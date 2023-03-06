@@ -64,6 +64,7 @@ import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -437,7 +438,7 @@ public class MapLayers {
 	                           @NonNull ContextMenuItem item,
 	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
 		selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, mapSourceName -> {
-			item.setDescription(mapSourceName);
+			item.setDescription(Algorithms.isEmpty(mapSourceName) ? app.getString(R.string.vector_data) : mapSourceName);
 			uiAdapter.onDataSetChanged();
 			return true;
 		});
@@ -465,7 +466,7 @@ public class MapLayers {
 		}
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
-		entriesMap.put(layerAdd, getString(R.string.shared_string_add));
+		entriesMap.put(layerAdd, getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 

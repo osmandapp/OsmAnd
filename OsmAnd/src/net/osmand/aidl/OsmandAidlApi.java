@@ -352,24 +352,28 @@ public class OsmandAidlApi {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
 					int zoom = intent.getIntExtra(AIDL_ZOOM, 0);
+					float zoomFloatPart;
 					boolean animated = intent.getBooleanExtra(AIDL_ANIMATED, false);
 					float rotation = intent.getFloatExtra(AIDL_ROTATION, Float.NaN);
 					if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 						OsmandMapTileView mapView = mapActivity.getMapView();
 						if (zoom == 0) {
 							zoom = mapView.getZoom();
+							zoomFloatPart = mapView.getZoomFloatPart();
 						} else {
-							zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
-							zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
+							zoom = Math.min(zoom, mapView.getMaxZoom());
+							zoom = Math.max(zoom, mapView.getMinZoom());
+							zoomFloatPart = 0;
 						}
 						if (!Float.isNaN(rotation)) {
 							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
-							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, true);
+							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart,
+									true, false, null, null);
 						} else {
 							mapView.setLatLon(lat, lon);
-							mapView.setIntZoom(zoom);
+							mapView.setZoomWithFloatPart(zoom, zoomFloatPart);
 						}
 					}
 					mapActivity.refreshMap();

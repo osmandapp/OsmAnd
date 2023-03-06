@@ -545,9 +545,9 @@
     <string name="map_overlay">Overlejringskort</string>
     <string name="map_overlay_descr">Vælg kort til overlejring</string>
     <string name="tile_source_already_installed">Kort er allerede installeret, \'Indstillinger\' vil blive opdateret.</string>
-    <string name="select_tile_source_to_install">Vælg kort(fliser) der skal installeres eller opdateres.</string>
+    <string name="select_tile_source_to_install">Vælg kilder til kort af fliser:</string>
     <string name="internet_not_available">Kan ikke udføre handlingen uden en forbindelse til Internettet.</string>
-    <string name="install_more">Installer flere…</string>
+    <string name="install_more">Tilføj flere…</string>
     <string name="level_to_switch_vector_raster_descr">Brug rasterkort for alt ud over dette niveau.</string>
     <string name="level_to_switch_vector_raster">Mindste vektor zoomniveau</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -4405,7 +4405,7 @@
     <string name="from_to_with_params">Fra %1$s til %2$s</string>
     <string name="progress_complete">%1$s fuldført</string>
     <string name="storage_found_files_descr">Tryk på \"%1$s\" for at kopiere %2$s filer fra \"%3$s\" til \"%4$s\". Det kan tage noget tid.</string>
-    <string name="storage_copied_files_size">Kopierede %1$s filer %2$s</string>
+    <string name="storage_copied_files_size">Behandlede %1$s fil(er), %2$s</string>
     <string name="storage_copying_files_size">Kopierer %1$s filer %2$s</string>
     <string name="storage_found_files_size">Fandt %1$s filer %2$s</string>
     <string name="shared_string_skip_warning">Spring overflytningen over\? OsmAnd har ikke længere adgang til dine filer i Delt lager.
@@ -4446,7 +4446,7 @@
     <string name="memory_allocated_for_routing_ds">Højere hukommelsestildeling gør beregningen af ruter (mere end 500 km) hurtigere, men kan påvirke andre applikationers ydeevne.
 \nHar ingen indflydelse på beregningshastigheden for korte ruter.</string>
     <string name="fold_unfold">fold/fold ud</string>
-    <string name="migration_files_present">Der er %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d-fil(er) (%2$s) findes allerede på målet \'%3$s\' og er ikke overskrevet.</string>
     <string name="exit_without_saving_warning">Afslut uden at gemme ændringer\?</string>
     <string name="shared_string_show_slope">Vis hældning</string>
     <string name="shared_string_uphill">Opstigning</string>
@@ -4981,7 +4981,6 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="mtb_scale">MTB-skala</string>
-    <string name="release_4_4">• Her kommer der strenge til 4.4-udgivelsen</string>
     <string name="rendering_attr_weatherCloudContours_name">Sky-konturlinjer</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-konturlinjer</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer for vindhastighed</string>
@@ -5058,8 +5057,46 @@
     <string name="shared_string_on_map">På kort</string>
     <string name="shared_string_kilograms">kilogram</string>
     <string name="shared_string_yards">yards</string>
-    <string name="approximate_bearing_descr">Beregn pejling, hvis den ikke modtages fra enheden</string>
+    <string name="approximate_bearing_descr">Udled pejlingen fra den navigationsrute, der følges.</string>
     <string name="shared_string_inches">tommer</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Omtrentlig pejling</string>
+    <string name="cloud_version_confirm_delete">Slet \"%1$s\" fra OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Slet fil</string>
+    <string name="delete_cloud_version">Slet cloud-version</string>
+    <string name="shared_string_in_progress">I gang</string>
+    <string name="shared_string_original">Oprindelig</string>
+    <string name="local_version_do_not_exist">Der findes ingen lokal version.</string>
+    <string name="movement_speed">Bevægelseshastighed</string>
+    <string name="simulation_position_description">Vælg en sporfil, der skal bruges som bevægelsesvejledning.</string>
+    <string name="shared_string_add_manually">Tilføj manuelt…</string>
+    <string name="release_4_4">- Forbedret menuen \"Spor\" i \"Konfigurer kort\"
+\n
+\n - Kontekstmenuen viser nu lokaliserede navne for IP\'er
+\n
+\n - Tilføjet mulighed for at dele rute via link
+\n
+\n - Tilføjet længdeenheden \"Nautiske mil/fod\"
+\n
+\n - Kortorientering tilføjet ny fast tilstand
+\n
+\n - Forenklet startskærm
+\n
+\n - En fastgjort positionsplacering i delt skræm-tilstand i Android Auto
+\n
+\n - Tilføjet \"hastighed/skråning\"-graf til sporanalyse
+\n
+\n - Android 13 flyttet valg af app-sprog til systemindstillingerne
+\n
+\n - Rettet problemer med visning af veganske steder
+\n
+\n</string>
+    <string name="sort_duration_ascending">Kortere varighed først</string>
+    <string name="selected_value">Valgt værdi</string>
+    <string name="sort_duration_descending">Længste varighed først</string>
+    <string name="sort_distance_ascending">Korteste distance først</string>
+    <string name="sort_date_ascending">Nyeste dato først</string>
+    <string name="sort_date_descending">Ældste dato først</string>
+    <string name="sort_distance_descending">Længste distance først</string>
+    <string name="shared_string_nearest">Nærmeste</string>
 </resources>

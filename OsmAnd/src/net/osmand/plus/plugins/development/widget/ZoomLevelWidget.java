@@ -14,6 +14,7 @@ public class ZoomLevelWidget extends TextInfoWidget {
 
 	private final OsmandMapTileView mapView;
 	private int cachedZoom;
+	private float cachedZoomFloatPart;
 
 	public ZoomLevelWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, DEV_ZOOM_LEVEL);
@@ -25,9 +26,13 @@ public class ZoomLevelWidget extends TextInfoWidget {
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		int newZoom = mapView.getZoom();
-		if (isUpdateNeeded() || newZoom != cachedZoom) {
+		float newZoomFloatPart = mapView.getZoomFloatPart() + mapView.getZoomAnimation();
+		if (isUpdateNeeded() || newZoom != cachedZoom || newZoomFloatPart != cachedZoomFloatPart) {
 			cachedZoom = newZoom;
-			setText(String.valueOf(cachedZoom), null);
+			cachedZoomFloatPart = newZoomFloatPart;
+
+			int formattedZoomFloatPart = Math.round(newZoomFloatPart * 100);
+			setText(String.valueOf(cachedZoom), String.valueOf(formattedZoomFloatPart));
 		}
 	}
 }

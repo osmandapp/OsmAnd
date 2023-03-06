@@ -19,6 +19,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.containers.ThemedIconId;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
@@ -41,11 +42,7 @@ public abstract class MapButton {
 	public final ImageView view;
 	public final String id;
 
-	@DrawableRes
-	private int dayIconId;
-	@DrawableRes
-	private int nightIconId;
-
+	private ThemedIconId themedIconId;
 	@DrawableRes
 	private int dayBackgroundId;
 	@DrawableRes
@@ -96,13 +93,12 @@ public abstract class MapButton {
 	}
 
 	protected void setIconId(@DrawableRes int iconId) {
-		setIconId(iconId, iconId);
+		setIconId(new ThemedIconId(iconId, iconId));
 	}
 
-	protected void setIconId(@DrawableRes int dayIconId, @DrawableRes int nightIconId) {
-		if (this.dayIconId != dayIconId || this.nightIconId != nightIconId) {
-			this.dayIconId = dayIconId;
-			this.nightIconId = nightIconId;
+	protected void setIconId(@NonNull ThemedIconId themedIconId) {
+		if (!Algorithms.objectEquals(this.themedIconId, themedIconId)) {
+			this.themedIconId = themedIconId;
 			this.forceUpdate = true;
 		}
 	}
@@ -159,7 +155,7 @@ public abstract class MapButton {
 		}
 
 		Drawable drawable = null;
-		int iconId = nightMode ? nightIconId : dayIconId;
+		int iconId = themedIconId.getIconId(nightMode);
 		if (iconId != 0) {
 			if (iconColor != null) {
 				drawable = iconsCache.getPaintedIcon(iconId, iconColor);

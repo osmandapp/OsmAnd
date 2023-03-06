@@ -272,6 +272,7 @@
         <item name="toolbar_title_color">@color/list_background_color_light</item>
         <item name="active_buttons_and_links_bg_pressed">@color/active_buttons_and_links_bg_pressed_light</item>
         <item name="ripple_solid_6dp">@drawable/ripple_solid_light_6dp</item>
+        <item name="icon_color_active">@color/icon_color_active_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -394,15 +395,6 @@
     <style name="CoordinateInputEditText" parent="Widget.AppCompat.EditText">
         <item name="colorControlActivated">@color/coordinate_input_edit_text_activated</item>
         <item name="colorControlNormal">?attr/coordinate_input_edit_text_normal</item>
-    </style>
-
-    <style name="OsmandAndroidAutoTheme">
-        <!-- even if darkMode is selected in AA settings, dark color is ignored, so abuse primary and secondary color to color the direction panel appropriately -->
-        <item name="carColorPrimary">#66B5FF</item> // Google default accent light
-        <item name="carColorPrimaryDark">#60A8F0</item> // Google default accent dark
-        <item name="carColorSecondary">@color/map_background_color_dark</item>
-        <item name="carColorSecondaryDark">@color/map_background_color_dark</item>
-        <item name="carPermissionActivityLayout">@color/map_background_color_dark</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
@@ -602,6 +594,7 @@
         <item name="toolbar_title_color">@color/text_color_primary_dark</item>
         <item name="active_buttons_and_links_bg_pressed">@color/active_buttons_and_links_bg_pressed_dark</item>
         <item name="ripple_solid_6dp">@drawable/ripple_solid_dark_6dp</item>
+        <item name="icon_color_active">@color/icon_color_active_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

@@ -164,6 +164,7 @@
 	    <attr name="toolbar_title_color" format="reference" />
 	    <attr name="ripple_solid_6dp" format="reference" />
 	    <attr name="active_buttons_and_links_bg_pressed" format="reference" />
+	    <attr name="icon_color_active" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

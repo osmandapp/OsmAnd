@@ -4363,8 +4363,6 @@
 
 	<string name="poi_siren">Siren</string>
 
-	<string name="poi_lifeguard_base">Lifeguard base</string>
-
 	<string name="poi_health_specialty_vaccination_yes">Vaccination</string>
 	<string name="poi_vaccination_covid19">Vaccination: COVID19</string>
 

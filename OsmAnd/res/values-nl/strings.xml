@@ -4144,7 +4144,7 @@
     <string name="direct_line_maps_required_descr">De route berekening duurt langer dan gewoonlijk.
 \n
 \nMisschien zijn enkele kaarten niet geladen.</string>
-    <string name="cancel_anytime_in_amazon_app">Annuleer het op elk moment via de Amazon app</string>
+    <string name="cancel_anytime_in_amazon_app">Annuleer het op elk moment in de Amazon app</string>
     <string name="no_activity_for_intent">Installeer een app die deze actie kan uitvoeren.</string>
     <string name="no_items_of_type_message">Je heb geen items van dit type</string>
     <string name="routeInfo_smoothness_description">Classificatie voor de manoeuvreerbaarheid van een weg/pad voor wielvoertuigen, in het bijzonder de regelmatigheid en vlakte van de ondergrond.</string>
@@ -5017,9 +5017,32 @@
     <string name="backup_delete_old_data_warning">U staat op het punt de wijzigingsgeschiedenis van de eerder geladen gegevens te wissen.
 \n
 \nDe huidige versie van de gegevens wordt opgeslagen op de server, maar u kunt de eerder aangebrachte wijzigingen niet terugdraaien.</string>
-    <string name="display_position_automatic_descr">Afhankelijk van de Kaartoriëntatie, \"Onderaan\" voor de kaartoriëntatie \"Bewegingsrichting\" en in het \"Midden\" voor alle andere gevallen.</string>
+    <string name="display_position_automatic_descr">Afhankelijk van de Kaartoriëntatie: \"Onderaan\" voor de kaartoriëntatie \"Bewegingsrichting\" en in het \"Midden\" voor alle andere gevallen.</string>
     <string name="sound_beep_minimal">Beep: minimaal</string>
     <string name="sound_beep_simple">Beep: simpel</string>
     <string name="sound_beep_simple_loud">Beep: simpel luid</string>
     <string name="lang_ckb">Centraal Koerdisch</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Het uiterlijk van %1$s tracks veranderen\?</string>
+    <string name="shared_string_apply_changes">Wijzigingen aanbrengen</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="no_visible_tracks_description">Selecteer tracks om ze op de kaart weer te geven.</string>
+    <string name="no_visible_tracks">Geen tracks op de kaart</string>
+    <string name="recently_visible">Onlangs zichtbaar %1$s</string>
+    <string name="empty_tracks">Je hebt geen trackbestanden.</string>
+    <string name="shared_string_select_recent">Selecteer recent</string>
+    <string name="change_appearance">Verander het uiterlijk</string>
+    <string name="switch_folder">Wisselmap</string>
+    <string name="show_all_tracks">Toon alle tracks</string>
+    <string name="empty_tracks_description">U kunt met OsmAnd trackbestanden importeren, aanmaken of opnemen.</string>
+    <string name="shared_string_on_map">Op de kaart</string>
+    <string name="shared_string_delete_file">Verwijder bestand</string>
+    <string name="delete_cloud_version">Verwijder cloud versie</string>
+    <string name="local_version_do_not_exist">Geen locale versie aanwezig.</string>
+    <string name="shared_string_in_progress">In uitvoering</string>
+    <string name="shared_string_original">Origineel</string>
+    <string name="shared_string_add_manually">Handmatig toevoegen…</string>
+    <string name="cloud_version_confirm_delete">Verwijder \"%1$s\" van OsmAnd Cloud\?</string>
+    <string name="movement_speed">Bewegingssnelheid</string>
+    <string name="simulation_position_description">Selecteer een trackbestand dat u wilt gebruiken als bewegingsbegeleiding.</string>
+    <string name="shared_string_inches">inch</string>
 </resources>

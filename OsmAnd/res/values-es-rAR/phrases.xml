@@ -4493,4 +4493,14 @@
     <string name="poi_socket_type3c_output_low">Baja</string>
     <string name="poi_socket_type3a_voltage_filter">Voltaje del conector tipo 3a</string>
     <string name="poi_socket_type3c_voltage_filter">Voltaje del conector tipo 3c</string>
+    <string name="poi_recycling_pet_drink_bottles">Botellas de polietileno (PET)</string>
+    <string name="poi_recycling_textiles">Textiles, ropa</string>
+    <string name="poi_self_checkout_yes">Sí</string>
+    <string name="poi_self_checkout_only">Únicamente</string>
+    <string name="poi_lifeguard">Guardavidas;Salvavidas;Socorrista acuático</string>
+    <string name="poi_recycling_plastic_bottle_caps">Tapas de botellas de plástico</string>
+    <string name="poi_self_checkout">Autopago</string>
+    <string name="poi_recycling_aluminium_cans">Latas de aluminio</string>
+    <string name="poi_lifeguard_tower">Torre del guardavidas;Torre del salvavidas;Torre del socorrista</string>
+    <string name="poi_self_checkout_no">Autopago: no</string>
 </resources>

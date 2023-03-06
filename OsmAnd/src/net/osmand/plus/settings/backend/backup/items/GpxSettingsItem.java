@@ -94,11 +94,6 @@ public class GpxSettingsItem extends FileSettingsItem {
 				if (readItem) {
 					dataItem = gpxDbHelper.getItem(savedFile, new GpxDataItemCallback() {
 						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-
-						@Override
 						public void onGpxDataItemReady(GpxDataItem item) {
 							updateGpxParams(item);
 						}
@@ -136,11 +131,6 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 	private void createGpxAppearanceInfo() {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
 			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
 				appearanceInfo = new GpxAppearanceInfo(item);
