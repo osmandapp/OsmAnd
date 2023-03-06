@@ -64,6 +64,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -217,6 +218,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private final DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
+	private OsmAndLocationProvider.OsmAndLocationListener locationListener;
 	private MapViewWithLayers mapViewWithLayers;
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
@@ -324,6 +326,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				setMapInitialLatLon(mapView, location);
 			}
 		}
+
+		locationListener = getLocationProviderListener();
+		app.getLocationProvider().addLocationListener(locationListener);
+
 		PluginsHelper.onMapActivityCreate(this);
 		importHelper = new ImportHelper(this);
 		if (System.currentTimeMillis() - tm > 50) {
@@ -444,6 +450,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.getOsmandMap().setupRenderingView();
 			restoreNavigationHelper.checkRestoreRoutingMode();
 		}
+	}
+
+	private OsmAndLocationProvider.OsmAndLocationListener getLocationProviderListener(){
+		return location -> {
+			if(app.getDaynightHelper().isFirstCheck()){
+				app.getDaynightHelper().recalculateLastNightMode();
+				refreshMapComplete();
+				app.getDaynightHelper().setFirstCheck(false);
+				app.getLocationProvider().removeLocationListener(locationListener);
+			}
+		};
 	}
 
 	private void createProgressBarForRouting() {
@@ -1157,6 +1174,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		lockHelper.setLockUIAdapter(null);
 		extendedMapActivity.onDestroy(this);
+		app.getLocationProvider().removeLocationListener(locationListener);
 
 		mIsDestroyed = true;
 	}

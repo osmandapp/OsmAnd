@@ -60,6 +60,7 @@ public class ConfigureMapDialogs {
 				items, nightMode, i, app, selectedProfileColor, themeRes, v -> {
 					int which = (int) v.getTag();
 					view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
+					app.getDaynightHelper().recalculateLastNightMode();
 					if (view.getMapRenderer() == null) {
 						activity.refreshMapComplete();
 					}

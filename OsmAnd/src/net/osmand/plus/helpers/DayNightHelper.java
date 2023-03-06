@@ -63,6 +63,14 @@ public class DayNightHelper implements SensorEventListener {
 	private boolean lastNightMode;
 	private StateChangedListener<Boolean> sensorStateListener;
 
+	private boolean firstCheck = true;
+	public boolean isFirstCheck() {
+		return firstCheck;
+	}
+
+	public void setFirstCheck(boolean firstCheck) {
+		this.firstCheck = firstCheck;
+	}
 	public boolean isNightModeForMapControls() {
 		return isNightModeForMapControlsForProfile(settings.APPLICATION_MODE.get());
 	}
@@ -72,6 +80,24 @@ public class DayNightHelper implements SensorEventListener {
 			return isNightModeForProfile(mode);
 		} else {
 			return true;
+		}
+	}
+
+	public void recalculateLastNightMode() {
+		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.getModeValue(settings.APPLICATION_MODE.get());
+		if (dayNightMode.isAuto()) { // We are in auto mode!
+			try {
+				SunriseSunset daynightSwitch = getSunriseSunset();
+				if (daynightSwitch != null) {
+					boolean daytime = daynightSwitch.isDaytime();
+					log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
+					lastNightMode = !daytime;
+				}
+			} catch (IllegalArgumentException e) {
+				log.warn("Network location provider not available"); //$NON-NLS-1$
+			} catch (SecurityException e) {
+				log.warn("Missing permissions to get actual location!"); //$NON-NLS-1$
+			}
 		}
 	}
 
