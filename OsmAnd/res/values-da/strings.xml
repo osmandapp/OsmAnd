@@ -4405,7 +4405,7 @@
     <string name="from_to_with_params">Fra %1$s til %2$s</string>
     <string name="progress_complete">%1$s fuldført</string>
     <string name="storage_found_files_descr">Tryk på \"%1$s\" for at kopiere %2$s filer fra \"%3$s\" til \"%4$s\". Det kan tage noget tid.</string>
-    <string name="storage_copied_files_size">Kopierede %1$s filer %2$s</string>
+    <string name="storage_copied_files_size">Behandlede %1$s fil(er), %2$s</string>
     <string name="storage_copying_files_size">Kopierer %1$s filer %2$s</string>
     <string name="storage_found_files_size">Fandt %1$s filer %2$s</string>
     <string name="shared_string_skip_warning">Spring overflytningen over\? OsmAnd har ikke længere adgang til dine filer i Delt lager.
@@ -4446,7 +4446,7 @@
     <string name="memory_allocated_for_routing_ds">Højere hukommelsestildeling gør beregningen af ruter (mere end 500 km) hurtigere, men kan påvirke andre applikationers ydeevne.
 \nHar ingen indflydelse på beregningshastigheden for korte ruter.</string>
     <string name="fold_unfold">fold/fold ud</string>
-    <string name="migration_files_present">Der er %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d-fil(er) (%2$s) findes allerede på målet \'%3$s\' og er ikke overskrevet.</string>
     <string name="exit_without_saving_warning">Afslut uden at gemme ændringer\?</string>
     <string name="shared_string_show_slope">Vis hældning</string>
     <string name="shared_string_uphill">Opstigning</string>
@@ -5057,7 +5057,7 @@
     <string name="shared_string_on_map">På kort</string>
     <string name="shared_string_kilograms">kilogram</string>
     <string name="shared_string_yards">yards</string>
-    <string name="approximate_bearing_descr">Beregn pejling, hvis den ikke modtages fra enheden</string>
+    <string name="approximate_bearing_descr">Udled pejlingen fra den navigationsrute, der følges.</string>
     <string name="shared_string_inches">tommer</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Omtrentlig pejling</string>
@@ -5091,4 +5091,12 @@
 \n - Rettet problemer med visning af veganske steder
 \n
 \n</string>
+    <string name="sort_duration_ascending">Kortere varighed først</string>
+    <string name="selected_value">Valgt værdi</string>
+    <string name="sort_duration_descending">Længste varighed først</string>
+    <string name="sort_distance_ascending">Korteste distance først</string>
+    <string name="sort_date_ascending">Nyeste dato først</string>
+    <string name="sort_date_descending">Ældste dato først</string>
+    <string name="sort_distance_descending">Længste distance først</string>
+    <string name="shared_string_nearest">Nærmeste</string>
 </resources>
