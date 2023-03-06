@@ -27,7 +27,7 @@
     <string name="shared_string_in_progress">In progress</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Movement speed</string>
-    <string name="simulation_position_description">Select a track file to use as motion guidance.</string>
+    <string name="simulation_position_description">Select a track file that will be used as a source for location moving. </string>
     <string name="approximate_bearing">Approximate bearing</string>
     <string name="approximate_bearing_descr">Derive the bearing from the navigation route being followed.</string>
     <string name="shared_string_inches">inches</string>
