@@ -5030,11 +5030,11 @@
     <string name="set_up_backup">Backup einrichten</string>
     <string name="x_axis">X-Achse</string>
     <string name="y_axis">Y-Achse</string>
-    <string name="share_as_file">Compartilhar como ficheiro</string>
+    <string name="share_as_file">Als Datei teilen</string>
     <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Download überspringen</string>
     <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
-    <string name="share_link">Partilhar a ligação</string>
+    <string name="share_link">Link teilen</string>
     <string name="sound_beep_simple">Signalton: Einfach</string>
     <string name="sound_beep_minimal">Signalton: Minimal</string>
     <string name="weight_limit_error">Der Mindestwert ist \"%1$s\" Tonnen. Verwenden Sie das Profil \"%2$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
@@ -5061,7 +5061,7 @@
     <string name="switch_folder">Ordner wechseln</string>
     <string name="show_all_tracks">Alle Tracks anzeigen</string>
     <string name="shared_string_on_map">Auf der Karte</string>
-    <string name="approximate_bearing_descr">Peilung berechnen, falls nicht vom Gerät empfangen</string>
+    <string name="approximate_bearing_descr">Die Peilung von der Navigationsroute, der Sie folgen, ableiten.</string>
     <string name="shared_string_inches">Zoll</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Ungefähre Peilung</string>
@@ -5094,4 +5094,12 @@
 \n - Probleme mit der Anzeige von veganen Orten behoben
 \n
 \n</string>
+    <string name="sort_duration_ascending">Kürzere Dauer zuerst</string>
+    <string name="sort_distance_descending">Längste Entfernung zuerst</string>
+    <string name="sort_date_ascending">Neuestes Datum zuerst</string>
+    <string name="sort_date_descending">Ältestes Datum zuerst</string>
+    <string name="sort_duration_descending">Längste Dauer zuerst</string>
+    <string name="sort_distance_ascending">Kürzeste Entfernung zuerst</string>
+    <string name="selected_value">Ausgewählter Wert</string>
+    <string name="shared_string_nearest">Am nächsten</string>
 </resources>
