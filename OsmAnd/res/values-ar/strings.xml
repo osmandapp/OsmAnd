@@ -1835,7 +1835,7 @@
     <string name="context_menu_item_edit_waypoint">تعدبل إحداثية GPX</string>
     <string name="lang_nds">الألمانية الدنيا</string>
     <string name="lang_fy">فريسك</string>
-    <string name="rendering_attr_hideProposed_name">الأشياء المقترحة</string>
+    <string name="rendering_attr_showProposed_name">الأشياء المقترحة</string>
     <string name="osm_edit_created_poi">إنشاء OSM POI</string>
     <string name="coords_search">بحث عن إحداثيات</string>
     <string name="advanced_coords_search">بحث متقدم عن الإحداثيات</string>

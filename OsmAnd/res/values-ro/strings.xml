@@ -1417,7 +1417,7 @@
     <string name="lang_mk">Macedoneană</string>
     <string name="read_more">Citește mai multe</string>
     <string name="whats_new">Ce-i nou în</string>
-    <string name="rendering_attr_hideProposed_name">Obiecte propuse</string>
+    <string name="rendering_attr_showProposed_name">Obiecte propuse</string>
     <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_upload">Încarcă (upload)</string>
     <string name="osm_edit_created_poi">Punct de interes OSM creat</string>

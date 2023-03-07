@@ -1731,7 +1731,7 @@
     <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
     <string name="whats_new">Nouveautés de la version</string>
-    <string name="rendering_attr_hideProposed_name">Objets proposés</string>
+    <string name="rendering_attr_showProposed_name">Objets proposés</string>
     <string name="lang_mk">Macédonien</string>
     <string name="lang_fy">Frison occidental</string>
     <string name="lang_als">Tosque</string>

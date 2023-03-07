@@ -1723,7 +1723,7 @@
     <string name="shared_string_upload">Carica</string>
     <string name="feedback">Feedback</string>
     <string name="shared_string_update">Aggiorna</string>
-    <string name="rendering_attr_hideProposed_name">Oggetti proposti</string>
+    <string name="rendering_attr_showProposed_name">Oggetti proposti</string>
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità di</string>
     <string name="share_osm_edits_subject">Modifiche di OSM condivise tramite OsmAnd</string>

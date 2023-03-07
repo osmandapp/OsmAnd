@@ -761,7 +761,7 @@
     <string name="osn_bug_name">OSM-minnispunktur</string>
     <string name="osn_add_dialog_title">Búa til minnispunkt</string>
     <string name="osn_reopen_dialog_title">Enduropna minnispunkt</string>
-    <string name="rendering_attr_hideProposed_name">Uppástungur</string>
+    <string name="rendering_attr_showProposed_name">Uppástungur</string>
     <string name="world_map_download_descr">Grunnkort af heiminum (sem þekur alla jörðina í minni aðdrætti) vantar eða er úrelt. Íhugaðu að hlaða því inn til að fá hnattræna yfirsýn.</string>
     <string name="hillshade_layer_disabled">Hæðaskyggingalag óvirkt</string>
     <string name="srtm_plugin_disabled">Hæðarlínur óvirkar</string>

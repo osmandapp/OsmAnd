@@ -1718,7 +1718,7 @@
     <string name="contact_us">Kapcsolat</string>
     <string name="read_more">Bővebben</string>
     <string name="whats_new">Újdonságok</string>
-    <string name="rendering_attr_hideProposed_name">Tervezett objektumok</string>
+    <string name="rendering_attr_showProposed_name">Tervezett objektumok</string>
     <string name="shared_string_update">Frissítés</string>
     <string name="shared_string_upload">Feltöltés</string>
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>

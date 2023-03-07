@@ -1745,7 +1745,7 @@ POIの更新は利用できません</string>
     <string name="lang_als">アルバニア語 (トスク)</string>
     <string name="read_more">続きを読む</string>
     <string name="whats_new">新機能</string>
-    <string name="rendering_attr_hideProposed_name">指定オブジェクト</string>
+    <string name="rendering_attr_showProposed_name">指定オブジェクト</string>
     <string name="shared_string_update">更新</string>
     <string name="shared_string_upload">アップロード</string>
     <string name="osm_edit_created_poi">OSMのPOIが作成されました</string>

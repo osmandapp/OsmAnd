@@ -1724,7 +1724,7 @@
     <string name="contact_us">Contacte</string>
     <string name="map_legend">Llegenda del mapa</string>
     <string name="shared_string_update">Actualitza</string>
-    <string name="rendering_attr_hideProposed_name">Objectes proposats</string>
+    <string name="rendering_attr_showProposed_name">Objectes proposats</string>
     <string name="read_more">Llegiu-ne més</string>
     <string name="whats_new">Què hi ha de nou a</string>
     <string name="share_osm_edits_subject">Edicions OSM compartides via OsmAnd</string>

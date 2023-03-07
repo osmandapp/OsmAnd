@@ -1568,7 +1568,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="lang_als">Albanskaja (Toskaja)</string>
     <string name="read_more">Padrabiaźniej</string>
     <string name="whats_new">Što novaha ŭ</string>
-    <string name="rendering_attr_hideProposed_name">Płanujemyja abjekty</string>
+    <string name="rendering_attr_showProposed_name">Płanujemyja abjekty</string>
     <string name="shared_string_update">Abnavіć</string>
     <string name="shared_string_upload">Zahruzić</string>
     <string name="osm_edit_created_poi">Stvorana OSM POI</string>

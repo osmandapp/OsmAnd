@@ -1730,7 +1730,7 @@
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
     <string name="lang_nds">Bajo Alemán</string>

@@ -1727,7 +1727,7 @@
     <string name="shared_string_upload">Pošlji</string>
     <string name="read_more">Preberite več</string>
     <string name="whats_new">Kaj je novega v</string>
-    <string name="rendering_attr_hideProposed_name">Skrij predlagane predmete</string>
+    <string name="rendering_attr_showProposed_name">Skrij predlagane predmete</string>
     <string name="share_osm_edits_subject">Posodobitve OSM, oddane preko OsmAnd</string>
     <string name="lang_nds">Nizka nemščina</string>
     <string name="lang_mk">Makedonščina</string>

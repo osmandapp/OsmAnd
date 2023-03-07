@@ -1077,7 +1077,7 @@
     <string name="lang_als">Albania (tosk)</string>
     <string name="read_more">Lue lisää</string>
     <string name="whats_new">Uutiset</string>
-    <string name="rendering_attr_hideProposed_name">Ehdotetut objektit</string>
+    <string name="rendering_attr_showProposed_name">Ehdotetut objektit</string>
     <string name="shared_string_update">Päivitä</string>
     <string name="shared_string_upload">Lähetä</string>
     <string name="osm_edit_created_poi">OSM KP luotu</string>

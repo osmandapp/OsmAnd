@@ -1744,7 +1744,7 @@
     <string name="techical_articles_item">Тэхнічныя артыкулы</string>
     <string name="read_more">Падрабязней</string>
     <string name="whats_new">Што новага ў</string>
-    <string name="rendering_attr_hideProposed_name">Плануемыя аб\'екты</string>
+    <string name="rendering_attr_showProposed_name">Плануемыя аб\'екты</string>
     <string name="lang_mk">Македонская</string>
     <string name="lang_nds">Ніжненямецкая</string>
     <string name="lang_fy">Заходнефрызская</string>

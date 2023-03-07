@@ -1777,7 +1777,7 @@
     <string name="use_dashboard_btn">Використовувати панель керування</string>
     <string name="use_drawer_btn">Використовувати меню</string>
     <string name="share_osm_edits_subject">OSM правки, надіслані з OsmAnd</string>
-    <string name="rendering_attr_hideProposed_name">Заплановані обʼєкти</string>
+    <string name="rendering_attr_showProposed_name">Заплановані обʼєкти</string>
     <string name="save_poi_without_poi_type_message">Зберегти POI без типу\?</string>
     <string name="no_location_permission">Надання доступу до даних про місцеперебування.</string>
     <string name="no_camera_permission">Надання доступу до камери.</string>

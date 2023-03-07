@@ -1507,7 +1507,7 @@
     <string name="share_osm_edits_subject">Edições OSM partilhadas via OsmAnd</string>
     <string name="read_more">Ler mais</string>
     <string name="whats_new">Novidades</string>
-    <string name="rendering_attr_hideProposed_name">Construções planeadas</string>
+    <string name="rendering_attr_showProposed_name">Construções planeadas</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM adicionado</string>
     <string name="world_map_download_descr">O mapa base mundial (que cobre o mundo inteiro num nível de ampliação baixo) não existe ou está desatualizado. Considere descarregá-lo para uma visão global.</string>
