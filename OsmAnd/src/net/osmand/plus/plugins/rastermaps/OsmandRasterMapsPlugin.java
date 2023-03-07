@@ -6,7 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.resources.ResourceManager.*;
+import static net.osmand.plus.resources.ResourceManager.ResourceListener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -539,7 +539,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		for (int entry : entriesMapList) {
 			items[i++] = app.getString(entry, mapActivity);
 		}
-		if(items.length > 1){
+		if (items.length > 1) {
 			DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
 					items, nightMode, -1, app, selectedModeColor, themeRes, v -> {
 						int which = (int) v.getTag();

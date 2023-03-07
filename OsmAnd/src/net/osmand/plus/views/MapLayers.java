@@ -446,7 +446,7 @@ public class MapLayers {
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           boolean includeOfflineMaps,
-	                           CommonPreference<String> targetLayer,
+	                           @NonNull CommonPreference<String> targetLayer,
 	                           @Nullable CallbackWithObject<String> callback) {
 		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);

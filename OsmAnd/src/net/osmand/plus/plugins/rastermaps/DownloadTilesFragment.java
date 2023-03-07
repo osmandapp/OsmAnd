@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins.rastermaps;
 
+import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getApproxTilesSizeMb;
+import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getTilesNumber;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +18,13 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
@@ -41,21 +51,10 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.text.MessageFormat;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.util.Pair;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getApproxTilesSizeMb;
-import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getTilesNumber;
 
 public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLocationListener {
 
@@ -288,10 +287,13 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	private CommonPreference<String> getMapLayerSettings() {
-		switch(layerToDownload){
-			case R.string.layer_map: return app.getSettings().MAP_TILE_SOURCES;
-			case R.string.layer_overlay: return app.getSettings().MAP_OVERLAY;
-			default: return app.getSettings().MAP_UNDERLAY;
+		switch (layerToDownload) {
+			case R.string.layer_map:
+				return app.getSettings().MAP_TILE_SOURCES;
+			case R.string.layer_overlay:
+				return app.getSettings().MAP_OVERLAY;
+			default:
+				return app.getSettings().MAP_UNDERLAY;
 		}
 	}
 
