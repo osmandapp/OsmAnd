@@ -1766,14 +1766,20 @@ public class OsmandSettings {
 
 	@NonNull
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
-		String tileName = MAP_TILE_SOURCES.get();
+		ITileSource tileSource = getLayerTileSource(MAP_TILE_SOURCES, warnWhenSelected);
+		return tileSource != null ? tileSource : TileSourceManager.getMapnikSource();
+	}
+
+	@Nullable
+	public ITileSource getLayerTileSource(CommonPreference<String> layerSetting, boolean warnWhenSelected) {
+		String tileName = layerSetting.get();
 		if (tileName != null) {
-			ITileSource ts = getTileSourceByName(tileName, warnWhenSelected);
-			if (ts != null) {
-				return ts;
+			ITileSource tileSource = getTileSourceByName(tileName, warnWhenSelected);
+			if (tileSource != null) {
+				return tileSource;
 			}
 		}
-		return TileSourceManager.getMapnikSource();
+		return null;
 	}
 
 	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list) {
