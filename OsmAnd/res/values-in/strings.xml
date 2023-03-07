@@ -5066,7 +5066,7 @@
     <string name="movement_speed">Kecepatan gerakan</string>
     <string name="shared_string_delete_file">Hapus berkas</string>
     <string name="delete_cloud_version">Hapus versi awan</string>
-    <string name="simulation_position_description">Gunakan berkas trek untuk digunakan sebagai pemandu gerakan.</string>
+    <string name="simulation_position_description">Pilih file track yang akan digunakan sebagai sumber untuk pemindahan lokasi.</string>
     <string name="cloud_version_confirm_delete">Hapus \"%1$s\" dari OsmAnd Cloud\?</string>
     <string name="shared_string_add_manually">Tambahkan secara manual…</string>
     <string name="release_4_4">- Menu \"Trek\" yang lebih baik di \"Konfigurasi Peta\"
