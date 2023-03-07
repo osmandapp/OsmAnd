@@ -1063,7 +1063,8 @@ public class SearchCoreFactory {
 				}
 				nameFilter = phrase.getUnknownSearchPhrase();
 			} else if (searchAmenityTypesAPI != null && (phrase.isFirstUnknownSearchWordComplete()
-					|| resultMatcher.getRequestResults().get(0).objectType == POI_TYPE)) {
+					|| (!Algorithms.isEmpty(resultMatcher.getRequestResults())
+						&& resultMatcher.getRequestResults().get(0).objectType == POI_TYPE))) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();
