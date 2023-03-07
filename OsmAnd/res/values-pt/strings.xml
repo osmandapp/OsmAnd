@@ -5056,7 +5056,7 @@
     <string name="show_all_tracks">Mostrar todos os trilhos</string>
     <string name="shared_string_on_map">No mapa</string>
     <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
-    <string name="approximate_bearing_descr">Derive a direção da rota de navegação que está a ser seguida.</string>
+    <string name="approximate_bearing_descr">Obter a direção da rota a partir da rota de navegação que está a ser seguida.</string>
     <string name="shared_string_inches">polegadas</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Direção aproximada</string>
