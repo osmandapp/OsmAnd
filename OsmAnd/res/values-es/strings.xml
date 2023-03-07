@@ -4388,7 +4388,7 @@
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones ilimitadas de mapas por hora.</string>
-    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Archivo(s) %1$s procesado(s), %2$s</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_string_skip_warning">¿Omitir migración\? OsmAnd ya no tiene acceso a los archivos en el almacenamiento compartido.
@@ -4397,7 +4397,7 @@
     <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
-    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
+    <string name="migration_files_present">%1$d archivo(s) (%2$s) ya presentes en el destino \'%3$s\' y no sobrescritos.</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="copying_completed">Copiado</string>
     <string name="shared_string_copy_to">Copiar a</string>
@@ -5055,7 +5055,7 @@
     <string name="show_all_tracks">Mostrar todas las vías</string>
     <string name="shared_string_kilograms">kilogramos</string>
     <string name="shared_string_yards">yardas</string>
-    <string name="approximate_bearing_descr">Calcular el rumbo si no se recibe del dispositivo</string>
+    <string name="approximate_bearing_descr">Obtenga el rumbo de la ruta de navegación que se está siguiendo.</string>
     <string name="shared_string_inches">pulgadas</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
@@ -5089,4 +5089,12 @@
     <string name="cloud_version_confirm_delete">¿Borrar \"%1$s\" de OsmAnd Cloud\?</string>
     <string name="shared_string_delete_file">Eliminar archivo</string>
     <string name="shared_string_add_manually">Añadir manualmente…</string>
+    <string name="sort_duration_descending">Primero el de mayor duración</string>
+    <string name="sort_distance_ascending">La distancia más corta primero</string>
+    <string name="sort_distance_descending">La distancia más larga primero</string>
+    <string name="sort_date_ascending">La fecha más reciente primero</string>
+    <string name="shared_string_nearest">Más cerca</string>
+    <string name="sort_duration_ascending">Primero el de menor duración</string>
+    <string name="sort_date_descending">La fecha más antigua primero</string>
+    <string name="selected_value">Valor elegido</string>
 </resources>

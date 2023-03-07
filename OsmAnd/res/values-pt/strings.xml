@@ -4404,7 +4404,7 @@
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s ficheiros de \"%3$s\" para \"%4$s\". Pode demorar algum tempo.</string>
-    <string name="storage_copied_files_size">Foram copiados %1$s ficheiros (%2$s)</string>
+    <string name="storage_copied_files_size">%1$s ficheiro(s) processado(s), %2$s</string>
     <string name="storage_copying_files_size">A copiar %1$s ficheiros (%2$s)</string>
     <string name="storage_found_files_size">Encontrados %1$s ficheiros (%2$s)</string>
     <string name="shared_string_skip_warning">Ignorar a migração\? O OsmAnd deixou de ter acesso aos seus ficheiros no armazenamento partilhado.
@@ -4431,7 +4431,7 @@
     <string name="icon_group_education">Educação</string>
     <string name="icon_group_industrial">Industrial</string>
     <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s alterações nos últimos dois meses %2$s para ter acesso a atualizações de mapas a cada hora ilimitadas.</string>
-    <string name="migration_files_present">Existem %1$d ficheiros (%2$s) no local selecionado \"%3$s\".</string>
+    <string name="migration_files_present">%1$d ficheiro(s) (%2$s) já presente(s) no destino \'%3$s\' e não substituído(s).</string>
     <string name="fold_unfold">ocultar/mostrar</string>
     <string name="app_profile_type">Tipo de perfil da aplicação</string>
     <string name="map_marker_options">Opções de marcador de mapa</string>
@@ -5056,7 +5056,7 @@
     <string name="show_all_tracks">Mostrar todos os trilhos</string>
     <string name="shared_string_on_map">No mapa</string>
     <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
-    <string name="approximate_bearing_descr">Calcular a direção se não for comunicada pelo aparelho</string>
+    <string name="approximate_bearing_descr">Obter a direção da rota a partir da rota de navegação que está a ser seguida.</string>
     <string name="shared_string_inches">polegadas</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Direção aproximada</string>
@@ -5090,4 +5090,12 @@
 \n • Corrigidos problemas com a visualização de locais com menus veganos
 \n
 \n</string>
+    <string name="sort_duration_ascending">Primeiro a duração mais curta</string>
+    <string name="sort_duration_descending">Primeiro a duração mais longa</string>
+    <string name="sort_distance_ascending">Primeiro a distância mais curta</string>
+    <string name="sort_distance_descending">Primeiro a distância mais longa</string>
+    <string name="sort_date_ascending">Primeiro a data mais recente</string>
+    <string name="sort_date_descending">Primeiro a data mais antiga</string>
+    <string name="selected_value">Valor selecionado</string>
+    <string name="shared_string_nearest">Mais perto</string>
 </resources>

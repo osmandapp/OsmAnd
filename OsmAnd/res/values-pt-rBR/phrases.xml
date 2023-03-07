@@ -4496,4 +4496,9 @@
     <string name="poi_recycling_textiles">Tecidos</string>
     <string name="poi_self_checkout">Autoatendimento</string>
     <string name="poi_recycling_plastic_bottle_caps">Tampas de garrafa de plástico</string>
+    <string name="poi_self_checkout_no">Autoatendimento: não</string>
+    <string name="poi_self_checkout_yes">Sim</string>
+    <string name="poi_self_checkout_only">Somente</string>
+    <string name="poi_lifeguard_tower">Torre de salva-vidas</string>
+    <string name="poi_lifeguard">Salva-vidas</string>
 </resources>

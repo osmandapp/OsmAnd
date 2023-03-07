@@ -2399,12 +2399,12 @@
     <string name="background_service_provider">Penyedia lokasi</string>
     <string name="display_groups_visibility_dialog_description">Anda dapat mengatur visibilitas grup pada peta. Jika trek tersembunyi, semua grup juga akan tersembunyi.</string>
     <string name="storage_found_files_descr">Ketuk \"%1$s\" untuk menyalin %2$s berkas dari \"%3$s\" ke \"%4$s\". Ini mungkin membutuhkan beberapa waktu.</string>
-    <string name="storage_copied_files_size">Disalin %1$s berkas %2$s</string>
+    <string name="storage_copied_files_size">Diproses %1$s berkas, %2$s</string>
     <string name="device_memory">Memori perangkat</string>
     <string name="poi_namefinder_query_empty">Ketik untuk mencari POI</string>
     <string name="background_router_service">Jalankan OsmAnd di latar belakang</string>
     <string name="layer_map">Sumber peta…</string>
-    <string name="migration_files_present">Ada %1$d berkas (%2$s) di lokasi \'%3$s\' yang dipilih.</string>
+    <string name="migration_files_present">%1$d (%2$s) yang sudah ada di target \'%3$s\' dan tidak ditimpa.</string>
     <string name="map_orientation_default">Sama seperti perangkat</string>
     <string name="routing_attr_avoid_toll_name">Tidak ada jalan tol</string>
     <string name="shared_storage_migration_descr">Karena perubahan dalam pengaksesan penyimpanan Android, OsmAnd tidak dapat lagi menggunakan %1$s.
@@ -5056,7 +5056,7 @@
     <string name="change_default_tracks_appearance_confirmation_description">Ubah tampilan trek %1$s\?</string>
     <string name="shared_string_yards">yard</string>
     <string name="shared_string_kilograms">kilogram</string>
-    <string name="approximate_bearing_descr">Hitung bantalan jika tidak diterima dari perangkat</string>
+    <string name="approximate_bearing_descr">Dapatkan arah dari rute navigasi yang diikuti.</string>
     <string name="shared_string_inches">inci</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Perkiraan bantalan</string>
@@ -5090,4 +5090,12 @@
 \n - Memperbaiki masalah dalam menampilkan tempat Vegan
 \n
 \n</string>
+    <string name="sort_date_descending">Tanggal paling lama dahulu</string>
+    <string name="sort_duration_ascending">Durasi terpendek dahulu</string>
+    <string name="shared_string_nearest">Terdekat</string>
+    <string name="selected_value">Nilai yang dipilih</string>
+    <string name="sort_duration_descending">Durasi terpanjang dahulu</string>
+    <string name="sort_distance_ascending">Jarak terpendek dahulu</string>
+    <string name="sort_distance_descending">Jarak terpanjang dahulu</string>
+    <string name="sort_date_ascending">Tanggal terbaru dahulu</string>
 </resources>
