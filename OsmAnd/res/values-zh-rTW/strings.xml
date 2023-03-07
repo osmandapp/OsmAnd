@@ -4394,7 +4394,7 @@
     <string name="progress_complete">%1$s 完成</string>
     <string name="shared_string_migration">遷移</string>
     <string name="storage_found_files_descr">點擊「%1$s」以從「%3$s」複製 %2$s 檔案到「%4$s」。可能需要一段時間。</string>
-    <string name="storage_copied_files_size">已複製 %1$s 檔案 %2$s</string>
+    <string name="storage_copied_files_size">已處理 %1$s 個檔案，%2$s</string>
     <string name="storage_copying_files_size">正在複製 %1$s 檔案 %2$s</string>
     <string name="storage_found_files_size">已找到 %1$s 檔案 %2$s</string>
     <string name="shared_string_skip_warning">要略過遷移嗎？OsmAnd 無法再存取您在共享儲存空間的檔案。
@@ -4433,7 +4433,7 @@
     <string name="no_items_selected_warning">請選取至少一個項目</string>
     <string name="display_groups_visibility_dialog_description">您可以在地圖上控制群組能見度。若隱藏軌跡，也將會隱藏所有的群組。</string>
     <string name="shared_string_hide_all">隱藏全部</string>
-    <string name="migration_files_present">%1$d 個檔案 (%2$s) 位於選定的位置「%3$s」。</string>
+    <string name="migration_files_present">%1$d 個檔案 (%2$s) 已存在於目標「%3$s」中，且未被覆寫。</string>
     <string name="exit_without_saving_warning">不儲存變更就退出？</string>
     <string name="shared_string_uphill">上坡</string>
     <string name="shared_string_downhill">下坡</string>
@@ -5048,7 +5048,7 @@
     <string name="shared_string_inches">英吋</string>
     <string name="inch">英吋</string>
     <string name="approximate_bearing">大約方位</string>
-    <string name="approximate_bearing_descr">若未從裝置接收到，則計算方位</string>
+    <string name="approximate_bearing_descr">從所遵循的的導航路線中推導出方位。</string>
     <string name="cloud_version_confirm_delete">從 OsmAnd Cloud 刪除「%1$s」？</string>
     <string name="simulation_position_description">選取一個軌跡檔案用於移動指引。</string>
     <string name="shared_string_delete_file">刪除檔案</string>
@@ -5079,4 +5079,12 @@
 \n • 修復了顯示素食場所的問題
 \n
 \n</string>
+    <string name="sort_date_descending">最舊日期優先</string>
+    <string name="selected_value">已選取的值</string>
+    <string name="sort_duration_ascending">最短時間優先</string>
+    <string name="sort_duration_descending">最長時間優先</string>
+    <string name="sort_distance_ascending">最短距離優先</string>
+    <string name="sort_date_ascending">最新日期優先</string>
+    <string name="sort_distance_descending">最長距離優先</string>
+    <string name="shared_string_nearest">最近</string>
 </resources>
