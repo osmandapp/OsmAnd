@@ -5068,7 +5068,7 @@
     <string name="shared_string_original">Oprindelig</string>
     <string name="local_version_do_not_exist">Der findes ingen lokal version.</string>
     <string name="movement_speed">Bevægelseshastighed</string>
-    <string name="simulation_position_description">Vælg en sporfil, der skal bruges som bevægelsesvejledning.</string>
+    <string name="simulation_position_description">Vælg en sporfil, der skal bruges som kilde til bevægelse af en placering.</string>
     <string name="shared_string_add_manually">Tilføj manuelt…</string>
     <string name="release_4_4">- Forbedret menuen \"Spor\" i \"Konfigurer kort\"
 \n
