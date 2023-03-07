@@ -920,7 +920,7 @@
     <string name="shared_string_location">位置</string>
     <string name="read_more">阅读更多信息</string>
     <string name="whats_new">新版本更新内容，在</string>
-    <string name="rendering_attr_hideProposed_name">提议的对象</string>
+    <string name="rendering_attr_showProposed_name">提议的对象</string>
     <string name="shared_string_update">更新</string>
     <string name="shared_string_upload">上传</string>
     <string name="osm_edit_created_poi">创建的 OSM 兴趣点</string>

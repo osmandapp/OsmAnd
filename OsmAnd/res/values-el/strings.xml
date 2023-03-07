@@ -2164,7 +2164,7 @@
     <string name="lang_als">Αλβανικά (Τοσκ)</string>
     <string name="read_more">Διαβάστε περισσότερα</string>
     <string name="whats_new">Τι νέο υπάρχει στο</string>
-    <string name="rendering_attr_hideProposed_name">Προτεινόμενα αντικείμενα</string>
+    <string name="rendering_attr_showProposed_name">Προτεινόμενα αντικείμενα</string>
     <string name="shared_string_update">Ενημέρωση</string>
     <string name="osm_edit_created_poi">Δημιουργήθηκε ΣΕ OSM</string>
     <string name="lang_fy">Φρισικά</string>

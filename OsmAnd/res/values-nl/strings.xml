@@ -1719,7 +1719,7 @@
     <string name="map_legend">Legenda</string>
     <string name="read_more">Meer lezen</string>
     <string name="whats_new">Wat is er nieuw in</string>
-    <string name="rendering_attr_hideProposed_name">Voorgestelde objecten</string>
+    <string name="rendering_attr_showProposed_name">Voorgestelde objecten</string>
     <string name="share_osm_edits_subject">Via OsmAnd gedeelde OSM-bewerkingen</string>
     <string name="lang_nds">Nederduits</string>
     <string name="lang_mk">Macedonisch</string>

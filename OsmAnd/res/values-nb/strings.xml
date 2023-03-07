@@ -1292,7 +1292,7 @@
     <string name="contact_us">Kontakt</string>
     <string name="planning_trip_item">Turplanlegging</string>
     <string name="read_more">Les mer</string>
-    <string name="rendering_attr_hideProposed_name">Foreslåtte objekter</string>
+    <string name="rendering_attr_showProposed_name">Foreslåtte objekter</string>
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>

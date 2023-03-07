@@ -1722,7 +1722,7 @@
     <string name="map_legend">地圖圖例</string>
     <string name="shared_string_upload">上傳</string>
     <string name="shared_string_update">更新</string>
-    <string name="rendering_attr_hideProposed_name">已提出的物件</string>
+    <string name="rendering_attr_showProposed_name">已提出的物件</string>
     <string name="read_more">讀取更多</string>
     <string name="whats_new">有什麼新的在</string>
     <!-- string name="map_legend_item_description">圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示</string -->

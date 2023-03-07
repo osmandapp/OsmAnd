@@ -3870,7 +3870,7 @@
     <string name="lang_nn">Nynorsk Norwegia</string>
     <string name="rendering_value_translucent_red_name">Merah tembus pandang</string>
     <string name="shared_string_not_selected">Tidak terpilih</string>
-    <string name="rendering_attr_hideProposed_name">Obyek yang diusulkan</string>
+    <string name="rendering_attr_showProposed_name">Obyek yang diusulkan</string>
     <string name="favourites_edit_dialog_title">Info favorit</string>
     <string name="shared_string_trip_recording">Rekaman perjalanan</string>
     <string name="rendering_value_translucent_purple_name">Ungu tembus pandang</string>

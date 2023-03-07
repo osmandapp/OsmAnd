@@ -1369,7 +1369,7 @@
     <string name="shared_string_location">Kokapena</string>
     <string name="read_more">Irakurri gehiago</string>
     <string name="whats_new">Zer da berria</string>
-    <string name="rendering_attr_hideProposed_name">Proposatuko objektuak</string>
+    <string name="rendering_attr_showProposed_name">Proposatuko objektuak</string>
     <string name="shared_string_update">Eguneratu</string>
     <string name="shared_string_upload">Igo</string>
     <string name="world_map_download_descr">Munduko oinarrizko mapa (mundu osoko xehetasun gutxiko mapa) falta da edo eguneratu gabe dago. Ingurunea osatzeko munduko oinarrizko mapa deskargatzea komeni da.</string>

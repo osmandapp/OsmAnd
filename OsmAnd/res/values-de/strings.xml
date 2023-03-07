@@ -1672,7 +1672,7 @@
     <string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
     <string name="roads">Straßen</string>
     <string name="show_free_version_banner_description">Das Banner der kostenlosen Version auch in der kostenpflichtigen Version anzeigen.</string>
-    <string name="rendering_attr_hideProposed_name">Geplante Objekte</string>
+    <string name="rendering_attr_showProposed_name">Geplante Objekte</string>
     <string name="shared_string_update">Aktualisieren</string>
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>

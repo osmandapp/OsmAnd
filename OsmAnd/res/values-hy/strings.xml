@@ -658,7 +658,7 @@
     <string name="lang_als">Ալբաներեն (Tosk)</string>
     <string name="read_more">Ավելին</string>
     <string name="whats_new">Ինչ է նորը</string>
-    <string name="rendering_attr_hideProposed_name">Պլանավորված օբյեկտներ</string>
+    <string name="rendering_attr_showProposed_name">Պլանավորված օբյեկտներ</string>
     <string name="shared_string_update">Թարմացնել</string>
     <string name="shared_string_upload">Վերբեռնել</string>
     <string name="osm_edit_created_poi">Ստեղծեք OSM POI</string>

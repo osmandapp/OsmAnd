@@ -1725,7 +1725,7 @@
     <string name="map_legend">Vysvetlivky k mape</string>
     <string name="shared_string_upload">Odoslať</string>
     <string name="shared_string_update">Aktualizovať</string>
-    <string name="rendering_attr_hideProposed_name">Plánované objekty</string>
+    <string name="rendering_attr_showProposed_name">Plánované objekty</string>
     <string name="read_more">Prečítať viac</string>
     <string name="whats_new">Čo je nové v</string>
     <!-- string name="map_legend_item_description">Vysvetlivky k základnému mapovému štýlu v OsmAnd. Pre ich zobrazenie je potrebné pripojenie na Internet</string -->

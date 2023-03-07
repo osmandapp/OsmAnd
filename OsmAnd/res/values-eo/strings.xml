@@ -153,7 +153,7 @@
     <string name="shared_string_upload">Alŝuti</string>
     <string name="osm_edit_created_poi">Kreita OSM-interesejo</string>
     <string name="shared_string_qr_code">QR-kodo</string>
-    <string name="rendering_attr_hideProposed_name">Proponitaj objektoj</string>
+    <string name="rendering_attr_showProposed_name">Proponitaj objektoj</string>
     <string name="share_menu_location">Kunhavigi lokon</string>
     <string name="shared_string_send">Sendi</string>
     <string name="world_map_download_descr">La fundamenta mapo de mondo (kiu kovras tutan mondon ĉe etaj skal-niveloj) mankas aŭ estas neĝisdata. Konsideru elŝuti ĝin por havi vidon al la tuta mondo.</string>

@@ -1613,7 +1613,7 @@
     <string name="lang_als">Albāņu (tosku)</string>
     <string name="read_more">Lasīt vēl</string>
     <string name="whats_new">Kas jauns</string>
-    <string name="rendering_attr_hideProposed_name">Piedāvātos objektus</string>
+    <string name="rendering_attr_showProposed_name">Piedāvātos objektus</string>
     <string name="shared_string_update">Atjauninājums</string>
     <string name="shared_string_upload">Augšupielādēt</string>
     <string name="osm_edit_created_poi">Izveidots OSM POI</string>

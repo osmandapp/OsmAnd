@@ -1697,7 +1697,7 @@
     <string name="feedback">Återkoppling</string>
     <string name="read_more">Läs mer</string>
     <string name="whats_new">Nyheter</string>
-    <string name="rendering_attr_hideProposed_name">Föreslagna objekt</string>
+    <string name="rendering_attr_showProposed_name">Föreslagna objekt</string>
     <string name="lang_nds">Lågtyska</string>
     <string name="lang_mk">Makedonska</string>
     <string name="lang_fy">Frisiska</string>

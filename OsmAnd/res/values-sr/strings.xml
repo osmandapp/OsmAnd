@@ -368,7 +368,7 @@
     <string name="lang_mk">Македонски</string>
     <string name="read_more">Прочитај више</string>
     <string name="whats_new">Шта је ново</string>
-    <string name="rendering_attr_hideProposed_name">Предложене објекте</string>
+    <string name="rendering_attr_showProposed_name">Предложене објекте</string>
     <string name="shared_string_update">Надгради</string>
     <string name="shared_string_upload">Отпреми</string>
     <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Преузмите основну карту света за употпуњавање радне средине.</string>

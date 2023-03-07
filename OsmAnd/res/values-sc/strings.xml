@@ -1732,7 +1732,7 @@
     <string name="shared_string_update">Agiorna</string>
     <string name="read_more">Leghe àteru</string>
     <string name="whats_new">Ite b\'at de nou in sa</string>
-    <string name="rendering_attr_hideProposed_name">Ogetos propostos</string>
+    <string name="rendering_attr_showProposed_name">Ogetos propostos</string>
     <string name="lang_nds">Bassu-tedescu</string>
     <string name="lang_mk">Matzèdone</string>
     <string name="lang_fy">Frisonu otzidentale</string>

@@ -1679,7 +1679,7 @@
     <string name="lang_als">Albanês (Tosco)</string>
     <string name="read_more">Leia mais</string>
     <string name="whats_new">O que há de novo</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propostos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propostos</string>
     <string name="world_map_download_descr">Mapa-base mundial (abrangendo o mundo inteiro em baixo nível de zoom) está faltando ou desatualizado. Por favor, considere baixá-lo para uma visão global.</string>
     <string name="map_downloaded_descr">O mapa %1$s está pronto para usar.</string>
     <string name="go_to_map">Exibir mapa</string>

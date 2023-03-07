@@ -1735,7 +1735,7 @@
     <string name="map_legend">Signaturforklaring</string>
     <string name="shared_string_upload">Overfør</string>
     <string name="shared_string_update">Opdater</string>
-    <string name="rendering_attr_hideProposed_name">Foreslåede objekter</string>
+    <string name="rendering_attr_showProposed_name">Foreslåede objekter</string>
     <string name="read_more">Læs mere</string>
     <string name="whats_new">Hvad er nyt i</string>
     <!-- string name="map_legend_item_description">Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig</string -->
