@@ -2662,7 +2662,7 @@
     <string name="shared_string_dont">Gør det ikke</string>
     <string name="shared_string_do">Gør det</string>
     <string name="shared_string_only_with_wifi">Kun med Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Hent billeder</string>
+    <string name="wikivoyage_download_pics">Download billeder</string>
     <string name="wikivoyage_download_pics_descr">Artikelbilleder kan hentes til offline brug.
 \nKan altid ændres i \'Udforsk\' → \'Indstillinger\'.</string>
     <string name="shared_string_wifi_only">Kun med Wi-Fi</string>
@@ -4798,7 +4798,7 @@
     <string name="coordinates_widget_map_center_desc">Viser de geografiske koordinater for det aktuelle kortcentrum</string>
     <string name="coordinates_widget_current_location_desc">Viser de geografiske koordinater for den aktuelle geografiske placering</string>
     <string name="map_widget_camera_distance_desc">Viser kameraets højde over overfladeniveauet.</string>
-    <string name="map_widget_zoom_level">Zoomniveau</string>
+    <string name="map_widget_zoom_level">Zoom-niveau</string>
     <string name="map_widget_target_distance_desc">Viser afstanden mellem kameraet til målstedet.</string>
     <string name="map_widget_zoom_level_desc">Viser kortets aktuelle zoomniveau.</string>
     <string name="map_widget_camera_tilt_desc">Viser kameraets hældningsvinkel i perspektivtilstand. Standardværdien er 90° (ingen hældning).</string>
