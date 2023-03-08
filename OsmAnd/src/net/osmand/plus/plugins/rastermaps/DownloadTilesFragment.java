@@ -64,8 +64,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private static final String KEY_DOWNLOAD_LAYER = "download_layer";
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
-	private final int KEY_LAYER_MAP = R.string.layer_map;
-	private final int KEY_LAYER_OVERLAY = R.string.layer_overlay;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -276,26 +274,22 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	private int getMapSourceTitle() {
-		switch (layerToDownload) {
-			case KEY_LAYER_MAP: {
-				return R.string.map_source;
-			}
-			case KEY_LAYER_OVERLAY: {
-				return R.string.map_overlay;
-			}
-			default:
-				return R.string.map_underlay;
+		if (layerToDownload == R.string.layer_map) {
+			return R.string.map_source;
+		} else if (layerToDownload == R.string.layer_overlay) {
+			return R.string.map_overlay;
+		} else {
+			return R.string.map_underlay;
 		}
 	}
 
 	private CommonPreference<String> getMapLayerSettings() {
-		switch (layerToDownload) {
-			case KEY_LAYER_MAP:
-				return app.getSettings().MAP_TILE_SOURCES;
-			case KEY_LAYER_OVERLAY:
-				return app.getSettings().MAP_OVERLAY;
-			default:
-				return app.getSettings().MAP_UNDERLAY;
+		if (layerToDownload == R.string.layer_map) {
+			return app.getSettings().MAP_TILE_SOURCES;
+		} else if (layerToDownload == R.string.layer_overlay) {
+			return app.getSettings().MAP_OVERLAY;
+		} else {
+			return app.getSettings().MAP_UNDERLAY;
 		}
 	}
 
