@@ -4269,7 +4269,7 @@
     <string name="history_actions_descr">Du kan eksportere historikk inn i en fil.</string>
     <string name="map_markers_history">Kartmarkørhistorikk</string>
     <string name="navigation_history">Navigasjonshistorikk</string>
-    <string name="history_preferences_descr">Du kan skru av historikklogging for hver historikktype.</string>
+    <string name="history_preferences_descr">Du kan skru av historikklogging individuelt for hver av historikktypene.</string>
     <string name="shortcut_start_recording">Start opptak</string>
     <string name="shortcut_navigate_to">Naviger til …</string>
     <string name="shortcut_navigate_to_work">Jobb</string>
