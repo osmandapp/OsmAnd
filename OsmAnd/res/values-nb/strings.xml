@@ -3853,10 +3853,10 @@
     <string name="online_routing_engine">Nettbasert rutingsmotor</string>
     <string name="online_routing_engines">Nettbaserte rutingsmotorer</string>
     <string name="announcement_time_prepare_long">Lang forberedelse</string>
-    <string name="announcement_time_prepare">Forberedelse</string>
+    <string name="announcement_time_prepare">Forbered</string>
     <string name="announcement_time_arrive">Ankom målet</string>
     <string name="shared_string_turn">Sving</string>
-    <string name="announcement_time_intervals">Tid og avstandsintervaller</string>
+    <string name="announcement_time_intervals">Tid- og avstandsintervaller</string>
     <string name="announcement_time_descr">Kunngjøringstid for forskjellige talemeldinger avhenger av meldingstype, gjeldende navigasjonshastighet og forvalgt navigasjonshastighet.</string>
     <string name="routing_engine_vehicle_type_hiking">Turgåing</string>
     <string name="routing_engine_vehicle_type_walking">Gåing</string>
@@ -5080,4 +5080,12 @@
 \n - Fikset problemer med visning av veganske steder
 \n
 \n</string>
+    <string name="sort_duration_ascending">Kortere varighet først</string>
+    <string name="sort_duration_descending">Lengste varighet først</string>
+    <string name="shared_string_nearest">Nærmeste</string>
+    <string name="sort_distance_descending">Lengste avstand først</string>
+    <string name="sort_date_descending">Eldste dato først</string>
+    <string name="sort_distance_ascending">Korteste avstand først</string>
+    <string name="selected_value">Valgt verdi</string>
+    <string name="sort_date_ascending">Nyeste dato først</string>
 </resources>
