@@ -42,7 +42,10 @@ public class ZoomLevelWidget extends TextInfoWidget {
 			cachedZoomFloatPart = newZoomFloatPart;
 			cachedMapDensity = newMapDensity;
 
-			float offsetFromLogicalZoom = newZoomFloatPart + getZoomFromMapDensity(newMapDensity);
+			float visualZoom = newZoomFloatPart >= 0.0f
+					? 1.0f + newZoomFloatPart
+					: 1.0f + 0.5f * newZoomFloatPart;
+			float offsetFromLogicalZoom = getZoomDeltaFromMapScale(visualZoom * newMapDensity);
 			float preFormattedOffset = Math.round(Math.abs(offsetFromLogicalZoom) * 100) / 100.0f;
 			String formattedOffset = OsmAndFormatter
 					.formatValue(preFormattedOffset, "", true, 2, app)
@@ -52,21 +55,27 @@ public class ZoomLevelWidget extends TextInfoWidget {
 		}
 	}
 
-	private float getZoomFromMapDensity(float mapDensity) {
-		int sign = mapDensity < 1.0f ? -1 : +1;
-		double mapScale = mapDensity < 1.0f ? Math.pow(mapDensity, -1) : mapDensity;
+	private float getZoomDeltaFromMapScale(float mapScale) {
 		double log2 = Math.log(mapScale) / Math.log(2);
-		boolean powerOfTwo = log2 - (int) log2 < 0.001;
+		boolean powerOfTwo = Math.abs(log2 - (int) log2) < 0.001;
 
 		if (powerOfTwo) {
-			return sign * (int) log2;
+			return (int) Math.round(log2);
 		}
 
-		int prevIntZoom = (int) log2;
-		int nextIntZoom = prevIntZoom + 1;
+		int prevIntZoom;
+		int nextIntZoom;
+		if (mapScale >= 1.0f) {
+			prevIntZoom = (int) log2;
+			nextIntZoom = prevIntZoom + 1;
+		} else {
+			nextIntZoom = (int) log2;
+			prevIntZoom = nextIntZoom - 1;
+		}
+
 		float prevPowZoom = (float) Math.pow(2, prevIntZoom);
 		float nextPowZoom = (float) Math.pow(2, nextIntZoom);
 		double zoomFloatPart = Math.abs(mapScale - prevPowZoom) / (nextPowZoom - prevPowZoom);
-		return sign * (float) (prevIntZoom + zoomFloatPart);
+		return (float) (prevIntZoom + zoomFloatPart);
 	}
 }
