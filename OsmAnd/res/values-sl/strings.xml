@@ -126,7 +126,7 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_lock_screen">Zakleni</string>
     <string name="map_widget_back_to_loc">Kje sem?</string>
-    <string name="map_widget_config">Nastavite zaslona</string>
+    <string name="map_widget_config">Nastavitve zaslona</string>
     <string name="map_widget_time">Čas do cilja</string>
     <string name="map_widget_next_turn">Naslednji zavoj</string>
     <string name="map_widget_next_turn_small">Naslednji zavoj (manjši)</string>
@@ -284,7 +284,7 @@
     <string name="select_navigation_mode">Načina prevoza:</string>
     <string name="day_night_info_description">Sončni vzhod: %1$s
 \nSončni zahod: %2$s</string>
-    <string name="layer_map_appearance">Nastavite zaslona</string>
+    <string name="layer_map_appearance">Nastavitve zaslona</string>
     <string name="show_lanes">Vozni pasovi</string>
     <string name="avoid_in_routing_title">Izogibanje …</string>
     <string name="avoid_ferries">Brez trajektov</string>
@@ -612,7 +612,7 @@
     <string name="gpx_option_from_start_point">Podaj celotno sled</string>
     <string name="switch_to_vector_map_to_see">Za to območje so na voljo vektorski zemljevidi za delo brez povezave.
 \n\t
-\n\tMožnosti so na voljo v »Meniju« → »Možnosti zemljevida« → »Vir zemljevida …« → »Vektorski zemljevidi za delo brez povezave«.</string>
+\n\tMožnosti so na voljo v »Meniju« → »Nastavitve zemljevida« → »Vir zemljevida …« → »Vektorski zemljevidi za delo brez povezave«.</string>
     <string name="voice_stream_notification">Zvok obvestila</string>
     <string name="voice_stream_music">Zvok navigacije</string>
     <string name="warning_tile_layer_not_downloadable">Ni mogoče prejeti sloja zemljevida %1$s. Morda je treba program ponovno namestiti.</string>
@@ -1333,7 +1333,7 @@
     <string name="map_widget_right">Desni pult</string>
     <string name="map_widget_left">Levi pult</string>
     <string name="shared_string_show">Pokaži</string>
-    <string name="configure_map">Nastavi zemljevid</string>
+    <string name="configure_map">Nastavitve zemljevida</string>
     <string name="search_radius_proximity">Znotraj</string>
     <string name="anonymous_user_hint">Anonimni uporabniki ne morejo:
 \n- ustvarjati skupin;
@@ -1515,9 +1515,9 @@
 \n
 \nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso zahtevani.
 \n
-\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti, ali pa s spreminjanjem vrste prikaza zemljevida.</string>
-    <string name="plugin_ski_descr">Zasnovan za navigacijo po območjih zimskih športov: oglej si smučarske proge in vlečnice ter proge za tek na smučeh z barvnimi črtami, ki označujejo stopnje težavnosti. Za uporabo omogoči ta vtičnik in pojdi na »Konfiguriraj zemljevid« ter izberite slog zemljevida »Zima in smučanje«.</string>
-    <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Konfiguriraj zemljevid«.
+\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti, ali pa s spreminjanjem vrste prikaza zemljevida v Nastavitvah zemljevida.</string>
+    <string name="plugin_ski_descr">Zasnovan za navigacijo po območjih zimskih športov: oglej si smučarske proge in vlečnice ter proge za tek na smučeh z barvnimi črtami, ki označujejo stopnje težavnosti. Za uporabo omogoči ta vtičnik in pojdi na »Nastavitve zemljevida« ter izberi slog zemljevida »Zima in smučanje«.</string>
+    <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Nastavitvah zemljevida«.
 \n
 \nNadaljnje branje na https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="routing_attr_avoid_borders_description">Izogni se mednarodnim mejnim prehodom</string>
@@ -2089,7 +2089,7 @@
     <string name="quick_action_poi_hide">Skrij %1$s</string>
     <string name="quick_action_add_category">Dodaj kategorijo</string>
     <string name="quick_action_add_create_items">Ustvari predmete</string>
-    <string name="quick_action_add_configure_map">Nastavi zemljevid</string>
+    <string name="quick_action_add_configure_map">Nastavitve zemljevida</string>
     <string name="quick_action_bug_message">Sporočilo</string>
     <string name="quick_action_poi_list">Seznam točk POI</string>
     <string name="quick_action_map_style_action">Dodaj slog zemljevida</string>
@@ -2261,7 +2261,7 @@
     <string name="mapillary_action_descr">Deli svoje posnetke na ravni ulice prek aplikacije Mapillary.</string>
     <string name="mapillary_widget_descr">Omogoča hitre prispevke v Mapillary.</string>
     <string name="mapillary_descr">Spletne fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
-    <string name="plugin_mapillary_descr">Posnetki pogledov z ravni ulice. Prispevaš lahko tudi sam/a. Če si želiš ogledati obstoječe podatke kot sloj zemljevida, v meniju »Konfiguriraj zemljevid« vklopi »Posnetke na ravni ulice«.</string>
+    <string name="plugin_mapillary_descr">Posnetki pogledov z ravni ulice. Prispevaš lahko tudi sam/a. Če si želiš ogledati obstoječe podatke kot sloj zemljevida, v meniju »Nastavitve zemljevida« vklopi »Posnetke na ravni ulice«.</string>
     <string name="private_access_routing_req">Ciljno mesto je znotraj območja z zasebnim dostopom. Ali lahko za to potovanje uporabljamo tudi zasebne ceste\?</string>
     <string name="quick_action_showhide_osmbugs_descr">Gumb za prikaz ali skrivanje OSM opomb na zemljevidu.</string>
     <string name="animate_my_location">Animiraj trenutno mesto</string>
@@ -4162,7 +4162,7 @@
 \n
 \n• Prilagoditev vrstnega reda predmetov v »Kontekstnem meniju«, »Nastavitvah zemljevida« in »Predalu«.
 \n
-\n• Wikipedija kot ločen sloj v »Nastavitvah zemljevida«, izbereš lahko samo potrebne jezike.
+\n• Wikipedija kot ločen sloj v »Nastavitve zemljevida«, izbereš lahko samo potrebne jezike.
 \n
 \n• Ustvari svoj lastni POI filter ali POI zemljevide s popolno prilagodljivostjo.
 \n
@@ -5062,4 +5062,25 @@
     <string name="shared_string_original">Izvirnik</string>
     <string name="movement_speed">Hitrost gibanja</string>
     <string name="simulation_position_description">Izberi datoteko s sledjo, ki bo uporabljena kot vir za premikanje lokacije.</string>
+    <string name="release_4_4">• Izboljšan meni »Sledi« v »Nastavitvah zemljevida«
+\n
+\n • Kontekstni meni zdaj prikazuje lokalizirana imena za POI točke
+\n
+\n • Dodana možnost deljenja poti s povezavo
+\n
+\n • Dodana enota za dolžino »navtične milje/čevlji«
+\n
+\n • Orientaciji zemljevida je dodan nov fiksni način
+\n
+\n • Poenostavljen začetni zaslon
+\n
+\n • Fiksni položaj lokacije v načinu razdeljenega zaslona v Android Auto
+\n
+\n • Dodan graf »Hitrost/naklon« za analizo sledi
+\n
+\n • Android 13 je premaknil izbiro jezika aplikacije v sistemske nastavitve
+\n
+\n • Odpravljene težave s prikazom veganskih krajev
+\n
+\n</string>
 </resources>
