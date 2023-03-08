@@ -59,19 +59,29 @@ public class TracksComparator implements Comparator<Object> {
 			case NAME_DESCENDING:
 				return -collator.compare(item1.getName(), item2.getName());
 			case DATE_ASCENDING:
-				long time1 = item1.getCreationTime();
-				long time2 = item2.getCreationTime();
-				if (time1 == time2) {
+				GpxDataItem dataItem1 = item1.getDataItem();
+				GpxDataItem dataItem2 = item2.getDataItem();
+				if (dataItem1 == null || dataItem2 == null) {
 					return collator.compare(item1.getName(), item2.getName());
 				}
-				return -Long.compare(time1, time2);
+				GPXTrackAnalysis analysis1 = dataItem1.getAnalysis();
+				GPXTrackAnalysis analysis2 = dataItem2.getAnalysis();
+				if (analysis1 == null || analysis2 == null || analysis1.startTime == analysis2.startTime) {
+					return collator.compare(item1.getName(), item2.getName());
+				}
+				return -Long.compare(analysis1.startTime, analysis2.startTime);
 			case DATE_DESCENDING:
-				time1 = item1.getCreationTime();
-				time2 = item2.getCreationTime();
-				if (time1 == time2) {
+				dataItem1 = item1.getDataItem();
+				dataItem2 = item2.getDataItem();
+				if (dataItem1 == null || dataItem2 == null) {
 					return collator.compare(item1.getName(), item2.getName());
 				}
-				return Long.compare(time1, time2);
+				analysis1 = dataItem1.getAnalysis();
+				analysis2 = dataItem2.getAnalysis();
+				if (analysis1 == null || analysis2 == null || analysis1.startTime == analysis2.startTime) {
+					return collator.compare(item1.getName(), item2.getName());
+				}
+				return Long.compare(analysis1.startTime, analysis2.startTime);
 			case LAST_MODIFIED:
 				File file1 = item1.getFile();
 				File file2 = item2.getFile();
@@ -80,13 +90,13 @@ public class TracksComparator implements Comparator<Object> {
 				}
 				return -Long.compare(file1.lastModified(), file2.lastModified());
 			case DISTANCE_DESCENDING:
-				GpxDataItem dataItem1 = item1.getDataItem();
-				GpxDataItem dataItem2 = item2.getDataItem();
+				dataItem1 = item1.getDataItem();
+				dataItem2 = item2.getDataItem();
 				if (dataItem1 == null || dataItem2 == null) {
 					return collator.compare(item1.getName(), item2.getName());
 				}
-				GPXTrackAnalysis analysis1 = dataItem1.getAnalysis();
-				GPXTrackAnalysis analysis2 = dataItem2.getAnalysis();
+				analysis1 = dataItem1.getAnalysis();
+				analysis2 = dataItem2.getAnalysis();
 				if (analysis1 == null || analysis2 == null || analysis1.totalDistance == analysis2.totalDistance) {
 					return collator.compare(item1.getName(), item2.getName());
 				}

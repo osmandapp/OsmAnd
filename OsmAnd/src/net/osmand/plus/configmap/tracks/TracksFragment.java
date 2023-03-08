@@ -367,6 +367,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);
 			selectedTracksHelper.sortTrackTab(trackTab);
+			selectedTracksHelper.saveTabsSortModes();
 			updateTabsContext();
 		}
 	}

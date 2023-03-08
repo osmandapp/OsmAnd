@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -81,24 +80,24 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				loadGPXFolder(file, progress, sub);
 			} else if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
 				GPXFile gpxFile = getGPXFile(file);
-				if (gpxFile.error == null) {
-					TrackItem trackItem = new TrackItem(file, gpxFile);
-					trackItem.setDataItem(getDataItem(trackItem));
+				TrackItem trackItem = new TrackItem(file);
+				trackItem.setDataItem(getDataItem(trackItem));
+				if (gpxFile != null) {
 					trackItem.setNearestPoint(getNearestPoint(gpxFile, latLon));
-					trackItems.add(trackItem);
+				}
+				trackItems.add(trackItem);
 
-					progress.add(trackItem);
-					if (progress.size() > 7) {
-						publishProgress(progress.toArray(new TrackItem[0]));
-						progress.clear();
-					}
+				progress.add(trackItem);
+				if (progress.size() > 7) {
+					publishProgress(progress.toArray(new TrackItem[0]));
+					progress.clear();
 				}
 			}
 		}
 	}
 
 	@Nullable
-	private WptPt getNearestPoint(@NonNull GPXFile gpxFile, @NonNull LatLon latLon) {
+	public static WptPt getNearestPoint(@NonNull GPXFile gpxFile, @NonNull LatLon latLon) {
 		WptPt nearestPoint = null;
 		double minDistance = Double.MAX_VALUE;
 		for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
@@ -113,8 +112,8 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	@NonNull
 	private GPXFile getGPXFile(@NonNull File file) {
-		SelectedGpxFile gpxFile = gpxSelectionHelper.getSelectedFileByPath(file.getAbsolutePath());
-		return gpxFile != null ? gpxFile.getGpxFile() : GPXUtilities.loadGPXFile(file);
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(file.getAbsolutePath());
+		return selectedGpxFile != null ? selectedGpxFile.getGpxFile() : null;
 	}
 
 	@Nullable
