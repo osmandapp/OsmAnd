@@ -5072,7 +5072,7 @@
     <string name="shared_string_in_progress">In Arbeit</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Bewegungsgeschwindigkeit</string>
-    <string name="simulation_position_description">Wählen Sie eine Track-Datei aus, die als Bewegungsführung verwendet werden soll.</string>
+    <string name="simulation_position_description">Wählen Sie eine Trackdatei aus, die als Quelle für die Veränderung des Standorts verwendet werden soll.</string>
     <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
 \n
 \n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
