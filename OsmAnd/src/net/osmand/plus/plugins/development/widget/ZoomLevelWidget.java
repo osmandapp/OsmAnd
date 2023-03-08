@@ -1,23 +1,29 @@
 package net.osmand.plus.plugins.development.widget;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
+
 public class ZoomLevelWidget extends TextInfoWidget {
 
+	private final OsmandMap osmandMap;
 	private final OsmandMapTileView mapView;
+
 	private int cachedZoom;
 	private float cachedZoomFloatPart;
+	private float cachedMapDensity;
 
 	public ZoomLevelWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, DEV_ZOOM_LEVEL);
+		this.osmandMap = app.getOsmandMap();
 		this.mapView = mapActivity.getMapView();
 		updateInfo(null);
 		setIcons(DEV_ZOOM_LEVEL);
@@ -27,12 +33,40 @@ public class ZoomLevelWidget extends TextInfoWidget {
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		int newZoom = mapView.getZoom();
 		float newZoomFloatPart = mapView.getZoomFloatPart() + mapView.getZoomAnimation();
-		if (isUpdateNeeded() || newZoom != cachedZoom || newZoomFloatPart != cachedZoomFloatPart) {
+		float newMapDensity = osmandMap.getMapDensity();
+		if (isUpdateNeeded()
+				|| newZoom != cachedZoom
+				|| newZoomFloatPart != cachedZoomFloatPart
+				|| newMapDensity != cachedMapDensity) {
 			cachedZoom = newZoom;
 			cachedZoomFloatPart = newZoomFloatPart;
+			cachedMapDensity = newMapDensity;
 
-			int formattedZoomFloatPart = Math.round(newZoomFloatPart * 100);
-			setText(String.valueOf(cachedZoom), String.valueOf(formattedZoomFloatPart));
+			float offsetFromLogicalZoom = newZoomFloatPart + getZoomFromMapDensity(newMapDensity);
+			float preFormattedOffset = Math.round(Math.abs(offsetFromLogicalZoom) * 100) / 100.0f;
+			String formattedOffset = OsmAndFormatter
+					.formatValue(preFormattedOffset, "", true, 2, app)
+					.value;
+			String sign = offsetFromLogicalZoom < 0 ? "-" : "+";
+			setText(String.valueOf(cachedZoom), sign + formattedOffset);
 		}
+	}
+
+	private float getZoomFromMapDensity(float mapDensity) {
+		int sign = mapDensity < 1.0f ? -1 : +1;
+		double mapScale = mapDensity < 1.0f ? Math.pow(mapDensity, -1) : mapDensity;
+		double log2 = Math.log(mapScale) / Math.log(2);
+		boolean powerOfTwo = log2 - (int) log2 < 0.001;
+
+		if (powerOfTwo) {
+			return sign * (int) log2;
+		}
+
+		int prevIntZoom = (int) log2;
+		int nextIntZoom = prevIntZoom + 1;
+		float prevPowZoom = (float) Math.pow(2, prevIntZoom);
+		float nextPowZoom = (float) Math.pow(2, nextIntZoom);
+		double zoomFloatPart = Math.abs(mapScale - prevPowZoom) / (nextPowZoom - prevPowZoom);
+		return sign * (float) (prevIntZoom + zoomFloatPart);
 	}
 }
