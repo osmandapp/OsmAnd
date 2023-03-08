@@ -64,6 +64,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private static final String KEY_DOWNLOAD_LAYER = "download_layer";
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
+	private final int KEY_LAYER_MAP = R.string.layer_map;
+	private final int KEY_LAYER_OVERLAY = R.string.layer_overlay;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -275,10 +277,10 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private int getMapSourceTitle() {
 		switch (layerToDownload) {
-			case R.string.layer_map: {
+			case KEY_LAYER_MAP: {
 				return R.string.map_source;
 			}
-			case R.string.layer_overlay: {
+			case KEY_LAYER_OVERLAY: {
 				return R.string.map_overlay;
 			}
 			default:
@@ -288,9 +290,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private CommonPreference<String> getMapLayerSettings() {
 		switch (layerToDownload) {
-			case R.string.layer_map:
+			case KEY_LAYER_MAP:
 				return app.getSettings().MAP_TILE_SOURCES;
-			case R.string.layer_overlay:
+			case KEY_LAYER_OVERLAY:
 				return app.getSettings().MAP_OVERLAY;
 			default:
 				return app.getSettings().MAP_UNDERLAY;
