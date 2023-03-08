@@ -3,7 +3,6 @@ package net.osmand.plus.configmap.tracks;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
@@ -14,9 +13,10 @@ public class TrackItem {
 	private final String name;
 	private final String path;
 	private final File file;
+	private final long lastModified;
 
 	private GpxDataItem dataItem;
-	private long lastModified;
+	private String regionName;
 
 	public TrackItem(@NonNull File file) {
 		this.file = file;
@@ -45,12 +45,21 @@ public class TrackItem {
 		return dataItem;
 	}
 
-	public long getLastModified() {
-		return lastModified;
-	}
-
 	public void setDataItem(@Nullable GpxDataItem dataItem) {
 		this.dataItem = dataItem;
+	}
+
+	@Nullable
+	public String getRegionName() {
+		return regionName;
+	}
+
+	public void setRegionName(@Nullable String regionName) {
+		this.regionName = regionName;
+	}
+
+	public long getLastModified() {
+		return lastModified;
 	}
 
 	@NonNull

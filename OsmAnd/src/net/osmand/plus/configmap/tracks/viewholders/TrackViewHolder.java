@@ -104,11 +104,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindInfoRow(@NonNull TracksAdapter adapter, @NonNull TrackItem trackItem) {
-		TrackTab trackTab = adapter.getTrackTab();
 		File file = trackItem.getFile();
 		GpxDataItem dataItem = trackItem.getDataItem();
 		if (dataItem != null) {
-			buildDescriptionRow(trackTab, dataItem, trackItem);
+			buildDescriptionRow(adapter, dataItem, trackItem);
 		} else if (file != null) {
 			dataItem = gpxDbHelper.getItem(file, new GpxDataItemCallback() {
 				@Override
@@ -121,14 +120,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			});
 			if (dataItem != null) {
 				trackItem.setDataItem(dataItem);
-				buildDescriptionRow(trackTab, dataItem, trackItem);
+				buildDescriptionRow(adapter, dataItem, trackItem);
 			}
 		}
 	}
 
-	private void buildDescriptionRow(@NonNull TrackTab trackTab, @NonNull GpxDataItem dataItem, @NonNull TrackItem trackItem) {
+	private void buildDescriptionRow(@NonNull TracksAdapter adapter, @NonNull GpxDataItem dataItem, @NonNull TrackItem trackItem) {
 		setupIcon(dataItem);
 
+		TrackTab trackTab = adapter.getTrackTab();
 		TracksSortMode sortMode = trackTab.getSortMode();
 		GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;
 		if (analysis != null) {
@@ -142,7 +142,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
 				appendDurationDescription(builder, trackTab, trackItem, analysis);
 			} else if (sortMode == NEAREST) {
-				appendNearestDescription(builder, trackItem, analysis);
+				appendNearestDescription(adapter, builder, trackItem, analysis);
 			} else if (sortMode == LAST_MODIFIED) {
 				appendLastModifiedDescription(builder, trackItem, analysis);
 			}
@@ -226,8 +226,12 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendFolderName(builder, trackTab, trackItem);
 	}
 
-	private void appendNearestDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
+	private void appendNearestDescription(@NonNull TracksAdapter adapter,
+	                                      @NonNull SpannableStringBuilder builder,
+	                                      @NonNull TrackItem trackItem,
+	                                      @NonNull GPXTrackAnalysis analysis) {
 		if (analysis.latLonStart != null) {
+			appendRegionName(adapter, analysis.latLonStart, builder, trackItem);
 			builder.append(" \u007C ");
 			uiUtilities.updateLocationView(locationViewCache, directionIcon, distanceTv, analysis.latLonStart);
 		}
@@ -237,6 +241,22 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
+	}
+
+	private void appendRegionName(@NonNull TracksAdapter adapter, @NonNull LatLon latLon,
+	                              @NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem) {
+		String regionName = trackItem.getRegionName();
+		if (regionName != null) {
+			builder.append(", " + regionName);
+		} else {
+			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, region -> {
+				trackItem.setRegionName(region != null ? region.getLocaleName() : "");
+				if (fragment.isAdded()) {
+					adapter.notifyItemChanged(getAdapterPosition());
+				}
+				return true;
+			});
+		}
 	}
 
 	private void appendDuration(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
