@@ -802,17 +802,4 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		}
 		return size;
 	}
-
-	public long getCreationTime() {
-		long time = metadata.time;
-		if (time == 0) {
-			List<WptPt> points = getPoints();
-			time = points.isEmpty() ? 0 : points.get(points.size() - 1).time;
-		}
-		if (time == 0) {
-			List<WptPt> points = getAllSegmentsPoints();
-			time = points.isEmpty() ? 0 : points.get(points.size() - 1).time;
-		}
-		return time;
-	}
 }
