@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
@@ -149,7 +148,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			}
 			description.setText(builder);
 		}
-		boolean showDistance = sortMode == NEAREST && trackItem.getNearestPoint() != null;
+		boolean showDistance = sortMode == NEAREST && analysis != null && analysis.latLonStart != null;
 		AndroidUiHelper.updateVisibility(distanceTv, showDistance);
 		AndroidUiHelper.updateVisibility(directionIcon, showDistance);
 	}
@@ -228,10 +227,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
-		WptPt wptPt = trackItem.getNearestPoint();
-		if (wptPt != null) {
+		if (analysis.latLonStart != null) {
 			builder.append(" \u007C ");
-			uiUtilities.updateLocationView(locationViewCache, directionIcon, distanceTv, new LatLon(wptPt.lat, wptPt.lon));
+			uiUtilities.updateLocationView(locationViewCache, directionIcon, distanceTv, analysis.latLonStart);
 		}
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {

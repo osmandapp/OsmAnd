@@ -8,9 +8,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
@@ -18,7 +16,6 @@ import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,14 +28,12 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	private final GpxSelectionHelper gpxSelectionHelper;
 
 	private final List<TrackItem> trackItems = new ArrayList<>();
-	private final LatLon latLon;
 	private final LoadTracksListener listener;
 
 	public TrackItemsLoaderTask(@NonNull OsmandApplication app, @NonNull LoadTracksListener listener) {
 		this.app = app;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.gpxSelectionHelper = app.getSelectedGpxHelper();
-		this.latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
 		this.listener = listener;
 	}
 
@@ -79,12 +74,8 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				String sub = subfolder.length() == 0 ? name : subfolder + "/" + name;
 				loadGPXFolder(file, progress, sub);
 			} else if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
-				GPXFile gpxFile = getGPXFile(file);
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));
-				if (gpxFile != null) {
-					trackItem.setNearestPoint(getNearestPoint(gpxFile, latLon));
-				}
 				trackItems.add(trackItem);
 
 				progress.add(trackItem);
@@ -94,26 +85,6 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				}
 			}
 		}
-	}
-
-	@Nullable
-	public static WptPt getNearestPoint(@NonNull GPXFile gpxFile, @NonNull LatLon latLon) {
-		WptPt nearestPoint = null;
-		double minDistance = Double.MAX_VALUE;
-		for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
-			double distance = MapUtils.getDistance(latLon, wptPt.lat, wptPt.lon);
-			if (distance < minDistance) {
-				minDistance = distance;
-				nearestPoint = wptPt;
-			}
-		}
-		return nearestPoint;
-	}
-
-	@NonNull
-	private GPXFile getGPXFile(@NonNull File file) {
-		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(file.getAbsolutePath());
-		return selectedGpxFile != null ? selectedGpxFile.getGpxFile() : null;
 	}
 
 	@Nullable

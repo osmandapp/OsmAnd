@@ -6,7 +6,6 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.MapUtils;
 
@@ -46,19 +45,6 @@ public class TracksComparator implements Comparator<Object> {
 	private int compareTrackItems(@NonNull TrackItem item1, @NonNull TrackItem item2) {
 		switch (sortMode) {
 			case NEAREST:
-				WptPt wptPt1 = item1.getNearestPoint();
-				WptPt wptPt2 = item2.getNearestPoint();
-				if (wptPt1 == null || wptPt2 == null) {
-					return collator.compare(item1.getName(), item2.getName());
-				}
-				double distance1 = MapUtils.getDistance(latLon, wptPt1.lat, wptPt1.lon);
-				double distance2 = MapUtils.getDistance(latLon, wptPt2.lat, wptPt2.lon);
-				return Double.compare(distance1, distance2);
-			case NAME_ASCENDING:
-				return collator.compare(item1.getName(), item2.getName());
-			case NAME_DESCENDING:
-				return -collator.compare(item1.getName(), item2.getName());
-			case DATE_ASCENDING:
 				GpxDataItem dataItem1 = item1.getDataItem();
 				GpxDataItem dataItem2 = item2.getDataItem();
 				if (dataItem1 == null || dataItem2 == null) {
@@ -66,6 +52,24 @@ public class TracksComparator implements Comparator<Object> {
 				}
 				GPXTrackAnalysis analysis1 = dataItem1.getAnalysis();
 				GPXTrackAnalysis analysis2 = dataItem2.getAnalysis();
+				if (analysis1 == null || analysis2 == null || analysis1.latLonStart == null || analysis2.latLonStart == null) {
+					return collator.compare(item1.getName(), item2.getName());
+				}
+				double distance1 = MapUtils.getDistance(latLon, analysis1.latLonStart);
+				double distance2 = MapUtils.getDistance(latLon, analysis2.latLonStart);
+				return Double.compare(distance1, distance2);
+			case NAME_ASCENDING:
+				return collator.compare(item1.getName(), item2.getName());
+			case NAME_DESCENDING:
+				return -collator.compare(item1.getName(), item2.getName());
+			case DATE_ASCENDING:
+				dataItem1 = item1.getDataItem();
+				dataItem2 = item2.getDataItem();
+				if (dataItem1 == null || dataItem2 == null) {
+					return collator.compare(item1.getName(), item2.getName());
+				}
+				analysis1 = dataItem1.getAnalysis();
+				analysis2 = dataItem2.getAnalysis();
 				if (analysis1 == null || analysis2 == null || analysis1.startTime == analysis2.startTime) {
 					return collator.compare(item1.getName(), item2.getName());
 				}

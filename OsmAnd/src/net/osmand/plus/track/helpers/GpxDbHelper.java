@@ -244,7 +244,8 @@ public class GpxDbHelper {
 		return item == null
 				|| item.getFileLastModifiedTime() != gpxFile.lastModified()
 				|| item.getAnalysis() == null
-				|| item.getAnalysis().wptCategoryNames == null;
+				|| item.getAnalysis().wptCategoryNames == null
+				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0;
 	}
 
 	@SuppressLint("StaticFieldLeak")

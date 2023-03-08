@@ -1,7 +1,6 @@
 package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.configmap.tracks.TrackItemsLoaderTask.getNearestPoint;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_VISIBLE_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
@@ -128,7 +127,6 @@ public class SelectedTracksHelper {
 			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
 			if (selectedGpxFile == null) {
 				TrackItem trackItem = new TrackItem(new File(gpxFile.path));
-				trackItem.setNearestPoint(getNearestPoint(gpxFile, latLon));
 				recentlyVisibleTrackItem.add(trackItem);
 			}
 		}

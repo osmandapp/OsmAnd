@@ -1,5 +1,6 @@
 package net.osmand.gpx;
 
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize;
@@ -47,8 +48,10 @@ public class GPXTrackAnalysis {
 
 	public double metricEnd;
 	public double secondaryMetricEnd;
-	public GPXUtilities.WptPt locationStart;
-	public GPXUtilities.WptPt locationEnd;
+
+	public LatLon latLonStart;
+	public WptPt locationStart;
+	public WptPt locationEnd;
 
 	public double left = 0;
 	public double right = 0;
@@ -135,6 +138,7 @@ public class GPXTrackAnalysis {
 				GPXUtilities.WptPt point = s.get(j);
 				if (j == 0 && locationStart == null) {
 					locationStart = point;
+					latLonStart = new LatLon(point.lat, point.lon);
 				}
 				if (j == numberOfPoints - 1) {
 					locationEnd = point;
@@ -531,8 +535,6 @@ public class GPXTrackAnalysis {
 		public abstract double metric(GPXUtilities.WptPt p1, GPXUtilities.WptPt p2);
 
 	}
-	
-	
 
 	static SplitMetric getDistanceMetric() {
 		return new SplitMetric() {

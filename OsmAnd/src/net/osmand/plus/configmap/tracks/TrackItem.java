@@ -15,8 +15,6 @@ public class TrackItem {
 	private final File file;
 
 	private GpxDataItem dataItem;
-	private WptPt nearestPoint;
-
 	private long lastModified;
 
 	public TrackItem(@NonNull File file) {
@@ -46,15 +44,6 @@ public class TrackItem {
 
 	public void setDataItem(@Nullable GpxDataItem dataItem) {
 		this.dataItem = dataItem;
-	}
-
-	@Nullable
-	public WptPt getNearestPoint() {
-		return nearestPoint;
-	}
-
-	public void setNearestPoint(@Nullable WptPt wptPt) {
-		this.nearestPoint = wptPt;
 	}
 
 	@NonNull
