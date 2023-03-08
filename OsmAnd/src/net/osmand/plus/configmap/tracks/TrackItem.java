@@ -12,6 +12,7 @@ import java.io.File;
 public class TrackItem {
 
 	private final String name;
+	private final String path;
 	private final File file;
 
 	private GpxDataItem dataItem;
@@ -19,6 +20,7 @@ public class TrackItem {
 
 	public TrackItem(@NonNull File file) {
 		this.file = file;
+		this.path = file.getAbsolutePath();
 		this.name = GpxUiHelper.getGpxTitle(file.getName());
 		this.lastModified = file.lastModified();
 	}
@@ -26,6 +28,11 @@ public class TrackItem {
 	@NonNull
 	public String getName() {
 		return name;
+	}
+
+	@NonNull
+	public String getPath() {
+		return path;
 	}
 
 	@NonNull

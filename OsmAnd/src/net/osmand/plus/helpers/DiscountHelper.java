@@ -129,7 +129,7 @@ public class DiscountHelper {
 
 			@Override
 			protected void onPostExecute(String response) {
-				if (response != null) {
+				if (!Algorithms.isEmpty(response)) {
 					processDiscountResponse(response, mapActivity);
 				}
 			}

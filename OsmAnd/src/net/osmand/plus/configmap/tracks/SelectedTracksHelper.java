@@ -111,7 +111,7 @@ public class SelectedTracksHelper {
 
 		if (selectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : allTrackItems) {
-				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getFile().getAbsolutePath());
+				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getPath());
 				if (selectedGpxFile != null) {
 					selectedTrackItems.add(info);
 					originalSelectedTrackItems.add(info);
@@ -203,8 +203,7 @@ public class SelectedTracksHelper {
 
 		Map<String, Boolean> selectedFileNames = new HashMap<>();
 		for (TrackItem trackItem : selectedTrackItems) {
-			String path = trackItem.getFile().getAbsolutePath();
-			selectedFileNames.put(path, true);
+			selectedFileNames.put(trackItem.getPath(), true);
 		}
 		selectionHelper.runSelection(selectedFileNames, null);
 	}
