@@ -2659,7 +2659,7 @@
     <string name="shared_string_dont">No</string>
     <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Descargar imágenes</string>
+    <string name="wikivoyage_download_pics">Descargar las imágenes</string>
     <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
 \nSiempre disponible en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
@@ -4752,7 +4752,7 @@
     <string name="next_turn_widget_desc">Muestra información sobre el próximo giro con una imagen de la maniobra y la distancia hasta ella.</string>
     <string name="download_complete">Descarga completa</string>
     <string name="map_widget_camera_distance">Elevación de la cámara</string>
-    <string name="map_widget_zoom_level">Nivel de zum</string>
+    <string name="map_widget_zoom_level">Nivel del zoom</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="shared_string_large">Largo</string>
