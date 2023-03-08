@@ -5050,7 +5050,7 @@
     <string name="approximate_bearing">大約方位</string>
     <string name="approximate_bearing_descr">從所遵循的的導航路線中推導出方位。</string>
     <string name="cloud_version_confirm_delete">從 OsmAnd Cloud 刪除「%1$s」？</string>
-    <string name="simulation_position_description">選取一個軌跡檔案用於移動指引。</string>
+    <string name="simulation_position_description">選取要用於位置移動來源的軌跡檔案。</string>
     <string name="shared_string_delete_file">刪除檔案</string>
     <string name="delete_cloud_version">刪除雲端版本</string>
     <string name="local_version_do_not_exist">沒有本機版本。</string>

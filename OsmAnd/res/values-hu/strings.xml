@@ -5053,7 +5053,7 @@
     <string name="shared_string_delete_file">Fálj törlése</string>
     <string name="local_version_do_not_exist">Nincs helyi verzió.</string>
     <string name="delete_cloud_version">Felhőben lévő verzió törlése</string>
-    <string name="simulation_position_description">Válasszon egy nyomvonalfájlt, ami mozgási útmutatóként szolgál.</string>
+    <string name="simulation_position_description">Válasszon ki egy nyomvonalfájlt, ami mozgatási forrásként fog szolgálni.</string>
     <string name="shared_string_add_manually">Hozzáadás kézzel…</string>
     <string name="shared_string_in_progress">Folyamatban</string>
     <string name="shared_string_original">Eredeti</string>

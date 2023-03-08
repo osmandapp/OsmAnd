@@ -5085,7 +5085,7 @@
     <string name="shared_string_in_progress">En curso</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Velocidad del movimiento</string>
-    <string name="simulation_position_description">Seleccione un archivo de pista para usar como guía de movimiento.</string>
+    <string name="simulation_position_description">Seleccione un archivo de pista que se utilizará como fuente para mover la ubicación.</string>
     <string name="cloud_version_confirm_delete">¿Borrar \"%1$s\" de OsmAnd Cloud\?</string>
     <string name="shared_string_delete_file">Eliminar archivo</string>
     <string name="shared_string_add_manually">Añadir manualmente…</string>
