@@ -462,9 +462,9 @@
     <string name="map_overlay">Harta de deasupra</string>
     <string name="map_overlay_descr">Alegeți harta suprapusă</string>
     <string name="tile_source_already_installed">Harta deja instalată, \'Settings\' va fi actualizată.</string>
-    <string name="select_tile_source_to_install">Alegeți hărți ( plăci) de instalat sau actualizat.</string>
+    <string name="select_tile_source_to_install">Selectați sursele de hărți cu plăci:</string>
     <string name="internet_not_available">Nu se poate efectua operațiunea fără conexiune la Internet.</string>
-    <string name="install_more">Instalați mai multe…</string>
+    <string name="install_more">Adăugați mai multe…</string>
     <string name="level_to_switch_vector_raster_descr">Folosiți hărți raster pentru tot ceea ce depășește acest nivel.</string>
     <string name="level_to_switch_vector_raster">Nivelul minim de zoom vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>Clasificarea online a hărților OSM</u> cu ajutorul imaginilor.</string>
@@ -1931,7 +1931,7 @@
     <string name="unlock_all_features">Deblochează toate funcționalitățile OsmAnd</string>
     <string name="purchase_dialog_title">Alege planul</string>
     <string name="shared_string_only_with_wifi">Numai pe Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Descarcă imagini</string>
+    <string name="wikivoyage_download_pics">Descărcați imagini</string>
     <string name="shared_string_wifi_only">Numai pe Wi-Fi</string>
     <string name="images_cache">Cache de imagine</string>
     <string name="delete_search_history">Șterge istoricul de căutare</string>
@@ -4417,7 +4417,7 @@
     <string name="files_remaining">Fișiere rămase: %1$s %2$s</string>
     <string name="from_to_with_params">De la %1$s spre %2$s</string>
     <string name="progress_complete">%1$s complet</string>
-    <string name="storage_copied_files_size">A copiat %1$s fișiere %2$s</string>
+    <string name="storage_copied_files_size">A procesat %1$s fișier(e) %2$s</string>
     <string name="storage_copying_files_size">Copierea fișierelor %1$s %2$s</string>
     <string name="storage_found_files_size">Am găsit %1$s fișiere %2$s</string>
     <string name="shared_storage_first_step">Apăsați \"%1$s\".
@@ -4439,7 +4439,7 @@
 \nCopiați toate datele în noul folder.</string>
     <string name="folder_access_denied">Permisiune necesară pentru a accesa folderul selectat.</string>
     <string name="shared_string_copy_to">Copiați la</string>
-    <string name="migration_files_present">Există %1$d fișiere (%2$s) în locația selectată \"%3$s\".</string>
+    <string name="migration_files_present">%1$d fișier(e) (%2$s) deja prezent) la ținta \"%3$s\" și nu a fost suprascris.</string>
     <string name="memory_allocated_for_routing_ds">O alocare mai mare a memoriei va accelera calcularea rutelor lungi (peste 500 km), dar poate avea un impact asupra performanței altor aplicații.
 \nNu are niciun impact asupra vitezei de calcul a traseelor scurte.</string>
     <string name="display_groups_visibility_dialog_description">Puteți controla vizibilitatea grupului pe hartă. Dacă pista este ascunsă, toate grupurile vor fi și ele ascunse.</string>
@@ -5075,4 +5075,29 @@
     <string name="cloud_version_confirm_delete">Ștergeți \"%1$s\" din OsmAnd Cloud\?</string>
     <string name="shared_string_delete_file">Ștergeți fișierul</string>
     <string name="simulation_position_description">Selectați un fișier track care va fi utilizat ca sursă pentru mutarea locației.</string>
+    <string name="inch">în</string>
+    <string name="shared_string_inches">inci</string>
+    <string name="release_4_4">- Îmbunătățirea meniului \"Urme\" din \"Configurare hartă\"
+\n
+\n - Meniul contextual afișează acum denumirile localizate pentru POI-uri
+\n
+\n - A fost adăugată opțiunea de partajare a traseului prin link
+\n
+\n - A fost adăugată unitatea de lungime \"Mile marine/pietri\"
+\n
+\n - Orientarea hărții a adăugat un nou mod fix
+\n
+\n - Ecran de pornire simplificat
+\n
+\n - AFixată poziția locației în modul ecran divizat în Android Auto
+\n
+\n - A fost adăugat graficul \"Speed/Slope\" pentru analiza traseului
+\n
+\n - Android 13 a mutat selecția limbii aplicației în setările sistemului
+\n
+\n - Au fost rezolvate problemele legate de afișarea locurilor Vegan
+\n
+\n</string>
+    <string name="approximate_bearing">Rulmentul aproximativ</string>
+    <string name="approximate_bearing_descr">Deduceți relevmentul din ruta de navigație urmată.</string>
 </resources>
