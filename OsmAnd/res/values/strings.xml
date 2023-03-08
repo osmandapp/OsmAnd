@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
     <string name="sort_duration_ascending">Shorter duration first</string>
     <string name="sort_duration_descending">Longest duration first</string>

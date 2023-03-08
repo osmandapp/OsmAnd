@@ -1083,6 +1083,7 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, "ic_action_bicycle_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "ic_action_pedestrian_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "ic_action_bus_dark");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.MOPED, "ic_action_motor_scooter");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BOAT, "ic_action_sail_boat_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.AIRCRAFT, "ic_action_aircraft");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.SKI, "ic_action_skiing");
@@ -1120,6 +1121,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.HORSE, "horsebackriding");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.MOPED, "moped");
 	}
 
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
