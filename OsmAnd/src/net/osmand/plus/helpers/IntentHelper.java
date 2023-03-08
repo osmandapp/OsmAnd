@@ -10,6 +10,7 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,9 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.ui.AuthorizeFragment;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -72,6 +76,7 @@ public class IntentHelper {
 	private static final String URL_PATH = "map";
 	private static final String URL_PARAMETER_START = "start";
 	private static final String URL_PARAMETER_END = "end";
+	private static final String URL_PARAMETER_TOKEN = "token";
 	private static final String URL_PARAMETER_MODE = "mode";
 	private static final String URL_PARAMETER_INTERMEDIATE_POINT = "ipoints";
 
@@ -87,6 +92,7 @@ public class IntentHelper {
 
 	public boolean parseLaunchIntents() {
 		return parseNavigationUrlIntent()
+				|| parseVerificationUrlIntent()
 				|| parseSetPinOnMapUrlIntent()
 				|| parseMoveMapToLocationUrlIntent()
 				|| parseOpenLocationMenuUrlIntent()
@@ -150,6 +156,37 @@ public class IntentHelper {
 			}
 		}
 		return false;
+	}
+
+	private boolean parseVerificationUrlIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && isUriHierarchical(intent)) {
+			Uri data = intent.getData();
+			boolean hasVerificationToken = data.getQueryParameterNames().contains(URL_PARAMETER_TOKEN);
+			if (isOsmAndSite(data) && hasVerificationToken) {
+				registerDevice(data.getQueryParameter(URL_PARAMETER_TOKEN));
+				clearIntent(intent);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void registerDevice(String token) {
+		AuthorizeFragment authorizeFragment = (AuthorizeFragment) mapActivity.getSupportFragmentManager().findFragmentByTag(AuthorizeFragment.TAG);
+		if (authorizeFragment != null && authorizeFragment.getDialogType().equals(AuthorizeFragment.LoginDialogType.VERIFY_EMAIL)) {
+			authorizeFragment.registerDevice(token);
+		} else {
+			if (!settings.BACKUP_USER_EMAIL.get().equals("")) {
+				if (BackupHelper.isTokenValid(token)) {
+					BackupHelper backupHelper = app.getBackupHelper();
+					backupHelper.registerDevice(token);
+					backupHelper.getBackupListeners().addRegisterDeviceListener((status, message, error) -> BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager()));
+				} else {
+					Toast.makeText(app, "Token is not valid", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
 	}
 
 	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,

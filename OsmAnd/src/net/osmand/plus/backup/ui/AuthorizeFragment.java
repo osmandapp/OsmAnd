@@ -82,6 +82,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private View buttonAuthorize;
 	private View keyboardSpace;
 	private View space;
+	private EditText editText;
+
+	public LoginDialogType getDialogType() {
+		return dialogType;
+	}
 
 	private LoginDialogType dialogType = LoginDialogType.SIGN_UP;
 
@@ -267,7 +272,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private void setupVerifyEmailContainer(View view) {
 		errorText = view.findViewById(R.id.error_text);
-		EditText editText = view.findViewById(R.id.edit_text);
+		editText = view.findViewById(R.id.edit_text);
 		View resendButton = view.findViewById(R.id.button);
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
 		View codeMissingDescription = view.findViewById(R.id.code_missing_description);
@@ -296,19 +301,29 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 		buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
 		buttonContinue.setOnClickListener(v -> {
-			String token = editText.getText().toString();
-			if (BackupHelper.isTokenValid(token)) {
-				progressBar.setVisibility(View.VISIBLE);
-				backupHelper.registerDevice(token);
-				Activity activity = getActivity();
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					AndroidUtils.hideSoftKeyboard(activity, editText);
-				}
-			} else {
-				editText.requestFocus();
-				editText.setError("Token is not valid");
-			}
+			registerDevice(null);
 		});
+	}
+
+	public void registerDevice(@Nullable String token) {
+		String verifyToken;
+		if (token == null) {
+			verifyToken = editText.getText().toString();
+		} else {
+			editText.setText(token);
+			verifyToken = token;
+		}
+		if (BackupHelper.isTokenValid(verifyToken)) {
+			progressBar.setVisibility(View.VISIBLE);
+			backupHelper.registerDevice(verifyToken);
+			Activity activity = getActivity();
+			if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				AndroidUtils.hideSoftKeyboard(activity, editText);
+			}
+		} else {
+			editText.requestFocus();
+			editText.setError("Token is not valid");
+		}
 	}
 
 	private TextWatcher getTextWatcher() {
