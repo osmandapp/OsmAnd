@@ -1,7 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -53,8 +51,8 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
-import net.osmand.plus.plugins.weather.RemoveLocalForecastParams;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.dialogs.WeatherIndexItemViewHolder;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -184,7 +182,7 @@ public class ItemViewHolder {
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		tvName.setText(text);
-		ViewCompat.setAccessibilityDelegate(ivBtnRight, new AccessibilityAssistant(context){
+		ViewCompat.setAccessibilityDelegate(ivBtnRight, new AccessibilityAssistant(context) {
 
 			@Override
 			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
@@ -218,6 +216,12 @@ public class ItemViewHolder {
 					downloadItem.getType().getIconResource()));
 		}
 		tvDesc.setTextColor(textColorSecondary);
+
+		if (isWeatherItemInRemoveProcess(downloadItem)) {
+			bindAsWeatherItemInRemoveProcess();
+			return;
+		}
+
 		if (!isDownloading) {
 			pbProgress.setVisibility(View.GONE);
 			tvDesc.setVisibility(View.VISIBLE);
@@ -269,11 +273,17 @@ public class ItemViewHolder {
 				}
 				tvDesc.setText(fullDescription);
 			} else if (downloadItem instanceof WeatherIndexItem) {
-				app.getOfflineForecastHelper().calculateCacheSizeIfNeeded(
-						(WeatherIndexItem) downloadItem,
+				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
+				pbProgress.setVisibility(View.VISIBLE);
+				tvDesc.setVisibility(View.GONE);
+				pbProgress.setIndeterminate(true);
+				app.getOfflineForecastHelper().calculateCacheSizeIfNeeded(weatherIndexItem,
 						() -> {
 							if (AndroidUtils.isActivityNotDestroyed(context)) {
 								setupCommonDescription(downloadItem);
+								pbProgress.setVisibility(View.GONE);
+								tvDesc.setVisibility(View.VISIBLE);
+								pbProgress.setIndeterminate(false);
 							}
 						});
 			} else {
@@ -316,6 +326,23 @@ public class ItemViewHolder {
 			tvDesc.setVisibility(View.GONE);
 			pbProgress.setVisibility(View.GONE);
 		}
+	}
+
+	private boolean isWeatherItemInRemoveProcess(@NonNull DownloadItem downloadItem) {
+		if (downloadItem instanceof WeatherIndexItem) {
+			OsmandApplication app = context.getMyApplication();
+			WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
+			OfflineForecastHelper forecastHelper = app.getOfflineForecastHelper();
+			return forecastHelper.isRemoveLocalForecastInProgress(weatherIndexItem.getRegionId());
+		}
+		return false;
+	}
+
+	private void bindAsWeatherItemInRemoveProcess() {
+		tvDesc.setVisibility(View.GONE);
+		pbProgress.setVisibility(View.VISIBLE);
+		pbProgress.setIndeterminate(true);
+		ivBtnRight.setImageDrawable(null);
 	}
 
 	private void setupCommonDescription(@NonNull DownloadItem downloadItem) {
@@ -399,7 +426,10 @@ public class ItemViewHolder {
 	}
 
 	public OnClickListener getRightButtonAction(DownloadItem item, RightButtonAction clickAction) {
-		if (clickAction != RightButtonAction.DOWNLOAD) {
+		if (isWeatherItemInRemoveProcess(item)) {
+			// empty listener
+			return v -> {};
+		} else if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -473,7 +503,7 @@ public class ItemViewHolder {
 			};
 		} else if (downloadItem instanceof WeatherIndexItem && downloadItem.isDownloaded()) {
 			removeItemClickListener = _item -> {
-				confirmWeatherRemove((WeatherIndexItem) downloadItem);
+				WeatherIndexItemViewHolder.confirmWeatherRemove(context, (WeatherIndexItem) downloadItem);
 				return true;
 			};
 		}
@@ -571,34 +601,6 @@ public class ItemViewHolder {
 		});
 		confirm.setNegativeButton(R.string.shared_string_no, null);
 
-		confirm.show();
-	}
-
-	private void confirmWeatherRemove(@NonNull WeatherIndexItem weatherIndexItem) {
-		OsmandApplication app = context.getMyApplication();
-		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
-
-		StringBuilder fileName = new StringBuilder()
-				.append(getWeatherName(app, app.getRegions(), weatherIndexItem.getRegion().getRegionId()))
-				.append(" ").append(DownloadActivityType.WEATHER_FORECAST.getString(app));
-		String message = context.getString(R.string.delete_confirmation_msg, fileName);
-		confirm.setMessage(message);
-
-		confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-			context.setProgressBarIndeterminateVisibility(true);
-			OfflineForecastHelper helper = app.getOfflineForecastHelper();
-			RemoveLocalForecastParams params = RemoveLocalForecastParams.newInstance()
-					.setRegionIds(weatherIndexItem.getRegion().getRegionId())
-					.setOnSettingsRemovedCallback(() -> {
-						app.getDownloadThread().updateLoadedFiles();
-						bindDownloadItem(weatherIndexItem);
-						context.getString(R.string.item_deleted, fileName);
-						context.setProgressBarIndeterminateVisibility(false);
-					})
-					.setRefreshMap();
-			helper.removeLocalForecast(params);
-		});
-		confirm.setNegativeButton(R.string.shared_string_no, null);
 		confirm.show();
 	}
 

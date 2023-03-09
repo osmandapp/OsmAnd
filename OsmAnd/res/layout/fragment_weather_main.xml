@@ -110,6 +110,12 @@
 
 			</FrameLayout>
 
+			<FrameLayout
+				android:id="@+id/offline_forecast_section"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" />
+
 			<include layout="@layout/card_bottom_divider" />
 
 			<View

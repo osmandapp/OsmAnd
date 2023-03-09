@@ -2,7 +2,6 @@ package net.osmand.plus.download.ui;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.WorldRegion;
@@ -59,7 +59,7 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription
 import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
 
 public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents,
-		InAppPurchaseListener, OnChildClickListener {
+		InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
 
@@ -114,12 +114,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(activity));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 		if (!openAsDialog()) {
 			toolbar.setVisibility(View.GONE);
 		}
@@ -380,6 +375,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	public void onResume() {
 		super.onResume();
 		reloadData();
+		OsmandApplication app = getMyApplication();
+		app.getOfflineForecastHelper().registerRemoveLocalForecastListener(this);
 		String filter = getDownloadActivity().getFilterAndClear();
 		String filterCat = getDownloadActivity().getFilterCatAndClear();
 		String filterGroup = getDownloadActivity().getFilterGroupAndClear();
@@ -401,6 +398,13 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		OsmandApplication app = getMyApplication();
+		app.getOfflineForecastHelper().unregisterRemoveLocalForecastListener(this);
 	}
 
 	private void reloadData() {
@@ -494,7 +498,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		return false;
 	}
 
-	
+	@Override
+	public void onRemoveLocalForecastEvent() {
+		listAdapter.notifyDataSetChanged();
+	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {

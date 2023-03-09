@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -19,13 +20,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.WeatherSettings;
+import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -34,7 +38,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Iterator;
 
-public class WeatherMainFragment extends BaseOsmAndFragment {
+public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadEvents, RemoveLocalForecastListener {
 
 	public static final String TAG = WeatherMainFragment.class.getSimpleName();
 
@@ -42,8 +46,11 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 	private OsmandSettings settings;
 
 	private WeatherHelper weatherHelper;
+	private OfflineForecastHelper forecastHelper;
 	private WeatherPlugin weatherPlugin;
 	private WeatherSettings weatherSettings;
+
+	private OfflineWeatherForecastCard offlineForecastCard;
 
 	private boolean nightMode;
 
@@ -53,6 +60,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 		app = requireMyApplication();
 		settings = app.getSettings();
 		weatherHelper = app.getWeatherHelper();
+		forecastHelper = app.getOfflineForecastHelper();
 		weatherSettings = weatherHelper.getWeatherSettings();
 		weatherPlugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -67,10 +75,24 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 		setupHeader(view);
 		setupWeatherLayers(view, themedInflater);
 		setupWeatherContours(view);
+		setupOfflineForecastCard(view);
 
 		updateScreenMode(view, weatherSettings.weatherEnabled.get());
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		forecastHelper.registerRemoveLocalForecastListener(this);
+		offlineForecastCard.updateIndexesList();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		forecastHelper.unregisterRemoveLocalForecastListener(this);
 	}
 
 	private void setupHeader(@NonNull View view) {
@@ -157,8 +179,8 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 		}
 
 		TextView tvSecondaryDesc = view.findViewById(R.id.secondary_description);
-		String enabledDescripiton = getString(enabled ? R.string.shared_string_on : R.string.shared_string_off);
-		tvSecondaryDesc.setText(enabledDescripiton);
+		String enabledDescription = getString(enabled ? R.string.shared_string_on : R.string.shared_string_off);
+		tvSecondaryDesc.setText(enabledDescription);
 
 		view.setOnClickListener(listener);
 
@@ -169,6 +191,34 @@ public class WeatherMainFragment extends BaseOsmAndFragment {
 
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 		AndroidUtils.setBackground(view, background);
+	}
+
+	private void setupOfflineForecastCard(@NonNull View view) {
+		FragmentActivity activity = requireMyActivity();
+		offlineForecastCard = new OfflineWeatherForecastCard((MapActivity) activity);
+		ViewGroup cardContainer = view.findViewById(R.id.offline_forecast_section);
+		cardContainer.removeAllViews();
+		cardContainer.addView(offlineForecastCard.build(activity));
+	}
+
+	@Override
+	public void onUpdatedIndexesList() {
+		offlineForecastCard.onUpdatedIndexesList();
+	}
+
+	@Override
+	public void downloadInProgress() {
+		offlineForecastCard.downloadInProgress();
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		offlineForecastCard.downloadHasFinished();
+	}
+
+	@Override
+	public void onRemoveLocalForecastEvent() {
+		offlineForecastCard.onRemoveLocalForecastEvent();
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {
