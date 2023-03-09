@@ -1152,8 +1152,8 @@ public class GPXUtilities {
 	}
 
 	private static void writeWpt(XmlSerializer serializer, WptPt p, IProgress progress) throws IOException {
-		serializer.attribute(null, "lat", LAT_LON_FORMAT.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
-		serializer.attribute(null, "lon", LAT_LON_FORMAT.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
+		serializer.attribute(null, "lat", LAT_LON_FORMAT.format(p.lat));
+		serializer.attribute(null, "lon", LAT_LON_FORMAT.format(p.lon));
 
 		if (!Double.isNaN(p.ele)) {
 			writeNotNullText(serializer, "ele", DECIMAL_FORMAT.format(p.ele));

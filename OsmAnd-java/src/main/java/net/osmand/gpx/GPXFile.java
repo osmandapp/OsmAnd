@@ -2,6 +2,9 @@ package net.osmand.gpx;
 
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXTrackAnalysis.SplitSegment;
+import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.gpx.GPXUtilities.Track;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -541,17 +544,17 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return null;
 	}
 
-	public GPXUtilities.WptPt findPointToShow() {
-		for (GPXUtilities.Track t : tracks) {
-			for (GPXUtilities.TrkSegment s : t.segments) {
-				if (s.points.size() > 0) {
-					return s.points.get(0);
+	public WptPt findPointToShow() {
+		for (Track track : tracks) {
+			for (TrkSegment segment : track.segments) {
+				if (segment.points.size() > 0) {
+					return segment.points.get(0);
 				}
 			}
 		}
-		for (GPXUtilities.Route s : routes) {
-			if (s.points.size() > 0) {
-				return s.points.get(0);
+		for (Route route : routes) {
+			if (route.points.size() > 0) {
+				return route.points.get(0);
 			}
 		}
 		if (points.size() > 0) {
