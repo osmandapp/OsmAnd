@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.weather;
+package net.osmand.plus.plugins.weather.containers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

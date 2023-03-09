@@ -55,7 +55,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		this.containerSize = containerSize;
 	}
 
-	// todo tmp solution
 	public void updateSize(@NonNull String size, long contentSize, long containerSize) {
 		this.size = size;
 		this.contentSize = contentSize;

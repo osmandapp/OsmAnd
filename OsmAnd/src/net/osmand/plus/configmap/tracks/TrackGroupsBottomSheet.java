@@ -97,7 +97,7 @@ public class TrackGroupsBottomSheet extends BottomSheetDialogFragment {
 		private final int activeColor;
 
 		public TrackGroupsAdapter() {
-			activeColor = ColorUtilities.getSelectedProfileColor(app, nightMode);
+			activeColor = ColorUtilities.getAppModeColor(app, nightMode);
 		}
 
 		@NonNull

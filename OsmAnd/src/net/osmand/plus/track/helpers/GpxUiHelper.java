@@ -1,6 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;

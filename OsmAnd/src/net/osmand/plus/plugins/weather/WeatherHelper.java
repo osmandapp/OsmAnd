@@ -6,7 +6,7 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITA
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
-import static net.osmand.plus.plugins.weather.WeatherForecastDownloadState.FINISHED;
+import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.FINISHED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +20,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.weather.containers.WeatherCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;

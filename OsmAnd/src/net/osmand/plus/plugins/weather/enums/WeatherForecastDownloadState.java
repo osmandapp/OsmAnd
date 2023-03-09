@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins.weather;
+package net.osmand.plus.plugins.weather.enums;
 
 public enum WeatherForecastDownloadState {
 	UNDEFINED,
