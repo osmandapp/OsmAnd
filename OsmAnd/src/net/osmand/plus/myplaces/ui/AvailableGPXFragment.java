@@ -96,7 +96,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
@@ -540,25 +541,31 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (itemId == R.id.action_sort) {
 			Activity activity = getActivity();
 			if (activity != null) {
-				View menuSortItemView = getActivity().findViewById(R.id.action_sort);
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(mode.getNameId())
-							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-							.setOnClickListener(v -> {
-								updateTracksSort(mode);
-								int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
-								item.setIcon(getIcon(mode.getIconId(), iconColorId));
-							})
-							.setSelected(settings.TRACKS_SORT_BY_MODE.get() == mode)
-							.create()
-					);
-				}
-				new PopUpMenuHelper.Builder(menuSortItemView, items, nightMode).show();
+				showSortPopUpMenu(activity.findViewById(R.id.action_sort), item);
 			}
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	private void showSortPopUpMenu(@NonNull View anchorView, @NonNull MenuItem item) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		for (TracksSortByMode mode : TracksSortByMode.values()) {
+			menuItems.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(mode.getNameId())
+					.setIcon(getContentIcon(mode.getIconId()))
+					.setOnClickListener(v -> {
+						updateTracksSort(mode);
+						int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
+						item.setIcon(getIcon(mode.getIconId(), iconColorId));
+					})
+					.setSelected(settings.TRACKS_SORT_BY_MODE.get() == mode)
+					.create()
+			);
+		}
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchorView;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
 	}
 
 	private void addTrack() {
@@ -1397,7 +1404,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				})
 				.create()
 		);
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
 	}
 
 	public class DeleteGpxTask extends AsyncTask<GPXInfo, GPXInfo, String> {

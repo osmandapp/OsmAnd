@@ -17,18 +17,17 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.GpxTrackAdapter.OnItemClickListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,34 +113,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		AndroidUtils.setBackground(sortButton, background);
 		sortButton.setImageResource(sortByMode.getIconId());
 		sortButton.setVisibility(View.VISIBLE);
-		sortButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(mode.getNameId())
-							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									sortByMode = mode;
-									sortButton.setImageResource(mode.getIconId());
-									updateDescription(descriptionView);
-									sortFolderList();
-									folderSelector.setItems(getFolderChips());
-									folderSelector.notifyDataSetChanged();
-									sortFileList();
-									adapter.notifyDataSetChanged();
-								}
-							})
-							.setSelected(sortByMode == mode)
-							.create());
-				}
-				new PopUpMenuHelper.Builder(v, items, nightMode)
-						.show();
-			}
-		});
+		sortButton.setOnClickListener(v -> showTracksSortPopUpMenu(app, v, sortButton, descriptionView));
 
 		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 
@@ -199,6 +171,33 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
 		updateFileList();
+	}
+
+	private void showTracksSortPopUpMenu(@NonNull OsmandApplication app, @NonNull View anchorView,
+	                                     @NonNull ImageButton sortButton, @NonNull TextView tvDesc) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		for (TracksSortByMode mode : TracksSortByMode.values()) {
+			menuItems.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(mode.getNameId())
+					.setIcon(getContentIcon(mode.getIconId()))
+					.setOnClickListener(v -> {
+						sortByMode = mode;
+						sortButton.setImageResource(mode.getIconId());
+						updateDescription(tvDesc);
+						sortFolderList();
+						folderSelector.setItems(getFolderChips());
+						folderSelector.notifyDataSetChanged();
+						sortFileList();
+						adapter.notifyDataSetChanged();
+					})
+					.setSelected(sortByMode == mode)
+					.create());
+		}
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchorView;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
 	}
 
 	private List<ChipItem> getFolderChips() {

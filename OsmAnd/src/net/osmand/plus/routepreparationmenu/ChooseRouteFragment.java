@@ -79,7 +79,8 @@ import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
@@ -503,17 +504,21 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			List<PopUpMenuItem> items = new ArrayList<>();
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_as_file))
-					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_file_routing, ColorUtilities.getDefaultIconColorId(nightMode)))
+					.setIcon(getContentIcon(R.drawable.ic_action_file_routing))
 					.setOnClickListener(_view -> shareFile(app))
 					.create());
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_link))
-					.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_link, ColorUtilities.getDefaultIconColorId(nightMode)))
+					.setIcon(getContentIcon(R.drawable.ic_action_link))
 					.setOnClickListener(_view -> shareLink(app))
 					.create());
 
-			new PopUpMenuHelper.Builder(v, items, nightMode).show();
+			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+			displayData.anchorView = v;
+			displayData.menuItems = items;
+			displayData.nightMode = nightMode;
+			PopUpMenu.show(displayData);
 		};
 		shareRoute.setOnClickListener(shareOnClick);
 		shareRouteFlow.setOnClickListener(shareOnClick);
