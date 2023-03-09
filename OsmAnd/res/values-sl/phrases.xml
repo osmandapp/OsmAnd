@@ -4488,4 +4488,14 @@
     <string name="poi_socket_type3a_output_low">Nizek</string>
     <string name="poi_socket_type3c_output_medium">Srednji</string>
     <string name="poi_socket_type3c_output_low">Nizek</string>
+    <string name="poi_self_checkout">Samoplačniška blagajna</string>
+    <string name="poi_recycling_plastic_bottle_caps">Plastični zamaški za steklenice</string>
+    <string name="poi_recycling_aluminium_cans">Aluminijaste pločevinke</string>
+    <string name="poi_recycling_pet_drink_bottles">Plastenke za pijačo iz PET</string>
+    <string name="poi_recycling_textiles">Tekstil</string>
+    <string name="poi_self_checkout_no">Samoplačniška blagajna: ne</string>
+    <string name="poi_self_checkout_yes">Da</string>
+    <string name="poi_self_checkout_only">Samo</string>
+    <string name="poi_lifeguard">Reševalec iz vode</string>
+    <string name="poi_lifeguard_tower">Reševalni stolp</string>
 </resources>
