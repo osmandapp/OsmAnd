@@ -972,6 +972,23 @@ public class RouteDataObject {
 		return true;
 	}
 
+	public boolean isDirectionApplicable(boolean forwardDirection, int ind) {
+		int[] pointTypes = getPointTypes(ind);
+		if (pointTypes != null) {
+			for (int pointType : pointTypes) {
+				RouteTypeRule r = region.quickGetEncodingRule(pointType);
+				if (r.getTag().equals("direction")) {
+					String dv = r.getValue();
+					if ((dv.equals("forward") && forwardDirection) || (dv.equals("backward") && !forwardDirection)) {
+						return true;
+					} else if ((dv.equals("forward") && !forwardDirection) || (dv.equals("backward") && forwardDirection)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
 	public double distance(int startPoint, int endPoint) {
 		if (startPoint > endPoint) {
 			int k = endPoint;

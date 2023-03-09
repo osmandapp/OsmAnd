@@ -274,20 +274,28 @@ public class RouteCalculationResult {
 	}
 
 	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
-		int[] pointTypes = res.getObject().getPointTypes(intId);
+		RouteDataObject rdo = res.getObject();
+		int[] pointTypes = rdo.getPointTypes(intId);
 		if (pointTypes != null) {
-			RouteRegion reg = res.getObject().region;
+			RouteRegion reg = rdo.region;
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
-				int x31 = res.getObject().getPoint31XTile(intId);
-				int y31 = res.getObject().getPoint31YTile(intId);
+				int x31 = rdo.getPoint31XTile(intId);
+				int y31 = rdo.getPoint31YTile(intId);
 				Location loc = new Location("");
 				loc.setLatitude(MapUtils.get31LatitudeY(y31));
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
-				// For STOP first check if it has directional info
-				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && !res.getObject().isStopApplicable(res.isForwardDirection(), intId, res.getStartPointIndex(), res.getEndPointIndex()))) {
-					alarms.add(info);
+				if (info != null) {
+					if (info.getType() == AlarmInfoType.TRAFFIC_CALMING
+							&& !rdo.isDirectionApplicable(res.isForwardDirection(), intId)) {
+						continue;
+					}
+					// For STOP first check if it has directional info
+					if (!(info.getType() == AlarmInfoType.STOP
+							&& !rdo.isStopApplicable(res.isForwardDirection(), intId, res.getStartPointIndex(), res.getEndPointIndex()))) {
+						alarms.add(info);
+					}
 				}
 			}
 		}
