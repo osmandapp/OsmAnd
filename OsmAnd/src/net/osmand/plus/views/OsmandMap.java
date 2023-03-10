@@ -62,22 +62,22 @@ public class OsmandMap implements NavigationSessionListener {
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 		mapActions = new MapActions(app);
 
-		int w;
-		int h;
+		int width;
+		int height;
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession == null) {
 			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point screenDimensions = new Point(0, 0);
 			display.getSize(screenDimensions);
-			w = screenDimensions.x;
-			h = screenDimensions.y - AndroidUtils.getStatusBarHeight(app);
+			width = screenDimensions.x;
+			height = screenDimensions.y - AndroidUtils.getStatusBarHeight(app);
 		} else {
 			SurfaceRenderer surface = carNavigationSession.getNavigationCarSurface();
-			w = surface != null ? surface.getWidth() : 100;
-			h = surface != null ? surface.getHeight() : 100;
+			width = surface != null ? surface.getWidth() : 100;
+			height = surface != null ? surface.getHeight() : 100;
 		}
-		mapView = new OsmandMapTileView(app, w, h);
+		mapView = new OsmandMapTileView(app, width, height);
 		mapLayers = new MapLayers(app);
 
 		// to not let it gc
