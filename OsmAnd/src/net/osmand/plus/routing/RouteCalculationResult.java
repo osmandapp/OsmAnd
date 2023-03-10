@@ -287,15 +287,15 @@ public class RouteCalculationResult {
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				if (info != null) {
-					if (info.getType() == AlarmInfoType.TRAFFIC_CALMING
-							&& !rdo.isDirectionApplicable(res.isForwardDirection(), intId)) {
+					// For STOP and TRAFFIC_CALMING first check if it has directional info
+					boolean forward = res.isForwardDirection();
+					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId);
+					boolean stopApplicable = rdo.isStopApplicable(forward, intId, res.getStartPointIndex(), res.getEndPointIndex());
+					if (info.getType() == AlarmInfoType.TRAFFIC_CALMING && !directionApplicable
+							|| (info.getType() == AlarmInfoType.STOP && !stopApplicable)) {
 						continue;
 					}
-					// For STOP first check if it has directional info
-					if (!(info.getType() == AlarmInfoType.STOP
-							&& !rdo.isStopApplicable(res.isForwardDirection(), intId, res.getStartPointIndex(), res.getEndPointIndex()))) {
-						alarms.add(info);
-					}
+					alarms.add(info);
 				}
 			}
 		}
