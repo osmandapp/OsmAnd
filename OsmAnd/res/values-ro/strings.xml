@@ -1417,7 +1417,7 @@
     <string name="lang_mk">Macedoneană</string>
     <string name="read_more">Citește mai multe</string>
     <string name="whats_new">Ce-i nou în</string>
-    <string name="rendering_attr_hideProposed_name">Obiecte propuse</string>
+    <string name="rendering_attr_showProposed_name">Obiecte propuse</string>
     <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_upload">Încarcă (upload)</string>
     <string name="osm_edit_created_poi">Punct de interes OSM creat</string>
@@ -4986,7 +4986,6 @@
     <string name="checking_progress">Verificare…</string>
     <string name="shared_string_modified">Modificat</string>
     <string name="shared_string_open">Deschis</string>
-    
     <string name="shared_string_uploaded">Încărcat</string>
     <string name="modified_file">Fișier modificat</string>
     <string name="download_cloud_version">Descărcați versiunea de pe Cloud</string>
@@ -5059,4 +5058,21 @@
     <string name="shared_string_apply_changes">Aplicați modificările</string>
     <string name="no_visible_tracks">Nu există urme pe hartă</string>
     <string name="shared_string_select_recent">Selectați recent</string>
+    <string name="sort_duration_descending">Prima cea mai lungă durată</string>
+    <string name="sort_distance_ascending">Mai întâi cea mai scurtă distanță</string>
+    <string name="sort_distance_descending">Prima cea mai lungă distanță</string>
+    <string name="sort_date_ascending">Cea mai nouă dată mai întâi</string>
+    <string name="sort_date_descending">Data cea mai veche mai întâi</string>
+    <string name="shared_string_nearest">Cea mai apropiată</string>
+    <string name="shared_string_add_manually">Adăugați manual…</string>
+    <string name="sort_duration_ascending">Mai întâi o durată mai scurtă</string>
+    <string name="selected_value">Valoarea selectată</string>
+    <string name="delete_cloud_version">Ștergeți versiunea cloud</string>
+    <string name="local_version_do_not_exist">Nu există o versiune locală.</string>
+    <string name="shared_string_in_progress">În curs de desfășurare</string>
+    <string name="shared_string_original">Originalul</string>
+    <string name="movement_speed">Viteza de mișcare</string>
+    <string name="cloud_version_confirm_delete">Ștergeți \"%1$s\" din OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Ștergeți fișierul</string>
+    <string name="simulation_position_description">Selectați un fișier track care va fi utilizat ca sursă pentru mutarea locației.</string>
 </resources>

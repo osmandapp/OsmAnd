@@ -1703,7 +1703,7 @@
     <string name="simulate_initial_startup">Zasymuluj pierwsze uruchomienie aplikacji</string>
     <string name="read_more">Czytaj dalej</string>
     <string name="whats_new">Co nowego w</string>
-    <string name="rendering_attr_hideProposed_name">Proponowane obiekty</string>
+    <string name="rendering_attr_showProposed_name">Proponowane obiekty</string>
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
     <string name="osm_edit_created_poi">Utworzone użyteczne miejsce OSM</string>

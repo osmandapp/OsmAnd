@@ -211,11 +211,6 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		} else {
 			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
 				@Override
-				public boolean isCancelled() {
-					return false;
-				}
-
-				@Override
 				public void onGpxDataItemReady(GpxDataItem item) {
 					if (item != null && item.getAnalysis() != null) {
 						setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);

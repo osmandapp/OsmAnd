@@ -628,9 +628,9 @@
     <string name="map_overlay">Prekrivni zemljevid</string>
     <string name="map_overlay_descr">Izberi prekrivni zemljevid</string>
     <string name="tile_source_already_installed">Zemljevid je že nameščen. Nastavitve bodo posodobljene.</string>
-    <string name="select_tile_source_to_install">Izbor zemljevidov za namestitev ali posodobitev.</string>
+    <string name="select_tile_source_to_install">Izberi vire ploščic zemljevidov:</string>
     <string name="internet_not_available">Opravila ni mogoče izvesti brez vzpostavljene povezave z internetom.</string>
-    <string name="install_more">Namesti več …</string>
+    <string name="install_more">Dodaj več …</string>
     <string name="create_poi_link_to_osm_doc">Določitev <u>spletnega OSM</u> s slikami.</string>
     <string name="error_doing_search">Iskanja v načinu brez povezave ni mogoče izvesti.</string>
     <string name="search_osm_offline">Poišči mesto na zemljevidu</string>
@@ -1727,7 +1727,7 @@
     <string name="shared_string_upload">Pošlji</string>
     <string name="read_more">Preberite več</string>
     <string name="whats_new">Kaj je novega v</string>
-    <string name="rendering_attr_hideProposed_name">Skrij predlagane predmete</string>
+    <string name="rendering_attr_showProposed_name">Skrij predlagane predmete</string>
     <string name="share_osm_edits_subject">Posodobitve OSM, oddane preko OsmAnd</string>
     <string name="lang_nds">Nizka nemščina</string>
     <string name="lang_mk">Makedonščina</string>
@@ -3459,7 +3459,7 @@
     <string name="shared_string_size">Velikost</string>
     <string name="use_routing_fallback">Nadomestno usmerjanje brez povezave</string>
     <string name="exit_without_saving_warning">Končati brez shranjevanja sprememb\?</string>
-    <string name="migration_files_present">Na izbranem mestu »%3$s« je %1$d datotek (%2$s).</string>
+    <string name="migration_files_present">%1$d datoteka(e) (%2$s), ki so že prisotne v ciljni mapi »%3$s« in niso bile prepisane.</string>
     <string name="created_on">Ustvarjeno</string>
     <string name="shared_string_memory">Pomnilnik</string>
     <string name="no_items_selected_warning">Prosim, izberi vsaj en element</string>
@@ -3514,7 +3514,7 @@
     <string name="gps_filter_smoothing_desc">Nastavi prag razdalje med točkami.
 \nTočke sledi, ki niso vsaj na tej razdalji od zadnje vidne točke, bodo skrite.
 \nPozor, ker lahko visoki prag preveč poenostavi geometrijo proge.</string>
-    <string name="storage_copied_files_size">Kopiranih %1$s datotek (%2$s)</string>
+    <string name="storage_copied_files_size">Obdelana(ih) %1$s datotek(a), %2$s</string>
     <string name="shared_storage_second_step">Klikni »Uporabi to mapo«.</string>
     <string name="shared_storage_warning_description">Zaradi novih pravil sistema Android bo od novembra 2021 OsmAnd 4.2 izgubil dostop do skupne shrambe.
 \n
@@ -4965,7 +4965,6 @@
     <string name="external_sensors_plugin_description">Dostopa do zunanjih senzorjev za branje npr. tvojega srčnega utripa, hitrost kolesa, moč kolesarjenja ali kadenco. Zahteva, da je tvoja naprava povezana z ustreznimi senzorji prek brezžičnega osebnega omrežnega protokola ANT+.</string>
     <string name="simulate_location_by_gpx">Simulacija lokacije iz GPX-a</string>
     <string name="terms_of_service_desc">S prenosom zemljevidov se strinjaš z %1$s in %2$s.</string>
-    
     <string name="open_weather_action_description">Omogoča odpiranje zaslona s podrobnimi informacijami o vremenu.</string>
     <string name="open_weather_action">Odpri vreme</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinije oblakov</string>
@@ -5042,4 +5041,25 @@
     <string name="change_default_tracks_appearance_confirmation_description">Spremenim izgled %1$s sledi\?</string>
     <string name="shared_string_yards">jardov</string>
     <string name="shared_string_kilograms">kilogramov</string>
+    <string name="inch">pa</string>
+    <string name="sort_duration_ascending">Najprej krajše trajanje</string>
+    <string name="sort_distance_ascending">Najprej krajša razdalja</string>
+    <string name="sort_distance_descending">Najprej daljša razdalja</string>
+    <string name="sort_date_ascending">Najprej novejši datum</string>
+    <string name="sort_date_descending">Najprej starejši datum</string>
+    <string name="approximate_bearing">Približna usmerjenost</string>
+    <string name="approximate_bearing_descr">Izpelji smer iz navigacijske poti, ki ji slediš.</string>
+    <string name="sort_duration_descending">Najprej daljše trajanje</string>
+    <string name="shared_string_nearest">Najbližje</string>
+    <string name="selected_value">Izbrana vrednost</string>
+    <string name="shared_string_add_manually">Ročno dodaj …</string>
+    <string name="shared_string_inches">palcev</string>
+    <string name="cloud_version_confirm_delete">Izbrisati »%1$s« iz OsmAnd oblaka\?</string>
+    <string name="shared_string_delete_file">Brisanje datoteke</string>
+    <string name="delete_cloud_version">Brisanje različice v oblaku</string>
+    <string name="local_version_do_not_exist">Ni lokalne različice.</string>
+    <string name="shared_string_in_progress">V teku</string>
+    <string name="shared_string_original">Izvirnik</string>
+    <string name="movement_speed">Hitrost gibanja</string>
+    <string name="simulation_position_description">Izberi datoteko s sledjo, ki bo uporabljena kot vir za premikanje lokacije.</string>
 </resources>

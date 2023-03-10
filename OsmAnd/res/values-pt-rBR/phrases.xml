@@ -4491,4 +4491,14 @@
     <string name="poi_socket_type3a_output_low">Baixa</string>
     <string name="poi_socket_type3c_output_high">Alta</string>
     <string name="poi_socket_type3c_output_low">Baixa</string>
+    <string name="poi_recycling_aluminium_cans">Latas de alumínio</string>
+    <string name="poi_recycling_pet_drink_bottles">Garrafas de bebidas PET</string>
+    <string name="poi_recycling_textiles">Tecidos</string>
+    <string name="poi_self_checkout">Autoatendimento</string>
+    <string name="poi_recycling_plastic_bottle_caps">Tampas de garrafa de plástico</string>
+    <string name="poi_self_checkout_no">Autoatendimento: não</string>
+    <string name="poi_self_checkout_yes">Sim</string>
+    <string name="poi_self_checkout_only">Somente</string>
+    <string name="poi_lifeguard_tower">Torre de salva-vidas</string>
+    <string name="poi_lifeguard">Salva-vidas</string>
 </resources>

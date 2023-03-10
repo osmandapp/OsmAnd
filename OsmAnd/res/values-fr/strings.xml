@@ -180,9 +180,9 @@
     <string name="map_overlay">Sur-couche de la carte</string>
     <string name="map_overlay_descr">Sélectionnez la sur-couche de carte</string>
     <string name="tile_source_already_installed">Carte déjà installée, les paramètres seront mis à jour.</string>
-    <string name="select_tile_source_to_install">Sélectionnez les cartes (tuile) à installer ou à mettre à jour.</string>
+    <string name="select_tile_source_to_install">Sélectionnez les sources des cartes (tuiles) :</string>
     <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération.</string>
-    <string name="install_more">Installer plus…</string>
+    <string name="install_more">Ajouter plus …</string>
     <string name="level_to_switch_vector_raster_descr">Utiliser les cartes matricielles (raster) à partir de ce niveau de zoom.</string>
     <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel minimal</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en ligne</u> classification des cartes avec images.</string>
@@ -1731,7 +1731,7 @@
     <string name="shared_string_update">Mettre à jour</string>
     <string name="read_more">En savoir +</string>
     <string name="whats_new">Nouveautés de la version</string>
-    <string name="rendering_attr_hideProposed_name">Objets proposés</string>
+    <string name="rendering_attr_showProposed_name">Objets proposés</string>
     <string name="lang_mk">Macédonien</string>
     <string name="lang_fy">Frison occidental</string>
     <string name="lang_als">Tosque</string>
@@ -4398,7 +4398,7 @@
 \n</string>
     <string name="from_to_with_params">De %1$s vers %2$s</string>
     <string name="progress_complete">%1$s terminé</string>
-    <string name="storage_copied_files_size">%1$s fichiers copiés pour %2$s</string>
+    <string name="storage_copied_files_size">%1$s fichiers traités, %2$s</string>
     <string name="storage_copying_files_size">Copie de %1$s fichiers pour %2$s</string>
     <string name="storage_found_files_size">%1$s fichiers trouvés pour %2$s</string>
     <string name="storage_found_files_descr">Appuyez sur \"%1$s\" pour copier %2$s fichiers de \"%3$s\" vers \"%4$s\". Cette opération peut prendre un peu de temps.</string>
@@ -4428,7 +4428,7 @@
 \nLe gestionnaire de fichiers va afficher le dossier qui devrait contenir un dossier Osmand.</string>
     <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
     <string name="show_parameter_seekbar">Afficher la barre de recherche des paramètres</string>
-    <string name="migration_files_present">Il y a %1$d fichiers (%2$s) dans l\'emplacement sélectionné \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d fichier(s) (%2$s) dans l\'emplacement sélectionné \'%3$s\'n \'ont pas été écrasés.</string>
     <string name="fold_unfold">plier / déplier</string>
     <string name="app_profile_type">Type de profil d’application</string>
     <string name="map_marker_options">Options pour les marques</string>
@@ -4936,7 +4936,6 @@
     <string name="shared_string_open">Ouvert</string>
     <string name="open_weather_action_description">Vous permet de consulter des informations météo détaillées.</string>
     <string name="open_weather_action">Afficher la météo</string>
-    
     <string name="rendering_attr_weatherPrecipitationContours_name">Contour des précipitations</string>
     <string name="rendering_attr_weatherCloudContours_name">Contour des nuages</string>
     <string name="action_not_supported_with_map_style">Cette action n\'est pas compatible avec le style de carte sélectionné.</string>
@@ -5043,4 +5042,22 @@
     <string name="change_default_tracks_appearance_confirmation_description">Modifier l\'apparence de %1$s traces \?</string>
     <string name="shared_string_kilograms">kilogrammes</string>
     <string name="shared_string_yards">yards</string>
+    <string name="inch">in</string>
+    <string name="cloud_version_confirm_delete">Supprimer \"%1$s\" du cloud OsmAnd \?</string>
+    <string name="shared_string_in_progress">En cours</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Vitesse de déplacement</string>
+    <string name="shared_string_inches">inches</string>
+    <string name="shared_string_add_manually">Ajouter manuellement …</string>
+    <string name="sort_duration_ascending">Durée plus courte en premier</string>
+    <string name="sort_duration_descending">Durée plus longue en premier</string>
+    <string name="sort_distance_ascending">Distance plus courte en premier</string>
+    <string name="sort_distance_descending">Distance plus longue en premier</string>
+    <string name="sort_date_ascending">Date plus récente en premier</string>
+    <string name="shared_string_nearest">Le plus proche</string>
+    <string name="selected_value">Valeur sélectionnée</string>
+    <string name="sort_date_descending">Date plus ancienne en premier</string>
+    <string name="shared_string_delete_file">Supprimer le fichier</string>
+    <string name="delete_cloud_version">Supprimer le fichier Cloud</string>
+    <string name="local_version_do_not_exist">Aucune version locale</string>
 </resources>

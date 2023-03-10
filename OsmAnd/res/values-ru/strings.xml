@@ -287,7 +287,7 @@
     <string name="lang_mk">Македонский</string>
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
-    <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
+    <string name="rendering_attr_showProposed_name">Планируемые объекты</string>
     <string name="srtm_plugin_description">Наложение контурных линий и слоя затенения рельефа (отмывки) поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, кому важна рельефная структура ландшафта.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основаны на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструменте визуализации Terra, флагманского спутника Системы наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических систем Японии (J-spacesystems).</string>
@@ -4981,7 +4981,6 @@
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
     <string name="mtb_scale">MTB шкала</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии порывов ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
@@ -5037,4 +5036,57 @@
     <string name="set_up_backup">Настройка резервного копирования</string>
     <string name="share_link">Поделиться ссылкой</string>
     <string name="last_synchronized">Последняя синхронизация</string>
+    <string name="shared_string_yards">ярды</string>
+    <string name="no_visible_tracks_description">Выберите треки для отображения на карте.</string>
+    <string name="shared_string_inches">дюймы</string>
+    <string name="approximate_bearing">Приблизительный пеленг</string>
+    <string name="approximate_bearing_descr">Рассчитать пеленг, если он не получен от устройства</string>
+    <string name="shared_string_kilograms">килограммы</string>
+    <string name="shared_string_apply_changes">Применить изменения</string>
+    <string name="no_visible_tracks">Нет треков на карте</string>
+    <string name="recently_visible">Недавно видимые %1$s</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Изменить внешний вид треков (%1$s шт.)\?</string>
+    <string name="inch">дюйм</string>
+    <string name="empty_tracks_description">Вы можете импортировать, создавать или записывать файлы треков с помощью OsmAnd.</string>
+    <string name="empty_tracks">У вас нет файлов треков.</string>
+    <string name="shared_string_select_recent">Выбрать последние</string>
+    <string name="change_appearance">Изменить внешний вид</string>
+    <string name="switch_folder">Переключить папку</string>
+    <string name="show_all_tracks">Показать все треки</string>
+    <string name="shared_string_on_map">На карте</string>
+    <string name="display_position_automatic_descr">Зависит от ориентации карты: для «по направления движения» - внизу, для всех остальных - по центру.</string>
+    <string name="weight_limit_error">Минимальное значение - %1$s тонн. Используйте профиль «%2$s», если масса автомобиля меньше минимального значения.</string>
+    <string name="sound_beep_complex_loud">Beep: complex loud</string>
+    <string name="sound_beep_minimal">Beep: minimal</string>
+    <string name="sound_beep_simple">Beep: simple</string>
+    <string name="sound_beep_complex">Beep: complex</string>
+    <string name="sound_beep_simple_loud">Beep: simple loud</string>
+    <string name="cloud_version_confirm_delete">Удалить «%1$s» из OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Удалить файл</string>
+    <string name="delete_cloud_version">Удалить облачную версию</string>
+    <string name="local_version_do_not_exist">Локальная версия отсутствует.</string>
+    <string name="shared_string_original">Оригинал</string>
+    <string name="movement_speed">Скорость движения</string>
+    <string name="release_4_4">• Улучшено подменю «Треки» в меню «Настройка карты».
+\n
+\n• В контекстном меню теперь отображаются локализованные названия POI.
+\n
+\n• Добавлена возможность поделиться маршрутом по ссылке
+\n
+\n• Добавлена единица измерения длины «Морские мили/футы».
+\n
+\n• Добавлен новый фиксированный режим ориентации карты.
+\n
+\n• Упрощён стартовый экран
+\n
+\n• Исправлено местоположение в режиме разделения экрана в Android Auto.
+\n
+\n• Добавлен график «Скорость/Уклон» для анализа пути.
+\n
+\n• Android 13 переместил выбор языка приложения в системные настройки.
+\n
+\n• Исправлены проблемы с отображением веганских мест.
+\n
+\n</string>
+    <string name="shared_string_add_manually">Добавить вручную…</string>
 </resources>

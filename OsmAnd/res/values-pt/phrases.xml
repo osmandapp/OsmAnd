@@ -4493,4 +4493,14 @@
     <string name="poi_socket_type3a_output_high">Alta</string>
     <string name="poi_socket_type3c_output_high">Alta</string>
     <string name="poi_socket_type3a_output_low">Baixa</string>
+    <string name="poi_self_checkout">Caixa de auto-pagamento</string>
+    <string name="poi_recycling_pet_drink_bottles">Garrafas PET para bebidas</string>
+    <string name="poi_self_checkout_yes">Sim</string>
+    <string name="poi_self_checkout_only">Unicamente</string>
+    <string name="poi_lifeguard">Nadador-salvador</string>
+    <string name="poi_self_checkout_no">Caixa de auto-pagamento: não</string>
+    <string name="poi_recycling_plastic_bottle_caps">Tampas de garrafas de plástico</string>
+    <string name="poi_recycling_textiles">Têxteis</string>
+    <string name="poi_recycling_aluminium_cans">Latas de alumínio</string>
+    <string name="poi_lifeguard_tower">Torre de nadador-salvador</string>
 </resources>

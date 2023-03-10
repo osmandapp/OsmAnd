@@ -96,6 +96,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.layer_map) {
 			if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
+				mapActivity.getMyApplication().showToastMessage(R.string.map_online_plugin_is_not_installed);
 			} else if (uiAdapter != null) {
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, item, uiAdapter);
 			}

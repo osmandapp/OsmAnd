@@ -368,7 +368,7 @@
     <string name="lang_mk">Македонски</string>
     <string name="read_more">Прочитај више</string>
     <string name="whats_new">Шта је ново</string>
-    <string name="rendering_attr_hideProposed_name">Предложене објекте</string>
+    <string name="rendering_attr_showProposed_name">Предложене објекте</string>
     <string name="shared_string_update">Надгради</string>
     <string name="shared_string_upload">Отпреми</string>
     <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Преузмите основну карту света за употпуњавање радне средине.</string>
@@ -2517,7 +2517,7 @@
     <string name="layer_underlay">Карта слоја испод…</string>
     <string name="map_underlay">Карта испод</string>
     <string name="tile_source_already_installed">Карта већ уграђена, „Подешавања“ ће се освежити.</string>
-    <string name="select_tile_source_to_install">Изаберите (сличице) карте ради уградње или освежења.</string>
+    <string name="select_tile_source_to_install">Изаберите изворе плочица карте:</string>
     <string name="send_location_way_choose_title">Подели положај користећи</string>
     <string name="add_waypoint_dialog_added">Пролазна тачка ГПС-а „{0}“ је додата</string>
     <string name="import_file_favourites">Сачувај податке као датотеку ГПИкс-а или увези пролазне тачке у „Омиљене тачке“\?</string>
@@ -3007,7 +3007,7 @@
     <string name="sett_generic_ext_input">Тастатура</string>
     <string name="sett_wunderlinq_ext_input">Вундерлинк (WunderLINQ)</string>
     <string name="sett_parrot_ext_input">Папагај (Parrot)</string>
-    <string name="turn_on_profile_desc">Укључите бар један применљиви налог ради употребе овог овог подешавања.</string>
+    <string name="turn_on_profile_desc">Укључите бар један применљиви налог ради употребе ових поставки.</string>
     <string name="rendering_attr_winter_road_name">Снежни коловоз</string>
     <string name="rendering_attr_ice_road_name">Залеђени коловоз</string>
     <string name="routeInfo_winter_ice_road_name">Снежни и залеђени коловози</string>
@@ -4772,7 +4772,6 @@
     <string name="weather_widgets_secondary_desc">Мерне јединице могу бити промењене у поставкама прикључка временских прилика.</string>
     <string name="air_pressure_widget_desc">Приказује ваздушни притисак на тренутном средишту карте.</string>
     <string name="weather_pressure_inches_of_mercury">Инчи живе</string>
-    
     <string name="weather_prefs_descr">24-часне и 7-дневне временске прилике, освежене сваких 3 часа</string>
     <string name="switch_mode_by_tapping_on_widget">Промени начин рада тапом по справици.</string>
     <string name="map_settings_weather_temp">Топлота</string>
@@ -4947,7 +4946,7 @@
     <string name="cloud_recent_changes">Измене</string>
     <string name="cloud_all_changes_uploaded">Све измене су отпремљене</string>
     <string name="cloud_all_changes_downloaded">Све измене су преузете</string>
-    <string name="cloud_no_conflicts">Нема сукоба</string>
+    <string name="cloud_no_conflicts">Нема сукоба.</string>
     <string name="download_cloud_version">Преузми издање из облака</string>
     <string name="shared_string_do_not_exist">Не постоји</string>
     <string name="backup_error_failed_to_fetch_remote_items">Нисам успео да добавим списак датотека са служитеља.</string>
@@ -5017,4 +5016,38 @@
     <string name="live_update_frequency_week_variant">Освежења карата се проверавају седмично.</string>
     <string name="no_altitude_data_desc">Ради пријема података %1$s, придодајте своју стазу путу или прорачунајте је на мрежи.</string>
     <string name="set_up_backup">Постави складиште</string>
+    <string name="value_downloaded_of_mb">Преузимам %1$.1f/%2$.1f MB</string>
+    <string name="sort_distance_ascending">Најпре најкраће растојање</string>
+    <string name="sort_distance_descending">Најпре најдуже растојање</string>
+    <string name="sort_date_ascending">Најпре најновији датум</string>
+    <string name="shared_string_nearest">Најближе</string>
+    <string name="shared_string_add_manually">Додај ручно…</string>
+    <string name="shared_string_delete_file">Избриши датотеку</string>
+    <string name="local_version_do_not_exist">Није присутно местно издање.</string>
+    <string name="shared_string_in_progress">У току</string>
+    <string name="shared_string_original">Изворно</string>
+    <string name="movement_speed">Брзина кретања</string>
+    <string name="shared_string_inches">инчи</string>
+    <string name="x_axis">X-осовина</string>
+    <string name="selected_value">Одабрана вредност</string>
+    <string name="sort_duration_ascending">Најпре најкраће трајање</string>
+    <string name="sort_duration_descending">Најпре најдуже трајање</string>
+    <string name="sort_date_descending">Најпре најстарији датум</string>
+    <string name="delete_cloud_version">Избриши издање из облака</string>
+    <string name="cloud_version_confirm_delete">Да ли избрисати „%1$s“ из Облака ОсмАнда\?</string>
+    <string name="simulation_position_description">Изаберите датотеку стазе ради употребе као водиље кретања.</string>
+    <string name="shared_string_kilograms">килограми</string>
+    <string name="share_link">Дели везу</string>
+    <string name="skip_download">Прескочи преузимање</string>
+    <string name="sound_beep_minimal">Бип: најтиши</string>
+    <string name="last_synchronized">Последње усклађивани</string>
+    <string name="display_position_automatic_descr">Зависи од усмерења карте: дно за смер кретања, средиште за све остало.</string>
+    <string name="weight_limit_error">Најмања вредност је „%1$s“ тона. Користите налог „%2$s“ уколико је тежина возила мања од најмање вредности.</string>
+    <string name="share_as_file">Дели као датотеку</string>
+    <string name="sound_beep_complex">Бип: сложен</string>
+    <string name="determine_location">Омогућава нам да одредимо ваш положај</string>
+    <string name="sound_beep_complex_loud">Бип: бучaн сложен</string>
+    <string name="sound_beep_simple">Бип: једноставан</string>
+    <string name="sound_beep_simple_loud">Бип: једноставан бучан</string>
+    <string name="y_axis">Y-осовина</string>
 </resources>

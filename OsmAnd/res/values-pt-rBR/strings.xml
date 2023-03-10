@@ -1185,9 +1185,9 @@
     <string name="map_overlay">Mapa da sobreposição</string>
     <string name="map_overlay_descr">Escolher mapa da sobreposição</string>
     <string name="tile_source_already_installed">Mapa já está instalado, as \'configurações\' serão atualizadas.</string>
-    <string name="select_tile_source_to_install">Escolher mapas (quadrículas) para instalar ou atualizar.</string>
+    <string name="select_tile_source_to_install">Selecione as fontes do mapa de mosaicos:</string>
     <string name="internet_not_available">Não é possível executar a operação sem uma conexão com a Internet.</string>
-    <string name="install_more">Instalar mais…</string>
+    <string name="install_more">Adicionar mais…</string>
     <string name="level_to_switch_vector_raster_descr">Use mapas raster para qualquer coisa além desse nível.</string>
     <string name="level_to_switch_vector_raster">Mínimo nível de zoom vetorial</string>
     <string name="create_poi_link_to_osm_doc">Classificação de mapa <u>OSM on-line</u> com imagens.</string>
@@ -1679,7 +1679,7 @@
     <string name="lang_als">Albanês (Tosco)</string>
     <string name="read_more">Leia mais</string>
     <string name="whats_new">O que há de novo</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propostos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propostos</string>
     <string name="world_map_download_descr">Mapa-base mundial (abrangendo o mundo inteiro em baixo nível de zoom) está faltando ou desatualizado. Por favor, considere baixá-lo para uma visão global.</string>
     <string name="map_downloaded_descr">O mapa %1$s está pronto para usar.</string>
     <string name="go_to_map">Exibir mapa</string>
@@ -2214,7 +2214,7 @@
     <string name="route_calculation">Cálculo da rota</string>
     <string name="gpx_no_tracks_title">Você não tem arquivos de trilha ainda</string>
     <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos de trilha na pasta</string>
-    <string name="gpx_add_track">Adicionar…</string>
+    <string name="gpx_add_track">Adicionar mais…</string>
     <string name="shared_string_appearance">Aparência</string>
     <string name="trip_rec_notification_settings">Ativar gravação rápida</string>
     <string name="shared_string_notifications">Notificações</string>
@@ -4277,7 +4277,7 @@
     <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s alterações nos últimos dois meses %2$s para obter acesso para atualizações de mapa por hora ilimitadas.</string>
     <string name="shared_string_contributions">Contribuições</string>
     <string name="contributions_may_calculate_with_delay">O cálculo das contribuições pode levar várias horas.</string>
-    <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
+    <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis. :-(</string>
     <string name="connect_track_points_as">Conectar pontos de rota</string>
     <string name="pro_features">Recursos Pro</string>
     <string name="purchases_restored">Compras restauradas</string>
@@ -4394,7 +4394,7 @@
     <string name="delete_history_items">Apagar itens do histórico %1$s\?</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s arquivos de \"%3$s\" para \"%4$s\". Pode levar algum tempo.</string>
-    <string name="storage_copied_files_size">Foram copiados %1$s arquivos (%2$s)</string>
+    <string name="storage_copied_files_size">%1$s arquivo(s) processado(s), %2$s</string>
     <string name="storage_copying_files_size">Copiando %1$s arquivos (%2$s)</string>
     <string name="shared_storage_second_step">Clique em \"Usar esta pasta\".</string>
     <string name="folder_access_denied">É necessária permissão para acessar a pasta selecionada.</string>
@@ -4430,7 +4430,7 @@
     <string name="no_items_selected_warning">Selecione pelo menos um item</string>
     <string name="display_groups_visibility_dialog_description">Você pode controlar a visibilidade do grupo no mapa. Se a trilha estiver oculta, todos os grupos também serão ocultados.</string>
     <string name="shared_string_hide_all">Ocultar tudo</string>
-    <string name="migration_files_present">Existem %1$d arquivos (%2$s) no local selecionado \"%3$s\".</string>
+    <string name="migration_files_present">%1$d arquivo(s) (%2$s) já presente(s) no destino \'%3$s\' e não substituído(s).</string>
     <string name="fold_unfold">ocultar/mostrar</string>
     <string name="app_profile_type">Tipo de perfil de aplicativo</string>
     <string name="map_marker_options">Opções de marcador de mapa</string>
@@ -4963,7 +4963,6 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Linhas isoladas de velocidade do vento</string>
-    
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinhas de precipitação</string>
     <string name="mtb_scale">Escala MTB</string>
     <string name="mtb_imba">IMBA</string>
@@ -5048,4 +5047,46 @@
     <string name="no_visible_tracks_description">Selecione as trilhas para exibi-las no mapa.</string>
     <string name="shared_string_kilograms">quilogramas</string>
     <string name="cloud_sync_progress">A sincronizar…%1$s</string>
+    <string name="approximate_bearing">Direção aproximada</string>
+    <string name="sort_duration_ascending">Primeiro a duração mais curta</string>
+    <string name="sort_distance_ascending">Primeiro a distância mais curta</string>
+    <string name="sort_distance_descending">Primeiro a distância mais longa</string>
+    <string name="sort_date_ascending">Primeiro a data mais recente</string>
+    <string name="selected_value">Valor selecionado</string>
+    <string name="sort_duration_descending">Primeiro a duração mais longa</string>
+    <string name="sort_date_descending">Primeiro a data mais recente</string>
+    <string name="shared_string_nearest">Mais perto</string>
+    <string name="movement_speed">Velocidade do movimento</string>
+    <string name="simulation_position_description">Selecione um arquivo de uma trilha para usar como orientação do movimento.</string>
+    <string name="approximate_bearing_descr">Derive o rumo da rota de navegação que está sendo seguida.</string>
+    <string name="shared_string_inches">polegadas</string>
+    <string name="inch">in</string>
+    <string name="cloud_version_confirm_delete">Excluir \"%1$s\" do OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Excluir arquivo</string>
+    <string name="delete_cloud_version">Excluir versão da nuvem</string>
+    <string name="local_version_do_not_exist">Não existe nenhuma versão local.</string>
+    <string name="shared_string_in_progress">Em andamento</string>
+    <string name="shared_string_original">Original</string>
+    <string name="shared_string_add_manually">Adicionar manualmente…</string>
+    <string name="release_4_4">• Menu \"Trilhas\" em \"Configurar mapa\" melhorado
+\n
+\n • O menu de contexto agora mostra nomes localizados nos POIs
+\n
+\n • Adicionada opção para partilhar rota com um link
+\n
+\n • Adicionada unidade de comprimento \"milhas náuticas/pés\"
+\n
+\n • A orientação do mapa agora tem um novo modo fixo
+\n
+\n • Tela inicial simplificada
+\n
+\n • Posição de localização fixa no modo de tela dividida no Android Auto
+\n
+\n • Adicionado gráfico \"Velocidade/inclinação\" na análise de trilha de navegação
+\n
+\n • O Android 13 mudou a escolha do idioma da aplicação para as configurações do sistema Android
+\n
+\n • Corrigidos problemas com a visualização de locais com menus veganos
+\n
+\n</string>
 </resources>

@@ -637,9 +637,9 @@
     <string name="map_overlay">Mapa da camada superior</string>
     <string name="map_overlay_descr">Escolha o mapa da camada superior</string>
     <string name="tile_source_already_installed">Mapa previamente instalado, as \"Configurações\" serão atualizadas.</string>
-    <string name="select_tile_source_to_install">Selecione mosaicos de mapas para instalar ou atualizar.</string>
+    <string name="select_tile_source_to_install">Selecione as fontes do mapa de mosaicos:</string>
     <string name="internet_not_available">Não é possível executar a operação sem ligação à Internet.</string>
-    <string name="install_more">Instalar mais…</string>
+    <string name="install_more">Adicionar mais…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas rasterizados para tudo a partir deste nível.</string>
     <string name="level_to_switch_vector_raster">Nível mínimo de ampliação para vetorial</string>
     <string name="create_poi_link_to_osm_doc">Classificação de mapa <u>OSM Online</u> com imagens.</string>
@@ -1507,7 +1507,7 @@
     <string name="share_osm_edits_subject">Edições OSM partilhadas via OsmAnd</string>
     <string name="read_more">Ler mais</string>
     <string name="whats_new">Novidades</string>
-    <string name="rendering_attr_hideProposed_name">Construções planeadas</string>
+    <string name="rendering_attr_showProposed_name">Construções planeadas</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM adicionado</string>
     <string name="world_map_download_descr">O mapa base mundial (que cobre o mundo inteiro num nível de ampliação baixo) não existe ou está desatualizado. Considere descarregá-lo para uma visão global.</string>
@@ -4404,7 +4404,7 @@
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s ficheiros de \"%3$s\" para \"%4$s\". Pode demorar algum tempo.</string>
-    <string name="storage_copied_files_size">Foram copiados %1$s ficheiros (%2$s)</string>
+    <string name="storage_copied_files_size">%1$s ficheiro(s) processado(s), %2$s</string>
     <string name="storage_copying_files_size">A copiar %1$s ficheiros (%2$s)</string>
     <string name="storage_found_files_size">Encontrados %1$s ficheiros (%2$s)</string>
     <string name="shared_string_skip_warning">Ignorar a migração\? O OsmAnd deixou de ter acesso aos seus ficheiros no armazenamento partilhado.
@@ -4431,7 +4431,7 @@
     <string name="icon_group_education">Educação</string>
     <string name="icon_group_industrial">Industrial</string>
     <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s alterações nos últimos dois meses %2$s para ter acesso a atualizações de mapas a cada hora ilimitadas.</string>
-    <string name="migration_files_present">Existem %1$d ficheiros (%2$s) no local selecionado \"%3$s\".</string>
+    <string name="migration_files_present">%1$d ficheiro(s) (%2$s) já presente(s) no destino \'%3$s\' e não substituído(s).</string>
     <string name="fold_unfold">ocultar/mostrar</string>
     <string name="app_profile_type">Tipo de perfil da aplicação</string>
     <string name="map_marker_options">Opções de marcador de mapa</string>
@@ -4985,7 +4985,6 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinhas de rajadas de vento</string>
     <string name="open_weather_action">Abrir previsão meteorológica</string>
     <string name="open_weather_action_description">Permite que abra um ecrã com informações meteorológicas detalhadas.</string>
-    
     <string name="shared_string_open">Aberto</string>
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
@@ -5057,4 +5056,46 @@
     <string name="show_all_tracks">Mostrar todos os trilhos</string>
     <string name="shared_string_on_map">No mapa</string>
     <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
+    <string name="approximate_bearing_descr">Obter a direção da rota a partir da rota de navegação que está a ser seguida.</string>
+    <string name="shared_string_inches">polegadas</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Direção aproximada</string>
+    <string name="cloud_version_confirm_delete">Eliminar \"%1$s\" do OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Eliminar ficheiro</string>
+    <string name="delete_cloud_version">Eliminar versão da nuvem</string>
+    <string name="local_version_do_not_exist">Não existe nenhuma versão local.</string>
+    <string name="shared_string_in_progress">A decorrer</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidade do movimento</string>
+    <string name="simulation_position_description">Selecione um ficheiro de um trilho para usar como orientação do movimento.</string>
+    <string name="shared_string_add_manually">Adicionar manualmente…</string>
+    <string name="release_4_4">• Menu \"Trilhos\" em \"Configurar mapa\" melhorado
+\n
+\n • O menu de contexto agora mostra nomes localizados nos POIs
+\n
+\n • Adicionada opção para partilhar rota com uma hiperligação
+\n
+\n • Adicionada unidade de comprimento \"milhas náuticas/pés\"
+\n
+\n • A orientação do mapa agora tem um novo modo fixo
+\n
+\n • Ecrã inicial simplificado
+\n
+\n • Posição de localização fixa no modo de ecrã dividido no Android Auto
+\n
+\n • Adicionado gráfico \"Velocidade/inclinação\" na análise do trilho de navegação
+\n
+\n • O Android 13 mudou a escolha do idioma da aplicação para as configurações do sistema Android
+\n
+\n • Corrigidos problemas com a visualização de locais com menus veganos
+\n
+\n</string>
+    <string name="sort_duration_ascending">Primeiro a duração mais curta</string>
+    <string name="sort_duration_descending">Primeiro a duração mais longa</string>
+    <string name="sort_distance_ascending">Primeiro a distância mais curta</string>
+    <string name="sort_distance_descending">Primeiro a distância mais longa</string>
+    <string name="sort_date_ascending">Primeiro a data mais recente</string>
+    <string name="sort_date_descending">Primeiro a data mais antiga</string>
+    <string name="selected_value">Valor selecionado</string>
+    <string name="shared_string_nearest">Mais perto</string>
 </resources>

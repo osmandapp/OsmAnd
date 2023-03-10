@@ -189,8 +189,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 		if (singleOperation) {
 			onSyncFinished(null);
+		} else {
+			uploadNewItems();
 		}
-		uploadNewItems();
 	}
 
 	@Override

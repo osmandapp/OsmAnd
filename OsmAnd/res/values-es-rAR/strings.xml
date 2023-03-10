@@ -1142,9 +1142,9 @@
     <string name="map_overlay">Mapa superpuesto</string>
     <string name="map_overlay_descr">Elige el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar.</string>
+    <string name="select_tile_source_to_install">Elige los repositorios de mapas (teselas):</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
-    <string name="install_more">Instalar más…</string>
+    <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
@@ -1262,7 +1262,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_north_opt">Norte siempre arriba (fijo)</string>
     <string name="rotate_map_to_descr">Alineación del mapa:</string>
     <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -1728,7 +1728,7 @@
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
     <string name="share_osm_edits_subject">Ediciones de OSM compartidas vía OsmAnd</string>
@@ -4401,7 +4401,7 @@
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
-    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_storage_last_step">Puedes definir una nueva carpeta de datos después.</string>
     <string name="shared_storage_third_step">Concede acceso a la carpeta. Sin esto, OsmAnd no puede copiar archivos.</string>
@@ -4428,7 +4428,7 @@
     <string name="rendering_attr_natureReserves_description">Mostrar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones ilimitadas de mapas por hora.</string>
     <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
-    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
+    <string name="migration_files_present">Hay %1$d archivo(s) (%2$s) en la ubicación «%3$s» y no pueden sobrescribirse.</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
     <string name="map_marker_options">Opciones del marcador de mapa</string>
@@ -4800,7 +4800,7 @@
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
-    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Rotación manual (fijo)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
     <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
@@ -4994,7 +4994,6 @@
     <string name="mtb_imba_full">Asociación Internacional del Ciclismo de Montaña</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de las ráfagas de viento</string>
-    
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de precipitación</string>
     <string name="shared_string_open">Abrir</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
@@ -5059,7 +5058,7 @@
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
-    <string name="recently_visible">Última visible «%1$s»</string>
+    <string name="recently_visible">Visibles recientemente %1$s</string>
     <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
     <string name="empty_tracks">No tienes archivos de trazas.</string>
     <string name="shared_string_select_recent">Marcar reciente</string>
@@ -5069,8 +5068,46 @@
     <string name="shared_string_on_map">En el mapa</string>
     <string name="shared_string_yards">yardas</string>
     <string name="shared_string_kilograms">kilogramos</string>
-    <string name="approximate_bearing_descr">Calcular el rumbo si no se recibe del dispositivo</string>
+    <string name="approximate_bearing_descr">Obtener el rumbo de la ruta de navegación que se está siguiendo.</string>
     <string name="shared_string_inches">pulgadas</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
     <string name="inch">in</string>
+    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud\?</string>
+    <string name="shared_string_in_progress">En curso</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidad de movimiento</string>
+    <string name="simulation_position_description">Marca un archivo de traza a usar como guía de movimiento.</string>
+    <string name="local_version_do_not_exist">No existe una versión local.</string>
+    <string name="delete_cloud_version">Borrar versión en la nube</string>
+    <string name="shared_string_delete_file">Borrar archivo</string>
+    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+\n
+\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n
+\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n
+\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n
+\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n
+\n• Se ha simplificado la pantalla de inicio
+\n
+\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n
+\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n
+\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n
+\n• Se han corregido problemas de visualización con los lugares veganos
+\n
+\n</string>
+    <string name="shared_string_add_manually">Añadir manualmente…</string>
+    <string name="sort_duration_ascending">Duración ascendente</string>
+    <string name="sort_duration_descending">Duración descendente</string>
+    <string name="sort_distance_descending">Distancia descendente</string>
+    <string name="selected_value">Valor elegido</string>
+    <string name="sort_date_descending">Fecha descendente</string>
+    <string name="sort_distance_ascending">Distancia ascendente</string>
+    <string name="sort_date_ascending">Fecha ascendente</string>
+    <string name="shared_string_nearest">Más cercano</string>
 </resources>

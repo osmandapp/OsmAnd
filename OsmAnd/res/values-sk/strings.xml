@@ -303,9 +303,9 @@
     <string name="map_overlay">Prekrývacia mapa</string>
     <string name="map_overlay_descr">Vybrať prekryvnú mapu</string>
     <string name="tile_source_already_installed">Mapa je už nainštalovaná, \"Nastavenia\" budú zaktualizované.</string>
-    <string name="select_tile_source_to_install">Vyberte (dlaždicové) mapy na inštaláciu alebo aktualizáciu.</string>
+    <string name="select_tile_source_to_install">Vyberte zdroje dlaždicových máp:</string>
     <string name="internet_not_available">Nie je možné vykonať túto operáciu bez pripojenia na Internet.</string>
-    <string name="install_more">Inštalovať viac…</string>
+    <string name="install_more">Pridať viac…</string>
     <string name="level_to_switch_vector_raster_descr">Použiť rastrové mapy pre všetko nad touto úrovňou.</string>
     <string name="level_to_switch_vector_raster">Minimálna úroveň vektorového priblíženia</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikácia s obrázkami.</string>
@@ -1725,7 +1725,7 @@
     <string name="map_legend">Vysvetlivky k mape</string>
     <string name="shared_string_upload">Odoslať</string>
     <string name="shared_string_update">Aktualizovať</string>
-    <string name="rendering_attr_hideProposed_name">Plánované objekty</string>
+    <string name="rendering_attr_showProposed_name">Plánované objekty</string>
     <string name="read_more">Prečítať viac</string>
     <string name="whats_new">Čo je nové v</string>
     <!-- string name="map_legend_item_description">Vysvetlivky k základnému mapovému štýlu v OsmAnd. Pre ich zobrazenie je potrebné pripojenie na Internet</string -->
@@ -4403,7 +4403,7 @@
     <string name="storage_found_files_descr">Stlačte \"%1$s\" pre skopírovanie %2$s súborov z \"%3$s\" do \"%4$s\". Môže to chvíľu trvať.</string>
     <string name="shared_storage_third_step">Povoľte prístup k priečinku. Bez tohto povolenia nemôže OsmAnd skopírovať súbory.</string>
     <string name="files_remaining">Zostávajúce súbory: %1$s %2$s</string>
-    <string name="storage_copied_files_size">Skopírovaných %1$s súborov %2$s</string>
+    <string name="storage_copied_files_size">Spracovaných %1$s súborov, %2$s</string>
     <string name="copying_file">Kopíruje sa súbor %1$s…</string>
     <string name="shared_string_skip_warning">Preskočiť migráciu\? OsmAnd už nemá prístup k vašim súborom v zdieľanom úložisku.
 \n
@@ -4422,7 +4422,7 @@
     <string name="rendering_attr_natureReserves_description">Zobraziť prírodné rezervácie, chránené oblasti a národné parky.</string>
     <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s zmien za posledné 2 mesiace %2$s, aby ste získali neobmedzené hodinové aktualizácie máp.</string>
     <string name="show_parameter_seekbar">Zobraziť hľadanie parametrov</string>
-    <string name="migration_files_present">V zvolenom umiestnení \'%3$s\' sa nachádza %1$d súborov (%2$s).</string>
+    <string name="migration_files_present">V zvolenom umiestnení \'%3$s\' sa nachádza %1$d súborov (%2$s), ktoré nebudú prepísané.</string>
     <string name="fold_unfold">zbaliť/rozbaliť</string>
     <string name="app_profile_type">Typ profilu aplikácie</string>
     <string name="map_marker_options">Možnosti mapových značiek</string>
@@ -4972,7 +4972,6 @@
     <string name="mtb_segment_classification">Klasifikácia úseku</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izočiary zrážok</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Izočiary rýchlosti vetra</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">Izočiary oblakov</string>
     <string name="open_weather_action_description">Umožní vám otvoriť obrazovku s detailnou informáciou o počasí.</string>
     <string name="shared_string_open">Otvoriť</string>
@@ -5051,4 +5050,46 @@
     <string name="switch_folder">Zmeniť priečinok</string>
     <string name="show_all_tracks">Zobraziť všetky stopy</string>
     <string name="shared_string_on_map">Na mape</string>
+    <string name="approximate_bearing">Približné smerovanie</string>
+    <string name="approximate_bearing_descr">Odvodiť smerovanie z nasledovanej navigačnej trasy.</string>
+    <string name="shared_string_inches">palcov</string>
+    <string name="inch">\"</string>
+    <string name="selected_value">Zvolená hodnota</string>
+    <string name="delete_cloud_version">Vymazať verziu z cloudu</string>
+    <string name="simulation_position_description">Zvoľte súbor stopy, ktorá bude použitá ako zdroj pre pohyb polohy.</string>
+    <string name="shared_string_delete_file">Vymazať súbor</string>
+    <string name="shared_string_original">Originál</string>
+    <string name="shared_string_add_manually">Pridať ručne…</string>
+    <string name="sort_duration_ascending">Najkratšie trvanie nahor</string>
+    <string name="sort_duration_descending">Najdlhšie trvanie nahor</string>
+    <string name="sort_distance_ascending">Najkratšia vzdialenosť nahor</string>
+    <string name="sort_date_ascending">Najnovší dátum nahor</string>
+    <string name="shared_string_nearest">Najbližší</string>
+    <string name="cloud_version_confirm_delete">Vymazať \"%1$s\" z OsmAnd Cloud\?</string>
+    <string name="sort_distance_descending">Najdlhšia vzdialenosť nahor</string>
+    <string name="sort_date_descending">Najstarší dátum nahor</string>
+    <string name="local_version_do_not_exist">Neexistuje lokálna verzia.</string>
+    <string name="shared_string_in_progress">Prebieha</string>
+    <string name="movement_speed">Rýchlosť pohybu</string>
+    <string name="release_4_4">• Vylepšené menu \"Stopy\" v \"Nastaviť mapu\"
+\n
+\n • Kontextové menu teraz zobrazuje preložené názvy pre body záujmu
+\n
+\n • Pridaná možnosť zdieľať trasu pomocou linky
+\n
+\n • Pridaná jednotka dĺžky \"Námorné míle/stopu\"
+\n
+\n • V orientácii mapy pridaný nový pevný režim
+\n
+\n • Zjednodušená úvodná obrazovka
+\n
+\n • Pevné umiestnenie polohy v režime rozdelenej obrazovky v systéme Android Auto
+\n
+\n • Pridaný graf \"Rýchlosť/Sklon\" pre analýzu stopy
+\n
+\n • Systém Android 13 presunul výber jazyka aplikácie do systémových nastavení
+\n
+\n • Opravené chyby pri zobrazení miest pre vegánov
+\n
+\n</string>
 </resources>

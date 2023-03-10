@@ -50,7 +50,6 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
@@ -1092,6 +1091,7 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, "ic_action_bicycle_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "ic_action_pedestrian_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "ic_action_bus_dark");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.MOPED, "ic_action_motor_scooter");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BOAT, "ic_action_sail_boat_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.AIRCRAFT, "ic_action_aircraft");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.SKI, "ic_action_skiing");
@@ -1129,6 +1129,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.HORSE, "horsebackriding");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.MOPED, "moped");
 	}
 
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
@@ -1760,6 +1761,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
+	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;");
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
@@ -1774,14 +1776,20 @@ public class OsmandSettings {
 
 	@NonNull
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
-		String tileName = MAP_TILE_SOURCES.get();
+		ITileSource tileSource = getLayerTileSource(MAP_TILE_SOURCES, warnWhenSelected);
+		return tileSource != null ? tileSource : TileSourceManager.getMapnikSource();
+	}
+
+	@Nullable
+	public ITileSource getLayerTileSource(CommonPreference<String> layerSetting, boolean warnWhenSelected) {
+		String tileName = layerSetting.get();
 		if (tileName != null) {
-			ITileSource ts = getTileSourceByName(tileName, warnWhenSelected);
-			if (ts != null) {
-				return ts;
+			ITileSource tileSource = getTileSourceByName(tileName, warnWhenSelected);
+			if (tileSource != null) {
+				return tileSource;
 			}
 		}
-		return TileSourceManager.getMapnikSource();
+		return null;
 	}
 
 	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list) {
@@ -2059,6 +2067,7 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_ZOOM_FLOAT_PART = "last_known_map_zoom_float_part";
 
 	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
@@ -2166,6 +2175,14 @@ public class OsmandSettings {
 
 	public void setLastKnownMapZoom(int zoom) {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
+	}
+
+	public float getLastKnownMapZoomFloatPart() {
+		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_ZOOM_FLOAT_PART, 0.0f);
+	}
+
+	public void setLastKnownMapZoomFloatPart(float zoomFloatPart) {
+		settingsAPI.edit(globalPreferences).putFloat(LAST_KNOWN_MAP_ZOOM_FLOAT_PART, zoomFloatPart).commit();
 	}
 
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
@@ -2852,7 +2869,7 @@ public class OsmandSettings {
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();
 
 	public final OsmandPreference<Boolean> APPROXIMATE_BEARING =
-			new BooleanPreference(this, "approximate_bearing", true).makeProfile();
+			new BooleanPreference(this, "calculate_bearing", false).makeProfile();
 
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();

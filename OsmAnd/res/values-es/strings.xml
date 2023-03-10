@@ -190,9 +190,9 @@
     <string name="map_overlay">Mapa superpuesto</string>
     <string name="map_overlay_descr">Elige el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar.</string>
+    <string name="select_tile_source_to_install">Seleccionar las fuentes para los mapas de mosaicos:</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
-    <string name="install_more">Instalar más…</string>
+    <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
@@ -1730,7 +1730,7 @@
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
     <string name="lang_nds">Bajo Alemán</string>
@@ -2659,7 +2659,7 @@
     <string name="shared_string_dont">No</string>
     <string name="shared_string_do">Sí</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Descargar imágenes</string>
+    <string name="wikivoyage_download_pics">Descargar las imágenes</string>
     <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
 \nSiempre disponible en «Explorar» → «Opciones».</string>
     <string name="shared_string_wifi_only">Sólo con Wi-Fi</string>
@@ -4388,7 +4388,7 @@
     <string name="copying_file">Copiando archivo %1$s…</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="not_enough_contributions_descr">Necesitas un mínimo de %1$s cambios en el último bimestre %2$s para obtener acceso a actualizaciones ilimitadas de mapas por hora.</string>
-    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Archivo(s) %1$s procesado(s), %2$s</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_string_skip_warning">¿Omitir migración\? OsmAnd ya no tiene acceso a los archivos en el almacenamiento compartido.
@@ -4397,7 +4397,7 @@
     <string name="show_parameter_seekbar">Mostrar barra de búsqueda de parámetros</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
-    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
+    <string name="migration_files_present">%1$d archivo(s) (%2$s) ya presentes en el destino \'%3$s\' y no sobrescritos.</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="copying_completed">Copiado</string>
     <string name="shared_string_copy_to">Copiar a</string>
@@ -4752,7 +4752,7 @@
     <string name="next_turn_widget_desc">Muestra información sobre el próximo giro con una imagen de la maniobra y la distancia hasta ella.</string>
     <string name="download_complete">Descarga completa</string>
     <string name="map_widget_camera_distance">Elevación de la cámara</string>
-    <string name="map_widget_zoom_level">Nivel de zum</string>
+    <string name="map_widget_zoom_level">Nivel del zoom</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
     <string name="import_as_one_track">Importar como una traza</string>
     <string name="shared_string_large">Largo</string>
@@ -4980,7 +4980,6 @@
     <string name="mtb_segment_classification">Segmentación</string>
     <string name="mtb_scale">Escala MTB</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de las nubes</string>
-    
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolíneas de la velocidad del viento</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolíneas de las precipitaciones</string>
     <string name="shared_string_open">Abrir</string>
@@ -5056,4 +5055,46 @@
     <string name="show_all_tracks">Mostrar todas las vías</string>
     <string name="shared_string_kilograms">kilogramos</string>
     <string name="shared_string_yards">yardas</string>
+    <string name="approximate_bearing_descr">Obtenga el rumbo de la ruta de navegación que se está siguiendo.</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
+    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+\n
+\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n
+\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n
+\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n
+\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n
+\n• Se ha simplificado la pantalla de inicio
+\n
+\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n
+\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n
+\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n
+\n• Se han corregido problemas de visualización con los lugares veganos
+\n
+\n</string>
+    <string name="delete_cloud_version">Borrar la versión en la nube</string>
+    <string name="local_version_do_not_exist">No existe ninguna versión local.</string>
+    <string name="shared_string_in_progress">En curso</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidad del movimiento</string>
+    <string name="simulation_position_description">Seleccione un archivo de pista que se utilizará como fuente para mover la ubicación.</string>
+    <string name="cloud_version_confirm_delete">¿Borrar \"%1$s\" de OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Eliminar archivo</string>
+    <string name="shared_string_add_manually">Añadir manualmente…</string>
+    <string name="sort_duration_descending">Primero el de mayor duración</string>
+    <string name="sort_distance_ascending">La distancia más corta primero</string>
+    <string name="sort_distance_descending">La distancia más larga primero</string>
+    <string name="sort_date_ascending">La fecha más reciente primero</string>
+    <string name="shared_string_nearest">Más cerca</string>
+    <string name="sort_duration_ascending">Primero el de menor duración</string>
+    <string name="sort_date_descending">La fecha más antigua primero</string>
+    <string name="selected_value">Valor elegido</string>
 </resources>

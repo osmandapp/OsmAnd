@@ -56,7 +56,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				}
 				mSurface = surfaceContainer.getSurface();
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
-				darkMode = getApp().getDaynightHelper().isNightMode();
+				darkMode = mCarContext.isDarkMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
 					mapView.setupRenderingView();
@@ -229,8 +229,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		boolean nightMode = getApp().getDaynightHelper().isNightMode();
-		DrawSettings drawSettings = new DrawSettings(nightMode, false);
+		DrawSettings drawSettings = new DrawSettings(mCarContext.isDarkMode(), false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		try {
 			renderFrame(tileBox, drawSettings);
@@ -246,7 +245,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		}
 		Canvas canvas = mSurface.lockCanvas(null);
 		try {
-			boolean newDarkMode = getApp().getDaynightHelper().isNightMode();
+			boolean newDarkMode = mCarContext.isDarkMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);

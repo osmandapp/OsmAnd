@@ -3824,7 +3824,7 @@
     <string name="av_audio_format">Fformat allbwn sain</string>
     <string name="show_on_start_description">Mae \'Diffodd\' yn agor y map yn uniongyrchol.</string>
     <string name="copied_to_clipboard">Wedi\'i gopïo i\'r clipfwrdd</string>
-    <string name="rendering_attr_hideProposed_name">Gwrthrychau arfaethedig</string>
+    <string name="rendering_attr_showProposed_name">Gwrthrychau arfaethedig</string>
     <string name="simulate_initial_startup_descr">Yn gosod y faner sy\'n nodi cychwyn cyntaf yr ap, yn cadw\'r holl leoliadau eraill heb eu newid.</string>
     <string name="simulate_initial_startup">Efelychu cychwyn cyntaf ap</string>
     <string name="favorite_category_dublicate_message">Defnyddia enw categori nad yw\'n bodoli eisoes.</string>
