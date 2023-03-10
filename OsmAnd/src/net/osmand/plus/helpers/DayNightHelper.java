@@ -76,16 +76,10 @@ public class DayNightHelper implements SensorEventListener {
 	private boolean lastNightMode;
 	private StateChangedListener<Boolean> sensorStateListener;
 
-	private MapActivity mapActivity;
-
-	public void setMapActivity(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-	}
-
 	public void setupLocationListener() {
 		locationListener = location -> {
 			resetLastTime();
-			mapActivity.refreshMap();
+			app.getOsmandMap().refreshMap();
 			app.getLocationProvider().removeLocationListener(locationListener);
 		};
 

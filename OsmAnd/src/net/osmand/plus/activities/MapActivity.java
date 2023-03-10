@@ -325,7 +325,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 
-		app.getDaynightHelper().setMapActivity(this);
 		app.getDaynightHelper().setupLocationListener();
 
 		PluginsHelper.onMapActivityCreate(this);
