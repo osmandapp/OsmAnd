@@ -222,13 +222,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean wasZoomInMultiTouch;
 	private float elevationAngle;
 
-	public OsmandMapTileView(@NonNull Context ctx, int w, int h) {
+	public OsmandMapTileView(@NonNull Context ctx, int width, int height) {
 		this.ctx = ctx;
-		init(ctx, w, h);
+		init(ctx, width, height);
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void init(@NonNull Context ctx, int w, int h) {
+	public void init(@NonNull Context ctx, int width, int height) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
 
@@ -274,7 +274,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				.setZoom(settings.getLastKnownMapZoom())
 				.setZoomFloatPart(settings.getLastKnownMapZoomFloatPart())
 				.setRotate(settings.getLastKnownMapRotation())
-				.setPixelDimensions(w, h)
+				.setPixelDimensions(width, height)
 				.build();
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
