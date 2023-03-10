@@ -42,6 +42,10 @@ public class WeatherIndexItem extends IndexItem {
 	}
 
 	public long getDataExpireTime() {
-		return WEEK_IN_MILLIS + (isDownloaded() ? getLocalTimestamp() : getTimestamp());
+		long downloadTime = getLocalTimestamp();
+		if (!isDownloaded() || downloadTime == 0) {
+			downloadTime = getTimestamp();
+		}
+		return downloadTime + WEEK_IN_MILLIS;
 	}
 }
