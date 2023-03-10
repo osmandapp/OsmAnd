@@ -81,6 +81,18 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
 						+ stableArea + " visibleArea:" + visibleArea);
 				SurfaceRenderer.this.visibleArea = visibleArea;
+				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+				if (!visibleArea.isEmpty() && mapView != null) {
+					int visibleAreaWidth = visibleArea.width();
+					int containerWidth = surfaceContainer.getWidth();
+
+					float ratioX = 0;
+					if ((float) containerWidth / visibleAreaWidth > VISIBLE_AREA_MIN_DETECTION_SIZE) {
+						int centerX = visibleArea.centerX();
+						ratioX = (float) centerX / containerWidth;
+					}
+					mapView.setCustomMapRatio(ratioX, 0);
+				}
 				renderFrame();
 			}
 		}
@@ -105,6 +117,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				}
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
+					mapView.restoreMapRatio();
 					mapView.setupRenderingView();
 				}
 			}
