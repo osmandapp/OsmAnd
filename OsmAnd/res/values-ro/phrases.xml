@@ -4488,4 +4488,14 @@
     <string name="poi_socket_cee_red_32a_voltage">Mufă: CEE roșu 32A: tensiune</string>
     <string name="poi_socket_nema_5_20_voltage">Mufă: NEMA 5-20: tensiune</string>
     <string name="poi_socket_type2_cable_voltage_low">Joasă</string>
+    <string name="poi_recycling_plastic_bottle_caps">Capace de sticle de plastic</string>
+    <string name="poi_recycling_pet_drink_bottles">Sticle pentru băuturi din PET</string>
+    <string name="poi_recycling_textiles">Textile</string>
+    <string name="poi_self_checkout">Autoservire</string>
+    <string name="poi_recycling_aluminium_cans">Conserve de aluminiu</string>
+    <string name="poi_self_checkout_no">Autoservire: nu</string>
+    <string name="poi_self_checkout_yes">Da</string>
+    <string name="poi_self_checkout_only">Doar</string>
+    <string name="poi_lifeguard">Salvamar</string>
+    <string name="poi_lifeguard_tower">Turn de salvare</string>
 </resources>

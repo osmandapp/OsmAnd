@@ -5067,7 +5067,7 @@
     <string name="shared_string_in_progress">A decorrer</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Velocidade do movimento</string>
-    <string name="simulation_position_description">Selecione um ficheiro de um trilho para usar como orientação do movimento.</string>
+    <string name="simulation_position_description">Selecione um ficheiro de trilho que será usado como uma fonte para a movimentação do local.</string>
     <string name="shared_string_add_manually">Adicionar manualmente…</string>
     <string name="release_4_4">• Menu \"Trilhos\" em \"Configurar mapa\" melhorado
 \n

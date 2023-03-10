@@ -4432,7 +4432,7 @@
     <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
     <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta, anche tutti i gruppi lo saranno.</string>
     <string name="shared_string_hide_all">Nascondi tutto</string>
-    <string name="migration_files_present">Ci sono %1$d file (%2$s) nella posizione selezionata \'%3$s\'.</string>
+    <string name="migration_files_present">Ci sono %1$d file (%2$s) già presenti nella destinazione \'%3$s\' e non sovrascritti.</string>
     <string name="exit_without_saving_warning">Uscire senza salvare le modifiche\?</string>
     <string name="shared_string_show_slope">Mostra pendenza</string>
     <string name="shared_string_hide_slope">Nascondi pendenza</string>
@@ -5053,7 +5053,7 @@
     <string name="shared_string_in_progress">In corso</string>
     <string name="shared_string_original">Originale</string>
     <string name="movement_speed">Velocità del movimento</string>
-    <string name="simulation_position_description">Seleziona un file di traccia da utilizzare come guida del movimento.</string>
+    <string name="simulation_position_description">Seleziona un file di traccia che verrà utilizzato come origine per lo spostamento della posizione.</string>
     <string name="shared_string_add_manually">Aggiungi manualmente…</string>
     <string name="release_4_4">• Menu \"Tracce\" migliorato in \"Configura mappa\"
 \n
@@ -5076,4 +5076,12 @@
 \n • Risolti i problemi con la visualizzazione dei luoghi vegani
 \n
 \n</string>
+    <string name="sort_duration_ascending">Prima durata più breve</string>
+    <string name="sort_duration_descending">Prima la durata più lunga</string>
+    <string name="sort_distance_ascending">Prima la distanza più breve</string>
+    <string name="sort_distance_descending">Prima la distanza più lunga</string>
+    <string name="sort_date_ascending">Prima la data più recente</string>
+    <string name="sort_date_descending">Prima la data meno recente</string>
+    <string name="shared_string_nearest">Più vicino</string>
+    <string name="selected_value">Valore selezionato</string>
 </resources>

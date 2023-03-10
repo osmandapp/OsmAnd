@@ -798,11 +798,11 @@
     <!-- string name="search_tabs_location">Position</string -->
     <string name="context_menu_item_update_map">Karte aktualisieren</string>
     <string name="context_menu_item_create_poi">POI erstellen</string>
-    <string name="shared_string_yes">ja</string>
+    <string name="shared_string_yes">Ja</string>
     <string name="shared_string_cancel">Abbrechen</string>
     <string name="shared_string_apply">Anwenden</string>
     <string name="shared_string_add">Hinzufügen</string>
-    <string name="shared_string_no">nein</string>
+    <string name="shared_string_no">Nein</string>
     <string name="add_favorite_dialog_top_text">Favorit benennen</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
     <string name="add_favorite_dialog_favourite_added_template">Favorit \'\'{0}\'\' hinzugefügt.</string>
@@ -5072,14 +5072,14 @@
     <string name="shared_string_in_progress">In Arbeit</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Bewegungsgeschwindigkeit</string>
-    <string name="simulation_position_description">Wählen Sie eine Track-Datei aus, die als Bewegungsführung verwendet werden soll.</string>
+    <string name="simulation_position_description">Wählen Sie eine Trackdatei aus, die als Quelle für die Veränderung des Standorts verwendet werden soll.</string>
     <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
 \n
 \n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
 \n
 \n - Option zum Teilen der Route per Link hinzugefügt
 \n
-\n - Die Längeneinheit \"Nautische Meilen/Fuß\" wurde zugefügt
+\n - Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
 \n
 \n - Die Kartenausrichtung wurde um einen festen Modus erweitert.
 \n

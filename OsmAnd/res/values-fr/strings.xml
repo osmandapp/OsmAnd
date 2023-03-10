@@ -527,7 +527,7 @@
     <string name="choose_intersected_street">Sélectionnez une intersection</string>
     <string name="Closest_Amenities">Équipements à proximité</string>
     <string name="app_mode_default">Parcourir la carte</string>
-    <string name="app_mode_car">En voiture</string>
+    <string name="app_mode_car">Voiture</string>
     <string name="app_mode_bicycle">Vélo</string>
     <string name="app_mode_pedestrian">À pied</string>
     <string name="position_on_map_center">Centre</string>
@@ -2486,7 +2486,7 @@
     <string name="add_location_as_first_point_descr">Ajoutez votre position comme point de départ pour calculer l\'itinéraire.</string>
     <string name="my_location">Ma position</string>
     <string name="shared_string_finish">Terminer</string>
-    <string name="plan_route">Créer une trace</string>
+    <string name="plan_route">Ajouter une trace</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
@@ -3680,7 +3680,7 @@
     <string name="app_mode_wheelchair_forward">Fauteuil roulant vers l\'avant</string>
     <string name="set_working_days_to_continue">Définissez les jours travaillés pour continuer</string>
     <string name="route_between_points">Itinéraire entre points</string>
-    <string name="plan_a_route">Créer une trace</string>
+    <string name="plan_a_route">Ajouter une trace</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
@@ -5060,4 +5060,7 @@
     <string name="shared_string_delete_file">Supprimer le fichier</string>
     <string name="delete_cloud_version">Supprimer le fichier Cloud</string>
     <string name="local_version_do_not_exist">Aucune version locale</string>
+    <string name="simulation_position_description">Sélectionnez un fichier trace à utiliser pour simuler le déplacement.</string>
+    <string name="approximate_bearing">Cap approximatif</string>
+    <string name="approximate_bearing_descr">Estimer le cap à partir de l’itinéraire suivi.</string>
 </resources>

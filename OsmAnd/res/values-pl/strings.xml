@@ -4974,7 +4974,6 @@
     <string name="mtb_segment_classification">Klasyfikacja segmentów</string>
     <string name="mtb_imba_full">Międzynarodowe Stowarzyszenie Kolarstwa Górskiego (IMBA)</string>
     <string name="av_audio_format_bottom_sheet_descr">Wybierz format wyjścia dźwięku. Typ pliku dźwięku to 3GPP (.3gp).</string>
-    
     <string name="choose_what_to_sync">Wybierz co synchronizować</string>
     <string name="cloud_sync_progress">Synchronizacja…%1$s</string>
     <string name="checking_progress">Sprawdzanie…</string>
@@ -5038,4 +5037,11 @@
     <string name="shared_string_yards">jardów</string>
     <string name="shared_string_apply_changes">Zatwierdź zmiany</string>
     <string name="shared_string_kilograms">kilogramów</string>
+    <string name="sort_duration_ascending">Krótkotrwały</string>
+    <string name="selected_value">Wybrana wartość</string>
+    <string name="shared_string_add_manually">Dodaj ręcznie…</string>
+    <string name="cloud_version_confirm_delete">Usunąć \"%1$s\" z OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Usuń plik</string>
+    <string name="local_version_do_not_exist">Brak wersji lokalnej.</string>
+    <string name="shared_string_original">Oryginalny</string>
 </resources>
