@@ -9,13 +9,13 @@ import android.hardware.SensorManager;
 import android.location.LocationManager;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Lifecycle.State;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -50,27 +50,50 @@ public class DayNightHelper implements SensorEventListener {
 	
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final StateChangedListener<DayNightMode> stateChangedListener = new StateChangedListener<DayNightMode>() {
+		@Override
+		public void stateChanged(DayNightMode dayNightMode) {
+			if (dayNightMode.isAuto()) {
+				setupLocationListener();
+				resetLastTime();
+			} else {
+				app.getLocationProvider().removeLocationListener(locationListener);
+			}
+		}
+	};
 
 	public DayNightHelper(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
+		settings.DAYNIGHT_MODE.addListener(stateChangedListener);
 	}
 
 	private DayNightHelper listener;
+	private OsmAndLocationProvider.OsmAndLocationListener locationListener;
 	private MapThemeProvider mapThemeProvider;
 
 	private long lastTime;
 	private boolean lastNightMode;
 	private StateChangedListener<Boolean> sensorStateListener;
 
-	private boolean firstCheck = true;
-	public boolean isFirstCheck() {
-		return firstCheck;
+	private MapActivity mapActivity;
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 
-	public void setFirstCheck(boolean firstCheck) {
-		this.firstCheck = firstCheck;
+	public void setupLocationListener() {
+		locationListener = location -> {
+			resetLastTime();
+			mapActivity.refreshMap();
+			app.getLocationProvider().removeLocationListener(locationListener);
+		};
+
+		if (settings.DAYNIGHT_MODE.get().isAuto()) {
+			app.getLocationProvider().addLocationListener(locationListener);
+		}
 	}
+
 	public boolean isNightModeForMapControls() {
 		return isNightModeForMapControlsForProfile(settings.APPLICATION_MODE.get());
 	}
@@ -83,22 +106,8 @@ public class DayNightHelper implements SensorEventListener {
 		}
 	}
 
-	public void recalculateLastNightMode() {
-		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.getModeValue(settings.APPLICATION_MODE.get());
-		if (dayNightMode.isAuto()) { // We are in auto mode!
-			try {
-				SunriseSunset daynightSwitch = getSunriseSunset();
-				if (daynightSwitch != null) {
-					boolean daytime = daynightSwitch.isDaytime();
-					log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
-					lastNightMode = !daytime;
-				}
-			} catch (IllegalArgumentException e) {
-				log.warn("Network location provider not available"); //$NON-NLS-1$
-			} catch (SecurityException e) {
-				log.warn("Missing permissions to get actual location!"); //$NON-NLS-1$
-			}
-		}
+	private void resetLastTime() {
+		lastTime = 0;
 	}
 
 	/**
