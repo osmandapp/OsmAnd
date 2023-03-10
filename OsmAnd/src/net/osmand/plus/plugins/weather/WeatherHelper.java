@@ -20,7 +20,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.weather.containers.WeatherCacheSize;
+import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -45,14 +45,15 @@ public class WeatherHelper {
 	private final OfflineForecastHelper offlineForecastHelper;
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
-	private final WeatherCacheSize weatherCacheSize = new WeatherCacheSize();
+	private final WeatherTotalCacheSize totalCacheSize;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
 
 	public WeatherHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.weatherSettings = new WeatherSettings(app);
-		this.offlineForecastHelper = new OfflineForecastHelper(app, weatherCacheSize);
+		this.offlineForecastHelper = new OfflineForecastHelper(app);
+		this.totalCacheSize = offlineForecastHelper.getTotalCacheSize();
 
 		weatherBands.put(WEATHER_BAND_TEMPERATURE, WeatherBand.withWeatherBand(app, WEATHER_BAND_TEMPERATURE));
 		weatherBands.put(WEATHER_BAND_PRESSURE, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRESSURE));
@@ -128,7 +129,7 @@ public class WeatherHelper {
 	}
 
 	public void clearOutdatedCache() {
-		weatherCacheSize.reset();
+		totalCacheSize.reset();
 
 		Date date = OsmAndFormatter.getStartOfToday();
 		long dateTime = date.getTime();

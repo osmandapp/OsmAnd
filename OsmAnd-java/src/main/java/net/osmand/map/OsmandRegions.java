@@ -449,6 +449,14 @@ public class OsmandRegions {
 		return mapIndexFields.get(mapIndexFields.fullNameType, o);
 	}
 
+	public List<String> getFlattenedWorldRegionIds() {
+		List<String> regionIds = new ArrayList<>();
+		for (WorldRegion region : getFlattenedWorldRegions()) {
+			regionIds.add(region.getRegionId());
+		}
+		return regionIds;
+	}
+
 	public List<WorldRegion> getFlattenedWorldRegions() {
 		List<WorldRegion> result = new ArrayList<>();
 		result.add(getWorldRegion());

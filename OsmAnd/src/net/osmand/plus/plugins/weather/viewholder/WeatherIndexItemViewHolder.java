@@ -1,11 +1,11 @@
-package net.osmand.plus.plugins.weather.dialogs;
+package net.osmand.plus.plugins.weather.viewholder;
 
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
-import static net.osmand.plus.plugins.weather.dialogs.ViewHolderState.DOWNLOADED;
-import static net.osmand.plus.plugins.weather.dialogs.ViewHolderState.DOWNLOAD_IN_PROGRESS;
-import static net.osmand.plus.plugins.weather.dialogs.ViewHolderState.NEW;
-import static net.osmand.plus.plugins.weather.dialogs.ViewHolderState.REMOVE_IN_PROGRESS;
+import static net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder.ViewHolderState.DOWNLOADED;
+import static net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder.ViewHolderState.DOWNLOAD_IN_PROGRESS;
+import static net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder.ViewHolderState.NEW;
+import static net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder.ViewHolderState.REMOVE_IN_PROGRESS;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -60,6 +60,10 @@ public class WeatherIndexItemViewHolder {
 	private final ImageView ivSecIcon;
 	private final ProgressBar pbProgress;
 	private ViewHolderState currentState;
+
+	public enum ViewHolderState {
+		NEW, DOWNLOAD_IN_PROGRESS, REMOVE_IN_PROGRESS, DOWNLOADED
+	}
 
 	public WeatherIndexItemViewHolder(@NonNull FragmentActivity activity, @NonNull ApplicationMode appMode,
 	                                  @NonNull WeatherIndexItem indexItem, boolean nightMode, boolean showDivider) {

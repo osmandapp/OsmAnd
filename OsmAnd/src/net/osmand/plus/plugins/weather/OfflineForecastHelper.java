@@ -21,7 +21,6 @@ import android.text.format.DateUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.OnCompleteCallback;
 import net.osmand.PlatformUtil;
@@ -37,6 +36,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager.IDownloadGeoTilesAsyncCal
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_IQueryController;
 import net.osmand.data.QuadRect;
+import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -45,11 +45,13 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.containers.OfflineForecastInfo;
-import net.osmand.plus.plugins.weather.containers.WeatherCacheSize;
+import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
+import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize.ResetWeatherTotalCacheSizeListener;
 import net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState;
 import net.osmand.plus.plugins.weather.enums.WeatherForecastUpdatesFrequency;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.plugins.weather.listener.WeatherCacheSizeChangeListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
@@ -69,7 +71,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OfflineForecastHelper {
+public class OfflineForecastHelper implements ResetWeatherTotalCacheSizeListener {
 
 	private static final Log LOG = PlatformUtil.getLog(OfflineForecastHelper.class);
 
@@ -83,19 +85,23 @@ public class OfflineForecastHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final WeatherCacheSize weatherCacheSize;
-	private final Map<String, WeatherIndexItem> cachedWeatherIndexes;
-	private List<String> regionsRemoveInProgress = new ArrayList<>();
-	private List<RemoveLocalForecastListener> removeLocalForecastListeners = new ArrayList<>();
 	private WeatherTileResourcesManager weatherResourcesManager;
-	private final Map<String, OfflineForecastInfo> offlineForecastInfo;
 
-	public OfflineForecastHelper(@NonNull OsmandApplication app, @NonNull WeatherCacheSize weatherCacheSize) {
+	private final Map<String, OfflineForecastInfo> offlineForecastInfo;
+	private final Map<String, WeatherIndexItem> cachedWeatherIndexes;
+	private final WeatherTotalCacheSize totalCacheSize;
+	private List<WeatherCacheSizeChangeListener> weatherCacheSizeChangeListeners = new ArrayList<>();
+	private boolean clearOnlineCacheInProgress;
+	private boolean totalCacheSizeCalculationInProgress;
+	private List<RemoveLocalForecastListener> removeLocalForecastListeners = new ArrayList<>();
+	private List<String> regionsRemoveInProgress = new ArrayList<>();
+
+	public OfflineForecastHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		cachedWeatherIndexes = new HashMap<>();
 		offlineForecastInfo = new HashMap<>();
-		this.weatherCacheSize = weatherCacheSize;
+		this.totalCacheSize = new WeatherTotalCacheSize(this);
 	}
 
 	public void setWeatherResourcesManager(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
@@ -232,7 +238,7 @@ public class OfflineForecastHelper {
 	}
 
 	public void prepareToStopDownloading(@NonNull String regionId) {
-		weatherCacheSize.reset(true);
+		totalCacheSize.reset(true);
 		if (isDownloadStateInProgress(regionId)) {
 			setPreferenceDownloadState(regionId, UNDEFINED);
 			if (getPreferenceLastUpdate(regionId) == -1) {
@@ -273,7 +279,7 @@ public class OfflineForecastHelper {
 			if (!qTileIds.isEmpty()) {
 				long localSize = weatherResourcesManager.calculateDbCacheSize(qTileIds, new TileIdList(), zoom).longValue();
 				setOfflineForecastSizeInfo(regionId, localSize, true);
-				setOfflineForecastSizeInfo(regionId, calculateUpdatesSize(tileIds), false);
+				setOfflineForecastSizeInfo(regionId, calculateApproxUpdatesSize(tileIds), false);
 				setOfflineForecastSizesInfoCalculated(regionId, true);
 			}
 			runInUiThread(() -> {
@@ -284,52 +290,129 @@ public class OfflineForecastHelper {
 		});
 	}
 
-	public void calculateFullCacheSize(boolean localData, CallbackWithObject<Long> callback) {
+	private int calculateApproxUpdatesSize(@NonNull List<Long> tileIds) {
+		return tileIds.size() * FORECAST_DATES_COUNT * TILE_SIZE;
+	}
+
+	public void calculateTotalCacheSizeAsync(boolean forceCalculation) {
+		if ((totalCacheSize.isCalculated() && !forceCalculation)) {
+			// calculation is not required
+			return;
+		}
+		if (isTotalCacheSizeCalculationInProgress() || isClearOnlineCacheInProgress()) {
+			return;
+		}
 		runAsync(() -> {
-			List<Long> tileIds = getOfflineTileIds(null);
-			TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
-			ZoomLevel zoom = getGeoTileZoom();
-			long size = weatherCacheSize.get(localData);
-			if (size == 0 && (!localData || !qTileIds.isEmpty())) {
-				size = weatherResourcesManager.calculateDbCacheSize(
-						localData ? qTileIds : new TileIdList(),
-						localData ? new TileIdList() : qTileIds,
-						zoom
-				).longValue();
-				weatherCacheSize.set(size, localData);
+			totalCacheSizeCalculationInProgress = true;
+			notifyOnWeatherCacheSizeChanged();
+
+			calculateTotalCacheSize(false, forceCalculation);
+			calculateTotalCacheSize(true, forceCalculation);
+
+			totalCacheSizeCalculationInProgress = false;
+			notifyOnWeatherCacheSizeChanged();
+		});
+	}
+
+	private void calculateTotalCacheSize(boolean forLocal, boolean forceCalculation) {
+		List<Long> offlineTileIds = getOfflineTileIds();
+		TileIdList qOfflineTileIds = NativeUtilities.convertToQListTileIds(offlineTileIds);
+		ZoomLevel zoom = getGeoTileZoom();
+		if (!totalCacheSize.isCalculated(forLocal) || forceCalculation) {
+			if (forLocal && qOfflineTileIds.isEmpty()) {
+				// skip calculation if no offline tiles are downloaded
+				totalCacheSize.set(0, true);
+			} else {
+				TileIdList tileIds = forLocal ? qOfflineTileIds : new TileIdList();
+				TileIdList excludeIds = forLocal ? new TileIdList() : qOfflineTileIds;
+				long size = weatherResourcesManager.calculateDbCacheSize(tileIds, excludeIds, zoom).longValue();
+				totalCacheSize.set(size, forLocal);
 			}
-			if (callback != null) {
-				callback.processResult(size);
+		}
+		// notify after cache was calculated
+		notifyOnWeatherCacheSizeChanged();
+	}
+
+	public boolean isTotalCacheSizeCalculationInProgress() {
+		return totalCacheSizeCalculationInProgress;
+	}
+
+	public void clearOnlineCacheAsync() {
+		runAsync(this::clearOnlineCache);
+	}
+
+	private void clearOnlineCache() {
+		clearOnlineCacheInProgress = true;
+		totalCacheSize.reset(false);
+
+		List<Long> offlineTileIds = getOfflineTileIds();
+		TileIdList qOfflineTileIds = NativeUtilities.convertToQListTileIds(offlineTileIds);
+		ZoomLevel zoom = getGeoTileZoom();
+		// remove all tiles except related to offline weather forecast
+		weatherResourcesManager.clearDbCache(new TileIdList(), qOfflineTileIds, zoom);
+		runInUiThread(this::updateWeatherLayers);
+
+		clearOnlineCacheInProgress = false;
+		notifyOnWeatherCacheSizeChanged();
+	}
+
+	public void clearOfflineCacheAsync(@Nullable List<String> regionIds) {
+		runAsync(() -> clearOfflineCache(regionIds));
+	}
+
+	private void clearOfflineCache(@Nullable List<String> regionIds) {
+		if (Algorithms.isEmpty(regionIds)) {
+			regionIds = getTempForecastsWithDownloadStates(IN_PROGRESS, FINISHED);
+		}
+		for (String regionId : regionIds) {
+			setOfflineForecastSizeInfo(regionId, 0, true);
+			prepareToStopDownloading(regionId);
+		}
+		totalCacheSize.reset(true);
+
+		List<Long> offlineTileIds = getOfflineTileIds(regionIds);
+		TileIdList qOfflineTileIds = NativeUtilities.convertToQListTileIds(offlineTileIds);
+		ZoomLevel zoom = getGeoTileZoom();
+		weatherResourcesManager.clearDbCache(qOfflineTileIds, new TileIdList(), zoom);
+		runInUiThread(this::updateWeatherLayers);
+	}
+
+	public boolean canClearOnlineCache() {
+		if (!isClearOnlineCacheInProgress()) {
+			return totalCacheSize.isCalculated(false)
+					&& totalCacheSize.get(false) > 0;
+		}
+		return false;
+	}
+
+	@NonNull
+	public WeatherTotalCacheSize getTotalCacheSize() {
+		return totalCacheSize;
+	}
+
+	public boolean isClearOnlineCacheInProgress() {
+		return clearOnlineCacheInProgress;
+	}
+
+	@Override
+	public void onResetWeatherTotalCacheSize() {
+		notifyOnWeatherCacheSizeChanged();
+	}
+
+	public void notifyOnWeatherCacheSizeChanged() {
+		runInUiThread(() -> {
+			for (WeatherCacheSizeChangeListener listener : weatherCacheSizeChangeListeners) {
+				listener.onWeatherCacheSizeChanged();
 			}
 		});
 	}
 
-	private int calculateUpdatesSize(@NonNull List<Long> tileIds) {
-		int tilesCount = tileIds.size();
-		return tilesCount * FORECAST_DATES_COUNT * TILE_SIZE;
+	public void registerWeatherCacheSizeChangeListener(@NonNull WeatherCacheSizeChangeListener listener) {
+		weatherCacheSizeChangeListeners = Algorithms.addToList(weatherCacheSizeChangeListeners, listener);
 	}
 
-	public void clearCache(boolean localData, @NonNull List<String> regionIds) {
-		if (localData) {
-			if (Algorithms.isEmpty(regionIds)) {
-				regionIds = getTempForecastsWithDownloadStates(IN_PROGRESS, FINISHED);
-			}
-			for (String regionId : regionIds) {
-				setOfflineForecastSizeInfo(regionId, 0, true);
-				prepareToStopDownloading(regionId);
-			}
-		}
-		weatherCacheSize.reset(false);
-
-		List<Long> tileIds = getOfflineTileIds(regionIds);
-		TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
-		ZoomLevel zoom = getGeoTileZoom();
-		weatherResourcesManager.clearDbCache(
-				localData ? qTileIds : new TileIdList(),
-				localData ? new TileIdList() : qTileIds,
-				zoom
-		);
-		runInUiThread(this::updateWeatherLayers);
+	public void unregisterWeatherCacheSizeChangeListener(@NonNull WeatherCacheSizeChangeListener listener) {
+		weatherCacheSizeChangeListeners = Algorithms.removeFromList(weatherCacheSizeChangeListeners, listener);
 	}
 
 	public void removeLocalForecastAsync(@NonNull String regionId, boolean refreshMap, boolean notifyUserOnFinish) {
@@ -343,7 +426,7 @@ public class OfflineForecastHelper {
 		// notify before remove and after region ids were registered
 		runInUiThread(this::notifyOnRemoveLocalForecastEvent);
 
-		weatherCacheSize.reset();
+		totalCacheSize.reset();
 		List<Long> tileIds = new ArrayList<>();
 		for (String regionId : regionIds) {
 			List<Long> regionTileIds = getTileIds(regionId);
@@ -357,7 +440,7 @@ public class OfflineForecastHelper {
 			}
 			removePreferences(regionId);
 			removeOfflineForecastInfo(regionId);
-			setOfflineForecastSizeInfo(regionId, calculateUpdatesSize(regionTileIds), false);
+			setOfflineForecastSizeInfo(regionId, calculateApproxUpdatesSize(regionTileIds), false);
 		}
 
 		TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
@@ -389,8 +472,8 @@ public class OfflineForecastHelper {
 	}
 
 	public void notifyOnRemoveLocalForecastEvent() {
-		for (RemoveLocalForecastListener callback : removeLocalForecastListeners) {
-			callback.onRemoveLocalForecastEvent();
+		for (RemoveLocalForecastListener listener : removeLocalForecastListeners) {
+			listener.onRemoveLocalForecastEvent();
 		}
 	}
 
@@ -400,6 +483,10 @@ public class OfflineForecastHelper {
 
 	public void unregisterRemoveLocalForecastListener(@NonNull RemoveLocalForecastListener listener) {
 		removeLocalForecastListeners = Algorithms.removeFromList(removeLocalForecastListeners, listener);
+	}
+
+	public List<Long> getOfflineTileIds() {
+		return getOfflineTileIds(null);
 	}
 
 	@NonNull
@@ -466,12 +553,17 @@ public class OfflineForecastHelper {
 	public List<String> getTempForecastsWithDownloadStates(@NonNull WeatherForecastDownloadState... states) {
 		List<String> forecasts = new ArrayList<>();
 		List<WeatherForecastDownloadState> statesList = Arrays.asList(states);
-		for (String regionId : offlineForecastInfo.keySet()) {
+		for (String regionId : getFlattenedWorldRegionIds()) {
 			if (statesList.contains(getPreferenceDownloadState(regionId))) {
 				forecasts.add(regionId);
 			}
 		}
 		return forecasts;
+	}
+
+	private List<String> getFlattenedWorldRegionIds() {
+		OsmandRegions regions = app.getRegions();
+		return regions.getFlattenedWorldRegionIds();
 	}
 
 	public void removeOfflineForecastInfo(@NonNull String regionId) {
@@ -566,7 +658,7 @@ public class OfflineForecastHelper {
 			setPreferenceDownloadState(regionId, FINISHED);
 			long lastUpdateTime = getTimeForTimeZone(System.currentTimeMillis(), "GMT").getTime();
 			setPreferenceLastUpdate(regionId, lastUpdateTime);
-			weatherCacheSize.reset();
+			totalCacheSize.reset();
 
 			runInUiThread(() -> {
 				updateWeatherLayers();

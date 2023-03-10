@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="clear_online_cache_description">This will clear all cache for online weather tile.</string>
+    <string name="clear_online_cache">Clear online cache</string>
+    <string name="offline_cache">Offline cache</string>
     <string name="cloud_version_confirm_delete">Delete \"%1$s\" from OsmAnd Cloud?</string>
     <string name="shared_string_delete_file">Delete file</string>
     <string name="delete_cloud_version">Delete cloud version</string>

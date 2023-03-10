@@ -52,7 +52,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.plugins.weather.dialogs.WeatherIndexItemViewHolder;
+import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;

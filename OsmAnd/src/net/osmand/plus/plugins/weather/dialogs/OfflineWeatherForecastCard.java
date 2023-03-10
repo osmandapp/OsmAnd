@@ -14,6 +14,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
