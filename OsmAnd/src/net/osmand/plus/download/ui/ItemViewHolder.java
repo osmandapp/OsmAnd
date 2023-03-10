@@ -217,8 +217,8 @@ public class ItemViewHolder {
 		}
 		tvDesc.setTextColor(textColorSecondary);
 
-		if (isWeatherItemInRemoveProcess(downloadItem)) {
-			bindAsWeatherItemInRemoveProcess();
+		if (isWeatherItemInRemovingProcess(downloadItem)) {
+			bindAsWeatherItemInRemovingProcess();
 			return;
 		}
 
@@ -328,7 +328,7 @@ public class ItemViewHolder {
 		}
 	}
 
-	private boolean isWeatherItemInRemoveProcess(@NonNull DownloadItem downloadItem) {
+	private boolean isWeatherItemInRemovingProcess(@NonNull DownloadItem downloadItem) {
 		if (downloadItem instanceof WeatherIndexItem) {
 			OsmandApplication app = context.getMyApplication();
 			WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
@@ -338,7 +338,7 @@ public class ItemViewHolder {
 		return false;
 	}
 
-	private void bindAsWeatherItemInRemoveProcess() {
+	private void bindAsWeatherItemInRemovingProcess() {
 		tvDesc.setVisibility(View.GONE);
 		pbProgress.setVisibility(View.VISIBLE);
 		pbProgress.setIndeterminate(true);
@@ -426,7 +426,7 @@ public class ItemViewHolder {
 	}
 
 	public OnClickListener getRightButtonAction(DownloadItem item, RightButtonAction clickAction) {
-		if (isWeatherItemInRemoveProcess(item)) {
+		if (isWeatherItemInRemovingProcess(item)) {
 			// empty listener
 			return v -> {};
 		} else if (clickAction != RightButtonAction.DOWNLOAD) {
