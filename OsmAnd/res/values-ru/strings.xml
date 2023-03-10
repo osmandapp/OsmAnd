@@ -5089,4 +5089,13 @@
 \n
 \n</string>
     <string name="shared_string_add_manually">Добавить вручную…</string>
+    <string name="sort_duration_descending">Сначала более продолжительные</string>
+    <string name="sort_distance_ascending">Сначала более короткие</string>
+    <string name="sort_distance_descending">Сначала более длинные</string>
+    <string name="shared_string_in_progress">В процессе</string>
+    <string name="selected_value">Выбранное значение</string>
+    <string name="sort_date_ascending">Сначала свежие</string>
+    <string name="sort_date_descending">Сначала старые</string>
+    <string name="shared_string_nearest">Ближайшие</string>
+    <string name="sort_duration_ascending">Сначала менее продолжительные</string>
 </resources>
