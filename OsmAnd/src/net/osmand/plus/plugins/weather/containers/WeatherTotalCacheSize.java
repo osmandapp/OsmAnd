@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 
 public class WeatherTotalCacheSize {
 
-	private final ResetWeatherTotalCacheSizeListener resetSizeListener;
+	private final ResetTotalWeatherCacheSizeListener resetSizeListener;
 	private long onlineCacheSize = 0;
 	private long offlineCacheSize = 0;
 	private boolean onlineCacheCalculated;
 	private boolean offlineCacheCalculated;
 
-	public WeatherTotalCacheSize(@NonNull ResetWeatherTotalCacheSizeListener resetSizeListener) {
+	public WeatherTotalCacheSize(@NonNull ResetTotalWeatherCacheSizeListener resetSizeListener) {
 		this.resetSizeListener = resetSizeListener;
 	}
 
@@ -24,10 +24,6 @@ public class WeatherTotalCacheSize {
 
 	public boolean isCalculated(boolean forLocal) {
 		return forLocal ? offlineCacheCalculated : onlineCacheCalculated;
-	}
-
-	public boolean isOfflineCacheCalculated() {
-		return offlineCacheCalculated;
 	}
 
 	public void set(long size, boolean forLocal) {
@@ -45,7 +41,7 @@ public class WeatherTotalCacheSize {
 		onlineCacheSize = 0;
 		offlineCacheCalculated = false;
 		onlineCacheCalculated = false;
-		resetSizeListener.onResetWeatherTotalCacheSize();
+		resetSizeListener.onResetTotalWeatherCacheSize();
 	}
 
 	public void reset(boolean forLocal) {
@@ -56,11 +52,11 @@ public class WeatherTotalCacheSize {
 			onlineCacheSize = 0;
 			onlineCacheCalculated = false;
 		}
-		resetSizeListener.onResetWeatherTotalCacheSize();
+		resetSizeListener.onResetTotalWeatherCacheSize();
 	}
 
-	public interface ResetWeatherTotalCacheSizeListener {
-		void onResetWeatherTotalCacheSize();
+	public interface ResetTotalWeatherCacheSizeListener {
+		void onResetTotalWeatherCacheSize();
 	}
 
 }

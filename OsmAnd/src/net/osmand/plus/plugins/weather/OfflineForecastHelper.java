@@ -46,7 +46,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.containers.OfflineForecastInfo;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
-import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize.ResetWeatherTotalCacheSizeListener;
+import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize.ResetTotalWeatherCacheSizeListener;
 import net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState;
 import net.osmand.plus.plugins.weather.enums.WeatherForecastUpdatesFrequency;
 import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
@@ -71,7 +71,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OfflineForecastHelper implements ResetWeatherTotalCacheSizeListener {
+public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener {
 
 	private static final Log LOG = PlatformUtil.getLog(OfflineForecastHelper.class);
 
@@ -395,7 +395,7 @@ public class OfflineForecastHelper implements ResetWeatherTotalCacheSizeListener
 	}
 
 	@Override
-	public void onResetWeatherTotalCacheSize() {
+	public void onResetTotalWeatherCacheSize() {
 		notifyOnWeatherCacheSizeChanged();
 	}
 
