@@ -5099,4 +5099,5 @@
     <string name="sort_date_descending">Ældste dato først</string>
     <string name="sort_distance_descending">Længste distance først</string>
     <string name="shared_string_nearest">Nærmeste</string>
+    <string name="app_mode_moped">Knallert</string>
 </resources>
