@@ -638,7 +638,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		for (OsmandMapLayer layer : layers) {
 			if (layer instanceof MapTileLayer) {
 				MapTileLayer mapTileLayer = (MapTileLayer) layer;
-				if (mapTileLayer.isVisible() && mapTileLayer.getMap().couldBeDownloadedFromInternet()) {
+				if (mapTileLayer.isVisible() && mapTileLayer.getMap() != null && mapTileLayer.getMap().couldBeDownloadedFromInternet()) {
 					return true;
 				}
 			}
