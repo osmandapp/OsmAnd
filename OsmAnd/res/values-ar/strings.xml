@@ -4468,7 +4468,7 @@
     <string name="from_to_with_params">من %1$s إلى %2$s</string>
     <string name="progress_complete">%1$s انتهى</string>
     <string name="storage_found_files_descr">اضغط على \"%1$s\" لنسخ %2$s ملف من \"%3$s\" إلى \"%4$s\". قد يستغرق بعض الوقت.</string>
-    <string name="storage_copied_files_size">نسخ %1$s ملف %2$s</string>
+    <string name="storage_copied_files_size">تمت معالجة %1$s ملف، %2$s</string>
     <string name="storage_copying_files_size">جاري نسخ %1$s ملف %2$s</string>
     <string name="storage_found_files_size">تم العثور على %1$s ملف %2$s</string>
     <string name="shared_string_skip_warning">تخطي الهجرة؟ OsmAnd لم يعد لديه حق الوصول إلى ملفاتك في التخزين المشترك.
@@ -4854,7 +4854,7 @@
     <string name="shared_string_normal">عادي</string>
     <string name="map_widget_camera_tilt">إمالة الكاميرا</string>
     <string name="map_widget_zoom_level_desc">تعرض الأداة مستوى تكبير/تصغير الخريطة الحالي.</string>
-    <string name="map_widget_zoom_level">مستوى التكبير/التصغير</string>
+    <string name="map_widget_zoom_level">مستويات التكبير</string>
     <string name="map_widget_camera_distance_desc">تعرض الأداة ارتفاع الكاميرا فوق مستوى الحامل.</string>
     <string name="developer_widgets">أدوات المطور</string>
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
@@ -5131,7 +5131,7 @@
     <string name="shared_string_in_progress">قيد التقدم</string>
     <string name="shared_string_original">أصلي</string>
     <string name="movement_speed">سرعة الحركة</string>
-    <string name="simulation_position_description">اختيار ملف لاستخدامه كمسارللحركة.</string>
+    <string name="simulation_position_description">حدد ملف المسار الذي سيتم استخدامه كمصدر لنقل الموقع.</string>
     <string name="shared_string_add_manually">إضافة يدويا…</string>
     <string name="release_4_4">• تحسين قائمة \"المسارات\" في \"تكوين الخريطة\"
 \n
@@ -5154,4 +5154,12 @@
 \n• تم إصلاح المشكلات المتعلقة بعرض أماكن الغطاء النباتي
 \n
 \n</string>
+    <string name="sort_duration_ascending">مدة أقصر أولا</string>
+    <string name="sort_duration_descending">أطول مدة أولا</string>
+    <string name="sort_distance_ascending">أقصر مسافة أولا</string>
+    <string name="sort_distance_descending">أطول مسافة أولا</string>
+    <string name="sort_date_ascending">أحدث تاريخ أولا</string>
+    <string name="sort_date_descending">أقدم تاريخ أولا</string>
+    <string name="shared_string_nearest">أقرب</string>
+    <string name="selected_value">القيمة المحددة</string>
 </resources>
