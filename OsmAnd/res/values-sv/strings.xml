@@ -193,7 +193,7 @@
 \n
 \nDessa kartor kan användas antingen som primär karta (baskarta), eller som över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underläggskarta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'.
 \n
-\nLadda ner kartraster/tiles direkt online, eller kopiera dem manuellt som SQLite-databas till OsmAnds data-mapp med med hjälp av något kartprepareringsverktyg från tredje part.</string>
+\nLadda ner kartraster/tiles direkt online, eller kopiera dem manuellt som SQLite-databas till OsmAnds data-mapp med hjälp av något kartprepareringsverktyg från tredje part.</string>
     <string name="osmand_background_plugin_description">Visar inställningarna för att aktivera spårning och navigering i bakgrundsläge genom att periodvis väcka GPS-enheten (med skärmen av).</string>
     <string name="osmand_development_plugin_description">Inställningar för utvecklings- och felsökningsfunktioner, som simulering av navigation, renderingsprestanda eller röststyrning. Avsedda för utvecklare, behövs ej för den vanliga användaren.</string>
     <string name="plugins_screen">Hantera insticksmoduler</string>
@@ -3671,7 +3671,7 @@
     <string name="backup_error_subscription_was_expired_descr">Din OsmAnd Pro-prenumeration har gått ut, förnya den för att använda säkerhetskopering. Du kan fortfarande återställa data från Cloud.</string>
     <string name="backup_error_size_is_exceeded">Maximal storlek för OsmAnd Cloud överskriden %1$s</string>
     <string name="logout_from_osmand_cloud">Logga ut från OsmAnd Cloud</string>
-    <string name="backup_do_not_have_any">Du har inte någon online-säkerhetskopia ännu.</string>
+    <string name="backup_do_not_have_any">Du har inte någon online-säkerhetskopia ännu</string>
     <string name="explore_wikipedia_offline">Utforska Wikipedia i nedkopplat läge.</string>
     <string name="purchases_feature_desc_pro_widgets">Få tillgång till OsmAnd Pro-finesser: Färgläggning av rutter med mera.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Utforska OsmAnd Plans för att hitta en plan som passar dig.</string>
@@ -4446,4 +4446,12 @@
     <string name="simulation_position_description">Välj en spår-fil att använda som källa för plats-förflyttning.</string>
     <string name="shared_string_original">Ursprunglig</string>
     <string name="y_axis">Y-axel</string>
+    <string name="stop_download">Avbryt nedladdning</string>
+    <string name="send_log">Skicka loggfil</string>
+    <string name="number_of_tiles">Antal raster-tiles</string>
+    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu, kommer bara delar av rasterkartan vara tillgänglig för visning.</string>
+    <string name="stop_and_exit">Avbryt och avsluta</string>
+    <string name="shared_string_shape">Figur</string>
+    <string name="location_source">Platskälla</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>
