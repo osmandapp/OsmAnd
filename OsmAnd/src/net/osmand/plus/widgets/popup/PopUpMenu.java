@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -63,10 +64,15 @@ public class PopUpMenu {
 		ListPopupWindow listPopupWindow = new ListPopupWindow(ctx);
 		listPopupWindow.setAnchorView(anchorView);
 		listPopupWindow.setContentWidth(totalWidth);
-		listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
-		listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
 		listPopupWindow.setModal(true);
 		listPopupWindow.setAdapter(adapter);
+		if (shouldShowAsDropDown(ctx)) {
+			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
+			listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
+		} else {
+			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
+			listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+		}
 		if (displayData.bgColor != 0) {
 			listPopupWindow.setBackgroundDrawable(new ColorDrawable(displayData.bgColor));
 		}
@@ -80,6 +86,23 @@ public class PopUpMenu {
 			listPopupWindow.dismiss();
 		});
 		return listPopupWindow;
+	}
+
+	private boolean shouldShowAsDropDown(@NonNull Context ctx) {
+		int screenHeight = ctx.getResources().getDisplayMetrics().heightPixels;
+		int anchorViewTopY = AndroidUtils.getViewOnScreenY(displayData.anchorView);
+		int leftScreenSpace = screenHeight - anchorViewTopY;
+		int approxPopupHeight = calculateApproxPopupWindowHeight(ctx);
+		return leftScreenSpace > approxPopupHeight;
+	}
+
+	private int calculateApproxPopupWindowHeight(@NonNull Context ctx) {
+		LayoutInflater inflater = LayoutInflater.from(ctx);
+		View view = inflater.inflate(displayData.layoutId, null, false);
+		int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		view.measure(widthMeasureSpec, heightMeasureSpec);
+		return view.getMeasuredHeight() * displayData.menuItems.size();
 	}
 
 	private int getDimension(@NonNull Context ctx, int resId) {
