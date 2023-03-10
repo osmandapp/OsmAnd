@@ -5057,7 +5057,7 @@
     <string name="sort_date_descending">Primeiro a data mais recente</string>
     <string name="shared_string_nearest">Mais perto</string>
     <string name="movement_speed">Velocidade do movimento</string>
-    <string name="simulation_position_description">Selecione um arquivo de uma trilha para usar como orientação do movimento.</string>
+    <string name="simulation_position_description">Selecione um arquivo de trilha que será usado como fonte para a movimentação de local.</string>
     <string name="approximate_bearing_descr">Derive o rumo da rota de navegação que está sendo seguida.</string>
     <string name="shared_string_inches">polegadas</string>
     <string name="inch">in</string>
