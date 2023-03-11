@@ -100,8 +100,10 @@ public class MultiTouchSupport {
 		int actionCode = event.getAction() & ACTION_MASK;
 		try {
 			if (actionCode == MotionEvent.ACTION_CANCEL) {
-				startedMode = MODE.NONE;
 				listener.onActionCancel();
+			}
+			if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_CANCEL) {
+				startedMode = MODE.NONE;
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if (pointCount < 2) {
@@ -128,9 +130,6 @@ public class MultiTouchSupport {
 			}
 			if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_POINTER_UP) {
 				listener.onActionPointerUp();
-			}
-			if (actionCode == MotionEvent.ACTION_UP) {
-				startedMode = MODE.NONE;
 			}
 			if (actionCode == MotionEvent.ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
