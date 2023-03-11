@@ -195,9 +195,9 @@
     <string name="shared_string_previous">Précédent</string>
     <string name="unit_of_length_descr">Modifier l\'unité de mesure de distance.</string>
     <string name="unit_of_length">Unités de longueur</string>
-    <string name="si_mi_feet">Miles/pieds</string>
+    <string name="si_mi_feet">Miles / pieds</string>
     <string name="si_mi_yard">Miles / yards</string>
-    <string name="si_km_m">Kilomètres/mètres</string>
+    <string name="si_km_m">Kilomètres / mètres</string>
     <string name="yard">yd</string>
     <string name="foot">pieds</string>
     <string name="mile_per_hour">mph</string>
@@ -530,8 +530,8 @@
     <string name="app_mode_car">Voiture</string>
     <string name="app_mode_bicycle">Vélo</string>
     <string name="app_mode_pedestrian">À pied</string>
-    <string name="position_on_map_center">Centre</string>
-    <string name="position_on_map_bottom">Bas</string>
+    <string name="position_on_map_center">Centré</string>
+    <string name="position_on_map_bottom">En bas</string>
     <string name="navigate_point_top_text">Entrez la latitude et la longitude au format sélectionné (D - degrés, M - minutes, S - secondes)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
@@ -1998,7 +1998,7 @@
     <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces GPX, etc.) : %1$s.</string>
     <string name="first_usage_greeting">Suivez des itinéraires et découvrez de nouveaux lieux sans connexion Internet</string>
     <string name="get_for">Obtenir pour %1$s</string>
-    <string name="si_mi_meters">Miles / Mètres</string>
+    <string name="si_mi_meters">Miles / mètres</string>
     <string name="get_it">Obtenir</string>
     <string name="osm_live_banner_desc">Téléchargez un nombre illimité de cartes et obtenez des mises à jour plus fréquentes (hebdomadaires ou quotidiennes voire horaires).</string>
     <string name="osmand_plus_banner_desc">Téléchargements illimités des cartes, des mises à jour et des données pour l\'extension Wikipédia.</string>
@@ -4901,7 +4901,7 @@
     <string name="weather_wind_meters_per_second">Mètres/seconde</string>
     <string name="weather_widgets_secondary_desc">Les unités de mesure peuvent être modifiées dans les paramètres du plugin météo.</string>
     <string name="air_pressure_widget_desc">Affiche la pression atmosphérique du centre actuel de la carte.</string>
-    <string name="precipitation_widget_desc">Affiche les précipitations pour le centre de carte actuel.</string>
+    <string name="precipitation_widget_desc">Affiche les précipitations pour le centre actuel de la carte.</string>
     <string name="temperature_widget_desc">Affiche la température pour le centre actuel de la carte.</string>
     <string name="weather_widget_group_desc">Un ensemble de widgets affichant diverses informations météorologiques.</string>
     <string name="weather_pressure_inhg">inHg</string>
@@ -5047,7 +5047,7 @@
     <string name="shared_string_in_progress">En cours</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Vitesse de déplacement</string>
-    <string name="shared_string_inches">inches</string>
+    <string name="shared_string_inches">pouces</string>
     <string name="shared_string_add_manually">Ajouter manuellement …</string>
     <string name="sort_duration_ascending">Durée plus courte en premier</string>
     <string name="sort_duration_descending">Durée plus longue en premier</string>
