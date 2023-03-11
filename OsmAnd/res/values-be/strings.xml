@@ -3304,7 +3304,7 @@
     <string name="simulate_your_location_gpx_descr">Сімуляваць сваю пазіцыю пры дапамозе запісанага GPX-следу.</string>
     <string name="quick_action_directions_from_desc">Кнопка для прызначэння цэнтра экрана пунктам адпраўлення. Будзе прапанавана абраць пункт і разлічыць маршрут.</string>
     <string name="button_rate">Ацаніць</string>
-    <string name="import_from_file">Імпарт з файла</string>
+    <string name="import_from_file">Імпартаваць з файла</string>
     <string name="import_routing_file">Імпартаваць файл маршрутызацыі</string>
     <string name="import_profile">Імпартаваць профіль</string>
     <string name="monitoring_prefs_descr">Навігацыя, дакладнасць рэгістрацыі</string>
@@ -3870,7 +3870,7 @@
     <string name="select_picture">Абярыце выявы</string>
     <string name="shared_string_resources">Рэсурсы</string>
     <string name="approximate_file_size">Прыблізны памер файла</string>
-    <string name="select_data_to_export">Абярыце даныя, якія вы хочаце экспартаваць у файл.</string>
+    <string name="select_data_to_export">Абярыце даныя для экспарту ў файл.</string>
     <string name="file_size_needed_for_import">Неабходна для імпартавання</string>
     <string name="export_not_enough_space_descr">На вашай прыладзе свабодна толькі %1$s. Вызваліце месца альбо прыбярыце пазнаку з некаторых элементаў.</string>
     <string name="export_not_enough_space">Не стае вольнага месца</string>
@@ -4877,4 +4877,7 @@
     <string name="depth_contour_lines">Ізабаты</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема ізабат</string>
     <string name="share_link">Падзяліцца спасылкай</string>
+    <string name="restart_now">Перазапусціць зараз</string>
+    <string name="export_to_file">Экспартаваць у файл</string>
+    <string name="import_export">Імпарт/Экспарт</string>
 </resources>
