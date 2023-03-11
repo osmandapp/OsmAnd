@@ -5102,4 +5102,5 @@
     <string name="sort_distance_ascending">Kürzeste Entfernung zuerst</string>
     <string name="selected_value">Ausgewählter Wert</string>
     <string name="shared_string_nearest">Am nächsten</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>
