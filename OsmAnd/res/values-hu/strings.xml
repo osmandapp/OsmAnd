@@ -5087,4 +5087,5 @@
     <string name="sort_date_descending">Először a legrégebbi dátum</string>
     <string name="shared_string_nearest">Legközelebbi</string>
     <string name="selected_value">Kiválasztott érték</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>
