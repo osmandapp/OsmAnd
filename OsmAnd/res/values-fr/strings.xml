@@ -2964,7 +2964,7 @@
     <string name="routing_attr_freeride_policy_name">Hors-piste</string>
     <string name="process_downloading_service">Service de téléchargement OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">Appuyez à nouveau pour modifier l\'orientation de la carte</string>
-    <string name="shared_string_min_speed">Vitesse Min.</string>
+    <string name="shared_string_min_speed">Vitesse minimale</string>
     <string name="shared_string_max_speed">Vitesse Max.</string>
     <string name="default_speed_setting_title">Vitesse par défaut</string>
     <string name="minmax_speed_dialog_title">Définir la vitesse min/max</string>
@@ -2978,7 +2978,7 @@
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
     <string name="routing_attr_freeride_policy_description">Le hors-piste (ou \'freeride\') emprunte des itinéraires non-officiels. Ces itinéraires ne sont généralement ni balisés ni damés et ne font l’objet d\'aucune surveillance. Vous pratiquez cette activité à vos risques et périls.</string>
-    <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
+    <string name="default_speed_setting_descr">Modifier les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
     <string name="edit_profile_setup_title">Paramétrez le profil</string>
@@ -3285,7 +3285,7 @@
     <string name="edit_profiles">Modifier les profils</string>
     <string name="profile_appearance">Apparence du profil</string>
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
-    <string name="reorder_profiles">Modifiez la liste des profils</string>
+    <string name="reorder_profiles">Modifier la liste des profils</string>
     <string name="selected_profile">Profil sélectionné</string>
     <string name="reset_confirmation_descr">Cliquer sur %1$s ignore toutes vos modifications.</string>
     <string name="reset_all_profile_settings_descr">Réinitialiser tous les paramètres de profil aux valeurs par défaut.</string>
@@ -4018,7 +4018,7 @@
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
-    <string name="snap_to_road_descr">L’icône de positionnement s\'accrochera à l\'itinéraire en cours.</string>
+    <string name="snap_to_road_descr">L’icône de la position actuelle se joindra à l\'itinéraire en cours</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
     <string name="trip_recording_logging_interval_info">L\'intervalle d’enregistrement définit la fréquence à laquelle OsmAnd interrogera les données de localisation.</string>
     <string name="trip_recording_save_and_continue">Enregistrer et continuer</string>
@@ -5059,8 +5059,30 @@
     <string name="sort_date_descending">Date plus ancienne en premier</string>
     <string name="shared_string_delete_file">Supprimer le fichier</string>
     <string name="delete_cloud_version">Supprimer le fichier Cloud</string>
-    <string name="local_version_do_not_exist">Aucune version locale</string>
+    <string name="local_version_do_not_exist">Aucune version locale.</string>
     <string name="simulation_position_description">Sélectionnez un fichier trace à utiliser pour simuler le déplacement.</string>
     <string name="approximate_bearing">Cap approximatif</string>
     <string name="approximate_bearing_descr">Estimer le cap à partir de l’itinéraire suivi.</string>
+    <string name="app_mode_moped">Cyclomoteur</string>
+    <string name="release_4_4">• Amélioration du menu \"Traces\" dans \"Paramétrer la carte\"
+\n
+\n• Le menu contextuel affiche désormais les noms locaux pour les points d\'intérêts
+\n
+\n• Ajout d\'une option pour partager l\'itinéraire avec un lien
+\n
+\n• Ajout de l\'unité de distance \"Milles marins / pieds\"
+\n
+\n• Nouveau mode fixe pour l\'orientation de la carte
+\n
+\n• Écran de démarrage simplifié
+\n
+\n• Correction de la position de la localisation en écran scindé dans Android Auto
+\n
+\n• Ajout de \"Pente/Vitesse\" dans l\'analyse des traces
+\n
+\n• Android 13 a déplacé la sélection de la langue dans les paramètres de l\'appareil
+\n
+\n• Correction de bugs concernant l\'affichage d\'endroits vegan
+\n
+\n</string>
 </resources>
