@@ -5098,4 +5098,5 @@
     <string name="sort_distance_ascending">Jarak terpendek dahulu</string>
     <string name="sort_distance_descending">Jarak terpanjang dahulu</string>
     <string name="sort_date_ascending">Tanggal terbaru dahulu</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>
