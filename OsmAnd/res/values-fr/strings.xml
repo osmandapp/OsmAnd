@@ -5066,23 +5066,23 @@
     <string name="app_mode_moped">Cyclomoteur</string>
     <string name="release_4_4">• Amélioration du menu \"Traces\" dans \"Paramétrer la carte\"
 \n
-\n• Le menu contextuel affiche désormais les noms locaux pour les points d\'intérêts
+\n• Le menu contextuel affiche désormais les noms locaux des points d\'intérêts
 \n
-\n• Ajout d\'une option pour partager l\'itinéraire avec un lien
+\n• Ajout d\'une option pour partager l\'itinéraire via lien
 \n
-\n• Ajout de l\'unité de distance \"Milles marins / pieds\"
+\n• Ajout des unités de distance \"Milles marins / pieds\"
 \n
 \n• Nouveau mode fixe pour l\'orientation de la carte
 \n
 \n• Écran de démarrage simplifié
 \n
-\n• Correction de la position de la localisation en écran scindé dans Android Auto
+\n• Android Auto : la position de la localisation est maintenant fixe en écrans scindés
 \n
-\n• Ajout de \"Pente/Vitesse\" dans l\'analyse des traces
+\n• Ajout des analyses \"Pente / Vitesse\" pour les traces
 \n
-\n• Android 13 a déplacé la sélection de la langue dans les paramètres de l\'appareil
+\n• Android 13 : la sélection de la langue a été déplacée vers les paramètres de l\'appareil
 \n
-\n• Correction de bugs concernant l\'affichage d\'endroits vegan
+\n• Correction de bugs lors de l\'affichage de lieux végans
 \n
 \n</string>
 </resources>
