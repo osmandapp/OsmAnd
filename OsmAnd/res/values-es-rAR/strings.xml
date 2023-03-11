@@ -5110,4 +5110,5 @@
     <string name="sort_distance_ascending">Distancia ascendente</string>
     <string name="sort_date_ascending">Fecha ascendente</string>
     <string name="shared_string_nearest">Más cercano</string>
+    <string name="app_mode_moped">Ciclomotor</string>
 </resources>
