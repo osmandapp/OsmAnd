@@ -5098,4 +5098,6 @@
     <string name="sort_date_descending">Сначала старые</string>
     <string name="shared_string_nearest">Ближайшие</string>
     <string name="sort_duration_ascending">Сначала менее продолжительные</string>
+    <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
+    <string name="app_mode_moped">Мопед</string>
 </resources>
