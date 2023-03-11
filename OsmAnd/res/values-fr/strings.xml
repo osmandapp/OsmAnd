@@ -3425,7 +3425,7 @@
     <string name="keep_both_desc">Les éléments seront importés avec un préfixe</string>
     <string name="import_duplicates_description">Des éléments portant les mêmes noms existent déjà dans OsmAnd.
 \n
-\nQue souhaitez-vous faire \?</string>
+\nSélectionnez une action.</string>
     <string name="import_duplicates_title">Certains éléments existent déjà</string>
     <string name="select_data_to_import">Sélectionnez les données à importer.</string>
     <string name="shared_string_rendering_style">Style de rendu</string>
@@ -4016,7 +4016,7 @@
     <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
-    <string name="routing_attr_driving_style_description">Sélectionnez un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr.</string>
+    <string name="routing_attr_driving_style_description">Sélectionner un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
     <string name="snap_to_road_descr">L’icône de la position actuelle se joindra à l\'itinéraire en cours</string>
     <string name="select_another_colorization">Veuillez sélectionner un autre type de coloration.</string>
@@ -4764,7 +4764,7 @@
     <string name="favorite_delete_group">Supprimer le groupe</string>
     <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
-    <string name="display_position">Position placement</string>
+    <string name="display_position">Position de la localisation</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
     <string name="shared_string_2_5_d_view">Vue 2.5D</string>
