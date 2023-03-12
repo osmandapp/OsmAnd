@@ -62,7 +62,7 @@ public class TracksComparator implements Comparator<Object> {
 
 		switch (sortMode) {
 			case NEAREST:
-				compareNearestItems(item1, item2);
+				return compareNearestItems(item1, item2);
 			case NAME_ASCENDING:
 				return compareTrackItemNames(item1, item2);
 			case NAME_DESCENDING:
