@@ -32,11 +32,8 @@ public class TracksComparator implements Comparator<Object> {
 
 	@Override
 	public int compare(Object o1, Object o2) {
-		if (o1 instanceof Integer && o2 instanceof Integer) {
-			return Integer.compare((Integer) o1, (Integer) o2);
-		}
 		if (o1 instanceof Integer) {
-			return -1;
+			return o2 instanceof Integer ? Integer.compare((Integer) o1, (Integer) o2) : -1;
 		}
 		if (o2 instanceof Integer) {
 			return 1;
@@ -110,11 +107,8 @@ public class TracksComparator implements Comparator<Object> {
 	@Nullable
 	private Integer checkItemsAnalysis(@NonNull TrackItem item1, @NonNull TrackItem item2,
 	                                   @Nullable GPXTrackAnalysis analysis1, @Nullable GPXTrackAnalysis analysis2) {
-		if (analysis1 == null && analysis2 == null) {
-			return compareTrackItemNames(item1, item2);
-		}
 		if (analysis1 == null) {
-			return 1;
+			return analysis2 == null ? compareTrackItemNames(item1, item2) : 1;
 		}
 		if (analysis2 == null) {
 			return -1;
@@ -124,11 +118,8 @@ public class TracksComparator implements Comparator<Object> {
 
 	private int compareNearestItems(@NonNull TrackItem item1, @NonNull TrackItem item2,
 	                                @Nullable GPXTrackAnalysis analysis1, @Nullable GPXTrackAnalysis analysis2) {
-		if (analysis1.latLonStart == null && analysis2.latLonStart == null) {
-			return compareTrackItemNames(item1, item2);
-		}
 		if (analysis1.latLonStart == null) {
-			return 1;
+			return analysis2.latLonStart == null ? compareTrackItemNames(item1, item2) : 1;
 		}
 		if (analysis2.latLonStart == null) {
 			return -1;
@@ -145,11 +136,8 @@ public class TracksComparator implements Comparator<Object> {
 		File file1 = item1.getFile();
 		File file2 = item2.getFile();
 
-		if (file1 == null && file2 == null) {
-			return compareTrackItemNames(item1, item2);
-		}
 		if (file1 == null) {
-			return 1;
+			return file2 == null ? compareTrackItemNames(item1, item2) : 1;
 		}
 		if (file2 == null) {
 			return -1;
