@@ -2517,7 +2517,7 @@
     <string name="layer_underlay">Карта слоја испод…</string>
     <string name="map_underlay">Карта испод</string>
     <string name="tile_source_already_installed">Карта већ уграђена, „Подешавања“ ће се освежити.</string>
-    <string name="select_tile_source_to_install">Изаберите (сличице) карте ради уградње или освежења.</string>
+    <string name="select_tile_source_to_install">Изаберите изворе плочица карте:</string>
     <string name="send_location_way_choose_title">Подели положај користећи</string>
     <string name="add_waypoint_dialog_added">Пролазна тачка ГПС-а „{0}“ је додата</string>
     <string name="import_file_favourites">Сачувај податке као датотеку ГПИкс-а или увези пролазне тачке у „Омиљене тачке“\?</string>
@@ -3007,7 +3007,7 @@
     <string name="sett_generic_ext_input">Тастатура</string>
     <string name="sett_wunderlinq_ext_input">Вундерлинк (WunderLINQ)</string>
     <string name="sett_parrot_ext_input">Папагај (Parrot)</string>
-    <string name="turn_on_profile_desc">Укључите бар један применљиви налог ради употребе овог овог подешавања.</string>
+    <string name="turn_on_profile_desc">Молим, укључите бар један налог програма ради употребе ових поставки.</string>
     <string name="rendering_attr_winter_road_name">Снежни коловоз</string>
     <string name="rendering_attr_ice_road_name">Залеђени коловоз</string>
     <string name="routeInfo_winter_ice_road_name">Снежни и залеђени коловози</string>
@@ -4351,7 +4351,8 @@
     <string name="shared_storage">Дељено складиште</string>
     <string name="use_external_timestamps_description">Користи мрежне временске ознаке водича ради подешавањапроцене времена и просечне брзине</string>
     <string name="shared_storage_migration_descr">Због измена права приступа складишту у склопу Андроида, ОсмАнд више не може да користи %1$s.
-\n множите све Ваше податке у нову фасциклу.</string>
+\n
+\nУмножите све Ваше податке у нову фасциклу.</string>
     <string name="folder_access_denied">Потребне дозволе за приступ одабраној фасцикли.</string>
     <string name="shared_string_copy_to">Умножи у</string>
     <string name="start_copying">Започни умножавање</string>
@@ -4528,7 +4529,7 @@
     <string name="routeInfo_horse_scale_name">Тежина коњских стаза</string>
     <string name="simulation_real_mode_desc">На правим деоницама пута брзина ће бити приближена највећој дозвољеној брзини.
 \nНа раскрсницама, опонашање ће се успорити.
-\nДодатне казне примењиване на саобраћајне знаке, знаке за заустављање итд.</string>
+\nДодатне казне ће бити примењиване на саобраћајне знаке, знаке за заустављање, итд.</string>
     <string name="shared_string_item">Ставка</string>
     <string name="bottom_widgets_panel">Доња полица</string>
     <string name="configure_screen_widgets_descr">Изаберите страну заслона ради додавања или преуређења справица.</string>
@@ -4792,7 +4793,7 @@
     <string name="rendering_attr_weatherCloudContours_name">Линије обриса облака</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Линије обриса падавина</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Линије обриса налета ветрова</string>
-    <string name="open_weather_action">Отвори време</string>
+    <string name="open_weather_action">Отвори временске прилике</string>
     <string name="pressure_layer">Слој притиска</string>
     <string name="temperature_layer">Слој топлоте</string>
     <string name="wind_layer">Слој ветра</string>
@@ -4951,7 +4952,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">Нисам успео да добавим списак датотека са служитеља.</string>
     <string name="last_sync">Последње усклађивање</string>
     <string name="import_export">Увоз/извоз</string>
-    <string name="shared_string_purchased_on">Купљено</string>
+    <string name="shared_string_purchased_on">Купљено у</string>
     <string name="map_widget_altitude_map_center_desc">Приказује надморску висину на тренутном средишту карте.</string>
     <string name="ant_read_data">Читај податке</string>
     <string name="map_widget_ant_bicycle_power_desc">Приказује излазну снагу бициклисте, која се користи да погони бицикл</string>
@@ -5034,7 +5035,7 @@
     <string name="sort_date_descending">Најпре најстарији датум</string>
     <string name="delete_cloud_version">Избриши издање из облака</string>
     <string name="cloud_version_confirm_delete">Да ли избрисати „%1$s“ из Облака ОсмАнда\?</string>
-    <string name="simulation_position_description">Изаберите датотеку стазе ради употребе као водиље кретања.</string>
+    <string name="simulation_position_description">Изаберите датотеку стазе ради употребе као извора за померање положаја.</string>
     <string name="shared_string_kilograms">килограми</string>
     <string name="share_link">Дели везу</string>
     <string name="skip_download">Прескочи преузимање</string>
@@ -5049,4 +5050,43 @@
     <string name="sound_beep_simple">Бип: једноставан</string>
     <string name="sound_beep_simple_loud">Бип: једноставан бучан</string>
     <string name="y_axis">Y-осовина</string>
+    <string name="approximate_bearing_descr">Изведите усмерење из путање навођења.</string>
+    <string name="approximate_bearing">Приближно одреди усмерење у простору</string>
+    <string name="shared_string_cross_buy">Унакрсна куповина</string>
+    <string name="app_mode_moped">Мопед</string>
+    <string name="inch">инч</string>
+    <string name="shared_string_yards">јарди</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Да ли изменити изглед стазе %1$s\?</string>
+    <string name="shared_string_apply_changes">Примени измене</string>
+    <string name="no_visible_tracks_description">Изаберите стазе за приказ на карти.</string>
+    <string name="no_visible_tracks">Нема стаза на карти</string>
+    <string name="recently_visible">Недавно видљив %1$s</string>
+    <string name="empty_tracks">Немате датотеке стаза.</string>
+    <string name="empty_tracks_description">Можете увозити, стварати или снимати датотеке стаза коришћењем Османда.</string>
+    <string name="shared_string_on_map">На карти</string>
+    <string name="shared_string_select_recent">Одаберите недавну</string>
+    <string name="change_appearance">Измени изглед</string>
+    <string name="switch_folder">Промени фасциклу</string>
+    <string name="show_all_tracks">Прикажи све стазе</string>
+    <string name="release_4_4">• Побољшан је изборник „Стазе“ у „Поставкама карте“
+\n
+\n • Приручни изборник сада приказује местне називе тачака занимања
+\n
+\n • Додата је могућност дељења путање везом
+\n
+\n • Дидата је јединица растојања „поморске миље/стопе“
+\n
+\n • Усмерење карте додаје нови непокретан начин
+\n
+\n • Упрошћен је почетни матични приказ
+\n
+\n • Непроменљиво место положаја у подељеном приказу Андроид аута
+\n
+\n • Додат је графички приказ за проучавање „Брзина/нагиб“
+\n
+\n • Андроид 13 је преместио језик програма у поставке система
+\n
+\n • Исправљена је грешка приликом приказа места пошћења
+\n
+\n</string>
 </resources>
