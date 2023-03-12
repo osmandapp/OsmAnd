@@ -50,11 +50,15 @@ import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private final StateChangedListener<Boolean> showHeightmapsListener;
+	private final StateChangedListener<Boolean> enableHeightmapListener;
+	private final StateChangedListener<Boolean> enable3DMapsListener;
+	private final StateChangedListener<Boolean> disableVertexHillshade3DListener;
 
-	public final OsmandPreference<Boolean> SHOW_HEIGHTMAPS;
+	public final OsmandPreference<Boolean> ENABLE_HEIGHTMAP;
+	public final OsmandPreference<Boolean> ENABLE_3D_MAPS;
+	public final OsmandPreference<Boolean> DISABLE_VERTEX_HILLSHADE_3D;
 
-	public OsmandDevelopmentPlugin(OsmandApplication app) {
+	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
 
 		ApplicationMode[] noAppMode = {};
@@ -64,15 +68,40 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
-		SHOW_HEIGHTMAPS = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
+		ENABLE_HEIGHTMAP = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
+		ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeGlobal().makeShared().cache();
+		DISABLE_VERTEX_HILLSHADE_3D = registerBooleanPreference("disable_vertex_hillshade_3d", true).makeGlobal().makeShared().cache();
 
-		showHeightmapsListener = change -> {
+		enable3DMapsListener = change -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null && mapContext.isVectorLayerEnabled()) {
 				mapContext.recreateHeightmapProvider();
 			}
 		};
-		SHOW_HEIGHTMAPS.addListener(showHeightmapsListener);
+		ENABLE_3D_MAPS.addListener(enable3DMapsListener);
+
+		disableVertexHillshade3DListener = change -> {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				mapRendererContext.updateElevationConfiguration();
+			}
+		};
+		DISABLE_VERTEX_HILLSHADE_3D.addListener(disableVertexHillshade3DListener);
+
+		enableHeightmapListener = change -> {
+			boolean newIs3DMapsEnabled = is3DMapsEnabled();
+			if (ENABLE_3D_MAPS.get() != newIs3DMapsEnabled) {
+				enable3DMapsListener.stateChanged(newIs3DMapsEnabled);
+			}
+
+			boolean newDisableVertexHillshade = disableVertexHillshade3D();
+			if (DISABLE_VERTEX_HILLSHADE_3D.get() != newDisableVertexHillshade) {
+				disableVertexHillshade3DListener.stateChanged(newDisableVertexHillshade);
+			}
+
+			app.getDownloadThread().runReloadIndexFilesSilent();
+		};
+		ENABLE_HEIGHTMAP.addListener(enableHeightmapListener);
 	}
 
 	@Override
@@ -200,8 +229,20 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return quickActionTypes;
 	}
 
+	// If enabled:
+	// * heightmap-related setting should be available for configuration
+	// * heightmaps should be available for downloads
 	public boolean isHeightmapEnabled() {
-		return isHeightmapAllowed() && SHOW_HEIGHTMAPS.get();
+		return isHeightmapAllowed() && ENABLE_HEIGHTMAP.get();
+	}
+
+	// If enabled, map should be rendered with elevation data (in 3D)
+	public boolean is3DMapsEnabled() {
+		return isHeightmapEnabled() && ENABLE_3D_MAPS.get();
+	}
+
+	public boolean disableVertexHillshade3D() {
+		return isHeightmapEnabled() && DISABLE_VERTEX_HILLSHADE_3D.get();
 	}
 
 	public boolean isHeightmapAllowed() {

@@ -2,6 +2,9 @@ package net.osmand.core.android;
 
 import android.util.Log;
 
+import net.osmand.core.jni.ElevationConfiguration;
+import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
+import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
@@ -313,7 +316,7 @@ public class MapRendererContext {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.isHeightmapEnabled()) {
+			if (plugin == null || !plugin.is3DMapsEnabled()) {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
@@ -325,12 +328,11 @@ public class MapRendererContext {
 			if (!geotiffDir.exists()) {
 				geotiffDir.mkdir();
 			}
-			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
 			GeoTiffCollection geotiffCollection = new GeoTiffCollection();
 			geotiffCollection.addDirectory(geotiffDir.getAbsolutePath());
 			geotiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
-			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(heightsCollection,
-				geotiffCollection, mapRendererView.getElevationDataTileSize()));
+			int elevationTileSize = mapRendererView.getElevationDataTileSize();
+			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(geotiffCollection, elevationTileSize));
 		}
 	}
 	public void resetHeightmapProvider() {
@@ -376,6 +378,7 @@ public class MapRendererContext {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
+		updateElevationConfiguration();
 
 		if (isVectorLayerEnabled()) {
 			// Layers
@@ -389,6 +392,23 @@ public class MapRendererContext {
 			// Heightmap
 			recreateHeightmapProvider();
 		}
+	}
+
+	public void updateElevationConfiguration() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView == null) {
+			return;
+		}
+
+		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
+		boolean disableVertexHillshade = developmentPlugin != null && developmentPlugin.disableVertexHillshade3D();
+		if (disableVertexHillshade) {
+			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
+			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
+		}
+
+		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
 
 	@Nullable

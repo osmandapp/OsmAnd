@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="disable_vertex_hillshade_3d">Disable vertex hillshade in 3D</string>
+    <string name="enable_3d_maps">Enable 3D maps</string>
+    <string name="test_heightmap">Test heightmap</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
     <string name="sort_duration_ascending">Shorter duration first</string>

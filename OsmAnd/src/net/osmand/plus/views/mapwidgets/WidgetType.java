@@ -168,7 +168,7 @@ public enum WidgetType {
 	public WidgetGroup getGroup() {
 		if (group == ALTITUDE) {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.isHeightmapEnabled()) {
+			if (plugin == null || !plugin.is3DMapsEnabled()) {
 				return null;
 			}
 		}
