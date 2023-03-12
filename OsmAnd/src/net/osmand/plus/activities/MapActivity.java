@@ -324,9 +324,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				setMapInitialLatLon(mapView, location);
 			}
 		}
-
-		app.getDaynightHelper().setupLocationListener();
-
 		PluginsHelper.onMapActivityCreate(this);
 		importHelper = new ImportHelper(this);
 		if (System.currentTimeMillis() - tm > 50) {

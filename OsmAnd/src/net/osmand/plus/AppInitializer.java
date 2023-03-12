@@ -320,8 +320,8 @@ public class AppInitializer implements IProgress {
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.routingOptionsHelper = startupInit(new RoutingOptionsHelper(app), RoutingOptionsHelper.class);
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);
-		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
+		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
 		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
