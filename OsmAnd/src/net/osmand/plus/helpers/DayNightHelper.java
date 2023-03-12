@@ -8,17 +8,20 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle.State;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
@@ -29,39 +32,83 @@ import java.util.TimeZone;
 
 /**
  * Class to help determine if we want to render day or night map - it uses the
- * DayNightMode enumeration for its behavior<BR> 
+ * DayNightMode enumeration for its behavior<BR>
  * - it uses the LightSensor and needs calls from MapActivity on onPause and onResume to
  * register/unregister the sensor listener<BR>
- * - it uses the {@link SunriseSunset} and {@link LocationManager} to find 
+ * - it uses the {@link SunriseSunset} and {@link LocationManager} to find
  * out about sunset/sunrise and use it
- * 
+ * <p>
  * Note: the usage of SunriseSunset is not optimized in any way, it is
  * recalculated on each demand. If this way it would be resource consuming, some
  * recalculation threshold could be specified to recalculate the sun-rise/set
  * only sometimes.<BR>
  * Note2: the light sensor threshold is hard coded to
  * {@link SensorManager#LIGHT_CLOUDY} and could be made customizable
- * 
+ *
  * @author pavol.zibrita
  */
 public class DayNightHelper implements SensorEventListener {
 
 	private static final Log log = PlatformUtil.getLog(DayNightHelper.class);
-	
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final OsmAndLocationProvider locationProvider;
 
-	public DayNightHelper(OsmandApplication app) {
-		this.app = app;
-		settings = app.getSettings();
-	}
-
-	private DayNightHelper listener;
 	private MapThemeProvider mapThemeProvider;
+	private OsmAndLocationListener locationListener;
+	private SensorEventListener sensorEventListener;
+	private StateChangedListener<Boolean> sensorStateListener;
+	private StateChangedListener<DayNightMode> preferenceStateListener;
 
 	private long lastTime;
 	private boolean lastNightMode;
-	private StateChangedListener<Boolean> sensorStateListener;
+
+	public DayNightHelper(@NonNull OsmandApplication app) {
+		this.app = app;
+		this.settings = app.getSettings();
+		this.locationProvider = app.getLocationProvider();
+
+		if (settings.DAYNIGHT_MODE.get().isAuto()) {
+			locationProvider.addLocationListener(getLocationListener());
+		}
+		settings.DAYNIGHT_MODE.addListener(getPreferenceStateListener());
+	}
+
+	private void resetLastTime() {
+		lastTime = 0;
+	}
+
+	public void setMapThemeProvider(@Nullable MapThemeProvider mapThemeProvider) {
+		this.mapThemeProvider = mapThemeProvider;
+	}
+
+	@NonNull
+	private OsmAndLocationListener getLocationListener() {
+		if (locationListener == null) {
+			locationListener = location -> app.runInUIThread(() -> {
+				resetLastTime();
+				app.getOsmandMap().refreshMap();
+				locationProvider.removeLocationListener(locationListener);
+			});
+		}
+		return locationListener;
+	}
+
+	@NonNull
+	private StateChangedListener<DayNightMode> getPreferenceStateListener() {
+		if (preferenceStateListener == null) {
+			preferenceStateListener = dayNightMode -> {
+				if (dayNightMode.isAuto()) {
+					resetLastTime();
+					locationProvider.addLocationListener(getLocationListener());
+				} else {
+					locationProvider.removeLocationListener(getLocationListener());
+				}
+			};
+		}
+		return preferenceStateListener;
+	}
 
 	public boolean isNightModeForMapControls() {
 		return isNightModeForMapControlsForProfile(settings.APPLICATION_MODE.get());
@@ -106,13 +153,13 @@ public class DayNightHelper implements SensorEventListener {
 					SunriseSunset daynightSwitch = getSunriseSunset();
 					if (daynightSwitch != null) {
 						boolean daytime = daynightSwitch.isDaytime();
-						log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
+						log.debug("Sunrise/sunset setting to day: " + daytime);
 						lastNightMode = !daytime;
 					}
 				} catch (IllegalArgumentException e) {
-					log.warn("Network location provider not available"); //$NON-NLS-1$
+					log.warn("Network location provider not available");
 				} catch (SecurityException e) {
-					log.warn("Missing permissions to get actual location!"); //$NON-NLS-1$
+					log.warn("Missing permissions to get actual location!");
 				}
 			}
 			return lastNightMode;
@@ -121,18 +168,20 @@ public class DayNightHelper implements SensorEventListener {
 		}
 		return false;
 	}
-	
+
+	@Nullable
 	public SunriseSunset getSunriseSunset() {
-		Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
-		if (lastKnownLocation == null) {
-			lastKnownLocation = app.getLocationProvider().getFirstTimeRunDefaultLocation(null);
+		Location location = locationProvider.getLastKnownLocation();
+		if (location == null) {
+			location = locationProvider.getFirstTimeRunDefaultLocation(null);
 		}
-		if (lastKnownLocation == null) {
+		if (location == null) {
 			return null;
 		}
-		return getSunriseSunset(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+		return getSunriseSunset(location.getLatitude(), location.getLongitude());
 	}
 
+	@NonNull
 	public SunriseSunset getSunriseSunset(double lat, double lon) {
 		Date actualTime = new Date();
 		if (lon < 0) {
@@ -141,35 +190,30 @@ public class DayNightHelper implements SensorEventListener {
 		return new SunriseSunset(lat, lon, actualTime, TimeZone.getDefault());
 	}
 
-	public void setMapThemeProvider(@Nullable MapThemeProvider mapThemeProvider) {
-		this.mapThemeProvider = mapThemeProvider;
-	}
-
 	public void stopSensorIfNeeded() {
-		if (listener != null) {
-			SensorManager mSensorManager = (SensorManager) app
-					.getSystemService(Context.SENSOR_SERVICE);
-			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-			mSensorManager.unregisterListener(listener, mLight);
-			listener = null;
+		if (sensorEventListener != null) {
+			SensorManager manager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
+			Sensor mLight = manager.getDefaultSensor(Sensor.TYPE_LIGHT);
+			manager.unregisterListener(sensorEventListener, mLight);
+			sensorEventListener = null;
 		}
 	}
 
-	public void startSensorIfNeeded(StateChangedListener<Boolean> sensorStateListener) {
+	public void startSensorIfNeeded(@NonNull StateChangedListener<Boolean> sensorStateListener) {
 		this.sensorStateListener = sensorStateListener;
 		DayNightMode dayNightMode = settings.DAYNIGHT_MODE.get();
-		if (listener == null && dayNightMode.isSensor()) {
-			SensorManager mSensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-			Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-			List<Sensor> list = mSensorManager.getSensorList(Sensor.TYPE_LIGHT);
-			log.info("Light sensors:" + list.size()); //$NON-NLS-1$
-			mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
-			listener = this;
-		} else if (listener != null && !dayNightMode.isSensor()) {
+		if (sensorEventListener == null && dayNightMode.isSensor()) {
+			SensorManager manager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
+			Sensor light = manager.getDefaultSensor(Sensor.TYPE_LIGHT);
+			List<Sensor> list = manager.getSensorList(Sensor.TYPE_LIGHT);
+			log.info("Light sensors:" + list.size());
+			manager.registerListener(this, light, SensorManager.SENSOR_DELAY_NORMAL);
+			sensorEventListener = this;
+		} else if (sensorEventListener != null && !dayNightMode.isSensor()) {
 			stopSensorIfNeeded();
 		}
 	}
-	
+
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// nothing to do here
@@ -179,7 +223,7 @@ public class DayNightHelper implements SensorEventListener {
 	public void onSensorChanged(SensorEvent event) {
 		if (event.values.length > 0) {
 			float lux = event.values[0];
-			//			log.debug("lux value:" + lux + " setting to day: " + (lux > SensorManager.LIGHT_CLOUDY)); //$NON-NLS-1$ //$NON-NLS-2$
+//			log.debug("lux value:" + lux + " setting to day: " + (lux > SensorManager.LIGHT_CLOUDY));
 			boolean nightMode = !(lux > SensorManager.LIGHT_CLOUDY);
 			if (nightMode != lastNightMode) {
 				if (System.currentTimeMillis() - lastTime > 10000) {
