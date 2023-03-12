@@ -4785,7 +4785,7 @@
     <string name="map_widget_camera_tilt_desc">Mostra l\'angolo di inclinazione della fotocamera in modalità prospettiva. Il valore predefinito è 90° (nessuna inclinazione).</string>
     <string name="map_widget_zoom_level_desc">Mostra il livello d\'ingrandimento attuale della mappa.</string>
     <string name="map_widget_target_distance_desc">Mostra la distanza tra la fotocamera e la destinazione.</string>
-    <string name="map_widget_zoom_level">Livello d\'ingrandimento</string>
+    <string name="map_widget_zoom_level">Livello di zoom</string>
     <string name="map_widget_camera_tilt">Inclinazione della fotocamera</string>
     <string name="developer_widgets">Widget per sviluppatori</string>
     <string name="map_widget_camera_distance">Elevazione della fotocamera</string>
@@ -5042,7 +5042,7 @@
     <string name="shared_string_on_map">Sulla mappa</string>
     <string name="shared_string_apply_changes">Applica modifiche</string>
     <string name="no_visible_tracks_description">Seleziona le tracce per visualizzarle sulla mappa.</string>
-    <string name="approximate_bearing_descr">Calcola rotta se non ricevuta dal dispositivo</string>
+    <string name="approximate_bearing_descr">Calcola il movimento dalla rotta seguita</string>
     <string name="shared_string_inches">pollici</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rotta approssimata</string>
@@ -5076,7 +5076,7 @@
 \n • Risolti i problemi con la visualizzazione dei luoghi vegani
 \n
 \n</string>
-    <string name="sort_duration_ascending">Prima durata più breve</string>
+    <string name="sort_duration_ascending">Prima la durata più breve</string>
     <string name="sort_duration_descending">Prima la durata più lunga</string>
     <string name="sort_distance_ascending">Prima la distanza più breve</string>
     <string name="sort_distance_descending">Prima la distanza più lunga</string>
@@ -5084,4 +5084,5 @@
     <string name="sort_date_descending">Prima la data meno recente</string>
     <string name="shared_string_nearest">Più vicino</string>
     <string name="selected_value">Valore selezionato</string>
+    <string name="app_mode_moped">Ciclomotore</string>
 </resources>

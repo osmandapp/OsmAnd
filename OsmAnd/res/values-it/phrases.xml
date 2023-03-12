@@ -3928,4 +3928,6 @@
     <string name="poi_health_person_type_technician">Ruolo operatore sanitario: tecnico</string>
     <string name="poi_health_person_type_paramedic">Ruolo operatore sanitario: paramedico</string>
     <string name="poi_health_person_type_nurse">Ruolo operatore sanitario: infermiere</string>
+    <string name="poi_recycling_plastic_bottle_caps">Tappi in plastica</string>
+    <string name="poi_recycling_pet_drink_bottles">Bottiglie in PET</string>
 </resources>

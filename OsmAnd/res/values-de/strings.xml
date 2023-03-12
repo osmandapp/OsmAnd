@@ -983,7 +983,7 @@
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="av_use_external_camera_descr">System-App für Fotos verwenden.</string>
     <string name="av_use_external_camera">System-Kamera-App nutzen</string>
-    <string name="dropbox_plugin_description">Synchronisieren Sie Tracks und Audio-/Video-Notizen mit Ihrem Dropbox-Konto.</string>
+    <string name="dropbox_plugin_description">Synchronisieren Sie Tracks und Audio-/Videonotizen mit Ihrem Dropbox-Konto.</string>
     <string name="dropbox_plugin_name">Dropbox-Modul</string>
     <string name="intermediate_points_change_order">Reihenfolge ändern</string>
     <string name="recording_camera_not_available">Kamera nicht verfügbar</string>
@@ -995,23 +995,23 @@
     <string name="recording_error">Aufzeichnung fehlgeschlagen</string>
     <string name="recording_is_recorded">Audio/Video wird aufgenommen. Tippen Sie zum Stoppen auf das AV-Steuerelement.</string>
     <string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
-    <string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
-    <string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
+    <string name="recording_context_menu_arecord">Audionotiz aufnehmen</string>
+    <string name="recording_context_menu_vrecord">Videonotiz aufnehmen</string>
     <string name="recording_description">Aufnahme %1$s %2$s von %3$s</string>
     <string name="recording_context_menu_show">Anzeigen</string>
     <string name="recording_photo_description">Foto %1$s von %2$s</string>
     <string name="recording_context_menu_precord">Foto aufnehmen</string>
     <string name="recording_can_not_be_played">Aufnahme konnte nicht abgespielt werden.</string>
     <string name="recording_context_menu_delete">Aufnahme löschen</string>
-    <string name="layer_recordings">Audio-/Video-Notizen</string>
-    <string name="map_widget_av_notes">Audio-/Video-Notizen</string>
+    <string name="layer_recordings">Audio-/Videonotizen</string>
+    <string name="map_widget_av_notes">Audio-/Videonotizen</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für Offline-Höhenlinien</string>
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
     <string name="monitoring_settings">Streckenaufzeichnung</string>
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
-    <string name="map_widget_audionotes">Audio-Notizen</string>
+    <string name="map_widget_audionotes">Audionotizen</string>
     <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-/Foto-/Videonotizen, entweder über eine Kartenschaltfläche oder das Standortkontextmenü.</string>
-    <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
+    <string name="audionotes_plugin_name">Audio-/Videonotizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden … \', um dem Ort eine Notiz zuzuweisen.</string>
     <string name="stop_routing_confirm">Navigation stoppen\?</string>
     <string name="clear_dest_confirm">Ziel (und die Zwischenziele) löschen\?</string>
@@ -1473,7 +1473,7 @@
     <string name="location_on_map">Standort:
 \n Lat %1$s
 \n Lon %2$s</string>
-    <string name="notes">Audio-/Video-Notizen</string>
+    <string name="notes">Audio-/Videonotizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
     <string name="rendering_attr_pisteRoutes_name">Skipisten</string>
@@ -2084,9 +2084,9 @@
     <string name="quick_action_add_poi">POI hinzufügen</string>
     <string name="quick_action_map_style">Kartendarstellung ändern</string>
     <string name="quick_action_map_style_switch">Kartendarstellung geändert zu „%s“.</string>
-    <string name="quick_action_take_audio_note">Neue Audio-Notiz</string>
-    <string name="quick_action_take_video_note">Neue Video-Notiz</string>
-    <string name="quick_action_take_photo_note">Neue Foto-Notiz</string>
+    <string name="quick_action_take_audio_note">Neue Audionotiz</string>
+    <string name="quick_action_take_video_note">Neue Videonotiz</string>
+    <string name="quick_action_take_photo_note">Neue Fotonotiz</string>
     <string name="quick_action_add_osm_bug">OSM-Hinweis hinzufügen</string>
     <string name="quick_action_navigation_voice">Sprachausgabe ein/aus</string>
     <string name="quick_action_navigation_voice_off">Sprachausgabe aktivieren</string>
@@ -2103,9 +2103,9 @@
     <string name="shared_string_action_name">Aktionsname</string>
     <string name="quick_action_add_marker_descr">Eine Schaltfläche zum Hinzufügen einer Kartenmarkierung in der Bildschirmmitte.</string>
     <string name="favorite_empty_place_name">Ort</string>
-    <string name="quick_action_take_audio_note_descr">Eine Schaltfläche, um eine Audio-Notiz in der Bildschirmmitte einzufügen.</string>
-    <string name="quick_action_take_video_note_descr">Eine Schaltfläche, um eine Video-Notiz in der Bildschirmmitte einzufügen.</string>
-    <string name="quick_action_take_photo_note_descr">Eine Schaltfläche, um eine Foto-Notiz in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_take_audio_note_descr">Eine Schaltfläche, um eine Audionotiz in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_take_video_note_descr">Eine Schaltfläche, um eine Videonotiz in der Bildschirmmitte einzufügen.</string>
+    <string name="quick_action_take_photo_note_descr">Eine Schaltfläche, um eine Fotonotiz in der Bildschirmmitte einzufügen.</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
     <string name="quick_action_add_category">Kategorie hinzufügen</string>
@@ -2555,7 +2555,7 @@
     <string name="shared_string_gpx_waypoints">Track-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">OSM-Objekte erstellen oder ändern</string>
-    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Hinweise erstellen oder bearbeiten und aufgezeichnete GPX-Dateien hinzufügen.</string>
+    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder ändern, OSM-Hinweise erstellen oder kommentieren und aufgezeichnete GPX-Dateien hinzufügen.</string>
     <string name="shared_string_deleted">Gelöscht</string>
     <string name="shared_string_edited">Bearbeitet</string>
     <string name="shared_string_added">Hinzugefügt</string>
@@ -2566,7 +2566,7 @@
     <string name="by_type">Nach Typ</string>
     <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
-    <string name="notes_by_date">Audio-/Video-Notizen nach Datum</string>
+    <string name="notes_by_date">Audio-/Videonotizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
     <string name="one_tap_active">\'Ein Klick\' aktiv</string>
     <string name="what_is_here">Was ist hier:</string>
@@ -3051,7 +3051,7 @@
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
     <string name="routing_attr_allow_skating_only_name">Nur Skating-Routen zulassen</string>
     <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
-    <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Einschließlich durch kleinere Schneemobile präparierte Routen mit lockerer Piste und durch Skifahrer selbstgespurte Bahnen.</string>
+    <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Einschließlich durch kleinere Schneemobile präparierte Routen mit lockerer Piste und durch Skifahrer selbst gespurte Bahnen.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="app_mode_personal_transporter">Einpersonen-Transportmittel</string>
     <string name="edit_profile_setup_title">Profil einrichten</string>
@@ -3313,8 +3313,8 @@
     <string name="accessibility_prefs_descr">Symbol, Farbe und Namen wählen</string>
     <string name="live_monitoring_descr">Ermöglicht die Weitergabe des aktuellen Standorts mithilfe der Fahrtenaufzeichnung.</string>
     <string name="save_track_logging_accuracy">Genauigkeit der Protokollierung</string>
-    <string name="video_notes">Video-Notizen</string>
-    <string name="photo_notes">Foto-Notizen</string>
+    <string name="video_notes">Videonotizen</string>
+    <string name="photo_notes">Fotonotizen</string>
     <string name="route_recalculation">Neuberechnung der Route</string>
     <string name="login_and_pass">Benutzername und Passwort</string>
     <string name="osm_editing">OSM-Bearbeitung</string>
@@ -4449,7 +4449,7 @@
     <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
     <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
     <string name="shared_string_hide_all">Alle ausblenden</string>
-    <string name="migration_files_present">%1$d Datei(en) (%2$s) existierten bereits am ausgewählten Zielort \'%3$s\', wurden micht überschrieben.</string>
+    <string name="migration_files_present">%1$d Datei(en) (%2$s) existierten bereits am ausgewählten Zielort \'%3$s\', wurden nicht überschrieben.</string>
     <string name="exit_without_saving_warning">Beenden, ohne die Änderungen zu speichern\?</string>
     <string name="shared_string_show_slope">Hangneigung anzeigen</string>
     <string name="shared_string_hide_slope">Hangneigung ausblenden</string>
@@ -4740,7 +4740,7 @@
     <string name="shared_string_duplicate">Duplikat</string>
     <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget können Sie ein Foto aufnehmen.</string>
     <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget können Sie ein Video aufnehmen.</string>
-    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie eine Sprachnotiz aufnehmen.</string>
+    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie eine Audionotiz aufnehmen.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
@@ -4962,7 +4962,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenaufgang und Sonnenuntergang an.</string>
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
-    <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s%% abgeschlossen. Bei Abbruch funktioniert die Anwendung möglicherweise nicht richtig.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s %% abgeschlossen. Bei Abbruch funktioniert die Anwendung möglicherweise nicht richtig.</string>
     <string name="quick_action_precipitation_layer">Ein Schalter zum Ein- oder Ausblenden der Niederschlagsebene auf der Karte.</string>
     <string name="quick_action_wind_layer">Ein Schalter zum Ein- oder Ausblenden der Windebene auf der Karte.</string>
     <string name="quick_action_air_pressure_layer">Ein Schalter zum Ein- oder Ausblenden der Luftdruckebene auf der Karte.</string>
