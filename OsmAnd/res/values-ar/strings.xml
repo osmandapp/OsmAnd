@@ -5122,7 +5122,7 @@
     <string name="shared_string_kilograms">كيلوغرامات</string>
     <string name="shared_string_inches">بوصات</string>
     <string name="approximate_bearing">الاتجاه التقريبي</string>
-    <string name="approximate_bearing_descr">حساب الاتجاه إذا لم يتم استلامه من الجهاز</string>
+    <string name="approximate_bearing_descr">استخراج الاتجاه من مسار الملاحة المتبع.</string>
     <string name="inch">في</string>
     <string name="cloud_version_confirm_delete">حذف \"%1$s\" من سحابة أوسماند؟</string>
     <string name="shared_string_delete_file">حذف ملف</string>
@@ -5162,4 +5162,5 @@
     <string name="sort_date_descending">أقدم تاريخ أولا</string>
     <string name="shared_string_nearest">أقرب</string>
     <string name="selected_value">القيمة المحددة</string>
+    <string name="app_mode_moped">الدراجة</string>
 </resources>
