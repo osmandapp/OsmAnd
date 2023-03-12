@@ -4294,4 +4294,14 @@
     <string name="poi_hiking_yes">Ja</string>
     <string name="poi_hiking_filter">Lämplig för vandring</string>
     <string name="poi_toilets_disposal_dry_toilet">Toalettyp: torrtoalett</string>
+    <string name="poi_self_checkout">Självskanning</string>
+    <string name="poi_recycling_plastic_bottle_caps">Plastkapsyler</string>
+    <string name="poi_recycling_aluminium_cans">Aluminiumburkar</string>
+    <string name="poi_recycling_pet_drink_bottles">PET-flaskor</string>
+    <string name="poi_recycling_textiles">Textilier</string>
+    <string name="poi_self_checkout_no">Självskanning: nej</string>
+    <string name="poi_self_checkout_yes">Ja</string>
+    <string name="poi_self_checkout_only">Enbart</string>
+    <string name="poi_lifeguard">Badvakt</string>
+    <string name="poi_lifeguard_tower">Badvaktstorn</string>
 </resources>

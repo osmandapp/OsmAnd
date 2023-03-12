@@ -52,13 +52,17 @@ public class SelectGpxTask extends AsyncTask<Void, Void, String> {
 
 	@Override
 	protected void onProgressUpdate(Void... values) {
-		gpxTaskListener.gpxSelectionInProgress();
+		if (gpxTaskListener != null) {
+			gpxTaskListener.gpxSelectionInProgress();
+		}
 	}
 
 	@Override
 	protected void onPreExecute() {
 		collectSelectedItems();
-		gpxTaskListener.gpxSelectionStarted();
+		if (gpxTaskListener != null) {
+			gpxTaskListener.gpxSelectionStarted();
+		}
 	}
 
 	private void collectSelectedItems() {

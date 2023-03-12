@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="shared_string_add_manually">Manuell hinzufügen …</string>
     <string name="distance_moving">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="shared_string_remove">Entfernen</string>
@@ -437,9 +438,9 @@
     <string name="map_overlay">Overlay-Karte</string>
     <string name="map_overlay_descr">Overlay-Karte auswählen</string>
     <string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert.</string>
-    <string name="select_tile_source_to_install">Zu installierende oder zu aktualisierende Karten (Kacheln) wählen.</string>
+    <string name="select_tile_source_to_install">Kartenquellen wählen:</string>
     <string name="internet_not_available">Kann Vorgang ohne Internetverbindung nicht abschließen.</string>
-    <string name="install_more">Weitere installieren …</string>
+    <string name="install_more">Weitere hinzufügen …</string>
     <string name="level_to_switch_vector_raster_descr">Verwenden Sie Rasterkarten für alles, was über diese Ebene hinausgeht.</string>
     <string name="level_to_switch_vector_raster">Minimale Vektor-Zoomstufe</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Kartenklassifizierung mit Bildern.</string>
@@ -797,11 +798,11 @@
     <!-- string name="search_tabs_location">Position</string -->
     <string name="context_menu_item_update_map">Karte aktualisieren</string>
     <string name="context_menu_item_create_poi">POI erstellen</string>
-    <string name="shared_string_yes">ja</string>
+    <string name="shared_string_yes">Ja</string>
     <string name="shared_string_cancel">Abbrechen</string>
     <string name="shared_string_apply">Anwenden</string>
     <string name="shared_string_add">Hinzufügen</string>
-    <string name="shared_string_no">nein</string>
+    <string name="shared_string_no">Nein</string>
     <string name="add_favorite_dialog_top_text">Favorit benennen</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
     <string name="add_favorite_dialog_favourite_added_template">Favorit \'\'{0}\'\' hinzugefügt.</string>
@@ -1611,7 +1612,7 @@
     <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
-    <string name="restart_is_required">Neustart erforderlich, um die Änderung umzusetzen.</string>
+    <string name="restart_is_required">Ein Neustart ist erforderlich, um die Änderung anzuwenden.</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
@@ -1671,7 +1672,7 @@
     <string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
     <string name="roads">Straßen</string>
     <string name="show_free_version_banner_description">Das Banner der kostenlosen Version auch in der kostenpflichtigen Version anzeigen.</string>
-    <string name="rendering_attr_hideProposed_name">Geplante Objekte</string>
+    <string name="rendering_attr_showProposed_name">Geplante Objekte</string>
     <string name="shared_string_update">Aktualisieren</string>
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>
@@ -3650,7 +3651,7 @@
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
     <string name="vessel_height_warning">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden. Wenn die Brücke beweglich ist, wird die Höhe im geöffneten Zustand verwendet.</string>
-    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Für beweglichen Brücken, wird deren Höhe im geöffneten Zustand verwendet.</string>
+    <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Für bewegliche Brücken wird deren Höhe im geöffneten Zustand verwendet.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
     <string name="quick_action_showhide_mapillary_descr">Eine Schaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
     <string name="uninstall_speed_cameras">Blitzer deinstallieren</string>
@@ -4379,8 +4380,8 @@
     <string name="transparent_status_bar">Transparente Statusleiste</string>
     <string name="markers_history_is_disabled_descr">Verlauf aktivieren, um eine Liste der besuchten Kartenmarkierungen zu speichern.</string>
     <string name="history_actions_descr">Sie können den Verlauf in eine Datei exportieren.</string>
-    <string name="navigation_history">Verlauf der Navigation</string>
-    <string name="history_preferences_descr">Sie können die Protokollierung des Verlaufs für jeden Verlaufstyp einzeln deaktivieren.</string>
+    <string name="navigation_history">Navigationsverlauf</string>
+    <string name="history_preferences_descr">Sie können die Verlaufsprotokollierung für jeden Verlaufstyp einzeln deaktivieren.</string>
     <string name="shared_storage_warning_description">Aufgrund neuer Android-Regeln wird OsmAnd 4.2 ab November 2021 den Zugriff auf den gemeinsamen Speicher verlieren.
 \n
 \nBitte verschieben Sie den Datenordner aus dem gemeinsamen Speicher in den verfügbaren Speicher, anderenfalls wird die App den Zugriff auf Ihre Daten wie Offline-Karten, GPX-Tracks usw. verlieren.</string>
@@ -4388,7 +4389,7 @@
     <string name="history_is_disabled_descr">Verlauf aktivieren, um einen schnelleren Zugriff auf die zuletzt verwendeten Ergebnisse zu erhalten.</string>
     <string name="clear_all_history_warning">Alle Einträge im Verlauf löschen, einschließlich Such-, Navigations- und Markierungsverlauf\?</string>
     <string name="clear_all_history">Gesamten Verlauf löschen</string>
-    <string name="map_markers_history">Verlauf der Kartenmarkierungen</string>
+    <string name="map_markers_history">Kartenmarkierungsverlauf</string>
     <string name="continue_on_phone">Auf dem Mobilgerät fortfahren</string>
     <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
     <string name="approx_safe_mode">Sichere GPX Approximation</string>
@@ -4407,7 +4408,7 @@
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf \"%1$s\", um %2$s Dateien von \"%3$s\" nach \"%4$s\" zu kopieren. Dies kann einige Zeit dauern.</string>
-    <string name="storage_copied_files_size">%1$s Dateien %2$s kopiert</string>
+    <string name="storage_copied_files_size">%1$s Datei(en) (%2$s) verarbeitet</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
@@ -4448,7 +4449,7 @@
     <string name="no_items_selected_warning">Bitte wählen Sie mindestens einen Artikel</string>
     <string name="display_groups_visibility_dialog_description">Sie können die Sichtbarkeit von Gruppen auf der Karte steuern. Wenn der Track ausgeblendet ist, werden auch alle Gruppen ausgeblendet.</string>
     <string name="shared_string_hide_all">Alle ausblenden</string>
-    <string name="migration_files_present">Es gibt %1$d Dateien (%2$s) am ausgewählten Speicherort \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d Datei(en) (%2$s) existierten bereits am ausgewählten Zielort \'%3$s\', wurden micht überschrieben.</string>
     <string name="exit_without_saving_warning">Beenden, ohne die Änderungen zu speichern\?</string>
     <string name="shared_string_show_slope">Hangneigung anzeigen</string>
     <string name="shared_string_hide_slope">Hangneigung ausblenden</string>
@@ -4983,7 +4984,6 @@
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
     <string name="shared_string_open">Öffnen</string>
-    <string name="release_4_4">• Hier werden die Strings für die Version 4.4 sein</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
@@ -5030,17 +5030,17 @@
     <string name="set_up_backup">Backup einrichten</string>
     <string name="x_axis">X-Achse</string>
     <string name="y_axis">Y-Achse</string>
-    <string name="share_as_file">Compartilhar como ficheiro</string>
+    <string name="share_as_file">Als Datei teilen</string>
     <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Download überspringen</string>
     <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
-    <string name="share_link">Partilhar a ligação</string>
-    <string name="sound_beep_simple">Signalton: Einfach</string>
-    <string name="sound_beep_minimal">Signalton: Minimal</string>
+    <string name="share_link">Link teilen</string>
+    <string name="sound_beep_simple">Signalton: einfach</string>
+    <string name="sound_beep_minimal">Signalton: minimal</string>
     <string name="weight_limit_error">Der Mindestwert ist \"%1$s\" Tonnen. Verwenden Sie das Profil \"%2$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
-    <string name="sound_beep_complex_loud">Signalton: Komplex, laut</string>
-    <string name="sound_beep_simple_loud">Signalton: Einfach, laut</string>
-    <string name="sound_beep_complex">Signalton: Komplex</string>
+    <string name="sound_beep_complex_loud">Signalton: komplex, laut</string>
+    <string name="sound_beep_simple_loud">Signalton: einfach, laut</string>
+    <string name="sound_beep_complex">Signalton: komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
     <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung: unten für Bewegungsrichtung, mittig für alles andere.</string>
     <string name="shared_string_apply_changes">Änderungen anwenden</string>
@@ -5051,7 +5051,7 @@
 \n
 \nSie werden auch als \"%1$s\" gespeichert, um von %2$s für alle anderen Spuren ohne implizites oder spezifisch eingestelltes Aussehen angewendet zu werden.</string>
     <string name="recently_visible">Kürzlich sichtbar %1$s</string>
-    <string name="empty_tracks_description">Sie können mit OsmAnd Track-Dateien importieren, erstellen oder aufzeichnen.</string>
+    <string name="empty_tracks_description">Sie können mit OsmAnd Trackdateien importieren, erstellen oder aufzeichnen.</string>
     <string name="default_tracks_appearance">Standarddarstellung des Tracks</string>
     <string name="no_visible_tracks_description">Wählen Sie Tracks, um sie auf der Karte anzuzeigen.</string>
     <string name="empty_tracks">Sie haben keine Trackdateien.</string>
@@ -5061,4 +5061,46 @@
     <string name="switch_folder">Ordner wechseln</string>
     <string name="show_all_tracks">Alle Tracks anzeigen</string>
     <string name="shared_string_on_map">Auf der Karte</string>
+    <string name="approximate_bearing_descr">Die Peilung von der Navigationsroute, der Sie folgen, ableiten.</string>
+    <string name="shared_string_inches">Zoll</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Ungefähre Peilung</string>
+    <string name="cloud_version_confirm_delete">\"%1$s\" aus OsmAnd Cloud löschen\?</string>
+    <string name="shared_string_delete_file">Datei löschen</string>
+    <string name="delete_cloud_version">Cloud-Version löschen</string>
+    <string name="local_version_do_not_exist">Keine lokale Version vorhanden.</string>
+    <string name="shared_string_in_progress">In Arbeit</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Bewegungsgeschwindigkeit</string>
+    <string name="simulation_position_description">Wählen Sie eine Trackdatei aus, die als Quelle für die Veränderung des Standorts verwendet werden soll.</string>
+    <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
+\n
+\n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
+\n
+\n - Option zum Teilen der Route per Link hinzugefügt
+\n
+\n - Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
+\n
+\n - Die Kartenausrichtung wurde um einen festen Modus erweitert.
+\n
+\n - Vereinfachter Startbildschirm
+\n
+\n - Feste Standortposition im geteilten Bildschirm in Android Auto
+\n
+\n - Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
+\n
+\n - Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
+\n
+\n - Probleme mit der Anzeige von veganen Orten behoben
+\n
+\n</string>
+    <string name="sort_duration_ascending">Kürzere Dauer zuerst</string>
+    <string name="sort_distance_descending">Längste Entfernung zuerst</string>
+    <string name="sort_date_ascending">Neuestes Datum zuerst</string>
+    <string name="sort_date_descending">Ältestes Datum zuerst</string>
+    <string name="sort_duration_descending">Längste Dauer zuerst</string>
+    <string name="sort_distance_ascending">Kürzeste Entfernung zuerst</string>
+    <string name="selected_value">Ausgewählter Wert</string>
+    <string name="shared_string_nearest">Am nächsten</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>

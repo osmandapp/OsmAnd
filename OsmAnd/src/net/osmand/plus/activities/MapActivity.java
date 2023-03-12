@@ -737,7 +737,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (settings.isLastKnownMapLocation()) {
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setIntZoom(settings.getLastKnownMapZoom());
+			mapView.setZoomWithFloatPart(settings.getLastKnownMapZoom(), settings.getLastKnownMapZoomFloatPart());
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
 				mapView.setRotate(settings.getLastKnownMapRotation(), true);
 			}
@@ -1242,6 +1242,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
+		settings.setLastKnownMapZoomFloatPart(mapView.getZoomFloatPart());
 		settings.setLastKnownMapRotation(mapView.getRotate());
 		settings.setLastKnownMapElevation(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);

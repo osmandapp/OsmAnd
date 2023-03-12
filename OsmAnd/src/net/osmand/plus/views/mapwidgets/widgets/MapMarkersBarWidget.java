@@ -141,7 +141,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	public void showMarkers(@NonNull List<MapMarker> markers) {
-		LatLon latLon = customLatLon != null ? customLatLon : MarkersWidgetsHelper.getDefaultLatLon(mapActivity);
+		LatLon latLon = customLatLon != null ? customLatLon : app.getMapViewTrackingUtilities().getDefaultLocation();
 		boolean defaultLatLon = customLatLon == null;
 		Float heading = mapActivity.getMapViewTrackingUtilities().getHeading();
 

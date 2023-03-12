@@ -185,7 +185,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				GpxDataItemCallback callback = new GpxDataItemCallback() {
 					@Override
 					public boolean isCancelled() {
-						return false;
+						return !isAdded();
 					}
 
 					@Override

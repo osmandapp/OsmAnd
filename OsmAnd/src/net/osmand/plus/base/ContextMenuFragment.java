@@ -48,6 +48,7 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
@@ -597,7 +598,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		updateContainerLayoutListener(view, true);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
+			MapLayers mapLayers = mapActivity.getMapLayers();
+			if (mapLayers.hasMapActivity()) {
+				mapLayers.getMapControlsLayer().showMapControlsIfHidden();
+			}
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();

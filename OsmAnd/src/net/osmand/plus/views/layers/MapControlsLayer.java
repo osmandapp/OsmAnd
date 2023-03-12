@@ -619,7 +619,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
 			zoomText.setVisibility(View.VISIBLE);
 			zoomText.setTextColor(textColor);
-			zoomText.setText(getZoomLevel(tileBox));
+			zoomText.setText(getZoomInfo(tileBox));
 		}
 
 		mapRouteInfoMenu.setVisible(shouldShowRouteCalculationControls);
@@ -796,18 +796,30 @@ public class MapControlsLayer extends OsmandMapLayer {
 		parameterValueSetting = null;
 	}
 
-	private String getZoomLevel(@NonNull RotatedTileBox tb) {
-		String zoomText = tb.getZoom() + "";
-		double frac = tb.getMapDensity();
-		if (frac != 0) {
-			int ifrac = (int) (frac * 10);
-			zoomText += " ";
-			zoomText += Math.abs(ifrac) / 10;
-			if (ifrac % 10 != 0) {
-				zoomText += "." + Math.abs(ifrac) % 10;
+	@NonNull
+	private String getZoomInfo(@NonNull RotatedTileBox tb) {
+		StringBuilder zoomInfo = new StringBuilder();
+		zoomInfo.append(tb.getZoom());
+
+		double zoomFloatPart = tb.getZoomFloatPart() + tb.getZoomAnimation();
+		int formattedZoomFloatPart = (int) Math.abs(Math.round(zoomFloatPart * 100));
+		boolean addLeadingZero = formattedZoomFloatPart < 10;
+		zoomInfo.append(" ")
+				.append(zoomFloatPart < 0 ? "-" : "+")
+				.append(".")
+				.append(addLeadingZero ? "0" : "")
+				.append(formattedZoomFloatPart);
+
+		double mapDensity = Math.abs(tb.getMapDensity());
+		if (mapDensity != 0) {
+			int mapDensity10 = (int) (mapDensity * 10);
+			zoomInfo.append(" ").append(mapDensity10 / 10);
+			if (mapDensity10 % 10 != 0) {
+				zoomInfo.append(".").append(mapDensity10 % 10);
 			}
 		}
-		return zoomText;
+
+		return zoomInfo.toString();
 	}
 
 	private boolean isInRoutePlanningMode() {

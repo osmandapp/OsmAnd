@@ -4493,4 +4493,14 @@
     <string name="poi_socket_type3c_output_high">Alta</string>
     <string name="poi_socket_type3c_output_medium">Media</string>
     <string name="poi_socket_type3c_output_low">Baja</string>
+    <string name="poi_self_checkout">Autopago</string>
+    <string name="poi_recycling_plastic_bottle_caps">Tapas de botellas de plástico</string>
+    <string name="poi_recycling_aluminium_cans">Latas de aluminio</string>
+    <string name="poi_recycling_pet_drink_bottles">Botellas de polietileno (PET)</string>
+    <string name="poi_recycling_textiles">Textiles, ropa</string>
+    <string name="poi_self_checkout_no">Autopago: no</string>
+    <string name="poi_self_checkout_yes">Sí</string>
+    <string name="poi_self_checkout_only">Únicamente</string>
+    <string name="poi_lifeguard">Socorrista acuático;Guardavidas;Salvavidas</string>
+    <string name="poi_lifeguard_tower">Torre del socorrista;Torre del guardavidas;Torre del salvavidas</string>
 </resources>

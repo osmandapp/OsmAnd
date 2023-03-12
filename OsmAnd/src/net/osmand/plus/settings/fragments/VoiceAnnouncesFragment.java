@@ -24,7 +24,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -114,25 +114,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	}
 
 	private void setupSpeedLimitExceedPref() {
-		//array size must be equal!
-		Float[] valuesKmh = {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-		Float[] valuesMph = {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-		String[] names;
-		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == MetricsConstants.KILOMETERS_AND_METERS) {
-			names = new String[valuesKmh.length];
-			for (int i = 0; i < names.length; i++) {
-				names[i] = valuesKmh[i].intValue() + " " + getString(R.string.km_h);
-			}
-		} else {
-			names = new String[valuesMph.length];
-			for (int i = 0; i < names.length; i++) {
-				names[i] = valuesMph[i].intValue() + " " + getString(R.string.mile_per_hour);
-			}
-		}
-		ListPreferenceEx voiceProvider = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
-		voiceProvider.setEntries(names);
-		voiceProvider.setEntryValues(valuesKmh);
-		voiceProvider.setEnabled(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
+		Preference preference = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
+		preference.setEnabled(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupKeepInformingPref() {
@@ -240,7 +223,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId)) {
-			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
+			SpeedCamerasBottomSheet.showInstance(requireFragmentManager(), this);
+		} else if (settings.SPEED_LIMIT_EXCEED_KMH.getId().equals(prefId)) {
+			ApplicationMode mode = getSelectedAppMode();
+			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), this, prefId, mode);
 		}
 		return super.onPreferenceClick(preference);
 	}

@@ -156,7 +156,7 @@
     <string name="map_overlay">Mappa sovrapposta</string>
     <string name="map_overlay_descr">Scegli la mappa sovrapposta</string>
     <string name="tile_source_already_installed">Mappa già installata, \'Impostazioni\' verrà aggiornato.</string>
-    <string name="select_tile_source_to_install">Scegli le mappe (tile) da installare o aggiornare.</string>
+    <string name="select_tile_source_to_install">Seleziona le fonti della mappa dei riquadri:</string>
     <string name="internet_not_available">Impossibile eseguire l\'operazione senza una connessione a Internet.</string>
     <string name="install_more">Installa altro…</string>
     <string name="level_to_switch_vector_raster_descr">Usare le mappe vettoriali per andare oltre questo livello.</string>
@@ -1723,7 +1723,7 @@
     <string name="shared_string_upload">Carica</string>
     <string name="feedback">Feedback</string>
     <string name="shared_string_update">Aggiorna</string>
-    <string name="rendering_attr_hideProposed_name">Oggetti proposti</string>
+    <string name="rendering_attr_showProposed_name">Oggetti proposti</string>
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità di</string>
     <string name="share_osm_edits_subject">Modifiche di OSM condivise tramite OsmAnd</string>
@@ -4368,7 +4368,7 @@
     <string name="is_disabled">%1$s è disabilitato</string>
     <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
     <string name="transparent_status_bar_descr">Mostra mappa sotto la barra di stato</string>
-    <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
+    <string name="history_preferences_descr">Puoi disattivare la registrazione della cronologia individualmente per ogni tipo di cronologia.</string>
     <string name="shortcut_navigate_to_work">Naviga fino al \'Lavoro\'</string>
     <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo.</string>
     <string name="display_route_tracks">Mostra tracce</string>
@@ -4432,7 +4432,7 @@
     <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
     <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta, anche tutti i gruppi lo saranno.</string>
     <string name="shared_string_hide_all">Nascondi tutto</string>
-    <string name="migration_files_present">Ci sono %1$d file (%2$s) nella posizione selezionata \'%3$s\'.</string>
+    <string name="migration_files_present">Ci sono %1$d file (%2$s) già presenti nella destinazione \'%3$s\' e non sovrascritti.</string>
     <string name="exit_without_saving_warning">Uscire senza salvare le modifiche\?</string>
     <string name="shared_string_show_slope">Mostra pendenza</string>
     <string name="shared_string_hide_slope">Nascondi pendenza</string>
@@ -4892,7 +4892,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -4966,7 +4966,6 @@
     <string name="not_enough_contributions_descr">È necessario un minimo di %1$s modifiche negli ultimi due mesi %2$s per ottenere l\'accesso agli aggiornamenti orari illimitati delle mappe.</string>
     <string name="mtb_segment_classification">Classificazione segmento</string>
     <string name="mtb_scale">Scala di difficoltà per MTB</string>
-    <string name="release_4_4">• Qui ci saranno le stringhe per la versione 4.4</string>
     <string name="shared_string_open">Apri</string>
     <string name="open_weather_action_description">Consente di aprire una schermata con informazioni meteorologiche dettagliate.</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinee delle nuvole</string>
@@ -5043,4 +5042,46 @@
     <string name="shared_string_on_map">Sulla mappa</string>
     <string name="shared_string_apply_changes">Applica modifiche</string>
     <string name="no_visible_tracks_description">Seleziona le tracce per visualizzarle sulla mappa.</string>
+    <string name="approximate_bearing_descr">Calcola rotta se non ricevuta dal dispositivo</string>
+    <string name="shared_string_inches">pollici</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Rotta approssimata</string>
+    <string name="cloud_version_confirm_delete">Cancellare \"%1$s\" da OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Cancella il file</string>
+    <string name="delete_cloud_version">Cancella la versione sul cloud</string>
+    <string name="local_version_do_not_exist">Non è presente alcuna versione locale.</string>
+    <string name="shared_string_in_progress">In corso</string>
+    <string name="shared_string_original">Originale</string>
+    <string name="movement_speed">Velocità del movimento</string>
+    <string name="simulation_position_description">Seleziona un file di traccia che verrà utilizzato come origine per lo spostamento della posizione.</string>
+    <string name="shared_string_add_manually">Aggiungi manualmente…</string>
+    <string name="release_4_4">• Menu \"Tracce\" migliorato in \"Configura mappa\"
+\n
+\n • Il menu contestuale ora mostra i nomi localizzati per i POI
+\n
+\n • Aggiunta l\'opzione per condividere il percorso tramite link
+\n
+\n • Aggiunta l\'unità di lunghezza \"Miglia nautiche/piedi\".
+\n
+\n • L\'orientamento della mappa ha aggiunto una nuova modalità fissa
+\n
+\n • Schermata iniziale semplificata
+\n
+\n • Posizione posizione fissa in modalità schermo diviso in Android Auto
+\n
+\n • Aggiunto il grafico \"Velocità/Pendenza\" per l\'analisi del tracciato
+\n
+\n • Android 13 ha spostato la selezione della lingua dell\'applicazione nelle impostazioni di sistema
+\n
+\n • Risolti i problemi con la visualizzazione dei luoghi vegani
+\n
+\n</string>
+    <string name="sort_duration_ascending">Prima durata più breve</string>
+    <string name="sort_duration_descending">Prima la durata più lunga</string>
+    <string name="sort_distance_ascending">Prima la distanza più breve</string>
+    <string name="sort_distance_descending">Prima la distanza più lunga</string>
+    <string name="sort_date_ascending">Prima la data più recente</string>
+    <string name="sort_date_descending">Prima la data meno recente</string>
+    <string name="shared_string_nearest">Più vicino</string>
+    <string name="selected_value">Valore selezionato</string>
 </resources>

@@ -57,7 +57,7 @@ public abstract class VehicleSizes {
 				return useInchesInsteadOfFeet() ? R.string.shared_string_inches : R.string.shared_string_feet;
 			}
 			if (mc == MetricsConstants.MILES_AND_YARDS) {
-				return R.string.shared_string_yards;
+				return useInchesInsteadOfYards() ? R.string.shared_string_inches : R.string.shared_string_yards;
 			}
 			return R.string.shared_string_meters;
 		}
@@ -71,7 +71,7 @@ public abstract class VehicleSizes {
 				return useInchesInsteadOfFeet() ? R.string.inch : R.string.foot;
 			}
 			if (mc == MetricsConstants.MILES_AND_YARDS) {
-				return R.string.yard;
+				return useInchesInsteadOfYards() ? R.string.inch : R.string.yard;
 			}
 			return R.string.m;
 		}
@@ -84,7 +84,8 @@ public abstract class VehicleSizes {
 		}
 		if (preference.getSizeType() != SizeType.WEIGHT) {
 			// Convert display value to selected metric system
-			value = VehicleAlgorithms.convertLengthFromMeters(preference.getLengthMetricSystem(), value, useInchesInsteadOfFeet());
+			value = VehicleAlgorithms.convertLengthFromMeters(
+					preference.getLengthMetricSystem(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 		}
 		return value;
 	}
@@ -92,7 +93,8 @@ public abstract class VehicleSizes {
 	public float prepareValueToSave(@NonNull SizePreference preference, float value) {
 		if (preference.getSizeType() != SizeType.WEIGHT) {
 			// Convert length to meters before save
-			value = VehicleAlgorithms.convertLengthToMeters(preference.getLengthMetricSystem(), value, useInchesInsteadOfFeet());
+			value = VehicleAlgorithms.convertLengthToMeters(
+					preference.getLengthMetricSystem(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 		}
 		if (value != 0.0f) {
 			value -= 0.01f;
@@ -133,7 +135,7 @@ public abstract class VehicleSizes {
 		SizeData data = getSizeData(type);
 		Limits limits = data.getLimits();
 		if (type != SizeType.WEIGHT) {
-			limits = VehicleAlgorithms.convertLimitsByMetricSystem(limits, lengthMetricSystem, useInchesInsteadOfFeet());
+			limits = VehicleAlgorithms.convertLimitsByMetricSystem(limits, lengthMetricSystem, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 		}
 		return VehicleAlgorithms.collectProposedValues(limits, 1, getMinProposedValuesCount());
 	}
@@ -143,6 +145,10 @@ public abstract class VehicleSizes {
 	}
 
 	protected boolean useInchesInsteadOfFeet() {
+		return true;
+	}
+
+	protected boolean useInchesInsteadOfYards() {
 		return true;
 	}
 

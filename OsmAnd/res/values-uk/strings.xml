@@ -290,9 +290,9 @@
     <string name="map_overlay">Мапа накладки</string>
     <string name="map_overlay_descr">Виберіть накладку для основної мапи</string>
     <string name="tile_source_already_installed">Мапа вже встановлена, \'Налаштування\' будуть оновлені.</string>
-    <string name="select_tile_source_to_install">Виберіть (тайлові) мапи для встановлення або оновлення.</string>
+    <string name="select_tile_source_to_install">Виберіть джерела тайлів мапи:</string>
     <string name="internet_not_available">Неможливо виконати операцію без підключення до Інтернету.</string>
-    <string name="install_more">Завантажити ще…</string>
+    <string name="install_more">Додати ще…</string>
     <string name="level_to_switch_vector_raster_descr">Використовувати растрові мапи для будь-чого поза цим масштабом.</string>
     <string name="level_to_switch_vector_raster">Мінімальний масштаб векторних мап</string>
     <string name="error_doing_search">Неможливо виконати автономний пошук.</string>
@@ -1777,7 +1777,7 @@
     <string name="use_dashboard_btn">Використовувати панель керування</string>
     <string name="use_drawer_btn">Використовувати меню</string>
     <string name="share_osm_edits_subject">OSM правки, надіслані з OsmAnd</string>
-    <string name="rendering_attr_hideProposed_name">Заплановані обʼєкти</string>
+    <string name="rendering_attr_showProposed_name">Заплановані обʼєкти</string>
     <string name="save_poi_without_poi_type_message">Зберегти POI без типу\?</string>
     <string name="no_location_permission">Надання доступу до даних про місцеперебування.</string>
     <string name="no_camera_permission">Надання доступу до камери.</string>
@@ -4401,7 +4401,7 @@
     <string name="from_to_with_params">З %1$s до %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
     <string name="storage_found_files_descr">Торкніться «%1$s», щоб скопіювати файли %2$s з «%3$s» на «%4$s». Це може тривати деякий час.</string>
-    <string name="storage_copied_files_size">Скопійовано %1$s файлів %2$s</string>
+    <string name="storage_copied_files_size">Оброблено %1$s файл(и), %2$s</string>
     <string name="storage_copying_files_size">Копіювання %1$s файлів %2$s</string>
     <string name="storage_found_files_size">Знайдено %1$s файлів %2$s</string>
     <string name="shared_storage_last_step">Після цього можна вказати нову теку даних.</string>
@@ -4440,7 +4440,7 @@
     <string name="no_items_selected_warning">Виберіть принаймні один елемент</string>
     <string name="display_groups_visibility_dialog_description">Ви можете керувати видимістю груп на мапі. Якщо трек приховано, усі групи також будуть приховані.</string>
     <string name="shared_string_hide_all">Сховати все</string>
-    <string name="migration_files_present">%1$d файлів (%2$s) присутні у вибраному місці «%3$s».</string>
+    <string name="migration_files_present">%1$d файл(и) (%2$s) вже наявні за адресою «%3$s» і не перезаписані.</string>
     <string name="exit_without_saving_warning">Точно вийти без збереження\?</string>
     <string name="shared_string_show_slope">Показати схил</string>
     <string name="shared_string_hide_slope">Сховати схил</string>
@@ -4978,7 +4978,6 @@
     <string name="rendering_attr_weatherCloudContours_name">Ізолінії хмар</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Ізолінії опадів</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
-    <string name="release_4_4">• Тут будуть рядки для випуску 4.4</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
     <string name="shared_string_open">Відкрити</string>
@@ -5052,8 +5051,46 @@
     <string name="switch_folder">Перемкнути теку</string>
     <string name="shared_string_yards">ярди</string>
     <string name="shared_string_kilograms">кілограми</string>
-    <string name="approximate_bearing_descr">Обчислювати азимут, якщо його не отримано від пристрою</string>
+    <string name="approximate_bearing_descr">Визначити азимут маршруту, яким ви слідуєте.</string>
     <string name="shared_string_inches">дюйми</string>
     <string name="inch">дюйми</string>
     <string name="approximate_bearing">Приблизний азимут</string>
+    <string name="cloud_version_confirm_delete">Видалити \"%1$s\" з OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Видалити файл</string>
+    <string name="delete_cloud_version">Видалити хмарну версію</string>
+    <string name="local_version_do_not_exist">Немає локальної версії.</string>
+    <string name="shared_string_in_progress">Виконується</string>
+    <string name="shared_string_original">Оригінальна</string>
+    <string name="movement_speed">Швидкість руху</string>
+    <string name="simulation_position_description">Виберіть файл треку, який буде використано джерелом для керування рухом.</string>
+    <string name="release_4_4">• Покращено меню \"Треки\" у \"Налаштувати мапу\"
+\n
+\n • Контекстне меню відтепер показує локалізовані назви POI
+\n
+\n • Додано можливість ділитися маршрутом за посиланням
+\n
+\n • Додано одиницю довжини \"морські милі/фути\"
+\n
+\n • Додано новий фіксований режим орієнтації мапи
+\n
+\n • Спрощено стартовий екран
+\n
+\n • Фіксоване положення розташування в режимі розділеного екрана в Android Auto
+\n
+\n • Додано графік \"Швидкість/Ухил\" для аналізу треку
+\n
+\n • Android 13 перенесено вибір мови застосунків до системних налаштувань
+\n
+\n • Виправлено проблеми з показом місць для веганів
+\n
+\n</string>
+    <string name="shared_string_add_manually">Додати вручну…</string>
+    <string name="sort_duration_ascending">Спочатку коротша тривалість</string>
+    <string name="sort_duration_descending">Спочатку найдовша тривалість</string>
+    <string name="sort_distance_ascending">Спочатку найкоротша відстань</string>
+    <string name="sort_distance_descending">Спочатку найдовша відстань</string>
+    <string name="sort_date_ascending">Спочатку найновіша дата</string>
+    <string name="sort_date_descending">Спочатку найдавніша дата</string>
+    <string name="shared_string_nearest">Найближчі</string>
+    <string name="selected_value">Вибране значення</string>
 </resources>

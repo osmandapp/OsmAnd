@@ -1541,7 +1541,7 @@
     <string name="lang_als">албански</string>
     <string name="read_more">Прочети повече</string>
     <string name="whats_new">Какво е новото в</string>
-    <string name="rendering_attr_hideProposed_name">Предложени обекти</string>
+    <string name="rendering_attr_showProposed_name">Предложени обекти</string>
     <string name="shared_string_update">Обновяване</string>
     <string name="shared_string_upload">Качване</string>
     <string name="osm_edit_created_poi">Създаден OSM POI</string>

@@ -1117,7 +1117,7 @@
     <string name="rendering_attr_roadStyle_name">Representacion dei vias</string>
     <string name="update_poi_no_offline_poi_index">Ges de PDI disponibles fòra de linha per aquest airau</string>
     <string name="rendering_attr_piste_type_connection_name">Connexion</string>
-    <string name="rendering_attr_hideProposed_name">Objèctes proposats</string>
+    <string name="rendering_attr_showProposed_name">Objèctes proposats</string>
     <string name="pro_features">Fonccionalitats avançadas</string>
     <string name="shared_string_rendering_style">Estil de representacion</string>
     <string name="download_map_dialog">Fenèstra de teledescargament de la mapa</string>

@@ -1732,7 +1732,7 @@
     <string name="shared_string_update">Agiorna</string>
     <string name="read_more">Leghe àteru</string>
     <string name="whats_new">Ite b\'at de nou in sa</string>
-    <string name="rendering_attr_hideProposed_name">Ogetos propostos</string>
+    <string name="rendering_attr_showProposed_name">Ogetos propostos</string>
     <string name="lang_nds">Bassu-tedescu</string>
     <string name="lang_mk">Matzèdone</string>
     <string name="lang_fy">Frisonu otzidentale</string>
@@ -4975,7 +4975,7 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Assòtziu Internatzionale de su Tziclismu de Monte (International Mountain Bicycling Association)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolìnias de sas pretzipitatziones</string>
-    <string name="release_4_4">• Inoghe b\'ant a èssere istringas pro sa versione 4.4</string>
+    
     <string name="rendering_attr_weatherCloudContours_name">Isolìnias de sas nues</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolìnias de sa velotzidade de su bentu</string>
     <string name="open_weather_action_description">Ti permitit de abèrrere un\'ischermada cun informatziones meteorològicas a sa minuda.</string>

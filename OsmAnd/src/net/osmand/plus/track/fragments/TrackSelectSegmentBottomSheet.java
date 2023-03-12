@@ -79,6 +79,9 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		gpxTrackName.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, 0);
 		gpxTrackName.setSpan(new ForegroundColorSpan(descriptionColor), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
+		TextView description = view.findViewById(R.id.description);
+		description.setText(gpxTrackName);
+
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		ImageView icon = routesContainer.findViewById(R.id.icon);
@@ -88,7 +91,6 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		LinearLayout readContainer = routesContainer.findViewById(R.id.read_section);
 		readContainer.setPadding(0, bottomTopPadding, 0, bottomTopPadding);
 		TextView name = routesContainer.findViewById(R.id.name);
-		TextView description = routesContainer.findViewById(R.id.description);
 		TextView distance = routesContainer.findViewById(R.id.distance);
 		TextView pointsCount = routesContainer.findViewById(R.id.points_count);
 		TextView time = routesContainer.findViewById(R.id.time);
@@ -100,7 +102,6 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		containerNameAndReadSection.setPadding(sidePadding, 0, 0, 0);
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		name.setText(titleGpxTrack);
-		description.setText(gpxTrackName);
 		distance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);

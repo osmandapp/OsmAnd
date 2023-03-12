@@ -2498,7 +2498,7 @@
     <string name="map_downloaded_descr">The %1$s map is ready for use.</string>
     <string name="map_downloaded">Map downloaded</string>
     <string name="osm_edit_created_poi">Created OSM POI</string>
-    <string name="rendering_attr_hideProposed_name">Oxetos propuestos</string>
+    <string name="rendering_attr_showProposed_name">Oxetos propuestos</string>
     <string name="what_is_new">Novedaes</string>
     <string name="share_osm_edits_subject">OSM edits shared via OsmAnd</string>
     <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>

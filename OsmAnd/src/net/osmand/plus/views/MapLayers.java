@@ -64,6 +64,7 @@ import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -436,8 +437,8 @@ public class MapLayers {
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           @NonNull ContextMenuItem item,
 	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
-		selectMapLayer(mapActivity, true, mapSourceName -> {
-			item.setDescription(mapSourceName);
+		selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, mapSourceName -> {
+			item.setDescription(Algorithms.isEmpty(mapSourceName) ? app.getString(R.string.vector_data) : mapSourceName);
 			uiAdapter.onDataSetChanged();
 			return true;
 		});
@@ -445,6 +446,7 @@ public class MapLayers {
 
 	public void selectMapLayer(@NonNull MapActivity mapActivity,
 	                           boolean includeOfflineMaps,
+	                           @NonNull CommonPreference<String> targetLayer,
 	                           @Nullable CallbackWithObject<String> callback) {
 		if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 			app.showToastMessage(R.string.map_online_plugin_is_not_installed);
@@ -464,14 +466,14 @@ public class MapLayers {
 		}
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
-		entriesMap.put(layerAdd, getString(R.string.shared_string_add));
+		entriesMap.put(layerAdd, getString(R.string.shared_string_add_manually));
 		List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
 
-		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();
+		String selectedTileSourceKey = targetLayer.get();
 
 		int selectedItem = -1;
-		if (!settings.MAP_ONLINE_DATA.get()) {
+		if (!settings.MAP_ONLINE_DATA.get() && targetLayer == settings.MAP_TILE_SOURCES) {
 			selectedItem = 0;
 		} else {
 
@@ -504,8 +506,10 @@ public class MapLayers {
 					String layerKey = entriesMapList.get(which).getKey();
 					switch (layerKey) {
 						case layerOsmVector:
-							settings.MAP_ONLINE_DATA.set(false);
-							updateMapSource(mapActivity.getMapView(), null);
+							if (targetLayer == settings.MAP_TILE_SOURCES) {
+								settings.MAP_ONLINE_DATA.set(false);
+							}
+							updateLayers(mapActivity);
 							if (callback != null) {
 								callback.processResult(null);
 							}
@@ -522,14 +526,16 @@ public class MapLayers {
 								public boolean publish(TileSourceTemplate object) {
 									if (object == null) {
 										if (count == 1) {
-											settings.MAP_TILE_SOURCES.set(template.getName());
-											settings.MAP_ONLINE_DATA.set(true);
-											updateMapSource(mapActivity.getMapView(), settings.MAP_TILE_SOURCES);
+											targetLayer.set(template.getName());
+											if (targetLayer == settings.MAP_TILE_SOURCES) {
+												settings.MAP_ONLINE_DATA.set(true);
+											}
+											updateLayers(mapActivity);
 											if (callback != null) {
 												callback.processResult(template.getName());
 											}
 										} else {
-											selectMapLayer(mapActivity, includeOfflineMaps, callback);
+											selectMapLayer(mapActivity, includeOfflineMaps, targetLayer, callback);
 										}
 									} else {
 										count++;
@@ -545,9 +551,11 @@ public class MapLayers {
 							});
 							break;
 						default:
-							settings.MAP_TILE_SOURCES.set(layerKey);
-							settings.MAP_ONLINE_DATA.set(true);
-							updateMapSource(mapActivity.getMapView(), settings.MAP_TILE_SOURCES);
+							targetLayer.set(layerKey);
+							if (targetLayer == settings.MAP_TILE_SOURCES) {
+								settings.MAP_ONLINE_DATA.set(true);
+							}
+							updateLayers(mapActivity);
 							if (callback != null) {
 								callback.processResult(layerKey.replace(IndexConstants.SQLITE_EXT, ""));
 							}

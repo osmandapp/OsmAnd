@@ -17,9 +17,9 @@ import androidx.core.widget.CompoundButtonCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
@@ -34,7 +34,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -62,6 +61,7 @@ import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -464,7 +464,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	private final GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
 		@Override
 		public boolean isCancelled() {
-			return false;
+			return !isAdded();
 		}
 
 		@Override

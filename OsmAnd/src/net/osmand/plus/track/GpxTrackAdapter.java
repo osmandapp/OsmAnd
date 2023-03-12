@@ -15,10 +15,10 @@ import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXInfo;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -179,22 +179,17 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		}
 	}
 
-	private GpxDataItem getDataItem(GPXInfo info) {
-		GpxDbHelper.GpxDataItemCallback gpxDataItemCallback = new GpxDbHelper.GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
+	private GpxDataItem getDataItem(@NonNull GPXInfo info) {
+		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
-				if (item != null && gpxInfoList != null && info != null) {
+				if (item != null && gpxInfoList != null) {
 					notifyItemChanged(gpxInfoList.indexOf(info));
 				}
 			}
 		};
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName())
-				, gpxDataItemCallback);
+		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR),
+						info.getFileName()), callback);
 	}
 
 	public void setAdapterListener(OnItemClickListener onItemClickListener) {

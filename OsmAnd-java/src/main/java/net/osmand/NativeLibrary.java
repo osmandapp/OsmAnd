@@ -231,7 +231,7 @@ public class NativeLibrary {
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
-		return nativeRouting(c, c.config.initialDirection == null ? -360 : c.config.initialDirection.floatValue(),
+		return nativeRouting(c, c.config.initialDirection == null ? -2 * (float) Math.PI : c.config.initialDirection.floatValue(),
 				regions, basemap);
 	}
 

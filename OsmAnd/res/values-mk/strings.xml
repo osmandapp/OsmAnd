@@ -2634,7 +2634,7 @@
     <string name="read_more">Procitaj povece</string>
     <string name="whats_new">Sto ima novo vo</string>
     <string name="what_is_new">Sto e novo</string>
-    <string name="rendering_attr_hideProposed_name">Predlozeni objekti</string>
+    <string name="rendering_attr_showProposed_name">Predlozeni objekti</string>
     <string name="shared_string_update">Azuriraj</string>
     <string name="shared_string_upload">Postavete</string>
     <string name="osm_edit_created_poi">Kreiran OSM POI</string>

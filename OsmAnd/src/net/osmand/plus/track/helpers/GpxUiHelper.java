@@ -523,23 +523,18 @@ public class GpxUiHelper {
 	}
 
 	public static void updateGpxInfoView(@NonNull OsmandApplication app,
-	                                     @NonNull View v,
+	                                     @NonNull View view,
 	                                     @NonNull String itemTitle,
 	                                     @Nullable Drawable iconDrawable,
 	                                     @NonNull GPXInfo info) {
 		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
 			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
-			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
-				updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+				updateGpxInfoView(app, view, itemTitle, iconDrawable, info, item);
 			}
 		});
 		if (item != null) {
-			updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+			updateGpxInfoView(app, view, itemTitle, iconDrawable, info, item);
 		}
 	}
 
@@ -1026,19 +1021,14 @@ public class GpxUiHelper {
 	}
 
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
+		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
 				addAppearanceToGpx(gpxFile, item);
 				saveAndShareGpx(app, gpxFile);
 			}
 		};
-		return app.getGpxDbHelper().getItem(new File(gpxFile.path), itemCallback);
+		return app.getGpxDbHelper().getItem(new File(gpxFile.path), callback);
 	}
 
 	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {

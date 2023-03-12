@@ -1,6 +1,12 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
+
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -21,12 +27,6 @@ import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.Ma
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState.SideMarkerMode;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 
 public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonListener {
 
@@ -59,7 +59,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		setOnClickListener(v -> {
 			if (markerClickBehaviourPref.get() == MarkerClickBehaviour.SWITCH_MODE) {
 				changeWidgetState();
-			} else if(markerClickBehaviourPref.get() == MarkerClickBehaviour.GO_TO_MARKER_LOCATION) {
+			} else if (markerClickBehaviourPref.get() == MarkerClickBehaviour.GO_TO_MARKER_LOCATION) {
 				showMarkerOnMap();
 			}
 		});
@@ -174,7 +174,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		int distance = 0;
 		LatLon pointToNavigate = getPointToNavigate();
 		if (pointToNavigate != null) {
-			LatLon latLon = customLatLon != null ? customLatLon : MarkersWidgetsHelper.getDefaultLatLon(mapActivity);
+			LatLon latLon = customLatLon != null ? customLatLon : app.getMapViewTrackingUtilities().getDefaultLocation();
 			float[] calc = new float[1];
 			Location.distanceBetween(latLon.getLatitude(), latLon.getLongitude(), pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), calc);
 			distance = (int) calc[0];
