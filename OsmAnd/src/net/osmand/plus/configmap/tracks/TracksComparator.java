@@ -62,7 +62,7 @@ public class TracksComparator implements Comparator<Object> {
 
 		switch (sortMode) {
 			case NEAREST:
-				return compareNearestItems(item1, item2);
+				return compareNearestItems(item1, item2, analysis1, analysis2);
 			case NAME_ASCENDING:
 				return compareTrackItemNames(item1, item2);
 			case NAME_DESCENDING:
@@ -122,10 +122,8 @@ public class TracksComparator implements Comparator<Object> {
 		return null;
 	}
 
-	private int compareNearestItems(@NonNull TrackItem item1, @NonNull TrackItem item2) {
-		GPXTrackAnalysis analysis1 = item1.getDataItem().getAnalysis();
-		GPXTrackAnalysis analysis2 = item2.getDataItem().getAnalysis();
-
+	private int compareNearestItems(@NonNull TrackItem item1, @NonNull TrackItem item2,
+	                                @Nullable GPXTrackAnalysis analysis1, @Nullable GPXTrackAnalysis analysis2) {
 		if (analysis1.latLonStart == null && analysis2.latLonStart == null) {
 			return compareTrackItemNames(item1, item2);
 		}
