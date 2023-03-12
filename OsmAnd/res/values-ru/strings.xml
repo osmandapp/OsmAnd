@@ -1502,7 +1502,7 @@
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
     <string name="sleep_mode_stop_dialog">Выключить фоновый режим GPS?</string>
-    <string name="stop_navigation_service">Выключить</string>
+    <string name="stop_navigation_service">Отменить</string>
     <string name="keep_navigation_service">Оставить</string>
     <string name="live_monitoring_m_descr">Отправлять данные отслеживания на заданный веб-сервис, если включена запись GPX.</string>
     <string name="live_monitoring_m">Онлайн-трекинг (требуется GPX)</string>
