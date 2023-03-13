@@ -3738,9 +3738,9 @@
     <string name="plan_route_trim_after">Tondi post</string>
     <string name="plan_route_change_route_type_before">Ŝanĝi specon de vojo antaŭ</string>
     <string name="plan_route_change_route_type_after">Ŝanĝi specon de vojo post</string>
-    <string name="sort_last_modified">Antaŭe modifita</string>
-    <string name="sort_name_descending">Nomo: Z – A</string>
-    <string name="sort_name_ascending">Nomo: A – Z</string>
+    <string name="sort_last_modified">dato de modifo</string>
+    <string name="sort_name_descending">nomo (Z → A)</string>
+    <string name="sort_name_ascending">nomo (A → Z)</string>
     <string name="all_next_segments_will_be_recalc">Ĉiuj sekvaj segmentoj estos rekalkulitaj uzante la elektitan profilon.</string>
     <string name="all_previous_segments_will_be_recalc">Ĉiuj antaŭaj segmentoj estos rekalkulitaj uzante la elektitan profilon.</string>
     <string name="open_saved_track">Malfermi konservitan spuron</string>
@@ -5053,4 +5053,21 @@
     <string name="approximate_bearing">Proksimumigi direkton</string>
     <string name="approximate_bearing_descr">Kalkuli direkton kiam ne eblas akiri ĝin de la aparato</string>
     <string name="inch">in</string>
+    <string name="selected_value">Elektita valoro</string>
+    <string name="sort_duration_ascending">daŭro (kreskante)</string>
+    <string name="sort_date_descending">dato (de plej malnovaj)</string>
+    <string name="shared_string_delete_file">Forigi dosieron</string>
+    <string name="delete_cloud_version">Forigi nuban version</string>
+    <string name="shared_string_in_progress">Daŭras</string>
+    <string name="sort_duration_descending">daŭro (malkreskante)</string>
+    <string name="sort_distance_ascending">distanco (kreskante)</string>
+    <string name="sort_distance_descending">distanco (malkreskante)</string>
+    <string name="sort_date_ascending">dato (de plej novaj)</string>
+    <string name="shared_string_nearest">proksimeco</string>
+    <string name="shared_string_add_manually">Aldoni permane…</string>
+    <string name="cloud_version_confirm_delete">Ĉu forigi “%1$s” el OsmAnd-Nubo\?</string>
+    <string name="local_version_do_not_exist">Neniu loka versio.</string>
+    <string name="shared_string_original">Origina</string>
+    <string name="movement_speed">Movrapido</string>
+    <string name="app_mode_moped">Motorbiciklo</string>
 </resources>
