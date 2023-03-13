@@ -5087,4 +5087,5 @@
     <string name="sort_date_ascending">最新日期優先</string>
     <string name="sort_distance_descending">最長距離優先</string>
     <string name="shared_string_nearest">最近</string>
+    <string name="app_mode_moped">輕便摩托車</string>
 </resources>
