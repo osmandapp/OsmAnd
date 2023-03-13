@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -72,10 +73,10 @@ public class TrackDrawInfo {
 		appearanceType = bundle.getInt(TRACK_APPEARANCE_TYPE);
 	}
 
-	public TrackDrawInfo(@NonNull String filePath, @Nullable GpxDataItem gpxDataItem) {
+	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull String filePath, @Nullable GpxDataItem gpxDataItem) {
 		this.appearanceType = GPX_FILE;
 		if (gpxDataItem != null) {
-			updateParams(gpxDataItem);
+			updateParams(app, gpxDataItem);
 		}
 		this.filePath = filePath;
 	}
@@ -102,9 +103,9 @@ public class TrackDrawInfo {
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
-	public void updateParams(@NonNull GpxDataItem gpxDataItem) {
-		width = gpxDataItem.getWidth();
-		color = gpxDataItem.getColor();
+	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem) {
+		width = gpxDataItem.getWidth() != null ? gpxDataItem.getWidth() : app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
+		color = gpxDataItem.getColor() != 0 ? gpxDataItem.getColor() : GPXUtilities.parseColor(app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get(), 0);
 		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxDataItem.getColoringType());
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxDataItem.getColoringType());
 		splitType = gpxDataItem.getSplitType();

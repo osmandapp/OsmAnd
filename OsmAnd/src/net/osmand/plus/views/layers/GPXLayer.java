@@ -234,8 +234,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		currentTrackShowArrowsPref = settings.CURRENT_TRACK_SHOW_ARROWS;
 		currentTrackShowStartFinishPref = settings.CURRENT_TRACK_SHOW_START_FINISH;
 
-		defaultColorPref = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).cache();
-		defaultWidthPref = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).cache();
+		defaultColorPref = settings.registerCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR, "red").cache();
+		defaultWidthPref = settings.registerCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR, "thin").cache();
 
 		initUI();
 	}

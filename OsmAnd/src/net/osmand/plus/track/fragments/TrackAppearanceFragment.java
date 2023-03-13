@@ -192,7 +192,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					public void onGpxDataItemReady(GpxDataItem item) {
 						if (item != null) {
 							gpxDataItem = item;
-							trackDrawInfo.updateParams(item);
+							trackDrawInfo.updateParams(app, item);
 						}
 						if (view != null) {
 							initContent();
@@ -201,7 +201,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				};
 				String filePath = selectedGpxFile.getGpxFile().path;
 				gpxDataItem = gpxDbHelper.getItem(new File(filePath), callback);
-				trackDrawInfo = new TrackDrawInfo(filePath, gpxDataItem);
+				trackDrawInfo = new TrackDrawInfo(app, filePath, gpxDataItem);
 			}
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
