@@ -1750,7 +1750,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_upload">アップロード</string>
     <string name="osm_edit_created_poi">OSMのPOIが作成されました</string>
     <string name="map_downloaded">マップがダウンロードされました</string>
-    <string name="simulate_initial_startup_descr">デバッグ用に初回起動時を再現します(要再起動)、既存の設定はそのまま維持され変更されることはありません</string>
+    <string name="simulate_initial_startup_descr">デバッグ用に初回起動時を再現します(要再起動)。既存の設定はそのまま維持され変更されることはありません</string>
     <string name="simulate_initial_startup">アプリ初回起動時のシミュレート</string>
     <string name="share_menu_location">位置を共有</string>
     <string name="shared_string_send">送信</string>
@@ -2332,22 +2332,19 @@ POIの更新は利用できません</string>
 \n• コンパクトなオフラインベクターマップが少なくとも1か月に1回更新されます
 \n
 \n • 完全な地域データと道路網のみのデータの選択が可能です（例：施設などを含んだデータ 700MB、道路網のみ 200MB）</string>
-    <string name="osmand_plus_extended_description_part5">"
- 安全機能
- • オプションで昼/夜モードマップ自動表示切り替えができます
- • 制限速度の表示が出来ます(オプション)
- • 速度に応じたマップの表示拡縮ができます
- • 友人があなたを見つけることができるようにあなたの場所を共有する昨日もあります
- "</string>
-    <string name="osmand_plus_extended_description_part6">"
- 自転車と徒歩モードの特徴
- • アウトドアアクティビティ向けに徒歩移動、ハイキング、自転車向けルートを見られます
- • 自転車と徒歩のための特別なルート検索と表示モードがあります
- • 路線名を含む公共交通機関の停留所(バス、路面電車、電車)
- • ローカル内のGPXファイル内記録経路またはオンラインサービスからの経路利用ができます
- • オプションで速度と標高表示ができます
- • 等高線と山陰の表示(要追加プラグイン）
- "</string>
+    <string name="osmand_plus_extended_description_part5">セーフティ機能
+\n • オプションで昼/夜モードのマップ自動表示切り替えができます
+\n • オプションで制限速度を表示できます(速度超過時の警告機能付き)
+\n • オプションで速度に応じたマップの表示拡縮ができます
+\n • 位置情報を共有することで、友達があなたを簡単に見つけることができるようにもなります
+\n</string>
+    <string name="osmand_plus_extended_description_part6">自転車・歩行者向け機能
+\n • アウトドアアクティビティ向けにウォーキング、ハイキング、サイクリングのルートを表示が可能
+\n • 自転車や歩行者のための特別なルート計算と表示方法
+\n • 路線名含む公共交通機関の停留所(バス、路面電車、電車)を表示
+\n • オプションでルートをGPXファイルとして、端末やオンラインサービスへの共有が可能
+\n • オプションで速度・高度表示も可能
+\n • 等高線や陰影起伏図の表示(要追加プラグイン)</string>
     <string name="quick_action_showhide_osmbugs_descr">マップ画面でのOSMメモの表示/非表示を切り替えるボタンです。</string>
     <string name="sorted_by_distance">距離順で並べ替え</string>
     <string name="search_favorites">お気に入りで検索</string>
@@ -3026,7 +3023,7 @@ POIの更新は利用できません</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
     <string name="base_profile_descr_car">乗用車、トラック、オートバイ</string>
-    <string name="base_profile_descr_bicycle">マウンテンバイク、モペッド、馬</string>
+    <string name="base_profile_descr_bicycle">マウンテンバイク、原付、馬</string>
     <string name="base_profile_descr_pedestrian">徒歩、ハイキング、ランニング</string>
     <string name="base_profile_descr_public_transport">公共交通機関の類い</string>
     <string name="base_profile_descr_boat">船舶、漕ぎボート、帆船</string>
@@ -4007,7 +4004,7 @@ POIの更新は利用できません</string>
     <string name="test_route_calculation">ルート計算のテスト</string>
     <string name="routing_engine_vehicle_type_driving">ドライブ</string>
     <string name="routing_engine_vehicle_type_foot">徒歩</string>
-    <string name="routing_engine_vehicle_type_bike">自転車</string>
+    <string name="routing_engine_vehicle_type_bike">原動機付き自転車、ペダル付バイク</string>
     <string name="routing_engine_vehicle_type_car">車</string>
     <string name="copy_address">住所をコピー</string>
     <string name="online_routing_engine">オンラインルーティングエンジン</string>
@@ -4143,7 +4140,7 @@ POIの更新は利用できません</string>
     <string name="offline_wikivoyage">オフラインWikivoyage</string>
     <string name="terrain_maps">地形マップ</string>
     <string name="nautical_depth">水深</string>
-    <string name="you_can_get_feature_as_part_of_pattern">対象プラン:%2$sプランの一機能として\"%1$s\"は提供されます。</string>
+    <string name="you_can_get_feature_as_part_of_pattern">\"%1$s\"が利用可能なプラン:%2$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$sまたは%2$s</string>
     <string name="not_available_with">%1$sでは利用できません</string>
     <string name="continue_with">%1$sへの手続きに進む</string>
@@ -4308,7 +4305,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_tactile_paving_name">触覚舗装を優先</string>
     <string name="routing_attr_allow_gate_name">ゲートの使用を許可</string>
     <string name="routing_attr_only_permitted_ways_description">明示的な許可のある小道(わだち、通路など)を使用します</string>
-    <string name="safe_settings">安全</string>
+    <string name="safe_settings">セーフモード</string>
     <string name="no_plugins_enabled">プラグインが有効になっていません。利用可能なプラグインの一覧は、\'メニュー\'→\'プラグイン\'にあります。</string>
     <string name="approx_safe_mode">セーフモードGPX概算</string>
     <string name="is_disabled">%1$sは無効化されました</string>
@@ -4336,7 +4333,7 @@ POIの更新は利用できません</string>
     <string name="shared_storage_warning_title">ストレージアクセスルールの変更</string>
     <string name="purchases_feature_desc_android_auto">OsmAndオフラインマップとナビゲーションを、対応した車載モニターに表示し車両側と操作を統合します。</string>
     <string name="icon_group_nautical">航海</string>
-    <string name="transparent_status_bar_descr">ステータスバーの下にマップを表示</string>
+    <string name="transparent_status_bar_descr">ステータスバーの下にマップを表示します</string>
     <string name="transparent_status_bar">透過式ステータスバー</string>
     <string name="search_title">検索: %1$s</string>
     <string name="shared_string_files">ファイル</string>
@@ -5102,4 +5099,5 @@ POIの更新は利用できません</string>
     <string name="movement_speed">移動速度</string>
     <string name="cloud_version_confirm_delete">OsmAnd Cloudから\"%1$s\"を削除しますか？</string>
     <string name="sort_date_descending">古い日付順</string>
+    <string name="app_mode_moped">モペッド</string>
 </resources>

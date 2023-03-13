@@ -330,7 +330,7 @@
     <string name="city_type_city">Större stad</string>
     <string name="animate_route_off">Stoppa simuleringen</string>
     <string name="animate_route">Starta simuleringen</string>
-    <string name="file_can_not_be_renamed">Filen kan inte döpas om.</string>
+    <string name="file_can_not_be_renamed">Det gick inte att ändra filnamnet.</string>
     <string name="file_with_name_already_exists">En fil med det namnet finns redan.</string>
     <string name="poi_query_by_name_matches_categories">Hittade flera relaterade IP-kategorier.</string>
     <string name="data_to_search_poi_not_available">Lokala data för att söka POI är inte tillgängliga.</string>
@@ -1248,9 +1248,9 @@
     <string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
     <string name="fav_point_dublicate">Duplicerat namn på favorit angivet</string>
-    <string name="fav_point_dublicate_message">Favorit omdöpt till %1$s för att undvika dubbletter.</string>
+    <string name="fav_point_dublicate_message">Favoritens namn ändras till %1$s för att undvika dubbletter.</string>
     <string name="print_route">Skriv ut rutt</string>
-    <string name="fav_point_emoticons_message">Favorit omdöpt till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
+    <string name="fav_point_emoticons_message">Favoritens namn ändras till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
     <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
     <string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
     <string name="anonymous_user_hint">Anonyma användare kan inte:
