@@ -83,6 +83,7 @@ import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.AutoZoomMap;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.settings.enums.DrivingRegion;
@@ -1642,6 +1643,20 @@ public class OsmandSettings {
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+	}
+
+	@NonNull
+	public CompassMode getCompassMode() {
+		return getCompassMode(getApplicationMode());
+	}
+
+	@NonNull
+	public CompassMode getCompassMode(@NonNull ApplicationMode appMode) {
+		return CompassMode.getByValue(ROTATE_MAP.getModeValue(appMode));
+	}
+
+	public void setCompassMode(@NonNull CompassMode compassMode) {
+		ROTATE_MAP.set(compassMode.getValue());
 	}
 
 	public static final int CENTER_CONSTANT = 0;

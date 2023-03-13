@@ -360,7 +360,8 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	private void updateCompass() {
 		OsmandSettings settings = getApp().getSettings();
 		boolean nightMode = getCarContext().isDarkMode();
-		compassResId = CompassMode.getByValue(settings.ROTATE_MAP.get()).getIconId(nightMode);
+		CompassMode compassMode = settings.getCompassMode();
+		compassResId = compassMode.getIconId(nightMode);
 	}
 
 	private boolean isRerouting() {

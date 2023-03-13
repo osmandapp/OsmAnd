@@ -547,7 +547,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void initMapRotationByCompassMode() {
-		CompassMode compassMode = CompassMode.getByValue(settings.ROTATE_MAP.get());
+		CompassMode compassMode = settings.getCompassMode();
 		if (compassMode == CompassMode.NORTH_IS_UP) {
 			resetRotation();
 		} else if (compassMode == CompassMode.MANUALLY_ROTATED) {

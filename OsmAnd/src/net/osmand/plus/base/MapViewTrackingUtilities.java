@@ -528,24 +528,24 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private void switchCompassToNextMode() {
 		if (mapView != null) {
-			int nextValue = (settings.ROTATE_MAP.get() + 1) % 4;
-			switchCompassModeTo(CompassMode.getByValue(nextValue));
+			CompassMode compassMode = settings.getCompassMode();
+			switchCompassModeTo(compassMode.next());
 		}
 	}
 
 	public void switchCompassModeTo(@NonNull CompassMode newMode) {
-		if (getCompassMode() != newMode) {
-			setCompassMode(newMode);
+		if (settings.getCompassMode() != newMode) {
+			settings.setCompassMode(newMode);
 			onCompassModeChanged();
 		}
 	}
 
 	public void checkAndUpdateManualRotationMode() {
-		if (getCompassMode() == CompassMode.NORTH_IS_UP) {
-			setCompassMode(CompassMode.MANUALLY_ROTATED);
+		if (settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
+			settings.setCompassMode(CompassMode.MANUALLY_ROTATED);
 			showCompassModeToast();
 		}
-		if (getCompassMode() == CompassMode.MANUALLY_ROTATED) {
+		if (settings.getCompassMode() == CompassMode.MANUALLY_ROTATED) {
 			settings.setManuallyMapRotation(getMapRotate());
 		}
 	}
@@ -560,19 +560,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void showCompassModeToast() {
-		CompassMode compassMode = CompassMode.getByValue(settings.ROTATE_MAP.get());
+		CompassMode compassMode = settings.getCompassMode();
 		String title = app.getString(compassMode.getTitleId());
 		String message = app.getString(R.string.rotate_map_to) + ":\n" + title;
 		app.showShortToastMessage(message);
-	}
-
-	@NonNull
-	public CompassMode getCompassMode() {
-		return CompassMode.getByValue(settings.ROTATE_MAP.get());
-	}
-
-	public void setCompassMode(@NonNull CompassMode compassMode) {
-		settings.ROTATE_MAP.set(compassMode.getValue());
 	}
 
 	@NonNull

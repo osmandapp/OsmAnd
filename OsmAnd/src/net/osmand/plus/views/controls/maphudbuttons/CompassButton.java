@@ -83,8 +83,7 @@ public class CompassButton extends MapButton {
 			this.mapRotation = mapRotation;
 			view.invalidate();
 		}
-		int selectedValue = settings.ROTATE_MAP.get();
-		CompassMode compassMode = CompassMode.getByValue(selectedValue);
+		CompassMode compassMode = settings.getCompassMode();
 		setIconId(compassMode.getIconId());
 		setContentDesc(compassMode.getTitleId());
 	}
