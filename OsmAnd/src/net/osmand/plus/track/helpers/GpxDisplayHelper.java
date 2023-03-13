@@ -31,6 +31,7 @@ public class GpxDisplayHelper {
 
 	private final OsmandApplication app;
 	private ThreadPoolExecutor singleThreadedExecutor;
+	private List<String> gpxSplitterList = new ArrayList<>();
 	private LinkedBlockingQueue<Runnable> taskQueue;
 
 	public GpxDisplayHelper(@NonNull OsmandApplication app) {
@@ -179,9 +180,14 @@ public class GpxDisplayHelper {
 	}
 
 	public void processSplit(@NonNull OsmandApplication app, @Nullable SelectedGpxFile fileToProcess, @NonNull CallbackWithObject<Boolean> callback) {
-		singleThreadedExecutor.execute(() -> {
-			callback.processResult(processSplit(app, fileToProcess));
-		});
+		List<String> copyGpxSplitterList = new ArrayList<>(gpxSplitterList);
+		if (fileToProcess != null && fileToProcess.getGpxFile() != null && !copyGpxSplitterList.contains(fileToProcess.getGpxFile().path)) {
+			gpxSplitterList.add(fileToProcess.getGpxFile().path);
+			singleThreadedExecutor.execute(() -> {
+				callback.processResult(processSplit(app, fileToProcess));
+				gpxSplitterList.remove(fileToProcess.getGpxFile().path);
+			});
+		}
 	}
 
 	/**
@@ -276,7 +282,7 @@ public class GpxDisplayHelper {
 				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else {
 				split = false;
-				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, segment)};
+				as = new GPXTrackAnalysis[]{GPXTrackAnalysis.segment(0, segment)};
 			}
 			for (GPXTrackAnalysis analysis : as) {
 				GpxDisplayItem item = new GpxDisplayItem();
