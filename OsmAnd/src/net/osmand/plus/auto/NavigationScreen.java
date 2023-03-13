@@ -37,6 +37,7 @@ import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -359,13 +360,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	private void updateCompass() {
 		OsmandSettings settings = getApp().getSettings();
 		boolean nightMode = getCarContext().isDarkMode();
-		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_MANUAL) {
-			compassResId = !nightMode ? R.drawable.ic_compass_niu_white : R.drawable.ic_compass_niu;
-		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
-			compassResId = !nightMode ? R.drawable.ic_compass_bearing_white : R.drawable.ic_compass_bearing;
-		} else {
-			compassResId = !nightMode ? R.drawable.ic_compass_white : R.drawable.ic_compass;
-		}
+		compassResId = CompassMode.getByValue(settings.ROTATE_MAP.get()).getIconId(nightMode);
 	}
 
 	private boolean isRerouting() {
