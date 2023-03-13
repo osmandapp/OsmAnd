@@ -32,12 +32,12 @@ public class CameraDistanceWidget extends TextInfoWidget {
 		if (isUpdateNeeded() || cameraDistance != cachedCameraDistance) {
 			cachedCameraDistance = cameraDistance;
 			if (cameraDistance > 0) {
-				setText(NO_VALUE, null);
-			} else {
 				MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
 				OsmAndFormatter.FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedCameraDistance,
 						app, false, metricsConstants);
 				setText(formattedDistance.value, formattedDistance.unit);
+			} else {
+				setText(NO_VALUE, null);
 			}
 		}
 	}
