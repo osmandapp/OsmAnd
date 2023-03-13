@@ -331,6 +331,10 @@ public class RoutingHelper {
 		return lastProjection;
 	}
 
+	public void setLastProjection(Location location) {
+		lastProjection = location;
+	}
+
 	public Location getLastFixedLocation() {
 		return lastFixedLocation;
 	}

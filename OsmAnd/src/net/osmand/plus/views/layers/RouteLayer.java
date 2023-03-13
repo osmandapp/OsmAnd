@@ -503,6 +503,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			} else if (straight) {
 				lastProjection = helper.getLastFixedLocation();
 				startLocationIndex = route.getCurrentStraightAngleRoute();
+			} else if (routeUpdated) {
+				lastProjection = helper.getLastFixedLocation();
+				startLocationIndex = route.getCurrentStraightAngleRoute();
+				helper.setLastProjection(lastProjection);
 			} else {
 				lastProjection = helper.getLastProjection();
 				startLocationIndex = route.getCurrentStraightAngleRoute();
