@@ -4388,7 +4388,7 @@
 \nSposta la cartella dei dati dalla memoria condivisa alla memoria disponibile, oppure l\'applicazione perderà l\'accesso ai tuoi dati quali mappe offline, tracce GPX, ecc.</string>
     <string name="horseback_riding">A cavallo</string>
     <string name="copying_file">Copia dei file %1$s…</string>
-    <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
+    <string name="storage_copied_files_size">Elaborati %1$s file, %2$s</string>
     <string name="storage_copying_files_size">Copiando %1$s file %2$s</string>
     <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
     <string name="shared_storage_last_step">Successivamente è possibile specificare una nuova cartella dati.</string>
@@ -4432,7 +4432,7 @@
     <string name="no_items_selected_warning">Seleziona almeno un oggetto</string>
     <string name="display_groups_visibility_dialog_description">Puoi gestire la visibilità dei gruppi nella mappa. Se la traccia è nascosta, anche tutti i gruppi lo saranno.</string>
     <string name="shared_string_hide_all">Nascondi tutto</string>
-    <string name="migration_files_present">Ci sono %1$d file (%2$s) già presenti nella destinazione \'%3$s\' e non sovrascritti.</string>
+    <string name="migration_files_present">%1$d file (%2$s) già presenti nella destinazione \'%3$s\' e non sovrascritti.</string>
     <string name="exit_without_saving_warning">Uscire senza salvare le modifiche\?</string>
     <string name="shared_string_show_slope">Mostra pendenza</string>
     <string name="shared_string_hide_slope">Nascondi pendenza</string>
