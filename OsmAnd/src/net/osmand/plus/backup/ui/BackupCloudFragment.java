@@ -282,7 +282,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 			if (IntroductionCard.SYNC_BUTTON_INDEX == buttonIndex) {
 				startSync();
 			} else if (IntroductionCard.SETTINGS_BUTTON_INDEX == buttonIndex) {
-				openSettings();
+				BackupTypesFragment.showInstance(manager);
 			}
 		} else if (card instanceof CloudSyncCard) {
 			if (SYNC_BUTTON_INDEX == buttonIndex) {
