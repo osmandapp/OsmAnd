@@ -2062,8 +2062,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			if (adjustMapPos) {
 				adjustMapPosition(mapY, animated, centered, 0);
 			}
-		} else {
-			customMapCenter = false;
 		}
 	}
 
