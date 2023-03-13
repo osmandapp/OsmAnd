@@ -1431,9 +1431,9 @@
     <string name="map_overlay">Surtavola mapo</string>
     <string name="map_overlay_descr">Elekti surtavolan mapon</string>
     <string name="tile_source_already_installed">Mapo estas jam instalita, agordoj estos ĝisdatigitaj.</string>
-    <string name="select_tile_source_to_install">Elekti (kahelajn) mapojn por instali aŭ ĝisdatigi.</string>
+    <string name="select_tile_source_to_install">Elekti fontojn de map-kaheloj:</string>
     <string name="internet_not_available">Ne povas fari tion ĉi sen interreta konekto.</string>
-    <string name="install_more">Instali pli…</string>
+    <string name="install_more">Aldoni pli…</string>
     <string name="lang_es_us">Hispana (Amerika)</string>
     <string name="lang_be_by">Belorusa (latina)</string>
     <string name="lang_kn">Kanara</string>
@@ -4394,7 +4394,7 @@
     <string name="icon_group_education">Edukado</string>
     <string name="add_to_group">Aldoni al grupo</string>
     <string name="shared_string_memory">Memoro</string>
-    <string name="migration_files_present">%1$d dosieroj (%2$s) ekzistas en la elektita dosierujo: “%3$s”.</string>
+    <string name="migration_files_present">%1$d dosiero(j) (%2$s) jam ekzistas en la alcela dosierujo: “%3$s” kaj ne superskribis ilin.</string>
     <string name="fold_unfold">etendi/maletendi</string>
     <string name="exit_without_saving_warning">Ĉu eliri sen konservi ŝanĝojn\?</string>
     <string name="map_marker_options">Agordoj pri map-marko</string>
@@ -4407,7 +4407,7 @@
     <string name="copying_file">Kopiado de dosiero %1$s…</string>
     <string name="from_to_with_params">El %1$s al %2$s</string>
     <string name="progress_complete">%1$s farita</string>
-    <string name="storage_copied_files_size">Kopiis %1$s dosierojn (%2$s)</string>
+    <string name="storage_copied_files_size">Pritraktis %1$s dosiero(j)n, %2$s</string>
     <string name="storage_copying_files_size">Kopiado de %1$s dosieroj (%2$s)</string>
     <string name="storage_found_files_size">Trovis %1$s dosierojn (%2$s)</string>
     <string name="shared_string_hide_all">Kaŝi ĉiujn</string>
@@ -5051,7 +5051,7 @@
     <string name="change_appearance">Ŝanĝi aspekton</string>
     <string name="shared_string_inches">coloj</string>
     <string name="approximate_bearing">Proksimumigi direkton</string>
-    <string name="approximate_bearing_descr">Kalkuli direkton kiam ne eblas akiri ĝin de la aparato</string>
+    <string name="approximate_bearing_descr">Akiri direkton de la sekvata kurso.</string>
     <string name="inch">in</string>
     <string name="selected_value">Elektita valoro</string>
     <string name="sort_duration_ascending">daŭro (kreskante)</string>
@@ -5070,4 +5070,26 @@
     <string name="shared_string_original">Origina</string>
     <string name="movement_speed">Movrapido</string>
     <string name="app_mode_moped">Motorbiciklo</string>
+    <string name="simulation_position_description">Elektu dosieron de spuro, kiu estos uzata por simuli movadon.</string>
+    <string name="release_4_4">• plibonigita menuo “Spuroj” en “Agordi mapon”
+\n
+\n• kunteksta menuo montras tradukitajn nomojn por interesejoj
+\n
+\n• eblo por kunhavigi spuron per ligilo
+\n
+\n• eblo elekti marajn mejlojn/futojn por mezurunuo de longo
+\n
+\n• nova reĝimo por map-orientiĝo: “Fiksita (permane turnita)”
+\n
+\n• plisimpligita komenca ekrano
+\n
+\n• fiksita pozicio de loko sur dividita ekrano en Android Auto
+\n
+\n• aldonita diagramo “Dekliveco/Rapido” al analizo de spuro
+\n
+\n• Android 13: agordo pri lingvo aldonita al operaciumaj agordoj
+\n
+\n• riparita problemo pri montrado de veganaj ejoj
+\n
+\n</string>
 </resources>
