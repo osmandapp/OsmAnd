@@ -735,9 +735,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoomWithFloatPart(settings.getLastKnownMapZoom(), settings.getLastKnownMapZoomFloatPart());
-			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
-				mapView.setRotate(settings.getLastKnownMapRotation(), true);
-			}
+			mapView.initMapRotationByCompassMode();
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);

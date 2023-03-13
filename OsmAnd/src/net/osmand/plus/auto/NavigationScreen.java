@@ -376,7 +376,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	}
 
 	private void compassClick() {
-		getApp().getMapViewTrackingUtilities().switchRotateMapMode();
+		getApp().getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
 	}
 
 	private void openSearch() {

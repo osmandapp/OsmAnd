@@ -39,7 +39,7 @@ public class CompassButton extends MapButton {
 		super(mapActivity, mapActivity.findViewById(R.id.map_compass_button), COMPASS_HUD_ID);
 		setIconColorId(0);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		setOnClickListener(v -> app.getMapViewTrackingUtilities().switchRotateMapMode());
+		setOnClickListener(v -> app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode());
 		setOnLongClickListener(v -> {
 			CompassModeWidgetDialogController.showDialog(mapActivity);
 			return true;

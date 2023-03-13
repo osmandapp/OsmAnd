@@ -1636,9 +1636,8 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
 	public static final int ROTATE_MAP_MANUAL = 3;
-	public final CommonPreference<Integer> ROTATE_MAP =
-			new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 
+	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
@@ -2178,6 +2177,7 @@ public class OsmandSettings {
 	}
 
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MANUALLY_MAP_ROTATION = new FloatPreference(this, "last_known_manually_map_rotation", 0).makeProfile().cache();
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
 	public float getLastKnownMapRotation() {
@@ -2194,6 +2194,22 @@ public class OsmandSettings {
 
 	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
 		LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
+	}
+
+	public float getManuallyMapRotation() {
+		return getManuallyMapRotation(getApplicationMode());
+	}
+
+	public float getManuallyMapRotation(@NonNull ApplicationMode appMode) {
+		return LAST_KNOWN_MANUALLY_MAP_ROTATION.getModeValue(appMode);
+	}
+
+	public void setManuallyMapRotation(float rotation) {
+		setManuallyMapRotation(getApplicationMode(), rotation);
+	}
+
+	public void setManuallyMapRotation(@NonNull ApplicationMode appMode, float rotation) {
+		LAST_KNOWN_MANUALLY_MAP_ROTATION.setModeValue(appMode, rotation);
 	}
 
 	public float getLastKnownMapElevation() {
