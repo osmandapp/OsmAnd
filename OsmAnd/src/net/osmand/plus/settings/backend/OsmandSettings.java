@@ -1645,6 +1645,10 @@ public class OsmandSettings {
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
 	}
 
+	public boolean isCompassMode(@NonNull CompassMode compassMode) {
+		return ROTATE_MAP.get() == compassMode.getValue();
+	}
+
 	@NonNull
 	public CompassMode getCompassMode() {
 		return getCompassMode(getApplicationMode());
