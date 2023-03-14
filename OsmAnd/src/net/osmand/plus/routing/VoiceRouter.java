@@ -243,7 +243,7 @@ public class VoiceRouter {
 		}
 	}
 
-	public void announceBackOnRoute() {
+	private void announceBackOnRoute() {
 		//if (announceBackOnRoute) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
