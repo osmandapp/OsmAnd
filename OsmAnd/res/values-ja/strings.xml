@@ -2556,7 +2556,7 @@ POIの更新は利用できません</string>
     <string name="modify_the_search_query">検索方式を変更します。</string>
     <string name="shared_string_marker">マーカー</string>
     <string name="empty_state_osm_edits">OpenStreetMapオブジェクトの作成または変更</string>
-    <string name="shared_string_deleted">削除</string>
+    <string name="shared_string_deleted">削除予定</string>
     <string name="shared_string_edited">編集されました</string>
     <string name="shared_string_added">追加しました</string>
     <string name="notes_by_date">日付別音声/動画メモ</string>
@@ -3295,7 +3295,7 @@ POIの更新は利用できません</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="select_navigation_icon">移動中の位置アイコン</string>
     <string name="select_map_icon">静止中の位置アイコン</string>
-    <string name="delete_profiles_descr">[決定]をタップすると、プロファイルが完全に削除されます。</string>
+    <string name="delete_profiles_descr">[決定]をタップすると、選択したプロファイルは完全に削除されます。</string>
     <string name="master_profile">マスタープロファイル</string>
     <string name="select_color">プロファイルの色</string>
     <string name="edit_profiles_descr">OsmAndで用意されているデフォルトプロファイルは削除できませんが、前の画面でそれらを無効にしたり、リストの下の方へ移動させることはできます。</string>
@@ -3710,7 +3710,7 @@ POIの更新は利用できません</string>
     <string name="vessel_width_limit_description">狭い橋を避けるために船の幅を設定します</string>
     <string name="quick_action_showhide_mapillary_descr">マップ上のMapillaryレイヤーの表示/非表示を切り替えます。</string>
     <string name="routing_attr_length_description">ルート検索時に指定した車両の長さを考慮します。</string>
-    <string name="routing_attr_length_name">長さ制限</string>
+    <string name="routing_attr_length_name">長さ</string>
     <string name="shared_string_bearing">ベアリング</string>
     <string name="item_deleted">%1$sを削除しました</string>
     <string name="speed_cameras_restart_descr">アプリを再起動し、すべてのスピードカメラデータを削除します。</string>
@@ -4398,7 +4398,7 @@ POIの更新は利用できません</string>
     <string name="memory_allocated_for_routing_ds">割り当てメモリを増やすと長いルート(500 km以上)の計算が早くなりますが、他アプリのパフォーマンスに影響を与える可能性があります。
 \n短いルートの計算速度には影響しません。</string>
     <string name="storage_copying_files_size">%1$s個のファイル%2$sをコピーしています</string>
-    <string name="storage_copied_files_size">%1$s個のファイル%2$sがコピーされました</string>
+    <string name="storage_copied_files_size">%1$s個のファイル(%2$s)を処理しました</string>
     <string name="routeInfo_tracktype_description">ルートまたは経路の線でその路面構成に応じて色付けします。通常、道路網がほとんど舗装されていない場合に適用されます。</string>
     <string name="routeInfo_smoothness_description">特に表面の規則性/平坦性の観点での、車輪の付いたあらゆる乗り物においてそれぞれの通行が認められる歩道および車道の操縦性分類です。</string>
     <string name="not_enough_contributions_descr">無制限の%1$s毎の地図更新を有効にするには、過去2か月間に最低%2$sの変更が必要です。</string>
@@ -4512,7 +4512,7 @@ POIの更新は利用できません</string>
     <string name="save_as_copy">コピーとして保存</string>
     <string name="storage_migration_wrong_folder_warning">選択したフォルダにOsmAndデータが見つかりません。もう一度やり直してください。</string>
     <string name="exit_without_saving_warning">変更を保存せずに終了しても良いですか？</string>
-    <string name="migration_files_present">選択した場所 \'%3$s\'に%1$d個のファイル(%2$s)があります。</string>
+    <string name="migration_files_present">%1$d個のファイル(%2$s)が選択された保存先\'%3$s\'に既に存在していたため、上書きされませんでした。</string>
     <string name="app_profile_type">アプリのプロファイルタイプ</string>
     <string name="map_marker_options">マップマーカーオプション</string>
     <string name="fold_unfold">たたむ/広げる</string>
@@ -4568,13 +4568,13 @@ POIの更新は利用できません</string>
     <string name="map_widget_current_speed">現行速度</string>
     <string name="shared_string_buttons">ボタン</string>
     <string name="auto_backup_title">自動バックアップ</string>
-    <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)でのルート</string>
-    <string name="rendering_attr_showFunicularRoutes_name">ケーブルカーでのルート</string>
+    <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)路線</string>
+    <string name="rendering_attr_showFunicularRoutes_name">ケーブルカー路線</string>
     <string name="show_map_symbols">地図記号を表示</string>
-    <string name="rendering_attr_showMonorailRoutes_name">モノレールでのルート</string>
+    <string name="rendering_attr_showMonorailRoutes_name">モノレール路線</string>
     <string name="app_mode_mountain_bicycle">マウンテンバイク</string>
-    <string name="rendering_attr_showTrolleybusRoutes_name">トロリーバスでのルート</string>
-    <string name="rendering_attr_showBusRoutes_name">バスでのルート</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">トロリーバス路線</string>
+    <string name="rendering_attr_showBusRoutes_name">バス路線</string>
     <string name="map_widget_rendering_fps">マップ描画FPS</string>
     <string name="shared_string_expires">期限切れ</string>
     <string name="shared_string_purchased_on">購入日</string>
@@ -5100,4 +5100,8 @@ POIの更新は利用できません</string>
     <string name="cloud_version_confirm_delete">OsmAnd Cloudから\"%1$s\"を削除しますか？</string>
     <string name="sort_date_descending">古い日付順</string>
     <string name="app_mode_moped">モペッド</string>
+    <string name="approximate_bearing">おおよその方位</string>
+    <string name="simulation_position_description">場所を変更する際のもととなる経路ファイルを選択します。</string>
+    <string name="approximate_bearing_descr">たどっているナビゲーションルートから方位を導き出します。</string>
+    <string name="shared_string_inches"></string>
 </resources>

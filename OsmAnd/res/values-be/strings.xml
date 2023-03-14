@@ -4880,4 +4880,18 @@
     <string name="restart_now">Перазапусціць зараз</string>
     <string name="export_to_file">Экспартаваць у файл</string>
     <string name="import_export">Імпарт/Экспарт</string>
+    <string name="map_rendering_engine">Рухавік адмалёўкі мапы</string>
+    <string name="map_rendering_engine_v2">Версія 2 (OpenGL)</string>
+    <string name="skip_download">Прамінуць спампоўку</string>
+    <string name="rendering_engine_failed">Адбыўся збой адмалёўкі мапы.</string>
+    <string name="terms_of_service_desc">Спампоўваючы мапы, вы згаджаецеся з %1$s і %2$s.</string>
+    <string name="determine_location">Вызначыць ваша месцазнаходжанне</string>
+    <string name="favorites_backup">Рэзервовая копія ўлюбёнага</string>
+    <string name="app_mode_moped">Мапед</string>
+    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) - гэта больш хуткі рухавік адмалёўкі мапы, які падтрымлівае 2.5D-выгляд. Адмалёўка першай версіі была прадвызначанай да OsmAnd 4.3 і па-ранейшаму з\'яўляецца пераважнай для старых прылад.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd вярнуўся да рухавіка адмалёўкі мапы \'Версія 1\'. Вы можаце паспрабаваць пераключыцца на новы рухавік адмалёўкі \'Версія 2 (OpenGL)\' праз налады.
+\n
+\nКалі ласка, падтрымайце паляпшэнні, падаўшы свой журнал памылак.</string>
+    <string name="shared_string_terms_of_use">Умовы выкарыстання</string>
+    <string name="map_rendering_engine_v1">Версія 1</string>
 </resources>

@@ -4489,4 +4489,14 @@
     <string name="poi_socket_tesla_supercharger_voltage">Ŝtopilo: Tesla Supercharger: tensio</string>
     <string name="poi_socket_tesla_roadster_voltage">Ŝtopilo: Tesla Roadster: tensio</string>
     <string name="poi_socket_nema_5_15_voltage">Ŝtopilo: NEMA 5-15R: tensio</string>
+    <string name="poi_recycling_textiles">ŝtofoj</string>
+    <string name="poi_self_checkout">Memserva kontkontrolejo</string>
+    <string name="poi_recycling_plastic_bottle_caps">plastaj botelaj kapsuloj</string>
+    <string name="poi_recycling_aluminium_cans">aluminiaj skatoloj</string>
+    <string name="poi_recycling_pet_drink_bottles">PET-boteloj post trinkaĵoj</string>
+    <string name="poi_self_checkout_no">Memserva kontkontrolejo: ne</string>
+    <string name="poi_self_checkout_yes">jes</string>
+    <string name="poi_self_checkout_only">nur</string>
+    <string name="poi_lifeguard">Akva savisto</string>
+    <string name="poi_lifeguard_tower">Turo de akvaj savistoj</string>
 </resources>
