@@ -41,8 +41,7 @@ public class CompassModeWidgetDialogController implements IDialogDisplayDataProv
 	@Override
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DialogDisplayItem selected) {
 		CompassMode compassMode = (CompassMode) selected.tag;
-		settings.ROTATE_MAP.set(compassMode.getValue());
-		app.getMapViewTrackingUtilities().onRotateMapModeChanged();
+		app.getMapViewTrackingUtilities().switchCompassModeTo(compassMode);
 	}
 
 	public static void showDialog(@NonNull MapActivity mapActivity) {

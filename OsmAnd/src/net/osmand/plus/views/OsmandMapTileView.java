@@ -61,6 +61,7 @@ import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -545,8 +546,31 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void resetManualRotation() {
+	public void initMapRotationByCompassMode() {
+		CompassMode compassMode = settings.getCompassMode();
+		if (compassMode == CompassMode.NORTH_IS_UP) {
+			resetRotation();
+		} else if (compassMode == CompassMode.MANUALLY_ROTATED) {
+			restoreManualMapRotation();
+		} else if (compassMode == CompassMode.MOVEMENT_DIRECTION) {
+			restoreLastKnownMapRotation();
+		}
+	}
+
+	private void resetRotation() {
 		setRotate(0, true);
+	}
+
+	private void restoreManualMapRotation() {
+		float manualMapRotation = settings.getManuallyMapRotation();
+		setRotate(manualMapRotation, true);
+	}
+
+	private void restoreLastKnownMapRotation() {
+		if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
+			float lastKnownMapRotation = settings.getLastKnownMapRotation();
+			setRotate(lastKnownMapRotation, true);
+		}
 	}
 
 	public void setRotate(float rotate, boolean force) {
@@ -1608,7 +1632,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			if (angleRelative != 0) {
-				application.getMapViewTrackingUtilities().setRotationNoneToManual();
+				application.getMapViewTrackingUtilities().checkAndUpdateManualRotationMode();
 			}
 			int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {

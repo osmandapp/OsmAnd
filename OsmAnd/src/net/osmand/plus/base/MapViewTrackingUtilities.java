@@ -102,7 +102,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void addEnable3DViewListener() {
-		enable3DViewListener = change -> updateMapTiltAndRotation();
+		enable3DViewListener = change -> updateMapTilt();
 		settings.ENABLE_3D_VIEW.addListener(enable3DViewListener);
 	}
 
@@ -335,23 +335,20 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
-		if (mapView != null && settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-			mapView.setRotate(0.0f, true);
+		if (mapView != null) {
+			mapView.initMapRotationByCompassMode();
 		}
 	}
 
 	public void appModeChanged() {
 		updateSettings();
 		resetDrivingRegionUpdate();
-		updateMapTiltAndRotation();
+		updateMapTilt();
 	}
 
-	public void updateMapTiltAndRotation() {
+	public void updateMapTilt() {
 		if (mapView != null) {
 			mapView.setElevationAngle(settings.getLastKnownMapElevation());
-			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
-				mapView.setRotate(settings.getLastKnownMapRotation(), true);
-			}
 		}
 	}
 
@@ -514,38 +511,47 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		setMapLinkedToLocation(false);
 	}
 
-	public void switchRotateMapMode() {
+	public void requestSwitchCompassToNextMode() {
 		if (routingHelper.isFollowingMode()) {
 			if (compassRequest + COMPASS_REQUEST_TIME_INTERVAL_MS > System.currentTimeMillis()) {
 				compassRequest = 0;
-				switchRotateMapModeImpl();
+				switchCompassToNextMode();
 			} else {
 				compassRequest = System.currentTimeMillis();
 				app.showShortToastMessage(app.getString(R.string.press_again_to_change_the_map_orientation));
 			}
 		} else {
 			compassRequest = 0;
-			switchRotateMapModeImpl();
+			switchCompassToNextMode();
 		}
 	}
 
-	private void switchRotateMapModeImpl() {
+	private void switchCompassToNextMode() {
 		if (mapView != null) {
-			int vl = (settings.ROTATE_MAP.get() + 1) % 4;
-			settings.ROTATE_MAP.set(vl);
-			onRotateMapModeChanged();
+			CompassMode compassMode = settings.getCompassMode();
+			switchCompassModeTo(compassMode.next());
 		}
 	}
 
-	public void onRotateMapModeChanged() {
-		CompassMode compassMode = CompassMode.getByValue(settings.ROTATE_MAP.get());
-		if (compassMode == CompassMode.NORTH_IS_UP) {
-			mapView.resetManualRotation();
+	public void switchCompassModeTo(@NonNull CompassMode newMode) {
+		if (settings.getCompassMode() != newMode) {
+			settings.setCompassMode(newMode);
+			onCompassModeChanged();
 		}
-		String title = app.getString(compassMode.getTitleId());
-		String message = app.getString(R.string.rotate_map_to) + ":\n" + title;
-		app.showShortToastMessage(message);
+	}
 
+	public void checkAndUpdateManualRotationMode() {
+		if (settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
+			settings.setCompassMode(CompassMode.MANUALLY_ROTATED);
+			showCompassModeToast();
+		}
+		if (settings.getCompassMode() == CompassMode.MANUALLY_ROTATED) {
+			settings.setManuallyMapRotation(getMapRotate());
+		}
+	}
+
+	public void onCompassModeChanged() {
+		showCompassModeToast();
 		updateSettings();
 		mapView.refreshMap();
 		if (mapView.isCarView()) {
@@ -553,12 +559,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	public void setRotationNoneToManual(){
-		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
-			settings.ROTATE_MAP.set(OsmandSettings.ROTATE_MAP_MANUAL);
-			app.showShortToastMessage(app.getString(R.string.rotate_map_to)
-					+ ":\n" + app.getString(R.string.rotate_map_manual_opt));
-		}
+	public void showCompassModeToast() {
+		CompassMode compassMode = settings.getCompassMode();
+		String title = app.getString(compassMode.getTitleId());
+		String message = app.getString(R.string.rotate_map_to) + ":\n" + title;
+		app.showShortToastMessage(message);
 	}
 
 	@NonNull
