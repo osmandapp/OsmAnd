@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.helpers.GPXInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class LoadGpxInfosTask extends AsyncTask<Void, GPXInfo, List<GPXInfo>> {
 	}
 
 	@NonNull
-	private File[] listFilesSorted(@NonNull File dir) {
+	public static File[] listFilesSorted(@NonNull TracksSortByMode sortByMode, @NonNull File dir) {
 		File[] listFiles = dir.listFiles();
 		if (listFiles == null) {
 			return new File[0];
@@ -108,7 +108,7 @@ public class LoadGpxInfosTask extends AsyncTask<Void, GPXInfo, List<GPXInfo>> {
 
 	private void loadGPXFolder(File mapPath, List<GPXInfo> result,
 	                           List<GPXInfo> progress, String gpxSubfolder) {
-		File[] listFiles = listFilesSorted(mapPath);
+		File[] listFiles = listFilesSorted(sortByMode, mapPath);
 		for (File file : listFiles) {
 			if (file.isDirectory()) {
 				String sub = gpxSubfolder.length() == 0 ? file.getName() : gpxSubfolder + "/"
