@@ -24,7 +24,6 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -155,8 +154,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (mapView != null) {
 			boolean preventCompassRotation = false;
 			if (routePlanningMode) {
-				MapActivity activity = mapView.getMapActivity();
-				preventCompassRotation = MapRouteInfoMenu.isRelatedFragmentVisible(activity);
+				preventCompassRotation = MapRouteInfoMenu.isRelatedFragmentVisible(mapView);
 			}
 			if (settings.isCompassMode(COMPASS_DIRECTION) && !preventCompassRotation) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {

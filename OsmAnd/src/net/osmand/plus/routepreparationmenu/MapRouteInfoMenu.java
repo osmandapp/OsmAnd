@@ -2142,12 +2142,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return false;
 	}
 
-	public static boolean isRelatedFragmentVisible(@Nullable MapActivity activity) {
+	public static boolean isRelatedFragmentVisible(@Nullable OsmandMapTileView mapView) {
 		if (MapRouteInfoMenu.chooseRoutesVisible
 				|| MapRouteInfoMenu.waypointsVisible
 				|| MapRouteInfoMenu.followTrackVisible) {
 			return true;
 		}
+		MapActivity activity = mapView != null ? mapView.getMapActivity() : null;
 		MapRouteInfoMenu menu = activity != null ? activity.getMapRouteInfoMenu() : null;
 		return menu != null && menu.isVisible();
 	}

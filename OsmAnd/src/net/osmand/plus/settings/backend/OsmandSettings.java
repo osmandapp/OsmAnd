@@ -1646,7 +1646,7 @@ public class OsmandSettings {
 	}
 
 	public boolean isCompassMode(@NonNull CompassMode compassMode) {
-		return getCompassMode() == compassMode;
+		return ROTATE_MAP.get() == compassMode.getValue();
 	}
 
 	@NonNull
