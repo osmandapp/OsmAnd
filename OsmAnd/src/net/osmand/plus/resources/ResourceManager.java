@@ -822,9 +822,9 @@ public class ResourceManager {
 			}
 
 			boolean shouldCopy = unconditional;
+			shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !exists;
 			if (firstInstall || overwrite) {
 				shouldCopy |= ASSET_COPY_MODE__overwriteOnlyIfExists.equals(copyMode) && exists;
-				shouldCopy |= ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode) && !exists;
 			}
 			if (shouldCopy) {
 				copyAssets(assetManager, asset.source, destinationFile);

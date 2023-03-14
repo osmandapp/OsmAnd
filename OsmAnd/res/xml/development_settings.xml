@@ -45,6 +45,20 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/disable_vertex_hillshade_3d" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="generate_slope_from_3d_maps"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/generate_slope_from_3d_maps" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="generate_hillshade_from_3d_maps"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/generate_hillshade_from_3d_maps" />
+
 	<PreferenceCategory
 		android:key="safe"
 		android:layout="@layout/preference_category_with_descr"

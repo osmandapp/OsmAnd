@@ -6,6 +6,7 @@ import net.osmand.core.jni.ElevationConfiguration;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
 import net.osmand.core.jni.GeoTiffCollection;
+import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
@@ -21,7 +22,6 @@ import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TileSqliteDatabasesCollection;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
@@ -80,6 +81,8 @@ public class MapRendererContext {
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
+	@Nullable
+	private GeoTiffCollection geoTiffCollection;
 	private volatile MapRendererView mapRendererView;
 
 	private float cachedReferenceTileSize;
@@ -320,19 +323,9 @@ public class MapRendererContext {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
-			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
-			if (!sqliteCacheDir.exists()) {
-				sqliteCacheDir.mkdir();
-			}
-			File geotiffDir = app.getAppPath(GEOTIFF_DIR);
-			if (!geotiffDir.exists()) {
-				geotiffDir.mkdir();
-			}
-			GeoTiffCollection geotiffCollection = new GeoTiffCollection();
-			geotiffCollection.addDirectory(geotiffDir.getAbsolutePath());
-			geotiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
+			GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
 			int elevationTileSize = mapRendererView.getElevationDataTileSize();
-			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(geotiffCollection, elevationTileSize));
+			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(geoTiffCollection, elevationTileSize));
 		}
 	}
 	public void resetHeightmapProvider() {
@@ -409,6 +402,38 @@ public class MapRendererContext {
 		}
 
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
+	}
+
+	public void updateCachedHeightmapTiles() {
+		GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+		for (RasterType rasterType : RasterType.values()) {
+			geoTiffCollection.refreshTilesInCache(rasterType);
+		}
+	}
+
+	public void removeCachedHeightmapTiles(@NonNull String filePath) {
+		GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+		for (RasterType rasterType : RasterType.values()) {
+			geoTiffCollection.removeFileTilesFromCache(rasterType, filePath);
+		}
+	}
+
+	@NonNull
+	public GeoTiffCollection getGeoTiffCollection() {
+		if (geoTiffCollection == null) {
+			geoTiffCollection = new GeoTiffCollection();
+			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
+			if (!sqliteCacheDir.exists()) {
+				sqliteCacheDir.mkdir();
+			}
+			File geotiffDir = app.getAppPath(GEOTIFF_DIR);
+			if (!geotiffDir.exists()) {
+				geotiffDir.mkdir();
+			}
+			geoTiffCollection.addDirectory(geotiffDir.getAbsolutePath());
+			geoTiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
+		}
+		return geoTiffCollection;
 	}
 
 	@Nullable

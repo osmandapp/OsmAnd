@@ -124,13 +124,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupHeightmapRelatedPrefs() {
+		boolean heightmapEnabled = plugin.isHeightmapEnabled();
+
 		SwitchPreferenceEx enable3DMapsSwitch = findPreference(plugin.ENABLE_3D_MAPS.getId());
 		enable3DMapsSwitch.setIconSpaceReserved(false);
-		enable3DMapsSwitch.setEnabled(plugin.isHeightmapEnabled());
+		enable3DMapsSwitch.setEnabled(heightmapEnabled);
 
 		SwitchPreferenceEx disableVertexHillshadeSwitch = findPreference(plugin.DISABLE_VERTEX_HILLSHADE_3D.getId());
 		disableVertexHillshadeSwitch.setIconSpaceReserved(false);
-		disableVertexHillshadeSwitch.setEnabled(plugin.isHeightmapEnabled());
+		disableVertexHillshadeSwitch.setEnabled(heightmapEnabled);
+
+		SwitchPreferenceEx generateSlopeFrom3DMapsSwitch = findPreference(plugin.GENERATE_SLOPE_FROM_3D_MAPS.getId());
+		generateSlopeFrom3DMapsSwitch.setIconSpaceReserved(false);
+		generateSlopeFrom3DMapsSwitch.setEnabled(heightmapEnabled);
+
+		SwitchPreferenceEx generateHillshadeFrom3DMapsSwitch = findPreference(plugin.GENERATE_HILLSHADE_FROM_3D_MAPS.getId());
+		generateHillshadeFrom3DMapsSwitch.setIconSpaceReserved(false);
+		generateHillshadeFrom3DMapsSwitch.setEnabled(heightmapEnabled);
 	}
 
 	private void setupSimulateYourLocationPref() {
