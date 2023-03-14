@@ -24,12 +24,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.core.android.NativeCore;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -559,7 +559,12 @@ public class AppInitializer implements IProgress {
 			appInitializing = false;
 			notifyFinish();
 			if (!Algorithms.isEmpty(warnings)) {
-				app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
+				String warning = AndroidUtils.formatWarnings(warnings).toString();
+				if (PluginsHelper.isDevelopment()) {
+					app.showToastMessage(warning);
+				} else {
+					LOG.error(warning);
+				}
 			}
 		}
 	}
@@ -590,18 +595,6 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-
-//	private void restoreBackupForFavoritesFiles() {
-//		File appDir = app.getAppPath(null);
-//		File save = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + IndexConstants.GPX_FILE_EXT);
-//		File bak = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + IndexConstants.GPX_FILE_EXT);
-//		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
-//			if (save.exists()) {
-//				save.delete();
-//			}
-//			bak.renameTo(save);
-//		}
-//	}
 
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {
