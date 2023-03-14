@@ -3025,7 +3025,7 @@ POIの更新は利用できません</string>
     <string name="base_profile_descr_car">乗用車、トラック、オートバイ</string>
     <string name="base_profile_descr_bicycle">マウンテンバイク、原付、馬</string>
     <string name="base_profile_descr_pedestrian">徒歩、ハイキング、ランニング</string>
-    <string name="base_profile_descr_public_transport">公共交通機関の類い</string>
+    <string name="base_profile_descr_public_transport">公共交通機関に値する鉄道やバス等(国によっては定期旅客を行う船や飛行機等も含む)</string>
     <string name="base_profile_descr_boat">船舶、漕ぎボート、帆船</string>
     <string name="base_profile_descr_aircraft">航空機、グライダー</string>
     <string name="routing_profile_geocoding">ジオコーディング</string>
@@ -4899,7 +4899,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_horse_scale_impossible_name">Impossible(命の危険あり)</string>
     <string name="routing_attr_carriage_restrictions_name">馬車の制限</string>
     <string name="routing_attr_carriage_restrictions_description">馬車のアクセス許可を考慮する</string>
-    <string name="rendering_attr_showTrainRoutes_name">列車路線</string>
+    <string name="rendering_attr_showTrainRoutes_name">鉄道路線</string>
     <string name="shared_string_item">項目</string>
     <string name="simulation_constant_mode_title">定速走行</string>
     <string name="change_default_tracks_appearance_confirmation_description">%1$s経路の外観を変更しますか？</string>
@@ -5103,5 +5103,5 @@ POIの更新は利用できません</string>
     <string name="approximate_bearing">おおよその方位</string>
     <string name="simulation_position_description">場所を変更する際のもととなる経路ファイルを選択します。</string>
     <string name="approximate_bearing_descr">たどっているナビゲーションルートから方位を導き出します。</string>
-    <string name="shared_string_inches"></string>
+    <string name="shared_string_inches"/>
 </resources>
