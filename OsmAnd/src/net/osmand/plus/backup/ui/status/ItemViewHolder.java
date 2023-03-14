@@ -75,8 +75,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		if (item.iconId != -1) {
 			icon.setImageDrawable(getContentIcon(item.iconId));
 		}
-		secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_white));
-
+		secondIcon.setImageDrawable(getContentIcon(item.synced ? R.drawable.ic_action_cloud_done : R.drawable.ic_overflow_menu_white, item.synced));
 		setupProgress(item);
 		OnClickListener listener = fragment != null ? view -> {
 			FragmentManager manager = fragment.getFragmentManager();
@@ -101,8 +100,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			progressBar.setProgress(progressInfo.getValue());
 		}
 		boolean syncing = isSyncing(item);
-		AndroidUiHelper.updateVisibility(secondIcon, !syncing);
-		AndroidUiHelper.updateVisibility(progressBar, syncing);
+		AndroidUiHelper.updateVisibility(secondIcon, item.synced || !syncing);
+		AndroidUiHelper.updateVisibility(progressBar, !item.synced && syncing);
 	}
 
 	private ItemProgressInfo getItemProgressInfo(@NonNull CloudChangeItem item) {
@@ -138,6 +137,11 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 	@Nullable
 	private Drawable getContentIcon(@DrawableRes int icon) {
-		return app.getUIUtilities().getIcon(icon, ColorUtilities.getDefaultIconColorId(nightMode));
+		return getContentIcon(icon, false);
+	}
+
+	@Nullable
+	private Drawable getContentIcon(@DrawableRes int icon, boolean active) {
+		return app.getUIUtilities().getIcon(icon, active ? ColorUtilities.getActiveIconColorId(nightMode) : ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 }

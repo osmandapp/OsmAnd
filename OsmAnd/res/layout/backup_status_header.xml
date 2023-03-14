@@ -11,7 +11,8 @@
 	<LinearLayout
 		android:id="@+id/header_container"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+		android:layout_height="0dp"
+		android:layout_weight="1"
 		android:orientation="horizontal">
 
 		<androidx.appcompat.widget.AppCompatImageView
@@ -23,12 +24,12 @@
 			tools:srcCompat="@drawable/ic_action_cloud_alert"
 			tools:tint="?attr/default_icon_color" />
 
-		<LinearLayout
+		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="0dp"
-			android:layout_height="wrap_content"
+			android:layout_height="match_parent"
 			android:layout_weight="1"
 			android:orientation="vertical"
-			android:paddingHorizontal="@dimen/content_padding"
+
 			android:paddingVertical="@dimen/content_padding_small">
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -37,6 +38,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
+				osmand:layout_constraintBottom_toTopOf="@+id/description"
+				osmand:layout_constraintTop_toTopOf="parent"
+				osmand:layout_constraintVertical_chainStyle="spread"
 				tools:text="@string/last_sync" />
 
 			<net.osmand.plus.widgets.TextViewEx
@@ -45,6 +49,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorSecondary"
+				osmand:layout_constraintBottom_toTopOf="@+id/progress_bar"
+				osmand:layout_constraintTop_toBottomOf="@+id/title"
 				tools:text="14 hours ago" />
 
 			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
@@ -52,13 +58,15 @@
 				style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
 				android:layout_width="match_parent"
 				android:layout_height="4dp"
-				android:layout_marginTop="@dimen/content_padding_half"
+				android:layout_marginTop="8dp"
 				android:indeterminate="false"
+				osmand:layout_constraintBottom_toBottomOf="parent"
+				osmand:layout_constraintTop_toBottomOf="@+id/description"
 				osmand:mpb_progressStyle="horizontal"
 				osmand:mpb_setBothDrawables="true"
 				osmand:mpb_useIntrinsicPadding="false" />
 
-		</LinearLayout>
+		</androidx.constraintlayout.widget.ConstraintLayout>
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/explicit_indicator"

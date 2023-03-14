@@ -192,6 +192,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		public SyncOperationType operation;
 		public String summary;
 		public String time;
+		public boolean synced = false;
 	}
 
 	protected CloudChangeItem createChangeItem(String key,

@@ -68,8 +68,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_overflow_menu_white"
-				osmand:tint="?attr/default_icon_color" />
+				osmand:srcCompat="@drawable/ic_overflow_menu_white"/>
 
 			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 				android:id="@+id/progressBar"
@@ -80,7 +79,6 @@
 				android:layout_marginLeft="@dimen/text_margin_small"
 				android:layout_marginRight="@dimen/text_margin_small"
 				android:indeterminate="false"
-				android:visibility="gone"
 				osmand:mpb_progressStyle="circular"
 				osmand:mpb_setBothDrawables="true"
 				osmand:mpb_useIntrinsicPadding="false" />
