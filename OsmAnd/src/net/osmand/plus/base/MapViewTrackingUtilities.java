@@ -1,5 +1,6 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 
 import android.content.Context;
@@ -23,12 +24,14 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.resources.DetectRegionTask;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -150,8 +153,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			headingChanged = Math.abs(MapUtils.degreesDiff(prevHeading, heading)) > COMPASS_HEADING_THRESHOLD;
 		}
 		if (mapView != null) {
-			boolean isRotateMapCompass = settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS;
-			if (isRotateMapCompass && !routePlanningMode) {
+			boolean preventCompassRotation = false;
+			if (routePlanningMode) {
+				MapActivity activity = mapView.getMapActivity();
+				preventCompassRotation = MapRouteInfoMenu.isRelatedFragmentVisible(activity);
+			}
+			if (settings.isCompassMode(COMPASS_DIRECTION) && !preventCompassRotation) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
 					mapView.setRotate(-val, false);
 				}
@@ -534,18 +541,18 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void switchCompassModeTo(@NonNull CompassMode newMode) {
-		if (settings.getCompassMode() != newMode) {
+		if (!settings.isCompassMode(newMode)) {
 			settings.setCompassMode(newMode);
 			onCompassModeChanged();
 		}
 	}
 
 	public void checkAndUpdateManualRotationMode() {
-		if (settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
+		if (settings.isCompassMode(CompassMode.NORTH_IS_UP)) {
 			settings.setCompassMode(CompassMode.MANUALLY_ROTATED);
 			showCompassModeToast();
 		}
-		if (settings.getCompassMode() == CompassMode.MANUALLY_ROTATED) {
+		if (settings.isCompassMode(CompassMode.MANUALLY_ROTATED)) {
 			settings.setManuallyMapRotation(getMapRotate());
 		}
 	}

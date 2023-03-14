@@ -2142,6 +2142,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return false;
 	}
 
+	public static boolean isRelatedFragmentVisible(@Nullable MapActivity activity) {
+		if (MapRouteInfoMenu.chooseRoutesVisible
+				|| MapRouteInfoMenu.waypointsVisible
+				|| MapRouteInfoMenu.followTrackVisible) {
+			return true;
+		}
+		MapRouteInfoMenu menu = activity != null ? activity.getMapRouteInfoMenu() : null;
+		return menu != null && menu.isVisible();
+	}
+
 	@Nullable
 	public WeakReference<MapRouteInfoMenuFragment> findMenuFragment() {
 		MapActivity mapActivity = getMapActivity();
