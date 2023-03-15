@@ -368,7 +368,7 @@ public class IntentHelper {
 			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
-					closeFragments();
+					closeAllFragments();
 					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
 						String path = data.getPath();
@@ -479,20 +479,14 @@ public class IntentHelper {
 		}
 	}
 
-	private void closeFragments(){
+	private void closeAllFragments() {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		List<Fragment> fragments = mapActivity.getSupportFragmentManager().getFragments();
-		int fragmentsCount = fragmentManager.getBackStackEntryCount();
-
-		for (Fragment fragment : fragments) {
-			mapActivity.getSupportFragmentManager().popBackStack();
+		for (Fragment fragment : fragmentManager.getFragments()) {
 			if (fragment instanceof DialogFragment) {
-				DialogFragment dialogFragment = (DialogFragment) fragment;
-				dialogFragment.dismiss();
+				((DialogFragment) fragment).dismiss();
+			} else {
+				fragmentManager.popBackStack();
 			}
-		}
-		for(int i = 0; i <= fragmentsCount; i++){
-			fragmentManager.popBackStack();
 		}
 	}
 
