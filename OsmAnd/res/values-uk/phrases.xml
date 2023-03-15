@@ -4503,4 +4503,7 @@
     <string name="poi_lifeguard">Рятувальник</string>
     <string name="poi_lifeguard_tower">Вежа рятувальника</string>
     <string name="poi_self_checkout">Самостійне оформлення</string>
+    <string name="poi_water_filter">Вода;Питна вода</string>
+    <string name="poi_antenna">Антена</string>
+    <string name="poi_aboriginal_lands">Землі корінних народів</string>
 </resources>
