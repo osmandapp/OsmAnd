@@ -315,7 +315,7 @@ public class MapTileLayer extends BaseMapLayer {
 			if ((alphaChanged || providerUpdated) && map != null) {
 				updateLayerProviderAlpha(alpha);
 			}
-		} else if (visible) {
+		} else if (visible && shouldDisplayAtZoom(tilesRect.getZoom())) {
 			drawTileMap(canvas, tilesRect, drawSettings);
 		}
 	}
@@ -492,6 +492,10 @@ public class MapTileLayer extends BaseMapLayer {
 	protected void cleanupResources() {
 		super.cleanupResources();
 		setLayerProvider(null);
+	}
+
+	protected boolean shouldDisplayAtZoom(int zoom) {
+		return true;
 	}
 
 	public boolean isVisible() {

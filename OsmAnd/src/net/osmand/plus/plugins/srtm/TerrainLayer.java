@@ -112,7 +112,7 @@ public class TerrainLayer extends MapTileLayer {
 			mapRenderer.setMapLayerProvider(layerIndex, hillshadeLayerProvider);
 			slopeLayerProvider = null;
 		} else {
-			TileSourceProxyProvider prov = new TileSourceProxyProvider(getApplication(), map);
+			TileSourceProxyProvider prov = new TerrainTilesProvider(getApplication(), map, srtmPlugin);
 			mapRenderer.setMapLayerProvider(layerIndex, prov.instantiateProxy(true));
 			prov.swigReleaseOwnership();
 			slopeLayerProvider = null;
@@ -147,9 +147,13 @@ public class TerrainLayer extends MapTileLayer {
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		int zoom = tileBox.getZoom();
 		int newMinVisibleZoom = srtmPlugin.getTerrainMinZoom();
 		int newMaxVisibleZoom = srtmPlugin.getTerrainMaxZoom();
 		if (cachedMinVisibleZoom != newMinVisibleZoom || cachedMaxVisibleZoom != newMaxVisibleZoom) {
+			boolean clearTilesForCurrentZoom = (cachedMinVisibleZoom != -1 && cachedMaxVisibleZoom != -1)
+					&& (zoom >= cachedMinVisibleZoom && zoom <= cachedMaxVisibleZoom)
+					&& (zoom < newMinVisibleZoom || zoom > newMaxVisibleZoom);
 			cachedMinVisibleZoom = newMinVisibleZoom;
 			cachedMaxVisibleZoom = newMaxVisibleZoom;
 			MapRendererView mapRenderer = getMapRenderer();
@@ -159,10 +163,11 @@ public class TerrainLayer extends MapTileLayer {
 				if (slopeLayerProvider != null) {
 					slopeLayerProvider.setMinVisibleZoom(minVisibleZoomLevel);
 					slopeLayerProvider.setMaxVisibleZoom(maxVisibleZoomLevel);
-					mapRenderer.reloadEverything();
 				} else if (hillshadeLayerProvider != null) {
 					hillshadeLayerProvider.setMinVisibleZoom(minVisibleZoomLevel);
 					hillshadeLayerProvider.setMaxVisibleZoom(maxVisibleZoomLevel);
+				}
+				if (clearTilesForCurrentZoom) {
 					mapRenderer.reloadEverything();
 				}
 			}
@@ -170,6 +175,11 @@ public class TerrainLayer extends MapTileLayer {
 
 		setAlpha(srtmPlugin.getTerrainTransparency());
 		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+	}
+
+	@Override
+	protected boolean shouldDisplayAtZoom(int zoom) {
+		return zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom();
 	}
 
 	private void indexTerrainFiles(OsmandApplication app) {
