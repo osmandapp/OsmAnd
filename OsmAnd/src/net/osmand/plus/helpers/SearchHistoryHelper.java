@@ -141,7 +141,6 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
 			loadedEntries = helper.getEntries();
-			removeDeletedEntries();
 			Collections.sort(loadedEntries, new HistoryEntryComparator());
 			for (HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
@@ -149,21 +148,7 @@ public class SearchHistoryHelper {
 		}
 		return helper;
 	}
-
-	private void removeDeletedEntries() {
-		HistoryItemDBHelper helper = new HistoryItemDBHelper();
-		List<HistoryEntry> deletedEntries = new ArrayList<>();
-		if (loadedEntries != null) {
-			for (HistoryEntry entry : loadedEntries) {
-				if (entry.name.isGpxFile() && GpxUiHelper.getGpxInfoByFileName(context, entry.name.getName()) == null) {
-					deletedEntries.add(entry);
-					helper.remove(entry);
-				}
-			}
-			loadedEntries.removeAll(deletedEntries);
-		}
-	}
-
+	
 	private void addNewItemToHistory(HistoryEntry model) {
 		if (context.getSettings().SEARCH_HISTORY.get()) {
 			HistoryItemDBHelper helper = checkLoadedEntries();
