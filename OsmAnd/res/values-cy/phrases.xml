@@ -1945,10 +1945,10 @@
     <string name="poi_boat_jetski_rental_no">Jetskis: nac ydy</string>
     <string name="poi_boat_sailboat_rental_yes">Cychod hwylio: oes</string>
     <string name="poi_boat_sailboat_rental_no">Cychod hwylio: na</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Dingi: oes</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Dingi: na</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Canŵ: oes</string>
-    <string name="poi_boat_canoe_rental_rental_no">Canŵ: na</string>
+    <string name="poi_boat_dinghy_rental_yes">Dingi: oes</string>
+    <string name="poi_boat_dinghy_rental_no">Dingi: na</string>
+    <string name="poi_boat_canoe_rental_yes">Canŵ: oes</string>
+    <string name="poi_boat_canoe_rental_no">Canŵ: na</string>
     <string name="poi_network">Rhwydwaith</string>
     <string name="poi_government_ministry">Gweinidogaeth</string>
     <string name="poi_surface_decoturf">DecoTurf</string>
@@ -3620,7 +3620,7 @@
     <string name="poi_direction_exit">Cyfeiriad: gadael</string>
     <string name="poi_beds">Gwelyau</string>
     <string name="poi_boat_motorboat_rental_no">Cychod modur: na</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Caiacau: oes</string>
+    <string name="poi_boat_kayak_rental_yes">Caiacau: oes</string>
     <string name="poi_government_archive">Archif</string>
     <string name="poi_government_public_service">Gwasanaeth cyhoeddus</string>
     <string name="poi_government_social_security">Nawdd cymdeithasol</string>
@@ -3734,7 +3734,7 @@
     <string name="poi_cuisine_ukrainian">Wcrainaidd</string>
     <string name="poi_motorcycle_type_offroad">Oddi ar y ffordd</string>
     <string name="poi_owner">Perchennog</string>
-    <string name="poi_boat_kayak_rental_rental_no">Caiacau: na</string>
+    <string name="poi_boat_kayak_rental_no">Caiacau: na</string>
     <string name="poi_socket_nema_14_50">Soced: NEMA 14-50</string>
     <string name="poi_socket_nema_14_50_current">Soced: NEMA 14-50: cerrynt</string>
     <string name="poi_shop_fireplace">Storfa llefydd tân</string>

@@ -399,10 +399,10 @@
     <string name="poi_boat_jetski_rental_no">jetski: ně</string>
     <string name="poi_boat_sailboat_rental_yes">płachtaki: haj</string>
     <string name="poi_boat_sailboat_rental_no">płachtaki: ně</string>
-    <string name="poi_boat_kayak_rental_rental_yes">kajaki: haj</string>
-    <string name="poi_boat_kayak_rental_rental_no">kajaki: ně</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Kanu: haj</string>
-    <string name="poi_boat_canoe_rental_rental_no">Kanu: ně</string>
+    <string name="poi_boat_kayak_rental_yes">kajaki: haj</string>
+    <string name="poi_boat_kayak_rental_no">kajaki: ně</string>
+    <string name="poi_boat_canoe_rental_yes">Kanu: haj</string>
+    <string name="poi_boat_canoe_rental_no">Kanu: ně</string>
     <string name="poi_fuel_type">družina ćěriwa</string>
     <string name="poi_fuel_avia_type">družina ćěriwa (avia)</string>
     <string name="poi_clothes_type">typ</string>

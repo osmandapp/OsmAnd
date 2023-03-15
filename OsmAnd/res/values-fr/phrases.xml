@@ -3086,10 +3086,10 @@
     <string name="poi_boat_pedalboat_rental_no">Pédalo : non</string>
     <string name="poi_boat_jetski_rental_yes">Jetskis : oui</string>
     <string name="poi_boat_jetski_rental_no">Jetskis : non</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Kayaks : oui</string>
-    <string name="poi_boat_kayak_rental_rental_no">Kayaks : non</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Canoë : oui</string>
-    <string name="poi_boat_canoe_rental_rental_no">Canoë : non</string>
+    <string name="poi_boat_kayak_rental_yes">Kayaks : oui</string>
+    <string name="poi_boat_kayak_rental_no">Kayaks : non</string>
+    <string name="poi_boat_canoe_rental_yes">Canoë : oui</string>
+    <string name="poi_boat_canoe_rental_no">Canoë : non</string>
     <string name="poi_government_ministry">Ministère</string>
     <string name="poi_government_social_security">Sécurité sociale</string>
     <string name="poi_government_social_services">Services sociaux</string>
@@ -3366,8 +3366,8 @@
     <string name="poi_winter_room_no">Salle d\'hiver : non</string>
     <string name="poi_boat_houseboat_rental_yes">Péniches : oui</string>
     <string name="poi_boat_houseboat_rental_no">Péniches : non</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Canot : oui</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Canot : non</string>
+    <string name="poi_boat_dinghy_rental_yes">Canot : oui</string>
+    <string name="poi_boat_dinghy_rental_no">Canot : non</string>
     <string name="poi_water_place_durability_durable">Durabilité des plans d\'eau : durable</string>
     <string name="poi_water_place_durability_emergency">Durabilité des plans d\'eau : urgence</string>
     <string name="poi_water_purification_chlorine">Chlore</string>
