@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -367,6 +368,7 @@ public class IntentHelper {
 			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
+					closeAllFragments();
 					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
 						String path = data.getPath();
@@ -473,6 +475,17 @@ public class IntentHelper {
 					}
 				}
 				clearIntent(intent);
+			}
+		}
+	}
+
+	private void closeAllFragments() {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		for (Fragment fragment : fragmentManager.getFragments()) {
+			if (fragment instanceof DialogFragment) {
+				((DialogFragment) fragment).dismiss();
+			} else {
+				fragmentManager.popBackStack();
 			}
 		}
 	}
