@@ -4501,4 +4501,9 @@
     <string name="poi_self_checkout_yes">Igen</string>
     <string name="poi_self_checkout_no">Önkiszolgáló kassza: nem</string>
     <string name="poi_self_checkout_only">Csak</string>
+    <string name="poi_lifeguard">Vízimentő</string>
+    <string name="poi_lifeguard_tower">Vízimentőtorony</string>
+    <string name="poi_aboriginal_lands">Őslakosok területe</string>
+    <string name="poi_water_filter">van;ivóvíz</string>
+    <string name="poi_antenna">Antenna</string>
 </resources>
