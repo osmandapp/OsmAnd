@@ -1080,7 +1080,7 @@
 \nΊχνος %2$s</string>
     <string name="gpx_file_is_empty">Άδειασμα αρχείου GPX</string>
     <string name="use_points_as_intermediates">Υπολογισμός διαδρομής μεταξύ σημείων</string>
-    <string name="always_center_position_on_map">Εμφάνιση της θέσης πάντα στο κέντρο</string>
+    <string name="always_center_position_on_map">Τοποθέτηση θέσης πάντα στο κέντρο</string>
     <string name="voice_pref_title">Φωνή</string>
     <string name="misc_pref_title">Διάφορα</string>
     <string name="index_item_nation_addresses">διευθύνσεις πανεθνικά</string>
@@ -3869,4 +3869,23 @@
     <string name="shared_string_empty">Κενό</string>
     <string name="routing_attr_allow_streams_description">Επιτρέψτε ρέματα και οχετούς</string>
     <string name="routing_attr_height_obstacles_description">Ο προβλεπόμενος χρόνος ταξιδιού θα αντανακλά αντίκτυπο υψομέτρου. Η προτίμηση δρομολόγησης μπορεί να βοηθήσει στην αποφυγή απότομων ανηφοριών:</string>
+    <string name="voice_prompts_timetable">Αριθμός προτροπών φωνής</string>
+    <string name="save_track_to_gpx">Αυτόματη εγγραφή ίχνους κατά την πλοήγηση</string>
+    <string name="sound_beep_simple">Μπιπ: απλό</string>
+    <string name="sound_beep_minimal">Μπιπ: ελάχιστο</string>
+    <string name="sound_beep_complex_loud">Μπιπ: σύνθετο δυνατό</string>
+    <string name="lang_sat">Σαντάλι</string>
+    <string name="street_level_imagery">Εικόνες σε επίπεδο δρόμου</string>
+    <string name="sound_beep_complex">Μπιπ: σύνθετο</string>
+    <string name="lang_ckb">Κεντρικά κουρδικά (σορανί)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Ελβετικό Σύστημα Συντεταγμένων (CH1903+)</string>
+    <string name="navigate_point_format_swiss_grid">Ελβετικό Σύστημα Συντεταγμένων (CH1903)</string>
+    <string name="navigate_point_format_mgrs">MGRS</string>
+    <string name="mgrs_format_descr">Το OsmAnd χρησιμοποιεί το MGRS, το οποίο είναι παρόμοιο με τη μορφή UTM του NATO.</string>
+    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="rotate_map_manual_opt">Χειροκίνητη περιστροφή (σταθερό)</string>
+    <string name="lang_de_casual">Γερμανικά (casual)</string>
+    <string name="sound_beep_simple_loud">Μπιπ: απλό δυνατό</string>
+    <string name="what_is_new">Τί νέο υπάρχει</string>
+    <string name="snowmobile_render_descr">Για οδήγηση με snowmobile με αποκλειστικούς δρόμους και πίστες.</string>
 </resources>
