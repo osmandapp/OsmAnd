@@ -76,8 +76,6 @@ public class SearchHistoryHelper {
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
-		} else {
-			removeDeletedEntries();
 		}
 		List<HistoryEntry> res = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
@@ -148,7 +146,7 @@ public class SearchHistoryHelper {
 		}
 		return helper;
 	}
-	
+
 	private void addNewItemToHistory(HistoryEntry model) {
 		if (context.getSettings().SEARCH_HISTORY.get()) {
 			HistoryItemDBHelper helper = checkLoadedEntries();
