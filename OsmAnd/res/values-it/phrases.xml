@@ -2293,8 +2293,8 @@
     <string name="poi_boat_pedalboat_rental_no">Pedalò: no</string>
     <string name="poi_boat_jetski_rental_yes">Jetski: sì</string>
     <string name="poi_boat_jetski_rental_no">Jetski: no</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Kayak: sì</string>
-    <string name="poi_boat_kayak_rental_rental_no">Kayak: no</string>
+    <string name="poi_boat_kayak_rental_yes">Kayak: sì</string>
+    <string name="poi_boat_kayak_rental_no">Kayak: no</string>
     <string name="poi_surface_tartan">Tartan</string>
     <string name="poi_checkpoint_type">Tipo Checkpoint</string>
     <string name="poi_bowls">Ciotole</string>
@@ -3707,7 +3707,7 @@
     <string name="poi_provided_for_girl_no">Fornito alle ragazze: no</string>
     <string name="poi_provided_for_boy_yes">Fornito ai ragazzi: sì</string>
     <string name="poi_office_physician">Ufficio psichiatrico</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Canoa: sì</string>
+    <string name="poi_boat_canoe_rental_yes">Canoa: sì</string>
     <string name="poi_government_social_security">Sicurezza sociale</string>
     <string name="poi_socket_type2_combo">Socket: Tipo 2 combo</string>
     <string name="poi_socket_type2_cable_current">Socket: Tipo 2 cavo: corrente</string>
@@ -3749,7 +3749,7 @@
     <string name="poi_counselling_type_crisis_no">Consulenza (crisi): no</string>
     <string name="poi_socket_type1_combo_current">Socket: Tipo 1 combo: corrente</string>
     <string name="poi_socket_nema_14_30_voltage">Socket: NEMA 14-30: tensione</string>
-    <string name="poi_boat_canoe_rental_rental_no">Canoa: no</string>
+    <string name="poi_boat_canoe_rental_no">Canoa: no</string>
     <string name="poi_socket_nema_5_20_voltage">Socket: NEMA 5-20: tensione</string>
     <string name="poi_socket_nema_5_15_voltage">Socket: NEMA 5-15R: tensione</string>
     <string name="poi_socket_tesla_roadster_voltage">Socket: Tesla Roadster: tensione</string>

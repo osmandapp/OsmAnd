@@ -241,6 +241,7 @@
 	<string name="poi_seamark">Nautical</string>
 	<string name="poi_military">Military</string>
 	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_water_filter">Water;Drinking water</string>
 	<string name="poi_user_defined_other">User defined</string>
 
 	<string name="poi_palaeontological_site">Palaeontological site</string>
@@ -3567,12 +3568,12 @@
 	<string name="poi_boat_jetski_rental_no">Jetskis: no</string>
 	<string name="poi_boat_sailboat_rental_yes">Sailboats: yes</string>
 	<string name="poi_boat_sailboat_rental_no">Sailboats: no</string>
-	<string name="poi_boat_dinghy_rental_rental_yes">Dinghy: yes</string>
-	<string name="poi_boat_dinghy_rental_rental_no">Dinghy: no</string>
-	<string name="poi_boat_kayak_rental_rental_yes">Kayaks: yes</string>
-	<string name="poi_boat_kayak_rental_rental_no">Kayaks: no</string>
-	<string name="poi_boat_canoe_rental_rental_yes">Canoe: yes</string>
-	<string name="poi_boat_canoe_rental_rental_no">Canoe: no</string>
+	<string name="poi_boat_dinghy_rental_yes">Dinghy: yes</string>
+	<string name="poi_boat_dinghy_rental_no">Dinghy: no</string>
+	<string name="poi_boat_kayak_rental_yes">Kayaks: yes</string>
+	<string name="poi_boat_kayak_rental_no">Kayaks: no</string>
+	<string name="poi_boat_canoe_rental_yes">Canoe: yes</string>
+	<string name="poi_boat_canoe_rental_no">Canoe: no</string>
 
 	<string name="poi_network">Network</string>
 
@@ -5044,5 +5045,9 @@
 	<string name="poi_lifeguard">Lifeguard</string>
 	<string name="poi_lifeguard_base">Lifeguard base</string>
 	<string name="poi_lifeguard_tower">Lifeguard tower</string>
+
+	<string name="poi_antenna">Antenna</string>
+
+	<string name="poi_aboriginal_lands">Aboriginal lands</string>
 
 </resources>

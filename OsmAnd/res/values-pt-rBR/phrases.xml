@@ -3231,10 +3231,10 @@
     <string name="poi_boat_pedalboat_rental_no">Pedalinhos: não</string>
     <string name="poi_boat_jetski_rental_yes">Jetskis: sim</string>
     <string name="poi_boat_jetski_rental_no">Jetskis: não</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Caiaques: sim</string>
-    <string name="poi_boat_kayak_rental_rental_no">Caiaques: não</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Canoa: sim</string>
-    <string name="poi_boat_canoe_rental_rental_no">Canoa: não</string>
+    <string name="poi_boat_kayak_rental_yes">Caiaques: sim</string>
+    <string name="poi_boat_kayak_rental_no">Caiaques: não</string>
+    <string name="poi_boat_canoe_rental_yes">Canoa: sim</string>
+    <string name="poi_boat_canoe_rental_no">Canoa: não</string>
     <string name="poi_boat_motorboat_rental_yes">Lanchas: sim</string>
     <string name="poi_boat_motorboat_rental_no">Lanchas: não</string>
     <string name="poi_boat_houseboat_rental_yes">Casas-barco: sim</string>
@@ -3243,8 +3243,8 @@
     <string name="poi_boat_sailboat_rental_no">Veleiros: não</string>
     <string name="poi_gorge">Desfiladeiro</string>
     <string name="poi_mountain_area">Área montanhosa</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Bote: sim</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Bote: não</string>
+    <string name="poi_boat_dinghy_rental_yes">Bote: sim</string>
+    <string name="poi_boat_dinghy_rental_no">Bote: não</string>
     <string name="poi_climbing_style">Estilo de escalada</string>
     <string name="poi_couloir">Ravina</string>
     <string name="poi_surface_decoturf">DecoTurf</string>

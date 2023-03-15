@@ -2905,4 +2905,5 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="public_transport_calc_pedestrian">Padličyć piešachodny maršrut</string>
     <string name="public_transport_type">Typ transpartu</string>
     <string name="send_log">Adpravić žurnal</string>
+    <string name="terms_of_service_desc">Spampoŭvajučy mapy, vy zhadžajeciesia z %1$s i %2$s.</string>
 </resources>
