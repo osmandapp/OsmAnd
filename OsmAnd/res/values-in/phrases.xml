@@ -825,10 +825,10 @@
     <string name="poi_government_ministry">Kementerian</string>
     <string name="poi_government_archive">Arsip</string>
     <string name="poi_network">Jaringan</string>
-    <string name="poi_boat_canoe_rental_rental_no">Kano: tidak</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Kano: ya</string>
-    <string name="poi_boat_kayak_rental_rental_no">Kayak: tidak</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Kayak: ya</string>
+    <string name="poi_boat_canoe_rental_no">Kano: tidak</string>
+    <string name="poi_boat_canoe_rental_yes">Kano: ya</string>
+    <string name="poi_boat_kayak_rental_no">Kayak: tidak</string>
+    <string name="poi_boat_kayak_rental_yes">Kayak: ya</string>
     <string name="poi_boat_jetski_rental_no">Jetski: tidak</string>
     <string name="poi_boat_jetski_rental_yes">Jetski: ya</string>
     <string name="poi_direction_exit">Arah: keluar</string>

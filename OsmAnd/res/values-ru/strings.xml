@@ -287,7 +287,7 @@
     <string name="lang_mk">Македонский</string>
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
-    <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
+    <string name="rendering_attr_showProposed_name">Планируемые объекты</string>
     <string name="srtm_plugin_description">Наложение контурных линий и слоя затенения рельефа (отмывки) поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, кому важна рельефная структура ландшафта.
 \n
 \nГлобальные данные (между 70° на севере и 70° на юге) основаны на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструменте визуализации Terra, флагманского спутника Системы наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических систем Японии (J-spacesystems).</string>
@@ -1502,7 +1502,7 @@
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
     <string name="sleep_mode_stop_dialog">Выключить фоновый режим GPS?</string>
-    <string name="stop_navigation_service">Выключить</string>
+    <string name="stop_navigation_service">Отменить</string>
     <string name="keep_navigation_service">Оставить</string>
     <string name="live_monitoring_m_descr">Отправлять данные отслеживания на заданный веб-сервис, если включена запись GPX.</string>
     <string name="live_monitoring_m">Онлайн-трекинг (требуется GPX)</string>
@@ -5089,4 +5089,15 @@
 \n
 \n</string>
     <string name="shared_string_add_manually">Добавить вручную…</string>
+    <string name="sort_duration_descending">Сначала более продолжительные</string>
+    <string name="sort_distance_ascending">Сначала более короткие</string>
+    <string name="sort_distance_descending">Сначала более длинные</string>
+    <string name="shared_string_in_progress">В процессе</string>
+    <string name="selected_value">Выбранное значение</string>
+    <string name="sort_date_ascending">Сначала свежие</string>
+    <string name="sort_date_descending">Сначала старые</string>
+    <string name="shared_string_nearest">Ближайшие</string>
+    <string name="sort_duration_ascending">Сначала менее продолжительные</string>
+    <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
+    <string name="app_mode_moped">Мопед</string>
 </resources>

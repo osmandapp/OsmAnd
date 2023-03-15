@@ -1262,7 +1262,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_north_opt">Norte siempre arriba (fijo)</string>
     <string name="rotate_map_to_descr">Alineación del mapa:</string>
     <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -1728,7 +1728,7 @@
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
     <string name="share_osm_edits_subject">Ediciones de OSM compartidas vía OsmAnd</string>
@@ -4786,7 +4786,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
-    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Rotación manual (fijo)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
@@ -5056,7 +5056,7 @@
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
-    <string name="recently_visible">Última visible «%1$s»</string>
+    <string name="recently_visible">Visibles recientemente %1$s</string>
     <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
     <string name="empty_tracks">No tienes archivos de trazas.</string>
     <string name="shared_string_select_recent">Marcar reciente</string>

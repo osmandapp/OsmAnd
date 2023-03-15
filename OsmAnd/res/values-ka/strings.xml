@@ -2013,7 +2013,7 @@
     <string name="lang_als">ალბანური (ტოსკა)</string>
     <string name="lang_nds">ქვედა გერმანული</string>
     <string name="read_more">მეტის წაკითხვა</string>
-    <string name="rendering_attr_hideProposed_name">შეთავაზებული ობიექტები</string>
+    <string name="rendering_attr_showProposed_name">შეთავაზებული ობიექტები</string>
     <string name="map_legend">რუკის აღწერა</string>
     <string name="techical_articles_item">ტექნიკური სტატიები</string>
     <string name="map_viewing_item">რუკის თვალიერება</string>

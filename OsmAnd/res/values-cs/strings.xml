@@ -1728,7 +1728,7 @@
     <string name="map_legend">Legenda mapy</string>
     <string name="shared_string_update">Aktualizovat</string>
     <string name="shared_string_upload">Odeslat</string>
-    <string name="rendering_attr_hideProposed_name">Plánované objekty</string>
+    <string name="rendering_attr_showProposed_name">Plánované objekty</string>
     <string name="whats_new">Novinky ve</string>
     <string name="share_osm_edits_subject">Úpravy OSM sdílené pomocí OsmAnd</string>
     <string name="lang_nds">Dolnoněmčina</string>

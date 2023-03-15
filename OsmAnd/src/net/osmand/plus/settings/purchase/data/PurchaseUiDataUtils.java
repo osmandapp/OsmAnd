@@ -133,6 +133,7 @@ public class PurchaseUiDataUtils {
 					return settings.BACKUP_SUBSCRIPTION_ORIGIN.get() != helper.getPurchaseOriginBySku(sku);
 				}
 			}
+			return true;
 		}
 		return false;
 	}

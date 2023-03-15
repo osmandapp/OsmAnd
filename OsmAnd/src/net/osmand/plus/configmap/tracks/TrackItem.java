@@ -3,9 +3,6 @@ package net.osmand.plus.configmap.tracks;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
@@ -14,21 +11,18 @@ import java.io.File;
 public class TrackItem {
 
 	private final String name;
+	private final String path;
 	private final File file;
-	private final GPXFile gpxFile;
+	private final long lastModified;
 
 	private GpxDataItem dataItem;
-	private WptPt nearestPoint;
+	private String regionName;
 
-	private long lastModified;
-	private long creationTime;
-
-	public TrackItem(@NonNull File file, @NonNull GPXFile gpxFile) {
+	public TrackItem(@NonNull File file) {
 		this.file = file;
-		this.gpxFile = gpxFile;
+		this.path = file.getAbsolutePath();
 		this.name = GpxUiHelper.getGpxTitle(file.getName());
 		this.lastModified = file.lastModified();
-		this.creationTime = gpxFile.getCreationTime();
 	}
 
 	@NonNull
@@ -37,13 +31,13 @@ public class TrackItem {
 	}
 
 	@NonNull
-	public File getFile() {
-		return file;
+	public String getPath() {
+		return path;
 	}
 
 	@NonNull
-	public GPXFile getGpxFile() {
-		return gpxFile;
+	public File getFile() {
+		return file;
 	}
 
 	@Nullable
@@ -51,25 +45,21 @@ public class TrackItem {
 		return dataItem;
 	}
 
-	public long getLastModified() {
-		return lastModified;
-	}
-
 	public void setDataItem(@Nullable GpxDataItem dataItem) {
 		this.dataItem = dataItem;
 	}
 
-	public long getCreationTime() {
-		return creationTime;
-	}
-
 	@Nullable
-	public WptPt getNearestPoint() {
-		return nearestPoint;
+	public String getRegionName() {
+		return regionName;
 	}
 
-	public void setNearestPoint(@Nullable WptPt wptPt) {
-		this.nearestPoint = wptPt;
+	public void setRegionName(@Nullable String regionName) {
+		this.regionName = regionName;
+	}
+
+	public long getLastModified() {
+		return lastModified;
 	}
 
 	@NonNull

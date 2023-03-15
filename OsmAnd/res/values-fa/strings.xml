@@ -2347,7 +2347,7 @@
     <string name="context_menu_item_open_note">ایجاد یادداشت OSM</string>
     <string name="osm_edit_reopened_note">یادداشت OSM بازگشوده</string>
     <string name="osm_edit_created_note">ایجاد یادداشت OSM</string>
-    <string name="rendering_attr_hideProposed_name">طرح‌های آینده (Proposed)</string>
+    <string name="rendering_attr_showProposed_name">طرح‌های آینده (Proposed)</string>
     <string name="osm_edit_created_poi">ایجاد POI</string>
     <string name="logged_as">واردشده با عنوان %1$s</string>
     <string name="moving_time">مدت حرکت</string>

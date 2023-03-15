@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
@@ -105,11 +104,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindInfoRow(@NonNull TracksAdapter adapter, @NonNull TrackItem trackItem) {
-		TrackTab trackTab = adapter.getTrackTab();
 		File file = trackItem.getFile();
 		GpxDataItem dataItem = trackItem.getDataItem();
 		if (dataItem != null) {
-			buildDescriptionRow(trackTab, dataItem, trackItem);
+			buildDescriptionRow(adapter, dataItem, trackItem);
 		} else if (file != null) {
 			dataItem = gpxDbHelper.getItem(file, new GpxDataItemCallback() {
 				@Override
@@ -122,14 +120,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			});
 			if (dataItem != null) {
 				trackItem.setDataItem(dataItem);
-				buildDescriptionRow(trackTab, dataItem, trackItem);
+				buildDescriptionRow(adapter, dataItem, trackItem);
 			}
 		}
 	}
 
-	private void buildDescriptionRow(@NonNull TrackTab trackTab, @NonNull GpxDataItem dataItem, @NonNull TrackItem trackItem) {
+	private void buildDescriptionRow(@NonNull TracksAdapter adapter, @NonNull GpxDataItem dataItem, @NonNull TrackItem trackItem) {
 		setupIcon(dataItem);
 
+		TrackTab trackTab = adapter.getTrackTab();
 		TracksSortMode sortMode = trackTab.getSortMode();
 		GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;
 		if (analysis != null) {
@@ -137,19 +136,19 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
 				appendNameDescription(builder, trackTab, trackItem, analysis);
 			} else if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
-				appendCreationTimeDescription(builder, trackTab, trackItem, analysis);
+				appendCreationTimeDescription(builder, analysis);
 			} else if (sortMode == DISTANCE_ASCENDING || sortMode == DISTANCE_DESCENDING) {
 				appendDistanceDescription(builder, trackTab, trackItem, analysis);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
 				appendDurationDescription(builder, trackTab, trackItem, analysis);
 			} else if (sortMode == NEAREST) {
-				appendNearestDescription(builder, trackTab, trackItem, analysis);
+				appendNearestDescription(adapter, builder, trackItem, analysis);
 			} else if (sortMode == LAST_MODIFIED) {
-				appendLastModifiedDescription(builder, trackTab, trackItem, analysis);
+				appendLastModifiedDescription(builder, trackItem, analysis);
 			}
 			description.setText(builder);
 		}
-		boolean showDistance = sortMode == NEAREST && trackItem.getNearestPoint() != null;
+		boolean showDistance = sortMode == NEAREST && analysis != null && analysis.latLonStart != null;
 		AndroidUiHelper.updateVisibility(distanceTv, showDistance);
 		AndroidUiHelper.updateVisibility(directionIcon, showDistance);
 	}
@@ -172,11 +171,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendFolderName(builder, trackTab, trackItem);
 	}
 
-	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
-		long creationTime = trackItem.getCreationTime();
-		if (creationTime > 0) {
+	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
+		if (analysis.startTime > 0) {
 			DateFormat format = app.getResourceManager().getDateFormat();
-			builder.append(format.format(new Date(creationTime)));
+			builder.append(format.format(new Date(analysis.startTime)));
 			setupTextSpan(builder);
 			builder.append(" \u007C ");
 		}
@@ -188,7 +186,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendPoints(builder, analysis);
 	}
 
-	private void appendLastModifiedDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
+	private void appendLastModifiedDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
 		long lastModified = trackItem.getLastModified();
 		if (lastModified > 0) {
 			DateFormat format = app.getResourceManager().getDateFormat();
@@ -228,11 +226,14 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendFolderName(builder, trackTab, trackItem);
 	}
 
-	private void appendNearestDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
-		WptPt wptPt = trackItem.getNearestPoint();
-		if (wptPt != null) {
+	private void appendNearestDescription(@NonNull TracksAdapter adapter,
+	                                      @NonNull SpannableStringBuilder builder,
+	                                      @NonNull TrackItem trackItem,
+	                                      @NonNull GPXTrackAnalysis analysis) {
+		if (analysis.latLonStart != null) {
+			appendRegionName(adapter, analysis.latLonStart, builder, trackItem);
 			builder.append(" \u007C ");
-			uiUtilities.updateLocationView(locationViewCache, directionIcon, distanceTv, new LatLon(wptPt.lat, wptPt.lon));
+			uiUtilities.updateLocationView(locationViewCache, directionIcon, distanceTv, analysis.latLonStart);
 		}
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {
@@ -240,6 +241,22 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
+	}
+
+	private void appendRegionName(@NonNull TracksAdapter adapter, @NonNull LatLon latLon,
+	                              @NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem) {
+		String regionName = trackItem.getRegionName();
+		if (regionName != null) {
+			builder.append(", " + regionName);
+		} else {
+			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, region -> {
+				trackItem.setRegionName(region != null ? region.getLocaleName() : "");
+				if (fragment.isAdded()) {
+					adapter.notifyItemChanged(getAdapterPosition());
+				}
+				return true;
+			});
+		}
 	}
 
 	private void appendDuration(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {

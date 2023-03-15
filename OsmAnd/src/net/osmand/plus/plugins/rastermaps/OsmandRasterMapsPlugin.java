@@ -6,7 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_U
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_RASTER_MAPS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.resources.ResourceManager.*;
+import static net.osmand.plus.resources.ResourceManager.ResourceListener;
 
 import android.app.Activity;
 import android.content.Context;
@@ -42,9 +42,11 @@ import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -465,7 +467,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public void registerMapContextMenuActions(@NonNull MapActivity mapActivity,
 	                                          double latitude, double longitude,
 	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
-		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer;
+		boolean mapTileLayer = mapActivity.getMapView().getMainLayer() instanceof MapTileLayer
+				|| overlayLayer != null && overlayLayer.getMap() != null && overlayLayer.getMap().couldBeDownloadedFromInternet()
+				|| underlayLayer != null && underlayLayer.getMap() != null && underlayLayer.getMap().couldBeDownloadedFromInternet();
 		if (configureMenu || mapTileLayer) {
 			adapter.addItem(createMapMenuItem(mapActivity, mapTileLayer, true));
 			adapter.addItem(createMapMenuItem(mapActivity, mapTileLayer, false));
@@ -492,14 +496,20 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (mainMapTileLayer) {
 			WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 			ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
-				MapActivity activity = mapActivityRef.get();
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					OsmandApplication app = activity.getMyApplication();
-					if (DownloadTilesFragment.shouldShowDialog(app)) {
-						DownloadTilesFragment.showInstance(activity.getSupportFragmentManager(), updateTiles);
-					} else {
-						app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
-					}
+				MapActivity activityForSelect = mapActivityRef.get();
+				if (AndroidUtils.isActivityNotDestroyed(activityForSelect)) {
+					selectLayerForTilesDownloading(activityForSelect, selectedLayer -> {
+						MapActivity activityForDownload = mapActivityRef.get();
+						if (AndroidUtils.isActivityNotDestroyed(activityForDownload)) {
+							OsmandApplication app = activityForDownload.getMyApplication();
+							if (DownloadTilesFragment.shouldShowDialog(app)) {
+								DownloadTilesFragment.showInstance(activityForDownload.getSupportFragmentManager(), updateTiles, selectedLayer);
+							} else {
+								app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
+							}
+						}
+						return false;
+					});
 				}
 				return true;
 			};
@@ -507,6 +517,49 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 
 		return item;
+	}
+
+	private void selectLayerForTilesDownloading(@NonNull MapActivity mapActivity, @NonNull CallbackWithObject<Integer> callback) {
+		List<Integer> entriesMapList = new ArrayList<Integer>();
+		OsmandMapLayer mainLayer = app.getOsmandMap().getMapView().getMainLayer();
+		if (mainLayer instanceof MapTileLayer && ((MapTileLayer) mainLayer).getMap().couldBeDownloadedFromInternet()) {
+			entriesMapList.add(R.string.layer_map);
+		}
+		if (isMapLayerDownloadable(app.getSettings().MAP_OVERLAY.get())) {
+			entriesMapList.add(R.string.layer_overlay);
+		}
+		if (isMapLayerDownloadable(app.getSettings().MAP_UNDERLAY.get())) {
+			entriesMapList.add(R.string.layer_underlay);
+		}
+		boolean nightMode = isNightMode(app);
+		int themeRes = getThemeRes(app);
+		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
+		String[] items = new String[entriesMapList.size()];
+		int i = 0;
+		for (int entry : entriesMapList) {
+			items[i++] = app.getString(entry, mapActivity);
+		}
+		if (items.length > 1) {
+			DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
+					items, nightMode, -1, app, selectedModeColor, themeRes, v -> {
+						int which = (int) v.getTag();
+						int layerKey = entriesMapList.get(which);
+						callback.processResult(layerKey);
+					}
+			);
+			Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode(app));
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+			builder.setAdapter(dialogAdapter, null);
+			builder.setNegativeButton(R.string.shared_string_dismiss, null);
+			dialogAdapter.setDialog(builder.show());
+		} else {
+			callback.processResult(entriesMapList.get(0));
+		}
+	}
+
+	private boolean isMapLayerDownloadable(String layerName) {
+		ITileSource overlayLayerMapSource = app.getSettings().getTileSourceByName(layerName, false);
+		return overlayLayerMapSource != null && overlayLayerMapSource.couldBeDownloadedFromInternet();
 	}
 
 	public static void installMapLayers(@NonNull Activity activity, ResultMatcher<TileSourceTemplate> result) {

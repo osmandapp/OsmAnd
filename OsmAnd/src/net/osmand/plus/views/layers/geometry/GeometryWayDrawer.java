@@ -198,6 +198,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		for (int i = 0; i < lines.size(); i++) {
 			VectorLine line = lines.get(i);
 			if (line.getLineId() == lineId) {
+				line.setFillColor(NativeUtilities.createFColorARGB(color));
 				line.setPoints(points);
 				if (hasColorizationMapping) {
 					line.setColorizationMapping(colorizationMapping);

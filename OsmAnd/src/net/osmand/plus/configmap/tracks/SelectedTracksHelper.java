@@ -20,6 +20,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -110,7 +111,7 @@ public class SelectedTracksHelper {
 
 		if (selectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : allTrackItems) {
-				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getGpxFile().path);
+				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getPath());
 				if (selectedGpxFile != null) {
 					selectedTrackItems.add(info);
 					originalSelectedTrackItems.add(info);
@@ -121,11 +122,12 @@ public class SelectedTracksHelper {
 		} else {
 			trackTab.items.add(TYPE_NO_VISIBLE_TRACKS);
 		}
+		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
 		for (GPXFile gpxFile : selectionHelper.getSelectedGpxFilesBackUp().keySet()) {
 			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
 			if (selectedGpxFile == null) {
-				File file = new File(gpxFile.path);
-				recentlyVisibleTrackItem.add(new TrackItem(file, gpxFile));
+				TrackItem trackItem = new TrackItem(new File(gpxFile.path));
+				recentlyVisibleTrackItem.add(trackItem);
 			}
 		}
 		trackTab.items.addAll(getVisibleItems());
@@ -199,14 +201,11 @@ public class SelectedTracksHelper {
 	public void saveTracksVisibility() {
 		selectionHelper.clearAllGpxFilesToShow(true);
 
-		List<GPXFile> gpxFiles = new ArrayList<>();
+		Map<String, Boolean> selectedFileNames = new HashMap<>();
 		for (TrackItem trackItem : selectedTrackItems) {
-			GPXFile gpxFile = trackItem.getGpxFile();
-			if (gpxFile != null) {
-				gpxFiles.add(gpxFile);
-			}
+			selectedFileNames.put(trackItem.getPath(), true);
 		}
-		selectionHelper.setGpxFileToDisplay(gpxFiles.toArray(new GPXFile[0]));
+		selectionHelper.runSelection(selectedFileNames, null);
 	}
 
 	public void loadTabsSortModes() {

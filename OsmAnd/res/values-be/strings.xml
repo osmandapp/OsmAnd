@@ -1744,7 +1744,7 @@
     <string name="techical_articles_item">Тэхнічныя артыкулы</string>
     <string name="read_more">Падрабязней</string>
     <string name="whats_new">Што новага ў</string>
-    <string name="rendering_attr_hideProposed_name">Плануемыя аб\'екты</string>
+    <string name="rendering_attr_showProposed_name">Плануемыя аб\'екты</string>
     <string name="lang_mk">Македонская</string>
     <string name="lang_nds">Ніжненямецкая</string>
     <string name="lang_fy">Заходнефрызская</string>
@@ -3304,7 +3304,7 @@
     <string name="simulate_your_location_gpx_descr">Сімуляваць сваю пазіцыю пры дапамозе запісанага GPX-следу.</string>
     <string name="quick_action_directions_from_desc">Кнопка для прызначэння цэнтра экрана пунктам адпраўлення. Будзе прапанавана абраць пункт і разлічыць маршрут.</string>
     <string name="button_rate">Ацаніць</string>
-    <string name="import_from_file">Імпарт з файла</string>
+    <string name="import_from_file">Імпартаваць з файла</string>
     <string name="import_routing_file">Імпартаваць файл маршрутызацыі</string>
     <string name="import_profile">Імпартаваць профіль</string>
     <string name="monitoring_prefs_descr">Навігацыя, дакладнасць рэгістрацыі</string>
@@ -3870,7 +3870,7 @@
     <string name="select_picture">Абярыце выявы</string>
     <string name="shared_string_resources">Рэсурсы</string>
     <string name="approximate_file_size">Прыблізны памер файла</string>
-    <string name="select_data_to_export">Абярыце даныя, якія вы хочаце экспартаваць у файл.</string>
+    <string name="select_data_to_export">Абярыце даныя для экспарту ў файл.</string>
     <string name="file_size_needed_for_import">Неабходна для імпартавання</string>
     <string name="export_not_enough_space_descr">На вашай прыладзе свабодна толькі %1$s. Вызваліце месца альбо прыбярыце пазнаку з некаторых элементаў.</string>
     <string name="export_not_enough_space">Не стае вольнага месца</string>
@@ -4877,4 +4877,21 @@
     <string name="depth_contour_lines">Ізабаты</string>
     <string name="rendering_attr_depthContourColorScheme_name">Колеравая схема ізабат</string>
     <string name="share_link">Падзяліцца спасылкай</string>
+    <string name="restart_now">Перазапусціць зараз</string>
+    <string name="export_to_file">Экспартаваць у файл</string>
+    <string name="import_export">Імпарт/Экспарт</string>
+    <string name="map_rendering_engine">Рухавік адмалёўкі мапы</string>
+    <string name="map_rendering_engine_v2">Версія 2 (OpenGL)</string>
+    <string name="skip_download">Прамінуць спампоўку</string>
+    <string name="rendering_engine_failed">Адбыўся збой адмалёўкі мапы.</string>
+    <string name="terms_of_service_desc">Спампоўваючы мапы, вы згаджаецеся з %1$s і %2$s.</string>
+    <string name="determine_location">Вызначыць ваша месцазнаходжанне</string>
+    <string name="favorites_backup">Рэзервовая копія ўлюбёнага</string>
+    <string name="app_mode_moped">Мапед</string>
+    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) - гэта больш хуткі рухавік адмалёўкі мапы, які падтрымлівае 2.5D-выгляд. Адмалёўка першай версіі была прадвызначанай да OsmAnd 4.3 і па-ранейшаму з\'яўляецца пераважнай для старых прылад.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd вярнуўся да рухавіка адмалёўкі мапы \'Версія 1\'. Вы можаце паспрабаваць пераключыцца на новы рухавік адмалёўкі \'Версія 2 (OpenGL)\' праз налады.
+\n
+\nКалі ласка, падтрымайце паляпшэнні, падаўшы свой журнал памылак.</string>
+    <string name="shared_string_terms_of_use">Умовы выкарыстання</string>
+    <string name="map_rendering_engine_v1">Версія 1</string>
 </resources>

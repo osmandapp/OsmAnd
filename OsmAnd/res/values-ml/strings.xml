@@ -847,7 +847,7 @@
     <string name="lang_nds">ലോ ജര്‍മന്‍ ഭാഷ</string>
     <string name="lang_mk">മാസിഡോണിയന്‍</string>
     <string name="read_more">കൂടുതല്‍ വായിക്കുക</string>
-    <string name="rendering_attr_hideProposed_name">പരിഗണന(മാത്രം)യിലുള്ള വസ്തുക്കള്‍</string>
+    <string name="rendering_attr_showProposed_name">പരിഗണന(മാത്രം)യിലുള്ള വസ്തുക്കള്‍</string>
     <string name="shared_string_update">പരിഷ്കരിക്കുക(അപ്ഡേറ്റ്)</string>
     <string name="shared_string_upload">അപ്ലോഡ്</string>
     <string name="world_map_download_descr">"അടിസ്ഥാന ലോക ഭൂപടം ഇല്ല അല്ലെങ്കില്‍ പഴയതായി.  ദയവായ് അത് ഡൗണ്‍ലോഡ് ചെയ്യുക(നിര്‍ബന്ധമല്ലാ )."</string>

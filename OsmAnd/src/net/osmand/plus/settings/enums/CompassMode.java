@@ -65,6 +65,13 @@ public enum CompassMode {
 	}
 
 	@NonNull
+	public CompassMode next() {
+		CompassMode[] values = values();
+		int nextModeIndex = (ordinal() + 1) % values.length;
+		return values[nextModeIndex];
+	}
+
+	@NonNull
 	public static CompassMode getByValue(int value) {
 		for (CompassMode compassMode : values()) {
 			if (compassMode.value == value) {

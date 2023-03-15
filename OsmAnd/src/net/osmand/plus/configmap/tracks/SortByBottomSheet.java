@@ -60,7 +60,7 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		View view = inflater.inflate(R.layout.bottom_sheet_track_group_list, null);
 
 		TextView title = view.findViewById(R.id.title);
-		title.setText(R.string.switch_folder);
+		title.setText(R.string.sort_by);
 		title.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);

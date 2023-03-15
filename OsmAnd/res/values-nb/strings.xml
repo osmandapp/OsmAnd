@@ -1292,7 +1292,7 @@
     <string name="contact_us">Kontakt</string>
     <string name="planning_trip_item">Turplanlegging</string>
     <string name="read_more">Les mer</string>
-    <string name="rendering_attr_hideProposed_name">Foreslåtte objekter</string>
+    <string name="rendering_attr_showProposed_name">Foreslåtte objekter</string>
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>
@@ -3853,10 +3853,10 @@
     <string name="online_routing_engine">Nettbasert rutingsmotor</string>
     <string name="online_routing_engines">Nettbaserte rutingsmotorer</string>
     <string name="announcement_time_prepare_long">Lang forberedelse</string>
-    <string name="announcement_time_prepare">Forberedelse</string>
+    <string name="announcement_time_prepare">Forbered</string>
     <string name="announcement_time_arrive">Ankom målet</string>
     <string name="shared_string_turn">Sving</string>
-    <string name="announcement_time_intervals">Tid og avstandsintervaller</string>
+    <string name="announcement_time_intervals">Tid- og avstandsintervaller</string>
     <string name="announcement_time_descr">Kunngjøringstid for forskjellige talemeldinger avhenger av meldingstype, gjeldende navigasjonshastighet og forvalgt navigasjonshastighet.</string>
     <string name="routing_engine_vehicle_type_hiking">Turgåing</string>
     <string name="routing_engine_vehicle_type_walking">Gåing</string>
@@ -4269,7 +4269,7 @@
     <string name="history_actions_descr">Du kan eksportere historikk inn i en fil.</string>
     <string name="map_markers_history">Kartmarkørhistorikk</string>
     <string name="navigation_history">Navigasjonshistorikk</string>
-    <string name="history_preferences_descr">Du kan skru av historikklogging for hver historikktype.</string>
+    <string name="history_preferences_descr">Du kan skru av historikklogging individuelt for hver av historikktypene.</string>
     <string name="shortcut_start_recording">Start opptak</string>
     <string name="shortcut_navigate_to">Naviger til …</string>
     <string name="shortcut_navigate_to_work">Jobb</string>
@@ -5080,4 +5080,12 @@
 \n - Fikset problemer med visning av veganske steder
 \n
 \n</string>
+    <string name="sort_duration_ascending">Kortere varighet først</string>
+    <string name="sort_duration_descending">Lengste varighet først</string>
+    <string name="shared_string_nearest">Nærmeste</string>
+    <string name="sort_distance_descending">Lengste avstand først</string>
+    <string name="sort_date_descending">Eldste dato først</string>
+    <string name="sort_distance_ascending">Korteste avstand først</string>
+    <string name="selected_value">Valgt verdi</string>
+    <string name="sort_date_ascending">Nyeste dato først</string>
 </resources>

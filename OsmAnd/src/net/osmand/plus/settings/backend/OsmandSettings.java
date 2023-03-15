@@ -83,6 +83,7 @@ import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.AutoZoomMap;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.settings.enums.DrivingRegion;
@@ -1083,6 +1084,7 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, "ic_action_bicycle_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "ic_action_pedestrian_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "ic_action_bus_dark");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.MOPED, "ic_action_motor_scooter");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BOAT, "ic_action_sail_boat_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.AIRCRAFT, "ic_action_aircraft");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.SKI, "ic_action_skiing");
@@ -1120,6 +1122,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.HORSE, "horsebackriding");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.MOPED, "moped");
 	}
 
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
@@ -1634,13 +1637,30 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
 	public static final int ROTATE_MAP_MANUAL = 3;
-	public final CommonPreference<Integer> ROTATE_MAP =
-			new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 
+	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+	}
+
+	public boolean isCompassMode(@NonNull CompassMode compassMode) {
+		return ROTATE_MAP.get() == compassMode.getValue();
+	}
+
+	@NonNull
+	public CompassMode getCompassMode() {
+		return getCompassMode(getApplicationMode());
+	}
+
+	@NonNull
+	public CompassMode getCompassMode(@NonNull ApplicationMode appMode) {
+		return CompassMode.getByValue(ROTATE_MAP.getModeValue(appMode));
+	}
+
+	public void setCompassMode(@NonNull CompassMode compassMode) {
+		ROTATE_MAP.set(compassMode.getValue());
 	}
 
 	public static final int CENTER_CONSTANT = 0;
@@ -1766,14 +1786,20 @@ public class OsmandSettings {
 
 	@NonNull
 	public ITileSource getMapTileSource(boolean warnWhenSelected) {
-		String tileName = MAP_TILE_SOURCES.get();
+		ITileSource tileSource = getLayerTileSource(MAP_TILE_SOURCES, warnWhenSelected);
+		return tileSource != null ? tileSource : TileSourceManager.getMapnikSource();
+	}
+
+	@Nullable
+	public ITileSource getLayerTileSource(CommonPreference<String> layerSetting, boolean warnWhenSelected) {
+		String tileName = layerSetting.get();
 		if (tileName != null) {
-			ITileSource ts = getTileSourceByName(tileName, warnWhenSelected);
-			if (ts != null) {
-				return ts;
+			ITileSource tileSource = getTileSourceByName(tileName, warnWhenSelected);
+			if (tileSource != null) {
+				return tileSource;
 			}
 		}
-		return TileSourceManager.getMapnikSource();
+		return null;
 	}
 
 	private TileSourceTemplate checkAmongAvailableTileSources(File dir, List<TileSourceTemplate> list) {
@@ -2170,6 +2196,7 @@ public class OsmandSettings {
 	}
 
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MANUALLY_MAP_ROTATION = new FloatPreference(this, "last_known_manually_map_rotation", 0).makeProfile();
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
 	public float getLastKnownMapRotation() {
@@ -2186,6 +2213,22 @@ public class OsmandSettings {
 
 	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
 		LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
+	}
+
+	public float getManuallyMapRotation() {
+		return getManuallyMapRotation(getApplicationMode());
+	}
+
+	public float getManuallyMapRotation(@NonNull ApplicationMode appMode) {
+		return LAST_KNOWN_MANUALLY_MAP_ROTATION.getModeValue(appMode);
+	}
+
+	public void setManuallyMapRotation(float rotation) {
+		setManuallyMapRotation(getApplicationMode(), rotation);
+	}
+
+	public void setManuallyMapRotation(@NonNull ApplicationMode appMode, float rotation) {
+		LAST_KNOWN_MANUALLY_MAP_ROTATION.setModeValue(appMode, rotation);
 	}
 
 	public float getLastKnownMapElevation() {

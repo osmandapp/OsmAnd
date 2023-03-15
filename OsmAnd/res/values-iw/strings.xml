@@ -1842,7 +1842,7 @@
     <string name="lang_als">אלבנית (טוסק)</string>
     <string name="read_more">מידע נוסף</string>
     <string name="whats_new">מה חדש עם</string>
-    <string name="rendering_attr_hideProposed_name">עצמים מוצעים</string>
+    <string name="rendering_attr_showProposed_name">עצמים מוצעים</string>
     <string name="shared_string_update">עדכון</string>
     <string name="shared_string_upload">העלאה</string>
     <string name="osm_edit_created_poi">נוצרו נקודות עניין ב־OSM</string>
