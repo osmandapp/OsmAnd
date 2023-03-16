@@ -150,10 +150,12 @@ public class TerrainLayer extends MapTileLayer {
 		int zoom = tileBox.getZoom();
 		int newMinVisibleZoom = srtmPlugin.getTerrainMinZoom();
 		int newMaxVisibleZoom = srtmPlugin.getTerrainMaxZoom();
+		boolean fitsZoomBounds = zoom >= newMinVisibleZoom && zoom <= newMaxVisibleZoom;
+
 		if (cachedMinVisibleZoom != newMinVisibleZoom || cachedMaxVisibleZoom != newMaxVisibleZoom) {
 			boolean clearTilesForCurrentZoom = (cachedMinVisibleZoom != -1 && cachedMaxVisibleZoom != -1)
 					&& (zoom >= cachedMinVisibleZoom && zoom <= cachedMaxVisibleZoom)
-					&& (zoom < newMinVisibleZoom || zoom > newMaxVisibleZoom);
+					&& !fitsZoomBounds;
 			cachedMinVisibleZoom = newMinVisibleZoom;
 			cachedMaxVisibleZoom = newMaxVisibleZoom;
 			MapRendererView mapRenderer = getMapRenderer();
@@ -174,12 +176,9 @@ public class TerrainLayer extends MapTileLayer {
 		}
 
 		setAlpha(srtmPlugin.getTerrainTransparency());
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
-	}
-
-	@Override
-	protected boolean shouldDisplayAtZoom(int zoom) {
-		return zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom();
+		if (hasMapRenderer() || fitsZoomBounds) {
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		}
 	}
 
 	private void indexTerrainFiles(OsmandApplication app) {
