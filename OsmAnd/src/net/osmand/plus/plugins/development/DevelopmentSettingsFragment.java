@@ -38,6 +38,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 	private OsmandDevelopmentPlugin plugin;
 	private StateChangedListener<Boolean> showHeightmapsListener;
+	private OsmAndLocationSimulation.LocationSimulationListener simulationListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 				mapInfoLayer.recreateAllControls(mapActivity);
 			}
 		};
+
+		simulationListener = simulating -> app.runInUIThread(this::setupSimulateYourLocationPref);
 	}
 
 	@Override
@@ -291,12 +294,15 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	public void onResume() {
 		super.onResume();
 		plugin.SHOW_HEIGHTMAPS.addListener(showHeightmapsListener);
+		app.getLocationProvider().getLocationSimulation().addSimulationListener(simulationListener);
+
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		plugin.SHOW_HEIGHTMAPS.removeListener(showHeightmapsListener);
+		app.getLocationProvider().getLocationSimulation().removeSimulationListener(simulationListener);
 	}
 
 	public void loadNativeLibrary() {
