@@ -341,7 +341,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
-			if (thisObject == null || !thisObject.equals(object)) {
+			if (thisObject == null || !(thisObject.equals(object) && isSameLocationForAmenities(thisObject, object))) {
 				hide();
 			} else {
 				return false;
@@ -402,6 +402,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			app.getTargetPointsHelper().addPointListener(this);
 		}
 
+		return true;
+	}
+
+	private boolean isSameLocationForAmenities(Object thisObject, Object object) {
+		if (thisObject instanceof Amenity && object instanceof Amenity) {
+			return ((Amenity) thisObject).getLocation().equals(((Amenity) object).getLocation());
+		}
 		return true;
 	}
 
