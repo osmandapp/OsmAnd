@@ -5,14 +5,15 @@
 			android:src="@drawable/map_location_bicycle_bottom"
 			android:gravity="bottom|center" />
 	</item>
-	<item android:id="@+id/center">
-		<bitmap
-			android:src="@drawable/map_location_bicycle_center"
-			android:gravity="bottom|center" />
-	</item>
-	<item android:id="@+id/top">
-		<bitmap
-			android:src="@drawable/map_location_bicycle_top"
-			android:gravity="bottom|center" />
-	</item>
+
+	<item
+		android:id="@+id/center"
+		android:drawable="@drawable/map_location_bicycle_center"
+		android:gravity="center|center" />
+
+	<item
+		android:id="@+id/top"
+		android:drawable="@drawable/map_location_bicycle_top"
+		android:gravity="center|center" />
+
 </layer-list>
