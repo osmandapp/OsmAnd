@@ -4413,4 +4413,23 @@
     <string name="poi_club_youth_movement">若者に限定されたクラブ</string>
     <string name="poi_club_aviation">航空クラブ</string>
     <string name="poi_first_aid_kit">応急処置キット</string>
+    <string name="poi_dog_designated">犬用</string>
+    <string name="poi_self_checkout">セルフレジ</string>
+    <string name="poi_recycling_textiles">織物</string>
+    <string name="poi_climbing_grade_uiaa">UIAAクライミンググレード</string>
+    <string name="poi_climbing_grade_french">Frenchクライミンググレード</string>
+    <string name="poi_climbing_grade_saxon">Saxonクライミンググレード</string>
+    <string name="poi_climbing_grade_saxon_max">最難関ルート(Saxonグレード)</string>
+    <string name="poi_climbing_grade_french_mean">平均ルート(Frenchグレード)</string>
+    <string name="poi_climbing_grade_french_max">最難関ルート(Frenchグレード)</string>
+    <string name="poi_climbing_grade_saxon_mean">平均ルート(Saxonグレード)</string>
+    <string name="poi_water_filter">水;飲料水</string>
+    <string name="poi_recycling_plastic_bottle_caps">ペットボトルキャップ</string>
+    <string name="poi_recycling_aluminium_cans">アルミ缶</string>
+    <string name="poi_recycling_pet_drink_bottles">ペットボトル</string>
+    <string name="poi_dog_leashed">犬: リード付のみ</string>
+    <string name="poi_dog_unleashed">犬: リードの必要なし</string>
+    <string name="poi_climbing_speed_yes">スピードクライミング(スピードウォール): 有り</string>
+    <string name="poi_climbing_grade_uiaa_max">最難関ルート(UIAAグレード)</string>
+    <string name="poi_climbing_grade_uiaa_mean">平均ルート(UIAAグレード)</string>
 </resources>
