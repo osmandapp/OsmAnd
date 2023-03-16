@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import android.os.AsyncTask;
 
@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
+import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.ui.TrackItem;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -29,7 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private String destFileName;

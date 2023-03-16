@@ -32,20 +32,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.importfiles.CollectTracksTask;
-import net.osmand.plus.importfiles.CollectTracksTask.CollectTracksListener;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.SaveGpxAsyncTask;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
-import net.osmand.plus.importfiles.SaveTracksTask;
+import net.osmand.plus.importfiles.tasks.CollectTracksTask;
+import net.osmand.plus.importfiles.tasks.CollectTracksTask.CollectTracksListener;
+import net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask;
+import net.osmand.plus.importfiles.tasks.SaveTracksTask;
 import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListener;
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
@@ -316,7 +317,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		String existingFilePath = ImportHelper.getExistingFilePath(app, fileName, fileSize);
 		if (existingFilePath != null) {
 			app.showToastMessage(R.string.file_already_imported);
-			openTracksTabInMyPlaces();
+			dismissAndOpenTracks();
 		} else {
 			File destinationDir = getFolderFile(selectedFolder);
 			SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
@@ -447,9 +448,20 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			public void onGpxSavingFinished(@NonNull List<String> warnings) {
 				clearTaskCallback.run();
 				updateProgress();
-				openTracksTabInMyPlaces();
+				dismissAndOpenTracks();
 			}
 		};
+	}
+
+	private void dismissAndOpenTracks() {
+		MapActivity mapActivity = getMapActivity();
+		TracksFragment fragment = mapActivity != null ? mapActivity.getFragment(TracksFragment.TAG) : null;
+		if (fragment != null) {
+			fragment.reloadTracks();
+		} else {
+			openTracksTabInMyPlaces();
+		}
+		dismissAllowingStateLoss();
 	}
 
 	private void openTracksTabInMyPlaces() {
@@ -464,7 +476,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			activity.startActivity(intent);
 		}
-		dismissAllowingStateLoss();
 	}
 
 	@Nullable

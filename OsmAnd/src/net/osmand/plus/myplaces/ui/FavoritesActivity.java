@@ -21,20 +21,19 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
@@ -82,7 +81,7 @@ public class FavoritesActivity extends TabActivity {
 
 		setContentView(R.layout.tab_content);
 		viewPager = findViewById(R.id.pager);
-		
+
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 
@@ -119,21 +118,21 @@ public class FavoritesActivity extends TabActivity {
 			if (data != null) {
 				Uri uri = data.getData();
 				AvailableGPXFragment gpxFragment = getGpxFragment();
-				if (gpxFragment!= null) {
+				if (gpxFragment != null) {
 					gpxFragment.startImport();
 				}
-				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
+				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
 					public void onImportComplete(boolean success) {
 						AvailableGPXFragment gpxFragment = getGpxFragment();
-						if (gpxFragment!= null) {
+						if (gpxFragment != null) {
 							gpxFragment.finishImport(success);
 						}
-						importHelper.setGpxImportCompleteListener(null);
+						importHelper.setGpxImportListener(null);
 					}
 				});
 				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {
-					if (gpxFragment!= null) {
+					if (gpxFragment != null) {
 						gpxFragment.finishImport(false);
 					}
 				}
@@ -279,7 +278,7 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	public static void showOnMap(@NonNull Activity activity, @Nullable FavoritesFragmentStateHolder fragment, double latitude, double longitude, int zoom, PointDescription pointDescription,
-								 boolean addToHistory, Object toShow) {
+	                             boolean addToHistory, Object toShow) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
 		if (fragment != null) {

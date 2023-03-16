@@ -7,6 +7,7 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NA
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -667,5 +668,24 @@ public class IntentHelper {
 
 	private static String getFormattedCoordinate(double coordinate) {
 		return String.format(Locale.US, "%.6f", coordinate);
+	}
+
+	@NonNull
+	public static List<Uri> getIntentUris(@NonNull Intent intent) {
+		List<Uri> uris = new ArrayList<>();
+		Uri data = intent.getData();
+		if (data != null) {
+			uris.add(data);
+		}
+		ClipData clipData = intent.getClipData();
+		if (clipData != null) {
+			for (int i = 0; i < clipData.getItemCount(); i++) {
+				Uri uri = clipData.getItemAt(i).getUri();
+				if (uri != null) {
+					uris.add(uri);
+				}
+			}
+		}
+		return uris;
 	}
 }

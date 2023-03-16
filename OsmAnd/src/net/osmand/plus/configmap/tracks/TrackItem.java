@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -60,6 +61,23 @@ public class TrackItem {
 
 	public long getLastModified() {
 		return lastModified;
+	}
+
+	@Override
+	public boolean equals(@Nullable Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TrackItem other = (TrackItem) obj;
+		return Algorithms.objectEquals(file, other.file);
+	}
+
+	@Override
+	public int hashCode() {
+		return Algorithms.hash(file);
 	}
 
 	@NonNull
