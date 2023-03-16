@@ -40,7 +40,7 @@
     <string name="poi_military">軍事地</string>
     <string name="poi_osmwiki">維基百科</string>
     <string name="poi_user_defined_other">使用者定義</string>
-    <string name="poi_palaeontological_site">古生物網站</string>
+    <string name="poi_palaeontological_site">古生物遺址</string>
     <string name="poi_bakery">麵包店</string>
     <string name="poi_alcohol">酒品店</string>
     <string name="poi_convenience">便利商店</string>
@@ -4502,4 +4502,7 @@
     <string name="poi_lifeguard">救生員</string>
     <string name="poi_lifeguard_tower">救生塔</string>
     <string name="poi_recycling_textiles">紡織品</string>
+    <string name="poi_antenna">天線</string>
+    <string name="poi_aboriginal_lands">原住民土地</string>
+    <string name="poi_water_filter">水；飲用水</string>
 </resources>
