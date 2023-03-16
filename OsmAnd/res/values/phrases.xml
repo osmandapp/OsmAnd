@@ -570,7 +570,6 @@
 	<string name="poi_recycling_white_goods">White goods</string>
 	<string name="poi_recycling_cooking_oil">Cooking oil</string>
 	<string name="poi_recycling_engine_oil">Engine oil</string>
-	<string name="poi_recycling_plastic_bags">Plastic bags</string>
 	<string name="poi_recycling_hazardous_waste">Hazardous waste</string>
 	<string name="poi_recycling_mobile_phones">Mobile phones</string>
 	<string name="poi_recycling_hydrargyrum">Hydrargyrum</string>
@@ -603,9 +602,7 @@
 	<string name="poi_recycling_car_batteries">Car batteries</string>
 	<string name="poi_recycling_cars">Cars</string>
 	<string name="poi_recycling_bicycles">Bicycles</string>
-	<string name="poi_recycling_aluminium_cans">Aluminum cans</string>
 	<string name="poi_recycling_pet_drink_bottles">PET beverage bottles</string>
-	<string name="poi_recycling_textiles">Textiles</string>
 
 	<string name="poi_landfill">Landfill</string>
 	<string name="poi_landfill_waste_nuclear">Nuclear waste</string>
@@ -5071,7 +5068,6 @@
 	<string name="poi_recycling_oil">Oil</string>
 	<string name="poi_recycling_others">Others</string>
 	<string name="poi_recycling_pallets">Pallets</string>
-	<string name="poi_recycling_pet_drink_bottles">PET drink bottles</string>
 	<string name="poi_recycling_plastic_bottle_tops">Plastic bottle tops</string>
 	<string name="poi_recycling_plastic_bags">Plastic bags</string>
 	<string name="poi_recycling_pmd">PMD</string>
