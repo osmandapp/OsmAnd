@@ -11,12 +11,17 @@
 		android:title="@string/plugin_global_prefs_info"
 		tools:icon="@drawable/ic_action_info_dark" />
 
+	<PreferenceCategory
+		android:key="heightmap"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/download_heightmap_maps" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="show_heightmaps"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/download_heightmap_maps" />
+		android:title="@string/test_heightmap" />
 
 	<Preference
 		android:key="show_heightmaps_promo"
@@ -25,6 +30,34 @@
 		android:title="@string/download_heightmap_maps"
 		android:summary="@string/shared_string_disabled"
 		tools:isPreferenceVisible="false"/>
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="enable_3d_maps"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/enable_3d_maps" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="disable_vertex_hillshade_3d"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/disable_vertex_hillshade_3d" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="generate_slope_from_3d_maps"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/generate_slope_from_3d_maps" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="generate_hillshade_from_3d_maps"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/generate_hillshade_from_3d_maps" />
 
 	<PreferenceCategory
 		android:key="safe"

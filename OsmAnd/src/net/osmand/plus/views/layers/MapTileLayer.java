@@ -258,7 +258,7 @@ public class MapTileLayer extends BaseMapLayer {
 		return null;
 	}
 
-	private boolean setLayerProvider(@Nullable ITileSource map) {
+	protected boolean setLayerProvider(@Nullable ITileSource map) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			int layerIndex = view.getLayerIndex(this);
