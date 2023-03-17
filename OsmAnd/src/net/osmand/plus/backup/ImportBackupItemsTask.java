@@ -43,7 +43,7 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	protected Boolean doInBackground(Void... voids) {
 		try {
 			importer.importItems(items, forceReadData);
-			return true;
+			return importer.isCancelled();
 		} catch (IllegalArgumentException e) {
 			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);
 		}
