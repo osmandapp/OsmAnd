@@ -13,12 +13,15 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -83,8 +86,28 @@ public class TrackDrawInfo {
 
 	private void initCurrentTrackParams(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		width = settings.CURRENT_TRACK_WIDTH.get();
-		color = settings.CURRENT_TRACK_COLOR.get();
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRuleProperty trackWidthProp = null;
+		RenderingRuleProperty trackColorProp = null;
+		if (renderer != null) {
+			trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
+			trackColorProp = renderer.PROPS.getCustomRule(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
+		}
+		if(!Algorithms.isEmpty(settings.CURRENT_TRACK_WIDTH.get())){
+			width = settings.CURRENT_TRACK_WIDTH.get();
+		} else if (trackWidthProp != null && !Algorithms.isEmpty(trackWidthProp.getPossibleValues())) {
+			width = trackWidthProp.getPossibleValues()[0];
+		} else {
+			width = "";
+		}
+		if(settings.CURRENT_TRACK_COLOR.get() != 0){
+			color = settings.CURRENT_TRACK_COLOR.get();
+		} else if (trackColorProp != null && !Algorithms.isEmpty(trackColorProp.getPossibleValues())) {
+			color = GpxAppearanceAdapter.parseTrackColor(renderer, trackColorProp.getPossibleValues()[0]);
+		} else {
+			color = 0;
+		}
+
 		coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
@@ -104,8 +127,32 @@ public class TrackDrawInfo {
 	}
 
 	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem) {
-		width = gpxDataItem.getWidth() != null ? gpxDataItem.getWidth() : app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
-		color = gpxDataItem.getColor() != 0 ? gpxDataItem.getColor() : GPXUtilities.parseColor(app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get(), 0);
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRuleProperty trackWidthProp = null;
+		RenderingRuleProperty trackColorProp = null;
+		if (renderer != null) {
+			trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
+			trackColorProp = renderer.PROPS.getCustomRule(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
+		}
+		if(gpxDataItem.getWidth() != null){
+			width = gpxDataItem.getWidth();
+		} else if (!Algorithms.isEmpty(app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get())) {
+			width = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
+		} else if (trackWidthProp != null && !Algorithms.isEmpty(trackWidthProp.getPossibleValues())) {
+			width = trackWidthProp.getPossibleValues()[0];
+		} else {
+			width = null;
+		}
+		if(gpxDataItem.getColor() != 0){
+			color = gpxDataItem.getColor();
+		} else if (GpxAppearanceAdapter.parseTrackColor(renderer, app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get()) != 0) {
+			color = GpxAppearanceAdapter.parseTrackColor(renderer, app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
+		} else if (trackColorProp != null && !Algorithms.isEmpty(trackColorProp.getPossibleValues())) {
+			color = GpxAppearanceAdapter.parseTrackColor(renderer, trackColorProp.getPossibleValues()[0]);
+		} else {
+			color = 0;
+		}
+
 		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxDataItem.getColoringType());
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxDataItem.getColoringType());
 		splitType = gpxDataItem.getSplitType();
