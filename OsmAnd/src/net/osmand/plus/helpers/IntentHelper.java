@@ -27,7 +27,9 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupListeners;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
@@ -53,6 +55,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
@@ -85,10 +88,26 @@ public class IntentHelper {
 	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
 
+	private BackupListeners.OnRegisterDeviceListener registerDeviceListener;
+
 	public IntentHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
+
+		registerDeviceListener = new BackupListeners.OnRegisterDeviceListener() {
+			@Override
+			public void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error) {
+				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+					if (status == BackupHelper.STATUS_SUCCESS) {
+						BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
+					} else if (Algorithms.isEmpty(message)) {
+						LOG.error(message);
+					}
+				}
+				app.getBackupHelper().getBackupListeners().removeRegisterDeviceListener(this);
+			}
+		};
 	}
 
 	public boolean parseLaunchIntents() {
@@ -184,8 +203,10 @@ public class IntentHelper {
 		} else if (!app.getBackupHelper().isRegistered() && !Algorithms.isEmpty(settings.BACKUP_USER_EMAIL.get())) {
 			if (BackupHelper.isTokenValid(token)) {
 				BackupHelper backupHelper = app.getBackupHelper();
+				if (!backupHelper.getBackupListeners().getRegisterDeviceListeners().contains(registerDeviceListener)) {
+					backupHelper.getBackupListeners().addRegisterDeviceListener(registerDeviceListener);
+				}
 				backupHelper.registerDevice(token);
-				backupHelper.getBackupListeners().addRegisterDeviceListener((status, message, error) -> BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager()));
 			} else {
 				LOG.error("Malformed OsmAnd backup authorization URL: token is not valid");
 			}
