@@ -176,6 +176,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = requireMapActivity();
 
+		map = mapActivity.getMapView();
 		menu = mapActivity.getContextMenu();
 		boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
@@ -241,7 +242,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		backButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 		updateVisibility(topButtonContainer, 0);
 
-		map = mapActivity.getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		customMapCenter = menu.getMapCenter() != null;
 		if (!customMapCenter) {

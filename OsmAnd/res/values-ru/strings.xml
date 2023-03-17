@@ -5040,7 +5040,7 @@
     <string name="no_visible_tracks_description">Выберите треки для отображения на карте.</string>
     <string name="shared_string_inches">дюймы</string>
     <string name="approximate_bearing">Приблизительный пеленг</string>
-    <string name="approximate_bearing_descr">Рассчитать пеленг, если он не получен от устройства</string>
+    <string name="approximate_bearing_descr">Определить пеленг на основе навигационного маршрута</string>
     <string name="shared_string_kilograms">килограммы</string>
     <string name="shared_string_apply_changes">Применить изменения</string>
     <string name="no_visible_tracks">Нет треков на карте</string>

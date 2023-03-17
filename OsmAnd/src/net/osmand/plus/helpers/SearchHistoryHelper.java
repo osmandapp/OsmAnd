@@ -7,8 +7,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
@@ -68,7 +68,7 @@ public class SearchHistoryHelper {
 	}
 
 	public void addNewItemToHistory(GPXInfo gpxInfo) {
-		if(gpxInfo != null) {
+		if (gpxInfo != null) {
 			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo)));
 		}
 	}
@@ -76,8 +76,6 @@ public class SearchHistoryHelper {
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
-		} else {
-			removeDeletedEntries();
 		}
 		List<HistoryEntry> res = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
@@ -141,28 +139,12 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
 			loadedEntries = helper.getEntries();
-			removeDeletedEntries();
 			Collections.sort(loadedEntries, new HistoryEntryComparator());
 			for (HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
 			}
 		}
 		return helper;
-	}
-
-	private void removeDeletedEntries() {
-		HistoryItemDBHelper helper = new HistoryItemDBHelper();
-		List<HistoryEntry> deletedEntries = new ArrayList<>();
-		if (loadedEntries != null) {
-			for (HistoryEntry entry : loadedEntries) {
-				GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(context, entry.name.getName());
-				if (gpxInfo == null) {
-					deletedEntries.add(entry);
-					helper.remove(entry);
-				}
-			}
-			loadedEntries.removeAll(deletedEntries);
-		}
 	}
 
 	private void addNewItemToHistory(HistoryEntry model) {
@@ -512,7 +494,7 @@ public class SearchHistoryHelper {
 		private void insert(HistoryEntry e, SQLiteConnection db) {
 			db.execSQL(
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
-					new Object[]{e.getSerializedName(), e.getLastAccessTime(),
+					new Object[] {e.getSerializedName(), e.getLastAccessTime(),
 							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
 			updateLastModifiedTime();
 		}
@@ -534,7 +516,7 @@ public class SearchHistoryHelper {
 							double lat = query.getDouble(1);
 							double lon = query.getDouble(2);
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
-							if (context.getPoiTypes().isTypeForbidden(p.getName())){
+							if (context.getPoiTypes().isTypeForbidden(p.getName())) {
 								query.moveToNext();
 							}
 							HistoryEntry e = new HistoryEntry(lat, lon, p);

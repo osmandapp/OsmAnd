@@ -4927,4 +4927,19 @@
     <string name="weight_limit_error">最小值是\"%1$s \"吨。如果车辆重量小于最小值，则使用\"%2$s \"配置文件。</string>
     <string name="rendering_attr_depthContourWidth_name">线宽度</string>
     <string name="rendering_attr_depthContourColorScheme_name">线条配色方案</string>
+    <string name="selected_value">选定值</string>
+    <string name="sort_date_descending">最早日期在前</string>
+    <string name="sort_date_ascending">最新日期在前</string>
+    <string name="local_version_do_not_exist">没有本地版本存在。</string>
+    <string name="sort_duration_ascending">最短时间优先</string>
+    <string name="sort_duration_descending">最长时间优先</string>
+    <string name="sort_distance_ascending">最短距离优先</string>
+    <string name="app_mode_moped">轻型摩托车</string>
+    <string name="sort_distance_descending">最长距离优先</string>
+    <string name="shared_string_nearest">最近</string>
+    <string name="shared_string_add_manually">手动添加…</string>
+    <string name="cloud_version_confirm_delete">从OsmAnd Cloud中删除\"%1$s\"？</string>
+    <string name="shared_string_delete_file">删除文件</string>
+    <string name="delete_cloud_version">删除云端版本</string>
+    <string name="shared_string_in_progress">进行中</string>
 </resources>

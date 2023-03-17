@@ -1040,7 +1040,7 @@
     <string name="poi_route_hiking_nwn_poi">Piedirada vojo ŝtata</string>
     <string name="poi_route_hiking_rwn_poi">Piedirada vojo regiona</string>
     <string name="poi_route_hiking_lwn_poi">Piedirada vojo loka</string>
-    <string name="poi_route_hiking_ref_poi">Referenco de piedirada vojo</string>
+    <string name="poi_route_hiking_ref_poi">Identigilo de piedirada vojo</string>
     <string name="poi_collection_times">Repreno je</string>
     <string name="poi_phone">Telefono</string>
     <string name="poi_website">Retejo</string>
@@ -1774,7 +1774,7 @@
     <string name="poi_route_monorail_ref">Fervojo unurela</string>
     <string name="poi_route_funicular_ref">Funikularo</string>
     <string name="poi_route_ferry_ref">Pramo</string>
-    <string name="poi_route_railway_ref">Referenco de fervojo</string>
+    <string name="poi_route_railway_ref">Identigilo de fervojo</string>
     <string name="poi_surveillance_yes">Supergardo: jes</string>
     <string name="poi_shop_additional_yes">Kun vendejo</string>
     <string name="poi_service_bicycle_retail_yes">vendo;bicikla vendo; vendado de bicikloj</string>
@@ -2179,9 +2179,9 @@
     <string name="poi_bathing_no">Banado: ne</string>
     <string name="poi_boat_storage">Boat-garaĝo seka</string>
     <string name="poi_conveying_yes">Rulŝtuparo aŭ rultrotuaro</string>
-    <string name="poi_bridge_ref">Referenco de ponto</string>
-    <string name="poi_tunnel_ref">Referenco de tunelo</string>
-    <string name="poi_ref">Referenco</string>
+    <string name="poi_bridge_ref">Identigilo de ponto</string>
+    <string name="poi_tunnel_ref">Identigilo de tunelo</string>
+    <string name="poi_ref">Identigilo</string>
     <string name="poi_cargo_passengers">pasaĝeroj</string>
     <string name="poi_cargo_vehicle">veturiloj</string>
     <string name="poi_cargo_bicycle">bicikloj</string>
@@ -3150,12 +3150,12 @@
     <string name="poi_boat_jetski_rental_no">Akvoskoteroj: ne</string>
     <string name="poi_boat_sailboat_rental_yes">Velboatoj: jes</string>
     <string name="poi_boat_sailboat_rental_no">Velboatoj: ne</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Remboatoj: jes</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Remboatoj: ne</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Kajakoj: jes</string>
-    <string name="poi_boat_kayak_rental_rental_no">Kajakoj: ne</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Kanuoj: jes</string>
-    <string name="poi_boat_canoe_rental_rental_no">Kanuoj: ne</string>
+    <string name="poi_boat_dinghy_rental_yes">Remboatoj: jes</string>
+    <string name="poi_boat_dinghy_rental_no">Remboatoj: ne</string>
+    <string name="poi_boat_kayak_rental_yes">Kajakoj: jes</string>
+    <string name="poi_boat_kayak_rental_no">Kajakoj: ne</string>
+    <string name="poi_boat_canoe_rental_yes">Kanuoj: jes</string>
+    <string name="poi_boat_canoe_rental_no">Kanuoj: ne</string>
     <string name="poi_network">Reto</string>
     <string name="poi_government_archive">Arĥivejo</string>
     <string name="poi_government_ministry">Ministrejo</string>
@@ -3886,7 +3886,7 @@
     <string name="poi_mobile_library">Movebla biblioteko (haltloko)</string>
     <string name="poi_summit_register_no">Pint‑taglibro: ne</string>
     <string name="poi_summit_register_yes">Pint‑taglibro: jes</string>
-    <string name="poi_local_ref">Loka referenco</string>
+    <string name="poi_local_ref">Loka identigilo</string>
     <string name="poi_geodesist">Oficejo de termezuristo</string>
     <string name="poi_conference_centre">Konferenca centro</string>
     <string name="poi_camp_pitch">Loko por kampadveturilo/tendo</string>
@@ -4499,4 +4499,7 @@
     <string name="poi_self_checkout_only">nur</string>
     <string name="poi_lifeguard">Akva savisto</string>
     <string name="poi_lifeguard_tower">Turo de akvaj savistoj</string>
+    <string name="poi_antenna">Anteno</string>
+    <string name="poi_aboriginal_lands">Rezervejo de indiĝenaj popoloj</string>
+    <string name="poi_water_filter">Trinkakvejo;trinkado;akvo</string>
 </resources>

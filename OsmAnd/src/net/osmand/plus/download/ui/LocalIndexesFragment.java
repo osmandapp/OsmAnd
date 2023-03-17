@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -61,6 +62,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -384,6 +386,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 								Algorithms.removeAllFiles(tWal);
 							}
 							clearMapillaryTiles(info);
+							clearHeightmapTiles(info);
 						}
 					} else if (operation == RESTORE_OPERATION) {
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -491,6 +494,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						}
 					}
 				}
+			}
+		}
+
+		private void clearHeightmapTiles(@NonNull LocalIndexInfo info) {
+			String filePath = info.getPathToData();
+			boolean heightmap = filePath.endsWith(IndexConstants.TIF_EXT);
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (heightmap && mapRendererContext != null) {
+				mapRendererContext.removeCachedHeightmapTiles(filePath);
 			}
 		}
 	}

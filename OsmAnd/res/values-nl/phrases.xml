@@ -3132,9 +3132,9 @@
     <string name="poi_government_social_services">Sociale voorzieningen</string>
     <string name="poi_government_public_service">Overheidsdienst</string>
     <string name="poi_government_archive">Rijksarchief</string>
-    <string name="poi_boat_canoe_rental_rental_no">Geen kano’s</string>
-    <string name="poi_boat_kayak_rental_rental_no">Geen kajaks</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Geen bijboten</string>
+    <string name="poi_boat_canoe_rental_no">Geen kano’s</string>
+    <string name="poi_boat_kayak_rental_no">Geen kajaks</string>
+    <string name="poi_boat_dinghy_rental_no">Geen bijboten</string>
     <string name="poi_boat_sailboat_rental_no">Geen zeilboten</string>
     <string name="poi_boat_jetski_rental_no">Geen jetskis</string>
     <string name="poi_boat_pedalboat_rental_no">Geen waterfietsen</string>
@@ -3309,9 +3309,9 @@
     <string name="poi_government_social_security">Sociale zekerheid</string>
     <string name="poi_government_ministry">Ministerie</string>
     <string name="poi_network">Netwerk</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Kano: ja</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Kajaks: ja</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Rubberboot: Ja</string>
+    <string name="poi_boat_canoe_rental_yes">Kano: ja</string>
+    <string name="poi_boat_kayak_rental_yes">Kajaks: ja</string>
+    <string name="poi_boat_dinghy_rental_yes">Rubberboot: Ja</string>
     <string name="poi_boat_sailboat_rental_yes">Zeilboten: ja</string>
     <string name="poi_boat_jetski_rental_yes">Jetski\'s: ja</string>
     <string name="poi_boat_pedalboat_rental_yes">Waterfietsen: ja</string>
