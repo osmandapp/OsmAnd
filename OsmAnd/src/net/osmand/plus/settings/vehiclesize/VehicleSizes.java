@@ -92,7 +92,7 @@ public abstract class VehicleSizes {
 		Metric metric = preference.getMetric();
 		float value = (float) Algorithms.parseDoubleSilently(preference.getValue(), 0.0f);
 		if (value != 0.0f) {
-			value += 0.01f;
+			value += 0.0001f;
 			if (preference.getSizeType() == SizeType.WEIGHT) {
 				// Convert weight from tons to selected weight metric system
 				value = VehicleAlgorithms.convertWeightFromTons(
@@ -118,7 +118,7 @@ public abstract class VehicleSizes {
 				value = VehicleAlgorithms.convertLengthToMeters(
 						metric.getLengthMetric(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 			}
-			value -= 0.01f;
+			value -= 0.0001f;
 		}
 		return value;
 	}
