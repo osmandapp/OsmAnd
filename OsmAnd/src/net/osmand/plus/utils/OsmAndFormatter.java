@@ -445,7 +445,12 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx, @NonNull ApplicationMode mode) {
-		return getFormattedSpeedValue(metersPerSeconds, ctx, mode).format(ctx);
+		return getFormattedSpeedValue(metersPerSeconds, ctx, mode, false).format(ctx);
+	}
+
+	@NonNull
+	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx, @NonNull ApplicationMode mode, boolean forceNotPace) {
+		return getFormattedSpeedValue(metersPerSeconds, ctx, mode, forceNotPace).format(ctx);
 	}
 
 	@NonNull
@@ -454,8 +459,41 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
+	public static float getMetersInModeUnit(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
+		SpeedConstants modeConstant = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
+		float metersInUnit = 0f;
+		switch (modeConstant) {
+			case MILES_PER_HOUR:
+			case MINUTES_PER_MILE:
+				metersInUnit = METERS_IN_ONE_MILE;
+				break;
+			case KILOMETERS_PER_HOUR:
+			case MINUTES_PER_KILOMETER:
+				metersInUnit = METERS_IN_KILOMETER;
+				break;
+			case METERS_PER_SECOND:
+				metersInUnit = 1f;
+				break;
+			case NAUTICALMILES_PER_HOUR:
+				metersInUnit = METERS_IN_ONE_NAUTICALMILE;
+				break;
+			default:
+				break;
+		}
+		return metersInUnit;
+	}
+
+	@NonNull
 	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
+		return getFormattedSpeedValue(metersPerSeconds, app, mode, false);
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, @NonNull ApplicationMode mode, boolean forceNotPace) {
 		SpeedConstants mc = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
+		if (forceNotPace) {
+			mc = getSpeedModeForPaceMode(mc);
+		}
 		String unit = mc.toShortString(app);
 		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
@@ -516,6 +554,18 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
+	private static SpeedConstants getSpeedModeForPaceMode(SpeedConstants originalMode) {
+		switch (originalMode) {
+			case MINUTES_PER_KILOMETER:
+				return SpeedConstants.KILOMETERS_PER_HOUR;
+			case MINUTES_PER_MILE:
+				return SpeedConstants.MILES_PER_HOUR;
+			default:
+				return originalMode;
+		}
+	}
+
+	@NonNull
 	private static FormattedValue getFormattedSpeed(float speed, @NonNull String unit, @NonNull OsmandApplication app) {
 		return formatValue(speed, unit, false, 0, app);
 	}
@@ -569,7 +619,7 @@ public class OsmAndFormatter {
 
 		MessageFormat messageFormat = new MessageFormat("{0}");
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
-		String formattedValue = messageFormat.format(new Object[] {value})
+		String formattedValue = messageFormat.format(new Object[]{value})
 				.replace('\n', ' ');
 		return new FormattedValue(formattedValue, unit);
 	}
@@ -837,7 +887,7 @@ public class OsmAndFormatter {
 		public String format(@NonNull Context context) {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
-					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
+					: new MessageFormat("{0}{1}").format(new Object[]{value, unit});
 		}
 	}
 

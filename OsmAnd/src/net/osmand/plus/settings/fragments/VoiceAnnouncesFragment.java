@@ -28,11 +28,14 @@ import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
+
+	private ApplicationMode appMode;
 
 	@Override
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
@@ -98,9 +101,21 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		setupInterruptMusicPref();
 
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
+		setupSpeedTolerance();
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
 		setupSpeedLimitExceedPref();
+	}
+
+	private void setupSpeedTolerance() {
+		Preference preference = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
+		float selectedValue = settings.SPEED_LIMIT_EXCEED_KMH.getModeValue(getAppMode());
+		String value = OsmAndFormatter.getFormattedSpeed(selectedValue / 3.6f, app, app.getSettings().getApplicationMode(), true);
+		preference.setSummary(value);
+	}
+
+	public ApplicationMode getAppMode() {
+		return appMode != null ? appMode : app.getSettings().getApplicationMode();
 	}
 
 	private void setupVoiceProviderPref() {
