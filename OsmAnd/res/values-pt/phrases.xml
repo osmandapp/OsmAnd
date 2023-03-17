@@ -3182,12 +3182,12 @@
     <string name="poi_boat_jetski_rental_no">Motas de água: não</string>
     <string name="poi_boat_sailboat_rental_yes">Veleiros: sim</string>
     <string name="poi_boat_sailboat_rental_no">Veleiros: não</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Botes: sim</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Botes: não</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Caiaques: sim</string>
-    <string name="poi_boat_kayak_rental_rental_no">Caiaques: não</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Canoas: sim</string>
-    <string name="poi_boat_canoe_rental_rental_no">Canoas: não</string>
+    <string name="poi_boat_dinghy_rental_yes">Botes: sim</string>
+    <string name="poi_boat_dinghy_rental_no">Botes: não</string>
+    <string name="poi_boat_kayak_rental_yes">Caiaques: sim</string>
+    <string name="poi_boat_kayak_rental_no">Caiaques: não</string>
+    <string name="poi_boat_canoe_rental_yes">Canoas: sim</string>
+    <string name="poi_boat_canoe_rental_no">Canoas: não</string>
     <string name="poi_network">Rede</string>
     <string name="poi_government_archive">Arquivo</string>
     <string name="poi_government_ministry">Ministério</string>
@@ -4493,4 +4493,17 @@
     <string name="poi_socket_type3a_output_high">Alta</string>
     <string name="poi_socket_type3c_output_high">Alta</string>
     <string name="poi_socket_type3a_output_low">Baixa</string>
+    <string name="poi_self_checkout">Caixa de auto-pagamento</string>
+    <string name="poi_recycling_pet_drink_bottles">Garrafas PET para bebidas</string>
+    <string name="poi_self_checkout_yes">Sim</string>
+    <string name="poi_self_checkout_only">Unicamente</string>
+    <string name="poi_lifeguard">Nadador-salvador</string>
+    <string name="poi_self_checkout_no">Caixa de auto-pagamento: não</string>
+    <string name="poi_recycling_plastic_bottle_caps">Tampas de garrafas de plástico</string>
+    <string name="poi_recycling_textiles">Têxteis</string>
+    <string name="poi_recycling_aluminium_cans">Latas de alumínio</string>
+    <string name="poi_lifeguard_tower">Torre de nadador-salvador</string>
+    <string name="poi_water_filter">Água;Água potável</string>
+    <string name="poi_antenna">Antena</string>
+    <string name="poi_aboriginal_lands">Terras aborígenes</string>
 </resources>

@@ -166,18 +166,15 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 						boolean checked = item.isChecked();
 						item.setChecked(!checked);
 						if (onLiveUpdatesForLocalChange != null
-								&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, !checked, new Runnable() {
-							@Override
-							public void run() {
-								refreshUpdateTimeInfo();
-								refreshUpdateFrequencyMessage();
-								updateFileSize();
-								Fragment target = getTargetFragment();
-								if (target instanceof LiveUpdatesFragment) {
-									((LiveUpdatesFragment) target).runSort();
-								}
-							}
-						})) {
+								&& onLiveUpdatesForLocalChange.onUpdateLocalIndex(fileName, !checked, () -> {
+									refreshUpdateTimeInfo();
+									refreshUpdateFrequencyMessage();
+									updateFileSize();
+									Fragment target = getTargetFragment();
+									if (target instanceof LiveUpdatesFragment) {
+										((LiveUpdatesFragment) target).runSort();
+									}
+								})) {
 							item.setTitle(getStateText(!checked));
 							updateCustomButtonView(app, null, item.getView(), !checked, nightMode);
 							CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);

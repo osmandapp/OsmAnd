@@ -160,7 +160,7 @@ h2 {
     color: #454545;
     color: var(--headline-text-color-day);
     font-family: RobotoSlab-Regular;
-    font-weight: 100;
+    font-weight: 400;
     word-wrap: break-word;
     line-height: 1.6em;
     line-height: var(--main-text-line-height);
@@ -178,7 +178,7 @@ h2 {
     color: var(--headline-text-color-night);
     border-bottom: #2d3133;
     border-bottom: 1px solid var(--divider-color-night);
-    font-weight: 100;
+    font-weight: 400;
 }
 
 h2.active {

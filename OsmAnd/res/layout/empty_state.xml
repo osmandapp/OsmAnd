@@ -21,6 +21,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/content_padding_small_half"
+		android:gravity="center"
 		android:textColor="?android:attr/textColorPrimary"
 		tools:text="@string/no_visible_tracks" />
 
@@ -30,8 +31,9 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginBottom="@dimen/content_padding"
+		android:gravity="center"
 		android:textColor="?android:attr/textColorSecondary"
-		tools:text="@string/on_map_empty_state_description" />
+		tools:text="@string/empty_tracks_description" />
 
 	<include
 		android:id="@+id/action_button"

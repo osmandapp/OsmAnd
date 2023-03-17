@@ -640,56 +640,53 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		if (app == null) {
 			return;
 		}
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				OsmandApplication app = getMyApplication();
-				if (app == null || !isVisible()) {
-					return;
-				}
-				List<TargetPoint> allTargets = new ArrayList<>();
-				TargetPoint start = null;
-				List<Object> items = listAdapter.getActiveObjects();
-				if (items != null) {
-					for (Object obj : items) {
-						if (obj instanceof LocationPointWrapper) {
-							LocationPointWrapper p = (LocationPointWrapper) obj;
-							if (p.getPoint() instanceof TargetPoint) {
-								TargetPoint t = (TargetPoint) p.getPoint();
-								if (t.start) {
-									start = t;
-								} else {
-									t.intermediate = true;
-								}
-								allTargets.add(t);
-							}
-						}
-					}
-					if (allTargets.size() > 0) {
-						allTargets.get(allTargets.size() - 1).intermediate = false;
-					}
-				}
-				TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-				if (start != null) {
-					int startInd = allTargets.indexOf(start);
-					TargetPoint first = allTargets.remove(0);
-					if (startInd != 0) {
-						start.start = false;
-						start.intermediate = startInd != allTargets.size() - 1;
-						if (targetPointsHelper.getPointToStart() == null) {
-							start.getOriginalPointDescription().setName(PointDescription
-									.getLocationNamePlain(getMyApplication(), start.getLatitude(), start.getLongitude()));
-						}
-						first.start = true;
-						first.intermediate = false;
-						targetPointsHelper.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()),
-								false, first.getPointDescription(getMyApplication()));
-					}
-				}
-				targetPointsHelper.reorderAllTargetPoints(allTargets, false);
-				newRouteIsCalculated(false, new ValueHolder<Boolean>());
-				targetPointsHelper.updateRouteAndRefresh(true);
+		app.runInUIThread(() -> {
+			OsmandApplication application = getMyApplication();
+			if (application == null || !isVisible()) {
+				return;
 			}
+			List<TargetPoint> allTargets = new ArrayList<>();
+			TargetPoint start = null;
+			List<Object> items = listAdapter.getActiveObjects();
+			if (items != null) {
+				for (Object obj : items) {
+					if (obj instanceof LocationPointWrapper) {
+						LocationPointWrapper p = (LocationPointWrapper) obj;
+						if (p.getPoint() instanceof TargetPoint) {
+							TargetPoint t = (TargetPoint) p.getPoint();
+							if (t.start) {
+								start = t;
+							} else {
+								t.intermediate = true;
+							}
+							allTargets.add(t);
+						}
+					}
+				}
+				if (allTargets.size() > 0) {
+					allTargets.get(allTargets.size() - 1).intermediate = false;
+				}
+			}
+			TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+			if (start != null) {
+				int startInd = allTargets.indexOf(start);
+				TargetPoint first = allTargets.remove(0);
+				if (startInd != 0) {
+					start.start = false;
+					start.intermediate = startInd != allTargets.size() - 1;
+					if (targetPointsHelper.getPointToStart() == null) {
+						start.getOriginalPointDescription().setName(PointDescription
+								.getLocationNamePlain(getMyApplication(), start.getLatitude(), start.getLongitude()));
+					}
+					first.start = true;
+					first.intermediate = false;
+					targetPointsHelper.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()),
+							false, first.getPointDescription(getMyApplication()));
+				}
+			}
+			targetPointsHelper.reorderAllTargetPoints(allTargets, false);
+			newRouteIsCalculated(false, new ValueHolder<Boolean>());
+			targetPointsHelper.updateRouteAndRefresh(true);
 		}, 50);
 	}
 

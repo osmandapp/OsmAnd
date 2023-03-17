@@ -25,6 +25,9 @@ public abstract class VehicleSizes {
 
 	public static final int DEFAULT_PROPOSED_VALUES_COUNT = 7;
 
+	private static final String DERIVED_PROFILE_TRUCK = "Truck";
+	private static final String DERIVED_PROFILE_MOTORCYCLE = "Motorcycle";
+
 	private Map<SizeType, SizeData> sizes = new HashMap<>();
 
 	protected VehicleSizes() {
@@ -51,10 +54,10 @@ public abstract class VehicleSizes {
 			return R.string.shared_string_tones;
 		} else {
 			if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-				return R.string.shared_string_feet;
+				return useInchesInsteadOfFeet() ? R.string.shared_string_inches : R.string.shared_string_feet;
 			}
 			if (mc == MetricsConstants.MILES_AND_YARDS) {
-				return R.string.shared_string_yards;
+				return useInchesInsteadOfYards() ? R.string.shared_string_inches : R.string.shared_string_yards;
 			}
 			return R.string.shared_string_meters;
 		}
@@ -65,10 +68,10 @@ public abstract class VehicleSizes {
 			return R.string.metric_ton;
 		} else {
 			if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-				return R.string.foot;
+				return useInchesInsteadOfFeet() ? R.string.inch : R.string.foot;
 			}
 			if (mc == MetricsConstants.MILES_AND_YARDS) {
-				return R.string.yard;
+				return useInchesInsteadOfYards() ? R.string.inch : R.string.yard;
 			}
 			return R.string.m;
 		}
@@ -81,7 +84,8 @@ public abstract class VehicleSizes {
 		}
 		if (preference.getSizeType() != SizeType.WEIGHT) {
 			// Convert display value to selected metric system
-			value = VehicleAlgorithms.convertLengthFromMeters(preference.getLengthMetricSystem(), value);
+			value = VehicleAlgorithms.convertLengthFromMeters(
+					preference.getLengthMetricSystem(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 		}
 		return value;
 	}
@@ -89,7 +93,8 @@ public abstract class VehicleSizes {
 	public float prepareValueToSave(@NonNull SizePreference preference, float value) {
 		if (preference.getSizeType() != SizeType.WEIGHT) {
 			// Convert length to meters before save
-			value = VehicleAlgorithms.convertLengthToMeters(preference.getLengthMetricSystem(), value);
+			value = VehicleAlgorithms.convertLengthToMeters(
+					preference.getLengthMetricSystem(), value, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 		}
 		if (value != 0.0f) {
 			value -= 0.01f;
@@ -130,13 +135,21 @@ public abstract class VehicleSizes {
 		SizeData data = getSizeData(type);
 		Limits limits = data.getLimits();
 		if (type != SizeType.WEIGHT) {
-			limits = VehicleAlgorithms.convertLimitsByMetricSystem(limits, lengthMetricSystem);
+			limits = VehicleAlgorithms.convertLimitsByMetricSystem(limits, lengthMetricSystem, useInchesInsteadOfFeet(), useInchesInsteadOfYards());
 		}
 		return VehicleAlgorithms.collectProposedValues(limits, 1, getMinProposedValuesCount());
 	}
 
 	protected int getMinProposedValuesCount() {
 		return DEFAULT_PROPOSED_VALUES_COUNT;
+	}
+
+	protected boolean useInchesInsteadOfFeet() {
+		return true;
+	}
+
+	protected boolean useInchesInsteadOfYards() {
+		return true;
 	}
 
 	@Nullable
@@ -146,9 +159,9 @@ public abstract class VehicleSizes {
 			return new BoatSizes();
 		}
 		if (routerProfile == GeneralRouterProfile.CAR) {
-			if ("Truck".equalsIgnoreCase(derivedProfile)) {
+			if (DERIVED_PROFILE_TRUCK.equalsIgnoreCase(derivedProfile)) {
 				return new TruckSizes();
-			} else if ("Motorcycle".equalsIgnoreCase(derivedProfile)) {
+			} else if (DERIVED_PROFILE_MOTORCYCLE.equalsIgnoreCase(derivedProfile)) {
 				return new MotorcycleSizes();
 			} else {
 				return new CarSizes();

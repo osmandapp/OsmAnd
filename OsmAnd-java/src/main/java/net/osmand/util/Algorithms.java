@@ -634,6 +634,30 @@ public class Algorithms {
 		throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
 	}
 
+	public static String formatLatlon(LatLon latLon) {
+		if (latLon != null) {
+			String lat = String.format(Locale.US, "%.6f", latLon.getLatitude());
+			String lan = String.format(Locale.US, "%.6f", latLon.getLongitude());
+			return lat + "," + lan;
+		}
+		return null;
+	}
+
+	public static LatLon parseLatLon(String latLon) {
+		if (latLon != null) {
+			String[] coords = latLon.split(",");
+			if (coords.length == 2) {
+				try {
+					double lat = Double.parseDouble(coords[0]);
+					double lon = Double.parseDouble(coords[1]);
+					return new LatLon(lat, lon);
+				} catch (NumberFormatException e) {
+					return null;
+				}
+			}
+		}
+		return null;
+	}
 
 	public static int extractFirstIntegerNumber(String s) {
 		int i = 0;

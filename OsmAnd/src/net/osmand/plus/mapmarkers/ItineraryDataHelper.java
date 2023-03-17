@@ -381,6 +381,7 @@ public class ItineraryDataHelper {
 		wpt.lat = marker.getLatitude();
 		wpt.lon = marker.getLongitude();
 		wpt.name = marker.getOnlyName();
+		wpt.time = marker.creationDate;
 		return wpt;
 	}
 

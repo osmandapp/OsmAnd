@@ -1,20 +1,15 @@
 package net.osmand.core.android;
 
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
-
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
-import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
+import net.osmand.core.jni.ElevationConfiguration;
+import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
+import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
+import net.osmand.core.jni.GeoTiffCollection;
+import net.osmand.core.jni.IGeoTiffCollection.RasterType;
 import net.osmand.core.jni.IMapTiledSymbolsProvider;
 import net.osmand.core.jni.IObfsCollection;
 import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
@@ -27,13 +22,10 @@ import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TileSqliteDatabasesCollection;
-import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.weather.WeatherHelper;
-import net.osmand.plus.plugins.weather.WeatherWebClient;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -51,6 +43,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
 
 /**
  * Context container and utility class for MapRendererView and derivatives.
@@ -71,6 +70,7 @@ public class MapRendererContext {
 	private IObfsCollection obfsCollection;
 
 	private boolean nightMode;
+	private boolean useAppLocale;
 	private final float density;
 
 	// сached objects
@@ -81,7 +81,9 @@ public class MapRendererContext {
 
 	private IMapTiledSymbolsProvider obfMapSymbolsProvider;
 	private IRasterMapLayerProvider obfMapRasterLayerProvider;
-	private MapRendererView mapRendererView;
+	@Nullable
+	private GeoTiffCollection geoTiffCollection;
+	private volatile MapRendererView mapRendererView;
 
 	private float cachedReferenceTileSize;
 
@@ -113,6 +115,15 @@ public class MapRendererContext {
 	public void setNightMode(boolean nightMode) {
 		if (nightMode != this.nightMode) {
 			this.nightMode = nightMode;
+			updateMapSettings();
+		}
+	}
+
+	public void updateLocalization() {
+		int zoom = app.getOsmandMap().getMapView().getZoom();
+		boolean useAppLocale = MapRenderRepositories.useAppLocaleForMap(app, zoom);
+		if (this.useAppLocale != useAppLocale) {
+			this.useAppLocale = useAppLocale;
 			updateMapSettings();
 		}
 	}
@@ -155,8 +166,14 @@ public class MapRendererContext {
 	private void updateMapPresentationEnvironment() {
 		// Create new map presentation environment
 		OsmandSettings settings = app.getSettings();
-		String langId = settings.MAP_PREFERRED_LOCALE.get();
-		LanguagePreference langPref = LanguagePreference.LocalizedOrNative;
+
+		int zoom = app.getOsmandMap().getMapView().getZoom();
+		String langId = MapRenderRepositories.getMapPreferredLocale(app, zoom);
+		boolean transliterate = MapRenderRepositories.transliterateMapNames(app, zoom);
+		LanguagePreference langPref = transliterate
+				? LanguagePreference.LocalizedOrTransliterated
+				: LanguagePreference.LocalizedOrNative;
+
 		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
@@ -302,24 +319,13 @@ public class MapRendererContext {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.isHeightmapEnabled()) {
+			if (plugin == null || !plugin.is3DMapsEnabled()) {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
-			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
-			if (!sqliteCacheDir.exists()) {
-				sqliteCacheDir.mkdir();
-			}
-			File geotiffDir = app.getAppPath(GEOTIFF_DIR);
-			if (!geotiffDir.exists()) {
-				geotiffDir.mkdir();
-			}
-			TileSqliteDatabasesCollection heightsCollection = new TileSqliteDatabasesCollection();
-			GeoTiffCollection geotiffCollection = new GeoTiffCollection();
-			geotiffCollection.addDirectory(geotiffDir.getAbsolutePath());
-			geotiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
-			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(heightsCollection,
-				geotiffCollection, mapRendererView.getElevationDataTileSize()));
+			GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+			int elevationTileSize = mapRendererView.getElevationDataTileSize();
+			mapRendererView.setElevationDataProvider(new SqliteHeightmapTileProvider(geoTiffCollection, elevationTileSize));
 		}
 	}
 	public void resetHeightmapProvider() {
@@ -365,6 +371,7 @@ public class MapRendererContext {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
 		}
+		updateElevationConfiguration();
 
 		if (isVectorLayerEnabled()) {
 			// Layers
@@ -378,6 +385,55 @@ public class MapRendererContext {
 			// Heightmap
 			recreateHeightmapProvider();
 		}
+	}
+
+	public void updateElevationConfiguration() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView == null) {
+			return;
+		}
+
+		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
+		boolean disableVertexHillshade = developmentPlugin != null && developmentPlugin.disableVertexHillshade3D();
+		if (disableVertexHillshade) {
+			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
+			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
+		}
+
+		mapRendererView.setElevationConfiguration(elevationConfiguration);
+	}
+
+	public void updateCachedHeightmapTiles() {
+		GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+		for (RasterType rasterType : RasterType.values()) {
+			geoTiffCollection.refreshTilesInCache(rasterType);
+		}
+	}
+
+	public void removeCachedHeightmapTiles(@NonNull String filePath) {
+		GeoTiffCollection geoTiffCollection = getGeoTiffCollection();
+		for (RasterType rasterType : RasterType.values()) {
+			geoTiffCollection.removeFileTilesFromCache(rasterType, filePath);
+		}
+	}
+
+	@NonNull
+	public GeoTiffCollection getGeoTiffCollection() {
+		if (geoTiffCollection == null) {
+			geoTiffCollection = new GeoTiffCollection();
+			File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
+			if (!sqliteCacheDir.exists()) {
+				sqliteCacheDir.mkdir();
+			}
+			File geotiffDir = app.getAppPath(GEOTIFF_DIR);
+			if (!geotiffDir.exists()) {
+				geotiffDir.mkdir();
+			}
+			geoTiffCollection.addDirectory(geotiffDir.getAbsolutePath());
+			geoTiffCollection.setLocalCache(sqliteCacheDir.getAbsolutePath());
+		}
+		return geoTiffCollection;
 	}
 
 	@Nullable

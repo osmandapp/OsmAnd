@@ -32,20 +32,17 @@ public class ScrollHelper {
 	private boolean isInContinuousScrolling;
 	private long startContinuousScrollingTime = INVALID_VALUE;
 
-	private final Runnable scrollingRunnable = new Runnable() {
-		@Override
-		public void run() {
-			isInContinuousScrolling = true;
-			while (hasActiveDirections()) {
-				notifyListener(true);
-				try {
-					Thread.sleep(REFRESHING_DELAY_MS);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+	private final Runnable scrollingRunnable = () -> {
+		isInContinuousScrolling = true;
+		while (hasActiveDirections()) {
+			notifyListener(true);
+			try {
+				Thread.sleep(REFRESHING_DELAY_MS);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			isInContinuousScrolling = false;
 		}
+		isInContinuousScrolling = false;
 	};
 
 	public ScrollHelper(OsmandApplication app) {

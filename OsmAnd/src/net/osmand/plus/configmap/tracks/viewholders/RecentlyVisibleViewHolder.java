@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -37,7 +37,7 @@ public class RecentlyVisibleViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindView() {
 		SelectedTracksHelper helper = fragment.getSelectedTracksHelper();
-		Set<GPXInfo> recentlyVisibleTracks = helper.getRecentlyVisibleTracks();
+		Set<TrackItem> recentlyVisibleTracks = helper.getRecentlyVisibleTracks();
 		title.setText(app.getString(R.string.recently_visible, "(" + recentlyVisibleTracks.size() + ")"));
 
 		boolean selected = helper.getSelectedTracks().containsAll(recentlyVisibleTracks);
@@ -45,6 +45,6 @@ public class RecentlyVisibleViewHolder extends RecyclerView.ViewHolder {
 		int color = ColorUtilities.getSelectedProfileColor(app, nightMode);
 		UiUtilities.setupCompoundButton(selected, color, checkbox);
 
-		itemView.setOnClickListener(v -> fragment.onGpxInfosSelected(recentlyVisibleTracks, !selected));
+		itemView.setOnClickListener(v -> fragment.onTrackItemsSelected(recentlyVisibleTracks, !selected));
 	}
 }

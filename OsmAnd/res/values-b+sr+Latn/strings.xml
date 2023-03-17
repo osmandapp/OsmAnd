@@ -1651,7 +1651,7 @@
     <string name="osm_edit_created_poi">OSM tačka od interesa je napravljena</string>
     <string name="shared_string_upload">Otpremi</string>
     <string name="shared_string_update">Nadgradi</string>
-    <string name="rendering_attr_hideProposed_name">Predložene objekte</string>
+    <string name="rendering_attr_showProposed_name">Predložene objekte</string>
     <string name="what_is_new">Šta je novo</string>
     <string name="whats_new">Šta je novo</string>
     <string name="read_more">Pročitaj više</string>

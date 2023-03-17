@@ -50,11 +50,6 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		File file = new File(filteredSelectedGpxFile.getGpxFile().path);
 		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
-			@Override
 			public void onGpxDataItemReady(GpxDataItem item) {
 				if (item != null) {
 					gpxDataItem = item;

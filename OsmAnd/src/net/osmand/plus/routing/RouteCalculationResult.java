@@ -1,11 +1,6 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-
 import android.content.Context;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -21,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
@@ -30,8 +26,14 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
@@ -852,7 +854,8 @@ public class RouteCalculationResult {
 
 	private static boolean introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions,
 											   List<RouteSegmentResult> segs, Location start) {
-		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+		Location firstLocation = Algorithms.isEmpty(locations) ? null : locations.get(0);
+		if (firstLocation != null && firstLocation.distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
 			// Start location can have wrong altitude
 			double firstValidAltitude = getFirstValidAltitude(locations);
 			if (!Double.isNaN(firstValidAltitude)) {
@@ -861,14 +864,17 @@ public class RouteCalculationResult {
 
 			// add start point
 			locations.add(0, start);
+			// Add artificial route segment
 			if (segs != null) {
-				segs.add(0, segs.get(0));
+				RouteSegmentResult straightSegment = generateStraightLineSegment(start, firstLocation);
+				segs.add(0, straightSegment);
 			}
 			if (directions != null && !directions.isEmpty()) {
 				for (RouteDirectionInfo i : directions) {
 					i.routePointOffset++;
 				}
-				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(), TurnType.straight());
+				float averageSpeed = ApplicationMode.DEFAULT.getDefaultSpeed();
+				RouteDirectionInfo info = new RouteDirectionInfo(averageSpeed, TurnType.straight());
 				info.routePointOffset = 0;
 				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
 				directions.add(0, info);
@@ -897,9 +903,9 @@ public class RouteCalculationResult {
 			endLocation.setLongitude(end.getLongitude());
 
 			if (lastFoundLocation.distanceTo(endLocation) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+				int type = TurnType.C;
 				if (directions != null && !directions.isEmpty()) {
 					if (locations.size() > 2) {
-						int type = TurnType.C;
 						Location prevLast = locations.get(locations.size() - 2);
 						float lastBearing = prevLast.bearingTo(lastFoundLocation);
 						float bearingToEnd = lastFoundLocation.bearingTo(endLocation);
@@ -912,21 +918,34 @@ public class RouteCalculationResult {
 							}
 						}
 
-						RouteDirectionInfo lastDirInf = directions.get(directions.size() - 1);
-						RouteDirectionInfo info = new RouteDirectionInfo(lastDirInf != null ? lastDirInf.getAverageSpeed() : 1, TurnType.valueOf(type, false));
+						float averageSpeed = ApplicationMode.DEFAULT.getDefaultSpeed();
+						RouteDirectionInfo info = new RouteDirectionInfo(averageSpeed, TurnType.valueOf(type, false));
 						info.routePointOffset = locations.size() - 1;
 						directions.add(info);
 					}
 				}
+				
 				// add end point
 				locations.add(endLocation);
+				// Add artificial route segment
 				if (segs != null) {
-					segs.add(segs.get(segs.size() - 1));
+					RouteSegmentResult straightSegment = generateStraightLineSegment(lastFoundLocation, endLocation);
+					straightSegment.setTurnType(TurnType.valueOf(type, false));
+					segs.add(straightSegment);
 				}
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@NonNull
+	private static RouteSegmentResult generateStraightLineSegment(@NonNull Location start, @NonNull Location end) {
+		float averageSpeed = ApplicationMode.DEFAULT.getDefaultSpeed();
+		LatLon startLatLon = new LatLon(start.getLatitude(), start.getLongitude());
+		LatLon endLatLon = new LatLon(end.getLatitude(), end.getLongitude());
+		List<LatLon> straightSegment = Arrays.asList(startLatLon, endLatLon);
+		return RoutePlannerFrontEnd.generateStraightLineSegment(averageSpeed, straightSegment);
 	}
 
 	/**

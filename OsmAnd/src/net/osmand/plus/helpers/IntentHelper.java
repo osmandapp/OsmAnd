@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -114,12 +115,12 @@ public class IntentHelper {
 					return true;
 				}
 
-				LatLon startLatLon = startLatLonParam == null ? null : parseLatLon(startLatLonParam);
+				LatLon startLatLon = startLatLonParam == null ? null : Algorithms.parseLatLon(startLatLonParam);
 				if (startLatLonParam != null && startLatLon == null) {
 					LOG.error("Malformed OsmAnd navigation URL: start location is broken");
 				}
 
-				LatLon endLatLon = parseLatLon(endLatLonParam);
+				LatLon endLatLon = Algorithms.parseLatLon(endLatLonParam);
 				if (endLatLon == null) {
 					LOG.error("Malformed OsmAnd navigation URL: destination location is broken");
 					return true;
@@ -178,7 +179,7 @@ public class IntentHelper {
 			Uri data = intent.getData();
 			if (isOsmAndMapUrl(data) && data.getQueryParameterNames().contains("pin")) {
 				String latLonParam = data.getQueryParameter("pin");
-				LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : parseLatLon(latLonParam);
+				LatLon latLon = Algorithms.isEmpty(latLonParam) ? null : Algorithms.parseLatLon(latLonParam);
 				if (latLon != null) {
 					double lat = latLon.getLatitude();
 					double lon = latLon.getLongitude();
@@ -213,21 +214,6 @@ public class IntentHelper {
 			return points;
 		}
 		return null;
-	}
-
-	@Nullable
-	private LatLon parseLatLon(@NonNull String latLon) {
-		String[] coords = latLon.split(",");
-		if (coords.length != 2) {
-			return null;
-		}
-		try {
-			double lat = Double.parseDouble(coords[0]);
-			double lon = Double.parseDouble(coords[1]);
-			return new LatLon(lat, lon);
-		} catch (NumberFormatException e) {
-			return null;
-		}
 	}
 
 	private boolean parseMoveMapToLocationUrlIntent() {
@@ -382,6 +368,7 @@ public class IntentHelper {
 			if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_MAIN.equals(action)) {
 				Uri data = intent.getData();
 				if (data != null) {
+					closeAllFragments();
 					String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
 						String path = data.getPath();
@@ -488,6 +475,17 @@ public class IntentHelper {
 					}
 				}
 				clearIntent(intent);
+			}
+		}
+	}
+
+	private void closeAllFragments() {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		for (Fragment fragment : fragmentManager.getFragments()) {
+			if (fragment instanceof DialogFragment) {
+				((DialogFragment) fragment).dismiss();
+			} else {
+				fragmentManager.popBackStack();
 			}
 		}
 	}
@@ -641,7 +639,7 @@ public class IntentHelper {
 				.appendPath(URL_PATH);
 
 		if (startPoint != null) {
-			String startPointCoordinates = getUrlFormattedCoordinate(startPoint.getLatitude()) + "," + getUrlFormattedCoordinate(startPoint.getLongitude());
+			String startPointCoordinates = Algorithms.formatLatlon(startPoint);
 			builder.appendQueryParameter(URL_PARAMETER_START, startPointCoordinates);
 		}
 
@@ -649,25 +647,25 @@ public class IntentHelper {
 			StringBuilder stringBuilder = new StringBuilder();
 			for (LatLon latLon : intermediatePoints) {
 				stringBuilder.append(",")
-						.append(getUrlFormattedCoordinate(latLon.getLatitude()))
+						.append(getFormattedCoordinate(latLon.getLatitude()))
 						.append(",")
-						.append(getUrlFormattedCoordinate(latLon.getLongitude()));
+						.append(getFormattedCoordinate(latLon.getLongitude()));
 			}
 			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT, stringBuilder.substring(1));
 		}
 
 		if (endPoint != null) {
-			String endPointCoordinates = getUrlFormattedCoordinate(endPoint.getLatitude()) + "," + getUrlFormattedCoordinate(endPoint.getLongitude());
+			String endPointCoordinates = Algorithms.formatLatlon(endPoint);
 			builder.appendQueryParameter(URL_PARAMETER_END, endPointCoordinates);
 		}
 
 		builder.appendQueryParameter(URL_PARAMETER_MODE, app.getRoutingHelper().getAppMode().getStringKey())
-				.encodedFragment(mapTileView.getZoom() + "/" + getUrlFormattedCoordinate(mapTileView.getLatitude()) + "/" + getUrlFormattedCoordinate(mapTileView.getLongitude()));
+				.encodedFragment(mapTileView.getZoom() + "/" + getFormattedCoordinate(mapTileView.getLatitude()) + "/" + getFormattedCoordinate(mapTileView.getLongitude()));
 
 		return builder.build().toString();
 	}
 
-	public static String getUrlFormattedCoordinate(double coordinate) {
+	private static String getFormattedCoordinate(double coordinate) {
 		return String.format(Locale.US, "%.6f", coordinate);
 	}
 }

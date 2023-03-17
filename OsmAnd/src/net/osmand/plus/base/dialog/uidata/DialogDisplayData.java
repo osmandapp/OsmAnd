@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.bottomsheets.displaydata;
+package net.osmand.plus.base.dialog.uidata;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +10,7 @@ public class DialogDisplayData {
 	private String title;
 	private String description;
 	private List<DialogDisplayItem> displayItems;
+	private int selectedItemIndex;
 
 	@NonNull
 	public String getTitle() {
@@ -36,5 +37,13 @@ public class DialogDisplayData {
 
 	public void setDisplayItems(@NonNull List<DialogDisplayItem> displayItems) {
 		this.displayItems = displayItems;
+	}
+
+	public void setSelectedItemIndex(int selectedItemIndex) {
+		this.selectedItemIndex = selectedItemIndex;
+	}
+
+	public int getSelectedItemIndex() {
+		return selectedItemIndex;
 	}
 }

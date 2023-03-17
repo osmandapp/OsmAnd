@@ -148,17 +148,14 @@ public class GpxApproximator {
 		this.gctx = gctx;
 		startProgress();
 		updateProgress(gctx);
-		approximationTask = new Runnable() {
-			@Override
-			public void run() {
-				try {
-					routingHelper.calculateGpxApproximation(env, gctx, getPoints(), resultMatcher);
-				} catch (Exception e) {
-					resultMatcher.publish(null);
-					log.error(e.getMessage(), e);
-				}
-				approximationTask = null;
+		approximationTask = () -> {
+			try {
+				routingHelper.calculateGpxApproximation(env, gctx, getPoints(), resultMatcher);
+			} catch (Exception e) {
+				resultMatcher.publish(null);
+				log.error(e.getMessage(), e);
 			}
+			approximationTask = null;
 		};
 		SINGLE_THREAD_EXECUTOR.submit(approximationTask);
 	}
@@ -180,20 +177,16 @@ public class GpxApproximator {
 	private void updateProgress(@NonNull GpxRouteApproximation gctx) {
 		GpxApproximationProgressCallback approximationProgress = this.approximationProgress;
 		if (approximationProgress != null) {
-			ctx.runInUIThread(new Runnable() {
-
-				@Override
-				public void run() {
-					RouteCalculationProgress calculationProgress = gctx.ctx.calculationProgress;
-					if (approximationTask == null && GpxApproximator.this.gctx == gctx) {
-						finishProgress();
-					}
-					if (approximationTask != null && calculationProgress != null && !calculationProgress.isCancelled) {
-						float pr = calculationProgress.getApproximationProgress();
-						approximationProgress.updateProgress(GpxApproximator.this, (int) pr);
-						if (GpxApproximator.this.gctx == gctx) {
-							updateProgress(gctx);
-						}
+			ctx.runInUIThread(() -> {
+				RouteCalculationProgress calculationProgress = gctx.ctx.calculationProgress;
+				if (approximationTask == null && GpxApproximator.this.gctx == gctx) {
+					finishProgress();
+				}
+				if (approximationTask != null && calculationProgress != null && !calculationProgress.isCancelled) {
+					float pr = calculationProgress.getApproximationProgress();
+					approximationProgress.updateProgress(GpxApproximator.this, (int) pr);
+					if (GpxApproximator.this.gctx == gctx) {
+						updateProgress(gctx);
 					}
 				}
 			}, 300);

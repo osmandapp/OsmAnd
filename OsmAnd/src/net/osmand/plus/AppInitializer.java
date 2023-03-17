@@ -24,12 +24,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.core.android.NativeCore;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -37,6 +37,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AnalyticsHelper;
@@ -319,8 +320,8 @@ public class AppInitializer implements IProgress {
 		app.routingHelper = startupInit(new RoutingHelper(app), RoutingHelper.class);
 		app.routingOptionsHelper = startupInit(new RoutingOptionsHelper(app), RoutingOptionsHelper.class);
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);
-		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
+		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
 		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
@@ -363,6 +364,7 @@ public class AppInitializer implements IProgress {
 		app.downloadTilesHelper = startupInit(new DownloadTilesHelper(app), DownloadTilesHelper.class);
 		app.averageSpeedComputer = startupInit(new AverageSpeedComputer(app), AverageSpeedComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
+		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 
 		initOpeningHoursParser();
 	}
@@ -557,7 +559,12 @@ public class AppInitializer implements IProgress {
 			appInitializing = false;
 			notifyFinish();
 			if (!Algorithms.isEmpty(warnings)) {
-				app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
+				String warning = AndroidUtils.formatWarnings(warnings).toString();
+				if (PluginsHelper.isDevelopment()) {
+					app.showToastMessage(warning);
+				} else {
+					LOG.error(warning);
+				}
 			}
 		}
 	}
@@ -588,18 +595,6 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-
-//	private void restoreBackupForFavoritesFiles() {
-//		File appDir = app.getAppPath(null);
-//		File save = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + IndexConstants.GPX_FILE_EXT);
-//		File bak = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + IndexConstants.GPX_FILE_EXT);
-//		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
-//			if (save.exists()) {
-//				save.delete();
-//			}
-//			bak.renameTo(save);
-//		}
-//	}
 
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {

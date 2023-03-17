@@ -1689,38 +1689,25 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				switch (object.objectType) {
 					case SEARCH_STARTED:
 						if (resultListener != null) {
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									resultListener.searchStarted(object.requiredSearchPhrase);
-								}
-							});
+							app.runInUIThread(() -> resultListener.searchStarted(object.requiredSearchPhrase));
 						}
 						break;
 					case SEARCH_FINISHED:
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								if (paused) {
-									return;
-								}
-								searching = false;
-								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
-									hideProgressBar();
-									SearchPhrase phrase = object.requiredSearchPhrase;
-									onSearchFinished(phrase);
-								}
+						app.runInUIThread(() -> {
+							if (paused) {
+								return;
+							}
+							searching = false;
+							if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
+								hideProgressBar();
+								SearchPhrase phrase = object.requiredSearchPhrase;
+								onSearchFinished(phrase);
 							}
 						});
 						break;
 					case FILTER_FINISHED:
 						if (resultListener != null) {
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									resultListener.publish(searchUICore.getCurrentSearchResult(), false);
-								}
-							});
+							app.runInUIThread(() -> resultListener.publish(searchUICore.getCurrentSearchResult(), false));
 						}
 						break;
 					case SEARCH_API_FINISHED:
@@ -1773,12 +1760,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void showLocationToolbar() {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				foundPartialLocation = true;
-				updateToolbarButton();
-			}
+		app.runInUIThread(() -> {
+			foundPartialLocation = true;
+			updateToolbarButton();
 		});
 	}
 
@@ -1787,39 +1771,36 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	                            SearchPhrase phrase,
 	                            boolean hasRegionCollection,
 	                            SearchResultListener resultListener) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				if (!paused && !cancelPrev) {
+		app.runInUIThread(() -> {
+			if (!paused && !cancelPrev) {
+				if (SearchUICore.isDebugMode()) {
+					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
+				}
+				boolean append = getResultCollection() != null;
+				if (append) {
 					if (SearchUICore.isDebugMode()) {
-						LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
+						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
-					boolean append = getResultCollection() != null;
-					if (append) {
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-						}
-						getResultCollection().addSearchResults(apiResults, true, true);
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-						}
-					} else {
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
-						}
-						SearchResultCollection resCollection = new SearchResultCollection(phrase);
-						resCollection.addSearchResults(apiResults, true, true);
-						setResultCollection(resCollection);
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-						}
-					}
-					if (!hasRegionCollection && resultListener != null) {
-						resultListener.publish(getResultCollection(), append);
-					}
+					getResultCollection().addSearchResults(apiResults, true, true);
 					if (SearchUICore.isDebugMode()) {
-						LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getSearchResultCollectionFormattedSize(getResultCollection()));
+						LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
+				} else {
+					if (SearchUICore.isDebugMode()) {
+						LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
+					}
+					SearchResultCollection resCollection = new SearchResultCollection(phrase);
+					resCollection.addSearchResults(apiResults, true, true);
+					setResultCollection(resCollection);
+					if (SearchUICore.isDebugMode()) {
+						LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
+					}
+				}
+				if (!hasRegionCollection && resultListener != null) {
+					resultListener.publish(getResultCollection(), append);
+				}
+				if (SearchUICore.isDebugMode()) {
+					LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 				}
 			}
 		});
@@ -1829,33 +1810,30 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	                               SearchPhrase phrase,
 	                               SearchResultCollection regionResultCollection,
 	                               SearchResultListener resultListener) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				if (!paused && !cancelPrev) {
+		app.runInUIThread(() -> {
+			if (!paused && !cancelPrev) {
+				if (SearchUICore.isDebugMode()) {
+					LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
+				}
+				if (getResultCollection() != null) {
 					if (SearchUICore.isDebugMode()) {
-						LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
+						LOG.info("UI >> Combining region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
-					if (getResultCollection() != null) {
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Combining region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
-						}
-						SearchResultCollection resCollection =
-								getResultCollection().combineWithCollection(regionResultCollection, true, true);
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Region results combined <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(resCollection));
-						}
-						if (resultListener != null) {
-							resultListener.publish(resCollection, true);
-						}
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(resCollection));
-						}
-					} else if (resultListener != null) {
-						resultListener.publish(regionResultCollection, false);
-						if (SearchUICore.isDebugMode()) {
-							LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
-						}
+					SearchResultCollection resCollection =
+							getResultCollection().combineWithCollection(regionResultCollection, true, true);
+					if (SearchUICore.isDebugMode()) {
+						LOG.info("UI >> Region results combined <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(resCollection));
+					}
+					if (resultListener != null) {
+						resultListener.publish(resCollection, true);
+					}
+					if (SearchUICore.isDebugMode()) {
+						LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(resCollection));
+					}
+				} else if (resultListener != null) {
+					resultListener.publish(regionResultCollection, false);
+					if (SearchUICore.isDebugMode()) {
+						LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
 					}
 				}
 			}

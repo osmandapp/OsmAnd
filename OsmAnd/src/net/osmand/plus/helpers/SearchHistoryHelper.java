@@ -7,8 +7,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -67,7 +68,7 @@ public class SearchHistoryHelper {
 	}
 
 	public void addNewItemToHistory(GPXInfo gpxInfo) {
-		if(gpxInfo != null) {
+		if (gpxInfo != null) {
 			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo)));
 		}
 	}
@@ -493,7 +494,7 @@ public class SearchHistoryHelper {
 		private void insert(HistoryEntry e, SQLiteConnection db) {
 			db.execSQL(
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
-					new Object[]{e.getSerializedName(), e.getLastAccessTime(),
+					new Object[] {e.getSerializedName(), e.getLastAccessTime(),
 							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
 			updateLastModifiedTime();
 		}
@@ -515,7 +516,7 @@ public class SearchHistoryHelper {
 							double lat = query.getDouble(1);
 							double lon = query.getDouble(2);
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
-							if (context.getPoiTypes().isTypeForbidden(p.getName())){
+							if (context.getPoiTypes().isTypeForbidden(p.getName())) {
 								query.moveToNext();
 							}
 							HistoryEntry e = new HistoryEntry(lat, lon, p);

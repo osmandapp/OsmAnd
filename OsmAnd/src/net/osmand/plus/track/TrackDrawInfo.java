@@ -98,10 +98,8 @@ public class TrackDrawInfo {
 		color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getModeValue(mode));
 		width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
 
-		coloringType = settings.DEFAULT_TRACK_COLORING_TYPE.getModeValue(mode);
-		routeInfoAttribute = settings.DEFAULT_TRACK_ROUTE_INFO_ATTRIBUTE.getModeValue(mode);
-		showArrows = settings.DEFAULT_TRACK_SHOW_ARROWS.getModeValue(mode);
-		showStartFinish = settings.DEFAULT_TRACK_SHOW_START_FINISH.getModeValue(mode);
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
 	public void updateParams(@NonNull GpxDataItem gpxDataItem) {
@@ -208,16 +206,12 @@ public class TrackDrawInfo {
 			settings.CURRENT_TRACK_SHOW_START_FINISH.resetToDefault();
 			initCurrentTrackParams(app);
 		} else if (isDefaultAppearance()) {
-			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			CommonPreference<String> colorPref = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
-
-			color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getDefaultValue());
-			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getDefaultValue();
-
-			coloringType = settings.DEFAULT_TRACK_COLORING_TYPE.getDefaultValue();
-			routeInfoAttribute = settings.DEFAULT_TRACK_ROUTE_INFO_ATTRIBUTE.getDefaultValue();
-			showArrows = settings.DEFAULT_TRACK_SHOW_ARROWS.getDefaultValue();
-			showStartFinish = settings.DEFAULT_TRACK_SHOW_START_FINISH.getDefaultValue();
+			color = 0;
+			width = null;
+			showArrows = false;
+			showStartFinish = true;
+			coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 		} else if (gpxFile != null) {
 			color = gpxFile.getColor(0);
 			width = gpxFile.getWidth(null);

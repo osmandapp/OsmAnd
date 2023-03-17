@@ -304,6 +304,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
+		cachedMapPosition = mapActivity.getMapView().getMapPosition();
 		app.setMeasurementEditingContext(editingCtx);
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
 			@Override
@@ -639,14 +640,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void expandInfoView() {
 		infoExpanded = true;
+		updateMapPosition();
+		cardsContainer.setVisibility(View.VISIBLE);
+		updateUpDownBtn();
+	}
+
+	private void updateMapPosition() {
 		if (portrait) {
 			setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
 		} else {
 			shiftMapControls(false);
 			setMapPosition(OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 		}
-		cardsContainer.setVisibility(View.VISIBLE);
-		updateUpDownBtn();
 	}
 
 	private void collapseInfoViewIfExpanded() {
@@ -779,8 +784,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
-			cachedMapPosition = mapActivity.getMapView().getMapPosition();
-			moveMapToDefaultPosition();
+			if (infoExpanded) {
+				updateMapPosition();
+			}
 			addInitialPoint();
 		}
 	}
@@ -1711,7 +1717,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void moveMapToDefaultPosition() {
-		setMapPosition(OsmandSettings.CENTER_CONSTANT);
+		setMapPosition(cachedMapPosition);
 	}
 
 	private void setMapPosition(int position) {

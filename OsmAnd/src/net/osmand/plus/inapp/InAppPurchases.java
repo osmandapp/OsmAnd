@@ -258,6 +258,25 @@ public abstract class InAppPurchases {
 			NOT_PURCHASED
 		}
 
+		public enum PurchaseOrigin {
+			UNDEFINED(R.string.shared_string_undefined),
+			GOOGLE(R.string.google_play),
+			AMAZON(R.string.amazon_market),
+			HUAWEI(R.string.huawei_market),
+			IOS(R.string.apple_app_store),
+			PROMO(R.string.promo);
+
+			final int storeNameId;
+
+			PurchaseOrigin(int storeNameId) {
+				this.storeNameId = storeNameId;
+			}
+
+			public int getStoreNameId() {
+				return storeNameId;
+			}
+		}
+
 		private final int featureId;
 		private final String sku;
 		private String price;
@@ -689,25 +708,6 @@ public abstract class InAppPurchases {
 		private long expireTime;
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
-
-		public enum SubscriptionOrigin {
-			UNDEFINED(R.string.shared_string_undefined),
-			GOOGLE(R.string.google_play),
-			AMAZON(R.string.amazon_market),
-			HUAWEI(R.string.huawei_market),
-			IOS(R.string.apple_app_store),
-			PROMO(R.string.promo);
-
-			final int storeNameId;
-
-			SubscriptionOrigin(int storeNameId) {
-				this.storeNameId = storeNameId;
-			}
-
-			public int getStoreNameId() {
-				return storeNameId;
-			}
-		}
 
 		public enum SubscriptionState {
 			UNDEFINED("undefined", R.string.shared_string_undefined),

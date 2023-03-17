@@ -260,12 +260,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 						if (lastDirection.update(destination) || !settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
 							String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
 							lastNotificationTime = now;
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									app.showToastMessage(notification);
-								}
-							});
+							app.runInUIThread(() -> app.showToastMessage(notification));
 						}
 					}
 				} else {

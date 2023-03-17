@@ -42,12 +42,12 @@
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="@dimen/list_header_settings_top_margin"
 				android:letterSpacing="@dimen/description_letter_spacing"
-				android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 				android:lineSpacingExtra="@dimen/descriptionLineSpacingExtra"
-				android:text="@string/select_segments_description"
+				android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_regular" />
+				osmand:typeface="@string/font_roboto_regular"
+				tools:text="@string/select_segments_description" />
 
 		</LinearLayout>
 

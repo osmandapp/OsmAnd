@@ -359,7 +359,7 @@
     <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
-    <string name="routing_attr_weight_name">Límite de peso</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="lang_sw">Suajili</string>
     <string name="lang_mr">Marathi</string>
@@ -1114,7 +1114,7 @@
     <string name="trace_rendering">Información sobre el rendimiento</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de la visualización y la navegación.</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
-    <string name="internet_connection_required_for_online_route">La navegación en línea, no funciona sin conexión a Internet.</string>
+    <string name="internet_connection_required_for_online_route">La navegación en línea no funciona sin conexión a Internet.</string>
     <string name="tts_language_not_supported_title">Idioma no admitido</string>
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
@@ -1142,9 +1142,9 @@
     <string name="map_overlay">Mapa superpuesto</string>
     <string name="map_overlay_descr">Elige el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los mapas (teselas) a instalar o actualizar.</string>
+    <string name="select_tile_source_to_install">Elige los repositorios de mapas (teselas):</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
-    <string name="install_more">Instalar más…</string>
+    <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
     <string name="level_to_switch_vector_raster">Nivel mínimo de zum vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes.</string>
@@ -1154,7 +1154,7 @@
     <string name="preferred_locale_descr">Idioma de la aplicación (surte efecto al reiniciar OsmAnd).</string>
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
+    <string name="unit_of_length_descr">Cambia las unidades de distancia o longitud.</string>
     <string name="unit_of_length">Unidades de longitud</string>
     <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
@@ -1262,7 +1262,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_north_opt">Norte siempre arriba (fijo)</string>
     <string name="rotate_map_to_descr">Alineación del mapa:</string>
     <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -1523,7 +1523,7 @@
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
     <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
-    <string name="routing_attr_height_name">Límite de altura</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
@@ -1592,7 +1592,7 @@
     <string name="rendering_value_translucent_blue_name">Azul translúcido</string>
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcida</string>
-    <string name="restart_is_required">Se requiere un reinicio para aplicar los cambios.</string>
+    <string name="restart_is_required">Debes reiniciar para aplicar los cambios.</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
@@ -1728,7 +1728,7 @@
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
-    <string name="rendering_attr_hideProposed_name">Objetos propuestos</string>
+    <string name="rendering_attr_showProposed_name">Objetos propuestos</string>
     <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
     <string name="share_osm_edits_subject">Ediciones de OSM compartidas vía OsmAnd</string>
@@ -3182,7 +3182,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
-    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_name">Anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3661,7 +3661,7 @@
     <string name="speed_cameras_restart_descr">Reiniciar la aplicación para borrar todos los datos de los radares de velocidad.</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar y reiniciar</string>
     <string name="routing_attr_length_description">Indica la longitud permitida del vehículo en rutas.</string>
-    <string name="routing_attr_length_name">Límite de longitud</string>
+    <string name="routing_attr_length_name">Longitud</string>
     <string name="speed_cameras_removed_descr">Este dispositivo no tiene radares de velocidad.</string>
     <string name="app_mode_inline_skates">Patines en línea</string>
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
@@ -3713,7 +3713,7 @@
     <string name="route_between_points_whole_track_button_desc">Recalcular toda la traza usando el perfil elegido.</string>
     <string name="route_between_points_next_segment_button_desc">Recalcular sólo el siguiente segmento usando el perfil elegido.</string>
     <string name="route_between_points_desc">Elige cómo conectar los puntos, con una línea recta o calcular una ruta entre ellos como se detalla a continuación.</string>
-    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que se añadirá un nuevo segmento.</string>
+    <string name="route_between_points_add_track_desc">Elige un archivo de traza al que añadir el segmento nuevo.</string>
     <string name="reverse_route">Ruta inversa</string>
     <string name="quick_action_add_gpx">Añadir punto de referencia de la traza</string>
     <string name="previous_segment">Segmento anterior</string>
@@ -4280,7 +4280,7 @@
     <string name="enough_contributions_descr">¡Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas de OsmAnd!</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">El cálculo de las contribuciones puede tomar varias horas.</string>
-    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
+    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún. :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
@@ -4397,7 +4397,7 @@
     <string name="shared_string_travelbooks">Libros de viajes</string>
     <string name="fold_unfold">Contraer/expandir</string>
     <string name="app_profile_type">Tipo de perfil de la aplicación</string>
-    <string name="migration_files_present">Existen %1$d archivo(s) (%2$s) en la ubicación «%3$s».</string>
+    <string name="migration_files_present">Hay %1$d archivo(s) (%2$s) en la ubicación «%3$s» y no pueden sobrescribirse.</string>
     <string name="map_marker_options">Opciones del marcador de mapa</string>
     <string name="add_to_group">Añadir al grupo</string>
     <string name="app_modes_options">Elegir modos de aplicación</string>
@@ -4412,7 +4412,7 @@
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Pulsa «%1$s» para copiar %2$s archivos de «%3$s» a «%4$s». Puede tardar un poco.</string>
     <string name="storage_copying_files_size">Copiando %1$s archivos (%2$s)</string>
-    <string name="storage_copied_files_size">Se copiaron %1$s archivos (%2$s)</string>
+    <string name="storage_copied_files_size">Procesados %1$s archivo(s), %2$s</string>
     <string name="storage_found_files_size">Se encontraron %1$s archivos (%2$s)</string>
     <string name="shared_string_skip_warning">¿Omitir migración\? OsmAnd ya no tiene acceso a los archivos en el almacenamiento compartido.
 \n
@@ -4786,7 +4786,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
-    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Rotación manual (fijo)</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
@@ -4958,7 +4958,7 @@
     <string name="weather_pressure_inches_of_mercury">Pulgadas de mercurio</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de las líneas</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Esquema de color de la línea</string>
     <string name="shared_string_sunset">Ocaso</string>
     <string name="rendering_attr_depthContourWidth_name">Grosor de la línea</string>
     <string name="depth_contour_lines">Curvas de nivel de profundidad</string>
@@ -4987,7 +4987,6 @@
     <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
-    <string name="release_4_4_pre">• Aquí estarán las cadenas para la versión 4.4</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
     <string name="open_weather_action">Ver meteorología</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
@@ -5053,4 +5052,61 @@
     <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
     <string name="sound_beep_complex">Pitido: complejo</string>
+    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
+    <string name="shared_string_apply_changes">Aplicar cambios</string>
+    <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
+    <string name="no_visible_tracks">Sin trazas en el mapa</string>
+    <string name="recently_visible">Visibles recientemente %1$s</string>
+    <string name="empty_tracks_description">Puedes importar, crear o grabar archivos de trazas, usando OsmAnd.</string>
+    <string name="empty_tracks">No tienes archivos de trazas.</string>
+    <string name="shared_string_select_recent">Marcar reciente</string>
+    <string name="change_appearance">Cambiar aspecto</string>
+    <string name="switch_folder">Alternar carpeta</string>
+    <string name="show_all_tracks">Mostrar todas las trazas</string>
+    <string name="shared_string_on_map">En el mapa</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
+    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+\n
+\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n
+\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n
+\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n
+\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n
+\n• Se ha simplificado la pantalla de inicio
+\n
+\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n
+\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n
+\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n
+\n• Se han corregido problemas de visualización con los lugares veganos
+\n
+\n</string>
+    <string name="approximate_bearing">Rumbo aproximado</string>
+    <string name="approximate_bearing_descr">Obtener el rumbo de la ruta de navegación que se está siguiendo.</string>
+    <string name="shared_string_inches">pulgadas</string>
+    <string name="inch">in</string>
+    <string name="sort_duration_descending">Duración descendente</string>
+    <string name="sort_distance_ascending">Distancia ascendente</string>
+    <string name="sort_date_ascending">Fecha ascendente</string>
+    <string name="sort_date_descending">Fecha descendente</string>
+    <string name="shared_string_nearest">Más cercano</string>
+    <string name="sort_distance_descending">Distancia descendente</string>
+    <string name="shared_string_kilograms">kilogramos</string>
+    <string name="shared_string_yards">yardas</string>
+    <string name="selected_value">Valor elegido</string>
+    <string name="sort_duration_ascending">Duración ascendente</string>
+    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Borrar archivo</string>
+    <string name="delete_cloud_version">Borrar versión en la nube</string>
+    <string name="local_version_do_not_exist">No existe una versión local.</string>
+    <string name="shared_string_in_progress">En curso</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidad de movimiento</string>
+    <string name="simulation_position_description">Marca un archivo de traza a usar como guía de movimiento.</string>
+    <string name="shared_string_add_manually">Añadir manualmente…</string>
 </resources>

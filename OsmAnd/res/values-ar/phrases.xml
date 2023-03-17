@@ -3398,12 +3398,12 @@
     <string name="poi_government_social_security">الضمان الاجتماعي</string>
     <string name="poi_government_archive">أرشيف/محفوظات حكومية</string>
     <string name="poi_network">الشبكة</string>
-    <string name="poi_boat_canoe_rental_rental_no">كانوي: لا</string>
-    <string name="poi_boat_canoe_rental_rental_yes">كانوي: نعم</string>
-    <string name="poi_boat_kayak_rental_rental_no">زوارق الكاياك: لا</string>
-    <string name="poi_boat_kayak_rental_rental_yes">زوارق الكاياك: نعم</string>
-    <string name="poi_boat_dinghy_rental_rental_no">زورق: لا</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">زورق: نعم</string>
+    <string name="poi_boat_canoe_rental_no">كانوي: لا</string>
+    <string name="poi_boat_canoe_rental_yes">كانوي: نعم</string>
+    <string name="poi_boat_kayak_rental_no">زوارق الكاياك: لا</string>
+    <string name="poi_boat_kayak_rental_yes">زوارق الكاياك: نعم</string>
+    <string name="poi_boat_dinghy_rental_no">زورق: لا</string>
+    <string name="poi_boat_dinghy_rental_yes">زورق: نعم</string>
     <string name="poi_boat_sailboat_rental_no">المراكب الشراعية: لا</string>
     <string name="poi_boat_sailboat_rental_yes">المراكب الشراعية: نعم</string>
     <string name="poi_boat_jetski_rental_no">جيتسكي: لا</string>
@@ -4492,4 +4492,17 @@
     <string name="poi_socket_cee_red_16a_voltage">مأخذ: CEE اﻷحمر 16A: جهد كهربائي</string>
     <string name="poi_socket_cee_red_32a_voltage">مأخذ: CEE اﻷحمر 32A: جهد كهربائي</string>
     <string name="poi_socket_schuko_voltage">مأخذ: Schuko: جهد كهربائي</string>
+    <string name="poi_recycling_aluminium_cans">علب الألمنيوم</string>
+    <string name="poi_recycling_plastic_bottle_caps">أغطية زجاجات بلاستيكية</string>
+    <string name="poi_recycling_pet_drink_bottles">زجاجات مشروبات PET</string>
+    <string name="poi_recycling_textiles">منسوجات</string>
+    <string name="poi_self_checkout_yes">نعم</string>
+    <string name="poi_self_checkout_only">فقط</string>
+    <string name="poi_lifeguard_tower">برج الإنقاذ</string>
+    <string name="poi_lifeguard">حرس</string>
+    <string name="poi_self_checkout_no">خروج ذاتي: لا</string>
+    <string name="poi_self_checkout">خروج ذاتي</string>
+    <string name="poi_aboriginal_lands">أراضي السكان الأصليين</string>
+    <string name="poi_water_filter">المياه؛ مياه الشرب</string>
+    <string name="poi_antenna">هوائي</string>
 </resources>

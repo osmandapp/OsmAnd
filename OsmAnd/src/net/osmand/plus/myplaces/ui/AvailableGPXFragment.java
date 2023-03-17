@@ -60,9 +60,8 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -78,16 +77,17 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
@@ -197,16 +197,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private void startHandler() {
 		Handler updateCurrentRecordingTrack = new Handler();
-		updateCurrentRecordingTrack.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (getView() != null && updateEnable) {
-					updateCurrentTrack();
-					if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
-						allGpxAdapter.notifyDataSetChanged();
-					}
-					startHandler();
+		updateCurrentRecordingTrack.postDelayed(() -> {
+			if (getView() != null && updateEnable) {
+				updateCurrentTrack();
+				if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
+					allGpxAdapter.notifyDataSetChanged();
 				}
+				startHandler();
 			}
 		}, 2000);
 	}
@@ -297,12 +294,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				plugin.saveCurrentTrack(new Runnable() {
-					@Override
-					public void run() {
-						if (isResumed()) {
-							reloadTracks();
-						}
+				plugin.saveCurrentTrack(() -> {
+					if (isResumed()) {
+						reloadTracks();
 					}
 				});
 				updateCurrentTrack();
@@ -936,13 +930,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			private long lastUpdateTime;
 
-			private final Runnable updateItemsProc = new Runnable() {
-				@Override
-				public void run() {
-					if (updateEnable) {
-						lastUpdateTime = System.currentTimeMillis();
-						allGpxAdapter.notifyDataSetChanged();
-					}
+			private final Runnable updateItemsProc = () -> {
+				if (updateEnable) {
+					lastUpdateTime = System.currentTimeMillis();
+					allGpxAdapter.notifyDataSetChanged();
 				}
 			};
 

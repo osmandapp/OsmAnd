@@ -6,6 +6,7 @@ import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FR
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
 
 import net.osmand.CollatorStringMatcher;
@@ -1061,7 +1062,9 @@ public class SearchCoreFactory {
 					throw new UnsupportedOperationException();
 				}
 				nameFilter = phrase.getUnknownSearchPhrase();
-			} else if (searchAmenityTypesAPI != null && phrase.isFirstUnknownSearchWordComplete()) {
+			} else if (searchAmenityTypesAPI != null && (phrase.isFirstUnknownSearchWordComplete()
+					|| (!Algorithms.isEmpty(resultMatcher.getRequestResults())
+						&& resultMatcher.getRequestResults().get(0).objectType == POI_TYPE))) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();

@@ -1464,7 +1464,7 @@
     <string name="osn_close_dialog_error">Qeyd bağlana bilmədi.</string>
     <string name="osb_comment_dialog_error">Rəy əlavə edilə bilmədi.</string>
     <string name="share_osm_edits_subject">OSM düzəlişləri OsmAnd ilə paylaşılıb</string>
-    <string name="rendering_attr_hideProposed_name">Təklif olunan obyektlər</string>
+    <string name="rendering_attr_showProposed_name">Təklif olunan obyektlər</string>
     <string name="local_recordings_delete_all_confirm">%1$d qeyd silinsin\?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d dəyişiklik OSM-a yüklənsin\?</string>
     <string name="osm_live_subscription">OsmAnd Live abunəliyi</string>

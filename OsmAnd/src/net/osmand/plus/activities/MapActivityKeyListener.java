@@ -44,12 +44,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && app.accessibilityEnabled()) {
 			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
-				Message msg = Message.obtain(uiHandler, new Runnable() {
-					@Override
-					public void run() {
-						app.getLocationProvider().emitNavigationHint();
-					}
-				});
+				Message msg = Message.obtain(uiHandler, () -> app.getLocationProvider().emitNavigationHint());
 				msg.what = LONG_KEYPRESS_MSG_ID;
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
@@ -96,7 +91,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 		} else if (keyCode == KeyEvent.KEYCODE_C) {
 			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 		} else if (keyCode == KeyEvent.KEYCODE_D) {
-			mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+			mapActivity.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
 		} else if (keyCode == KeyEvent.KEYCODE_MINUS) {
 			osmandMap.changeZoom(-1);
 			return true;

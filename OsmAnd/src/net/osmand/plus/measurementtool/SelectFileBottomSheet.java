@@ -1,11 +1,21 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.util.Algorithms.collectDirs;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
@@ -14,10 +24,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxTrackAdapter;
 import net.osmand.plus.track.GpxTrackAdapter.OnItemClickListener;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -32,16 +42,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.StringRes;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
-import static net.osmand.util.Algorithms.collectDirs;
 
 public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -80,7 +80,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	private Mode fragmentMode;
 	private String selectedFolder;
 	private String allFilesFolder;
-	TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
+	private TracksSortByMode sortByMode = TracksSortByMode.BY_DATE;
 
 	public void setFragmentMode(Mode fragmentMode) {
 		this.fragmentMode = fragmentMode;

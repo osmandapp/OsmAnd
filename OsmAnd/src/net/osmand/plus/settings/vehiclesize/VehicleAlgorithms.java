@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.vehiclesize;
 
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.INCHES_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import androidx.annotation.NonNull;
@@ -14,13 +15,14 @@ import java.util.List;
 public class VehicleAlgorithms {
 
 	public static Limits convertLimitsByMetricSystem(@NonNull Limits limits,
-	                                                 @NonNull MetricsConstants lengthMetric) {
+	                                                 @NonNull MetricsConstants lengthMetricSystem,
+	                                                 boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
 		float min = limits.getMin();
 		float max = limits.getMax();
 		// Convert to appropriate length metric system
-		min = convertLengthFromMeters(lengthMetric, min);
-		max = convertLengthFromMeters(lengthMetric, max);
-		if (lengthMetric != MetricsConstants.KILOMETERS_AND_METERS) {
+		min = convertLengthFromMeters(lengthMetricSystem, min, useInchesInsteadOfFeet, useInchesInsteadOfYards);
+		max = convertLengthFromMeters(lengthMetricSystem, max, useInchesInsteadOfFeet, useInchesInsteadOfYards);
+		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS) {
 			// Round min / max
 			int multiplier = 10;
 			float scaledMin = min * multiplier;
@@ -96,24 +98,26 @@ public class VehicleAlgorithms {
 		return result;
 	}
 
-	public static float convertLengthToMeters(@NonNull MetricsConstants mc, float value) {
+	public static float convertLengthToMeters(@NonNull MetricsConstants mc, float value,
+	                                          boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
 		float resultValue;
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			resultValue = value / FEET_IN_ONE_METER;
+			resultValue = value / (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
-			resultValue = value / YARDS_IN_ONE_METER;
+			resultValue = value / (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
 		} else {
 			resultValue = value;
 		}
 		return resultValue;
 	}
 
-	public static float convertLengthFromMeters(@NonNull MetricsConstants mc, float valueInMeters) {
+	public static float convertLengthFromMeters(@NonNull MetricsConstants mc, float valueInMeters,
+	                                            boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
 		float result;
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			result = valueInMeters * FEET_IN_ONE_METER;
+			result = valueInMeters * (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
-			result = valueInMeters * YARDS_IN_ONE_METER;
+			result = valueInMeters * (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
 		} else {
 			result = valueInMeters;
 		}

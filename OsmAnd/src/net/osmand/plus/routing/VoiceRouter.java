@@ -196,6 +196,9 @@ public class VoiceRouter {
 		//STATUS_UNKNOWN=0 -> STATUS_LONG_PREPARE=1 -> STATUS_PREPARE=2 -> STATUS_TURN_IN=3 -> STATUS_TURN=4 -> STATUS_TOLD=5
 		if (previousStatus != STATUS_TOLD) {
 			this.currentStatus = previousStatus + 1;
+			if (previousStatus == STATUS_TURN) {
+				waitAnnouncedOffRoute = 0;
+			}
 		} else {
 			this.currentStatus = previousStatus;
 		}
@@ -233,19 +236,23 @@ public class VoiceRouter {
 					waitAnnouncedOffRoute *= 2.5;
 				}
 				lastAnnouncedOffRoute = ms;
+			// Avoid offRoute/onRoute loop, #16571:
+			} else if (announceBackOnRoute && (dist < 0.3 * atd.getOffRouteDistance())) {
+				announceBackOnRoute();
 			}
 		}
 	}
 
-	public void announceBackOnRoute() {
-		if (announceBackOnRoute) {
+	private void announceBackOnRoute() {
+		//if (announceBackOnRoute) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
 			}
 			play(p);
 			announceBackOnRoute = false;
-		}
+			waitAnnouncedOffRoute = 0;
+		//}
 	}
 
 	public void approachWaypoint(Location location, List<LocationPointWrapper> points) {
@@ -882,6 +889,7 @@ public class VoiceRouter {
 		play(p);
 		if (newRoute) {
 			playGoAheadDist = -1;
+			waitAnnouncedOffRoute = 0;
 		}
 		currentStatus = STATUS_UNKNOWN;
 		suppressDest = false;

@@ -1708,7 +1708,7 @@
     <string name="first_usage_item">Pirmasis naudojimas</string>
     <string name="read_more">Skaityti toliau</string>
     <string name="whats_new">Kas naujo</string>
-    <string name="rendering_attr_hideProposed_name">Siūlomi objektai</string>
+    <string name="rendering_attr_showProposed_name">Siūlomi objektai</string>
     <string name="lang_mk">Makedonų</string>
     <string name="copied_to_clipboard">Nukopijuota į įškarpinę</string>
     <string name="osm_edit_deleted_poi">OSM LV ištrinta</string>
@@ -2988,4 +2988,5 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="context_menu_edit_descr">Redaguoti aprašymą</string>
     <string name="copy_to_map_favorites">Kopijuoti į mėgstamiausius</string>
     <string name="shared_string_min_height">Min. aukštis</string>
+    <string name="map_widget_altitude">Esamos vietos aukštis</string>
 </resources>

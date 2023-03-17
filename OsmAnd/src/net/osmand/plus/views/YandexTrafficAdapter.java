@@ -44,17 +44,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	protected void updateTimeStamp() {
 		if ((mTimestamp == null || (System.currentTimeMillis() - lastTimestampUpdated) > DELTA) && !updateThreadRan) {
 			updateThreadRan = true;
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						updateTimeStampImpl();
-					} finally {
-
-					}
-
-				}
-			}, "UpdateYandexTraffic").start();
+			new Thread(this::updateTimeStampImpl, "UpdateYandexTraffic").start();
 		}
 	}
 

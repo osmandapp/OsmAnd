@@ -5,6 +5,7 @@ import static net.osmand.plus.settings.backend.ApplicationMode.BICYCLE;
 import static net.osmand.plus.settings.backend.ApplicationMode.BOAT;
 import static net.osmand.plus.settings.backend.ApplicationMode.CAR;
 import static net.osmand.plus.settings.backend.ApplicationMode.HORSE;
+import static net.osmand.plus.settings.backend.ApplicationMode.MOPED;
 import static net.osmand.plus.settings.backend.ApplicationMode.MOTORCYCLE;
 import static net.osmand.plus.settings.backend.ApplicationMode.PEDESTRIAN;
 import static net.osmand.plus.settings.backend.ApplicationMode.PUBLIC_TRANSPORT;
@@ -70,12 +71,12 @@ public class WidgetsAvailabilityHelper {
 
 	public static void initRegVisibility() {
 		ApplicationMode[] exceptDefault = {CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT,
-				AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
+				AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 		ApplicationMode[] all = null;
 		ApplicationMode[] none = {};
 
 		// left
-		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
+		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(NEXT_TURN, navigationSet1);
@@ -91,8 +92,8 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
 		regWidgetVisibility(TIME_TO_DESTINATION, all);
 		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
-				TRUCK, MOTORCYCLE, HORSE);
-		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
+				TRUCK, MOTORCYCLE, HORSE, MOPED);
+		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE, MOPED);
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
 		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
