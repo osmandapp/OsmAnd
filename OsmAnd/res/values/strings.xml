@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="common_weight_limit_error">Minimum value is \"%1$s\" %2$s. Use the "\"%3$s\"" profile if the vehicle weight is less than the minimum value.</string>
+    <string name="shared_string_pounds">pounds</string>
+    <string name="metric_lbs">lbs</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
     <string name="sort_duration_ascending">Shorter duration first</string>

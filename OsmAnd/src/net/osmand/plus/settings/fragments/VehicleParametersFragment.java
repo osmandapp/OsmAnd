@@ -38,12 +38,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.settings.vehiclesize.WeightMetric;
+import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -108,7 +111,6 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		String description = AndroidUtils.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 		String defValue = parameter.getDefaultString();
 		ApplicationMode appMode = getSelectedAppMode();
-		MetricsConstants lengthMetricSystem = settings.METRIC_SYSTEM.getModeValue(appMode);
 		StringPreference preference = (StringPreference) settings.getCustomRoutingProperty(parameterId, defValue);
 
 		SizePreference uiPreference = new SizePreference(requireContext());
@@ -116,7 +118,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		uiPreference.setSizeType(type);
 		uiPreference.setVehicleSizes(vehicle);
 		uiPreference.setDefaultValue(defValue);
-		uiPreference.setLengthMetricSystem(lengthMetricSystem);
+		uiPreference.setMetric(createMetrics(appMode));
 		uiPreference.setTitle(title);
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(getPreferenceIcon(parameterId));
@@ -124,6 +126,14 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 		PreferenceScreen screen = getPreferenceScreen();
 		screen.addPreference(uiPreference);
+	}
+
+	@NonNull
+	private Metric createMetrics(@NonNull ApplicationMode appMode) {
+		boolean usePounds = settings.DRIVING_REGION.getModeValue(appMode) == DrivingRegion.US;
+		WeightMetric weightMetric = usePounds ? WeightMetric.POUNDS : WeightMetric.TONES;
+		MetricsConstants lengthMetric = settings.METRIC_SYSTEM.getModeValue(appMode);
+		return new Metric(weightMetric, lengthMetric);
 	}
 
 	private void setupDefaultSpeedPref() {
