@@ -51,6 +51,7 @@ public class WorldRegion implements Serializable {
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
 	protected List<LatLon> polygon;
+	protected List<List<LatLon>> additionalPolygons = new ArrayList<>();
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -295,8 +296,11 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
-	public List<LatLon> getPolygon() {
-		return polygon;
+	public List<List<LatLon>> getPolygons() {
+		List<List<LatLon>> polygons = new ArrayList<>();
+		polygons.add(polygon);
+		polygons.addAll(additionalPolygons);
+		return polygons;
 	}
 
 	@Override
