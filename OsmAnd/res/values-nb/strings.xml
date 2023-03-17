@@ -5088,4 +5088,7 @@
     <string name="sort_distance_ascending">Korteste avstand først</string>
     <string name="selected_value">Valgt verdi</string>
     <string name="sort_date_ascending">Nyeste dato først</string>
+    <string name="enable_3d_maps">Skru på 3D-kart</string>
+    <string name="app_mode_moped">Moped</string>
+    <string name="test_heightmap">Test høydekart</string>
 </resources>
