@@ -49,8 +49,6 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private int maxProgress;
 	private int generalProgress;
 
-	private ImportBackupItemsTask importBackupItemsTask;
-
 	ImportBackupTask(@NonNull String key,
 	                 @NonNull NetworkSettingsHelper helper,
 	                 @Nullable BackupCollectListener collectListener,
@@ -136,25 +134,9 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		return null;
 	}
 
-	public void cancelSubtask() {
-		if (isSubtaskRunning()) {
-			importer.cancel();
-			importBackupItemsTask.cancelTask();
-		}
-	}
-
-	public boolean isSubtaskRunning() {
-		return importBackupItemsTask != null && importBackupItemsTask.getStatus() == Status.RUNNING;
-	}
-
 	@Override
-	protected void onCancelled(List<SettingsItem> settingsItems) {
-		if (importBackupItemsTask != null) {
-			importBackupItemsTask.cancelTask();
-			importBackupItemsTask = null;
-		} else {
-			onPostExecute(settingsItems);
-		}
+	protected void onCancelled() {
+		onPostExecute(null);
 	}
 
 	@Override
@@ -184,8 +166,8 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 						helper.importAsyncTasks.remove(key);
 						helper.finishImport(importListener, succeed, items, needRestart);
 					};
-					importBackupItemsTask = new ImportBackupItemsTask(app, importer, items, itemsListener, forceReadData);
-					importBackupItemsTask.executeOnExecutor(app.getBackupHelper().getExecutor());
+					new ImportBackupItemsTask(app, importer, items, itemsListener, forceReadData)
+							.executeOnExecutor(app.getBackupHelper().getExecutor());
 				} else {
 					helper.importAsyncTasks.remove(key);
 					helper.finishImport(importListener, false, Collections.emptyList(), false);
@@ -301,6 +283,11 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 			}
 
 			@Override
+			public void itemExportDone(@NonNull String type, @NonNull String fileName) {
+				publishProgress(new ItemProgressInfo(type, fileName, 0, 0, true));
+			}
+
+			@Override
 			public void updateGeneralProgress(int downloadedItems, int uploadedKb) {
 				if (isCancelled()) {
 					importer.cancel();
@@ -308,14 +295,6 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				generalProgress = uploadedKb;
 				if (importListener != null) {
 					importListener.onImportProgressUpdate(generalProgress, uploadedKb);
-				}
-			}
-
-			@Override
-			public void itemExportDone(@NonNull String type, @NonNull String fileName) {
-				publishProgress(new ItemProgressInfo(type, fileName, 0, 0, true));
-				if (isCancelled()) {
-					importer.cancel();
 				}
 			}
 		};

@@ -22,10 +22,10 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	private boolean needRestart;
 
 	ImportBackupItemsTask(@NonNull OsmandApplication app,
-	                      @NonNull BackupImporter importer,
-	                      @NonNull List<SettingsItem> items,
-	                      @Nullable ImportItemsListener listener,
-	                      boolean forceReadData) {
+						  @NonNull BackupImporter importer,
+						  @NonNull List<SettingsItem> items,
+						  @Nullable ImportItemsListener listener,
+						  boolean forceReadData) {
 		this.app = app;
 		this.importer = importer;
 		this.items = items;
@@ -43,20 +43,11 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	protected Boolean doInBackground(Void... voids) {
 		try {
 			importer.importItems(items, forceReadData);
-			return true;
+			return importer.isCancelled();
 		} catch (IllegalArgumentException e) {
 			NetworkSettingsHelper.LOG.error("Failed to import items from backup", e);
 		}
 		return false;
-	}
-
-	public void cancelTask() {
-		importer.cancel();
-	}
-
-	@Override
-	protected void onCancelled(Boolean aBoolean) {
-		onPostExecute(false);
 	}
 
 	@Override
