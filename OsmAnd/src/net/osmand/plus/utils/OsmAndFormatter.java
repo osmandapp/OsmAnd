@@ -439,30 +439,25 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx) {
-		return getFormattedSpeed(metersPerSeconds, ctx, ctx.getSettings().getApplicationMode());
+	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication app) {
+		return getFormattedSpeedValue(metersPerSeconds, app).format(app);
 	}
 
 	@NonNull
-	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx, @NonNull ApplicationMode mode) {
-		return getFormattedSpeedValue(metersPerSeconds, ctx, mode, false).format(ctx);
+	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication app, boolean hasFastSpeed, SpeedConstants speedFormat) {
+		return getFormattedSpeedValue(metersPerSeconds, app, hasFastSpeed, speedFormat).format(app);
 	}
 
 	@NonNull
-	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx, @NonNull ApplicationMode mode, boolean forceNotPace) {
-		return getFormattedSpeedValue(metersPerSeconds, ctx, mode, forceNotPace).format(ctx);
+	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app) {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		return getFormattedSpeedValue(metersPerSeconds, app, mode.hasFastSpeed(), app.getSettings().SPEED_SYSTEM.getModeValue(mode));
 	}
 
 	@NonNull
-	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication ctx) {
-		return getFormattedSpeedValue(metersPerSeconds, ctx, ctx.getSettings().getApplicationMode());
-	}
-
-	@NonNull
-	public static float getMetersInModeUnit(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
-		SpeedConstants modeConstant = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
+	public static float getMetersInModeUnit(@NonNull OsmandApplication app, @NonNull SpeedConstants speedFormat) {
 		float metersInUnit = 0f;
-		switch (modeConstant) {
+		switch (speedFormat) {
 			case MILES_PER_HOUR:
 			case MINUTES_PER_MILE:
 				metersInUnit = METERS_IN_ONE_MILE;
@@ -484,21 +479,12 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
-		return getFormattedSpeedValue(metersPerSeconds, app, mode, false);
-	}
-
-	@NonNull
-	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, @NonNull ApplicationMode mode, boolean forceNotPace) {
-		SpeedConstants mc = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
-		if (forceNotPace) {
-			mc = getSpeedModeForPaceMode(mc);
-		}
+	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, boolean hasFastSpeed, SpeedConstants mc) {
 		String unit = mc.toShortString(app);
 		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
-			if (kmh >= 20 || mode.hasFastSpeed()) {
+			if (kmh >= 20 || hasFastSpeed) {
 				return getFormattedSpeed(Math.round(kmh), unit, app);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
@@ -506,7 +492,7 @@ public class OsmAndFormatter {
 			return getFormattedLowSpeed(kmh10 / 10f, unit, app);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-			if (mph >= 20 || mode.hasFastSpeed()) {
+			if (mph >= 20 || hasFastSpeed) {
 				return getFormattedSpeed(Math.round(mph), unit, app);
 			} else {
 				int mph10 = Math.round(mph * 10f);
@@ -514,7 +500,7 @@ public class OsmAndFormatter {
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
-			if (mph >= 20 || mode.hasFastSpeed()) {
+			if (mph >= 20 || hasFastSpeed) {
 				return getFormattedSpeed(Math.round(mph), unit, app);
 			} else {
 				int mph10 = Math.round(mph * 10f);
@@ -554,7 +540,7 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	private static SpeedConstants getSpeedModeForPaceMode(SpeedConstants originalMode) {
+	public static SpeedConstants getSpeedModeForPaceMode(SpeedConstants originalMode) {
 		switch (originalMode) {
 			case MINUTES_PER_KILOMETER:
 				return SpeedConstants.KILOMETERS_PER_HOUR;

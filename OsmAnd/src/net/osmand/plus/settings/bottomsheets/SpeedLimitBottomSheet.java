@@ -24,8 +24,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
 public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
@@ -68,23 +70,24 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.selected_value);
 
+		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(appMode));
 		TextView summary = view.findViewById(R.id.summary);
-		summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode, true));
+		summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
 
 		TextView fromTv = view.findViewById(R.id.from_value);
-		fromTv.setText(getFormattedSpeed(MIN_VALUE_KM_H / 3.6f, app, appMode, true));
+		fromTv.setText(getFormattedSpeed(MIN_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
 
 		TextView toTv = view.findViewById(R.id.to_value);
-		toTv.setText(getFormattedSpeed(MAX_VALUE_KM_H / 3.6f, app, appMode, true));
+		toTv.setText(getFormattedSpeed(MAX_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
 
 		Slider slider = view.findViewById(R.id.slider);
-		slider.setValue(Float.parseFloat(getFormattedSpeedValue(selectedValue / 3.6f, app, appMode, true).value));
-		slider.setValueFrom(Float.parseFloat(getFormattedSpeedValue(MIN_VALUE_KM_H / 3.6f, app, appMode, true).value));
-		slider.setValueTo(Float.parseFloat(getFormattedSpeedValue(MAX_VALUE_KM_H / 3.6f, app, appMode, true).value));
+		slider.setValue(Float.parseFloat(getFormattedSpeedValue(selectedValue / 3.6f, app, appMode.hasFastSpeed(), speedFormat).value));
+		slider.setValueFrom(Float.parseFloat(getFormattedSpeedValue(MIN_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat).value));
+		slider.setValueTo(Float.parseFloat(getFormattedSpeedValue(MAX_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat).value));
 		slider.setStepSize(1f);
 		slider.addOnChangeListener((s, value, fromUser) -> {
-			selectedValue = (value * getMetersInModeUnit(app, appMode) / METERS_IN_KILOMETER);
-			summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode, true));
+			selectedValue = (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER);
+			summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
 		});
 
 		int color = appMode.getProfileColor(nightMode);
