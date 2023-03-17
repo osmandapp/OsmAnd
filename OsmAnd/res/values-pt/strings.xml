@@ -5099,4 +5099,6 @@
     <string name="selected_value">Valor selecionado</string>
     <string name="shared_string_nearest">Mais perto</string>
     <string name="app_mode_moped">Ciclomotor</string>
+    <string name="enable_3d_maps">Ativar mapas de 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombras de relevo de vértice em 3D</string>
 </resources>
