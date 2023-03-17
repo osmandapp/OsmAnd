@@ -5044,4 +5044,6 @@
     <string name="shared_string_delete_file">Usuń plik</string>
     <string name="local_version_do_not_exist">Brak wersji lokalnej.</string>
     <string name="shared_string_original">Oryginalny</string>
+    <string name="app_mode_moped">Motorower</string>
+    <string name="enable_3d_maps">Włącz mapy 3D</string>
 </resources>
