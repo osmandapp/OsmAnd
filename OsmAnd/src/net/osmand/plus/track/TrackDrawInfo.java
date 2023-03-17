@@ -93,14 +93,14 @@ public class TrackDrawInfo {
 			trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
 			trackColorProp = renderer.PROPS.getCustomRule(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
 		}
-		if(!Algorithms.isEmpty(settings.CURRENT_TRACK_WIDTH.get())){
+		if (!Algorithms.isEmpty(settings.CURRENT_TRACK_WIDTH.get())) {
 			width = settings.CURRENT_TRACK_WIDTH.get();
 		} else if (trackWidthProp != null && !Algorithms.isEmpty(trackWidthProp.getPossibleValues())) {
 			width = trackWidthProp.getPossibleValues()[0];
 		} else {
 			width = "";
 		}
-		if(settings.CURRENT_TRACK_COLOR.get() != 0){
+		if (settings.CURRENT_TRACK_COLOR.get() != 0) {
 			color = settings.CURRENT_TRACK_COLOR.get();
 		} else if (trackColorProp != null && !Algorithms.isEmpty(trackColorProp.getPossibleValues())) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, trackColorProp.getPossibleValues()[0]);
@@ -134,7 +134,7 @@ public class TrackDrawInfo {
 			trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
 			trackColorProp = renderer.PROPS.getCustomRule(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
 		}
-		if(gpxDataItem.getWidth() != null){
+		if (gpxDataItem.getWidth() != null) {
 			width = gpxDataItem.getWidth();
 		} else if (!Algorithms.isEmpty(app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get())) {
 			width = app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
@@ -143,7 +143,7 @@ public class TrackDrawInfo {
 		} else {
 			width = null;
 		}
-		if(gpxDataItem.getColor() != 0){
+		if (gpxDataItem.getColor() != 0) {
 			color = gpxDataItem.getColor();
 		} else if (GpxAppearanceAdapter.parseTrackColor(renderer, app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get()) != 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
