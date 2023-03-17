@@ -160,6 +160,7 @@ public class OsmandRegions {
 					for (BinaryMapDataObject mapObject : unattachedMapObjects) {
 						addPolygonToRegionIfValid(mapObject, region);
 					}
+					unattachedBoundaryMapObjectsByRegions.remove(region.regionFullName);
 				}
 
 				if (region.regionDownloadName != null) {
