@@ -217,7 +217,7 @@ class AppVersionUpgradeOnInit {
 					updateSelectedPoiPreference();
 				}
 				if (prevAppVersion < VERSION_4_4_02) {
-					increaseVehicleSizesAccuracy();
+					increaseVehicleSizeLimitsAccuracy();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -622,7 +622,7 @@ class AppVersionUpgradeOnInit {
 		}
 	}
 
-	private void increaseVehicleSizesAccuracy() {
+	private void increaseVehicleSizeLimitsAccuracy() {
 		String[] parameterIds = new String[] {
 				VEHICLE_HEIGHT,
 				VEHICLE_WEIGHT,
