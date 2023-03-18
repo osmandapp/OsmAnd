@@ -4501,4 +4501,13 @@
     <string name="poi_self_checkout_only">Somente</string>
     <string name="poi_lifeguard_tower">Torre de salva-vidas</string>
     <string name="poi_lifeguard">Salva-vidas</string>
+    <string name="poi_waste_accepted">Resíduos aceitos</string>
+    <string name="poi_water_filter">Água;Água potável</string>
+    <string name="poi_antenna">Antena</string>
+    <string name="poi_aboriginal_lands">Terras aborígines</string>
+    <string name="poi_recycling_aerosol_cans">Latas de aerosol</string>
+    <string name="poi_recycling_asbestos">Amianto</string>
+    <string name="poi_recycling_boats">Barcos</string>
+    <string name="poi_recycling_coffee_capsules">Cápsulas de café</string>
+    <string name="poi_recycling_electrical_appliances">Aparelhos elétricos</string>
 </resources>
