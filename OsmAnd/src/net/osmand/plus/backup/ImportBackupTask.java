@@ -135,6 +135,11 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	@Override
+	protected void onCancelled() {
+		onPostExecute(null);
+	}
+
+	@Override
 	protected void onPostExecute(@Nullable List<SettingsItem> items) {
 		if (items != null && importType != ImportType.CHECK_DUPLICATES) {
 			this.items = items;
@@ -278,18 +283,18 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 			}
 
 			@Override
-			public void updateGeneralProgress(int downloadedItems, int uploadedKb) {
-				generalProgress = uploadedKb;
-				if (importListener != null) {
-					importListener.onImportProgressUpdate(generalProgress, uploadedKb);
-				}
+			public void itemExportDone(@NonNull String type, @NonNull String fileName) {
+				publishProgress(new ItemProgressInfo(type, fileName, 0, 0, true));
 			}
 
 			@Override
-			public void itemExportDone(@NonNull String type, @NonNull String fileName) {
-				publishProgress(new ItemProgressInfo(type, fileName, 0, 0, true));
+			public void updateGeneralProgress(int downloadedItems, int uploadedKb) {
 				if (isCancelled()) {
 					importer.cancel();
+				}
+				generalProgress = uploadedKb;
+				if (importListener != null) {
+					importListener.onImportProgressUpdate(generalProgress, uploadedKb);
 				}
 			}
 		};
