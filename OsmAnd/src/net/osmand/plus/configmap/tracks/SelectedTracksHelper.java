@@ -47,6 +47,11 @@ public class SelectedTracksHelper {
 	}
 
 	@NonNull
+	public Map<String, TrackTab> getTrackTabs() {
+		return trackTabs;
+	}
+
+	@NonNull
 	public Set<TrackItem> getSelectedTracks() {
 		return new HashSet<>(selectedTrackItems);
 	}
@@ -56,21 +61,8 @@ public class SelectedTracksHelper {
 		return new HashSet<>(recentlyVisibleTrackItem);
 	}
 
-	@NonNull
-	public Map<String, TrackTab> getTrackTabs() {
-		return trackTabs;
-	}
-
 	public boolean hasItemsToApply() {
 		return !Algorithms.objectEquals(selectedTrackItems, originalSelectedTrackItems);
-	}
-
-	public boolean hasSelectedTracks() {
-		return !selectedTrackItems.isEmpty();
-	}
-
-	public boolean hasRecentlyVisibleTracks() {
-		return !recentlyVisibleTrackItem.isEmpty();
 	}
 
 	public void ontrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
@@ -81,11 +73,22 @@ public class SelectedTracksHelper {
 		}
 	}
 
-	public void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<TrackItem> trackItems) {
-		trackTabs.clear();
+	public void updateTrackItems(@NonNull List<TrackItem> trackItems) {
 		allTrackItems.clear();
 		allTrackItems.addAll(trackItems);
 
+		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
+		for (TrackItem item : trackItems) {
+			addLocalIndexInfo(trackTabs, item);
+		}
+		updateTrackTabs(trackTabs, trackItems);
+	}
+
+	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<TrackItem> trackItems) {
+		processVisibleTracks();
+		processRecentlyVisibleTracks();
+
+		trackTabs.clear();
 		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
 		trackTabs.putAll(folderTabs);
@@ -94,45 +97,39 @@ public class SelectedTracksHelper {
 		sortTrackTabs();
 	}
 
-	private TrackTab getAllTracksTab() {
-		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_all), TrackTabType.ALL);
-		trackTab.items.add(TYPE_SORT_TRACKS);
-		if (Algorithms.isEmpty(allTrackItems)) {
-			trackTab.items.add(TYPE_NO_TRACKS);
-		} else {
-			trackTab.items.addAll(allTrackItems);
-		}
+	@NonNull
+	private TrackTab getTracksOnMapTab() {
+		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_on_map), TrackTabType.ON_MAP);
+		trackTab.items.addAll(getOnMapTabItems());
 		return trackTab;
 	}
 
-	private TrackTab getTracksOnMapTab() {
-		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_on_map), TrackTabType.ON_MAP);
-		trackTab.items.add(TYPE_SORT_TRACKS);
-
-		if (selectionHelper.isAnyGpxFileSelected()) {
-			for (TrackItem info : allTrackItems) {
-				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getPath());
-				if (selectedGpxFile != null) {
-					selectedTrackItems.add(info);
-					originalSelectedTrackItems.add(info);
-				}
-			}
-		} else if (Algorithms.isEmpty(allTrackItems)) {
-			trackTab.items.add(TYPE_NO_TRACKS);
-		} else {
-			trackTab.items.add(TYPE_NO_VISIBLE_TRACKS);
-		}
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		for (GPXFile gpxFile : selectionHelper.getSelectedGpxFilesBackUp().keySet()) {
-			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
-			if (selectedGpxFile == null) {
-				TrackItem trackItem = new TrackItem(new File(gpxFile.path));
-				recentlyVisibleTrackItem.add(trackItem);
-			}
-		}
-		trackTab.items.addAll(getVisibleItems());
-		trackTab.items.addAll(getRecentlyVisibleItems());
+	@NonNull
+	private TrackTab getAllTracksTab() {
+		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_all), TrackTabType.ALL);
+		trackTab.items.addAll(getAllTabItems());
 		return trackTab;
+	}
+
+	@NonNull
+	private List<Object> getOnMapTabItems() {
+		List<Object> items = new ArrayList<>();
+		items.add(TYPE_SORT_TRACKS);
+		items.addAll(getVisibleItems());
+		items.addAll(getRecentlyVisibleItems());
+		return items;
+	}
+
+	@NonNull
+	private List<Object> getAllTabItems() {
+		List<Object> items = new ArrayList<>();
+		items.add(TYPE_SORT_TRACKS);
+		if (Algorithms.isEmpty(allTrackItems)) {
+			items.add(TYPE_NO_TRACKS);
+		} else {
+			items.addAll(allTrackItems);
+		}
+		return items;
 	}
 
 	@NonNull
@@ -158,8 +155,32 @@ public class SelectedTracksHelper {
 		return items;
 	}
 
-	public void addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem info) {
-		File dir = info.getFile().getParentFile();
+	private void processRecentlyVisibleTracks() {
+		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
+		for (GPXFile gpxFile : selectionHelper.getSelectedGpxFilesBackUp().keySet()) {
+			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
+			if (selectedGpxFile == null) {
+				TrackItem trackItem = new TrackItem(new File(gpxFile.path));
+				recentlyVisibleTrackItem.add(trackItem);
+			}
+		}
+	}
+
+	private void processVisibleTracks() {
+		if (selectionHelper.isAnyGpxFileSelected()) {
+			for (TrackItem info : allTrackItems) {
+				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getPath());
+				if (selectedGpxFile != null) {
+					selectedTrackItems.add(info);
+					originalSelectedTrackItems.add(info);
+				}
+			}
+		}
+	}
+
+	@NonNull
+	public TrackTab addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
+		File dir = item.getFile().getParentFile();
 		String name = dir.getName();
 		if (GPX_INDEX_DIR.equals(name + "/")) {
 			name = app.getString(R.string.shared_string_tracks);
@@ -170,7 +191,37 @@ public class SelectedTracksHelper {
 			trackTab.items.add(TYPE_SORT_TRACKS);
 			trackTabs.put(name, trackTab);
 		}
-		trackTab.items.add(info);
+		trackTab.items.add(item);
+		return trackTab;
+	}
+
+	public void addTrackItem(@NonNull TrackItem item) {
+		allTrackItems.add(item);
+		TrackTab folderTab = addLocalIndexInfo(trackTabs, item);
+
+		TrackTab onMapTab = trackTabs.get(TrackTabType.ON_MAP.name());
+		if (onMapTab != null) {
+			onMapTab.items.clear();
+			onMapTab.items.addAll(getOnMapTabItems());
+		}
+		TrackTab allTab = trackTabs.get(TrackTabType.ALL.name());
+		if (allTab != null) {
+			allTab.items.clear();
+			allTab.items.addAll(getAllTabItems());
+		}
+		sortTrackTab(folderTab);
+		sortTrackTab(onMapTab);
+		sortTrackTab(allTab);
+	}
+
+	public void saveTracksVisibility() {
+		selectionHelper.clearAllGpxFilesToShow(true);
+
+		Map<String, Boolean> selectedFileNames = new HashMap<>();
+		for (TrackItem trackItem : selectedTrackItems) {
+			selectedFileNames.put(trackItem.getPath(), true);
+		}
+		selectionHelper.runSelection(selectedFileNames, null);
 	}
 
 	private void sortTrackTabs() {
@@ -196,16 +247,6 @@ public class SelectedTracksHelper {
 		} else {
 			Collections.sort(trackTab.items, new TracksComparator(trackTab, latLon));
 		}
-	}
-
-	public void saveTracksVisibility() {
-		selectionHelper.clearAllGpxFilesToShow(true);
-
-		Map<String, Boolean> selectedFileNames = new HashMap<>();
-		for (TrackItem trackItem : selectedTrackItems) {
-			selectedFileNames.put(trackItem.getPath(), true);
-		}
-		selectionHelper.runSelection(selectedFileNames, null);
 	}
 
 	public void loadTabsSortModes() {

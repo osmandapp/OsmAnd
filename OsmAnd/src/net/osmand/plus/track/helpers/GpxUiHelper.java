@@ -56,6 +56,7 @@ import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListene
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
@@ -637,16 +638,16 @@ public class GpxUiHelper {
 				}
 
 				ImportHelper importHelper = mapActivity.getImportHelper();
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile gpxFile) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
 							GpxSelectionParams params = GpxSelectionParams.newInstance()
 									.showOnMap().syncGroup().selectedByUser().addToMarkers()
 									.addToHistory().saveSelection();
-							app.getSelectedGpxHelper().selectGpxFile(result, params);
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, result.path);
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
 						}
 					}
 				});

@@ -29,7 +29,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
@@ -443,16 +443,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (requestCode == ImportHelper.IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
+				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile gpxFile) {
 						if (success) {
-							selectTrackToFollow(result, true);
+							selectTrackToFollow(gpxFile, true);
 							updateSelectionMode(false);
 						} else {
 							app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
 						}
-						importHelper.setGpxImportCompleteListener(null);
+						importHelper.setGpxImportListener(null);
 					}
 				});
 				importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, true);

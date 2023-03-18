@@ -5,10 +5,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
@@ -17,7 +17,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -41,7 +40,9 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 
 	@Override
 	protected void onPreExecute() {
-		showProgress(true);
+		if (isShouldShowProgress()) {
+			showProgress(true);
+		}
 	}
 
 	@Override

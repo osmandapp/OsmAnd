@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.IndexConstants.TILES_INDEX_DIR;
 
@@ -8,13 +8,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 
-class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;

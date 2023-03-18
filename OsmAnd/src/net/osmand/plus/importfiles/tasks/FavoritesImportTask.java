@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
