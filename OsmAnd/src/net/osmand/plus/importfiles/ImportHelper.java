@@ -523,10 +523,10 @@ public class ImportHelper {
 		File dir = app.getAppPath(GPX_INDEX_DIR);
 		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
 		for (GPXInfo gpxInfo : gpxInfoList) {
-			String fileName = gpxInfo.getFileName();
-			String nameWithoutDirs = Algorithms.getFileWithoutDirs(fileName);
-			if (nameWithoutDirs.equals(name) && gpxInfo.getFileSize() == fileSize) {
-				return fileName;
+			String filePath = gpxInfo.getFileName();
+			String fileName = Algorithms.getFileWithoutDirs(filePath);
+			if (Algorithms.objectEquals(name, fileName) && gpxInfo.getFileSize() == fileSize) {
+				return filePath;
 			}
 		}
 		return null;

@@ -744,7 +744,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			item.setIconId(R.drawable.ic_notification_track);
 
 			items.add(item);
-			size[0] += gpxInfo.getFileSize();
+			size[0] += gpxInfo.getIncreasedFileSize();
 		}
 		List<SelectableItem<GPXInfo>> selectedItems = new ArrayList<>(items);
 		FragmentManager manager = activity.getSupportFragmentManager();
@@ -1562,8 +1562,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			String date = "";
 			String size = "";
 
-			if (child.getFileSize() > 0) {
-				size = AndroidUtils.formatSize(v.getContext(), child.getFileSize());
+			if (child.getIncreasedFileSize() > 0) {
+				size = AndroidUtils.formatSize(v.getContext(), child.getIncreasedFileSize());
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long lastModified = child.getLastModified();
