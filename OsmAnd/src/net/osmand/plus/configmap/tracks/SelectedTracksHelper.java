@@ -73,7 +73,18 @@ public class SelectedTracksHelper {
 		}
 	}
 
-	public void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<TrackItem> trackItems) {
+	public void updateTrackItems(@NonNull List<TrackItem> trackItems) {
+		allTrackItems.clear();
+		allTrackItems.addAll(trackItems);
+
+		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
+		for (TrackItem item : trackItems) {
+			addLocalIndexInfo(trackTabs, item);
+		}
+		updateTrackTabs(trackTabs, trackItems);
+	}
+
+	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<TrackItem> trackItems) {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
 
@@ -182,17 +193,6 @@ public class SelectedTracksHelper {
 		}
 		trackTab.items.add(item);
 		return trackTab;
-	}
-
-	public void updateTrackItems(@NonNull List<TrackItem> trackItems) {
-		allTrackItems.clear();
-		allTrackItems.addAll(trackItems);
-
-		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
-		for (TrackItem item : trackItems) {
-			addLocalIndexInfo(trackTabs, item);
-		}
-		updateTrackTabs(trackTabs, trackItems);
 	}
 
 	public void addTrackItem(@NonNull TrackItem item) {

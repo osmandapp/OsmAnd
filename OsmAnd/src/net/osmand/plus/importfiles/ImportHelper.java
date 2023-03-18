@@ -53,8 +53,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.importfiles.tasks.FavoritesImportTask;
-import net.osmand.plus.importfiles.tasks.GPXLoadTask;
 import net.osmand.plus.importfiles.tasks.GeoTiffImportTask;
+import net.osmand.plus.importfiles.tasks.GpxImportTask;
 import net.osmand.plus.importfiles.tasks.ObfImportTask;
 import net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask;
 import net.osmand.plus.importfiles.tasks.SettingsImportTask;
@@ -143,16 +143,12 @@ public class ImportHelper {
 		this.app = (OsmandApplication) activity.getApplicationContext();
 	}
 
-	@NonNull
-	public FragmentActivity getActivity() {
-		return activity;
-	}
-
+	@Nullable
 	public GpxImportListener getGpxImportListener() {
 		return gpxImportListener;
 	}
 
-	public void setGpxImportListener(GpxImportListener gpxImportListener) {
+	public void setGpxImportListener(@Nullable GpxImportListener gpxImportListener) {
 		this.gpxImportListener = gpxImportListener;
 	}
 
@@ -173,7 +169,7 @@ public class ImportHelper {
 		String name = getNameFromContentUri(app, uri);
 		String fileName = getGpxFileName(name);
 		boolean isOsmandSubDir = Algorithms.isSubDirectory(app.getAppPath(GPX_INDEX_DIR), new File(uri.getPath()));
-		if (!isOsmandSubDir && name != null) {
+		if (!isOsmandSubDir && fileName != null) {
 			handleGpxImport(uri, fileName, onGpxImport, useImportDir, true);
 		}
 		return false;
@@ -219,9 +215,9 @@ public class ImportHelper {
 					}
 					return true;
 				};
-				GPXLoadTask gpxLoadTask = new GPXLoadTask(activity, uri, fileName, callback);
-				gpxLoadTask.setShouldShowProgress(false);
-				executeImportTask(gpxLoadTask);
+				GpxImportTask gpxImportTask = new GpxImportTask(activity, uri, fileName, callback);
+				gpxImportTask.setShouldShowProgress(false);
+				executeImportTask(gpxImportTask);
 			}
 		}
 	}
@@ -283,7 +279,7 @@ public class ImportHelper {
 			handleResult(pair.first, fileName, onGpxImport, pair.second, save, useImportDir);
 			return true;
 		};
-		executeImportTask(new GPXLoadTask(activity, uri, fileName, callback));
+		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
 	}
 
 	public void handleGpxOrFavouritesImport(Uri uri, String fileName, boolean save, boolean useImportDir,
@@ -292,7 +288,7 @@ public class ImportHelper {
 			importGpxOrFavourites(pair.first, fileName, pair.second, save, useImportDir, forceImportFavourites, forceImportGpx);
 			return true;
 		};
-		executeImportTask(new GPXLoadTask(activity, uri, fileName, callback));
+		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
 	}
 
 	private void importFavoritesImpl(GPXFile gpxFile, String fileName, boolean forceImportFavourites) {
@@ -470,7 +466,8 @@ public class ImportHelper {
 				int tracksCount = result.getTracksCount();
 				boolean showImportMultiTrackFragment = tracksCount > 1 && tracksCount < 50;
 				if (showImportMultiTrackFragment) {
-					ImportTracksFragment.showInstance(activity.getSupportFragmentManager(), result, name, fileSize);
+					FragmentManager manager = activity.getSupportFragmentManager();
+					ImportTracksFragment.showInstance(manager, result, name, gpxImportListener, fileSize);
 				} else {
 					importAsOneTrack(result, name, fileSize, useImportDir, onGpxImport);
 				}
@@ -521,8 +518,8 @@ public class ImportHelper {
 			}
 			app.showToastMessage(R.string.file_already_imported);
 		} else {
-			SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, onGpxImport);
 			File destinationDir = app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
+			SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, onGpxImport);
 			executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener));
 		}
 	}
@@ -533,6 +530,11 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSavingStarted() {
+			}
+
+			@Override
+			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
+
 			}
 
 			@Override

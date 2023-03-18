@@ -27,7 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class GPXLoadTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
+public class GpxImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
 	private final Uri uri;
 	private final String fileName;
@@ -35,8 +35,8 @@ public class GPXLoadTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 	private long fileSize;
 
 
-	public GPXLoadTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-	                   @NonNull String fileName, @NonNull CallbackWithObject<Pair<GPXFile, Long>> callback) {
+	public GpxImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
+	                     @NonNull String fileName, @NonNull CallbackWithObject<Pair<GPXFile, Long>> callback) {
 		super(activity);
 		this.uri = uri;
 		this.fileName = fileName;
@@ -70,12 +70,6 @@ public class GPXLoadTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 			Algorithms.closeStream(zis);
 		}
 		return null;
-	}
-
-	@Override
-	protected void onPostExecute(GPXFile gpxFile) {
-		hideProgress();
-		callback.processResult(new Pair<GPXFile, Long>(gpxFile, fileSize));
 	}
 
 	@Nullable
@@ -125,5 +119,11 @@ public class GPXLoadTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	protected void onPostExecute(GPXFile gpxFile) {
+		hideProgress();
+		callback.processResult(new Pair<GPXFile, Long>(gpxFile, fileSize));
 	}
 }

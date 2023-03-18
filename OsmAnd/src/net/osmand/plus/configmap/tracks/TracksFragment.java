@@ -345,7 +345,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	@Override
 	public void onSaveComplete(boolean success, GPXFile gpxFile) {
-		if (success) {
+		if (isAdded() && success) {
 			addTrackItem(new TrackItem(new File(gpxFile.path)));
 		}
 	}

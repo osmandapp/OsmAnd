@@ -5,9 +5,9 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.ui.TrackItem;
 
@@ -49,8 +49,12 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 
 				File file = new File(importDir, trackItem.name + IndexConstants.GPX_FILE_EXT);
 				Exception warn = GPXUtilities.writeGpxFile(file, gpxFile);
-				if (warn != null) {
-					warnings.add(warn.getMessage());
+				String error = warn != null ? warn.getMessage() : null;
+				if (error != null) {
+					warnings.add(error);
+				}
+				if (listener != null) {
+					listener.onGpxSaved(error, gpxFile);
 				}
 			}
 		}

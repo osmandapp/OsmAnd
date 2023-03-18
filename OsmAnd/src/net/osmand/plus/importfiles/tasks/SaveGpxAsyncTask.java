@@ -67,8 +67,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			WptPt pt = gpxFile.findPointToShow();
 			File toWrite = getFileToSave(fileName, destinationDir, pt);
 			boolean destinationExists = toWrite.exists();
-			Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
-			if (e == null) {
+			Exception exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
+
+			if (listener != null) {
+				listener.onGpxSaved(exception != null ? exception.getMessage() : null, gpxFile);
+			}
+			if (exception == null) {
 				gpxFile.path = toWrite.getAbsolutePath();
 				File file = new File(gpxFile.path);
 				if (destinationExists) {
