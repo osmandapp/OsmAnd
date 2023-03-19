@@ -1641,6 +1641,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_MANUAL = 3;
 
 	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
+
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
@@ -1736,10 +1737,7 @@ public class OsmandSettings {
 	public boolean shouldHidePolygons(boolean groundPolygons) {
 		String attrName = groundPolygons ? NO_POLYGONS_ATTR : HIDE_WATER_POLYGONS_ATTR;
 		CommonPreference<Boolean> hidePreference = getCustomRenderBooleanProperty(attrName);
-		if (!hidePreference.get()) {
-			return MAP_UNDERLAY.get() != null && !SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.get();
-		}
-		return true;
+		return hidePreference.get() || (MAP_UNDERLAY.get() != null && !SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.get());
 	}
 
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
