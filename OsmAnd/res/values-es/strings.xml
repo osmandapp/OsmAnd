@@ -5103,4 +5103,5 @@
     <string name="test_heightmap">Mapa de altura de prueba</string>
     <string name="generate_slope_from_3d_maps">Generación de mapas ráster de pendientes a partir de mapas 3D</string>
     <string name="generate_hillshade_from_3d_maps">Generación de mapas ráster de colinas a partir de mapas 3D</string>
+    <string name="app_mode_climbing">Escalada</string>
 </resources>
