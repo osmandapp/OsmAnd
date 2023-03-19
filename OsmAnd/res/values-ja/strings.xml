@@ -415,7 +415,7 @@ POIの更新は利用できません</string>
     <string name="Closest_Amenities">いちばん近い施設</string>
     <string name="app_mode_default">地図閲覧</string>
     <string name="app_mode_car">乗用車</string>
-    <string name="app_mode_bicycle">原動機付き自転車、ペダル付バイク</string>
+    <string name="app_mode_bicycle">自転車</string>
     <string name="app_mode_pedestrian">徒歩</string>
     <string name="position_on_map_center">中央</string>
     <string name="position_on_map_bottom">下</string>

@@ -5085,4 +5085,8 @@
 \n• Correction de bugs lors de l\'affichage de lieux végans
 \n
 \n</string>
+    <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrage du relief à partir de cartes 3D</string>
+    <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>
+    <string name="disable_vertex_hillshade_3d">Désactiver l\'ombrage du relief en 3D</string>
+    <string name="enable_3d_maps">Activer les cartes en 3D</string>
 </resources>

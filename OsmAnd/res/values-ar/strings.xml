@@ -4843,7 +4843,7 @@
     <string name="display_position">عرض الموقف</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
-    <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
+    <string name="coordinates_widget_map_center">الإحداثيات: مركز الخرائط</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
     <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
     <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
@@ -5163,4 +5163,9 @@
     <string name="shared_string_nearest">أقرب</string>
     <string name="selected_value">القيمة المحددة</string>
     <string name="app_mode_moped">الدراجة</string>
+    <string name="generate_slope_from_3d_maps">إنشاء خرائط الانحدار من خرائط ثلاثية الأبعاد</string>
+    <string name="enable_3d_maps">تمكين خريطة ثلاثية الأبعاد</string>
+    <string name="test_heightmap">اختبار خريطة الارتفاع</string>
+    <string name="disable_vertex_hillshade_3d">تعطيل قمة الارتفاع في عرض الثلاثي الأبعاد</string>
+    <string name="generate_hillshade_from_3d_maps">إنشاء خرائط الارتفاع من خرائط ثلاثية الأبعاد</string>
 </resources>

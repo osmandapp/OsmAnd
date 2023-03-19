@@ -5090,4 +5090,8 @@
 \n
 \n</string>
     <string name="app_mode_moped">Ciclomotor</string>
+    <string name="generate_hillshade_from_3d_maps">Gere mapas sombras de relevo a partir de mapas 3D</string>
+    <string name="enable_3d_maps">Ativar mapas 3D</string>
+    <string name="generate_slope_from_3d_maps">Gere mapas raster de inclinação a partir de mapas 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombreamento de vértice em 3D</string>
 </resources>
