@@ -5100,4 +5100,6 @@
     <string name="sort_duration_ascending">Сначала менее продолжительные</string>
     <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
     <string name="app_mode_moped">Мопед</string>
+    <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
+    <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D карт</string>
 </resources>

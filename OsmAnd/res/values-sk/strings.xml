@@ -5098,4 +5098,5 @@
     <string name="enable_3d_maps">Povoliť 3D mapy</string>
     <string name="test_heightmap">Testovať výškovú mapu</string>
     <string name="generate_hillshade_from_3d_maps">Generovať rastrové mapy tieňovaných svahov z 3D máp</string>
+    <string name="app_mode_climbing">Lezenie</string>
 </resources>
