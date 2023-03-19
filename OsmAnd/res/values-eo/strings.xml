@@ -5092,4 +5092,10 @@
 \n• riparita problemo pri montrado de veganaj ejoj
 \n
 \n</string>
+    <string name="generate_hillshade_from_3d_maps">Generi nivelombruman kahelan mapon uzante 3-dimensiajn mapojn</string>
+    <string name="generate_slope_from_3d_maps">Generi deklivecan kahelan mapon uzante 3-dimensiajn mapojn</string>
+    <string name="disable_vertex_hillshade_3d">Malaktivigi vertican nivelombrumon en 3D</string>
+    <string name="enable_3d_maps">Aktivigi 3-dimensiajn mapojn</string>
+    <string name="test_heightmap">Testi altmapon</string>
+    <string name="app_mode_climbing">Grimpado</string>
 </resources>
