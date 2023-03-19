@@ -138,7 +138,7 @@
     <string name="use_high_res_maps">Заслон велике размере</string>
     <string name="voice">Снимљени глас</string>
     <string name="no_vector_map_loaded">Векторске карте нису учитане</string>
-    <string name="gpx_files_not_found">Нема датотека ГПИкс у фасцикли стаза</string>
+    <string name="gpx_files_not_found">Нема датотека ГПИкс-а у фасцикли трагова</string>
     <string name="error_reading_gpx">Подаци ГПИкс-а не могу да се прочитају.</string>
     <string name="poi_context_menu_modify">Измена тачака занимања</string>
     <string name="poi_context_menu_delete">Брисање тачака занимања</string>
@@ -253,7 +253,7 @@
     <string name="tts_language_not_supported_title">Језик није подржан</string>
     <string name="tts_missing_language_data_title">Недостају подаци</string>
     <string name="tts_missing_language_data">Отићи до продавнице ради преузимања означеног језика\?</string>
-    <string name="gpx_option_reverse_route">Обрни смер стазе</string>
+    <string name="gpx_option_reverse_route">Обрни смер трага</string>
     <string name="choose_audio_stream">Излаз гласовног навођења</string>
     <string name="voice_stream_voice_call">Звук долазног позива (прекида и Блутут у колима)</string>
     <string name="voice_stream_notification">Звучно обавештење</string>
@@ -301,7 +301,7 @@
     <string name="navigate_point_easting">Земљописна дужина</string>
     <string name="error_avoid_specific_road">Нисам пронашао заобилазнице</string>
     <string name="rename_failed">Преименовање није успело.</string>
-    <string name="shared_string_currently_recording_track">Стаза која се тренутно снима</string>
+    <string name="shared_string_currently_recording_track">Траг која се тренутно снима</string>
     <string name="back_to_map">Назад на карту</string>
     <string name="plugin_nautical_descr">Овај додатак обогаћује програм ОсмАнд да приказује и поморске путеве, светионике навођења, опасне пловне области, области са ограничењима за једрење и пристајање, итд. Ради употребе, преузмите одговарајуће пловне карте и омогућите приказ „пловне карте“ под „Подеси карту“.
 \n
@@ -567,7 +567,7 @@
     <string name="shared_string_add_to_favorites">Додај у Омиљено</string>
     <string name="shared_string_my_places">Моја места</string>
     <string name="shared_string_my_favorites">Омиљено</string>
-    <string name="shared_string_tracks">Путање</string>
+    <string name="shared_string_tracks">Трагови</string>
     <string name="shared_string_video">Снимак</string>
     <string name="shared_string_photo">Слика</string>
     <string name="route_points">Тачке путање</string>
@@ -868,7 +868,7 @@
     <string name="index_name_canada">Северна Америка - Канада</string>
     <string name="index_name_italy">Европа - Италија</string>
     <string name="index_name_gb">Европа - Велика Британија</string>
-    <string name="calculate_osmand_route_without_internet">Рачунање одсечака стазе Османда ван мреже</string>
+    <string name="calculate_osmand_route_without_internet">Рачунање одсечака путање Османда ван мреже</string>
     <string name="gpx_option_calculate_first_last_segment">Рачунај од првог до последњег одсечка стазе ОсмАнда</string>
     <string name="use_displayed_track_for_navigation">Користи приказану стазу за навођење?</string>
     <string name="select_gpx">Изаберите ГПИкс…</string>
@@ -954,8 +954,8 @@
     <string name="route_roundabout_short">Одреди излаз %1$d и иди</string>
     <string name="upload_poi">Отпреми тачку занимања</string>
     <string name="route_calculation">Прорачун путање</string>
-    <string name="gpx_no_tracks_title">Још увек немате ни једну датотеку стаза</string>
-    <string name="gpx_no_tracks_title_folder">Такође, можете додати датотеке стаза у фасциклу</string>
+    <string name="gpx_no_tracks_title">Још увек немате ни једну датотеку трагова</string>
+    <string name="gpx_no_tracks_title_folder">Такође, можете додати датотеке трагова у фасциклу</string>
     <string name="gpx_add_track">Додај још…</string>
     <string name="shared_string_appearance">Изглед</string>
     <string name="trip_rec_notification_settings">Укључи брзо снимање</string>
@@ -1013,7 +1013,7 @@
     <string name="no_inet_connection_desc_map">Захтеване за преузимање.</string>
     <string name="search_location">Претражујем положај…</string>
     <string name="storage_free_space">Слободно место складишта</string>
-    <string name="storage_place_description">Складиште података ОсмАнда (за карте, датотеке стаза итд.): %1$s.</string>
+    <string name="storage_place_description">Складиште података ОсмАнда (за карте, датотеке трагова итд.): %1$s.</string>
     <string name="give_permission">Дајте дозволе</string>
     <string name="allow_access_location">Омогућите приступ одређивању положаја</string>
     <string name="first_usage_greeting">Узми упутства и откриј нова места, и без интернета</string>
@@ -1044,7 +1044,7 @@
     <string name="coords_format_descr">Облик географских координата.</string>
     <string name="app_mode_bus">Аутобус</string>
     <string name="app_mode_train">Воз</string>
-    <string name="current_track">Тренутна стаза</string>
+    <string name="current_track">Тренутни траг</string>
     <string name="map_widget_battery">Попуњеност батерије</string>
     <string name="change_markers_position">Измени положај ознаке</string>
     <string name="move_marker_bottom_sheet_title">Помери карту ради измена положаја ознаке</string>
@@ -1306,7 +1306,7 @@
     <string name="select_gpx_folder">Изаберите фасциклу датотека ГПИкса</string>
     <string name="file_can_not_be_moved">Нисам успео да преместим датотеку.</string>
     <string name="shared_string_move">Премести</string>
-    <string name="shared_string_gpx_tracks">Путање</string>
+    <string name="shared_string_gpx_tracks">Трагови</string>
     <string name="routing_attr_driving_style_name">Начин вожње</string>
     <string name="route_altitude">Успон пута</string>
     <string name="altitude_descent">Низбрдо</string>
@@ -2446,8 +2446,8 @@
 \n Белешка 2: У новој положају складишта, неће бити могуће делити датотеке између програма ОсмАнд и ОсмАнд+.</string>
     <string name="disable_complex_routing_descr">Искључи двостепено усмеравање навођења у колима.</string>
     <string name="edit_tilesource_successfully">Извор плочица %1$s сачуван</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Путање за пешачење</string>
-    <string name="show_warnings_descr">Подесите упозорења у саобраћају (ограничења брзине, форсирана заустављања, лежећи полицајци, тунели), радаре и податке о траци.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Планинске стазе</string>
+    <string name="show_warnings_descr">Подесите упозорења у саобраћају (ограничења брзине, присилна заустављања, лежећи полицајци, тунели), радаре и податке о траци.</string>
     <string name="osmand_extended_description_part4">Скијање
 \n ОсмАндов додатак за скијашке карте Вам омогућава преглед скијашке стазе уз њихову тежину и додатне податке, као што су положај скијашких жичара и осталих објеката.</string>
     <string name="osmand_extended_description_part8">ОсмАнд је мекотворина отвореног кода на којој се активно ради. Свако може да допринесе програму тако што ће да пријављује грешке, побољшава преводе или да програмира нове могућности. Додатно, пројекат се ослања на новчане прилоге ради улагања у развој и проверу нових могућности.
@@ -2487,11 +2487,11 @@
 \n • Могућност снимања ГПИксом Вам омогућава да снимити Ваше путовање и да га делите
 \n • Уз још додатака можете да укључите и изохипсе и рељеф</string>
     <string name="osmand_extended_description_part6">Шетање, планинарење, градске туре
-\n • Карта Вам показује стазе за пешачење и планинарење
-\n • Википедија на Вашем језику Вам може рећи много за време тура по граду
+\n • Карта Вам показује пешачке и планинарске стазе
+\n • Википедија на Вашем језику Вам може рећи много за време путовања по граду
 \n • Станице јавног превоза (аутобуси, трамваји, возови), укључујући и имена линија ће Вам помоћи кретање по непознатом граду
 \n • Навођење ГПС-ом у раду пешачења Вам прави путању користећи путеве на којима се може проћи пешке
-\n • Отпремајте и пратите путање ГПИксом или снимајте и делите Ваше сопствене
+\n • Отпремајте и пратите трагове ГПИкса или снимајте и делите Ваше сопствене
 \n</string>
     <string name="osmand_extended_description_part7">Допринесите ОСМ-у
 \n • Пријављујте грешке у подацима
@@ -2599,7 +2599,7 @@
     <string name="osmand_routing_experimental">ОсмАндово навођење ван мреже је опитна могућност и не ради за удаљености преко 20 km.
 \n
 \nНавођење је привремено пребачено на мрежне услуге Клаудмаде.</string>
-    <string name="off_road_render_descr">За вожњу ван пута, заснован на изледу „Topo“ и погодан за употребу са зеленим сателитским сликама као доњи слој. Смањена је дебљина главног пута, повећана дебљина путања, стаза, бициклистичких и других путева.</string>
+    <string name="off_road_render_descr">За вожњу ван пута, заснован на изледу „Topo“ и погодан за употребу са зеленим сателитским сликама као доњи слој. Смањена је дебљина главног пута, повећана дебљина путања, трагова, бициклистичких и других путева.</string>
     <string name="access_intermediate_arrival_time">Време доласка у међутачку</string>
     <string name="map_widget_intermediate_time">Међувреме</string>
     <string name="tts_language_not_supported">Одабрани језик није подржан од стране уграђенг Андроидовог претварања писма у говор, биће коришћен већ подешени језик. Потражите други претварач писма у говор у продавници\?</string>
@@ -2616,7 +2616,7 @@
 \n • Приближавање карте се прилагођава брзини
 \n • Претрага места по адреси, врсти (нпр. гостионе, преноћишта, горивне црпне станице, музеји), или по координатама
 \n • Подршка за успутне тачке
-\n • Снимање Ваших, или отпремање стаза ГПИкса и њихово праћење
+\n • Снимање Ваших, или отпремање трагова ГПИкс-а и њихово праћење
 \n</string>
     <string name="osmand_plus_extended_description_part1">ОсмАнд+ (ОСМ Automated Navigation Directions) је програм за карте и навођење која приступа бесплатним висококвалитетним подацима ОСМ-а из целог света.
 \n Уживајте у приказном и гласовном навођењу, прегледу тачака занимања, прављењем и управљањем путањама ГПИкса, коришћењем изобата и подацима о висини, избору између приказа вожње, бициклизма, пешачења, измена на ОСМ-у и још много тога.
@@ -2632,16 +2632,16 @@
 \n • Самостално прерачунавање пута када се одаљите са путање
 \n • Претрага места по адреси, врсти (нпр. гостионе, преноћишта, горивне црпне станице, музеји), или по координатама
 \n</string>
-    <string name="unirs_render_descr">Измена подразумеваног стила за бољи контраст пешачких и бициклистичких путева. Користи старе Mapnik боје.</string>
-    <string name="osmand_long_description_1000_chars">ОсмАнд (ОСМ Automated Navigation Directions)
+    <string name="unirs_render_descr">Измена подразумеваног начина приказа за боље истицање пешачких и бициклистичких путева. Користи старе обрасце боја Мапника.</string>
+    <string name="osmand_long_description_1000_chars">ОсмАнд (ОСМ самостално навођење упућивањем)
 \n
-\n ОсмАнд је is апликација отвореног кода за навођење са приступом разним глобалним подацима ОСМ-а. Сви подаци на карти (векторски или сличице карте) се могу ускладиштити на меморијску картицу телефона за употребу и без интернета. Нуде се могућности навођења и са и без интернет конекције, укључујући у гласовно навођење.
+\n ОсмАнд је is апликација отвореног кода за навођење са приступом разним земаљским подацима ОСМ-а. Сви подаци на карти (векторски или сличице карте) се могу ускладиштити на меморијску картицу телефона за употребу и без интернета. Нуде се могућности навођења и са и без везе са интернетом, укључујући у гласовно навођење.
 \n
 \n Неке од основних могућности:
-\n - Комплетна функционалност рада ван мреже (складиштење скинутих векторских карти и сличица на складиште телефона)
+\n - Потпуна могућност рада ван мреже (складиштење преузетих векторских карата и сличица на складиште телефона)
 \n - Доступне су целокупне векторске карте целог света за рад ван мреже
-\n - Преузимање државе или области непосредноиз програма
-\n - Могућност додавања различитих додатних слојева, као што су слој ГПИкса или стазе за навођење. Тачке занимања, омиљене тачке, изохипсе, станице јавног превоза, додатне карте са подесивом провидношћу
+\n - Преузимање карата државе или области непосредно из програма
+\n - Могућност надношења различитих додатних слојева, као што су слој ГПИкса или стазе за навођење. Тачке занимања, омиљене тачке, изохипсе, станице јавног превоза, додатне карте са подесивом прозирношћу
 \n - Претрага ван мреже за адресе и тачке занимања
 \n - Навођење без потребе за интернетом за удаљености средњег домета
 \n - Начин рада за аутомобил, бициклу и пешаке са додатним:
@@ -2655,7 +2655,7 @@
 \n - Без приступа тачкама занимања са Википедије када нема интернета
 \n
 \n ОсмАнд се развија и наш пројекат и стални напредак се ослања на новчане прилоге за развој и пробу нових могућности. Молимо, размислите о куповини програма ОсмАнд+ или новчаној помоћи развоја нових могућности или давању прилога на https://osmand.net.</string>
-    <string name="osmand_plus_extended_description_part5">Безбедоносне могућности
+    <string name="osmand_plus_extended_description_part5">Безбедносне могућности
 \n • Додатак самосталног преказива дневног/ноћног рада
 \n • Додатак приказивања ограничења брзине, са подсетником ако је прекорачите
 \n • Додатак приближавања пута у зависности од брзине кретања
@@ -2670,7 +2670,7 @@
 \n • Приказ контурних линија и висинских обриса (преко додатка)</string>
     <string name="osmand_plus_long_description_1000_chars">ОсмАнд+ (ОСМ Automated Navigation Directions)
 \n
-\n ОсмАнд+ је is апликација отвореног кода за навођење са приступом разним земаљским подацима ОСМ-а. Сви подаци на карти (векторски или сличице карте) се могу ускладиштити на меморијску картицу телефона за употребу и без интернета. Нуде се могућности навођења и са и без безе са интернетом, укључујући у гласовно навођење.
+\n ОсмАнд+ је програм слободног кода за навођење са приступом разним земаљским подацима ОСМ-а. Сви подаци на карти (векторски или сличице карте) се могу ускладиштити на меморијску картицу телефона за употребу и без интернета. Нуде се могућности навођења и са и без безе са интернетом, укључујући у гласовно навођење.
 \n
 \n ОсмАнд+ је издање програма која се плаћа, а њеном куповином, подржавате пројекат, прилажете развоју нових могућности и примате најновија унапређења.
 \n
@@ -2723,7 +2723,7 @@
     <string name="coord_input_save_as_track_descr">Додали сте %1$s тачке(и). Унесите име датотеке и кликните „Сними“.</string>
     <string name="plugin_touringview_descr">Укључивањем овог погледа се мења начин изгеда карте на „Туристички преглед“, који је нарочити богати преглед за туристе и службене возаче.
 \n
-\nОвај поглед нуди, на сваком ступњу приближавања највећу количину туристичких појединости на подацима карте (посебно путеве, путање, стазе и знакове сналажења у простору).
+\nОвај поглед нуди, на сваком ступњу приближавања највећу количину туристичких појединости на подацима карте (посебно путеве, трагове, стазе и знакове сналажења у простору).
 \n
 \nТакође и јасно представља све врсте путева по боји, тако да никад не буде забуне, што је корисно када се нпр. возе већа возила.
 \n
@@ -3049,8 +3049,8 @@
     <string name="routing_attr_allow_skating_only_name">Дозволи путеве само за клизање</string>
     <string name="routing_attr_allow_skating_only_description">Путеви спремљени за слободни начин или само клизање без уобичајених путања.</string>
     <string name="routing_attr_allow_classic_only_name">Дозволи само уобичајене путеве</string>
-    <string name="routing_attr_allow_classic_only_description">Стазе припремљене за обичан начинн без путева за клизање. Ово укључује и стазе припремљене малим возилима за снег и путањама које су скијаши направили.</string>
-    <string name="routing_attr_difficulty_preference_description">Тежи стазама ове тежине, али остави могуће навођење преко тежих или лакших стаза ако је краће.</string>
+    <string name="routing_attr_allow_classic_only_description">Стазе припремљене за обичан начин без путева за клизање. Ово укључује и стазе припремљене малим возилима за снег и путањама које су скијаши направили.</string>
+    <string name="routing_attr_difficulty_preference_description">Тежи путањама ове тежине, али остави могућност навођења преко тежих или лакших путања ако су краће.</string>
     <string name="release_3_4">• Применљиви налози: стварање произвољних налога за сопствене потребе, са произвољном сличицом и бојом
 \n
 \n • Постави произвољне најмање/највише брзине на подразумеване налоге
@@ -3197,11 +3197,11 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
-    <string name="track_storage_directory">Складишна фасцикла стаза</string>
-    <string name="track_storage_directory_descrp">Стазе могу бити складиштене у фасцикли \'rec\', или у месечним или дневним фасциклама.</string>
-    <string name="store_tracks_in_rec_directory">Снимај стазе у фасцикли \'rec\'</string>
-    <string name="store_tracks_in_daily_directories">Снимај стазе у дневним фасциклама</string>
-    <string name="store_tracks_in_daily_directories_descrp">Снимај стазе у подфасцикле по дану снимања (нпр. 2018-01-01).</string>
+    <string name="track_storage_directory">Складишна фасцикла трагова</string>
+    <string name="track_storage_directory_descrp">Трагови могу бити складиштени у фасцикли \'rec\', или у месечним или дневним фасциклама.</string>
+    <string name="store_tracks_in_rec_directory">Снимај трагове у фасцикли \'rec\'</string>
+    <string name="store_tracks_in_daily_directories">Снимај трагове у дневним фасциклама</string>
+    <string name="store_tracks_in_daily_directories_descrp">Снимај трагове у подфасцикле по дану снимања (нпр. 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">Искоришћено %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Искоришћено %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Искоришћено %1$s MB</string>
@@ -3249,7 +3249,7 @@
     <string name="rendering_value_white_name">Бело</string>
     <string name="swap_two_places">Замени %1$s и %2$s</string>
     <string name="route_start_point">Почетна тачка</string>
-    <string name="track_saved">Стаза је сачувана</string>
+    <string name="track_saved">Траг је сачуван</string>
     <string name="empty_filename">Празно име датотеке</string>
     <string name="shared_string_revert">Поврати</string>
     <string name="quick_action_directions_from_desc">Дугме које средиште заслона се узима за тачку поласка. После пита да одаберете одредиште или рачуна пут до одредишта.</string>
@@ -3304,7 +3304,7 @@
     <string name="live_monitoring_descr">Дозвољава дељење тренутнположаја користећи снимање пута.</string>
     <string name="live_monitoring">Праћење преко интернета</string>
     <string name="save_track_logging_accuracy">Тачност бележења</string>
-    <string name="tracks_view_descr">Ваше снимљене стазе су у %1$s, или у фасцикли ОсмАнда.</string>
+    <string name="tracks_view_descr">Ваш снимљени трагови су у %1$s, или у фасцикли ОсмАнда.</string>
     <string name="multimedia_notes_view_descr">Ваше белешке ОСМ-а су у %1$s.</string>
     <string name="video_notes">Белешке видеа</string>
     <string name="photo_notes">Белешке слика</string>
@@ -3320,15 +3320,15 @@
     <string name="logcat_buffer_descr">Проверите и поделите дневнике са појединостима програма</string>
     <string name="search_offline_geo_error">Нисам успео да расчланим гео-намеру ’%s’.</string>
     <string name="permission_is_required">Потребне су дозволе за коришћење ове могућности.</string>
-    <string name="monitoring_min_speed_descr">Ово је пропусник за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљене стазе изгледају глаткије када се гледају на карти.</string>
+    <string name="monitoring_min_speed_descr">Ово је пропусник за одсецање малих брзина који не бележи тачке испод одређене брзине. Овим снимљени трагови изгледају глаткије када се гледају на карти.</string>
     <string name="monitoring_min_speed_descr_side_effect">Успутне појаве: Вашим стазама ће недостајати сви одсечци где мерило најмање брзине није био испуњено (нпр. где сте гурали бицикл узбрдо). Такође, неће бити података о раздобљима мировања, као што су прављење одмора. Ово може да има утицаја на рашчлањивање или накнадну обраду, као што је одређивање укупне дужине пута, времена кретања, или просечне брзине.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Препорука: Покушајте прво да користите препознавач кретања преко пропусника најмањег помераја (B) прво, пошто може дати бољи учинак и изгубићете мање података. Ако Ваше стазе остану пуне шума при малим брзинама, пробајте са не-ништавним вредностима овде. Пазите да неке врсте мерења неће уопште давати мерења брзине (неки начини преко мреже) у ком случају нећете снимити ништа.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Препорука: Покушајте прво да користите препознавач кретања преко пропусника најмањег помераја (B), пошто може дати бољи учинак и изгубићете мање података. Ако Ваши трагови остану пуне шума при малим брзинама, пробајте са не-ништавним вредностима овде. Пазите да неке врсте мерења неће уопште давати мерења брзине (неки начини преко мреже) у ком случају нећете снимити ништа.</string>
     <string name="monitoring_min_speed_descr_remark">Опаска: провера брзине &gt; 0: већина чипова ГПС-а пријављују вредност брзине само ако алгоритам примети да сте у покрету и ништа уколико нисте. Коришћење поставке &gt;0 у овом пропуснику је заправо коришћење пријемника покрета из чипа ГПС-а. Чак иако се не избира пропуст података овде за време снимања, ми и даље користимо ову могућност у нашем рашчлањивању ГПИкс-а анализи да одредимо пређену удаљеност, тј. вредност коју приказујемо у том пољу је пређена удаљеност за време кретања.</string>
     <string name="monitoring_min_accuracy_descr">Ово ће снимати само тачке измерене са назначивањем најмање тачности (у метрима/стопама, као што пријављује Андроид за Ваш чипове). Тачност је приближна мерењима стварног положаја, и није непосредно везана за прецизност, која је расипање поновљених мерења.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Успутна појава: Као исход пропуштања података по тачности, неке тачке могу скроз недостајати нпр. испод мостова, дрвећа, између високих зграда, или у одређеним временским условима.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Препорука: тешко је предвидети шта ће се бележити, а шта неће, па је најбоље да искључите овај пропусник.</string>
     <string name="monitoring_min_accuracy_descr_remark">Опаска: Ако је ГПС био искључен одмах пре снимања, прва тачка ће имати умањену тачност, па у нашем коду би желели да сачекамо пар секунди пре снимања тачке (или снимања најбоље од 3 узастопне тачке итд.), али ово још није направљено.</string>
-    <string name="monitoring_min_distance_descr">Овај пропусник избегава снимање удвостручених тачака када има мало стварног кретања, и даје бољи изглед стазе на карти.</string>
+    <string name="monitoring_min_distance_descr">Овај пропусник избегава снимање удвостручених тачака када има мало стварног кретања, и даје бољи изглед трага на карти.</string>
     <string name="monitoring_min_distance_descr_side_effect">Успутне спојаве: раздобља одмарања се не снимају уопште или се не снима само по једна тачка. Мала (стварна) померања (нпр. у страну, да обележите могуће скретање на Вашем путу) могу да буду протребљена. Ваша датотека садржи мање података за накнадну обраду и има лошије статистике тиме што се требе очигледно понављају исте тачке за време снимања, док је могуће да сечувају остаци који настају лошим сигналом или дејствима чипа ГПС-а.</string>
     <string name="monitoring_min_distance_descr_recommendation">Препорука: Поставка од 5 метара ако не треба да бележите прецизније детаље од овога и недвосмислено не желите да бележите податке приликом одмарања.</string>
     <string name="live_monitoring_time_buffer">Временско међускладиште</string>
@@ -3612,7 +3612,7 @@
     <string name="lang_zhyue">Кантонски</string>
     <string name="lang_zhminnan">Јужномински</string>
     <string name="shared_string_hillshade">Сенке брда</string>
-    <string name="select_track_file">Изаберите датотеку стазе</string>
+    <string name="select_track_file">Изаберите датотеку трага</string>
     <string name="shared_string_resume">Настави</string>
     <string name="hillshade_description">Карта сена брда користи тамне преливе за приказивање нагиба, врхова и низина.</string>
     <string name="slope_description">При нагибу користе се боје за дочаравање стрмине терена.</string>
@@ -3701,7 +3701,7 @@
     <string name="route_between_points_whole_track_button_desc">Читава путања ће се прерачунати користећи одабрани налог.</string>
     <string name="route_between_points_next_segment_button_desc">Само ће следећи чланак бити прерачунат користећи одабрани налог.</string>
     <string name="route_between_points_desc">Изаберите како повезати тачке, по правој линији, или израчунајте пут између њих како је доле назначено.</string>
-    <string name="whole_track">Цела стаза</string>
+    <string name="whole_track">Цео траг</string>
     <string name="next_segment">Следећи чланак</string>
     <string name="threshold_distance">Праг удаљености</string>
     <string name="navigation_profile">Налог навођења</string>
@@ -3709,24 +3709,24 @@
     <string name="street_level_imagery">Слике на ступњу улице</string>
     <string name="plan_route_exit_dialog_descr">Одбацити све промене на планираној путањи\?</string>
     <string name="in_case_of_reverse_direction">У случају обрнутог правца</string>
-    <string name="shared_string_save_as_gpx">Сачувај као нову датотеку стазе</string>
-    <string name="add_segment_to_the_track">Додај у датотеку стазе</string>
+    <string name="shared_string_save_as_gpx">Сачувај као нову датотеку трага</string>
+    <string name="add_segment_to_the_track">Додај у датотеку трага</string>
     <string name="shared_string_gpx_files">Путање</string>
-    <string name="layer_gpx_layer">Путање</string>
-    <string name="show_gpx">Путање</string>
+    <string name="layer_gpx_layer">Трагови</string>
+    <string name="show_gpx">Трагови</string>
     <string name="monitoring_control_start">РЕК</string>
     <string name="save_track_to_gpx_globally">Уписуј путању у датотеку ГПИкс-а</string>
     <string name="shared_string_gpx_route">Прати пут</string>
-    <string name="empty_state_my_tracks">Додајте датотеке стаза</string>
-    <string name="empty_state_my_tracks_desc">Увезите или снимите датотеке стаза</string>
-    <string name="context_menu_item_add_waypoint">Додајте тачку стазе</string>
-    <string name="quick_action_add_gpx">Додајте тачку стазе</string>
+    <string name="empty_state_my_tracks">Додај датотеке трагова</string>
+    <string name="empty_state_my_tracks_desc">Увези или сними датотеке трагова</string>
+    <string name="context_menu_item_add_waypoint">Додај тачку трага</string>
+    <string name="quick_action_add_gpx">Додај тачку трага</string>
     <string name="map_widget_monitoring">Снимање путовања</string>
-    <string name="marker_save_as_track">Сачувај као датотеку стазе</string>
-    <string name="follow_track">Следи стазу</string>
-    <string name="follow_track_descr">Изаберите датотеку стазе ради праћења</string>
-    <string name="import_track_descr">Изаберите датотеку стазе ради праћења или увоза са Вашег уређаја.</string>
-    <string name="select_another_track">Изаберите другу стазу</string>
+    <string name="marker_save_as_track">Сачувај као датотеку трага</string>
+    <string name="follow_track">Следи траг</string>
+    <string name="follow_track_descr">Изаберите датотеку трага ради праћења</string>
+    <string name="import_track_descr">Изаберите датотеку трага ради праћења или увоза са Вашег уређаја.</string>
+    <string name="select_another_track">Изаберите други траг</string>
     <string name="navigate_to_track_descr">Наводите од мојег положаја до стазе</string>
     <string name="pass_whole_track_descr">Тачка стазе за навођење</string>
     <string name="start_of_the_track">Почетак стазе</string>
@@ -3741,12 +3741,12 @@
     <string name="plan_route_change_route_type_after">Промените врсту пута након</string>
     <string name="what_is_new">Шта је ново</string>
     <string name="shared_string_file_name">Име датотеке</string>
-    <string name="number_of_gpx_files_selected_pattern">%s изабраних датотека стаза</string>
+    <string name="number_of_gpx_files_selected_pattern">%s изабраних датотека трагова</string>
     <string name="gpx_monitoring_stop">Затстани са снимањем пута</string>
     <string name="one_point_error">Додајте бар две тачке.</string>
     <string name="osm_edit_logout_success">Одјављен</string>
-    <string name="gpx_upload_private_visibility_descr">„Приватно“ значи да се стаза не појављује ни на једном јавном списку, али тачке праћења у њему у нису у времеском редоследу доступне путем јавног АПИ-ја ГПС-а без временских ознака.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">„Препознатљив“ значи да ће се стаза јавно приказати у Вашим стазама ГПС-а и у јавним списковима стаза ГПС-а, тј. други корисници ће моћи да преузму необрађену стазу и повежу га са Вашим корисничким именом. Јавни подаци о временским тачкама стазе из АПИ-ја ГПС-а који се служе путем АПИ-ја за тачке праћења имаће однос на вашу изворну страницу праћења.</string>
+    <string name="gpx_upload_private_visibility_descr">„Приватно“ значи да се траг не појављује ни на једном јавном списку, али тачке праћења у њему у нису у временском редоследу доступне путем јавног АПИ-ја ГПС-а без временских ознака.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">„Препознатљив“ значи да ће се траг јавно приказати у Вашим траговима ГПС-а и у јавним списковима трагова ГПС-а, тј. други корисници ће моћи да преузму необрађени траг и повежу га са Вашим корисничким именом. Јавни подаци о временским тачкама стазе из АПИ-ја ГПС-а који се служе путем АПИ-ја за тачке праћења имаће однос на вашу изворну страницу праћења.</string>
     <string name="gpx_upload_trackable_visibility_descr">„Следљиво“ значи да се траг не приказује нигде на јавним списковима, али обрађене тачке праћења са временским ознакама у њима (које не могу бити непосредно повезане са вама) иду кроз преузимања са јавног АПИ-ја ГПС-а.</string>
     <string name="osm_edit_close_note">Затвори белешку ОСМ-а</string>
     <string name="osm_edit_comment_note">Напомена белешке ОСМ-а</string>
@@ -3777,10 +3777,10 @@
     <string name="snowmobile_render_descr">За вожњу моторних санки са наменским путевима и стазама.</string>
     <string name="navigate_point_format_mgrs">МГРС</string>
     <string name="mgrs_format_descr">ОсмАнд користи МГРС, који је сличан облику НАТО-вог УТМ.</string>
-    <string name="simplified_track">Поједностављена стаза</string>
+    <string name="simplified_track">Поједностављени траг</string>
     <string name="simplified_track_description">Само линија путање ће бити сачувана, а путне тачке ће бити избрисане.</string>
     <string name="disable_recording_once_app_killed_descrp">Бележење стазе ће бити заустављено када се програм убије (преко скорашњих програма). (Указивач рада ОсмАнда у позадини тада нестаје из обавештајне траке.)</string>
-    <string name="save_global_track_interval_descr">Наведите међувреме завођења општег снимања стаза (укључено помоћу справице „снимање путовања“ на карти).</string>
+    <string name="save_global_track_interval_descr">Наведите међувреме завођења општег снимања трагова (укључено помоћу справице „снимање путовања“ на карти).</string>
     <string name="gpx_monitoring_start">Наставите снимање путовања</string>
     <string name="system_default_theme">Системско подразумевана</string>
     <string name="all_next_segments">Сви наредни делови</string>
@@ -3792,17 +3792,17 @@
     <string name="open_saved_track">Отвори сачувану</string>
     <string name="shared_string_is_saved">је сачувано</string>
     <string name="shared_string_redo">Понови</string>
-    <string name="release_3_8">• Освежена је могућност путање: омогућава употребу различитих врста навођења по делу и укључивање стаза
+    <string name="release_3_8">• Освежена је могућност путање: омогућава употребу различитих врста навођења по делу и укључивање трагова
 \n
-\n • Нови изборник изгледа стазе: одаберите боју, дебљину, стрелице смера приказа, сличице почетка и завршетка
+\n • Нови изборник трагова: одаберите боју, дебљину, стрелице смера приказа, сличице почетка и завршетка
 \n
 \n • Побољшана је видљивост бициклистичких чворова.
 \n
-\n • Стазе се сада могу додирнути, имају приручни изборник са основним подацима.
+\n • Трагови се сада могу тапкати, имају приручни изборник са основним подацима.
 \n
 \n • Побољшани су погони претраге
 \n
-\n • Побољшане су могућности праћења стаза у навођењу
+\n • Побољшане су могућности праћења трагова у навођењу
 \n
 \n • Решени проблеми са увозом / извозом подешавања налога
 \n
@@ -3877,7 +3877,7 @@
     <string name="plan_route_add_new_segment">Додајте нови одсечак</string>
     <string name="release_3_9">• Додата је могућност за извоз и увоз свих података, укључујући подешавања, изворе, моја места
 \n
-\n • Планирање путање: графикони за одсечке са путањом, и додата је могућност стварања и уређивања вишеструких одсечака стаза
+\n • Планирање путање: графикони за одсечке са путањом, и додата је могућност стварања и уређивања вишеструких одсечака трагова
 \n
 \n • Додан је начин пријаве OАутх за ОпенСтритМап, побољшано корисничко сучеље прозорчића ОСМ-а
 \n
@@ -4968,7 +4968,7 @@
     <string name="export_to_file">Извези у датотеку</string>
     <string name="terms_of_service_desc">Преузимајући карте се слажете са %1$s и %2$s.</string>
     <string name="map_widget_ant_heart_rate_desc">Приказује тренутне корисникове срчане откуцаје приликом датог дејства</string>
-    <string name="attach_roads_descr">Уопштите своје стазе ради дозвољавања путевима у путање између тачака и придружите тачна упутства скретања и својства путање.</string>
+    <string name="attach_roads_descr">Уопштите свој траг ради дозвољавања путевима у путање између тачака и придружите тачна упутства скретања и својства путање.</string>
     <string name="auto_backup_preference_desc">Подразумевано, Андроид чува складиште омиљених, значака карата, и поставке Османда ради њиховог повраћаја на нове уређаје након поновне уградње. Складиште је ограничено на 25 МБ.
 \nПриликом коришћења Облака Османда, ово може одвести до неразумевања након поновне уградње.</string>
     <string name="first_marker_widget_desc">Можете подесити справицу да приказује растојање или процењено преостало време доласка на првој ознаци карте.</string>
@@ -5035,7 +5035,7 @@
     <string name="sort_date_descending">Најпре најстарији датум</string>
     <string name="delete_cloud_version">Избриши издање из облака</string>
     <string name="cloud_version_confirm_delete">Да ли избрисати „%1$s“ из Облака ОсмАнда\?</string>
-    <string name="simulation_position_description">Изаберите датотеку стазе ради употребе као извора за померање положаја.</string>
+    <string name="simulation_position_description">Изаберите датотеку трага ради употребе као извора за померање положаја.</string>
     <string name="shared_string_kilograms">килограми</string>
     <string name="share_link">Дели везу</string>
     <string name="skip_download">Прескочи преузимање</string>
@@ -5056,19 +5056,19 @@
     <string name="app_mode_moped">Мопед</string>
     <string name="inch">инч</string>
     <string name="shared_string_yards">јарди</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Да ли изменити изглед стазе %1$s\?</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Да ли изменити изглед трага %1$s\?</string>
     <string name="shared_string_apply_changes">Примени измене</string>
-    <string name="no_visible_tracks_description">Изаберите стазе за приказ на карти.</string>
-    <string name="no_visible_tracks">Нема стаза на карти</string>
+    <string name="no_visible_tracks_description">Изаберите трагове за приказ на карти.</string>
+    <string name="no_visible_tracks">Нема трагова на карти</string>
     <string name="recently_visible">Недавно видљив %1$s</string>
-    <string name="empty_tracks">Немате датотеке стаза.</string>
-    <string name="empty_tracks_description">Можете увозити, стварати или снимати датотеке стаза коришћењем Османда.</string>
+    <string name="empty_tracks">Немате датотеке трагова.</string>
+    <string name="empty_tracks_description">Можете увозити, стварати или снимати датотеке трагова коришћењем Османда.</string>
     <string name="shared_string_on_map">На карти</string>
     <string name="shared_string_select_recent">Одаберите недавну</string>
     <string name="change_appearance">Измени изглед</string>
     <string name="switch_folder">Промени фасциклу</string>
-    <string name="show_all_tracks">Прикажи све стазе</string>
-    <string name="release_4_4">• Побољшан је изборник „Стазе“ у „Поставкама карте“
+    <string name="show_all_tracks">Прикажи све трагове</string>
+    <string name="release_4_4">• Побољшан је изборник „Трагови“ у „Поставкама карте“
 \n
 \n • Приручни изборник сада приказује местне називе тачака занимања
 \n
