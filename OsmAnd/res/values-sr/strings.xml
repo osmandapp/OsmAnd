@@ -5089,4 +5089,10 @@
 \n • Исправљена је грешка приликом приказа места пошћења
 \n
 \n</string>
+    <string name="enable_3d_maps">Омогући просторне, 3Д-карте</string>
+    <string name="test_heightmap">Опитај висинску карту</string>
+    <string name="app_mode_climbing">Пентрање</string>
+    <string name="generate_hillshade_from_3d_maps">Образуј оквирне карте сенчених падина из просторних, 3Д карата</string>
+    <string name="generate_slope_from_3d_maps">Образуј оквире карата нагиба из просторних, 3Д карата</string>
+    <string name="disable_vertex_hillshade_3d">Онемогући вртложно сенчење у просторном прегледу 3Д</string>
 </resources>
