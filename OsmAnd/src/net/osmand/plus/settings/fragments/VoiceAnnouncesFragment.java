@@ -25,9 +25,11 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
@@ -98,9 +100,19 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		setupInterruptMusicPref();
 
 		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
+		setupSpeedTolerance();
 		setupSpeakCamerasPref();
 		setupSpeedCamerasAlert();
 		setupSpeedLimitExceedPref();
+	}
+
+	private void setupSpeedTolerance() {
+		Preference preference = findPreference(settings.SPEED_LIMIT_EXCEED_KMH.getId());
+		float selectedValue = settings.SPEED_LIMIT_EXCEED_KMH.getModeValue(getSelectedAppMode());
+		ApplicationMode mode = getSelectedAppMode();
+		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(mode));
+		String value = OsmAndFormatter.getFormattedSpeed(selectedValue / 3.6f, app, mode.hasFastSpeed(), speedFormat);
+		preference.setSummary(value);
 	}
 
 	private void setupVoiceProviderPref() {
