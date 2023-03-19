@@ -3262,9 +3262,9 @@
     <string name="select_segments">Välj segment</string>
     <string name="select_segments_description">%1$s innehåller mer än ett segment, du måste välja önskad del för navigering.</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="open_place_reviews_plugin_description">Skicka in foton, recensioner och länkar om offentliga platser som restauranger, hotell, museer och vägpunkter som öppen data https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Bidra till OpenPlaceReviews-projektet med sådant som foton på, recensioner av eller länkar till offentliga platser såsom restauranger, hotell eller museer
 \n
-\nLäs mer på: http://openplacereviews.org</string>
+\nHitta instruktioner för hur du bidrar på vår webbplats https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
     <string name="hillshade_slope_contour_lines">Terrängskuggning / Lutning / Höjdkurvor</string>
@@ -4454,4 +4454,8 @@
     <string name="shared_string_shape">Figur</string>
     <string name="location_source">Platskälla</string>
     <string name="app_mode_moped">Moped</string>
+    <string name="ui_customization">Anpassning av användargränssnittet</string>
+    <string name="osm_editing_prefs_descr">Användarnamn, lösenord, offline-redigering</string>
+    <string name="auto_25_chars_route_tu_kl">Gör en u-sväng och håll till vänster</string>
+    <string name="auto_25_chars_route_tu_kr">Gör en u-sväng och håll till höger</string>
 </resources>
