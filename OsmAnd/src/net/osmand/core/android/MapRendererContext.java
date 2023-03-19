@@ -267,24 +267,24 @@ public class MapRendererContext {
 
 	protected QStringStringHash getMapStyleSettings() {
 		// Apply map style settings
-		OsmandSettings prefs = app.getSettings();
+		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-		Map<String, String> props = new HashMap<>();
-		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-			if (customProp.isBoolean()) {
-				CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
-				props.put(customProp.getAttrName(), pref.get() + "");
+
+		Map<String, String> properties = new HashMap<>();
+		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
+			String attrName = property.getAttrName();
+			if (property.isBoolean()) {
+				properties.put(attrName, settings.getRenderBooleanPropertyValue(attrName) + "");
 			} else {
-				CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
-				String res = settings.get();
-				if (!Algorithms.isEmpty(res)) {
-					props.put(customProp.getAttrName(), res);
+				String value = settings.getRenderPropertyValue(attrName);
+				if (!Algorithms.isEmpty(value)) {
+					properties.put(attrName, value);
 				}
 			}
 		}
 
 		QStringStringHash convertedStyleSettings = new QStringStringHash();
-		for (Entry<String, String> setting : props.entrySet()) {
+		for (Entry<String, String> setting : properties.entrySet()) {
 			convertedStyleSettings.set(setting.getKey(), setting.getValue());
 		}
 		if (nightMode) {
