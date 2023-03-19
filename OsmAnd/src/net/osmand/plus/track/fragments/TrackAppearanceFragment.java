@@ -436,6 +436,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (card instanceof ActionsCard) {
 			if (buttonIndex == RESET_BUTTON_INDEX) {
 				trackDrawInfo.resetParams(app, selectedGpxFile.getGpxFile());
+				if (colorsCard != null) {
+					colorsCard.setSelectedColor(trackDrawInfo.getColor());
+				}
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
 				refreshMap();
