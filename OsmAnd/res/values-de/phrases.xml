@@ -3315,7 +3315,7 @@
     <string name="poi_money_transfer">Überweisung</string>
     <string name="poi_route_subway_ref">U-Bahn</string>
     <string name="poi_climbing_style">Klettertechnik</string>
-    <string name="poi_ref_post">Postleitzahl</string>
+    <string name="poi_ref_post">Referenznummer</string>
     <string name="poi_climbing_sport_yes">Sport: ja</string>
     <string name="poi_climbing_sport_no">Sport: nein</string>
     <string name="poi_climbing_trad_yes">Traditionell: ja</string>
