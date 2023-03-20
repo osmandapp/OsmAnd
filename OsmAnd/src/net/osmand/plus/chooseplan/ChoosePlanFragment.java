@@ -300,7 +300,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
 
-		String version = getString(isFullVersion ? R.string.osmand_plus : R.string.maps_plus);
+		String version = getString(R.string.maps_plus);
 		boolean featureIncluded = selectedFeature.isAvailableInMapsPlus();
 		int pattern = featureIncluded ? R.string.included_in_your_current_plan : R.string.not_available_with;
 		tvTitle.setText(String.format(getString(pattern), version));
