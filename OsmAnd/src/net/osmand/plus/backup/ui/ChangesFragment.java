@@ -62,7 +62,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	private NetworkSettingsHelper settingsHelper;
 
 	private View buttonsContainer;
-	private AppCompatImageView buttonsShadow;
+	private View buttonsShadow;
 
 	private RecentChangesType tabType;
 	private boolean nightMode;

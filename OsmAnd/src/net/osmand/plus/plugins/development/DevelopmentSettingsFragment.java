@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 	private OsmandDevelopmentPlugin plugin;
 	private StateChangedListener<Boolean> enableHeightmapListener;
+	private LocationSimulationListener simulationListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 				}
 			}
 		};
+		simulationListener = simulating -> app.runInUIThread(this::setupSimulateYourLocationPref);
 	}
 
 	@Override
@@ -318,12 +322,14 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	public void onResume() {
 		super.onResume();
 		plugin.ENABLE_HEIGHTMAP.addListener(enableHeightmapListener);
+		app.getLocationProvider().getLocationSimulation().addSimulationListener(simulationListener);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		plugin.ENABLE_HEIGHTMAP.removeListener(enableHeightmapListener);
+		app.getLocationProvider().getLocationSimulation().removeSimulationListener(simulationListener);
 	}
 
 	public void loadNativeLibrary() {

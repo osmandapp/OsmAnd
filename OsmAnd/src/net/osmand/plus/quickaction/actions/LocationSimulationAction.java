@@ -26,6 +26,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -81,31 +83,34 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			unselectGpxFileIfMissing();
+			speedUpValue = getFloatFromParams(KEY_SIMULATION_SPEEDUP, MIN_SPEEDUP);
+			cutOffValue = getFloatFromParams(KEY_SIMULATION_CUTOFF, MIN_CUTOFF_DISTANCE);
 
-		unselectGpxFileIfMissing();
-		speedUpValue = getFloatFromParams(KEY_SIMULATION_SPEEDUP, MIN_SPEEDUP);
-		cutOffValue = getFloatFromParams(KEY_SIMULATION_CUTOFF, MIN_CUTOFF_DISTANCE);
-
-		if (!shouldUseSelectedGpxFile()) {
-			OsmAndLocationSimulation sim = mapActivity.getMyApplication().getLocationProvider().getLocationSimulation();
-			if (sim.isRouteAnimating()) {
-				sim.startStopGpxAnimation(mapActivity);
-			} else {
-				CallbackWithObject<String> onFileSelect = gpxFilePath -> {
-					getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
-						startStopSimulation(gpxFile, mapActivity);
+			if (!shouldUseSelectedGpxFile()) {
+				OsmAndLocationSimulation sim = mapActivity.getMyApplication().getLocationProvider().getLocationSimulation();
+				if (sim.isRouteAnimating()) {
+					sim.startStopGpxAnimation(mapActivity);
+				} else {
+					CallbackWithObject<String> onFileSelect = gpxFilePath -> {
+						getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
+							startStopSimulation(gpxFile, mapActivity);
+							return true;
+						});
 						return true;
-					});
+					};
+					showSelectTrackFileDialog(mapActivity, onFileSelect);
+				}
+			} else {
+				getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
+					startStopSimulation(gpxFile, mapActivity);
 					return true;
-				};
-				showSelectTrackFileDialog(mapActivity, onFileSelect);
+				});
 			}
-		} else {
-			getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
-				startStopSimulation(gpxFile, mapActivity);
-				return true;
-			});
 		}
+
 	}
 
 	@Override
