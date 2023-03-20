@@ -1,5 +1,10 @@
 package net.osmand.plus.download;
 
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
+import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +15,10 @@ import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -42,13 +51,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
-
-import static net.osmand.plus.Version.FULL_VERSION_NAME;
-import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 
 @SuppressLint({"NewApi", "DefaultLocale"})
 public class DownloadIndexesThread {
@@ -506,7 +508,7 @@ public class DownloadIndexesThread {
 							if (item.getBasename().equalsIgnoreCase(DownloadResources.WORLD_SEAMARKS_KEY)) {
 								File folder = app.getAppPath(IndexConstants.MAPS_PATH);
 								String fileName = DownloadResources.WORLD_SEAMARKS_OLD_NAME
-										+ IndexConstants.BINARY_MAP_INDEX_EXT;
+										+ BINARY_MAP_INDEX_EXT;
 								File oldFile = new File(folder, fileName);
 								Algorithms.removeAllFiles(oldFile);
 							}
@@ -555,13 +557,13 @@ public class DownloadIndexesThread {
 			return true;
 		}
 
-		private boolean validateNotExceedsFreeLimit(IndexItem item) {
+		private boolean validateNotExceedsFreeLimit(@NonNull IndexItem item) {
 			boolean exceed = !Version.isPaidVersion(app)
 					&& DownloadActivityType.isCountedInDownloads(item)
-					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+					&& downloads.get() >= MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if (exceed) {
 				String breakDownloadMessage = app.getString(R.string.free_version_message,
-						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
+						MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
 				publishProgress(breakDownloadMessage);
 			}
 			return !exceed;
@@ -572,7 +574,7 @@ public class DownloadIndexesThread {
 			// reindex vector maps all at one time
 			ResourceManager manager = app.getResourceManager();
 			for (File f : filesToReindex) {
-				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+				if (f.getName().endsWith(BINARY_MAP_INDEX_EXT)) {
 					vectorMapsToReindex = true;
 				}
 			}

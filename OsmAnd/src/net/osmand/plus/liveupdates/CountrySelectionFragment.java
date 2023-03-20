@@ -94,7 +94,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		ImageButton clearButton = view.findViewById(R.id.clearButton);
-		setThemedDrawable(clearButton, R.drawable.ic_action_remove_dark);
+		clearButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

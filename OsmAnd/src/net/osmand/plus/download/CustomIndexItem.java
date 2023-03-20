@@ -4,10 +4,10 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.JsonUtils;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -36,7 +36,7 @@ public class CustomIndexItem extends IndexItem {
 	                       Map<String, String> secondSubNames,
 	                       @NonNull DownloadActivityType type,
 	                       DownloadDescriptionInfo descriptionInfo) {
-		super(fileName, null, timestamp, size, contentSize, containerSize, type);
+		super(fileName, null, timestamp, size, contentSize, containerSize, type, false, null);
 		this.names = names;
 		this.firstSubNames = firstSubNames;
 		this.secondSubNames = secondSubNames;
@@ -66,12 +66,12 @@ public class CustomIndexItem extends IndexItem {
 	}
 
 	@Override
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
+	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions) {
 		return getVisibleName(ctx, osmandRegions, true);
 	}
 
 	@Override
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
+	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		String name = super.getVisibleName(ctx, osmandRegions, includingParent);
 		return JsonUtils.getLocalizedResFromMap(ctx, names, name);
 	}

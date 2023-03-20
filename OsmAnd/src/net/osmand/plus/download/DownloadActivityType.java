@@ -1,19 +1,19 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
@@ -108,10 +108,10 @@ public class DownloadActivityType {
 		return orderIndex;
 	}
 
-	public static boolean isCountedInDownloads(IndexItem es) {
-		DownloadActivityType tp = es.getType();
-		if (tp == NORMAL_FILE || tp == ROADS_FILE) {
-			return !es.extra;
+	public static boolean isCountedInDownloads(@NonNull IndexItem item) {
+		DownloadActivityType type = item.getType();
+		if (type == NORMAL_FILE || type == ROADS_FILE) {
+			return !item.extra && !item.free;
 		}
 		return false;
 	}
@@ -332,22 +332,25 @@ public class DownloadActivityType {
 		}
 	}
 
-	public IndexItem parseIndexItem(OsmandApplication ctx, XmlPullParser parser) {
-		String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
+	@Nullable
+	public IndexItem parseIndexItem(@NonNull OsmandApplication app, @NonNull XmlPullParser parser) {
+		String name = parser.getAttributeValue(null, "name");
 		if (!isAccepted(name)) {
 			return null;
 		}
-		String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
-		String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
+		String size = parser.getAttributeValue(null, "size");
+		String description = parser.getAttributeValue(null, "description");
 		long containerSize = Algorithms.parseLongSilently(
 				parser.getAttributeValue(null, "containerSize"), 0);
 		long contentSize = Algorithms.parseLongSilently(
 				parser.getAttributeValue(null, "contentSize"), 0);
 		long timestamp = Algorithms.parseLongSilently(
 				parser.getAttributeValue(null, "timestamp"), 0);
-		IndexItem it = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this);
-		it.extra = FileNameTranslationHelper.getStandardMapName(ctx, it.getBasename().toLowerCase()) != null;
-		return it;
+		boolean free = Boolean.parseBoolean(parser.getAttributeValue(null, "free"));
+		String freeMessage = parser.getAttributeValue(null, "freeMessage");
+		IndexItem item = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this, free, freeMessage);
+		item.extra = FileNameTranslationHelper.getStandardMapName(app, item.getBasename().toLowerCase()) != null;
+		return item;
 	}
 
 	protected static String reparseDate(Context ctx, String date) {

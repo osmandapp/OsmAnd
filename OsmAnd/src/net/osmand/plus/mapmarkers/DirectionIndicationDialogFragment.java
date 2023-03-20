@@ -63,16 +63,14 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				.inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
-		toolbar.setNavigationIcon(getIconsCache().getIcon(navigationIconResId));
+		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(getContext())));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(view -> dismiss());
 
 		TextView appModeTv = mainView.findViewById(R.id.app_mode_text_view);
 		ApplicationMode appMode = settings.APPLICATION_MODE.get();
 		appModeTv.setText(appMode.toHumanString());
-		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(
-			appMode.getIconRes()), null);
+		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIcon(appMode.getIconRes()), null);
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
@@ -216,37 +214,37 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private Drawable getTopBar2Img() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_topbar_2_day : R.drawable.img_help_markers_direction_topbar_2_night);
 	}
 
 	private Drawable getTopBar1Img() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_topbar_1_day : R.drawable.img_help_markers_direction_topbar_1_night);
 	}
 
 	private Drawable getArrowOneImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_arrow_one_day : R.drawable.img_help_markers_direction_arrow_one_night);
 	}
 
 	private Drawable getArrowTwoImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_arrow_two_day : R.drawable.img_help_markers_direction_arrow_two_night);
 	}
 
 	private Drawable getGuideLineOneImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_guideline_one_day : R.drawable.img_help_markers_direction_guideline_one_night);
 	}
 
 	private Drawable getGuideLineTwoImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_guideline_two_day : R.drawable.img_help_markers_direction_guideline_two_night);
 	}
 
 	private Drawable getDeviceImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(getSettings().isLightContent()
 				? R.drawable.img_help_markers_direction_device_day : R.drawable.img_help_markers_direction_device_night);
 	}
 

@@ -19,10 +19,11 @@ public abstract class DownloadItem {
 	protected DownloadActivityType type;
 	protected DownloadResourceGroup relatedGroup;
 
-	public DownloadItem(DownloadActivityType type) {
+	public DownloadItem(@NonNull DownloadActivityType type) {
 		this.type = type;
 	}
 
+	@NonNull
 	public DownloadActivityType getType() {
 		return type;
 	}
@@ -36,24 +37,24 @@ public abstract class DownloadItem {
 	}
 
 	@NonNull
-	public String getSizeDescription(Context ctx) {
+	public String getSizeDescription(@NonNull Context ctx) {
 		return getFormattedMb(ctx, getSizeToDownloadInMb());
 	}
 
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
+	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions) {
 		return getVisibleName(ctx, osmandRegions, true);
 	}
 
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
+	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		return getVisibleName(ctx, osmandRegions, includingParent, false);
 	}
 
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent, boolean useShortName) {
+	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions, boolean includingParent, boolean useShortName) {
 		return type.getVisibleName(this, ctx, osmandRegions, includingParent, useShortName);
 	}
 
-	public String getVisibleDescription(OsmandApplication ctx) {
-		return type.getVisibleDescription(this, ctx);
+	public String getVisibleDescription(@NonNull OsmandApplication app) {
+		return type.getVisibleDescription(this, app);
 	}
 
 	@NonNull
@@ -85,11 +86,21 @@ public abstract class DownloadItem {
 
 	public abstract String getFileName();
 
+	public abstract boolean isFree();
+
+	public abstract String getFreeMessage();
+
 	public abstract String getDate(@NonNull DateFormat dateFormat, boolean remote);
 
 	@NonNull
 	public static String getFormattedMb(@NonNull Context ctx, double sizeInMb) {
 		String size = String.format(Locale.US, "%.2f", sizeInMb);
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getFileName();
 	}
 }
