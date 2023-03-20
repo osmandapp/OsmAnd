@@ -1,11 +1,11 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -29,6 +29,10 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.ui.AuthorizeFragment;
+import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -42,6 +46,7 @@ import net.osmand.plus.myplaces.ui.EditFavoriteGroupDialogFragment;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.openplacereviews.OPRConstants;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper.OprAuthorizationListener;
+import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -50,6 +55,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
@@ -74,6 +80,7 @@ public class IntentHelper {
 	private static final String URL_PATH = "map";
 	private static final String URL_PARAMETER_START = "start";
 	private static final String URL_PARAMETER_END = "end";
+	private static final String URL_PARAMETER_TOKEN = "token";
 	private static final String URL_PARAMETER_MODE = "mode";
 	private static final String URL_PARAMETER_INTERMEDIATE_POINT = "ipoints";
 
@@ -81,26 +88,47 @@ public class IntentHelper {
 	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
 
+	private OnRegisterDeviceListener registerDeviceListener;
+
 	public IntentHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
+
+		registerDeviceListener = getRegisterDeviceListener();
+	}
+
+	private OnRegisterDeviceListener getRegisterDeviceListener() {
+		if (registerDeviceListener == null) {
+			registerDeviceListener = (status, message, error) -> {
+				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+					if (status == BackupHelper.STATUS_SUCCESS) {
+						BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
+					} else if (Algorithms.isEmpty(message)) {
+						LOG.error(message);
+					}
+				}
+				app.runInUIThread(() -> app.getBackupHelper().getBackupListeners().removeRegisterDeviceListener(registerDeviceListener));
+			};
+		}
+		return registerDeviceListener;
 	}
 
 	public boolean parseLaunchIntents() {
-		return parseNavigationUrlIntent()
-				|| parseSetPinOnMapUrlIntent()
-				|| parseMoveMapToLocationUrlIntent()
-				|| parseOpenLocationMenuUrlIntent()
-				|| parseRedirectUrlIntent()
-				|| parseTileSourceUrlIntent()
-				|| parseOpenGpxUrlIntent()
+		return parseNavigationIntent()
+				|| parseBackupAuthorizationIntent()
+				|| parseSetPinOnMapIntent()
+				|| parseMoveMapToLocationIntent()
+				|| parseOpenLocationMenuIntent()
+				|| parseRedirectIntent()
+				|| parseTileSourceIntent()
+				|| parseOpenGpxIntent()
 				|| parseSendIntent()
 				|| parseOAuthIntent()
 				|| parseOprOAuthIntent();
 	}
 
-	private boolean parseNavigationUrlIntent() {
+	private boolean parseNavigationIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
@@ -154,6 +182,39 @@ public class IntentHelper {
 		return false;
 	}
 
+	private boolean parseBackupAuthorizationIntent() {
+		Intent intent = mapActivity.getIntent();
+		if (intent != null && isUriHierarchical(intent)) {
+			Uri data = intent.getData();
+			if (isOsmAndSite(data) && isPathPrefix(data, "/premium")) {
+				String token = data.getQueryParameter(URL_PARAMETER_TOKEN);
+				if (!Algorithms.isEmpty(token)) {
+					registerDevice(token);
+				} else {
+					LOG.error("Malformed OsmAnd backup authorization URL: token is empty");
+				}
+				clearIntent(intent);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void registerDevice(@NonNull String token) {
+		AuthorizeFragment fragment = mapActivity.getFragment(AuthorizeFragment.TAG);
+		if (fragment != null && fragment.getDialogType() == LoginDialogType.VERIFY_EMAIL) {
+			fragment.setToken(token);
+		} else if (!app.getBackupHelper().isRegistered() && !Algorithms.isEmpty(settings.BACKUP_USER_EMAIL.get())) {
+			if (BackupHelper.isTokenValid(token)) {
+				BackupHelper backupHelper = app.getBackupHelper();
+				backupHelper.getBackupListeners().addRegisterDeviceListener(registerDeviceListener);
+				backupHelper.registerDevice(token);
+			} else {
+				LOG.error("Malformed OsmAnd backup authorization URL: token is not valid");
+			}
+		}
+	}
+
 	private void buildRoute(@Nullable LatLon start, @NonNull LatLon end,
 	                        @Nullable ApplicationMode appMode, @Nullable List<LatLon> points) {
 		if (appMode != null) {
@@ -174,7 +235,7 @@ public class IntentHelper {
 				null, hasIntermediatePoints, true, MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
-	private boolean parseSetPinOnMapUrlIntent() {
+	private boolean parseSetPinOnMapIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
@@ -217,7 +278,7 @@ public class IntentHelper {
 		return null;
 	}
 
-	private boolean parseMoveMapToLocationUrlIntent() {
+	private boolean parseMoveMapToLocationIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
@@ -247,7 +308,7 @@ public class IntentHelper {
 		return isOsmAndSite(uri) && isPathPrefix(uri, "/map");
 	}
 
-	private boolean parseOpenLocationMenuUrlIntent() {
+	private boolean parseOpenLocationMenuIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
@@ -275,7 +336,7 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseRedirectUrlIntent() {
+	private boolean parseRedirectIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
@@ -298,7 +359,7 @@ public class IntentHelper {
 		return isOsmAndSite(uri) && isPathPrefix(uri, "/go");
 	}
 
-	private boolean parseTileSourceUrlIntent() {
+	private boolean parseTileSourceIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
@@ -327,7 +388,7 @@ public class IntentHelper {
 		return false;
 	}
 
-	private boolean parseOpenGpxUrlIntent() {
+	private boolean parseOpenGpxIntent() {
 		Intent intent = mapActivity.getIntent();
 		if (intent != null && isUriHierarchical(intent)) {
 			Uri data = intent.getData();
