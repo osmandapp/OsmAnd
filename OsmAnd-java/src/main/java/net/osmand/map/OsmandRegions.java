@@ -459,8 +459,8 @@ public class OsmandRegions {
 	}
 
 
-	public WorldRegion getRegionData(String fullname) {
-		return fullNamesToRegionData.get(fullname);
+	public WorldRegion getRegionData(String fullName) {
+		return fullNamesToRegionData.get(fullName);
 	}
 
 	public WorldRegion getRegionDataByDownloadName(String downloadName) {
@@ -479,8 +479,23 @@ public class OsmandRegions {
 		return mapIndexFields.get(mapIndexFields.fullNameType, o);
 	}
 
+	public List<String> getFlattenedWorldRegionIds() {
+		List<String> regionIds = new ArrayList<>();
+		for (WorldRegion region : getFlattenedWorldRegions()) {
+			regionIds.add(region.getRegionId());
+		}
+		return regionIds;
+	}
+
+	public List<WorldRegion> getFlattenedWorldRegions() {
+		List<WorldRegion> result = new ArrayList<>();
+		result.add(getWorldRegion());
+		result.addAll(getAllRegionData());
+		return result;
+	}
+
 	public List<WorldRegion> getAllRegionData() {
-		return new ArrayList<WorldRegion>(fullNamesToRegionData.values());
+		return new ArrayList<>(fullNamesToRegionData.values());
 	}
 
 

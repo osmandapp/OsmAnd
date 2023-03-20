@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,6 +60,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	private boolean nightMode;
 	private boolean usedOnMap;
+	private LocationSimulationListener simulationListener;
 
 	public void setGpxFile(@Nullable GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
@@ -77,9 +80,15 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 		settings = app.getSettings();
 		simulation = app.getLocationProvider().getLocationSimulation();
 
-		if (simulation.isRouteAnimating() && simulation.getGpxFile() != gpxFile) {
+		if (simulation.isRouteAnimating() && gpxFile == null) {
+			gpxFile = simulation.getGpxFile();
+		} else if (simulation.isRouteAnimating() && gpxFile != null && simulation.getGpxFile() != gpxFile) {
 			simulation.stop();
+		} else if (!simulation.isRouteAnimating()) {
+			app.getSettings().SIMULATE_POSITION_SPEED.set(1);
 		}
+
+		simulationListener = simulating -> app.runInUIThread(SimulatePositionFragment.this::updateCard);
 	}
 
 	@Override
@@ -97,9 +106,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 		View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.simulate_position_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
-		if (simulation.isRouteAnimating() && simulation.getGpxFile() != null && gpxFile == null) {
-			gpxFile = simulation.getGpxFile();
-		} else if (gpxFile == null && savedInstanceState != null) {
+		if (gpxFile == null && savedInstanceState != null) {
 			String path = savedInstanceState.getString(TRACK_FILE_NAME);
 			MapActivity mapActivity = (MapActivity) requireActivity();
 			TrackMenuFragment.loadSelectedGpxFile(mapActivity, path, false, result -> {
@@ -113,6 +120,18 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 		setupCard(view);
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		simulation.addSimulationListener(simulationListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		simulation.removeSimulationListener(simulationListener);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -159,8 +178,6 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 		startButton = startItem.findViewById(R.id.button_container);
 		startButton.setOnClickListener(v -> startStopSimulation());
-		TextView startTextview = startItem.findViewById(R.id.title);
-		startTextview.setText(simulation.isRouteAnimating() ? R.string.shared_string_control_stop : R.string.shared_string_control_start);
 
 		AndroidUiHelper.updateVisibility(startItem.findViewById(R.id.short_divider), false);
 
@@ -217,7 +234,9 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 			AndroidUiHelper.updateVisibility(startDescription, false);
 		}
 
-		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_rec_stop : R.drawable.ic_play_dark,
+		TextView startTextview = startItem.findViewById(R.id.title);
+		startTextview.setText(simulation.isRouteAnimating() ? R.string.shared_string_control_stop : R.string.shared_string_control_start);
+		startIcon.setImageDrawable(app.getUIUtilities().getPaintedIcon(simulation.isRouteAnimating() ? R.drawable.ic_action_stop  : R.drawable.ic_play_dark,
 				gpxFile != null ? ColorUtilities.getActiveIconColor(app, nightMode) : ColorUtilities.getSecondaryIconColor(app, nightMode)));
 	}
 

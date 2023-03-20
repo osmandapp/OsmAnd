@@ -52,6 +52,7 @@ public class OsmAndLocationSimulation {
 	private Thread routeAnimation;
 	@Nullable
 	private GPXFile gpxFile = null;
+	private List<LocationSimulationListener> listeners = new ArrayList<>();
 
 	public OsmAndLocationSimulation(@NonNull OsmandApplication app, @NonNull OsmAndLocationProvider provider) {
 		this.app = app;
@@ -65,6 +66,22 @@ public class OsmAndLocationSimulation {
 	@Nullable
 	public GPXFile getGpxFile() {
 		return gpxFile;
+	}
+
+	public void addSimulationListener(LocationSimulationListener listener) {
+		if (!listeners.contains(listener)) {
+			listeners.add(listener);
+		}
+	}
+
+	public void removeSimulationListener(LocationSimulationListener listener) {
+		listeners.remove(listener);
+	}
+
+	private void notifyListeners(boolean simulating) {
+		for (LocationSimulationListener listener : listeners) {
+			listener.onSimulationStateChanged(simulating);
+		}
 	}
 
 //	public void startStopRouteAnimationRoute(final MapActivity ma) {
@@ -253,6 +270,7 @@ public class OsmAndLocationSimulation {
 			}
 
 		};
+		notifyListeners(true);
 		routeAnimation.start();
 	}
 
@@ -326,6 +344,7 @@ public class OsmAndLocationSimulation {
 	public void stop() {
 		gpxFile = null;
 		routeAnimation = null;
+		notifyListeners(false);
 	}
 
 	public static SimulatedLocation middleLocation(SimulatedLocation start, SimulatedLocation end, float meters) {
@@ -471,5 +490,9 @@ public class OsmAndLocationSimulation {
 		public void setSpeedLimit(float speedLimit) {
 			this.speedLimit = speedLimit;
 		}
+	}
+
+	public interface LocationSimulationListener {
+		void onSimulationStateChanged(boolean simulating);
 	}
 }

@@ -32,6 +32,8 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
+import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -237,7 +239,7 @@ public class DownloadIndexesThread {
 			app.logEvent("download_files");
 		}
 		for (IndexItem item : items) {
-			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
+			if (!isCurrentDownloading(item) && !indexItemDownloading.contains(item)) {
 				indexItemDownloading.add(item);
 			}
 		}
@@ -261,32 +263,51 @@ public class DownloadIndexesThread {
 		}
 	}
 
-	public void cancelDownload(IndexItem item) {
-		app.logMapDownloadEvent("cancel", item);
-		if (currentDownloadingItem == item) {
-			downloadFileHelper.setInterruptDownloading(true);
-		} else {
-			indexItemDownloading.remove(item);
+	public void cancelDownload(List<IndexItem> items) {
+		if (items == null) return;
+		boolean updateProgress = false;
+		for (IndexItem item : items) {
+			if (!isCurrentDownloading(item)) {
+				updateProgress = true;
+			}
+			cancelDownload(item, false);
+		}
+		if (updateProgress) {
 			downloadInProgress();
 		}
 	}
 
-	public void cancelDownload(List<IndexItem> items) {
-		if (items != null) {
-			boolean updateProgress = false;
-			for (IndexItem item : items) {
-				app.logMapDownloadEvent("cancel", item);
-				if (currentDownloadingItem == item) {
-					downloadFileHelper.setInterruptDownloading(true);
-				} else {
-					indexItemDownloading.remove(item);
-					updateProgress = true;
-				}
+	public void cancelDownload(IndexItem item) {
+		cancelDownload(item, true);
+	}
+
+	public void cancelDownload(IndexItem item, boolean forceUpdateProgress) {
+		app.logMapDownloadEvent("cancel", item);
+		if (item instanceof WeatherIndexItem) {
+			cancelWeatherDownload((WeatherIndexItem) item);
+			if (forceUpdateProgress) {
+				downloadInProgress();
 			}
-			if (updateProgress) {
+		} else if (isCurrentDownloading(item)) {
+			downloadFileHelper.setInterruptDownloading(true);
+		} else {
+			indexItemDownloading.remove(item);
+			if (forceUpdateProgress) {
 				downloadInProgress();
 			}
 		}
+	}
+
+	private void cancelWeatherDownload(@NonNull WeatherIndexItem weatherIndexItem) {
+		if (!isCurrentDownloading(weatherIndexItem)) {
+			indexItemDownloading.remove(weatherIndexItem);
+		}
+		OfflineForecastHelper helper = app.getOfflineForecastHelper();
+		helper.checkAndStopWeatherDownload(weatherIndexItem);
+	}
+
+	public boolean isCurrentDownloading(@NonNull DownloadItem downloadItem) {
+		return downloadItem.equals(getCurrentDownloadingItem());
 	}
 
 	public IndexItem getCurrentDownloadingItem() {
@@ -490,7 +511,7 @@ public class DownloadIndexesThread {
 					while (!indexItemDownloading.isEmpty()) {
 						IndexItem item = indexItemDownloading.poll();
 						currentDownloadingItem = item;
-						currentDownloadProgress = 0;
+						resetDownloadProgress();
 						if (item == null || currentDownloads.contains(item)) {
 							continue;
 						}
@@ -531,7 +552,7 @@ public class DownloadIndexesThread {
 					}
 				} finally {
 					currentDownloadingItem = null;
-					currentDownloadProgress = 0;
+					resetDownloadProgress();
 				}
 				if (warnings.toString().trim().length() == 0) {
 					return null;
@@ -616,11 +637,13 @@ public class DownloadIndexesThread {
 				throws InterruptedException {
 			downloadFileHelper.setInterruptDownloading(false);
 			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
-			boolean res = false;
+			boolean result = false;
 			if (de == null) {
 				return false;
-			}
-			if (de.isAsset) {
+			} else if (de.isWeather) {
+				OfflineForecastHelper offlineForecastHelper = app.getOfflineForecastHelper();
+				result = offlineForecastHelper.downloadForecastByRegion(de.worldRegion, this);
+			} else if (de.isAsset) {
 				try {
 					if (ctx != null) {
 						ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile);
@@ -628,7 +651,7 @@ public class DownloadIndexesThread {
 						if (!changedDate) {
 							LOG.error("Set last timestamp is not supported");
 						}
-						res = true;
+						result = true;
 					}
 				} catch (IOException e) {
 					LOG.error("Copy exception", e);
@@ -636,22 +659,26 @@ public class DownloadIndexesThread {
 			} else {
 				long start = System.currentTimeMillis();
 				app.logMapDownloadEvent("start", item);
-				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
+				result = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
 				long time = System.currentTimeMillis() - start;
-				if (res) {
+				if (result) {
 					app.logMapDownloadEvent("done", item, time);
 					checkDownload(item);
 				} else {
 					app.logMapDownloadEvent("failed", item, time);
 				}
 			}
-			return res;
+			return result;
 		}
 
 		@Override
 		protected void updateProgress(boolean updateOnlyProgress, IndexItem tag) {
 			currentDownloadProgress = getDownloadProgress();
 			downloadInProgress();
+		}
+
+		private void resetDownloadProgress() {
+			currentDownloadProgress = 0;
 		}
 	}
 

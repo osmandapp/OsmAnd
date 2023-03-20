@@ -165,9 +165,9 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			if(operationType == SYNC_OPERATION_DELETE){
 				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode));
 				builder.setTitle(app.getString(R.string.shared_string_delete_file));
-				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.fileName));
+				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.title));
 				builder.setNeutralButton(R.string.shared_string_cancel, null)
-						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+						.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
 							syncItem(operationType);
 							dismiss();
 						});

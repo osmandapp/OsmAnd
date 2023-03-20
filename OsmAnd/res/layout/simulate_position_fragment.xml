@@ -47,6 +47,8 @@
 				android:id="@+id/start"
 				layout="@layout/item_with_desc_dividers" />
 
+			<include layout="@layout/card_bottom_divider" />
+
 		</LinearLayout>
 
 	</ScrollView>

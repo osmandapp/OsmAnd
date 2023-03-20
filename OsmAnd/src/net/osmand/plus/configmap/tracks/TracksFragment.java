@@ -48,7 +48,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
@@ -171,7 +172,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				.setTitleId(R.string.shared_string_import)
 				.setIcon(getContentIcon(R.drawable.ic_action_import_to))
 				.setOnClickListener(v -> importTracks()).create());
-		new PopUpMenuHelper.Builder(view, items, nightMode, R.layout.simple_popup_menu_item).show();
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.layoutId = R.layout.simple_popup_menu_item;
+		PopUpMenu.show(displayData);
 	}
 
 	private void setupTabLayout(@NonNull View view) {

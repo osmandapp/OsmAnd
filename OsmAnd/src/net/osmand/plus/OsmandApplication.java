@@ -85,6 +85,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -581,6 +582,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public DialogManager getDialogManager() {
 		return dialogManager;
+	}
+
+	@NonNull
+	public OfflineForecastHelper getOfflineForecastHelper() {
+		return weatherHelper.getOfflineForecastHelper();
 	}
 
 	public CommandPlayer getPlayer() {

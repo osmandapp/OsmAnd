@@ -4518,11 +4518,24 @@
     <string name="poi_recycling_glass_jars">Jarras de vidro</string>
     <string name="poi_recycling_marine_waste">Resíduos marinhos</string>
     <string name="poi_recycling_metal_packaging">Embalagens de metal</string>
-    <string name="poi_recycling_oil">Petróleo</string>
+    <string name="poi_recycling_oil">Óleo</string>
     <string name="poi_recycling_others">Outros</string>
     <string name="poi_recycling_plastic_bottle_tops">Tampas de garrafas de plástico</string>
     <string name="poi_recycling_polystyrene_foam">Espuma de poliestireno</string>
     <string name="poi_recycling_printer_inkjet_cartridges">Cartuchos de impressora de jato de tinta</string>
     <string name="poi_recycling_printer_toner_cartridges">Cartuchos de toner de impressora</string>
     <string name="poi_recycling_second_hand">Segunda mão</string>
+    <string name="poi_waste_oil">Óleo</string>
+    <string name="poi_waste_organic">Orgânico</string>
+    <string name="poi_waste_drugs">Drogas</string>
+    <string name="poi_waste_rubble">Entulho</string>
+    <string name="poi_recycling_pens">Canetas</string>
+    <string name="poi_recycling_bags">Sacos</string>
+    <string name="poi_recycling_pet">PET</string>
+    <string name="poi_recycling_pmd">PMD</string>
+    <string name="poi_recycling_small_metal">Pequenas peças de metal</string>
+    <string name="poi_recycling_toys">Brinquedos</string>
+    <string name="poi_waste_trash">Lixo</string>
+    <string name="poi_waste_dog_excrement">Excrementos de cães</string>
+    <string name="poi_waste_cigarettes">Cigarros</string>
 </resources>

@@ -5108,4 +5108,5 @@
     <string name="enable_3d_maps">3D-Karten aktivieren</string>
     <string name="test_heightmap">Höhenkarte testen</string>
     <string name="generate_hillshade_from_3d_maps">Erzeugen von gerasterten Reliefkarten aus 3D-Karten</string>
+    <string name="app_mode_climbing">Klettern</string>
 </resources>

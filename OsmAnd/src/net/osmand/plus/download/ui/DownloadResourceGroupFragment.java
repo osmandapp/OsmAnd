@@ -6,6 +6,7 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,6 +27,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
+import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
@@ -58,8 +62,12 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButtons;
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription;
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
+
 public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment implements DownloadEvents,
-		InAppPurchaseListener, OnChildClickListener {
+		InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
 	public static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
@@ -117,12 +125,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 		toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(activity)));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 		if (!openAsDialog()) {
 			toolbar.setVisibility(View.GONE);
 		}
@@ -428,6 +431,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 		reloadData();
 
 		DownloadActivity activity = getDownloadActivity();
+		app.getOfflineForecastHelper().registerRemoveLocalForecastListener(this);
 		String filter = activity.getFilterAndClear();
 		String filterCat = activity.getFilterCatAndClear();
 		String filterGroup = activity.getFilterGroupAndClear();
@@ -448,6 +452,13 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 			DownloadResourceGroupFragment regionDialogFragment = createInstance(filterGroup);
 			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		OsmandApplication app = getMyApplication();
+		app.getOfflineForecastHelper().unregisterRemoveLocalForecastListener(this);
 	}
 
 	private void reloadData() {
@@ -536,6 +547,11 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onRemoveLocalForecastEvent() {
+		listAdapter.notifyDataSetChanged();
 	}
 
 	@Override

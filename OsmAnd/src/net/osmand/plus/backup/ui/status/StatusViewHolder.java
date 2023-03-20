@@ -31,6 +31,7 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView icon;
 	private final TextView description;
 	private final ProgressBar progressBar;
+	private final LinearLayout progressContainer;
 	private final LinearLayout divider;
 
 	private final boolean nightMode;
@@ -45,6 +46,7 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 		icon = itemView.findViewById(R.id.icon);
 		description = itemView.findViewById(R.id.description);
 		progressBar = itemView.findViewById(R.id.progress_bar);
+		progressContainer = itemView.findViewById(R.id.progress_bar_container);
 		divider = itemView.findViewById(R.id.bottom_divider);
 	}
 
@@ -77,7 +79,7 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		AndroidUiHelper.updateVisibility(divider, false);
-		AndroidUiHelper.updateVisibility(progressBar, exportTask != null || preparing);
+		AndroidUiHelper.updateVisibility(progressContainer, exportTask != null || preparing);
 		AndroidUiHelper.updateVisibility(description, exportTask == null || preparing);
 	}
 }

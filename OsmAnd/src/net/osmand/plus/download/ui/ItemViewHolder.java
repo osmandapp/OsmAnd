@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -57,7 +58,13 @@ import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -66,12 +73,12 @@ import java.util.List;
 
 public class ItemViewHolder {
 
-	protected final TextView nameTextView;
-	protected final TextView descrTextView;
-	protected final ImageView leftImageView;
-	protected final ImageView rightImageButton;
-	protected final Button rightButton;
-	protected final ProgressBar progressBar;
+	protected final TextView tvName;
+	protected final TextView tvDesc;
+	protected final ImageView ivLeft;
+	protected final ImageView ivBtnRight;
+	protected final Button btnRight;
+	protected final ProgressBar pbProgress;
 
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
@@ -100,22 +107,23 @@ public class ItemViewHolder {
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
 		ASK_FOR_SRTM_PLUGIN_ENABLE,
 		ASK_FOR_FULL_VERSION_PURCHASE,
-		ASK_FOR_DEPTH_CONTOURS_PURCHASE
+		ASK_FOR_DEPTH_CONTOURS_PURCHASE,
+		ASK_FOR_WEATHER_PURCHASE
 	}
 
 
 	public ItemViewHolder(View view, DownloadActivity context) {
 		this.context = context;
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
-		progressBar = view.findViewById(R.id.progressBar);
-		rightButton = view.findViewById(R.id.rightButton);
-		leftImageView = view.findViewById(R.id.icon);
-		descrTextView = view.findViewById(R.id.description);
-		rightImageButton = view.findViewById(R.id.secondaryIcon);
-		nameTextView = view.findViewById(R.id.title);
+		pbProgress = view.findViewById(R.id.progressBar);
+		btnRight = view.findViewById(R.id.rightButton);
+		ivLeft = view.findViewById(R.id.icon);
+		tvDesc = view.findViewById(R.id.description);
+		ivBtnRight = view.findViewById(R.id.secondaryIcon);
+		tvName = view.findViewById(R.id.title);
 
 		ViewCompat.setAccessibilityDelegate(view, context.getAccessibilityAssistant());
-		ViewCompat.setAccessibilityDelegate(rightButton, context.getAccessibilityAssistant());
+		ViewCompat.setAccessibilityDelegate(btnRight, context.getAccessibilityAssistant());
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();
@@ -167,10 +175,11 @@ public class ItemViewHolder {
 
 	public void bindDownloadItem(DownloadItem downloadItem, String cityName) {
 		initAppStatusVariables();
+		OsmandApplication app = context.getMyApplication();
 		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
 		float progress = -1;
 		DownloadIndexesThread downloadThread = context.getDownloadThread();
-		if (downloadThread.getCurrentDownloadingItem() == downloadItem) {
+		if (downloadThread.isCurrentDownloading(downloadItem)) {
 			progress = downloadThread.getCurrentDownloadProgress();
 		}
 		boolean disabled = checkDisabledAndClickAction(downloadItem);
@@ -179,16 +188,16 @@ public class ItemViewHolder {
 		if (showTypeInName) {
 			name = downloadItem.getType().getString(context);
 		} else {
-			name = downloadItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName, useShortName);
+			name = downloadItem.getVisibleName(context, app.getRegions(), showParentRegionName, useShortName);
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
-		nameTextView.setText(text);
-		ViewCompat.setAccessibilityDelegate(rightImageButton, new AccessibilityAssistant(context) {
+		tvName.setText(text);
+		ViewCompat.setAccessibilityDelegate(ivBtnRight, new AccessibilityAssistant(context) {
 
 			@Override
 			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
 				super.onInitializeAccessibilityNodeInfo(host, info);
-				info.setContentDescription(context.getString(R.string.shared_string_download) + nameTextView.getText());
+				info.setContentDescription(context.getString(R.string.shared_string_download) + tvName.getText());
 				info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
 						AccessibilityNodeInfo.ACTION_CLICK, context.getString(R.string.shared_string_download)
 				));
@@ -197,9 +206,9 @@ public class ItemViewHolder {
 		});
 
 		if (!disabled) {
-			nameTextView.setTextColor(textColorPrimary);
+			tvName.setTextColor(textColorPrimary);
 		} else {
-			nameTextView.setTextColor(textColorSecondary);
+			tvName.setTextColor(textColorSecondary);
 		}
 		int color = textColorSecondary;
 		if (downloadItem.isDownloaded() && !isDownloading) {
@@ -207,31 +216,37 @@ public class ItemViewHolder {
 			color = context.getColor(colorId);
 		}
 		if (downloadItem.isDownloaded()) {
-			leftImageView.setImageDrawable(getContentIcon(context,
+			ivLeft.setImageDrawable(getContentIcon(context,
 					downloadItem.getType().getIconResource(), color));
 		} else if (disabled) {
-			leftImageView.setImageDrawable(getContentIcon(context,
+			ivLeft.setImageDrawable(getContentIcon(context,
 					downloadItem.getType().getIconResource(), textColorSecondary));
 		} else {
-			leftImageView.setImageDrawable(getContentIcon(context,
+			ivLeft.setImageDrawable(getThemedIcon(context,
 					downloadItem.getType().getIconResource()));
 		}
-		descrTextView.setTextColor(textColorSecondary);
+		tvDesc.setTextColor(textColorSecondary);
+
+		if (isWeatherItemInRemovingProcess(downloadItem)) {
+			bindAsWeatherItemInRemovingProcess();
+			return;
+		}
+
 		if (!isDownloading) {
-			progressBar.setVisibility(View.GONE);
-			descrTextView.setVisibility(View.VISIBLE);
+			pbProgress.setVisibility(View.GONE);
+			tvDesc.setVisibility(View.VISIBLE);
 			if (downloadItem instanceof CustomIndexItem && (((CustomIndexItem) downloadItem).getSubName(context) != null)) {
-				descrTextView.setText(((CustomIndexItem) downloadItem).getSubName(context));
+				tvDesc.setText(((CustomIndexItem) downloadItem).getSubName(context));
 			} else if ((downloadItem.getType() == DEPTH_CONTOUR_FILE
 					|| downloadItem.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
-				descrTextView.setText(context.getString(R.string.depth_contour_descr));
+				tvDesc.setText(context.getString(R.string.depth_contour_descr));
 			} else if ((downloadItem.getType() == SRTM_COUNTRY_FILE
 					|| downloadItem.getType() == HILLSHADE_FILE
 					|| downloadItem.getType() == SLOPE_FILE) && srtmDisabled) {
 				if (showTypeInName) {
-					descrTextView.setText("");
+					tvDesc.setText("");
 				} else {
-					descrTextView.setText(downloadItem.getType().getString(context));
+					tvDesc.setText(downloadItem.getType().getString(context));
 				}
 			} else if (downloadItem instanceof MultipleDownloadItem) {
 				MultipleDownloadItem item = (MultipleDownloadItem) downloadItem;
@@ -266,27 +281,29 @@ public class ItemViewHolder {
 							R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
 							item.getSizeDescription(context));
 				}
-				descrTextView.setText(fullDescription);
+				tvDesc.setText(fullDescription);
+			} else if (downloadItem instanceof WeatherIndexItem) {
+				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
+				pbProgress.setVisibility(View.VISIBLE);
+				tvDesc.setVisibility(View.GONE);
+				pbProgress.setIndeterminate(true);
+				app.getOfflineForecastHelper().calculateCacheSizeIfNeeded(weatherIndexItem,
+						() -> {
+							if (AndroidUtils.isActivityNotDestroyed(context)) {
+								setupCommonDescription(downloadItem);
+								pbProgress.setVisibility(View.GONE);
+								tvDesc.setVisibility(View.VISIBLE);
+								pbProgress.setIndeterminate(false);
+							}
+						});
 			} else {
-				String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
-				String type = downloadItem.getType().getString(context);
-				String size = downloadItem.getSizeDescription(context);
-				String addDescr = downloadItem.getAdditionalDescription(context);
-				if (addDescr != null) {
-					size += " " + addDescr;
-				}
-				String date = downloadItem.getDate(dateFormat, showRemoteDate);
-				String fullDescription = String.format(pattern, size, date);
-				if (showTypeInDesc) {
-					fullDescription = String.format(pattern, type, fullDescription);
-				}
-				descrTextView.setText(fullDescription);
+				setupCommonDescription(downloadItem);
 			}
 
 		} else {
-			progressBar.setVisibility(View.VISIBLE);
-			progressBar.setIndeterminate(progress < 0);
-			progressBar.setProgress((int) progress);
+			pbProgress.setVisibility(View.VISIBLE);
+			pbProgress.setIndeterminate(progress < 0);
+			pbProgress.setProgress((int) progress);
 
 			if (showProgressInDesc) {
 				double mb = downloadItem.getArchiveSizeMB();
@@ -301,10 +318,10 @@ public class ItemViewHolder {
 					fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_bold_point,
 							downloadItem.getType().getString(context), fullDescription);
 				}
-				descrTextView.setText(fullDescription);
-				descrTextView.setVisibility(View.VISIBLE);
+				tvDesc.setText(fullDescription);
+				tvDesc.setVisibility(View.VISIBLE);
 			} else {
-				descrTextView.setVisibility(View.GONE);
+				tvDesc.setVisibility(View.GONE);
 			}
 		}
 	}
@@ -313,12 +330,45 @@ public class ItemViewHolder {
 		if (cityItem.getIndexItem() != null) {
 			bindDownloadItem(cityItem.getIndexItem(), cityItem.getName());
 		} else {
-			nameTextView.setText(cityItem.getName());
-			nameTextView.setTextColor(textColorPrimary);
-			leftImageView.setImageDrawable(getContentIcon(context, R.drawable.ic_map));
-			descrTextView.setVisibility(View.GONE);
-			progressBar.setVisibility(View.GONE);
+			tvName.setText(cityItem.getName());
+			tvName.setTextColor(textColorPrimary);
+			ivLeft.setImageDrawable(getThemedIcon(context, R.drawable.ic_map));
+			tvDesc.setVisibility(View.GONE);
+			pbProgress.setVisibility(View.GONE);
 		}
+	}
+
+	private boolean isWeatherItemInRemovingProcess(@NonNull DownloadItem downloadItem) {
+		if (downloadItem instanceof WeatherIndexItem) {
+			OsmandApplication app = context.getMyApplication();
+			WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
+			OfflineForecastHelper forecastHelper = app.getOfflineForecastHelper();
+			return forecastHelper.isRemoveLocalForecastInProgress(weatherIndexItem.getRegionId());
+		}
+		return false;
+	}
+
+	private void bindAsWeatherItemInRemovingProcess() {
+		tvDesc.setVisibility(View.GONE);
+		pbProgress.setVisibility(View.VISIBLE);
+		pbProgress.setIndeterminate(true);
+		ivBtnRight.setImageDrawable(null);
+	}
+
+	private void setupCommonDescription(@NonNull DownloadItem downloadItem) {
+		String pattern = context.getString(R.string.ltr_or_rtl_combine_via_bold_point);
+		String size = downloadItem.getSizeDescription(context);
+		String addDesc = downloadItem.getAdditionalDescription(context);
+		if (addDesc != null) {
+			size += " " + addDesc;
+		}
+		String date = downloadItem.getDate(dateFormat, showRemoteDate);
+		String fullDescription = String.format(pattern, size, date);
+		if (showTypeInDesc) {
+			String type = downloadItem.getType().getString(context);
+			fullDescription = String.format(pattern, type, fullDescription);
+		}
+		tvDesc.setText(fullDescription);
 	}
 
 	private boolean checkDisabledAndClickAction(DownloadItem item) {
@@ -326,25 +376,25 @@ public class ItemViewHolder {
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
 		OnClickListener action = getRightButtonAction(item, clickAction);
 		if (clickAction != RightButtonAction.DOWNLOAD) {
-			rightButton.setText(R.string.shared_string_get);
-			rightButton.setVisibility(View.VISIBLE);
-			rightImageButton.setVisibility(View.GONE);
-			rightButton.setOnClickListener(action);
+			btnRight.setText(R.string.shared_string_get);
+			btnRight.setVisibility(View.VISIBLE);
+			ivBtnRight.setVisibility(View.GONE);
+			btnRight.setOnClickListener(action);
 		} else {
-			rightButton.setVisibility(View.GONE);
-			rightImageButton.setVisibility(View.VISIBLE);
+			btnRight.setVisibility(View.GONE);
+			ivBtnRight.setVisibility(View.VISIBLE);
 			boolean isDownloading = item.isDownloading(context.getDownloadThread());
 			if (isDownloading) {
-				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
-				rightImageButton.setContentDescription(context.getString(R.string.shared_string_cancel));
+				ivBtnRight.setImageDrawable(getThemedIcon(context, R.drawable.ic_action_remove_dark));
+				ivBtnRight.setContentDescription(context.getString(R.string.shared_string_cancel));
 			} else if (!item.hasActualDataToDownload()) {
-				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
-				rightImageButton.setContentDescription(context.getString(R.string.shared_string_more));
+				ivBtnRight.setImageDrawable(getThemedIcon(context, R.drawable.ic_overflow_menu_white));
+				ivBtnRight.setContentDescription(context.getString(R.string.shared_string_more));
 			} else {
-				rightImageButton.setImageDrawable(getContentIcon(context, getDownloadActionIconId(item)));
-				rightImageButton.setContentDescription(context.getString(R.string.shared_string_download));
+				ivBtnRight.setImageDrawable(getThemedIcon(context, getDownloadActionIconId(item)));
+				ivBtnRight.setContentDescription(context.getString(R.string.shared_string_download));
 			}
-			rightImageButton.setOnClickListener(action);
+			ivBtnRight.setOnClickListener(action);
 		}
 
 		return disabled;
@@ -369,13 +419,27 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((type == DEPTH_CONTOUR_FILE || type == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
+			} else if (item.getType() == DownloadActivityType.WEATHER_FORECAST
+					&& !PluginsHelper.isActive(WeatherPlugin.class)) {
+				action = RightButtonAction.ASK_FOR_WEATHER_PURCHASE;
+			} else if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+					|| item.getType() == DownloadActivityType.TRAVEL_FILE)
+					&& !Version.isPaidVersion(context.getMyApplication())) {
+				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
+			} else if ((item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
+				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 			}
 		}
 		return action;
 	}
 
 	public OnClickListener getRightButtonAction(DownloadItem item, RightButtonAction clickAction) {
-		if (clickAction != RightButtonAction.DOWNLOAD) {
+		if (isWeatherItemInRemovingProcess(item)) {
+			// empty listener
+			return v -> {
+			};
+		} else if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -383,6 +447,10 @@ public class ItemViewHolder {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
 							context.getMyApplication().logEvent("in_app_purchase_show_from_wiki_context_menu");
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WIKIPEDIA);
+							break;
+						case ASK_FOR_WEATHER_PURCHASE:
+							context.getMyApplication().logEvent("in_app_purchase_show_from_weather_context_menu");
+							ChoosePlanFragment.showInstance(context, OsmAndFeature.WEATHER);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.NAUTICAL);
@@ -431,23 +499,34 @@ public class ItemViewHolder {
 	}
 
 	protected void showContextMenu(View v,
-								   DownloadItem downloadItem,
-								   DownloadResourceGroup parentOptional) {
+	                               DownloadItem downloadItem,
+	                               DownloadResourceGroup parentOptional) {
 		OsmandApplication app = context.getMyApplication();
 		PopupMenu optionsMenu = new PopupMenu(context, v);
-		MenuItem item;
 
+		OnMenuItemClickListener removeItemClickListener = null;
 		List<File> downloadedFiles = downloadItem.getDownloadedFiles(app);
 		if (!Algorithms.isEmpty(downloadedFiles)) {
-			item = optionsMenu.getMenu().add(R.string.shared_string_remove)
-					.setIcon(getContentIcon(context, R.drawable.ic_action_remove_dark));
-			item.setOnMenuItemClickListener(_item -> {
+			removeItemClickListener = _item -> {
 				confirmRemove(downloadItem, downloadedFiles);
 				return true;
-			});
+			};
+		} else if (downloadItem instanceof WeatherIndexItem && downloadItem.isDownloaded()) {
+			removeItemClickListener = _item -> {
+				WeatherIndexItemViewHolder.confirmWeatherRemove(context, (WeatherIndexItem) downloadItem);
+				return true;
+			};
 		}
-		item = optionsMenu.getMenu().add(R.string.shared_string_download)
-				.setIcon(context.getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_import));
+		if (removeItemClickListener != null) {
+			optionsMenu.getMenu()
+					.add(R.string.shared_string_remove)
+					.setIcon(getThemedIcon(context, R.drawable.ic_action_remove_dark))
+					.setOnMenuItemClickListener(removeItemClickListener);
+		}
+
+		MenuItem item = optionsMenu.getMenu()
+				.add(R.string.shared_string_download)
+				.setIcon(getThemedIcon(context, R.drawable.ic_action_import));
 		item.setOnMenuItemClickListener(_item -> {
 			download(downloadItem, parentOptional);
 			return true;
@@ -511,7 +590,7 @@ public class ItemViewHolder {
 	}
 
 	private void confirmRemove(@NonNull DownloadItem downloadItem,
-							   @NonNull List<File> downloadedFiles) {
+	                           @NonNull List<File> downloadedFiles) {
 		OsmandApplication app = context.getMyApplication();
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 
@@ -536,7 +615,7 @@ public class ItemViewHolder {
 	}
 
 	private void remove(@NonNull LocalIndexType type,
-						@NonNull List<File> filesToDelete) {
+	                    @NonNull List<File> filesToDelete) {
 		OsmandApplication app = context.getMyApplication();
 		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(
 				context,
@@ -545,7 +624,7 @@ public class ItemViewHolder {
 		LocalIndexInfo[] params = new LocalIndexInfo[filesToDelete.size()];
 		for (int i = 0; i < filesToDelete.size(); i++) {
 			File file = filesToDelete.get(i);
-			params[i] = new LocalIndexInfo(type, file, false, app);
+			params[i] = new LocalIndexInfo(type, file, false);
 		}
 		removeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
@@ -576,11 +655,13 @@ public class ItemViewHolder {
 		} else if (downloadItem.getType() == DownloadActivityType.VOICE_FILE) {
 			type = downloadItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
 					: LocalIndexType.VOICE_DATA;
+		} else if (downloadItem.getType() == DownloadActivityType.WEATHER_FORECAST) {
+			type = LocalIndexType.TILES_DATA;
 		}
 		return type;
 	}
 
-	private Drawable getContentIcon(DownloadActivity context, int resourceId) {
+	private Drawable getThemedIcon(DownloadActivity context, int resourceId) {
 		return context.getMyApplication().getUIUtilities().getThemedIcon(resourceId);
 	}
 

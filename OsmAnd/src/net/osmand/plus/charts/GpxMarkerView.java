@@ -1,6 +1,6 @@
 package net.osmand.plus.charts;
 
-import static net.osmand.plus.track.helpers.GpxUiHelper.SECOND_IN_MILLIS;
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

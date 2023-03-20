@@ -512,6 +512,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	protected void addOnPreferencesScreen(@NonNull Preference preference) {
+		PreferenceScreen preferenceScreen = getPreferenceScreen();
+		preferenceScreen.addPreference(preference);
+	}
+
 	private void updatePreferencesScreen() {
 		if (getSelectedAppMode() != null && currentScreenType != null) {
 			int resId = currentScreenType.preferencesResId;
