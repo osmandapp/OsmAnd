@@ -500,7 +500,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					}
 					this.currentAnimatedRoute = currentAnimatedRoute;
 				}
-			} else if (straight) {
+			} else if (straight || routeUpdated) {
 				lastProjection = helper.getLastFixedLocation();
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			} else {

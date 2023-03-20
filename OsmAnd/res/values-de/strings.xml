@@ -5103,4 +5103,9 @@
     <string name="selected_value">Ausgewählter Wert</string>
     <string name="shared_string_nearest">Am nächsten</string>
     <string name="app_mode_moped">Moped</string>
+    <string name="generate_slope_from_3d_maps">Erzeugen von Hangneigungskarten aus 3D-Karten</string>
+    <string name="disable_vertex_hillshade_3d">Vertex-Relief in 3D deaktivieren</string>
+    <string name="enable_3d_maps">3D-Karten aktivieren</string>
+    <string name="test_heightmap">Höhenkarte testen</string>
+    <string name="generate_hillshade_from_3d_maps">Erzeugen von gerasterten Reliefkarten aus 3D-Karten</string>
 </resources>

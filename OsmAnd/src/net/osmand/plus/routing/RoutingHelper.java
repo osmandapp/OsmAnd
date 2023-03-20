@@ -450,8 +450,8 @@ public class RoutingHelper {
 				}
 				// 5. Update Voice router
 				// Do not update in route planning mode
+				boolean inRecalc = (calculateRoute || isRouteBeingCalculated());
 				if (isFollowingMode) {
-					boolean inRecalc = (calculateRoute || isRouteBeingCalculated());
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
 						voiceRouterStopped = false;
@@ -463,7 +463,7 @@ public class RoutingHelper {
 				}
 
 				// calculate projection of current location
-				if (currentRoute > 0) {
+				if (currentRoute > 0 && !inRecalc) {
 					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1),
 							routeNodes.get(currentRoute));
 					if (settings.APPROXIMATE_BEARING.get()) {

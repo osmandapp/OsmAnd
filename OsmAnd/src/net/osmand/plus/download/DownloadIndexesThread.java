@@ -1,8 +1,5 @@
 package net.osmand.plus.download;
 
-import static net.osmand.plus.Version.FULL_VERSION_NAME;
-import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,11 +11,9 @@ import android.os.Build;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
@@ -32,6 +27,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -46,6 +42,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
+
+import static net.osmand.plus.Version.FULL_VERSION_NAME;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 
 @SuppressLint({"NewApi", "DefaultLocale"})
 public class DownloadIndexesThread {
@@ -494,6 +497,7 @@ public class DownloadIndexesThread {
 							break;
 						}
 						setTag(item);
+						boolean updatingFile = item.isDownloaded();
 						boolean success = downloadFile(item, filesToReindex, forceWifi);
 						if (success) {
 							if (DownloadActivityType.isCountedInDownloads(item)) {
@@ -505,6 +509,9 @@ public class DownloadIndexesThread {
 										+ IndexConstants.BINARY_MAP_INDEX_EXT;
 								File oldFile = new File(folder, fileName);
 								Algorithms.removeAllFiles(oldFile);
+							}
+							if (item.getType() == DownloadActivityType.GEOTIFF_FILE) {
+								updateHeightmap(updatingFile, item.getTargetFile(app).getAbsolutePath());
 							}
 							File bf = item.getBackupFile(app);
 							if (bf.exists()) {
@@ -585,6 +592,17 @@ public class DownloadIndexesThread {
 				return warnings.get(0);
 			}
 			return null;
+		}
+
+		private void updateHeightmap(boolean overwriteExistingFile, @NonNull String filePath) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				if (overwriteExistingFile) {
+					mapRendererContext.removeCachedHeightmapTiles(filePath);
+				} else {
+					mapRendererContext.updateCachedHeightmapTiles();
+				}
+			}
 		}
 
 		@Override

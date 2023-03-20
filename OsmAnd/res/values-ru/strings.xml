@@ -5040,7 +5040,7 @@
     <string name="no_visible_tracks_description">Выберите треки для отображения на карте.</string>
     <string name="shared_string_inches">дюймы</string>
     <string name="approximate_bearing">Приблизительный пеленг</string>
-    <string name="approximate_bearing_descr">Рассчитать пеленг, если он не получен от устройства</string>
+    <string name="approximate_bearing_descr">Определить пеленг на основе навигационного маршрута</string>
     <string name="shared_string_kilograms">килограммы</string>
     <string name="shared_string_apply_changes">Применить изменения</string>
     <string name="no_visible_tracks">Нет треков на карте</string>
@@ -5100,4 +5100,6 @@
     <string name="sort_duration_ascending">Сначала менее продолжительные</string>
     <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
     <string name="app_mode_moped">Мопед</string>
+    <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
+    <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D карт</string>
 </resources>

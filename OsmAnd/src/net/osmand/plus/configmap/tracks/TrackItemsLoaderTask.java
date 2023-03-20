@@ -8,13 +8,13 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.myplaces.ui.LoadGpxInfosTask;
+import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -53,8 +53,9 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	protected Void doInBackground(Void... voids) {
 		File dir = app.getAppPath(GPX_INDEX_DIR);
 		if (dir.exists() && dir.canRead()) {
+			TracksSortByMode sortByMode = app.getSettings().TRACKS_SORT_BY_MODE.get();
 			List<TrackItem> progress = new ArrayList<>();
-			loadGPXFolder(dir, progress, "");
+			loadGPXFolder(dir, sortByMode, progress, "");
 
 			if (!progress.isEmpty()) {
 				publishProgress(progress.toArray(new TrackItem[0]));
@@ -63,8 +64,9 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		return null;
 	}
 
-	private void loadGPXFolder(@NonNull File dir, @NonNull List<TrackItem> progress, @NonNull String subfolder) {
-		File[] listFiles = dir.listFiles();
+	private void loadGPXFolder(@NonNull File dir, @NonNull TracksSortByMode sortByMode,
+	                           @NonNull List<TrackItem> progress, @NonNull String subfolder) {
+		File[] listFiles = LoadGpxInfosTask.listFilesSorted(sortByMode, dir);
 		if (Algorithms.isEmpty(listFiles)) {
 			return;
 		}
@@ -72,7 +74,7 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			String name = file.getName();
 			if (file.isDirectory()) {
 				String sub = subfolder.length() == 0 ? name : subfolder + "/" + name;
-				loadGPXFolder(file, progress, sub);
+				loadGPXFolder(file, sortByMode, progress, sub);
 			} else if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));

@@ -439,28 +439,52 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx) {
-		return getFormattedSpeed(metersPerSeconds, ctx, ctx.getSettings().getApplicationMode());
+	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication app) {
+		return getFormattedSpeedValue(metersPerSeconds, app).format(app);
 	}
 
 	@NonNull
-	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication ctx, @NonNull ApplicationMode mode) {
-		return getFormattedSpeedValue(metersPerSeconds, ctx, mode).format(ctx);
+	public static String getFormattedSpeed(float metersPerSeconds, @NonNull OsmandApplication app, boolean hasFastSpeed, SpeedConstants speedFormat) {
+		return getFormattedSpeedValue(metersPerSeconds, app, hasFastSpeed, speedFormat).format(app);
 	}
 
 	@NonNull
-	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication ctx) {
-		return getFormattedSpeedValue(metersPerSeconds, ctx, ctx.getSettings().getApplicationMode());
+	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app) {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		return getFormattedSpeedValue(metersPerSeconds, app, mode.hasFastSpeed(), app.getSettings().SPEED_SYSTEM.getModeValue(mode));
 	}
 
 	@NonNull
-	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
-		SpeedConstants mc = app.getSettings().SPEED_SYSTEM.getModeValue(mode);
+	public static float getMetersInModeUnit(@NonNull OsmandApplication app, @NonNull SpeedConstants speedFormat) {
+		float metersInUnit = 0f;
+		switch (speedFormat) {
+			case MILES_PER_HOUR:
+			case MINUTES_PER_MILE:
+				metersInUnit = METERS_IN_ONE_MILE;
+				break;
+			case KILOMETERS_PER_HOUR:
+			case MINUTES_PER_KILOMETER:
+				metersInUnit = METERS_IN_KILOMETER;
+				break;
+			case METERS_PER_SECOND:
+				metersInUnit = 1f;
+				break;
+			case NAUTICALMILES_PER_HOUR:
+				metersInUnit = METERS_IN_ONE_NAUTICALMILE;
+				break;
+			default:
+				break;
+		}
+		return metersInUnit;
+	}
+
+	@NonNull
+	public static FormattedValue getFormattedSpeedValue(float metersPerSeconds, @NonNull OsmandApplication app, boolean hasFastSpeed, SpeedConstants mc) {
 		String unit = mc.toShortString(app);
 		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
-			if (kmh >= 20 || mode.hasFastSpeed()) {
+			if (kmh >= 20 || hasFastSpeed) {
 				return getFormattedSpeed(Math.round(kmh), unit, app);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
@@ -468,7 +492,7 @@ public class OsmAndFormatter {
 			return getFormattedLowSpeed(kmh10 / 10f, unit, app);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-			if (mph >= 20 || mode.hasFastSpeed()) {
+			if (mph >= 20 || hasFastSpeed) {
 				return getFormattedSpeed(Math.round(mph), unit, app);
 			} else {
 				int mph10 = Math.round(mph * 10f);
@@ -476,7 +500,7 @@ public class OsmAndFormatter {
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
-			if (mph >= 20 || mode.hasFastSpeed()) {
+			if (mph >= 20 || hasFastSpeed) {
 				return getFormattedSpeed(Math.round(mph), unit, app);
 			} else {
 				int mph10 = Math.round(mph * 10f);
@@ -512,6 +536,18 @@ public class OsmAndFormatter {
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = Math.round(metersPerSeconds * 10f);
 			return getFormattedLowSpeed(kmh10 / 10f, metersPerSecond, app);
+		}
+	}
+
+	@NonNull
+	public static SpeedConstants getSpeedModeForPaceMode(SpeedConstants originalMode) {
+		switch (originalMode) {
+			case MINUTES_PER_KILOMETER:
+				return SpeedConstants.KILOMETERS_PER_HOUR;
+			case MINUTES_PER_MILE:
+				return SpeedConstants.MILES_PER_HOUR;
+			default:
+				return originalMode;
 		}
 	}
 
@@ -569,7 +605,7 @@ public class OsmAndFormatter {
 
 		MessageFormat messageFormat = new MessageFormat("{0}");
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
-		String formattedValue = messageFormat.format(new Object[] {value})
+		String formattedValue = messageFormat.format(new Object[]{value})
 				.replace('\n', ' ');
 		return new FormattedValue(formattedValue, unit);
 	}
@@ -837,7 +873,7 @@ public class OsmAndFormatter {
 		public String format(@NonNull Context context) {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
-					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
+					: new MessageFormat("{0}{1}").format(new Object[]{value, unit});
 		}
 	}
 

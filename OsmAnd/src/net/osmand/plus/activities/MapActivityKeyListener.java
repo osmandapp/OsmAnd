@@ -91,7 +91,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 		} else if (keyCode == KeyEvent.KEYCODE_C) {
 			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 		} else if (keyCode == KeyEvent.KEYCODE_D) {
-			mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+			mapActivity.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
 		} else if (keyCode == KeyEvent.KEYCODE_MINUS) {
 			osmandMap.changeZoom(-1);
 			return true;

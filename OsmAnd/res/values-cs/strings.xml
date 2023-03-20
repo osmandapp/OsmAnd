@@ -4813,7 +4813,7 @@
     <string name="developer_widgets">Widgety pro vývojáře</string>
     <string name="quick_action_map_center_widget_descr">Přepínač pro zobrazení nebo skrytí widgetu středu mapy na mapě.</string>
     <string name="quick_action_current_location_widget_descr">Přepínač pro zobrazení nebo skrytí widgetu aktuální polohy na mapě.</string>
-    <string name="coordinates_widget_map_center">Souřadnice: střed mapy</string>
+    <string name="coordinates_widget_map_center">Počet řádků</string>
     <string name="shared_string_switch_mode">Režim přepínání</string>
     <string name="click_on_widget">Klikněte na widget</string>
     <string name="last_synchronized">Poslední synchronizace</string>
@@ -4841,7 +4841,7 @@
     <string name="altitude_correction">Korekce nadmořské výšky</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nevyjíždějte mimo sjezdovky</string>
     <string name="map_marker_average_speed_desc">Zadejte časový interval pro průměrování rychlosti (používá se pro odhad času příjezdu).</string>
-    <string name="map_widget_zoom_level">Úroveň přiblížení</string>
+    <string name="map_widget_zoom_level">Zoom level</string>
     <string name="external_sensors_plugin_name">Externí senzory</string>
     <string name="external_sensors_plugin_description">Přístup k externím snímačům, které snímají např. srdeční tep, rychlost jízdy na kole, výkon nebo kadenci. Vyžaduje, aby vaše zařízení bylo připojeno k příslušným snímačům prostřednictvím protokolu bezdrátové osobní sítě ANT+.</string>
     <string name="marker_1st">První značka</string>

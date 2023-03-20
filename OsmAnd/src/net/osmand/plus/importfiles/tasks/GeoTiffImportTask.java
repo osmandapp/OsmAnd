@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 
@@ -10,10 +10,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.importfiles.ImportHelper;
 
 import java.io.File;
 
-class GeoTiffImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class GeoTiffImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String targetFileName;

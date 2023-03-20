@@ -4836,7 +4836,7 @@
     <string name="map_widget_altitude_desc">Mostra a altitude da geolocalização atual ou a elevação do centro do mapa atual</string>
     <string name="terms_of_service_desc">Ao descarregar mapas, concorda com %1$s e %2$s.</string>
     <string name="map_widget_rendering_fps">FPS da renderização do mapa</string>
-    <string name="map_center_widget">Coordenadas:centro do mapa</string>
+    <string name="map_center_widget">Coordenadas: centro do mapa</string>
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Elevação: centro do mapa</string>
     <string name="map_widget_altitude_current_location_desc">Mostra a altitude acima do nível do mar da geolocalização atual.</string>
@@ -5099,4 +5099,6 @@
     <string name="selected_value">Valor selecionado</string>
     <string name="shared_string_nearest">Mais perto</string>
     <string name="app_mode_moped">Ciclomotor</string>
+    <string name="enable_3d_maps">Ativar mapas de 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombras de relevo de vértice em 3D</string>
 </resources>

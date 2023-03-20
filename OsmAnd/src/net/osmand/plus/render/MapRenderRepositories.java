@@ -30,10 +30,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.layers.MapVectorLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -58,7 +56,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.TLongList;
@@ -116,20 +113,17 @@ public class MapRenderRepositories {
 	private RenderingContext currentRenderingContext;
 	private RenderingContext visibleRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
-	private OsmandSettings prefs;
+	private OsmandSettings settings;
 
 	public MapRenderRepositories(OsmandApplication context) {
 		this.context = context;
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
-		prefs = context.getSettings();
+		settings = context.getSettings();
 
-		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
-			@Override
-			public void onOsmAndSettingsCustomized() {
-				prefs = MapRenderRepositories.this.context.getSettings();
-				clearCache();
-			}
+		OsmAndAppCustomizationListener customizationListener = () -> {
+			settings = MapRenderRepositories.this.context.getSettings();
+			clearCache();
 		};
 		context.getAppCustomization().addListener(customizationListener);
 	}
@@ -380,17 +374,17 @@ public class MapRenderRepositories {
 							}
 							ids.add(r.getId());
 						}
-						int[] coordinantes = new int[r.getPointsLength() * 2];
+						int[] coordinates = new int[r.getPointsLength() * 2];
 						int[] roTypes = r.getTypes();
 						for(int k = 0; k < roTypes.length; k++) {
 							int type = roTypes[k];
 							registerMissingType(nmi, r, type);
 						}
-						for(int k = 0; k < coordinantes.length/2; k++ ) {
-							coordinantes[2 * k] = r.getPoint31XTile(k);
-							coordinantes[2 * k + 1] = r.getPoint31YTile(k);
+						for(int k = 0; k < coordinates.length/2; k++ ) {
+							coordinates[2 * k] = r.getPoint31XTile(k);
+							coordinates[2 * k + 1] = r.getPoint31YTile(k);
 						}
-						BinaryMapDataObject mo = new BinaryMapDataObject( r.getId(), coordinantes, new int[0][],
+						BinaryMapDataObject mo = new BinaryMapDataObject( r.getId(), coordinates, new int[0][],
 								RenderingRulesStorage.LINE_RULES, true, roTypes, null, 0,0);
 						TIntObjectHashMap<String> names = r.getNames();
 						if(names != null) {
@@ -672,16 +666,16 @@ public class MapRenderRepositories {
 
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-			prefs.getCustomRenderProperty("appMode").setModeValue(prefs.APPLICATION_MODE.get(),
+			settings.getCustomRenderProperty("appMode").setModeValue(settings.APPLICATION_MODE.get(),
 					app.getSettings().APPLICATION_MODE.get().getStringKey());
-			prefs.getCustomRenderProperty("baseAppMode").setModeValue(prefs.APPLICATION_MODE.get(),
+			settings.getCustomRenderProperty("baseAppMode").setModeValue(settings.APPLICATION_MODE.get(),
 					app.getSettings().APPLICATION_MODE.get().getParent() != null
-							? prefs.APPLICATION_MODE.get().getParent().getStringKey()
-							: prefs.APPLICATION_MODE.get().getStringKey());
+							? settings.APPLICATION_MODE.get().getParent().getStringKey()
+							: settings.APPLICATION_MODE.get().getStringKey());
 			RenderingRuleSearchRequest renderingReq = getSearchRequestWithAppliedCustomRules(storage, nightMode);
 
 			renderingReq.saveState();
-			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
+			NativeOsmandLibrary nativeLib = !settings.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
 
 
 			// calculate data box
@@ -705,7 +699,7 @@ public class MapRenderRepositories {
 				renderedState = 0;
 				boolean loaded;
 				if(nativeLib != null) {
-					cObjects = new LinkedList<BinaryMapDataObject>();
+					cObjects = new LinkedList<>();
 					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
 				} else {
 					cNativeObjects = null;
@@ -822,7 +816,7 @@ public class MapRenderRepositories {
 			// keep cache
 			// this.prevBmp = null;
 			this.prevBmpLocation = null;
-			if (prefs.DEBUG_RENDERING_INFO.get() && PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
+			if (settings.DEBUG_RENDERING_INFO.get() && PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;
@@ -860,38 +854,37 @@ public class MapRenderRepositories {
 		// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 		RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
 		renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
-		for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-			if (customProp.isBoolean()) {
-				if(customProp.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
-					renderingReq.setBooleanFilter(customProp, true);
-				} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
-					renderingReq.setBooleanFilter(customProp, false);
+		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
+			String attrName = property.getAttrName();
+			if (property.isBoolean()) {
+				if (attrName.equals(RenderingRuleStorageProperties.A_ENGINE_V1)) {
+					renderingReq.setBooleanFilter(property, true);
+				} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(property.getCategory())) {
+					renderingReq.setBooleanFilter(property, false);
 				} else {
-					CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
-					renderingReq.setBooleanFilter(customProp, pref.get());
+					renderingReq.setBooleanFilter(property, settings.getRenderBooleanPropertyValue(attrName));
 				}
-			} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(customProp.getCategory())) {
-				if (customProp.isString()) {
-					renderingReq.setStringFilter(customProp, "");
+			} else if (RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(property.getCategory())) {
+				if (property.isString()) {
+					renderingReq.setStringFilter(property, "");
 				} else {
-					renderingReq.setIntFilter(customProp, 0);
+					renderingReq.setIntFilter(property, 0);
 				}
 			} else {
-				CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
-				String res = settings.get();
-				if (!Algorithms.isEmpty(res)) {
-					if (customProp.isString()) {
-						renderingReq.setStringFilter(customProp, res);
+				String value = settings.getRenderPropertyValue(attrName);
+				if (!Algorithms.isEmpty(value)) {
+					if (property.isString()) {
+						renderingReq.setStringFilter(property, value);
 					} else {
 						try {
-							renderingReq.setIntFilter(customProp, Integer.parseInt(res));
+							renderingReq.setIntFilter(property, Integer.parseInt(value));
 						} catch (NumberFormatException e) {
 							e.printStackTrace();
 						}
 					}
 				} else {
-					if (customProp.isString()) {
-						renderingReq.setStringFilter(customProp, "");
+					if (property.isString()) {
+						renderingReq.setStringFilter(property, "");
 					}
 				}
 			}
@@ -926,8 +919,8 @@ public class MapRenderRepositories {
 	// returns true if coastlines were added!
 	private boolean processCoastlines(List<BinaryMapDataObject> coastLines, int leftX, int rightX, 
 			int bottomY, int topY, int zoom, boolean doNotAddIfIncompleted, boolean addDebugIncompleted, List<BinaryMapDataObject> result) {
-		List<TLongList> completedRings = new ArrayList<TLongList>();
-		List<TLongList> uncompletedRings = new ArrayList<TLongList>();
+		List<TLongList> completedRings = new ArrayList<>();
+		List<TLongList> uncompletedRings = new ArrayList<>();
 		MapIndex mapIndex = null;
 		long dbId = 0;
 		for (BinaryMapDataObject o : coastLines) {
@@ -1058,9 +1051,9 @@ public class MapRenderRepositories {
 
 	private void unifyIncompletedRings(List<TLongList> toProcces, List<TLongList> completedRings, int leftX, int rightX, int bottomY, int topY, long dbId, int zoom) {
 		int mask = 0xffffffff;
-		List<TLongList> uncompletedRings = new ArrayList<TLongList>(toProcces);
+		List<TLongList> uncompletedRings = new ArrayList<>(toProcces);
 		toProcces.clear();
-		Set<Integer> nonvisitedRings = new LinkedHashSet<Integer>();
+		Set<Integer> nonVisitedRings = new LinkedHashSet<>();
 		for (int j = 0; j < uncompletedRings.size(); j++) {
 			TLongList i = uncompletedRings.get(j);
 			int x = (int) (i.get(i.size() - 1) >> 32);
@@ -1091,12 +1084,12 @@ public class MapRenderRepositories {
 				}
 				toProcces.add(i);
 			} else {
-				nonvisitedRings.add(j);
+				nonVisitedRings.add(j);
 			}
 		}
 		for (int j = 0; j < uncompletedRings.size(); j++) {
 			TLongList i = uncompletedRings.get(j);
-			if (!nonvisitedRings.contains(j)) {
+			if (!nonVisitedRings.contains(j)) {
 				continue;
 			}
 
@@ -1122,7 +1115,7 @@ public class MapRenderRepositories {
 
 					// BEGIN find closest nonvisited start (including current)
 					int mindiff = UNDEFINED_MIN_DIFF;
-					for (Integer ni : nonvisitedRings) {
+					for (Integer ni : nonVisitedRings) {
 						TLongList cni = uncompletedRings.get(ni);
 						int csx = (int) (cni.get(0) >> 32);
 						int csy = (int) (cni.get(0) & mask);
@@ -1189,11 +1182,11 @@ public class MapRenderRepositories {
 					// it is impossible (current start should always be found)
 				} else if (nextRingIndex == j) {
 					i.add(i.get(0));
-					nonvisitedRings.remove(j);
+					nonVisitedRings.remove(j);
 					break;
 				} else {
 					i.addAll(uncompletedRings.get(nextRingIndex));
-					nonvisitedRings.remove(nextRingIndex);
+					nonVisitedRings.remove(nextRingIndex);
 					// get last point and start again going clockwise
 					x = (int) (i.get(i.size() - 1) >> 32);
 					y = (int) (i.get(i.size() - 1) & mask);

@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.getSettingsToOperate;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.utils.FileUtils;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;
