@@ -414,9 +414,9 @@ POIの更新は利用できません</string>
     <string name="choose_intersected_street">交差する通りを選択</string>
     <string name="Closest_Amenities">いちばん近い施設</string>
     <string name="app_mode_default">地図閲覧</string>
-    <string name="app_mode_car">乗用車</string>
-    <string name="app_mode_bicycle">自転車</string>
-    <string name="app_mode_pedestrian">徒歩</string>
+    <string name="app_mode_car">車移動</string>
+    <string name="app_mode_bicycle">二輪車移動</string>
+    <string name="app_mode_pedestrian">徒歩移動</string>
     <string name="position_on_map_center">中央</string>
     <string name="position_on_map_bottom">下</string>
     <string name="navigate_point_top_text">選択した形式で緯度と経度を入力 (D - 度, M - 分, S - 秒)</string>
@@ -5104,4 +5104,5 @@ POIの更新は利用できません</string>
     <string name="simulation_position_description">場所を変更する際のもととなる経路ファイルを選択します。</string>
     <string name="approximate_bearing_descr">たどっているナビゲーションルートから方位を導き出します。</string>
     <string name="shared_string_inches"/>
+    <string name="app_mode_climbing">クライミング</string>
 </resources>
