@@ -68,19 +68,19 @@ public class OsmAndLocationSimulation {
 		return gpxFile;
 	}
 
-	public void addSimulationListener(LocationSimulationListener listener){
-		if(!listeners.contains(listener)){
+	public void addSimulationListener(LocationSimulationListener listener) {
+		if (!listeners.contains(listener)) {
 			listeners.add(listener);
 		}
 	}
 
-	public void removeSimulationListener(LocationSimulationListener listener){
+	public void removeSimulationListener(LocationSimulationListener listener) {
 		listeners.remove(listener);
 	}
 
-	private void notifyOnStopListeners(boolean simulating){
-		for(LocationSimulationListener listener : listeners){
-			listener.onSimulationNewState(simulating);
+	private void notifyListeners(boolean simulating) {
+		for (LocationSimulationListener listener : listeners) {
+			listener.onSimulationStateChanged(simulating);
 		}
 	}
 
@@ -270,7 +270,7 @@ public class OsmAndLocationSimulation {
 			}
 
 		};
-		notifyOnStopListeners(true);
+		notifyListeners(true);
 		routeAnimation.start();
 	}
 
@@ -344,7 +344,7 @@ public class OsmAndLocationSimulation {
 	public void stop() {
 		gpxFile = null;
 		routeAnimation = null;
-		notifyOnStopListeners(false);
+		notifyListeners(false);
 	}
 
 	public static SimulatedLocation middleLocation(SimulatedLocation start, SimulatedLocation end, float meters) {
@@ -492,7 +492,7 @@ public class OsmAndLocationSimulation {
 		}
 	}
 
-	public interface LocationSimulationListener{
-		void onSimulationNewState(boolean simulating);
+	public interface LocationSimulationListener {
+		void onSimulationStateChanged(boolean simulating);
 	}
 }

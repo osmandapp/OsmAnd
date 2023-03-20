@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,7 +60,7 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	private boolean nightMode;
 	private boolean usedOnMap;
-	private OsmAndLocationSimulation.LocationSimulationListener simulationListener;
+	private LocationSimulationListener simulationListener;
 
 	public void setGpxFile(@Nullable GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
