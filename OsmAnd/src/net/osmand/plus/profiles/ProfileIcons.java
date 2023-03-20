@@ -24,6 +24,7 @@ public enum ProfileIcons {
 	HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse"),
 	PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark"),
 	TREKKING(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark"),
+	CLIMBING(R.drawable.ic_action_hill_climbing, R.string.app_mode_climbing, "ic_action_hill_climbing"),
 	SKIING(R.drawable.ic_action_skiing, R.string.app_mode_skiing, "ic_action_skiing"),
 	SAIL_BOAT(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark"),
 	AIRCRAFT(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft"),

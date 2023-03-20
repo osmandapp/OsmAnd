@@ -27,20 +27,29 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	private static final String TAG = "SurfaceRenderer";
 
+	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.25;
+
+	private final CarContext carContext;
 	private final CarSurfaceView surfaceView;
 	private OsmandMapTileView mapView;
 
 	@Nullable
-	Surface mSurface;
+	private Surface surface;
 	@Nullable
-	Rect mVisibleArea;
+	private SurfaceContainer surfaceContainer;
+
 	@Nullable
-	Rect mStableArea;
+	private Rect visibleArea;
+	@Nullable
+	private Rect stableArea;
 
 	private boolean darkMode;
-	private final CarContext mCarContext;
 
-	SurfaceRendererCallback callback;
+	private SurfaceRendererCallback callback;
+
+	public void setCallback(@Nullable SurfaceRendererCallback callback) {
+		this.callback = callback;
+	}
 
 	interface SurfaceRendererCallback {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
@@ -51,12 +60,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		public void onSurfaceAvailable(@NonNull SurfaceContainer surfaceContainer) {
 			synchronized (SurfaceRenderer.this) {
 				Log.i(TAG, "Surface available " + surfaceContainer);
-				if (mSurface != null) {
-					mSurface.release();
+				if (surface != null) {
+					surface.release();
 				}
-				mSurface = surfaceContainer.getSurface();
+				SurfaceRenderer.this.surfaceContainer = surfaceContainer;
+				surface = surfaceContainer.getSurface();
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
-				darkMode = mCarContext.isDarkMode();
+				darkMode = carContext.isDarkMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
 					mapView.setupRenderingView();
@@ -68,9 +78,21 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		@Override
 		public void onVisibleAreaChanged(@NonNull Rect visibleArea) {
 			synchronized (SurfaceRenderer.this) {
-				Log.i(TAG, "Visible area changed " + mSurface + ". stableArea: "
-						+ mStableArea + " visibleArea:" + visibleArea);
-				mVisibleArea = visibleArea;
+				Log.i(TAG, "Visible area changed " + surface + ". stableArea: "
+						+ stableArea + " visibleArea:" + visibleArea);
+				SurfaceRenderer.this.visibleArea = visibleArea;
+				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+				if (!visibleArea.isEmpty() && mapView != null) {
+					int visibleAreaWidth = visibleArea.width();
+					int containerWidth = surfaceContainer.getWidth();
+
+					float ratioX = 0;
+					if ((float) containerWidth / visibleAreaWidth > VISIBLE_AREA_MIN_DETECTION_SIZE) {
+						int centerX = visibleArea.centerX();
+						ratioX = (float) centerX / containerWidth;
+					}
+					mapView.setCustomMapRatio(ratioX, 0);
+				}
 				renderFrame();
 			}
 		}
@@ -78,9 +100,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		@Override
 		public void onStableAreaChanged(@NonNull Rect stableArea) {
 			synchronized (SurfaceRenderer.this) {
-				Log.i(TAG, "Stable area changed " + mSurface + ". stableArea: "
-						+ mStableArea + " visibleArea:" + mVisibleArea);
-				mStableArea = stableArea;
+				Log.i(TAG, "Stable area changed " + surface + ". stableArea: "
+						+ stableArea + " visibleArea:" + visibleArea);
+				SurfaceRenderer.this.stableArea = stableArea;
 				renderFrame();
 			}
 		}
@@ -89,12 +111,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		public void onSurfaceDestroyed(@NonNull SurfaceContainer surfaceContainer) {
 			synchronized (SurfaceRenderer.this) {
 				Log.i(TAG, "Surface destroyed");
-				if (mSurface != null) {
-					mSurface.release();
-					mSurface = null;
+				if (surface != null) {
+					surface.release();
+					surface = null;
 				}
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
+					mapView.restoreMapRatio();
 					mapView.setupRenderingView();
 				}
 			}
@@ -125,15 +148,15 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	};
 
 	public SurfaceRenderer(@NonNull CarContext carContext, @NonNull Lifecycle lifecycle) {
-		mCarContext = carContext;
-		surfaceView = new CarSurfaceView(mCarContext, this);
+		this.carContext = carContext;
+		this.surfaceView = new CarSurfaceView(carContext, this);
 		lifecycle.addObserver(this);
 	}
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		Log.i(TAG, "SurfaceRenderer created");
-		mCarContext.getCarService(AppManager.class).setSurfaceCallback(mSurfaceCallback);
+		carContext.getCarService(AppManager.class).setSurfaceCallback(mSurfaceCallback);
 	}
 
 	/**
@@ -150,7 +173,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		synchronized (this) {
 			float x = focusX;
 			float y = focusY;
-			Rect visibleArea = mVisibleArea;
+			Rect visibleArea = this.visibleArea;
 			if (visibleArea != null) {
 				// If a focal point value is negative, use the center point of the visible area.
 				if (x < 0) {
@@ -190,7 +213,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 
 	@NonNull
 	private OsmandApplication getApp() {
-		return (OsmandApplication) mCarContext.getApplicationContext();
+		return (OsmandApplication) carContext.getApplicationContext();
 	}
 
 	public OsmandMapTileView getMapView() {
@@ -199,7 +222,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
-		if (mSurface != null) {
+		if (surface != null) {
 			mapView.setView(surfaceView);
 		}
 	}
@@ -221,15 +244,15 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	}
 
 	public boolean hasSurface() {
-		return mSurface != null && mSurface.isValid();
+		return surface != null && surface.isValid();
 	}
 
 	public void renderFrame() {
-		if (mapView == null || mSurface == null || !mSurface.isValid()) {
+		if (mapView == null || surface == null || !surface.isValid()) {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		DrawSettings drawSettings = new DrawSettings(mCarContext.isDarkMode(), false);
+		DrawSettings drawSettings = new DrawSettings(carContext.isDarkMode(), false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		try {
 			renderFrame(tileBox, drawSettings);
@@ -239,27 +262,27 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	}
 
 	public void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {
-		if (mapView == null || mSurface == null || !mSurface.isValid()) {
+		if (mapView == null || surface == null || !surface.isValid()) {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		Canvas canvas = mSurface.lockCanvas(null);
+		Canvas canvas = surface.lockCanvas(null);
 		try {
-			boolean newDarkMode = mCarContext.isDarkMode();
+			boolean newDarkMode = carContext.isDarkMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
 			SurfaceRendererCallback callback = this.callback;
 			if (callback != null) {
-				Rect visibleArea = this.mVisibleArea;
-				Rect stableArea = this.mStableArea;
+				Rect visibleArea = this.visibleArea;
+				Rect stableArea = this.stableArea;
 				if (visibleArea != null && stableArea != null) {
 					callback.onFrameRendered(canvas, visibleArea, stableArea);
 				}
 			}
 		} finally {
-			mSurface.unlockCanvasAndPost(canvas);
+			surface.unlockCanvasAndPost(canvas);
 		}
 	}
 }

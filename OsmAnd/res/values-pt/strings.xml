@@ -4796,7 +4796,7 @@
     <string name="coordinates_widget_current_location">Coordenadas: localização atual</string>
     <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
     <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. A inclinação predefinida é de 90° (sem inclinação).</string>
-    <string name="map_widget_zoom_level">Nível de zoom</string>
+    <string name="map_widget_zoom_level">Nível de ampliação</string>
     <string name="map_widget_camera_distance">Elevação da câmara</string>
     <string name="developer_widgets">Widgets de desenvolvimento</string>
     <string name="map_widget_target_distance_desc">Mostra a distância entre a câmara e o local de destino.</string>
@@ -4836,7 +4836,7 @@
     <string name="map_widget_altitude_desc">Mostra a altitude da geolocalização atual ou a elevação do centro do mapa atual</string>
     <string name="terms_of_service_desc">Ao descarregar mapas, concorda com %1$s e %2$s.</string>
     <string name="map_widget_rendering_fps">FPS da renderização do mapa</string>
-    <string name="map_center_widget">Coordenadas:centro do mapa</string>
+    <string name="map_center_widget">Coordenadas: centro do mapa</string>
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Elevação: centro do mapa</string>
     <string name="map_widget_altitude_current_location_desc">Mostra a altitude acima do nível do mar da geolocalização atual.</string>
@@ -5067,7 +5067,7 @@
     <string name="shared_string_in_progress">A decorrer</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Velocidade do movimento</string>
-    <string name="simulation_position_description">Selecione um ficheiro de um trilho para usar como orientação do movimento.</string>
+    <string name="simulation_position_description">Selecione o ficheiro de um trilho que será usado na simulação do movimento.</string>
     <string name="shared_string_add_manually">Adicionar manualmente…</string>
     <string name="release_4_4">• Menu \"Trilhos\" em \"Configurar mapa\" melhorado
 \n
@@ -5098,4 +5098,7 @@
     <string name="sort_date_descending">Primeiro a data mais antiga</string>
     <string name="selected_value">Valor selecionado</string>
     <string name="shared_string_nearest">Mais perto</string>
+    <string name="app_mode_moped">Ciclomotor</string>
+    <string name="enable_3d_maps">Ativar mapas de 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombras de relevo de vértice em 3D</string>
 </resources>

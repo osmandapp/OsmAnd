@@ -14,6 +14,14 @@
     <string name="clear_online_cache_description">This will clear all cache for online weather tile.</string>
     <string name="clear_online_cache">Clear online cache</string>
     <string name="offline_cache">Offline cache</string>
+    <string name="shared_string_alt_name">Alternative name</string>
+    <string name="token_is_not_valid">Token is not valid</string>
+    <string name="app_mode_climbing">Climbing</string>
+    <string name="generate_hillshade_from_3d_maps">Generate hillshade raster maps from 3D maps</string>
+    <string name="generate_slope_from_3d_maps">Generate slope raster maps from 3D maps</string>
+    <string name="disable_vertex_hillshade_3d">Disable vertex hillshade in 3D</string>
+    <string name="enable_3d_maps">Enable 3D maps</string>
+    <string name="test_heightmap">Test heightmap</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
     <string name="sort_duration_ascending">Shorter duration first</string>

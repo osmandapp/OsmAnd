@@ -41,7 +41,7 @@ public class UpdateGpxCategoryTask extends BaseLoadAsyncTask<Void, Void, Excepti
 
 	@Override
 	protected void onPreExecute() {
-		showProgress();
+		super.onPreExecute();
 		updatePoints();
 	}
 

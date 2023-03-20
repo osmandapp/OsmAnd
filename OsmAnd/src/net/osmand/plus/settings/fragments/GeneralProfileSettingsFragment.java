@@ -142,13 +142,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupRotateMapPref() {
-		ApplicationMode appMode = getSelectedAppMode();
-		CommonPreference<Integer> preference = settings.ROTATE_MAP;
-		int value = preference.getModeValue(appMode);
-		CompassMode compassMode = CompassMode.getByValue(value);
-
-		Preference uiPreference = findPreference(preference.getId());
+		Preference uiPreference = findPreference(settings.ROTATE_MAP.getId());
 		if (uiPreference != null) {
+			ApplicationMode appMode = getSelectedAppMode();
+			CompassMode compassMode = settings.getCompassMode(appMode);
 			Drawable icon = getActiveIcon(compassMode.getIconId(isNightMode()));
 			uiPreference.setIcon(icon);
 			uiPreference.setSummary(compassMode.getTitleId());

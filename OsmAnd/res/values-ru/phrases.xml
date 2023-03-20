@@ -3115,12 +3115,12 @@
     <string name="poi_boat_jetski_rental_no">Гидроциклы: нет</string>
     <string name="poi_boat_sailboat_rental_yes">Парусники: есть</string>
     <string name="poi_boat_sailboat_rental_no">Парусники: нет</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Шлюпки: есть</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Шлюпки: нет</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Каяки: есть</string>
-    <string name="poi_boat_kayak_rental_rental_no">Каяки: нет</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Каноэ: есть</string>
-    <string name="poi_boat_canoe_rental_rental_no">Каноэ: нет</string>
+    <string name="poi_boat_dinghy_rental_yes">Шлюпки: есть</string>
+    <string name="poi_boat_dinghy_rental_no">Шлюпки: нет</string>
+    <string name="poi_boat_kayak_rental_yes">Каяки: есть</string>
+    <string name="poi_boat_kayak_rental_no">Каяки: нет</string>
+    <string name="poi_boat_canoe_rental_yes">Каноэ: есть</string>
+    <string name="poi_boat_canoe_rental_no">Каноэ: нет</string>
     <string name="poi_government_archive">Архив</string>
     <string name="poi_government_ministry">Министерство</string>
     <string name="poi_government_public_service">Государственная служба</string>
@@ -4377,4 +4377,6 @@
     <string name="poi_playground_springy">Качалка на пружине</string>
     <string name="poi_playground_zipwire">Тарзанка</string>
     <string name="poi_playground_teenshelter">Навес</string>
+    <string name="poi_water_filter">Вода;Питьевая вода</string>
+
 </resources>

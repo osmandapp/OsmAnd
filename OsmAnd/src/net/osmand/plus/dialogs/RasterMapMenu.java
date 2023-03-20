@@ -73,9 +73,6 @@ public class RasterMapMenu {
 			throw new RuntimeException("Unexpected raster map type");
 		}
 
-		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
-		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
-
 		String mapTypeDescr = mapTypePreference.get();
 		if (mapTypeDescr != null && mapTypeDescr.contains(".sqlitedb")) {
 			mapTypeDescr = mapTypeDescr.replaceFirst(".sqlitedb", "");
@@ -118,9 +115,7 @@ public class RasterMapMenu {
 						plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
 					});
 				} else if (itemId == R.string.show_polygons) {
-					hidePolygonsPref.set(!isChecked);
-					hideWaterPolygonsPref.set(!isChecked);
-					settings.POLYGONS_VISIBILITY_SET_MANUALLY.set(true);
+					settings.SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.set(isChecked);
 					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					updateTransparencyBarVisibility(isChecked);
@@ -189,7 +184,7 @@ public class RasterMapMenu {
 						.setTitleId(R.string.show_polygons, mapActivity)
 						.setHideDivider(true)
 						.setListener(l)
-						.setSelected(!hidePolygonsPref.get()));
+						.setSelected(settings.SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.get()));
 			}
 			Boolean transparencySwitchState = isSeekbarVisible(app, type);
 			contextMenuAdapter.addItem(new ContextMenuItem(null)

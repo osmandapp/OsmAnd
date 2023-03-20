@@ -1502,7 +1502,7 @@
     <string name="enable_sleep_mode">Включить фоновый режим GPS</string>
     <string name="gps_wake_up_timer">Интервал пробуждения GPS</string>
     <string name="sleep_mode_stop_dialog">Выключить фоновый режим GPS?</string>
-    <string name="stop_navigation_service">Выключить</string>
+    <string name="stop_navigation_service">Отменить</string>
     <string name="keep_navigation_service">Оставить</string>
     <string name="live_monitoring_m_descr">Отправлять данные отслеживания на заданный веб-сервис, если включена запись GPX.</string>
     <string name="live_monitoring_m">Онлайн-трекинг (требуется GPX)</string>
@@ -5040,7 +5040,7 @@
     <string name="no_visible_tracks_description">Выберите треки для отображения на карте.</string>
     <string name="shared_string_inches">дюймы</string>
     <string name="approximate_bearing">Приблизительный пеленг</string>
-    <string name="approximate_bearing_descr">Рассчитать пеленг, если он не получен от устройства</string>
+    <string name="approximate_bearing_descr">Определить пеленг на основе навигационного маршрута</string>
     <string name="shared_string_kilograms">килограммы</string>
     <string name="shared_string_apply_changes">Применить изменения</string>
     <string name="no_visible_tracks">Нет треков на карте</string>
@@ -5089,4 +5089,17 @@
 \n
 \n</string>
     <string name="shared_string_add_manually">Добавить вручную…</string>
+    <string name="sort_duration_descending">Сначала более продолжительные</string>
+    <string name="sort_distance_ascending">Сначала более короткие</string>
+    <string name="sort_distance_descending">Сначала более длинные</string>
+    <string name="shared_string_in_progress">В процессе</string>
+    <string name="selected_value">Выбранное значение</string>
+    <string name="sort_date_ascending">Сначала свежие</string>
+    <string name="sort_date_descending">Сначала старые</string>
+    <string name="shared_string_nearest">Ближайшие</string>
+    <string name="sort_duration_ascending">Сначала менее продолжительные</string>
+    <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
+    <string name="app_mode_moped">Мопед</string>
+    <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
+    <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D карт</string>
 </resources>

@@ -267,7 +267,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		}, available);
 
 		if (mapsPlusPurchased) {
-			updatePurchasedButton(mapsPlusView, isFullVersion);
+			updatePurchasedButton(mapsPlusView, fullVersion);
 		}
 	}
 

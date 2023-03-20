@@ -128,12 +128,16 @@ public class FlowLayout extends ViewGroup {
 	}
 
 	private int getFreeSizeSpacing(int width, int childWidth, int horizontalSpacing) {
+		int childWithSpacing = childWidth + horizontalSpacing;
+		int itemsCount = width / childWithSpacing;
+		if (width % childWithSpacing >= childWidth) {
+			itemsCount++;
+		}
 		int freeSizeSpacing;
-		int itemsCount = width / (childWidth + horizontalSpacing);
 		if (itemsCount > 1 && horizontalAutoSpacing) {
-			freeSizeSpacing = (width - childWidth) / (itemsCount-1);
+			freeSizeSpacing = (width - childWidth) / (itemsCount - 1);
 		} else if (!horizontalAutoSpacing) {
-			freeSizeSpacing = childWidth + horizontalSpacing;
+			freeSizeSpacing = childWithSpacing;
 		} else {
 			freeSizeSpacing = (width % childWidth / itemsCount);
 		}

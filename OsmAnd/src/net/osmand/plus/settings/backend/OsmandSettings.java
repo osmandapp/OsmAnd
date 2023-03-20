@@ -6,6 +6,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCH
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
@@ -83,6 +85,7 @@ import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.AutoZoomMap;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.settings.enums.DrivingRegion;
@@ -1644,13 +1647,31 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
 	public static final int ROTATE_MAP_MANUAL = 3;
-	public final CommonPreference<Integer> ROTATE_MAP =
-			new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
+
+	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
 
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+	}
+
+	public boolean isCompassMode(@NonNull CompassMode compassMode) {
+		return ROTATE_MAP.get() == compassMode.getValue();
+	}
+
+	@NonNull
+	public CompassMode getCompassMode() {
+		return getCompassMode(getApplicationMode());
+	}
+
+	@NonNull
+	public CompassMode getCompassMode(@NonNull ApplicationMode appMode) {
+		return CompassMode.getByValue(ROTATE_MAP.getModeValue(appMode));
+	}
+
+	public void setCompassMode(@NonNull CompassMode compassMode) {
+		ROTATE_MAP.set(compassMode.getValue());
 	}
 
 	public static final int CENTER_CONSTANT = 0;
@@ -1719,7 +1740,13 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> KEEP_MAP_LABELS_VISIBLE = new BooleanPreference(this, "keep_map_labels_visible", false).makeProfile().cache();
 
-	public final CommonPreference<Boolean> POLYGONS_VISIBILITY_SET_MANUALLY = new BooleanPreference(this, "polygons_visibility_set_manually", false).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON = new BooleanPreference(this, "show_polygons_when_underlay_is_on", false).makeProfile().cache();
+
+	public boolean shouldHidePolygons(boolean groundPolygons) {
+		String attrName = groundPolygons ? NO_POLYGONS_ATTR : HIDE_WATER_POLYGONS_ATTR;
+		CommonPreference<Boolean> hidePreference = getCustomRenderBooleanProperty(attrName);
+		return hidePreference.get() || (MAP_UNDERLAY.get() != null && !SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.get());
+	}
 
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
@@ -2186,6 +2213,7 @@ public class OsmandSettings {
 	}
 
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ROTATION = new FloatPreference(this, "last_known_map_rotation", 0).makeProfile();
+	private final CommonPreference<Float> LAST_KNOWN_MANUALLY_MAP_ROTATION = new FloatPreference(this, "last_known_manually_map_rotation", 0).makeProfile();
 	private final CommonPreference<Float> LAST_KNOWN_MAP_ELEVATION = new FloatPreference(this, "last_known_map_elevation", 90).makeProfile();
 
 	public float getLastKnownMapRotation() {
@@ -2202,6 +2230,22 @@ public class OsmandSettings {
 
 	public void setLastKnownMapRotation(@NonNull ApplicationMode appMode, float rotation) {
 		LAST_KNOWN_MAP_ROTATION.setModeValue(appMode, rotation);
+	}
+
+	public float getManuallyMapRotation() {
+		return getManuallyMapRotation(getApplicationMode());
+	}
+
+	public float getManuallyMapRotation(@NonNull ApplicationMode appMode) {
+		return LAST_KNOWN_MANUALLY_MAP_ROTATION.getModeValue(appMode);
+	}
+
+	public void setManuallyMapRotation(float rotation) {
+		setManuallyMapRotation(getApplicationMode(), rotation);
+	}
+
+	public void setManuallyMapRotation(@NonNull ApplicationMode appMode, float rotation) {
+		LAST_KNOWN_MANUALLY_MAP_ROTATION.setModeValue(appMode, rotation);
 	}
 
 	public float getLastKnownMapElevation() {
@@ -2770,6 +2814,21 @@ public class OsmandSettings {
 	{
 		RENDERER.setModeDefaultValue(ApplicationMode.BOAT, RendererRegistry.NAUTICAL_RENDER);
 		RENDERER.setModeDefaultValue(ApplicationMode.SKI, RendererRegistry.WINTER_SKI_RENDER);
+	}
+
+	public boolean getRenderBooleanPropertyValue(@NonNull String attrName) {
+		if (attrName.equals(NO_POLYGONS_ATTR)) {
+			return shouldHidePolygons(true);
+		} else if (attrName.equals(HIDE_WATER_POLYGONS_ATTR)) {
+			return shouldHidePolygons(false);
+		} else {
+			return getCustomRenderBooleanProperty(attrName).get();
+		}
+	}
+
+	@Nullable
+	public String getRenderPropertyValue(@NonNull String attrName) {
+		return getCustomRenderProperty(attrName).get();
 	}
 
 	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName) {

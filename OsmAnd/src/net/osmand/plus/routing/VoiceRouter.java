@@ -236,12 +236,15 @@ public class VoiceRouter {
 					waitAnnouncedOffRoute *= 2.5;
 				}
 				lastAnnouncedOffRoute = ms;
+			// Avoid offRoute/onRoute loop, #16571:
+			} else if (announceBackOnRoute && (dist < 0.3 * atd.getOffRouteDistance())) {
+				announceBackOnRoute();
 			}
 		}
 	}
 
-	public void announceBackOnRoute() {
-		if (announceBackOnRoute) {
+	private void announceBackOnRoute() {
+		//if (announceBackOnRoute) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
@@ -249,7 +252,7 @@ public class VoiceRouter {
 			play(p);
 			announceBackOnRoute = false;
 			waitAnnouncedOffRoute = 0;
-		}
+		//}
 	}
 
 	public void approachWaypoint(Location location, List<LocationPointWrapper> points) {

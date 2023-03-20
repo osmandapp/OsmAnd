@@ -637,25 +637,25 @@ public class ConfigureMapMenu {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
-		List<RenderingRuleProperty> ps = new ArrayList<>();
-		List<CommonPreference<Boolean>> prefs = new ArrayList<>();
+		List<RenderingRuleProperty> properties = new ArrayList<>();
+		List<CommonPreference<Boolean>> preferences = new ArrayList<>();
 		Iterator<RenderingRuleProperty> it = customRules.iterator();
 
 		while (it.hasNext()) {
 			RenderingRuleProperty p = it.next();
 			if (category.equals(p.getCategory()) && p.isBoolean()) {
-				ps.add(p);
-				prefs.add(settings.getCustomRenderBooleanProperty(p.getAttrName()));
+				properties.add(p);
+				preferences.add(settings.getCustomRenderBooleanProperty(p.getAttrName()));
 				it.remove();
 			}
 		}
-		if (prefs.size() > 0) {
+		if (preferences.size() > 0) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
 				if (UI_CATEGORY_DETAILS.equals(category)) {
-					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, uiAdapter, item);
+					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), properties, preferences, uiAdapter, item);
 				} else {
 					ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-							activity.getString(strId), ps, prefs, nightMode, selectedProfileColor);
+							activity.getString(strId), properties, preferences, nightMode, selectedProfileColor);
 				}
 				return false;
 			};
@@ -664,18 +664,18 @@ public class ConfigureMapMenu {
 					.setIcon(icon).setListener(clickListener);
 			item.setRefreshCallback(refreshableItem -> {
 				boolean selected = false;
-				for (CommonPreference<Boolean> p : prefs) {
+				for (CommonPreference<Boolean> p : preferences) {
 					if (p.get()) {
 						selected = true;
 						break;
 					}
 				}
 				refreshableItem.setColor(activity, selected ? R.color.osmand_orange : INVALID_ID);
-				refreshableItem.setDescription(ConfigureMapUtils.getDescription(settings, prefs));
+				refreshableItem.setDescription(ConfigureMapUtils.getDescription(settings, preferences));
 			});
 			item.setLayout(R.layout.list_item_single_line_descrition_narrow);
-			OsmandPreference<?>[] prefArray = new OsmandPreference[prefs.size()];
-			item.setItemDeleteAction(prefs.toArray(prefArray));
+			OsmandPreference<?>[] prefArray = new OsmandPreference[preferences.size()];
+			item.setItemDeleteAction(preferences.toArray(prefArray));
 			return item;
 		}
 		return null;

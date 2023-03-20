@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
 import static net.osmand.gpx.GPXUtilities.ADDRESS_EXTENSION;
 import static net.osmand.gpx.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
@@ -160,7 +161,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			String key = e.getKey();
 			String vl = e.getValue();
 
-			if (key.startsWith(COLLAPSABLE_PREFIX)) {
+			if (key.startsWith(COLLAPSABLE_PREFIX) || key.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
 				continue;
 			}
 			if (key.equals("image")

@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.openplacereviews;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -13,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UploadPhotosHelper {
@@ -91,20 +90,7 @@ public class UploadPhotosHelper {
 		mapActivity.registerActivityResultListener(new ActivityResultListener(PICK_IMAGE, (resultCode, resultData) -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null && resultData != null) {
-				List<Uri> imagesUri = new ArrayList<>();
-				Uri data = resultData.getData();
-				if (data != null) {
-					imagesUri.add(data);
-				}
-				ClipData clipData = resultData.getClipData();
-				if (clipData != null) {
-					for (int i = 0; i < clipData.getItemCount(); i++) {
-						Uri uri = resultData.getClipData().getItemAt(i).getUri();
-						if (uri != null) {
-							imagesUri.add(uri);
-						}
-					}
-				}
+				List<Uri> imagesUri = IntentHelper.getIntentUris(resultData);
 				UploadPhotosListener listener = response -> app.runInUIThread(() -> {
 					if (getMapActivity() != null) {
 						try {

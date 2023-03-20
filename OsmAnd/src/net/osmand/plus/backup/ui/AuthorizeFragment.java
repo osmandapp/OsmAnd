@@ -78,6 +78,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private TextView description;
 	private View buttonContinue;
 	private View buttonChoosePlan;
+	private EditText editText;
 	private TextView errorText;
 	private View buttonAuthorize;
 	private View keyboardSpace;
@@ -96,7 +97,12 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	public void setDialogType(LoginDialogType dialogType) {
+	@NonNull
+	public LoginDialogType getDialogType() {
+		return dialogType;
+	}
+
+	public void setDialogType(@NonNull LoginDialogType dialogType) {
 		this.dialogType = dialogType;
 		if (dialogType != LoginDialogType.VERIFY_EMAIL) {
 			signIn = dialogType == LoginDialogType.SIGN_IN;
@@ -225,7 +231,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		errorText = view.findViewById(R.id.error_text);
 		buttonAuthorize = view.findViewById(R.id.button);
 
-		EditText editText = view.findViewById(R.id.edit_text);
+		editText = view.findViewById(R.id.edit_text);
 		EditText promoEditText = view.findViewById(R.id.promocode_edit_text);
 
 		editText.setText(settings.BACKUP_USER_EMAIL.get());
@@ -267,7 +273,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private void setupVerifyEmailContainer(View view) {
 		errorText = view.findViewById(R.id.error_text);
-		EditText editText = view.findViewById(R.id.edit_text);
+		editText = view.findViewById(R.id.edit_text);
 		View resendButton = view.findViewById(R.id.button);
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
 		View codeMissingDescription = view.findViewById(R.id.code_missing_description);
@@ -295,20 +301,26 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY_ACTIVE, R.string.resend_verification_code);
 
 		buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
-		buttonContinue.setOnClickListener(v -> {
-			String token = editText.getText().toString();
-			if (BackupHelper.isTokenValid(token)) {
-				progressBar.setVisibility(View.VISIBLE);
-				backupHelper.registerDevice(token);
-				Activity activity = getActivity();
-				if (AndroidUtils.isActivityNotDestroyed(activity)) {
-					AndroidUtils.hideSoftKeyboard(activity, editText);
-				}
-			} else {
-				editText.requestFocus();
-				editText.setError("Token is not valid");
+		buttonContinue.setOnClickListener(v -> registerDevice(editText.getText().toString()));
+	}
+
+	public void setToken(@Nullable String token) {
+		editText.setText(token);
+		registerDevice(token);
+	}
+
+	private void registerDevice(@Nullable String token) {
+		if (!Algorithms.isEmpty(token) && BackupHelper.isTokenValid(token)) {
+			progressBar.setVisibility(View.VISIBLE);
+			backupHelper.registerDevice(token);
+			Activity activity = getActivity();
+			if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				AndroidUtils.hideSoftKeyboard(activity, editText);
 			}
-		});
+		} else {
+			editText.requestFocus();
+			editText.setError(getString(R.string.token_is_not_valid));
+		}
 	}
 
 	private TextWatcher getTextWatcher() {
