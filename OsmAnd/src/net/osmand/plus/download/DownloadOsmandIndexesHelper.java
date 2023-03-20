@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.resources.ResourceManager;
 
 import org.apache.commons.logging.Log;
@@ -120,6 +122,7 @@ public class DownloadOsmandIndexesHelper {
 		}
 		// Add all tts files from assets and data folder
 		addTtsVoiceIndexes(app, indexes);
+		addOfflineWeatherIndexes(app, indexes);
 
 		indexes.sort();
 		return indexes;
@@ -288,6 +291,16 @@ public class DownloadOsmandIndexesHelper {
 		}
 
 		return recordedVoiceList;
+	}
+
+	private static void addOfflineWeatherIndexes(OsmandApplication app, IndexFileList indexes) {
+		OfflineForecastHelper helper = app.getOfflineForecastHelper();
+		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
+			if (helper.shouldHaveWeatherForecast(region)) {
+				IndexItem index = helper.createIndexItem(region);
+				indexes.add(index);
+			}
+		}
 	}
 
 	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx) {

@@ -1,5 +1,6 @@
 package net.osmand.plus.track.helpers;
 
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
@@ -98,9 +99,6 @@ public class GpxUiHelper {
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
-
-	public static final long SECOND_IN_MILLIS = 1000L;
-	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
 
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {

@@ -32,16 +32,27 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.util.Algorithms.collectDirs;
 
 public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -53,8 +64,8 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		OPEN_TRACK(R.string.shared_string_gpx_tracks, R.string.sort_by),
 		ADD_TO_TRACK(R.string.add_to_a_track, R.string.route_between_points_add_track_desc);
 
-		int title;
-		int description;
+		final int title;
+		final int description;
 
 		Mode(@StringRes int title, @StringRes int description) {
 			this.title = title;
@@ -113,34 +124,7 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		AndroidUtils.setBackground(sortButton, background);
 		sortButton.setImageResource(sortByMode.getIconId());
 		sortButton.setVisibility(View.VISIBLE);
-		sortButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(mode.getNameId())
-							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-							.setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									sortByMode = mode;
-									sortButton.setImageResource(mode.getIconId());
-									updateDescription(descriptionView);
-									sortFolderList();
-									folderSelector.setItems(getFolderChips());
-									folderSelector.notifyDataSetChanged();
-									sortFileList();
-									adapter.notifyDataSetChanged();
-								}
-							})
-							.setSelected(sortByMode == mode)
-							.create());
-				}
-				new PopUpMenuHelper.Builder(v, items, nightMode)
-						.show();
-			}
-		});
+		sortButton.setOnClickListener(v -> showTracksSortPopUpMenu(app, v, sortButton, descriptionView));
 
 		File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 
@@ -166,23 +150,20 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		adapter = new GpxTrackAdapter(requireContext(), allGpxList, isShowCurrentGpx(), showFoldersName());
-		adapter.setAdapterListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(int position) {
-				List<GPXInfo> gpxList = adapter.getGpxInfoList();
-				if (position != RecyclerView.NO_POSITION && position < gpxList.size()) {
-					String fileName;
-					if (isShowCurrentGpx() && position == 0) {
-						fileName = null;
-					} else {
-						fileName = gpxList.get(position).getFileName();
-					}
-					if (listener != null) {
-						listener.selectFileOnCLick(fileName);
-					}
+		adapter.setAdapterListener(position -> {
+			List<GPXInfo> gpxList = adapter.getGpxInfoList();
+			if (position != RecyclerView.NO_POSITION && position < gpxList.size()) {
+				String fileName;
+				if (isShowCurrentGpx() && position == 0) {
+					fileName = null;
+				} else {
+					fileName = gpxList.get(position).getFileName();
 				}
-				dismiss();
+				if (listener != null) {
+					listener.selectFileOnCLick(fileName);
+				}
 			}
+			dismiss();
 		});
 		filesRecyclerView.setAdapter(adapter);
 
@@ -201,6 +182,33 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
 		updateFileList();
+	}
+
+	private void showTracksSortPopUpMenu(@NonNull OsmandApplication app, @NonNull View anchorView,
+	                                     @NonNull ImageButton sortButton, @NonNull TextView tvDesc) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		for (TracksSortByMode mode : TracksSortByMode.values()) {
+			menuItems.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(mode.getNameId())
+					.setIcon(getContentIcon(mode.getIconId()))
+					.setOnClickListener(v -> {
+						sortByMode = mode;
+						sortButton.setImageResource(mode.getIconId());
+						updateDescription(tvDesc);
+						sortFolderList();
+						folderSelector.setItems(getFolderChips());
+						folderSelector.notifyDataSetChanged();
+						sortFileList();
+						adapter.notifyDataSetChanged();
+					})
+					.setSelected(sortByMode == mode)
+					.create());
+		}
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchorView;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
 	}
 
 	private List<ChipItem> getFolderChips() {
@@ -240,21 +248,18 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void sortFolderList() {
 		Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(folders, new Comparator<File>() {
-			@Override
-			public int compare(File i1, File i2) {
-				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+		Collections.sort(folders, (i1, i2) -> {
+			if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+				return collator.compare(i1.getName(), i2.getName());
+			} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+				return -collator.compare(i1.getName(), i2.getName());
+			} else {
+				long time1 = i1.lastModified();
+				long time2 = i2.lastModified();
+				if (time1 == time2) {
 					return collator.compare(i1.getName(), i2.getName());
-				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
-					return -collator.compare(i1.getName(), i2.getName());
-				} else {
-					long time1 = i1.lastModified();
-					long time2 = i2.lastModified();
-					if (time1 == time2) {
-						return collator.compare(i1.getName(), i2.getName());
-					}
-					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
 				}
+				return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
 			}
 		});
 	}
@@ -270,21 +275,18 @@ public class SelectFileBottomSheet extends MenuBottomSheetDialogFragment {
 	public void sortSelected(List<GPXInfo> gpxInfoList) {
 		boolean hasRecording = gpxInfoList.remove(currentlyRecording);
 		Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(gpxInfoList, new Comparator<GPXInfo>() {
-			@Override
-			public int compare(GPXInfo i1, GPXInfo i2) {
-				if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+		Collections.sort(gpxInfoList, (i1, i2) -> {
+			if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
+				return collator.compare(i1.getFileName(), i2.getFileName());
+			} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
+				return -collator.compare(i1.getFileName(), i2.getFileName());
+			} else {
+				long time1 = i1.getLastModified();
+				long time2 = i2.getLastModified();
+				if (time1 == time2) {
 					return collator.compare(i1.getFileName(), i2.getFileName());
-				} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
-					return -collator.compare(i1.getFileName(), i2.getFileName());
-				} else {
-					long time1 = i1.getLastModified();
-					long time2 = i2.getLastModified();
-					if (time1 == time2) {
-						return collator.compare(i1.getFileName(), i2.getFileName());
-					}
-					return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
 				}
+				return -((time1 < time2) ? -1 : ((time1 == time2) ? 0 : 1));
 			}
 		});
 		if (hasRecording) {

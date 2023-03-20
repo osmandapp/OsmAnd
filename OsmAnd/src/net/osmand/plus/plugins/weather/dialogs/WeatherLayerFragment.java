@@ -177,7 +177,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			};
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 			int selectedIndex = weatherBand.getAvailableBandUnits().indexOf(preference.get());
-			WeatherSettingsFragment.showChooseUnitDialog(view.getContext(), weatherBand, selectedIndex, profileColor, nightMode, listener);
+			WeatherDialogs.showChooseUnitDialog(view.getContext(), weatherBand, selectedIndex, profileColor, nightMode, listener);
 		}
 	}
 

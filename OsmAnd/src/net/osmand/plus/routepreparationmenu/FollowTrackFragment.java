@@ -51,7 +51,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import org.apache.commons.logging.Log;
@@ -515,7 +516,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						.create()
 				);
 			}
-			new PopUpMenuHelper.Builder(v, items, isNightMode()).show();
+			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+			displayData.anchorView = v;
+			displayData.menuItems = items;
+			displayData.nightMode = isNightMode();
+			PopUpMenu.show(displayData);
 		});
 	}
 

@@ -17,6 +17,9 @@ import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -173,11 +176,17 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
 		boolean outdated = false;
+		item.setDownloaded(false);
+		item.setOutdated(false);
+
+		if (item instanceof WeatherIndexItem) {
+			OfflineForecastHelper offlineForecastHelper = app.getOfflineForecastHelper();
+			return offlineForecastHelper.checkIfItemOutdated((WeatherIndexItem) item);
+		}
+
 		String sfName = item.getTargetFileName();
 		String indexActivatedDate = indexActivatedFileNames.get(sfName);
 		String indexFilesDate = indexFileNames.get(sfName);
-		item.setDownloaded(false);
-		item.setOutdated(false);
 		if (indexActivatedDate == null && indexFilesDate == null) {
 			return false;
 		}
@@ -395,21 +404,43 @@ public class DownloadResources extends DownloadResourceGroup {
 					continue;
 				}
 			}
+			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
+				WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+				if (plugin == null || !plugin.isEnabled()) {
+					continue;
+				}
+			}
 			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
 				// Hide heightmaps of sqlite format
 				continue;
 			}
-			String basename = ii.getBasename().toLowerCase();
-			WorldRegion wg = regs.getRegionDataByDownloadName(basename);
-			if (wg != null) {
-				if (!groupByRegion.containsKey(wg)) {
-					groupByRegion.put(wg, new ArrayList<>());
+			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
+				WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
+				if (plugin == null || !plugin.isEnabled()) {
+					continue;
 				}
-				groupByRegion.get(wg).add(ii);
+			}
+			WorldRegion region;
+			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
+				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) ii;
+				region = weatherIndexItem.getRegion();
+				if (WorldRegion.WORLD.equals(region.getRegionId())) {
+					worldMaps.addItem(ii);
+					continue;
+				}
+			} else  {
+				String basename = ii.getBasename().toLowerCase();
+				region = regs.getRegionDataByDownloadName(basename);
+			}
+			if (region != null) {
+				if (!groupByRegion.containsKey(region)) {
+					groupByRegion.put(region, new ArrayList<>());
+				}
+				groupByRegion.get(region).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
-					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) ||
-							ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_OLD_KEY)) {
+					String fileName = ii.getFileName().toLowerCase();
+					if (Algorithms.startsWithAny(fileName, WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalWorldwideMaps.addItem(ii);
 					} else {
 						worldMaps.addItem(ii);
@@ -429,8 +460,8 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 		}
 
-		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
-		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		LinkedList<WorldRegion> queue = new LinkedList<>();
+		LinkedList<DownloadResourceGroup> parent = new LinkedList<>();
 		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
 		addGroup(worldSubregions);
 		for (WorldRegion rg : region.getSubregions()) {

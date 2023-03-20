@@ -28,7 +28,7 @@ public class WorldRegion implements Serializable {
 	public static final String GERMANY_REGION_ID = "europe_germany";
 	public static final String FRANCE_REGION_ID = "europe_france";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
-	protected static final String WORLD = "world";
+	public static final String WORLD = "world";
 
 	// Just a string constant
 	public static final String UNITED_KINGDOM_REGION_ID = "gb_europe";
@@ -294,6 +294,10 @@ public class WorldRegion implements Serializable {
 		} else {
 			return obfFileName.toLowerCase();
 		}
+	}
+
+	public QuadRect getBoundingBox() {
+		return boundingBox;
 	}
 
 	public List<List<LatLon>> getPolygons() {

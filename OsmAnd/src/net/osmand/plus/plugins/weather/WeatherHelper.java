@@ -6,6 +6,7 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITA
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.FINISHED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,51 +18,42 @@ import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class WeatherHelper {
 
-	private static final String WEATHER_FORECAST_DOWNLOAD_STATE_PREFIX = "forecast_download_state_";
-	private static final String WEATHER_FORECAST_LAST_UPDATE_PREFIX = "forecast_last_update_";
-	private static final String WEATHER_FORECAST_FREQUENCY_PREFIX = "forecast_frequency_";
-	private static final String WEATHER_FORECAST_TILE_IDS_PREFIX = "forecast_tile_ids_";
-	private static final String WEATHER_FORECAST_WIFI_PREFIX = "forecast_download_via_wifi_";
-
-	private static final int TILE_SIZE = 40000;
-	private static final int FORECAST_DATES_COUNT = 24 + (6 * 8) + 1;
-	private static final int WEATHER_FORECAST_FREQUENCY_HALF_DAY = 43200;
-	private static final int WEATHER_FORECAST_FREQUENCY_DAY = 86400;
-	private static final int WEATHER_FORECAST_FREQUENCY_WEEK = 604800;
+	private static final Log log = PlatformUtil.getLog(WeatherHelper.class);
 
 	private final OsmandApplication app;
 	private final WeatherSettings weatherSettings;
-
+	private final OfflineForecastHelper offlineForecastHelper;
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
-
-	private static final Log log = PlatformUtil.getLog(WeatherHelper.class);
+	private final WeatherTotalCacheSize totalCacheSize;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
 
 	public WeatherHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.weatherSettings = new WeatherSettings(app);
+		this.offlineForecastHelper = new OfflineForecastHelper(app);
+		this.totalCacheSize = offlineForecastHelper.getTotalCacheSize();
 
 		weatherBands.put(WEATHER_BAND_TEMPERATURE, WeatherBand.withWeatherBand(app, WEATHER_BAND_TEMPERATURE));
 		weatherBands.put(WEATHER_BAND_PRESSURE, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRESSURE));
@@ -111,8 +103,7 @@ public class WeatherHelper {
 		return weatherBands.get(bandIndex);
 	}
 
-
-	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRenderer) {
 		if (weatherTileResourcesManager != null) {
 			return;
 		}
@@ -120,42 +111,46 @@ public class WeatherHelper {
 		if (!weatherForecastDir.exists()) {
 			weatherForecastDir.mkdir();
 		}
-		cleanupOldFiles(weatherForecastDir, 2);
 		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
 		int tileSize = 256;
-		MapPresentationEnvironment mapPresentationEnvironment = mapRendererContext.getMapPresentationEnvironment();
+		MapPresentationEnvironment mapPresentationEnvironment = mapRenderer.getMapPresentationEnvironment();
 		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
 
 		WeatherWebClient webClient = new WeatherWebClient();
-		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(new BandIndexGeoBandSettingsHash(),
-				weatherForecastDir.getAbsolutePath(), projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true));
+		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(
+				new BandIndexGeoBandSettingsHash(), weatherForecastDir.getAbsolutePath(),
+				projResourcesPath, tileSize, densityFactor, webClient.instantiateProxy(true)
+		);
 		webClient.swigReleaseOwnership();
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
+		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
+		clearOutdatedCache();
 	}
 
-	private void cleanupOldFiles(File weatherForecastDir, int days) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-		long cleanup = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(days);
-		for (File f : weatherForecastDir.listFiles()) {
-			String fileName = f.getName();
-			if (fileName.endsWith(".db") && fileName.length() > 8) {
-				try {
-					Date dt = format.parse(fileName.substring(0, 8));
-					if (dt.getTime() < cleanup) {
-						f.delete();
-					}
-				} catch (RuntimeException | ParseException e) {
-					log.error(String.format("Unexpected file name in weather folder %s", fileName));
-				}
+	public void clearOutdatedCache() {
+		totalCacheSize.reset();
+
+		Date date = OsmAndFormatter.getStartOfToday();
+		long dateTime = date.getTime();
+		weatherTileResourcesManager.clearDbCache(dateTime);
+
+		List<String> downloadedRegionIds = offlineForecastHelper.getTempForecastsWithDownloadStates(FINISHED);
+		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
+			if (downloadedRegionIds.contains(region.getRegionId())) {
+				offlineForecastHelper.calculateCacheSize(region, null);
 			}
 		}
 	}
 
-
 	@Nullable
 	public WeatherTileResourcesManager getWeatherResourcesManager() {
 		return weatherTileResourcesManager;
+	}
+
+	@NonNull
+	public OfflineForecastHelper getOfflineForecastHelper() {
+		return offlineForecastHelper;
 	}
 
 	public boolean updateBandsSettings() {
@@ -188,8 +183,10 @@ public class WeatherHelper {
 				String contourStyleName = band.getContourStyleName();
 				String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
 				MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(weatherResourcesManager,
-						mapContext != null? mapContext.getMapPresentationEnvironment() : null);
+				MapPresentationEnvironment mapPresentationEnvironment =
+						mapContext != null ? mapContext.getMapPresentationEnvironment() : null;
+				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(
+						weatherResourcesManager, mapPresentationEnvironment);
 				GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
 						internalUnit, opacity, colorProfilePath, contourStyleName, contourLevels);
 				bandSettings.set(band.getBandIndex(), settings);
@@ -201,6 +198,7 @@ public class WeatherHelper {
 	public int getBandsSettingsVersion() {
 		return bandsSettingsVersion.get();
 	}
+
 
 	public static long roundForecastTimeToHour(long time) {
 		long hour = 60 * 60 * 1000;
