@@ -3381,7 +3381,7 @@ POIの更新は利用できません</string>
     <string name="clear_recorded_data">記録データの消去</string>
     <string name="copy_coordinates">座標をコピー</string>
     <string name="routing_profile_direct_to">直接指示</string>
-    <string name="of">%2$d中の%1$d</string>
+    <string name="of">全%2$d中%1$d</string>
     <string name="button_rate">評価する</string>
     <string name="release_3_6">• プロファイル：表示順序、マップ画面で表示されるアイコン、ベースプロファイルすべての設定などを変更したり、初期状態に戻すことが可能に 
 \n 
