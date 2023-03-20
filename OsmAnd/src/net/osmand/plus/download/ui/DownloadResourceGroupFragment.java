@@ -6,7 +6,6 @@ import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,9 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
-import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.R;
@@ -50,6 +46,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -61,10 +58,6 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButtons;
-import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription;
-import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
 
 public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment implements DownloadEvents,
 		InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
@@ -457,7 +450,6 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	@Override
 	public void onPause() {
 		super.onPause();
-		OsmandApplication app = getMyApplication();
 		app.getOfflineForecastHelper().unregisterRemoveLocalForecastListener(this);
 	}
 

@@ -17,7 +17,7 @@ public class WeatherIndexItem extends IndexItem {
 	public WeatherIndexItem(@NonNull WorldRegion region, long timestamp,
 	                        @NonNull String size, long contentSize, long containerSize) {
 		super(region.getRegionId() + WEATHER_EXT, "", timestamp,
-				size, contentSize, containerSize, WEATHER_FORECAST);
+				size, contentSize, containerSize, WEATHER_FORECAST, false, null);
 		this.region = region;
 	}
 

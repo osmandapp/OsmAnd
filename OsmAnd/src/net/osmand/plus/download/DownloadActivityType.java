@@ -1,12 +1,10 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.WEATHER_EXT;
+import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
 import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
 import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.IndexConstants.WEATHER_EXT;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
 import android.content.Context;
 
@@ -39,42 +37,24 @@ public class DownloadActivityType {
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 	private static final Map<String, DownloadActivityType> byTag = new HashMap<>();
 
-	public static final DownloadActivityType NORMAL_FILE =
-			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
-	public static final DownloadActivityType VOICE_FILE =
-			new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice", 20);
-	public static final DownloadActivityType FONT_FILE =
-			new DownloadActivityType(R.string.fonts_header, R.drawable.ic_action_map_language, "fonts", 25);
-	public static final DownloadActivityType ROADS_FILE =
-			new DownloadActivityType(R.string.download_roads_only_maps, "road_map", 30);
-	public static final DownloadActivityType SRTM_COUNTRY_FILE =
-			new DownloadActivityType(R.string.download_srtm_maps, R.drawable.ic_plugin_srtm, "srtm_map", 40);
-	public static final DownloadActivityType DEPTH_CONTOUR_FILE =
-			new DownloadActivityType(R.string.download_regular_maps, "depth", 45);
-	public static final DownloadActivityType DEPTH_MAP_FILE =
-			new DownloadActivityType(R.string.nautical_depth, "depthmap", 46);
-	public static final DownloadActivityType HILLSHADE_FILE =
-			new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
-	public static final DownloadActivityType SLOPE_FILE =
-			new DownloadActivityType(R.string.download_slope_maps, R.drawable.ic_action_hillshade_dark, "slope", 55);
-	public static final DownloadActivityType WIKIPEDIA_FILE =
-			new DownloadActivityType(R.string.download_wikipedia_maps, R.drawable.ic_plugin_wikipedia, "wikimap", 60);
-	public static final DownloadActivityType WIKIVOYAGE_FILE =
-			new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "wikivoyage", 65);
-	public static final DownloadActivityType TRAVEL_FILE =
-			new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "travel", 66);
-	public static final DownloadActivityType LIVE_UPDATES_FILE =
-			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
-	public static final DownloadActivityType GPX_FILE =
-			new DownloadActivityType(R.string.shared_string_gpx_tracks, R.drawable.ic_action_polygom_dark, "gpx", 75);
-	public static final DownloadActivityType SQLITE_FILE =
-			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
-	public static final DownloadActivityType HEIGHTMAP_FILE_LEGACY =
-			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "heightmap", 85);
-	public static final DownloadActivityType WEATHER_FORECAST =
-			new DownloadActivityType(R.string.weather_forecast, R.drawable.ic_action_umbrella, "weather", 90);
-	public static final DownloadActivityType GEOTIFF_FILE =
-			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "geotiff", 85);
+	public static final DownloadActivityType NORMAL_FILE = new DownloadActivityType(R.string.download_regular_maps, "map", 10);
+	public static final DownloadActivityType VOICE_FILE = new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice", 20);
+	public static final DownloadActivityType FONT_FILE = new DownloadActivityType(R.string.fonts_header, R.drawable.ic_action_map_language, "fonts", 25);
+	public static final DownloadActivityType ROADS_FILE = new DownloadActivityType(R.string.download_roads_only_maps, "road_map", 30);
+	public static final DownloadActivityType SRTM_COUNTRY_FILE = new DownloadActivityType(R.string.download_srtm_maps, R.drawable.ic_plugin_srtm, "srtm_map", 40);
+	public static final DownloadActivityType DEPTH_CONTOUR_FILE = new DownloadActivityType(R.string.download_regular_maps, "depth", 45);
+	public static final DownloadActivityType DEPTH_MAP_FILE = new DownloadActivityType(R.string.nautical_depth, "depthmap", 46);
+	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
+	public static final DownloadActivityType SLOPE_FILE = new DownloadActivityType(R.string.download_slope_maps, R.drawable.ic_action_hillshade_dark, "slope", 55);
+	public static final DownloadActivityType WIKIPEDIA_FILE = new DownloadActivityType(R.string.download_wikipedia_maps, R.drawable.ic_plugin_wikipedia, "wikimap", 60);
+	public static final DownloadActivityType WIKIVOYAGE_FILE = new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "wikivoyage", 65);
+	public static final DownloadActivityType TRAVEL_FILE = new DownloadActivityType(R.string.shared_string_wikivoyage, R.drawable.ic_plugin_wikipedia, "travel", 66);
+	public static final DownloadActivityType LIVE_UPDATES_FILE = new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
+	public static final DownloadActivityType GPX_FILE = new DownloadActivityType(R.string.shared_string_gpx_tracks, R.drawable.ic_action_polygom_dark, "gpx", 75);
+	public static final DownloadActivityType SQLITE_FILE = new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
+	public static final DownloadActivityType HEIGHTMAP_FILE_LEGACY = new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "heightmap", 85);
+	public static final DownloadActivityType WEATHER_FORECAST = new DownloadActivityType(R.string.weather_forecast, R.drawable.ic_action_umbrella, "weather", 90);
+	public static final DownloadActivityType GEOTIFF_FILE = new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "geotiff", 85);
 
 	private final int stringResource;
 	private final int iconResource;
@@ -140,9 +120,7 @@ public class DownloadActivityType {
 
 	public boolean isAccepted(String fileName) {
 		if (NORMAL_FILE == this) {
-			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION))
-					|| fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)
-					|| fileName.endsWith(IndexConstants.SQLITE_EXT);
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION)) || fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT) || fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (ROADS_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (VOICE_FILE == this) {
@@ -150,13 +128,11 @@ public class DownloadActivityType {
 		} else if (FONT_FILE == this) {
 			return fileName.endsWith(IndexConstants.FONT_INDEX_EXT_ZIP);
 		} else if (WIKIPEDIA_FILE == this) {
-			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP,
-					IndexConstants.BINARY_MAP_VERSION));
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (WIKIVOYAGE_FILE == this) {
 			return fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
 		} else if (TRAVEL_FILE == this) {
-			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT_ZIP,
-					IndexConstants.BINARY_MAP_VERSION));
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (SRTM_COUNTRY_FILE == this) {
 			boolean srtm = fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 			boolean srtmf = fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
@@ -224,13 +200,7 @@ public class DownloadActivityType {
 	}
 
 	public boolean isZipStream() {
-		return HILLSHADE_FILE != this
-				&& SLOPE_FILE != this
-				&& HEIGHTMAP_FILE_LEGACY != this
-				&& GEOTIFF_FILE != this
-				&& SQLITE_FILE != this
-				&& WIKIVOYAGE_FILE != this
-				&& GPX_FILE != this;
+		return HILLSHADE_FILE != this && SLOPE_FILE != this && HEIGHTMAP_FILE_LEGACY != this && GEOTIFF_FILE != this && SQLITE_FILE != this && WIKIVOYAGE_FILE != this && GPX_FILE != this;
 	}
 
 	public boolean isZipFolder() {
@@ -324,8 +294,7 @@ public class DownloadActivityType {
 	}
 
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
-		String url = "https://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
-				+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
+		String url = "https://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&" + Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
 		if (this == LIVE_UPDATES_FILE && fileName.length() > 16) {
 			// DATE_AND_EXT_STR_LEN = "_18_06_02.obf.gz".length()
 			String region = fileName.substring(0, fileName.length() - 16).toLowerCase();
@@ -350,12 +319,9 @@ public class DownloadActivityType {
 		}
 		String size = parser.getAttributeValue(null, "size");
 		String description = parser.getAttributeValue(null, "description");
-		long containerSize = Algorithms.parseLongSilently(
-				parser.getAttributeValue(null, "containerSize"), 0);
-		long contentSize = Algorithms.parseLongSilently(
-				parser.getAttributeValue(null, "contentSize"), 0);
-		long timestamp = Algorithms.parseLongSilently(
-				parser.getAttributeValue(null, "timestamp"), 0);
+		long containerSize = Algorithms.parseLongSilently(parser.getAttributeValue(null, "containerSize"), 0);
+		long contentSize = Algorithms.parseLongSilently(parser.getAttributeValue(null, "contentSize"), 0);
+		long timestamp = Algorithms.parseLongSilently(parser.getAttributeValue(null, "timestamp"), 0);
 		boolean free = Boolean.parseBoolean(parser.getAttributeValue(null, "free"));
 		String freeMessage = parser.getAttributeValue(null, "freeMessage");
 		IndexItem item = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this, free, freeMessage);
@@ -443,8 +409,7 @@ public class DownloadActivityType {
 		if (basename.contains("addresses-nationwide")) {
 			int ind = basename.indexOf("addresses-nationwide");
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
-			return osmandRegions.getLocaleName(downloadName, includeParent) +
-					" " + ctx.getString(R.string.index_item_nation_addresses);
+			return osmandRegions.getLocaleName(downloadName, includeParent) + " " + ctx.getString(R.string.index_item_nation_addresses);
 		}
 
 		return osmandRegions.getLocaleName(basename, includeParent);
@@ -485,8 +450,7 @@ public class DownloadActivityType {
 				l = fileName.length();
 			}
 			return fileName.substring(0, l) + IndexConstants.BINARY_MAP_INDEX_EXT;
-		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
-				|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
+		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			int l = fileName.lastIndexOf('_');
 			if (l == -1) {
 				l = fileName.length();
@@ -515,8 +479,7 @@ public class DownloadActivityType {
 		} else if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.replace('_', ' ');
 		} else if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length())
-					+ IndexConstants.EXTRA_EXT;
+			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length()) + IndexConstants.EXTRA_EXT;
 		}
 		return fileName;
 	}
@@ -530,27 +493,22 @@ public class DownloadActivityType {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
 		if (this == HILLSHADE_FILE) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length())
-					.replace(FileNameTranslationHelper.HILL_SHADE + "_", "");
+			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace(FileNameTranslationHelper.HILL_SHADE + "_", "");
 		}
 		if (this == SLOPE_FILE) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length())
-					.replace(FileNameTranslationHelper.SLOPE + "_", "");
+			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace(FileNameTranslationHelper.SLOPE + "_", "");
 		}
 		if (this == HEIGHTMAP_FILE_LEGACY) {
 			String heightmapSuffix = ".heightmap" + IndexConstants.HEIGHTMAP_SQLITE_EXT;
-			return fileName.substring(0, fileName.length() - heightmapSuffix.length())
-					.replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
+			return fileName.substring(0, fileName.length() - heightmapSuffix.length()).replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
 		}
 		if (this == GEOTIFF_FILE) {
-			return fileName.substring(0, fileName.length() - IndexConstants.TIF_EXT.length())
-					.replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
+			return fileName.substring(0, fileName.length() - IndexConstants.TIF_EXT.length()).replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
 		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 		}
-		if (downloadItem.getType() == WIKIVOYAGE_FILE &&
-				fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
+		if (downloadItem.getType() == WIKIVOYAGE_FILE && fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT.length());
 		}
 		if (this == VOICE_FILE) {
@@ -558,8 +516,7 @@ public class DownloadActivityType {
 			if (l == -1) {
 				l = fileName.length();
 			}
-			return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) ? fileName.replace('_', '-')
-					.replaceAll(".js", "") : fileName.substring(0, l);
+			return fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS) ? fileName.replace('_', '-').replaceAll(".js", "") : fileName.substring(0, l);
 		}
 		if (this == FONT_FILE) {
 			int l = fileName.indexOf('.');
