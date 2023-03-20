@@ -211,6 +211,12 @@ task copyWeatherFiles(type: Copy) {
 	include "*.*"
 }
 
+task copyHeightmapFiles(type: Copy) {
+	from "../../resources/heightmap"
+	into "assets/heightmap"
+	include "*.*"
+}
+
 task copyPoiCategories(type: Copy) {
 	from("../../resources/poi") {
 		include "poi_categories.json"
@@ -298,6 +304,7 @@ task collectExternalResources {
 			copyWidgetIconsXhdpi,
 			copyProjDb,
 			copyWeatherFiles,
+			copyHeightmapFiles,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
 			downloadDefaultWikivoyage

@@ -56,7 +56,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<G
 	private void updateSizeDescription() {
 		long size = 0;
 		for (SelectableItem<GPXInfo> item : selectedItems) {
-			size += item.getObject().getFileSize();
+			size += item.getObject().getIncreasedFileSize();
 		}
 		String total = getString(R.string.shared_string_total);
 		titleDescription.setText(getString(R.string.ltr_or_rtl_combine_via_colon, total,

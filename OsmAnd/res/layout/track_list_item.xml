@@ -62,7 +62,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/content_padding_small"
 					android:layout_marginBottom="@dimen/text_margin_small"
-					android:maxLines="2"
+					android:maxLines="3"
 					android:paddingEnd="@dimen/content_padding"
 					android:textColor="?android:textColorPrimary"
 					tools:text="Track name" />

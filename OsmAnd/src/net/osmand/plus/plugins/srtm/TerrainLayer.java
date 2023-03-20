@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
-
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,16 +8,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
+import net.osmand.core.jni.GeoTiffCollection;
+import net.osmand.core.jni.HillshadeRasterMapLayerProvider;
+import net.osmand.core.jni.SlopeRasterMapLayerProvider;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.util.Algorithms;
 
@@ -32,6 +39,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.HILLSHADE_MAIN_COLOR_FILENAME;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.SLOPE_MAIN_COLOR_FILENAME;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.SLOPE_SECONDARY_COLOR_FILENAME;
+import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
+import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
 
 public class TerrainLayer extends MapTileLayer {
 
@@ -46,7 +63,13 @@ public class TerrainLayer extends MapTileLayer {
 
 	private final QuadTree<String> indexedResources = new QuadTree<>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
 
-	public TerrainLayer(@NonNull Context context, SRTMPlugin srtmPlugin) {
+	private SlopeRasterMapLayerProvider slopeLayerProvider;
+	private HillshadeRasterMapLayerProvider hillshadeLayerProvider;
+
+	private int cachedMinVisibleZoom = -1;
+	private int cachedMaxVisibleZoom = -1;
+
+	public TerrainLayer(@NonNull Context context, @NonNull SRTMPlugin srtmPlugin) {
 		super(context, false);
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.srtmPlugin = srtmPlugin;
@@ -57,17 +80,105 @@ public class TerrainLayer extends MapTileLayer {
 	}
 
 	@Override
+	protected boolean setLayerProvider(@Nullable ITileSource map) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return false;
+		}
+
+		int layerIndex = view.getLayerIndex(this);
+		if (map == null) {
+			mapRenderer.resetMapLayerProvider(layerIndex);
+			slopeLayerProvider = null;
+			hillshadeLayerProvider = null;
+			return true;
+		}
+
+		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		boolean slopeFromHeightmap = developmentPlugin != null && developmentPlugin.generateSlopeFrom3DMaps();
+		boolean hillshadeFromHeightmap = developmentPlugin != null && developmentPlugin.generateHillshadeFrom3DMaps();
+
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		GeoTiffCollection geoTiffCollection = mapRendererContext != null
+				? mapRendererContext.getGeoTiffCollection()
+				: null;
+
+		if (mode == SLOPE && slopeFromHeightmap && geoTiffCollection != null) {
+			slopeLayerProvider = createSlopeLayerProvider(geoTiffCollection);
+			mapRenderer.setMapLayerProvider(layerIndex, slopeLayerProvider);
+			hillshadeLayerProvider = null;
+		} else if (mode == HILLSHADE && hillshadeFromHeightmap && geoTiffCollection != null) {
+			hillshadeLayerProvider = createHillshadeLayerProvider(geoTiffCollection);
+			mapRenderer.setMapLayerProvider(layerIndex, hillshadeLayerProvider);
+			slopeLayerProvider = null;
+		} else {
+			TileSourceProxyProvider prov = new TerrainTilesProvider(getApplication(), map, srtmPlugin);
+			mapRenderer.setMapLayerProvider(layerIndex, prov.instantiateProxy(true));
+			prov.swigReleaseOwnership();
+			slopeLayerProvider = null;
+			hillshadeLayerProvider = null;
+		}
+
+		return true;
+	}
+
+	@NonNull
+	private SlopeRasterMapLayerProvider createSlopeLayerProvider(@NonNull GeoTiffCollection geoTiffCollection) {
+		OsmandApplication app = getApplication();
+		String slopeColorFilename = app.getAppPath(HEIGHTMAP_INDEX_DIR + SLOPE_MAIN_COLOR_FILENAME).getAbsolutePath();
+		SlopeRasterMapLayerProvider provider = new SlopeRasterMapLayerProvider(geoTiffCollection, slopeColorFilename);
+		provider.setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
+		provider.setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
+		return provider;
+	}
+
+	@NonNull
+	private HillshadeRasterMapLayerProvider createHillshadeLayerProvider(@NonNull GeoTiffCollection geoTiffCollection) {
+		OsmandApplication app = getApplication();
+		File heightmapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
+		String hillshadeColorFilename = new File(heightmapDir, HILLSHADE_MAIN_COLOR_FILENAME).getAbsolutePath();
+		String slopeSecondaryColorFilename = new File(heightmapDir, SLOPE_SECONDARY_COLOR_FILENAME).getAbsolutePath();
+		HillshadeRasterMapLayerProvider provider =
+				new HillshadeRasterMapLayerProvider(geoTiffCollection, hillshadeColorFilename, slopeSecondaryColorFilename);
+		provider.setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
+		provider.setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
+		return provider;
+	}
+
+	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		int zoom = tileBox.getZoom();
-		if (zoom >= srtmPlugin.getTerrainMinZoom() && zoom <= srtmPlugin.getTerrainMaxZoom()) {
-			setAlpha(srtmPlugin.getTerrainTransparency());
-		} else if(zoom > srtmPlugin.getTerrainMaxZoom()) {
-			// backward compatibility 100 -> 20 with overscale
-			setAlpha(srtmPlugin.getTerrainTransparency() / 5);
-		} else {
-			// ignore
+		int newMinVisibleZoom = srtmPlugin.getTerrainMinZoom();
+		int newMaxVisibleZoom = srtmPlugin.getTerrainMaxZoom();
+		boolean fitsZoomBounds = zoom >= newMinVisibleZoom && zoom <= newMaxVisibleZoom;
+
+		if (cachedMinVisibleZoom != newMinVisibleZoom || cachedMaxVisibleZoom != newMaxVisibleZoom) {
+			boolean clearTilesForCurrentZoom = (cachedMinVisibleZoom != -1 && cachedMaxVisibleZoom != -1)
+					&& (zoom >= cachedMinVisibleZoom && zoom <= cachedMaxVisibleZoom)
+					&& !fitsZoomBounds;
+			cachedMinVisibleZoom = newMinVisibleZoom;
+			cachedMaxVisibleZoom = newMaxVisibleZoom;
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				ZoomLevel minVisibleZoomLevel = ZoomLevel.swigToEnum(newMinVisibleZoom);
+				ZoomLevel maxVisibleZoomLevel = ZoomLevel.swigToEnum(newMaxVisibleZoom);
+				if (slopeLayerProvider != null) {
+					slopeLayerProvider.setMinVisibleZoom(minVisibleZoomLevel);
+					slopeLayerProvider.setMaxVisibleZoom(maxVisibleZoomLevel);
+				} else if (hillshadeLayerProvider != null) {
+					hillshadeLayerProvider.setMinVisibleZoom(minVisibleZoomLevel);
+					hillshadeLayerProvider.setMaxVisibleZoom(maxVisibleZoomLevel);
+				}
+				if (clearTilesForCurrentZoom) {
+					mapRenderer.reloadEverything();
+				}
+			}
 		}
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+
+		setAlpha(srtmPlugin.getTerrainTransparency());
+		if (hasMapRenderer() || fitsZoomBounds) {
+			super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		}
 	}
 
 	private void indexTerrainFiles(OsmandApplication app) {

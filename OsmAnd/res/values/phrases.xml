@@ -196,6 +196,7 @@
 	<string name="poi_climbing_quality">Climbing quality</string>
 	<string name="poi_hiking_filter">Suitable for hiking</string>
 	<string name="poi_self_checkout">Self checkout</string>
+	<string name="poi_waste_accepted">Accepted waste</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -569,7 +570,6 @@
 	<string name="poi_recycling_white_goods">White goods</string>
 	<string name="poi_recycling_cooking_oil">Cooking oil</string>
 	<string name="poi_recycling_engine_oil">Engine oil</string>
-	<string name="poi_recycling_plastic_bags">Plastic bags</string>
 	<string name="poi_recycling_hazardous_waste">Hazardous waste</string>
 	<string name="poi_recycling_mobile_phones">Mobile phones</string>
 	<string name="poi_recycling_hydrargyrum">Hydrargyrum</string>
@@ -602,10 +602,7 @@
 	<string name="poi_recycling_car_batteries">Car batteries</string>
 	<string name="poi_recycling_cars">Cars</string>
 	<string name="poi_recycling_bicycles">Bicycles</string>
-	<string name="poi_recycling_plastic_bottle_caps">Plastic bottle caps</string>
-	<string name="poi_recycling_aluminium_cans">Aluminum cans</string>
 	<string name="poi_recycling_pet_drink_bottles">PET beverage bottles</string>
-	<string name="poi_recycling_textiles">Textiles</string>
 
 	<string name="poi_landfill">Landfill</string>
 	<string name="poi_landfill_waste_nuclear">Nuclear waste</string>
@@ -5049,5 +5046,46 @@
 	<string name="poi_antenna">Antenna</string>
 
 	<string name="poi_aboriginal_lands">Aboriginal lands</string>
+
+	<string name="poi_recycling_plastic_bottle_caps">Plastic bottle caps</string>
+	<string name="poi_recycling_pens">Pens</string>
+	<string name="poi_recycling_pet">PET</string>
+	<string name="poi_recycling_aerosol_cans">Aerosol cans</string>
+	<string name="poi_recycling_aluminium_cans">Aluminium cans</string>
+	<string name="poi_recycling_asbestos">Asbestos</string>
+	<string name="poi_recycling_bags">Bags</string>
+	<string name="poi_recycling_belts">Belts</string>
+	<string name="poi_recycling_boats">Boats</string>
+	<string name="poi_recycling_coffee_capsules">Coffee capsules</string>
+	<string name="poi_recycling_electrical_appliances">Electrical appliances</string>
+	<string name="poi_recycling_electronics">Electronics</string>
+	<string name="poi_recycling_food">Food</string>
+	<string name="poi_recycling_gas_bottles">Gas bottles</string>
+	<string name="poi_recycling_glass_bottles_colour">Coloured glass bottles</string>
+	<string name="poi_recycling_glass_jars">Glass jars</string>
+	<string name="poi_recycling_marine_waste">Marine waste</string>
+	<string name="poi_recycling_metal_packaging">Metal packaging</string>
+	<string name="poi_recycling_oil">Oil</string>
+	<string name="poi_recycling_others">Others</string>
+	<string name="poi_recycling_pallets">Pallets</string>
+	<string name="poi_recycling_plastic_bottle_tops">Plastic bottle tops</string>
+	<string name="poi_recycling_plastic_bags">Plastic bags</string>
+	<string name="poi_recycling_pmd">PMD</string>
+	<string name="poi_recycling_polystyrene_foam">Polystyrene foam</string>
+	<string name="poi_recycling_printer_inkjet_cartridges">Printer inkjet cartridges</string>
+	<string name="poi_recycling_printer_toner_cartridges">Printer toner cartridges</string>
+	<string name="poi_recycling_refund_bottles">Refund bottles</string>
+	<string name="poi_recycling_second_hand">Second hand</string>
+	<string name="poi_recycling_small_metal">Small metal parts</string>
+	<string name="poi_recycling_textiles">Textiles</string>
+	<string name="poi_recycling_toys">Toys</string>
+
+	<string name="poi_waste_trash">Trash</string>
+	<string name="poi_waste_oil">Oil</string>
+	<string name="poi_waste_drugs">Drugs</string>
+	<string name="poi_waste_organic">Organic</string>
+	<string name="poi_waste_rubble">Rubble</string>
+	<string name="poi_waste_dog_excrement">Dog excrement</string>
+	<string name="poi_waste_cigarettes">Cigarettes</string>
 
 </resources>

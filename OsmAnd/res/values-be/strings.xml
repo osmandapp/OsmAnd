@@ -652,7 +652,7 @@
     <string name="map_overlay">Мапа для накладання</string>
     <string name="map_overlay_descr">Абярыце мапу для накладання</string>
     <string name="tile_source_already_installed">Мапа ўжо ўсталяваная, «Налады» будуць абноўленыя.</string>
-    <string name="select_tile_source_to_install">Абярыце мапы (растравыя) для ўсталёўкі або абнаўлення.</string>
+    <string name="select_tile_source_to_install">Абярыце крыніцы растравых мап:</string>
     <string name="internet_not_available">Немагчыма выканаць аперацыю без падлучэнне да Інтэрнэту.</string>
     <string name="install_more">Усталяваць яшчэ…</string>
     <string name="level_to_switch_vector_raster_descr">Выкарыстоўваць агульныя растравыя мапы да гэтага ўзроўню.</string>
@@ -4852,15 +4852,11 @@
     <string name="clouds_widget_desc">Паказвае воблачнасць для бягучага цэнтра мапы.</string>
     <string name="weather_prefs_descr">Прагноз на 24 гадзіны і прагноз на 7 дзён, які абнаўляецца кожныя 3 гадзіны</string>
     <string name="weather_plugin_description">Змяшчае:
-\n
 \n- 5-слаёвы прагноз на 24 гадзіны і 7 дзён
-\n
 \n- віджэты на аснове месцазнаходжання
+\n- ізатэрмы / ізабары
 \n
-\n- ізалініі тэмпературы / ціску
-\n
-\n
-\nДаныя бяруцца з GFS (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nДаныя бяруцца з Global Forecast System (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="weather_wind_kilimeters_per_hour">Кіламетраў за гадзіну</string>
     <string name="weather_wind_meters_per_second">Метры за секунду</string>
     <string name="map_widget_sunrise_desc">Паказвае час ўзыходу сонца або час, які застаўся да ўзыходу сонца.</string>

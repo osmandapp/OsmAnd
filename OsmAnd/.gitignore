@@ -67,6 +67,7 @@ assets/OsmAndCore_ResourcesBundle/
 assets/ui-fonts/*
 assets/weather/*
 assets/proj.db
+assets/heightmap/*
 
 # Android Studio
 /.idea

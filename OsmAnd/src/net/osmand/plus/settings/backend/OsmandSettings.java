@@ -6,6 +6,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCH
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWithoutInternet;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
+import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
@@ -1639,6 +1641,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_MANUAL = 3;
 
 	public final CommonPreference<Integer> ROTATE_MAP = new IntPreference(this, "rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
+
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
@@ -1729,7 +1732,13 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> KEEP_MAP_LABELS_VISIBLE = new BooleanPreference(this, "keep_map_labels_visible", false).makeProfile().cache();
 
-	public final CommonPreference<Boolean> POLYGONS_VISIBILITY_SET_MANUALLY = new BooleanPreference(this, "polygons_visibility_set_manually", false).makeProfile().cache();
+	public final CommonPreference<Boolean> SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON = new BooleanPreference(this, "show_polygons_when_underlay_is_on", false).makeProfile().cache();
+
+	public boolean shouldHidePolygons(boolean groundPolygons) {
+		String attrName = groundPolygons ? NO_POLYGONS_ATTR : HIDE_WATER_POLYGONS_ATTR;
+		CommonPreference<Boolean> hidePreference = getCustomRenderBooleanProperty(attrName);
+		return hidePreference.get() || (MAP_UNDERLAY.get() != null && !SHOW_POLYGONS_WHEN_UNDERLAY_IS_ON.get());
+	}
 
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
@@ -2797,6 +2806,21 @@ public class OsmandSettings {
 	{
 		RENDERER.setModeDefaultValue(ApplicationMode.BOAT, RendererRegistry.NAUTICAL_RENDER);
 		RENDERER.setModeDefaultValue(ApplicationMode.SKI, RendererRegistry.WINTER_SKI_RENDER);
+	}
+
+	public boolean getRenderBooleanPropertyValue(@NonNull String attrName) {
+		if (attrName.equals(NO_POLYGONS_ATTR)) {
+			return shouldHidePolygons(true);
+		} else if (attrName.equals(HIDE_WATER_POLYGONS_ATTR)) {
+			return shouldHidePolygons(false);
+		} else {
+			return getCustomRenderBooleanProperty(attrName).get();
+		}
+	}
+
+	@Nullable
+	public String getRenderPropertyValue(@NonNull String attrName) {
+		return getCustomRenderProperty(attrName).get();
 	}
 
 	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName) {

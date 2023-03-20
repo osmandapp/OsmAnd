@@ -1,7 +1,7 @@
 package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.importfiles.FavoritesImportTask.wptAsFavourites;
+import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
 

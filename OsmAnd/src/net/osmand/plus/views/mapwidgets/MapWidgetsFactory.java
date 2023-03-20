@@ -134,7 +134,7 @@ public class MapWidgetsFactory {
 	private boolean isWidgetCreationAllowed(@NonNull WidgetType widgetType) {
 		if (widgetType == ALTITUDE_MAP_CENTER) {
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			return plugin != null && plugin.isHeightmapEnabled();
+			return plugin != null && plugin.is3DMapsEnabled();
 		}
 		return true;
 	}

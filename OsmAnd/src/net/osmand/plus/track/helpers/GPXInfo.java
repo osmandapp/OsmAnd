@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
 
@@ -25,7 +24,7 @@ public class GPXInfo {
 		this.file = file;
 		this.fileName = fileName;
 		this.name = GpxUiHelper.getGpxTitle(fileName);
-		this.fileSize = file != null ? file.length() + 512 : 0;
+		this.fileSize = file != null ? file.length() : 0;
 		this.lastModified = file != null ? file.lastModified() : 0;
 	}
 
@@ -45,6 +44,15 @@ public class GPXInfo {
 
 	public long getFileSize() {
 		return fileSize;
+	}
+
+	/**
+	 * @return a file size increased by 512 bytes,
+	 * which allows for proper rounding of small files less than 1KB in size.
+	 * Without this rounding, the file size may be displayed as 0KB, which is inaccurate.
+	 */
+	public long getIncreasedFileSize() {
+		return fileSize > 0 ? fileSize + 512 : 0;
 	}
 
 	@Nullable

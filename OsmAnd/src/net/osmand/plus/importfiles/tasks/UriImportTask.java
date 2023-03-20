@@ -1,9 +1,10 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import android.net.Uri;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -32,7 +33,7 @@ import static net.osmand.util.Algorithms.SQLITE_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
 
-class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final ImportHelper importHelper;
 	private final Uri uri;

@@ -2317,11 +2317,11 @@ POIの更新は利用できません</string>
 \n • ルートから大きく外れると自動的に再ルート検索します
 \n • 住所別、種類別（例：レストラン、ホテル、ガソリンスタンド、博物館）、または座標の数値で場所を検索可能です</string>
     <string name="osmand_plus_extended_description_part3">マップ表示
-\n • 現在地と現在の方向を表示できます
-\n • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更できます
-\n • 大事な場所は『お気に入り』として保存できます
-\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
-\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能
+\n • 現在地と現在の方向を表示可能
+\n • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更可能
+\n • 大事な場所は『お気に入り』として保存可能
+\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示可能
+\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能
 \n • オプションで、地名を英語、現地語、または表音つづりで表示可能
 \n</string>
     <string name="osmand_plus_extended_description_part4">OSMとWikipediaデータを使用 
@@ -3001,7 +3001,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_horse">馬</string>
     <string name="app_mode_helicopter">ヘリコプター</string>
     <string name="app_mode_skiing">スキー</string>
-    <string name="base_profile_descr_ski">スキー(あるいはスノーボードなど)</string>
+    <string name="base_profile_descr_ski">スキー、スノーボード</string>
     <string name="show_compass_ruler">コンパス定規を表示</string>
     <string name="hide_compass_ruler">コンパス定規を非表示</string>
     <string name="settings_routing_mode_string">モード:%s</string>
@@ -3025,7 +3025,7 @@ POIの更新は利用できません</string>
     <string name="base_profile_descr_car">乗用車、トラック、オートバイ</string>
     <string name="base_profile_descr_bicycle">マウンテンバイク、原付、馬</string>
     <string name="base_profile_descr_pedestrian">徒歩、ハイキング、ランニング</string>
-    <string name="base_profile_descr_public_transport">公共交通機関に値する鉄道やバス等(国によっては定期旅客を行う船や飛行機等も含む)</string>
+    <string name="base_profile_descr_public_transport">定期運行している鉄道やバスなど</string>
     <string name="base_profile_descr_boat">船舶、漕ぎボート、帆船</string>
     <string name="base_profile_descr_aircraft">航空機、グライダー</string>
     <string name="routing_profile_geocoding">ジオコーディング</string>
@@ -3171,7 +3171,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="track_storage_directory">経路保存フォルダー</string>
     <string name="track_storage_directory_descrp">記録した経路はrecフォルダー内に、月または日付ごとに分けて保存ができます。</string>
-    <string name="store_tracks_in_rec_directory">記録経路は『rec』フォルダーに保存</string>
+    <string name="store_tracks_in_rec_directory">記録経路は\'rec\'フォルダーに保存されます</string>
     <string name="store_tracks_in_daily_directories">記録経路は日付ごとのフォルダーに保存</string>
     <string name="store_tracks_in_daily_directories_descrp">記録経路は日付ごとにサブフォルダー(例: 2018-01-01)へ保存されます</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB使用</string>
@@ -3285,8 +3285,8 @@ POIの更新は利用できません</string>
     <string name="join_segments">セグメントの接続</string>
     <string name="quick_action_directions_from_desc">画面の中心を出発点にするボタンです。その後目的地を設定しルート検索を別途おこなう必要があります。</string>
     <string name="add_new_profile_q">新しいプロファイルとして\'%1$s\'を追加しますか？</string>
-    <string name="save_heading">見出しを含める</string>
-    <string name="save_heading_descr">記録中の各トラックポイントに見出しも保存します。</string>
+    <string name="save_heading">方向もログに含める</string>
+    <string name="save_heading_descr">記録中の各経路地点でのその時の向きも保存します。</string>
     <string name="personal_category_name">パーソナル</string>
     <string name="shared_string_downloading_formatted">%sをダウンロード中</string>
     <string name="rendering_value_thick_name">濃い</string>
@@ -3339,7 +3339,7 @@ POIの更新は利用できません</string>
     <string name="multimedia_notes_prefs_descr">画像サイズ、音声および動画品質</string>
     <string name="osm_editing_prefs_descr">ログイン、パスワード、オフライン編集</string>
     <string name="accessibility_prefs_descr">アイコン種類、色、名前の選択</string>
-    <string name="live_monitoring_descr">旅行記録を利用し現在地の共有ができます。</string>
+    <string name="live_monitoring_descr">移動中のログを指定したサイトに上げることで、現在地の共有ができます。</string>
     <string name="live_monitoring">オンライン追跡</string>
     <string name="save_track_logging_accuracy">ロギング精度</string>
     <string name="tracks_view_descr">記録された経路は%1$s、またはOsmAndフォルダーにあります。</string>

@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import android.net.Uri;
 
@@ -9,11 +9,12 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.importfiles.ImportHelper;
 
 import java.io.File;
 import java.util.ArrayList;
 
-class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
+public class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	private final Uri uri;
 	private final String name;

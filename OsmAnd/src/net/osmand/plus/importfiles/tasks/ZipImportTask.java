@@ -1,4 +1,13 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.TEMP_DIR;
+import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
+import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
+import static net.osmand.plus.utils.FileUtils.createUniqueFileName;
 
 import android.net.Uri;
 
@@ -6,20 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
 import net.osmand.util.Algorithms;
 
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import static net.osmand.plus.utils.FileUtils.createUniqueFileName;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.IndexConstants.TEMP_DIR;
-import static net.osmand.plus.importfiles.ImportHelper.KML_SUFFIX;
 
 public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 
@@ -29,7 +31,7 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 	private final boolean useImportDir;
 
 	public ZipImportTask(@NonNull ImportHelper importHelper, @NonNull FragmentActivity activity,
-						 @NonNull Uri uri, boolean save, boolean useImportDir) {
+	                     @NonNull Uri uri, boolean save, boolean useImportDir) {
 		super(activity);
 		this.importHelper = importHelper;
 		this.uri = uri;
@@ -82,7 +84,7 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 		if (importType == ImportType.KMZ) {
 			String dir = useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR;
 			String name = createUniqueFileName(app, "track", dir, GPX_FILE_EXT);
-			importHelper.handleKmzImport(uri, name + GPX_FILE_EXT, save, useImportDir);
+			importHelper.handleGpxImport(uri, name + GPX_FILE_EXT, OPEN_GPX_CONTEXT_MENU, useImportDir, save);
 		} else if (importType == ImportType.SETTINGS) {
 			String name = createUniqueFileName(app, "settings", TEMP_DIR, OSMAND_SETTINGS_FILE_EXT);
 			importHelper.handleOsmAndSettingsImport(uri, name + OSMAND_SETTINGS_FILE_EXT,
