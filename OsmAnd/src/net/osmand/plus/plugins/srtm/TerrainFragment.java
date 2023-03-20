@@ -2,8 +2,6 @@ package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MAX_ZOOM;
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.TERRAIN_MIN_ZOOM;
 import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
 import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
@@ -212,8 +210,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		zoomSlider.addOnChangeListener(zoomSliderChangeListener);
 		transparencySlider.setValueTo(100);
 		transparencySlider.setValueFrom(0);
-		zoomSlider.setValueTo(TERRAIN_MAX_ZOOM);
-		zoomSlider.setValueFrom(TERRAIN_MIN_ZOOM);
 
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
@@ -243,13 +239,17 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		if (terrainEnabled) {
 			int transparencyValue = (int) (srtmPlugin.getTerrainTransparency() / 2.55);
 			String transparency = transparencyValue + "%";
-			int minZoom = Math.max(srtmPlugin.getTerrainMinZoom(), TERRAIN_MIN_ZOOM);
-			int maxZoom = Math.min(srtmPlugin.getTerrainMaxZoom(), TERRAIN_MAX_ZOOM);
+			int minZoom = srtmPlugin.getTerrainMinZoom();
+			int maxZoom = srtmPlugin.getTerrainMaxZoom();
 			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
 			stateTv.setText(R.string.shared_string_enabled);
 			transparencySlider.setValue(transparencyValue);
 			transparencyValueTv.setText(transparency);
+
+			zoomSlider.setValueFrom(SRTMPlugin.TERRAIN_MIN_SUPPORTED_ZOOM);
+			zoomSlider.setValueTo(SRTMPlugin.TERRAIN_MAX_SUPPORTED_ZOOM);
 			zoomSlider.setValues((float) minZoom, (float) maxZoom);
+
 			minZoomTv.setText(String.valueOf(minZoom));
 			maxZoomTv.setText(String.valueOf(maxZoom));
 			switch (mode) {

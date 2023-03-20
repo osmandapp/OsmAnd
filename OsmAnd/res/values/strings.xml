@@ -11,6 +11,17 @@
 	Thx - Hardy
 -->
 
+    <string name="clear_online_cache_description">This will clear all cache for online weather tile.</string>
+    <string name="clear_online_cache">Clear online cache</string>
+    <string name="offline_cache">Offline cache</string>
+    <string name="shared_string_alt_name">Alternative name</string>
+    <string name="token_is_not_valid">Token is not valid</string>
+    <string name="app_mode_climbing">Climbing</string>
+    <string name="generate_hillshade_from_3d_maps">Generate hillshade raster maps from 3D maps</string>
+    <string name="generate_slope_from_3d_maps">Generate slope raster maps from 3D maps</string>
+    <string name="disable_vertex_hillshade_3d">Disable vertex hillshade in 3D</string>
+    <string name="enable_3d_maps">Enable 3D maps</string>
+    <string name="test_heightmap">Test heightmap</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
     <string name="sort_duration_ascending">Shorter duration first</string>
@@ -48,6 +59,11 @@
     <string name="show_all_tracks">Show all tracks</string>
     <string name="shared_string_on_map">On map</string>
     <string name="display_position_automatic_descr">Depends on Map orientation: bottom for movement direction, center for all others.</string>
+    <string name="weather_forecast_is_outdated">Forecast is outdated.</string>
+    <string name="shared_string_all_world">All world</string>
+    <string name="weather_forecast">Weather forecast</string>
+    <string name="offline_weather_forecast">Offline weather forecast</string>
+    <string name="offline_weather_forecast_desc">You can download weather forecast for 7 days.</string>
     <string name="last_synchronized">Last synchronized</string>
     <string name="weight_limit_error">Minimum value is \"%1$s\" tons. Use the "\"%2$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="share_link">Share link</string>

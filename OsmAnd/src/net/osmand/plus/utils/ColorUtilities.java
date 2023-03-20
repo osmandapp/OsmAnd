@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ColorUtilities {
 
@@ -82,8 +84,24 @@ public class ColorUtilities {
 	/********************************* Basic colors *********************************/
 
 	@ColorInt
-	public static int getSelectedProfileColor(@NonNull OsmandApplication app, boolean nightMode) {
-		return app.getSettings().getApplicationMode().getProfileColor(nightMode);
+	public static int getAppModeColor(@NonNull OsmandApplication app, boolean nightMode) {
+		return getAppModeColor(app, nightMode, 1.0f);
+	}
+
+	@ColorInt
+	public static int getAppModeColor(@NonNull OsmandApplication app, boolean nightMode, float alpha) {
+		OsmandSettings settings = app.getSettings();
+		ApplicationMode appMode = settings.getApplicationMode();
+		return getAppModeColor(appMode, nightMode, alpha);
+	}
+
+	@ColorInt
+	public static int getAppModeColor(@NonNull ApplicationMode appMode, boolean nightMode, float alpha) {
+		int color = appMode.getProfileColor(nightMode);
+		if (alpha < 1.0f) {
+			color = ColorUtilities.getColorWithAlpha(color, alpha);
+		}
+		return color;
 	}
 
 	@ColorInt

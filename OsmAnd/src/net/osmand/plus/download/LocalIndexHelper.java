@@ -140,7 +140,7 @@ public class LocalIndexHelper {
 		if (fileDir != null && fileName != null) {
 			File f = new File(fileDir, fileName);
 			if (f.exists()) {
-				LocalIndexInfo info = new LocalIndexInfo(type, f, backuped, app);
+				LocalIndexInfo info = new LocalIndexInfo(type, f, backuped);
 				updateDescription(info);
 				return info;
 			}
@@ -355,7 +355,7 @@ public class LocalIndexHelper {
 						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 					}
 				} else if (tileFile.isDirectory()) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup);
 
 					if (!TileSourceManager.isTileSourceMetaInfoExist(tileFile)) {
 						info.setCorrupted(true);
@@ -438,7 +438,7 @@ public class LocalIndexHelper {
 		} else if (fileName.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
 			lt = LocalIndexType.DEPTH_DATA;
 		}
-		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup, app);
+		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup);
 		if (indexFileNames.containsKey(fileName) && !backup) {
 			info.setLoaded(true);
 		}
@@ -473,7 +473,7 @@ public class LocalIndexHelper {
 	private void loadLocalData(@NonNull File file, @NonNull LocalIndexType indexType,
 	                           @NonNull List<LocalIndexInfo> result, boolean backup, boolean needDescription,
 	                           @Nullable AbstractLoadLocalIndexTask loadTask) {
-		LocalIndexInfo info = new LocalIndexInfo(indexType, file, backup, app);
+		LocalIndexInfo info = new LocalIndexInfo(indexType, file, backup);
 		if (needDescription) {
 			updateDescription(info);
 		}

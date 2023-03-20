@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.track.helpers.GpxUiHelper.HOUR_IN_MILLIS;
+import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 
 import android.content.Context;
 import android.graphics.Matrix;

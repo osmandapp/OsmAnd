@@ -5094,4 +5094,10 @@
     <string name="shared_string_nearest">Найближчі</string>
     <string name="selected_value">Вибране значення</string>
     <string name="app_mode_moped">Мопед</string>
+    <string name="disable_vertex_hillshade_3d">Вимкнути вершини схилів в 3D</string>
+    <string name="enable_3d_maps">Увімкнути 3D-мапи</string>
+    <string name="generate_hillshade_from_3d_maps">Генерувати растрові мапи пагорбів з 3D-мап</string>
+    <string name="generate_slope_from_3d_maps">Генерувати растрові мапи схилів з 3D-мап</string>
+    <string name="test_heightmap">Тестова мапа висот</string>
+    <string name="app_mode_climbing">Сходження</string>
 </resources>

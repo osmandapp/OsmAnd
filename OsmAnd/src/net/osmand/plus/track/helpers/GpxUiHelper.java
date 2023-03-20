@@ -1,5 +1,6 @@
 package net.osmand.plus.track.helpers;
 
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
@@ -56,6 +57,7 @@ import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListene
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
@@ -97,9 +99,6 @@ public class GpxUiHelper {
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
-
-	public static final long SECOND_IN_MILLIS = 1000L;
-	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
 
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
@@ -637,16 +636,16 @@ public class GpxUiHelper {
 				}
 
 				ImportHelper importHelper = mapActivity.getImportHelper();
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile gpxFile) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
 							GpxSelectionParams params = GpxSelectionParams.newInstance()
 									.showOnMap().syncGroup().selectedByUser().addToMarkers()
 									.addToHistory().saveSelection();
-							app.getSelectedGpxHelper().selectGpxFile(result, params);
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, result.path);
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
 						}
 					}
 				});

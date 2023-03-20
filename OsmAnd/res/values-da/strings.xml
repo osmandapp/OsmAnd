@@ -36,7 +36,7 @@
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygger og skråninger hjælper dig med at vurdere terrænets beskaffenhed og relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af skravering af hældninger, konturlinjer og/eller farvelægning af stejlhed.
+    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygger og hældninger hjælper dig med at vurdere terrænets beskaffenhed og relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af skravering af hældninger, konturlinjer og/eller farvelægning af stejlhed.
 \n
 \nDe underliggende data stammer fra SRTM og ASTER.
 \n
@@ -3403,7 +3403,7 @@
     <string name="select_distance_route_will_recalc">Vælg afstanden, hvorefter ruten genberegnes.</string>
     <string name="recalculate_route_distance_promo">Ruten genberegnes, hvis afstanden fra ruten til den aktuelle placering er større end den valgte værdi.</string>
     <string name="n_items_of_z">%1$s af %2$s</string>
-    <string name="download_slope_maps">Skråninger</string>
+    <string name="download_slope_maps">Hældninger</string>
     <string name="quick_action_terrain_descr">En knap der viser eller skjuler terrænlag på kortet.</string>
     <string name="delete_description">Slet beskrivelse</string>
     <string name="add_description">Tilføj beskrivelse</string>
@@ -3447,7 +3447,7 @@
     <string name="shared_string_transparency">Gennemsigtighed</string>
     <string name="shared_string_zoom_levels">Zoomniveauer</string>
     <string name="shared_string_legend">Tegnforklaring</string>
-    <string name="terrain_empty_state_text">Viser terrænskygger eller skråninger på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
+    <string name="terrain_empty_state_text">Viser terrænskygger eller hældninger på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
     <string name="shared_string_hillshade">Terrænskygge</string>
     <string name="import_complete_description">Alle data fra %1$s er importeret. Brug knapperne nedenfor til at åbne den nødvendige del af appen for at håndtere det.</string>
     <string name="items_added">Poster tilføjet</string>
@@ -3820,7 +3820,7 @@
     <string name="announce_when_exceeded">Meddel, når overskredet</string>
     <string name="user_points">Brugerpunkter</string>
     <string name="output">Resultat</string>
-    <string name="route_line_use_gradient_coloring">Rutelinje vil blive farvelagt afhængig af højdeprofil.</string>
+    <string name="route_line_use_gradient_coloring">Rutelinje vil blive farvelagt afhængig af højdehældning.</string>
     <string name="shared_string_min_height">Min. højde</string>
     <string name="shared_string_max_height">Maks. højde</string>
     <string name="language_description">Vælg det foretrukne sprog og type af stemmevejledning.</string>
@@ -3839,7 +3839,7 @@
     <string name="shared_string_turn">Sving</string>
     <string name="announcement_time_intervals">Tids- og distanceintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
-    <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Højdekurver</string>
+    <string name="hillshade_slope_contour_lines">Terrænskygge / Hældning / Højdekurver</string>
     <string name="activity_type_racing_name">Racerkørsel</string>
     <string name="temporary_conditional_routing_descr">Brug de vejrestriktioner, der er aktive på kortet nu</string>
     <string name="on_hold">I venteposition</string>
@@ -3957,7 +3957,7 @@
     <string name="rendering_value_walkingRoutesOSMC_description">Farvelæg ruterne efter deres individuelle lokale farve (hvis de findes på OpenStreetMap) og symbolet for vandreskjoldet.</string>
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrænkort: højdekurver, terrænskygger, skråning</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrænkort: højdekurver, terrænskygger, hældning</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="terrain_maps">Terrænkort</string>
@@ -3991,7 +3991,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller udløbet token</string>
     <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
-    <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, skråning</string>
+    <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, hældning</string>
     <string name="duration_moment_ago">for et øjeblik siden</string>
     <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Log ud\?
@@ -5084,7 +5084,7 @@
 \n
 \n - En fastgjort positionsplacering i delt skræm-tilstand i Android Auto
 \n
-\n - Tilføjet \"hastighed/skråning\"-graf til sporanalyse
+\n - Tilføjet \"hastighed/hældning\"-graf til sporanalyse
 \n
 \n - Android 13 flyttet valg af app-sprog til systemindstillingerne
 \n
@@ -5100,4 +5100,9 @@
     <string name="sort_distance_descending">Længste distance først</string>
     <string name="shared_string_nearest">Nærmeste</string>
     <string name="app_mode_moped">Knallert</string>
+    <string name="generate_slope_from_3d_maps">Generér hældningsrasterkort fra 3D-kort</string>
+    <string name="disable_vertex_hillshade_3d">Deaktiver vertex-terrænskygge i 3D</string>
+    <string name="enable_3d_maps">Aktivér 3D-kort</string>
+    <string name="test_heightmap">Test højdekort</string>
+    <string name="generate_hillshade_from_3d_maps">Generér terrænskygge-rasterkort fra 3D-kort</string>
 </resources>

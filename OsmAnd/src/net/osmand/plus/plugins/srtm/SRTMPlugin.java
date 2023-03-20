@@ -1,19 +1,11 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.DialogListItemAdapter;
@@ -49,6 +41,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+
 public class SRTMPlugin extends OsmandPlugin {
 
 	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid";
@@ -61,8 +61,12 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
-	public static final int TERRAIN_MIN_ZOOM = 3;
-	public static final int TERRAIN_MAX_ZOOM = 19;
+	public static final String SLOPE_MAIN_COLOR_FILENAME = "slopes_main.txt";
+	public static final String HILLSHADE_MAIN_COLOR_FILENAME = "hillshade_main.txt";
+	public static final String SLOPE_SECONDARY_COLOR_FILENAME = "color_slope.txt";
+
+	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
+	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
 
 	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM;
@@ -206,6 +210,14 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN.set(enabled);
 	}
 
+	public boolean isSlopeMode() {
+		return getTerrainMode() == TerrainMode.SLOPE;
+	}
+
+	public boolean isHillshadeMode() {
+		return getTerrainMode() == TerrainMode.HILLSHADE;
+	}
+
 	public TerrainMode getTerrainMode() {
 		return TERRAIN_MODE.get();
 	}
@@ -249,23 +261,31 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public int getTerrainMinZoom() {
+		int minSupportedZoom = TERRAIN_MIN_SUPPORTED_ZOOM;
+		int minZoom = minSupportedZoom;
 		switch (getTerrainMode()) {
 			case HILLSHADE:
-				return HILLSHADE_MIN_ZOOM.get();
+				minZoom = HILLSHADE_MIN_ZOOM.get();
+				break;
 			case SLOPE:
-				return SLOPE_MIN_ZOOM.get();
+				minZoom = SLOPE_MIN_ZOOM.get();
+				break;
 		}
-		return TERRAIN_MIN_ZOOM;
+		return Math.max(minSupportedZoom, minZoom);
 	}
 
 	public int getTerrainMaxZoom() {
+		int maxSupportedZoom = TERRAIN_MAX_SUPPORTED_ZOOM;
+		int maxZoom = maxSupportedZoom;
 		switch (getTerrainMode()) {
 			case HILLSHADE:
-				return HILLSHADE_MAX_ZOOM.get();
+				maxZoom = HILLSHADE_MAX_ZOOM.get();
+				break;
 			case SLOPE:
-				return SLOPE_MAX_ZOOM.get();
+				maxZoom = SLOPE_MAX_ZOOM.get();
+				break;
 		}
-		return TERRAIN_MAX_ZOOM;
+		return Math.min(maxSupportedZoom, maxZoom);
 	}
 
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {

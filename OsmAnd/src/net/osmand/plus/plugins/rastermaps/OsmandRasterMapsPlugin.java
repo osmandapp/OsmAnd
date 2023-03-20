@@ -116,17 +116,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
-		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
-		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
-
 		underlayListener = change -> {
-			boolean selected = settings.MAP_UNDERLAY.get() != null;
-			if (!settings.POLYGONS_VISIBILITY_SET_MANUALLY.get()) {
-				hidePolygonsPref.set(selected);
-				hideWaterPolygonsPref.set(selected);
-			}
-
 			if (updateConfigureMapItemCallback != null) {
+				boolean selected = settings.MAP_UNDERLAY.get() != null;
 				updateConfigureMapItemCallback.processResult(selected);
 			}
 		};

@@ -56,6 +56,7 @@ public class Amenity extends MapObject {
 	public static final String SUBTYPE = "subtype";
 	public static final String NAME = "name";
 	public static final String SEPARATOR = ";";
+	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 
 	private String subType;
 	private PoiCategory type;
@@ -271,6 +272,16 @@ public class Amenity extends MapObject {
 			}
 		}
 		return l;
+	}
+	public Map<String, String> getAltNamesMap() {
+		Map<String, String>  names = new HashMap<>();
+		for (String nm : getAdditionalInfoKeys()) {
+			String name = additionalInfo.get(nm);
+			if (nm.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
+				names.put(nm.substring(ALT_NAME_WITH_LANG_PREFIX.length()), name);
+			}
+		}
+		return names;
 	}
 
 	public String getTagSuffix(String tagPrefix) {

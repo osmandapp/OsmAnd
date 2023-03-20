@@ -4230,4 +4230,17 @@
     <string name="poi_climbing_grade_french_max">Najťažšia cesta (francúzska stupnica)</string>
     <string name="poi_climbing_grade_uiaa">Stupeň lezenia podľa UIAA</string>
     <string name="poi_climbing_grade_saxon">Stupeň lezenia podľa saskej stupnice</string>
+    <string name="poi_climbing_grade_filter">Stupeň lezenia</string>
+    <string name="poi_climbing_bolt">Lezecká skoba</string>
+    <string name="poi_climbing_bolts_filter">Lezecké skoby</string>
+    <string name="poi_self_checkout">Samoobslužná pokladnica</string>
+    <string name="poi_lifeguard_tower">Záchranárske stanovište/veža</string>
+    <string name="poi_antenna">Anténa</string>
+    <string name="poi_aboriginal_lands">Územie/rezervácia domorodcov</string>
+    <string name="poi_climbing_quality">Kvalita lezenia</string>
+    <string name="poi_self_checkout_no">Samoobslužná pokladnica: nie</string>
+    <string name="poi_water_filter">Voda;Pitná voda</string>
+    <string name="poi_self_checkout_yes">Áno</string>
+    <string name="poi_self_checkout_only">Výlučne</string>
+    <string name="poi_lifeguard">Záchranár/plavčík</string>
 </resources>

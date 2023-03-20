@@ -1,4 +1,4 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.tasks;
 
 import android.os.AsyncTask;
 
@@ -7,6 +7,8 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.Algorithms;
 
@@ -65,8 +67,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			WptPt pt = gpxFile.findPointToShow();
 			File toWrite = getFileToSave(fileName, destinationDir, pt);
 			boolean destinationExists = toWrite.exists();
-			Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
-			if (e == null) {
+			Exception exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
+
+			if (listener != null) {
+				listener.onGpxSaved(exception != null ? exception.getMessage() : null, gpxFile);
+			}
+			if (exception == null) {
 				gpxFile.path = toWrite.getAbsolutePath();
 				File file = new File(gpxFile.path);
 				if (destinationExists) {

@@ -370,7 +370,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof TracksFragment) {
-			((TracksFragment) fragment).updateTabsContext();
+			((TracksFragment) fragment).updateTabsContent();
 		}
 		dismiss();
 	}
