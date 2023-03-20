@@ -5100,4 +5100,14 @@
     <string name="generate_slope_from_3d_maps">Генерувати растрові мапи схилів з 3D-мап</string>
     <string name="test_heightmap">Тестова мапа висот</string>
     <string name="app_mode_climbing">Сходження</string>
+    <string name="clear_online_cache">Очистити онлайн-кеш</string>
+    <string name="offline_cache">Офлайн-кеш</string>
+    <string name="shared_string_alt_name">Альтернативна назва</string>
+    <string name="token_is_not_valid">Токен недійсний</string>
+    <string name="weather_forecast">Прогноз погоди</string>
+    <string name="offline_weather_forecast">Офлайн прогноз погоди</string>
+    <string name="clear_online_cache_description">Це очистить весь кеш тайлів онлайн-погоди.</string>
+    <string name="weather_forecast_is_outdated">Прогноз застарілий.</string>
+    <string name="shared_string_all_world">Весь світ</string>
+    <string name="offline_weather_forecast_desc">Ви можете завантажити прогноз погоди на 7 днів.</string>
 </resources>
