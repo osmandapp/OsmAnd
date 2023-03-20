@@ -4962,7 +4962,7 @@
     <string name="map_widget_group_sunrise_sunset_desc">Эти виджеты отображают информацию о следующем восходе и закате солнца.</string>
     <string name="turn_on_nautical_depth_description">Включите для просмотра данных о морских глубинах на карте.</string>
     <string name="rendering_attr_depthContourWidth_name">Толщина изобат</string>
-    <string name="storage_migration_fragment_close_descr">Выполняется копирование %1$s%%. Если остановить сейчас, приложение может работать некорректно.</string>
+    <string name="storage_migration_fragment_close_descr">Копирование завершено только на %1$s%%. Если остановить сейчас, приложение может работать некорректно.</string>
     <string name="quick_action_temperature_layer">Переключатель для отображения или скрытия слоя температуры на карте.</string>
     <string name="quick_action_precipitation_layer">Переключатель для отображения или скрытия слоя осадков на карте.</string>
     <string name="pressure_layer">Слой давления</string>
@@ -4974,7 +4974,7 @@
     <string name="precipitation_layer">Слой осадков</string>
     <string name="cloud_layer">Слой облачности</string>
     <string name="rendering_attr_showMtbScale_name">Показать MTB шкалу</string>
-    <string name="rendering_attr_showMtbScale_description">Показать трассы в соответствии с MTB-шкалой.</string>
+    <string name="rendering_attr_showMtbScale_description">Показать трассы в соответствии с их MTB-шкалой.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
@@ -4982,7 +4982,7 @@
     <string name="mtb_segment_classification">Классификация сегментов</string>
     <string name="mtb_scale">MTB шкала</string>
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии порывов ветра (изотахи)</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии скорости ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
     <string name="open_weather_action_description">Позволяет открыть экран с подробной информацией о погоде.</string>
     <string name="open_weather_action">Открыть прогноз погоды</string>
@@ -5017,7 +5017,7 @@
     <string name="export_to_file">Экспорт в файл</string>
     <string name="backup_error_failed_to_fetch_remote_items">Не удалось получить список файлов с сервера.</string>
     <string name="last_sync">Последняя синхронизация</string>
-    <string name="import_export">Импорт/Экспорт</string>
+    <string name="import_export">Импорт/экспорт</string>
     <string name="cloud_changes">Изменения в облаке</string>
     <string name="local_changes_will_be_dismissed">Локальные изменения будут отклонены</string>
     <string name="shared_string_modified">Изменён</string>
@@ -5101,5 +5101,9 @@
     <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
     <string name="app_mode_moped">Мопед</string>
     <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
-    <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D карт</string>
+    <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D-карт</string>
+    <string name="disable_vertex_hillshade_3d">Отключить отмывку вершин в 3D</string>
+    <string name="test_heightmap">Тестировать карты высот</string>
+    <string name="enable_3d_maps">Включить 3D-карты</string>
+    <string name="app_mode_climbing">Альпинизм</string>
 </resources>
