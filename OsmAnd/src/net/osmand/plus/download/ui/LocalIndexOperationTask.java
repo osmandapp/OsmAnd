@@ -3,7 +3,10 @@ package net.osmand.plus.download.ui;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.IndexConstants;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -15,6 +18,7 @@ import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexesAdapter;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -122,6 +126,7 @@ public class LocalIndexOperationTask extends AsyncTask<LocalIndexInfo, LocalInde
 							Algorithms.removeAllFiles(tWal);
 						}
 						clearMapillaryTiles(info);
+						clearHeightmapTiles(info);
 					}
 				} else if (operation == RESTORE_OPERATION) {
 					successfull = move(new File(info.getPathToData()), getFileToRestore(info));
@@ -229,6 +234,15 @@ public class LocalIndexOperationTask extends AsyncTask<LocalIndexInfo, LocalInde
 					}
 				}
 			}
+		}
+	}
+
+	private void clearHeightmapTiles(@NonNull LocalIndexInfo info) {
+		String filePath = info.getPathToData();
+		boolean heightmap = filePath.endsWith(IndexConstants.TIF_EXT);
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (heightmap && mapRendererContext != null) {
+			mapRendererContext.removeCachedHeightmapTiles(filePath);
 		}
 	}
 }
