@@ -319,7 +319,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			}
 		} else {
 			editText.requestFocus();
-			editText.setError("Token is not valid");
+			editText.setError(getString(R.string.token_is_not_valid));
 		}
 	}
 

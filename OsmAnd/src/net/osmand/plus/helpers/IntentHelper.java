@@ -5,6 +5,7 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -27,9 +28,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupListeners;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
@@ -88,7 +87,7 @@ public class IntentHelper {
 	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
 
-	private BackupListeners.OnRegisterDeviceListener registerDeviceListener;
+	private OnRegisterDeviceListener registerDeviceListener;
 
 	public IntentHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -98,7 +97,7 @@ public class IntentHelper {
 		registerDeviceListener = getRegisterDeviceListener();
 	}
 
-	private BackupListeners.OnRegisterDeviceListener getRegisterDeviceListener() {
+	private OnRegisterDeviceListener getRegisterDeviceListener() {
 		if (registerDeviceListener == null) {
 			registerDeviceListener = (status, message, error) -> {
 				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
