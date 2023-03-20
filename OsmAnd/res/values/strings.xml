@@ -11,7 +11,7 @@
 	Thx - Hardy
 -->
 
-
+    <string name="shared_string_alt_name">Alternative name</string>
     <string name="token_is_not_valid">Token is not valid</string>
     <string name="app_mode_climbing">Climbing</string>
     <string name="generate_hillshade_from_3d_maps">Generate hillshade raster maps from 3D maps</string>

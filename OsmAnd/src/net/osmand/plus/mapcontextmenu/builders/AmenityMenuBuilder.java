@@ -67,11 +67,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.buildInternal(view);
 
 		buildNearestRows((ViewGroup) view);
-		buildNamesRow((ViewGroup) view);
+		buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);
+		buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
 	}
 
-	public void buildNamesRow(ViewGroup viewGroup) {
-		Map<String, String> namesMap = amenity.getNamesMap(true);
+	public void buildNamesRow(ViewGroup viewGroup, Map<String, String> namesMap, boolean altName) {
 		if (namesMap.values().size() > 0) {
 			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
 			Locale availablePreferredLocale = getAvailablePreferredLocale(namesMap);
@@ -92,10 +92,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 
 			Context context = viewGroup.getContext();
-			View amenitiesRow = createRowContainer(context, NAMES_ROW_KEY);
+			View amenitiesRow = createRowContainer(context, altName ? ALT_NAMES_ROW_KEY : NAMES_ROW_KEY);
+			String hint = app.getString(altName ? R.string.shared_string_alt_name : R.string.shared_string_name);
 			rowsBuilder.buildNamesRow(amenitiesRow, getRowIcon(R.drawable.ic_action_map_language), name,
-					app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(R.string.shared_string_name), nameLocale.getDisplayLanguage()),
-					namesMap.size() > 1 ? getNamesCollapsableView(namesMap, nameLocale.getLanguage()) : null, true);
+					app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, nameLocale.getDisplayLanguage()),
+					namesMap.size() > 1 ? getNamesCollapsableView(namesMap, nameLocale.getLanguage(), hint) : null, true);
 			viewGroup.addView(amenitiesRow);
 		}
 	}
@@ -113,7 +114,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		return null;
 	}
 
-	protected CollapsableView getNamesCollapsableView(Map<String, String> mapNames, @Nullable String excludedLanguageKey) {
+	protected CollapsableView getNamesCollapsableView(Map<String, String> mapNames, @Nullable String excludedLanguageKey,
+	                                                  String hint) {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (int i = 0; i < mapNames.size(); i++) {
 			String key = (String) mapNames.keySet().toArray()[i];
@@ -123,7 +125,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 				View amenitiesRow = createRowContainer(app, null);
 				rowsBuilder.buildNamesRow(amenitiesRow, null, name,
-						app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(R.string.shared_string_name), locale.getDisplayLanguage()),
+						app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, locale.getDisplayLanguage()),
 						null, false);
 				llv.addView(amenitiesRow);
 			}
