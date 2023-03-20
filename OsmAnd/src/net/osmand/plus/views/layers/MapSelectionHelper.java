@@ -409,7 +409,6 @@ public class MapSelectionHelper {
 				amenity.getX().add(points31.get(k).getX());
 				amenity.getY().add(points31.get(k).getY());
 			}
-			amenity.setLocation(latLon);
 		}
 		return amenity;
 	}
