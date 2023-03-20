@@ -95,9 +95,12 @@ public class IntentHelper {
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
 
-		registerDeviceListener = new BackupListeners.OnRegisterDeviceListener() {
-			@Override
-			public void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error) {
+		registerDeviceListener = getRegisterDeviceListener();
+	}
+
+	private BackupListeners.OnRegisterDeviceListener getRegisterDeviceListener() {
+		if (registerDeviceListener == null) {
+			registerDeviceListener = (status, message, error) -> {
 				if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 					if (status == BackupHelper.STATUS_SUCCESS) {
 						BackupCloudFragment.showInstance(mapActivity.getSupportFragmentManager());
@@ -105,9 +108,10 @@ public class IntentHelper {
 						LOG.error(message);
 					}
 				}
-				app.getBackupHelper().getBackupListeners().removeRegisterDeviceListener(this);
-			}
-		};
+				app.runInUIThread(() -> app.getBackupHelper().getBackupListeners().removeRegisterDeviceListener(registerDeviceListener));
+			};
+		}
+		return registerDeviceListener;
 	}
 
 	public boolean parseLaunchIntents() {
@@ -203,9 +207,7 @@ public class IntentHelper {
 		} else if (!app.getBackupHelper().isRegistered() && !Algorithms.isEmpty(settings.BACKUP_USER_EMAIL.get())) {
 			if (BackupHelper.isTokenValid(token)) {
 				BackupHelper backupHelper = app.getBackupHelper();
-				if (!backupHelper.getBackupListeners().getRegisterDeviceListeners().contains(registerDeviceListener)) {
-					backupHelper.getBackupListeners().addRegisterDeviceListener(registerDeviceListener);
-				}
+				backupHelper.getBackupListeners().addRegisterDeviceListener(registerDeviceListener);
 				backupHelper.registerDevice(token);
 			} else {
 				LOG.error("Malformed OsmAnd backup authorization URL: token is not valid");

@@ -74,7 +74,9 @@ public class BackupListeners {
 	}
 
 	public void addDeleteFilesListener(@NonNull OnDeleteFilesListener listener) {
-		deleteFilesListeners.add(listener);
+		if (!deleteFilesListeners.contains(listener)) {
+			deleteFilesListeners.add(listener);
+		}
 	}
 
 	public void removeDeleteFilesListener(@NonNull OnDeleteFilesListener listener) {
@@ -86,7 +88,9 @@ public class BackupListeners {
 	}
 
 	public void addRegisterUserListener(@NonNull OnRegisterUserListener listener) {
-		registerUserListeners.add(listener);
+		if (!registerUserListeners.contains(listener)) {
+			registerUserListeners.add(listener);
+		}
 	}
 
 	public void removeRegisterUserListener(@NonNull OnRegisterUserListener listener) {
@@ -98,7 +102,9 @@ public class BackupListeners {
 	}
 
 	public void addRegisterDeviceListener(@NonNull OnRegisterDeviceListener listener) {
-		registerDeviceListeners.add(listener);
+		if (!registerDeviceListeners.contains(listener)) {
+			registerDeviceListeners.add(listener);
+		}
 	}
 
 	public void removeRegisterDeviceListener(@NonNull OnRegisterDeviceListener listener) {
