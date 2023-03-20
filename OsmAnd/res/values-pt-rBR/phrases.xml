@@ -4510,4 +4510,19 @@
     <string name="poi_recycling_boats">Barcos</string>
     <string name="poi_recycling_coffee_capsules">Cápsulas de café</string>
     <string name="poi_recycling_electrical_appliances">Aparelhos elétricos</string>
+    <string name="poi_recycling_belts">Cintos</string>
+    <string name="poi_recycling_electronics">Eletrônicos</string>
+    <string name="poi_recycling_food">Comida</string>
+    <string name="poi_recycling_gas_bottles">Botijões de gás</string>
+    <string name="poi_recycling_glass_bottles_colour">Garrafas de vidro coloridas</string>
+    <string name="poi_recycling_glass_jars">Jarras de vidro</string>
+    <string name="poi_recycling_marine_waste">Resíduos marinhos</string>
+    <string name="poi_recycling_metal_packaging">Embalagens de metal</string>
+    <string name="poi_recycling_oil">Petróleo</string>
+    <string name="poi_recycling_others">Outros</string>
+    <string name="poi_recycling_plastic_bottle_tops">Tampas de garrafas de plástico</string>
+    <string name="poi_recycling_polystyrene_foam">Espuma de poliestireno</string>
+    <string name="poi_recycling_printer_inkjet_cartridges">Cartuchos de impressora de jato de tinta</string>
+    <string name="poi_recycling_printer_toner_cartridges">Cartuchos de toner de impressora</string>
+    <string name="poi_recycling_second_hand">Segunda mão</string>
 </resources>
