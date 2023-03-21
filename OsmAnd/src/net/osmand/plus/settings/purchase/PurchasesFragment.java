@@ -56,8 +56,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = isNightMode(false);
 	}
 
 	@Override

@@ -51,7 +51,6 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
 		searchHelper = new WikivoyageSearchHelper(app);
 
 		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
@@ -144,7 +143,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 	private void setAdapterItems(@Nullable List<WikivoyageSearchResult> items) {
 		if (items == null || items.isEmpty()) {
-			TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getBookmarksHelper();
+			TravelLocalDataHelper ldh = app.getTravelHelper().getBookmarksHelper();
 			adapter.setHistoryItems(ldh.getAllHistory());
 		} else {
 			adapter.setItems(items);
@@ -157,7 +156,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 		searchHelper.search(searchQuery, new ResultMatcher<List<WikivoyageSearchResult>>() {
 			@Override
 			public boolean publish(List<WikivoyageSearchResult> results) {
-				getMyApplication().runInUIThread(() -> {
+				app.runInUIThread(() -> {
 					if (!isCancelled()) {
 						setAdapterItems(results);
 						switchProgressBarVisibility(false);

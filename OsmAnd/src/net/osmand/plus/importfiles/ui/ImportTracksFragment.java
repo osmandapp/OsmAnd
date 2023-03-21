@@ -79,8 +79,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	private static final String SELECTED_DIRECTORY_KEY = "selected_directory_key";
 
-	private OsmandApplication app;
-
 	private final List<TrackItem> trackItems = new ArrayList<>();
 	private final Set<TrackItem> selectedTracks = new HashSet<>();
 
@@ -109,7 +107,6 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		nightMode = isNightMode(true);
 
 		if (savedInstanceState == null) {
