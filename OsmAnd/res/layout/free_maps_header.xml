@@ -4,55 +4,42 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/list_item_height"
-	android:orientation="vertical">
+	android:orientation="horizontal">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:src="@drawable/ic_action_map_update"
+		android:tint="?attr/default_icon_color" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:minHeight="@dimen/list_item_height"
-		android:paddingStart="@dimen/list_content_padding"
-		android:paddingLeft="@dimen/list_content_padding"
-		android:paddingEnd="0dp"
-		android:paddingRight="0dp">
+		android:layout_gravity="center_vertical"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_small">
 
-		<ImageView
-			android:id="@+id/icon"
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/title"
+			style="@style/TitleStyle"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding_small"
-			android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-			android:layout_marginRight="@dimen/favorites_icon_right_margin"
-			android:src="@drawable/ic_action_alert"
-			android:tint="@color/color_osm_edit_delete" />
+			android:text="@string/free_maps_updates"
+			android:textColor="?android:textColorPrimary" />
 
-		<LinearLayout
-			android:layout_width="0dp"
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			style="@style/DescStyle"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_weight="1"
-			android:orientation="vertical"
-			android:paddingTop="@dimen/content_padding_small"
-			android:paddingBottom="@dimen/content_padding_small">
-
-			<TextView
-				android:id="@+id/title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/emergency_updates"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_list_text_size" />
-
-			<TextView
-				android:id="@+id/description"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:gravity="center_vertical"
-				android:maxLines="25"
-				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_sub_text_size"
-				tools:text="@string/troubleshooting_description" />
-
-		</LinearLayout>
+			android:gravity="center_vertical"
+			android:maxLines="25"
+			android:textColor="?android:textColorSecondary"
+			tools:text="We hope rescue operations will help as many people as possible and we provide all maps free of charge." />
 
 	</LinearLayout>
 

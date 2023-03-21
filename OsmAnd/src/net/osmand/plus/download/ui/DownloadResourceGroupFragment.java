@@ -144,7 +144,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	}
 
 	private void addSubscribeEmailRow() {
-		if (DownloadActivity.shouldShowFreeVersionBanner(app) && !settings.EMAIL_SUBSCRIBED.get() && !shouldDisplayFreeMapsMessage()) {
+		if (DownloadActivity.shouldShowFreeVersionBanner(app) && !settings.EMAIL_SUBSCRIBED.get()) {
 			subscribeEmailView = activity.getLayoutInflater().inflate(R.layout.subscribe_email_header, null, false);
 			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(v -> subscribe());
 			listView.addHeaderView(subscribeEmailView);
