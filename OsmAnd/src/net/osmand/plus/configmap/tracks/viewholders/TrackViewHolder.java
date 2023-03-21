@@ -40,6 +40,7 @@ import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
@@ -95,8 +96,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		boolean selected = helper.getSelectedTracks().contains(trackItem);
 
 		checkbox.setChecked(selected);
-		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
-		UiUtilities.setupCompoundButton(selected, activeColor, checkbox);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		UiUtilities.setupCompoundButton(nightMode, activeColor, checkbox);
 		itemView.setOnClickListener(v -> fragment.onTrackItemsSelected(Collections.singleton(trackItem), !selected));
 
 		AndroidUiHelper.updateVisibility(divider, showDivider);

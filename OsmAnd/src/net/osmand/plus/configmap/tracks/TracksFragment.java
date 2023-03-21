@@ -28,6 +28,7 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -54,6 +55,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -153,7 +155,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		actionsButton.setOnClickListener(this::showOptionsMenu);
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
 
-		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_primary_dark : R.color.app_bar_color_dark);
+		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 		switchGroup.setImageTintList(ColorStateList.valueOf(iconColor));
 		actionsButton.setImageTintList(ColorStateList.valueOf(iconColor));
 	}
@@ -185,6 +187,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		adapter = new TracksTabAdapter(this, getTrackTabs());
 
 		viewPager = view.findViewById(R.id.view_pager);
+		reduceDragSensitivity(8);
 		viewPager.setAdapter(adapter);
 
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
@@ -200,6 +203,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 					View customView = inflater.inflate(R.layout.tab_title_view, tabLayout, false);
 					TextView textView = customView.findViewById(android.R.id.text1);
 					textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
+					textView.setAllCaps(true);
 
 					tab.setCustomView(customView);
 					tab.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
@@ -207,6 +211,19 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		mediator.attach();
 	}
 
+	private void reduceDragSensitivity(int sensitivity) {
+		try {
+			Field ff = ViewPager2.class.getDeclaredField("mRecyclerView") ;
+			ff.setAccessible(true);
+			RecyclerView recyclerView =  (RecyclerView) ff.get(viewPager);
+			Field touchSlopField = RecyclerView.class.getDeclaredField("mTouchSlop") ;
+			touchSlopField.setAccessible(true);
+			int touchSlop = (int) touchSlopField.get(recyclerView);
+			touchSlopField.set(recyclerView, touchSlop * sensitivity);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
 	private void setupButtons(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> saveChanges());
