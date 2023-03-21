@@ -4492,7 +4492,7 @@
     <string name="poi_socket_cee_red_16a_voltage">مأخذ: CEE اﻷحمر 16A: جهد كهربائي</string>
     <string name="poi_socket_cee_red_32a_voltage">مأخذ: CEE اﻷحمر 32A: جهد كهربائي</string>
     <string name="poi_socket_schuko_voltage">مأخذ: Schuko: جهد كهربائي</string>
-    <string name="poi_recycling_aluminium_cans">علب الألمنيوم</string>
+    <string name="poi_recycling_aluminium_cans">قارورات ألمنيوم</string>
     <string name="poi_recycling_plastic_bottle_caps">أغطية زجاجات بلاستيكية</string>
     <string name="poi_recycling_pet_drink_bottles">زجاجات مشروبات PET</string>
     <string name="poi_recycling_textiles">منسوجات</string>
@@ -4505,4 +4505,19 @@
     <string name="poi_aboriginal_lands">أراضي السكان الأصليين</string>
     <string name="poi_water_filter">المياه؛ مياه الشرب</string>
     <string name="poi_antenna">هوائي</string>
+    <string name="poi_recycling_gas_bottles">زجاجات غاز</string>
+    <string name="poi_waste_accepted">النفايات المقبولة</string>
+    <string name="poi_recycling_pens">أقلام</string>
+    <string name="poi_recycling_pet">بولي ايثلين</string>
+    <string name="poi_recycling_aerosol_cans">قارورات تعمل بالهواء المضغوط</string>
+    <string name="poi_recycling_asbestos">مادة الاسبست</string>
+    <string name="poi_recycling_bags">أكياس</string>
+    <string name="poi_recycling_belts">أحزمة</string>
+    <string name="poi_recycling_boats">قوارب</string>
+    <string name="poi_recycling_coffee_capsules">كبسولات قهوة</string>
+    <string name="poi_recycling_electrical_appliances">أجهزة كهربائية</string>
+    <string name="poi_recycling_electronics">إلكترونيات</string>
+    <string name="poi_recycling_food">أكل</string>
+    <string name="poi_recycling_glass_bottles_colour">قارورات زجاجية ملونة</string>
+    <string name="poi_recycling_glass_jars">جرار (عبوات) زجاجية</string>
 </resources>
