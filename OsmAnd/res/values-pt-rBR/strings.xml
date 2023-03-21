@@ -5094,4 +5094,12 @@
     <string name="enable_3d_maps">Ativar mapas 3D</string>
     <string name="generate_slope_from_3d_maps">Gere mapas raster de inclinação a partir de mapas 3D</string>
     <string name="disable_vertex_hillshade_3d">Desativar sombreamento de vértice em 3D</string>
+    <string name="clear_online_cache">Limpar cache online</string>
+    <string name="token_is_not_valid">O token não é válido</string>
+    <string name="shared_string_alt_name">Nome alternativo</string>
+    <string name="shared_string_all_world">Mundo inteiro</string>
+    <string name="weather_forecast">Previsão do tempo</string>
+    <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
+    <string name="offline_cache">Cache off-line</string>
+    <string name="test_heightmap">Mapa de altura de teste</string>
 </resources>
