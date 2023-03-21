@@ -45,7 +45,6 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
-	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
