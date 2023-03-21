@@ -24,23 +24,21 @@ import androidx.core.widget.NestedScrollView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragment
 		implements InAppPurchaseListener, OnOffsetChangedListener, OnScrollChangedListener {
 
 	public static final String SCROLL_POSITION = "scroll_position";
 
-	protected OsmandApplication app;
 	protected InAppPurchaseHelper purchaseHelper;
 
 	protected View mainView;
@@ -85,11 +83,10 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		purchaseHelper = app.getInAppPurchaseHelper();
 		usedOnMap = getMapActivity() != null;
 		nightMode = isNightMode(usedOnMap);
-		themedInflater = UiUtilities.getInflater(getMyActivity(), nightMode);
+		themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
 	}
 
 	@NonNull
@@ -100,7 +97,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColorId()));
@@ -197,8 +194,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	@Override
 	public void onGetItems() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && InAppPurchaseHelper.isSubscribedToAny(app)) {
+		if (isAdded() && InAppPurchaseHelper.isSubscribedToAny(app)) {
 			updateContent(false);
 		}
 	}

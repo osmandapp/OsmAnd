@@ -72,7 +72,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			int statusBarColor = ColorUtilities.getActivityBgColor(ctx, isNightMode(true));
@@ -103,7 +103,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 
 		View btnSave = view.findViewById(R.id.btn_save);
 		int drawableRes = isNightMode(true) ? R.drawable.btn_solid_border_dark : R.drawable.btn_solid_border_light;
-		AndroidUtils.setBackground(btnSave, getMyApplication().getUIUtilities().getIcon(drawableRes));
+		AndroidUtils.setBackground(btnSave, getIcon(drawableRes));
 	}
 
 	private void showDismissDialog() {

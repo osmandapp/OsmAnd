@@ -97,8 +97,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private boolean nightMode;
 
 	private View toolbarSwitchContainer;
@@ -136,8 +134,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		settings = getSettings();
 		nightMode = isNightMode(false);
 		setHasOptionsMenu(true);
 	}
@@ -342,7 +338,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	private void switchOnLiveUpdates() {
 		settings.IS_LIVE_UPDATES_ON.set(true);
 		enableLiveUpdates(true);
-		showUpdateDialog(getMyActivity(), getFragmentManager(), this);
+		showUpdateDialog(getActivity(), getFragmentManager(), this);
 		startUpdateDateAsyncTask();
 	}
 
@@ -420,8 +416,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			Collections.sort(mapsList, new Comparator<LocalIndexInfo>() {
 				@Override
 				public int compare(LocalIndexInfo o1, LocalIndexInfo o2) {
-					CommonPreference<Boolean> preference1 = preferenceForLocalIndex(o1.getFileNameWithoutRoadSuffix(), getSettings());
-					CommonPreference<Boolean> preference2 = preferenceForLocalIndex(o2.getFileNameWithoutRoadSuffix(), getSettings());
+					CommonPreference<Boolean> preference1 = preferenceForLocalIndex(o1.getFileNameWithoutRoadSuffix(), settings);
+					CommonPreference<Boolean> preference2 = preferenceForLocalIndex(o2.getFileNameWithoutRoadSuffix(), settings);
 					int prefSort = preference2.get().compareTo(preference1.get());
 					if (prefSort != 0) {
 						return prefSort;
@@ -582,7 +578,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		GetLastUpdateDateTask(LiveUpdatesFragment fragment) {
 			this.fragment = new WeakReference<>(fragment);
-			app = fragment.getMyApplication();
+			app = fragment.app;
 		}
 
 		@Override

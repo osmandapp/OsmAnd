@@ -1,7 +1,7 @@
 package net.osmand.plus.download.ui;
 
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
+import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
 import android.content.res.Resources;
 import android.util.TypedValue;
@@ -16,8 +16,7 @@ import net.osmand.plus.download.CustomIndexItem;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.download.DownloadResourceGroupType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,13 +78,13 @@ public class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapte
 				boolean useShortName = type == NAUTICAL_DEPTH_HEADER || type == NAUTICAL_POINTS_HEADER;
 				viewHolder.setUseShortName(useShortName);
 			}
-			if (mainGroup.getType() == DownloadResourceGroup.DownloadResourceGroupType.REGION &&
-					group != null && group.getType() == DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS
+			if (mainGroup.getType() == DownloadResourceGroupType.REGION &&
+					group != null && group.getType() == DownloadResourceGroupType.REGION_MAPS
 					&& !(item instanceof CustomIndexItem)) {
 				viewHolder.setShowTypeInName(true);
 				viewHolder.setShowTypeInDesc(false);
-			} else if (group != null && (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.SRTM_HEADER
-					|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.HILLSHADE_HEADER)) {
+			} else if (group != null && (group.getType() == DownloadResourceGroupType.SRTM_HEADER
+					|| group.getType() == DownloadResourceGroupType.HILLSHADE_HEADER)) {
 				viewHolder.setShowTypeInName(false);
 				viewHolder.setShowTypeInDesc(false);
 			} else {

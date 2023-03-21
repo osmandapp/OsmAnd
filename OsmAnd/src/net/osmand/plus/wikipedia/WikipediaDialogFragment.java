@@ -23,19 +23,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -79,18 +78,15 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					FragmentManager fm = getFragmentManager();
-					if (fm == null) {
-						return;
-					}
-					WikipediaOptionsBottomSheetDialogFragment fragment = new WikipediaOptionsBottomSheetDialogFragment();
-					fragment.setUsedOnMap(false);
-					fragment.setTargetFragment(WikipediaDialogFragment.this,
-							WikipediaOptionsBottomSheetDialogFragment.REQUEST_CODE);
-					fragment.show(fm, WikipediaOptionsBottomSheetDialogFragment.TAG);
+				FragmentManager manager = getFragmentManager();
+				if (manager == null) {
+					return;
 				}
+				WikipediaOptionsBottomSheetDialogFragment fragment = new WikipediaOptionsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
+				fragment.setTargetFragment(WikipediaDialogFragment.this,
+						WikipediaOptionsBottomSheetDialogFragment.REQUEST_CODE);
+				fragment.show(manager, WikipediaOptionsBottomSheetDialogFragment.TAG);
 			}
 		});
 		ColorStateList buttonColorStateList = AndroidUtils.createPressedColorStateList(getContext(), nightMode,
@@ -156,8 +152,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		webViewClient = new WikipediaWebViewClient(getActivity(), amenity, nightMode);
 		contentWebView.setWebViewClient(webViewClient);
 		updateWebSettings();
-		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),
-				nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
+		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
 
 		return mainView;
 	}
@@ -176,7 +171,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		sb.append(article);
 		sb.append(FOOTER_INNER);
 		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
-			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
+			writeOutHTML(sb, new File(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
 		}
 		return sb.toString();
 	}
@@ -208,7 +203,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		if (amenity != null) {
 			String preferredLanguage = lang;
 			if (TextUtils.isEmpty(preferredLanguage)) {
-				preferredLanguage = getMyApplication().getLanguage();
+				preferredLanguage = app.getLanguage();
 			}
 
 			langSelected = amenity.getContentLanguage("content", preferredLanguage, "en");

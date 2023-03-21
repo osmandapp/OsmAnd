@@ -3,12 +3,14 @@ package net.osmand.plus.download;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -29,89 +31,11 @@ public class DownloadResourceGroup {
 
 	protected WorldRegion region;
 
-	public enum DownloadResourceGroupType {
-		// headers
-		WORLD_MAPS(R.string.world_maps),
-		REGION_MAPS(R.string.region_maps),
-		SRTM_HEADER(R.string.download_srtm_maps),
-		HILLSHADE_HEADER(R.string.download_hillshade_maps),
-		OTHER_MAPS_HEADER(R.string.download_select_map_types),
-		WIKIVOYAGE_HEADER(R.string.shared_string_wikivoyage),
-		
-		NAUTICAL_WORLDWIDE_HEADER(R.string.worldwide_maps),
-		NAUTICAL_DEPTH_HEADER(R.string.depth_contours),
-		NAUTICAL_POINTS_HEADER(R.string.nautical_depth_points),
-		// headers with voice items
-		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
-		VOICE_HEADER_REC(R.string.index_name_voice),
-		// headers with font items
-		FONTS_HEADER(R.string.fonts_header),
-		// headers with resources
-		NAUTICAL_MAPS_GROUP(R.string.nautical_maps),
-		TRAVEL_GROUP(R.string.download_maps_travel),
-		OTHER_MAPS_GROUP(R.string.download_select_map_types),
-		OTHER_GROUP(R.string.other_menu_group),
-		SUBREGIONS(R.string.regions),
-		// screen items
-		NAUTICAL_MAPS(R.string.nautical_maps),
-		WIKIVOYAGE_MAPS(R.string.download_maps_travel),
-		VOICE_TTS(R.string.index_name_tts_voice),
-		FONTS(R.string.fonts_header),
-		VOICE_REC(R.string.index_name_voice),
-		OTHER_MAPS(R.string.download_select_map_types),
-		EXTRA_MAPS(R.string.extra_maps_menu_group),
-		WORLD(-1),
-		REGION(-1);
-
-		final int resId;
-
-		DownloadResourceGroupType(int resId) {
-			this.resId = resId;
-		}
-
-		public boolean isScreen() {
-			return this == WORLD || this == REGION || this == VOICE_TTS
-					|| this == VOICE_REC || this == OTHER_MAPS || this == FONTS || this == NAUTICAL_MAPS || this == WIKIVOYAGE_MAPS;
-		}
-
-		public String getDefaultId() {
-			return name().toLowerCase();
-		}
-
-		public int getResourceId() {
-			return resId;
-		}
-
-		public boolean containsIndexItem() {
-			return isHeader() && this != SUBREGIONS && this != OTHER_GROUP && this != OTHER_MAPS_GROUP
-					&& this != NAUTICAL_MAPS_GROUP && this != TRAVEL_GROUP && this != EXTRA_MAPS;
-		}
-
-		public boolean isHeader() {
-			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS
-					|| this == SUBREGIONS
-					|| this == WORLD_MAPS || this == REGION_MAPS || this == OTHER_GROUP   
-					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
-					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP
-					|| this == FONTS_HEADER 
-					|| this == NAUTICAL_WORLDWIDE_HEADER
-					|| this == NAUTICAL_DEPTH_HEADER
-					|| this == NAUTICAL_POINTS_HEADER
-					|| this == NAUTICAL_MAPS_GROUP
-					|| this == WIKIVOYAGE_HEADER || this == TRAVEL_GROUP
-					|| this == EXTRA_MAPS;
-		}
-
-		public static String getVoiceTTSId() {
-			return "#" + OTHER_GROUP.name().toLowerCase() + "#" + VOICE_TTS.name().toLowerCase();
-		}
-	}
-	
-	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type) {
+	public DownloadResourceGroup(@Nullable DownloadResourceGroup parentGroup, @NonNull DownloadResourceGroupType type) {
 		this(parentGroup, type, type.getDefaultId());
 	}
 
-	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type, String id) {
+	public DownloadResourceGroup(@Nullable DownloadResourceGroup parentGroup, @NonNull DownloadResourceGroupType type, @NonNull String id) {
 		boolean flat = type.containsIndexItem();
 		if (flat) {
 			this.individualDownloadItems = new ArrayList<DownloadItem>();
@@ -160,32 +84,31 @@ public class DownloadResourceGroup {
 	}
 
 	public void trimEmptyGroups() {
-		if(groups != null) {
-			for(DownloadResourceGroup gr : groups) {
+		if (groups != null) {
+			for (DownloadResourceGroup gr : groups) {
 				gr.trimEmptyGroups();
 			}
 			Iterator<DownloadResourceGroup> gr = groups.iterator();
-			while(gr.hasNext()) {
+			while (gr.hasNext()) {
 				DownloadResourceGroup group = gr.next();
-				if(group.isEmpty()) {
+				if (group.isEmpty()) {
 					gr.remove();
 				}
 			}
 		}
-		
 	}
 	
 	public void createHillshadeSRTMGroups() {
-		if(getType().isScreen()) {
+		if (getType().isScreen()) {
 			DownloadResourceGroup regionMaps = getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-			if(regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null && 
+			if (regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null &&
 					isEmpty(getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId()))) {
 				IndexItem item = regionMaps.getIndividualResources().get(0);
 				DownloadResourceGroup screenParent = parentGroup.getParentGroup();
-				if(item.getType() == DownloadActivityType.HILLSHADE_FILE) {
-					DownloadResourceGroup hillshades = 
+				if (item.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					DownloadResourceGroup hillshades =
 							screenParent.getSubGroupById(DownloadResourceGroupType.HILLSHADE_HEADER.getDefaultId());
-					if(hillshades == null) {
+					if (hillshades == null) {
 						hillshades = new DownloadResourceGroup(screenParent, DownloadResourceGroupType.HILLSHADE_HEADER);
 						screenParent.addGroup(hillshades);
 					}
@@ -201,11 +124,10 @@ public class DownloadResourceGroup {
 					hillshades.addItem(item);
 					regionMaps.individualDownloadItems.remove(0);
 				}
-				
 			}
 			DownloadResourceGroup subregs = getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId());
-			if(subregs != null) {
-				for(DownloadResourceGroup g : subregs.getGroups()) {
+			if (subregs != null) {
+				for (DownloadResourceGroup g : subregs.getGroups()) {
 					g.createHillshadeSRTMGroups();
 				}
 			}
@@ -218,7 +140,7 @@ public class DownloadResourceGroup {
 
 	public void addGroup(DownloadResourceGroup g) {
 		if (type.isScreen()) {
-			if(!g.type.isHeader()) {
+			if (!g.type.isHeader()) {
 				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
 			}
 		}
@@ -264,7 +186,7 @@ public class DownloadResourceGroup {
 	}
 	
 	public DownloadResourceGroup getGroupByIndex(int ind) {
-		if(groups != null && ind < groups.size()) {
+		if (groups != null && ind < groups.size()) {
 			return groups.get(ind);
 		}
 		return null;
@@ -333,7 +255,7 @@ public class DownloadResourceGroup {
 
 	private DownloadResourceGroup getSubGroupById(String[] lst, int subInd) {
 		for (DownloadResourceGroup rg : groups) {
-			DownloadResourceGroup r = rg.getGroupById(lst, subInd );
+			DownloadResourceGroup r = rg.getGroupById(lst, subInd);
 			if (r != null) {
 				return r;
 			}
@@ -360,6 +282,23 @@ public class DownloadResourceGroup {
 
 	public String getId() {
 		return id;
+	}
+
+	@NonNull
+	public List<DownloadItem> getAllDownloadItems() {
+		List<DownloadItem> downloadItems = new ArrayList<>();
+		if (individualDownloadItems != null) {
+			downloadItems.addAll(individualDownloadItems);
+		}
+		if (groups != null) {
+			for (DownloadResourceGroup resourceGroup : groups) {
+				List<DownloadItem> items = resourceGroup.getIndividualDownloadItems();
+				if (items != null) {
+					downloadItems.addAll(items);
+				}
+			}
+		}
+		return downloadItems;
 	}
 
 	public static Comparator<DownloadItem> getComparator(OsmandApplication app) {

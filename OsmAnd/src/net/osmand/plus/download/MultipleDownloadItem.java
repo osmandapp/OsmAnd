@@ -115,6 +115,27 @@ public class MultipleDownloadItem extends DownloadItem {
 	}
 
 	@Override
+	public boolean isFree() {
+		for (DownloadItem item : items) {
+			if (item.isFree()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String getFreeMessage() {
+		for (DownloadItem item : items) {
+			String message = item.getFreeMessage();
+			if (message != null) {
+				return message;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public double getSizeToDownloadInMb() {
 		double totalSizeMb = 0.0d;
 		for (DownloadItem item : items) {

@@ -29,14 +29,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.utils.AndroidUtils;
@@ -158,7 +157,6 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 					WikivoyageExploreActivity exploreActivity = (WikivoyageExploreActivity) activity;
 					exploreActivity.setArticle(article);
 				}
-				OsmandApplication app = getMyApplication();
 				TravelHelper travelHelper = app.getTravelHelper();
 				File file = travelHelper.createGpxFile(article);
 				boolean temporarySelected = app.getSelectedGpxHelper().getSelectedFileByName(file.getAbsolutePath()) == null;
@@ -183,8 +181,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		FragmentManager fragmentManager = requireFragmentManager();
 		webViewClient = new WikivoyageWebViewClient(activity, fragmentManager, nightMode);
 		contentWebView.setWebViewClient(webViewClient);
-		contentWebView.setBackgroundColor(ContextCompat.getColor(getMyApplication(),
-				nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
+		contentWebView.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.wiki_webview_background_dark : R.color.wiki_webview_background_light));
 
 		return mainView;
 	}
@@ -234,7 +231,6 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandSettings settings = getMyApplication().getSettings();
 		if (!settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.get()) {
 			FragmentActivity activity = getActivity();
 			FragmentManager fm = getFragmentManager();
@@ -249,7 +245,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 	private void updateSaveButton() {
 		if (article != null) {
-			TravelHelper helper = getMyApplication().getTravelHelper();
+			TravelHelper helper = app.getTravelHelper();
 			boolean saved = helper.getBookmarksHelper().isArticleSaved(article);
 			Drawable icon = getActiveIcon(saved ? R.drawable.ic_action_read_later_fill : R.drawable.ic_action_read_later);
 			saveBtn.setText(getString(saved ? R.string.shared_string_remove : R.string.shared_string_bookmark));
@@ -309,7 +305,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			selectedLang = langs.get(0);
 		}
 		articleToolbarText.setText("");
-		article = getMyApplication().getTravelHelper().getArticleById(articleId, selectedLang, true,
+		article = app.getTravelHelper().getArticleById(articleId, selectedLang, true,
 				new GpxReadCallback() {
 					@Override
 					public void onGpxFileReading() {
@@ -327,7 +323,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		webViewClient.setArticle(article);
 		articleToolbarText.setText(article.getTitle());
 
-		TravelLocalDataHelper ldh = getMyApplication().getTravelHelper().getBookmarksHelper();
+		TravelLocalDataHelper ldh = app.getTravelHelper().getBookmarksHelper();
 		ldh.addToHistory(article);
 
 		updateSaveButton();
@@ -381,7 +377,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 			}
 		}
 		String url = TravelArticle.getImageUrl(imageTitle, false);
-		if (!TextUtils.isEmpty(imageTitle) && getSettings().WIKI_ARTICLE_SHOW_IMAGES.get() != OFF &&
+		if (!TextUtils.isEmpty(imageTitle) && settings.WIKI_ARTICLE_SHOW_IMAGES.get() != OFF &&
 				!url.startsWith(EMPTY_URL)) {
 			sb.append("<div class=\"title-image" + nightModeClass + "\" style=\"background-image: url(").append(url).append(")\"></div>");
 		}
@@ -392,7 +388,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		sb.append(article.getContent());
 		sb.append(FOOTER_INNER);
 		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
-			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
+			writeOutHTML(sb, new File(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
 		}
 		return sb.toString();
 	}

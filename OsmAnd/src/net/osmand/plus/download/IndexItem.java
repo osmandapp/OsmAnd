@@ -38,6 +38,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	boolean outdated;
 	boolean downloaded;
 	long localTimestamp;
+	boolean free;
+	String freeMessage;
 
 	public IndexItem(String fileName,
 	                 String description,
@@ -45,7 +47,9 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	                 String size,
 	                 long contentSize,
 	                 long containerSize,
-	                 @NonNull DownloadActivityType type) {
+	                 @NonNull DownloadActivityType type,
+	                 boolean free,
+	                 String freeMessage) {
 		super(type);
 		this.fileName = fileName;
 		this.description = description;
@@ -53,6 +57,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		this.size = size;
 		this.contentSize = contentSize;
 		this.containerSize = containerSize;
+		this.free = free;
+		this.freeMessage = freeMessage;
 	}
 
 	public void updateSize(@NonNull String size, long contentSize, long containerSize) {
@@ -215,6 +221,15 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 
 	public long getLocalTimestamp() {
 		return localTimestamp;
+	}
+
+	public boolean isFree() {
+		return free;
+	}
+
+	@Nullable
+	public String getFreeMessage() {
+		return freeMessage;
 	}
 
 	public boolean isDownloaded() {
