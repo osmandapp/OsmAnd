@@ -85,7 +85,6 @@
 					android:gravity="end|center_vertical"
 					android:inputType="numberDecimal"
 					android:maxLines="1"
-					android:maxLength="5"
 					android:paddingVertical="0dp"
 					android:paddingHorizontal="@dimen/content_padding_small"
 					android:textSize="@dimen/default_list_text_size"/>
