@@ -5094,4 +5094,14 @@
     <string name="test_heightmap">Magassági térkép tesztelése</string>
     <string name="generate_hillshade_from_3d_maps">Raszteres domborzatárnyékolási térképek generálása 3D térképekből</string>
     <string name="app_mode_climbing">Mászás</string>
+    <string name="shared_string_alt_name">Alternatív név</string>
+    <string name="token_is_not_valid">A token nem érvényes</string>
+    <string name="shared_string_all_world">Az egész világ</string>
+    <string name="weather_forecast">Időjárás-előrejelzés</string>
+    <string name="offline_weather_forecast_desc">Hét napra szóló időjárás-előrejelzést tölthet le.</string>
+    <string name="clear_online_cache_description">Ez törli az online időjárási csempék teljes gyorsítótárát.</string>
+    <string name="offline_cache">Offline gyorsítótár</string>
+    <string name="clear_online_cache">Online gyorsítótár törlése</string>
+    <string name="weather_forecast_is_outdated">Az előrejelzés elavult.</string>
+    <string name="offline_weather_forecast">Offline időjárás-előrejelzés</string>
 </resources>
