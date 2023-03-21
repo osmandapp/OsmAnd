@@ -291,7 +291,7 @@ public class DownloadOsmandIndexesHelper {
 			File ttsFile = new File(voiceDirPath, indexInfo.getFileName() + "/" + ttsFileName);
 			long installDate = ttsFile.lastModified();
 			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,
-					"", 0, 0, DownloadActivityType.VOICE_FILE);
+					"", 0, 0, VOICE_FILE, false, null);
 			localRecordedVoiceIndex.setDownloaded(true);
 			recordedVoiceList.add(localRecordedVoiceIndex);
 		}
@@ -389,7 +389,7 @@ public class DownloadOsmandIndexesHelper {
 
 		public AssetIndexItem(String fileName, String description, long dateModified, String size,
 		                      long sizeL, String assetName, String destFile, DownloadActivityType type) {
-			super(fileName, description, dateModified, size, sizeL, sizeL, type);
+			super(fileName, description, dateModified, size, sizeL, sizeL, type, false, null);
 			this.dateModified = dateModified;
 			this.assetName = assetName;
 			this.destFile = destFile;

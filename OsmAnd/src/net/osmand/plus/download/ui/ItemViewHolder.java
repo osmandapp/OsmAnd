@@ -406,33 +406,32 @@ public class ItemViewHolder {
 				R.drawable.ic_action_gsave_dark;
 	}
 
-	@SuppressLint("DefaultLocale")
-	public RightButtonAction getClickAction(DownloadItem item) {
-		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
-		if (item.getBasename().equalsIgnoreCase(DownloadResources.WORLD_SEAMARKS_KEY)
-				&& nauticalPluginDisabled) {
-			clickAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-		} else if ((item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-				|| item.getType() == DownloadActivityType.HILLSHADE_FILE
-				|| item.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
-			if (srtmNeedsInstallation) {
-				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
-			} else {
-				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
+	@NonNull
+	public RightButtonAction getClickAction(@NonNull DownloadItem item) {
+		RightButtonAction action = RightButtonAction.DOWNLOAD;
+		if (!item.isFree()) {
+			DownloadActivityType type = item.getType();
+			if (item.getBasename().equalsIgnoreCase(WORLD_SEAMARKS_KEY) && nauticalPluginDisabled) {
+				action = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
+			} else if ((type == SRTM_COUNTRY_FILE || type == HILLSHADE_FILE || type == SLOPE_FILE) && srtmDisabled) {
+				action = srtmNeedsInstallation ? ASK_FOR_SRTM_PLUGIN_PURCHASE : ASK_FOR_SRTM_PLUGIN_ENABLE;
+			} else if ((type == WIKIPEDIA_FILE || type == TRAVEL_FILE) && !Version.isPaidVersion(context.getMyApplication())) {
+				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
+			} else if ((type == DEPTH_CONTOUR_FILE || type == DEPTH_MAP_FILE) && !depthContoursPurchased) {
+				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
+			} else if (item.getType() == DownloadActivityType.WEATHER_FORECAST
+					&& !PluginsHelper.isActive(WeatherPlugin.class)) {
+				action = RightButtonAction.ASK_FOR_WEATHER_PURCHASE;
+			} else if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+					|| item.getType() == DownloadActivityType.TRAVEL_FILE)
+					&& !Version.isPaidVersion(context.getMyApplication())) {
+				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
+			} else if ((item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
+				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 			}
-
-		} else if (item.getType() == DownloadActivityType.WEATHER_FORECAST
-				&& !PluginsHelper.isActive(WeatherPlugin.class)) {
-			clickAction = RightButtonAction.ASK_FOR_WEATHER_PURCHASE;
-		} else if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
-				|| item.getType() == DownloadActivityType.TRAVEL_FILE)
-				&& !Version.isPaidVersion(context.getMyApplication())) {
-			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-		} else if ((item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
-				|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
-			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
-		return clickAction;
+		return action;
 	}
 
 	public OnClickListener getRightButtonAction(DownloadItem item, RightButtonAction clickAction) {

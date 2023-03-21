@@ -80,6 +80,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	private View searchView;
 	private View restorePurchasesView;
 	private View subscribeEmailView;
+	private View freeMapsView;
 	private View descriptionView;
 	private boolean nightMode;
 
@@ -246,6 +247,52 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 		}
 	}
 
+	private void updateFreeMapsView() {
+		if (shouldDisplayFreeMapsMessage()) {
+			if (freeMapsView == null) {
+				freeMapsView = activity.getLayoutInflater().inflate(R.layout.free_maps_header, null, false);
+				listView.addHeaderView(freeMapsView);
+			}
+			TextView description = freeMapsView.findViewById(R.id.description);
+			description.setText(getFreeMapsMessage());
+		} else if (freeMapsView != null && freeMapsView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
+			freeMapsView.findViewById(R.id.container).setVisibility(View.GONE);
+		}
+	}
+
+	private boolean shouldDisplayFreeMapsMessage() {
+		if (group != null) {
+			WorldRegion region = group.getRegion();
+			WorldRegion worldRegion = app.getRegions().getWorldRegion();
+			return !Algorithms.objectEquals(region, worldRegion) && !Algorithms.objectEquals(region.getSuperregion(), worldRegion) && hasFreeMaps();
+		}
+		return false;
+	}
+
+	private boolean hasFreeMaps() {
+		if (group != null) {
+			for (DownloadItem item : group.getAllDownloadItems()) {
+				if (item.isFree()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	private String getFreeMapsMessage() {
+		if (group != null) {
+			for (DownloadItem item : group.getAllDownloadItems()) {
+				String message = item.getFreeMessage();
+				if (!Algorithms.isEmpty(message)) {
+					return message;
+				}
+			}
+		}
+		return null;
+	}
+
 	private void hideSubscribeEmailView() {
 		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
 			subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
@@ -383,8 +430,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 					SearchDialogFragment.createInstance(filter, false,
 							DownloadActivityType.WIKIPEDIA_FILE));
 		} else if (filter != null) {
-			getDownloadActivity().showDialog(getActivity(),
-					SearchDialogFragment.createInstance(filter));
+			activity.showDialog(getActivity(), SearchDialogFragment.createInstance(filter));
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
 				String uniqueId = DownloadResourceGroupType.getVoiceTTSId();
@@ -412,6 +458,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 		}
 		updateSubscribeEmailView();
 		updateDescriptionView();
+		updateFreeMapsView();
 
 		if (group != null) {
 			listAdapter.update(group);

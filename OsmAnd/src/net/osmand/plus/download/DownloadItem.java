@@ -86,6 +86,10 @@ public abstract class DownloadItem {
 
 	public abstract String getFileName();
 
+	public abstract boolean isFree();
+
+	public abstract String getFreeMessage();
+
 	public abstract String getDate(@NonNull DateFormat dateFormat, boolean remote);
 
 	@NonNull

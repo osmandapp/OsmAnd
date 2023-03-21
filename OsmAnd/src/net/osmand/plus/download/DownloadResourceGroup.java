@@ -284,6 +284,23 @@ public class DownloadResourceGroup {
 		return id;
 	}
 
+	@NonNull
+	public List<DownloadItem> getAllDownloadItems() {
+		List<DownloadItem> downloadItems = new ArrayList<>();
+		if (individualDownloadItems != null) {
+			downloadItems.addAll(individualDownloadItems);
+		}
+		if (groups != null) {
+			for (DownloadResourceGroup resourceGroup : groups) {
+				List<DownloadItem> items = resourceGroup.getIndividualDownloadItems();
+				if (items != null) {
+					downloadItems.addAll(items);
+				}
+			}
+		}
+		return downloadItems;
+	}
+
 	public static Comparator<DownloadItem> getComparator(OsmandApplication app) {
 		OsmandRegions osmandRegions = app.getRegions();
 		Collator collator = OsmAndCollator.primaryCollator();
