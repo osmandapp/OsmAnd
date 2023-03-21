@@ -1607,8 +1607,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
 
-		private static final float ANGLE_THRESHOLD = 5;
-		private static final float ZOOM_THRESHOLD = 0.2f;
+		private static final float ANGLE_THRESHOLD = 30;
 		private static final float MAX_DELTA_ZOOM = 4;
 
 		private PointF initialMultiTouchCenterPoint;
@@ -1619,7 +1618,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private boolean startRotating;
-		private boolean startZooming;
 		private float initialElevation;
 		private float prevAngle;
 
@@ -1627,11 +1625,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
 			finishPinchZoom();
-			if (startZooming) {
+			if (!mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)
+					|| Math.abs(angleRelative) < ANGLE_THRESHOLD * relativeToStart
+					|| Math.abs(angleRelative) < ANGLE_THRESHOLD / relativeToStart) {
 				angleRelative = 0;
-			} else {
-				rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			}
+			rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			if (angleRelative != 0) {
 				application.getMapViewTrackingUtilities().checkAndUpdateManualRotationMode();
 			}
@@ -1729,31 +1728,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialCenterLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport,
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
 			startRotating = false;
-			startZooming = false;
 		}
 
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
 			double deltaZoom = calculateDeltaZoom(relativeToStart);
-			if (!startRotating) {
-				if (Math.abs(deltaZoom) <= ZOOM_THRESHOLD) {
-					deltaZoom = 0; // keep only rotating
-				} else {
-					startZooming = true;
-				}
-			} else {
-				deltaZoom = 0;
+			if (Math.abs(deltaZoom) <= 0.1) {
+				deltaZoom = 0; // keep only rotating
 			}
 
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
-				if (!startZooming) {
-					if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
-						relAngle = 0;
-					} else {
-						startRotating = true;
-					}
-				} else {
+				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
 					relAngle = 0;
+				} else {
+					startRotating = true;
 				}
 			} else {
 				relAngle = 0;
