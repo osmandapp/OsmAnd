@@ -5104,4 +5104,14 @@
     <string name="generate_slope_from_3d_maps">Generación de mapas ráster de pendientes a partir de mapas 3D</string>
     <string name="generate_hillshade_from_3d_maps">Generación de mapas ráster de colinas a partir de mapas 3D</string>
     <string name="app_mode_climbing">Escalada</string>
+    <string name="clear_online_cache">Borrar la caché en línea</string>
+    <string name="offline_cache">Caché sin conexión</string>
+    <string name="shared_string_alt_name">Nombre alternativo</string>
+    <string name="token_is_not_valid">El código no es válido</string>
+    <string name="weather_forecast_is_outdated">Pronóstico desactualizado.</string>
+    <string name="shared_string_all_world">Todo el mundo</string>
+    <string name="weather_forecast">Previsión del tiempo</string>
+    <string name="offline_weather_forecast">Previsión meteorológica sin conexión</string>
+    <string name="offline_weather_forecast_desc">Puede descargar la previsión meteorológica para 7 días.</string>
+    <string name="clear_online_cache_description">Esto borrará toda la memoria caché de la ficha meteorológica en línea.</string>
 </resources>
