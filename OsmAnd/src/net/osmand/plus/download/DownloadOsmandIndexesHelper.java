@@ -1,5 +1,11 @@
 package net.osmand.plus.download;
 
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+import static net.osmand.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.plus.download.DownloadActivityType.VOICE_FILE;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.VOICE_DATA;
+
 import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -203,28 +209,28 @@ public class DownloadOsmandIndexesHelper {
 	}
 
 	@NonNull
-	private static List<IndexItem> listDefaultTtsVoiceIndexes(OsmandApplication app, List<AssetEntry> bundledAssets) {
+	private static List<IndexItem> listDefaultTtsVoiceIndexes(@NonNull OsmandApplication app, @NonNull List<AssetEntry> bundledAssets) {
 		List<IndexItem> defaultTTS = new ArrayList<>();
-		File voiceDirPath = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		long installDate = getInstallDate(app);
 
 		for (AssetEntry asset : bundledAssets) {
 			String target = asset.destination;
-			boolean isTTS = target.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)
-					&& target.startsWith(IndexConstants.VOICE_INDEX_DIR)
+			boolean isTTS = target.endsWith(TTSVOICE_INDEX_EXT_JS)
+					&& target.startsWith(VOICE_INDEX_DIR)
 					&& target.contains(IndexConstants.VOICE_PROVIDER_SUFFIX);
 			if (!isTTS) {
 				continue;
 			}
 
-			String lang = target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
+			String lang = target.substring(VOICE_INDEX_DIR.length(),
 					target.indexOf(IndexConstants.VOICE_PROVIDER_SUFFIX));
-			String ttsIndexFolder = target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
-					target.indexOf("/", IndexConstants.VOICE_INDEX_DIR.length()));
+			String ttsIndexFolder = target.substring(VOICE_INDEX_DIR.length(),
+					target.indexOf("/", VOICE_INDEX_DIR.length()));
 			File destFile = new File(voiceDirPath, ttsIndexFolder + "/" + lang + "_tts.js");
-			IndexItem ttsIndex = new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
+			IndexItem ttsIndex = new AssetIndexItem(lang + "_" + TTSVOICE_INDEX_EXT_JS,
 					"voice", installDate, "0.1", destFile.length(), asset.source,
-					destFile.getPath(), DownloadActivityType.VOICE_FILE);
+					destFile.getPath(), VOICE_FILE);
 			ttsIndex.setDownloaded(destFile.exists());
 			defaultTTS.add(ttsIndex);
 		}
@@ -234,7 +240,7 @@ public class DownloadOsmandIndexesHelper {
 
 	@NonNull
 	private static List<IndexItem> listCustomTtsVoiceIndexes(OsmandApplication app, List<AssetEntry> bundledAssets) {
-		File voiceDirPath = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
 		List<LocalIndexInfo> localIndexes = new ArrayList<>();
 		List<IndexItem> customTTS = new ArrayList<>();
@@ -257,7 +263,7 @@ public class DownloadOsmandIndexesHelper {
 				String fileName = indexInfo.getFileName().replace("-", "_") + ".js";
 				File file = new File(voiceDirPath, indexInfo.getFileName() + "/" + fileName);
 				IndexItem customVoiceIndex = new AssetIndexItem(fileName, "voice", installDate, "0.1",
-						file.length(), "", file.getPath(), DownloadActivityType.VOICE_FILE);
+						file.length(), "", file.getPath(), VOICE_FILE);
 				customVoiceIndex.setDownloaded(true);
 				customTTS.add(customVoiceIndex);
 			}
@@ -268,7 +274,7 @@ public class DownloadOsmandIndexesHelper {
 
 	@NonNull
 	public static List<IndexItem> listLocalRecordedVoiceIndexes(OsmandApplication app) {
-		File voiceDirPath = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		File voiceDirPath = app.getAppPath(VOICE_INDEX_DIR);
 		LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
 		List<LocalIndexInfo> localIndexes = new ArrayList<>();
 		List<IndexItem> recordedVoiceList = new ArrayList<>();
@@ -276,12 +282,12 @@ public class DownloadOsmandIndexesHelper {
 		localIndexHelper.loadVoiceData(voiceDirPath, localIndexes, false, true, true,
 				app.getResourceManager().getIndexFiles(), null);
 		for (LocalIndexInfo indexInfo : localIndexes) {
-			if (indexInfo.getType() != LocalIndexType.VOICE_DATA || indexInfo.getFileName().contains("tts")) {
+			if (indexInfo.getType() != VOICE_DATA || indexInfo.getFileName().contains("tts")) {
 				continue;
 			}
 
-			String recordedZipName = indexInfo.getFileName() + "_0" + IndexConstants.VOICE_INDEX_EXT_ZIP;
-			String ttsFileName = indexInfo.getFileName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS;
+			String recordedZipName = indexInfo.getFileName() + "_0" + VOICE_INDEX_EXT_ZIP;
+			String ttsFileName = indexInfo.getFileName() + "_" + TTSVOICE_INDEX_EXT_JS;
 			File ttsFile = new File(voiceDirPath, indexInfo.getFileName() + "/" + ttsFileName);
 			long installDate = ttsFile.lastModified();
 			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,

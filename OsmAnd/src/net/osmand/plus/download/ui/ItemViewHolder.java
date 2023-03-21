@@ -1,6 +1,16 @@
 package net.osmand.plus.download.ui;
 
-import android.annotation.SuppressLint;
+import static net.osmand.plus.download.DownloadActivityType.DEPTH_CONTOUR_FILE;
+import static net.osmand.plus.download.DownloadActivityType.DEPTH_MAP_FILE;
+import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
+import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
+import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.DownloadActivityType.TRAVEL_FILE;
+import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
+import static net.osmand.plus.download.DownloadResources.WORLD_SEAMARKS_KEY;
+import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
+import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -39,12 +49,12 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.ui.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -52,8 +62,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -91,7 +101,7 @@ public class ItemViewHolder {
 	private final DateFormat dateFormat;
 
 
-	private enum RightButtonAction {
+	protected enum RightButtonAction {
 		DOWNLOAD,
 		ASK_FOR_SEAMARKS_PLUGIN,
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
@@ -99,7 +109,7 @@ public class ItemViewHolder {
 		ASK_FOR_FULL_VERSION_PURCHASE,
 		ASK_FOR_DEPTH_CONTOURS_PURCHASE,
 		ASK_FOR_WEATHER_PURCHASE
-		}
+	}
 
 
 	public ItemViewHolder(View view, DownloadActivity context) {
@@ -227,12 +237,12 @@ public class ItemViewHolder {
 			tvDesc.setVisibility(View.VISIBLE);
 			if (downloadItem instanceof CustomIndexItem && (((CustomIndexItem) downloadItem).getSubName(context) != null)) {
 				tvDesc.setText(((CustomIndexItem) downloadItem).getSubName(context));
-			} else if ((downloadItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
-					|| downloadItem.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
+			} else if ((downloadItem.getType() == DEPTH_CONTOUR_FILE
+					|| downloadItem.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				tvDesc.setText(context.getString(R.string.depth_contour_descr));
-			} else if ((downloadItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
-					|| downloadItem.getType() == DownloadActivityType.HILLSHADE_FILE
-					|| downloadItem.getType() == DownloadActivityType.SLOPE_FILE) && srtmDisabled) {
+			} else if ((downloadItem.getType() == SRTM_COUNTRY_FILE
+					|| downloadItem.getType() == HILLSHADE_FILE
+					|| downloadItem.getType() == SLOPE_FILE) && srtmDisabled) {
 				if (showTypeInName) {
 					tvDesc.setText("");
 				} else {
@@ -622,9 +632,9 @@ public class ItemViewHolder {
 	@NonNull
 	private LocalIndexType getLocalIndexType(@NonNull DownloadItem downloadItem) {
 		LocalIndexType type = LocalIndexType.MAP_DATA;
-		if (downloadItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+		if (downloadItem.getType() == HILLSHADE_FILE) {
 			type = LocalIndexType.TILES_DATA;
-		} else if (downloadItem.getType() == DownloadActivityType.SLOPE_FILE) {
+		} else if (downloadItem.getType() == SLOPE_FILE) {
 			type = LocalIndexType.TILES_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
 			type = LocalIndexType.TILES_DATA;
@@ -632,13 +642,13 @@ public class ItemViewHolder {
 			type = LocalIndexType.TILES_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.ROADS_FILE) {
 			type = LocalIndexType.MAP_DATA;
-		} else if (downloadItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+		} else if (downloadItem.getType() == SRTM_COUNTRY_FILE) {
 			type = LocalIndexType.SRTM_DATA;
-		} else if (downloadItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+		} else if (downloadItem.getType() == WIKIPEDIA_FILE) {
 			type = LocalIndexType.MAP_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
 			type = LocalIndexType.MAP_DATA;
-		} else if (downloadItem.getType() == DownloadActivityType.TRAVEL_FILE) {
+		} else if (downloadItem.getType() == TRAVEL_FILE) {
 			type = LocalIndexType.MAP_DATA;
 		} else if (downloadItem.getType() == DownloadActivityType.FONT_FILE) {
 			type = LocalIndexType.FONT_DATA;

@@ -112,10 +112,10 @@ public class DownloadActivityType {
 		return orderIndex;
 	}
 
-	public static boolean isCountedInDownloads(IndexItem es) {
-		DownloadActivityType tp = es.getType();
-		if (tp == NORMAL_FILE || tp == ROADS_FILE) {
-			return !es.extra;
+	public static boolean isCountedInDownloads(@NonNull IndexItem item) {
+		DownloadActivityType type = item.getType();
+		if (type == NORMAL_FILE || type == ROADS_FILE) {
+			return !item.extra && !item.free;
 		}
 		return false;
 	}
