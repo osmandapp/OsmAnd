@@ -84,14 +84,22 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (!visibleArea.isEmpty() && mapView != null) {
 					int visibleAreaWidth = visibleArea.width();
+					int visibleAreaHeight = visibleArea.height();
 					int containerWidth = surfaceContainer.getWidth();
+					int containerHeight = surfaceContainer.getHeight();
 
 					float ratioX = 0;
 					if ((float) containerWidth / visibleAreaWidth > VISIBLE_AREA_MIN_DETECTION_SIZE) {
 						int centerX = visibleArea.centerX();
 						ratioX = (float) centerX / containerWidth;
 					}
-					mapView.setCustomMapRatio(ratioX, 0);
+					float ratioY = 0;
+					if ((float) containerHeight / visibleAreaHeight > VISIBLE_AREA_MIN_DETECTION_SIZE) {
+						float defaultRatioY = mapView.getDefaultRatioY();
+						float centerY = (visibleAreaHeight * defaultRatioY) + visibleArea.top;
+						ratioY = centerY / containerHeight;
+					}
+					mapView.setCustomMapRatio(ratioX, ratioY);
 				}
 				renderFrame();
 			}
