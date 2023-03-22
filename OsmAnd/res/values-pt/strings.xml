@@ -5089,6 +5089,16 @@
 \n
 \n • Corrigidos problemas com a visualização de locais com menus veganos
 \n
+\n • Adicionada a possibilidade de descarregar mosaicos on-line usados como mapas da \"Camada superior\" ou \"Camada inferior\"
+\n
+\n • Adicionado suporte de unidades imperiais em \"Parâmetros do veículo\"
+\n
+\n • Novo perfil de ciclomotor
+\n
+\n • Nova opção \"Automático\" em \"Posição do ecrã\"
+\n
+\n • Corrigidos gestos para inclinação, aproximação e rotação
+\n
 \n</string>
     <string name="sort_duration_ascending">Primeiro a duração mais curta</string>
     <string name="sort_duration_descending">Primeiro a duração mais longa</string>
@@ -5099,6 +5109,24 @@
     <string name="selected_value">Valor selecionado</string>
     <string name="shared_string_nearest">Mais perto</string>
     <string name="app_mode_moped">Ciclomotor</string>
-    <string name="enable_3d_maps">Ativar mapas de 3D</string>
-    <string name="disable_vertex_hillshade_3d">Desativar sombras de relevo de vértice em 3D</string>
+    <string name="enable_3d_maps">Ativar mapas 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombras de vértice em 3D</string>
+    <string name="generate_slope_from_3d_maps">Gera mapas raster de declives a partir de mapas 3D</string>
+    <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
+    <string name="shared_string_all_world">Mundo inteiro</string>
+    <string name="clear_online_cache_description">Isto irá limpar todos os ficheiros temporários dos mosaicos de previsão meteorológica online.</string>
+    <string name="clear_online_cache">Limpar cache online</string>
+    <string name="offline_cache">Cache offline</string>
+    <string name="app_mode_climbing">Escalada</string>
+    <string name="shared_string_pounds">libras</string>
+    <string name="weather_forecast">Previsão meteorológica</string>
+    <string name="token_is_not_valid">O token não é válido</string>
+    <string name="free_maps_updates">Atualizações gratuitas (emergências)</string>
+    <string name="shared_string_alt_name">Nome alternativo</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="test_heightmap">Mapa de testes de altitude</string>
+    <string name="common_weight_limit_error">O valor mínimo é \"%1$s\" %2$s. Use o perfil \"%3$s\" se o peso do veículo for inferior ao valor mínimo.</string>
+    <string name="offline_weather_forecast">Previsão meteorológica sem ligação à Internet</string>
+    <string name="offline_weather_forecast_desc">Pode descarregar a previsão meteorológica para os próximos 7 dias.</string>
+    <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
 </resources>
