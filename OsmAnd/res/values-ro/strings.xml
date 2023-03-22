@@ -5100,4 +5100,11 @@
 \n</string>
     <string name="approximate_bearing">Rulmentul aproximativ</string>
     <string name="approximate_bearing_descr">Deduceți relevmentul din ruta de navigație urmată.</string>
+    <string name="clear_online_cache">Ștergeți memoria cache online</string>
+    <string name="offline_cache">Memoria cache offline</string>
+    <string name="shared_string_alt_name">Denumire alternativă</string>
+    <string name="clear_online_cache_description">Acest lucru va șterge toată memoria cache pentru panoul meteo online.</string>
+    <string name="token_is_not_valid">Tokenul nu este valabil</string>
+    <string name="app_mode_climbing">Escaladare</string>
+    <string name="free_maps_updates">Actualizări gratuite (de urgență)</string>
 </resources>

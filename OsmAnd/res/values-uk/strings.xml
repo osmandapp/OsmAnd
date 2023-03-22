@@ -5110,4 +5110,8 @@
     <string name="weather_forecast_is_outdated">Прогноз застарілий.</string>
     <string name="shared_string_all_world">Весь світ</string>
     <string name="offline_weather_forecast_desc">Ви можете завантажити прогноз погоди на 7 днів.</string>
+    <string name="common_weight_limit_error">Мінімальне значення — «%1$s» %2$s. Використовуйте профіль «%3$s», якщо вага транспортного засобу менша за мінімальне значення.</string>
+    <string name="shared_string_pounds">фунтів</string>
+    <string name="metric_lbs">фунтів</string>
+    <string name="free_maps_updates">Безплатні оновлення (екстрені)</string>
 </resources>

@@ -5116,4 +5116,8 @@
     <string name="offline_weather_forecast_desc">Du kan hente vejrudsigt for 7 dage.</string>
     <string name="clear_online_cache_description">Dette vil rydde al cache for online vejrfliser.</string>
     <string name="offline_weather_forecast">Offline vejrudsigt</string>
+    <string name="common_weight_limit_error">Mindste værdi er \"%1$s\" %2$s. Brug profilen \"%3$s\", hvis køretøjets vægt er mindre end minimumsværdien.</string>
+    <string name="shared_string_pounds">pund</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="free_maps_updates">Gratis opdateringer (nødsituation)</string>
 </resources>

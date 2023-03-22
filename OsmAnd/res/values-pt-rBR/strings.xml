@@ -5105,4 +5105,5 @@
     <string name="offline_weather_forecast">Previsão do tempo off-line</string>
     <string name="offline_weather_forecast_desc">Você pode baixar a previsão do tempo para 7 dias.</string>
     <string name="clear_online_cache_description">Isto irá limpar toda a cache para os mosaicos de previsão meteorológica online.</string>
+    <string name="free_maps_updates">Atualizações gratuitas (emergência)</string>
 </resources>
