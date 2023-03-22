@@ -5153,6 +5153,16 @@
 \n
 \n• تم إصلاح المشكلات المتعلقة بعرض أماكن الغطاء النباتي
 \n
+\n• إمكانية إضافية لتنزيل الطبقات عبر الإنترنت المستخدم كخرائط \"تراكب\" أو \"أساسية\"
+\n
+\n• دعم إضافي للوحدات العالمية \"معلمات السيارة\"
+\n
+\n• ملف تعريف الدراجة الجديد
+\n
+\n• \"موضع العرض\" أضاف خيار جديد \"تلقائي\"
+\n
+\n• إيماءات خريطة ثابتة للإمالة والتكبير والتدوير
+\n
 \n</string>
     <string name="sort_duration_ascending">مدة أقصر أولا</string>
     <string name="sort_duration_descending">أطول مدة أولا</string>
@@ -5168,4 +5178,19 @@
     <string name="test_heightmap">اختبار خريطة الارتفاع</string>
     <string name="disable_vertex_hillshade_3d">تعطيل قمة الارتفاع في عرض الثلاثي الأبعاد</string>
     <string name="generate_hillshade_from_3d_maps">إنشاء خرائط الارتفاع من خرائط ثلاثية الأبعاد</string>
+    <string name="offline_cache">ذاكرة التخزين المؤقت دون اتصال</string>
+    <string name="weather_forecast_is_outdated">التوقعات قديمة.</string>
+    <string name="clear_online_cache_description">سيؤدي ذلك إلى مسح جميع ذاكرة التخزين المؤقت لطبقات الطقس المتصلة بالانترنت.</string>
+    <string name="clear_online_cache">مسح ذاكرة تخزين الانترنت المؤقت</string>
+    <string name="shared_string_alt_name">الاسم البديل</string>
+    <string name="shared_string_all_world">كل العالم</string>
+    <string name="weather_forecast">توقعات الطقس</string>
+    <string name="offline_weather_forecast">توقعات الطقس دون اتصال</string>
+    <string name="offline_weather_forecast_desc">يمكنك تنزيل توقعات الطقس لمدة 7 أيام.</string>
+    <string name="free_maps_updates">تحديثات مجانية (طارئة)</string>
+    <string name="token_is_not_valid">الرمز غير صالح</string>
+    <string name="metric_lbs">رطل</string>
+    <string name="app_mode_climbing">التسلق</string>
+    <string name="common_weight_limit_error">القيمة الدنيا هي \"%1$s\" %2$s. استخدم ملف تعريف \"%3$s\" إذا كان وزن السيارة أقل من الحد الأدنى للقيمة.</string>
+    <string name="shared_string_pounds">باوند</string>
 </resources>
