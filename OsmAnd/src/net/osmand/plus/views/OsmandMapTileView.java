@@ -1627,11 +1627,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
 			finishPinchZoom();
-			if (startZooming) {
-				angleRelative = 0;
-			} else {
-				rotateToAnimate(initialViewport.getRotate() + angleRelative);
-			}
+			rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			if (angleRelative != 0) {
 				application.getMapViewTrackingUtilities().checkAndUpdateManualRotationMode();
 			}
@@ -1735,25 +1731,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
 			double deltaZoom = calculateDeltaZoom(relativeToStart);
-			if (!startRotating) {
-				if (Math.abs(deltaZoom) <= ZOOM_THRESHOLD) {
-					deltaZoom = 0; // keep only rotating
-				} else {
-					startZooming = true;
-				}
+			if (Math.abs(deltaZoom) <= ZOOM_THRESHOLD) {
+				deltaZoom = 0; // keep only rotating
 			} else {
-				deltaZoom = 0;
+				startZooming = true;
 			}
-
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
-				if (!startZooming) {
-					if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
-						relAngle = 0;
-					} else {
-						startRotating = true;
-					}
-				} else {
+				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
 					relAngle = 0;
+				} else {
+					startRotating = true;
 				}
 			} else {
 				relAngle = 0;
