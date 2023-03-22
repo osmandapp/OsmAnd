@@ -87,10 +87,15 @@
         • Added \"Nautical miles/feet\" unit of length\n\n
         • Map orientation added new fixed mode\n\n
         • Simplified start screen\n\n
-        • AFixed location position in split screen mode in Android Auto\n\n
+        • Fixed location position in split screen mode in Android Auto\n\n
         • Added \"Speed/Slope\" graph for track analysis\n\n
         • Android 13 moved app language selection to system settings\n\n
         • Fixed issues with displaying Vegan places\n\n
+        • Added possibility to download online tiles used as  \"Overlay\" or  \"Underlay\" maps\n\n
+        • Added support of imperial units for \"Vehicle parameters\"\n\n
+        • New Moped profile\n\n
+        • \"Display position\" added new option \"Automatic\"\n\n
+        • Fixed map gestures for tilt, zoom and rotation\n\n
     </string>
     <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>
