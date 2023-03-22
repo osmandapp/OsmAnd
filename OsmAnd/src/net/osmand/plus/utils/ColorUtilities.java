@@ -80,12 +80,6 @@ public class ColorUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
-	@NonNull
-	public static String convertColorToHex(@ColorInt int color) {
-		return String.format("#%06X", (0xFFFFFF & color));
-	}
-
-
 	/********************************* Basic colors *********************************/
 
 	@ColorInt
