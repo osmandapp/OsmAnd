@@ -38,6 +38,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -1281,7 +1282,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			// Zoom
-			mapRenderer.setZoom((float) (zoom + zoomAnimation + zoomFloatPart));
+			float finalZoomFloatPart = (float) (zoomAnimation + zoomFloatPart);
+			float visualZoom = finalZoomFloatPart >= 0
+					? 1 + finalZoomFloatPart
+					: 1 + 0.5f * finalZoomFloatPart;
+			mapRenderer.setZoom(ZoomLevel.swigToEnum(zoom), visualZoom);
 			float zoomMagnifier = application.getOsmandMap().getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 
@@ -1343,7 +1348,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private void zoomToAnimate(@NonNull RotatedTileBox initialViewport, float deltaZoom, int centerX, int centerY) {
 		Zoom zoom = new Zoom(initialViewport.getZoom(), (float) initialViewport.getZoomFloatPart(), getMinZoom(), getMaxZoom());
-		zoom.calculateAnimatedZoom(deltaZoom);
+		zoom.calculateAnimatedZoom(currentViewport.getZoom(), deltaZoom);
 		boolean notify = !(doubleTapScaleDetector != null && doubleTapScaleDetector.isInZoomMode());
 		zoomToAnimate(zoom.getBaseZoom(), zoom.getZoomAnimation(), centerX, centerY, notify);
 	}

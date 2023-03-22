@@ -51,7 +51,7 @@ public class Zoom {
 		checkZoomBounds();
 	}
 
-	public void calculateAnimatedZoom(float deltaZoom) {
+	public void calculateAnimatedZoom(int currentBaseZoom, float deltaZoom) {
 		while (zoomFloatPart + deltaZoom >= 0.5 && baseZoom + 1 <= maxZoom) {
 			deltaZoom--;
 			baseZoom++;
@@ -59,6 +59,19 @@ public class Zoom {
 		while (zoomFloatPart + deltaZoom < -0.5 && baseZoom - 1 >= minZoom) {
 			deltaZoom++;
 			baseZoom--;
+		}
+
+		// Extend zoom float part from [-0.5 ... +0.5) to [-0.6 ... +0.6)
+		// Example: previous zoom was 15 + 0.3f. With deltaZoom = 0.25f,
+		// zoom will become 15 + 0.55f, not 16 - 0.45f
+		if (baseZoom + 1 == currentBaseZoom && zoomFloatPart + deltaZoom >= 0.4f) {
+			baseZoom++;
+			float invertedZoomFloatPart = (zoomFloatPart + deltaZoom) - 1.0f;
+			deltaZoom = invertedZoomFloatPart - zoomFloatPart;
+		} else if (baseZoom - 1 == currentBaseZoom && zoomFloatPart + deltaZoom < -0.4f) {
+			baseZoom--;
+			float invertedZoomFloatPart = 1.0f + (zoomFloatPart + deltaZoom);
+			deltaZoom = invertedZoomFloatPart - zoomFloatPart;
 		}
 
 		boolean zoomInOverflow = baseZoom == maxZoom && zoomFloatPart + deltaZoom > 0;
