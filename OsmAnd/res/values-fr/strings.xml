@@ -5103,4 +5103,6 @@
     <string name="common_weight_limit_error">La valeur minimum est \"%1$s\" %2$s. Utilisez le profil \"%3$s\" si le poids de votre véhicule est inférieur à la valeur minimum.</string>
     <string name="weather_forecast">Prévisions météo</string>
     <string name="test_heightmap">Carte de hauteur test</string>
+    <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
+    <string name="offline_weather_forecast">Prévisions météo hors ligne</string>
 </resources>
