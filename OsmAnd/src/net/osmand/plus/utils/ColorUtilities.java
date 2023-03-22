@@ -80,7 +80,6 @@ public class ColorUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
-
 	/********************************* Basic colors *********************************/
 
 	@ColorInt
