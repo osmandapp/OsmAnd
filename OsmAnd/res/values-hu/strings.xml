@@ -5058,7 +5058,7 @@
     <string name="shared_string_in_progress">Folyamatban</string>
     <string name="shared_string_original">Eredeti</string>
     <string name="movement_speed">Mozgási sebesség</string>
-    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
+    <string name="release_4_4">"• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
 \n
 \n • A helyi menü most a POI lokalizált neveit jeleníti meg
 \n
@@ -5078,7 +5078,17 @@
 \n
 \n • Vegán helyek megjelenítésével kapcsolatos problémák javítása
 \n
-\n</string>
+\n • Lehetőség „Fedvény” vagy „Háttér” térképként használt online csempék letöltésére
+\n
+\n  • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél
+\n
+\n  • Új Moped profil
+\n
+\n  • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció
+\n
+\n  • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
+\n
+\n"</string>
     <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
     <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
