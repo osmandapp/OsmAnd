@@ -1,6 +1,8 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_VISIBLE_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
@@ -184,6 +186,10 @@ public class SelectedTracksHelper {
 		String name = dir.getName();
 		if (GPX_INDEX_DIR.equals(name + "/")) {
 			name = app.getString(R.string.shared_string_tracks);
+		}
+		if((dir.getPath() + "/").endsWith(GPX_IMPORT_DIR) ||
+				(dir.getPath() + "/").endsWith(GPX_RECORDED_INDEX_DIR) ){
+			name = Algorithms.capitalizeFirstLetter(name);
 		}
 		TrackTab trackTab = trackTabs.get(name);
 		if (trackTab == null) {

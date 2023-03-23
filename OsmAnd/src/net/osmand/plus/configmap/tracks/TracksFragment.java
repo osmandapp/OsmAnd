@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +31,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -49,6 +49,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -71,7 +72,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private SelectedTracksHelper selectedTracksHelper;
 	private TrackItemsLoaderTask asyncLoader;
 
-	private ViewPager2 viewPager;
+	private ViewPager viewPager;
 	private ProgressBar progressBar;
 	private TracksTabAdapter adapter;
 
@@ -79,6 +80,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private View selectionButton;
 
 	private boolean nightMode;
+	private int tabSize;
 
 	@NonNull
 	public SelectedTracksHelper getSelectedTracksHelper() {
@@ -184,39 +186,63 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void setupTabLayout(@NonNull View view) {
-		adapter = new TracksTabAdapter(this, getTrackTabs());
-
 		viewPager = view.findViewById(R.id.view_pager);
-		reduceDragSensitivity(8);
-		viewPager.setAdapter(adapter);
+		List<TrackTab> tabs = getTrackTabs();
+		PagerSlidingTabStrip tabLayout = view.findViewById(R.id.sliding_tabs);
+		tabLayout.setTabBackground(nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light);
+		tabLayout.setCustomTabProvider(new PagerSlidingTabStrip.CustomTabProvider() {
+			@Override
+			public View getCustomTabView(@NonNull ViewGroup parent, int position) {
+				LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
+				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+				int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+				View customView = inflater.inflate(R.layout.tab_title_view, parent, false);
+				TextView textView = customView.findViewById(android.R.id.text1);
+				DisplayMetrics dm = getResources().getDisplayMetrics();
+				int sidePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, dm);
+				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
+				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
+				textView.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
+				return customView;
+			}
 
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+			@Override
+			public void select(View tab) {
+				tab.setSelected(true);
+			}
 
-		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-		tabLayout.setSelectedTabIndicatorColor(activeColor);
-		tabLayout.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+			@Override
+			public void deselect(View tab) {
+				tab.setSelected(false);
+			}
 
-		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager,
-				(tab, position) -> {
-					View customView = inflater.inflate(R.layout.tab_title_view, tabLayout, false);
-					TextView textView = customView.findViewById(android.R.id.text1);
-					textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
-					textView.setAllCaps(true);
+			@Override
+			public void tabStylesUpdated(View tabsContainer, int currentPosition) {
 
-					tab.setCustomView(customView);
-					tab.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
-				});
-		mediator.attach();
+			}
+		});
+		setTabs(tabLayout, tabs);
+
+	}
+
+	private void setTabs(PagerSlidingTabStrip mSlidingTabLayout, List<TrackTab> mTabs) {
+		tabSize = mTabs.size();
+		setViewPagerAdapter(viewPager, mTabs);
+		mSlidingTabLayout.setViewPager(viewPager);
+		viewPager.setCurrentItem(0);
+	}
+
+	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
+		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
+		pager.setAdapter(adapter);
 	}
 
 	private void reduceDragSensitivity(int sensitivity) {
 		try {
-			Field ff = ViewPager2.class.getDeclaredField("mRecyclerView") ;
+			Field ff = ViewPager2.class.getDeclaredField("mRecyclerView");
 			ff.setAccessible(true);
-			RecyclerView recyclerView =  (RecyclerView) ff.get(viewPager);
-			Field touchSlopField = RecyclerView.class.getDeclaredField("mTouchSlop") ;
+			RecyclerView recyclerView = (RecyclerView) ff.get(viewPager);
+			Field touchSlopField = RecyclerView.class.getDeclaredField("mTouchSlop");
 			touchSlopField.setAccessible(true);
 			int touchSlop = (int) touchSlopField.get(recyclerView);
 			touchSlopField.set(recyclerView, touchSlop * sensitivity);
@@ -224,6 +250,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			e.printStackTrace();
 		}
 	}
+
 	private void setupButtons(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> saveChanges());
@@ -284,7 +311,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void onResume() {
 		super.onResume();
-
+		List<TrackTab> tabs = getTrackTabs();
+		if (tabs.size() != tabSize) {
+			setTabs(getView().findViewById(R.id.sliding_tabs), tabs);
+		}
 		if (asyncLoader == null) {
 			reloadTracks();
 		}
@@ -309,7 +339,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void updateTrackTabs() {
-		adapter.setTrackTabs(selectedTracksHelper.getTrackTabs());
+		setTabs(getView().findViewById(R.id.sliding_tabs), new ArrayList<>(selectedTracksHelper.getTrackTabs().values()));
 	}
 
 	private void saveChanges() {
