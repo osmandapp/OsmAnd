@@ -32,6 +32,7 @@
 				android:id="@+id/name_and_read_section_container"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_weight="1"

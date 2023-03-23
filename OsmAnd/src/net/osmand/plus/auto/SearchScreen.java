@@ -33,12 +33,11 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.fragments.HistorySettingsFragment;
 import net.osmand.search.SearchUICore;
-import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -202,7 +201,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 	@Override
 	public void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
-							 @Nullable ItemList itemList, int resultsCount) {
+	                         @Nullable ItemList itemList, int resultsCount) {
 		SearchWord lastSelectedWord = phrase.getLastSelectedWord();
 		if (showResult && resultsCount == 0 && lastSelectedWord != null) {
 			showResult(lastSelectedWord.getResult());
@@ -301,9 +300,9 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				}
 
 				// History
-				SearchResultCollection res = getSearchUICore().shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-				if (res != null) {
-					recentResults.addAll(res.getCurrentSearchResults());
+				List<SearchResult> results = HistorySettingsFragment.getSearchHistoryResults(app, true);
+				if (!Algorithms.isEmpty(results)) {
+					recentResults.addAll(results);
 				}
 				this.recentResults = recentResults;
 				if (!searchHelper.isSearching() && Algorithms.isEmpty(searchHelper.getSearchQuery())) {

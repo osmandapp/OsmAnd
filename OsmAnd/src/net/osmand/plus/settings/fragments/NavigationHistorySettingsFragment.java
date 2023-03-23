@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 
 import static net.osmand.plus.settings.fragments.HistoryAdapter.PREVIOUS_ROUTE_HEADER;
-import static net.osmand.plus.settings.fragments.HistorySettingsFragment.getNavigationHistoryResults;
 import static net.osmand.plus.settings.fragments.SearchHistorySettingsFragment.createHistoryPairsByDate;
 import static net.osmand.plus.settings.fragments.SearchHistorySettingsFragment.sortSearchResults;
 
@@ -45,7 +44,7 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	@Override
 	protected void updateHistoryItems() {
 		clearItems();
-		List<SearchResult> searchResults = getNavigationHistoryResults(app);
+		List<SearchResult> searchResults = HistorySettingsFragment.getSearchHistoryResults(app, true, true);
 		sortSearchResults(searchResults);
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();

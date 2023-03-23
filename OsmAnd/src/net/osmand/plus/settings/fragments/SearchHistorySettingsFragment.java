@@ -37,7 +37,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 	@Override
 	protected void updateHistoryItems() {
 		clearItems();
-		List<SearchResult> searchResults = HistorySettingsFragment.getSearchHistoryResults(app);
+		List<SearchResult> searchResults = HistorySettingsFragment.getSearchHistoryResults(app, false, true);
 		sortSearchResults(searchResults);
 
 		Map<Integer, List<SearchResult>> historyGroups = new HashMap<>();
@@ -74,7 +74,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 			if (historyEntry2 != null) {
 				lastTime2 = historyEntry2.getLastAccessTime();
 			}
-			return (lastTime1 < lastTime2) ? 1 : ((lastTime1 == lastTime2) ? 0 : -1);
+			return Long.compare(lastTime2, lastTime1);
 		});
 	}
 

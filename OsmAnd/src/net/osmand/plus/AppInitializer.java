@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.SETTINGS_DIR;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
@@ -290,8 +291,8 @@ public class AppInitializer implements IProgress {
 
 	private void initPoiTypes() {
 		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
-		if (app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").exists()) {
-			app.poiTypes.init(app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
+		if (app.getAppPath(SETTINGS_DIR + "poi_types.xml").exists()) {
+			app.poiTypes.init(app.getAppPath(SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
 		} else {
 			app.poiTypes.init();
 		}

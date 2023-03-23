@@ -1,8 +1,11 @@
 package net.osmand.plus.helpers;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -73,18 +76,41 @@ public class SearchHistoryHelper {
 		}
 	}
 
+	@NonNull
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
+		return getHistoryEntries(onlyPoints, false);
+	}
+
+	@NonNull
+	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints, boolean includeDeleted) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
-		List<HistoryEntry> res = new ArrayList<>();
+		List<HistoryEntry> entries = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
-			PointDescription pd = entry.getName();
-			if (!onlyPoints || (!pd.isPoiType() && !pd.isCustomPoiFilter())) {
-				res.add(entry);
+			PointDescription description = entry.getName();
+
+			boolean deleted = isPointDescriptionDeleted(description);
+			if (includeDeleted || !deleted) {
+				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
+					entries.add(entry);
+				}
 			}
 		}
-		return res;
+		return entries;
+	}
+
+	private boolean isPointDescriptionDeleted(@NonNull PointDescription description) {
+		String name = description.getName();
+		if (description.isPoiType()) {
+			MapPoiTypes poiTypes = context.getPoiTypes();
+			return poiTypes.getAnyPoiTypeByKey(name) == null && poiTypes.getAnyPoiAdditionalTypeByKey(name) == null;
+		} else if (description.isCustomPoiFilter()) {
+			return context.getPoiFilters().getFilterById(name, true) == null;
+		} else if (description.isGpxFile()) {
+			return GpxUiHelper.getGpxInfoByFileName(context, name) == null;
+		}
+		return false;
 	}
 
 	private PointDescription createPointDescription(AbstractPoiType pt) {
