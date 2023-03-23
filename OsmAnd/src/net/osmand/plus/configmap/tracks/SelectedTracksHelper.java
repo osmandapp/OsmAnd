@@ -1,8 +1,5 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_VISIBLE_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
@@ -13,7 +10,6 @@ import androidx.annotation.NonNull;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -101,14 +97,14 @@ public class SelectedTracksHelper {
 
 	@NonNull
 	private TrackTab getTracksOnMapTab() {
-		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_on_map), TrackTabType.ON_MAP);
+		TrackTab trackTab = new TrackTab(TrackTabType.ON_MAP);
 		trackTab.items.addAll(getOnMapTabItems());
 		return trackTab;
 	}
 
 	@NonNull
 	private TrackTab getAllTracksTab() {
-		TrackTab trackTab = new TrackTab(app.getString(R.string.shared_string_all), TrackTabType.ALL);
+		TrackTab trackTab = new TrackTab(TrackTabType.ALL);
 		trackTab.items.addAll(getAllTabItems());
 		return trackTab;
 	}
@@ -183,20 +179,11 @@ public class SelectedTracksHelper {
 	@NonNull
 	public TrackTab addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
 		File dir = item.getFile().getParentFile();
-		String name = dir.getName();
-		if (GPX_INDEX_DIR.equals(name + "/")) {
-			name = app.getString(R.string.shared_string_tracks);
-		}
-		String dirPath = dir.getPath() + "/";
-		if (dirPath.endsWith(GPX_IMPORT_DIR) ||
-				dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
-			name = Algorithms.capitalizeFirstLetter(name);
-		}
-		TrackTab trackTab = trackTabs.get(name);
+		TrackTab trackTab = trackTabs.get(dir.getName());
 		if (trackTab == null) {
-			trackTab = new TrackTab(name, TrackTabType.FOLDER);
+			trackTab = new TrackTab(dir);
 			trackTab.items.add(TYPE_SORT_TRACKS);
-			trackTabs.put(name, trackTab);
+			trackTabs.put(trackTab.getTypeName(), trackTab);
 		}
 		trackTab.items.add(item);
 		return trackTab;

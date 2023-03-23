@@ -23,7 +23,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +87,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
 			TrackTab trackTab = trackTabs.get(position);
 
-			holder.title.setText(Algorithms.capitalizeFirstLetter(trackTab.name.toLowerCase()));
+			holder.title.setText(trackTab.getName(app, true));
 
 			boolean selected = trackTab == selectedTab;
 			int colorId = selected ? activeColorId : defaultColorId;
@@ -102,7 +101,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksFragment) {
 					TrackTab tab = trackTabs.get(adapterPosition);
-					((TracksFragment) target).setSelectedTab(tab.name);
+					((TracksFragment) target).setSelectedTab(tab.getTypeName());
 				}
 				dismiss();
 			});

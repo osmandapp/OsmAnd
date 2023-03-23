@@ -1,19 +1,23 @@
 package net.osmand.plus.configmap.tracks;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 
 public enum TrackTabType {
 
-	ON_MAP(R.drawable.ic_show_on_map),
-	ALL(R.drawable.ic_action_list_header),
-	FOLDER(R.drawable.ic_action_folder);
+	ON_MAP(R.string.shared_string_on_map, R.drawable.ic_show_on_map),
+	ALL(R.string.shared_string_all, R.drawable.ic_action_list_header),
+	FOLDER(-1, R.drawable.ic_action_folder);
 
 	@DrawableRes
-	final int iconId;
+	public final int iconId;
+	@StringRes
+	public final int titleId;
 
-	TrackTabType(@DrawableRes int iconId) {
+	TrackTabType(@StringRes int titleId, @DrawableRes int iconId) {
+		this.titleId = titleId;
 		this.iconId = iconId;
 	}
 
