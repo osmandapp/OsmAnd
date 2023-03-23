@@ -41,6 +41,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -106,19 +107,6 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public void setWeatherResourcesManager(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
 		this.weatherResourcesManager = weatherResourcesManager;
-	}
-
-	public boolean shouldHaveWeatherForecast(@NonNull WorldRegion region) {
-		String regionId = region.getRegionId();
-		int level = region.getLevel();
-
-		boolean russia = RUSSIA_REGION_ID.equals(regionId);
-		boolean russiaPrefix = regionId.startsWith(RUSSIA_REGION_ID);
-		boolean unitedKingdom = regionId.equals(WorldRegion.UNITED_KINGDOM_REGION_ID);
-
-		return WORLD.equals(regionId) ||
-				(level == 1 && russia) ||
-				(level > 1 && !russiaPrefix && ((level == 2 && !unitedKingdom) || (level == 3 && unitedKingdom)));
 	}
 
 	public void checkAndDownloadForecastsByRegionIds(List<String> regionIds) {
@@ -570,15 +558,15 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		offlineForecastInfo.remove(regionId);
 	}
 
-	public void setOfflineForecastSizeInfo(@NonNull String regionId, long size, boolean local) {
+	public void setOfflineForecastSizeInfo(@NonNull String regionId, long size, boolean forLocal) {
 		OfflineForecastInfo info = getOrCreateCachedInfo(regionId);
-		info.put(local ? LOCAL_SIZE : UPDATES_SIZE, size);
+		info.put(forLocal ? LOCAL_SIZE : UPDATES_SIZE, size);
 	}
 
-	public long getOfflineForecastSizeInfo(@NonNull String regionId, boolean local) {
+	public long getOfflineForecastSizeInfo(@NonNull String regionId, boolean forLocal) {
 		OfflineForecastInfo info = getCachedInfo(regionId);
 		if (info != null) {
-			Object size = info.get(local ? LOCAL_SIZE : UPDATES_SIZE);
+			Object size = info.get(forLocal ? LOCAL_SIZE : UPDATES_SIZE);
 			if (size instanceof Long) {
 				return (long) size;
 			}
@@ -667,8 +655,18 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		}
 	}
 
+	public void addWeatherIndexItems(@NonNull IndexFileList indexes) {
+		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
+			if (shouldHaveWeatherForecast(region)) {
+				WeatherIndexItem index = createIndexItem(region);
+				cachedWeatherIndexes.put(index.getRegionId(), index);
+				indexes.add(index);
+			}
+		}
+	}
+
 	@NonNull
-	public IndexItem createIndexItem(@NonNull WorldRegion region) {
+	private WeatherIndexItem createIndexItem(@NonNull WorldRegion region) {
 		String regionId = region.getRegionId();
 		DecimalFormat decimalFormat = new DecimalFormat("#.#");
 		long contentSize = getOfflineForecastSizeInfo(regionId, true);
@@ -682,12 +680,20 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		} else {
 			timestamp = getPreferenceLastUpdate(regionId);
 		}
+		return new WeatherIndexItem(region, timestamp, size, contentSize, containerSize);
+	}
 
-		WeatherIndexItem indexItem = new WeatherIndexItem(
-				region, timestamp, size, contentSize, containerSize
-		);
-		cachedWeatherIndexes.put(regionId, indexItem);
-		return indexItem;
+	private boolean shouldHaveWeatherForecast(@NonNull WorldRegion region) {
+		String regionId = region.getRegionId();
+		int level = region.getLevel();
+
+		boolean russia = RUSSIA_REGION_ID.equals(regionId);
+		boolean russiaPrefix = regionId.startsWith(RUSSIA_REGION_ID);
+		boolean unitedKingdom = regionId.equals(WorldRegion.UNITED_KINGDOM_REGION_ID);
+
+		return WORLD.equals(regionId) ||
+				(level == 1 && russia) ||
+				(level > 1 && !russiaPrefix && ((level == 2 && !unitedKingdom) || (level == 3 && unitedKingdom)));
 	}
 
 	public boolean checkIfItemOutdated(@NonNull WeatherIndexItem weatherIndexItem) {
@@ -786,6 +792,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		return region != null ? getTileIds(region) : null;
 	}
 
+	@NonNull
 	public static List<Long> getTileIds(@NonNull WorldRegion region) {
 		QuadRect regionBounds = getRegionBounds(region);
 		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);

@@ -32,6 +32,7 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.resources.ResourceManager;
@@ -386,6 +387,7 @@ public class DownloadIndexesThread {
 				while (app.isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
+				PluginsHelper.addPluginIndexItems(indexFileList);
 				result = new DownloadResources(app);
 				result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
 				result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
