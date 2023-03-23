@@ -4108,7 +4108,7 @@
     <string name="shared_string_offline">Офлайн</string>
     <string name="shared_string_online">З мережі</string>
     <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, openrouteservice або GPX.</string>
-    <string name="shared_string_external">Зовнішні</string>
+    <string name="shared_string_external">Зовнішньо</string>
     <string name="provided_by">Надано %1$s</string>
     <string name="failed_loading_predefined_engines">Не вдалося завантажити список попередньо визначених шаблонів.
 \nПеревірте з\'єднання з Інтернетом.</string>
