@@ -876,7 +876,7 @@
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stíny kopců a svahy, vám pomohou vizuálně zhodnotit reliéf a reliéf terénu, navigaci a další. Topografické informace mohou být na mapě znázorněny stínováním svahů, vrstevnicemi a/nebo zbarvením strmosti.
+    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stíny kopců a svahy, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny stínováním svahů, vrstevnicemi a/nebo zbarvením strmosti.
 \n
 \nPodkladová data pocházejí ze systémů SRTM a ASTER.
 \n
@@ -1347,7 +1347,7 @@
     <string name="impassable_road">Vyhnout se cestám…</string>
     <string name="rendering_category_hide">Skrýt</string>
     <string name="wake_on_voice">Zapnout obrazovku</string>
-    <string name="wake_on_voice_descr">Zapnout obrazovku zařízení (pokud je vypnuta) když se blíží odbočka.</string>
+    <string name="wake_on_voice_descr">Zapnout obrazovku zařízení (pokud je vypnuta), když se blíží odbočka.</string>
     <string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="shared_string_never">Nikdy</string>
     <string name="home_button">Domov</string>
@@ -1507,7 +1507,7 @@
     <string name="plugin_nautical_descr">Obohatí vaši mapu o informace o plavebních trasách, navigačních světlech, nebezpečných námořních zónách, zónách s omezením plavby nebo kotvení atd. Pro použití si stáhněte příslušné námořní mapy a povolte styl \"Námořní mapa\" v části \"Konfigurace mapy\". 
 \n
 \nDalší informace naleznete na adrese https://osmand.net/docs/user/plugins/nautical-charts .</string>
-    <string name="plugin_ski_descr">Navrženo pro navigaci v oblastech zimních sportů: Sjezdovky, vleky a běžkařské tratě jsou označeny barevnými čarami, které označují obtížnost. Chcete-li tento doplněk používat, povolte jej a přejděte také na \"Konfigurace mapy\" a vyberte styl mapy \"Zima a lyžování\".</string>
+    <string name="plugin_ski_descr">Navrženo pro navigaci v oblastech zimních sportů: Sjezdovky, vleky a běžkařské tratě jsou označeny barevnými čarami, které označují obtížnost. Chcete-li tento modul používat, povolte jej a přejděte také do \"Nastavení mapy\" a vyberte styl mapy \"Zima a lyžování\".</string>
     <string name="index_name_netherlands">Evropa - Holandsko</string>
     <string name="rendering_value__name">Výchozí</string>
     <string name="rendering_value_highContrastRoads_name">Vysoce kontrastní cesty</string>
@@ -1642,7 +1642,7 @@
     <string name="closing_at">Otevřeno do</string>
     <string name="count_of_lines">Počet řádků</string>
     <string name="show_on_start">Zobrazit po spuštění</string>
-    <string name="are_you_sure">Jste si jistý\?</string>
+    <string name="are_you_sure">Jste si jisti\?</string>
     <string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
     <string name="srtm_plugin_disabled">Vrstevnice vypnuty</string>
     <string name="favorite_category_add_new">Přidat nový</string>
@@ -2222,7 +2222,7 @@
     <string name="srtm_color_scheme">Barevné schéma</string>
     <string name="show_from_zoom_level">Zobrazení začíná na úrovni přiblížení</string>
     <string name="routing_attr_allow_private_name">Povolit soukromý přístup</string>
-    <string name="routing_attr_allow_private_description">Umožnit přístup k soukromým oblastem.</string>
+    <string name="routing_attr_allow_private_description">Povolit přístup do soukromých oblastí.</string>
     <string name="display_zoom_level">Zobrazit úrovně přiblížení: %1$s</string>
     <string name="favorite_group_name">Název skupiny</string>
     <string name="change_color">Změnit barvu</string>
@@ -3426,7 +3426,7 @@
     <string name="plan_route_change_route_type_before">Změnit typ trasy před</string>
     <string name="plan_route_change_route_type_after">Změnit typ trasy po</string>
     <string name="video_notes">Video poznámky</string>
-    <string name="vessel_height_limit_description">Nastavte výšku plavidla tak, abyste se vyhnuli nízkým mostům. Mějte na paměti, že pokud je most pohyblivý, použijeme jeho výšku v otevřeném stavu.</string>
+    <string name="vessel_height_limit_description">Nastavte výšku plavidla, aby bylo možné se vyhnout nízkým mostům. Mějte na paměti, že pokud je most pohyblivý, použijeme jeho výšku v otevřeném stavu.</string>
     <string name="vessel_width_limit_description">Nastavte šířku plavidla, abyste se vyhnuli úzkým mostům</string>
     <string name="quick_action_showhide_mapillary_descr">Přepínač pro zobrazení nebo skrytí mapové vrstvy Mapillary.</string>
     <string name="routing_attr_length_description">Zadejte délku vozidla, která musí být na trase povolená.</string>
@@ -3442,7 +3442,7 @@
     <string name="use_volume_buttons_as_zoom">Tlačítka hlasitosti pro přibližování</string>
     <string name="threshold_distance">Mezní vzdálenost</string>
     <string name="navigation_profile">Navigační profil</string>
-    <string name="route_between_points_add_track_desc">Vyberte soubor stopy, do kterého chcete přidat nový segment.</string>
+    <string name="route_between_points_add_track_desc">Vyberte soubor stopy, do níž se přidá nový úsek.</string>
     <string name="street_level_imagery">Snímky z úrovně ulice</string>
     <string name="plan_route_exit_dialog_descr">Zahodit všechny změny v plánované trase\?</string>
     <string name="in_case_of_reverse_direction">V případě opačného směru</string>
@@ -3619,7 +3619,7 @@
     <string name="width_limit_description">Zadejte šířku svého vozidla, na trase mohou být omezení pro široká vozidla.</string>
     <string name="height_limit_description">Zadejte výšku svého vozidla, na trase mohou být omezení pro vysoká vozidla.</string>
     <string name="weight_limit_description">Zadejte hmotnost svého vozidla, na trase mohou být omezení pro těžká vozidla.</string>
-    <string name="lenght_limit_description">Uveďte délku svého vozidla, na některých trasách mohou platit omezení pro dlouhá vozidla.</string>
+    <string name="lenght_limit_description">Zadejte délku svého vozidla, na trase mohou být omezení pro dlouhá vozidla.</string>
     <string name="gpx_parse_error">Nalezeny problémy se souborem GPX.
 \n
 \nMůžete se obrátit na podporu OsmAnd a prošetřit je.</string>
@@ -4346,7 +4346,7 @@
     <string name="setting_supported_by_style">Toto nastavení je poskytováno mapovým stylem \'%1$s\'</string>
     <string name="explore_osmnad_plans_to_find_suitable">Prozkoumejte předplatné OsmAnd a najděte si takové, které vám bude vyhovovat.</string>
     <string name="option_available_only_in_osmand_pro">Dostupné v předplatném OsmAnd.</string>
-    <string name="track_has_no_needed_data">Na trase chybí příslušné údaje.</string>
+    <string name="track_has_no_needed_data">Ve stopě chybí potřebné údaje.</string>
     <string name="promo_subscription">Propagační předplatné</string>
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="backup_setup">Nastavit zálohování</string>
@@ -4409,7 +4409,7 @@
     <string name="from_with_param">Od %1$s</string>
     <string name="offline_wikipeadia">Offline Wikipedie</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terénu: vrstevnice, stínování svahů, sklony svahů</string>
-    <string name="purchases_feature_desc_wikipedia">Poskytuje všechny články z Wikipedie týkající se míst v režimu offline a pomáhá vám dozvědět se informace o místech, která navštívíte na své cestě, pouhým klepnutím na mapu. Nezapomeňte si stáhnout mapové soubory Wikipedie pro příslušné regiony.</string>
+    <string name="purchases_feature_desc_wikipedia">Poskytuje offline přístup ke všem článkům z Wikipedie týkajícím se míst, díky čemuž můžete jednoduchým klepnutím na mapě zjistit informace o místech, která navštívíte na své cestě. Nezapomeňte si stáhnout mapové soubory Wikipedie pro příslušné regiony.</string>
     <string name="enter_verification_code">Zadejte jednorázové heslo</string>
     <string name="contributions_may_calculate_with_delay">Výpočet příspěvků může trvat několik hodin.</string>
     <string name="shared_string_contributions">Příspěvky</string>
@@ -4536,7 +4536,7 @@
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="nautical_depth_points">Plavební hloubkové body</string>
     <string name="rendering_attr_showRunningRoutes_name">Běžecké trasy</string>
-    <string name="routing_attr_allow_private_for_truck_name">Umožnit soukromý vjezd (nákladní automobil)</string>
+    <string name="routing_attr_allow_private_for_truck_name">Povolit soukromý vjezd (nákladní automobil)</string>
     <string name="mtb_segment_classification">Klasifikace úseku</string>
     <string name="show_borders_of_downloaded_maps">Zobrazit hranice stažených map</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybridní</string>
@@ -4645,7 +4645,7 @@
     <string name="shared_string_next_sunset">Příští západ slunce</string>
     <string name="map_widget_group_sunrise_sunset_desc">Tyto widgety zobrazují informace o nejbližším východu a západu slunce.</string>
     <string name="weather_plugin_description">Poskytuje
-\n- 24hodinovou a 7denní předpověď počasí s 5 vrstvami.
+\n- 24hodinovou a 7denní předpověď počasí s 5 vrstvami
 \n- widgety založené na poloze
 \n- izolinie teploty a tlaku
 \n
@@ -4694,9 +4694,9 @@
 \n
 \n - Plynulá animace změn polohy při pohybu
 \n
-\n - Nové widgety pro souřadnice středu mapy a nadmořskou výšku geolokací
+\n - Nové widgety pro souřadnice středu mapy a nadmořskou výšku zeměpisné polohy
 \n
-\n - \"Vzdálenost k poklepání\": přidány možnosti velikosti textu
+\n - \"Vzdálenost klepnutím\": přidány možnosti velikosti textu
 \n
 \n - Widget \"Mapová značka\": přidána možnost změny chování při kliknutí
 \n
@@ -4739,14 +4739,14 @@
     <string name="skip_download">Přeskočit stahování</string>
     <string name="determine_location">Umožněte nám určit vaši polohu</string>
     <string name="weather_precip_in">v</string>
-    <string name="display_position_automatic_descr">Závisí na orientaci mapy: dole pro směr pohybu, uprostřed pro všechny ostatní.</string>
+    <string name="display_position_automatic_descr">Závisí na orientaci mapy: dole pro režim ve směru pohybu, uprostřed pro všechny ostatní.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Změnit vzhled %1$s stop\?</string>
-    <string name="no_visible_tracks_description">Výběrem stop je zobrazíte na mapě.</string>
+    <string name="no_visible_tracks_description">Vyberte stopy k zobrazení na mapě.</string>
     <string name="no_visible_tracks">Žádné stopy na mapě</string>
     <string name="recently_visible">Nedávno viditelné %1$s</string>
     <string name="empty_tracks_description">Pomocí aplikace OsmAnd můžete importovat, vytvářet nebo nahrávat soubory stop.</string>
     <string name="empty_tracks">Nemáte soubory stop.</string>
-    <string name="shared_string_select_recent">Vybrat poslední</string>
+    <string name="shared_string_select_recent">Vybrat nedávné</string>
     <string name="change_appearance">Změnit vzhled</string>
     <string name="switch_folder">Přepnout složku</string>
     <string name="show_all_tracks">Zobrazit všechny stopy</string>
@@ -4764,7 +4764,7 @@
     <string name="rendering_attr_horseScale_name">Obtížnost stezek pro koně</string>
     <string name="routing_attr_avoid_fords_description">Vyhnout se brodům</string>
     <string name="routing_attr_avoid_fords_name">Vyhnout se brodům</string>
-    <string name="routing_attr_hazmat_category_description">Kategorie nebezpečných materiálů / zvažte povolení pro přístup k nebezpečným látkám</string>
+    <string name="routing_attr_hazmat_category_description">Kategorie nebezpečných materiálů / zohlednit omezení pro nebezpečný náklad</string>
     <string name="map_markers_desc">Widget zobrazuje vzdálenost nebo odhadovaný čas příjezdu (ETA) pro první dvě značky v seznamu značek na mapě.</string>
     <string name="current_location_widget">Souřadnice: Aktuální poloha</string>
     <string name="location_simulation_speedup">Zrychlení simulace</string>
@@ -4774,7 +4774,7 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Žádné preference</string>
     <string name="goods_delivery_desc_3">Platí pouze pro dodávkové vozy o hmotnosti do 3,5 tuny.</string>
     <string name="rendering_attr_horse_scale_impossible_name">Nemožné</string>
-    <string name="routing_attr_goods_restrictions_description">Zvážit povolení k vjezdu pro lehká nákladní vozidla (zboží)</string>
+    <string name="routing_attr_goods_restrictions_description">Zohlednit omezení vjezdu pro lehká nákladní vozidla (zboží)</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobrazit trasy pro MTB IMBA</string>
     <string name="transport_hazmat_yes_desc">Vyberte příslušnou kategorii.</string>
     <string name="routing_attr_hazmat_category_name">Přeprava nebezpečných materiálů</string>
@@ -4789,7 +4789,7 @@
     <string name="map_widget_ant_bicycle_cadence_desc">Zobrazuje rychlost, kterou uživatel šlape do pedálů</string>
     <string name="shared_string_shows">Zobrazuje</string>
     <string name="auto_25_chars_route_tu_kr">Otočte se a držte se vpravo</string>
-    <string name="routing_attr_allow_private_for_truck_description">Umožnění přístupu nákladních vozidel na soukromé pozemky.</string>
+    <string name="routing_attr_allow_private_for_truck_description">Povolit přístup nákladních vozidel na soukromé pozemky.</string>
     <string name="lang_sat">Santali</string>
     <string name="attach_roads_warning">K silnicím lze připojit pouze nahranou stopu.</string>
     <string name="ant_write_to_gpx">Zápis dat do stopy</string>
@@ -4863,7 +4863,7 @@
     <string name="shared_string_only_missing">Pouze chybějící</string>
     <string name="download_tiles">Stáhnout dlaždice</string>
     <string name="second_next_turn_widget_desc">Widget zobrazuje informace o druhém příštím odbočení, které je povoleno, pokud je odbočení v dojezdové vzdálenosti.</string>
-    <string name="rendering_attr_depthContourWidth_description">Šířka hloubkové vrstevnice</string>
+    <string name="rendering_attr_depthContourWidth_description">Tloušťka hloubkové vrstevnice</string>
     <string name="routing_attr_motor_type_description">Zvolte typ paliva vašeho motoru, je to nutné pro odhad emisí CO2.</string>
     <string name="use_latin_name_if_missing">Pokud chybí, použijte latinský název</string>
     <string name="rendering_attr_weatherPressureContours_name">Izolinie tlaku</string>
@@ -4871,7 +4871,7 @@
     <string name="rendering_attr_horse_scale_dangerous_name">Nebezpečné</string>
     <string name="rendering_attr_horse_scale_critical_name">Kritické</string>
     <string name="rendering_attr_horse_scale_demanding_name">Náročné</string>
-    <string name="routing_attr_carriage_restrictions_description">Zvážit povolení k vjezdu pro vozidla tažená koňmi</string>
+    <string name="routing_attr_carriage_restrictions_description">Zohlednit omezení vjezdu pro vozidla tažená koňmi</string>
     <string name="rendering_attr_horse_scale_common_name">Společné</string>
     <string name="rendering_attr_showTramRoutes_name">Tramvajové linky</string>
     <string name="shared_string_duplicate">Duplikát</string>
@@ -4926,9 +4926,9 @@
     <string name="no_altitude_data_desc">Chcete-li získat údaje o %1$s, připojte svou stopu k silnicím nebo ji vypočítejte online.</string>
     <string name="routing_attr_motor_type_name">Spotřeba paliva v motoru</string>
     <string name="routing_attr_avoid_4wd_only_name">Vyhnout se silnicím pro vozidla s pohonem všech kol</string>
-    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Raději mimo sjezdovky</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferovat mimo sjezdovky</string>
     <string name="rendering_attr_weatherTempContours_name">Teplotní izolinie</string>
-    <string name="routing_attr_avoid_4wd_only_description">Vyhýbejte se silnicím vhodným pouze pro vozidla s pohonem všech kol</string>
+    <string name="routing_attr_avoid_4wd_only_description">Vyhnout se silnicím vhodným pouze pro vozidla s pohonem všech kol</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Začátečník</string>
     <string name="average_speed_skip_stops">Zohlednit zastávky</string>
     <string name="rendering_attr_showTrainRoutes_name">Vlakové trasy</string>
