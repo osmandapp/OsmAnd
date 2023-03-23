@@ -5100,6 +5100,16 @@
 \n
 \n• Se han corregido problemas de visualización con los lugares veganos
 \n
+\n• Se ha añadido la posibilidad de descargar teselas en línea usadas como mapas «Superpuestos» o «Subyacentes»
+\n
+\n• Ahora se admiten unidades imperiales en «Parámetros del vehículo»
+\n
+\n• Se ha añadido un nuevo perfil de «Ciclomotor»
+\n
+\n• Se ha añadido la opción «Automático» en «Posición de la ubicación»
+\n
+\n• Se ha corregido los gestos del mapa para la inclinación, zum y rotación
+\n
 \n</string>
     <string name="shared_string_add_manually">Añadir manualmente…</string>
     <string name="sort_duration_ascending">Duración ascendente</string>
