@@ -5106,4 +5106,18 @@
     <string name="test_heightmap">Тестировать карты высот</string>
     <string name="enable_3d_maps">Включить 3D-карты</string>
     <string name="app_mode_climbing">Альпинизм</string>
+    <string name="offline_cache">Офлайн кеш</string>
+    <string name="shared_string_alt_name">Альтернативное название</string>
+    <string name="token_is_not_valid">Токен недействителен</string>
+    <string name="clear_online_cache">Очистить онлайн кеш</string>
+    <string name="common_weight_limit_error">Минимальное значение - \"%1$s\" %2$s. Используйте профиль \"%3$s\", если вес автомобиля меньше минимального значения.</string>
+    <string name="shared_string_pounds">фунты</string>
+    <string name="metric_lbs">фунты</string>
+    <string name="weather_forecast_is_outdated">Прогноз устарел.</string>
+    <string name="shared_string_all_world">Весь мир</string>
+    <string name="weather_forecast">Прогноз погоды</string>
+    <string name="offline_weather_forecast">Офлайн-прогноз погоды</string>
+    <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
+    <string name="clear_online_cache_description">Это очистит весь кеш онлайн тайлов погоды.</string>
+    <string name="free_maps_updates">Бесплатные обновления (экстренные)</string>
 </resources>
