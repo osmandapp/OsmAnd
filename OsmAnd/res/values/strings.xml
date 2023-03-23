@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="deleting_derived_profile_alert">\"%1$s\" is derived profile. Deleting derived profile will cause deleting parent profile. Are you sure? </string>
     <string name="clear_online_cache_description">This will clear all cache for online weather tile.</string>
     <string name="clear_online_cache">Clear online cache</string>
     <string name="offline_cache">Offline cache</string>

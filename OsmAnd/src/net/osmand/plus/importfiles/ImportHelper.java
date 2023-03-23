@@ -339,7 +339,7 @@ public class ImportHelper {
 	}
 
 	public void handleXmlFileImport(Uri intentUri, String fileName, CallbackWithObject routingCallback) {
-		executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback));
+		executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback, true));
 	}
 
 	private void handleUriImport(Uri uri, boolean save, boolean useImportDir) {

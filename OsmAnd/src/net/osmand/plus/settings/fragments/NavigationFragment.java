@@ -155,7 +155,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		return false;
 	}
 
-	private void updateRoutingProfiles() {
+	public void updateRoutingProfiles() {
 		routingProfiles = routingDataUtils.getRoutingProfiles();
 	}
 
