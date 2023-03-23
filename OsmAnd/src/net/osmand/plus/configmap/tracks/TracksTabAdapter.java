@@ -2,18 +2,21 @@ package net.osmand.plus.configmap.tracks;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import net.osmand.plus.OsmandApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TracksTabAdapter extends FragmentStateAdapter {
+public class TracksTabAdapter extends FragmentStatePagerAdapter {
 
 	private final List<TrackTab> trackTabs = new ArrayList<>();
 
-	public TracksTabAdapter(@NonNull TracksFragment fragment, @NonNull List<TrackTab> tabs) {
-		super(fragment);
+	public TracksTabAdapter(@NonNull FragmentManager manager, @NonNull List<TrackTab> tabs) {
+		super(manager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 		trackTabs.addAll(tabs);
 	}
 
@@ -23,9 +26,14 @@ public class TracksTabAdapter extends FragmentStateAdapter {
 		notifyDataSetChanged();
 	}
 
+	@Override
+	public int getCount() {
+		return trackTabs.size();
+	}
+
 	@NonNull
 	@Override
-	public Fragment createFragment(int position) {
+	public Fragment getItem(int position) {
 		TrackItemsFragment fragment = new TrackItemsFragment();
 		fragment.setTrackTab(trackTabs.get(position));
 		fragment.setRetainInstance(true);
@@ -33,7 +41,7 @@ public class TracksTabAdapter extends FragmentStateAdapter {
 	}
 
 	@Override
-	public int getItemCount() {
-		return trackTabs.size();
+	public CharSequence getPageTitle(int position) {
+		return trackTabs.get(position).name;
 	}
 }
