@@ -4512,7 +4512,7 @@
     <string name="poi_recycling_boats">Barcos;Botes</string>
     <string name="poi_recycling_coffee_capsules">Cápsulas de café</string>
     <string name="poi_recycling_glass_bottles_colour">Botellas de vidrio de colores</string>
-    <string name="poi_recycling_glass_jars">Jarras de cristal</string>
+    <string name="poi_recycling_glass_jars">Recipientes de cristal</string>
     <string name="poi_recycling_marine_waste">Residuos marinos</string>
     <string name="poi_recycling_metal_packaging">Envases metálicos</string>
     <string name="poi_recycling_oil">Petróleo</string>
@@ -4528,13 +4528,13 @@
     <string name="poi_recycling_toys">Juguetes</string>
     <string name="poi_waste_trash">Basura</string>
     <string name="poi_waste_oil">Aceite</string>
-    <string name="poi_waste_drugs">Medicamentos;Drogas</string>
+    <string name="poi_waste_drugs">Medicamentos, drogas</string>
     <string name="poi_waste_organic">Reciclado orgánico</string>
     <string name="poi_waste_rubble">Escombros</string>
     <string name="poi_waste_dog_excrement">Excremento de perro</string>
-    <string name="poi_waste_cigarettes">Cigarrillos;Cigarros</string>
+    <string name="poi_waste_cigarettes">Cigarrillos, cigarros</string>
     <string name="poi_recycling_pet">Tereftalato de polietileno (PET)</string>
-    <string name="poi_recycling_pmd">Envases de plástico, envases metálicos y cartones para bebidas (PMD)</string>
+    <string name="poi_recycling_pmd">PMD (envases de plástico, metálicos y cartones para bebidas)</string>
     <string name="poi_recycling_pens">Bolígrafos</string>
     <string name="poi_recycling_aerosol_cans">Latas de aerosol</string>
     <string name="poi_recycling_gas_bottles">Botellas de gas</string>
