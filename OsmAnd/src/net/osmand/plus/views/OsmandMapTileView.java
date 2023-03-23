@@ -1611,6 +1611,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
 
 		private static final float ANGLE_THRESHOLD = 5;
+		private static final float ANGLE_ZOOM_THRESHOLD = 15;
 		private static final float ZOOM_THRESHOLD = 0.2f;
 		private static final float MAX_DELTA_ZOOM = 4;
 
@@ -1630,9 +1631,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
 			finishPinchZoom();
-			rotateToAnimate(initialViewport.getRotate() + angleRelative);
-			if (angleRelative != 0) {
-				application.getMapViewTrackingUtilities().checkAndUpdateManualRotationMode();
+			if (startRotating) {
+				rotateToAnimate(initialViewport.getRotate() + angleRelative);
+				if (angleRelative != 0) {
+					application.getMapViewTrackingUtilities().checkAndUpdateManualRotationMode();
+				}
 			}
 			int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
@@ -1742,8 +1745,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
 				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
 					relAngle = 0;
-				} else {
+				} else if (!startZooming || Math.abs(relAngle) > ANGLE_ZOOM_THRESHOLD) {
 					startRotating = true;
+				} else if (!startRotating) {
+					relAngle = 0;
 				}
 			} else {
 				relAngle = 0;
