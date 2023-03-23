@@ -90,11 +90,6 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 		return R.drawable.ic_action_user;
 	}
 
-	@Override
-	public void onDetach() {
-		super.onDetach();
-	}
-
 	private class ListAdapter extends ArrayAdapter<Object> {
 		private final Drawable drawableLeft;
 		@ColorInt

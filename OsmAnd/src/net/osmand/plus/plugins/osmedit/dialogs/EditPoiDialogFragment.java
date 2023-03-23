@@ -136,8 +136,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final int AMENITY_TEXT_LENGTH = 255;
 
 	@Override
-	public void onAttach(@NonNull Context activity) {
-		super.onAttach(activity);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
@@ -154,7 +154,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
-		boolean isLightTheme = settings.isLightContent();
 
 		if (savedInstanceState != null) {
 			@SuppressWarnings("unchecked")
@@ -246,7 +245,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		int activeColor = ColorUtilities.getActiveColor(getContext(), !isLightTheme);
+		int activeColor = ColorUtilities.getActiveColor(getContext(), isNightMode(false));
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
