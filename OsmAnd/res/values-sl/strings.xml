@@ -5083,4 +5083,22 @@
 \n • Odpravljene težave s prikazom veganskih krajev
 \n
 \n</string>
+    <string name="generate_slope_from_3d_maps">Ustvarjanje rastrskih zemljevidov naklonov iz 3D zemljevidov</string>
+    <string name="clear_online_cache_description">To bo počistilo ves predpomnilnik za spletne vremenske ploščice.</string>
+    <string name="clear_online_cache">Počisti spletni predpomnilnik</string>
+    <string name="offline_cache">Predpomnilnik brez povezave</string>
+    <string name="app_mode_climbing">Plezanje</string>
+    <string name="offline_weather_forecast_desc">Lahko preneseš vremensko napoved za 7 dni.</string>
+    <string name="free_maps_updates">Brezplačne posodobitve (v sili)</string>
+    <string name="token_is_not_valid">Žeton ni veljaven</string>
+    <string name="shared_string_alt_name">Alternativno ime</string>
+    <string name="generate_hillshade_from_3d_maps">Ustvarjanje rastrskih zemljevidov senčenja terena iz 3D-zemljevidov</string>
+    <string name="enable_3d_maps">Omogoči 3D zemljevide</string>
+    <string name="test_heightmap">Preizkusi zemljevid višin</string>
+    <string name="common_weight_limit_error">Najmanjša vrednost je »%1$s« %2$s. Če je masa vozila manjša od najmanjše vrednosti, uporabi profil »%3$s«.</string>
+    <string name="weather_forecast_is_outdated">Napoved je zastarela.</string>
+    <string name="weather_forecast">Vremenska napoved</string>
+    <string name="shared_string_all_world">Ves svet</string>
+    <string name="offline_weather_forecast">Vremenska napoved brez povezave</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>

@@ -61,7 +61,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private static final String EXISTING_FILES_KEY = "existing_files";
 	private static final String SELECTED_STORAGE_KEY = "selected_storage";
 
-	private OsmandApplication app;
 	private StorageItem selectedStorage;
 	private StorageItem currentStorage;
 
@@ -91,7 +90,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		if (savedInstanceState != null && filesSize == null) {
 			filesCount = savedInstanceState.getInt(FILES_COUNT_KEY);
 			remainingSize = savedInstanceState.getLong(REMAINING_SIZE_KEY);

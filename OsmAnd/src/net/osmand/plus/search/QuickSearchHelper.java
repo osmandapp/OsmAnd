@@ -27,7 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;

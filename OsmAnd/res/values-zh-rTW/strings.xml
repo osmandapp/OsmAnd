@@ -5094,4 +5094,18 @@
     <string name="enable_3d_maps">啟用 3D 地圖</string>
     <string name="app_mode_climbing">攀岩</string>
     <string name="test_heightmap">測試高度圖</string>
+    <string name="clear_online_cache">清除線上快取</string>
+    <string name="offline_cache">離線快取</string>
+    <string name="shared_string_alt_name">替代名稱</string>
+    <string name="token_is_not_valid">權杖無效</string>
+    <string name="weather_forecast">天氣預報</string>
+    <string name="clear_online_cache_description">這將會清除線上天氣圖磚的所有快取。</string>
+    <string name="weather_forecast_is_outdated">預測已過時。</string>
+    <string name="offline_weather_forecast_desc">您可以下載七天的天氣預報。</string>
+    <string name="shared_string_all_world">全世界</string>
+    <string name="offline_weather_forecast">離線天氣預報</string>
+    <string name="free_maps_updates">免費更新（緊急）</string>
+    <string name="shared_string_pounds">磅</string>
+    <string name="common_weight_limit_error">最小值為「%1$s」%2$s。若車輛重量低於最小值時，請使用「%3$s」設定檔。</string>
+    <string name="metric_lbs">磅</string>
 </resources>

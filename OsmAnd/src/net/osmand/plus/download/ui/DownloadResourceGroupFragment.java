@@ -1,8 +1,11 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButtons;
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription;
+import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,32 +22,34 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 
-import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.download.CustomIndexItem;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -54,38 +59,37 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.osmand.plus.download.ui.DownloadItemFragment.updateActionButtons;
-import static net.osmand.plus.download.ui.DownloadItemFragment.updateDescription;
-import static net.osmand.plus.download.ui.DownloadItemFragment.updateImagesPager;
-
-public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents,
+public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment implements DownloadEvents,
 		InAppPurchaseListener, RemoveLocalForecastListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
-
-	public static final String TAG = "RegionDialogFragment";
 	public static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 
+	private DownloadIndexesThread downloadThread;
+	private InAppPurchaseHelper purchaseHelper;
+
 	private String groupId;
+	private DownloadResourceGroup group;
+
 	private View view;
 	private BannerAndDownloadFreeVersion banner;
-	protected ExpandableListView listView;
-	protected DownloadResourceGroupAdapter listAdapter;
-	private DownloadResourceGroup group;
+	private ExpandableListView listView;
+	private DownloadResourceGroupAdapter listAdapter;
 	private DownloadActivity activity;
-	private InAppPurchaseHelper purchaseHelper;
 	private Toolbar toolbar;
 	private View searchView;
 	private View restorePurchasesView;
 	private View subscribeEmailView;
+	private View freeMapsView;
 	private View descriptionView;
 	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		downloadThread = app.getDownloadThread();
 		purchaseHelper = getDownloadActivity().getPurchaseHelper();
-		nightMode = !getMyApplication().getSettings().isLightContent();
+		nightMode = isNightMode(false);
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		setHasOptionsMenu(true);
@@ -111,8 +115,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		activity.getAccessibilityAssistant().registerPage(view, DownloadActivity.DOWNLOAD_TAB_NUMBER);
 
 		toolbar = view.findViewById(R.id.toolbar);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(activity));
-		toolbar.setNavigationIcon(icBack);
+		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(activity)));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
 		if (!openAsDialog()) {
@@ -121,7 +124,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 		setHasOptionsMenu(true);
 
-		if(openAsDialog()) {
+		if (openAsDialog()) {
 			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
 		} else {
 			banner = null;
@@ -140,14 +143,13 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	private void addSubscribeEmailRow() {
-		if (DownloadActivity.shouldShowFreeVersionBanner(activity.getMyApplication())
-				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
+		if (DownloadActivity.shouldShowFreeVersionBanner(app) && !settings.EMAIL_SUBSCRIBED.get()) {
 			subscribeEmailView = activity.getLayoutInflater().inflate(R.layout.subscribe_email_header, null, false);
 			subscribeEmailView.findViewById(R.id.subscribe_btn).setOnClickListener(v -> subscribe());
 			listView.addHeaderView(subscribeEmailView);
-			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()
-					|| DownloadActivity.isDownlodingPermitted(activity.getMyApplication().getSettings())) {
+					|| DownloadActivity.isDownlodingPermitted(settings)) {
 				subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
 			}
 		}
@@ -157,14 +159,14 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (!openAsDialog() && purchaseHelper != null && !purchaseHelper.hasInventory()) {
 			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
 			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
-					getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
+					getContentIcon(R.drawable.ic_action_reset_to_default_dark));
 			restorePurchasesView.findViewById(R.id.button).setOnClickListener(v -> {
 				restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
 				purchaseHelper.requestInventory(true);
 			});
 			listView.addFooterView(restorePurchasesView);
 			listView.setFooterDividersEnabled(false);
-			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
 				restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
 			}
@@ -177,18 +179,16 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	private void addSearchRow() {
-		if (!openAsDialog() ) {
+		if (!openAsDialog()) {
 			searchView = activity.getLayoutInflater().inflate(R.layout.simple_list_menu_item, null);
 			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
 			TextView title = searchView.findViewById(R.id.title);
-			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
+			title.setCompoundDrawablesWithIntrinsicBounds(getContentIcon(R.drawable.ic_action_search_dark), null, null, null);
 			title.setHint(R.string.search_map_hint);
-			searchView.setOnClickListener(v -> {
-				getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
-			});
+			searchView.setOnClickListener(v -> getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance("")));
 			listView.addHeaderView(searchView);
 			listView.setHeaderDividersEnabled(true);
-			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
 				searchView.findViewById(R.id.title).setVisibility(View.GONE);
 				listView.setHeaderDividersEnabled(false);
@@ -199,7 +199,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	private void updateSearchView() {
 		IndexItem worldBaseMapItem = null;
 		if (searchView != null && searchView.findViewById(R.id.title).getVisibility() == View.GONE) {
-			worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				searchView.findViewById(R.id.title).setVisibility(View.VISIBLE);
 				listView.setHeaderDividersEnabled(true);
@@ -215,9 +215,9 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	private void updateSubscribeEmailView() {
 		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.GONE
-				&& !DownloadActivity.isDownlodingPermitted(getMyApplication().getSettings())
-				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
-			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+				&& !DownloadActivity.isDownlodingPermitted(settings)
+				&& !settings.EMAIL_SUBSCRIBED.get()) {
+			IndexItem worldBaseMapItem = downloadThread.getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 			}
@@ -230,7 +230,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				CustomRegion customRegion = (CustomRegion) group.getRegion();
 				DownloadDescriptionInfo descriptionInfo = customRegion.getDescriptionInfo();
 				if (descriptionInfo != null) {
-					OsmandApplication app = activity.getMyApplication();
 					TextView description = descriptionView.findViewById(R.id.description);
 					updateDescription(app, descriptionInfo, description);
 
@@ -248,6 +247,52 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		}
 	}
 
+	private void updateFreeMapsView() {
+		if (shouldDisplayFreeMapsMessage()) {
+			if (freeMapsView == null) {
+				freeMapsView = activity.getLayoutInflater().inflate(R.layout.free_maps_header, null, false);
+				listView.addHeaderView(freeMapsView);
+			}
+			TextView description = freeMapsView.findViewById(R.id.description);
+			description.setText(getFreeMapsMessage());
+		} else if (freeMapsView != null && freeMapsView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
+			freeMapsView.findViewById(R.id.container).setVisibility(View.GONE);
+		}
+	}
+
+	private boolean shouldDisplayFreeMapsMessage() {
+		if (group != null) {
+			WorldRegion region = group.getRegion();
+			WorldRegion worldRegion = app.getRegions().getWorldRegion();
+			return !Algorithms.objectEquals(region, worldRegion) && !Algorithms.objectEquals(region.getSuperregion(), worldRegion) && hasFreeMaps();
+		}
+		return false;
+	}
+
+	private boolean hasFreeMaps() {
+		if (group != null) {
+			for (DownloadItem item : group.getAllDownloadItems()) {
+				if (item.isFree()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Nullable
+	private String getFreeMapsMessage() {
+		if (group != null) {
+			for (DownloadItem item : group.getAllDownloadItems()) {
+				String message = item.getFreeMessage();
+				if (!Algorithms.isEmpty(message)) {
+					return message;
+				}
+			}
+		}
+		return null;
+	}
+
 	private void hideSubscribeEmailView() {
 		if (subscribeEmailView != null && subscribeEmailView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
 			subscribeEmailView.findViewById(R.id.container).setVisibility(View.GONE);
@@ -255,23 +300,23 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	private void subscribe() {
-		AlertDialog.Builder b = new AlertDialog.Builder(activity);
-		b.setTitle(R.string.shared_string_email_address);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(R.string.shared_string_email_address);
 		int hPadding = AndroidUtils.dpToPx(activity, 24f);
 		int vPadding = AndroidUtils.dpToPx(activity, 4f);
 		FrameLayout container = new FrameLayout(activity);
 		container.setPadding(hPadding, vPadding, hPadding, vPadding);
 		EditText editText = new EditText(activity);
 		container.addView(editText);
-		b.setView(container);
-		b.setPositiveButton(R.string.shared_string_ok, null);
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		AlertDialog alertDialog = b.create();
+		builder.setView(container);
+		builder.setPositiveButton(R.string.shared_string_ok, null);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		AlertDialog alertDialog = builder.create();
 		alertDialog.setOnShowListener(dialog -> alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
 				v -> {
 					String email = editText.getText().toString().trim();
 					if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
-						getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
+						app.showToastMessage(getString(R.string.osm_live_enter_email));
 						return;
 					}
 					doSubscribe(email);
@@ -298,7 +343,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					OsmandApplication app = getMyApplication();
 					Map<String, String> parameters = new HashMap<>();
 					if (app.isUserAndroidIdAllowed()) {
 						parameters.put("aid", app.getUserAndroidId());
@@ -320,7 +364,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					dlg.dismiss();
 					dlg = null;
 				}
-				OsmandApplication app = getMyApplication();
 				if (response == null) {
 					app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));
 				} else {
@@ -330,10 +373,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						if (!email.equalsIgnoreCase(responseEmail)) {
 							app.showShortToastMessage(activity.getString(R.string.shared_string_unexpected_error));
 						} else {
-							int newDownloads = app.getSettings().NUMBER_OF_FREE_DOWNLOADS.get().intValue() - 3;
-							if(newDownloads < 0) {
+							int newDownloads = settings.NUMBER_OF_FREE_DOWNLOADS.get().intValue() - 3;
+							if (newDownloads < 0) {
 								newDownloads = 0;
-							} else if(newDownloads > DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3) {
+							} else if (newDownloads > DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3) {
 								newDownloads = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - 3;
 							}
 							app.getSettings().NUMBER_OF_FREE_DOWNLOADS.set(newDownloads);
@@ -361,7 +404,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		getMyApplication().getDownloadThread().runReloadIndexFilesSilent();
+		downloadThread.runReloadIndexFilesSilent();
 	}
 
 	@Override
@@ -375,22 +418,22 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	public void onResume() {
 		super.onResume();
 		reloadData();
-		OsmandApplication app = getMyApplication();
+
+		DownloadActivity activity = getDownloadActivity();
 		app.getOfflineForecastHelper().registerRemoveLocalForecastListener(this);
-		String filter = getDownloadActivity().getFilterAndClear();
-		String filterCat = getDownloadActivity().getFilterCatAndClear();
-		String filterGroup = getDownloadActivity().getFilterGroupAndClear();
+		String filter = activity.getFilterAndClear();
+		String filterCat = activity.getFilterCatAndClear();
+		String filterGroup = activity.getFilterGroupAndClear();
 		if (filter != null && filterCat != null
 				&& filterCat.equals(DownloadActivityType.WIKIPEDIA_FILE.getTag())) {
-			getDownloadActivity().showDialog(getActivity(),
+			activity.showDialog(getActivity(),
 					SearchDialogFragment.createInstance(filter, false,
 							DownloadActivityType.WIKIPEDIA_FILE));
 		} else if (filter != null) {
-			getDownloadActivity().showDialog(getActivity(),
-					SearchDialogFragment.createInstance(filter));
+			activity.showDialog(getActivity(), SearchDialogFragment.createInstance(filter));
 		} else if (filterCat != null) {
 			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
-				String uniqueId = DownloadResourceGroup.DownloadResourceGroupType.getVoiceTTSId();
+				String uniqueId = DownloadResourceGroupType.getVoiceTTSId();
 				DownloadResourceGroupFragment regionDialogFragment = createInstance(uniqueId);
 				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			}
@@ -403,12 +446,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onPause() {
 		super.onPause();
-		OsmandApplication app = getMyApplication();
 		app.getOfflineForecastHelper().unregisterRemoveLocalForecastListener(this);
 	}
 
 	private void reloadData() {
-		DownloadResources indexes = activity.getDownloadThread().getIndexes();
+		DownloadResources indexes = downloadThread.getIndexes();
 		group = indexes.getGroupById(groupId);
 
 		if (!openAsDialog()) {
@@ -416,6 +458,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		}
 		updateSubscribeEmailView();
 		updateDescriptionView();
+		updateFreeMapsView();
 
 		if (group != null) {
 			listAdapter.update(group);
@@ -440,8 +483,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		OsmandApplication app = getMyApplication();
-		boolean nightMode = !app.getSettings().isLightContent();
 		setShowsDialog(openAsDialog());
 		listView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
@@ -459,9 +500,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (banner != null) {
 			banner.updateBannerInProgress();
 		}
-		if (subscribeEmailView != null
-				&& !DownloadActivity.isDownlodingPermitted(activity.getMyApplication().getSettings())
-				&& !getMyApplication().getSettings().EMAIL_SUBSCRIBED.get()) {
+		if (subscribeEmailView != null && !DownloadActivity.isDownlodingPermitted(settings) && !settings.EMAIL_SUBSCRIBED.get()) {
 			subscribeEmailView.findViewById(R.id.container).setVisibility(View.VISIBLE);
 		}
 		listAdapter.notifyDataSetChanged();
@@ -509,10 +548,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		super.onSaveInstanceState(outState);
 	}
 
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
 	private DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
 	}
@@ -520,18 +555,14 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		if (!openAsDialog()) {
-			OsmandApplication app = getMyApplication();
-			boolean nightMode = !app.getSettings().isLightContent();
 			int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-			
+
 			MenuItem itemReload = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
-			Drawable icReload = app.getUIUtilities().getIcon(R.drawable.ic_action_refresh_dark, colorResId);
-			itemReload.setIcon(icReload);
+			itemReload.setIcon(getIcon(R.drawable.ic_action_refresh_dark, colorResId));
 			itemReload.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 			MenuItem itemSearch = menu.add(0, SEARCH_ID, 1, R.string.shared_string_search);
-			Drawable icSearch = app.getUIUtilities().getIcon(R.drawable.ic_action_search_dark, colorResId);
-			itemSearch.setIcon(icSearch);
+			itemSearch.setIcon(getIcon(R.drawable.ic_action_search_dark, colorResId));
 			itemSearch.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
 	}
@@ -539,15 +570,15 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case RELOAD_ID:
-			// re-create the thread
-			getDownloadActivity().getDownloadThread().runReloadIndexFiles();
-			return true;
-		case SEARCH_ID:
-			getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			case RELOAD_ID:
+				// re-create the thread
+				downloadThread.runReloadIndexFiles();
+				return true;
+			case SEARCH_ID:
+				getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 

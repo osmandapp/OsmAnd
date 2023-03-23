@@ -60,6 +60,7 @@ public class OsmAndFormatter {
 	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
 
 	public static final int KILOGRAMS_IN_ONE_TON = 1000;
+	public static final float POUNDS_IN_ONE_KILOGRAM = 2.2046f;
 
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final int MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT = 24 * 60 * 60;

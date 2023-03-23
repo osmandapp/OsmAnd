@@ -4,11 +4,11 @@ import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes;
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listTtsVoiceIndexes;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
+import static net.osmand.plus.download.DownloadResourceGroupType.OTHER_GROUP;
+import static net.osmand.plus.download.DownloadResourceGroupType.VOICE_HEADER_REC;
+import static net.osmand.plus.download.DownloadResourceGroupType.VOICE_HEADER_TTS;
+import static net.osmand.plus.download.DownloadResourceGroupType.VOICE_REC;
+import static net.osmand.plus.download.DownloadResourceGroupType.VOICE_TTS;
 
 import android.app.Activity;
 import android.content.Context;

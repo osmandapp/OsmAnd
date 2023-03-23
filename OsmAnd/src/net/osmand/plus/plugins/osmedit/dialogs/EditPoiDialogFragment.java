@@ -123,7 +123,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		BASIC_TAGS.add(OSMTagKey.OPENING_HOURS.getValue());
 	}
 
-	private OsmandApplication app;
 	private OpenstreetmapUtil openstreetmapUtil;
 
 	private EditPoiData editPoiData;
@@ -139,10 +138,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onAttach(@NonNull Context activity) {
 		super.onAttach(activity);
-		app = getMyApplication();
 
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
-		if (plugin.OFFLINE_EDITION.get() || !getSettings().isInternetConnectionAvailable(true)) {
+		if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			openstreetmapUtil = plugin.getPoiModificationLocalUtil();
 		} else {
 			openstreetmapUtil = plugin.getPoiModificationRemoteUtil();
@@ -156,7 +154,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
-		boolean isLightTheme = getSettings().isLightContent();
+		boolean isLightTheme = settings.isLightContent();
 
 		if (savedInstanceState != null) {
 			@SuppressWarnings("unchecked")
@@ -339,7 +337,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			Button deleteButton = view.findViewById(R.id.deleteButton);
 			deleteButton.setVisibility(View.VISIBLE);
 			deleteButton.setOnClickListener(v -> {
-				DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
+				DeletePoiHelper deletePoiHelper = new DeletePoiHelper((AppCompatActivity) getActivity());
 				deletePoiHelper.setCallback(this::dismiss);
 				deletePoiHelper.deletePoiWithDialog(getEditPoiData().getEntity());
 			});

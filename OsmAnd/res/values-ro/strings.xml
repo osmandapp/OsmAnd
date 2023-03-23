@@ -5100,4 +5100,25 @@
 \n</string>
     <string name="approximate_bearing">Rulmentul aproximativ</string>
     <string name="approximate_bearing_descr">Deduceți relevmentul din ruta de navigație urmată.</string>
+    <string name="clear_online_cache">Ștergeți memoria cache online</string>
+    <string name="offline_cache">Memoria cache offline</string>
+    <string name="shared_string_alt_name">Denumire alternativă</string>
+    <string name="clear_online_cache_description">Acest lucru va șterge toată memoria cache pentru panoul meteo online.</string>
+    <string name="token_is_not_valid">Tokenul nu este valabil</string>
+    <string name="app_mode_climbing">Escaladare</string>
+    <string name="free_maps_updates">Actualizări gratuite (de urgență)</string>
+    <string name="offline_weather_forecast">Prognoza meteo offline</string>
+    <string name="offline_weather_forecast_desc">Puteți descărca prognoza meteo pentru 7 zile.</string>
+    <string name="generate_slope_from_3d_maps">Generarea de hărți raster de pantă din hărți 3D</string>
+    <string name="enable_3d_maps">Activați hărțile 3D</string>
+    <string name="test_heightmap">Harta înălțimii de testare</string>
+    <string name="shared_string_pounds">lire sterline</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="shared_string_all_world">Toată lumea</string>
+    <string name="generate_hillshade_from_3d_maps">Generarea de hărți raster hillshade din hărți 3D</string>
+    <string name="disable_vertex_hillshade_3d">Dezactivați umbra vertexurilor în 3D</string>
+    <string name="common_weight_limit_error">Valoarea minimă este \"%1$s\" %2$s. Utilizați profilul \"%3$s\" dacă greutatea vehiculului este mai mică decât valoarea minimă.</string>
+    <string name="weather_forecast_is_outdated">Previziunile sunt depășite.</string>
+    <string name="weather_forecast">Prognoza meteo</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>

@@ -45,7 +45,6 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
-	private OsmandApplication app;
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
@@ -56,8 +55,7 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = isNightMode(false);
 	}
 
 	@Override

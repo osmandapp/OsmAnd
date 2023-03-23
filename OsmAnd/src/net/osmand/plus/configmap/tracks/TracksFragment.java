@@ -62,9 +62,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
 	private TrackItemsLoaderTask asyncLoader;
@@ -92,8 +89,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		settings = app.getSettings();
 		importHelper = new ImportHelper(requireActivity());
 		importHelper.setGpxImportListener(this);
 		selectedTracksHelper = new SelectedTracksHelper(app);
@@ -113,7 +108,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		};
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			window.setStatusBarColor(ContextCompat.getColor(app, getStatusBarColorId()));

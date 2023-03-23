@@ -2,6 +2,8 @@ package net.osmand.plus.settings.vehiclesize;
 
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.INCHES_IN_ONE_METER;
+import static net.osmand.plus.utils.OsmAndFormatter.KILOGRAMS_IN_ONE_TON;
+import static net.osmand.plus.utils.OsmAndFormatter.POUNDS_IN_ONE_KILOGRAM;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import androidx.annotation.NonNull;
@@ -14,23 +16,38 @@ import java.util.List;
 
 public class VehicleAlgorithms {
 
-	public static Limits convertLimitsByMetricSystem(@NonNull Limits limits,
-	                                                 @NonNull MetricsConstants lengthMetricSystem,
-	                                                 boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
-		float min = limits.getMin();
-		float max = limits.getMax();
-		// Convert to appropriate length metric system
-		min = convertLengthFromMeters(lengthMetricSystem, min, useInchesInsteadOfFeet, useInchesInsteadOfYards);
-		max = convertLengthFromMeters(lengthMetricSystem, max, useInchesInsteadOfFeet, useInchesInsteadOfYards);
-		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS) {
+	public static Limits convertWeightLimitsByMetricSystem(@NonNull Limits limits,
+	                                                       @NonNull WeightMetric weightMetricSystem,
+	                                                       boolean useKilogramsInsteadOfTons) {
+		if (weightMetricSystem != WeightMetric.TONES || useKilogramsInsteadOfTons) {
+			float min = limits.getMin();
+			float max = limits.getMax();
+			// Convert to appropriate weight metric system
+			min = convertWeightFromTons(weightMetricSystem, min, useKilogramsInsteadOfTons);
+			max = convertWeightFromTons(weightMetricSystem, max, useKilogramsInsteadOfTons);
 			// Round min / max
-			int multiplier = 10;
-			float scaledMin = min * multiplier;
-			float scaledMax = max * multiplier;
-			min = (float) (Math.floor(scaledMin)) / multiplier;
-			max = (float) (Math.ceil(scaledMax)) / multiplier;
+			min = roundToSecondSignificantDigit(min, true);
+			max = roundToSecondSignificantDigit(max, false);
+			limits = new Limits(min, max);
 		}
-		return new Limits(min, max);
+		return limits;
+	}
+
+	public static Limits convertLengthLimitsByMetricSystem(@NonNull Limits limits,
+	                                                       @NonNull MetricsConstants lengthMetricSystem,
+	                                                       boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
+		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS) {
+			float min = limits.getMin();
+			float max = limits.getMax();
+			// Convert to appropriate length metric system
+			min = convertLengthFromMeters(lengthMetricSystem, min, useInchesInsteadOfFeet, useInchesInsteadOfYards);
+			max = convertLengthFromMeters(lengthMetricSystem, max, useInchesInsteadOfFeet, useInchesInsteadOfYards);
+			// Round min / max
+			min = roundToSecondSignificantDigit(min, true);
+			max = roundToSecondSignificantDigit(max, false);
+			limits = new Limits(min, max);
+		}
+		return limits;
 	}
 
 	public static List<Float> collectProposedValues(@NonNull Limits limits, int upscale,
@@ -98,30 +115,57 @@ public class VehicleAlgorithms {
 		return result;
 	}
 
+	public static float convertWeightToTons(@NonNull WeightMetric wm, float value,
+	                                        boolean useKilogramsInsteadOfTons) {
+		if (wm == WeightMetric.POUNDS) {
+			return value / (POUNDS_IN_ONE_KILOGRAM * KILOGRAMS_IN_ONE_TON);
+		}
+		return useKilogramsInsteadOfTons ? value / KILOGRAMS_IN_ONE_TON : value;
+	}
+
+	public static float convertWeightFromTons(@NonNull WeightMetric wm, float valueInTons,
+	                                          boolean useKilogramsInsteadOfTons) {
+		if (wm == WeightMetric.POUNDS) {
+			return valueInTons * KILOGRAMS_IN_ONE_TON * POUNDS_IN_ONE_KILOGRAM;
+		}
+		return useKilogramsInsteadOfTons ? valueInTons * KILOGRAMS_IN_ONE_TON : valueInTons;
+	}
+
 	public static float convertLengthToMeters(@NonNull MetricsConstants mc, float value,
 	                                          boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
-		float resultValue;
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			resultValue = value / (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
+			return value / (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
-			resultValue = value / (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
-		} else {
-			resultValue = value;
+			return value / (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
 		}
-		return resultValue;
+		return value;
 	}
 
 	public static float convertLengthFromMeters(@NonNull MetricsConstants mc, float valueInMeters,
 	                                            boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
-		float result;
 		if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			result = valueInMeters * (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
+			return valueInMeters * (useInchesInsteadOfFeet ? INCHES_IN_ONE_METER : FEET_IN_ONE_METER);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
-			result = valueInMeters * (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
-		} else {
-			result = valueInMeters;
+			return valueInMeters * (useInchesInsteadOfYards ? INCHES_IN_ONE_METER : YARDS_IN_ONE_METER);
 		}
-		return result;
+		return valueInMeters;
+	}
+
+	public static float roundToSecondSignificantDigit(double value, boolean roundDown) {
+		if (value == 0) return 0;
+
+		double absValue = Math.abs(value);
+		int power = (int) Math.floor(Math.log10(absValue)) - 1;
+		double factor = Math.pow(10, power);
+		double rounded = absValue / factor;
+
+		if (roundDown) {
+			rounded = Math.floor(rounded);
+		} else {
+			rounded = Math.ceil(rounded);
+		}
+		rounded *= factor;
+		return (float) (Math.signum(value) * rounded);
 	}
 
 }

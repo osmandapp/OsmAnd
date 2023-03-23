@@ -66,8 +66,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedTracksHelper selectedTracksHelper;
@@ -93,8 +91,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectedTracksHelper = getSelectedTracksHelper();
@@ -120,7 +116,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		};
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			window.setStatusBarColor(ContextCompat.getColor(app, getStatusBarColorId()));

@@ -5081,13 +5081,23 @@
 \n
 \n - Layar awal yang disederhanakan
 \n
-\n - Posisi lokasi tetap dalam mode layar terbagi di Android Auto
+\n - Memperbaiki posisi lokasi dalam mode layar terbagi di Android Auto
 \n
 \n - Menambahkan grafik \"Kecepatan/Kemiringan\" untuk analisis lintasan
 \n
-\n - Android 13 memindahkan pilihan bahasa aplikasi ke pengaturan sistem
+\n - Android 13 memindahkan pemilihan bahasa aplikasi ke pengaturan sistem
 \n
 \n - Memperbaiki masalah dalam menampilkan tempat Vegan
+\n
+\n - Menambahkan kemungkinan untuk mengunduh ubin online yang digunakan sebagai peta \"Overlay\" atau \"Underlay\"
+\n
+\n - Menambahkan dukungan unit kekaisaran untuk \"Parameter kendaraan\"
+\n
+\n - Profil Moped baru
+\n
+\n - \"Posisi tampilan\" menambahkan opsi baru \"Otomatis\"
+\n
+\n - Memperbaiki gerakan peta untuk kemiringan, zoom, dan rotasi
 \n
 \n</string>
     <string name="sort_date_descending">Tanggal paling lama dahulu</string>
@@ -5105,4 +5115,18 @@
     <string name="test_heightmap">Uji coba peta ketinggian</string>
     <string name="app_mode_climbing">Mendaki</string>
     <string name="enable_3d_maps">Aktifkan peta 3D</string>
+    <string name="weather_forecast_is_outdated">Prakiraan kedaluwarsa.</string>
+    <string name="shared_string_pounds">pound</string>
+    <string name="shared_string_all_world">Semua dunia</string>
+    <string name="offline_weather_forecast">Prakiraan cuaca luring</string>
+    <string name="clear_online_cache">Hapus tembolok daring</string>
+    <string name="offline_cache">Tembolok daring</string>
+    <string name="clear_online_cache_description">Ini akan menghapus semua tembolok untuk ubin cuaca daring.</string>
+    <string name="shared_string_alt_name">Nama alternatif</string>
+    <string name="token_is_not_valid">Token tidak valid</string>
+    <string name="metric_lbs">lb</string>
+    <string name="weather_forecast">Prakiraan cuaca</string>
+    <string name="offline_weather_forecast_desc">Anda dapat mengunduh prakiraan cuaca untuk 7 hari.</string>
+    <string name="common_weight_limit_error">Nilai minimum adalah \"%1$s\" %2$s. Gunakan profil \"%3$s\" jika ketinggian kendaraan kurang dari nilai minimum.</string>
+    <string name="free_maps_updates">Pembaruan gratis (darurat)</string>
 </resources>

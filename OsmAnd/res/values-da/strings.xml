@@ -5070,25 +5070,35 @@
     <string name="movement_speed">Bevægelseshastighed</string>
     <string name="simulation_position_description">Vælg en sporfil, der skal bruges som kilde til bevægelse af en placering.</string>
     <string name="shared_string_add_manually">Tilføj manuelt…</string>
-    <string name="release_4_4">- Forbedret menuen \"Spor\" i \"Konfigurer kort\"
+    <string name="release_4_4">• Forbedret menuen \"Spor\" i \"Konfigurer kort\"
 \n
-\n - Kontekstmenuen viser nu lokaliserede navne for IP\'er
+\n • Kontekstmenuen viser nu lokaliserede navne for IP\'er
 \n
-\n - Tilføjet mulighed for at dele rute via link
+\n • Tilføjet mulighed for at dele rute via link
 \n
-\n - Tilføjet længdeenheden \"Nautiske mil/fod\"
+\n -• Tilføjet længdeenheden \"Nautiske mil/fod\"
 \n
-\n - Kortorientering tilføjet ny fast tilstand
+\n • Kortorientering tilføjet ny fast tilstand
 \n
-\n - Forenklet startskærm
+\n • Forenklet startskærm
 \n
-\n - En fastgjort positionsplacering i delt skræm-tilstand i Android Auto
+\n • Rettet positionsplacering i delt skræm-tilstand i Android Auto
 \n
-\n - Tilføjet \"hastighed/hældning\"-graf til sporanalyse
+\n • Tilføjet \"hastighed/hældning\"-graf til sporanalyse
 \n
-\n - Android 13 flyttet valg af app-sprog til systemindstillingerne
+\n • Android 13 flyttet valg af app-sprog til systemindstillingerne
 \n
-\n - Rettet problemer med visning af veganske steder
+\n • Rettet problemer med visning af veganske steder
+\n
+\n • Tilføjet mulighed for at downloade online fliser, der bruges som \"Overlejrings\"- eller \"Underlejrings\"-kort
+\n
+\n • Tilføjet understøttelse af engelske måleenheder for \"Køretøjsparametre\"
+\n
+\n • Ny knallertprofil
+\n
+\n • \"Visningsposition\" tilføjet ny indstilling \"Automatisk\"
+\n
+\n • Rettet kortbevægelser for tilt, zoom og rotation
 \n
 \n</string>
     <string name="sort_duration_ascending">Kortere varighed først</string>
@@ -5116,4 +5126,8 @@
     <string name="offline_weather_forecast_desc">Du kan hente vejrudsigt for 7 dage.</string>
     <string name="clear_online_cache_description">Dette vil rydde al cache for online vejrfliser.</string>
     <string name="offline_weather_forecast">Offline vejrudsigt</string>
+    <string name="common_weight_limit_error">Mindste værdi er \"%1$s\" %2$s. Brug profilen \"%3$s\", hvis køretøjets vægt er mindre end minimumsværdien.</string>
+    <string name="shared_string_pounds">pund</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="free_maps_updates">Gratis opdateringer (nødsituation)</string>
 </resources>

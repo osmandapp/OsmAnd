@@ -102,7 +102,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 		private final int textSecondaryColor;
 
 		public ListAdapter(@DrawableRes int drawableLeftId) {
-			super(getMyActivity(), android.R.layout.simple_list_item_2);
+			super(getActivity(), android.R.layout.simple_list_item_2);
 			this.drawableLeft = drawableLeftId == -1 ? null : getContentIcon(drawableLeftId);
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = getActivity().getTheme();

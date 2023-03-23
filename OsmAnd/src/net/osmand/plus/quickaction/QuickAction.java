@@ -85,20 +85,20 @@ public class QuickAction {
         return true;
     }
 
-    public String getName(Context context) {
-        if (Algorithms.isEmpty(name)) {
+	public String getName(@NonNull Context context) {
+		if (Algorithms.isEmpty(name) || !isActionEditable()) {
 			return getDefaultName(context);
 		} else {
-            return name;
-        }
-    }
+			return name;
+		}
+	}
 
-    public String getRawName() {
-    	return name;
+	public String getRawName() {
+		return name;
 	}
 
 	@NonNull
-	private String getDefaultName(Context context) {
+	private String getDefaultName(@NonNull Context context) {
 		return getNameRes() != 0 ? context.getString(getNameRes()) : "";
 	}
 

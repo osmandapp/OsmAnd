@@ -5099,4 +5099,14 @@
     <string name="test_heightmap">Testovať výškovú mapu</string>
     <string name="generate_hillshade_from_3d_maps">Generovať rastrové mapy tieňovaných svahov z 3D máp</string>
     <string name="app_mode_climbing">Lezenie</string>
+    <string name="clear_online_cache">Vymazať online vyrovnávaciu pamäť</string>
+    <string name="offline_cache">Offline vyrovnávacia pamäť</string>
+    <string name="shared_string_alt_name">Alternatívny názov</string>
+    <string name="token_is_not_valid">Token nie je platný</string>
+    <string name="shared_string_all_world">Celý svet</string>
+    <string name="weather_forecast">Predpoveď počasia</string>
+    <string name="offline_weather_forecast_desc">Môžete stiahnuť predpoveď počasia na 7 dní.</string>
+    <string name="weather_forecast_is_outdated">Predpoveď je zastaralá.</string>
+    <string name="clear_online_cache_description">Toto vymaže dočasnú vyrovnávaciu pamäť pre online dlaždice počasia.</string>
+    <string name="offline_weather_forecast">Offline predpoveď počasia</string>
 </resources>

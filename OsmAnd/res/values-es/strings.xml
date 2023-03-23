@@ -5059,25 +5059,35 @@
     <string name="shared_string_inches">pulgadas</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
-    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+    <string name="release_4_4">• Menú \"Pistas\" mejorado en \"Configurar mapa\"
 \n
-\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n • El menú contextual ahora muestra nombres localizados para PDI
 \n
-\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n • Opción agregada para compartir ruta por enlace
 \n
-\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n • Se agregó la unidad de longitud \"Millas náuticas/pies\".
 \n
-\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n • La orientación del mapa agregó un nuevo modo fijo
 \n
-\n• Se ha simplificado la pantalla de inicio
+\n • Pantalla de inicio simplificada
 \n
-\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n • Posición de ubicación fija en modo de pantalla dividida en Android Auto
 \n
-\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n • Se agregó el gráfico \"Velocidad/Pendiente\" para el análisis de pistas
 \n
-\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n • Android 13 movió la selección de idioma de la aplicación a la configuración del sistema
 \n
-\n• Se han corregido problemas de visualización con los lugares veganos
+\n • Problemas resueltos con la visualización de lugares veganos
+\n
+\n • Se agregó la posibilidad de descargar mosaicos en línea utilizados como mapas \"superpuestos\" o \"subyacentes\".
+\n
+\n • Soporte agregado de unidades imperiales para \"parámetros del vehículo\"
+\n
+\n • Nuevo perfil de ciclomotor
+\n
+\n • \"Mostrar posición\" agregó la nueva opción \"Automático\"
+\n
+\n • Gestos de mapa fijos para inclinación, zoom y rotación
 \n
 \n</string>
     <string name="delete_cloud_version">Borrar la versión en la nube</string>
@@ -5104,4 +5114,18 @@
     <string name="generate_slope_from_3d_maps">Generación de mapas ráster de pendientes a partir de mapas 3D</string>
     <string name="generate_hillshade_from_3d_maps">Generación de mapas ráster de colinas a partir de mapas 3D</string>
     <string name="app_mode_climbing">Escalada</string>
+    <string name="clear_online_cache">Borrar la caché en línea</string>
+    <string name="offline_cache">Caché sin conexión</string>
+    <string name="shared_string_alt_name">Nombre alternativo</string>
+    <string name="token_is_not_valid">El código no es válido</string>
+    <string name="weather_forecast_is_outdated">Pronóstico desactualizado.</string>
+    <string name="shared_string_all_world">Todo el mundo</string>
+    <string name="weather_forecast">Previsión del tiempo</string>
+    <string name="offline_weather_forecast">Previsión meteorológica sin conexión</string>
+    <string name="offline_weather_forecast_desc">Puede descargar la previsión meteorológica para 7 días.</string>
+    <string name="clear_online_cache_description">Esto borrará toda la memoria caché de la ficha meteorológica en línea.</string>
+    <string name="free_maps_updates">Actualizaciones gratuitas (de emergencia)</string>
+    <string name="metric_lbs">lbs.</string>
+    <string name="common_weight_limit_error">El valor mínimo es \"%1$s\" %2$s. Utilice el perfil \"%3$s\" si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="shared_string_pounds">libras</string>
 </resources>

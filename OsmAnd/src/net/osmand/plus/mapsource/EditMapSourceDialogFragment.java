@@ -82,7 +82,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private static final String ELLIPTIC_KEY = "elliptic_key";
 	private static final String SQLITE_DB_KEY = "sqlite_db_key";
 	private static final String FROM_TEMPLATE_KEY = "from_template_key";
-	private OsmandApplication app;
 	private TextInputLayout nameInputLayout;
 	private TextInputLayout urlInputLayout;
 	private TextInputEditText nameEditText;
@@ -129,7 +128,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		nightMode = !app.getSettings().isLightContent();
 	}
 
@@ -394,7 +392,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					storageChanged = f.exists();
 				}
 			} else {
-				getSettings().installTileSource(template);
+				settings.installTileSource(template);
 				storageChanged = f != null && f.exists() && IndexConstants.SQLITE_EXT.equals(ext);
 			}
 			if (storageChanged) {

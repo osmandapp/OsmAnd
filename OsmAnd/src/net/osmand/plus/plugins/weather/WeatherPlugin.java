@@ -307,8 +307,8 @@ public class WeatherPlugin extends OsmandPlugin {
 			                                  @Nullable View view, @NotNull ContextMenuItem item,
 			                                  boolean isChecked) {
 				weatherSettings.weatherEnabled.set(isChecked);
-				item.setSelected(weatherSettings.weatherEnabled.get());
-				item.setColor(app, weatherSettings.weatherEnabled.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setSelected(isChecked);
+				item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				item.setDescription(isChecked ? getWeatherTypesSummary(weatherHelper.getVisibleBands()) : null);
 				if (uiAdapter != null) {
 					uiAdapter.onDataSetChanged();

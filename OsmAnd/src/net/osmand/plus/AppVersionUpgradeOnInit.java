@@ -24,6 +24,10 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_GO_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -111,8 +115,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_3_01 = 4301;
 
 	public static final int VERSION_4_4_01 = 4401;
+	// 4402 - 4.4-02 (Increase accuracy of vehicle sizes limits)
+	public static final int VERSION_4_4_02 = 4402;
 
-	public static final int LAST_APP_VERSION = VERSION_4_4_01;
+	public static final int LAST_APP_VERSION = VERSION_4_4_02;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -209,6 +215,9 @@ class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_3_01) {
 					updateSelectedPoiPreference();
+				}
+				if (prevAppVersion < VERSION_4_4_02) {
+					increaseVehicleSizeLimitsAccuracy();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -609,6 +618,29 @@ class AppVersionUpgradeOnInit {
 				Set<String> selectedIds = new LinkedHashSet<>();
 				Collections.addAll(selectedIds, filterId.split(","));
 				settings.setSelectedPoiFilters(appMode, selectedIds);
+			}
+		}
+	}
+
+	private void increaseVehicleSizeLimitsAccuracy() {
+		String[] parameterIds = new String[] {
+				VEHICLE_HEIGHT,
+				VEHICLE_WEIGHT,
+				VEHICLE_LENGTH,
+				VEHICLE_WIDTH
+		};
+		OsmandSettings settings = app.getSettings();
+		for (String parameterId : parameterIds) {
+			StringPreference preference = (StringPreference) settings.getCustomRoutingProperty(parameterId, "0.0f");
+			for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+				String valueStr = preference.getModeValue(appMode);
+				float value = (float) Algorithms.parseDoubleSilently(valueStr, 0.0f);
+				if (value != 0.0f) {
+					value += 0.01f;
+					value -= 0.0001f;
+					valueStr = String.valueOf(value);
+					preference.setModeValue(appMode, valueStr);
+				}
 			}
 		}
 	}

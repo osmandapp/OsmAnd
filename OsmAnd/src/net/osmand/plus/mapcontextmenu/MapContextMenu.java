@@ -341,7 +341,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		Object thisObject = getObject();
 		if (!update && isVisible()) {
-			if (thisObject == null || !thisObject.equals(object)) {
+			if (thisObject == null || !thisObject.equals(object)
+					|| (thisObject instanceof Amenity && !((Amenity) thisObject).strictEquals(object))) {
 				hide();
 			} else {
 				return false;

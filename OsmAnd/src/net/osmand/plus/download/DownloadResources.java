@@ -1,7 +1,7 @@
 package net.osmand.plus.download;
 
 import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
+import static net.osmand.plus.download.DownloadResourceGroupType.REGION_MAPS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
