@@ -132,6 +132,16 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 	}
 
 	@Override
+	public ZoomLevel getMinVisibleZoom() {
+		return getMinZoom();
+	}
+
+	@Override
+	public ZoomLevel getMaxVisibleZoom() {
+		return getMaxZoom();
+	}
+
+	@Override
 	public boolean supportsNaturalObtainData() {
 		return true;
 	}
