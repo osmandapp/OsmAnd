@@ -62,7 +62,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
@@ -151,9 +150,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		boolean nightMode = isNightMode(false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 
 		if (savedInstanceState != null) {
 			@SuppressWarnings("unchecked")

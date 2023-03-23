@@ -75,11 +75,11 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
-		boolean night = !requireSettings().isLightContent();
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), night);
+		boolean nightMode = isNightMode(false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
 
-		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, !night);
+		deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, !nightMode);
 
 		nameTextView = view.findViewById(R.id.nameTextView);
 		amenityTagTextView = view.findViewById(R.id.amenityTagTextView);
