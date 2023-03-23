@@ -14,11 +14,9 @@ import java.util.Map;
 public class TracksTabAdapter extends FragmentStatePagerAdapter {
 
 	private final List<TrackTab> trackTabs = new ArrayList<>();
-	private OsmandApplication app;
 
-	public TracksTabAdapter(@NonNull OsmandApplication app, @NonNull FragmentManager manager, @NonNull List<TrackTab> tabs) {
+	public TracksTabAdapter(@NonNull FragmentManager manager, @NonNull List<TrackTab> tabs) {
 		super(manager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-		this.app = app;
 		trackTabs.addAll(tabs);
 	}
 

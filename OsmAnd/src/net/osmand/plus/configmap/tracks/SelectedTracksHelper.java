@@ -187,8 +187,9 @@ public class SelectedTracksHelper {
 		if (GPX_INDEX_DIR.equals(name + "/")) {
 			name = app.getString(R.string.shared_string_tracks);
 		}
-		if((dir.getPath() + "/").endsWith(GPX_IMPORT_DIR) ||
-				(dir.getPath() + "/").endsWith(GPX_RECORDED_INDEX_DIR) ){
+		String dirPath = dir.getPath() + "/";
+		if (dirPath.endsWith(GPX_IMPORT_DIR) ||
+				dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
 			name = Algorithms.capitalizeFirstLetter(name);
 		}
 		TrackTab trackTab = trackTabs.get(name);

@@ -73,6 +73,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private TrackItemsLoaderTask asyncLoader;
 
 	private ViewPager viewPager;
+	private PagerSlidingTabStrip tabLayout;
 	private ProgressBar progressBar;
 	private TracksTabAdapter adapter;
 
@@ -188,7 +189,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void setupTabLayout(@NonNull View view) {
 		viewPager = view.findViewById(R.id.view_pager);
 		List<TrackTab> tabs = getTrackTabs();
-		PagerSlidingTabStrip tabLayout = view.findViewById(R.id.sliding_tabs);
+		tabLayout = view.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light);
 		tabLayout.setCustomTabProvider(new PagerSlidingTabStrip.CustomTabProvider() {
 			@Override
@@ -199,7 +200,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				View customView = inflater.inflate(R.layout.tab_title_view, parent, false);
 				TextView textView = customView.findViewById(android.R.id.text1);
 				DisplayMetrics dm = getResources().getDisplayMetrics();
-				int sidePadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, dm);
+				int sidePadding = AndroidUtils.dpToPx(app, 12);
 				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
 				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
 				textView.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
@@ -221,34 +222,20 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 			}
 		});
-		setTabs(tabLayout, tabs);
+		setTabs(tabs);
 
 	}
 
-	private void setTabs(PagerSlidingTabStrip mSlidingTabLayout, List<TrackTab> mTabs) {
-		tabSize = mTabs.size();
-		setViewPagerAdapter(viewPager, mTabs);
-		mSlidingTabLayout.setViewPager(viewPager);
+	private void setTabs(List<TrackTab> tabs) {
+		tabSize = tabs.size();
+		setViewPagerAdapter(viewPager, tabs);
+		tabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(0);
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
-		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
+		adapter = new TracksTabAdapter(getChildFragmentManager(), items);
 		pager.setAdapter(adapter);
-	}
-
-	private void reduceDragSensitivity(int sensitivity) {
-		try {
-			Field ff = ViewPager2.class.getDeclaredField("mRecyclerView");
-			ff.setAccessible(true);
-			RecyclerView recyclerView = (RecyclerView) ff.get(viewPager);
-			Field touchSlopField = RecyclerView.class.getDeclaredField("mTouchSlop");
-			touchSlopField.setAccessible(true);
-			int touchSlop = (int) touchSlopField.get(recyclerView);
-			touchSlopField.set(recyclerView, touchSlop * sensitivity);
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void setupButtons(@NonNull View view) {
@@ -313,7 +300,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		super.onResume();
 		List<TrackTab> tabs = getTrackTabs();
 		if (tabs.size() != tabSize) {
-			setTabs(getView().findViewById(R.id.sliding_tabs), tabs);
+			setTabs(tabs);
 		}
 		if (asyncLoader == null) {
 			reloadTracks();
@@ -339,7 +326,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void updateTrackTabs() {
-		setTabs(getView().findViewById(R.id.sliding_tabs), new ArrayList<>(selectedTracksHelper.getTrackTabs().values()));
+		adapter.setTrackTabs(selectedTracksHelper.getTrackTabs());
 	}
 
 	private void saveChanges() {
