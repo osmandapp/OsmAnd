@@ -11,8 +11,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +28,9 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -45,18 +40,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -186,19 +180,21 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		List<TrackTab> tabs = getTrackTabs();
 		tabLayout = view.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light);
-		tabLayout.setCustomTabProvider(new PagerSlidingTabStrip.CustomTabProvider() {
+		tabLayout.setCustomTabProvider(new CustomTabProvider() {
 			@Override
 			public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-				LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
+				TrackTab trackTab = getTrackTabs().get(position);
+
 				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 				int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+				int sidePadding = AndroidUtils.dpToPx(app, 12);
+
+				LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 				View customView = inflater.inflate(R.layout.tab_title_view, parent, false);
 				TextView textView = customView.findViewById(android.R.id.text1);
-				DisplayMetrics dm = getResources().getDisplayMetrics();
-				int sidePadding = AndroidUtils.dpToPx(app, 12);
 				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
 				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
-				textView.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
+				textView.setText(trackTab.getName(app, false));
 				return customView;
 			}
 
@@ -229,7 +225,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
-		adapter = new TracksTabAdapter(getChildFragmentManager(), items);
+		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
 		pager.setAdapter(adapter);
 	}
 
@@ -276,7 +272,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		List<TrackTab> trackTabs = getTrackTabs();
 		for (int i = 0; i < trackTabs.size(); i++) {
 			TrackTab tab = trackTabs.get(i);
-			if (Algorithms.stringsEqual(tab.name, name)) {
+			if (Algorithms.stringsEqual(tab.getTypeName(), name)) {
 				viewPager.setCurrentItem(i);
 				break;
 			}

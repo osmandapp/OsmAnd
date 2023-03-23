@@ -13,10 +13,12 @@ import java.util.Map;
 
 public class TracksTabAdapter extends FragmentStatePagerAdapter {
 
+	private final OsmandApplication app;
 	private final List<TrackTab> trackTabs = new ArrayList<>();
 
-	public TracksTabAdapter(@NonNull FragmentManager manager, @NonNull List<TrackTab> tabs) {
-		super(manager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+	public TracksTabAdapter(@NonNull OsmandApplication app, @NonNull FragmentManager manager, @NonNull List<TrackTab> tabs) {
+		super(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+		this.app = app;
 		trackTabs.addAll(tabs);
 	}
 
@@ -42,6 +44,6 @@ public class TracksTabAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return trackTabs.get(position).name;
+		return trackTabs.get(position).getName(app, false);
 	}
 }
