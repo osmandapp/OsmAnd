@@ -5094,4 +5094,6 @@
 	<string name="poi_sinkhole_ponor">Sinkhole: ponor</string>
 	<string name="poi_sinkhole_pit">Sinkhole: pit</string>
 
+	<string name="poi_barrier_coupure">Coupure barrier</string>
+
 </resources>
