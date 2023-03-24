@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -32,7 +33,7 @@ public class NoVisibleTracksViewHolder extends RecyclerView.ViewHolder {
 		description = view.findViewById(R.id.description);
 		icon = view.findViewById(R.id.icon);
 		button = view.findViewById(R.id.action_button);
-		button.setOnClickListener(v -> fragment.setSelectedTab(app.getString(R.string.shared_string_all)));
+		button.setOnClickListener(v -> fragment.setSelectedTab(TrackTabType.ALL.name()));
 	}
 
 	public void bindView() {

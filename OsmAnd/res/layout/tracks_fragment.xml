@@ -66,13 +66,13 @@
 
 		</androidx.appcompat.widget.Toolbar>
 
-		<com.google.android.material.tabs.TabLayout
-			android:id="@+id/tab_layout"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			osmand:tabMode="scrollable" />
+        <net.osmand.plus.views.controls.PagerSlidingTabStrip
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_height"
+            osmand:pstsTabBackground="@color/color_transparent"/>
 
-	</com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -89,7 +89,7 @@
 			osmand:mpb_setBothDrawables="true"
 			osmand:mpb_useIntrinsicPadding="false" />
 
-		<androidx.viewpager2.widget.ViewPager2
+		<androidx.viewpager.widget.ViewPager
 			android:id="@+id/view_pager"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -134,8 +134,8 @@
 
 			</LinearLayout>
 
-		</LinearLayout>
+        </LinearLayout>
 
-	</FrameLayout>
+    </FrameLayout>
 
 </LinearLayout>

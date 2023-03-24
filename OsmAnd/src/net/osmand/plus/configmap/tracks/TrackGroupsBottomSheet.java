@@ -87,7 +87,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
 			TrackTab trackTab = trackTabs.get(position);
 
-			holder.title.setText(trackTab.name);
+			holder.title.setText(trackTab.getName(app, true));
 
 			boolean selected = trackTab == selectedTab;
 			int colorId = selected ? activeColorId : defaultColorId;
@@ -101,7 +101,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksFragment) {
 					TrackTab tab = trackTabs.get(adapterPosition);
-					((TracksFragment) target).setSelectedTab(tab.name);
+					((TracksFragment) target).setSelectedTab(tab.getTypeName());
 				}
 				dismiss();
 			});
