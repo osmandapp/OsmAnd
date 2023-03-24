@@ -55,6 +55,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
@@ -525,64 +526,50 @@ public class GpxUiHelper {
 	                                     @NonNull View view,
 	                                     @NonNull String itemTitle,
 	                                     @Nullable Drawable iconDrawable,
-	                                     @NonNull GPXInfo info) {
-		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
+	                                     @Nullable GPXInfo info) {
+		if (info != null) {
+			GpxDataItem item = getDataItem(app, info, dataItem -> updateGpxInfoView(app, view, itemTitle, iconDrawable, info, dataItem));
+			if (item != null) {
 				updateGpxInfoView(app, view, itemTitle, iconDrawable, info, item);
 			}
-		});
-		if (item != null) {
-			updateGpxInfoView(app, view, itemTitle, iconDrawable, info, item);
+		} else {
+			updateGpxInfoView(view, itemTitle, null, null, app);
+			if (iconDrawable != null) {
+				ImageView icon = view.findViewById(R.id.icon);
+				icon.setImageDrawable(iconDrawable);
+				icon.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
 	private static void updateGpxInfoView(@NonNull OsmandApplication app,
-	                                      @NonNull View v,
+	                                      @NonNull View view,
 	                                      @NonNull String itemTitle,
 	                                      @Nullable Drawable iconDrawable,
 	                                      @NonNull GPXInfo info,
 	                                      @NonNull GpxDataItem dataItem) {
-		updateGpxInfoView(v, itemTitle, info, dataItem.getAnalysis(), app);
+		updateGpxInfoView(view, itemTitle, info, dataItem.getAnalysis(), app);
 		if (iconDrawable != null) {
-			ImageView icon = v.findViewById(R.id.icon);
+			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(iconDrawable);
 			icon.setVisibility(View.VISIBLE);
 		}
 	}
 
-	public static void updateGpxInfoView(View v,
-	                                     String itemTitle,
-	                                     GPXInfo info,
-	                                     GPXTrackAnalysis analysis,
-	                                     OsmandApplication app) {
+	public static void updateGpxInfoView(@NonNull View v,
+	                                     @NonNull String itemTitle,
+	                                     @Nullable GPXInfo gpxInfo,
+	                                     @Nullable GPXTrackAnalysis analysis,
+	                                     @NonNull OsmandApplication app) {
 		TextView viewName = v.findViewById(R.id.name);
 		viewName.setText(itemTitle.replace("/", " • ").trim());
 		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		ImageView icon = v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
-		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
 
-		boolean sectionRead = analysis == null;
-		if (sectionRead) {
-			v.findViewById(R.id.read_section).setVisibility(View.GONE);
-			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
-			String date = "";
-			String size = "";
-			if (info.getFileSize() >= 0) {
-				size = AndroidUtils.formatSize(v.getContext(), info.getFileSize());
-			}
-			DateFormat df = app.getResourceManager().getDateFormat();
-			long fd = info.getLastModified();
-			if (fd > 0) {
-				date = (df.format(new Date(fd)));
-			}
-			TextView sizeText = v.findViewById(R.id.date_and_size_details);
-			sizeText.setText(date + " \u2022 " + size);
-
-		} else {
-			v.findViewById(R.id.read_section).setVisibility(View.VISIBLE);
-			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
+		boolean hasGPXInfo = gpxInfo != null;
+		boolean hasAnalysis = analysis != null;
+		if (hasAnalysis) {
 			ImageView distanceI = v.findViewById(R.id.distance_icon);
 			distanceI.setVisibility(View.VISIBLE);
 			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_distance_16));
@@ -595,7 +582,7 @@ public class GpxUiHelper {
 			TextView time = v.findViewById(R.id.time);
 			TextView distance = v.findViewById(R.id.distance);
 			TextView pointsCount = v.findViewById(R.id.points_count);
-			pointsCount.setText(analysis.wptPoints + "");
+			pointsCount.setText(String.valueOf(analysis.wptPoints));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
 			if (analysis.isTimeSpecified()) {
@@ -603,17 +590,24 @@ public class GpxUiHelper {
 			} else {
 				time.setText("");
 			}
+		} else if (hasGPXInfo) {
+			String date = "";
+			String size = "";
+			if (gpxInfo.getFileSize() >= 0) {
+				size = AndroidUtils.formatSize(v.getContext(), gpxInfo.getFileSize());
+			}
+			DateFormat format = app.getResourceManager().getDateFormat();
+			long lastModified = gpxInfo.getLastModified();
+			if (lastModified > 0) {
+				date = (format.format(new Date(lastModified)));
+			}
+			TextView sizeText = v.findViewById(R.id.date_and_size_details);
+			sizeText.setText(date + " • " + size);
 		}
-
-		TextView descr = v.findViewById(R.id.description);
-		if (descr != null) {
-			descr.setVisibility(View.GONE);
-		}
-
-		View checkbox = v.findViewById(R.id.check_item);
-		if (checkbox != null) {
-			checkbox.setVisibility(View.GONE);
-		}
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.check_item), false);
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.description), false);
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.read_section), hasAnalysis);
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.unknown_section), !hasAnalysis && hasGPXInfo);
 	}
 
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app,
