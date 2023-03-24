@@ -125,7 +125,6 @@ public class WeatherHelper {
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
 		offlineForecastHelper.setWeatherResourcesManager(weatherTileResourcesManager);
-		clearOutdatedCache();
 	}
 
 	public void clearOutdatedCache() {

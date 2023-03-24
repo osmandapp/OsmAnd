@@ -29,6 +29,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -188,6 +189,8 @@ public abstract class OsmandPlugin {
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.emptyList();
 	}
+
+	public void addPluginIndexItems(@NonNull IndexFileList indexes) {}
 
 	public List<IndexItem> getSuggestedMaps() {
 		return Collections.emptyList();
