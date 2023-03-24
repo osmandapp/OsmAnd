@@ -27,6 +27,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
@@ -472,6 +473,12 @@ public class PluginsHelper {
 		}
 		for (WorldRegion subregion : region.getSubregions()) {
 			collectIndexItemsFromSubregion(subregion, items);
+		}
+	}
+
+	public static void addPluginIndexItems(@NonNull IndexFileList indexes) {
+		for (OsmandPlugin p : getAvailablePlugins()) {
+			p.addPluginIndexItems(indexes);
 		}
 	}
 

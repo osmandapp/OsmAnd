@@ -64,9 +64,9 @@ public class OsmandRegions {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandRegions.class);
 
 	WorldRegion worldRegion = new WorldRegion(WorldRegion.WORLD);
-	Map<String, WorldRegion> fullNamesToRegionData = new HashMap<String, WorldRegion>();
-	Map<String, String> downloadNamesToFullNames = new HashMap<String, String>();
-	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<String, LinkedList<BinaryMapDataObject>>();
+	Map<String, WorldRegion> fullNamesToRegionData = new HashMap<>();
+	Map<String, String> downloadNamesToFullNames = new HashMap<>();
+	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<>();
 
 
 	QuadTree<String> quadTree;
@@ -116,7 +116,7 @@ public class OsmandRegions {
 	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
-		final Map<String, String> parentRelations = new LinkedHashMap<String, String>();
+		final Map<String, String> parentRelations = new LinkedHashMap<>();
 		final Map<String, List<BinaryMapDataObject>> unattachedBoundaryMapObjectsByRegions = new HashMap<>();
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
 
@@ -187,7 +187,7 @@ public class OsmandRegions {
 				parent.addSubregion(rd);
 			}
 		}
-		structureWorldRegions(new ArrayList<WorldRegion>(fullNamesToRegionData.values()));
+		structureWorldRegions(new ArrayList<>(fullNamesToRegionData.values()));
 		return reader;
 	}
 

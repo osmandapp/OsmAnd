@@ -404,21 +404,9 @@ public class DownloadResources extends DownloadResourceGroup {
 					continue;
 				}
 			}
-			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
-				WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-				if (plugin == null || !plugin.isEnabled()) {
-					continue;
-				}
-			}
 			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
 				// Hide heightmaps of sqlite format
 				continue;
-			}
-			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
-				WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-				if (plugin == null || !plugin.isEnabled()) {
-					continue;
-				}
 			}
 			WorldRegion region;
 			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
