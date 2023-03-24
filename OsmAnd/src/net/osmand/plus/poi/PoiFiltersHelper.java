@@ -168,6 +168,7 @@ public class PoiFiltersHelper {
 		helper.close();
 	}
 
+	@Nullable
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters) {
 		for (PoiUIFilter pf : filters) {
 			if (pf != null && pf.getFilterId() != null && filterId != null && pf.getFilterId().equals(filterId)) {
@@ -181,19 +182,20 @@ public class PoiFiltersHelper {
 		return getFilterById(filterId, false);
 	}
 
+	@Nullable
 	public PoiUIFilter getFilterById(String filterId, boolean includeDeleted) {
 		if (filterId == null) {
 			return null;
 		}
-		for (PoiUIFilter f : getTopDefinedPoiFilters(includeDeleted)) {
-			if (f.getFilterId().equals(filterId)) {
-				return f;
+		for (PoiUIFilter filter : getTopDefinedPoiFilters(includeDeleted)) {
+			if (filter.getFilterId().equals(filterId)) {
+				return filter;
 			}
 		}
-		PoiUIFilter ff = getFilterById(filterId, getCustomPOIFilter(), getSearchByNamePOIFilter(),
+		PoiUIFilter filter = getFilterById(filterId, getCustomPOIFilter(), getSearchByNamePOIFilter(),
 				getTopWikiPoiFilter(), getShowAllPOIFilter(), getNominatimPOIFilter(), getNominatimAddressFilter());
-		if (ff != null) {
-			return ff;
+		if (filter != null) {
+			return filter;
 		}
 		if (filterId.startsWith(PoiUIFilter.STD_PREFIX)) {
 			String typeId = filterId.substring(PoiUIFilter.STD_PREFIX.length());
