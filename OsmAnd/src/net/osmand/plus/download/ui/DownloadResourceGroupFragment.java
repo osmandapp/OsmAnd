@@ -263,8 +263,10 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	private boolean shouldDisplayFreeMapsMessage() {
 		if (group != null) {
 			WorldRegion region = group.getRegion();
-			WorldRegion worldRegion = app.getRegions().getWorldRegion();
-			return !Algorithms.objectEquals(region, worldRegion) && !Algorithms.objectEquals(region.getSuperregion(), worldRegion) && hasFreeMaps();
+			if (region != null) {
+				WorldRegion worldRegion = app.getRegions().getWorldRegion();
+				return !Algorithms.objectEquals(region, worldRegion) && !Algorithms.objectEquals(region.getSuperregion(), worldRegion) && hasFreeMaps();
+			}
 		}
 		return false;
 	}
