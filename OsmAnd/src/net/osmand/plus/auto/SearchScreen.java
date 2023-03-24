@@ -28,6 +28,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -36,7 +37,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.fragments.HistorySettingsFragment;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
@@ -300,7 +300,8 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				}
 
 				// History
-				List<SearchResult> results = HistorySettingsFragment.getSearchHistoryResults(app, true);
+				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+				List<SearchResult> results = historyHelper.getSearchHistoryResults(true);
 				if (!Algorithms.isEmpty(results)) {
 					recentResults.addAll(results);
 				}

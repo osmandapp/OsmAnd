@@ -37,7 +37,8 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 	@Override
 	protected void updateHistoryItems() {
 		clearItems();
-		List<SearchResult> searchResults = HistorySettingsFragment.getSearchHistoryResults(app, false, true);
+		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		List<SearchResult> searchResults = historyHelper.getSearchHistoryResults(false, true);
 		sortSearchResults(searchResults);
 
 		Map<Integer, List<SearchResult>> historyGroups = new HashMap<>();

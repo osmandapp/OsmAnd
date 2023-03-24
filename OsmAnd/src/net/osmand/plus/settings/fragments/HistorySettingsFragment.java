@@ -20,13 +20,11 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.bottomsheets.ClearAllHistoryBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 
 import org.apache.commons.logging.Log;
@@ -79,7 +77,8 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	private void setupSearchHistoryPref() {
 		Preference preference = findPreference(SEARCH_HISTORY);
 		if (settings.SEARCH_HISTORY.get()) {
-			int size = getSearchHistoryResults(app, false, true).size();
+			SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+			int size = historyHelper.getSearchHistoryResults(false, true).size();
 			String description = getString(R.string.shared_string_items);
 			preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, description, String.valueOf(size)));
 			preference.setIcon(getActiveIcon(R.drawable.ic_action_search_dark));
@@ -193,26 +192,9 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		updateAllSettings();
 	}
 
-	@NonNull
-	public static List<SearchResult> getSearchHistoryResults(@NonNull OsmandApplication app, boolean onlyPoints) {
-		return getSearchHistoryResults(app, onlyPoints, false);
-	}
-
-	@NonNull
-	protected static List<SearchResult> getSearchHistoryResults(@NonNull OsmandApplication app, boolean onlyPoints, boolean includeDeleted) {
-		List<SearchResult> searchResults = new ArrayList<>();
-
-		SearchPhrase phrase = SearchPhrase.emptyPhrase();
-		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		for (HistoryEntry entry : historyHelper.getHistoryEntries(onlyPoints, includeDeleted)) {
-			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			searchResults.add(result);
-		}
-		return searchResults;
-	}
-
 	private static int calculateNavigationItemsCount(@NonNull OsmandApplication app) {
-		int count = getSearchHistoryResults(app, true, true).size();
+		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		int count = historyHelper.getSearchHistoryResults(true, true).size();
 		if (app.getTargetPointsHelper().isBackupPointsAvailable()) {
 			// Take "Previous Route" item into account during calculations
 			count++;

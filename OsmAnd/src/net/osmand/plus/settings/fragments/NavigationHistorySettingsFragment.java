@@ -44,7 +44,8 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	@Override
 	protected void updateHistoryItems() {
 		clearItems();
-		List<SearchResult> searchResults = HistorySettingsFragment.getSearchHistoryResults(app, true, true);
+		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+		List<SearchResult> searchResults = historyHelper.getSearchHistoryResults(true, true);
 		sortSearchResults(searchResults);
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();

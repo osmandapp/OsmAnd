@@ -63,6 +63,7 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -111,7 +112,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.fragments.HistorySettingsFragment;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
@@ -766,7 +766,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// History card
 				if (historyEnabled) {
-					List<SearchResult> results = HistorySettingsFragment.getSearchHistoryResults(app, true);
+					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+					List<SearchResult> results = historyHelper.getSearchHistoryResults(true);
 					if (!Algorithms.isEmpty(results)) {
 						HistoryCard historyCard = new HistoryCard(mapActivity, results);
 						historyCard.setListener(this);
