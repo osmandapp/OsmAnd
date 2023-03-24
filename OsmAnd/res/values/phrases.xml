@@ -5088,4 +5088,10 @@
 	<string name="poi_waste_dog_excrement">Dog excrement</string>
 	<string name="poi_waste_cigarettes">Cigarettes</string>
 
+	<string name="poi_sinkhole_estavelle">Sinkhole: estavelle</string>
+	<string name="poi_sinkhole_bluehole">Sinkhole: bluehole</string>
+	<string name="poi_sinkhole_doline">Sinkhole: doline</string>
+	<string name="poi_sinkhole_ponor">Sinkhole: ponor</string>
+	<string name="poi_sinkhole_pit">Sinkhole: pit</string>
+
 </resources>
