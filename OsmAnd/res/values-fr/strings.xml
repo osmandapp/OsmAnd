@@ -5084,6 +5084,16 @@
 \n
 \n• Correction de bugs lors de l\'affichage de lieux végans
 \n
+\n• Ajout de la possibilité de télécharger des tuiles en ligne utilisées comme sur-couches ou comme sous-couches.
+\n
+\n• Ajout de la prise en charge des unités impériales pour les \"caractéristiques du véhicule\"
+\n
+\n• Nouveau profil : cyclomoteur
+\n
+\n• Nouvelle option \"Automatique\" pour le paramètre \"Emplacement sur l\'écran\"
+\n
+\n• Correction des gestes pour incliner, zoomer et tourner la carte
+\n
 \n</string>
     <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrage du relief à partir de cartes 3D</string>
     <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>

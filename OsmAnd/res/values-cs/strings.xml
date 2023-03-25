@@ -4829,7 +4829,7 @@
     <string name="download_heightmap_maps">Výšková mapa</string>
     <string name="reset_all_settings_desc">Obnovení všech výchozích nastavení\?</string>
     <string name="kg">kg</string>
-    <string name="map_widget_ant_bicycle_dist">Vzdálenost jízdních kol</string>
+    <string name="map_widget_ant_bicycle_dist">Vzdálenost jízdního kola</string>
     <string name="coordinates_widget_map_center_desc">Zobrazuje zeměpisné souřadnice aktuálního středu mapy</string>
     <string name="coordinates_widget_current_location_desc">Zobrazí zeměpisné souřadnice aktuální polohy</string>
     <string name="auto_25_chars_route_roundabout_kr">Sjeďte k výjezdu %1$d a držte se vpravo</string>
@@ -4892,7 +4892,7 @@
     <string name="map_widget_camera_distance">Výška kamery</string>
     <string name="map_marker_interval_dialog_desc">Zadejte časový interval, ve kterém se bude měřit průměrná rychlost pro výpočet odhadovaného času příjezdu.</string>
     <string name="included_in_your_current_plan">Zahrnuto ve vašem aktuálním plánu \"%1$s\"</string>
-    <string name="connect_with_straight_line">Připojit k rovné čáře</string>
+    <string name="connect_with_straight_line">Připojit přímou čarou</string>
     <string name="attach_roads_descr">Přibližte svou trať k povoleným silnicím, abyste mohli projíždět mezi body, a přiřaďte přesné pokyny k odbočování a vlastnosti trasy.</string>
     <string name="without_profiles_changing">Bez změny profilů</string>
     <string name="auto_25_chars_route_tl_kl">Odbočte vlevo a držte se vlevo</string>

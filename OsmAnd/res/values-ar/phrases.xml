@@ -4520,4 +4520,17 @@
     <string name="poi_recycling_food">أكل</string>
     <string name="poi_recycling_glass_bottles_colour">قارورات زجاجية ملونة</string>
     <string name="poi_recycling_glass_jars">جرار (عبوات) زجاجية</string>
+    <string name="poi_recycling_second_hand">مستعمل</string>
+    <string name="poi_waste_rubble">أنقاض</string>
+    <string name="poi_waste_dog_excrement">فضلات كلاب</string>
+    <string name="poi_waste_cigarettes">سجائر</string>
+    <string name="poi_recycling_toys">ألعاب</string>
+    <string name="poi_waste_trash">نفايات</string>
+    <string name="poi_waste_oil">زيت</string>
+    <string name="poi_waste_drugs">أدوية</string>
+    <string name="poi_waste_organic">عضوي</string>
+    <string name="poi_recycling_printer_inkjet_cartridges">خراطيش طابعة نافثة للحبر</string>
+    <string name="poi_recycling_printer_toner_cartridges">خراطيش طابعة من طراز toner</string>
+    <string name="poi_recycling_refund_bottles">قارورات معوضة</string>
+    <string name="poi_recycling_small_metal">أجزاء معدنية صغيرة</string>
 </resources>
