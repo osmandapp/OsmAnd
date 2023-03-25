@@ -4547,4 +4547,5 @@
     <string name="poi_sinkhole_ponor">Sumidouro: ponor</string>
     <string name="poi_sinkhole_pit">Sumidouro: poço</string>
     <string name="poi_sinkhole_estavelle">Sumidouro: estavelle</string>
+    <string name="poi_barrier_coupure">Barreira de cheias \"cupure\"</string>
 </resources>
