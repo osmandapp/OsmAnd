@@ -4062,7 +4062,7 @@
     <string name="coordinates_widget_secondary_desc">Фармат адлюстравання каардынат можна быць зменены на: %1$s-%2$s-%3$s.</string>
     <string name="routing_attr_avoid_4wd_only_name">Пазбягаць прасёлачных дарог (4х4)</string>
     <string name="routing_attr_avoid_4wd_only_description">Пазбягаць дарог, прызначаных для аўтамабіляў з поўным прывадам (4х4)</string>
-    <string name="elevation_profile_widget_desc">Віджэт паказвае профіль вышыні і ўхілу бягучага маршруту.</string>
+    <string name="elevation_profile_widget_desc">Паказвае профіль вышыні і ўхілу бягучага маршруту.</string>
     <string name="parking_widget_desc">Віджэт, які паказвае адлегласць ад сярэдзіны экрана да паркоўкі.</string>
     <string name="compass_on_circles">Компас на акружнасці</string>
     <string name="distance_circles">Акружнасці-адлегласці</string>
@@ -4079,9 +4079,9 @@
     <string name="lanes_widgets_desc">Віджэт «Палосы руху» паказвае бягучую схему дарожных палос і вылучае палосы руху з актыўнай навігацыяй.</string>
     <string name="current_time_widget_desc">Паказвае бягучы час з вашай прылады.</string>
     <string name="gps_info_widget_desc">Паказвае колькасць спадарожнікаў, якія прылада выяўляе і выкарыстоўвае ў бягучы момант.</string>
-    <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора бягучай геалакацыі.</string>
+    <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання.</string>
     <string name="max_speed_widget_desc">Паказвае абмежаванне хуткасці для бягучай дарогі.</string>
-    <string name="map_markers_bar_widget_desc">На віджэце верхняй панэлі вы можаце ўбачыць адлегласць і кірунак да маркера ад бягучага месцазнаходжання. Можна наладзіць прагляд 1 або 2 верхніх маркераў у віджэце.</string>
+    <string name="map_markers_bar_widget_desc">Віджэт верхняй панэлі паказвае адлегласць і кірунак да наступнага маркера ад бягучага месцазнаходжання. Віджэт можна наладзіць для паказу 1 або 2 маркераў.</string>
     <string name="radius_rules_widget_desc">Інструмент «Радыусная лінейка» дапамагае вызначыць радыус вакол абранай кропкі на мапе, паказваючы кругі адлегласці на мапе.</string>
     <string name="colour_of_circles">Колер акружнасцей</string>
     <string name="coordinates_widget_desc">Паказвае геаграфічныя каардынаты бягучага месцазнаходжання.</string>
@@ -4808,7 +4808,7 @@
     <string name="map_markers_desc">Віджэт паказвае адлегласць або прыблізны час прыбыцця (ETA) для першых двух адзнак у спісе адзнак мапы.</string>
     <string name="external_sensors_plugin_name">Вонкавыя датчыкі</string>
     <string name="map_center_widget">Цэнтр мапы</string>
-    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
+    <string name="current_location_widget">Каардынаты: бягучае месцазнаходжанне</string>
     <string name="map_widget_altitude_map_center">Вышыня: цэнтр мапы</string>
     <string name="ant_read_data">Чытаць даныя</string>
     <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
@@ -4890,4 +4890,8 @@
 \nКалі ласка, падтрымайце паляпшэнні, падаўшы свой журнал памылак.</string>
     <string name="shared_string_terms_of_use">Умовы выкарыстання</string>
     <string name="map_rendering_engine_v1">Версія 1</string>
+    <string name="map_widget_altitude_current_location">Вышыня: бягучае месцазнаходжанне</string>
+    <string name="map_widget_altitude_current_location_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання.</string>
+    <string name="map_widget_altitude_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання або для цэнтра мапы</string>
+    <string name="map_widget_altitude_map_center_desc">Паказвае вышыню над узроўнем мора для цэнтра мапы.</string>
 </resources>
