@@ -4540,4 +4540,10 @@
     <string name="poi_recycling_electronics">Electrónica</string>
     <string name="poi_recycling_aerosol_cans">Aerosoles</string>
     <string name="poi_waste_cigarettes">Tabaco</string>
+    <string name="poi_sinkhole_bluehole">Agujero azul</string>
+    <string name="poi_sinkhole_doline">Dolina</string>
+    <string name="poi_sinkhole_ponor">Pónor</string>
+    <string name="poi_sinkhole_pit">Fosa: pozo</string>
+    <string name="poi_barrier_coupure">Barrera de seguridad</string>
+    <string name="poi_sinkhole_estavelle">estavelle</string>
 </resources>
