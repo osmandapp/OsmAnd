@@ -4542,4 +4542,10 @@
     <string name="poi_recycling_printer_toner_cartridges">Тонер-картриджі для принтерів</string>
     <string name="poi_recycling_toys">Іграшки</string>
     <string name="poi_waste_oil">Сира нафта</string>
+    <string name="poi_sinkhole_doline">Воронка: долина</string>
+    <string name="poi_sinkhole_ponor">Воронка: понор</string>
+    <string name="poi_sinkhole_pit">Воронка: кар\'єр</string>
+    <string name="poi_sinkhole_bluehole">Воронка: блакитна дірка</string>
+    <string name="poi_sinkhole_estavelle">Воронка: еставела</string>
+    <string name="poi_barrier_coupure">Загороджувальний бар\'єр</string>
 </resources>
