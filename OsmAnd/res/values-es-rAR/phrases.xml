@@ -664,7 +664,7 @@
     <string name="poi_crater">Cráter</string>
     <string name="poi_ridge">Cresta</string>
     <string name="poi_glacier">Glaciar</string>
-    <string name="poi_sinkhole">Dolina;Torca;Sima;Sumidero</string>
+    <string name="poi_sinkhole">Sumidero;Dolina;Torca;Sima</string>
     <string name="poi_waterfall">Cascada;Catarata</string>
     <string name="poi_river">Río</string>
     <string name="poi_stream">Arroyo</string>
@@ -4542,4 +4542,10 @@
     <string name="poi_recycling_electronics">Electrónica</string>
     <string name="poi_recycling_electrical_appliances">Electrodomésticos</string>
     <string name="poi_recycling_food">Comida</string>
+    <string name="poi_sinkhole_estavelle">Sumidero: estavelle</string>
+    <string name="poi_sinkhole_ponor">Sumidero: abismo (orificio de desagüe)</string>
+    <string name="poi_sinkhole_doline">Sumidero: dolina o valle</string>
+    <string name="poi_barrier_coupure">Barrera de seguridad</string>
+    <string name="poi_sinkhole_bluehole">Sumidero: agujero azul</string>
+    <string name="poi_sinkhole_pit">Sumidero: fosa</string>
 </resources>
