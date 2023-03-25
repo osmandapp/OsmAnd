@@ -4519,7 +4519,7 @@
     <string name="poi_recycling_electronics">إلكترونيات</string>
     <string name="poi_recycling_food">أكل</string>
     <string name="poi_recycling_glass_bottles_colour">قارورات زجاجية ملونة</string>
-    <string name="poi_recycling_glass_jars">جرار (عبوات) زجاجية</string>
+    <string name="poi_recycling_glass_jars">جَرَّات زجاجية</string>
     <string name="poi_recycling_second_hand">مستعمل</string>
     <string name="poi_waste_rubble">أنقاض</string>
     <string name="poi_waste_dog_excrement">فضلات كلاب</string>
@@ -4533,4 +4533,18 @@
     <string name="poi_recycling_printer_toner_cartridges">خراطيش طابعة من طراز toner</string>
     <string name="poi_recycling_refund_bottles">قارورات معوضة</string>
     <string name="poi_recycling_small_metal">أجزاء معدنية صغيرة</string>
+    <string name="poi_sinkhole_doline">بالوعة: دولين</string>
+    <string name="poi_sinkhole_pit">بالوعة: حفرة</string>
+    <string name="poi_barrier_coupure">حاجز كوبر</string>
+    <string name="poi_sinkhole_estavelle">بالوعة: استافيل</string>
+    <string name="poi_sinkhole_bluehole">بالوعة: ثقب أزرق</string>
+    <string name="poi_sinkhole_ponor">بالوعة: بونور</string>
+    <string name="poi_recycling_marine_waste">نفايات بحرية</string>
+    <string name="poi_recycling_metal_packaging">تغليف معدني</string>
+    <string name="poi_recycling_oil">زيت</string>
+    <string name="poi_recycling_others">مواد أخرى</string>
+    <string name="poi_recycling_pallets">منصات</string>
+    <string name="poi_recycling_plastic_bottle_tops">أغطية زجاجات بلاستيكية</string>
+    <string name="poi_recycling_pmd">العبوات البلاستيكية والتعبئة المعدنية وعلب المشروبات</string>
+    <string name="poi_recycling_polystyrene_foam">رغوة البوليسترين</string>
 </resources>
