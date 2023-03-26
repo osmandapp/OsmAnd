@@ -950,7 +950,7 @@
     <string name="poi_recycling_plasterboard">Gipskartonplatten</string>
     <string name="poi_recycling_animal_waste">Tierischer Abfall</string>
     <string name="poi_monitoring_station">Überwachungsstation</string>
-    <string name="poi_seasonal_yes">ja;Saisonal</string>
+    <string name="poi_seasonal_yes">ja;saisonal</string>
     <string name="poi_seasonal_no">nein</string>
     <string name="poi_seasonal_dry_season">Trockenzeit</string>
     <string name="poi_seasonal_wet_season">Regenzeit</string>
@@ -1414,7 +1414,7 @@
     <string name="poi_payment_dkv_no">DKV nicht akzeptiert</string>
     <string name="poi_drive_in_yes">ja;Drive-in</string>
     <string name="poi_drive_in_no">Drive-in: nein</string>
-    <string name="poi_drive_through_yes">ja;Durchfahrtsbedienung</string>
+    <string name="poi_drive_through_yes">ja;Durchfahrt</string>
     <string name="poi_drive_through_no">Durchfahrt: nein</string>
     <string name="poi_brewery_additional">Brauereiname</string>
     <string name="poi_microbrewery_yes">ja;Mikrobrauerei</string>
@@ -1986,14 +1986,14 @@
     <string name="poi_shop_additional_yes">mit Geschäften</string>
     <string name="poi_service_bicycle_retail_yes">Einzelhandel;Fahrradhandel</string>
     <string name="poi_service_bicycle_retail_no">Fahrradeinzelhandel: nein</string>
-    <string name="poi_service_bicycle_repair_yes">Reparatur;Fahrradreperatur</string>
+    <string name="poi_service_bicycle_repair_yes">Reparatur;Fahrradreparatur</string>
     <string name="poi_service_bicycle_repair_no">Fahrradreparatur: nein</string>
-    <string name="poi_service_bicycle_rental_yes">Verleih;Fahrradverlei</string>
+    <string name="poi_service_bicycle_rental_yes">Verleih;Fahrradverleih</string>
     <string name="poi_service_bicycle_rental_no">Fahrradverleih: nein</string>
     <string name="poi_service_bicycle_pump_yes">Pumpe;Fahrradpumpe</string>
     <string name="poi_service_bicycle_pump_no">Fahrradpumpe: nein</string>
     <string name="poi_service_bicycle_diy_no">Fahrradwerkzeuge für Eigenreparatur: nein</string>
-    <string name="poi_service_bicycle_diy_yes">Reperaturwerkzeuge;Fahrrad-Reperaturwerkzeuge</string>
+    <string name="poi_service_bicycle_diy_yes">Reparaturwerkzeuge;Fahrradreparaturwerkzeuge</string>
     <string name="poi_service_bicycle_cleaning_yes">Reinigung;Fahrradreinigung</string>
     <string name="poi_service_bicycle_cleaning_no">Fahrradreinigung: nein</string>
     <string name="poi_service_bicycle_chaintool_yes">Kettenwerkzeuge;Fahrradkettenwerkzeug</string>
