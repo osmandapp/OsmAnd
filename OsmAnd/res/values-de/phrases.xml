@@ -165,7 +165,7 @@
     <string name="poi_curtain">Vorhanggeschäft</string>
     <string name="poi_customs">Zollamt</string>
     <string name="poi_cycling">Radsport</string>
-    <string name="poi_dairy">Milchladen</string>
+    <string name="poi_dairy">Molkereigeschäft</string>
     <string name="poi_dam">Staudamm</string>
     <string name="poi_dance_floor">Tanzfläche</string>
     <string name="poi_deli">Feinkostgeschäft</string>
@@ -2529,7 +2529,7 @@
     <string name="poi_counselling_type_crisis_no">Beratung (Krise): nein</string>
     <string name="poi_counselling_type_drugs_yes">Beratung (Drogen): ja</string>
     <string name="poi_counselling_type_drugs_no">Beratung (Drogen): nein</string>
-    <string name="poi_counselling_type_education_yes">Beratung (Bildung): ja</string>
+    <string name="poi_counselling_type_education_yes">Beratung (Erziehung): ja</string>
     <string name="poi_counselling_type_education_no">Beratung (Bildung): nein</string>
     <string name="poi_counselling_type_family_yes">Beratung (Familie): ja</string>
     <string name="poi_counselling_type_family_no">Beratung (Familie): nein</string>
@@ -3289,7 +3289,7 @@
     <string name="poi_scooter_no">Roller: nein</string>
     <string name="poi_truck_yes">Lkw: ja</string>
     <string name="poi_truck_no">Lkw: nein</string>
-    <string name="poi_parking_fee_yes">Ja</string>
+    <string name="poi_parking_fee_yes">ja</string>
     <string name="poi_parking_fee_no">Nein</string>
     <string name="poi_parking_fee">Parkgebühr</string>
     <string name="poi_amperage">Stromstärke</string>
@@ -3425,7 +3425,7 @@
     <string name="poi_adult_gaming_centre">Spielkasino für Erwachsene</string>
     <string name="poi_water_utility">Büro der Wasserversorgung</string>
     <string name="poi_service_car">Autodienst</string>
-    <string name="poi_service_vehicle_car_repair_yes">Autowerkstatt</string>
+    <string name="poi_service_vehicle_car_repair_yes">Autoreparatur</string>
     <string name="poi_service_vehicle_oil_change_yes">Ölwechsel</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Gebrauchtwagenverkauf</string>
     <string name="poi_service_vehicle_brakes_yes">Bremsen</string>
@@ -3685,7 +3685,7 @@
     <string name="poi_moped_designated">Ausgewiesen;Ausgewiesen für Mopeds</string>
     <string name="poi_mofa_yes">Ja;Mofa</string>
     <string name="poi_mofa_designated">Ausgewiesen;Ausgewiesen für Mofas</string>
-    <string name="poi_hgv_yes">Ja;Lkw;Lastwagen</string>
+    <string name="poi_hgv_yes">Ja;Lkw;Laster;Lastwagen</string>
     <string name="poi_hgv_destination">Anlieger frei;Zugang für LKW als Anlieger</string>
     <string name="poi_hgv_permissive">Gestattet;Zugang für LKW gestattet</string>
     <string name="poi_hgv_designated">Ausgewiesen;Für LKW ausgewiesen</string>
@@ -4020,7 +4020,7 @@
     <string name="poi_permanent_camping">Dauerstellplätze</string>
     <string name="poi_arch">Felsbogen</string>
     <string name="poi_payment_reverse_charge_calls_yes">R-Gespräche: ja</string>
-    <string name="poi_payment_calling_cards_yes">Calling cards akzeptiert</string>
+    <string name="poi_payment_calling_cards_yes">Telefonkarten akzeptiert</string>
     <string name="poi_callable">Anrufbar</string>
     <string name="poi_payment_calling_cards_no">Calling cards nicht akzeptiert</string>
     <string name="poi_payment_reverse_charge_calls_no">R-Gespräche: nein</string>
