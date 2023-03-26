@@ -5113,7 +5113,7 @@ POIの更新は利用できません</string>
     <string name="approximate_bearing">おおよその方位</string>
     <string name="simulation_position_description">場所を変更する際のもととなる経路ファイルを選択します。</string>
     <string name="approximate_bearing_descr">たどっているナビゲーションルートから方位を導き出します。</string>
-    <string name="shared_string_inches"/>
+    <string name="shared_string_inches">インチ</string>
     <string name="app_mode_climbing">クライミング</string>
     <string name="shared_string_pounds">ポンド</string>
     <string name="clear_online_cache">オンラインキャッシュを消去する</string>
@@ -5134,4 +5134,6 @@ POIの更新は利用できません</string>
     <string name="metric_lbs">ポンド</string>
     <string name="offline_weather_forecast">オフライン天気予報</string>
     <string name="offline_weather_forecast_desc">7日分の天気予報をダウンロードすることができます。</string>
+    <string name="nautical_depth_points">水深点(最高深度)</string>
+    <string name="inch">インチ</string>
 </resources>
