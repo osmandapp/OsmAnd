@@ -4055,7 +4055,7 @@ POIの更新は利用できません</string>
     <string name="navigate_point_format_mgrs">MGRS(Military Grid Reference System)</string>
     <string name="mgrs_format_descr">OsmAndは、UTM NATO形式類似のMGRSを使用します。</string>
     <string name="shared_string_legend">凡例</string>
-    <string name="n_items_of_z">%2$sの%1$s</string>
+    <string name="n_items_of_z">%1$s (全%2$s)</string>
     <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
     <string name="track_coloring_solid">通常色</string>
     <string name="in_case_of_reverse_direction">逆方向の場合</string>
@@ -4900,7 +4900,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_carriage_restrictions_name">馬車の制限</string>
     <string name="routing_attr_carriage_restrictions_description">馬車のアクセス許可を考慮する</string>
     <string name="rendering_attr_showTrainRoutes_name">鉄道路線</string>
-    <string name="shared_string_item">項目</string>
+    <string name="shared_string_item">アイテム</string>
     <string name="simulation_constant_mode_title">定速走行</string>
     <string name="change_default_tracks_appearance_confirmation_description">%1$s経路の外観を変更しますか？</string>
     <string name="no_visible_tracks_description">マップ上に表示する経路を選択します。</string>
@@ -5093,6 +5093,16 @@ POIの更新は利用できません</string>
 \n
 \n• ビーガン向けの場所表示に関する問題を修正
 \n
+\n• \"オーバーレイ\"または\"アンダーレイ\"マップとして使用されるオンラインタイルをダウンロードできるように
+\n
+\n• \"車両パラメータ \"で帝国単位(ヤード・ポンド法)をサポート
+\n
+\n• 新しくモペットのプロフィールを追加
+\n
+\n• \"表示位置 \"オプションに \"自動 \"を追加
+\n
+\n• マップの傾き、ズーム、回転のジェスチャーを修正
+\n
 \n</string>
     <string name="shared_string_delete_file">ファイルを削除</string>
     <string name="selected_value">選択した値</string>
@@ -5105,4 +5115,23 @@ POIの更新は利用できません</string>
     <string name="approximate_bearing_descr">たどっているナビゲーションルートから方位を導き出します。</string>
     <string name="shared_string_inches"/>
     <string name="app_mode_climbing">クライミング</string>
+    <string name="shared_string_pounds">ポンド</string>
+    <string name="clear_online_cache">オンラインキャッシュを消去する</string>
+    <string name="free_maps_updates">無料アップデート(緊急)</string>
+    <string name="clear_online_cache_description">この操作により、オンライン天気予報タイルのキャッシュがすべて消去されます。</string>
+    <string name="shared_string_alt_name">代替名称</string>
+    <string name="offline_cache">オフラインキャッシュ</string>
+    <string name="token_is_not_valid">トークンが無効です</string>
+    <string name="generate_hillshade_from_3d_maps">3Dマップから2D化した陰影起伏図を生成する。</string>
+    <string name="generate_slope_from_3d_maps">3Dマップから2D化した勾配マップを生成する</string>
+    <string name="enable_3d_maps">3Dマップを有効にする</string>
+    <string name="disable_vertex_hillshade_3d">3Dでの頂点部の陰影を無効にする</string>
+    <string name="test_heightmap">標高マップのテスト</string>
+    <string name="weather_forecast_is_outdated">天気予報データが古くなっています。</string>
+    <string name="shared_string_all_world">世界中</string>
+    <string name="common_weight_limit_error">最小値は\"%1$s\"%2$sです。車両重量が最小値以下の場合は、プロファイル\"%3$s\"を使用してください。</string>
+    <string name="weather_forecast">天気予報</string>
+    <string name="metric_lbs">ポンド</string>
+    <string name="offline_weather_forecast">オフライン天気予報</string>
+    <string name="offline_weather_forecast_desc">7日分の天気予報をダウンロードすることができます。</string>
 </resources>
