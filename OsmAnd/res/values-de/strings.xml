@@ -1087,7 +1087,7 @@
     <string name="speak_speed_limit">Tempolimit</string>
     <string name="speak_cameras">Blitzer</string>
     <string name="speak_traffic_warnings">Verkehrswarnungen</string>
-    <string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
+    <string name="osb_author_or_password_not_specified">Bitte OSM-Nutzernamen und Passwort in den Einstellungen eingeben</string>
     <string name="clear_intermediate_points">Zwischenziele löschen</string>
     <string name="keep_intermediate_points">Zwischenziele behalten</string>
     <string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
@@ -2099,7 +2099,7 @@
     <string name="quick_actions_delete">Aktion löschen</string>
     <string name="quick_actions_delete_text">Aktion „%s“ löschen\?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
-    <string name="quick_favorites_name_preset">Name voreinstellen</string>
+    <string name="quick_favorites_name_preset">Namen voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
     <string name="quick_action_add_marker_descr">Eine Schaltfläche zum Hinzufügen einer Kartenmarkierung in der Bildschirmmitte.</string>
     <string name="favorite_empty_place_name">Ort</string>
@@ -2606,7 +2606,7 @@
     <string name="winter_and_ski_renderer">Winter und Ski</string>
     <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
-    <string name="copy_location_name">Ort/POI-Name kopieren</string>
+    <string name="copy_location_name">Ort/POI-Namen kopieren</string>
     <string name="toast_empty_name_error">Standort ohne Name</string>
     <string name="show_closed_notes">Geschlossene Hinweise anzeigen</string>
     <string name="switch_osm_notes_visibility_desc">OSM-Hinweise auf der Karte ein- oder ausblenden.</string>
@@ -3361,7 +3361,7 @@
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
-    <string name="copy_coordinates">Kopiere Koordinaten</string>
+    <string name="copy_coordinates">Koordinaten kopieren</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
@@ -3840,7 +3840,7 @@
     <string name="open_street_map_login_mode">Anmelden, um Änderungen hochzuladen.
 \n
 \nVerwenden Sie die OAuth-Methode oder Ihren OSM-Benutzernamen und Ihr -Passwort.</string>
-    <string name="use_login_password">Benutzername und Passwort verwenden</string>
+    <string name="use_login_password">Benutzernamen und Passwort verwenden</string>
     <string name="login_account">Konto</string>
     <string name="user_login">Anmelden</string>
     <string name="markers_history">Historie der Marker</string>
@@ -3919,7 +3919,7 @@
     <string name="routing_engine_vehicle_type_car">Auto</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
-    <string name="copy_address">Kopiere Adresse</string>
+    <string name="copy_address">Adresse kopieren</string>
     <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online-Navigationssystem</string>
     <string name="online_routing_engines">Online-Navigationssysteme</string>
@@ -3961,7 +3961,7 @@
     <string name="delete_online_routing_engine">Dieses Online-Routingmodul löschen\?</string>
     <string name="context_menu_edit_descr">Beschreibung bearbeiten</string>
     <string name="delete_waypoints">Wegpunkte löschen</string>
-    <string name="copy_to_map_favorites">Kopiere in Favoriten</string>
+    <string name="copy_to_map_favorites">Zu den Favoriten kopieren</string>
     <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
     <string name="upload_photo">Lade hoch</string>
     <string name="upload_photo_completed">Hochladen abgeschlossen</string>
@@ -4292,7 +4292,7 @@
     <string name="benefits_for_contributors">Vorteile für aktive OSM-Mitwirkende</string>
     <string name="benefits_for_contributors_primary_descr">Aktive Mitwirkende an OpenStreetMap.org können Anspruch auf unbegrenzte stündliche Kartenaktualisierungen haben.</string>
     <string name="benefits_for_contributors_secondary_descr">Melden Sie sich bei OpenStreetMap an, um zu prüfen, ob Sie Anspruch auf unbegrenzte monatliche und stündliche Kartenaktualisierungen haben.</string>
-    <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
+    <string name="use_login_and_password">Benutzernamen und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
     <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
     <string name="shared_string_contributions">Beiträge</string>
