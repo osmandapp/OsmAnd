@@ -1,8 +1,8 @@
 package net.osmand.plus;
 
 
-import static net.osmand.plus.OsmAndLocationProvider.SIMULATED_PROVIDER;
-import static net.osmand.plus.OsmAndLocationProvider.SIMULATED_PROVIDER_GPX;
+import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
+import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER_GPX;
 
 import android.app.Activity;
 import android.view.View;
