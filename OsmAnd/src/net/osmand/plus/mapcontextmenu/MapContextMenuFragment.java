@@ -56,7 +56,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportRoute;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -966,7 +965,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void restoreCustomMapRatio() {
 		if (map != null && map.hasCustomMapRatio()) {
-			map.restoreMapRatio();
+			map.restoreScreenCenter();
 		}
 	}
 

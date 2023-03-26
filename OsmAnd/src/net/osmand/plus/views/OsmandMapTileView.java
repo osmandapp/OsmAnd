@@ -735,11 +735,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void restoreMapRatio() {
+		customMapRatioX = 0;
+		customMapRatioY = 0;
+	}
+
+	public void restoreScreenCenter() {
+		restoreMapRatio();
 		RotatedTileBox box = currentViewport.copy();
 		LatLon screenCenter = NativeUtilities.getLatLonFromPixel(mapRenderer, box,
 				box.getPixWidth() / 2f, box.getPixHeight() / 2f);
-		customMapRatioX = 0;
-		customMapRatioY = 0;
 		PointF ratio = calculateRatio();
 		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude(), ratio.x, ratio.y);
 	}
