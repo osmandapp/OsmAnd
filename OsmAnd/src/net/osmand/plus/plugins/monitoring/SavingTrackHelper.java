@@ -14,8 +14,8 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -487,7 +487,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			lastRoutingApplicationMode = null;
 		}
 		boolean record = false;
-		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
+		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
