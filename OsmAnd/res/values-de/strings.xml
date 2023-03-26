@@ -4562,7 +4562,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">Oberleitungsbuslinien</string>
     <string name="map_markers_bar">Leiste für Kartenmarkierungen</string>
     <string name="shared_string_visible_widgets">Sichtbare Widgets</string>
-    <string name="top_widgets_panel">Oberes Paneel</string>
+    <string name="top_widgets_panel">Oberes Panel</string>
     <string name="bottom_widgets_panel">Unteres Paneel</string>
     <string name="shared_string_item">Element</string>
     <string name="shared_string_buttons">Schaltflächen</string>
@@ -4806,7 +4806,7 @@
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Zeigt die Entfernung zwischen Kamera und Zielort an.</string>
     <string name="external_sensor_widgets">ANT+ Widgets</string>
-    <string name="map_widget_target_distance">Entfernung von der Kamera zum Ziel</string>
+    <string name="map_widget_target_distance">Entfernung zwischen Kamera und Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
     <string name="map_widget_ant_bicycle_power_desc">Zeigt die Leistung des Radfahrers an, mit der das Fahrrad vorwärts bewegt wird</string>
