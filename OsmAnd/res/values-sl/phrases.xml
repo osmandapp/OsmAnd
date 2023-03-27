@@ -4537,4 +4537,9 @@
     <string name="poi_waste_cigarettes">Cigaretni ogorki</string>
     <string name="poi_waste_accepted">Sprejeti odpadki</string>
     <string name="poi_water_filter">Voda;Pitna voda</string>
+    <string name="poi_sinkhole_bluehole">Vrtača: modra luknja</string>
+    <string name="poi_sinkhole_doline">Vrtača: dolina</string>
+    <string name="poi_sinkhole_ponor">Vrtača: ponor</string>
+    <string name="poi_sinkhole_pit">Vrtača: brezno</string>
+    <string name="poi_sinkhole_estavelle">Vrtača: estavela</string>
 </resources>
