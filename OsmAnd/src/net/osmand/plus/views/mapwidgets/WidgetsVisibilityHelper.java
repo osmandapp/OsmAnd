@@ -180,7 +180,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInPlanRouteMode()
-				&& !isSelectingTilesZone();
+				&& !isSelectingTilesZone()
+				&& !isTrackDetailsMenuOpened();
 		/*
 				&& !isDashboardVisible()
 				&& !isInGpxDetailsMode()
