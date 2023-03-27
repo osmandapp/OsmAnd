@@ -549,7 +549,7 @@
     <string name="renderer_load_exception">Renderer konnte nicht geladen werden.</string>
     <string name="renderers">Vektor-Renderer</string>
     <string name="renderers_descr">Darstellung für Offline-Vektorkarten auswählen</string>
-    <string name="poi_context_menu_website">POI-Internetseite anzeigen</string>
+    <string name="poi_context_menu_website">POI-Website anzeigen</string>
     <string name="poi_context_menu_call">POI-Telefon anzeigen</string>
     <string name="website">Webseite</string>
     <string name="phone">Telefon</string>
@@ -2564,7 +2564,7 @@
     <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
-    <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
+    <string name="import_gpx_file_description">kann als Favorit oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
     <string name="notes_by_date">Audio-/Videonotizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
@@ -2756,8 +2756,8 @@
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
     <string name="thank_you_for_feedback">Danke für Ihr Feedback</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
-    <string name="search_no_results_feedback">Keine Suchergebnisse?
-\nGeben Sie uns eine Rückmeldung</string>
+    <string name="search_no_results_feedback">Keine Suchergebnisse\?
+\nGeben Sie uns eine Rückmeldung.</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen</string>
     <string name="ask_for_location_permission">Bitte gewähren Sie OsmAnd den Zugriff auf den Standort, um fortzufahren.</string>
     <string name="rendering_value_black_name">Schwarz</string>
@@ -4557,7 +4557,7 @@
     <string name="routing_attr_carriage_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für Pferdefuhrwerke</string>
     <string name="rendering_attr_showLightRailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_showMonorailRoutes_name">Monoraillinien</string>
-    <string name="rendering_attr_showFunicularRoutes_name">Kabelgetriebene Linien</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Standseilbahnlinien</string>
     <string name="rendering_attr_showBusRoutes_name">Buslinien</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Oberleitungsbuslinien</string>
     <string name="map_markers_bar">Leiste für Kartenmarkierungen</string>
