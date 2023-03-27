@@ -4541,4 +4541,10 @@
     <string name="poi_recycling_refund_bottles">可退款瓶子</string>
     <string name="poi_recycling_second_hand">二手</string>
     <string name="poi_waste_dog_excrement">狗大便</string>
+    <string name="poi_sinkhole_bluehole">天坑：藍洞</string>
+    <string name="poi_sinkhole_estavelle">天坑：estavelle</string>
+    <string name="poi_sinkhole_doline">天坑：漏斗坑</string>
+    <string name="poi_sinkhole_pit">天坑：坑洞</string>
+    <string name="poi_sinkhole_ponor">天坑：ponor</string>
+    <string name="poi_barrier_coupure">障礙切割</string>
 </resources>
