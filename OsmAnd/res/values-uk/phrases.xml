@@ -4548,4 +4548,6 @@
     <string name="poi_sinkhole_bluehole">Воронка: блакитна дірка</string>
     <string name="poi_sinkhole_estavelle">Воронка: еставела</string>
     <string name="poi_barrier_coupure">Загороджувальний бар\'єр</string>
+    <string name="poi_barrier_spikes">Шипи</string>
+    <string name="poi_barrier_planter">Плантатор</string>
 </resources>
