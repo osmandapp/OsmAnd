@@ -4535,7 +4535,7 @@
     <string name="poi_recycling_small_metal">أجزاء معدنية صغيرة</string>
     <string name="poi_sinkhole_doline">بالوعة: دولين</string>
     <string name="poi_sinkhole_pit">بالوعة: حفرة</string>
-    <string name="poi_barrier_coupure">حاجز كوبر</string>
+    <string name="poi_barrier_coupure">حاجز فيضان جداري (كوبر )</string>
     <string name="poi_sinkhole_estavelle">بالوعة: استافيل</string>
     <string name="poi_sinkhole_bluehole">بالوعة: ثقب أزرق</string>
     <string name="poi_sinkhole_ponor">بالوعة: بونور</string>
