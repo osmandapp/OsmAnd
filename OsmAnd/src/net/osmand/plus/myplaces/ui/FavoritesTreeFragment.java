@@ -60,7 +60,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
@@ -670,10 +671,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		List<FavoriteGroup> groups = new ArrayList<FavoriteGroup>();
 		Filter myFilter;
 		private Set<?> filter;
-		private final UiUtilities.UpdateLocationViewCache cache;
+		private final UpdateLocationViewCache cache;
 
 		FavouritesAdapter() {
-			cache = app.getUIUtilities().getUpdateLocationViewCache();
+			cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		}
 
 		void synchronizeGroups() {
@@ -897,7 +898,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			ImageView direction = row.findViewById(R.id.direction);
-			app.getUIUtilities().updateLocationView(cache, direction, distanceText, model.getLatitude(), model.getLongitude());
+			UpdateLocationUtils.updateLocationView(app, cache, direction, distanceText, model.getLatitude(), model.getLongitude());
 			if (model.isAddressSpecified()) {
 				String addComma = app.getString(R.string.ltr_or_rtl_combine_via_comma);
 				distanceText.setText(String.format(addComma, distanceText.getText(), ""));

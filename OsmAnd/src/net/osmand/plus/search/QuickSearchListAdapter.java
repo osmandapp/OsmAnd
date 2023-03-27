@@ -52,7 +52,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
@@ -103,7 +104,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 	}
 
 	public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {
@@ -721,7 +722,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
 		LatLon toloc = listItem.getSearchResult().location;
-		app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, toloc);
+		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
 	}
 
 	private boolean isNightMode() {

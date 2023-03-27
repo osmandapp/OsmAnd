@@ -34,7 +34,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.OsmAndListFragment;
@@ -128,7 +129,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
 		location = null;
 		FragmentActivity activity = getActivity();
-		updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(getMyApplication());
 		Intent intent = activity.getIntent();
 		if (intent != null) {
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
@@ -240,7 +241,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			updateHistoryItem(historyEntry, row, location, getMyApplication());
 			TextView distanceText = row.findViewById(R.id.distance);
 			ImageView direction = row.findViewById(R.id.direction);
-			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, 
+			UpdateLocationUtils.updateLocationView(getMyApplication(), updateLocationViewCache,
 					direction, distanceText, historyEntry.getLat(),
 					historyEntry.getLon());
 			ImageButton options = row.findViewById(R.id.options);

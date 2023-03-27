@@ -80,15 +80,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
@@ -125,12 +123,14 @@ import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSe
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -138,7 +138,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.util.Algorithms;
@@ -297,7 +298,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		displayHelper = new TrackDisplayHelper(app);
 		uiUtilities = app.getUIUtilities();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
-		updateLocationViewCache = uiUtilities.getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 		if (selectedGpxFile == null && savedInstanceState != null) {
@@ -921,7 +922,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			View view = overviewCard.getView();
 			TextView distanceText = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);
-			uiUtilities.updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
+			UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, latLon);
 		}
 	}
 

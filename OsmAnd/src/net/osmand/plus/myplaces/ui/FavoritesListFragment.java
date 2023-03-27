@@ -27,15 +27,16 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.text.Collator;
@@ -171,7 +172,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			this.activity = activity;
 			this.app = ((OsmandApplication) activity.getApplication());
 			this.shouldShowMenuButton = shouldShowMenuButton;
-			cache = app.getUIUtilities().getUpdateLocationViewCache();
+			cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		}
 
 
@@ -238,7 +239,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			icon.setImageDrawable(PointImageDrawable.getFromFavorite(activity, app.getFavoritesHelper().getColorWithCategory(favorite,
 					app.getColor(R.color.color_favorite)), false, favorite));
 			 
-			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
+			UpdateLocationUtils.updateLocationView(app, cache, direction, distanceText,
 					favorite.getLatitude(), favorite.getLongitude());
 			name.setText(getName(favorite));
 			CheckBox ch = row.findViewById(R.id.toggle_item);
