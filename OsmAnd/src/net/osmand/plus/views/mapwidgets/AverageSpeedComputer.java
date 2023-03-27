@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -65,7 +65,7 @@ public class AverageSpeedComputer {
 	public void updateLocation(@Nullable Location location) {
 		if (location != null) {
 			long time = System.currentTimeMillis();
-			boolean save = isEnabled() && OsmAndLocationProvider.isNotSimulatedLocation(location);
+			boolean save = isEnabled() && SimulationProvider.isNotSimulatedLocation(location);
 			if (save) {
 				saveLocation(location, time);
 			}
