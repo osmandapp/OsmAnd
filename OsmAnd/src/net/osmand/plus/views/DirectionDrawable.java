@@ -1,9 +1,5 @@
 package net.osmand.plus.views;
 
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -14,6 +10,11 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 /**
  * Created by Denis
@@ -96,15 +97,15 @@ public class DirectionDrawable extends Drawable {
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
 		if (arrowImage != null) {
-			Rect r = bounds;
+			Rect rect = bounds;
 			int w = arrowImage.getIntrinsicWidth();
 			int h = arrowImage.getIntrinsicHeight();
-			int dx = Math.max(0, r.width() - w);
-			int dy = Math.max(0, r.height() - h);
-			if(r.width() == 0 && r.height() == 0) {
+			int dx = Math.max(0, rect.width() - w);
+			int dy = Math.max(0, rect.height() - h);
+			if(rect.width() == 0 && rect.height() == 0) {
 				arrowImage.setBounds(0, 0, w, h);
 			} else {
-				arrowImage.setBounds(r.left + dx / 2, r.top + dy / 2, r.right - dx / 2, r.bottom - dy / 2);
+				arrowImage.setBounds(rect.left + dx / 2, rect.top + dy / 2, rect.right - dx / 2, rect.bottom - dy / 2);
 			}
 		}
 	}

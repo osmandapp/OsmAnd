@@ -46,14 +46,11 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -184,6 +181,7 @@ public class UiUtilities {
 		return drawable;
 	}
 
+	@Nullable
 	public static Drawable getSelectableDrawable(Context ctx) {
 		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
 		if (bgResId != 0) {
@@ -212,114 +210,6 @@ public class UiUtilities {
 		}
 
 		return coloredDrawable;
-	}
-
-	public UpdateLocationViewCache getUpdateLocationViewCache() {
-		return getUpdateLocationViewCache(true);
-	}
-
-	public UpdateLocationViewCache getUpdateLocationViewCache(boolean useScreenOrientation) {
-		UpdateLocationViewCache uvc = new UpdateLocationViewCache();
-		if (useScreenOrientation) {
-			uvc.screenOrientation = getScreenOrientation();
-		}
-		return uvc;
-	}
-
-	public static class UpdateLocationViewCache {
-		int screenOrientation;
-		public boolean paintTxt = true;
-		public int arrowResId;
-		public int arrowColor;
-		public int textColor;
-		public LatLon specialFrom;
-	}
-
-	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
-			double toLat, double toLon) {
-		updateLocationView(cache, arrow, txt, new LatLon(toLat, toLon));
-	}
-
-	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
-			LatLon toLoc) {
-		float[] mes = new float[2];
-		boolean stale = false;
-		LatLon fromLoc = cache == null ? null : cache.specialFrom;
-		boolean useCenter = fromLoc != null;
-		Float h = null;
-		if (fromLoc == null) {
-			Location loc = app.getLocationProvider().getLastKnownLocation();
-			h = app.getLocationProvider().getHeading();
-			if (loc == null) {
-				loc = app.getLocationProvider().getLastStaleKnownLocation();
-				stale = true;
-			}
-			if (loc != null) {
-				fromLoc = new LatLon(loc.getLatitude(), loc.getLongitude());
-			} else {
-				useCenter = true;
-				stale = false;
-				fromLoc = app.getMapViewTrackingUtilities().getMapLocation();
-				h = app.getMapViewTrackingUtilities().getMapRotate();
-				if (h != null) {
-					h = -h;
-				}
-			}
-		}
-		if (fromLoc != null && toLoc != null) {
-			Location.distanceBetween(toLoc.getLatitude(), toLoc.getLongitude(), fromLoc.getLatitude(),
-					fromLoc.getLongitude(), mes);
-		}
-
-		if (arrow != null) {
-			boolean newImage = false;
-			int arrowResId = cache == null ? 0 : cache.arrowResId;
-			if (arrowResId == 0) {
-				arrowResId = R.drawable.ic_direction_arrow;
-			}
-			DirectionDrawable dd;
-			if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
-				newImage = true;
-				dd = new DirectionDrawable(app, arrow.getWidth(), arrow.getHeight());
-			} else {
-				dd = (DirectionDrawable) arrow.getDrawable();
-			}
-			int imgColorSet = cache == null ? 0 : cache.arrowColor;
-			if (imgColorSet == 0) {
-				imgColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
-				if (stale) {
-					imgColorSet = R.color.icon_color_default_light;
-				}
-			}
-			dd.setImage(arrowResId, imgColorSet);
-			if (fromLoc == null || h == null || toLoc == null) {
-				dd.setAngle(0);
-			} else {
-				float orientation = (cache == null ? 0 : cache.screenOrientation);
-				dd.setAngle(mes[1] - h + 180 + orientation);
-			}
-			if (newImage) {
-				arrow.setImageDrawable(dd);
-			}
-			arrow.invalidate();
-		}
-		if (txt != null) {
-			if (fromLoc != null && toLoc != null) {
-				if (cache.paintTxt) {
-					int textColorSet = cache.textColor;
-					if (textColorSet == 0) {
-						textColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
-						if (stale) {
-							textColorSet = R.color.icon_color_default_light;
-						}
-					}
-					txt.setTextColor(ColorUtilities.getColor(app, textColorSet));
-				}
-				txt.setText(OsmAndFormatter.getFormattedDistance(mes[0], app));
-			} else {
-				txt.setText("");
-			}
-		}
 	}
 
 	public int getScreenOrientation() {
@@ -550,9 +440,9 @@ public class UiUtilities {
 	}
 
 	public static void setupCompoundButton(CompoundButton compoundButton,
-										   @ColorInt int activeColor,
-										   @ColorInt int inactiveColorPrimary,
-										   @ColorInt int inactiveColorSecondary) {
+	                                       @ColorInt int activeColor,
+	                                       @ColorInt int inactiveColorPrimary,
+	                                       @ColorInt int inactiveColorSecondary) {
 		if (compoundButton == null) {
 			return;
 		}
@@ -639,7 +529,7 @@ public class UiUtilities {
 	}
 
 	public static void setupSlider(RangeSlider slider, boolean nightMode,
-								   @ColorInt Integer activeColor, boolean showTicks) {
+	                               @ColorInt Integer activeColor, boolean showTicks) {
 		Context ctx = slider.getContext();
 		if (ctx == null) {
 			return;

@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageDrawable;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
 		this.app = app;
 		this.favouritePoints = FavouritePoints;
-		cache = app.getUIUtilities().getUpdateLocationViewCache();
+		cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 					PointImageDrawable.getFromFavorite(app,
 							app.getFavoritesHelper().getColorWithCategory(favouritePoint,
 									ContextCompat.getColor(app, R.color.color_favorite)), false, favouritePoint));
-			app.getUIUtilities().updateLocationView(cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,
+			UpdateLocationUtils.updateLocationView(app, cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,
 					favouritePoint.getLatitude(), favouritePoint.getLongitude());
 		}
 	}

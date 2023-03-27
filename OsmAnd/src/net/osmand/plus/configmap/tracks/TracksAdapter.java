@@ -17,7 +17,8 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.util.Algorithms;
 
 import java.util.Set;
@@ -44,7 +45,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.trackTab = trackTab;
 		this.fragment = fragment;
 		this.nightMode = nightMode;
-		this.locationViewCache = uiUtilities.getUpdateLocationViewCache();
+		this.locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
 		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 	}
