@@ -205,6 +205,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		progress.setCancelable(true);
 		progress.setTitle(app.getString(R.string.shared_string_export));
 		progress.setMessage(app.getString(R.string.shared_string_preparing));
+		progress.setProgressNumberFormat("%1d/%2d MB");
 		progress.setButton(DialogInterface.BUTTON_NEGATIVE, app.getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
