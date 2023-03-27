@@ -5046,4 +5046,6 @@
     <string name="shared_string_original">Oryginalny</string>
     <string name="app_mode_moped">Motorower</string>
     <string name="enable_3d_maps">Włącz mapy 3D</string>
+    <string name="clear_online_cache_description">Spowoduje to wyczyszczenie całej pamięci podręcznej kafelka pogody online.</string>
+    <string name="free_maps_updates">Bezpłatne aktualizacje (awaryjne)</string>
 </resources>
