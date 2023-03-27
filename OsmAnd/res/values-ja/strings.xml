@@ -414,9 +414,9 @@ POIの更新は利用できません</string>
     <string name="choose_intersected_street">交差する通りを選択</string>
     <string name="Closest_Amenities">いちばん近い施設</string>
     <string name="app_mode_default">地図閲覧</string>
-    <string name="app_mode_car">車移動</string>
-    <string name="app_mode_bicycle">二輪車移動</string>
-    <string name="app_mode_pedestrian">徒歩移動</string>
+    <string name="app_mode_car">車移動等</string>
+    <string name="app_mode_bicycle">二輪車移動等</string>
+    <string name="app_mode_pedestrian">徒歩移動等</string>
     <string name="position_on_map_center">中央</string>
     <string name="position_on_map_bottom">下</string>
     <string name="navigate_point_top_text">選択した形式で緯度と経度を入力 (D - 度, M - 分, S - 秒)</string>
@@ -2275,14 +2275,13 @@ POIの更新は利用できません</string>
  • GPXレコーディングオプションを使用すると、経路を記録して共有することができます
  • 追加のプラグインを使用して、等高線と山陰を表示することができます
  "</string>
-    <string name="osmand_extended_description_part6">"
- ウォーキング、ハイキング、市内ツアー
- • 地図には、徒歩移動やハイキング向け道が表示されます
- • 親しんだ言語のウィキペディアは、市内ツアー中に多くの情報をもたらしてくれます
- • 公共交通機関の停留所や駅(バス、路面電車、電車)、路線名の表示は、初めて訪れた市街での移動に役立ちます
- • 歩行者モードでのGPSナビゲーションは、徒歩移動向け経路を使用してルートを構築します。
- • ルートや記録を含んだGPXファイルをアップロードしたり、フォローしたり、自分自身で共有することができます
- "</string>
+    <string name="osmand_extended_description_part6">ウォーキング、ハイキング、市内観光
+\n• 地図には、徒歩移動やハイキング向けの道が表示されます
+\n• 慣れ親しんだ言語でのWikipediaならば、観光中により多くの情報をもたらしてくれます
+\n• 公共交通機関の停留所や駅(バス、路面電車、電車)、路線名の表示は、初めて訪れた市街での移動に役立ちます
+\n• 歩行者モードでのGPSナビゲーションは、徒歩移動向け経路を使用してルートを構築します
+\n• ルートなどの記録を含んだGPXファイルをアップロードしたり、フォローしたり、自分自身で共有することができます
+\n</string>
     <string name="osmand_extended_description_part7">"
  OSMに寄与
  • データ、バグの報告ができます
@@ -3698,7 +3697,7 @@ POIの更新は利用できません</string>
     <string name="speed_cameras_alert">一部の国では、スピードカメラ有無の事前警告は法律で禁止されています。</string>
     <string name="screen_timeout_descr">\"%1$s\"がオンの場合、設定された動作時間はそちらに依存します。</string>
     <string name="default_screen_timeout">端末設定の画面スリープ時間に従う</string>
-    <string name="shared_string_tones">トーン</string>
+    <string name="shared_string_tones">トン</string>
     <string name="shared_string_meters">メートル</string>
     <string name="details_dialog_decr">追加マップの詳細を表示または非表示にします</string>
     <string name="shared_string_night_map">夜間マップ</string>
@@ -4055,7 +4054,7 @@ POIの更新は利用できません</string>
     <string name="navigate_point_format_mgrs">MGRS(Military Grid Reference System)</string>
     <string name="mgrs_format_descr">OsmAndは、UTM NATO形式類似のMGRSを使用します。</string>
     <string name="shared_string_legend">凡例</string>
-    <string name="n_items_of_z">%1$s (全%2$s)</string>
+    <string name="n_items_of_z">%1$s／%2$s</string>
     <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
     <string name="track_coloring_solid">通常色</string>
     <string name="in_case_of_reverse_direction">逆方向の場合</string>
