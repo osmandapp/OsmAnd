@@ -35,8 +35,6 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 	private static final String TAG = SpeedLimitBottomSheet.class.getSimpleName();
 
 	private static final String SELECTED_VALUE = "selected_value";
-	private static final float MIN_VALUE_KM_H = -10;
-	private static final float MAX_VALUE_KM_H = 20;
 
 	private OsmandApplication app;
 	private float selectedValue;
@@ -70,24 +68,41 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.selected_value);
 
+		Slider slider = view.findViewById(R.id.slider);
 		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(appMode));
+		float convertedLimitFrom = getFormattedSpeedValue(appMode.getMinSpeedToleranceLimit(), app, appMode.isSpeedToleranceBigRange(), speedFormat).valueSrc;
+		float convertedLimitTo = getFormattedSpeedValue(appMode.getMaxSpeedToleranceLimit(), app, appMode.isSpeedToleranceBigRange(), speedFormat).valueSrc;
+		float convertedSelectedValue = getFormattedSpeedValue(selectedValue / 3.6f, app, appMode.isSpeedToleranceBigRange(), speedFormat).valueSrc;
+		if (convertedSelectedValue > convertedLimitTo) {
+			convertedSelectedValue = convertedLimitTo;
+		} else if (convertedSelectedValue < convertedLimitFrom) {
+			convertedSelectedValue = convertedLimitFrom;
+		}
+		float step = 0.1f;
+		if (appMode.isSpeedToleranceBigRange()) {
+			convertedSelectedValue = getIntegerSpeed(convertedSelectedValue);
+			convertedLimitFrom = getIntegerSpeed(convertedLimitFrom);
+			convertedLimitTo = getIntegerSpeed(convertedLimitTo);
+			step = 1f;
+		}
+		slider.setValue(convertedSelectedValue);
+		slider.setValueFrom(convertedLimitFrom);
+		slider.setValueTo(convertedLimitTo);
+		slider.setStepSize(step);
+
 		TextView summary = view.findViewById(R.id.summary);
-		summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
+		summary.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedSelectedValue, speedFormat), app, appMode.isSpeedToleranceBigRange(), speedFormat));
 
 		TextView fromTv = view.findViewById(R.id.from_value);
-		fromTv.setText(getFormattedSpeed(MIN_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
+		fromTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitFrom, speedFormat), app, appMode.isSpeedToleranceBigRange(), speedFormat));
 
 		TextView toTv = view.findViewById(R.id.to_value);
-		toTv.setText(getFormattedSpeed(MAX_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
+		toTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitTo, speedFormat), app, appMode.isSpeedToleranceBigRange(), speedFormat));
 
-		Slider slider = view.findViewById(R.id.slider);
-		slider.setValue(Float.parseFloat(getFormattedSpeedValue(selectedValue / 3.6f, app, appMode.hasFastSpeed(), speedFormat).value));
-		slider.setValueFrom(Float.parseFloat(getFormattedSpeedValue(MIN_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat).value));
-		slider.setValueTo(Float.parseFloat(getFormattedSpeedValue(MAX_VALUE_KM_H / 3.6f, app, appMode.hasFastSpeed(), speedFormat).value));
-		slider.setStepSize(1f);
 		slider.addOnChangeListener((s, value, fromUser) -> {
-			selectedValue = (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER);
-			summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode.hasFastSpeed(), speedFormat));
+			float selectedSpeedInMS = getMpSFromFormattedValue(value, speedFormat);
+			selectedValue = selectedSpeedInMS * 3.6f;
+			summary.setText(getFormattedSpeed(selectedSpeedInMS, app, appMode.isSpeedToleranceBigRange(), speedFormat));
 		});
 
 		int color = appMode.getProfileColor(nightMode);
@@ -96,6 +111,18 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create();
+	}
+
+	private float getMpSFromFormattedValue(float value, SpeedConstants speedFormat) {
+		return (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER) / 3.6f;
+	}
+
+	private int getIntegerSpeed(float floatSpeed) {
+		if (floatSpeed < 0) {
+			return (int) Math.floor(floatSpeed);
+		} else {
+			return (int) Math.ceil(floatSpeed);
+		}
 	}
 
 	@Override

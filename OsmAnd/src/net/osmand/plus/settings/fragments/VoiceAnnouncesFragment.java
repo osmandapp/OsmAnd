@@ -111,8 +111,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		float selectedValue = settings.SPEED_LIMIT_EXCEED_KMH.getModeValue(getSelectedAppMode());
 		ApplicationMode mode = getSelectedAppMode();
 		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(mode));
-		String value = OsmAndFormatter.getFormattedSpeed(selectedValue / 3.6f, app, mode.hasFastSpeed(), speedFormat);
+		String value = OsmAndFormatter.getFormattedSpeed(selectedValue / 3.6f, app, mode.isSpeedToleranceBigRange(), speedFormat);
 		preference.setSummary(value);
+		preference.setVisible(settings.SPEAK_SPEED_LIMIT.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupVoiceProviderPref() {
