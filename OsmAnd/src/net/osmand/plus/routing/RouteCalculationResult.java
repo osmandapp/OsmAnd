@@ -1,6 +1,11 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -29,11 +34,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
@@ -224,7 +224,7 @@ public class RouteCalculationResult {
 				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
 				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
 				for (int currentLocation = prevLocation; currentLocation < locations.size();
-					 currentLocation++) {
+				     currentLocation++) {
 					double currentDistance = getDistanceToLocation(locations, currentIntermediatePoint, currentLocation);
 					if (currentDistance < setDistance) {
 						interLocations[currentIntermediate] = currentLocation;
@@ -1006,6 +1006,7 @@ public class RouteCalculationResult {
 		return 0;
 	}
 
+	@Nullable
 	public RouteSegmentResult getCurrentSegmentResult() {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		if (cs < segments.size()) {
@@ -1014,6 +1015,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	@Nullable
 	public RouteSegmentResult getNextStreetSegmentResult() {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		while (cs < segments.size()) {
@@ -1026,6 +1028,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		if (cs < segments.size()) {
@@ -1134,9 +1137,10 @@ public class RouteCalculationResult {
 		return nextIntermediate;
 	}
 
-	public Location getLocationFromRouteDirection(RouteDirectionInfo i) {
-		if (i != null && locations != null && i.routePointOffset < locations.size()) {
-			return locations.get(i.routePointOffset);
+	@Nullable
+	public Location getLocationFromRouteDirection(RouteDirectionInfo info) {
+		if (info != null && locations != null && info.routePointOffset < locations.size()) {
+			return locations.get(info.routePointOffset);
 		}
 		return null;
 	}
@@ -1179,7 +1183,9 @@ public class RouteCalculationResult {
 		return info;
 	}
 
-	/*public */NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
+	/*public */
+	@Nullable
+	NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
 		int dirInfo = prev.directionInfoInd;
 		if (dirInfo < directions.size() && prev.directionInfo != null) {
 			int dist = getListDistance(prev.directionInfo.routePointOffset);
@@ -1246,6 +1252,7 @@ public class RouteCalculationResult {
 		return Collections.emptyList();
 	}
 
+	@Nullable
 	public Location getNextRouteLocation() {
 		if (currentRoute < locations.size()) {
 			return locations.get(currentRoute);
@@ -1253,6 +1260,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	@Nullable
 	public Location getNextRouteLocation(int after) {
 		if (currentRoute + after >= 0 && currentRoute + after < locations.size()) {
 			return locations.get(currentRoute + after);
@@ -1277,6 +1285,7 @@ public class RouteCalculationResult {
 		return currentDirectionInfo < directions.size();
 	}
 
+	@Nullable
 	public RouteDirectionInfo getCurrentDirection() {
 		if (currentDirectionInfo < directions.size()) {
 			return directions.get(currentDirectionInfo);

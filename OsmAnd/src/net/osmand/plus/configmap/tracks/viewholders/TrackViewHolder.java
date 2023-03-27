@@ -39,11 +39,12 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationInfo;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -55,7 +56,6 @@ import java.util.Date;
 public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
-	private final UiUtilities uiUtilities;
 	private final GpxDbHelper gpxDbHelper;
 
 	private final UpdateLocationViewCache locationViewCache;
@@ -64,7 +64,6 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private final TextView title;
 	private final TextView description;
-	private final TextView distanceTv;
 	private final ImageView imageView;
 	private final CompoundButton checkbox;
 	private final View divider;
@@ -75,14 +74,12 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		super(itemView);
 		this.app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		this.gpxDbHelper = app.getGpxDbHelper();
-		this.uiUtilities = app.getUIUtilities();
 		this.locationViewCache = viewCache;
 		this.fragment = fragment;
 		this.nightMode = nightMode;
 
 		title = itemView.findViewById(R.id.title);
 		description = itemView.findViewById(R.id.description);
-		distanceTv = itemView.findViewById(R.id.distance);
 		directionIcon = itemView.findViewById(R.id.direction_icon);
 		checkbox = itemView.findViewById(R.id.checkbox);
 		imageView = itemView.findViewById(R.id.track_icon);
@@ -110,13 +107,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		if (dataItem != null) {
 			buildDescriptionRow(adapter, dataItem, trackItem);
 		} else if (file != null) {
-			dataItem = gpxDbHelper.getItem(file, new GpxDataItemCallback() {
-				@Override
-				public void onGpxDataItemReady(GpxDataItem item) {
-					trackItem.setDataItem(item);
-					if (item != null && fragment.isAdded()) {
-						adapter.notifyItemChanged(getAdapterPosition());
-					}
+			dataItem = gpxDbHelper.getItem(file, item -> {
+				trackItem.setDataItem(item);
+				if (fragment.isAdded()) {
+					adapter.notifyItemChanged(getAdapterPosition());
 				}
 			});
 			if (dataItem != null) {
@@ -131,7 +125,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 		TrackTab trackTab = adapter.getTrackTab();
 		TracksSortMode sortMode = trackTab.getSortMode();
-		GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;
+		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
 			SpannableStringBuilder builder = new SpannableStringBuilder();
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
@@ -149,9 +143,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			}
 			description.setText(builder);
 		}
-		boolean showDistance = sortMode == NEAREST && analysis != null && analysis.latLonStart != null;
-		AndroidUiHelper.updateVisibility(distanceTv, showDistance);
-		AndroidUiHelper.updateVisibility(directionIcon, showDistance);
+		boolean showDirection = sortMode == NEAREST && analysis != null && analysis.latLonStart != null;
+		AndroidUiHelper.updateVisibility(directionIcon, showDirection);
 	}
 
 	private void setupIcon(@NonNull GpxDataItem dataItem) {
@@ -165,7 +158,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void appendNameDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
@@ -177,11 +170,11 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			DateFormat format = app.getResourceManager().getDateFormat();
 			builder.append(format.format(new Date(analysis.startTime)));
 			setupTextSpan(builder);
-			builder.append(" \u007C ");
+			builder.append(" | ");
 		}
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
@@ -193,11 +186,11 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			DateFormat format = app.getResourceManager().getDateFormat();
 			builder.append(format.format(new Date(lastModified)));
 			setupTextSpan(builder);
-			builder.append(" \u007C ");
+			builder.append(" | ");
 		}
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
@@ -208,7 +201,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		setupTextSpan(builder);
 
 		if (analysis.isTimeSpecified()) {
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
@@ -219,7 +212,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		if (analysis.isTimeSpecified()) {
 			appendDuration(builder, analysis);
 			setupTextSpan(builder);
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 		}
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
@@ -232,13 +225,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	                                      @NonNull TrackItem trackItem,
 	                                      @NonNull GPXTrackAnalysis analysis) {
 		if (analysis.latLonStart != null) {
+			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, analysis.latLonStart);
+			builder.append(UpdateLocationUtils.getFormattedDistance(app, locationInfo, locationViewCache));
 			appendRegionName(adapter, analysis.latLonStart, builder, trackItem);
-			builder.append(" \u007C ");
-			uiUtilities.updateLocationView(locationViewCache, directionIcon, distanceTv, analysis.latLonStart);
+			builder.append(" | ");
+			UpdateLocationUtils.updateDirectionDrawable(app, directionIcon, locationInfo, locationViewCache);
 		}
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
@@ -248,7 +243,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	                              @NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem) {
 		String regionName = trackItem.getRegionName();
 		if (regionName != null) {
-			builder.append(", " + regionName);
+			builder.append(", ").append(regionName);
 		} else {
 			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, region -> {
 				trackItem.setRegionName(region != null ? region.getLocaleName() : "");
@@ -269,7 +264,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendPoints(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
 		if (analysis.wptPoints > 0) {
-			builder.append(" \u2022 ");
+			builder.append(" • ");
 			builder.append(String.valueOf(analysis.wptPoints));
 		}
 	}
@@ -277,7 +272,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void appendFolderName(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem) {
 		String folderName = getFolderName(trackTab, trackItem);
 		if (!Algorithms.isEmpty(folderName)) {
-			builder.append(" \u007C ");
+			builder.append(" | ");
 			builder.append(Algorithms.capitalizeFirstLetter(folderName));
 		}
 	}
