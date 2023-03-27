@@ -2999,7 +2999,7 @@
     <string name="downloaded_maps_collect_descr">Pomozte nám pochopit, které regiony a země jsou v mapách nejpopulárnější.</string>
     <string name="visited_screens_collect_descr">Pomůže nám zjistit popularitu funkcí OsmAnd.</string>
     <string name="osmand_routing_promo">Přidejte svou vlastní upravenou verzi souboru routing.xml v ..osmand/routing</string>
-    <string name="press_again_to_change_the_map_orientation">Klepněte znovu pro změnu orientace mapy</string>
+    <string name="press_again_to_change_the_map_orientation">Dalším klepnutím změníte orientaci mapy</string>
     <string name="shared_string_min_speed">Min. rychlost</string>
     <string name="shared_string_max_speed">Max. rychlost</string>
     <string name="default_speed_setting_title">Výchozí rychlost</string>
@@ -4218,7 +4218,7 @@
     <string name="from_to_with_params">Z %1$s do %2$s</string>
     <string name="progress_complete">%1$s hotovo</string>
     <string name="storage_found_files_descr">Stiskněte \"%1$s\" pro zkopírování %2$s souborů z \"%3$s\" do \"%4$s\". Může to chvíli trvat.</string>
-    <string name="storage_copied_files_size">Zkopírováno %1$s souborů %2$s</string>
+    <string name="storage_copied_files_size">Zpracováno %1$s souborů, %2$s</string>
     <string name="storage_copying_files_size">Kopírování %1$s souborů %2$s</string>
     <string name="storage_found_files_size">Nalezeno %1$s souborů %2$s</string>
     <string name="shared_string_skip_warning">Přeskočit migraci\? OsmAnd již nemá přístup k vašim souborům ve sdíleném úložišti.
@@ -4439,7 +4439,7 @@
     <string name="no_items_selected_warning">Vyberte prosím aspoň jednu položku</string>
     <string name="display_groups_visibility_dialog_description">Můžete nastavit viditelnost skupin na mapě. Je-li stopa skrytá, všechny skupiny budou také skryté.</string>
     <string name="shared_string_hide_all">Skrýt vše</string>
-    <string name="migration_files_present">Ve vybraném umístění \'%3$s\' se nachází %1$d souborů (%2$s).</string>
+    <string name="migration_files_present">%1$d soubor(y) (%2$s) se již nachází v cíli \'%3$s\' a nebyl přepsán.</string>
     <string name="exit_without_saving_warning">Ukončit bez uložení změn\?</string>
     <string name="shared_string_precision">Přesnost</string>
     <string name="gps_filter_hdop_desc">Zadejte maximální přípustnou hodnotu pro HDOP.
@@ -5042,7 +5042,7 @@
     <string name="simulation_constant_mode_title">Stálá rychlost</string>
     <string name="simulation_preview_mode_desc">Rychlost simulace bude maximální na rovných úsecích a zpomalí se pouze na křižovatkách.</string>
     <string name="shared_string_inches">palců</string>
-    <string name="approximate_bearing_descr">Výpočet směru, pokud není přijat ze zařízení</string>
+    <string name="approximate_bearing_descr">Odvození azimutu od sledované navigační trasy.</string>
     <string name="approximate_bearing">Přibližné určení polohy</string>
     <string name="inch">na</string>
     <string name="sound_beep_minimal">Pípnutí: minimální</string>
@@ -5058,7 +5058,7 @@
     <string name="shared_string_in_progress">Probíhá</string>
     <string name="shared_string_original">Originál</string>
     <string name="movement_speed">Rychlost pohybu</string>
-    <string name="simulation_position_description">Vyberte soubor stopy, který chcete použít pro navádění pohybem.</string>
+    <string name="simulation_position_description">Vyberte soubor stopy, který bude použit jako zdroj pro přesun polohy.</string>
     <string name="shared_string_add_manually">Přidejte ručně…</string>
     <string name="release_4_4">- Vylepšená nabídka \"Stopy\" v \"Konfiguraci mapy\"
 \n
@@ -5072,7 +5072,7 @@
 \n
 \n - Zjednodušená úvodní obrazovka
 \n
-\n - Pevná poloha polohy v režimu rozdělené obrazovky v systému Android Auto
+\n - Opravena poloha polohy v režimu rozdělené obrazovky v systému Android Auto
 \n
 \n - Přidán graf \"Rychlost/Sklon\" pro analýzu trasy
 \n
@@ -5080,5 +5080,44 @@
 \n
 \n - Opraveny problémy se zobrazováním veganských míst
 \n
+\n - Přidána možnost stahování online dlaždic používaných jako \"Překryvné\" nebo \"Podkryvné\" mapy
+\n
+\n - Přidána podpora imperiálních jednotek pro \"Parametry vozidla\"
+\n
+\n - Nový profil Moped
+\n
+\n - Do položky \"Zobrazení polohy\" byla přidána nová možnost \"Automaticky\"
+\n
+\n - Opravena gesta pro naklápění, přibližování a otáčení mapy
+\n
 \n</string>
+    <string name="enable_3d_maps">Povolení 3D map</string>
+    <string name="generate_hillshade_from_3d_maps">Generování rastrových map kopců z 3D map</string>
+    <string name="sort_distance_ascending">Nejkratší vzdálenost jako první</string>
+    <string name="sort_distance_descending">Nejdelší vzdálenost jako první</string>
+    <string name="sort_date_ascending">Nejnovější datum jako první</string>
+    <string name="sort_date_descending">Nejstarší datum jako první</string>
+    <string name="selected_value">Vybraná hodnota</string>
+    <string name="sort_duration_ascending">Nejdříve kratší doba trvání</string>
+    <string name="sort_duration_descending">Nejdříve delší doba trvání</string>
+    <string name="clear_online_cache_description">Tím vymažete veškerou mezipaměť pro dlaždice počasí online.</string>
+    <string name="clear_online_cache">Vymazání mezipaměti online</string>
+    <string name="offline_cache">Offline vyrovnávací paměť</string>
+    <string name="shared_string_alt_name">Alternativní název</string>
+    <string name="token_is_not_valid">Token není platný</string>
+    <string name="app_mode_climbing">Horolezectví</string>
+    <string name="generate_slope_from_3d_maps">Generování rastrových map svahů z 3D map</string>
+    <string name="disable_vertex_hillshade_3d">Zakázat stínování vrcholů ve 3D</string>
+    <string name="test_heightmap">Test výškové mapy</string>
+    <string name="common_weight_limit_error">Minimální hodnota je \"%1$s\" %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%3$s\".</string>
+    <string name="shared_string_pounds">libry</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="shared_string_all_world">Celý svět</string>
+    <string name="weather_forecast_is_outdated">Předpověď je zastaralá.</string>
+    <string name="weather_forecast">Předpověď počasí</string>
+    <string name="offline_weather_forecast">Offline předpověď počasí</string>
+    <string name="offline_weather_forecast_desc">Můžete si stáhnout předpověď počasí na 7 dní.</string>
+    <string name="free_maps_updates">Bezplatné aktualizace (nouzové)</string>
+    <string name="app_mode_moped">Moped</string>
+    <string name="shared_string_nearest">Nejbližší</string>
 </resources>
