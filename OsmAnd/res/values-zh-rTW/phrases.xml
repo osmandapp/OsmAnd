@@ -4547,4 +4547,6 @@
     <string name="poi_sinkhole_pit">天坑：坑洞</string>
     <string name="poi_sinkhole_ponor">天坑：ponor</string>
     <string name="poi_barrier_coupure">障礙切割</string>
+    <string name="poi_barrier_planter">花盆</string>
+    <string name="poi_barrier_spikes">輪胎放氣裝置</string>
 </resources>
