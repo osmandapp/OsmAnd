@@ -32,6 +32,8 @@ import java.util.Set;
 public class ApplicationMode {
 
 	public static final float FAST_SPEED_THRESHOLD = 10;
+	private static final float MIN_VALUE_KM_H = -10;
+	private static final float MAX_VALUE_KM_H = 20;
 
 	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
 	private static final List<ApplicationMode> values = new ArrayList<>();
@@ -281,6 +283,18 @@ public class ApplicationMode {
 
 	public void setMaxSpeed(float defaultSpeed) {
 		app.getSettings().MAX_SPEED.setModeValue(this, defaultSpeed);
+	}
+
+	public float getMaxSpeedToleranceLimit() {
+		return Math.min(getDefaultSpeed(), MAX_VALUE_KM_H / 3.6f);
+	}
+
+	public float getMinSpeedToleranceLimit() {
+		return Math.max(-getDefaultSpeed() / 2, MIN_VALUE_KM_H / 3.6f);
+	}
+
+	public boolean isSpeedToleranceBigRange() {
+		return (getMaxSpeedToleranceLimit() - getMinSpeedToleranceLimit()) * 3.6 > 6;
 	}
 
 	public float getStrAngle() {
