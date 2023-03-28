@@ -5091,7 +5091,7 @@
 \n - Opravena gesta pro naklápění, přibližování a otáčení mapy
 \n
 \n</string>
-    <string name="enable_3d_maps">Povolení 3D map</string>
+    <string name="enable_3d_maps">Povolit 3D mapy</string>
     <string name="generate_hillshade_from_3d_maps">Generování rastrových map kopců z 3D map</string>
     <string name="sort_distance_ascending">Nejkratší vzdálenost jako první</string>
     <string name="sort_distance_descending">Nejdelší vzdálenost jako první</string>
@@ -5101,8 +5101,8 @@
     <string name="sort_duration_ascending">Nejdříve kratší doba trvání</string>
     <string name="sort_duration_descending">Nejdříve delší doba trvání</string>
     <string name="clear_online_cache_description">Tím vymažete veškerou mezipaměť pro dlaždice počasí online.</string>
-    <string name="clear_online_cache">Vymazání mezipaměti online</string>
-    <string name="offline_cache">Offline vyrovnávací paměť</string>
+    <string name="clear_online_cache">Vymazání online mezipaměti</string>
+    <string name="offline_cache">Offline mezipaměť</string>
     <string name="shared_string_alt_name">Alternativní název</string>
     <string name="token_is_not_valid">Token není platný</string>
     <string name="app_mode_climbing">Horolezectví</string>
