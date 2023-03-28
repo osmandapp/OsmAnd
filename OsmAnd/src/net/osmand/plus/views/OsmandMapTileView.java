@@ -1621,6 +1621,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		private static final float ANGLE_THRESHOLD = 5;
 		private static final float ANGLE_ZOOM_THRESHOLD = 15;
+		private static final float ANGLE_THRESHOLD_FIXED = 30;
 		private static final float ZOOM_THRESHOLD = 0.1f;
 		private static final float MAX_DELTA_ZOOM = 4;
 
@@ -1635,6 +1636,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private boolean startZooming;
 		private float initialElevation;
 		private float prevAngle;
+		private float angleThreshold;
+		private float angleZoomThreshold;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -1746,15 +1749,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
 			double deltaZoom = calculateDeltaZoom(relativeToStart);
+
+			// Avoicd accidental rotation in "North is up (fixed)" mode
+			if (settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
+				angleThreshold = ANGLE_THRESHOLD_FIXED;
+				angleZoomThreshold = ANGLE_THRESHOLD_FIXED;
+			} else {
+				angleThreshold = ANGLE_THRESHOLD;
+				angleZoomThreshold = ANGLE_ZOOM_THRESHOLD;
+			}
+
 			if (Math.abs(deltaZoom) <= ZOOM_THRESHOLD && !startZooming) {
 				deltaZoom = 0; // keep only rotating
 			} else {
 				startZooming = true;
 			}
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
-				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
+				if (Math.abs(relAngle) < angleThreshold && !startRotating) {
 					relAngle = 0;
-				} else if (!startZooming || Math.abs(relAngle) > ANGLE_ZOOM_THRESHOLD) {
+				} else if (!startZooming || Math.abs(relAngle) > angleZoomThreshold) {
 					startRotating = true;
 				} else if (!startRotating) {
 					relAngle = 0;
