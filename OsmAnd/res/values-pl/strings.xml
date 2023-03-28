@@ -117,9 +117,9 @@
     <string name="map_overlay">Nakładka mapy</string>
     <string name="map_overlay_descr">Wybierz nakładkę mapy</string>
     <string name="tile_source_already_installed">Mapa jest już zainstalowana, \"Ustawienia\" zostaną zaktualizowane.</string>
-    <string name="select_tile_source_to_install">Wybierz (kafelkowe) mapy do zainstalowania lub aktualizacji.</string>
+    <string name="select_tile_source_to_install">Wybierz źródła mapy kafelkowej:</string>
     <string name="internet_not_available">Nie można wykonać czynności bez połączenia z Internetem.</string>
-    <string name="install_more">Zainstaluj więcej…</string>
+    <string name="install_more">Dodaj więcej…</string>
     <string name="level_to_switch_vector_raster_descr">Poza tym poziomem używaj wszędzie map rastrowych.</string>
     <string name="level_to_switch_vector_raster">Minimalne przybliżenie mapy wektorowej</string>
     <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline.</string>
@@ -1103,7 +1103,7 @@
     <string name="routing_attr_avoid_ferries_description">Unika promów</string>
     <string name="routing_attr_avoid_motorway_name">Bez autostrad</string>
     <string name="routing_attr_avoid_motorway_description">Unika autostrad</string>
-    <string name="routing_attr_weight_name">Ograniczenie wagi</string>
+    <string name="routing_attr_weight_name">Waga</string>
     <string name="routing_attr_weight_description">Określa dozwolony ciężar pojazdu na trasach.</string>
     <string name="select_gpx">Wybierz trasę GPX…</string>
     <string name="route_descr_select_destination">Ustaw cel podróży</string>
@@ -1525,7 +1525,7 @@
     <string name="rendering_attr_hideHouseNumbers_name">Numery budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
     <string name="routing_attr_avoid_borders_description">Unika przekraczania granic państwowych</string>
-    <string name="routing_attr_height_name">Ograniczenie wysokości</string>
+    <string name="routing_attr_height_name">Wysokość</string>
     <string name="routing_attr_height_description">Określa dozwoloną wysokość pojazdu na trasach.</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
     <string name="use_fast_recalculation_desc">Przelicza tylko początkową część trasy, która jest przydatna podczas długich podróży.</string>
@@ -3183,7 +3183,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremalna</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Niezdefiniowana</string>
     <string name="routeInfo_piste_difficulty_name">Trudność trasy</string>
-    <string name="routing_attr_width_name">Ograniczenie szerokości</string>
+    <string name="routing_attr_width_name">Szerokość</string>
     <string name="routing_attr_width_description">Określa dozwoloną szerokość pojazdu na trasach.</string>
     <string name="avoid_in_routing_descr_">Unikaj określonych tras i rodzajów dróg</string>
     <string name="app_mode_utv">Obok siebie</string>
@@ -3665,7 +3665,7 @@
     <string name="app_mode_enduro_motorcycle">Motocykl Enduro</string>
     <string name="app_mode_motor_scooter">Skuter</string>
     <string name="routing_attr_length_description">Określ długość pojazdu dozwoloną na trasach.</string>
-    <string name="routing_attr_length_name">Limit długości</string>
+    <string name="routing_attr_length_name">Długość</string>
     <string name="app_mode_inline_skates">Rolki</string>
     <string name="use_volume_buttons_as_zoom">Przyciski głośności jako powiększenie</string>
     <string name="app_mode_wheelchair">Wózek inwalidzki</string>
@@ -4445,9 +4445,9 @@
     <string name="storage_migration_wrong_folder_warning">W wybranym folderze nie znaleziono danych OsmAnd. Proszę spróbuj ponownie.</string>
     <string name="fold_unfold">zwiń/rozwiń</string>
     <string name="app_profile_type">Typ profilu aplikacji</string>
-    <string name="storage_copied_files_size">Skopiowano %1$s pliki %2$s</string>
+    <string name="storage_copied_files_size">Przetworzony %1$s plik (pliki), %2$s</string>
     <string name="rendering_attr_natureReserves_description">Pokaż rezerwat przyrody, obszary chronione i parki narodowe.</string>
-    <string name="migration_files_present">W wybranej lokalizacji \'%3$s\' znajdują się pliki %1$d (%2$s).</string>
+    <string name="migration_files_present">%1$d plik(i) (%2$s) już obecny w miejscu docelowym \"%3$s\" i nie nadpisany.</string>
     <string name="map_marker_options">Opcje znaczników mapy</string>
     <string name="shared_string_size">Rozmiar</string>
     <string name="created_on">Utworzono na</string>
@@ -5048,4 +5048,78 @@
     <string name="enable_3d_maps">Włącz mapy 3D</string>
     <string name="clear_online_cache_description">Spowoduje to wyczyszczenie całej pamięci podręcznej kafelka pogody online.</string>
     <string name="free_maps_updates">Bezpłatne aktualizacje (awaryjne)</string>
+    <string name="app_mode_climbing">Wspinaczka</string>
+    <string name="test_heightmap">Przetestuj mapę wysokości</string>
+    <string name="approximate_bearing">Przybliżony namiar</string>
+    <string name="approximate_bearing_descr">Uzyskaj namiar na podstawie realizowanej trasy nawigacyjnej.</string>
+    <string name="sort_date_ascending">Najpierw najnowsza data</string>
+    <string name="sort_distance_descending">Najpierw najdłuższy dystans</string>
+    <string name="sort_date_descending">Najpierw najstarsza data</string>
+    <string name="shared_string_nearest">Najbliższy</string>
+    <string name="shared_string_inches">cale</string>
+    <string name="offline_weather_forecast">Prognoza pogody offline</string>
+    <string name="offline_weather_forecast_desc">Możesz pobrać prognozę pogody na 7 dni.</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Zmienić wygląd ścieżek %1$s\?</string>
+    <string name="no_visible_tracks_description">Wybierz ścieżki, aby wyświetlić je na mapie.</string>
+    <string name="shared_string_select_recent">Wybierz ostatnie</string>
+    <string name="offline_cache">Pamięć podręczna offline</string>
+    <string name="shared_string_alt_name">Alternatywna nazwa</string>
+    <string name="token_is_not_valid">Token jest nieprawidłowy</string>
+    <string name="generate_hillshade_from_3d_maps">Generuj mapy rastrowe z cieniami wzgórz z map 3D</string>
+    <string name="disable_vertex_hillshade_3d">Wyłącz cieniowanie wierzchołków w 3D</string>
+    <string name="shared_string_pounds">funtów</string>
+    <string name="metric_lbs">funty</string>
+    <string name="shared_string_on_map">Na mapie</string>
+    <string name="weather_forecast_is_outdated">Prognoza jest nieaktualna.</string>
+    <string name="weather_forecast">Prognoza pogody</string>
+    <string name="release_4_4">• Poprawione menu \"Ścieżki\" w \"Konfiguracji mapy\"
+\n
+\n • Menu kontekstowe wyświetla teraz zlokalizowane nazwy dla POI
+\n
+\n • Dodano opcję udostępniania trasy przez łącze
+\n
+\n • Dodano jednostkę długości \"mila morska/feet\".
+\n
+\n • Orientacja mapy dodała nowy tryb stały
+\n
+\n • Uproszczony ekran startowy
+\n
+\n • Poprawiona pozycja lokalizacji w trybie podzielonego ekranu w Android Auto
+\n
+\n • Dodano wykres \"Prędkość/Nachylenie\" do analizy trasy
+\n
+\n • Android 13 przeniósł wybór języka aplikacji do ustawień systemowych
+\n
+\n • Naprawiono problemy z wyświetlaniem miejsc dla wegan
+\n
+\n • Dodano możliwość pobierania kafelków online używanych jako mapy \"Nakładka\" lub \"Podkład\"
+\n
+\n • Dodano obsługę jednostek imperialnych dla \"Parametrów pojazdu\"
+\n
+\n • Nowy profil \"Motorower\"
+\n
+\n • W \"pozycji wyświetlacza\" dodano nową opcję \"Automatyczna\"
+\n
+\n • Poprawiono gesty mapy dla pochylenia, powiększenia i obrotu
+\n
+\n</string>
+    <string name="clear_online_cache">Wyczyść pamięć podręczną online</string>
+    <string name="display_position_automatic_descr">Zależy od orientacji mapy: dół dla kierunku ruchu, środek dla wszystkich innych.</string>
+    <string name="shared_string_all_world">Cały świat</string>
+    <string name="common_weight_limit_error">Minimalna wartość to \"%1$s\" %2$s. Użyj profilu \"%3$s\", jeśli masa pojazdu jest mniejsza niż wartość minimalna.</string>
+    <string name="generate_slope_from_3d_maps">Generuj mapy rastrowe zboczy z map 3D</string>
+    <string name="no_visible_tracks">Brak ścieżek na mapie</string>
+    <string name="change_appearance">Zmiana wyglądu</string>
+    <string name="switch_folder">Przełącz folder</string>
+    <string name="show_all_tracks">Pokaż wszystkie ścieżki</string>
+    <string name="sort_duration_descending">Najpierw najdłuższy czas trwania</string>
+    <string name="sort_distance_ascending">Najpierw najkrótsza odległość</string>
+    <string name="delete_cloud_version">Usuń wersję w chmurze</string>
+    <string name="shared_string_in_progress">W trakcie</string>
+    <string name="movement_speed">Prędkość ruchu</string>
+    <string name="simulation_position_description">Wybierz plik śladu, który będzie używany jako źródło przenoszenia lokalizacji.</string>
+    <string name="inch">cl</string>
+    <string name="recently_visible">Ostatnio widoczne %1$s</string>
+    <string name="empty_tracks_description">Przy pomocy OsmAnd można importować, tworzyć lub nagrywać pliki ścieżek.</string>
+    <string name="empty_tracks">Nie masz plików ze ścieżkami.</string>
 </resources>
