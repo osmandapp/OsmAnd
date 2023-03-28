@@ -544,7 +544,8 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Override
 	public void addPluginIndexItems(@NonNull IndexFileList indexes) {
-		OfflineForecastHelper offlineForecastHelper = weatherHelper.getOfflineForecastHelper();
-		offlineForecastHelper.addWeatherIndexItems(indexes);
+		if (weatherHelper.getWeatherResourcesManager() != null) {
+			weatherHelper.getOfflineForecastHelper().addWeatherIndexItems(indexes);
+		}
 	}
 }
