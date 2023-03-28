@@ -70,16 +70,17 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 
 		Slider slider = view.findViewById(R.id.slider);
 		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(appMode));
-		float convertedLimitFrom = getFormattedSpeedValue(appMode.getMinSpeedToleranceLimit(), app, appMode.isSpeedToleranceBigRange(), speedFormat).valueSrc;
-		float convertedLimitTo = getFormattedSpeedValue(appMode.getMaxSpeedToleranceLimit(), app, appMode.isSpeedToleranceBigRange(), speedFormat).valueSrc;
-		float convertedSelectedValue = getFormattedSpeedValue(selectedValue / 3.6f, app, appMode.isSpeedToleranceBigRange(), speedFormat).valueSrc;
+		boolean isSpeedToleranceBigRange = appMode.isSpeedToleranceBigRange();
+		float convertedLimitFrom = getFormattedSpeedValue(appMode.getMinSpeedToleranceLimit(), app, isSpeedToleranceBigRange, speedFormat).valueSrc;
+		float convertedLimitTo = getFormattedSpeedValue(appMode.getMaxSpeedToleranceLimit(), app, isSpeedToleranceBigRange, speedFormat).valueSrc;
+		float convertedSelectedValue = getFormattedSpeedValue(selectedValue / 3.6f, app, isSpeedToleranceBigRange, speedFormat).valueSrc;
 		if (convertedSelectedValue > convertedLimitTo) {
 			convertedSelectedValue = convertedLimitTo;
 		} else if (convertedSelectedValue < convertedLimitFrom) {
 			convertedSelectedValue = convertedLimitFrom;
 		}
 		float step = 0.1f;
-		if (appMode.isSpeedToleranceBigRange()) {
+		if (isSpeedToleranceBigRange) {
 			convertedSelectedValue = getIntegerSpeed(convertedSelectedValue);
 			convertedLimitFrom = getIntegerSpeed(convertedLimitFrom);
 			convertedLimitTo = getIntegerSpeed(convertedLimitTo);
@@ -91,18 +92,18 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		slider.setStepSize(step);
 
 		TextView summary = view.findViewById(R.id.summary);
-		summary.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedSelectedValue, speedFormat), app, appMode.isSpeedToleranceBigRange(), speedFormat));
+		summary.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedSelectedValue, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		TextView fromTv = view.findViewById(R.id.from_value);
-		fromTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitFrom, speedFormat), app, appMode.isSpeedToleranceBigRange(), speedFormat));
+		fromTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitFrom, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		TextView toTv = view.findViewById(R.id.to_value);
-		toTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitTo, speedFormat), app, appMode.isSpeedToleranceBigRange(), speedFormat));
+		toTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitTo, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		slider.addOnChangeListener((s, value, fromUser) -> {
 			float selectedSpeedInMS = getMpSFromFormattedValue(value, speedFormat);
 			selectedValue = selectedSpeedInMS * 3.6f;
-			summary.setText(getFormattedSpeed(selectedSpeedInMS, app, appMode.isSpeedToleranceBigRange(), speedFormat));
+			summary.setText(getFormattedSpeed(selectedSpeedInMS, app, isSpeedToleranceBigRange, speedFormat));
 		});
 
 		int color = appMode.getProfileColor(nightMode);
