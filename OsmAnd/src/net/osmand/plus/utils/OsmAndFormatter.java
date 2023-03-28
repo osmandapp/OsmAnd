@@ -535,18 +535,18 @@ public class OsmAndFormatter {
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
 			if (metersPerSeconds < 0.111111111) {
-				return new FormattedValue("-", unit, false);
+				return new FormattedValue(metersPerSeconds, "-", unit, false);
 			}
 			float minPerKm = METERS_IN_KILOMETER / (metersPerSeconds * 60);
 			if (minPerKm >= 10) {
 				return getFormattedSpeed(Math.round(minPerKm), unit, app);
 			} else {
 				int seconds = Math.round(minPerKm * 60);
-				return new FormattedValue(Algorithms.formatDuration(seconds, false), unit);
+				return new FormattedValue(seconds, Algorithms.formatDuration(seconds, false), unit);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
 			if (metersPerSeconds < 0.111111111) {
-				return new FormattedValue("-", unit, false);
+				return new FormattedValue(metersPerSeconds, "-", unit, false);
 			}
 			float minPerM = (METERS_IN_ONE_MILE) / (metersPerSeconds * 60);
 			if (minPerM >= 10) {
@@ -634,7 +634,7 @@ public class OsmAndFormatter {
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
 		String formattedValue = messageFormat.format(new Object[]{value})
 				.replace('\n', ' ');
-		return new FormattedValue(formattedValue, unit);
+		return new FormattedValue(value, formattedValue, unit);
 	}
 
 	public static boolean isSameDay(long firstTime, long secondTime) {
@@ -883,15 +883,17 @@ public class OsmAndFormatter {
 
 		public final String value;
 		public final String unit;
+		public final float valueSrc;
 
 		private final boolean separateWithSpace;
 
-		public FormattedValue(@NonNull String value, @NonNull String unit) {
-			this(value, unit, true);
+		public FormattedValue(float valueSrc, @NonNull String value, @NonNull String unit) {
+			this(valueSrc, value, unit, true);
 		}
 
-		public FormattedValue(@NonNull String value, @NonNull String unit, boolean separateWithSpace) {
+		public FormattedValue(float valueSrc, @NonNull String value, @NonNull String unit, boolean separateWithSpace) {
 			this.value = value;
+			this.valueSrc = valueSrc;
 			this.unit = unit;
 			this.separateWithSpace = separateWithSpace;
 		}
