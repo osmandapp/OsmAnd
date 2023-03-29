@@ -90,8 +90,9 @@ public class MultiTouchSupport {
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
 	private static final int TILT_X_THRESHOLD_PX = 40;
-	private static final int TILT_Y_THRESHOLD_PX = 40;
+	private static final int TILT_Y_THRESHOLD_PX = 10;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
+	private static final float MAX_DELTA_ZOOM = 4;
 
 	public boolean onTouchEvent(MotionEvent event) {
 		if (!isMultiTouchSupported()) {
@@ -158,7 +159,7 @@ public class MultiTouchSupport {
 						angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
 					}
 					zoomRelative = distance / zoomStartedDistance;
-					listener.onZoomingOrRotating(zoomRelative, angleRelative);
+					listener.onZoomingOrRotating(calculateDeltaZoom(zoomRelative), angleRelative);
 				} else if (inTiltMode) {
 					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
@@ -177,8 +178,9 @@ public class MultiTouchSupport {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
+					} else if ((dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
 							|| Math.abs(dy1 - dy2) > TILT_DY_THRESHOLD_PX
+							|| Math.abs(calculateDeltaZoom(distance / zoomStartedDistance)) > 0.1)
 							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
 						angleRelative = 0;
 						zoomRelative = 0;
@@ -195,6 +197,16 @@ public class MultiTouchSupport {
 			log.debug("Multi touch exception", e);
 		}
 		return false;
+	}
+
+	private double calculateDeltaZoom(double relativeToStart) {
+		double deltaZoom = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
+		if (deltaZoom > 0.0 && deltaZoom > MAX_DELTA_ZOOM) {
+			return MAX_DELTA_ZOOM;
+		} else if (deltaZoom < 0.0 && deltaZoom < -MAX_DELTA_ZOOM) {
+			return -MAX_DELTA_ZOOM;
+		}
+		return deltaZoom;
 	}
 
 	public PointF getCenterPoint() {
