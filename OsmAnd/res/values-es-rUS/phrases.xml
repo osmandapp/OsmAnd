@@ -4542,4 +4542,16 @@
     <string name="poi_waste_accepted">Residuo admitido</string>
     <string name="poi_water_filter">Agua potable</string>
     <string name="poi_waste_organic">Reciclado orgánico</string>
+    <string name="poi_sinkhole_estavelle">Sumidero: estavelle</string>
+    <string name="poi_sinkhole_bluehole">Sumidero: agujero azul</string>
+    <string name="poi_sinkhole_doline">Sumidero: dolina o valle</string>
+    <string name="poi_sinkhole_ponor">Sumidero: abismo (orificio de desagüe)</string>
+    <string name="poi_sinkhole_pit">Sumidero: fosa</string>
+    <string name="poi_barrier_coupure">Barrera de seguridad</string>
+    <string name="poi_barrier_planter">Macetón;Planta</string>
+    <string name="poi_spikes">Tira de puntas;Picos;Miguelitos;Abrojos;Púas</string>
+    <string name="poi_sump_buster">Rompe cárter;Rompebaches;Sumidero trampa;Trampa de colectivos;Trampa de autobús</string>
+    <string name="poi_wedge">Cuña</string>
+    <string name="poi_wicket_gate">Puerta peatonal</string>
+    <string name="poi_barrier_bar">Barra fija horizontal</string>
 </resources>
