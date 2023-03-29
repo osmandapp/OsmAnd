@@ -4547,4 +4547,10 @@
     <string name="poi_recycling_plastic_bottle_tops">أغطية زجاجات بلاستيكية</string>
     <string name="poi_recycling_pmd">العبوات البلاستيكية والتعبئة المعدنية وعلب المشروبات</string>
     <string name="poi_recycling_polystyrene_foam">رغوة البوليسترين</string>
+    <string name="poi_barrier_planter">حاجز نباتي</string>
+    <string name="poi_wicket_gate">بوابه فرعية</string>
+    <string name="poi_sump_buster">كاسر حوض السيارات السفلي</string>
+    <string name="poi_wedge">وتد</string>
+    <string name="poi_spikes">مسامير</string>
+    <string name="poi_barrier_bar">حاجز</string>
 </resources>

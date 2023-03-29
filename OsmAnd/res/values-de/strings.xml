@@ -574,7 +574,7 @@
     <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
     <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
     <string name="rotate_map_to_descr">Kartenausrichtung:</string>
-    <string name="rotate_map_to">Kartenrotation</string>
+    <string name="rotate_map_to">Kartenausrichtung</string>
     <string name="show_route">Routendetails</string>
     <string name="fav_imported_sucessfully">Favoriten importiert</string>
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>
@@ -1139,7 +1139,7 @@
     <string name="app_mode_motorcycle">Motorrad</string>
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Flugzeug</string>
-    <string name="local_osm_changes_delete_all_confirm">%1$d OSM Änderung(en) löschen\?</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d OSM-Änderung(en) löschen\?</string>
     <string name="shared_string_delete_all">Alle löschen</string>
     <string name="amenity_type_seamark">Schifffahrtsobjekte</string>
     <string name="app_modes_choose_descr">Wählen Sie die anzuzeigenden Profile aus.</string>
@@ -4990,7 +4990,7 @@
     <string name="shared_string_expires">Abgelaufen</string>
     <string name="shared_string_purchased_on">Gekauft am</string>
     <string name="choose_what_to_sync">Wählen Sie, was synchronisiert werden soll</string>
-    <string name="cloud_sync_progress">Sync…%1$s</string>
+    <string name="cloud_sync_progress">Synchronisieren… %1$s</string>
     <string name="shared_string_unsynced">Unsynchronisiert</string>
     <string name="check_for_updates">Auf Aktualisierungen überprüfen</string>
     <string name="changes">Änderungen %1$s</string>
@@ -5042,7 +5042,7 @@
     <string name="sound_beep_simple_loud">Signalton: einfach, laut</string>
     <string name="sound_beep_complex">Signalton: komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
-    <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung: unten für Bewegungsrichtung, mittig für alles andere.</string>
+    <string name="display_position_automatic_descr">Abhängig von der Kartenausrichtung: unten für Bewegungsrichtung, mittig für alles andere.</string>
     <string name="shared_string_apply_changes">Änderungen anwenden</string>
     <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
     <string name="shared_string_kilograms">Kilogramm</string>
@@ -5111,7 +5111,7 @@
     <string name="app_mode_climbing">Klettern</string>
     <string name="offline_weather_forecast">Offline-Wettervorhersage</string>
     <string name="offline_weather_forecast_desc">Sie können die Wettervorhersage für 7 Tage herunterladen.</string>
-    <string name="clear_online_cache_description">Dies wird den gesamten Cache für die Offline-Wetterkachel löschen.</string>
+    <string name="clear_online_cache_description">Dies wird den gesamten Cache für die Online-Wetterkachel löschen.</string>
     <string name="clear_online_cache">Online-Cache leeren</string>
     <string name="offline_cache">Offline-Cache</string>
     <string name="shared_string_alt_name">Alternativer Name</string>

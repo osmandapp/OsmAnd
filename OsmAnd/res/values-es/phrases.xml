@@ -4548,4 +4548,9 @@
     <string name="poi_sinkhole_estavelle">estavelle</string>
     <string name="poi_barrier_planter">Jardinera</string>
     <string name="poi_barrier_spikes">Picos</string>
+    <string name="poi_sump_buster">Bomba de limpieza</string>
+    <string name="poi_wedge">Cuña</string>
+    <string name="poi_wicket_gate">Postigo</string>
+    <string name="poi_barrier_bar">Bar</string>
+    <string name="poi_spikes">Picos</string>
 </resources>
