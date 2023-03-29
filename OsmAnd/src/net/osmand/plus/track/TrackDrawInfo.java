@@ -12,17 +12,22 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TrackDrawInfo {
 
@@ -108,7 +113,9 @@ public class TrackDrawInfo {
 
 		color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getModeValue(mode));
 		width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
-
+		if (Algorithms.isEmpty(width)) {
+			width = getRenderDefaultTrackWidth(renderer);
+		}
 		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
@@ -143,6 +150,29 @@ public class TrackDrawInfo {
 	@Nullable
 	private String getRenderDefaultTrackWidth(@Nullable RenderingRulesStorage renderer) {
 		if (renderer != null) {
+			float defaultWidth = 0.0F;
+			RenderingRule gpxRule = renderer.getRenderingAttributeRule("gpx");
+			Map<Float, String> trackWidthMap = new HashMap<>();
+			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
+				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfChildren().get(0).getIfElseChildren();
+				for (RenderingRule r : rules) {
+					String currentTrackWidth = r.getStringPropertyValue(ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR);
+					float strokeWidth = r.getFloatPropertyValue("strokeWidth");
+
+					if (currentTrackWidth != null && strokeWidth != 0.0F) {
+						trackWidthMap.put(strokeWidth, currentTrackWidth);
+					}
+					if (currentTrackWidth == null && strokeWidth != 0.0F) {
+						defaultWidth = strokeWidth;
+					}
+				}
+
+				String width = trackWidthMap.get(defaultWidth);
+				if (!Algorithms.isEmpty(width)) {
+					return width;
+				}
+			}
+
 			RenderingRuleProperty property = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
 			if (property != null && !Algorithms.isEmpty(property.getPossibleValues())) {
 				return property.getPossibleValues()[0];
