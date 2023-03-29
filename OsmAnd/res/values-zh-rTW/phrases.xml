@@ -4549,4 +4549,9 @@
     <string name="poi_barrier_coupure">障礙切割</string>
     <string name="poi_barrier_planter">花盆</string>
     <string name="poi_barrier_spikes">輪胎放氣裝置</string>
+    <string name="poi_wicket_gate">小門</string>
+    <string name="poi_spikes">輪胎放氣裝置</string>
+    <string name="poi_sump_buster">底盤路障</string>
+    <string name="poi_wedge">楔形路障</string>
+    <string name="poi_barrier_bar">固定桿</string>
 </resources>
