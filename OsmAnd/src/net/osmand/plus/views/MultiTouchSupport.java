@@ -182,9 +182,8 @@ public class MultiTouchSupport {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (
-							isZoomRotationGesture(distance, angle, angleDefined)
-									&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
+					} else if (isZoomRotationGesture(distance, angle, angleDefined)
+							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
 						if (startedMode == MODE.NONE) {
 							angleRelative = 0;
 							zoomRelative = 0;
