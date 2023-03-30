@@ -159,6 +159,10 @@ public class UiUtilities {
 		return getDrawable(id, R.color.icon_color_default_light);
 	}
 
+	public Drawable getActiveIcon(@DrawableRes int id, boolean nightMode) {
+		return getDrawable(id, ColorUtilities.getActiveColorId(nightMode));
+	}
+
 	public Drawable getIcon(@DrawableRes int id) {
 		return getDrawable(id, 0);
 	}
