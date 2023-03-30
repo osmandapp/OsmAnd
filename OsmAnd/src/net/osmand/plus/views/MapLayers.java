@@ -256,15 +256,9 @@ public class MapLayers {
 
 	public void updateMapSource(@NonNull OsmandMapTileView mapView, CommonPreference<String> settingsToWarnAboutMap) {
 		OsmandSettings settings = app.getSettings();
-		boolean useOpenGLRender = app.useOpenGlRenderer();
 
 		// update transparency
-		int mapTransparency = 255;
-		if (settings.MAP_UNDERLAY.get() != null) {
-			mapTransparency = settings.MAP_TRANSPARENCY.get();
-		} else if (useOpenGLRender && settings.MAP_OVERLAY.get() != null) {
-			mapTransparency = 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
-		}
+		int mapTransparency = getMapSourceTransparency();
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 
@@ -285,6 +279,16 @@ public class MapLayers {
 		} else {
 			mapView.setMainLayer(mapTileLayer);
 		}
+	}
+
+	public int getMapSourceTransparency() {
+		OsmandSettings settings = app.getSettings();
+		if (settings.MAP_UNDERLAY.get() != null) {
+			return settings.MAP_TRANSPARENCY.get();
+		} else if (app.useOpenGlRenderer() && settings.MAP_OVERLAY.get() != null) {
+			return 255 - settings.MAP_OVERLAY_TRANSPARENCY.get();
+		}
+		return 255;
 	}
 
 	public void showMultiChoicePoiFilterDialog(MapActivity mapActivity, DismissListener listener) {
