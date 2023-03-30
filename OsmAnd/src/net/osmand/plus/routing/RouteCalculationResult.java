@@ -289,11 +289,9 @@ public class RouteCalculationResult {
 				if (info != null) {
 					// For STOP and TRAFFIC_CALMING first check if it has directional info
 					boolean forward = res.isForwardDirection();
-					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId);
-					boolean stopApplicable = rdo.isStopApplicable(forward, intId, res.getStartPointIndex(), res.getEndPointIndex());
-					if ((info.getType() == AlarmInfoType.TRAFFIC_CALMING
-							|| info.getType() == AlarmInfoType.HAZARD) && !directionApplicable
-							|| (info.getType() == AlarmInfoType.STOP && !stopApplicable)) {
+					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId,
+							info.getType() == AlarmInfoType.STOP ? res.getStartPointIndex() : -1, res.getEndPointIndex());
+					if (!directionApplicable) {
 						continue;
 					}
 					alarms.add(info);
