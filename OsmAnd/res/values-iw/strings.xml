@@ -389,7 +389,7 @@
     <string name="map_text_size_descr">גודל הטקסט של השמות במפה:</string>
     <string name="map_text_size">גודל הגופן במפות</string>
     <string name="trace_rendering">נתוני ניפוי שגיאות של ביצועים</string>
-    <string name="trace_rendering_descr">הצגת ביצועי עיבוד תמונה.</string>
+    <string name="trace_rendering_descr">הצגת ביצועי עיבוד תמונה וניווט.</string>
     <string name="installing_new_resources">הנתונים החדשים נפרסים…</string>
     <string name="internet_connection_required_for_online_route">ניווט מקוון לא עובד ללא חיבור לאינטרנט.</string>
     <string name="tts_language_not_supported_title">שפה בלתי נתמכת</string>
@@ -419,9 +419,9 @@
     <string name="map_overlay">מפה עליונה</string>
     <string name="map_overlay_descr">נא לבחור במפה עליונה</string>
     <string name="tile_source_already_installed">המפה כבר מותקנת, ה‚הגדרות’ יעודכנו.</string>
-    <string name="select_tile_source_to_install">יש לבחור ב(אריחי) מפה להתקנה או עדכון.</string>
+    <string name="select_tile_source_to_install">בחירת מקורות מפה לאריח:</string>
     <string name="internet_not_available">לא ניתן לבצע את הפעולה ללא חיבור לאינטרנט.</string>
-    <string name="install_more">התקנת עוד…</string>
+    <string name="install_more">ועוד…</string>
     <string name="level_to_switch_vector_raster_descr">שימוש במפות מעובדות לכל מה שמעבר לרמה הזאת.</string>
     <string name="level_to_switch_vector_raster">תקריב מזערי לווקטורים</string>
     <string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות.</string>
@@ -1242,9 +1242,9 @@
     <string name="routing_attr_avoid_stairs_description">נמנע ממדרגות</string>
     <string name="routing_attr_avoid_borders_name">ללא מעברי גבול</string>
     <string name="routing_attr_avoid_borders_description">נמנע ממעבר גבולות בין מדינות</string>
-    <string name="routing_attr_weight_name">הגבלת משקל</string>
+    <string name="routing_attr_weight_name">משקל</string>
     <string name="routing_attr_weight_description">ציון מגבלה מותרת למשקל רכב במסלולים.</string>
-    <string name="routing_attr_height_name">מגבלת גובה</string>
+    <string name="routing_attr_height_name">גובה</string>
     <string name="routing_attr_height_description">ציון גובה רכב מורשה בנתיבים.</string>
     <string name="copying_osmand_one_file_descr">הקובץ (%s) מועתק ליעד החדש…</string>
     <string name="copying_osmand_files_descr">קובצי הנתונים של OsmAnd מועתקים ליעד החדש (%s)…</string>
@@ -3177,7 +3177,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">אקסטרים</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">אין הגדרה</string>
     <string name="routeInfo_piste_difficulty_name">דרגת קושי מסלול</string>
-    <string name="routing_attr_width_name">מגבלת רוחב</string>
+    <string name="routing_attr_width_name">רוחב</string>
     <string name="routing_attr_width_description">ציון מגבלת רוחב מכונית אפשרי בנתיבים.</string>
     <string name="avoid_in_routing_descr_">הימנעות מסוגים מסוימים של מסלולים וכבישים</string>
     <string name="app_mode_utv">זה לצד זה</string>
@@ -4726,7 +4726,6 @@
     <string name="available_as_part_of_subscription_plan">זמין כחלק מהמינוי על %1$s.</string>
     <string name="download_heightmap_maps">מפת גבהים</string>
     <string name="favorite_delete_group">מחיקת קבוצה</string>
-    
     <string name="share_link">שיתוף קישור</string>
     <string name="share_as_file">שיתוף כקובץ</string>
     <string name="y_axis">ציר Y</string>
