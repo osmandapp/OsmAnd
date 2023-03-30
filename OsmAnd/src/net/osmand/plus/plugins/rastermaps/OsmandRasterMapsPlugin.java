@@ -490,18 +490,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
 				MapActivity activityForSelect = mapActivityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(activityForSelect)) {
-					selectLayerForTilesDownloading(activityForSelect, selectedLayer -> {
-						MapActivity activityForDownload = mapActivityRef.get();
-						if (AndroidUtils.isActivityNotDestroyed(activityForDownload)) {
-							OsmandApplication app = activityForDownload.getMyApplication();
-							if (DownloadTilesFragment.shouldShowDialog(app)) {
-								DownloadTilesFragment.showInstance(activityForDownload.getSupportFragmentManager(), updateTiles, selectedLayer);
-							} else {
-								app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
-							}
-						}
-						return false;
-					});
+					MapLayerBottomSheet.showInstance(app,
+							activityForSelect.getSupportFragmentManager(),
+							getDownloadableLayerNameIds(),
+							updateTiles);
 				}
 				return true;
 			};
@@ -509,6 +501,21 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 
 		return item;
+	}
+
+	private ArrayList<Integer> getDownloadableLayerNameIds() {
+		ArrayList<Integer> layerNameIdsList = new ArrayList<Integer>();
+		OsmandMapLayer mainLayer = app.getOsmandMap().getMapView().getMainLayer();
+		if (mainLayer instanceof MapTileLayer && ((MapTileLayer) mainLayer).getMap().couldBeDownloadedFromInternet()) {
+			layerNameIdsList.add(R.string.map_source);
+		}
+		if (isMapLayerDownloadable(app.getSettings().MAP_OVERLAY.get())) {
+			layerNameIdsList.add(R.string.map_overlay);
+		}
+		if (isMapLayerDownloadable(app.getSettings().MAP_UNDERLAY.get())) {
+			layerNameIdsList.add(R.string.map_underlay);
+		}
+		return layerNameIdsList;
 	}
 
 	private void selectLayerForTilesDownloading(@NonNull MapActivity mapActivity, @NonNull CallbackWithObject<Integer> callback) {
