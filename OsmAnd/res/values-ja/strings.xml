@@ -1130,7 +1130,7 @@ POIの更新は利用できません</string>
     <string name="complex_route_calculation_failed">高速ルート計算が失敗しました(%s)、低速モードで再計算します。</string>
     <string name="disable_complex_routing_descr">車用ナビゲーションの2段階ルート計算を無効化します</string>
     <string name="disable_complex_routing">複雑なルート計算を無効化</string>
-    <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路セグメントを計算する</string>
+    <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路区分を計算する</string>
     <string name="forward">次へ</string>
     <string name="keep_navigation_service">続行</string>
     <string name="enable_sleep_mode">GPSバックグラウンドモードを有効</string>
@@ -1159,7 +1159,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車ルート</string>
     <string name="stop_navigation_service">停止</string>
-    <string name="gpx_start_new_segment">新しいセグメントの開始</string>
+    <string name="gpx_start_new_segment">新しい区分の開始</string>
     <string name="no_index_file_to_download">ダウンロードできるものが見つかりません、インターネットの接続を確認して下さい。</string>
     <string name="none_selected_gpx">最初に利用可能な経路をロングタップで選択してください。</string>
     <string name="local_index_select_gpx_file">経路の選択</string>
@@ -1191,7 +1191,7 @@ POIの更新は利用できません</string>
     <string name="gpx_info_asc_altitude">上り/下り: %1$s</string>
     <string name="gpx_timemoving">移動時間: %1$s</string>
     <string name="gpx_timespan">全長時間: %1$s</string>
-    <string name="gpx_selection_segment_title">セグメント</string>
+    <string name="gpx_selection_segment_title">区分</string>
     <string name="gpx_selection_number_of_points">" %1$s 地点"</string>
     <string name="gpx_selection_point">地点 %1$s</string>
     <string name="gpx_selection_route_points">%1$s
@@ -1280,7 +1280,7 @@ POIの更新は利用できません</string>
     <string name="index_name_canada">北米 - カナダ</string>
     <string name="index_name_italy">ヨーロッパ - イタリア</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
-    <string name="gpx_option_calculate_first_last_segment">最初と最後の経路セグメントを利用しOsmAndエンジンでルートを計算する</string>
+    <string name="gpx_option_calculate_first_last_segment">最初と最後の経路分類を利用しOsmAndエンジンでルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
     <string name="rendering_attr_alpineHiking_name">アルペンハイキングスケール(SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
@@ -1460,7 +1460,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_video">動画</string>
     <string name="shared_string_photo">写真</string>
     <string name="route_points">ルート地点</string>
-    <string name="track_segments">経路セグメント</string>
+    <string name="track_segments">経路区分</string>
     <string name="track_points">経路地点</string>
     <string name="delay_to_start_navigation_descr">目的地決定後、指定時間が経過すると自動的にナビゲーションを開始します</string>
     <string name="delay_to_start_navigation">ナビゲーション自動開始設定…</string>
@@ -1959,7 +1959,7 @@ POIの更新は利用できません</string>
     <string name="access_sort">並べ替え</string>
     <string name="map_mode">昼夜モード切替</string>
     <string name="rendering_value_thin_name">細線</string>
-    <string name="rendering_value_medium_name">中</string>
+    <string name="rendering_value_medium_name">中線</string>
     <string name="rendering_value_bold_name">太線</string>
     <string name="lang_es_us">スペイン語 (アメリカ)</string>
     <string name="lang_ast">アストゥリア語</string>
@@ -1991,7 +1991,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_allow_motorway_name">高速道路を使う</string>
     <string name="routing_attr_allow_motorway_description">高速道路を利用可能とみなします。</string>
     <string name="auto_split_recording_title">空白検知で自動分割記録</string>
-    <string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しいセグメントを開始します。</string>
+    <string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しい区分として開始します。</string>
     <string name="rendering_attr_contourDensity_description">等高線の密度</string>
     <string name="rendering_attr_contourDensity_name">等高線密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -3281,7 +3281,7 @@ POIの更新は利用できません</string>
     <string name="added_profiles_descr">プラグインによって追加されたプロファイル</string>
     <string name="shared_string_turn_off">OFFにする</string>
     <string name="new_plugin_added">新しいプラグインが追加されました</string>
-    <string name="join_segments">セグメントの接続</string>
+    <string name="join_segments">区分同士の接続</string>
     <string name="quick_action_directions_from_desc">画面の中心を出発点にするボタンです。その後目的地を設定しルート検索を別途おこなう必要があります。</string>
     <string name="add_new_profile_q">新しいプロファイルとして\'%1$s\'を追加しますか？</string>
     <string name="save_heading">方向もログに含める</string>
@@ -3424,7 +3424,7 @@ POIの更新は利用できません</string>
     <string name="profile_type_custom_string">カスタムプロファイル</string>
     <string name="shared_string_angle_param">角度: %s°</string>
     <string name="shared_string_angle">角度</string>
-    <string name="recalc_angle_dialog_descr">ルートの再計算が終わるまで、現在地と計算済みルートの間に余剰分の直線セグメントが表示されます</string>
+    <string name="recalc_angle_dialog_descr">ルートの再計算が終わるまで、現在地と計算済みルートの間に余剰分の直線区分が表示されます</string>
     <string name="recalc_angle_dialog_title">現在地とルート間の最小角度</string>
     <string name="shared_string_app_default_w_val">アプリデフォルト(%s)</string>
     <string name="no_recalculation_setting">再計算をしない</string>
@@ -3631,14 +3631,14 @@ POIの更新は利用できません</string>
     <string name="overwrite_track">経路を上書き</string>
     <string name="save_as_new_track">新しい経路として保存</string>
     <string name="reverse_route">ルート反転</string>
-    <string name="route_between_points_next_segment_button_desc">選択したプロファイルを使用して、次のセグメントのみ再計算します。</string>
+    <string name="route_between_points_next_segment_button_desc">選択したプロファイルを使用して、次の区分のみ再計算します。</string>
     <string name="route_between_points_whole_track_button_desc">選択したプロファイルを使用して、経路全体が再計算されます。</string>
     <string name="route_between_points_desc">地点間を直線で結ぶ方法、または地点だけを指定しその後ルートを計算する方法のどちらかを選択します。</string>
     <string name="whole_track">全経路</string>
-    <string name="next_segment">次のセグメント</string>
+    <string name="next_segment">次の区分</string>
     <string name="threshold_distance">限界距離</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
-    <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
+    <string name="route_between_points_add_track_desc">新しい区分を追加するための経路ファイルを選択します。</string>
     <string name="street_level_imagery">ストリート画像</string>
     <string name="plan_route_exit_dialog_descr">計画されたルートにおける、すべての変更を破棄しますか？</string>
     <string name="app_mode_enduro_motorcycle">エンデューロバイク</string>
@@ -3758,16 +3758,16 @@ POIの更新は利用できません</string>
     <string name="gpx_monitoring_stop">旅程の記録を一時停止</string>
     <string name="gpx_monitoring_start">旅程の記録を続行</string>
     <string name="system_default_theme">システムのデフォルト</string>
-    <string name="all_next_segments_will_be_recalc">以後のすべてのセグメントは、選択したプロファイルを使用して再計算されます。</string>
-    <string name="all_next_segments">以後のすべてのセグメント</string>
-    <string name="previous_segment">前のセグメント</string>
-    <string name="all_previous_segments">以前のすべてのセグメント</string>
-    <string name="only_selected_segment_recalc">選択したセグメントのみ、選択したプロファイルを使用して再計算されます。</string>
-    <string name="all_previous_segments_will_be_recalc">以前のセグメントは、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_next_segments_will_be_recalc">以後のすべての区分は、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_next_segments">以後のすべての区分</string>
+    <string name="previous_segment">前の区分</string>
+    <string name="all_previous_segments">以前のすべての区分</string>
+    <string name="only_selected_segment_recalc">選択した区分のみ、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_previous_segments_will_be_recalc">以前の区分は、選択したプロファイルを使用して再計算されます。</string>
     <string name="open_saved_track">保存された経路を開く</string>
     <string name="one_point_error">少なくとも2つの地点を追加してください。</string>
     <string name="shared_string_redo">繰り返し</string>
-    <string name="release_3_8">• ルート計画機能を更新 : セグメントごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
+    <string name="release_3_8">• ルート計画機能を更新 : 区分ごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
 \n
 \n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始と終了アイコンの選択
 \n
@@ -3878,9 +3878,9 @@ POIの更新は利用できません</string>
     <string name="upload_photo">アップロード中</string>
     <string name="upload_photo_completed">アップロードが完了しました</string>
     <string name="uploading_count">%2$d個中%1$d個をアップロード中</string>
-    <string name="select_segments">セグメントの選択</string>
-    <string name="select_segments_description">%1$sには複数のセグメントが含まれているため、ナビゲーション用部分を指定する必要があります。</string>
-    <string name="segments_count">%1$dセグメント</string>
+    <string name="select_segments">区分の選択</string>
+    <string name="select_segments_description">%1$sには複数の区分が含まれているため、ナビゲーション用部分を指定する必要があります。</string>
+    <string name="segments_count">%1$d区分</string>
     <string name="uploaded_count">%2$d個中%1$d個をアップロードしました</string>
     <string name="toast_select_edits_for_upload">アップロードする編集を選択</string>
     <string name="hillshade_slope_contour_lines">陰影起伏図 / 勾配 / 等高線</string>
@@ -3901,7 +3901,7 @@ POIの更新は利用できません</string>
     <string name="activity_type_walking_name">徒歩</string>
     <string name="activity_type_offroad_name">未舗装道路</string>
     <string name="activity_type_motorbike_name">オートバイ</string>
-    <string name="routing_attr_short_way_description">最適化されたなるべく短いルート (省エネ)</string>
+    <string name="routing_attr_short_way_description">最適化されたなるべく短い(省エネ)ルートを選択します</string>
     <string name="activity_type_car_name">車</string>
     <string name="temporary_conditional_routing_descr">マップ上で現在有効になっている道路の制限を使用します</string>
     <string name="routing_attr_driving_style_description">運転の目的を選択することで、より短くより速くより安全なルートを取得します</string>
@@ -3970,12 +3970,12 @@ POIの更新は利用できません</string>
     <string name="plan_route_split_after">この後で分割</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">軽飛行機</string>
-    <string name="plan_route_add_new_segment">新規セグメントの追加</string>
+    <string name="plan_route_add_new_segment">新規区分の追加</string>
     <string name="profile_type_osmand_string">OsmAndプロファイル</string>
     <string name="profile_type_user_string">ユーザープロファイル</string>
     <string name="release_3_9">• 設定、リソース、お気に入りを含むすべてのデータをエクスポートおよびインポートするオプションを追加
 \n
-\n• ルートの計画：ルートを含むトラックセグメントのグラフ、および複数のトラックセグメントを作成および編集する機能を追加
+\n• ルートの計画：ルートを含む経路区分のグラフ、および複数の経路区分を作成および編集する機能を追加
 \n
 \n• OpenStreetMapのOAuth認証方法を追加し、OSMダイアログのUIを改善
 \n
@@ -4057,7 +4057,7 @@ POIの更新は利用できません</string>
     <string name="n_items_of_z">%1$s／%2$s</string>
     <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
     <string name="track_coloring_solid">通常色</string>
-    <string name="in_case_of_reverse_direction">逆方向の場合</string>
+    <string name="in_case_of_reverse_direction">逆方向に移動した場合</string>
     <string name="no_purchases">購入済みのアイテムはありません</string>
     <string name="new_device_account">新しい端末 / 新規アカウント</string>
     <string name="contact_support_description">ご不明な点がございましたら、%1$sまでお問い合わせください。</string>
@@ -4677,7 +4677,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_next_sunrise">次の日出</string>
     <string name="weather_temperature_fahrenheit">華氏</string>
     <string name="storage_migration_fragment_close_descr">コピーは %1$s しか完了していません。ここで停止すると、アプリが正しく動作しなくなる可能性があります。</string>
-    <string name="mtb_segment_classification">セグメントの分類</string>
+    <string name="mtb_segment_classification">区分の分類</string>
     <string name="quick_action_temperature_layer">マップ上の気温関連レイヤーの表示/非表示を切り替えます。</string>
     <string name="quick_action_air_pressure_layer">マップ上の気圧関連レイヤーの表示/非表示を切り替えます。</string>
     <string name="quick_action_cloud_layer">マップ上の雲関連レイヤーの表示/非表示を切り替えます。</string>
@@ -4877,7 +4877,7 @@ POIの更新は利用できません</string>
     <string name="coordinates_widget_map_center">座標:マップの中心</string>
     <string name="shared_string_shows">表示</string>
     <string name="download_heightmap_maps">ハイトマップ</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">専用のマウンテンバイク トレイルを表示します。</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">指定されたマウンテンバイクトレイルを表示します。</string>
     <string name="attach_roads_warning">道路には、記録された経路のみを取り付けることができます。</string>
     <string name="auto_25_chars_route_tu_kl">Uターン後左寄りに進む</string>
     <string name="auto_25_chars_route_tr_kr">右に曲がったあと右側へ寄って進む</string>
@@ -4943,7 +4943,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_2_5_d_view">2.5D表示</string>
     <string name="without_profiles_changing">プロファイルを変更しない</string>
     <string name="included_in_your_current_plan">現在の\"%1$s\"プランに含まれています</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBAトレイルを表示</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBA基準トレイルを表示</string>
     <string name="auto_25_chars_route_tu_kr">Uターン後右寄りに進む</string>
     <string name="auto_25_chars_route_roundabout_kl">%1$d出口を出て左寄りに進む</string>
     <string name="time_to_intermediate_widget_desc">ウィジェットには、最初の中間地点までの\"到着時刻\"または\"残り時間\"が表示されます。ナビゲーション中は常に時間が更新され、中間地点を通過すると次の中間地点までの時間へと更新されます。</string>
@@ -5058,7 +5058,7 @@ POIの更新は利用できません</string>
     <string name="rotate_map_manual_opt">手動回転(固定)</string>
     <string name="shared_string_kilograms">キログラム</string>
     <string name="shared_string_yards">ヤード</string>
-    <string name="display_position_automatic_descr">マップの向きによって異なります。移動方向は下に、その他は中央です。</string>
+    <string name="display_position_automatic_descr">現在地はマップの向きに応じて、移動時は下部に、その他は中央に表示されます。</string>
     <string name="sound_beep_simple_loud">ビープ音:シンプルで大音量</string>
     <string name="sound_beep_simple">ビープ音:シンプル</string>
     <string name="sort_duration_ascending">短い期間順</string>
