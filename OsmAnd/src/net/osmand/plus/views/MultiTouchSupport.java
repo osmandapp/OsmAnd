@@ -90,8 +90,11 @@ public class MultiTouchSupport {
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
 	private static final int TILT_X_THRESHOLD_PX = 40;
-	private static final int TILT_Y_THRESHOLD_PX = 40;
+	private static final int TILT_Y_THRESHOLD_PX = 10;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
+	private static final double DELTA_DISTANCE_THRESHOLD = 0.04;
+	private static final double ANGLE_THRESHOLD = 4;
+	private static final float MAX_DELTA_ZOOM = 4;
 
 	public boolean onTouchEvent(MotionEvent event) {
 		if (!isMultiTouchSupported()) {
@@ -173,16 +176,19 @@ public class MultiTouchSupport {
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
 							&& startDy < TILT_Y_THRESHOLD_PX * 6
 							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX
-							&& (startedMode == MODE.NONE || startedMode == MODE.TILT)) {
+							&& startedMode == MODE.NONE
+							&& !isZoomRotationGesture(distance, angle, angleDefined)
+							|| startedMode == MODE.TILT) {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
-							|| Math.abs(dy1 - dy2) > TILT_DY_THRESHOLD_PX
+					} else if (isZoomRotationGesture(distance, angle, angleDefined)
 							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
-						angleRelative = 0;
-						zoomRelative = 0;
-						startedMode = MODE.ZOOM;
+						if (startedMode == MODE.NONE) {
+							angleRelative = 0;
+							zoomRelative = 0;
+							startedMode = MODE.ZOOM;
+						}
 						inZoomMode = true;
 					}
 				} else {
@@ -195,6 +201,11 @@ public class MultiTouchSupport {
 			log.debug("Multi touch exception", e);
 		}
 		return false;
+	}
+
+	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
+		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
+				|| Math.abs(angle - angleStarted) > ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {

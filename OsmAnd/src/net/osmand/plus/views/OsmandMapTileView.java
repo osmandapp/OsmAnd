@@ -1619,9 +1619,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
 
-		private static final float ANGLE_THRESHOLD = 5;
-		private static final float ANGLE_ZOOM_THRESHOLD = 15;
-		private static final float ZOOM_THRESHOLD = 0.1f;
+		private static final float ZONE_0_ANGLE_THRESHOLD = 5;
+		private static final float ZONE_1_ANGLE_THRESHOLD = 15;
+		private static final float ZONE_2_ANGLE_THRESHOLD = 30;
+		private static final float ZONE_0_ZOOM_THRESHOLD = 0.15f;
+		private static final float ZONE_1_ZOOM_THRESHOLD = 0.3f;
+		private static final float ZONE_2_ZOOM_THRESHOLD = 2f;
 		private static final float MAX_DELTA_ZOOM = 4;
 
 		private PointF initialMultiTouchCenterPoint;
@@ -1746,19 +1749,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
 			double deltaZoom = calculateDeltaZoom(relativeToStart);
-			if (Math.abs(deltaZoom) <= ZOOM_THRESHOLD && !startZooming) {
+			if (Math.abs(deltaZoom) <= ZONE_0_ZOOM_THRESHOLD && !startZooming) {
 				deltaZoom = 0; // keep only rotating
 			} else {
 				startZooming = true;
 			}
-			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
-				if (Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
-					relAngle = 0;
-				} else if (!startZooming || Math.abs(relAngle) > ANGLE_ZOOM_THRESHOLD) {
-					startRotating = true;
-				} else if (!startRotating) {
-					relAngle = 0;
-				}
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION) && isAngleOverThreshold(Math.abs(relAngle), Math.abs(deltaZoom))) {
+				startRotating = true;
 			} else {
 				relAngle = 0;
 			}
@@ -1766,6 +1763,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (deltaZoom != 0 || relAngle != 0) {
 				changeZoomPosition((float) deltaZoom, relAngle);
 			}
+		}
+
+		private boolean isAngleOverThreshold(float angle, double deltaZoom) {
+			return startRotating ||
+					!startZooming && Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD ||
+					startZooming && angle >= ZONE_1_ANGLE_THRESHOLD && deltaZoom >= ZONE_1_ZOOM_THRESHOLD && deltaZoom < ZONE_2_ZOOM_THRESHOLD ||
+					startZooming && angle >= ZONE_2_ANGLE_THRESHOLD && deltaZoom >= ZONE_2_ZOOM_THRESHOLD;
 		}
 
 		@Override
@@ -1806,9 +1810,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		private double calculateDeltaZoom(double relativeToStart) {
 			double deltaZoom = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
-			if (deltaZoom > 0.0 && deltaZoom > MAX_DELTA_ZOOM) {
+			if (deltaZoom > MAX_DELTA_ZOOM) {
 				return MAX_DELTA_ZOOM;
-			} else if (deltaZoom < 0.0 && deltaZoom < -MAX_DELTA_ZOOM) {
+			} else if (deltaZoom < -MAX_DELTA_ZOOM) {
 				return -MAX_DELTA_ZOOM;
 			}
 			return deltaZoom;
