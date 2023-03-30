@@ -591,4 +591,8 @@ public class DownloadActivityType {
 		String fileName = downloadItem.getFileName();
 		return !Algorithms.isEmpty(fileName) && fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP);
 	}
+
+	public static boolean isDefaultVoiceTTS(@NonNull OsmandApplication app, @NonNull DownloadItem item) {
+		return isVoiceTTS(item) && Algorithms.stringsEqual(app.getLanguage(), item.getBasename().replaceAll("-tts", ""));
+	}
 }
