@@ -460,6 +460,9 @@ public class OsmandRegions {
 
 
 	public WorldRegion getRegionData(String fullName) {
+		if (WorldRegion.WORLD.equals(fullName)) {
+			return worldRegion;
+		}
 		return fullNamesToRegionData.get(fullName);
 	}
 
