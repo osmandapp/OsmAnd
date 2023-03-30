@@ -430,7 +430,7 @@ public class BinaryRoutePlanner {
 		
 		// calculate possible obstacle plus time
 		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
-		if (obstacle < 0) {
+		if (obstacle < 0 && !(road.id == ctx.startRoadId && segmentInd == ctx.startSegmentInd && !reverseWaySearch)) {
 			return -1;
 		}
 		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd);
