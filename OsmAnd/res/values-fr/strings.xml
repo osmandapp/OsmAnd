@@ -152,7 +152,7 @@
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
     <string name="internet_connection_required_for_online_route">Le calcul d\'itinéraire en ligne est sélectionné mais une connexion Internet est indispensable pour qu\'il fonctionne.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
-    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas supportée par le moteur de synthèse vocale installé, la langue par défaut sera utilisée à la place. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \?</string>
+    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible pour le moteur de synthèse vocale installé, la langue par défaut sera donc utilisée. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale Android TTS (text-to-speech) sur Google Play \?</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
     <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
     <string name="gpx_option_reverse_route">Inverser le sens de la trace</string>
