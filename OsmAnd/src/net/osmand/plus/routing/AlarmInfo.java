@@ -6,6 +6,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.SpeedConstants;
 
 public class AlarmInfo implements LocationPoint {
 	public enum AlarmInfoType {
@@ -42,7 +43,7 @@ public class AlarmInfo implements LocationPoint {
 	private final AlarmInfoType type;
 	protected final int locationIndex;
 	private int lastLocationIndex = -1;
-	private int intValue;
+	private float maxSpeed;
 	private float floatValue;
 	private double latitude;
 	private double longitude;
@@ -64,7 +65,17 @@ public class AlarmInfo implements LocationPoint {
 	public void setFloatValue(float floatValue) {
 		this.floatValue = floatValue;
 	}
-	
+
+	public int getMaxSpeed(SpeedConstants sc) {
+		return sc.imperial
+				? Math.round(getMaxSpeed() * 3.6f / 1.6f)
+				: Math.round(getMaxSpeed() * 3.6f);
+	}
+
+	public float getMaxSpeed() { return maxSpeed; }
+
+	public void setMaxSpeed(float maxSpeed) { this.maxSpeed = maxSpeed; }
+
 	@Override
 	public double getLatitude() {
 		return latitude;
@@ -73,10 +84,6 @@ public class AlarmInfo implements LocationPoint {
 	@Override
 	public double getLongitude() {
 		return longitude;
-	}
-	
-	public int getIntValue() {
-		return intValue;
 	}
 	
 	public int getLocationIndex() {
@@ -91,14 +98,10 @@ public class AlarmInfo implements LocationPoint {
 		this.lastLocationIndex = lastLocationIndex;
 	}
 
-	public void setIntValue(int intValue) {
-		this.intValue = intValue;
-	}
-
-	public static AlarmInfo createSpeedLimit(int speed, Location loc){
+	public static AlarmInfo createSpeedLimit(float maxSpeed, Location loc){
 		AlarmInfo info = new AlarmInfo(AlarmInfoType.SPEED_LIMIT, 0);
 		info.setLatLon(loc.getLatitude(), loc.getLongitude());
-		info.setIntValue(speed);
+		info.setMaxSpeed(maxSpeed);
 		return info;
 	}
 	

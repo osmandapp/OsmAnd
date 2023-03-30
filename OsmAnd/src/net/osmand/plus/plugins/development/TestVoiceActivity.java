@@ -214,14 +214,15 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "Attention prompts:", builder(p));
 		addButton(ll, "\u25BA (9.1)  You are exceeding the speed limit '50' (18 m/s)", builder(p).speedAlarm(50, 18f));
-		addButton(ll, "\u25BA (9.2)  Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
-		addButton(ll, "\u25BA (9.3)  Attention, border control", builder(p).attention("BORDER_CONTROL"));
-		addButton(ll, "\u25BA (9.4)  Attention, railroad crossing", builder(p).attention("RAILWAY"));
-		addButton(ll, "\u25BA (9.5)  Attention, traffic calming", builder(p).attention("TRAFFIC_CALMING"));
-		addButton(ll, "\u25BA (9.6)  Attention, toll booth", builder(p).attention("TOLL_BOOTH"));
-		addButton(ll, "\u25BA (9.7)  Attention, stop sign", builder(p).attention("STOP"));
-		addButton(ll, "\u25BA (9.8)  Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
-		addButton(ll, "\u25BA (9.9)  Attention, tunnel", builder(p).attention("TUNNEL"));
+		addButton(ll, "\u25BA (9.2)  Attention, speed camera, distance 650m, speed limit '50' (18 m/s)", builder(p).speedCameraAlarm(650f, 50, "SPEED_CAMERA"));
+		addButton(ll, "\u25BA (9.3)  Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
+		addButton(ll, "\u25BA (9.4)  Attention, border control", builder(p).attention("BORDER_CONTROL"));
+		addButton(ll, "\u25BA (9.5)  Attention, railroad crossing", builder(p).attention("RAILWAY"));
+		addButton(ll, "\u25BA (9.6)  Attention, traffic calming", builder(p).attention("TRAFFIC_CALMING"));
+		addButton(ll, "\u25BA (9.7)  Attention, toll booth", builder(p).attention("TOLL_BOOTH"));
+		addButton(ll, "\u25BA (9.8)  Attention, stop sign", builder(p).attention("STOP"));
+		addButton(ll, "\u25BA (9.9)  Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
+		addButton(ll, "\u25BA (9.10)  Attention, tunnel", builder(p).attention("TUNNEL"));
 
 		addButton(ll, "Other prompts:", builder(p));
 		addButton(ll, "\u25BA (10.1) GPS signal lost", builder(p).gpsLocationLost());

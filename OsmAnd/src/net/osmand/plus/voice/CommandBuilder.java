@@ -30,6 +30,7 @@ public abstract class CommandBuilder {
 	protected static final String C_REACHED_POI = "reached_poi";
 	protected static final String C_THEN = "then";
 	protected static final String C_SPEAD_ALARM = "speed_alarm";
+	protected static final String C_SPEED_CAMERA_ALARM = "speed_camera_alarm";
 	protected static final String C_ATTENTION = "attention";
 	protected static final String C_OFF_ROUTE = "off_route";
 	protected static final String C_BACK_ON_ROUTE = "back_on_route";
@@ -68,6 +69,8 @@ public abstract class CommandBuilder {
 	public abstract CommandBuilder makeUT(StreetName streetName);
 
 	public abstract CommandBuilder speedAlarm(int maxSpeed, float speed);
+
+	public abstract CommandBuilder speedCameraAlarm(double dist, int maxSpeed, String fallbackAttentionType);
 
 	public abstract CommandBuilder attention(String type);
 

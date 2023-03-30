@@ -20,6 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
@@ -277,6 +278,8 @@ public class RouteCalculationResult {
 		int[] pointTypes = res.getObject().getPointTypes(intId);
 		if (pointTypes != null) {
 			RouteRegion reg = res.getObject().region;
+			float maxSpeed = -1;
+			AlarmInfo speedCameraAlarmInfo = null;
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 				int x31 = res.getObject().getPoint31XTile(intId);
@@ -285,9 +288,28 @@ public class RouteCalculationResult {
 				loc.setLatitude(MapUtils.get31LatitudeY(y31));
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
+
 				// For STOP first check if it has directional info
 				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && !res.getObject().isStopApplicable(res.isForwardDirection(), intId, res.getStartPointIndex(), res.getEndPointIndex()))) {
 					alarms.add(info);
+
+					if (info.getType() == AlarmInfoType.SPEED_CAMERA) {
+						speedCameraAlarmInfo = info;
+					}
+				}
+
+				if (maxSpeed <= 0 || maxSpeed == RouteDataObject.NONE_MAX_SPEED) {
+					maxSpeed = typeRule.maxSpeed();
+				}
+			}
+
+			if (speedCameraAlarmInfo != null) {
+				if (maxSpeed <= 0 || maxSpeed == RouteDataObject.NONE_MAX_SPEED) {
+					maxSpeed = res.getObject().getMaximumSpeed(res.isForwardDirection());
+				}
+
+				if (maxSpeed > 0 && maxSpeed != RouteDataObject.NONE_MAX_SPEED) {
+					speedCameraAlarmInfo.setMaxSpeed(maxSpeed);
 				}
 			}
 		}
