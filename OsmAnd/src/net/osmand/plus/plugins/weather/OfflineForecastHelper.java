@@ -5,6 +5,7 @@ import static net.osmand.map.WorldRegion.RUSSIA_REGION_ID;
 import static net.osmand.map.WorldRegion.WORLD;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
+import static net.osmand.plus.plugins.weather.WeatherHelper.isWeatherAllowed;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.LOCAL_SIZE;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.PROGRESS_DOWNLOAD;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.SIZE_CALCULATED;
@@ -260,6 +261,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		setOfflineForecastSizeInfo(regionId, 0, true);
 		setOfflineForecastSizeInfo(regionId, 0, false);
 		setOfflineForecastSizesInfoCalculated(regionId, false);
+		if (!isWeatherAllowed(app)) {
+			LOG.error("[Calculate size] [" + regionId + "] Weather isn't allowed with this configuration.");
+			return;
+		}
 		runAsync(() -> {
 			List<Long> tileIds = getTileIds(region);
 			TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
@@ -283,6 +288,13 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void calculateTotalCacheSizeAsync(boolean forceCalculation) {
+		LOG.debug("[Calculate size] [Total] Call calculateTotalCacheSizeAsync " +
+				"[isCalculated = " + totalCacheSize.isCalculated() + "], " +
+				"[forceCalculation = " + forceCalculation + "]");
+		if (!isWeatherAllowed(app)) {
+			LOG.error("[Calculate size] [Total] Can't calculate. Weather isn't allowed with current configuration.");
+			return;
+		}
 		if ((totalCacheSize.isCalculated() && !forceCalculation)) {
 			// calculation is not required
 			return;
@@ -326,7 +338,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void clearOnlineCacheAsync() {
-		runAsync(this::clearOnlineCache);
+		if (isWeatherAllowed(app)) {
+			runAsync(this::clearOnlineCache);
+		} else {
+			LOG.error("[Clear] [All online] Can't clear online cache. Weather isn't allowed with current configuration.");
+		}
 	}
 
 	private void clearOnlineCache() {
@@ -345,7 +361,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void clearOfflineCacheAsync(@Nullable List<String> regionIds) {
-		runAsync(() -> clearOfflineCache(regionIds));
+		if (isWeatherAllowed(app)) {
+			runAsync(() -> clearOfflineCache(regionIds));
+		} else {
+			LOG.error("[Clear] [All offline] Can't clear offline cache. Weather isn't allowed with current configuration.");
+		}
 	}
 
 	private void clearOfflineCache(@Nullable List<String> regionIds) {
@@ -367,8 +387,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public boolean canClearOnlineCache() {
 		if (!isClearOnlineCacheInProgress()) {
-			return totalCacheSize.isCalculated(false)
-					&& totalCacheSize.get(false) > 0;
+			return totalCacheSize.isCalculated(false) && totalCacheSize.get(false) > 0;
 		}
 		return false;
 	}
@@ -656,6 +675,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void addWeatherIndexItems(@NonNull IndexFileList indexes) {
+		LOG.debug("[Add Index Items] Call addWeatherIndexItems");
+		if (!isWeatherAllowed(app)) {
+			LOG.error("[Add Index Items] Can't add weather indexes. Weather isn't allowed with current configuration.");
+		}
 		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
 			if (shouldHaveWeatherForecast(region)) {
 				WeatherIndexItem index = createIndexItem(region);
