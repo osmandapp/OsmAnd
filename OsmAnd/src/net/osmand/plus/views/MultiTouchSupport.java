@@ -92,6 +92,8 @@ public class MultiTouchSupport {
 	private static final int TILT_X_THRESHOLD_PX = 40;
 	private static final int TILT_Y_THRESHOLD_PX = 10;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
+	private static final double DELTA_DISTANCE_THRESHOLD = 0.04;
+	private static final double ANGLE_THRESHOLD = 4;
 	private static final float MAX_DELTA_ZOOM = 4;
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -159,7 +161,7 @@ public class MultiTouchSupport {
 						angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
 					}
 					zoomRelative = distance / zoomStartedDistance;
-					listener.onZoomingOrRotating(calculateDeltaZoom(zoomRelative), angleRelative);
+					listener.onZoomingOrRotating(zoomRelative, angleRelative);
 				} else if (inTiltMode) {
 					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
@@ -174,17 +176,20 @@ public class MultiTouchSupport {
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
 							&& startDy < TILT_Y_THRESHOLD_PX * 6
 							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX
-							&& (startedMode == MODE.NONE || startedMode == MODE.TILT)) {
+							&& startedMode == MODE.NONE
+							&& !isZoomRotationGesture(distance, angle, angleDefined)
+							|| startedMode == MODE.TILT) {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if ((dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
-							|| Math.abs(dy1 - dy2) > TILT_DY_THRESHOLD_PX
-							|| Math.abs(calculateDeltaZoom(distance / zoomStartedDistance)) > 0.1)
-							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
-						angleRelative = 0;
-						zoomRelative = 0;
-						startedMode = MODE.ZOOM;
+					} else if (
+							isZoomRotationGesture(distance, angle, angleDefined)
+									&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
+						if (startedMode == MODE.NONE) {
+							angleRelative = 0;
+							zoomRelative = 0;
+							startedMode = MODE.ZOOM;
+						}
 						inZoomMode = true;
 					}
 				} else {
@@ -199,14 +204,9 @@ public class MultiTouchSupport {
 		return false;
 	}
 
-	private double calculateDeltaZoom(double relativeToStart) {
-		double deltaZoom = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
-		if (deltaZoom > 0.0 && deltaZoom > MAX_DELTA_ZOOM) {
-			return MAX_DELTA_ZOOM;
-		} else if (deltaZoom < 0.0 && deltaZoom < -MAX_DELTA_ZOOM) {
-			return -MAX_DELTA_ZOOM;
-		}
-		return deltaZoom;
+	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
+		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
+				|| Math.abs(angle - angleStarted) > ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {
