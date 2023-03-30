@@ -1959,7 +1959,7 @@ POIの更新は利用できません</string>
     <string name="access_sort">並べ替え</string>
     <string name="map_mode">昼夜モード切替</string>
     <string name="rendering_value_thin_name">細線</string>
-    <string name="rendering_value_medium_name">中</string>
+    <string name="rendering_value_medium_name">中線</string>
     <string name="rendering_value_bold_name">太線</string>
     <string name="lang_es_us">スペイン語 (アメリカ)</string>
     <string name="lang_ast">アストゥリア語</string>
@@ -3901,7 +3901,7 @@ POIの更新は利用できません</string>
     <string name="activity_type_walking_name">徒歩</string>
     <string name="activity_type_offroad_name">未舗装道路</string>
     <string name="activity_type_motorbike_name">オートバイ</string>
-    <string name="routing_attr_short_way_description">最適化されたなるべく短いルート (省エネ)</string>
+    <string name="routing_attr_short_way_description">最適化されたなるべく短い(省エネ)ルートを選択します</string>
     <string name="activity_type_car_name">車</string>
     <string name="temporary_conditional_routing_descr">マップ上で現在有効になっている道路の制限を使用します</string>
     <string name="routing_attr_driving_style_description">運転の目的を選択することで、より短くより速くより安全なルートを取得します</string>
@@ -4057,7 +4057,7 @@ POIの更新は利用できません</string>
     <string name="n_items_of_z">%1$s／%2$s</string>
     <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
     <string name="track_coloring_solid">通常色</string>
-    <string name="in_case_of_reverse_direction">逆方向の場合</string>
+    <string name="in_case_of_reverse_direction">逆方向に移動した場合</string>
     <string name="no_purchases">購入済みのアイテムはありません</string>
     <string name="new_device_account">新しい端末 / 新規アカウント</string>
     <string name="contact_support_description">ご不明な点がございましたら、%1$sまでお問い合わせください。</string>
@@ -4677,7 +4677,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_next_sunrise">次の日出</string>
     <string name="weather_temperature_fahrenheit">華氏</string>
     <string name="storage_migration_fragment_close_descr">コピーは %1$s しか完了していません。ここで停止すると、アプリが正しく動作しなくなる可能性があります。</string>
-    <string name="mtb_segment_classification">セグメントの分類</string>
+    <string name="mtb_segment_classification">区分の分類</string>
     <string name="quick_action_temperature_layer">マップ上の気温関連レイヤーの表示/非表示を切り替えます。</string>
     <string name="quick_action_air_pressure_layer">マップ上の気圧関連レイヤーの表示/非表示を切り替えます。</string>
     <string name="quick_action_cloud_layer">マップ上の雲関連レイヤーの表示/非表示を切り替えます。</string>
@@ -4877,7 +4877,7 @@ POIの更新は利用できません</string>
     <string name="coordinates_widget_map_center">座標:マップの中心</string>
     <string name="shared_string_shows">表示</string>
     <string name="download_heightmap_maps">ハイトマップ</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">専用のマウンテンバイク トレイルを表示します。</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">指定されたマウンテンバイクトレイルを表示します。</string>
     <string name="attach_roads_warning">道路には、記録された経路のみを取り付けることができます。</string>
     <string name="auto_25_chars_route_tu_kl">Uターン後左寄りに進む</string>
     <string name="auto_25_chars_route_tr_kr">右に曲がったあと右側へ寄って進む</string>
@@ -4943,7 +4943,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_2_5_d_view">2.5D表示</string>
     <string name="without_profiles_changing">プロファイルを変更しない</string>
     <string name="included_in_your_current_plan">現在の\"%1$s\"プランに含まれています</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBAトレイルを表示</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBA基準トレイルを表示</string>
     <string name="auto_25_chars_route_tu_kr">Uターン後右寄りに進む</string>
     <string name="auto_25_chars_route_roundabout_kl">%1$d出口を出て左寄りに進む</string>
     <string name="time_to_intermediate_widget_desc">ウィジェットには、最初の中間地点までの\"到着時刻\"または\"残り時間\"が表示されます。ナビゲーション中は常に時間が更新され、中間地点を通過すると次の中間地点までの時間へと更新されます。</string>
@@ -5058,7 +5058,7 @@ POIの更新は利用できません</string>
     <string name="rotate_map_manual_opt">手動回転(固定)</string>
     <string name="shared_string_kilograms">キログラム</string>
     <string name="shared_string_yards">ヤード</string>
-    <string name="display_position_automatic_descr">マップの向きによって異なります。移動方向は下に、その他は中央です。</string>
+    <string name="display_position_automatic_descr">現在地はマップの向きに応じて、移動時は下部に、その他は中央に表示されます。</string>
     <string name="sound_beep_simple_loud">ビープ音:シンプルで大音量</string>
     <string name="sound_beep_simple">ビープ音:シンプル</string>
     <string name="sort_duration_ascending">短い期間順</string>
