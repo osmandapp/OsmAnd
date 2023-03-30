@@ -3024,7 +3024,7 @@ POIの更新は利用できません</string>
     <string name="base_profile_descr_car">乗用車、トラック、オートバイ</string>
     <string name="base_profile_descr_bicycle">マウンテンバイク、原付、馬</string>
     <string name="base_profile_descr_pedestrian">徒歩、ハイキング、ランニング</string>
-    <string name="base_profile_descr_public_transport">定期運行している鉄道やバスなど</string>
+    <string name="base_profile_descr_public_transport">定期運行している鉄道、バス、路面電車など</string>
     <string name="base_profile_descr_boat">船舶、漕ぎボート、帆船</string>
     <string name="base_profile_descr_aircraft">航空機、グライダー</string>
     <string name="routing_profile_geocoding">ジオコーディング</string>
