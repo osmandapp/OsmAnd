@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.BandIndexGeoBandSettingsHash;
 import net.osmand.core.jni.GeoBandSettings;
 import net.osmand.core.jni.MapPresentationEnvironment;
@@ -20,6 +21,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.ZoomLevelDoubleListHash;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -202,5 +204,11 @@ public class WeatherHelper {
 	public static long roundForecastTimeToHour(long time) {
 		long hour = 60 * 60 * 1000;
 		return (time + hour / 2) / hour * hour;
+	}
+
+	public static boolean isWeatherSupported(@NonNull OsmandApplication app) {
+		return app.getSettings().USE_OPENGL_RENDER.get()
+				&& NativeCore.isAvailable()
+				&& !Version.isQnxOperatingSystem();
 	}
 }
