@@ -699,7 +699,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+		if (NetworkUtils.getProxy() == null && osmandSettings.isProxyEnabled()) {
 			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}
 		appInitializer.startApplication();
