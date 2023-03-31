@@ -29,7 +29,7 @@
     <string name="rendering_attr_tracktype_grade3_name">Смешанное</string>
     <string name="rendering_attr_tracktype_grade4_name">Почти мягкое</string>
     <string name="rendering_attr_tracktype_grade5_name">Мягкое</string>
-    <string name="routeInfo_tracktype_name">Твёрдость поверхности</string>
+    <string name="routeInfo_tracktype_name">Прочность покрытия</string>
     <string name="intermediate_waypoint">Промежуточная точка</string>
     <string name="intermediate_destinations">Промежуточные точки</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
