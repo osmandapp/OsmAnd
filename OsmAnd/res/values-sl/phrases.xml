@@ -4542,4 +4542,13 @@
     <string name="poi_sinkhole_ponor">Vrtača: ponor</string>
     <string name="poi_sinkhole_pit">Vrtača: brezno</string>
     <string name="poi_sinkhole_estavelle">Vrtača: estavela</string>
+    <string name="poi_barrier_planter">Okrasni lonec za rože</string>
+    <string name="poi_sump_buster">Karterski uničevalec</string>
+    <string name="poi_wedge">Klin</string>
+    <string name="poi_wicket_gate">Vratca</string>
+    <string name="poi_barrier_bar">Drog</string>
+    <string name="poi_barrier_tyres">Pnevmatike</string>
+    <string name="poi_tank_trap">Pregrada za tanke</string>
+    <string name="poi_spikes">Stinger</string>
+    <string name="poi_barrier_board">Pregradna plošča</string>
 </resources>
