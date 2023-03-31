@@ -32,6 +32,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -159,6 +160,8 @@ public class OsmandSettings {
 	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
 
+	private StateChangedListener<ApplicationMode> appModeListener;
+
 	private Object objectToShow;
 	private boolean editObjectToShow;
 	private String searchRequestToShow;
@@ -182,6 +185,20 @@ public class OsmandSettings {
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
+		initBaseAppMode();
+	}
+
+	private void initBaseAppMode() {
+		setBaseAppMode();
+		appModeListener = applicationMode -> setBaseAppMode();
+		APPLICATION_MODE.addListener(appModeListener);
+	}
+
+	private void setBaseAppMode(){
+		getCustomRenderProperty("baseAppMode").setModeValue(APPLICATION_MODE.get(),
+				APPLICATION_MODE.get().getParent() != null
+						? APPLICATION_MODE.get().getParent().getStringKey()
+						: APPLICATION_MODE.get().getStringKey());
 	}
 
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
@@ -379,6 +396,7 @@ public class OsmandSettings {
 
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
+		setBaseAppMode();
 	}
 
 	public void resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
