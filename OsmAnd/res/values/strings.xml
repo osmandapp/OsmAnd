@@ -3054,6 +3054,7 @@
     <string name="download_live_updates">Live updates</string>
     <string name="rendering_value_default13_name">Default (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Default (translucent cyan)</string>
+    <string name="rendering_value_defaultMedium_name">Default (medium)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX color</string>
     <string name="rendering_attr_currentTrackColor_description">GPX color</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
