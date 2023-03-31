@@ -55,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener, GpxImportListener {
+public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
@@ -89,7 +89,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		importHelper = new ImportHelper(requireActivity());
-		importHelper.setGpxImportListener(this);
 		selectedTracksHelper = new SelectedTracksHelper(app);
 		nightMode = isNightMode(true);
 	}
@@ -236,10 +235,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
 			Set<TrackItem> selectedTracks = selectedTracksHelper.getSelectedTracks();
-			if (!Algorithms.isEmpty(selectedTracks)) {
-				onTrackItemsSelected(selectedTracks, false);
-			} else {
+			if (Algorithms.isEmpty(selectedTracks)) {
 				onTrackItemsSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
+			} else {
+				onTrackItemsSelected(selectedTracks, false);
 			}
 		});
 		updateButtonsState();
@@ -265,7 +264,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Nullable
 	public TrackTab getSelectedTab() {
 		List<TrackTab> trackTabs = getTrackTabs();
-		return !trackTabs.isEmpty() ? trackTabs.get(viewPager.getCurrentItem()) : null;
+		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
 	}
 
 	public void setSelectedTab(@NonNull String name) {
@@ -298,7 +297,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
-	public void reloadTracks() {
+	private void reloadTracks() {
 		asyncLoader = new TrackItemsLoaderTask(app, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -364,9 +363,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				List<Uri> filesUri = IntentHelper.getIntentUris(data);
-				if (filesUri.size() == 1) {
-					importHelper.handleGpxImport(filesUri.get(0), null, true);
-				} else if (filesUri.size() > 1) {
+				if (!Algorithms.isEmpty(filesUri)) {
+					AndroidUiHelper.updateVisibility(progressBar, true);
+					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
 					importHelper.handleGpxFilesImport(filesUri, true);
 				}
 			}
@@ -375,11 +374,35 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
-	@Override
-	public void onSaveComplete(boolean success, GPXFile gpxFile) {
-		if (isAdded() && success) {
-			addTrackItem(new TrackItem(new File(gpxFile.path)));
-		}
+	@NonNull
+	private GpxImportListener getGpxImportListener(int filesSize) {
+		return new GpxImportListener() {
+			private int importCounter;
+
+			@Override
+			public void onImportComplete(boolean success) {
+				if (!success) {
+					importCounter++;
+				}
+				checkImportFinished();
+			}
+
+			@Override
+			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+				if (isAdded() && success) {
+					addTrackItem(new TrackItem(new File(gpxFile.path)));
+				}
+				importCounter++;
+				checkImportFinished();
+			}
+
+			private void checkImportFinished() {
+				if (importCounter == filesSize) {
+					importHelper.setGpxImportListener(null);
+					AndroidUiHelper.updateVisibility(progressBar, false);
+				}
+			}
+		};
 	}
 
 	private void addTrackItem(@NonNull TrackItem item) {
@@ -409,7 +432,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
 			if (fragment instanceof TrackItemsFragment) {
-				((TrackItemsFragment) fragment).ontrackItemsSelected(trackItems);
+				((TrackItemsFragment) fragment).onTrackItemsSelected(trackItems);
 			}
 		}
 	}

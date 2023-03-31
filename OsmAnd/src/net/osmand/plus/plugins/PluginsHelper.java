@@ -143,7 +143,7 @@ public class PluginsHelper {
 					allPlugins.add(plugin);
 				}
 			} catch (JSONException e) {
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
 	}
@@ -162,7 +162,7 @@ public class PluginsHelper {
 				plugin.writeDependentFilesJson(json);
 				itemsJson.put(json);
 			} catch (JSONException e) {
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
 		String jsonStr = itemsJson.toString();
@@ -172,7 +172,7 @@ public class PluginsHelper {
 	}
 
 	private static void enablePluginsByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins) {
-		for (OsmandPlugin plugin : allPlugins) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			if (plugin.isEnableByDefault()
 					&& !enabledPlugins.contains(plugin.getId())
 					&& !isPluginDisabledManually(app, plugin)) {
@@ -183,7 +183,7 @@ public class PluginsHelper {
 	}
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
-		for (OsmandPlugin plugin : allPlugins) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isEnabled()) {
 				initPlugin(app, plugin);
 			}
@@ -331,62 +331,67 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<OsmandPlugin> getAvailablePlugins() {
-		return allPlugins;
+		return new ArrayList<>(allPlugins);
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getEnabledPlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isEnabled()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (plugin.isEnabled()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getActivePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isActive()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (plugin.isActive()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getNotActivePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (!p.isActive()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (!plugin.isActive()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getMarketPlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isMarketPlugin()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (plugin.isMarketPlugin()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<CustomOsmandPlugin> getCustomPlugins() {
-		ArrayList<CustomOsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin plugin : allPlugins) {
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<CustomOsmandPlugin> customPlugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
 			if (plugin instanceof CustomOsmandPlugin) {
-				lst.add((CustomOsmandPlugin) plugin);
+				customPlugins.add((CustomOsmandPlugin) plugin);
 			}
 		}
-		return lst;
+		return customPlugins;
 	}
 
 	@NonNull
