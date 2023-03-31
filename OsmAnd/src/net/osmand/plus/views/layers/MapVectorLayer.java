@@ -110,9 +110,8 @@ public class MapVectorLayer extends BaseMapLayer {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
 			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
-			boolean keepLabels = false;
-			if (view != null) 
-				keepLabels = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
+
+			boolean keepLabels = getApplication().getSettings().KEEP_MAP_LABELS_VISIBLE.get();
 			SymbolSubsectionConfiguration symbolSubsectionConfiguration = new SymbolSubsectionConfiguration();
 			symbolSubsectionConfiguration.setOpacityFactor(keepLabels ? 1.0f : ((float) alpha) / 255.0f);
 			mapRenderer.setSymbolSubsectionConfiguration(MapRendererContext.OBF_SYMBOL_SECTION,
@@ -155,7 +154,7 @@ public class MapVectorLayer extends BaseMapLayer {
 					mapRendererContext.updateLocalization();
 				}
 			}
-			if ((alphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
+			if ((mapRendererChanged || alphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
 				updateLayerProviderAlpha(alpha);
 			}
 
