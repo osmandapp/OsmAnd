@@ -353,6 +353,9 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 						@Override
 						protected void onPostExecute(String response) {
+							if (!isAdded()) {
+								return;
+							}
 							if (response != null) {
 								try {
 									JSONObject obj = new JSONObject(response);
