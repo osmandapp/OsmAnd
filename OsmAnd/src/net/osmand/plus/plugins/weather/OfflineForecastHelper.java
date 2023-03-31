@@ -151,15 +151,14 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void downloadForecastByRegion(@NonNull WorldRegion region) {
-		LOG.debug("[Download] [" + region.getRegionId() + "] Call downloadForecastByRegion progress is null");
+		LOG.debug("[Download] [" + region.getRegionId() + "] Call 'downloadForecastByRegion' progress is null");
 		downloadForecastByRegion(region, null);
 	}
 
 	public boolean downloadForecastByRegion(@NonNull WorldRegion region, @Nullable IProgress progress) {
-		LOG.debug("[Download] [" + region.getRegionId() + "] Call downloadForecastByRegion with progress");
-		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
-		if (plugin == null || !plugin.isActive()) {
-			LOG.error("[Download] [" + region.getRegionId() + "] Failed. Plugin isn't available.");
+		LOG.debug("[Download] [" + region.getRegionId() + "] Call 'downloadForecastByRegion' with progress");
+		if (!WeatherHelper.isWeatherAllowed(app)) {
+			LOG.error("[Download] [" + region.getRegionId() + "] Failed. Weather isn't allowed with current configuration.");
 			return false;
 		}
 		String regionId = region.getRegionId();
@@ -229,6 +228,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	public void checkAndStopWeatherDownload(@NonNull WeatherIndexItem weatherIndexItem) {
 		String regionId = weatherIndexItem.getRegionId();
 		LOG.debug("[Download] [" + regionId + "] Call 'checkAndStopWeatherDownload'");
+		if (!isWeatherAllowed(app)) {
+			LOG.error("[Download] [" + regionId + "] Can't stop weather download. Weather isn't allowed with current configuration.");
+			return;
+		}
 		prepareToStopDownloading(regionId);
 		if (isDownloadStateUndefined(regionId)) {
 			removeLocalForecastAsync(regionId, false, false);
@@ -255,6 +258,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	public void calculateCacheSizeIfNeeded(@NonNull WeatherIndexItem indexItem, @Nullable OnCompleteCallback callback) {
 		String regionId = indexItem.getRegionId();
 		LOG.debug("[Calculate size] [" + regionId + "] Call 'calculateCacheSizeIfNeeded'");
+		if (!isWeatherAllowed(app)) {
+			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with this configuration.");
+			return;
+		}
 		if (!isOfflineForecastSizesInfoCalculated(regionId)) {
 			calculateCacheSize(indexItem.getRegion(), () -> {
 				DecimalFormat decimalFormat = new DecimalFormat("#.#");
@@ -275,14 +282,14 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public void calculateCacheSize(@NonNull WorldRegion region, @Nullable OnCompleteCallback callback) {
 		String regionId = region.getRegionId();
-		LOG.debug("[Calculate size] [" + regionId + "] Call calculateCacheSize");
+		LOG.debug("[Calculate size] [" + regionId + "] Call 'calculateCacheSize'");
+		if (!isWeatherAllowed(app)) {
+			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with current configuration.");
+			return;
+		}
 		setOfflineForecastSizeInfo(regionId, 0, true);
 		setOfflineForecastSizeInfo(regionId, 0, false);
 		setOfflineForecastSizesInfoCalculated(regionId, false);
-		if (!isWeatherAllowed(app)) {
-			LOG.error("[Calculate size] [" + regionId + "] Weather isn't allowed with this configuration.");
-			return;
-		}
 		runAsync(() -> {
 			LOG.debug("[Calculate size] [" + regionId + "] Run async calculation");
 			List<Long> tileIds = getTileIds(region);
@@ -465,8 +472,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		if (isWeatherAllowed(app)) {
 			runAsync(() -> removeLocalForecast(new String[]{regionId}, refreshMap, notifyUserOnFinish));
 		} else {
-			LOG.error("[Clear] [" + regionId + "] Can't remove local forecast. " +
-					"Weather isn't allowed with current configuration.");
+			LOG.error("[Clear] [" + regionId + "] Can't remove local forecast. Weather isn't allowed with current configuration.");
 		}
 	}
 
@@ -719,8 +725,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			setPreferenceLastUpdate(regionId, lastUpdateTime);
 			totalCacheSize.reset();
 
-			LOG.debug("[Download] [" + regionId + "] 100% download finished. Progress = " +
-					progress + ", lastUpdateTime = " + lastUpdateTime);
+			LOG.debug("[Download] [" + regionId + "] 100% download finished. Progress = " + progress + ", lastUpdateTime = " + lastUpdateTime);
 
 			runInUiThread(() -> {
 				updateWeatherLayers();
