@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="select_layer">Select layer</string>
     <string name="free_maps_updates">Free updates (emergency)</string>
     <string name="clear_online_cache_description">This will clear all cache for online weather tile.</string>
     <string name="clear_online_cache">Clear online cache</string>

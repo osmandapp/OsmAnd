@@ -134,7 +134,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
 			downloadType = DownloadType.valueOf(savedInstanceState.getString(KEY_DOWNLOAD_TYPE));
 		} else {
-			ITileSource tileSource = settings.getMapTileSource(false);
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			int currentZoom = mapView.getZoom();
 			selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
@@ -267,26 +266,16 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		TextView tvSelectedMapSource = mapSourceContainer.findViewById(R.id.desc);
 
 		ivIcon.setImageResource(R.drawable.ic_world_globe_dark);
-		tvMapSource.setText(getMapSourceTitle());
+		tvMapSource.setText(layerToDownload);
 		String selectedMapSource = tileSource.getName()
 				.replace(IndexConstants.SQLITE_EXT, "");
 		tvSelectedMapSource.setText(selectedMapSource);
 	}
 
-	private int getMapSourceTitle() {
-		if (layerToDownload == R.string.layer_map) {
-			return R.string.map_source;
-		} else if (layerToDownload == R.string.layer_overlay) {
-			return R.string.map_overlay;
-		} else {
-			return R.string.map_underlay;
-		}
-	}
-
 	private CommonPreference<String> getMapLayerSettings() {
-		if (layerToDownload == R.string.layer_map) {
+		if (layerToDownload == R.string.map_source) {
 			return app.getSettings().MAP_TILE_SOURCES;
-		} else if (layerToDownload == R.string.layer_overlay) {
+		} else if (layerToDownload == R.string.map_overlay) {
 			return app.getSettings().MAP_OVERLAY;
 		} else {
 			return app.getSettings().MAP_UNDERLAY;
