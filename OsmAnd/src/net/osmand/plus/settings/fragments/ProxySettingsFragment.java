@@ -11,12 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.Preference;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public class ProxySettingsFragment extends BaseSettingsFragment {
@@ -24,10 +24,9 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	public static final String TAG = ProxySettingsFragment.class.getSimpleName();
 
 	private static final String INFO_PREF_ID = "proxy_preferences_info";
-
 	private static final String PENDING_ENABLE_PROXY_ATTR = "pending_enable_proxy";
 
-	private boolean pendingEnableProxy = false;
+	private boolean pendingEnableProxy;
 
 	private static final String IP_ADDRESS_PATTERN =
 			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -41,6 +40,12 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		if (savedInstanceState != null) {
 			pendingEnableProxy = savedInstanceState.getBoolean(PENDING_ENABLE_PROXY_ATTR, false);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(PENDING_ENABLE_PROXY_ATTR, pendingEnableProxy);
 	}
 
 	@Override
@@ -84,21 +89,21 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupProxyHostPref() {
-		EditTextPreferenceEx uiPreference = findPreference(settings.PROXY_HOST.getId());
-		uiPreference.setPersistent(false);
 		String host = settings.PROXY_HOST.get();
 		String summary = host != null ? host : getString(R.string.shared_string_none);
-		uiPreference.setSummary(summary);
-		uiPreference.setDescription(R.string.proxy_host_descr);
+		EditTextPreferenceEx preference = findPreference(settings.PROXY_HOST.getId());
+		preference.setPersistent(false);
+		preference.setSummary(summary);
+		preference.setDescription(R.string.proxy_host_descr);
 	}
 
 	private void setupProxyPortPref() {
-		EditTextPreferenceEx uiPreference = findPreference(settings.PROXY_PORT.getId());
-		uiPreference.setPersistent(false);
 		int port = settings.PROXY_PORT.get();
 		String summary = port > 0 ? String.valueOf(port) : getString(R.string.shared_string_none);
-		uiPreference.setSummary(summary);
-		uiPreference.setDescription(R.string.proxy_port_descr);
+		EditTextPreferenceEx preference = findPreference(settings.PROXY_PORT.getId());
+		preference.setPersistent(false);
+		preference.setSummary(summary);
+		preference.setDescription(R.string.proxy_port_descr);
 	}
 
 	@Override
@@ -118,13 +123,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 			disableProxy();
 		} else if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
 			settings.PROXY_HOST.set(ipAddress);
-			if (pendingEnableProxy) {
-				// If we are pending to enable proxy try to do it now
-				askEnableProxy();
-			} else if (settings.isProxyEnabled()) {
-				// Update proxy host in Network Utils, when proxy is already enabled
-				settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
-			}
+			onProxyParameterUpdated();
 		} else {
 			app.showShortToastMessage(R.string.wrong_format);
 		}
@@ -139,15 +138,19 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 			disableProxy();
 		} else {
 			settings.PROXY_PORT.set(port);
-			if (pendingEnableProxy) {
-				// If we are pending to enable proxy try to do it now
-				askEnableProxy();
-			} else if (settings.isProxyEnabled()) {
-				// Update proxy port in Network Utils, when proxy is already enabled
-				settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
-			}
+			onProxyParameterUpdated();
 		}
 		setupProxyPortPref();
+	}
+
+	private void onProxyParameterUpdated() {
+		if (pendingEnableProxy) {
+			// If we are pending to enable proxy try to do it now
+			askEnableProxy();
+		} else if (settings.isProxyEnabled()) {
+			// Update proxy in Network Utils, when proxy is already enabled
+			settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
+		}
 	}
 
 	private void switchProxyState() {
@@ -180,11 +183,5 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		settings.ENABLE_PROXY.set(enable);
 		pendingEnableProxy = false;
 		updateMainToggle();
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(PENDING_ENABLE_PROXY_ATTR, pendingEnableProxy);
 	}
 }

@@ -5,7 +5,6 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE
 
 import android.app.Activity;
 import android.app.backup.BackupManager;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -300,11 +299,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupEnableProxyPref() {
-		Preference uiPreference = findPreference(ENABLE_PROXY_PREF_ID);
 		int iconId = R.drawable.ic_action_proxy;
 		boolean enabled = settings.isProxyEnabled();
-		uiPreference.setIcon(enabled ? getActiveIcon(iconId) : getContentIcon(iconId));
-		uiPreference.setSummary(settings.isProxyEnabled() ? R.string.shared_string_on : R.string.shared_string_off);
+		Preference preference = findPreference(ENABLE_PROXY_PREF_ID);
+		preference.setIcon(enabled ? getActiveIcon(iconId) : getContentIcon(iconId));
+		preference.setSummary(enabled ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	private void setupHistoryPref() {
