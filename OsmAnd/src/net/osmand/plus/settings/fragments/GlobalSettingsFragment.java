@@ -5,6 +5,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE
 
 import android.app.Activity;
 import android.app.backup.BackupManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
+	private static final String ENABLE_PROXY_PREF_ID = "enable_proxy";
 
 	@Override
 	protected void setupPreferences() {
@@ -298,8 +300,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupEnableProxyPref() {
-		SwitchPreferenceEx enableProxy = findPreference(settings.ENABLE_PROXY.getId());
-		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
+		Preference uiPreference = findPreference(ENABLE_PROXY_PREF_ID);
+		int iconId = R.drawable.ic_action_proxy;
+		boolean enabled = settings.isProxyEnabled();
+		uiPreference.setIcon(enabled ? getActiveIcon(iconId) : getContentIcon(iconId));
+		uiPreference.setSummary(settings.isProxyEnabled() ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	private void setupHistoryPref() {
