@@ -2715,7 +2715,7 @@
     <string name="how_to_open_wiki_title">Wie öffnet man Wikipedia-Artikel?</string>
     <string name="popular_destinations">Beliebte Reiseziele</string>
     <string name="osmand_team">OsmAnd-Team</string>
-    <string name="shared_string_restart">App neustarten</string>
+    <string name="shared_string_restart">App neu starten</string>
     <string name="show_images">Bilder anzeigen</string>
     <string name="purchase_cancelled_dialog_title">Sie haben Ihr OsmAnd-Live-Abonnement gekündigt</string>
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
@@ -3274,7 +3274,7 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Knotenpunktsystem von Radrouten anzeigen</string>
     <string name="download_map_dialog">Dialog zum Herunterladen der Karte</string>
     <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
-    <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen.</string>
+    <string name="dialogs_and_notifications_descr">Steuern Sie Pop-ups, Dialoge und Benachrichtigungen.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Knotennetzwerke</string>
     <string name="suggested_maps_descr">Diese Karten werden für das Plugin benötigt.</string>
     <string name="join_segments">Segmente verbinden</string>
@@ -3482,7 +3482,7 @@
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefinierte OsmAnd-Erweiterung</string>
-    <string name="slope_description">Hangneigungskarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
+    <string name="slope_description">Hangneigungskarte verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen.</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
@@ -3666,18 +3666,18 @@
     <string name="shared_string_uninstall_and_restart">Deinstallieren und neu starten</string>
     <string name="speed_cameras_legal_descr">In einigen Ländern oder Regionen ist die Verwendung von Blitzer-Warneinrichtungen gesetzlich verboten.
 \n
-\nSie müssen anhand der Gesetzeslage des Landes entscheiden, ob Sie
+\nSie müssen anhand der Gesetzeslage Ihres Landes entscheiden, ob Sie:
 \n
-\n%1$s wählen und Warnungen und Hinweise zu Blitzern erhalten werden,
+\n%1$s wählen und Warnungen und Hinweise zu Blitzern erhalten werden oder
 \n
-\n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
+\n%2$s wählen, woraufhin alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
     <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
     <string name="routing_attr_length_name">Länge</string>
     <string name="speed_cameras_removed_descr">Diese App hat keine Informationen zu Blitzern.</string>
     <string name="app_mode_inline_skates">Inlineskates</string>
     <string name="use_volume_buttons_as_zoom_descr">Steuern Sie die Zoomstufen der Karte mit den Lautstärketasten des Geräts.</string>
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
-    <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge können einige Streckenabschnitte nicht befahrbar sein.</string>
     <string name="quick_action_remove_next_destination">Nächstgelegenen Zielpunkt löschen</string>
     <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für den Favoriten an</string>
     <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das endgültige Ziel ist, wird die Navigation gestoppt.</string>
@@ -4778,7 +4778,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Kartenzentrierung</string>
+    <string name="display_position">Anzeigeposition</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
@@ -5073,25 +5073,35 @@
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Bewegungsgeschwindigkeit</string>
     <string name="simulation_position_description">Wählen Sie eine Trackdatei aus, die als Quelle für die Veränderung des Standorts verwendet werden soll.</string>
-    <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
+    <string name="release_4_4">• Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
 \n
-\n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
+\n • Kontextmenü zeigt jetzt lokalisierte Namen für POI an
 \n
-\n - Option zum Teilen der Route per Link hinzugefügt
+\n • Option zum Teilen der Route per Link hinzugefügt
 \n
-\n - Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
+\n • Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
 \n
-\n - Die Kartenausrichtung wurde um einen festen Modus erweitert.
+\n • Kartenausrichtung wurde um einen festen Modus erweitert.
 \n
-\n - Vereinfachter Startbildschirm
+\n • Vereinfachter Startbildschirm
 \n
-\n - Feste Standortposition im geteilten Bildschirm in Android Auto
+\n • Feste Standortposition im geteilten Bildschirm in Android Auto
 \n
-\n - Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
+\n • Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
 \n
-\n - Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
+\n • Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
 \n
-\n - Probleme mit der Anzeige von veganen Orten behoben
+\n • Probleme mit der Anzeige von veganen Orten behoben
+\n
+\n • Möglichkeit zum Herunterladen von Online-Kacheln, die als \"Overlay\"- oder \"Underlay\"-Karten verwendet werden, hinzugefügt
+\n
+\n• Unterstützung von imperialen Einheiten für \"Fahrzeugparameter\" hinzugefügt
+\n
+\n• Neues Moped-Profil
+\n
+\n• Neue Option \"Automatisch\" bei \"Anzeigeposition\" hinzugefügt
+\n
+\n• Kartengesten für Neigen, Zoomen und Drehen korrigiert
 \n
 \n</string>
     <string name="sort_duration_ascending">Kürzere Dauer zuerst</string>
