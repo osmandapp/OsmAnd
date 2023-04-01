@@ -5115,4 +5115,6 @@
     <string name="test_heightmap">Carte de hauteur test</string>
     <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
     <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
+    <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
+    <string name="select_layer">Sélectionner la sur-couche</string>
 </resources>
