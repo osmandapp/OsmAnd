@@ -479,5 +479,5 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) { }
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) { }
 }

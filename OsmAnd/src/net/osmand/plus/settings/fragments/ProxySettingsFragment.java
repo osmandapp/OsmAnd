@@ -1,26 +1,32 @@
 package net.osmand.plus.settings.fragments;
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 public class ProxySettingsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = ProxySettingsFragment.class.getSimpleName();
+
+	private static final String INFO_PREF_ID = "proxy_preferences_info";
+	private static final String PENDING_ENABLE_PROXY_ATTR = "pending_enable_proxy";
+
+	private boolean pendingEnableProxy;
 
 	private static final String IP_ADDRESS_PATTERN =
 			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -29,101 +35,153 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	@Override
-	protected void setupPreferences() {
-		Preference mapDuringNavigationInfo = findPreference("proxy_preferences_info");
-		mapDuringNavigationInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			pendingEnableProxy = savedInstanceState.getBoolean(PENDING_ENABLE_PROXY_ATTR, false);
+		}
+	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(PENDING_ENABLE_PROXY_ATTR, pendingEnableProxy);
+	}
+
+	@Override
+	protected void setupPreferences() {
+		setPreferenceIcon(INFO_PREF_ID, getContentIcon(R.drawable.ic_action_info_dark));
 		setupProxyHostPref();
 		setupProxyPortPref();
-		enableDisablePreferences(settings.ENABLE_PROXY.get());
 	}
 
 	@Override
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
-
-		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				boolean checked = !settings.ENABLE_PROXY.get();
-				settings.ENABLE_PROXY.set(checked);
-				updateToolbarSwitch();
-				enableDisablePreferences(checked);
-			}
-		});
-		TextView title = view.findViewById(R.id.switchButtonText);
-		title.setTextColor(ContextCompat.getColor(app, ColorUtilities.getActiveColorId(isNightMode())));
+		View container = view.findViewById(R.id.toolbar_switch_container);
+		container.setOnClickListener(v -> switchProxyState());
+		TextView tvTitle = view.findViewById(R.id.switchButtonText);
+		tvTitle.setTextColor(ColorUtilities.getActiveColor(app, isNightMode()));
 	}
 
 	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
-		updateToolbarSwitch();
+		updateMainToggle();
 	}
 
-	private void updateToolbarSwitch() {
+	private void updateMainToggle() {
 		View view = getView();
 		if (view == null) {
 			return;
 		}
-		boolean checked = settings.ENABLE_PROXY.get();
-
+		boolean enabled = settings.isProxyEnabled();
 		View selectableView = view.findViewById(R.id.selectable_item);
 
-		SwitchCompat switchView = selectableView.findViewById(R.id.switchWidget);
-		switchView.setChecked(checked);
+		SwitchCompat cbSwitch = selectableView.findViewById(R.id.switchWidget);
+		cbSwitch.setChecked(enabled);
 
-		TextView title = selectableView.findViewById(R.id.switchButtonText);
-		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
+		TextView tvTitle = selectableView.findViewById(R.id.switchButtonText);
+		tvTitle.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);
 
-		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
-		AndroidUtils.setBackground(selectableView, drawable);
+		Drawable background = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
+		AndroidUtils.setBackground(selectableView, background);
 	}
 
 	private void setupProxyHostPref() {
-		EditTextPreferenceEx hostPref = findPreference(settings.PROXY_HOST.getId());
-		hostPref.setPersistent(false);
-		hostPref.setSummary(settings.PROXY_HOST.get());
-		hostPref.setDescription(R.string.proxy_host_descr);
+		String host = settings.PROXY_HOST.get();
+		String summary = host != null ? host : getString(R.string.shared_string_none);
+		EditTextPreferenceEx preference = findPreference(settings.PROXY_HOST.getId());
+		preference.setPersistent(false);
+		preference.setSummary(summary);
+		preference.setDescription(R.string.proxy_host_descr);
 	}
 
 	private void setupProxyPortPref() {
-		EditTextPreferenceEx portPref = findPreference(settings.PROXY_PORT.getId());
-		portPref.setPersistent(false);
-		portPref.setSummary(String.valueOf(settings.PROXY_PORT.get()));
-		portPref.setDescription(R.string.proxy_port_descr);
+		int port = settings.PROXY_PORT.get();
+		String summary = port > 0 ? String.valueOf(port) : getString(R.string.shared_string_none);
+		EditTextPreferenceEx preference = findPreference(settings.PROXY_PORT.getId());
+		preference.setPersistent(false);
+		preference.setSummary(summary);
+		preference.setDescription(R.string.proxy_port_descr);
 	}
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
-
-		if (prefId.equals(settings.ENABLE_PROXY.getId())) {
-			return true;
-		} else if (prefId.equals(settings.PROXY_HOST.getId())) {
-			String ipAddress = (String) newValue;
-			if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
-				settings.PROXY_HOST.set(ipAddress);
-				settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
-				preference.setSummary(ipAddress);
-				return true;
-			} else {
-				Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
-				return false;
-			}
+		if (prefId.equals(settings.PROXY_HOST.getId())) {
+			applyIpAddress((String) newValue);
 		} else if (prefId.equals(settings.PROXY_PORT.getId())) {
-			int port = -1;
-			String portString = (String) newValue;
-			try {
-				port = Integer.valueOf(portString.replaceAll("[^0-9]", ""));
-			} catch (NumberFormatException e1) {
-			}
-			settings.PROXY_PORT.set(port);
-			settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
-			preference.setSummary(String.valueOf(port));
-			return true;
+			applyProxyPort((String) newValue);
 		}
+		return true;
+	}
 
-		return super.onPreferenceChange(preference, newValue);
+	private void applyIpAddress(@NonNull String ipAddress) {
+		if (Algorithms.isEmpty(ipAddress)) {
+			settings.PROXY_HOST.resetToDefault();
+			disableProxy();
+		} else if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
+			settings.PROXY_HOST.set(ipAddress);
+			onProxyParameterUpdated();
+		} else {
+			app.showShortToastMessage(R.string.wrong_format);
+		}
+		setupProxyHostPref();
+	}
+
+	private void applyProxyPort(@NonNull String portString) {
+		String portNumbers = portString.replaceAll("[^0-9]", "");
+		int port = Algorithms.parseIntSilently(portNumbers, 0);
+		if (port <= 0) {
+			settings.PROXY_PORT.resetToDefault();
+			disableProxy();
+		} else {
+			settings.PROXY_PORT.set(port);
+			onProxyParameterUpdated();
+		}
+		setupProxyPortPref();
+	}
+
+	private void onProxyParameterUpdated() {
+		if (pendingEnableProxy) {
+			// If we are pending to enable proxy try to do it now
+			askEnableProxy();
+		} else if (settings.isProxyEnabled()) {
+			// Update proxy in Network Utils, when proxy is already enabled
+			settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
+		}
+	}
+
+	private void switchProxyState() {
+		if (settings.isProxyEnabled()) {
+			disableProxy();
+		} else {
+			askEnableProxy();
+		}
+	}
+
+	private void askEnableProxy() {
+		if (settings.PROXY_HOST.get() == null) {
+			// If the proxy host is not defined, ask the user to define it
+			pendingEnableProxy = true;
+			displayPreferenceDialog(settings.PROXY_HOST.getId());
+		} else if (settings.PROXY_PORT.get() <= 0) {
+			// If the proxy port is not defined, ask the user to define it
+			pendingEnableProxy = true;
+			displayPreferenceDialog(settings.PROXY_PORT.getId());
+		} else {
+			enableDisableProxy(true);
+		}
+	}
+
+	private void disableProxy() {
+		enableDisableProxy(false);
+	}
+
+	private void enableDisableProxy(boolean enable) {
+		settings.ENABLE_PROXY.set(enable);
+		pendingEnableProxy = false;
+		updateMainToggle();
 	}
 }
