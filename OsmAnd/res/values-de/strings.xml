@@ -5133,4 +5133,6 @@
     <string name="free_maps_updates">Kostenlose Updates (Notfall)</string>
     <string name="token_is_not_valid">Token ist ungültig</string>
     <string name="common_weight_limit_error">Der Mindestwert ist \"%1$s\" %2$s. Verwenden Sie das Profil \"%3$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
+    <string name="rendering_value_defaultMedium_name">Standard (mittel)</string>
+    <string name="select_layer">Ebene wählen</string>
 </resources>
