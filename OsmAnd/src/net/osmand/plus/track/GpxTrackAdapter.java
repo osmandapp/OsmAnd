@@ -189,7 +189,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			}
 		};
 		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR),
-						info.getFileName()), callback);
+				info.getFileName()), callback);
 	}
 
 	public void setAdapterListener(OnItemClickListener onItemClickListener) {
@@ -222,11 +222,16 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	static class TrackCategoriesViewHolder extends RecyclerView.ViewHolder {
 
-		HorizontalChipsView trackCategories;
+		private final HorizontalChipsView trackCategories;
 
-		TrackCategoriesViewHolder(HorizontalChipsView itemView) {
+		TrackCategoriesViewHolder(@NonNull HorizontalChipsView itemView) {
 			super(itemView);
 			trackCategories = itemView;
+
+			ViewGroup parent = (ViewGroup) itemView.getParent();
+			if (parent != null) {
+				parent.removeView(itemView);
+			}
 		}
 	}
 

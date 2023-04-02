@@ -4,7 +4,6 @@ package net.osmand.plus.settings.purchase.data;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 
@@ -23,11 +22,11 @@ public class PurchaseUiData {
 	private final SubscriptionState subscriptionState;
 	private final PurchaseOrigin origin;
 
-	public PurchaseUiData(String sku, String title, int iconId, String purchaseType,
-	                      long expireTime, long purchaseTime, boolean isSubscription,
-	                      boolean isLiveUpdateSubscription, boolean isAutoRenewing,
-	                      boolean isRenewVisible, SubscriptionState subscriptionState,
-	                      PurchaseOrigin origin) {
+	public PurchaseUiData(String sku, @NonNull String title, @DrawableRes int iconId,
+	                      @NonNull String purchaseType, long expireTime, long purchaseTime,
+	                      boolean isSubscription, boolean isLiveUpdateSubscription,
+	                      boolean isAutoRenewing, boolean isRenewVisible,
+	                      @NonNull SubscriptionState subscriptionState, @NonNull PurchaseOrigin origin) {
 		this.sku = sku;
 		this.title = title;
 		this.iconId = iconId;

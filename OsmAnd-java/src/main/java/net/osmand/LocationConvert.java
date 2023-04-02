@@ -150,7 +150,7 @@ public class LocationConvert {
 		return sb.toString();
 	}
 
-	public static String convertLatitude(double latitude, int outputType, boolean addCardinalDirection) {
+	public static String convertLatitude(double latitude, int outputType, boolean addCardinalDirection) throws IllegalArgumentException {
 		if (latitude < -90.0 || latitude > 90.0 || Double.isNaN(latitude)) {
 			throw new IllegalArgumentException("latitude=" + latitude);
 		}

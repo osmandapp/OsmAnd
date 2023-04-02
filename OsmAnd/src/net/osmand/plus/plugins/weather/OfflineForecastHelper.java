@@ -6,6 +6,7 @@ import static net.osmand.map.WorldRegion.WORLD;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
 import static net.osmand.plus.plugins.weather.WeatherHelper.isWeatherSupported;
+import static net.osmand.plus.plugins.weather.WeatherUtils.getRegionBounds;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.LOCAL_SIZE;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.PROGRESS_DOWNLOAD;
 import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.InfoType.SIZE_CALCULATED;
@@ -13,7 +14,6 @@ import static net.osmand.plus.plugins.weather.containers.OfflineForecastInfo.Inf
 import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.FINISHED;
 import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.IN_PROGRESS;
 import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.UNDEFINED;
-import static net.osmand.plus.plugins.weather.WeatherUtils.getRegionBounds;
 import static net.osmand.plus.utils.OsmAndFormatter.getTimeForTimeZone;
 
 import android.os.AsyncTask;
@@ -51,8 +51,8 @@ import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize.ResetTotalWeatherCacheSizeListener;
 import net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState;
 import net.osmand.plus.plugins.weather.enums.WeatherForecastUpdatesFrequency;
-import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
+import net.osmand.plus.plugins.weather.listener.RemoveLocalForecastListener;
 import net.osmand.plus.plugins.weather.listener.WeatherCacheSizeChangeListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -161,6 +161,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			LOG.error("[Download] [" + region.getRegionId() + "] Failed. Weather isn't allowed with current configuration.");
 			return false;
 		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Download] [" + region.getRegionId() + "] Failed. weatherResourcesManager  isn't available.");
+			return false;
+		}
 		String regionId = region.getRegionId();
 		if (!settings.isInternetConnectionAvailable()) {
 			LOG.error("[Download] [" + regionId + "] Failed. Internet connection isn't available.");
@@ -232,6 +236,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			LOG.error("[Download] [" + regionId + "] Can't stop weather download. Weather isn't allowed with current configuration.");
 			return;
 		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Download] [" + regionId + "] Can't stop weather download. WeatherResourcesManager isn't available.");
+			return;
+		}
 		prepareToStopDownloading(regionId);
 		if (isDownloadStateUndefined(regionId)) {
 			removeLocalForecastAsync(regionId, false, false);
@@ -262,6 +270,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with this configuration.");
 			return;
 		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. WeatherResourcesManager isn't available.");
+			return;
+		}
 		if (!isOfflineForecastSizesInfoCalculated(regionId)) {
 			calculateCacheSize(indexItem.getRegion(), () -> {
 				DecimalFormat decimalFormat = new DecimalFormat("#.#");
@@ -285,6 +297,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		LOG.debug("[Calculate size] [" + regionId + "] Call 'calculateCacheSize'");
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with current configuration.");
+			return;
+		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. WeatherResourcesManager isn't available.");
 			return;
 		}
 		setOfflineForecastSizeInfo(regionId, 0, true);
@@ -322,6 +338,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				"[forceCalculation = " + forceCalculation + "]");
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Calculate size] [Total] Can't calculate. Weather isn't allowed with current configuration.");
+			return;
+		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Calculate size] [Total] Can't calculate. WeatherResourcesManager isn't available.");
 			return;
 		}
 		if ((totalCacheSize.isCalculated() && !forceCalculation)) {
@@ -470,20 +490,20 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	public void removeLocalForecastAsync(@NonNull String regionId, boolean refreshMap, boolean notifyUserOnFinish) {
 		if (isWeatherSupported(app)) {
-			runAsync(() -> removeLocalForecast(new String[]{regionId}, refreshMap, notifyUserOnFinish));
+			runAsync(() -> removeLocalForecast(new String[] {regionId}, refreshMap, notifyUserOnFinish));
 		} else {
 			LOG.error("[Clear] [" + regionId + "] Can't remove local forecast. Weather isn't allowed with current configuration.");
 		}
 	}
 
 	private void removeLocalForecast(@NonNull String[] regionIds, boolean refreshMap, boolean notifyUserOnFinish) {
-		LOG.debug("[Clear] [" + Arrays.toString(regionIds) +  "] Call 'removeLocalForecast' " + 
+		LOG.debug("[Clear] [" + Arrays.toString(regionIds) + "] Call 'removeLocalForecast' " +
 				"[refreshMap = " + refreshMap + "], " + "[notifyUserOnFinish = " + notifyUserOnFinish + "]");
 		List<String> regionIdsList = Arrays.asList(regionIds);
 		regionsRemoveInProgress = Algorithms.addAllToList(regionsRemoveInProgress, regionIdsList);
 
 		// notify before remove and after region ids were registered
-		LOG.debug("[Clear] [" + Arrays.toString(regionIds) +  "] Notify on start. Regions remove in progress: " + regionsRemoveInProgress);
+		LOG.debug("[Clear] [" + Arrays.toString(regionIds) + "] Notify on start. Regions remove in progress: " + regionsRemoveInProgress);
 		runInUiThread(this::notifyOnRemoveLocalForecastEvent);
 
 		totalCacheSize.reset();
@@ -506,7 +526,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		TileIdList qTileIds = NativeUtilities.convertToQListTileIds(tileIds);
 		ZoomLevel zoom = getGeoTileZoom();
 		if (!qTileIds.isEmpty()) {
-			LOG.debug("[Clear] [" + Arrays.toString(regionIds) +  "] Call resources manager. Zoom = " + zoom + "tileIds = " + tileIds);
+			LOG.debug("[Clear] [" + Arrays.toString(regionIds) + "] Call resources manager. Zoom = " + zoom + "tileIds = " + tileIds);
 			weatherResourcesManager.clearDbCache(qTileIds, new TileIdList(), zoom);
 		}
 		if (notifyUserOnFinish) {
@@ -521,7 +541,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		app.getDownloadThread().updateLoadedFiles();
 
 		// notify after remove was completed and region ids were unregistered
-		LOG.debug("[Clear] [" + Arrays.toString(regionIds) +  "] Notify on finish. Regions remove in progress: " + regionsRemoveInProgress);
+		LOG.debug("[Clear] [" + Arrays.toString(regionIds) + "] Notify on finish. Regions remove in progress: " + regionsRemoveInProgress);
 		runInUiThread(this::notifyOnRemoveLocalForecastEvent);
 
 		if (refreshMap) {
@@ -913,7 +933,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public String[] getPreferenceKeys(@NonNull String regionId) {
-		return new String[]{
+		return new String[] {
 				PREF_FORECAST_DOWNLOAD_STATE_PREFIX + regionId,
 				PREF_FORECAST_LAST_UPDATE_PREFIX + regionId,
 				PREF_FORECAST_FREQUENCY_PREFIX + regionId,
