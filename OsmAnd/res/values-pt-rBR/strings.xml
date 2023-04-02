@@ -5120,4 +5120,6 @@
     <string name="common_weight_limit_error">O valor mínimo é \"%1$s\" %2$s. Use o perfil \"%3$s\" se o peso do veículo for menor que o valor mínimo.</string>
     <string name="shared_string_pounds">libras</string>
     <string name="metric_lbs">lbs</string>
+    <string name="select_layer">Selecionar camada</string>
+    <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
 </resources>
