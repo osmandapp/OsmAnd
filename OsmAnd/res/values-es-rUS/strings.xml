@@ -5140,4 +5140,6 @@
     <string name="offline_weather_forecast">Previsión meteorológica sin conexión</string>
     <string name="offline_weather_forecast_desc">Puedes descargar la previsión meteorológica para 7 días.</string>
     <string name="app_mode_moped">Ciclomotor</string>
+    <string name="select_layer">Elegir capa</string>
+    <string name="rendering_value_defaultMedium_name">Predefinido (medio)</string>
 </resources>

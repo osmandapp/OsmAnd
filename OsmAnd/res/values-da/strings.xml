@@ -5042,7 +5042,7 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_automatic_descr">Afhænger af kortets orientering: nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortorientering: nederst for bevægelsesretning, centrum for alle andre.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ændr udseendet af %1$s spor\?</string>
     <string name="shared_string_apply_changes">Anvend ændringer</string>
     <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
@@ -5130,4 +5130,6 @@
     <string name="shared_string_pounds">pund</string>
     <string name="metric_lbs">lbs</string>
     <string name="free_maps_updates">Gratis opdateringer (nødsituation)</string>
+    <string name="select_layer">Vælg lag</string>
+    <string name="rendering_value_defaultMedium_name">Standard (medium)</string>
 </resources>

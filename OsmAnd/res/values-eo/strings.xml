@@ -1516,7 +1516,7 @@
     <string name="error_doing_search">Okazis eraro dum malkonekta serĉado.</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (post ŝanĝi necesas restarti la aplikaĵon).</string>
-    <string name="unit_of_length">Mezurunuoj de longo</string>
+    <string name="unit_of_length">Unuoj de longo</string>
     <string name="unit_of_length_descr">Ŝanĝi unuojn por reprezenti distancoj.</string>
     <string name="si_mi_feet">Mejloj/futoj</string>
     <string name="si_mi_yard">Mejloj/jardoj</string>
@@ -3310,7 +3310,7 @@
     <string name="button_rate">Taksi</string>
     <string name="accessibility_announce">Anonco</string>
     <string name="login_and_pass">Uzantnomo kaj pasvorto</string>
-    <string name="plugin_global_prefs_info">Tiuj ĉi agordoj pri kromprogramoj aplikos al ĉiuj profiloj</string>
+    <string name="plugin_global_prefs_info">Agordoj pri tiu ĉi kromprogramo aplikiĝos al ĉiuj profiloj</string>
     <string name="osm_editing">OSM‑redaktilo</string>
     <string name="osm_edits_view_descr">Ĉiuj viaj jam nepublikigitaj redaktoj aŭ rimarkoj OSM estos videblaj ĉe %1$s. Punktoj alŝutitaj al OSM ne estos videblaj en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
@@ -5091,6 +5091,16 @@
 \n
 \n• riparita problemo pri montrado de veganaj ejoj
 \n
+\n• eblo elŝuti enretajn kahelojn por uzi kiel subtavolan aŭ surtavolan mapon
+\n
+\n• subteno por imperiaj unuoj por “Parametroj de veturilo”
+\n
+\n• nova profilo “Motorbiciklo”
+\n
+\n• nova elekto “Aŭtomata” por la agordo “Markilo de nuna pozicio”
+\n
+\n• riparitaj map-gestoj por 2,5-dimensia vido, pligrandigi kaj turni
+\n
 \n</string>
     <string name="generate_hillshade_from_3d_maps">Generi nivelombruman kahelan mapon uzante 3-dimensiajn mapojn</string>
     <string name="generate_slope_from_3d_maps">Generi deklivecan kahelan mapon uzante 3-dimensiajn mapojn</string>
@@ -5098,4 +5108,20 @@
     <string name="enable_3d_maps">Aktivigi 3-dimensiajn mapojn</string>
     <string name="test_heightmap">Testi altmapon</string>
     <string name="app_mode_climbing">Grimpado</string>
+    <string name="offline_cache">Kaŝmemoro</string>
+    <string name="shared_string_alt_name">Alternativa nomo</string>
+    <string name="free_maps_updates">Senpagaj ĝisdatigoj (krizaj)</string>
+    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
+    <string name="clear_online_cache_description">Forviŝi la tutan kaŝmemoron de enretaj veteraj kaheloj.</string>
+    <string name="clear_online_cache">Forviŝi kaŝmemoron</string>
+    <string name="token_is_not_valid">Ĵetono malvalida</string>
+    <string name="offline_weather_forecast">Malkonekta veterprognozo</string>
+    <string name="offline_weather_forecast_desc">Vi povas elŝuti veterprognozon por 7 tagoj.</string>
+    <string name="shared_string_all_world">Tuta mondo</string>
+    <string name="weather_forecast">Veterprognozo</string>
+    <string name="shared_string_pounds">funtoj</string>
+    <string name="metric_lbs">lb</string>
+    <string name="select_layer">Elekti tavolon</string>
+    <string name="weather_forecast_is_outdated">Veterprognozo estas malaktuala.</string>
+    <string name="rendering_value_defaultMedium_name">Implicita (meza)</string>
 </resources>

@@ -209,7 +209,7 @@
     <string name="poi_tobacco">Tabak-vendejo</string>
     <string name="poi_toys">Ludil-vendejo</string>
     <string name="poi_trade">Staplejo</string>
-    <string name="poi_tyres">Aerbend-vendejo</string>
+    <string name="poi_tyres">Pneŭa vendejo</string>
     <string name="poi_vacuum_cleaner">Senpolvigil-vendejo</string>
     <string name="poi_variety_store">Ĉio-po-unu-spesmilo vendejo</string>
     <string name="poi_video">Filmovendejo</string>
@@ -295,7 +295,7 @@
     <string name="poi_bank">Bankejo</string>
     <string name="poi_beach">Sablobordo</string>
     <string name="poi_car_repair">Aŭtomobil-riparejo</string>
-    <string name="poi_service_tyres">aerbendoj</string>
+    <string name="poi_service_tyres">pneŭoj</string>
     <string name="poi_vehicle_inspection">Aŭtomobil-kontrolejo</string>
     <string name="poi_fuel_diesel">dizeloleo</string>
     <string name="poi_fuel_gtl_diesel">dizeloleo sinteza</string>
@@ -427,7 +427,7 @@
     <string name="poi_recycling_hazardous_waste">danĝeraj ruboj</string>
     <string name="poi_recycling_mobile_phones">poŝtelefonoj</string>
     <string name="poi_recycling_computers">komputiloj</string>
-    <string name="poi_recycling_tyres">aerbendoj</string>
+    <string name="poi_recycling_tyres">pneŭoj</string>
     <string name="poi_recycling_tv_monitor">televidiloj, ekranoj</string>
     <string name="poi_recycling_tetrapak">Tetra Pak</string>
     <string name="poi_recycling_cds">lumdiskoj</string>
@@ -899,7 +899,7 @@
     <string name="poi_saddle">Sela punkto (intermonto)</string>
     <string name="poi_crater">Kratero</string>
     <string name="poi_ridge">Montokresto</string>
-    <string name="poi_sinkhole">Dolino</string>
+    <string name="poi_sinkhole">Dolino (karsta funelo)</string>
     <string name="poi_waterfall">Akvofalo</string>
     <string name="poi_stream">Rivereto</string>
     <string name="poi_rapids">Rivero rapida</string>
@@ -1012,7 +1012,7 @@
     <string name="poi_cycle_barrier">Barilo kontraŭbicikla</string>
     <string name="poi_motorcycle_barrier">Barilo kontraŭmotorcikla</string>
     <string name="poi_block">Bloko</string>
-    <string name="poi_bus_trap">Kaptilo kontraŭpersonaŭta</string>
+    <string name="poi_bus_trap">Kaptilo kontraŭpersonaŭta (larĝa)</string>
     <string name="poi_cattle_grid">Barilo kontraŭbruta</string>
     <string name="poi_full_height_turnstile">Turniĝebla barilpordo (hom-alta)</string>
     <string name="poi_bump_gate">Aŭtomobil-puŝebla pordego</string>
@@ -3081,8 +3081,8 @@
     <string name="poi_motorcycle_repair_no">Riparo: ne</string>
     <string name="poi_motorcycle_parts_yes">partoj</string>
     <string name="poi_motorcycle_parts_no">Partoj: ne</string>
-    <string name="poi_motorcycle_tyres_yes">aerbendoj</string>
-    <string name="poi_motorcycle_tyres_no">Aerbendoj: ne</string>
+    <string name="poi_motorcycle_tyres_yes">pneŭoj</string>
+    <string name="poi_motorcycle_tyres_no">Pneŭoj: ne</string>
     <string name="poi_motorcycle_clothes_yes">motorciklaj vestaĵoj</string>
     <string name="poi_motorcycle_clothes_no">Motorciklaj vestaĵoj: ne</string>
     <string name="poi_motorcycle_type_scooter">skoteroj</string>
@@ -3441,7 +3441,7 @@
     <string name="poi_service_vehicle_transmission_repair_yes">rapidumskatolo</string>
     <string name="poi_service_vehicle_motor_yes">motoro</string>
     <string name="poi_service_vehicle_insurance_yes">asekuroj</string>
-    <string name="poi_service_vehicle_tyres_yes">aerbendoj</string>
+    <string name="poi_service_vehicle_tyres_yes">pneŭoj</string>
     <string name="poi_aerialway_zip_line">Ŝnurega deglitejo</string>
     <string name="poi_climbing_adventure">Grimpada parko</string>
     <string name="poi_via_ferrata">Via ferrata (fera grimp-vojo)</string>
@@ -4538,4 +4538,19 @@
     <string name="poi_recycling_refund_bottles">reuzeblaj boteloj</string>
     <string name="poi_recycling_second_hand">aĵoj por reuzo</string>
     <string name="poi_waste_cigarettes">cigaredstumpoj</string>
+    <string name="poi_sinkhole_bluehole">Dolino: submara</string>
+    <string name="poi_sinkhole_doline">Dolino: superŝutita</string>
+    <string name="poi_sinkhole_ponor">Dolino: akv-malaperejo (ponoro)</string>
+    <string name="poi_sinkhole_pit">Dolino: vertikala kaverno</string>
+    <string name="poi_barrier_coupure">Pordego transdiga</string>
+    <string name="poi_barrier_planter">Florpotego</string>
+    <string name="poi_sump_buster">Kaptilo kontraŭpersonaŭta (alta)</string>
+    <string name="poi_wedge">Bloko kaŝebla</string>
+    <string name="poi_wicket_gate">Giĉeto</string>
+    <string name="poi_barrier_bar">Trabo</string>
+    <string name="poi_barrier_board">Tabuleg-barilo</string>
+    <string name="poi_barrier_tyres">Pneŭ-amaso</string>
+    <string name="poi_tank_trap">Kontraŭtanka barilo</string>
+    <string name="poi_sinkhole_estavelle">Dolino: dudirekta (estavelo)</string>
+    <string name="poi_spikes">Trafika pikil-strio</string>
 </resources>
