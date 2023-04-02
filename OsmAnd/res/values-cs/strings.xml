@@ -5120,4 +5120,6 @@
     <string name="free_maps_updates">Bezplatné aktualizace (nouzové)</string>
     <string name="app_mode_moped">Moped</string>
     <string name="shared_string_nearest">Nejbližší</string>
+    <string name="select_layer">Vybrat vrstvu</string>
+    <string name="rendering_value_defaultMedium_name">Výchozí (střední)</string>
 </resources>
