@@ -236,6 +236,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			LOG.error("[Download] [" + regionId + "] Can't stop weather download. Weather isn't allowed with current configuration.");
 			return;
 		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Download] [" + regionId + "] Can't stop weather download. WeatherResourcesManager isn't available.");
+			return;
+		}
 		prepareToStopDownloading(regionId);
 		if (isDownloadStateUndefined(regionId)) {
 			removeLocalForecastAsync(regionId, false, false);
@@ -266,6 +270,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with this configuration.");
 			return;
 		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. WeatherResourcesManager isn't available.");
+			return;
+		}
 		if (!isOfflineForecastSizesInfoCalculated(regionId)) {
 			calculateCacheSize(indexItem.getRegion(), () -> {
 				DecimalFormat decimalFormat = new DecimalFormat("#.#");
@@ -292,7 +300,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			return;
 		}
 		if (weatherResourcesManager == null) {
-			LOG.error("[Calculate size] [" + region.getRegionId() + "] Can't calculate cache size. weatherResourcesManager isn't available.");
+			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. WeatherResourcesManager isn't available.");
 			return;
 		}
 		setOfflineForecastSizeInfo(regionId, 0, true);
@@ -330,6 +338,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				"[forceCalculation = " + forceCalculation + "]");
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Calculate size] [Total] Can't calculate. Weather isn't allowed with current configuration.");
+			return;
+		}
+		if (weatherResourcesManager == null) {
+			LOG.error("[Calculate size] [Total] Can't calculate. WeatherResourcesManager isn't available.");
 			return;
 		}
 		if ((totalCacheSize.isCalculated() && !forceCalculation)) {
