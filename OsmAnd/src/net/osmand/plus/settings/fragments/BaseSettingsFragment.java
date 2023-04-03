@@ -305,6 +305,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return currentScreenType != null ? currentScreenType.applyQueryType : null;
 	}
 
+	protected void displayPreferenceDialog(@NonNull String prefKey) {
+		Preference preference = findPreference(prefKey);
+		if (preference != null) {
+			onDisplayPreferenceDialog(preference);
+		}
+	}
+
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		FragmentManager fragmentManager = getFragmentManager();
@@ -623,6 +630,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			}
 		}
 		return null;
+	}
+
+	protected void setPreferenceIcon(@NonNull String prefId, @NonNull Drawable icon) {
+		Preference preference = findPreference(prefId);
+		if (preference != null) {
+			preference.setIcon(icon);
+		}
 	}
 
 	@ColorInt

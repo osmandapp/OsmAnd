@@ -1369,8 +1369,13 @@ public class OsmandSettings {
 		}
 	}.makeGlobal().makeShared();
 
-	public final CommonPreference<String> PROXY_HOST = new StringPreference(this, "proxy_host", "127.0.0.1").makeGlobal().makeShared();
-	public final CommonPreference<Integer> PROXY_PORT = new IntPreference(this, "proxy_port", 8118).makeGlobal().makeShared();
+	public final CommonPreference<String> PROXY_HOST = new StringPreference(this, "proxy_host", null).makeGlobal().makeShared();
+	public final CommonPreference<Integer> PROXY_PORT = new IntPreference(this, "proxy_port", 0).makeGlobal().makeShared();
+
+	public boolean isProxyEnabled() {
+		return PROXY_HOST.get() != null && PROXY_PORT.get() > 0 && ENABLE_PROXY.get();
+	}
+
 	public final CommonPreference<String> USER_ANDROID_ID = new StringPreference(this, "user_android_id", "").makeGlobal();
 	public final CommonPreference<Long> USER_ANDROID_ID_EXPIRED_TIME = new LongPreference(this, "user_android_id_expired_time", 0).makeGlobal();
 

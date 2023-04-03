@@ -5124,4 +5124,6 @@
     <string name="shared_string_pounds">фунтів</string>
     <string name="metric_lbs">фунтів</string>
     <string name="free_maps_updates">Безплатні оновлення (екстрені)</string>
+    <string name="select_layer">Вибрати шар</string>
+    <string name="rendering_value_defaultMedium_name">Типово (середній)</string>
 </resources>

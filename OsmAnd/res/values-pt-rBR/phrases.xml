@@ -4540,4 +4540,9 @@
     <string name="poi_waste_cigarettes">Cigarros</string>
     <string name="poi_recycling_pallets">Paletes de madeira</string>
     <string name="poi_recycling_refund_bottles">Garrafas retornáveis</string>
+    <string name="poi_sinkhole_bluehole">Sumidouro: buraco azul</string>
+    <string name="poi_sinkhole_ponor">Sumidouro: ponor</string>
+    <string name="poi_sinkhole_pit">Sumidouro: poço</string>
+    <string name="poi_sinkhole_estavelle">Sumidouro: estavelle</string>
+    <string name="poi_sinkhole_doline">Sumidouro: dolina</string>
 </resources>

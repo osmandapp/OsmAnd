@@ -5129,4 +5129,6 @@
     <string name="offline_weather_forecast">Previsão meteorológica sem ligação à Internet</string>
     <string name="offline_weather_forecast_desc">Pode descarregar a previsão meteorológica para os próximos 7 dias.</string>
     <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
+    <string name="select_layer">Selecionar camada</string>
+    <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
 </resources>

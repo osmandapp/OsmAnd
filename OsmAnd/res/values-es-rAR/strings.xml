@@ -5141,4 +5141,6 @@
     <string name="offline_cache">Caché sin conexión</string>
     <string name="shared_string_alt_name">Nombre alternativo</string>
     <string name="metric_lbs">lbs</string>
+    <string name="select_layer">Elegir capa</string>
+    <string name="rendering_value_defaultMedium_name">Predefinido (medio)</string>
 </resources>

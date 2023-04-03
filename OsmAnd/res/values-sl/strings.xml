@@ -1643,7 +1643,7 @@
     <string name="count_of_lines">Seštevek vrstic</string>
     <string name="are_you_sure">Ali ste prepričani?</string>
     <string name="unsaved_changes_will_be_lost">Vse neshranjene spremembe bodo izgubljene. Ali želite nadaljevati?</string>
-    <string name="downloads_left_template">%1$s prejemov v vrsti</string>
+    <string name="downloads_left_template">Še %1$s prenos/-ov/-a/-i</string>
     <string name="roads">Poti</string>
     <string name="shared_string_trip_recording">Beleženje poti</string>
     <string name="shared_string_navigation">Navigacija</string>
