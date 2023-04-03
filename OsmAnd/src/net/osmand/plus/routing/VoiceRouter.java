@@ -243,7 +243,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private void announceBackOnRoute() {//
+	private void announceBackOnRoute() {
 		if (settings.SPEAK_ROUTE_DEVIATION.get()) {
 			//if (announceBackOnRoute) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
