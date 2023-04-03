@@ -136,6 +136,11 @@
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_route_recalculation" />
 
+	<SwitchPreferenceCompat
+		android:key="speak_route_deviation"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_route_deviation" />
+
 	<Preference
 		android:key="speed_limit_divider"
 		android:layout="@layout/simple_divider_item"
