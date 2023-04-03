@@ -13,6 +13,8 @@ import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -189,16 +191,19 @@ public class OsmandSettings {
 	}
 
 	private void initBaseAppMode() {
-		setBaseAppMode();
-		appModeListener = applicationMode -> setBaseAppMode();
+		setAppModeCustomProperties();
+		appModeListener = applicationMode -> setAppModeCustomProperties();
 		APPLICATION_MODE.addListener(appModeListener);
 	}
 
-	private void setBaseAppMode(){
-		getCustomRenderProperty("baseAppMode").setModeValue(APPLICATION_MODE.get(),
-				APPLICATION_MODE.get().getParent() != null
-						? APPLICATION_MODE.get().getParent().getStringKey()
-						: APPLICATION_MODE.get().getStringKey());
+	public void setAppModeCustomProperties() {
+		ApplicationMode appMode = APPLICATION_MODE.get();
+		ApplicationMode parentAppMode = APPLICATION_MODE.get().getParent();
+
+		getCustomRenderProperty(A_APP_MODE).setModeValue(appMode, appMode.getStringKey());
+		getCustomRenderProperty(A_BASE_APP_MODE).setModeValue(appMode, parentAppMode != null
+				? parentAppMode.getStringKey()
+				: appMode.getStringKey());
 	}
 
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
@@ -396,7 +401,7 @@ public class OsmandSettings {
 
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
-		setBaseAppMode();
+		setAppModeCustomProperties();
 	}
 
 	public void resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
