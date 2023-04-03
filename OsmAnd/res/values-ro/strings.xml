@@ -5123,7 +5123,7 @@
     <string name="enable_3d_maps">Activați hărțile 3D</string>
     <string name="test_heightmap">Harta înălțimii de testare</string>
     <string name="shared_string_pounds">lire sterline</string>
-    <string name="metric_lbs">lbs</string>
+    <string name="metric_lbs">livre</string>
     <string name="shared_string_all_world">Toată lumea</string>
     <string name="generate_hillshade_from_3d_maps">Generarea de hărți raster hillshade din hărți 3D</string>
     <string name="disable_vertex_hillshade_3d">Dezactivați umbra vertexurilor în 3D</string>
@@ -5131,4 +5131,6 @@
     <string name="weather_forecast_is_outdated">Previziunile sunt depășite.</string>
     <string name="weather_forecast">Prognoza meteo</string>
     <string name="app_mode_moped">Moped</string>
+    <string name="select_layer">Selectează stratul</string>
+    <string name="rendering_value_defaultMedium_name">Predefinit (medium)</string>
 </resources>

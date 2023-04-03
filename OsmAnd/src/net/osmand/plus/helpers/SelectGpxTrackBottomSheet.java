@@ -2,10 +2,11 @@ package net.osmand.plus.helpers;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +18,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.GpxTrackAdapter;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 import java.util.List;
@@ -29,39 +31,21 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectGpxTrackBottomSheet.class.getSimpleName();
 
-	protected View mainView;
-	protected GpxTrackAdapter adapter;
 	private List<GPXInfo> gpxInfoList;
 	private boolean showCurrentGpx;
 	private CallbackWithObject<GPXFile[]> callbackWithObject;
 
-	private void setGpxInfoList(List<GPXInfo> gpxInfoList) {
-		this.gpxInfoList = gpxInfoList;
-	}
-
-	private void setShowCurrentGpx(boolean showCurrentGpx) {
-		this.showCurrentGpx = showCurrentGpx;
-	}
-
-	private void setCallbackWithObject(CallbackWithObject<GPXFile[]> callbackWithObject) {
-		this.callbackWithObject = callbackWithObject;
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
-				R.layout.gpx_track_select_dialog, null);
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
+		View mainView = inflater.inflate(R.layout.gpx_track_select_dialog, null);
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		adapter = new GpxTrackAdapter(requireContext(), gpxInfoList, showCurrentGpx, true);
-		adapter.setAdapterListener(new GpxTrackAdapter.OnItemClickListener() {
-			@Override
-			public void onItemClick(int position) {
-				if (position != RecyclerView.NO_POSITION) {
-					SelectGpxTrackBottomSheet.this.onItemClick(position);
-				}
+		GpxTrackAdapter adapter = new GpxTrackAdapter(requireContext(), gpxInfoList, showCurrentGpx, true);
+		adapter.setAdapterListener(position -> {
+			if (position != RecyclerView.NO_POSITION) {
+				onItemClick(position);
 			}
 		});
 		recyclerView.setAdapter(adapter);
@@ -94,21 +78,21 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
+	@Override
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_cancel;
+	}
+
 	public static void showInstance(FragmentManager fragmentManager, boolean showCurrentGpx,
-	                                CallbackWithObject<GPXFile[]> callbackWithObject, List<GPXInfo> gpxInfoList) {
+	                                CallbackWithObject<GPXFile[]> callbackWithObject, @NonNull List<GPXInfo> gpxInfoList) {
 		if (!fragmentManager.isStateSaved()) {
 			SelectGpxTrackBottomSheet fragment = new SelectGpxTrackBottomSheet();
 			fragment.setUsedOnMap(true);
 			fragment.setRetainInstance(true);
-			fragment.setShowCurrentGpx(showCurrentGpx);
-			fragment.setCallbackWithObject(callbackWithObject);
-			fragment.setGpxInfoList(gpxInfoList);
+			fragment.showCurrentGpx = showCurrentGpx;
+			fragment.callbackWithObject = callbackWithObject;
+			fragment.gpxInfoList = gpxInfoList;
 			fragment.show(fragmentManager, TAG);
 		}
-	}
-
-	@Override
-	protected int getDismissButtonTextId() {
-		return R.string.shared_string_cancel;
 	}
 }

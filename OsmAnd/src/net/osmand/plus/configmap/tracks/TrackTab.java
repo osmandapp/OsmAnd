@@ -66,7 +66,7 @@ public class TrackTab {
 				if (!Algorithms.isEmpty(parentName) && !GPX_INDEX_DIR.equals(parentName + File.separator)) {
 					name = parentName + File.separator + name;
 				}
-				return Algorithms.capitalizeFirstLetter(name.toLowerCase());
+				return name;
 			}
 			return name;
 		}

@@ -10,6 +10,7 @@ import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
+import net.osmand.plus.settings.fragments.voice.VoiceAnnouncesFragment;
 
 public enum SettingsScreenType {
 

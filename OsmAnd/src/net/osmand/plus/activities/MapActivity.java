@@ -414,6 +414,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						app.getOsmandMap().setupRenderingView();
 						renderingViewSetup = true;
 					}
+					if (openGlInitialized) {
+						app.getOsmandMap().getMapLayers().updateLayers(MapActivity.this);
+					}
 					if (event == MAPS_INITIALIZED) {
 						// TODO investigate if this false cause any issues!
 						getMapView().refreshMap(false);

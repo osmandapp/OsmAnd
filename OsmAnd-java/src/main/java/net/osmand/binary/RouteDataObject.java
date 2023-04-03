@@ -942,8 +942,8 @@ public class RouteDataObject {
 		return false;
 	}
 
-	public boolean isStopApplicable(boolean direction, int intId, int startPointInd, int endPointInd) {
-		int[] pt = getPointTypes(intId);
+	public boolean isDirectionApplicable(boolean direction, int ind, int startPointInd, int endPointInd) {
+		int[] pt = getPointTypes(ind);
 		int sz = pt.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
@@ -956,22 +956,20 @@ public class RouteDataObject {
 					return false;
 				}
 			}
-			// Tagging stop=all should be ok anyway, usually tagged on intersection node itself, so not needed here
-			//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
-			//	return true;
-			//}
 		}
-		// Heuristic fallback: Distance analysis for STOP with no recognized directional tagging:
-		// Mask STOPs closer to the start than to the end of the routing segment if it is within 50m of start, but do not mask STOPs mapped directly on start/end (likely intersection node)
-		double d2Start = distance(startPointInd, intId);
-		double d2End = distance(intId, endPointInd);
-		if ((d2Start < d2End) && d2Start != 0 && d2End != 0 && d2Start < 50) {
-			return false;
+		if (startPointInd >= 0 ) {
+			// Heuristic fallback: Distance analysis for STOP with no recognized directional tagging:
+			// Mask STOPs closer to the start than to the end of the routing segment if it is within 50m of start, but do not mask STOPs mapped directly on start/end (likely intersection node)
+			double d2Start = distance(startPointInd, ind);
+			double d2End = distance(ind, endPointInd);
+			if ((d2Start < d2End) && d2Start != 0 && d2End != 0 && d2Start < 50) {
+				return false;
+			}
 		}
 		// No directional info detected
 		return true;
 	}
-
+	
 	public double distance(int startPoint, int endPoint) {
 		if (startPoint > endPoint) {
 			int k = endPoint;

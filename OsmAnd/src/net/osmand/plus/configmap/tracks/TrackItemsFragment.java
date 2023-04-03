@@ -64,7 +64,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
-			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+			public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
 				super.onScrollStateChanged(recyclerView, newState);
 				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
 			}
@@ -73,7 +73,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 		return view;
 	}
 
-	public void ontrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
+	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
 		adapter.ontrackItemsSelected(trackItems);
 	}
 

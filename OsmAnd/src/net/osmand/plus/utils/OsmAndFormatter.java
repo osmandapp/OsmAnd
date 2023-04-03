@@ -64,6 +64,7 @@ public class OsmAndFormatter {
 
 	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final int MIN_DURATION_FOR_YESTERDAY_DATE_FORMAT = 24 * 60 * 60;
+	private static final int SECONDS_IN_HOUR = 3600;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
@@ -494,7 +495,7 @@ public class OsmAndFormatter {
 				metersInUnit = METERS_IN_KILOMETER;
 				break;
 			case METERS_PER_SECOND:
-				metersInUnit = 1f;
+				metersInUnit = 1f * SECONDS_IN_HOUR;
 				break;
 			case NAUTICALMILES_PER_HOUR:
 				metersInUnit = METERS_IN_ONE_NAUTICALMILE;

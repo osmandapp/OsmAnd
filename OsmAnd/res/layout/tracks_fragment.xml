@@ -66,17 +66,23 @@
 
 		</androidx.appcompat.widget.Toolbar>
 
-        <net.osmand.plus.views.controls.PagerSlidingTabStrip
-            android:id="@+id/sliding_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/list_item_height"
-            osmand:pstsTabBackground="@color/color_transparent"/>
+		<net.osmand.plus.views.controls.PagerSlidingTabStrip
+			android:id="@+id/sliding_tabs"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/list_item_height"
+			osmand:pstsTabBackground="@color/color_transparent" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
+
+		<androidx.viewpager.widget.ViewPager
+			android:id="@+id/view_pager"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingBottom="@dimen/bottom_sheet_title_height" />
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"
@@ -88,12 +94,6 @@
 			osmand:mpb_progressStyle="horizontal"
 			osmand:mpb_setBothDrawables="true"
 			osmand:mpb_useIntrinsicPadding="false" />
-
-		<androidx.viewpager.widget.ViewPager
-			android:id="@+id/view_pager"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:paddingBottom="@dimen/bottom_sheet_title_height" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -134,8 +134,8 @@
 
 			</LinearLayout>
 
-        </LinearLayout>
+		</LinearLayout>
 
-    </FrameLayout>
+	</FrameLayout>
 
 </LinearLayout>
