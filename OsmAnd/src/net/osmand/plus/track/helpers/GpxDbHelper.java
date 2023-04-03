@@ -6,16 +6,31 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreFactory.SearchAddressByNameAPI;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,12 +42,15 @@ public class GpxDbHelper {
 
 	private final OsmandApplication app;
 	private final GPXDatabase db;
+
 	private final Map<File, GpxDataItem> itemsCache = new ConcurrentHashMap<>();
 
 	private final ConcurrentLinkedQueue<File> readingItems = new ConcurrentLinkedQueue<>();
 	private final Map<File, GpxDataItem> readingItemsMap = new ConcurrentHashMap<>();
 	private final Map<File, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
+
 	private GpxReaderTask readerTask;
+	private SearchSettings searchSettings;
 
 	public interface GpxDataItemCallback {
 
@@ -101,6 +119,12 @@ public class GpxDbHelper {
 
 	public boolean updateColoringType(@NonNull GpxDataItem item, @Nullable String coloringType) {
 		boolean res = db.updateColoringType(item, coloringType);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateNearestCityName(@NonNull GpxDataItem item, @Nullable String nearestCityName) {
+		boolean res = db.updateNearestCityName(item, nearestCityName);
 		putToCache(item);
 		return res;
 	}
@@ -176,20 +200,23 @@ public class GpxDbHelper {
 		return res;
 	}
 
-	public boolean clearAnalysis(GpxDataItem item) {
+	public boolean clearAnalysis(@NonNull GpxDataItem item) {
 		boolean res = db.clearAnalysis(item);
 		itemsCache.remove(item.getFile());
 		return res;
 	}
 
+	@NonNull
 	public List<GpxDataItem> getItems() {
 		return db.getItems();
 	}
 
+	@Nullable
 	public GpxDataItem getItem(@NonNull File file) {
 		return getItem(file, null);
 	}
 
+	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = itemsCache.get(file);
 		if (isAnalyseNeeded(file, item) && !isGpxReading(file)) {
@@ -245,7 +272,69 @@ public class GpxDbHelper {
 				|| item.getFileLastModifiedTime() != gpxFile.lastModified()
 				|| item.getAnalysis() == null
 				|| item.getAnalysis().wptCategoryNames == null
-				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0;
+				|| item.getAnalysis().latLonStart == null && item.getAnalysis().points > 0
+				|| isCitySearchNeeded(item);
+	}
+
+	private boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
+		return item != null && item.getNearestCityName() == null && item.getAnalysis() != null && item.getAnalysis().latLonStart != null;
+	}
+
+	@NonNull
+	private SearchSettings getSearchSettings(@NonNull LatLon latLon) {
+		if (searchSettings == null) {
+			SearchUICore searchUICore = app.getSearchUICore().getCore();
+			searchSettings = searchUICore.getSearchSettings()
+					.setEmptyQueryAllowed(true)
+					.setSortByName(false)
+					.setSearchTypes(ObjectType.CITY)
+					.setRadiusLevel(1);
+		}
+		return searchSettings.setOriginalLocation(latLon);
+	}
+
+	private void setupNearestCityName(@NonNull GpxDataItem item) {
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onFinish(@NonNull AppInitializer init) {
+					searchNearestCity(item);
+				}
+			});
+		} else {
+			searchNearestCity(item);
+		}
+	}
+
+	private void searchNearestCity(@NonNull GpxDataItem item) {
+		LatLon latLon = item.getAnalysis().latLonStart;
+		SearchSettings settings = getSearchSettings(latLon);
+		SearchUICore searchUICore = app.getSearchUICore().getCore();
+
+		CallbackWithObject<SearchResultCollection> callback = resultCollection -> {
+			if (resultCollection != null && resultCollection.hasSearchResults()) {
+				List<SearchResult> searchResults = new ArrayList<>(resultCollection.getCurrentSearchResults());
+				sortSearchResults(searchResults, latLon);
+
+				SearchResult searchResult = searchResults.get(0);
+				double distance = MapUtils.getDistance(latLon, searchResult.location);
+				if (distance <= CityType.CITY.getRadius()) {
+					updateNearestCityName(item, searchResult.localeName);
+					return true;
+				}
+			}
+			item.setNearestCityName("");
+			return false;
+		};
+		searchUICore.shallowSearchAsync(SearchAddressByNameAPI.class, "", null, false, false, settings, callback);
+	}
+
+	private void sortSearchResults(@NonNull List<SearchResult> results, @NonNull LatLon latLon) {
+		Collections.sort(results, (o1, o2) -> {
+			double distance1 = MapUtils.getDistance(latLon, o1.location);
+			double distance2 = MapUtils.getDistance(latLon, o2.location);
+			return Double.compare(distance1, distance2);
+		});
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -258,7 +347,7 @@ public class GpxDbHelper {
 		}
 
 		public boolean isReading() {
-			return readingItems.size() > 0 || gpxFile != null;
+			return !Algorithms.isEmpty(readingItems) || gpxFile != null;
 		}
 
 		@Override
@@ -281,10 +370,11 @@ public class GpxDbHelper {
 							} else {
 								db.updateAnalysis(item, analysis, conn);
 							}
-							putToCache(item);
-						} else {
-							putToCache(item);
 						}
+						if (isCitySearchNeeded(item)) {
+							setupNearestCityName(item);
+						}
+						putToCache(item);
 
 						if (!isCancelled()) {
 							publishProgress(item);
@@ -323,7 +413,7 @@ public class GpxDbHelper {
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
-			if (readingItems.size() > 0 && !isCancelled()) {
+			if (!Algorithms.isEmpty(readingItems) && !isCancelled()) {
 				startReading();
 			} else {
 				readerTask = null;
