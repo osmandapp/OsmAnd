@@ -23,18 +23,17 @@ import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
@@ -44,7 +43,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -247,12 +246,9 @@ public class GPXAction extends QuickAction implements FileSelected {
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
-				@Override
-				public void onGpxDataItemReady(GpxDataItem item) {
-					if (item != null && item.getAnalysis() != null) {
-						setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
-					}
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
+				if (item.getAnalysis() != null) {
+					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
 			});
 

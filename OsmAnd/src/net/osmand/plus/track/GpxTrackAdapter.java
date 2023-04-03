@@ -180,12 +180,9 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	}
 
 	private GpxDataItem getDataItem(@NonNull GPXInfo info) {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				if (item != null && gpxInfoList != null) {
-					notifyItemChanged(gpxInfoList.indexOf(info));
-				}
+		GpxDataItemCallback callback = item -> {
+			if (gpxInfoList != null) {
+				notifyItemChanged(gpxInfoList.indexOf(info));
 			}
 		};
 		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR),
