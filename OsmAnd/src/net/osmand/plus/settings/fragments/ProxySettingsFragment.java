@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import net.osmand.osm.io.NetworkUtils;
@@ -58,10 +60,17 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	@Override
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
-		View container = view.findViewById(R.id.toolbar_switch_container);
-		container.setOnClickListener(v -> switchProxyState());
-		TextView tvTitle = view.findViewById(R.id.switchButtonText);
-		tvTitle.setTextColor(ColorUtilities.getActiveColor(app, isNightMode()));
+
+		TextView title = view.findViewById(R.id.switchButtonText);
+		title.setTextColor(ColorUtilities.getActiveColor(app, isNightMode()));
+
+		view.findViewById(R.id.action_button).setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_proxy_settings)), isNightMode());
+			}
+		});
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(v -> switchProxyState());
 	}
 
 	@Override

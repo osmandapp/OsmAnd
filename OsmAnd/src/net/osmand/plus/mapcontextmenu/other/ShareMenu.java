@@ -15,24 +15,29 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.LocationConvert;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
 public class ShareMenu extends BaseMenuController {
+
+	private static final Log log = PlatformUtil.getLog(ShareMenu.class);
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
@@ -107,13 +112,6 @@ public class ShareMenu extends BaseMenuController {
 		if (mapActivity == null) {
 			return;
 		}
-		String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
-		String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
-		lat = lat.substring(0, lat.length() - 1);
-		lon = lon.substring(0, lon.length() - 1);
-		int zoom = mapActivity.getMapView().getZoom();
-		String geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
-		String httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
@@ -125,7 +123,23 @@ public class ShareMenu extends BaseMenuController {
 		if (TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL) {
 			sb.append("\n");
 		}
-		sb.append(geoUrl).append("\n").append(httpUrl);
+
+		String geoUrl = "";
+		String httpUrl = "";
+		try {
+			String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
+			String lon = LocationConvert.convertLongitude(latLon.getLongitude(), LocationConvert.FORMAT_DEGREES, false);
+			lat = lat.substring(0, lat.length() - 1);
+			lon = lon.substring(0, lon.length() - 1);
+			int zoom = mapActivity.getMapView().getZoom();
+			geoUrl = MapUtils.buildGeoUrl(lat, lon, zoom);
+			httpUrl = "https://osmand.net/map?pin=" + lat + "," + lon + "#" + zoom + "/" + lat + "/" + lon;
+		} catch (RuntimeException e) {
+			log.error("Failed to convert coordinates", e);
+		}
+		if (!Algorithms.isEmpty(geoUrl) && !Algorithms.isEmpty(httpUrl)) {
+			sb.append(geoUrl).append("\n").append(httpUrl);
+		}
 		String sms = sb.toString();
 		switch (item) {
 			case MESSAGE:
@@ -159,8 +173,10 @@ public class ShareMenu extends BaseMenuController {
 				copyToClipboardWithToast(mapActivity, coordinates, Toast.LENGTH_LONG);
 				break;
 			case GEO:
-				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
-				AndroidUtils.startActivityIfSafe(mapActivity, mapIntent);
+				if (!Algorithms.isEmpty(geoUrl)) {
+					Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
+					AndroidUtils.startActivityIfSafe(mapActivity, mapIntent);
+				}
 				break;
 			case QR_CODE:
 				Bundle bundle = new Bundle();

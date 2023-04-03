@@ -390,7 +390,9 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 						locationSearchTimer.schedule(new TimerTask() {
 							@Override
 							public void run() {
-								app.runInUIThread(() -> showNoLocationWizard(true));
+								if (isAdded()) {
+									app.runInUIThread(() -> showNoLocationWizard(true));
+								}
 							}
 						}, 1000 * 10);
 					}
