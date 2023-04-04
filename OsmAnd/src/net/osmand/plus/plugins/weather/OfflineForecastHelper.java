@@ -316,7 +316,8 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			LOG.debug("[Calculate size] [" + regionId + "] Zoom = " + zoom + ", Tile ids = " + tileIds);
 			if (!qTileIds.isEmpty()) {
 				LOG.debug("[Calculate size] [" + regionId + "] Call resource manager");
-				long localSize = weatherResourcesManager.calculateDbCacheSize(qTileIds, new TileIdList(), zoom).longValue();
+				BigInteger calculatedSize = weatherResourcesManager.calculateDbCacheSize(qTileIds, new TileIdList(), zoom);
+				long localSize = calculatedSize != null ? calculatedSize.longValue() : 0;
 				long updatesSize = calculateApproxUpdatesSize(tileIds);
 				LOG.debug("[Calculate size] [" + regionId + "] Calculated: local=" + localSize + ", updates=" + updatesSize);
 				setOfflineForecastSizeInfo(regionId, localSize, true);
@@ -387,7 +388,8 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				TileIdList tileIds = forLocal ? qOfflineTileIds : new TileIdList();
 				TileIdList excludeIds = forLocal ? new TileIdList() : qOfflineTileIds;
 				LOG.debug("[Calculate size] [Total] Call resources manager [" + (forLocal ? "local cache" : "online cache") + "]");
-				long size = weatherResourcesManager.calculateDbCacheSize(tileIds, excludeIds, zoom).longValue();
+				BigInteger calculatedSize = weatherResourcesManager.calculateDbCacheSize(tileIds, excludeIds, zoom);
+				long size = calculatedSize != null ? calculatedSize.longValue() : 0;
 				LOG.debug("[Calculate size] [Total] Calculated [" + (forLocal ? "local cache" : "online cache") + "]. Result = " + size + " bytes.");
 				totalCacheSize.set(size, forLocal);
 			}
