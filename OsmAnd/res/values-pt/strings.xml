@@ -5131,4 +5131,5 @@
     <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
     <string name="select_layer">Selecionar camada</string>
     <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
+    <string name="speak_route_deviation">Anunciar desvio da rota</string>
 </resources>
