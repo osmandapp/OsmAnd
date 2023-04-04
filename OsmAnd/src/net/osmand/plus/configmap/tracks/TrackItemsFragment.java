@@ -61,6 +61,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
+		recyclerView.setItemAnimator(null);
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
