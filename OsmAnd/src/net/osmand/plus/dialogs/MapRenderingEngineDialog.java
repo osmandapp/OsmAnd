@@ -75,13 +75,13 @@ public class MapRenderingEngineDialog {
 			String title = app.getString(R.string.loading_smth, "");
 			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
 			app.getAppInitializer().initOpenglAsync(() -> {
-				updateMap();
+				updateDependentAppComponents();
 				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 					progress.dismiss();
 				}
 			});
 		} else {
-			updateMap();
+			updateDependentAppComponents();
 			if (app.getSettings().MAP_OVERLAY_TRANSPARENCY != null) {
 				app.getOsmandMap().getMapLayers().getMapVectorLayer().setAlpha(255);
 			}
@@ -92,13 +92,15 @@ public class MapRenderingEngineDialog {
 		}
 	}
 
-	private void updateMap() {
+	private void updateDependentAppComponents() {
 		app.getOsmandMap().setupRenderingView();
 
 		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.refreshMapComplete();
 		}
+
+		app.getDownloadThread().runReloadIndexFilesSilent();
 	}
 
 	private void updateRadioButtons(boolean openglEnabled) {
