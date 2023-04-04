@@ -84,6 +84,7 @@ public class ItemViewHolder {
 	private boolean srtmNeedsInstallation;
 	private boolean nauticalPluginDisabled;
 	private boolean depthContoursPurchased;
+	private boolean weatherPurchased;
 
 	protected final DownloadActivity context;
 
@@ -163,10 +164,12 @@ public class ItemViewHolder {
 	}
 
 	private void initAppStatusVariables() {
+		OsmandApplication app = context.getMyApplication();
 		srtmDisabled = context.isSrtmDisabled();
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
-		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(context.getMyApplication());
+		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(app);
+		weatherPurchased = InAppPurchaseHelper.isOsmAndProAvailable(app);
 	}
 
 	public void bindDownloadItem(DownloadItem downloadItem) {
@@ -419,8 +422,7 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((type == DEPTH_CONTOUR_FILE || type == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
-			} else if (item.getType() == DownloadActivityType.WEATHER_FORECAST
-					&& !PluginsHelper.isActive(WeatherPlugin.class)) {
+			} else if (item.getType() == DownloadActivityType.WEATHER_FORECAST && !weatherPurchased) {
 				action = RightButtonAction.ASK_FOR_WEATHER_PURCHASE;
 			} else if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 					|| item.getType() == DownloadActivityType.TRAVEL_FILE)

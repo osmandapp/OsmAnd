@@ -268,6 +268,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		LOG.debug("[Calculate size] [" + regionId + "] Call 'calculateCacheSizeIfNeeded'");
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with this configuration.");
+			notifyOnComplete(callback);
 			return;
 		}
 		if (weatherResourcesManager == null) {
@@ -297,6 +298,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		LOG.debug("[Calculate size] [" + regionId + "] Call 'calculateCacheSize'");
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with current configuration.");
+			notifyOnComplete(callback);
 			return;
 		}
 		if (weatherResourcesManager == null) {
@@ -758,6 +760,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		LOG.debug("[Add Index Items] Call addWeatherIndexItems");
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Add Index Items] Can't add weather indexes. Weather isn't allowed with current configuration.");
+			return;
 		}
 		for (WorldRegion region : app.getRegions().getFlattenedWorldRegions()) {
 			boolean shouldHaveWeatherForecast = shouldHaveWeatherForecast(region);
