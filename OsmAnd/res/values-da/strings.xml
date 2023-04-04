@@ -5132,4 +5132,5 @@
     <string name="free_maps_updates">Gratis opdateringer (nødsituation)</string>
     <string name="select_layer">Vælg lag</string>
     <string name="rendering_value_defaultMedium_name">Standard (medium)</string>
+    <string name="speak_route_deviation">Meddel afvigelse fra ruten</string>
 </resources>
