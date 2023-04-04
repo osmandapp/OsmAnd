@@ -5126,4 +5126,5 @@
     <string name="free_maps_updates">Безплатні оновлення (екстрені)</string>
     <string name="select_layer">Вибрати шар</string>
     <string name="rendering_value_defaultMedium_name">Типово (середній)</string>
+    <string name="speak_route_deviation">Повідомляти про відхилення від маршруту</string>
 </resources>
