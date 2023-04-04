@@ -62,7 +62,7 @@
     <string name="settings_direction_style">दिशांचा प्रकार</string>
     <string name="i_am_here">मी इथे आहे</string>
     <string name="rendering_out_of_memory">निवडलेले क्षेत्र दाखवण्यासाठी पुरेशी प्रोसेस मेमरी नाही</string>
-    <string name="local_openstreetmap_uploading">अपलोड करत आहे …</string>
+    <string name="local_openstreetmap_uploading">चढवत आहे …</string>
     <string name="local_openstreetmap_were_uploaded">{0} पीओआय/नोट्स अपलोड झाले</string>
     <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
     <string name="local_openstreetmap_delete">बदल काढून टाका</string>
@@ -168,7 +168,7 @@
     <string name="voice">ध्वनीमुद्रित आवाज</string>
     <string name="poi_context_menu_modify">पिओआय बदला</string>
     <string name="poi_context_menu_delete">पिओआय काढून टाका</string>
-    <string name="rotate_map_compass_opt">कंपास दिशा</string>
+    <string name="rotate_map_compass_opt">होकायंत्र दिशा</string>
     <string name="rotate_map_bearing_opt">हालचालीची दिशा</string>
     <string name="rotate_map_north_opt">फिरवू नका (उत्तर दिशा नेहमी वरती)</string>
     <string name="show_route">मार्ग तपशील</string>
@@ -571,4 +571,18 @@
     <string name="shared_string_slope">उतार</string>
     <string name="rendering_category_hide">लपवा</string>
     <string name="gpx_direction_arrows">दिशेचे बाण</string>
+    <string name="configure_map">नकाशा मांडणी</string>
+    <string name="save_global_track_interval">सामान्य क्रमलेखन काळांतर</string>
+    <string name="shared_string_world">जग</string>
+    <string name="start_of_the_track">ट्रॅकची सुरुवात</string>
+    <string name="track_show_start_finish_icons">प्रारंभ व अंतचे चिन्हे दाखवा</string>
+    <string name="rename_track">ट्रॅक नाव परिवर्तन</string>
+    <string name="save_track_interval_globally">क्रमलेखन काळांतर</string>
+    <string name="shared_string_interval">काळांतर</string>
+    <string name="local_map_names">स्थानिक नावे</string>
+    <string name="map_locale">नकाशा भाषा</string>
+    <string name="download_tab_updates">अद्यतने</string>
+    <string name="download_tab_local">आधीच उतरवलेले</string>
+    <string name="save_track_to_gpx_descrp">मार्गनिर्देशनच्या वेळी आपोआप ट्रॅक मुद्रण चालू करुन नंतर आपोआप साठवा.</string>
+    <string name="monitoring_control_start">मुद्रण</string>
 </resources>
