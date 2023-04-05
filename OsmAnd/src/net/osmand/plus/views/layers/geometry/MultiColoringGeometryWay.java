@@ -14,6 +14,7 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
@@ -55,8 +56,18 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	protected void updateStylesWidth(@Nullable Float newWidth) {
-		for (GeometryWayStyle<?> style : styleMap.values()) {
-			style.width = newWidth;
+		if (!styleMap.isEmpty()) {
+			for (GeometryWayStyle<?> style : styleMap.values()) {
+				style.width = newWidth;
+			}
+		} else {
+			for (List<DrawPathData31> pathDataList : pathsData31Cache) {
+				for (DrawPathData31 pathData : pathDataList) {
+					if (pathData.style != null) {
+						pathData.style.width = newWidth;
+					}
+				}
+			}
 		}
 		resetArrowsProvider();
 	}

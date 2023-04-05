@@ -49,7 +49,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	//OpenGL
 	private final List<Integer> tx31 = new ArrayList<>();
 	private final List<Integer> ty31 = new ArrayList<>();
-	private final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
+	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
 	public int baseOrder = -1;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
