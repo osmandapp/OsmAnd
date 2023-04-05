@@ -143,42 +143,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	protected void drawSegmentBorder(@NonNull Canvas canvas, int zoom, @NonNull DrawPathData pathData) {
 	}
 
-	protected void buildVectorOutline(@NonNull VectorLinesCollection collection, int baseOrder,
-	                                  int lineId, int color, float width, float outlineWidth,
-	                                  @NonNull List<DrawPathData31> pathsData) {
-		QVectorPointI points = new QVectorPointI();
-		int px = 0;
-		int py = 0;
-		for (DrawPathData31 data : pathsData) {
-			for (int i = 0; i < data.tx.size(); i++) {
-				if (px == data.tx.get(i) && py == data.ty.get(i)) {
-					continue;
-				}
-				px = data.tx.get(i);
-				py = data.ty.get(i);
-				points.add(new PointI(px, py));
-			}
-		}
-		QListVectorLine lines = collection.getLines();
-		for (int i = 0; i < lines.size(); i++) {
-			VectorLine line = lines.get(i);
-			if (line.getLineId() == lineId) {
-				line.setPoints(points);
-				return;
-			}
-		}
-		VectorLineBuilder builder = new VectorLineBuilder();
-		builder.setBaseOrder(baseOrder)
-				.setIsHidden(false)
-				.setLineId(lineId)
-				.setLineWidth(width * VECTOR_LINE_SCALE_COEF + outlineWidth)
-				.setOutlineWidth(outlineWidth)
-				.setPoints(points)
-				.setApproximationEnabled(false)
-				.setFillColor(NativeUtilities.createFColorARGB(color));
-		builder.buildAndAddToCollection(collection);
-	}
-
 	protected void buildVectorLine(@NonNull VectorLinesCollection collection, int baseOrder,
 	                               int lineId, int color, float width,
 	                               int outlineColor, float outlineWidth,
@@ -199,6 +163,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			VectorLine line = lines.get(i);
 			if (line.getLineId() == lineId) {
 				line.setFillColor(NativeUtilities.createFColorARGB(color));
+				line.setLineWidth(width * VECTOR_LINE_SCALE_COEF);
+				line.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF);
 				line.setPoints(points);
 				if (hasColorizationMapping) {
 					line.setColorizationMapping(colorizationMapping);

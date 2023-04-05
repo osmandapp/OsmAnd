@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
+import com.google.android.material.slider.Slider.OnSliderTouchListener;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -154,6 +155,35 @@ public class TrackWidthCard extends MapBaseCard {
 					}
 				}
 			});
+
+			// Disable arrows in OpenGL while touching slider to prevent arrows blinking
+			widthSlider.addOnSliderTouchListener(new OnSliderTouchListener() {
+
+				boolean prevShowArrows;
+
+				@Override
+				public void onStartTrackingTouch(@NonNull Slider slider) {
+					if (hasMapRenderer()) {
+						if (trackDrawInfo.isShowArrows()) {
+							prevShowArrows = true;
+							setShowArrows(false);
+						}
+					}
+				}
+
+				@Override
+				public void onStopTrackingTouch(@NonNull Slider slider) {
+					if (hasMapRenderer()) {
+						if (prevShowArrows) {
+							setShowArrows(true);
+						}
+					}
+				}
+
+				private boolean hasMapRenderer() {
+					return app.getOsmandMap().getMapView().getMapRenderer() != null;
+				}
+			});
 			UiUtilities.setupSlider(widthSlider, nightMode, null, true);
 			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, () -> {
 				if (sliderContainer.getVisibility() == View.VISIBLE) {
@@ -168,6 +198,11 @@ public class TrackWidthCard extends MapBaseCard {
 
 	private void setGpxWidth(String width) {
 		trackDrawInfo.setWidth(width);
+		mapActivity.refreshMap();
+	}
+
+	private void setShowArrows(boolean showArrows) {
+		trackDrawInfo.setShowArrows(showArrows);
 		mapActivity.refreshMap();
 	}
 

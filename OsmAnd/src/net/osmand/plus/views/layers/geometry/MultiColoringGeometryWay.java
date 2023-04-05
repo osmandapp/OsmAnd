@@ -58,7 +58,7 @@ public abstract class MultiColoringGeometryWay
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.width = newWidth;
 		}
-		resetSymbolProviders();
+		resetArrowsProvider();
 	}
 
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
