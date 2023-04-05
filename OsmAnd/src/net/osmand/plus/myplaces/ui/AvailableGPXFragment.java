@@ -96,8 +96,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
@@ -546,6 +546,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	private void showSortPopUpMenu(@NonNull View anchorView, @NonNull MenuItem item) {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
 		for (TracksSortByMode mode : TracksSortByMode.values()) {
@@ -1577,13 +1578,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			if (child.getIncreasedFileSize() > 0) {
 				size = AndroidUtils.formatSize(v.getContext(), child.getIncreasedFileSize());
 			}
-			DateFormat df = app.getResourceManager().getDateFormat();
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
 			long lastModified = child.getLastModified();
 			if (lastModified > 0) {
-				date = (df.format(new Date(lastModified)));
+				date = (format.format(new Date(lastModified)));
 			}
 			TextView sizeText = v.findViewById(R.id.date_and_size_details);
-			sizeText.setText(date + " \u2022 " + size);
+			sizeText.setText(date + " • " + size);
 
 		} else {
 			v.findViewById(R.id.read_section).setVisibility(View.VISIBLE);
@@ -1600,11 +1601,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			TextView time = v.findViewById(R.id.time);
 			TextView distance = v.findViewById(R.id.distance);
 			TextView pointsCount = v.findViewById(R.id.points_count);
-			pointsCount.setText(analysis.wptPoints + "");
+			pointsCount.setText(String.valueOf(analysis.wptPoints));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+				time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
 			} else {
 				time.setText("");
 			}

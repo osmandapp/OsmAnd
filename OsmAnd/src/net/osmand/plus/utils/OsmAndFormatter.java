@@ -202,6 +202,10 @@ public class OsmAndFormatter {
 		return formattedTime;
 	}
 
+	public static DateFormat getDateFormat(@NonNull Context context) {
+		return android.text.format.DateFormat.getDateFormat(context);
+	}
+
 	public static String getFormattedDate(Context context, long milliseconds) {
 		return DateUtils.formatDateTime(context, milliseconds,
 				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
@@ -633,7 +637,7 @@ public class OsmAndFormatter {
 
 		MessageFormat messageFormat = new MessageFormat("{0}");
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
-		String formattedValue = messageFormat.format(new Object[]{value})
+		String formattedValue = messageFormat.format(new Object[] {value})
 				.replace('\n', ' ');
 		return new FormattedValue(value, formattedValue, unit);
 	}
@@ -903,7 +907,7 @@ public class OsmAndFormatter {
 		public String format(@NonNull Context context) {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
-					: new MessageFormat("{0}{1}").format(new Object[]{value, unit});
+					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
 		}
 	}
 
