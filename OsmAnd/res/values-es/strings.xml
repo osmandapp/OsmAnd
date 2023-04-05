@@ -5130,4 +5130,5 @@
     <string name="shared_string_pounds">libras</string>
     <string name="rendering_value_defaultMedium_name">Por defecto (media)</string>
     <string name="select_layer">Selecciona una capa</string>
+    <string name="speak_route_deviation">Anunciar un desvío de la ruta</string>
 </resources>

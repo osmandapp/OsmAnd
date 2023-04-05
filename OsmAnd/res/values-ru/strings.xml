@@ -3384,7 +3384,7 @@
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="not_support_file_type_with_ext">Выберите поддерживаемый файл с расширением %1$s.</string>
     <string name="import_from_file">Импорт из файла</string>
-    <string name="import_routing_file">Импорт файла маршрута</string>
+    <string name="import_routing_file">Импорт файла маршрутизации</string>
     <string name="import_profile">Импорт профиля</string>
     <string name="monitoring_prefs_descr">Навигация, точность журналирования</string>
     <string name="multimedia_notes_prefs_descr">Размер изображения, качество звука и видео</string>
@@ -5120,4 +5120,7 @@
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
     <string name="clear_online_cache_description">Это очистит весь кеш онлайн тайлов погоды.</string>
     <string name="free_maps_updates">Бесплатные обновления (экстренные)</string>
+    <string name="speak_route_deviation">Объявлять об отклонении от маршрута</string>
+    <string name="select_layer">Выбрать слой</string>
+    <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
 </resources>

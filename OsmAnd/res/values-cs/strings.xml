@@ -3934,7 +3934,7 @@
     <string name="shared_string_turn">Odbočit</string>
     <string name="announcement_time_intervals">Časové a vzdálenostní intervaly</string>
     <string name="announcement_time_descr">Načasování hlášení různých hlasových výzev závisí na typu výzvy, aktuální rychlosti navigace a výchozí rychlosti navigace.</string>
-    <string name="announcement_time_title">Oznámení o čase</string>
+    <string name="announcement_time_title">Čas oznámení</string>
     <string name="start_recording">Spustit záznam</string>
     <string name="show_track_on_map">Zobrazit stopu na mapě</string>
     <string name="routing_engine_vehicle_type_wheelchair">Invalidní vozík</string>
@@ -5122,4 +5122,5 @@
     <string name="shared_string_nearest">Nejbližší</string>
     <string name="select_layer">Vybrat vrstvu</string>
     <string name="rendering_value_defaultMedium_name">Výchozí (střední)</string>
+    <string name="speak_route_deviation">Oznámení o odchýlení od trasy</string>
 </resources>

@@ -5120,4 +5120,5 @@
     <string name="free_maps_updates">Ingyenes frissítések (vészhelyzet)</string>
     <string name="rendering_value_defaultMedium_name">Alapértelmezett (közepes)</string>
     <string name="select_layer">Réteg választása</string>
+    <string name="speak_route_deviation">Az útvonaltól való eltérés bemondása</string>
 </resources>

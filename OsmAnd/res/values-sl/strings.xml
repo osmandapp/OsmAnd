@@ -5114,4 +5114,7 @@
     <string name="disable_vertex_hillshade_3d">Onemogoči senčenja terena oglišč v 3D</string>
     <string name="shared_string_pounds">funtov</string>
     <string name="metric_lbs">lbs</string>
+    <string name="speak_route_deviation">Obvesti o odstopanju od poti</string>
+    <string name="select_layer">Izberi sloj</string>
+    <string name="rendering_value_defaultMedium_name">Privzeto (srednje)</string>
 </resources>

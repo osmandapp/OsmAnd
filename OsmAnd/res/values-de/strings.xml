@@ -5135,4 +5135,5 @@
     <string name="common_weight_limit_error">Der Mindestwert ist \"%1$s\" %2$s. Verwenden Sie das Profil \"%3$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
     <string name="rendering_value_defaultMedium_name">Standard (mittel)</string>
     <string name="select_layer">Ebene wählen</string>
+    <string name="speak_route_deviation">Abweichung von der Route ankündigen</string>
 </resources>
