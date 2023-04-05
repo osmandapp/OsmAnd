@@ -228,19 +228,16 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				if (useSpecialArrow) {
 					newWidth = AndroidUtils.dpToPxAuto(ctx, 12);
 				} else {
-					if (scaled) {
-						newWidth = arrowsWayStyle.getWidth(0) == 0 ? 0 : arrowsWayStyle.getWidth(0) / 2f;
-					} else {
-						newWidth = bitmap.getWidth();
-					}
+					newWidth = scaled ? arrowsWayStyle.getWidth(0) / 2f : bitmap.getWidth();
 				}
-				float paintH2 = bitmap.getHeight() / 2f;
-				float paintW2 = newWidth == 0 ? 0 : newWidth / 2f;
+
+				float scale = newWidth / bitmap.getWidth();
+				float paintW2 = newWidth / 2f;
+				float paintH2 = bitmap.getHeight() * scale / 2f;
 
 				Matrix matrix = getMatrix();
 				matrix.reset();
-				float sy = useSpecialArrow ? newWidth / bitmap.getHeight() : 1;
-				matrix.postScale(newWidth / bitmap.getWidth(), sy);
+				matrix.postScale(scale, scale);
 				matrix.postRotate((float) angle, paintW2, paintH2);
 				matrix.postTranslate(x - paintW2, y - paintH2);
 
