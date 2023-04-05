@@ -47,6 +47,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 	private static final String SEND_UNIQUE_USER_IDENTIFIER_PREF_ID = "send_unique_user_identifier";
+	private static final String ENABLE_PROXY_PREF_ID = "enable_proxy";
 
 	@Override
 	protected void setupPreferences() {
@@ -298,8 +299,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupEnableProxyPref() {
-		SwitchPreferenceEx enableProxy = findPreference(settings.ENABLE_PROXY.getId());
-		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
+		int iconId = R.drawable.ic_action_proxy;
+		boolean enabled = settings.isProxyEnabled();
+		Preference preference = findPreference(ENABLE_PROXY_PREF_ID);
+		preference.setIcon(enabled ? getActiveIcon(iconId) : getContentIcon(iconId));
+		preference.setSummary(enabled ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	private void setupHistoryPref() {

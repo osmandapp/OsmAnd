@@ -122,6 +122,7 @@ public class TracksToFollowCard extends MapBaseCard {
 		for (String title : gpxInfoCategories.keySet()) {
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			items.add(item);
 		}
 		chipsView.setItems(items);
 

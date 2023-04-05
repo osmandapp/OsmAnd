@@ -8,17 +8,23 @@ import androidx.annotation.Nullable;
 import com.google.openlocationcode.OpenLocationCode;
 
 import net.osmand.LocationConvert;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PointDescription {
+
+	private static final Log log = PlatformUtil.getLog(PointDescription.class);
+
 	private String type = "";
 	private String name = "";
 	private String typeName;
@@ -33,7 +39,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_ROUTE = "route";
 	public static final String POINT_TYPE_POI = "poi";
 	public static final String POINT_TYPE_ADDRESS = "address";
-	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
+	public static final String POINT_TYPE_OSM_NOTE = "osm_note";
 	public static final String POINT_TYPE_MARKER = "marker";
 	public static final String POINT_TYPE_PARKING_MARKER = "parking_marker";
 	public static final String POINT_TYPE_AUDIO_NOTE = "audionote";
@@ -88,7 +94,7 @@ public class PointDescription {
 		this.typeName = typeName;
 	}
 
-	public void setName(String name){
+	public void setName(String name) {
 		this.name = name;
 		if (this.name == null) {
 			this.name = "";
@@ -125,7 +131,7 @@ public class PointDescription {
 		if (!Algorithms.isEmpty(typeName)) {
 			if (Algorithms.isEmpty(name)) {
 				return typeName;
-			} else if(addTypeName){
+			} else if (addTypeName) {
 				return typeName.trim() + ": " + name;
 			}
 		}
@@ -165,7 +171,7 @@ public class PointDescription {
 		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		Map<Integer, String> results = new LinkedHashMap<>();
 
-		String latLonString ;
+		String latLonString;
 		String latLonDeg;
 		String latLonMin;
 		String latLonSec;
@@ -198,31 +204,35 @@ public class PointDescription {
 		results.put(OsmAndFormatter.SWISS_GRID_FORMAT, swissGrid);
 		results.put(OsmAndFormatter.SWISS_GRID_PLUS_FORMAT, swissGridPlus);
 
-		int zoom = ctx.getMapView().getZoom();
-		String latUrl = LocationConvert.convertLatitude(lat, LocationConvert.FORMAT_DEGREES, false);
-		String lonUrl = LocationConvert.convertLongitude(lon, LocationConvert.FORMAT_DEGREES, false);
-		latUrl = latUrl.substring(0, latUrl.length() - 1);
-		lonUrl = lonUrl.substring(0, lonUrl.length() - 1);
-		String httpUrl = "https://osmand.net/map?pin=" + latUrl + "," + lonUrl + "#" + zoom + "/" + latUrl + "/" + lonUrl;
-		results.put(LOCATION_URL, httpUrl);
+		try {
+			int zoom = ctx.getMapView().getZoom();
+			String latUrl = LocationConvert.convertLatitude(lat, LocationConvert.FORMAT_DEGREES, false);
+			String lonUrl = LocationConvert.convertLongitude(lon, LocationConvert.FORMAT_DEGREES, false);
+			latUrl = latUrl.substring(0, latUrl.length() - 1);
+			lonUrl = lonUrl.substring(0, lonUrl.length() - 1);
+			String httpUrl = "https://osmand.net/map?pin=" + latUrl + "," + lonUrl + "#" + zoom + "/" + latUrl + "/" + lonUrl;
+			results.put(LOCATION_URL, httpUrl);
+		} catch (RuntimeException e) {
+			log.error("Failed to convert coordinates", e);
+		}
 
-		int f = settings.COORDINATES_FORMAT.get();
-		
-		if (f == PointDescription.UTM_FORMAT) {
+		int format = settings.COORDINATES_FORMAT.get();
+
+		if (format == PointDescription.UTM_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, utm);
-		} else if (f == PointDescription.OLC_FORMAT) {
+		} else if (format == PointDescription.OLC_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, olc);
-		} else if (f == PointDescription.MGRS_FORMAT) {
+		} else if (format == PointDescription.MGRS_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, mgrs);
-		} else if (f == PointDescription.SWISS_GRID_FORMAT) {
+		} else if (format == PointDescription.SWISS_GRID_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, swissGrid);
-		} else if (f == PointDescription.SWISS_GRID_PLUS_FORMAT) {
+		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 			results.put(LOCATION_LIST_HEADER, swissGridPlus);
-		} else if (f == PointDescription.FORMAT_DEGREES) {
+		} else if (format == PointDescription.FORMAT_DEGREES) {
 			results.put(LOCATION_LIST_HEADER, latLonDeg);
-		} else if (f == PointDescription.FORMAT_MINUTES) {
+		} else if (format == PointDescription.FORMAT_MINUTES) {
 			results.put(LOCATION_LIST_HEADER, latLonMin);
-		} else if (f == PointDescription.FORMAT_SECONDS) {
+		} else if (format == PointDescription.FORMAT_SECONDS) {
 			results.put(LOCATION_LIST_HEADER, latLonSec);
 		}
 		return results;
@@ -359,9 +369,9 @@ public class PointDescription {
 		if (p == null) {
 			return "";
 		}
-		String tp = p.type ;
-		if(!Algorithms.isEmpty(p.typeName)) {
-			tp = tp +'.' + p.typeName;
+		String tp = p.type;
+		if (!Algorithms.isEmpty(p.typeName)) {
+			tp = tp + '.' + p.typeName;
 		}
 		String res = tp + "#" + p.name;
 		if (!Algorithms.isEmpty(p.iconName)) {
@@ -371,7 +381,7 @@ public class PointDescription {
 	}
 
 	public static PointDescription deserializeFromString(String s, LatLon l) {
-		PointDescription pd = null ;
+		PointDescription pd = null;
 		if (s != null && s.length() > 0) {
 			int in = s.indexOf('#');
 			if (in >= 0) {
@@ -385,7 +395,7 @@ public class PointDescription {
 					name = s.substring(in + 1).trim();
 				}
 				String tp = s.substring(0, in);
-				if(tp.contains(".")) {
+				if (tp.contains(".")) {
 					pd = new PointDescription(tp.substring(0, tp.indexOf('.')), tp.substring(tp.indexOf('.') + 1), name);
 				} else {
 					pd = new PointDescription(tp, name);
@@ -395,10 +405,10 @@ public class PointDescription {
 				}
 			}
 		}
-		if(pd == null) {
+		if (pd == null) {
 			pd = new PointDescription(POINT_TYPE_LOCATION, "");
 		}
-		if(pd.isLocation() && l != null) {
+		if (pd.isLocation() && l != null) {
 			pd.lat = l.getLatitude();
 			pd.lon = l.getLongitude();
 		}

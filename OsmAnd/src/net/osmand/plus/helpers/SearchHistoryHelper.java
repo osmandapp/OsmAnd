@@ -1,15 +1,21 @@
 package net.osmand.plus.helpers;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -29,17 +35,17 @@ public class SearchHistoryHelper {
 
 	private static SearchHistoryHelper instance;
 
-	private final OsmandApplication context;
+	private final OsmandApplication app;
 	private List<HistoryEntry> loadedEntries;
 	private final Map<PointDescription, HistoryEntry> mp = new HashMap<>();
 
-	public SearchHistoryHelper(OsmandApplication context) {
-		this.context = context;
+	public SearchHistoryHelper(@NonNull OsmandApplication app) {
+		this.app = app;
 	}
 
-	public static SearchHistoryHelper getInstance(OsmandApplication context) {
+	public static SearchHistoryHelper getInstance(@NonNull OsmandApplication app) {
 		if (instance == null) {
-			instance = new SearchHistoryHelper(context);
+			instance = new SearchHistoryHelper(app);
 		}
 		return instance;
 	}
@@ -62,8 +68,8 @@ public class SearchHistoryHelper {
 
 	public void addNewItemToHistory(PoiUIFilter filter) {
 		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter)));
-		if (context.getSettings().SEARCH_HISTORY.get()) {
-			context.getPoiFilters().markHistory(filter.getFilterId(), true);
+		if (app.getSettings().SEARCH_HISTORY.get()) {
+			app.getPoiFilters().markHistory(filter.getFilterId(), true);
 		}
 	}
 
@@ -73,18 +79,58 @@ public class SearchHistoryHelper {
 		}
 	}
 
+	@NonNull
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
+		return getHistoryEntries(onlyPoints, false);
+	}
+
+	@NonNull
+	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints, boolean includeDeleted) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
-		List<HistoryEntry> res = new ArrayList<>();
+		List<HistoryEntry> entries = new ArrayList<>();
 		for (HistoryEntry entry : loadedEntries) {
-			PointDescription pd = entry.getName();
-			if (!onlyPoints || (!pd.isPoiType() && !pd.isCustomPoiFilter())) {
-				res.add(entry);
+			PointDescription description = entry.getName();
+
+			boolean exists = isPointDescriptionExists(description);
+			if (includeDeleted || exists) {
+				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
+					entries.add(entry);
+				}
 			}
 		}
-		return res;
+		return entries;
+	}
+
+	private boolean isPointDescriptionExists(@NonNull PointDescription description) {
+		String name = description.getName();
+		if (description.isPoiType()) {
+			MapPoiTypes poiTypes = app.getPoiTypes();
+			return poiTypes.getAnyPoiTypeByKey(name) != null || poiTypes.getAnyPoiAdditionalTypeByKey(name) != null;
+		} else if (description.isCustomPoiFilter()) {
+			return app.getPoiFilters().getFilterById(name, true) != null;
+		} else if (description.isGpxFile()) {
+			return GpxUiHelper.getGpxInfoByFileName(app, name) != null;
+		}
+		return true;
+	}
+
+	@NonNull
+	public List<SearchResult> getSearchHistoryResults(boolean onlyPoints) {
+		return getSearchHistoryResults(onlyPoints, false);
+	}
+
+	@NonNull
+	public List<SearchResult> getSearchHistoryResults(boolean onlyPoints, boolean includeDeleted) {
+		List<SearchResult> searchResults = new ArrayList<>();
+
+		SearchPhrase phrase = SearchPhrase.emptyPhrase();
+		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
+			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
+			searchResults.add(result);
+		}
+		return searchResults;
 	}
 
 	private PointDescription createPointDescription(AbstractPoiType pt) {
@@ -119,7 +165,7 @@ public class SearchHistoryHelper {
 		HistoryEntry model = mp.get(pd);
 		if (model != null && checkLoadedEntries().remove(model)) {
 			if (pd.isCustomPoiFilter()) {
-				context.getPoiFilters().markHistory(pd.getName(), false);
+				app.getPoiFilters().markHistory(pd.getName(), false);
 			}
 			loadedEntries.remove(model);
 			mp.remove(pd);
@@ -129,7 +175,7 @@ public class SearchHistoryHelper {
 	public void removeAll() {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
-			context.getPoiFilters().clearHistory();
+			app.getPoiFilters().clearHistory();
 			loadedEntries.clear();
 			mp.clear();
 		}
@@ -148,7 +194,7 @@ public class SearchHistoryHelper {
 	}
 
 	private void addNewItemToHistory(HistoryEntry model) {
-		if (context.getSettings().SEARCH_HISTORY.get()) {
+		if (app.getSettings().SEARCH_HISTORY.get()) {
 			HistoryItemDBHelper helper = checkLoadedEntries();
 			if (mp.containsKey(model.getName())) {
 				model = mp.get(model.getName());
@@ -373,11 +419,11 @@ public class SearchHistoryHelper {
 		}
 
 		private SQLiteConnection openConnection(boolean readonly) {
-			SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+			SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 			if (conn != null && conn.getVersion() < DB_VERSION) {
 				if (readonly) {
 					conn.close();
-					conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
+					conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 				}
 				if (conn != null) {
 					int version = conn.getVersion();
@@ -409,21 +455,21 @@ public class SearchHistoryHelper {
 		}
 
 		public long getLastModifiedTime() {
-			long lastModifiedTime = BackupHelper.getLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME);
+			long lastModifiedTime = BackupHelper.getLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME);
 			if (lastModifiedTime == 0) {
-				File dbFile = context.getDatabasePath(DB_NAME);
+				File dbFile = app.getDatabasePath(DB_NAME);
 				lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
-				BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+				BackupHelper.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
 			}
 			return lastModifiedTime;
 		}
 
 		public void setLastModifiedTime(long lastModifiedTime) {
-			BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+			BackupHelper.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
 		}
 
 		private void updateLastModifiedTime() {
-			BackupHelper.setLastModifiedTime(context, HISTORY_LAST_MODIFIED_NAME);
+			BackupHelper.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME);
 		}
 
 		public boolean remove(HistoryEntry e) {
@@ -516,7 +562,7 @@ public class SearchHistoryHelper {
 							double lat = query.getDouble(1);
 							double lon = query.getDouble(2);
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
-							if (context.getPoiTypes().isTypeForbidden(p.getName())) {
+							if (app.getPoiTypes().isTypeForbidden(p.getName())) {
 								query.moveToNext();
 							}
 							HistoryEntry e = new HistoryEntry(lat, lon, p);

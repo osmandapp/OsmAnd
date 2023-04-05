@@ -21,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -816,9 +817,9 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			case GeneralRouter.USE_SHORTEST_WAY:
 				return getPersistentPrefIcon(R.drawable.ic_action_fuel);
 			case GeneralRouter.ALLOW_MOTORWAYS:
-				Drawable disabled = getContentIcon(R.drawable.ic_action_avoid_motorways);
-				Drawable enabled = getActiveIcon(R.drawable.ic_action_motorways);
-				return getPersistentPrefIcon(enabled, disabled);
+				return getPersistentPrefIcon(
+						UiUtilities.createTintedDrawable(app, R.drawable.ic_action_motorways, getActiveProfileColor()),
+						UiUtilities.createTintedDrawable(app, R.drawable.ic_action_avoid_motorways, ContextCompat.getColor(app, R.color.icon_color_default_light)));
 			case USE_HEIGHT_OBSTACLES:
 			case RELIEF_SMOOTHNESS_FACTOR:
 				return getPersistentPrefIcon(R.drawable.ic_action_altitude_average);

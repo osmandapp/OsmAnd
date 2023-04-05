@@ -5083,13 +5083,23 @@
 \n
 \n • Zjednodušená úvodná obrazovka
 \n
-\n • Pevné umiestnenie polohy v režime rozdelenej obrazovky v systéme Android Auto
+\n • Opravené umiestnenie polohy v režime rozdelenej obrazovky v systéme Android Auto
 \n
 \n • Pridaný graf \"Rýchlosť/Sklon\" pre analýzu stopy
 \n
 \n • Systém Android 13 presunul výber jazyka aplikácie do systémových nastavení
 \n
 \n • Opravené chyby pri zobrazení miest pre vegánov
+\n
+\n • Pridaná možnosť stiahnuť online dlaždice používané ako prekrývacie alebo podkladové mapy
+\n
+\n • Pridaná podpora pre imperiálne merné jednotky vo \"Vlastnostiach vozidla\"
+\n
+\n • Nový profil pre moped
+\n
+\n • \"Zobrazenie polohy\" má pridanú novú možnosť \"Automatické\"
+\n
+\n • Opravené gestá na mape pre sklopenie, priblíženie a otáčanie
 \n
 \n</string>
     <string name="app_mode_moped">Moped</string>
@@ -5109,4 +5119,8 @@
     <string name="weather_forecast_is_outdated">Predpoveď je zastaralá.</string>
     <string name="clear_online_cache_description">Toto vymaže dočasnú vyrovnávaciu pamäť pre online dlaždice počasia.</string>
     <string name="offline_weather_forecast">Offline predpoveď počasia</string>
+    <string name="common_weight_limit_error">Minimálna hodnota je \"%1$s\" %2$s. Použite profil \"%3$s\" ak je hmotnosť vozidla nižšia než minimálna hodnota.</string>
+    <string name="shared_string_pounds">libry</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="free_maps_updates">Aktualizácie zdarma (núdzové)</string>
 </resources>

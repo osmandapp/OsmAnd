@@ -109,6 +109,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public static final int NOTES_TAB = R.string.notes;
 	public static final String DEFAULT_ACTION_SETTING_ID = "av_default_action";
+	public static final String EXTERNAL_RECORDER_SETTING_ID = "av_external_recorder";
+	public static final String EXTERNAL_PHOTO_CAM_SETTING_ID = "av_external_cam";
 	public static final String THREEGP_EXTENSION = "3gp";
 	public static final String MPEG4_EXTENSION = "mp4";
 	public static final String IMG_EXTENSION = "jpg";
@@ -556,8 +558,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_RECORD_VIDEO, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_TAKE_PHOTO, noAppMode);
 
-		AV_EXTERNAL_RECORDER = registerBooleanPreference("av_external_recorder", false);
-		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference("av_external_cam", true);
+		AV_EXTERNAL_RECORDER = registerBooleanPreference(EXTERNAL_RECORDER_SETTING_ID, false);
+		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference(EXTERNAL_PHOTO_CAM_SETTING_ID, true);
 		AV_VIDEO_FORMAT = registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4);
 		AV_VIDEO_QUALITY = registerIntPreference("av_video_quality", VIDEO_QUALITY_DEFAULT);
 		AV_AUDIO_FORMAT = registerIntPreference("av_audio_format", AUDIO_FORMAT_DEFAULT);

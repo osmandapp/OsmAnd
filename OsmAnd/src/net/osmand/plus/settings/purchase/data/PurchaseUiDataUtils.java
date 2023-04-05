@@ -14,8 +14,8 @@ import net.osmand.plus.Version;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -36,10 +36,10 @@ public class PurchaseUiDataUtils {
 		String purchaseType;
 		long purchaseTime = purchase.getPurchaseTime();
 		long expireTime = INVALID;
-		boolean isLiveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
+		boolean liveUpdateSubscription = purchases.isLiveUpdatesSubscription(purchase);
 		boolean autoRenewing = false;
 		boolean renewVisible = false;
-		SubscriptionState subscriptionState = null;
+		SubscriptionState subscriptionState = UNDEFINED;
 		PurchaseOrigin origin = purchaseHelper.getPurchaseOriginBySku(sku);
 		boolean isSubscription = purchase instanceof InAppSubscription;
 
@@ -84,7 +84,7 @@ public class PurchaseUiDataUtils {
 
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
 				expireTime, purchaseTime, isSubscription,
-				isLiveUpdateSubscription, autoRenewing,
+				liveUpdateSubscription, autoRenewing,
 				renewVisible, subscriptionState, origin);
 	}
 

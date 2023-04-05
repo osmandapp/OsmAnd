@@ -2600,7 +2600,7 @@
     <string name="shared_string_dont">Non fare</string>
     <string name="shared_string_do">Fai</string>
     <string name="shared_string_only_with_wifi">Solo da WiFi</string>
-    <string name="wikivoyage_download_pics">Scarica le immagini</string>
+    <string name="wikivoyage_download_pics">Scarica immagini</string>
     <string name="shared_string_wifi_only">Solo con WiFi</string>
     <string name="select_travel_book">Scegli un libro di viaggio</string>
     <string name="shared_string_travel_book">Libro di viaggio</string>
@@ -4788,7 +4788,7 @@
     <string name="map_widget_zoom_level">Livello di zoom</string>
     <string name="map_widget_camera_tilt">Inclinazione della fotocamera</string>
     <string name="developer_widgets">Widget per sviluppatori</string>
-    <string name="map_widget_camera_distance">Elevazione della fotocamera</string>
+    <string name="map_widget_camera_distance">Elevazione fotocamera</string>
     <string name="coordinates_widget_current_location_desc">Mostra le coordinate geografiche della posizione attuale</string>
     <string name="coordinates_widget_current_location">Coordinate: posizione attuale</string>
     <string name="favorites_backup">Salva i preferiti</string>
@@ -5085,4 +5085,14 @@
     <string name="shared_string_nearest">Più vicino</string>
     <string name="selected_value">Valore selezionato</string>
     <string name="app_mode_moped">Ciclomotore</string>
+    <string name="offline_cache">Cache offline</string>
+    <string name="weather_forecast_is_outdated">Previsioni</string>
+    <string name="clear_online_cache">Pulisci cache online</string>
+    <string name="shared_string_alt_name">Nome alternativo</string>
+    <string name="token_is_not_valid">Token non valido</string>
+    <string name="app_mode_climbing">Arrampicata</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="offline_weather_forecast">Previsioni meteorologiche offline</string>
+    <string name="weather_forecast">Previsioni meteorologiche</string>
+    <string name="enable_3d_maps">Attiva mappe 3D</string>
 </resources>

@@ -666,12 +666,7 @@ public class MapRenderRepositories {
 
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-			settings.getCustomRenderProperty("appMode").setModeValue(settings.APPLICATION_MODE.get(),
-					app.getSettings().APPLICATION_MODE.get().getStringKey());
-			settings.getCustomRenderProperty("baseAppMode").setModeValue(settings.APPLICATION_MODE.get(),
-					app.getSettings().APPLICATION_MODE.get().getParent() != null
-							? settings.APPLICATION_MODE.get().getParent().getStringKey()
-							: settings.APPLICATION_MODE.get().getStringKey());
+			settings.setAppModeCustomProperties();
 			RenderingRuleSearchRequest renderingReq = getSearchRequestWithAppliedCustomRules(storage, nightMode);
 
 			renderingReq.saveState();

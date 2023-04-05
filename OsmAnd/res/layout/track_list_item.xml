@@ -81,16 +81,6 @@
 						tools:src="@drawable/ic_direction_arrow" />
 
 					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/distance"
-						style="@style/DescStyle.Medium"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center_vertical"
-						android:maxLines="1"
-						android:textColor="?android:textColorSecondary"
-						tools:text="213 m" />
-
-					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/description"
 						style="@style/DescStyle"
 						android:layout_width="wrap_content"

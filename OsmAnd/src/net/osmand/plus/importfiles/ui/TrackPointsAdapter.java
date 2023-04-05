@@ -24,7 +24,8 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 
@@ -55,7 +56,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		this.selectedPoints = selectedPoints;
 		inflater = UiUtilities.getInflater(app, nightMode);
 		uiUtilities = app.getUIUtilities();
-		viewCache = uiUtilities.getUpdateLocationViewCache();
+		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 	}
 
 	public void setListener(@Nullable OnItemSelectedListener listener) {

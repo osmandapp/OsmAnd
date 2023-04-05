@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -36,7 +36,8 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -78,7 +79,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		updateShowDirectionMarkers();
 		createDisplayGroups();
@@ -412,7 +413,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 			updateLocationViewCache.arrowResId = drawableResToUpdate;
 			updateLocationViewCache.arrowColor = markerToHighlight ? color : 0;
-			app.getUIUtilities().updateLocationView(updateLocationViewCache, markerImageViewToUpdate, itemViewHolder.distance, markerLatLon);
+			UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, markerImageViewToUpdate, itemViewHolder.distance, markerLatLon);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
 			MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
 			Object header = getItem(position);

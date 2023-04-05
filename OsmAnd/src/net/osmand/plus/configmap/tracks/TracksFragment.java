@@ -28,13 +28,9 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -44,10 +40,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -58,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener, GpxImportListener {
+public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
@@ -66,7 +63,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private SelectedTracksHelper selectedTracksHelper;
 	private TrackItemsLoaderTask asyncLoader;
 
-	private ViewPager2 viewPager;
+	private ViewPager viewPager;
+	private PagerSlidingTabStrip tabLayout;
 	private ProgressBar progressBar;
 	private TracksTabAdapter adapter;
 
@@ -74,6 +72,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private View selectionButton;
 
 	private boolean nightMode;
+	private int tabSize;
 
 	@NonNull
 	public SelectedTracksHelper getSelectedTracksHelper() {
@@ -90,7 +89,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		importHelper = new ImportHelper(requireActivity());
-		importHelper.setGpxImportListener(this);
 		selectedTracksHelper = new SelectedTracksHelper(app);
 		nightMode = isNightMode(true);
 	}
@@ -148,7 +146,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		actionsButton.setOnClickListener(this::showOptionsMenu);
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
 
-		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_primary_dark : R.color.app_bar_color_dark);
+		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 		switchGroup.setImageTintList(ColorStateList.valueOf(iconColor));
 		actionsButton.setImageTintList(ColorStateList.valueOf(iconColor));
 	}
@@ -177,29 +175,57 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void setupTabLayout(@NonNull View view) {
-		adapter = new TracksTabAdapter(this, getTrackTabs());
-
 		viewPager = view.findViewById(R.id.view_pager);
-		viewPager.setAdapter(adapter);
+		List<TrackTab> tabs = getTrackTabs();
+		tabLayout = view.findViewById(R.id.sliding_tabs);
+		tabLayout.setTabBackground(nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light);
+		tabLayout.setCustomTabProvider(new CustomTabProvider() {
+			@Override
+			public View getCustomTabView(@NonNull ViewGroup parent, int position) {
+				TrackTab trackTab = getTrackTabs().get(position);
 
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+				int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+				int sidePadding = AndroidUtils.dpToPx(app, 12);
 
-		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
-		tabLayout.setSelectedTabIndicatorColor(activeColor);
-		tabLayout.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+				LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
+				View customView = inflater.inflate(R.layout.tab_title_view, parent, false);
+				TextView textView = customView.findViewById(android.R.id.text1);
+				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
+				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
+				textView.setText(trackTab.getName(app, false));
+				return customView;
+			}
 
-		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager,
-				(tab, position) -> {
-					View customView = inflater.inflate(R.layout.tab_title_view, tabLayout, false);
-					TextView textView = customView.findViewById(android.R.id.text1);
-					textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
+			@Override
+			public void select(View tab) {
+				tab.setSelected(true);
+			}
 
-					tab.setCustomView(customView);
-					tab.setText(Algorithms.getFileWithoutDirs(getTrackTabs().get(position).name));
-				});
-		mediator.attach();
+			@Override
+			public void deselect(View tab) {
+				tab.setSelected(false);
+			}
+
+			@Override
+			public void tabStylesUpdated(View tabsContainer, int currentPosition) {
+
+			}
+		});
+		setTabs(tabs);
+
+	}
+
+	private void setTabs(List<TrackTab> tabs) {
+		tabSize = tabs.size();
+		setViewPagerAdapter(viewPager, tabs);
+		tabLayout.setViewPager(viewPager);
+		viewPager.setCurrentItem(0);
+	}
+
+	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
+		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
+		pager.setAdapter(adapter);
 	}
 
 	private void setupButtons(@NonNull View view) {
@@ -209,10 +235,10 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
 			Set<TrackItem> selectedTracks = selectedTracksHelper.getSelectedTracks();
-			if (!Algorithms.isEmpty(selectedTracks)) {
-				onTrackItemsSelected(selectedTracks, false);
-			} else {
+			if (Algorithms.isEmpty(selectedTracks)) {
 				onTrackItemsSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
+			} else {
+				onTrackItemsSelected(selectedTracks, false);
 			}
 		});
 		updateButtonsState();
@@ -238,14 +264,14 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Nullable
 	public TrackTab getSelectedTab() {
 		List<TrackTab> trackTabs = getTrackTabs();
-		return !trackTabs.isEmpty() ? trackTabs.get(viewPager.getCurrentItem()) : null;
+		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
 	}
 
 	public void setSelectedTab(@NonNull String name) {
 		List<TrackTab> trackTabs = getTrackTabs();
 		for (int i = 0; i < trackTabs.size(); i++) {
 			TrackTab tab = trackTabs.get(i);
-			if (Algorithms.stringsEqual(tab.name, name)) {
+			if (Algorithms.stringsEqual(tab.getTypeName(), name)) {
 				viewPager.setCurrentItem(i);
 				break;
 			}
@@ -262,13 +288,16 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void onResume() {
 		super.onResume();
-
+		List<TrackTab> tabs = getTrackTabs();
+		if (tabs.size() != tabSize) {
+			setTabs(tabs);
+		}
 		if (asyncLoader == null) {
 			reloadTracks();
 		}
 	}
 
-	public void reloadTracks() {
+	private void reloadTracks() {
 		asyncLoader = new TrackItemsLoaderTask(app, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -334,9 +363,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				List<Uri> filesUri = IntentHelper.getIntentUris(data);
-				if (filesUri.size() == 1) {
-					importHelper.handleGpxImport(filesUri.get(0), null, true);
-				} else if (filesUri.size() > 1) {
+				if (!Algorithms.isEmpty(filesUri)) {
+					AndroidUiHelper.updateVisibility(progressBar, true);
+					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
 					importHelper.handleGpxFilesImport(filesUri, true);
 				}
 			}
@@ -345,11 +374,35 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
-	@Override
-	public void onSaveComplete(boolean success, GPXFile gpxFile) {
-		if (isAdded() && success) {
-			addTrackItem(new TrackItem(new File(gpxFile.path)));
-		}
+	@NonNull
+	private GpxImportListener getGpxImportListener(int filesSize) {
+		return new GpxImportListener() {
+			private int importCounter;
+
+			@Override
+			public void onImportComplete(boolean success) {
+				if (!success) {
+					importCounter++;
+				}
+				checkImportFinished();
+			}
+
+			@Override
+			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+				if (isAdded() && success) {
+					addTrackItem(new TrackItem(new File(gpxFile.path)));
+				}
+				importCounter++;
+				checkImportFinished();
+			}
+
+			private void checkImportFinished() {
+				if (importCounter == filesSize) {
+					importHelper.setGpxImportListener(null);
+					AndroidUiHelper.updateVisibility(progressBar, false);
+				}
+			}
+		};
 	}
 
 	private void addTrackItem(@NonNull TrackItem item) {
@@ -379,7 +432,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
 		for (Fragment fragment : getChildFragmentManager().getFragments()) {
 			if (fragment instanceof TrackItemsFragment) {
-				((TrackItemsFragment) fragment).ontrackItemsSelected(trackItems);
+				((TrackItemsFragment) fragment).onTrackItemsSelected(trackItems);
 			}
 		}
 	}

@@ -1320,8 +1320,8 @@
     <string name="wake_on_voice_descr">Увімкнути екран пристрою (якщо його вимкнено) під час наближення до повороту.</string>
     <string name="shared_string_never">Ніколи</string>
     <string name="impassable_road">Уникати доріг…</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Маршрути поїздів</string>
-    <string name="rendering_attr_tramRoutes_name">Маршрути трамваїв</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Залізничні маршрути</string>
+    <string name="rendering_attr_tramRoutes_name">Трамвайні маршрути</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Маршрутне таксі</string>
     <string name="rendering_attr_trolleybusRoutes_name">Маршрути тролейбусів</string>
     <string name="rendering_attr_busRoutes_name">Маршрути автобусів</string>
@@ -4108,7 +4108,7 @@
     <string name="shared_string_offline">Офлайн</string>
     <string name="shared_string_online">З мережі</string>
     <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, openrouteservice або GPX.</string>
-    <string name="shared_string_external">Зовнішні</string>
+    <string name="shared_string_external">Зовнішньо</string>
     <string name="provided_by">Надано %1$s</string>
     <string name="failed_loading_predefined_engines">Не вдалося завантажити список попередньо визначених шаблонів.
 \nПеревірте з\'єднання з Інтернетом.</string>
@@ -5124,4 +5124,7 @@
     <string name="shared_string_pounds">фунтів</string>
     <string name="metric_lbs">фунтів</string>
     <string name="free_maps_updates">Безплатні оновлення (екстрені)</string>
+    <string name="select_layer">Вибрати шар</string>
+    <string name="rendering_value_defaultMedium_name">Типово (середній)</string>
+    <string name="speak_route_deviation">Повідомляти про відхилення від маршруту</string>
 </resources>

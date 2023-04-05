@@ -30,8 +30,6 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.myplaces.FavoriteGroup;
@@ -41,6 +39,8 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
@@ -435,12 +435,12 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public int getMinimalSearchRadius(SearchPhrase phrase) {
-			return (int)filter.getSearchRadius(phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT);
+			return (int) filter.getSearchRadius(phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT);
 		}
 
 		@Override
 		public int getNextSearchRadius(SearchPhrase phrase) {
-			return (int)filter.getSearchRadius(phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT + 1);
+			return (int) filter.getSearchRadius(phrase.getRadiusLevel() + SEARCH_RADIUS_INCREMENT + 1);
 		}
 
 		@Override
@@ -452,12 +452,10 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchHistoryAPI extends SearchBaseAPI {
 
 		private final OsmandApplication app;
-		private final MapPoiTypes poiTypes;
 
 		public SearchHistoryAPI(OsmandApplication app) {
 			super(ObjectType.RECENT_OBJ);
 			this.app = app;
-			this.poiTypes = app.getPoiTypes();
 		}
 
 		@Override
@@ -467,66 +465,68 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			int p = 0;
-			for (HistoryEntry point : SearchHistoryHelper.getInstance(app).getHistoryEntries(false)) {
-				boolean publish = false;
-				SearchResult sr = new SearchResult(phrase);
-				PointDescription pd = point.getName();
-				if (pd.isPoiType()) {
-					String name = pd.getName();
-					MapPoiTypes mapPoiTypes = MapPoiTypes.getDefault();
-					AbstractPoiType pt = mapPoiTypes.getAnyPoiTypeByKey(name);
-					if (pt == null) {
-						pt = mapPoiTypes.getAnyPoiAdditionalTypeByKey(name);
-					}
-					if (pt != null) {
-						if (OSM_WIKI_CATEGORY.equals(pt.getKeyName())) {
-							sr.localeName = pt.getTranslation() + " (" + poiTypes.getAllLanguagesTranslationSuffix() + ")";
-						} else {
-							sr.localeName = pt.getTranslation();
-						}
-						sr.object = pt;
-						sr.relatedObject = point;
-						sr.priorityDistance = 0;
-						sr.objectType = ObjectType.POI_TYPE;
-						publish = true;
-					}
-				} else if (pd.isCustomPoiFilter()) {
-					PoiUIFilter filter = app.getPoiFilters().getFilterById(pd.getName(), true);
-					if (filter != null) {
-						sr.localeName = filter.getName();
-						sr.object = filter;
-						sr.relatedObject = point;
-						sr.objectType = ObjectType.POI_TYPE;
-						publish = true;
-					}
-				} else if (pd.isGpxFile()) {
-					GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, pd.getName());
-					if (gpxInfo != null) {
-						sr.localeName = gpxInfo.getFileName();
-						sr.object = point;
-						sr.objectType = ObjectType.GPX_TRACK;
-						sr.relatedObject = gpxInfo;
-						publish = true;
-					}
-				} else {
-					sr.localeName = pd.getName();
-					sr.object = point;
-					sr.objectType = ObjectType.RECENT_OBJ;
-					sr.location = new LatLon(point.getLat(), point.getLon());
-					sr.preferredZoom = 17;
-					publish = true;
-				}
-				if (publish) {
-					sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
-					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
-						resultMatcher.publish(sr);
-					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
-					}
+			int priority = 0;
+			SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+			for (HistoryEntry entry : historyHelper.getHistoryEntries(false)) {
+				SearchResult result = createSearchResult(app, entry, phrase);
+				result.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (priority++);
+
+				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
+					resultMatcher.publish(result);
+				} else if (phrase.getFirstUnknownNameStringMatcher().matches(result.localeName)) {
+					resultMatcher.publish(result);
 				}
 			}
 			return true;
+		}
+
+		@NonNull
+		public static SearchResult createSearchResult(OsmandApplication app, HistoryEntry entry, SearchPhrase phrase) {
+			SearchResult result = new SearchResult(phrase);
+
+			PointDescription description = entry.getName();
+			String name = description.getName();
+			result.localeName = name;
+
+			if (description.isPoiType()) {
+				MapPoiTypes poiTypes = app.getPoiTypes();
+				AbstractPoiType poiType = poiTypes.getAnyPoiTypeByKey(name);
+				if (poiType == null) {
+					poiType = poiTypes.getAnyPoiAdditionalTypeByKey(name);
+				}
+				if (poiType != null) {
+					result.localeName = poiType.getTranslation();
+					if (OSM_WIKI_CATEGORY.equals(poiType.getKeyName())) {
+						result.localeName = result.localeName + " (" + poiTypes.getAllLanguagesTranslationSuffix() + ")";
+					}
+				}
+				result.object = poiType;
+				result.relatedObject = entry;
+				result.priorityDistance = 0;
+				result.objectType = ObjectType.POI_TYPE;
+			} else if (description.isCustomPoiFilter()) {
+				PoiUIFilter filter = app.getPoiFilters().getFilterById(name, true);
+				if (filter != null) {
+					result.localeName = filter.getName();
+				}
+				result.object = filter;
+				result.relatedObject = entry;
+				result.objectType = ObjectType.POI_TYPE;
+			} else if (description.isGpxFile()) {
+				GPXInfo gpxInfo = GpxUiHelper.getGpxInfoByFileName(app, name);
+				if (gpxInfo != null) {
+					result.localeName = gpxInfo.getFileName();
+				}
+				result.object = entry;
+				result.objectType = ObjectType.GPX_TRACK;
+				result.relatedObject = gpxInfo;
+			} else {
+				result.object = entry;
+				result.objectType = ObjectType.RECENT_OBJ;
+				result.location = new LatLon(entry.getLat(), entry.getLon());
+				result.preferredZoom = 17;
+			}
+			return result;
 		}
 
 		@Override
@@ -699,24 +699,16 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public static void showPoiFilterOnMap(@NonNull MapActivity mapActivity,
-										  @NonNull PoiUIFilter filter,
-										  @Nullable Runnable action) {
+	                                      @NonNull PoiUIFilter filter,
+	                                      @Nullable Runnable action) {
 		TopToolbarController controller = new PoiFilterBarController();
-		View.OnClickListener listener = new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				hidePoiFilterOnMap(mapActivity, controller, action);
-				mapActivity.showQuickSearch(filter);
-			}
+		View.OnClickListener listener = v -> {
+			hidePoiFilterOnMap(mapActivity, controller, action);
+			mapActivity.showQuickSearch(filter);
 		};
 		controller.setOnBackButtonClickListener(listener);
 		controller.setOnTitleClickListener(listener);
-		controller.setOnCloseButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				hidePoiFilterOnMap(mapActivity, controller, action);
-			}
-		});
+		controller.setOnCloseButtonClickListener(v -> hidePoiFilterOnMap(mapActivity, controller, action));
 		controller.setTitle(filter.getName());
 		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
 		helper.clearSelectedPoiFilters();
@@ -726,8 +718,8 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	private static void hidePoiFilterOnMap(@NonNull MapActivity mapActivity,
-										   @NonNull TopToolbarController controller,
-										   @Nullable Runnable action) {
+	                                       @NonNull TopToolbarController controller,
+	                                       @Nullable Runnable action) {
 		mapActivity.hideTopToolbar(controller);
 		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
 		mapActivity.refreshMap();

@@ -52,7 +52,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.R.color;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandListActivity;
@@ -720,7 +721,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		AmenityAdapter(List<Amenity> list) {
 			super(SearchPOIActivity.this, R.layout.searchpoi_list, list);
-			updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
+			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 			originalAmenityList = new ArrayList<Amenity>(list);
 			this.setNotifyOnChange(false);
 		}
@@ -731,7 +732,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 		public void setNewModel(List<Amenity> amenityList) {
 			setNotifyOnChange(false);
-			updateLocationViewCache = getMyApplication().getUIUtilities().getUpdateLocationViewCache();
+			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 			originalAmenityList = new ArrayList<Amenity>(amenityList);
 			clear();
 			for (Amenity obj : amenityList) {
@@ -794,7 +795,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			} else if (loc != null) {
 				updateLocationViewCache.specialFrom = new LatLon(loc.getLatitude(), loc.getLongitude());
 			}
-			getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, amenity.getLocation());
+			UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, amenity.getLocation());
 			direction.setImageDrawable(draw);
 			String iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
 			if (iconName != null) {

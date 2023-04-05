@@ -4436,4 +4436,24 @@
     <string name="poi_climbing_grade_uiaa_mean">Průměrná trasa (stupeň UIAA)</string>
     <string name="poi_climbing_grade_french_max">Nejtěžší trasa (francouzské hodnocení)</string>
     <string name="poi_climbing_quality_medium">Střední</string>
+    <string name="poi_socket_type3c_voltage">Zásuvka: Typ 3c: napětí</string>
+    <string name="poi_socket_type3c_current">Zásuvka: Typ 3c: proud</string>
+    <string name="poi_socket_type3c_output">Zásuvka: Typ 3c: výstup</string>
+    <string name="poi_socket_type1_voltage">Zásuvka: Typ 1: napětí</string>
+    <string name="poi_socket_tesla_roadster_voltage">Zásuvka: Tesla Roadster: napětí</string>
+    <string name="poi_socket_tesla_standard_voltage">Zásuvka: Tesla standard: napětí</string>
+    <string name="poi_socket_tesla_supercharger_voltage">Zásuvka: Tesla Supercharger: napětí</string>
+    <string name="poi_socket_cee_red_63a_voltage">Zásuvka: CEE červená 63A: napětí</string>
+    <string name="poi_socket_cee_red_125a_voltage">Zásuvka: CEE červená 125A: napětí</string>
+    <string name="poi_socket_cee_blue_voltage">Zásuvka: CEE modrá: napětí</string>
+    <string name="poi_socket_cee_red_16a_voltage">Zásuvka: CEE red 16A: napětí</string>
+    <string name="poi_socket_cee_red_32a_voltage">Zásuvka: CEE červená 32A: napětí</string>
+    <string name="poi_socket_type1_combo_voltage">Zásuvka: Typ 1 combo: napětí</string>
+    <string name="poi_socket_type2_voltage">Zásuvka: Typ 2: napětí</string>
+    <string name="poi_socket_type2_combo_voltage">Zásuvka: Typ 2 combo: napětí</string>
+    <string name="poi_socket_chademo_voltage">Zásuvka: CHAdeMO: napětí</string>
+    <string name="poi_socket_nema_5_15_voltage">Zásuvka: NEMA 5-15R: napětí</string>
+    <string name="poi_socket_nema_5_20_voltage">Zásuvka: NEMA 5-20: napětí</string>
+    <string name="poi_waste_accepted">Přijímaný odpad</string>
+    <string name="poi_water_filter">Voda;Pitná voda</string>
 </resources>

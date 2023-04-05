@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.ButtonItem;
 import static net.osmand.plus.search.listitems.QuickSearchBannerListItem.INVALID_ID;
 import static net.osmand.search.core.ObjectType.POI_TYPE;
@@ -25,7 +26,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.CollatorStringMatcher;
+import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
@@ -36,8 +37,6 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
@@ -47,14 +46,18 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
@@ -101,7 +104,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 	}
 
 	public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {
@@ -508,7 +511,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		ivButton.setImageDrawable(buttonDrawable);
 	}
 
-	public static void bindGpxTrack(@NonNull View view, @NonNull QuickSearchListItem listItem, @NonNull GPXInfo gpxInfo) {
+	public static void bindGpxTrack(@NonNull View view, @NonNull QuickSearchListItem listItem, @Nullable GPXInfo gpxInfo) {
 		SearchResult searchResult = listItem.getSearchResult();
 		String gpxTitle = GpxUiHelper.getGpxTitle(searchResult.localeName);
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
@@ -537,15 +540,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			QuickSearchHelper searchHelper = app.getSearchUICore();
 			SearchUICore searchUICore = searchHelper.getCore();
 			String searchPhrase = searchUICore.getPhrase().getText(true);
-			SearchPhrase.NameStringMatcher nm = new SearchPhrase.NameStringMatcher(searchPhrase,
-					CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE);
+			StringMatcher matcher = new NameStringMatcher(searchPhrase, CHECK_STARTS_FROM_SPACE);
 
-			if (!searchPhrase.isEmpty() && !nm.matches(abstractPoiType.getTranslation())) {
-				if (nm.matches(abstractPoiType.getEnTranslation())) {
+			if (!searchPhrase.isEmpty() && !matcher.matches(abstractPoiType.getTranslation())) {
+				if (matcher.matches(abstractPoiType.getEnTranslation())) {
 					desc = listItem.getTypeName() + " (" + abstractPoiType.getEnTranslation() + ")";
 				} else {
 					for (String syn : synonyms) {
-						if (nm.matches(syn)) {
+						if (matcher.matches(syn)) {
 							desc = listItem.getTypeName() + " (" + syn + ")";
 							break;
 						}
@@ -720,7 +722,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
 		LatLon toloc = listItem.getSearchResult().location;
-		app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, toloc);
+		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
 	}
 
 	private boolean isNightMode() {

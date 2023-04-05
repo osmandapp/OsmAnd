@@ -5058,7 +5058,7 @@
     <string name="shared_string_in_progress">Folyamatban</string>
     <string name="shared_string_original">Eredeti</string>
     <string name="movement_speed">Mozgási sebesség</string>
-    <string name="release_4_4">"• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
+    <string name="release_4_4">• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
 \n
 \n • A helyi menü most a POI lokalizált neveit jeleníti meg
 \n
@@ -5080,15 +5080,15 @@
 \n
 \n • Lehetőség „Fedvény” vagy „Háttér” térképként használt online csempék letöltésére
 \n
-\n  • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél
+\n • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél
 \n
-\n  • Új Moped profil
+\n • Új Moped profil
 \n
-\n  • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció
+\n • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció
 \n
-\n  • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
+\n • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
 \n
-\n"</string>
+\n</string>
     <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
     <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
@@ -5118,4 +5118,6 @@
     <string name="shared_string_pounds">font</string>
     <string name="common_weight_limit_error">A minimális érték „%1$s” %2$s. Használja a „%3$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
     <string name="free_maps_updates">Ingyenes frissítések (vészhelyzet)</string>
+    <string name="rendering_value_defaultMedium_name">Alapértelmezett (közepes)</string>
+    <string name="select_layer">Réteg választása</string>
 </resources>

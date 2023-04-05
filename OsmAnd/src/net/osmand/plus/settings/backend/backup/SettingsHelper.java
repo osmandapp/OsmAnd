@@ -287,21 +287,29 @@ public abstract class SettingsHelper {
 				? app.getMapMarkersHelper().getMapMarkers()
 				: Collections.emptyList();
 		if (!mapMarkers.isEmpty() || addEmptyItems) {
-			String name = app.getString(R.string.map_markers);
-			String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
-			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
-			markersGroup.setMarkers(mapMarkers);
-			myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
+			if (mapMarkers.isEmpty()) {
+				myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.emptyList());
+			} else {
+				String name = app.getString(R.string.map_markers);
+				String groupId = ExportSettingsType.ACTIVE_MARKERS.name();
+				MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
+				markersGroup.setMarkers(mapMarkers);
+				myPlacesItems.put(ExportSettingsType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
+			}
 		}
 		List<MapMarker> markersHistory = settingsTypes == null || settingsTypes.contains(ExportSettingsType.HISTORY_MARKERS)
 				? app.getMapMarkersHelper().getMapMarkersHistory()
 				: Collections.emptyList();
 		if (!markersHistory.isEmpty() || addEmptyItems) {
-			String name = app.getString(R.string.shared_string_history);
-			String groupId = ExportSettingsType.HISTORY_MARKERS.name();
-			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
-			markersGroup.setMarkers(markersHistory);
-			myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
+			if (markersHistory.isEmpty()) {
+				myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.emptyList());
+			} else {
+				String name = app.getString(R.string.shared_string_history);
+				String groupId = ExportSettingsType.HISTORY_MARKERS.name();
+				MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
+				markersGroup.setMarkers(markersHistory);
+				myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
+			}
 		}
 		List<HistoryEntry> historyEntries = settingsTypes == null || settingsTypes.contains(ExportSettingsType.SEARCH_HISTORY)
 				? SearchHistoryHelper.getInstance(app).getHistoryEntries(false)
@@ -383,9 +391,7 @@ public abstract class SettingsHelper {
 		if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.VOICE)) {
 			dataTypes.add(LocalIndexType.VOICE_DATA);
 		}
-		localIndexInfoList = !dataTypes.isEmpty()
-				? getLocalIndexData(dataTypes.toArray(new LocalIndexType[0]))
-				: Collections.emptyList();
+		localIndexInfoList = dataTypes.isEmpty() ? Collections.emptyList() : getLocalIndexData(dataTypes.toArray(new LocalIndexType[0]));
 		List<File> files = getFilesByType(localIndexInfoList, LocalIndexType.MAP_DATA, LocalIndexType.TILES_DATA,
 				LocalIndexType.SRTM_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.DEPTH_DATA);
 		if (!files.isEmpty() || addEmptyItems) {

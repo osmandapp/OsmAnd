@@ -57,7 +57,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		if (countryItems.size() == 0) {
 			initCountries(app);
 		}
@@ -105,15 +105,15 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Context context = getContext();
 		if (context instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) context;
 		} else if (getParentFragment() instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) getParentFragment();
 		} else {
-			throw new RuntimeException(context
-					+ " must implement OnFragmentInteractionListener");
+			throw new RuntimeException(context + " must implement OnFragmentInteractionListener");
 		}
 	}
 
@@ -162,7 +162,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private static void processGroup(WorldRegion group,
-									 List<WorldRegion> nameList) {
+	                                 List<WorldRegion> nameList) {
 		if (group.isRegionMapDownload()) {
 			nameList.add(group);
 		}

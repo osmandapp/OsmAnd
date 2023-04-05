@@ -178,6 +178,7 @@ public class WeatherIndexItemViewHolder {
 		show(pbProgress);
 		hide(tvDescription, ivSecIcon);
 
+		ivIcon.setColorFilter(getDefaultIconColor());
 		pbProgress.setIndeterminate(true);
 		view.setOnClickListener(view -> {
 			// do nothing

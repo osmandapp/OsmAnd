@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
+    <string name="osb_author_or_password_not_specified">Въведете потребителско име и парола за OSM в „Настройки“</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
     <string name="new_directions_point_dialog">Вече имате настроени междинни точки.</string>
@@ -18,12 +18,12 @@
     <string name="settings_preset_descr">Изгледът на картата и настройките за навигация се запомнят за всеки потребителски профил. Настройте своя профил по подразбиране тук.</string>
     <string name="destination_point">Крайна цел %1$s</string>
     <string name="context_menu_item_destination_point">Направи крайна цел</string>
-    <string name="please_select_address">Първо изберете град или улица</string>
-    <string name="search_street_in_neighborhood_cities">Търси улицата в съседни градове</string>
+    <string name="please_select_address">Първо задайте град или улица</string>
+    <string name="search_street_in_neighborhood_cities">Търсене на улицата в съседните градове</string>
     <string name="intermediate_items_sort_return">Междинните точки са подредени с цел оптимизиране на пътя до крайната цел.</string>
     <string name="intermediate_items_sort_by_distance">Сортиране врата-до-врата</string>
-    <string name="local_osm_changes_backup_successful">Успешно създаден OSM файл с промени %1$s</string>
-    <string name="local_osm_changes_backup_failed">Бекъп на промените в OSM не беше успешен</string>
+    <string name="local_osm_changes_backup_successful">Файл с промени е създаден за %1$s</string>
+    <string name="local_osm_changes_backup_failed">Грешка при създаване на резервно копие на промените на OSM.</string>
     <string name="local_osm_changes_backup">Запишете като промени в OSM</string>
     <string name="delete_point">Изтриване на точка</string>
     <string name="plugin_distance_point_time">време</string>
@@ -31,23 +31,23 @@
     <string name="plugin_distance_point_speed">скорост</string>
     <string name="plugin_distance_point_ele">възвишение</string>
     <string name="plugin_distance_point">Точка</string>
-    <string name="gpx_file_name">име на GPX файл</string>
-    <string name="gpx_saved_sucessfully">GPX успешно записан в {0}</string>
+    <string name="gpx_file_name">Име на файл на GPX</string>
+    <string name="gpx_saved_sucessfully">Файлът на GPX е запазен в {0}</string>
     <string name="osmand_distance_planning_plugin_description">Създаване на път чрез докосване на картата или промяна на съществуващи файлове на GPX с цел планиране на маршрут или измерване на разстояние между точки. Резултатите могат да бъдат запазени във файл на GPX, който по-късно да бъде ползван за напътствие.</string>
     <string name="osmand_distance_planning_plugin_name">Изчисляване на дистанции и планиране на маршрут</string>
-    <string name="use_distance_measurement_help">* Маркирайте точка.\n 
-        * Натиснете и задръжте върху картата за изтриване на предна точка.\n
-        * Натиснете и задръжте върху точка за разглеждане и добавяне на описание.\n
-        * Докоснете върху добавката за повече опции.</string>
+    <string name="use_distance_measurement_help">* Докоснете, за да отбележите точка.
+\n* Докоснете продължително върху картата, за да премахнете предната точка.
+\n* Докоснете продължително върху точка, за да разгледате и добавите описание.
+\n* Докоснете върху приспособлението за други действия.</string>
     <string name="shared_string_do_not_show_again">Без повторно показване</string>
     <string name="distance_measurement_start_editing">Започни редактиране</string>
     <string name="distance_measurement_finish_editing">Край на редактирането</string>
     <string name="distance_measurement_finish_subtrack">Започни нов частичен трак</string>
     <string name="distance_measurement_clear_route">Изчистване на всички точки</string>
-    <string name="distance_measurement_load_gpx">Отвори съществуващ GPX</string>
+    <string name="distance_measurement_load_gpx">Отваряне съществуващ файл на GPX</string>
     <string name="wait_current_task_finished">Моля, почакайте докато свърши текущата задача</string>
-    <string name="use_kalman_filter_compass_descr">Намалява трептенето на компаса, но го прави по-бавен</string>
-    <string name="use_magnetic_sensor_descr">Използвай магнитния сензор за определяне на компасната посока вместо сензора за ориентиране</string>
+    <string name="use_kalman_filter_compass_descr">Намалява „шума“ на компаса, но добавя инерция.</string>
+    <string name="use_magnetic_sensor_descr">Използване на магнитния сензор вместо сензора за посока.</string>
     <string name="use_magnetic_sensor">Използвай магнитния сензор</string>
     <string name="other_location">Друго</string>
     <string name="files_limit">Остават Ви %1$d файла</string>
@@ -59,16 +59,16 @@
     <string name="download_using_mobile_internet">Няма свързан Wi-Fi. Ще използвате ли текущата връзка с интернет, за да изтегляте\?</string>
     <string name="street_name">Име на улица</string>
     <string name="hno">Номер</string>
-    <string name="website">Сайт</string>
+    <string name="website">Страница</string>
     <string name="phone">Телефон</string>
     <string name="monitoring_settings">Записване на изминатия път</string>
     <string name="monitoring_settings_descr">Настройки на записване на маршрута.</string>
-    <string name="osmand_background_plugin_description">Настройки за запис и навигация при изключен екран чрез периодично активиране на GPS модула.</string>
+    <string name="osmand_background_plugin_description">Показва настройките за запис и маршрутизиране при изключен екран чрез периодично събуждане на модула за GPS.</string>
     <string name="contribution_activity">Инсталирана версия</string>
-    <string name="choose_osmand_theme_descr">Изберете тема на приложението</string>
+    <string name="choose_osmand_theme_descr">Настройка на външния вид на приложението.</string>
     <string name="choose_osmand_theme">Тема на приложението</string>
     <string name="accessibility_options">Достъпност</string>
-    <string name="select_address_activity">Изберете адрес</string>
+    <string name="select_address_activity">Задайте адрес</string>
     <string name="favourites_list_activity">Определете избрана точка</string>
     <string name="local_openstreetmap_act_title">Изменения в OSM</string>
     <string name="shared_string_more_actions">Други действия</string>
@@ -86,9 +86,9 @@
     <string name="download_hillshade_maps">Оцветяване на релефа</string>
     <string name="local_indexes_cat_srtm">Контурни линии</string>
     <string name="local_indexes_cat_av">Аудио/видео данни</string>
-    <string name="stop_routing_confirm">Наистина ли искате да спрете навигацията?</string>
-    <string name="clear_dest_confirm">Наистина ли искате да изтриете крайната цел (и междинните точки)?</string>
-    <string name="precise_routing_mode_descr">Прецизното изчисляване на маршрута. Все още е ограничено по дистанция и е по-бавно.</string>
+    <string name="stop_routing_confirm">Спиране на маршрутизирането\?</string>
+    <string name="clear_dest_confirm">Премахване крайната цел (и междинните точки)\?</string>
+    <string name="precise_routing_mode_descr">Прецизно изчисляване на маршрута. Ограничено по разстояние и бавно.</string>
     <string name="precise_routing_mode">Прецизно изчисляване на маршрута (алфа)</string>
     <string name="recording_context_menu_show">Покажи</string>
     <string name="recording_photo_description">Снимка %1$s %2$s</string>
@@ -105,15 +105,15 @@
     <string name="av_widget_action">Действие по подразбиране</string>
     <string name="av_video_format_descr">Изберете формат за видеото:</string>
     <string name="av_video_format">Изходен формат на видеото</string>
-    <string name="av_use_external_recorder_descr">Използване на вградената камера за видео</string>
+    <string name="av_use_external_recorder_descr">Използване на системното приложение за видео.</string>
     <string name="av_use_external_recorder">Използване на вграденото видео</string>
-    <string name="av_use_external_camera_descr">Използване на вграденото приложение за камерата</string>
+    <string name="av_use_external_camera_descr">Използване на системното приложение за снимки.</string>
     <string name="av_use_external_camera">Използване на камерата</string>
-    <string name="av_settings_descr">Настройване на аудио и видео</string>
+    <string name="av_settings_descr">Настройки на аудио и видео.</string>
     <string name="av_settings">Настройки на аудио/видео </string>
-    <string name="recording_error">Възникна грешка при запис </string>
+    <string name="recording_error">Грешка при запис</string>
     <string name="recording_camera_not_available">Камерата не е достъпна</string>
-    <string name="recording_is_recorded">Записва се аудио/видео. За спиране натиснете стоп.</string>
+    <string name="recording_is_recorded">Записва се аудио/видео. За спиране натиснете приспособлението за АВ.</string>
     <string name="recording_playing">Избраният аудио запис се изпълнява.\n%1$s</string>
     <string name="recording_open_external_player">Отваряне на външен плеър</string>
     <string name="recording_delete_confirm">Искате ли да изтриете този запис?</string>
@@ -1017,15 +1017,15 @@
     <string name="speak_title">Обявяване…</string>
     <string name="speak_street_names">Имена на улици (синтезиран глас)</string>
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
-    <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (знак \'Стоп\', легнали полицаи), предупреждения за камери, ограничения на скоростта</string>
+    <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (знак \'Стоп\', легнали полицаи), предупреждения за камери и ограничения на скоростта.</string>
     <string name="osb_author_dialog_password">Парола за OSM (по желание)</string>
     <string name="driving_region_descr">Район на шофиране: САЩ, Европа, Великобритания, Азия или друг.</string>
     <string name="driving_region">Район на шофиране</string>
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">САЩ</string>
     <string name="driving_region_canada">Канада</string>
-    <string name="driving_region_europe_asia">Европа и Азия</string>
-    <string name="driving_region_uk">Великобритания, Индия, Австралия и други</string>
+    <string name="driving_region_europe_asia">Европа, Азия, Латинска Америка и подобни</string>
+    <string name="driving_region_uk">Великобритания, Индия, Австралия и подобни</string>
     <string name="amenity_type_seamark">Навигационен ориентир</string>
     <string name="app_modes_choose_descr">Изберете видимите профили</string>
     <string name="app_modes_choose">Профили в приложението</string>
@@ -1037,7 +1037,7 @@
     <string name="shared_string_and">и</string>
     <string name="shared_string_or">или</string>
     <string name="base_world_map">Базова карта на света</string>
-    <string name="about_version">Версия:</string>
+    <string name="about_version">Издание:</string>
     <string name="shared_string_about">За програмата</string>
     <string name="about_settings_descr">Версия, лицензи и разработчици</string>
     <string name="shared_string_delete_all">Премахване на всичко</string>
@@ -1051,16 +1051,16 @@
     <string name="auto_zoom_farthest">За далечни разстояния</string>
     <string name="map_magnifier">Лупа за картата</string>
     <string name="local_osm_changes_delete_all_confirm">Премахване на %1$d промени в OSM\?</string>
-    <string name="local_index_tile_data_expire">Изтича след %1$s минути</string>
+    <string name="local_index_tile_data_expire">Изтича след (минути): %1$s</string>
     <string name="local_index_tile_data_downloadable">Разрешени за теглене: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимален мащаб: %1$s</string>
     <string name="local_index_tile_data_minzoom">Минимален мащаб: %1$s</string>
-    <string name="local_index_tile_data_zooms">Заредени мащаби: %1$s</string>
+    <string name="local_index_tile_data_zooms">Изтеглени нива на мащабиране: %1$s</string>
     <string name="local_index_tile_data_name">Данни: %1$s</string>
-    <string name="edit_tilesource_successfully">Източникът на карти %1$s беше записан</string>
-    <string name="edit_tilesource_elliptic_tile">Елиптична меркаторна проекция</string>
+    <string name="edit_tilesource_successfully">Източникът на фрагменти %1$s е записан</string>
+    <string name="edit_tilesource_elliptic_tile">Елиптична проекция на Меркатор</string>
     <string name="edit_tilesource_maxzoom">Максимално увеличение</string>
-    <string name="edit_tilesource_expiration_time">Минути до изтичане</string>
+    <string name="edit_tilesource_expiration_time">Изтича след (минути)</string>
     <string name="edit_tilesource_minzoom">Минимално увеличение</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Изберете съществуващ…</string>
@@ -2437,7 +2437,7 @@
     <string name="explore_osmnad_plans_to_find_suitable">Разгледайте плановете на OsmAnd, за да намерите подходящия за вас.</string>
     <string name="routes_color_by_type">Маршрути с цвят по…</string>
     <string name="shared_string_relation">Връзка</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Оцветяване маршрутите въз основа на цвета, зададен на устройството (ако е наличен в OpenStreetMap) и символа на информационната туристическа значка.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Оцветяване на маршрутите въз основа на цвета, зададен на устройството (ако е наличен в OpenStreetMap) и символа на информационната туристическа значка.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Оцветяване въз основа на принадлежността към мрежа.</string>
     <string name="direct_line_maps_required_descr">Изчисляването на маршрута отнема повече време от обичайното.
 \n
@@ -2815,4 +2815,7 @@
     <string name="ant_missing_dependency">Липсваща зависимост</string>
     <string name="ant_read_data">Прочетени данни</string>
     <string name="map_widget_target_distance">Разстояние от камерата до целта</string>
+    <string name="rendering_value_defaultMedium_name">По подразбиране (средно)</string>
+    <string name="map_widget_intermediate_time">Време до междинна точка</string>
+    <string name="access_intermediate_arrival_time">Време на пристигане в междинна точка</string>
 </resources>

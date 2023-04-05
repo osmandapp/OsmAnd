@@ -3373,4 +3373,5 @@
     <string name="purchases_feature_desc_cross_buy">Abunəlik funksiyalarından müxtəlif platformalarda (Android/iOS/veb) əlavə ödəniş etmədən istifadə edin.</string>
     <string name="external_sensor_widgets">Xarici sensorlar</string>
     <string name="shared_string_cross_buy">Çarpaz alış</string>
+    <string name="by_transport_type">%1$s ilə</string>
 </resources>

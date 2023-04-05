@@ -213,7 +213,6 @@ public class MapRendererContext {
 			setMapBackgroundColor();
 		}
 		PluginsHelper.updateMapPresentationEnvironment(this);
-
 	}
 
 	public MapPresentationEnvironment getMapPresentationEnvironment() {

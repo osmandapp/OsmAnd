@@ -362,13 +362,17 @@ public class Amenity extends MapObject {
 	}
 
 	public boolean strictEquals(Object object) {
-		if (equals(object) && x.size() == ((Amenity) object).x.size()) {
-			for (int i = 0; i < x.size(); i++) {
-				if (x.get(i) != ((Amenity) object).x.get(i) || y.get(i) != ((Amenity) object).y.get(i)) {
-					return false;
+		if (equals(object)) {
+			if (x != null && ((Amenity) object).x != null && x.size() == ((Amenity) object).x.size()) {
+				for (int i = 0; i < x.size(); i++) {
+					if (x.get(i) != ((Amenity) object).x.get(i) || y.get(i) != ((Amenity) object).y.get(i)) {
+						return false;
+					}
 				}
+				return true;
+			} else {
+				return x == null && ((Amenity) object).x == null;
 			}
-			return true;
 		}
 		return false;
 	}

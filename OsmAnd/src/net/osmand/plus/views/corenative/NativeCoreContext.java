@@ -39,8 +39,14 @@ public class NativeCoreContext {
 
 	public static void init(@NonNull OsmandApplication app) {
 		if (!init && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
-			if (!NativeCore.isLoaded())
-				NativeCore.load(CoreResourcesFromAndroidAssets.loadFromCurrentApplication(app));
+			if (!NativeCore.isLoaded()) {
+				CoreResourcesFromAndroidAssets assets = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(app);
+				File fontDir = app.getAppPath(IndexConstants.FONT_INDEX_DIR);
+				if (fontDir.exists())
+					NativeCore.load(assets, fontDir.getAbsolutePath());
+				else
+					NativeCore.load(assets, "");
+			}
 			if (NativeCore.isLoaded()) {
 				File directory = app.getAppPath("");
 				Logger.get().addLogSink(QIODeviceLogSink.createFileLogSink(

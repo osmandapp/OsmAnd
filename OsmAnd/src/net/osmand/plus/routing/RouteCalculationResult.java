@@ -1,6 +1,11 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -29,11 +34,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
 	private static final Log log = PlatformUtil.getLog(RouteCalculationResult.class);
@@ -224,7 +224,7 @@ public class RouteCalculationResult {
 				LatLon currentIntermediatePoint = intermediates.get(currentIntermediate);
 				int prevLocation = currentIntermediate == 0 ? 0 : interLocations[currentIntermediate - 1];
 				for (int currentLocation = prevLocation; currentLocation < locations.size();
-					 currentLocation++) {
+				     currentLocation++) {
 					double currentDistance = getDistanceToLocation(locations, currentIntermediatePoint, currentLocation);
 					if (currentDistance < setDistance) {
 						interLocations[currentIntermediate] = currentLocation;
@@ -274,19 +274,26 @@ public class RouteCalculationResult {
 	}
 
 	private static void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
-		int[] pointTypes = res.getObject().getPointTypes(intId);
+		RouteDataObject rdo = res.getObject();
+		int[] pointTypes = rdo.getPointTypes(intId);
 		if (pointTypes != null) {
-			RouteRegion reg = res.getObject().region;
+			RouteRegion reg = rdo.region;
 			for (int r = 0; r < pointTypes.length; r++) {
 				RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
-				int x31 = res.getObject().getPoint31XTile(intId);
-				int y31 = res.getObject().getPoint31YTile(intId);
+				int x31 = rdo.getPoint31XTile(intId);
+				int y31 = rdo.getPoint31YTile(intId);
 				Location loc = new Location("");
 				loc.setLatitude(MapUtils.get31LatitudeY(y31));
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
-				// For STOP first check if it has directional info
-				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && !res.getObject().isStopApplicable(res.isForwardDirection(), intId, res.getStartPointIndex(), res.getEndPointIndex()))) {
+				if (info != null) {
+					// For STOP and TRAFFIC_CALMING first check if it has directional info
+					boolean forward = res.isForwardDirection();
+					boolean directionApplicable = rdo.isDirectionApplicable(forward, intId,
+							info.getType() == AlarmInfoType.STOP ? res.getStartPointIndex() : -1, res.getEndPointIndex());
+					if (!directionApplicable) {
+						continue;
+					}
 					alarms.add(info);
 				}
 			}
@@ -1006,6 +1013,7 @@ public class RouteCalculationResult {
 		return 0;
 	}
 
+	@Nullable
 	public RouteSegmentResult getCurrentSegmentResult() {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		if (cs < segments.size()) {
@@ -1014,6 +1022,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	@Nullable
 	public RouteSegmentResult getNextStreetSegmentResult() {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		while (cs < segments.size()) {
@@ -1026,6 +1035,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		if (cs < segments.size()) {
@@ -1134,9 +1144,10 @@ public class RouteCalculationResult {
 		return nextIntermediate;
 	}
 
-	public Location getLocationFromRouteDirection(RouteDirectionInfo i) {
-		if (i != null && locations != null && i.routePointOffset < locations.size()) {
-			return locations.get(i.routePointOffset);
+	@Nullable
+	public Location getLocationFromRouteDirection(RouteDirectionInfo info) {
+		if (info != null && locations != null && info.routePointOffset < locations.size()) {
+			return locations.get(info.routePointOffset);
 		}
 		return null;
 	}
@@ -1179,7 +1190,9 @@ public class RouteCalculationResult {
 		return info;
 	}
 
-	/*public */NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
+	/*public */
+	@Nullable
+	NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
 		int dirInfo = prev.directionInfoInd;
 		if (dirInfo < directions.size() && prev.directionInfo != null) {
 			int dist = getListDistance(prev.directionInfo.routePointOffset);
@@ -1246,6 +1259,7 @@ public class RouteCalculationResult {
 		return Collections.emptyList();
 	}
 
+	@Nullable
 	public Location getNextRouteLocation() {
 		if (currentRoute < locations.size()) {
 			return locations.get(currentRoute);
@@ -1253,6 +1267,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	@Nullable
 	public Location getNextRouteLocation(int after) {
 		if (currentRoute + after >= 0 && currentRoute + after < locations.size()) {
 			return locations.get(currentRoute + after);
@@ -1277,6 +1292,7 @@ public class RouteCalculationResult {
 		return currentDirectionInfo < directions.size();
 	}
 
+	@Nullable
 	public RouteDirectionInfo getCurrentDirection() {
 		if (currentDirectionInfo < directions.size()) {
 			return directions.get(currentDirectionInfo);

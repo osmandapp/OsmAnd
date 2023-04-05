@@ -546,9 +546,10 @@ public class IntentHelper {
 		for (Fragment fragment : fragmentManager.getFragments()) {
 			if (fragment instanceof DialogFragment) {
 				((DialogFragment) fragment).dismiss();
-			} else {
-				fragmentManager.popBackStack();
 			}
+		}
+		for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+			fragmentManager.popBackStack();
 		}
 	}
 

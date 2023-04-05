@@ -4542,4 +4542,10 @@
     <string name="poi_recycling_electronics">Électronique</string>
     <string name="poi_recycling_pallets">Palettes</string>
     <string name="poi_recycling_plastic_bottle_tops">Bouchons de bouteilles en plastique</string>
+    <string name="poi_sinkhole_bluehole">Gouffre : trou bleu</string>
+    <string name="poi_sinkhole_ponor">Gouffre : perte</string>
+    <string name="poi_sinkhole_pit">Gouffre : gouffre</string>
+    <string name="poi_sinkhole_estavelle">Gouffre : estavelle</string>
+    <string name="poi_sinkhole_doline">Gouffre : doline</string>
+    <string name="poi_barrier_coupure">Barrière de digue</string>
 </resources>
