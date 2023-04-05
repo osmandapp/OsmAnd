@@ -5098,4 +5098,13 @@
     <string name="shared_string_all_world">Hele verden</string>
     <string name="weather_forecast">Værmelding</string>
     <string name="offline_weather_forecast_desc">Du kan laste ned 7-dagers værmelding.</string>
+    <string name="camera_app">Kameraprogram</string>
+    <string name="select_layer">Velg lag</string>
+    <string name="shutter_sound">Lukkerlyd</string>
+    <string name="rendering_value_defaultMedium_name">Forvalg (medium)</string>
+    <string name="offline_cache">Frakoblet hurtiglager</string>
+    <string name="clear_online_cache">Tøm nettbasert hurtiglager</string>
+    <string name="free_maps_updates">Gratis oppdateringer (nødsfall)</string>
+    <string name="shared_string_pounds">pund</string>
+    <string name="weather_forecast_is_outdated">Værmeldingen er utdatert.</string>
 </resources>
