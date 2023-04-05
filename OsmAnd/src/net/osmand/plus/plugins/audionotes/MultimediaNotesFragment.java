@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AUDIO_BITRATE_DEFAULT;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_EDOF;
@@ -10,6 +9,8 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_PHOTO_SIZE_DEFAULT;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_PHOTO_CAM_SETTING_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_RECORDER_SETTING_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 
@@ -30,12 +31,14 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -45,8 +48,10 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -146,10 +151,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupExternalPhotoCamPref(Camera cam, AudioVideoNotesPlugin plugin) {
-		SwitchPreferenceEx externalPhotoCam = findPreference(plugin.AV_EXTERNAL_PHOTO_CAM.getId());
-		externalPhotoCam.setDescription(getString(R.string.av_use_external_camera_descr));
-		externalPhotoCam.setIcon(getPersistentPrefIcon(R.drawable.ic_action_photo_dark));
-		externalPhotoCam.setEnabled(cam != null);
+		ApplicationMode appMode = getSelectedAppMode();
+		boolean useSystemCameraApp = plugin.AV_EXTERNAL_PHOTO_CAM.getModeValue(appMode);
+		Preference uiPreference = findPreference(EXTERNAL_PHOTO_CAM_SETTING_ID);
+		uiPreference.setIcon(getActiveIcon(R.drawable.ic_action_photo_dark));
+		uiPreference.setSummary(getCameraAppTitle(useSystemCameraApp));
+		uiPreference.setEnabled(cam != null);
 	}
 
 	private void setupCameraPictureSizePref(Camera cam, AudioVideoNotesPlugin plugin) {
@@ -292,10 +299,14 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Drawable enabled = getActiveIcon(R.drawable.ic_type_audio);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceEx photoPlaySound = findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
-		photoPlaySound.setDescription(getString(R.string.av_photo_play_sound_descr));
-		photoPlaySound.setIcon(icon);
-		photoPlaySound.setEnabled(cam != null);
+		SwitchPreferenceEx uiPreference = findPreference(plugin.AV_PHOTO_PLAY_SOUND.getId());
+		uiPreference.setDescription(getString(R.string.av_photo_play_sound_descr));
+		uiPreference.setIcon(icon);
+		uiPreference.setEnabled(cam != null);
+
+		ApplicationMode appMode = getSelectedAppMode();
+		boolean useOsmAndCamera = !plugin.AV_EXTERNAL_PHOTO_CAM.getModeValue(appMode);
+		uiPreference.setVisible(useOsmAndCamera);
 	}
 
 	private void setupAudioFormatPref(AudioVideoNotesPlugin plugin) {
@@ -319,9 +330,11 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	private void setupExternalRecorderPref(AudioVideoNotesPlugin plugin) {
-		SwitchPreferenceEx externalRecorder = findPreference(plugin.AV_EXTERNAL_RECORDER.getId());
-		externalRecorder.setDescription(getString(R.string.av_use_external_recorder_descr));
-		externalRecorder.setIcon(getPersistentPrefIcon(R.drawable.ic_action_video_dark));
+		ApplicationMode appMode = getSelectedAppMode();
+		boolean useSystemCamera = plugin.AV_EXTERNAL_RECORDER.getModeValue(appMode);
+		Preference uiPreference = findPreference(EXTERNAL_RECORDER_SETTING_ID);
+		uiPreference.setIcon(getActiveIcon(R.drawable.ic_action_video_dark));
+		uiPreference.setSummary(getCameraAppTitle(useSystemCamera));
 	}
 
 	private void setupVideoQualityPref(AudioVideoNotesPlugin plugin) {
@@ -477,8 +490,53 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
 			requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
+		} else if (EXTERNAL_RECORDER_SETTING_ID.equals(prefId)) {
+			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+			if (plugin != null) {
+				showSelectCameraAppDialog(plugin.AV_EXTERNAL_RECORDER);
+			}
+			return true;
+		} else if (EXTERNAL_PHOTO_CAM_SETTING_ID.equals(prefId)) {
+			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+			if (plugin != null) {
+				showSelectCameraAppDialog(plugin.AV_EXTERNAL_PHOTO_CAM);
+			}
+			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	private void showSelectCameraAppDialog(@NonNull CommonPreference<Boolean> preference) {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		boolean nightMode = isNightMode();
+		ApplicationMode appMode = getSelectedAppMode();
+		int profileColor = appMode.getProfileColor(nightMode);
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+		String[] entries = new String[] {
+				getCameraAppTitle(true),
+				getCameraAppTitle(false)
+		};
+		int selected = preference.getModeValue(appMode) ? 0 : 1;
+
+		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				entries, nightMode, selected, app, profileColor, themeRes, v -> {
+					boolean useSystemApp = (int) v.getTag() == 0;
+					onConfirmPreferenceChange(preference.getId(), useSystemApp, ApplyQueryType.SNACK_BAR);
+				}
+		);
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(getString(R.string.camera_app));
+		builder.setAdapter(adapter, null);
+		adapter.setDialog(builder.show());
+	}
+
+	@NonNull
+	private String getCameraAppTitle(boolean useSystemApp) {
+		return getString(useSystemApp ? R.string.system_locale : R.string.app_name_osmand);
 	}
 
 	private Camera openCamera() {

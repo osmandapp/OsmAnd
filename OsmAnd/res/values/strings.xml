@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="shutter_sound">Shutter sound</string>
+    <string name="camera_app">Camera app</string>
     <string name="speak_route_deviation">Announce deviation from the route</string>
     <string name="select_layer">Select layer</string>
     <string name="free_maps_updates">Free updates (emergency)</string>
