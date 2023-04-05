@@ -5123,4 +5123,6 @@
     <string name="speak_route_deviation">Объявлять об отклонении от маршрута</string>
     <string name="select_layer">Выбрать слой</string>
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
+    <string name="shutter_sound">Звук затвора</string>
+    <string name="camera_app">Приложение камеры</string>
 </resources>
