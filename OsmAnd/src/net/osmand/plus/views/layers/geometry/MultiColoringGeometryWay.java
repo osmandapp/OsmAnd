@@ -370,9 +370,17 @@ public abstract class MultiColoringGeometryWay
 
 		@Override
 		public double getPointStepPx(double zoomCoef) {
-			return useSpecialArrow()
-					? getPointBitmap().getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER
-					: getPointBitmap().getHeight() + getWidth(0) * ARROW_DISTANCE_MULTIPLIER;
+			return useSpecialArrow() ? getSpecialPointStepPx() : getRegularPointStepPx();
+		}
+
+		public double getSpecialPointStepPx() {
+			Bitmap bitmap = getContext().getSpecialArrowBitmap();
+			return bitmap.getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER;
+		}
+
+		public double getRegularPointStepPx() {
+			Bitmap bitmap = getContext().getArrowBitmap();
+			return bitmap.getHeight() + getWidth(0) * ARROW_DISTANCE_MULTIPLIER;
 		}
 
 		public boolean useSpecialArrow() {

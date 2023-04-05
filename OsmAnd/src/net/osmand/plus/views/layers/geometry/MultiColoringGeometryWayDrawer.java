@@ -95,14 +95,17 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		arrowPathPointSample.scaled = false;
 		PathPoint specialArrowPathPointSample = getArrowPathPointSample(style, true);
 		specialArrowPathPointSample.scaled = false;
-
 		Bitmap pointBitmap = arrowPathPointSample.drawBitmap(getContext());
 		Bitmap specialPointBitmap = specialArrowPathPointSample.drawBitmap(getContext());
-		double pxStep = style.getPointStepPx(1f);
+
+		GeometrySolidWayStyle<?> solidWayStyle = (GeometrySolidWayStyle<?>) style;
+		float bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
+		float specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
+
 		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, specialPointBitmap, (float) pxStep, true, colorizationMapping, style.getColorizationScheme(),
+				pointBitmap, specialPointBitmap, bitmapStep, specialBitmapStep, true, colorizationMapping, style.getColorizationScheme(),
 				pathsData);
 	}
 

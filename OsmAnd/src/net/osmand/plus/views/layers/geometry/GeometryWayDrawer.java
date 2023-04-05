@@ -147,8 +147,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               int lineId, int color, float width,
 	                               int outlineColor, float outlineWidth,
 	                               @Nullable float[] dashPattern,
-	                               boolean approximationEnabled, boolean showPathBitmaps, @Nullable Bitmap pathBitmap,
-	                               @Nullable Bitmap specialPathBitmap, float bitmapStep, boolean bitmapOnSurface,
+	                               boolean approximationEnabled, boolean showPathBitmaps,
+	                               @Nullable Bitmap pathBitmap, @Nullable Bitmap specialPathBitmap,
+	                               float bitmapStep, float specialBitmapStep, boolean bitmapOnSurface,
 	                               @Nullable  QListFColorARGB colorizationMapping, int colorizationScheme,
 	                               @NonNull List<DrawPathData31> pathsData) {
 		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
@@ -168,6 +169,13 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				line.setPoints(points);
 				if (hasColorizationMapping) {
 					line.setColorizationMapping(colorizationMapping);
+				}
+
+				if (showPathBitmaps && pathBitmap != null) {
+					line.setPathIconStep(bitmapStep);
+					if (specialPathBitmap != null && specialBitmapStep != -1) {
+						line.setSpecialPathIconStep(specialBitmapStep);
+					}
 				}
 				return;
 			}
@@ -196,7 +204,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					.setPathIcon(NativeUtilities.createSkImageFromBitmap(pathBitmap))
 					.setPathIconOnSurface(bitmapOnSurface);
 			if (specialPathBitmap != null) {
-					builder.setSpecialPathIcon(NativeUtilities.createSkImageFromBitmap(specialPathBitmap));
+				builder.setSpecialPathIcon(NativeUtilities.createSkImageFromBitmap(specialPathBitmap));
+				if (specialBitmapStep != -1) {
+					builder.setSpecialPathIconStep(specialBitmapStep);
+				}
 			}
 		}
 		if (hasColorizationMapping) {
@@ -253,9 +264,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
-		double pxStep = style.getPointStepPx(1f);
+		float pxStep = (float) style.getPointStepPx(1f);
 		buildVectorLine(collection, baseOrder, lineId, color, width, outlineColor, outlineWidth, dashPattern,
-				approximationEnabled, shouldDrawArrows, pointBitmap, null, (float) pxStep, true, null, 0,
+				approximationEnabled, shouldDrawArrows, pointBitmap, null, pxStep,
+				pxStep, true, null, 0,
 				pathsData);
 	}
 
