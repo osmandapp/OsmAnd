@@ -5121,4 +5121,6 @@
     <string name="rendering_value_defaultMedium_name">Alapértelmezett (közepes)</string>
     <string name="select_layer">Réteg választása</string>
     <string name="speak_route_deviation">Az útvonaltól való eltérés bemondása</string>
+    <string name="camera_app">Kamera alkalmazás</string>
+    <string name="shutter_sound">Zárhang</string>
 </resources>

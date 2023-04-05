@@ -5193,4 +5193,9 @@
     <string name="app_mode_climbing">التسلق</string>
     <string name="common_weight_limit_error">القيمة الدنيا هي \"%1$s\" %2$s. استخدم ملف تعريف \"%3$s\" إذا كان وزن السيارة أقل من الحد الأدنى للقيمة.</string>
     <string name="shared_string_pounds">باوند</string>
+    <string name="camera_app">تطبيق الكاميرا</string>
+    <string name="rendering_value_defaultMedium_name">افتراضي (متوسط)</string>
+    <string name="shutter_sound">صوت الغالق</string>
+    <string name="speak_route_deviation">تحذيرعند الانحراف عن المسار</string>
+    <string name="select_layer">حدد طبقة</string>
 </resources>
