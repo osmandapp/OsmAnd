@@ -32,7 +32,7 @@
     <string name="poi_filter_for_tourists">对于游客</string>
     <string name="poi_filter_fuel">燃料</string>
     <string name="use_compass_navigation">使用指南针</string>
-    <string name="avoid_motorway">无高速公路</string>
+    <string name="avoid_motorway">避开高速公路</string>
     <string name="auto_zoom_map">自动缩放地图</string>
     <string name="recalculate_route_to_your_location">运输方式：</string>
     <string name="select_navigation_mode">运输模式：</string>
@@ -266,7 +266,7 @@
     <string name="route_head">前方</string>
     <string name="first_time_continue">稍后</string>
     <string name="first_time_download">下载区域</string>
-    <string name="search_poi_location">正在等待信号…</string>
+    <string name="search_poi_location">等待信号中…</string>
     <string name="map_orientation_portrait">竖屏</string>
     <string name="map_orientation_landscape">横屏</string>
     <string name="map_screen_orientation">屏幕方向</string>
@@ -285,7 +285,7 @@
     <string name="follow">开始导航</string>
     <string name="auth_failed">授权失败</string>
     <string name="failed_op">失败</string>
-    <string name="converting_names">正在转换当地/英文名称…</string>
+    <string name="converting_names">正在转换当地 / 英文名称…</string>
     <string name="error_occurred_saving_gpx">无法保存 GPX 文件。</string>
     <string name="arrived_at_destination">你已到达。</string>
     <string name="invalid_locations">无效的座标</string>
@@ -330,11 +330,11 @@
     <string name="shared_string_delete">删除</string>
     <string name="layer_hillshade">山体阴影层</string>
     <string name="shared_string_map">地图</string>
-    <string name="prefer_motorways">首选高速公路</string>
+    <string name="prefer_motorways">高速公路优先</string>
     <string name="prefer_in_routing_title">偏好…</string>
     <string name="index_name_openmaps">开放地图属性索引</string>
     <string name="download_hillshade_maps">山体阴影层</string>
-    <string name="prefer_in_routing_descr">首选高速公路。</string>
+    <string name="prefer_in_routing_descr">高速公路优先。</string>
     <string name="local_indexes_cat_av">音频/视频数据</string>
     <string name="stop_routing_confirm">停止导航？</string>
     <string name="clear_dest_confirm">删除目的地（和中转点）？</string>
@@ -436,7 +436,7 @@
     <string name="av_settings">音频/视频设置 </string>
     <string name="recording_error">录制失败</string>
     <string name="recording_camera_not_available">摄像头不可用</string>
-    <string name="recording_is_recorded">正在录制音频/视频，点击AV组件停止。</string>
+    <string name="recording_is_recorded">录制音频/视频中，点击 AV 小工具以停止。</string>
     <string name="recording_open_external_player">打开外部播放器</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd 的离线等高线插件</string>
     <string name="map_widget_distancemeasurement">距离测量</string>
@@ -697,7 +697,7 @@
     <string name="uploading">正在上传…</string>
     <string name="search_nothing_found">什么也没找到</string>
     <string name="searching">正在搜索…</string>
-    <string name="searching_address">正在搜索地址…</string>
+    <string name="searching_address">搜索地址中…</string>
     <string name="search_osm_nominatim">使用 OSM Nominatim 进行在线搜索</string>
     <string name="hint_search_online">在线搜索：门牌号、街道、城市</string>
     <string name="search_offline_address">离线搜索</string>
@@ -833,7 +833,7 @@
     <string name="osm_live_support_region">支持地区</string>
     <string name="osm_live_month_cost">每月费用</string>
     <string name="osm_live_month_cost_desc">每月支付</string>
-    <string name="osm_live_active">有效</string>
+    <string name="osm_live_active">活动</string>
     <string name="osm_live_not_active">失效</string>
     <string name="osm_live_enter_email">请输入有效的电子邮件地址</string>
     <string name="osm_live_enter_user_name">请输入公开名称</string>
@@ -1120,7 +1120,7 @@
     <string name="shared_string_automatic">自动</string>
     <string name="do_not_send_anonymous_app_usage">不发送匿名应用使用情况统计信息</string>
     <string name="restore_purchases">恢复购买内容</string>
-    <string name="shared_string_visible">可见性</string>
+    <string name="shared_string_visible">可见的</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 只会搜集您打开应用的那一部分的信息。您的位置永远不会被发送至服务器，您输入进应用的任何数据或者浏览的区域、搜索内容和下载内容同样不会被搜集。</string>
     <string name="do_not_show_startup_messages">不显示启动消息</string>
     <string name="full_version_thanks">感谢你购买 OsmAnd 的付费版。</string>
@@ -1168,9 +1168,9 @@
     <string name="impassable_road">避开道路…</string>
     <string name="routing_attr_avoid_toll_name">无收费公路</string>
     <string name="routing_attr_avoid_toll_description">避开收费公路</string>
-    <string name="routing_attr_avoid_unpaved_name">无未铺设道路</string>
+    <string name="routing_attr_avoid_unpaved_name">避开未铺设道路</string>
     <string name="routing_attr_avoid_unpaved_description">避开未铺设道路</string>
-    <string name="routing_attr_avoid_ferries_name">无轮渡</string>
+    <string name="routing_attr_avoid_ferries_name">避开轮渡</string>
     <string name="routing_attr_avoid_ferries_description">避开轮渡</string>
     <string name="favourites_context_menu_add">添加收藏</string>
     <string name="map_widget_plain_time">当前时间</string>
@@ -1287,8 +1287,8 @@
     <string name="profile_settings">选择设置对应场景</string>
     <string name="routing_attr_allow_private_name">允许私有访问</string>
     <string name="routing_attr_weight_name">重量限制</string>
-    <string name="routing_attr_avoid_stairs_name">无阶梯</string>
-    <string name="routing_attr_avoid_stairs_description">避免阶梯</string>
+    <string name="routing_attr_avoid_stairs_name">避开楼梯</string>
+    <string name="routing_attr_avoid_stairs_description">避开楼梯</string>
     <string name="routing_attr_avoid_borders_name">无边界穿越</string>
     <string name="routing_attr_avoid_borders_description">避免跨越国界</string>
     <string name="routing_attr_weight_description">指定路线上允许的车辆重量。</string>
@@ -1369,8 +1369,8 @@
     <string name="route_points_category_name">转到这条路线上</string>
     <string name="track_points_category_name">路点、兴趣点、命名的特征</string>
     <string name="shared_string_gpx_track">轨迹</string>
-    <string name="shared_string_time_moving">移动的时间</string>
-    <string name="shared_string_time_span">时间跨度</string>
+    <string name="shared_string_time_moving">时间移动</string>
+    <string name="shared_string_time_span">持续时间</string>
     <string name="select_gpx_folder">选择GPX轨迹文件夹</string>
     <string name="shared_string_gpx_tracks">轨迹</string>
     <string name="route_altitude">路线标高</string>
@@ -1463,7 +1463,7 @@
     <string name="move_marker_bottom_sheet_title">移动地图以更改标记位置</string>
     <string name="access_direction_audio_feedback">音频方向</string>
     <string name="access_direction_audio_feedback_descr">通过声音指示目标点方向。</string>
-    <string name="access_direction_haptic_feedback">触觉方向</string>
+    <string name="access_direction_haptic_feedback">触觉指引</string>
     <string name="access_direction_haptic_feedback_descr">由振动指示目标点方向。</string>
     <string name="use_osm_live_routing_description">启用导航时由 OsmAnd 实时服务提供的更新。</string>
     <string name="access_no_destination">辅助功能插件：没有设置目的地</string>
@@ -1587,7 +1587,7 @@
     <string name="shared_string_address">地址</string>
     <string name="shared_string_my_favorites">收藏</string>
     <string name="shared_string_tracks">轨迹</string>
-    <string name="shared_string_currently_recording_track">当前正在录制轨迹</string>
+    <string name="shared_string_currently_recording_track">当前录制轨迹</string>
     <string name="shared_string_audio">音频</string>
     <string name="shared_string_video">视频</string>
     <string name="shared_string_photo">图片</string>
@@ -1852,9 +1852,9 @@
     <string name="select_gpx">选择 GPX…</string>
     <string name="route_preferences">路线首选项</string>
     <string name="route_info">路线信息</string>
-    <string name="routing_attr_prefer_motorway_name">首选高速公路</string>
-    <string name="routing_attr_prefer_motorway_description">首选高速公路</string>
-    <string name="routing_attr_avoid_motorway_name">无高速公路</string>
+    <string name="routing_attr_prefer_motorway_name">高速公路优先</string>
+    <string name="routing_attr_prefer_motorway_description">高速公路优先</string>
+    <string name="routing_attr_avoid_motorway_name">避开高速公路</string>
     <string name="routing_attr_avoid_motorway_description">避开高速公路</string>
     <string name="copying_osmand_files_descr">将 OsmAnd 数据文件复制到新的目标 (%s)…</string>
     <string name="copying_osmand_files">正在复制 OsmAnd 数据文件…</string>
@@ -2229,7 +2229,7 @@
     <string name="search_poi_filter">筛选器</string>
     <string name="menu_mute_off">语音已开启</string>
     <string name="menu_mute_on">语音已关闭</string>
-    <string name="voice_data_initializing">正在初始化语音数据…</string>
+    <string name="voice_data_initializing">初始化语音数据中…</string>
     <string name="opening_hours_not_supported">无法更改营业时间格式。</string>
     <string name="transport_stop_to_go_out">选择下车站</string>
     <string name="transport_to_go_after">事先的距离</string>
@@ -2643,8 +2643,8 @@
     <string name="routing_attr_avoid_train_name">不乘坐火车</string>
     <string name="routing_attr_avoid_train_description">避免火车</string>
     <string name="routing_attr_avoid_subway_description">避免地铁和轻轨交通</string>
-    <string name="routing_attr_avoid_ferry_name">不乘坐轮渡</string>
-    <string name="routing_attr_avoid_ferry_description">避免轮渡</string>
+    <string name="routing_attr_avoid_ferry_name">避开轮渡</string>
+    <string name="routing_attr_avoid_ferry_description">避开轮渡</string>
     <string name="shared_string_degrees">度</string>
     <string name="shared_string_milliradians">毫弧度</string>
     <string name="avoid_pt_types_descr">选择导航时要避免的公共交通类型：</string>
@@ -2691,11 +2691,11 @@
     <string name="markers_remove_dialog_msg">删除地图标记 \'%s\' 吗？</string>
     <string name="edit_map_marker">编辑地图标记</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="add_intermediate_point">添加中点</string>
+    <string name="add_intermediate_point">添加中间点</string>
     <string name="add_start_point">设置出发地</string>
-    <string name="intermediate_waypoint">中点</string>
+    <string name="intermediate_waypoint">中间点</string>
     <string name="on_foot">步行</string>
-    <string name="waiting_for_route_calculation">正在计算路径……</string>
+    <string name="waiting_for_route_calculation">计算路线中……</string>
     <string name="app_mode_public_transport">公共交通</string>
     <string name="avoid_roads_descr">在地图或下方的列表中选择一条您在导航中想避开的道路：</string>
     <string name="simulate_navigation">模拟导航</string>
@@ -2711,8 +2711,8 @@
     <string name="work_button">工作地点</string>
     <string name="previous_route">上一条路径</string>
     <string name="show_more">显示更多</string>
-    <string name="tracks_on_map">已显示的路径</string>
-    <string name="time_of_day">当前时间</string>
+    <string name="tracks_on_map">已显示轨迹</string>
+    <string name="time_of_day">一天中的时间</string>
     <string name="by_transport_type">乘坐 %1$s</string>
     <string name="step_by_step">路线转向规划</string>
     <string name="routeInfo_road_types_name">道路类型</string>
@@ -2777,9 +2777,9 @@
     <string name="routing_profile_ski">滑雪</string>
     <string name="profile_type_descr_string">类型：%s</string>
     <string name="profile_alert_need_save_title">保存更改</string>
-    <string name="shared_string_min_speed">最低速率</string>
-    <string name="shared_string_max_speed">最高速率</string>
-    <string name="default_speed_setting_title">默认速率</string>
+    <string name="shared_string_min_speed">最低速度</string>
+    <string name="shared_string_max_speed">最高速度</string>
+    <string name="default_speed_setting_title">默认速度</string>
     <string name="shared_string_default">默认</string>
     <string name="transport_nearby_routes">之间</string>
     <string name="shared_string_privacy_policy">隐私政策</string>
@@ -2816,7 +2816,7 @@
     <string name="update_all_maps">更新所有地图</string>
     <string name="update_all_maps_q">更新所有 (%1$d) 地图？</string>
     <string name="default_speed_dialog_msg">估计未知道路类型的到达时间，并限制所有道路的速度（可能会影响路线）</string>
-    <string name="tts_initialization_error">无法启动文本到语音引擎。</string>
+    <string name="tts_initialization_error">无法启动文字转语音引擎。</string>
     <string name="export_profile">导出配置文件</string>
     <string name="exported_osmand_profile">OsmAnd配置文件： %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\'已经存在。覆盖？</string>
@@ -3103,7 +3103,7 @@
     <string name="routing_attr_piste_type_sled_name">雪橇</string>
     <string name="routing_profile_geocoding">地理编码</string>
     <string name="button_rate">评分</string>
-    <string name="shared_string_swap">变道</string>
+    <string name="shared_string_swap">交换</string>
     <string name="dd_dddddd_format">度度.度度度度度度°</string>
     <string name="dd_mm_ss_format">度度°分分′秒秒″</string>
     <string name="nautical_renderer">航海</string>
@@ -3321,7 +3321,7 @@
     <string name="subscription_on_hold_title">OsmAnd Live 订阅已暂停</string>
     <string name="send_files_to_openstreetmap">将 GPX 文件发送到 OpenStreetMap</string>
     <string name="enter_text_separated">输入以逗号分隔的标签。</string>
-    <string name="gpx_upload_public_visibility_descr">\"公开 \"是指在您的GPS轨迹和公开的GPS轨迹列表中公开显示该轨迹，并在公开的轨迹列表中以原始形式显示时间戳。通过API提供的数据不引用您的跟踪页面。通过公开的GPS API无法获得跟踪点的时间戳，而且跟踪点也不是按时间顺序排列的。</string>
+    <string name="gpx_upload_public_visibility_descr">\"公开 \"是指在您的GPS轨迹和公开的GPS轨迹列表中公开显示该轨迹，并在公开的轨迹列表中以原始格式显示时间戳。通过API提供的数据不会引用您的轨迹页面。通过公开的GPS API无法获得轨迹点的时间戳，而且轨迹点也不会按时间顺序排列。</string>
     <string name="gpx_upload_private_visibility_descr">\"私有 \"意味着该轨迹不会出现在任何公开的列表中，但可以通过公开的GPS API以非同步的顺序获得其中的轨迹点，但没有时间戳。</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"可识别 \"意味着该轨迹将公开显示在您的GPS轨迹和公共GPS轨迹列表中，即其他用户将能够下载原始轨迹，并与您的用户名相关联。通过trackpoints API服务的GPS API中公开的有时间戳的跟踪点数据将引用您的原始跟踪页面。</string>
     <string name="gpx_upload_trackable_visibility_descr">“可追踪”意味着该轨迹不会出现在任何公开的列表中，但经过处理的轨迹点与其中的时间戳（不能直接与你关联）会通过从公共 GPS API 下载。</string>
@@ -3398,7 +3398,7 @@
     <string name="icon_group_emergency">紧急救助</string>
     <string name="rearrange_categories">重新排列类别</string>
     <string name="select_distance_route_will_recalc">选择之后重新计算路径的距离。</string>
-    <string name="recalculate_route_distance_promo">如果从路线到当前位置的距离超过了所选的值，路线将被重新计算。</string>
+    <string name="recalculate_route_distance_promo">如果从路线到当前位置的距离超过所选的数值，路线将被重新计算。</string>
     <string name="select_group">选择组</string>
     <string name="ui_customization_description">自定义 \"抽屉\"、\"配置地图\"、\"上下文菜单 \"中的项目数量。
 \n
@@ -3495,7 +3495,7 @@
     <string name="routing_attr_allow_intermittent_name">允许间歇性水路</string>
     <string name="analyze_by_intervals">按间隔分析</string>
     <string name="activity_type_car_name">汽车</string>
-    <string name="temporary_conditional_routing_descr">使用地图上有效的道路限制</string>
+    <string name="temporary_conditional_routing_descr">使用地图上当前有效的道路限制</string>
     <string name="routing_attr_short_way_description">优化的更短路线（节能）</string>
     <string name="routing_attr_driving_style_description">选择驾驶目的，以获得更短、更快或更安全的路线</string>
     <string name="restart">重新启动</string>
@@ -3544,7 +3544,7 @@
     <string name="app_mode_ski_touring">滑雪游览</string>
     <string name="custom_osmand_plugin">自定义 OsmAnd 插件</string>
     <string name="settings_item_read_error">无法从 \'%1$s\' 中读取。</string>
-    <string name="settings_item_write_error">无法写到 \'%1$s\'。</string>
+    <string name="settings_item_write_error">无法写入到 \'%1$s\'。</string>
     <string name="settings_item_import_error">无法从 \'%1$s\' 导入。</string>
     <string name="select_track_file">选择轨迹文件</string>
     <string name="wiki_menu_download_descr">需要其他地图才能在地图上查看维基百科兴趣点。</string>
@@ -3621,7 +3621,7 @@
     <string name="turn_screen_on_wake_time_descr">选择唤醒后屏幕超时。 （“%1$s”表示禁用超时。）</string>
     <string name="system_screen_timeout">使用系统屏幕超时</string>
     <string name="use_system_language">使用系统语言</string>
-    <string name="turn_screen_on_sensor_descr">在屏幕上挥手点亮屏幕。</string>
+    <string name="turn_screen_on_sensor_descr">在屏幕上方挥手就能点亮屏幕。</string>
     <string name="voice_announces_descr">导航指示和通告</string>
     <string name="turn_screen_on_navigation_instructions_descr">每个导航指令都会点亮屏幕。</string>
     <string name="turn_screen_on_navigation_instructions">导航指示</string>
@@ -3660,7 +3660,7 @@
     <string name="backup_error_subscription_was_expired">订阅已过期</string>
     <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 订阅已过期，请续订以使用备份。您仍然可以从云端恢复数据。</string>
     <string name="backup_error_subscription_was_used">订阅或促销活动由另一个账户使用 %1$s</string>
-    <string name="backup_error_size_is_exceeded">超过了 OsmAnd 云的最大尺寸 %1$s</string>
+    <string name="backup_error_size_is_exceeded">OsmAnd云的最大容量超出 %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">该文件应以 .gzip 格式发送</string>
     <string name="backup_error_file_not_available">文件不可用</string>
     <string name="backup_error_token_is_not_valid">所提供的设备 ID 或令牌有问题</string>
@@ -3766,13 +3766,13 @@
     <string name="shared_string_files">文件</string>
     <string name="travel_route_types">路线类型</string>
     <string name="gps_filter_smoothing">平滑</string>
-    <string name="not_enough_contributions_descr">至少需要在过去两个月期间进行 %1$s 次更改 %2$s 才能获得无限制的每小时地图更新。</string>
+    <string name="not_enough_contributions_descr">需要在过去两个月期间至少进行 %1$s 次更改 %2$s 才能获得无限制的每小时地图更新。</string>
     <string name="shared_string_precision">精度</string>
     <string name="shared_string_feet">英尺</string>
     <string name="gps_filter_precision">GPS 精度</string>
     <string name="save_as_copy">另存为副本</string>
     <string name="gps_filter_actions_description">OsmAnd 将在不更新文件的情况下将更改应用到轨迹中。你可以手动保存更改。</string>
-    <string name="shared_string_gps_filter">GPS 筛选器</string>
+    <string name="shared_string_gps_filter">GPS 过滤器</string>
     <string name="save_changes_into_file">将更改保存到文件</string>
     <string name="storage_migration_wrong_folder_warning">在选定的文件夹中找不到 OsmAnd 数据。请再试一次。</string>
     <string name="exit_without_saving_warning">不保存更改就退出？</string>
@@ -3809,15 +3809,15 @@
     <string name="shortcut_navigate_to_home">导航到“家”</string>
     <string name="reading_files">正在读取文件…</string>
     <string name="shared_string_hide_all">隐藏全部</string>
-    <string name="display_groups_visibility_dialog_description">你可以控制地图上的组的可见性。如果轨迹被隐藏，则所有组也将被隐藏。</string>
+    <string name="display_groups_visibility_dialog_description">你可以控制地图上的群组可见性。如果轨迹被隐藏，则所有群组也将被隐藏。</string>
     <string name="files_remaining">剩余文件：%1$s %2$s</string>
     <string name="shared_storage_second_step">点击“使用此文件夹”。</string>
     <string name="shared_storage_migration_descr">由于 Android 存储权限的改变，OsmAnd 不能再使用 %1$s。
 \n
 \n将所有数据复制到新文件夹中。</string>
-    <string name="shared_string_skip_warning">跳过迁移？OsmAnd 无法再访问共享存储中的文件。
+    <string name="shared_string_skip_warning">要跳过迁移吗？OsmAnd 将无法再访问您在共享存储中的文件。
 \n
-\n应用程序将开始使用新数据文件夹。</string>
+\n应用程序将开始使用新的数据文件夹。</string>
     <string name="shared_storage_third_step">授予访问文件夹的权限。没有它 OsmAnd 不能复制文件。</string>
     <string name="shared_string_copy_to">复制到</string>
     <string name="display_route_tracks_as_poi">将轨迹显示为兴趣点</string>
@@ -4166,7 +4166,7 @@
     <string name="use_system_screen_timeout_promo">默认禁用：当 OsmAnd 在前台运行时，屏幕不会超时关闭。
 \n
 \n如果启用，OsmAnd 将使用系统屏幕超时设置。</string>
-    <string name="accessibility_mode_disabled">辅助功能（无障碍模式）模式在安卓系统中处于关闭状态。</string>
+    <string name="accessibility_mode_disabled">无障碍模式在您的安卓系统中被关闭。</string>
     <string name="create_custom_categories_list_promo">更改列表顺序并隐藏类别。将所有更改导入或导出为配置文件。</string>
     <string name="add_new_custom_category_button_promo">通过选择一个或多个类别来添加新的自定义类别。</string>
     <string name="monitoring_min_speed_descr">这是一个低速截止过滤器，用于不记录低于特定速度的点。当在地图上查看时，这可能会使记录的轨迹看起来更平滑。</string>
@@ -4226,7 +4226,7 @@
     <string name="stop_download">停止下载</string>
     <string name="stop_download_desc">下载未完成。如果现在中断下载，则只有部分磁贴可供查看。</string>
     <string name="rendering_attr_showFitnessTrails_name">健身步道</string>
-    <string name="gpx_no_routes_title">无路径</string>
+    <string name="gpx_no_routes_title">没有路线</string>
     <string name="routing_attr_allow_advanced_name">允许高难路线</string>
     <string name="routing_attr_allow_advanced_description">困难的路线，有危险的障碍物和陡峭的路段。</string>
     <string name="routing_attr_piste_type_skitour_description">滑雪游览线路。</string>
@@ -4443,7 +4443,7 @@
     <string name="first_marker_widget_desc">你可以配置小组件来显示距离或估计到达第一个地图标记的时间。</string>
     <string name="time_to_destination_widget_desc">该小部件会显示需要多少时间才能到达最后一个目的地点。时间会在导航过程中不断更新，它等于从当前位置出发的路线时间。</string>
     <string name="shared_string_widget">小工具</string>
-    <string name="current_time_widget_desc">显示从您的设备获取的当前时间。</string>
+    <string name="current_time_widget_desc">显示从您设备获取的当前时间。</string>
     <string name="gps_info_widget_desc">显示设备在那一刻检测到并使用的卫星数量。</string>
     <string name="av_def_action_choose">根据要求</string>
     <string name="lanes_widgets_desc">显示当前的道路车道布局，并突出显示导航时要走的车道。</string>
@@ -4780,7 +4780,7 @@
     <string name="routeInfo_piste_difficulty_name">滑雪道难度</string>
     <string name="routeInfo_piste_type_name">滑雪道类型</string>
     <string name="screen_alerts">屏幕警报</string>
-    <string name="route_parameters">路径参数</string>
+    <string name="route_parameters">路线参数</string>
     <string name="track_storage_directory_descrp">轨迹可以存储在 \"rec \"文件夹、每月或每日文件夹中。</string>
     <string name="change_data_storage_folder">更改存储文件夹</string>
     <string name="empty_screen_view_selected_weather_data">打开以在地图上查看选定的天气数据。</string>
@@ -4878,7 +4878,7 @@
     <string name="edit_profile_setup_title">设置配置文件</string>
     <string name="precision_hdop">水平精度：%s</string>
     <string name="turn_screen_on_time_descr">调整屏幕应开启多长时间。</string>
-    <string name="route_parameters_descr">设置路径参数</string>
+    <string name="route_parameters_descr">设置路线参数</string>
     <string name="application_profile_changed">应用配置文件更改为“%s”</string>
     <string name="last_launch_crashed">OsmAnd 上一次运行崩溃了。请通过分享错误信息帮助我们改进OsmAnd。</string>
     <string name="default_speed_setting_descr">更改默认速度设置</string>
@@ -4928,7 +4928,7 @@
     <string name="rendering_attr_depthContourWidth_name">线宽度</string>
     <string name="rendering_attr_depthContourColorScheme_name">线条配色方案</string>
     <string name="selected_value">选定值</string>
-    <string name="sort_date_descending">最早日期在前</string>
+    <string name="sort_date_descending">最早日期优先</string>
     <string name="sort_date_ascending">最新日期在前</string>
     <string name="local_version_do_not_exist">没有本地版本存在。</string>
     <string name="sort_duration_ascending">最短时间优先</string>
@@ -4938,8 +4938,54 @@
     <string name="sort_distance_descending">最长距离优先</string>
     <string name="shared_string_nearest">最近</string>
     <string name="shared_string_add_manually">手动添加…</string>
-    <string name="cloud_version_confirm_delete">从OsmAnd Cloud中删除\"%1$s\"？</string>
+    <string name="cloud_version_confirm_delete">从OsmAnd Cloud中删除 \"%1$s\"？</string>
     <string name="shared_string_delete_file">删除文件</string>
     <string name="delete_cloud_version">删除云端版本</string>
     <string name="shared_string_in_progress">进行中</string>
+    <string name="approximate_bearing">大致方位</string>
+    <string name="movement_speed">移动速度</string>
+    <string name="release_4_4">• 改进了 \"配置地图 \"中的 \"轨迹 \"菜单
+\n
+\n • 上下文菜单现在会显示POI的本地化名称
+\n
+\n • 增加了通过链接分享路线的选项
+\n
+\n • 增加了 \"海里/英尺 \"的长度单位
+\n
+\n • 地图方向增加了新的固定模式
+\n
+\n • 简化了开始屏幕
+\n
+\n • 修复了Android Auto的分屏模式中的地点位置
+\n
+\n • 增加了用于轨迹分析的 \"速度/坡度 \"图表
+\n
+\n • 安卓13将应用语言选择移至系统设置
+\n
+\n • 修正了显示素食区的问题
+\n
+\n • 增加了下载为 \"叠加 \"或 \"底层 \"地图使用的在线磁贴的可能性
+\n
+\n • 为 \"车辆参数 \"增加了对英制单位的支持
+\n
+\n • 新的轻便摩托车资料
+\n
+\n • \"显示位置 \"增加了新选项 \"自动\"
+\n
+\n • 修正了倾斜、缩放和旋转的地图手势
+\n
+\n</string>
+    <string name="get_discount_second_part">然后 %1$s</string>
+    <string name="empty_tracks">您没有轨迹文件。</string>
+    <string name="shared_string_select_recent">选择最近的</string>
+    <string name="shared_string_original">原始</string>
+    <string name="shared_string_kilograms">千克</string>
+    <string name="shared_string_apply_changes">应用更改</string>
+    <string name="change_appearance">变更外观</string>
+    <string name="switch_folder">切换文件夹</string>
+    <string name="show_all_tracks">显示所有轨迹</string>
+    <string name="shared_string_on_map">在地图上</string>
+    <string name="price_and_discount">%1$s • 节省 %2$s</string>
+    <string name="offline_weather_forecast">离线天气预报</string>
+    <string name="offline_weather_forecast_desc">您可下载未来7天的天气预报。</string>
 </resources>
