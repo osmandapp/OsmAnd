@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -27,8 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -36,6 +33,7 @@ import net.osmand.plus.myplaces.ui.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -53,6 +51,7 @@ public class OverviewCard extends MapBaseCard {
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
 	private final GPXTrackAnalysis analysis;
+	private final GpxDataItem dataItem;
 	private final Fragment targetFragment;
 
 	public GpxBlockStatisticsBuilder getBlockStatisticsBuilder() {
@@ -61,11 +60,12 @@ public class OverviewCard extends MapBaseCard {
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
 	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GPXTrackAnalysis analysis,
-	                    @NonNull Fragment targetFragment) {
+	                    @Nullable GpxDataItem dataItem, @NonNull Fragment targetFragment) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
 		this.analysis = analysis;
+		this.dataItem = dataItem;
 		this.targetFragment = targetFragment;
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
 	}
@@ -113,20 +113,10 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	private void setupRegion() {
+		String cityName = dataItem != null ? dataItem.getNearestCityName() : null;
 		TextView regionText = view.findViewById(R.id.region);
-		LinearLayout regionContainer = view.findViewById(R.id.region_container);
-		WptPt point = selectedGpxFile.getGpxFile().findPointToShow();
-		if (point != null) {
-			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-			app.getMapViewTrackingUtilities().detectCurrentRegion(latLon, worldRegion -> {
-				if (worldRegion != null) {
-					String regionName = worldRegion.getLocaleName();
-					regionText.setText(regionName);
-					AndroidUiHelper.updateVisibility(regionContainer, true);
-				}
-				return true;
-			});
-		}
+		regionText.setText(cityName);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.region_container), !Algorithms.isEmpty(cityName));
 	}
 
 	private GPXFile getGPXFile() {
@@ -135,13 +125,11 @@ public class OverviewCard extends MapBaseCard {
 
 	@DrawableRes
 	private int getActiveShowHideIcon() {
-		int icon;
-		if (!FileUtils.isTempFile(app, getGPXFile().path)) {
-			icon = isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_hide : R.drawable.ic_action_view;
+		if (FileUtils.isTempFile(app, getGPXFile().path)) {
+			return R.drawable.ic_action_gsave_dark;
 		} else {
-			icon = R.drawable.ic_action_gsave_dark;
+			return isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_hide : R.drawable.ic_action_view;
 		}
-		return icon;
 	}
 
 	private void initShowButton(int iconColorDef, int iconColorPres) {

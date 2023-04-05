@@ -434,13 +434,8 @@ public class TravelObfHelper implements TravelHelper {
 		return langs;
 	}
 
-	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> list) {
-		Collections.sort(list, new Comparator<WikivoyageSearchResult>() {
-			@Override
-			public int compare(WikivoyageSearchResult res1, WikivoyageSearchResult res2) {
-				return collator.compare(res1.getArticleTitle(), res2.getArticleTitle());
-			}
-		});
+	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> results) {
+		Collections.sort(results, (o1, o2) -> collator.compare(o1.getArticleTitle(), o2.getArticleTitle()));
 	}
 
 	@NonNull
@@ -505,17 +500,12 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 
-		LinkedHashMap<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
+		Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
 		for (String header : headers) {
 			WikivoyageSearchResult searchResult = headerObjs.get(header);
 			List<WikivoyageSearchResult> results = navMap.get(header);
 			if (results != null) {
-				Collections.sort(results, new Comparator<WikivoyageSearchResult>() {
-					@Override
-					public int compare(WikivoyageSearchResult o1, WikivoyageSearchResult o2) {
-						return collator.compare(o1.getArticleTitle(), o2.getArticleTitle());
-					}
-				});
+				sortSearchResults(results);
 				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult("", header, null, null, null);
 				searchResult = searchResult != null ? searchResult : emptyResult;
 				res.put(searchResult, results);

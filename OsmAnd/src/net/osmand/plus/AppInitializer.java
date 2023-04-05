@@ -124,7 +124,7 @@ public class AppInitializer implements IProgress {
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
 
 	private final List<String> warnings = new ArrayList<>();
-	private final List<AppInitializeListener> listeners = new ArrayList<>();
+	private List<AppInitializeListener> listeners = new ArrayList<>();
 
 	private boolean initSettings;
 	private boolean activityChangesShowed;
@@ -680,11 +680,11 @@ public class AppInitializer implements IProgress {
 				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
 				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
-				if (!initialized) {
-					LOG.info("Native library could not be loaded!");
-				} else {
+				if (initialized) {
 					File ls = app.getAppPath("fonts");
 					lib.loadFontData(ls);
+				} else {
+					LOG.info("Native library could not be loaded!");
 				}
 
 			}
@@ -701,9 +701,8 @@ public class AppInitializer implements IProgress {
 
 	public void notifyFinish() {
 		app.uiHandler.post(() -> {
-			List<AppInitializeListener> listeners = new ArrayList<>(this.listeners);
-			for (AppInitializeListener l : listeners) {
-				l.onFinish(this);
+			for (AppInitializeListener listener : listeners) {
+				listener.onFinish(this);
 			}
 		});
 	}
@@ -715,8 +714,8 @@ public class AppInitializer implements IProgress {
 			startBgTime = time;
 		}
 		app.uiHandler.post(() -> {
-			for (AppInitializeListener l : listeners) {
-				l.onProgress(AppInitializer.this, event);
+			for (AppInitializeListener listener : listeners) {
+				listener.onProgress(this, event);
 			}
 		});
 	}
@@ -779,14 +778,14 @@ public class AppInitializer implements IProgress {
 	}
 
 	public void addListener(@NonNull AppInitializeListener listener) {
-		this.listeners.add(listener);
+		listeners = Algorithms.addToList(listeners, listener);
 		if (!appInitializing) {
 			listener.onFinish(this);
 		}
 	}
 
 	public void removeListener(@NonNull AppInitializeListener listener) {
-		this.listeners.remove(listener);
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	@Override

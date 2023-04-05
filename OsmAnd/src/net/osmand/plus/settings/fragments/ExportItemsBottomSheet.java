@@ -468,7 +468,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		@Override
-		public void onGpxDataItemReady(GpxDataItem item) {
+		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			for (BaseBottomSheetItem bottomSheetItem : items) {
 				Object tag = bottomSheetItem.getTag();
 				if (tag instanceof FileSettingsItem) {

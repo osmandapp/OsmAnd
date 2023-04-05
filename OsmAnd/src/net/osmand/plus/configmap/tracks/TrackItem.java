@@ -16,7 +16,6 @@ public class TrackItem {
 	private final long lastModified;
 
 	private GpxDataItem dataItem;
-	private String regionName;
 
 	public TrackItem(@NonNull File file) {
 		this.file = file;
@@ -47,15 +46,6 @@ public class TrackItem {
 
 	public void setDataItem(@Nullable GpxDataItem dataItem) {
 		this.dataItem = dataItem;
-	}
-
-	@Nullable
-	public String getRegionName() {
-		return regionName;
-	}
-
-	public void setRegionName(@Nullable String regionName) {
-		this.regionName = regionName;
 	}
 
 	public long getLastModified() {

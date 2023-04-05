@@ -1642,7 +1642,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					}
 
 					@Override
-					public void onGpxDataItemReady(GpxDataItem item) {
+					public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 						callback.onGpxDataItemChanged(item);
 					}
 				};
