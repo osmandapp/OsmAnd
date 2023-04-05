@@ -189,11 +189,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 					}
 
 					@Override
-					public void onGpxDataItemReady(GpxDataItem item) {
-						if (item != null) {
-							gpxDataItem = item;
-							trackDrawInfo.updateParams(app, item);
-						}
+					public void onGpxDataItemReady(@NonNull GpxDataItem item) {
+						gpxDataItem = item;
+						trackDrawInfo.updateParams(app, item);
 						if (view != null) {
 							initContent();
 						}

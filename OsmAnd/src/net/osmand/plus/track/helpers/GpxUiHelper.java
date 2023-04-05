@@ -323,7 +323,7 @@ public class GpxUiHelper {
 		}
 
 		@Override
-		public void onGpxDataItemReady(GpxDataItem item) {
+		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
 				updateItemsProc.run();
 			}
@@ -1016,7 +1016,7 @@ public class GpxUiHelper {
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
 		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
+			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 				addAppearanceToGpx(gpxFile, item);
 				saveAndShareGpx(app, gpxFile);
 			}
