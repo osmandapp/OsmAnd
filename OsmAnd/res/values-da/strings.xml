@@ -5133,4 +5133,6 @@
     <string name="select_layer">Vælg lag</string>
     <string name="rendering_value_defaultMedium_name">Standard (medium)</string>
     <string name="speak_route_deviation">Meddel afvigelse fra ruten</string>
+    <string name="shutter_sound">Lukkerlyd</string>
+    <string name="camera_app">Kamera-app</string>
 </resources>
