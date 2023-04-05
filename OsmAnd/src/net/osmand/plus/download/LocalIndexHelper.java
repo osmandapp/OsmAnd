@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -58,7 +59,7 @@ public class LocalIndexHelper {
 			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
 			if (ifns.containsKey(info.getFileName())) {
 				try {
-					Date dt = app.getResourceManager().getDateFormat().parse(ifns.get(info.getFileName()));
+					Date dt = OsmAndFormatter.getDateFormat(app).parse(ifns.get(info.getFileName()));
 					info.setDescription(getInstalledDate(dt.getTime(), null));
 				} catch (ParseException e) {
 					e.printStackTrace();

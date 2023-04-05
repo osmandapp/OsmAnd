@@ -166,7 +166,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
 		if (analysis.startTime > 0) {
-			DateFormat format = app.getResourceManager().getDateFormat();
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
 			builder.append(format.format(new Date(analysis.startTime)));
 			setupTextSpan(builder);
 			builder.append(" | ");
@@ -182,7 +182,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void appendLastModifiedDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
 		long lastModified = trackItem.getLastModified();
 		if (lastModified > 0) {
-			DateFormat format = app.getResourceManager().getDateFormat();
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
 			builder.append(format.format(new Date(lastModified)));
 			setupTextSpan(builder);
 			builder.append(" | ");
