@@ -330,10 +330,11 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startMoving(double finalLat, double finalLon, int endZoom, boolean notifyListener) {
-		startMoving(finalLat, finalLon, endZoom, notifyListener, false, null, null);
+		startMoving(finalLat, finalLon, endZoom, 0, notifyListener, false, null, null);
 	}
 
-	public void startMoving(double finalLat, double finalLon, int endZoom, boolean notifyListener, boolean allowAnimationJoin,
+	public void startMoving(double finalLat, double finalLon, int endZoom, float endZoomFloatPart,
+	                        boolean notifyListener, boolean allowAnimationJoin,
 	                        @Nullable Runnable startAnimationCallback, @Nullable Runnable finishAnimationCallback) {
 		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
@@ -355,7 +356,7 @@ public class AnimateDraggingMapThread {
 		boolean joinAnimation = allowAnimationJoin && interpolation >= MIN_INTERPOLATION_TO_JOIN_ANIMATION;
 		if (skipAnimation || wasAnimating && !joinAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
-			tileView.setFractionalZoom(endZoom, 0, notifyListener);
+			tileView.setFractionalZoom(endZoom, endZoomFloatPart, notifyListener);
 			if (finishAnimationCallback != null) {
 				finishAnimationCallback.run();
 			}
@@ -380,7 +381,7 @@ public class AnimateDraggingMapThread {
 
 			animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Target);
 
-			boolean animateZoom = endZoom != startZoom || startZoomFP != 0;
+			boolean animateZoom = endZoom != startZoom || startZoomFP != endZoomFloatPart;
 			if (!animateZoom)
 				zoomAnimation = null;
 			if (zoomAnimation != null) {
@@ -398,23 +399,23 @@ public class AnimateDraggingMapThread {
 					duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
 				}
 				if (animateZoom) {
-					animator.animateZoomToAndPan((float) endZoom, finish31,
+					animator.animateZoomToAndPan(endZoom + endZoomFloatPart, finish31,
 							Math.max(duration, ZOOM_MOVE_ANIMATION_TIME / 1000f),
 							TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 				} else {
 					animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
 				}
 			} else if (animateZoom) {
-				animator.animateZoomTo((float) endZoom, ZOOM_MOVE_ANIMATION_TIME / 1000f,
+				animator.animateZoomTo(endZoom + endZoomFloatPart, ZOOM_MOVE_ANIMATION_TIME / 1000f,
 						TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			}
 		}
 
 		startThreadAnimating(() -> {
 			animatingMapMove = true;
-			setTargetValues(endZoom, 0, finalLat, finalLon);
+			setTargetValues(endZoom, endZoomFloatPart, finalLat, finalLon);
 
-			boolean animateZoom = endZoom != startZoom || startZoomFP != 0;
+			boolean animateZoom = endZoom != startZoom || startZoomFP != endZoomFloatPart;
 			if (mapRenderer != null) {
 				if (animateZoom) {
 					animatingMapZoom = true;
@@ -445,11 +446,11 @@ public class AnimateDraggingMapThread {
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 				}
 
-				if (!stopped && (moveZoom != endZoom || startZoomFP != 0)) {
+				if (!stopped && (moveZoom != endZoom || startZoomFP != endZoomFloatPart)) {
 					animatingZoomInThread(moveZoom, startZoomFP, endZoom, 0, doNotUseAnimations
 							? 1 : ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
-				tileView.setFractionalZoom(endZoom, 0, notifyListener);
+				tileView.setFractionalZoom(endZoom, endZoomFloatPart, notifyListener);
 
 				pendingRotateAnimation();
 			}

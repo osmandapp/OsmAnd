@@ -2041,9 +2041,9 @@
     <string name="poi_boat_pedalboat_rental_yes">Barcos a pedais: si</string>
     <string name="poi_boat_jetski_rental_yes">Motos da auga: si</string>
     <string name="poi_boat_sailboat_rental_yes">Veleiros: si</string>
-    <string name="poi_boat_dinghy_rental_rental_yes">Botes: si</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Caiaques: si</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Canoas: si</string>
+    <string name="poi_boat_dinghy_rental_yes">Botes: si</string>
+    <string name="poi_boat_kayak_rental_yes">Caiaques: si</string>
+    <string name="poi_boat_canoe_rental_yes">Canoas: si</string>
     <string name="poi_car_yes">Automóbil: si</string>
     <string name="poi_scooter_yes">Scooter: si</string>
     <string name="poi_truck_yes">Camións: si</string>
@@ -3186,9 +3186,9 @@
     <string name="poi_boat_pedalboat_rental_no">Embarcacións a pedais: non</string>
     <string name="poi_boat_jetski_rental_no">Motos de auga: non</string>
     <string name="poi_boat_sailboat_rental_no">Veleiros: non</string>
-    <string name="poi_boat_dinghy_rental_rental_no">Botes: non</string>
-    <string name="poi_boat_kayak_rental_rental_no">Caiaques: non</string>
-    <string name="poi_boat_canoe_rental_rental_no">Canoas: non</string>
+    <string name="poi_boat_dinghy_rental_no">Botes: non</string>
+    <string name="poi_boat_kayak_rental_no">Caiaques: non</string>
+    <string name="poi_boat_canoe_rental_no">Canoas: non</string>
     <string name="poi_government_archive">Arquivo</string>
     <string name="poi_government_ministry">Ministerio</string>
     <string name="poi_government_social_security">Seguridade social</string>

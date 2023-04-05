@@ -118,10 +118,10 @@ public class WeatherContourLayer extends BaseMapLayer {
 		geoTileObjectsProvider = new GeoTileObjectsProvider(resourcesManager, dateTime, band, false, cacheSize);
 		mapPrimitivesProvider = new MapPrimitivesProvider(geoTileObjectsProvider, mapPrimitiviser, rasterTileSize);
 
-		mapObjectsSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, rasterTileSize);
+		mapObjectsSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, rasterTileSize, null, true);
 		mapRenderer.addSymbolsProvider(WEATHER_CONTOURS_SYMBOL_SECTION, mapObjectsSymbolsProvider);
 
-		rasterMapProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, false);
+		rasterMapProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, false, true);
 		mapRenderer.setMapLayerProvider(view.getLayerIndex(this), rasterMapProvider);
 	}
 

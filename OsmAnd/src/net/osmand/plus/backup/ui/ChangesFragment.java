@@ -20,6 +20,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -61,6 +62,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	private NetworkSettingsHelper settingsHelper;
 
 	private View buttonsContainer;
+	private View buttonsShadow;
 
 	private RecentChangesType tabType;
 	private boolean nightMode;
@@ -121,6 +123,8 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			tabItems.add(new TabItem(tabType.titleId, getString(tabType.titleId), tabType.fragment));
 		}
 		ViewPager viewPager = view.findViewById(R.id.pager);
+		buttonsShadow = view.findViewById(R.id.buttons_shadow);
+
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getChildFragmentManager(), tabItems));
 		viewPager.setCurrentItem(tabType.ordinal());
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
@@ -142,6 +146,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 
 		setupSyncButton(syncing, preparing);
 		setupCancelButton(syncing, preparing);
+		AndroidUiHelper.updateVisibility(buttonsShadow, tabType != RECENT_CHANGES_CONFLICTS);
 		AndroidUiHelper.updateVisibility(buttonsContainer, tabType != RECENT_CHANGES_CONFLICTS);
 	}
 
@@ -180,7 +185,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			setupBottomButtons();
 		});
 		button.setEnabled(syncing && !preparing);
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_cancel);
+		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_control_stop);
 		AndroidUiHelper.updateVisibility(button, syncing);
 	}
 
@@ -280,6 +285,11 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			this.buttonIconId = buttonIconId;
 			this.fragment = fragment;
 		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull RecentChangesType tabType) {

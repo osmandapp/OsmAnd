@@ -871,6 +871,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			if (endIndex < 0 || endIndex < startIndex || endIndex >= points.size()) {
 				endIndex = MeasurementEditingContextUtils.findPointIndex(pair.second, points, startIndex);
 			}
+			// end index is not inclusive, so increment it to include last point of TrkSegment
+			if (endIndex + 1 == points.size()) {
+				endIndex++;
+			}
+
 			if (startIndex >= 0 && endIndex >= 0) {
 				List<WptPt> pairPoints = new ArrayList<>();
 				for (int j = startIndex; j < endIndex && j < points.size(); j++) {
@@ -1245,9 +1250,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					}
 					locations.add(l);
 				}
-				pair.second.setTrkPtIndex(i + 1 < before.points.size() - 1 ? locations.size() : locations.size() - 1);
+
+				int routePointIndex = i + 1 == endPointIndex ? locations.size() - 1 : locations.size();
+				pair.second.setTrkPtIndex(routePointIndex);
 				route.addAll(dataSegments);
-				routePointIndexes.add(i + 1 == endPointIndex ? locations.size() - 1 : locations.size());
+				routePointIndexes.add(routePointIndex);
 			}
 		}
 		if (!locations.isEmpty() && !route.isEmpty()) {

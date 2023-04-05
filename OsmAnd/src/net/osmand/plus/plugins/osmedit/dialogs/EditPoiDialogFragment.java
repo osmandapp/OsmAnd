@@ -62,7 +62,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
@@ -123,7 +122,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		BASIC_TAGS.add(OSMTagKey.OPENING_HOURS.getValue());
 	}
 
-	private OsmandApplication app;
 	private OpenstreetmapUtil openstreetmapUtil;
 
 	private EditPoiData editPoiData;
@@ -137,12 +135,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final int AMENITY_TEXT_LENGTH = 255;
 
 	@Override
-	public void onAttach(@NonNull Context activity) {
-		super.onAttach(activity);
-		app = getMyApplication();
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
-		if (plugin.OFFLINE_EDITION.get() || !getSettings().isInternetConnectionAvailable(true)) {
+		if (plugin.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			openstreetmapUtil = plugin.getPoiModificationLocalUtil();
 		} else {
 			openstreetmapUtil = plugin.getPoiModificationRemoteUtil();
@@ -153,10 +150,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
-		boolean isLightTheme = getSettings().isLightContent();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		boolean nightMode = isNightMode(false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 
 		if (savedInstanceState != null) {
 			@SuppressWarnings("unchecked")
@@ -248,7 +245,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		int activeColor = ColorUtilities.getActiveColor(getContext(), !isLightTheme);
+		int activeColor = ColorUtilities.getActiveColor(getContext(), isNightMode(false));
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
@@ -339,7 +336,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			Button deleteButton = view.findViewById(R.id.deleteButton);
 			deleteButton.setVisibility(View.VISIBLE);
 			deleteButton.setOnClickListener(v -> {
-				DeletePoiHelper deletePoiHelper = new DeletePoiHelper(getMyActivity());
+				DeletePoiHelper deletePoiHelper = new DeletePoiHelper((AppCompatActivity) getActivity());
 				deletePoiHelper.setCallback(this::dismiss);
 				deletePoiHelper.deletePoiWithDialog(getEditPoiData().getEntity());
 			});

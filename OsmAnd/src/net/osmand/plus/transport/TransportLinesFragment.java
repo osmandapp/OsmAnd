@@ -136,12 +136,8 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int iconColor = enabled ? activeColor : defColor;
-
-		UiUtilities cache = app.getUIUtilities();
-		Drawable icon = cache.getPaintedIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(icon);
+		ivIcon.setImageResource(iconId);
 		ivIcon.setColorFilter(enabled ? activeColor : defColor);
 
 		TextView tvTitle = view.findViewById(R.id.title);

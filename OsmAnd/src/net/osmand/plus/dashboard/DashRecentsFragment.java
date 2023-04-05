@@ -16,10 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -87,7 +87,8 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 		OsmandApplication app = requireMyApplication();
 		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 		List<HistoryEntry> historyEntries = helper.getHistoryEntries(true);
-		if (Algorithms.isEmpty(historyEntries)) {
+
+		if (!app.getSettings().SEARCH_HISTORY.get() || Algorithms.isEmpty(historyEntries)) {
 			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;
 		} else {

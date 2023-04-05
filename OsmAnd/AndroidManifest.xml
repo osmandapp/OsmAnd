@@ -135,6 +135,16 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 
+			<intent-filter android:autoVerify="true">
+				<data android:scheme="http" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" />
+				<data android:pathPrefix="/premium" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+
 			<intent-filter>
 				<data android:scheme="http" />
 				<data android:scheme="https" />
@@ -1083,7 +1093,7 @@
 
 		<activity android:name="net.osmand.plus.plugins.development.TestVoiceActivity" />
 		<activity android:name="net.osmand.plus.plugins.development.LogcatActivity" />
-		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
+		<activity android:name="net.osmand.plus.download.DownloadActivity" android:exported="true" android:label="" />
 		<activity android:name="net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity" android:exported="true">
 
 			<intent-filter>

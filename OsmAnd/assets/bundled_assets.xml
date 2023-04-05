@@ -119,4 +119,9 @@
 	<asset source="weather/pressure_color.txt" destination="weather/pressure_color.txt" mode="copyOnlyIfDoesNotExist" />
 	<asset source="weather/temperature_color.txt" destination="weather/temperature_color.txt" mode="copyOnlyIfDoesNotExist" />
 	<asset source="weather/wind_color.txt" destination="weather/wind_color.txt" mode="copyOnlyIfDoesNotExist" />
+
+	<!-- Heightmap color profiles -->
+	<asset source="heightmap/color_slope.txt" destination="heightmap/color_slope.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="heightmap/hillshade_main.txt" destination="heightmap/hillshade_main.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="heightmap/slopes_main.txt" destination="heightmap/slopes_main.txt" mode="copyOnlyIfDoesNotExist" />
 </assets>

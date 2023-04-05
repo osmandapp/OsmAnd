@@ -637,9 +637,9 @@
     <string name="map_overlay">Mapa da camada superior</string>
     <string name="map_overlay_descr">Escolha o mapa da camada superior</string>
     <string name="tile_source_already_installed">Mapa previamente instalado, as \"Configurações\" serão atualizadas.</string>
-    <string name="select_tile_source_to_install">Selecione mosaicos de mapas para instalar ou atualizar.</string>
+    <string name="select_tile_source_to_install">Selecione as fontes do mapa de mosaicos:</string>
     <string name="internet_not_available">Não é possível executar a operação sem ligação à Internet.</string>
-    <string name="install_more">Instalar mais…</string>
+    <string name="install_more">Adicionar mais…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas rasterizados para tudo a partir deste nível.</string>
     <string name="level_to_switch_vector_raster">Nível mínimo de ampliação para vetorial</string>
     <string name="create_poi_link_to_osm_doc">Classificação de mapa <u>OSM Online</u> com imagens.</string>
@@ -1127,7 +1127,7 @@
     <string name="routing_attr_avoid_ferries_description">Evita balsas/ferries</string>
     <string name="routing_attr_avoid_motorway_name">Evitar autoestradas</string>
     <string name="routing_attr_avoid_motorway_description">Evita autoestradas</string>
-    <string name="routing_attr_weight_name">Peso máximo</string>
+    <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Especifique o limite de peso permitido do veículo em rotas.</string>
     <string name="android_19_location_disabled">Desde a versão Android 4.4 (KitKat) que não se pode descarregar e atualizar mapas no local de armazenamento anterior (%s). Quer alterar para um local com permissão e copiar todos os ficheiros do OsmAnd para lá\?
 \n Nota 1: os ficheiros antigos permanecerão intocados (mas podem ser eliminados manualmente).
@@ -1507,7 +1507,7 @@
     <string name="share_osm_edits_subject">Edições OSM partilhadas via OsmAnd</string>
     <string name="read_more">Ler mais</string>
     <string name="whats_new">Novidades</string>
-    <string name="rendering_attr_hideProposed_name">Construções planeadas</string>
+    <string name="rendering_attr_showProposed_name">Construções planeadas</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM adicionado</string>
     <string name="world_map_download_descr">O mapa base mundial (que cobre o mundo inteiro num nível de ampliação baixo) não existe ou está desatualizado. Considere descarregá-lo para uma visão global.</string>
@@ -2477,7 +2477,7 @@
     <string name="routing_attr_avoid_stairs_description">Evita escadas</string>
     <string name="routing_attr_avoid_borders_name">Evitar passagens por fronteiras</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzar fronteiras nacionais</string>
-    <string name="routing_attr_height_name">Altura máxima</string>
+    <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="route_is_too_long_v2">Para longas distâncias: adicione destinos intermédios se não for encontrada nenhuma rota dentro de 10 minutos.</string>
     <string name="driving_region_australia">Austrália</string>
@@ -3187,7 +3187,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
-    <string name="routing_attr_width_name">Largura máxima</string>
+    <string name="routing_attr_width_name">Largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
     <string name="avoid_in_routing_descr_">Evitar determinados tipos de rotas e estradas</string>
     <string name="app_mode_utv">Lado a lado</string>
@@ -3677,7 +3677,7 @@
     <string name="osm_edit_closed_note">Nota do OSM fechada</string>
     <string name="shared_string_uninstall_and_restart">Desinstalar e reiniciar</string>
     <string name="routing_attr_length_description">Especifique o comprimento do veículo a ser permitido nas rotas.</string>
-    <string name="routing_attr_length_name">Limite de comprimento</string>
+    <string name="routing_attr_length_name">Comprimento</string>
     <string name="speed_camera_pois">Radares de velocidade</string>
     <string name="shared_string_resume">Retomar</string>
     <string name="shared_string_bearing">Direção</string>
@@ -4404,7 +4404,7 @@
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="progress_complete">%1$s completo</string>
     <string name="storage_found_files_descr">Toque em \"%1$s\" para copiar %2$s ficheiros de \"%3$s\" para \"%4$s\". Pode demorar algum tempo.</string>
-    <string name="storage_copied_files_size">Foram copiados %1$s ficheiros (%2$s)</string>
+    <string name="storage_copied_files_size">%1$s ficheiro(s) processado(s), %2$s</string>
     <string name="storage_copying_files_size">A copiar %1$s ficheiros (%2$s)</string>
     <string name="storage_found_files_size">Encontrados %1$s ficheiros (%2$s)</string>
     <string name="shared_string_skip_warning">Ignorar a migração\? O OsmAnd deixou de ter acesso aos seus ficheiros no armazenamento partilhado.
@@ -4431,7 +4431,7 @@
     <string name="icon_group_education">Educação</string>
     <string name="icon_group_industrial">Industrial</string>
     <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s alterações nos últimos dois meses %2$s para ter acesso a atualizações de mapas a cada hora ilimitadas.</string>
-    <string name="migration_files_present">Existem %1$d ficheiros (%2$s) no local selecionado \"%3$s\".</string>
+    <string name="migration_files_present">%1$d ficheiro(s) (%2$s) já presente(s) no destino \'%3$s\' e não substituído(s).</string>
     <string name="fold_unfold">ocultar/mostrar</string>
     <string name="app_profile_type">Tipo de perfil da aplicação</string>
     <string name="map_marker_options">Opções de marcador de mapa</string>
@@ -4796,7 +4796,7 @@
     <string name="coordinates_widget_current_location">Coordenadas: localização atual</string>
     <string name="quick_action_map_center_widget_descr">Um alternador para mostrar ou esconder o widget do centro do mapa no mapa.</string>
     <string name="map_widget_camera_tilt_desc">Mostra o ângulo de inclinação da câmara no modo de perspetiva. A inclinação predefinida é de 90° (sem inclinação).</string>
-    <string name="map_widget_zoom_level">Nível de zoom</string>
+    <string name="map_widget_zoom_level">Nível de ampliação</string>
     <string name="map_widget_camera_distance">Elevação da câmara</string>
     <string name="developer_widgets">Widgets de desenvolvimento</string>
     <string name="map_widget_target_distance_desc">Mostra a distância entre a câmara e o local de destino.</string>
@@ -4836,7 +4836,7 @@
     <string name="map_widget_altitude_desc">Mostra a altitude da geolocalização atual ou a elevação do centro do mapa atual</string>
     <string name="terms_of_service_desc">Ao descarregar mapas, concorda com %1$s e %2$s.</string>
     <string name="map_widget_rendering_fps">FPS da renderização do mapa</string>
-    <string name="map_center_widget">Coordenadas:centro do mapa</string>
+    <string name="map_center_widget">Coordenadas: centro do mapa</string>
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Elevação: centro do mapa</string>
     <string name="map_widget_altitude_current_location_desc">Mostra a altitude acima do nível do mar da geolocalização atual.</string>
@@ -4985,7 +4985,6 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolinhas de rajadas de vento</string>
     <string name="open_weather_action">Abrir previsão meteorológica</string>
     <string name="open_weather_action_description">Permite que abra um ecrã com informações meteorológicas detalhadas.</string>
-    <string name="release_4_4_pre">• Aqui estarão as cadeias para a versão 4.4</string>
     <string name="shared_string_open">Aberto</string>
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
@@ -5043,16 +5042,12 @@
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
     <string name="display_position_automatic_descr">Depende da orientação do mapa: a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
-    <string name="default_tracks_appearance_description">Estas configurações de aparência são aplicadas a todos os trilhos selecionados no ecrã anterior.
-\n
-\nElas também são guardadas como \"%1$s\" para serem aplicadas por %2$s em todos os outros trilhos sem aparência implícita ou especificamente definida.</string>
     <string name="shared_string_select_recent">Selecionar recente</string>
     <string name="change_appearance">Alterar aparência</string>
     <string name="shared_string_kilograms">quilogramas</string>
     <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência dos trilhos %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicar alterações</string>
     <string name="shared_string_yards">jardas</string>
-    <string name="default_tracks_appearance">Aparência predefinida de trilho</string>
     <string name="no_visible_tracks_description">Selecione os trilhos a mostrar no mapa.</string>
     <string name="no_visible_tracks">Nenhum trilho no mapa</string>
     <string name="recently_visible">Visível recentemente %1$s</string>
@@ -5061,4 +5056,77 @@
     <string name="show_all_tracks">Mostrar todos os trilhos</string>
     <string name="shared_string_on_map">No mapa</string>
     <string name="empty_tracks">Não tem ficheiros de trilhos.</string>
+    <string name="approximate_bearing_descr">Obter a direção da rota a partir da rota de navegação que está a ser seguida.</string>
+    <string name="shared_string_inches">polegadas</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Direção aproximada</string>
+    <string name="cloud_version_confirm_delete">Eliminar \"%1$s\" do OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Eliminar ficheiro</string>
+    <string name="delete_cloud_version">Eliminar versão da nuvem</string>
+    <string name="local_version_do_not_exist">Não existe nenhuma versão local.</string>
+    <string name="shared_string_in_progress">A decorrer</string>
+    <string name="shared_string_original">Original</string>
+    <string name="movement_speed">Velocidade do movimento</string>
+    <string name="simulation_position_description">Selecione o ficheiro de um trilho que será usado na simulação do movimento.</string>
+    <string name="shared_string_add_manually">Adicionar manualmente…</string>
+    <string name="release_4_4">• Menu \"Trilhos\" em \"Configurar mapa\" melhorado
+\n
+\n • O menu de contexto agora mostra nomes localizados nos POIs
+\n
+\n • Adicionada opção para partilhar rota com uma hiperligação
+\n
+\n • Adicionada unidade de comprimento \"milhas náuticas/pés\"
+\n
+\n • A orientação do mapa agora tem um novo modo fixo
+\n
+\n • Ecrã inicial simplificado
+\n
+\n • Posição de localização fixa no modo de ecrã dividido no Android Auto
+\n
+\n • Adicionado gráfico \"Velocidade/inclinação\" na análise do trilho de navegação
+\n
+\n • O Android 13 mudou a escolha do idioma da aplicação para as configurações do sistema Android
+\n
+\n • Corrigidos problemas com a visualização de locais com menus veganos
+\n
+\n • Adicionada a possibilidade de descarregar mosaicos on-line usados como mapas da \"Camada superior\" ou \"Camada inferior\"
+\n
+\n • Adicionado suporte de unidades imperiais em \"Parâmetros do veículo\"
+\n
+\n • Novo perfil de ciclomotor
+\n
+\n • Nova opção \"Automático\" em \"Posição do ecrã\"
+\n
+\n • Corrigidos gestos para inclinação, aproximação e rotação
+\n
+\n</string>
+    <string name="sort_duration_ascending">Primeiro a duração mais curta</string>
+    <string name="sort_duration_descending">Primeiro a duração mais longa</string>
+    <string name="sort_distance_ascending">Primeiro a distância mais curta</string>
+    <string name="sort_distance_descending">Primeiro a distância mais longa</string>
+    <string name="sort_date_ascending">Primeiro a data mais recente</string>
+    <string name="sort_date_descending">Primeiro a data mais antiga</string>
+    <string name="selected_value">Valor selecionado</string>
+    <string name="shared_string_nearest">Mais perto</string>
+    <string name="app_mode_moped">Ciclomotor</string>
+    <string name="enable_3d_maps">Ativar mapas 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombras de vértice em 3D</string>
+    <string name="generate_slope_from_3d_maps">Gera mapas raster de declives a partir de mapas 3D</string>
+    <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
+    <string name="shared_string_all_world">Mundo inteiro</string>
+    <string name="clear_online_cache_description">Isto irá limpar todos os ficheiros temporários dos mosaicos de previsão meteorológica online.</string>
+    <string name="clear_online_cache">Limpar cache online</string>
+    <string name="offline_cache">Cache offline</string>
+    <string name="app_mode_climbing">Escalada</string>
+    <string name="shared_string_pounds">libras</string>
+    <string name="weather_forecast">Previsão meteorológica</string>
+    <string name="token_is_not_valid">O token não é válido</string>
+    <string name="free_maps_updates">Atualizações gratuitas (emergências)</string>
+    <string name="shared_string_alt_name">Nome alternativo</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="test_heightmap">Mapa de testes de altitude</string>
+    <string name="common_weight_limit_error">O valor mínimo é \"%1$s\" %2$s. Use o perfil \"%3$s\" se o peso do veículo for inferior ao valor mínimo.</string>
+    <string name="offline_weather_forecast">Previsão meteorológica sem ligação à Internet</string>
+    <string name="offline_weather_forecast_desc">Pode descarregar a previsão meteorológica para os próximos 7 dias.</string>
+    <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
 </resources>

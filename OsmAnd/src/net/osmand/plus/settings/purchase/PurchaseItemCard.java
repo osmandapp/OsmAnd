@@ -16,7 +16,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.purchase.data.PurchaseUiData;
@@ -71,7 +70,7 @@ public class PurchaseItemCard extends BaseCard {
 
 		if (purchase.isSubscription() && !purchase.isPromo()) {
 			prepareSubscriptionCard();
-		} else if (purchase.isPromo()){
+		} else if (purchase.isPromo()) {
 			preparePromoCard();
 		} else {
 			prepareOneTimePaymentCard();

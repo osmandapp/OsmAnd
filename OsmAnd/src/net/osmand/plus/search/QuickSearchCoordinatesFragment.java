@@ -40,7 +40,6 @@ import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 import com.jwetherell.openmap.common.ZonedUTMPoint;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.LocationConvert;
@@ -49,8 +48,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -58,8 +55,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -156,7 +157,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.color_white : R.color.text_color_primary_dark));
 
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 
 		if(currentFormat == -1)
@@ -997,7 +998,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private void updateDistanceDirection(View view, LatLon latLon) {
 		TextView distanceText = view.findViewById(R.id.distance);
 		ImageView direction = view.findViewById(R.id.direction);
-		getMyApplication().getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, latLon);
+		UpdateLocationUtils.updateLocationView(getMyApplication(), updateLocationViewCache, direction, distanceText, latLon);
 	}
 
 	public static void showDialog(DialogFragment parentFragment, String text) {

@@ -250,23 +250,19 @@ public class TransportRoutingHelper {
 	private void updateProgress(TransportRouteCalculationParams params) {
 		TransportRouteCalculationProgressCallback progressRoute = this.progressRoute;
 		if (progressRoute != null) {
-			app.runInUIThread(new Runnable() {
-
-				@Override
-				public void run() {
-					RouteCalculationProgress calculationProgress = params.calculationProgress;
-					if (isRouteBeingCalculated()) {
-						float pr = calculationProgress.getLinearProgress();
-						progressRoute.updateProgress((int) pr);
-						if (lastTask != null && lastTask.params == params) {
-							updateProgress(params);
-						}
-					} else {
-						if (routes != null && routes.size() > 0) {
-							setCurrentRoute(0);
-						}
-						progressRoute.finish();
+			app.runInUIThread(() -> {
+				RouteCalculationProgress calculationProgress = params.calculationProgress;
+				if (isRouteBeingCalculated()) {
+					float pr = calculationProgress.getLinearProgress();
+					progressRoute.updateProgress((int) pr);
+					if (lastTask != null && lastTask.params == params) {
+						updateProgress(params);
 					}
+				} else {
+					if (routes != null && routes.size() > 0) {
+						setCurrentRoute(0);
+					}
+					progressRoute.finish();
 				}
 			}, 300);
 		}
@@ -294,25 +290,22 @@ public class TransportRoutingHelper {
 
 	private void setNewRoute(List<TransportRouteResult> res) {
 		app.logRoutingEvent("setNewRoute res " + res);
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				ValueHolder<Boolean> showToast = new ValueHolder<>();
-				showToast.value = true;
-				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while (it.hasNext()) {
-					WeakReference<IRouteInformationListener> ref = it.next();
-					IRouteInformationListener l = ref.get();
-					if (l == null) {
-						it.remove();
-					} else {
-						l.newRouteIsCalculated(true, showToast);
-					}
+		app.runInUIThread(() -> {
+			ValueHolder<Boolean> showToast = new ValueHolder<>();
+			showToast.value = true;
+			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+			while (it.hasNext()) {
+				WeakReference<IRouteInformationListener> ref = it.next();
+				IRouteInformationListener l = ref.get();
+				if (l == null) {
+					it.remove();
+				} else {
+					l.newRouteIsCalculated(true, showToast);
 				}
-				if (showToast.value && PluginsHelper.isDevelopment()) {
-					String msg = "Public transport routes calculated: " + res.size();
-					app.showToastMessage(msg);
-				}
+			}
+			if (showToast.value && PluginsHelper.isDevelopment()) {
+				String msg = "Public transport routes calculated: " + res.size();
+				app.showToastMessage(msg);
 			}
 		});
 	}
@@ -329,18 +322,15 @@ public class TransportRoutingHelper {
 		routes = null;
 		walkingRouteSegments = null;
 		app.getWaypointHelper().setNewRoute(new RouteCalculationResult(""));
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
-				while (it.hasNext()) {
-					WeakReference<IRouteInformationListener> ref = it.next();
-					IRouteInformationListener l = ref.get();
-					if (l == null) {
-						it.remove();
-					} else {
-						l.routeWasCancelled();
-					}
+		app.runInUIThread(() -> {
+			Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+			while (it.hasNext()) {
+				WeakReference<IRouteInformationListener> ref = it.next();
+				IRouteInformationListener l = ref.get();
+				if (l == null) {
+					it.remove();
+				} else {
+					l.routeWasCancelled();
 				}
 			}
 		});
@@ -650,12 +640,7 @@ public class TransportRoutingHelper {
 
 		private void showMessage(String msg) {
 			OsmandApplication app = routingHelper.getApplication();
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					app.showToastMessage(msg);
-				}
-			});
+			app.runInUIThread(() -> app.showToastMessage(msg));
 		}
 
 		@Override

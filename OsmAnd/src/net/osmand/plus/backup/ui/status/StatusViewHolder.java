@@ -76,7 +76,8 @@ public class StatusViewHolder extends RecyclerView.ViewHolder {
 			icon.setImageDrawable(uiUtilities.getIcon(status.statusIconRes));
 		}
 
-		AndroidUiHelper.updateVisibility(divider, false);
+		AndroidUiHelper.updateVisibility(divider, preparing);
+
 		AndroidUiHelper.updateVisibility(progressBar, exportTask != null || preparing);
 		AndroidUiHelper.updateVisibility(description, exportTask == null || preparing);
 	}

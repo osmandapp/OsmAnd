@@ -462,9 +462,9 @@
     <string name="map_overlay">Harta de deasupra</string>
     <string name="map_overlay_descr">Alegeți harta suprapusă</string>
     <string name="tile_source_already_installed">Harta deja instalată, \'Settings\' va fi actualizată.</string>
-    <string name="select_tile_source_to_install">Alegeți hărți ( plăci) de instalat sau actualizat.</string>
+    <string name="select_tile_source_to_install">Selectați sursele de hărți cu plăci:</string>
     <string name="internet_not_available">Nu se poate efectua operațiunea fără conexiune la Internet.</string>
-    <string name="install_more">Instalați mai multe…</string>
+    <string name="install_more">Adăugați mai multe…</string>
     <string name="level_to_switch_vector_raster_descr">Folosiți hărți raster pentru tot ceea ce depășește acest nivel.</string>
     <string name="level_to_switch_vector_raster">Nivelul minim de zoom vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>Clasificarea online a hărților OSM</u> cu ajutorul imaginilor.</string>
@@ -931,7 +931,7 @@
     <string name="routing_attr_avoid_ferries_description">Evitați feriboturile</string>
     <string name="routing_attr_avoid_motorway_name">Fără autostrăzi</string>
     <string name="routing_attr_avoid_motorway_description">Evitați autostrăzile</string>
-    <string name="routing_attr_weight_name">Limită greutate</string>
+    <string name="routing_attr_weight_name">Greutate</string>
     <string name="routing_attr_weight_description">Specificați limita permisă a greutății vehiculului pe rute.</string>
     <string name="android_19_location_disabled">Începând cu versiunea de Android 4.4 (KitKat) nu poți descărca și actualiza harta în directorul de stocare anterior (%s). Vrei să modifici locația de stocare la un permisivă și să copiezi toate fișierele OsmAnd acolo\?
 \n Nota 1: Fișierele vechi vor rămâne nemodificate (dar pot fi șterse manual).
@@ -1417,7 +1417,7 @@
     <string name="lang_mk">Macedoneană</string>
     <string name="read_more">Citește mai multe</string>
     <string name="whats_new">Ce-i nou în</string>
-    <string name="rendering_attr_hideProposed_name">Obiecte propuse</string>
+    <string name="rendering_attr_showProposed_name">Obiecte propuse</string>
     <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_upload">Încarcă (upload)</string>
     <string name="osm_edit_created_poi">Punct de interes OSM creat</string>
@@ -1931,7 +1931,7 @@
     <string name="unlock_all_features">Deblochează toate funcționalitățile OsmAnd</string>
     <string name="purchase_dialog_title">Alege planul</string>
     <string name="shared_string_only_with_wifi">Numai pe Wi-Fi</string>
-    <string name="wikivoyage_download_pics">Descarcă imagini</string>
+    <string name="wikivoyage_download_pics">Descărcați imagini</string>
     <string name="shared_string_wifi_only">Numai pe Wi-Fi</string>
     <string name="images_cache">Cache de imagine</string>
     <string name="delete_search_history">Șterge istoricul de căutare</string>
@@ -2066,7 +2066,7 @@
     <string name="routing_attr_avoid_stairs_description">Evitați treptele</string>
     <string name="routing_attr_avoid_borders_name">Fără treceri de frontieră</string>
     <string name="routing_attr_avoid_borders_description">Evitați trecerea granițelor naționale</string>
-    <string name="routing_attr_height_name">Limită înălțime</string>
+    <string name="routing_attr_height_name">Înălțime</string>
     <string name="driving_region_australia">Australia</string>
     <string name="distance_measurement_start_editing">Începe editarea</string>
     <string name="distance_measurement_finish_editing">Termină editarea</string>
@@ -2559,7 +2559,7 @@
     <string name="screen_alerts">Alerte ecran</string>
     <string name="route_parameters_descr">Configurați parametrii rutei</string>
     <string name="route_parameters">Parametrii rutei</string>
-    <string name="routing_attr_width_name">Limită lățime</string>
+    <string name="routing_attr_width_name">Lățime</string>
     <string name="routing_attr_width_description">Specificați limita permisă pentru lățimea vehiculului pe rute.</string>
     <string name="dialogs_and_notifications_title">Dialoguri și notificări</string>
     <string name="shared_string_crash">Blocat</string>
@@ -2851,7 +2851,7 @@
     <string name="add_online_source">Adăugare surse online</string>
     <string name="quick_action_showhide_mapillary_descr">O comutare să afișeze sau să ascundă stratul Mapillary pe hartă.</string>
     <string name="routing_attr_length_description">Specificați lungimea vehiculului care trebuie permisă pe rute.</string>
-    <string name="routing_attr_length_name">Limită lungime</string>
+    <string name="routing_attr_length_name">Lungime</string>
     <string name="shared_string_bearing">Direcție</string>
     <string name="item_deleted">%1$s șters</string>
     <string name="shared_string_uninstall_and_restart">Dezinstalare și repornire</string>
@@ -4417,7 +4417,7 @@
     <string name="files_remaining">Fișiere rămase: %1$s %2$s</string>
     <string name="from_to_with_params">De la %1$s spre %2$s</string>
     <string name="progress_complete">%1$s complet</string>
-    <string name="storage_copied_files_size">A copiat %1$s fișiere %2$s</string>
+    <string name="storage_copied_files_size">A procesat %1$s fișier(e) %2$s</string>
     <string name="storage_copying_files_size">Copierea fișierelor %1$s %2$s</string>
     <string name="storage_found_files_size">Am găsit %1$s fișiere %2$s</string>
     <string name="shared_storage_first_step">Apăsați \"%1$s\".
@@ -4439,7 +4439,7 @@
 \nCopiați toate datele în noul folder.</string>
     <string name="folder_access_denied">Permisiune necesară pentru a accesa folderul selectat.</string>
     <string name="shared_string_copy_to">Copiați la</string>
-    <string name="migration_files_present">Există %1$d fișiere (%2$s) în locația selectată \"%3$s\".</string>
+    <string name="migration_files_present">%1$d fișier(e) (%2$s) deja prezent) la ținta \"%3$s\" și nu a fost suprascris.</string>
     <string name="memory_allocated_for_routing_ds">O alocare mai mare a memoriei va accelera calcularea rutelor lungi (peste 500 km), dar poate avea un impact asupra performanței altor aplicații.
 \nNu are niciun impact asupra vitezei de calcul a traseelor scurte.</string>
     <string name="display_groups_visibility_dialog_description">Puteți controla vizibilitatea grupului pe hartă. Dacă pista este ascunsă, toate grupurile vor fi și ele ascunse.</string>
@@ -4986,7 +4986,6 @@
     <string name="checking_progress">Verificare…</string>
     <string name="shared_string_modified">Modificat</string>
     <string name="shared_string_open">Deschis</string>
-    <string name="release_4_4_pre">• Aici vor fi notițele pentru lansarea 4.4</string>
     <string name="shared_string_uploaded">Încărcat</string>
     <string name="modified_file">Fișier modificat</string>
     <string name="download_cloud_version">Descărcați versiunea de pe Cloud</string>
@@ -5057,10 +5056,69 @@
     <string name="shared_string_yards">yarzi</string>
     <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul pieselor %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicați modificările</string>
-    <string name="default_tracks_appearance_description">Aceste setări de aspect se aplică tuturor pieselor selectate în ecranul anterior.
-\n
-\nEle sunt, de asemenea, salvate ca \"%1$s\" pentru a fi aplicate de %2$s pentru toate celelalte piste fără aspect implicit sau specificat.</string>
-    <string name="default_tracks_appearance">Aspectul implicit al track-ului</string>
     <string name="no_visible_tracks">Nu există urme pe hartă</string>
     <string name="shared_string_select_recent">Selectați recent</string>
+    <string name="sort_duration_descending">Prima cea mai lungă durată</string>
+    <string name="sort_distance_ascending">Mai întâi cea mai scurtă distanță</string>
+    <string name="sort_distance_descending">Prima cea mai lungă distanță</string>
+    <string name="sort_date_ascending">Cea mai nouă dată mai întâi</string>
+    <string name="sort_date_descending">Data cea mai veche mai întâi</string>
+    <string name="shared_string_nearest">Cea mai apropiată</string>
+    <string name="shared_string_add_manually">Adăugați manual…</string>
+    <string name="sort_duration_ascending">Mai întâi o durată mai scurtă</string>
+    <string name="selected_value">Valoarea selectată</string>
+    <string name="delete_cloud_version">Ștergeți versiunea cloud</string>
+    <string name="local_version_do_not_exist">Nu există o versiune locală.</string>
+    <string name="shared_string_in_progress">În curs de desfășurare</string>
+    <string name="shared_string_original">Originalul</string>
+    <string name="movement_speed">Viteza de mișcare</string>
+    <string name="cloud_version_confirm_delete">Ștergeți \"%1$s\" din OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Ștergeți fișierul</string>
+    <string name="simulation_position_description">Selectați un fișier track care va fi utilizat ca sursă pentru mutarea locației.</string>
+    <string name="inch">în</string>
+    <string name="shared_string_inches">inci</string>
+    <string name="release_4_4">- Îmbunătățirea meniului \"Urme\" din \"Configurare hartă\"
+\n
+\n - Meniul contextual afișează acum denumirile localizate pentru POI-uri
+\n
+\n - A fost adăugată opțiunea de partajare a traseului prin link
+\n
+\n - A fost adăugată unitatea de lungime \"Mile marine/pietri\"
+\n
+\n - Orientarea hărții a adăugat un nou mod fix
+\n
+\n - Ecran de pornire simplificat
+\n
+\n - AFixată poziția locației în modul ecran divizat în Android Auto
+\n
+\n - A fost adăugat graficul \"Speed/Slope\" pentru analiza traseului
+\n
+\n - Android 13 a mutat selecția limbii aplicației în setările sistemului
+\n
+\n - Au fost rezolvate problemele legate de afișarea locurilor Vegan
+\n
+\n</string>
+    <string name="approximate_bearing">Rulmentul aproximativ</string>
+    <string name="approximate_bearing_descr">Deduceți relevmentul din ruta de navigație urmată.</string>
+    <string name="clear_online_cache">Ștergeți memoria cache online</string>
+    <string name="offline_cache">Memoria cache offline</string>
+    <string name="shared_string_alt_name">Denumire alternativă</string>
+    <string name="clear_online_cache_description">Acest lucru va șterge toată memoria cache pentru panoul meteo online.</string>
+    <string name="token_is_not_valid">Tokenul nu este valabil</string>
+    <string name="app_mode_climbing">Escaladare</string>
+    <string name="free_maps_updates">Actualizări gratuite (de urgență)</string>
+    <string name="offline_weather_forecast">Prognoza meteo offline</string>
+    <string name="offline_weather_forecast_desc">Puteți descărca prognoza meteo pentru 7 zile.</string>
+    <string name="generate_slope_from_3d_maps">Generarea de hărți raster de pantă din hărți 3D</string>
+    <string name="enable_3d_maps">Activați hărțile 3D</string>
+    <string name="test_heightmap">Harta înălțimii de testare</string>
+    <string name="shared_string_pounds">lire sterline</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="shared_string_all_world">Toată lumea</string>
+    <string name="generate_hillshade_from_3d_maps">Generarea de hărți raster hillshade din hărți 3D</string>
+    <string name="disable_vertex_hillshade_3d">Dezactivați umbra vertexurilor în 3D</string>
+    <string name="common_weight_limit_error">Valoarea minimă este \"%1$s\" %2$s. Utilizați profilul \"%3$s\" dacă greutatea vehiculului este mai mică decât valoarea minimă.</string>
+    <string name="weather_forecast_is_outdated">Previziunile sunt depășite.</string>
+    <string name="weather_forecast">Prognoza meteo</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>

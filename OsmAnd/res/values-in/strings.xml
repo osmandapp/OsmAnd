@@ -1939,7 +1939,7 @@
     <string name="foot">kaki</string>
     <string name="system_locale">Sistem</string>
     <string name="error_doing_search">Tidak dapat melakukan pencarian luring.</string>
-    <string name="install_more">Pasang lebih banyak…</string>
+    <string name="install_more">Tambahkan lebih banyak…</string>
     <string name="incomplete_locale">belum lengkap</string>
     <string name="backup_version_history">Riwayat versi</string>
     <string name="delete_version_history">Hapus riwayat versi</string>
@@ -2399,12 +2399,12 @@
     <string name="background_service_provider">Penyedia lokasi</string>
     <string name="display_groups_visibility_dialog_description">Anda dapat mengatur visibilitas grup pada peta. Jika trek tersembunyi, semua grup juga akan tersembunyi.</string>
     <string name="storage_found_files_descr">Ketuk \"%1$s\" untuk menyalin %2$s berkas dari \"%3$s\" ke \"%4$s\". Ini mungkin membutuhkan beberapa waktu.</string>
-    <string name="storage_copied_files_size">Disalin %1$s berkas %2$s</string>
+    <string name="storage_copied_files_size">Diproses %1$s berkas, %2$s</string>
     <string name="device_memory">Memori perangkat</string>
     <string name="poi_namefinder_query_empty">Ketik untuk mencari POI</string>
     <string name="background_router_service">Jalankan OsmAnd di latar belakang</string>
     <string name="layer_map">Sumber peta…</string>
-    <string name="migration_files_present">Ada %1$d berkas (%2$s) di lokasi \'%3$s\' yang dipilih.</string>
+    <string name="migration_files_present">%1$d (%2$s) yang sudah ada di target \'%3$s\' dan tidak ditimpa.</string>
     <string name="map_orientation_default">Sama seperti perangkat</string>
     <string name="routing_attr_avoid_toll_name">Tidak ada jalan tol</string>
     <string name="shared_storage_migration_descr">Karena perubahan dalam pengaksesan penyimpanan Android, OsmAnd tidak dapat lagi menggunakan %1$s.
@@ -2471,7 +2471,7 @@
     <string name="layer_underlay">Peta dasaran…</string>
     <string name="map_underlay">Peta dasaran</string>
     <string name="map_underlay_descr">Pilih peta dasaran</string>
-    <string name="select_tile_source_to_install">Pilih (ubin) peta untuk dipasang atau diperbarui.</string>
+    <string name="select_tile_source_to_install">Pilih sumber peta ubin:</string>
     <string name="internet_not_available">Tidak dapat melakukan operasi tanpa koneksi internet.</string>
     <string name="send_location_email_pattern">Untuk melihat lokasi ikuti tautan web %1$s atau tautan intent Android %2$s</string>
     <string name="osmand_routing_experimental">Navigasi luring OsmAnd adalah fitur eksperimental dan tidak bekerja dengan jarak yang lebih panjang dari 20 km.
@@ -3229,7 +3229,7 @@
     <string name="mercator_projection">Proyeksi Mercator</string>
     <string name="speed_cameras_restart_descr">Mulai ulang aplikasi untuk menghapus semua data kamera kecepatan.</string>
     <string name="shared_string_bearing">Bantalan</string>
-    <string name="routing_attr_length_name">Batas panjang</string>
+    <string name="routing_attr_length_name">Panjang</string>
     <string name="vessel_height_limit_description">Atur ketinggian kapal untuk menghindari jembatan rendah. Perlu diingat, jika jembatan itu dapat dipindah, kita akan menggunakan ketinggiannya dalam keadaan terbuka.</string>
     <string name="release_4_2">• Desain baru widget: Tampilan &amp; Nuansa baru, kelompokkan berdasarkan Laman, ubah urutan, dan gabungkan sesuai keinginan.
 \n
@@ -3538,7 +3538,7 @@
     <string name="local_indexes_cat_srtm">Garis kontur</string>
     <string name="av_def_action_choose">Pada permintaan</string>
     <string name="delete_target_point">Hapus tujuan</string>
-    <string name="routing_attr_height_name">Batas ketinggian</string>
+    <string name="routing_attr_height_name">Tinggi</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Jalan raya non-kendaraan</string>
     <string name="speak_cameras">Kamera kecepatan</string>
     <string name="storage_directory_manual">Ditetapkan secara manual</string>
@@ -3555,7 +3555,7 @@
     <string name="gpx_selection_number_of_points">%1$s titik</string>
     <string name="gpx_selection_point">Titik %1$s</string>
     <string name="lang_no">Norwegia</string>
-    <string name="routing_attr_weight_name">Batas berat</string>
+    <string name="routing_attr_weight_name">Berat</string>
     <string name="battery_widget_desc">Menampilkan tingkat baterai perangkat Anda.</string>
     <string name="arrival_time_widget_desc">Waktu tiba di titik tujuan.</string>
     <string name="shared_string_widget">Widget</string>
@@ -3870,7 +3870,7 @@
     <string name="lang_nn">Nynorsk Norwegia</string>
     <string name="rendering_value_translucent_red_name">Merah tembus pandang</string>
     <string name="shared_string_not_selected">Tidak terpilih</string>
-    <string name="rendering_attr_hideProposed_name">Obyek yang diusulkan</string>
+    <string name="rendering_attr_showProposed_name">Obyek yang diusulkan</string>
     <string name="favourites_edit_dialog_title">Info favorit</string>
     <string name="shared_string_trip_recording">Rekaman perjalanan</string>
     <string name="rendering_value_translucent_purple_name">Ungu tembus pandang</string>
@@ -4313,7 +4313,7 @@
     <string name="map_widget_show_destination_arrow">Tampilkan arah tujuan</string>
     <string name="precise_routing_mode">Perutean akurat (alpha)</string>
     <string name="shared_string_normal">Normal</string>
-    <string name="routing_attr_width_name">Batas kelebaran</string>
+    <string name="routing_attr_width_name">Lebar</string>
     <string name="clear_intermediate_points">Hapus tujuan perantara</string>
     <string name="map_widget_time">Waktu untuk bepergian</string>
     <string name="show_zoom_buttons_navigation">Tampilkan tombol perbesaran dan perkecilan</string>
@@ -4988,7 +4988,6 @@
     <string name="open_weather_action">Buka cuaca</string>
     <string name="shared_string_purchased_on">Dibeli pada</string>
     <string name="shared_string_expires">Kedaluwarsa pada</string>
-    <string name="release_4_4_pre">• Di sini akan ada string untuk rilis 4.4</string>
     <string name="checking_progress">Memeriksa…</string>
     <string name="res_unknown">Tidak diketahui</string>
     <string name="check_for_updates">Periksa pembaruan</string>
@@ -5044,10 +5043,6 @@
     <string name="last_synchronized">Disinkronkan terakhir</string>
     <string name="display_position_automatic_descr">Tergantung pada orientasi Peta: bagian bawah untuk arah pergerakan, bagian tengah untuk yang lainnya.</string>
     <string name="shared_string_apply_changes">Terapkan perubahan</string>
-    <string name="default_tracks_appearance_description">Pengaturan penampilan ini diterapkan ke semua trek yang dipilih pada layar sebelumnya.
-\n
-\nPengaturan ini juga disimpan sebagai \"%1$s\" untuk diterapkan oleh %2$s untuk semua trek lain tanpa tampilan implisit atau yang diatur secara khusus.</string>
-    <string name="default_tracks_appearance">Tampilan trek bawaan</string>
     <string name="no_visible_tracks_description">Pilih trek untuk ditampilkan di peta.</string>
     <string name="no_visible_tracks">Tidak ada trek di peta</string>
     <string name="recently_visible">Terlihat terkini %1$s</string>
@@ -5059,4 +5054,79 @@
     <string name="show_all_tracks">Tampilkan semua trek</string>
     <string name="shared_string_on_map">Di peta</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ubah tampilan trek %1$s\?</string>
+    <string name="shared_string_yards">yard</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="approximate_bearing_descr">Dapatkan arah dari rute navigasi yang diikuti.</string>
+    <string name="shared_string_inches">inci</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Perkiraan bantalan</string>
+    <string name="local_version_do_not_exist">Tidak ada versi lokal yang tersedia.</string>
+    <string name="shared_string_in_progress">Dalam proses</string>
+    <string name="shared_string_original">Asli</string>
+    <string name="movement_speed">Kecepatan gerakan</string>
+    <string name="shared_string_delete_file">Hapus berkas</string>
+    <string name="delete_cloud_version">Hapus versi awan</string>
+    <string name="simulation_position_description">Pilih file track yang akan digunakan sebagai sumber untuk pemindahan lokasi.</string>
+    <string name="cloud_version_confirm_delete">Hapus \"%1$s\" dari OsmAnd Cloud\?</string>
+    <string name="shared_string_add_manually">Tambahkan secara manual…</string>
+    <string name="release_4_4">- Menu \"Trek\" yang lebih baik di \"Konfigurasi Peta\"
+\n
+\n - Menu konteks sekarang menampilkan nama yang dilokalkan untuk POI
+\n
+\n - Menambahkan opsi untuk berbagi rute dengan tautan
+\n
+\n - Menambahkan satuan panjang \"mil laut/kaki\"
+\n
+\n - Orientasi peta menambahkan mode tetap baru
+\n
+\n - Layar awal yang disederhanakan
+\n
+\n - Memperbaiki posisi lokasi dalam mode layar terbagi di Android Auto
+\n
+\n - Menambahkan grafik \"Kecepatan/Kemiringan\" untuk analisis lintasan
+\n
+\n - Android 13 memindahkan pemilihan bahasa aplikasi ke pengaturan sistem
+\n
+\n - Memperbaiki masalah dalam menampilkan tempat Vegan
+\n
+\n - Menambahkan kemungkinan untuk mengunduh ubin online yang digunakan sebagai peta \"Overlay\" atau \"Underlay\"
+\n
+\n - Menambahkan dukungan unit kekaisaran untuk \"Parameter kendaraan\"
+\n
+\n - Profil Moped baru
+\n
+\n - \"Posisi tampilan\" menambahkan opsi baru \"Otomatis\"
+\n
+\n - Memperbaiki gerakan peta untuk kemiringan, zoom, dan rotasi
+\n
+\n</string>
+    <string name="sort_date_descending">Tanggal paling lama dahulu</string>
+    <string name="sort_duration_ascending">Durasi terpendek dahulu</string>
+    <string name="shared_string_nearest">Terdekat</string>
+    <string name="selected_value">Nilai yang dipilih</string>
+    <string name="sort_duration_descending">Durasi terpanjang dahulu</string>
+    <string name="sort_distance_ascending">Jarak terpendek dahulu</string>
+    <string name="sort_distance_descending">Jarak terpanjang dahulu</string>
+    <string name="sort_date_ascending">Tanggal terbaru dahulu</string>
+    <string name="app_mode_moped">Moped</string>
+    <string name="generate_hillshade_from_3d_maps">Buat peta raster bayangan bukit dari peta 3D</string>
+    <string name="generate_slope_from_3d_maps">Buat peta raster kemiringan dari peta 3D</string>
+    <string name="disable_vertex_hillshade_3d">Nonaktifkan bayangan bukit verteks dalam 3D</string>
+    <string name="test_heightmap">Uji coba peta ketinggian</string>
+    <string name="app_mode_climbing">Mendaki</string>
+    <string name="enable_3d_maps">Aktifkan peta 3D</string>
+    <string name="weather_forecast_is_outdated">Prakiraan kedaluwarsa.</string>
+    <string name="shared_string_pounds">pound</string>
+    <string name="shared_string_all_world">Semua dunia</string>
+    <string name="offline_weather_forecast">Prakiraan cuaca luring</string>
+    <string name="clear_online_cache">Hapus tembolok daring</string>
+    <string name="offline_cache">Tembolok daring</string>
+    <string name="clear_online_cache_description">Ini akan menghapus semua tembolok untuk ubin cuaca daring.</string>
+    <string name="shared_string_alt_name">Nama alternatif</string>
+    <string name="token_is_not_valid">Token tidak valid</string>
+    <string name="metric_lbs">lb</string>
+    <string name="weather_forecast">Prakiraan cuaca</string>
+    <string name="offline_weather_forecast_desc">Anda dapat mengunduh prakiraan cuaca untuk 7 hari.</string>
+    <string name="common_weight_limit_error">Nilai minimum adalah \"%1$s\" %2$s. Gunakan profil \"%3$s\" jika ketinggian kendaraan kurang dari nilai minimum.</string>
+    <string name="free_maps_updates">Pembaruan gratis (darurat)</string>
 </resources>

@@ -46,8 +46,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private static final String CATEGORY_NAME_KEY = "category_key";
 	private static final String ALL_SELECTED_KEY = "all_selected";
 	private static final String ACCEPTED_CATEGORIES_KEY = "accepted_categories";
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
 	private PoiCategory poiCategory;
 	private List<PoiType> poiTypeList;
 	private Set<String> acceptedCategories;
@@ -78,9 +76,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		uiUtilities = app.getUIUtilities();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			poiCategory = app.getPoiTypes().getPoiCategoryByName(savedInstanceState.getString(CATEGORY_NAME_KEY));
 			selectAll = savedInstanceState.getBoolean(ALL_SELECTED_KEY);
@@ -205,7 +201,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		ImageView searchIcon = root.findViewById(R.id.search_icon);
-		searchIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_search_dark, nightMode));
+		searchIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_search_dark, nightMode));
 		searchIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -214,7 +210,7 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		ImageView searchCloseIcon = root.findViewById(R.id.search_close);
-		searchCloseIcon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_cancel, nightMode));
+		searchCloseIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_cancel, nightMode));
 		searchCloseIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

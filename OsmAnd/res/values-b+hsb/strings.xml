@@ -93,7 +93,7 @@
     <string name="lang_als">albansce (toskisce)</string>
     <string name="read_more">Wjace čitać</string>
     <string name="whats_new">Nowosće w</string>
-    <string name="rendering_attr_hideProposed_name">Namjetowane objekty</string>
+    <string name="rendering_attr_showProposed_name">Namjetowane objekty</string>
     <string name="shared_string_update">Aktualizowanje</string>
     <string name="shared_string_upload">Nahrać</string>
     <string name="osm_edit_created_poi">OSM POI-dypk wutworjeny</string>

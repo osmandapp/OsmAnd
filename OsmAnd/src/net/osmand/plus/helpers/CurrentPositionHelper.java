@@ -108,12 +108,8 @@ public class CurrentPositionHelper {
 			}
 			int request = requestNumber.incrementAndGet();
 			AtomicInteger finalRequestNumber = requestNumber;
-			singleThreadExecutor.submit(new Runnable() {
-				@Override
-				public void run() {
-					processGeocoding(loc, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch);
-				}
-			});
+			singleThreadExecutor.submit(() -> processGeocoding(loc, geoCoding, storeFound,
+					allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch));
 			res = true;
 		}
 		return res;
@@ -167,19 +163,9 @@ public class CurrentPositionHelper {
 
 		if (cancelPreviousSearch && request != requestNumber.get()) {
 			if (geoCoding != null) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						geoCoding.publish(null);
-					}
-				});
+				app.runInUIThread(() -> geoCoding.publish(null));
 			} else if (result != null) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						result.publish(null);
-					}
-				});
+				app.runInUIThread(() -> result.publish(null));
 			}
 			return;
 		}
@@ -193,20 +179,10 @@ public class CurrentPositionHelper {
 			try {
 				justifyResult(gr, geoCoding);
 			} catch (Exception e) {
-				app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							geoCoding.publish(null);
-						}
-					});
+				app.runInUIThread(() -> geoCoding.publish(null));
 			}
 		} else if (result != null) {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad());
-				}
-			});
+			app.runInUIThread(() -> result.publish(gr == null || gr.isEmpty() ? null : gr.get(0).point.getRoad()));
 		}
 	}
 

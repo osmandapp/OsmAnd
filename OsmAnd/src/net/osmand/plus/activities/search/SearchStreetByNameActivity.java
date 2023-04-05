@@ -160,13 +160,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 					return namesFilter.isCancelled;
 				}
 			});
-			runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					finishInitializing(res);					
-				}
-			});
+			runOnUiThread(() -> finishInitializing(res));
 		}
 		return result[0];
 	}

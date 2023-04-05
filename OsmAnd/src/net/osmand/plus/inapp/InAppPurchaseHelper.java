@@ -22,7 +22,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
@@ -109,7 +109,7 @@ public abstract class InAppPurchaseHelper {
 		long startTime;
 		long expireTime;
 		PeriodUnit periodUnit;
-		SubscriptionOrigin origin;
+		PurchaseOrigin origin;
 	}
 
 	public enum InAppPurchaseTaskType {
@@ -618,10 +618,10 @@ public abstract class InAppPurchaseHelper {
 					stateHolder.state = SubscriptionState.getByStateStr(state);
 					stateHolder.startTime = subObj.optLong("start_time");
 					stateHolder.expireTime = subObj.optLong("expire_time");
-					stateHolder.origin = getSubscriptionOriginBySku(sku);
+					stateHolder.origin = getPurchaseOriginBySku(sku);
 
 					PeriodUnit periodUnit = null;
-					if (stateHolder.origin == SubscriptionOrigin.PROMO || sku.contains("annual")) {
+					if (stateHolder.origin == PurchaseOrigin.PROMO || sku.contains("annual")) {
 						periodUnit = PeriodUnit.YEAR;
 					} else if (sku.contains("monthly")) {
 						periodUnit = PeriodUnit.MONTH;
@@ -1091,22 +1091,19 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	@NonNull
-	public SubscriptionOrigin getSubscriptionOriginBySku(@NonNull String sku) {
+	public PurchaseOrigin getPurchaseOriginBySku(@NonNull String sku) {
 		if (sku.equals("promo_website")) {
-			return SubscriptionOrigin.PROMO;
+			return PurchaseOrigin.PROMO;
 		}
-		if (sku.toLowerCase().startsWith("osmand_pro_")) {
-			return SubscriptionOrigin.GOOGLE;
+		if (sku.startsWith("net.osmand.maps.")) {
+			return PurchaseOrigin.IOS;
 		}
-		if (sku.toLowerCase().startsWith("net.osmand.maps.subscription.pro")) {
-			return SubscriptionOrigin.IOS;
+		if (sku.contains(".huawei.")) {
+			return PurchaseOrigin.HUAWEI;
 		}
-		if (sku.toLowerCase().contains(".huawei.annual.pro") || sku.toLowerCase().contains(".huawei.monthly.pro")) {
-			return SubscriptionOrigin.HUAWEI;
+		if (sku.contains(".amazon.")) {
+			return PurchaseOrigin.AMAZON;
 		}
-		if (sku.toLowerCase().contains(".amazon.pro")) {
-			return SubscriptionOrigin.AMAZON;
-		}
-		return SubscriptionOrigin.UNDEFINED;
+		return PurchaseOrigin.GOOGLE;
 	}
 }

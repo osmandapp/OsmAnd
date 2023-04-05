@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.purchase;
 
-import static net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin.GOOGLE;
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.GOOGLE;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -29,7 +29,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.settings.purchase.data.PurchaseUiData;
@@ -49,9 +48,6 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
-	private OsmandApplication app;
-	private UiUtilities iconsCache;
-
 	private String purchaseSku;
 	private PurchaseUiData purchase;
 	private InAppPurchaseHelper inAppPurchaseHelper;
@@ -65,8 +61,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = isNightMode(false);
 		Bundle args = getArguments();
 		if (args != null) {
 			purchaseSku = args.getString(PURCHASE_SKU_ARG);
@@ -147,7 +142,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		}
 
 		String purchasedOn = getString(R.string.shared_string_purchased_on);
-		SubscriptionOrigin origin = purchase.getOrigin();
+		InAppPurchase.PurchaseOrigin origin = purchase.getOrigin();
 		String platform = getString(origin.getStoreNameId());
 		updateInformationBlock(R.id.platform_block, purchasedOn, platform);
 

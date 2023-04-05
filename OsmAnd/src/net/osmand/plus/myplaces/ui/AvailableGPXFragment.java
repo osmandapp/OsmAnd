@@ -60,9 +60,8 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -78,16 +77,17 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
@@ -96,7 +96,8 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
@@ -197,16 +198,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private void startHandler() {
 		Handler updateCurrentRecordingTrack = new Handler();
-		updateCurrentRecordingTrack.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (getView() != null && updateEnable) {
-					updateCurrentTrack();
-					if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
-						allGpxAdapter.notifyDataSetChanged();
-					}
-					startHandler();
+		updateCurrentRecordingTrack.postDelayed(() -> {
+			if (getView() != null && updateEnable) {
+				updateCurrentTrack();
+				if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
+					allGpxAdapter.notifyDataSetChanged();
 				}
+				startHandler();
 			}
 		}, 2000);
 	}
@@ -297,12 +295,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				plugin.saveCurrentTrack(new Runnable() {
-					@Override
-					public void run() {
-						if (isResumed()) {
-							reloadTracks();
-						}
+				plugin.saveCurrentTrack(() -> {
+					if (isResumed()) {
+						reloadTracks();
 					}
 				});
 				updateCurrentTrack();
@@ -546,25 +541,31 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (itemId == R.id.action_sort) {
 			Activity activity = getActivity();
 			if (activity != null) {
-				View menuSortItemView = getActivity().findViewById(R.id.action_sort);
-				List<PopUpMenuItem> items = new ArrayList<>();
-				for (TracksSortByMode mode : TracksSortByMode.values()) {
-					items.add(new PopUpMenuItem.Builder(app)
-							.setTitleId(mode.getNameId())
-							.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-							.setOnClickListener(v -> {
-								updateTracksSort(mode);
-								int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
-								item.setIcon(getIcon(mode.getIconId(), iconColorId));
-							})
-							.setSelected(settings.TRACKS_SORT_BY_MODE.get() == mode)
-							.create()
-					);
-				}
-				new PopUpMenuHelper.Builder(menuSortItemView, items, nightMode).show();
+				showSortPopUpMenu(activity.findViewById(R.id.action_sort), item);
 			}
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	private void showSortPopUpMenu(@NonNull View anchorView, @NonNull MenuItem item) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		for (TracksSortByMode mode : TracksSortByMode.values()) {
+			menuItems.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(mode.getNameId())
+					.setIcon(getContentIcon(mode.getIconId()))
+					.setOnClickListener(v -> {
+						updateTracksSort(mode);
+						int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
+						item.setIcon(getIcon(mode.getIconId(), iconColorId));
+					})
+					.setSelected(settings.TRACKS_SORT_BY_MODE.get() == mode)
+					.create()
+			);
+		}
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = anchorView;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
 	}
 
 	private void addTrack() {
@@ -750,7 +751,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			item.setIconId(R.drawable.ic_notification_track);
 
 			items.add(item);
-			size[0] += gpxInfo.getFileSize();
+			size[0] += gpxInfo.getIncreasedFileSize();
 		}
 		List<SelectableItem<GPXInfo>> selectedItems = new ArrayList<>(items);
 		FragmentManager manager = activity.getSupportFragmentManager();
@@ -936,13 +937,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			private long lastUpdateTime;
 
-			private final Runnable updateItemsProc = new Runnable() {
-				@Override
-				public void run() {
-					if (updateEnable) {
-						lastUpdateTime = System.currentTimeMillis();
-						allGpxAdapter.notifyDataSetChanged();
-					}
+			private final Runnable updateItemsProc = () -> {
+				if (updateEnable) {
+					lastUpdateTime = System.currentTimeMillis();
+					allGpxAdapter.notifyDataSetChanged();
 				}
 			};
 
@@ -1406,7 +1404,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				})
 				.create()
 		);
-		new PopUpMenuHelper.Builder(view, items, nightMode).show();
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
 	}
 
 	public class DeleteGpxTask extends AsyncTask<GPXInfo, GPXInfo, String> {
@@ -1571,8 +1574,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			String date = "";
 			String size = "";
 
-			if (child.getFileSize() > 0) {
-				size = AndroidUtils.formatSize(v.getContext(), child.getFileSize());
+			if (child.getIncreasedFileSize() > 0) {
+				size = AndroidUtils.formatSize(v.getContext(), child.getIncreasedFileSize());
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long lastModified = child.getLastModified();
@@ -1639,7 +1642,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					}
 
 					@Override
-					public void onGpxDataItemReady(GpxDataItem item) {
+					public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 						callback.onGpxDataItemChanged(item);
 					}
 				};

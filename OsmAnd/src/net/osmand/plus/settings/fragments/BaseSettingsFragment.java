@@ -305,6 +305,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return currentScreenType != null ? currentScreenType.applyQueryType : null;
 	}
 
+	protected void displayPreferenceDialog(@NonNull String prefKey) {
+		Preference preference = findPreference(prefKey);
+		if (preference != null) {
+			onDisplayPreferenceDialog(preference);
+		}
+	}
+
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		FragmentManager fragmentManager = getFragmentManager();
@@ -512,6 +519,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	protected void addOnPreferencesScreen(@NonNull Preference preference) {
+		PreferenceScreen preferenceScreen = getPreferenceScreen();
+		preferenceScreen.addPreference(preference);
+	}
+
 	private void updatePreferencesScreen() {
 		if (getSelectedAppMode() != null && currentScreenType != null) {
 			int resId = currentScreenType.preferencesResId;
@@ -620,11 +632,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return null;
 	}
 
+	protected void setPreferenceIcon(@NonNull String prefId, @NonNull Drawable icon) {
+		Preference preference = findPreference(prefId);
+		if (preference != null) {
+			preference.setIcon(icon);
+		}
+	}
+
 	@ColorInt
 	protected int getActiveProfileColor() {
 		return isProfileDependent() ?
 				getSelectedAppMode().getProfileColor(isNightMode()) :
-				ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
+				ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@ColorRes

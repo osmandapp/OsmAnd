@@ -175,6 +175,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	@Override
 	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 		if (isCancelled()) {
+			onSyncFinished(null);
 			return;
 		}
 		if (succeed) {
@@ -189,8 +190,9 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		}
 		if (singleOperation) {
 			onSyncFinished(null);
+		} else {
+			uploadNewItems();
 		}
-		uploadNewItems();
 	}
 
 	@Override

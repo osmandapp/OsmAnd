@@ -83,7 +83,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	private void setupHeader(@NonNull View view) {
 		TransportLinesFragment.setupButton(
 				view.findViewById(R.id.main_toggle),
-				R.drawable.ic_action_umbrella,
+				weatherBand.getIconId(),
 				weatherBand.getMeasurementName(),
 				weatherBand.isBandVisible(),
 				false,
@@ -177,7 +177,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			};
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 			int selectedIndex = weatherBand.getAvailableBandUnits().indexOf(preference.get());
-			WeatherSettingsFragment.showChooseUnitDialog(view.getContext(), weatherBand, selectedIndex, profileColor, nightMode, listener);
+			WeatherDialogs.showChooseUnitDialog(view.getContext(), weatherBand, selectedIndex, profileColor, nightMode, listener);
 		}
 	}
 

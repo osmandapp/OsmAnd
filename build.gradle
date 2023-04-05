@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         //classpath 'com.android.tools.build:gradle:2.+'
-        classpath 'com.android.tools.build:gradle:7.4.1'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {

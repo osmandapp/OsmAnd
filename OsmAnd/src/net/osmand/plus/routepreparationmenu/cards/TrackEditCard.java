@@ -46,19 +46,7 @@ public class TrackEditCard extends MapBaseCard {
 	}
 
 	private GpxDataItem getDataItem(GPXInfo info) {
-		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				if (item != null) {
-					updateContent();
-				}
-			}
-		};
+		GpxDataItemCallback itemCallback = item -> updateContent();
 		return app.getGpxDbHelper().getItem(new File(info.getFileName()), itemCallback);
 	}
 

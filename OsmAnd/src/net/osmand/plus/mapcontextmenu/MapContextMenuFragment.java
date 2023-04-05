@@ -56,7 +56,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.TransportRoute;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -82,7 +81,8 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -176,6 +176,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = requireMapActivity();
 
+		map = mapActivity.getMapView();
 		menu = mapActivity.getContextMenu();
 		boolean enabled = mapActivity.getQuickSearchDialogFragment() == null;
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(enabled) {
@@ -202,7 +203,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		MapActivity mapActivity = requireMapActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
-		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
@@ -241,7 +242,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		backButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 		updateVisibility(topButtonContainer, 0);
 
-		map = mapActivity.getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		customMapCenter = menu.getMapCenter() != null;
 		if (!customMapCenter) {
@@ -966,7 +966,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void restoreCustomMapRatio() {
 		if (map != null && map.hasCustomMapRatio()) {
-			map.restoreMapRatio();
+			map.restoreScreenCenter();
 		}
 	}
 
@@ -1369,7 +1369,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			if (MapRouteInfoMenu.chooseRoutesVisible) {
 				mapActivity.getChooseRouteFragment().dismiss();
 			}
-			updateLocationViewCache = mapActivity.getMyApplication().getUIUtilities().getUpdateLocationViewCache(false);
+			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity.getMyApplication(), false);
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
 			mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -1929,7 +1929,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (app != null && activity != null && view != null) {
 			TextView distanceText = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);
-			app.getUIUtilities().updateLocationView(updateLocationViewCache, direction, distanceText, menu.getLatLon());
+			UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, menu.getLatLon());
 		}
 	}
 
@@ -2062,8 +2062,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			if (adjustMapPos) {
 				adjustMapPosition(mapY, animated, centered, 0);
 			}
-		} else {
-			customMapCenter = false;
 		}
 	}
 

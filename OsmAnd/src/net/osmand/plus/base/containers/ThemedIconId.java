@@ -16,4 +16,20 @@ public class ThemedIconId {
 	public int getIconId(boolean nightMode) {
 		return nightMode ? iconNightId : iconDayId;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o instanceof ThemedIconId) {
+			ThemedIconId that = (ThemedIconId) o;
+			return iconDayId == that.iconDayId
+					&& iconNightId == that.iconNightId;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * iconDayId + iconNightId;
+	}
 }

@@ -199,29 +199,21 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 					.setTitle(getRoutingParameterTitle(app, parameter))
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
 					.setTag(i)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							selectedEntryIndex = (int) preferenceItem[0].getTag();
-							if (selectedEntryIndex >= 0) {
-								RoutingParameter parameter = parameters.get(selectedEntryIndex);
-								updateSelectedParameters(app, appMode, parameters, parameter.getId());
-							}
-							Fragment target = getTargetFragment();
-							if (target instanceof BaseSettingsFragment) {
-								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
-							}
-							if (target instanceof RouteOptionsBottomSheet) {
-								((RouteOptionsBottomSheet) target).updateMenuItems();
-							}
-							updateReliefButtons();
-							app.runInUIThread(new Runnable() {
-								@Override
-								public void run() {
-									dismiss();
-								}
-							}, 500);
+					.setOnClickListener(v -> {
+						selectedEntryIndex = (int) preferenceItem[0].getTag();
+						if (selectedEntryIndex >= 0) {
+							RoutingParameter routingParameter = parameters.get(selectedEntryIndex);
+							updateSelectedParameters(app, appMode, parameters, routingParameter.getId());
 						}
+						Fragment target = getTargetFragment();
+						if (target instanceof BaseSettingsFragment) {
+							((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
+						}
+						if (target instanceof RouteOptionsBottomSheet) {
+							((RouteOptionsBottomSheet) target).updateMenuItems();
+						}
+						updateReliefButtons();
+						app.runInUIThread(this::dismiss, 500);
 					}).create();
 			items.add(preferenceItem[0]);
 			reliefFactorButtons.add(preferenceItem[0]);

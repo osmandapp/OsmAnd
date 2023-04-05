@@ -53,6 +53,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -84,6 +85,7 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.openplacereviews.OprAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -201,6 +203,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
 	WeatherHelper weatherHelper;
+	DialogManager dialogManager;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -576,6 +579,16 @@ public class OsmandApplication extends MultiDexApplication {
 		return weatherHelper;
 	}
 
+	@NonNull
+	public DialogManager getDialogManager() {
+		return dialogManager;
+	}
+
+	@NonNull
+	public OfflineForecastHelper getOfflineForecastHelper() {
+		return weatherHelper.getOfflineForecastHelper();
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
@@ -686,7 +699,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+		if (NetworkUtils.getProxy() == null && osmandSettings.isProxyEnabled()) {
 			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}
 		appInitializer.startApplication();

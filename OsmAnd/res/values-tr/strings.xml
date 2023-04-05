@@ -1280,7 +1280,7 @@
     <string name="lang_als">Arnavutça (Tosk)</string>
     <string name="read_more">Devamını oku</string>
     <string name="whats_new">Yenilikler neler</string>
-    <string name="rendering_attr_hideProposed_name">Önerilen nesneler</string>
+    <string name="rendering_attr_showProposed_name">Önerilen nesneler</string>
     <string name="shared_string_update">Güncelle</string>
     <string name="shared_string_upload">Karşıya yükle</string>
     <string name="osm_edit_created_poi">Oluşturulmuş OSM POI\'si</string>

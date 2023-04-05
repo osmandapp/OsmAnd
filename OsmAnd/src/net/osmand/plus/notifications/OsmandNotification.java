@@ -157,9 +157,13 @@ public abstract class OsmandNotification {
 				return true;
 			} else {
 				notificationManager.cancel(getOsmandNotificationId());
+				// there could be a different primary notification, so additionally clear CAR_APP explicitly
+				notificationManager.cancel(CAR_APP_NOTIFICATION_SERVICE_ID);
 			}
 		} else {
 			notificationManager.cancel(getOsmandNotificationId());
+			// there could be a different primary notification, so additionally clear CAR_APP explicitly
+			notificationManager.cancel(CAR_APP_NOTIFICATION_SERVICE_ID);
 		}
 		return false;
 	}

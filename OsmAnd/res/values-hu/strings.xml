@@ -238,9 +238,9 @@
     <string name="map_overlay">Fedőrétegtérkép</string>
     <string name="map_overlay_descr">Fedőrétegtérkép kiválasztása</string>
     <string name="tile_source_already_installed">A térkép már telepítve van, a beállítások frissülnek.</string>
-    <string name="select_tile_source_to_install">(Csempés) térkép kiválasztása telepítéshez vagy frissítéshez.</string>
+    <string name="select_tile_source_to_install">Csempés térkép forrásainak kiválasztása:</string>
     <string name="internet_not_available">A műveletet nem lehetséges internetkapcsolat nélkül végrehajtani.</string>
-    <string name="install_more">További telepítése…</string>
+    <string name="install_more">További hozzáadása…</string>
     <string name="level_to_switch_vector_raster_descr">Raszteres térképek használata ezen nagyítási szint alatt.</string>
     <string name="level_to_switch_vector_raster">Legkisebb vektoros nagyítási szint</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> térképbesorolás képekkel.</string>
@@ -1091,7 +1091,7 @@
     <string name="routing_attr_avoid_ferries_description">Elkerüli a kompokat</string>
     <string name="routing_attr_avoid_motorway_name">Autópálya nélkül</string>
     <string name="routing_attr_avoid_motorway_description">Elkerüli az autópályákat</string>
-    <string name="routing_attr_weight_name">Súlykorlátozás</string>
+    <string name="routing_attr_weight_name">Súly</string>
     <string name="routing_attr_weight_description">Adja meg az útvonalakon a járművekre vonatkozó súlykorlátozást.</string>
     <string name="android_19_location_disabled">Az Android 4.4 (KitKat) verziója óta a régi tárolási mappa (%s) elavult. Másoljuk az összes OsmAnd fájlt az új helyre\?
 \n 1. megjegyzés: a régi fájlok érintetlenül maradnak (de kézzel törölhetők).
@@ -1518,7 +1518,7 @@
     <string name="application_dir_change_warning3">Az OsmAnd adatfájljait áthelyezzük az új helyre\?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok</string>
     <string name="routing_attr_avoid_borders_description">Elkerüli az országhatár átlépését</string>
-    <string name="routing_attr_height_name">Magasságkorlátozás</string>
+    <string name="routing_attr_height_name">Magasság</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
     <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
@@ -1718,7 +1718,7 @@
     <string name="contact_us">Kapcsolat</string>
     <string name="read_more">Bővebben</string>
     <string name="whats_new">Újdonságok</string>
-    <string name="rendering_attr_hideProposed_name">Tervezett objektumok</string>
+    <string name="rendering_attr_showProposed_name">Tervezett objektumok</string>
     <string name="shared_string_update">Frissítés</string>
     <string name="shared_string_upload">Feltöltés</string>
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
@@ -2156,7 +2156,7 @@
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
     <string name="auto_split_recording_title">Felvételek automatikus szétvágása szünet után</string>
     <string name="auto_split_recording_descr">Új szakasz kezdése 6 perc szünet után, új nyomvonal 2 óra szünet után vagy új fájl hosszabb szünet után ha a dátum megváltozott.</string>
-    <string name="max_speed">Sebességkorlátozás</string>
+    <string name="max_speed">Legnagyobb sebesség</string>
     <string name="average_speed">Átlagsebesség</string>
     <string name="shared_string_time_moving">Mozgásban töltött idő</string>
     <string name="shared_string_time_span">Időtartam</string>
@@ -3031,7 +3031,7 @@
     <string name="plugins_settings">Bővítménybeállítások</string>
     <string name="download_detailed_map">A terület megtekintéséhez töltse le %s részletes térképét.</string>
     <string name="change_data_storage_folder">Tároló mappa módosítása</string>
-    <string name="routing_attr_width_name">Szélességkorlátozás</string>
+    <string name="routing_attr_width_name">Szélesség</string>
     <string name="routing_attr_width_description">Adja meg az útvonalakon a járművekre vonatkozó szélességkorlátozást.</string>
     <string name="avoid_in_routing_descr_">Bizonyos útvonalak és úttípusok elkerülése</string>
     <string name="shared_string_osmand_usage">OsmAnd használat</string>
@@ -3583,7 +3583,7 @@
     <string name="speed_cameras_restart_descr">A traffipaxadatok végleges törléséhez indítsa újra az alkalmazást.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
     <string name="routing_attr_length_description">Adja meg az útvonalakon a járművekre vonatkozó hosszkorlátozást.</string>
-    <string name="routing_attr_length_name">Hosszkorlátozás</string>
+    <string name="routing_attr_length_name">Hossz</string>
     <string name="speed_cameras_removed_descr">Az eszköz nem tartalmaz traffipaxadatokat.</string>
     <string name="replace_all_desc">Az jelenlegi elemek lecserélésre kerülnek a fájlban lévőkre</string>
     <string name="keep_both_desc">Az importált elemek előtaggal lesznek hozzáadva</string>
@@ -4401,7 +4401,7 @@
     <string name="copying_file">Fájl másolása: %1$s…</string>
     <string name="progress_complete">%1$s kész</string>
     <string name="storage_found_files_descr">Koppintson a(z) „%1$s” gombra, hogy átmásoljon %2$s fájlt innen: „%3$s”, ide: „ %4$s” Ez eltarthat egy darabig.</string>
-    <string name="storage_copied_files_size">%1$s fájl (%2$s) másolva</string>
+    <string name="storage_copied_files_size">Feldolgozva %1$s fájl, (%2$s)</string>
     <string name="shared_storage_third_step">Adjon engedélyt a mappa eléréséhez. Enélkül az OsmAnd nem tud fájlokat másolni.</string>
     <string name="shared_storage_first_step">Nyomja meg a(z) „%1$s” gombot.
 \nA fájlkezelő meg fog nyílni, ahol meg kell keresnie és meg kell nyitnia az osmand mappát.</string>
@@ -4420,7 +4420,7 @@
     <string name="shared_storage_migration_descr">Az Android tárhelyelérési szabályainak változása miatt az OsmAnd már nem használhatja a(z) %1$s mappát.
 \n
 \nÁt kell másolnia az összes adatát az új mappába.</string>
-    <string name="migration_files_present">A kiválasztott „%3$s” helyen %1$d fájl (%2$s) található.</string>
+    <string name="migration_files_present">%1$d fájl (%2$s) már létezik a „%3$s” helyen, és nincs felülírva.</string>
     <string name="fold_unfold">összecsukás / kibontás</string>
     <string name="app_modes_options">Alkalmazásmódok kiválasztása</string>
     <string name="shared_string_memory">Memória</string>
@@ -4972,7 +4972,6 @@
     <string name="rendering_attr_weatherCloudContours_name">Felhő-izovonalak</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Csapadék-izovonalak</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Szélsebesség-izovonalak</string>
-    <string name="release_4_4_pre">• Itt a 4.4 kiadáshoz szükséges karakterláncok lesznek</string>
     <string name="open_weather_action">Időjárás megnyitása</string>
     <string name="shared_string_open">Megnyitás</string>
     <string name="open_weather_action_description">Lehetővé teszi egy részletes időjárási információkat tartalmazó képernyő megnyitását.</string>
@@ -5040,14 +5039,83 @@
     <string name="shared_string_select_recent">Legutóbbi választása</string>
     <string name="empty_tracks">Nincsenek nyomvonal fájljai.</string>
     <string name="recently_visible">Legutóbb látható %1$s</string>
-    <string name="default_tracks_appearance">Alapértelmezett nyomvonal megjelenés</string>
-    <string name="default_tracks_appearance_description">Ezek a megjelenési beállítások az előző képernyőn kiválasztott összes nyomvonalra vonatkoznak.
-\n
-\nA rendszer továbbá elmenti „%1$s” néven ezeket, hogy a(z) %2$s alkalmazza az összes többi, közvetett vagy konkrét megjelenési beállítás nélküli nyomvonalra.</string>
     <string name="shared_string_apply_changes">Módosítások alkalmazása</string>
     <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
     <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Megváltoztatja a %1$s nyomvonalak kinézetét\?</string>
     <string name="shared_string_kilograms">kilogramm</string>
     <string name="shared_string_yards">yard</string>
+    <string name="shared_string_inches">hüvelyk</string>
+    <string name="approximate_bearing_descr">Az irányszöget a követett navigációs útvonalból határozza meg.</string>
+    <string name="inch">in</string>
+    <string name="approximate_bearing">Hozzávetőleges irányszög</string>
+    <string name="cloud_version_confirm_delete">\"%1$s\" törlése az OsmAnd felhőből\?</string>
+    <string name="shared_string_delete_file">Fálj törlése</string>
+    <string name="local_version_do_not_exist">Nincs helyi verzió.</string>
+    <string name="delete_cloud_version">Felhőben lévő verzió törlése</string>
+    <string name="simulation_position_description">Válasszon ki egy nyomvonalfájlt, ami mozgatási forrásként fog szolgálni.</string>
+    <string name="shared_string_add_manually">Hozzáadás kézzel…</string>
+    <string name="shared_string_in_progress">Folyamatban</string>
+    <string name="shared_string_original">Eredeti</string>
+    <string name="movement_speed">Mozgási sebesség</string>
+    <string name="release_4_4">"• Továbbfejlesztett „Nyomvonalak” menü a „Térkép konfigurálása” részben
+\n
+\n • A helyi menü most a POI lokalizált neveit jeleníti meg
+\n
+\n • Lehetőség az útvonal megosztására linken keresztül
+\n
+\n • „Tengeri mérföld/láb” hosszúságegység hozzáadva
+\n
+\n • A térképtájolás új rögzített móddal bővült
+\n
+\n • Egyszerűsített kezdőképernyő
+\n
+\n • Helypozíció javítása osztott képernyős módban az Android Auto-ban
+\n
+\n • \"Sebesség/lejtés\" grafikon hozzáadva a nyomvonal-elemzéshez
+\n
+\n • Az Android 13 áthelyezte az alkalmazás nyelvének kiválasztását a rendszerbeállításokba
+\n
+\n • Vegán helyek megjelenítésével kapcsolatos problémák javítása
+\n
+\n • Lehetőség „Fedvény” vagy „Háttér” térképként használt online csempék letöltésére
+\n
+\n  • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél
+\n
+\n  • Új Moped profil
+\n
+\n  • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció
+\n
+\n  • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
+\n
+\n"</string>
+    <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
+    <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
+    <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
+    <string name="sort_distance_descending">Először a leghosszabb távolság</string>
+    <string name="sort_date_ascending">Először a legújabb dátum</string>
+    <string name="sort_date_descending">Először a legrégebbi dátum</string>
+    <string name="shared_string_nearest">Legközelebbi</string>
+    <string name="selected_value">Kiválasztott érték</string>
+    <string name="app_mode_moped">Moped</string>
+    <string name="disable_vertex_hillshade_3d">Vertex domborzatárnyékolás letiltása 3D-ben</string>
+    <string name="generate_slope_from_3d_maps">Raszteres lejtéstérképek generálása 3D térképekből</string>
+    <string name="enable_3d_maps">3D térképek engedélyezése</string>
+    <string name="test_heightmap">Magassági térkép tesztelése</string>
+    <string name="generate_hillshade_from_3d_maps">Raszteres domborzatárnyékolási térképek generálása 3D térképekből</string>
+    <string name="app_mode_climbing">Mászás</string>
+    <string name="shared_string_alt_name">Alternatív név</string>
+    <string name="token_is_not_valid">A token nem érvényes</string>
+    <string name="shared_string_all_world">Az egész világ</string>
+    <string name="weather_forecast">Időjárás-előrejelzés</string>
+    <string name="offline_weather_forecast_desc">Hét napra szóló időjárás-előrejelzést tölthet le.</string>
+    <string name="clear_online_cache_description">Ez törli az online időjárási csempék teljes gyorsítótárát.</string>
+    <string name="offline_cache">Offline gyorsítótár</string>
+    <string name="clear_online_cache">Online gyorsítótár törlése</string>
+    <string name="weather_forecast_is_outdated">Az előrejelzés elavult.</string>
+    <string name="offline_weather_forecast">Offline időjárás-előrejelzés</string>
+    <string name="metric_lbs">font</string>
+    <string name="shared_string_pounds">font</string>
+    <string name="common_weight_limit_error">A minimális érték „%1$s” %2$s. Használja a „%3$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
+    <string name="free_maps_updates">Ingyenes frissítések (vészhelyzet)</string>
 </resources>

@@ -61,7 +61,6 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void setupRecyclerView(@NonNull View root) {
-		OsmandApplication app = getMyApplication();
 		Context context = root.getContext();
 
 		File gpxRootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);

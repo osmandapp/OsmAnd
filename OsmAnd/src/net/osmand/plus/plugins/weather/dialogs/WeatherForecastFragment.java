@@ -46,8 +46,9 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper.PopUpMenuWidthType;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
@@ -335,17 +336,22 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 					.create()
 			);
 		}
-		new PopUpMenuHelper.Builder(view, items, nightMode).setWidthType(PopUpMenuWidthType.STANDARD).show();
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
 	}
 
 	private void chooseLayers(@NonNull View view) {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		List<PopUpMenuItem> items = new ArrayList<>();
-
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
 		for (WeatherBand band : weatherHelper.getWeatherBands()) {
 			boolean selected = band.isForecastBandVisible();
 			Drawable icon = selected ? getIcon(band.getIconId(), ColorUtilities.getActiveColorId(nightMode)) : getContentIcon(band.getIconId());
-			items.add(new PopUpMenuItem.Builder(app)
+			menuItems.add(new PopUpMenuItem.Builder(app)
 					.setTitle(band.getMeasurementName())
 					.setIcon(icon)
 					.showCompoundBtn(activeColor)
@@ -358,7 +364,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 					.create()
 			);
 		}
-		new PopUpMenuHelper.Builder(view, items, nightMode, R.layout.popup_menu_item_checkbox).setWidthType(PopUpMenuWidthType.STANDARD).show();
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = nightMode;
+		displayData.layoutId = R.layout.popup_menu_item_checkbox;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
 	}
 
 	@Nullable

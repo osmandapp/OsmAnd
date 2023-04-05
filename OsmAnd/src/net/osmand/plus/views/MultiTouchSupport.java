@@ -20,8 +20,6 @@ public class MultiTouchSupport {
 
 	public static final int ACTION_MASK = 255;
 	public static final int ACTION_POINTER_ID_SHIFT = 8;
-	public static final int ACTION_POINTER_DOWN = 5;
-	public static final int ACTION_POINTER_UP = 6;
 	private float angleStarted;
 	private float angleRelative;
 
@@ -51,6 +49,7 @@ public class MultiTouchSupport {
 	private Method getX;
 	private Method getY;
 	private boolean multiTouchAPISupported;
+	private MODE startedMode = MODE.NONE;
 
 
 	public MultiTouchSupport(@NonNull OsmandApplication app, @NonNull MultiTouchZoomListener listener) {
@@ -91,8 +90,11 @@ public class MultiTouchSupport {
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
 	private static final int TILT_X_THRESHOLD_PX = 40;
-	private static final int TILT_Y_THRESHOLD_PX = 40;
+	private static final int TILT_Y_THRESHOLD_PX = 10;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
+	private static final double DELTA_DISTANCE_THRESHOLD = 0.04;
+	private static final double ANGLE_THRESHOLD = 4;
+	private static final float MAX_DELTA_ZOOM = 4;
 
 	public boolean onTouchEvent(MotionEvent event) {
 		if (!isMultiTouchSupported()) {
@@ -102,6 +104,9 @@ public class MultiTouchSupport {
 		try {
 			if (actionCode == MotionEvent.ACTION_CANCEL) {
 				listener.onActionCancel();
+			}
+			if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_CANCEL) {
+				startedMode = MODE.NONE;
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if (pointCount < 2) {
@@ -129,7 +134,7 @@ public class MultiTouchSupport {
 			if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_POINTER_UP) {
 				listener.onActionPointerUp();
 			}
-			if (actionCode == ACTION_POINTER_DOWN) {
+			if (actionCode == MotionEvent.ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 				firstFingerStart = new PointF(x1, y1);
 				secondFingerStart = new PointF(x2, y2);
@@ -138,7 +143,7 @@ public class MultiTouchSupport {
 				zoomStartedDistance = distance;
 				angleStarted = angle;
 				return true;
-			} else if (actionCode == ACTION_POINTER_UP) {
+			} else if (actionCode == MotionEvent.ACTION_POINTER_UP) {
 				if (inZoomMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
@@ -170,17 +175,24 @@ public class MultiTouchSupport {
 					if (dx1 < TILT_X_THRESHOLD_PX && dx2 < TILT_X_THRESHOLD_PX
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
 							&& startDy < TILT_Y_THRESHOLD_PX * 6
-							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX) {
+							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX
+							&& startedMode == MODE.NONE
+							&& !isZoomRotationGesture(distance, angle, angleDefined)
+							|| startedMode == MODE.TILT) {
 						listener.onChangeViewAngleStarted();
+						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
-							|| Math.abs(dy2 - dy1) > TILT_DY_THRESHOLD_PX
-							|| Math.abs(dy1 - dy2) > TILT_DY_THRESHOLD_PX) {
-						angleRelative = 0;
-						zoomRelative = 0;
+					} else if (isZoomRotationGesture(distance, angle, angleDefined)
+							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
+						if (startedMode == MODE.NONE) {
+							angleRelative = 0;
+							zoomRelative = 0;
+							startedMode = MODE.ZOOM;
+						}
 						inZoomMode = true;
 					}
 				} else {
+					startedMode = MODE.ZOOM;
 					inZoomMode = true;
 				}
 				return true;
@@ -189,6 +201,11 @@ public class MultiTouchSupport {
 			log.debug("Multi touch exception", e);
 		}
 		return false;
+	}
+
+	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
+		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
+				|| Math.abs(angle - angleStarted) > ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {
@@ -202,4 +219,9 @@ public class MultiTouchSupport {
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {
 		return app.useOpenGlRenderer();
 	}
+
+	private enum MODE {
+		NONE, ZOOM, TILT
+	}
+
 }

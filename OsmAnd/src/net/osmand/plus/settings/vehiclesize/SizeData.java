@@ -7,8 +7,8 @@ import net.osmand.plus.base.containers.Limits;
 
 public class SizeData {
 
-	private Assets assets;
-	private Limits limits;
+	private final Assets assets;
+	private final Limits limits;
 
 	public SizeData(@NonNull Assets assets,
 	                @NonNull Limits limits) {

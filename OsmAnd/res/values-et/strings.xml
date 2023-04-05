@@ -2203,7 +2203,7 @@
     <string name="osm_edit_created_poi">OSM huvipunkt loodud</string>
     <string name="shared_string_upload">Laadi üles</string>
     <string name="shared_string_update">Uuenda</string>
-    <string name="rendering_attr_hideProposed_name">Välja pakutud objektid</string>
+    <string name="rendering_attr_showProposed_name">Välja pakutud objektid</string>
     <string name="read_more">Loe lisa</string>
     <string name="whats_new">Uudised</string>
     <string name="lang_nds">Alamsaksa</string>

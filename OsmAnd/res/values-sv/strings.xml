@@ -193,7 +193,7 @@
 \n
 \nDessa kartor kan användas antingen som primär karta (baskarta), eller som över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underläggskarta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'.
 \n
-\nLadda ner kartraster/tiles direkt online, eller kopiera dem manuellt som SQLite-databas till OsmAnds data-mapp med med hjälp av något kartprepareringsverktyg från tredje part.</string>
+\nLadda ner kartraster/tiles direkt online, eller kopiera dem manuellt som SQLite-databas till OsmAnds data-mapp med hjälp av något kartprepareringsverktyg från tredje part.</string>
     <string name="osmand_background_plugin_description">Visar inställningarna för att aktivera spårning och navigering i bakgrundsläge genom att periodvis väcka GPS-enheten (med skärmen av).</string>
     <string name="osmand_development_plugin_description">Inställningar för utvecklings- och felsökningsfunktioner, som simulering av navigation, renderingsprestanda eller röststyrning. Avsedda för utvecklare, behövs ej för den vanliga användaren.</string>
     <string name="plugins_screen">Hantera insticksmoduler</string>
@@ -330,7 +330,7 @@
     <string name="city_type_city">Större stad</string>
     <string name="animate_route_off">Stoppa simuleringen</string>
     <string name="animate_route">Starta simuleringen</string>
-    <string name="file_can_not_be_renamed">Filen kan inte döpas om.</string>
+    <string name="file_can_not_be_renamed">Det gick inte att ändra filnamnet.</string>
     <string name="file_with_name_already_exists">En fil med det namnet finns redan.</string>
     <string name="poi_query_by_name_matches_categories">Hittade flera relaterade IP-kategorier.</string>
     <string name="data_to_search_poi_not_available">Lokala data för att söka POI är inte tillgängliga.</string>
@@ -417,9 +417,9 @@
     <string name="map_overlay">Överläggskarta</string>
     <string name="map_overlay_descr">Välj överläggskarta</string>
     <string name="tile_source_already_installed">Kartan är redan installerad, \'Inställningar\' kommer att uppdateras.</string>
-    <string name="select_tile_source_to_install">Välj rasterkartor att installera eller uppdatera.</string>
+    <string name="select_tile_source_to_install">Välj källor för rasterkartor:</string>
     <string name="internet_not_available">Åtgärden kan inte utföras utan uppkoppling mot Internet.</string>
-    <string name="install_more">Installera fler …</string>
+    <string name="install_more">Lägg till fler …</string>
     <string name="level_to_switch_vector_raster_descr">Använd rasterkartor för allt över denna zoomnivå.</string>
     <string name="level_to_switch_vector_raster">Minsta vektor-zoomnivå</string>
     <string name="error_doing_search">Kunde inte utföra offline-sökning.</string>
@@ -1041,7 +1041,7 @@
     <string name="routing_attr_avoid_ferries_description">Undviker färjor</string>
     <string name="routing_attr_avoid_motorway_name">Inga motorvägar</string>
     <string name="routing_attr_avoid_motorway_description">Undviker motorvägar</string>
-    <string name="routing_attr_weight_name">Viktgräns</string>
+    <string name="routing_attr_weight_name">Vikt</string>
     <string name="routing_attr_weight_description">Ange tillåten viktgräns för fordon på sträckorna.</string>
     <string name="select_gpx">Välj GPX …</string>
     <string name="route_descr_select_destination">Ställ in destination</string>
@@ -1248,9 +1248,9 @@
     <string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
     <string name="fav_point_dublicate">Duplicerat namn på favorit angivet</string>
-    <string name="fav_point_dublicate_message">Favorit omdöpt till %1$s för att undvika dubbletter.</string>
+    <string name="fav_point_dublicate_message">Favoritens namn ändras till %1$s för att undvika dubbletter.</string>
     <string name="print_route">Skriv ut rutt</string>
-    <string name="fav_point_emoticons_message">Favorit omdöpt till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
+    <string name="fav_point_emoticons_message">Favoritens namn ändras till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
     <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
     <string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
     <string name="anonymous_user_hint">Anonyma användare kan inte:
@@ -1497,7 +1497,7 @@
     <string name="shared_string_copy">Kopiera</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnummer</string>
     <string name="routing_attr_avoid_borders_description">Undviker att korsa nationella gränser</string>
-    <string name="routing_attr_height_name">Höjdgräns</string>
+    <string name="routing_attr_height_name">Höjd</string>
     <string name="use_fast_recalculation">Smart omräkning av rutt</string>
     <string name="use_fast_recalculation_desc">Räkna om endast början av färdvägen, användbart för längre resor.</string>
     <string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter.</string>
@@ -1697,7 +1697,7 @@
     <string name="feedback">Återkoppling</string>
     <string name="read_more">Läs mer</string>
     <string name="whats_new">Nyheter</string>
-    <string name="rendering_attr_hideProposed_name">Föreslagna objekt</string>
+    <string name="rendering_attr_showProposed_name">Föreslagna objekt</string>
     <string name="lang_nds">Lågtyska</string>
     <string name="lang_mk">Makedonska</string>
     <string name="lang_fy">Frisiska</string>
@@ -3262,9 +3262,9 @@
     <string name="select_segments">Välj segment</string>
     <string name="select_segments_description">%1$s innehåller mer än ett segment, du måste välja önskad del för navigering.</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="open_place_reviews_plugin_description">Skicka in foton, recensioner och länkar om offentliga platser som restauranger, hotell, museer och vägpunkter som öppen data https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Bidra till OpenPlaceReviews-projektet med sådant som foton på, recensioner av eller länkar till offentliga platser såsom restauranger, hotell eller museer
 \n
-\nLäs mer på: http://openplacereviews.org</string>
+\nHitta instruktioner för hur du bidrar på vår webbplats https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
     <string name="hillshade_slope_contour_lines">Terrängskuggning / Lutning / Höjdkurvor</string>
@@ -3349,7 +3349,7 @@
     <string name="vessel_width_limit_description">Ställ in fartygets bredd för att undvika smala broar</string>
     <string name="quick_action_showhide_mapillary_descr">En växling för att visa eller dölja Mapillary-lagret på kartan.</string>
     <string name="routing_attr_length_description">Ange tillåten fordonslängd på rutter.</string>
-    <string name="routing_attr_length_name">Längdsgräns</string>
+    <string name="routing_attr_length_name">Längd</string>
     <string name="shared_string_bearing">Bäring</string>
     <string name="item_deleted">%1$s har tagits bort</string>
     <string name="speed_cameras_restart_descr">Starta om appen för att radera all hastighetskameradata.</string>
@@ -3421,9 +3421,9 @@
     <string name="backup_deleted_all_data_descr">All din data har framgångsrikt raderats från OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">All versionshistorik har tagits bort.</string>
     <string name="backup_data_removed">All data har tagits bort.</string>
-    <string name="backup_dont_have_any_descr">Schemalägg automatisk säkerhetskopiering och förlora aldrig data.</string>
+    <string name="backup_dont_have_any_descr">Ställ in automatisk säkerhetskopiering så du inte behöver oroa dig för att förlora data.</string>
     <string name="backup_welcome_back">Välkommen tillbaka!</string>
-    <string name="backup_welcome_back_descr">Återställ data på denna enhet från existerande säkerhetskopia, eller säkerhetskopiera data till OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Återställ data på denna enhet med hjälp av OsmAnd Cloud.</string>
     <string name="backup_setup">Ställ in säkerhetskopiering</string>
     <string name="backup_restore_now">Återställ nu</string>
     <string name="some_articles_may_not_available_in_lang">Vissa Wikipedia-artiklar finns kanske inte tillgängliga på ditt språk.</string>
@@ -3671,7 +3671,7 @@
     <string name="backup_error_subscription_was_expired_descr">Din OsmAnd Pro-prenumeration har gått ut, förnya den för att använda säkerhetskopering. Du kan fortfarande återställa data från Cloud.</string>
     <string name="backup_error_size_is_exceeded">Maximal storlek för OsmAnd Cloud överskriden %1$s</string>
     <string name="logout_from_osmand_cloud">Logga ut från OsmAnd Cloud</string>
-    <string name="backup_do_not_have_any">Du har inte någon online-säkerhetskopia ännu.</string>
+    <string name="backup_do_not_have_any">Du har inte någon online-säkerhetskopia ännu</string>
     <string name="explore_wikipedia_offline">Utforska Wikipedia i nedkopplat läge.</string>
     <string name="purchases_feature_desc_pro_widgets">Få tillgång till OsmAnd Pro-finesser: Färgläggning av rutter med mera.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Utforska OsmAnd Plans för att hitta en plan som passar dig.</string>
@@ -3689,7 +3689,7 @@
     <string name="sett_generic_ext_input">Tangentbord</string>
     <string name="external_input_device">Externa inmatningsenheter</string>
     <string name="routing_attr_width_description">Ange tillåten fordonsbredd på rutter.</string>
-    <string name="routing_attr_width_name">Breddgräns</string>
+    <string name="routing_attr_width_name">Bredd</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="sort_by_category">Sortera efter kategori</string>
     <string name="lang_oc">Occitanska</string>
@@ -3857,13 +3857,13 @@
     <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="exit_without_saving_warning">Avsluta utan att spara ändringar\?</string>
     <string name="from_to_with_params">Från %1$s till %2$s</string>
-    <string name="storage_copied_files_size">Kopierade %1$s filer %2$s</string>
+    <string name="storage_copied_files_size">Behandlade %1$s fil(er), %2$s</string>
     <string name="storage_copying_files_size">Kopierar %1$s filer, %2$s</string>
     <string name="storage_found_files_size">Hittade %1$s filer, %2$s</string>
     <string name="shared_storage_last_step">Du kan ange en ny datamapp efteråt.</string>
     <string name="app_modes_options">Välj app-läge</string>
     <string name="shared_string_memory">Minne</string>
-    <string name="migration_files_present">Det finns %1$d filer (%2$s) i den valda mappen \'%3$s\'.</string>
+    <string name="migration_files_present">%1$d filer (%2$s) finns redan i den valda mappen \'%3$s\' och har inte skrivits över.</string>
     <string name="fold_unfold">fäll ihop/veckla ut</string>
     <string name="app_profile_type">App-profiltyp</string>
     <string name="map_marker_options">Alternativ för kartmarkörer</string>
@@ -4033,7 +4033,7 @@
     <string name="routing_attr_difficulty_preference_advanced_name">Avancerad</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_description">Välj din motors bränsletyp, det används för att uppskatta koldioxidutsläpp.</string>
-    <string name="routing_attr_motor_type_name">Fordonets motor</string>
+    <string name="routing_attr_motor_type_name">Drivmedel för motorn</string>
     <string name="side_marker_eta">Uppskattad ankomsttid</string>
     <string name="reset_all_settings_desc">Återställ alla inställningar till standard\?</string>
     <string name="co2_mission">CO2-utsläpp</string>
@@ -4111,20 +4111,20 @@
     <string name="cloud_all_changes_uploaded">Alla ändringar har laddats upp</string>
     <string name="cloud_all_changes_downloaded">Alla ändringar är nedladdade</string>
     <string name="backup_error_failed_to_fetch_remote_items">Misslyckades att hämta listan över filer från servern.</string>
-    <string name="import_export">Import/Export</string>
+    <string name="import_export">Import/export</string>
     <string name="export_to_file">Exportera till fil</string>
     <string name="shared_string_purchased_on">Köpt</string>
     <string name="open_weather_action_description">Ger dig möjlighet att öppna en vy med detaljerad väderinformation.</string>
     <string name="open_weather_action">Öppna väder</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Konturlinjer för nederbörd</string>
-    <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer för vindbyar</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Konturlinjer för vindhastighet</string>
     <string name="speed_mode">Hastighetsmetod</string>
     <string name="rendering_attr_weatherCloudContours_name">Konturlinjer för moln</string>
     <string name="local_changes">Lokala ändringar</string>
     <string name="upload_change">Ladda upp ändring</string>
     <string name="cloud_version_will_be_removed">Moln-versionen kommer tas bort</string>
-    <string name="cloud_changes_will_be_dismissed">Moln-ändringar kommer avvisas</string>
-    <string name="local_file_will_be_restored">Lokal fil kommer återställas</string>
+    <string name="cloud_changes_will_be_dismissed">Moln-ändringarna kommer avvisas</string>
+    <string name="local_file_will_be_restored">Den lokala filen kommer återställas</string>
     <string name="local_changes_will_be_dismissed">Lokala ändringar kommer avvisas</string>
     <string name="cloud_conflicts">Konflikter</string>
     <string name="cloud_conflict">Konflikt</string>
@@ -4134,7 +4134,7 @@
     <string name="compass_always_visible">Alltid synlig</string>
     <string name="compass_always_hidden">Alltid dold</string>
     <string name="cloud_all_changes_uploaded_descr">Alla ändringar gjorda på denna enhet synkroniseras med OsmAnd molnlagring.</string>
-    <string name="cloud_no_conflicts">Inga konflikter hittades</string>
+    <string name="cloud_no_conflicts">Inga konflikter hittades.</string>
     <string name="download_cloud_version">Ladda ner moln-versionen</string>
     <string name="shared_string_do_not_exist">Finns inte</string>
     <string name="last_sync">Senaste synkronisering</string>
@@ -4182,12 +4182,12 @@
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
     <string name="rendering_attr_showMtbScale_name">Visa MTB-svårighetsgrad</string>
-    <string name="rendering_attr_showMtbScale_description">Visa leder enligt MTB-svårighetsgrad.</string>
+    <string name="rendering_attr_showMtbScale_description">Visa leder enligt deras MTB-svårighetsgrad.</string>
     <string name="quick_action_cloud_layer">En knapp för att visa eller dölja molnlagret på kartan.</string>
     <string name="pressure_layer">Lufttryckslager</string>
     <string name="wind_layer">Vindlager</string>
     <string name="cloud_layer">Molnlager</string>
-    <string name="storage_migration_fragment_close_descr">Kopiering pågår för %1$s%%. Om du avslutar nu kanske appen inte kommer fungera korrekt.</string>
+    <string name="storage_migration_fragment_close_descr">Kopiering pågår och är bara %1$s%% färdigt. Om du avslutar nu kanske appen inte kommer fungera korrekt.</string>
     <string name="map_widget_sunset_desc">Visar klockslag för eller återstående tid till kommande solnedgång.</string>
     <string name="shared_string_next_sunrise">Kommande soluppgång</string>
     <string name="shared_string_time_left">Tid kvar</string>
@@ -4390,4 +4390,72 @@
 \n • Buggrättningar: automatisk uppdatering av online tile-kartor
 \n
 \n</string>
+    <string name="average_speed_skip_stops_desc">Hastigheter under %1$s räknas in och kommer påverka medelhastigheten.</string>
+    <string name="shared_string_kilograms">kilogram</string>
+    <string name="shared_string_yards">yard</string>
+    <string name="switch_folder">Byt mapp</string>
+    <string name="display_position_automatic_descr">Beror på kartorienteringen; nertill för färdriktning, i mitten för övriga.</string>
+    <string name="share_as_file">Dela som fil</string>
+    <string name="determine_location">Tillåt att hämta din position</string>
+    <string name="sound_beep_complex">Ljudsignal: komplex</string>
+    <string name="sort_duration_ascending">Kortast tid först</string>
+    <string name="sort_distance_ascending">Kortast distans först</string>
+    <string name="sort_date_ascending">Nyaste först</string>
+    <string name="sort_date_descending">Äldsta först</string>
+    <string name="approximate_bearing">Ungefärlig bäring</string>
+    <string name="approximate_bearing_descr">Härled bäringen från den rutt som följs.</string>
+    <string name="inch">in</string>
+    <string name="shared_string_apply_changes">Tillämpa ändringar</string>
+    <string name="no_visible_tracks_description">Välj spår att visa på kartan.</string>
+    <string name="recently_visible">Senast synliga %1$s</string>
+    <string name="empty_tracks_description">Du kan importera, skapa och spela in spårfiler med OsmAnd.</string>
+    <string name="shared_string_select_recent">Välj senaste</string>
+    <string name="change_appearance">Ändra utseende</string>
+    <string name="show_all_tracks">Visa alla spår</string>
+    <string name="shared_string_on_map">På karta</string>
+    <string name="last_synchronized">Senast synkroniserat</string>
+    <string name="weight_limit_error">Minsta värde är \"%1$s\" ton. Använd profilen \"%2$s\" om fordonets vikt är under minsta tillåtna värde.</string>
+    <string name="share_link">Dela länk</string>
+    <string name="value_downloaded_of_mb">Laddar ned %1$.1f/%2$.1f MB</string>
+    <string name="skip_download">Hoppa över nedladdning</string>
+    <string name="configure_screen_widgets_descr">Välj skärmsektion att lägga till eller arrangera om widgets.</string>
+    <string name="legend_item_description">Vägledning till kartans symboler och utformning.</string>
+    <string name="radius_ruler_item">Radiemätare</string>
+    <string name="sound_beep_simple_loud">Ljudsignal: enkel, högt</string>
+    <string name="rotate_map_manual_opt">Manuellt roterad (fast)</string>
+    <string name="sound_beep_complex_loud">Ljudsignal: komplex, högt</string>
+    <string name="sound_beep_minimal">Ljudsignal: minimal</string>
+    <string name="sound_beep_simple">Ljudsignal: enkel</string>
+    <string name="selected_value">Valt värde</string>
+    <string name="sort_duration_descending">Längsta tid först</string>
+    <string name="sort_distance_descending">Längsta distans först</string>
+    <string name="shared_string_nearest">Närmaste</string>
+    <string name="shared_string_add_manually">Lägg till manuellt…</string>
+    <string name="shared_string_inches">tum</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Ändra utseendet för %1$s spår\?</string>
+    <string name="no_visible_tracks">Inga spår på kartan</string>
+    <string name="x_axis">X-axel</string>
+    <string name="what_is_new">Nyheter</string>
+    <string name="empty_tracks">Du har inga spårfiler än.</string>
+    <string name="delete_cloud_version">Radera moln-version</string>
+    <string name="cloud_version_confirm_delete">Radera \"%1$s\" från OsmAnd Cloud\?</string>
+    <string name="shared_string_delete_file">Radera fil</string>
+    <string name="local_version_do_not_exist">Det finns ingen lokal version.</string>
+    <string name="movement_speed">Rörelsehastighet</string>
+    <string name="shared_string_in_progress">Pågående</string>
+    <string name="simulation_position_description">Välj en spår-fil att använda som källa för plats-förflyttning.</string>
+    <string name="shared_string_original">Ursprunglig</string>
+    <string name="y_axis">Y-axel</string>
+    <string name="stop_download">Avbryt nedladdning</string>
+    <string name="send_log">Skicka loggfil</string>
+    <string name="number_of_tiles">Antal raster-tiles</string>
+    <string name="stop_download_desc">Nedladdningen är inte klar. Om du avbryter nu, kommer bara delar av rasterkartan vara tillgänglig för visning.</string>
+    <string name="stop_and_exit">Avbryt och avsluta</string>
+    <string name="shared_string_shape">Figur</string>
+    <string name="location_source">Platskälla</string>
+    <string name="app_mode_moped">Moped</string>
+    <string name="ui_customization">Anpassning av användargränssnittet</string>
+    <string name="osm_editing_prefs_descr">Användarnamn, lösenord, offline-redigering</string>
+    <string name="auto_25_chars_route_tu_kl">Gör en u-sväng och håll till vänster</string>
+    <string name="auto_25_chars_route_tu_kr">Gör en u-sväng och håll till höger</string>
 </resources>

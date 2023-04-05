@@ -62,22 +62,22 @@ public class OsmandMap implements NavigationSessionListener {
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
 		mapActions = new MapActions(app);
 
-		int w;
-		int h;
+		int width;
+		int height;
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession == null) {
 			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point screenDimensions = new Point(0, 0);
 			display.getSize(screenDimensions);
-			w = screenDimensions.x;
-			h = screenDimensions.y - AndroidUtils.getStatusBarHeight(app);
+			width = screenDimensions.x;
+			height = screenDimensions.y - AndroidUtils.getStatusBarHeight(app);
 		} else {
 			SurfaceRenderer surface = carNavigationSession.getNavigationCarSurface();
-			w = surface != null ? surface.getWidth() : 100;
-			h = surface != null ? surface.getHeight() : 100;
+			width = surface != null ? surface.getWidth() : 100;
+			height = surface != null ? surface.getHeight() : 100;
 		}
-		mapView = new OsmandMapTileView(app, w, h);
+		mapView = new OsmandMapTileView(app, width, height);
 		mapLayers = new MapLayers(app);
 
 		// to not let it gc
@@ -139,19 +139,20 @@ public class OsmandMap implements NavigationSessionListener {
 		// int newZoom = (int) Math.round(curZoom);
 		// double zoomFrac = curZoom - newZoom;
 
-		int newZoom = mapView.getZoom() + stp;
-		double zoomFrac = mapView.getZoomFractionalPart();
-		if (newZoom > mapView.getMaxZoom()) {
+		Zoom zoom = new Zoom(mapView.getZoom(), mapView.getZoomFloatPart(), mapView.getMinZoom(), mapView.getMaxZoom());
+
+		if (stp > 0 && !zoom.isZoomInAllowed()) {
 			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
 			return;
-		}
-		if (newZoom < mapView.getMinZoom()) {
+		} else if (stp < 0 && !zoom.isZoomOutAllowed()) {
 			Toast.makeText(app, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show();
 			return;
 		}
-		mapView.getAnimatedDraggingThread().startZooming(newZoom, zoomFrac, changeLocation);
+
+		zoom.changeZoom(stp);
+		mapView.getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), changeLocation);
 		if (app.accessibilityEnabled()) {
-			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show();
+			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
 		}
 		for (OsmandMapListener listener : listeners) {
 			listener.onChangeZoom(stp);

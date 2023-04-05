@@ -44,7 +44,6 @@
 		android:layout_height="0dp"
 		android:layout_weight="1"
 		tools:itemCount="1"
-		tools:listitem="@layout/gpx_track_select_item">
+		tools:listitem="@layout/gpx_track_select_item" />
 
-	</androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

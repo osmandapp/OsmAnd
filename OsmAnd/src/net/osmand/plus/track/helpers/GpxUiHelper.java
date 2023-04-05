@@ -1,5 +1,6 @@
 package net.osmand.plus.track.helpers;
 
+import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
@@ -54,8 +55,10 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
@@ -97,9 +100,6 @@ public class GpxUiHelper {
 	private static final Log LOG = PlatformUtil.getLog(GpxUiHelper.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1005;
-
-	public static final long SECOND_IN_MILLIS = 1000L;
-	public static final long HOUR_IN_MILLIS = 60 * 60 * SECOND_IN_MILLIS;
 
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
@@ -323,7 +323,7 @@ public class GpxUiHelper {
 		}
 
 		@Override
-		public void onGpxDataItemReady(GpxDataItem item) {
+		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
 				updateItemsProc.run();
 			}
@@ -523,72 +523,53 @@ public class GpxUiHelper {
 	}
 
 	public static void updateGpxInfoView(@NonNull OsmandApplication app,
-	                                     @NonNull View v,
+	                                     @NonNull View view,
 	                                     @NonNull String itemTitle,
 	                                     @Nullable Drawable iconDrawable,
-	                                     @NonNull GPXInfo info) {
-		GpxDataItem item = getDataItem(app, info, new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return false;
+	                                     @Nullable GPXInfo info) {
+		if (info != null) {
+			GpxDataItem item = getDataItem(app, info, dataItem -> updateGpxInfoView(app, view, itemTitle, iconDrawable, info, dataItem));
+			if (item != null) {
+				updateGpxInfoView(app, view, itemTitle, iconDrawable, info, item);
 			}
-
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
+		} else {
+			updateGpxInfoView(view, itemTitle, null, null, app);
+			if (iconDrawable != null) {
+				ImageView icon = view.findViewById(R.id.icon);
+				icon.setImageDrawable(iconDrawable);
+				icon.setVisibility(View.VISIBLE);
 			}
-		});
-		if (item != null) {
-			updateGpxInfoView(app, v, itemTitle, iconDrawable, info, item);
 		}
 	}
 
 	private static void updateGpxInfoView(@NonNull OsmandApplication app,
-	                                      @NonNull View v,
+	                                      @NonNull View view,
 	                                      @NonNull String itemTitle,
 	                                      @Nullable Drawable iconDrawable,
 	                                      @NonNull GPXInfo info,
 	                                      @NonNull GpxDataItem dataItem) {
-		updateGpxInfoView(v, itemTitle, info, dataItem.getAnalysis(), app);
+		updateGpxInfoView(view, itemTitle, info, dataItem.getAnalysis(), app);
 		if (iconDrawable != null) {
-			ImageView icon = v.findViewById(R.id.icon);
+			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(iconDrawable);
 			icon.setVisibility(View.VISIBLE);
 		}
 	}
 
-	public static void updateGpxInfoView(View v,
-	                                     String itemTitle,
-	                                     GPXInfo info,
-	                                     GPXTrackAnalysis analysis,
-	                                     OsmandApplication app) {
+	public static void updateGpxInfoView(@NonNull View v,
+	                                     @NonNull String itemTitle,
+	                                     @Nullable GPXInfo gpxInfo,
+	                                     @Nullable GPXTrackAnalysis analysis,
+	                                     @NonNull OsmandApplication app) {
 		TextView viewName = v.findViewById(R.id.name);
 		viewName.setText(itemTitle.replace("/", " • ").trim());
 		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		ImageView icon = v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
-		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
 
-		boolean sectionRead = analysis == null;
-		if (sectionRead) {
-			v.findViewById(R.id.read_section).setVisibility(View.GONE);
-			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
-			String date = "";
-			String size = "";
-			if (info.getFileSize() >= 0) {
-				size = AndroidUtils.formatSize(v.getContext(), info.getFileSize());
-			}
-			DateFormat df = app.getResourceManager().getDateFormat();
-			long fd = info.getLastModified();
-			if (fd > 0) {
-				date = (df.format(new Date(fd)));
-			}
-			TextView sizeText = v.findViewById(R.id.date_and_size_details);
-			sizeText.setText(date + " \u2022 " + size);
-
-		} else {
-			v.findViewById(R.id.read_section).setVisibility(View.VISIBLE);
-			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
+		boolean hasGPXInfo = gpxInfo != null;
+		boolean hasAnalysis = analysis != null;
+		if (hasAnalysis) {
 			ImageView distanceI = v.findViewById(R.id.distance_icon);
 			distanceI.setVisibility(View.VISIBLE);
 			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_distance_16));
@@ -601,7 +582,7 @@ public class GpxUiHelper {
 			TextView time = v.findViewById(R.id.time);
 			TextView distance = v.findViewById(R.id.distance);
 			TextView pointsCount = v.findViewById(R.id.points_count);
-			pointsCount.setText(analysis.wptPoints + "");
+			pointsCount.setText(String.valueOf(analysis.wptPoints));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
 			if (analysis.isTimeSpecified()) {
@@ -609,17 +590,24 @@ public class GpxUiHelper {
 			} else {
 				time.setText("");
 			}
+		} else if (hasGPXInfo) {
+			String date = "";
+			String size = "";
+			if (gpxInfo.getFileSize() >= 0) {
+				size = AndroidUtils.formatSize(v.getContext(), gpxInfo.getFileSize());
+			}
+			DateFormat format = app.getResourceManager().getDateFormat();
+			long lastModified = gpxInfo.getLastModified();
+			if (lastModified > 0) {
+				date = (format.format(new Date(lastModified)));
+			}
+			TextView sizeText = v.findViewById(R.id.date_and_size_details);
+			sizeText.setText(date + " • " + size);
 		}
-
-		TextView descr = v.findViewById(R.id.description);
-		if (descr != null) {
-			descr.setVisibility(View.GONE);
-		}
-
-		View checkbox = v.findViewById(R.id.check_item);
-		if (checkbox != null) {
-			checkbox.setVisibility(View.GONE);
-		}
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.check_item), false);
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.description), false);
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.read_section), hasAnalysis);
+		AndroidUiHelper.updateVisibility(v.findViewById(R.id.unknown_section), !hasAnalysis && hasGPXInfo);
 	}
 
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app,
@@ -642,16 +630,16 @@ public class GpxUiHelper {
 				}
 
 				ImportHelper importHelper = mapActivity.getImportHelper();
-				importHelper.setGpxImportCompleteListener(new ImportHelper.OnGpxImportCompleteListener() {
+				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile gpxFile) {
 						if (success) {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
 							GpxSelectionParams params = GpxSelectionParams.newInstance()
 									.showOnMap().syncGroup().selectedByUser().addToMarkers()
 									.addToHistory().saveSelection();
-							app.getSelectedGpxHelper().selectGpxFile(result, params);
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, result.path);
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
 						}
 					}
 				});
@@ -1026,19 +1014,14 @@ public class GpxUiHelper {
 	}
 
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		GpxDataItemCallback itemCallback = new GpxDataItemCallback() {
+		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
+			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 				addAppearanceToGpx(gpxFile, item);
 				saveAndShareGpx(app, gpxFile);
 			}
 		};
-		return app.getGpxDbHelper().getItem(new File(gpxFile.path), itemCallback);
+		return app.getGpxDbHelper().getItem(new File(gpxFile.path), callback);
 	}
 
 	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {

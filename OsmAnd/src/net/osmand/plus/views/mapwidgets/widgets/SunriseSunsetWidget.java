@@ -131,22 +131,20 @@ public class SunriseSunsetWidget extends TextInfoWidget {
 		if (cachedCenterLatLon != null) {
 			double lat = cachedCenterLatLon.getLatitude();
 			double lon = cachedCenterLatLon.getLongitude();
-			SunriseSunset bundle = dayNightHelper.getSunriseSunset(lat, lon);
-			if (bundle != null) {
-				Date nextTimeDate = isSunriseMode() ? bundle.getSunrise() : bundle.getSunset();
-				if (nextTimeDate != null) {
-					long now = System.currentTimeMillis();
-					if (isLocationChanged || now >= cachedNextTime) {
-						Calendar calendar = Calendar.getInstance();
-						calendar.setTime(nextTimeDate);
-						// If sunrise or sunset has passed today, move the date to the next day
-						if (calendar.getTimeInMillis() <= now) {
-							calendar.add(Calendar.DAY_OF_MONTH, 1);
-						}
-						cachedNextTime = calendar.getTimeInMillis();
+			SunriseSunset sunriseSunset = dayNightHelper.getSunriseSunset(lat, lon);
+			Date nextTimeDate = isSunriseMode() ? sunriseSunset.getSunrise() : sunriseSunset.getSunset();
+			if (nextTimeDate != null) {
+				long now = System.currentTimeMillis();
+				if (isLocationChanged || now >= cachedNextTime) {
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(nextTimeDate);
+					// If sunrise or sunset has passed today, move the date to the next day
+					if (calendar.getTimeInMillis() <= now) {
+						calendar.add(Calendar.DAY_OF_MONTH, 1);
 					}
-					return cachedNextTime;
+					cachedNextTime = calendar.getTimeInMillis();
 				}
+				return cachedNextTime;
 			}
 		}
 		return -1;

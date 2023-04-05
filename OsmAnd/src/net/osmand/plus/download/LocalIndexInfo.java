@@ -6,7 +6,6 @@ import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
@@ -33,15 +32,14 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 
 	private GPXFile gpxFile;
 
-	public LocalIndexInfo(@NonNull LocalIndexType type, @NonNull File f, boolean backuped,
-						  @NonNull OsmandApplication app) {
-		pathToData = f.getAbsolutePath();
-		fileName = f.getName();
-		name = formatName(f.getName());
+	public LocalIndexInfo(@NonNull LocalIndexType type, @NonNull File f, boolean backuped) {
+		this.pathToData = f.getAbsolutePath();
+		this.fileName = f.getName();
+		this.name = formatName(f.getName());
 		this.type = type;
-		singleFile = !f.isDirectory();
-		if (singleFile) {
-			kbSize = (int) ((f.length() + 512) >> 10);
+		this.singleFile = !f.isDirectory();
+		if (this.singleFile) {
+			this.kbSize = (int) ((f.length() + 512) >> 10);
 		}
 		this.backupedData = backuped;
 	}
@@ -177,7 +175,6 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 		}
 		return fileName;
 	}
-
 
 	public String getBaseName() {
 		return type.getBasename(this);

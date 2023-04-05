@@ -558,6 +558,11 @@ public class RotatedTileBox {
 			zoomSet = true;
 			return this;
 		}
+
+		public RotatedTileBoxBuilder setZoomFloatPart(double zoomFloatPart) {
+			tb.zoomFloatPart = zoomFloatPart;
+			return this;
+		}
 		
 		public RotatedTileBoxBuilder setLocation(double lat, double lon) {
 			tb.lat = lat;

@@ -481,7 +481,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		OsmandApplication app = null;
 		MapActivity activity = getMapActivity();
 		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (activity != null && devPlugin != null && devPlugin.isHeightmapEnabled()) {
+		if (activity != null && devPlugin != null && devPlugin.is3DMapsEnabled()) {
 			app = activity.getMyApplication();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();

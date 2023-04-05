@@ -34,12 +34,12 @@ public class TargetDistanceWidget extends TextInfoWidget {
 		if (isUpdateNeeded() || targetDistance != cachedTargetDistance) {
 			cachedTargetDistance = targetDistance;
 			if (cachedTargetDistance > 0) {
-				setText(NO_VALUE, null);
-			} else {
 				MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
 				OsmAndFormatter.FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedTargetDistance,
 						app, false, metricsConstants);
 				setText(formattedDistance.value, formattedDistance.unit);
+			} else {
+				setText(NO_VALUE, null);
 			}
 		}
 	}

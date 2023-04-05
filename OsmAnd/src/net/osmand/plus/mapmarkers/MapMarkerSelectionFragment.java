@@ -55,7 +55,6 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 
 		MapActivity mapActivity = getMapActivity();
-		OsmandApplication app = getMyApplication();
 		if (mapActivity != null) {
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
 			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
@@ -92,7 +91,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
-		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getMapMarkers();
+		List<MapMarker> markers = app.getMapMarkersHelper().getMapMarkers();
 		if (markers.size() > 0) {
 			for (MapMarker marker : markers) {
 				adapter.add(marker);

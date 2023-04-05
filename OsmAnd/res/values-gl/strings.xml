@@ -1633,7 +1633,7 @@ Lon %2$s</string>
     <string name="traffic_warning_hazard">Perigo</string>
     <string name="read_more">Ler máis</string>
     <string name="whats_new">Novidades de</string>
-    <string name="rendering_attr_hideProposed_name">Obxectos propostos</string>
+    <string name="rendering_attr_showProposed_name">Obxectos propostos</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">Crear un PDI de OSM</string>

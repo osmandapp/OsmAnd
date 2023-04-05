@@ -1,5 +1,6 @@
 package net.osmand.search;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -15,9 +16,9 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
-import net.osmand.search.core.SearchCoreFactory.SearchAmenityByNameAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
 import net.osmand.search.core.SearchExportSettings;
@@ -57,7 +58,7 @@ public class SearchUICore {
 	private static final int TIMEOUT_BEFORE_FILTER = 20;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
 	private SearchPhrase phrase;
-	private SearchResultCollection  currentSearchResult;
+	private SearchResultCollection currentSearchResult;
 
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
@@ -94,12 +95,11 @@ public class SearchUICore {
 	}
 
 	public static class SearchResultCollection {
-		private List<SearchResult> searchResults;
+		private final List<SearchResult> searchResults = new ArrayList<>();
 		private SearchPhrase phrase;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 
 		public SearchResultCollection(SearchPhrase phrase) {
-			searchResults = new ArrayList<>();
 			this.phrase = phrase;
 		}
 
@@ -174,6 +174,10 @@ public class SearchUICore {
 			return this;
 		}
 
+		public boolean hasSearchResults() {
+			return !Algorithms.isEmpty(searchResults);
+		}
+
 		public List<SearchResult> getCurrentSearchResults() {
 			return Collections.unmodifiableList(searchResults);
 		}
@@ -241,7 +245,7 @@ public class SearchUICore {
 						Street st2 = (Street) r2.object;
 						return st1.getLocation().equals(st2.getLocation());
 					}
-				} 
+				}
 				Amenity a1 = null;
 				if (r1.object instanceof Amenity) {
 					a1 = (Amenity) r1.object;
@@ -337,8 +341,7 @@ public class SearchUICore {
 			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
 			api.search(sphrase, rm);
 
-			SearchResultCollection collection = new SearchResultCollection(
-					sphrase);
+			SearchResultCollection collection = new SearchResultCollection(sphrase);
 			collection.addSearchResults(rm.getRequestResults(), resortAll, removeDuplicates);
 			if (debugMode) {
 				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
@@ -346,6 +349,27 @@ public class SearchUICore {
 			return collection;
 		}
 		return null;
+	}
+
+	public <T extends SearchCoreAPI> void shallowSearchAsync(final Class<T> cl, final String text,
+	                                                         final ResultMatcher<SearchResult> matcher,
+	                                                         final boolean resortAll, final boolean removeDuplicates,
+	                                                         final SearchSettings searchSettings,
+	                                                         final CallbackWithObject<SearchResultCollection> callback) {
+		singleThreadedExecutor.submit(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					SearchResultCollection collection = shallowSearch(cl, text, matcher, resortAll, removeDuplicates, searchSettings);
+					if (callback != null) {
+						callback.processResult(collection);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+					LOG.error(e.getMessage(), e);
+				}
+			}
+		});
 	}
 
 	public void init() {
@@ -569,6 +593,7 @@ public class SearchUICore {
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
+					LOG.error(e.getMessage(), e);
 				}
 			}
 		});
@@ -681,7 +706,7 @@ public class SearchUICore {
 		}
 	}
 
-	public static class SearchResultMatcher implements ResultMatcher<SearchResult>{
+	public static class SearchResultMatcher implements ResultMatcher<SearchResult> {
 		private final List<SearchResult> requestResults = new ArrayList<>();
 		private final ResultMatcher<SearchResult> matcher;
 		private final int request;
@@ -755,7 +780,7 @@ public class SearchUICore {
 		}
 
 		public void apiSearchRegionFinished(SearchCoreAPI api, BinaryMapIndexReader region, SearchPhrase phrase) {
-			if(matcher != null) {
+			if (matcher != null) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.objectType = ObjectType.SEARCH_API_REGION_FINISHED;
 				sr.object = api;
@@ -887,7 +912,7 @@ public class SearchUICore {
 			SearchExportSettings exportSettings = phrase.getSettings().getExportSettings();
 			json.put("settings", phrase.getSettings().toJSON());
 			json.put("phrase", phrase.getFullSearchPhrase());
-			if (searchResult.searchResults != null && searchResult.searchResults.size() > 0) {
+			if (searchResult.hasSearchResults()) {
 				JSONArray resultsArr = new JSONArray();
 				for (SearchResult r : searchResult.searchResults) {
 					resultsArr.put(r.toString());
@@ -935,9 +960,8 @@ public class SearchUICore {
 		COMPARE_DISTANCE_TO_PARENT_SEARCH_RESULT, // makes sense only for inner subqueries
 		COMPARE_BY_NAME,
 		COMPARE_BY_DISTANCE,
-		AMENITY_LAST_AND_SORT_BY_SUBTYPE
-		;
-		
+		AMENITY_LAST_AND_SORT_BY_SUBTYPE;
+
 		// -1 - means 1st is less (higher) than 2nd
 		public int compare(SearchResult o1, SearchResult o2, SearchResultComparator c) {
 			switch(this) {

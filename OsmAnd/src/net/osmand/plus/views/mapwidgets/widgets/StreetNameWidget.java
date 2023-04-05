@@ -142,8 +142,8 @@ public class StreetNameWidget extends MapWidget {
 				if (indexOf > 0) {
 					streetName.text = streetName.text.substring(indexOf);
 				}
-				if (roadShieldName != null && streetName.text.contains(roadShieldName)) {
-					streetName.text = streetName.text.replace(roadShieldName, "");
+				if (roadShieldName != null && streetName.text.startsWith(roadShieldName)) {
+					streetName.text = streetName.text.replaceFirst(roadShieldName, "");
 					streetName.text = streetName.text.trim();
 				}
 			} else {

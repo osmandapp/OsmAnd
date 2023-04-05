@@ -32,6 +32,8 @@ import java.util.Set;
 public class ApplicationMode {
 
 	public static final float FAST_SPEED_THRESHOLD = 10;
+	private static final float MIN_VALUE_KM_H = -10;
+	private static final float MAX_VALUE_KM_H = 20;
 
 	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
 	private static final List<ApplicationMode> values = new ArrayList<>();
@@ -77,6 +79,9 @@ public class ApplicationMode {
 	public static final ApplicationMode MOTORCYCLE = create(CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.description(R.string.app_mode_motorcycle).reg();
+	public static final ApplicationMode MOPED = create(BICYCLE, R.string.app_mode_moped, "moped")
+			.icon(R.drawable.ic_action_motor_scooter)
+			.description(R.string.app_mode_bicycle).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
 			.icon(R.drawable.ic_action_bus_dark)
@@ -280,6 +285,18 @@ public class ApplicationMode {
 		app.getSettings().MAX_SPEED.setModeValue(this, defaultSpeed);
 	}
 
+	public float getMaxSpeedToleranceLimit() {
+		return Math.min(getDefaultSpeed(), MAX_VALUE_KM_H / 3.6f);
+	}
+
+	public float getMinSpeedToleranceLimit() {
+		return Math.max(-getDefaultSpeed() / 2, MIN_VALUE_KM_H / 3.6f);
+	}
+
+	public boolean isSpeedToleranceBigRange() {
+		return (getMaxSpeedToleranceLimit() - getMinSpeedToleranceLimit()) * 3.6 > 6;
+	}
+
 	public float getStrAngle() {
 		return app.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(this);
 	}
@@ -457,6 +474,9 @@ public class ApplicationMode {
 			}
 			if (!settings.APP_MODE_ORDER.isSetForMode(MOTORCYCLE)) {
 				MOTORCYCLE.setOrder(PEDESTRIAN.getOrder() + 1);
+			}
+			if (!settings.APP_MODE_ORDER.isSetForMode(MOPED)) {
+				MOPED.setOrder(PEDESTRIAN.getOrder() + 1);
 			}
 		}
 		if (settings.APP_MODE_ORDER.isSetForMode(SKI) && !settings.APP_MODE_ORDER.isSetForMode(HORSE)) {

@@ -57,7 +57,7 @@ public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 	public static boolean shouldShow(@NonNull OsmandSettings settings, @NonNull MapActivity activity) {
 		OsmandApplication app = activity.getMyApplication();
 		if (app.getAppCustomization().isFeatureEnabled(FRAGMENT_RENDER_INIT_ERROR_ID)) {
-			return settings.USE_OPENGL_RENDER.get() && settings.OPENGL_RENDER_FAILED.get() > 1;
+			return settings.USE_OPENGL_RENDER.get() && settings.OPENGL_RENDER_FAILED.get() > 3;
 		}
 		return true;
 	}

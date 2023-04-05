@@ -114,7 +114,7 @@ class RouteRecalculationHelper {
 
 	void stopCalculationIfParamsNotChanged() {
 		synchronized (routingHelper) {
-			boolean hasPendingTasks = tasksMap.isEmpty();
+			//boolean hasPendingTasks = tasksMap.isEmpty();
 			for (Entry<Future<?>, RouteRecalculationTask> taskFuture : tasksMap.entrySet()) {
 				RouteRecalculationTask task = taskFuture.getValue();
 				if (!task.isParamsChanged()) {
@@ -122,11 +122,12 @@ class RouteRecalculationHelper {
 					task.stopCalculation();
 				}
 			}
-			if (hasPendingTasks) {
-				if (isFollowingMode()) {
-					getVoiceRouter().announceBackOnRoute();
-				}
-			}
+			// Avoid offRoute/onRoute loop, #16571
+			//if (hasPendingTasks) {
+			//	if (isFollowingMode()) {
+			//		getVoiceRouter().announceBackOnRoute();
+			//	}
+			//}
 		}
 	}
 

@@ -126,7 +126,7 @@
     <string name="map_widget_compass">Kompas</string>
     <string name="map_widget_lock_screen">Zakleni</string>
     <string name="map_widget_back_to_loc">Kje sem?</string>
-    <string name="map_widget_config">Nastavite zaslona</string>
+    <string name="map_widget_config">Nastavitve zaslona</string>
     <string name="map_widget_time">Čas do cilja</string>
     <string name="map_widget_next_turn">Naslednji zavoj</string>
     <string name="map_widget_next_turn_small">Naslednji zavoj (manjši)</string>
@@ -284,7 +284,7 @@
     <string name="select_navigation_mode">Načina prevoza:</string>
     <string name="day_night_info_description">Sončni vzhod: %1$s
 \nSončni zahod: %2$s</string>
-    <string name="layer_map_appearance">Nastavite zaslona</string>
+    <string name="layer_map_appearance">Nastavitve zaslona</string>
     <string name="show_lanes">Vozni pasovi</string>
     <string name="avoid_in_routing_title">Izogibanje …</string>
     <string name="avoid_ferries">Brez trajektov</string>
@@ -612,7 +612,7 @@
     <string name="gpx_option_from_start_point">Podaj celotno sled</string>
     <string name="switch_to_vector_map_to_see">Za to območje so na voljo vektorski zemljevidi za delo brez povezave.
 \n\t
-\n\tMožnosti so na voljo v »Meniju« → »Možnosti zemljevida« → »Vir zemljevida …« → »Vektorski zemljevidi za delo brez povezave«.</string>
+\n\tMožnosti so na voljo v »Meniju« → »Nastavitve zemljevida« → »Vir zemljevida …« → »Vektorski zemljevidi za delo brez povezave«.</string>
     <string name="voice_stream_notification">Zvok obvestila</string>
     <string name="voice_stream_music">Zvok navigacije</string>
     <string name="warning_tile_layer_not_downloadable">Ni mogoče prejeti sloja zemljevida %1$s. Morda je treba program ponovno namestiti.</string>
@@ -628,9 +628,9 @@
     <string name="map_overlay">Prekrivni zemljevid</string>
     <string name="map_overlay_descr">Izberi prekrivni zemljevid</string>
     <string name="tile_source_already_installed">Zemljevid je že nameščen. Nastavitve bodo posodobljene.</string>
-    <string name="select_tile_source_to_install">Izbor zemljevidov za namestitev ali posodobitev.</string>
+    <string name="select_tile_source_to_install">Izberi vire ploščic zemljevidov:</string>
     <string name="internet_not_available">Opravila ni mogoče izvesti brez vzpostavljene povezave z internetom.</string>
-    <string name="install_more">Namesti več …</string>
+    <string name="install_more">Dodaj več …</string>
     <string name="create_poi_link_to_osm_doc">Določitev <u>spletnega OSM</u> s slikami.</string>
     <string name="error_doing_search">Iskanja v načinu brez povezave ni mogoče izvesti.</string>
     <string name="search_osm_offline">Poišči mesto na zemljevidu</string>
@@ -1136,7 +1136,7 @@
     <string name="routing_attr_avoid_ferries_description">Izogne se trajektom</string>
     <string name="routing_attr_avoid_motorway_name">Brez avtocest</string>
     <string name="routing_attr_avoid_motorway_description">Izogne se avtocestam</string>
-    <string name="routing_attr_weight_name">Omejitev teže</string>
+    <string name="routing_attr_weight_name">Teža</string>
     <string name="routing_attr_weight_description">Navedi dovoljeno težo vozila na poteh.</string>
     <string name="app_mode_truck">Tovorno vozilo</string>
     <string name="index_item_world_bitcoin_payments">Svetovna plačila Bitcoin</string>
@@ -1333,7 +1333,7 @@
     <string name="map_widget_right">Desni pult</string>
     <string name="map_widget_left">Levi pult</string>
     <string name="shared_string_show">Pokaži</string>
-    <string name="configure_map">Nastavi zemljevid</string>
+    <string name="configure_map">Nastavitve zemljevida</string>
     <string name="search_radius_proximity">Znotraj</string>
     <string name="anonymous_user_hint">Anonimni uporabniki ne morejo:
 \n- ustvarjati skupin;
@@ -1515,13 +1515,13 @@
 \n
 \nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso zahtevani.
 \n
-\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti, ali pa s spreminjanjem vrste prikaza zemljevida.</string>
-    <string name="plugin_ski_descr">Zasnovan za navigacijo po območjih zimskih športov: oglej si smučarske proge in vlečnice ter proge za tek na smučeh z barvnimi črtami, ki označujejo stopnje težavnosti. Za uporabo omogoči ta vtičnik in pojdi na »Konfiguriraj zemljevid« ter izberite slog zemljevida »Zima in smučanje«.</string>
-    <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Konfiguriraj zemljevid«.
+\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti, ali pa s spreminjanjem vrste prikaza zemljevida v Nastavitvah zemljevida.</string>
+    <string name="plugin_ski_descr">Zasnovan za navigacijo po območjih zimskih športov: oglej si smučarske proge in vlečnice ter proge za tek na smučeh z barvnimi črtami, ki označujejo stopnje težavnosti. Za uporabo omogoči ta vtičnik in pojdi na »Nastavitve zemljevida« ter izberi slog zemljevida »Zima in smučanje«.</string>
+    <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Nastavitvah zemljevida«.
 \n
 \nNadaljnje branje na https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="routing_attr_avoid_borders_description">Izogni se mednarodnim mejnim prehodom</string>
-    <string name="routing_attr_height_name">Omejitev višine</string>
+    <string name="routing_attr_height_name">Višina</string>
     <string name="routing_attr_height_description">Navedi dovoljeno višino vozila na poteh.</string>
     <string name="use_fast_recalculation">Pametno preračunavanje poti</string>
     <string name="use_fast_recalculation_desc">Preračuna samo začetni del poti, uporabno pri dolgih potovanjih.</string>
@@ -1727,7 +1727,7 @@
     <string name="shared_string_upload">Pošlji</string>
     <string name="read_more">Preberite več</string>
     <string name="whats_new">Kaj je novega v</string>
-    <string name="rendering_attr_hideProposed_name">Skrij predlagane predmete</string>
+    <string name="rendering_attr_showProposed_name">Skrij predlagane predmete</string>
     <string name="share_osm_edits_subject">Posodobitve OSM, oddane preko OsmAnd</string>
     <string name="lang_nds">Nizka nemščina</string>
     <string name="lang_mk">Makedonščina</string>
@@ -2089,7 +2089,7 @@
     <string name="quick_action_poi_hide">Skrij %1$s</string>
     <string name="quick_action_add_category">Dodaj kategorijo</string>
     <string name="quick_action_add_create_items">Ustvari predmete</string>
-    <string name="quick_action_add_configure_map">Nastavi zemljevid</string>
+    <string name="quick_action_add_configure_map">Nastavitve zemljevida</string>
     <string name="quick_action_bug_message">Sporočilo</string>
     <string name="quick_action_poi_list">Seznam točk POI</string>
     <string name="quick_action_map_style_action">Dodaj slog zemljevida</string>
@@ -2261,7 +2261,7 @@
     <string name="mapillary_action_descr">Deli svoje posnetke na ravni ulice prek aplikacije Mapillary.</string>
     <string name="mapillary_widget_descr">Omogoča hitre prispevke v Mapillary.</string>
     <string name="mapillary_descr">Spletne fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
-    <string name="plugin_mapillary_descr">Posnetki pogledov z ravni ulice. Prispevaš lahko tudi sam/a. Če si želiš ogledati obstoječe podatke kot sloj zemljevida, v meniju »Konfiguriraj zemljevid« vklopi »Posnetke na ravni ulice«.</string>
+    <string name="plugin_mapillary_descr">Posnetki pogledov z ravni ulice. Prispevaš lahko tudi sam/a. Če si želiš ogledati obstoječe podatke kot sloj zemljevida, v meniju »Nastavitve zemljevida« vklopi »Posnetke na ravni ulice«.</string>
     <string name="private_access_routing_req">Ciljno mesto je znotraj območja z zasebnim dostopom. Ali lahko za to potovanje uporabljamo tudi zasebne ceste\?</string>
     <string name="quick_action_showhide_osmbugs_descr">Gumb za prikaz ali skrivanje OSM opomb na zemljevidu.</string>
     <string name="animate_my_location">Animiraj trenutno mesto</string>
@@ -3224,7 +3224,7 @@
     <string name="route_between_points">Pot med točkama/-i</string>
     <string name="plan_a_route">Načrtujte pot</string>
     <string name="add_to_a_track">Dodaj sledi</string>
-    <string name="routing_attr_width_name">Omejitev širine</string>
+    <string name="routing_attr_width_name">Širina</string>
     <string name="shared_string_bearing">Smer</string>
     <string name="plan_route_select_track_file_for_open">Izberi datoteko sledi za odpiranje.</string>
     <string name="add_hidden_group_info">Dodano točko lahko najdeš v »%s«. Razkrij izbrano skupino, da bo prikazana na zemljevidu.</string>
@@ -3459,7 +3459,7 @@
     <string name="shared_string_size">Velikost</string>
     <string name="use_routing_fallback">Nadomestno usmerjanje brez povezave</string>
     <string name="exit_without_saving_warning">Končati brez shranjevanja sprememb\?</string>
-    <string name="migration_files_present">Na izbranem mestu »%3$s« je %1$d datotek (%2$s).</string>
+    <string name="migration_files_present">%1$d datoteka(e) (%2$s), ki so že prisotne v ciljni mapi »%3$s« in niso bile prepisane.</string>
     <string name="created_on">Ustvarjeno</string>
     <string name="shared_string_memory">Pomnilnik</string>
     <string name="no_items_selected_warning">Prosim, izberi vsaj en element</string>
@@ -3514,7 +3514,7 @@
     <string name="gps_filter_smoothing_desc">Nastavi prag razdalje med točkami.
 \nTočke sledi, ki niso vsaj na tej razdalji od zadnje vidne točke, bodo skrite.
 \nPozor, ker lahko visoki prag preveč poenostavi geometrijo proge.</string>
-    <string name="storage_copied_files_size">Kopiranih %1$s datotek (%2$s)</string>
+    <string name="storage_copied_files_size">Obdelana(ih) %1$s datotek(a), %2$s</string>
     <string name="shared_storage_second_step">Klikni »Uporabi to mapo«.</string>
     <string name="shared_storage_warning_description">Zaradi novih pravil sistema Android bo od novembra 2021 OsmAnd 4.2 izgubil dostop do skupne shrambe.
 \n
@@ -4162,7 +4162,7 @@
 \n
 \n• Prilagoditev vrstnega reda predmetov v »Kontekstnem meniju«, »Nastavitvah zemljevida« in »Predalu«.
 \n
-\n• Wikipedija kot ločen sloj v »Nastavitvah zemljevida«, izbereš lahko samo potrebne jezike.
+\n• Wikipedija kot ločen sloj v »Nastavitve zemljevida«, izbereš lahko samo potrebne jezike.
 \n
 \n• Ustvari svoj lastni POI filter ali POI zemljevide s popolno prilagodljivostjo.
 \n
@@ -4201,7 +4201,7 @@
     <string name="turn_screen_on_navigation_instructions">Navodila za navigacijo</string>
     <string name="shared_string_always">Vedno</string>
     <string name="keep_active">Obdrži aktivno</string>
-    <string name="routing_attr_length_name">Omejitev dolžine</string>
+    <string name="routing_attr_length_name">Dolžina</string>
     <string name="turn_screen_on_power_button">Gumb za vklop</string>
     <string name="reset_deafult_order">Obnovi privzeti vrstni red elementov</string>
     <string name="send_files_to_openstreetmap">Pošlji datoteko GPX v OpenStreetMap</string>
@@ -4965,7 +4965,6 @@
     <string name="external_sensors_plugin_description">Dostopa do zunanjih senzorjev za branje npr. tvojega srčnega utripa, hitrost kolesa, moč kolesarjenja ali kadenco. Zahteva, da je tvoja naprava povezana z ustreznimi senzorji prek brezžičnega osebnega omrežnega protokola ANT+.</string>
     <string name="simulate_location_by_gpx">Simulacija lokacije iz GPX-a</string>
     <string name="terms_of_service_desc">S prenosom zemljevidov se strinjaš z %1$s in %2$s.</string>
-    <string name="release_4_4_pre">• Tukaj bodo nizi za različico 4.4</string>
     <string name="open_weather_action_description">Omogoča odpiranje zaslona s podrobnimi informacijami o vremenu.</string>
     <string name="open_weather_action">Odpri vreme</string>
     <string name="rendering_attr_weatherCloudContours_name">Izolinije oblakov</string>
@@ -5028,10 +5027,6 @@
     <string name="checking_progress">Preverjanje …</string>
     <string name="last_synchronized">Zadnja sinhronizacija</string>
     <string name="display_position_automatic_descr">Odvisno od usmerjenosti zemljevida: spodnji del za smer gibanja, sredinski del za vse drugo.</string>
-    <string name="default_tracks_appearance_description">Te nastavitve videza se uveljavijo za vse sledi, izbrane na prejšnjem zaslonu.
-\n
-\nPrav tako se shranijo kot »%1$s«, ki jih uporabi %2$s za vse druge sledi brez implicitnega ali posebej nastavljenega videza.</string>
-    <string name="default_tracks_appearance">Privzeti videz za sled</string>
     <string name="no_visible_tracks_description">Izberi sledi, ki jih želiš prikazati na zemljevidu.</string>
     <string name="no_visible_tracks">Na zemljevidu ni sledi</string>
     <string name="recently_visible">Nedavno vidna %1$s</string>
@@ -5046,4 +5041,64 @@
     <string name="change_default_tracks_appearance_confirmation_description">Spremenim izgled %1$s sledi\?</string>
     <string name="shared_string_yards">jardov</string>
     <string name="shared_string_kilograms">kilogramov</string>
+    <string name="inch">pa</string>
+    <string name="sort_duration_ascending">Najprej krajše trajanje</string>
+    <string name="sort_distance_ascending">Najprej krajša razdalja</string>
+    <string name="sort_distance_descending">Najprej daljša razdalja</string>
+    <string name="sort_date_ascending">Najprej novejši datum</string>
+    <string name="sort_date_descending">Najprej starejši datum</string>
+    <string name="approximate_bearing">Približna usmerjenost</string>
+    <string name="approximate_bearing_descr">Izpelji smer iz navigacijske poti, ki ji slediš.</string>
+    <string name="sort_duration_descending">Najprej daljše trajanje</string>
+    <string name="shared_string_nearest">Najbližje</string>
+    <string name="selected_value">Izbrana vrednost</string>
+    <string name="shared_string_add_manually">Ročno dodaj …</string>
+    <string name="shared_string_inches">palcev</string>
+    <string name="cloud_version_confirm_delete">Izbrisati »%1$s« iz OsmAnd oblaka\?</string>
+    <string name="shared_string_delete_file">Brisanje datoteke</string>
+    <string name="delete_cloud_version">Brisanje različice v oblaku</string>
+    <string name="local_version_do_not_exist">Ni lokalne različice.</string>
+    <string name="shared_string_in_progress">V teku</string>
+    <string name="shared_string_original">Izvirnik</string>
+    <string name="movement_speed">Hitrost gibanja</string>
+    <string name="simulation_position_description">Izberi datoteko s sledjo, ki bo uporabljena kot vir za premikanje lokacije.</string>
+    <string name="release_4_4">• Izboljšan meni »Sledi« v »Nastavitvah zemljevida«
+\n
+\n • Kontekstni meni zdaj prikazuje lokalizirana imena za POI točke
+\n
+\n • Dodana možnost deljenja poti s povezavo
+\n
+\n • Dodana enota za dolžino »navtične milje/čevlji«
+\n
+\n • Orientaciji zemljevida je dodan nov fiksni način
+\n
+\n • Poenostavljen začetni zaslon
+\n
+\n • Fiksni položaj lokacije v načinu razdeljenega zaslona v Android Auto
+\n
+\n • Dodan graf »Hitrost/naklon« za analizo sledi
+\n
+\n • Android 13 je premaknil izbiro jezika aplikacije v sistemske nastavitve
+\n
+\n • Odpravljene težave s prikazom veganskih krajev
+\n
+\n</string>
+    <string name="generate_slope_from_3d_maps">Ustvarjanje rastrskih zemljevidov naklonov iz 3D zemljevidov</string>
+    <string name="clear_online_cache_description">To bo počistilo ves predpomnilnik za spletne vremenske ploščice.</string>
+    <string name="clear_online_cache">Počisti spletni predpomnilnik</string>
+    <string name="offline_cache">Predpomnilnik brez povezave</string>
+    <string name="app_mode_climbing">Plezanje</string>
+    <string name="offline_weather_forecast_desc">Lahko preneseš vremensko napoved za 7 dni.</string>
+    <string name="free_maps_updates">Brezplačne posodobitve (v sili)</string>
+    <string name="token_is_not_valid">Žeton ni veljaven</string>
+    <string name="shared_string_alt_name">Alternativno ime</string>
+    <string name="generate_hillshade_from_3d_maps">Ustvarjanje rastrskih zemljevidov senčenja terena iz 3D-zemljevidov</string>
+    <string name="enable_3d_maps">Omogoči 3D zemljevide</string>
+    <string name="test_heightmap">Preizkusi zemljevid višin</string>
+    <string name="common_weight_limit_error">Najmanjša vrednost je »%1$s« %2$s. Če je masa vozila manjša od najmanjše vrednosti, uporabi profil »%3$s«.</string>
+    <string name="weather_forecast_is_outdated">Napoved je zastarela.</string>
+    <string name="weather_forecast">Vremenska napoved</string>
+    <string name="shared_string_all_world">Ves svet</string>
+    <string name="offline_weather_forecast">Vremenska napoved brez povezave</string>
+    <string name="app_mode_moped">Moped</string>
 </resources>

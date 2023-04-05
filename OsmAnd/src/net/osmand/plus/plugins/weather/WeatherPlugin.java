@@ -32,18 +32,17 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.android.NativeCore;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
@@ -124,6 +123,8 @@ public class WeatherPlugin extends OsmandPlugin {
 				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
 					updateMapPresentationEnvironment();
 					updateLayers(app, null);
+				} else if (event == InitEvents.INDEX_REGION_BOUNDARIES) {
+					clearOutdatedCache();
 				}
 			}
 		});
@@ -148,18 +149,24 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	private void updateMapPresentationEnvironment() {
-		MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
-		if (weatherHelper.getWeatherResourcesManager() == null && rendererContext != null) {
-			weatherHelper.updateMapPresentationEnvironment(rendererContext);
+		MapRendererContext mapRenderer = NativeCoreContext.getMapRendererContext();
+		if (weatherHelper.getWeatherResourcesManager() == null && mapRenderer != null) {
+			updateMapPresentationEnvironment(mapRenderer);
+		}
+	}
+
+
+	private void clearOutdatedCache() {
+		if (weatherHelper.getWeatherResourcesManager() != null) {
+			weatherHelper.clearOutdatedCache();
+		} else {
+			log.error("Tile Resources Manager isn't initialized");
 		}
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return app.getSettings().USE_OPENGL_RENDER.get()
-				&& NativeCore.isAvailable()
-				&& !Version.isQnxOperatingSystem()
-				&& super.isEnabled();
+		return WeatherHelper.isWeatherSupported(app) && super.isEnabled();
 	}
 
 	@Override
@@ -307,8 +314,8 @@ public class WeatherPlugin extends OsmandPlugin {
 			                                  @Nullable View view, @NotNull ContextMenuItem item,
 			                                  boolean isChecked) {
 				weatherSettings.weatherEnabled.set(isChecked);
-				item.setSelected(weatherSettings.weatherEnabled.get());
-				item.setColor(app, weatherSettings.weatherEnabled.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				item.setSelected(isChecked);
+				item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				item.setDescription(isChecked ? getWeatherTypesSummary(weatherHelper.getVisibleBands()) : null);
 				if (uiAdapter != null) {
 					uiAdapter.onDataSetChanged();
@@ -350,7 +357,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 
 	@Override
-	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 		weatherHelper.updateMapPresentationEnvironment(mapRendererContext);
 	}
 
@@ -529,5 +536,10 @@ public class WeatherPlugin extends OsmandPlugin {
 	@Override
 	protected boolean layerShouldBeDisabled(@NonNull OsmandMapLayer layer) {
 		return hasCustomForecast() && layer instanceof DownloadedRegionsLayer;
+	}
+
+	@Override
+	public void addPluginIndexItems(@NonNull IndexFileList indexes) {
+		weatherHelper.getOfflineForecastHelper().addWeatherIndexItems(indexes);
 	}
 }
