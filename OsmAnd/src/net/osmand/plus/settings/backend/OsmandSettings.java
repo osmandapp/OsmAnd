@@ -1124,6 +1124,7 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.TRUCK, "ic_action_truck_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "ic_action_motorcycle_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.HORSE, "ic_action_horse");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.TRAIN, "ic_action_train");
 	}
 
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
@@ -1156,6 +1157,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.HORSE, "horsebackriding");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.MOPED, "moped");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.TRAIN, "train");
 	}
 
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
