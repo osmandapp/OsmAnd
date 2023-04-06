@@ -443,7 +443,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 							routeColoringType : ColoringType.DEFAULT;
 			int routeLineColor = getRouteLineColor();
 			float routeLineWidth = getRouteLineWidth(tb);
-			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth,
+			boolean shouldShowDirectionArrows = previewRouteLineInfo == null
+					|| previewRouteLineInfo.shouldShowDirectionArrows();
+			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			boolean routeUpdated = routeGeometry.updateRoute(tb, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
@@ -511,7 +513,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {
 				renderState.updateRouteState(lastProjection, startLocationIndex, actualColoringType, routeLineColor,
-						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows);
+						routeLineWidth, route.getCurrentRoute(), tb.getZoom(), shouldShowTurnArrows, shouldShowDirectionArrows);
 				draw = routeUpdated || renderState.shouldRebuildRoute || mapActivityInvalidated || mapRendererChanged;
 				if (draw) {
 					routeGeometry.resetSymbolProviders();
@@ -861,23 +863,26 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		private int currentRoute = -1;
 		private int zoom = -1;
 		private boolean shouldShowTurnArrows;
+		private boolean shouldShowDirectionArrows;
 
 		boolean shouldRebuildRoute;
 		boolean shouldRebuildTransportRoute;
 		boolean shouldUpdateRoute;
 		boolean shouldUpdateActionPoints;
 
-		public void updateRouteState(@Nullable Location lastProjection, int startLocationIndex, ColoringType coloringType, int routeColor, float routeWidth,
-		                             int currentRoute, int zoom, boolean shouldShowTurnArrows) {
+		public void updateRouteState(@Nullable Location lastProjection, int startLocationIndex,
+		                             ColoringType coloringType, int routeColor, float routeWidth,
+		                             int currentRoute, int zoom,
+		                             boolean shouldShowTurnArrows, boolean shouldShowDirectionArrows) {
 			this.shouldRebuildRoute = this.coloringType != coloringType
-					|| this.routeColor != routeColor
-					|| this.routeWidth != routeWidth;
+					|| this.routeColor != routeColor;
 
 			this.shouldUpdateRoute = (!MapUtils.areLatLonEqualPrecise(this.lastProjection, lastProjection)
-							|| this.startLocationIndex != startLocationIndex)
+					|| this.startLocationIndex != startLocationIndex
+					|| this.routeWidth != routeWidth
+					|| this.shouldShowDirectionArrows != shouldShowDirectionArrows)
 					&& this.coloringType == coloringType
-					&& this.routeColor == routeColor
-					&& this.routeWidth == routeWidth;
+					&& this.routeColor == routeColor;
 
 			this.shouldUpdateActionPoints = this.shouldRebuildRoute
 					|| this.shouldUpdateRoute
@@ -893,6 +898,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			this.currentRoute = currentRoute;
 			this.zoom = zoom;
 			this.shouldShowTurnArrows = shouldShowTurnArrows;
+			this.shouldShowDirectionArrows = shouldShowDirectionArrows;
 		}
 
 		public void updateTransportRouteState(int publicTransportRoute) {
