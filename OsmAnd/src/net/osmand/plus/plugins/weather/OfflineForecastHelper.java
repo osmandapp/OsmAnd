@@ -66,11 +66,14 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener {
@@ -277,7 +280,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		}
 		if (!isOfflineForecastSizesInfoCalculated(regionId)) {
 			calculateCacheSize(indexItem.getRegion(), () -> {
-				DecimalFormat decimalFormat = new DecimalFormat("#.#");
+				NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 				long contentSize = getOfflineForecastSizeInfo(regionId, true);
 				long containerSize = getOfflineForecastSizeInfo(regionId, false);
 				String size = decimalFormat.format(containerSize / (1024f * 1024f));
