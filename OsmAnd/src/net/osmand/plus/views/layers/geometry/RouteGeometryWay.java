@@ -56,7 +56,7 @@ public class RouteGeometryWay extends
 			updateStylesWidth(pathWidth);
 		}
 		if (this.drawDirectionArrows != drawDirectionArrows) {
-			resetSymbolProviders();
+			resetArrowsProvider();
 		}
 		updatePaints(pathWidth, routeColoringType);
 		getDrawer().setColoringType(routeColoringType);

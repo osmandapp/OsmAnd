@@ -171,6 +171,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					line.setColorizationMapping(colorizationMapping);
 				}
 
+				line.setShowArrows(showPathBitmaps);
 				if (showPathBitmaps && pathBitmap != null) {
 					line.setPathIconStep(bitmapStep);
 					if (specialPathBitmap != null && specialBitmapStep != -1) {
@@ -197,9 +198,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			}
 			builder.setLineDash(vectorDouble);
 		}
-		if (showPathBitmaps && pathBitmap != null) {
-			builder.setShouldShowArrows(true)
-					.setScreenScale(1f)
+
+		builder.setShouldShowArrows(showPathBitmaps);
+		if (pathBitmap != null) {
+			builder.setScreenScale(1f)
 					.setPathIconStep(bitmapStep)
 					.setPathIcon(NativeUtilities.createSkImageFromBitmap(pathBitmap))
 					.setPathIconOnSurface(bitmapOnSurface);

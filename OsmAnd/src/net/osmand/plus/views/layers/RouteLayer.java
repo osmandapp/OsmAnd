@@ -875,12 +875,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		                             int currentRoute, int zoom,
 		                             boolean shouldShowTurnArrows, boolean shouldShowDirectionArrows) {
 			this.shouldRebuildRoute = this.coloringType != coloringType
-					|| this.routeColor != routeColor
-					|| (!this.shouldShowDirectionArrows && shouldShowDirectionArrows);
+					|| this.routeColor != routeColor;
 
 			this.shouldUpdateRoute = (!MapUtils.areLatLonEqualPrecise(this.lastProjection, lastProjection)
-							|| this.startLocationIndex != startLocationIndex
-							|| this.routeWidth != routeWidth)
+					|| this.startLocationIndex != startLocationIndex
+					|| this.routeWidth != routeWidth
+					|| this.shouldShowDirectionArrows != shouldShowDirectionArrows)
 					&& this.coloringType == coloringType
 					&& this.routeColor == routeColor;
 
