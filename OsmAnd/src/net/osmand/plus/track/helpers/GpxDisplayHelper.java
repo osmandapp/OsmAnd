@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -33,15 +35,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class GpxDisplayHelper {
 
 	private static final Log log = PlatformUtil.getLog(GpxDisplayHelper.class);
 
 	private final OsmandApplication app;
-	private final ExecutorService splitTrackSingleThreadExecutor = Executors.newSingleThreadExecutor();
 	private final Map<String, SplitTrackAsyncTask> splitTrackTasks = new HashMap<>();
 
 	public GpxDisplayHelper(@NonNull OsmandApplication app) {
@@ -209,12 +208,12 @@ public class GpxDisplayHelper {
 
 			GpxDataItemCallback itemCallback = item -> {
 				setupSplitTask(splitTask, item);
-				splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
+				splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			};
 			GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path), itemCallback);
 			if (dataItem != null) {
 				setupSplitTask(splitTask, dataItem);
-				splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
+				splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		} else if (callback != null) {
 			callback.processResult(false);
@@ -233,7 +232,7 @@ public class GpxDisplayHelper {
 		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, groups, null);
 		setupSplitTask(splitTask, dataItem);
 		try {
-			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor).get();
+			splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
 		}
