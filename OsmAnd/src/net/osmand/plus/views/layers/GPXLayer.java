@@ -546,8 +546,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					paintTextIcon.setColor(contrastColor);
 					paintOuterRect.setColor(contrastColor);
 
-					List<GpxDisplayItem> items = groups.get(0).getModifiableList();
-					drawSplitItems(canvas, tileBox, new ArrayList<>(items));
+					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
+					drawSplitItems(canvas, tileBox, items);
 				}
 			}
 		}
@@ -570,9 +570,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				}
 				List<GpxDisplayGroup> groups = selectedGpxFile.getDisplayGroups(app);
 				if (!Algorithms.isEmpty(groups)) {
-					List<GpxDisplayItem> items = groups.get(0).getModifiableList();
-					List<GpxDisplayItem> iterableList = new ArrayList(items);
-					for (GpxDisplayItem item : iterableList) {
+					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
+					for (GpxDisplayItem item : items) {
 						if (item.splitName != null) {
 							splitLabelsCount++;
 						}
@@ -605,9 +604,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				List<GpxDisplayGroup> groups = selectedGpxFile.getDisplayGroups(app);
 				if (!Algorithms.isEmpty(groups)) {
 					int color = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
-					List<GpxDisplayItem> items = groups.get(0).getModifiableList();
-					List<GpxDisplayItem> iterableList = new ArrayList(items);
-					for (GpxDisplayItem item : iterableList) {
+					List<GpxDisplayItem> items = groups.get(0).getDisplayItems();
+					for (GpxDisplayItem item : items) {
 						WptPt point = item.locationEnd;
 						String name = item.splitName;
 						if (name != null) {

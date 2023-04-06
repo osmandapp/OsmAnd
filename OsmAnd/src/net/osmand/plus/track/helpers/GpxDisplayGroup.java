@@ -8,6 +8,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class GpxDisplayGroup {
 	private final GPXFile gpxFile;
 
 	private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
-	private List<GpxDisplayItem> list = new ArrayList<>();
+	private List<GpxDisplayItem> displayItems = new ArrayList<>();
 	private String gpxName;
 	private String name;
 	private String description;
@@ -50,7 +51,7 @@ public class GpxDisplayGroup {
 		group.name = name;
 		group.description = description;
 		group.track = track;
-		group.list = new ArrayList<>(list);
+		group.displayItems = new ArrayList<>(displayItems);
 		return group;
 	}
 
@@ -78,8 +79,17 @@ public class GpxDisplayGroup {
 		return name;
 	}
 
-	public List<GpxDisplayItem> getModifiableList() {
-		return list;
+	@NonNull
+	public List<GpxDisplayItem> getDisplayItems() {
+		return new ArrayList<>(displayItems);
+	}
+
+	public void addDisplayItems(@NonNull List<GpxDisplayItem> items) {
+		displayItems = Algorithms.addAllToList(displayItems, items);
+	}
+
+	public void clearDisplayItems() {
+		displayItems = new ArrayList<>();
 	}
 
 	public GpxDisplayItemType getType() {
@@ -107,21 +117,21 @@ public class GpxDisplayGroup {
 	}
 
 	public void noSplit(OsmandApplication app) {
-		list.clear();
+		clearDisplayItems();
 		splitDistance = -1;
 		splitTime = -1;
 		processGroupTrack(app, this);
 	}
 
 	public void splitByDistance(OsmandApplication app, double meters, boolean joinSegments) {
-		list.clear();
+		clearDisplayItems();
 		splitDistance = meters;
 		splitTime = -1;
 		processGroupTrack(app, this, joinSegments);
 	}
 
 	public void splitByTime(OsmandApplication app, int seconds, boolean joinSegments) {
-		list.clear();
+		clearDisplayItems();
 		splitDistance = -1;
 		splitTime = seconds;
 		processGroupTrack(app, this, joinSegments);

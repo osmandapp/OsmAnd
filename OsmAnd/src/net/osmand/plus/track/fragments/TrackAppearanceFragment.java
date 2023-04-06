@@ -713,13 +713,19 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (splitIntervalCard != null) {
 			splitIntervalCard.updateContent();
 		}
-		SplitTrackListener splitTrackListener = new SplitTrackListener() {
+		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
+		SplitTrackListener listener = getSplitTrackListener();
 
-			@Override
-			public void trackSplittingStarted() {
+		SplitTrackAsyncTask splitTrackTask = new SplitTrackAsyncTask(app, groups, listener);
+		splitTrackTask.setSplitType(splitType);
+		splitTrackTask.setSplitInterval(splitType == GpxSplitType.DISTANCE ? distanceSplit : timeSplit);
+		splitTrackTask.setJoinSegments(trackDrawInfo.isJoinSegments());
+		splitTrackTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
 
-			}
-
+	@NonNull
+	private SplitTrackListener getSplitTrackListener() {
+		return new SplitTrackListener() {
 			@Override
 			public void trackSplittingFinished() {
 				if (selectedGpxFile != null) {
@@ -729,9 +735,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				refreshMap();
 			}
 		};
-		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
-		new SplitTrackAsyncTask(app, splitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
-				timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void setupCards() {

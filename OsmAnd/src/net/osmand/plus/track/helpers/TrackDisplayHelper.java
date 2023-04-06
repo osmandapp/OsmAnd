@@ -169,7 +169,7 @@ public class TrackDisplayHelper {
 	public static List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
 		ArrayList<GpxDisplayItem> list = new ArrayList<>();
 		for (GpxDisplayGroup g : groups) {
-			list.addAll(g.getModifiableList());
+			list.addAll(g.getDisplayItems());
 		}
 		return list;
 	}

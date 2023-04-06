@@ -919,8 +919,8 @@ public class GpxUiHelper {
 			String groupName = helper.getGroupName(gpxFile);
 			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		}
-		if (group != null && group.getModifiableList().size() > 0) {
-			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
+		if (group != null && group.getDisplayItems().size() > 0) {
+			GpxDisplayItem gpxItem = group.getDisplayItems().get(0);
 			if (gpxItem != null) {
 				gpxItem.chartPointLayer = chartPointLayer;
 			}

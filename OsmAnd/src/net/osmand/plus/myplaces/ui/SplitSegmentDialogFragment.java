@@ -383,7 +383,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		boolean generalGroup = group.isGeneralTrack();
 		if ((group.isSplitDistance() || group.isSplitTime()) && (!generalGroup && !generalTrack || generalGroup && generalTrack)) {
 			boolean itemsForSelectedSegment = false;
-			for (GpxDisplayItem item : group.getModifiableList()) {
+			for (GpxDisplayItem item : group.getDisplayItems()) {
 				itemsForSelectedSegment = trkSegment.points.get(0).equals(item.locationStart) || itemsForSelectedSegment;
 				if (itemsForSelectedSegment) {
 					splitSegments.add(item);

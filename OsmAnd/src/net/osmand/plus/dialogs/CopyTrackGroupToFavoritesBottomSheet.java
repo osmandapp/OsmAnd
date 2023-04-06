@@ -48,7 +48,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	private void copyToFavorites() {
 		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
-		for (GpxDisplayItem item : group.getModifiableList()) {
+		for (GpxDisplayItem item : group.getDisplayItems()) {
 			if (item.locationStart != null) {
 				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
 				if (!Algorithms.isEmpty(item.description)) {

@@ -5,54 +5,57 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
 
 import java.util.List;
 
 public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private final OsmandApplication app;
-	private final GpxSplitType gpxSplitType;
 	private final List<GpxDisplayGroup> groups;
-	private final SplitTrackListener splitTrackListener;
+	private final SplitTrackListener listener;
 
-	private final boolean joinSegments;
-	private final int timeSplitInterval;
-	private final double distanceSplitInterval;
+	private GpxSplitType splitType = GpxSplitType.NO_SPLIT;
+	private boolean joinSegments;
+	private double splitInterval;
 
 	public SplitTrackAsyncTask(@NonNull OsmandApplication app,
-	                           @NonNull GpxSplitType gpxSplitType,
 	                           @NonNull List<GpxDisplayGroup> groups,
-	                           @Nullable SplitTrackListener splitTrackListener,
-	                           boolean joinSegments,
-	                           int timeSplitInterval,
-	                           double distanceSplitInterval) {
+	                           @Nullable SplitTrackListener listener) {
 		this.app = app;
 		this.groups = groups;
-		this.gpxSplitType = gpxSplitType;
-		this.splitTrackListener = splitTrackListener;
+		this.listener = listener;
+	}
+
+	public void setSplitType(@NonNull GpxSplitType splitType) {
+		this.splitType = splitType;
+	}
+
+	public void setJoinSegments(boolean joinSegments) {
 		this.joinSegments = joinSegments;
-		this.timeSplitInterval = timeSplitInterval;
-		this.distanceSplitInterval = distanceSplitInterval;
+	}
+
+	public void setSplitInterval(double splitInterval) {
+		this.splitInterval = splitInterval;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		if (splitTrackListener != null) {
-			splitTrackListener.trackSplittingStarted();
+		if (listener != null) {
+			listener.trackSplittingStarted();
 		}
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
 		for (GpxDisplayGroup model : groups) {
-			if (gpxSplitType == GpxSplitType.NO_SPLIT) {
+			if (splitType == GpxSplitType.NO_SPLIT) {
 				model.noSplit(app);
-			} else if (gpxSplitType == GpxSplitType.DISTANCE && distanceSplitInterval > 0) {
-				model.splitByDistance(app, distanceSplitInterval, joinSegments);
-			} else if (gpxSplitType == GpxSplitType.TIME && timeSplitInterval > 0) {
-				model.splitByTime(app, timeSplitInterval, joinSegments);
+			} else if (splitType == GpxSplitType.DISTANCE) {
+				model.splitByDistance(app, splitInterval, joinSegments);
+			} else if (splitType == GpxSplitType.TIME) {
+				model.splitByTime(app, (int) splitInterval, joinSegments);
 			}
 		}
 		return null;
@@ -60,15 +63,17 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void result) {
-		if (splitTrackListener != null) {
-			splitTrackListener.trackSplittingFinished();
+		if (listener != null) {
+			listener.trackSplittingFinished();
 		}
 	}
 
 	public interface SplitTrackListener {
 
-		void trackSplittingStarted();
+		default void trackSplittingStarted() {
+		}
 
-		void trackSplittingFinished();
+		default void trackSplittingFinished() {
+		}
 	}
 }
