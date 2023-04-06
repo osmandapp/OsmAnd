@@ -6,6 +6,7 @@ import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 import static net.osmand.plus.download.DownloadActivityType.TRAVEL_FILE;
+import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.DownloadResources.WORLD_SEAMARKS_KEY;
 import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
@@ -54,14 +55,11 @@ import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
-import net.osmand.plus.download.ui.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
 import net.osmand.plus.utils.AndroidUtils;
@@ -422,14 +420,12 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((type == DEPTH_CONTOUR_FILE || type == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
-			} else if (item.getType() == DownloadActivityType.WEATHER_FORECAST && !weatherPurchased) {
+			} else if (item.getType() == WEATHER_FORECAST && !weatherPurchased) {
 				action = RightButtonAction.ASK_FOR_WEATHER_PURCHASE;
-			} else if ((item.getType() == DownloadActivityType.WIKIPEDIA_FILE
-					|| item.getType() == DownloadActivityType.TRAVEL_FILE)
+			} else if ((item.getType() == WIKIPEDIA_FILE || item.getType() == TRAVEL_FILE)
 					&& !Version.isPaidVersion(context.getMyApplication())) {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-			} else if ((item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
-					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE) && !depthContoursPurchased) {
+			} else if ((item.getType() == DEPTH_CONTOUR_FILE || item.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 			}
 		}
@@ -656,7 +652,7 @@ public class ItemViewHolder {
 		} else if (downloadItem.getType() == DownloadActivityType.VOICE_FILE) {
 			type = downloadItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
 					: LocalIndexType.VOICE_DATA;
-		} else if (downloadItem.getType() == DownloadActivityType.WEATHER_FORECAST) {
+		} else if (downloadItem.getType() == WEATHER_FORECAST) {
 			type = LocalIndexType.TILES_DATA;
 		}
 		return type;

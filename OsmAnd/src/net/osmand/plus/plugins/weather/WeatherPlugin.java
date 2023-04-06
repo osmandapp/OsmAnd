@@ -170,6 +170,11 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean isEnableByDefault() {
+		return true;
+	}
+
+	@Override
 	public CharSequence getDescription() {
 		return app.getString(R.string.weather_plugin_description);
 	}
