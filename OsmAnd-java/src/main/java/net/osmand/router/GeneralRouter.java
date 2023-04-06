@@ -396,7 +396,7 @@ public class GeneralRouter implements VehicleRouter {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
 			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, dir);
-			if(obst == null) {
+			if (obst == null) {
 				int[] filteredPointTypes = filterDirectionTags(road, pointTypes, dir);
 				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, filteredPointTypes, 0);
 				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst, dir);
@@ -405,44 +405,38 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return 0;
 	}
-	
-	private int[] filterDirectionTags(RouteDataObject road, int[] pointTypes, boolean dir) {
-		int wayOppositeDirection = dir ? -1 : 1;
+
+	private int[] filterDirectionTags(RouteDataObject road, int[] pointTypes, boolean forwardDir) {
+		int wayDirection = forwardDir ? 1 : -1;
 		int direction = 0;
 		int tdirection = 0;
 		int hdirection = 0;
-		for (int i = 0; i < pointTypes.length; i++) {
-			if (pointTypes[i] == road.region.directionBackward) {
+		for (int type : pointTypes) {
+			if (type == road.region.directionBackward) {
 				direction = -1;
-			} else if(pointTypes[i] == road.region.directionForward) {
+			} else if (type == road.region.directionForward) {
 				direction = 1;
-			} else if (pointTypes[i] == road.region.directionTrafficSignalsBackward) {
+			} else if (type == road.region.directionTrafficSignalsBackward) {
 				tdirection = -1;
-			} else if(pointTypes[i] == road.region.directionTrafficSignalsForward) {
+			} else if (type == road.region.directionTrafficSignalsForward) {
 				tdirection = 1;
-			} else if (pointTypes[i] == road.region.maxheightBackward) {
+			} else if (type == road.region.maxheightBackward) {
 				hdirection = -1;
-			} else if (pointTypes[i] == road.region.maxheightForward) {
+			} else if (type == road.region.maxheightForward) {
 				hdirection = 1;
 			}
 		}
 		if (direction != 0 || tdirection != 0 || hdirection != 0) {
-			TIntArrayList filteredRules = new TIntArrayList();
-			for (int i = 0; i < pointTypes.length; i++) {
-				boolean skip = false;
-				if ((pointTypes[i] == road.region.stopSign || pointTypes[i] == road.region.giveWaySign)
-						&& direction == wayOppositeDirection) {
-					skip = true;
-				} else if (pointTypes[i] == road.region.trafficSignals && tdirection == wayOppositeDirection) {
-					skip = true;
-				} else if (hdirection == wayOppositeDirection) {
-					skip = true;
+			TIntArrayList filteredPointTypes = new TIntArrayList();
+			for (int type : pointTypes) {
+				if (((type == road.region.stopSign || type == road.region.giveWaySign) && direction == wayDirection)
+						|| (type == road.region.trafficSignals && tdirection == wayDirection)
+						|| (hdirection == wayDirection)) {
+					continue;
 				}
-				if (!skip) {
-					filteredRules.add(pointTypes[i]);
-				}
+				filteredPointTypes.add(type);
 			}
-			return filteredRules.toArray();
+			return filteredPointTypes.toArray();
 		}
 		return pointTypes;
 	}
