@@ -5088,4 +5088,10 @@
     <string name="shared_string_original">Jatorrizkoa</string>
     <string name="movement_speed">Mugimendu-abiadura</string>
     <string name="shared_string_on_map">Mapan</string>
+    <string name="camera_app">Kamera aplikazioa</string>
+    <string name="shutter_sound">Obturadorearen soinua</string>
+    <string name="speak_route_deviation">Ibilbidearen desbideratzearen berri eman</string>
+    <string name="select_layer">Hautatu geruza</string>
+    <string name="free_maps_updates">Doako eguneraketak (larrialdikoak)</string>
+    <string name="clear_online_cache_description">Horrek lineako eguraldi lauzarako cache guztia garbituko du.</string>
 </resources>

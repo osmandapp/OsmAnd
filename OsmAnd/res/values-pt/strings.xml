@@ -4077,7 +4077,7 @@
     <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
     <string name="tts_description">Text-to-speech (TTS) pode pronunciar todos os tipos de instruções: nomes de ruas, instruções de viragem, nomes de POI, etc.</string>
     <string name="tts_title">TTS</string>
-    <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: apenas estão disponíveis as instruções de viragem. Não pode pronunciar nomes de ruas ou nomes de POI.</string>
+    <string name="recorded_description">A voz gravada soa melhor, mas só é possível pronunciar frases pré-gravadas: apenas estão disponíveis instruções de viragem. Não pronuncia nomes de ruas ou nomes de POI.</string>
     <string name="use_system_language">Usar idioma do sistema</string>
     <string name="shared_string_itinerary">Itinerário</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas onde só são permitidos veículos com baixas emissões poluentes, como carros elétricos (ou a combustão, dependendo da legislação local)</string>
@@ -4850,8 +4850,8 @@
     <string name="shared_string_terms_of_use">Termos de utilização</string>
     <string name="shared_string_shows">Mostra</string>
     <string name="external_sensors_support">Sensores externos suportados</string>
-    <string name="speak_gps_signal_status">Anunciar a perda ou recuperação do sinal GPS</string>
-    <string name="speak_route_recalculation">Anunciar o recálculo da rota</string>
+    <string name="speak_gps_signal_status">Avisar perda ou recuperação do sinal GPS</string>
+    <string name="speak_route_recalculation">Avisar recálculo da rota</string>
     <string name="release_4_3">• Novo mecanismo de renderização de mapas mais rápido (versão 2 - OpenGL), com visualização 2.5D
 \n
 \n • Animação suave em alterações de localização durante o movimento
@@ -5131,5 +5131,7 @@
     <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
     <string name="select_layer">Selecionar camada</string>
     <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
-    <string name="speak_route_deviation">Anunciar desvio da rota</string>
+    <string name="speak_route_deviation">Avisar desvio da rota</string>
+    <string name="camera_app">Aplicação de câmara</string>
+    <string name="shutter_sound">Som ao tirar fotografia</string>
 </resources>

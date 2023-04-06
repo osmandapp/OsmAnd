@@ -5117,4 +5117,7 @@
     <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
     <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
     <string name="select_layer">Sélectionner la sur-couche</string>
+    <string name="camera_app">Application d\'appareil photo</string>
+    <string name="shutter_sound">Son de l\'obturateur</string>
+    <string name="speak_route_deviation">Annoncer une déviation de l\'itinéraire</string>
 </resources>

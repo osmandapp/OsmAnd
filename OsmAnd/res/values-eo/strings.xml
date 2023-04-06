@@ -5125,4 +5125,6 @@
     <string name="weather_forecast_is_outdated">Veterprognozo estas malaktuala.</string>
     <string name="rendering_value_defaultMedium_name">Implicita (meza)</string>
     <string name="speak_route_deviation">Anonci devojiĝon de la kurso</string>
+    <string name="shutter_sound">Sono dum fari foton</string>
+    <string name="camera_app">Aplikaĵo de fotilo</string>
 </resources>

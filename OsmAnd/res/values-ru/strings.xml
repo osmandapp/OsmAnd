@@ -4973,14 +4973,14 @@
     <string name="quick_action_air_pressure_layer">Переключатель для отображения или скрытия слоя давления на карте.</string>
     <string name="precipitation_layer">Слой осадков</string>
     <string name="cloud_layer">Слой облачности</string>
-    <string name="rendering_attr_showMtbScale_name">Показать MTB шкалу</string>
-    <string name="rendering_attr_showMtbScale_description">Показать трассы в соответствии с их MTB-шкалой.</string>
+    <string name="rendering_attr_showMtbScale_name">Показать MTB сложность</string>
+    <string name="rendering_attr_showMtbScale_description">Показать MTB трейлы в соответствии с их сложностью.</string>
     <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
     <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
-    <string name="mtb_scale">MTB шкала</string>
+    <string name="mtb_scale">MTB сложность</string>
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии скорости ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
@@ -5123,4 +5123,6 @@
     <string name="speak_route_deviation">Объявлять об отклонении от маршрута</string>
     <string name="select_layer">Выбрать слой</string>
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
+    <string name="shutter_sound">Звук затвора</string>
+    <string name="camera_app">Приложение камеры</string>
 </resources>

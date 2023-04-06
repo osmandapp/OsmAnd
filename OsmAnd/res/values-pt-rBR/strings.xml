@@ -5122,4 +5122,7 @@
     <string name="metric_lbs">lbs</string>
     <string name="select_layer">Selecionar camada</string>
     <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
+    <string name="speak_route_deviation">Anunciar desvio da rota</string>
+    <string name="shutter_sound">Som do obturador</string>
+    <string name="camera_app">Aplicativo de câmera</string>
 </resources>
