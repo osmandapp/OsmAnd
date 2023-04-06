@@ -5094,4 +5094,24 @@
     <string name="select_layer">Hautatu geruza</string>
     <string name="free_maps_updates">Doako eguneraketak (larrialdikoak)</string>
     <string name="clear_online_cache_description">Horrek lineako eguraldi lauzarako cache guztia garbituko du.</string>
+    <string name="weather_forecast">Eguraldi iragarpena</string>
+    <string name="offline_weather_forecast_desc">7 egunetarako eguraldiaren iragarpena deskarga dezakezu.</string>
+    <string name="rendering_value_defaultMedium_name">Lehenetsia (ertaina)</string>
+    <string name="shared_string_alt_name">Ordezko izena</string>
+    <string name="token_is_not_valid">Kodea baliogabea da</string>
+    <string name="clear_online_cache">Garbitu lineako cachea</string>
+    <string name="offline_cache">Lineaz kanpoko cachea</string>
+    <string name="weather_forecast_is_outdated">Iragarpena zaharkituta dago.</string>
+    <string name="shared_string_all_world">Mundu guztia</string>
+    <string name="offline_weather_forecast">Lineaz kanpoko eguraldiaren iragarpena</string>
+    <string name="app_mode_climbing">Eskalada</string>
+    <string name="common_weight_limit_error">Gutxieneko balioa \"%1$s\" %2$s da. Erabili \"%3$s\" profila ibilgailuaren pisua gutxieneko balioa baino txikiagoa bada.</string>
+    <string name="shared_string_pounds">libra</string>
+    <string name="metric_lbs">libra</string>
+    <string name="app_mode_moped">Ziklomotorra</string>
+    <string name="generate_hillshade_from_3d_maps">Sortu mendien itzala duten raster mapak 3D mapetatik</string>
+    <string name="generate_slope_from_3d_maps">Sortu malden raster mapak 3D mapetatik</string>
+    <string name="disable_vertex_hillshade_3d">Desgaitu gailurren mendi-itzalak 3Dn</string>
+    <string name="enable_3d_maps">Gaitu 3D mapak</string>
+    <string name="test_heightmap">Probatu altuera-mapa</string>
 </resources>
