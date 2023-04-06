@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="switch_to_raster_map_to_see">Stáhněte si offline vektorovou mapu pro toto místo v \"Menu\" (\"Stáhnout mapy\") nebo přepněte na zásuvný modul \"Online mapy\".</string>
+    <string name="switch_to_raster_map_to_see">Stáhněte si offline vektorovou mapu pro toto místo v \"Menu\" (\"Stáhnout mapy\") nebo přepněte na modul \"Online mapy\".</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
     <string name="gpx_visibility_txt">Viditelnost</string>
     <string name="gpx_tags_txt">Tagy</string>
@@ -318,7 +318,7 @@
     <string name="voice_is_not_available_msg">Hlasové navádění je nedostupné. Přejděte do „Nastavení“ → „Nastavení navigace“ → „Hlasová data“ a vyberte nebo stáhněte balíček s hlasovými pokyny.</string>
     <string name="voice_is_not_available_title">Zvolte balíček hlasových údajů</string>
     <string name="trace_rendering_descr">Zobrazení výkonu vykreslování a navigace.</string>
-    <string name="trace_rendering">Informace o ladění výkonu</string>
+    <string name="trace_rendering">Informace pro ladění výkonu</string>
     <string name="daynight_mode_day">Den</string>
     <string name="daynight_mode_night">Noc</string>
     <string name="daynight_mode_auto">Východ/západ slunce</string>
@@ -433,7 +433,7 @@
     <string name="route_head">Pokračujte rovně</string>
     <string name="first_time_continue">Pokračujte</string>
     <string name="first_time_download">Stáhnout regiony</string>
-    <string name="first_time_msg">Děkujeme, že používáte OsmAnd. Stáhněte si regionální data pro offline použití přes \"Menu\" → \"Stáhnout mapy\" a prohlížejte si mapy, vyhledávejte adresy, hledejte body zájmu, vyhledávejte veřejnou dopravu a další.</string>
+    <string name="first_time_msg">Děkujeme, že používáte OsmAnd. Stáhněte si regionální data pro offline použití přes \"Menu\" → \"Stáhnout mapy\" a prohlížejte si mapy, vyhledávejte adresy, body zájmu, veřejnou dopravu a další.</string>
     <string name="search_poi_location">Čekání na signál…</string>
     <string name="search_near_map">Hledat poblíž současného středu mapy</string>
     <string name="search_nearby">Hledat poblíž</string>
@@ -649,14 +649,14 @@
     <string name="map_online_data_descr">Používat on-line mapy (ukládat dlaždice do mezipaměti na paměťové kartě).</string>
     <string name="shared_string_online_maps">On-line mapy</string>
     <string name="online_map_settings_descr">Zvolit online nebo uložené dlaždicové mapové zdroje.</string>
-    <string name="osmand_rastermaps_plugin_description">Přístup k mnoha typům online (tzv. dlaždicových nebo rastrových) map, jako jsou předrenderované dlaždice OSM, satelitní snímky a speciální vrstvy, jako jsou mapy počasí, klimatické mapy, geologické mapy, vrstvy kopců atd.
+    <string name="osmand_rastermaps_plugin_description">Získejte přístup k mnoha typům online (tzv. dlaždicových nebo rastrových) map, jako jsou předrenderované dlaždice OSM, satelitní snímky a speciální vrstvy, např. mapy počasí, klimatické mapy, geologické mapy, vrstvy stínovaných svahů atd.
 \n
-\n Kteroukoli z těchto map lze zobrazit jako hlavní (základní) mapu nebo jako překryvnou či podkladovou mapu k jiné základní mapě (jako jsou offline vektorové mapy OsmAnd). Některé prvky vektorových map OsmAnd lze skrýt prostřednictvím nabídky \"Konfigurace mapy\", aby byla jakákoli podkladová mapa viditelnější.
+\n Kterákoliv z těchto map může být zobrazena jako hlavní (základní) mapa nebo jako překryvná či podkladová mapa k jiné základní mapě (např. offline vektorové mapy OsmAnd). Některé prvky vektorových map OsmAnd lze skrýt prostřednictvím nabídky \"Nastavení mapy\", aby byla podkladová mapa viditelnější.
 \n
 \n Stáhněte si dlaždicové mapy přímo nebo je zkopírujte jako databázové soubory SQLite do datové složky aplikace OsmAnd pomocí některého z mnoha nástrojů třetích stran pro přípravu map.</string>
     <string name="osmand_background_plugin_description">Zobrazí nastavení pro zapnutí záznamu trasy a navigace na pozadí s pravidelným probouzením GPS zařízení (s vypnutou obrazovkou).</string>
-    <string name="osmand_accessibility_description">Zpřístupní funkce přístupnosti zařízení přímo v aplikaci OsmAnd. To usnadňuje např. nastavení rychlosti řeči pro hlasy převádějící text na řeč, konfiguraci navigace pomocí D-padu, použití trackballu pro ovládání zoomu nebo zpětnou vazbu převádějící text na řeč, např. pro automatické oznamování polohy.</string>
-    <string name="osmand_development_plugin_description">Poskytuje funkce pro testování a ladění aplikace OsmAnd: simulaci navigačních tras, sledování vykreslování obrazovky, kontrolu výkonu atd. Tento zásuvný modul není pro běžné používání aplikace vyžadován.</string>
+    <string name="osmand_accessibility_description">Zobrazí funkce usnadnění přístupu přímo v aplikaci OsmAnd. To umožňuje např. změnit rychlost řeči generovaných hlasů, nastavení ovládání pomocí D-padu, použití trackballu pro ovládání zoomu nebo automatické hlasové oznamování polohy.</string>
+    <string name="osmand_development_plugin_description">Poskytuje funkce pro testování a ladění aplikace OsmAnd: simulaci navigačních tras, sledování vykreslování obrazovky, kontrolu výkonu atd. Tento modul není pro běžné používání aplikace vyžadován.</string>
     <string name="plugins_screen">Správce modulů</string>
     <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a přídavné funkce.</string>
     <string name="prefs_plugins">Moduly</string>
@@ -895,7 +895,7 @@
     <string name="recording_context_menu_play">Přehrát</string>
     <string name="map_widget_av_notes">Zvukové/video poznámky</string>
     <string name="map_widget_distancemeasurement">Měření vzdálenosti</string>
-    <string name="audionotes_plugin_description">Během cesty můžete pořizovat zvukové/fotografické/video poznámky pomocí tlačítka na mapě nebo kontextové nabídky polohy.</string>
+    <string name="audionotes_plugin_description">Vytvářejte zvukové/fotografické/video poznámky během cesty pomocí tlačítka na mapě nebo kontextové nabídky polohy.</string>
     <string name="index_srtm_parts">části</string>
     <string name="av_def_action_video">Nahrát video</string>
     <string name="av_def_action_audio">Nahrát zvuk</string>
@@ -1288,7 +1288,7 @@
     <string name="download_additional_maps">Stáhnout chybějící mapy %1$s (%2$d MB)?</string>
     <string name="save_track_interval_globally">Interval ukládání trasy</string>
     <string name="rendering_attr_publicTransportMode_name">Autobusy, trolejbusy a kyvadlová doprava</string>
-    <string name="record_plugin_description">Zaznamenávejte své výlety nebo tréninky a analyzujte data z hlediska rychlosti, počtu stoupání a klesání, výškového profilu atd. Zaznamenané trasy lze archivovat, sdílet s přáteli, upravovat a následně zpracovávat.
+    <string name="record_plugin_description">Zaznamenávejte své výlety nebo tréninky a analyzujte data z hlediska rychlosti, stoupání a klesání, výškového profilu atd. Zaznamenané trasy lze archivovat, sdílet s přáteli, upravovat a dále zpracovávat.
 \n
 \nDalší informace naleznete na adrese https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="record_plugin_name">Záznam cesty</string>
@@ -2271,7 +2271,7 @@
     <string name="mapillary_action_descr">Sdílejte svůj vlastní pohled z úrovně ulice přes Mapillary.</string>
     <string name="mapillary_widget_descr">Umožňuje rychle přispět do Mapillary.</string>
     <string name="mapillary_descr">On-line fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
-    <string name="plugin_mapillary_descr">Snímky pohledů na úrovni ulice. Přispět můžete i vy. Chcete-li zobrazit existující data jako mapovou vrstvu, zapněte v nabídce \"Konfigurace mapy\" možnost \"Snímky na úrovni ulic\".</string>
+    <string name="plugin_mapillary_descr">Snímky z úrovně ulice. Přispět můžete i vy. Chcete-li zobrazit existující data jako mapovou vrstvu, zapněte v nabídce \"Nastavení mapy\" možnost \"Snímky z úrovně ulice\".</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="map_widget_ruler_control">Kruhové pravítko</string>
     <string name="shared_string_reset">Resetovat</string>
@@ -3784,9 +3784,9 @@
     <string name="live_monitoring_adress">Webová adresa</string>
     <string name="live_monitoring_tracking_interval">Interval záznamu</string>
     <string name="live_monitoring_time_buffer">Časový zásobník</string>
-    <string name="monitoring_min_distance_descr_recommendation">Doporučení: Pokud nechcete zaznamenávat drobné podrobnosti o trase a nepotřebujete další údaje o době odpočinku, nastavte posun o 5 metrů.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Nežádoucí účinky: Období odpočinku se nezaznamenávají vůbec nebo jen po jednom bodu. Drobné pohyby (např. ke straně silnice pro označení možné odbočky na cestě) mohou být odfiltrovány. Všimněte si, že váš soubor bude obsahovat méně informací pro následné zpracování a zároveň může potenciálně ušetřit artefakty GPS způsobené špatným příjmem nebo efekty čipové sady.</string>
-    <string name="monitoring_min_distance_descr">Zapnutí tohoto filtru umožňuje vyhnout se dodatečnému záznamu dat, pokud pohyb není téměř detekován. Zlepšuje také prostorový vzhled stop bez dalšího zpracování.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Doporučení: Pokud nechcete zaznamenávat drobné detaily trasy a nepotřebujete další údaje o obdobích bez pohybu, nastavte posun 5 metrů.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Vedlejší účinky: Období klidu se nezaznamenávají vůbec, nebo jen po jednom bodu. Drobné pohyby (např. ke straně silnice pro označení možné odbočky na cestě) mohou být odfiltrovány. Mějte na paměti, že váš soubor bude obsahovat méně informací pro následné zpracování a zároveň může potenciálně ukládat artefakty GPS způsobené špatným příjmem nebo efekty čipové sady.</string>
+    <string name="monitoring_min_distance_descr">Zapnutím tohoto filtru zamezíte záznamu zbytečných dat, pokud pohyb téměř není detekován. Zlepšuje také prostorový vzhled stop bez dalšího zpracování.</string>
     <string name="monitoring_min_accuracy_descr_remark">Poznámka: Pokud bylo GPS vypnuté těsně před začátkem záznamu, může mít první změřený bod nižší přesnost, proto bychom v našem programu mohli chvíli počkat před zaznamenáním bodu (nebo zaznamenat nejlepší ze tří po sobě jdoucích bodů), ovšem to ještě není implementováno.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Doporučení: Je těžké předpovědět, co se zaznamená a co ne, proto může být vhodné tento filtr vypnout.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Vedlejší účinek: Kvůli filtrování podle přesnosti mohou zcela chybět body například pod mosty, stromy, mezi vysokými budovami nebo při jistých povětrnostních podmínkách.</string>
@@ -5005,7 +5005,7 @@
     <string name="rendering_attr_showLightRailRoutes_name">Trasy lehké železnice</string>
     <string name="no_altitude_data">Žádné údaje o nadmořské výšce</string>
     <string name="top_widgets_panel">Horní panel</string>
-    <string name="speed_mode">Režim rychlosti</string>
+    <string name="speed_mode">Rychlostní režim</string>
     <string name="map_markers_bar">Lišta mapových značek</string>
     <string name="change_default_appearance">Změnit výchozí vzhled</string>
     <string name="shared_string_visible_widgets">Viditelné nástroje</string>
@@ -5017,7 +5017,7 @@
     <string name="apply_to_existing_favorites_descr">Použít změny na stávající oblíbené body skupiny, nebo pouze na nové\?</string>
     <string name="apply_to_existing">Použít na stávající</string>
     <string name="configure_screen_widgets_descr">Vyberte stranu obrazovky, na které chcete přidat nebo změnit uspořádání nástrojů.</string>
-    <string name="simulation_constant_mode_desc">Simulace bude provedena s konstantní zvolenou rychlostí.</string>
+    <string name="simulation_constant_mode_desc">Simulace bude provedena se zvolenou konstantní rychlostí.</string>
     <string name="snackbar_page_removed">\"Stránka %1$s\" byla odstraněna.</string>
     <string name="add_page">Přidat stránku</string>
     <string name="shared_string_speed">Rychlost</string>
@@ -5044,9 +5044,9 @@
     <string name="shared_string_inches">palců</string>
     <string name="approximate_bearing_descr">Odvození azimutu od sledované navigační trasy.</string>
     <string name="approximate_bearing">Přibližné určení polohy</string>
-    <string name="inch">na</string>
+    <string name="inch">\"</string>
     <string name="sound_beep_minimal">Pípnutí: minimální</string>
-    <string name="sound_beep_complex_loud">Pípání: komplexní hlasité</string>
+    <string name="sound_beep_complex_loud">Pípnutí: komplexní hlasité</string>
     <string name="sound_beep_complex">Pípnutí: komplexní</string>
     <string name="sound_beep_simple">Pípnutí: jednoduché</string>
     <string name="sound_beep_simple_loud">Pípnutí: jednoduché hlasité</string>
