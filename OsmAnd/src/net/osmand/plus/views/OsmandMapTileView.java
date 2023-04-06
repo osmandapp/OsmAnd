@@ -1622,9 +1622,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private static final float ZONE_0_ANGLE_THRESHOLD = 5;
 		private static final float ZONE_1_ANGLE_THRESHOLD = 15;
 		private static final float ZONE_2_ANGLE_THRESHOLD = 30;
+		private static final float ZONE_3_ANGLE_THRESHOLD = 60;
 		private static final float ZONE_0_ZOOM_THRESHOLD = 0.15f;
-		private static final float ZONE_1_ZOOM_THRESHOLD = 0.3f;
-		private static final float ZONE_2_ZOOM_THRESHOLD = 2f;
+		private static final float ZONE_1_ZOOM_THRESHOLD = 0.6f;
+		private static final float ZONE_2_ZOOM_THRESHOLD = 1.5f;
 		private static final float MAX_DELTA_ZOOM = 4;
 
 		private PointF initialMultiTouchCenterPoint;
@@ -1766,10 +1767,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		private boolean isAngleOverThreshold(float angle, double deltaZoom) {
-			return startRotating ||
-					!startZooming && Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD ||
-					startZooming && angle >= ZONE_1_ANGLE_THRESHOLD && deltaZoom >= ZONE_1_ZOOM_THRESHOLD && deltaZoom < ZONE_2_ZOOM_THRESHOLD ||
-					startZooming && angle >= ZONE_2_ANGLE_THRESHOLD && deltaZoom >= ZONE_2_ZOOM_THRESHOLD;
+			if (startRotating) {
+				return true;
+			} else if (!startZooming) {
+				return Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD;
+			} else if (deltaZoom >= ZONE_2_ZOOM_THRESHOLD) {
+				return Math.abs(angle) >= ZONE_3_ANGLE_THRESHOLD;
+			} else if (deltaZoom >= ZONE_1_ZOOM_THRESHOLD) {
+				return Math.abs(angle) >= ZONE_2_ANGLE_THRESHOLD;
+			} else {
+				return Math.abs(angle) >= ZONE_1_ANGLE_THRESHOLD;
+			}
 		}
 
 		@Override
@@ -1809,8 +1817,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		private double calculateDeltaZoom(double relativeToStart) {
-			// 1/Math.log(2) * 1.5 = 2.1640
-			double deltaZoom = Math.log(relativeToStart) * 2.164;
+			double deltaZoom = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
 			if (deltaZoom > MAX_DELTA_ZOOM) {
 				return MAX_DELTA_ZOOM;
 			} else if (deltaZoom < -MAX_DELTA_ZOOM) {
