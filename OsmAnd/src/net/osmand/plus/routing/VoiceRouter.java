@@ -244,17 +244,17 @@ public class VoiceRouter {
 	}
 
 	private void announceBackOnRoute() {
+		//if (announceBackOnRoute) {
 		if (settings.SPEAK_ROUTE_DEVIATION.get()) {
-			//if (announceBackOnRoute) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
 			}
 			play(p);
-			announceBackOnRoute = false;
-			waitAnnouncedOffRoute = 0;
-			//}
 		}
+		announceBackOnRoute = false;
+		waitAnnouncedOffRoute = 0;
+		//}
 	}
 
 	public void approachWaypoint(Location location, List<LocationPointWrapper> points) {
