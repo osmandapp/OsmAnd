@@ -31,9 +31,9 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 
 public class GpxDisplayHelper {
@@ -41,7 +41,7 @@ public class GpxDisplayHelper {
 	private static final Log log = PlatformUtil.getLog(GpxDisplayHelper.class);
 
 	private final OsmandApplication app;
-	private final Map<String, SplitTrackAsyncTask> splitTrackTasks = new HashMap<>();
+	private final Map<String, SplitTrackAsyncTask> splitTrackTasks = new ConcurrentHashMap<>();
 
 	public GpxDisplayHelper(@NonNull OsmandApplication app) {
 		this.app = app;
