@@ -27,6 +27,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 
 	private static final String INFO_PREF_ID = "proxy_preferences_info";
 	private static final String PENDING_ENABLE_PROXY_ATTR = "pending_enable_proxy";
+	private static final int MAX_PORT_VALUE = 65535;
 
 	private boolean pendingEnableProxy;
 
@@ -142,7 +143,9 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	private void applyProxyPort(@NonNull String portString) {
 		String portNumbers = portString.replaceAll("[^0-9]", "");
 		int port = Algorithms.parseIntSilently(portNumbers, 0);
-		if (port <= 0) {
+		if (port > MAX_PORT_VALUE) {
+			app.showShortToastMessage(R.string.proxy_port_max_warning, MAX_PORT_VALUE);
+		} else if (port <= 0) {
 			settings.PROXY_PORT.resetToDefault();
 			disableProxy();
 		} else {
