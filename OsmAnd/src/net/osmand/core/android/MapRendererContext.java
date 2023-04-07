@@ -174,7 +174,6 @@ public class MapRendererContext {
 				? LanguagePreference.LocalizedOrTransliterated
 				: LanguagePreference.LocalizedOrNative;
 
-		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
@@ -183,8 +182,6 @@ public class MapRendererContext {
 			Log.d(TAG, "Style '" + rendName + "' not in cache");
 			if (mapStylesCollection.getStyleByName(rendName) == null) {
 				Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
-
-				// Ensure parents are loaded (this may also trigger load)
 				loadRenderer(rendName);
 			}
 			ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);
@@ -195,6 +192,7 @@ public class MapRendererContext {
 				rendName = "default";
 			}
 		}
+		loadRendererAddons();
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
 		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density,
 				settings.MAP_DENSITY.get(), settings.TEXT_SCALE.get());
