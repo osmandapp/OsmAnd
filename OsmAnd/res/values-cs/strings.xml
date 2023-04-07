@@ -5123,4 +5123,6 @@
     <string name="select_layer">Vybrat vrstvu</string>
     <string name="rendering_value_defaultMedium_name">Výchozí (střední)</string>
     <string name="speak_route_deviation">Oznámení o odchýlení od trasy</string>
+    <string name="camera_app">Aplikace fotoaparátu</string>
+    <string name="shutter_sound">Zvuk závěrky</string>
 </resources>
