@@ -69,7 +69,6 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode;
@@ -433,38 +432,27 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		Drawable undoDrawable = getActiveIcon(R.drawable.ic_action_undo_dark);
 		undoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, undoDrawable));
-		undoBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				editingCtx.getCommandManager().undo();
-				updateUndoRedoButton(editingCtx.getCommandManager().canUndo(), undoBtn);
-				updateUndoRedoButton(true, redoBtn);
-				updateUndoRedoCommonStuff();
-			}
+		undoBtn.setOnClickListener(v -> {
+			editingCtx.getCommandManager().undo();
+			updateUndoRedoButton(editingCtx.getCommandManager().canUndo(), undoBtn);
+			updateUndoRedoButton(true, redoBtn);
+			updateUndoRedoCommonStuff();
 		});
 
 		Drawable redoDrawable = getActiveIcon(R.drawable.ic_action_redo_dark);
 		redoBtn.setImageDrawable(AndroidUtils.getDrawableForDirection(mapActivity, redoDrawable));
-		redoBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				editingCtx.getCommandManager().redo();
-				updateUndoRedoButton(editingCtx.getCommandManager().canRedo(), redoBtn);
-				updateUndoRedoButton(true, undoBtn);
-				updateUndoRedoCommonStuff();
-			}
+		redoBtn.setOnClickListener(v -> {
+			editingCtx.getCommandManager().redo();
+			updateUndoRedoButton(editingCtx.getCommandManager().canRedo(), redoBtn);
+			updateUndoRedoButton(true, undoBtn);
+			updateUndoRedoCommonStuff();
 		});
 
 		View addPointButton = mainView.findViewById(R.id.add_point_button);
 		UiUtilities.setupDialogButton(nightMode, addPointButton,
 				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_add);
 		addPointButton.setMinimumWidth(btnWidth);
-		addPointButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addCenterPoint();
-			}
-		});
+		addPointButton.setOnClickListener(v -> addCenterPoint());
 
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
@@ -950,8 +938,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (Algorithms.isEmpty(pointsSegments)) {
 				onCancelSnapTrackWarning();
 			} else if (mapActivity != null) {
+				GpxApproximationParams params = new GpxApproximationParams();
+				params.setTrackPoints(pointsSegments);
+				params.setAppMode(mode);
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				GpxApproximationFragment.showInstance(fragmentManager, this, pointsSegments, mode);
+				GpxApproximationFragment.showInstance(app, fragmentManager, this, params);
 			}
 		} else if (resultCode == SnapTrackWarningFragment.CONNECT_STRAIGHT_LINE_RESULT_CODE) {
 			MeasurementToolLayer measurementLayer = getMeasurementLayer();
@@ -1749,7 +1740,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private String getSuggestedFileName() {
-		GpxData gpxData = editingCtx.getGpxData();
+		return getSuggestedFileName(app, editingCtx.getGpxData());
+	}
+
+	public static String getSuggestedFileName(@NonNull OsmandApplication app, @Nullable GpxData gpxData) {
 		String displayedName = null;
 		if (gpxData != null) {
 			GPXFile gpxFile = gpxData.getGpxFile();
