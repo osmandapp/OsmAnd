@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="proxy_port_max_warning">Maximum port value is %1$s</string>
     <string name="shutter_sound">Shutter sound</string>
     <string name="camera_app">Camera app</string>
     <string name="speak_route_deviation">Announce deviation from the route</string>
