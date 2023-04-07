@@ -9,19 +9,20 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,14 +30,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 
 public class LocalIndexHelper {
 
+	private final Log log = PlatformUtil.getLog(LocalIndexHelper.class);
+
 	private final OsmandApplication app;
 
-	public LocalIndexHelper(OsmandApplication app) {
+	public LocalIndexHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -49,20 +51,21 @@ public class LocalIndexHelper {
 		return new Date(t);
 	}
 
-	public String getInstalledDate(long t, TimeZone timeZone) {
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
+	public String getInstalledDate(long time) {
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(time));
 	}
 
 	public void updateDescription(@NonNull LocalIndexInfo info) {
 		File f = new File(info.getPathToData());
 		if (info.getType() == LocalIndexType.MAP_DATA) {
-			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
-			if (ifns.containsKey(info.getFileName())) {
+			Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
+			String fileModifiedDate = indexFileNames.get(info.getFileName());
+			if (fileModifiedDate != null) {
 				try {
-					Date dt = OsmAndFormatter.getDateFormat(app).parse(ifns.get(info.getFileName()));
-					info.setDescription(getInstalledDate(dt.getTime(), null));
-				} catch (ParseException e) {
-					e.printStackTrace();
+					Date date = app.getResourceManager().getDateFormat().parse(fileModifiedDate);
+					info.setDescription(getInstalledDate(date.getTime()));
+				} catch (Exception e) {
+					log.error(e);
 				}
 			} else {
 				info.setDescription(getInstalledDate(f));
