@@ -220,7 +220,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_STOP_RECORDING = "aidl_stop_recording";
 
 	private static final String AIDL_NAVIGATE = "aidl_navigate";
-	private static final String AIDL_NAVIGATE_GPX = "aidl_navigate_gpx"; // todo task that I need
+	private static final String AIDL_NAVIGATE_GPX = "aidl_navigate_gpx";
 	private static final String AIDL_NAVIGATE_SEARCH = "aidl_navigate_search";
 	private static final String AIDL_PAUSE_NAVIGATION = "pause_navigation";
 	private static final String AIDL_RESUME_NAVIGATION = "resume_navigation";
