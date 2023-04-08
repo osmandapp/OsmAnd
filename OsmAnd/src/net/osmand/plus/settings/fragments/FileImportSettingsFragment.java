@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -107,6 +109,19 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 			FragmentManager fm = getFragmentManager();
 			if (fm != null && file != null) {
 				ImportCompleteFragment.showInstance(fm, items, file.getName(), needRestart);
+			}
+			disableFirstUsageFragment();
+		}
+	}
+
+	private void disableFirstUsageFragment() {
+		FirstUsageWizardFragment.SHOW = false;
+		app.getSettings().SHOW_OSMAND_WELCOME_SCREEN.set(false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			FirstUsageWizardFragment wizardFragment = getMapActivity().getFirstUsageWizardFragment();
+			if (wizardFragment != null) {
+				wizardFragment.closeWizard();
 			}
 		}
 	}

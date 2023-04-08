@@ -1,5 +1,7 @@
 package net.osmand.plus.firstusage;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -445,6 +447,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void onResume() {
 		super.onResume();
 		requireMapActivity().disableDrawer();
+		wizardType = DEFAULT_WIZARD_TYPE;
+		doWizardTypeTask();
 	}
 
 	@Override
@@ -774,6 +778,12 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			}
 
 			@Override
+			public void onRestoreFromFile() {
+				MapActivity mapActivity = requireMapActivity();
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+			}
+
+			@Override
 			public void onSelectStorageFolder() {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
@@ -812,6 +822,8 @@ interface FirstUsageActionsListener {
 	void onDetermineLocation();
 
 	void onRestoreFromCloud();
+
+	void onRestoreFromFile();
 
 	void onSelectStorageFolder();
 }
