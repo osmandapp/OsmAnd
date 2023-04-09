@@ -116,8 +116,8 @@ public class TrackDisplayHelper {
 				? displayHelper.collectDisplayGroups(filteredGpxFile)
 				: displayHelper.collectDisplayGroups(gpxFile);
 		originalGroups.clear();
-		for (GpxDisplayGroup g : displayGroups) {
-			originalGroups.add(g.cloneInstance());
+		for (GpxDisplayGroup group : displayGroups) {
+			originalGroups.add(new GpxDisplayGroup(group));
 		}
 		if (file != null) {
 			SelectedGpxFile sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);

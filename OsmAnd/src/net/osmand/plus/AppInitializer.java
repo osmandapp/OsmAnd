@@ -331,7 +331,7 @@ public class AppInitializer implements IProgress {
 		app.feedbackHelper = startupInit(new FeedbackHelper(app), FeedbackHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
-		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
+		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app), GpxSelectionHelper.class);
 		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);

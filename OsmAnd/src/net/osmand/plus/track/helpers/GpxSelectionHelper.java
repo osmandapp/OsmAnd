@@ -56,21 +56,27 @@ public class GpxSelectionHelper {
 
 	private final OsmandApplication app;
 	private final SavingTrackHelper savingTrackHelper;
+	private final GpxDisplayHelper gpxDisplayHelper;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
 
-	public GpxSelectionHelper(OsmandApplication app, SavingTrackHelper trackHelper) {
+	public GpxSelectionHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		savingTrackHelper = trackHelper;
+		savingTrackHelper = app.getSavingTrackHelper();
+		gpxDisplayHelper = app.getGpxDisplayHelper();
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
 		selectedGpxFilesBackUp.clear();
 		if (backupSelection) {
 			for (SelectedGpxFile file : selectedGPXFiles) {
-				selectedGpxFilesBackUp.put(file.gpxFile, file.modifiedTime);
+				selectedGpxFilesBackUp.put(file.getGpxFile(), file.getModifiedTime());
+
+				if (gpxDisplayHelper.isSplittingTrack(file)) {
+					gpxDisplayHelper.cancelTrackSplitting(file);
+				}
 			}
 		}
 		selectedGPXFiles = new ArrayList<>();
@@ -384,14 +390,18 @@ public class GpxSelectionHelper {
 		return selectedFile;
 	}
 
-	void updateSelected(boolean show, SelectedGpxFile file) {
+	void updateSelected(boolean show, @NonNull SelectedGpxFile selectedGpxFile) {
 		List<SelectedGpxFile> selectedFiles = new ArrayList<>(selectedGPXFiles);
 		if (show) {
-			if (!selectedFiles.contains(file)) {
-				selectedFiles.add(file);
+			if (!selectedFiles.contains(selectedGpxFile)) {
+				selectedFiles.add(selectedGpxFile);
 			}
 		} else {
-			selectedFiles.remove(file);
+			selectedFiles.remove(selectedGpxFile);
+
+			if (gpxDisplayHelper.isSplittingTrack(selectedGpxFile)) {
+				gpxDisplayHelper.cancelTrackSplitting(selectedGpxFile);
+			}
 		}
 		selectedGPXFiles = selectedFiles;
 	}

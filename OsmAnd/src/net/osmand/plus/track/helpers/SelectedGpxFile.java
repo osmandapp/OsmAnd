@@ -3,7 +3,6 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.data.QuadRect;

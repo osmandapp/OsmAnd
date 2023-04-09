@@ -45,6 +45,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -716,10 +717,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
 		SplitTrackListener listener = getSplitTrackListener();
 
-		SplitTrackAsyncTask splitTrackTask = new SplitTrackAsyncTask(app, groups, listener);
-		splitTrackTask.setSplitType(splitType);
-		splitTrackTask.setSplitInterval(splitType == GpxSplitType.DISTANCE ? distanceSplit : timeSplit);
-		splitTrackTask.setJoinSegments(trackDrawInfo.isJoinSegments());
+		double splitInterval = splitType == GpxSplitType.DISTANCE ? distanceSplit : timeSplit;
+		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, trackDrawInfo.isJoinSegments());
+
+		SplitTrackAsyncTask splitTrackTask = new SplitTrackAsyncTask(app, groups, params, listener);
 		splitTrackTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
