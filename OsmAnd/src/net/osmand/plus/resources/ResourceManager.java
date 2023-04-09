@@ -1,14 +1,15 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.HandlerThread;
-import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -71,7 +72,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -80,6 +83,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -99,7 +103,8 @@ import java.util.concurrent.Executors;
 public class ResourceManager {
 
 	private static final String INDEXES_CACHE = "ind.cache";
-	public static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
+	private static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
+	private static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm";
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 
@@ -257,7 +262,7 @@ public class ResourceManager {
 	private boolean depthContours;
 	private boolean indexesLoadedOnStart;
 
-	public ResourceManager(OsmandApplication context) {
+	public ResourceManager(@NonNull OsmandApplication context) {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 
@@ -362,6 +367,7 @@ public class ResourceManager {
 		}
 	}
 
+	@Nullable
 	private MapTileLayerSize getMapTileLayerSize(MapTileLayer layer) {
 		for (MapTileLayerSize layerSize : mapTileLayerSizes) {
 			if (layerSize.layer == layer) {
@@ -386,10 +392,12 @@ public class ResourceManager {
 		}
 	}
 
-	public java.text.DateFormat getDateFormat() {
-		return DateFormat.getDateFormat(context);
+	@NonNull
+	public DateFormat getDateFormat() {
+		return new SimpleDateFormat(DATE_TIME_PATTERN, Locale.US);
 	}
 
+	@NonNull
 	public OsmandApplication getContext() {
 		return context;
 	}
@@ -400,6 +408,7 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 
+	@Nullable
 	private TilesCache<?> getTilesCache(ITileSource map) {
 		for (TilesCache<?> cache : tilesCacheList) {
 			if (cache.isTileSourceSupported(map)) {
@@ -448,6 +457,7 @@ public class ResourceManager {
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
 	private boolean searchAmenitiesInProgress;
 
+	@Nullable
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
@@ -572,20 +582,20 @@ public class ResourceManager {
 
 
 	public List<String> indexVoiceFiles(@Nullable IProgress progress) {
-		File file = context.getAppPath(VOICE_INDEX_DIR);
-		file.mkdirs();
+		File voiceDir = context.getAppPath(VOICE_INDEX_DIR);
+		voiceDir.mkdirs();
 		List<String> warnings = new ArrayList<>();
-		if (file.exists() && file.canRead()) {
-			File[] lf = file.listFiles();
-			if (lf != null) {
-				java.text.DateFormat dateFormat = getDateFormat();
-				for (File f : lf) {
-					if (f.isDirectory()) {
-						String lang = f.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
-						File conf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+		if (voiceDir.exists() && voiceDir.canRead()) {
+			File[] files = voiceDir.listFiles();
+			if (files != null) {
+				DateFormat dateFormat = getDateFormat();
+				for (File file : files) {
+					if (file.isDirectory()) {
+						String lang = file.getName().replace(VOICE_PROVIDER_SUFFIX, "");
+						File conf = new File(file, lang + "_" + TTSVOICE_INDEX_EXT_JS);
 						if (conf.exists()) {
-							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified()));
-							indexFiles.put(f.getName(), f);
+							indexFileNames.put(file.getName(), dateFormat.format(conf.lastModified()));
+							indexFiles.put(file.getName(), file);
 						}
 					}
 				}
@@ -595,17 +605,17 @@ public class ResourceManager {
 	}
 
 	public List<String> indexFontFiles(@Nullable IProgress progress) {
-		File file = context.getAppPath(IndexConstants.FONT_INDEX_DIR);
-		file.mkdirs();
+		File fontDir = context.getAppPath(IndexConstants.FONT_INDEX_DIR);
+		fontDir.mkdirs();
 		List<String> warnings = new ArrayList<>();
-		if (file.exists() && file.canRead()) {
-			File[] lf = file.listFiles();
-			if (lf != null) {
-				java.text.DateFormat dateFormat = getDateFormat();
-				for (File f : lf) {
-					if (!f.isDirectory()) {
-						indexFileNames.put(f.getName(), dateFormat.format(f.lastModified()));
-						indexFiles.put(f.getName(), f);
+		if (fontDir.exists() && fontDir.canRead()) {
+			File[] files = fontDir.listFiles();
+			if (files != null) {
+				DateFormat dateFormat = getDateFormat();
+				for (File file : files) {
+					if (!file.isDirectory()) {
+						indexFileNames.put(file.getName(), dateFormat.format(file.lastModified()));
+						indexFiles.put(file.getName(), file);
 					}
 				}
 			}
@@ -630,10 +640,10 @@ public class ResourceManager {
 			if (appPath.canWrite()) {
 				for (AssetEntry asset : assets) {
 					File jsFile = new File(appPath, asset.destination);
-					if (asset.destination.contains(IndexConstants.VOICE_PROVIDER_SUFFIX) && asset.destination
-							.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+					if (asset.destination.contains(VOICE_PROVIDER_SUFFIX) && asset.destination
+							.endsWith(TTSVOICE_INDEX_EXT_JS)) {
 						File oggFile = new File(appPath, asset.destination.replace(
-								IndexConstants.VOICE_PROVIDER_SUFFIX, ""));
+								VOICE_PROVIDER_SUFFIX, ""));
 						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
 							copyAssets(context.getAssets(), asset.source, oggFile);
 						}
@@ -942,7 +952,7 @@ public class ResourceManager {
 			files.remove(worldBasemapMini);
 		}
 
-		java.text.DateFormat dateFormat = getDateFormat();
+		DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
 			String fileName = f.getName();
 			if (progress != null) {

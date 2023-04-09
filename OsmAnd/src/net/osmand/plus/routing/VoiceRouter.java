@@ -221,7 +221,7 @@ public class VoiceRouter {
 	}
 
 	public void announceOffRoute(double dist) {
-		if (dist > atd.getOffRouteDistance()) {
+		if (settings.SPEAK_ROUTE_DEVIATION.get() && dist > atd.getOffRouteDistance()) {
 			long ms = System.currentTimeMillis();
 			if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -245,13 +245,15 @@ public class VoiceRouter {
 
 	private void announceBackOnRoute() {
 		//if (announceBackOnRoute) {
+		if (settings.SPEAK_ROUTE_DEVIATION.get()) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
 			}
 			play(p);
-			announceBackOnRoute = false;
-			waitAnnouncedOffRoute = 0;
+		}
+		announceBackOnRoute = false;
+		waitAnnouncedOffRoute = 0;
 		//}
 	}
 

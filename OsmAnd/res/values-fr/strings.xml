@@ -152,7 +152,7 @@
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
     <string name="internet_connection_required_for_online_route">Le calcul d\'itinéraire en ligne est sélectionné mais une connexion Internet est indispensable pour qu\'il fonctionne.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
-    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \? Sinon la langue par défaut sera utilisée.</string>
+    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible pour le moteur de synthèse vocale installé, la langue par défaut sera donc utilisée. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale Android TTS (text-to-speech) sur Google Play \?</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
     <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
     <string name="gpx_option_reverse_route">Inverser le sens de la trace</string>
@@ -332,8 +332,8 @@
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
-    <string name="layer_poi">Points d\'intérêt</string>
-    <string name="layer_map">Sources de la carte</string>
+    <string name="layer_poi">Sur-couche de points d\'intérêt…</string>
+    <string name="layer_map">Source de la carte…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
     <string name="use_trackball_descr">Utiliser le pointeur pour déplacer la carte.</string>
@@ -2275,7 +2275,7 @@
     <string name="animate_my_location_desc">Activer le suivi progressif de \'Ma position\' sur la carte pendant le guidage.</string>
     <string name="animate_my_location">Animer ma position</string>
     <string name="osmand_plus_extended_description_part6">Fonctions adaptées aux cyclistes et piétons
-\n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
+\n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables ; idéal pour les activités de plein air
 \n • Modes de guidage adaptés aux cyclistes et piétons
 \n • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
 \n • Enregistrement GPX du trajet en local ou en ligne (option)
@@ -3287,7 +3287,7 @@
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
     <string name="reorder_profiles">Modifier la liste des profils</string>
     <string name="selected_profile">Profil sélectionné</string>
-    <string name="reset_confirmation_descr">Cliquer sur %1$s ignore toutes vos modifications.</string>
+    <string name="reset_confirmation_descr">Appuyer sur %1$s ignore toutes vos modifications.</string>
     <string name="reset_all_profile_settings_descr">Réinitialiser tous les paramètres de profil aux valeurs par défaut.</string>
     <string name="reset_all_profile_settings">Ré-initialiser tous les paramètres de profil \?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s : %2$s</string>
@@ -4476,7 +4476,7 @@
     <string name="shared_string_used">Utilisé</string>
     <string name="files_with_route_restrictions">Fichiers avec restrictions d\'itinéraire</string>
     <string name="waypoint_appearance">Apparence du point de passage</string>
-    <string name="track_file_description">Un appui sur cette action affiche les traces disponibles.</string>
+    <string name="track_file_description">Appuyez sur cette action affiche les traces disponibles.</string>
     <string name="shared_string_not_used">Non utilisé</string>
     <string name="waypoint_template">Modèle de point de passage</string>
     <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
@@ -4699,7 +4699,7 @@
     <string name="lang_ckb">Sorani</string>
     <string name="goods_delivery_desc">L\'accès aux véhicules transportant des marchandises peut être restreint à certaines routes.</string>
     <string name="map_marker_average_speed_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
-    <string name="switch_widget_mode_desc">Un appui sur le gadget bascule entre les modes.</string>
+    <string name="switch_widget_mode_desc">Appuyez sur le gadget pour basculer entre les modes.</string>
     <string name="marker_1st">Première marque</string>
     <string name="side_marker_eta">Heure d’arrivée estimée</string>
     <string name="marker_2nd">Seconde marque</string>
@@ -4722,19 +4722,19 @@
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
     <string name="compass_click_desc">Astuce : appuyez sur la boussole pour changer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
-    <string name="av_notes_photo_widget_desc">Un appui sur le gadget, permet de prendre une photo.</string>
-    <string name="av_notes_video_widget_desc">Un appui sur le gadget permet d\'enregistrer une vidéo.</string>
-    <string name="av_notes_audio_widget_desc">Un appui sur le gadget permet de prendre une note audio.</string>
+    <string name="av_notes_photo_widget_desc">Appuyez sur le gadget pour prendre une photo.</string>
+    <string name="av_notes_video_widget_desc">Appuyez sur le gadget pour enregistrer une vidéo.</string>
+    <string name="av_notes_audio_widget_desc">Appuyez sur le gadget pour prendre une note audio.</string>
     <string name="auto_backup_preference_desc">Par défaut, Android sauvegarde les favoris, noms des cartes et paramètres OsmAnd afin de pouvoir les restaurer sur d\'autres appareils ou après une réinitialisation. Cette sauvegarde est limitée à 25 Mo.
 \nL\'utilisation d\'OsmAnd Cloud et de ce type de sauvegarde peut entraîner des conflits après restauration.</string>
-    <string name="auto_25_chars_route_tl_kl">Tournez à gauche puis gardez la gauche</string>
-    <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis gardez la droite</string>
-    <string name="auto_25_chars_route_tr_kl">Tournez à droite puis gardez la gauche</string>
-    <string name="auto_25_chars_route_tr_kr">Tournez à droite puis gardez la droite</string>
-    <string name="auto_25_chars_route_tu_kl">Faites demi-tour et restez à gauche</string>
-    <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
-    <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis gardez la gauche</string>
-    <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis gardez la droite</string>
+    <string name="auto_25_chars_route_tl_kl">Tournez à gauche puis restez à gauche</string>
+    <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis restez à droite</string>
+    <string name="auto_25_chars_route_tr_kl">Tournez à droite puis restez à gauche</string>
+    <string name="auto_25_chars_route_tr_kr">Tournez à droite puis restez à droite</string>
+    <string name="auto_25_chars_route_tu_kl">Faites demi-tour puis restez à gauche</string>
+    <string name="auto_25_chars_route_tu_kr">Faites demi-tour puis restez à droite</string>
+    <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis restez à gauche</string>
+    <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis restez à droite</string>
     <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d’enregistrement.</string>
     <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes du trajet enregistré.</string>
     <string name="true_bearing_wdiget_desc">Angle entre le Nord vrai et la destination depuis votre position.</string>
@@ -5084,6 +5084,16 @@
 \n
 \n• Correction de bugs lors de l\'affichage de lieux végans
 \n
+\n• Ajout de la possibilité de télécharger des tuiles en ligne utilisées comme sur-couches ou comme sous-couches.
+\n
+\n• Ajout de la prise en charge des unités impériales pour les \"caractéristiques du véhicule\"
+\n
+\n• Nouveau profil : cyclomoteur
+\n
+\n• Nouvelle option \"Automatique\" pour le paramètre \"Emplacement sur l\'écran\"
+\n
+\n• Correction des gestes pour incliner, zoomer et tourner la carte
+\n
 \n</string>
     <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrage du relief à partir de cartes 3D</string>
     <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>
@@ -5105,4 +5115,9 @@
     <string name="test_heightmap">Carte de hauteur test</string>
     <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
     <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
+    <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
+    <string name="select_layer">Sélectionner la sur-couche</string>
+    <string name="camera_app">Application d\'appareil photo</string>
+    <string name="shutter_sound">Son de l\'obturateur</string>
+    <string name="speak_route_deviation">Annoncer une déviation de l\'itinéraire</string>
 </resources>

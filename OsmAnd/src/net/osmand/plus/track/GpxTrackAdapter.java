@@ -160,10 +160,10 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			if (info.getFileSize() >= 0) {
 				size = AndroidUtils.formatSize(app, info.getFileSize());
 			}
-			DateFormat df = app.getResourceManager().getDateFormat();
-			long fd = info.getLastModified();
-			if (fd > 0) {
-				date = (df.format(new Date(fd)));
+			DateFormat df = OsmAndFormatter.getDateFormat(app);
+			long lastModified = info.getLastModified();
+			if (lastModified > 0) {
+				date = (df.format(new Date(lastModified)));
 			}
 			holder.dateAndSize.setText(String.format(app.getString(R.string.ltr_or_rtl_combine_via_bold_point), date, size));
 		} else {

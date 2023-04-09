@@ -176,7 +176,7 @@ public class RoutePlannerFrontEnd {
 					}
 				}
 				if (road != null) {
-					if(!transportStop) {
+					if (!transportStop) {
 						float prio = ctx.getRouter().defineDestinationPriority(road.road);
 						if (prio > 0) {
 							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)

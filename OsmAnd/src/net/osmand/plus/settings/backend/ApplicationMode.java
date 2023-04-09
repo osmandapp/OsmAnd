@@ -87,6 +87,10 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_bus_dark)
 			.description(R.string.base_profile_descr_public_transport).reg();
 
+	public static final ApplicationMode TRAIN = createBase(R.string.app_mode_train, "train")
+			.icon(R.drawable.ic_action_train)
+			.description(R.string.app_mode_train).reg();
+
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.icon(R.drawable.ic_action_sail_boat_dark)
 			.description(R.string.base_profile_descr_boat).reg();
@@ -467,6 +471,10 @@ public class ApplicationMode {
 		for (ApplicationMode mode : allPossibleValues()) {
 			mode.app = app;
 			mode.updateAppModeIcon();
+		}
+
+		if (settings.APP_MODE_ORDER.isSetForMode(PUBLIC_TRANSPORT) && !settings.APP_MODE_ORDER.isSetForMode(TRAIN)) {
+			TRAIN.setOrder(PUBLIC_TRANSPORT.getOrder() + 1);
 		}
 		if (settings.APP_MODE_ORDER.isSetForMode(PEDESTRIAN)) {
 			if (!settings.APP_MODE_ORDER.isSetForMode(TRUCK)) {

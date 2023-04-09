@@ -4816,7 +4816,7 @@
     <string name="purchases_feature_desc_cross_buy">Use as suas funcionalidades de assinaturas em diferentes plataformas (Android/iOS/web) sem custos adicionais.</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
     <string name="favorites_backup">Backup favoritos</string>
-    <string name="map_widget_target_distance">Distância da câmara ao alvo</string>
+    <string name="map_widget_target_distance">Distância da câmera ao alvo</string>
     <string name="ant_heart_rate_write_gpx_desc">Incluir frequência cardíaca no trilha</string>
     <string name="nautical_depth_points">Pontos de profundidade náutica</string>
     <string name="depth_contours">Contornos de profundidade</string>
@@ -5078,15 +5078,25 @@
 \n
 \n • A orientação do mapa agora tem um novo modo fixo
 \n
-\n • Tela inicial simplificada
+\n • Ecrã inicial simplificado
 \n
 \n • Posição de localização fixa no modo de tela dividida no Android Auto
 \n
-\n • Adicionado gráfico \"Velocidade/inclinação\" na análise de trilha de navegação
+\n • Adicionado gráfico \"Velocidade/inclinação\" na análise do trilho de navegação
 \n
 \n • O Android 13 mudou a escolha do idioma da aplicação para as configurações do sistema Android
 \n
 \n • Corrigidos problemas com a visualização de locais com menus veganos
+\n
+\n • Adicionada a possibilidade de descarregar mosaicos on-line usados como mapas da \"Camada superior\" ou \"Camada inferior\"
+\n
+\n • Adicionado suporte de unidades imperiais em \"Parâmetros do veículo\"
+\n
+\n • Novo perfil de ciclomotor
+\n
+\n • Nova opção \"Automático\" em \"Posição da tela\"
+\n
+\n • Corrigidos gestos para inclinação, aproximação e rotação
 \n
 \n</string>
     <string name="app_mode_moped">Ciclomotor</string>
@@ -5106,4 +5116,13 @@
     <string name="offline_weather_forecast_desc">Você pode baixar a previsão do tempo para 7 dias.</string>
     <string name="clear_online_cache_description">Isto irá limpar toda a cache para os mosaicos de previsão meteorológica online.</string>
     <string name="free_maps_updates">Atualizações gratuitas (emergência)</string>
+    <string name="app_mode_climbing">Escalada</string>
+    <string name="common_weight_limit_error">O valor mínimo é \"%1$s\" %2$s. Use o perfil \"%3$s\" se o peso do veículo for menor que o valor mínimo.</string>
+    <string name="shared_string_pounds">libras</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="select_layer">Selecionar camada</string>
+    <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
+    <string name="speak_route_deviation">Anunciar desvio da rota</string>
+    <string name="shutter_sound">Som do obturador</string>
+    <string name="camera_app">Aplicativo de câmera</string>
 </resources>

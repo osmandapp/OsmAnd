@@ -67,11 +67,11 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
-		double pxStep = style.getPointStepPx(1f);
+		float pxStep = (float) style.getPointStepPx(1f);
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
 				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, pointBitmap, (float) pxStep, false, null, 0, pathsData);
+				pointBitmap, pointBitmap, pxStep, pxStep, false, null, 0, pathsData);
 	}
 
 	@Override

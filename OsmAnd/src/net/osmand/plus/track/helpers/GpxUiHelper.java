@@ -596,7 +596,7 @@ public class GpxUiHelper {
 			if (gpxInfo.getFileSize() >= 0) {
 				size = AndroidUtils.formatSize(v.getContext(), gpxInfo.getFileSize());
 			}
-			DateFormat format = app.getResourceManager().getDateFormat();
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
 			long lastModified = gpxInfo.getLastModified();
 			if (lastModified > 0) {
 				date = (format.format(new Date(lastModified)));

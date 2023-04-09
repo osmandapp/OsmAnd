@@ -13,6 +13,8 @@ import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,6 +34,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -159,6 +162,8 @@ public class OsmandSettings {
 	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
 
+	private StateChangedListener<ApplicationMode> appModeListener;
+
 	private Object objectToShow;
 	private boolean editObjectToShow;
 	private String searchRequestToShow;
@@ -182,6 +187,23 @@ public class OsmandSettings {
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
+		initBaseAppMode();
+	}
+
+	private void initBaseAppMode() {
+		setAppModeCustomProperties();
+		appModeListener = applicationMode -> setAppModeCustomProperties();
+		APPLICATION_MODE.addListener(appModeListener);
+	}
+
+	public void setAppModeCustomProperties() {
+		ApplicationMode appMode = APPLICATION_MODE.get();
+		ApplicationMode parentAppMode = APPLICATION_MODE.get().getParent();
+
+		getCustomRenderProperty(A_APP_MODE).setModeValue(appMode, appMode.getStringKey());
+		getCustomRenderProperty(A_BASE_APP_MODE).setModeValue(appMode, parentAppMode != null
+				? parentAppMode.getStringKey()
+				: appMode.getStringKey());
 	}
 
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
@@ -379,6 +401,7 @@ public class OsmandSettings {
 
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
+		setAppModeCustomProperties();
 	}
 
 	public void resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
@@ -1101,6 +1124,7 @@ public class OsmandSettings {
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.TRUCK, "ic_action_truck_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.MOTORCYCLE, "ic_action_motorcycle_dark");
 		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.HORSE, "ic_action_horse");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.TRAIN, "ic_action_train");
 	}
 
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
@@ -1133,6 +1157,7 @@ public class OsmandSettings {
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.HORSE, "horsebackriding");
 		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.MOPED, "moped");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.TRAIN, "train");
 	}
 
 	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumStringPreference<RouteService>(this, "route_service", RouteService.OSMAND, RouteService.values()) {
@@ -1458,6 +1483,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_EXIT_NUMBER_NAMES = new BooleanPreference(this, "exit_number_names", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_ROUTE_RECALCULATION = new BooleanPreference(this, "speak_route_recalculation", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_GPS_SIGNAL_STATUS = new BooleanPreference(this, "speak_gps_signal_status", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SPEAK_ROUTE_DEVIATION= new BooleanPreference(this, "speak_route_deviation", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference(this, "speed_cameras_uninstalled", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference(this, "speed_cameras_alert_showed", false).makeGlobal().makeShared();

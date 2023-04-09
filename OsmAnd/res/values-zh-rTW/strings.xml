@@ -5078,6 +5078,16 @@
 \n
 \n • 修復了顯示素食場所的問題
 \n
+\n • 新增了下載線上圖磚作為「覆蓋層」或「底層」地圖的可能性
+\n
+\n • 在「車輛參數」中新增了對英制單位的支援
+\n
+\n • 新的輕便摩托車設定檔
+\n
+\n • 「顯示位置」新增了「自動」選項
+\n
+\n • 修復了傾斜、縮放與旋轉的地圖手勢
+\n
 \n</string>
     <string name="sort_date_descending">最舊日期優先</string>
     <string name="selected_value">已選取的值</string>

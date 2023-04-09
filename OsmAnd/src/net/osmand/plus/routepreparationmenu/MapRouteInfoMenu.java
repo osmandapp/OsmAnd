@@ -1978,11 +1978,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupButtonIcon(ImageView imageView, @DrawableRes int iconId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			UiUtilities uiUtilities = mapActivity.getMyApplication().getUIUtilities();
-
-			Drawable normal = uiUtilities.getIcon(iconId, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+			Drawable normal = UiUtilities.createTintedDrawable(mapActivity, iconId, nightMode
+					? ContextCompat.getColor(mapActivity, R.color.route_info_control_icon_color_dark)
+					: ContextCompat.getColor(mapActivity, R.color.route_info_control_icon_color_light));
 			if (Build.VERSION.SDK_INT >= 21) {
-				Drawable active = uiUtilities.getIcon(iconId, ColorUtilities.getActiveColorId(nightMode));
+				Drawable active = UiUtilities.createTintedDrawable(mapActivity, iconId, ColorUtilities.getActiveColor(mapActivity, nightMode));
 				normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 			}
 			imageView.setImageDrawable(normal);

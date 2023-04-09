@@ -15,13 +15,12 @@
 		android:summary="@string/give_permission"
 		android:title="@string/permission_is_required" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+	<Preference
 		android:key="av_external_cam"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/multimedia_use_system_camera"
-		tools:icon="@drawable/ic_action_photo_dark" />
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/camera_app"
+		tools:icon="@drawable/ic_action_video_dark"
+		tools:summary="@string/app_name_osmand"/>
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:icon="@drawable/ic_action_picture_size"
@@ -42,7 +41,7 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/multimedia_photo_play_sound"
+		android:title="@string/shutter_sound"
 		tools:icon="@drawable/ic_action_music_off" />
 
 	<Preference
@@ -75,13 +74,12 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/video_notes" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+	<Preference
 		android:key="av_external_recorder"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/multimedia_use_system_camera"
-		tools:icon="@drawable/ic_action_video_dark" />
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/camera_app"
+		tools:icon="@drawable/ic_action_video_dark"
+		tools:summary="@string/system_locale"/>
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:icon="@drawable/ic_action_picture_size"

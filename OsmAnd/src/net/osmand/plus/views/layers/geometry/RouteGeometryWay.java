@@ -33,7 +33,8 @@ public class RouteGeometryWay extends
 	private Integer customDirectionArrowColor;
 
 	//OpenGL
-	public VectorLinesCollection actionLinesCollection;
+	private boolean drawDirectionArrows = true;
+	private VectorLinesCollection actionLinesCollection;
 
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new MultiColoringGeometryWayDrawer<>(context));
@@ -42,6 +43,7 @@ public class RouteGeometryWay extends
 
 	public void setRouteStyleParams(int pathColor,
 	                                float pathWidth,
+	                                boolean drawDirectionArrows,
 	                                @Nullable @ColorInt Integer directionArrowColor,
 	                                @NonNull ColoringType routeColoringType,
 	                                @Nullable String routeInfoAttribute) {
@@ -53,11 +55,15 @@ public class RouteGeometryWay extends
 		if (widthChanged) {
 			updateStylesWidth(pathWidth);
 		}
+		if (this.drawDirectionArrows != drawDirectionArrows) {
+			resetArrowsProvider();
+		}
 		updatePaints(pathWidth, routeColoringType);
 		getDrawer().setColoringType(routeColoringType);
 
 		this.customColor = pathColor;
 		this.customWidth = pathWidth;
+		this.drawDirectionArrows = drawDirectionArrows;
 		this.customDirectionArrowColor = directionArrowColor;
 		this.coloringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
@@ -127,6 +133,11 @@ public class RouteGeometryWay extends
 	@Override
 	public Location getNextVisiblePoint() {
 		return helper.getRoute().getCurrentStraightAnglePoint();
+	}
+
+	@Override
+	protected boolean shouldDrawArrows() {
+		return drawDirectionArrows;
 	}
 
 	public void clearRoute() {
