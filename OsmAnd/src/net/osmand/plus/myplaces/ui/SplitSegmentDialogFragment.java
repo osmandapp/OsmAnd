@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -40,7 +39,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -282,8 +280,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		SplitTrackListener listener = getSplitTrackListener(selectedGpxFile);
 		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, joinSegments);
 
-		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, groups, params, listener);
-		splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		app.getGpxDisplayHelper().splitTrackAsync(selectedGpxFile, groups, params, listener);
 	}
 
 	@NonNull
@@ -295,10 +292,12 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			}
 
 			@Override
-			public void trackSplittingFinished() {
+			public void trackSplittingFinished(boolean success) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
-				List<GpxDisplayGroup> groups = getDisplayGroups();
-				selectedGpxFile.setDisplayGroups(groups, app);
+				if (success) {
+					List<GpxDisplayGroup> groups = getDisplayGroups();
+					selectedGpxFile.setDisplayGroups(groups, app);
+				}
 				updateContent();
 			}
 		};

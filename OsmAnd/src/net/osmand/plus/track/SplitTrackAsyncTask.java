@@ -28,14 +28,13 @@ import java.util.List;
 public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private final OsmandApplication app;
+	private final GpxSplitParams splitParams;
 	private final List<GpxDisplayGroup> groups;
 	private final SplitTrackListener listener;
 
-	private GpxSplitParams splitParams;
-
 	public SplitTrackAsyncTask(@NonNull OsmandApplication app,
+	                           @NonNull GpxSplitParams splitParams,
 	                           @NonNull List<GpxDisplayGroup> groups,
-	                           @Nullable GpxSplitParams splitParams,
 	                           @Nullable SplitTrackListener listener) {
 		this.app = app;
 		this.splitParams = splitParams;
@@ -43,12 +42,9 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		this.listener = listener;
 	}
 
+	@NonNull
 	public GpxSplitParams getSplitParams() {
 		return splitParams;
-	}
-
-	public void setSplitParams(@NonNull GpxSplitParams splitParams) {
-		this.splitParams = splitParams;
 	}
 
 	@Override
@@ -90,14 +86,14 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onCancelled() {
 		if (listener != null) {
-			listener.trackSplittingFinished();
+			listener.trackSplittingFinished(false);
 		}
 	}
 
 	@Override
 	protected void onPostExecute(Void result) {
 		if (listener != null) {
-			listener.trackSplittingFinished();
+			listener.trackSplittingFinished(true);
 		}
 	}
 
@@ -168,12 +164,12 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 					if (tm == 0) {
 						tm = analysis.timeSpan;
 					}
-					if (name.length() != 0)
+					if (!name.isEmpty())
 						name += ", ";
 					name += GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000), app.accessibilityEnabled()));
 				}
 				if (analysis.isSpeedSpecified()) {
-					if (name.length() != 0)
+					if (!name.isEmpty())
 						name += ", ";
 					name += GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
 				}
@@ -243,7 +239,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		default void trackSplittingStarted() {
 		}
 
-		default void trackSplittingFinished() {
+		default void trackSplittingFinished(boolean success) {
 		}
 	}
 }

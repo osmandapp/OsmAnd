@@ -20,7 +20,6 @@ import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.util.Algorithms;
 
@@ -188,43 +187,8 @@ public class GpxDisplayHelper {
 	}
 
 	public void processSplitAsync(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
-		checkSplitParamsChanged(selectedGpxFile);
-
 		if (!app.isApplicationInitializing()) {
-			splitTrack(selectedGpxFile, callback);
-		} else if (callback != null) {
-			callback.processResult(false);
-		}
-	}
-
-	private void checkSplitParamsChanged(@NonNull SelectedGpxFile selectedGpxFile) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		SplitTrackAsyncTask splitTask = splitTrackTasks.get(gpxFile.path);
-		if (splitTask != null) {
-			GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
-			if (dataItem != null && !Algorithms.objectEquals(new GpxSplitParams(dataItem), splitTask.getSplitParams())) {
-				cancelTrackSplitting(selectedGpxFile);
-			}
-		}
-	}
-
-	private void splitTrack(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		if (!splitTrackTasks.containsKey(gpxFile.path)) {
-			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile);
-			SplitTrackListener splitListener = getSplitTrackListener(selectedGpxFile, groups, callback);
-			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, groups, null, splitListener);
-			splitTrackTasks.put(gpxFile.path, splitTask);
-
-			GpxDataItemCallback itemCallback = item -> {
-				splitTask.setSplitParams(new GpxSplitParams(item));
-				splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			};
-			GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path), itemCallback);
-			if (dataItem != null) {
-				splitTask.setSplitParams(new GpxSplitParams(dataItem));
-				splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			}
+			splitTrackAsync(selectedGpxFile, callback);
 		} else if (callback != null) {
 			callback.processResult(false);
 		}
@@ -234,7 +198,7 @@ public class GpxDisplayHelper {
 	public List<GpxDisplayGroup> processSplitSync(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
 		GpxSplitParams params = new GpxSplitParams(dataItem);
 		List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile);
-		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, groups, params, null);
+		SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, params, groups, null);
 		try {
 			splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
 		} catch (ExecutionException | InterruptedException e) {
@@ -243,22 +207,41 @@ public class GpxDisplayHelper {
 		return groups;
 	}
 
-	@NonNull
-	private SplitTrackListener getSplitTrackListener(@NonNull SelectedGpxFile selectedGpxFile,
-	                                                 @NonNull List<GpxDisplayGroup> groups,
-	                                                 @Nullable CallbackWithObject<Boolean> callback) {
-		return new SplitTrackListener() {
-			@Override
-			public void trackSplittingFinished() {
-				selectedGpxFile.setDisplayGroups(groups, app);
-				app.getOsmandMap().getMapView().refreshMap();
+	private void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpxFile.path));
+		if (!isSplittingTrack(selectedGpxFile) && dataItem != null) {
+			GpxSplitParams params = new GpxSplitParams(dataItem);
+			List<GpxDisplayGroup> groups = collectDisplayGroups(gpxFile);
+			SplitTrackListener listener = getSplitTrackListener(selectedGpxFile, groups, callback);
 
-				if (callback != null) {
-					callback.processResult(true);
-				}
-				splitTrackTasks.remove(selectedGpxFile.gpxFile.path);
-			}
-		};
+			splitTrackAsync(selectedGpxFile, groups, params, listener);
+		} else if (callback != null) {
+			callback.processResult(false);
+		}
+	}
+
+	private boolean splitParamsChanged(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxSplitParams splitParams) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		SplitTrackAsyncTask splitTask = splitTrackTasks.get(gpxFile.path);
+		if (splitTask != null) {
+			return !Algorithms.objectEquals(splitParams, splitTask.getSplitParams());
+		}
+		return false;
+	}
+
+	public void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @NonNull List<GpxDisplayGroup> groups,
+	                            @NonNull GpxSplitParams splitParams, @Nullable SplitTrackListener listener) {
+		boolean splittingTrack = isSplittingTrack(selectedGpxFile);
+		boolean paramsChanged = splitParamsChanged(selectedGpxFile, splitParams);
+		if (paramsChanged) {
+			cancelTrackSplitting(selectedGpxFile);
+		}
+		if (paramsChanged || !splittingTrack) {
+			SplitTrackAsyncTask splitTask = new SplitTrackAsyncTask(app, splitParams, groups, listener);
+			splitTrackTasks.put(selectedGpxFile.getGpxFile().path, splitTask);
+			splitTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 
 	public boolean isSplittingTrack(@NonNull SelectedGpxFile selectedGpxFile) {
@@ -270,6 +253,25 @@ public class GpxDisplayHelper {
 		if (splitTask != null && splitTask.getStatus() == Status.RUNNING) {
 			splitTask.cancel(false);
 		}
+	}
+
+	@NonNull
+	private SplitTrackListener getSplitTrackListener(@NonNull SelectedGpxFile selectedGpxFile,
+	                                                 @NonNull List<GpxDisplayGroup> groups,
+	                                                 @Nullable CallbackWithObject<Boolean> callback) {
+		return new SplitTrackListener() {
+			@Override
+			public void trackSplittingFinished(boolean success) {
+				if (success) {
+					selectedGpxFile.setDisplayGroups(groups, app);
+					app.getOsmandMap().getMapView().refreshMap();
+				}
+				if (callback != null) {
+					callback.processResult(success);
+				}
+				splitTrackTasks.remove(selectedGpxFile.getGpxFile().path);
+			}
+		};
 	}
 
 	@NonNull
