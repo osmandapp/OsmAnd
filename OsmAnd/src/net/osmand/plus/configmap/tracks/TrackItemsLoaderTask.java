@@ -88,18 +88,22 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	@Nullable
 	private GpxDataItem getDataItem(@NonNull TrackItem trackItem) {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return TrackItemsLoaderTask.this.isCancelled();
-			}
+		File file = trackItem.getFile();
+		if (file != null) {
+			GpxDataItemCallback callback = new GpxDataItemCallback() {
+				@Override
+				public boolean isCancelled() {
+					return TrackItemsLoaderTask.this.isCancelled();
+				}
 
-			@Override
-			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-				trackItem.setDataItem(item);
-			}
-		};
-		return gpxDbHelper.getItem(trackItem.getFile(), callback);
+				@Override
+				public void onGpxDataItemReady(@NonNull GpxDataItem item) {
+					trackItem.setDataItem(item);
+				}
+			};
+			return gpxDbHelper.getItem(file, callback);
+		}
+		return null;
 	}
 
 	@Override

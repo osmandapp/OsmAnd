@@ -17,14 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.GpxTrackAdapter;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -67,7 +66,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfo(gpxRootDir, null, false);
 		boolean showCurrentGpx = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		if (showCurrentGpx) {
-			gpxInfoList.add(0, new GPXInfo(getString(R.string.current_track), null));
+			gpxInfoList.add(0, new GPXInfo(getString(R.string.shared_string_currently_recording_track), null));
 		}
 		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList, showCurrentGpx, true);
 		adapter.setAdapterListener(position -> {

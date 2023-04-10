@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -46,9 +49,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -817,6 +817,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		this.lastTimeFileSaved = lastTimeFileSaved;
 	}
 
+	@NonNull
 	public GPXFile getCurrentGpx() {
 		return currentTrack.getGpxFile();
 	}
