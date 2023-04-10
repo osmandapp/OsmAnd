@@ -3900,7 +3900,7 @@
     <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
     <string name="select_folder">Elegir carpeta</string>
     <string name="shared_string_folders">Carpetas</string>
-    <string name="change_folder">Cambiar carpeta</string>
+    <string name="change_folder">Cambiar de carpeta</string>
     <string name="add_online_routing_engine">Añadir motor de navegación en línea</string>
     <string name="edit_online_routing_engine">Editar motor de navegación en línea</string>
     <string name="shared_string_subtype">Subtipo</string>
@@ -4829,7 +4829,7 @@
     <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
     <string name="map_widget_ant_bicycle_cadence">Cadencia de la bicicleta</string>
-    <string name="worldwide_maps">Mapas del mundo</string>
+    <string name="worldwide_maps">Mapas de todo el mundo</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Muestra la velocidad a la que el usuario pedalea</string>
     <string name="map_widget_ant_bicycle_speed">Velocidad de la bicicleta</string>
     <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
@@ -5142,4 +5142,8 @@
     <string name="app_mode_moped">Ciclomotor</string>
     <string name="select_layer">Elegir capa</string>
     <string name="rendering_value_defaultMedium_name">Predefinido (medio)</string>
+    <string name="shutter_sound">Sonido del obturador</string>
+    <string name="camera_app">Aplicación de la cámara</string>
+    <string name="speak_route_deviation">Anunciar desviación de la ruta</string>
+    <string name="proxy_port_max_warning">Valor máximo del puerto: %1$s</string>
 </resources>
