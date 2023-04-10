@@ -5123,4 +5123,5 @@
     <string name="speak_route_deviation">Az útvonaltól való eltérés bemondása</string>
     <string name="camera_app">Kamera alkalmazás</string>
     <string name="shutter_sound">Zárhang</string>
+    <string name="proxy_port_max_warning">A port maximális értéke %1$s</string>
 </resources>
