@@ -77,7 +77,7 @@ public class BaseBottomSheetItem {
 			view.setEnabled(false);
 			view.setAlpha(.5f);
 		}
-		if(onLongClickListener != null){
+		if (onLongClickListener != null) {
 			view.setOnLongClickListener(onLongClickListener);
 		}
 		view.setOnClickListener(onClickListener);

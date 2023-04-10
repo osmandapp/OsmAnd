@@ -36,7 +36,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private String destFileName;
 	private ImportType importType;
 	private final CallbackWithObject routingCallback;
-	private boolean overwrite;
+	private final boolean overwrite;
 
 	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
 						 @NonNull String fileName, @Nullable CallbackWithObject routingCallback, boolean overwrite) {
