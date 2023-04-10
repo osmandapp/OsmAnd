@@ -174,6 +174,7 @@ public class MapRendererContext {
 				? LanguagePreference.LocalizedOrTransliterated
 				: LanguagePreference.LocalizedOrNative;
 
+		loadRendererAddons();
 		String rendName = settings.RENDERER.get();
 		if (rendName.length() == 0 || rendName.equals(RendererRegistry.DEFAULT_RENDER)) {
 			rendName = "default";
@@ -192,7 +193,6 @@ public class MapRendererContext {
 				rendName = "default";
 			}
 		}
-		loadRendererAddons();
 		ResolvedMapStyle mapStyle = mapStyles.get(rendName);
 		CachedMapPresentation pres = new CachedMapPresentation(langId, langPref, mapStyle, density,
 				settings.MAP_DENSITY.get(), settings.TEXT_SCALE.get());
