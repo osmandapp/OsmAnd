@@ -3924,7 +3924,7 @@
     <string name="upload_to_openstreetmap">Subir a OpenStreetMap</string>
     <string name="edit_track">Editar traza</string>
     <string name="rename_track">Renombrar traza</string>
-    <string name="change_folder">Cambiar carpeta</string>
+    <string name="change_folder">Cambiar de carpeta</string>
     <string name="shared_string_sec">seg</string>
     <string name="announcement_time_passing">Pasando</string>
     <string name="announcement_time_approach">Acercarse</string>
@@ -5146,4 +5146,5 @@
     <string name="camera_app">Aplicación de la cámara</string>
     <string name="speak_route_deviation">Anunciar desviación de la ruta</string>
     <string name="shutter_sound">Sonido del obturador</string>
+    <string name="proxy_port_max_warning">Valor máximo del puerto: %1$s</string>
 </resources>

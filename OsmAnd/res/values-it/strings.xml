@@ -4892,7 +4892,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_inhg">mmHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5042,7 +5042,7 @@
     <string name="shared_string_on_map">Sulla mappa</string>
     <string name="shared_string_apply_changes">Applica modifiche</string>
     <string name="no_visible_tracks_description">Seleziona le tracce per visualizzarle sulla mappa.</string>
-    <string name="approximate_bearing_descr">Calcola il movimento dalla rotta seguita</string>
+    <string name="approximate_bearing_descr">Calcola il movimento dalla rotta seguita.</string>
     <string name="shared_string_inches">pollici</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rotta approssimata</string>
@@ -5061,7 +5061,7 @@
 \n
 \n • Aggiunta l\'opzione per condividere il percorso tramite link
 \n
-\n • Aggiunta l\'unità di lunghezza \"Miglia nautiche/piedi\".
+\n • Aggiunta l\'unità di lunghezza \"Miglia nautiche/piedi\"
 \n
 \n • L\'orientamento della mappa ha aggiunto una nuova modalità fissa
 \n
@@ -5075,6 +5075,16 @@
 \n
 \n • Risolti i problemi con la visualizzazione dei luoghi vegani
 \n
+\n • Aggiunta la possibilità di scaricare tessere online utilizzate come mappe \"Overlay\" o \"Underlay\"
+\n
+\n • Aggiunto il supporto delle unità imperiali per i \"Parametri del veicolo\"
+\n
+\n • Nuovo profilo Ciclomotore
+\n
+\n • Aggiunta nuova opzione \"Automatico\" in \"Visualizza posizione\"
+\n
+\n • Risolti i problemi con i gesti sulla mappa per inclinazione, zoom e rotazione
+\n
 \n</string>
     <string name="sort_duration_ascending">Prima la durata più breve</string>
     <string name="sort_duration_descending">Prima la durata più lunga</string>
@@ -5086,7 +5096,7 @@
     <string name="selected_value">Valore selezionato</string>
     <string name="app_mode_moped">Ciclomotore</string>
     <string name="offline_cache">Cache offline</string>
-    <string name="weather_forecast_is_outdated">Previsioni</string>
+    <string name="weather_forecast_is_outdated">La previsione è obsoleta.</string>
     <string name="clear_online_cache">Pulisci cache online</string>
     <string name="shared_string_alt_name">Nome alternativo</string>
     <string name="token_is_not_valid">Token non valido</string>
@@ -5095,4 +5105,16 @@
     <string name="offline_weather_forecast">Previsioni meteorologiche offline</string>
     <string name="weather_forecast">Previsioni meteorologiche</string>
     <string name="enable_3d_maps">Attiva mappe 3D</string>
+    <string name="shutter_sound">Suono dell\'otturatore</string>
+    <string name="camera_app">Applicazione fotocamera</string>
+    <string name="rendering_value_defaultMedium_name">Predefinito (medio)</string>
+    <string name="select_layer">Seleziona il livello</string>
+    <string name="speak_route_deviation">Annuncio deviazione dal percorso</string>
+    <string name="clear_online_cache_description">Questo cancellerà tutta la cache per il riquadro meteo online.</string>
+    <string name="free_maps_updates">Aggiornamenti gratuiti (emergenza)</string>
+    <string name="common_weight_limit_error">Il valore minimo è \"%1$s\" %2$s. Utilizza il profilo \"%3$s\" se il peso del veicolo è inferiore al valore minimo.</string>
+    <string name="shared_string_all_world">Tutto il mondo</string>
+    <string name="offline_weather_forecast_desc">Puoi scaricare le previsioni del tempo per 7 giorni.</string>
+    <string name="generate_slope_from_3d_maps">Genera mappe raster di pendenza da mappe 3D</string>
+    <string name="generate_hillshade_from_3d_maps">Genera mappe raster con ombreggiamenti delle colline da mappe 3D</string>
 </resources>

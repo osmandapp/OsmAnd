@@ -5133,4 +5133,5 @@
     <string name="speak_route_deviation">Anunciar un desvío de la ruta</string>
     <string name="camera_app">Aplicación de cámara</string>
     <string name="shutter_sound">Sonido del obturador</string>
+    <string name="proxy_port_max_warning">La altura máxima del puerto es de %1$s</string>
 </resources>
