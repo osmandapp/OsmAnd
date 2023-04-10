@@ -5134,4 +5134,5 @@
     <string name="speak_route_deviation">Avisar desvio da rota</string>
     <string name="camera_app">Aplicação de câmara</string>
     <string name="shutter_sound">Som ao tirar fotografia</string>
+    <string name="proxy_port_max_warning">O valor máximo da porta é %1$s</string>
 </resources>
