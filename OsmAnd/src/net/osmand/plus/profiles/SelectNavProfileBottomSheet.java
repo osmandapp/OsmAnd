@@ -2,7 +2,6 @@ package net.osmand.plus.profiles;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +19,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -47,32 +44,13 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
 
-import org.apache.commons.logging.Log;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
-	private static final Log LOG = PlatformUtil.getLog(SelectNavProfileBottomSheet.class);
 
 	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
 	private static final String DIALOG_TYPE = "dialog_type";
@@ -84,9 +62,6 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	private boolean triedToDownload;
 	private DialogMode dialogMode;
 	private String predefinedJson;
-
-	private AsyncTask<Void, Object, Boolean> removeRoutingProfileTask = null;
-
 
 	public enum DialogMode {
 		OFFLINE(R.string.shared_string_offline),
@@ -208,7 +183,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			if (!Algorithms.isEmpty(items)) {
 				addGroupHeader(group);
 				for (RoutingDataObject item : items) {
-					addProfileItem(item);
+					addProfileItem(item, group);
 				}
 				addDivider();
 			}
@@ -257,7 +232,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		});
 	}
 
-	protected void addGroupHeader(ProfilesGroup group) {
+	private void addGroupHeader(ProfilesGroup group) {
 		CharSequence title = group.getTitle();
 		CharSequence description = group.getDescription(app, nightMode);
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
@@ -265,7 +240,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_large, null);
 		View container = view.findViewById(R.id.container);
 
-		if (isGroupImported(group) && !isGroupSelected(group)) {
+		if (isGroupImported(group)) {
 			container.setOnLongClickListener(getGroupLongClickListener(group));
 		}
 
@@ -295,13 +270,14 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		return true;
 	}
 
-	private boolean isGroupSelected(ProfilesGroup group) {
+	@Nullable
+	private ProfileDataObject getSelectedRoutingProfile(ProfilesGroup group) {
 		for (RoutingDataObject profile : group.getProfiles()) {
 			if (isSelected(profile)) {
-				return true;
+				return profile;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	protected View.OnLongClickListener getGroupLongClickListener(ProfilesGroup group) {
@@ -315,6 +291,11 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 						File routingFile = new File(dir, fileName);
 						if (routingFile.exists() && routingFile.delete()) {
+							updateRouteProfileInAppModes(group.getProfiles());
+							ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
+							if (selectedProfile != null) {
+								setDefaultRouteProfile(getCurrentBaseAppMode());
+							}
 							app.getCustomRoutingConfigs().remove(fileName);
 							updateMenuItems();
 						}
@@ -324,8 +305,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		};
 	}
 
-	@Override
-	protected void addProfileItem(ProfileDataObject profileDataObject) {
+	private void addProfileItem(ProfileDataObject profileDataObject, ProfilesGroup group) {
 		RoutingDataObject profile = (RoutingDataObject) profileDataObject;
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
@@ -345,8 +325,8 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 		if (!profile.isOnline() || profile.isPredefined()) {
 			builder.setOnClickListener(getItemClickListener(profile));
-			if (!Algorithms.isEmpty(profile.getFileName()) && !isSelected(profile)) {
-				builder.setOnLongClickListener(getItemLongClickListener(profile));
+			if (!Algorithms.isEmpty(profile.getFileName())) {
+				builder.setOnLongClickListener(getItemLongClickListener(profile, group));
 			}
 			items.add(builder.create());
 			return;
@@ -373,31 +353,64 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		items.add(builder.create());
 	}
 
-	protected View.OnLongClickListener getItemLongClickListener(RoutingDataObject profile) {
+	protected View.OnLongClickListener getItemLongClickListener(RoutingDataObject profile, ProfilesGroup group) {
 		return view -> {
-			if (!Algorithms.isEmpty(profile.getFileName()) && !isSelected(profile)) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
-				builder.setTitle(getString(R.string.delete_confirmation_msg, profile.getName()));
-				builder.setMessage(profile.getDerivedProfile() == null ? getString(R.string.are_you_sure) : getString(R.string.deleting_derived_profile_alert, profile.getName()));
-				builder.setNegativeButton(R.string.shared_string_cancel, null)
-						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> onItemLongPositiveButtonClick(profile));
-				builder.show();
-			}
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
+			builder.setTitle(getString(R.string.delete_confirmation_msg, profile.getFileName()));
+			builder.setMessage(getString(R.string.are_you_sure));
+			builder.setNegativeButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+						File routingFile = new File(dir, profile.getFileName());
+						if (routingFile.exists() && routingFile.delete()) {
+							updateRouteProfileInAppModes(group.getProfiles());
+							if (isSelected(profile)) {
+								setDefaultRouteProfile(getCurrentBaseAppMode());
+							}
+							app.getCustomRoutingConfigs().remove(profile.getFileName());
+							updateMenuItems();
+						}
+					});
+			builder.show();
 			return true;
 		};
 	}
 
-	protected void onItemLongPositiveButtonClick(RoutingDataObject profile) {
-		if (removeRoutingProfileTask == null) {
-			removeRoutingProfileTask = new RemoveRoutingProfileTask(app, profile, (success) -> {
-				if (success) {
-					app.getCustomRoutingConfigs().clear();
-					loadRoutingFiles(app, this::updateMenuItems);
-				}
-				removeRoutingProfileTask = null;
-			});
-			removeRoutingProfileTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	private void setDefaultRouteProfile(ApplicationMode applicationMode) {
+		String routingProfile = applicationMode.getDefaultRoutingProfile();
+		String derivedProfile = applicationMode.getDefaultDerivedProfile();
+		Bundle args = new Bundle();
+		args.putString(PROFILE_KEY_ARG, routingProfile);
+		args.putBoolean(PROFILES_LIST_UPDATED_ARG, false);
+		if (!Algorithms.isEmpty(derivedProfile)) {
+			args.putString(DERIVED_PROFILE_ARG, derivedProfile);
 		}
+		Fragment target = getTargetFragment();
+		if (target instanceof OnSelectProfileCallback) {
+			((OnSelectProfileCallback) target).onProfileSelected(args);
+		}
+		dismiss();
+	}
+
+	private void updateRouteProfileInAppModes(List<RoutingDataObject> deletedRoutingProfiles) {
+		List<ApplicationMode> applicationModes = ApplicationMode.allPossibleValues();
+		Fragment targetFragment = getTargetFragment();
+		for (ApplicationMode mode : applicationModes) {
+			String routingProfile = mode.getRoutingProfile();
+			for (RoutingDataObject deletedRoutingProfile : deletedRoutingProfiles) {
+				if (targetFragment instanceof NavigationFragment && routingProfile.equals(deletedRoutingProfile.getStringKey())) {
+					((NavigationFragment) targetFragment).updateAppMode(mode, mode.getDefaultRoutingProfile(), mode.getDefaultDerivedProfile());
+				}
+			}
+		}
+	}
+
+	private ApplicationMode getCurrentBaseAppMode() {
+		ApplicationMode baseMode = getAppMode();
+		while (baseMode.getParent() != null) {
+			baseMode = baseMode.getParent();
+		}
+		return baseMode;
 	}
 
 	@Override
@@ -494,85 +507,4 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		this.dialogMode = dialogMode;
 	}
 
-	private interface RemoveRoutingProfileTaskListener {
-		void onProfileRemoved(boolean success);
-	}
-
-	static class RemoveRoutingProfileTask extends AsyncTask<Void, Object, Boolean> {
-		private final OsmandApplication app;
-		private final RoutingDataObject profile;
-		private final RemoveRoutingProfileTaskListener listener;
-
-		public RemoveRoutingProfileTask(@NonNull OsmandApplication app, @NonNull RoutingDataObject profile, @Nullable RemoveRoutingProfileTaskListener listener) {
-			this.app = app;
-			this.profile = profile;
-			this.listener = listener;
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-			File routingFile = new File(dir, profile.getFileName());
-			if (routingFile.exists()) {
-				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				try {
-					DocumentBuilder builder = factory.newDocumentBuilder();
-					Document document = builder.parse(routingFile);
-
-					Node profileToDelete = getNodeToDelete(document);
-
-					if (profileToDelete != null) {
-						Node parentNode = profileToDelete.getParentNode();
-						parentNode.removeChild(profileToDelete);
-
-						if (document.getElementsByTagName("routingProfile").getLength() == 0) {
-							routingFile.delete();
-						} else {
-							TransformerFactory transformerFactory = TransformerFactory.newInstance();
-							Transformer transformer = transformerFactory.newTransformer();
-							DOMSource domSource = new DOMSource(document);
-							StreamResult result = new StreamResult(routingFile);
-							transformer.transform(domSource, result);
-						}
-						return true;
-					}
-				} catch (IOException | SAXException | TransformerException |
-				         ParserConfigurationException e) {
-					LOG.error(e);
-				}
-			}
-			return false;
-		}
-
-		private Node getNodeToDelete(Document document) {
-			NodeList nodelist = document.getElementsByTagName("routingProfile");
-			Node profileToDelete = null;
-			String deletingProfileName;
-
-			if (profile.getDerivedProfile() != null) {
-				String[] splitKey = profile.getStringKey().split("/");
-				deletingProfileName = splitKey[splitKey.length - 1];
-			} else {
-				deletingProfileName = profile.getName();
-			}
-
-			for (int i = 0; i < nodelist.getLength(); i++) {
-				Node node = nodelist.item(i);
-				NamedNodeMap att = node.getAttributes();
-				Node name = att.getNamedItem("name");
-				if (name.getNodeValue().equals(deletingProfileName)) {
-					profileToDelete = node;
-					break;
-				}
-			}
-			return profileToDelete;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean value) {
-			if (listener != null) {
-				listener.onProfileRemoved(value);
-			}
-		}
-	}
 }

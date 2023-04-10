@@ -97,7 +97,7 @@ public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				ImportType importType = XmlImportTask.checkImportType(app, tempUri);
 				if (importType == ImportType.RENDERING || importType == ImportType.ROUTING) {
 					String name = importType == ImportType.RENDERING ? "renderer" + RENDERER_INDEX_EXT : "router" + ROUTING_FILE_EXT;
-					importHelper.handleXmlFileImport(tempUri, name, null);
+					importHelper.handleXmlFileImport(tempUri, name, null, true);
 				} else if (importType == ImportType.GPX || importType == ImportType.KML) {
 					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, save, useImportDir, false, false);
 				}
