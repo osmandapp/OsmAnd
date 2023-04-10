@@ -5138,4 +5138,5 @@
     <string name="speak_route_deviation">Abweichung von der Route ankündigen</string>
     <string name="camera_app">Kamera-App</string>
     <string name="shutter_sound">Auslöser-Ton</string>
+    <string name="proxy_port_max_warning">Der höchste Wert für einen Port ist %1$s</string>
 </resources>
