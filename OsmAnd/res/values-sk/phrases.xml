@@ -4243,4 +4243,16 @@
     <string name="poi_self_checkout_yes">Áno</string>
     <string name="poi_self_checkout_only">Výlučne</string>
     <string name="poi_lifeguard">Záchranár/plavčík</string>
+    <string name="poi_toy_library">Knižnica hračiek</string>
+    <string name="poi_waste_accepted">Prijímaný odpad</string>
+    <string name="poi_barrier_coupure">Protipovodňová bariéra</string>
+    <string name="poi_barrier_planter">Kvetináč</string>
+    <string name="poi_spikes">Hroty</string>
+    <string name="poi_sump_buster">Obmedzovač vjazdu malých vozidiel</string>
+    <string name="poi_wedge">Výsuvný klin</string>
+    <string name="poi_wicket_gate">Vstupná bránka pre chodcov</string>
+    <string name="poi_barrier_bar">Vodorovná lišta</string>
+    <string name="poi_barrier_tyres">Pneumatiky</string>
+    <string name="poi_barrier_board">Dosková bariéra</string>
+    <string name="poi_tank_trap">Protitanková zábrana</string>
 </resources>
