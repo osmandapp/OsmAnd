@@ -36,13 +36,15 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private String destFileName;
 	private ImportType importType;
 	private final CallbackWithObject routingCallback;
+	private final boolean overwrite;
 
 	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-						 @NonNull String fileName, @Nullable CallbackWithObject routingCallback) {
+						 @NonNull String fileName, @Nullable CallbackWithObject routingCallback, boolean overwrite) {
 		super(activity);
 		this.uri = uri;
 		this.destFileName = fileName;
 		this.routingCallback = routingCallback;
+		this.overwrite = overwrite;
 	}
 
 	@Override
@@ -109,7 +111,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				destFileName = fileName + RENDERER_INDEX_EXT;
 			}
 			File destFile = new File(destDir, destFileName);
-			while (destFile.exists()) {
+			while (destFile.exists() && !overwrite) {
 				destFileName = AndroidUtils.createNewFileName(destFileName);
 				destFile = new File(destDir, destFileName);
 			}

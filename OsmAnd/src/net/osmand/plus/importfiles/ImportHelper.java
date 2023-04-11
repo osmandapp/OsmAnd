@@ -235,7 +235,7 @@ public class ImportHelper {
 		} else if (fileName.endsWith(OSMAND_SETTINGS_FILE_EXT) || fileName.endsWith(OSMAND_SETTINGS_FILE_EXT + ZIP_EXT)) {
 			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
 		} else if (fileName.endsWith(ROUTING_FILE_EXT)) {
-			handleXmlFileImport(intentUri, fileName, null);
+			handleXmlFileImport(intentUri, fileName, null, true);
 		} else if (fileName.endsWith(WPT_CHART_FILE_EXT)) {
 			handleGpxOrFavouritesImport(intentUri, fileName.replace(WPT_CHART_FILE_EXT, GPX_FILE_EXT), saveFile, useImportDir, false, true);
 		} else if (fileName.endsWith(SQLITE_CHART_FILE_EXT)) {
@@ -335,8 +335,8 @@ public class ImportHelper {
 				latestChanges, version, callback));
 	}
 
-	public void handleXmlFileImport(Uri intentUri, String fileName, CallbackWithObject routingCallback) {
-		executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback));
+	public void handleXmlFileImport(Uri intentUri, String fileName, CallbackWithObject routingCallback, boolean overwrite) {
+		executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback, overwrite));
 	}
 
 	private void handleUriImport(Uri uri, boolean save, boolean useImportDir) {
@@ -421,7 +421,7 @@ public class ImportHelper {
 					if (importType.equals(ImportType.SETTINGS)) {
 						handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
 					} else if (importType.equals(ImportType.ROUTING)) {
-						handleXmlFileImport(data, fileName, callback);
+						handleXmlFileImport(data, fileName, callback, true);
 					}
 				} else {
 					app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
