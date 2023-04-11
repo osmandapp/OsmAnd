@@ -1062,9 +1062,7 @@ public class SearchCoreFactory {
 					throw new UnsupportedOperationException();
 				}
 				nameFilter = phrase.getUnknownSearchPhrase();
-			} else if (searchAmenityTypesAPI != null && (phrase.isFirstUnknownSearchWordComplete()
-					|| (!Algorithms.isEmpty(resultMatcher.getRequestResults())
-						&& resultMatcher.getRequestResults().get(0).objectType == POI_TYPE))) {
+			} else if (searchAmenityTypesAPI != null && phrase.isNoSelectedType() && phrase.getFirstUnknownSearchWord().length() > 1) {
 				NameStringMatcher nm = phrase.getFirstUnknownNameStringMatcher();
 				NameStringMatcher nmAdditional = new NameStringMatcher(phrase.getFirstUnknownSearchWord(), StringMatcherMode.CHECK_EQUALS_FROM_SPACE);
 				searchAmenityTypesAPI.initPoiTypes();
