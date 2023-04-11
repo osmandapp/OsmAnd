@@ -1817,7 +1817,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		private double calculateDeltaZoom(double relativeToStart) {
-			double deltaZoom = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
+			// 1.5/Math.log(2) = 2.1640
+			double deltaZoom = Math.log(relativeToStart) * 2.164;
 			if (deltaZoom > MAX_DELTA_ZOOM) {
 				return MAX_DELTA_ZOOM;
 			} else if (deltaZoom < -MAX_DELTA_ZOOM) {
