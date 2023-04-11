@@ -1,7 +1,5 @@
 package net.osmand.plus.backup;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -216,7 +214,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation) {
+	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation) throws IllegalStateException {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
 			syncBackupTasks.put(key, syncTask);
@@ -225,7 +223,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 			throw new IllegalStateException("Already syncing " + key);
 		}
 	}
-
 
 	public void syncSettingsItems(@NonNull String key,
 	                              @Nullable LocalFile localFile,

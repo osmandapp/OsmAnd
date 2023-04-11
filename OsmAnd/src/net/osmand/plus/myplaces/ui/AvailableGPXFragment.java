@@ -1281,7 +1281,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 			List<GpxDisplayItem> items = null;
 			if (gpxDisplayGroup != null) {
-				items = gpxDisplayGroup.getModifiableList();
+				items = gpxDisplayGroup.getDisplayItems();
 			}
 			if (items != null && items.size() > 0) {
 				return items.get(0);
