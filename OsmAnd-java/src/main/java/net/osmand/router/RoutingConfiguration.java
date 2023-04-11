@@ -428,7 +428,7 @@ public class RoutingConfiguration {
 			}
 			
 			RouteAttributeContext ctx = currentRouter.getObjContext(attr);
-			if("select".equals(rr.tagName)) {
+			if ("select".equals(rr.tagName)) {
 				String val = parser.getAttributeValue("", "value");
 				String type = rr.type;
 				ctx.registerNewRule(val, type);
@@ -436,6 +436,11 @@ public class RoutingConfiguration {
 				for (int i = 0; i < stack.size(); i++) {
 					addSubclause(stack.get(i), ctx);
 				}
+			} else if ("min".equals(rr.tagName)) {
+				String initVal = parser.getAttributeValue("", "value1");
+				String type = rr.type;
+				ctx.registerNewRule(initVal, type);
+				addSubclause(rr, ctx);
 			} else if (stack.size() > 0 && "select".equals(stack.peek().tagName)) {
 				addSubclause(rr, ctx);
 			}
@@ -445,7 +450,8 @@ public class RoutingConfiguration {
 
 	private static boolean checkTag(String pname) {
 		return "select".equals(pname) || "if".equals(pname) || "ifnot".equals(pname)
-				|| "gt".equals(pname) || "le".equals(pname) || "eq".equals(pname);
+				|| "gt".equals(pname) || "le".equals(pname) || "eq".equals(pname)
+				|| "min".equals(pname);
 	}
 
 	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
@@ -462,6 +468,8 @@ public class RoutingConfiguration {
 			ctx.getLastRule().registerLessCondition(rr.value1, rr.value2, rr.type);
 		} else if ("eq".equals(rr.tagName)) {
 			ctx.getLastRule().registerEqualCondition(rr.value1, rr.value2, rr.type);
+		} else if ("min".equals(rr.tagName)) {
+			ctx.getLastRule().registerMinExpression(rr.value1, rr.value2, rr.type);
 		}
 	}
 

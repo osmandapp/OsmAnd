@@ -932,6 +932,7 @@ public class GeneralRouter implements VehicleRouter {
 		public static final int LESS_EXPRESSION = 1;
 		public static final int GREAT_EXPRESSION = 2;
 		public static final int EQUAL_EXPRESSION = 3;
+		public static final int MIN_EXPRESSION = 4;
 		
 		public RouteAttributeExpression(String[] vs, String valueType, int expressionId) {
 			this.expressionType = expressionId;
@@ -963,6 +964,9 @@ public class GeneralRouter implements VehicleRouter {
 			if (Double.isNaN(f1) || Double.isNaN(f2)) {
 				return false;
 			}
+			if (expressionType == MIN_EXPRESSION) {
+				return true;
+			}
 			if (expressionType == LESS_EXPRESSION) {
 				return f1 <= f2;
 			} else if (expressionType == GREAT_EXPRESSION) {
@@ -973,10 +977,22 @@ public class GeneralRouter implements VehicleRouter {
 			return false;
 		}
 
+		public Double calculateExpr(BitSet types, ParameterContext paramContext) {
+			double f1 = calculateExprValue(0, types, paramContext);
+			double f2 = calculateExprValue(1, types, paramContext);
+			if (Double.isNaN(f1) || Double.isNaN(f2)) {
+				return null;
+			}
+			if (expressionType == MIN_EXPRESSION) {
+				return Math.min(f1, f2);
+			}
+			return null;
+		}
+
 		private double calculateExprValue(int id, BitSet types, ParameterContext paramContext) {
 			String value = values[id];
 			Number cacheValue = cacheValues[id];
-			if(cacheValue != null) {
+			if (cacheValue != null) {
 				return cacheValue.doubleValue();
 			}
 			Object o = null;
@@ -1118,17 +1134,22 @@ public class GeneralRouter implements VehicleRouter {
 			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
 					RouteAttributeExpression.LESS_EXPRESSION));
 		}
-		
+
 		public void registerGreatCondition(String value1, String value2, String valueType) {
-			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+			expressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
 					RouteAttributeExpression.GREAT_EXPRESSION));
 		}
-		
+
 		public void registerEqualCondition(String value1, String value2, String valueType) {
-			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+			expressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
 					RouteAttributeExpression.EQUAL_EXPRESSION));
 		}
-		
+
+		public void registerMinExpression(String value1, String value2, String valueType) {
+			expressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
+					RouteAttributeExpression.MIN_EXPRESSION));
+		}
+
 		public void registerAndParamCondition(String param, boolean not) {
 			param = not ? "-" + param : param;
 			parameters.add(param);
@@ -1136,6 +1157,10 @@ public class GeneralRouter implements VehicleRouter {
 
 		public synchronized Object eval(BitSet types, ParameterContext paramContext) {
 			if (matches(types, paramContext)) {
+				if (!expressions.isEmpty()
+						&& expressions.get(0).expressionType == RouteAttributeExpression.MIN_EXPRESSION) {
+					selectValue = expressions.get(0).calculateExpr(types, paramContext);
+				}
 				return calcSelectValue(types, paramContext);
 			}
 			return null;
