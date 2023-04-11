@@ -57,6 +57,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -382,8 +383,9 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			}
 		};
 		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
-			if (trackItem.getFile() != null) {
-				GpxDataItem item = gpxDbHelper.getItem(trackItem.getFile(), callback);
+			File file = trackItem.getFile();
+			if (file != null) {
+				GpxDataItem item = gpxDbHelper.getItem(file, callback);
 				if (item != null) {
 					updateTrackAppearance(item);
 				}

@@ -35,9 +35,11 @@ import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.configmap.tracks.TracksSortMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -55,6 +57,7 @@ import java.util.Date;
 public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final GpxDbHelper gpxDbHelper;
 
 	private final UpdateLocationViewCache locationViewCache;
@@ -72,6 +75,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	                       @NonNull UpdateLocationViewCache viewCache, boolean nightMode) {
 		super(itemView);
 		this.app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		this.settings = app.getSettings();
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.locationViewCache = viewCache;
 		this.fragment = fragment;
@@ -102,43 +106,57 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	public void bindInfoRow(@NonNull TracksAdapter adapter, @NonNull TrackItem trackItem) {
 		File file = trackItem.getFile();
-		GpxDataItem dataItem = trackItem.getDataItem();
-		if (dataItem != null) {
-			buildDescriptionRow(adapter, dataItem, trackItem);
+		GpxDataItem item = trackItem.getDataItem();
+		if (item != null) {
+			bindInfoRow(adapter, trackItem, item);
 		} else if (file != null) {
-			dataItem = gpxDbHelper.getItem(file, item -> {
-				trackItem.setDataItem(item);
+			item = gpxDbHelper.getItem(file, dataItem -> {
+				trackItem.setDataItem(dataItem);
 				if (fragment.isAdded()) {
 					adapter.notifyItemChanged(getAdapterPosition());
 				}
 			});
-			if (dataItem != null) {
-				trackItem.setDataItem(dataItem);
-				buildDescriptionRow(adapter, dataItem, trackItem);
+			if (item != null) {
+				trackItem.setDataItem(item);
+				bindInfoRow(adapter, trackItem, item);
 			}
+		} else if (trackItem.isShowCurrentTrack()) {
+			String width = settings.CURRENT_TRACK_WIDTH.get();
+			boolean showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
+			int color = settings.CURRENT_TRACK_COLOR.get();
+			setupIcon(color, width, showArrows);
+
+			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
+			buildDescriptionRow(adapter, trackItem, analysis, null);
 		}
 	}
 
-	private void buildDescriptionRow(@NonNull TracksAdapter adapter, @NonNull GpxDataItem dataItem, @NonNull TrackItem trackItem) {
+	public void bindInfoRow(@NonNull TracksAdapter adapter, @NonNull TrackItem trackItem, @NonNull GpxDataItem dataItem) {
 		setupIcon(dataItem);
+		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		String cityName = dataItem.getNearestCityName();
+		buildDescriptionRow(adapter, trackItem, analysis, cityName);
+	}
 
+	private void buildDescriptionRow(@NonNull TracksAdapter adapter, @NonNull TrackItem item,
+	                                 @Nullable GPXTrackAnalysis analysis, @Nullable String cityName) {
 		TrackTab trackTab = adapter.getTrackTab();
 		TracksSortMode sortMode = trackTab.getSortMode();
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
 			SpannableStringBuilder builder = new SpannableStringBuilder();
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
-				appendNameDescription(builder, trackTab, trackItem, analysis);
+				appendNameDescription(builder, trackTab, item, analysis);
 			} else if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
 				appendCreationTimeDescription(builder, analysis);
 			} else if (sortMode == DISTANCE_ASCENDING || sortMode == DISTANCE_DESCENDING) {
-				appendDistanceDescription(builder, trackTab, trackItem, analysis);
+				appendDistanceDescription(builder, trackTab, item, analysis);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
-				appendDurationDescription(builder, trackTab, trackItem, analysis);
+				appendDurationDescription(builder, trackTab, item, analysis);
 			} else if (sortMode == NEAREST) {
-				appendNearestDescription(builder, dataItem, analysis);
+				appendNearestDescription(builder, analysis, cityName);
 			} else if (sortMode == LAST_MODIFIED) {
-				appendLastModifiedDescription(builder, trackItem, analysis);
+				appendLastModifiedDescription(builder, item, analysis);
 			}
 			description.setText(builder);
 		}
@@ -146,12 +164,16 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		AndroidUiHelper.updateVisibility(directionIcon, showDirection);
 	}
 
-	private void setupIcon(@NonNull GpxDataItem dataItem) {
-		int color = dataItem.getColor();
-		if (color == 0) {
-			color = GpxAppearanceAdapter.getTrackColor(app);
+	private void setupIcon(@NonNull GpxDataItem item) {
+		setupIcon(item.getColor(), item.getWidth(), item.isShowArrows());
+	}
+
+	private void setupIcon(int color, String width, boolean showArrows) {
+		int trackColor = color;
+		if (trackColor == 0) {
+			trackColor = GpxAppearanceAdapter.getTrackColor(app);
 		}
-		imageView.setImageDrawable(getTrackIcon(app, dataItem.getWidth(), dataItem.isShowArrows(), color));
+		imageView.setImageDrawable(getTrackIcon(app, width, showArrows, trackColor));
 	}
 
 	private void appendNameDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
@@ -220,13 +242,12 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder,
-	                                      @NonNull GpxDataItem dataItem,
-	                                      @NonNull GPXTrackAnalysis analysis) {
+	                                      @NonNull GPXTrackAnalysis analysis,
+	                                      @Nullable String cityName) {
 		if (analysis.latLonStart != null) {
 			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, analysis.latLonStart);
 			builder.append(UpdateLocationUtils.getFormattedDistance(app, locationInfo, locationViewCache));
 
-			String cityName = dataItem.getNearestCityName();
 			if (!Algorithms.isEmpty(cityName)) {
 				builder.append(", ").append(cityName);
 			}

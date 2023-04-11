@@ -424,7 +424,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
-		selectedTracksHelper.ontrackItemsSelected(trackItems, selected);
+		selectedTracksHelper.onTrackItemsSelected(trackItems, selected);
 		onTrackItemsSelected(trackItems);
 		updateButtonsState();
 	}
