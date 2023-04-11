@@ -743,14 +743,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	private boolean shouldHaveWeatherForecast(@NonNull WorldRegion region) {
-		String regionId = region.getRegionId();
 		int level = region.getLevel();
-
-		return WORLD.equals(regionId)
-				|| (level == 1 && regionId.equals(RUSSIA_REGION_ID))
-				|| (level > 1 && !regionId.startsWith(RUSSIA_REGION_ID)
-				&& ((level == 2 && !regionId.startsWith(UNITED_KINGDOM_REGION_ID))
-				|| (level == 3 && regionId.startsWith(UNITED_KINGDOM_REGION_ID))));
+		String regionId = region.getRegionId();
+		return WORLD.equals(regionId) || (level > 2 && regionId.startsWith(RUSSIA_REGION_ID))
+				|| (level == 2 && !regionId.startsWith(UNITED_KINGDOM_REGION_ID))
+				|| (level == 3 && regionId.startsWith(UNITED_KINGDOM_REGION_ID));
 	}
 
 	public boolean checkIfItemOutdated(@NonNull WeatherIndexItem weatherIndexItem) {
