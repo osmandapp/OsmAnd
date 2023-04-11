@@ -776,7 +776,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWizardFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
 		}
 		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
-				&& FirstUsageWizardFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get()
+				&& settings.SHOW_OSMAND_WELCOME_SCREEN.get()
 				&& showOsmAndWelcomeScreen && !showStorageMigrationScreen;
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
@@ -818,12 +818,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
 		}
-		FirstUsageWizardFragment.SHOW = false;
 		if (isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
-			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-			if (wizardFragment != null) {
-				wizardFragment.closeWizard();
-			}
+			disableFirstUsageFragment();
 		}
 		if (SecondSplashScreenFragment.SHOW && SecondSplashScreenFragment.showInstance(fragmentManager)) {
 			SecondSplashScreenFragment.SHOW = false;
@@ -865,6 +861,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void setKeepScreenOn(boolean keepScreenOn) {
 		if (mapViewWithLayers != null) {
 			mapViewWithLayers.setKeepScreenOn(keepScreenOn);
+		}
+	}
+
+	public void disableFirstUsageFragment() {
+		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+		if (wizardFragment != null) {
+			wizardFragment.closeWizard();
 		}
 	}
 

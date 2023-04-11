@@ -110,18 +110,9 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 			if (fm != null && file != null) {
 				ImportCompleteFragment.showInstance(fm, items, file.getName(), needRestart);
 			}
-			disableFirstUsageFragment();
-		}
-	}
-
-	private void disableFirstUsageFragment() {
-		FirstUsageWizardFragment.SHOW = false;
-		app.getSettings().SHOW_OSMAND_WELCOME_SCREEN.set(false);
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			FirstUsageWizardFragment wizardFragment = getMapActivity().getFirstUsageWizardFragment();
-			if (wizardFragment != null) {
-				wizardFragment.closeWizard();
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.disableFirstUsageFragment();
 			}
 		}
 	}

@@ -90,7 +90,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public static final String FIRST_USAGE = "first_usage";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
-	public static boolean SHOW = true;
 
 	private OsmandApplication app;
 	private DownloadIndexesThread downloadThread;
@@ -447,8 +446,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void onResume() {
 		super.onResume();
 		requireMapActivity().disableDrawer();
-		wizardType = DEFAULT_WIZARD_TYPE;
-		doWizardTypeTask();
 	}
 
 	@Override
@@ -626,6 +623,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	public void closeWizard() {
+		app.getSettings().SHOW_OSMAND_WELCOME_SCREEN.set(false);
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager()
