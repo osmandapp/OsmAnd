@@ -281,6 +281,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	@Override
 	public void onUpdatedIndexesList() {
+		selectedItems.clear();
 		reloadData();
 	}
 
@@ -300,7 +301,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			openPopUpMenu(v, child);
 			return true;
 		}
-		selectedItems.add(child);
+		if (selectedItems.contains(child)) {
+			selectedItems.remove(child);
+		} else {
+			selectedItems.add(child);
+		}
 		listAdapter.notifyDataSetChanged();
 		return true;
 	}
