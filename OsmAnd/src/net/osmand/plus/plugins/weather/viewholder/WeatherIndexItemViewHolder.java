@@ -25,7 +25,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.OnCompleteCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -41,6 +40,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class WeatherIndexItemViewHolder {
@@ -236,22 +236,29 @@ public class WeatherIndexItemViewHolder {
 	}
 
 	private void confirmRemove() {
-		confirmWeatherRemove(activity, indexItem);
+		confirmWeatherRemove(activity, Collections.singletonList(indexItem.getRegionId()));
 	}
 
-	public static void confirmWeatherRemove(@NonNull Context context, @NonNull WeatherIndexItem indexItem) {
+	public static void confirmWeatherRemove(@NonNull Context context, @NonNull List<String> regionIds) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 
-		StringBuilder fileName = new StringBuilder()
-				.append(getWeatherName(app, app.getRegions(), indexItem.getRegionId())).append(" ")
-				.append(DownloadActivityType.WEATHER_FORECAST.getString(app));
+		String name = "";
+		if (regionIds.size() == 1) {
+			name = getWeatherName(app, app.getRegions(), regionIds.get(0));
+		} else if (regionIds.size() > 1) {
+			name = String.valueOf(regionIds.size());
+		}
+		StringBuilder fileName = new StringBuilder(name)
+				.append(" ").append(WEATHER_FORECAST.getString(app));
 		String message = context.getString(R.string.delete_confirmation_msg, fileName);
 		confirm.setMessage(message);
 
 		confirm.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			OfflineForecastHelper helper = app.getOfflineForecastHelper();
-			helper.removeLocalForecastAsync(indexItem.getRegionId(), true, true);
+			for (String regionId : regionIds) {
+				helper.removeLocalForecastAsync(regionId, true, true);
+			}
 		});
 		confirm.setNegativeButton(R.string.shared_string_no, null);
 		confirm.show();
