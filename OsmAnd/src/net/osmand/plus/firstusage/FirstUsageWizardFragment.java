@@ -1,5 +1,7 @@
 package net.osmand.plus.firstusage;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -88,7 +90,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public static final String FIRST_USAGE = "first_usage";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
-	public static boolean SHOW = true;
 
 	private OsmandApplication app;
 	private DownloadIndexesThread downloadThread;
@@ -622,6 +623,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	public void closeWizard() {
+		app.getSettings().SHOW_OSMAND_WELCOME_SCREEN.set(false);
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager()
@@ -774,6 +776,12 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			}
 
 			@Override
+			public void onRestoreFromFile() {
+				MapActivity mapActivity = requireMapActivity();
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+			}
+
+			@Override
 			public void onSelectStorageFolder() {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
@@ -812,6 +820,8 @@ interface FirstUsageActionsListener {
 	void onDetermineLocation();
 
 	void onRestoreFromCloud();
+
+	void onRestoreFromFile();
 
 	void onSelectStorageFolder();
 }
