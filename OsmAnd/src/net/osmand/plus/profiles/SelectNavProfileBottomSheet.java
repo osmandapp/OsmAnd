@@ -1,6 +1,7 @@
 package net.osmand.plus.profiles;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -281,28 +282,20 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	protected View.OnLongClickListener getGroupLongClickListener(ProfilesGroup group) {
-		return view -> {
-			String fileName = String.valueOf(group.getTitle());
-			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
-			builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
-			builder.setMessage(R.string.are_you_sure);
-			builder.setNegativeButton(R.string.shared_string_cancel, null)
-					.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-						File routingFile = new File(dir, fileName);
-						if (routingFile.exists() && routingFile.delete()) {
-							updateRouteProfileInAppModes(group.getProfiles());
-							ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
-							if (selectedProfile != null) {
-								setDefaultRouteProfile(getCurrentBaseAppMode());
-							}
-							app.getCustomRoutingConfigs().remove(fileName);
-							updateMenuItems();
-						}
-					});
-			builder.show();
-			return true;
-		};
+		String fileName = String.valueOf(group.getTitle());
+		return getDeleteLongClickListener(fileName, (dialogInterface, i) -> {
+			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+			File routingFile = new File(dir, fileName);
+			if (routingFile.exists() && routingFile.delete()) {
+				updateRouteProfileInAppModes(group.getProfiles());
+				ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
+				if (selectedProfile != null) {
+					setDefaultRouteProfile(getAppMode());
+				}
+				app.getCustomRoutingConfigs().remove(fileName);
+				updateMenuItems();
+			}
+		});
 	}
 
 	private void addProfileItem(ProfileDataObject profileDataObject, ProfilesGroup group) {
@@ -354,23 +347,27 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	protected View.OnLongClickListener getItemLongClickListener(RoutingDataObject profile, ProfilesGroup group) {
+		return getDeleteLongClickListener(profile.getFileName(), (dialogInterface, i) -> {
+			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+			File routingFile = new File(dir, profile.getFileName());
+			if (routingFile.exists() && routingFile.delete()) {
+				updateRouteProfileInAppModes(group.getProfiles());
+				if (isSelected(profile)) {
+					setDefaultRouteProfile(getAppMode());
+				}
+				app.getCustomRoutingConfigs().remove(profile.getFileName());
+				updateMenuItems();
+			}
+		});
+	}
+
+	private View.OnLongClickListener getDeleteLongClickListener(String fileName, DialogInterface.OnClickListener positiveAlertButton) {
 		return view -> {
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
-			builder.setTitle(getString(R.string.delete_confirmation_msg, profile.getFileName()));
+			builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
 			builder.setMessage(getString(R.string.are_you_sure));
 			builder.setNegativeButton(R.string.shared_string_cancel, null)
-					.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-						File routingFile = new File(dir, profile.getFileName());
-						if (routingFile.exists() && routingFile.delete()) {
-							updateRouteProfileInAppModes(group.getProfiles());
-							if (isSelected(profile)) {
-								setDefaultRouteProfile(getCurrentBaseAppMode());
-							}
-							app.getCustomRoutingConfigs().remove(profile.getFileName());
-							updateMenuItems();
-						}
-					});
+					.setPositiveButton(R.string.shared_string_ok, positiveAlertButton);
 			builder.show();
 			return true;
 		};
@@ -403,14 +400,6 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				}
 			}
 		}
-	}
-
-	private ApplicationMode getCurrentBaseAppMode() {
-		ApplicationMode baseMode = getAppMode();
-		while (baseMode.getParent() != null) {
-			baseMode = baseMode.getParent();
-		}
-		return baseMode;
 	}
 
 	@Override
