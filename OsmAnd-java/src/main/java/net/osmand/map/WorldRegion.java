@@ -29,9 +29,7 @@ public class WorldRegion implements Serializable {
 	public static final String FRANCE_REGION_ID = "europe_france";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
 	public static final String WORLD = "world";
-
-	// Just a string constant
-	public static final String UNITED_KINGDOM_REGION_ID = "gb_europe";
+	public static final String UNITED_KINGDOM_REGION_ID = "europe_gb";
 
 	// Hierarchy
 	protected WorldRegion superregion;

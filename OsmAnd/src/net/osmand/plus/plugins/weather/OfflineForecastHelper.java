@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.weather;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static net.osmand.map.WorldRegion.RUSSIA_REGION_ID;
+import static net.osmand.map.WorldRegion.UNITED_KINGDOM_REGION_ID;
 import static net.osmand.map.WorldRegion.WORLD;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.getWeatherName;
@@ -673,7 +674,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			String regionId = region.getRegionId();
 			StringBuilder taskName = new StringBuilder()
 					.append(getWeatherName(app, app.getRegions(), regionId))
-					.append(" ").append(DownloadActivityType.WEATHER_FORECAST.getString(app));
+					.append(" ").append(WEATHER_FORECAST.getString(app));
 			String message = app.getString(R.string.shared_string_downloading_formatted, taskName);
 			int totalWork = getProgressDestination(regionId);
 			progress.startTask(message, totalWork);
@@ -695,7 +696,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			progress.remaining(remainingWork);
 		}
 
-		if (currentProgress >= 1.f) {
+		if (currentProgress >= 1.0f) {
 			setPreferenceDownloadState(regionId, FINISHED);
 			long lastUpdateTime = getTimeForTimeZone(System.currentTimeMillis(), "GMT").getTime();
 			setPreferenceLastUpdate(regionId, lastUpdateTime);
@@ -742,16 +743,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	private boolean shouldHaveWeatherForecast(@NonNull WorldRegion region) {
-		String regionId = region.getRegionId();
 		int level = region.getLevel();
-
-		boolean russia = RUSSIA_REGION_ID.equals(regionId);
-		boolean russiaPrefix = regionId.startsWith(RUSSIA_REGION_ID);
-		boolean unitedKingdom = regionId.equals(WorldRegion.UNITED_KINGDOM_REGION_ID);
-
-		return WORLD.equals(regionId) ||
-				(level == 1 && russia) ||
-				(level > 1 && !russiaPrefix && ((level == 2 && !unitedKingdom) || (level == 3 && unitedKingdom)));
+		String regionId = region.getRegionId();
+		return WORLD.equals(regionId) || (level > 2 && regionId.startsWith(RUSSIA_REGION_ID))
+				|| (level == 2 && !regionId.startsWith(UNITED_KINGDOM_REGION_ID))
+				|| (level == 3 && regionId.startsWith(UNITED_KINGDOM_REGION_ID));
 	}
 
 	public boolean checkIfItemOutdated(@NonNull WeatherIndexItem weatherIndexItem) {
