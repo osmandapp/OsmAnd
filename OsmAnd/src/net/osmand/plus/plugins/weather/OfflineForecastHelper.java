@@ -42,7 +42,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
@@ -73,9 +73,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener {
 
@@ -107,7 +109,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		settings = app.getSettings();
 		cachedWeatherIndexes = new HashMap<>();
 		offlineForecastInfo = new HashMap<>();
-		this.totalCacheSize = new WeatherTotalCacheSize(this);
+		totalCacheSize = new WeatherTotalCacheSize(this);
 	}
 
 	public void setWeatherResourcesManager(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
@@ -159,7 +161,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public boolean downloadForecastByRegion(@NonNull WorldRegion region, @Nullable IProgress progress) {
-		if (!WeatherHelper.isWeatherSupported(app)) {
+		if (!isWeatherSupported(app)) {
 			LOG.error("[Download] [" + region.getRegionId() + "] Failed. Weather isn't allowed with current configuration.");
 			return false;
 		}
@@ -177,19 +179,29 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			return false;
 		}
 
-		QuadRect regionBounds = getRegionBounds(region);
-		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
-		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
-
 		setOfflineForecastProgressInfo(regionId, 0);
-		setPreferenceDownloadState(regionId, WeatherForecastDownloadState.IN_PROGRESS);
+		setPreferenceDownloadState(regionId, IN_PROGRESS);
 
 		onDownloadStarted(region, progress);
+
+		long[] errorsCount = {0};
+		for (QuadRect bounds : getRegionBounds(region)) {
+			downloadForecastByRegion(region, bounds, progress, errorsCount);
+		}
+
+		return isDownloadStateFinished(regionId);
+	}
+
+	private void downloadForecastByRegion(@NonNull WorldRegion region, @NonNull QuadRect regionBounds,
+	                                      @Nullable IProgress progress, long[] errorsCounter) {
+		String regionId = region.getRegionId();
+		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
+		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
 
 		interface_IQueryController queryController = new interface_IQueryController() {
 			@Override
 			public boolean isAborted() {
-				return getPreferenceDownloadState(regionId) != WeatherForecastDownloadState.IN_PROGRESS;
+				return getPreferenceDownloadState(regionId) != IN_PROGRESS;
 			}
 		};
 
@@ -213,7 +225,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				                   BigInteger downloadedTiles,
 				                   BigInteger totalTiles,
 				                   SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
-					onUpdateDownloadProgress(region, progress, succeeded);
+					if (!succeeded) {
+						errorsCounter[0]++;
+					}
+					onUpdateDownloadProgress(region, progress, errorsCounter[0]);
 				}
 			};
 			queryController.swigReleaseOwnership();
@@ -222,8 +237,6 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			weatherResourcesManager.downloadGeoTiles(request, callback.getBinding());
 			dateTime += HOUR_IN_MILLIS * (i < 24 ? 1 : 3);
 		}
-
-		return isDownloadStateFinished(regionId);
 	}
 
 	public void checkAndStopWeatherDownload(@NonNull WeatherIndexItem weatherIndexItem) {
@@ -497,7 +510,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			for (String regionId : regionIds) {
 				StringBuilder fileName = new StringBuilder()
 						.append(getWeatherName(app, app.getRegions(), regionId)).append(" ")
-						.append(DownloadActivityType.WEATHER_FORECAST.getString(app));
+						.append(WEATHER_FORECAST.getString(app));
 				app.showToastMessage(app.getString(R.string.item_deleted, fileName));
 			}
 		}
@@ -681,7 +694,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		}
 	}
 
-	public void onUpdateDownloadProgress(@NonNull WorldRegion region, @Nullable IProgress progress, boolean success) {
+	public void onUpdateDownloadProgress(@NonNull WorldRegion region, @Nullable IProgress progress, long errorsCount) {
 		String regionId = region.getRegionId();
 		if (!isDownloadStateInProgress(regionId)) {
 			return;
@@ -702,6 +715,10 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			setPreferenceLastUpdate(regionId, lastUpdateTime);
 			totalCacheSize.reset();
 
+			if (errorsCount > 0 && destinationTilesCount > 0) {
+				int percentage = ProgressHelper.normalizeProgressPercent((int) (errorsCount * 100 / destinationTilesCount));
+				app.showToastMessage(R.string.weather_download_error, percentage + "%");
+			}
 			runInUiThread(() -> {
 				updateWeatherLayers();
 				calculateCacheSize(region, null);
@@ -790,7 +807,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	private EnumStringPreference<WeatherForecastDownloadState> getDownloadStatePreference(@NonNull String regionId) {
 		String prefId = PREF_FORECAST_DOWNLOAD_STATE_PREFIX + regionId;
 		return (EnumStringPreference<WeatherForecastDownloadState>) settings.registerEnumStringPreference(prefId,
-						WeatherForecastDownloadState.UNDEFINED,
+						UNDEFINED,
 						WeatherForecastDownloadState.values(),
 						WeatherForecastDownloadState.class)
 				.makeGlobal();
@@ -848,18 +865,20 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	@NonNull
 	public static List<Long> getTileIds(@NonNull WorldRegion region) {
-		QuadRect regionBounds = getRegionBounds(region);
-		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
-		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
+		Set<Long> tileIds = new HashSet<>();
 		ZoomLevel zoomLevel = getGeoTileZoom();
 
-		TileIdVector tileIdVector = WeatherTileResourcesManager.generateGeoTileIds(topLeft, bottomRight, zoomLevel);
-		List<Long> tileIds = new ArrayList<>();
-		for (int i = 0; i < tileIdVector.size(); i++) {
-			TileId tileId = tileIdVector.get(i);
-			tileIds.add(getTileId(tileId.getX(), tileId.getY()));
+		for (QuadRect bounds : getRegionBounds(region)) {
+			LatLon topLeft = new LatLon(bounds.top, bounds.left);
+			LatLon bottomRight = new LatLon(bounds.bottom, bounds.right);
+
+			TileIdVector tileIdVector = WeatherTileResourcesManager.generateGeoTileIds(topLeft, bottomRight, zoomLevel);
+			for (int i = 0; i < tileIdVector.size(); i++) {
+				TileId tileId = tileIdVector.get(i);
+				tileIds.add(getTileId(tileId.getX(), tileId.getY()));
+			}
 		}
-		return tileIds;
+		return new ArrayList<>(tileIds);
 	}
 
 	public boolean getPreferenceWifi(@NonNull String regionId) {
