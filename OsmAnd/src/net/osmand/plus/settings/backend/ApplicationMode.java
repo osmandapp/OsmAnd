@@ -235,7 +235,7 @@ public class ApplicationMode {
 		}
 	}
 
-	private void updateAppModeIcon() {
+	public void updateAppModeIcon() {
 		try {
 			String iconResName = app.getSettings().ICON_RES_NAME.getModeValue(this);
 			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
