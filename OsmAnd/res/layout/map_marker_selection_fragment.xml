@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:text="@string/select_map_marker"
-            android:textColor="@color/color_white"
+            android:textColor="?attr/app_bar_primary_item_color"
             android:textSize="@dimen/default_list_text_size_large"
             android:textStyle="bold"
             app:typeface="@string/font_roboto_regular"
@@ -36,7 +36,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/list_background_color">
 
         <ListView
             android:id="@android:id/list"
