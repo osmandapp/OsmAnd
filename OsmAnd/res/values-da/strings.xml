@@ -5136,4 +5136,5 @@
     <string name="shutter_sound">Lukkerlyd</string>
     <string name="camera_app">Kamera-app</string>
     <string name="proxy_port_max_warning">Maksimal portværdi er %1$s</string>
+    <string name="weather_download_error">Kunne ikke downloade %1$s fliser.</string>
 </resources>
