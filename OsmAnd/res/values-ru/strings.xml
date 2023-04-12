@@ -530,7 +530,7 @@
     <string name="map_overlay">Карта наложения</string>
     <string name="map_overlay_descr">Выберите слой наложения поверх основной карты</string>
     <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены.</string>
-    <string name="select_tile_source_to_install">აირჩიეთ ფილის რუკის წყაროები:</string>
+    <string name="select_tile_source_to_install">Выберите источники тайловых карт:</string>
     <string name="internet_not_available">Для данной операции требуется подключение к интернету, но оно недоступно.</string>
     <string name="install_more">Загрузить ещё…</string>
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
@@ -5083,7 +5083,7 @@
 \n
 \n• Добавлен график «Скорость/Уклон» для анализа пути.
 \n
-\n• Android 13 переместил выбор языка приложения в системные настройки.
+\n• В Android 13 выбор языка приложения перемещён в системные настройки.
 \n
 \n• Исправлены проблемы с отображением веганских мест.
 \n
@@ -5125,4 +5125,6 @@
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
     <string name="shutter_sound">Звук затвора</string>
     <string name="camera_app">Приложение камеры</string>
+    <string name="proxy_port_max_warning">Максимальное значение порта - %1$s</string>
+    <string name="weather_download_error">Не удалось загрузить тайлы %1$s.</string>
 </resources>
