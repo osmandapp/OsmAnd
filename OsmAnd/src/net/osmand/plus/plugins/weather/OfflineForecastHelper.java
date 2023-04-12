@@ -73,9 +73,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener {
 
@@ -177,14 +179,24 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			return false;
 		}
 
-		QuadRect regionBounds = getRegionBounds(region);
-		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
-		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
-
 		setOfflineForecastProgressInfo(regionId, 0);
 		setPreferenceDownloadState(regionId, IN_PROGRESS);
 
 		onDownloadStarted(region, progress);
+
+		long[] errorsCount = {0};
+		for (QuadRect bounds : getRegionBounds(region)) {
+			downloadForecastByRegion(region, bounds, progress, errorsCount);
+		}
+
+		return isDownloadStateFinished(regionId);
+	}
+
+	private void downloadForecastByRegion(@NonNull WorldRegion region, @NonNull QuadRect regionBounds,
+	                                      @Nullable IProgress progress, long[] errorsCounter) {
+		String regionId = region.getRegionId();
+		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
+		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
 
 		interface_IQueryController queryController = new interface_IQueryController() {
 			@Override
@@ -193,7 +205,6 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			}
 		};
 
-		long[] errorsCount = {0};
 		Date date = OsmAndFormatter.getStartOfToday();
 		long dateTime = date.getTime();
 		for (int i = 0; i < FORECAST_DATES_COUNT; i++) {
@@ -215,9 +226,9 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				                   BigInteger totalTiles,
 				                   SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
 					if (!succeeded) {
-						errorsCount[0]++;
+						errorsCounter[0]++;
 					}
-					onUpdateDownloadProgress(region, progress, errorsCount[0]);
+					onUpdateDownloadProgress(region, progress, errorsCounter[0]);
 				}
 			};
 			queryController.swigReleaseOwnership();
@@ -226,8 +237,6 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			weatherResourcesManager.downloadGeoTiles(request, callback.getBinding());
 			dateTime += HOUR_IN_MILLIS * (i < 24 ? 1 : 3);
 		}
-
-		return isDownloadStateFinished(regionId);
 	}
 
 	public void checkAndStopWeatherDownload(@NonNull WeatherIndexItem weatherIndexItem) {
@@ -856,18 +865,20 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	@NonNull
 	public static List<Long> getTileIds(@NonNull WorldRegion region) {
-		QuadRect regionBounds = getRegionBounds(region);
-		LatLon topLeft = new LatLon(regionBounds.top, regionBounds.left);
-		LatLon bottomRight = new LatLon(regionBounds.bottom, regionBounds.right);
+		Set<Long> tileIds = new HashSet<>();
 		ZoomLevel zoomLevel = getGeoTileZoom();
 
-		TileIdVector tileIdVector = WeatherTileResourcesManager.generateGeoTileIds(topLeft, bottomRight, zoomLevel);
-		List<Long> tileIds = new ArrayList<>();
-		for (int i = 0; i < tileIdVector.size(); i++) {
-			TileId tileId = tileIdVector.get(i);
-			tileIds.add(getTileId(tileId.getX(), tileId.getY()));
+		for (QuadRect bounds : getRegionBounds(region)) {
+			LatLon topLeft = new LatLon(bounds.top, bounds.left);
+			LatLon bottomRight = new LatLon(bounds.bottom, bounds.right);
+
+			TileIdVector tileIdVector = WeatherTileResourcesManager.generateGeoTileIds(topLeft, bottomRight, zoomLevel);
+			for (int i = 0; i < tileIdVector.size(); i++) {
+				TileId tileId = tileIdVector.get(i);
+				tileIds.add(getTileId(tileId.getX(), tileId.getY()));
+			}
 		}
-		return tileIds;
+		return new ArrayList<>(tileIds);
 	}
 
 	public boolean getPreferenceWifi(@NonNull String regionId) {
