@@ -5124,4 +5124,5 @@
     <string name="camera_app">Kamera alkalmazás</string>
     <string name="shutter_sound">Zárhang</string>
     <string name="proxy_port_max_warning">A port maximális értéke %1$s</string>
+    <string name="weather_download_error">Nem lehet betölteni %1$s csempét.</string>
 </resources>
