@@ -24,6 +24,7 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.OnMarkerSelectListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
+import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		}
 		nightMode = !app.getSettings().isLightContent();
 
-		View view = inflater.inflate(R.layout.map_marker_selection_fragment, container, false);
+		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.map_marker_selection_fragment, container, false);
 		ImageButton closeButton = view.findViewById(R.id.closeButton);
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app));
 		closeButton.setImageDrawable(icBack);

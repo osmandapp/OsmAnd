@@ -140,7 +140,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
+		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.fragment_live_updates, container, false);
 		createToolbar(view.findViewById(R.id.app_bar));
 
 		listView = view.findViewById(android.R.id.list);
