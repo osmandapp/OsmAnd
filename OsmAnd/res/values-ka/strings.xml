@@ -7,9 +7,9 @@
     <string name="unknown_location">პოზიცია უცნობია.</string>
     <string name="modify_transparency">გამჭირვალობა (0 - გამჭირვალე, 255 - გაუმჭირვალე)</string>
     <string name="confirm_interrupt_download">გნებავთ ჩამოტვირთვის შეწყვეტა?</string>
-    <string name="first_time_msg">პროგრამის მთავარი თვისებების გამოსაყენებლად თქვენ გჭირდებათ მონაცემები რომლებიც გამოიყენება გათიშულ რეჟიმში, რომელიც შეგიძლიათ ჩამოტვირთოთ (პარამეტრები-&gt;მონაცემები გათიშვისას). ამის შემდეგ თქვენ შეგეძლებათ ძებნა როგორც მისამართის, ასევე საჯარო ტრანსპორტის მიხედვით.</string>
+    <string name="first_time_msg">პროგრამის მთავარი თვისებების გამოსაყენებლად თქვენ გჭირდებათ მონაცემები რომლებიც გამოიყენება გათიშულ რეჟიმში, რომელიც შეგიძლიათ ჩამოტვირთოთ (მენიუ-&gt;რუკების გადმოწერა). ამის შემდეგ თქვენ შეგეძლებათ ძებნა როგორც მისამართის, ასევე საჯარო ტრანსპორტის მიხედვით.</string>
     <string name="basemap_was_selected_to_download">ბაზური რუკა საჭიროა პროგრამის ფუნქციონირებისათვის და არჩეულ იქნა გადმოსაწერად.</string>
-    <string name="select_index_file_to_download">არაფერი არ იქნა ნაპოვნი. თუ ვერ პოულობთ თქვენი რეგიონის რუკას, შეგიძლიათ შექმნათ თვითონ. (იხილეთ https://osmand.net).</string>
+    <string name="select_index_file_to_download">არაფერი არ იქნა ნაპოვნი. შექმენით რუკა თვითონ. (იხილეთ https://osmand.net).</string>
     <string name="local_indexes_cat_tile">მიმდინარე რუკები (ნახაზები)</string>
     <string name="local_indexes_cat_map">სტანდარტული რუკები (ვექტორული)</string>
     <string name="index_settings_descr">გათიშული რუკების ჩამოტვირთვა, მართვა და დეტალები.</string>
@@ -18,22 +18,20 @@
     <string name="map_online_data_descr">მიმდინარე რუკების გამოყენება (ჩამოტვირთვა და მეხსიერების ბარათზე ქეშირება).</string>
     <string name="shared_string_online_maps">მიმდინარე რუკები</string>
     <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა.</string>
-    <string name="osmand_rastermaps_plugin_description">დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. 
-\nისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და 
-\nშეინახოს OsmAnd-ის დასტაში.</string>
+    <string name="osmand_rastermaps_plugin_description"></string>
     <string name="osmand_background_plugin_description">დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
-    <string name="osmand_accessibility_description">დამატება მართავს სპეციალური წვდომის შესაძლებლობებს.</string>
-    <string name="osmand_development_plugin_description">დამატება გაძლევთ საშუალებას განახორციელოთ შეცდომების კონტროლი და განვითარება მახასიათებლებისა როგორიცაა ანიმირებული ნავიგაცია.</string>
+    <string name="osmand_accessibility_description"></string>
+    <string name="osmand_development_plugin_description"></string>
     <string name="plugins_screen">დამატებათა გამმართველი</string>
     <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა.</string>
     <string name="prefs_plugins">დამატების მმართველი</string>
-    <string name="osm_editing_plugin_description">ეს დამატება გაძლევთ საშუალებას გააცნოთ OSM-ს თქვენი აზრი, გახსნა/დახურვა OSM-ის ხოჭოების შესახებ და მიაწოდოთ პროექტს თქვენი ჩაწერილი GPX ფაილები.</string>
+    <string name="osm_editing_plugin_description"></string>
     <string name="vector_maps_may_display_faster_on_some_devices">ვექტორული რუკები როგორც წესი ჩანს უფრო სწრაფად. შეიძლება არ იმუშაოს ზოგიერთ მოწყობილობაზე.</string>
     <string name="play_commands_of_currently_selected_voice">ხმით არჩეული ბრძანებების შესრულება:</string>
     <string name="debugging_and_development">OsmAnd -ის განვითარება და გამართვა</string>
     <string name="native_rendering">ადგილობრივი რენდერი</string>
     <string name="test_voice_prompts">ხმის ტესტირება</string>
-    <string name="switch_to_raster_map_to_see">მოცემული ადგილისათვის ვექტორული რუკები ნაპოვნი არაა. შეგიძლიათ გადმოწეროთ პარამეტრებში (გამორთული მონაცემები), ან გადაერთოთ მიმდინარე მონაცემებზე.</string>
+    <string name="switch_to_raster_map_to_see">მოცემული ადგილისათვის ვექტორული რუკები ნაპოვნი არაა. შეგიძლიათ გადმოწეროთ მენიუდან (რუკების გადმოწერა), ან გადაერთოთ მიმდინარე მონაცემებზე.</string>
     <string name="send_files_to_osm">გავუგზავნო GPX ფაილები OSM-ს?</string>
     <string name="gpx_visibility_txt">ხილვადობა</string>
     <string name="gpx_tags_txt">ჭდეები</string>
@@ -114,7 +112,7 @@
     <string name="live_monitoring_url">ცოცხალი დევნის ვებ-მისამართი</string>
     <string name="gpx_monitoring_disabled_warn">გთხოვთ ჩართოთ \'დევნის GPX ჟურნალში ჩაწერა\' დევნის პარამეტრებში.</string>
     <string name="show_current_gpx_title">მიმდინარე დევნის ჩვენება</string>
-    <string name="free_version_message">OsmAnd-ის უფასო ვერსია ლიმიტირებულია %1$s ჩამოტვირთვით და არ გააჩნია გათიშული ვიკიპედიის სტატიების მხარდაჭერა.</string>
+    <string name="free_version_message">გადმოსაწერი ან განსაახლებელია %1$s რუკა.</string>
     <string name="free_version_title">უფასო ვერსია</string>
     <string name="poi_context_menu_showdescription">POI-ის აღწერის ჩვენება.</string>
     <string name="index_name_north_america">ჩრდილო ამერიკა</string>
@@ -202,7 +200,7 @@
     <string name="show_more_map_detail">მეტი დეტალები რუკის შესახებ</string>
     <string name="show_more_map_detail_descr">ვექტორული რუკის დეტალების (გზების და ა.შ.) ჩვენება პატარა გადიდებისას.</string>
     <string name="favourites_delete_multiple_succesful">რჩეული წერტილები წაშლილია.</string>
-    <string name="favorite_delete_multiple">თქვენ აპირებთ წაშალოთ %1$d რჩეული და %2$d რჩეულთა ჯგუფი. დარწმუნებული ხართ?</string>
+    <string name="favorite_delete_multiple">წავშალო %1$d სანიშნი და %2$d სანიშნების ჯგუფი\?</string>
     <string name="favorite_home_category">საწყისი</string>
     <string name="favorite_friends_category">მეგობრები</string>
     <string name="favorite_places_category">ადგილები</string>
@@ -234,8 +232,8 @@
     <string name="search_offline_clear_search">ახალი ძებნა</string>
     <string name="map_text_size_descr">ტექსტის ზომა რუკაზე დატანილი სახელებისათვის:</string>
     <string name="map_text_size">ტექსტის ზომა</string>
-    <string name="trace_rendering">რენდერინგის ინფორმაცია</string>
-    <string name="trace_rendering_descr">რენდერის სისწრაფის ჩვენება.</string>
+    <string name="trace_rendering">წარმადობის გამართვის ინფორმაცია</string>
+    <string name="trace_rendering_descr">რენდერის და ნავიგაციის წარმადობის ჩვენება.</string>
     <string name="installing_new_resources">ახალი მონაცემების განშლა…</string>
     <string name="internet_connection_required_for_online_route">არჩეულია მიმდინარე ნავიგაციის სერვისი მაგრამ ინტერნეტთან შეერთება წვდომადი არაა.</string>
     <string name="tts_language_not_supported_title">ენა მხარდაჭერილი არაა</string>
@@ -264,9 +262,9 @@
     <string name="map_overlay">ზედა რუკა</string>
     <string name="map_overlay_descr">ზედა რუკის არჩევა</string>
     <string name="tile_source_already_installed">რუკა უკვე დაყენებულია. მიმდინარეობს პარამეტრების განახლება.</string>
-    <string name="select_tile_source_to_install">აირჩიეთ რუკა დასაყენებლად ან განსანახლებლად.</string>
+    <string name="select_tile_source_to_install">აირჩიეთ ფილის რუკის წყაროები:</string>
     <string name="internet_not_available">ოპერაციისათვის საჭიროა ინტერნეტი, რომელთანაც წვდომა არ არსებობს.</string>
-    <string name="install_more">მეტის ჩაყენება…</string>
+    <string name="install_more">მეტის დამატება…</string>
     <string name="level_to_switch_vector_raster_descr">ამ დონის შემდეგ რასტერული რუკების გამოყენება.</string>
     <string name="level_to_switch_vector_raster">ვექტორული გადიდების მინ. ზომა</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> რუკების დალაგება სურათებით.</string>
@@ -706,8 +704,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">პარკინგის ადგილი</string>
-    <string name="osmand_parking_plugin_description">დამატება გაძლევთ საშუალებას შეინახოთ
-\n მანქანის პარკინგის მდებარეობა.</string>
+    <string name="osmand_parking_plugin_description"></string>
     <string name="osmand_parking_plugin_name">პარკინგის მდებარეობა</string>
     <string name="context_menu_item_add_parking_point">დამატება პარკინგის მდებარეობად</string>
     <string name="context_menu_item_delete_parking_point">პარკინგის მაჩვენებლის წაშლა</string>
@@ -773,7 +770,7 @@
     <string name="download_roads_only_item">გზები</string>
     <string name="download_regular_maps">ჩვეულებრივი რუკები</string>
     <string name="download_roads_only_maps">რუკები მხოლოდ გზებით</string>
-    <string name="safe_mode_description">აპლიკაციის დაცულ რეჟიმში გაშვება(ადგილობრივი კოდის მაგიერ ნელი Android-ის რეჟიმის გამოყენება).</string>
+    <string name="safe_mode_description">აპლიკაციის დაცულ (უფრო ნელ) რეჟიმში გაშვება.</string>
     <string name="safe_mode">დაცული რეჟიმი</string>
     <string name="native_library_not_running">აპლიკაცია გაშვებულია დაცულ რეჟიმში(გამოსართველად იხილეთ პარამეტრები).</string>
     <string name="background_service_is_enabled_question">ფონური სერვისი ჯერ კიდევ გაშვებულია. გნებავთ მისი გამორთვა?</string>
@@ -817,8 +814,8 @@
     <string name="osmand_short_description_80_chars">OsmAnd არის ნავიგაციის აპლიკაცია ღია წყაროთი გათიშული და ონლაინ რუკების მხარდაჭერით</string>
     <string name="map_widget_intermediate_distance">შუალედური დანიშნულების პუნქტი</string>
     <string name="local_indexes_cat_av">აუდიო/ვიდეო მონაცემები</string>
-    <string name="stop_routing_confirm">დარწმუნებული ბრძანდებით რომ გნებავთ ნავიგაციის შეწყვეტა?</string>
-    <string name="clear_dest_confirm">დარწმუნებული ბრძანდებით რომ გნებავთ გაასუფთაოთ თქვენი დანიშნულების წერტილი?</string>
+    <string name="stop_routing_confirm">შევწყვიტო ნავიგაცია\?</string>
+    <string name="clear_dest_confirm">წავშალო თქვენი დანიშნულების (და შუალედური) წერტილი\?</string>
     <string name="precise_routing_mode_descr">ზუსტი გზები მათი მანძილის ზუსტად დასათვლელად. მაგრამ ის ძალიან შეზღუდულია მანძილით და არ იყენებს ადგილობრივ ბიბლიოთეკას და ნელია.</string>
     <string name="precise_routing_mode">გზის ზუსტი დათვლა (ალფა)</string>
     <string name="recording_context_menu_show">ჩვენება</string>
@@ -864,8 +861,7 @@
     <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="index_srtm_parts">მონაკვეთები</string>
     <string name="index_srtm_ele">კონტურული ხაზები</string>
-    <string name="srtm_plugin_description">მოცემული დამატება აადვილებს კონტურული ხაზების ჩამოწერას 
-\n(გათიშული მონაცემების გადმოწერა -&gt; მენიუ -&gt; სხვა რუკები) გათიშულ რუკებთან გამოსაყენებლად.</string>
+    <string name="srtm_plugin_description"></string>
     <string name="srtm_plugin_name">კონტურული ხაზების დამატება</string>
     <string name="download_select_map_types">სხვა რუკები</string>
     <string name="download_srtm_maps">კოტურული ხაზების მონაცემები</string>
@@ -885,7 +881,7 @@
     <string name="app_mode_motorcycle">მოტოციკლი</string>
     <string name="app_mode_boat">გემი</string>
     <string name="app_mode_aircraft">თვითმფრინავი</string>
-    <string name="local_osm_changes_delete_all_confirm">თქვენ შლით osm ცვლილებას %1$d. დარწმუნებული ბრძანდებით?</string>
+    <string name="local_osm_changes_delete_all_confirm">წავშალო %1$d OSM ცვლილება\?</string>
     <string name="shared_string_delete_all">ყველას წაშლა</string>
     <string name="animate_routing_route_not_calculated">გთხოვთ ჯერ გადაითვალოთ გზა</string>
     <string name="animate_routing_route">სიმულაცია გამოთვლილი გზის გამოყენებით </string>
@@ -1110,7 +1106,7 @@
     <string name="shared_string_slope">დაქანება</string>
     <string name="add_new_folder">ახალი დასტის დამატება</string>
     <string name="points_delete_multiple_succesful">წერტილები წაშლილია.</string>
-    <string name="points_delete_multiple">დარწმუნებული ბრძანდებით, რომ აპირებთ წაშალოთ %1$d წერტილ(ებ)ი?</string>
+    <string name="points_delete_multiple">წავშალო %1$d წერტილი\?</string>
     <string name="track_points_category_name">გზის მნიშვნელოვანი წერტილები</string>
     <string name="shared_string_gpx_track">მიდევნება</string>
     <string name="max_speed">მაქს. სიჩქარე</string>
@@ -1309,7 +1305,7 @@
     <string name="route_preferences">გზის პარამეტრები</string>
     <string name="route_descr_select_destination">დანიშნულების წერტილის დაყენება</string>
     <string name="select_gpx">აირჩიეთ GPX…</string>
-    <string name="routing_attr_weight_name">წონის ლიმიტი</string>
+    <string name="routing_attr_weight_name">წონა</string>
     <string name="routing_attr_avoid_motorway_description">ავტოსტრადებისთვის თავის არიდება</string>
     <string name="routing_attr_avoid_motorway_name">ავტოსტრადების გარეშე</string>
     <string name="routing_attr_avoid_ferries_description">ბორნების თავიდან აცილება</string>
@@ -1714,7 +1710,7 @@
     <string name="shared_string_night_map">ღამის რუკა</string>
     <string name="add_online_source">ონლაინ წყაროს დამატება</string>
     <string name="vessel_height_warning_link">ჭურჭლის სიმაღლის მითითება</string>
-    <string name="routing_attr_length_name">სიგრძის ლიმიტი</string>
+    <string name="routing_attr_length_name">სიგრძე</string>
     <string name="item_deleted">%1$s წაშლილია</string>
     <string name="routing_attr_difficulty_preference_name">არჩეული სირთულე</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
@@ -2047,7 +2043,7 @@
     <string name="delete_change">ცვლილების წაშლა</string>
     <string name="shared_string_show_details">დეტალების ჩვენება</string>
     <string name="shared_string_logoff">გასვლა</string>
-    <string name="routing_attr_height_name">სიმაღლის ლიმიტი</string>
+    <string name="routing_attr_height_name">სიმაღლე</string>
     <string name="rendering_attr_hideHouseNumbers_name">სახლების ნომრები</string>
     <string name="storage_directory">რუკების საცავი</string>
     <string name="storage_directory_default">შიდა მეხსიერება</string>
@@ -2184,7 +2180,7 @@
     <string name="shared_string_local_maps">ლოკალური რუკები</string>
     <string name="login_open_street_map">OpenStreetMap-ზე შესვლა</string>
     <string name="login_open_street_map_org">გთხოვთ, შეხვიდეთ OpenStreetMap.org-ზე</string>
-    <string name="use_login_password">გამოიყენეთ მომხმარებელ და პაროლი</string>
+    <string name="use_login_password">მომხმარებელის და პაროლის გამოყენება</string>
     <string name="manage_subscription">გამოწერის მართვა</string>
     <string name="register_on_openplacereviews">OpenPlaceReviews.org-ზე
 \nრეგისტრაცია</string>
@@ -2274,7 +2270,7 @@
     <string name="shared_string_memory_mb_desc">%1$s მბ</string>
     <string name="shared_string_memory_gb_desc">%1$s გბ</string>
     <string name="shared_string_memory_tb_desc">%1$s ტბ</string>
-    <string name="routing_attr_width_name">სიგანის ლიმიტი</string>
+    <string name="routing_attr_width_name">სიგანე</string>
     <string name="routeInfo_piste_difficulty_name">თხილამურის სიძნელე</string>
     <string name="routeInfo_piste_type_name">თხილამურის ტიპი</string>
     <string name="shared_string_by_default">ნაგულისხმევად</string>
@@ -2291,7 +2287,7 @@
     <string name="change_default_settings">პარამეტრის შეცვლა</string>
     <string name="navigate_point_format_utm">UTM სტანდარტი</string>
     <string name="cancel_subscription">გამოწერის გაუქმება</string>
-    <string name="get_discount_second_part">მაშინ %1$s</string>
+    <string name="get_discount_second_part">შემდეგ %1$s</string>
     <string name="months_3">3 თვე</string>
     <string name="app_mode_campervan">სალაშქრო მანქანა (RV)</string>
     <string name="shared_string_open_track">ღია გზა</string>
@@ -2761,7 +2757,7 @@
     <string name="shared_string_purchased">შეძენილია</string>
     <string name="routing_attr_avoid_tunnels_name">გვირაბების აცილება</string>
     <string name="storage_found_files_descr">შეეხეთ \"%1$s\"-ს %2$s ფაილების დასაკოპირებლად \"%3$s\"-დან \"%4$s\"-ში. საჭირო იქნება ჩვეულებრივზე მეტი დრო.</string>
-    <string name="storage_copied_files_size">დაკოპირებულია %1$s ფაილები %2$s</string>
+    <string name="storage_copied_files_size">დამუშავებულია %1$s ფაილი, %2$s</string>
     <string name="storage_copying_files_size">კოპირება %1$s ფაილების %2$s</string>
     <string name="storage_found_files_size">ნაპოვნია %1$s ფაილები %2$s</string>
     <string name="reading_files">ფაილების კითხვა…</string>
@@ -2902,4 +2898,6 @@
     <string name="shared_string_move_up">გადაადგილება ↑</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">სალაშქრო გზები</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">ქსელი</string>
+    <string name="save_track_to_gpx_descrp"></string>
+    <string name="av_def_action_choose">მოთხოვნისას</string>
 </resources>
