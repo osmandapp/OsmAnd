@@ -530,7 +530,7 @@
     <string name="map_overlay">Карта наложения</string>
     <string name="map_overlay_descr">Выберите слой наложения поверх основной карты</string>
     <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены.</string>
-    <string name="select_tile_source_to_install">Выберите тайловые карты для установки или обновления.</string>
+    <string name="select_tile_source_to_install">აირჩიეთ ფილის რუკის წყაროები:</string>
     <string name="internet_not_available">Для данной операции требуется подключение к интернету, но оно недоступно.</string>
     <string name="install_more">Загрузить ещё…</string>
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
