@@ -235,7 +235,7 @@ public class ApplicationMode {
 		}
 	}
 
-	public void updateAppModeIcon() {
+	private void updateAppModeIcon() {
 		try {
 			String iconResName = app.getSettings().ICON_RES_NAME.getModeValue(this);
 			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
@@ -458,12 +458,10 @@ public class ApplicationMode {
 			iconNameListener = new StateChangedListener<String>() {
 				@Override
 				public void stateChanged(String change) {
-					app.runInUIThread(() -> {
-						List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
-						for (ApplicationMode mode : modes) {
-							mode.updateAppModeIcon();
-						}
-					});
+					List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
+					for (ApplicationMode mode : modes) {
+						mode.updateAppModeIcon();
+					}
 				}
 			};
 			settings.ICON_RES_NAME.addListener(iconNameListener);

@@ -179,7 +179,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			} else {
 				app.getSettings().resetPreferencesForProfile(appMode);
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
-				appMode.updateAppModeIcon();
 				updateCopiedOrResetPrefs();
 			}
 		}
