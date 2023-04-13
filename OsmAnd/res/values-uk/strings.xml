@@ -4120,9 +4120,9 @@
     <string name="backup_conflicts">Неузгодженості</string>
     <string name="backup_confilcts_descr">Не вдалося надіслати деякі файли на сервер, оскільки на сервері зберігається новіша версія.</string>
     <string name="backup_view_conflicts">Переглянути неузгодженості</string>
-    <string name="backup_no_internet_descr">Перевірте з\'єднання з Інтернетом та завантажте знову.</string>
+    <string name="backup_no_internet_descr">Перевірте зʼєднання з Інтернетом та завантажте знову.</string>
     <string name="backup_pause_all">Призупинити все</string>
-    <string name="upload_local_version">Вивантажити локальну версію</string>
+    <string name="upload_local_version">Надіслати локальну версію</string>
     <string name="download_server_version">Завантажити версію з сервера</string>
     <string name="shared_string_logout">Вийти</string>
     <string name="backup_delete_all_data">Вилучити всі мої дані</string>
@@ -4156,13 +4156,13 @@
     <string name="send_logcat_log">Надіслати вміст журналу</string>
     <string name="backup_promocode">Промокод</string>
     <string name="purchases_feature_desc_nautical">Отримайте доступ до даних про морські глибини</string>
-    <string name="purchases_feature_desc_terrain">Ізолінії рельєфу, повноколірна відмивка рельєфу з темними відтінками та мапами схилів в кольорах для показу піків та низин.</string>
+    <string name="purchases_feature_desc_terrain">Ізолінії рельєфу, повноколірне затінення рельєфу та мапам схилів в кольорах для показу піків та низин.</string>
     <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікімандри в офлайн режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
-    <string name="purchases_feature_desc_wikipedia">Надає всі статті Вікіпедії, пов\'язані з конкретними місцями офлайн, допомагаючи вам дізнатися про місця, які ви відвідуєте під час подорожі, простими дотиком до мапи. Не забудьте завантажити файли мап Вікіпедії для відповідних регіонів.</string>
+    <string name="purchases_feature_desc_wikipedia">Надає всі статті Вікіпедії, повʼязані з конкретними місцями офлайн, допомагаючи вам дізнатися про місця, які ви відвідуєте під час подорожі, простими дотиком до мапи. Не забудьте завантажити файли мап Вікіпедії для відповідних регіонів.</string>
     <string name="purchases_feature_desc_combined_wiki">Переглядайте статті Вікіпедії в дорозі, без з’єднання з Інтернетом. Офлайнові дані, розділені за країнами та доступні всіма мовами.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Отримайте доступ до часто оновлюваних мап. Щогодинні, щоденні або щотижневі оновлення. Завантажуються поступово, лише для зміненої ділянки.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Отримайте доступ до часто оновлюваних мап. Щогодинні, щоденні або щотижневі оновлення. Завантажуються інкрементно, лише для зміненої ділянки.</string>
     <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd онлайн. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
     <string name="unlimited_map_downloads">Необмежена кількість завантажень мап</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедія і Вікімандри в офлайн режимі</string>
@@ -4177,7 +4177,7 @@
     <string name="not_available_with">Недоступно з %1$s</string>
     <string name="redeem_promo_code">Застосувати промокод</string>
     <string name="osmand_maps_plus_tagline">Отримайте розширені можливості</string>
-    <string name="osmand_pro_tagline">Отримайте найбільшу кількість можливостей</string>
+    <string name="osmand_pro_tagline">Отримайте максимум можливостей</string>
     <string name="shared_string_learn_more">Докладніше</string>
     <string name="cancel_anytime_in_huawei_appgallery">Скасуйте її в будь-який час у Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Скасуйте її в будь-який час у Google Play.</string>
@@ -4191,13 +4191,13 @@
     <string name="shared_string_discussion">Обговорення</string>
     <string name="shared_string_view_all">Подивитись все</string>
     <string name="backup_error_user_is_already_registered">Ця адреса е-пошти використовується іншим обліковим записом</string>
-    <string name="backup_error_subscription_was_expired">Термін дії передплати завершився</string>
-    <string name="backup_error_subscription_was_used">Передплату або акцію застосовано іншим обліковим записом %1$s</string>
+    <string name="backup_error_subscription_was_expired">Термін дії передплати закінчився</string>
+    <string name="backup_error_subscription_was_used">Передплата або промокод використані іншим обліковим записом %1$s</string>
     <string name="backup_error_size_is_exceeded">Максимальний розмір OsmAnd Cloud перевищено %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Файл слід надіслати у форматі .gzip</string>
     <string name="backup_error_file_not_available">Файл недоступний</string>
     <string name="backup_error_token_is_not_valid">Щось не так із наданим ID пристрою або токеном</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або не чинний</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або прострочений</string>
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
     <string name="backup_error_no_valid_subscription">Немає чинної передплати</string>
     <string name="release_4_0">• Резервне копіювання в хмарі
@@ -4227,7 +4227,7 @@
     <string name="logout_from_osmand_cloud_decsr">Вийти\?
 \nЩоб створити резервну копію даних або відновити їх, потрібно буде ввійти ще раз.</string>
     <string name="backup_error_subscription_was_expired_descr">Термін дії передплати OsmAnd Pro завершився, поновіть її, щоб користуватись резервним копіюванням. Ви досі можете відновити дані з Хмари.</string>
-    <string name="contour_lines_hillshades_slope">Ізолінії, відмивка рельєфу, схили</string>
+    <string name="contour_lines_hillshades_slope">Ізолінії, затінення рельєфу, схили</string>
     <string name="backup_deleting_all_data">Вилучення всіх даних…</string>
     <string name="backup_deleted_all_data">Вилучено всі дані.</string>
     <string name="backup_deleting_all_data_descr">Зачекайте, поки OsmAnd вилучить ваші дані з хмари. Усі дані на пристрої залишаться незміненими.</string>
@@ -4247,27 +4247,27 @@
     <string name="on_hold_since">Призупинено з %1$s</string>
     <string name="active_till">Активна до %1$s</string>
     <string name="promo_subscription">Промо-передплата</string>
-    <string name="track_has_no_needed_data">У треку відсутні відповідні дані.</string>
+    <string name="track_has_no_needed_data">Трек не містить потрібних даних.</string>
     <string name="benefits_for_contributors_primary_descr">Активні учасники OpenStreetMap.org мають право на необмежене погодинне оновлення мап.</string>
     <string name="benefits_for_contributors_secondary_descr">Увійдіть в OpenStreetMap, щоб перевірити, чи маєте ви право отримувати необмежені щомісячні та погодинні оновлення мап.</string>
-    <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
+    <string name="use_login_and_password">Використовуйте логін та пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вітаємо, ви зробили достатньо змін в OpenStreetMap і тепер можете насолоджуватися необмеженою кількістю оновлень мап OsmAnd!</string>
     <string name="not_enough_contributions_descr">Щоб отримати безплатні щогодинні оновлення, зробіть щонайменше %1$s змін за останні два місяці %2$s.</string>
     <string name="shared_string_contributions">Кількість змін</string>
-    <string name="contributions_may_calculate_with_delay">Обчислення внесків може тривати кілька годин.</string>
+    <string name="contributions_may_calculate_with_delay">Обробка внесків може тривати кілька годин.</string>
     <string name="map_updates_are_unavailable_yet">Оновлення мап досі недоступні. :-(</string>
-    <string name="connect_track_points_as">З\'єднати точки маршруту</string>
+    <string name="connect_track_points_as">Зʼєднати точки маршруту</string>
     <string name="option_available_only_in_osmand_pro">Доступно як частина передплати OsmAnd Pro.</string>
     <string name="pro_widgets">Віджети Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Отримайте доступ до можливостей OsmAnd Pro: Забарвлення маршрутів та багато іншого.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ознайомтеся з тарифними планами OsmAnd, щоб знайти відповідний для вас.</string>
     <string name="routes_color_by_type">Забарвлення маршрутів від…</string>
-    <string name="shared_string_relation">Зв\'язок</string>
+    <string name="shared_string_relation">Звʼязок</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Забарвлення маршрутів згідно з їхнім індивідуальним місцевим кольором (якщо він присутній в OpenStreetMap) і символом на туристичному маршруті.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Забарвлення згідно з належністю до мережі.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Забарвлення маршрутів згідно з типом мережі вузлів (міжнародної, регіональної, місцевої).</string>
-    <string name="walking_route_osmc_description">Забарвлення маршрутів за їх місцевим індивідуальним кольором (якщо він наявний в OpenStreetMap) і типу (міжнародний, регіональний, місцевий).</string>
+    <string name="walking_route_osmc_description">Забарвлення маршрутів за їх місцевим індивідуальним кольором (якщо він наявний в OpenStreetMap) і типом (міжнародний, регіональний, місцевий).</string>
     <string name="travel_routes">Туристичні маршрути</string>
     <string name="setting_supported_by_style">Це налаштування надається стилем мапи «%1$s»</string>
     <string name="direct_line_maps_required_descr">Обчислення маршруту триває довше ніж зазвичай.
@@ -4313,10 +4313,10 @@
     <string name="horseback_riding">Верхова їзда</string>
     <string name="routing_attr_prefer_horse_routes_description">Надавати перевагу кінним маршрутам</string>
     <string name="routing_attr_prefer_horse_routes_name">Надавати перевагу кінним маршрутам</string>
-    <string name="routing_attr_only_permitted_ways_description">Використовувати лише явно дозволені шляхи (доріжки, просіки тощо)</string>
-    <string name="routing_attr_only_permitted_ways_name">Явний дозвіл використання вулиць</string>
-    <string name="routing_attr_only_permitted_streets_description">Використовувати лише явно дозволені вулиці</string>
-    <string name="routing_attr_only_permitted_streets_name">Явний дозвіл використання вулиць</string>
+    <string name="routing_attr_only_permitted_ways_description">Використовувати лише шляхи з явним дозволом для руху (доріжки, просіки тощо)</string>
+    <string name="routing_attr_only_permitted_ways_name">Шляхи з явним дозволом для руху</string>
+    <string name="routing_attr_only_permitted_streets_description">Використовувати лише вулиці з явним дозволом для руху</string>
+    <string name="routing_attr_only_permitted_streets_name">Вулиці з явним дозволом для руху</string>
     <string name="routing_attr_allow_gate_description">Дозволити використання воріт</string>
     <string name="routing_attr_allow_gate_name">Дозволити використання воріт</string>
     <string name="routing_attr_prefer_tactile_paving_description">Надавати перевагу тактильному покриттю</string>
@@ -4330,7 +4330,7 @@
     <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
     <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
     <string name="shared_string_details">Подробиці</string>
-    <string name="internal_app_storage_description">Користувачі та інші застосунків не мають доступу до внутрішнього сховища, тому лише OsmAnd може отримати доступ до ваших даних.</string>
+    <string name="internal_app_storage_description">Користувачі та інші застосунки не мають доступу до внутрішнього сховища, тому лише OsmAnd може отримати доступ до ваших даних.</string>
     <string name="rendering_attr_natureReserves_description">Показати заповідники, заповідні території та національні парки.</string>
     <string name="included_categories">Включені категорії</string>
     <string name="shared_string_articles">Статті</string>
@@ -4363,12 +4363,12 @@
     <string name="continue_on_phone">Продовжити на мобільному пристрої</string>
     <string name="location_access_request_title">OsmAnd потрібен доступ до GPS для навігації.</string>
     <string name="android_auto_map_placeholder_title">Мапа показується на екрані в автомобілі.</string>
-    <string name="android_auto_map_placeholder_descr">Від\'єднайте пристрій від Android Auto, щоб переглядати мапу в застосунку.</string>
+    <string name="android_auto_map_placeholder_descr">Відʼєднайте пристрій від Android Auto, щоб переглядати мапу в застосунку.</string>
     <string name="location_access_request_action">Надати доступ</string>
     <string name="location_access_request_result">Затверджено: %1$s Відхилено: %2$s</string>
     <string name="is_disabled">%1$s вимкнено</string>
     <string name="clear_all_history">Очистити всю історію</string>
-    <string name="markers_history_is_disabled_descr">Увімкніть історію, щоб пригадати список відвіданих позначок мапи.</string>
+    <string name="markers_history_is_disabled_descr">Увімкніть історію, щоб запамʼятати список відвіданих позначок мапи.</string>
     <string name="clear_all_history_warning">Очистити всі записи історії застосунків, включно з пошуком, навігацією та історією позначок\?</string>
     <string name="shortcut_navigate_to_home">Маршрут \"Додому\"</string>
     <string name="shared_storage_warning_description">Через нові правила Android, починаючи з листопада 2021 року OsmAnd 4.2 втратить доступ до спільного сховища.
@@ -4411,18 +4411,18 @@
     <string name="copying_completed">Скопійовано</string>
     <string name="shared_string_copy_to">Копіювати до</string>
     <string name="start_copying">Почати копіювання</string>
-    <string name="shared_string_migration">Переміщення</string>
+    <string name="shared_string_migration">Міграція</string>
     <string name="folder_access_denied">Для доступу до обраної теки потрібен дозвіл.</string>
     <string name="skip_confirmation">Так, пропустити</string>
-    <string name="shared_storage_migration">Переміщення Спільного сховища</string>
+    <string name="shared_storage_migration">Міграція Спільного сховища</string>
     <string name="icon_group_industrial">Промисловість</string>
-    <string name="shared_string_skip_warning">Пропустити переміщення\? OsmAnd більше не має доступу до ваших файлів у спільному сховищі.
+    <string name="shared_string_skip_warning">Пропустити міграцію\? OsmAnd більше не має доступу до ваших файлів у спільному сховищі.
 \n
 \nЗастосунок почне використовувати вашу нову теку даних.</string>
     <string name="shared_storage">Спільне сховище</string>
     <string name="files_remaining">Файлів лишилося: %1$s %2$s</string>
     <string name="shared_storage_second_step">Натисніть «Використовувати цю теку».</string>
-    <string name="shared_storage_migration_descr">Через зміни доступу до пам\'яті в Android, OsmAnd більше не може використовувати %1$s.
+    <string name="shared_storage_migration_descr">Через зміни доступу до памʼяті в Android, OsmAnd більше не може використовувати %1$s.
 \n
 \nСкопіюйте всі дані до нової теки.</string>
     <string name="icon_group_education">Освіта</string>
@@ -4432,7 +4432,7 @@
     <string name="map_marker_options">Параметри позначок на мапі</string>
     <string name="add_to_group">Додати до групи</string>
     <string name="app_modes_options">Вибір режимів застосунку</string>
-    <string name="shared_string_memory">Пам\'ять</string>
+    <string name="shared_string_memory">Памʼять</string>
     <string name="memory_allocated_for_routing_ds">Виділення більшого обсягу пам\'яті прискорює прокладання довгих маршрутів (понад 500 км), але може вплинути на швидкодію інших застосунків.
 \nНе впливає на швидкість прокладання коротких маршрутів.</string>
     <string name="memory_allocated_for_routing">Пам\'ять, виділена для навігації</string>
@@ -4454,7 +4454,7 @@
 \nТочки з більшим значенням будуть приховані.</string>
     <string name="shared_string_statistics">Статистика</string>
     <string name="distance_between_points">Відстань між точками</string>
-    <string name="gps_filter_speed_altitude_desc">На діаграмі та мапі з’являться лише точки треку, які відповідають встановленому проміжку, інше буде приховано.</string>
+    <string name="gps_filter_speed_altitude_desc">На діаграмі та мапі з’являться лише точки треку, які відповідають встановленому інтервалу, інше буде приховано.</string>
     <string name="gps_filter_smoothing_desc">Встановіть граничну відстань між точками.
 \nТочки треку, які розміщено за межами цієї відстані, від останньої видимої точки, будуть приховані.
 \nМайте на увазі, що високі граничні значення можуть надмірно спростити геометрію треку.</string>
@@ -4465,9 +4465,9 @@
     <string name="gps_filter_actions_description">OsmAnd застосовує зміни до треку без збереження його у файлі. Ви можете зберегти зміни вручну.</string>
     <string name="shared_string_gps_filter">GPS-фільтр</string>
     <string name="storage_migration_wrong_folder_warning">У вибраній теці не має даних OsmAnd. Спробуйте ще раз.</string>
-    <string name="use_routing_fallback_description">Використовувати офлайн-навігацію, якщо онлайн-навігація не доступна.</string>
-    <string name="use_routing_fallback">Резервна офлайн-навігація</string>
-    <string name="turn_arrows_descr">Укажіть, чи показувати стрілки повороту на лінії маршруту.</string>
+    <string name="use_routing_fallback_description">Використовуйте офлайн-маршрутизацію, коли онлайн-маршрутизація недоступна.</string>
+    <string name="use_routing_fallback">Запасний варіант офлайн-маршрутизації</string>
+    <string name="turn_arrows_descr">Оберіть, чи показувати стрілки повороту на лінії маршруту.</string>
     <string name="shared_string_size">Розмір</string>
     <string name="created_on">Створено</string>
     <string name="turn_arrows">Стрілки повороту</string>
@@ -4485,17 +4485,17 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Показувати теґи fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на мапі малого масштабу</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на мапі малого масштабу</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на загальних масштабах</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на загальних масштабах</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Тунелі на водних шляхах</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Додаткові текстові відомості про поверхню (surface_qualification) морського дна, комбіновані типи поверхні, категорію та тип рослинності</string>
     <string name="rendering_value_category_name">Категорія</string>
-    <string name="rendering_value_all_name">Усі</string>
+    <string name="rendering_value_all_name">Всі</string>
     <string name="rendering_value_omit_name">Пропустити</string>
-    <string name="rendering_attr_seabedDetail_name">Подробиці про морське дно</string>
+    <string name="rendering_attr_seabedDetail_name">Деталі морського дна</string>
     <string name="save_track_to_gpx_descrp">Автозапуск запису треку під час навігації та автоматичне збереження після завершення.</string>
     <string name="gpx_no_routes_descr">Ви можете використовувати інструмент «%1$s», щоб додати маршрут у файл.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
@@ -4531,14 +4531,14 @@
     <string name="rendering_attr_showFitnessTrails_name">Фітнес-стежки</string>
     <string name="rendering_attr_showRunningRoutes_description">Показати бігові маршрути</string>
     <string name="rendering_attr_showRunningRoutes_name">Бігові маршрути</string>
-    <string name="rendering_attr_horse_scale_common_name">Загальне</string>
-    <string name="rendering_attr_horse_scale_demanding_name">Вимогливість</string>
-    <string name="rendering_attr_horse_scale_impossible_name">Неможливо</string>
+    <string name="rendering_attr_horse_scale_common_name">Загальна</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Вибаглива</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Непрохідна</string>
     <string name="routing_attr_carriage_restrictions_name">Обмеження на перевезення</string>
-    <string name="routing_attr_carriage_restrictions_description">Враховувати дозволи на доступ для кінних транспортних засобів</string>
+    <string name="routing_attr_carriage_restrictions_description">Враховувати обмеження для гужових транспортних засобів</string>
     <string name="rendering_attr_showTrainRoutes_name">Залізничні маршрути</string>
     <string name="rendering_attr_showLightRailRoutes_name">Маршрути легкорейкового транспорту</string>
-    <string name="rendering_attr_showFunicularRoutes_name">Фунікулерні маршрути</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Маршрути фунікулера</string>
     <string name="rendering_attr_showBusRoutes_name">Автобусні маршрути</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Тролейбусні маршрути</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Трансферні маршрути</string>
@@ -4546,30 +4546,30 @@
     <string name="shared_string_visible_widgets">Видимі віджети</string>
     <string name="shared_string_item">Пункт</string>
     <string name="shared_string_buttons">Кнопки</string>
-    <string name="simulation_constant_mode_desc">Симуляція буде проводитися з постійною вибраною швидкістю.</string>
-    <string name="simulation_constant_mode_title">Стала швидкість</string>
+    <string name="simulation_constant_mode_desc">Симуляція буде проводитися з постійною заданою швидкістю.</string>
+    <string name="simulation_constant_mode_title">Постійна швидкість</string>
     <string name="simulation_preview_mode_desc">Швидкість симуляції буде максимальною на прямих ділянках і сповільнюватиметься лише на перехрестях.</string>
-    <string name="simulation_preview_mode_title">Режим швидкого передогляду</string>
+    <string name="simulation_preview_mode_title">Режим швидкого попереднього перегляду</string>
     <string name="speed_mode">Режим швидкості</string>
     <string name="routeInfo_horse_scale_name">Складність кінних стежок</string>
-    <string name="rendering_attr_horse_scale_difficult_name">Складність</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Важка</string>
     <string name="routeInfo_horse_scale_description">Показувати шляхи відповідно до складності кінних стежок</string>
-    <string name="rendering_attr_horse_scale_dangerous_name">Небезпечно</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Небезпечна</string>
     <string name="rendering_attr_showTramRoutes_name">Трамвайні маршрути</string>
-    <string name="rendering_attr_horse_scale_critical_name">Критичність</string>
+    <string name="rendering_attr_horse_scale_critical_name">Критична</string>
     <string name="rendering_attr_showMonorailRoutes_name">Монорейкові маршрути</string>
     <string name="top_widgets_panel">Верхня панель</string>
     <string name="bottom_widgets_panel">Нижня панель</string>
     <string name="configure_screen_widgets_descr">Виберіть сторону екрана, щоб додати або переставити віджети.</string>
-    <string name="osm_carto_render_descr">Подібно до стилю OpenStreetMap-carto, який використовується на головному сайті OSM</string>
+    <string name="osm_carto_render_descr">Подібно до стилю OpenStreetMap-carto, який використовується на сайті OSM</string>
     <string name="simulation_real_mode_desc">На прямих ділянках доріг швидкість буде наближена до максимально дозволеної швидкості.
 \nНа перехрестях симуляція сповільниться.
-\nДодаткові штрафи будуть застосовуватися на світлофорах, знаках зупинки і т.д.</string>
+\nДодаткові уповільнення будуть застосовуватися на світлофорах, знаках СТОП і т.д.</string>
     <string name="simulation_real_mode_title">Реалістична симуляція</string>
-    <string name="apply_to_existing_points_descr">Застосувати зміни до наявних точок групи чи лише до нових\?</string>
+    <string name="apply_to_existing_points_descr">Застосувати зміни до наявних точок групи чи тільки до нових\?</string>
     <string name="apply_to_existing">Застосувати до наявних</string>
     <string name="apply_to_existing_favorites_descr">Застосувати зміни до наявних точок групи закладок чи тільки до нових\?</string>
-    <string name="apply_only_to_new_points">Застосовувати лише до нових точок</string>
+    <string name="apply_only_to_new_points">Застосовувати тільки до нових точок</string>
     <string name="apply_only_to_new_favorites">Застосовувати лише до нових закладок</string>
     <string name="change_default_appearance">Змінити типовий зовнішній вигляд</string>
     <string name="map_widget_altitude">Висота поточного розташування</string>
@@ -4578,16 +4578,16 @@
     <string name="add_page">Додати сторінку</string>
     <string name="page_number">Сторінка %1$s</string>
     <string name="shared_string_symbol">Символ</string>
-    <string name="no_widgets_descr">Додайте один або кілька віджетів зі списку доступних віджетів.</string>
+    <string name="no_widgets_descr">Додайте один або кілька віджетів зі списку наявних віджетів.</string>
     <string name="available_widgets">Доступні віджети</string>
     <string name="snackbar_page_removed">«Сторінку %1$s» видалено.</string>
     <string name="no_widgets_here_yet">Тут ще немає віджетів</string>
     <string name="on_with_params">%1$s на %2$s</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не сходити з траси</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Лише за необхідності</string>
-    <string name="routing_attr_freeride_policy_allow_name">Дозволити</string>
+    <string name="routing_attr_freeride_policy_allow_name">Дозволено</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Надавати перевагу руху поза трасою</string>
-    <string name="routing_attr_difficulty_preference_no_preference_name">Не налаштовувати</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">Без переваг</string>
     <string name="routing_attr_difficulty_preference_beginner_name">Початківець</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Досвідчений</string>
     <string name="routing_attr_difficulty_preference_expert_name">Експерт</string>
