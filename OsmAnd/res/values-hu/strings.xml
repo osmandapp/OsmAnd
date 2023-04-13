@@ -5109,7 +5109,7 @@
     <string name="shared_string_all_world">Az egész világ</string>
     <string name="weather_forecast">Időjárás-előrejelzés</string>
     <string name="offline_weather_forecast_desc">Hét napra szóló időjárás-előrejelzést tölthet le.</string>
-    <string name="clear_online_cache_description">Ez törli az online időjárási csempék teljes gyorsítótárát.</string>
+    <string name="clear_online_cache_description">Ez törli az online időjárási csempék gyorsítótárát.</string>
     <string name="offline_cache">Offline gyorsítótár</string>
     <string name="clear_online_cache">Online gyorsítótár törlése</string>
     <string name="weather_forecast_is_outdated">Az előrejelzés elavult.</string>
