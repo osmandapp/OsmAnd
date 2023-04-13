@@ -5128,4 +5128,5 @@
     <string name="shutter_sound">Sono dum fari foton</string>
     <string name="camera_app">Aplikaĵo de fotilo</string>
     <string name="proxy_port_max_warning">La maksimuma numero de pordo estas %1$s</string>
+    <string name="weather_download_error">Ne povas elŝuti %1$s kahelojn.</string>
 </resources>

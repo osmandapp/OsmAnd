@@ -5139,4 +5139,5 @@
     <string name="camera_app">Kamera-App</string>
     <string name="shutter_sound">Auslöser-Ton</string>
     <string name="proxy_port_max_warning">Der höchste Wert für einen Port ist %1$s</string>
+    <string name="weather_download_error">Konnte %1$s Kacheln nicht herunterladen.</string>
 </resources>

@@ -5124,4 +5124,5 @@
     <string name="speak_route_deviation">宣佈偏離路線</string>
     <string name="select_layer">選取圖層</string>
     <string name="proxy_port_max_warning">最大連接埠值為 %1$s</string>
+    <string name="weather_download_error">無法下載 %1$s 圖磚。</string>
 </resources>

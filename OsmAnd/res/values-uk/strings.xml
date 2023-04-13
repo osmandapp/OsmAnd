@@ -4719,7 +4719,7 @@
     <string name="accessibility_2d_view_off">Огляд 2.5D вимкнено</string>
     <string name="accessibility_2d_view_on">Огляд 2.5D увімкнено</string>
     <string name="download_complete">Завантаження завершено</string>
-    <string name="auto_backup_title">Автобекап</string>
+    <string name="auto_backup_title">Автоматичне резервне копіювання</string>
     <string name="duplacate_widget_added_snackbar">У список додається дублікат віджета.</string>
     <string name="shared_string_duplicate">Дублікат</string>
     <string name="av_notes_photo_widget_desc">Торкнувшись віджета, можна зробити знімок.</string>
@@ -4744,12 +4744,12 @@
     <string name="compass_always_visible">Постійно видно</string>
     <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб перемикнути режим орієнтації мапи.</string>
     <string name="compass_desc">Показує напрямок на північ.</string>
-    <string name="rendering_attr_depthContourColorScheme_description">Колірна гамма контурних ліній глибини</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Колір ізоліній глибин</string>
     <string name="auto_backup_preference_desc">Типово Android зберігає резервні копії вибраного, позначок мап і налаштувань OsmAnd, щоб відновити їх на нових пристроях або після перевстановлення. Ця резервна копія обмежена 25 МБ.
 \nКоли ви використовуєте OsmAnd Cloud, це може призвести до непорозумінь після перевстановлення.</string>
     <string name="first_marker_widget_desc">Ви можете налаштувати віджет, щоб відображати відстань або орієнтовний час прибуття до першої позначки на мапі.</string>
     <string name="time_to_intermediate_widget_desc">Віджет показує «Час прибуття» або «Скільки рухатися» до першого проміжного пункту. Час постійно оновлюється під час навігації, коли пройдено проміжні точки, час буде оновлено до наступної проміжної точки.</string>
-    <string name="rendering_attr_depthContourWidth_description">Ширина ізоліній глибини</string>
+    <string name="rendering_attr_depthContourWidth_description">Ширина ізоліній глибин</string>
     <string name="auto_25_chars_route_roundabout_kl">Поверніть у %1$d з\'їзд і тримайтеся ліворуч</string>
     <string name="auto_25_chars_route_roundabout_kr">Поверніть у %1$d з\'їзд і тримайтеся праворуч</string>
     <string name="auto_25_chars_route_tl_kl">Поверніть ліворуч і тримайтеся ліворуч</string>
@@ -4760,7 +4760,7 @@
     <string name="auto_25_chars_route_tu_kr">Виконайте розворот і тримайтеся праворуч</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Показати спеціальні маршрути для гірських велосипедів.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Показувати маршрути для MTB IMBA</string>
-    <string name="connect_with_straight_line">З\'єднати прямою лінією</string>
+    <string name="connect_with_straight_line">Зʼєднати прямою лінією</string>
     <string name="attach_roads_warning">До доріг можна прикріпити лише записаний трек.</string>
     <string name="without_profiles_changing">Без зміни профілів</string>
     <string name="download_tiles">Завантажити тайли</string>
@@ -4786,13 +4786,13 @@
     <string name="shared_string_large">Великий</string>
     <string name="shared_string_normal">Звичайний</string>
     <string name="quick_action_current_location_widget_descr">Перемикач для показу або приховування віджета «Поточне місце перебування» на мапі.</string>
-    <string name="coordinates_widget_current_location">Координати: поточне місце перебування</string>
+    <string name="coordinates_widget_current_location">Координати: поточне положення</string>
     <string name="coordinates_widget_current_location_desc">Показує географічні координати поточної геолокації</string>
     <string name="coordinates_widget_map_center_desc">Показує географічні координати поточного центру мапи</string>
     <string name="quick_action_map_center_widget_descr">Перемикач для показу або приховування віджета «Центр мапи» на мапі.</string>
     <string name="coordinates_widget_map_center">Координати: центр мапи</string>
     <string name="map_widget_camera_distance_desc">Показує висоту камери над рівнем поверхні.</string>
-    <string name="map_widget_camera_tilt_desc">Показує кут нахилу камери в режимі перспективи. Усталено 90° (без нахилу).</string>
+    <string name="map_widget_camera_tilt_desc">Показує кут нахилу камери в режимі перспективи. Стандартно 90° (без нахилу).</string>
     <string name="map_widget_zoom_level">Масштаб</string>
     <string name="map_widget_camera_tilt">Нахил камери</string>
     <string name="developer_widgets">Віджети розробника</string>
@@ -4817,7 +4817,7 @@
     <string name="worldwide_maps">Мапи світу</string>
     <string name="map_widget_ant_bicycle_power">Витрачена під час велоїзди сила</string>
     <string name="map_widget_ant_bicycle_power_desc">Показує силу велосипедиста, використану для руху велосипеда</string>
-    <string name="map_widget_ant_bicycle_cadence">Швидкість обертання велопедалей</string>
+    <string name="map_widget_ant_bicycle_cadence">Швидкість обертання педалей</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показує швидкість, з якою користувач крутить педалі</string>
     <string name="nautical_depth_points">Точки морських глибин</string>
     <string name="depth_contours">Ізолінії глибин</string>
