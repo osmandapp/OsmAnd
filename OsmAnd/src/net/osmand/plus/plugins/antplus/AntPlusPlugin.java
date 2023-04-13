@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.antplus;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ANT_BICYCLE_CADENCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ANT_BICYCLE_DISTANCE;
@@ -8,7 +9,12 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.ANT_BICYCLE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ANT_HEART_RATE;
 
 import android.app.Activity;
+import android.bluetooth.le.ScanRecord;
+import android.bluetooth.le.ScanResult;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.ParcelUuid;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +34,9 @@ import net.osmand.plus.plugins.antplus.antdevices.AntBikeSpeedDevice;
 import net.osmand.plus.plugins.antplus.antdevices.AntHeartRateDevice;
 import net.osmand.plus.plugins.antplus.devices.CommonDevice;
 import net.osmand.plus.plugins.antplus.devices.CommonDevice.IPreferenceFactory;
+import net.osmand.plus.plugins.antplus.devices.DeviceType;
+import net.osmand.plus.plugins.antplus.dialogs.AntPlusSensorsListFragment;
+import net.osmand.plus.plugins.antplus.models.BleDeviceData;
 import net.osmand.plus.plugins.antplus.widgets.BikeCadenceTextWidget;
 import net.osmand.plus.plugins.antplus.widgets.BikeDistanceTextWidget;
 import net.osmand.plus.plugins.antplus.widgets.BikePowerTextWidget;
@@ -40,18 +49,25 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
-
+public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, BleConnectionStateListener, BleDataListener {
 	private static final Log log = PlatformUtil.getLog(AntPlusPlugin.class);
 
 	private final DevicesHelper devicesHelper;
+	private ScanForDevicesListener scanForDevicesListener;
+	private ArrayList<ExternalDevice> pairedBleDevices = new ArrayList<>();
+	private ArrayList<BleConnectionStateListener> stateChangeListeners = new ArrayList<>();
+	private ArrayList<BleDataListener> bleDeviceDataListeners = new ArrayList<>();
 
 	public AntPlusPlugin(OsmandApplication app) {
 		super(app);
@@ -141,7 +157,8 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		devicesHelper.setActivity(activity);
-		devicesHelper.connectAntDevices(activity);
+		devicesHelper.setConnectionStateListener(this);
+		devicesHelper.setBleDataListenerListener(this);
 		return true;
 	}
 
@@ -149,6 +166,9 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	public void disable(@NonNull OsmandApplication app) {
 		super.disable(app);
 		devicesHelper.disconnectAntDevices();
+		devicesHelper.disconnectBLE();
+		devicesHelper.setConnectionStateListener(null);
+		devicesHelper.setBleDataListenerListener(null);
 	}
 
 	@Override
@@ -201,5 +221,139 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory {
 	@Override
 	public CommonPreference<Integer> registerIntPref(@NonNull String prefId, int defValue) {
 		return registerIntPreference(prefId, defValue).makeGlobal().makeShared();
+	}
+
+	@Override
+	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
+		if (isActive()) {
+			helper.addItem(new ContextMenuItem(DRAWER_ANT_PLUS_ID)
+					.setTitleId(R.string.external_sensors_plugin_name, mapActivity)
+					.setIcon(R.drawable.ic_action_sensor)
+					.setListener((uiAdapter, view, item, isChecked) -> {
+						app.logEvent("externalSettingsOpen");
+						AntPlusSensorsListFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}));
+		}
+	}
+
+	public boolean isBlueToothEnabled() {
+		return devicesHelper.isBleEnabled();
+	}
+
+	public void searchForDevices() {
+		devicesHelper.scanLeDevice(true);
+		new Handler(Looper.myLooper()).postDelayed(this::finishScanBle, 10000);
+	}
+
+	private void finishScanBle() {
+		devicesHelper.scanLeDevice(false);
+		if (scanForDevicesListener != null) {
+			scanForDevicesListener.onScanFinished(new HashMap<>(devicesHelper.leDevices));
+		}
+	}
+
+	public ArrayList<ExternalDevice> getLastFoundDevices() {
+		ArrayList<ExternalDevice> foundDevices = new ArrayList<>();
+		for (ScanResult result : devicesHelper.leDevices.values()) {
+			ScanRecord scanRecord = result.getScanRecord();
+			List<ParcelUuid> uuids = scanRecord.getServiceUuids();
+			DeviceType foundDeviceType = null;
+			for (ParcelUuid uuid : uuids) {
+				DeviceType deviceType = DeviceType.getDeviceTypeByUuid(uuid.getUuid());
+				if (deviceType != null) {
+					foundDeviceType = deviceType;
+					break;
+				}
+			}
+			foundDevices.add(new ExternalDevice(result.getDevice().getName(),
+					false,
+					result.getDevice().getAddress(),
+					ExternalDevice.DeviceConnectionType.BLE,
+					foundDeviceType,
+					result.getRssi()));
+		}
+		return foundDevices;
+	}
+
+	public void setScanForDevicesListener(ScanForDevicesListener listener) {
+		scanForDevicesListener = listener;
+	}
+
+	@Override
+	public void onStateChanged(@Nullable String address, int newState) {
+		for (BleConnectionStateListener listener : stateChangeListeners) {
+			listener.onStateChanged(address, newState);
+		}
+	}
+
+	public void addBleDeviceConnectionStateListener(BleConnectionStateListener listener) {
+		stateChangeListeners.add(listener);
+	}
+
+	public void removeBleDeviceConnectionStateListener(BleConnectionStateListener listener) {
+		stateChangeListeners.remove(listener);
+	}
+
+	public void addBleDeviceDataListener(BleDataListener listener) {
+		bleDeviceDataListeners.add(listener);
+	}
+
+	public void removeBleDeviceDataListener(BleDataListener listener) {
+		bleDeviceDataListeners.remove(listener);
+	}
+
+	@Override
+	public void onDataReceived(@Nullable String address, @NonNull BleDeviceData data) {
+		for (BleDataListener listener : bleDeviceDataListeners) {
+			listener.onDataReceived(address, data);
+		}
+	}
+
+	public interface ScanForDevicesListener {
+		void onScanFinished(HashMap<String, ScanResult> foundDevices);
+	}
+
+	public boolean isDeviceConnected(ExternalDevice device) {
+		if (device.getConnectionType() == ExternalDevice.DeviceConnectionType.BLE) {
+			return devicesHelper.isBleConnected(device);
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isDevicePaired(ExternalDevice device) {
+		ArrayList<ExternalDevice> tmpDevicesList = new ArrayList<>(pairedBleDevices);
+		for (ExternalDevice pairedDevice : tmpDevicesList) {
+			if (pairedDevice.getAddress().equals(device.getAddress())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public void pairDevice(ExternalDevice device) {
+		if (!isDevicePaired(device)) {
+			pairedBleDevices.add(device);
+		}
+	}
+
+	public void connectDevice(ExternalDevice device) {
+		if (device.getConnectionType() == ExternalDevice.DeviceConnectionType.BLE) {
+			devicesHelper.connectBleDevice(device.getAddress());
+		} else {
+			//todo implement ant+ connection
+//			devicesHelper.connectAntDevice();
+		}
+	}
+
+	public void disconnectDevice(ExternalDevice device) {
+		if (device.getConnectionType() == ExternalDevice.DeviceConnectionType.BLE) {
+			devicesHelper.disconnectBleDevice();
+		} else {
+			//todo implement ant+ disconnection
+//			devicesHelper.connectAntDevice();
+		}
 	}
 }

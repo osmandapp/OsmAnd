@@ -10,6 +10,7 @@ import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -64,6 +65,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -320,12 +322,12 @@ public class AndroidUtils {
 			String size = "";
 			String numSuffix = "MB";
 			if (sizeKb > 1 << 20) {
-				size = formatGb.format(new Object[] {(float) sizeKb / (1 << 20)});
+				size = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
 				numSuffix = "GB";
 			} else if (sizeBytes > (100 * (1 << 10))) {
-				size = formatMb.format(new Object[] {(float) sizeBytes / (1 << 20)});
+				size = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
 			} else {
-				size = formatKb.format(new Object[] {(float) sizeBytes / (1 << 10)});
+				size = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
 				numSuffix = "kB";
 			}
 			if (ctx == null) {
@@ -400,19 +402,19 @@ public class AndroidUtils {
 	@NonNull
 	public static ColorStateList createColorStateList(int state, @ColorInt int stateColor, @ColorInt int normal) {
 		return new ColorStateList(
-				new int[][] {new int[] {state}, new int[] {}},
-				new int[] {stateColor, normal}
+				new int[][]{new int[]{state}, new int[]{}},
+				new int[]{stateColor, normal}
 		);
 	}
 
 	public static ColorStateList createColorStateList(Context ctx, boolean night) {
 		return new ColorStateList(
-				new int[][] {
-						new int[] {-android.R.attr.state_enabled}, // disabled
-						new int[] {android.R.attr.state_checked},
-						new int[] {}
+				new int[][]{
+						new int[]{-android.R.attr.state_enabled}, // disabled
+						new int[]{android.R.attr.state_checked},
+						new int[]{}
 				},
-				new int[] {
+				new int[]{
 						ColorUtilities.getSecondaryTextColor(ctx, night),
 						ColorUtilities.getActiveColor(ctx, night),
 						ColorUtilities.getSecondaryTextColor(ctx, night)}
@@ -445,11 +447,11 @@ public class AndroidUtils {
 	                                                      @ColorInt int lightNormal, @ColorInt int lightState,
 	                                                      @ColorInt int darkNormal, @ColorInt int darkState) {
 		return new ColorStateList(
-				new int[][] {
-						new int[] {state},
-						new int[] {}
+				new int[][]{
+						new int[]{state},
+						new int[]{}
 				},
-				new int[] {
+				new int[]{
 						night ? darkState : lightState,
 						night ? darkNormal : lightNormal
 				}
@@ -470,8 +472,8 @@ public class AndroidUtils {
 
 	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {
 		StateListDrawable res = new StateListDrawable();
-		res.addState(new int[] {state}, stateDrawable);
-		res.addState(new int[] {}, normal);
+		res.addState(new int[]{state}, stateDrawable);
+		res.addState(new int[]{}, normal);
 		return res;
 	}
 
@@ -482,7 +484,7 @@ public class AndroidUtils {
 		ShapeDrawable progress = new ShapeDrawable();
 		progress.getPaint().setColor(progressColor);
 
-		LayerDrawable res = new LayerDrawable(new Drawable[] {
+		LayerDrawable res = new LayerDrawable(new Drawable[]{
 				bg,
 				new ClipDrawable(progress, Gravity.START, ClipDrawable.HORIZONTAL)
 		});
@@ -1235,4 +1237,10 @@ public class AndroidUtils {
 		}
 	}
 
+	public static boolean hasPermission(Context context, String permission) {
+		return ActivityCompat.checkSelfPermission(
+				context,
+				permission
+		) == PackageManager.PERMISSION_GRANTED;
+	}
 }

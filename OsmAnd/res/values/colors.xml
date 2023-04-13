@@ -514,4 +514,5 @@
 	<color name="track_gradient_center">#D4EF32</color>
 	<color name="track_gradient_end">#F3374D</color>
 
+	<color name="ble_unpaired_device_btn_bg">#14CC70</color>
 </resources>
