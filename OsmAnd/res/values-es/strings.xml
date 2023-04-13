@@ -5128,4 +5128,10 @@
     <string name="metric_lbs">lbs.</string>
     <string name="common_weight_limit_error">El valor mínimo es \"%1$s\" %2$s. Utilice el perfil \"%3$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="shared_string_pounds">libras</string>
+    <string name="rendering_value_defaultMedium_name">Por defecto (media)</string>
+    <string name="select_layer">Selecciona una capa</string>
+    <string name="speak_route_deviation">Anunciar un desvío de la ruta</string>
+    <string name="camera_app">Aplicación de cámara</string>
+    <string name="shutter_sound">Sonido del obturador</string>
+    <string name="proxy_port_max_warning">La altura máxima del puerto es de %1$s</string>
 </resources>

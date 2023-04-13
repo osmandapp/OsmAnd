@@ -5129,4 +5129,9 @@
     <string name="offline_weather_forecast_desc">Anda dapat mengunduh prakiraan cuaca untuk 7 hari.</string>
     <string name="common_weight_limit_error">Nilai minimum adalah \"%1$s\" %2$s. Gunakan profil \"%3$s\" jika ketinggian kendaraan kurang dari nilai minimum.</string>
     <string name="free_maps_updates">Pembaruan gratis (darurat)</string>
+    <string name="camera_app">Aplikasi kamera</string>
+    <string name="speak_route_deviation">Beri tahu jika keluar dari rute</string>
+    <string name="select_layer">Pilih lapisan</string>
+    <string name="shutter_sound">Suara potret</string>
+    <string name="rendering_value_defaultMedium_name">Bawaan (sedang)</string>
 </resources>

@@ -21,11 +21,11 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -219,11 +219,10 @@ public class FileUtils {
 			isWriteable = writeTestFile.exists();
 
 			if (isWriteable && testWrite) {
-				Path path = writeTestFile.toPath();
-				out = Files.newOutputStream(path);
+				out = new FileOutputStream(writeTestFile);
 				Algorithms.writeInt(out, Integer.reverseBytes(XML_FILE_SIGNATURE));
 
-				in = Files.newInputStream(path);
+				in = new FileInputStream(writeTestFile);
 				int fileSignature = Algorithms.readInt(in);
 				isWriteable = XML_FILE_SIGNATURE == fileSignature;
 			}

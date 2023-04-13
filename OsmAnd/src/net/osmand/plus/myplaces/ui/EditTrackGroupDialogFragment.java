@@ -251,7 +251,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void deleteGroupItems() {
-		Set<GpxDisplayItem> items = new HashSet<>(group.getModifiableList());
+		Set<GpxDisplayItem> items = new HashSet<>(group.getDisplayItems());
 		new DeletePointsTask(app, group.getGpxFile(), items, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

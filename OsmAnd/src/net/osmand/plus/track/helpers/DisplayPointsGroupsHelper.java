@@ -62,7 +62,7 @@ public class DisplayPointsGroupsHelper {
 	private void processDisplayGroups(List<GpxDisplayGroup> displayGroups, Set<?> filteredItems) {
 		for (int i = 0; i < displayGroups.size(); i++) {
 			GpxDisplayGroup group = displayGroups.get(i);
-			if (group.getModifiableList().isEmpty()) {
+			if (group.getDisplayItems().isEmpty()) {
 				continue;
 			}
 			Map<String, List<GpxDisplayItem>> itemsMap = collectItemsByCategory(group, i);
@@ -78,7 +78,7 @@ public class DisplayPointsGroupsHelper {
 	private Map<String, List<GpxDisplayItem>> collectItemsByCategory(GpxDisplayGroup group, int index) {
 		Map<String, List<GpxDisplayItem>> itemsMap = new HashMap<>();
 
-		for (GpxDisplayItem item : group.getModifiableList()) {
+		for (GpxDisplayItem item : group.getDisplayItems()) {
 			String category;
 			if (item.locationStart != null) {
 				if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
@@ -130,7 +130,7 @@ public class DisplayPointsGroupsHelper {
 		Collections.sort(categories, comparator);
 		for (String category : categories) {
 			List<GpxDisplayItem> values = itemsMap.get(category);
-			GpxDisplayGroup headerGroup = group.cloneInstance();
+			GpxDisplayGroup headerGroup = new GpxDisplayGroup(group);
 			headerGroup.setName(category);
 			for (GpxDisplayItem i : values) {
 				if (i.locationStart != null && i.locationStart.getColor() != 0) {
@@ -138,9 +138,8 @@ public class DisplayPointsGroupsHelper {
 					break;
 				}
 			}
-			List<GpxDisplayItem> headerGroupItems = headerGroup.getModifiableList();
-			headerGroupItems.clear();
-			headerGroupItems.addAll(values);
+			group.clearDisplayItems();
+			group.addDisplayItems(values);
 			itemGroups.put(headerGroup, values);
 			this.groups.add(headerGroup);
 		}

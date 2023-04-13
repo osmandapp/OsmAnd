@@ -183,8 +183,6 @@ public class MapRendererContext {
 			Log.d(TAG, "Style '" + rendName + "' not in cache");
 			if (mapStylesCollection.getStyleByName(rendName) == null) {
 				Log.d(TAG, "Unknown '" + rendName + "' style, need to load");
-
-				// Ensure parents are loaded (this may also trigger load)
 				loadRenderer(rendName);
 			}
 			ResolvedMapStyle mapStyle = mapStylesCollection.getResolvedStyleByName(rendName);

@@ -25,7 +25,6 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -35,7 +34,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -59,6 +57,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -379,13 +378,14 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			}
 
 			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
+			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 				updateTrackAppearance(item);
 			}
 		};
 		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
-			if (trackItem.getFile() != null) {
-				GpxDataItem item = gpxDbHelper.getItem(trackItem.getFile(), callback);
+			File file = trackItem.getFile();
+			if (file != null) {
+				GpxDataItem item = gpxDbHelper.getItem(file, callback);
 				if (item != null) {
 					updateTrackAppearance(item);
 				}

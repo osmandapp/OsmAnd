@@ -636,7 +636,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
 				for (GpxDisplayGroup g : getOriginalGroups()) {
-					for (GpxDisplayItem i : g.getModifiableList()) {
+					for (GpxDisplayItem i : g.getDisplayItems()) {
 						if (i.name.toLowerCase().contains(cs)) {
 							filter.add(i);
 						} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)

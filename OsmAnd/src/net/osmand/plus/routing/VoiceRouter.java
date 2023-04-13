@@ -221,7 +221,7 @@ public class VoiceRouter {
 	}
 
 	public void announceOffRoute(double dist) {
-		if (dist > atd.getOffRouteDistance()) {
+		if (settings.SPEAK_ROUTE_DEVIATION.get() && dist > atd.getOffRouteDistance()) {
 			long ms = System.currentTimeMillis();
 			if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -245,13 +245,15 @@ public class VoiceRouter {
 
 	private void announceBackOnRoute() {
 		//if (announceBackOnRoute) {
+		if (settings.SPEAK_ROUTE_DEVIATION.get()) {
 			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
 			}
 			play(p);
-			announceBackOnRoute = false;
-			waitAnnouncedOffRoute = 0;
+		}
+		announceBackOnRoute = false;
+		waitAnnouncedOffRoute = 0;
 		//}
 	}
 
@@ -607,9 +609,13 @@ public class VoiceRouter {
 		}
 		// Delimit refs if followed by street names to create a brief pause. Also solves unintentional concatenation of numbers (Issue #16256). (Need to apply in sync for toRef and fromRef.)
 		String refDelimiter = ", ";
-		if (!result.get(TO_REF).equals("") && !result.get(TO_STREET_NAME).equals("")) {
-			result.replace(TO_REF, result.get(TO_REF) + refDelimiter);
-			result.replace(FROM_REF, result.get(FROM_REF) + refDelimiter);
+		String toRef = result.get(TO_REF);
+		String fromRef = result.get(FROM_REF);
+		if (!Algorithms.isEmpty(toRef) && !Algorithms.isEmpty(result.get(TO_STREET_NAME))) {
+			result.put(TO_REF, toRef + refDelimiter);
+			if (!Algorithms.isEmpty(fromRef)) {
+				result.put(FROM_REF, fromRef + refDelimiter);
+			}
 		}
 		return new StreetName(result);
 	}

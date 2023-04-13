@@ -160,10 +160,10 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			if (info.getFileSize() >= 0) {
 				size = AndroidUtils.formatSize(app, info.getFileSize());
 			}
-			DateFormat df = app.getResourceManager().getDateFormat();
-			long fd = info.getLastModified();
-			if (fd > 0) {
-				date = (df.format(new Date(fd)));
+			DateFormat df = OsmAndFormatter.getDateFormat(app);
+			long lastModified = info.getLastModified();
+			if (lastModified > 0) {
+				date = (df.format(new Date(lastModified)));
 			}
 			holder.dateAndSize.setText(String.format(app.getString(R.string.ltr_or_rtl_combine_via_bold_point), date, size));
 		} else {
@@ -180,16 +180,13 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	}
 
 	private GpxDataItem getDataItem(@NonNull GPXInfo info) {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				if (item != null && gpxInfoList != null) {
-					notifyItemChanged(gpxInfoList.indexOf(info));
-				}
+		GpxDataItemCallback callback = item -> {
+			if (gpxInfoList != null) {
+				notifyItemChanged(gpxInfoList.indexOf(info));
 			}
 		};
 		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR),
-						info.getFileName()), callback);
+				info.getFileName()), callback);
 	}
 
 	public void setAdapterListener(OnItemClickListener onItemClickListener) {
@@ -222,11 +219,16 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	static class TrackCategoriesViewHolder extends RecyclerView.ViewHolder {
 
-		HorizontalChipsView trackCategories;
+		private final HorizontalChipsView trackCategories;
 
-		TrackCategoriesViewHolder(HorizontalChipsView itemView) {
+		TrackCategoriesViewHolder(@NonNull HorizontalChipsView itemView) {
 			super(itemView);
 			trackCategories = itemView;
+
+			ViewGroup parent = (ViewGroup) itemView.getParent();
+			if (parent != null) {
+				parent.removeView(itemView);
+			}
 		}
 	}
 

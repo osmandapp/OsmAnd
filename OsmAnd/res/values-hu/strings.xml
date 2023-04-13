@@ -5118,4 +5118,11 @@
     <string name="shared_string_pounds">font</string>
     <string name="common_weight_limit_error">A minimális érték „%1$s” %2$s. Használja a „%3$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
     <string name="free_maps_updates">Ingyenes frissítések (vészhelyzet)</string>
+    <string name="rendering_value_defaultMedium_name">Alapértelmezett (közepes)</string>
+    <string name="select_layer">Réteg választása</string>
+    <string name="speak_route_deviation">Az útvonaltól való eltérés bemondása</string>
+    <string name="camera_app">Kamera alkalmazás</string>
+    <string name="shutter_sound">Zárhang</string>
+    <string name="proxy_port_max_warning">A port maximális értéke %1$s</string>
+    <string name="weather_download_error">Nem lehet betölteni %1$s csempét.</string>
 </resources>

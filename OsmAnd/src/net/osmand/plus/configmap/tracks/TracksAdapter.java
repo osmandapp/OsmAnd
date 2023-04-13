@@ -32,16 +32,12 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_RECENTLY_VISIBLE_TRACKS = 3;
 	public static final int TYPE_TRACK = 4;
 
-	private final OsmandApplication app;
-	private final UiUtilities uiUtilities;
 	private final UpdateLocationViewCache locationViewCache;
 	private final TrackTab trackTab;
 	private final TracksFragment fragment;
 	private final boolean nightMode;
 
 	public TracksAdapter(@NonNull OsmandApplication app, @NonNull TrackTab trackTab, @NonNull TracksFragment fragment, boolean nightMode) {
-		this.app = app;
-		this.uiUtilities = app.getUIUtilities();
 		this.trackTab = trackTab;
 		this.fragment = fragment;
 		this.nightMode = nightMode;

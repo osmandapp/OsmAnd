@@ -1,5 +1,7 @@
 package net.osmand.plus.profiles;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +12,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -32,12 +36,15 @@ import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,9 +182,9 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		for (ProfilesGroup group : profileGroups) {
 			List<RoutingDataObject> items = group.getProfiles();
 			if (!Algorithms.isEmpty(items)) {
-				addGroupHeader(group.getTitle(), group.getDescription(app, nightMode));
+				addGroupHeader(group);
 				for (RoutingDataObject item : items) {
-					addProfileItem(item);
+					addProfileItem(item, group);
 				}
 				addDivider();
 			}
@@ -206,6 +213,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				return;
 			}
 			mapActivity.getImportHelper().chooseFileToImport(ROUTING, (CallbackWithObject<Builder>) builder -> {
+				Fragment targetFragment = getTargetFragment();
+				if (targetFragment instanceof NavigationFragment) {
+					((NavigationFragment) targetFragment).updateRoutingProfiles();
+				}
 				updateMenuItems();
 				return false;
 			});
@@ -222,8 +233,72 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		});
 	}
 
-	@Override
-	protected void addProfileItem(ProfileDataObject profileDataObject) {
+	private void addGroupHeader(ProfilesGroup group) {
+		CharSequence title = group.getTitle();
+		CharSequence description = group.getDescription(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
+		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_large, null);
+		View container = view.findViewById(R.id.container);
+
+		if (isGroupImported(group)) {
+			container.setOnLongClickListener(getGroupLongClickListener(group));
+		}
+
+		TextView tvTitle = view.findViewById(R.id.title);
+		TextView tvDescription = view.findViewById(R.id.description);
+		tvTitle.setText(title);
+		if (description != null) {
+			tvDescription.setText(description);
+			tvDescription.setOnTouchListener(new ClickableSpanTouchListener());
+		} else {
+			tvDescription.setVisibility(View.GONE);
+		}
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(view)
+				.create()
+		);
+	}
+
+	private boolean isGroupImported(ProfilesGroup group) {
+		for (RoutingDataObject profile : group.getProfiles()) {
+			String fileName = profile.getFileName();
+			if (fileName == null || !fileName.contentEquals(group.getTitle())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Nullable
+	private ProfileDataObject getSelectedRoutingProfile(ProfilesGroup group) {
+		for (RoutingDataObject profile : group.getProfiles()) {
+			if (isSelected(profile)) {
+				return profile;
+			}
+		}
+		return null;
+	}
+
+	protected View.OnLongClickListener getGroupLongClickListener(ProfilesGroup group) {
+		String fileName = String.valueOf(group.getTitle());
+		return getDeleteLongClickListener(fileName, (dialogInterface, i) -> {
+			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+			File routingFile = new File(dir, fileName);
+			if (routingFile.exists() && routingFile.delete()) {
+				updateRouteProfileInAppModes(group.getProfiles());
+				ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
+				if (selectedProfile != null) {
+					setDefaultRouteProfile(getAppMode());
+				}
+				app.getCustomRoutingConfigs().remove(fileName);
+				updateMenuItems();
+			}
+		});
+	}
+
+	private void addProfileItem(ProfileDataObject profileDataObject, ProfilesGroup group) {
 		RoutingDataObject profile = (RoutingDataObject) profileDataObject;
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
@@ -243,6 +318,9 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 		if (!profile.isOnline() || profile.isPredefined()) {
 			builder.setOnClickListener(getItemClickListener(profile));
+			if (!Algorithms.isEmpty(profile.getFileName())) {
+				builder.setOnLongClickListener(getItemLongClickListener(profile, group));
+			}
 			items.add(builder.create());
 			return;
 		} else {
@@ -266,6 +344,62 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			});
 		}
 		items.add(builder.create());
+	}
+
+	protected View.OnLongClickListener getItemLongClickListener(RoutingDataObject profile, ProfilesGroup group) {
+		return getDeleteLongClickListener(profile.getFileName(), (dialogInterface, i) -> {
+			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+			File routingFile = new File(dir, profile.getFileName());
+			if (routingFile.exists() && routingFile.delete()) {
+				updateRouteProfileInAppModes(group.getProfiles());
+				if (isSelected(profile)) {
+					setDefaultRouteProfile(getAppMode());
+				}
+				app.getCustomRoutingConfigs().remove(profile.getFileName());
+				updateMenuItems();
+			}
+		});
+	}
+
+	private View.OnLongClickListener getDeleteLongClickListener(String fileName, DialogInterface.OnClickListener positiveAlertButton) {
+		return view -> {
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
+			builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
+			builder.setMessage(getString(R.string.are_you_sure));
+			builder.setNegativeButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_ok, positiveAlertButton);
+			builder.show();
+			return true;
+		};
+	}
+
+	private void setDefaultRouteProfile(ApplicationMode applicationMode) {
+		String routingProfile = applicationMode.getDefaultRoutingProfile();
+		String derivedProfile = applicationMode.getDefaultDerivedProfile();
+		Bundle args = new Bundle();
+		args.putString(PROFILE_KEY_ARG, routingProfile);
+		args.putBoolean(PROFILES_LIST_UPDATED_ARG, false);
+		if (!Algorithms.isEmpty(derivedProfile)) {
+			args.putString(DERIVED_PROFILE_ARG, derivedProfile);
+		}
+		Fragment target = getTargetFragment();
+		if (target instanceof OnSelectProfileCallback) {
+			((OnSelectProfileCallback) target).onProfileSelected(args);
+		}
+		dismiss();
+	}
+
+	private void updateRouteProfileInAppModes(List<RoutingDataObject> deletedRoutingProfiles) {
+		List<ApplicationMode> applicationModes = ApplicationMode.allPossibleValues();
+		Fragment targetFragment = getTargetFragment();
+		for (ApplicationMode mode : applicationModes) {
+			String routingProfile = mode.getRoutingProfile();
+			for (RoutingDataObject deletedRoutingProfile : deletedRoutingProfiles) {
+				if (targetFragment instanceof NavigationFragment && routingProfile.equals(deletedRoutingProfile.getStringKey())) {
+					((NavigationFragment) targetFragment).updateAppMode(mode, mode.getDefaultRoutingProfile(), mode.getDefaultDerivedProfile());
+				}
+			}
+		}
 	}
 
 	@Override

@@ -178,7 +178,7 @@ public class GpsFilterHelper {
 			List<GpxDataItem> dataItems = app.getGpxDbHelper().getSplitItems();
 			for (GpxDataItem dataItem : dataItems) {
 				if (dataItem.getFile().getAbsolutePath().equals(gpxFile.path)) {
-					return GpxDisplayHelper.processSplit(app, dataItem, gpxFile);
+					return app.getGpxDisplayHelper().processSplitSync(gpxFile, dataItem);
 				}
 			}
 			return null;

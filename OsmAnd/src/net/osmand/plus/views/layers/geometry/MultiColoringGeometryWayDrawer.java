@@ -90,14 +90,22 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		Paint borderPaint = getContext().getBorderPaint();
 		int borderColor = coloringType.isGradient() ? borderPaint.getColor() : 0;
 		float borderWidth = coloringType.isGradient() ? borderPaint.getStrokeWidth() : 0;
-		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
-		pathPoint.scaled = false;
-		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
-		double pxStep = style.getPointStepPx(1f);
+
+		PathPoint arrowPathPointSample = getArrowPathPointSample(style, false);
+		arrowPathPointSample.scaled = false;
+		PathPoint specialArrowPathPointSample = getArrowPathPointSample(style, true);
+		specialArrowPathPointSample.scaled = false;
+		Bitmap pointBitmap = arrowPathPointSample.drawBitmap(getContext());
+		Bitmap specialPointBitmap = specialArrowPathPointSample.drawBitmap(getContext());
+
+		GeometrySolidWayStyle<?> solidWayStyle = (GeometrySolidWayStyle<?>) style;
+		float bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
+		float specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
+
 		QListFColorARGB colorizationMapping = getColorizationMapping(pathsData);
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(), approximationEnabled, shouldDrawArrows,
-				pointBitmap, pointBitmap, (float) pxStep, true, colorizationMapping, style.getColorizationScheme(),
+				pointBitmap, specialPointBitmap, bitmapStep, specialBitmapStep, true, colorizationMapping, style.getColorizationScheme(),
 				pathsData);
 	}
 
@@ -167,16 +175,24 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	@Override
 	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style, double angle, double percent) {
-		return new ArrowPathPoint(iconX, iconY, angle, style, percent);
+		GeometrySolidWayStyle<?> solidWayStyle = (GeometrySolidWayStyle<?>) style;
+		return new ArrowPathPoint(iconX, iconY, angle, style, percent, solidWayStyle.useSpecialArrow());
+	}
+
+	@NonNull
+	private PathPoint getArrowPathPointSample(GeometryWayStyle<?> style, boolean useSpecialArrow) {
+		return new ArrowPathPoint(0, 0, 0, style, 0, useSpecialArrow);
 	}
 
 	private static class ArrowPathPoint extends PathPoint {
 
 		private final double percent;
+		private final boolean useSpecialArrow;
 
-		ArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style, double percent) {
+		ArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style, double percent, boolean useSpecialArrow) {
 			super(x, y, angle, style);
 			this.percent = percent;
+			this.useSpecialArrow = useSpecialArrow;
 		}
 
 		@Nullable
@@ -186,7 +202,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 			if (bitmap != null) {
 				Context ctx = style.getCtx();
 				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
-				if (arrowsWayStyle.useSpecialArrow()) {
+				if (useSpecialArrow) {
 					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPxAuto(ctx, 2));
 					return new int[]{bitmapSize, bitmapSize};
 				} else {
@@ -210,25 +226,21 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				}
 				Context ctx = style.getCtx();
 				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
-				boolean useSpecialArrow = arrowsWayStyle.useSpecialArrow();
 
 				float newWidth;
 				if (useSpecialArrow) {
 					newWidth = AndroidUtils.dpToPxAuto(ctx, 12);
 				} else {
-					if (scaled) {
-						newWidth = arrowsWayStyle.getWidth(0) == 0 ? 0 : arrowsWayStyle.getWidth(0) / 2f;
-					} else {
-						newWidth = bitmap.getWidth();
-					}
+					newWidth = scaled ? arrowsWayStyle.getWidth(0) / 2f : bitmap.getWidth();
 				}
-				float paintH2 = bitmap.getHeight() / 2f;
-				float paintW2 = newWidth == 0 ? 0 : newWidth / 2f;
+
+				float scale = newWidth / bitmap.getWidth();
+				float paintW2 = newWidth / 2f;
+				float paintH2 = bitmap.getHeight() * scale / 2f;
 
 				Matrix matrix = getMatrix();
 				matrix.reset();
-				float sy = useSpecialArrow ? newWidth / bitmap.getHeight() : 1;
-				matrix.postScale(newWidth / bitmap.getWidth(), sy);
+				matrix.postScale(scale, scale);
 				matrix.postRotate((float) angle, paintW2, paintH2);
 				matrix.postTranslate(x - paintW2, y - paintH2);
 
@@ -261,6 +273,13 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 		protected boolean shouldDrawArrow() {
 			return !Algorithms.objectEquals(style.color, Color.TRANSPARENT);
+		}
+
+		@Nullable
+		@Override
+		protected Bitmap getPointBitmap() {
+			MultiColoringGeometryWayContext context = (MultiColoringGeometryWayContext) style.getContext();
+			return useSpecialArrow ? context.getSpecialArrowBitmap() : context.getArrowBitmap();
 		}
 	}
 }

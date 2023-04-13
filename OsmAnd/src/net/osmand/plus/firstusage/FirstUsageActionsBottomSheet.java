@@ -21,6 +21,10 @@ public class FirstUsageActionsBottomSheet extends BaseFirstUsageBottomSheet {
 			listener.onRestoreFromCloud();
 			dismiss();
 		}));
+		container.addView(createItemView(inflater, getString(R.string.restore_from_file), R.drawable.ic_action_read_from_file, view -> {
+			listener.onRestoreFromFile();
+			dismiss();
+		}));
 
 		if (wizardType != WizardType.MAP_DOWNLOAD) {
 			container.addView(createItemView(inflater, getString(R.string.application_dir), R.drawable.ic_action_folder, view -> {

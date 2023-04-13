@@ -1159,4 +1159,15 @@ public class RouteDataObject {
 		}
 		return false;
 	}
+
+	public boolean containsType(int cachedType) {
+		if(cachedType != -1) {
+			for(int i=0; i<types.length; i++){
+				if(types[i] == cachedType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

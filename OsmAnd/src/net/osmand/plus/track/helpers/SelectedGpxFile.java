@@ -1,5 +1,8 @@
 package net.osmand.plus.track.helpers;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.data.QuadRect;
@@ -20,9 +23,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 
 public class SelectedGpxFile {
@@ -53,9 +53,9 @@ public class SelectedGpxFile {
 
 	private FilteredSelectedGpxFile filteredSelectedGpxFile;
 
-	public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
+	public void setGpxFile(@NonNull GPXFile gpxFile, @NonNull OsmandApplication app) {
 		this.gpxFile = gpxFile;
-		if (gpxFile.tracks.size() > 0) {
+		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			this.color = gpxFile.tracks.get(0).getColor(0);
 		}
 		processPoints(app);
@@ -90,16 +90,23 @@ public class SelectedGpxFile {
 				: new File(gpxFile.path).lastModified();
 		trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
 
-		displayGroups = null;
-		splitProcessed = processSplit(app);
+		updateSplit(app);
 
 		if (filteredSelectedGpxFile != null) {
 			filteredSelectedGpxFile.update(app);
 		}
 	}
 
-	protected boolean processSplit(@NonNull OsmandApplication app) {
-		return GpxDisplayHelper.processSplit(app, this);
+	private void updateSplit(@NonNull OsmandApplication app) {
+		displayGroups = null;
+		if (showCurrentTrack) {
+			splitProcessed = true;
+		} else {
+			app.getGpxDisplayHelper().processSplitAsync(this, result -> {
+				splitProcessed = result;
+				return true;
+			});
+		}
 	}
 
 	public void processPoints(OsmandApplication app) {
@@ -236,6 +243,7 @@ public class SelectedGpxFile {
 		return hiddenGroups.contains(Algorithms.isBlank(group) ? null : group);
 	}
 
+	@NonNull
 	public GPXFile getGpxFile() {
 		return gpxFile;
 	}
@@ -288,8 +296,11 @@ public class SelectedGpxFile {
 	}
 
 	public List<GpxDisplayGroup> getDisplayGroups(@NonNull OsmandApplication app) {
-		if (modifiedTime != gpxFile.modifiedTime || !splitProcessed) {
+		if (modifiedTime != gpxFile.modifiedTime) {
 			update(app);
+		}
+		if (!splitProcessed) {
+			updateSplit(app);
 		}
 		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getDisplayGroups(app) : displayGroups;
 	}

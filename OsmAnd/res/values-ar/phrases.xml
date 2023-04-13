@@ -4553,4 +4553,7 @@
     <string name="poi_wedge">وتد</string>
     <string name="poi_spikes">مسامير</string>
     <string name="poi_barrier_bar">حاجز</string>
+    <string name="poi_barrier_tyres">اطارات</string>
+    <string name="poi_tank_trap">فخ دبابات</string>
+    <string name="poi_barrier_board">حاجز لوحي</string>
 </resources>

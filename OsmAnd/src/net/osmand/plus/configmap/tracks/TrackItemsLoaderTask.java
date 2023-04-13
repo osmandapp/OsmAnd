@@ -14,7 +14,6 @@ import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -25,7 +24,6 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	private final OsmandApplication app;
 	private final GpxDbHelper gpxDbHelper;
-	private final GpxSelectionHelper gpxSelectionHelper;
 
 	private final List<TrackItem> trackItems = new ArrayList<>();
 	private final LoadTracksListener listener;
@@ -33,7 +31,6 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	public TrackItemsLoaderTask(@NonNull OsmandApplication app, @NonNull LoadTracksListener listener) {
 		this.app = app;
 		this.gpxDbHelper = app.getGpxDbHelper();
-		this.gpxSelectionHelper = app.getSelectedGpxHelper();
 		this.listener = listener;
 	}
 
@@ -73,7 +70,7 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		for (File file : listFiles) {
 			String name = file.getName();
 			if (file.isDirectory()) {
-				String sub = subfolder.length() == 0 ? name : subfolder + "/" + name;
+				String sub = subfolder.isEmpty() ? name : subfolder + File.separator + name;
 				loadGPXFolder(file, sortByMode, progress, sub);
 			} else if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
 				TrackItem trackItem = new TrackItem(file);
@@ -91,20 +88,22 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	@Nullable
 	private GpxDataItem getDataItem(@NonNull TrackItem trackItem) {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return TrackItemsLoaderTask.this.isCancelled();
-			}
+		File file = trackItem.getFile();
+		if (file != null) {
+			GpxDataItemCallback callback = new GpxDataItemCallback() {
+				@Override
+				public boolean isCancelled() {
+					return TrackItemsLoaderTask.this.isCancelled();
+				}
 
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				if (item != null && item.getAnalysis() != null) {
+				@Override
+				public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 					trackItem.setDataItem(item);
 				}
-			}
-		};
-		return gpxDbHelper.getItem(trackItem.getFile(), callback);
+			};
+			return gpxDbHelper.getItem(file, callback);
+		}
+		return null;
 	}
 
 	@Override

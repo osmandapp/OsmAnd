@@ -11,9 +11,14 @@
 	Thx - Hardy
 -->
 
+    <string name="weather_download_error">Could not download %1$s tiles.</string>
+    <string name="proxy_port_max_warning">Maximum port value is %1$s</string>
+    <string name="shutter_sound">Shutter sound</string>
+    <string name="camera_app">Camera app</string>
+    <string name="speak_route_deviation">Announce deviation from the route</string>
     <string name="select_layer">Select layer</string>
     <string name="free_maps_updates">Free updates (emergency)</string>
-    <string name="clear_online_cache_description">This will clear all cache for online weather tile.</string>
+    <string name="clear_online_cache_description">This will clear the cache for online weather tiles.</string>
     <string name="clear_online_cache">Clear online cache</string>
     <string name="offline_cache">Offline cache</string>
     <string name="shared_string_alt_name">Alternative name</string>
@@ -3054,6 +3059,7 @@
     <string name="download_live_updates">Live updates</string>
     <string name="rendering_value_default13_name">Default (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Default (translucent cyan)</string>
+    <string name="rendering_value_defaultMedium_name">Default (medium)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX color</string>
     <string name="rendering_attr_currentTrackColor_description">GPX color</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX width</string>

@@ -323,7 +323,7 @@ public class GpxUiHelper {
 		}
 
 		@Override
-		public void onGpxDataItemReady(GpxDataItem item) {
+		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
 				updateItemsProc.run();
 			}
@@ -596,7 +596,7 @@ public class GpxUiHelper {
 			if (gpxInfo.getFileSize() >= 0) {
 				size = AndroidUtils.formatSize(v.getContext(), gpxInfo.getFileSize());
 			}
-			DateFormat format = app.getResourceManager().getDateFormat();
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
 			long lastModified = gpxInfo.getLastModified();
 			if (lastModified > 0) {
 				date = (format.format(new Date(lastModified)));
@@ -919,8 +919,8 @@ public class GpxUiHelper {
 			String groupName = helper.getGroupName(gpxFile);
 			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		}
-		if (group != null && group.getModifiableList().size() > 0) {
-			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
+		if (group != null && group.getDisplayItems().size() > 0) {
+			GpxDisplayItem gpxItem = group.getDisplayItems().get(0);
 			if (gpxItem != null) {
 				gpxItem.chartPointLayer = chartPointLayer;
 			}
@@ -1016,7 +1016,7 @@ public class GpxUiHelper {
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
 		GpxDataItemCallback callback = new GpxDataItemCallback() {
 			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
+			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 				addAppearanceToGpx(gpxFile, item);
 				saveAndShareGpx(app, gpxFile);
 			}

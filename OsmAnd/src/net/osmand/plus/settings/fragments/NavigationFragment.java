@@ -155,7 +155,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		return false;
 	}
 
-	private void updateRoutingProfiles() {
+	public void updateRoutingProfiles() {
 		routingProfiles = routingDataUtils.getRoutingProfiles();
 	}
 
@@ -169,6 +169,10 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		navigationType.setIcon(getActiveIcon(selected.getIconRes()));
 
 		ApplicationMode appMode = getSelectedAppMode();
+		updateAppMode(appMode, profileKey, derivedProfile);
+	}
+
+	public void updateAppMode(@NonNull ApplicationMode appMode, @NonNull String profileKey, @Nullable String derivedProfile) {
 		RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			routeService = RouteService.STRAIGHT;

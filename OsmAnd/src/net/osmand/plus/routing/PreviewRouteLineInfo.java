@@ -35,6 +35,7 @@ public class PreviewRouteLineInfo {
 	private boolean showTurnArrows;
 
 	// temporally parameters to show in preview
+	private boolean showDirectionArrows = true;
 	@ColorInt
 	private int iconColor;
 	@DrawableRes
@@ -86,6 +87,10 @@ public class PreviewRouteLineInfo {
 		this.showTurnArrows = showTurnArrows;
 	}
 
+	public void setShowDirectionArrows(boolean show) {
+		this.showDirectionArrows = show;
+	}
+
 	public void setIconId(int iconId) {
 		this.iconId = iconId;
 	}
@@ -131,6 +136,10 @@ public class PreviewRouteLineInfo {
 
 	public boolean shouldShowTurnArrows() {
 		return showTurnArrows;
+	}
+
+	public boolean shouldShowDirectionArrows() {
+		return showDirectionArrows;
 	}
 
 	public int getIconId() {

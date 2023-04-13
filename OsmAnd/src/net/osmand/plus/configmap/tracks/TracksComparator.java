@@ -46,15 +46,20 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareTrackItems(@NonNull TrackItem item1, @NonNull TrackItem item2) {
+		Integer currentTrack = checkCurrentTrack(item1, item2);
+		if (currentTrack != null) {
+			return currentTrack;
+		}
+
 		GpxDataItem dataItem1 = item1.getDataItem();
 		GpxDataItem dataItem2 = item2.getDataItem();
 		GPXTrackAnalysis analysis1 = dataItem1 != null ? dataItem1.getAnalysis() : null;
 		GPXTrackAnalysis analysis2 = dataItem2 != null ? dataItem2.getAnalysis() : null;
 
 		if (shouldCheckAnalysis()) {
-			Integer value = checkItemsAnalysis(item1, item2, analysis1, analysis2);
-			if (value != null) {
-				return value;
+			Integer analysis = checkItemsAnalysis(item1, item2, analysis1, analysis2);
+			if (analysis != null) {
+				return analysis;
 			}
 		}
 
@@ -103,6 +108,17 @@ public class TracksComparator implements Comparator<Object> {
 
 	private boolean shouldCheckAnalysis() {
 		return sortMode != NAME_ASCENDING && sortMode != NAME_DESCENDING && sortMode != LAST_MODIFIED;
+	}
+
+	@Nullable
+	private Integer checkCurrentTrack(@NonNull TrackItem item1, @NonNull TrackItem item2) {
+		if (item1.isShowCurrentTrack()) {
+			return -1;
+		}
+		if (item2.isShowCurrentTrack()) {
+			return 1;
+		}
+		return null;
 	}
 
 	@Nullable

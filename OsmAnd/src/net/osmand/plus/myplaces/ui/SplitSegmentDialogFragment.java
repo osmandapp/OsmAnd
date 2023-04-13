@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -35,8 +34,12 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.GpxSplitParams;
+import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
@@ -264,8 +267,40 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		}
 	}
 
-	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @Nullable SelectedGpxFile sf) {
-		new SplitTrackAsyncTask(sf, groups).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+	private void updateSplit(@NonNull List<GpxDisplayGroup> groups, @NonNull SelectedGpxFile selectedGpxFile) {
+		double splitInterval = 0;
+		GpxSplitType splitType = GpxSplitType.NO_SPLIT;
+		if (distanceSplit.get(selectedSplitInterval) > 0) {
+			splitType = GpxSplitType.DISTANCE;
+			splitInterval = distanceSplit.get(selectedSplitInterval);
+		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			splitType = GpxSplitType.TIME;
+			splitInterval = timeSplit.get(selectedSplitInterval);
+		}
+		SplitTrackListener listener = getSplitTrackListener(selectedGpxFile);
+		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, joinSegments);
+
+		app.getGpxDisplayHelper().splitTrackAsync(selectedGpxFile, groups, params, listener);
+	}
+
+	@NonNull
+	private SplitTrackListener getSplitTrackListener(@NonNull SelectedGpxFile selectedGpxFile) {
+		return new SplitTrackListener() {
+			@Override
+			public void trackSplittingStarted() {
+				AndroidUiHelper.updateVisibility(progressBar, true);
+			}
+
+			@Override
+			public void trackSplittingFinished(boolean success) {
+				AndroidUiHelper.updateVisibility(progressBar, false);
+				if (success) {
+					List<GpxDisplayGroup> groups = getDisplayGroups();
+					selectedGpxFile.setDisplayGroups(groups, app);
+				}
+				updateContent();
+			}
+		};
 	}
 
 	private void setupSplitIntervalView(@NonNull View view) {
@@ -383,7 +418,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		boolean generalGroup = group.isGeneralTrack();
 		if ((group.isSplitDistance() || group.isSplitTime()) && (!generalGroup && !generalTrack || generalGroup && generalTrack)) {
 			boolean itemsForSelectedSegment = false;
-			for (GpxDisplayItem item : group.getModifiableList()) {
+			for (GpxDisplayItem item : group.getDisplayItems()) {
 				itemsForSelectedSegment = trkSegment.points.get(0).equals(item.locationStart) || itemsForSelectedSegment;
 				if (itemsForSelectedSegment) {
 					splitSegments.add(item);
@@ -662,46 +697,6 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				}
 			}
 			return convertView;
-		}
-	}
-
-	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
-		@Nullable
-		private final SelectedGpxFile mSelectedGpxFile;
-
-		private final List<GpxDisplayGroup> groups;
-
-		SplitTrackAsyncTask(@Nullable SelectedGpxFile selectedGpxFile, @NonNull List<GpxDisplayGroup> groups) {
-			mSelectedGpxFile = selectedGpxFile;
-			this.groups = groups;
-		}
-
-		protected void onPreExecute() {
-			progressBar.setVisibility(View.VISIBLE);
-		}
-
-		protected void onPostExecute(Void result) {
-			progressBar.setVisibility(View.GONE);
-			if (mSelectedGpxFile != null) {
-				List<GpxDisplayGroup> groups = getDisplayGroups();
-				mSelectedGpxFile.setDisplayGroups(groups, app);
-			}
-			updateContent();
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			for (GpxDisplayGroup model : groups) {
-				if (selectedSplitInterval == 0) {
-					model.noSplit(app);
-				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
-				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
-				}
-			}
-
-			return null;
 		}
 	}
 

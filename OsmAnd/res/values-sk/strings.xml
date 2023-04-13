@@ -5123,4 +5123,10 @@
     <string name="shared_string_pounds">libry</string>
     <string name="metric_lbs">lbs</string>
     <string name="free_maps_updates">Aktualizácie zdarma (núdzové)</string>
+    <string name="shutter_sound">Zvuk spúšte</string>
+    <string name="camera_app">Aplikácia fotoaparátu</string>
+    <string name="speak_route_deviation">Oznámiť odchýlenie od trasy</string>
+    <string name="proxy_port_max_warning">Maximálna hodnota portu je %1$s</string>
+    <string name="rendering_value_defaultMedium_name">Predvolená (stredná)</string>
+    <string name="select_layer">Zvoľte vrstvu</string>
 </resources>

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 
@@ -22,6 +24,7 @@ public class BaseBottomSheetItem {
 	private Object tag;
 	private boolean disabled;
 	protected View.OnClickListener onClickListener;
+	protected View.OnLongClickListener onLongClickListener;
 	protected int position = INVALID_POSITION;
 
 	public View getView() {
@@ -42,11 +45,22 @@ public class BaseBottomSheetItem {
 							   boolean disabled,
 							   View.OnClickListener onClickListener,
 							   int position) {
+		this(view, layoutId, tag, disabled, onClickListener, null, position);
+	}
+
+	public BaseBottomSheetItem(@NonNull View view,
+	                           @LayoutRes int layoutId,
+	                           @Nullable Object tag,
+	                           boolean disabled,
+	                           @Nullable View.OnClickListener onClickListener,
+	                           @Nullable View.OnLongClickListener onLongClickListener,
+	                           int position) {
 		this.view = view;
 		this.layoutId = layoutId;
 		this.tag = tag;
 		this.disabled = disabled;
 		this.onClickListener = onClickListener;
+		this.onLongClickListener = onLongClickListener;
 		this.position = position;
 	}
 
@@ -63,8 +77,11 @@ public class BaseBottomSheetItem {
 			view.setEnabled(false);
 			view.setAlpha(.5f);
 		}
+		if (onLongClickListener != null) {
+			view.setOnLongClickListener(onLongClickListener);
+		}
 		view.setOnClickListener(onClickListener);
-		view.setClickable(onClickListener != null);
+		view.setClickable(onClickListener != null || onLongClickListener != null);
 		if (position != INVALID_POSITION) {
 			container.addView(view, position);
 		} else {
@@ -92,6 +109,7 @@ public class BaseBottomSheetItem {
 		protected Object tag;
 		protected boolean disabled;
 		protected View.OnClickListener onClickListener;
+		protected View.OnLongClickListener onLongClickListener;
 		protected int position = INVALID_POSITION;
 
 		public Builder setCustomView(View customView) {
@@ -119,13 +137,18 @@ public class BaseBottomSheetItem {
 			return this;
 		}
 
+		public Builder setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
+			this.onLongClickListener = onLongClickListener;
+			return this;
+		}
+
 		public Builder setPosition(int position) {
 			this.position = position;
 			return this;
 		}
 
 		public BaseBottomSheetItem create() {
-			return new BaseBottomSheetItem(customView, layoutId, tag, disabled, onClickListener, position);
+			return new BaseBottomSheetItem(customView, layoutId, tag, disabled, onClickListener, onLongClickListener, position);
 		}
 	}
 }

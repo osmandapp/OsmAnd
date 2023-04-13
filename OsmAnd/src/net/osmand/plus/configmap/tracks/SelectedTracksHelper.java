@@ -6,6 +6,7 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIB
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
@@ -63,7 +64,7 @@ public class SelectedTracksHelper {
 		return !Algorithms.objectEquals(selectedTrackItems, originalSelectedTrackItems);
 	}
 
-	public void ontrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
+	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
 		if (selected) {
 			selectedTrackItems.addAll(trackItems);
 		} else {
@@ -74,6 +75,12 @@ public class SelectedTracksHelper {
 	public void updateTrackItems(@NonNull List<TrackItem> trackItems) {
 		allTrackItems.clear();
 		allTrackItems.addAll(trackItems);
+
+		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
+			allTrackItems.add(trackItem);
+		}
 
 		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 		for (TrackItem item : trackItems) {
@@ -154,12 +161,10 @@ public class SelectedTracksHelper {
 	}
 
 	private void processRecentlyVisibleTracks() {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
 		for (GPXFile gpxFile : selectionHelper.getSelectedGpxFilesBackUp().keySet()) {
 			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
 			if (selectedGpxFile == null) {
-				TrackItem trackItem = new TrackItem(new File(gpxFile.path));
-				recentlyVisibleTrackItem.add(trackItem);
+				recentlyVisibleTrackItem.add(new TrackItem(app, gpxFile));
 			}
 		}
 	}
@@ -176,36 +181,42 @@ public class SelectedTracksHelper {
 		}
 	}
 
-	@NonNull
-	public TrackTab addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
-		File dir = item.getFile().getParentFile();
-		TrackTab trackTab = trackTabs.get(dir.getName());
-		if (trackTab == null) {
-			trackTab = new TrackTab(dir);
-			trackTab.items.add(TYPE_SORT_TRACKS);
-			trackTabs.put(trackTab.getTypeName(), trackTab);
+	@Nullable
+	private TrackTab addLocalIndexInfo(@NonNull Map<String, TrackTab> trackTabs, @NonNull TrackItem item) {
+		File file = item.getFile();
+		if (file != null && file.getParentFile() != null) {
+			File dir = file.getParentFile();
+			TrackTab trackTab = trackTabs.get(dir.getName());
+			if (trackTab == null) {
+				trackTab = new TrackTab(dir);
+				trackTab.items.add(TYPE_SORT_TRACKS);
+				trackTabs.put(trackTab.getTypeName(), trackTab);
+			}
+			trackTab.items.add(item);
+			return trackTab;
 		}
-		trackTab.items.add(item);
-		return trackTab;
+		return null;
 	}
 
 	public void addTrackItem(@NonNull TrackItem item) {
 		allTrackItems.add(item);
-		TrackTab folderTab = addLocalIndexInfo(trackTabs, item);
 
 		TrackTab onMapTab = trackTabs.get(TrackTabType.ON_MAP.name());
 		if (onMapTab != null) {
 			onMapTab.items.clear();
 			onMapTab.items.addAll(getOnMapTabItems());
+			sortTrackTab(onMapTab);
 		}
 		TrackTab allTab = trackTabs.get(TrackTabType.ALL.name());
 		if (allTab != null) {
 			allTab.items.clear();
 			allTab.items.addAll(getAllTabItems());
+			sortTrackTab(allTab);
 		}
-		sortTrackTab(folderTab);
-		sortTrackTab(onMapTab);
-		sortTrackTab(allTab);
+		TrackTab folderTab = addLocalIndexInfo(trackTabs, item);
+		if (folderTab != null) {
+			sortTrackTab(folderTab);
+		}
 	}
 
 	public void saveTracksVisibility() {

@@ -5118,4 +5118,11 @@
     <string name="shared_string_pounds">磅</string>
     <string name="common_weight_limit_error">最小值為「%1$s」%2$s。若車輛重量低於最小值時，請使用「%3$s」設定檔。</string>
     <string name="metric_lbs">磅</string>
+    <string name="camera_app">相機應用程式</string>
+    <string name="rendering_value_defaultMedium_name">預設 (中間)</string>
+    <string name="shutter_sound">快門聲</string>
+    <string name="speak_route_deviation">宣佈偏離路線</string>
+    <string name="select_layer">選取圖層</string>
+    <string name="proxy_port_max_warning">最大連接埠值為 %1$s</string>
+    <string name="weather_download_error">無法下載 %1$s 圖磚。</string>
 </resources>
