@@ -5124,7 +5124,7 @@
     <string name="shared_string_all_world">Hele verden</string>
     <string name="weather_forecast">Vejrudsigt</string>
     <string name="offline_weather_forecast_desc">Du kan hente vejrudsigt for 7 dage.</string>
-    <string name="clear_online_cache_description">Dette vil rydde al cache for online vejrfliser.</string>
+    <string name="clear_online_cache_description">Dette vil rydde cachehukommelsen for online vejrfliser.</string>
     <string name="offline_weather_forecast">Offline vejrudsigt</string>
     <string name="common_weight_limit_error">Mindste værdi er \"%1$s\" %2$s. Brug profilen \"%3$s\", hvis køretøjets vægt er mindre end minimumsværdien.</string>
     <string name="shared_string_pounds">pund</string>
