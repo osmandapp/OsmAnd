@@ -5129,4 +5129,5 @@
     <string name="proxy_port_max_warning">Maximálna hodnota portu je %1$s</string>
     <string name="rendering_value_defaultMedium_name">Predvolená (stredná)</string>
     <string name="select_layer">Zvoľte vrstvu</string>
+    <string name="weather_download_error">Nepodarilo sa stiahnuť %1$s dlaždíc.</string>
 </resources>
