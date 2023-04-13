@@ -5121,7 +5121,7 @@
     <string name="app_mode_climbing">Klettern</string>
     <string name="offline_weather_forecast">Offline-Wettervorhersage</string>
     <string name="offline_weather_forecast_desc">Sie können die Wettervorhersage für 7 Tage herunterladen.</string>
-    <string name="clear_online_cache_description">Dies wird den gesamten Cache für die Online-Wetterkachel löschen.</string>
+    <string name="clear_online_cache_description">Dies wird den Cache der Online-Wetterkacheln löschen.</string>
     <string name="clear_online_cache">Online-Cache leeren</string>
     <string name="offline_cache">Offline-Cache</string>
     <string name="shared_string_alt_name">Alternativer Name</string>
