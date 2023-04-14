@@ -5123,7 +5123,7 @@
     <string name="weather_forecast">Previsión del tiempo</string>
     <string name="offline_weather_forecast">Previsión meteorológica sin conexión</string>
     <string name="offline_weather_forecast_desc">Puede descargar la previsión meteorológica para 7 días.</string>
-    <string name="clear_online_cache_description">Esto borrará toda la memoria caché de la ficha meteorológica en línea.</string>
+    <string name="clear_online_cache_description">Borrará la memoria caché de los mosaicos meteorológicos en línea.</string>
     <string name="free_maps_updates">Actualizaciones gratuitas (de emergencia)</string>
     <string name="metric_lbs">lbs.</string>
     <string name="common_weight_limit_error">El valor mínimo es \"%1$s\" %2$s. Utilice el perfil \"%3$s\" si el peso del vehículo es inferior al valor mínimo.</string>
@@ -5134,4 +5134,5 @@
     <string name="camera_app">Aplicación de cámara</string>
     <string name="shutter_sound">Sonido del obturador</string>
     <string name="proxy_port_max_warning">La altura máxima del puerto es de %1$s</string>
+    <string name="weather_download_error">No se pudieron descargar %1$s mosaicos.</string>
 </resources>
