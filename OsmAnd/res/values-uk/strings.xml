@@ -464,8 +464,8 @@
     <string name="search_poi_filter">Фільтр</string>
     <string name="menu_mute_off">Звук увімкнено</string>
     <string name="menu_mute_on">Звук вимкнено</string>
-    <string name="voice_provider_descr">Виберіть голосові вказівки для навігації.</string>
-    <string name="voice_provider">Голосові інструкції</string>
+    <string name="voice_provider_descr">Виберіть голосовий супровід для навігації.</string>
+    <string name="voice_provider">Голосовий супровід</string>
     <string name="voice_data_initializing">Ініціалізуються голосові дані…</string>
     <string name="voice_data_not_supported">Голосові дані не підтримуються поточною версією програми</string>
     <string name="voice_data_corrupted">Голосові дані неправильного формату або пошкоджені</string>
@@ -1125,18 +1125,18 @@
     <string name="gpx_info_diff_altitude">Діапазон висот: %1$s</string>
     <string name="gpx_info_asc_altitude">Спуск/підйом: %1$s</string>
     <string name="gpx_timespan">Загальний час: %1$s</string>
-    <string name="gpx_timemoving">Час руху: %1$s</string>
+    <string name="gpx_timemoving">Час в русі: %1$s</string>
     <string name="gpx_selection_segment_title">Відрізок</string>
     <string name="gpx_selection_number_of_points">%1$s точок</string>
     <string name="gpx_selection_point">Точка %1$s</string>
-    <string name="gpx_selection_route_points">%1$s↵
+    <string name="gpx_selection_route_points">%1$s
 \nМаршрутних точок %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nТочок</string>
     <string name="gpx_selection_track">%1$s
 \nТрек %2$s</string>
     <string name="osmo_connect_menu">З’єднатись</string>
-    <string name="use_points_as_intermediates">Обчислити маршрут між точками</string>
+    <string name="use_points_as_intermediates">Прокласти маршрут між точками</string>
     <string name="always_center_position_on_map">Позиція розташування завжди в центрі</string>
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Різне</string>
@@ -1294,7 +1294,7 @@
     <string name="record_plugin_description">Записуйте свої поїздки або тренування та аналізуйте дані щодо швидкості, накопичених підйомів і спусків, профілю висоти тощо. Записані треки можна архівувати, ділитися з друзями, редагувати та обробляти.
 \n
 \nРозгорнутіший опис за адресою https://osmand.net/docs/user/plugins/trip-recording .</string>
-    <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна увімкнути або вимкнути кнопкою запису GPX на екрані з мапою.</string>
+    <string name="save_track_to_gpx_globally_descr">Запис розташування до файлу GPX можна увімкнути або вимкнути кнопкою запису GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал запису</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та маршруток</string>
     <string name="record_plugin_name">Запис подорожі</string>
@@ -1341,7 +1341,7 @@
     <string name="anonymous_user">Анонімний користувач</string>
     <string name="logged_as">Ви увійшли як %1$s</string>
     <string name="speed_limit_exceed">Допустиме значення перевищення швидкості</string>
-    <string name="speed_limit_exceed_message">Оберіть допустиме значення перевищення швидкості, при перевищенні якого Ви отримаєте голосове попередження.</string>
+    <string name="speed_limit_exceed_message">Оберіть допустиме значення перевищення швидкості, при перевищенні якого ви отримаєте голосове попередження.</string>
     <string name="fav_point_emoticons_message">Закладку перейменовано на «%1$s», щоб зберегти у файл рядок, що містить смайлики.</string>
     <string name="print_route">Друк маршруту</string>
     <string name="fav_point_dublicate">Дублювання назви закладки</string>
@@ -1414,7 +1414,7 @@
     <string name="use_opengl_render">Використовувати OpenGL для візуалізації</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для візуалізації (може бути причиною швидкого розряду батареї або не працювати на деяких пристроях).</string>
     <string name="error_avoid_specific_road">Об\'їзд не знайдений</string>
-    <string name="save_track_to_gpx_globally_headline">Запис треку за вимогою</string>
+    <string name="save_track_to_gpx_globally_headline">Запис треків на вимогу</string>
     <string name="enable_proxy_title">Увімкнути HTTP проксі-сервер</string>
     <string name="enable_proxy_descr">Налаштування HTTP проксі-сервера для усіх мережевих запитів.</string>
     <string name="proxy_host_title">Адреса проксі-сервера</string>
