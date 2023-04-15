@@ -5119,4 +5119,6 @@
     <string name="generate_hillshade_from_3d_maps">Genera mappe raster con ombreggiamenti delle colline da mappe 3D</string>
     <string name="weather_download_error">Impossibile scaricare i riquadri %1$s.</string>
     <string name="test_heightmap">Prova la mappa dell\'altezza</string>
+    <string name="proxy_port_max_warning">Valore massimo della porta è %1$s</string>
+    <string name="shared_string_pounds">libbre</string>
 </resources>
