@@ -676,7 +676,7 @@
     <string name="favorite">Favorit</string>
     <string name="shared_string_clear_all">Alle löschen</string>
     <string name="shared_string_history">Verlauf</string>
-    <string name="uploading_data">Daten hochladen …</string>
+    <string name="uploading_data">Daten speichern …</string>
     <string name="uploading">Hochladen …</string>
     <string name="search_nothing_found">Kein Treffer</string>
     <string name="searching">Suche…</string>
