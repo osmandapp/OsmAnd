@@ -5125,4 +5125,6 @@
     <string name="speak_route_deviation">Anunciar desvio da rota</string>
     <string name="shutter_sound">Som do obturador</string>
     <string name="camera_app">Aplicativo de câmera</string>
+    <string name="proxy_port_max_warning">O valor máximo da porta é %1$s</string>
+    <string name="weather_download_error">Não foi possível baixar %1$s mosaicos.</string>
 </resources>
