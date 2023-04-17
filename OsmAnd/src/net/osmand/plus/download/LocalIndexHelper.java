@@ -50,7 +50,7 @@ public class LocalIndexHelper {
 
 	@NonNull
 	public String getInstalledDate(long time) {
-		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT);
+		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		return format.format(new Date(time));
 	}
 
