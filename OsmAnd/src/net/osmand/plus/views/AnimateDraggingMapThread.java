@@ -131,6 +131,10 @@ public class AnimateDraggingMapThread {
 	 */
 	public void stopAnimating() {
 		stopped = true;
+		MapRendererView renderer = getMapRenderer();
+		if (renderer != null) {
+			renderer.resetMapTarget();
+		}
 	}
 
 	public boolean isAnimating() {
@@ -145,6 +149,7 @@ public class AnimateDraggingMapThread {
 		MapRendererView renderer = getMapRenderer();
 		if (renderer != null) {
 			renderer.pauseMapAnimation();
+			renderer.resetMapTarget();
 		}
 		stopped = true;
 		Thread tt;
@@ -750,7 +755,7 @@ public class AnimateDraggingMapThread {
 
 			// Rescale speed to 31 coordinates
 			PointD velocity = new PointD(-velocityInMapSpaceX * scale31, -velocityInMapSpaceY * scale31);
-			animator.animateTargetWith(velocity,
+			animator.animateFlatTargetWith(velocity,
 					new PointD(TARGET_MOVE_DECELERATION * scale31, TARGET_MOVE_DECELERATION * scale31),
 					userInteractionAnimationKey);
 		}
