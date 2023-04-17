@@ -87,6 +87,7 @@ public class MultiTouchSupport {
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
+	private PointF secondPoint = new PointF();
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
 	private static final int TILT_X_THRESHOLD_PX = 40;
@@ -136,6 +137,7 @@ public class MultiTouchSupport {
 			}
 			if (actionCode == MotionEvent.ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				secondPoint = new PointF(x2, y2);
 				firstFingerStart = new PointF(x1, y1);
 				secondFingerStart = new PointF(x2, y2);
 				listener.onGestureInit(x1, y1, x2, y2);
@@ -156,6 +158,8 @@ public class MultiTouchSupport {
 
 					// Keep zoom center fixed or flexible
 					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+
+					secondPoint = new PointF(x2, y2);
 
 					if (angleDefined) {
 						angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
@@ -210,6 +214,10 @@ public class MultiTouchSupport {
 
 	public PointF getCenterPoint() {
 		return centerPoint;
+	}
+
+	public PointF getSecondPoint() {
+		return secondPoint;
 	}
 
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {
