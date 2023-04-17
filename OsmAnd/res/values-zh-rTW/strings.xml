@@ -5109,7 +5109,7 @@
     <string name="shared_string_alt_name">替代名稱</string>
     <string name="token_is_not_valid">權杖無效</string>
     <string name="weather_forecast">天氣預報</string>
-    <string name="clear_online_cache_description">這將會清除線上天氣圖磚的所有快取。</string>
+    <string name="clear_online_cache_description">這將會清除線上天氣圖磚的快取。</string>
     <string name="weather_forecast_is_outdated">預測已過時。</string>
     <string name="offline_weather_forecast_desc">您可以下載七天的天氣預報。</string>
     <string name="shared_string_all_world">全世界</string>
