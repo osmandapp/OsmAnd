@@ -797,7 +797,7 @@
     <string name="av_camera_focus_auto">自动对焦</string>
     <string name="clear_intermediate_points">清除中途点</string>
     <string name="keep_intermediate_points">保持中途点</string>
-    <string name="new_directions_point_dialog">你已经设置了中间目的地。</string>
+    <string name="new_directions_point_dialog">您已经设置了中途点。</string>
     <string name="settings_preset_descr">每种使用场景的地图和导航设置是相互独立的。在这里设置您的缺省使用场景。</string>
     <string name="intermediate_items_sort_by_distance">排序 门到门</string>
     <string name="plugin_distance_point_ele">海拔</string>
@@ -1612,7 +1612,7 @@
     <string name="plugin_nautical_name">航海地图视图</string>
     <string name="audionotes_plugin_description">在旅途中使用地图按钮或位置上下文菜单进行音频/照片/视频注记。</string>
     <string name="osmand_parking_plugin_description">启用此选项可在地图上设置您的汽车停在街上的点，并在停车时间开始时通知您的日历。插件有助于跟踪停车时间和汽车位置。要放置标记，请在地图上选择一个地点，然后转到“操作”并按“添加停车地点”。</string>
-    <string name="osmand_distance_planning_plugin_description">点击地图创建路径，或使用或修改现有的 GPX 文件，计划旅程和测量点之间的距离。结果可以保存为 GPX 文件，以后可以用于导航。</string>
+    <string name="osmand_distance_planning_plugin_description">通过点击地图来使用或修改现有的GPX文件来创建路径，以规划旅行并测量各点之间的距离。其结果可以保存为GPX文件，以便日后用于导航。</string>
     <string name="osm_editing_plugin_description">向由全球社区所维护的综合性地图 OpenStreetMap 做出贡献，并为每个用户提供最新的开源数据。
 \n
 \n您可以在我们的网站上找到有关如何编辑地图的说明 https://osmand.net/docs/user/plugins/osm-editing 。</string>
@@ -1647,7 +1647,7 @@
     <string name="routing_attr_no_new_routing_description">请不要使用 v1.9 的路径规划规则。</string>
     <string name="rendering_attr_transportStops_name">公交站</string>
     <string name="navigate_point_zone">地区</string>
-    <string name="navigate_point_olc">开放地点编码(OLC)</string>
+    <string name="navigate_point_olc">开放位置代码（OLC）</string>
     <string name="navigate_point_olc_info_invalid">无效的开放地点编码（OLC）
 \n</string>
     <string name="navigate_point_olc_info_short">简短的开放地点编码（OLC）
@@ -1888,10 +1888,10 @@
     <string name="route_descr_destination">目的地</string>
     <string name="intermediate_items_sort_return">优化了前往目的地的中间目的地的顺序。</string>
     <string name="plugin_distance_point_hdop">精度</string>
-    <string name="use_distance_measurement_help">* 点击标记一个标点。
-\n * 在地图上按住去删除先前的标点。
-\n * 在标点上按住以查看并附加叙述。
-\n * 在测量小工具上点击可看到更多的作用。</string>
+    <string name="use_distance_measurement_help">*点击以标记一个点。
+\n *长按地图可删除上一个点。
+\n *长按一个点以查看并附加描述。
+\n * 点击测量小工具以查看更多操作。</string>
     <string name="use_magnetic_sensor_descr">使用磁传感器来确定罗盘值而不是方向传感器。</string>
     <string name="use_magnetic_sensor">使用磁传感器</string>
     <string name="osmand_background_plugin_description">显示通过定期唤醒 GPS 设备（屏幕关闭）来打开后台跟踪和导航的设置。</string>
@@ -2986,7 +2986,7 @@
     <string name="article_removed">已删除文章</string>
     <string name="saved_articles">已存书签文章</string>
     <string name="group_deleted">群组已删除</string>
-    <string name="rendering_attr_whiteWaterSports_name">激流运动</string>
+    <string name="rendering_attr_whiteWaterSports_name">白水运动</string>
     <string name="touring_view_renderer">旅游风景</string>
     <string name="osm_recipients_label">OSM 收件人</string>
     <string name="rename_marker">重命名标记</string>
@@ -4482,7 +4482,7 @@
     <string name="routing_attr_allow_skating_only_description">仅针对自由式或滑冰而修整的路线，没有经典轨迹。</string>
     <string name="routing_attr_allow_classic_only_description">路线仅针对经典风格进行了修饰，没有滑冰道。这包括由较小的雪地摩托和较松的滑雪道以及滑雪者手动制作的轨迹。</string>
     <string name="custom_routing">自定义路径规划配置文件</string>
-    <string name="default_render_descr">通用风格。密集的城市清晰地显示出来。具有等高线、路线、路面质量、通行限制、公路护栏、根据 SAC 比例绘制的路径、激流运动项目。</string>
+    <string name="default_render_descr">通用风格。密集的城市清晰地显示出来。具有等高线、路线、路面质量、通行限制、公路护栏、根据 SAC 比例绘制的路径、白水运动项目。</string>
     <string name="add_location_as_first_point_descr">将您的位置添加为出发点，以计划完美的路线。</string>
     <string name="measurement_tool_save_as_new_track_descr">将点存储为路径点或一条线路。</string>
     <string name="add_route_points">添加路径点</string>
@@ -4802,10 +4802,10 @@
     <string name="empty_screen_weather_precipitation_layer">打开以在地图上查看降水图层。</string>
     <string name="weather_prefs_descr">24小时 x 7天 的预报，每3小时更新</string>
     <string name="empty_screen_weather_temperature_layer">打开以在地图上查看温度图层。</string>
-    <string name="weather_pressure_hectopascals">百帕斯卡</string>
+    <string name="weather_pressure_hectopascals">百帕</string>
     <string name="weather_pressure_inches_of_mercury">英寸汞柱</string>
     <string name="weather_pressure_millimeters_of_mercury">毫米汞柱</string>
-    <string name="weather_temperature_celsius">摄氏度</string>
+    <string name="weather_temperature_celsius">摄氏</string>
     <string name="rendering_engine_failed_descr">OsmAnd 已恢复为“版本 1”地图渲染。您可以尝试在设置中切换回新的“版本 2 (OpenGL)”渲染引擎。
 \n
 \n请通过提供您的错误日志来支持改进。</string>
@@ -4988,4 +4988,81 @@
     <string name="price_and_discount">%1$s • 节省 %2$s</string>
     <string name="offline_weather_forecast">离线天气预报</string>
     <string name="offline_weather_forecast_desc">您可下载未来7天的天气预报。</string>
+    <string name="weather_wind_knots">节</string>
+    <string name="shared_string_do_not_exist">不存在</string>
+    <string name="rendering_attr_weatherCloudContours_name">云等值线</string>
+    <string name="local_changes_will_be_dismissed">本地更改将被忽略</string>
+    <string name="open_weather_action">开启天气</string>
+    <string name="map_widget_sunset_desc">显示下一次日落的时间或距离日落的剩余时间。</string>
+    <string name="map_widget_group_sunrise_sunset">日出、日落</string>
+    <string name="depth_contour_lines">等深线</string>
+    <string name="map_widget_group_sunrise_sunset_desc">这些小部件会显示有关下一次日出和日落的信息。</string>
+    <string name="weather_pressure_mmhg">毫米汞柱</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">降水等值线</string>
+    <string name="pressure_layer">压力图层</string>
+    <string name="weather_pressure_inhg">英寸汞柱</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="cloud_conflict">冲突</string>
+    <string name="shared_string_next_sunrise">下次日出</string>
+    <string name="shared_string_next_sunset">下次日落</string>
+    <string name="weather_wind_kn">节</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="mtb_scale">山地自行车级别</string>
+    <string name="download_cloud_version">下载云端版本</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">风速等值线</string>
+    <string name="open_weather_action_description">允许您打开包含详细天气信息的屏幕。</string>
+    <string name="navigate_point_format_utm">UTM标准</string>
+    <string name="cloud_all_changes_uploaded_descr">在此设备上所做的所有更改都会与OsmAnd Cloud同步。</string>
+    <string name="upload_all">全部上传</string>
+    <string name="cloud_all_changes_downloaded">已下载所有变更</string>
+    <string name="cloud_no_conflicts">没有冲突。</string>
+    <string name="cloud_conflicts">冲突</string>
+    <string name="shared_string_time_left">剩余时间</string>
+    <string name="map_widget_sunrise_desc">显示下一次日出的时间或距离日出的剩余时间。</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="get_discount_first_few_part">以 %1$s 的第一次 %2$s</string>
+    <string name="wind_layer">风力图层</string>
+    <string name="temperature_layer">温度图层</string>
+    <string name="cloud_layer">云图层</string>
+    <string name="precipitation_layer">降水图层</string>
+    <string name="storage_migration_fragment_close_descr">复制仅完成 %1$s%%。如果您现在停止，应用程序可能无法正常工作。</string>
+    <string name="turn_on_nautical_depth_description">打开以在地图上查看航海深度数据。</string>
+    <string name="shared_string_purchased_on">购买于</string>
+    <string name="shared_string_open">打开</string>
+    <string name="last_sync">上次同步</string>
+    <string name="export_to_file">导出至文件</string>
+    <string name="shared_string_expires">过期</string>
+    <string name="local_file_will_be_restored">本地文件将被还原</string>
+    <string name="cloud_recent_changes">变更</string>
+    <string name="cloud_all_changes_uploaded">已上传所有变更</string>
+    <string name="backup_error_failed_to_fetch_remote_items">无法从服务器获取文件列表。</string>
+    <string name="switch_mode_by_tapping_on_widget">通过点击小部件来切换模式。</string>
+    <string name="navigate_point_format_olc">开放位置代码（OLC）</string>
+    <string name="release_4_1">• 增加了对Android Auto的初步支持
+\n
+\n • UTM坐标搜索的用户界面更新
+\n
+\n • GPX轨迹的GPS过滤器
+\n
+\n • 高程小工具（专业版）
+\n
+\n • 收藏：增加了查看最近使用的图标的功能
+\n
+\n • 路线规划：启动后将使用选定的配置文件
+\n
+\n • 修复了Mapillary图层，该插件现在默认是禁用的。
+\n
+\n • 增加了管理应用程序中所有历史记录的屏幕
+\n
+\n • 重新启动应用程序后，地图方向不会被重置
+\n
+\n • 改进了SRTM高度标记的渲染
+\n
+\n • 修正了阿拉伯语的地图说明
+\n
+\n • 修正了不同的路由问题
+\n
+\n</string>
 </resources>
