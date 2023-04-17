@@ -54,7 +54,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
 	private static final String SELECTED_TYPES = "selected_types";
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
 	private ProgressDialog progress;
 	private ApplicationMode appMode;
