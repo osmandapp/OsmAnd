@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -8,7 +10,6 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.GpxSelectionParams;
 
 import java.io.File;
@@ -66,34 +67,33 @@ public class SelectGpxTask extends AsyncTask<Void, Void, String> {
 	}
 
 	private void collectSelectedItems() {
-		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 		for (String filePath : selectedItems.keySet()) {
-			SelectedGpxFile sf;
-			if (!filePath.equals(GpxSelectionHelper.CURRENT_TRACK)) {
-				sf = selectionHelper.getSelectedFileByPath(filePath);
-				if (sf == null) {
-					sf = new SelectedGpxFile();
-					sf.setGpxFile(new GPXFile(null), app);
+			SelectedGpxFile selectedGpxFile;
+			if (filePath.equals(CURRENT_TRACK)) {
+				selectedGpxFile = selectionHelper.getSelectedCurrentRecordingTrack();
+				if (selectedGpxFile == null) {
+					selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 				}
-				sf.getGpxFile().path = filePath;
 			} else {
-				sf = selectionHelper.getSelectedCurrentRecordingTrack();
-				if (sf == null) {
-					sf = savingTrackHelper.getCurrentTrack();
+				selectedGpxFile = selectionHelper.getSelectedFileByPath(filePath);
+				if (selectedGpxFile == null) {
+					selectedGpxFile = new SelectedGpxFile();
+					selectedGpxFile.setGpxFile(new GPXFile(null), app);
 				}
+				selectedGpxFile.getGpxFile().path = filePath;
 			}
 			boolean visible = false;
 			if (selectedItems.get(filePath) != null) {
 				visible = selectedItems.get(filePath);
 			}
 			if (visible) {
-				if (!sf.isShowCurrentTrack()) {
-					sf.getGpxFile().modifiedTime = -1;
-					sf.getGpxFile().pointsModifiedTime = -1;
+				if (!selectedGpxFile.isShowCurrentTrack()) {
+					selectedGpxFile.getGpxFile().modifiedTime = -1;
+					selectedGpxFile.getGpxFile().pointsModifiedTime = -1;
 				}
-				originalSelectedItems.add(sf.getGpxFile());
+				originalSelectedItems.add(selectedGpxFile.getGpxFile());
 			}
-			selectionHelper.updateSelected(visible, sf);
+			selectionHelper.updateSelected(visible, selectedGpxFile);
 		}
 	}
 

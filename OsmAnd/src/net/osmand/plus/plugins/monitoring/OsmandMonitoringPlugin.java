@@ -200,6 +200,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		widgetsInfos.add(creator.createWidgetInfo(downhillWidget));
 	}
 
+	@Nullable
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
 		switch (widgetType) {
