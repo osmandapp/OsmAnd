@@ -5099,7 +5099,7 @@
     <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>
     <string name="disable_vertex_hillshade_3d">Désactiver l\'ombrage du relief en 3D</string>
     <string name="enable_3d_maps">Activer les cartes en 3D</string>
-    <string name="clear_online_cache_description">Vider le cache de toutes les tuiles météo en ligne.</string>
+    <string name="clear_online_cache_description">Cela videra le cache des tuiles météo en ligne.</string>
     <string name="clear_online_cache">Vider le cache en ligne</string>
     <string name="app_mode_climbing">Escalade</string>
     <string name="offline_cache">Cache hors-ligne</string>
@@ -5120,4 +5120,6 @@
     <string name="camera_app">Application d\'appareil photo</string>
     <string name="shutter_sound">Son de l\'obturateur</string>
     <string name="speak_route_deviation">Annoncer une déviation de l\'itinéraire</string>
+    <string name="proxy_port_max_warning">La valeur maximale du port est %1$s</string>
+    <string name="weather_download_error">Le téléchargement des tuiles %1$s a échoué.</string>
 </resources>
