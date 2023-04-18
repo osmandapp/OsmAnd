@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.antplus.adapters;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,14 +21,13 @@ import java.util.ArrayList;
 
 public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHolder> {
 
-	private final OsmandApplication app;
-	private final boolean nightMode;
-	private final ArrayList<ExternalDevice> items = new ArrayList<>();
-	private DeviceClickListener deviceClickListener;
+	protected final OsmandApplication app;
+	protected final boolean nightMode;
+	protected final ArrayList<ExternalDevice> items = new ArrayList<>();
+	protected DeviceClickListener deviceClickListener;
 
-	public FoundDevicesAdapter(@NonNull OsmandApplication app, ArrayList<ExternalDevice> items, boolean nightMode, DeviceClickListener deviceClickListener) {
+	public FoundDevicesAdapter(@NonNull OsmandApplication app, boolean nightMode, DeviceClickListener deviceClickListener) {
 		this.app = app;
-		this.items.addAll(items);
 		this.nightMode = nightMode;
 		this.deviceClickListener = deviceClickListener;
 	}
@@ -38,7 +36,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	@Override
 	public FoundDeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
-		View view = inflater.inflate(R.layout.item_with_desc_dividers, parent, false);
+		View view = inflater.inflate(R.layout.item_external_device, parent, false);
 		return new FoundDeviceViewHolder(view, nightMode);
 	}
 
@@ -72,7 +70,6 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 				deviceClickListener.onDeviceClicked(device);
 			}
 		});
-
 	}
 
 	@Override

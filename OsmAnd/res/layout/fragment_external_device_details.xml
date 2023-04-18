@@ -177,7 +177,7 @@
                     android:textSize="@dimen/default_list_text_size" />
 
                 <TextView
-                    android:id="@+id/connection_type"
+                    android:id="@+id/battery_level"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical|right"

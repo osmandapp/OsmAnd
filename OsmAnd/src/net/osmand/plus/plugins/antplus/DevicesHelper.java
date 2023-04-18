@@ -217,7 +217,6 @@ public class DevicesHelper implements AntDeviceListener, DeviceListener {
 			super.onScanResult(callbackType, result);
 			BluetoothDevice device = result.getDevice();
 			if (device.getName() != null) {
-				android.util.Log.d("Corwin", "found " + device.getName() + "___ " + device.getAddress());
 				addScanResult(result);
 			}
 		}
@@ -231,9 +230,6 @@ public class DevicesHelper implements AntDeviceListener, DeviceListener {
 		}
 
 		private void addScanResult(ScanResult result) {
-			if (result.getDevice().getName() != null) {
-				android.util.Log.d("Corwin", "check device" + result.getDevice().getName());
-			}
 			if (isSupportedBleDevice(result.getScanRecord())) {
 				leDevices.put(result.getDevice().getAddress(), result);
 			}
@@ -545,15 +541,11 @@ public class DevicesHelper implements AntDeviceListener, DeviceListener {
 		}
 	}
 
-	public boolean isBleConnected(ExternalDevice device) {
+	public boolean isBleConnected(String deviceAddress) {
 		if (isBleEnabled()) {
 			BluetoothManager bluetoothManager = (BluetoothManager) activity.getSystemService(Context.BLUETOOTH_SERVICE);
-			List<BluetoothDevice> connectedDevices = bluetoothManager.getConnectedDevices(BluetoothProfile.GATT);
-			for (BluetoothDevice connectedDevice : connectedDevices) {
-				if (Objects.equals(connectedDevice.getAddress(), device.getAddress())) {
-					return true;
-				}
-			}
+			BluetoothDevice device = bluetoothAdapter.getRemoteDevice(deviceAddress);
+			return bluetoothManager.getConnectionState(device, BluetoothProfile.GATT) == BluetoothProfile.STATE_CONNECTED;
 		}
 		return false;
 	}

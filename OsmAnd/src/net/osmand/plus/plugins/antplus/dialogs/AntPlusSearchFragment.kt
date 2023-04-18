@@ -103,7 +103,7 @@ class AntPlusSearchFragment : AntPlusBaseFragment(), ScanForDevicesListener,
         val recyclerView: RecyclerView? =
             stateDevicesListView?.findViewById(R.id.found_devices_list)
         recyclerView?.layoutManager = LinearLayoutManager(context)
-        adapter = FoundDevicesAdapter(app, ArrayList<ExternalDevice>(), nightMode, this)
+        adapter = FoundDevicesAdapter(app, nightMode, this)
         recyclerView?.adapter = adapter
     }
 

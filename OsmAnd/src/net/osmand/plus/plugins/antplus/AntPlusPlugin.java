@@ -9,15 +9,21 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.ANT_BICYCLE_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ANT_HEART_RATE;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ParcelUuid;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -25,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.antplus.antdevices.AntBikeCadenceDevice;
@@ -36,6 +43,7 @@ import net.osmand.plus.plugins.antplus.devices.CommonDevice;
 import net.osmand.plus.plugins.antplus.devices.CommonDevice.IPreferenceFactory;
 import net.osmand.plus.plugins.antplus.devices.DeviceType;
 import net.osmand.plus.plugins.antplus.dialogs.AntPlusSensorsListFragment;
+import net.osmand.plus.plugins.antplus.models.BatteryData;
 import net.osmand.plus.plugins.antplus.models.BleDeviceData;
 import net.osmand.plus.plugins.antplus.widgets.BikeCadenceTextWidget;
 import net.osmand.plus.plugins.antplus.widgets.BikeDistanceTextWidget;
@@ -51,6 +59,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -62,15 +71,27 @@ import java.util.List;
 
 public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, BleConnectionStateListener, BleDataListener {
 	private static final Log log = PlatformUtil.getLog(AntPlusPlugin.class);
+	private static final String PREFERENCES_NAME = "net.osmand.plugins.ble";
+	private static final String PAIRED_DEVICES_KEY = "paired_devices";
 
 	private final DevicesHelper devicesHelper;
 	private ScanForDevicesListener scanForDevicesListener;
 	private ArrayList<ExternalDevice> pairedBleDevices = new ArrayList<>();
 	private ArrayList<BleConnectionStateListener> stateChangeListeners = new ArrayList<>();
 	private ArrayList<BleDataListener> bleDeviceDataListeners = new ArrayList<>();
+	private Gson gson;
 
 	public AntPlusPlugin(OsmandApplication app) {
 		super(app);
+		gson = new GsonBuilder().create();
+		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+		Object blePrefs = settingsAPI.getPreferenceObject(PREFERENCES_NAME);
+		String customPluginsJson = settingsAPI.getString(blePrefs, PAIRED_DEVICES_KEY, "");
+		if (!Algorithms.isEmpty(customPluginsJson)) {
+			List<ExternalDevice> pairedDevices = gson.fromJson(customPluginsJson, new TypeToken<List<ExternalDevice>>() {
+			}.getType());
+			pairedBleDevices.addAll(pairedDevices);
+		}
 		devicesHelper = new DevicesHelper(app, this);
 	}
 
@@ -267,7 +288,8 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, B
 				}
 			}
 			foundDevices.add(new ExternalDevice(result.getDevice().getName(),
-					false,
+					isDevicePaired(result.getDevice().getAddress()),
+					isBleDeviceConnected(result.getDevice().getAddress()),
 					result.getDevice().getAddress(),
 					ExternalDevice.DeviceConnectionType.BLE,
 					foundDeviceType,
@@ -282,6 +304,13 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, B
 
 	@Override
 	public void onStateChanged(@Nullable String address, int newState) {
+		new Handler(Looper.getMainLooper()).post(()->{
+			if (newState == BluetoothProfile.STATE_CONNECTED) {
+				Toast.makeText(app, R.string.external_device_connected, Toast.LENGTH_SHORT).show();
+			} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+				Toast.makeText(app, R.string.external_device_disconnected, Toast.LENGTH_SHORT).show();
+			}
+		});
 		for (BleConnectionStateListener listener : stateChangeListeners) {
 			listener.onStateChanged(address, newState);
 		}
@@ -305,6 +334,15 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, B
 
 	@Override
 	public void onDataReceived(@Nullable String address, @NonNull BleDeviceData data) {
+		if (data instanceof BatteryData) {
+			for (ExternalDevice device :
+					pairedBleDevices) {
+				if (device.getAddress().equals(address)) {
+					device.setBatteryLevel(((BatteryData) data).getBatteryLevel());
+					break;
+				}
+			}
+		}
 		for (BleDataListener listener : bleDeviceDataListeners) {
 			listener.onDataReceived(address, data);
 		}
@@ -316,27 +354,52 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, B
 
 	public boolean isDeviceConnected(ExternalDevice device) {
 		if (device.getConnectionType() == ExternalDevice.DeviceConnectionType.BLE) {
-			return devicesHelper.isBleConnected(device);
+			return isBleDeviceConnected(device.getAddress());
 		} else {
 			return false;
 		}
 	}
 
+	private boolean isBleDeviceConnected(String deviceAddress) {
+		return devicesHelper.isBleConnected(deviceAddress);
+	}
+
 	public boolean isDevicePaired(ExternalDevice device) {
+		return isDevicePaired(device.getAddress());
+	}
+
+	public boolean isDevicePaired(String deviceAddress) {
 		ArrayList<ExternalDevice> tmpDevicesList = new ArrayList<>(pairedBleDevices);
 		for (ExternalDevice pairedDevice : tmpDevicesList) {
-			if (pairedDevice.getAddress().equals(device.getAddress())) {
+			if (pairedDevice.getAddress().equals(deviceAddress)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
+	public void unpairDevice(String address) {
+		for (ExternalDevice device : pairedBleDevices) {
+			if (device.getAddress().equals(address)) {
+				pairedBleDevices.remove(device);
+				savePairedDevices();
+				break;
+			}
+		}
+	}
 
 	public void pairDevice(ExternalDevice device) {
 		if (!isDevicePaired(device)) {
 			pairedBleDevices.add(device);
+			savePairedDevices();
 		}
+	}
+
+	private void savePairedDevices() {
+		SettingsAPI settingsAPI = app.getSettings().getSettingsAPI();
+		Object blePrefs = settingsAPI.getPreferenceObject(PREFERENCES_NAME);
+		String devicesJson = gson.toJson(pairedBleDevices);
+		settingsAPI.edit(blePrefs).putString(PAIRED_DEVICES_KEY, devicesJson).commit();
 	}
 
 	public void connectDevice(ExternalDevice device) {
@@ -356,4 +419,28 @@ public class AntPlusPlugin extends OsmandPlugin implements IPreferenceFactory, B
 //			devicesHelper.connectAntDevice();
 		}
 	}
+
+	public ArrayList<ExternalDevice> getPairedDevices() {
+		ArrayList<ExternalDevice> devicesList = new ArrayList<>();
+		devicesList.addAll(pairedBleDevices);
+		return devicesList;
+	}
+
+	private ExternalDevice getPairedDevice(@NonNull String deviceAddress){
+		for (ExternalDevice device: pairedBleDevices) {
+			if(device.getAddress().equals(deviceAddress)){
+				return device;
+			}
+		}
+		return null;
+	}
+
+	public void changeDeviceName(@NonNull String deviceAddress, @NonNull String newName){
+		ExternalDevice device = getPairedDevice(deviceAddress);
+		if(device != null){
+			device.setName(newName);
+			savePairedDevices();
+		}
+	}
+
 }

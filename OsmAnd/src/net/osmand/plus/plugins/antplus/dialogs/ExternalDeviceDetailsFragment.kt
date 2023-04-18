@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class ExternalDeviceDetailsFragment : AntPlusBaseFragment(), BleConnectionStateL
 
     lateinit var device: ExternalDevice
     private var connectionState: TextView? = null
+    private var batteryLevel: TextView? = null
     private var receivedDataView: RecyclerView? = null
     lateinit var receivedDataAdapter: DeviceCharacteristicsAdapter
 
@@ -79,6 +81,7 @@ class ExternalDeviceDetailsFragment : AntPlusBaseFragment(), BleConnectionStateL
             widgetIcon.setImageResource(if (nightMode) it.nightIconId else it.dayIconId)
         }
         connectionState = view.findViewById(R.id.connection_state)
+        batteryLevel = view.findViewById(R.id.battery_level)
         updateConnectedState(view)
         updateButtonState(view)
         val connectionTypeTextView: TextView = view.findViewById(R.id.connection_type)
@@ -230,9 +233,13 @@ class ExternalDeviceDetailsFragment : AntPlusBaseFragment(), BleConnectionStateL
     }
 
     override fun onDataReceived(address: String?, data: BleDeviceData) {
-        if (device.address.equals(address)) {
+        if (device.address == address) {
             if (data is BatteryData) {
-
+                batteryLevel?.text = "${data.batteryLevel}"
+                if (data.batteryLevel < 15) {
+                    Toast.makeText(app, R.string.external_device_low_battery, Toast.LENGTH_SHORT)
+                        .show()
+                }
             } else {
                 receivedDataAdapter.setItems(data.getDataFields())
             }
@@ -242,6 +249,7 @@ class ExternalDeviceDetailsFragment : AntPlusBaseFragment(), BleConnectionStateL
     override fun onDestroyView() {
         super.onDestroyView()
         connectionState = null
+        batteryLevel = null
         receivedDataView = null
     }
 }

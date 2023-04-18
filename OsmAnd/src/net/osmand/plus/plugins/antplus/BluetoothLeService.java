@@ -300,7 +300,6 @@ public class BluetoothLeService extends Service {
 
 	private void decodeBatteryLevel(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
 		int batteryValue = characteristic.getValue()[0];
-
 		Intent broadcast = new Intent(BROADCAST_BATTERY_LEVEL_DATA);
 		broadcast.putExtra(EXTRA_BATTERY_LEVEL, batteryValue);
 		broadcast.putExtra(EXTRA_ADDRESS, gatt.getDevice().getAddress());

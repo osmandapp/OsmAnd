@@ -16,6 +16,7 @@ public class FoundDeviceViewHolder extends RecyclerView.ViewHolder {
 	public final TextView name;
 	public final TextView description;
 	public final ImageView icon;
+	public final ImageView menuIcon;
 	public final boolean nightMode;
 
 	public FoundDeviceViewHolder(@NonNull View view, boolean nightMode) {
@@ -25,5 +26,6 @@ public class FoundDeviceViewHolder extends RecyclerView.ViewHolder {
 		name = view.findViewById(R.id.title);
 		description = view.findViewById(R.id.description);
 		icon = view.findViewById(R.id.icon);
+		menuIcon = view.findViewById(R.id.menu_icon);
 	}
 }
