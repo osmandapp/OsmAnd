@@ -14,6 +14,7 @@ import net.osmand.plus.plugins.antplus.viewholders.DeviceCharacteristicsViewHold
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DeviceCharacteristicsAdapter extends RecyclerView.Adapter<DeviceCharacteristicsViewHolder> {
 
@@ -50,7 +51,7 @@ public class DeviceCharacteristicsAdapter extends RecyclerView.Adapter<DeviceCha
 		return items.size();
 	}
 
-	public void setItems(ArrayList<CharacteristicDataField> items) {
+	public void setItems(List<CharacteristicDataField> items) {
 		this.items.clear();
 		this.items.addAll(items);
 		notifyDataSetChanged();
