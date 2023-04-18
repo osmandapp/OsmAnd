@@ -145,8 +145,8 @@
     <string name="si_kmh">Кілометрів на годину</string>
     <string name="si_mph">Миль на годину</string>
     <string name="si_m_s">Метрів за секунду</string>
-    <string name="si_min_km">Хвилин за кілометр</string>
-    <string name="si_min_m">Хвилин за милю</string>
+    <string name="si_min_km">Хвилин на кілометр</string>
+    <string name="si_min_m">Хвилин на милю</string>
     <string name="si_nm_h">Морських миль на годину (вузол)</string>
     <string name="si_mi_feet">Милі/фути</string>
     <string name="si_mi_yard">Милі/ярди</string>
