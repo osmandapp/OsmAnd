@@ -5114,7 +5114,7 @@
     <string name="generate_slope_from_3d_maps">Gera mapas raster de declives a partir de mapas 3D</string>
     <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
     <string name="shared_string_all_world">Mundo inteiro</string>
-    <string name="clear_online_cache_description">Isto irá limpar todos os ficheiros temporários dos mosaicos de previsão meteorológica online.</string>
+    <string name="clear_online_cache_description">Isto irá limpar os ficheiros temporários dos mosaicos de previsão meteorológica online.</string>
     <string name="clear_online_cache">Limpar cache online</string>
     <string name="offline_cache">Cache offline</string>
     <string name="app_mode_climbing">Escalada</string>
@@ -5135,4 +5135,5 @@
     <string name="camera_app">Aplicação de câmara</string>
     <string name="shutter_sound">Som ao tirar fotografia</string>
     <string name="proxy_port_max_warning">O valor máximo da porta é %1$s</string>
+    <string name="weather_download_error">Não foi possível descarregar %1$s mosaicos.</string>
 </resources>

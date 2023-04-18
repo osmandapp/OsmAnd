@@ -13,6 +13,9 @@ public class NavigateGpxParams extends AidlParams {
 	private boolean force;
 	private boolean needLocationPermission;
 	private boolean passWholeRoute;
+	private boolean snapToRoad;
+	private String snapToRoadMode;
+	private int snapToRoadThreshold;
 
 	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission) {
 		this.data = data;
@@ -62,6 +65,30 @@ public class NavigateGpxParams extends AidlParams {
 		this.passWholeRoute = passWholeRoute;
 	}
 
+	public boolean isSnapToRoad() {
+		return snapToRoad;
+	}
+
+	public void setSnapToRoad(boolean snapToRoad) {
+		this.snapToRoad = snapToRoad;
+	}
+
+	public String getSnapToRoadMode() {
+		return snapToRoadMode;
+	}
+
+	public void setSnapToRoadMode(String snapToRoadMode) {
+		this.snapToRoadMode = snapToRoadMode;
+	}
+
+	public int getSnapToRoadThreshold() {
+		return snapToRoadThreshold;
+	}
+
+	public void setSnapToRoadThreshold(int snapToRoadThreshold) {
+		this.snapToRoadThreshold = snapToRoadThreshold;
+	}
+
 	public boolean isNeedLocationPermission() {
 		return needLocationPermission;
 	}
@@ -73,6 +100,9 @@ public class NavigateGpxParams extends AidlParams {
 		bundle.putBoolean("force", force);
 		bundle.putBoolean("needLocationPermission", needLocationPermission);
 		bundle.putBoolean("passWholeRoute", passWholeRoute);
+		bundle.putBoolean("snapToRoad", snapToRoad);
+		bundle.putString("snapToRoadMode", snapToRoadMode);
+		bundle.putInt("snapToRoadThreshold", snapToRoadThreshold);
 	}
 
 	@Override
@@ -82,5 +112,8 @@ public class NavigateGpxParams extends AidlParams {
 		force = bundle.getBoolean("force");
 		needLocationPermission = bundle.getBoolean("needLocationPermission");
 		passWholeRoute = bundle.getBoolean("passWholeRoute");
+		snapToRoad = bundle.getBoolean("snapToRoad");
+		snapToRoadMode = bundle.getString("snapToRoadMode");
+		snapToRoadThreshold = bundle.getInt("snapToRoadThreshold");
 	}
 }

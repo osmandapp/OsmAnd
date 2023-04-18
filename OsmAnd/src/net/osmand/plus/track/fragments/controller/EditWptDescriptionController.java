@@ -1,7 +1,5 @@
 package net.osmand.plus.track.fragments.controller;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXFile;
@@ -10,7 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.SaveGpxAsyncTask;
+import net.osmand.plus.track.helpers.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 
@@ -40,16 +38,11 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 				WptPt wptRes = wpt;
 				wptRes.desc = editedText;
 				gpx.updateWptPt(wpt, wptRes);
-				saveGpx(gpx);
+				SaveGpxHelper.saveGpx(gpx);
 			}
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
 			updateContextMenu(latLon, new WptLocationPoint(wpt).getPointDescription(activity), wpt);
 		}
-	}
-
-	private void saveGpx(@NonNull GPXFile gpxFile) {
-		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, null)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@NonNull

@@ -2951,7 +2951,7 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icona</string>
     <string name="collected_data">Dati raccolti</string>
-    <string name="press_again_to_change_the_map_orientation">Tocca di nuovo per cambiare l\'orientamento della mappa</string>
+    <string name="press_again_to_change_the_map_orientation">Tocca di nuovo per modificare l\'orientamento della mappa</string>
     <string name="shared_string_min_speed">Velocità min</string>
     <string name="shared_string_max_speed">Velocità max</string>
     <string name="default_speed_setting_title">Velocità predefinita</string>
@@ -4541,7 +4541,7 @@
     <string name="simulation_real_mode_desc">Nei tratti di strada diritti, la velocità sarà approssimata alla massima consentita.
 \nAlle intersezioni la simulazione rallenterà.
 \nVerranno aggiunte penalizzazioni aggiuntive per i vari segnali stradali, gli stop, eccetera.</string>
-    <string name="rendering_attr_showRunningRoutes_name">Percorso attuale</string>
+    <string name="rendering_attr_showRunningRoutes_name">Percorsi per running</string>
     <string name="location_source_descr">Come preimpostazione, OsmAnd installato da Google Play usa %1$s per determinare la posizione.
 \n
 \nSe tu ottieni posizioni non accurate, oppure usi un dispositivo senza %2$s, prova a passare a \"%3$s\"</string>
@@ -4565,7 +4565,7 @@
     <string name="map_widget_altitude">Altitudine della posizione attuale</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Percorsi filobus</string>
     <string name="map_markers_bar">Barra marcatori mappa</string>
-    <string name="rendering_attr_showRunningRoutes_description">Mostra il percorso attuale</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostra i percorsi per running</string>
     <string name="rendering_attr_showFitnessTrails_name">Percorsi fitness</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostra i percorsi fitness</string>
     <string name="rendering_attr_horse_scale_demanding_name">Impegnativo</string>
@@ -5110,11 +5110,16 @@
     <string name="rendering_value_defaultMedium_name">Predefinito (medio)</string>
     <string name="select_layer">Seleziona il livello</string>
     <string name="speak_route_deviation">Annuncio deviazione dal percorso</string>
-    <string name="clear_online_cache_description">Questo cancellerà tutta la cache per il riquadro meteo online.</string>
+    <string name="clear_online_cache_description">Questo cancellerà la cache per il riquadro meteo online.</string>
     <string name="free_maps_updates">Aggiornamenti gratuiti (emergenza)</string>
     <string name="common_weight_limit_error">Il valore minimo è \"%1$s\" %2$s. Utilizza il profilo \"%3$s\" se il peso del veicolo è inferiore al valore minimo.</string>
     <string name="shared_string_all_world">Tutto il mondo</string>
     <string name="offline_weather_forecast_desc">Puoi scaricare le previsioni del tempo per 7 giorni.</string>
     <string name="generate_slope_from_3d_maps">Genera mappe raster di pendenza da mappe 3D</string>
     <string name="generate_hillshade_from_3d_maps">Genera mappe raster con ombreggiamenti delle colline da mappe 3D</string>
+    <string name="weather_download_error">Impossibile scaricare i riquadri %1$s.</string>
+    <string name="test_heightmap">Prova la mappa dell\'altezza</string>
+    <string name="proxy_port_max_warning">Valore massimo della porta è %1$s</string>
+    <string name="shared_string_pounds">libbre</string>
+    <string name="disable_vertex_hillshade_3d">Disabilita l\'ombreggiatura dei vertici in 3D</string>
 </resources>

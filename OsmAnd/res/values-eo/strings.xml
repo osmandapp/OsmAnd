@@ -5112,7 +5112,7 @@
     <string name="shared_string_alt_name">Alternativa nomo</string>
     <string name="free_maps_updates">Senpagaj ĝisdatigoj (krizaj)</string>
     <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
-    <string name="clear_online_cache_description">Forviŝi la tutan kaŝmemoron de enretaj veteraj kaheloj.</string>
+    <string name="clear_online_cache_description">Forviŝi kaŝmemoron de enretaj veteraj kaheloj.</string>
     <string name="clear_online_cache">Forviŝi kaŝmemoron</string>
     <string name="token_is_not_valid">Ĵetono malvalida</string>
     <string name="offline_weather_forecast">Malkonekta veterprognozo</string>

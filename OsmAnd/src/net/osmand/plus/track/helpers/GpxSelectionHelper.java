@@ -1,6 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -115,6 +114,7 @@ public class GpxSelectionHelper {
 		return selectedGPXFiles;
 	}
 
+	@NonNull
 	public Map<GPXFile, Long> getSelectedGpxFilesBackUp() {
 		return selectedGpxFilesBackUp;
 	}
@@ -130,21 +130,20 @@ public class GpxSelectionHelper {
 						(gpxFile.path != null && helper.getSelectedFileByPath(gpxFile.path) != null));
 	}
 
-	@SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
+	@Nullable
 	public String getGpxDescription() {
-		if (selectedGPXFiles.size() == 1) {
+		int size = selectedGPXFiles.size();
+		if (size == 1) {
 			GPXFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 			if (selectedGPXFiles.get(0).getGpxFile() == currentGPX) {
 				return app.getString(R.string.shared_string_currently_recording_track);
 			}
-
 			File file = new File(selectedGPXFiles.get(0).getGpxFile().path);
 			return Algorithms.getFileNameWithoutExtension(file).replace('_', ' ');
-		} else if (selectedGPXFiles.size() == 0) {
+		} else if (size == 0) {
 			return null;
 		} else {
-			return app.getString(R.string.number_of_gpx_files_selected_pattern,
-					selectedGPXFiles.size());
+			return app.getString(R.string.number_of_gpx_files_selected_pattern, String.valueOf(size));
 		}
 	}
 

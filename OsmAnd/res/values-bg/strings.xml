@@ -2818,4 +2818,12 @@
     <string name="rendering_value_defaultMedium_name">По подразбиране (средно)</string>
     <string name="map_widget_intermediate_time">Време до междинна точка</string>
     <string name="access_intermediate_arrival_time">Време на пристигане в междинна точка</string>
+    <string name="proxy_port_max_warning">Максималната стойност на порта е %1$s</string>
+    <string name="shutter_sound">Звук при снимане</string>
+    <string name="camera_app">Приложение за камера</string>
+    <string name="speak_route_deviation">Обявяване при отклонение от маршрута</string>
+    <string name="clear_online_cache_description">Това ще изчисти кеша за онлайн слоя за времето.</string>
+    <string name="free_maps_updates">Безплатни актуализации (спешни)</string>
+    <string name="weather_download_error">Не могат да се изтеглят плочки %1$s.</string>
+    <string name="select_layer">Изберете слой</string>
 </resources>

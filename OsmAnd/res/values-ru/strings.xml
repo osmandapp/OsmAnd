@@ -1338,7 +1338,7 @@
     <string name="routing_attr_avoid_unpaved_description">Избегать грунтовых дорог</string>
     <string name="routing_attr_avoid_ferries_name">Без паромов</string>
     <string name="routing_attr_avoid_ferries_description">Избегать паромные переправы</string>
-    <string name="routing_attr_weight_name">Предельная масса</string>
+    <string name="routing_attr_weight_name">Масса</string>
     <string name="routing_attr_weight_description">Укажите допустимый предел массы автомобиля для учёта при построении маршрута.</string>
     <string name="map_widget_map_rendering">Отображение карты</string>
     <string name="amenity_type_seamark">Навигационные знаки (водоёмы)</string>
@@ -1801,7 +1801,7 @@
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границ</string>
-    <string name="routing_attr_height_name">Предельная высота</string>
+    <string name="routing_attr_height_name">Высота</string>
     <string name="routing_attr_height_description">Укажите высоту транспортного средства для учёта при построении маршрута.</string>
     <string name="use_fast_recalculation">Умный пересчёт маршрута</string>
     <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Полезно для дальних поездок.</string>
@@ -3169,7 +3169,7 @@
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтный парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Самоходные и несамоходные сани (упряжки)</string>
     <string name="routeInfo_piste_difficulty_name">Сложность горнолыжной трассы</string>
-    <string name="routing_attr_width_name">Ограничение по ширине</string>
+    <string name="routing_attr_width_name">Ширина</string>
     <string name="routing_attr_width_description">Укажите ширину транспортного средства для учёта при построении маршрута.</string>
     <string name="app_mode_utv">Мотовездеход</string>
     <string name="shared_string_calculate">Рассчитать</string>
@@ -3670,7 +3670,7 @@
     <string name="shared_string_uninstall_and_restart">Удалить и перезапустить</string>
     <string name="shared_string_uninstall">Удалить</string>
     <string name="routing_attr_length_description">Укажите длину транспортного средства, разрешённую для движения по маршрутам.</string>
-    <string name="routing_attr_length_name">Предельная длина</string>
+    <string name="routing_attr_length_name">Длина</string>
     <string name="speed_cameras_removed_descr">В этом устройстве нет камер контроля скорости.</string>
     <string name="app_mode_inline_skates">Роликовые коньки</string>
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
@@ -4695,7 +4695,7 @@
     <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_diesel_name">Дизельное топливо</string>
-    <string name="routing_attr_motor_type_name">Двигатель автомобиля</string>
+    <string name="routing_attr_motor_type_name">Используемое топливо</string>
     <string name="routing_attr_motor_type_description">Выберите тип топлива для вашего двигателя, это необходимо для оценки выбросов CO2.</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_electric_name">Электричество</string>
@@ -4875,7 +4875,7 @@
 \n
 \n• Виджет «Маркер карты»: добавлена возможность изменения поведения при нажатии
 \n
-\n• Исправлена опция \"Показать положение\"
+\n• Исправлена опция \"Отображать позицию\"
 \n
 \n• GPX: добавлена поддержка тегов «link», «cmt», «desc» и любых пользовательских расширений
 \n

@@ -44,7 +44,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	public interface SaveGpxListener {
 
-		void gpxSavingStarted();
+		default void gpxSavingStarted() { }
 
 		void gpxSavingFinished(Exception errorMessage);
 	}
