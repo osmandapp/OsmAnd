@@ -30,6 +30,7 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -225,10 +226,10 @@ public class WaypointHelper {
 	}
 
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
-		Location lastProjection = app.getRoutingHelper().getLastProjection();
-		float mxspeed = route.getCurrentMaxSpeed();
-		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		Location lastProjection = routingHelper.getLastProjection();
+		float maxSpeed = routingHelper.getCurrentMaxSpeed();
+		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, lastProjection);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
 		}
@@ -252,7 +253,7 @@ public class WaypointHelper {
 							&& currentRoute < inf.getLastLocationIndex()) {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
-					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
+					Location lastKnownLocation = routingHelper.getLastProjection();
 					int d = (int) Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
 							inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
 					if (inf.getLocationIndex() == currentRoute && d > 10) {
@@ -331,8 +332,7 @@ public class WaypointHelper {
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
 		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc));
-		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, loc, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, loc);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
 			return speedAlarm;
@@ -369,9 +369,10 @@ public class WaypointHelper {
 		return null;
 	}
 
-	private static AlarmInfo createSpeedAlarm(SpeedConstants sc, float mxspeed, Location loc, float delta) {
+	private AlarmInfo createSpeedAlarm(SpeedConstants sc, float mxspeed, Location loc) {
 		AlarmInfo speedAlarm = null;
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
+			float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 			if (loc.getSpeed() > mxspeed + delta) {
 				int speed;
 				if (sc.imperial) {

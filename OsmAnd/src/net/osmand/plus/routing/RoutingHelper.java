@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.RouteDataObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
@@ -25,6 +26,7 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
@@ -769,7 +771,22 @@ public class RoutingHelper {
 	}
 
 	public synchronized float getCurrentMaxSpeed() {
-		return route.getCurrentMaxSpeed();
+		float speed = 0;
+		RouteSegmentResult lastFixedLocation = getCurrentSegmentResult();
+		if (lastFixedLocation != null) {
+			RouteDataObject routeObject = lastFixedLocation.getObject();
+			if (routeObject != null) {
+				try {
+					RoutingEnvironment env = getRoutingEnvironment(app, mode,
+							lastFixedLocation.getStartPoint(), lastFixedLocation.getEndPoint());
+					GeneralRouter router = env.getCtx().config.router;
+					speed = router.defineRoutingSpeed(routeObject);
+				} catch (IOException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		}
+		return speed != 0 ? speed : route.getCurrentMaxSpeed();
 	}
 
 	@NonNull
