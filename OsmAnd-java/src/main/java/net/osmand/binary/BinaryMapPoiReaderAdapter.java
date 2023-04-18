@@ -550,7 +550,7 @@ public class BinaryMapPoiReaderAdapter {
 						skipTiles.add(skipVal);
 					}
 					codedIS.popLimit(oldLim);
-					if (req.isCancelled() || req.limitExceeded()) {
+					if (req.isCancelled()) {
 						return;
 					}
 				}

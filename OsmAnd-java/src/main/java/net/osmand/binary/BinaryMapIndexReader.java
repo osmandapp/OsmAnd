@@ -1555,22 +1555,6 @@ public class BinaryMapIndexReader {
 
 		return request;
 	}
-	
-	public static SearchRequest<Amenity> buildSearchPoiWebRequest(int sleft, int sright, int stop, int sbottom, int zoom,
-	                                                           SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher,
-	                                                           int limit){
-		SearchRequest<Amenity> request = new SearchRequest<>();
-		request.left = sleft;
-		request.right = sright;
-		request.top = stop;
-		request.bottom = sbottom;
-		request.zoom = zoom;
-		request.poiTypeFilter = poiTypeFilter;
-		request.resultMatcher = matcher;
-		request.limit = limit;
-		
-		return request;
-	}
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(LatLon latLon, int radius, int zoom,
 	                                                           SearchPoiTypeFilter poiTypeFilter,
