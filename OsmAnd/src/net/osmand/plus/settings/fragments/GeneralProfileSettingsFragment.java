@@ -146,7 +146,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (uiPreference != null) {
 			ApplicationMode appMode = getSelectedAppMode();
 			CompassMode compassMode = settings.getCompassMode(appMode);
-			Drawable icon = getActiveIcon(compassMode.getIconId(isNightMode()));
+			Drawable icon = getIcon(compassMode.getIconId(isNightMode()));
 			uiPreference.setIcon(icon);
 			uiPreference.setSummary(compassMode.getTitleId());
 		}
