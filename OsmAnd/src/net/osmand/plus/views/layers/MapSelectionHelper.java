@@ -250,10 +250,12 @@ public class MapSelectionHelper {
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
 				if (isTravelGpx) {
 					addTravelGpx(result, renderedObject, filter);
-				} else if (isRoute) {
-					addRoute(result, tileBox, point);
 				} else {
-					if (!addAmenity(result, renderedObject, searchLatLon)) {
+					if (isRoute) {
+						addRoute(result, tileBox, point);
+					}
+					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
+					if (!amenityAdded && !isRoute) {
 						result.selectedObjects.put(renderedObject, null);
 					}
 				}
