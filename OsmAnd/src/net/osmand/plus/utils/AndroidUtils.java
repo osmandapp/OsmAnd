@@ -941,8 +941,8 @@ public class AndroidUtils {
 		return isSupportRTL() && getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
-	public static ArrayList<View> getChildrenViews(ViewGroup vg) {
-		ArrayList<View> result = new ArrayList<>();
+	public static List<View> getChildrenViews(ViewGroup vg) {
+		List<View> result = new ArrayList<>();
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			View child = vg.getChildAt(i);
 			result.add(child);
@@ -1006,22 +1006,22 @@ public class AndroidUtils {
 		int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
 		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
 			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
-			SpannableStringBuilder ssb = new SpannableStringBuilder(nStr);
+			SpannableStringBuilder builder = new SpannableStringBuilder(nStr);
 			if (baseStyle != null) {
 				if (indexOfPlaceholder > 0) {
-					ssb.setSpan(baseStyle, 0, indexOfPlaceholder, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+					builder.setSpan(baseStyle, 0, indexOfPlaceholder, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 				if (indexOfPlaceholder + stringToInsertAndStyle.length() < nStr.length()) {
-					ssb.setSpan(baseStyle,
+					builder.setSpan(baseStyle,
 							indexOfPlaceholder + stringToInsertAndStyle.length(),
 							nStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
 			if (replaceStyle != null) {
-				ssb.setSpan(replaceStyle, indexOfPlaceholder,
+				builder.setSpan(replaceStyle, indexOfPlaceholder,
 						indexOfPlaceholder + stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
-			return ssb;
+			return builder;
 		} else {
 			return baseString;
 		}
@@ -1043,10 +1043,10 @@ public class AndroidUtils {
 			char c = nameWithoutExt.charAt(i);
 			if (Character.isDigit(c)) {
 				numberSection.insert(0, c);
-			} else if (Character.isSpaceChar(c) && numberSection.length() > 0) {
-				hasNameNumberSection = true;
-				break;
 			} else {
+				if (Character.isSpaceChar(c) && numberSection.length() > 0) {
+					hasNameNumberSection = true;
+				}
 				break;
 			}
 			i--;
@@ -1075,36 +1075,6 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
-	}
-
-	@NonNull
-	public static String checkEmoticons(@NonNull String name) {
-		char[] chars = name.toCharArray();
-		char ch1;
-		char ch2;
-
-		int index = 0;
-		StringBuilder builder = new StringBuilder();
-		while (index < chars.length) {
-			ch1 = chars[index];
-			if ((int) ch1 == 0xD83C) {
-				ch2 = chars[index + 1];
-				if ((int) ch2 >= 0xDF00 && (int) ch2 <= 0xDFFF) {
-					index += 2;
-					continue;
-				}
-			} else if ((int) ch1 == 0xD83D) {
-				ch2 = chars[index + 1];
-				if ((int) ch2 >= 0xDC00 && (int) ch2 <= 0xDDFF) {
-					index += 2;
-					continue;
-				}
-			}
-			builder.append(ch1);
-			++index;
-		}
-		builder.trimToSize(); // remove trailing null characters
-		return builder.toString();
 	}
 
 	@NonNull
