@@ -67,7 +67,6 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.GradientScaleType;
-import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
@@ -79,6 +78,7 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
+import net.osmand.plus.track.helpers.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -1794,20 +1794,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						callback.onApplyMovedObject(true, objectInMotion);
 					}
 				} else {
-					new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
-
-						@Override
-						public void gpxSavingStarted() {
-
+					SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
+						if (callback != null) {
+							callback.onApplyMovedObject(errorMessage == null, objectInMotion);
 						}
-
-						@Override
-						public void gpxSavingFinished(Exception errorMessage) {
-							if (callback != null) {
-								callback.onApplyMovedObject(errorMessage == null, objectInMotion);
-							}
-						}
-					}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					});
 				}
 			}
 		} else if (callback != null) {

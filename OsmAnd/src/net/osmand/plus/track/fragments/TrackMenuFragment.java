@@ -104,8 +104,6 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.cards.DescriptionCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
@@ -131,6 +129,7 @@ import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -1562,21 +1561,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void saveGpx(SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
-		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
+		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
+			if (selectedGpxFile != null) {
+				List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
+						new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
+				selectedGpxFile.setDisplayGroups(groups, app);
+				selectedGpxFile.processPoints(app);
 			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
-					selectedGpxFile.setDisplayGroups(groups, app);
-					selectedGpxFile.processPoints(app);
-				}
-				updateContent();
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			updateContent();
+		});
 	}
 
 	private boolean isCurrentRecordingTrack() {
