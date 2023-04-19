@@ -5122,4 +5122,8 @@
     <string name="recently_visible">Ostatnio widoczne %1$s</string>
     <string name="empty_tracks_description">Przy pomocy OsmAnd można importować, tworzyć lub nagrywać pliki ścieżek.</string>
     <string name="empty_tracks">Nie masz plików ze ścieżkami.</string>
+    <string name="proxy_port_max_warning">Maksymalna wartość portu to %1$s</string>
+    <string name="camera_app">Aplikacja Aparat</string>
+    <string name="select_layer">Wybierz warstwę</string>
+    <string name="rendering_value_defaultMedium_name">Domyślny (średni)</string>
 </resources>
