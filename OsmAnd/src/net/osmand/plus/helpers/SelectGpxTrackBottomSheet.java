@@ -42,7 +42,9 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		GpxTrackAdapter adapter = new GpxTrackAdapter(requireContext(), gpxInfoList, showCurrentGpx, true);
+		GpxTrackAdapter adapter = new GpxTrackAdapter(requireContext(), gpxInfoList);
+		adapter.setShowCurrentGpx(showCurrentGpx);
+		adapter.setShowFolderName(true);
 		adapter.setAdapterListener(position -> {
 			if (position != RecyclerView.NO_POSITION) {
 				onItemClick(position);
