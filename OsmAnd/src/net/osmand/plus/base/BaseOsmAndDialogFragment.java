@@ -27,7 +27,7 @@ public class BaseOsmAndDialogFragment extends DialogFragment {
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 
-		int themeId = isNightMode(false) ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		int themeId = isNightMode(false) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
