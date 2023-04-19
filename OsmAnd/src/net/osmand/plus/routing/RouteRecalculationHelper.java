@@ -447,9 +447,6 @@ class RouteRecalculationHelper {
 				app.runInUIThread(() -> routingThreadHelper.onRouteCalculationFinish(params));
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
-			if (updateProgress) {
-				updateProgress(params);
-			}
 		}
 	}
 
