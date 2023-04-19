@@ -201,13 +201,17 @@ public class DevicesHelper implements AntDeviceListener, DeviceListener {
 		} catch (IllegalArgumentException exception) {
 
 		}
-		if (bluetoothAdapter != null) {
-			bluetoothAdapter.cancelDiscovery();
-			bluetoothAdapter = null;
-		}
-		if (bluetoothLeScanner != null) {
-			bluetoothLeScanner.stopScan(leScanCallback);
-			bluetoothLeScanner = null;
+		try{
+			if (bluetoothAdapter != null) {
+				bluetoothAdapter.cancelDiscovery();
+				bluetoothAdapter = null;
+			}
+			if (bluetoothLeScanner != null) {
+				bluetoothLeScanner.stopScan(leScanCallback);
+				bluetoothLeScanner = null;
+			}
+		} catch(SecurityException error){
+			LOG.debug("No permission on disable BLE");
 		}
 	}
 
@@ -472,7 +476,7 @@ public class DevicesHelper implements AntDeviceListener, DeviceListener {
 
 	private boolean requestBlePermissions() {
 		boolean hasNeededPermissions = true;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_SCAN)) {
 				hasNeededPermissions = false;
 				ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.BLUETOOTH_SCAN}, 4);
