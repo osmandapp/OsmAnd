@@ -71,6 +71,7 @@ public class AnimateDraggingMapThread {
 	private boolean animatingMapMove;
 	private boolean animatingMapRotation;
 	private boolean animatingMapTilt;
+	private boolean inconsistentMapTarget;
 
 	private float interpolation;
 
@@ -131,9 +132,12 @@ public class AnimateDraggingMapThread {
 	 */
 	public void stopAnimating() {
 		stopped = true;
-		MapRendererView renderer = getMapRenderer();
-		if (renderer != null) {
-			renderer.resetMapTarget();
+		if (inconsistentMapTarget) {
+			inconsistentMapTarget = false;
+			MapRendererView renderer = getMapRenderer();
+			if (renderer != null) {
+				renderer.resetMapTarget();
+			}
 		}
 	}
 
@@ -149,7 +153,10 @@ public class AnimateDraggingMapThread {
 		MapRendererView renderer = getMapRenderer();
 		if (renderer != null) {
 			renderer.pauseMapAnimation();
-			renderer.resetMapTarget();
+			if (inconsistentMapTarget) {
+				inconsistentMapTarget = false;
+				renderer.resetMapTarget();
+			}
 		}
 		stopped = true;
 		Thread tt;
@@ -755,6 +762,7 @@ public class AnimateDraggingMapThread {
 
 			// Rescale speed to 31 coordinates
 			PointD velocity = new PointD(-velocityInMapSpaceX * scale31, -velocityInMapSpaceY * scale31);
+			inconsistentMapTarget = true;
 			animator.animateFlatTargetWith(velocity,
 					new PointD(TARGET_MOVE_DECELERATION * scale31, TARGET_MOVE_DECELERATION * scale31),
 					userInteractionAnimationKey);
