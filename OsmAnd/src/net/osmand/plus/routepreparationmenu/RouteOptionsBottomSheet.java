@@ -69,7 +69,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
-import net.osmand.plus.track.helpers.SaveGpxHelper;
+import net.osmand.plus.track.helpers.savegpx.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;

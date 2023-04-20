@@ -8,11 +8,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.SaveGpxHelper;
+import net.osmand.plus.track.helpers.savegpx.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-
-import java.io.File;
 
 public class EditWptDescriptionController extends EditPointDescriptionController {
 

@@ -29,7 +29,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
