@@ -4458,4 +4458,80 @@
     <string name="osm_editing_prefs_descr">Användarnamn, lösenord, offline-redigering</string>
     <string name="auto_25_chars_route_tu_kl">Gör en u-sväng och håll till vänster</string>
     <string name="auto_25_chars_route_tu_kr">Gör en u-sväng och håll till höger</string>
+    <string name="weather_forecast">Väderprognos</string>
+    <string name="weather_forecast_is_outdated">Prognosen är föråldrad.</string>
+    <string name="rendering_value_defaultMedium_name">Standard (medium)</string>
+    <string name="shutter_sound">Slutarljud</string>
+    <string name="speak_route_deviation">Meddela avvikelser från rutten</string>
+    <string name="offline_cache">Offline-cache</string>
+    <string name="shared_string_all_world">Hela världen</string>
+    <string name="proxy_port_max_warning">Maximalt portvärde är %1$s</string>
+    <string name="camera_app">Kamera-app</string>
+    <string name="shared_string_pounds">pund</string>
+    <string name="weather_plugin_description">Tillhandahåller
+\n- 24-timmars och 7-dagars väderprognos med 5 lager.
+\n- platsbaserade widgetar
+\n- temperatur och lufttryck med isolinjer
+\n
+\nVäderdatat tillhandahålls av Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="rendering_engine_failed_descr">OsmAnd har återgått till \"version 1\" för kartrendering. Du kan försöka byta tillbaka till den nya \"Version 2 (OpenGL)\"-renderingsmotorn i inställningarna.
+\n
+\nUnderlätta gärna förbättringar genom att tillhandahålla din fellogg.</string>
+    <string name="marker_1st">Första markören</string>
+    <string name="offline_weather_forecast_desc">Du kan hämta väderprognoser för 7 dagar.</string>
+    <string name="switch_widget_mode_desc">Genom att trycka på widgeten kan du byta läge.</string>
+    <string name="free_maps_updates">Gratis uppdateringar (nödsituationer)</string>
+    <string name="clear_online_cache">Rensa online-cache</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="token_is_not_valid">Token är inte giltig</string>
+    <string name="shared_string_alt_name">Alternativt namn</string>
+    <string name="enable_3d_maps">Aktivera 3D-kartor</string>
+    <string name="disable_vertex_hillshade_3d">Inaktivera terrängskuggning i 3D</string>
+    <string name="generate_slope_from_3d_maps">Generera terränglutningsraster från 3D-kartor</string>
+    <string name="generate_hillshade_from_3d_maps">Generera terrängskuggningsraster från 3D-kartor</string>
+    <string name="weather_offline_forecast">Offline väderprognos</string>
+    <string name="common_weight_limit_error">Minsta värde är \"%1$s\" %2$s. Använd profilen \"%3$s\" om fordonets vikt är lägre än minimivärdet.</string>
+    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online väderleksraster.</string>
+    <string name="test_heightmap">Testa höjdkarta</string>
+    <string name="offline_weather_forecast">Väderprognos offline</string>
+    <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
+    <string name="marker_2nd">Andra markören</string>
+    <string name="goods_delivery_desc_2">Vägar stängda för varuleveranser kommer att undvikas.</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunnlar för vattendrag</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Dölj inte tunnlar för vattendrag</string>
+    <string name="app_mode_climbing">Klättring</string>
+    <string name="weather_download_error">Kunde inte ladda ned %1$s rastertiles.</string>
+    <string name="select_layer">Välj lager</string>
+    <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\"
+\n
+\n• Kontextmenyn visar nu lokaliserade namn för POI
+\n
+\n• Lagt till alternativ för att dela rutt via länk
+\n
+\n• Lagt till \"Nautiska mil/fot\" som längdenhet
+\n
+\n• Lagt till nytt fast läge för kartorientering
+\n
+\n• Förenklad startskärm
+\n
+\n• Fast positionsvisning i delat skärmläge i Android Auto
+\n
+\n• Lagt till \"hastighet/lutning\"-graf för spåranalys
+\n
+\n• Android 13 flyttade appspråk till systeminställningar
+\n
+\n• Åtgärdade problem med att visa veganska platser
+\n
+\n• Möjlighet att ladda ner online-raster som används som överläggs- eller underläggskartor
+\n
+\n• Stöd för brittiska måttenheter för \"Fordonsparametrar\"
+\n
+\n• Ny profil för moped
+\n
+\n• Nytt alternativ \"Automatisk\" för positionsvisning
+\n
+\n• Åtgärdat kartgester för lutning, zoom och rotation
+\n
+\n</string>
+    <string name="goods_delivery_desc_3">Gäller endast för varubilar som inte väger mer än 3,5 ton.</string>
 </resources>
