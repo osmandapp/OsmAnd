@@ -762,9 +762,7 @@ public class RoutePlannerFrontEnd {
 		if (!intermediatesEmpty) {
 			targets.addAll(intermediates);
 		}
-		if (ctx.calculationMode != RouteCalculationMode.BASE && needRequestPrivateAccessRouting(ctx, targets)) {
-			ctx.calculationProgress.requestPrivateAccessRouting = true;
-		}
+	
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;
@@ -779,11 +777,16 @@ public class RoutePlannerFrontEnd {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			if (ls == null) {
+			if (ls != null) {
+				routeDirection = PrecalculatedRouteDirection.build(ls, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
+				ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
+			} else if(maxDistance > RoutingConfiguration.DEVIATION_RADIUS * 20) {
 				return null;
 			}
-			routeDirection = PrecalculatedRouteDirection.build(ls, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
-			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
+			
+		}
+		if (ctx.calculationMode != RouteCalculationMode.BASE && needRequestPrivateAccessRouting(ctx, targets)) {
+			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		List<RouteSegmentResult> res ;
 		if (intermediatesEmpty && ctx.nativeLib != null) {
