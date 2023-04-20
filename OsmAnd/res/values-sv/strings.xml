@@ -4534,4 +4534,51 @@
 \n
 \n</string>
     <string name="goods_delivery_desc_3">Gäller endast för varubilar som inte väger mer än 3,5 ton.</string>
+    <string name="compass_on_circles">Kompass på cirklar</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Medelnivå</string>
+    <string name="lanes_widgets_desc">Visar aktuella körfält och framhäver de som ska köras för navigeringen.</string>
+    <string name="navigation_points">Navigeringspunkter</string>
+    <string name="app_mode_mountain_bicycle">Mountainbike</string>
+    <string name="get_altitude_data">Hämta höjddata</string>
+    <string name="map_widget_trip_recording_uphill">Stigning</string>
+    <string name="widget_secondary_desc_part_of">Del av insticksmodulen %1$s.</string>
+    <string name="shared_string_item">Objekt</string>
+    <string name="simulation_preview_mode_title">Snabb förhandsvisningsläge</string>
+    <string name="simulation_preview_mode_desc">Simuleringens hastighet kommer att vara max på raksträckor och sakta ner endast vid korsningar.</string>
+    <string name="circle_settings">Cirkelinställningar</string>
+    <string name="distance_circles">Avståndscirklar</string>
+    <string name="av_notes_choose_action_widget_desc">Välj åtgärd.</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Endast om det är nödvändigt</string>
+    <string name="on_with_params">%1$s på %2$s</string>
+    <string name="calculate_online">Beräkna online</string>
+    <string name="route_maneuvers_desc">Navigationswidgetar aktiveras under navigering för att visa information som avstånd, ankomsttid, kommande svängar, bäring, aktuellt gatunamn, körfält, maxhastighet, ankommande varningar, ruttpunkter och intressepunkter.</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (inga begränsningar)</string>
+    <string name="routing_attr_allow_private_for_truck_description">Tillåt åtkomst till privata områden för lastbilar.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Tillåt privat åtkomst (lastbil)</string>
+    <string name="map_widget_trip_recording_distance">Sträcka</string>
+    <string name="routing_attr_hazmat_category_name">Kategori av farligt gods</string>
+    <string name="map_widget_trip_recording_duration">Varaktighet</string>
+    <string name="no_altitude_data">Ingen höjddata</string>
+    <string name="track_attach_to_the_roads_descr">Spåret kommer att kopplas till vägarna med hjälp av offline-kartor. Spårets geometri kommer att ändras.</string>
+    <string name="calculate_online_altitude_descr">Beräkna höjden online på OsmAnds servrar, baserat på satellitbilder och digitala höjdmodeller. Skillnader jämfört med enhetens registrerade höjd kan användas som höjdkorrigering.</string>
+    <string name="map_widget_trip_recording_downhill">Nedför</string>
+    <string name="colour_of_circles">Färg på cirklar</string>
+    <string name="get_altitude_information">Hämta höjdinformation</string>
+    <string name="navigation_points_desc">Navigationswidgetar aktiveras under navigering för att visa information som avstånd, ankomsttid, kommande svängar, bäring, aktuellt gatunamn, körfält, maxhastighet, ankommande varningar, ruttpunkter och intressepunkter.</string>
+    <string name="route_maneuvers">Ruttmanövrar</string>
+    <string name="bearing_desc">Visar den absoluta eller relativa bäringen till ett mål i vinkelenheter (i 180 grader, 360 grader eller milliradianer).</string>
+    <string name="audio_video_notes_desc">Ger snabb åtkomst till start/stopp av ljud-, video- eller fotonotering.</string>
+    <string name="street_name_widget_desc">Gatunamn-widgeten visar det aktuella gatunamnet med en rak pil, eller nästa gatunamn med en pil som visar en kommande sväng.</string>
+    <string name="radius_rules_widget_desc">Radielinjal-vertyget visar avståndscirklar runt en vald punkt på kartan.</string>
+    <string name="bearing_secondary_desc">Du kan ändra det dataformat som används i: %1$s - %2$s - %3$s.</string>
+    <string name="altitude_widget_desc">Visar höjd över havet för den aktuella positionen.</string>
+    <string name="coordinates_widget_secondary_desc">Du kan ändra koordinatformatet i %1$s - %2$s - %3$s.</string>
+    <string name="snackbar_page_removed">\"Sidan %1$s\" har tagits bort.</string>
+    <string name="simulation_real_mode_desc">På raksträckor kommer hastigheten att vara ungefär den högsta tillåtna hastigheten.
+\nVid korsningar saktar simuleringen ner.
+\nExtra tidstillägg kommer att tillämpas vid trafiksignaler, stoppskyltar mm.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Åk inte offpist</string>
+    <string name="osm_carto_render_descr">Liknar OpenStreetMaps Carto-stil som används på OSM:s egna hemsida</string>
+    <string name="map_markers_bar">Fältet Kartmarkörer</string>
+    <string name="simulation_constant_mode_desc">Simuleringen kommer utföras med konstant vald hastighet.</string>
 </resources>
