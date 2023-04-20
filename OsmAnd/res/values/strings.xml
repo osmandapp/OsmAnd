@@ -18,6 +18,9 @@ You will be able to pair this sensor again at any time.</string>
     <string name="external_device_disconnected">Disconnected</string>
     <string name="external_device_connected">Connected</string>
     <string name="external_device_menu_forget">Forget</string>
+    <string name="n_tracks">%1$s tracks</string>
+    <string name="shared_string_remove_folder">Remove folder</string>
+    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="weather_download_error">Could not download %1$s tiles.</string>
     <string name="proxy_port_max_warning">Maximum port value is %1$s</string>
     <string name="external_device_characteristic_speed">Speed</string>
