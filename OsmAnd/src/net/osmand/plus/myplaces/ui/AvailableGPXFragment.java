@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.ui;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
@@ -63,6 +64,7 @@ import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
+import net.osmand.plus.myplaces.controller.GPXFolderOptionsController;
 import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -1125,30 +1127,38 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				ch.setVisibility((selectionMode && !(groupPosition == 0 && isShowingSelection())) ? View.VISIBLE : View.GONE);
 				ch.setChecked(selectedGroups.contains(groupPosition));
 
-				ch.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (ch.isChecked()) {
-							selectedItems.addAll(data.get(category.get(getGroupPosition(groupPosition))));
-							selectedGroups.add(groupPosition);
-						} else {
-							selectedItems.removeAll(data.get(category.get(getGroupPosition(groupPosition))));
-							selectedGroups.remove(groupPosition);
-						}
-						allGpxAdapter.notifyDataSetInvalidated();
-						updateSelectionMode(actionMode);
+				ch.setOnClickListener(view -> {
+					if (ch.isChecked()) {
+						selectedItems.addAll(data.get(category.get(getGroupPosition(groupPosition))));
+						selectedGroups.add(groupPosition);
+					} else {
+						selectedItems.removeAll(data.get(category.get(getGroupPosition(groupPosition))));
+						selectedGroups.remove(groupPosition);
 					}
+					allGpxAdapter.notifyDataSetInvalidated();
+					updateSelectionMode(actionMode);
 				});
 				v.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {
 				CheckBox ch = v.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
+				ImageView icon = v.findViewById(R.id.category_icon);
 				if (isSelectedGroup(groupPosition)) {
 					setCategoryIcon(app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), v);
 				} else {
 					setCategoryIcon(app, 0, v, !nightMode);
+					if (!Algorithms.isEmpty(group)) {
+						icon.setOnClickListener(view -> {
+							FragmentActivity activity = getMyActivity();
+							if (activity != null) {
+								File root = app.getAppPath(GPX_INDEX_DIR);
+								File directory = new File(root, group);
+								GPXFolderOptionsController.showDialog(activity, directory);
+							}
+						});
+					}
 				}
-				v.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
+				icon.setVisibility(View.VISIBLE);
 			}
 
 			adjustIndicator(app, groupPosition, isExpanded, v, !nightMode);
