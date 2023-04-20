@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.controllers;
 
+import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
+import static net.osmand.plus.base.dialog.data.DialogExtra.SELECTED_INDEX;
+import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 import static net.osmand.plus.settings.fragments.ApplyQueryType.BOTTOM_SHEET;
 
 import androidx.annotation.NonNull;
@@ -7,20 +10,18 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.base.dialog.uidata.DialogDisplayData;
-import net.osmand.plus.base.dialog.uidata.DialogDisplayItem;
-import net.osmand.plus.base.dialog.interfaces.IDialogDisplayDataProvider;
-import net.osmand.plus.base.dialog.interfaces.IDialogItemSelected;
+import net.osmand.plus.base.dialog.data.DisplayData;
+import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MapFocusDialogController implements IDialogDisplayDataProvider, IDialogItemSelected {
+public class MapFocusDialogController implements IDisplayDataProvider, IDialogItemSelected {
 
 	public static final String PROCESS_ID = "select_map_focus";
 
@@ -42,40 +43,43 @@ public class MapFocusDialogController implements IDialogDisplayDataProvider, IDi
 
 	@Nullable
 	@Override
-	public DialogDisplayData getDialogDisplayData(@NonNull String processId) {
+	public DisplayData getDisplayData(@NonNull String processId) {
+		int dividerStartPadding = app.getResources()
+				.getDimensionPixelSize(R.dimen.bottom_sheet_divider_margin_start);
 		UiUtilities iconsCache = app.getUIUtilities();
 		boolean nightMode = !settings.isLightContentForMode(appMode);
-
-		DialogDisplayData displayData = new DialogDisplayData();
-		List<DialogDisplayItem> items = new ArrayList<>();
-		displayData.setTitle(app.getString(R.string.display_position));
 		int profileColor = appMode.getProfileColor(nightMode);
+		int profileColorAlpha = ColorUtilities.getColorWithAlpha(profileColor, 0.3f);
+
+		DisplayData displayData = new DisplayData();
+		displayData.putExtra(TITLE, app.getString(R.string.display_position));
+		displayData.putExtra(BACKGROUND_COLOR, profileColorAlpha);
 		for (MapFocus mapFocus : MapFocus.values()) {
-			DialogDisplayItem item = new DialogDisplayItem();
-			item.title = app.getString(mapFocus.getTitleId());
-			item.layoutId = R.layout.bottom_sheet_item_with_bottom_descr_and_radio_btn;
+			DisplayItem item = new DisplayItem()
+					.setTitle(app.getString(mapFocus.getTitleId()))
+					.setLayoutId(R.layout.bottom_sheet_item_with_bottom_descr_and_radio_btn)
+					.setNormalIcon(iconsCache.getThemedIcon(mapFocus.getIconId()))
+					.setSelectedIcon(iconsCache.getPaintedIcon(mapFocus.getIconId(), profileColor))
+					.setControlsColor(profileColor)
+					.setTag(mapFocus);
 			if (mapFocus == MapFocus.AUTOMATIC) {
-				item.description = app.getString(R.string.display_position_automatic_descr);
+				item.setDescription(app.getString(R.string.display_position_automatic_descr));
 			}
-			item.normalIcon = iconsCache.getThemedIcon(mapFocus.getIconId());
-			item.selectedIcon = iconsCache.getPaintedIcon(mapFocus.getIconId(), profileColor);
-			item.customControlsColor = profileColor;
-			item.addDividerAfter = mapFocus != MapFocus.AUTOMATIC;
-			item.tag = mapFocus;
-			items.add(item);
+			if (mapFocus != MapFocus.AUTOMATIC) {
+				item.setShowBottomDivider(true, dividerStartPadding);
+			}
+			displayData.addDisplayItem(item);
 		}
-		displayData.setDisplayItems(items);
 
 		int selectedValue = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(appMode);
 		int selectedItemIndex = MapFocus.getByValue(selectedValue).ordinal();
-		displayData.setSelectedItemIndex(selectedItemIndex);
+		displayData.putExtra(SELECTED_INDEX, selectedItemIndex);
 		return displayData;
 	}
 
 	@Override
-	public void onDialogItemSelected(@NonNull String processId,
-	                                 @NonNull DialogDisplayItem selected) {
-		Object newValue = selected.tag;
+	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem selected) {
+		Object newValue = selected.getTag();
 		if (newValue instanceof MapFocus) {
 			String prefId = settings.POSITION_PLACEMENT_ON_MAP.getId();
 			MapFocus mapFocus = (MapFocus) newValue;

@@ -6,16 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.dialog.uidata.DialogDisplayData;
-import net.osmand.plus.base.dialog.uidata.DialogDisplayItem;
-import net.osmand.plus.base.dialog.interfaces.IDialogDisplayDataProvider;
-import net.osmand.plus.base.dialog.interfaces.IDialogItemSelected;
+import net.osmand.plus.base.dialog.data.DisplayData;
+import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 
-public class CompassModeDialogController implements IDialogDisplayDataProvider, IDialogItemSelected {
+public class CompassModeDialogController implements IDisplayDataProvider, IDialogItemSelected {
 
 	public static final String PROCESS_ID = "select_compass_mode_on_preferences_screen";
 
@@ -35,14 +35,14 @@ public class CompassModeDialogController implements IDialogDisplayDataProvider, 
 
 	@Nullable
 	@Override
-	public DialogDisplayData getDialogDisplayData(@NonNull String processId) {
+	public DisplayData getDisplayData(@NonNull String processId) {
 		return displayDataCreator.createDisplayData();
 	}
 
 	@Override
 	public void onDialogItemSelected(@NonNull String processId,
-	                                 @NonNull DialogDisplayItem selected) {
-		Object newValue = selected.tag;
+	                                 @NonNull DisplayItem selected) {
+		Object newValue = selected.getTag();
 		if (newValue instanceof CompassMode) {
 			OsmandSettings settings = app.getSettings();
 			String prefId = settings.ROTATE_MAP.getId();
