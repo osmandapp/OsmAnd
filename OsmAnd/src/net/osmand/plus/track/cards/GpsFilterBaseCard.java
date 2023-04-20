@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
-import net.osmand.plus.track.helpers.savegpx.SaveGpxHelper;
+import net.osmand.plus.track.helpers.savetrack.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.ColorUtilities;
