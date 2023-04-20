@@ -374,6 +374,7 @@ public class RoutingContext {
 		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
 		List<RoutingSubregionTile> collection = null;
+		System.out.println("START");
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
 			try {
@@ -385,6 +386,7 @@ public class RoutingContext {
 					}
 				}
 				if (intersect) {
+					System.out.println(r.getKey().getRegionName());
 //					long now = System.nanoTime();
 					// int rg = r.getValue().get(0).routeReg.regionsRead;
 					
@@ -416,7 +418,12 @@ public class RoutingContext {
 		if (calculationProgress != null) {
 			calculationProgress.timeToLoadHeaders += (System.nanoTime() - now);
 		}
-	
+		if (collection == null) {
+			System.out.println(String.format("No object found %d, %d, %d: %.5f %.5f - %.5f %.5f", tileX, tileY,
+					(31 - zoomToLoad), MapUtils.get31LatitudeY(tileY << zoomToLoad),
+					MapUtils.get31LongitudeX(tileX << zoomToLoad), MapUtils.get31LatitudeY((tileY + 1) << zoomToLoad),
+					MapUtils.get31LongitudeX((tileX + 1) << zoomToLoad)));
+		}
 		return collection;
 	}
 

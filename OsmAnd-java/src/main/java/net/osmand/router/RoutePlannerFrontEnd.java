@@ -762,7 +762,7 @@ public class RoutePlannerFrontEnd {
 		if (!intermediatesEmpty) {
 			targets.addAll(intermediates);
 		}
-		if (needRequestPrivateAccessRouting(ctx, targets)) {
+		if (ctx.calculationMode != RouteCalculationMode.BASE && needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		double maxDistance = MapUtils.getDistance(start, end);

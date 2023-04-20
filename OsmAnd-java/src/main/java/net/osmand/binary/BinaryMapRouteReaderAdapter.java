@@ -1120,6 +1120,7 @@ public class BinaryMapRouteReaderAdapter {
 					readRouteTree(rs, null, req.contains(rs.left, rs.top, rs.right, rs.bottom) ? -1 : 1, false);
 					codedIS.popLimit(old);
 				}
+				
 				searchRouteRegionTree(req, rs.subregions, toLoad);
 
 				if (rs.shiftToData != 0) {
