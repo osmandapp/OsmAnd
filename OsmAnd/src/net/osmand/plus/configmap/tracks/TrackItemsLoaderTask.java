@@ -1,7 +1,9 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.track.helpers.GPXFolderUtils.getSubfolderTitle;
+import static net.osmand.plus.track.helpers.GPXFolderUtils.listFilesSorted;
+import static net.osmand.plus.track.helpers.GpxUiHelper.isGpxFile;
 
 import android.os.AsyncTask;
 
@@ -9,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.myplaces.ui.LoadGpxInfosTask;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
@@ -63,16 +64,14 @@ public class TrackItemsLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	private void loadGPXFolder(@NonNull File dir, @NonNull TracksSortByMode sortByMode,
 	                           @NonNull List<TrackItem> progress, @NonNull String subfolder) {
-		File[] listFiles = LoadGpxInfosTask.listFilesSorted(sortByMode, dir);
+		File[] listFiles = listFilesSorted(sortByMode, dir);
 		if (Algorithms.isEmpty(listFiles)) {
 			return;
 		}
 		for (File file : listFiles) {
-			String name = file.getName();
 			if (file.isDirectory()) {
-				String sub = subfolder.isEmpty() ? name : subfolder + File.separator + name;
-				loadGPXFolder(file, sortByMode, progress, sub);
-			} else if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
+				loadGPXFolder(file, sortByMode, progress, getSubfolderTitle(file, subfolder));
+			} else if (isGpxFile(file)) {
 				TrackItem trackItem = new TrackItem(file);
 				trackItem.setDataItem(getDataItem(trackItem));
 				trackItems.add(trackItem);
