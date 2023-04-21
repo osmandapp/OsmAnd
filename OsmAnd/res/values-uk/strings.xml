@@ -2124,7 +2124,7 @@
     <string name="routing_attr_height_obstacles_name">Використовувати дані висоти</string>
     <string name="rendering_attr_depthContours_description">Показувати ізолінії та точки глибин.</string>
     <string name="rendering_attr_depthContours_name">Ізолінії морських глибин (Ізобати)</string>
-    <string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
+    <string name="auto_split_recording_title">Авторозрив запису після перерви</string>
     <string name="auto_split_recording_descr">Починати новий відрізок після 6 хвилинної перерви, новий трек після 2-годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
     <string name="select_gpx_folder">Оберіть теку для файлів GPX</string>
     <string name="navigate_point_olc_info_invalid">Неправильний OLC
