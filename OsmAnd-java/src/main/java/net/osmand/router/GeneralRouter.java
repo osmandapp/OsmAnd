@@ -933,7 +933,8 @@ public class GeneralRouter implements VehicleRouter {
 		public static final int GREAT_EXPRESSION = 2;
 		public static final int EQUAL_EXPRESSION = 3;
 		public static final int MIN_EXPRESSION = 4;
-		
+		public static final int MAX_EXPRESSION = 5;
+
 		public RouteAttributeExpression(String[] vs, String valueType, int expressionId) {
 			this.expressionType = expressionId;
 			this.values = vs;
@@ -964,7 +965,7 @@ public class GeneralRouter implements VehicleRouter {
 			if (Double.isNaN(f1) || Double.isNaN(f2)) {
 				return false;
 			}
-			if (expressionType == MIN_EXPRESSION) {
+			if (expressionType == MIN_EXPRESSION || expressionType == MAX_EXPRESSION) {
 				return true;
 			}
 			if (expressionType == LESS_EXPRESSION) {
@@ -980,11 +981,13 @@ public class GeneralRouter implements VehicleRouter {
 		public Double calculateExpr(BitSet types, ParameterContext paramContext) {
 			double f1 = calculateExprValue(0, types, paramContext);
 			double f2 = calculateExprValue(1, types, paramContext);
-			if (Double.isNaN(f1) || Double.isNaN(f2)) {
-				return null;
-			}
-			if (expressionType == MIN_EXPRESSION) {
-				return Math.min(f1, f2);
+			if (!Double.isNaN(f1) && !Double.isNaN(f2)) {
+				switch (expressionType) {
+					case MIN_EXPRESSION:
+						return Math.min(f1, f2);
+					case MAX_EXPRESSION:
+						return Math.max(f1, f2);
+				}
 			}
 			return null;
 		}
@@ -996,8 +999,8 @@ public class GeneralRouter implements VehicleRouter {
 				return cacheValue.doubleValue();
 			}
 			Object o = null;
-			if (value instanceof String && value.toString().startsWith("$")) {
-				BitSet mask = tagRuleMask.get(value.toString().substring(1));
+			if (value != null && value.startsWith("$")) {
+				BitSet mask = tagRuleMask.get(value.substring(1));
 				if (mask != null && mask.intersects(types)) {
 					BitSet findBit = new BitSet(mask.length());
 					findBit.or(mask);
@@ -1005,10 +1008,10 @@ public class GeneralRouter implements VehicleRouter {
 					int v = findBit.nextSetBit(0);
 					o = parseValueFromTag(v, valueType);
 				}
-			} else if (value instanceof String && value.equals(":incline")) {
+			} else if (value != null && value.equals(":incline")) {
 				return paramContext.incline;
-			} else if (value instanceof String && value.toString().startsWith(":")) {
-				String p = ((String) value).substring(1);
+			} else if (value != null && value.startsWith(":")) {
+				String p = value.substring(1);
 				if (paramContext != null && paramContext.vars.containsKey(p)) {
 					o = parseValue(paramContext.vars.get(p), valueType);
 				}
@@ -1150,6 +1153,11 @@ public class GeneralRouter implements VehicleRouter {
 					RouteAttributeExpression.MIN_EXPRESSION));
 		}
 
+		public void registerMaxExpression(String value1, String value2, String valueType) {
+			expressions.add(new RouteAttributeExpression(new String[]{value1, value2}, valueType,
+					RouteAttributeExpression.MAX_EXPRESSION));
+		}
+
 		public void registerAndParamCondition(String param, boolean not) {
 			param = not ? "-" + param : param;
 			parameters.add(param);
@@ -1157,9 +1165,13 @@ public class GeneralRouter implements VehicleRouter {
 
 		public synchronized Object eval(BitSet types, ParameterContext paramContext) {
 			if (matches(types, paramContext)) {
-				if (!expressions.isEmpty()
-						&& expressions.get(0).expressionType == RouteAttributeExpression.MIN_EXPRESSION) {
-					selectValue = expressions.get(0).calculateExpr(types, paramContext);
+				if (!expressions.isEmpty()) {
+					RouteAttributeExpression routeAttributeExpression = expressions.get(0);
+					int expressionType = routeAttributeExpression.expressionType;
+					if (expressionType == RouteAttributeExpression.MIN_EXPRESSION
+							|| expressionType == RouteAttributeExpression.MAX_EXPRESSION) {
+						selectValue = routeAttributeExpression.calculateExpr(types, paramContext);
+					}
 				}
 				return calcSelectValue(types, paramContext);
 			}
