@@ -1499,7 +1499,7 @@
     <string name="poi_deleted_localy">Merkisstaðnum verður eytt um leið og þú sendir inn breytingarnar þínar</string>
     <string name="save_poi_without_poi_type_message">Vista merkisstað á þess að gefa upp tegund hans\?</string>
     <string name="proxy_pref_descr">Tilgreindu milliþjón (proxy - vefsel).</string>
-    <string name="avoid_roads_msg">Þú getur sett í gang varaleið með því að velja götur sem á að forðast</string>
+    <string name="avoid_roads_msg">Settu í gang varaleið með því að velja vegi sem á að forðast</string>
     <string name="rendering_value_germanRoadAtlas_name">Þýsk vegakort</string>
     <string name="rendering_value_highContrastRoads_name">Götukort með mikil birtuskil</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerísk vegakort</string>
@@ -2056,7 +2056,7 @@
     <string name="display_zoom_level">Aðdráttarstig birtingar: %1$s</string>
     <string name="animate_my_location">Framkvæma hreyfingar á eigin staðsetningu</string>
     <string name="type_address">Settu inn heimilisfang</string>
-    <string name="type_city_town">Settu inn borg eða bæjarfélag</string>
+    <string name="type_city_town">Settu inn borg, bæ eða sveitarfélag</string>
     <string name="type_postcode">Settu inn póstnúmer</string>
     <string name="select_postcode">Leita eftir póstnúmeri</string>
     <string name="quick_action_auto_zoom">Sjálfvirkur aðdráttur korts af/á</string>
@@ -2488,7 +2488,7 @@
     <string name="shared_string_current">Núverandi</string>
     <string name="last_intermediate_dest_description">Bætir inn millistoppi</string>
     <string name="first_intermediate_dest_description">Bætir við fyrsta stoppi</string>
-    <string name="subsequent_dest_description">Færa áfangastað upp, og búa til áfangastað</string>
+    <string name="subsequent_dest_description">Færa áfangastað upp, og búa hann til</string>
     <string name="osm_live_header">Þessi áskrift virkjar uppfærslur á klukkustundar fresti fyrir öll kort um allan heim.
 \n Hluti innkomunnar fer til OSM-samfélagsins og er greitt fyrir hvert framlag til OSM.
 \n Ef þér líkar við OsmAnd og OSM og vilt styðja við verkefnið og fá stuðning frá þeim, þá er þetta kjörin leið.</string>
@@ -4071,7 +4071,7 @@
     <string name="shared_string_feet">fet</string>
     <string name="srtm_unit_format">Tilbrigði eininga hæðarlína</string>
     <string name="srtm_download_list_help_message">OsmAnd býður upp á hæðalínugögn í metrum og fetum. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
-    <string name="srtm_download_single_help_message">Veldu rétt snið eininga. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
+    <string name="srtm_download_single_help_message">Veldu tilbrigði. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
     <string name="route_line_use_gradient_coloring">Leiðarlína er lituð af halla hæðar.</string>
     <string name="shared_string_min_height">Lágmarkshæð</string>
     <string name="shared_string_max_height">Hámarkshæð</string>
@@ -4876,7 +4876,6 @@
     <string name="rendering_attr_depthContourWidth_name">Breidd línu</string>
     <string name="map_widget_altitude_map_center">Hæð: miðja korts</string>
     <string name="shared_string_terms_of_use">Notkunarskilmála</string>
-    
     <string name="rendering_attr_weatherWindSpeedContours_name">Vindhraðalínur</string>
     <string name="mtb_segment_classification">Flokkun búta</string>
     <string name="rendering_attr_showMtbScale_name">Birta fjallahjólreiðakvarða</string>
