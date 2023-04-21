@@ -3134,7 +3134,7 @@
     <string name="list_of_installed_plugins">Installerede udvidelser</string>
     <string name="configure_navigation">Konfigurer navigation</string>
     <string name="general_settings_profile_descr">Tema, enheder, region</string>
-    <string name="configure_profile">Konfigurere profil</string>
+    <string name="configure_profile">Konfigurer profil</string>
     <string name="screen_alerts_descr">Advarsler vises nederst til venstre under navigationen.</string>
     <string name="switch_profile">Skift profil</string>
     <string name="language_and_output">Sprog og output</string>
