@@ -4631,7 +4631,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Isolíneas de presión</string>
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
     <string name="rendering_attr_weatherTempContours_name">Isolíneas de temperatura</string>
-    <string name="map_widget_trip_recording_downhill">Descenso</string>
+    <string name="map_widget_trip_recording_downhill">Cuesta abajo</string>
     <string name="arrival_time_widget_desc">Hora de llegada al punto de destino.</string>
     <string name="bearing_desc">Muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados o milirradianes).</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
@@ -4650,7 +4650,7 @@
     <string name="route_maneuvers">Maniobras de la ruta</string>
     <string name="explore_plans">Explorar planes</string>
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
-    <string name="map_widget_trip_recording_uphill">Ascenso</string>
+    <string name="map_widget_trip_recording_uphill">Cuesta arriba</string>
     <string name="coordinates_widget_secondary_desc">El formato de las coordenadas puede cambiarse en %1$s → %2$s → %3$s.</string>
     <string name="elevation_profile_widget_desc">Muestra el perfil de elevación y pendiente de la ruta actual.</string>
     <string name="mapillary_widget_desc">Proporciona un acceso rápido a la aplicación Mapillary para añadir imágenes a nivel de calle.</string>
@@ -5135,4 +5135,58 @@
     <string name="shutter_sound">Sonido del obturador</string>
     <string name="proxy_port_max_warning">La altura máxima del puerto es de %1$s</string>
     <string name="weather_download_error">No se pudieron descargar %1$s mosaicos.</string>
+    <string name="external_device_forget_sensor">Olvídate del sensor</string>
+    <string name="external_device_forget_sensor_description">El sensor será eliminado de la lista. Podrás volver a emparejar este sensor en cualquier momento.</string>
+    <string name="external_device_disconnected">Desconectado</string>
+    <string name="external_device_connected">Conectado</string>
+    <string name="external_device_characteristic_battery_level">Batería</string>
+    <string name="external_device_characteristic_gear_ratio">Reductores de velocidad</string>
+    <string name="external_device_characteristic_cadence">Ritmo</string>
+    <string name="external_device_characteristic_heart_rate">Ritmo cardiaco</string>
+    <string name="external_device_characteristic_systolic">Sístole</string>
+    <string name="external_device_characteristic_diastolic">Diastole</string>
+    <string name="external_device_characteristic_arterial_pressure">Presión arterial</string>
+    <string name="external_device_characteristic_cuff_pressure">Presión del brazalete</string>
+    <string name="external_device_characteristic_pulse_rate">Frecuencia cardíaca</string>
+    <string name="external_device_characteristic_stride_length">Longitud de los pasos</string>
+    <string name="external_device_characteristic_temperature">Temperatura</string>
+    <string name="external_device_details_information">Información</string>
+    <string name="external_device_details_received_data">Datos recibidos</string>
+    <string name="external_device_details_connection">Conexión</string>
+    <string name="external_device_details_battery">Batería</string>
+    <string name="bluetooth_connected">Conectado, %s</string>
+    <string name="external_device_ble">Bluetooth de baja energía</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Encontrado: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth no compatible</string>
+    <string name="ble_search_again">Buscar de nuevo</string>
+    <string name="ant_plus_nothing_found_text">No se puede encontrar ningún sensor</string>
+    <string name="ant_plus_nothing_found_description">Asegúrate:
+\n- El Bluetooth está encendido
+\n- El sensor está activado
+\n- Este dispositivo se encuentra cerca del sensor</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth está apagado</string>
+    <string name="ant_plus_bluetooth_off_description">Enciende los sensores de búsqueda y emparejamiento del Bluetooth.</string>
+    <string name="ant_plus_searching_text">Buscando los sensores</string>
+    <string name="ant_plus_searching_text_description">Por favor, mantén el dispositivo cerca del sensor. Debe activar el sensor para que OsmAnd pueda encontrarlo.</string>
+    <string name="ant_plus_help_title">No se que tipo de sensor tengo</string>
+    <string name="ant_plus_searching">Buscando</string>
+    <string name="ant_plus_pair_new_sensor">Emparejar un nuevo sensor</string>
+    <string name="ant_plus_open_settings">Abrir los ajustes</string>
+    <string name="ant_plus_pair_new_sensor_ble">Emparejar un sensor Bluetooth LE</string>
+    <string name="learn_more_about_sensors_link">Obtén más información sobre los sensores.</string>
+    <string name="external_device_low_battery">Batería baja</string>
+    <string name="external_device_characteristic_distance">Distancia</string>
+    <string name="external_device_details_total_distance">Distancia total</string>
+    <string name="external_device_menu_forget">Olvidar</string>
+    <string name="external_device_characteristic_speed">Velocidad</string>
+    <string name="external_device_characteristic_total_distance">Distancia total</string>
+    <string name="external_device_details_speed">Velocidad</string>
+    <string name="external_device_details_distance">Distancia</string>
+    <string name="external_device_details_connect">Conectar</string>
+    <string name="external_device_details_pair">Emparejar</string>
+    <string name="external_device_details_disconnect">Desconectar</string>
+    <string name="bluetooth_disconnected">Desconectado, %s</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Emparejar un sensor Ant+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Puedes emparejar sensores Bluetooth LE y ANT+ con OsmAnd.</string>
 </resources>
