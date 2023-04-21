@@ -120,7 +120,7 @@
     <string name="use_fluorescent_overlays">Флуоресцентні кольори</string>
     <string name="use_fluorescent_overlays_descr">Використовувати флуоресцентні кольори для показу треків та маршрутів.</string>
     <string name="offline_edition">Оффлайн редагування</string>
-    <string name="offline_edition_descr">Якщо увімкнено редагування в режимі офлайн, то зміни спочатку буде збережено локально та надіслані за запитом, інакше зміни будуть надіслані негайно.</string>
+    <string name="offline_edition_descr">Якщо увімкнено редагування в офлайн, то зміни спочатку буде збережено локально та надіслані за запитом, інакше зміни будуть надіслані негайно.</string>
     <string name="update_poi_does_not_change_indexes">Зміни точок інтересу (POI) в застосунку не впливають на завантажені файли мап — вони зберігаються в окремий файл на вашому пристрої.</string>
     <string name="local_openstreetmap_uploading">Надсилання…</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/Нотатки надіслано</string>
@@ -138,7 +138,7 @@
     <string name="show_current_gpx_title">Показувати поточний трек</string>
     <string name="free_version_message">%1$s мап для завантаження або оновлення.</string>
     <string name="free_version_title">Безплатна версія</string>
-    <string name="poi_context_menu_showdescription">Показати подробиці точки інтересу.</string>
+    <string name="poi_context_menu_showdescription">Показати опис точки інтересу.</string>
     <string name="index_name_north_america">Північна Америка</string>
     <string name="index_name_us">Північна Америка — США</string>
     <string name="index_name_central_america">Центральна Америка</string>
@@ -420,7 +420,7 @@
     <string name="poi_context_menu_delete">Вилучити POI</string>
     <string name="rotate_map_compass_opt">За компасом</string>
     <string name="rotate_map_bearing_opt">За напрямком руху</string>
-    <string name="rotate_map_north_opt">Фіксовано (північ угорі)</string>
+    <string name="rotate_map_north_opt">Фіксовано (північ вгорі)</string>
     <string name="rotate_map_to_descr">Орієнтація мапи:</string>
     <string name="rotate_map_to">Орієнтація мапи</string>
     <string name="show_route">Подробиці маршруту</string>
@@ -489,9 +489,9 @@
     <string name="search_poi_location">Очікування сигналу…</string>
     <string name="search_near_map">Шукати поблизу поточного центру мапи</string>
     <string name="search_nearby">Шукати поруч</string>
-    <string name="map_orientation_default">Типово</string>
-    <string name="map_orientation_portrait">Портрет</string>
-    <string name="map_orientation_landscape">Альбом</string>
+    <string name="map_orientation_default">За орієнтацією пристрою</string>
+    <string name="map_orientation_portrait">Вертикально</string>
+    <string name="map_orientation_landscape">Горизонтально</string>
     <string name="map_screen_orientation">Орієнтація екрана</string>
     <string name="map_screen_orientation_descr">Виберіть орієнтацію екрана.</string>
     <string name="opening_hours_not_supported">Формат годин роботи не може бути змінений.</string>
@@ -636,8 +636,8 @@
     <string name="app_mode_car">Автівка</string>
     <string name="app_mode_bicycle">Велосипед</string>
     <string name="app_mode_pedestrian">Пішохід</string>
-    <string name="position_on_map_center">Центр</string>
-    <string name="position_on_map_bottom">Униз</string>
+    <string name="position_on_map_center">В центрі</string>
+    <string name="position_on_map_bottom">Внизу</string>
     <string name="navigate_point_top_text">Широта та довгота у вибраному форматі (Г - градуси, Х - хвилини, С - секунди)</string>
     <string name="navigate_point_latitude">Широта</string>
     <string name="navigate_point_longitude">Довгота</string>
@@ -1254,9 +1254,9 @@
     <string name="shared_string_and">та</string>
     <string name="shared_string_or">або</string>
     <string name="auto_zoom_none">Без автомасштабування</string>
-    <string name="auto_zoom_close">Докладніше</string>
+    <string name="auto_zoom_close">Докладний масштаб</string>
     <string name="auto_zoom_far">Середній масштаб</string>
-    <string name="auto_zoom_farthest">Загальніше</string>
+    <string name="auto_zoom_farthest">Загальний масштаб</string>
     <string name="route_descr_destination">Пункт призначення</string>
     <string name="interrupt_music_descr">Голосові повідомлення призупиняють відтворення музики.</string>
     <string name="interrupt_music">Призупиняти музику</string>
@@ -1518,8 +1518,8 @@
     <string name="specified_directiory_not_writeable">Не вдалося створити мапи у вказаній теці</string>
     <string name="copying_osmand_file_failed">Не вдалося перемістити файли</string>
     <string name="storage_directory_external">Зовнішнє сховище</string>
-    <string name="storage_directory_multiuser">Багатокористувацьке сховище</string>
-    <string name="storage_directory_internal_app">Внутрішня памʼять застосунку</string>
+    <string name="storage_directory_multiuser">Спільне сховище для декількох користувачів</string>
+    <string name="storage_directory_internal_app">Внутрішнє сховище OsmAnd</string>
     <string name="storage_directory_manual">Вказано вручну</string>
     <string name="storage_directory_default">Внутрішня памʼять</string>
     <string name="storage_directory">Сховище мап</string>
@@ -1927,7 +1927,7 @@
     <string name="storage_directory_shared">Спільне сховище</string>
     <string name="shared_string_topbar">Верхня панель</string>
     <string name="full_report">Повний звіт</string>
-    <string name="recalculate_route">Перестворити маршрут</string>
+    <string name="recalculate_route">Перестворювати маршрут</string>
     <string name="open_street_map_login_and_pass">Логін та пароль OSM</string>
     <string name="number_of_recipients">Кількість одержувачів</string>
     <string name="osm_user_stat">Правки %1$s, ранг %2$s, всього правок %3$s</string>
@@ -2430,7 +2430,7 @@
     <string name="quick_action_resume_pause_navigation">Призупинити/відновити навігацію</string>
     <string name="quick_action_resume_pause_navigation_descr">Кнопка для призупинення чи відновлення навігації.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показати діалог завершення навігації</string>
-    <string name="quick_action_start_stop_navigation">Почати/зупинити навігацію</string>
+    <string name="quick_action_start_stop_navigation">Розпочати/закінчити навігацію</string>
     <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб почати або закінчити навігацію.</string>
     <string name="live_monitoring_max_interval_to_send">Час буферизації для онлайн моніторингу</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Вкажіть час буферизації для збереження локацій для їх подальшого надсилання за відсутності з\'єднання з мережею</string>
@@ -2499,7 +2499,7 @@
     <string name="move_to_history">Перемістити до історії</string>
     <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску застосунку.</string>
     <string name="show_guide_line">Показувати напрямні лінії</string>
-    <string name="show_arrows_on_the_map">Показати стрілки на мапі</string>
+    <string name="show_arrows_on_the_map">Показувати стрілки на мапі</string>
     <string name="show_passed">Показати проходження</string>
     <string name="hide_passed">Приховати проходження</string>
     <string name="shared_string_markers">Позначки</string>
@@ -2530,9 +2530,9 @@
     <string name="import_as_gpx">Імпортувати як GPX-файл</string>
     <string name="import_as_favorites">Імпортувати як Закладки</string>
     <string name="import_file">Імпортувати файл</string>
-    <string name="tap_on_map_to_hide_interface_descr">Дотик на мапі змінює кнопки керування та віджети.</string>
+    <string name="tap_on_map_to_hide_interface_descr">Натискання на мапу перемикає елементи керування та віджети.</string>
     <string name="tap_on_map_to_hide_interface">Повноекранний режим</string>
-    <string name="mark_passed">Позначити пройденим</string>
+    <string name="mark_passed">Пройдено</string>
     <string name="digits_quantity">Кількість десяткових цифр</string>
     <string name="show_number_pad">Показати цифрову панель</string>
     <string name="shared_string_paste">Вставити</string>
@@ -2546,7 +2546,7 @@
     <string name="add_group">Додати групу</string>
     <string name="add_group_descr">Імпортувати групи із закладок або маршрутних точок треку.</string>
     <string name="empty_state_markers_active">Створіть позначки на мапі!</string>
-    <string name="empty_state_markers_active_desc">Довге або коротке натискання на потрібне місце, а потім на прапорець позначки.</string>
+    <string name="empty_state_markers_active_desc">Довге або коротке натискання на потрібне місце, після чого натисніть на «Позначка» в контекстному меню.</string>
     <string name="empty_state_markers_groups">Імпортувати групи</string>
     <string name="empty_state_markers_groups_desc">Імпортувати групи закладок або маршрутних точок треку як позначки.</string>
     <string name="empty_state_markers_history_desc">Позначки, що відзначено як пройдені, зʼявляться на цьому екрані.</string>
@@ -2555,7 +2555,7 @@
     <string name="show_guide_line_descr">Показувати напрямну від вашого місця розташування до увімкнених позначок.</string>
     <string name="show_arrows_descr">Показувати одну або дві стрілки, що вказують напрямок на увімкнені позначки.</string>
     <string name="distance_indication_descr">Виберіть спосіб показу відстані до увімкнених позначок.</string>
-    <string name="active_markers_descr">Виберіть, скільки напрямних показувати.</string>
+    <string name="active_markers_descr">Виберіть, скільки індикаторів напрямків показувати.</string>
     <string name="shared_string_right">Направо</string>
     <string name="shared_string_left">Наліво</string>
     <string name="looking_for_tracks_with_waypoints">Пошук треків з маршрутними точками</string>
@@ -2566,8 +2566,8 @@
     <string name="shared_string_edited">Змінено</string>
     <string name="shared_string_added">Додано</string>
     <string name="marker_activated">Позначку %s увімкнено.</string>
-    <string name="one_tap_active_descr">Натискання на позначку на мапі перемістить її на перше місце в списку увімкнених позначок, не відкриваючи контекстне меню.</string>
-    <string name="one_tap_active">Вимикання одним дотиком</string>
+    <string name="one_tap_active_descr">Натискання на позначку на мапі перемістить її на перше місце в списку активних позначок, не відкриваючи контекстне меню.</string>
+    <string name="one_tap_active">Вмикання одним дотиком</string>
     <string name="empty_state_av_notes">Робіть примітки!</string>
     <string name="empty_state_av_notes_desc">Додайте аудіо, відео або фотопримітку в будь-яку точку на мапі використовуючи віджет або контекстне меню.</string>
     <string name="notes_by_date">Примітки за датою</string>
@@ -2877,9 +2877,9 @@
     <string name="routing_attr_avoid_bus_description">Уникати автобусів і тролейбусів</string>
     <string name="routing_attr_avoid_share_taxi_name">Уникати маршрутних таксі</string>
     <string name="routing_attr_avoid_share_taxi_description">Уникати маршрутних таксі</string>
-    <string name="routing_attr_avoid_train_name">Уник. потягів</string>
+    <string name="routing_attr_avoid_train_name">Уникати потягів</string>
     <string name="routing_attr_avoid_train_description">Уникати потягів</string>
-    <string name="routing_attr_avoid_subway_name">Уник. метро</string>
+    <string name="routing_attr_avoid_subway_name">Уникати метро</string>
     <string name="routing_attr_avoid_subway_description">Уникати метро та легкого рейкового транспорту</string>
     <string name="routing_attr_avoid_ferry_name">Уникати поромних переправ</string>
     <string name="routing_attr_avoid_ferry_description">Уникати поромних переправ</string>
@@ -2887,7 +2887,7 @@
     <string name="shared_string_milliradians">Мілірадіани</string>
     <string name="angular_measeurement">Кутові одиниці</string>
     <string name="angular_measeurement_descr">Змінити одиниці вимірювання азимута.</string>
-    <string name="avoid_pt_types_descr">Оберіть види громадського транспорту, яких треба уникати при навігації:</string>
+    <string name="avoid_pt_types_descr">Оберіть види громадського транспорту, яких треба уникати:</string>
     <string name="quick_action_day_night_mode">%s режим</string>
     <string name="avoid_pt_types">Уникати видів транспорту…</string>
     <string name="save_poi_value_exceed_length_title">Довжина значення \"%s\"</string>
@@ -3015,7 +3015,7 @@
     <string name="select_nav_profile_dialog_title">Оберіть тип навігації</string>
     <string name="base_profile_descr_car">Автомобіль, вантажівка, мотоцикл</string>
     <string name="base_profile_descr_bicycle">MTB (велосипед), мопед, верхи</string>
-    <string name="base_profile_descr_pedestrian">Пішки, піший туризм, біг</string>
+    <string name="base_profile_descr_pedestrian">Пересування пішки, піший туризм, біг</string>
     <string name="base_profile_descr_public_transport">Види громадського транспорту</string>
     <string name="base_profile_descr_boat">Корабель, веслування, вітрильний спорт</string>
     <string name="base_profile_descr_aircraft">Літак, планер</string>
@@ -3037,8 +3037,8 @@
     <string name="edit_profile_setup_map_subtitle">Оберіть налаштування мапи для профілю</string>
     <string name="edit_profile_screen_options_subtitle">Виберіть налаштування екрана для профілю</string>
     <string name="edit_profile_nav_settings_subtitle">Оберіть налаштування навігації для профілю</string>
-    <string name="routing_attr_max_num_changes_description">Зазначте максимальну кількість змін</string>
-    <string name="routing_attr_max_num_changes_name">Кількість змін</string>
+    <string name="routing_attr_max_num_changes_description">Зазначте максимальну кількість пересадок</string>
+    <string name="routing_attr_max_num_changes_name">Кількість пересадок</string>
     <string name="routing_attr_piste_type_nordic_name">Бігові лижі та скандинавські лижі</string>
     <string name="routing_attr_piste_type_nordic_description">Траси для скандинавської ходьби або бігу на лижах.</string>
     <string name="routing_attr_piste_type_skitour_name">Лижні тури</string>
@@ -3177,7 +3177,7 @@
     <string name="paste_Osmand_data_folder_path">Вставте шлях до теки з даними OsmAnd</string>
     <string name="change_osmand_data_folder_question">Змінити теку даних OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Перемістити у нове місце</string>
-    <string name="change_data_storage_folder">Змінити теку для зберігання</string>
+    <string name="change_data_storage_folder">Зміна теки сховища</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтний парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Запряжені сани, санчата</string>
     <string name="rendering_attr_piste_type_sled_name">Тільки санки, санчата</string>
@@ -3287,7 +3287,7 @@
     <string name="rendering_value_thick_name">Товсто</string>
     <string name="desert_render_descr">Для пустель та інших малонаселених місцевостей. Докладніше.</string>
     <string name="select_navigation_icon">Піктограма положення під час руху</string>
-    <string name="select_map_icon">Позиція піктограми в стані спокою</string>
+    <string name="select_map_icon">Піктограма місцеположення в стані спокою</string>
     <string name="delete_profiles_descr">Натискання на «Застосувати» вилучить профілі назавжди.</string>
     <string name="master_profile">Основний профіль</string>
     <string name="select_color">Виберіть колір</string>
@@ -3326,7 +3326,7 @@
     <string name="osm_editing">Редагування OSM</string>
     <string name="osm_edits_view_descr">Перегляньте всі свої ще не надіслані зміни чи OSM-помилки у %1$s. Вже надіслані зміни більше не показуватимуться.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">Піктограма показується під час навігації чи руху.</string>
+    <string name="select_nav_icon_descr">Піктограма, що показується під час навігації чи руху.</string>
     <string name="select_map_icon_descr">Піктограма, що показується під час стану спокою.</string>
     <string name="logcat_buffer_descr">Переглянути та надіслати докладний журнал роботи застосунку</string>
     <string name="search_offline_geo_error">Не вдалося обробити geo: \'%s\'.</string>
@@ -3494,18 +3494,18 @@
     <string name="wiki_menu_download_descr">Для перегляду точок інтересу з Вікіпедії на мапі потрібні додаткові мапи.</string>
     <string name="ui_customization_description">Налаштування кількості елементів меню \"Бічна панель\", \"Налаштувати мапу\" та \"Контекстне меню\".
 \n
-\nВимкніть непотрібні втулки, щоб приховати їх елементи керування %1$s.</string>
+\nВимкніть непотрібні втулки, щоб приховати їх елементи керування. %1$s.</string>
     <string name="ui_customization_short_descr">Елементи бічної панелі, контекстне меню</string>
     <string name="ui_customization">Налаштування інтерфейсу</string>
     <string name="shared_string_drawer">Бічна панель</string>
     <string name="context_menu_actions">Дії контекстного меню</string>
-    <string name="reorder_or_hide_from">Впорядкувати або приховати елементи з %1$s.</string>
+    <string name="reorder_or_hide_from">Впорядкувати або приховати елементи — %1$s.</string>
     <string name="shared_string_divider">Розділювач</string>
-    <string name="divider_descr">Елементи нижче цієї точки відокремлені роздільником.</string>
+    <string name="divider_descr">Елементи нижче відокремлені розділювачем.</string>
     <string name="shared_string_hidden">Приховано</string>
-    <string name="hidden_items_descr">Ці елементи приховані з меню, але встановлені параметри чи втулки продовжать роботу.</string>
+    <string name="hidden_items_descr">Ці елементи приховані в меню, але відповідні параметри чи втулки будуть продовжувати працювати.</string>
     <string name="reset_items_descr">Приховування налаштувань призведе до скидання до їхнього початкового стану.</string>
-    <string name="main_actions_descr">Має лише 4 кнопки.</string>
+    <string name="main_actions_descr">Містять лише чотири кнопки.</string>
     <string name="main_actions">Основні дії</string>
     <string name="move_inside_category">Елементи можна переміщувати лише в межах цієї категорії.</string>
     <string name="developer_plugin">Втулок для розробників</string>
@@ -3634,7 +3634,7 @@
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених тайлів.</string>
     <string name="default_screen_timeout">Типовий час до вимкнення екрана</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Експортувати або імпортувати швидкі дії з профілями застосунку.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Експортуйте або імпортуйте швидкі дії разом з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Вилучити все\?</string>
     <string name="delete_all_actions_message_q">Вилучити %d швидких дій остаточно\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
@@ -3899,7 +3899,7 @@
     <string name="profile_type_user_string">Профіль користувача</string>
     <string name="reverse_all_points">Інвертувати всі точки</string>
     <string name="profile_by_default_description">Виберіть профіль, який застосовуватиметься під час запуску.</string>
-    <string name="shared_string_last_used">Востаннє використовувалось</string>
+    <string name="shared_string_last_used">Останній використаний</string>
     <string name="routing_attr_allow_intermittent_description">Використовувати водні шляхи, які пересихають</string>
     <string name="routing_attr_allow_intermittent_name">Використовувати водні шляхи, які пересихають</string>
     <string name="routing_attr_prefer_hiking_routes_description">Надавати перевагу маршрутам для пішого туризму</string>
@@ -3995,10 +3995,10 @@
     <string name="select_segments">Вибір відрізків</string>
     <string name="select_segments_description">%1$s містить більше ніж один відрізок, потрібно вибрати необхідну частину для навігації.</string>
     <string name="segments_count">Відрізок %1$d</string>
-    <string name="temporary_conditional_routing_descr">Застосовувати дорожні обмеження, які зараз діють на мапі</string>
+    <string name="temporary_conditional_routing_descr">Застосовувати поточні дорожні обмеження</string>
     <string name="routing_attr_short_way_description">Оптимізований коротший маршрут (енергоощадний)</string>
     <string name="routing_attr_driving_style_description">Виберіть тип маршруту, щоб отримати коротший, швидший або безпечніший маршрут</string>
-    <string name="snap_to_road_descr">Значок поточної позиції буде притягуватись до дороги під час навігації</string>
+    <string name="snap_to_road_descr">Значок поточного положення буде притягуватись до лінії маршруту під час навігації</string>
     <string name="restart">Перезапустити</string>
     <string name="shared_strings_all_regions">Усі регіони</string>
     <string name="delete_number_files_question">Вилучити %1$d файли\?</string>
@@ -4032,9 +4032,9 @@
     <string name="trip_recording_logging_interval_info">Інтервал запису встановлює проміжок часу, впродовж якого OsmAnd запитуватиме дані про поточне розташування.</string>
     <string name="trip_recording_save_and_continue">Зберегти й продовжити</string>
     <string name="lost_data_warning">Усі незбережені дані буде втрачено.</string>
-    <string name="show_start_dialog">Показувати вікно запуску</string>
+    <string name="show_start_dialog">Показувати початковий діалог</string>
     <string name="trip_recording_show_start_dialog_setting">Якщо вимкнено, запис почнеться одразу після торкання віджета або пункту меню, без появи додаткового вікна підтвердження.</string>
-    <string name="customize_route_line">Налаштувати лінію маршруту</string>
+    <string name="customize_route_line">Налаштувати вигляд лінії маршруту</string>
     <string name="shared_string_route_line">Лінія маршруту</string>
     <string name="specify_color_for_map_mode">Вкажіть колір для режиму мапи %1$s.</string>
     <string name="release_4_0_beta">• Додана можливість завантаження ізоліній у футах
@@ -4335,7 +4335,7 @@
     <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
     <string name="icon_group_nautical">Морські</string>
     <string name="rendering_attr_natureReserves_name">Заповідник</string>
-    <string name="shared_app_storage_description">Спільна пам’ять більше не доступна через зміну доступу до пам’яті в Android.</string>
+    <string name="shared_app_storage_description">Спільне сховище більше не доступне через зміну правил доступу до сховища в Android.</string>
     <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
     <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
     <string name="shared_string_details">Подробиці</string>
@@ -4431,7 +4431,7 @@
     <string name="shared_storage">Спільне сховище</string>
     <string name="files_remaining">Файлів лишилося: %1$s %2$s</string>
     <string name="shared_storage_second_step">Натисніть «Використовувати цю теку».</string>
-    <string name="shared_storage_migration_descr">Через зміни доступу до памʼяті в Android, OsmAnd більше не може використовувати %1$s.
+    <string name="shared_storage_migration_descr">Через зміни доступу до сховища в Android, OsmAnd більше не може використовувати %1$s.
 \n
 \nСкопіюйте всі дані до нової теки.</string>
     <string name="icon_group_education">Освіта</string>
@@ -4552,7 +4552,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">Тролейбусні маршрути</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Трансферні маршрути</string>
     <string name="map_markers_bar">Панель позначок мапи</string>
-    <string name="shared_string_visible_widgets">Видимі віджети</string>
+    <string name="shared_string_visible_widgets">Увімкнені віджети</string>
     <string name="shared_string_item">Пункт</string>
     <string name="shared_string_buttons">Кнопки</string>
     <string name="simulation_constant_mode_desc">Симуляція буде проводитися з постійною заданою швидкістю.</string>
@@ -4614,14 +4614,14 @@
     <string name="av_def_action_choose">За запитом</string>
     <string name="coordinates_widget_secondary_desc">Можна змінити формат координат на %1$s - %2$s - %3$s.</string>
     <string name="widget_secondary_desc_part_of">Частина втулка %1$s.</string>
-    <string name="elevation_profile_widget_desc">Показує висоту і профіль нахилу поточного маршруту.</string>
+    <string name="elevation_profile_widget_desc">Показує висоту і профіль рельєфу поточного маршруту.</string>
     <string name="parking_widget_desc">Показує відстань від центру екрана до місця стоянки.</string>
     <string name="mapillary_widget_desc">Забезпечує швидкий доступ до застосунку Mapillary для додавання зображень вулиць.</string>
     <string name="av_notes_choose_action_widget_desc">Виберіть дію.</string>
     <string name="battery_widget_desc">Показує рівень заряду акумулятора пристрою.</string>
     <string name="gps_info_widget_desc">Показує кількість супутників, які на цю мить видимі та використовуються.</string>
     <string name="altitude_widget_desc">Показує висоту над рівнем моря поточної геолокації.</string>
-    <string name="max_speed_widget_desc">Показує обмеження швидкості для поточної дороги.</string>
+    <string name="max_speed_widget_desc">Показує обмеження швидкості, що діє на поточному відрізку дороги.</string>
     <string name="arrival_time_widget_desc">Час прибуття в пункт призначення.</string>
     <string name="coordinates_widget_desc">Показує географічні координати поточної геолокації.</string>
     <string name="shared_string_widget">Віджет</string>
@@ -4637,7 +4637,7 @@
     <string name="audio_video_notes_desc">Надає швидкий доступ для початку/зупинки запису аудіо, відео або фотографування.</string>
     <string name="bearing_desc">Показує абсолютний або відносний азимут до цілі в кутових одиницях (в режимі 180 градусів, 360 градусів або в мілірадіанах).</string>
     <string name="navigation_points_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, час до прибуття, або час що залишився, наступні маневри, азимут, назва поточної/наступної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення до знаків чи перешкод, точки інтересу, маршрутні точки.</string>
-    <string name="navigation_points">Точки навігації</string>
+    <string name="navigation_points">Навігаційні точки</string>
     <string name="route_maneuvers_desc">Навігаційні віджети вмикаються під час навігації для показу такої інформації, як відстань, час до прибуття, або час що залишився, наступні маневри, азимут, назва поточної вулиці, інформація про смуги руху, обмеження швидкості, сповіщення про наближення до знаків чи перешкод, точки інтересу, маршрутні точки.</string>
     <string name="get_altitude_information">Отримати дані про висоту над рівнем моря</string>
     <string name="calculating_altitude">Обчислення висоти</string>
@@ -4676,7 +4676,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Сховати військові райони</string>
     <string name="explore_plans">Ознайомитися з тарифними планами</string>
     <string name="shared_string_mode">Режим</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Торкніться віджета, щоб перемикнути режими.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Торкніться віджета, щоб змінити режими.</string>
     <string name="map_widget_time_to_destination">Час до місця призначення</string>
     <string name="map_widget_time_to_intermediate">Час до проміжного пункту</string>
     <string name="map_widget_distance_to_intermediate">Відстань до проміжного пункту</string>
@@ -4748,10 +4748,10 @@
     <string name="next_turn_widget_desc">Віджет показує відомості про ваш наступний поворот із зображенням маневру та відстані до нього.</string>
     <string name="widget_with_dot">Віджет.</string>
     <string name="compass_visible_if_map_rotated_desc">Не показується, коли північ зверху</string>
-    <string name="compass_visible_if_map_rotated">Показується, якщо мапу повернути</string>
+    <string name="compass_visible_if_map_rotated">Показується після повороту мапи</string>
     <string name="compass_always_hidden">Постійно прихований</string>
     <string name="compass_always_visible">Показується постійно</string>
-    <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб перемикнути режим орієнтації мапи.</string>
+    <string name="compass_click_desc">Підказка: Торкніться віджета компаса, щоб змінити режим орієнтації мапи.</string>
     <string name="compass_desc">Показує напрямок на північ.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Колір ізоліній глибин</string>
     <string name="auto_backup_preference_desc">Типово Android створює резервні копії Закладок, ключів мап і налаштувань OsmAnd, щоб відновити їх на нових пристроях або після перевстановлення. Ця резервна копія має обмеження у 25 МБ.
@@ -4780,10 +4780,10 @@
     <string name="favorite_delete_group">Вилучити групу</string>
     <string name="favorite_confirm_delete_group">Ви впевнені, що хочете вилучити групу «%1$s» і всі її точки (%2$d)\?</string>
     <string name="download_heightmap_maps">Мапа висот</string>
-    <string name="display_position">Позиція на екрані</string>
+    <string name="display_position">Місцеположення на екрані</string>
     <string name="shared_string_2_5_d_view">Огляд 2.5 D</string>
     <string name="distance_by_tap_use_description">Торкніться мапи, щоб переглянути відстань між вашим поточним розташуванням і точкою дотику.
-\nТоркніться мапи 2 пальцями, щоб переглянути відстань між натиснутими точками</string>
+\nТоркніться мапи 2 пальцями, щоб переглянути відстань між двома точками</string>
     <string name="how_to_use">Як користуватися:</string>
     <string name="go_to_marker_location">Перейти до локації позначки</string>
     <string name="click_on_widget">Натиснути віджет</string>
@@ -4883,7 +4883,7 @@
 \n</string>
     <string name="purchases_feature_desc_external_sensors">Показ і запис даних з зовнішніх датчиків: швидкість велосипеда, потужність велосипеда, швидкість обертання педалей і пульс.</string>
     <string name="show_map_symbols_desc">Текст, дорожні знаки тощо.</string>
-    <string name="show_borders_of_downloaded_maps">Показати межі завантажених мап</string>
+    <string name="show_borders_of_downloaded_maps">Показувати межі завантажених мап</string>
     <string name="show_map_symbols">Показати символи мапи</string>
     <string name="rendering_engine_failed_descr">OsmAnd повернувся до рендерингу мап \"Version 1\". Ви можете спробувати перемкнутися на новий рушій рендерингу «Версії 2 (OpenGL)» у Налаштуваннях.
 \n
@@ -5045,7 +5045,7 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для напрямку руху, по центру — для всіх інших.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямку руху, по центру — для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
@@ -5145,23 +5145,23 @@
     <string name="external_device_details_distance">Відстань</string>
     <string name="external_device_ble">BLE</string>
     <string name="external_device_low_battery">Низький заряд акумулятора</string>
-    <string name="external_device_connected">Під\'єднано</string>
-    <string name="external_device_forget_sensor_description">Датчик буде вилучено зі списку. Ви будь-коли зможете знову додати його до списку.</string>
+    <string name="external_device_connected">Підʼєднано</string>
+    <string name="external_device_forget_sensor_description">Датчик буде вилучено зі списку. Ви зможете знову підʼєднати цей датчик у будь-який момент.</string>
     <string name="external_device_menu_forget">Забути</string>
-    <string name="external_device_disconnected">Від\'єднано</string>
+    <string name="external_device_disconnected">Відʼєднано</string>
     <string name="external_device_characteristic_speed">Швидкість</string>
     <string name="external_device_forget_sensor">Забути датчик</string>
     <string name="external_device_characteristic_distance">Відстань</string>
     <string name="external_device_characteristic_gear_ratio">Передаточне число</string>
     <string name="external_device_characteristic_cadence">Швидкість обертання педалей</string>
     <string name="external_device_characteristic_total_distance">Загальна відстань</string>
-    <string name="external_device_characteristic_heart_rate">Частота серцевих скорочень</string>
+    <string name="external_device_characteristic_heart_rate">Пульс</string>
     <string name="external_device_characteristic_battery_level">Акумулятор</string>
     <string name="external_device_characteristic_systolic">Систолічний тиск</string>
     <string name="external_device_characteristic_diastolic">Діастолічний тиск</string>
     <string name="external_device_characteristic_arterial_pressure">Артеріальний тиск</string>
     <string name="external_device_characteristic_stride_length">Довжина кроку</string>
-    <string name="external_device_details_connect">Під\'єднати</string>
+    <string name="external_device_details_connect">Підʼєднати</string>
     <string name="external_device_characteristic_cuff_pressure">Тиск у манжеті</string>
     <string name="external_device_characteristic_pulse_rate">Пульс</string>
     <string name="external_device_characteristic_temperature">Температура</string>
@@ -5175,15 +5175,15 @@
     <string name="ant_plus_nothing_found_text">Не вдалося знайти датчики</string>
     <string name="bluetooth_not_supported">Bluetooth не підтримується</string>
     <string name="ant_plus_bluetooth_off">Bluetooth вимкнено</string>
-    <string name="external_device_details_disconnect">Від\'єднати</string>
+    <string name="external_device_details_disconnect">Відʼєднати</string>
     <string name="bluetooth_found_title">Знайдено: %d</string>
     <string name="ant_plus_searching_text">Пошук датчиків</string>
-    <string name="bluetooth_disconnected">Від\'єднано, %s</string>
+    <string name="bluetooth_disconnected">Відʼєднано, %s</string>
     <string name="ant_plus_nothing_found_description">Переконайся що:
 \n– Bluetooth увімкнено
 \n– Датчик активовано
 \n– Цей пристрій розташовано поблизу датчика</string>
-    <string name="bluetooth_connected">Під\'єднано, %s</string>
+    <string name="bluetooth_connected">Підʼєднано, %s</string>
     <string name="ant_plus_pair_new_sensor">Сполучити новий датчик</string>
     <string name="ant_plus_bluetooth_off_description">Увімкнути функцію пошуку та сполучення датчиків через Bluetooth.</string>
     <string name="ant_plus_pair_new_sensor_ble">Сполучити датчик Bluetooth LE</string>
