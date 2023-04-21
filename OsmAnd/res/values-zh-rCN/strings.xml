@@ -2174,7 +2174,7 @@
 \n
 \n启用方式“菜单” -&gt; “组态地图” -&gt; “地图来源…” -&gt; “离线矢量图”。</string>
     <string name="voice_stream_voice_call">电话音频（会中断汽车蓝牙音响）</string>
-    <string name="select_tile_source_to_install">选择（瓦片）地图进行安装或更新。</string>
+    <string name="select_tile_source_to_install">选择瓦片地图来源：</string>
     <string name="create_poi_link_to_osm_doc">带照片的<u>在线 OSM</u> 地图分类。</string>
     <string name="send_location_email_pattern">查看追踪位置，以网页浏览器链接 %1$s 或用 Android intent 链接 %2$s</string>
     <string name="add_waypoint_dialog_added">GPX 路点“{0}”已添加</string>
@@ -5065,4 +5065,35 @@
 \n • 修正了不同的路由问题
 \n
 \n</string>
+    <string name="enable_3d_maps">启用 3D 地图</string>
+    <string name="metric_lbs">磅</string>
+    <string name="weather_download_error">无法下载 %1$s 瓦片。</string>
+    <string name="clear_online_cache">清除在线缓存</string>
+    <string name="offline_cache">离线缓存</string>
+    <string name="shared_string_alt_name">别名</string>
+    <string name="proxy_port_max_warning">最大端口值为 %1$s</string>
+    <string name="shutter_sound">快门声音</string>
+    <string name="shared_string_pounds">磅</string>
+    <string name="external_device_low_battery">电量低</string>
+    <string name="external_device_disconnected">已断开连接</string>
+    <string name="external_device_connected">已连接</string>
+    <string name="external_device_menu_forget">遗忘</string>
+    <string name="external_device_characteristic_speed">速度</string>
+    <string name="external_device_characteristic_distance">距离</string>
+    <string name="external_device_characteristic_total_distance">总距离</string>
+    <string name="external_device_characteristic_battery_level">电池</string>
+    <string name="external_device_details_information">信息</string>
+    <string name="external_device_details_battery">电池</string>
+    <string name="external_device_details_connection">连接</string>
+    <string name="external_device_details_speed">速度</string>
+    <string name="external_device_details_total_distance">总距离</string>
+    <string name="external_device_details_received_data">已接收数据</string>
+    <string name="external_device_details_distance">距离</string>
+    <string name="external_device_details_connect">连接</string>
+    <string name="bluetooth_found_title">已找到：%d</string>
+    <string name="ble_search_again">重新搜索</string>
+    <string name="ant_plus_open_settings">打开设置</string>
+    <string name="external_device_forget_sensor">遗忘传感器</string>
+    <string name="external_device_forget_sensor_description">传感器将从列表中移除。你可以稍后重新和该传感器配对。</string>
+    <string name="external_device_details_pair">配对</string>
 </resources>
