@@ -105,6 +105,7 @@ public class BinaryMapIndexReader {
 	protected final File file;
 	/*private*/ int version;
 	/*private*/ long dateCreated;
+	/*private*/ OsmAndOwner owner;
 	// keep them immutable inside
 	/*private*/ boolean basemap = false;
 	/*private*/ List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
@@ -177,6 +178,10 @@ public class BinaryMapIndexReader {
 		return dateCreated;
 	}
 
+	public OsmAndOwner getOwner() {
+		return owner;
+	}
+
 	private void init() throws IOException {
 		boolean initCorrectly = false;
 		while (true) {
@@ -195,11 +200,18 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER :
 				dateCreated = codedIS.readInt64();
 				break;
+			case OsmandOdb.OsmAndStructure.OWNER_FIELD_NUMBER:
+				int len = codedIS.readInt32();
+				int oldLimit = codedIS.pushLimit(len);
+				owner = new OsmAndOwner();
+				readOsmAndOwner();
+				codedIS.popLimit(oldLimit);
+				break;
 			case OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER:
 				MapIndex mapIndex = new MapIndex();
 				mapIndex.length = readInt();
 				mapIndex.filePointer = codedIS.getTotalBytesRead();
-				int oldLimit = codedIS.pushLimit(mapIndex.length);
+				oldLimit = codedIS.pushLimit(mapIndex.length);
 				readMapIndex(mapIndex, false);
 				basemap = basemap || mapIndex.isBaseMap();
 				codedIS.popLimit(oldLimit);
@@ -2734,4 +2746,54 @@ public class BinaryMapIndexReader {
 		return incompleteTransportRoutes;
 	}
 
+	public static class OsmAndOwner {
+		String owner = "";
+		String pluginid = "";
+		String description = "";
+
+		public OsmAndOwner() {
+		}
+
+		public OsmAndOwner(String owner, String pluginid, String description) {
+			this.owner = owner;
+			this.pluginid = pluginid;
+			this.description = description;
+		}
+
+		public String getOwner() {
+			return owner;
+		}
+
+		public String getPluginid() {
+			return pluginid;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+	}
+
+	private void readOsmAndOwner() throws IOException {
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+
+			switch (tag) {
+				case 0:
+					return;
+				case OsmandOdb.OsmAndOwner.OWNER_FIELD_NUMBER :
+					owner.owner = codedIS.readString();
+					break;
+				case OsmandOdb.OsmAndOwner.PLUGINID_FIELD_NUMBER :
+					owner.pluginid = codedIS.readString();
+					break;
+				case OsmandOdb.OsmAndOwner.DESCRIPTION_FIELD_NUMBER :
+					owner.description = codedIS.readString();
+					break;
+				default:
+					skipUnknownField(t);
+					break;
+			}
+		}
+	}
 }
