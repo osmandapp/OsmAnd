@@ -1,6 +1,8 @@
 package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import static net.osmand.plus.utils.FileUtils.RenameCallback;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 
 import android.app.Activity;
@@ -55,7 +57,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener {
+public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener, OnTrackFileMoveListener, RenameCallback {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
@@ -313,10 +315,12 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		selectedTracksHelper.updateTrackItems(asyncLoader.getTrackItems());
 		updateTrackTabs();
 		updateButtonsState();
+		updateTabsContent();
 	}
 
 	private void updateTrackTabs() {
 		adapter.setTrackTabs(selectedTracksHelper.getTrackTabs());
+		adapter.notifyDataSetChanged();
 	}
 
 	private void saveChanges() {
@@ -451,5 +455,25 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	@Override
+	public void onFileMove(@NonNull File src, @NonNull File dest) {
+		File destFolder = dest.getParentFile();
+		if (destFolder != null && !destFolder.exists() && !destFolder.mkdirs()) {
+			app.showToastMessage(R.string.file_can_not_be_moved);
+		} else if (dest.exists()) {
+			app.showToastMessage(R.string.file_with_name_already_exists);
+		} else if (src.renameTo(dest)) {
+			app.getGpxDbHelper().rename(src, dest);
+			reloadTracks();
+		} else {
+			app.showToastMessage(R.string.file_can_not_be_moved);
+		}
+	}
+
+	@Override
+	public void renamedTo(File file) {
+		reloadTracks();
 	}
 }
