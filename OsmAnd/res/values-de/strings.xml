@@ -5168,4 +5168,22 @@
     <string name="external_device_details_pair">Kopplung</string>
     <string name="external_device_ant">ANT</string>
     <string name="ant_plus_searching">Suche</string>
+    <string name="external_device_characteristic_gear_ratio">Getriebeübersetzung</string>
+    <string name="external_device_characteristic_cadence">Trittfrequenz</string>
+    <string name="external_device_characteristic_diastolic">Diastolisch</string>
+    <string name="external_device_characteristic_arterial_pressure">Arterieller Blutdruck</string>
+    <string name="external_device_characteristic_cuff_pressure">Manschettendruck</string>
+    <string name="external_device_characteristic_stride_length">Schrittweite</string>
+    <string name="external_device_details_connection">Verbindung</string>
+    <string name="bluetooth_found_title">Gefunden: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth wird nicht unterstützt</string>
+    <string name="ant_plus_searching_text">Suche nach Sensoren</string>
+    <string name="external_device_characteristic_pulse_rate">Pulsfrequenz</string>
+    <string name="ble_search_again">Erneut suchen</string>
+    <string name="ant_plus_open_settings">Einstellungen öffnen</string>
+    <string name="ant_plus_nothing_found_text">Es können keine Sensoren gefunden werden</string>
+    <string name="external_device_details_connect">Verbinden</string>
+    <string name="ant_plus_bluetooth_off_description">Schalten Sie die Bluetooth-Suche ein und koppeln Sie die Sensoren.</string>
+    <string name="ant_plus_pair_new_sensor_ble">Bluetooth-LE-Sensor koppeln</string>
+    <string name="ant_plus_pair_new_sensor">Neuen Sensor koppeln</string>
 </resources>
