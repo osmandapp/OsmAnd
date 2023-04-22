@@ -1807,7 +1807,7 @@
     <string name="shared_string_sound">Lyd</string>
     <string name="select_voice_provider">Vælg talevejledning</string>
     <string name="select_voice_provider_descr">Vælg eller hent talevejledning på dit sprog.</string>
-    <string name="live_updates">Realtidsopdateringer</string>
+    <string name="live_updates">Live-opdateringer</string>
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>
     <string name="update_time">Opdateringstidspunkt</string>
@@ -1832,7 +1832,7 @@
     <string name="item_removed">Emne fjernet</string>
     <string name="n_items_removed">Emner slettet</string>
     <string name="shared_string_undo_all">Fortryd alle</string>
-    <string name="rendering_attr_hideIcons_name">IP ikoner</string>
+    <string name="rendering_attr_hideIcons_name">IP-ikoner</string>
     <string name="switch_start_finish">Byt om på startpunkt og destination</string>
     <string name="number_of_contributors">Antal bidragydere</string>
     <string name="number_of_edits">Antal redigeringer</string>
@@ -1851,9 +1851,9 @@
     <string name="find_parking">Find parkering</string>
     <string name="show_polygons">Vis polygoner</string>
     <string name="rendering_attr_showMtbRoutes_name">Mountainbike-ruter</string>
-    <string name="show_map_markers_description">Aktivér kortmarkør funktionen.</string>
+    <string name="show_map_markers_description">Aktivér kortmarkør-funktionen.</string>
     <string name="clear_active_markers_q">Fjern alle aktive markører?</string>
-    <string name="clear_markers_history_q">Ryd kortmarkørhistoriken?</string>
+    <string name="clear_markers_history_q">Ryd kortmarkørhistorikken\?</string>
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kortmarkører</string>
     <string name="map_marker">Kortmarkør</string>
@@ -1864,7 +1864,7 @@
     <string name="shared_string_add_to_map_markers">Tilføj til kortmarkører</string>
     <string name="map_marker_1st">Første kortmarkør</string>
     <string name="map_marker_2nd">Anden kortmarkør</string>
-    <string name="shared_string_toolbar">Værktøjslinie</string>
+    <string name="shared_string_toolbar">Værktøjslinje</string>
     <string name="shared_string_widgets">Moduler</string>
     <string name="download_files_error_not_enough_space">Ikke nok plads!
 \nBrug for {3} MB midlertidigt, {1} MB permanent.
@@ -1885,7 +1885,7 @@
     <string name="osm_live_subscribe_btn">Tilmeld</string>
     <string name="osm_live_email_desc">Nødvendig for at opdatere dig om dine bidrag.</string>
     <string name="osm_live_user_public_name">Offentligt navn</string>
-    <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
+    <string name="osm_live_hide_user_name">Vis ikke mit navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
     <string name="osm_live_month_cost">Omkostning pr. måned</string>
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
@@ -1893,7 +1893,7 @@
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Indtast en gyldig e-mailadresse</string>
     <string name="osm_live_enter_user_name">Indtast et offentligt navn</string>
-    <string name="osm_live_thanks">Tak for støtte til OsmAnd!
+    <string name="osm_live_thanks">Tak for din støtte til OsmAnd!
 \nFor at aktivere alle nye funktioner, er det nødvendigt at genstarte OsmAnd.</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM-brugere, som indsender ændringer til kortet i det pågældende område.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
@@ -1910,7 +1910,7 @@
     <string name="shared_string_move_up">Flyt ↑</string>
     <string name="shared_string_move_down">Flyt ↓</string>
     <string name="full_report">Fuldstændig rapport</string>
-    <string name="open_street_map_login_and_pass">OSM brugernavn og adgangskode</string>
+    <string name="open_street_map_login_and_pass">OSM-brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Appen har nu lov til at skrive til eksternt lager, men en genstart er påkrævet.</string>
     <string name="report">Rapport</string>
     <string name="file_name_containes_illegal_char">Filnavn indeholder ikke-tilladte tegn</string>
@@ -2995,7 +2995,7 @@
     <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski.</string>
     <string name="routing_attr_piste_type_sled_name">Slæde</string>
     <string name="routing_attr_piste_type_sled_description">Pister til kælkning.</string>
-    <string name="routing_attr_allow_intermediate_name">Tillad mellemliggende ruter</string>
+    <string name="routing_attr_allow_intermediate_name">Tillad middelsvære ruter</string>
     <string name="routing_attr_allow_intermediate_description">Mere vanskelige ruter med stejlere sektioner. Generelt med nogle forhindringer som bør undgås.</string>
     <string name="routing_attr_allow_advanced_name">Tillad avancerede ruter</string>
     <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige forhindringer og stejle sektioner.</string>
@@ -3006,7 +3006,7 @@
     <string name="routing_attr_allow_classic_only_name">Tillad kun klassiske ruter</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Dette omfatter ruter forberedt af en mindre snescooter med løsere pister og spor lavet manuelt af skiløbere.</string>
     <string name="routing_attr_difficulty_preference_name">Foretrukket sværhedsgrad</string>
-    <string name="routing_attr_difficulty_preference_description">Foretræk ruter af denne vanskelighed, selv om ruteføring over sværere eller lettere pister stadig er mulig, hvis de er kortere.</string>
+    <string name="routing_attr_difficulty_preference_description">Foretræk ruter af denne sværhedsgrad, selv om ruteføring over sværere eller lettere pister stadig er mulig, hvis de er kortere.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' og \'Off-piste\' er uofficielle ruter og passager. Typisk upræparerede, ikke vedligeholdt og ikke kontrolleret om aftenen. Adgang på egen risiko.</string>
     <string name="shared_string_color_magenta">Magenta</string>
