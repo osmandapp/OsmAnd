@@ -4612,7 +4612,7 @@
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
     <string name="elevation_profile_widget_desc">Viser højden og hældningsprofilen for den aktuelle rute.</string>
     <string name="parking_widget_desc">Viser afstanden fra skærmens centrum til dit parkeringssted.</string>
-    <string name="altitude_widget_desc">Viser højden over havniveau for den aktuelle geografiske placering.</string>
+    <string name="altitude_widget_desc">Viser højden over havets overflade for den aktuelle geolokalisering.</string>
     <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
     <string name="map_markers_bar_widget_desc">Modulet i topbjælken viser afstanden og retningen til den næste kortmarkør fra din aktuelle position. Det er muligt at konfigurere i modulet, om der skal vises 1 eller 2 markører.</string>
     <string name="coordinates_widget_desc">Viser de geografiske koordinater for den aktuelle geoplacering.</string>
@@ -4838,7 +4838,7 @@
     <string name="map_widget_altitude_desc">Viser højden for den aktuelle geoplacering eller højden for det aktuelle kortcentrum</string>
     <string name="map_center_widget">Koordinater: Kortets centrum</string>
     <string name="current_location_widget">Koordinater: Nuværende placering</string>
-    <string name="map_widget_altitude_map_center">Højde: Kortets centrum</string>
+    <string name="map_widget_altitude_map_center">Højde: kortcentrum</string>
     <string name="map_widget_altitude_map_center_desc">Viser højden over havniveau for det aktuelle kortcentrum.</string>
     <string name="map_widget_rendering_fps">Kortgengivelse FPS</string>
     <string name="map_widget_rendering_fps_desc">Viser, hvor hurtigt kortet og kortelementer vises og opdateres, udtrykt i billeder pr. sekund (FPS).</string>
