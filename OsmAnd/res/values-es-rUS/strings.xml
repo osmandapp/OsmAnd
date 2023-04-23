@@ -5163,7 +5163,7 @@
     <string name="external_device_characteristic_gear_ratio">Relación de transmisión</string>
     <string name="external_device_characteristic_cadence">Cadencia</string>
     <string name="external_device_characteristic_heart_rate">Ritmo cardíaco</string>
-    <string name="external_device_characteristic_systolic">Cistólica</string>
+    <string name="external_device_characteristic_systolic">Sistólica</string>
     <string name="external_device_characteristic_diastolic">Diastólica</string>
     <string name="external_device_characteristic_arterial_pressure">Presión arterial</string>
     <string name="external_device_characteristic_cuff_pressure">Presión del manguito</string>
