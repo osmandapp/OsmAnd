@@ -5141,7 +5141,7 @@
     <string name="proxy_port_max_warning">Der höchste Wert für einen Port ist %1$s</string>
     <string name="weather_download_error">Konnte %1$s Kacheln nicht herunterladen.</string>
     <string name="external_device_forget_sensor">Sensor entfernen</string>
-    <string name="external_device_forget_sensor_description">Sensor wird aus der Liste entfernt. Der Sensor kann jederzeit erneut gekoppeln werden.</string>
+    <string name="external_device_forget_sensor_description">Sensor wird aus der Liste entfernt. Der Sensor kann jederzeit erneut gekoppelt werden.</string>
     <string name="external_device_disconnected">Getrennt</string>
     <string name="external_device_connected">Verbunden</string>
     <string name="external_device_menu_forget">Entkoppeln</string>
