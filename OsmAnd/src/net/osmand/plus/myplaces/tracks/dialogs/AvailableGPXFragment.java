@@ -1,7 +1,7 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.util.Algorithms.formatDuration;
 import static net.osmand.util.Algorithms.objectEquals;
@@ -63,7 +63,11 @@ import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
-import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask;
+import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask.LoadTracksListener;
+import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -117,7 +121,7 @@ import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
-		RenameCallback, UploadGpxListener, LoadGpxInfosTask.LoadTracksListener {
+		RenameCallback, UploadGpxListener, LoadTracksListener {
 
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
 
@@ -411,7 +415,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		SearchView searchView = new SearchView(getActivity());
-		FavoritesActivity.updateSearchView(getActivity(), searchView);
+		MyPlacesActivity.updateSearchView(getActivity(), searchView);
 		mi.setActionView(searchView);
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -448,11 +452,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		mi.setIcon(getIcon(settings.TRACKS_SORT_BY_MODE.get().getIconId(), iconColorId));
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
+			menu = ((MyPlacesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
-			((FavoritesActivity) getActivity()).getClearToolbar(false);
+			((MyPlacesActivity) getActivity()).getClearToolbar(false);
 		}
-		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
+		((MyPlacesActivity) getActivity()).updateListViewFooter(footerView);
 
 		// To do Rewrite without ContextMenuAdapter
 		optionsMenuAdapter = new ContextMenuAdapter(app);
@@ -570,7 +574,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void addTrack() {
-		((FavoritesActivity) getActivity()).addTrack();
+		((MyPlacesActivity) getActivity()).addTrack();
 	}
 
 	private void updateTracksSort(TracksSortByMode sortByMode) {
@@ -586,13 +590,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	public void showProgressBar() {
 		if (getActivity() != null) {
-			((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
+			((MyPlacesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 		}
 	}
 
 	public void hideProgressBar() {
 		if (getActivity() != null) {
-			((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+			((MyPlacesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(false);
 		}
 	}
 
@@ -607,9 +611,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
+			((MyPlacesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 					AndroidUiHelper.isOrientationPortrait(getActivity()));
-			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
+			((MyPlacesActivity) getActivity()).updateListViewFooter(footerView);
 		}
 	}
 

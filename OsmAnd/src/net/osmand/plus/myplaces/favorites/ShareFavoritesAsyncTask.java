@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.favorites;
 
 import android.content.Intent;
 import android.os.AsyncTask;

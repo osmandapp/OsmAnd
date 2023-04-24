@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.tracks.tasks;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;

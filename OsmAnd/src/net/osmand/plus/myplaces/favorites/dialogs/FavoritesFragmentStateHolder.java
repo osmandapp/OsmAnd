@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.favorites.dialogs;
 
 import android.os.Bundle;
 

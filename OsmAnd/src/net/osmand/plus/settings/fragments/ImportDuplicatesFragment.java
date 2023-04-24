@@ -15,7 +15,7 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;

@@ -1,7 +1,6 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.tracks.dialogs;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

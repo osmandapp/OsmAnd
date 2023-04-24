@@ -1,7 +1,7 @@
 package net.osmand.plus.importfiles.tasks;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.content.Intent;
 
@@ -15,7 +15,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;

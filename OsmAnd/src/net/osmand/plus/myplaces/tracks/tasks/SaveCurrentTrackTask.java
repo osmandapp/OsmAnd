@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.tracks.tasks;
 
 import android.os.AsyncTask;
 

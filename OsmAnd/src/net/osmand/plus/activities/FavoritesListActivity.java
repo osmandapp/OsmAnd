@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.ui.FavoritesListFragment;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesListFragment;
 
 
 public class FavoritesListActivity extends OsmandActionBarActivity {

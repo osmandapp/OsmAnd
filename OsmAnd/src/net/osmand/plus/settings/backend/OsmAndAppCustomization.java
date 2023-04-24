@@ -27,7 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -183,8 +183,8 @@ public class OsmAndAppCustomization {
 		return MapActivity.class;
 	}
 
-	public Class<FavoritesActivity> getFavoritesActivity() {
-		return FavoritesActivity.class;
+	public Class<MyPlacesActivity> getFavoritesActivity() {
+		return MyPlacesActivity.class;
 	}
 
 	public Class<? extends Activity> getDownloadIndexActivity() {

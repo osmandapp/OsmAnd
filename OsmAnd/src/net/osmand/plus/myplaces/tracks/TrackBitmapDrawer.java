@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.tracks;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

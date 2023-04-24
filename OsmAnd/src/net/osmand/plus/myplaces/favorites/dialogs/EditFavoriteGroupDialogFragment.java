@@ -1,7 +1,7 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.favorites.dialogs;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,8 +29,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;

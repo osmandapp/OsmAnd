@@ -1,6 +1,6 @@
-package net.osmand.plus.myplaces;
+package net.osmand.plus.myplaces.favorites;
 
-import static net.osmand.plus.myplaces.FavouritesHelper.getPointsFromGroups;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.getPointsFromGroups;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
