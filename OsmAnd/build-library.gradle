@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'ivy-publish'
 apply from: 'build-common.gradle'
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 android {
 
 	defaultConfig {

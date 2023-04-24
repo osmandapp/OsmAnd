@@ -66,6 +66,12 @@ public class ContextMenuItem {
 		this.id = id;
 	}
 
+	@NonNull
+	@Override
+	public String toString() {
+		return title;
+	}
+
 	@Nullable
 	public String getId() {
 		return id;

@@ -5180,7 +5180,7 @@
     <string name="generate_hillshade_from_3d_maps">إنشاء خرائط الارتفاع من خرائط ثلاثية الأبعاد</string>
     <string name="offline_cache">ذاكرة التخزين المؤقت دون اتصال</string>
     <string name="weather_forecast_is_outdated">التوقعات قديمة.</string>
-    <string name="clear_online_cache_description">سيؤدي ذلك إلى مسح جميع ذاكرة التخزين المؤقت لطبقات الطقس المتصلة بالانترنت.</string>
+    <string name="clear_online_cache_description">سيؤدي هذا إلى مسح جميع ذالملفات المؤقتة لطبقات الطقس المتصلة بالانترنت.</string>
     <string name="clear_online_cache">مسح ذاكرة تخزين الانترنت المؤقت</string>
     <string name="shared_string_alt_name">الاسم البديل</string>
     <string name="shared_string_all_world">كل العالم</string>
@@ -5196,6 +5196,8 @@
     <string name="camera_app">تطبيق الكاميرا</string>
     <string name="rendering_value_defaultMedium_name">افتراضي (متوسط)</string>
     <string name="shutter_sound">صوت الغالق</string>
-    <string name="speak_route_deviation">تحذيرعند الانحراف عن المسار</string>
+    <string name="speak_route_deviation">أعلن الانحراف عن المسار</string>
     <string name="select_layer">حدد طبقة</string>
+    <string name="proxy_port_max_warning">الحد الأقصى لقيمة البوابة هو %1$s</string>
+    <string name="weather_download_error">تعذر تنزيل %1$s مربع</string>
 </resources>

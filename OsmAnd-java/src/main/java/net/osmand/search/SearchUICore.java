@@ -292,6 +292,10 @@ public class SearchUICore {
 			return false;
 		}
 	}
+	
+	public MapPoiTypes getPoiTypes() {
+		return poiTypes;
+	}
 
 	public void setPoiTypes(MapPoiTypes poiTypes) {
 		this.poiTypes = poiTypes;

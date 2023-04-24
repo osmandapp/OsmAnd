@@ -5125,4 +5125,51 @@
     <string name="speak_route_deviation">Anunciar desvio da rota</string>
     <string name="shutter_sound">Som do obturador</string>
     <string name="camera_app">Aplicativo de câmera</string>
+    <string name="proxy_port_max_warning">O valor máximo da porta é %1$s</string>
+    <string name="weather_download_error">Não foi possível baixar %1$s mosaicos.</string>
+    <string name="external_device_forget_sensor_description">O sensor será removido da lista. Você poderá emparelhar este sensor novamente a qualquer momento.</string>
+    <string name="external_device_disconnected">Desconectado</string>
+    <string name="external_device_connected">Conectado</string>
+    <string name="external_device_menu_forget">Esquecer</string>
+    <string name="external_device_characteristic_speed">Velocidade</string>
+    <string name="external_device_characteristic_distance">Distância</string>
+    <string name="external_device_characteristic_total_distance">Distância total</string>
+    <string name="external_device_characteristic_battery_level">Bateria</string>
+    <string name="external_device_characteristic_cadence">Cadência</string>
+    <string name="external_device_characteristic_pulse_rate">Frequência de pulso</string>
+    <string name="external_device_characteristic_stride_length">Comprimento do passo</string>
+    <string name="external_device_characteristic_temperature">Temperatura</string>
+    <string name="external_device_details_information">Informação</string>
+    <string name="external_device_details_received_data">Dados recebidos</string>
+    <string name="external_device_details_connection">Conexão</string>
+    <string name="external_device_details_battery">Bateria</string>
+    <string name="external_device_details_speed">Velocidade</string>
+    <string name="external_device_details_total_distance">Distância total</string>
+    <string name="external_device_details_distance">Distância</string>
+    <string name="external_device_details_connect">Conectar</string>
+    <string name="external_device_details_disconnect">Desconectar</string>
+    <string name="bluetooth_disconnected">Desconectado, %s</string>
+    <string name="bluetooth_connected">Conectado, %s</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Encontrado: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth não suportado</string>
+    <string name="ble_search_again">Pesquisar novamente</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth está desligado</string>
+    <string name="ant_plus_bluetooth_off_description">Ative os sensores de localização e emparelhamento do Bluetooth.</string>
+    <string name="ant_plus_searching_text">Procurando por sensores</string>
+    <string name="ant_plus_searching_text_description">Por favor, segure o dispositivo perto do sensor. Você precisa ativar o sensor para que o OsmAnd possa encontrá-lo.</string>
+    <string name="ant_plus_help_title">Eu não sei que tipo de sensor eu tenho</string>
+    <string name="ant_plus_searching">Procurando</string>
+    <string name="ant_plus_pair_new_sensor">Emparelhar novo sensor</string>
+    <string name="learn_more_about_sensors_link">Saiba mais sobre sensores.</string>
+    <string name="external_device_characteristic_arterial_pressure">Pressão arterial</string>
+    <string name="external_device_characteristic_heart_rate">Frequência cardíaca</string>
+    <string name="ant_plus_nothing_found_description">Certificar-se:
+\n- O Bluetooth está ativado
+\n– O sensor está ativado
+\n– Este dispositivo está localizado perto do sensor</string>
+    <string name="ant_plus_nothing_found_text">Não foi possível encontrar nenhum sensor</string>
+    <string name="ant_plus_open_settings">Abrir configurações</string>
+    <string name="external_device_low_battery">Bateria fraca</string>
 </resources>

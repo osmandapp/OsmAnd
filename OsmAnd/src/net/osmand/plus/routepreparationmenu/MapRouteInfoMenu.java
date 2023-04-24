@@ -478,20 +478,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationFinished() {
-		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		OsmandApplication app = getApp();
-		if (app != null && fragmentRef != null && fragment.isVisible()) {
+		if (app != null) {
 			RouteCalculationResult route = app.getRoutingHelper().getRoute();
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
-			if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
-				openMenuAfterCalculation(fragment, app);
-			}
-			if (setRouteCalculationInProgress(routeCalculating)) {
-				fragment.updateInfo();
-				if (!routeCalculationInProgress) {
-					fragment.hideRouteCalculationProgressBar();
+
+			WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+			MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+
+			boolean calculationStatusChanged = setRouteCalculationInProgress(routeCalculating);
+			if (fragmentRef != null && fragment.isVisible()) {
+				if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
 					openMenuAfterCalculation(fragment, app);
+				}
+				if (calculationStatusChanged) {
+					fragment.updateInfo();
+					if (!routeCalculationInProgress) {
+						fragment.hideRouteCalculationProgressBar();
+						openMenuAfterCalculation(fragment, app);
+					}
 				}
 			}
 		}

@@ -1132,7 +1132,7 @@
     <string name="lang_pt_br">葡萄牙語(巴西)</string>
     <string name="index_name_canada">北美洲 - 加拿大</string>
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
-    <string name="voice_pref_title">聲音</string>
+    <string name="voice_pref_title">語音</string>
     <string name="localization_pref_title">在地化</string>
     <string name="interrupt_music_descr">語音提示會暫停音樂播放。</string>
     <string name="interrupt_music">暫停音樂</string>
@@ -2465,7 +2465,7 @@
     <string name="make_active">進行活動</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
-    <string name="last_seven_days">最近 7 天</string>
+    <string name="last_seven_days">最近7天</string>
     <string name="this_year">今年</string>
     <string name="marker_show_distance_descr">選擇如何在地圖上表示距離和方向給地圖標記：</string>
     <string name="remove_from_map_markers">從「地圖標記」中移除</string>
@@ -4360,14 +4360,14 @@
     <string name="markers_history_is_disabled_descr">啟用歷史紀錄以記住造訪過的地圖標記清單。</string>
     <string name="is_disabled">%1$s 已停用</string>
     <string name="clear_all_history_warning">清除所有應用程式歷史紀錄條目，包含搜尋、導航與標記歷史紀錄？</string>
-    <string name="history_preferences_descr">您可以為每種歷史紀錄類型單獨停用紀錄。</string>
+    <string name="history_preferences_descr">你可以各自關閉每種歷史類型的歷史記錄。</string>
     <string name="shortcut_start_recording">開始錄製</string>
     <string name="shortcut_navigate_to">導航至……</string>
     <string name="transparent_status_bar_descr">在狀態列下顯示地圖</string>
     <string name="transparent_status_bar">透明狀態列</string>
     <string name="history_is_disabled_descr">啟用歷史紀錄以更快存取上次使用的結果。</string>
     <string name="clear_all_history">清除所有歷史紀錄</string>
-    <string name="map_markers_history">地圖標記歷史紀錄</string>
+    <string name="map_markers_history">地圖標記歷史</string>
     <string name="shortcut_navigate_to_work">導航至「工作地點」</string>
     <string name="shortcut_navigate_to_home">導航至「家裡」</string>
     <string name="shared_storage_warning_description">因為新的 Android 規則，從2021年11月的 OsmAnd 4.2 將無法再存取共享儲存空間。
@@ -4375,7 +4375,7 @@
 \n請將存放資料的資料夾從共享儲存空間移動至可用的儲存空間，否則應用程式將無法存取您的資料（如離線地圖、GPX 軌跡等等）。</string>
     <string name="search_history_is_disabled_descr">您可以在設定中啟用搜尋歷史。</string>
     <string name="history_actions_descr">您可以將歷史紀錄匯出為檔案。</string>
-    <string name="navigation_history">導航歷史紀錄</string>
+    <string name="navigation_history">導航歷史</string>
     <string name="approx_safe_mode_description">使用較慢的 Android 而非原生程式碼來執行 GPX 近似。</string>
     <string name="safe_settings">安全</string>
     <string name="approx_safe_mode">安全 GPX 近似</string>
@@ -4769,7 +4769,7 @@
     <string name="distance_by_tap_use_description">點擊地圖以檢視您目前位置與點擊點之間的距離。
 \n用兩根手指在地圖上點擊以檢視與點擊點之間的距離</string>
     <string name="shared_string_2_5_d_view">2.5 D 檢視</string>
-    <string name="rotate_map_manual_opt">固定（手動旋轉）</string>
+    <string name="rotate_map_manual_opt">手動旋轉（固定）</string>
     <string name="shared_string_large">大</string>
     <string name="display_position">顯示位置</string>
     <string name="map_marker_interval_dialog_desc">指定將測量平均速度以計算預計到達時間的時間間隔。</string>
@@ -4786,12 +4786,12 @@
     <string name="coordinates_widget_current_location">座標：目前位置</string>
     <string name="developer_widgets">開發者小工具</string>
     <string name="map_widget_camera_tilt_desc">用來在透視模式下顯示相機傾斜角度。預設為 90°（無傾斜）。</string>
-    <string name="map_widget_zoom_level">縮放層級</string>
+    <string name="map_widget_zoom_level">縮放水平</string>
     <string name="map_widget_camera_tilt">相機傾斜</string>
     <string name="map_widget_target_distance_desc">顯示從相機到目標位置的距離。</string>
     <string name="map_widget_zoom_level_desc">顯示目前地圖的縮放層級。</string>
     <string name="map_widget_camera_distance_desc">顯示高於地面的相機海拔。</string>
-    <string name="map_widget_camera_distance">相機標高</string>
+    <string name="map_widget_camera_distance">地圖視角高度</string>
     <string name="ant_missing_dependency">缺少依賴關係</string>
     <string name="ant_go_to_store">到商店</string>
     <string name="ant_read_data">讀取資料</string>
@@ -4816,7 +4816,7 @@
     <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
     <string name="shared_string_cross_buy">跨平台購買</string>
     <string name="map_widget_fps_info">地圖繪製 FPS（每秒畫面）</string>
-    <string name="map_widget_target_distance">攝影機到目標的距離</string>
+    <string name="map_widget_target_distance">地圖視角至目標的距離</string>
     <string name="favorites_backup">收藏備份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台上免費使用您的訂閱功能（Android/iOS/網頁版）。</string>
     <string name="location_simulation_cutoff">模擬跳過第一公尺</string>
@@ -5109,7 +5109,7 @@
     <string name="shared_string_alt_name">替代名稱</string>
     <string name="token_is_not_valid">權杖無效</string>
     <string name="weather_forecast">天氣預報</string>
-    <string name="clear_online_cache_description">這將會清除線上天氣圖磚的所有快取。</string>
+    <string name="clear_online_cache_description">這將會清除線上天氣圖磚的快取。</string>
     <string name="weather_forecast_is_outdated">預測已過時。</string>
     <string name="offline_weather_forecast_desc">您可以下載七天的天氣預報。</string>
     <string name="shared_string_all_world">全世界</string>
