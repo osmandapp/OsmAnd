@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="is_imported_snackbar">{0} is imported.</string>
+    <string name="is_imported">%1$s is imported.</string>
+    <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
+    <string name="file_already_exists">File already exists</string>
+    <string name="nav_profile_confirm_delete">Are you sure you want to delete \"%1$s\"?</string>
     <string name="weather_download_error">Could not download %1$s tiles.</string>
     <string name="proxy_port_max_warning">Maximum port value is %1$s</string>
     <string name="shutter_sound">Shutter sound</string>

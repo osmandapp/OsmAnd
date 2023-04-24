@@ -10,6 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -34,17 +35,29 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	private final String fileName;
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
+	private final boolean overwrite;
+
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,
 	                        @NonNull File destinationDir,
 	                        @NonNull String fileName,
 	                        @Nullable SaveImportedGpxListener listener) {
+		this(app, gpxFile, destinationDir, fileName, listener, false);
+	}
+
+	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
+	                        @NonNull GPXFile gpxFile,
+	                        @NonNull File destinationDir,
+	                        @NonNull String fileName,
+	                        @Nullable SaveImportedGpxListener listener,
+	                        boolean overwrite) {
 		this.app = app;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
 		this.destinationDir = destinationDir;
 		this.listener = listener;
+		this.overwrite = overwrite;
 	}
 
 	@Override
@@ -110,7 +123,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		if (!fileName.endsWith(GPX_FILE_EXT)) {
 			fileName = fileName + GPX_FILE_EXT;
 		}
-		return new File(importDir, fileName);
+		File destFile = new File(importDir, fileName);
+		while (destFile.exists() && !overwrite) {
+			fileName = AndroidUtils.createNewFileName(fileName);
+			destFile = new File(importDir, fileName);
+		}
+		return destFile;
 	}
 
 	@Override
