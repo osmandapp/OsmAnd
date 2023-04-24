@@ -43,30 +43,9 @@ public class LayerDrawableImageView extends AppCompatImageView {
 			LayerDrawable layerSource = (LayerDrawable) getDrawable();
 			int drawableWidth = layerSource.getIntrinsicWidth();
 			float scale = (float) canvasWidth / drawableWidth;
-			Paint bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
-			int layers = layerSource.getNumberOfLayers() - 1;
 			canvas.save();
 			canvas.concat(getImageMatrix());
-			for (int i = 0; i <= layers; i++) {
-				Drawable drawable = layerSource.getDrawable(i);
-				if (drawable != null) {
-					if (drawable instanceof VectorDrawable) {
-						int widthVector = (int) (drawable.getIntrinsicWidth() * scale);
-						int heightVector = (int) (drawable.getIntrinsicHeight() * scale);
-						Rect boundsVector = new Rect(locationX - widthVector / 2, locationY - heightVector / 2,
-								locationX + widthVector / 2, locationY + heightVector / 2);
-						drawable.setBounds(boundsVector);
-						drawable.draw(canvas);
-					} else {
-						int width = (int) (drawable.getIntrinsicWidth() * scale);
-						int height = (int) (drawable.getIntrinsicHeight() * scale);
-						Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
-						Bitmap tmpBitmap = srcBitmap.copy(srcBitmap.getConfig(), true);
-						Bitmap bitmap = AndroidUtils.scaleBitmap(tmpBitmap, width, height, false);
-						canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-					}
-				}
-			}
+			AndroidUtils.drawScaledLayerDrawable(canvas, layerSource, locationX, locationY, scale);
 			canvas.restore();
 		} else {
 			super.onDraw(canvas);
