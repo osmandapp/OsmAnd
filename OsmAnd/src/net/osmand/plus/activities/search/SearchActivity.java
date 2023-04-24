@@ -28,7 +28,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesListActivity;
-import net.osmand.plus.myplaces.ui.FavoritesListFragment;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;

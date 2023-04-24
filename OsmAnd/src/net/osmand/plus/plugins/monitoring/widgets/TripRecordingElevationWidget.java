@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.myplaces.ui.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;

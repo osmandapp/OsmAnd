@@ -24,9 +24,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
-import net.osmand.plus.myplaces.DefaultFavoritesListener;
-import net.osmand.plus.myplaces.FavoritesListener;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
@@ -123,7 +122,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	private FavoritesListener getFavouritesListener() {
 		if (mFavouritesListener == null) {
-			mFavouritesListener = new DefaultFavoritesListener() {
+			mFavouritesListener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					loadFavorites();
@@ -157,7 +156,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 				return Double.compare(ld, rd);
 			} else if (mSortByDist == SORT_TYPE_CATEGORY) {
 				int cat = inst.compare(lhs.getCategoryDisplayName(getMyApplication()), rhs.getCategoryDisplayName(getMyApplication()));
-				if(cat != 0) {
+				if (cat != 0) {
 					return cat;
 				}
 			}
@@ -177,9 +176,9 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	private String getTextForButton(int sortByDist) {
 		int r = R.string.sort_by_distance;
-		if(sortByDist == SORT_TYPE_CATEGORY) {
+		if (sortByDist == SORT_TYPE_CATEGORY) {
 			r = R.string.sort_by_category;
-		} else if(sortByDist == SORT_TYPE_NAME) {
+		} else if (sortByDist == SORT_TYPE_NAME) {
 			r = R.string.sort_by_name;
 		}
 		return getString(r);

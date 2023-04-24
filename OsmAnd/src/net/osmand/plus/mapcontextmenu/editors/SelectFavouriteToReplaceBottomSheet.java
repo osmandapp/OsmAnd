@@ -17,7 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.SelectFavouriteBottomSheet;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.UiUtilities;
 
 import static net.osmand.plus.dialogs.FavoriteDialogs.KEY_FAVORITE;

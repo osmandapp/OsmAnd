@@ -17,8 +17,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
@@ -143,7 +143,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					FavoritesActivity.openFavoritesGroup(context, group.getName());
+					MyPlacesActivity.openFavoritesGroup(context, group.getName());
 				}
 			});
 			view.addView(button);

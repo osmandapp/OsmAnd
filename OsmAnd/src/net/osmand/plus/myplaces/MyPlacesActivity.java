@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_DELETED_KEY;
 
@@ -30,6 +30,9 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -45,8 +48,8 @@ import java.util.List;
 /**
  *
  */
-public class FavoritesActivity extends TabActivity {
-	private static final Log LOG = PlatformUtil.getLog(FavoritesActivity.class);
+public class MyPlacesActivity extends TabActivity {
+	private static final Log LOG = PlatformUtil.getLog(MyPlacesActivity.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;

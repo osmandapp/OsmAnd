@@ -60,7 +60,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -1592,8 +1592,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-		mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
+	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
+		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
 		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
 			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 		}

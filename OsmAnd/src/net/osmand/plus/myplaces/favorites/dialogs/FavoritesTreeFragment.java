@@ -1,10 +1,10 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.favorites.dialogs;
 
 import static android.view.Gravity.CENTER;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -50,12 +50,12 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.DefaultFavoritesListener;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavoritesListener;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.ShareFavoritesAsyncTask;
-import net.osmand.plus.myplaces.ShareFavoritesAsyncTask.ShareFavoritesListener;
+import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask;
+import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavoritesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -120,7 +120,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		if (helper.isFavoritesLoaded()) {
 			favouritesAdapter.synchronizeGroups();
 		} else {
-			helper.addListener(favoritesListener = new DefaultFavoritesListener() {
+			helper.addListener(favoritesListener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					favouritesAdapter.synchronizeGroups();
@@ -419,11 +419,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		});
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
+			menu = ((MyPlacesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
-			((FavoritesActivity) getActivity()).getClearToolbar(false);
+			((MyPlacesActivity) getActivity()).getClearToolbar(false);
 		}
-		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
+		((MyPlacesActivity) getActivity()).updateListViewFooter(footerView);
 
 
 		if (!mi.isActionViewExpanded()) {
@@ -554,9 +554,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
+		((MyPlacesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 				AndroidUiHelper.isOrientationPortrait(getActivity()));
-		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
+		((MyPlacesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
 	private void deleteFavoritesAction() {
@@ -588,7 +588,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	private void importFavourites() {
-		((FavoritesActivity) getActivity()).importFavourites();
+		((MyPlacesActivity) getActivity()).importFavourites();
 	}
 
 	public void shareFavorites(@Nullable FavoriteGroup group) {
@@ -624,7 +624,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		String pointType = PointDescription.POINT_TYPE_FAVORITE;
-		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
+		MyPlacesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getDisplayName(app)), true, point);
 	}
 
@@ -774,7 +774,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int color = model.getColor() == 0 ? getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app.getUIUtilities().getPaintedIcon(
-						R.drawable.ic_action_folder, visible ? color : getColor(disabledColor)),
+								R.drawable.ic_action_folder, visible ? color : getColor(disabledColor)),
 						row);
 			}
 			adjustIndicator(app, groupPosition, isExpanded, row, light);

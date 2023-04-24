@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.myplaces.SaveCurrentTrackTask;
+import net.osmand.plus.myplaces.tracks.tasks.SaveCurrentTrackTask;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 

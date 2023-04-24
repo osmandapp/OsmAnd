@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.myplaces.ui.LoadGpxInfosTask;
+import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;

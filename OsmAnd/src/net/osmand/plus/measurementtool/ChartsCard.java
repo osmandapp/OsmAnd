@@ -41,7 +41,7 @@ import net.osmand.plus.measurementtool.graph.ChartAdapterHelper.RefreshMapCallba
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter;
 import net.osmand.plus.measurementtool.graph.CustomChartAdapter.LegendViewType;
-import net.osmand.plus.myplaces.ui.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxDisplayItem;

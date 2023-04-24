@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.ui;
+package net.osmand.plus.myplaces.favorites.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -40,8 +40,9 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -206,7 +207,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 	}
 
 	public void showOnMap(FavouritePoint point) {
-		getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.FAV_TAB);
+		getMyApplication().getSettings().FAVORITES_TAB.set(MyPlacesActivity.FAV_TAB);
 
 		OsmandSettings settings = getMyApplication().getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
