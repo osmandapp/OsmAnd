@@ -220,10 +220,11 @@ public class AndroidUtils {
 					drawable.draw(canvas);
 				} else {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
-					Bitmap tmpBitmap = srcBitmap.copy(srcBitmap.getConfig(), true);
-					Bitmap bitmap = AndroidUtils.scaleBitmap(tmpBitmap, width, height, false);
-					canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-					bitmap.recycle();
+					Bitmap scaledBitmap = AndroidUtils.scaleBitmap(srcBitmap, width, height, true);
+					canvas.drawBitmap(scaledBitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
+					if(scaledBitmap != srcBitmap){
+						scaledBitmap.recycle();
+					}
 				}
 			}
 		}
