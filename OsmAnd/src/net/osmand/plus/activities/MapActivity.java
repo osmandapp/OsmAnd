@@ -735,8 +735,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		OsmandMapTileView mapView = getMapView();
 		if (settings.isLastKnownMapLocation()) {
-			LatLon l = settings.getLastKnownMapLocation();
-			mapView.setLatLon(l.getLatitude(), l.getLongitude());
+			LatLon mapLocation = settings.getLastKnownMapLocation();
+			float height = settings.getLastKnownMapHeight();
+			LatLon mapShiftedLocation = settings.getLastKnownMapLocationShifted();
+			mapView.setLatLon(mapLocation, height, mapShiftedLocation);
 			mapView.setZoomWithFloatPart(settings.getLastKnownMapZoom(), settings.getLastKnownMapZoomFloatPart());
 			mapView.initMapRotationByCompassMode();
 		}
@@ -1235,7 +1237,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getDaynightHelper().stopSensorIfNeeded();
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
 
-		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
+		LatLon mapLocation = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon mapLocationShifted = mapLocation;
+		float height = mapView.getHeight();
+		if (height != 0.0f)
+			mapLocationShifted = mapView.getTargetLatLon(mapLocationShifted);
+		settings.setLastKnownMapLocation(mapLocation, height, mapLocationShifted);
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
 		if (animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0 && !getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(),

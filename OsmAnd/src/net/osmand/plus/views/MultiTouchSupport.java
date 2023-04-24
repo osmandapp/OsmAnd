@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
+import net.osmand.core.jni.PointI;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.MapUtils;
 
@@ -87,6 +88,7 @@ public class MultiTouchSupport {
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
+	private PointF firstPoint = new PointF();
 	private PointF secondPoint = new PointF();
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
@@ -137,6 +139,7 @@ public class MultiTouchSupport {
 			}
 			if (actionCode == MotionEvent.ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				firstPoint = new PointF(x1, y1);
 				secondPoint = new PointF(x2, y2);
 				firstFingerStart = new PointF(x1, y1);
 				secondFingerStart = new PointF(x2, y2);
@@ -154,12 +157,12 @@ public class MultiTouchSupport {
 				}
 				return true;
 			} else if (actionCode == MotionEvent.ACTION_MOVE) {
+				firstPoint = new PointF(x1, y1);
+				secondPoint = new PointF(x2, y2);
 				if (inZoomMode) {
 
 					// Keep zoom center fixed or flexible
 					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
-
-					secondPoint = new PointF(x2, y2);
 
 					if (angleDefined) {
 						angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
@@ -216,8 +219,11 @@ public class MultiTouchSupport {
 		return centerPoint;
 	}
 
-	public PointF getSecondPoint() {
-		return secondPoint;
+	public PointI getFirstPoint() {
+		return new PointI((int) firstPoint.x, (int) firstPoint.y);
+	}
+	public PointI getSecondPoint() {
+		return new PointI((int) secondPoint.x, (int) secondPoint.y);
 	}
 
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {

@@ -126,19 +126,27 @@ public class AnimateDraggingMapThread {
 		}
 	}
 
+	/**
+	 * Make map target in sync with current map location coordinates and elevation
+	 */
+	public void resetMapTarget() {
+		MapRendererView renderer = getMapRenderer();
+		if (renderer != null && inconsistentMapTarget) {
+			inconsistentMapTarget = false;
+			renderer.resetMapTarget();
+		}
+	}
+
+	public void invalidateMapTarget() {
+		inconsistentMapTarget = true;
+	}
 
 	/**
 	 * Stop dragging async
 	 */
 	public void stopAnimating() {
 		stopped = true;
-		if (inconsistentMapTarget) {
-			inconsistentMapTarget = false;
-			MapRendererView renderer = getMapRenderer();
-			if (renderer != null) {
-				renderer.resetMapTarget();
-			}
-		}
+		resetMapTarget();
 	}
 
 	public boolean isAnimating() {
@@ -153,12 +161,9 @@ public class AnimateDraggingMapThread {
 		MapRendererView renderer = getMapRenderer();
 		if (renderer != null) {
 			renderer.pauseMapAnimation();
-			if (inconsistentMapTarget) {
-				inconsistentMapTarget = false;
-				renderer.resetMapTarget();
-			}
 		}
 		stopped = true;
+		resetMapTarget();
 		Thread tt;
 		while ((tt = currentThread) != null) {
 			try {
@@ -684,6 +689,7 @@ public class AnimateDraggingMapThread {
 		double targetLat = tileView.getLatitude();
 		double targetLon = tileView.getLongitude();
 
+		resetMapTarget();
 		MapRendererView mapRenderer = getMapRenderer();
 		MapAnimator animator = getAnimator();
 		if (mapRenderer != null && animator != null) {
@@ -762,7 +768,7 @@ public class AnimateDraggingMapThread {
 
 			// Rescale speed to 31 coordinates
 			PointD velocity = new PointD(-velocityInMapSpaceX * scale31, -velocityInMapSpaceY * scale31);
-			inconsistentMapTarget = true;
+			invalidateMapTarget();
 			animator.animateFlatTargetWith(velocity,
 					new PointD(TARGET_MOVE_DECELERATION * scale31, TARGET_MOVE_DECELERATION * scale31),
 					userInteractionAnimationKey);
@@ -902,6 +908,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startRotate(float rotate) {
+		resetMapTarget();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapAnimator animator = mapRenderer.getMapAnimator();
