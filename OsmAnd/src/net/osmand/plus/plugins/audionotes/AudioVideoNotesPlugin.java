@@ -597,15 +597,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
-		if (AV_PHOTO_PLAY_SOUND.get()) {
-			loadCameraSound();
-		}
+		loadCameraSoundIfNeeded(false);
 		AV_PHOTO_PLAY_SOUND.addListener(change -> app.runInUIThread(() -> {
-			if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
-				loadCameraSound();
-			}
+			loadCameraSoundIfNeeded(true);
 		}));
 		return true;
+	}
+
+	private void loadCameraSoundIfNeeded(boolean checkSoundPool) {
+		if (isShutterSoundEnabled() && (!checkSoundPool || soundPool == null)) {
+			loadCameraSound();
+		}
 	}
 
 	private void loadCameraSound() {
@@ -625,6 +627,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				log.error("cannot get shotId for sounds/camera_click.ogg");
 			}
 		}
+	}
+
+	public boolean isShutterSoundEnabled() {
+		return AV_PHOTO_PLAY_SOUND.get();
+	}
+
+	public static boolean canDisableShutterSound() {
+		CameraInfo info = new CameraInfo();
+		return info.canDisableShutterSound;
 	}
 
 	@Override
@@ -1370,28 +1381,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void internalShoot() {
-		requireMapActivity().getMyApplication().runInUIThread(() -> {
+		app.runInUIThread(() -> {
 			if (cam != null) {
-				CameraInfo info = new CameraInfo();
-				if (info.canDisableShutterSound) {
-					cam.enableShutterSound(AV_PHOTO_PLAY_SOUND.get());
+				if (canDisableShutterSound()) {
+					cam.enableShutterSound(isShutterSoundEnabled());
 				}
-				if (!autofocus) {
-					cam.takePicture(null, null, new JpegPhotoHandler());
+				if (autofocus) {
+					takePictureOnAutofocus();
 				} else {
-					cam.autoFocus(new Camera.AutoFocusCallback() {
-						@Override
-						public void onAutoFocus(boolean success, Camera camera) {
-							try {
-								cam.takePicture(null, null, new JpegPhotoHandler());
-							} catch (Exception e) {
-								logErr(e);
-								closeRecordingMenu();
-								closeCamera();
-								finishRecording();
-							}
-						}
-					});
+					takePicture();
 				}
 			}
 		}, 200);
@@ -1469,7 +1467,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordingDone = true;
 			if (cam != null && lastTakingPhoto != null) {
 				try {
-					cam.takePicture(null, null, new JpegPhotoHandler());
+					takePicture();
 				} catch (RuntimeException e) {
 					closeRecordingMenu();
 					closeCamera();
@@ -1477,6 +1475,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		}
+	}
+
+	public void takePictureOnAutofocus() {
+		cam.autoFocus((success, camera) -> {
+			try {
+				takePicture();
+			} catch (Exception e) {
+				logErr(e);
+				closeRecordingMenu();
+				closeCamera();
+				finishRecording();
+			}
+		});
+	}
+
+	public void takePicture() {
+		cam.takePicture(null, null, new JpegPhotoHandler());
 	}
 
 	public void takePhotoExternal(double lat, double lon, MapActivity mapActivity) {
@@ -1899,19 +1914,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public class JpegPhotoHandler implements PictureCallback {
 
-		public JpegPhotoHandler() {
-		}
+		public JpegPhotoHandler() { }
 
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
 			photoJpegData = data;
-
-			if (AV_PHOTO_PLAY_SOUND.get()) {
-				if (soundPool != null && shotId != 0) {
-					soundPool.play(shotId, 0.7f, 0.7f, 0, 0, 1);
-				}
+			if (isShutterSoundEnabled() && soundPool != null && shotId != 0) {
+				soundPool.play(shotId, 0.7f, 0.7f, 0, 0, 1);
 			}
-
 			if (recordingMenu != null) {
 				recordingMenu.showFinalPhoto(data, FULL_SCEEN_RESULT_DELAY_MS);
 			}

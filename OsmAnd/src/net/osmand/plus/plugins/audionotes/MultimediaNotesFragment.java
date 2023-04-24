@@ -13,6 +13,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_RECORDER_SETTING_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
 
 import android.Manifest;
 import android.content.Context;
@@ -306,7 +307,8 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 
 		ApplicationMode appMode = getSelectedAppMode();
 		boolean useOsmAndCamera = !plugin.AV_EXTERNAL_PHOTO_CAM.getModeValue(appMode);
-		uiPreference.setVisible(useOsmAndCamera);
+		boolean shouldShowPreference = useOsmAndCamera && canDisableShutterSound();
+		uiPreference.setVisible(shouldShowPreference);
 	}
 
 	private void setupAudioFormatPref(AudioVideoNotesPlugin plugin) {
