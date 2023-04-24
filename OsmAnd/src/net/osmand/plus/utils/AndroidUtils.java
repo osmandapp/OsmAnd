@@ -2,6 +2,8 @@ package net.osmand.plus.utils;
 
 
 import static android.content.Context.POWER_SERVICE;
+import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
@@ -27,6 +29,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
@@ -202,6 +205,31 @@ public class AndroidUtils {
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
 	}
 
+	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
+		Paint bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
+		int layers = layerDrawable.getNumberOfLayers() - 1;
+		for (int i = 0; i <= layers; i++) {
+			Drawable drawable = layerDrawable.getDrawable(i);
+			if (drawable != null) {
+				int width = (int) (drawable.getIntrinsicWidth() * scale);
+				int height = (int) (drawable.getIntrinsicHeight() * scale);
+				if (drawable instanceof VectorDrawable) {
+					Rect boundsVector = new Rect(locationX - width / 2, locationY - height / 2,
+							locationX + width / 2, locationY + height / 2);
+					drawable.setBounds(boundsVector);
+					drawable.draw(canvas);
+				} else {
+					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
+					Bitmap scaledBitmap = AndroidUtils.scaleBitmap(srcBitmap, width, height, true);
+					canvas.drawBitmap(scaledBitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
+					if(scaledBitmap != srcBitmap){
+						scaledBitmap.recycle();
+					}
+				}
+			}
+		}
+	}
+
 	public static String addColon(@NonNull OsmandApplication app, @StringRes int stringRes) {
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(stringRes), "").trim();
 	}
@@ -322,12 +350,12 @@ public class AndroidUtils {
 			String size = "";
 			String numSuffix = "MB";
 			if (sizeKb > 1 << 20) {
-				size = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				size = formatGb.format(new Object[] {(float) sizeKb / (1 << 20)});
 				numSuffix = "GB";
 			} else if (sizeBytes > (100 * (1 << 10))) {
-				size = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+				size = formatMb.format(new Object[] {(float) sizeBytes / (1 << 20)});
 			} else {
-				size = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				size = formatKb.format(new Object[] {(float) sizeBytes / (1 << 10)});
 				numSuffix = "kB";
 			}
 			if (ctx == null) {
@@ -402,19 +430,19 @@ public class AndroidUtils {
 	@NonNull
 	public static ColorStateList createColorStateList(int state, @ColorInt int stateColor, @ColorInt int normal) {
 		return new ColorStateList(
-				new int[][]{new int[]{state}, new int[]{}},
-				new int[]{stateColor, normal}
+				new int[][] {new int[] {state}, new int[] {}},
+				new int[] {stateColor, normal}
 		);
 	}
 
 	public static ColorStateList createColorStateList(Context ctx, boolean night) {
 		return new ColorStateList(
-				new int[][]{
-						new int[]{-android.R.attr.state_enabled}, // disabled
-						new int[]{android.R.attr.state_checked},
-						new int[]{}
+				new int[][] {
+						new int[] {-android.R.attr.state_enabled}, // disabled
+						new int[] {android.R.attr.state_checked},
+						new int[] {}
 				},
-				new int[]{
+				new int[] {
 						ColorUtilities.getSecondaryTextColor(ctx, night),
 						ColorUtilities.getActiveColor(ctx, night),
 						ColorUtilities.getSecondaryTextColor(ctx, night)}
@@ -447,11 +475,11 @@ public class AndroidUtils {
 	                                                      @ColorInt int lightNormal, @ColorInt int lightState,
 	                                                      @ColorInt int darkNormal, @ColorInt int darkState) {
 		return new ColorStateList(
-				new int[][]{
-						new int[]{state},
-						new int[]{}
+				new int[][] {
+						new int[] {state},
+						new int[] {}
 				},
-				new int[]{
+				new int[] {
 						night ? darkState : lightState,
 						night ? darkNormal : lightNormal
 				}
@@ -472,8 +500,8 @@ public class AndroidUtils {
 
 	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {
 		StateListDrawable res = new StateListDrawable();
-		res.addState(new int[]{state}, stateDrawable);
-		res.addState(new int[]{}, normal);
+		res.addState(new int[] {state}, stateDrawable);
+		res.addState(new int[] {}, normal);
 		return res;
 	}
 
@@ -484,7 +512,7 @@ public class AndroidUtils {
 		ShapeDrawable progress = new ShapeDrawable();
 		progress.getPaint().setColor(progressColor);
 
-		LayerDrawable res = new LayerDrawable(new Drawable[]{
+		LayerDrawable res = new LayerDrawable(new Drawable[] {
 				bg,
 				new ClipDrawable(progress, Gravity.START, ClipDrawable.HORIZONTAL)
 		});
