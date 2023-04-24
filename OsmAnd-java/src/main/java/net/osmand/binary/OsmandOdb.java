@@ -65326,47 +65326,62 @@ public final class OsmandOdb {
   public interface OsmAndOwnerOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required string owner = 1;
+    // required string name = 1;
     /**
-     * <code>required string owner = 1;</code>
+     * <code>required string name = 1;</code>
      */
-    boolean hasOwner();
+    boolean hasName();
     /**
-     * <code>required string owner = 1;</code>
+     * <code>required string name = 1;</code>
      */
-    java.lang.String getOwner();
+    java.lang.String getName();
     /**
-     * <code>required string owner = 1;</code>
+     * <code>required string name = 1;</code>
      */
     com.google.protobuf.ByteString
-        getOwnerBytes();
+        getNameBytes();
 
-    // required string description = 2;
+    // optional string resource = 2;
     /**
-     * <code>required string description = 2;</code>
+     * <code>optional string resource = 2;</code>
+     */
+    boolean hasResource();
+    /**
+     * <code>optional string resource = 2;</code>
+     */
+    java.lang.String getResource();
+    /**
+     * <code>optional string resource = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getResourceBytes();
+
+    // optional string description = 3;
+    /**
+     * <code>optional string description = 3;</code>
      */
     boolean hasDescription();
     /**
-     * <code>required string description = 2;</code>
+     * <code>optional string description = 3;</code>
      */
     java.lang.String getDescription();
     /**
-     * <code>required string description = 2;</code>
+     * <code>optional string description = 3;</code>
      */
     com.google.protobuf.ByteString
         getDescriptionBytes();
 
-    // required string pluginid = 3;
+    // optional string pluginid = 4;
     /**
-     * <code>required string pluginid = 3;</code>
+     * <code>optional string pluginid = 4;</code>
      */
     boolean hasPluginid();
     /**
-     * <code>required string pluginid = 3;</code>
+     * <code>optional string pluginid = 4;</code>
      */
     java.lang.String getPluginid();
     /**
-     * <code>required string pluginid = 3;</code>
+     * <code>optional string pluginid = 4;</code>
      */
     com.google.protobuf.ByteString
         getPluginidBytes();
@@ -65424,16 +65439,21 @@ public final class OsmandOdb {
             }
             case 10: {
               bitField0_ |= 0x00000001;
-              owner_ = input.readBytes();
+              name_ = input.readBytes();
               break;
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              description_ = input.readBytes();
+              resource_ = input.readBytes();
               break;
             }
             case 26: {
               bitField0_ |= 0x00000004;
+              description_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
               pluginid_ = input.readBytes();
               break;
             }
@@ -65477,20 +65497,20 @@ public final class OsmandOdb {
     }
 
     private int bitField0_;
-    // required string owner = 1;
-    public static final int OWNER_FIELD_NUMBER = 1;
-    private java.lang.Object owner_;
+    // required string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private java.lang.Object name_;
     /**
-     * <code>required string owner = 1;</code>
+     * <code>required string name = 1;</code>
      */
-    public boolean hasOwner() {
+    public boolean hasName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string owner = 1;</code>
+     * <code>required string name = 1;</code>
      */
-    public java.lang.String getOwner() {
-      java.lang.Object ref = owner_;
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -65498,39 +65518,82 @@ public final class OsmandOdb {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          owner_ = s;
+          name_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>required string owner = 1;</code>
+     * <code>required string name = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getOwnerBytes() {
-      java.lang.Object ref = owner_;
+        getNameBytes() {
+      java.lang.Object ref = name_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        owner_ = b;
+        name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    // required string description = 2;
-    public static final int DESCRIPTION_FIELD_NUMBER = 2;
-    private java.lang.Object description_;
+    // optional string resource = 2;
+    public static final int RESOURCE_FIELD_NUMBER = 2;
+    private java.lang.Object resource_;
     /**
-     * <code>required string description = 2;</code>
+     * <code>optional string resource = 2;</code>
      */
-    public boolean hasDescription() {
+    public boolean hasResource() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string description = 2;</code>
+     * <code>optional string resource = 2;</code>
+     */
+    public java.lang.String getResource() {
+      java.lang.Object ref = resource_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          resource_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string resource = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getResourceBytes() {
+      java.lang.Object ref = resource_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        resource_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional string description = 3;
+    public static final int DESCRIPTION_FIELD_NUMBER = 3;
+    private java.lang.Object description_;
+    /**
+     * <code>optional string description = 3;</code>
+     */
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string description = 3;</code>
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -65547,7 +65610,7 @@ public final class OsmandOdb {
       }
     }
     /**
-     * <code>required string description = 2;</code>
+     * <code>optional string description = 3;</code>
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -65563,17 +65626,17 @@ public final class OsmandOdb {
       }
     }
 
-    // required string pluginid = 3;
-    public static final int PLUGINID_FIELD_NUMBER = 3;
+    // optional string pluginid = 4;
+    public static final int PLUGINID_FIELD_NUMBER = 4;
     private java.lang.Object pluginid_;
     /**
-     * <code>required string pluginid = 3;</code>
+     * <code>optional string pluginid = 4;</code>
      */
     public boolean hasPluginid() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required string pluginid = 3;</code>
+     * <code>optional string pluginid = 4;</code>
      */
     public java.lang.String getPluginid() {
       java.lang.Object ref = pluginid_;
@@ -65590,7 +65653,7 @@ public final class OsmandOdb {
       }
     }
     /**
-     * <code>required string pluginid = 3;</code>
+     * <code>optional string pluginid = 4;</code>
      */
     public com.google.protobuf.ByteString
         getPluginidBytes() {
@@ -65607,7 +65670,8 @@ public final class OsmandOdb {
     }
 
     private void initFields() {
-      owner_ = "";
+      name_ = "";
+      resource_ = "";
       description_ = "";
       pluginid_ = "";
     }
@@ -65616,15 +65680,7 @@ public final class OsmandOdb {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasOwner()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasDescription()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPluginid()) {
+      if (!hasName()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -65636,13 +65692,16 @@ public final class OsmandOdb {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getOwnerBytes());
+        output.writeBytes(1, getNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getDescriptionBytes());
+        output.writeBytes(2, getResourceBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getPluginidBytes());
+        output.writeBytes(3, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getPluginidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -65655,15 +65714,19 @@ public final class OsmandOdb {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getOwnerBytes());
+          .computeBytesSize(1, getNameBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getDescriptionBytes());
+          .computeBytesSize(2, getResourceBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getPluginidBytes());
+          .computeBytesSize(3, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getPluginidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -65781,12 +65844,14 @@ public final class OsmandOdb {
 
       public Builder clear() {
         super.clear();
-        owner_ = "";
+        name_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        description_ = "";
+        resource_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        pluginid_ = "";
+        description_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        pluginid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -65818,13 +65883,17 @@ public final class OsmandOdb {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.owner_ = owner_;
+        result.name_ = name_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.description_ = description_;
+        result.resource_ = resource_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.description_ = description_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
         }
         result.pluginid_ = pluginid_;
         result.bitField0_ = to_bitField0_;
@@ -65843,18 +65912,23 @@ public final class OsmandOdb {
 
       public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndOwner other) {
         if (other == net.osmand.binary.OsmandOdb.OsmAndOwner.getDefaultInstance()) return this;
-        if (other.hasOwner()) {
+        if (other.hasName()) {
           bitField0_ |= 0x00000001;
-          owner_ = other.owner_;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasResource()) {
+          bitField0_ |= 0x00000002;
+          resource_ = other.resource_;
           onChanged();
         }
         if (other.hasDescription()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           description_ = other.description_;
           onChanged();
         }
         if (other.hasPluginid()) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
           pluginid_ = other.pluginid_;
           onChanged();
         }
@@ -65863,15 +65937,7 @@ public final class OsmandOdb {
       }
 
       public final boolean isInitialized() {
-        if (!hasOwner()) {
-          
-          return false;
-        }
-        if (!hasDescription()) {
-          
-          return false;
-        }
-        if (!hasPluginid()) {
+        if (!hasName()) {
           
           return false;
         }
@@ -65897,90 +65963,164 @@ public final class OsmandOdb {
       }
       private int bitField0_;
 
-      // required string owner = 1;
-      private java.lang.Object owner_ = "";
+      // required string name = 1;
+      private java.lang.Object name_ = "";
       /**
-       * <code>required string owner = 1;</code>
+       * <code>required string name = 1;</code>
        */
-      public boolean hasOwner() {
+      public boolean hasName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string owner = 1;</code>
+       * <code>required string name = 1;</code>
        */
-      public java.lang.String getOwner() {
-        java.lang.Object ref = owner_;
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
           java.lang.String s = ((com.google.protobuf.ByteString) ref)
               .toStringUtf8();
-          owner_ = s;
+          name_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>required string owner = 1;</code>
+       * <code>required string name = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getOwnerBytes() {
-        java.lang.Object ref = owner_;
+          getNameBytes() {
+        java.lang.Object ref = name_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          owner_ = b;
+          name_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>required string owner = 1;</code>
+       * <code>required string name = 1;</code>
        */
-      public Builder setOwner(
+      public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        owner_ = value;
+        name_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string owner = 1;</code>
+       * <code>required string name = 1;</code>
        */
-      public Builder clearOwner() {
+      public Builder clearName() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        owner_ = getDefaultInstance().getOwner();
+        name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
       /**
-       * <code>required string owner = 1;</code>
+       * <code>required string name = 1;</code>
        */
-      public Builder setOwnerBytes(
+      public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        owner_ = value;
+        name_ = value;
         onChanged();
         return this;
       }
 
-      // required string description = 2;
-      private java.lang.Object description_ = "";
+      // optional string resource = 2;
+      private java.lang.Object resource_ = "";
       /**
-       * <code>required string description = 2;</code>
+       * <code>optional string resource = 2;</code>
        */
-      public boolean hasDescription() {
+      public boolean hasResource() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string description = 2;</code>
+       * <code>optional string resource = 2;</code>
+       */
+      public java.lang.String getResource() {
+        java.lang.Object ref = resource_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          resource_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string resource = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getResourceBytes() {
+        java.lang.Object ref = resource_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          resource_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string resource = 2;</code>
+       */
+      public Builder setResource(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        resource_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string resource = 2;</code>
+       */
+      public Builder clearResource() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        resource_ = getDefaultInstance().getResource();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string resource = 2;</code>
+       */
+      public Builder setResourceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        resource_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional string description = 3;
+      private java.lang.Object description_ = "";
+      /**
+       * <code>optional string description = 3;</code>
+       */
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string description = 3;</code>
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -65994,7 +66134,7 @@ public final class OsmandOdb {
         }
       }
       /**
-       * <code>required string description = 2;</code>
+       * <code>optional string description = 3;</code>
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -66010,51 +66150,51 @@ public final class OsmandOdb {
         }
       }
       /**
-       * <code>required string description = 2;</code>
+       * <code>optional string description = 3;</code>
        */
       public Builder setDescription(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         description_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string description = 2;</code>
+       * <code>optional string description = 3;</code>
        */
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       /**
-       * <code>required string description = 2;</code>
+       * <code>optional string description = 3;</code>
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         description_ = value;
         onChanged();
         return this;
       }
 
-      // required string pluginid = 3;
+      // optional string pluginid = 4;
       private java.lang.Object pluginid_ = "";
       /**
-       * <code>required string pluginid = 3;</code>
+       * <code>optional string pluginid = 4;</code>
        */
       public boolean hasPluginid() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required string pluginid = 3;</code>
+       * <code>optional string pluginid = 4;</code>
        */
       public java.lang.String getPluginid() {
         java.lang.Object ref = pluginid_;
@@ -66068,7 +66208,7 @@ public final class OsmandOdb {
         }
       }
       /**
-       * <code>required string pluginid = 3;</code>
+       * <code>optional string pluginid = 4;</code>
        */
       public com.google.protobuf.ByteString
           getPluginidBytes() {
@@ -66084,36 +66224,36 @@ public final class OsmandOdb {
         }
       }
       /**
-       * <code>required string pluginid = 3;</code>
+       * <code>optional string pluginid = 4;</code>
        */
       public Builder setPluginid(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         pluginid_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string pluginid = 3;</code>
+       * <code>optional string pluginid = 4;</code>
        */
       public Builder clearPluginid() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         pluginid_ = getDefaultInstance().getPluginid();
         onChanged();
         return this;
       }
       /**
-       * <code>required string pluginid = 3;</code>
+       * <code>optional string pluginid = 4;</code>
        */
       public Builder setPluginidBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         pluginid_ = value;
         onChanged();
         return this;
@@ -66580,10 +66720,10 @@ public final class OsmandOdb {
       "smAnd.OBF.IdTable\022*\n\013dataObjects\030\006 \003(\0132\025" +
       ".OsmAnd.OBF.RouteData\0221\n\014restrictions\030\007 ",
       "\003(\0132\033.OsmAnd.OBF.RestrictionData\022,\n\013stri" +
-      "ngTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTable\"C" +
-      "\n\013OsmAndOwner\022\r\n\005owner\030\001 \002(\t\022\023\n\013descript" +
-      "ion\030\002 \002(\t\022\020\n\010pluginid\030\003 \002(\tB\036\n\021net.osman" +
-      "d.binaryB\tOsmandOdb"
+      "ngTable\030\010 \001(\0132\027.OsmAnd.OBF.StringTable\"T" +
+      "\n\013OsmAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030" +
+      "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\020\n\010pluginid\030\004" +
+      " \001(\tB\036\n\021net.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -66889,7 +67029,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndOwner_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndOwner_descriptor,
-              new java.lang.String[] { "Owner", "Description", "Pluginid", });
+              new java.lang.String[] { "Name", "Resource", "Description", "Pluginid", });
           return null;
         }
       };

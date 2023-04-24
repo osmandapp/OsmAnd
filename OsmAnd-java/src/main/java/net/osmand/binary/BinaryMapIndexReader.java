@@ -2747,21 +2747,23 @@ public class BinaryMapIndexReader {
 	}
 
 	public static class OsmAndOwner {
-		String owner = "";
+		String name = "";
 		String pluginid = "";
 		String description = "";
+		String resource = "";
 
 		public OsmAndOwner() {
 		}
 
-		public OsmAndOwner(String owner, String pluginid, String description) {
-			this.owner = owner;
+		public OsmAndOwner(String name, String resource, String pluginid, String description) {
+			this.name = name;
+			this.resource = resource;
 			this.pluginid = pluginid;
 			this.description = description;
 		}
 
-		public String getOwner() {
-			return owner;
+		public String getName() {
+			return name;
 		}
 
 		public String getPluginid() {
@@ -2770,6 +2772,24 @@ public class BinaryMapIndexReader {
 
 		public String getDescription() {
 			return description;
+		}
+
+		public String getResource() {
+			return resource;
+		}
+
+		public String toString() {
+			String owner = " owner=name:" + name;
+			if (!resource.isEmpty()) {
+				owner += ", resource:" + resource;
+			}
+			if (!description.isEmpty()) {
+				owner += ", description:" + description;
+			}
+			if (!pluginid.isEmpty()) {
+				owner += ", pluginid:" + pluginid;
+			}
+			return owner;
 		}
 	}
 
@@ -2781,8 +2801,11 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 				case 0:
 					return;
-				case OsmandOdb.OsmAndOwner.OWNER_FIELD_NUMBER :
-					owner.owner = codedIS.readString();
+				case OsmandOdb.OsmAndOwner.NAME_FIELD_NUMBER :
+					owner.name = codedIS.readString();
+					break;
+				case OsmandOdb.OsmAndOwner.RESOURCE_FIELD_NUMBER :
+					owner.resource = codedIS.readString();
 					break;
 				case OsmandOdb.OsmAndOwner.PLUGINID_FIELD_NUMBER :
 					owner.pluginid = codedIS.readString();
