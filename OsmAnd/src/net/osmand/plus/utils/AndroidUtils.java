@@ -211,20 +211,19 @@ public class AndroidUtils {
 		for (int i = 0; i <= layers; i++) {
 			Drawable drawable = layerDrawable.getDrawable(i);
 			if (drawable != null) {
+				int width = (int) (drawable.getIntrinsicWidth() * scale);
+				int height = (int) (drawable.getIntrinsicHeight() * scale);
 				if (drawable instanceof VectorDrawable) {
-					int widthVector = (int) (drawable.getIntrinsicWidth() * scale);
-					int heightVector = (int) (drawable.getIntrinsicHeight() * scale);
-					Rect boundsVector = new Rect(locationX - widthVector / 2, locationY - heightVector / 2,
-							locationX + widthVector / 2, locationY + heightVector / 2);
+					Rect boundsVector = new Rect(locationX - width / 2, locationY - height / 2,
+							locationX + width / 2, locationY + height / 2);
 					drawable.setBounds(boundsVector);
 					drawable.draw(canvas);
 				} else {
-					int width = (int) (drawable.getIntrinsicWidth() * scale);
-					int height = (int) (drawable.getIntrinsicHeight() * scale);
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
 					Bitmap tmpBitmap = srcBitmap.copy(srcBitmap.getConfig(), true);
 					Bitmap bitmap = AndroidUtils.scaleBitmap(tmpBitmap, width, height, false);
 					canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
+					bitmap.recycle();
 				}
 			}
 		}
