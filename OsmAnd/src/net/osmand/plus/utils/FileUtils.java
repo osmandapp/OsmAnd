@@ -1,5 +1,7 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.IndexConstants.DOWNLOAD_EXT;
+import static net.osmand.IndexConstants.TEMP_DIR;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
 import android.widget.Toast;
@@ -10,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
@@ -197,8 +198,14 @@ public class FileUtils {
 		return dest;
 	}
 
+	@NonNull
 	public static File getTempDir(@NonNull OsmandApplication app) {
-		File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+		return getExistingDir(app, TEMP_DIR);
+	}
+
+	@NonNull
+	public static File getExistingDir(@NonNull OsmandApplication app, @NonNull String path) {
+		File tempDir = app.getAppPath(path);
 		if (!tempDir.exists()) {
 			tempDir.mkdirs();
 		}
@@ -256,11 +263,11 @@ public class FileUtils {
 	@NonNull
 	public static File getFileWithDownloadExtension(@NonNull File original) {
 		File folder = original.getParentFile();
-		String fileName = original.getName() + IndexConstants.DOWNLOAD_EXT;
+		String fileName = original.getName() + DOWNLOAD_EXT;
 		return new File(folder, fileName);
 	}
 
-	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs, @NonNull String ... extensions) {
+	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs, @NonNull String... extensions) {
 		File[] files = dir.listFiles(pathname -> pathname.isDirectory()
 				? withSubdirs : Algorithms.endsWithAny(pathname.getName(), extensions));
 		if (files == null) {

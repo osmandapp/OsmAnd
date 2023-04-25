@@ -75,7 +75,7 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -683,7 +683,7 @@ public class ImportHelper {
 	}
 
 	private void openFavorites() {
-		Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+		Intent newIntent = new Intent(activity, app.getAppCustomization().getMyPlacesActivity());
 		newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		newIntent.putExtra(TAB_ID, GPX_TAB);
 		activity.startActivity(newIntent);

@@ -145,12 +145,12 @@ public class OsmAndAppCustomization {
 			String directory = osmandSettings.getExternalStorageDirectoryV19();
 			newSettings.setExternalStorageDirectoryV19(type, directory);
 		}
-		app.setOsmandSettings(newSettings);
+		app.setSettings(newSettings);
 		notifySettingsCustomized();
 	}
 
 	public void restoreOsmandSettings() {
-		app.setOsmandSettings(osmandSettings);
+		app.setSettings(osmandSettings);
 		notifySettingsCustomized();
 	}
 
@@ -183,7 +183,7 @@ public class OsmAndAppCustomization {
 		return MapActivity.class;
 	}
 
-	public Class<MyPlacesActivity> getFavoritesActivity() {
+	public Class<MyPlacesActivity> getMyPlacesActivity() {
 		return MyPlacesActivity.class;
 	}
 

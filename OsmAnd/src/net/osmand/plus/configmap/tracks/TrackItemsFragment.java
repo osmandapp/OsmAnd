@@ -79,7 +79,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	}
 
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
-		adapter.ontrackItemsSelected(trackItems);
+		adapter.onTrackItemsSelected(trackItems);
 	}
 
 	public void updateContent() {

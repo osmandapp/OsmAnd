@@ -9,7 +9,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.track.helpers.save.SaveGpxListener;
 
 import java.io.File;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 	@Override
 	protected void onPreExecute() {
 		if (saveGpxListener != null) {
-			saveGpxListener.gpxSavingStarted();
+			saveGpxListener.onSaveGpxStarted();
 		}
 	}
 
@@ -63,7 +63,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 	protected void onPostExecute(Boolean shouldClearPath) {
 		if (gpx != null) {
 			if (saveGpxListener != null) {
-				saveGpxListener.gpxSavingFinished(null);
+				saveGpxListener.onSaveGpxFinished(null);
 			}
 			if (shouldClearPath) {
 				gpx.path = "";

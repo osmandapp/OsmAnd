@@ -478,7 +478,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			bundle.putInt(TAB_ID, GPX_TAB);
 			bundle.putString(SELECTED_FOLDER_KEY, folder);
 
-			Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+			Intent intent = new Intent(app, app.getAppCustomization().getMyPlacesActivity());
 			intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			activity.startActivity(intent);
 		}

@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.OPEN_GPX_DOCUMENT_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.util.Algorithms.formatDuration;
@@ -62,12 +63,13 @@ import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask.LoadTracksListener;
-import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -78,10 +80,10 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -574,7 +576,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void addTrack() {
-		((MyPlacesActivity) getActivity()).addTrack();
+		Intent intent = ImportHelper.getImportTrackIntent();
+		AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
 	private void updateTracksSort(TracksSortByMode sortByMode) {
@@ -858,7 +861,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		Bundle bundle = new Bundle();
 		bundle.putInt(TAB_ID, GPX_TAB);
 
-		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		Intent intent = new Intent(app, app.getAppCustomization().getMyPlacesActivity());
 		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -1129,19 +1132,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				ch.setVisibility((selectionMode && !(groupPosition == 0 && isShowingSelection())) ? View.VISIBLE : View.GONE);
 				ch.setChecked(selectedGroups.contains(groupPosition));
 
-				ch.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (ch.isChecked()) {
-							selectedItems.addAll(data.get(category.get(getGroupPosition(groupPosition))));
-							selectedGroups.add(groupPosition);
-						} else {
-							selectedItems.removeAll(data.get(category.get(getGroupPosition(groupPosition))));
-							selectedGroups.remove(groupPosition);
-						}
-						allGpxAdapter.notifyDataSetInvalidated();
-						updateSelectionMode(actionMode);
+				ch.setOnClickListener(view -> {
+					if (ch.isChecked()) {
+						selectedItems.addAll(data.get(category.get(getGroupPosition(groupPosition))));
+						selectedGroups.add(groupPosition);
+					} else {
+						selectedItems.removeAll(data.get(category.get(getGroupPosition(groupPosition))));
+						selectedGroups.remove(groupPosition);
 					}
+					allGpxAdapter.notifyDataSetInvalidated();
+					updateSelectionMode(actionMode);
 				});
 				v.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {

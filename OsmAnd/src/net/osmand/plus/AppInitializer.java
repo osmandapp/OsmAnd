@@ -290,7 +290,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initPoiTypes() {
-		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
+		app.poiTypes.setForbiddenTypes(app.settings.getForbiddenTypes());
 		if (app.getAppPath(SETTINGS_DIR + "poi_types.xml").exists()) {
 			app.poiTypes.init(app.getAppPath(SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
 		} else {

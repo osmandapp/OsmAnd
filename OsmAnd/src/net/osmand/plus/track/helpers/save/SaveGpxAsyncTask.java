@@ -1,4 +1,4 @@
-package net.osmand.plus.track;
+package net.osmand.plus.track.helpers.save;
 
 import android.os.AsyncTask;
 
@@ -17,7 +17,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 	private final SaveGpxListener saveGpxListener;
 
 	public SaveGpxAsyncTask(@NonNull File file, @NonNull GPXFile gpx,
-							@Nullable SaveGpxListener saveGpxListener) {
+	                        @Nullable SaveGpxListener saveGpxListener) {
 		this.gpx = gpx;
 		this.file = file;
 		this.saveGpxListener = saveGpxListener;
@@ -26,7 +26,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 	@Override
 	protected void onPreExecute() {
 		if (saveGpxListener != null) {
-			saveGpxListener.gpxSavingStarted();
+			saveGpxListener.onSaveGpxStarted();
 		}
 	}
 
@@ -38,14 +38,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 	@Override
 	protected void onPostExecute(Exception errorMessage) {
 		if (saveGpxListener != null) {
-			saveGpxListener.gpxSavingFinished(errorMessage);
+			saveGpxListener.onSaveGpxFinished(errorMessage);
 		}
-	}
-
-	public interface SaveGpxListener {
-
-		default void gpxSavingStarted() { }
-
-		void gpxSavingFinished(Exception errorMessage);
 	}
 }
