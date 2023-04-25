@@ -32,7 +32,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -42,14 +44,20 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
+import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
+import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -320,7 +328,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void updateTrackTabs() {
 		adapter.setTrackTabs(selectedTracksHelper.getTrackTabs());
-		adapter.notifyDataSetChanged();
 	}
 
 	private void saveChanges() {
@@ -424,6 +431,92 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			selectedTracksHelper.sortTrackTab(trackTab);
 			selectedTracksHelper.saveTabsSortModes();
 			updateTabsContent();
+		}
+	}
+
+	public void onTrackItemLongClick(@NonNull View view, @NonNull GPXInfo gpxInfo) {
+		openPopUpMenu(view, gpxInfo);
+	}
+
+	private void openPopUpMenu(View view, GPXInfo gpxInfo) {
+		UiUtilities iconsCache = app.getUIUtilities();
+		List<PopUpMenuItem> items = new ArrayList<>();
+		FragmentActivity activity = app.getOsmandMap().getMapView().getMapActivity();
+
+		if (activity != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_show_on_map)
+					.setIcon(iconsCache
+							.getThemedIcon(R.drawable.ic_show_on_map))
+					.setOnClickListener(v -> showGpxOnMap(gpxInfo, activity))
+					.create());
+		}
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_move)
+				.setIcon(iconsCache
+						.getThemedIcon(R.drawable.ic_action_folder_stroke))
+				.setOnClickListener(v -> moveGpx(gpxInfo))
+				.create());
+
+		if (activity != null && gpxInfo.getFile() != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_rename)
+					.setIcon(iconsCache
+							.getThemedIcon(R.drawable.ic_action_edit_dark))
+					.setOnClickListener(v -> FileUtils.renameFile(activity, gpxInfo.getFile(), this, false)).create());
+		}
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_share)
+				.setIcon(AndroidUtils.getDrawableForDirection(app, iconsCache.getThemedIcon(R.drawable.ic_action_gshare_dark)))
+				.setOnClickListener(v -> {
+					if (gpxInfo.isCurrentRecordingTrack()) {
+						GPXFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
+						GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
+					} else if (gpxInfo.getGpxFile() == null && gpxInfo.getFile() != null) {
+						GpxFileLoaderTask.loadGpxFile(gpxInfo.getFile(), activity, result -> {
+							GpxUiHelper.saveAndShareGpxWithAppearance(app, result);
+							return false;
+						});
+					} else {
+						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxInfo.getGpxFile());
+					}
+				}).create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private void showGpxOnMap(@NonNull GPXInfo info, @NonNull Activity activity) {
+		getGpxFile(info, activity, gpxFile -> {
+			info.setGpxFile(gpxFile);
+			GPXUtilities.WptPt loc = gpxFile.findPointToShow();
+			if (loc != null) {
+				settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+				MapActivity.launchMapActivityMoveToTop(activity, null);
+			} else {
+				app.showToastMessage(R.string.gpx_file_is_empty);
+			}
+			dismiss();
+			return true;
+		});
+	}
+
+	private void getGpxFile(@NonNull GPXInfo gpxInfo, @NonNull Activity activity, @NonNull CallbackWithObject<GPXFile> callback) {
+		if (gpxInfo.getFile() != null) {
+			GpxFileLoaderTask.loadGpxFile(gpxInfo.getFile(), activity, callback);
+		}
+	}
+
+	private void moveGpx(@NonNull GPXInfo info) {
+		if (getFragmentManager() != null && info.getFile() != null) {
+			MoveGpxFileBottomSheet.showInstance(getFragmentManager(), this, info.getFile().getAbsolutePath(), false, false);
 		}
 	}
 

@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -96,21 +97,14 @@ public class TrackItem {
 		}
 
 		TrackItem trackItem = (TrackItem) obj;
-		return trackItem.path.equals(this.path)
-				&& trackItem.name.equals(this.name)
+		return Algorithms.stringsEqual(trackItem.path, this.path)
+				&& Algorithms.stringsEqual(trackItem.name, this.name)
 				&& trackItem.lastModified == this.lastModified
 				&& trackItem.showCurrentTrack == this.showCurrentTrack;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + path.hashCode();
-		result = prime * result + name.hashCode();
-		result = prime * result + (int) (lastModified ^ (lastModified >>> 32));
-		result = prime * result + ((dataItem == null) ? 0 : dataItem.hashCode());
-		result = prime * result + ((file == null) ? 0 : file.hashCode());
-		return result;
+		return Algorithms.hash(path, name, lastModified, dataItem, file);
 	}
 }
