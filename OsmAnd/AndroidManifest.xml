@@ -25,6 +25,13 @@
 	<uses-permission android:name="androidx.car.app.ACCESS_SURFACE"/>
 	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
+	<uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+	<uses-permission android:name="android.permission.BLUETOOTH"
+		android:maxSdkVersion="30" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+		android:maxSdkVersion="30" />
+
 	<uses-feature android:name="android.hardware.camera" android:required="false" />
 	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 	<uses-feature android:name="android.hardware.microphone" android:required="false" />
@@ -1149,6 +1156,9 @@
 			android:name="net.osmand.plus.download.DownloadService"
 			android:label="@string/process_downloading_service"
 			android:stopWithTask="false" />
+
+		<service
+			android:name=".plugins.antplus.BluetoothLeService" />
 
 		<meta-data android:name="com.google.android.gms.car.application"
 			android:resource="@xml/car_app_desc"

@@ -5094,7 +5094,7 @@
 \n
 \n</string>
     <string name="generate_slope_from_3d_maps">Ustvarjanje rastrskih zemljevidov naklonov iz 3D zemljevidov</string>
-    <string name="clear_online_cache_description">To bo počistilo ves predpomnilnik za spletne vremenske ploščice.</string>
+    <string name="clear_online_cache_description">To bo počistilo predpomnilnik za spletne vremenske ploščice.</string>
     <string name="clear_online_cache">Počisti spletni predpomnilnik</string>
     <string name="offline_cache">Predpomnilnik brez povezave</string>
     <string name="app_mode_climbing">Plezanje</string>
@@ -5111,10 +5111,14 @@
     <string name="shared_string_all_world">Ves svet</string>
     <string name="offline_weather_forecast">Vremenska napoved brez povezave</string>
     <string name="app_mode_moped">Moped</string>
-    <string name="disable_vertex_hillshade_3d">Onemogoči senčenja terena oglišč v 3D</string>
+    <string name="disable_vertex_hillshade_3d">Onemogoči senčenja terena vrhov v 3D</string>
     <string name="shared_string_pounds">funtov</string>
     <string name="metric_lbs">lbs</string>
     <string name="speak_route_deviation">Obvesti o odstopanju od poti</string>
     <string name="select_layer">Izberi sloj</string>
     <string name="rendering_value_defaultMedium_name">Privzeto (srednje)</string>
+    <string name="proxy_port_max_warning">Največja vrednost za vrata je %1$s</string>
+    <string name="shutter_sound">Zvok zaklopke</string>
+    <string name="camera_app">Aplikacija kamera</string>
+    <string name="weather_download_error">Ploščic %1$s ni bilo mogoče prenesti.</string>
 </resources>

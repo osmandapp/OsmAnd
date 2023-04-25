@@ -1980,6 +1980,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					mapRenderer.setMapTarget(
 							new PointI((int) e2.getX(), (int) e2.getY()),
 							new PointI(touchLocationX, touchLocationY));
+					currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(touchLocationY),
+							MapUtils.get31LongitudeX(touchLocationX));
+					refreshMap();
 					notifyLocationListeners(getLatitude(), getLongitude());
 				} else
 					dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);

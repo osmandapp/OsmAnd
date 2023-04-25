@@ -5136,4 +5136,25 @@
     <string name="rendering_value_defaultMedium_name">Bawaan (sedang)</string>
     <string name="proxy_port_max_warning">Nilai porta maksimum adalah %1$s</string>
     <string name="weather_download_error">Tidak dapat mengunduh ubin %1$s.</string>
+    <string name="external_device_forget_sensor_description">Sensor akan dihapus dari daftar.
+\nAnda dapat menyandingkan sensor ini lagi kapan pun.</string>
+    <string name="external_device_disconnected">Terputus</string>
+    <string name="external_device_connected">Terhubung</string>
+    <string name="external_device_menu_forget">Abaikan</string>
+    <string name="external_device_characteristic_speed">Kecepatan</string>
+    <string name="external_device_characteristic_distance">Jarak</string>
+    <string name="external_device_characteristic_total_distance">Jumlah jarak</string>
+    <string name="external_device_characteristic_battery_level">Baterai</string>
+    <string name="external_device_characteristic_gear_ratio">Rasio gigi</string>
+    <string name="external_device_characteristic_cadence">Irama</string>
+    <string name="external_device_characteristic_heart_rate">Detak jantung</string>
+    <string name="external_device_characteristic_systolic">Sistolik</string>
+    <string name="external_device_characteristic_diastolic">Diastolik</string>
+    <string name="external_device_characteristic_arterial_pressure">Tekanan arteri</string>
+    <string name="external_device_characteristic_cuff_pressure">Tekanan manset</string>
+    <string name="external_device_characteristic_pulse_rate">Denyut nadi</string>
+    <string name="external_device_characteristic_stride_length">Panjang langkah</string>
+    <string name="external_device_characteristic_temperature">Suhu</string>
+    <string name="external_device_forget_sensor">Abaikan sensor</string>
+    <string name="external_device_low_battery">Baterai lemah</string>
 </resources>

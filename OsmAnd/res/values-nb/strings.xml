@@ -5107,4 +5107,14 @@
     <string name="free_maps_updates">Gratis oppdateringer (nødsfall)</string>
     <string name="shared_string_pounds">pund</string>
     <string name="weather_forecast_is_outdated">Værmeldingen er utdatert.</string>
+    <string name="weather_download_error">Kunne ikke laste ned %1$s flis.</string>
+    <string name="proxy_port_max_warning">Maks. portverdi er %1$s</string>
+    <string name="external_device_characteristic_battery_level">Batteri</string>
+    <string name="external_device_characteristic_gear_ratio">Girutveksling</string>
+    <string name="external_device_characteristic_total_distance">Total avstand</string>
+    <string name="external_device_menu_forget">Glem</string>
+    <string name="external_device_characteristic_speed">Hastighet</string>
+    <string name="ant_plus_nothing_found_text">Fant ingen sensorer</string>
+    <string name="external_device_characteristic_distance">Avstand</string>
+    <string name="ant_plus_searching_text">Søker etter sensorer …</string>
 </resources>
