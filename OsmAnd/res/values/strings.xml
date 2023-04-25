@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="n_tracks">%1$s tracks</string>
+    <string name="shared_string_remove_folder">Remove folder</string>
+    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>

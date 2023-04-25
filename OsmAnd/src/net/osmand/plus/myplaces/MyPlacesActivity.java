@@ -12,6 +12,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -57,6 +59,7 @@ public class MyPlacesActivity extends TabActivity {
 	public static final String TAB_ID = "selected_tab_id";
 
 	public static final int GPX_TAB = R.string.shared_string_tracks;
+	public static final int TRACKS_TAB = R.string.shared_string_gpx_files;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
 	protected List<WeakReference<FavoritesFragmentStateHolder>> fragList = new ArrayList<>();
@@ -80,12 +83,15 @@ public class MyPlacesActivity extends TabActivity {
 
 		importHelper = new ImportHelper(this);
 
-		//noinspection ConstantConditions
-		getSupportActionBar().setTitle(R.string.shared_string_my_places);
-		getSupportActionBar().setElevation(0);
+		if (getSupportActionBar() != null) {
+			getSupportActionBar().hide();
+		}
 
-		setContentView(R.layout.tab_content);
+		setContentView(R.layout.my_places);
 		viewPager = findViewById(R.id.pager);
+
+		TextView title = findViewById(R.id.toolbar_title);
+		title.setText(R.string.shared_string_my_places);
 
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
@@ -179,6 +185,7 @@ public class MyPlacesActivity extends TabActivity {
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
 		mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
+		mTabs.add(getTabIndicator(TRACKS_TAB, AvailableTracksFragment.class));
 		PluginsHelper.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
 	}

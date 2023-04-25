@@ -67,6 +67,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
@@ -242,6 +243,23 @@ public class GpxUiHelper {
 			}
 			SelectGpxTrackBottomSheet.showInstance(activity.getSupportFragmentManager(), showCurrentGpx, callbackWithObject, list);
 		}
+	}
+
+	@NonNull
+	public static String getFolderDescription(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+		String pattern = app.getString(R.string.ltr_or_rtl_combine_via_comma);
+		return String.format(pattern, formatLastUpdateTime(app, folder), formatTracksCount(app, folder));
+	}
+
+	@NonNull
+	public static String formatLastUpdateTime(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+		return OsmAndFormatter.getFormattedDate(app, folder.getLastModified());
+	}
+
+	@NonNull
+	public static String formatTracksCount(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+		String pattern = app.getString(R.string.n_tracks);
+		return String.format(pattern, folder.getTotalTracksCount());
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app,
