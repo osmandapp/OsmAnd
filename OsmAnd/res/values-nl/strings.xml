@@ -5045,4 +5045,17 @@
     <string name="movement_speed">Bewegingssnelheid</string>
     <string name="simulation_position_description">Selecteer een trackbestand dat u wilt gebruiken als bewegingsbegeleiding.</string>
     <string name="shared_string_inches">inch</string>
+    <string name="shutter_sound">Sluitergeluid</string>
+    <string name="camera_app">Camera app</string>
+    <string name="speak_route_deviation">Kondig afwijking van de route aan</string>
+    <string name="select_layer">Selecteer laag</string>
+    <string name="clear_online_cache_description">Dit wist de cache voor online weertegels.</string>
+    <string name="free_maps_updates">Gratis updates (noodgevallen)</string>
+    <string name="clear_online_cache">Verwijder online cache</string>
+    <string name="offline_cache">Offline cache</string>
+    <string name="token_is_not_valid">Token is niet geldig</string>
+    <string name="app_mode_climbing">Klimmen</string>
+    <string name="shared_string_alt_name">Alternatieve naam</string>
+    <string name="generate_slope_from_3d_maps">Genereer hellingrasterkaarten uit 3D-kaarten</string>
+    <string name="enable_3d_maps">3D-kaarten inschakelen</string>
 </resources>

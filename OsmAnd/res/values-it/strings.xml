@@ -4792,7 +4792,7 @@
     <string name="coordinates_widget_current_location_desc">Mostra le coordinate geografiche della posizione attuale</string>
     <string name="coordinates_widget_current_location">Coordinate: posizione attuale</string>
     <string name="favorites_backup">Salva i preferiti</string>
-    <string name="map_widget_target_distance">Distanza dalla destinazione</string>
+    <string name="map_widget_target_distance">Distanza dalla telecamera alla destinazione</string>
     <string name="ant_go_to_store">Vai al Play Store</string>
     <string name="send_uuid_preference">Invia Unique User Identifier (UUID)</string>
     <string name="shared_string_cross_buy">Acquisto multi piattaforma</string>

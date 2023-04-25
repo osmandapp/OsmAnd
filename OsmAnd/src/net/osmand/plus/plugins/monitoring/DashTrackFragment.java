@@ -26,8 +26,8 @@ import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.GpxSelectionParams;
@@ -75,8 +75,8 @@ public class DashTrackFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+				Intent favorites = new Intent(activity, appCustomization.getMyPlacesActivity());
+				getMyApplication().getSettings().FAVORITES_TAB.set(MyPlacesActivity.GPX_TAB);
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 				closeDashboard();

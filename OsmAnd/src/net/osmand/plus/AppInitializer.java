@@ -54,7 +54,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -290,7 +290,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initPoiTypes() {
-		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
+		app.poiTypes.setForbiddenTypes(app.settings.getForbiddenTypes());
 		if (app.getAppPath(SETTINGS_DIR + "poi_types.xml").exists()) {
 			app.poiTypes.init(app.getAppPath(SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
 		} else {

@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
-import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.getGpxTrackAnalysis;
+import static net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment.getGpxTrackAnalysis;
 import static net.osmand.util.Algorithms.formatDuration;
 
 import android.view.View;

@@ -11,6 +11,7 @@ import java.util.Arrays;
 
 public class GPXFolderUtils {
 
+	@NonNull
 	public static String getSubfolderTitle(@NonNull File file, @NonNull String subfolder) {
 		String name = file.getName();
 		return subfolder.isEmpty() ? name : subfolder + File.separator + name;
@@ -40,5 +41,4 @@ public class GPXFolderUtils {
 		});
 		return listFiles;
 	}
-
 }

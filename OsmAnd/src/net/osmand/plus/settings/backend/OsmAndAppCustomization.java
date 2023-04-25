@@ -27,7 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -145,12 +145,12 @@ public class OsmAndAppCustomization {
 			String directory = osmandSettings.getExternalStorageDirectoryV19();
 			newSettings.setExternalStorageDirectoryV19(type, directory);
 		}
-		app.setOsmandSettings(newSettings);
+		app.setSettings(newSettings);
 		notifySettingsCustomized();
 	}
 
 	public void restoreOsmandSettings() {
-		app.setOsmandSettings(osmandSettings);
+		app.setSettings(osmandSettings);
 		notifySettingsCustomized();
 	}
 
@@ -183,8 +183,8 @@ public class OsmAndAppCustomization {
 		return MapActivity.class;
 	}
 
-	public Class<FavoritesActivity> getFavoritesActivity() {
-		return FavoritesActivity.class;
+	public Class<MyPlacesActivity> getMyPlacesActivity() {
+		return MyPlacesActivity.class;
 	}
 
 	public Class<? extends Activity> getDownloadIndexActivity() {

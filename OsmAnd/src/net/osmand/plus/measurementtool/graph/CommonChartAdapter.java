@@ -20,8 +20,8 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
-import net.osmand.plus.myplaces.ui.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.UiUtilities;
 

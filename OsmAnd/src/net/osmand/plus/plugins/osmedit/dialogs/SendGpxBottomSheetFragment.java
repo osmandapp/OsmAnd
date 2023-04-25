@@ -24,7 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
@@ -131,8 +131,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			BaseSettingsFragment.showInstance(activity, OPEN_STREET_MAP_EDITING);
 		} else {
 			Bundle prevIntentParams = null;
-			if (activity instanceof FavoritesActivity) {
-				prevIntentParams = ((FavoritesActivity) activity).storeCurrentState();
+			if (activity instanceof MyPlacesActivity) {
+				prevIntentParams = ((MyPlacesActivity) activity).storeCurrentState();
 			} else if (activity.getIntent() != null) {
 				prevIntentParams = activity.getIntent().getExtras();
 			}

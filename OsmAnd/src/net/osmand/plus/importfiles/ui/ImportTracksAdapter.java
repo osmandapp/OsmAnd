@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;

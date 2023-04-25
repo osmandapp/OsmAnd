@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.utils.AndroidUtils;
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -18,7 +18,10 @@ import net.osmand.plus.AppInitializer.LoadRoutingFilesCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.ImportType;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
@@ -39,7 +42,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private final boolean overwrite;
 
 	public XmlImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-						 @NonNull String fileName, @Nullable CallbackWithObject routingCallback, boolean overwrite) {
+	                     @NonNull String fileName, @Nullable CallbackWithObject routingCallback, boolean overwrite) {
 		super(activity);
 		this.uri = uri;
 		this.destFileName = fileName;
@@ -61,12 +64,12 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	@Override
 	protected void onPostExecute(String error) {
-		File destDir = getDestinationDir();
+		File destDir = getDestinationDir(app, importType);
 		File file = new File(destDir, destFileName);
 		if (error == null && file.exists()) {
 			if (importType == ImportType.RENDERING) {
 				app.getRendererRegistry().updateExternalRenderers();
-				app.showShortToastMessage(app.getString(R.string.file_imported_successfully, destFileName));
+				showSuccessSnackbar(destFileName);
 				hideProgress();
 			} else if (importType == ImportType.ROUTING) {
 				loadRoutingFiles(app, new LoadRoutingFilesCallback() {
@@ -78,7 +81,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 							if (routingCallback != null) {
 								routingCallback.processResult(builder);
 							}
-							app.showShortToastMessage(app.getString(R.string.file_imported_successfully, destFileName));
+							showSuccessSnackbar(destFileName);
 						} else {
 							app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
 						}
@@ -91,7 +94,17 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		}
 	}
 
-	private File getDestinationDir() {
+	private void showSuccessSnackbar(@NonNull String filename) {
+		FragmentActivity activity = activityRef.get();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
+					app.getString(R.string.is_imported, filename), Snackbar.LENGTH_LONG);
+			UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
+			snackbar.show();
+		}
+	}
+
+	public static File getDestinationDir(OsmandApplication app, ImportType importType) {
 		if (importType == ImportType.ROUTING) {
 			return app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 		} else if (importType == ImportType.RENDERING) {
@@ -101,7 +114,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	}
 
 	private File getDestinationFile() {
-		File destDir = getDestinationDir();
+		File destDir = getDestinationDir(app, importType);
 		if (destDir != null) {
 			if (!destDir.exists()) {
 				destDir.mkdirs();
@@ -120,7 +133,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		return null;
 	}
 
-	protected static ImportType checkImportType(OsmandApplication app, Uri uri) {
+	public static ImportType checkImportType(OsmandApplication app, Uri uri) {
 		ImportType importType = null;
 		InputStream is = null;
 		try {

@@ -145,14 +145,14 @@ public abstract class DashBaseFragment extends Fragment {
 		return ColorUtilities.getColor(getContext(), resId);
 	}
 
-	protected void startFavoritesActivity(int tab) {
+	protected void startMyPlacesActivity(int tab) {
 		Activity activity = getActivity();
 		if (activity == null) {
 			return;
 		}
 		OsmandApplication app = getMyApplication();
 		OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+		Intent favorites = new Intent(activity, appCustomization.getMyPlacesActivity());
 		favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		app.getSettings().FAVORITES_TAB.set(tab);
 		activity.startActivity(favorites);

@@ -501,7 +501,7 @@ public class MapActivityActions extends MapActions {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_myplaces_open");
 					Intent newIntent = new Intent(mapActivity, app.getAppCustomization()
-							.getFavoritesActivity());
+							.getMyPlacesActivity());
 					newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					mapActivity.startActivity(newIntent);
 					return true;
@@ -745,7 +745,7 @@ public class MapActivityActions extends MapActions {
 					String itemLogName = drawerId.replace(DRAWER_ITEM_ID_SCHEME, "");
 					app.logEvent("drawer_" + itemLogName + "_open");
 					Intent newIntent = new Intent(mapActivity, app.getAppCustomization()
-							.getFavoritesActivity());
+							.getMyPlacesActivity());
 					newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					settings.FAVORITES_TAB.set(titleRes);
 					mapActivity.startActivity(newIntent);

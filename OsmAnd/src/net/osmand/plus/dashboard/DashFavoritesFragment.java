@@ -10,23 +10,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.myplaces.DefaultFavoritesListener;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavoritesListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -60,7 +58,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
-			startFavoritesActivity(FavoritesActivity.FAV_TAB);
+			startMyPlacesActivity(MyPlacesActivity.FAV_TAB);
 			closeDashboard();
 		});
 		return view;
@@ -72,7 +70,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		if (helper.isFavoritesLoaded()) {
 			setupFavorites();
 		} else {
-			helper.addListener(favoritesListener = new DefaultFavoritesListener() {
+			helper.addListener(favoritesListener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					setupFavorites();
