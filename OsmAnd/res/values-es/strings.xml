@@ -4664,7 +4664,7 @@
     <string name="radius_rules_widget_desc">La herramienta «Regla radial» muestra círculos de distancia alrededor del punto marcado en el mapa.</string>
     <string name="current_time_widget_desc">Muestra la hora actual tomada del dispositivo.</string>
     <string name="battery_widget_desc">Muestra el nivel de batería del dispositivo.</string>
-    <string name="altitude_widget_desc">Muestra la altura sobre el nivel del mar en la ubicación actual.</string>
+    <string name="altitude_widget_desc">Muestra la altura sobre el nivel del mar de la geolocalización actual.</string>
     <string name="navigation_points_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o el tiempo restante, los próximos giros, el rumbo, el nombre de la calle actual o siguiente, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="route_maneuvers_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
@@ -4846,7 +4846,7 @@
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="map_center_widget">Coordenadas: centro del mapa</string>
     <string name="map_widget_altitude_desc">Muestran la altitud de la ubicación geográfica actual o la elevación del centro del mapa actual</string>
-    <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar en el centro del mapa actual.</string>
+    <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar del centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
