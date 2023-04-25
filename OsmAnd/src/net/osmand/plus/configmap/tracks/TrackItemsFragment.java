@@ -38,6 +38,10 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	private boolean compassUpdateAllowed = true;
 	private boolean nightMode;
 
+	public TrackTab getTrackTab() {
+		return trackTab;
+	}
+
 	public void setTrackTab(@NonNull TrackTab trackTab) {
 		this.trackTab = trackTab;
 	}

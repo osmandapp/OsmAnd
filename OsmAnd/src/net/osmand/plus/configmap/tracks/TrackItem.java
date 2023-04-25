@@ -25,24 +25,24 @@ public class TrackItem {
 
 	public TrackItem(@NonNull File file) {
 		this.file = file;
-		this.path = file.getAbsolutePath();
-		this.name = GpxUiHelper.getGpxTitle(file.getName());
-		this.lastModified = file.lastModified();
-		this.showCurrentTrack = false;
+		path = file.getAbsolutePath();
+		name = GpxUiHelper.getGpxTitle(file.getName());
+		lastModified = file.lastModified();
+		showCurrentTrack = false;
 	}
 
 	public TrackItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		this.showCurrentTrack = gpxFile.showCurrentTrack;
+		showCurrentTrack = gpxFile.showCurrentTrack;
 		if (showCurrentTrack) {
-			this.file = null;
-			this.path = gpxFile.path;
-			this.name = app.getString(R.string.shared_string_currently_recording_track);
-			this.lastModified = gpxFile.modifiedTime;
+			file = null;
+			path = gpxFile.path;
+			name = app.getString(R.string.shared_string_currently_recording_track);
+			lastModified = gpxFile.modifiedTime;
 		} else {
-			this.file = new File(gpxFile.path);
-			this.path = file.getAbsolutePath();
-			this.name = GpxUiHelper.getGpxTitle(file.getName());
-			this.lastModified = file.lastModified();
+			file = new File(gpxFile.path);
+			path = file.getAbsolutePath();
+			name = GpxUiHelper.getGpxTitle(file.getName());
+			lastModified = file.lastModified();
 		}
 	}
 
@@ -86,7 +86,7 @@ public class TrackItem {
 
 	@Override
 	public boolean equals(@Nullable Object obj) {
-		if (this == obj){
+		if (this == obj) {
 			return true;
 		}
 		if (obj == null) {
@@ -97,10 +97,10 @@ public class TrackItem {
 		}
 
 		TrackItem trackItem = (TrackItem) obj;
-		return Algorithms.stringsEqual(trackItem.path, this.path)
-				&& Algorithms.stringsEqual(trackItem.name, this.name)
-				&& trackItem.lastModified == this.lastModified
-				&& trackItem.showCurrentTrack == this.showCurrentTrack;
+		return Algorithms.stringsEqual(trackItem.path, path)
+				&& Algorithms.stringsEqual(trackItem.name, name)
+				&& trackItem.lastModified == lastModified
+				&& trackItem.showCurrentTrack == showCurrentTrack;
 	}
 
 	@Override

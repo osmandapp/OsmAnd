@@ -38,7 +38,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
@@ -101,7 +100,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		UiUtilities.setupCompoundButton(nightMode, activeColor, checkbox);
 		itemView.setOnClickListener(v -> fragment.onTrackItemsSelected(Collections.singleton(trackItem), !selected));
 		itemView.setOnLongClickListener(view -> {
-			fragment.onTrackItemLongClick(itemView, new GPXInfo(trackItem.getName(), trackItem.getFile()));
+			fragment.onTrackItemLongClick(view, trackItem);
 			return true;
 		});
 
