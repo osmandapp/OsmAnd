@@ -147,10 +147,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		String appearance = getString(R.string.change_appearance);
-		String count = String.valueOf(selectedTracksHelper.getSelectedTracks().size());
+		String count = "(" + String.valueOf(selectedTracksHelper.getSelectedTracks().size()) + ")";
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_dash, appearance, count));
+		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count));
 		toolbarTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView toolbarSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
