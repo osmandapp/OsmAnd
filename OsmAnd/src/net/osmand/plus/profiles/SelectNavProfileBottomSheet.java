@@ -246,11 +246,14 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		container.setPadding(container.getPaddingLeft(), 0, container.getPaddingRight(), 0);
 
 		View options = view.findViewById(R.id.options);
-		options.setOnClickListener(view1 -> {
-			if (isGroupImported(group)) {
-				openPopUpMenu(view1, group);
-			}
-		});
+		if(isGroupImported(group)){
+			options.setVisibility(View.VISIBLE);
+			options.setOnClickListener(itemView -> {
+				if (isGroupImported(group)) {
+					openPopUpMenu(itemView, group);
+				}
+			});
+		}
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
@@ -274,8 +277,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_delete)
-				.setIcon(iconsCache
-						.getThemedIcon(R.drawable.ic_action_delete_outlined))
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(getOptionDeleteClickListener(group))
 				.create());
 

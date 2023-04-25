@@ -11,7 +11,6 @@
 	Thx - Hardy
 -->
 
-    <string name="is_imported_snackbar">{0} is imported.</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>

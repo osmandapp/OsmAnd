@@ -548,18 +548,14 @@ public class ImportHelper {
 			public void onGpxSavingFinished(@NonNull List<String> warnings) {
 				boolean success = Algorithms.isEmpty(warnings);
 				if (success) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						Snackbar snackbar = Snackbar.make(getMapActivity().getLayout(),
-										MessageFormat.format(app.getString(R.string.is_imported_snackbar), gpxFile.metadata.name),
-										Snackbar.LENGTH_LONG)
-								.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
+					Snackbar snackbar = Snackbar.make(activity.getWindow().getDecorView().findViewById(android.R.id.content),
+									app.getString(R.string.is_imported, gpxFile.metadata.name),
+									Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
 
-						UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
-						snackbar.show();
-					} else {
-						openTrack(gpxFile, onGpxImport);
-					}
+					UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
+					snackbar.show();
+
 				} else {
 					app.showToastMessage(warnings.get(0));
 				}

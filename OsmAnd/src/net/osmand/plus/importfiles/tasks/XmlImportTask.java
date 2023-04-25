@@ -71,7 +71,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		if (error == null && file.exists()) {
 			if (importType == ImportType.RENDERING) {
 				app.getRendererRegistry().updateExternalRenderers();
-				showSuccessfulImportToast(destFileName);
+				onSuccessfulImport(destFileName);
 				hideProgress();
 			} else if (importType == ImportType.ROUTING) {
 				loadRoutingFiles(app, new LoadRoutingFilesCallback() {
@@ -83,7 +83,7 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 							if (routingCallback != null) {
 								routingCallback.processResult(builder);
 							}
-							showSuccessfulImportToast(destFileName);
+							onSuccessfulImport(destFileName);
 						} else {
 							app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
 						}
@@ -96,17 +96,13 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		}
 	}
 
-	private void showSuccessfulImportToast(String filename) {
-		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
-		if (mapActivity != null) {
-			Snackbar snackbar = Snackbar.make(mapActivity.getLayout(),
-					MessageFormat.format(app.getString(R.string.is_imported_snackbar), filename),
-					Snackbar.LENGTH_LONG);
-			UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
-			snackbar.show();
-		} else {
-			app.showToastMessage(app.getString(R.string.is_imported, filename));
-		}
+	private void onSuccessfulImport(String filename) {
+		Snackbar snackbar = Snackbar.make(activityRef.get().getWindow().getDecorView().findViewById(android.R.id.content),
+				app.getString(R.string.is_imported, filename),
+				Snackbar.LENGTH_LONG);
+		UiUtilities.setupSnackbar(snackbar, !app.getSettings().isLightContent());
+		snackbar.show();
+
 	}
 
 	public static File getDestinationDir(OsmandApplication app, ImportType importType) {
