@@ -99,6 +99,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		UiUtilities.setupCompoundButton(nightMode, activeColor, checkbox);
 		itemView.setOnClickListener(v -> fragment.onTrackItemsSelected(Collections.singleton(trackItem), !selected));
+		itemView.setOnLongClickListener(view -> {
+			fragment.onTrackItemLongClick(view, trackItem);
+			return true;
+		});
 
 		AndroidUiHelper.updateVisibility(divider, showDivider);
 		bindInfoRow(adapter, trackItem);

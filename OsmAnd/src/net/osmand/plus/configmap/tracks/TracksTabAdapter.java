@@ -29,6 +29,16 @@ public class TracksTabAdapter extends FragmentStatePagerAdapter {
 	}
 
 	@Override
+	public int getItemPosition(@NonNull Object object) {
+		if (object instanceof TrackItemsFragment) {
+			TrackItemsFragment fragment = (TrackItemsFragment) object;
+			int index = trackTabs.indexOf(fragment.getTrackTab());
+			return index >= 0 ? index : POSITION_NONE;
+		}
+		return POSITION_NONE;
+	}
+
+	@Override
 	public int getCount() {
 		return trackTabs.size();
 	}

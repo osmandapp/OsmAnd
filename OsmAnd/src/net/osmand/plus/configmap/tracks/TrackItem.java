@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 
@@ -24,24 +25,24 @@ public class TrackItem {
 
 	public TrackItem(@NonNull File file) {
 		this.file = file;
-		this.path = file.getAbsolutePath();
-		this.name = GpxUiHelper.getGpxTitle(file.getName());
-		this.lastModified = file.lastModified();
-		this.showCurrentTrack = false;
+		path = file.getAbsolutePath();
+		name = GpxUiHelper.getGpxTitle(file.getName());
+		lastModified = file.lastModified();
+		showCurrentTrack = false;
 	}
 
 	public TrackItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		this.showCurrentTrack = gpxFile.showCurrentTrack;
+		showCurrentTrack = gpxFile.showCurrentTrack;
 		if (showCurrentTrack) {
-			this.file = null;
-			this.path = gpxFile.path;
-			this.name = app.getString(R.string.shared_string_currently_recording_track);
-			this.lastModified = gpxFile.modifiedTime;
+			file = null;
+			path = gpxFile.path;
+			name = app.getString(R.string.shared_string_currently_recording_track);
+			lastModified = gpxFile.modifiedTime;
 		} else {
-			this.file = new File(gpxFile.path);
-			this.path = file.getAbsolutePath();
-			this.name = GpxUiHelper.getGpxTitle(file.getName());
-			this.lastModified = file.lastModified();
+			file = new File(gpxFile.path);
+			path = file.getAbsolutePath();
+			name = GpxUiHelper.getGpxTitle(file.getName());
+			lastModified = file.lastModified();
 		}
 	}
 
@@ -81,5 +82,29 @@ public class TrackItem {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public boolean equals(@Nullable Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+
+		TrackItem trackItem = (TrackItem) obj;
+		return Algorithms.stringsEqual(trackItem.path, path)
+				&& Algorithms.stringsEqual(trackItem.name, name)
+				&& trackItem.lastModified == lastModified
+				&& trackItem.showCurrentTrack == showCurrentTrack;
+	}
+
+	@Override
+	public int hashCode() {
+		return Algorithms.hash(path, name, lastModified, dataItem, file);
 	}
 }
