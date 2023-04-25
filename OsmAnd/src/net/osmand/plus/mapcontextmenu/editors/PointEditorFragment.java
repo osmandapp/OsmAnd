@@ -1,7 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.plus.myplaces.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.myplaces.FavoriteGroup.isPersonalCategoryDisplayName;
+import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.myplaces.favorites.FavoriteGroup.isPersonalCategoryDisplayName;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

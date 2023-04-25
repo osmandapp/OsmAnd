@@ -1,7 +1,9 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -40,6 +43,10 @@ import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
@@ -47,9 +54,6 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
@@ -76,10 +80,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-									@Nullable Fragment target,
-									ApplicationMode appMode,
-									String selectedItemKey,
-									boolean usedOnMap) {
+	                                @Nullable Fragment target,
+	                                ApplicationMode appMode,
+	                                String selectedItemKey,
+	                                boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
@@ -184,7 +188,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			if (!Algorithms.isEmpty(items)) {
 				addGroupHeader(group);
 				for (RoutingDataObject item : items) {
-					addProfileItem(item, group);
+					addProfileItem(item);
 				}
 				addDivider();
 			}
@@ -238,12 +242,16 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		CharSequence description = group.getDescription(app, nightMode);
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_large, null);
+		View view = inflater.inflate(R.layout.group_title_with_desription_and_option, null);
 		View container = view.findViewById(R.id.container);
+		container.setPadding(container.getPaddingLeft(), 0, container.getPaddingRight(), 0);
 
-		if (isGroupImported(group)) {
-			container.setOnLongClickListener(getGroupLongClickListener(group));
+		View options = view.findViewById(R.id.options);
+		boolean groupImported = isGroupImported(group);
+		if (groupImported) {
+			options.setOnClickListener(itemView -> openPopUpMenu(itemView, group));
 		}
+		AndroidUiHelper.updateVisibility(options, groupImported);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);
@@ -259,6 +267,24 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				.setCustomView(view)
 				.create()
 		);
+	}
+
+	private void openPopUpMenu(View view, ProfilesGroup group) {
+		UiUtilities iconsCache = app.getUIUtilities();
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_delete)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(getOptionDeleteClickListener(group))
+				.create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
 	}
 
 	private boolean isGroupImported(ProfilesGroup group) {
@@ -281,24 +307,33 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		return null;
 	}
 
-	protected View.OnLongClickListener getGroupLongClickListener(ProfilesGroup group) {
+	protected View.OnClickListener getOptionDeleteClickListener(ProfilesGroup group) {
 		String fileName = String.valueOf(group.getTitle());
-		return getDeleteLongClickListener(fileName, (dialogInterface, i) -> {
-			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-			File routingFile = new File(dir, fileName);
-			if (routingFile.exists() && routingFile.delete()) {
-				updateRouteProfileInAppModes(group.getProfiles());
-				ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
-				if (selectedProfile != null) {
-					setDefaultRouteProfile(getAppMode());
-				}
-				app.getCustomRoutingConfigs().remove(fileName);
-				updateMenuItems();
-			}
-		});
+		return view -> {
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
+			builder.setTitle(getString(R.string.shared_string_delete_file));
+			builder.setMessage(getString(R.string.nav_profile_confirm_delete, fileName));
+			builder.setNeutralButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_ok, (dialogInterface, i) -> {
+						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+						File routingFile = new File(dir, fileName);
+						if (routingFile.exists() && routingFile.delete()) {
+							updateRouteProfileInAppModes(group.getProfiles());
+							ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
+							if (selectedProfile != null) {
+								setDefaultRouteProfile(getAppMode());
+							}
+							app.getCustomRoutingConfigs().remove(fileName);
+							updateMenuItems();
+						}
+					});
+
+			builder.show();
+		};
 	}
 
-	private void addProfileItem(ProfileDataObject profileDataObject, ProfilesGroup group) {
+	@Override
+	protected void addProfileItem(ProfileDataObject profileDataObject) {
 		RoutingDataObject profile = (RoutingDataObject) profileDataObject;
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View itemView = inflater.inflate(getItemLayoutId(profile), null);
@@ -318,9 +353,6 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 		if (!profile.isOnline() || profile.isPredefined()) {
 			builder.setOnClickListener(getItemClickListener(profile));
-			if (!Algorithms.isEmpty(profile.getFileName())) {
-				builder.setOnLongClickListener(getItemLongClickListener(profile, group));
-			}
 			items.add(builder.create());
 			return;
 		} else {
@@ -344,33 +376,6 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			});
 		}
 		items.add(builder.create());
-	}
-
-	protected View.OnLongClickListener getItemLongClickListener(RoutingDataObject profile, ProfilesGroup group) {
-		return getDeleteLongClickListener(profile.getFileName(), (dialogInterface, i) -> {
-			File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-			File routingFile = new File(dir, profile.getFileName());
-			if (routingFile.exists() && routingFile.delete()) {
-				updateRouteProfileInAppModes(group.getProfiles());
-				if (isSelected(profile)) {
-					setDefaultRouteProfile(getAppMode());
-				}
-				app.getCustomRoutingConfigs().remove(profile.getFileName());
-				updateMenuItems();
-			}
-		});
-	}
-
-	private View.OnLongClickListener getDeleteLongClickListener(String fileName, DialogInterface.OnClickListener positiveAlertButton) {
-		return view -> {
-			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
-			builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
-			builder.setMessage(getString(R.string.are_you_sure));
-			builder.setNegativeButton(R.string.shared_string_cancel, null)
-					.setPositiveButton(R.string.shared_string_ok, positiveAlertButton);
-			builder.show();
-			return true;
-		};
 	}
 
 	private void setDefaultRouteProfile(ApplicationMode applicationMode) {

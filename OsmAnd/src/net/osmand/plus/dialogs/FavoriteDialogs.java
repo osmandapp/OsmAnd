@@ -5,15 +5,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +23,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.SelectFavouriteToReplaceBottomSheet;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.ui.FavoritesListFragment.FavouritesAdapter;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.util.Algorithms;
+
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -116,7 +112,7 @@ public class FavoriteDialogs {
 				boolean added = helper.addFavourite(point);
 				if (added) {
 					Toast.makeText(activity, MessageFormat.format(
-							activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
+									activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
 				if (activity instanceof MapActivity) {
@@ -127,41 +123,16 @@ public class FavoriteDialogs {
 		return builder.create();
 	}
 
-	@NonNull
-	public static AlertDialog showFavoritesDialog(
-			Context uiContext,
-			FavouritesAdapter favouritesAdapter, OnItemClickListener click,
-			OnDismissListener dismissListener, Dialog[] dialogHolder, boolean sortByDist) {
-		ListView listView = new ListView(uiContext);
-		AlertDialog.Builder bld = new AlertDialog.Builder(uiContext);
-		favouritesAdapter.sortByDefault(sortByDist);
-		listView.setAdapter(favouritesAdapter);
-		listView.setOnItemClickListener(click);
-		bld.setPositiveButton(sortByDist ? R.string.sort_by_name : R.string.sort_by_distance,
-				(dialog, which) -> showFavoritesDialog(uiContext, favouritesAdapter, click, dismissListener, dialogHolder, !sortByDist));
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
-		bld.setView(listView);
-		AlertDialog dlg = bld.show();
-		if (dialogHolder != null) {
-			dialogHolder[0] = dlg;
-		}
-		dlg.setOnDismissListener(dismissListener);
-		return dlg;
-	}
-
 	public static AlertDialog.Builder checkDuplicates(@NonNull FavouritePoint point, @NonNull Activity activity) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		FavouritesHelper helper = app.getFavoritesHelper();
 
-		String name = AndroidUtils.checkEmoticons(point.getName());
+		String name = point.getName();
 		boolean emoticons = name.length() != point.getName().length();
 
 		String index = "";
 		int number = 0;
-		point.setCategory(AndroidUtils.checkEmoticons(point.getCategory()));
-		if (!Algorithms.isEmpty(point.getDescription())) {
-			point.setDescription(AndroidUtils.checkEmoticons(point.getDescription()));
-		}
+		point.setCategory(point.getCategory());
 
 		boolean fl = true;
 		while (fl) {

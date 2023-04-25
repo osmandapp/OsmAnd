@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:orientation="vertical">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/file_already_exists"
+			android:textColor="?android:textColorPrimary" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/description"
+			style="@style/DescStyle"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/favorites_icon_padding"
+			android:text="@string/compass_desc"
+			android:textColor="?android:textColorSecondary" />
+
+		<include
+			android:id="@+id/replace_button"
+			layout="@layout/bottom_sheet_dialog_button"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_height"
+			android:layout_marginTop="24dp" />
+
+		<include
+			android:id="@+id/duplicate_button"
+			layout="@layout/bottom_sheet_dialog_button"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/dialog_button_height"
+			android:layout_marginTop="12dp" />
+
+	</LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

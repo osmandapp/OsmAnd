@@ -31,7 +31,7 @@ import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.antplus.AntPlusPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -772,9 +772,9 @@ public class PluginsHelper {
 		return getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
 	}
 
-	public static void addMyPlacesTabPlugins(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
+	public static void addMyPlacesTabPlugins(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
-			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
+			p.addMyPlacesTab(myPlacesActivity, mTabs, intent);
 		}
 	}
 

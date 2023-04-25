@@ -11,8 +11,66 @@
 	Thx - Hardy
 -->
 
+    <string name="is_imported">%1$s is imported.</string>
+    <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
+    <string name="file_already_exists">File already exists</string>
+    <string name="nav_profile_confirm_delete">Are you sure you want to delete \"%1$s\"?</string>
+    <string name="external_device_low_battery">Low battery</string>
+    <string name="external_device_forget_sensor">Forget sensor</string>
+    <string name="external_device_forget_sensor_description">Sensor will be removed from the list.
+You will be able to pair this sensor again at any time.</string>
+    <string name="external_device_disconnected">Disconnected</string>
+    <string name="external_device_connected">Connected</string>
+    <string name="external_device_menu_forget">Forget</string>
     <string name="weather_download_error">Could not download %1$s tiles.</string>
     <string name="proxy_port_max_warning">Maximum port value is %1$s</string>
+    <string name="external_device_characteristic_speed">Speed</string>
+    <string name="external_device_characteristic_distance">Distance</string>
+    <string name="external_device_characteristic_total_distance">Total distance</string>
+    <string name="external_device_characteristic_battery_level">Battery</string>
+    <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
+    <string name="external_device_characteristic_cadence">Cadence</string>
+    <string name="external_device_characteristic_heart_rate">Heart rate</string>
+    <string name="external_device_characteristic_systolic">Cystolic</string>
+    <string name="external_device_characteristic_diastolic">Diastolic</string>
+    <string name="external_device_characteristic_arterial_pressure">Arterial pressure</string>
+    <string name="external_device_characteristic_cuff_pressure">Cuff pressure</string>
+    <string name="external_device_characteristic_pulse_rate">Pulse rate</string>
+    <string name="external_device_characteristic_stride_length">Stride length</string>
+    <string name="external_device_characteristic_temperature">Temperature</string>
+    <string name="external_device_details_information">Information</string>
+    <string name="external_device_details_received_data">Received data</string>
+    <string name="external_device_details_connection">Connection</string>
+    <string name="external_device_details_battery">Battery</string>
+    <string name="external_device_details_speed">Speed</string>
+    <string name="external_device_details_total_distance">Total distance</string>
+    <string name="external_device_details_distance">Distance</string>
+    <string name="external_device_details_connect">Connect</string>
+    <string name="external_device_details_pair">Pair</string>
+    <string name="external_device_details_disconnect">Disconnect</string>
+    <string name="bluetooth_disconnected">Disconnected, %s</string>
+    <string name="bluetooth_connected">Connected, %s</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Found: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth not supported</string>
+    <string name="ble_search_again">Search again</string>
+    <string name="ant_plus_nothing_found_text">Unable to find any sensors</string>
+    <string name="ant_plus_nothing_found_description">Make sure:\n– Bluetooth is turned on\n– Sensor is activated\n– This device is located near sensor</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth is turned off</string>
+    <string name="ant_plus_bluetooth_off_description">Turn on Bluetooth find and pair sensors.</string>
+    <string name="ant_plus_searching_text">Searching for sensors</string>
+    <string name="ant_plus_searching_text_description">Please hold the device close to the sensor.
+You need to activate the sensor so OsmAnd can find it.</string>
+    <string name="ant_plus_help_title">I don\’t know what type of sensor I have</string>
+    <string name="ant_plus_searching">Searching</string>
+    <string name="ant_plus_pair_new_sensor">Pair new sensor</string>
+    <string name="ant_plus_open_settings">Open settings</string>
+    <string name="ant_plus_pair_new_sensor_ble">Pair Bluetooth LE sensor</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Pair Ant+ sensor</string>
+    <string name="ant_plus_pair_bluetooth_prompt">You can pair Bluetooth LE and ANT+ sensors with OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Learn more about sensors.</string>
+
     <string name="shutter_sound">Shutter sound</string>
     <string name="camera_app">Camera app</string>
     <string name="speak_route_deviation">Announce deviation from the route</string>

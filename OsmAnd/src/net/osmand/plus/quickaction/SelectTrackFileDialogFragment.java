@@ -35,11 +35,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = SelectTrackFileDialogFragment.class.getSimpleName();
 
-	CallbackWithObject<String> onFileSelectListener;
-
-	void setListener(CallbackWithObject<String> onFileSelectListener) {
-		this.onFileSelectListener = onFileSelectListener;
-	}
+	private CallbackWithObject<String> fileSelectCallback;
 
 	@Nullable
 	@Override
@@ -68,7 +64,9 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 		if (showCurrentGpx) {
 			gpxInfoList.add(0, new GPXInfo(getString(R.string.shared_string_currently_recording_track), null));
 		}
-		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList, showCurrentGpx, true);
+		GpxTrackAdapter adapter = new GpxTrackAdapter(context, gpxInfoList);
+		adapter.setShowCurrentGpx(showCurrentGpx);
+		adapter.setShowFolderName(true);
 		adapter.setAdapterListener(position -> {
 			Fragment target = getTargetFragment();
 			CallbackWithObject<String> listener = target instanceof CallbackWithObject<?>
@@ -76,8 +74,8 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 					: null;
 			if (listener != null) {
 				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, listener);
-			} else if (onFileSelectListener != null) {
-				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, onFileSelectListener);
+			} else if (fileSelectCallback != null) {
+				processResult(gpxRootDir, gpxInfoList, showCurrentGpx, position, fileSelectCallback);
 			}
 			dismiss();
 		});
@@ -110,10 +108,10 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @Nullable Fragment target,
-	                                @Nullable CallbackWithObject<String> onFileSelectListener) {
+	                                @Nullable CallbackWithObject<String> fileSelectCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectTrackFileDialogFragment fragment = new SelectTrackFileDialogFragment();
-			fragment.setListener(onFileSelectListener);
+			fragment.fileSelectCallback = fileSelectCallback;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);

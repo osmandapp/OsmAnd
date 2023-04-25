@@ -1,15 +1,22 @@
 package net.osmand.plus.importfiles.tasks;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.ZIP_EXT;
+
 import android.os.AsyncTask;
 
-import net.osmand.gpx.GPXUtilities;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -18,12 +25,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.ZIP_EXT;
 
 @SuppressWarnings("deprecation")
 public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
@@ -34,17 +35,20 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	private final String fileName;
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
+	private final boolean overwrite;
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,
 	                        @NonNull File destinationDir,
 	                        @NonNull String fileName,
-	                        @Nullable SaveImportedGpxListener listener) {
+	                        @Nullable SaveImportedGpxListener listener,
+	                        boolean overwrite) {
 		this.app = app;
 		this.gpxFile = gpxFile;
 		this.fileName = fileName;
 		this.destinationDir = destinationDir;
 		this.listener = listener;
+		this.overwrite = overwrite;
 	}
 
 	@Override
@@ -110,7 +114,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		if (!fileName.endsWith(GPX_FILE_EXT)) {
 			fileName = fileName + GPX_FILE_EXT;
 		}
-		return new File(importDir, fileName);
+		File destFile = new File(importDir, fileName);
+		while (destFile.exists() && !overwrite) {
+			fileName = AndroidUtils.createNewFileName(fileName);
+			destFile = new File(importDir, fileName);
+		}
+		return destFile;
 	}
 
 	@Override
