@@ -1,9 +1,15 @@
 package net.osmand.plus.importfiles.tasks;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.ZIP_EXT;
+
 import android.os.AsyncTask;
 
-import net.osmand.gpx.GPXUtilities;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,12 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.ZIP_EXT;
-
 @SuppressWarnings("deprecation")
 public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 
@@ -36,15 +36,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
-
-
-	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
-	                        @NonNull GPXFile gpxFile,
-	                        @NonNull File destinationDir,
-	                        @NonNull String fileName,
-	                        @Nullable SaveImportedGpxListener listener) {
-		this(app, gpxFile, destinationDir, fileName, listener, false);
-	}
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,

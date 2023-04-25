@@ -1,5 +1,8 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -24,6 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -51,9 +55,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
-
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
 	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
@@ -79,10 +80,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-									@Nullable Fragment target,
-									ApplicationMode appMode,
-									String selectedItemKey,
-									boolean usedOnMap) {
+	                                @Nullable Fragment target,
+	                                ApplicationMode appMode,
+	                                String selectedItemKey,
+	                                boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
@@ -246,14 +247,11 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		container.setPadding(container.getPaddingLeft(), 0, container.getPaddingRight(), 0);
 
 		View options = view.findViewById(R.id.options);
-		if(isGroupImported(group)){
-			options.setVisibility(View.VISIBLE);
-			options.setOnClickListener(itemView -> {
-				if (isGroupImported(group)) {
-					openPopUpMenu(itemView, group);
-				}
-			});
+		boolean groupImported = isGroupImported(group);
+		if (groupImported) {
+			options.setOnClickListener(itemView -> openPopUpMenu(itemView, group));
 		}
+		AndroidUiHelper.updateVisibility(options, groupImported);
 
 		TextView tvTitle = view.findViewById(R.id.title);
 		TextView tvDescription = view.findViewById(R.id.description);

@@ -1,6 +1,8 @@
-package net.osmand.plus.importfiles;
+package net.osmand.plus.importfiles.ui;
 
-import static net.osmand.plus.utils.UiUtilities.*;
+import static net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import static net.osmand.plus.utils.UiUtilities.getInflater;
+import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
@@ -15,16 +18,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment;
 
 public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
-	public static final String TAG = CompassVisibilityBottomSheetDialogFragment.class.getSimpleName();
+
+	public static final String TAG = FileExistBottomSheet.class.getSimpleName();
 
 	private static final String FILE_NAME_KEY = "file_name";
 
 	private OsmandApplication app;
 	private String fileName;
-	private FileExistsBottomSheetListener listener;
+	private SaveExistingFileListener listener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,7 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new BaseBottomSheetItem.Builder()
-				.setCustomView(createView())
-				.create());
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(createView()).create());
 	}
 
 	@NonNull
@@ -51,14 +52,32 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 		LayoutInflater inflater = getInflater(app, nightMode);
 		View view = inflater.inflate(R.layout.fragment_file_exists_bottom_sheet, null);
 
-		View replaceButton = view.findViewById(R.id.replace_button);
-		setupReplaceButton(replaceButton);
-		View duplicateButton = view.findViewById(R.id.duplicate_button);
-		setupDuplicateButton(duplicateButton);
+		setupReplaceButton(view.findViewById(R.id.replace_button));
+		setupDuplicateButton(view.findViewById(R.id.duplicate_button));
 
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getString(R.string.file_already_exists_description, fileName));
 		return view;
+	}
+
+	private void setupReplaceButton(@NonNull View view) {
+		setupDialogButton(nightMode, view, DialogButtonType.SECONDARY, R.string.update_existing);
+		view.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.saveExistingFile(true);
+			}
+			dismiss();
+		});
+	}
+
+	private void setupDuplicateButton(@NonNull View view) {
+		setupDialogButton(nightMode, view, DialogButtonType.PRIMARY, R.string.keep_both);
+		view.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.saveExistingFile(false);
+			}
+			dismiss();
+		});
 	}
 
 	@Override
@@ -67,39 +86,20 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putString(FILE_NAME_KEY, fileName);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, String fileName, FileExistsBottomSheetListener listener) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			FileExistBottomSheet fragment = new FileExistBottomSheet();
-			fragment.listener = listener;
-			fragment.setRetainInstance(true);
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String fileName, @Nullable SaveExistingFileListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(FILE_NAME_KEY, fileName);
+
+			FileExistBottomSheet fragment = new FileExistBottomSheet();
+			fragment.listener = listener;
 			fragment.setArguments(args);
-			fragment.show(fragmentManager, TAG);
+			fragment.setRetainInstance(true);
+			fragment.show(manager, TAG);
 		}
 	}
 
-	private void setupReplaceButton(View replaceButton) {
-		setupDialogButton(nightMode, replaceButton, DialogButtonType.SECONDARY, R.string.update_existing);
-		replaceButton.setOnClickListener(v -> {
-			dismiss();
-			if (listener != null) {
-				listener.onActionSelected(true);
-			}
-		});
-	}
-
-	private void setupDuplicateButton(View replaceButton) {
-		setupDialogButton(nightMode, replaceButton, DialogButtonType.PRIMARY, R.string.keep_both);
-		replaceButton.setOnClickListener(v -> {
-			dismiss();
-			if (listener != null) {
-				listener.onActionSelected(false);
-			}
-		});
-	}
-
-	public interface FileExistsBottomSheetListener {
-		void onActionSelected(boolean overwrite);
+	public interface SaveExistingFileListener {
+		void saveExistingFile(boolean overwrite);
 	}
 }
