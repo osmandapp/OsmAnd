@@ -225,15 +225,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean wasZoomInMultiTouch;
 	private float elevationAngle;
 
-	private int targetPixelX;
-	private int targetPixelY;
-	private int firstTouchLocationX;
-	private int firstTouchLocationY;
-	private float firstTouchLocationHeight;
-	private int secondTouchLocationX;
-	private int secondTouchLocationY;
-	private float secondTouchLocationHeight;
-
 	public OsmandMapTileView(@NonNull Context ctx, int width, int height) {
 		this.ctx = ctx;
 		init(ctx, width, height);
@@ -1589,53 +1580,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			animatedDraggingThread.stopAnimating();
 		}
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
-
-		// Detect touch location for correct map dragging
-		if (mapRenderer != null) {
-			int actionCode = event.getActionMasked();
-			int actionIndex = event.getActionIndex();
-			boolean firstTouch = actionCode == MotionEvent.ACTION_DOWN;
-			boolean primaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 0;
-			boolean primaryUntouch = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 0;
-			boolean secondaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 1;
-			if (actionCode == MotionEvent.ACTION_UP	|| actionCode == MotionEvent.ACTION_CANCEL) {
-				// Restore last target position after map dragging
-				mapRenderer.resetMapTargetPixelCoordinates(new PointI(targetPixelX, targetPixelY));
-				PointI target31 = mapRenderer.getTarget();
-				currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(target31.getY()),
-						MapUtils.get31LongitudeX(target31.getX()));
-			} else if (firstTouch || (isMultiTouch && (primaryTouch || primaryUntouch))) {
-				PointI touchPosition;
-				if (firstTouch) {
-					// Remember last target position before map dragging
-					PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
-					targetPixelX = targetPixelPosition.getX();
-					targetPixelY = targetPixelPosition.getY();
-				}
-				if (firstTouch || primaryTouch) {
-					touchPosition = new PointI((int) event.getX(), (int) event.getY());
-				} else
-					touchPosition = multiTouchSupport.getSecondPoint();
-				secondTouchLocationX = firstTouchLocationX;
-				secondTouchLocationY = firstTouchLocationY;
-				secondTouchLocationHeight = firstTouchLocationHeight;
-				PointI touchLocation31 = new PointI(firstTouchLocationX, firstTouchLocationY);
-				float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
-				firstTouchLocationX = touchLocation31.getX();
-				firstTouchLocationY = touchLocation31.getY();
-				firstTouchLocationHeight = height > NativeUtilities.MIN_ALTITUDE_VALUE ? height : 0.0f;
-				currentViewport.setLatLonCenter(MapUtils.get31LatitudeY(firstTouchLocationY),
-						MapUtils.get31LongitudeX(firstTouchLocationX));
-			} else if (isMultiTouch && secondaryTouch) {
-				PointI touchPosition = multiTouchSupport.getSecondPoint();
-				PointI touchLocation31 = new PointI(secondTouchLocationX, secondTouchLocationY);
-				float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
-				secondTouchLocationX = touchLocation31.getX();
-				secondTouchLocationY = touchLocation31.getY();
-				secondTouchLocationHeight = height > NativeUtilities.MIN_ALTITUDE_VALUE ? height : 0.0f;
-			}
-		}
-
 		if (doubleTapScaleDetector != null) {
 			doubleTapScaleDetector.onTouchEvent(event);
 		}
@@ -2032,14 +1976,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 			if (multiTouchSupport != null && !multiTouchSupport.isInTiltMode()) {
-				MapRendererView mapRenderer = getMapRenderer();
-				if (mapRenderer != null) {
-					PointI touchPoint = new PointI((int) e2.getX(), (int) e2.getY());
-					mapRenderer.setMapTarget(touchPoint, new PointI(firstTouchLocationX, firstTouchLocationY));
-					refreshMap();
-					notifyLocationListeners(getLatitude(), getLongitude());
-				} else
-					dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			}
 			return true;
 		}
