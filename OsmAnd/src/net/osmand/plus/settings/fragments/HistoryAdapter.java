@@ -23,7 +23,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.search.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;

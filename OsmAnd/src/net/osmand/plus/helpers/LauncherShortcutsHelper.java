@@ -140,8 +140,8 @@ public class LauncherShortcutsHelper {
 		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
 			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {
-			Intent favoritesActivityIntent = new Intent(mapActivity, app.getAppCustomization().getFavoritesActivity());
-			mapActivity.startActivity(favoritesActivityIntent);
+			Intent activityIntent = new Intent(mapActivity, app.getAppCustomization().getMyPlacesActivity());
+			mapActivity.startActivity(activityIntent);
 		} else if (Shortcut.NAVIGATE_TO.id.equals(shortcutId)) {
 			navigateTo(mapActivity, null);
 		}

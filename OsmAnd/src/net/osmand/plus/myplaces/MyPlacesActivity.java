@@ -3,7 +3,6 @@ package net.osmand.plus.myplaces;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_DELETED_KEY;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,6 +19,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
@@ -34,9 +34,7 @@ import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
@@ -49,10 +47,11 @@ import java.util.List;
  *
  */
 public class MyPlacesActivity extends TabActivity {
+
 	private static final Log LOG = PlatformUtil.getLog(MyPlacesActivity.class);
 
-	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
-	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
+	public static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
+	public static final int IMPORT_FAVOURITES_REQUEST = 1007;
 	protected static final int OPEN_GPX_REQUEST = 1008;
 
 	public static final String TAB_ID = "selected_tab_id";
@@ -62,6 +61,8 @@ public class MyPlacesActivity extends TabActivity {
 
 	protected List<WeakReference<FavoritesFragmentStateHolder>> fragList = new ArrayList<>();
 	private int tabSize;
+	private OsmandApplication app;
+	private OsmandSettings settings;
 	private ImportHelper importHelper;
 
 	private ViewPager viewPager;
@@ -70,7 +71,8 @@ public class MyPlacesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		OsmandApplication app = getMyApplication();
+		app = getMyApplication();
+		settings = app.getSettings();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 
@@ -103,16 +105,6 @@ public class MyPlacesActivity extends TabActivity {
 				viewPager.setCurrentItem(pagerItem, false);
 			}
 		}
-	}
-
-	public void addTrack() {
-		Intent intent = ImportHelper.getImportTrackIntent();
-		AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
-	}
-
-	public void importFavourites() {
-		Intent intent = ImportHelper.getImportTrackIntent();
-		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
 	@Override
@@ -167,22 +159,22 @@ public class MyPlacesActivity extends TabActivity {
 		return gpxFragment;
 	}
 
-	private void setTabs(List<TabItem> mTabs) {
+	private void setTabs(@NonNull List<TabItem> tabItems) {
 		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
-		OsmandSettings settings = getMyApplication().getSettings();
 		Integer tabId = settings.FAVORITES_TAB.get();
 		int tab = 0;
-		for (int i = 0; i < mTabs.size(); i++) {
-			if (mTabs.get(i).resId == tabId) {
+		for (int i = 0; i < tabItems.size(); i++) {
+			if (tabItems.get(i).resId == tabId) {
 				tab = i;
 			}
 		}
-		tabSize = mTabs.size();
-		setViewPagerAdapter(viewPager, mTabs);
+		tabSize = tabItems.size();
+		setViewPagerAdapter(viewPager, tabItems);
 		mSlidingTabLayout.setViewPager(viewPager);
 		viewPager.setCurrentItem(tab);
 	}
 
+	@NonNull
 	private List<TabItem> getTabItems() {
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
@@ -191,6 +183,7 @@ public class MyPlacesActivity extends TabActivity {
 		return mTabs;
 	}
 
+	@Nullable
 	public Bundle storeCurrentState() {
 		int currentItem = viewPager.getCurrentItem();
 		if (currentItem >= 0 && currentItem < fragList.size()) {
@@ -217,21 +210,10 @@ public class MyPlacesActivity extends TabActivity {
 		if (mTabs.size() != tabSize) {
 			setTabs(mTabs);
 		}
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			}
-
+		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					app.getSettings().FAVORITES_TAB.set(mTabs.get(position).resId);
-				}
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int state) {
+				settings.FAVORITES_TAB.set(mTabs.get(position).resId);
 			}
 		});
 	}
@@ -280,24 +262,10 @@ public class MyPlacesActivity extends TabActivity {
 		}
 	}
 
-	public static void showOnMap(@NonNull Activity activity, @Nullable FavoritesFragmentStateHolder fragment, double latitude, double longitude, int zoom, PointDescription pointDescription,
-	                             boolean addToHistory, Object toShow) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
-		if (fragment != null) {
-			MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState());
-		} else {
-			MapActivity.launchMapActivityMoveToTop(activity);
-		}
-	}
-
-	public static void openFavoritesGroup(Context context, String groupName) {
-		OsmAndAppCustomization appCustomization = ((OsmandApplication) context.getApplicationContext()).getAppCustomization();
-		Intent intent = new Intent(context, appCustomization.getFavoritesActivity());
-		Bundle b = new Bundle();
-		b.putInt(TAB_ID, FAV_TAB);
-		b.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
-		intent.putExtra(MapActivity.INTENT_PARAMS, b);
-		AndroidUtils.startActivityIfSafe(context, intent);
+	public void showOnMap(@Nullable FavoritesFragmentStateHolder fragment, double latitude, double longitude,
+	                      int zoom, PointDescription pointDescription, boolean addToHistory, Object toShow) {
+		settings.setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
+		Bundle bundle = fragment != null ? fragment.storeState() : null;
+		MapActivity.launchMapActivityMoveToTop(this, bundle);
 	}
 }

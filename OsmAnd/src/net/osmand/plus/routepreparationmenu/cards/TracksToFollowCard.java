@@ -13,7 +13,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.util.Algorithms;
 
 import java.io.File;

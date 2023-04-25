@@ -512,7 +512,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 
 	private void showOnMap(Recording recording, int itemPosition) {
 		selectedItemPosition = itemPosition;
-		MyPlacesActivity.showOnMap(requireActivity(), this, recording.getLatitude(), recording.getLongitude(), 15,
+		((MyPlacesActivity) getActivity()).showOnMap(this, recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
 	}

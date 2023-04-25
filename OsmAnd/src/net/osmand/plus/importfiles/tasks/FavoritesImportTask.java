@@ -92,7 +92,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 		FragmentActivity activity = activityRef.get();
 		if (activity != null) {
 			app.showToastMessage(R.string.fav_imported_sucessfully);
-			Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+			Intent newIntent = new Intent(activity, app.getAppCustomization().getMyPlacesActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			newIntent.putExtra(TAB_ID, FAV_TAB);
 			activity.startActivity(newIntent);

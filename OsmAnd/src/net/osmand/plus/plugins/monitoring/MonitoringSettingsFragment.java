@@ -319,7 +319,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 			bundle.putInt(TAB_ID, MyPlacesActivity.GPX_TAB);
 
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
-			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
+			Intent favorites = new Intent(preference.getContext(), appCustomization.getMyPlacesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);

@@ -636,7 +636,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		Bundle bundle = new Bundle();
 		bundle.putInt(TAB_ID, OSM_EDIT_TAB);
 
-		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		Intent intent = new Intent(app, app.getAppCustomization().getMyPlacesActivity());
 		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -682,7 +682,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
 		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
-		MyPlacesActivity.showOnMap(requireActivity(), this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
+		((MyPlacesActivity) getActivity()).showOnMap(this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint);
 	}
 

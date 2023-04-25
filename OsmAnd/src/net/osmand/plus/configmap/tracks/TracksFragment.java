@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
@@ -37,7 +38,9 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.configmap.tracks.TrackItemsLoaderTask.LoadTracksListener;
+import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
+import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
@@ -48,6 +51,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -65,13 +69,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener, OnTrackFileMoveListener, RenameCallback {
+public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
+		OnTrackFileMoveListener, RenameCallback, TrackSelectionListener, SortTracksListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
-	private TrackItemsLoaderTask asyncLoader;
+	private TrackFolderLoaderTask asyncLoader;
 
 	private ViewPager viewPager;
 	private PagerSlidingTabStrip tabLayout;
@@ -288,6 +293,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	@Override
 	public void showSortByDialog() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -308,7 +314,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void reloadTracks() {
-		asyncLoader = new TrackItemsLoaderTask(app, this);
+		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
+		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -318,9 +325,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@Override
-	public void loadTracksFinished() {
+	public void loadTracksFinished(@NonNull TrackFolder folder) {
 		AndroidUiHelper.updateVisibility(progressBar, false);
-		selectedTracksHelper.updateTrackItems(asyncLoader.getTrackItems());
+		selectedTracksHelper.updateTrackItems(folder.getFlattenedTrackItems());
 		updateTrackTabs();
 		updateTabsContent();
 		updateButtonsState();
@@ -434,6 +441,19 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	@Override
+	public boolean isTrackItemSelected(@NonNull TrackItem trackItem) {
+		return selectedTracksHelper.getSelectedTracks().contains(trackItem);
+	}
+
+	@Override
+	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
+		selectedTracksHelper.onTrackItemsSelected(trackItems, selected);
+		onTrackItemsSelected(trackItems);
+		updateButtonsState();
+	}
+
+	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -541,12 +561,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Override
 	public void renamedTo(File file) {
 		reloadTracks();
-	}
-
-	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
-		selectedTracksHelper.onTrackItemsSelected(trackItems, selected);
-		onTrackItemsSelected(trackItems);
-		updateButtonsState();
 	}
 
 	private void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {

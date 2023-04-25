@@ -22,7 +22,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;

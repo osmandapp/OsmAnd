@@ -27,7 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;

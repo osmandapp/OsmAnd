@@ -1,22 +1,21 @@
 package net.osmand.plus.myplaces.tracks.tasks;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.track.helpers.GPXFolderUtils.getSubfolderTitle;
+import static net.osmand.plus.track.helpers.GPXFolderUtils.listFilesSorted;
+import static net.osmand.plus.track.helpers.GpxUiHelper.isGpxFile;
 import static net.osmand.util.Algorithms.objectEquals;
 
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.Collator;
-import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -71,31 +70,6 @@ public class LoadGpxInfosTask extends AsyncTask<Void, GPXInfo, List<GPXInfo>> {
 		}
 	}
 
-	@NonNull
-	public static File[] listFilesSorted(@NonNull TracksSortByMode sortByMode, @NonNull File dir) {
-		File[] listFiles = dir.listFiles();
-		if (listFiles == null) {
-			return new File[0];
-		}
-		// This file could be sorted in different way for folders
-		// now folders are also sorted by last modified date
-		Collator collator = OsmAndCollator.primaryCollator();
-		Arrays.sort(listFiles, (f1, f2) -> {
-			if (sortByMode == TracksSortByMode.BY_NAME_ASCENDING) {
-				return collator.compare(f1.getName(), (f2.getName()));
-			} else if (sortByMode == TracksSortByMode.BY_NAME_DESCENDING) {
-				return -collator.compare(f1.getName(), (f2.getName()));
-			} else {
-				// here we could guess date from file name '2017-08-30 ...' - first part date
-				if (f1.lastModified() == f2.lastModified()) {
-					return -collator.compare(f1.getName(), (f2.getName()));
-				}
-				return -(Long.compare(f1.lastModified(), f2.lastModified()));
-			}
-		});
-		return listFiles;
-	}
-
 	private void loadGPXData(@NonNull File mapPath, @NonNull List<GPXInfo> result) {
 		if (mapPath.canRead()) {
 			List<GPXInfo> progress = new ArrayList<>();
@@ -111,10 +85,8 @@ public class LoadGpxInfosTask extends AsyncTask<Void, GPXInfo, List<GPXInfo>> {
 		File[] listFiles = listFilesSorted(sortByMode, mapPath);
 		for (File file : listFiles) {
 			if (file.isDirectory()) {
-				String sub = gpxSubfolder.length() == 0 ? file.getName() : gpxSubfolder + "/"
-						+ file.getName();
-				loadGPXFolder(file, result, progress, sub);
-			} else if (file.isFile() && file.getName().toLowerCase().endsWith(GPX_FILE_EXT)) {
+				loadGPXFolder(file, result, progress, getSubfolderTitle(file, gpxSubfolder));
+			} else if (isGpxFile(file)) {
 				GPXInfo info = new GPXInfo(file.getName(), file);
 				info.subfolder = gpxSubfolder;
 				result.add(info);

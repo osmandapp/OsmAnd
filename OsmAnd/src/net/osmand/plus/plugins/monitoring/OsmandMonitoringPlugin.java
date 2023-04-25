@@ -27,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingDistanceWidget;
 import net.osmand.plus.plugins.monitoring.widgets.TripRecordingElevationWidget.TripRecordingDownhillWidget;

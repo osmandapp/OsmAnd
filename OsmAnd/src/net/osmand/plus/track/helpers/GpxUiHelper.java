@@ -66,10 +66,12 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -705,7 +707,7 @@ public class GpxUiHelper {
 	public static GPXInfo getGpxInfoByFileName(@NonNull OsmandApplication app, @NonNull String fileName) {
 		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		File file = new File(dir, fileName);
-		if (file.exists() && file.getName().endsWith(GPX_FILE_EXT)) {
+		if (file.exists() && isGpxFile(file)) {
 			return new GPXInfo(fileName, file);
 		}
 		return null;
@@ -797,7 +799,7 @@ public class GpxUiHelper {
 			if (files != null) {
 				for (File file : files) {
 					String name = file.getName();
-					if (file.isFile() && name.toLowerCase().endsWith(GPX_FILE_EXT)) {
+					if (isGpxFile(file)) {
 						String fileName = absolutePath ? file.getAbsolutePath() : parent + name;
 						list.add(new GPXInfo(fileName, file));
 					} else if (file.isDirectory()) {
@@ -1147,5 +1149,9 @@ public class GpxUiHelper {
 		intermediatePoint.lat = prevPoint.lat + dLat;
 		intermediatePoint.lon = prevPoint.lon + dLon;
 		return intermediatePoint;
+	}
+
+	public static boolean isGpxFile(@NonNull File file) {
+		return file.isFile() && file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
 	}
 }

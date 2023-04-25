@@ -243,10 +243,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	private void openFavouritesActivity(Activity activity, int tabType) {
 		OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		Intent favoritesActivity = new Intent(activity, appCustomization.getFavoritesActivity());
-		favoritesActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		Intent intent = new Intent(activity, appCustomization.getMyPlacesActivity());
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		app.getSettings().FAVORITES_TAB.set(tabType);
-		startActivity(favoritesActivity);
+		startActivity(intent);
 	}
 
 	private int getFavoritesTabId(ExportSettingsType type) {

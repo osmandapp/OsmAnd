@@ -4,10 +4,12 @@ import static android.view.Gravity.CENTER;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.IMPORT_FAVOURITES_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -49,6 +51,7 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -588,7 +591,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	private void importFavourites() {
-		((MyPlacesActivity) getActivity()).importFavourites();
+		Intent intent = ImportHelper.getImportTrackIntent();
+		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
 	public void shareFavorites(@Nullable FavoriteGroup group) {
@@ -624,7 +628,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		String pointType = PointDescription.POINT_TYPE_FAVORITE;
-		MyPlacesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
+		((MyPlacesActivity) getActivity()).showOnMap(this, location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getDisplayName(app)), true, point);
 	}
 
