@@ -5148,9 +5148,9 @@
     <string name="bluetooth_not_supported">Bluetooth non supporté</string>
     <string name="external_device_ble">BLE</string>
     <string name="ant_plus_nothing_found_text">Aucun capteur trouvé</string>
-    <string name="ant_plus_searching_text">Recherche de capteurs</string>
-    <string name="ant_plus_searching_text_description">Veuillez garder l\'appareil proche du capteur. Vous devez activer le capteur pour que OsmAnd puisse le trouver.</string>
-    <string name="ant_plus_help_title">Je ne sais pas de quel type de capteur il s\'agit</string>
+    <string name="ant_plus_searching_text">Recherche de capteurs en cours</string>
+    <string name="ant_plus_searching_text_description">Veuillez rapprocher l\'appareil et le capteur. Vous devez activer le capteur afin qu\'il soit détecté par OsmAnd.</string>
+    <string name="ant_plus_help_title">Je ne connais pas le type de capteur</string>
     <string name="ant_plus_searching">Recherche</string>
     <string name="ant_plus_pair_new_sensor">Appairer un nouveau capteur</string>
     <string name="ant_plus_pair_new_sensor_ble">Appairer un capteur BLE</string>
