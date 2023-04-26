@@ -5179,4 +5179,8 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">ANT+ érzékelő párosítása</string>
     <string name="learn_more_about_sensors_link">Tudjon meg többet az érzékelőkről.</string>
     <string name="ant_plus_pair_bluetooth_prompt">Párosíthat Bluetooth LE és ANT+ érzékelőket az OsmAnd-dal.</string>
+    <string name="is_imported">%1$s importálva.</string>
+    <string name="file_already_exists_description">\"%1$s\". Egy azonos nevű fájl már létezik. A csere felülír minden, a jelenlegi verzióval készített változást.</string>
+    <string name="file_already_exists">A fájl már létezik</string>
+    <string name="nav_profile_confirm_delete">Biztosan törli ezt: \"%1$s\"\?</string>
 </resources>

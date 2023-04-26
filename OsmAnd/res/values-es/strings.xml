@@ -5189,4 +5189,8 @@
     <string name="bluetooth_disconnected">Desconectado, %s</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Emparejar un sensor Ant+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puedes emparejar sensores Bluetooth LE y ANT+ con OsmAnd.</string>
+    <string name="is_imported">%1$s ha sido importado.</string>
+    <string name="file_already_exists_description">\"%1$s\". Ya existe un fichero con ese nombre. Reemplazar sobrescribirá todos los cambios realizados con la versión actual.</string>
+    <string name="file_already_exists">El archivo ya existe</string>
+    <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"\?</string>
 </resources>
