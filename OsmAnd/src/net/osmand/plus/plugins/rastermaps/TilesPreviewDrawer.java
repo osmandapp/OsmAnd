@@ -5,16 +5,18 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-
-import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
 
 public class TilesPreviewDrawer {
 
@@ -45,8 +47,9 @@ public class TilesPreviewDrawer {
 	}
 
 	@NonNull
-	public Pair<Bitmap, Bitmap> drawTilesPreview(@NonNull LatLon center, int minZoom, int maxZoom) {
-		previewTilesLayer.setMap(app.getSettings().getMapTileSource(false));
+	public Pair<Bitmap, Bitmap> drawTilesPreview(@Nullable ITileSource tileSource,
+	                                             @NonNull LatLon center, int minZoom, int maxZoom) {
+		previewTilesLayer.setMap(tileSource);
 
 		minZoomBitmap.eraseColor(Color.TRANSPARENT);
 		maxZoomBitmap.eraseColor(Color.TRANSPARENT);
