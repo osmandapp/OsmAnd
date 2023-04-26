@@ -2881,7 +2881,7 @@
     <string name="downloaded_maps">Letöltött térképek</string>
     <string name="visited_screens">Meglátogatott képernyők</string>
     <string name="collected_data_descr">Határozza meg, mely adatok megosztását engedélyezi az OsmAndnak.</string>
-    <string name="downloaded_maps_collect_descr">Segít megértenünk, az ország- és régiótérképek népszerűségét.</string>
+    <string name="downloaded_maps_collect_descr">Segít megértenünk az ország- és régiótérképek népszerűségét.</string>
     <string name="visited_screens_collect_descr">Segít megértenünk az OsmAnd funkcióinak népszerűségét.</string>
     <string name="privacy_and_security_change_descr">Koppintson az „Engedélyezés”-re, ha elfogadja: %1$s</string>
     <string name="settings_privacy_and_security">Adatvédelem és biztonság</string>
