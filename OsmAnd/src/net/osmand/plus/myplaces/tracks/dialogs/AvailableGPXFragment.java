@@ -1146,8 +1146,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 				v.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {
-				CheckBox ch = v.findViewById(R.id.toggle_item);
-				ch.setVisibility(View.GONE);
+				CheckBox checkBox = v.findViewById(R.id.toggle_item);
+				checkBox.setVisibility(View.GONE);
 				ImageView icon = v.findViewById(R.id.category_icon);
 				if (isSelectedGroup(groupPosition)) {
 					setCategoryIcon(app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), v);

@@ -16,7 +16,7 @@ public class ParametersExtractor {
 
 	private final OsmandApplication app;
 
-	public ParametersExtractor(OsmandApplication app) {
+	public ParametersExtractor(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -42,5 +42,4 @@ public class ParametersExtractor {
 		}
 		return color;
 	}
-
 }

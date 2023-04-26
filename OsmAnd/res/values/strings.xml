@@ -11,20 +11,19 @@
 	Thx - Hardy
 -->
 
+    <string name="n_tracks">%1$s tracks</string>
+    <string name="shared_string_remove_folder">Remove folder</string>
+    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>
     <string name="nav_profile_confirm_delete">Are you sure you want to delete \"%1$s\"?</string>
     <string name="external_device_low_battery">Low battery</string>
     <string name="external_device_forget_sensor">Forget sensor</string>
-    <string name="external_device_forget_sensor_description">Sensor will be removed from the list.
-You will be able to pair this sensor again at any time.</string>
+    <string name="external_device_forget_sensor_description">Sensor will be removed from the list. You will be able to pair this sensor again at any time.</string>
     <string name="external_device_disconnected">Disconnected</string>
     <string name="external_device_connected">Connected</string>
     <string name="external_device_menu_forget">Forget</string>
-    <string name="n_tracks">%1$s tracks</string>
-    <string name="shared_string_remove_folder">Remove folder</string>
-    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="weather_download_error">Could not download %1$s tiles.</string>
     <string name="proxy_port_max_warning">Maximum port value is %1$s</string>
     <string name="external_device_characteristic_speed">Speed</string>

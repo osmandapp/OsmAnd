@@ -27,7 +27,7 @@ public class SaveGpxHelper {
 
 	public static void saveGpx(@NonNull File file, @NonNull GPXFile gpx,
 	                           @Nullable SaveGpxListener listener) {
-		new SaveTrackTask(file, gpx, listener)
+		new SaveGpxAsyncTask(file, gpx, listener)
 				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

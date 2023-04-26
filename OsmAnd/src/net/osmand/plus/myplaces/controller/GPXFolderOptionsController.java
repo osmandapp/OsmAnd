@@ -13,13 +13,13 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
-import net.osmand.plus.track.helpers.loadinfo.GpxInfoLoader;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
+import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
-import net.osmand.plus.track.data.GPXFolderInfo;
+import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.helpers.loadinfo.GpxInfoLoader;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -32,7 +32,7 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 	public static final String PROCESS_ID = "tracks_folder_options";
 
 	private final OsmandApplication app;
-	private GPXFolderInfo folderInfo;
+	private TrackFolder trackFolder;
 
 	private enum ListOption {
 		DETAILS(R.string.shared_string_details, R.drawable.ic_action_info_dark),
@@ -68,9 +68,9 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 		}
 	}
 
-	public GPXFolderOptionsController(@NonNull OsmandApplication app, @NonNull GPXFolderInfo folderInfo) {
+	public GPXFolderOptionsController(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
 		this.app = app;
-		this.folderInfo = folderInfo;
+		this.trackFolder = folder;
 	}
 
 	@Nullable
@@ -78,14 +78,14 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 	public DisplayData getDisplayData(@NonNull String processId) {
 		UiUtilities iconsCache = app.getUIUtilities();
 		DisplayData displayData = new DisplayData();
-		int folderColorAlpha = ColorUtilities.getColorWithAlpha(folderInfo.getColor(), 0.3f);
+		int folderColorAlpha = ColorUtilities.getColorWithAlpha(trackFolder.getColor(), 0.3f);
 		displayData.putExtra(BACKGROUND_COLOR, folderColorAlpha);
 
 		displayData.addDisplayItem(new DisplayItem()
-				.setTitle(folderInfo.getName())
+				.setTitle(trackFolder.getName())
 				.setDescription(getFolderDescription())
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
-				.setIcon(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, folderInfo.getColor()))
+				.setIcon(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, trackFolder.getColor()))
 				.setShowBottomDivider(true, 0)
 				.setClickable(false)
 		);
@@ -160,12 +160,12 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 	}
 
 	private String formatLastUpdateTime() {
-		return OsmAndFormatter.getFormattedDate(app, folderInfo.getLastModified());
+		return OsmAndFormatter.getFormattedDate(app, trackFolder.getLastModified());
 	}
 
 	private String formatTracksCount() {
 		String pattern = getString(R.string.n_tracks);
-		return String.format(pattern, folderInfo.getTotalTracksCount());
+		return String.format(pattern, trackFolder.getTotalTracksCount());
 	}
 
 	private int calculateSubtitleDividerPadding() {
@@ -188,9 +188,9 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 		GpxInfoLoader.loadGpxInfoForDirectory(app, rootDir, result -> showDialog(activity, result));
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity, @NonNull GPXFolderInfo folderInfo) {
+	public static void showDialog(@NonNull FragmentActivity activity, @NonNull TrackFolder folder) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		GPXFolderOptionsController controller = new GPXFolderOptionsController(app, folderInfo);
+		GPXFolderOptionsController controller = new GPXFolderOptionsController(app, folder);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);

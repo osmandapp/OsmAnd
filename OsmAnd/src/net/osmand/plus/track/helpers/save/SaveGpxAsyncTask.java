@@ -10,14 +10,14 @@ import net.osmand.gpx.GPXFile;
 
 import java.io.File;
 
-public class SaveTrackTask extends AsyncTask<Void, Void, Exception> {
+public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	private final File file;
 	private final GPXFile gpx;
 	private final SaveGpxListener saveGpxListener;
 
-	public SaveTrackTask(@NonNull File file, @NonNull GPXFile gpx,
-	                     @Nullable SaveGpxListener saveGpxListener) {
+	public SaveGpxAsyncTask(@NonNull File file, @NonNull GPXFile gpx,
+	                        @Nullable SaveGpxListener saveGpxListener) {
 		this.gpx = gpx;
 		this.file = file;
 		this.saveGpxListener = saveGpxListener;

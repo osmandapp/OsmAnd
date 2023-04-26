@@ -1,8 +1,12 @@
 package net.osmand.plus.track.data;
 
+import android.graphics.Color;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,5 +53,36 @@ public class TrackFolder {
 			items.addAll(folder.trackItems);
 		}
 		return items;
+	}
+
+	@ColorInt
+	public int getColor() {
+		return Color.parseColor("#F52887"); // todo use real folder color
+	}
+
+	public int getTotalTracksCount() {
+		int total = trackItems.size();
+		for (TrackFolder folder : folders) {
+			total += folder.getTotalTracksCount();
+		}
+		return total;
+	}
+
+	public long getLastModified() {
+		long lastUpdateTime = 0;
+		for (TrackFolder folder : folders) {
+			long folderLastUpdate = folder.getLastModified();
+			lastUpdateTime = Math.max(lastUpdateTime, folderLastUpdate);
+		}
+		for (TrackItem item : trackItems) {
+			long fileLastUpdate = item.getLastModified();
+			lastUpdateTime = Math.max(lastUpdateTime, fileLastUpdate);
+		}
+		return lastUpdateTime;
+	}
+
+	@NonNull
+	public String getName() {
+		return Algorithms.capitalizeFirstLetter(dirFile.getName());
 	}
 }
