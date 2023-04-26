@@ -5123,7 +5123,7 @@
     <string name="proxy_port_max_warning">La valeur maximale du port est %1$s</string>
     <string name="weather_download_error">Le téléchargement des tuiles %1$s a échoué.</string>
     <string name="file_already_exists_description">Un fichier portant le nom \"%1$s\" existe déjà. Le remplacer écrasera tous les changements réalisés sur la version actuelle.</string>
-    <string name="is_imported">%1$s est importé.</string>
+    <string name="is_imported">%1$s a été importé.</string>
     <string name="ant_plus_bluetooth_off">Le Bluetooth est désactivé</string>
     <string name="external_device_characteristic_diastolic">Diastolique</string>
     <string name="external_device_characteristic_cuff_pressure">Pression du brassard</string>
