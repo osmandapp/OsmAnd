@@ -19,7 +19,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.helpers.loadinfo.GpxInfoLoader;
+import net.osmand.plus.track.helpers.loadinfo.TracksInfoLoader;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -27,12 +27,12 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class GPXFolderOptionsController implements IDisplayDataProvider, IDialogItemClicked {
+public class TrackFolderOptionsController implements IDisplayDataProvider, IDialogItemClicked {
 
 	public static final String PROCESS_ID = "tracks_folder_options";
 
 	private final OsmandApplication app;
-	private TrackFolder trackFolder;
+	private final TrackFolder trackFolder;
 
 	private enum ListOption {
 		DETAILS(R.string.shared_string_details, R.drawable.ic_action_info_dark),
@@ -68,7 +68,7 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 		}
 	}
 
-	public GPXFolderOptionsController(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+	public TrackFolderOptionsController(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
 		this.app = app;
 		this.trackFolder = folder;
 	}
@@ -185,12 +185,12 @@ public class GPXFolderOptionsController implements IDisplayDataProvider, IDialog
 
 	public static void showDialog(@NonNull FragmentActivity activity, @NonNull File rootDir) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		GpxInfoLoader.loadGpxInfoForDirectory(app, rootDir, result -> showDialog(activity, result));
+		TracksInfoLoader.loadTracksInfoForDirectory(app, rootDir, result -> showDialog(activity, result));
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity, @NonNull TrackFolder folder) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		GPXFolderOptionsController controller = new GPXFolderOptionsController(app, folder);
+		TrackFolderOptionsController controller = new TrackFolderOptionsController(app, folder);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);

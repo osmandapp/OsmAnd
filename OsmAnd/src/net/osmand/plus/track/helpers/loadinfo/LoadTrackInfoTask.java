@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap.tracks;
+package net.osmand.plus.track.helpers.loadinfo;
 
 import static net.osmand.plus.track.helpers.GPXFolderUtils.getSubfolderTitle;
 import static net.osmand.plus.track.helpers.GPXFolderUtils.listFilesSorted;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
@@ -18,14 +19,17 @@ import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 
 import java.io.File;
 
-public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
+public class LoadTrackInfoTask extends AsyncTask<Void, Void, TrackFolder> {
 
 	private final GpxDbHelper gpxDbHelper;
 	private final File dir;
 	private final TracksSortByMode sortByMode;
 	private final LoadTracksListener listener;
 
-	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull File dir, @NonNull LoadTracksListener listener) {
+	public LoadTrackInfoTask(
+			@NonNull OsmandApplication app,
+			@NonNull File dir, @NonNull LoadTracksListener listener
+	) {
 		this.dir = dir;
 		this.listener = listener;
 		this.gpxDbHelper = app.getGpxDbHelper();
@@ -69,7 +73,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override
 				public boolean isCancelled() {
-					return TrackFolderLoaderTask.this.isCancelled();
+					return LoadTrackInfoTask.this.isCancelled();
 				}
 
 				@Override

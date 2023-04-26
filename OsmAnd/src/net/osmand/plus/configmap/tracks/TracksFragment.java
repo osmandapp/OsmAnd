@@ -38,7 +38,8 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.plus.track.helpers.loadinfo.LoadTrackInfoTask;
+import net.osmand.plus.track.helpers.loadinfo.LoadTrackInfoTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -76,7 +77,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
-	private TrackFolderLoaderTask asyncLoader;
+	private LoadTrackInfoTask asyncLoader;
 
 	private ViewPager viewPager;
 	private PagerSlidingTabStrip tabLayout;
@@ -315,7 +316,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void reloadTracks() {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
-		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, this);
+		asyncLoader = new LoadTrackInfoTask(app, gpxDir, this);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

@@ -46,39 +46,31 @@ public class TrackFolder {
 		trackItems.add(trackItem);
 	}
 
-	@NonNull
-	public List<TrackItem> getFlattenedTrackItems() {
-		List<TrackItem> items = new ArrayList<>();
-		for (TrackFolder folder : folders) {
-			items.addAll(folder.trackItems);
-		}
-		return items;
-	}
-
 	@ColorInt
 	public int getColor() {
 		return Color.parseColor("#F52887"); // todo use real folder color
 	}
 
 	public int getTotalTracksCount() {
-		int total = trackItems.size();
-		for (TrackFolder folder : folders) {
-			total += folder.getTotalTracksCount();
-		}
-		return total;
+		return getFlattenedTrackItems().size();
 	}
 
 	public long getLastModified() {
-		long lastUpdateTime = 0;
+		long lastModified = 0;
+		for (TrackItem item : getFlattenedTrackItems()) {
+			long fileLastModified = item.getLastModified();
+			lastModified = Math.max(lastModified, fileLastModified);
+		}
+		return lastModified;
+	}
+
+	@NonNull
+	public List<TrackItem> getFlattenedTrackItems() {
+		List<TrackItem> items = new ArrayList<>(trackItems);
 		for (TrackFolder folder : folders) {
-			long folderLastUpdate = folder.getLastModified();
-			lastUpdateTime = Math.max(lastUpdateTime, folderLastUpdate);
+			items.addAll(folder.trackItems);
 		}
-		for (TrackItem item : trackItems) {
-			long fileLastUpdate = item.getLastModified();
-			lastUpdateTime = Math.max(lastUpdateTime, fileLastUpdate);
-		}
-		return lastUpdateTime;
+		return items;
 	}
 
 	@NonNull

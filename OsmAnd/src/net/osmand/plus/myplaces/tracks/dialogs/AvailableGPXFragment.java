@@ -66,7 +66,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.controller.GPXFolderOptionsController;
+import net.osmand.plus.myplaces.controller.TrackFolderOptionsController;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask;
@@ -1159,7 +1159,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 							if (activity != null) {
 								File root = app.getAppPath(GPX_INDEX_DIR);
 								File directory = new File(root, group);
-								GPXFolderOptionsController.showDialog(activity, directory);
+								TrackFolderOptionsController.showDialog(activity, directory);
 							}
 						});
 					}
