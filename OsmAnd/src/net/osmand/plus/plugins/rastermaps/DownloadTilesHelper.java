@@ -3,6 +3,9 @@ package net.osmand.plus.plugins.rastermaps;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
@@ -18,10 +21,8 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class DownloadTilesHelper implements TilesDownloadListener {
 
@@ -110,7 +111,7 @@ public class DownloadTilesHelper implements TilesDownloadListener {
 		private int activeRequests;
 		private long availableTiles;
 		private long totalTilesBytes;
-		private final List<String> recentlyDownloadedTilesIds = new ArrayList<>();
+		private final List<String> recentlyDownloadedTilesIds = Collections.synchronizedList(new ArrayList<>());
 
 		private boolean cancelled;
 
