@@ -29,6 +29,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
@@ -164,7 +165,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			String relativeGpxPath = pointDescription.getName();
 			File gpxFile = new File(tracksDir, relativeGpxPath);
 			if (gpxFile.isFile()) {
-				SearchHistoryHelper.getInstance(app).addNewItemToHistory(0, 0, pointDescription);
+				SearchHistoryHelper.getInstance(app).addNewItemToHistory(0, 0, pointDescription, HistorySource.SEARCH);
 				TrackMenuFragment.openTrack(activity, gpxFile, null);
 				closeDashboard();
 			}

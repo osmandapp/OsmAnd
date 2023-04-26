@@ -12,6 +12,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.search.core.SearchPhrase;
@@ -58,24 +59,24 @@ public class SearchHistoryHelper {
 		new HistoryItemDBHelper().setLastModifiedTime(lastModifiedTime);
 	}
 
-	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription) {
-		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription));
+	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription, HistorySource historySource) {
+		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription, historySource));
 	}
 
-	public void addNewItemToHistory(AbstractPoiType pt) {
-		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(pt)));
+	public void addNewItemToHistory(AbstractPoiType pt, HistorySource historySource) {
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(pt), historySource));
 	}
 
-	public void addNewItemToHistory(PoiUIFilter filter) {
-		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter)));
+	public void addNewItemToHistory(PoiUIFilter filter, HistorySource historySource) {
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter), historySource));
 		if (app.getSettings().SEARCH_HISTORY.get()) {
 			app.getPoiFilters().markHistory(filter.getFilterId(), true);
 		}
 	}
 
-	public void addNewItemToHistory(GPXInfo gpxInfo) {
+	public void addNewItemToHistory(GPXInfo gpxInfo, HistorySource historySource) {
 		if (gpxInfo != null) {
-			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo)));
+			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo), historySource));
 		}
 	}
 
@@ -128,7 +129,23 @@ public class SearchHistoryHelper {
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();
 		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			searchResults.add(result);
+			if(entry.historySource.equals(HistorySource.SEARCH)){
+				searchResults.add(result);
+			}
+		}
+		return searchResults;
+	}
+
+	@NonNull
+	public List<SearchResult> getNavigationHistoryResults(boolean onlyPoints, boolean includeDeleted) {
+		List<SearchResult> searchResults = new ArrayList<>();
+
+		SearchPhrase phrase = SearchPhrase.emptyPhrase();
+		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
+			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
+			if(entry.historySource.equals(HistorySource.NAVIGATION)){
+				searchResults.add(result);
+			}
 		}
 		return searchResults;
 	}
@@ -252,10 +269,13 @@ public class SearchHistoryHelper {
 		private int[] intervals = new int[0];
 		private double[] intervalValues = new double[0];
 
-		public HistoryEntry(double lat, double lon, PointDescription name) {
+		private HistorySource historySource;
+
+		public HistoryEntry(double lat, double lon, PointDescription name, HistorySource historySource) {
 			this.lat = lat;
 			this.lon = lon;
 			this.name = name;
+			this.historySource = historySource;
 		}
 
 		private double rankFunction(double cf, double timeDiff) {
@@ -297,6 +317,10 @@ public class SearchHistoryHelper {
 
 		public double getLon() {
 			return lon;
+		}
+
+		public HistorySource getHistorySource(){
+			return historySource;
 		}
 
 		public void markAsAccessed(long time) {
@@ -398,7 +422,7 @@ public class SearchHistoryHelper {
 	private class HistoryItemDBHelper {
 
 		private static final String DB_NAME = "search_history";
-		private static final int DB_VERSION = 2;
+		private static final int DB_VERSION = 3;
 		private static final String HISTORY_TABLE_NAME = "history_recents";
 		private static final String HISTORY_COL_NAME = "name";
 		private static final String HISTORY_COL_TIME = "time";
@@ -406,12 +430,13 @@ public class SearchHistoryHelper {
 		private static final String HISTORY_COL_FREQ_VALUES = "freq_values";
 		private static final String HISTORY_COL_LAT = "latitude";
 		private static final String HISTORY_COL_LON = "longitude";
+		private static final String HISTORY_COL_SOURCE = "source";
 		private static final String HISTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + HISTORY_TABLE_NAME + " (" +
 				HISTORY_COL_NAME + " TEXT, " +
 				HISTORY_COL_TIME + " long, " +
 				HISTORY_COL_FREQ_INTERVALS + " TEXT, " +
 				HISTORY_COL_FREQ_VALUES + " TEXT, " +
-				HISTORY_COL_LAT + " double, " + HISTORY_COL_LON + " double);";
+				HISTORY_COL_LAT + " double, " + HISTORY_COL_LON + " double, " + HISTORY_COL_SOURCE + " TEXT);";
 
 		private static final String HISTORY_LAST_MODIFIED_NAME = "history_recents";
 
@@ -448,6 +473,9 @@ public class SearchHistoryHelper {
 				db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
 				onCreate(db);
 				upgraded = true;
+			}
+			if (oldVersion < 3) {
+				db.execSQL("ALTER TABLE " + HISTORY_TABLE_NAME + " ADD " + HISTORY_COL_SOURCE + " TEXT");
 			}
 			if (upgraded) {
 				updateLastModifiedTime();
@@ -512,9 +540,9 @@ public class SearchHistoryHelper {
 									", " + HISTORY_COL_FREQ_INTERVALS + " = ? " +
 									", " + HISTORY_COL_FREQ_VALUES + "= ? WHERE " +
 									HISTORY_COL_NAME + " = ? AND " +
-									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ?",
+									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ? AND " + HISTORY_COL_SOURCE + " = ?",
 							new Object[] {e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
-									e.getSerializedName(), e.getLat(), e.getLon()});
+									e.getSerializedName(), e.getLat(), e.getLon(), e.getHistorySource().name()});
 					updateLastModifiedTime();
 				} finally {
 					db.close();
@@ -539,9 +567,9 @@ public class SearchHistoryHelper {
 
 		private void insert(HistoryEntry e, SQLiteConnection db) {
 			db.execSQL(
-					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?)",
+					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
 					new Object[] {e.getSerializedName(), e.getLastAccessTime(),
-							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon()});
+							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon(), e.getHistorySource().name()});
 			updateLastModifiedTime();
 		}
 
@@ -551,7 +579,7 @@ public class SearchHistoryHelper {
 			if (db != null) {
 				try {
 					SQLiteCursor query = db.rawQuery(
-							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + ", " +
+							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + ", " + HISTORY_COL_SOURCE + ", " +
 									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES +
 									" FROM " + HISTORY_TABLE_NAME, null);
 					Map<PointDescription, HistoryEntry> st = new HashMap<>();
@@ -561,14 +589,16 @@ public class SearchHistoryHelper {
 							String name = query.getString(0);
 							double lat = query.getDouble(1);
 							double lon = query.getDouble(2);
+							String historySourceValue = query.getString(3);
+							HistorySource historySource = HistorySource.valueOf(historySourceValue != null ? historySourceValue : HistorySource.SEARCH.name()) ;
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
 							if (app.getPoiTypes().isTypeForbidden(p.getName())) {
 								query.moveToNext();
 							}
-							HistoryEntry e = new HistoryEntry(lat, lon, p);
-							long time = query.getLong(3);
+							HistoryEntry e = new HistoryEntry(lat, lon, p, historySource);
+							long time = query.getLong(4);
 							e.setLastAccessTime(time);
-							e.setFrequency(query.getString(4), query.getString(5));
+							e.setFrequency(query.getString(5), query.getString(6));
 							if (st.containsKey(p)) {
 								reinsert = true;
 							}

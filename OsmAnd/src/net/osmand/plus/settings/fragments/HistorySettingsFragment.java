@@ -194,7 +194,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 
 	private static int calculateNavigationItemsCount(@NonNull OsmandApplication app) {
 		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		int count = historyHelper.getSearchHistoryResults(true, true).size();
+		int count = historyHelper.getNavigationHistoryResults(true, true).size();
 		if (app.getTargetPointsHelper().isBackupPointsAvailable()) {
 			// Take "Previous Route" item into account during calculations
 			count++;

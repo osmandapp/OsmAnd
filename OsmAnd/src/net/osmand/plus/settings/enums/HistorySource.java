@@ -1,0 +1,24 @@
+package net.osmand.plus.settings.enums;
+
+import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
+import net.osmand.plus.R;
+
+public enum HistorySource {
+	SEARCH(R.string.shared_string_search_history),
+	NAVIGATION(R.string.navigation_history);
+
+	@StringRes
+	public final int nameId;
+
+	HistorySource(@StringRes int nameId) {
+		this.nameId = nameId;
+	}
+
+	public String toHumanString(@NonNull Context ctx) {
+		return ctx.getString(nameId);
+	}
+}
