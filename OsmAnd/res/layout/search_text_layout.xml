@@ -7,6 +7,16 @@
               android:focusableInTouchMode="true"
               android:gravity="center_vertical"
               android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/back_button"
+        style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+        android:layout_width="@dimen/toolbar_height"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_gravity="center"
+        android:contentDescription="@string/back"
+        osmand:srcCompat="@drawable/ic_arrow_back"
+        android:visibility="gone"/>
     
     <EditText
         android:id="@+id/searchEditText"
@@ -37,7 +47,7 @@
         style="@style/Widget.AppCompat.ActionButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="@string/shared_string_close"
+        android:contentDescription="@string/shared_string_clear"
         osmand:srcCompat="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>

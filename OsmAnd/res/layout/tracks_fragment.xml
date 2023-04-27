@@ -45,6 +45,17 @@
 					android:textSize="@dimen/dialog_header_text_size" />
 
 				<ImageButton
+					android:id="@+id/search"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/search_button"
+					osmand:srcCompat="@drawable/ic_action_search_dark"
+					android:tint="?attr/default_icon_color"
+					tools:tint="?attr/default_icon_color" />
+
+				<ImageButton
 					android:id="@+id/switch_group"
 					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 					android:layout_width="@dimen/toolbar_height"
