@@ -21,6 +21,7 @@ public class TrackTab {
 
 	public final TrackTabType type;
 	public final List<Object> items = new ArrayList<>();
+	private String filterTracksQuery;
 
 	@Nullable
 	public final File directory;
@@ -85,10 +86,40 @@ public class TrackTab {
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
 		for (Object object : items) {
-			if (object instanceof TrackItem)
-				trackItems.add((TrackItem) object);
+			if (object instanceof TrackItem) {
+				TrackItem trackItem = (TrackItem) object;
+				if (Algorithms.isEmpty(filterTracksQuery) || trackItem.getName().contains(filterTracksQuery)) {
+					trackItems.add((TrackItem) object);
+				}
+			}
 		}
 		return trackItems;
+	}
+
+	public List<Object> getFilteredItems(){
+		List<Object> filteredItems = new ArrayList<>();
+		boolean hasTrackItems = false;
+		boolean hasFoundTrackItems = false;
+		for (Object object : items) {
+			if (object instanceof TrackItem) {
+				hasTrackItems = true;
+				TrackItem trackItem = (TrackItem) object;
+				if (Algorithms.isEmpty(filterTracksQuery) || trackItem.getName().contains(filterTracksQuery)) {
+					filteredItems.add(object);
+					hasFoundTrackItems = true;
+				}
+			} else {
+				filteredItems.add(object);
+			}
+		}
+		if(hasTrackItems && !hasFoundTrackItems){
+			filteredItems.add(TracksAdapter.TYPE_NO_FOUND_TRACKS);
+		}
+		return filteredItems;
+	}
+
+	public void setFilterTracksQuery(@Nullable String query){
+		filterTracksQuery = query;
 	}
 
 	@NonNull
