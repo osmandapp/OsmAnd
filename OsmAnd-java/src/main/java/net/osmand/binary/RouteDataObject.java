@@ -599,27 +599,36 @@ public class RouteDataObject {
 		return getMaximumSpeed(direction, false);
 	}
 
-	public float getMaximumSpeed(boolean direction, boolean truck) {
+	public float getMaximumSpeed(boolean direction, boolean truckProfile) {
 		int sz = types.length;
 		float maxSpeed = 0;
+		float maxTruckSpeed = 0;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			float mx = r.maxSpeed();
-			if (mx > 0 && r.isTrack() == truck) {
+			if (mx > 0) {
 				if (r.isForward() != 0) {
 					if ((r.isForward() == 1) != direction) {
 						continue;
 					} else {
 						// priority over default
-						maxSpeed = mx;
+						if (r.isTruck()) {
+							maxTruckSpeed = mx;
+						} else {
+							maxSpeed = mx;
+						}
 						break;
 					}
 				} else {
-					maxSpeed = mx;
+					if (r.isTruck()) {
+						maxTruckSpeed = mx;
+					} else {
+						maxSpeed = mx;
+					}
 				}
 			}
 		}
-		return maxSpeed;
+		return (truckProfile && (maxTruckSpeed > 0)) ? maxTruckSpeed : maxSpeed;
 	}
 
 	public static float parseSpeed(String v, float def) {

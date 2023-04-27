@@ -769,7 +769,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized float getCurrentMaxSpeed() {
-		return route.getCurrentMaxSpeed(getAppMode().getStringKey().equals("truck"));
+		return route.getCurrentMaxSpeed(getAppMode().isDerivedRoutingFrom(ApplicationMode.TRUCK));
 	}
 
 	@NonNull

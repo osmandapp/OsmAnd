@@ -74,7 +74,7 @@ public class BinaryMapRouteReaderAdapter {
 		private int type;
 		private List<RouteTypeCondition> conditions = null;
 		private int forward;
-		private boolean track;
+		private boolean truck;
 
 		public RouteTypeRule() {
 		}
@@ -201,8 +201,8 @@ public class BinaryMapRouteReaderAdapter {
 			return -1;
 		}
 
-		public boolean isTrack() {
-			return track;
+		public boolean isTruck() {
+			return truck;
 		}
 
 		public int lanes() {
@@ -270,9 +270,14 @@ public class BinaryMapRouteReaderAdapter {
 //				}
 			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
-			} else if (isMaxSpeed()) {
-				type = MAXSPEED;
-				floatValue = RouteDataObject.parseSpeed(v, 0);
+			} else if (t.startsWith("maxspeed") && v != null) {
+				boolean maxSpeed = t.equalsIgnoreCase("maxspeed");
+				truck = t.equalsIgnoreCase("maxspeed:hgv");
+				forward = t.endsWith(":forward") ? 1 : t.endsWith(":backward") ? -1 : 0;
+				if (maxSpeed || truck) {
+					type = MAXSPEED;
+					floatValue = RouteDataObject.parseSpeed(v, 0);
+				}
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
 				int i = 0;
@@ -284,16 +289,6 @@ public class BinaryMapRouteReaderAdapter {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
 			}
-		}
-
-		private boolean isMaxSpeed() {
-			boolean maxSpeed = false;
-			if (t.startsWith("maxspeed") && v != null) {
-				maxSpeed = t.equalsIgnoreCase("maxspeed");
-				track = t.equalsIgnoreCase("maxspeed:hgv");
-				forward = t.endsWith(":forward") ? 1 : t.endsWith(":backward") ? -1 : 0;
-			}
-			return maxSpeed || track;
 		}
 	}
 

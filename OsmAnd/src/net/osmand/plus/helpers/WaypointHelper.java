@@ -4,6 +4,7 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALAR
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
+import static net.osmand.plus.settings.backend.ApplicationMode.*;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -226,7 +227,7 @@ public class WaypointHelper {
 
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
-		float mxspeed = route.getCurrentMaxSpeed(appMode.getStringKey().equals("truck"));
+		float mxspeed = route.getCurrentMaxSpeed(appMode.isDerivedRoutingFrom(TRUCK));
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
@@ -330,7 +331,7 @@ public class WaypointHelper {
 
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
-		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getStringKey().equals("truck"));
+		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.isDerivedRoutingFrom(TRUCK));
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, loc, delta);
 		if (speedAlarm != null) {
