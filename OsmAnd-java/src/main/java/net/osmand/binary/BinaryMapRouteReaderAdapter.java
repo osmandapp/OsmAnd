@@ -74,6 +74,7 @@ public class BinaryMapRouteReaderAdapter {
 		private int type;
 		private List<RouteTypeCondition> conditions = null;
 		private int forward;
+		private boolean track;
 
 		public RouteTypeRule() {
 		}
@@ -192,32 +193,36 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			return 0;
 		}
-		
-		public float maxSpeed(){
-			if(type == MAXSPEED){
+
+		public float maxSpeed() {
+			if (type == MAXSPEED) {
 				return floatValue;
 			}
 			return -1;
 		}
 
-		public int lanes(){
-			if(type == LANES){
+		public boolean isTrack() {
+			return track;
+		}
+
+		public int lanes() {
+			if (type == LANES) {
 				return intValue;
 			}
 			return -1;
 		}
 
-		public String highwayRoad(){
-			if(type == HIGHWAY_TYPE){
+		public String highwayRoad() {
+			if (type == HIGHWAY_TYPE) {
 				return v;
 			}
 			return null;
 		}
 
 		private void analyze() {
-			if(t.equalsIgnoreCase("oneway")){
+			if (t.equalsIgnoreCase("oneway")) {
 				type = ONEWAY;
-				if("-1".equals(v) || "reverse".equals(v)) {
+				if ("-1".equals(v) || "reverse".equals(v)) {
 					intValue = -1;
 				} else if("1".equals(v) || "yes".equals(v)) {
 					intValue = 1;
@@ -263,18 +268,10 @@ public class BinaryMapRouteReaderAdapter {
 //				} else if(t.startsWith("access")) {
 //					type = ACCESS;
 //				}
-			} else if(t.startsWith("access") && v != null){
+			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
-			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
+			} else if (isMaxSpeed()) {
 				type = MAXSPEED;
-				floatValue = RouteDataObject.parseSpeed(v, 0);
-			} else if(t.equalsIgnoreCase("maxspeed:forward") && v != null){
-				type = MAXSPEED;
-				forward = 1;
-				floatValue = RouteDataObject.parseSpeed(v, 0);
-			} else if(t.equalsIgnoreCase("maxspeed:backward") && v != null){
-				type = MAXSPEED;
-				forward = -1;
 				floatValue = RouteDataObject.parseSpeed(v, 0);
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
@@ -287,6 +284,16 @@ public class BinaryMapRouteReaderAdapter {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
 			}
+		}
+
+		private boolean isMaxSpeed() {
+			boolean maxSpeed = false;
+			if (t.startsWith("maxspeed") && v != null) {
+				maxSpeed = t.equalsIgnoreCase("maxspeed");
+				track = t.equalsIgnoreCase("maxspeed:hgv");
+				forward = t.endsWith(":forward") ? 1 : t.endsWith(":backward") ? -1 : 0;
+			}
+			return maxSpeed || track;
 		}
 	}
 
