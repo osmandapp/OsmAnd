@@ -117,7 +117,7 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 				long lastAccessed = object.optLong("lastAccessedTime");
 				String intervals = object.optString("intervals");
 				String intervalValues = object.optString("intervalValues");
-				HistorySource source = HistorySource.valueOf(object.optString("source", HistorySource.SEARCH.name()));
+				HistorySource source = HistorySource.getHistorySourceByName(object.optString("source"));
 
 				HistoryEntry historyEntry = new HistoryEntry(lat, lon,
 						PointDescription.deserializeFromString(serializedPointDescription, new LatLon(lat, lon)), source);

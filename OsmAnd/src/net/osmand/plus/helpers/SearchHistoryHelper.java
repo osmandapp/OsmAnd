@@ -129,7 +129,7 @@ public class SearchHistoryHelper {
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();
 		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			if(entry.historySource.equals(HistorySource.SEARCH)){
+			if(entry.historySource == HistorySource.SEARCH){
 				searchResults.add(result);
 			}
 		}
@@ -143,7 +143,7 @@ public class SearchHistoryHelper {
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();
 		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			if(entry.historySource.equals(HistorySource.NAVIGATION)){
+			if(entry.historySource == HistorySource.NAVIGATION){
 				searchResults.add(result);
 			}
 		}
@@ -590,7 +590,7 @@ public class SearchHistoryHelper {
 							double lat = query.getDouble(1);
 							double lon = query.getDouble(2);
 							String historySourceValue = query.getString(3);
-							HistorySource historySource = HistorySource.valueOf(historySourceValue != null ? historySourceValue : HistorySource.SEARCH.name()) ;
+							HistorySource historySource = HistorySource.getHistorySourceByName(historySourceValue) ;
 							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
 							if (app.getPoiTypes().isTypeForbidden(p.getName())) {
 								query.moveToNext();

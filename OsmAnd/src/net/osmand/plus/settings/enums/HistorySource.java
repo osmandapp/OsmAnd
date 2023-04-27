@@ -3,6 +3,7 @@ package net.osmand.plus.settings.enums;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -20,5 +21,14 @@ public enum HistorySource {
 
 	public String toHumanString(@NonNull Context ctx) {
 		return ctx.getString(nameId);
+	}
+
+	public static HistorySource getHistorySourceByName(@Nullable String name) {
+		for (HistorySource source : values()) {
+			if (source.name().equalsIgnoreCase(name)) {
+				return source;
+			}
+		}
+		return SEARCH;
 	}
 }
