@@ -3278,8 +3278,8 @@
     <string name="new_plugin_added">Додано новий втулок</string>
     <string name="join_segments">Обʼєднати відрізки</string>
     <string name="add_new_profile_q">Додати новий профіль \'%1$s\'\?</string>
-    <string name="save_heading">Додавати напрямок</string>
-    <string name="save_heading_descr">Зберігати напрямок для кожної точки треку під час запису.</string>
+    <string name="save_heading">Записувати азимут</string>
+    <string name="save_heading_descr">Зберігати азимут кожної точки треку під час запису.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Особистий</string>
