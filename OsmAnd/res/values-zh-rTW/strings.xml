@@ -5179,4 +5179,8 @@
     <string name="ant_plus_pair_new_sensor_ble">配對低功耗藍牙感應器</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">配對 Ant+ 感應器</string>
     <string name="learn_more_about_sensors_link">取得更多關於感應器的資訊。</string>
+    <string name="is_imported">%1$s 已匯入。</string>
+    <string name="file_already_exists_description">「%1$s」。同名檔案已存在。取代將會覆寫對目前版本的所有變動。</string>
+    <string name="file_already_exists">檔案已存在</string>
+    <string name="nav_profile_confirm_delete">您確定要刪除「%1$s」嗎？</string>
 </resources>
