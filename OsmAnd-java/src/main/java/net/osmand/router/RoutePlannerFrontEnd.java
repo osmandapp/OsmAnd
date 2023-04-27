@@ -779,9 +779,6 @@ public class RoutePlannerFrontEnd {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			if (ls == null) {
-				return null;
-			}
 			routeDirection = PrecalculatedRouteDirection.build(ls, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
 		}
@@ -802,21 +799,22 @@ public class RoutePlannerFrontEnd {
 			res = runNativeRouting(ctx, recalculationEnd);
 			makeStartEndPointsPrecise(res, start, end, intermediates);
 		} else {
+			List<RouteSegmentResult> emptyList = new ArrayList<>();
 			int indexNotFound = 0;
 			List<RouteSegmentPoint> points = new ArrayList<RouteSegmentPoint>();
 			if (!addSegment(start, ctx, indexNotFound++, points, ctx.startTransportStop)) {
-				return null;
+				return emptyList;
 			}
 			if (intermediates != null) {
 				for (LatLon l : intermediates) {
 					if (!addSegment(l, ctx, indexNotFound++, points, false)) {
 						System.out.println(points.get(points.size() - 1).getRoad().toString());
-						return null;
+						return emptyList;
 					}
 				}
 			}
 			if (!addSegment(end, ctx, indexNotFound++, points, ctx.targetTransportStop)) {
-				return null;
+				return emptyList;
 			}
 			ctx.calculationProgress.nextIteration();
 			res = searchRouteImpl(ctx, points, routeDirection);
