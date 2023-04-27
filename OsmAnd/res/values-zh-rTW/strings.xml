@@ -5177,6 +5177,6 @@
     <string name="ant_plus_pair_new_sensor">配對新感應器</string>
     <string name="ant_plus_open_settings">開啟設定</string>
     <string name="ant_plus_pair_new_sensor_ble">配對低功耗藍牙感應器</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">配對 Ant+ 感應器</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">配對 ANT+ 感應器</string>
     <string name="learn_more_about_sensors_link">取得更多關於感應器的資訊。</string>
 </resources>

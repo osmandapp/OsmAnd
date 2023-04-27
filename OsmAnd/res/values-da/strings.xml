@@ -5187,7 +5187,7 @@
     <string name="bluetooth_connected">Forbundet, %s</string>
     <string name="ant_plus_pair_bluetooth_prompt">Du kan parre Bluetooth LE- og ANT+-sensorer med OsmAnd.</string>
     <string name="ant_plus_pair_new_sensor_ble">Par Bluetooth LE-sensor</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Par Ant+-sensor</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Par ANT+-sensor</string>
     <string name="learn_more_about_sensors_link">Få mere at vide om sensorer.</string>
     <string name="external_device_characteristic_gear_ratio">Gearforhold</string>
     <string name="ant_plus_pair_new_sensor">Par ny sensor</string>

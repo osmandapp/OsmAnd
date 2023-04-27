@@ -5177,7 +5177,7 @@
     <string name="ant_plus_pair_new_sensor">Parekatu sentsore berria</string>
     <string name="ant_plus_open_settings">Ireki ezarpenak</string>
     <string name="learn_more_about_sensors_link">Lortu informazio gehiago sentsoreei buruz.</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Parekatu Ant+ sentsorea</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Parekatu ANT+ sentsorea</string>
     <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LE eta ANT+ sentsoreak OsmAnd-ekin parekatu ditzakezu.</string>
     <string name="external_device_forget_sensor">Ahaztu sentsorea</string>
 </resources>

@@ -5191,7 +5191,7 @@
     <string name="ant_plus_open_settings">Відкрити налаштування</string>
     <string name="ant_plus_help_title">Я не знаю, який у мене тип датчика</string>
     <string name="ant_plus_searching">Пошук</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Сполучити датчик Ant+</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Сполучити датчик ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">З OsmAnd можна сполучати датчики Bluetooth LE та ANT+.</string>
     <string name="learn_more_about_sensors_link">Докладніше про датчики.</string>
     <string name="is_imported">%1$s імпортовано.</string>
