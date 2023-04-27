@@ -4845,7 +4845,7 @@
     <string name="send_uuid_preference">Eindeutige Benutzerkennung (UUID) senden</string>
     <string name="shared_string_identifiers">Identifikatoren</string>
     <string name="terms_of_service_desc">Durch das Herunterladen von Karten stimmen Sie den %1$s und %2$s zu.</string>
-    <string name="map_widget_altitude_map_center">Höhenlage: Kartenmitte</string>
+    <string name="map_widget_altitude_map_center">Höhe: Kartenmitte</string>
     <string name="map_widget_altitude_map_center_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Kartenmitte an.</string>
     <string name="map_widget_altitude_current_location">Höhe: aktueller Standort</string>
     <string name="map_widget_altitude_current_location_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts an.</string>
