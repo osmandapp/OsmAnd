@@ -71,7 +71,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ant_plus_pair_new_sensor">Pair new sensor</string>
     <string name="ant_plus_open_settings">Open settings</string>
     <string name="ant_plus_pair_new_sensor_ble">Pair Bluetooth LE sensor</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Pair Ant+ sensor</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Pair ANT+ sensor</string>
     <string name="ant_plus_pair_bluetooth_prompt">You can pair Bluetooth LE and ANT+ sensors with OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Learn more about sensors.</string>
 

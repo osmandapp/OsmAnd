@@ -5198,7 +5198,7 @@
     <string name="ant_plus_pair_new_sensor">Vincular nuevo sensor</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
     <string name="ant_plus_pair_new_sensor_ble">Vincular sensor de Bluetooth LE</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Vincular sensor de Ant+</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Vincular sensor de ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puedes vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
     <string name="learn_more_about_sensors_link">Véase más sobre sensores.</string>
 </resources>

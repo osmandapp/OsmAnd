@@ -147,7 +147,7 @@ public class OsmAndFormatter {
 			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
 
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				DateFormat dateFormat = new SimpleDateFormat("MMM d, HH:mm:ss");
+				DateFormat dateFormat = new SimpleDateFormat("MMM d yyyy, HH:mm:ss");
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTimeInMillis(lastUploadedTimems);
 				return dateFormat.format(calendar.getTime());

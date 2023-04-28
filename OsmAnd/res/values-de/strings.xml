@@ -5161,7 +5161,7 @@
     <string name="external_device_ble">BLE</string>
     <string name="ant_plus_bluetooth_off">Bluetooth ist ausgeschaltet</string>
     <string name="ant_plus_help_title">Ich weiß nicht, welche Art von Sensor ich habe</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Ant+-Sensor koppeln</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">ANT+-Sensor koppeln</string>
     <string name="external_device_low_battery">Niedriger Akku</string>
     <string name="external_device_characteristic_heart_rate">Herzfrequenz</string>
     <string name="external_device_characteristic_temperature">Temperatur</string>
