@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
@@ -62,6 +64,20 @@ public class DialogManager {
 		IDialogController controller = controllers.get(processId);
 		if (controller instanceof IDialogItemClicked) {
 			((IDialogItemClicked) controller).onDialogItemClicked(processId, item);
+		}
+	}
+
+	public void askDismissDialog(@NonNull String processId) {
+		IDialog dialog = dialogs.get(processId);
+		if (dialog instanceof IAskDismissDialog) {
+			((IAskDismissDialog) dialog).onAskDismissDialog(processId);
+		}
+	}
+
+	public void askRefreshDialogCompletely(@NonNull String processId) {
+		IDialog dialog = dialogs.get(processId);
+		if (dialog instanceof IAskRefreshDialogCompletely) {
+			((IAskRefreshDialogCompletely) dialog).onAskRefreshDialogCompletely(processId);
 		}
 	}
 

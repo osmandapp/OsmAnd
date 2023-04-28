@@ -15,28 +15,24 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 
-public class CompassModeDialogController implements IDisplayDataProvider, IDialogItemSelected {
+public class CompassModeDialogController extends BaseCompassModeDialogController {
 
 	public static final String PROCESS_ID = "select_compass_mode_on_preferences_screen";
 
-	private final OsmandApplication app;
-	private final CompassModeDisplayDataCreator displayDataCreator;
 	private OnConfirmPreferenceChange preferenceChangeCallback;
 
 	public CompassModeDialogController(@NonNull OsmandApplication app,
-									   @NonNull ApplicationMode appMode) {
-		this.app = app;
-		this.displayDataCreator = new CompassModeDisplayDataCreator(app, appMode, false);
+	                                   @NonNull ApplicationMode appMode) {
+		super(app, appMode);
+	}
+
+	@NonNull @Override
+	public String getProcessId() {
+		return PROCESS_ID;
 	}
 
 	public void setCallback(@NonNull OnConfirmPreferenceChange preferenceChangeCallback) {
 		this.preferenceChangeCallback = preferenceChangeCallback;
-	}
-
-	@Nullable
-	@Override
-	public DisplayData getDisplayData(@NonNull String processId) {
-		return displayDataCreator.createDisplayData();
 	}
 
 	@Override
@@ -51,5 +47,4 @@ public class CompassModeDialogController implements IDisplayDataProvider, IDialo
 			preferenceChangeCallback.onConfirmPreferenceChange(prefId, value, SNACK_BAR);
 		}
 	}
-
 }

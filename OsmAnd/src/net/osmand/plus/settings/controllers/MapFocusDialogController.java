@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
@@ -21,20 +22,25 @@ import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class MapFocusDialogController implements IDisplayDataProvider, IDialogItemSelected {
+public class MapFocusDialogController extends BaseDialogController
+		implements IDisplayDataProvider, IDialogItemSelected {
 
 	public static final String PROCESS_ID = "select_map_focus";
 
-	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final OsmandSettings settings;
 	private OnConfirmPreferenceChange preferenceChangeCallback;
 
 	public MapFocusDialogController(@NonNull OsmandApplication app,
 	                                @NonNull ApplicationMode appMode) {
-		this.app = app;
+		super(app);
 		this.appMode = appMode;
 		this.settings = app.getSettings();
+	}
+
+	@NonNull @Override
+	public String getProcessId() {
+		return PROCESS_ID;
 	}
 
 	public void setCallback(@NonNull OnConfirmPreferenceChange preferenceChangeCallback) {
@@ -52,18 +58,18 @@ public class MapFocusDialogController implements IDisplayDataProvider, IDialogIt
 		int profileColorAlpha = ColorUtilities.getColorWithAlpha(profileColor, 0.3f);
 
 		DisplayData displayData = new DisplayData();
-		displayData.putExtra(TITLE, app.getString(R.string.display_position));
+		displayData.putExtra(TITLE, getString(R.string.display_position));
 		displayData.putExtra(BACKGROUND_COLOR, profileColorAlpha);
 		for (MapFocus mapFocus : MapFocus.values()) {
 			DisplayItem item = new DisplayItem()
-					.setTitle(app.getString(mapFocus.getTitleId()))
+					.setTitle(getString(mapFocus.getTitleId()))
 					.setLayoutId(R.layout.bottom_sheet_item_with_bottom_descr_and_radio_btn)
 					.setNormalIcon(iconsCache.getThemedIcon(mapFocus.getIconId()))
 					.setSelectedIcon(iconsCache.getPaintedIcon(mapFocus.getIconId(), profileColor))
 					.setControlsColor(profileColor)
 					.setTag(mapFocus);
 			if (mapFocus == MapFocus.AUTOMATIC) {
-				item.setDescription(app.getString(R.string.display_position_automatic_descr));
+				item.setDescription(getString(R.string.display_position_automatic_descr));
 			}
 			if (mapFocus != MapFocus.AUTOMATIC) {
 				item.setShowBottomDivider(true, dividerStartPadding);

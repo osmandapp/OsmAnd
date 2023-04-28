@@ -6,35 +6,34 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.SUBTITLE;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
+import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class CompassModeDisplayDataCreator {
+public abstract class BaseCompassModeDialogController extends BaseDialogController
+		implements IDisplayDataProvider, IDialogItemSelected {
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
 	private final ApplicationMode appMode;
-	private final boolean usedOnMap;
 
-	public CompassModeDisplayDataCreator(@NonNull OsmandApplication app,
-	                                     @NonNull ApplicationMode appMode,
-	                                     boolean usedOnMap) {
-		this.app = app;
+	public BaseCompassModeDialogController(@NonNull OsmandApplication app,
+	                                       @NonNull ApplicationMode appMode) {
+		super(app);
 		this.appMode = appMode;
-		this.usedOnMap = usedOnMap;
-		this.settings = app.getSettings();
 	}
 
-	@NonNull
-	public DisplayData createDisplayData() {
+	@Nullable @Override
+	public DisplayData getDisplayData(@NonNull String processId) {
 		OsmandSettings settings = app.getSettings();
 		boolean nightMode = isNightMode();
 		int profileColor = appMode.getProfileColor(nightMode);
@@ -57,15 +56,4 @@ public class CompassModeDisplayDataCreator {
 		displayData.putExtra(SELECTED_INDEX, selected.ordinal());
 		return displayData;
 	}
-
-	private String getString(int stringId) {
-		return app.getString(stringId);
-	}
-
-	private boolean isNightMode() {
-		return usedOnMap ?
-				app.getDaynightHelper().isNightModeForMapControlsForProfile(appMode) :
-				!settings.isLightContentForMode(appMode);
-	}
-
 }

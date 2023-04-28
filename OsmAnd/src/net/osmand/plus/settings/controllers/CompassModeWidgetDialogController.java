@@ -1,41 +1,26 @@
 package net.osmand.plus.settings.controllers;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
-import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.enums.CompassMode;
 
-public class CompassModeWidgetDialogController implements IDisplayDataProvider, IDialogItemSelected {
+public class CompassModeWidgetDialogController extends BaseCompassModeDialogController {
 
 	public static final String PROCESS_ID = "select_compass_mode_on_map";
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-
 	public CompassModeWidgetDialogController(OsmandApplication app) {
-		this.app = app;
-		this.settings = app.getSettings();
+		super(app, app.getSettings().getApplicationMode());
 	}
 
-	@Nullable
-	@Override
-	public DisplayData getDisplayData(@NonNull String processId) {
-		if (processId.equals(PROCESS_ID)) {
-			ApplicationMode appMode = settings.getApplicationMode();
-			return new CompassModeDisplayDataCreator(app, appMode, true).createDisplayData();
-		}
-		return null;
+	@NonNull @Override
+	public String getProcessId() {
+		return PROCESS_ID;
 	}
 
 	@Override

@@ -8,18 +8,13 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
-import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.utils.UiUtilities;
 
 
-public class CustomizableOptionsBottomSheet extends CustomizableBottomSheet implements IDialog {
+public class CustomizableOptionsBottomSheet extends CustomizableBottomSheet {
 
 	public static final String TAG = CustomizableOptionsBottomSheet.class.getSimpleName();
-
-	public CustomizableOptionsBottomSheet(@NonNull String processId) {
-		super(processId);
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -55,7 +50,8 @@ public class CustomizableOptionsBottomSheet extends CustomizableBottomSheet impl
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull String processId, boolean usedOnMap) {
 		try {
-			CustomizableOptionsBottomSheet fragment = new CustomizableOptionsBottomSheet(processId);
+			CustomizableOptionsBottomSheet fragment = new CustomizableOptionsBottomSheet();
+			fragment.setProcessId(processId);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.show(fragmentManager, TAG);
 			return true;

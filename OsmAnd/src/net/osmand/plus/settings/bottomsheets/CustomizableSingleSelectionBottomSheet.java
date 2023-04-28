@@ -31,10 +31,6 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	public static final String TAG = CustomizableSingleSelectionBottomSheet.class.getSimpleName();
 
-	public CustomizableSingleSelectionBottomSheet(@NonNull String processId) {
-		super(processId);
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context ctx = getContext();
@@ -93,8 +89,8 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull String processId, boolean usedOnMap) {
 		try {
-			CustomizableSingleSelectionBottomSheet fragment =
-					new CustomizableSingleSelectionBottomSheet(processId);
+			CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
+			fragment.setProcessId(processId);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.show(fragmentManager, TAG);
 			return true;

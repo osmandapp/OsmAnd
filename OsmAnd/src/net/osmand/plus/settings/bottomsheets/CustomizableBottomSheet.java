@@ -14,6 +14,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
@@ -22,7 +24,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragment implements IDialog {
+public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragment
+		implements IDialog, IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String PROCESS_ID_ATTR = "process_id";
 
@@ -32,7 +35,7 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 	protected ParametersExtractor extractor;
 	protected String processId;
 
-	public CustomizableBottomSheet(@NonNull String processId) {
+	public void setProcessId(@NonNull String processId) {
 		this.processId = processId;
 	}
 
@@ -78,6 +81,17 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 
 	protected void onItemSelected(@NonNull DisplayItem item) {
 		manager.onDialogItemSelected(processId, item);
+	}
+
+	@Override
+	public void onAskDismissDialog(@NonNull String processId) {
+		dismiss();
+	}
+
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		refreshDisplayData();
+		updateMenuItems();
 	}
 
 	@NonNull
