@@ -12,7 +12,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -42,11 +40,14 @@ import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -260,7 +261,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		OsmandSettings settings = app.getSettings();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(mapActivity)));
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode(app)));
 		String[] items = new String[entriesMap.size() + 1];
 		int i = 0;
 		for (String it : entriesMap.values()) {
@@ -530,27 +531,21 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (isMapLayerDownloadable(app.getSettings().MAP_UNDERLAY.get())) {
 			entriesMapList.add(R.string.layer_underlay);
 		}
-		boolean nightMode = isNightMode(app);
-		int themeRes = getThemeRes(app);
-		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 		String[] items = new String[entriesMapList.size()];
 		int i = 0;
 		for (int entry : entriesMapList) {
 			items[i++] = app.getString(entry, mapActivity);
 		}
 		if (items.length > 1) {
-			DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-					items, nightMode, -1, app, selectedModeColor, themeRes, v -> {
-						int which = (int) v.getTag();
-						int layerKey = entriesMapList.get(which);
-						callback.processResult(layerKey);
-					}
-			);
-			Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode(app));
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			builder.setAdapter(dialogAdapter, null);
-			builder.setNegativeButton(R.string.shared_string_dismiss, null);
-			dialogAdapter.setDialog(builder.show());
+			boolean nightMode = isNightMode(app);
+			AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
+					.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+					.setNegativeButton(R.string.shared_string_dismiss, null);
+			CustomAlert.showSingleSelection(dialogData, items, -1, v -> {
+				int which = (int) v.getTag();
+				int layerKey = entriesMapList.get(which);
+				callback.processResult(layerKey);
+			});
 		} else {
 			callback.processResult(entriesMapList.get(0));
 		}
@@ -585,55 +580,52 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					Toast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(activity)));
 				String[] names = new String[downloaded.size()];
 				for (int i = 0; i < names.length; i++) {
 					names[i] = downloaded.get(i).getName();
 				}
 				boolean[] selected = new boolean[downloaded.size()];
 				boolean nightMode = isNightMode(activity);
-				int themeResId = getThemeRes(activity);
-				int selectedProfileColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
-				DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createMultiChoiceAdapter(names, nightMode, selected, app,
-						selectedProfileColor, themeResId, v -> {
-							Activity actv = activityRef.get();
-							if (actv != null && !actv.isFinishing()) {
-								Map<String, String> entriesMap = ((OsmandApplication) actv.getApplication()).getSettings().getTileSourceEntries();
-								int which = (int) v.getTag();
-								selected[which] = !selected[which];
-								if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
-									Toast.makeText(actv, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+
+				AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+						.setTitle(R.string.select_tile_source_to_install)
+						.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+						.setNegativeButton(R.string.shared_string_cancel, null)
+						.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
+							Activity activity12 = activityRef.get();
+							if (activity12 != null && !activity12.isFinishing()) {
+								OsmandSettings settings1 = ((OsmandApplication) activity12.getApplication()).getSettings();
+								List<TileSourceTemplate> toInstall = new ArrayList<>();
+								for (int i = 0; i < selected.length; i++) {
+									if (selected[i]) {
+										toInstall.add(downloaded.get(i));
+									}
+								}
+								for (TileSourceTemplate ts : toInstall) {
+									if (settings1.installTileSource(ts)) {
+										if (result != null) {
+											result.publish(ts);
+										}
+									}
+								}
+								// at the end publish null to show end of process
+								if (!toInstall.isEmpty() && result != null) {
+									result.publish(null);
 								}
 							}
-						}
-				);
-				builder.setAdapter(dialogAdapter, null);
-				builder.setNegativeButton(R.string.shared_string_cancel, null);
-				builder.setTitle(R.string.select_tile_source_to_install);
-				builder.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
-					Activity activity12 = activityRef.get();
-					if (activity12 != null && !activity12.isFinishing()) {
-						OsmandSettings settings1 = ((OsmandApplication) activity12.getApplication()).getSettings();
-						List<TileSourceTemplate> toInstall = new ArrayList<>();
-						for (int i = 0; i < selected.length; i++) {
-							if (selected[i]) {
-								toInstall.add(downloaded.get(i));
-							}
-						}
-						for (TileSourceTemplate ts : toInstall) {
-							if (settings1.installTileSource(ts)) {
-								if (result != null) {
-									result.publish(ts);
-								}
-							}
-						}
-						// at the end publish null to show end of process
-						if (!toInstall.isEmpty() && result != null) {
-							result.publish(null);
+						});
+
+				CustomAlert.showMultiSelection(dialogData, names, selected, v -> {
+					Activity a = activityRef.get();
+					if (a != null && !a.isFinishing()) {
+						Map<String, String> entriesMap = settings.getTileSourceEntries();
+						int which = (int) v.getTag();
+						selected[which] = !selected[which];
+						if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
+							Toast.makeText(a, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 						}
 					}
 				});
-				dialogAdapter.setDialog(builder.show());
 			}
 		};
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -696,10 +688,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		return context instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
-	}
-
-	private static int getThemeRes(Context context) {
-		return isNightMode(context) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	public enum RasterMapType {
