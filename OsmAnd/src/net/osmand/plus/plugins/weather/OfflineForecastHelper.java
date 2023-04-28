@@ -275,17 +275,17 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			@NonNull List<WeatherIndexItem> indexItems,
 			@Nullable OnCompleteCallback callback
 	) {
-		calculateCacheSizeOneByOne(callback, new int[]{0}, indexItems.toArray(new WeatherIndexItem[0]));
+		calculateCacheSizeOneByOne(callback, 0, indexItems);
 	}
 
 	private void calculateCacheSizeOneByOne(
-			@Nullable OnCompleteCallback callback, int[] entryIndex,
-			@NonNull WeatherIndexItem ... items
+			@Nullable OnCompleteCallback callback, int entryIndex,
+			@NonNull List<WeatherIndexItem> items
 	) {
-		calculateCacheSizeIfNeeded(items[entryIndex[0]], () -> {
-			entryIndex[0]++;
-			if (entryIndex[0] < items.length) {
-				calculateCacheSizeOneByOne(callback, entryIndex, items);
+		calculateCacheSizeIfNeeded(items.get(entryIndex), () -> {
+			int nextEntryIndex = entryIndex + 1;
+			if (nextEntryIndex < items.size()) {
+				calculateCacheSizeOneByOne(callback, nextEntryIndex, items);
 			} else {
 				notifyOnComplete(callback);
 			}
