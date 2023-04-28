@@ -61,6 +61,8 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -94,6 +96,7 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.folder.TrackFolderOptionsListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -124,7 +127,7 @@ import java.util.Set;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener,
-		RenameCallback, UploadGpxListener, LoadTracksListener {
+		RenameCallback, UploadGpxListener, LoadTracksListener, TrackFolderOptionsListener {
 
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
 
@@ -190,6 +193,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		selectedGpxHelper = app.getSelectedGpxHelper();
 		allGpxAdapter = new GpxIndexesAdapter();
 		setAdapter(allGpxAdapter);
+		updateTrackFolderListener();
 	}
 
 	public void startImport() {
@@ -932,6 +936,32 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
+	private void showTrackFolderOptionsDialog(@NonNull String group) {
+		FragmentActivity activity = getMyActivity();
+		if (activity != null) {
+			File directory = new File(app.getAppPath(GPX_INDEX_DIR), group);
+			TrackFolderOptionsController.showDialog(activity, directory, this);
+		}
+	}
+
+	private void updateTrackFolderListener() {
+		DialogManager manager = app.getDialogManager();
+		IDialogController controller = manager.findController(TrackFolderOptionsController.PROCESS_ID);
+		if (controller instanceof TrackFolderOptionsController) {
+			((TrackFolderOptionsController) controller).setTrackFolderOptionsListener(this);
+		}
+	}
+
+	@Override
+	public void onFolderRenamed(@NonNull File newDir) {
+		reloadTracks();
+	}
+
+	@Override
+	public void onFolderDeleted() {
+		reloadTracks();
+	}
+
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		private final Map<String, List<GPXInfo>> data = new LinkedHashMap<>();
@@ -1154,14 +1184,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				} else {
 					setCategoryIcon(app, 0, v, !nightMode);
 					if (!Algorithms.isEmpty(group)) {
-						icon.setOnClickListener(view -> {
-							FragmentActivity activity = getMyActivity();
-							if (activity != null) {
-								File root = app.getAppPath(GPX_INDEX_DIR);
-								File directory = new File(root, group);
-								TrackFolderOptionsController.showDialog(activity, directory);
-							}
-						});
+						icon.setOnClickListener(view -> showTrackFolderOptionsDialog(group));
 					}
 				}
 				icon.setVisibility(View.VISIBLE);

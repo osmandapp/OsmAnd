@@ -11,8 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
+    <string name="shared_string_delete_folder_q">Delete folder?</string>
     <string name="n_tracks">%1$s tracks</string>
-    <string name="shared_string_remove_folder">Remove folder</string>
+    <string name="shared_string_delete_folder">Delete folder</string>
     <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>

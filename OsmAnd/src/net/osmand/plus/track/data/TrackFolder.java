@@ -75,6 +75,11 @@ public class TrackFolder {
 
 	@NonNull
 	public String getName() {
-		return Algorithms.capitalizeFirstLetter(dirFile.getName());
+		return Algorithms.capitalizeFirstLetter(getOriginalName());
+	}
+
+	@NonNull
+	public String getOriginalName() {
+		return dirFile.getName();
 	}
 }
