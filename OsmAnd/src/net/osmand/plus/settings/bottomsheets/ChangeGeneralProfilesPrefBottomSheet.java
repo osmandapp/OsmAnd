@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -52,7 +53,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		}
 		int cancelTitleRes = args.getInt(CANCEL_TITLE_RES_KEY);
 		String prefId = args.getString(PREFERENCE_ID);
-		newValue = args.getSerializable(NEW_VALUE_KEY);
+		newValue = AndroidUtils.getSerializable(args, NEW_VALUE_KEY, Serializable.class);
 		if (newValue == null || prefId == null) {
 			return;
 		}

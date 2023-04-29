@@ -722,7 +722,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
 			OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-			@SuppressWarnings("unchecked") ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
+			List<OsmPoint> points = (List<OsmPoint>) AndroidUtils.getSerializable(getArguments(), POINTS_LIST, ArrayList.class);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			assert points != null;

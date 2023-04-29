@@ -25,7 +25,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		PoiCategory a = poiTypes.getPoiCategoryByName((String) getArguments().getSerializable(KEY_POI_CATEGORY));
+		PoiCategory a = poiTypes.getPoiCategoryByName(getArguments().getString(KEY_POI_CATEGORY));
 		Set<String> strings = new TreeSet<>();
 		if(a == poiTypes.getOtherPoiCategory()) {
 			for (PoiCategory category : poiTypes.getCategories(false)) {
@@ -58,7 +58,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 	public static PoiSubTypeDialogFragment createInstance(PoiCategory cat) {
 		PoiSubTypeDialogFragment fragment = new PoiSubTypeDialogFragment();
 		Bundle args = new Bundle();
-		args.putSerializable(KEY_POI_CATEGORY, cat.getKeyName());
+		args.putString(KEY_POI_CATEGORY, cat.getKeyName());
 		fragment.setArguments(args);
 		return fragment;
 	}

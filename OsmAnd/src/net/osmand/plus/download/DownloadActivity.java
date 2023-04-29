@@ -177,7 +177,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			
 			@Override
 			public void onPageScrollStateChanged(int state) {
-				accessibilityAssistant.onPageScrollStateChanged(state);				
+				accessibilityAssistant.onPageScrollStateChanged(state);
 			}
 		});
 		viewPager.setCurrentItem(currentTab);
@@ -755,8 +755,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				outState.putString(KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME, indexItem.getFileName());
 			}
 		}
-
-
 	}
 
 	public static class GoToMapFragment extends BottomSheetDialogFragment {
@@ -772,10 +770,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			if (savedInstanceState != null) {
 				regionName = savedInstanceState.getString(KEY_GOTO_MAP_REGION_NAME);
 				regionName = regionName == null ? "" : regionName;
-				Object rCenterObj = savedInstanceState.getSerializable(KEY_GOTO_MAP_REGION_CENTER);
-				if (rCenterObj != null) {
-					regionCenter = (LatLon) rCenterObj;
-				} else {
+				regionCenter = AndroidUtils.getSerializable(savedInstanceState, KEY_GOTO_MAP_REGION_CENTER, LatLon.class);
+				if (regionCenter == null) {
 					regionCenter = new LatLon(0, 0);
 				}
 			}
@@ -825,8 +821,5 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			outState.putString(KEY_GOTO_MAP_REGION_NAME, regionName);
 			outState.putSerializable(KEY_GOTO_MAP_REGION_CENTER, regionCenter);
 		}
-
-
 	}
-
 }
