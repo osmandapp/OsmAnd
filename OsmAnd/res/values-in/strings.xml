@@ -5164,7 +5164,7 @@
     <string name="file_already_exists_description">\"%1$s\". Sebuah berkas dengan nama itu sudah ada. Menggantikan akan menimpa semua perubahan yang dibuat dengan versi saat ini.</string>
     <string name="external_device_details_received_data">Data yang diterima</string>
     <string name="ant_plus_searching_text_description">Silakan pegang perangkat dengkat dengan sensor. Anda harus mengaktifkan sensor supaya OsmAnd dapat menemukannya.</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Sandingkan sensor Ant+</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Sandingkan sensor ANT+</string>
     <string name="learn_more_about_sensors_link">Pelajari lebih lanjut tentang sensor.</string>
     <string name="file_already_exists">Berkas sudah ada</string>
     <string name="external_device_details_battery">Baterai</string>
@@ -5190,4 +5190,9 @@
     <string name="ant_plus_open_settings">Buka pengaturan</string>
     <string name="ant_plus_pair_new_sensor_ble">Sandingkan sensor Bluetooth LE</string>
     <string name="ant_plus_pair_bluetooth_prompt">Anda dapat menyandingkan sensor Bluetooth LE dan ANT+ dengan OsmAnd.</string>
+    <string name="ant_plus_nothing_found_description">Pastikan:
+\n– Bluetooth dinyalakan
+\n– Sensor diaktifkan
+\n– Perangkat ini di dekat sensor</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth dinonaktifkan</string>
 </resources>

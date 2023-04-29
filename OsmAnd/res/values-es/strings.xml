@@ -2700,7 +2700,7 @@
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
-    <string name="wiki_article_search_text">Buscando el artículo wiki correspondiente</string>
+    <string name="wiki_article_search_text">Buscando el artículo en la wiki correspondiente</string>
     <string name="wiki_article_not_found">Artículo no encontrado</string>
     <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
