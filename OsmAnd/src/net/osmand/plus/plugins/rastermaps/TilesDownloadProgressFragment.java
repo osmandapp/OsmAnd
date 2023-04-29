@@ -6,6 +6,7 @@ import static net.osmand.plus.plugins.rastermaps.DownloadTilesFragment.KEY_DOWNL
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -122,9 +123,16 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		latLonRect.top = args.getDouble(KEY_TOP_LAT);
 		latLonRect.right = args.getDouble(KEY_RIGHT_LON);
 		latLonRect.bottom = args.getDouble(KEY_BOTTOM_LAT);
-		downloadType = args.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
 
-		MapLayerType layerType = args.getSerializable(KEY_DOWNLOAD_LAYER, MapLayerType.class);
+		MapLayerType layerType;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			layerType = args.getSerializable(KEY_DOWNLOAD_LAYER, MapLayerType.class);
+			downloadType = args.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
+		} else {
+			layerType = (MapLayerType) args.getSerializable(KEY_DOWNLOAD_LAYER);
+			downloadType = (DownloadType) args.getSerializable(KEY_DOWNLOAD_TYPE);
+		}
+
 		tileSource = settings.getLayerTileSource(layerType.getMapLayerSettings(app), false);
 		if (tileSource == null) {
 			tileSource = settings.getMapTileSource(false);

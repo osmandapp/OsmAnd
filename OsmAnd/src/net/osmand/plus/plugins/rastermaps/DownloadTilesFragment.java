@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -114,7 +115,11 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
 		if (args != null) {
-			layerToDownload = args.getSerializable(KEY_DOWNLOAD_LAYER, MapLayerType.class);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+				layerToDownload = args.getSerializable(KEY_DOWNLOAD_LAYER, MapLayerType.class);
+			} else {
+				layerToDownload = (MapLayerType) args.getSerializable(KEY_DOWNLOAD_LAYER);
+			}
 		}
 
 		app = requireMyApplication();
@@ -132,13 +137,21 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (savedInstanceState != null) {
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
-			downloadType = savedInstanceState.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
+			downloadType = getDownloadType(savedInstanceState);
 		} else {
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			selectedMinZoom = Math.min(mapView.getZoom(), selectedMaxZoom);
 			if (args != null) {
-				downloadType = args.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
+				downloadType = getDownloadType(args);
 			}
+		}
+	}
+
+	private DownloadType getDownloadType(@NonNull Bundle bundle) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return bundle.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
+		} else {
+			return (DownloadType) bundle.getSerializable(KEY_DOWNLOAD_TYPE);
 		}
 	}
 
