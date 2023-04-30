@@ -28,7 +28,6 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -92,7 +91,7 @@ public class FavoriteDialogs {
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
+				FavouritePoint point = AndroidUtils.getSerializable(args, KEY_FAVORITE, FavouritePoint.class);
 				String categoryStr = cat.getText().toString().trim();
 				FavouritesHelper helper = app.getFavoritesHelper();
 				app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(categoryStr);

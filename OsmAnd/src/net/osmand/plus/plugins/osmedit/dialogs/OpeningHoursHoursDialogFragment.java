@@ -16,7 +16,9 @@ import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 
 public class OpeningHoursHoursDialogFragment extends DialogFragment {
 	private static final String IS_START = "is_start";
@@ -32,8 +34,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		boolean isStart = args.getBoolean(IS_START);
-		OpeningHoursParser.BasicOpeningHourRule item = (OpeningHoursParser.BasicOpeningHourRule)
-				args.getSerializable(BASIC_OPENING_HOUR_RULE);
+		BasicOpeningHourRule item = AndroidUtils.getSerializable(args, BASIC_OPENING_HOUR_RULE, BasicOpeningHourRule.class);
 		int rulePosition = args.getInt(RULE_POSITION);
 		int timePosition = args.getInt(TIME_POSITION);
 

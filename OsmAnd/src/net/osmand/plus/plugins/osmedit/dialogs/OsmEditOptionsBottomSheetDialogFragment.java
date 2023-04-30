@@ -9,10 +9,11 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -31,7 +32,7 @@ public class OsmEditOptionsBottomSheetDialogFragment extends MenuBottomSheetDial
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		if (args != null) {
-			OsmPoint osmPoint = (OsmPoint) args.getSerializable(OSM_POINT);
+			OsmPoint osmPoint = AndroidUtils.getSerializable(args, OSM_POINT, OsmPoint.class);
 			String name = OsmEditingPlugin.getName(osmPoint);
 			if (Algorithms.isEmpty(name)) {
 				name = OsmEditingPlugin.getCategory(osmPoint, getContext());

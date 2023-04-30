@@ -23,7 +23,6 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
@@ -53,12 +52,12 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -582,7 +581,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		} else {
 			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
 			if (initialPoint == null && savedInstanceState.containsKey(INITIAL_POINT_KEY)) {
-				initialPoint = (LatLon) savedInstanceState.getSerializable(INITIAL_POINT_KEY);
+				initialPoint = AndroidUtils.getSerializable(savedInstanceState, INITIAL_POINT_KEY, LatLon.class);
 			}
 			modes = savedInstanceState.getInt(MODES_KEY);
 			showSnapWarning = savedInstanceState.getBoolean(SHOW_SNAP_WARNING_KEY);

@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.antplus.dialogs
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -51,12 +50,7 @@ class ExternalDeviceDetailsFragment : AntPlusBaseFragment(), BleConnectionStateL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        device = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getSerializable("DEVICE", ExternalDevice::class.java)!!
-        } else {
-            arguments?.getSerializable("DEVICE") as ExternalDevice
-        }
-
+        device = AndroidUtils.getSerializable(arguments!!, "DEVICE", ExternalDevice::class.java)!!
     }
 
     override fun setupToolbar(view: View) {

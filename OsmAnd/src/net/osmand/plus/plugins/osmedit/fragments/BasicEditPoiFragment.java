@@ -118,8 +118,8 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 		Drawable deleteDrawable = getPaintedContentIcon(R.drawable.ic_action_remove_dark, iconColor);
 		LinearLayout openHoursContainer = view.findViewById(R.id.openHoursContainer);
 		if (savedInstanceState != null && savedInstanceState.containsKey(OPENING_HOURS)) {
-			openingHoursAdapter = new OpeningHoursAdapter(app,
-					(OpeningHours) savedInstanceState.getSerializable(OPENING_HOURS),
+			OpeningHours openingHours = AndroidUtils.getSerializable(savedInstanceState, OPENING_HOURS, OpeningHours.class);
+			openingHoursAdapter = new OpeningHoursAdapter(app, openingHours,
 					openHoursContainer, getData(), clockDrawable, deleteDrawable);
 			openingHoursAdapter.updateViews();
 		} else {
