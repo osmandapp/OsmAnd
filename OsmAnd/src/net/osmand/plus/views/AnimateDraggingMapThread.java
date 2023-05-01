@@ -768,7 +768,8 @@ public class AnimateDraggingMapThread {
 
 			// Rescale speed to 31 coordinates
 			PointD velocity = new PointD(-velocityInMapSpaceX * scale31, -velocityInMapSpaceY * scale31);
-			animator.animateTargetWith(velocity,
+			invalidateMapTarget();
+			animator.animateFlatTargetWith(velocity,
 					new PointD(TARGET_MOVE_DECELERATION * scale31, TARGET_MOVE_DECELERATION * scale31),
 					userInteractionAnimationKey);
 		}
