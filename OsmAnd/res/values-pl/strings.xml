@@ -5153,7 +5153,7 @@
     <string name="ant_plus_searching">Wyszukiwanie</string>
     <string name="ant_plus_pair_new_sensor">Parowanie nowego czujnika</string>
     <string name="ant_plus_open_settings">Otwórz ustawienia</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Parowanie czujnika Ant+</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Parowanie czujnika ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Z OsmAndem można sparować czujniki Bluetooth LE i ANT+.</string>
     <string name="learn_more_about_sensors_link">Dowiedz się więcej o czujnikach.</string>
     <string name="shutter_sound">Dźwięk migawki</string>
