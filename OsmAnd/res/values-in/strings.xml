@@ -5157,4 +5157,42 @@
     <string name="external_device_characteristic_temperature">Suhu</string>
     <string name="external_device_forget_sensor">Abaikan sensor</string>
     <string name="external_device_low_battery">Baterai lemah</string>
+    <string name="nav_profile_confirm_delete">Apakah Anda yakin ingin menghapus \"%1$s\"\?</string>
+    <string name="external_device_details_information">Informasi</string>
+    <string name="external_device_details_connection">Koneksi</string>
+    <string name="is_imported">%1$s telah diimpor.</string>
+    <string name="file_already_exists_description">\"%1$s\". Sebuah berkas dengan nama itu sudah ada. Menggantikan akan menimpa semua perubahan yang dibuat dengan versi saat ini.</string>
+    <string name="external_device_details_received_data">Data yang diterima</string>
+    <string name="ant_plus_searching_text_description">Silakan pegang perangkat dengkat dengan sensor. Anda harus mengaktifkan sensor supaya OsmAnd dapat menemukannya.</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Sandingkan sensor ANT+</string>
+    <string name="learn_more_about_sensors_link">Pelajari lebih lanjut tentang sensor.</string>
+    <string name="file_already_exists">Berkas sudah ada</string>
+    <string name="external_device_details_battery">Baterai</string>
+    <string name="external_device_details_speed">Kecepatan</string>
+    <string name="external_device_details_total_distance">Jarak total</string>
+    <string name="external_device_details_distance">Jarak</string>
+    <string name="external_device_details_connect">Hubungkan</string>
+    <string name="external_device_details_pair">Sandingkan</string>
+    <string name="external_device_details_disconnect">Putuskan</string>
+    <string name="bluetooth_disconnected">Terputus, %s</string>
+    <string name="bluetooth_connected">Terhubung, %s</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Ditemukan: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth tidak didukung</string>
+    <string name="ble_search_again">Cari lagi</string>
+    <string name="ant_plus_nothing_found_text">Tidak dapat mencari sensor</string>
+    <string name="ant_plus_bluetooth_off_description">Nyalakan Bluetooth cari dan sandingkan sensor.</string>
+    <string name="ant_plus_searching_text">Mencari sensor</string>
+    <string name="ant_plus_help_title">Saya tidak tahu jenis sensor apa yang saya punya</string>
+    <string name="ant_plus_searching">Mencari</string>
+    <string name="ant_plus_pair_new_sensor">Sandingkan sensor baru</string>
+    <string name="ant_plus_open_settings">Buka pengaturan</string>
+    <string name="ant_plus_pair_new_sensor_ble">Sandingkan sensor Bluetooth LE</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Anda dapat menyandingkan sensor Bluetooth LE dan ANT+ dengan OsmAnd.</string>
+    <string name="ant_plus_nothing_found_description">Pastikan:
+\n– Bluetooth dinyalakan
+\n– Sensor diaktifkan
+\n– Perangkat ini di dekat sensor</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth dinonaktifkan</string>
 </resources>

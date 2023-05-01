@@ -4538,4 +4538,10 @@
     <string name="poi_waste_drugs">Leki</string>
     <string name="poi_waste_dog_excrement">Psie odchody</string>
     <string name="poi_waste_cigarettes">Papierosy</string>
+    <string name="poi_toy_library">Biblioteka zabawek</string>
+    <string name="poi_spikes">Kolce</string>
+    <string name="poi_sump_buster">Pogromca miski olejowej</string>
+    <string name="poi_barrier_board">Tablica barierowa</string>
+    <string name="poi_barrier_tyres">Opony</string>
+    <string name="poi_tank_trap">Bariera przeciwpancerna</string>
 </resources>

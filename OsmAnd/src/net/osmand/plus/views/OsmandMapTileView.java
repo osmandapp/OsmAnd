@@ -1784,6 +1784,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
 			startRotating = false;
 			startZooming = false;
+			notifyLocationListeners(getLatitude(), getLongitude());
 		}
 
 		@Override

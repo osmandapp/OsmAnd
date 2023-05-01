@@ -3763,10 +3763,10 @@
     <string name="upload_photo">Sender</string>
     <string name="opr_use_dev_url">Brug test.openplacereviews.org</string>
     <string name="activity_type_winter_name">Vinter</string>
-    <string name="activity_type_riding_name">Ride</string>
-    <string name="activity_type_cycling_name">Cykle</string>
-    <string name="activity_type_running_name">Løbe</string>
-    <string name="activity_type_walking_name">Gå</string>
+    <string name="activity_type_riding_name">Ridning</string>
+    <string name="activity_type_cycling_name">Cykling</string>
+    <string name="activity_type_running_name">Løb</string>
+    <string name="activity_type_walking_name">Gang</string>
     <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
     <string name="announcement_time_title">Meddelelsestidspunkt</string>
@@ -5187,8 +5187,12 @@
     <string name="bluetooth_connected">Forbundet, %s</string>
     <string name="ant_plus_pair_bluetooth_prompt">Du kan parre Bluetooth LE- og ANT+-sensorer med OsmAnd.</string>
     <string name="ant_plus_pair_new_sensor_ble">Par Bluetooth LE-sensor</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Par Ant+-sensor</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Par ANT+-sensor</string>
     <string name="learn_more_about_sensors_link">Få mere at vide om sensorer.</string>
     <string name="external_device_characteristic_gear_ratio">Gearforhold</string>
     <string name="ant_plus_pair_new_sensor">Par ny sensor</string>
+    <string name="file_already_exists">Fil eksisterer allerede</string>
+    <string name="file_already_exists_description">\"%1$s\". Der findes allerede en fil med dette navn. Hvis den erstattes, overskrives alle ændringer, der er foretaget med den aktuelle version.</string>
+    <string name="nav_profile_confirm_delete">Er du sikker på, at du vil slette \"%1$s\"\?</string>
+    <string name="is_imported">%1$s importeres.</string>
 </resources>

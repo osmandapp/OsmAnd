@@ -5169,7 +5169,7 @@
     <string name="ant_plus_searching">Hledání</string>
     <string name="ant_plus_pair_new_sensor">Spárování nového senzoru</string>
     <string name="ant_plus_open_settings">Otevřít nastavení</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Párování senzoru Ant+</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Párování senzoru ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Se zařízením OsmAnd můžete spárovat snímače Bluetooth LE a ANT+.</string>
     <string name="learn_more_about_sensors_link">Další informace o senzorech.</string>
     <string name="external_device_characteristic_distance">Vzdálenost</string>

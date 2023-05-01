@@ -96,10 +96,10 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (savedInstanceState != null) {
 			hideImpassableRoads = savedInstanceState.getBoolean(HIDE_IMPASSABLE_ROADS_KEY);
 			if (savedInstanceState.containsKey(AVOID_ROADS_TYPES_KEY)) {
-				routingParametersMap = (HashMap<String, Boolean>) savedInstanceState.getSerializable(AVOID_ROADS_TYPES_KEY);
+				routingParametersMap = (HashMap<String, Boolean>) AndroidUtils.getSerializable(savedInstanceState, AVOID_ROADS_TYPES_KEY, HashMap.class);
 			}
 			if (savedInstanceState.containsKey(AVOID_ROADS_OBJECTS_KEY)) {
-				removedImpassableRoads = (List<LatLon>) savedInstanceState.getSerializable(AVOID_ROADS_OBJECTS_KEY);
+				removedImpassableRoads = (List<LatLon>) AndroidUtils.getSerializable(savedInstanceState, AVOID_ROADS_OBJECTS_KEY, ArrayList.class);
 			}
 			if (savedInstanceState.containsKey(AVOID_ROADS_APP_MODE_KEY)) {
 				appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(AVOID_ROADS_APP_MODE_KEY), null);

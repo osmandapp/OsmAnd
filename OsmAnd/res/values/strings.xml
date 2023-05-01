@@ -67,7 +67,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ant_plus_pair_new_sensor">Pair new sensor</string>
     <string name="ant_plus_open_settings">Open settings</string>
     <string name="ant_plus_pair_new_sensor_ble">Pair Bluetooth LE sensor</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Pair Ant+ sensor</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Pair ANT+ sensor</string>
     <string name="ant_plus_pair_bluetooth_prompt">You can pair Bluetooth LE and ANT+ sensors with OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Learn more about sensors.</string>
 
@@ -1396,7 +1396,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="please_provide_point_name_error">Please provide a name for the point</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="use_volume_buttons_as_zoom_descr">Control the map-zoom level using the volume buttons on the device.</string>
-    <string name="quick_action_remove_next_destination">Delete nearest destination point</string>
+    <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>

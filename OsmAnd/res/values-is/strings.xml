@@ -5116,7 +5116,7 @@
     <string name="ant_plus_pair_new_sensor">Para nýjan skynjara</string>
     <string name="ant_plus_open_settings">Opna stillingar</string>
     <string name="ant_plus_pair_new_sensor_ble">Para Bluetooth LE skynjara</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Para Ant+ skynjara</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Para ANT+ skynjara</string>
     <string name="ant_plus_pair_bluetooth_prompt">Þú getur parað Bluetooth LE og ANT+ skynjara við OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Læra meira um skynjara.</string>
     <string name="inch">in</string>

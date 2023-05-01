@@ -92,6 +92,7 @@ import org.apache.commons.logging.Log;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -145,7 +146,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			openstreetmapUtil = plugin.getPoiModificationRemoteUtil();
 		}
 
-		Entity entity = (Entity) getArguments().getSerializable(KEY_AMENITY_ENTITY);
+		Entity entity = AndroidUtils.getSerializable(getArguments(), KEY_AMENITY_ENTITY, Entity.class);
 		editPoiData = new EditPoiData(entity, app);
 	}
 
@@ -156,9 +157,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 
 		if (savedInstanceState != null) {
-			@SuppressWarnings("unchecked")
-			Map<String, String> mp = (Map<String, String>) savedInstanceState.getSerializable(TAGS_LIST);
-			editPoiData.updateTags(mp);
+			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, HashMap.class);
+			editPoiData.updateTags(map);
 		}
 
 		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);

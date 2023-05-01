@@ -2700,7 +2700,7 @@
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
-    <string name="wiki_article_search_text">Buscando el artículo wiki correspondiente</string>
+    <string name="wiki_article_search_text">Buscando el artículo en la wiki correspondiente</string>
     <string name="wiki_article_not_found">Artículo no encontrado</string>
     <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
@@ -3936,17 +3936,17 @@
     <string name="add_online_routing_engine">Añadir motor de navegación en línea</string>
     <string name="activity_type_winter_name">Invierno</string>
     <string name="activity_type_water_name">Agua</string>
-    <string name="activity_type_walking_name">Peatón</string>
+    <string name="activity_type_walking_name">A pie</string>
     <string name="activity_type_snowmobile_name">Motonieve</string>
     <string name="activity_type_running_name">Correr</string>
     <string name="activity_type_riding_name">Equitación</string>
     <string name="activity_type_racing_name">Carreras</string>
-    <string name="activity_type_offroad_name">Todo terreno</string>
+    <string name="activity_type_offroad_name">Todoterreno</string>
     <string name="activity_type_mountainbike_name">Bicicleta de montaña</string>
-    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_hiking_name">Senderismo</string>
     <string name="activity_type_cycling_name">Bicicleta</string>
-    <string name="activity_type_car_name">Automóvil</string>
+    <string name="activity_type_car_name">Coche</string>
     <string name="shared_string_api_key">Clave de la API</string>
     <string name="uploaded_count">Se subieron %1$d de %2$d</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Límites de reservas naturales</string>
@@ -4664,7 +4664,7 @@
     <string name="radius_rules_widget_desc">La herramienta «Regla radial» muestra círculos de distancia alrededor del punto marcado en el mapa.</string>
     <string name="current_time_widget_desc">Muestra la hora actual tomada del dispositivo.</string>
     <string name="battery_widget_desc">Muestra el nivel de batería del dispositivo.</string>
-    <string name="altitude_widget_desc">Muestra la altura sobre el nivel del mar en la ubicación actual.</string>
+    <string name="altitude_widget_desc">Muestra la altura sobre el nivel del mar de la geolocalización actual.</string>
     <string name="navigation_points_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o el tiempo restante, los próximos giros, el rumbo, el nombre de la calle actual o siguiente, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="route_maneuvers_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
@@ -4846,7 +4846,7 @@
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="map_center_widget">Coordenadas: centro del mapa</string>
     <string name="map_widget_altitude_desc">Muestran la altitud de la ubicación geográfica actual o la elevación del centro del mapa actual</string>
-    <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar en el centro del mapa actual.</string>
+    <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar del centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
@@ -5187,6 +5187,10 @@
     <string name="external_device_details_pair">Emparejar</string>
     <string name="external_device_details_disconnect">Desconectar</string>
     <string name="bluetooth_disconnected">Desconectado, %s</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">Emparejar un sensor Ant+</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Emparejar un sensor ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puedes emparejar sensores Bluetooth LE y ANT+ con OsmAnd.</string>
+    <string name="is_imported">%1$s ha sido importado.</string>
+    <string name="file_already_exists_description">\"%1$s\". Ya existe un fichero con ese nombre. Reemplazar sobrescribirá todos los cambios realizados con la versión actual.</string>
+    <string name="file_already_exists">El archivo ya existe</string>
+    <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"\?</string>
 </resources>

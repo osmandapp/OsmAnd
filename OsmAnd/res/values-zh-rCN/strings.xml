@@ -5096,4 +5096,7 @@
     <string name="external_device_forget_sensor">遗忘传感器</string>
     <string name="external_device_forget_sensor_description">传感器将从列表中移除。你可以稍后重新和该传感器配对。</string>
     <string name="external_device_details_pair">配对</string>
+    <string name="is_imported">%1$s 已导入。</string>
+    <string name="file_already_exists">文件已存在</string>
+    <string name="nav_profile_confirm_delete">您确定要删除“%1$s”吗？</string>
 </resources>

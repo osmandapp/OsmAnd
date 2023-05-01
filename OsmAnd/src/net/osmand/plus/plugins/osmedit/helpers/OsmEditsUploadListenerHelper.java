@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
@@ -117,7 +118,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			Bundle argument = getArguments();
 			String errorMessage = argument.getString(ERROR_MESSAGE);
-			OsmPoint point = (OsmPoint) argument.getSerializable(POINT);
+			OsmPoint point = AndroidUtils.getSerializable(argument, POINT, OsmPoint.class);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getResources().getString(R.string.failed_to_upload))
 					.setMessage(MessageFormat.format(
@@ -162,7 +163,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			Bundle arguments = getArguments();
 			String[] pointNames = arguments.getStringArray(POINT_NAMES);
 			boolean[] hasErrors = arguments.getBooleanArray(HAS_ERROR);
-			OsmPoint[] points = (OsmPoint[]) arguments.getSerializable(POINTS_WITH_ERRORS);
+			OsmPoint[] points = AndroidUtils.getSerializable(arguments, POINTS_WITH_ERRORS, OsmPoint[].class);
 			int successfulUploads = 0;
 			assert hasErrors != null;
 			for (boolean hasError : hasErrors) {

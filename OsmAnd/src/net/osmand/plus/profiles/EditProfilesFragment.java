@@ -61,7 +61,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		OsmandApplication app = requireMyApplication();
 		if (savedInstanceState != null && savedInstanceState.containsKey(APP_MODES_ORDER_KEY) && savedInstanceState.containsKey(DELETED_APP_MODES_KEY)) {
-			appModesOrders = (HashMap<String, Integer>) savedInstanceState.getSerializable(APP_MODES_ORDER_KEY);
+			appModesOrders = (HashMap<String, Integer>) AndroidUtils.getSerializable(savedInstanceState, APP_MODES_ORDER_KEY, HashMap.class);
 			deletedModesKeys = savedInstanceState.getStringArrayList(DELETED_APP_MODES_KEY);
 		} else {
 			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
