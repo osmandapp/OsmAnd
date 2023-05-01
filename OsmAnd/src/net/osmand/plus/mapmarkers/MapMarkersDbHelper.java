@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -233,7 +234,7 @@ public class MapMarkersDbHelper {
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
 			SearchHistoryHelper.getInstance(context)
-					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription);
+					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription, HistorySource.SEARCH);
 		}
 
 		Map<String, Object> rowsMap = new HashMap<>();

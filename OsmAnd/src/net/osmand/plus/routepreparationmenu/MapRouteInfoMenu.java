@@ -112,6 +112,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
@@ -772,7 +773,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				// History card
 				if (historyEnabled) {
 					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-					List<SearchResult> results = historyHelper.getSearchHistoryResults(true);
+					List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, false);
 					if (!Algorithms.isEmpty(results)) {
 						HistoryCard historyCard = new HistoryCard(mapActivity, results);
 						historyCard.setListener(this);
