@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
 
@@ -38,7 +39,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 	protected void updateHistoryItems() {
 		clearItems();
 		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		List<SearchResult> searchResults = historyHelper.getSearchHistoryResults(false, true);
+		List<SearchResult> searchResults = historyHelper.getHistoryResults(HistorySource.SEARCH, false, true);
 		sortSearchResults(searchResults);
 
 		Map<Integer, List<SearchResult>> historyGroups = new HashMap<>();

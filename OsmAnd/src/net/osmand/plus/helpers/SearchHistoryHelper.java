@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -59,24 +60,24 @@ public class SearchHistoryHelper {
 		new HistoryItemDBHelper().setLastModifiedTime(lastModifiedTime);
 	}
 
-	public void addNewItemToHistory(double latitude, double longitude, PointDescription pointDescription, HistorySource historySource) {
-		addNewItemToHistory(new HistoryEntry(latitude, longitude, pointDescription, historySource));
+	public void addNewItemToHistory(double latitude, double longitude, PointDescription name, HistorySource source) {
+		addNewItemToHistory(new HistoryEntry(latitude, longitude, name, source));
 	}
 
-	public void addNewItemToHistory(AbstractPoiType pt, HistorySource historySource) {
-		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(pt), historySource));
+	public void addNewItemToHistory(AbstractPoiType poiType, HistorySource source) {
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(poiType), source));
 	}
 
-	public void addNewItemToHistory(PoiUIFilter filter, HistorySource historySource) {
-		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter), historySource));
+	public void addNewItemToHistory(PoiUIFilter filter, HistorySource source) {
+		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter), source));
 		if (app.getSettings().SEARCH_HISTORY.get()) {
 			app.getPoiFilters().markHistory(filter.getFilterId(), true);
 		}
 	}
 
-	public void addNewItemToHistory(GPXInfo gpxInfo, HistorySource historySource) {
+	public void addNewItemToHistory(GPXInfo gpxInfo, HistorySource source) {
 		if (gpxInfo != null) {
-			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo), historySource));
+			addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(gpxInfo), source));
 		}
 	}
 
@@ -118,32 +119,13 @@ public class SearchHistoryHelper {
 	}
 
 	@NonNull
-	public List<SearchResult> getSearchHistoryResults(boolean onlyPoints) {
-		return getSearchHistoryResults(onlyPoints, false);
-	}
-
-	@NonNull
-	public List<SearchResult> getSearchHistoryResults(boolean onlyPoints, boolean includeDeleted) {
+	public List<SearchResult> getHistoryResults(@Nullable HistorySource source, boolean onlyPoints, boolean includeDeleted) {
 		List<SearchResult> searchResults = new ArrayList<>();
 
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();
 		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			if(entry.historySource == HistorySource.SEARCH){
-				searchResults.add(result);
-			}
-		}
-		return searchResults;
-	}
-
-	@NonNull
-	public List<SearchResult> getNavigationHistoryResults(boolean onlyPoints, boolean includeDeleted) {
-		List<SearchResult> searchResults = new ArrayList<>();
-
-		SearchPhrase phrase = SearchPhrase.emptyPhrase();
-		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
-			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			if(entry.historySource == HistorySource.NAVIGATION){
+			if (source == null || entry.source == source) {
 				searchResults.add(result);
 			}
 		}
@@ -262,20 +244,21 @@ public class SearchHistoryHelper {
 	}
 
 	public static class HistoryEntry {
-		double lat;
-		double lon;
-		PointDescription name;
+		private final double lat;
+		private final double lon;
+		private final PointDescription name;
+		private final HistorySource source;
+
 		private long lastAccessedTime;
 		private int[] intervals = new int[0];
 		private double[] intervalValues = new double[0];
 
-		private HistorySource historySource;
 
-		public HistoryEntry(double lat, double lon, PointDescription name, HistorySource historySource) {
+		public HistoryEntry(double lat, double lon, @NonNull PointDescription name, @NonNull HistorySource source) {
 			this.lat = lat;
 			this.lon = lon;
 			this.name = name;
-			this.historySource = historySource;
+			this.source = source;
 		}
 
 		private double rankFunction(double cf, double timeDiff) {
@@ -319,8 +302,9 @@ public class SearchHistoryHelper {
 			return lon;
 		}
 
-		public HistorySource getHistorySource(){
-			return historySource;
+		@NonNull
+		public HistorySource getSource() {
+			return source;
 		}
 
 		public void markAsAccessed(long time) {
@@ -332,13 +316,13 @@ public class SearchHistoryHelper {
 			}
 			intervals = nintervals;
 			intervalValues = nintervalValues;
-			this.lastAccessedTime = time;
+			lastAccessedTime = time;
 		}
 
 		double getUsageLastTime(long time, int days, int hours, int minutes) {
 			long mins = (minutes + (hours + 24 * days) * 60);
 			long timeInPast = time - mins * 60 * 1000;
-			if (this.lastAccessedTime <= timeInPast) {
+			if (lastAccessedTime <= timeInPast) {
 				return 0;
 			}
 			double res = 0;
@@ -359,7 +343,7 @@ public class SearchHistoryHelper {
 
 		public void setFrequency(String intervalsString, String values) {
 			if (Algorithms.isEmpty(intervalsString) || Algorithms.isEmpty(values)) {
-				markAsAccessed(this.lastAccessedTime);
+				markAsAccessed(lastAccessedTime);
 				return;
 			}
 			String[] ints = intervalsString.split(",");
@@ -403,9 +387,8 @@ public class SearchHistoryHelper {
 		}
 
 		public void setLastAccessTime(long time) {
-			this.lastAccessedTime = time;
+			lastAccessedTime = time;
 		}
-
 	}
 
 	private static class HistoryEntryComparator implements Comparator<HistoryEntry> {
@@ -542,7 +525,7 @@ public class SearchHistoryHelper {
 									HISTORY_COL_NAME + " = ? AND " +
 									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ? AND " + HISTORY_COL_SOURCE + " = ?",
 							new Object[] {e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
-									e.getSerializedName(), e.getLat(), e.getLon(), e.getHistorySource().name()});
+									e.getSerializedName(), e.getLat(), e.getLon(), e.getSource().name()});
 					updateLastModifiedTime();
 				} finally {
 					db.close();
@@ -569,7 +552,7 @@ public class SearchHistoryHelper {
 			db.execSQL(
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
 					new Object[] {e.getSerializedName(), e.getLastAccessTime(),
-							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon(), e.getHistorySource().name()});
+							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon(), e.getSource().name()});
 			updateLastModifiedTime();
 		}
 
@@ -579,8 +562,8 @@ public class SearchHistoryHelper {
 			if (db != null) {
 				try {
 					SQLiteCursor query = db.rawQuery(
-							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + ", " + HISTORY_COL_SOURCE + ", " +
-									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES +
+							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON + ", " +
+									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES + ", " + HISTORY_COL_SOURCE +
 									" FROM " + HISTORY_TABLE_NAME, null);
 					Map<PointDescription, HistoryEntry> st = new HashMap<>();
 					if (query != null && query.moveToFirst()) {
@@ -589,21 +572,23 @@ public class SearchHistoryHelper {
 							String name = query.getString(0);
 							double lat = query.getDouble(1);
 							double lon = query.getDouble(2);
-							String historySourceValue = query.getString(3);
-							HistorySource historySource = HistorySource.getHistorySourceByName(historySourceValue) ;
-							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
-							if (app.getPoiTypes().isTypeForbidden(p.getName())) {
+							long lastAccessedTime = query.getLong(3);
+							String frequencyIntervals = query.getString(4);
+							String frequencyValues = query.getString(5);
+							HistorySource source = HistorySource.getHistorySourceByName(query.getString(6));
+
+							PointDescription pd = PointDescription.deserializeFromString(name, new LatLon(lat, lon));
+							if (app.getPoiTypes().isTypeForbidden(pd.getName())) {
 								query.moveToNext();
 							}
-							HistoryEntry e = new HistoryEntry(lat, lon, p, historySource);
-							long time = query.getLong(4);
-							e.setLastAccessTime(time);
-							e.setFrequency(query.getString(5), query.getString(6));
-							if (st.containsKey(p)) {
+							HistoryEntry entry = new HistoryEntry(lat, lon, pd, source);
+							entry.setLastAccessTime(lastAccessedTime);
+							entry.setFrequency(frequencyIntervals, frequencyValues);
+							if (st.containsKey(pd)) {
 								reinsert = true;
 							}
-							entries.add(e);
-							st.put(p, e);
+							entries.add(entry);
+							st.put(pd, entry);
 						} while (query.moveToNext());
 						if (reinsert) {
 							System.err.println("Reinsert all values for search history");

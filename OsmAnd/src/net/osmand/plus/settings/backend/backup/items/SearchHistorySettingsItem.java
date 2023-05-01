@@ -146,7 +146,7 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 					jsonObject.put("lastAccessedTime", historyEntry.getLastAccessTime());
 					jsonObject.put("intervals", historyEntry.getIntervals());
 					jsonObject.put("intervalValues", historyEntry.getIntervalsValues());
-					jsonObject.put("source", historyEntry.getHistorySource().name());
+					jsonObject.put("source", historyEntry.getSource().name());
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);
