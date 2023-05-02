@@ -3611,7 +3611,7 @@
     <string name="app_mode_inline_skates">Görkorcsolya</string>
     <string name="please_provide_point_name_error">Kérjük, adjon nevet a pontnak</string>
     <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
-    <string name="quick_action_remove_next_destination">Legközelebbi célpont törlése</string>
+    <string name="quick_action_remove_next_destination">Következő célpont törlése</string>
     <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
     <string name="export_profile_dialog_description">További adatok kijelölése exportálásra a profillal együtt.</string>
     <string name="shared_string_include_data">Kiegészítő adatok átvétele</string>
@@ -5183,4 +5183,6 @@
     <string name="file_already_exists_description">\"%1$s\". Egy azonos nevű fájl már létezik. A csere felülír minden, a jelenlegi verzióval készített változást.</string>
     <string name="file_already_exists">A fájl már létezik</string>
     <string name="nav_profile_confirm_delete">Biztosan törli ezt: \"%1$s\"\?</string>
+    <string name="no_search_results">Nincs találat</string>
+    <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
 </resources>
