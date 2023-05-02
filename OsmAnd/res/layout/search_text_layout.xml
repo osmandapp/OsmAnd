@@ -8,16 +8,6 @@
               android:gravity="center_vertical"
               android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/back_button"
-        style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-        android:layout_width="@dimen/toolbar_height"
-        android:layout_height="@dimen/toolbar_height"
-        android:layout_gravity="center"
-        android:contentDescription="@string/back"
-        osmand:srcCompat="@drawable/ic_arrow_back"
-        android:visibility="gone"/>
-    
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="0dp"
