@@ -343,7 +343,7 @@ public class ImportHelper {
 	public void handleXmlFileImport(@NonNull Uri intentUri, @NonNull String fileName, @Nullable CallbackWithObject routingCallback) {
 		if (fileExists(intentUri, fileName)) {
 			SaveExistingFileListener listener = overwrite -> executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback, overwrite));
-			FileExistBottomSheet.showInstance(app, activity.getSupportFragmentManager(), fileName, listener);
+			app.runInUIThread(() -> FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), fileName, listener));
 		} else {
 			executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback, true));
 		}
@@ -528,7 +528,7 @@ public class ImportHelper {
 
 		if (existingFilePath != null) {
 			SaveExistingFileListener saveFileListener = overwrite -> executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, overwrite));
-			FileExistBottomSheet.showInstance(app, activity.getSupportFragmentManager(), name, saveFileListener);
+			app.runInUIThread(() -> FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), name, saveFileListener));
 		} else {
 			executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, false));
 		}

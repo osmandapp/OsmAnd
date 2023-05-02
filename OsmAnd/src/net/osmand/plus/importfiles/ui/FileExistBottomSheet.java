@@ -86,19 +86,17 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 		outState.putString(FILE_NAME_KEY, fileName);
 	}
 
-	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager manager, @NonNull String fileName, @Nullable SaveExistingFileListener listener) {
-		app.runInUIThread(() -> {
-			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				Bundle args = new Bundle();
-				args.putString(FILE_NAME_KEY, fileName);
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String fileName, @Nullable SaveExistingFileListener listener) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(FILE_NAME_KEY, fileName);
 
-				FileExistBottomSheet fragment = new FileExistBottomSheet();
-				fragment.listener = listener;
-				fragment.setArguments(args);
-				fragment.setRetainInstance(true);
-				fragment.show(manager, TAG);
-			}
-		});
+			FileExistBottomSheet fragment = new FileExistBottomSheet();
+			fragment.listener = listener;
+			fragment.setArguments(args);
+			fragment.setRetainInstance(true);
+			fragment.show(manager, TAG);
+		}
 	}
 
 	public interface SaveExistingFileListener {
