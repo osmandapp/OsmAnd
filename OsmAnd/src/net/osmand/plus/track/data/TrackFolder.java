@@ -44,7 +44,7 @@ public class TrackFolder {
 
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
-		List<TrackItem> items = new ArrayList<>();
+		List<TrackItem> items = new ArrayList<>(trackItems);
 		for (TrackFolder folder : folders) {
 			items.addAll(folder.trackItems);
 		}
