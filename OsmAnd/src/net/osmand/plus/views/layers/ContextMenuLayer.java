@@ -405,7 +405,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return false;
 		}
 		hideVisibleMenues();
-		LatLon pointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
+		LatLon pointLatLon;
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			PointI point31 = new PointI();
+			mapRenderer.getLocationFromElevatedPoint(new PointI((int) point.x, (int) point.y), point31);
+			pointLatLon = new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+		} else
+			pointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
 		menu.show(pointLatLon, null, null);
 
 		view.refreshMap();
@@ -857,7 +864,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		if (selectOnMap != null) {
-			LatLon latlon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
+			LatLon latlon;
+			MapRendererView mapRenderer = getMapRenderer();
+			if (mapRenderer != null) {
+				PointI point31 = new PointI();
+				mapRenderer.getLocationFromElevatedPoint(new PointI((int) point.x, (int) point.y), point31);
+				latlon = new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+			} else
+				latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
 			menu.init(latlon, null, null);
 			CallbackWithObject<LatLon> cb = selectOnMap;
 			cb.processResult(latlon);
