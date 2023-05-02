@@ -31,6 +31,12 @@ public class TracksComparator implements Comparator<Object> {
 		this.latLon = latLon;
 	}
 
+	public TracksComparator(@NonNull TracksSortMode sortMode, @NonNull LatLon latLon) {
+		trackTab = null;
+		this.sortMode = sortMode;
+		this.latLon = latLon;
+	}
+
 	@Override
 	public int compare(Object o1, Object o2) {
 		if (o1 instanceof Integer) {

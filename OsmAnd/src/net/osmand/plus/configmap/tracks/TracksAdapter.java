@@ -33,12 +33,11 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_NO_VISIBLE_TRACKS = 2;
 	public static final int TYPE_RECENTLY_VISIBLE_TRACKS = 3;
 	public static final int TYPE_TRACK = 4;
-	public static final int TYPE_NO_FOUND_TRACKS = 5;
 
 	private final UpdateLocationViewCache locationViewCache;
 	private final TrackTab trackTab;
 	private final TracksFragment fragment;
-	private final boolean nightMode;
+	protected final boolean nightMode;
 
 	public TracksAdapter(@NonNull OsmandApplication app, @NonNull TrackTab trackTab, @NonNull TracksFragment fragment, boolean nightMode) {
 		this.trackTab = trackTab;
@@ -68,24 +67,25 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_NO_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.empty_state, parent, false);
 				return new NoVisibleTracksViewHolder(view, fragment, nightMode);
-			case TYPE_NO_FOUND_TRACKS:
-				view = inflater.inflate(R.layout.empty_search_results, parent, false);
-				return new RecyclerView.ViewHolder(view) {
-				};
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);
 				return new RecentlyVisibleViewHolder(view, fragment, nightMode);
 			case TYPE_SORT_TRACKS:
-				view = inflater.inflate(R.layout.sort_type_view, parent, false);
-				return new SortTracksViewHolder(view, fragment, nightMode);
+				return createSortTracksViewHolder(parent, inflater);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
 	}
 
+	@NonNull
+	protected SortTracksViewHolder createSortTracksViewHolder(@NonNull ViewGroup parent, LayoutInflater inflater) {
+		View view = inflater.inflate(R.layout.sort_type_view, parent, false);
+		return new SortTracksViewHolder(view, fragment, nightMode);
+	}
+
 	@Override
 	public int getItemViewType(int position) {
-		Object object = trackTab.getFilteredItems().get(position);
+		Object object = getItems().get(position);
 		if (object instanceof TrackItem) {
 			return TYPE_TRACK;
 		} else if (object instanceof Integer) {
@@ -98,19 +98,21 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return TYPE_RECENTLY_VISIBLE_TRACKS;
 			} else if (TYPE_SORT_TRACKS == item) {
 				return TYPE_SORT_TRACKS;
-			} else if (TYPE_NO_FOUND_TRACKS == item) {
-				return TYPE_NO_FOUND_TRACKS;
 			}
 		}
 		throw new IllegalArgumentException("Unsupported view type");
 	}
 
+	protected List<Object> getItems() {
+		return trackTab.items;
+	}
+
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof TrackViewHolder) {
-			TrackItem item = (TrackItem) trackTab.getFilteredItems().get(position);
+			TrackItem item = (TrackItem) getItems().get(position);
 			boolean hideDivider = position == getItemCount() - 1
-					|| Algorithms.objectEquals(trackTab.getFilteredItems().get(position + 1), TYPE_RECENTLY_VISIBLE_TRACKS);
+					|| Algorithms.objectEquals(getItems().get(position + 1), TYPE_RECENTLY_VISIBLE_TRACKS);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
 			viewHolder.bindView(trackTab, item, !hideDivider);
 		} else if (holder instanceof NoVisibleTracksViewHolder) {
@@ -134,7 +136,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	}
 
 	private void updateItem(@NonNull Object object) {
-		int index = trackTab.getFilteredItems().indexOf(object);
+		int index = getItems().indexOf(object);
 		if (index != -1) {
 			notifyItemChanged(index);
 		}
@@ -142,9 +144,9 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public List<TrackItem> getCurrentTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
-		for (Object objectItem: trackTab.getFilteredItems()) {
-			if(objectItem instanceof TrackItem){
-				trackItems.add((TrackItem)objectItem);
+		for (Object objectItem : getItems()) {
+			if (objectItem instanceof TrackItem) {
+				trackItems.add((TrackItem) objectItem);
 			}
 		}
 		return trackItems;
@@ -152,6 +154,6 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public int getItemCount() {
-		return trackTab.getFilteredItems().size();
+		return getItems().size();
 	}
 }
