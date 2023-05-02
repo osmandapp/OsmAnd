@@ -1674,12 +1674,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		MeasurementToolLayer layer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		if (mapRenderer != null && multiTouchSupport != null && (layer == null || !layer.isInMeasurementMode())) {
 			int actionCode = event.getActionMasked();
-			int actionIndex = event.getActionIndex();
-			boolean primaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 0;
-			boolean primaryClear = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 0;
-			boolean secondaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 1;
-			boolean secondaryClear = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 1;
-			if (actionCode != MotionEvent.ACTION_DOWN) {
+			if (actionCode != MotionEvent.ACTION_DOWN
+				&& actionCode != MotionEvent.ACTION_UP
+				&& actionCode != MotionEvent.ACTION_CANCEL) {
+				int actionIndex = event.getActionIndex();
+				boolean primaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 0;
+				boolean primaryClear = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 0;
+				boolean secondaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 1;
+				boolean secondaryClear = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 1;
 				if (primaryTouch) {
 					// Keep map location of previous touch for map gestures
 					secondTouchLocationX = firstTouchLocationX;
