@@ -23,7 +23,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.Set;
 
-public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -78,10 +78,12 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 		return view;
 	}
 
+	@Override
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
 		adapter.onTrackItemsSelected(trackItems);
 	}
 
+	@Override
 	public void updateContent() {
 		adapter.notifyDataSetChanged();
 	}

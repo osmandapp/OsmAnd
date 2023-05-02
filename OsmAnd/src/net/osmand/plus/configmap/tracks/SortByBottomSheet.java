@@ -45,8 +45,8 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		nightMode = isNightMode(true);
 
 		Fragment target = getTargetFragment();
-		if (target instanceof TracksFragment) {
-			TrackTab trackTab = ((TracksFragment) target).getSelectedTab();
+		if (target instanceof SortableFragment) {
+			TrackTab trackTab = ((SortableFragment) target).getSelectedTab();
 			tracksSortMode = trackTab.getSortMode();
 		}
 	}
@@ -102,9 +102,9 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 			holder.itemView.setOnClickListener(view -> {
 				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
-				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksFragment) {
+				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof SortableFragment) {
 					TracksSortMode mode = sortModes.get(position);
-					((TracksFragment) target).setTracksSortMode(mode);
+					((SortableFragment) target).setTracksSortMode(mode);
 				}
 				dismiss();
 			});

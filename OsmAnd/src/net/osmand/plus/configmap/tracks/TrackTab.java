@@ -85,8 +85,9 @@ public class TrackTab {
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
 		for (Object object : items) {
-			if (object instanceof TrackItem)
+			if (object instanceof TrackItem) {
 				trackItems.add((TrackItem) object);
+			}
 		}
 		return trackItems;
 	}
