@@ -408,9 +408,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		LatLon pointLatLon;
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			PointI point31 = new PointI();
-			mapRenderer.getLocationFromElevatedPoint(new PointI((int) point.x, (int) point.y), point31);
-			pointLatLon = new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+			pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
 		} else
 			pointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
 		menu.show(pointLatLon, null, null);
@@ -866,11 +864,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (selectOnMap != null) {
 			LatLon latlon;
 			MapRendererView mapRenderer = getMapRenderer();
-			if (mapRenderer != null) {
-				PointI point31 = new PointI();
-				mapRenderer.getLocationFromElevatedPoint(new PointI((int) point.x, (int) point.y), point31);
-				latlon = new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
-			} else
+			if (mapRenderer != null)
+				latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
+			else
 				latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
 			menu.init(latlon, null, null);
 			CallbackWithObject<LatLon> cb = selectOnMap;
