@@ -407,9 +407,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		hideVisibleMenues();
 		LatLon pointLatLon;
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null) {
+		if (mapRenderer != null)
 			pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
-		} else
+		else
 			pointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
 		menu.show(pointLatLon, null, null);
 
