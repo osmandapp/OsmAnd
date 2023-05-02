@@ -3677,7 +3677,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Зміна масштабу мапи кнопками гучності пристрою.</string>
     <string name="use_volume_buttons_as_zoom">Масштабування кнопками гучності</string>
     <string name="lenght_limit_description">Зазначте довжину вашого автомобіля. До довгомірних транспортних можуть застосовуватися певні маршрутні обмеження.</string>
-    <string name="quick_action_remove_next_destination">Вилучити найближчу точку призначення</string>
+    <string name="quick_action_remove_next_destination">Вилучити наступну точку призначення</string>
     <string name="please_provide_point_name_error">Вкажіть назву точки</string>
     <string name="quick_action_remove_next_destination_descr">Вилучає наступний пункт призначення з маршруту. Якщо це кінцевий пункт призначення, навігація зупиниться.</string>
     <string name="search_download_wikipedia_maps">Завантажити мапи Вікіпедії</string>
@@ -5198,4 +5198,6 @@
     <string name="file_already_exists_description">«%1$s». Файл з такою назвою вже існує. Заміна перезапише всі зміни, внесені в поточну версію.</string>
     <string name="file_already_exists">Файл вже існує</string>
     <string name="nav_profile_confirm_delete">Ви дійсно бажаєте вилучити «%1$s»\?</string>
+    <string name="search_track_by_name">Пошук треків за назвою</string>
+    <string name="no_search_results">Нічого не знайдено</string>
 </resources>
