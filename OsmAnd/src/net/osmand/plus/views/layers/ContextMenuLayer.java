@@ -405,12 +405,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return false;
 		}
 		hideVisibleMenues();
-		LatLon pointLatLon;
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null)
-			pointLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
-		else
-			pointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
+		LatLon pointLatLon = mapRenderer == null ? NativeUtilities.getLatLonFromPixel(null, tileBox, point.x, point.y)
+			: NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
 		menu.show(pointLatLon, null, null);
 
 		view.refreshMap();
@@ -862,12 +859,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		if (selectOnMap != null) {
-			LatLon latlon;
 			MapRendererView mapRenderer = getMapRenderer();
-			if (mapRenderer != null)
-				latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
-			else
-				latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tileBox, point.x, point.y);
+			LatLon latlon = mapRenderer == null ? NativeUtilities.getLatLonFromPixel(null, tileBox, point.x, point.y)
+				: NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
 			menu.init(latlon, null, null);
 			CallbackWithObject<LatLon> cb = selectOnMap;
 			cb.processResult(latlon);
