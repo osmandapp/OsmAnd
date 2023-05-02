@@ -3669,7 +3669,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
-    <string name="quick_action_remove_next_destination">Borrar el punto de destino más cercano</string>
+    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
@@ -5193,4 +5193,6 @@
     <string name="file_already_exists_description">\"%1$s\". Ya existe un fichero con ese nombre. Reemplazar sobrescribirá todos los cambios realizados con la versión actual.</string>
     <string name="file_already_exists">El archivo ya existe</string>
     <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"\?</string>
+    <string name="no_search_results">No hay resultados</string>
+    <string name="search_track_by_name">Buscar las pista por nombre</string>
 </resources>
