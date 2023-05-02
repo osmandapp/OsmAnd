@@ -608,7 +608,8 @@ public class VoiceRouter {
 			result.put(TO_DEST, "");
 		}
 		// Delimit refs if followed by street names to create a brief pause. Also solves unintentional concatenation of numbers (Issue #16256). (Need to apply in sync for toRef and fromRef.)
-		String refDelimiter = ", ";
+		//String refDelimiter = ", ";   caused some TTS engines to pronounce as "thousands" for concatenations like "nn, nnn".
+		String refDelimiter = "; ";
 		String toRef = result.get(TO_REF);
 		String fromRef = result.get(FROM_REF);
 		if (!Algorithms.isEmpty(toRef) && !Algorithms.isEmpty(result.get(TO_STREET_NAME))) {
