@@ -37,6 +37,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
@@ -57,7 +59,8 @@ import java.util.List;
  * Created by okorsun on 23.12.16.
  */
 
-public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUpdatesListener, QuickActionSelectionListener {
+public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUpdatesListener,
+        QuickActionSelectionListener, IMapDisplayPositionProvider {
 
     private ImageView contextMarker;
     private final OsmandApplication app;
@@ -331,7 +334,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             return;
         }
         previousMapPosition = view.getMapPosition();
-        view.setMapPosition(OsmandSettings.MIDDLE_BOTTOM_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
 
         LatLon ll = menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon())
@@ -357,21 +359,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             view.setLatLon(lat, lon);
         }
-
         inMovingMarkerMode = true;
         AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
-                R.id.map_ruler_layout,
-                R.id.map_left_widgets_panel,
-                R.id.map_right_widgets_panel,
-                R.id.map_center_info);
-
+                R.id.map_ruler_layout, R.id.map_left_widgets_panel,
+                R.id.map_right_widgets_panel, R.id.map_center_info);
+        updateMapDisplayPosition();
         view.refreshMap();
-    }
-
-    private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
-        return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
-                app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
-                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to folow if there is selected point on map
     }
 
     private void quitMovingMarker() {
@@ -394,19 +387,32 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                 view.setLatLon(lat, lon);
             }
         }
-        int currentPosition = view.getMapPosition();
-        if (currentPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
-            view.setMapPosition(previousMapPosition);
-        }
-
         inMovingMarkerMode = false;
         AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-                R.id.map_ruler_layout,
-                R.id.map_left_widgets_panel,
-                R.id.map_right_widgets_panel,
-                R.id.map_center_info);
-
+                R.id.map_ruler_layout, R.id.map_left_widgets_panel,
+                R.id.map_right_widgets_panel, R.id.map_center_info);
+        updateMapDisplayPosition();
         view.refreshMap();
+    }
+
+    private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
+        return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
+                app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
+                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to folow if there is selected point on map
+    }
+
+    private void updateMapDisplayPosition() {
+        MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+        manager.updateProviders(this, inMovingMarkerMode);
+        manager.updateMapDisplayPosition();
+    }
+
+    @Nullable @Override
+    public Integer getMapDisplayPosition() {
+        if (inMovingMarkerMode) {
+            return OsmandSettings.MIDDLE_BOTTOM_CONSTANT;
+        }
+        return null;
     }
 
     @Override

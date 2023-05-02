@@ -14,6 +14,9 @@ import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCo
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.backend.OsmandSettings.CENTER_CONSTANT;
+import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -67,6 +70,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
@@ -92,7 +97,6 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
@@ -138,7 +142,8 @@ import java.util.Locale;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister, OnFileUploadCallback, CalculateAltitudeListener {
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister,
+		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -161,6 +166,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private OsmandApplication app;
+	private MapDisplayPositionManager mapDisplayPositionManager;
 
 	private String previousToolBarTitle = "";
 	private MeasurementToolBarController toolBarController;
@@ -198,7 +204,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private boolean portrait;
 	private boolean nightMode;
-	private int cachedMapPosition;
 
 	private MeasurementEditingContext editingCtx;
 	private GraphDetailsMenu detailsMenu;
@@ -280,6 +285,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		if (editingCtx == null) {
 			editingCtx = new MeasurementEditingContext(app);
 		}
@@ -302,7 +308,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
-		cachedMapPosition = mapActivity.getMapView().getMapPosition();
 		app.setMeasurementEditingContext(editingCtx);
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
 			@Override
@@ -627,18 +632,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void expandInfoView() {
 		infoExpanded = true;
-		updateMapPosition();
+		if (!portrait) {
+			shiftMapControls(false);
+		}
+		updateMapDisplayPosition();
 		cardsContainer.setVisibility(View.VISIBLE);
 		updateUpDownBtn();
-	}
-
-	private void updateMapPosition() {
-		if (portrait) {
-			setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
-		} else {
-			shiftMapControls(false);
-			setMapPosition(OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
-		}
 	}
 
 	private void collapseInfoViewIfExpanded() {
@@ -655,7 +654,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			shiftMapControls(true);
 		}
 		infoTypeBtn.setSelectedItem(null);
-		moveMapToDefaultPosition();
+		updateMapDisplayPosition();
 		updateUpDownBtn();
 	}
 
@@ -765,15 +764,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onResume() {
 		super.onResume();
+		mapDisplayPositionManager.registerProvider(this);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapActivity.getMapLayers().hasMapActivity()) {
 			onBackPressedCallback.setEnabled(true);
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
-			if (infoExpanded) {
-				updateMapPosition();
-			}
+			updateMapDisplayPosition();
 			addInitialPoint();
 		}
 	}
@@ -781,13 +779,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onPause() {
 		super.onPause();
+		mapDisplayPositionManager.unregisterProvider(this);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().removeThemeInfoProviderTag(TAG);
 		}
 		detailsMenu.onDismiss();
 		detailsMenu.setMapActivity(null);
-		setMapPosition(cachedMapPosition);
+		updateMapDisplayPosition();
 	}
 
 	@Override
@@ -1273,7 +1272,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void onCloseMenu() {
-		moveMapToDefaultPosition();
+		updateMapDisplayPosition();
 	}
 
 	@Override
@@ -1429,9 +1428,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			public void onItemClick(int position) {
 				if (mapActivity != null) {
 					collapseInfoViewIfExpanded();
-					if (portrait) {
-						setMapPosition(OsmandSettings.MIDDLE_TOP_CONSTANT);
-					}
+					updateMapDisplayPosition();
 					measurementLayer.moveMapToPoint(position);
 					measurementLayer.selectPoint(position);
 				}
@@ -1592,7 +1589,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void addPointBeforeAfter() {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		int selectedPoint = editingCtx.getSelectedPointPosition();
 		int pointsCount = editingCtx.getPointsCount();
 		if (addCenterPoint()) {
@@ -1706,16 +1702,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		updateInfoView();
 	}
 
-	private void moveMapToDefaultPosition() {
-		setMapPosition(cachedMapPosition);
+	private void updateMapDisplayPosition() {
+		mapDisplayPositionManager.updateMapDisplayPosition(true);
 	}
 
-	private void setMapPosition(int position) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMapView().setMapPosition(position);
-			mapActivity.refreshMap();
+	@Nullable @Override
+	public Integer getMapDisplayPosition() {
+		if (infoExpanded) {
+			return portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 		}
+		return CENTER_CONSTANT;
 	}
 
 	private void addToGpx(FinalSaveAction finalSaveAction) {

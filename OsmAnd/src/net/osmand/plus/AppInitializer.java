@@ -47,6 +47,7 @@ import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.FeedbackHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;

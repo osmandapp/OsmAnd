@@ -1035,7 +1035,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			if (mapLabelToShow != null && !mapLabelToShow.contextMenuDisabled()) {
 				mapContextMenu.setMapCenter(latLonToShow);
-				mapContextMenu.setMapPosition(mapView.getMapPosition());
 				mapContextMenu.setCenterMarker(true);
 
 				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();

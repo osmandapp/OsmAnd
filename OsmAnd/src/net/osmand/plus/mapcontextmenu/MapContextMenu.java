@@ -24,6 +24,9 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
@@ -62,7 +65,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
-		MapMarkerChangedListener, TargetPointChangedListener {
+		MapMarkerChangedListener, TargetPointChangedListener, IMapDisplayPositionProvider {
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -86,7 +89,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private MenuController menuController;
 
 	private LatLon mapCenter;
-	private int mapPosition;
 	private boolean centerMarker;
 	private boolean zoomOutOnly;
 	private int mapZoom;
@@ -95,6 +97,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private boolean appModeChanged;
 	private boolean appModeListenerAdded;
 	private boolean autoHide;
+	private boolean shouldUpdateMapDisplayPosition;
 
 	private int favActionIconId;
 	private int waypointActionIconId;
@@ -296,10 +299,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void setMapPosition(int mapPosition) {
-		this.mapPosition = mapPosition;
-	}
-
 	@Override
 	public PointDescription getPointDescription() {
 		return pointDescription;
@@ -370,6 +369,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 		active = true;
 		appModeChanged = false;
+		shouldUpdateMapDisplayPosition = true;
 
 		if (needAcquireMenuController) {
 			if (menuController != null) {
@@ -390,11 +390,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			menuController.clearPlainMenuItems();
 			menuController.addPlainMenuItems(typeStr, getPointDescription(), getLatLon());
 		}
-
-		if (mapPosition != 0) {
-			mapActivity.getMapView().setMapPosition(0);
-		}
-
+		updateMapDisplayPosition();
 		mapActivity.refreshMap();
 
 		if (object instanceof MapMarker) {
@@ -528,10 +524,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		boolean result = false;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (mapPosition != 0) {
-				mapActivity.getMapView().setMapPosition(mapPosition);
-				mapPosition = 0;
-			}
+			shouldUpdateMapDisplayPosition = false;
+			updateMapDisplayPosition();
 			MenuController menuController = getMenuController();
 			if (menuController != null) {
 				menuController.onHide();
@@ -1597,6 +1591,23 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().updateLocation(centerChanged, locationChanged, compassChanged);
 			}
 		});
+	}
+
+	private void updateMapDisplayPosition() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			MapDisplayPositionManager manager = mapActivity.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+			manager.updateProviders(this, shouldUpdateMapDisplayPosition);
+			manager.updateMapDisplayPosition();
+		}
+	}
+
+	@Nullable @Override
+	public Integer getMapDisplayPosition() {
+		if (shouldUpdateMapDisplayPosition) {
+			return OsmandSettings.CENTER_CONSTANT;
+		}
+		return null;
 	}
 
 	private abstract class MenuAction implements Runnable {

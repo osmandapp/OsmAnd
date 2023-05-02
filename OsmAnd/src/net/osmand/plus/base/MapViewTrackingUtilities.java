@@ -25,8 +25,8 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.resources.DetectRegionTask;
@@ -57,11 +57,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
+	private final MapDisplayPositionManager mapDisplayPositionManager;
 
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
 	private MapContextMenu contextMenu;
-	private TrackDetailsMenu detailsMenu;
 	private StateChangedListener<Boolean> enable3DViewListener;
 
 	private boolean isMapLinkedToLocation = true;
@@ -78,10 +78,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean drivingRegionUpdated;
 	private long compassRequest;
 
-	public MapViewTrackingUtilities(OsmandApplication app) {
+	public MapViewTrackingUtilities(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
+		mapDisplayPositionManager = new MapDisplayPositionManager(app);
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
@@ -89,6 +90,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		addMapMarkersListener(app);
 		addEnable3DViewListener();
 		initMapLinkedToLocation();
+	}
+
+	@NonNull
+	public MapDisplayPositionManager getMapDisplayPositionManager() {
+		return mapDisplayPositionManager;
 	}
 
 	public void resetDrivingRegionUpdate() {
@@ -124,6 +130,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setMapView(@Nullable OsmandMapTileView mapView) {
 		this.mapView = mapView;
+		mapDisplayPositionManager.setMapView(mapView);
 		if (mapView != null) {
 			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 			int orientation = 0;
@@ -178,10 +185,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	public void setContextMenu(MapContextMenu contextMenu) {
 		this.contextMenu = contextMenu;
-	}
-
-	public void setDetailsMenu(TrackDetailsMenu detailsMenu) {
-		this.detailsMenu = detailsMenu;
 	}
 
 	public void detectDrivingRegion(@NonNull LatLon latLon) {
@@ -325,19 +328,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public void updateSettings() {
-		if (mapView != null) {
-			if (isMapLinkedToLocation) {
-				boolean trackDetailsVisible = detailsMenu != null && detailsMenu.isVisible();
-				int displayPosition;
-				if (settings.POSITION_PLACEMENT_ON_MAP.get() == OsmandSettings.POSITION_PLACEMENT_CENTER
-					|| ((settings.POSITION_PLACEMENT_ON_MAP.get() == OsmandSettings.POSITION_PLACEMENT_AUTOMATIC) && (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_BEARING))
-					|| trackDetailsVisible) {
-					displayPosition = OsmandSettings.CENTER_CONSTANT;
-				} else {
-					displayPosition = OsmandSettings.BOTTOM_CONSTANT;
-				}
-				mapView.setMapPosition(displayPosition);
-			}
+		if (isMapLinkedToLocation) {
+			mapDisplayPositionManager.updateMapDisplayPosition();
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
 		if (mapView != null) {
