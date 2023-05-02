@@ -99,18 +99,18 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 						if (!downloadThread.getIndexes().isDownloadedFromInternet) {
 							if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
 								downloadThread.runReloadIndexFiles();
-								setupDownoadingIndexesView();
+								setupDownloadingIndexesView();
 							}
 						}
 					});
 					AndroidUiHelper.updateVisibility(tryAgainButton, true);
 					dialog.setCustomView(view);
 				} else if (downloadingIndexes) {
-					setupDownoadingIndexesView();
+					setupDownloadingIndexesView();
 				}
 			}
 
-			private void setupDownoadingIndexesView() {
+			private void setupDownloadingIndexesView() {
 				LayoutInflater inflater = UiUtilities.getInflater(dialog.getContext(), nightMode);
 				View view = inflater.inflate(R.layout.bottom_sheet_with_progress_bar, null);
 				TextView title = view.findViewById(R.id.title);

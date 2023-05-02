@@ -35,6 +35,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
+import net.osmand.OnCompleteCallback;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -252,52 +253,13 @@ public class ItemViewHolder {
 				}
 			} else if (downloadItem instanceof MultipleDownloadItem) {
 				MultipleDownloadItem item = (MultipleDownloadItem) downloadItem;
-				String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
-				String regionsHeader = context.getString(R.string.regions);
-				String allRegionsCount = String.valueOf(item.getAllItems().size());
-				String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
-				String header;
-				String count;
-				if (item.hasActualDataToDownload()) {
-					if (!item.isDownloaded()) {
-						header = allRegionsHeader;
-						count = leftToDownloadCount;
-					} else {
-						header = regionsHeader;
-						count = String.format(
-								context.getString(R.string.ltr_or_rtl_combine_via_slash),
-								leftToDownloadCount,
-								allRegionsCount);
-					}
+				if (item.hasWeatherIndexes()) {
+					calculateWeatherCacheSize(item, () -> setupCommonMultipleDescription(item));
 				} else {
-					header = allRegionsHeader;
-					count = allRegionsCount;
+					setupCommonMultipleDescription(item);
 				}
-				String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
-				String addDescr = item.getAdditionalDescription(context);
-				if (addDescr != null) {
-					fullDescription += " " + addDescr;
-				}
-				if (item.hasActualDataToDownload()) {
-					fullDescription = context.getString(
-							R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
-							item.getSizeDescription(context));
-				}
-				tvDesc.setText(fullDescription);
 			} else if (downloadItem instanceof WeatherIndexItem) {
-				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
-				pbProgress.setVisibility(View.VISIBLE);
-				tvDesc.setVisibility(View.GONE);
-				pbProgress.setIndeterminate(true);
-				app.getOfflineForecastHelper().calculateCacheSizeIfNeeded(weatherIndexItem,
-						() -> {
-							if (AndroidUtils.isActivityNotDestroyed(context)) {
-								setupCommonDescription(downloadItem);
-								pbProgress.setVisibility(View.GONE);
-								tvDesc.setVisibility(View.VISIBLE);
-								pbProgress.setIndeterminate(false);
-							}
-						});
+				calculateWeatherCacheSize(downloadItem, () -> setupCommonDescription(downloadItem));
 			} else {
 				setupCommonDescription(downloadItem);
 			}
@@ -341,7 +303,14 @@ public class ItemViewHolder {
 	}
 
 	private boolean isWeatherItemInRemovingProcess(@NonNull DownloadItem downloadItem) {
-		if (downloadItem instanceof WeatherIndexItem) {
+		if (downloadItem instanceof MultipleDownloadItem) {
+			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
+			for (IndexItem indexItem : multipleDownloadItem.getAllIndexes()) {
+				if (isWeatherItemInRemovingProcess(indexItem)) {
+					return true;
+				}
+			}
+		} else if (downloadItem instanceof WeatherIndexItem) {
 			OsmandApplication app = context.getMyApplication();
 			WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
 			OfflineForecastHelper forecastHelper = app.getOfflineForecastHelper();
@@ -351,10 +320,72 @@ public class ItemViewHolder {
 	}
 
 	private void bindAsWeatherItemInRemovingProcess() {
-		tvDesc.setVisibility(View.GONE);
-		pbProgress.setVisibility(View.VISIBLE);
-		pbProgress.setIndeterminate(true);
+		showIndeterminateProgress();
 		ivBtnRight.setImageDrawable(null);
+	}
+
+	private void calculateWeatherCacheSize(
+			@NonNull DownloadItem downloadItem,
+			@NonNull OnCompleteCallback onComplete
+	) {
+		showIndeterminateProgress();
+		OsmandApplication app = context.getMyApplication();
+		OfflineForecastHelper helper = app.getOfflineForecastHelper();
+		if (downloadItem instanceof MultipleDownloadItem) {
+			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
+			List<IndexItem> indexes = multipleDownloadItem.getAllIndexes();
+			List<WeatherIndexItem> weatherIndexes = new ArrayList<>();
+			for (IndexItem indexItem : indexes) {
+				if (indexItem instanceof WeatherIndexItem) {
+					weatherIndexes.add((WeatherIndexItem) indexItem);
+				}
+			}
+			helper.calculateCacheSizeForAll(weatherIndexes, () -> onWeatherCacheSizeCalculated(onComplete));
+		} else if (downloadItem instanceof WeatherIndexItem) {
+			WeatherIndexItem index = (WeatherIndexItem) downloadItem;
+			helper.calculateCacheSizeIfNeeded(index, () -> onWeatherCacheSizeCalculated(onComplete));
+		}
+	}
+
+	private void onWeatherCacheSizeCalculated(@NonNull OnCompleteCallback callback) {
+		if (AndroidUtils.isActivityNotDestroyed(context)) {
+			hideIndeterminateProgress();
+			callback.onComplete();
+		}
+	}
+
+	private void setupCommonMultipleDescription(@NonNull MultipleDownloadItem item) {
+		String regionsHeader = context.getString(R.string.regions);
+		String allRegionsHeader = context.getString(R.string.shared_strings_all_regions);
+		String allRegionsCount = String.valueOf(item.getAllItems().size());
+		String leftToDownloadCount = String.valueOf(item.getItemsToDownload().size());
+
+		String header = allRegionsHeader;
+		String count = allRegionsCount;
+		if (item.hasActualDataToDownload()) {
+			if (!item.isDownloaded()) {
+				header = allRegionsHeader;
+				count = leftToDownloadCount;
+			} else {
+				header = regionsHeader;
+				count = String.format(
+						context.getString(R.string.ltr_or_rtl_combine_via_slash),
+						leftToDownloadCount,
+						allRegionsCount);
+			}
+		}
+
+		String fullDescription = context.getString(R.string.ltr_or_rtl_combine_via_colon, header, count);
+		String additionalDescription = item.getAdditionalDescription(context);
+		if (additionalDescription != null) {
+			fullDescription += " " + additionalDescription;
+		}
+		if (item.hasActualDataToDownload()) {
+			fullDescription = context.getString(
+					R.string.ltr_or_rtl_combine_via_bold_point, fullDescription,
+					item.getSizeDescription(context));
+		}
+		tvDesc.setText(fullDescription);
 	}
 
 	private void setupCommonDescription(@NonNull DownloadItem downloadItem) {
@@ -371,6 +402,18 @@ public class ItemViewHolder {
 			fullDescription = String.format(pattern, type, fullDescription);
 		}
 		tvDesc.setText(fullDescription);
+	}
+
+	private void showIndeterminateProgress() {
+		tvDesc.setVisibility(View.GONE);
+		pbProgress.setVisibility(View.VISIBLE);
+		pbProgress.setIndeterminate(true);
+	}
+
+	private void hideIndeterminateProgress() {
+		tvDesc.setVisibility(View.VISIBLE);
+		pbProgress.setVisibility(View.GONE);
+		pbProgress.setIndeterminate(false);
 	}
 
 	private boolean checkDisabledAndClickAction(DownloadItem item) {

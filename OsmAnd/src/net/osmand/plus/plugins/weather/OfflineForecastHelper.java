@@ -271,7 +271,31 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 		}
 	}
 
-	public void calculateCacheSizeIfNeeded(@NonNull WeatherIndexItem indexItem, @Nullable OnCompleteCallback callback) {
+	public void calculateCacheSizeForAll(
+			@NonNull List<WeatherIndexItem> indexItems,
+			@Nullable OnCompleteCallback callback
+	) {
+		calculateCacheSizeOneByOne(callback, 0, indexItems);
+	}
+
+	private void calculateCacheSizeOneByOne(
+			@Nullable OnCompleteCallback callback, int entryIndex,
+			@NonNull List<WeatherIndexItem> items
+	) {
+		calculateCacheSizeIfNeeded(items.get(entryIndex), () -> {
+			int nextEntryIndex = entryIndex + 1;
+			if (nextEntryIndex < items.size()) {
+				calculateCacheSizeOneByOne(callback, nextEntryIndex, items);
+			} else {
+				notifyOnComplete(callback);
+			}
+		});
+	}
+
+	public void calculateCacheSizeIfNeeded(
+			@NonNull WeatherIndexItem indexItem,
+			@Nullable OnCompleteCallback callback
+	) {
 		String regionId = indexItem.getRegionId();
 		if (!isWeatherSupported(app)) {
 			LOG.error("[Calculate size] [" + regionId + "] Can't calculate cache size. Weather isn't allowed with this configuration.");
