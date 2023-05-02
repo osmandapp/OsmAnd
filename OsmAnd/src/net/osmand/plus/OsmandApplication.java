@@ -67,7 +67,6 @@ import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -187,7 +186,6 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
-	MapDisplayPositionManager mapDisplayPositionManager;
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	FileSettingsHelper fileSettingsHelper;
@@ -1055,10 +1053,6 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
-	}
-
-	public MapDisplayPositionManager getMapDisplayPositionManager() {
-		return mapDisplayPositionManager;
 	}
 
 	public OsmandMap getOsmandMap() {

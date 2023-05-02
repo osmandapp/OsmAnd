@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
@@ -131,8 +130,7 @@ public abstract class ContextMenuCardDialog implements IMapDisplayPositionProvid
 	}
 
 	private void updateMapDisplayPosition(boolean registerProvider) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		MapDisplayPositionManager manager = app.getMapDisplayPositionManager();
+		MapDisplayPositionManager manager = mapActivity.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		manager.updateProviders(this, registerProvider);
 		manager.updateMapDisplayPosition();
 	}

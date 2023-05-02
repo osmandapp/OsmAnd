@@ -899,7 +899,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	}
 
 	private void updateMapDisplayPosition() {
-		MapDisplayPositionManager manager = app.getMapDisplayPositionManager();
+		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		manager.updateProviders(this, isInPlanRouteMode);
 		manager.updateMapDisplayPosition();
 	}

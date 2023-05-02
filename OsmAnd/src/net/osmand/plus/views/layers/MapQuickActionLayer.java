@@ -402,7 +402,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     }
 
     private void updateMapDisplayPosition() {
-        MapDisplayPositionManager manager = app.getMapDisplayPositionManager();
+        MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
         manager.updateProviders(this, inMovingMarkerMode);
         manager.updateMapDisplayPosition();
     }

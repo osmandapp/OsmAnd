@@ -704,7 +704,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			getApplication().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			if (!NativeUtilities.containsLatLon(getMapRenderer(), getMapView().getCurrentRotatedTileBox(), latLon)) {
 				menu.setMapCenter(latLon);
-				menu.setMapPosition(getMapView().getMapPosition());
 				menu.setCenterMarker(true);
 			}
 			menu.show(latLon, pointDescription, object);

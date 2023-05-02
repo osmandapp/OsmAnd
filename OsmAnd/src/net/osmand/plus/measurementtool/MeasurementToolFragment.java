@@ -285,7 +285,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		mapDisplayPositionManager = app.getMapDisplayPositionManager();
+		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		if (editingCtx == null) {
 			editingCtx = new MeasurementEditingContext(app);
 		}

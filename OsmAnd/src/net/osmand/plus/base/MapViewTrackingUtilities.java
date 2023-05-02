@@ -82,7 +82,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		this.app = app;
 		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
-		mapDisplayPositionManager = app.getMapDisplayPositionManager();
+		mapDisplayPositionManager = new MapDisplayPositionManager(app);
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().addCompassListener(this);
@@ -90,6 +90,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		addMapMarkersListener(app);
 		addEnable3DViewListener();
 		initMapLinkedToLocation();
+	}
+
+	@NonNull
+	public MapDisplayPositionManager getMapDisplayPositionManager() {
+		return mapDisplayPositionManager;
 	}
 
 	public void resetDrivingRegionUpdate() {

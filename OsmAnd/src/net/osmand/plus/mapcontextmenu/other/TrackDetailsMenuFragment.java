@@ -161,7 +161,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 	}
 
 	private void updateMapDisplayPosition(boolean registerProvider) {
-		MapDisplayPositionManager manager = app.getMapDisplayPositionManager();
+		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		manager.updateProviders(this, registerProvider);
 		manager.updateMapDisplayPosition();
 	}
