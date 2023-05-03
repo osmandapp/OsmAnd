@@ -447,7 +447,11 @@ public class OsmandSettings {
 		int indexOfNext = next ?
 				(indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0) :
 				(indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1);
-		return setApplicationMode(enabledModes.get(indexOfNext));
+		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
+		if (appMode != nextAppMode){
+			return setApplicationMode(nextAppMode);
+		}
+		return false;
 	}
 
 	public boolean setApplicationMode(ApplicationMode appMode) {
