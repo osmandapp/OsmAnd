@@ -5128,7 +5128,7 @@
     <string name="external_device_characteristic_diastolic">Diastolique</string>
     <string name="external_device_characteristic_cuff_pressure">Pression du brassard</string>
     <string name="external_device_characteristic_pulse_rate">Fréquence du pouls</string>
-    <string name="external_device_characteristic_stride_length">Longueur de la foulée</string>
+    <string name="external_device_characteristic_stride_length">Longueur de foulée</string>
     <string name="ant_plus_bluetooth_off_description">Activez le Bluetooth pour rechercher et appairer des capteurs.</string>
     <string name="external_device_characteristic_temperature">Température</string>
     <string name="external_device_details_information">Information</string>
