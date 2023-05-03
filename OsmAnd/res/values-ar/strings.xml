@@ -5256,7 +5256,7 @@
     <string name="ant_plus_pair_new_sensor">اقتران مستشعر جديد</string>
     <string name="ant_plus_open_settings">فتح الإعدادات</string>
     <string name="ant_plus_pair_new_sensor_ble">إقران مستشعر بلوتوث LE</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">اقتران مستشعر Ant +</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">اقتران مستشعر ANT+</string>
     <string name="learn_more_about_sensors_link">تعرف على المزيد حول أجهزة الاستشعار.</string>
     <string name="no_search_results">لا توجد نتائج</string>
     <string name="search_track_by_name">بحث عن المسار بالاسم</string>
