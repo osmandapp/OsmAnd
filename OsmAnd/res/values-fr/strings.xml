@@ -3668,7 +3668,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
     <string name="quick_action_remove_next_destination_descr">Supprime la prochaine étape de votre route. S\'il s\'agit de la destination finale, le guidage s\'arrêtera.</string>
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
-    <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
+    <string name="quick_action_remove_next_destination">Supprimer la prochaine étape</string>
     <string name="please_provide_point_name_error">Veuillez renseigner un nom pour le point</string>
     <string name="plugin_wikipedia_description">Obtenez des informations sur les points d\'intérêt avec les articles Wikipédia, un guide disponible hors-ligne.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
@@ -5180,4 +5180,6 @@
     <string name="external_device_characteristic_cadence">Cadence</string>
     <string name="external_device_characteristic_heart_rate">Fréquence cardiaque</string>
     <string name="external_device_characteristic_systolic">Systolique</string>
+    <string name="no_search_results">Aucun résultat</string>
+    <string name="search_track_by_name">Rechercher les traces par nom</string>
 </resources>
