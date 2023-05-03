@@ -90,6 +90,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			return true;
 		} else if (isLetterKeyCode(keyCode)) {
 			onLetterKeyUp(keyCode);
+			return false;
 		} else if (keyCode == KeyEvent.KEYCODE_MINUS) {
 			osmandMap.changeZoom(-1);
 			return true;
