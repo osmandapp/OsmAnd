@@ -152,10 +152,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		titleTv.setText(title);
 		descriptionTv.setText(description);
 		Drawable icon;
-		if(item.localFile == null){
+		if (item.localFile == null) {
 			icon = getIcon(R.drawable.ic_action_cloud_delete, enabled ? R.color.color_osm_edit_delete : ColorUtilities.getSecondaryIconColorId(nightMode));
-			titleTv.setTextColor(enabled ? ContextCompat.getColor(app, R.color.backup_warning): ColorUtilities.getSecondaryTextColorId(nightMode));
-		}else{
+			titleTv.setTextColor(enabled ? ContextCompat.getColor(app, R.color.backup_warning) : ColorUtilities.getSecondaryTextColorId(nightMode));
+		} else {
 			icon = getIcon(R.drawable.ic_action_cloud_upload_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode));
 			titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getSecondaryTextColor(app, nightMode));
 		}
