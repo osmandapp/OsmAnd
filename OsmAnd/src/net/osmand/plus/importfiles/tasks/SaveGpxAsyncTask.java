@@ -15,7 +15,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
+import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -70,7 +73,8 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		if (destinationDir.exists() && destinationDir.isDirectory() && destinationDir.canWrite()) {
 			WptPt pt = gpxFile.findPointToShow();
 			File toWrite = getFileToSave(fileName, destinationDir, pt);
-			boolean destinationExists = toWrite.exists();
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(toWrite.getAbsolutePath());
 			Exception exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
 
 			if (listener != null) {
@@ -79,15 +83,16 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			if (exception == null) {
 				gpxFile.path = toWrite.getAbsolutePath();
 				File file = new File(gpxFile.path);
-				if (destinationExists) {
-					GpxDataItem item = app.getGpxDbHelper().getItem(file);
-					if (item != null) {
-						app.getGpxDbHelper().clearAnalysis(item);
+				if (overwrite) {
+					app.getGpxDbHelper().remove(toWrite);
+					if (selected != null) {
+						GpxSelectionParams params = GpxSelectionParams.newInstance()
+								.hideFromMap().syncGroup().saveSelection();
+						helper.selectGpxFile(selected.getGpxFile(), params);
 					}
-				} else {
-					GpxDataItem item = new GpxDataItem(file, gpxFile);
-					app.getGpxDbHelper().add(item);
 				}
+				GpxDataItem item = new GpxDataItem(file, gpxFile);
+				app.getGpxDbHelper().add(item);
 
 				warning = null;
 			} else {
