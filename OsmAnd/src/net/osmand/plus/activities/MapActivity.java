@@ -679,8 +679,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					SecondSplashScreenFragment.SHOW = false;
 					RateUsHelper.showRateDialog(this);
 				}
-			} else {
-				dashboardOnMap.updateDashboard();
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);
