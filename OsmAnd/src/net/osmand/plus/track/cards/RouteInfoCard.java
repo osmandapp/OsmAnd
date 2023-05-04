@@ -23,6 +23,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
+import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
 
@@ -58,11 +59,24 @@ public class RouteInfoCard extends MapBaseCard {
 		addInfoRow(container, routeKey.getOperator(), app.getString(R.string.poi_operator));
 		addInfoRow(container, routeKey.getSymbol(), app.getString(R.string.shared_string_symbol));
 		addInfoRow(container, routeKey.getWebsite(), app.getString(R.string.website), true);
-		addInfoRow(container, routeKey.getWikipedia(), app.getString(R.string.shared_string_wikipedia));
+		addWikiInfoRow(container, routeKey.getWikipedia());
 	}
 
 	private void addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description) {
 		addInfoRow(container, text, description, false);
+	}
+
+	private void addWikiInfoRow(@NonNull ViewGroup container, @NonNull String text) {
+		if (Algorithms.isEmpty(text)) {
+			return;
+		}
+		String url = WikiAlgorithms.getWikiUrl(text);
+		String description = app.getString(R.string.shared_string_wikipedia);
+		if (Algorithms.isUrl(url)) {
+			addInfoRow(container, url, description, true);
+		} else {
+			addInfoRow(container, text, description);
+		}
 	}
 
 	private void addInfoRow(@NonNull ViewGroup container, @NonNull String text, @NonNull String description, boolean needLinks) {
