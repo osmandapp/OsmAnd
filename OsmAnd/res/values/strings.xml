@@ -14,6 +14,7 @@
     <string name="number_of_tracks">%1$s tracks</string>
     <string name="search_track_by_name">Search track by name</string>
     <string name="no_search_results">No results</string>
+    <string name="poi_categories">POI Categories</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>

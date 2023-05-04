@@ -67,6 +67,9 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
 			File file = new File(getApp().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
+			if(!file.exists()){
+				file = gpxInfo.getFile();
+			}
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
 			if(selectedGpxFile == null){
 				GpxFileLoaderTask.loadGpxFile(file, null, new CallbackWithObject<GPXFile>() {
