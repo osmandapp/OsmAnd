@@ -24,7 +24,7 @@ import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -157,7 +157,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		Intent intent = new Intent(context, customization.getMyPlacesActivity());
 		Bundle bundle = new Bundle();
 		bundle.putInt(TAB_ID, FAV_TAB);
-		bundle.putString(FavoritesFragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
+		bundle.putString(FragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
 		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 		AndroidUtils.startActivityIfSafe(context, intent);
 	}

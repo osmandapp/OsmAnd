@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="number_of_tracks">%1$s tracks</string>
     <string name="search_track_by_name">Search track by name</string>
     <string name="no_search_results">No results</string>
     <string name="is_imported">%1$s is imported.</string>
