@@ -1308,7 +1308,7 @@ public class Algorithms {
 
 	public static boolean isUrl(String value) {
 		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};
-		return Algorithms.startsWithAny(value, urlPrefixes);
+		return startsWithAny(value, urlPrefixes);
 	}
 
 	public static <T> List<WeakReference<T>> updateWeakReferencesList(List<WeakReference<T>> list, T item, boolean isNew) {
