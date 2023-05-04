@@ -1,9 +1,9 @@
 package net.osmand.plus.configmap.tracks;
 
 import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +12,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.MapUtils;
 

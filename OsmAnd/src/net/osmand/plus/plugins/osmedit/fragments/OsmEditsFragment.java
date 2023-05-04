@@ -44,7 +44,7 @@ import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
@@ -82,7 +82,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
-		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
+		OnNodeCommittedListener, FragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;

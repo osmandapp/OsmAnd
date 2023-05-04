@@ -111,10 +111,12 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof TrackViewHolder) {
 			TrackItem item = (TrackItem) getItems().get(position);
+
+			boolean shouldShowFolder = trackTab.type.shouldShowFolder();
 			boolean hideDivider = position == getItemCount() - 1
 					|| Algorithms.objectEquals(getItems().get(position + 1), TYPE_RECENTLY_VISIBLE_TRACKS);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
-			viewHolder.bindView(trackTab, item, !hideDivider);
+			viewHolder.bindView(trackTab.getSortMode(), item, !hideDivider, shouldShowFolder, true);
 		} else if (holder instanceof NoVisibleTracksViewHolder) {
 			((NoVisibleTracksViewHolder) holder).bindView();
 		} else if (holder instanceof EmptyTracksViewHolder) {
@@ -122,9 +124,8 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof RecentlyVisibleViewHolder) {
 			((RecentlyVisibleViewHolder) holder).bindView();
 		} else if (holder instanceof SortTracksViewHolder) {
-			TracksSortMode sortMode = trackTab.getSortMode();
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems());
-			((SortTracksViewHolder) holder).bindView(sortMode, enabled);
+			((SortTracksViewHolder) holder).bindView(enabled);
 		}
 	}
 

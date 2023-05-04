@@ -8,6 +8,8 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.viewholders.EmptySearchResultViewHolder
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener
+import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.util.Algorithms
 import java.util.*
@@ -17,7 +19,7 @@ class SearchableTrackAdapter(
     trackTab: TrackTab,
     fragment: TracksFragment,
     nightMode: Boolean,
-    sortableFragment: SortableFragment
+    sortTracksListener: SortTracksListener
 ) : TracksAdapter(app, trackTab, fragment, nightMode) {
 
     private var filterTracksQuery: String? = null
@@ -25,11 +27,11 @@ class SearchableTrackAdapter(
     private val allItems = ArrayList<Any>()
     private var sortMode: TracksSortMode
     private var app: OsmandApplication
-    private var sortableFragment: SortableFragment
+    private var sortTracksListener: SortTracksListener
 
     init {
         this.app = app
-        this.sortableFragment = sortableFragment
+        this.sortTracksListener = sortTracksListener
         sortMode = trackTab.sortMode
         updateAllItems()
     }
@@ -106,7 +108,7 @@ class SearchableTrackAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is SortTracksViewHolder) {
-            holder.bindView(sortMode, true)
+            holder.bindView(true)
         } else {
             super.onBindViewHolder(holder, position)
         }
@@ -126,6 +128,6 @@ class SearchableTrackAdapter(
         parent: ViewGroup,
         inflater: LayoutInflater): SortTracksViewHolder {
         val view = inflater.inflate(R.layout.sort_type_view, parent, false)
-        return SortTracksViewHolder(view, sortableFragment, nightMode)
+        return SortTracksViewHolder(view, sortTracksListener, nightMode)
     }
 }

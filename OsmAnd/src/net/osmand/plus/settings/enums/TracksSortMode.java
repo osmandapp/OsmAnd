@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap.tracks;
+package net.osmand.plus.settings.enums;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -41,12 +41,17 @@ public enum TracksSortMode {
 	}
 
 	@NonNull
+	public static TracksSortMode getDefaultSortMode() {
+		return LAST_MODIFIED;
+	}
+
+	@NonNull
 	public static TracksSortMode getByValue(@NonNull String name) {
 		for (TracksSortMode sortMode : values()) {
 			if (Algorithms.stringsEqual(sortMode.name(), name)) {
 				return sortMode;
 			}
 		}
-		return LAST_MODIFIED;
+		return getDefaultSortMode();
 	}
 }

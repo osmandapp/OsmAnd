@@ -14,7 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
 
-public class BaseOsmAndDialogFragment extends DialogFragment {
+public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
