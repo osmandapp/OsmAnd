@@ -10,6 +10,9 @@ import static net.osmand.gpx.GPXUtilities.ICON_NAME_EXTENSION;
 import static net.osmand.gpx.GPXUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
+import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKIPEDIA;
+import static net.osmand.plus.wikipedia.WikiAlgorithms.WIKI_LINK;
+import static net.osmand.util.Algorithms.isUrl;
 
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +54,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
+import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -89,9 +93,6 @@ public class AmenityUIHelper extends MenuBuilder {
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
 
-	private static final String WIKIPEDIA = "wikipedia";
-	private static final String WIKIPEDIA_DOMAIN = ".wikipedia.org/";
-	private static final String WIKI_LINK = WIKIPEDIA_DOMAIN + "wiki/";
 	private static final DecimalFormat DISTANCE_FORMAT = new DecimalFormat("#.##");
 
 	private final MetricsConstants metricSystem;
@@ -208,7 +209,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 			isUrl = isUrl(vl);
 			if (key.contains(WIKIPEDIA)) {
-				Pair<String, String> wikiParams = getWikipediaParams(key, vl);
+				Pair<String, String> wikiParams = WikiAlgorithms.getWikiParams(key, vl);
 				vl = wikiParams.first;
 				hiddenUrl = wikiParams.second;
 				isWikipediaLink = isUrl = true;
@@ -517,50 +518,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 	}
 
-	private Pair<String, String> getWikipediaParams(String key, String value) {
-		String title = null;
-		String langCode = "en";
-		// Full OpenStreetMap Wikipedia tag pattern looks like "operator:wikipedia:lang_code",
-		// "operator" and "lang_code" is optional parameters and may be skipped.
-		if (key.contains(":")) {
-			String[] tagParts = key.split(":");
-			if (tagParts.length == 3) {
-				// In this case tag contains all 3 parameters: "operator", "wikipedia" and "lang_code".
-				langCode = tagParts[2];
-			} else if (tagParts.length == 2) {
-				// In this case one of the optional parameters was skipped.
-				// Parameters never change their order and parameter "wikipedia" is always present.
-				if (WIKIPEDIA.equals(tagParts[0])) {
-					// So if "wikipedia" is the first parameter, then parameter "operator" was skipped.
-					// And the second parameter is "lang_code".
-					langCode = tagParts[1];
-				}
-			}
-		}
-		// Value of an Wikipedia item can be an URL, but it is not recommended.
-		// OSM users should use the following pattern "lang_code:article_title" instead.
-		// Where "lang_code" is optional parameter for multilingual wikipedia tags.
-		String url;
-		if (isUrl(value)) {
-			// In this case a value is already represented as an URL.
-			url = value;
-		} else {
-			if (value.contains(":")) {
-				// If value contains a sign ":" it means that "lang_code" is also present in value.
-				String[] valueParts = value.split(":");
-				langCode = valueParts[0];
-				title = valueParts[1];
-			} else {
-				title = value;
-			}
-			// Full article URL has a pattern: "http://lang_code.wikipedia.org/wiki/article_name"
-			String formattedTitle = title.replaceAll(" ", "_");
-			url = "http://" + langCode + WIKI_LINK + formattedTitle;
-		}
-		String text = title != null ? title : value;
-		return new Pair<>(text, url);
-	}
-
 	@Nullable
 	private String getSocialMediaUrl(String key, String value) {
 		// Remove leading and closing slashes
@@ -592,11 +549,6 @@ public class AmenityUIHelper extends MenuBuilder {
 		} else {
 			return null;
 		}
-	}
-
-	private boolean isUrl(String vl) {
-		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};
-		return Algorithms.startsWithAny(vl, urlPrefixes);
 	}
 
 	private String getFormattedInt(String value) {
