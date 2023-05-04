@@ -536,7 +536,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				}
 			}
 		});
-		updateToolbar();
 
 		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
@@ -773,6 +772,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			updateMapDisplayPosition();
 			addInitialPoint();
+			updateToolbar();
 		}
 	}
 
