@@ -444,9 +444,12 @@ public class OsmandSettings {
 		ApplicationMode appMode = getApplicationMode();
 		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
 		int indexOfCurrent = enabledModes.indexOf(appMode);
-		int indexOfNext = next ?
-				(indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0) :
-				(indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1);
+		int indexOfNext;
+		if (next) {
+			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
+		} else {
+			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
+		}
 		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
 		if (appMode != nextAppMode){
 			return setApplicationMode(nextAppMode);
