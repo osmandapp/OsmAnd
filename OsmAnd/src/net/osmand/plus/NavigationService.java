@@ -292,6 +292,10 @@ public class NavigationService extends Service {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {
 				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+				if(navigationScreen == null){
+					carNavigationSession.startNavigation();
+					navigationScreen = carNavigationSession.getNavigationScreen();
+				}
 				if (navigationScreen != null) {
 					float density = navigationScreen.getSurfaceRenderer().getDensity();
 					if (density == 0) {
