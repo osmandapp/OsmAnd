@@ -121,6 +121,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	private final Path multiProfilePath = new Path();
 	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
+	private boolean forceUpdateBufferImage;
 
 	public MeasurementToolLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -325,7 +326,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		boolean hasMapRenderer = hasMapRenderer();
 		boolean mapRendererChanged = hasMapRenderer && this.mapRendererChanged;
 		if (isDrawingEnabled()) {
-			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || mapActivityInvalidated || mapRendererChanged;
+			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || forceUpdateBufferImage || mapActivityInvalidated || mapRendererChanged;
 			if (mapRendererChanged) {
 				this.mapRendererChanged = false;
 			}
@@ -372,6 +373,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			multiProfileGeometry.clearWay();
 		}
 		mapActivityInvalidated = false;
+		forceUpdateBufferImage = false;
 	}
 
 	@Nullable
@@ -1026,6 +1028,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	public void refreshMap() {
+		forceUpdateBufferImage = true;
 		showPointsZoomCache = 0;
 		showPointsMinZoom = false;
 		view.refreshMap();
