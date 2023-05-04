@@ -163,8 +163,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
-		// force update after screen rotation
-		forceUpdateOnDraw = mapActivityInvalidated;
+		forceUpdateOnDraw |= mapActivityInvalidated;
 	}
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
