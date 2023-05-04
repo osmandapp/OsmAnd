@@ -86,7 +86,7 @@ public class ImportedSettingsItemsAdapter extends
 				break;
 			case POI_TYPES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
-				holder.title.setText(R.string.search_activity);
+				holder.title.setText(R.string.shared_string_search);
 				break;
 			case MAP_SOURCES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_layers, activeColorRes));
