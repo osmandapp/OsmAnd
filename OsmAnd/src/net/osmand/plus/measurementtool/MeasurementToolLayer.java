@@ -119,6 +119,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 	private ChartPointsHelper chartPointsHelper;
 
+	private boolean forceUpdateOnDraw;
 	private final Path multiProfilePath = new Path();
 	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
 	private boolean forceUpdateBufferImage;
@@ -156,6 +157,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 		marginApplyingPointIconY = applyingPointIcon.getHeight() / 2;
 		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
+	}
+
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		// force update after screen rotation
+		forceUpdateOnDraw = mapActivityInvalidated;
 	}
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
@@ -390,7 +398,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		boolean hasMapRenderer = hasMapRenderer();
 		if (isDrawingEnabled()) {
-			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb);
+			boolean updated = lineAttrs.updatePaints(view.getApplication(), settings, tb) || forceUpdateOnDraw;
 			if (!editingCtx.isInApproximationMode()) {
 				drawBeforeAfterPath(canvas, tb, updated);
 			} else {
@@ -476,6 +484,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			resetBeforeAfterRenderer();
 			clearActivePointsCollection();
 		}
+		forceUpdateOnDraw = false;
 	}
 
 	private boolean isDrawingEnabled() {
