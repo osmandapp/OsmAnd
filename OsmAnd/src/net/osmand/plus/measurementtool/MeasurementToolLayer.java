@@ -119,10 +119,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
 	private ChartPointsHelper chartPointsHelper;
 
-	private boolean forceUpdateOnDraw;
 	private final Path multiProfilePath = new Path();
 	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
+
 	private boolean forceUpdateBufferImage;
+	private boolean forceUpdateOnDraw;
 
 	public MeasurementToolLayer(@NonNull Context ctx) {
 		super(ctx);
