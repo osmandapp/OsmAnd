@@ -294,7 +294,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				quit(true);
 			}
 		};
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 	}
 
 	@Nullable
@@ -767,6 +766,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mapDisplayPositionManager.registerProvider(this);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapActivity.getMapLayers().hasMapActivity()) {
+			mapActivity.getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 			onBackPressedCallback.setEnabled(true);
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
