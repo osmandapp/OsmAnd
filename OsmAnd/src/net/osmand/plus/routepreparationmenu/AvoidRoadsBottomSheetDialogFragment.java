@@ -31,7 +31,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.routing.AvoidRoadsHelper;
@@ -118,7 +117,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			routingParametersMap = getRoutingParametersMap(app);
 		}
 		if (removedImpassableRoads == null) {
-			removedImpassableRoads = new ArrayList<LatLon>();
+			removedImpassableRoads = new ArrayList<>();
 		}
 
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
@@ -130,12 +129,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		int icBackResId = AndroidUtils.getNavigationIconResId(app);
 		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(titleView)
@@ -177,21 +171,17 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 			}
 
-			buttonContainer.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-						mapActivity.getMapRouteInfoMenu().hide();
-						app.getAvoidSpecificRoads().selectFromMap(mapActivity, appMode);
-						Fragment fragment = getTargetFragment();
-						if (fragment != null) {
-							fragment.onActivityResult(getTargetRequestCode(), OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE, null);
-						}
+			buttonContainer.setOnClickListener(v -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.getMapRouteInfoMenu().hide();
+					app.getAvoidSpecificRoads().selectFromMap(mapActivity, appMode);
+					Fragment fragment = getTargetFragment();
+					if (fragment != null) {
+						fragment.onActivityResult(getTargetRequestCode(), OPEN_AVOID_ROADS_DIALOG_REQUEST_CODE, null);
 					}
-					dismiss();
 				}
+				dismiss();
 			});
 			SimpleBottomSheetItem buttonItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 					.setCustomView(buttonView)
@@ -218,12 +208,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			String name = avoidSpecificRoads.getText(routeDataObject);
 
 			View view = stylesContainer.getChildAt(counter);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					removedImpassableRoads.add(routeDataObject);
-					stylesContainer.removeView(v);
-				}
+			view.setOnClickListener(v -> {
+				removedImpassableRoads.add(routeDataObject);
+				stylesContainer.removeView(v);
 			});
 
 			TextView titleTv = view.findViewById(R.id.title);
@@ -254,12 +241,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 					.setChecked(selected)
 					.setTitle(parameterName)
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							item[0].setChecked(!item[0].isChecked());
-							routingParametersMap.put(parameterId, item[0].isChecked());
-						}
+					.setOnClickListener(v -> {
+						item[0].setChecked(!item[0].isChecked());
+						routingParametersMap.put(parameterId, item[0].isChecked());
 					})
 					.setTag(parameterId)
 					.create();

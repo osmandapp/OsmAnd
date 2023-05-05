@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;

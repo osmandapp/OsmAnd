@@ -1,32 +1,26 @@
-package net.osmand.plus.activities.actions;
+package net.osmand.plus.voice;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.CallbackWithObject;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-import java.util.HashMap;
-import java.util.Map;
+public class VoiceProviderDialog {
 
-public class OsmAndDialogs {
+	public static final String MORE_VALUE = "MORE_VALUE";
 
-	public static void showVoiceProviderDialog(MapActivity activity, ApplicationMode applicationMode, boolean applyAllModes) {
+	public static void showVoiceProviderDialog(@NonNull MapActivity activity, ApplicationMode appMode, boolean applyAllModes) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
@@ -40,14 +34,14 @@ public class OsmAndDialogs {
 				.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_volume_up, settings.isLightContent()));
 
 		view.findViewById(R.id.spinner).setOnClickListener(v -> routingOptionsHelper.selectVoiceGuidance(activity, result -> {
-			boolean acceptableValue = !RoutePreferencesMenu.MORE_VALUE.equals(firstSelectedVoiceProvider[0]);
+			boolean acceptableValue = MORE_VALUE.equals(firstSelectedVoiceProvider[0]);
 			if (acceptableValue) {
 				((TextView) v.findViewById(R.id.selectText))
 						.setText(routingOptionsHelper.getVoiceProviderName(v.getContext(), result));
 				firstSelectedVoiceProvider[0] = result;
 			}
 			return acceptableValue;
-		}, applicationMode));
+		}, appMode));
 
 		((ImageView) view.findViewById(R.id.dropDownIcon))
 				.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, settings.isLightContent()));
@@ -58,9 +52,9 @@ public class OsmAndDialogs {
 			if (!Algorithms.isEmpty(firstSelectedVoiceProvider[0])) {
 				routingOptionsHelper.applyVoiceProvider(activity, firstSelectedVoiceProvider[0], applyAllModes);
 				if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(firstSelectedVoiceProvider[0])) {
-					settings.VOICE_MUTE.setModeValue(applicationMode, true);
+					settings.VOICE_MUTE.setModeValue(appMode, true);
 				} else {
-					settings.VOICE_MUTE.setModeValue(applicationMode, false);
+					settings.VOICE_MUTE.setModeValue(appMode, false);
 				}
 			}
 		});
@@ -68,13 +62,13 @@ public class OsmAndDialogs {
 			if (applyAllModes) {
 				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 					//if (!settings.VOICE_PROVIDER.isSetForMode(mode)) {
-						settings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-						settings.VOICE_MUTE.setModeValue(mode, true);
+					settings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+					settings.VOICE_MUTE.setModeValue(mode, true);
 					//}
 				}
 			}
-			settings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
-			settings.VOICE_MUTE.setModeValue(applicationMode, true);
+			settings.VOICE_PROVIDER.setModeValue(appMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+			settings.VOICE_MUTE.setModeValue(appMode, true);
 		});
 
 		builder.setView(view);

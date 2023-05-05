@@ -64,8 +64,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.router.network.NetworkRouteSelector;
-import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

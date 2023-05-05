@@ -14,8 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.*;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 
 public class GpxAppearanceInfo {
 

@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.osmedit.menu;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;

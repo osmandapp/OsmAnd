@@ -21,7 +21,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 
-import java.io.File;
 import java.text.MessageFormat;
 
 public class DownloadValidationManager {
