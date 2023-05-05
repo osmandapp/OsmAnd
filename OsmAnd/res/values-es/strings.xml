@@ -2883,8 +2883,8 @@
     <string name="save_poi_value_exceed_length">Acorte la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
     <string name="quick_action_day_night_mode">modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Sin empedrado ni adoquinado</string>
-    <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
+    <string name="routing_attr_avoid_sett_name">Sin empedrar</string>
+    <string name="routing_attr_avoid_sett_description">Evite los adoquines</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
@@ -5195,4 +5195,5 @@
     <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"\?</string>
     <string name="no_search_results">No hay resultados</string>
     <string name="search_track_by_name">Buscar las pista por nombre</string>
+    <string name="number_of_tracks">%1$s pistas</string>
 </resources>
