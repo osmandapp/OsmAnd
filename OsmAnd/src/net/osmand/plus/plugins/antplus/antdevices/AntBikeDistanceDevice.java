@@ -8,11 +8,8 @@ import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc.CalculatedAccumulatedDistanceReceiver;
-import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc.CalculatedSpeedReceiver;
 import com.dsi.ant.plugins.antplus.pcc.defines.EventFlag;
 import com.dsi.ant.plugins.antplus.pccbase.PccReleaseHandle;
-
-import net.osmand.plus.plugins.antplus.antdevices.AntBikeSpeedDevice.BikeSpeedData;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

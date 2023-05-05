@@ -1,7 +1,5 @@
 package net.osmand.plus.auto;
 
-import android.content.SharedPreferences;
-
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.Screen;

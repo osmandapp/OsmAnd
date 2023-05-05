@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;

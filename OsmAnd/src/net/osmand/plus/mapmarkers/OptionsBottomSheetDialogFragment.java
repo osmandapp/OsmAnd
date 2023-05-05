@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
