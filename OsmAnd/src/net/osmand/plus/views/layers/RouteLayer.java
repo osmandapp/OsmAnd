@@ -764,15 +764,15 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		int radius = rp * 3 / 2;
 		try {
 			for (int i = 0; i < routeTransportStops.size(); i++) {
-				TransportStop n = routeTransportStops.get(i);
-				if (n.getLocation() == null) {
+				TransportStop transportStop = routeTransportStops.get(i);
+				if (transportStop.getLocation() == null) {
 					continue;
 				}
-				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-						n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb,
+						transportStop.getLocation());
 				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 					radius = rp;
-					res.add(n);
+					res.add(transportStop);
 				}
 			}
 		} catch (IndexOutOfBoundsException e) {

@@ -568,16 +568,20 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return;
 		}
 
-		PointI point31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
+		PointI point31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, point.x, point.y);
+		if (point31 == null) {
+			return;
+		}
+
 		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getQuadTreeByPoint(point31);
 		if (quadTree == null) {
 			return;
 		}
 
 		final int radius = getRadius(tb) / 2;
-		LatLon topLeft = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x - radius, point.y - radius);
-		LatLon bottomRight = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x + radius, point.y + radius);
-		LatLon center = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x, point.y);
+		LatLon topLeft = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, point.x - radius, point.y - radius);
+		LatLon bottomRight = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, point.x + radius, point.y + radius);
+		LatLon center = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, point.x, point.y);
 		double left = topLeft.getLongitude();
 		double top = topLeft.getLatitude();
 		double right = bottomRight.getLongitude();
@@ -623,11 +627,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			double tileY = entry.getKey().y;
 			Map<?, ?> userData = entry.getValue();
 
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-					MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileY),
-					MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileX));
-			x = pixel.x;
-			y = pixel.y;
+			x = tb.getPixXFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+			y = tb.getPixYFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 				sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
 				if (img == null || minSqDist > sqDist) {

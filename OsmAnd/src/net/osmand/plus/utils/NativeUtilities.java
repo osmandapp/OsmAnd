@@ -93,8 +93,9 @@ public class NativeUtilities {
 	@Nullable
 	public static PointI get31FromElevatedPixel(@NonNull MapRendererView mapRenderer, int x, int y) {
 		PointI point31 = new PointI();
-		mapRenderer.getLocationFromElevatedPoint(new PointI(x, y), point31);
-		return point31;
+		return mapRenderer.getLocationFromElevatedPoint(new PointI(x, y), point31)
+				? point31
+				: null;
 	}
 
 	@Nullable
@@ -102,16 +103,36 @@ public class NativeUtilities {
 		return get31FromElevatedPixel(mapRenderer, (int) x, (int) y);
 	}
 
-	@Nullable
-	public static LatLon getLatLonFromElevatedPixel(@NonNull MapRendererView mapRenderer, int x, int y) {
-		PointI point31 = get31FromElevatedPixel(mapRenderer, x, y);
-		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+	@NonNull
+	public static LatLon getLatLonFromElevatedPixel(@Nullable MapRendererView mapRenderer,
+	                                                @NonNull RotatedTileBox tileBox,
+	                                                @NonNull PointF pixel) {
+		return getLatLonFromElevatedPixel(mapRenderer, tileBox, pixel.x, pixel.y);
 	}
 
-	@Nullable
-	public static LatLon getLatLonFromElevatedPixel(@NonNull MapRendererView mapRenderer, float x, float y) {
-		PointI point31 = get31FromElevatedPixel(mapRenderer, x, y);
-		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+	@NonNull
+	public static LatLon getLatLonFromElevatedPixel(@Nullable MapRendererView mapRenderer,
+	                                                @NonNull RotatedTileBox tileBox,
+	                                                float x, float y) {
+		return getLatLonFromElevatedPixel(mapRenderer, tileBox, (int) x, (int) y);
+	}
+
+	@NonNull
+	public static LatLon getLatLonFromElevatedPixel(@Nullable MapRendererView mapRenderer,
+	                                                @NonNull RotatedTileBox tileBox,
+	                                                int x, int y) {
+		PointI point31 = null;
+		if (mapRenderer != null) {
+			point31 = get31FromElevatedPixel(mapRenderer, x, y);
+		}
+
+		if (point31 == null) {
+			return tileBox.getLatLonFromPixel(x, y);
+		}
+
+		double lat = MapUtils.get31LatitudeY(point31.getY());
+		double lon = MapUtils.get31LongitudeX(point31.getX());
+		return new LatLon(lat, lon);
 	}
 
 	@Nullable
@@ -215,6 +236,45 @@ public class NativeUtilities {
 			point = new PointF(tileBox.getPixXFrom31(x31, y31), tileBox.getPixYFrom31(x31, y31));
 		}
 		return point;
+	}
+
+	@NonNull
+	public static PointF getElevatedPixelFromLatLon(@Nullable MapRendererView mapRenderer,
+	                                                @NonNull RotatedTileBox tileBox,
+	                                                @NonNull LatLon latLon) {
+		return getElevatedPixelFromLatLon(mapRenderer, tileBox, latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	@NonNull
+	public static PointF getElevatedPixelFromLatLon(@Nullable MapRendererView mapRenderer,
+	                                                @NonNull RotatedTileBox tileBox,
+	                                                double lat, double lon) {
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		return getElevatedPixelFrom31(mapRenderer, tileBox, x31, y31);
+	}
+
+	@NonNull
+	public static PointF getElevatedPixelFrom31(@Nullable MapRendererView mapRenderer,
+	                                            @NonNull RotatedTileBox tileBox,
+	                                            int x31, int y31) {
+		PointF pixel = null;
+
+		if (mapRenderer != null) {
+			PointI point31 = new PointI(x31, y31);
+			PointI screenPoint = new PointI();
+			if (mapRenderer.getElevatedPointFromLocation(point31, screenPoint, true)) {
+				pixel = new PointF(screenPoint.getX(), screenPoint.getY());
+			}
+		}
+
+		if (pixel == null) {
+			float pixX = tileBox.getPixXFrom31(x31, y31);
+			float pixY = tileBox.getPixYFrom31(x31, y31);
+			pixel = new PointF(pixX, pixY);
+		}
+
+		return pixel;
 	}
 
 	@NonNull

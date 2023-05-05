@@ -250,7 +250,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					if (!n.isOpened() && !showClosed) {
 						continue;
 					}
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
+					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
 					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 						radius = small;
 						res.add(n);

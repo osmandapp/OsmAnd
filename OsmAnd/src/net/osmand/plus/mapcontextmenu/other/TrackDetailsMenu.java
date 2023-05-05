@@ -158,17 +158,15 @@ public class TrackDetailsMenu {
 			if (ds != null && ds.size() > 0 && gpxItem != null && segment != null) {
 				MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 				RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox();
-				PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude());
+				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude());
 				int mx = (int) pixel.x;
 				int my = (int) pixel.y;
 				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
 				Pair<WptPt, WptPt> points = GPXLayer.findLineNearPoint(
 						mapRenderer, tb, segment.points, r, mx, my);
 				if (points != null) {
-					LatLon latLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, mx, my);
-					if (latLon != null) {
-						gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
-					}
+					LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, mx, my);
+					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||

@@ -227,12 +227,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			int radius = compare * 3 / 2;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
-					Amenity n = objects.get(i);
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-							n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					Amenity amenity = objects.get(i);
+					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb,
+							amenity.getLocation());
 					if (Math.abs(pixel.x - ex) <= compare && Math.abs(pixel.y - ey) <= compare) {
 						compare = radius;
-						am.add(n);
+						am.add(amenity);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {

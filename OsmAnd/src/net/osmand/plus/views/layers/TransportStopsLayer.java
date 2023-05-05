@@ -148,19 +148,19 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		try {
 			TreeSet<String> ms = new TreeSet<>();
 			for (int i = 0; i < objects.size(); i++) {
-				TransportStop n = objects.get(i);
-				if (n.getLocation() == null) {
+				TransportStop transportStop = objects.get(i);
+				if (transportStop.getLocation() == null) {
 					continue;
 				}
-				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-						n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb,
+						transportStop.getLocation());
 				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
-					if (!ms.add(n.getName())) {
+					if (!ms.add(transportStop.getName())) {
 						// only unique names
 						continue;
 					}
 					radius = rp;
-					res.add(n);
+					res.add(transportStop);
 				}
 			}
 		} catch (IndexOutOfBoundsException e) {

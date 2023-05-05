@@ -181,7 +181,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
 				if (location != null && road != null) {
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, location.getLatitude(), location.getLongitude());
+					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, location);
 					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 						compare = radius;
 						o.add(road);

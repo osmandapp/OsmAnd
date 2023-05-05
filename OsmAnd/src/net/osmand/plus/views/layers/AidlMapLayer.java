@@ -467,7 +467,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			for (AidlMapPointWrapper p : aidlLayer.getPoints()) {
 				LatLon position = p.getLocation();
 				if (position != null) {
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, position.getLatitude(), position.getLongitude());
+					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, position);
 					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
 						points.add(p);
 					}

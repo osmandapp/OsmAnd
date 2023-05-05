@@ -295,11 +295,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
-								 FavouritePoint n) {
-		if (n.isVisible()) {
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
+								 FavouritePoint favouritePoint) {
+		if (favouritePoint.isVisible()) {
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb,
+					favouritePoint.getLatitude(), favouritePoint.getLongitude());
 			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
-				res.add(n);
+				res.add(favouritePoint);
 			}
 		}
 	}

@@ -239,11 +239,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	private int getFromPoint(RotatedTileBox tileBox, List<? super OsmPoint> am, int ex, int ey, int compare,
 							 int radius, List<? extends OsmPoint> points) {
-		for (OsmPoint n : points) {
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, n.getLatitude(), n.getLongitude());
+		for (OsmPoint point : points) {
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, point.getLocation());
 			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 				compare = radius;
-				am.add(n);
+				am.add(point);
 			}
 		}
 		return compare;

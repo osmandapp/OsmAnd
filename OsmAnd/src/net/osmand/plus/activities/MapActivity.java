@@ -1109,7 +1109,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			float y = event.getY();
 			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 			QuadPoint cp = tb.getCenterPixelPoint();
-			LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
+			LatLon l = NativeUtilities.getLatLonFromElevatedPixel(getMapView().getMapRenderer(), tb,
 					cp.x + x * 15, cp.y + y * 15);
 			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
@@ -1340,7 +1340,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void scrollMap(float dx, float dy) {
 		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 		QuadPoint cp = tb.getCenterPixelPoint();
-		LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
+		LatLon l = NativeUtilities.getLatLonFromElevatedPixel(getMapView().getMapRenderer(), tb,
 				cp.x + dx, cp.y + dy);
 		app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 	}

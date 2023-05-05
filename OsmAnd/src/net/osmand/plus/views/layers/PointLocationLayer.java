@@ -680,8 +680,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		if (location != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-					location.getLatitude(), location.getLongitude());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, location);
 			int rad = (int) (18 * tb.getDensity());
 			if (Math.abs(pixel.x - ex) <= rad && (ey - pixel.y) <= rad && (pixel.y - ey) <= 2.5 * rad) {
 				myLocation.add(location);

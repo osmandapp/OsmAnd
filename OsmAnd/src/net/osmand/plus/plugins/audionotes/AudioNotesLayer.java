@@ -231,11 +231,12 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		int ey = (int) point.y;
 		int compare = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox));
 		int radius = compare * 3 / 2;
-		for (Recording n : plugin.getAllRecordings()) {
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, n.getLatitude(), n.getLongitude());
+		for (Recording recording : plugin.getAllRecordings()) {
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox,
+					recording.getLatitude(), recording.getLongitude());
 			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
 				compare = radius;
-				am.add(n);
+				am.add(recording);
 			}
 		}
 	}

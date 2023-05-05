@@ -413,7 +413,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float cy;
 					if (mapRenderer != null) {
 						PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-						PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 						if (center31 == null) {
 							continue;
 						}
@@ -524,7 +524,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				&& !getApplication().getOsmandMap().getMapView().isCarView()) {
 			widgetHeight = markersWidgetsHelper.getMapMarkersBarWidgetHeight();
 		}
-		PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, lat, lon);
+		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, lat, lon);
 		double tx = pixel.x;
 		double ty = pixel.y;
 		return tx >= -w && tx <= tb.getPixWidth() + w && ty >= widgetHeight - h && ty <= tb.getPixHeight() + h;
@@ -559,7 +559,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				case MotionEvent.ACTION_DOWN:
 					float x = event.getX();
 					float y = event.getY();
-					fingerLocation = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, x, y);
+					fingerLocation = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, x, y);
 					hasMoved = false;
 					moving = true;
 					break;
@@ -656,7 +656,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, latLon.getLatitude(), latLon.getLongitude());
+					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, latLon);
 					if (calculateBelongs((int) point.x, (int) point.y, (int) pixel.x, (int) pixel.y, r)) {
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
@@ -915,8 +915,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				return null;
 			}
 		}
-		PointF l = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, firstPoint);
-		PointF m = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, secondPoint);
+		PointF l = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox, firstPoint.getX(), firstPoint.getY());
+		PointF m = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox, secondPoint.getX(), secondPoint.getY());
 		return new PointF[] {l, m};
 	}
 

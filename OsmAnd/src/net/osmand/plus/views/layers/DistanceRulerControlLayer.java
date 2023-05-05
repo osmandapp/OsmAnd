@@ -115,7 +115,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				touched = true;
 				touchOutside = false;
 				touchPoint.set(event.getX(), event.getY());
-				touchPointLatLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
+				touchPointLatLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox,
 						event.getX(), event.getY());
 				touchStartTime = System.currentTimeMillis();
 				wasZoom = false;

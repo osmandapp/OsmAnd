@@ -1362,14 +1362,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		List<SelectedGpxFile> visibleGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		for (SelectedGpxFile g : visibleGpxFiles) {
 			List<WptPt> pts = getSelectedFilePoints(g);
-			// int fcolor = g.getColor() == 0 ? clr : g.getColor();
-			for (WptPt n : pts) {
-				if (isPointHidden(g, n)) {
+			for (WptPt waypoint : pts) {
+				if (isPointHidden(g, waypoint)) {
 					continue;
 				}
-				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.lat, n.lon);
+				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, waypoint.lat, waypoint.lon);
 				if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
-					res.add(n);
+					res.add(waypoint);
 				}
 			}
 		}
@@ -1387,11 +1386,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			Pair<WptPt, WptPt> line = findSegmentLineNearPoint(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
 			if (line != null) {
-				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, mx, my);
-				if (latLon != null) {
-					res.add(createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLon,
-							showTrackPointMenu));
-				}
+				LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tb, mx, my);
+				res.add(createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLon,
+						showTrackPointMenu));
 			}
 		}
 	}
@@ -1416,14 +1413,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return null;
 		}
 		WptPt prevPoint = points.get(0);
-		PointF pixelPrev = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, prevPoint.lat, prevPoint.lon);
+		PointF pixelPrev = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, prevPoint.lat, prevPoint.lon);
 		int ppx = (int) pixelPrev.x;
 		int ppy = (int) pixelPrev.y;
 		int pcross = placeInBbox(ppx, ppy, mx, my, r, r);
 
 		for (int i = 1; i < points.size(); i++) {
 			WptPt point = points.get(i);
-			PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, point.lat, point.lon);
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, point.lat, point.lon);
 			int px = (int) pixel.x;
 			int py = (int) pixel.y;
 			int cross = placeInBbox(px, py, mx, my, r, r);
@@ -1672,7 +1669,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			getTracksFromPoint(tileBox, point, trackPoints, true);
 
 			if (!Algorithms.isEmpty(trackPoints)) {
-				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
+				LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, point);
 				if (trackPoints.size() == 1) {
 					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
 					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, null);
