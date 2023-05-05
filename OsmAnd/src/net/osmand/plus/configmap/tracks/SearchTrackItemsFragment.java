@@ -102,6 +102,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
+		searchEditText.requestFocus();
+		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		startLocationUpdate();
 		trackTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
 	}
@@ -130,6 +132,9 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 				dashboard.refreshContent(false);
 			}
 		}
+		selectedTracksHelper.updateTracksOnMap();
+		TracksFragment tracksFragment = (TracksFragment) requireParentFragment();
+		tracksFragment.updateTabsContent();
 		app.getOsmandMap().getMapView().refreshMap();
 		resetSearchQuery();
 		dismissAllowingStateLoss();
