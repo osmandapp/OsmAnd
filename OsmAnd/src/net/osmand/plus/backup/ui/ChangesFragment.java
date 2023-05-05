@@ -250,6 +250,10 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		app.runInUIThread(this::setupBottomButtons);
 	}
 
+	public void onBackupSyncTasksUpdated() {
+		app.runInUIThread(this::setupBottomButtons);
+	}
+
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
 		if (!Algorithms.isEmpty(error)) {
@@ -257,7 +261,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-		app.runInUIThread(this::setupBottomButtons);
 	}
 
 	@Nullable

@@ -57,7 +57,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.gpx_info_items_fragment, container, false);
+		View view = inflater.inflate(R.layout.recycler_view_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		TracksFragment fragment = (TracksFragment) requireParentFragment();

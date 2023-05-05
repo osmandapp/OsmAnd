@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -59,12 +58,9 @@ public class WikipediaArticleWikiLinkFragment extends MenuBottomSheetDialogFragm
 				.setIcon(viewOnlineIcon)
 				.setTitle(getString(R.string.open_wikipedia_link_online))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						AndroidUtils.openUrl(ctx, Uri.parse(articleUrl), nightMode);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					AndroidUtils.openUrl(ctx, Uri.parse(articleUrl), nightMode);
+					dismiss();
 				})
 				.create();
 		items.add(wikiArticleOnlineItem);

@@ -2917,8 +2917,8 @@
     <string name="avoid_pt_types">Исключить виды транспорта…</string>
     <string name="save_poi_value_exceed_length_title">Длина значения «%s»</string>
     <string name="quick_action_day_night_mode">Режим %s</string>
-    <string name="routing_attr_avoid_sett_name">Без булыжников или брусчатки</string>
-    <string name="routing_attr_avoid_sett_description">Избегать мощёных улиц и брусчатки</string>
+    <string name="routing_attr_avoid_sett_name">Без брусчатки</string>
+    <string name="routing_attr_avoid_sett_description">Избегать брусчатки</string>
     <string name="shared_string_milliradians">Миллирадианы</string>
     <string name="angular_measeurement">Угловые единицы</string>
     <string name="angular_measeurement_descr">Изменить, в чём измеряется азимут.</string>
