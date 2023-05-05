@@ -1127,9 +1127,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
 					File file = new File(gpxFile.path);
-					GPXInfo gpxInfo = new GPXInfo(file.getName(), file);
-					gpxInfo.setGpxFile(gpxFile);
-					osmEditingPlugin.sendGPXFiles(mapActivity, this, gpxInfo);
+					osmEditingPlugin.sendGPXFiles(mapActivity, this, file);
 				}
 			} else if (buttonIndex == EDIT_BUTTON_INDEX) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap();
