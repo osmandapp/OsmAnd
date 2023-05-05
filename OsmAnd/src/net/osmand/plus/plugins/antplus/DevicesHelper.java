@@ -72,6 +72,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class DevicesHelper implements AntDeviceListener, DeviceListener {
