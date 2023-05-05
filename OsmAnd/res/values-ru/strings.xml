@@ -5156,7 +5156,7 @@
     <string name="bluetooth_found_title">Найдено: %d</string>
     <string name="ant_plus_nothing_found_text">Датчики не обнаружены</string>
     <string name="ble_search_again">Повторный поиск</string>
-    <string name="ant_plus_help_title">Я не знаю, какой у меня тип датчика.</string>
+    <string name="ant_plus_help_title">Я не знаю какой у меня тип датчика.</string>
     <string name="ant_plus_searching_text_description">Удерживайте устройство рядом с датчиком. Активируйте датчик, чтобы OsmAnd мог его найти.</string>
     <string name="ant_plus_searching">Поиск</string>
     <string name="ant_plus_bluetooth_off">Bluetooth выключен</string>
