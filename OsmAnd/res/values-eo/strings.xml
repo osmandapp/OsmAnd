@@ -4710,8 +4710,6 @@
     <string name="live_update_frequency_week_variant">Mapoj estas kontrolitaj pri ĝisdatigoj ĉiusemajne.</string>
     <string name="altitude_correction">Korekto de altitudo</string>
     <string name="no_altitude_data_desc">Por akiri datumojn de %1$s, aligu vian spuron al la vojoj aŭ kalkuli ilin per enreta servo.</string>
-    <string name="accessibility_2d_view_off">2,5-dimensia vido: ne</string>
-    <string name="accessibility_2d_view_on">2,5-dimensia vido: jes</string>
     <string name="download_complete">Elŝuto finita</string>
     <string name="live_update_frequency_hour_variant">Mapoj estas kontrolitaj pri ĝisdatigoj ĉiuhore.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Montbiciklaj kursoj IMBA</string>
@@ -4788,7 +4786,6 @@
     <string name="shared_string_large">Granda</string>
     <string name="shared_string_normal">Norma</string>
     <string name="how_to_use">Kiel uzi:</string>
-    <string name="shared_string_2_5_d_view">2,5-dimensia vido</string>
     <string name="map_widget_zoom_level_desc">Fenestraĵo montranta la nunan nivelon de pligrandigo de mapo.</string>
     <string name="map_widget_target_distance_desc">Fenestraĵo montranta distancon inter la fotilo kaj la celo.</string>
     <string name="map_widget_camera_tilt_desc">Fenestraĵo montranta fotilan klinecon en 2,5-dimensia vido. Implicite estas 90° (neniu klineco).</string>

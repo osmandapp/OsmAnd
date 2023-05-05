@@ -88,7 +88,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
 		addMapMarkersListener(app);
-		addEnable3DViewListener();
 		initMapLinkedToLocation();
 	}
 
@@ -107,11 +106,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.refreshMap();
 			}
 		}));
-	}
-
-	private void addEnable3DViewListener() {
-		enable3DViewListener = change -> updateMapTilt();
-		settings.ENABLE_3D_VIEW.addListener(enable3DViewListener);
 	}
 
 	private void addMapMarkersListener(OsmandApplication app) {

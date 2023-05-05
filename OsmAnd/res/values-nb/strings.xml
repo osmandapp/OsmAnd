@@ -4729,7 +4729,6 @@
     <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
     <string name="auto_25_chars_route_tr_kl">Sving til høyre og hold til venstre</string>
-    <string name="accessibility_2d_view_on">2,5D-visning på</string>
     <string name="goods_delivery_desc">Kjøretøy som transporterer varer kan ha begrenset tilgang til noen veier.</string>
     <string name="included_in_your_current_plan">Inkludert i din nåværende «%1$s»-plan</string>
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
@@ -4774,7 +4773,6 @@
     <string name="map_widget_camera_distance">Kamerahøyde</string>
     <string name="auto_25_chars_route_roundabout_kl">Ta %1$d avkjøringen og hold til venstre</string>
     <string name="auto_25_chars_route_roundabout_kr">Ta %1$d avkjøringen og hold til høyre</string>
-    <string name="shared_string_2_5_d_view">2.5 D-visning</string>
     <string name="external_sensors_plugin_name">Eksterne sensorer</string>
     <string name="map_widget_altitude_map_center">Høyde: kartsenter</string>
     <string name="map_widget_altitude_map_center_desc">Viser høyde over havet til gjeldende kartsenter.</string>
@@ -4844,7 +4842,6 @@
     <string name="turn_on_nautical_depth_description">Slå på for å vise nautiske dybdedata på kartet.</string>
     <string name="weather_wind_kmh">km/t</string>
     <string name="weather_wind_ms">m/s</string>
-    <string name="accessibility_2d_view_off">2.5D-visning av</string>
     <string name="attach_roads_descr">Tilnærm sporet ditt til tillatte veier for å rute mellom punkter og tilknytte nøyaktige svinginstruksjoner og ruteegenskaper.</string>
     <string name="mtb_scale">Fjellsykkel-skala</string>
     <string name="mtb_segment_classification">Segmentklassifisering</string>

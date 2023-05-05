@@ -123,7 +123,17 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                 quickActionButton.setScaleX(1.5f);
                 quickActionButton.setScaleY(1.5f);
                 quickActionButton.setAlpha(0.95f);
-                quickActionButton.setOnTouchListener(getActionOnTouchListener());
+                quickActionButton.setOnTouchListener(getActionOnTouchListener(app, mapActivity, quickActionButton, new SetFabMarginCallback() {
+                    @Override
+                    public void onSetPortraitMargin(int rightMargin, int bottomMargin) {
+                        app.getSettings().setPortraitFabMargin(rightMargin, bottomMargin);
+                    }
+
+                    @Override
+                    public void onSetLandscapeMargin(int rightMargin, int bottomMargin) {
+                        app.getSettings().setLandscapeFabMargin(rightMargin, bottomMargin);
+                    }
+                }));
                 return true;
             });
         } else {
@@ -174,30 +184,29 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private void setQuickActionButtonMargin() {
         MapActivity mapActivity = getMapActivity();
         if (mapActivity != null) {
-            int defRightMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
-            int defBottomMargin = calculateTotalSizePx(R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
+            int defRightMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
+            int defBottomMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
             FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) quickActionButton.getLayoutParams();
             if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
                 Pair<Integer, Integer> fabMargin = settings.getPortraitFabMargin();
-                setQuickActionButtonMargin(param, fabMargin, 0, defBottomMargin);
+                setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, 0, defBottomMargin);
             } else {
                 Pair<Integer, Integer> fabMargin = settings.getLandscapeFabMargin();
-                setQuickActionButtonMargin(param, fabMargin, defRightMargin, 0);
+                setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, defRightMargin, 0);
             }
         }
     }
 
-    private void setQuickActionButtonMargin(FrameLayout.LayoutParams params,
-                                            Pair<Integer, Integer> fabMargin,
-                                            int defRightMargin, int defBottomMargin) {
-        MapActivity mapActivity = getMapActivity();
+    public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton, FrameLayout.LayoutParams params,
+                                          Pair<Integer, Integer> fabMargin,
+                                          int defRightMargin, int defBottomMargin) {
         if (mapActivity == null) {
             return;
         }
         int screenHeight = AndroidUtils.getScreenHeight(mapActivity);
         int screenWidth = AndroidUtils.getScreenWidth(mapActivity);
-        int btnHeight = quickActionButton.getHeight();
-        int btnWidth = quickActionButton.getWidth();
+        int btnHeight = fabButton.getHeight();
+        int btnWidth = fabButton.getWidth();
         int maxRightMargin = screenWidth - btnWidth;
         int maxBottomMargin = screenHeight - btnHeight;
 
@@ -217,10 +226,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
         params.rightMargin = rightMargin;
         params.bottomMargin = bottomMargin;
-        quickActionButton.setLayoutParams(params);
+        fabButton.setLayoutParams(params);
     }
 
-    private int calculateTotalSizePx(@DimenRes int... dimensId) {
+    public static int calculateTotalSizePx(OsmandApplication app, @DimenRes int... dimensId) {
         int result = 0;
         for (int id : dimensId) {
             result += app.getResources().getDimensionPixelSize(id);
@@ -492,7 +501,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         return setLayerState(false);
     }
 
-    private OnTouchListener getActionOnTouchListener() {
+    public static OnTouchListener getActionOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull SetFabMarginCallback fabMarginCallback) {
 
         return new OnTouchListener() {
 
@@ -504,7 +513,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                MapActivity mapActivity = getMapActivity();
                 if (mapActivity == null) {
                     return false;
                 }
@@ -513,22 +521,22 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                         setUpInitialValues(v, event);
                         return true;
                     case MotionEvent.ACTION_UP:
-                        quickActionButton.setOnTouchListener(null);
-                        quickActionButton.setPressed(false);
-                        quickActionButton.setScaleX(1);
-                        quickActionButton.setScaleY(1);
-                        quickActionButton.setAlpha(1f);
+	                    fabButton.setOnTouchListener(null);
+	                    fabButton.setPressed(false);
+	                    fabButton.setScaleX(1);
+	                    fabButton.setScaleY(1);
+	                    fabButton.setAlpha(1f);
                         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
                         if (AndroidUiHelper.isOrientationPortrait(mapActivity))
-                            settings.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+                            fabMarginCallback.onSetPortraitMargin(params.rightMargin, params.bottomMargin);
                         else
-                            settings.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
+	                        fabMarginCallback.onSetLandscapeMargin(params.rightMargin, params.bottomMargin);
                         return true;
                     case MotionEvent.ACTION_MOVE:
                         if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
                             setUpInitialValues(v, event);
 
-                        int padding = calculateTotalSizePx(R.dimen.map_button_margin);
+                        int padding = calculateTotalSizePx(app, R.dimen.map_button_margin);
                         FrameLayout parent = (FrameLayout) v.getParent();
                         FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
 
@@ -575,4 +583,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             }
         };
     }
+
+	public interface SetFabMarginCallback {
+		void onSetPortraitMargin(int rightMargin, int bottomMargin);
+
+		void onSetLandscapeMargin(int rightMargin, int bottomMargin);
+	}
 }

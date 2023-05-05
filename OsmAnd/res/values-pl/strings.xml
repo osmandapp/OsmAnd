@@ -4742,8 +4742,6 @@
     <string name="relative_bearing_widget_desc">Pokazuje kąt między kierunkiem ruchu do przodu a punktem docelowym.</string>
     <string name="bearing_desc">Pokazuje bezwzględne lub względne namiary na cel w jednostkach kątowych (w trybie 180 stopni, 360 stopni lub miliradianów).</string>
     <string name="distance_to_destination_widget_desc">Widżet pokazuje odległość, jaka pozostała do ostatniego punktu docelowego.</string>
-    <string name="accessibility_2d_view_off">Widok 2.5D wyłączony</string>
-    <string name="accessibility_2d_view_on">Widok 2.5D włączony</string>
     <string name="download_complete">Pobieranie zakończone</string>
     <string name="auto_25_chars_route_roundabout_kr">Zjedź zjazdem %1$d i trzymaj się prawej strony</string>
     <string name="auto_backup_preference_desc">Domyślnie Android zapisuje kopie zapasowe ulubionych, tokenów map i ustawień OsmAnd, aby przywrócić je na nowych urządzeniach lub po reinstalacji. Ta kopia zapasowa jest ograniczona do 25 MB.
@@ -4901,7 +4899,6 @@
     <string name="show_map_symbols_desc">Tekst, znaki drogowe i inne.</string>
     <string name="external_sensors_plugin_description">Uzyskuje dostęp do zewnętrznych czujników, aby odczytać np. tętno, prędkość roweru, moc jazdy na rowerze lub kadencję. Wymaga podłączenia urządzenia do odpowiednich czujników za pośrednictwem protokołu bezprzewodowej sieci osobistej ANT+.</string>
     <string name="nautical_depth_points">Nautyczne punkty głębokości</string>
-    <string name="shared_string_2_5_d_view">Widok 2,5 D</string>
     <string name="go_to_marker_location">Przejdź do lokalizacji znacznika</string>
     <string name="shared_string_switch_mode">Przełącz tryb</string>
     <string name="shared_string_normal">Normalna</string>

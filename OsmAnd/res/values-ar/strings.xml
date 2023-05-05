@@ -4811,8 +4811,6 @@
     <string name="compass_always_visible">مرئي دائما</string>
     <string name="compass_click_desc">تلميح: انقرعلى البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
-    <string name="accessibility_2d_view_off">إيقاف عرض 3D</string>
-    <string name="accessibility_2d_view_on">تفعيل عرض 3D</string>
     <string name="download_complete">تم التحميل</string>
     <string name="compass_desc">يظهر الاتجاه إلى الشمال.</string>
     <string name="rendering_attr_depthContourColorScheme_description">نظام ألوان عمق خطوط الخطوط المحيطية</string>
@@ -4860,7 +4858,6 @@
     <string name="distance_by_tap_use_description">اضغط على الخريطة لعرض المسافة بين موقعك الحالي والنقطة التي تم النقر عليها.
 \nاضغط بإصبعين على الخريطة لعرض المسافة بين النقاط التي تم النقر عليها</string>
     <string name="how_to_use">طريقة الاستخدام:</string>
-    <string name="shared_string_2_5_d_view">عرض 3D</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>

@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.configure;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.Map3DModeBottomSheet.*;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -263,7 +264,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		));
 	}
 
-	private void setupButtonsCard() {
+	public void setupButtonsCard() {
 		buttonsCard.removeAllViews();
 
 		CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(selectedAppMode);
@@ -272,11 +273,28 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				getString(R.string.map_widget_compass),
 				compassVisibility.getTitle(app),
 				true,
+				true,
 				v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
 						CompassVisibilityBottomSheetDialogFragment.showInstance(fragmentManager, this, selectedAppMode);
+					}
+				}
+		));
+
+		Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
+		buttonsCard.addView(createButtonWithDesc(
+				map3DModeVisibility.iconId,
+				getString(R.string.map_3d_mode_action),
+				map3DModeVisibility.getTitle(app),
+				true,
+				true,
+				v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						Map3DModeBottomSheet.showInstance(fragmentManager, this, selectedAppMode);
 					}
 				}
 		));
@@ -299,6 +317,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				R.drawable.ic_quick_action,
 				getString(R.string.configure_screen_quick_action),
 				desc,
+				false,
 				settings.QUICK_ACTION.getModeValue(selectedAppMode),
 				v -> QuickActionListFragment.showInstance(requireActivity(), false)
 		));
@@ -472,7 +491,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	                                   boolean enabled,
 	                                   boolean showShortDivider,
 	                                   OnClickListener listener) {
-		View view = createButtonWithDesc(iconId, title, null, enabled, listener);
+		View view = createButtonWithDesc(iconId, title, null, enabled, showShortDivider, listener);
 
 		if (showShortDivider) {
 			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
@@ -480,7 +499,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 		TextView stateContainer = view.findViewById(R.id.items_count_descr);
 		stateContainer.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
-		stateContainer.setText(enabled ? R.string.shared_string_on: R.string.shared_string_off);
+		stateContainer.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);
 
 		AndroidUiHelper.updateVisibility(stateContainer, true);
 
@@ -493,11 +512,16 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	                                  @NonNull String title,
 	                                  @Nullable String desc,
 	                                  boolean enabled,
+	                                  boolean showShortDivider,
 	                                  OnClickListener listener) {
 		int activeColor = selectedAppMode.getProfileColor(nightMode);
 		int defColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int iconColor = enabled ? activeColor : defColor;
 		View view = themedInflater.inflate(R.layout.configure_screen_list_item, null);
+
+		if (showShortDivider) {
+			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
+		}
 
 		Drawable icon = getPaintedContentIcon(iconId, iconColor);
 		ImageView ivIcon = view.findViewById(R.id.icon);

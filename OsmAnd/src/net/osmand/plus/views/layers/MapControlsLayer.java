@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_3D_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
@@ -65,6 +66,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.maphudbuttons.CompassButton;
 import net.osmand.plus.views.controls.maphudbuttons.ConfigureMapButton;
 import net.osmand.plus.views.controls.maphudbuttons.DrawerMenuButton;
+import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.NavigationMenuButton;
@@ -216,10 +218,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void initDashboardRelatedControls() {
 		MapActivity mapActivity = requireMapActivity();
 		ImageView backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
+		ImageView map3DButtonView = mapActivity.findViewById(R.id.map_3d_button);
 
 		mapButtons.add(new DrawerMenuButton(mapActivity));
 		mapButtons.add(new NavigationMenuButton(mapActivity));
 		mapButtons.add(new MyLocationButton(mapActivity, backToLocation, BACK_TO_LOC_HUD_ID, true));
+		mapButtons.add(new Map3DButton(mapActivity, map3DButtonView, MAP_3D_HUD_ID));
 
 		zoomText = mapActivity.findViewById(R.id.map_app_mode_text);
 	}

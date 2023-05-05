@@ -103,6 +103,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
+import net.osmand.plus.views.mapwidgets.configure.Map3DModeBottomSheet.Map3DModeVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -1725,8 +1726,6 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
-	public final CommonPreference<Boolean> ENABLE_3D_VIEW = new BooleanPreference(this, "enable_3d_view", true).makeProfile();
-
 	public final CommonPreference<Long> LAST_MAP_ACTIVITY_PAUSED_TIME = new LongPreference(this, "last_map_activity_paused_time", 0).makeGlobal().cache();
 	public final CommonPreference<Boolean> MAP_LINKED_TO_LOCATION = new BooleanPreference(this, "map_linked_to_location", true).makeGlobal().cache();
 
@@ -2300,9 +2299,7 @@ public class OsmandSettings {
 	}
 
 	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
-		return ENABLE_3D_VIEW.getModeValue(appMode) ?
-				LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode) :
-				LAST_KNOWN_MAP_ELEVATION.getProfileDefaultValue(appMode);
+		return LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode);
 	}
 
 	public void setLastKnownMapElevation(float elevation) {
@@ -2310,9 +2307,7 @@ public class OsmandSettings {
 	}
 
 	public void setLastKnownMapElevation(@NonNull ApplicationMode appMode, float elevation) {
-		if (ENABLE_3D_VIEW.get()) {
-			LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
-		}
+		LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
 	}
 
 	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
@@ -2638,6 +2633,44 @@ public class OsmandSettings {
 	public Pair<Integer, Integer> getLandscapeFabMargin() {
 		if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
 			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
+		}
+		return null;
+	}
+
+	/**
+	 * map 3d mode
+	 */
+
+	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE_IN_3D_MODE, Map3DModeVisibility.values()).makeProfile().cache();
+
+	public static final String MAP_3D_FAB_MARGIN_X_PORTRAIT_MARGIN = "map_3d_fab_margin_x_portrait_margin";
+	public static final String MAP_3D_FAB_MARGIN_Y_PORTRAIT_MARGIN = "map_3d_fab_margin_y_portrait_margin";
+	public static final String MAP_3D_FAB_MARGIN_X_LANDSCAPE_MARGIN = "map_3d_fab_margin_x_landscape_margin";
+	public static final String MAP_3D_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "map_3d_fab_margin_y_landscape_margin";
+
+	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT = new IntPreference(this, MAP_3D_FAB_MARGIN_X_PORTRAIT_MARGIN, 0).makeProfile();
+	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT = new IntPreference(this, MAP_3D_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0).makeProfile();
+	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN = new IntPreference(this, MAP_3D_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0).makeProfile();
+	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN = new IntPreference(this, MAP_3D_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0).makeProfile();
+
+	public boolean setPortraitFab3DModeMargin(int x, int y) {
+		return MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT.set(x) && MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT.set(y);
+	}
+
+	public boolean setLandscapeFab3DModeMargin(int x, int y) {
+		return MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN.set(x) && MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN.set(y);
+	}
+
+	public Pair<Integer, Integer> getPortraitMap3DModeFabMargin() {
+		if (MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT.isSet() && MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT.isSet()) {
+			return new Pair<>(MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT.get(), MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT.get());
+		}
+		return null;
+	}
+
+	public Pair<Integer, Integer> getLandscapeMap3DModeFabMargin() {
+		if (MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
+			return new Pair<>(MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
 		}
 		return null;
 	}

@@ -4633,8 +4633,6 @@
     <string name="compass_desc">Ammustrat sa diretzione pro su nord.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Ischema de colores de sas curvas de livellu de profundidade</string>
     <string name="rendering_attr_depthContourWidth_description">Largària de sas curvas de livellu de profundidade</string>
-    <string name="accessibility_2d_view_off">Vista 2.5 istudada</string>
-    <string name="accessibility_2d_view_on">Vista 2.5 alluta</string>
     <string name="download_complete">Iscarrigamentu agabbadu</string>
     <string name="side_marker_eta">Ora carculada de arrivu</string>
     <string name="updated_map_time">Agiornadu: %1$s.</string>
@@ -4772,7 +4770,6 @@
     <string name="included_in_your_current_plan">Incluidu in su pianu currente tuo \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Toca in sa mapa pro bìdere sa distàntzia intre sa positzione atuale tua e su puntu tocadu.
 \nToca cun duos pòddighes in sa mapa pro bìdere sa distàntzia intre sos puntos tocados</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="shared_string_shows">Ammustrat</string>
     <string name="shared_string_large">Mannu</string>
     <string name="shared_string_normal">Normale</string>

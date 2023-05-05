@@ -4708,9 +4708,7 @@
     <string name="goods_delivery_desc_3">Csak legfeljebb 3,5 tonna tömegű teherautókra vonatkozik.</string>
     <string name="map_marker_average_speed_desc">Adja meg az átlagsebesség-számításhoz használandó időintervallumot (az érkezési idő becsléséhez lesz felhasználva).</string>
     <string name="routing_attr_goods_restrictions_name">Áruszállítás</string>
-    <string name="accessibility_2d_view_on">2,5D nézet be</string>
     <string name="download_complete">A letöltés kész</string>
-    <string name="accessibility_2d_view_off">2,5D nézet ki</string>
     <string name="shared_string_duplicate">Másolat készítése</string>
     <string name="auto_backup_title">Automatikus biztonsági mentés</string>
     <string name="trip_recording_downhill_widget_desc">Megjeleníti a jelenleg rögzített utazás összes ereszkedésének összegét.</string>
@@ -4766,7 +4764,6 @@
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció megjelenítése</string>
-    <string name="shared_string_2_5_d_view">2,5D nézet</string>
     <string name="rotate_map_manual_opt">Rögzített (kézzel forgatva)</string>
     <string name="shared_string_large">Nagy</string>
     <string name="how_to_use">Használat:</string>

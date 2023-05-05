@@ -4706,7 +4706,6 @@
     <string name="auto_25_chars_route_tr_kr">Скрените десно и држите десно</string>
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
     <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
-    <string name="accessibility_2d_view_off">Поглед 2.5д је искључен</string>
     <string name="rotate_map_manual_opt">Непроменљиво (ручно окретање)</string>
     <string name="coordinates_widget_map_center">Координате: средиште карте</string>
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
@@ -4735,12 +4734,10 @@
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
-    <string name="shared_string_2_5_d_view">поглед 2.5д</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)\?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
-    <string name="accessibility_2d_view_on">Полгед 2.5д је укључен</string>
     <string name="download_complete">Преузимање је завршено</string>
     <string name="trip_recording_uphill_widget_desc">Приказује укупно све успоне на путу који се тренутно снима.</string>
     <string name="side_marker_eta">Процењено време доласка</string>

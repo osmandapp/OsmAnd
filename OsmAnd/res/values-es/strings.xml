@@ -4698,7 +4698,6 @@
     <string name="live_update_frequency_week_variant">Las actualizaciones de mapas se comprueban cada semana.</string>
     <string name="use_latin_name_if_missing">Usar nombre en latín si falta</string>
     <string name="compass_visible_if_map_rotated">Visible al girar el mapa</string>
-    <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
     <string name="live_update_frequency_day_variant">Las actualizaciones de mapas se comprueban cada día.</string>
     <string name="average_speed_skip_stops">Tener en cuenta las paradas</string>
     <string name="average_speed_widget_desc">Muestra la velocidad media del viaje actual.</string>
@@ -4710,7 +4709,6 @@
     <string name="compass_always_visible">Siempre visible</string>
     <string name="compass_click_desc">Sugerencia: Pulse sobre el widget de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
-    <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
     <string name="altitude_correction">Corrección de la elevación</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_diesel_name">Diésel</string>
@@ -4758,7 +4756,6 @@
     <string name="shared_string_large">Largo</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Cómo usar:</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="map_marker_interval_dialog_desc">Indica el intervalo de tiempo en la que se medirá la velocidad media para calcular la hora de llegada estimada.</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
