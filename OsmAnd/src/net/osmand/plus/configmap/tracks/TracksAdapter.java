@@ -35,7 +35,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_TRACK = 4;
 
 	private final UpdateLocationViewCache locationViewCache;
-	private final TrackTab trackTab;
+	private TrackTab trackTab;
 	private final TracksFragment fragment;
 	protected final boolean nightMode;
 
@@ -51,6 +51,11 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@NonNull
 	public TrackTab getTrackTab() {
 		return trackTab;
+	}
+
+	public void setTrackTab(TrackTab trackTab) {
+		this.trackTab = trackTab;
+		notifyDataSetChanged();
 	}
 
 	@NonNull
