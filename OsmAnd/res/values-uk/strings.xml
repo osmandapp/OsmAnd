@@ -2907,8 +2907,8 @@
     <string name="choose_track_file_to_follow">Виберіть файл треку якому слід слідувати</string>
     <string name="quick_action_switch_day_night_descr">Перемикач денного та нічного режимів OsmAnd.</string>
     <string name="run_full_osmand_msg">Ви використовуєте {0} мапу, надану OsmAnd. Хочете запустити повну версію OsmAnd\?</string>
-    <string name="routing_attr_avoid_sett_name">Уник. мостових та бруківки</string>
-    <string name="routing_attr_avoid_sett_description">Уникати мостових та бруківку</string>
+    <string name="routing_attr_avoid_sett_name">Уникати бруківки</string>
+    <string name="routing_attr_avoid_sett_description">Уникати бруківки</string>
     <string name="send_log">Надіслати журнал</string>
     <string name="files_moved">Переміщено %1$d файлів (%2$s).</string>
     <string name="files_copied">Скопійовано %1$d файлів (%2$s).</string>
@@ -5200,4 +5200,5 @@
     <string name="nav_profile_confirm_delete">Ви дійсно бажаєте вилучити «%1$s»\?</string>
     <string name="search_track_by_name">Пошук треків за назвою</string>
     <string name="no_search_results">Нічого не знайдено</string>
+    <string name="number_of_tracks">%1$s треків</string>
 </resources>
