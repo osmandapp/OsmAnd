@@ -5173,7 +5173,7 @@
     <string name="external_device_characteristic_diastolic">Диастолическое</string>
     <string name="external_device_characteristic_pulse_rate">Частота пульса</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Сопряжение датчика ANT+</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Вы можете сопрягать датчики Bluetooth LE и ANT+ с OsmAnd.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Сопрягайте датчики Bluetooth LE и ANT+ с OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Узнать больше о датчиках.</string>
     <string name="search_track_by_name">Поиск трека по названию</string>
     <string name="ant_plus_nothing_found_description">Убедитесь, что:
