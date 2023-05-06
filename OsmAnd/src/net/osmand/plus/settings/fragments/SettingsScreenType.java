@@ -2,7 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
-import net.osmand.plus.plugins.antplus.AntPlusSettingsFragment;
+import net.osmand.plus.plugins.externalsensors.AntPlusSettingsFragment;
 import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;

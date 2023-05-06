@@ -892,11 +892,11 @@ public class OsmAndFormatter {
 
 		private final boolean separateWithSpace;
 
-		public FormattedValue(float valueSrc, @NonNull String value, @NonNull String unit) {
+		public FormattedValue(float valueSrc, String value, String unit) {
 			this(valueSrc, value, unit, true);
 		}
 
-		public FormattedValue(float valueSrc, @NonNull String value, @NonNull String unit, boolean separateWithSpace) {
+		public FormattedValue(float valueSrc, String value, String unit, boolean separateWithSpace) {
 			this.value = value;
 			this.valueSrc = valueSrc;
 			this.unit = unit;

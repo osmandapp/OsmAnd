@@ -1157,9 +1157,6 @@
 			android:label="@string/process_downloading_service"
 			android:stopWithTask="false" />
 
-		<service
-			android:name=".plugins.antplus.BluetoothLeService" />
-
 		<meta-data android:name="com.google.android.gms.car.application"
 			android:resource="@xml/car_app_desc"
 			tools:ignore="MetadataTagInsideApplicationTag" />

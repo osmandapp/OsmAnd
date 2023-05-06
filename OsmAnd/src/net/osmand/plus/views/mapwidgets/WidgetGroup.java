@@ -10,7 +10,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.antplus.AntPlusPlugin;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -116,7 +116,7 @@ public enum WidgetGroup {
 		} else if (this == DEVELOPER_OPTIONS) {
 			return getPartOfPluginDesc(context, OsmandDevelopmentPlugin.class);
 		} else if (this == ANT_PLUS) {
-			return getPartOfPluginDesc(context, AntPlusPlugin.class);
+			return getPartOfPluginDesc(context, ExternalSensorsPlugin.class);
 		} else if (this == WEATHER) {
 			return getPartOfPluginDesc(context, WeatherPlugin.class);
 		}

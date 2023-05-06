@@ -11,6 +11,19 @@
 	Thx - Hardy
 -->
 
+    <string name="device_disconnected">%1$s disconnected</string>
+    <string name="device_connected">%1$s connected</string>
+    <string name="running_scds_device_name">Running device</string>
+    <string name="bicycle_scd_device_name">Bicycle device</string>
+    <string name="external_device_blood_pressure">Blood pressure</string>
+    <string name="no_bt_permission">Bluetooth permission is not granted</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="shared_string_chest">Chest</string>
+    <string name="shared_string_wrist">Wrist</string>
+    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_hand">Hand</string>
+    <string name="shared_string_ear_lobe">Ear lobe</string>
+    <string name="shared_string_foot">Foot</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>
@@ -31,7 +44,7 @@ You will be able to pair this sensor again at any time.</string>
     <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
     <string name="external_device_characteristic_cadence">Cadence</string>
     <string name="external_device_characteristic_heart_rate">Heart rate</string>
-    <string name="external_device_characteristic_systolic">Cystolic</string>
+    <string name="external_device_characteristic_systolic">Systolic</string>
     <string name="external_device_characteristic_diastolic">Diastolic</string>
     <string name="external_device_characteristic_arterial_pressure">Arterial pressure</string>
     <string name="external_device_characteristic_cuff_pressure">Cuff pressure</string>
