@@ -200,7 +200,7 @@
     <string name="poi_town">Vila</string>
     <string name="poi_village">Poble</string>
     <string name="poi_hamlet">Llogaret</string>
-    <string name="poi_isolated_dwelling">Assentament aïllat</string>
+    <string name="poi_isolated_dwelling">Vivenda aïllada;Assentament aïllat</string>
     <string name="poi_suburb">Suburbi/Districte</string>
     <string name="poi_place_allotments">Horts familiars</string>
     <string name="poi_place_farm">Granja</string>
@@ -426,7 +426,7 @@
     <string name="poi_storage_tank">Dipòsit d\'emmagatzematge</string>
     <string name="poi_quarter">Districte</string>
     <string name="poi_neighbourhood">Barri;Veïnat</string>
-    <string name="poi_locality">Assentament</string>
+    <string name="poi_locality">Indret;Paratge;Partida</string>
     <string name="poi_residential">Àrea residencial</string>
     <string name="poi_dentist">Dentista</string>
     <string name="poi_nursing_home">Residència d\'avis</string>
@@ -487,7 +487,7 @@
     <string name="poi_viewpoint">Mirador</string>
     <string name="poi_camp_site">Lloc d\'acampada</string>
     <string name="poi_caravan_site">Acomodament de caravanes</string>
-    <string name="poi_spring">Font</string>
+    <string name="poi_spring">Font natural</string>
     <string name="poi_geyser">Guèiser</string>
     <string name="poi_cemetery">Cementiri</string>
     <string name="poi_grave_yard">Cementiri</string>
@@ -575,7 +575,7 @@
     <string name="poi_bar">Pub (bar de copes)</string>
     <string name="poi_pub">Bar</string>
     <string name="poi_food_court">Menjador comú</string>
-    <string name="poi_drinking_water">Aigua potable</string>
+    <string name="poi_drinking_water">Font d\'aigua potable</string>
     <string name="poi_barbecue">Barbacoa</string>
     <string name="poi_craft_agricultural_engines">Artefactes agrícoles artesans</string>
     <string name="poi_craft_basket_maker">Cisteller</string>
@@ -859,7 +859,7 @@
     <string name="poi_basin">Bassa</string>
     <string name="poi_bump_gate">Porta batent de tancament controlat</string>
     <string name="poi_country">País</string>
-    <string name="poi_fee_yes">Sí</string>
+    <string name="poi_fee_yes">Sí;Tarifat</string>
     <string name="poi_abandoned_poi">Objectes perduts</string>
     <string name="poi_node_networks">Xarxa de nodes de senderisme/ciclisme</string>
     <string name="poi_hiking_routes">Rutes de senderisme</string>
@@ -942,9 +942,9 @@
     <string name="poi_recycling_cars">Cotxes</string>
     <string name="poi_recycling_bicycles">Bicicletes</string>
     <string name="poi_shower">Dutxa</string>
-    <string name="poi_drinking_water_yes">Sí</string>
+    <string name="poi_drinking_water_yes">Sí;Aigua potable</string>
     <string name="poi_drinking_water_no">No</string>
-    <string name="poi_seasonal_yes">Sí</string>
+    <string name="poi_seasonal_yes">Sí;Estacional</string>
     <string name="poi_seasonal_no">No</string>
     <string name="poi_seasonal_dry_season">Estació seca</string>
     <string name="poi_seasonal_wet_season">Estació humida</string>
@@ -1918,7 +1918,7 @@
     <string name="poi_shoes_sport">Esports</string>
     <string name="poi_shoes_orthopedic">Ortopèdia</string>
     <string name="poi_badminton">Bàdminton</string>
-    <string name="poi_judo">*Judo</string>
+    <string name="poi_judo">Judo</string>
     <string name="poi_disc_golf">Disc golf</string>
     <string name="poi_futsal">Futbol sala</string>
     <string name="poi_rc_car">Curses de cotxes teledirigits</string>
@@ -2102,7 +2102,7 @@
     <string name="poi_diplomatic_filter">Tipus</string>
     <string name="poi_city_capital">Capital</string>
     <string name="poi_healthcare_alternative_types">Especialitat</string>
-    <string name="poi_free_flying_characteristics">Característica</string>
+    <string name="poi_free_flying_characteristics">Característica de vol</string>
     <string name="poi_archaeological_site_type">Tipus</string>
     <string name="poi_star_rating">Valoració en estrelles</string>
     <string name="poi_religion_type">Religió</string>
@@ -2137,7 +2137,7 @@
     <string name="poi_recycling_accepted_waste">Residus acceptats</string>
     <string name="poi_shelter_type">Tipus</string>
     <string name="poi_fireplace">Llar de foc</string>
-    <string name="poi_seasonal">Temporada</string>
+    <string name="poi_seasonal">Estacional;Temporada</string>
     <string name="poi_water_characteristic">Tipus d\'aigua</string>
     <string name="poi_beach_surface_type">Superfície</string>
     <string name="poi_nudism">Nudisme</string>
@@ -2837,7 +2837,7 @@
     <string name="poi_seamark_clearance_height_open">Altura màxima (obert)</string>
     <string name="poi_seamark_clearance_width">Amplada màxima</string>
     <string name="poi_climbing_style">Estil d\'escalada</string>
-    <string name="poi_socket_chademo_output_filter">Connector CHAdeMO</string>
+    <string name="poi_socket_chademo_output_filter">Connector d\'eixida CHAdeMO</string>
     <string name="poi_socket_type2_output_filter">Connector tipus 2</string>
     <string name="poi_socket_type2_combo_output_filter">Connector combinat tipus 2</string>
     <string name="poi_socket_type3_output_filter">Connector tipus 3</string>
@@ -2916,4 +2916,11 @@
     <string name="poi_access_hgv">Accés per a vehicles pesats</string>
     <string name="poi_city_block">Illa urbana;Illa de cases</string>
     <string name="poi_access_scooter">Accés en escúter</string>
+    <string name="poi_playground_springy">Cavallet gronxador</string>
+    <string name="poi_drinking_water_refill_network">Xarxa de recàrrega d\'aigua potable</string>
+    <string name="poi_drinking_water_refill_no">Recàrrega d\'aigua potable: no</string>
+    <string name="poi_bath_type_hot_spring">Banys termals</string>
+    <string name="poi_drinking_water_refill_yes">Sí,Recàrrega d\'aigua potable;Recàrrega</string>
+    <string name="poi_playground_activitypanel">Tauler d\'activitats de parc infantil</string>
+    <string name="poi_playground_aerialrotator">Barres giratòries aèries</string>
 </resources>

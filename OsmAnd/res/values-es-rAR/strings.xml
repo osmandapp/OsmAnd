@@ -2881,8 +2881,8 @@
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="quick_action_day_night_mode">modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Sin empedrado ni adoquinado</string>
-    <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
+    <string name="routing_attr_avoid_sett_name">Sin adoquinado natural</string>
+    <string name="routing_attr_avoid_sett_description">Evitar calles con adoquines naturales</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
@@ -5208,4 +5208,5 @@
     <string name="is_imported">%1$s se ha importado.</string>
     <string name="search_track_by_name">Buscar traza por el nombre</string>
     <string name="no_search_results">Sin resultados</string>
+    <string name="number_of_tracks">%1$s trazas</string>
 </resources>
