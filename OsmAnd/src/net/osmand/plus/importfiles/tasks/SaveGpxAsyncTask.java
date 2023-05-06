@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
 
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -30,7 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 @SuppressWarnings("deprecation")
-public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
+public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> {
 
 	private final OsmandApplication app;
 
@@ -62,12 +64,13 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground(Void... nothing) {
+	protected Pair<String, File> doInBackground(Void... nothing) {
 		if (gpxFile.isEmpty()) {
-			return app.getString(R.string.error_reading_gpx);
+			return new Pair<>(app.getString(R.string.error_reading_gpx), null);
 		}
 
 		String warning;
+		File resultFile = null;
 		//noinspection ResultOfMethodCallIgnored
 		destinationDir.mkdirs();
 		if (destinationDir.exists() && destinationDir.isDirectory() && destinationDir.canWrite()) {
@@ -82,7 +85,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			}
 			if (exception == null) {
 				gpxFile.path = toWrite.getAbsolutePath();
-				File file = new File(gpxFile.path);
+				resultFile = new File(gpxFile.path);
 				if (overwrite) {
 					app.getGpxDbHelper().remove(toWrite);
 					if (selected != null) {
@@ -91,7 +94,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 						helper.selectGpxFile(selected.getGpxFile(), params);
 					}
 				}
-				GpxDataItem item = new GpxDataItem(file, gpxFile);
+				GpxDataItem item = new GpxDataItem(resultFile, gpxFile);
 				app.getGpxDbHelper().add(item);
 
 				warning = null;
@@ -102,7 +105,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			warning = app.getString(R.string.sd_dir_not_accessible);
 		}
 
-		return warning;
+		return new Pair<>(warning, resultFile);
 	}
 
 	@NonNull
@@ -128,12 +131,23 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	}
 
 	@Override
-	protected void onPostExecute(@Nullable String warning) {
+	protected void onPostExecute(Pair<String, File> result) {
+		String warning = result.first;
+		File file = result.second;
 		if (listener != null) {
 			List<String> warnings = Algorithms.isEmpty(warning)
 					? Collections.emptyList()
 					: Collections.singletonList(warning);
 			listener.onGpxSavingFinished(warnings);
+		}
+		if (file != null) {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			GpxFileLoaderTask.loadGpxFile(file, app.getOsmandMap().getMapView().getMapActivity(), gpxFile -> {
+				GpxSelectionParams selectionParams = GpxSelectionParams.newInstance()
+						.showOnMap().selectedAutomatically().saveSelection();
+				helper.selectGpxFile(gpxFile, selectionParams);
+				return true;
+			});
 		}
 	}
 }
