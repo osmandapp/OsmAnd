@@ -29,14 +29,17 @@ public class SensorTextWidget extends TextInfoWidget {
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		List<SensorData> dataList = sensor.getLastSensorDataList();
-		if (Algorithms.isEmpty(dataList)) {
+		if (!sensor.getDevice().isConnected() || Algorithms.isEmpty(dataList)) {
+			setText(NO_VALUE, null);
 			return;
 		}
 		SensorWidgetDataField field = null;
 		for (SensorData data : dataList) {
-			field = data.getWidgetField(fieldType);
-			if (field != null) {
-				break;
+			if (data != null) {
+				field = data.getWidgetField(fieldType);
+				if (field != null) {
+					break;
+				}
 			}
 		}
 		if (field != null) {
@@ -45,11 +48,13 @@ public class SensorTextWidget extends TextInfoWidget {
 				FormattedValue formattedValue = field.getFormattedValue(app);
 				if (formattedValue != null) {
 					setText(formattedValue.value, formattedValue.unit);
-					return;
+				} else {
+					setText(NO_VALUE, null);
 				}
 			}
+		} else {
+			setText(NO_VALUE, null);
 		}
-		setText(NO_VALUE, null);
 	}
 
 	@Override

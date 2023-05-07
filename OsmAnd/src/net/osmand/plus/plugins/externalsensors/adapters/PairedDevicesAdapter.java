@@ -38,12 +38,11 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 		// TODO: 28 API
 		//optionsMenu.getMenu().setGroupDividerEnabled(true);
 		MenuItem enableDisableItem = optionsMenu.getMenu().add(1, 1, Menu.NONE,
-				device.isConnected() ?
-						R.string.external_device_details_disconnect :
-						R.string.external_device_details_connect);
-		enableDisableItem.setIcon(device.isConnected() ? R.drawable.ic_action_sensor_off : R.drawable.ic_action_sensor);
-		// TODO: 26 API, colorId instead of color
-		//enableDisableItem.setIconTintList(ColorStateList.valueOf(getMenuIconColor()));
+				device.isConnected()
+						? R.string.external_device_details_disconnect
+						: R.string.external_device_details_connect);
+		enableDisableItem.setIcon(app.getUIUtilities().getIcon(
+				device.isConnected() ? R.drawable.ic_action_sensor_off : R.drawable.ic_action_sensor, getMenuIconColor()));
 		enableDisableItem.setOnMenuItemClickListener(item -> {
 			if (device.isConnected()) {
 				deviceMenuClickListener.onDisconnect(device);
@@ -56,9 +55,7 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 
 		MenuItem settingsItem = optionsMenu.getMenu().add(1, 2, Menu.NONE,
 				R.string.shared_string_settings);
-		settingsItem.setIcon(R.drawable.ic_action_settings_outlined);
-		// TODO: 26 API, colorId instead of color
-		//settingsItem.setIconTintList(ColorStateList.valueOf(getMenuIconColor()));
+		settingsItem.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_settings_outlined, getMenuIconColor()));
 		settingsItem.setOnMenuItemClickListener(item -> {
 			deviceMenuClickListener.onSettings(device);
 			optionsMenu.dismiss();
@@ -67,9 +64,7 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 
 		MenuItem renameItem = optionsMenu.getMenu().add(1, 3, Menu.NONE,
 				R.string.shared_string_rename);
-		renameItem.setIcon(R.drawable.ic_action_edit_outlined);
-		// TODO: 26 API, colorId instead of color
-		//renameItem.setIconTintList(ColorStateList.valueOf(getMenuIconColor()));
+		renameItem.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_outlined, getMenuIconColor()));
 		renameItem.setOnMenuItemClickListener(item -> {
 			deviceMenuClickListener.onRename(device);
 			optionsMenu.dismiss();
@@ -79,8 +74,7 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 		MenuItem forgetItem = optionsMenu.getMenu().add(2, 4, Menu.NONE,
 				R.string.external_device_menu_forget);
 		forgetItem.setIcon(R.drawable.ic_action_sensor_remove);
-		// TODO: 26 API, colorId instead of color
-		//forgetItem.setIconTintList(ColorStateList.valueOf(getMenuIconColor()));
+		forgetItem.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_sensor_remove, getMenuIconColor()));
 		forgetItem.setOnMenuItemClickListener(item -> {
 			deviceMenuClickListener.onForget(device);
 			optionsMenu.dismiss();

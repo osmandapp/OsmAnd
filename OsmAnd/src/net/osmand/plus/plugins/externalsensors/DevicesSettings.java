@@ -12,8 +12,10 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 class DevicesSettings {
 
@@ -74,6 +76,13 @@ class DevicesSettings {
 			List<DevicePreferencesListener> newListeners = new ArrayList<>(listeners);
 			newListeners.remove(listener);
 			listeners = newListeners;
+		}
+	}
+
+	@NonNull
+	public Set<String> getDeviceIds() {
+		synchronized (settings) {
+			return new HashSet<>(settings.keySet());
 		}
 	}
 

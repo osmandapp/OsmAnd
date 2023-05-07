@@ -54,6 +54,14 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	                                                   @NonNull UUID uuid, @NonNull String address) {
 		if (BLEHeartRateDevice.getServiceUUID().equals(uuid)) {
 			return new BLEHeartRateDevice(bluetoothAdapter, address);
+		} else if (BLETemperatureDevice.getServiceUUID().equals(uuid)) {
+			return new BLETemperatureDevice(bluetoothAdapter, address);
+		} else if (BLEBikeSCDDevice.getServiceUUID().equals(uuid)) {
+			return new BLEBikeSCDDevice(bluetoothAdapter, address);
+		} else if (BLERunningSCDDevice.getServiceUUID().equals(uuid)) {
+			return new BLERunningSCDDevice(bluetoothAdapter, address);
+		} else if (BLEBPICPDevice.getServiceUUID().equals(uuid)) {
+			return new BLEBPICPDevice(bluetoothAdapter, address);
 		}
 		return null;
 	}
