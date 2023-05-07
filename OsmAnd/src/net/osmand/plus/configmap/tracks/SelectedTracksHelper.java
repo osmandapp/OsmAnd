@@ -15,7 +15,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectGpxTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
@@ -112,6 +114,10 @@ public class SelectedTracksHelper {
 		return trackTab;
 	}
 
+	public void updateTracksOnMap(){
+		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
+	}
+
 	@NonNull
 	private TrackTab getAllTracksTab() {
 		TrackTab trackTab = new TrackTab(TrackTabType.ALL);
@@ -164,6 +170,7 @@ public class SelectedTracksHelper {
 	}
 
 	private void processRecentlyVisibleTracks() {
+		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		for (GPXFile gpxFile : selectionHelper.getSelectedGpxFilesBackUp().keySet()) {
 			SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(gpxFile.path);
@@ -174,6 +181,8 @@ public class SelectedTracksHelper {
 	}
 
 	private void processVisibleTracks() {
+		selectedTrackItems.clear();
+		originalSelectedTrackItems.clear();
 		if (selectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : allTrackItems) {
 				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getPath());
@@ -232,6 +241,8 @@ public class SelectedTracksHelper {
 			selectedFileNames.put(path, true);
 		}
 		selectionHelper.runSelection(selectedFileNames, null);
+		processVisibleTracks();
+		processRecentlyVisibleTracks();
 	}
 
 	private void sortTrackTabs() {

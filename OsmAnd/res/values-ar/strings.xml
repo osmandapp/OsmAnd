@@ -2939,8 +2939,8 @@
 \n</string-->
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام أوسماند لايف.</string>
     <string name="use_osm_live_public_transport">أوسماند لايف وسائل النقل العام</string>
-    <string name="routing_attr_avoid_sett_name">عدم تجنب الحصى والطرق المرصوفة</string>
-    <string name="routing_attr_avoid_sett_description">تجنب الحصى والطرق المرصوفة</string>
+    <string name="routing_attr_avoid_sett_name">بدون ضبط</string>
+    <string name="routing_attr_avoid_sett_description">تجنب الطرق المرصوفة</string>
     <string name="routing_attr_avoid_train_name">بدون قطارات</string>
     <string name="routing_attr_avoid_train_description">تجنب القطارات</string>
     <string name="routing_attr_avoid_subway_name">تجنب قطارالانفاق</string>
@@ -5256,6 +5256,9 @@
     <string name="ant_plus_pair_new_sensor">اقتران مستشعر جديد</string>
     <string name="ant_plus_open_settings">فتح الإعدادات</string>
     <string name="ant_plus_pair_new_sensor_ble">إقران مستشعر بلوتوث LE</string>
-    <string name="ant_plus_pair_new_sensor_ant_plus">إقتران مستشعر Ant +</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">قم بربط مستشعر +ANT</string>
     <string name="learn_more_about_sensors_link">تعرف على المزيد حول أجهزة الاستشعار.</string>
+    <string name="no_search_results">لا توجد نتائج</string>
+    <string name="search_track_by_name">بحث عن المسار بالاسم</string>
+    <string name="number_of_tracks">%1$s مسار</string>
 </resources>

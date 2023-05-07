@@ -44,7 +44,6 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
@@ -114,6 +113,7 @@ import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.VoiceProviderDialog;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
@@ -601,7 +601,7 @@ public class OsmandApplication extends MultiDexApplication {
 			settings.VOICE_MUTE.setModeValue(appMode, true);
 		} else if (Algorithms.isEmpty(voiceProvider)) {
 			if (warnNoProvider && context instanceof MapActivity) {
-				OsmAndDialogs.showVoiceProviderDialog((MapActivity) context, appMode, applyAllModes);
+				VoiceProviderDialog.showVoiceProviderDialog((MapActivity) context, appMode, applyAllModes);
 			}
 		} else {
 			if (player == null || !voiceProvider.equals(player.getCurrentVoice()) || forceInitialization) {

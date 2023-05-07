@@ -24,6 +24,9 @@
     <string name="shared_string_hand">Hand</string>
     <string name="shared_string_ear_lobe">Ear lobe</string>
     <string name="shared_string_foot">Foot</string>
+    <string name="number_of_tracks">%1$s tracks</string>
+    <string name="search_track_by_name">Search track by name</string>
+    <string name="no_search_results">No results</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>
@@ -1409,7 +1412,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="please_provide_point_name_error">Please provide a name for the point</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="use_volume_buttons_as_zoom_descr">Control the map-zoom level using the volume buttons on the device.</string>
-    <string name="quick_action_remove_next_destination">Delete nearest destination point</string>
+    <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
@@ -5121,8 +5124,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routeInfo_steepness_name">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
-    <string name="routing_attr_avoid_sett_name">No cobblestone or sett</string>
-    <string name="routing_attr_avoid_sett_description">Avoids cobblestone and sett</string>
+    <string name="routing_attr_avoid_sett_name">No sett</string>
+    <string name="routing_attr_avoid_sett_description">Avoids sett</string>
     <string name="quick_action_need_to_add_item_to_list">Add at least one item to the list in the \'Quick action\' settings</string>
     <string name="routing_attr_piste_type_downhill_name">Alpine and downhill skiing</string>
     <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>

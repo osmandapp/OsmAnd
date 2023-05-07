@@ -42,7 +42,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.favorites.dialogs.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
@@ -62,7 +62,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
+public class NotesFragment extends OsmAndListFragment implements FragmentStateHolder {
 
 	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
 

@@ -37,6 +37,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
@@ -301,7 +302,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 				// History
 				SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-				List<SearchResult> results = historyHelper.getSearchHistoryResults(true);
+				List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.SEARCH, true, false);
 				if (!Algorithms.isEmpty(results)) {
 					recentResults.addAll(results);
 				}

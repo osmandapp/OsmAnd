@@ -41,7 +41,6 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -123,18 +122,6 @@ public class RoutingOptionsHelper {
 		ApplicationMode mode = routingHelper.getAppMode();
 		boolean mute = !routingHelper.getVoiceRouter().isMuteForMode(mode);
 		routingHelper.getVoiceRouter().setMuteForMode(mode, mute);
-	}
-
-	public void switchMusic() {
-		OsmandSettings settings = app.getSettings();
-		boolean mt = !settings.INTERRUPT_MUSIC.get();
-		settings.INTERRUPT_MUSIC.set(mt);
-	}
-
-	public void selectRestrictedRoads(MapActivity mapActivity) {
-		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-		mapActivity.getMapRouteInfoMenu().hide();
-		mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity, null);
 	}
 
 	public void selectVoiceGuidance(MapActivity mapActivity, CallbackWithObject<String> callback, ApplicationMode applicationMode) {

@@ -7,7 +7,7 @@
               android:focusableInTouchMode="true"
               android:gravity="center_vertical"
               android:orientation="horizontal">
-    
+
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="0dp"
@@ -37,7 +37,7 @@
         style="@style/Widget.AppCompat.ActionButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="@string/shared_string_close"
+        android:contentDescription="@string/shared_string_clear"
         osmand:srcCompat="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>

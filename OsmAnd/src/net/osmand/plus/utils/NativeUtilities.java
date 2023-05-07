@@ -91,6 +91,30 @@ public class NativeUtilities {
 	}
 
 	@Nullable
+	public static PointI get31FromElevatedPixel(@NonNull MapRendererView mapRenderer, int x, int y) {
+		PointI point31 = new PointI();
+		mapRenderer.getLocationFromElevatedPoint(new PointI(x, y), point31);
+		return point31;
+	}
+
+	@Nullable
+	public static PointI get31FromElevatedPixel(@NonNull MapRendererView mapRenderer, float x, float y) {
+		return get31FromElevatedPixel(mapRenderer, (int) x, (int) y);
+	}
+
+	@Nullable
+	public static LatLon getLatLonFromElevatedPixel(@NonNull MapRendererView mapRenderer, int x, int y) {
+		PointI point31 = get31FromElevatedPixel(mapRenderer, x, y);
+		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+	}
+
+	@Nullable
+	public static LatLon getLatLonFromElevatedPixel(@NonNull MapRendererView mapRenderer, float x, float y) {
+		PointI point31 = get31FromElevatedPixel(mapRenderer, x, y);
+		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+	}
+
+	@Nullable
 	public static LatLon getLatLonFromPixel(@Nullable MapRendererView mapRenderer, @Nullable RotatedTileBox tileBox,
 	                                        int x, int y) {
 		if (mapRenderer == null) {

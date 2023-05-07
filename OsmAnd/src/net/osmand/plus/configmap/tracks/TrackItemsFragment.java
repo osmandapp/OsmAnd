@@ -23,7 +23,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.Set;
 
-public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener {
+public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -57,7 +57,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.gpx_info_items_fragment, container, false);
+		View view = inflater.inflate(R.layout.recycler_view_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		TracksFragment fragment = (TracksFragment) requireParentFragment();
@@ -78,12 +78,16 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 		return view;
 	}
 
+	@Override
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
 		adapter.onTrackItemsSelected(trackItems);
 	}
 
+	@Override
 	public void updateContent() {
-		adapter.notifyDataSetChanged();
+		TracksFragment fragment = (TracksFragment) requireParentFragment();
+		SelectedTracksHelper selectedTrackHelper = fragment.getSelectedTracksHelper();
+		adapter.setTrackTab(selectedTrackHelper.getTrackTabs().get(trackTab.getTypeName()));
 	}
 
 	@Override

@@ -195,10 +195,7 @@ public class ShareMenu extends BaseMenuController {
 	public static ShareMenu restoreMenu(Bundle bundle, MapActivity mapActivity) {
 		ShareMenu menu = new ShareMenu(mapActivity);
 		menu.title = bundle.getString(KEY_SHARE_MENU_POINT_TITLE);
-		Object latLonObj = bundle.getSerializable(KEY_SHARE_MENU_LATLON);
-		if (latLonObj != null) {
-			menu.latLon = (LatLon) latLonObj;
-		}
+		menu.latLon = AndroidUtils.getSerializable(bundle, KEY_SHARE_MENU_LATLON, LatLon.class);
 		return menu;
 	}
 

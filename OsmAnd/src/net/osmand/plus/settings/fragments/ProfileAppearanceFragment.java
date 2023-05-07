@@ -17,7 +17,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -320,13 +319,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.name = savedInstanceState.getString(PROFILE_NAME_KEY);
 		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
-		changedProfile.color = (ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
-		changedProfile.customColor = (Integer) savedInstanceState.getSerializable(PROFILE_CUSTOM_COLOR_KEY);
+		changedProfile.color = AndroidUtils.getSerializable(savedInstanceState, PROFILE_COLOR_KEY, ProfileIconColors.class);
+		changedProfile.customColor = AndroidUtils.getSerializable(savedInstanceState, PROFILE_CUSTOM_COLOR_KEY, Integer.class);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
-		changedProfile.locationIcon = (LocationIcon) savedInstanceState.getSerializable(PROFILE_LOCATION_ICON_KEY);
-		changedProfile.navigationIcon = (NavigationIcon) savedInstanceState.getSerializable(PROFILE_NAVIGATION_ICON_KEY);
+		changedProfile.locationIcon = AndroidUtils.getSerializable(savedInstanceState, PROFILE_LOCATION_ICON_KEY, LocationIcon.class);
+		changedProfile.navigationIcon = AndroidUtils.getSerializable(savedInstanceState, PROFILE_NAVIGATION_ICON_KEY, NavigationIcon.class);
 		isNewProfile = savedInstanceState.getBoolean(IS_NEW_PROFILE_KEY);
 	}
 

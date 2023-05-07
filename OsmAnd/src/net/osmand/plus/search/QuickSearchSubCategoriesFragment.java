@@ -27,9 +27,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 
 import java.util.ArrayList;

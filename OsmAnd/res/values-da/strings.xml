@@ -2889,8 +2889,8 @@
     <string name="rendering_attr_highway_class_state_road_name">Statsvej</string>
     <string name="rendering_attr_highway_class_service_name">Service</string>
     <string name="rendering_attr_highway_class_steps_name">Trin</string>
-    <string name="routing_attr_avoid_sett_name">Ingen brosten eller natursten</string>
-    <string name="routing_attr_avoid_sett_description">Undgår brosten og natursten</string>
+    <string name="routing_attr_avoid_sett_name">Ingen brosten</string>
+    <string name="routing_attr_avoid_sett_description">Undgår brosten</string>
     <string name="shared_string_degrees">Grader</string>
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Enhed for vinkelmåling</string>
@@ -3568,7 +3568,7 @@
     <string name="details_dialog_decr">Vis eller skjul yderligere kort-detaljer</string>
     <string name="shared_string_night_map">Natkort</string>
     <string name="add_online_source">Tilføj onlinekilde</string>
-    <string name="quick_action_remove_next_destination">Slet nærmeste destinationspunkt</string>
+    <string name="quick_action_remove_next_destination">Slet næste destinationspunkt</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper som zoom</string>
     <string name="please_provide_point_name_error">Angiv et navn til punktet</string>
     <string name="search_download_wikipedia_maps">Hent Wikipedia-kort</string>
@@ -5195,4 +5195,7 @@
     <string name="file_already_exists_description">\"%1$s\". Der findes allerede en fil med dette navn. Hvis den erstattes, overskrives alle ændringer, der er foretaget med den aktuelle version.</string>
     <string name="nav_profile_confirm_delete">Er du sikker på, at du vil slette \"%1$s\"\?</string>
     <string name="is_imported">%1$s importeres.</string>
+    <string name="no_search_results">Ingen resultater</string>
+    <string name="search_track_by_name">Søg spor efter navn</string>
+    <string name="number_of_tracks">%1$s spor</string>
 </resources>

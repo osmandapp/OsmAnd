@@ -3,7 +3,6 @@ package net.osmand.plus.configmap.tracks;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
 
 import android.content.Context;
 
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class TrackTab {
 	@Nullable
 	public final File directory;
 
-	private TracksSortMode sortMode = LAST_MODIFIED;
+	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 
 	public TrackTab(@NonNull File directory) {
 		this.directory = directory;
@@ -85,8 +85,9 @@ public class TrackTab {
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
 		for (Object object : items) {
-			if (object instanceof TrackItem)
+			if (object instanceof TrackItem) {
 				trackItems.add((TrackItem) object);
+			}
 		}
 		return trackItems;
 	}

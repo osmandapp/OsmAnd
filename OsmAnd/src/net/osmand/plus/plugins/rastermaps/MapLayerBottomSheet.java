@@ -43,7 +43,7 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		nightMode = isNightMode(true);
 		Bundle args = getArguments();
-		layerTypes = (List<MapLayerType>) args.getSerializable(KEY_LAYER_NAMES);
+		layerTypes = (List<MapLayerType>) AndroidUtils.getSerializable(args, KEY_LAYER_NAMES, ArrayList.class);
 		updateTiles = args.getBoolean(KEY_UPDATE_TILES);
 	}
 

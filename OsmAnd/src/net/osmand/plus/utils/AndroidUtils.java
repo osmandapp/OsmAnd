@@ -32,6 +32,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.StatFs;
@@ -86,6 +87,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
@@ -220,9 +222,9 @@ public class AndroidUtils {
 					drawable.draw(canvas);
 				} else {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
-					Bitmap scaledBitmap = AndroidUtils.scaleBitmap(srcBitmap, width, height, true);
+					Bitmap scaledBitmap = scaleBitmap(srcBitmap, width, height, true);
 					canvas.drawBitmap(scaledBitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-					if(scaledBitmap != srcBitmap){
+					if (scaledBitmap != srcBitmap) {
 						scaledBitmap.recycle();
 					}
 				}
@@ -1240,5 +1242,14 @@ public class AndroidUtils {
 				context,
 				permission
 		) == PackageManager.PERMISSION_GRANTED;
+	}
+
+	@Nullable
+	public static <T extends Serializable> T getSerializable(@NonNull Bundle bundle, @NonNull String key, @NonNull Class<T> clazz) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return bundle.getSerializable(key, clazz);
+		} else {
+			return (T) bundle.getSerializable(key);
+		}
 	}
 }

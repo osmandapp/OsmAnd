@@ -140,9 +140,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		app = requireMyApplication();
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
-			screenType = (ScreenType) savedInstanceState.getSerializable(ITEM_TYPE_KEY);
+			screenType = AndroidUtils.getSerializable(savedInstanceState, ITEM_TYPE_KEY, ScreenType.class);
 			hiddenMenuItems = savedInstanceState.getStringArrayList(HIDDEN_ITEMS_KEY);
-			menuItemsOrder = (HashMap<String, Integer>) savedInstanceState.getSerializable(ITEMS_ORDER_KEY);
+			menuItemsOrder = (HashMap<String, Integer>) AndroidUtils.getSerializable(savedInstanceState, ITEMS_ORDER_KEY, HashMap.class);
 			isChanged = savedInstanceState.getBoolean(IS_CHANGED_KEY);
 			if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 				mainActionItems = savedInstanceState.getStringArrayList(MAIN_ACTIONS_ITEMS_KEY);

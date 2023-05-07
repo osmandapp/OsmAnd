@@ -3661,7 +3661,7 @@
     <string name="use_volume_buttons_as_zoom_descr">使用裝置音量按鈕控制地圖縮放等級。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
     <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
-    <string name="quick_action_remove_next_destination">刪除最近的目的地點</string>
+    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
     <string name="please_provide_point_name_error">請提供點的名稱</string>
     <string name="quick_action_remove_next_destination_descr">刪除您路線上的下一個目的地。如果其為您最後的目的地，導航將會中止。</string>
     <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
@@ -5183,4 +5183,6 @@
     <string name="file_already_exists_description">「%1$s」。同名檔案已存在。取代將會覆寫對目前版本的所有變動。</string>
     <string name="file_already_exists">檔案已存在</string>
     <string name="nav_profile_confirm_delete">您確定要刪除「%1$s」嗎？</string>
+    <string name="no_search_results">無結果</string>
+    <string name="search_track_by_name">透過名稱搜尋軌跡</string>
 </resources>
