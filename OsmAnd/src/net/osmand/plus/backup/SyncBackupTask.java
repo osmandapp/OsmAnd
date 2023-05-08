@@ -105,7 +105,8 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	public void uploadLocalItem(@NonNull SettingsItem item) {
-		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.singletonList(item),
+		networkSettingsHelper.exportSettings(
+				BackupHelper.getItemFileName(item), Collections.singletonList(item),
 				Collections.emptyList(), Collections.emptyList(), this);
 	}
 
@@ -226,7 +227,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	private void onSyncFinished(@Nullable String error) {
 		backupHelper.removePrepareBackupListener(this);
-		networkSettingsHelper.syncBackupTasks.remove(key);
+		networkSettingsHelper.unregisterSyncBackupTask(key);
 
 		if (syncListener != null) {
 			syncListener.onBackupSyncFinished(error);
@@ -273,6 +274,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	}
 
 	public interface OnBackupSyncListener {
+
+		default void onBackupSyncTasksUpdated() {
+
+		}
 
 		default void onBackupSyncStarted() {
 

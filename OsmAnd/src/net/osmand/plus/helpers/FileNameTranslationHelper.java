@@ -14,7 +14,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.plugins.weather.WeatherUtils;
 
 import org.apache.commons.logging.Log;
 

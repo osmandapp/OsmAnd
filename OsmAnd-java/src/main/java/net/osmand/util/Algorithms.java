@@ -1306,6 +1306,11 @@ public class Algorithms {
 		return stringPalette.toString();
 	}
 
+	public static boolean isUrl(String value) {
+		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};
+		return startsWithAny(value, urlPrefixes);
+	}
+
 	public static <T> List<WeakReference<T>> updateWeakReferencesList(List<WeakReference<T>> list, T item, boolean isNew) {
 		List<WeakReference<T>> copy = new ArrayList<>(list);
 		Iterator<WeakReference<T>> it = copy.iterator();
