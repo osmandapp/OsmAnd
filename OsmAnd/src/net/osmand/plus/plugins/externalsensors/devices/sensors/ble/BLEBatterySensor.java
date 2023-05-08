@@ -13,7 +13,6 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntHeartRateSensor;
 
 import org.json.JSONException;
 import org.json.JSONObject;

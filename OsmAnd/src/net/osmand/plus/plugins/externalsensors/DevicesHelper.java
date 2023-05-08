@@ -55,7 +55,9 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLETemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -390,6 +392,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	@Override
 	public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
+		for (SensorDataField dataField : data.getDataFields()) {
+			FormattedValue fmtValue = dataField.getFormattedValue(app);
+			if (fmtValue != null) {
+				LOG.debug("onSensorData '" + sensor.getDevice().getName() + "' <" + sensor.getName() + ">: "
+						+ fmtValue.value + (!Algorithms.isEmpty(fmtValue.unit) ? " " + fmtValue.unit : ""));
+			}
+		}
 	}
 
 	public boolean isDevicePaired(@NonNull AbstractDevice<?> device) {

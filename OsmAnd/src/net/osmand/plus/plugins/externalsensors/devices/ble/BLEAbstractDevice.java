@@ -173,6 +173,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				for (BLEAbstractSensor sensor : sensors) {
 					sensor.requestCharacteristic(characteristics);
 				}
+				gatt.readRemoteRssi();
 			} else {
 				LOG.debug("onServicesDiscovered received: " + status);
 			}
@@ -199,6 +200,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
 			super.onReadRemoteRssi(gatt, rssi, status);
 			BLEAbstractDevice.this.rssi = rssi;
+			LOG.debug("'" + getName() + "' <Rssi>: " + rssi);
 		}
 	};
 
