@@ -200,6 +200,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			String title = type.getTitle();
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = type;
 			typeItems.add(item);
 		}
@@ -248,6 +249,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			String title = vehicle.getTitle(app);
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = vehicle;
 			vehicleItems.add(item);
 		}
@@ -350,6 +352,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			String title = location.getName();
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = location;
 			locationItems.add(item);
 		}

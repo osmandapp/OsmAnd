@@ -187,6 +187,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			String title = type.getTitle();
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = type;
 			if (type.isCustom()) {
 				item.titleColor = activeColor;
