@@ -1618,7 +1618,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
-			PointI touchLocation31 = new PointI(firstTouchLocationX, firstTouchLocationY);
+			PointI touchLocation31 = mapRenderer.getTarget();
 			float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
 			firstTouchLocationX = touchLocation31.getX();
 			firstTouchLocationY = touchLocation31.getY();
@@ -1630,7 +1630,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			PointI touchPosition = new PointI((int) touchPointX, (int) touchPointY);
-			PointI touchLocation31 = new PointI(secondTouchLocationX, secondTouchLocationY);
+			PointI touchLocation31 = mapRenderer.getTarget();
 			float height = mapRenderer.getHeightAndLocationFromElevatedPoint(touchPosition, touchLocation31);
 			secondTouchLocationX = touchLocation31.getX();
 			secondTouchLocationY = touchLocation31.getY();
