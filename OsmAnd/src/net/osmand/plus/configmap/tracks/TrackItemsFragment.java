@@ -85,7 +85,9 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 
 	@Override
 	public void updateContent() {
-		adapter.notifyDataSetChanged();
+		TracksFragment fragment = (TracksFragment) requireParentFragment();
+		SelectedTracksHelper selectedTrackHelper = fragment.getSelectedTracksHelper();
+		adapter.setTrackTab(selectedTrackHelper.getTrackTabs().get(trackTab.getTypeName()));
 	}
 
 	@Override

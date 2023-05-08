@@ -8,7 +8,6 @@ import net.osmand.plus.base.dialog.uidata.DialogDisplayData;
 import net.osmand.plus.base.dialog.uidata.DialogDisplayItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.UiUtilities;
 

@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
