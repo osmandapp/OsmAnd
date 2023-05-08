@@ -229,7 +229,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				return false;
 			}
 
-			bluetoothGatt = device.connectGatt(context, false, gattCallback, BluetoothDevice.TRANSPORT_LE);
+			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
 			LOG.debug("Trying to create new connection");
 			state = DeviceConnectionState.CONNECTING;
 		}
