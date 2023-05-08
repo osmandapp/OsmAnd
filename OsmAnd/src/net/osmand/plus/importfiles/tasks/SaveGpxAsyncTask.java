@@ -41,6 +41,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
+	private boolean isTrackSelected = false;
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,
@@ -89,6 +90,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 				if (overwrite) {
 					app.getGpxDbHelper().remove(toWrite);
 					if (selected != null) {
+						isTrackSelected = true;
 						GpxSelectionParams params = GpxSelectionParams.newInstance()
 								.hideFromMap().syncGroup().saveSelection();
 						helper.selectGpxFile(selected.getGpxFile(), params);
@@ -140,7 +142,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 					: Collections.singletonList(warning);
 			listener.onGpxSavingFinished(warnings);
 		}
-		if (file != null) {
+		if (isTrackSelected && file != null) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			GpxFileLoaderTask.loadGpxFile(file, app.getOsmandMap().getMapView().getMapActivity(), gpxFile -> {
 				GpxSelectionParams selectionParams = GpxSelectionParams.newInstance()
