@@ -2892,8 +2892,8 @@
     <string name="rendering_attr_undefined_name">未定義</string>
     <string name="use_osm_live_public_transport_description">為 OsmAnd Live 變更啟用大眾運輸。</string>
     <string name="use_osm_live_public_transport">OsmAnd Live 大眾運輸</string>
-    <string name="routing_attr_avoid_sett_name">避免鵝卵石或枕木</string>
-    <string name="routing_attr_avoid_sett_description">避免鵝卵石或枕木</string>
+    <string name="routing_attr_avoid_sett_name">避免枕木</string>
+    <string name="routing_attr_avoid_sett_description">避免枕木</string>
     <string name="files_moved">已移動 %1$d 個檔案 (%2$s)。</string>
     <string name="files_copied">已複製 %1$d 個檔案 (%2$s)。</string>
     <string name="files_failed">無法複製 %1$d 檔案 (%2$s)。</string>
@@ -5185,4 +5185,5 @@
     <string name="nav_profile_confirm_delete">您確定要刪除「%1$s」嗎？</string>
     <string name="no_search_results">無結果</string>
     <string name="search_track_by_name">透過名稱搜尋軌跡</string>
+    <string name="number_of_tracks">%1$s 個軌跡</string>
 </resources>
