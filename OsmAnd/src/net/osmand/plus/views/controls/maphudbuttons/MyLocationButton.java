@@ -19,7 +19,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 
 public class MyLocationButton extends MapButton {
 
-	private final OsmandMapTileView mapView;
 	private final boolean contextMenuAllowed;
 
 	private final OnClickListener backToLocationListener = v -> moveBackToLocation(false);
@@ -28,7 +27,6 @@ public class MyLocationButton extends MapButton {
 	public MyLocationButton(@NonNull MapActivity mapActivity, @NonNull ImageView view, @NonNull String id, boolean contextMenuAllowed) {
 		super(mapActivity, view, id);
 		this.contextMenuAllowed = contextMenuAllowed;
-		this.mapView = mapActivity.getMapView();
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setBackground(R.drawable.btn_circle_blue);
 	}
@@ -60,7 +58,6 @@ public class MyLocationButton extends MapButton {
 	protected void updateState(boolean nightMode) {
 		boolean hasLocation = app.getLocationProvider().getLastKnownLocation() != null;
 		boolean linkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		float elevationAngle = mapView.getElevationAngle();
 
 		if (app.accessibilityEnabled()) {
 			boolean visible = view.getVisibility() == View.VISIBLE;

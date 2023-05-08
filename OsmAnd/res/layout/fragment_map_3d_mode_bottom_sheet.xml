@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -29,17 +29,13 @@
 
 	</LinearLayout>
 
-	<include
-		android:id="@+id/always_visible_mode"
-		layout="@layout/compass_visibility_item" />
+	<LinearLayout
+		android:id="@+id/items_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
 
-	<include
-		android:id="@+id/always_hidden_mode"
-		layout="@layout/compass_visibility_item" />
-
-	<include
-		android:id="@+id/visible_in_3d_mode"
-		layout="@layout/compass_visibility_item" />
+	</LinearLayout>
 
 	<View
 		android:layout_width="match_parent"
@@ -72,4 +68,4 @@
 
 	</LinearLayout>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

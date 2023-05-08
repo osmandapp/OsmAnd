@@ -12,7 +12,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.controls.maphudbuttons.Map3DButton;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
@@ -27,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_3D_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
@@ -38,7 +36,6 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 	private static final String ZOOM_IN_BUTTON_ID = ZOOM_IN_HUD_ID + TAG;
 	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
 	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
-	private static final String MAP_3D_BUTTON_ID = MAP_3D_HUD_ID + TAG;
 
 	@Nullable
 	private View mapBottomHudButtons;
@@ -125,7 +122,6 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		ImageView zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
 		ImageView zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
 		ImageView myLocButtonView = view.findViewById(R.id.map_my_location_button);
-		ImageView map3DButtonView = view.findViewById(R.id.map_3d_button);
 
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
@@ -133,7 +129,6 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButtonView, ZOOM_IN_BUTTON_ID));
 		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButtonView, ZOOM_OUT_BUTTON_ID));
 		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, myLocButtonView, BACK_TO_LOC_BUTTON_ID, false));
-		mapControlsLayer.addMapButton(new Map3DButton(mapActivity, map3DButtonView, MAP_3D_BUTTON_ID));
 
 		setupMapRulerWidget(view, mapLayers);
 	}

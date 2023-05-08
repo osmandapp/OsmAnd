@@ -100,6 +100,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private List<MapButton> mapButtons = new ArrayList<>();
 	private CompassButton compassButton;
+	private Map3DButton map3DButton;
 
 	private LinearLayout transparencyBarLayout;
 	private Slider transparencySlider;
@@ -143,6 +144,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 			vh = mapActivity.getWidgetsVisibilityHelper();
 			initTopControls();
+			initFabButtons(mapActivity);
 			initTransparencyBar();
 			initZooms();
 			initDashboardRelatedControls();
@@ -175,6 +177,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		compassButton = new CompassButton(mapActivity);
 		mapButtons.add(compassButton);
+	}
+
+	private void initFabButtons(MapActivity mapActivity){
+		ImageView map3DButtonView = mapActivity.findViewById(R.id.map_3d_button);
+		if(map3DButton != null){
+			map3DButton.onDestroyButton();
+		}
+		map3DButton = new Map3DButton(mapActivity, map3DButtonView, MAP_3D_HUD_ID);
+		mapButtons.add(map3DButton);
 	}
 
 	public void setControlsClickable(boolean clickable) {
@@ -218,12 +229,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void initDashboardRelatedControls() {
 		MapActivity mapActivity = requireMapActivity();
 		ImageView backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
-		ImageView map3DButtonView = mapActivity.findViewById(R.id.map_3d_button);
 
 		mapButtons.add(new DrawerMenuButton(mapActivity));
 		mapButtons.add(new NavigationMenuButton(mapActivity));
 		mapButtons.add(new MyLocationButton(mapActivity, backToLocation, BACK_TO_LOC_HUD_ID, true));
-		mapButtons.add(new Map3DButton(mapActivity, map3DButtonView, MAP_3D_HUD_ID));
 
 		zoomText = mapActivity.findViewById(R.id.map_app_mode_text);
 	}
@@ -586,6 +595,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
+		mapButtons.clear();
+		destroyButtons();
+	}
+
+	private void destroyButtons(){
+		for(MapButton button : mapButtons){
+			button.onDestroyButton();
+		}
 		mapButtons.clear();
 	}
 

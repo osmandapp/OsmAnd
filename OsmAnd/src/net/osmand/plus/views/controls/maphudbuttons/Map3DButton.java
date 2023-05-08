@@ -1,11 +1,9 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
+import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.calculateTotalSizePx;
+import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
 import static net.osmand.plus.views.OsmandMapTileView.*;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
-import static net.osmand.plus.views.layers.MapQuickActionLayer.calculateTotalSizePx;
-import static net.osmand.plus.views.layers.MapQuickActionLayer.getActionOnTouchListener;
-import static net.osmand.plus.views.layers.MapQuickActionLayer.setFabButtonMargin;
-import static net.osmand.plus.views.mapwidgets.configure.Map3DModeBottomSheet.*;
 
 import android.content.Context;
 import android.os.Vibrator;
@@ -19,16 +17,21 @@ import androidx.core.util.Pair;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
 
 public class Map3DButton extends MapButton {
+	private final ElevationListener elevationListener;
+	private final AnimateDraggingMapThread animateDraggingMapThread;
+
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
 		super(mapActivity, fabButton, id);
 		OsmandMapTileView mapView = mapActivity.getMapView();
-
-		updateButton(mapView.getElevationAngle() != DEFAULT_ELEVATION_ANGLE);
+		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
+		animateDraggingMapThread = mapView.getAnimatedDraggingThread();
+		updateButton(!isDefaultElevationAngle());
 		setRoundTransparentBackground();
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
 		setMap3DButtonMargin(fabButton);
@@ -38,34 +41,32 @@ public class Map3DButton extends MapButton {
 	}
 
 	private void setElevationListener(OsmandMapTileView mapView) {
-		mapView.addElevationListener(angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE));
+		mapView.addElevationListener(elevationListener);
 	}
 
 	private View.OnClickListener getOnCLickListener(OsmandMapTileView mapView) {
-		AnimateDraggingMapThread animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		return view -> {
-			boolean isDefaultAngle = mapView.getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
-			if (isDefaultAngle) {
-				int zoom = mapView.getZoom();
-				if (zoom < 10) {
-					animateDraggingMapThread.startTilting(55);
-				} else if (zoom < 12) {
-					animateDraggingMapThread.startTilting(50);
-				} else if (zoom < 14) {
-					animateDraggingMapThread.startTilting(45);
-				} else if (zoom < 16) {
-					animateDraggingMapThread.startTilting(40);
-				} else if (zoom < 17) {
-					animateDraggingMapThread.startTilting(35);
-				} else {
-					animateDraggingMapThread.startTilting(30);
-				}
-				mapView.refreshMap();
-			} else {
-				animateDraggingMapThread.startTilting(DEFAULT_ELEVATION_ANGLE);
-				mapView.refreshMap();
-			}
+			animateDraggingMapThread.startTilting(isDefaultElevationAngle()
+					? getElevationAngle(mapView.getZoom())
+					: DEFAULT_ELEVATION_ANGLE);
+			mapView.refreshMap();
 		};
+	}
+
+	private float getElevationAngle(int zoom) {
+		if (zoom < 10) {
+			return 55;
+		} else if (zoom < 12) {
+			return 50;
+		} else if (zoom < 14) {
+			return 45;
+		} else if (zoom < 16) {
+			return 40;
+		} else if (zoom < 17) {
+			return 35;
+		} else {
+			return 30;
+		}
 	}
 
 	private View.OnLongClickListener getLongClickListener(ImageView fabButton) {
@@ -75,17 +76,7 @@ public class Map3DButton extends MapButton {
 			view.setScaleX(1.5f);
 			view.setScaleY(1.5f);
 			view.setAlpha(0.95f);
-			view.setOnTouchListener(getActionOnTouchListener(app, mapActivity, fabButton, new MapQuickActionLayer.SetFabMarginCallback() {
-				@Override
-				public void onSetPortraitMargin(int rightMargin, int bottomMargin) {
-					app.getSettings().setPortraitFab3DModeMargin(rightMargin, bottomMargin);
-				}
-
-				@Override
-				public void onSetLandscapeMargin(int rightMargin, int bottomMargin) {
-					app.getSettings().setLandscapeFab3DModeMargin(rightMargin, bottomMargin);
-				}
-			}));
+			view.setOnTouchListener(settings.MAP_3D_MODE_FAB_MARGIN.getMoveFabOnTouchListener(app, mapActivity, fabButton));
 			return true;
 		};
 	}
@@ -100,11 +91,13 @@ public class Map3DButton extends MapButton {
 			int defMarginPortrait = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing);
 			int defMarginLandscape = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land);
 			FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) fabButton.getLayoutParams();
+			FabMarginPreference preference = settings.MAP_3D_MODE_FAB_MARGIN;
+
 			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				Pair<Integer, Integer> fabMargin = settings.getPortraitMap3DModeFabMargin();
+				Pair<Integer, Integer> fabMargin = preference.getPortraitFabMargin();
 				setFabButtonMargin(mapActivity, fabButton, param, fabMargin, defMarginPortrait, defMarginPortrait);
 			} else {
-				Pair<Integer, Integer> fabMargin = settings.getLandscapeMap3DModeFabMargin();
+				Pair<Integer, Integer> fabMargin = preference.getLandscapeFabMargin();
 				setFabButtonMargin(mapActivity, fabButton, param, fabMargin, defMarginLandscape, defMarginLandscape);
 			}
 		}
@@ -112,8 +105,17 @@ public class Map3DButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		return app.getSettings().MAP_3D_MODE_VISIBILITY.get() == Map3DModeVisibility.VISIBLE
-				|| (app.getSettings().MAP_3D_MODE_VISIBILITY.get() == Map3DModeVisibility.VISIBLE_IN_3D_MODE
-				&& app.getOsmandMap().getMapView().getElevationAngle() != DEFAULT_ELEVATION_ANGLE);
+		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.get();
+		return visibility == Map3DModeVisibility.VISIBLE
+				|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE
+				&& !isDefaultElevationAngle());
+	}
+
+	private boolean isDefaultElevationAngle() {
+		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
+	}
+
+	public void onDestroyButton(){
+		mapActivity.getMapView().removeElevationListener(elevationListener);
 	}
 }

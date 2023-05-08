@@ -77,6 +77,7 @@ import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.backend.preferences.FloatPreference;
 import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -95,16 +96,17 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.views.controls.FabMarginSettings;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
-import net.osmand.plus.views.mapwidgets.configure.Map3DModeBottomSheet.Map3DModeVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -684,6 +686,14 @@ public class OsmandSettings {
 
 	public void removeFromGlobalPreferences(@NonNull String... prefIds) {
 		SettingsEditor editor = settingsAPI.edit(globalPreferences);
+		for (String prefId : prefIds) {
+			editor.remove(prefId);
+		}
+		editor.commit();
+	}
+
+	public void removeFromProfilePreferences(@NonNull String... prefIds) {
+		SettingsEditor editor = settingsAPI.edit(profilePreferences);
 		for (String prefId : prefIds) {
 			editor.remove(prefId);
 		}
@@ -2631,9 +2641,13 @@ public class OsmandSettings {
 	 * quick actions prefs
 	 */
 
+	@Deprecated
 	public static final String QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN = "quick_fab_margin_x_portrait_margin";
+	@Deprecated
 	public static final String QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN = "quick_fab_margin_y_portrait_margin";
+	@Deprecated
 	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
+	@Deprecated
 	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
 
 	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference(this, "quick_action_state", false).makeProfile();
@@ -2641,33 +2655,40 @@ public class OsmandSettings {
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference(this, "quick_action_list", "").makeGlobal().storeLastModifiedTime();
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
+	public final FabMarginPreference QUICK_ACTION_FAB_MARGIN = (FabMarginPreference) new FabMarginPreference(this, "quick_action_margin", new FabMarginSettings()) {
+		@Nullable
+		@Override
+		public Pair<Integer, Integer> getPortraitFabMargin() {
+			if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.isSet() && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.isSet()) {
+				if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get() != 0 && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get() != 0) {
+					setPortraitFabMargin(QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get(), QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get());
+				}
+				removeFromProfilePreferences(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN);
+			}
+			return get().getPortraitFabMargin();
+		}
 
+		@Nullable
+		@Override
+		public Pair<Integer, Integer> getLandscapeFabMargin() {
+			if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
+				if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get() != 0 && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get() != 0) {
+					setLandscapeFabMargin(QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
+				}
+				removeFromProfilePreferences(QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN);
+			}
+			return get().getLandscapeFabMargin();
+		}
+	}.makeProfile();
+
+	@Deprecated
 	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_PORTRAIT = new IntPreference(this, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, 0).makeProfile();
+	@Deprecated
 	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT = new IntPreference(this, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0).makeProfile();
+	@Deprecated
 	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN = new IntPreference(this, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0).makeProfile();
+	@Deprecated
 	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN = new IntPreference(this, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0).makeProfile();
-
-	public boolean setPortraitFabMargin(int x, int y) {
-		return QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.set(x) && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.set(y);
-	}
-
-	public boolean setLandscapeFabMargin(int x, int y) {
-		return QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.set(x) && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.set(y);
-	}
-
-	public Pair<Integer, Integer> getPortraitFabMargin() {
-		if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.isSet() && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.isSet()) {
-			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get(), QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get());
-		}
-		return null;
-	}
-
-	public Pair<Integer, Integer> getLandscapeFabMargin() {
-		if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
-			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
-		}
-		return null;
-	}
 
 	/**
 	 * map 3d mode
@@ -2675,37 +2696,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE_IN_3D_MODE, Map3DModeVisibility.values()).makeProfile().cache();
 
-	public static final String MAP_3D_FAB_MARGIN_X_PORTRAIT_MARGIN = "map_3d_fab_margin_x_portrait_margin";
-	public static final String MAP_3D_FAB_MARGIN_Y_PORTRAIT_MARGIN = "map_3d_fab_margin_y_portrait_margin";
-	public static final String MAP_3D_FAB_MARGIN_X_LANDSCAPE_MARGIN = "map_3d_fab_margin_x_landscape_margin";
-	public static final String MAP_3D_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "map_3d_fab_margin_y_landscape_margin";
-
-	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT = new IntPreference(this, MAP_3D_FAB_MARGIN_X_PORTRAIT_MARGIN, 0).makeProfile();
-	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT = new IntPreference(this, MAP_3D_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0).makeProfile();
-	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN = new IntPreference(this, MAP_3D_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0).makeProfile();
-	private final CommonPreference<Integer> MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN = new IntPreference(this, MAP_3D_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0).makeProfile();
-
-	public boolean setPortraitFab3DModeMargin(int x, int y) {
-		return MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT.set(x) && MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT.set(y);
-	}
-
-	public boolean setLandscapeFab3DModeMargin(int x, int y) {
-		return MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN.set(x) && MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN.set(y);
-	}
-
-	public Pair<Integer, Integer> getPortraitMap3DModeFabMargin() {
-		if (MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT.isSet() && MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT.isSet()) {
-			return new Pair<>(MAP_3D_MODE_FAB_MARGIN_X_PORTRAIT.get(), MAP_3D_MODE_FAB_MARGIN_Y_PORTRAIT.get());
-		}
-		return null;
-	}
-
-	public Pair<Integer, Integer> getLandscapeMap3DModeFabMargin() {
-		if (MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
-			return new Pair<>(MAP_3D_MODE_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), MAP_3D_MODE_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
-		}
-		return null;
-	}
+	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = (FabMarginPreference) new FabMarginPreference(this, "map_3d_mode_margin", new FabMarginSettings()).makeProfile();
 
 	/**
 	 * the location of a parked car
