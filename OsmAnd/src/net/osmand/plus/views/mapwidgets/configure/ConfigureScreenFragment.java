@@ -259,7 +259,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				.setTitle(getString(R.string.map_widget_transparent))
 				.setIconId(R.drawable.ic_action_appearance)
 				.setEnabled(settings.TRANSPARENT_MAP_THEME.getModeValue(selectedAppMode))
-				.showShortDivider(false)
 				.showSwitch(true, view -> {
 					boolean enabled = settings.TRANSPARENT_MAP_THEME.get();
 					settings.TRANSPARENT_MAP_THEME.setModeValue(selectedAppMode, !enabled);

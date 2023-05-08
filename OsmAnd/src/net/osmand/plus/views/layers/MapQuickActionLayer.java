@@ -179,7 +179,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
             FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) quickActionButton.getLayoutParams();
             FabMarginPreference preference = settings.QUICK_ACTION_FAB_MARGIN;
             if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-
                 Pair<Integer, Integer> fabMargin = preference.getPortraitFabMargin();
                 setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, 0, defBottomMargin);
             } else {
