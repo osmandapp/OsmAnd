@@ -403,8 +403,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		for (SensorDataField dataField : data.getDataFields()) {
 			FormattedValue fmtValue = dataField.getFormattedValue(app);
 			if (fmtValue != null) {
-				//LOG.debug("onSensorData '" + sensor.getDevice().getName() + "' <" + sensor.getName() + ">: "
-				//		+ fmtValue.value + (!Algorithms.isEmpty(fmtValue.unit) ? " " + fmtValue.unit : ""));
+				LOG.debug("onSensorData '" + sensor.getDevice().getName() + "' <" + sensor.getName() + ">: "
+						+ fmtValue.value + (!Algorithms.isEmpty(fmtValue.unit) ? " " + fmtValue.unit : ""));
 			}
 		}
 	}

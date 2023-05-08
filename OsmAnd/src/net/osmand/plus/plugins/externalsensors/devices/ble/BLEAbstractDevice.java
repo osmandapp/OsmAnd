@@ -12,14 +12,18 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionState;
@@ -33,7 +37,9 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Queue;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor> {
 
@@ -42,6 +48,11 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
 	protected BluetoothGatt bluetoothGatt;
+
+	private final Handler callbackHandler = new Handler();
+	private final Handler mainHandler = new Handler(Looper.getMainLooper());
+	private final Queue<Runnable> commandQueue = new ConcurrentLinkedQueue<>();
+	private boolean commandQueueBusy;
 
 	public BLEAbstractDevice(@NonNull BluetoothAdapter bluetoothAdapter, @NonNull String deviceId) {
 		super(deviceId);
@@ -173,7 +184,11 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 				for (BLEAbstractSensor sensor : sensors) {
 					sensor.requestCharacteristic(characteristics);
 				}
-				gatt.readRemoteRssi();
+				enqueueCommand(() -> {
+					if (!gatt.readRemoteRssi()) {
+						completedCommand();
+					}
+				});
 			} else {
 				LOG.debug("onServicesDiscovered received: " + status);
 			}
@@ -183,17 +198,27 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		public void onCharacteristicRead(BluetoothGatt gatt,
 		                                 BluetoothGattCharacteristic characteristic,
 		                                 int status) {
-			for (BLEAbstractSensor sensor : sensors) {
-				sensor.onCharacteristicRead(gatt, characteristic, status);
+			if (status != GATT_SUCCESS) {
+				LOG.error("ERROR: Read failed for characteristic: " + characteristic.getUuid() + ", status " + status);
+				completedCommand();
+				return;
 			}
+			callbackHandler.post(() -> {
+				for (BLEAbstractSensor sensor : sensors) {
+					sensor.onCharacteristicRead(gatt, characteristic, status);
+				}
+			});
+			completedCommand();
 		}
 
 		@Override
 		public void onCharacteristicChanged(BluetoothGatt gatt,
 		                                    BluetoothGattCharacteristic characteristic) {
-			for (BLEAbstractSensor sensor : sensors) {
-				sensor.onCharacteristicChanged(gatt, characteristic);
-			}
+			callbackHandler.post(() -> {
+				for (BLEAbstractSensor sensor : sensors) {
+					sensor.onCharacteristicChanged(gatt, characteristic);
+				}
+			});
 		}
 
 		@Override
@@ -201,6 +226,13 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			super.onReadRemoteRssi(gatt, rssi, status);
 			BLEAbstractDevice.this.rssi = rssi;
 			LOG.debug("'" + getName() + "' <Rssi>: " + rssi);
+			completedCommand();
+		}
+
+		@Override
+		public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
+			super.onDescriptorWrite(gatt, descriptor, status);
+			completedCommand();
 		}
 	};
 
@@ -254,5 +286,88 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			batteryLevel = ((BLEBatterySensor.BatteryData) data).getBatteryLevel();
 		}
 		super.fireSensorDataEvent(sensor, data);
+	}
+
+	@SuppressLint("MissingPermission")
+	public void readCharacteristic(@NonNull BluetoothGattCharacteristic characteristic) {
+		if (bluetoothAdapter == null || bluetoothGatt == null) {
+			return;
+		}
+		enqueueCommand(() -> {
+			if (!bluetoothGatt.readCharacteristic(characteristic)) {
+				LOG.error("Device readCharacteristic failed " + getName());
+				completedCommand();
+			}
+		});
+	}
+
+	@SuppressLint("MissingPermission")
+	public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
+	                                          boolean enabled) {
+		if (bluetoothAdapter == null || bluetoothGatt == null) {
+			return;
+		}
+		boolean res = bluetoothGatt.setCharacteristicNotification(characteristic, enabled);
+		if (!res) {
+			LOG.error("Device setCharacteristicNotification failed " + getName());
+		}
+
+		BluetoothGattDescriptor descriptor =
+				characteristic.getDescriptor(GattAttributes.UUID_CHARACTERISTIC_CLIENT_CONFIG);
+		descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+		enqueueCommand(() -> {
+			if (!bluetoothGatt.writeDescriptor(descriptor)) {
+				LOG.error("Device writeDescriptor failed " + getName());
+				completedCommand();
+			}
+		});
+	}
+
+	private boolean enqueueCommand(@NonNull Runnable command) {
+		final boolean result = commandQueue.add(command);
+		if (result) {
+			nextCommand();
+		} else {
+			LOG.error("Could not enqueue BLE command");
+		}
+		return result;
+	}
+
+	private void nextCommand() {
+		// If there is still a command being executed then bail out
+		if (commandQueueBusy) {
+			return;
+		}
+
+		// Check if we still have a valid gatt object
+		if (bluetoothGatt == null) {
+			LOG.error("ERROR: GATT is 'null' for peripheral '" + getDeviceId() + "', clearing command queue");
+			commandQueue.clear();
+			commandQueueBusy = false;
+			return;
+		}
+
+		// Execute the next command in the queue
+		if (commandQueue.size() > 0) {
+			final Runnable bluetoothCommand = commandQueue.peek();
+			if (bluetoothCommand == null) {
+				return;
+			}
+			commandQueueBusy = true;
+
+			mainHandler.post((Runnable) () -> {
+				try {
+					bluetoothCommand.run();
+				} catch (Exception ex) {
+					LOG.error("ERROR: Command exception for device '" + getName() + "'", ex);
+				}
+			});
+		}
+	}
+
+	private void completedCommand() {
+		commandQueueBusy = false;
+		commandQueue.poll();
+		nextCommand();
 	}
 }
