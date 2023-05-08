@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.ant;
 
+import static com.dsi.ant.plugins.antplus.pcc.defines.RequestAccessResult.SUCCESS;
+
 import android.app.Activity;
 import android.content.Context;
 
@@ -29,7 +31,7 @@ public class AntBikeSpeedCadenceDevice extends AntAbstractDevice<AntPlusBikeCade
 		@Override
 		public void onResultReceived(AntPlusBikeCadencePcc result, RequestAccessResult resultCode, DeviceState initialDeviceState) {
 			super.onResultReceived(result, resultCode, initialDeviceState);
-			if (pcc != null) {
+			if (resultCode == SUCCESS && pcc != null) {
 				if (pcc.isSpeedAndCadenceCombinedSensor()) {
 					spdDistDevice = new AntBikeSpeedDistanceDevice(String.valueOf(deviceNumber));
 					spdDistDevice.combined = true;

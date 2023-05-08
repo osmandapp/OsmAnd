@@ -250,6 +250,20 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		devicesHelper.dropUnpairedDevices();
 	}
 
+	public void connectDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
+		if (isDevicePaired(device)) {
+			devicesHelper.setDeviceEnabled(device, true);
+		}
+		device.connect(app, activity);
+	}
+
+	public void disconnectDevice(@NonNull AbstractDevice<?> device) {
+		if (isDevicePaired(device)) {
+			devicesHelper.setDeviceEnabled(device, false);
+		}
+		device.disconnect();
+	}
+
 	@Nullable
 	public String getDeviceName(@NonNull AbstractDevice<?> device) {
 		String sensorName = devicesHelper.getDeviceName(device);

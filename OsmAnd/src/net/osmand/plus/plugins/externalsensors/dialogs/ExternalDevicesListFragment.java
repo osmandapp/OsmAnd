@@ -216,12 +216,12 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 
 	@Override
 	public void onDisconnect(@NonNull AbstractDevice<?> device) {
-		device.disconnect();
+		plugin.disconnectDevice(device);
 	}
 
 	@Override
 	public void onConnect(@NonNull AbstractDevice<?> device) {
-		device.connect(app, getActivity());
+		plugin.connectDevice(getActivity(), device);
 	}
 
 	@Override

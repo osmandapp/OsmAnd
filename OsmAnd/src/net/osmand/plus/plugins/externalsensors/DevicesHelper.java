@@ -66,6 +66,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DevicesHelper implements DeviceListener, DevicePreferencesListener {
@@ -78,6 +79,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public final static String MATCH_NUM_PREFERENCE = "MATCH_NUM";
 
 	private static final Log LOG = PlatformUtil.getLog(DevicesHelper.class);
+
+	private final static List<UUID> SUPPORTED_BLE_SERVICE_UUIDS = Arrays.asList(
+			BLEBikeSCDDevice.getServiceUUID(),
+			BLEBPICPDevice.getServiceUUID(),
+			BLEHeartRateDevice.getServiceUUID(),
+			BLERunningSCDDevice.getServiceUUID(),
+			BLETemperatureDevice.getServiceUUID());
 
 	private final OsmandApplication app;
 	private final DevicesSettings devicesSettings;
@@ -99,6 +107,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	void setActivity(@Nullable Activity activity) {
 		if (this.activity != null) {
+			dropUnpairedDevices();
 			deinitBLE();
 			devicesSettings.removeListener(this);
 		}
@@ -230,8 +239,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 		if (uuids != null) {
 			for (ParcelUuid uuid : uuids) {
-				// TODO: should be based on ble sensors classes
-				if (GattAttributes.SUPPORTED_CHARACTERISTICS.contains(uuid.getUuid())) {
+				if (SUPPORTED_BLE_SERVICE_UUIDS.contains(uuid.getUuid())) {
 					return true;
 				}
 			}
@@ -395,8 +403,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		for (SensorDataField dataField : data.getDataFields()) {
 			FormattedValue fmtValue = dataField.getFormattedValue(app);
 			if (fmtValue != null) {
-				LOG.debug("onSensorData '" + sensor.getDevice().getName() + "' <" + sensor.getName() + ">: "
-						+ fmtValue.value + (!Algorithms.isEmpty(fmtValue.unit) ? " " + fmtValue.unit : ""));
+				//LOG.debug("onSensorData '" + sensor.getDevice().getName() + "' <" + sensor.getName() + ">: "
+				//		+ fmtValue.value + (!Algorithms.isEmpty(fmtValue.unit) ? " " + fmtValue.unit : ""));
 			}
 		}
 	}
@@ -512,7 +520,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			antScanning = true;
 		} else {
 			for (AntAbstractDevice<?> device : antSearchableDevices) {
-				if (!device.isSearchDone()) {
+				if (!device.isSearchDone() || devices.containsKey(device.getDeviceId())) {
 					device.disconnect();
 					device.removeListener(this);
 				}

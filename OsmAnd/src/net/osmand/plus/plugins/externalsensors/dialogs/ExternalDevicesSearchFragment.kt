@@ -190,8 +190,8 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
         }
     }
 
-    override fun dismiss() {
-        super.dismiss()
+    override fun onDestroy() {
+        super.onDestroy()
         plugin.dropUnpairedDevices()
     }
 
