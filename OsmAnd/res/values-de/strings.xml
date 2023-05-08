@@ -3678,7 +3678,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Steuern Sie die Zoomstufen der Karte mit den Lautstärketasten des Geräts.</string>
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
     <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge können einige Streckenabschnitte nicht befahrbar sein.</string>
-    <string name="quick_action_remove_next_destination">Nächstgelegenen Zielpunkt löschen</string>
+    <string name="quick_action_remove_next_destination">Nächsten Zielpunkt löschen</string>
     <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für den Favoriten an</string>
     <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das endgültige Ziel ist, wird die Navigation gestoppt.</string>
     <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
@@ -5195,4 +5195,6 @@
     <string name="file_already_exists">Datei existiert bereits</string>
     <string name="nav_profile_confirm_delete">Sind Sie sicher, dass Sie »%1$s« löschen möchten\?</string>
     <string name="is_imported">%1$s ist importiert.</string>
+    <string name="no_search_results">Keine Ergebnisse</string>
+    <string name="search_track_by_name">Track nach Namen suchen</string>
 </resources>

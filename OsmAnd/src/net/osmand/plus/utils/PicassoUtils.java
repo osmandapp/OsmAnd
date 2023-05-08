@@ -22,9 +22,6 @@ import java.util.Map;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
-
 public class PicassoUtils {
 	private static final Log LOG = PlatformUtil.getLog(PicassoUtils.class);
 

@@ -59,15 +59,4 @@
     <string name="osm_oauth_developer_secret">jDvM95Ne1Bq2BDTmIfB6b3ZMxvdK87WGfp6DC07J</string>
     <string name="osm_oauth_consumer_key">Ti2qq3fo4i4Wmuox3SiWRIGq3obZisBHnxmcM05y</string>
     <string name="osm_oauth_consumer_secret">lxulb3HYoMmd2cC4xxNe1dyfRMAY8dS0eNihJ0DM</string>
-
-    <string-array name="heart_rate_body_parts">
-        <item>Other</item>
-        <item>Chest</item>
-        <item>Wrist</item>
-        <item>Finger</item>
-        <item>Hand</item>
-        <item>Ear lobe</item>
-        <item>Foot</item>
-    </string-array>
-
 </resources>

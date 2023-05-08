@@ -3,8 +3,6 @@ package net.osmand.aidl.contextmenu;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import net.osmand.aidl.mapwidget.AMapWidget;
-
 public class UpdateContextMenuButtonsParams implements Parcelable {
 	private ContextMenuButtonsParams buttonsParams;
 

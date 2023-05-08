@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -80,7 +81,7 @@ public class PointDescription {
 			this.name = "";
 		}
 	}
-	
+
 	public PointDescription(String type, String typeName, String name) {
 		this.type = type;
 		this.name = name;
@@ -89,8 +90,8 @@ public class PointDescription {
 			this.name = "";
 		}
 	}
-	
-	public void setTypeName(String typeName){
+
+	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
 
@@ -137,7 +138,7 @@ public class PointDescription {
 		}
 		return name;
 	}
-	
+
 	public String getFullPlainName(Context ctx) {
 		if (isLocation()) {
 			return getLocationName(ctx, lat, lon, false);
@@ -175,7 +176,7 @@ public class PointDescription {
 		String latLonDeg;
 		String latLonMin;
 		String latLonSec;
-		
+
 		String utm = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.UTM_FORMAT);
 		String olc = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.OLC_FORMAT);
 		String mgrs = OsmAndFormatter.getFormattedCoordinates(lat, lon, OsmAndFormatter.MGRS_FORMAT);
@@ -256,15 +257,15 @@ public class PointDescription {
 	public boolean isLocation() {
 		return POINT_TYPE_LOCATION.equals(type);
 	}
-	
+
 	public boolean isAddress() {
 		return POINT_TYPE_ADDRESS.equals(type);
 	}
-	
+
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
 	}
-	
+
 	public boolean isPoi() {
 		return POINT_TYPE_POI.equals(type);
 	}
@@ -346,8 +347,8 @@ public class PointDescription {
 				&& Algorithms.objectEquals(other.lon, lon)
 				&& Algorithms.objectEquals(other.typeName, typeName);
 	}
-	
-	
+
+
 	public static String getSimpleName(LocationPoint o, Context ctx) {
 		PointDescription pd = o.getPointDescription(ctx);
 		return pd.getSimpleName(ctx, true);
@@ -414,7 +415,7 @@ public class PointDescription {
 		}
 		return pd;
 	}
-	
+
 	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
 	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
@@ -447,4 +448,28 @@ public class PointDescription {
 		}
 	}
 
+	@DrawableRes
+	public int getItemIcon() {
+		if (isAddress()) {
+			return R.drawable.ic_action_street_name;
+		} else if (isFavorite()) {
+			return R.drawable.ic_action_favorite;
+		} else if (isLocation()) {
+			return R.drawable.ic_action_marker_dark;
+		} else if (isPoi()) {
+			return R.drawable.ic_action_info_dark;
+		} else if (isGpxFile() || isGpxPoint()) {
+			return R.drawable.ic_action_polygom_dark;
+		} else if (isWpt()) {
+			return R.drawable.ic_action_flag_stroke;
+		} else if (isAudioNote()) {
+			return R.drawable.ic_type_audio;
+		} else if (isVideoNote()) {
+			return R.drawable.ic_type_video;
+		} else if (isPhotoNote()) {
+			return R.drawable.ic_type_img;
+		} else {
+			return R.drawable.ic_action_street_name;
+		}
+	}
 }
