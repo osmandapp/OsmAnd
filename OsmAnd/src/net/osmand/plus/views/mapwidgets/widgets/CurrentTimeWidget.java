@@ -2,8 +2,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
 
-import android.text.format.DateFormat;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 

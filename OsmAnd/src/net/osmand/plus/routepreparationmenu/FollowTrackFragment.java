@@ -27,9 +27,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
@@ -51,7 +51,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-import net.osmand.plus.widgets.popup.PopUpMenuHelper;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import org.apache.commons.logging.Log;
@@ -443,16 +444,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (requestCode == ImportHelper.IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				importHelper.setGpxImportCompleteListener(new OnGpxImportCompleteListener() {
+				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile result) {
+					public void onSaveComplete(boolean success, GPXFile gpxFile) {
 						if (success) {
-							selectTrackToFollow(result, true);
+							selectTrackToFollow(gpxFile, true);
 							updateSelectionMode(false);
 						} else {
 							app.showShortToastMessage(app.getString(R.string.error_occurred_loading_gpx));
 						}
-						importHelper.setGpxImportCompleteListener(null);
+						importHelper.setGpxImportListener(null);
 					}
 				});
 				importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, true);
@@ -515,7 +516,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						.create()
 				);
 			}
-			new PopUpMenuHelper.Builder(v, items, isNightMode()).show();
+			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+			displayData.anchorView = v;
+			displayData.menuItems = items;
+			displayData.nightMode = isNightMode();
+			PopUpMenu.show(displayData);
 		});
 	}
 

@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.SETTINGS_DIR;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
@@ -24,12 +25,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.core.android.NativeCore;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -53,7 +54,7 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -123,7 +124,7 @@ public class AppInitializer implements IProgress {
 	private final AppVersionUpgradeOnInit appVersionUpgrade;
 
 	private final List<String> warnings = new ArrayList<>();
-	private final List<AppInitializeListener> listeners = new ArrayList<>();
+	private List<AppInitializeListener> listeners = new ArrayList<>();
 
 	private boolean initSettings;
 	private boolean activityChangesShowed;
@@ -289,9 +290,9 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void initPoiTypes() {
-		app.poiTypes.setForbiddenTypes(app.osmandSettings.getForbiddenTypes());
-		if (app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").exists()) {
-			app.poiTypes.init(app.getAppPath(IndexConstants.SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
+		app.poiTypes.setForbiddenTypes(app.settings.getForbiddenTypes());
+		if (app.getAppPath(SETTINGS_DIR + "poi_types.xml").exists()) {
+			app.poiTypes.init(app.getAppPath(SETTINGS_DIR + "poi_types.xml").getAbsolutePath());
 		} else {
 			app.poiTypes.init();
 		}
@@ -324,13 +325,13 @@ public class AppInitializer implements IProgress {
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
 		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
 		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
+		app.gpxDisplayHelper = startupInit(new GpxDisplayHelper(app), GpxDisplayHelper.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
 		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
 		app.feedbackHelper = startupInit(new FeedbackHelper(app), FeedbackHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
-		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
-		app.gpxDisplayHelper = startupInit(new GpxDisplayHelper(app), GpxDisplayHelper.class);
+		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app), GpxSelectionHelper.class);
 		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
@@ -559,7 +560,12 @@ public class AppInitializer implements IProgress {
 			appInitializing = false;
 			notifyFinish();
 			if (!Algorithms.isEmpty(warnings)) {
-				app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
+				String warning = AndroidUtils.formatWarnings(warnings).toString();
+				if (PluginsHelper.isDevelopment()) {
+					app.showToastMessage(warning);
+				} else {
+					LOG.error(warning);
+				}
 			}
 		}
 	}
@@ -590,18 +596,6 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-
-//	private void restoreBackupForFavoritesFiles() {
-//		File appDir = app.getAppPath(null);
-//		File save = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + IndexConstants.GPX_FILE_EXT);
-//		File bak = new File(appDir, FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX + FavouritesFileHelper.BAK_FILE_SUFFIX + IndexConstants.GPX_FILE_EXT);
-//		if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
-//			if (save.exists()) {
-//				save.delete();
-//			}
-//			bak.renameTo(save);
-//		}
-//	}
 
 	private void saveGPXTracks() {
 		if (app.savingTrackHelper.hasDataToSave()) {
@@ -686,11 +680,11 @@ public class AppInitializer implements IProgress {
 				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
 				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
-				if (!initialized) {
-					LOG.info("Native library could not be loaded!");
-				} else {
+				if (initialized) {
 					File ls = app.getAppPath("fonts");
 					lib.loadFontData(ls);
+				} else {
+					LOG.info("Native library could not be loaded!");
 				}
 
 			}
@@ -707,9 +701,8 @@ public class AppInitializer implements IProgress {
 
 	public void notifyFinish() {
 		app.uiHandler.post(() -> {
-			List<AppInitializeListener> listeners = new ArrayList<>(this.listeners);
-			for (AppInitializeListener l : listeners) {
-				l.onFinish(this);
+			for (AppInitializeListener listener : listeners) {
+				listener.onFinish(this);
 			}
 		});
 	}
@@ -721,8 +714,8 @@ public class AppInitializer implements IProgress {
 			startBgTime = time;
 		}
 		app.uiHandler.post(() -> {
-			for (AppInitializeListener l : listeners) {
-				l.onProgress(AppInitializer.this, event);
+			for (AppInitializeListener listener : listeners) {
+				listener.onProgress(this, event);
 			}
 		});
 	}
@@ -785,14 +778,14 @@ public class AppInitializer implements IProgress {
 	}
 
 	public void addListener(@NonNull AppInitializeListener listener) {
-		this.listeners.add(listener);
+		listeners = Algorithms.addToList(listeners, listener);
 		if (!appInitializing) {
 			listener.onFinish(this);
 		}
 	}
 
 	public void removeListener(@NonNull AppInitializeListener listener) {
-		this.listeners.remove(listener);
+		listeners = Algorithms.removeFromList(listeners, listener);
 	}
 
 	@Override

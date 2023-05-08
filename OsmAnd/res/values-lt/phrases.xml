@@ -1743,7 +1743,7 @@
     <string name="poi_government_transportation">Transporto institucija</string>
     <string name="poi_government_ministry">Ministerija</string>
     <string name="poi_government_archive">Archyvas</string>
-    <string name="poi_boat_kayak_rental_rental_no">Baidarės: ne</string>
+    <string name="poi_boat_kayak_rental_no">Baidarės: ne</string>
     <string name="poi_boat_sailboat_rental_no">Burlaiviai: ne</string>
     <string name="poi_boat_jetski_rental_yes">Vandens motociklai: taip</string>
     <string name="poi_boat_pedalboat_rental_no">Vandens dviračiai: ne</string>
@@ -1955,7 +1955,7 @@
     <string name="poi_direction_entrance">Kryptis: įėjimas</string>
     <string name="poi_direction_exit">Kryptis: išvažiavimas</string>
     <string name="poi_boat_sailboat_rental_yes">Burlaiviai: taip</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Kanojos: taip</string>
+    <string name="poi_boat_canoe_rental_yes">Kanojos: taip</string>
     <string name="poi_government_public_service">Viešoji tarnyba</string>
     <string name="poi_government_social_services">Socialinės paslaugos</string>
     <string name="poi_government_treasury">Iždas</string>
@@ -2047,7 +2047,7 @@
     <string name="poi_fair_trade_no">Sąžininga prekyba: ne</string>
     <string name="poi_reservation_members_only">Rezervacija: tik nariams</string>
     <string name="poi_beds">Lovos</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Baidarės: taip</string>
+    <string name="poi_boat_kayak_rental_yes">Baidarės: taip</string>
     <string name="poi_water_place_access_family">Šeimos</string>
     <string name="poi_socket_type1_combo_current">Lizdas: 1 tipo kombinuotas: srovė</string>
     <string name="poi_socket_type1_combo_output">Lizdas: 1 tipo kombinuotas: išvestis</string>
@@ -2209,7 +2209,7 @@
     <string name="poi_health_service_test_no">Sveikatos priežiūros paslauga: tyrimai: ne</string>
     <string name="poi_reservation_required">Rezervacija: būtina</string>
     <string name="poi_boat_houseboat_rental_no">Valtys-nameliai: ne</string>
-    <string name="poi_boat_canoe_rental_rental_no">Kanojos: ne</string>
+    <string name="poi_boat_canoe_rental_no">Kanojos: ne</string>
     <string name="poi_network">Tinklas</string>
     <string name="poi_location_kiosk">Vieta: kioskas</string>
     <string name="poi_location_bridge">Vieta: tiltas</string>

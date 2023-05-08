@@ -27,12 +27,13 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
-import net.osmand.plus.plugins.antplus.AntPlusPlugin;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
@@ -99,7 +100,7 @@ public class PluginsHelper {
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
-		allPlugins.add(new AntPlusPlugin(app));
+		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
@@ -142,7 +143,7 @@ public class PluginsHelper {
 					allPlugins.add(plugin);
 				}
 			} catch (JSONException e) {
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
 	}
@@ -161,7 +162,7 @@ public class PluginsHelper {
 				plugin.writeDependentFilesJson(json);
 				itemsJson.put(json);
 			} catch (JSONException e) {
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
 		String jsonStr = itemsJson.toString();
@@ -171,7 +172,7 @@ public class PluginsHelper {
 	}
 
 	private static void enablePluginsByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins) {
-		for (OsmandPlugin plugin : allPlugins) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			if (plugin.isEnableByDefault()
 					&& !enabledPlugins.contains(plugin.getId())
 					&& !isPluginDisabledManually(app, plugin)) {
@@ -182,7 +183,7 @@ public class PluginsHelper {
 	}
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
-		for (OsmandPlugin plugin : allPlugins) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isEnabled()) {
 				initPlugin(app, plugin);
 			}
@@ -330,62 +331,67 @@ public class PluginsHelper {
 
 	@NonNull
 	public static List<OsmandPlugin> getAvailablePlugins() {
-		return allPlugins;
+		return new ArrayList<>(allPlugins);
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getEnabledPlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isEnabled()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (plugin.isEnabled()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getActivePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isActive()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (plugin.isActive()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getNotActivePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (!p.isActive()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (!plugin.isActive()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<OsmandPlugin> getMarketPlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isMarketPlugin()) {
-				lst.add(p);
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<OsmandPlugin> plugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
+			if (plugin.isMarketPlugin()) {
+				plugins.add(plugin);
 			}
 		}
-		return lst;
+		return plugins;
 	}
 
 	@NonNull
 	public static List<CustomOsmandPlugin> getCustomPlugins() {
-		ArrayList<CustomOsmandPlugin> lst = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin plugin : allPlugins) {
+		List<OsmandPlugin> availablePlugins = getAvailablePlugins();
+		List<CustomOsmandPlugin> customPlugins = new ArrayList<>(availablePlugins.size());
+		for (OsmandPlugin plugin : availablePlugins) {
 			if (plugin instanceof CustomOsmandPlugin) {
-				lst.add((CustomOsmandPlugin) plugin);
+				customPlugins.add((CustomOsmandPlugin) plugin);
 			}
 		}
-		return lst;
+		return customPlugins;
 	}
 
 	@NonNull
@@ -472,6 +478,12 @@ public class PluginsHelper {
 		}
 		for (WorldRegion subregion : region.getSubregions()) {
 			collectIndexItemsFromSubregion(subregion, items);
+		}
+	}
+
+	public static void addPluginIndexItems(@NonNull IndexFileList indexes) {
+		for (OsmandPlugin p : getAvailablePlugins()) {
+			p.addPluginIndexItems(indexes);
 		}
 	}
 
@@ -760,9 +772,9 @@ public class PluginsHelper {
 		return getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
 	}
 
-	public static void addMyPlacesTabPlugins(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
+	public static void addMyPlacesTabPlugins(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
-			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
+			p.addMyPlacesTab(myPlacesActivity, mTabs, intent);
 		}
 	}
 

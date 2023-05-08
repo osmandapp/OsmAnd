@@ -57,9 +57,9 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		if (countryItems.size() == 0) {
-			initCountries(getMyApplication());
+			initCountries(app);
 		}
 
 		View view = inflater.inflate(R.layout.fragment_search_list, container, false);
@@ -94,7 +94,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		ImageButton clearButton = view.findViewById(R.id.clearButton);
-		setThemedDrawable(clearButton, R.drawable.ic_action_remove_dark);
+		clearButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -105,15 +105,15 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Context context = getContext();
 		if (context instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) context;
 		} else if (getParentFragment() instanceof OnFragmentInteractionListener) {
 			mListener = (OnFragmentInteractionListener) getParentFragment();
 		} else {
-			throw new RuntimeException(context
-					+ " must implement OnFragmentInteractionListener");
+			throw new RuntimeException(context + " must implement OnFragmentInteractionListener");
 		}
 	}
 
@@ -162,7 +162,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private static void processGroup(WorldRegion group,
-									 List<WorldRegion> nameList) {
+	                                 List<WorldRegion> nameList) {
 		if (group.isRegionMapDownload()) {
 			nameList.add(group);
 		}
@@ -231,7 +231,7 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 		private final int textColor;
 
 		public ListAdapter(@DrawableRes int drawableLeftId) {
-			super(getMyActivity(), android.R.layout.simple_list_item_1);
+			super(getActivity(), android.R.layout.simple_list_item_1);
 			this.drawableLeft = drawableLeftId == -1 ? null : getContentIcon(drawableLeftId);
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = getActivity().getTheme();

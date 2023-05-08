@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -37,6 +38,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	boolean outdated;
 	boolean downloaded;
 	long localTimestamp;
+	boolean free;
+	String freeMessage;
 
 	public IndexItem(String fileName,
 	                 String description,
@@ -44,11 +47,21 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	                 String size,
 	                 long contentSize,
 	                 long containerSize,
-	                 @NonNull DownloadActivityType type) {
+	                 @NonNull DownloadActivityType type,
+	                 boolean free,
+	                 String freeMessage) {
 		super(type);
 		this.fileName = fileName;
 		this.description = description;
 		this.timestamp = timestamp;
+		this.size = size;
+		this.contentSize = contentSize;
+		this.containerSize = containerSize;
+		this.free = free;
+		this.freeMessage = freeMessage;
+	}
+
+	public void updateSize(@NonNull String size, long contentSize, long containerSize) {
 		this.size = size;
 		this.contentSize = contentSize;
 		this.containerSize = containerSize;
@@ -123,8 +136,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			entry.type = type;
 			entry.baseName = getBasename();
 			entry.urlToDownload = entry.type.getBaseUrl(ctx, fileName) + entry.type.getUrlSuffix(ctx);
-			entry.zipStream = type.isZipStream(ctx, this);
-			entry.unzipFolder = type.isZipFolder(ctx, this);
+			entry.zipStream = type.isZipStream();
+			entry.unzipFolder = type.isZipFolder();
 			entry.dateModified = timestamp; 
 			entry.sizeMB = contentSize / (1024f*1024f);
 			entry.targetFile = getTargetFile(ctx);
@@ -155,8 +168,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 
 	public File getBackupFile(OsmandApplication ctx) {
-		File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), getTargetFile(ctx).getName());
-		return backup;
+		return new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), getTargetFile(ctx).getName());
 	}
 	
 	@Override
@@ -211,6 +223,15 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return localTimestamp;
 	}
 
+	public boolean isFree() {
+		return free;
+	}
+
+	@Nullable
+	public String getFreeMessage() {
+		return freeMessage;
+	}
+
 	public boolean isDownloaded() {
 		return downloaded;
 	}
@@ -232,6 +253,14 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return null;
 	}
+
+	public long getExistingFileSize(@NonNull OsmandApplication ctx) {
+		File file = getTargetFile(ctx);
+		if (file.canRead()) {
+			return file.length();
+		}
+		return 0;
+	}
 	
 	public static class DownloadEntry {
 		public long dateModified;
@@ -249,7 +278,14 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		public String assetName;
 		public DownloadActivityType type;
 
-		public DownloadEntry() {
+		public boolean isWeather;
+		public WorldRegion worldRegion;
+
+		public DownloadEntry() { }
+
+		public DownloadEntry(WorldRegion worldRegion) {
+			this.worldRegion = worldRegion;
+			isWeather = true;
 		}
 		
 		public DownloadEntry(String assetName, String fileName, long dateModified) {

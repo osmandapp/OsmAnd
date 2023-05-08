@@ -23,13 +23,11 @@ import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -48,9 +46,6 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
 		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
-
-	protected OsmandApplication app;
-	protected OsmandSettings settings;
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final Set<Object> selectedItems = new HashSet<>();
@@ -73,9 +68,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		settings = app.getSettings();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = isNightMode(false);
 		updateHistoryItems();
 	}
 
@@ -319,8 +312,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && !locationUpdateStarted) {
+		if (!locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
 			locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
@@ -331,8 +323,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && locationUpdateStarted) {
+		if (locationUpdateStarted) {
 			locationUpdateStarted = false;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
 			locationProvider.removeLocationListener(this);

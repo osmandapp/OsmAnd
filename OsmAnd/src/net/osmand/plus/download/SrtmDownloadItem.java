@@ -1,5 +1,10 @@
 package net.osmand.plus.download;
 
+import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP;
+import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.SRTM_DATA;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -15,11 +20,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP;
-import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.SRTM_DATA;
-import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
 
 public class SrtmDownloadItem extends DownloadItem {
 
@@ -132,6 +132,27 @@ public class SrtmDownloadItem extends DownloadItem {
 	@Override
 	public String getFileName() {
 		return getIndexItem().getFileName();
+	}
+
+	@Override
+	public boolean isFree() {
+		for (IndexItem item : indexes) {
+			if (item.isFree()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String getFreeMessage() {
+		for (IndexItem item : indexes) {
+			String message = item.getFreeMessage();
+			if (message != null) {
+				return message;
+			}
+		}
+		return null;
 	}
 
 	@NonNull

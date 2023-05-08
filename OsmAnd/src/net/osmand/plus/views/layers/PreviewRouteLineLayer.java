@@ -143,7 +143,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		List<Double> distances = new ArrayList<>();
 		List<GeometryWayStyle<?>> styles = new ArrayList<>();
 		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
-				directionArrowsColor, routeColoringType, routeInfoAttribute);
+				true, directionArrowsColor, routeColoringType, routeInfoAttribute);
 		fillPreviewLineArrays(tx, ty, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		previewLineGeometry.drawRouteSegment(tileBox, canvas, null, tx, ty, tx31, ty31, angles, distances, 0, styles);

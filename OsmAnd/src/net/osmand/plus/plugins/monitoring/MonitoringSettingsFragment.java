@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
@@ -28,7 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -316,10 +316,10 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		String prefId = preference.getKey();
 		if (OPEN_TRACKS.equals(prefId)) {
 			Bundle bundle = new Bundle();
-			bundle.putInt(TAB_ID, FavoritesActivity.GPX_TAB);
+			bundle.putInt(TAB_ID, MyPlacesActivity.GPX_TAB);
 
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
-			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
+			Intent favorites = new Intent(preference.getContext(), appCustomization.getMyPlacesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);

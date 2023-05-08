@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 
 public class EditFavoriteDescriptionController extends EditPointDescriptionController {
 

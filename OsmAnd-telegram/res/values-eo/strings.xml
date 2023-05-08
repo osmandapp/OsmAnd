@@ -84,7 +84,7 @@
     <string name="gpx_settings">Agordoj pri GPX</string>
     <string name="start_end_date">Komenca – Fina datoj</string>
     <string name="unit_of_speed_system_descr">Difinu la mezurunuon de rapido.</string>
-    <string name="unit_of_length">Mezurunuoj de longo</string>
+    <string name="unit_of_length">Unuoj de longo</string>
     <string name="unit_of_speed_system">Mezurunuo de rapido</string>
     <string name="shared_string_error_short">ERARO</string>
     <string name="back_to_osmand">Reen al OsmAnd</string>

@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;

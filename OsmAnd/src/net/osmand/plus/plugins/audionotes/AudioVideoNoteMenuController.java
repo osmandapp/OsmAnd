@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.audionotes;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;

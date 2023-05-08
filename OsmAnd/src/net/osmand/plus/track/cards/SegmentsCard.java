@@ -1,6 +1,6 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.plus.myplaces.ui.GPXItemPagerAdapter.createGpxTabsView;
+import static net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter.createGpxTabsView;
 import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
 
 import android.view.View;
@@ -19,9 +19,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
-import net.osmand.plus.myplaces.ui.GPXTabItemType;
-import net.osmand.plus.myplaces.ui.SegmentActionsListener;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;

@@ -27,10 +27,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -40,9 +40,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.myplaces.DeletePointsTask;
-import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
-import net.osmand.plus.myplaces.ui.EditTrackGroupDialogFragment;
+import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
+import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
+import net.osmand.plus.myplaces.tracks.dialogs.EditTrackGroupDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
@@ -55,7 +55,8 @@ import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -369,7 +370,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		private final UpdateLocationViewCache locationViewCache;
 
 		PointGPXAdapter() {
-			locationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+			locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		}
 
 		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> displayGroups) {
@@ -615,7 +616,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		ImageView arrow = container.findViewById(R.id.direction_arrow);
 
 		OsmandApplication app = (OsmandApplication) container.getContext().getApplicationContext();
-		app.getUIUtilities().updateLocationView(cache, arrow, text, point.lat, point.lon);
+		UpdateLocationUtils.updateLocationView(app, cache, arrow, text, point.lat, point.lon);
 
 		String address = point.getAddress();
 		TextView addressContainer = container.findViewById(R.id.address);
@@ -635,7 +636,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
 				for (GpxDisplayGroup g : getOriginalGroups()) {
-					for (GpxDisplayItem i : g.getModifiableList()) {
+					for (GpxDisplayItem i : g.getDisplayItems()) {
 						if (i.name.toLowerCase().contains(cs)) {
 							filter.add(i);
 						} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)

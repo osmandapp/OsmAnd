@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.monitoring;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateUtils;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.gpx.GPXFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -28,9 +28,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
-import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_DYNAMIC_ITEMS;
@@ -147,13 +145,11 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonSave)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (hasDataToSave()) {
-							GPXFile gpxFile = getGPXFile();
-							new SaveCurrentTrackTask(app, gpxFile, createSaveListener()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-						}
+				.setOnClickListener(v -> {
+					if (hasDataToSave()) {
+						SaveGpxHelper.saveCurrentTrack(app, getGPXFile(), errorMessage -> {
+							onGpxSaved();
+						});
 					}
 				})
 				.create());
@@ -162,12 +158,9 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new BaseBottomSheetItem.Builder()
 				.setCustomView(buttonSegment)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (wasTrackMonitored()) {
-							helper.startNewSegment();
-						}
+				.setOnClickListener(v -> {
+					if (wasTrackMonitored()) {
+						helper.startNewSegment();
 					}
 				})
 				.create());
@@ -244,33 +237,23 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 		return TripRecordingBottomSheet.createItem(app, nightMode, inflater, type);
 	}
 
-	private SaveGpxListener createSaveListener() {
-		return new SaveGpxListener() {
-
-			@Override
-			public void gpxSavingStarted() {
+	private void onGpxSaved() {
+		MapActivity mapActivity = getMapActivity();
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
+		if (mapActivity != null && plugin != null) {
+			stopUpdatingTimeTrackSaved();
+			plugin.saveCurrentTrack(null, mapActivity, false, true);
+			Bundle args = getArguments();
+			if (args != null) {
+				args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+			} else {
+				args = new Bundle();
+				args.putBoolean(ACTION_STOP_AND_DISMISS, true);
+				setArguments(args);
 			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				MapActivity mapActivity = getMapActivity();
-				OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
-				if (mapActivity != null && plugin != null) {
-					stopUpdatingTimeTrackSaved();
-					plugin.saveCurrentTrack(null, mapActivity, false, true);
-					Bundle args = getArguments();
-					if (args != null) {
-						args.putBoolean(ACTION_STOP_AND_DISMISS, true);
-					} else {
-						args = new Bundle();
-						args.putBoolean(ACTION_STOP_AND_DISMISS, true);
-						setArguments(args);
-					}
-					dismiss();
-					dismissTarget();
-				}
-			}
-		};
+			dismiss();
+			dismissTarget();
+		}
 	}
 
 	private boolean isDiscard() {

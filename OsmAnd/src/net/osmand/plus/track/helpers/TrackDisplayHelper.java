@@ -116,8 +116,8 @@ public class TrackDisplayHelper {
 				? displayHelper.collectDisplayGroups(filteredGpxFile)
 				: displayHelper.collectDisplayGroups(gpxFile);
 		originalGroups.clear();
-		for (GpxDisplayGroup g : displayGroups) {
-			originalGroups.add(g.cloneInstance());
+		for (GpxDisplayGroup group : displayGroups) {
+			originalGroups.add(new GpxDisplayGroup(group));
 		}
 		if (file != null) {
 			SelectedGpxFile sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
@@ -169,7 +169,7 @@ public class TrackDisplayHelper {
 	public static List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
 		ArrayList<GpxDisplayItem> list = new ArrayList<>();
 		for (GpxDisplayGroup g : groups) {
-			list.addAll(g.getModifiableList());
+			list.addAll(g.getDisplayItems());
 		}
 		return list;
 	}

@@ -3213,10 +3213,10 @@
     <string name="poi_climbing_sport_yes">Spor: evet</string>
     <string name="poi_money_transfer">Para gönderme</string>
     <string name="poi_location_bridge">Konum: köprü</string>
-    <string name="poi_boat_canoe_rental_rental_no">Kano: hayır</string>
-    <string name="poi_boat_canoe_rental_rental_yes">Kano: evet</string>
-    <string name="poi_boat_kayak_rental_rental_no">Kayaklar: hayır</string>
-    <string name="poi_boat_kayak_rental_rental_yes">Kayaklar: evet</string>
+    <string name="poi_boat_canoe_rental_no">Kano: hayır</string>
+    <string name="poi_boat_canoe_rental_yes">Kano: evet</string>
+    <string name="poi_boat_kayak_rental_no">Kayaklar: hayır</string>
+    <string name="poi_boat_kayak_rental_yes">Kayaklar: evet</string>
     <string name="poi_zoo_falconry">Kuşçuluk</string>
     <string name="poi_zoo_safari_park">Safari parkı</string>
     <string name="poi_locomotive">Lokomotif</string>

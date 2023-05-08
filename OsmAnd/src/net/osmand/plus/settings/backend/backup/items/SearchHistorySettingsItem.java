@@ -15,6 +15,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -116,9 +117,10 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 				long lastAccessed = object.optLong("lastAccessedTime");
 				String intervals = object.optString("intervals");
 				String intervalValues = object.optString("intervalValues");
+				HistorySource source = HistorySource.getHistorySourceByName(object.optString("source"));
 
 				HistoryEntry historyEntry = new HistoryEntry(lat, lon,
-						PointDescription.deserializeFromString(serializedPointDescription, new LatLon(lat, lon)));
+						PointDescription.deserializeFromString(serializedPointDescription, new LatLon(lat, lon)), source);
 				historyEntry.setLastAccessTime(lastAccessed);
 				historyEntry.setFrequency(intervals, intervalValues);
 				items.add(historyEntry);
@@ -144,6 +146,7 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 					jsonObject.put("lastAccessedTime", historyEntry.getLastAccessTime());
 					jsonObject.put("intervals", historyEntry.getIntervals());
 					jsonObject.put("intervalValues", historyEntry.getIntervalsValues());
+					jsonObject.put("source", historyEntry.getSource().name());
 					jsonArray.put(jsonObject);
 				}
 				json.put("items", jsonArray);

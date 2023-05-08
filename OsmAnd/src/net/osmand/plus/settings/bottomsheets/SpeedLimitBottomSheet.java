@@ -1,6 +1,9 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeed;
+import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeedValue;
+import static net.osmand.plus.utils.OsmAndFormatter.getMetersInModeUnit;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,8 +24,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
 public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
@@ -30,21 +35,19 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 	private static final String TAG = SpeedLimitBottomSheet.class.getSimpleName();
 
 	private static final String SELECTED_VALUE = "selected_value";
-	private static final float MIN_VALUE_KM_H = -10;
-	private static final float MAX_VALUE_KM_H = 20;
 
 	private OsmandApplication app;
-	private int selectedValue;
+	private float selectedValue;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 
 		if (savedInstanceState != null) {
-			selectedValue = savedInstanceState.getInt(SELECTED_VALUE);
+			selectedValue = savedInstanceState.getFloat(SELECTED_VALUE);
 		} else {
 			float value = app.getSettings().SPEED_LIMIT_EXCEED_KMH.getModeValue(getAppMode());
-			selectedValue = (int) value;
+			selectedValue = value;
 		}
 
 		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding);
@@ -65,23 +68,42 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.selected_value);
 
+		Slider slider = view.findViewById(R.id.slider);
+		SpeedConstants speedFormat = OsmAndFormatter.getSpeedModeForPaceMode(app.getSettings().SPEED_SYSTEM.getModeValue(appMode));
+		boolean isSpeedToleranceBigRange = appMode.isSpeedToleranceBigRange();
+		float convertedLimitFrom = getFormattedSpeedValue(appMode.getMinSpeedToleranceLimit(), app, isSpeedToleranceBigRange, speedFormat).valueSrc;
+		float convertedLimitTo = getFormattedSpeedValue(appMode.getMaxSpeedToleranceLimit(), app, isSpeedToleranceBigRange, speedFormat).valueSrc;
+		float convertedSelectedValue = getFormattedSpeedValue(selectedValue / 3.6f, app, isSpeedToleranceBigRange, speedFormat).valueSrc;
+		if (convertedSelectedValue > convertedLimitTo) {
+			convertedSelectedValue = convertedLimitTo;
+		} else if (convertedSelectedValue < convertedLimitFrom) {
+			convertedSelectedValue = convertedLimitFrom;
+		}
+		float step = 0.1f;
+		if (isSpeedToleranceBigRange) {
+			convertedSelectedValue = getIntegerSpeed(convertedSelectedValue);
+			convertedLimitFrom = getIntegerSpeed(convertedLimitFrom);
+			convertedLimitTo = getIntegerSpeed(convertedLimitTo);
+			step = 1f;
+		}
+		slider.setValue(convertedSelectedValue);
+		slider.setValueFrom(convertedLimitFrom);
+		slider.setValueTo(convertedLimitTo);
+		slider.setStepSize(step);
+
 		TextView summary = view.findViewById(R.id.summary);
-		summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode));
+		summary.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedSelectedValue, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		TextView fromTv = view.findViewById(R.id.from_value);
-		fromTv.setText(getFormattedSpeed(MIN_VALUE_KM_H / 3.6f, app, appMode));
+		fromTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitFrom, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		TextView toTv = view.findViewById(R.id.to_value);
-		toTv.setText(getFormattedSpeed(MAX_VALUE_KM_H / 3.6f, app, appMode));
+		toTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitTo, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
-		Slider slider = view.findViewById(R.id.slider);
-		slider.setValue(selectedValue);
-		slider.setValueFrom(MIN_VALUE_KM_H);
-		slider.setValueTo(MAX_VALUE_KM_H);
-		slider.setStepSize(1f);
 		slider.addOnChangeListener((s, value, fromUser) -> {
-			selectedValue = (int) value;
-			summary.setText(getFormattedSpeed(selectedValue / 3.6f, app, appMode));
+			float selectedSpeedInMS = getMpSFromFormattedValue(value, speedFormat);
+			selectedValue = selectedSpeedInMS * 3.6f;
+			summary.setText(getFormattedSpeed(selectedSpeedInMS, app, isSpeedToleranceBigRange, speedFormat));
 		});
 
 		int color = appMode.getProfileColor(nightMode);
@@ -92,11 +114,23 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 				.create();
 	}
 
+	private float getMpSFromFormattedValue(float value, SpeedConstants speedFormat) {
+		return (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER) / 3.6f;
+	}
+
+	private int getIntegerSpeed(float floatSpeed) {
+		if (floatSpeed < 0) {
+			return (int) Math.floor(floatSpeed);
+		} else {
+			return (int) Math.ceil(floatSpeed);
+		}
+	}
+
 	@Override
 	protected void onRightBottomButtonClick() {
 		Preference preference = getPreference();
 		if (preference != null) {
-			float value = (float) selectedValue;
+			float value = selectedValue;
 			if (preference.callChangeListener(value)) {
 				app.getSettings().SPEED_LIMIT_EXCEED_KMH.setModeValue(getAppMode(), value);
 			}
@@ -116,7 +150,7 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(SELECTED_VALUE, selectedValue);
+		outState.putFloat(SELECTED_VALUE, selectedValue);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target,

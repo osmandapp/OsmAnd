@@ -8,7 +8,7 @@ import androidx.preference.DialogPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.settings.vehiclesize.containers.Metric;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -17,7 +17,7 @@ import java.util.Locale;
 public class SizePreference extends DialogPreference {
 
 	private SizeType sizeType;
-	private MetricsConstants lengthMetricSystem;
+	private Metric metric;
 	private VehicleSizes vehicleSizes;
 	private String defaultValue;
 
@@ -43,13 +43,13 @@ public class SizePreference extends DialogPreference {
 		this.sizeType = sizeType;
 	}
 
-	@NonNull
-	public MetricsConstants getLengthMetricSystem() {
-		return lengthMetricSystem;
+	public void setMetric(@NonNull Metric metric) {
+		this.metric = metric;
 	}
 
-	public void setLengthMetricSystem(@NonNull MetricsConstants lengthMetric) {
-		this.lengthMetricSystem = lengthMetric;
+	@NonNull
+	public Metric getMetric() {
+		return metric;
 	}
 
 	public void setDefaultValue(String defaultValue) {
@@ -65,10 +65,10 @@ public class SizePreference extends DialogPreference {
 		}
 		try {
 			DecimalFormat formatter = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US));
-			String valueStr = formatter.format(value);
 			String pattern = getString(R.string.ltr_or_rtl_combine_via_space);
-			String metricShort = getString(vehicleSizes.getMetricShortStringId(sizeType, lengthMetricSystem));
-			return String.format(pattern, valueStr, metricShort);
+			String valueStr = formatter.format(value);
+			String metricStr = getString(vehicleSizes.getMetricShortStringId(sizeType, metric));
+			return String.format(pattern, valueStr, metricStr);
 		} catch (NumberFormatException e) {
 			return none;
 		}

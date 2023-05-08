@@ -41,8 +41,8 @@ import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
@@ -116,17 +116,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
-		CommonPreference<Boolean> hidePolygonsPref = settings.getCustomRenderBooleanProperty(NO_POLYGONS_ATTR);
-		CommonPreference<Boolean> hideWaterPolygonsPref = settings.getCustomRenderBooleanProperty(HIDE_WATER_POLYGONS_ATTR);
-
 		underlayListener = change -> {
-			boolean selected = settings.MAP_UNDERLAY.get() != null;
-			if (!settings.POLYGONS_VISIBILITY_SET_MANUALLY.get()) {
-				hidePolygonsPref.set(selected);
-				hideWaterPolygonsPref.set(selected);
-			}
-
 			if (updateConfigureMapItemCallback != null) {
+				boolean selected = settings.MAP_UNDERLAY.get() != null;
 				updateConfigureMapItemCallback.processResult(selected);
 			}
 		};
@@ -498,18 +490,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			ItemClickListener listener = (uiAdapter, view, _item, isChecked) -> {
 				MapActivity activityForSelect = mapActivityRef.get();
 				if (AndroidUtils.isActivityNotDestroyed(activityForSelect)) {
-					selectLayerForTilesDownloading(activityForSelect, selectedLayer -> {
-						MapActivity activityForDownload = mapActivityRef.get();
-						if (AndroidUtils.isActivityNotDestroyed(activityForDownload)) {
-							OsmandApplication app = activityForDownload.getMyApplication();
-							if (DownloadTilesFragment.shouldShowDialog(app)) {
-								DownloadTilesFragment.showInstance(activityForDownload.getSupportFragmentManager(), updateTiles, selectedLayer);
-							} else {
-								app.showShortToastMessage(R.string.maps_could_not_be_downloaded);
-							}
-						}
-						return false;
-					});
+					MapLayerBottomSheet.showInstance(app,
+							activityForSelect.getSupportFragmentManager(),
+							getDownloadableLayerNameIds(),
+							updateTiles);
 				}
 				return true;
 			};
@@ -519,42 +503,20 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return item;
 	}
 
-	private void selectLayerForTilesDownloading(@NonNull MapActivity mapActivity, @NonNull CallbackWithObject<Integer> callback) {
-		List<Integer> entriesMapList = new ArrayList<Integer>();
+	@NonNull
+	private List<MapLayerType> getDownloadableLayerNameIds() {
+		List<MapLayerType> layerTypes = new ArrayList<>();
 		OsmandMapLayer mainLayer = app.getOsmandMap().getMapView().getMainLayer();
 		if (mainLayer instanceof MapTileLayer && ((MapTileLayer) mainLayer).getMap().couldBeDownloadedFromInternet()) {
-			entriesMapList.add(R.string.layer_map);
+			layerTypes.add(MapLayerType.MAP_SOURCE);
 		}
 		if (isMapLayerDownloadable(app.getSettings().MAP_OVERLAY.get())) {
-			entriesMapList.add(R.string.layer_overlay);
+			layerTypes.add(MapLayerType.MAP_OVERLAY);
 		}
 		if (isMapLayerDownloadable(app.getSettings().MAP_UNDERLAY.get())) {
-			entriesMapList.add(R.string.layer_underlay);
+			layerTypes.add(MapLayerType.MAP_UNDERLAY);
 		}
-		boolean nightMode = isNightMode(app);
-		int themeRes = getThemeRes(app);
-		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
-		String[] items = new String[entriesMapList.size()];
-		int i = 0;
-		for (int entry : entriesMapList) {
-			items[i++] = app.getString(entry, mapActivity);
-		}
-		if (items.length > 1) {
-			DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-					items, nightMode, -1, app, selectedModeColor, themeRes, v -> {
-						int which = (int) v.getTag();
-						int layerKey = entriesMapList.get(which);
-						callback.processResult(layerKey);
-					}
-			);
-			Context themedContext = UiUtilities.getThemedContext(mapActivity, isNightMode(app));
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			builder.setAdapter(dialogAdapter, null);
-			builder.setNegativeButton(R.string.shared_string_dismiss, null);
-			dialogAdapter.setDialog(builder.show());
-		} else {
-			callback.processResult(entriesMapList.get(0));
-		}
+		return layerTypes;
 	}
 
 	private boolean isMapLayerDownloadable(String layerName) {

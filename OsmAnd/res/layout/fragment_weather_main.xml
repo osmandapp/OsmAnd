@@ -58,6 +58,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
+					android:gravity="center_horizontal"
+					android:paddingHorizontal="40dp"
 					android:text="@string/empty_screen_view_selected_weather_data"
 					android:textColor="?android:textColorSecondary" />
 
@@ -109,6 +111,12 @@
 					layout="@layout/bottom_sheet_item_with_additional_right_desc" />
 
 			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/offline_forecast_section"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical" />
 
 			<include layout="@layout/card_bottom_divider" />
 

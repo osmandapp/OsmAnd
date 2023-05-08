@@ -17,7 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.SelectFavouriteBottomSheet;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import static net.osmand.plus.dialogs.FavoriteDialogs.KEY_FAVORITE;
@@ -43,7 +44,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 	}
 
 	private void onApplyReplacement(@NonNull FavouritePoint favourite) {
-		FavouritePoint point = (FavouritePoint) getArguments().getSerializable(KEY_FAVORITE);
+		FavouritePoint point = AndroidUtils.getSerializable(getArguments(), KEY_FAVORITE, FavouritePoint.class);
 		FavouritesHelper helper = mApp.getFavoritesHelper();
 		favourite.setAddress(point.getAddress()); // Use address from the new point
 		if (point != null && helper.editFavourite(favourite, point.getLatitude(), point.getLongitude())) {

@@ -29,13 +29,14 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -188,6 +189,8 @@ public abstract class OsmandPlugin {
 	public List<ApplicationMode> getAddedAppModes() {
 		return Collections.emptyList();
 	}
+
+	public void addPluginIndexItems(@NonNull IndexFileList indexes) {}
 
 	public List<IndexItem> getSuggestedMaps() {
 		return Collections.emptyList();
@@ -354,7 +357,7 @@ public abstract class OsmandPlugin {
 	public void updateLocation(Location location) {
 	}
 
-	protected void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
+	protected void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 	}
 
 	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
@@ -476,5 +479,5 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) { }
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) { }
 }

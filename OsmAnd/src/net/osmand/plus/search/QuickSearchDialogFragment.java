@@ -78,7 +78,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
@@ -95,6 +95,7 @@ import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.fragments.SearchHistorySettingsFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -1846,10 +1847,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public void completeQueryWithObject(SearchResult sr) {
 		if (sr.object instanceof AbstractPoiType) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) sr.object);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) sr.object, HistorySource.SEARCH);
 			reloadHistory();
 		} else if (sr.object instanceof PoiUIFilter) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) sr.object);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) sr.object, HistorySource.SEARCH);
 			reloadHistory();
 		}
 		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
@@ -2204,7 +2205,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				nFilter.setSavedFilterByName(filter.getFilterByName());
 			}
 			app.getPoiFilters().createPoiFilter(nFilter, true);
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory(nFilter);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory(nFilter, HistorySource.SEARCH);
 			reloadHistory();
 		}
 

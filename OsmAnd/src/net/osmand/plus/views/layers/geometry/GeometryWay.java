@@ -49,7 +49,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	//OpenGL
 	private final List<Integer> tx31 = new ArrayList<>();
 	private final List<Integer> ty31 = new ArrayList<>();
-	private final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
+	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
 	public int baseOrder = -1;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
@@ -178,6 +178,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 	}
 
+	public void resetArrowsProvider() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (vectorLineArrowsProvider != null) {
+				mapRenderer.removeSymbolsProvider(vectorLineArrowsProvider);
+				vectorLineArrowsProvider = null;
+			}
+		}
+	}
+
 	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
 		int zoom = tb.getZoom();
 		PathGeometryZoom zm = zooms.size() > zoom ? zooms.get(zoom) : null;
@@ -200,7 +210,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		if (locationProvider == null || locationProvider.getSize() == 0) {
 			return;
 		}
-		boolean hasMapRenderer = hasMapRenderer();
+
+		MapRendererView mapRenderer = getMapRenderer();
+		boolean hasMapRenderer = mapRenderer != null;
 		PathGeometryZoom geometryZoom = !hasMapRenderer ? getGeometryZoom(tb) : null;
 		TByteArrayList simplification = geometryZoom != null ? geometryZoom.getSimplifyPoints() : null;
 		List<Double> odistances = geometryZoom != null ? geometryZoom.getDistances() : null;
@@ -265,6 +277,19 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					}
 				}
 				drawPathLine(tb, newPathsDataList);
+			}
+
+			if (shouldDrawArrows()) {
+				VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
+				VectorLineArrowsProvider vectorLineArrowsProvider = this.vectorLineArrowsProvider;
+
+				boolean updateArrowsProvider = vectorLineArrowsProvider == null
+						|| !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider);
+				if (vectorLinesCollection != null && updateArrowsProvider) {
+					VectorLineArrowsProvider newArrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
+					this.vectorLineArrowsProvider = newArrowsProvider;
+					mapRenderer.addSymbolsProvider(newArrowsProvider);
+				}
 			}
 			return;
 		}

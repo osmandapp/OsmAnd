@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.search.SearchUICore;
@@ -248,9 +249,9 @@ public class SearchHelper {
 
 	public void completeQueryWithObject(@NonNull SearchResult sr) {
 		if (sr.object instanceof AbstractPoiType) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) sr.object);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory((AbstractPoiType) sr.object, HistorySource.SEARCH);
 		} else if (sr.object instanceof PoiUIFilter) {
-			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) sr.object);
+			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) sr.object, HistorySource.SEARCH);
 		}
 		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
 			PoiType additional = (PoiType) sr.object;

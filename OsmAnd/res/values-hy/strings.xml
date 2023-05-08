@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ (Hillshades)</string>
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
@@ -335,7 +335,6 @@
     <string name="total_distance">Ընդհանուր հեռավորությունը</string>
     <string name="routing_attr_relief_smoothness_factor_name">Ընտրել բարձունքների տատանումը</string>
     <string name="routing_attr_height_obstacles_name">Օգտագործել բարձրության տվյալները</string>
-
     <string name="rendering_attr_depthContours_description">Ցույց տալ խորության տվյալները։</string>
     <string name="rendering_attr_depthContours_name">Ծովային խորքային ուրվագծեր</string>
     <string name="rendering_attr_contourDensity_description">Եզրագծերի խտությունը</string>
@@ -2372,7 +2371,7 @@
     <string name="unsaved_changes_will_be_lost">Ցանկացած չպահպնված փոփոխություն կկորցնեք: Շարունակել?</string>
     <string name="downloads_left_template">Մնաց %1$s ներբեռնումներ</string>
     <string name="roads">Ճանապարհներ</string>
-    <string name="downloading_number_of_files">Ֆայլի ներբեռնում - %1$d</string>
+    <string name="downloading_number_of_files">Ֆայլի ներբեռնում %1$d…</string>
     <string name="show_free_version_banner">Ցույց տալ անվճար տարբերակների պաստառը</string>
     <string name="show_free_version_banner_description">Ցույց տալ անվճար տարբերակների պաստառը նաև վճարովի տարբերակում։</string>
     <string name="buy">Գնել</string>

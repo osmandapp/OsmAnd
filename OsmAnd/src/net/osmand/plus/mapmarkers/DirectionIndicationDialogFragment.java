@@ -27,7 +27,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -54,7 +53,6 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		OsmandSettings settings = getSettings();
 		boolean nightMode = isNightMode(false);
 		
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
@@ -63,16 +61,14 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				.inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
-		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
-		toolbar.setNavigationIcon(getIconsCache().getIcon(navigationIconResId));
+		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(getContext())));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(view -> dismiss());
 
 		TextView appModeTv = mainView.findViewById(R.id.app_mode_text_view);
 		ApplicationMode appMode = settings.APPLICATION_MODE.get();
 		appModeTv.setText(appMode.toHumanString());
-		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIconsCache().getIcon(
-			appMode.getIconRes()), null);
+		appModeTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getIcon(appMode.getIconRes()), null);
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			((ObservableScrollView) mainView.findViewById(R.id.scroll_view)).setScrollViewCallbacks(new ObservableScrollViewCallbacks() {
@@ -166,7 +162,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	@Override
 	protected Drawable getContentIcon(int id) {
-		return getIcon(id, ColorUtilities.getDefaultIconColorId(!getSettings().isLightContent()));
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(!settings.isLightContent()));
 	}
 
 	private MapActivity getMapActivity() {
@@ -175,7 +171,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private CharSequence[] getMenuTitles() {
-		if (getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1) {
+		if (settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1) {
 			return new CharSequence[]{getActiveString(R.string.shared_string_one), getString(R.string.shared_string_two)};
 		}
 		return new CharSequence[]{getString(R.string.shared_string_one), getActiveString(R.string.shared_string_two)};
@@ -183,13 +179,12 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private SpannableString getActiveString(int id) {
 		SpannableString res = new SpannableString(getString(id));
-		int activeColor = ColorUtilities.getActiveColor(getActivity(), !getSettings().isLightContent());
+		int activeColor = ColorUtilities.getActiveColor(getActivity(), !settings.isLightContent());
 		res.setSpan(new ForegroundColorSpan(activeColor), 0, res.length(), 0);
 		return res;
 	}
 
 	private void updateHelpImage() {
-		OsmandSettings settings = getSettings();
 		int count = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		LinkedList<Drawable> imgList = new LinkedList<>();
 		imgList.add(getDeviceImg());
@@ -216,44 +211,44 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private Drawable getTopBar2Img() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_topbar_2_day : R.drawable.img_help_markers_direction_topbar_2_night);
 	}
 
 	private Drawable getTopBar1Img() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_topbar_1_day : R.drawable.img_help_markers_direction_topbar_1_night);
 	}
 
 	private Drawable getArrowOneImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_arrow_one_day : R.drawable.img_help_markers_direction_arrow_one_night);
 	}
 
 	private Drawable getArrowTwoImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_arrow_two_day : R.drawable.img_help_markers_direction_arrow_two_night);
 	}
 
 	private Drawable getGuideLineOneImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_guideline_one_day : R.drawable.img_help_markers_direction_guideline_one_night);
 	}
 
 	private Drawable getGuideLineTwoImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_guideline_two_day : R.drawable.img_help_markers_direction_guideline_two_night);
 	}
 
 	private Drawable getDeviceImg() {
-		return getIconsCache().getIcon(getSettings().isLightContent()
+		return getIcon(settings.isLightContent()
 				? R.drawable.img_help_markers_direction_device_day : R.drawable.img_help_markers_direction_device_night);
 	}
 
 	private void updateDisplayedMarkersCount(int count) {
 		((TextView) mainView.findViewById(R.id.active_markers_text_view))
 				.setText(count == 1 ? R.string.shared_string_one : R.string.shared_string_two);
-		getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.set(count);
+		settings.DISPLAYED_MARKERS_WIDGETS_COUNT.set(count);
 		updateHelpImage();
 	}
 

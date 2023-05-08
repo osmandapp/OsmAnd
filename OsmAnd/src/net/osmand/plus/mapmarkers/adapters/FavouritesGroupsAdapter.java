@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.R;
 
 import java.util.List;

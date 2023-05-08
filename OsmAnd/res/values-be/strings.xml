@@ -652,7 +652,7 @@
     <string name="map_overlay">Мапа для накладання</string>
     <string name="map_overlay_descr">Абярыце мапу для накладання</string>
     <string name="tile_source_already_installed">Мапа ўжо ўсталяваная, «Налады» будуць абноўленыя.</string>
-    <string name="select_tile_source_to_install">Абярыце мапы (растравыя) для ўсталёўкі або абнаўлення.</string>
+    <string name="select_tile_source_to_install">Абярыце крыніцы растравых мап:</string>
     <string name="internet_not_available">Немагчыма выканаць аперацыю без падлучэнне да Інтэрнэту.</string>
     <string name="install_more">Усталяваць яшчэ…</string>
     <string name="level_to_switch_vector_raster_descr">Выкарыстоўваць агульныя растравыя мапы да гэтага ўзроўню.</string>
@@ -4062,7 +4062,7 @@
     <string name="coordinates_widget_secondary_desc">Фармат адлюстравання каардынат можна быць зменены на: %1$s-%2$s-%3$s.</string>
     <string name="routing_attr_avoid_4wd_only_name">Пазбягаць прасёлачных дарог (4х4)</string>
     <string name="routing_attr_avoid_4wd_only_description">Пазбягаць дарог, прызначаных для аўтамабіляў з поўным прывадам (4х4)</string>
-    <string name="elevation_profile_widget_desc">Віджэт паказвае профіль вышыні і ўхілу бягучага маршруту.</string>
+    <string name="elevation_profile_widget_desc">Паказвае профіль вышыні і ўхілу бягучага маршруту.</string>
     <string name="parking_widget_desc">Віджэт, які паказвае адлегласць ад сярэдзіны экрана да паркоўкі.</string>
     <string name="compass_on_circles">Компас на акружнасці</string>
     <string name="distance_circles">Акружнасці-адлегласці</string>
@@ -4079,9 +4079,9 @@
     <string name="lanes_widgets_desc">Віджэт «Палосы руху» паказвае бягучую схему дарожных палос і вылучае палосы руху з актыўнай навігацыяй.</string>
     <string name="current_time_widget_desc">Паказвае бягучы час з вашай прылады.</string>
     <string name="gps_info_widget_desc">Паказвае колькасць спадарожнікаў, якія прылада выяўляе і выкарыстоўвае ў бягучы момант.</string>
-    <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора бягучай геалакацыі.</string>
+    <string name="altitude_widget_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання.</string>
     <string name="max_speed_widget_desc">Паказвае абмежаванне хуткасці для бягучай дарогі.</string>
-    <string name="map_markers_bar_widget_desc">На віджэце верхняй панэлі вы можаце ўбачыць адлегласць і кірунак да маркера ад бягучага месцазнаходжання. Можна наладзіць прагляд 1 або 2 верхніх маркераў у віджэце.</string>
+    <string name="map_markers_bar_widget_desc">Віджэт верхняй панэлі паказвае адлегласць і кірунак да наступнага маркера ад бягучага месцазнаходжання. Віджэт можна наладзіць для паказу 1 або 2 маркераў.</string>
     <string name="radius_rules_widget_desc">Інструмент «Радыусная лінейка» дапамагае вызначыць радыус вакол абранай кропкі на мапе, паказваючы кругі адлегласці на мапе.</string>
     <string name="colour_of_circles">Колер акружнасцей</string>
     <string name="coordinates_widget_desc">Паказвае геаграфічныя каардынаты бягучага месцазнаходжання.</string>
@@ -4808,7 +4808,7 @@
     <string name="map_markers_desc">Віджэт паказвае адлегласць або прыблізны час прыбыцця (ETA) для першых двух адзнак у спісе адзнак мапы.</string>
     <string name="external_sensors_plugin_name">Вонкавыя датчыкі</string>
     <string name="map_center_widget">Цэнтр мапы</string>
-    <string name="current_location_widget">Бягучае месцазнаходжанне</string>
+    <string name="current_location_widget">Каардынаты: бягучае месцазнаходжанне</string>
     <string name="map_widget_altitude_map_center">Вышыня: цэнтр мапы</string>
     <string name="ant_read_data">Чытаць даныя</string>
     <string name="ant_write_to_gpx">Запісваць даныя ў след</string>
@@ -4852,15 +4852,11 @@
     <string name="clouds_widget_desc">Паказвае воблачнасць для бягучага цэнтра мапы.</string>
     <string name="weather_prefs_descr">Прагноз на 24 гадзіны і прагноз на 7 дзён, які абнаўляецца кожныя 3 гадзіны</string>
     <string name="weather_plugin_description">Змяшчае:
-\n
 \n- 5-слаёвы прагноз на 24 гадзіны і 7 дзён
-\n
 \n- віджэты на аснове месцазнаходжання
+\n- ізатэрмы / ізабары
 \n
-\n- ізалініі тэмпературы / ціску
-\n
-\n
-\nДаныя бяруцца з GFS (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nДаныя бяруцца з Global Forecast System (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
     <string name="weather_wind_kilimeters_per_hour">Кіламетраў за гадзіну</string>
     <string name="weather_wind_meters_per_second">Метры за секунду</string>
     <string name="map_widget_sunrise_desc">Паказвае час ўзыходу сонца або час, які застаўся да ўзыходу сонца.</string>
@@ -4880,4 +4876,22 @@
     <string name="restart_now">Перазапусціць зараз</string>
     <string name="export_to_file">Экспартаваць у файл</string>
     <string name="import_export">Імпарт/Экспарт</string>
+    <string name="map_rendering_engine">Рухавік адмалёўкі мапы</string>
+    <string name="map_rendering_engine_v2">Версія 2 (OpenGL)</string>
+    <string name="skip_download">Прамінуць спампоўку</string>
+    <string name="rendering_engine_failed">Адбыўся збой адмалёўкі мапы.</string>
+    <string name="terms_of_service_desc">Спампоўваючы мапы, вы згаджаецеся з %1$s і %2$s.</string>
+    <string name="determine_location">Вызначыць ваша месцазнаходжанне</string>
+    <string name="favorites_backup">Рэзервовая копія ўлюбёнага</string>
+    <string name="app_mode_moped">Мапед</string>
+    <string name="map_rendering_engine_descr">Версія 2 (OpenGL) - гэта больш хуткі рухавік адмалёўкі мапы, які падтрымлівае 2.5D-выгляд. Адмалёўка першай версіі была прадвызначанай да OsmAnd 4.3 і па-ранейшаму з\'яўляецца пераважнай для старых прылад.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd вярнуўся да рухавіка адмалёўкі мапы \'Версія 1\'. Вы можаце паспрабаваць пераключыцца на новы рухавік адмалёўкі \'Версія 2 (OpenGL)\' праз налады.
+\n
+\nКалі ласка, падтрымайце паляпшэнні, падаўшы свой журнал памылак.</string>
+    <string name="shared_string_terms_of_use">Умовы выкарыстання</string>
+    <string name="map_rendering_engine_v1">Версія 1</string>
+    <string name="map_widget_altitude_current_location">Вышыня: бягучае месцазнаходжанне</string>
+    <string name="map_widget_altitude_current_location_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання.</string>
+    <string name="map_widget_altitude_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання або для цэнтра мапы</string>
+    <string name="map_widget_altitude_map_center_desc">Паказвае вышыню над узроўнем мора для цэнтра мапы.</string>
 </resources>

@@ -100,7 +100,7 @@ public class SelectedGpxMenuController extends MenuController {
 			if (gpxFile.tracks.size() > 0) {
 				GpxDisplayGroup gpxDisplayGroup = app.getGpxDisplayHelper().buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
 
-				List<GpxDisplayItem> items = gpxDisplayGroup.getModifiableList();
+				List<GpxDisplayItem> items = gpxDisplayGroup.getDisplayItems();
 				if (!Algorithms.isEmpty(items)) {
 					return items.get(0);
 				}

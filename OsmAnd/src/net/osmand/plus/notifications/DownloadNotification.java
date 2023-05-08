@@ -51,7 +51,9 @@ public class DownloadNotification extends OsmandNotification {
 
 	@Override
 	public Intent getContentIntent() {
-		return new Intent(app, DownloadActivity.class);
+		Intent intent = new Intent(app, DownloadActivity.class);
+		intent.setPackage(app.getPackageName());
+		return intent;
 	}
 
 	@Override

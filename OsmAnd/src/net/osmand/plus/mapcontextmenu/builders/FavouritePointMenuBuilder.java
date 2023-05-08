@@ -1,6 +1,11 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
+
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -12,14 +17,17 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.fragments.ReadPointDescriptionFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -125,13 +133,10 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			button.setText(name);
 
 			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(context));
-						mapActivity.getContextMenu().show(latLon, pointDescription, point);
-					}
+				button.setOnClickListener(v -> {
+					LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+					PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(context));
+					mapActivity.getContextMenu().show(latLon, pointDescription, point);
 				});
 			}
 			view.addView(button);
@@ -140,15 +145,20 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		if (points.size() > 10) {
 			TextViewEx button = buildButtonInCollapsableView(context, false, true);
 			button.setText(context.getString(R.string.shared_string_show_all));
-			button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					FavoritesActivity.openFavoritesGroup(context, group.getName());
-				}
-			});
+			button.setOnClickListener(v -> openFavoritesGroup(context, group.getName()));
 			view.addView(button);
 		}
 
 		return new CollapsableView(view, this, collapsed);
+	}
+
+	private void openFavoritesGroup(Context context, String groupName) {
+		OsmAndAppCustomization customization = ((OsmandApplication) context.getApplicationContext()).getAppCustomization();
+		Intent intent = new Intent(context, customization.getMyPlacesActivity());
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_ID, FAV_TAB);
+		bundle.putString(FragmentStateHolder.GROUP_NAME_TO_SHOW, groupName);
+		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
+		AndroidUtils.startActivityIfSafe(context, intent);
 	}
 }

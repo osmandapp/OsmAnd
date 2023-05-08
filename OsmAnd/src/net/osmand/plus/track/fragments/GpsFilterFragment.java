@@ -5,7 +5,6 @@ import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +34,12 @@ import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.S
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.GpsFilterScreensAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.cards.GpsFilterBaseCard.SaveIntoFileListener;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -432,17 +430,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			GPXFile gpxFileToWrite = GpsFilterHelper.copyGpxFile(app, filteredGpxFile);
 			gpxFileToWrite.path = destFile.getAbsolutePath();
 
-			new SaveGpxAsyncTask(destFile, gpxFileToWrite, new SaveGpxListener() {
-
-				@Override
-				public void gpxSavingStarted() {
-				}
-
-				@Override
-				public void gpxSavingFinished(Exception errorMessage) {
-					onGpxSavingFinished(gpxFileToWrite, errorMessage, showOnMap);
-				}
-			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			SaveGpxHelper.saveGpx(destFile, gpxFileToWrite, errorMessage -> {
+				onGpxSavingFinished(gpxFileToWrite, errorMessage, showOnMap);
+			});
 		}
 	}
 

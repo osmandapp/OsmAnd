@@ -549,7 +549,7 @@
     <string name="renderer_load_exception">Renderer konnte nicht geladen werden.</string>
     <string name="renderers">Vektor-Renderer</string>
     <string name="renderers_descr">Darstellung für Offline-Vektorkarten auswählen</string>
-    <string name="poi_context_menu_website">POI-Internetseite anzeigen</string>
+    <string name="poi_context_menu_website">POI-Website anzeigen</string>
     <string name="poi_context_menu_call">POI-Telefon anzeigen</string>
     <string name="website">Webseite</string>
     <string name="phone">Telefon</string>
@@ -574,7 +574,7 @@
     <string name="rotate_map_north_opt">Norden ist oben (fest)</string>
     <string name="rotate_map_manual_opt">Manuell gedreht (fest)</string>
     <string name="rotate_map_to_descr">Kartenausrichtung:</string>
-    <string name="rotate_map_to">Kartenrotation</string>
+    <string name="rotate_map_to">Kartenausrichtung</string>
     <string name="show_route">Routendetails</string>
     <string name="fav_imported_sucessfully">Favoriten importiert</string>
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>
@@ -676,7 +676,7 @@
     <string name="favorite">Favorit</string>
     <string name="shared_string_clear_all">Alle löschen</string>
     <string name="shared_string_history">Verlauf</string>
-    <string name="uploading_data">Daten hochladen …</string>
+    <string name="uploading_data">Daten speichern …</string>
     <string name="uploading">Hochladen …</string>
     <string name="search_nothing_found">Kein Treffer</string>
     <string name="searching">Suche…</string>
@@ -798,7 +798,7 @@
     <!-- string name="search_tabs_location">Position</string -->
     <string name="context_menu_item_update_map">Karte aktualisieren</string>
     <string name="context_menu_item_create_poi">POI erstellen</string>
-    <string name="shared_string_yes">Ja</string>
+    <string name="shared_string_yes">ja</string>
     <string name="shared_string_cancel">Abbrechen</string>
     <string name="shared_string_apply">Anwenden</string>
     <string name="shared_string_add">Hinzufügen</string>
@@ -1087,7 +1087,7 @@
     <string name="speak_speed_limit">Tempolimit</string>
     <string name="speak_cameras">Blitzer</string>
     <string name="speak_traffic_warnings">Verkehrswarnungen</string>
-    <string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
+    <string name="osb_author_or_password_not_specified">Bitte OSM-Nutzernamen und Passwort in den Einstellungen eingeben</string>
     <string name="clear_intermediate_points">Zwischenziele löschen</string>
     <string name="keep_intermediate_points">Zwischenziele behalten</string>
     <string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
@@ -1139,7 +1139,7 @@
     <string name="app_mode_motorcycle">Motorrad</string>
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Flugzeug</string>
-    <string name="local_osm_changes_delete_all_confirm">%1$d OSM Änderung(en) löschen\?</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d OSM-Änderung(en) löschen\?</string>
     <string name="shared_string_delete_all">Alle löschen</string>
     <string name="amenity_type_seamark">Schifffahrtsobjekte</string>
     <string name="app_modes_choose_descr">Wählen Sie die anzuzeigenden Profile aus.</string>
@@ -1174,7 +1174,7 @@
     <string name="shared_string_select_on_map">Auf der Karte auswählen</string>
     <string name="shared_string_favorite">Favorit</string>
     <string name="route_preferences">Routen-Einstellungen</string>
-    <string name="route_info">Routen-Info</string>
+    <string name="route_info">Infos zur Route</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd-Routenteil offline berechnen</string>
     <string name="use_displayed_track_for_navigation">Angezeigten Track zur Navigation verwenden?</string>
     <string name="keep_and_add_destination_point">Als weiteres Ziel hinzufügen</string>
@@ -2099,7 +2099,7 @@
     <string name="quick_actions_delete">Aktion löschen</string>
     <string name="quick_actions_delete_text">Aktion „%s“ löschen\?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
-    <string name="quick_favorites_name_preset">Name voreinstellen</string>
+    <string name="quick_favorites_name_preset">Namen voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
     <string name="quick_action_add_marker_descr">Eine Schaltfläche zum Hinzufügen einer Kartenmarkierung in der Bildschirmmitte.</string>
     <string name="favorite_empty_place_name">Ort</string>
@@ -2564,7 +2564,7 @@
     <string name="empty_state_av_notes">Machen Sie sich Notizen!</string>
     <string name="by_date">Nach Datum</string>
     <string name="by_type">Nach Typ</string>
-    <string name="import_gpx_file_description">kann als Favoriten oder GPX-Datei importiert werden.</string>
+    <string name="import_gpx_file_description">kann als Favorit oder GPX-Datei importiert werden.</string>
     <string name="empty_state_av_notes_desc">Audio-, Video- oder Fotonotizen zu einem beliebigen Punkt auf der Karte hinzufügen, indem Sie die Widgets oder Kontextmenüs verwenden.</string>
     <string name="notes_by_date">Audio-/Videonotizen nach Datum</string>
     <string name="tap_on_map_to_hide_interface_descr">Ein Tippen auf die Karte schaltet die Steuertasten und Bedienelemente um.</string>
@@ -2606,7 +2606,7 @@
     <string name="winter_and_ski_renderer">Winter und Ski</string>
     <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
-    <string name="copy_location_name">Ort/POI-Name kopieren</string>
+    <string name="copy_location_name">Ort/POI-Namen kopieren</string>
     <string name="toast_empty_name_error">Standort ohne Name</string>
     <string name="show_closed_notes">Geschlossene Hinweise anzeigen</string>
     <string name="switch_osm_notes_visibility_desc">OSM-Hinweise auf der Karte ein- oder ausblenden.</string>
@@ -2715,7 +2715,7 @@
     <string name="how_to_open_wiki_title">Wie öffnet man Wikipedia-Artikel?</string>
     <string name="popular_destinations">Beliebte Reiseziele</string>
     <string name="osmand_team">OsmAnd-Team</string>
-    <string name="shared_string_restart">App neustarten</string>
+    <string name="shared_string_restart">App neu starten</string>
     <string name="show_images">Bilder anzeigen</string>
     <string name="purchase_cancelled_dialog_title">Sie haben Ihr OsmAnd-Live-Abonnement gekündigt</string>
     <string name="purchase_cancelled_dialog_descr">Erneuern Sie Ihr Abonnement, um weiterhin alle Funktionen nutzen zu können:</string>
@@ -2756,8 +2756,8 @@
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
     <string name="thank_you_for_feedback">Danke für Ihr Feedback</string>
     <string name="poi_cannot_be_found">Knoten oder Weg kann nicht gefunden werden.</string>
-    <string name="search_no_results_feedback">Keine Suchergebnisse?
-\nGeben Sie uns eine Rückmeldung</string>
+    <string name="search_no_results_feedback">Keine Suchergebnisse\?
+\nGeben Sie uns eine Rückmeldung.</string>
     <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen</string>
     <string name="ask_for_location_permission">Bitte gewähren Sie OsmAnd den Zugriff auf den Standort, um fortzufahren.</string>
     <string name="rendering_value_black_name">Schwarz</string>
@@ -3274,7 +3274,7 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Knotenpunktsystem von Radrouten anzeigen</string>
     <string name="download_map_dialog">Dialog zum Herunterladen der Karte</string>
     <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
-    <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen.</string>
+    <string name="dialogs_and_notifications_descr">Steuern Sie Pop-ups, Dialoge und Benachrichtigungen.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Knotennetzwerke</string>
     <string name="suggested_maps_descr">Diese Karten werden für das Plugin benötigt.</string>
     <string name="join_segments">Segmente verbinden</string>
@@ -3361,7 +3361,7 @@
 \nWenn aktiviert, verwendet OsmAnd das Zeitlimit für den Systembildschirm.</string>
     <string name="live_monitoring">Online-Aufzeichnung</string>
     <string name="clear_recorded_data">Aufgezeichnete Daten löschen</string>
-    <string name="copy_coordinates">Kopiere Koordinaten</string>
+    <string name="copy_coordinates">Koordinaten kopieren</string>
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
@@ -3482,7 +3482,7 @@
     <string name="app_mode_ski_touring">Skitouren</string>
     <string name="app_mode_ski_snowmobile">Schneemobil</string>
     <string name="custom_osmand_plugin">Benutzerdefinierte OsmAnd-Erweiterung</string>
-    <string name="slope_description">Hangneigungskarten verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
+    <string name="slope_description">Hangneigungskarte verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen.</string>
     <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
@@ -3666,19 +3666,19 @@
     <string name="shared_string_uninstall_and_restart">Deinstallieren und neu starten</string>
     <string name="speed_cameras_legal_descr">In einigen Ländern oder Regionen ist die Verwendung von Blitzer-Warneinrichtungen gesetzlich verboten.
 \n
-\nSie müssen anhand der Gesetzeslage des Landes entscheiden, ob Sie
+\nSie müssen anhand der Gesetzeslage Ihres Landes entscheiden, ob Sie:
 \n
-\n%1$s wählen und Warnungen und Hinweise zu Blitzern erhalten werden,
+\n%1$s wählen und Warnungen und Hinweise zu Blitzern erhalten werden oder
 \n
-\n%2$s wählen, worauf alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
+\n%2$s wählen, woraufhin alle Daten zu Blitzern (Warnungen, Hinweise und POIs) bis zu einer vollständigen Neuinstallation von OsmAnd gelöscht werden.</string>
     <string name="routing_attr_length_description">Geben Sie die Fahrzeuglänge an, die auf Routen erlaubt sein soll.</string>
     <string name="routing_attr_length_name">Länge</string>
     <string name="speed_cameras_removed_descr">Diese App hat keine Informationen zu Blitzern.</string>
     <string name="app_mode_inline_skates">Inlineskates</string>
     <string name="use_volume_buttons_as_zoom_descr">Steuern Sie die Zoomstufen der Karte mit den Lautstärketasten des Geräts.</string>
     <string name="use_volume_buttons_as_zoom">Lautstärketasten als Zoom</string>
-    <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge könnten einige Streckenabschnitte nicht befahrbar sein.</string>
-    <string name="quick_action_remove_next_destination">Nächstgelegenen Zielpunkt löschen</string>
+    <string name="lenght_limit_description">Bitte geben Sie Ihre Fahrzeuglänge an. Für lange Fahrzeuge können einige Streckenabschnitte nicht befahrbar sein.</string>
+    <string name="quick_action_remove_next_destination">Nächsten Zielpunkt löschen</string>
     <string name="please_provide_point_name_error">Bitte geben Sie einen Namen für den Favoriten an</string>
     <string name="quick_action_remove_next_destination_descr">Löscht das nächste Ziel auf Ihrer Route. Wenn dies das endgültige Ziel ist, wird die Navigation gestoppt.</string>
     <string name="search_download_wikipedia_maps">Wikipedia-Karten herunterladen</string>
@@ -3840,7 +3840,7 @@
     <string name="open_street_map_login_mode">Anmelden, um Änderungen hochzuladen.
 \n
 \nVerwenden Sie die OAuth-Methode oder Ihren OSM-Benutzernamen und Ihr -Passwort.</string>
-    <string name="use_login_password">Benutzername und Passwort verwenden</string>
+    <string name="use_login_password">Benutzernamen und Passwort verwenden</string>
     <string name="login_account">Konto</string>
     <string name="user_login">Anmelden</string>
     <string name="markers_history">Historie der Marker</string>
@@ -3919,7 +3919,7 @@
     <string name="routing_engine_vehicle_type_car">Auto</string>
     <string name="shared_string_subtype">Subtyp</string>
     <string name="keep_it_empty_if_not">Leer lassen, wenn kein API-Schlüssel vorhanden</string>
-    <string name="copy_address">Kopiere Adresse</string>
+    <string name="copy_address">Adresse kopieren</string>
     <string name="routing_engine_vehicle_type_driving">Fahrzeug</string>
     <string name="online_routing_engine">Online-Navigationssystem</string>
     <string name="online_routing_engines">Online-Navigationssysteme</string>
@@ -3961,7 +3961,7 @@
     <string name="delete_online_routing_engine">Dieses Online-Routingmodul löschen\?</string>
     <string name="context_menu_edit_descr">Beschreibung bearbeiten</string>
     <string name="delete_waypoints">Wegpunkte löschen</string>
-    <string name="copy_to_map_favorites">Kopiere in Favoriten</string>
+    <string name="copy_to_map_favorites">Zu den Favoriten kopieren</string>
     <string name="copy_to_map_markers">In Kartenmarkierungen kopieren</string>
     <string name="upload_photo">Lade hoch</string>
     <string name="upload_photo_completed">Hochladen abgeschlossen</string>
@@ -3980,11 +3980,11 @@
     <string name="activity_type_snowmobile_name">Schneemobil</string>
     <string name="activity_type_riding_name">Reiten</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
-    <string name="activity_type_cycling_name">Fahrrad</string>
+    <string name="activity_type_cycling_name">Radfahren</string>
     <string name="activity_type_hiking_name">Wandern</string>
     <string name="activity_type_running_name">Laufen</string>
-    <string name="activity_type_walking_name">Fußgänger</string>
-    <string name="activity_type_offroad_name">Geländegängig</string>
+    <string name="activity_type_walking_name">Gehen</string>
+    <string name="activity_type_offroad_name">Offroad</string>
     <string name="activity_type_motorbike_name">Motorrad</string>
     <string name="activity_type_car_name">Auto</string>
     <string name="announcement_time_prepare">Zweite Ankündigung (mittlere Distanz)</string>
@@ -4292,7 +4292,7 @@
     <string name="benefits_for_contributors">Vorteile für aktive OSM-Mitwirkende</string>
     <string name="benefits_for_contributors_primary_descr">Aktive Mitwirkende an OpenStreetMap.org können Anspruch auf unbegrenzte stündliche Kartenaktualisierungen haben.</string>
     <string name="benefits_for_contributors_secondary_descr">Melden Sie sich bei OpenStreetMap an, um zu prüfen, ob Sie Anspruch auf unbegrenzte monatliche und stündliche Kartenaktualisierungen haben.</string>
-    <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
+    <string name="use_login_and_password">Benutzernamen und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
     <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
     <string name="shared_string_contributions">Beiträge</string>
@@ -4557,12 +4557,12 @@
     <string name="routing_attr_carriage_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für Pferdefuhrwerke</string>
     <string name="rendering_attr_showLightRailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_showMonorailRoutes_name">Monoraillinien</string>
-    <string name="rendering_attr_showFunicularRoutes_name">Kabelgetriebene Linien</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Standseilbahnlinien</string>
     <string name="rendering_attr_showBusRoutes_name">Buslinien</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Oberleitungsbuslinien</string>
     <string name="map_markers_bar">Leiste für Kartenmarkierungen</string>
     <string name="shared_string_visible_widgets">Sichtbare Widgets</string>
-    <string name="top_widgets_panel">Oberes Paneel</string>
+    <string name="top_widgets_panel">Oberes Panel</string>
     <string name="bottom_widgets_panel">Unteres Paneel</string>
     <string name="shared_string_item">Element</string>
     <string name="shared_string_buttons">Schaltflächen</string>
@@ -4691,7 +4691,7 @@
     <string name="current_time_widget_desc">Zeigt die aktuelle Zeit an, die von Ihrem Gerät abgerufen wird.</string>
     <string name="current_speed_widget_desc">Zeigt Ihre per GPS gemeldete aktuelle Geschwindigkeit an.</string>
     <string name="battery_widget_desc">Zeigt den Akkustand Ihres Geräts an.</string>
-    <string name="altitude_widget_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Position an.</string>
+    <string name="altitude_widget_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Geolokalisierung an.</string>
     <string name="max_speed_widget_desc">Zeigt die Geschwindigkeitsbegrenzung für die aktuell befahrene Straße an.</string>
     <string name="get_altitude_information">Höheninformationen abrufen</string>
     <string name="calculate_online">Online berechnen</string>
@@ -4778,7 +4778,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Kartenzentrierung</string>
+    <string name="display_position">Anzeigeposition</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
@@ -4806,7 +4806,7 @@
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Zeigt die Entfernung zwischen Kamera und Zielort an.</string>
     <string name="external_sensor_widgets">ANT+ Widgets</string>
-    <string name="map_widget_target_distance">Entfernung von der Kamera zum Ziel</string>
+    <string name="map_widget_target_distance">Entfernung zwischen Kamera und Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
     <string name="map_widget_ant_bicycle_power_desc">Zeigt die Leistung des Radfahrers an, mit der das Fahrrad vorwärts bewegt wird</string>
@@ -4845,9 +4845,9 @@
     <string name="send_uuid_preference">Eindeutige Benutzerkennung (UUID) senden</string>
     <string name="shared_string_identifiers">Identifikatoren</string>
     <string name="terms_of_service_desc">Durch das Herunterladen von Karten stimmen Sie den %1$s und %2$s zu.</string>
-    <string name="map_widget_altitude_map_center">Höhenlage: Kartenmitte</string>
+    <string name="map_widget_altitude_map_center">Höhe: Kartenmitte</string>
     <string name="map_widget_altitude_map_center_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Kartenmitte an.</string>
-    <string name="map_widget_altitude_current_location">Höhenlage: aktueller Standort</string>
+    <string name="map_widget_altitude_current_location">Höhe: aktueller Standort</string>
     <string name="map_widget_altitude_current_location_desc">Zeigt die Höhe über dem Meeresspiegel des aktuellen Standorts an.</string>
     <string name="map_widget_altitude_desc">Zeigt die Höhe des aktuellen Standorts oder die Höhe der aktuellen Kartenmitte an</string>
     <string name="external_sensors_support">Unterstützung für externe Sensoren</string>
@@ -4990,7 +4990,7 @@
     <string name="shared_string_expires">Abgelaufen</string>
     <string name="shared_string_purchased_on">Gekauft am</string>
     <string name="choose_what_to_sync">Wählen Sie, was synchronisiert werden soll</string>
-    <string name="cloud_sync_progress">Sync…%1$s</string>
+    <string name="cloud_sync_progress">Synchronisieren… %1$s</string>
     <string name="shared_string_unsynced">Unsynchronisiert</string>
     <string name="check_for_updates">Auf Aktualisierungen überprüfen</string>
     <string name="changes">Änderungen %1$s</string>
@@ -5042,7 +5042,7 @@
     <string name="sound_beep_simple_loud">Signalton: einfach, laut</string>
     <string name="sound_beep_complex">Signalton: komplex</string>
     <string name="last_synchronized">Zuletzt synchronisiert</string>
-    <string name="display_position_automatic_descr">Abhängig von der Kartenorientierung: unten für Bewegungsrichtung, mittig für alles andere.</string>
+    <string name="display_position_automatic_descr">Abhängig von der Kartenausrichtung: unten für Bewegungsrichtung, mittig für alles andere.</string>
     <string name="shared_string_apply_changes">Änderungen anwenden</string>
     <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
     <string name="shared_string_kilograms">Kilogramm</string>
@@ -5073,25 +5073,35 @@
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Bewegungsgeschwindigkeit</string>
     <string name="simulation_position_description">Wählen Sie eine Trackdatei aus, die als Quelle für die Veränderung des Standorts verwendet werden soll.</string>
-    <string name="release_4_4">- Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
+    <string name="release_4_4">• Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
 \n
-\n - Kontextmenü zeigt jetzt lokalisierte Namen für POI an
+\n • Kontextmenü zeigt jetzt lokalisierte Namen für POI an
 \n
-\n - Option zum Teilen der Route per Link hinzugefügt
+\n • Option zum Teilen der Route per Link hinzugefügt
 \n
-\n - Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
+\n • Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
 \n
-\n - Die Kartenausrichtung wurde um einen festen Modus erweitert.
+\n • Kartenausrichtung wurde um einen festen Modus erweitert.
 \n
-\n - Vereinfachter Startbildschirm
+\n • Vereinfachter Startbildschirm
 \n
-\n - Feste Standortposition im geteilten Bildschirm in Android Auto
+\n • Feste Standortposition im geteilten Bildschirm in Android Auto
 \n
-\n - Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
+\n • Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
 \n
-\n - Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
+\n • Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
 \n
-\n - Probleme mit der Anzeige von veganen Orten behoben
+\n • Probleme mit der Anzeige von veganen Orten behoben
+\n
+\n • Möglichkeit zum Herunterladen von Online-Kacheln, die als \"Overlay\"- oder \"Underlay\"-Karten verwendet werden, hinzugefügt
+\n
+\n• Unterstützung von imperialen Einheiten für \"Fahrzeugparameter\" hinzugefügt
+\n
+\n• Neues Moped-Profil
+\n
+\n• Neue Option \"Automatisch\" bei \"Anzeigeposition\" hinzugefügt
+\n
+\n• Kartengesten für Neigen, Zoomen und Drehen korrigiert
 \n
 \n</string>
     <string name="sort_duration_ascending">Kürzere Dauer zuerst</string>
@@ -5103,4 +5113,91 @@
     <string name="selected_value">Ausgewählter Wert</string>
     <string name="shared_string_nearest">Am nächsten</string>
     <string name="app_mode_moped">Moped</string>
+    <string name="generate_slope_from_3d_maps">Erzeugen von Hangneigungskarten aus 3D-Karten</string>
+    <string name="disable_vertex_hillshade_3d">Vertex-Relief in 3D deaktivieren</string>
+    <string name="enable_3d_maps">3D-Karten aktivieren</string>
+    <string name="test_heightmap">Höhenkarte testen</string>
+    <string name="generate_hillshade_from_3d_maps">Erzeugen von gerasterten Reliefkarten aus 3D-Karten</string>
+    <string name="app_mode_climbing">Klettern</string>
+    <string name="offline_weather_forecast">Offline-Wettervorhersage</string>
+    <string name="offline_weather_forecast_desc">Sie können die Wettervorhersage für 7 Tage herunterladen.</string>
+    <string name="clear_online_cache_description">Dies wird den Cache der Online-Wetterkacheln löschen.</string>
+    <string name="clear_online_cache">Online-Cache leeren</string>
+    <string name="offline_cache">Offline-Cache</string>
+    <string name="shared_string_alt_name">Alternativer Name</string>
+    <string name="shared_string_pounds">Pfund</string>
+    <string name="metric_lbs">Lbs</string>
+    <string name="weather_forecast_is_outdated">Die Vorhersage ist veraltet.</string>
+    <string name="shared_string_all_world">Die ganze Welt</string>
+    <string name="weather_forecast">Wettervorhersage</string>
+    <string name="free_maps_updates">Kostenlose Updates (Notfall)</string>
+    <string name="token_is_not_valid">Token ist ungültig</string>
+    <string name="common_weight_limit_error">Der Mindestwert ist \"%1$s\" %2$s. Verwenden Sie das Profil \"%3$s\", wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
+    <string name="rendering_value_defaultMedium_name">Standard (mittel)</string>
+    <string name="select_layer">Ebene wählen</string>
+    <string name="speak_route_deviation">Abweichung von der Route ankündigen</string>
+    <string name="camera_app">Kamera-App</string>
+    <string name="shutter_sound">Auslöser-Ton</string>
+    <string name="proxy_port_max_warning">Der höchste Wert für einen Port ist %1$s</string>
+    <string name="weather_download_error">Konnte %1$s Kacheln nicht herunterladen.</string>
+    <string name="external_device_forget_sensor">Sensor entfernen</string>
+    <string name="external_device_forget_sensor_description">Sensor wird aus der Liste entfernt. Der Sensor kann jederzeit erneut gekoppelt werden.</string>
+    <string name="external_device_disconnected">Getrennt</string>
+    <string name="external_device_connected">Verbunden</string>
+    <string name="external_device_menu_forget">Entkoppeln</string>
+    <string name="external_device_characteristic_speed">Geschwindigkeit</string>
+    <string name="external_device_characteristic_distance">Entfernung</string>
+    <string name="external_device_characteristic_total_distance">Gesamtentfernung</string>
+    <string name="external_device_characteristic_battery_level">Akku</string>
+    <string name="external_device_details_information">Information</string>
+    <string name="external_device_details_received_data">Empfangene Daten</string>
+    <string name="external_device_details_battery">Akku</string>
+    <string name="external_device_details_speed">Geschwindigkeit</string>
+    <string name="external_device_details_total_distance">Gesamtentfernung</string>
+    <string name="external_device_details_distance">Entfernung</string>
+    <string name="external_device_details_disconnect">Trennen</string>
+    <string name="bluetooth_disconnected">%s getrennt</string>
+    <string name="bluetooth_connected">%s verbunden</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth ist ausgeschaltet</string>
+    <string name="ant_plus_help_title">Ich weiß nicht, welche Art von Sensor ich habe</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">ANT+-Sensor koppeln</string>
+    <string name="external_device_low_battery">Niedriger Akku</string>
+    <string name="external_device_characteristic_heart_rate">Herzfrequenz</string>
+    <string name="external_device_characteristic_temperature">Temperatur</string>
+    <string name="external_device_details_pair">Kopplung</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="ant_plus_searching">Suche</string>
+    <string name="external_device_characteristic_gear_ratio">Getriebeübersetzung</string>
+    <string name="external_device_characteristic_cadence">Trittfrequenz</string>
+    <string name="external_device_characteristic_diastolic">Diastolisch</string>
+    <string name="external_device_characteristic_arterial_pressure">Arterieller Blutdruck</string>
+    <string name="external_device_characteristic_cuff_pressure">Manschettendruck</string>
+    <string name="external_device_characteristic_stride_length">Schrittweite</string>
+    <string name="external_device_details_connection">Verbindung</string>
+    <string name="bluetooth_found_title">Gefunden: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth wird nicht unterstützt</string>
+    <string name="ant_plus_searching_text">Suche nach Sensoren</string>
+    <string name="external_device_characteristic_pulse_rate">Pulsfrequenz</string>
+    <string name="ble_search_again">Erneut suchen</string>
+    <string name="ant_plus_open_settings">Einstellungen öffnen</string>
+    <string name="ant_plus_nothing_found_text">Es können keine Sensoren gefunden werden</string>
+    <string name="external_device_details_connect">Verbinden</string>
+    <string name="ant_plus_bluetooth_off_description">Schalten Sie die Bluetooth-Suche ein und koppeln Sie die Sensoren.</string>
+    <string name="ant_plus_pair_new_sensor_ble">Bluetooth-LE-Sensor koppeln</string>
+    <string name="ant_plus_pair_new_sensor">Neuen Sensor koppeln</string>
+    <string name="external_device_characteristic_systolic">Systolisch</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Sie können Bluetooth LE- und ANT+-Sensoren mit OsmAnd koppeln.</string>
+    <string name="learn_more_about_sensors_link">Mehr über Sensoren erfahren.</string>
+    <string name="ant_plus_nothing_found_description">Stellen Sie sicher:
+\n- Bluetooth ist eingeschaltet
+\n- Der Sensor ist aktiviert
+\n- Dieses Gerät befindet sich in der Nähe des Sensors</string>
+    <string name="ant_plus_searching_text_description">Bitte halten Sie das Gerät nahe an den Sensor. Sie müssen den Sensor aktivieren, damit OsmAnd ihn finden kann.</string>
+    <string name="file_already_exists_description">»%1$s«. Eine Datei mit diesem Namen existiert bereits. Ersetzen überschreibt alle mit der aktuellen Version vorgenommenen Änderungen.</string>
+    <string name="file_already_exists">Datei existiert bereits</string>
+    <string name="nav_profile_confirm_delete">Sind Sie sicher, dass Sie »%1$s« löschen möchten\?</string>
+    <string name="is_imported">%1$s ist importiert.</string>
+    <string name="no_search_results">Keine Ergebnisse</string>
+    <string name="search_track_by_name">Track nach Namen suchen</string>
 </resources>

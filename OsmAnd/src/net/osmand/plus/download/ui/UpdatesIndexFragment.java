@@ -44,7 +44,6 @@ import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;

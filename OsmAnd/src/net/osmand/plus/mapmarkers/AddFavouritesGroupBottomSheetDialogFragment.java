@@ -2,16 +2,12 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-
-import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.mapmarkers.adapters.FavouritesGroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
-import net.osmand.plus.myplaces.DefaultFavoritesListener;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 
 public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
 
@@ -39,7 +35,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	@Override
 	public GroupsAdapter createAdapter() {
 		if (!favouritesHelper.isFavoritesLoaded()) {
-			favouritesHelper.addListener(listener = new DefaultFavoritesListener() {
+			favouritesHelper.addListener(listener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
 					if (adapter != null) {

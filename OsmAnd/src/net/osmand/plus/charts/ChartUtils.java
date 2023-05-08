@@ -1,7 +1,7 @@
 package net.osmand.plus.charts;
 
+import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.plus.track.helpers.GpxUiHelper.HOUR_IN_MILLIS;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;

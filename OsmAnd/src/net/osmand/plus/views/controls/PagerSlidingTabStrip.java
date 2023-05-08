@@ -26,7 +26,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -161,6 +160,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int tabBackgroundResId = R.drawable.background_tab;
 
 	private Locale locale;
+	private CustomTabProvider customTabProvider;
 
 	public PagerSlidingTabStrip(Context context) {
 		this(context, null);
@@ -272,6 +272,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 			if (pager.getAdapter() instanceof CustomTabProvider) {
 				tabView = ((CustomTabProvider) pager.getAdapter()).getCustomTabView(this, i);
+			} else if (customTabProvider != null) {
+				tabView = customTabProvider.getCustomTabView(this, i);
 			} else {
 				tabView = LayoutInflater.from(getContext()).inflate(R.layout.tab, this, false);
 			}
@@ -340,6 +342,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		}
 		if (pager.getAdapter() instanceof CustomTabProvider) {
 			((CustomTabProvider) pager.getAdapter()).tabStylesUpdated(tabsContainer, currentPosition);
+		} else if (customTabProvider != null) {
+			customTabProvider.tabStylesUpdated(tabsContainer, currentPosition);
 		} else {
 			for (int i = 0; i < tabCount; i++) {
 				View v = tabsContainer.getChildAt(i);
@@ -569,6 +573,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		if (tab != null) {
 			if (pager.getAdapter() instanceof CustomTabProvider) {
 				((CustomTabProvider) pager.getAdapter()).deselect(tab);
+			} else if (customTabProvider != null) {
+				customTabProvider.deselect(tab);
 			} else {
 				TextView title = tab.findViewById(R.id.tab_title);
 				if (title != null) {
@@ -590,6 +596,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		if (tab != null) {
 			if (pager.getAdapter() instanceof CustomTabProvider) {
 				((CustomTabProvider) pager.getAdapter()).select(tab);
+			} else if (customTabProvider != null) {
+				customTabProvider.select(tab);
 			} else {
 				TextView title = tab.findViewById(R.id.tab_title);
 				if (title != null) {
@@ -895,5 +903,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	@ColorInt
 	protected int getColor(@ColorInt int resId) {
 		return ColorUtilities.getColor(getContext(), resId);
+	}
+
+	public void setCustomTabProvider(CustomTabProvider customTabProvider) {
+		this.customTabProvider = customTabProvider;
 	}
 }

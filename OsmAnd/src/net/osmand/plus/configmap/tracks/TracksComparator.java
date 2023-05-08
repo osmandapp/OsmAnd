@@ -1,8 +1,9 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_DESCENDING;
+import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
+import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.MapUtils;
 
@@ -30,6 +32,12 @@ public class TracksComparator implements Comparator<Object> {
 		this.latLon = latLon;
 	}
 
+	public TracksComparator(@NonNull TracksSortMode sortMode, @NonNull LatLon latLon) {
+		trackTab = null;
+		this.sortMode = sortMode;
+		this.latLon = latLon;
+	}
+
 	@Override
 	public int compare(Object o1, Object o2) {
 		if (o1 instanceof Integer) {
@@ -45,15 +53,20 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareTrackItems(@NonNull TrackItem item1, @NonNull TrackItem item2) {
+		Integer currentTrack = checkCurrentTrack(item1, item2);
+		if (currentTrack != null) {
+			return currentTrack;
+		}
+
 		GpxDataItem dataItem1 = item1.getDataItem();
 		GpxDataItem dataItem2 = item2.getDataItem();
 		GPXTrackAnalysis analysis1 = dataItem1 != null ? dataItem1.getAnalysis() : null;
 		GPXTrackAnalysis analysis2 = dataItem2 != null ? dataItem2.getAnalysis() : null;
 
-		if (shouldCheckAnalisis()) {
-			Integer value = checkItemsAnalysis(item1, item2, analysis1, analysis2);
-			if (value != null) {
-				return value;
+		if (shouldCheckAnalysis()) {
+			Integer analysis = checkItemsAnalysis(item1, item2, analysis1, analysis2);
+			if (analysis != null) {
+				return analysis;
 			}
 		}
 
@@ -77,12 +90,12 @@ public class TracksComparator implements Comparator<Object> {
 			case LAST_MODIFIED:
 				return compareItemFilesByLastModified(item1, item2);
 			case DISTANCE_DESCENDING:
-				if (analysis1.totalDistance == analysis2.totalDistance) {
+				if (Math.abs(analysis1.totalDistance - analysis2.totalDistance) < EQUIVALENT_TOLERANCE) {
 					return compareTrackItemNames(item1, item2);
 				}
 				return -Float.compare(analysis1.totalDistance, analysis2.totalDistance);
 			case DISTANCE_ASCENDING:
-				if (analysis1.totalDistance == analysis2.totalDistance) {
+				if (Math.abs(analysis1.totalDistance - analysis2.totalDistance) < EQUIVALENT_TOLERANCE) {
 					return compareTrackItemNames(item1, item2);
 				}
 				return Float.compare(analysis1.totalDistance, analysis2.totalDistance);
@@ -100,8 +113,19 @@ public class TracksComparator implements Comparator<Object> {
 		return 0;
 	}
 
-	private boolean shouldCheckAnalisis() {
+	private boolean shouldCheckAnalysis() {
 		return sortMode != NAME_ASCENDING && sortMode != NAME_DESCENDING && sortMode != LAST_MODIFIED;
+	}
+
+	@Nullable
+	private Integer checkCurrentTrack(@NonNull TrackItem item1, @NonNull TrackItem item2) {
+		if (item1.isShowCurrentTrack()) {
+			return -1;
+		}
+		if (item2.isShowCurrentTrack()) {
+			return 1;
+		}
+		return null;
 	}
 
 	@Nullable
@@ -117,7 +141,7 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareNearestItems(@NonNull TrackItem item1, @NonNull TrackItem item2,
-	                                @Nullable GPXTrackAnalysis analysis1, @Nullable GPXTrackAnalysis analysis2) {
+	                                @NonNull GPXTrackAnalysis analysis1, @NonNull GPXTrackAnalysis analysis2) {
 		if (analysis1.latLonStart == null) {
 			return analysis2.latLonStart == null ? compareTrackItemNames(item1, item2) : 1;
 		}
@@ -149,10 +173,6 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareTrackItemNames(@NonNull TrackItem item1, @NonNull TrackItem item2) {
-		if (trackTab.type == TrackTabType.FOLDER) {
-			return collator.compare(item1.getName(), item2.getName());
-		} else {
-			return collator.compare(item1.getPath(), item2.getPath());
-		}
+		return collator.compare(item1.getName(), item2.getName());
 	}
 }

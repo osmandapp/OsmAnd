@@ -30,7 +30,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickActionListFragment;
@@ -243,10 +243,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	private void openFavouritesActivity(Activity activity, int tabType) {
 		OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		Intent favoritesActivity = new Intent(activity, appCustomization.getFavoritesActivity());
-		favoritesActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		Intent intent = new Intent(activity, appCustomization.getMyPlacesActivity());
+		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		app.getSettings().FAVORITES_TAB.set(tabType);
-		startActivity(favoritesActivity);
+		startActivity(intent);
 	}
 
 	private int getFavoritesTabId(ExportSettingsType type) {
@@ -257,11 +257,11 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			case MULTIMEDIA_NOTES:
 				return AudioVideoNotesPlugin.NOTES_TAB;
 			case TRACKS:
-				return FavoritesActivity.GPX_TAB;
+				return MyPlacesActivity.GPX_TAB;
 			case FAVORITES:
 			case FAVORITES_BACKUP:
 			default:
-				return FavoritesActivity.FAV_TAB;
+				return MyPlacesActivity.FAV_TAB;
 		}
 	}
 

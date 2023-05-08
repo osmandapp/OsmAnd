@@ -1,6 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.track.helpers.GpxUiHelper.HOUR_IN_MILLIS;
+import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -38,7 +38,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.myplaces.ui.GPXItemPagerAdapter;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
 import net.osmand.plus.charts.GpxMarkerView;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;

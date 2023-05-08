@@ -60,7 +60,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
@@ -109,6 +109,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public static final int NOTES_TAB = R.string.notes;
 	public static final String DEFAULT_ACTION_SETTING_ID = "av_default_action";
+	public static final String EXTERNAL_RECORDER_SETTING_ID = "av_external_recorder";
+	public static final String EXTERNAL_PHOTO_CAM_SETTING_ID = "av_external_cam";
 	public static final String THREEGP_EXTENSION = "3gp";
 	public static final String MPEG4_EXTENSION = "mp4";
 	public static final String IMG_EXTENSION = "jpg";
@@ -556,8 +558,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_RECORD_VIDEO, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(AV_NOTES_TAKE_PHOTO, noAppMode);
 
-		AV_EXTERNAL_RECORDER = registerBooleanPreference("av_external_recorder", false);
-		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference("av_external_cam", true);
+		AV_EXTERNAL_RECORDER = registerBooleanPreference(EXTERNAL_RECORDER_SETTING_ID, false);
+		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference(EXTERNAL_PHOTO_CAM_SETTING_ID, true);
 		AV_VIDEO_FORMAT = registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4);
 		AV_VIDEO_QUALITY = registerIntPreference("av_video_quality", VIDEO_QUALITY_DEFAULT);
 		AV_AUDIO_FORMAT = registerIntPreference("av_audio_format", AUDIO_FORMAT_DEFAULT);
@@ -595,15 +597,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
-		if (AV_PHOTO_PLAY_SOUND.get()) {
-			loadCameraSound();
-		}
+		loadCameraSoundIfNeeded(false);
 		AV_PHOTO_PLAY_SOUND.addListener(change -> app.runInUIThread(() -> {
-			if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
-				loadCameraSound();
-			}
+			loadCameraSoundIfNeeded(true);
 		}));
 		return true;
+	}
+
+	private void loadCameraSoundIfNeeded(boolean checkSoundPool) {
+		if (isShutterSoundEnabled() && (!checkSoundPool || soundPool == null)) {
+			loadCameraSound();
+		}
 	}
 
 	private void loadCameraSound() {
@@ -623,6 +627,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				log.error("cannot get shotId for sounds/camera_click.ogg");
 			}
 		}
+	}
+
+	public boolean isShutterSoundEnabled() {
+		return AV_PHOTO_PLAY_SOUND.get();
+	}
+
+	public static boolean canDisableShutterSound() {
+		CameraInfo info = new CameraInfo();
+		return info.canDisableShutterSound;
 	}
 
 	@Override
@@ -1368,28 +1381,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void internalShoot() {
-		requireMapActivity().getMyApplication().runInUIThread(() -> {
+		app.runInUIThread(() -> {
 			if (cam != null) {
-				CameraInfo info = new CameraInfo();
-				if (info.canDisableShutterSound) {
-					cam.enableShutterSound(AV_PHOTO_PLAY_SOUND.get());
+				if (canDisableShutterSound()) {
+					cam.enableShutterSound(isShutterSoundEnabled());
 				}
-				if (!autofocus) {
-					cam.takePicture(null, null, new JpegPhotoHandler());
+				if (autofocus) {
+					takePictureOnAutofocus();
 				} else {
-					cam.autoFocus(new Camera.AutoFocusCallback() {
-						@Override
-						public void onAutoFocus(boolean success, Camera camera) {
-							try {
-								cam.takePicture(null, null, new JpegPhotoHandler());
-							} catch (Exception e) {
-								logErr(e);
-								closeRecordingMenu();
-								closeCamera();
-								finishRecording();
-							}
-						}
-					});
+					takePicture();
 				}
 			}
 		}, 200);
@@ -1467,7 +1467,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordingDone = true;
 			if (cam != null && lastTakingPhoto != null) {
 				try {
-					cam.takePicture(null, null, new JpegPhotoHandler());
+					takePicture();
 				} catch (RuntimeException e) {
 					closeRecordingMenu();
 					closeCamera();
@@ -1475,6 +1475,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		}
+	}
+
+	public void takePictureOnAutofocus() {
+		cam.autoFocus((success, camera) -> {
+			try {
+				takePicture();
+			} catch (Exception e) {
+				logErr(e);
+				closeRecordingMenu();
+				closeCamera();
+				finishRecording();
+			}
+		});
+	}
+
+	public void takePicture() {
+		cam.takePicture(null, null, new JpegPhotoHandler());
 	}
 
 	public void takePhotoExternal(double lat, double lon, MapActivity mapActivity) {
@@ -1590,8 +1607,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
-		mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
+	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
+		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
 		if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
 			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 		}
@@ -1897,19 +1914,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public class JpegPhotoHandler implements PictureCallback {
 
-		public JpegPhotoHandler() {
-		}
+		public JpegPhotoHandler() { }
 
 		@Override
 		public void onPictureTaken(byte[] data, Camera camera) {
 			photoJpegData = data;
-
-			if (AV_PHOTO_PLAY_SOUND.get()) {
-				if (soundPool != null && shotId != 0) {
-					soundPool.play(shotId, 0.7f, 0.7f, 0, 0, 1);
-				}
+			if (isShutterSoundEnabled() && soundPool != null && shotId != 0) {
+				soundPool.play(shotId, 0.7f, 0.7f, 0, 0, 1);
 			}
-
 			if (recordingMenu != null) {
 				recordingMenu.showFinalPhoto(data, FULL_SCEEN_RESULT_DELAY_MS);
 			}

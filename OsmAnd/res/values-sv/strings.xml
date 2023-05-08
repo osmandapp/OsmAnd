@@ -330,7 +330,7 @@
     <string name="city_type_city">Större stad</string>
     <string name="animate_route_off">Stoppa simuleringen</string>
     <string name="animate_route">Starta simuleringen</string>
-    <string name="file_can_not_be_renamed">Filen kan inte döpas om.</string>
+    <string name="file_can_not_be_renamed">Det gick inte att ändra filnamnet.</string>
     <string name="file_with_name_already_exists">En fil med det namnet finns redan.</string>
     <string name="poi_query_by_name_matches_categories">Hittade flera relaterade IP-kategorier.</string>
     <string name="data_to_search_poi_not_available">Lokala data för att söka POI är inte tillgängliga.</string>
@@ -1248,9 +1248,9 @@
     <string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
     <string name="fav_point_dublicate">Duplicerat namn på favorit angivet</string>
-    <string name="fav_point_dublicate_message">Favorit omdöpt till %1$s för att undvika dubbletter.</string>
+    <string name="fav_point_dublicate_message">Favoritens namn ändras till %1$s för att undvika dubbletter.</string>
     <string name="print_route">Skriv ut rutt</string>
-    <string name="fav_point_emoticons_message">Favorit omdöpt till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
+    <string name="fav_point_emoticons_message">Favoritens namn ändras till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
     <string name="speed_limit_exceed_message">Välj hur mycket hastighetsgränsen måste överskridas för att du ska få ett röstmeddelande.</string>
     <string name="speed_limit_exceed">Tolerans för hastighetsgräns</string>
     <string name="anonymous_user_hint">Anonyma användare kan inte:
@@ -3262,9 +3262,9 @@
     <string name="select_segments">Välj segment</string>
     <string name="select_segments_description">%1$s innehåller mer än ett segment, du måste välja önskad del för navigering.</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="open_place_reviews_plugin_description">Skicka in foton, recensioner och länkar om offentliga platser som restauranger, hotell, museer och vägpunkter som öppen data https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Bidra till OpenPlaceReviews-projektet med sådant som foton på, recensioner av eller länkar till offentliga platser såsom restauranger, hotell eller museer
 \n
-\nLäs mer på: http://openplacereviews.org</string>
+\nHitta instruktioner för hur du bidrar på vår webbplats https://osmand.net/docs/user/plugins/openplacereviews .</string>
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
     <string name="hillshade_slope_contour_lines">Terrängskuggning / Lutning / Höjdkurvor</string>
@@ -4454,4 +4454,131 @@
     <string name="shared_string_shape">Figur</string>
     <string name="location_source">Platskälla</string>
     <string name="app_mode_moped">Moped</string>
+    <string name="ui_customization">Anpassning av användargränssnittet</string>
+    <string name="osm_editing_prefs_descr">Användarnamn, lösenord, offline-redigering</string>
+    <string name="auto_25_chars_route_tu_kl">Gör en u-sväng och håll till vänster</string>
+    <string name="auto_25_chars_route_tu_kr">Gör en u-sväng och håll till höger</string>
+    <string name="weather_forecast">Väderprognos</string>
+    <string name="weather_forecast_is_outdated">Prognosen är föråldrad.</string>
+    <string name="rendering_value_defaultMedium_name">Standard (medium)</string>
+    <string name="shutter_sound">Slutarljud</string>
+    <string name="speak_route_deviation">Meddela avvikelser från rutten</string>
+    <string name="offline_cache">Offline-cache</string>
+    <string name="shared_string_all_world">Hela världen</string>
+    <string name="proxy_port_max_warning">Maximalt portvärde är %1$s</string>
+    <string name="camera_app">Kamera-app</string>
+    <string name="shared_string_pounds">pund</string>
+    <string name="weather_plugin_description">Tillhandahåller
+\n- 24-timmars och 7-dagars väderprognos med 5 lager.
+\n- platsbaserade widgetar
+\n- temperatur och lufttryck med isolinjer
+\n
+\nVäderdatat tillhandahålls av Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="rendering_engine_failed_descr">OsmAnd har återgått till \"version 1\" för kartrendering. Du kan försöka byta tillbaka till den nya \"Version 2 (OpenGL)\"-renderingsmotorn i inställningarna.
+\n
+\nUnderlätta gärna förbättringar genom att tillhandahålla din fellogg.</string>
+    <string name="marker_1st">Första markören</string>
+    <string name="offline_weather_forecast_desc">Du kan hämta väderprognoser för 7 dagar.</string>
+    <string name="switch_widget_mode_desc">Genom att trycka på widgeten kan du byta läge.</string>
+    <string name="free_maps_updates">Gratis uppdateringar (nödsituationer)</string>
+    <string name="clear_online_cache">Rensa online-cache</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="token_is_not_valid">Token är inte giltig</string>
+    <string name="shared_string_alt_name">Alternativt namn</string>
+    <string name="enable_3d_maps">Aktivera 3D-kartor</string>
+    <string name="disable_vertex_hillshade_3d">Inaktivera terrängskuggning i 3D</string>
+    <string name="generate_slope_from_3d_maps">Generera terränglutningsraster från 3D-kartor</string>
+    <string name="generate_hillshade_from_3d_maps">Generera terrängskuggningsraster från 3D-kartor</string>
+    <string name="weather_offline_forecast">Offline väderprognos</string>
+    <string name="common_weight_limit_error">Minsta värde är \"%1$s\" %2$s. Använd profilen \"%3$s\" om fordonets vikt är lägre än minimivärdet.</string>
+    <string name="clear_online_cache_description">Detta kommer rensa cacheminnet för online väderleksraster.</string>
+    <string name="test_heightmap">Testa höjdkarta</string>
+    <string name="offline_weather_forecast">Väderprognos offline</string>
+    <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
+    <string name="marker_2nd">Andra markören</string>
+    <string name="goods_delivery_desc_2">Vägar stängda för varuleveranser kommer att undvikas.</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tunnlar för vattendrag</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Dölj inte tunnlar för vattendrag</string>
+    <string name="app_mode_climbing">Klättring</string>
+    <string name="weather_download_error">Kunde inte ladda ned %1$s rastertiles.</string>
+    <string name="select_layer">Välj lager</string>
+    <string name="release_4_4">• Förbättrad \"Spår\"-meny i \"Konfigurera karta\"
+\n
+\n• Kontextmenyn visar nu lokaliserade namn för POI
+\n
+\n• Lagt till alternativ för att dela rutt via länk
+\n
+\n• Lagt till \"Nautiska mil/fot\" som längdenhet
+\n
+\n• Lagt till nytt fast läge för kartorientering
+\n
+\n• Förenklad startskärm
+\n
+\n• Fast positionsvisning i delat skärmläge i Android Auto
+\n
+\n• Lagt till \"hastighet/lutning\"-graf för spåranalys
+\n
+\n• Android 13 flyttade appspråk till systeminställningar
+\n
+\n• Åtgärdade problem med att visa veganska platser
+\n
+\n• Möjlighet att ladda ner online-raster som används som överläggs- eller underläggskartor
+\n
+\n• Stöd för brittiska måttenheter för \"Fordonsparametrar\"
+\n
+\n• Ny profil för moped
+\n
+\n• Nytt alternativ \"Automatisk\" för positionsvisning
+\n
+\n• Åtgärdat kartgester för lutning, zoom och rotation
+\n
+\n</string>
+    <string name="goods_delivery_desc_3">Gäller endast för varubilar som inte väger mer än 3,5 ton.</string>
+    <string name="compass_on_circles">Kompass på cirklar</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Medelnivå</string>
+    <string name="lanes_widgets_desc">Visar aktuella körfält och framhäver de som ska köras för navigeringen.</string>
+    <string name="navigation_points">Navigeringspunkter</string>
+    <string name="app_mode_mountain_bicycle">Mountainbike</string>
+    <string name="get_altitude_data">Hämta höjddata</string>
+    <string name="map_widget_trip_recording_uphill">Stigning</string>
+    <string name="widget_secondary_desc_part_of">Del av insticksmodulen %1$s.</string>
+    <string name="shared_string_item">Objekt</string>
+    <string name="simulation_preview_mode_title">Snabb förhandsvisningsläge</string>
+    <string name="simulation_preview_mode_desc">Simuleringens hastighet kommer att vara max på raksträckor och sakta ner endast vid korsningar.</string>
+    <string name="circle_settings">Cirkelinställningar</string>
+    <string name="distance_circles">Avståndscirklar</string>
+    <string name="av_notes_choose_action_widget_desc">Välj åtgärd.</string>
+    <string name="routing_attr_freeride_policy_only_if_necessary_name">Endast om det är nödvändigt</string>
+    <string name="on_with_params">%1$s på %2$s</string>
+    <string name="calculate_online">Beräkna online</string>
+    <string name="route_maneuvers_desc">Navigationswidgetar aktiveras under navigering för att visa information som avstånd, ankomsttid, kommande svängar, bäring, aktuellt gatunamn, körfält, maxhastighet, ankommande varningar, ruttpunkter och intressepunkter.</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (inga begränsningar)</string>
+    <string name="routing_attr_allow_private_for_truck_description">Tillåt åtkomst till privata områden för lastbilar.</string>
+    <string name="routing_attr_allow_private_for_truck_name">Tillåt privat åtkomst (lastbil)</string>
+    <string name="map_widget_trip_recording_distance">Sträcka</string>
+    <string name="routing_attr_hazmat_category_name">Kategori av farligt gods</string>
+    <string name="map_widget_trip_recording_duration">Varaktighet</string>
+    <string name="no_altitude_data">Ingen höjddata</string>
+    <string name="track_attach_to_the_roads_descr">Spåret kommer att kopplas till vägarna med hjälp av offline-kartor. Spårets geometri kommer att ändras.</string>
+    <string name="calculate_online_altitude_descr">Beräkna höjden online på OsmAnds servrar, baserat på satellitbilder och digitala höjdmodeller. Skillnader jämfört med enhetens registrerade höjd kan användas som höjdkorrigering.</string>
+    <string name="map_widget_trip_recording_downhill">Nedför</string>
+    <string name="colour_of_circles">Färg på cirklar</string>
+    <string name="get_altitude_information">Hämta höjdinformation</string>
+    <string name="navigation_points_desc">Navigationswidgetar aktiveras under navigering för att visa information som avstånd, ankomsttid, kommande svängar, bäring, aktuellt gatunamn, körfält, maxhastighet, ankommande varningar, ruttpunkter och intressepunkter.</string>
+    <string name="route_maneuvers">Ruttmanövrar</string>
+    <string name="bearing_desc">Visar den absoluta eller relativa bäringen till ett mål i vinkelenheter (i 180 grader, 360 grader eller milliradianer).</string>
+    <string name="audio_video_notes_desc">Ger snabb åtkomst till start/stopp av ljud-, video- eller fotonotering.</string>
+    <string name="street_name_widget_desc">Gatunamn-widgeten visar det aktuella gatunamnet med en rak pil, eller nästa gatunamn med en pil som visar en kommande sväng.</string>
+    <string name="radius_rules_widget_desc">Radielinjal-vertyget visar avståndscirklar runt en vald punkt på kartan.</string>
+    <string name="bearing_secondary_desc">Du kan ändra det dataformat som används i: %1$s - %2$s - %3$s.</string>
+    <string name="altitude_widget_desc">Visar höjd över havet för den aktuella positionen.</string>
+    <string name="coordinates_widget_secondary_desc">Du kan ändra koordinatformatet i %1$s - %2$s - %3$s.</string>
+    <string name="snackbar_page_removed">\"Sidan %1$s\" har tagits bort.</string>
+    <string name="simulation_real_mode_desc">På raksträckor kommer hastigheten att vara ungefär den högsta tillåtna hastigheten.
+\nVid korsningar saktar simuleringen ner.
+\nExtra tidstillägg kommer att tillämpas vid trafiksignaler, stoppskyltar mm.</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Åk inte offpist</string>
+    <string name="osm_carto_render_descr">Liknar OpenStreetMaps Carto-stil som används på OSM:s egna hemsida</string>
+    <string name="map_markers_bar">Fältet Kartmarkörer</string>
+    <string name="simulation_constant_mode_desc">Simuleringen kommer utföras med konstant vald hastighet.</string>
 </resources>

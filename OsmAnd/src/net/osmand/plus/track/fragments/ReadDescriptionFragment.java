@@ -25,7 +25,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -47,7 +46,6 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	protected String mContent;
 	protected ContentType mContentType;
 
-	protected OsmandApplication app;
 	protected WebViewEx mWebView;
 	protected TextView mPlainTextView;
 
@@ -59,7 +57,6 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			readBundle(savedInstanceState);
@@ -94,7 +91,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			int statusBarColor = isNightMode(true) ? R.color.status_bar_color_dark : R.color.status_bar_color_light;

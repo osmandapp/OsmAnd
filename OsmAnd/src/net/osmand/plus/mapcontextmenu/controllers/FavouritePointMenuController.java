@@ -23,7 +23,7 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;

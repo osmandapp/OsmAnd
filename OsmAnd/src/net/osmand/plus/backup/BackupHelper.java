@@ -511,13 +511,13 @@ public class BackupHelper {
 
 			@Override
 			public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
-				BackupHelper.this.prepareBackupTask = null;
+				setPrepareBackupTask(null);
 				for (OnPrepareBackupListener listener : prepareBackupListeners) {
 					listener.onBackupPrepared(backupResult);
 				}
 			}
 		});
-		this.prepareBackupTask = prepareBackupTask;
+		setPrepareBackupTask(prepareBackupTask);
 		prepareBackupTask.prepare();
 		return true;
 	}
@@ -531,6 +531,10 @@ public class BackupHelper {
 
 	public void removePrepareBackupListener(@NonNull OnPrepareBackupListener listener) {
 		prepareBackupListeners.remove(listener);
+	}
+
+	private void setPrepareBackupTask(@Nullable PrepareBackupTask task) {
+		this.prepareBackupTask = task;
 	}
 
 	@Nullable

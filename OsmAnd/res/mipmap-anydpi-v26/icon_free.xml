@@ -2,4 +2,5 @@
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@mipmap/adaptive_icon_osmand_background" />
     <foreground android:drawable="@mipmap/adaptive_icon_osmand_logo" />
+    <monochrome android:drawable="@drawable/ic_launcher_osmand_monochrome" />
 </adaptive-icon>

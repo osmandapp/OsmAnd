@@ -13,7 +13,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -409,8 +408,8 @@ public class BinaryRoutePlanner {
 	private double calculateRouteSegmentTime(RoutingContext ctx, boolean reverseWaySearch, RouteSegment segment) {
 		final RouteDataObject road = segment.road;
 		// store <segment> in order to not have unique <segment, direction> in visitedSegments
-		short segmentInd = !reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
-		short prevSegmentInd = reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
+		short segmentInd = reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
+		short prevSegmentInd = !reverseWaySearch ? segment.getSegmentStart() : segment.getSegmentEnd();
 		final int x = road.getPoint31XTile(segmentInd);
 		final int y = road.getPoint31YTile(segmentInd);
 		final int prevX = road.getPoint31XTile(prevSegmentInd);

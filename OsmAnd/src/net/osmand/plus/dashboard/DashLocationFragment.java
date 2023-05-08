@@ -1,15 +1,16 @@
 package net.osmand.plus.dashboard;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
 import android.annotation.SuppressLint;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -54,12 +55,11 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		if (app == null || dashboard == null) {
 			return;
 		}
-		UiUtilities ic = app.getUIUtilities();
-		UpdateLocationViewCache cache = ic.getUpdateLocationViewCache();
-		for (DashLocationView lv : distances) {
-			cache.arrowResId = lv.arrowResId;
-			cache.paintTxt = lv.paint;
-			ic.updateLocationView(cache, lv.arrow, lv.txt, lv.loc);
+		UpdateLocationViewCache cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		for (DashLocationView view : distances) {
+			cache.arrowResId = view.arrowResId;
+			cache.paintTxt = view.paint;
+			UpdateLocationUtils.updateLocationView(app, cache, view.arrow, view.txt, view.loc);
 		}
 	}
 

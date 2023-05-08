@@ -37,7 +37,7 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
@@ -468,7 +468,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 
 		@Override
-		public void onGpxDataItemReady(GpxDataItem item) {
+		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			for (BaseBottomSheetItem bottomSheetItem : items) {
 				Object tag = bottomSheetItem.getTag();
 				if (tag instanceof FileSettingsItem) {

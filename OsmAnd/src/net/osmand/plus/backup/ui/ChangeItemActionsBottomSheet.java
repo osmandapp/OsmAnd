@@ -152,10 +152,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		titleTv.setText(title);
 		descriptionTv.setText(description);
 		Drawable icon;
-		if(item.localFile == null){
+		if (item.localFile == null) {
 			icon = getIcon(R.drawable.ic_action_cloud_delete, enabled ? R.color.color_osm_edit_delete : ColorUtilities.getSecondaryIconColorId(nightMode));
-			titleTv.setTextColor(enabled ? ContextCompat.getColor(app, R.color.backup_warning): ColorUtilities.getSecondaryTextColorId(nightMode));
-		}else{
+			titleTv.setTextColor(enabled ? ContextCompat.getColor(app, R.color.backup_warning) : ColorUtilities.getSecondaryTextColorId(nightMode));
+		} else {
 			icon = getIcon(R.drawable.ic_action_cloud_upload_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode));
 			titleTv.setTextColor(enabled ? ColorUtilities.getActiveColor(app, nightMode) : ColorUtilities.getSecondaryTextColor(app, nightMode));
 		}
@@ -165,9 +165,9 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			if(operationType == SYNC_OPERATION_DELETE){
 				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode));
 				builder.setTitle(app.getString(R.string.shared_string_delete_file));
-				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.fileName));
+				builder.setMessage(getString(R.string.cloud_version_confirm_delete, item.title));
 				builder.setNeutralButton(R.string.shared_string_cancel, null)
-						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+						.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
 							syncItem(operationType);
 							dismiss();
 						});

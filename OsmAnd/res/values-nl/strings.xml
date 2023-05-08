@@ -242,7 +242,7 @@
     <string name="map_overlay">Extra kaartlaag</string>
     <string name="map_overlay_descr">Kies de extra kaartlaag</string>
     <string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd.</string>
-    <string name="select_tile_source_to_install">(Raster)kaarten om te installeren of te updaten kiezen.</string>
+    <string name="select_tile_source_to_install">Selecteer tegelkaartbronnen:</string>
     <string name="internet_not_available">De benodigde internetverbinding voor deze actie is niet beschikbaar.</string>
     <string name="install_more">Installeer meer…</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten in plaats van (raster)kaartsegmenten te gebruiken.</string>
@@ -5045,4 +5045,125 @@
     <string name="movement_speed">Bewegingssnelheid</string>
     <string name="simulation_position_description">Selecteer een trackbestand dat u wilt gebruiken als bewegingsbegeleiding.</string>
     <string name="shared_string_inches">inch</string>
+    <string name="shutter_sound">Sluitergeluid</string>
+    <string name="camera_app">Camera app</string>
+    <string name="speak_route_deviation">Kondig afwijking van de route aan</string>
+    <string name="select_layer">Selecteer laag</string>
+    <string name="clear_online_cache_description">Dit wist de cache voor online weertegels.</string>
+    <string name="free_maps_updates">Gratis updates (noodgevallen)</string>
+    <string name="clear_online_cache">Verwijder online cache</string>
+    <string name="offline_cache">Offline cache</string>
+    <string name="token_is_not_valid">Token is niet geldig</string>
+    <string name="app_mode_climbing">Klimmen</string>
+    <string name="shared_string_alt_name">Alternatieve naam</string>
+    <string name="generate_slope_from_3d_maps">Genereer hellingrasterkaarten uit 3D-kaarten</string>
+    <string name="enable_3d_maps">3D-kaarten inschakelen</string>
+    <string name="weather_forecast">Weersvoorspelling</string>
+    <string name="sound_beep_complex_loud">Pieptoon: complex luid</string>
+    <string name="proxy_port_max_warning">De maximale poortwaarde is %1$s</string>
+    <string name="file_already_exists_description">\"%1$s\". Een bestand met die naam bestaat al. Vervangen overschrijft alle wijzigingen die zijn aangebracht met de huidige versie.</string>
+    <string name="file_already_exists">Bestand bestaat al</string>
+    <string name="external_device_low_battery">Batterij bijna leeg</string>
+    <string name="external_device_forget_sensor">Vergeet sensor</string>
+    <string name="external_device_forget_sensor_description">De sensor wordt uit de lijst verwijderd. U kunt deze sensor op elk gewenst moment opnieuw koppelen.</string>
+    <string name="external_device_disconnected">Verbinding verbroken</string>
+    <string name="external_device_connected">Verbonden</string>
+    <string name="external_device_menu_forget">Vergeet</string>
+    <string name="external_device_characteristic_speed">Snelheid</string>
+    <string name="external_device_characteristic_distance">Afstand</string>
+    <string name="external_device_characteristic_total_distance">Totale afstand</string>
+    <string name="external_device_characteristic_battery_level">Batterij</string>
+    <string name="external_device_characteristic_cadence">Cadans</string>
+    <string name="external_device_characteristic_heart_rate">Hartslag</string>
+    <string name="external_device_characteristic_pulse_rate">Polsslag</string>
+    <string name="external_device_characteristic_stride_length">Staplengte</string>
+    <string name="external_device_characteristic_temperature">Temperatuur</string>
+    <string name="external_device_details_information">Informatie</string>
+    <string name="external_device_details_received_data">Ontvangen gegevens</string>
+    <string name="external_device_details_connection">Verbinding</string>
+    <string name="external_device_details_battery">Batterij</string>
+    <string name="external_device_details_speed">Snelheid</string>
+    <string name="external_device_details_total_distance">Totale afstand</string>
+    <string name="external_device_details_connect">Verbinden</string>
+    <string name="external_device_details_pair">Koppelen</string>
+    <string name="bluetooth_disconnected">Verbinding verbreken, %s</string>
+    <string name="bluetooth_connected">Verbonden, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Gevonden: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth niet ondersteund</string>
+    <string name="ble_search_again">Opnieuw zoeken</string>
+    <string name="ant_plus_nothing_found_text">Kan geen sensoren vinden</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth is uitgeschakeld</string>
+    <string name="ant_plus_bluetooth_off_description">Schakel Bluetooth in om sensoren te vinden en te koppelen.</string>
+    <string name="ant_plus_searching_text_description">Houd het apparaat dicht bij de sensor. Je moet de sensor activeren zodat OsmAnd hem kan vinden.</string>
+    <string name="ant_plus_help_title">Ik weet niet welk type sensor ik heb</string>
+    <string name="ant_plus_searching">Bezig met zoeken</string>
+    <string name="ant_plus_pair_new_sensor">Nieuwe sensor koppelen</string>
+    <string name="ant_plus_open_settings">Instellingen openen</string>
+    <string name="ant_plus_pair_new_sensor_ble">Bluetooth LE-sensor koppelen</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">ANT+ sensor koppelen</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Je kunt Bluetooth LE en ANT+ sensoren koppelen met OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Leer meer over sensoren.</string>
+    <string name="sort_duration_descending">Langste duur eerst</string>
+    <string name="shared_string_yards">yards</string>
+    <string name="is_imported">%1$s is geïmporteerd.</string>
+    <string name="ant_plus_nothing_found_description">Zorg ervoor dat:
+\n- Bluetooth is ingeschakeld
+\n- Sensor is geactiveerd
+\n- Dit apparaat bevindt zich in de buurt van de sensor</string>
+    <string name="nav_profile_confirm_delete">Weet je zeker dat je \"%1$s\" wilt verwijderen\?</string>
+    <string name="external_device_details_distance">Afstand</string>
+    <string name="external_device_details_disconnect">Verbreek verbinding</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="ant_plus_searching_text">Sensoren zoeken</string>
+    <string name="release_4_4">- Verbeterd \"Tracks\" menu in \"Kaart configureren\".
+\n
+\n - Contextmenu toont nu gelokaliseerde namen voor POI\'s
+\n
+\n - Optie toegevoegd om route via link te delen
+\n
+\n - Lengte-eenheid \"Nautische mijlen/voeten\" toegevoegd
+\n
+\n - Kaartoriëntatie nieuwe vaste modus toegevoegd
+\n
+\n - Startscherm vereenvoudigd
+\n
+\n - Vaste locatiepositie in gesplitste schermmodus in Android Auto
+\n
+\n - Snelheids-/hellinggrafiek toegevoegd voor trackanalyse
+\n
+\n - Android 13 verplaatst app taalselectie naar systeeminstellingen
+\n
+\n - Problemen met de weergave van Vegan-plaatsen opgelost
+\n
+\n - Mogelijkheid toegevoegd om online tegels te downloaden die worden gebruikt als \"Overlay\" of \"Underlay\" kaarten
+\n
+\n - Ondersteuning toegevoegd van imperiale eenheden voor \"Voertuigparameters\".
+\n
+\n - Nieuw brommerprofiel
+\n
+\n - Nieuwe \"Automatisch\" weergavepositie optie toegevoegd
+\n
+\n - Kaartbewegingen voor kantelen, zoomen en draaien opgelost
+\n
+\n</string>
+    <string name="sort_duration_ascending">Kortste duur eerst</string>
+    <string name="selected_value">Geselecteerde waarde</string>
+    <string name="common_weight_limit_error">De minimumwaarde is \"%1$s\" %2$s. Gebruik het \"%3$s\" profiel indien het gewicht van het voertuig lager is dan de minimumwaarde.</string>
+    <string name="offline_weather_forecast_desc">U kunt het weerbericht voor 7 dagen downloaden.</string>
+    <string name="weather_download_error">Kon %1$s tegels niet downloaden.</string>
+    <string name="shared_string_nearest">Dichtstbijzijnde</string>
+    <string name="rendering_value_defaultMedium_name">Standaard (gemiddeld)</string>
+    <string name="sound_beep_complex">Pieptoon: complex</string>
+    <string name="shared_string_pounds">pond</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="sort_date_descending">Oudste datum eerst</string>
+    <string name="weather_forecast_is_outdated">Voorspelling is verouderd.</string>
+    <string name="shared_string_all_world">Wereldwijd</string>
+    <string name="offline_weather_forecast">Offline weersvoorspelling</string>
+    <string name="inch">inch</string>
+    <string name="test_heightmap">Test hoogtekaart</string>
+    <string name="sort_distance_ascending">Kortste afstand eerst</string>
+    <string name="sort_distance_descending">Langste afstand eerst</string>
+    <string name="sort_date_ascending">Nieuwste datum eerst</string>
 </resources>

@@ -32,6 +32,8 @@ import java.util.Set;
 public class ApplicationMode {
 
 	public static final float FAST_SPEED_THRESHOLD = 10;
+	private static final float MIN_VALUE_KM_H = -10;
+	private static final float MAX_VALUE_KM_H = 20;
 
 	private static final List<ApplicationMode> defaultValues = new ArrayList<>();
 	private static final List<ApplicationMode> values = new ArrayList<>();
@@ -84,6 +86,10 @@ public class ApplicationMode {
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
 			.icon(R.drawable.ic_action_bus_dark)
 			.description(R.string.base_profile_descr_public_transport).reg();
+
+	public static final ApplicationMode TRAIN = createBase(R.string.app_mode_train, "train")
+			.icon(R.drawable.ic_action_train)
+			.description(R.string.app_mode_train).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.icon(R.drawable.ic_action_sail_boat_dark)
@@ -283,6 +289,18 @@ public class ApplicationMode {
 		app.getSettings().MAX_SPEED.setModeValue(this, defaultSpeed);
 	}
 
+	public float getMaxSpeedToleranceLimit() {
+		return Math.min(getDefaultSpeed(), MAX_VALUE_KM_H / 3.6f);
+	}
+
+	public float getMinSpeedToleranceLimit() {
+		return Math.max(-getDefaultSpeed() / 2, MIN_VALUE_KM_H / 3.6f);
+	}
+
+	public boolean isSpeedToleranceBigRange() {
+		return (getMaxSpeedToleranceLimit() - getMinSpeedToleranceLimit()) * 3.6 > 6;
+	}
+
 	public float getStrAngle() {
 		return app.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(this);
 	}
@@ -440,12 +458,10 @@ public class ApplicationMode {
 			iconNameListener = new StateChangedListener<String>() {
 				@Override
 				public void stateChanged(String change) {
-					app.runInUIThread(() -> {
-						List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
-						for (ApplicationMode mode : modes) {
-							mode.updateAppModeIcon();
-						}
-					});
+					List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
+					for (ApplicationMode mode : modes) {
+						mode.updateAppModeIcon();
+					}
 				}
 			};
 			settings.ICON_RES_NAME.addListener(iconNameListener);
@@ -453,6 +469,10 @@ public class ApplicationMode {
 		for (ApplicationMode mode : allPossibleValues()) {
 			mode.app = app;
 			mode.updateAppModeIcon();
+		}
+
+		if (settings.APP_MODE_ORDER.isSetForMode(PUBLIC_TRANSPORT) && !settings.APP_MODE_ORDER.isSetForMode(TRAIN)) {
+			TRAIN.setOrder(PUBLIC_TRANSPORT.getOrder() + 1);
 		}
 		if (settings.APP_MODE_ORDER.isSetForMode(PEDESTRIAN)) {
 			if (!settings.APP_MODE_ORDER.isSetForMode(TRUCK)) {

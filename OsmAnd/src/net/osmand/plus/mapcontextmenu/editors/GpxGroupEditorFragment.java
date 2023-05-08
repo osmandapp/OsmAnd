@@ -15,8 +15,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.SelectPointsCategoryBottomSheet.CategorySelectionListener;
-import net.osmand.plus.myplaces.UpdateGpxCategoryTask;
-import net.osmand.plus.myplaces.UpdateGpxCategoryTask.UpdateGpxListener;
+import net.osmand.plus.myplaces.tracks.tasks.UpdateGpxCategoryTask;
+import net.osmand.plus.myplaces.tracks.tasks.UpdateGpxCategoryTask.UpdateGpxListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 

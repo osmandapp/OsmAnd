@@ -61,6 +61,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	private NetworkSettingsHelper settingsHelper;
 
 	private View buttonsContainer;
+	private View buttonsShadow;
 
 	private RecentChangesType tabType;
 	private boolean nightMode;
@@ -121,6 +122,8 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			tabItems.add(new TabItem(tabType.titleId, getString(tabType.titleId), tabType.fragment));
 		}
 		ViewPager viewPager = view.findViewById(R.id.pager);
+		buttonsShadow = view.findViewById(R.id.buttons_shadow);
+
 		viewPager.setAdapter(new OsmandFragmentPagerAdapter(getChildFragmentManager(), tabItems));
 		viewPager.setCurrentItem(tabType.ordinal());
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
@@ -142,6 +145,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 
 		setupSyncButton(syncing, preparing);
 		setupCancelButton(syncing, preparing);
+		AndroidUiHelper.updateVisibility(buttonsShadow, tabType != RECENT_CHANGES_CONFLICTS);
 		AndroidUiHelper.updateVisibility(buttonsContainer, tabType != RECENT_CHANGES_CONFLICTS);
 	}
 
@@ -245,6 +249,10 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		app.runInUIThread(this::setupBottomButtons);
 	}
 
+	public void onBackupSyncTasksUpdated() {
+		app.runInUIThread(this::setupBottomButtons);
+	}
+
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
 		if (!Algorithms.isEmpty(error)) {
@@ -252,7 +260,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-		app.runInUIThread(this::setupBottomButtons);
 	}
 
 	@Nullable

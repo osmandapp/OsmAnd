@@ -37,7 +37,6 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-import java.util.Collections;
 import java.util.List;
 
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
@@ -142,8 +141,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	private void updateAdapter() {
 		if (adapter != null) {
-			boolean preparing = backupHelper.isBackupPreparing();
-			adapter.setCloudChangeItems(!preparing ? generateData() : Collections.emptyList());
+			adapter.setCloudChangeItems(generateData());
 		}
 	}
 
@@ -162,7 +160,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	}
 
 	public static String generateTimeString(OsmandApplication app, long time, String summary) {
-			return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, getTimeString(app, time));
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, getTimeString(app, time));
 	}
 
 	public static String getTimeString(OsmandApplication app, long time) {
@@ -192,6 +190,13 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		public SyncOperationType operation;
 		public String summary;
 		public String time;
+		public boolean synced;
+
+		@NonNull
+		@Override
+		public String toString() {
+			return fileName;
+		}
 	}
 
 	protected CloudChangeItem createChangeItem(String key,

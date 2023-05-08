@@ -4077,7 +4077,7 @@
     <string name="language_description">Selecione o idioma preferido e o tipo de orientação por voz.</string>
     <string name="tts_description">Text-to-speech (TTS) pode pronunciar todos os tipos de instruções: nomes de ruas, instruções de viragem, nomes de POI, etc.</string>
     <string name="tts_title">TTS</string>
-    <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: apenas estão disponíveis as instruções de viragem. Não pode pronunciar nomes de ruas ou nomes de POI.</string>
+    <string name="recorded_description">A voz gravada soa melhor, mas só é possível pronunciar frases pré-gravadas: apenas estão disponíveis instruções de viragem. Não pronuncia nomes de ruas ou nomes de POI.</string>
     <string name="use_system_language">Usar idioma do sistema</string>
     <string name="shared_string_itinerary">Itinerário</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas onde só são permitidos veículos com baixas emissões poluentes, como carros elétricos (ou a combustão, dependendo da legislação local)</string>
@@ -4836,7 +4836,7 @@
     <string name="map_widget_altitude_desc">Mostra a altitude da geolocalização atual ou a elevação do centro do mapa atual</string>
     <string name="terms_of_service_desc">Ao descarregar mapas, concorda com %1$s e %2$s.</string>
     <string name="map_widget_rendering_fps">FPS da renderização do mapa</string>
-    <string name="map_center_widget">Coordenadas:centro do mapa</string>
+    <string name="map_center_widget">Coordenadas: centro do mapa</string>
     <string name="current_location_widget">Coordenadas: localização atual</string>
     <string name="map_widget_altitude_map_center">Elevação: centro do mapa</string>
     <string name="map_widget_altitude_current_location_desc">Mostra a altitude acima do nível do mar da geolocalização atual.</string>
@@ -4850,8 +4850,8 @@
     <string name="shared_string_terms_of_use">Termos de utilização</string>
     <string name="shared_string_shows">Mostra</string>
     <string name="external_sensors_support">Sensores externos suportados</string>
-    <string name="speak_gps_signal_status">Anunciar a perda ou recuperação do sinal GPS</string>
-    <string name="speak_route_recalculation">Anunciar o recálculo da rota</string>
+    <string name="speak_gps_signal_status">Avisar perda ou recuperação do sinal GPS</string>
+    <string name="speak_route_recalculation">Avisar recálculo da rota</string>
     <string name="release_4_3">• Novo mecanismo de renderização de mapas mais rápido (versão 2 - OpenGL), com visualização 2.5D
 \n
 \n • Animação suave em alterações de localização durante o movimento
@@ -5089,6 +5089,16 @@
 \n
 \n • Corrigidos problemas com a visualização de locais com menus veganos
 \n
+\n • Adicionada a possibilidade de descarregar mosaicos on-line usados como mapas da \"Camada superior\" ou \"Camada inferior\"
+\n
+\n • Adicionado suporte de unidades imperiais em \"Parâmetros do veículo\"
+\n
+\n • Novo perfil de ciclomotor
+\n
+\n • Nova opção \"Automático\" em \"Posição do ecrã\"
+\n
+\n • Corrigidos gestos para inclinação, aproximação e rotação
+\n
 \n</string>
     <string name="sort_duration_ascending">Primeiro a duração mais curta</string>
     <string name="sort_duration_descending">Primeiro a duração mais longa</string>
@@ -5099,4 +5109,31 @@
     <string name="selected_value">Valor selecionado</string>
     <string name="shared_string_nearest">Mais perto</string>
     <string name="app_mode_moped">Ciclomotor</string>
+    <string name="enable_3d_maps">Ativar mapas 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar sombras de vértice em 3D</string>
+    <string name="generate_slope_from_3d_maps">Gera mapas raster de declives a partir de mapas 3D</string>
+    <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
+    <string name="shared_string_all_world">Mundo inteiro</string>
+    <string name="clear_online_cache_description">Isto irá limpar os ficheiros temporários dos mosaicos de previsão meteorológica online.</string>
+    <string name="clear_online_cache">Limpar cache online</string>
+    <string name="offline_cache">Cache offline</string>
+    <string name="app_mode_climbing">Escalada</string>
+    <string name="shared_string_pounds">libras</string>
+    <string name="weather_forecast">Previsão meteorológica</string>
+    <string name="token_is_not_valid">O token não é válido</string>
+    <string name="free_maps_updates">Atualizações gratuitas (emergências)</string>
+    <string name="shared_string_alt_name">Nome alternativo</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="test_heightmap">Mapa de testes de altitude</string>
+    <string name="common_weight_limit_error">O valor mínimo é \"%1$s\" %2$s. Use o perfil \"%3$s\" se o peso do veículo for inferior ao valor mínimo.</string>
+    <string name="offline_weather_forecast">Previsão meteorológica sem ligação à Internet</string>
+    <string name="offline_weather_forecast_desc">Pode descarregar a previsão meteorológica para os próximos 7 dias.</string>
+    <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
+    <string name="select_layer">Selecionar camada</string>
+    <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
+    <string name="speak_route_deviation">Avisar afastamento da rota</string>
+    <string name="camera_app">Aplicação de câmara</string>
+    <string name="shutter_sound">Som ao tirar fotografia</string>
+    <string name="proxy_port_max_warning">O valor máximo da porta é %1$s</string>
+    <string name="weather_download_error">Não foi possível descarregar %1$s mosaicos.</string>
 </resources>

@@ -1,7 +1,7 @@
 package net.osmand.plus.download;
 
 import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
+import static net.osmand.plus.download.DownloadResourceGroupType.REGION_MAPS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +17,8 @@ import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
+import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -24,7 +26,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 
 public class DownloadResources extends DownloadResourceGroup {
-	private static final String TAG = DownloadResources.class.getSimpleName();
 
 	public boolean isDownloadedFromInternet;
 	public boolean downloadFromInternetFailed;
@@ -73,9 +73,9 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (worldMaps != null) {
 			List<IndexItem> list = worldMaps.getIndividualResources();
 			if (list != null) {
-				for (IndexItem ii : list) {
-					if (ii.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
-						worldMap = ii;
+				for (IndexItem item : list) {
+					if (item.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
+						worldMap = item;
 						break;
 					}
 				}
@@ -106,6 +106,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		return header == null ? null : header.getIndividualResources();
 	}
 
+	@Nullable
 	public IndexItem getIndexItem(String fileName) {
 		IndexItem res = null;
 		if (rawResources == null) {
@@ -146,7 +147,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	}
 
 	private void initAlreadyLoadedFiles() {
-		java.text.DateFormat dateFormat = app.getResourceManager().getDateFormat();
+		DateFormat dateFormat = app.getResourceManager().getDateFormat();
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
@@ -173,11 +174,17 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
 		boolean outdated = false;
+		item.setDownloaded(false);
+		item.setOutdated(false);
+
+		if (item instanceof WeatherIndexItem) {
+			OfflineForecastHelper offlineForecastHelper = app.getOfflineForecastHelper();
+			return offlineForecastHelper.checkIfItemOutdated((WeatherIndexItem) item);
+		}
+
 		String sfName = item.getTargetFileName();
 		String indexActivatedDate = indexActivatedFileNames.get(sfName);
 		String indexFilesDate = indexFileNames.get(sfName);
-		item.setDownloaded(false);
-		item.setOutdated(false);
 		if (indexActivatedDate == null && indexFilesDate == null) {
 			return false;
 		}
@@ -260,7 +267,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private void recalculateFilesToUpdate() {
 		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
 		for (IndexItem item : itemsToUpdate) {
-			java.text.DateFormat format = app.getResourceManager().getDateFormat();
+			DateFormat format = app.getResourceManager().getDateFormat();
 			checkIfItemOutdated(item, format);
 			if (item.isOutdated()) {
 				stillUpdate.add(item);
@@ -272,16 +279,13 @@ public class DownloadResources extends DownloadResourceGroup {
 	private Map<String, String> listWithAlternatives(java.text.DateFormat dateFormat, File file,
 	                                                 String ext, Map<String, String> files) {
 		if (file.isDirectory()) {
-			file.list(new FilenameFilter() {
-				@Override
-				public boolean accept(File dir, String filename) {
-					if (filename.endsWith(ext)) {
-						String date = dateFormat.format(findFileInDir(new File(dir, filename)).lastModified());
-						files.put(filename, date);
-						return true;
-					} else {
-						return false;
-					}
+			file.list((dir, filename) -> {
+				if (filename.endsWith(ext)) {
+					String date = dateFormat.format(findFileInDir(new File(dir, filename)).lastModified());
+					files.put(filename, date);
+					return true;
+				} else {
+					return false;
 				}
 			});
 
@@ -307,7 +311,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		List<IndexItem> filtered = rawResources;
 		if (filtered != null) {
 			itemsToUpdate.clear();
-			java.text.DateFormat format = app.getResourceManager().getDateFormat();
+			DateFormat format = app.getResourceManager().getDateFormat();
 			for (IndexItem item : filtered) {
 				boolean outdated = checkIfItemOutdated(item, format);
 				// include only activated files here
@@ -399,17 +403,27 @@ public class DownloadResources extends DownloadResourceGroup {
 				// Hide heightmaps of sqlite format
 				continue;
 			}
-			String basename = ii.getBasename().toLowerCase();
-			WorldRegion wg = regs.getRegionDataByDownloadName(basename);
-			if (wg != null) {
-				if (!groupByRegion.containsKey(wg)) {
-					groupByRegion.put(wg, new ArrayList<>());
+			WorldRegion region;
+			if (ii.getType() == DownloadActivityType.WEATHER_FORECAST) {
+				WeatherIndexItem weatherIndexItem = (WeatherIndexItem) ii;
+				region = weatherIndexItem.getRegion();
+				if (WorldRegion.WORLD.equals(region.getRegionId())) {
+					worldMaps.addItem(ii);
+					continue;
 				}
-				groupByRegion.get(wg).add(ii);
+			} else {
+				String basename = ii.getBasename().toLowerCase();
+				region = regs.getRegionDataByDownloadName(basename);
+			}
+			if (region != null) {
+				if (!groupByRegion.containsKey(region)) {
+					groupByRegion.put(region, new ArrayList<>());
+				}
+				groupByRegion.get(region).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
-					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) ||
-							ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_OLD_KEY)) {
+					String fileName = ii.getFileName().toLowerCase();
+					if (Algorithms.startsWithAny(fileName, WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalWorldwideMaps.addItem(ii);
 					} else {
 						worldMaps.addItem(ii);
@@ -429,8 +443,8 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 		}
 
-		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
-		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		LinkedList<WorldRegion> queue = new LinkedList<>();
+		LinkedList<DownloadResourceGroup> parent = new LinkedList<>();
 		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
 		addGroup(worldSubregions);
 		for (WorldRegion rg : region.getSubregions()) {

@@ -25,7 +25,6 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -35,7 +34,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
@@ -59,6 +57,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +65,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedTracksHelper selectedTracksHelper;
@@ -93,8 +90,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectedTracksHelper = getSelectedTracksHelper();
@@ -120,7 +115,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		};
 		Window window = dialog.getWindow();
 		if (window != null) {
-			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			window.setStatusBarColor(ContextCompat.getColor(app, getStatusBarColorId()));
@@ -152,10 +147,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		String appearance = getString(R.string.change_appearance);
-		String count = String.valueOf(selectedTracksHelper.getSelectedTracks().size());
+		String count = "(" + String.valueOf(selectedTracksHelper.getSelectedTracks().size()) + ")";
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_dash, appearance, count));
+		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count));
 		toolbarTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView toolbarSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
@@ -370,7 +365,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof TracksFragment) {
-			((TracksFragment) fragment).updateTabsContext();
+			((TracksFragment) fragment).updateTabsContent();
 		}
 		dismiss();
 	}
@@ -383,13 +378,14 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			}
 
 			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
+			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 				updateTrackAppearance(item);
 			}
 		};
 		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
-			if (trackItem.getFile() != null) {
-				GpxDataItem item = gpxDbHelper.getItem(trackItem.getFile(), callback);
+			File file = trackItem.getFile();
+			if (file != null) {
+				GpxDataItem item = gpxDbHelper.getItem(file, callback);
 				if (item != null) {
 					updateTrackAppearance(item);
 				}

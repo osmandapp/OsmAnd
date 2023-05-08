@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.audionotes;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 
 import android.app.Activity;
@@ -41,8 +41,8 @@ import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
-import net.osmand.plus.myplaces.ui.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.plugins.audionotes.ItemMenuBottomSheetDialogFragment.ItemMenuFragmentListener;
@@ -62,7 +62,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
+public class NotesFragment extends OsmAndListFragment implements FragmentStateHolder {
 
 	public static final Recording SHARE_LOCATION_FILE = new Recording(new File("."));
 
@@ -406,8 +406,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	private void switchSelectionMode(boolean enable) {
 		selectionMode = enable;
 		listAdapter.setSelectionMode(enable);
-		((FavoritesActivity) getActivity()).setToolbarVisibility(!enable && AndroidUiHelper.isOrientationPortrait(getActivity()));
-		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
+		((MyPlacesActivity) getActivity()).setToolbarVisibility(!enable && AndroidUiHelper.isOrientationPortrait(getActivity()));
+		((MyPlacesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
 	private void updateSelectionTitle(ActionMode m) {
@@ -512,7 +512,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 
 	private void showOnMap(Recording recording, int itemPosition) {
 		selectedItemPosition = itemPosition;
-		FavoritesActivity.showOnMap(requireActivity(), this, recording.getLatitude(), recording.getLongitude(), 15,
+		((MyPlacesActivity) getActivity()).showOnMap(this, recording.getLatitude(), recording.getLongitude(), 15,
 				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 				true, recording);
 	}

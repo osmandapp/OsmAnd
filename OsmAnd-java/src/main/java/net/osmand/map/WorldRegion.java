@@ -28,10 +28,8 @@ public class WorldRegion implements Serializable {
 	public static final String GERMANY_REGION_ID = "europe_germany";
 	public static final String FRANCE_REGION_ID = "europe_france";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
-	protected static final String WORLD = "world";
-
-	// Just a string constant
-	public static final String UNITED_KINGDOM_REGION_ID = "gb_europe";
+	public static final String WORLD = "world";
+	public static final String UNITED_KINGDOM_REGION_ID = "europe_gb";
 
 	// Hierarchy
 	protected WorldRegion superregion;
@@ -51,6 +49,7 @@ public class WorldRegion implements Serializable {
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
 	protected List<LatLon> polygon;
+	protected List<List<LatLon>> additionalPolygons = new ArrayList<>();
 
 	public static class RegionParams {
 		protected String regionLeftHandDriving;
@@ -295,8 +294,15 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
-	public List<LatLon> getPolygon() {
-		return polygon;
+	public QuadRect getBoundingBox() {
+		return boundingBox;
+	}
+
+	public List<List<LatLon>> getPolygons() {
+		List<List<LatLon>> polygons = new ArrayList<>();
+		polygons.add(polygon);
+		polygons.addAll(additionalPolygons);
+		return polygons;
 	}
 
 	@Override

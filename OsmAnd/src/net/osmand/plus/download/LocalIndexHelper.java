@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
@@ -19,8 +20,10 @@ import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,50 +31,50 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 
 public class LocalIndexHelper {
 
+	private final Log log = PlatformUtil.getLog(LocalIndexHelper.class);
+
 	private final OsmandApplication app;
 
-	public LocalIndexHelper(OsmandApplication app) {
+	public LocalIndexHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 	}
 
-	public String getInstalledDate(File f) {
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(getInstallationDate(f));
+	@NonNull
+	public String getInstalledDate(@NonNull File file) {
+		return getInstalledDate(file.lastModified());
 	}
 
-	public Date getInstallationDate(File f) {
-		long t = f.lastModified();
-		return new Date(t);
-	}
-
-	public String getInstalledDate(long t, TimeZone timeZone) {
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
+	@NonNull
+	public String getInstalledDate(long time) {
+		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		return format.format(new Date(time));
 	}
 
 	public void updateDescription(@NonNull LocalIndexInfo info) {
-		File f = new File(info.getPathToData());
+		File file = new File(info.getPathToData());
 		if (info.getType() == LocalIndexType.MAP_DATA) {
-			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
-			if (ifns.containsKey(info.getFileName())) {
+			Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
+			String fileModifiedDate = indexFileNames.get(info.getFileName());
+			if (fileModifiedDate != null) {
 				try {
-					Date dt = app.getResourceManager().getDateFormat().parse(ifns.get(info.getFileName()));
-					info.setDescription(getInstalledDate(dt.getTime(), null));
-				} catch (ParseException e) {
-					e.printStackTrace();
+					Date date = app.getResourceManager().getDateFormat().parse(fileModifiedDate);
+					info.setDescription(getInstalledDate(date.getTime()));
+				} catch (Exception e) {
+					log.error(e);
 				}
 			} else {
-				info.setDescription(getInstalledDate(f));
+				info.setDescription(getInstalledDate(file));
 			}
 		} else if (info.getType() == LocalIndexType.TILES_DATA) {
 			ITileSource template;
-			if (f.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(f)) {
+			if (file.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(file)) {
 				template = TileSourceManager.createTileSourceTemplate(new File(info.getPathToData()));
-			} else if (f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)) {
-				template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
+			} else if (file.isFile() && file.getName().endsWith(SQLiteTileSource.EXT)) {
+				template = new SQLiteTileSource(app, file, TileSourceManager.getKnownSourceTemplates());
 			} else {
 				return;
 			}
@@ -84,22 +87,23 @@ public class LocalIndexHelper {
 		} else if (info.getType() == LocalIndexType.SRTM_DATA) {
 			info.setDescription(app.getString(R.string.download_srtm_maps));
 		} else if (info.getType() == LocalIndexType.WIKI_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.TRAVEL_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.DEACTIVATED) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.VOICE_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.FONT_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.DEPTH_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		}
 	}
 
+	@Nullable
 	private LocalIndexInfo getLocalIndexInfo(LocalIndexType type, String downloadName, boolean roadMap, boolean backuped) {
 
 		File fileDir = null;
@@ -140,7 +144,7 @@ public class LocalIndexHelper {
 		if (fileDir != null && fileName != null) {
 			File f = new File(fileDir, fileName);
 			if (f.exists()) {
-				LocalIndexInfo info = new LocalIndexInfo(type, f, backuped, app);
+				LocalIndexInfo info = new LocalIndexInfo(type, f, backuped);
 				updateDescription(info);
 				return info;
 			}
@@ -355,7 +359,7 @@ public class LocalIndexHelper {
 						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 					}
 				} else if (tileFile.isDirectory()) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup);
 
 					if (!TileSourceManager.isTileSourceMetaInfoExist(tileFile)) {
 						info.setCorrupted(true);
@@ -438,7 +442,7 @@ public class LocalIndexHelper {
 		} else if (fileName.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
 			lt = LocalIndexType.DEPTH_DATA;
 		}
-		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup, app);
+		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup);
 		if (indexFileNames.containsKey(fileName) && !backup) {
 			info.setLoaded(true);
 		}
@@ -473,7 +477,7 @@ public class LocalIndexHelper {
 	private void loadLocalData(@NonNull File file, @NonNull LocalIndexType indexType,
 	                           @NonNull List<LocalIndexInfo> result, boolean backup, boolean needDescription,
 	                           @Nullable AbstractLoadLocalIndexTask loadTask) {
-		LocalIndexInfo info = new LocalIndexInfo(indexType, file, backup, app);
+		LocalIndexInfo info = new LocalIndexInfo(indexType, file, backup);
 		if (needDescription) {
 			updateDescription(info);
 		}

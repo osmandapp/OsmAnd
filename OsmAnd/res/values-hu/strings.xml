@@ -2853,8 +2853,8 @@
     <string name="rendering_attr_highway_class_path_name">Ösvény</string>
     <string name="rendering_attr_highway_class_cycleway_name">Kerékpárút</string>
     <string name="rendering_attr_undefined_name">Meghatározatlan</string>
-    <string name="routing_attr_avoid_sett_name">Macskakő és kavicsburkolat nélkül</string>
-    <string name="routing_attr_avoid_sett_description">Elkerüli a macskaköves és kavicsburkolatút utakat</string>
+    <string name="routing_attr_avoid_sett_name">Macskaköves nélkül</string>
+    <string name="routing_attr_avoid_sett_description">Elkerüli a macskaköves utakat</string>
     <string name="files_moved">%1$d fájl áthelyezve (%2$s).</string>
     <string name="files_copied">%1$d fájl átmásolva (%2$s).</string>
     <string name="files_failed">Nem sikerült %1$d fájl másolása (%2$s).</string>
@@ -2881,7 +2881,7 @@
     <string name="downloaded_maps">Letöltött térképek</string>
     <string name="visited_screens">Meglátogatott képernyők</string>
     <string name="collected_data_descr">Határozza meg, mely adatok megosztását engedélyezi az OsmAndnak.</string>
-    <string name="downloaded_maps_collect_descr">Segít megértenünk, az ország- és régiótérképek népszerűségét.</string>
+    <string name="downloaded_maps_collect_descr">Segít megértenünk az ország- és régiótérképek népszerűségét.</string>
     <string name="visited_screens_collect_descr">Segít megértenünk az OsmAnd funkcióinak népszerűségét.</string>
     <string name="privacy_and_security_change_descr">Koppintson az „Engedélyezés”-re, ha elfogadja: %1$s</string>
     <string name="settings_privacy_and_security">Adatvédelem és biztonság</string>
@@ -3611,7 +3611,7 @@
     <string name="app_mode_inline_skates">Görkorcsolya</string>
     <string name="please_provide_point_name_error">Kérjük, adjon nevet a pontnak</string>
     <string name="lenght_limit_description">Adja meg a járműve hosszát (a hosszú járművekre útvonalkorlátozások vonatkozhatnak).</string>
-    <string name="quick_action_remove_next_destination">Legközelebbi célpont törlése</string>
+    <string name="quick_action_remove_next_destination">Következő célpont törlése</string>
     <string name="search_download_wikipedia_maps">Wikipédia-térképek letöltése</string>
     <string name="export_profile_dialog_description">További adatok kijelölése exportálásra a profillal együtt.</string>
     <string name="shared_string_include_data">Kiegészítő adatok átvétele</string>
@@ -5078,6 +5078,16 @@
 \n
 \n • Vegán helyek megjelenítésével kapcsolatos problémák javítása
 \n
+\n • Lehetőség „Fedvény” vagy „Háttér” térképként használt online csempék letöltésére
+\n
+\n • Angolszász mértékegységek támogatása a „Járműparaméterek\"-nél
+\n
+\n • Új Moped profil
+\n
+\n • „Kijelző pozíció”-nál hozzáadva egy új „Automatikus” opció
+\n
+\n • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
+\n
 \n</string>
     <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
@@ -5088,4 +5098,92 @@
     <string name="shared_string_nearest">Legközelebbi</string>
     <string name="selected_value">Kiválasztott érték</string>
     <string name="app_mode_moped">Moped</string>
+    <string name="disable_vertex_hillshade_3d">Vertex domborzatárnyékolás letiltása 3D-ben</string>
+    <string name="generate_slope_from_3d_maps">Raszteres lejtéstérképek generálása 3D térképekből</string>
+    <string name="enable_3d_maps">3D térképek engedélyezése</string>
+    <string name="test_heightmap">Magassági térkép tesztelése</string>
+    <string name="generate_hillshade_from_3d_maps">Raszteres domborzatárnyékolási térképek generálása 3D térképekből</string>
+    <string name="app_mode_climbing">Mászás</string>
+    <string name="shared_string_alt_name">Alternatív név</string>
+    <string name="token_is_not_valid">A token nem érvényes</string>
+    <string name="shared_string_all_world">Az egész világ</string>
+    <string name="weather_forecast">Időjárás-előrejelzés</string>
+    <string name="offline_weather_forecast_desc">Hét napra szóló időjárás-előrejelzést tölthet le.</string>
+    <string name="clear_online_cache_description">Ez törli az online időjárási csempék gyorsítótárát.</string>
+    <string name="offline_cache">Offline gyorsítótár</string>
+    <string name="clear_online_cache">Online gyorsítótár törlése</string>
+    <string name="weather_forecast_is_outdated">Az előrejelzés elavult.</string>
+    <string name="offline_weather_forecast">Offline időjárás-előrejelzés</string>
+    <string name="metric_lbs">font</string>
+    <string name="shared_string_pounds">font</string>
+    <string name="common_weight_limit_error">A minimális érték „%1$s” %2$s. Használja a „%3$s” profilt, ha a jármű tömege kisebb, mint a minimális érték.</string>
+    <string name="free_maps_updates">Ingyenes frissítések (vészhelyzet)</string>
+    <string name="rendering_value_defaultMedium_name">Alapértelmezett (közepes)</string>
+    <string name="select_layer">Réteg választása</string>
+    <string name="speak_route_deviation">Az útvonaltól való eltérés bemondása</string>
+    <string name="camera_app">Kamera alkalmazás</string>
+    <string name="shutter_sound">Zárhang</string>
+    <string name="proxy_port_max_warning">A port maximális értéke %1$s</string>
+    <string name="weather_download_error">Nem lehet betölteni %1$s csempét.</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_characteristic_gear_ratio">Áttétel</string>
+    <string name="ant_plus_nothing_found_text">Nem található érzékelő</string>
+    <string name="external_device_characteristic_distance">Távolság</string>
+    <string name="external_device_characteristic_arterial_pressure">Artériás nyomás</string>
+    <string name="external_device_details_battery">Akkumulátor</string>
+    <string name="bluetooth_found_title">Megtalálva: %d</string>
+    <string name="external_device_low_battery">Alacsony akkuszint</string>
+    <string name="external_device_forget_sensor">Érzékelő elfelejtése</string>
+    <string name="external_device_forget_sensor_description">Az érzékelő törlődik a listáról. Ezt az érzékelőt bármikor újra párosíthatja.</string>
+    <string name="external_device_menu_forget">Elfelejtés</string>
+    <string name="external_device_characteristic_stride_length">Lépéshossz</string>
+    <string name="external_device_details_connect">Kapcsolódás</string>
+    <string name="ant_plus_bluetooth_off">A Bluetooth ki van kapcsolva</string>
+    <string name="ant_plus_searching">Keresés</string>
+    <string name="external_device_disconnected">Szétkapcsolódva</string>
+    <string name="external_device_connected">Kapcsolódva</string>
+    <string name="external_device_characteristic_cadence">Pedálfordulat</string>
+    <string name="external_device_characteristic_speed">Sebesség</string>
+    <string name="external_device_characteristic_total_distance">Összes távolság</string>
+    <string name="external_device_characteristic_battery_level">Akkumulátor</string>
+    <string name="external_device_characteristic_heart_rate">Pulzusszám</string>
+    <string name="external_device_characteristic_systolic">Cisztolés</string>
+    <string name="external_device_characteristic_diastolic">Diasztolés</string>
+    <string name="external_device_characteristic_pulse_rate">Pulzusszám</string>
+    <string name="external_device_characteristic_temperature">Hőmérséklet</string>
+    <string name="external_device_details_connection">Kapcsolat</string>
+    <string name="bluetooth_connected">Kapcsolódva, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="external_device_details_information">Információ</string>
+    <string name="external_device_details_received_data">Fogadott adat</string>
+    <string name="external_device_details_speed">Sebesség</string>
+    <string name="external_device_details_pair">Párosítás</string>
+    <string name="external_device_details_disconnect">Szétkapcsolás</string>
+    <string name="bluetooth_disconnected">Szétkapcsolódva, %s</string>
+    <string name="ble_search_again">Keresés újra</string>
+    <string name="ant_plus_pair_new_sensor">Új érzékelő párosítása</string>
+    <string name="ant_plus_open_settings">Beállítások megnyitása</string>
+    <string name="external_device_details_total_distance">Teljes távolság</string>
+    <string name="external_device_details_distance">Távolság</string>
+    <string name="bluetooth_not_supported">Bluetooth nem támogatott</string>
+    <string name="ant_plus_nothing_found_description">Győződjön meg róla:
+\n– A Bluetooth be van kapcsolva
+\n– Az érzékelő aktiválva van
+\n– Ez a készülék az érzékelő közelében található</string>
+    <string name="ant_plus_searching_text_description">Tartsa a készüléket az érzékelő közelében. Aktiválnia kell az érzékelőt, hogy az OsmAnd megtalálja.</string>
+    <string name="ant_plus_bluetooth_off_description">Kapcsolja be a Bluetooth-t, keresse meg és párosítása az érzékelőket.</string>
+    <string name="ant_plus_searching_text">Érzékelők keresése</string>
+    <string name="ant_plus_help_title">Nem tudom milyen típusú érzékelőm van</string>
+    <string name="external_device_characteristic_cuff_pressure">Mandzsettanyomás</string>
+    <string name="ant_plus_pair_new_sensor_ble">Bluetooth LE érzékelő párosítása</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">ANT+ érzékelő párosítása</string>
+    <string name="learn_more_about_sensors_link">Tudjon meg többet az érzékelőkről.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Párosíthat Bluetooth LE és ANT+ érzékelőket az OsmAnd-dal.</string>
+    <string name="is_imported">%1$s importálva.</string>
+    <string name="file_already_exists_description">\"%1$s\". Egy azonos nevű fájl már létezik. A csere felülír minden, a jelenlegi verzióval készített változást.</string>
+    <string name="file_already_exists">A fájl már létezik</string>
+    <string name="nav_profile_confirm_delete">Biztosan törli ezt: \"%1$s\"\?</string>
+    <string name="no_search_results">Nincs találat</string>
+    <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
+    <string name="number_of_tracks">%1$s nyomvonal</string>
 </resources>

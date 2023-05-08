@@ -9,6 +9,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
@@ -50,6 +51,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.preference_edit_text_box, null);
 		editText = view.findViewById(R.id.edit_text);
 		editText.setText(text);
+		editText.requestFocus();
 
 		ViewGroup editTextLayout = view.findViewById(R.id.text_field_boxes_editTextLayout);
 		if (editTextLayout != null && editTextLayout.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
@@ -63,6 +65,11 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (!Algorithms.isEmpty(description)) {
 			TextFieldBoxes textFieldBoxes = view.findViewById(R.id.text_field_box);
 			textFieldBoxes.setHelperText(description);
+		}
+
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			AndroidUtils.softKeyboardDelayed(activity, editText);
 		}
 	}
 

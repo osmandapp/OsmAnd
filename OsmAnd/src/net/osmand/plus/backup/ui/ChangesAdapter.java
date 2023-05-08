@@ -157,6 +157,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<ViewHolder> implements 
 	public void onBackupItemFinished(@NonNull String type, @NonNull String fileName) {
 		CloudChangeItem changeItem = getChangeItem(type, fileName);
 		if (changeItem != null) {
+			changeItem.synced = true;
 			notifyItemChanged(items.indexOf(changeItem));
 		}
 	}

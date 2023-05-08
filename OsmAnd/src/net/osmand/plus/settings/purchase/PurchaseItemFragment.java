@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -48,9 +47,6 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
-	private OsmandApplication app;
-	private UiUtilities iconsCache;
-
 	private String purchaseSku;
 	private PurchaseUiData purchase;
 	private InAppPurchaseHelper inAppPurchaseHelper;
@@ -64,8 +60,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+		nightMode = isNightMode(false);
 		Bundle args = getArguments();
 		if (args != null) {
 			purchaseSku = args.getString(PURCHASE_SKU_ARG);

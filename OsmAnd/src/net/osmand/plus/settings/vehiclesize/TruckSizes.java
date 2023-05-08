@@ -14,8 +14,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.containers.ThemedIconId;
 import net.osmand.plus.settings.vehiclesize.containers.Assets;
-
-import java.util.Locale;
+import net.osmand.plus.settings.vehiclesize.containers.Metric;
 
 public class TruckSizes extends VehicleSizes {
 
@@ -43,16 +42,19 @@ public class TruckSizes extends VehicleSizes {
 	}
 
 	@Override
-	public boolean verifyValue(@NonNull SizeType type, @NonNull Context ctx,
+	public boolean verifyValue(@NonNull Context ctx, @NonNull SizeType type, @NonNull Metric metric,
 	                           float value, @NonNull StringBuilder error) {
 		if (type == WEIGHT) {
 			SizeData data = getSizeData(type);
-			float min = data.getLimits().getMin();
+			Limits limits = VehicleAlgorithms.convertWeightLimitsByMetricSystem(
+					data.getLimits(), metric.getWeightMetric(), useKilogramsInsteadOfTons());
+			float min = limits.getMin();
 			if (value < min) {
-				String errorMessagePattern = ctx.getString(R.string.weight_limit_error);
-				String minWeightFormatted = String.format(Locale.US, "%.1f", min);
+				String errorMessagePattern = ctx.getString(R.string.common_weight_limit_error);
+				String minWeightFormatted = formatValue(min);
+				String metricStr = ctx.getString(getMetricStringId(type, metric));
 				String drivingProfileName = ctx.getString(ApplicationMode.CAR.getNameKeyResource());
-				String message = String.format(errorMessagePattern, minWeightFormatted, drivingProfileName);
+				String message = String.format(errorMessagePattern, minWeightFormatted, metricStr, drivingProfileName);
 				error.append(message);
 				return false;
 			}

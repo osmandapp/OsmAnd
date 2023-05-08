@@ -414,9 +414,9 @@ POIの更新は利用できません</string>
     <string name="choose_intersected_street">交差する通りを選択</string>
     <string name="Closest_Amenities">いちばん近い施設</string>
     <string name="app_mode_default">地図閲覧</string>
-    <string name="app_mode_car">乗用車</string>
-    <string name="app_mode_bicycle">自転車</string>
-    <string name="app_mode_pedestrian">徒歩</string>
+    <string name="app_mode_car">車移動等</string>
+    <string name="app_mode_bicycle">二輪車移動等</string>
+    <string name="app_mode_pedestrian">徒歩移動等</string>
     <string name="position_on_map_center">中央</string>
     <string name="position_on_map_bottom">下</string>
     <string name="navigate_point_top_text">選択した形式で緯度と経度を入力 (D - 度, M - 分, S - 秒)</string>
@@ -1130,7 +1130,7 @@ POIの更新は利用できません</string>
     <string name="complex_route_calculation_failed">高速ルート計算が失敗しました(%s)、低速モードで再計算します。</string>
     <string name="disable_complex_routing_descr">車用ナビゲーションの2段階ルート計算を無効化します</string>
     <string name="disable_complex_routing">複雑なルート計算を無効化</string>
-    <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路セグメントを計算する</string>
+    <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路区分を計算する</string>
     <string name="forward">次へ</string>
     <string name="keep_navigation_service">続行</string>
     <string name="enable_sleep_mode">GPSバックグラウンドモードを有効</string>
@@ -1159,7 +1159,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車ルート</string>
     <string name="stop_navigation_service">停止</string>
-    <string name="gpx_start_new_segment">新しいセグメントの開始</string>
+    <string name="gpx_start_new_segment">新しい区分の開始</string>
     <string name="no_index_file_to_download">ダウンロードできるものが見つかりません、インターネットの接続を確認して下さい。</string>
     <string name="none_selected_gpx">最初に利用可能な経路をロングタップで選択してください。</string>
     <string name="local_index_select_gpx_file">経路の選択</string>
@@ -1191,7 +1191,7 @@ POIの更新は利用できません</string>
     <string name="gpx_info_asc_altitude">上り/下り: %1$s</string>
     <string name="gpx_timemoving">移動時間: %1$s</string>
     <string name="gpx_timespan">全長時間: %1$s</string>
-    <string name="gpx_selection_segment_title">セグメント</string>
+    <string name="gpx_selection_segment_title">区分</string>
     <string name="gpx_selection_number_of_points">" %1$s 地点"</string>
     <string name="gpx_selection_point">地点 %1$s</string>
     <string name="gpx_selection_route_points">%1$s
@@ -1280,7 +1280,7 @@ POIの更新は利用できません</string>
     <string name="index_name_canada">北米 - カナダ</string>
     <string name="index_name_italy">ヨーロッパ - イタリア</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
-    <string name="gpx_option_calculate_first_last_segment">最初と最後の経路セグメントを利用しOsmAndエンジンでルートを計算する</string>
+    <string name="gpx_option_calculate_first_last_segment">最初と最後の経路分類を利用しOsmAndエンジンでルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
     <string name="rendering_attr_alpineHiking_name">アルペンハイキングスケール(SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
@@ -1460,7 +1460,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_video">動画</string>
     <string name="shared_string_photo">写真</string>
     <string name="route_points">ルート地点</string>
-    <string name="track_segments">経路セグメント</string>
+    <string name="track_segments">経路区分</string>
     <string name="track_points">経路地点</string>
     <string name="delay_to_start_navigation_descr">目的地決定後、指定時間が経過すると自動的にナビゲーションを開始します</string>
     <string name="delay_to_start_navigation">ナビゲーション自動開始設定…</string>
@@ -1750,7 +1750,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_upload">アップロード</string>
     <string name="osm_edit_created_poi">OSMのPOIが作成されました</string>
     <string name="map_downloaded">マップがダウンロードされました</string>
-    <string name="simulate_initial_startup_descr">デバッグ用に初回起動時を再現します(要再起動)、既存の設定はそのまま維持され変更されることはありません</string>
+    <string name="simulate_initial_startup_descr">デバッグ用に初回起動時を再現します(要再起動)。既存の設定はそのまま維持され変更されることはありません</string>
     <string name="simulate_initial_startup">アプリ初回起動時のシミュレート</string>
     <string name="share_menu_location">位置を共有</string>
     <string name="shared_string_send">送信</string>
@@ -1959,7 +1959,7 @@ POIの更新は利用できません</string>
     <string name="access_sort">並べ替え</string>
     <string name="map_mode">昼夜モード切替</string>
     <string name="rendering_value_thin_name">細線</string>
-    <string name="rendering_value_medium_name">中</string>
+    <string name="rendering_value_medium_name">中線</string>
     <string name="rendering_value_bold_name">太線</string>
     <string name="lang_es_us">スペイン語 (アメリカ)</string>
     <string name="lang_ast">アストゥリア語</string>
@@ -1991,7 +1991,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_allow_motorway_name">高速道路を使う</string>
     <string name="routing_attr_allow_motorway_description">高速道路を利用可能とみなします。</string>
     <string name="auto_split_recording_title">空白検知で自動分割記録</string>
-    <string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しいセグメントを開始します。</string>
+    <string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しい区分として開始します。</string>
     <string name="rendering_attr_contourDensity_description">等高線の密度</string>
     <string name="rendering_attr_contourDensity_name">等高線密度</string>
     <string name="rendering_value_high_name">高</string>
@@ -2275,14 +2275,13 @@ POIの更新は利用できません</string>
  • GPXレコーディングオプションを使用すると、経路を記録して共有することができます
  • 追加のプラグインを使用して、等高線と山陰を表示することができます
  "</string>
-    <string name="osmand_extended_description_part6">"
- ウォーキング、ハイキング、市内ツアー
- • 地図には、徒歩移動やハイキング向け道が表示されます
- • 親しんだ言語のウィキペディアは、市内ツアー中に多くの情報をもたらしてくれます
- • 公共交通機関の停留所や駅(バス、路面電車、電車)、路線名の表示は、初めて訪れた市街での移動に役立ちます
- • 歩行者モードでのGPSナビゲーションは、徒歩移動向け経路を使用してルートを構築します。
- • ルートや記録を含んだGPXファイルをアップロードしたり、フォローしたり、自分自身で共有することができます
- "</string>
+    <string name="osmand_extended_description_part6">ウォーキング、ハイキング、市内観光
+\n• 地図には、徒歩移動やハイキング向けの道が表示されます
+\n• 慣れ親しんだ言語でのWikipediaならば、観光中により多くの情報をもたらしてくれます
+\n• 公共交通機関の停留所や駅(バス、路面電車、電車)、路線名の表示は、初めて訪れた市街での移動に役立ちます
+\n• 歩行者モードでのGPSナビゲーションは、徒歩移動向け経路を使用してルートを構築します
+\n• ルートなどの記録を含んだGPXファイルをアップロードしたり、フォローしたり、自分自身で共有することができます
+\n</string>
     <string name="osmand_extended_description_part7">"
  OSMに寄与
  • データ、バグの報告ができます
@@ -2317,11 +2316,11 @@ POIの更新は利用できません</string>
 \n • ルートから大きく外れると自動的に再ルート検索します
 \n • 住所別、種類別（例：レストラン、ホテル、ガソリンスタンド、博物館）、または座標の数値で場所を検索可能です</string>
     <string name="osmand_plus_extended_description_part3">マップ表示
-\n • 現在地と現在の方向を表示できます
-\n • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更できます
-\n • 大事な場所は『お気に入り』として保存できます
-\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
-\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能
+\n • 現在地と現在の方向を表示可能
+\n • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更可能
+\n • 大事な場所は『お気に入り』として保存可能
+\n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示可能
+\n • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能
 \n • オプションで、地名を英語、現地語、または表音つづりで表示可能
 \n</string>
     <string name="osmand_plus_extended_description_part4">OSMとWikipediaデータを使用 
@@ -2332,22 +2331,19 @@ POIの更新は利用できません</string>
 \n• コンパクトなオフラインベクターマップが少なくとも1か月に1回更新されます
 \n
 \n • 完全な地域データと道路網のみのデータの選択が可能です（例：施設などを含んだデータ 700MB、道路網のみ 200MB）</string>
-    <string name="osmand_plus_extended_description_part5">"
- 安全機能
- • オプションで昼/夜モードマップ自動表示切り替えができます
- • 制限速度の表示が出来ます(オプション)
- • 速度に応じたマップの表示拡縮ができます
- • 友人があなたを見つけることができるようにあなたの場所を共有する昨日もあります
- "</string>
-    <string name="osmand_plus_extended_description_part6">"
- 自転車と徒歩モードの特徴
- • アウトドアアクティビティ向けに徒歩移動、ハイキング、自転車向けルートを見られます
- • 自転車と徒歩のための特別なルート検索と表示モードがあります
- • 路線名を含む公共交通機関の停留所(バス、路面電車、電車)
- • ローカル内のGPXファイル内記録経路またはオンラインサービスからの経路利用ができます
- • オプションで速度と標高表示ができます
- • 等高線と山陰の表示(要追加プラグイン）
- "</string>
+    <string name="osmand_plus_extended_description_part5">セーフティ機能
+\n • オプションで昼/夜モードのマップ自動表示切り替えができます
+\n • オプションで制限速度を表示できます(速度超過時の警告機能付き)
+\n • オプションで速度に応じたマップの表示拡縮ができます
+\n • 位置情報を共有することで、友達があなたを簡単に見つけることができるようにもなります
+\n</string>
+    <string name="osmand_plus_extended_description_part6">自転車・歩行者向け機能
+\n • アウトドアアクティビティ向けにウォーキング、ハイキング、サイクリングのルートを表示が可能
+\n • 自転車や歩行者のための特別なルート計算と表示方法
+\n • 路線名含む公共交通機関の停留所(バス、路面電車、電車)を表示
+\n • オプションでルートをGPXファイルとして、端末やオンラインサービスへの共有が可能
+\n • オプションで速度・高度表示も可能
+\n • 等高線や陰影起伏図の表示(要追加プラグイン)</string>
     <string name="quick_action_showhide_osmbugs_descr">マップ画面でのOSMメモの表示/非表示を切り替えるボタンです。</string>
     <string name="sorted_by_distance">距離順で並べ替え</string>
     <string name="search_favorites">お気に入りで検索</string>
@@ -2559,7 +2555,7 @@ POIの更新は利用できません</string>
     <string name="modify_the_search_query">検索方式を変更します。</string>
     <string name="shared_string_marker">マーカー</string>
     <string name="empty_state_osm_edits">OpenStreetMapオブジェクトの作成または変更</string>
-    <string name="shared_string_deleted">削除</string>
+    <string name="shared_string_deleted">削除予定</string>
     <string name="shared_string_edited">編集されました</string>
     <string name="shared_string_added">追加しました</string>
     <string name="notes_by_date">日付別音声/動画メモ</string>
@@ -3004,7 +3000,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_horse">馬</string>
     <string name="app_mode_helicopter">ヘリコプター</string>
     <string name="app_mode_skiing">スキー</string>
-    <string name="base_profile_descr_ski">スキー(あるいはスノーボードなど)</string>
+    <string name="base_profile_descr_ski">スキー、スノーボード</string>
     <string name="show_compass_ruler">コンパス定規を表示</string>
     <string name="hide_compass_ruler">コンパス定規を非表示</string>
     <string name="settings_routing_mode_string">モード:%s</string>
@@ -3026,9 +3022,9 @@ POIの更新は利用できません</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
     <string name="base_profile_descr_car">乗用車、トラック、オートバイ</string>
-    <string name="base_profile_descr_bicycle">マウンテンバイク、モペッド、馬</string>
+    <string name="base_profile_descr_bicycle">マウンテンバイク、原付、馬</string>
     <string name="base_profile_descr_pedestrian">徒歩、ハイキング、ランニング</string>
-    <string name="base_profile_descr_public_transport">公共交通機関の類い</string>
+    <string name="base_profile_descr_public_transport">定期運行している鉄道、バス、路面電車など</string>
     <string name="base_profile_descr_boat">船舶、漕ぎボート、帆船</string>
     <string name="base_profile_descr_aircraft">航空機、グライダー</string>
     <string name="routing_profile_geocoding">ジオコーディング</string>
@@ -3174,7 +3170,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="track_storage_directory">経路保存フォルダー</string>
     <string name="track_storage_directory_descrp">記録した経路はrecフォルダー内に、月または日付ごとに分けて保存ができます。</string>
-    <string name="store_tracks_in_rec_directory">記録経路は『rec』フォルダーに保存</string>
+    <string name="store_tracks_in_rec_directory">記録経路は\'rec\'フォルダーに保存されます</string>
     <string name="store_tracks_in_daily_directories">記録経路は日付ごとのフォルダーに保存</string>
     <string name="store_tracks_in_daily_directories_descrp">記録経路は日付ごとにサブフォルダー(例: 2018-01-01)へ保存されます</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB使用</string>
@@ -3285,11 +3281,11 @@ POIの更新は利用できません</string>
     <string name="added_profiles_descr">プラグインによって追加されたプロファイル</string>
     <string name="shared_string_turn_off">OFFにする</string>
     <string name="new_plugin_added">新しいプラグインが追加されました</string>
-    <string name="join_segments">セグメントの接続</string>
+    <string name="join_segments">区分同士の接続</string>
     <string name="quick_action_directions_from_desc">画面の中心を出発点にするボタンです。その後目的地を設定しルート検索を別途おこなう必要があります。</string>
     <string name="add_new_profile_q">新しいプロファイルとして\'%1$s\'を追加しますか？</string>
-    <string name="save_heading">見出しを含める</string>
-    <string name="save_heading_descr">記録中の各トラックポイントに見出しも保存します。</string>
+    <string name="save_heading">方向もログに含める</string>
+    <string name="save_heading_descr">記録中の各経路地点でのその時の向きも保存します。</string>
     <string name="personal_category_name">パーソナル</string>
     <string name="shared_string_downloading_formatted">%sをダウンロード中</string>
     <string name="rendering_value_thick_name">濃い</string>
@@ -3298,7 +3294,7 @@ POIの更新は利用できません</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="select_navigation_icon">移動中の位置アイコン</string>
     <string name="select_map_icon">静止中の位置アイコン</string>
-    <string name="delete_profiles_descr">[決定]をタップすると、プロファイルが完全に削除されます。</string>
+    <string name="delete_profiles_descr">[決定]をタップすると、選択したプロファイルは完全に削除されます。</string>
     <string name="master_profile">マスタープロファイル</string>
     <string name="select_color">プロファイルの色</string>
     <string name="edit_profiles_descr">OsmAndで用意されているデフォルトプロファイルは削除できませんが、前の画面でそれらを無効にしたり、リストの下の方へ移動させることはできます。</string>
@@ -3342,7 +3338,7 @@ POIの更新は利用できません</string>
     <string name="multimedia_notes_prefs_descr">画像サイズ、音声および動画品質</string>
     <string name="osm_editing_prefs_descr">ログイン、パスワード、オフライン編集</string>
     <string name="accessibility_prefs_descr">アイコン種類、色、名前の選択</string>
-    <string name="live_monitoring_descr">旅行記録を利用し現在地の共有ができます。</string>
+    <string name="live_monitoring_descr">移動中のログを指定したサイトに上げることで、現在地の共有ができます。</string>
     <string name="live_monitoring">オンライン追跡</string>
     <string name="save_track_logging_accuracy">ロギング精度</string>
     <string name="tracks_view_descr">記録された経路は%1$s、またはOsmAndフォルダーにあります。</string>
@@ -3384,7 +3380,7 @@ POIの更新は利用できません</string>
     <string name="clear_recorded_data">記録データの消去</string>
     <string name="copy_coordinates">座標をコピー</string>
     <string name="routing_profile_direct_to">直接指示</string>
-    <string name="of">%2$d中の%1$d</string>
+    <string name="of">全%2$d中%1$d</string>
     <string name="button_rate">評価する</string>
     <string name="release_3_6">• プロファイル：表示順序、マップ画面で表示されるアイコン、ベースプロファイルすべての設定などを変更したり、初期状態に戻すことが可能に 
 \n 
@@ -3428,7 +3424,7 @@ POIの更新は利用できません</string>
     <string name="profile_type_custom_string">カスタムプロファイル</string>
     <string name="shared_string_angle_param">角度: %s°</string>
     <string name="shared_string_angle">角度</string>
-    <string name="recalc_angle_dialog_descr">ルートの再計算が終わるまで、現在地と計算済みルートの間に余剰分の直線セグメントが表示されます</string>
+    <string name="recalc_angle_dialog_descr">ルートの再計算が終わるまで、現在地と計算済みルートの間に余剰分の直線区分が表示されます</string>
     <string name="recalc_angle_dialog_title">現在地とルート間の最小角度</string>
     <string name="shared_string_app_default_w_val">アプリデフォルト(%s)</string>
     <string name="no_recalculation_setting">再計算をしない</string>
@@ -3635,14 +3631,14 @@ POIの更新は利用できません</string>
     <string name="overwrite_track">経路を上書き</string>
     <string name="save_as_new_track">新しい経路として保存</string>
     <string name="reverse_route">ルート反転</string>
-    <string name="route_between_points_next_segment_button_desc">選択したプロファイルを使用して、次のセグメントのみ再計算します。</string>
+    <string name="route_between_points_next_segment_button_desc">選択したプロファイルを使用して、次の区分のみ再計算します。</string>
     <string name="route_between_points_whole_track_button_desc">選択したプロファイルを使用して、経路全体が再計算されます。</string>
     <string name="route_between_points_desc">地点間を直線で結ぶ方法、または地点だけを指定しその後ルートを計算する方法のどちらかを選択します。</string>
     <string name="whole_track">全経路</string>
-    <string name="next_segment">次のセグメント</string>
+    <string name="next_segment">次の区分</string>
     <string name="threshold_distance">限界距離</string>
     <string name="navigation_profile">ナビゲーションプロファイル</string>
-    <string name="route_between_points_add_track_desc">新しいセグメントを追加するための経路ファイルを選択します。</string>
+    <string name="route_between_points_add_track_desc">新しい区分を追加するための経路ファイルを選択します。</string>
     <string name="street_level_imagery">ストリート画像</string>
     <string name="plan_route_exit_dialog_descr">計画されたルートにおける、すべての変更を破棄しますか？</string>
     <string name="app_mode_enduro_motorcycle">エンデューロバイク</string>
@@ -3701,7 +3697,7 @@ POIの更新は利用できません</string>
     <string name="speed_cameras_alert">一部の国では、スピードカメラ有無の事前警告は法律で禁止されています。</string>
     <string name="screen_timeout_descr">\"%1$s\"がオンの場合、設定された動作時間はそちらに依存します。</string>
     <string name="default_screen_timeout">端末設定の画面スリープ時間に従う</string>
-    <string name="shared_string_tones">トーン</string>
+    <string name="shared_string_tones">トン</string>
     <string name="shared_string_meters">メートル</string>
     <string name="details_dialog_decr">追加マップの詳細を表示または非表示にします</string>
     <string name="shared_string_night_map">夜間マップ</string>
@@ -3713,7 +3709,7 @@ POIの更新は利用できません</string>
     <string name="vessel_width_limit_description">狭い橋を避けるために船の幅を設定します</string>
     <string name="quick_action_showhide_mapillary_descr">マップ上のMapillaryレイヤーの表示/非表示を切り替えます。</string>
     <string name="routing_attr_length_description">ルート検索時に指定した車両の長さを考慮します。</string>
-    <string name="routing_attr_length_name">長さ制限</string>
+    <string name="routing_attr_length_name">長さ</string>
     <string name="shared_string_bearing">ベアリング</string>
     <string name="item_deleted">%1$sを削除しました</string>
     <string name="speed_cameras_restart_descr">アプリを再起動し、すべてのスピードカメラデータを削除します。</string>
@@ -3762,16 +3758,16 @@ POIの更新は利用できません</string>
     <string name="gpx_monitoring_stop">旅程の記録を一時停止</string>
     <string name="gpx_monitoring_start">旅程の記録を続行</string>
     <string name="system_default_theme">システムのデフォルト</string>
-    <string name="all_next_segments_will_be_recalc">以後のすべてのセグメントは、選択したプロファイルを使用して再計算されます。</string>
-    <string name="all_next_segments">以後のすべてのセグメント</string>
-    <string name="previous_segment">前のセグメント</string>
-    <string name="all_previous_segments">以前のすべてのセグメント</string>
-    <string name="only_selected_segment_recalc">選択したセグメントのみ、選択したプロファイルを使用して再計算されます。</string>
-    <string name="all_previous_segments_will_be_recalc">以前のセグメントは、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_next_segments_will_be_recalc">以後のすべての区分は、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_next_segments">以後のすべての区分</string>
+    <string name="previous_segment">前の区分</string>
+    <string name="all_previous_segments">以前のすべての区分</string>
+    <string name="only_selected_segment_recalc">選択した区分のみ、選択したプロファイルを使用して再計算されます。</string>
+    <string name="all_previous_segments_will_be_recalc">以前の区分は、選択したプロファイルを使用して再計算されます。</string>
     <string name="open_saved_track">保存された経路を開く</string>
     <string name="one_point_error">少なくとも2つの地点を追加してください。</string>
     <string name="shared_string_redo">繰り返し</string>
-    <string name="release_3_8">• ルート計画機能を更新 : セグメントごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
+    <string name="release_3_8">• ルート計画機能を更新 : 区分ごとに異なるナビゲーションタイプを使用し、経路として反映することが可能に
 \n
 \n• 経路の新しい外観オプション : 色、太さ、表示方向矢印、開始と終了アイコンの選択
 \n
@@ -3882,9 +3878,9 @@ POIの更新は利用できません</string>
     <string name="upload_photo">アップロード中</string>
     <string name="upload_photo_completed">アップロードが完了しました</string>
     <string name="uploading_count">%2$d個中%1$d個をアップロード中</string>
-    <string name="select_segments">セグメントの選択</string>
-    <string name="select_segments_description">%1$sには複数のセグメントが含まれているため、ナビゲーション用部分を指定する必要があります。</string>
-    <string name="segments_count">%1$dセグメント</string>
+    <string name="select_segments">区分の選択</string>
+    <string name="select_segments_description">%1$sには複数の区分が含まれているため、ナビゲーション用部分を指定する必要があります。</string>
+    <string name="segments_count">%1$d区分</string>
     <string name="uploaded_count">%2$d個中%1$d個をアップロードしました</string>
     <string name="toast_select_edits_for_upload">アップロードする編集を選択</string>
     <string name="hillshade_slope_contour_lines">陰影起伏図 / 勾配 / 等高線</string>
@@ -3905,7 +3901,7 @@ POIの更新は利用できません</string>
     <string name="activity_type_walking_name">徒歩</string>
     <string name="activity_type_offroad_name">未舗装道路</string>
     <string name="activity_type_motorbike_name">オートバイ</string>
-    <string name="routing_attr_short_way_description">最適化されたなるべく短いルート (省エネ)</string>
+    <string name="routing_attr_short_way_description">最適化されたなるべく短い(省エネ)ルートを選択します</string>
     <string name="activity_type_car_name">車</string>
     <string name="temporary_conditional_routing_descr">マップ上で現在有効になっている道路の制限を使用します</string>
     <string name="routing_attr_driving_style_description">運転の目的を選択することで、より短くより速くより安全なルートを取得します</string>
@@ -3974,12 +3970,12 @@ POIの更新は利用できません</string>
     <string name="plan_route_split_after">この後で分割</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="app_mode_light_aircraft">軽飛行機</string>
-    <string name="plan_route_add_new_segment">新規セグメントの追加</string>
+    <string name="plan_route_add_new_segment">新規区分の追加</string>
     <string name="profile_type_osmand_string">OsmAndプロファイル</string>
     <string name="profile_type_user_string">ユーザープロファイル</string>
     <string name="release_3_9">• 設定、リソース、お気に入りを含むすべてのデータをエクスポートおよびインポートするオプションを追加
 \n
-\n• ルートの計画：ルートを含むトラックセグメントのグラフ、および複数のトラックセグメントを作成および編集する機能を追加
+\n• ルートの計画：ルートを含む経路区分のグラフ、および複数の経路区分を作成および編集する機能を追加
 \n
 \n• OpenStreetMapのOAuth認証方法を追加し、OSMダイアログのUIを改善
 \n
@@ -4007,7 +4003,7 @@ POIの更新は利用できません</string>
     <string name="test_route_calculation">ルート計算のテスト</string>
     <string name="routing_engine_vehicle_type_driving">ドライブ</string>
     <string name="routing_engine_vehicle_type_foot">徒歩</string>
-    <string name="routing_engine_vehicle_type_bike">自転車</string>
+    <string name="routing_engine_vehicle_type_bike">原動機付き自転車、ペダル付バイク</string>
     <string name="routing_engine_vehicle_type_car">車</string>
     <string name="copy_address">住所をコピー</string>
     <string name="online_routing_engine">オンラインルーティングエンジン</string>
@@ -4058,10 +4054,10 @@ POIの更新は利用できません</string>
     <string name="navigate_point_format_mgrs">MGRS(Military Grid Reference System)</string>
     <string name="mgrs_format_descr">OsmAndは、UTM NATO形式類似のMGRSを使用します。</string>
     <string name="shared_string_legend">凡例</string>
-    <string name="n_items_of_z">%2$sの%1$s</string>
+    <string name="n_items_of_z">%1$s／%2$s</string>
     <string name="app_mode_wheelchair_forward">基本前進のみの車椅子</string>
     <string name="track_coloring_solid">通常色</string>
-    <string name="in_case_of_reverse_direction">逆方向の場合</string>
+    <string name="in_case_of_reverse_direction">逆方向に移動した場合</string>
     <string name="no_purchases">購入済みのアイテムはありません</string>
     <string name="new_device_account">新しい端末 / 新規アカウント</string>
     <string name="contact_support_description">ご不明な点がございましたら、%1$sまでお問い合わせください。</string>
@@ -4143,7 +4139,7 @@ POIの更新は利用できません</string>
     <string name="offline_wikivoyage">オフラインWikivoyage</string>
     <string name="terrain_maps">地形マップ</string>
     <string name="nautical_depth">水深</string>
-    <string name="you_can_get_feature_as_part_of_pattern">対象プラン:%2$sプランの一機能として\"%1$s\"は提供されます。</string>
+    <string name="you_can_get_feature_as_part_of_pattern">\"%1$s\"が利用可能なプラン:%2$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$sまたは%2$s</string>
     <string name="not_available_with">%1$sでは利用できません</string>
     <string name="continue_with">%1$sへの手続きに進む</string>
@@ -4308,7 +4304,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_tactile_paving_name">触覚舗装を優先</string>
     <string name="routing_attr_allow_gate_name">ゲートの使用を許可</string>
     <string name="routing_attr_only_permitted_ways_description">明示的な許可のある小道(わだち、通路など)を使用します</string>
-    <string name="safe_settings">安全</string>
+    <string name="safe_settings">セーフモード</string>
     <string name="no_plugins_enabled">プラグインが有効になっていません。利用可能なプラグインの一覧は、\'メニュー\'→\'プラグイン\'にあります。</string>
     <string name="approx_safe_mode">セーフモードGPX概算</string>
     <string name="is_disabled">%1$sは無効化されました</string>
@@ -4336,7 +4332,7 @@ POIの更新は利用できません</string>
     <string name="shared_storage_warning_title">ストレージアクセスルールの変更</string>
     <string name="purchases_feature_desc_android_auto">OsmAndオフラインマップとナビゲーションを、対応した車載モニターに表示し車両側と操作を統合します。</string>
     <string name="icon_group_nautical">航海</string>
-    <string name="transparent_status_bar_descr">ステータスバーの下にマップを表示</string>
+    <string name="transparent_status_bar_descr">ステータスバーの下にマップを表示します</string>
     <string name="transparent_status_bar">透過式ステータスバー</string>
     <string name="search_title">検索: %1$s</string>
     <string name="shared_string_files">ファイル</string>
@@ -4401,7 +4397,7 @@ POIの更新は利用できません</string>
     <string name="memory_allocated_for_routing_ds">割り当てメモリを増やすと長いルート(500 km以上)の計算が早くなりますが、他アプリのパフォーマンスに影響を与える可能性があります。
 \n短いルートの計算速度には影響しません。</string>
     <string name="storage_copying_files_size">%1$s個のファイル%2$sをコピーしています</string>
-    <string name="storage_copied_files_size">%1$s個のファイル%2$sがコピーされました</string>
+    <string name="storage_copied_files_size">%1$s個のファイル(%2$s)を処理しました</string>
     <string name="routeInfo_tracktype_description">ルートまたは経路の線でその路面構成に応じて色付けします。通常、道路網がほとんど舗装されていない場合に適用されます。</string>
     <string name="routeInfo_smoothness_description">特に表面の規則性/平坦性の観点での、車輪の付いたあらゆる乗り物においてそれぞれの通行が認められる歩道および車道の操縦性分類です。</string>
     <string name="not_enough_contributions_descr">無制限の%1$s毎の地図更新を有効にするには、過去2か月間に最低%2$sの変更が必要です。</string>
@@ -4515,7 +4511,7 @@ POIの更新は利用できません</string>
     <string name="save_as_copy">コピーとして保存</string>
     <string name="storage_migration_wrong_folder_warning">選択したフォルダにOsmAndデータが見つかりません。もう一度やり直してください。</string>
     <string name="exit_without_saving_warning">変更を保存せずに終了しても良いですか？</string>
-    <string name="migration_files_present">選択した場所 \'%3$s\'に%1$d個のファイル(%2$s)があります。</string>
+    <string name="migration_files_present">%1$d個のファイル(%2$s)が選択された保存先\'%3$s\'に既に存在していたため、上書きされませんでした。</string>
     <string name="app_profile_type">アプリのプロファイルタイプ</string>
     <string name="map_marker_options">マップマーカーオプション</string>
     <string name="fold_unfold">たたむ/広げる</string>
@@ -4571,13 +4567,13 @@ POIの更新は利用できません</string>
     <string name="map_widget_current_speed">現行速度</string>
     <string name="shared_string_buttons">ボタン</string>
     <string name="auto_backup_title">自動バックアップ</string>
-    <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)でのルート</string>
-    <string name="rendering_attr_showFunicularRoutes_name">ケーブルカーでのルート</string>
+    <string name="rendering_attr_showLightRailRoutes_name">軽量軌道交通(LRT)路線</string>
+    <string name="rendering_attr_showFunicularRoutes_name">ケーブルカー路線</string>
     <string name="show_map_symbols">地図記号を表示</string>
-    <string name="rendering_attr_showMonorailRoutes_name">モノレールでのルート</string>
+    <string name="rendering_attr_showMonorailRoutes_name">モノレール路線</string>
     <string name="app_mode_mountain_bicycle">マウンテンバイク</string>
-    <string name="rendering_attr_showTrolleybusRoutes_name">トロリーバスでのルート</string>
-    <string name="rendering_attr_showBusRoutes_name">バスでのルート</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">トロリーバス路線</string>
+    <string name="rendering_attr_showBusRoutes_name">バス路線</string>
     <string name="map_widget_rendering_fps">マップ描画FPS</string>
     <string name="shared_string_expires">期限切れ</string>
     <string name="shared_string_purchased_on">購入日</string>
@@ -4681,7 +4677,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_next_sunrise">次の日出</string>
     <string name="weather_temperature_fahrenheit">華氏</string>
     <string name="storage_migration_fragment_close_descr">コピーは %1$s しか完了していません。ここで停止すると、アプリが正しく動作しなくなる可能性があります。</string>
-    <string name="mtb_segment_classification">セグメントの分類</string>
+    <string name="mtb_segment_classification">区分の分類</string>
     <string name="quick_action_temperature_layer">マップ上の気温関連レイヤーの表示/非表示を切り替えます。</string>
     <string name="quick_action_air_pressure_layer">マップ上の気圧関連レイヤーの表示/非表示を切り替えます。</string>
     <string name="quick_action_cloud_layer">マップ上の雲関連レイヤーの表示/非表示を切り替えます。</string>
@@ -4881,7 +4877,7 @@ POIの更新は利用できません</string>
     <string name="coordinates_widget_map_center">座標:マップの中心</string>
     <string name="shared_string_shows">表示</string>
     <string name="download_heightmap_maps">ハイトマップ</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_description">専用のマウンテンバイク トレイルを表示します。</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_description">指定されたマウンテンバイクトレイルを表示します。</string>
     <string name="attach_roads_warning">道路には、記録された経路のみを取り付けることができます。</string>
     <string name="auto_25_chars_route_tu_kl">Uターン後左寄りに進む</string>
     <string name="auto_25_chars_route_tr_kr">右に曲がったあと右側へ寄って進む</string>
@@ -4902,8 +4898,8 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_horse_scale_impossible_name">Impossible(命の危険あり)</string>
     <string name="routing_attr_carriage_restrictions_name">馬車の制限</string>
     <string name="routing_attr_carriage_restrictions_description">馬車のアクセス許可を考慮する</string>
-    <string name="rendering_attr_showTrainRoutes_name">列車路線</string>
-    <string name="shared_string_item">項目</string>
+    <string name="rendering_attr_showTrainRoutes_name">鉄道路線</string>
+    <string name="shared_string_item">アイテム</string>
     <string name="simulation_constant_mode_title">定速走行</string>
     <string name="change_default_tracks_appearance_confirmation_description">%1$s経路の外観を変更しますか？</string>
     <string name="no_visible_tracks_description">マップ上に表示する経路を選択します。</string>
@@ -4947,7 +4943,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_2_5_d_view">2.5D表示</string>
     <string name="without_profiles_changing">プロファイルを変更しない</string>
     <string name="included_in_your_current_plan">現在の\"%1$s\"プランに含まれています</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBAトレイルを表示</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBA基準トレイルを表示</string>
     <string name="auto_25_chars_route_tu_kr">Uターン後右寄りに進む</string>
     <string name="auto_25_chars_route_roundabout_kl">%1$d出口を出て左寄りに進む</string>
     <string name="time_to_intermediate_widget_desc">ウィジェットには、最初の中間地点までの\"到着時刻\"または\"残り時間\"が表示されます。ナビゲーション中は常に時間が更新され、中間地点を通過すると次の中間地点までの時間へと更新されます。</string>
@@ -5062,7 +5058,7 @@ POIの更新は利用できません</string>
     <string name="rotate_map_manual_opt">手動回転(固定)</string>
     <string name="shared_string_kilograms">キログラム</string>
     <string name="shared_string_yards">ヤード</string>
-    <string name="display_position_automatic_descr">マップの向きによって異なります。移動方向は下に、その他は中央です。</string>
+    <string name="display_position_automatic_descr">現在地はマップの向きに応じて、移動時は下部に、その他は中央に表示されます。</string>
     <string name="sound_beep_simple_loud">ビープ音:シンプルで大音量</string>
     <string name="sound_beep_simple">ビープ音:シンプル</string>
     <string name="sort_duration_ascending">短い期間順</string>
@@ -5096,10 +5092,47 @@ POIの更新は利用できません</string>
 \n
 \n• ビーガン向けの場所表示に関する問題を修正
 \n
+\n• \"オーバーレイ\"または\"アンダーレイ\"マップとして使用されるオンラインタイルをダウンロードできるように
+\n
+\n• \"車両パラメータ \"で帝国単位(※訳注 要するに『インチ』)をサポート
+\n
+\n• 新しくモペットのプロフィールを追加
+\n
+\n• \"表示位置 \"オプションに \"自動 \"を追加
+\n
+\n• マップの傾き、ズーム、回転のジェスチャーを修正
+\n
 \n</string>
     <string name="shared_string_delete_file">ファイルを削除</string>
     <string name="selected_value">選択した値</string>
     <string name="movement_speed">移動速度</string>
     <string name="cloud_version_confirm_delete">OsmAnd Cloudから\"%1$s\"を削除しますか？</string>
     <string name="sort_date_descending">古い日付順</string>
+    <string name="app_mode_moped">モペッド</string>
+    <string name="approximate_bearing">おおよその方位</string>
+    <string name="simulation_position_description">場所を変更する際のもととなる経路ファイルを選択します。</string>
+    <string name="approximate_bearing_descr">たどっているナビゲーションルートから方位を導き出します。</string>
+    <string name="shared_string_inches">インチ</string>
+    <string name="app_mode_climbing">クライミング</string>
+    <string name="shared_string_pounds">ポンド</string>
+    <string name="clear_online_cache">オンラインキャッシュを消去する</string>
+    <string name="free_maps_updates">無料アップデート(緊急)</string>
+    <string name="clear_online_cache_description">この操作により、オンライン天気予報タイルのキャッシュがすべて消去されます。</string>
+    <string name="shared_string_alt_name">代替名称</string>
+    <string name="offline_cache">オフラインキャッシュ</string>
+    <string name="token_is_not_valid">トークンが無効です</string>
+    <string name="generate_hillshade_from_3d_maps">3Dマップから2D化した陰影起伏図を生成する。</string>
+    <string name="generate_slope_from_3d_maps">3Dマップから2D化した勾配マップを生成する</string>
+    <string name="enable_3d_maps">3Dマップを有効にする</string>
+    <string name="disable_vertex_hillshade_3d">3Dでの頂点部の陰影を無効にする</string>
+    <string name="test_heightmap">標高マップのテスト</string>
+    <string name="weather_forecast_is_outdated">天気予報データが古くなっています。</string>
+    <string name="shared_string_all_world">世界中</string>
+    <string name="common_weight_limit_error">最小値は\"%1$s\"%2$sです。車両重量が最小値以下の場合は、プロファイル\"%3$s\"を使用してください。</string>
+    <string name="weather_forecast">天気予報</string>
+    <string name="metric_lbs">ポンド</string>
+    <string name="offline_weather_forecast">オフライン天気予報</string>
+    <string name="offline_weather_forecast_desc">7日分の天気予報をダウンロードすることができます。</string>
+    <string name="nautical_depth_points">水深点(最高深度)</string>
+    <string name="inch">インチ</string>
 </resources>

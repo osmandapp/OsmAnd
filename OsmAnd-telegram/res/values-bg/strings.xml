@@ -139,4 +139,5 @@
     <string name="si_mi_meters">Мили / метри</string>
     <string name="si_m_s">Метри в секунда</string>
     <string name="shared_string_share">Споделяне</string>
+    <string name="shared_string_continue">Напред</string>
 </resources>

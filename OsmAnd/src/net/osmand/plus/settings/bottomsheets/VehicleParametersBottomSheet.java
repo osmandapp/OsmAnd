@@ -29,10 +29,10 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.vehiclesize.SizeData;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
@@ -88,10 +88,10 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 		sizePreference = (SizePreference) getPreference();
 		VehicleSizes vehicleSizes = sizePreference.getVehicleSizes();
-		MetricsConstants lengthMetricSystem = sizePreference.getLengthMetricSystem();
+		Metric metric = sizePreference.getMetric();
 		SizeType sizeType = sizePreference.getSizeType();
 		SizeData data = vehicleSizes.getSizeData(sizeType);
-		chips = vehicleSizes.collectChipItems(app, sizeType, lengthMetricSystem);
+		chips = vehicleSizes.collectChipItems(app, sizeType, metric);
 
 		TextView title = mainView.findViewById(R.id.title);
 		title.setText(sizePreference.getTitle().toString());
@@ -105,7 +105,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 		tvDescription.setText(description);
 
 		TextView tvMetric = mainView.findViewById(R.id.metric);
-		int metricStringId = vehicleSizes.getMetricStringId(sizeType, lengthMetricSystem);
+		int metricStringId = vehicleSizes.getMetricStringId(sizeType, metric);
 		tvMetric.setText(metricStringId);
 
 		chipsView = mainView.findViewById(R.id.chips_view);
@@ -126,7 +126,7 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 			public void afterTextChanged(Editable s) {
 				currentValue = (float) Algorithms.parseDoubleSilently(s.toString(), 0.0f);
 				StringBuilder error = new StringBuilder();
-				if (currentValue == 0.0f || vehicleSizes.verifyValue(sizeType, app, currentValue, error)) {
+				if (currentValue == 0.0f || vehicleSizes.verifyValue(app, sizeType, metric, currentValue, error)) {
 					onCorrectInput();
 					updateChips();
 				} else {

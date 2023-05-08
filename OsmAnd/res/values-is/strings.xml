@@ -903,7 +903,7 @@
     <string name="layer_overlay">Yfirlagskort…</string>
     <string name="map_overlay">Yfirlagskort</string>
     <string name="map_overlay_descr">Veldu yfirlagskortið</string>
-    <string name="install_more">Setja inn meira…</string>
+    <string name="install_more">Bæta við fleiru…</string>
     <string name="preferred_locale">Birt tungumál</string>
     <string name="unit_of_length_descr">Breyta einingum sem notaðar eru við lengdarmælingar.</string>
     <string name="unit_of_length">Lengdareiningar</string>
@@ -1050,8 +1050,8 @@
     <string name="routing_attr_avoid_stairs_description">Forðast stiga</string>
     <string name="routing_attr_avoid_borders_name">Forðast þverun landamæra</string>
     <string name="routing_attr_avoid_borders_description">Forðast að fara yfir landamæri inn í annað land</string>
-    <string name="routing_attr_weight_name">Þungatakmarkanir</string>
-    <string name="routing_attr_height_name">Hæðartakmarkanir</string>
+    <string name="routing_attr_weight_name">Þyngd</string>
+    <string name="routing_attr_height_name">Hæð</string>
     <string name="map_widget_map_rendering">Myndgerð korts</string>
     <string name="app_mode_hiking">Ganga</string>
     <string name="app_mode_motorcycle">Mótorhjól</string>
@@ -1150,7 +1150,7 @@
     <string name="upload_poi">Senda inn merkisstað</string>
     <string name="christmas_desc_q">Birta jólastaðina?</string>
     <string name="rendering_attr_surfaceIntegrity_name">Áreiðanleiki yfirborðs gatna</string>
-    <string name="donation_to_osm">Styrkur til OpenStreetMap samfélagsins</string>
+    <string name="donation_to_osm">Styrkur til OSM-samfélagsins</string>
     <string name="skip_map_downloading">Sleppa því að ná í kort</string>
     <string name="rendering_attr_hideOverground_name">Hlutir á yfirborði</string>
     <string name="open_street_map_login_and_pass">Notandanafn og lykilorð á OSM</string>
@@ -1324,7 +1324,7 @@
     <string name="gpx_option_destination_point">Nota núverandi áfangastað</string>
     <string name="warning_tile_layer_not_downloadable">Forritið getur ekki hlaðið niður kortalaginu %1$s, prófaðu að setja það aftur upp.</string>
     <string name="tile_source_already_installed">Kortið er þegar uppsett, stillingar verða uppfærðar.</string>
-    <string name="select_tile_source_to_install">Veldu (tígla)kort til að setja inn eða uppfæra.</string>
+    <string name="select_tile_source_to_install">Veldu uppruna tíglakorta:</string>
     <string name="internet_not_available">Get ekki framkvæmt þessa aðgerð án internettengingar.</string>
     <string name="error_doing_search">Gat ekki framkvæmt ónettengda leit.</string>
     <string name="preferred_locale_descr">Tungumál til birtingar í forriti (endurræstu OsmAnd til að breytingar taki gildi).</string>
@@ -1499,7 +1499,7 @@
     <string name="poi_deleted_localy">Merkisstaðnum verður eytt um leið og þú sendir inn breytingarnar þínar</string>
     <string name="save_poi_without_poi_type_message">Vista merkisstað á þess að gefa upp tegund hans\?</string>
     <string name="proxy_pref_descr">Tilgreindu milliþjón (proxy - vefsel).</string>
-    <string name="avoid_roads_msg">Þú getur sett í gang varaleið með því að velja götur sem á að forðast</string>
+    <string name="avoid_roads_msg">Settu í gang varaleið með því að velja vegi sem á að forðast</string>
     <string name="rendering_value_germanRoadAtlas_name">Þýsk vegakort</string>
     <string name="rendering_value_highContrastRoads_name">Götukort með mikil birtuskil</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerísk vegakort</string>
@@ -2056,7 +2056,7 @@
     <string name="display_zoom_level">Aðdráttarstig birtingar: %1$s</string>
     <string name="animate_my_location">Framkvæma hreyfingar á eigin staðsetningu</string>
     <string name="type_address">Settu inn heimilisfang</string>
-    <string name="type_city_town">Settu inn borg eða bæjarfélag</string>
+    <string name="type_city_town">Settu inn borg, bæ eða sveitarfélag</string>
     <string name="type_postcode">Settu inn póstnúmer</string>
     <string name="select_postcode">Leita eftir póstnúmeri</string>
     <string name="quick_action_auto_zoom">Sjálfvirkur aðdráttur korts af/á</string>
@@ -2488,7 +2488,7 @@
     <string name="shared_string_current">Núverandi</string>
     <string name="last_intermediate_dest_description">Bætir inn millistoppi</string>
     <string name="first_intermediate_dest_description">Bætir við fyrsta stoppi</string>
-    <string name="subsequent_dest_description">Færa áfangastað upp, og búa til áfangastað</string>
+    <string name="subsequent_dest_description">Færa áfangastað upp, og búa hann til</string>
     <string name="osm_live_header">Þessi áskrift virkjar uppfærslur á klukkustundar fresti fyrir öll kort um allan heim.
 \n Hluti innkomunnar fer til OSM-samfélagsins og er greitt fyrir hvert framlag til OSM.
 \n Ef þér líkar við OsmAnd og OSM og vilt styðja við verkefnið og fá stuðning frá þeim, þá er þetta kjörin leið.</string>
@@ -3187,7 +3187,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ofur</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Óskilgreint</string>
     <string name="routeInfo_piste_difficulty_name">Erfiðleikastig brautar</string>
-    <string name="routing_attr_width_name">Takmörkun breiddar</string>
+    <string name="routing_attr_width_name">Breidd</string>
     <string name="routing_attr_width_description">Tilgreindu takmörk á breidd farartækja á leiðum.</string>
     <string name="avoid_in_routing_descr_">Forðast tilteknar leiðir og gerðir af vegum</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3668,7 +3668,7 @@
     <string name="next_segment">Næsti bútur</string>
     <string name="search_download_wikipedia_maps">Sækja Wikipedia-kort</string>
     <string name="street_level_imagery">Myndefni í götuhæð</string>
-    <string name="routing_attr_length_name">Takmörk á lengd</string>
+    <string name="routing_attr_length_name">Lengd</string>
     <string name="plan_a_route">Skipuleggja leið</string>
     <string name="save_as_new_track">Vista sem nýjan feril</string>
     <string name="track_coloring_solid">Gegnheilt</string>
@@ -4071,7 +4071,7 @@
     <string name="shared_string_feet">fet</string>
     <string name="srtm_unit_format">Tilbrigði eininga hæðarlína</string>
     <string name="srtm_download_list_help_message">OsmAnd býður upp á hæðalínugögn í metrum og fetum. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
-    <string name="srtm_download_single_help_message">Veldu rétt snið eininga. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
+    <string name="srtm_download_single_help_message">Veldu tilbrigði. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
     <string name="route_line_use_gradient_coloring">Leiðarlína er lituð af halla hæðar.</string>
     <string name="shared_string_min_height">Lágmarkshæð</string>
     <string name="shared_string_max_height">Hámarkshæð</string>
@@ -4282,7 +4282,7 @@
     <string name="shared_storage_first_step">Ýttu á \"%1$s\".
 \nSkráastjórinn opnast þar sem þú þarft að finna og opna osmand-gagnamöppuna.</string>
     <string name="shared_storage_third_step">Gefðu heimild til að nota möppuna. Án þessarar heimildar getur OsmAnd ekki afritað skrár.</string>
-    <string name="storage_copied_files_size">Afritaði %1$s skrár %2$s</string>
+    <string name="storage_copied_files_size">Meðhöndlaði %1$s skrá(r), %2$s</string>
     <string name="storage_copying_files_size">Afrita %1$s skrár %2$s</string>
     <string name="shared_storage_migration">Yfirfærsla samnýtts geymslurýmis</string>
     <string name="shared_string_migration">Yfirfærsla</string>
@@ -4308,7 +4308,7 @@
     <string name="start_copying">Hefja afritun</string>
     <string name="skip_confirmation">Já, sleppa</string>
     <string name="shared_storage">Samnýtt geymslurými</string>
-    <string name="migration_files_present">Það eru %1$d skrár (%2$s) til staðar á völdu staðsetningunni \'%3$s\'.</string>
+    <string name="migration_files_present">Það eru %1$d skrár (%2$s) til staðar á völdu staðsetningunni \'%3$s\' og ekki skrifað yfir þær.</string>
     <string name="fold_unfold">breiða/brjóta</string>
     <string name="shared_string_hide_all">Fela allt</string>
     <string name="storage_found_files_descr">Ýttu á \"%1$s\" til að afrita %2$s skrár úr \"%3$s\" yfir í \"%4$s\". Þetta gæti tekið nokkra stund.</string>
@@ -4700,7 +4700,7 @@
     <string name="auto_25_chars_route_roundabout_kl">Beygðu útaf við %1$d afrein og haltu þig til vinstri</string>
     <string name="auto_25_chars_route_roundabout_kr">Beygðu útaf við %1$d afrein og haltu þig til hægri</string>
     <string name="av_notes_photo_widget_desc">Ef ýtt er á viðmótshluta er hægt að taka mynd.</string>
-    <string name="routing_attr_motor_type_name">Vél farartækis</string>
+    <string name="routing_attr_motor_type_name">Eldsneyti á vél farartækis</string>
     <string name="no_altitude_data_desc">Þú getur hengt ferilinn þinn við vegi til að ná í %1$s-gögn eða reikna þetta á netinu.</string>
     <string name="average_speed_widget_desc">Birtir meðalhraða núverandi leiðar.</string>
     <string name="parking_widget_desc">Sýnir vegalengd frá skjámiðju að bílastæðinu þínu.</string>
@@ -4773,7 +4773,7 @@
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
     <string name="shared_string_2_5_d_view">2.5 D sýn</string>
-    <string name="rotate_map_manual_opt">Fast (snúið handvirkt)</string>
+    <string name="rotate_map_manual_opt">Snúið handvirkt (fast)</string>
     <string name="external_sensor_widgets">ANT+ viðmótshlutar</string>
     <string name="map_widget_ant_heart_rate">Hjartsláttur</string>
     <string name="shared_string_switch_mode">Skipta um ham</string>
@@ -4876,7 +4876,6 @@
     <string name="rendering_attr_depthContourWidth_name">Breidd línu</string>
     <string name="map_widget_altitude_map_center">Hæð: miðja korts</string>
     <string name="shared_string_terms_of_use">Notkunarskilmála</string>
-    
     <string name="rendering_attr_weatherWindSpeedContours_name">Vindhraðalínur</string>
     <string name="mtb_segment_classification">Flokkun búta</string>
     <string name="rendering_attr_showMtbScale_name">Birta fjallahjólreiðakvarða</string>
@@ -5001,9 +5000,9 @@
     <string name="sync_now">Samstilla núna</string>
     <string name="local_changes">Staðværar breytingar</string>
     <string name="upload_change">Senda inn breytingu</string>
-    <string name="cloud_version_will_be_removed">Útgáfan á tölvuskýinu verður fjarlægð</string>
+    <string name="cloud_version_will_be_removed">Útgáfa á tölvuskýi verður fjarlægð</string>
     <string name="cloud_changes_will_be_dismissed">Breytingar á tölvuskýinu verða hunsaðar</string>
-    <string name="local_file_will_be_restored">Staðværa skráin verður endurheimt</string>
+    <string name="local_file_will_be_restored">Staðvær skrá verður endurheimt</string>
     <string name="local_changes_will_be_dismissed">Staðværar breytingar verða hunsaðar</string>
     <string name="cloud_conflicts">Árekstrar</string>
     <string name="cloud_conflict">Árekstur</string>
@@ -5037,4 +5036,101 @@
     <string name="value_downloaded_of_mb">Sæki %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Sleppa niðurhali</string>
     <string name="determine_location">Leyfir okkur að ákvarða staðsetninguna þína</string>
+    <string name="external_device_forget_sensor">Gleyma skynjara</string>
+    <string name="external_device_forget_sensor_description">Skynjari verður fjarlægður af listanum. Þú munt geta parað þennan skynjara aftur hvenær sem er.</string>
+    <string name="external_device_disconnected">Aftengt</string>
+    <string name="external_device_connected">Tengt</string>
+    <string name="external_device_menu_forget">Gleyma</string>
+    <string name="proxy_port_max_warning">Hámarksgildi gáttar er %1$s</string>
+    <string name="external_device_characteristic_speed">Hraði</string>
+    <string name="external_device_characteristic_distance">Vegalengd</string>
+    <string name="external_device_characteristic_total_distance">Heildarvegalengd</string>
+    <string name="external_device_characteristic_battery_level">Rafhlaða</string>
+    <string name="external_device_characteristic_gear_ratio">Gírhlutfall</string>
+    <string name="external_device_characteristic_arterial_pressure">Slagæðaþrýstingur</string>
+    <string name="external_device_characteristic_pulse_rate">Hjartsláttartíðni</string>
+    <string name="external_device_characteristic_stride_length">Skreflengd</string>
+    <string name="external_device_characteristic_temperature">Hitastig</string>
+    <string name="external_device_details_disconnect">Aftengja</string>
+    <string name="bluetooth_disconnected">Aftengt, %s</string>
+    <string name="bluetooth_connected">Tengt, %s</string>
+    <string name="bluetooth_found_title">Fann: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth ekki stutt</string>
+    <string name="ble_search_again">Leita aftur</string>
+    <string name="ant_plus_nothing_found_text">Fann enga skynjara</string>
+    <string name="ant_plus_nothing_found_description">Gakktu úr skugga um eftirfarandi:
+\n– Kveikt er á Bluetooth
+\n– Skynjari er virkjaður
+\n– Þetta tæki er staðsett nálægt skynjara</string>
+    <string name="external_device_low_battery">Lítil hleðsla á rafhlöðu</string>
+    <string name="weather_download_error">Gat ekki sótt %1$s flísar.</string>
+    <string name="external_device_characteristic_heart_rate">Hjartsláttartíðni</string>
+    <string name="external_device_details_information">Upplýsingar</string>
+    <string name="external_device_details_received_data">Móttekin gögn</string>
+    <string name="external_device_details_connection">Tenging</string>
+    <string name="external_device_details_battery">Rafhlaða</string>
+    <string name="external_device_details_speed">Hraði</string>
+    <string name="external_device_details_total_distance">Heildarvegalengd</string>
+    <string name="external_device_details_connect">Tengjast</string>
+    <string name="external_device_details_pair">Para</string>
+    <string name="external_device_details_distance">Vegalengd</string>
+    <string name="enable_3d_maps">Virkja þrívíddarkort</string>
+    <string name="cloud_version_confirm_delete">Eyða \"%1$s\" af OsmAnd-tölvuskýinu\?</string>
+    <string name="delete_cloud_version">Eyða útgáfu á tölvuskýi</string>
+    <string name="approximate_bearing">Nálguð stefna</string>
+    <string name="shared_string_inches">tommur</string>
+    <string name="speak_route_deviation">Tilkynna frávik frá leið</string>
+    <string name="select_layer">Veldu lag</string>
+    <string name="shared_string_select_recent">Velja nýlegt</string>
+    <string name="weather_forecast">Veðurspá</string>
+    <string name="shutter_sound">Hljóð lokara</string>
+    <string name="shared_string_alt_name">Annað heiti</string>
+    <string name="clear_online_cache">Hreinsa nettengt skyndiminni</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="app_mode_moped">Skellinöðrur</string>
+    <string name="shared_string_pounds">pund</string>
+    <string name="selected_value">Valið gildi</string>
+    <string name="shared_string_nearest">Næsta</string>
+    <string name="last_synchronized">Síðast samstillt</string>
+    <string name="offline_cache">Ónettengt skyndiminni</string>
+    <string name="token_is_not_valid">Teiknið er ekki gilt</string>
+    <string name="app_mode_climbing">Klifur</string>
+    <string name="test_heightmap">Prófa hæðakort</string>
+    <string name="shared_string_add_manually">Bæta handvirkt við…</string>
+    <string name="shared_string_in_progress">Í vinnslu</string>
+    <string name="shared_string_delete_file">Eyða skrá</string>
+    <string name="shared_string_on_map">Á korti</string>
+    <string name="shared_string_apply_changes">Virkja breytingar</string>
+    <string name="change_appearance">Breyta útliti</string>
+    <string name="external_device_characteristic_cadence">Taktur</string>
+    <string name="external_device_characteristic_systolic">Slagbilsþrýstingur</string>
+    <string name="external_device_characteristic_diastolic">Þanbilsþrýstingur</string>
+    <string name="external_device_characteristic_cuff_pressure">Þrýstingur armbands</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="ant_plus_bluetooth_off">Slökkt er á Bluetooth</string>
+    <string name="ant_plus_bluetooth_off_description">Kveikja á Bluetooth til að finna og para skynjara.</string>
+    <string name="ant_plus_searching_text">Leita að skynjurum</string>
+    <string name="ant_plus_help_title">Ég veit ekki hvaða tegund skynjara ég er með</string>
+    <string name="ant_plus_searching">Leita</string>
+    <string name="ant_plus_pair_new_sensor">Para nýjan skynjara</string>
+    <string name="ant_plus_open_settings">Opna stillingar</string>
+    <string name="ant_plus_pair_new_sensor_ble">Para Bluetooth LE skynjara</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Para ANT+ skynjara</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Þú getur parað Bluetooth LE og ANT+ skynjara við OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Læra meira um skynjara.</string>
+    <string name="inch">in</string>
+    <string name="shared_string_kilograms">kílógrömm</string>
+    <string name="camera_app">Myndavélarforrit</string>
+    <string name="shared_string_original">Upprunalegt</string>
+    <string name="movement_speed">Hraði hreyfingar</string>
+    <string name="shared_string_yards">Yardar</string>
+    <string name="no_visible_tracks">Engir ferlar á kortinu</string>
+    <string name="switch_folder">Skipta um möppu</string>
+    <string name="show_all_tracks">Birta alla ferla</string>
+    <string name="weather_forecast_is_outdated">Spáin er úrelt.</string>
+    <string name="shared_string_all_world">Allur heimurinn</string>
+    <string name="offline_weather_forecast">Veðurspá án nettengingar</string>
+    <string name="offline_weather_forecast_desc">Þú getur sótt veðurspá fyrir næstu 7 daga.</string>
+    <string name="rendering_value_defaultMedium_name">Sjálfgefið (miðlungs)</string>
 </resources>

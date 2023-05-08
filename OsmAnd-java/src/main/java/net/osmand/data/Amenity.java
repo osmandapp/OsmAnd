@@ -56,6 +56,7 @@ public class Amenity extends MapObject {
 	public static final String SUBTYPE = "subtype";
 	public static final String NAME = "name";
 	public static final String SEPARATOR = ";";
+	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 
 	private String subType;
 	private PoiCategory type;
@@ -272,6 +273,16 @@ public class Amenity extends MapObject {
 		}
 		return l;
 	}
+	public Map<String, String> getAltNamesMap() {
+		Map<String, String>  names = new HashMap<>();
+		for (String nm : getAdditionalInfoKeys()) {
+			String name = additionalInfo.get(nm);
+			if (nm.startsWith(ALT_NAME_WITH_LANG_PREFIX)) {
+				names.put(nm.substring(ALT_NAME_WITH_LANG_PREFIX.length()), name);
+			}
+		}
+		return names;
+	}
 
 	public String getTagSuffix(String tagPrefix) {
 		for (String infoTag : getAdditionalInfoKeys()) {
@@ -348,6 +359,22 @@ public class Amenity extends MapObject {
 				Algorithms.objectEquals(this.type.getKeyName(), thatObj.type.getKeyName()) &&
 				Algorithms.objectEquals(this.subType, thatObj.subType) &&
 				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo);
+	}
+
+	public boolean strictEquals(Object object) {
+		if (equals(object)) {
+			if (x != null && ((Amenity) object).x != null && x.size() == ((Amenity) object).x.size()) {
+				for (int i = 0; i < x.size(); i++) {
+					if (x.get(i) != ((Amenity) object).x.get(i) || y.get(i) != ((Amenity) object).y.get(i)) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return x == null && ((Amenity) object).x == null;
+			}
+		}
+		return false;
 	}
 
 	@Override

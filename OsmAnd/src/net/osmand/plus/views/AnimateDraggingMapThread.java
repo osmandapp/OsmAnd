@@ -71,6 +71,7 @@ public class AnimateDraggingMapThread {
 	private boolean animatingMapMove;
 	private boolean animatingMapRotation;
 	private boolean animatingMapTilt;
+	private boolean inconsistentMapTarget;
 
 	private float interpolation;
 
@@ -125,12 +126,27 @@ public class AnimateDraggingMapThread {
 		}
 	}
 
+	/**
+	 * Make map target in sync with current map location coordinates and elevation
+	 */
+	public void resetMapTarget() {
+		MapRendererView renderer = getMapRenderer();
+		if (renderer != null && inconsistentMapTarget) {
+			inconsistentMapTarget = false;
+			renderer.resetMapTarget();
+		}
+	}
+
+	public void invalidateMapTarget() {
+		inconsistentMapTarget = true;
+	}
 
 	/**
 	 * Stop dragging async
 	 */
 	public void stopAnimating() {
 		stopped = true;
+		resetMapTarget();
 	}
 
 	public boolean isAnimating() {
@@ -147,6 +163,7 @@ public class AnimateDraggingMapThread {
 			renderer.pauseMapAnimation();
 		}
 		stopped = true;
+		resetMapTarget();
 		Thread tt;
 		while ((tt = currentThread) != null) {
 			try {
@@ -672,6 +689,7 @@ public class AnimateDraggingMapThread {
 		double targetLat = tileView.getLatitude();
 		double targetLon = tileView.getLongitude();
 
+		resetMapTarget();
 		MapRendererView mapRenderer = getMapRenderer();
 		MapAnimator animator = getAnimator();
 		if (mapRenderer != null && animator != null) {
@@ -889,6 +907,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startRotate(float rotate) {
+		resetMapTarget();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapAnimator animator = mapRenderer.getMapAnimator();

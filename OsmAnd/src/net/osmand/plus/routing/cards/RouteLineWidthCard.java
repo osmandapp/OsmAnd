@@ -2,7 +2,6 @@ package net.osmand.plus.routing.cards;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
+import com.google.android.material.slider.Slider.OnSliderTouchListener;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -177,6 +177,21 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 						setRouteLineWidth(newWidth);
 						tvCustomWidth.setText(newWidth);
 					}
+				}
+			});
+
+			// Hide direction arrows in OpenGL while slider is touched
+			slider.addOnSliderTouchListener(new OnSliderTouchListener() {
+
+				@Override
+				public void onStartTrackingTouch(@NonNull Slider slider) {
+					boolean hasMapRenderer = app.getOsmandMap().getMapView().hasMapRenderer();
+					previewRouteLineInfo.setShowDirectionArrows(!hasMapRenderer);
+				}
+
+				@Override
+				public void onStopTrackingTouch(@NonNull Slider slider) {
+					previewRouteLineInfo.setShowDirectionArrows(true);
 				}
 			});
 			UiUtilities.setupSlider(slider, nightMode, null, true);

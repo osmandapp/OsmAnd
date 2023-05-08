@@ -61,6 +61,8 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="center"
+					android:gravity="center_horizontal"
+					android:paddingHorizontal="40dp"
 					android:text="@string/empty_screen_view_selected_weather_data"
 					android:textColor="?android:textColorSecondary" />
 

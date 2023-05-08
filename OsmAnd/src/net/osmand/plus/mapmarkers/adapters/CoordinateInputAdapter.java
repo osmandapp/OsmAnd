@@ -8,14 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.UpdateLocationViewCache;
+import net.osmand.plus.utils.UpdateLocationUtils;
+import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageDrawable;
 
 
@@ -47,7 +48,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.gpx = gpx;
 
 		uiUtilities = app.getUIUtilities();
-		updateViewCache = uiUtilities.getUpdateLocationViewCache();
+		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		nightTheme = !app.getSettings().isLightContent();
 	}
 
@@ -85,7 +86,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.divider.setVisibility((!singleItem && !lastItem) ? View.VISIBLE : View.GONE);
 
 		holder.title.setText(wpt.name);
-		uiUtilities.updateLocationView(updateViewCache, holder.iconDirection, holder.distance, wpt.lat, wpt.lon);
+		UpdateLocationUtils.updateLocationView(app, updateViewCache, holder.iconDirection, holder.distance, wpt.lat, wpt.lon);
 	}
 
 	@Override

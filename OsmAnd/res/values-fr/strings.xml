@@ -152,7 +152,7 @@
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
     <string name="internet_connection_required_for_online_route">Le calcul d\'itinéraire en ligne est sélectionné mais une connexion Internet est indispensable pour qu\'il fonctionne.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
-    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \? Sinon la langue par défaut sera utilisée.</string>
+    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible pour le moteur de synthèse vocale installé, la langue par défaut sera donc utilisée. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale Android TTS (text-to-speech) sur Google Play \?</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
     <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
     <string name="gpx_option_reverse_route">Inverser le sens de la trace</string>
@@ -332,8 +332,8 @@
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
-    <string name="layer_poi">Points d\'intérêt</string>
-    <string name="layer_map">Sources de la carte</string>
+    <string name="layer_poi">Sur-couche de points d\'intérêt…</string>
+    <string name="layer_map">Source de la carte…</string>
     <string name="menu_layers">Couches</string>
     <string name="context_menu_item_search_poi">Rechercher un Point d\'Intérêt</string>
     <string name="use_trackball_descr">Utiliser le pointeur pour déplacer la carte.</string>
@@ -1645,7 +1645,7 @@
     <string name="av_locations_descr">Fichier GPX avec positions.</string>
     <string name="simulate_your_location_stop_descr">Arrêter de simuler votre position.</string>
     <string name="simulate_your_location_descr">Simulez votre position à partir d\'un fichier GPX ou d\'une route calculée.</string>
-    <string name="are_you_sure">Etes-vous certain ?</string>
+    <string name="are_you_sure">Êtes-vous sûr \?</string>
     <string name="unsaved_changes_will_be_lost">Vos modifications non enregistrées seront perdues. Souhaitez-vous continuer ?</string>
     <string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
     <string name="roads">Routes</string>
@@ -2275,7 +2275,7 @@
     <string name="animate_my_location_desc">Activer le suivi progressif de \'Ma position\' sur la carte pendant le guidage.</string>
     <string name="animate_my_location">Animer ma position</string>
     <string name="osmand_plus_extended_description_part6">Fonctions adaptées aux cyclistes et piétons
-\n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
+\n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables ; idéal pour les activités de plein air
 \n • Modes de guidage adaptés aux cyclistes et piétons
 \n • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
 \n • Enregistrement GPX du trajet en local ou en ligne (option)
@@ -3287,7 +3287,7 @@
     <string name="choose_icon_color_name">Icône, couleur et nom</string>
     <string name="reorder_profiles">Modifier la liste des profils</string>
     <string name="selected_profile">Profil sélectionné</string>
-    <string name="reset_confirmation_descr">Cliquer sur %1$s ignore toutes vos modifications.</string>
+    <string name="reset_confirmation_descr">Appuyer sur %1$s ignore toutes vos modifications.</string>
     <string name="reset_all_profile_settings_descr">Réinitialiser tous les paramètres de profil aux valeurs par défaut.</string>
     <string name="reset_all_profile_settings">Ré-initialiser tous les paramètres de profil \?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s : %2$s</string>
@@ -3668,7 +3668,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Contrôler le niveau de zoom de la carte avec les boutons de réglage du volume sonore.</string>
     <string name="quick_action_remove_next_destination_descr">Supprime la prochaine étape de votre route. S\'il s\'agit de la destination finale, le guidage s\'arrêtera.</string>
     <string name="lenght_limit_description">Indiquez la longueur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules longs.</string>
-    <string name="quick_action_remove_next_destination">Supprimer le prochain point</string>
+    <string name="quick_action_remove_next_destination">Supprimer la prochaine étape</string>
     <string name="please_provide_point_name_error">Veuillez renseigner un nom pour le point</string>
     <string name="plugin_wikipedia_description">Obtenez des informations sur les points d\'intérêt avec les articles Wikipédia, un guide disponible hors-ligne.</string>
     <string name="search_download_wikipedia_maps">Télécharger les cartes Wikipédia</string>
@@ -3970,19 +3970,19 @@
     <string name="activity_type_water_name">Eau</string>
     <string name="activity_type_winter_name">Hiver</string>
     <string name="activity_type_snowmobile_name">Motoneige</string>
-    <string name="activity_type_cycling_name">Vélo</string>
+    <string name="activity_type_cycling_name">Cyclisme</string>
     <string name="activity_type_mountainbike_name">VTT</string>
     <string name="activity_type_hiking_name">Randonnée</string>
-    <string name="activity_type_running_name">Course à pied</string>
+    <string name="activity_type_running_name">Course</string>
     <string name="activity_type_walking_name">Marche</string>
     <string name="activity_type_car_name">Voiture</string>
-    <string name="activity_type_riding_name">Promenade</string>
-    <string name="activity_type_offroad_name">Voies non revêtues</string>
+    <string name="activity_type_riding_name">Équitation</string>
+    <string name="activity_type_offroad_name">Tout-terrain</string>
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens sur des lieux publics tels que les restaurants, les hôtels ou les musées afin de contribuer au projet OpenPlaceReviews.
 \n
 \nPour en savoir plus, consultez https://osmand.net/docs/user/plugins/openplacereviews.</string>
-    <string name="activity_type_racing_name">Course automobile</string>
+    <string name="activity_type_racing_name">Course</string>
     <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
     <string name="track_recording_description">Arrêter l\'enregistrement \?
 \nToutes les données non enregistrées seront perdues.</string>
@@ -4211,7 +4211,7 @@
     <string name="contour_lines_hillshades_slope">Courbes de niveau, ombres, pentes</string>
     <string name="backup_deleting_all_data">Suppression de toutes les données …</string>
     <string name="backup_deleted_all_data">Données supprimées.</string>
-    <string name="backup_deleting_all_data_descr">Veuillez patientez pendant qu\'OsmAnd supprime toutes vos données du Cloud. Les données sur l\'appareil restent, elles, inchangées.</string>
+    <string name="backup_deleting_all_data_descr">Veuillez patienter pendant qu\'OsmAnd supprime toutes vos données du Cloud. Les données sur l\'appareil restent, elles, inchangées.</string>
     <string name="backup_deleted_all_data_descr">Toutes vos données ont été supprimées avec succès de OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">L’historique de toutes les versions a été supprimé.</string>
     <string name="backup_data_removed">Toutes les données ont été supprimées.</string>
@@ -4476,7 +4476,7 @@
     <string name="shared_string_used">Utilisé</string>
     <string name="files_with_route_restrictions">Fichiers avec restrictions d\'itinéraire</string>
     <string name="waypoint_appearance">Apparence du point de passage</string>
-    <string name="track_file_description">Un appui sur cette action affiche les traces disponibles.</string>
+    <string name="track_file_description">Appuyez sur cette action affiche les traces disponibles.</string>
     <string name="shared_string_not_used">Non utilisé</string>
     <string name="waypoint_template">Modèle de point de passage</string>
     <string name="navigate_point_format_swiss_grid_plus">Grille suisse (CH1903+)</string>
@@ -4612,7 +4612,7 @@
     <string name="shared_string_widget">Widget</string>
     <string name="max_speed_widget_desc">Affiche la limitation de vitesse de la route actuelle.</string>
     <string name="radius_rules_widget_desc">L\'outil Rayon affiche des cercles de rayon autour d\'un point sélectionné sur la carte.</string>
-    <string name="altitude_widget_desc">Indique l’altitude, par rapport au niveau de la mer, de la position actuelle.</string>
+    <string name="altitude_widget_desc">Affiche l\'altitude de la position actuelle.</string>
     <string name="audio_video_notes_desc">Permet un accès rapide pour démarrer / arrêter un enregistrement d\'audio, de vidéo ou de photo.</string>
     <string name="get_altitude_data">Obtenir les données d\'altitude</string>
     <string name="current_time_widget_desc">Affiche l\'heure actuelle de votre appareil.</string>
@@ -4699,7 +4699,7 @@
     <string name="lang_ckb">Sorani</string>
     <string name="goods_delivery_desc">L\'accès aux véhicules transportant des marchandises peut être restreint à certaines routes.</string>
     <string name="map_marker_average_speed_desc">Indiquez la durée sur laquelle la vitesse moyenne sera calculée pour estimer l\'heure d\'arrivée.</string>
-    <string name="switch_widget_mode_desc">Un appui sur le gadget bascule entre les modes.</string>
+    <string name="switch_widget_mode_desc">Appuyez sur le gadget pour basculer entre les modes.</string>
     <string name="marker_1st">Première marque</string>
     <string name="side_marker_eta">Heure d’arrivée estimée</string>
     <string name="marker_2nd">Seconde marque</string>
@@ -4722,19 +4722,19 @@
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
     <string name="compass_click_desc">Astuce : appuyez sur la boussole pour changer le mode d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
-    <string name="av_notes_photo_widget_desc">Un appui sur le gadget, permet de prendre une photo.</string>
-    <string name="av_notes_video_widget_desc">Un appui sur le gadget permet d\'enregistrer une vidéo.</string>
-    <string name="av_notes_audio_widget_desc">Un appui sur le gadget permet de prendre une note audio.</string>
+    <string name="av_notes_photo_widget_desc">Appuyez sur le gadget pour prendre une photo.</string>
+    <string name="av_notes_video_widget_desc">Appuyez sur le gadget pour enregistrer une vidéo.</string>
+    <string name="av_notes_audio_widget_desc">Appuyez sur le gadget pour prendre une note audio.</string>
     <string name="auto_backup_preference_desc">Par défaut, Android sauvegarde les favoris, noms des cartes et paramètres OsmAnd afin de pouvoir les restaurer sur d\'autres appareils ou après une réinitialisation. Cette sauvegarde est limitée à 25 Mo.
 \nL\'utilisation d\'OsmAnd Cloud et de ce type de sauvegarde peut entraîner des conflits après restauration.</string>
-    <string name="auto_25_chars_route_tl_kl">Tournez à gauche puis gardez la gauche</string>
-    <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis gardez la droite</string>
-    <string name="auto_25_chars_route_tr_kl">Tournez à droite puis gardez la gauche</string>
-    <string name="auto_25_chars_route_tr_kr">Tournez à droite puis gardez la droite</string>
-    <string name="auto_25_chars_route_tu_kl">Faites demi-tour et restez à gauche</string>
-    <string name="auto_25_chars_route_tu_kr">Faites demi-tour et restez à droite</string>
-    <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis gardez la gauche</string>
-    <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis gardez la droite</string>
+    <string name="auto_25_chars_route_tl_kl">Tournez à gauche puis restez à gauche</string>
+    <string name="auto_25_chars_route_tl_kr">Tournez à gauche puis restez à droite</string>
+    <string name="auto_25_chars_route_tr_kl">Tournez à droite puis restez à gauche</string>
+    <string name="auto_25_chars_route_tr_kr">Tournez à droite puis restez à droite</string>
+    <string name="auto_25_chars_route_tu_kl">Faites demi-tour puis restez à gauche</string>
+    <string name="auto_25_chars_route_tu_kr">Faites demi-tour puis restez à droite</string>
+    <string name="auto_25_chars_route_roundabout_kl">Prenez la sortie %1$d puis restez à gauche</string>
+    <string name="auto_25_chars_route_roundabout_kr">Prenez la sortie %1$d puis restez à droite</string>
     <string name="trip_recording_distance_widget_desc">Affiche la distance du trajet en cours d’enregistrement.</string>
     <string name="trip_recording_downhill_widget_desc">Affiche la somme de toutes les descentes du trajet enregistré.</string>
     <string name="true_bearing_wdiget_desc">Angle entre le Nord vrai et la destination depuis votre position.</string>
@@ -4818,7 +4818,7 @@
     <string name="shared_string_cross_buy">Achat multi-plateformes</string>
     <string name="favorites_backup">Sauvegarde des favoris</string>
     <string name="external_sensors_plugin_name">Capteurs externes</string>
-    <string name="map_widget_altitude_map_center_desc">Affiche l’altitude du centre de la carte.</string>
+    <string name="map_widget_altitude_map_center_desc">Affiche l\'altitude du centre de la carte.</string>
     <string name="simulate_location_by_gpx">Simuler la position via GPX</string>
     <string name="map_widget_altitude_desc">Affiche l\'altitude de la position actuelle ou du centre de la carte</string>
     <string name="location_simulation_cutoff">La simulation ignore les premiers mètres</string>
@@ -4826,8 +4826,8 @@
     <string name="shared_string_identifiers">Identifiants</string>
     <string name="shared_string_terms_of_use">Conditions d\'utilisation</string>
     <string name="send_uuid_preference">Envoyer l\'identifiant unique de l\'utilisateur (UUID)</string>
-    <string name="map_widget_altitude_current_location">Altitude : Emplacement actuel</string>
-    <string name="map_widget_altitude_map_center">Altitude : Centre de la carte</string>
+    <string name="map_widget_altitude_current_location">Altitude : position actuelle</string>
+    <string name="map_widget_altitude_map_center">Altitude : centre de la carte</string>
     <string name="map_widget_altitude_current_location_desc">Affiche l’altitude de la position actuelle.</string>
     <string name="map_widget_rendering_fps">Rendu FPS de la carte</string>
     <string name="send_uuid_preference_desc">Un UUID aléatoire est utilisé pour télécharger les cartes hors ligne à partir des serveurs OsmAnd ; ce qui permet de garantir une utilisation équitable des ressources du serveur, de prévoir le trafic et de générer des rapports d\'utilisation mensuelle et anonyme des cartes.</string>
@@ -5084,5 +5084,102 @@
 \n
 \n• Correction de bugs lors de l\'affichage de lieux végans
 \n
+\n• Ajout de la possibilité de télécharger des tuiles en ligne utilisées comme sur-couches ou comme sous-couches.
+\n
+\n• Ajout de la prise en charge des unités impériales pour les \"caractéristiques du véhicule\"
+\n
+\n• Nouveau profil : cyclomoteur
+\n
+\n• Nouvelle option \"Automatique\" pour le paramètre \"Emplacement sur l\'écran\"
+\n
+\n• Correction des gestes pour incliner, zoomer et tourner la carte
+\n
 \n</string>
+    <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrage du relief à partir de cartes 3D</string>
+    <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>
+    <string name="disable_vertex_hillshade_3d">Désactiver l\'ombrage du relief en 3D</string>
+    <string name="enable_3d_maps">Activer les cartes en 3D</string>
+    <string name="clear_online_cache_description">Cela videra le cache des tuiles météo en ligne.</string>
+    <string name="clear_online_cache">Vider le cache en ligne</string>
+    <string name="app_mode_climbing">Escalade</string>
+    <string name="offline_cache">Cache hors-ligne</string>
+    <string name="shared_string_alt_name">Autre dénomination</string>
+    <string name="token_is_not_valid">Le jeton n\'est pas valide</string>
+    <string name="metric_lbs">livres</string>
+    <string name="weather_forecast_is_outdated">Les prévisions sont périmées.</string>
+    <string name="shared_string_all_world">Monde entier</string>
+    <string name="shared_string_pounds">livres</string>
+    <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
+    <string name="common_weight_limit_error">La valeur minimale est \"%1$s\" %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil \"%3$s\".</string>
+    <string name="weather_forecast">Prévisions météo</string>
+    <string name="test_heightmap">Carte de hauteur test</string>
+    <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
+    <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
+    <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
+    <string name="select_layer">Sélectionner la sur-couche</string>
+    <string name="camera_app">Application d\'appareil photo</string>
+    <string name="shutter_sound">Son de l\'obturateur</string>
+    <string name="speak_route_deviation">Annoncer une déviation de l\'itinéraire</string>
+    <string name="proxy_port_max_warning">La valeur maximale du port est %1$s</string>
+    <string name="weather_download_error">Le téléchargement des tuiles %1$s a échoué.</string>
+    <string name="file_already_exists_description">Un fichier nommé \"%1$s\" existe déjà. Remplacer écrasera le fichier courant et toutes ses modifications.</string>
+    <string name="is_imported">%1$s a été importé.</string>
+    <string name="ant_plus_bluetooth_off">Le Bluetooth est désactivé</string>
+    <string name="external_device_characteristic_diastolic">Diastolique</string>
+    <string name="external_device_characteristic_cuff_pressure">Pression du brassard</string>
+    <string name="external_device_characteristic_pulse_rate">Fréquence du pouls</string>
+    <string name="external_device_characteristic_stride_length">Longueur de foulée</string>
+    <string name="ant_plus_bluetooth_off_description">Activez le Bluetooth pour rechercher et appairer des capteurs.</string>
+    <string name="external_device_characteristic_temperature">Température</string>
+    <string name="external_device_details_information">Information</string>
+    <string name="bluetooth_disconnected">Déconnecté, %s</string>
+    <string name="bluetooth_found_title">Trouvé : %d</string>
+    <string name="external_device_details_received_data">Données reçues</string>
+    <string name="external_device_details_battery">Batterie</string>
+    <string name="external_device_details_connection">Connexion</string>
+    <string name="external_device_details_speed">Vitesse</string>
+    <string name="external_device_details_connect">Connecter</string>
+    <string name="external_device_details_pair">Appairer</string>
+    <string name="ble_search_again">Rechercher à nouveau</string>
+    <string name="external_device_details_distance">DIstance</string>
+    <string name="external_device_details_disconnect">Déconnecter</string>
+    <string name="bluetooth_connected">Connecté, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_not_supported">Bluetooth non supporté</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="ant_plus_nothing_found_text">Aucun capteur trouvé</string>
+    <string name="ant_plus_searching_text">Recherche de capteurs en cours</string>
+    <string name="ant_plus_searching_text_description">Veuillez rapprocher l\'appareil et le capteur. Vous devez activer le capteur afin qu\'il soit détecté par OsmAnd.</string>
+    <string name="ant_plus_help_title">Je ne connais pas le type de capteur</string>
+    <string name="ant_plus_searching">Recherche</string>
+    <string name="ant_plus_pair_new_sensor">Appairer un nouveau capteur</string>
+    <string name="ant_plus_pair_new_sensor_ble">Appairer un capteur BLE</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Vous pouvez appairer des capteurs BLE et ANT+ avec OsmAnd.</string>
+    <string name="ant_plus_open_settings">Ouvrir les paramètres</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Appairer un capteur ANT+</string>
+    <string name="learn_more_about_sensors_link">En savoir plus sur les capteurs.</string>
+    <string name="file_already_exists">Le fichier existe déjà</string>
+    <string name="nav_profile_confirm_delete">Êtes-vous sûr de vouloir supprimer \"%1$s\" \?</string>
+    <string name="external_device_characteristic_arterial_pressure">Pression artérielle</string>
+    <string name="external_device_details_total_distance">Distance totale</string>
+    <string name="ant_plus_nothing_found_description">Vérifiez que :
+\n- le Bluetooth est activé
+\n- le capteur est activé
+\n- l\'appareil et le capteur sont proches</string>
+    <string name="external_device_low_battery">Batterie faible</string>
+    <string name="external_device_forget_sensor">Oublier ce capteur</string>
+    <string name="external_device_forget_sensor_description">Ce capteur sera supprimé de la liste. Vous pourrez appairer de nouveau ce capteur à tout moment.</string>
+    <string name="external_device_disconnected">Déconnecté</string>
+    <string name="external_device_connected">Connecté</string>
+    <string name="external_device_menu_forget">Oublier</string>
+    <string name="external_device_characteristic_speed">Vitesse</string>
+    <string name="external_device_characteristic_distance">Distance</string>
+    <string name="external_device_characteristic_total_distance">Distance totale</string>
+    <string name="external_device_characteristic_battery_level">Batterie</string>
+    <string name="external_device_characteristic_gear_ratio">Rapport de démultiplication</string>
+    <string name="external_device_characteristic_cadence">Cadence</string>
+    <string name="external_device_characteristic_heart_rate">Fréquence cardiaque</string>
+    <string name="external_device_characteristic_systolic">Systolique</string>
+    <string name="no_search_results">Aucun résultat</string>
+    <string name="search_track_by_name">Rechercher les traces par nom</string>
 </resources>

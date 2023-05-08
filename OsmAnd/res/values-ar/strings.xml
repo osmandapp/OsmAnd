@@ -2939,8 +2939,8 @@
 \n</string-->
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام أوسماند لايف.</string>
     <string name="use_osm_live_public_transport">أوسماند لايف وسائل النقل العام</string>
-    <string name="routing_attr_avoid_sett_name">عدم تجنب الحصى والطرق المرصوفة</string>
-    <string name="routing_attr_avoid_sett_description">تجنب الحصى والطرق المرصوفة</string>
+    <string name="routing_attr_avoid_sett_name">بدون ضبط</string>
+    <string name="routing_attr_avoid_sett_description">تجنب الطرق المرصوفة</string>
     <string name="routing_attr_avoid_train_name">بدون قطارات</string>
     <string name="routing_attr_avoid_train_description">تجنب القطارات</string>
     <string name="routing_attr_avoid_subway_name">تجنب قطارالانفاق</string>
@@ -4048,7 +4048,7 @@
     <string name="activity_type_cycling_name">دراجة</string>
     <string name="activity_type_hiking_name">مشي</string>
     <string name="activity_type_running_name">الجري</string>
-    <string name="activity_type_walking_name">مشي</string>
+    <string name="activity_type_walking_name">المشي</string>
     <string name="activity_type_offroad_name">الطرق الوعرة</string>
     <string name="activity_type_motorbike_name">دراجة نارية</string>
     <string name="activity_type_car_name">سيارة</string>
@@ -4843,7 +4843,7 @@
     <string name="display_position">عرض الموقف</string>
     <string name="quick_action_map_center_widget_descr">مفتاح تبديل لإظهار أداة مركز الخريطة أو إخفائها على الخريطة.</string>
     <string name="quick_action_current_location_widget_descr">مفتاح تبديل لإظهار أداة الموقع الحالي أو إخفائه على الخريطة.</string>
-    <string name="coordinates_widget_map_center">الإحداثيات: مركز الخريطة</string>
+    <string name="coordinates_widget_map_center">الإحداثيات: مركز الخرائط</string>
     <string name="coordinates_widget_current_location">الإحداثيات: الموقع الحالي</string>
     <string name="map_marker_interval_dialog_desc">حدد الفاصل الزمني الذي سيتم قياس متوسط السرعة فيه لحساب الوقت المقدر للوصول.</string>
     <string name="map_widget_camera_distance">ارتفاع الكاميرا</string>
@@ -5153,6 +5153,16 @@
 \n
 \n• تم إصلاح المشكلات المتعلقة بعرض أماكن الغطاء النباتي
 \n
+\n• إمكانية إضافية لتنزيل الطبقات عبر الإنترنت المستخدم كخرائط \"تراكب\" أو \"أساسية\"
+\n
+\n• دعم إضافي للوحدات العالمية \"معلمات السيارة\"
+\n
+\n• ملف تعريف الدراجة الجديد
+\n
+\n• \"موضع العرض\" أضاف خيار جديد \"تلقائي\"
+\n
+\n• إيماءات خريطة ثابتة للإمالة والتكبير والتدوير
+\n
 \n</string>
     <string name="sort_duration_ascending">مدة أقصر أولا</string>
     <string name="sort_duration_descending">أطول مدة أولا</string>
@@ -5163,4 +5173,92 @@
     <string name="shared_string_nearest">أقرب</string>
     <string name="selected_value">القيمة المحددة</string>
     <string name="app_mode_moped">الدراجة</string>
+    <string name="generate_slope_from_3d_maps">إنشاء خرائط الانحدار من خرائط ثلاثية الأبعاد</string>
+    <string name="enable_3d_maps">تمكين خريطة ثلاثية الأبعاد</string>
+    <string name="test_heightmap">اختبار خريطة الارتفاع</string>
+    <string name="disable_vertex_hillshade_3d">تعطيل قمة الارتفاع في عرض الثلاثي الأبعاد</string>
+    <string name="generate_hillshade_from_3d_maps">إنشاء خرائط الارتفاع من خرائط ثلاثية الأبعاد</string>
+    <string name="offline_cache">ذاكرة التخزين المؤقت دون اتصال</string>
+    <string name="weather_forecast_is_outdated">التوقعات قديمة.</string>
+    <string name="clear_online_cache_description">سيؤدي هذا إلى مسح جميع الملفات المؤقتة لطبقات الطقس المتصلة بالانترنت.</string>
+    <string name="clear_online_cache">مسح ذاكرة تخزين الانترنت المؤقت</string>
+    <string name="shared_string_alt_name">الاسم البديل</string>
+    <string name="shared_string_all_world">كل العالم</string>
+    <string name="weather_forecast">توقعات الطقس</string>
+    <string name="offline_weather_forecast">توقعات الطقس دون اتصال</string>
+    <string name="offline_weather_forecast_desc">يمكنك تنزيل توقعات الطقس لمدة 7 أيام.</string>
+    <string name="free_maps_updates">تحديثات مجانية (طارئة)</string>
+    <string name="token_is_not_valid">الرمز غير صالح</string>
+    <string name="metric_lbs">رطل</string>
+    <string name="app_mode_climbing">التسلق</string>
+    <string name="common_weight_limit_error">القيمة الدنيا هي \"%1$s\" %2$s. استخدم ملف تعريف \"%3$s\" إذا كان وزن السيارة أقل من الحد الأدنى للقيمة.</string>
+    <string name="shared_string_pounds">باوند</string>
+    <string name="camera_app">تطبيق الكاميرا</string>
+    <string name="rendering_value_defaultMedium_name">افتراضي (متوسط)</string>
+    <string name="shutter_sound">صوت الغالق</string>
+    <string name="speak_route_deviation">أعلن الانحراف عن المسار</string>
+    <string name="select_layer">حدد طبقة</string>
+    <string name="proxy_port_max_warning">أقصى قيمة للمنفذ %1$s</string>
+    <string name="weather_download_error">تعذر تنزيل %1$s الطبقات.</string>
+    <string name="external_device_details_connect">اتصال</string>
+    <string name="is_imported">يتم استيراد%1$s.</string>
+    <string name="external_device_details_distance">المسافة</string>
+    <string name="external_device_details_pair">اقتران</string>
+    <string name="ant_plus_searching_text_description">يرجى تثبيت الجهاز بالقرب من المستشعر. تحتاج إلى تنشيط المستشعر حتى يتمكن أوسماند من العثور عليه.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">يمكنك إقران مستشعرات بلوتوث LE و ANT + مع أوسماند.</string>
+    <string name="file_already_exists_description">\"%1$s\". يوجد ملف بهذا الاسم . سيتم استبدال جميع التغييرات التي تم إجراؤها بالإصدار الحالي.</string>
+    <string name="file_already_exists">الملف موجود مسبقا</string>
+    <string name="nav_profile_confirm_delete">هل أنت متأكد أنك تريد حذف \"%1$s\"؟</string>
+    <string name="external_device_low_battery">البطارية ضعيفة</string>
+    <string name="external_device_forget_sensor">إزالة المستشعر</string>
+    <string name="external_device_forget_sensor_description">ستتم إزالة المستشعر من القائمة. بإمكانك الاقتران بهذا المستشعر مرة أخرى في أي وقت.</string>
+    <string name="external_device_disconnected">غير متصل</string>
+    <string name="external_device_connected">متصل</string>
+    <string name="external_device_menu_forget">نسيان</string>
+    <string name="external_device_characteristic_speed">السرعة</string>
+    <string name="external_device_characteristic_distance">المسافة</string>
+    <string name="external_device_characteristic_total_distance">المسافة الإجمالية</string>
+    <string name="external_device_characteristic_battery_level">البطارية</string>
+    <string name="external_device_characteristic_gear_ratio">نسبة مئوية</string>
+    <string name="external_device_characteristic_cadence">إيقاع</string>
+    <string name="external_device_characteristic_heart_rate">معدل نبضات القلب</string>
+    <string name="external_device_characteristic_systolic">انقباضي</string>
+    <string name="external_device_characteristic_diastolic">انبساطي</string>
+    <string name="external_device_characteristic_arterial_pressure">الضغط الشرياني</string>
+    <string name="external_device_characteristic_cuff_pressure">ضغط الكف</string>
+    <string name="external_device_characteristic_pulse_rate">معدل النبض</string>
+    <string name="external_device_characteristic_stride_length">طول الخطوة</string>
+    <string name="external_device_characteristic_temperature">درجة حرارة</string>
+    <string name="external_device_details_information">معلومات</string>
+    <string name="external_device_details_received_data">البيانات المستلمة</string>
+    <string name="external_device_details_connection">الاتصال</string>
+    <string name="external_device_details_battery">البطارية</string>
+    <string name="external_device_details_speed">السرعة</string>
+    <string name="external_device_details_total_distance">المسافة الإجمالية</string>
+    <string name="external_device_details_disconnect">غير متصل</string>
+    <string name="bluetooth_disconnected">غير متصل, %s</string>
+    <string name="bluetooth_connected">متصل %s</string>
+    <string name="external_device_ble">بلوتوث</string>
+    <string name="external_device_ant">مستشعر ANT+</string>
+    <string name="bluetooth_found_title">العثور على: %d</string>
+    <string name="bluetooth_not_supported">البلوتوث غير مدعوم</string>
+    <string name="ble_search_again">بحث مرة أخرى</string>
+    <string name="ant_plus_nothing_found_text">تعذر العثور على أي أجهزة استشعار</string>
+    <string name="ant_plus_nothing_found_description">تأكد من:
+\n- البلوتوث قيد التشغيل
+\n- تم تنشيط المستشعر
+\n- الجهاز قريب من المستشعر</string>
+    <string name="ant_plus_bluetooth_off">البلوتوث متوقف</string>
+    <string name="ant_plus_bluetooth_off_description">قم بالبحث عن أجهزة الاستشعار وعمل اقتران بالبلوتوث.</string>
+    <string name="ant_plus_searching_text">البحث عن أجهزة الاستشعار</string>
+    <string name="ant_plus_help_title">نوع المستشعر غير معروف لدي</string>
+    <string name="ant_plus_searching">جاري البحث</string>
+    <string name="ant_plus_pair_new_sensor">اقتران مستشعر جديد</string>
+    <string name="ant_plus_open_settings">فتح الإعدادات</string>
+    <string name="ant_plus_pair_new_sensor_ble">إقران مستشعر بلوتوث LE</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">قم بربط مستشعر +ANT</string>
+    <string name="learn_more_about_sensors_link">تعرف على المزيد حول أجهزة الاستشعار.</string>
+    <string name="no_search_results">لا توجد نتائج</string>
+    <string name="search_track_by_name">بحث عن المسار بالاسم</string>
+    <string name="number_of_tracks">%1$s مسار</string>
 </resources>

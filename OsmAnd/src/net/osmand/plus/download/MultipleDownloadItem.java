@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -69,6 +70,15 @@ public class MultipleDownloadItem extends DownloadItem {
 		return false;
 	}
 
+	public boolean hasWeatherIndexes() {
+		for (DownloadItem item : items) {
+			if (item instanceof WeatherIndexItem) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public String getFileName() {
 		// The file name is used in many places.
@@ -112,6 +122,27 @@ public class MultipleDownloadItem extends DownloadItem {
 	@Override
 	public boolean hasActualDataToDownload() {
 		return getItemsToDownload().size() > 0;
+	}
+
+	@Override
+	public boolean isFree() {
+		for (DownloadItem item : items) {
+			if (item.isFree()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public String getFreeMessage() {
+		for (DownloadItem item : items) {
+			String message = item.getFreeMessage();
+			if (message != null) {
+				return message;
+			}
+		}
+		return null;
 	}
 
 	@Override

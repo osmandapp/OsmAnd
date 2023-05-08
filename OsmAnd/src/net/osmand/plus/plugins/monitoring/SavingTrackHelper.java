@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -14,8 +17,8 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -46,9 +49,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -487,7 +487,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			lastRoutingApplicationMode = null;
 		}
 		boolean record = false;
-		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
+		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
@@ -817,6 +817,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		this.lastTimeFileSaved = lastTimeFileSaved;
 	}
 
+	@NonNull
 	public GPXFile getCurrentGpx() {
 		return currentTrack.getGpxFile();
 	}

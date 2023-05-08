@@ -72,7 +72,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			updateStylesDashPattern(dashPattern);
 		}
 		if (this.drawDirectionArrows != drawDirectionArrows) {
-			resetSymbolProviders();
+			resetArrowsProvider();
 		}
 		updatePaints(trackWidth, routeColoringType);
 		getDrawer().setColoringType(routeColoringType);

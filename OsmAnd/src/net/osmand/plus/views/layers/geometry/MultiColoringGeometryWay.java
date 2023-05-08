@@ -14,6 +14,7 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
@@ -55,10 +56,20 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	protected void updateStylesWidth(@Nullable Float newWidth) {
-		for (GeometryWayStyle<?> style : styleMap.values()) {
-			style.width = newWidth;
+		if (!styleMap.isEmpty()) {
+			for (GeometryWayStyle<?> style : styleMap.values()) {
+				style.width = newWidth;
+			}
+		} else {
+			for (List<DrawPathData31> pathDataList : pathsData31Cache) {
+				for (DrawPathData31 pathData : pathDataList) {
+					if (pathData.style != null) {
+						pathData.style.width = newWidth;
+					}
+				}
+			}
 		}
-		resetSymbolProviders();
+		resetArrowsProvider();
 	}
 
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
@@ -370,9 +381,17 @@ public abstract class MultiColoringGeometryWay
 
 		@Override
 		public double getPointStepPx(double zoomCoef) {
-			return useSpecialArrow()
-					? getPointBitmap().getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER
-					: getPointBitmap().getHeight() + getWidth(0) * ARROW_DISTANCE_MULTIPLIER;
+			return useSpecialArrow() ? getSpecialPointStepPx() : getRegularPointStepPx();
+		}
+
+		public double getSpecialPointStepPx() {
+			Bitmap bitmap = getContext().getSpecialArrowBitmap();
+			return bitmap.getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER;
+		}
+
+		public double getRegularPointStepPx() {
+			Bitmap bitmap = getContext().getArrowBitmap();
+			return bitmap.getHeight() + getWidth(0) * ARROW_DISTANCE_MULTIPLIER;
 		}
 
 		public boolean useSpecialArrow() {

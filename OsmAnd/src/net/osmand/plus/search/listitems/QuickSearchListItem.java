@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -22,21 +19,23 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchHistoryFragment;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -381,7 +380,7 @@ public class QuickSearchListItem {
 				try {
 					return getIcon(app, iconId);
 				} catch (Exception e) {
-					return getIcon(app, SearchHistoryFragment.getItemIcon(entry.getName()));
+					return getIcon(app, entry.getName().getItemIcon());
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
@@ -413,7 +412,7 @@ public class QuickSearchListItem {
 			}
 		}
 		if (iconId <= 0 && name != null) {
-			iconId = SearchHistoryFragment.getItemIcon(name);
+			iconId = name.getItemIcon();
 		}
 		return iconId;
 	}

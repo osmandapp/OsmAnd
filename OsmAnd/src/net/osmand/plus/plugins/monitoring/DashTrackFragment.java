@@ -21,19 +21,18 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 
@@ -75,8 +74,8 @@ public class DashTrackFragment extends DashBaseFragment {
 			public void onClick(View view) {
 				Activity activity = getActivity();
 				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+				Intent favorites = new Intent(activity, appCustomization.getMyPlacesActivity());
+				getMyApplication().getSettings().FAVORITES_TAB.set(MyPlacesActivity.GPX_TAB);
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 				closeDashboard();
@@ -163,7 +162,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			GPXInfo info = new GPXInfo(filename, file);
 			info.subfolder = "";
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			AvailableGPXFragment.updateGpxInfoView(itemView, info, app, true, null);
+			GpxUiHelper.updateGpxInfoView(itemView, info, app, true, null);
 
 			itemView.setOnClickListener(v -> openGpxContextMenu(file));
 			ImageButton showOnMap = itemView.findViewById(R.id.show_on_map);
@@ -258,7 +257,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
 					GPXInfo info = new GPXInfo(file.getName(), file);
 					info.subfolder = "";
-					AvailableGPXFragment.updateGpxInfoView(pView, info, app, true, null);
+					GpxUiHelper.updateGpxInfoView(pView, info, app, true, null);
 					updateShowOnMap(app, file, v, showOnMap);
 				}
 			});

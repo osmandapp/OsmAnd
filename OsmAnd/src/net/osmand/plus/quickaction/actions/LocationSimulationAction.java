@@ -26,12 +26,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -81,31 +82,34 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getActivePlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			unselectGpxFileIfMissing();
+			speedUpValue = getFloatFromParams(KEY_SIMULATION_SPEEDUP, MIN_SPEEDUP);
+			cutOffValue = getFloatFromParams(KEY_SIMULATION_CUTOFF, MIN_CUTOFF_DISTANCE);
 
-		unselectGpxFileIfMissing();
-		speedUpValue = getFloatFromParams(KEY_SIMULATION_SPEEDUP, MIN_SPEEDUP);
-		cutOffValue = getFloatFromParams(KEY_SIMULATION_CUTOFF, MIN_CUTOFF_DISTANCE);
-
-		if (!shouldUseSelectedGpxFile()) {
-			OsmAndLocationSimulation sim = mapActivity.getMyApplication().getLocationProvider().getLocationSimulation();
-			if (sim.isRouteAnimating()) {
-				sim.startStopGpxAnimation(mapActivity);
-			} else {
-				CallbackWithObject<String> onFileSelect = gpxFilePath -> {
-					getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
-						startStopSimulation(gpxFile, mapActivity);
+			if (!shouldUseSelectedGpxFile()) {
+				OsmAndLocationSimulation sim = mapActivity.getMyApplication().getLocationProvider().getLocationSimulation();
+				if (sim.isRouteAnimating()) {
+					sim.startStopGpxAnimation(mapActivity);
+				} else {
+					CallbackWithObject<String> onFileSelect = gpxFilePath -> {
+						getGpxFile(gpxFilePath, mapActivity, gpxFile -> {
+							startStopSimulation(gpxFile, mapActivity);
+							return true;
+						});
 						return true;
-					});
+					};
+					showSelectTrackFileDialog(mapActivity, onFileSelect);
+				}
+			} else {
+				getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
+					startStopSimulation(gpxFile, mapActivity);
 					return true;
-				};
-				showSelectTrackFileDialog(mapActivity, onFileSelect);
+				});
 			}
-		} else {
-			getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
-				startStopSimulation(gpxFile, mapActivity);
-				return true;
-			});
 		}
+
 	}
 
 	@Override
@@ -209,15 +213,11 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, new GpxDataItemCallback() {
-				@Override
-				public void onGpxDataItemReady(GpxDataItem item) {
-					if (item != null && item.getAnalysis() != null) {
-						setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
-					}
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
+				if (item.getAnalysis() != null) {
+					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
 			});
-
 			if (gpxDataItem != null && gpxDataItem.getAnalysis() != null) {
 				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getAnalysis(), app);
 			}

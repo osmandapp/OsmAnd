@@ -144,7 +144,7 @@
 	- Swiss lakes: Federal Office of Topography swisstopo
 
     * DEM (DSM) data
-	- ALOS DEM: The original data used for this product have been supplied by JAXA’s AW3D.
+	- ALOS DEM: The original data used for this product have been supplied by JAXA’s AW3D (available at https://www.eorc.jaxa.jp/ALOS/en/index_e.htm).
 	- MERIT DEM (available at http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM)
 	- ArcticDEM: Porter, Claire; Morin, Paul; Howat, Ian; Noh, Myoung-Jon; Bates, Brian; Peterman, Kenneth; Keesey, Scott; Schlenk, Matthew; Gardiner, Judith; Tomko, Karen; Willis, Michael; Kelleher, Cole; Cloutier, Michael; Husby, Eric; Foga, Steven; Nakamura, Hitomi; Platson, Melisa; Wethington, Michael, Jr.; Williamson, Cathleen; Bauer, Gregory; Enos, Jeremy; Arnold, Galen; Kramer, William; Becker, Peter; Doshi, Abhijit; D’Souza, Cristelle; Cummens, Pat; Laurier, Fabien; Bojesen, Mikkel, 2018, “ArcticDEM”, https://doi.org/10.7910/DVN/OHHUKH, Harvard Dataverse, V1
-	- OpenDataPortal: https://data.opendataportal.at/dataset/dtm-europe
+	- SONNY's LiDAR DIGITAL TERRAIN MODELS (DTM) OF EUROPEAN COUNTRIES: https://sonny.4lima.de

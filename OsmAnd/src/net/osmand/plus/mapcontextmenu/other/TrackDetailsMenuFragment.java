@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -18,6 +17,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -30,10 +32,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.MapUtils;
 
-public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmAndLocationListener {
+public class TrackDetailsMenuFragment extends BaseOsmAndFragment
+		implements OsmAndLocationListener, IMapDisplayPositionProvider {
 
 	public static final String TAG = "TrackDetailsMenuFragment";
 
+	private OsmandApplication app;
 	private TrackDetailsMenu menu;
 	private View mainView;
 	private boolean nightMode;
@@ -54,6 +58,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MapActivity mapActivity = requireMapActivity();
+		app = mapActivity.getMyApplication();
 		menu = mapActivity.getTrackDetailsMenu();
 
 		mapActivity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -100,23 +105,15 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 		ImageButton backButton = mainView.findViewById(R.id.top_bar_back_button);
 		ImageButton closeButton = mainView.findViewById(R.id.top_bar_close_button);
 		if (backButton != null) {
-			backButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						activity.onBackPressed();
-					}
+			backButton.setOnClickListener(v -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					activity.onBackPressed();
 				}
 			});
 		}
 		if (closeButton != null) {
-			closeButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					menu.hide(false);
-				}
-			});
+			closeButton.setOnClickListener(v -> menu.hide(false));
 		}
 
 		MapContextMenu contextMenu = mapActivity.getContextMenu();
@@ -153,20 +150,28 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 			menu.onShow();
 		}
 		startLocationUpdate();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMapViewTrackingUtilities().setDetailsMenu(menu);
-		}
+		updateMapDisplayPosition(true);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMapViewTrackingUtilities().setDetailsMenu(menu);
-		}
+		updateMapDisplayPosition(false);
+	}
+
+	private void updateMapDisplayPosition(boolean registerProvider) {
+		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		manager.updateProviders(this, registerProvider);
+		manager.updateMapDisplayPosition();
+	}
+
+	@Override @Nullable
+	public Integer getMapDisplayPosition() {
+		if (isVisible()) {
+			return OsmandSettings.CENTER_CONSTANT;
+		};
+		return null;
 	}
 
 	private void startLocationUpdate() {

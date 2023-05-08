@@ -8,27 +8,27 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.material.slider.RangeSlider;
-import com.google.android.material.slider.Slider;
-
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
-
-import java.io.File;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.slider.Slider;
+
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+
+import java.io.File;
+import java.util.List;
 
 public class GpsFiltersCard extends GpsFilterBaseCard {
 
@@ -48,14 +48,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 	@Nullable
 	private GpxDataItem fetchGpxDataItem() {
 		File file = new File(filteredSelectedGpxFile.getGpxFile().path);
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public void onGpxDataItemReady(GpxDataItem item) {
-				if (item != null) {
-					gpxDataItem = item;
-				}
-			}
-		};
+		GpxDataItemCallback callback = item -> gpxDataItem = item;
 		return gpxDbHelper.getItem(file, callback);
 	}
 

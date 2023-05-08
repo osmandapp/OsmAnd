@@ -2700,7 +2700,7 @@
     <string name="open_in_browser_wiki">Abrir artículo en línea</string>
     <string name="open_in_browser_wiki_description">Ver el artículo en un navegador web.</string>
     <string name="download_wiki_region_placeholder">esta región</string>
-    <string name="wiki_article_search_text">Buscando el artículo wiki correspondiente</string>
+    <string name="wiki_article_search_text">Buscando el artículo en la wiki correspondiente</string>
     <string name="wiki_article_not_found">Artículo no encontrado</string>
     <string name="how_to_open_wiki_title">¿Cómo abrir artículos de Wikipedia?</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
@@ -2883,8 +2883,8 @@
     <string name="save_poi_value_exceed_length">Acorte la longitud de la etiqueta «%s» a menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de «%s»</string>
     <string name="quick_action_day_night_mode">modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Sin empedrado ni adoquinado</string>
-    <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
+    <string name="routing_attr_avoid_sett_name">Sin empedrar</string>
+    <string name="routing_attr_avoid_sett_description">Evite los adoquines</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
@@ -3669,7 +3669,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
-    <string name="quick_action_remove_next_destination">Borrar el punto de destino más cercano</string>
+    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
@@ -3936,17 +3936,17 @@
     <string name="add_online_routing_engine">Añadir motor de navegación en línea</string>
     <string name="activity_type_winter_name">Invierno</string>
     <string name="activity_type_water_name">Agua</string>
-    <string name="activity_type_walking_name">Peatón</string>
+    <string name="activity_type_walking_name">A pie</string>
     <string name="activity_type_snowmobile_name">Motonieve</string>
     <string name="activity_type_running_name">Correr</string>
     <string name="activity_type_riding_name">Equitación</string>
     <string name="activity_type_racing_name">Carreras</string>
-    <string name="activity_type_offroad_name">Todo terreno</string>
+    <string name="activity_type_offroad_name">Todoterreno</string>
     <string name="activity_type_mountainbike_name">Bicicleta de montaña</string>
-    <string name="activity_type_motorbike_name">Motocicleta</string>
+    <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_hiking_name">Senderismo</string>
     <string name="activity_type_cycling_name">Bicicleta</string>
-    <string name="activity_type_car_name">Automóvil</string>
+    <string name="activity_type_car_name">Coche</string>
     <string name="shared_string_api_key">Clave de la API</string>
     <string name="uploaded_count">Se subieron %1$d de %2$d</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Límites de reservas naturales</string>
@@ -4340,7 +4340,7 @@
     <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
 \nComprueba la conexión a Internet.</string>
     <string name="provided_by">Provisto por %1$s</string>
-    <string name="shared_string_external">Externo</string>
+    <string name="shared_string_external">Exteriores</string>
     <string name="osmand_online_routing_promo">Usa plantillas predefinidas o añade navegadores en línea admitidos como OSRM, Graphhopper, openrouteservice o GPX.</string>
     <string name="shared_string_online">En línea</string>
     <string name="shared_string_offline">Desconectado</string>
@@ -4631,7 +4631,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Isolíneas de presión</string>
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
     <string name="rendering_attr_weatherTempContours_name">Isolíneas de temperatura</string>
-    <string name="map_widget_trip_recording_downhill">Descenso</string>
+    <string name="map_widget_trip_recording_downhill">Cuesta abajo</string>
     <string name="arrival_time_widget_desc">Hora de llegada al punto de destino.</string>
     <string name="bearing_desc">Muestra el rumbo absoluto o relativo a un objetivo en unidades angulares (180 grados, 360 grados o milirradianes).</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
@@ -4650,7 +4650,7 @@
     <string name="route_maneuvers">Maniobras de la ruta</string>
     <string name="explore_plans">Explorar planes</string>
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
-    <string name="map_widget_trip_recording_uphill">Ascenso</string>
+    <string name="map_widget_trip_recording_uphill">Cuesta arriba</string>
     <string name="coordinates_widget_secondary_desc">El formato de las coordenadas puede cambiarse en %1$s → %2$s → %3$s.</string>
     <string name="elevation_profile_widget_desc">Muestra el perfil de elevación y pendiente de la ruta actual.</string>
     <string name="mapillary_widget_desc">Proporciona un acceso rápido a la aplicación Mapillary para añadir imágenes a nivel de calle.</string>
@@ -4664,7 +4664,7 @@
     <string name="radius_rules_widget_desc">La herramienta «Regla radial» muestra círculos de distancia alrededor del punto marcado en el mapa.</string>
     <string name="current_time_widget_desc">Muestra la hora actual tomada del dispositivo.</string>
     <string name="battery_widget_desc">Muestra el nivel de batería del dispositivo.</string>
-    <string name="altitude_widget_desc">Muestra la altura sobre el nivel del mar en la ubicación actual.</string>
+    <string name="altitude_widget_desc">Muestra la altura sobre el nivel del mar de la geolocalización actual.</string>
     <string name="navigation_points_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o el tiempo restante, los próximos giros, el rumbo, el nombre de la calle actual o siguiente, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="route_maneuvers_desc">Se activan durante la navegación para mostrar información como la distancia, la hora de llegada o de salida, los próximos giros, el rumbo, el nombre de la calle actual, la información de los carriles, la velocidad máxima, las alertas de aproximación, los PDI y los puntos de referencia.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
@@ -4751,7 +4751,7 @@
     <string name="distance_to_destination_widget_desc">Muestra la distancia que queda hasta el último punto de destino.</string>
     <string name="next_turn_widget_desc">Muestra información sobre el próximo giro con una imagen de la maniobra y la distancia hasta ella.</string>
     <string name="download_complete">Descarga completa</string>
-    <string name="map_widget_camera_distance">Elevación de la cámara</string>
+    <string name="map_widget_camera_distance">Altura de la cámara</string>
     <string name="map_widget_zoom_level">Nivel del zoom</string>
     <string name="map_widget_target_distance">Distancia de la cámara al objetivo</string>
     <string name="import_as_one_track">Importar como una traza</string>
@@ -4768,7 +4768,7 @@
     <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="second_next_turn_widget_desc">Muestra la información sobre el segundo próximo giro, que se activa al aproximarse a este giro.</string>
-    <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
+    <string name="map_markers_desc">El widget muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar senderos de montaña IMBA</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
     <string name="routing_attr_motor_type_hybrid_name">Híbrido</string>
@@ -4846,7 +4846,7 @@
     <string name="shared_string_identifiers">Identificadores</string>
     <string name="map_center_widget">Coordenadas: centro del mapa</string>
     <string name="map_widget_altitude_desc">Muestran la altitud de la ubicación geográfica actual o la elevación del centro del mapa actual</string>
-    <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar en el centro del mapa actual.</string>
+    <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar del centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="purchases_feature_desc_external_sensors">Muestra y graba datos de sensores externos: la velocidad, potencia y cadencia de la bicicleta y el ritmo cardíaco.</string>
     <string name="external_sensors_support">Sensores externos admitidos</string>
@@ -5059,25 +5059,35 @@
     <string name="shared_string_inches">pulgadas</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
-    <string name="release_4_4">• Se ha mejorado el menú «Trazas» en «Configurar mapa»
+    <string name="release_4_4">• Menú \"Pistas\" mejorado en \"Configurar mapa\"
 \n
-\n• El menú contextual muestra ahora los nombres traducidos de los PDI.
+\n • El menú contextual ahora muestra nombres localizados para PDI
 \n
-\n• Se ha añadido la opción para compartir una ruta a través de un enlace
+\n • Opción agregada para compartir ruta por enlace
 \n
-\n• Se ha añadido la unidad de longitud «Millas náuticas/pies»
+\n • Se agregó la unidad de longitud \"Millas náuticas/pies\".
 \n
-\n• Se ha añadido un nuevo modo fijo en la «Orientación del mapa»
+\n • La orientación del mapa agregó un nuevo modo fijo
 \n
-\n• Se ha simplificado la pantalla de inicio
+\n • Pantalla de inicio simplificada
 \n
-\n• Se ha corregido la «Posición de ubicación» con modo de pantalla dividida en Android Auto
+\n • Posición de ubicación fija en modo de pantalla dividida en Android Auto
 \n
-\n• Se ha añadido el gráfico «Velocidad/pendiente» para el análisis de la traza
+\n • Se agregó el gráfico \"Velocidad/Pendiente\" para el análisis de pistas
 \n
-\n• Desde Android 13 se ha movido la elección de idioma de la aplicación a los ajustes del sistema
+\n • Android 13 movió la selección de idioma de la aplicación a la configuración del sistema
 \n
-\n• Se han corregido problemas de visualización con los lugares veganos
+\n • Problemas resueltos con la visualización de lugares veganos
+\n
+\n • Se agregó la posibilidad de descargar mosaicos en línea utilizados como mapas \"superpuestos\" o \"subyacentes\".
+\n
+\n • Soporte agregado de unidades imperiales para \"parámetros del vehículo\"
+\n
+\n • Nuevo perfil de ciclomotor
+\n
+\n • \"Mostrar posición\" agregó la nueva opción \"Automático\"
+\n
+\n • Gestos de mapa fijos para inclinación, zoom y rotación
 \n
 \n</string>
     <string name="delete_cloud_version">Borrar la versión en la nube</string>
@@ -5098,4 +5108,92 @@
     <string name="sort_date_descending">La fecha más antigua primero</string>
     <string name="selected_value">Valor elegido</string>
     <string name="app_mode_moped">Ciclomotor</string>
+    <string name="disable_vertex_hillshade_3d">Desactivar la sombra de los vértices en 3D</string>
+    <string name="enable_3d_maps">Activar los mapas en 3D</string>
+    <string name="test_heightmap">Mapa de altura de prueba</string>
+    <string name="generate_slope_from_3d_maps">Generación de mapas ráster de pendientes a partir de mapas 3D</string>
+    <string name="generate_hillshade_from_3d_maps">Generación de mapas ráster de colinas a partir de mapas 3D</string>
+    <string name="app_mode_climbing">Escalada</string>
+    <string name="clear_online_cache">Borrar la caché en línea</string>
+    <string name="offline_cache">Caché sin conexión</string>
+    <string name="shared_string_alt_name">Nombre alternativo</string>
+    <string name="token_is_not_valid">El código no es válido</string>
+    <string name="weather_forecast_is_outdated">Pronóstico desactualizado.</string>
+    <string name="shared_string_all_world">Todo el mundo</string>
+    <string name="weather_forecast">Previsión del tiempo</string>
+    <string name="offline_weather_forecast">Previsión meteorológica sin conexión</string>
+    <string name="offline_weather_forecast_desc">Puede descargar la previsión meteorológica para 7 días.</string>
+    <string name="clear_online_cache_description">Borrará la memoria caché de los mosaicos meteorológicos en línea.</string>
+    <string name="free_maps_updates">Actualizaciones gratuitas (de emergencia)</string>
+    <string name="metric_lbs">lbs.</string>
+    <string name="common_weight_limit_error">El valor mínimo es \"%1$s\" %2$s. Utilice el perfil \"%3$s\" si el peso del vehículo es inferior al valor mínimo.</string>
+    <string name="shared_string_pounds">libras</string>
+    <string name="rendering_value_defaultMedium_name">Por defecto (media)</string>
+    <string name="select_layer">Selecciona una capa</string>
+    <string name="speak_route_deviation">Anunciar un desvío de la ruta</string>
+    <string name="camera_app">Aplicación de cámara</string>
+    <string name="shutter_sound">Sonido del obturador</string>
+    <string name="proxy_port_max_warning">La altura máxima del puerto es de %1$s</string>
+    <string name="weather_download_error">No se pudieron descargar %1$s mosaicos.</string>
+    <string name="external_device_forget_sensor">Olvídate del sensor</string>
+    <string name="external_device_forget_sensor_description">El sensor será eliminado de la lista. Podrás volver a emparejar este sensor en cualquier momento.</string>
+    <string name="external_device_disconnected">Desconectado</string>
+    <string name="external_device_connected">Conectado</string>
+    <string name="external_device_characteristic_battery_level">Batería</string>
+    <string name="external_device_characteristic_gear_ratio">Reductores de velocidad</string>
+    <string name="external_device_characteristic_cadence">Ritmo</string>
+    <string name="external_device_characteristic_heart_rate">Ritmo cardiaco</string>
+    <string name="external_device_characteristic_systolic">Sístole</string>
+    <string name="external_device_characteristic_diastolic">Diastole</string>
+    <string name="external_device_characteristic_arterial_pressure">Presión arterial</string>
+    <string name="external_device_characteristic_cuff_pressure">Presión del brazalete</string>
+    <string name="external_device_characteristic_pulse_rate">Frecuencia cardíaca</string>
+    <string name="external_device_characteristic_stride_length">Longitud de los pasos</string>
+    <string name="external_device_characteristic_temperature">Temperatura</string>
+    <string name="external_device_details_information">Información</string>
+    <string name="external_device_details_received_data">Datos recibidos</string>
+    <string name="external_device_details_connection">Conexión</string>
+    <string name="external_device_details_battery">Batería</string>
+    <string name="bluetooth_connected">Conectado, %s</string>
+    <string name="external_device_ble">Bluetooth de baja energía</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Encontrado: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth no compatible</string>
+    <string name="ble_search_again">Buscar de nuevo</string>
+    <string name="ant_plus_nothing_found_text">No se puede encontrar ningún sensor</string>
+    <string name="ant_plus_nothing_found_description">Asegúrate:
+\n- El Bluetooth está encendido
+\n- El sensor está activado
+\n- Este dispositivo se encuentra cerca del sensor</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth está apagado</string>
+    <string name="ant_plus_bluetooth_off_description">Enciende los sensores de búsqueda y emparejamiento del Bluetooth.</string>
+    <string name="ant_plus_searching_text">Buscando los sensores</string>
+    <string name="ant_plus_searching_text_description">Por favor, mantén el dispositivo cerca del sensor. Debe activar el sensor para que OsmAnd pueda encontrarlo.</string>
+    <string name="ant_plus_help_title">No se que tipo de sensor tengo</string>
+    <string name="ant_plus_searching">Buscando</string>
+    <string name="ant_plus_pair_new_sensor">Emparejar un nuevo sensor</string>
+    <string name="ant_plus_open_settings">Abrir los ajustes</string>
+    <string name="ant_plus_pair_new_sensor_ble">Emparejar un sensor Bluetooth LE</string>
+    <string name="learn_more_about_sensors_link">Obtén más información sobre los sensores.</string>
+    <string name="external_device_low_battery">Batería baja</string>
+    <string name="external_device_characteristic_distance">Distancia</string>
+    <string name="external_device_details_total_distance">Distancia total</string>
+    <string name="external_device_menu_forget">Olvidar</string>
+    <string name="external_device_characteristic_speed">Velocidad</string>
+    <string name="external_device_characteristic_total_distance">Distancia total</string>
+    <string name="external_device_details_speed">Velocidad</string>
+    <string name="external_device_details_distance">Distancia</string>
+    <string name="external_device_details_connect">Conectar</string>
+    <string name="external_device_details_pair">Emparejar</string>
+    <string name="external_device_details_disconnect">Desconectar</string>
+    <string name="bluetooth_disconnected">Desconectado, %s</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Emparejar un sensor ANT+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Puedes emparejar sensores Bluetooth LE y ANT+ con OsmAnd.</string>
+    <string name="is_imported">%1$s ha sido importado.</string>
+    <string name="file_already_exists_description">\"%1$s\". Ya existe un fichero con ese nombre. Reemplazar sobrescribirá todos los cambios realizados con la versión actual.</string>
+    <string name="file_already_exists">El archivo ya existe</string>
+    <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"\?</string>
+    <string name="no_search_results">No hay resultados</string>
+    <string name="search_track_by_name">Buscar las pista por nombre</string>
+    <string name="number_of_tracks">%1$s pistas</string>
 </resources>

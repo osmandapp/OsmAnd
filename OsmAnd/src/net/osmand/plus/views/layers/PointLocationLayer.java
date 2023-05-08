@@ -12,7 +12,6 @@ import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
@@ -65,7 +64,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	protected static final int RADIUS = 7;
 
 	private Paint headingPaint;
-	private Paint bitmapPaint;
 	private Paint area;
 	private Paint aroundArea;
 
@@ -115,7 +113,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 		private SWIGTYPE_p_void onSurfaceHeadingIconKey;
 
 		public static CoreMapMarker createAndAddToCollection(@NonNull Context ctx, @NonNull MapMarkersCollection markersCollection,
-		                                                     int id, int baseOrder, @NonNull Drawable icon, @DrawableRes int headingIconId,
+		                                                     int id, int baseOrder, @NonNull LayerDrawable icon, @DrawableRes int headingIconId,
 		                                                     float scale, @ColorInt int profileColor, boolean withHeading) {
 			CoreMapMarker marker = new CoreMapMarker();
 			MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
@@ -127,7 +125,15 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 			myLocMarkerBuilder.setIsHidden(true);
 
-			Bitmap markerBitmap = AndroidUtils.createScaledBitmap(icon, scale);
+			int width = (int)(icon.getIntrinsicWidth() * scale);
+			int height = (int)(icon.getIntrinsicHeight() * scale);
+			int locationX = width / 2;
+			int locationY = height / 2;
+
+			Bitmap markerBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+			Canvas canvas = new Canvas(markerBitmap);
+			AndroidUtils.drawScaledLayerDrawable(canvas, icon, locationX, locationY, scale);
+
 			if (markerBitmap != null) {
 				marker.onSurfaceIconKey = SwigUtilities.getOnSurfaceIconKey(1);
 				myLocMarkerBuilder.addOnMapSurfaceIcon(marker.onSurfaceIconKey,
@@ -164,7 +170,6 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 
 	private void initLegacyRenderer() {
 		headingPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
-		bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		area = new Paint();
 		aroundArea = new Paint();
 		aroundArea.setStyle(Style.STROKE);
@@ -240,7 +245,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 	}
 
 	@Nullable
-	private CoreMapMarker recreateMarker(Drawable icon, int id, @ColorInt int profileColor, boolean withHeading) {
+	private CoreMapMarker recreateMarker(LayerDrawable icon, int id, @ColorInt int profileColor, boolean withHeading) {
 		if (view == null || icon == null) {
 			return null;
 		}
@@ -476,28 +481,13 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			Float bearing = getBearingToShow(lastKnownLocation);
 			if (bearing != null) {
 				canvas.rotate(bearing - 90, locationX, locationY);
-				drawIcon(canvas, navigationIcon, locationX, locationY);
+				AndroidUtils.drawScaledLayerDrawable(canvas, navigationIcon, locationX, locationY, textScale);
 			} else {
-				drawIcon(canvas, locationIcon, locationX, locationY);
+				AndroidUtils.drawScaledLayerDrawable(canvas, locationIcon, locationX, locationY, textScale);
 			}
 		}
 	}
 
-	private void drawIcon(@NonNull Canvas canvas, @NonNull Drawable icon, int locationX, int locationY) {
-		int width = (int) (icon.getIntrinsicWidth() * textScale);
-		int height = (int) (icon.getIntrinsicHeight() * textScale);
-		width += width % 2 == 1 ? 1 : 0;
-		height += height % 2 == 1 ? 1 : 0;
-		if (textScale == 1) {
-			icon.setBounds(locationX - width / 2, locationY - height / 2,
-					locationX + width / 2, locationY + height / 2);
-			icon.draw(canvas);
-		} else {
-			icon.setBounds(0, 0, width, height);
-			Bitmap bitmap = AndroidUtils.createScaledBitmap(icon, width, height);
-			canvas.drawBitmap(bitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
-		}
-	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {

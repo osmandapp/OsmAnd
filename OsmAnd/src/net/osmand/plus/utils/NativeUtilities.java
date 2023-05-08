@@ -14,9 +14,14 @@ import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.TileId;
+import net.osmand.core.jni.TileIdList;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.util.MapUtils;
+
+import java.util.List;
 
 public class NativeUtilities {
 
@@ -83,6 +88,30 @@ public class NativeUtilities {
 			return point31;
 		}
 		return null;
+	}
+
+	@Nullable
+	public static PointI get31FromElevatedPixel(@NonNull MapRendererView mapRenderer, int x, int y) {
+		PointI point31 = new PointI();
+		mapRenderer.getLocationFromElevatedPoint(new PointI(x, y), point31);
+		return point31;
+	}
+
+	@Nullable
+	public static PointI get31FromElevatedPixel(@NonNull MapRendererView mapRenderer, float x, float y) {
+		return get31FromElevatedPixel(mapRenderer, (int) x, (int) y);
+	}
+
+	@Nullable
+	public static LatLon getLatLonFromElevatedPixel(@NonNull MapRendererView mapRenderer, int x, int y) {
+		PointI point31 = get31FromElevatedPixel(mapRenderer, x, y);
+		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
+	}
+
+	@Nullable
+	public static LatLon getLatLonFromElevatedPixel(@NonNull MapRendererView mapRenderer, float x, float y) {
+		PointI point31 = get31FromElevatedPixel(mapRenderer, x, y);
+		return new LatLon(MapUtils.get31LatitudeY(point31.getY()), MapUtils.get31LongitudeX(point31.getX()));
 	}
 
 	@Nullable
@@ -217,5 +246,14 @@ public class NativeUtilities {
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);
 		return new PointI(x31, y31);
+	}
+
+	public static TileIdList convertToQListTileIds(@NonNull List<Long> tileIds) {
+		TileIdList qTileIds = new TileIdList();
+		for (Long tileId : tileIds) {
+			qTileIds.add(TileId.fromXY(OfflineForecastHelper.getTileX(tileId),
+					OfflineForecastHelper.getTileY(tileId)));
+		}
+		return qTileIds;
 	}
 }

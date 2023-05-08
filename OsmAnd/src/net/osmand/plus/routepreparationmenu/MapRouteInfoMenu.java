@@ -40,8 +40,6 @@ import androidx.transition.Transition;
 import androidx.transition.TransitionListenerAdapter;
 import androidx.transition.TransitionManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -52,6 +50,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.SpecialPointType;
 import net.osmand.data.ValueHolder;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -63,7 +63,7 @@ import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -72,8 +72,8 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.myplaces.FavoritesListener;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
@@ -108,14 +108,15 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.TransportRoutingHelper;
-import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
-import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
+import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -128,7 +129,6 @@ import net.osmand.plus.widgets.TextViewExProgress;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.TransportRouteResult;
-import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -136,7 +136,6 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -480,20 +479,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationFinished() {
-		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		OsmandApplication app = getApp();
-		if (app != null && fragmentRef != null && fragment.isVisible()) {
+		if (app != null) {
 			RouteCalculationResult route = app.getRoutingHelper().getRoute();
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
-			if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
-				openMenuAfterCalculation(fragment, app);
-			}
-			if (setRouteCalculationInProgress(routeCalculating)) {
-				fragment.updateInfo();
-				if (!routeCalculationInProgress) {
-					fragment.hideRouteCalculationProgressBar();
+
+			WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+			MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+
+			boolean calculationStatusChanged = setRouteCalculationInProgress(routeCalculating);
+			if (fragmentRef != null && fragment.isVisible()) {
+				if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
 					openMenuAfterCalculation(fragment, app);
+				}
+				if (calculationStatusChanged) {
+					fragment.updateInfo();
+					if (!routeCalculationInProgress) {
+						fragment.hideRouteCalculationProgressBar();
+						openMenuAfterCalculation(fragment, app);
+					}
 				}
 			}
 		}
@@ -768,18 +772,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// History card
 				if (historyEnabled) {
-					try {
-						SearchResultCollection res = app.getSearchUICore().getCore().shallowSearch(SearchHistoryAPI.class, "", null, false, false);
-						if (res != null) {
-							List<SearchResult> results = res.getCurrentSearchResults();
-							if (results.size() > 0) {
-								HistoryCard historyCard = new HistoryCard(mapActivity, results);
-								historyCard.setListener(this);
-								menuCards.add(historyCard);
-							}
-						}
-					} catch (IOException e) {
-						LOG.error(e);
+					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
+					List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, false);
+					if (!Algorithms.isEmpty(results)) {
+						HistoryCard historyCard = new HistoryCard(mapActivity, results);
+						historyCard.setListener(this);
+						menuCards.add(historyCard);
 					}
 				}
 			}
@@ -1986,11 +1984,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupButtonIcon(ImageView imageView, @DrawableRes int iconId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			UiUtilities uiUtilities = mapActivity.getMyApplication().getUIUtilities();
-
-			Drawable normal = uiUtilities.getIcon(iconId, nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
+			Drawable normal = UiUtilities.createTintedDrawable(mapActivity, iconId, nightMode
+					? ContextCompat.getColor(mapActivity, R.color.route_info_control_icon_color_dark)
+					: ContextCompat.getColor(mapActivity, R.color.route_info_control_icon_color_light));
 			if (Build.VERSION.SDK_INT >= 21) {
-				Drawable active = uiUtilities.getIcon(iconId, ColorUtilities.getActiveColorId(nightMode));
+				Drawable active = UiUtilities.createTintedDrawable(mapActivity, iconId, ColorUtilities.getActiveColor(mapActivity, nightMode));
 				normal = AndroidUtils.createPressedStateListDrawable(normal, active);
 			}
 			imageView.setImageDrawable(normal);
@@ -2140,6 +2138,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		}
 		return false;
+	}
+
+	public static boolean isRelatedFragmentVisible(@Nullable OsmandMapTileView mapView) {
+		if (MapRouteInfoMenu.chooseRoutesVisible
+				|| MapRouteInfoMenu.waypointsVisible
+				|| MapRouteInfoMenu.followTrackVisible) {
+			return true;
+		}
+		MapActivity activity = mapView != null ? mapView.getMapActivity() : null;
+		MapRouteInfoMenu menu = activity != null ? activity.getMapRouteInfoMenu() : null;
+		return menu != null && menu.isVisible();
 	}
 
 	@Nullable

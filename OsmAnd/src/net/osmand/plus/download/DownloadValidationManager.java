@@ -21,7 +21,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 
-import java.io.File;
 import java.text.MessageFormat;
 
 public class DownloadValidationManager {
@@ -45,7 +44,7 @@ public class DownloadValidationManager {
 		long szMaxTempLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
-			long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+			long szExistingLong = es.getExistingFileSize(app);
 			long change = es.contentSize - szExistingLong;
 			szChangeLong += change;
 			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
@@ -53,7 +52,7 @@ public class DownloadValidationManager {
 		}
 		for (IndexItem es : items) {
 			if (es != null) {
-				long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+				long szExistingLong = es.getExistingFileSize(app);
 				long change = es.contentSize - szExistingLong;
 				szChangeLong += change;
 				if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
@@ -77,25 +76,8 @@ public class DownloadValidationManager {
 		return true;
 	}
 
-	private long getExistingFileSize(@Nullable File file) {
-		if (file != null) {
-			if (file.canRead()) {
-				return file.length();
-			}
-		}
-		return 0;
-	}
-
-	public void startDownload(@NonNull FragmentActivity context, IndexItem... items) {
-		boolean allTts = true;
-		for (IndexItem index : items) {
-			if (!DownloadActivityType.isVoiceTTS(index)) {
-				allTts = false;
-				break;
-			}
-		}
-
-		if (allTts) {
+	public void startDownload(@NonNull FragmentActivity context, @NonNull IndexItem... items) {
+		if (isAllAssets(items)) {
 			copyVoiceAssetsWithoutInternet(context, items);
 		} else {
 			downloadFilesWithAllChecks(context, items);
@@ -106,6 +88,15 @@ public class DownloadValidationManager {
 		if (downloadFilesCheck_1_FreeVersion(activity)) {
 			downloadFilesCheck_3_ValidateSpace(activity, items);
 		}
+	}
+
+	private boolean isAllAssets(@NonNull IndexItem... items) {
+		for (IndexItem index : items) {
+			if (!DownloadActivityType.isVoiceTTS(index)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, IndexItem... items) {
@@ -152,14 +143,14 @@ public class DownloadValidationManager {
 		long szMaxTempLong = 0;
 		int i = 0;
 		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
-			long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+			long szExistingLong = es.getExistingFileSize(app);
 			long change = es.contentSize - szExistingLong;
 			szChangeLong += change;
 			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
 			i++;
 		}
 		for (IndexItem es : items) {
-			long szExistingLong = getExistingFileSize(es.getTargetFile(app));
+			long szExistingLong = es.getExistingFileSize(app);
 			long change = es.contentSize - szExistingLong;
 			szChangeLong += change;
 			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;

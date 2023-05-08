@@ -49,7 +49,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		}
 
 		@Override
-		public void onGpxDataItemReady(GpxDataItem item) {
+		public void onGpxDataItemReady(@NonNull GpxDataItem item) {
 			populateList(item);
 			if (dbHelper.isRead()) {
 				onListPopulated();

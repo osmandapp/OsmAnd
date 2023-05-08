@@ -22,13 +22,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.Location;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -56,8 +55,6 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-
 	private TrackItem trackItem;
 	private final List<WptPt> points = new ArrayList<>();
 	private final Set<WptPt> selectedPoints = new HashSet<>();
@@ -77,7 +74,6 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = getMyApplication();
 		nightMode = isNightMode(true);
 	}
 
@@ -321,8 +317,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && !locationUpdateStarted) {
+		if (!locationUpdateStarted) {
 			locationUpdateStarted = true;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
 			locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
@@ -333,8 +328,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && locationUpdateStarted) {
+		if (locationUpdateStarted) {
 			locationUpdateStarted = false;
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
 			locationProvider.removeLocationListener(this);
