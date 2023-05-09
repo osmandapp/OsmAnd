@@ -75,6 +75,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
+	public static final String OPEN_TRACKS_TAB = "open_tracks_tab";
+
 	private ImportHelper importHelper;
 	private SelectedTracksHelper selectedTracksHelper;
 	private TrackFolderLoaderTask asyncLoader;
@@ -87,6 +89,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private View applyButton;
 	private View selectionButton;
 
+	@Nullable
+	private String preselectedTabName;
 	private int tabSize;
 
 	@NonNull
@@ -120,6 +124,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		Dialog dialog = new Dialog(activity, themeId) {
 			@Override
 			public void onBackPressed() {
+				if (preselectedTabName != null && activity instanceof MapActivity) {
+					((MapActivity) activity).launchPrevActivityIntent();
+				}
 				dismiss();
 			}
 		};
@@ -343,6 +350,11 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		updateTrackTabs();
 		updateTabsContent();
 		updateButtonsState();
+
+		if (!Algorithms.isEmpty(preselectedTabName)) {
+			setSelectedTab(preselectedTabName);
+			preselectedTabName = "";
+		}
 	}
 
 	private void updateTrackTabs() {
@@ -593,8 +605,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
+		showInstance(manager, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable String preselectedTabName) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksFragment fragment = new TracksFragment();
+			fragment.preselectedTabName = preselectedTabName;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}

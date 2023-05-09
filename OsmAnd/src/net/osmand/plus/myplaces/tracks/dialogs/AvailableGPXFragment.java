@@ -384,41 +384,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		SearchView searchView = new SearchView(getActivity());
-		updateSearchView(searchView);
-		mi.setActionView(searchView);
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				allGpxAdapter.getFilter().filter(query);
-				return true;
-			}
-
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				allGpxAdapter.getFilter().filter(newText);
-				return true;
-			}
-		});
-		mi.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
-				return true;
-			}
-
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				// Needed to hide intermediate progress bar after closing action mode
-				new Handler().postDelayed(() -> hideProgressBar(), 100);
-				return true;
-			}
-		});
 
 		inflater.inflate(R.menu.track_sort_menu_item, menu);
-		mi = menu.findItem(R.id.action_sort);
+		MenuItem mi = menu.findItem(R.id.action_sort);
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 		mi.setIcon(getIcon(settings.TRACKS_SORT_BY_MODE.get().getIconId(), iconColorId));
@@ -468,7 +436,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener));
-		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
+//		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
@@ -486,33 +454,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
 			}
-		}
-	}
-
-	private void updateSearchView(@NonNull SearchView searchView) {
-		//do not ever do like this
-		if (!app.getSettings().isLightContent()) {
-			return;
-		}
-		try {
-			ImageView cancelIcon = searchView.findViewById(R.id.search_close_btn);
-			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
-			//styling search hint icon and text
-			SearchView.SearchAutoComplete searchEdit = searchView.findViewById(R.id.search_src_text);
-			searchEdit.setTextColor(app.getColor(R.color.color_white));
-			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
-			float rawTextSize = searchEdit.getTextSize();
-			int textSize = (int) (rawTextSize * 1.25);
-
-			//setting icon as spannable
-			Drawable searchIcon = AppCompatResources.getDrawable(app, R.drawable.ic_action_search_dark);
-			if (searchIcon != null) {
-				searchIcon.setBounds(0, 0, textSize, textSize);
-				stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				searchEdit.setHint(stopHint);
-			}
-		} catch (Exception e) {
-			// ignore
 		}
 	}
 
@@ -911,12 +852,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
+	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter {
 
 		private final Map<String, List<GPXInfo>> data = new LinkedHashMap<>();
 		private final List<String> category = new ArrayList<>();
 		private final List<GPXInfo> selected = new ArrayList<>();
-		private SearchFilter filter;
 
 		private final GpxDataItemCallback updateGpxCallback = new GpxDataItemCallback() {
 
@@ -1193,14 +1133,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			return true;
 		}
 
-		@Override
-		public Filter getFilter() {
-			if (filter == null) {
-				filter = new SearchFilter();
-			}
-			return filter;
-		}
-
 		public void delete(GPXInfo g) {
 			int found = -1;
 			// search from end
@@ -1215,60 +1147,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				data.get(category.get(found)).remove(g);
 				selected.remove(g);
 			}
-		}
-	}
-
-	private class SearchFilter extends Filter {
-
-		@Override
-		protected FilterResults performFiltering(CharSequence constraint) {
-			FilterResults results = new FilterResults();
-			List<GPXInfo> raw = asyncLoader.getGpxInfos();
-			if (constraint == null || constraint.length() == 0 || raw == null) {
-				results.values = raw;
-				results.count = 1;
-			} else {
-				String namePart = constraint.toString();
-				NameStringMatcher matcher = new NameStringMatcher(namePart.trim(), StringMatcherMode.CHECK_CONTAINS);
-				List<GPXInfo> res = new ArrayList<>();
-				for (GPXInfo gpxInfo : raw) {
-					if (matcher.matches(gpxInfo.getName())) {
-						res.add(gpxInfo);
-					}
-				}
-				results.values = res;
-				results.count = res.size();
-			}
-			return results;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results) {
-			if (results.values != null) {
-				synchronized (allGpxAdapter) {
-					allGpxAdapter.clear();
-					for (GPXInfo i : ((List<GPXInfo>) results.values)) {
-						allGpxAdapter.addLocalIndexInfo(i);
-					}
-					// disable sort
-					// allGpxAdapter.sort();
-					allGpxAdapter.refreshSelected();
-				}
-				allGpxAdapter.notifyDataSetChanged();
-				if (constraint != null && constraint.length() > 3) {
-					collapseTrees(10);
-				}
-			}
-		}
-
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (asyncLoader != null) {
-			asyncLoader.cancel(true);
 		}
 	}
 

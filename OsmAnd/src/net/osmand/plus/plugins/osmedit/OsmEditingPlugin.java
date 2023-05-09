@@ -39,6 +39,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.configmap.ConfigureMapMenu;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -47,9 +48,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
@@ -80,6 +80,8 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuItem.Builder;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -481,26 +483,23 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter adapter) {
-		if (fragment instanceof AvailableGPXFragment) {
-			AvailableGPXFragment gpxFragment = ((AvailableGPXFragment) fragment);
-			adapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
-					.setColor(app, R.color.color_white)
-					.setListener((uiAdapter, view, item, isChecked) -> {
-						gpxFragment.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
-								R.drawable.ic_action_upload_to_openstreetmap, items -> {
-									int size = items.size();
-									File[] files = new File[size];
-									for (int i = 0; i < size; i++) {
-										files[i] = items.get(i).getFile();
-									}
-									sendGPXFiles(activity, gpxFragment, files);
-								}
-						);
-						return true;
-					}));
+	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, List<PopUpMenuItem> items) {
+		if (fragment instanceof TracksSelectionFragment) {
+			TracksSelectionFragment selectionFragment = (TracksSelectionFragment) fragment;
+			items.add(new Builder(app)
+					.setTitleId(R.string.upload_to_openstreetmap)
+					.setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_upload_to_openstreetmap))
+					.setOnClickListener(v -> {
+						List<TrackItem> trackItems = selectionFragment.getSelectedTrackItems();
+						File[] files = new File[trackItems.size()];
+						for (int i = 0; i < trackItems.size(); i++) {
+							TrackItem item = trackItems.get(i);
+							files[i] = item.getFile();
+						}
+						sendGPXFiles(activity, fragment, files);
+					})
+					.create()
+			);
 		}
 	}
 

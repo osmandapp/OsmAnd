@@ -56,6 +56,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -638,9 +639,9 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, List<PopUpMenuItem> items) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.optionsMenuFragment(activity, fragment, optionsMenuAdapter);
+			plugin.optionsMenuFragment(activity, fragment, items);
 		}
 	}
 

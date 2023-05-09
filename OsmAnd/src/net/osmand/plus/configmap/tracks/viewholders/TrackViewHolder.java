@@ -65,6 +65,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private final TextView description;
 	private final ImageView imageView;
 	private final CompoundButton checkbox;
+	private final View menuButton;
 	private final View divider;
 	private final ImageView directionIcon;
 
@@ -82,6 +83,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		description = itemView.findViewById(R.id.description);
 		directionIcon = itemView.findViewById(R.id.direction_icon);
 		checkbox = itemView.findViewById(R.id.checkbox);
+		menuButton = itemView.findViewById(R.id.menu_button);
 		imageView = itemView.findViewById(R.id.track_icon);
 		divider = itemView.findViewById(R.id.divider);
 	}
@@ -94,10 +96,16 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		checkbox.setChecked(selected);
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), selectionMode);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
 
 		itemView.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.onTrackItemsSelected(Collections.singleton(trackItem), !selected);
+			}
+		});
+		menuButton.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.onTrackItemOptionsSelected(v, trackItem);
 			}
 		});
 		itemView.setOnLongClickListener(view -> {
@@ -315,6 +323,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		default void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+
+		}
+
+		default void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 
 		}
 	}

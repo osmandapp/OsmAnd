@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_string_visible_on_map">Visible on map</string>
+    <string name="shared_string_remove_folder">Remove folder</string>
+    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="rendering_attr_lightDetail_name">Light detail</string>
     <string name="rendering_attr_lightDetail_description">Default: seamark name (light character.group.period), select additional information on sectors 1 to 3 or sector 1,2,3,4,5 light character</string>
     <string name="rendering_value_sectors_name">Sectors</string>
