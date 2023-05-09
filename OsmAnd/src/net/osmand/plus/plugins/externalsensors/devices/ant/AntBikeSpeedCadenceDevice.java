@@ -70,10 +70,11 @@ public class AntBikeSpeedCadenceDevice extends AntAbstractDevice<AntPlusBikeCade
 	}
 
 	@Override
-	public void disconnect() {
-		super.disconnect();
+	public boolean disconnect() {
+		boolean res = super.disconnect();
 		if (spdDistDevice != null) {
-			spdDistDevice.disconnect();
+			res |= spdDistDevice.disconnect();
 		}
+		return res;
 	}
 }
