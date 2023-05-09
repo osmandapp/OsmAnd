@@ -2939,7 +2939,7 @@
 \n</string-->
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام أوسماند لايف.</string>
     <string name="use_osm_live_public_transport">أوسماند لايف وسائل النقل العام</string>
-    <string name="routing_attr_avoid_sett_name">بدون ضبط</string>
+    <string name="routing_attr_avoid_sett_name">عدم تجنب الحصى والطرق المرصوفة</string>
     <string name="routing_attr_avoid_sett_description">تجنب الطرق المرصوفة</string>
     <string name="routing_attr_avoid_train_name">بدون قطارات</string>
     <string name="routing_attr_avoid_train_description">تجنب القطارات</string>

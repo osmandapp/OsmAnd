@@ -3194,7 +3194,7 @@
     <string name="lang_th">Thai</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Jangan pergi offpiste</string>
     <string name="plugin_wikipedia_description">Dapatkan info tentang tempat menarik dari Wikipedia, panduan saku offline yang menampilkan artikel tentang tempat dan tujuan.</string>
-    <string name="quick_action_remove_next_destination">Hapus titik tujuan terdekat</string>
+    <string name="quick_action_remove_next_destination">Hapus titik tujuan berikutnya</string>
     <string name="speed_cameras_removed_descr">Perangkat ini tidak memiliki kamera kecepatan.</string>
     <string name="nm">nmi</string>
     <string name="lang_is">Islandia</string>
@@ -4473,8 +4473,8 @@
     <string name="rotate_map_manual_opt">Fiks (diputar secara manual)</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
-    <string name="routing_attr_avoid_sett_description">Menghindari batu bulat dan sett</string>
-    <string name="routing_attr_avoid_sett_name">Tidak ada batu bulat atau sett</string>
+    <string name="routing_attr_avoid_sett_description">Menghindari sett</string>
+    <string name="routing_attr_avoid_sett_name">Tidak ada sett</string>
     <string name="map_widget_target_distance_desc">Menampilkan jarak antara kamera dan lokasi sasaran.</string>
     <string name="map_widget_zoom_level_desc">Menampilkan tingkat perbesaran peta saat ini.</string>
     <string name="bg_service_screen_lock_toast">Layar terkunci</string>
@@ -5195,4 +5195,7 @@
 \n– Sensor diaktifkan
 \n– Perangkat ini di dekat sensor</string>
     <string name="ant_plus_bluetooth_off">Bluetooth dinonaktifkan</string>
+    <string name="search_track_by_name">Cari trek berdasarkan nama</string>
+    <string name="no_search_results">Tidak ada hasil</string>
+    <string name="number_of_tracks">%1$s trek</string>
 </resources>

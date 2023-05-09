@@ -2894,8 +2894,8 @@
     <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
     <string name="save_poi_value_exceed_length_title">Länge des Wertes „%s“</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
-    <string name="routing_attr_avoid_sett_name">Kein Kopfsteinpflaster oder Pflastersteine</string>
-    <string name="routing_attr_avoid_sett_description">Vermeidet Kopfsteinpflaster und Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_name">Keine Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_description">Vermeidet Pflastersteine</string>
     <string name="shared_string_degrees">Grad</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
