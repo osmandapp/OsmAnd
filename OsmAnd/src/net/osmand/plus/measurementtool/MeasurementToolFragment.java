@@ -294,7 +294,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				quit(true);
 			}
 		};
-		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 	}
 
 	@Nullable
@@ -537,7 +536,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				}
 			}
 		});
-		updateToolbar();
 
 		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
@@ -767,12 +765,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mapDisplayPositionManager.registerProvider(this);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapActivity.getMapLayers().hasMapActivity()) {
+			mapActivity.getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
 			onBackPressedCallback.setEnabled(true);
 			detailsMenu.setMapActivity(mapActivity);
 			mapActivity.getMapLayers().getMapControlsLayer().addThemeInfoProviderTag(TAG);
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
 			updateMapDisplayPosition();
 			addInitialPoint();
+			updateToolbar();
 		}
 	}
 
