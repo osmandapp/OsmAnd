@@ -23,7 +23,7 @@ public class NavigationHistorySettingsItem extends HistorySettingsItem {
 		super(app, items);
 	}
 
-	public NavigationHistorySettingsItem(@NonNull OsmandApplication app, @Nullable HistorySettingsItem baseItem, @NonNull List<SearchHistoryHelper.HistoryEntry> items) {
+	public NavigationHistorySettingsItem(@NonNull OsmandApplication app, @Nullable NavigationHistorySettingsItem baseItem, @NonNull List<SearchHistoryHelper.HistoryEntry> items) {
 		super(app, baseItem, items);
 	}
 
@@ -34,7 +34,6 @@ public class NavigationHistorySettingsItem extends HistorySettingsItem {
 	@NonNull
 	@Override
 	protected List<SearchHistoryHelper.HistoryEntry> getHistoryEntries() {
-		searchHistoryHelper = SearchHistoryHelper.getInstance(app);
 		return searchHistoryHelper.getHistoryEntries(HistorySource.NAVIGATION, false);
 	}
 

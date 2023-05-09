@@ -31,7 +31,7 @@ public class SearchHistorySettingsItem extends HistorySettingsItem {
 		super(app, items);
 	}
 
-	public SearchHistorySettingsItem(@NonNull OsmandApplication app, @Nullable HistorySettingsItem baseItem, @NonNull List<HistoryEntry> items) {
+	public SearchHistorySettingsItem(@NonNull OsmandApplication app, @Nullable SearchHistorySettingsItem baseItem, @NonNull List<HistoryEntry> items) {
 		super(app, baseItem, items);
 	}
 
@@ -42,7 +42,6 @@ public class SearchHistorySettingsItem extends HistorySettingsItem {
 	@NonNull
 	@Override
 	protected List<HistoryEntry> getHistoryEntries() {
-		searchHistoryHelper = SearchHistoryHelper.getInstance(app);
 		return searchHistoryHelper.getHistoryEntries(HistorySource.SEARCH, false);
 	}
 
