@@ -3656,7 +3656,7 @@
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="lenght_limit_description">Podaj długość pojazdu, niektóre ograniczenia tras mogą być stosowane dla długich pojazdów.</string>
     <string name="speed_cameras_removed_descr">To urządzenie nie ma fotoradarów.</string>
-    <string name="quick_action_remove_next_destination">Usuń najbliższy punkt docelowy</string>
+    <string name="quick_action_remove_next_destination">Usuń następny punkt docelowy</string>
     <string name="use_volume_buttons_as_zoom_descr">Steruj poziomem powiększenia mapy za pomocą przycisków głośności na urządzeniu.</string>
     <string name="please_provide_point_name_error">Podaj nazwę punktu</string>
     <string name="quick_action_remove_next_destination_descr">Usuwa następny cel na trasie. Jeśli jest to miejsce docelowe, nawigacja zostanie zatrzymana.</string>
@@ -5187,4 +5187,18 @@
     <string name="ant_plus_bluetooth_off_description">Włącz znajdowanie Bluetooth i sparuj czujniki.</string>
     <string name="ant_plus_searching_text">Wyszukiwanie czujników</string>
     <string name="ant_plus_help_title">Nie wiem jaki mam typ czujnika</string>
+    <string name="device_disconnected">%1$s rozłączony</string>
+    <string name="device_connected">%1$s podłączony</string>
+    <string name="running_scds_device_name">Urządzenie uruchomione</string>
+    <string name="search_track_by_name">Wyszukaj ścieżkę według nazwy</string>
+    <string name="shared_string_hand">Ręka</string>
+    <string name="shared_string_wrist">Nadgarstek</string>
+    <string name="number_of_tracks">%1$s ścieżki</string>
+    <string name="shared_string_ear_lobe">Małżowina</string>
+    <string name="shared_string_foot">Stopa</string>
+    <string name="bicycle_scd_device_name">Urządzenie rowerowe</string>
+    <string name="external_device_blood_pressure">Ciśnienie krwi</string>
+    <string name="shared_string_chest">Klatka piersiowa</string>
+    <string name="shared_string_finger">Palec</string>
+    <string name="no_search_results">Brak wyników</string>
 </resources>
