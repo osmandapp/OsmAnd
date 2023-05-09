@@ -2,6 +2,7 @@ package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.syncGpx;
 
 import android.os.AsyncTask;
 
@@ -16,6 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -70,7 +73,8 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		if (destinationDir.exists() && destinationDir.isDirectory() && destinationDir.canWrite()) {
 			WptPt pt = gpxFile.findPointToShow();
 			File toWrite = getFileToSave(fileName, destinationDir, pt);
-			boolean destinationExists = toWrite.exists();
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			SelectedGpxFile selected = helper.getSelectedFileByPath(toWrite.getAbsolutePath());
 			Exception exception = GPXUtilities.writeGpxFile(toWrite, gpxFile);
 
 			if (listener != null) {
@@ -78,16 +82,16 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			}
 			if (exception == null) {
 				gpxFile.path = toWrite.getAbsolutePath();
-				File file = new File(gpxFile.path);
-				if (destinationExists) {
-					GpxDataItem item = app.getGpxDbHelper().getItem(file);
-					if (item != null) {
-						app.getGpxDbHelper().clearAnalysis(item);
+				File resultFile = new File(gpxFile.path);
+				if (overwrite) {
+					app.getGpxDbHelper().remove(toWrite);
+					if (selected != null) {
+						selected.setGpxFile(gpxFile, app);
+						syncGpx(app, gpxFile);
 					}
-				} else {
-					GpxDataItem item = new GpxDataItem(file, gpxFile);
-					app.getGpxDbHelper().add(item);
 				}
+				GpxDataItem item = new GpxDataItem(resultFile, gpxFile);
+				app.getGpxDbHelper().add(item);
 
 				warning = null;
 			} else {
@@ -123,7 +127,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 	}
 
 	@Override
-	protected void onPostExecute(@Nullable String warning) {
+	protected void onPostExecute(String warning) {
 		if (listener != null) {
 			List<String> warnings = Algorithms.isEmpty(warning)
 					? Collections.emptyList()
