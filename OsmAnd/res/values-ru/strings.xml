@@ -5185,4 +5185,6 @@
     <string name="external_device_disconnected">Отключён</string>
     <string name="external_device_connected">Подключён</string>
     <string name="external_device_forget_sensor">Забыть датчик</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_foot">Нога</string>
 </resources>
