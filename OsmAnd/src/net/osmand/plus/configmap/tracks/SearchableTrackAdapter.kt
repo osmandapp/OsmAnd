@@ -29,12 +29,14 @@ class SearchableTrackAdapter(
     private var sortMode: TracksSortMode
     private var app: OsmandApplication
     private var sortTracksListener: SortTracksListener
+    private var filteredTrackItems = ArrayList<TrackItem>()
 
     init {
         this.app = app
         this.sortTracksListener = sortTracksListener
         sortMode = trackTab.sortMode
         updateAllItems()
+        getFilteredItems()
     }
 
     private fun updateAllItems() {
@@ -74,6 +76,7 @@ class SearchableTrackAdapter(
 
     private fun getFilteredItems(): MutableList<Any> {
         val filteredItems: MutableList<Any> = ArrayList()
+        filteredTrackItems.clear()
         var hasTrackItems = false
         var hasFoundTrackItems = false
         var collator: CollatorStringMatcher? = null
@@ -88,6 +91,7 @@ class SearchableTrackAdapter(
                 if (Algorithms.isEmpty(filterTracksQuery)
                     || collator != null && collator.matches(itemObject.name.lowercase())) {
                     filteredItems.add(itemObject)
+                    filteredTrackItems.add(itemObject)
                     hasFoundTrackItems = true
                 }
             } else {
@@ -100,17 +104,8 @@ class SearchableTrackAdapter(
         return filteredItems
     }
 
-    override fun getCurrentTrackItems(): List<TrackItem> {
-        val trackItems: MutableList<TrackItem> = ArrayList()
-        for (objectItem in items) {
-            if (objectItem is TrackItem) {
-                if (Algorithms.isEmpty(filterTracksQuery)
-                    || objectItem.name.contains(filterTracksQuery!!)) {
-                    trackItems.add(objectItem)
-                }
-            }
-        }
-        return trackItems
+    fun getCurrentTrackItems(): List<TrackItem> {
+        return filteredTrackItems
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
