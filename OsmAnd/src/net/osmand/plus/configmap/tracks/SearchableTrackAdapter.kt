@@ -3,6 +3,7 @@ package net.osmand.plus.configmap.tracks
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import net.osmand.CollatorStringMatcher
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -78,8 +79,9 @@ class SearchableTrackAdapter(
         for (itemObject in allItems) {
             if (itemObject is TrackItem) {
                 hasTrackItems = true
+
                 if (Algorithms.isEmpty(filterTracksQuery)
-                    || itemObject.name.contains(filterTracksQuery!!)) {
+                    || containsQuery(filterTracksQuery!!, itemObject.name.lowercase())) {
                     filteredItems.add(itemObject)
                     hasFoundTrackItems = true
                 }
@@ -91,6 +93,13 @@ class SearchableTrackAdapter(
             filteredItems.add(TYPE_NO_FOUND_TRACKS)
         }
         return filteredItems
+    }
+
+    private fun containsQuery(query: String, phrase: String): Boolean {
+        val csm = CollatorStringMatcher(
+            query,
+            CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
+        return csm.matches(phrase)
     }
 
     override fun getCurrentTrackItems(): List<TrackItem> {

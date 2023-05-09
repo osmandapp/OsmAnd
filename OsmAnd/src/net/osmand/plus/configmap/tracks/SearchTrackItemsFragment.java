@@ -200,7 +200,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 			@Override
 			public void afterTextChanged(Editable query) {
 				clearSearchQuery.setVisibility(query.length() > 0 ? View.VISIBLE : View.GONE);
-				filterTracks(query.toString());
+				filterTracks(query.toString().toLowerCase().trim());
 			}
 		});
 		clearSearchQuery.setOnClickListener((v) -> resetSearchQuery());
@@ -297,6 +297,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+		trackTab.setSortMode(sortMode);
 		adapter.setTracksSortMode(sortMode);
 		adapter.notifyDataSetChanged();
 	}
