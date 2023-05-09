@@ -92,12 +92,12 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		}
 	}
 
-	private void addSelectedTypes(List<String> selectedTypes){
+	private void addSelectedTypes(List<String> selectedTypes) {
 		if (!Algorithms.isEmpty(selectedTypes)) {
 			for (String type : selectedTypes) {
 				ExportSettingsType settingsType = ExportSettingsType.valueOf(type);
 				List<Object> items = getItemsForType(settingsType);
-				if(!Algorithms.isEmpty(items)){
+				if (!Algorithms.isEmpty(items)) {
 					selectedItemsMap.put(settingsType, items);
 				}
 			}

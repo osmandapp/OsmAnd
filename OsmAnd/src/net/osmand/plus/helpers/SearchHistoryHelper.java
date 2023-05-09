@@ -101,7 +101,7 @@ public class SearchHistoryHelper {
 			PointDescription description = entry.getName();
 
 			boolean exists = isPointDescriptionExists(description);
-			if ((includeDeleted || exists ) && (source == null || entry.source == source)) {
+			if ((includeDeleted || exists) && (source == null || entry.source == source)) {
 				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
 					entries.add(entry);
 				}
