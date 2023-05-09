@@ -115,7 +115,9 @@ public class SelectedTracksHelper {
 	}
 
 	public void updateTracksOnMap(){
-		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
+		TrackTab onMapTab = getTracksOnMapTab();
+		trackTabs.put(TrackTabType.ON_MAP.name(), onMapTab);
+		sortTrackTab(onMapTab);
 	}
 
 	@NonNull
