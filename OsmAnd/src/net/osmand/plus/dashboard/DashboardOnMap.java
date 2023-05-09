@@ -534,7 +534,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			return;
 		}
 		mapActivity.getRoutingHelper().removeListener(this);
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		this.visible = visible;
 		updateVisibilityStack(type, visible);
 		ApplicationMode currentAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();

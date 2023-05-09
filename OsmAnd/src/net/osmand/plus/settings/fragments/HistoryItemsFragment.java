@@ -63,12 +63,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	private Location location;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	protected boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		updateHistoryItems();
 	}
 

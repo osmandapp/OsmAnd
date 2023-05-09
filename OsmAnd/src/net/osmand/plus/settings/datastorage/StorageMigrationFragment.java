@@ -81,7 +81,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private int generalProgress;
 	private boolean copyFinished;
 
-	private boolean nightMode;
 	private boolean usedOnMap;
 
 	private AlertDialog closeDialog = null;
@@ -110,6 +109,11 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			}
 		}
 		nightMode = isNightMode(usedOnMap);
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return usedOnMap;
 	}
 
 	@Nullable

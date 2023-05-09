@@ -456,7 +456,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		OsmandApplication app = requireMyApplication();
-		int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode(false));
+		int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);

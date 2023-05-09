@@ -214,11 +214,7 @@ public class AppModeDialog {
 		return tb;
 	}
 
-	private static boolean isNightMode(OsmandApplication ctx, boolean useMapTheme) {
-		if (useMapTheme) {
-			return ctx.getDaynightHelper().isNightModeForMapControls();
-		} else {
-			return !ctx.getSettings().isLightContent();
-		}
+	private static boolean isNightMode(OsmandApplication app, boolean usedOnMap) {
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

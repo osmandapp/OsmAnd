@@ -252,9 +252,6 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 	}
 
 	protected boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

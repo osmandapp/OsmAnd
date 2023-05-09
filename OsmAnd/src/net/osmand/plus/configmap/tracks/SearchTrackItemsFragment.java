@@ -52,7 +52,6 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private boolean nightMode;
 
 	private View applyButton;
 	private View buttonsContainer;
@@ -64,9 +63,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private SelectedTracksHelper selectedTracksHelper;
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@Nullable

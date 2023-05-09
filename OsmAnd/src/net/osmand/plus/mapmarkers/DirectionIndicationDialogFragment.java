@@ -53,8 +53,6 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		boolean nightMode = isNightMode(false);
-		
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
 
 		mainView = UiUtilities.getInflater(getContext(), nightMode)

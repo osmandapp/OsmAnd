@@ -81,16 +81,12 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	private float approxSizeMb;
 	private float downloadedSizeMb;
 
-	private boolean nightMode;
-
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
-		nightMode = isNightMode(true);
 
 		Bundle args = getArguments();
 		if (args != null) {
@@ -106,6 +102,11 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 				dismiss(true);
 			}
 		});
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	private void restoreState(@NonNull Bundle savedState) {

@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -2112,6 +2113,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			activityRestartNeeded = true;
 		} else {
 			recreate();
+		}
+	}
+
+	@Override
+	public void onConfigurationChanged(@NonNull Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		List<Fragment> fragments = getSupportFragmentManager().getFragments();
+		for (Fragment fragment : fragments) {
+			getSupportFragmentManager()
+					.beginTransaction()
+					.detach(fragment)
+					.attach(fragment)
+					.commit();
 		}
 	}
 

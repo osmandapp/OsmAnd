@@ -55,12 +55,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	private boolean isToolbarInitialized;
 	private LayoutInflater themedInflater;
 
-	private boolean nightMode;
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		Bundle args = getArguments();
 		if (args != null) {
 			purchaseSku = args.getString(PURCHASE_SKU_ARG);
