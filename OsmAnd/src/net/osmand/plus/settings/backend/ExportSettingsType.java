@@ -35,6 +35,7 @@ public enum ExportSettingsType {
 	ACTIVE_MARKERS(R.string.map_markers, R.drawable.ic_action_flag, SettingsItemType.ACTIVE_MARKERS.name()),
 	HISTORY_MARKERS(R.string.markers_history, R.drawable.ic_action_flag, SettingsItemType.HISTORY_MARKERS.name()),
 	SEARCH_HISTORY(R.string.shared_string_search_history, R.drawable.ic_action_history, SettingsItemType.SEARCH_HISTORY.name()),
+	NAVIGATION_HISTORY(R.string.navigation_history, R.drawable.ic_action_gdirections_dark, SettingsItemType.NAVIGATION_HISTORY.name()),
 	CUSTOM_RENDER_STYLE(R.string.shared_string_rendering_style, R.drawable.ic_action_map_style, SettingsItemType.FILE.name()),
 	CUSTOM_ROUTING(R.string.shared_string_routing, R.drawable.ic_action_route_distance, SettingsItemType.FILE.name()),
 	MAP_SOURCES(R.string.quick_action_map_source_title, R.drawable.ic_map, SettingsItemType.MAP_SOURCES.name()),
@@ -78,7 +79,7 @@ public enum ExportSettingsType {
 	public boolean isMyPlacesCategory() {
 		return this == FAVORITES || this == TRACKS || this == OSM_EDITS || this == OSM_NOTES
 				|| this == MULTIMEDIA_NOTES || this == ACTIVE_MARKERS || this == HISTORY_MARKERS
-				|| this == SEARCH_HISTORY || this == ITINERARY_GROUPS;
+				|| this == SEARCH_HISTORY || this == ITINERARY_GROUPS || this == NAVIGATION_HISTORY;
 	}
 
 	public boolean isResourcesCategory() {

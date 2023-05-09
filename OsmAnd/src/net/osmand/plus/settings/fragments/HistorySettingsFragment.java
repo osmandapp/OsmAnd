@@ -152,6 +152,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 				ApplicationMode mode = getSelectedAppMode();
 				List<ExportSettingsType> types = new ArrayList<>();
 				types.add(ExportSettingsType.SEARCH_HISTORY);
+				types.add(ExportSettingsType.NAVIGATION_HISTORY);
 				types.add(ExportSettingsType.HISTORY_MARKERS);
 				ExportSettingsFragment.showInstance(activity.getSupportFragmentManager(), mode, types, true);
 			}

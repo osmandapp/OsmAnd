@@ -300,7 +300,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Override
 	public void onTypeClicked(ExportSettingsType type) {
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null && type != ExportSettingsType.GLOBAL && type != ExportSettingsType.SEARCH_HISTORY) {
+		if (fragmentManager != null && type != ExportSettingsType.GLOBAL && type != ExportSettingsType.SEARCH_HISTORY && type != ExportSettingsType.NAVIGATION_HISTORY) {
 			ExportItemsBottomSheet.showInstance(fragmentManager, type, this, exportMode);
 		}
 	}
