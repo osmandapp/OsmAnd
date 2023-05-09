@@ -4726,7 +4726,7 @@
     <string name="download_complete">Download fuldført</string>
     <string name="auto_backup_title">Automatisk sikkerhedskopiering</string>
     <string name="duplacate_widget_added_snackbar">En modul-dublet tilføjes listen.</string>
-    <string name="shared_string_duplicate">Dublet</string>
+    <string name="shared_string_duplicate">Duplikér</string>
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
     <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du starte en videooptagelse.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
@@ -5198,4 +5198,16 @@
     <string name="no_search_results">Ingen resultater</string>
     <string name="search_track_by_name">Søg spor efter navn</string>
     <string name="number_of_tracks">%1$s spor</string>
+    <string name="device_connected">%1$s oprettede forbindelse</string>
+    <string name="running_scds_device_name">Løbeenhed</string>
+    <string name="bicycle_scd_device_name">Cykelenhed</string>
+    <string name="external_device_blood_pressure">Blodtryk</string>
+    <string name="no_bt_permission">Bluetooth-tilladelse er ikke givet</string>
+    <string name="shared_string_chest">Bryst</string>
+    <string name="shared_string_wrist">Håndled</string>
+    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_hand">Hånd</string>
+    <string name="shared_string_ear_lobe">Øreflip</string>
+    <string name="shared_string_foot">Fod</string>
+    <string name="device_disconnected">%1$s afbrød forbindelsen</string>
 </resources>
