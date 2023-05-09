@@ -46,9 +46,6 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	protected NestedScrollView scrollView;
 	protected LayoutInflater themedInflater;
 
-	protected boolean nightMode;
-	protected boolean usedOnMap;
-
 	private int lastScrollY;
 	private int lastKnownToolbarOffset;
 
@@ -84,9 +81,12 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		purchaseHelper = app.getInAppPurchaseHelper();
-		usedOnMap = getMapActivity() != null;
-		nightMode = isNightMode(usedOnMap);
 		themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return getMapActivity() != null;
 	}
 
 	@NonNull

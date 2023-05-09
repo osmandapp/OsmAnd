@@ -338,13 +338,6 @@ public class ContourLinesMenu {
 		};
 	}
 
-	public static boolean isNightMode(OsmandApplication app) {
-		if (app == null) {
-			return false;
-		}
-		return app.getDaynightHelper().isNightModeForMapControls();
-	}
-
 	public static void closeDashboard(MapActivity mapActivity) {
 		mapActivity.getDashboard().hideDashboard(false);
 	}

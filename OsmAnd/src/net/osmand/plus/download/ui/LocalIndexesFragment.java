@@ -32,7 +32,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
@@ -58,7 +57,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -458,7 +456,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 		OsmandApplication app = requireMyApplication();
-		int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode(false));
+		int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);

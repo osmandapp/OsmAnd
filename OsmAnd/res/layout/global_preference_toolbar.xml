@@ -65,12 +65,17 @@
 
 		</LinearLayout>
 
-		<ImageButton
-			android:id="@+id/action_button"
-			style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-			android:layout_width="@dimen/toolbar_height"
-			android:layout_height="@dimen/toolbar_height"
-			android:visibility="gone" />
+		<LinearLayout
+			android:id="@+id/actions_container"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<include
+				layout="@layout/action_button"
+				android:visibility="gone" />
+
+		</LinearLayout>
 
 	</LinearLayout>
 

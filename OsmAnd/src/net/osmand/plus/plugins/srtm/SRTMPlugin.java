@@ -554,7 +554,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (activity == null || app == null) {
 			return false;
 		}
-		return activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
 	}
 
 	private static int getThemeRes(Activity activity, OsmandApplication app) {

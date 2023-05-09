@@ -170,6 +170,9 @@ public class IconsCard extends MapBaseCard {
 			ChipItem item = new ChipItem(category);
 			if (!category.equals(KEY_LAST_USED_ICONS)) {
 				item.title = category;
+				item.contentDescription = category;
+			} else {
+				item.contentDescription = app.getString(R.string.shared_string_last_used);
 			}
 			items.add(item);
 		}

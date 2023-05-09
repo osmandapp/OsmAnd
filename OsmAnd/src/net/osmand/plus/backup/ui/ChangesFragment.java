@@ -20,7 +20,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -65,7 +64,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	private View buttonsShadow;
 
 	private RecentChangesType tabType;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +71,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			tabType = RecentChangesType.valueOf(savedInstanceState.getString(SELECTED_TAB_TYPE_KEY, RECENT_CHANGES_LOCAL.name()));
 		}
@@ -250,6 +247,10 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		app.runInUIThread(this::setupBottomButtons);
 	}
 
+	public void onBackupSyncTasksUpdated() {
+		app.runInUIThread(this::setupBottomButtons);
+	}
+
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
 		if (!Algorithms.isEmpty(error)) {
@@ -257,7 +258,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-		app.runInUIThread(this::setupBottomButtons);
 	}
 
 	@Nullable

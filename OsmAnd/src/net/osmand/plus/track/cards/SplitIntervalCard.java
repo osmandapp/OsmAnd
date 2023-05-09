@@ -4,7 +4,6 @@ import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

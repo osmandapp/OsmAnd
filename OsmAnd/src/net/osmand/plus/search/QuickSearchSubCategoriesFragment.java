@@ -27,9 +27,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 
 import java.util.ArrayList;
@@ -58,7 +56,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private View footerShadow;
 	private FrameLayout addButton;
 	private boolean selectAll;
-	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
@@ -76,7 +73,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			poiCategory = app.getPoiTypes().getPoiCategoryByName(savedInstanceState.getString(CATEGORY_NAME_KEY));
 			selectAll = savedInstanceState.getBoolean(ALL_SELECTED_KEY);

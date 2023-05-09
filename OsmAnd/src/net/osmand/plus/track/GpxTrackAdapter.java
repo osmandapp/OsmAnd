@@ -259,6 +259,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			for (String title : categories.keySet()) {
 				ChipItem item = new ChipItem(title);
 				item.title = title;
+				item.contentDescription = title;
 				items.add(item);
 			}
 			return items;

@@ -82,14 +82,12 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 	private View subscribeEmailView;
 	private View freeMapsView;
 	private View descriptionView;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		downloadThread = app.getDownloadThread();
 		purchaseHelper = getDownloadActivity().getPurchaseHelper();
-		nightMode = isNightMode(false);
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		setHasOptionsMenu(true);

@@ -34,6 +34,7 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
@@ -302,19 +303,19 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupExternalInputDevicePref() {
-		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		externalInputDevice.setSummary(R.string.sett_no_ext_input);
-		externalInputDevice.setEntries(new String[] {
-				getString(R.string.sett_generic_ext_input),
-				getString(R.string.sett_wunderlinq_ext_input),
-				getString(R.string.sett_parrot_ext_input)
-		});
+		ListPreferenceEx uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		uiPreference.setSummary(R.string.sett_no_ext_input);
+		InputDevice[] devices = InputDevice.values();
 
-		externalInputDevice.setEntryValues(new Integer[] {
-				OsmandSettings.GENERIC_EXTERNAL_DEVICE,
-				OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE,
-				OsmandSettings.PARROT_EXTERNAL_DEVICE}
-		);
+		String[] entries = new String[devices.length];
+		Integer[] values = new Integer[devices.length];
+		for (int i = 0; i < devices.length; i++) {
+			InputDevice device = devices[i];
+			entries[i] = getString(device.getTitleId());
+			values[i] = device.getValue();
+		}
+		uiPreference.setEntries(entries);
+		uiPreference.setEntryValues(values);
 	}
 
 	private void setupTrackballForMovementsPref() {

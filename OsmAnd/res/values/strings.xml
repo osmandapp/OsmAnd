@@ -10,7 +10,30 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="rendering_attr_lightDetail_name">Light detail</string>
+    <string name="rendering_attr_lightDetail_description">Default: seamark name (light character.group.period), select additional information on sectors 1 to 3 or sector 1,2,3,4,5 light character</string>
+    <string name="rendering_value_sectors_name">Sectors</string>
+    <string name="rendering_value_sector1_name">Sector 1</string>
+    <string name="rendering_value_sector2_name">Sector 2</string>
+    <string name="rendering_value_sector3_name">Sector 3</string>
+    <string name="rendering_value_sector4_name">Sector 4</string>
+    <string name="rendering_value_sector5_name">Sector 5</string>
+    <string name="rendering_value_small_name">Small</string>
+    <string name="rendering_value_name_only_name">Name only</string>
+    <string name="device_disconnected">%1$s disconnected</string>
+    <string name="device_connected">%1$s connected</string>
+    <string name="running_scds_device_name">Running device</string>
+    <string name="bicycle_scd_device_name">Bicycle device</string>
+    <string name="external_device_blood_pressure">Blood pressure</string>
+    <string name="no_bt_permission">Bluetooth permission is not granted</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="shared_string_chest">Chest</string>
+    <string name="shared_string_wrist">Wrist</string>
+    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_hand">Hand</string>
+    <string name="shared_string_ear_lobe">Ear lobe</string>
+    <string name="shared_string_foot">Foot</string>
+    <string name="number_of_tracks">%1$s tracks</string>
     <string name="search_track_by_name">Search track by name</string>
     <string name="no_search_results">No results</string>
     <string name="is_imported">%1$s is imported.</string>
@@ -33,7 +56,7 @@ You will be able to pair this sensor again at any time.</string>
     <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
     <string name="external_device_characteristic_cadence">Cadence</string>
     <string name="external_device_characteristic_heart_rate">Heart rate</string>
-    <string name="external_device_characteristic_systolic">Cystolic</string>
+    <string name="external_device_characteristic_systolic">Systolic</string>
     <string name="external_device_characteristic_diastolic">Diastolic</string>
     <string name="external_device_characteristic_arterial_pressure">Arterial pressure</string>
     <string name="external_device_characteristic_cuff_pressure">Cuff pressure</string>
@@ -5110,8 +5133,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routeInfo_steepness_name">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
-    <string name="routing_attr_avoid_sett_name">No cobblestone or sett</string>
-    <string name="routing_attr_avoid_sett_description">Avoids cobblestone and sett</string>
+    <string name="routing_attr_avoid_sett_name">No sett</string>
+    <string name="routing_attr_avoid_sett_description">Avoids sett</string>
     <string name="quick_action_need_to_add_item_to_list">Add at least one item to the list in the \'Quick action\' settings</string>
     <string name="routing_attr_piste_type_downhill_name">Alpine and downhill skiing</string>
     <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>

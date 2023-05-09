@@ -78,7 +78,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FavoritesFragmentStateHolder,
+public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FragmentStateHolder,
 		OsmAndCompassListener, OsmAndLocationListener, ShareFavoritesListener {
 
 	public static final int SEARCH_ID = -1;

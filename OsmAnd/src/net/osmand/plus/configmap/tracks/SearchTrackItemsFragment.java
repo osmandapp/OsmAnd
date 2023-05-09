@@ -29,8 +29,11 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
@@ -38,7 +41,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer, SortableFragment {
+public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer, SortTracksListener {
 
 	public static final String TAG = SearchTrackItemsFragment.class.getSimpleName();
 
@@ -49,7 +52,6 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private boolean nightMode;
 
 	private View applyButton;
 	private View buttonsContainer;
@@ -61,9 +63,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private SelectedTracksHelper selectedTracksHelper;
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@Nullable
@@ -99,6 +100,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onResume() {
 		super.onResume();
+		searchEditText.requestFocus();
+		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		startLocationUpdate();
 		trackTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
 	}
@@ -127,6 +130,9 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 				dashboard.refreshContent(false);
 			}
 		}
+		selectedTracksHelper.updateTracksOnMap();
+		TracksFragment tracksFragment = (TracksFragment) requireParentFragment();
+		tracksFragment.updateTabsContent();
 		app.getOsmandMap().getMapView().refreshMap();
 		resetSearchQuery();
 		dismissAllowingStateLoss();
@@ -192,7 +198,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 			@Override
 			public void afterTextChanged(Editable query) {
 				clearSearchQuery.setVisibility(query.length() > 0 ? View.VISIBLE : View.GONE);
-				filterTracks(query.toString());
+				filterTracks(query.toString().toLowerCase().trim());
 			}
 		});
 		clearSearchQuery.setOnClickListener((v) -> resetSearchQuery());
@@ -287,20 +293,23 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
-		SearchTrackItemsFragment fragment = new SearchTrackItemsFragment();
-		fragment.show(manager, TAG);
-	}
-
-	@Nullable
-	@Override
-	public TrackTab getSelectedTab() {
-		return trackTab;
-	}
-
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+		trackTab.setSortMode(sortMode);
 		adapter.setTracksSortMode(sortMode);
 		adapter.notifyDataSetChanged();
+	}
+
+	@NonNull
+	@Override
+	public TracksSortMode getTracksSortMode() {
+		return trackTab.getSortMode();
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			SearchTrackItemsFragment fragment = new SearchTrackItemsFragment();
+			fragment.show(manager, TAG);
+		}
 	}
 }
