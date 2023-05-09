@@ -56,14 +56,14 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected int getHeaderIconId() {
-		return isNightMode(usedOnMap) ?
+		return nightMode ?
 				R.drawable.ic_action_osmand_pro_logo_colored_night :
 				R.drawable.ic_action_osmand_pro_logo_colored;
 	}
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
 														   InAppPurchaseHelper purchaseHelper,
-														   boolean nightMode) {
+	                                                       boolean nightMode) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
 		List<SubscriptionButton> subscriptionButtons =
 				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode);

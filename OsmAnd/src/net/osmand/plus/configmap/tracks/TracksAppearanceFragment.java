@@ -79,8 +79,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private PromoBannerCard promoCard;
 	private View applyButton;
 
-	private boolean nightMode;
-
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -93,13 +91,17 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		gpxDbHelper = app.getGpxDbHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectedTracksHelper = getSelectedTracksHelper();
-		nightMode = isNightMode(true);
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
 		} else {
 			trackDrawInfo = new TrackDrawInfo(app, TrackDrawInfo.DEFAULT);
 		}
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull

@@ -193,10 +193,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	public void updateNightMode() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		}
+		nightMode = requireMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	public String getPreferredMapLang() {

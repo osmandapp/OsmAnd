@@ -40,8 +40,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	private View signUpButton;
 	private View signInButton;
 
-	private boolean nightMode;
-
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -52,7 +50,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		nightMode = isNightMode(false);
 	}
 
 	@Nullable

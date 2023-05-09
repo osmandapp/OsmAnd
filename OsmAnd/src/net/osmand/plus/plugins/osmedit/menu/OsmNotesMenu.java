@@ -136,11 +136,8 @@ public class OsmNotesMenu {
 		return res;
 	}
 
-	public static boolean isNightMode(OsmandApplication app) {
-		if (app == null) {
-			return false;
-		}
-		return app.getDaynightHelper().isNightModeForMapControls();
+	public static boolean isNightMode(@NonNull OsmandApplication app) {
+		return app.getDaynightHelper().isNightMode(true);
 	}
 
 	public static int getThemeRes(OsmandApplication app) {

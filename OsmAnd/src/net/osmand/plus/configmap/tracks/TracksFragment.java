@@ -87,7 +87,6 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private View applyButton;
 	private View selectionButton;
 
-	private boolean nightMode;
 	private int tabSize;
 
 	@NonNull
@@ -106,7 +105,11 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		super.onCreate(savedInstanceState);
 		importHelper = new ImportHelper(requireActivity());
 		selectedTracksHelper = new SelectedTracksHelper(app);
-		nightMode = isNightMode(true);
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull

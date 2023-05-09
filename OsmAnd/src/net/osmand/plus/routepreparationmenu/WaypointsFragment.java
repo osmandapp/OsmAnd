@@ -397,7 +397,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			return;
 		}
 		boolean landscapeLayout = !portrait;
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		if (!landscapeLayout) {
 			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);

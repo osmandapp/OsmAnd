@@ -56,7 +56,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private View footerShadow;
 	private FrameLayout addButton;
 	private boolean selectAll;
-	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
@@ -74,7 +73,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			poiCategory = app.getPoiTypes().getPoiCategoryByName(savedInstanceState.getString(CATEGORY_NAME_KEY));
 			selectAll = savedInstanceState.getBoolean(ALL_SELECTED_KEY);

@@ -27,14 +27,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 
 public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 
-	protected boolean nightMode;
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
-	}
-
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
