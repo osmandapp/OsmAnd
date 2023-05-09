@@ -76,12 +76,17 @@ class SearchableTrackAdapter(
         val filteredItems: MutableList<Any> = ArrayList()
         var hasTrackItems = false
         var hasFoundTrackItems = false
+        var collator: CollatorStringMatcher? = null
+        if (filterTracksQuery != null) {
+            collator = CollatorStringMatcher(
+                filterTracksQuery,
+                CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
+        }
         for (itemObject in allItems) {
             if (itemObject is TrackItem) {
                 hasTrackItems = true
-
                 if (Algorithms.isEmpty(filterTracksQuery)
-                    || containsQuery(filterTracksQuery!!, itemObject.name.lowercase())) {
+                    || collator != null && collator.matches(itemObject.name.lowercase())) {
                     filteredItems.add(itemObject)
                     hasFoundTrackItems = true
                 }
@@ -93,13 +98,6 @@ class SearchableTrackAdapter(
             filteredItems.add(TYPE_NO_FOUND_TRACKS)
         }
         return filteredItems
-    }
-
-    private fun containsQuery(query: String, phrase: String): Boolean {
-        val csm = CollatorStringMatcher(
-            query,
-            CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
-        return csm.matches(phrase)
     }
 
     override fun getCurrentTrackItems(): List<TrackItem> {
