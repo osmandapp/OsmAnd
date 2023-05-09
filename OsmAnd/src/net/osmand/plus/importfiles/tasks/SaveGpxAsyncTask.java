@@ -2,9 +2,9 @@ package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.syncGpx;
 
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
-import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -32,7 +30,7 @@ import java.util.List;
 import java.util.Locale;
 
 @SuppressWarnings("deprecation")
-public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> {
+public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 
 	private final OsmandApplication app;
 
@@ -41,7 +39,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
-	private boolean isTrackSelected = false;
 
 	public SaveGpxAsyncTask(@NonNull OsmandApplication app,
 	                        @NonNull GPXFile gpxFile,
@@ -65,13 +62,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 	}
 
 	@Override
-	protected Pair<String, File> doInBackground(Void... nothing) {
+	protected String doInBackground(Void... nothing) {
 		if (gpxFile.isEmpty()) {
-			return new Pair<>(app.getString(R.string.error_reading_gpx), null);
+			return app.getString(R.string.error_reading_gpx);
 		}
 
 		String warning;
-		File resultFile = null;
 		//noinspection ResultOfMethodCallIgnored
 		destinationDir.mkdirs();
 		if (destinationDir.exists() && destinationDir.isDirectory() && destinationDir.canWrite()) {
@@ -86,14 +82,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 			}
 			if (exception == null) {
 				gpxFile.path = toWrite.getAbsolutePath();
-				resultFile = new File(gpxFile.path);
+				File resultFile = new File(gpxFile.path);
 				if (overwrite) {
 					app.getGpxDbHelper().remove(toWrite);
 					if (selected != null) {
-						isTrackSelected = true;
-						GpxSelectionParams params = GpxSelectionParams.newInstance()
-								.hideFromMap().syncGroup().saveSelection();
-						helper.selectGpxFile(selected.getGpxFile(), params);
+						selected.setGpxFile(gpxFile, app);
+						syncGpx(app, gpxFile);
 					}
 				}
 				GpxDataItem item = new GpxDataItem(resultFile, gpxFile);
@@ -107,7 +101,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 			warning = app.getString(R.string.sd_dir_not_accessible);
 		}
 
-		return new Pair<>(warning, resultFile);
+		return warning;
 	}
 
 	@NonNull
@@ -133,23 +127,12 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Pair<String, File>> 
 	}
 
 	@Override
-	protected void onPostExecute(Pair<String, File> result) {
-		String warning = result.first;
-		File file = result.second;
+	protected void onPostExecute(String warning) {
 		if (listener != null) {
 			List<String> warnings = Algorithms.isEmpty(warning)
 					? Collections.emptyList()
 					: Collections.singletonList(warning);
 			listener.onGpxSavingFinished(warnings);
-		}
-		if (isTrackSelected && file != null) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			GpxFileLoaderTask.loadGpxFile(file, app.getOsmandMap().getMapView().getMapActivity(), gpxFile -> {
-				GpxSelectionParams selectionParams = GpxSelectionParams.newInstance()
-						.showOnMap().selectedAutomatically().saveSelection();
-				helper.selectGpxFile(gpxFile, selectionParams);
-				return true;
-			});
 		}
 	}
 }
