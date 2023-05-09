@@ -416,7 +416,6 @@ public class RoutingContext {
 		if (calculationProgress != null) {
 			calculationProgress.timeToLoadHeaders += (System.nanoTime() - now);
 		}
-	
 		return collection;
 	}
 
