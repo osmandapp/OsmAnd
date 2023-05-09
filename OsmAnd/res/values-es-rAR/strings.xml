@@ -5209,4 +5209,17 @@
     <string name="search_track_by_name">Buscar traza por el nombre</string>
     <string name="no_search_results">Sin resultados</string>
     <string name="number_of_tracks">%1$s trazas</string>
+    <string name="device_connected">%1$s conectado</string>
+    <string name="bicycle_scd_device_name">Dispositivo para «Bicicleta»</string>
+    <string name="external_device_blood_pressure">Presión arterial</string>
+    <string name="no_bt_permission">El permiso de Bluetooth está bloqueado</string>
+    <string name="beats_per_minute_short">ppm</string>
+    <string name="shared_string_chest">Pecho</string>
+    <string name="shared_string_wrist">Muñeca</string>
+    <string name="shared_string_finger">Dedo</string>
+    <string name="device_disconnected">%1$s desconectado</string>
+    <string name="shared_string_hand">Mano</string>
+    <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
+    <string name="shared_string_foot">Pie</string>
+    <string name="running_scds_device_name">Dispositivo para «Correr»</string>
 </resources>
