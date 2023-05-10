@@ -13,7 +13,7 @@ import net.osmand.plus.R
 class LandingScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : Screen(carContext) {
+    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
 
@@ -130,10 +130,6 @@ class LandingScreen(
                     surfaceRenderer))
         }
     }
-
-
-    private val app: OsmandApplication
-        private get() = carContext.applicationContext as OsmandApplication
 
     internal enum class PlaceCategory(
         @DrawableRes val iconId: Int,

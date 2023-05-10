@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="no_poi_for_category">POI not found</string>
     <string name="rendering_attr_lightDetail_name">Light detail</string>
     <string name="rendering_attr_lightDetail_description">Default: seamark name (light character.group.period), select additional information on sectors 1 to 3 or sector 1,2,3,4,5 light character</string>
     <string name="rendering_value_sectors_name">Sectors</string>

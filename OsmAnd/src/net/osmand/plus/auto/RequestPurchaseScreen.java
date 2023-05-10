@@ -18,7 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 
-public class RequestPurchaseScreen extends Screen {
+public class RequestPurchaseScreen extends BaseOsmAndAndroidAutoScreen {
 
 	public RequestPurchaseScreen(@NonNull CarContext carContext) {
 		super(carContext);

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
-import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarColor;
@@ -46,7 +45,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public final class NavigationScreen extends Screen implements SurfaceRendererCallback,
+public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implements SurfaceRendererCallback,
 		IRouteInformationListener, DefaultLifecycleObserver {
 
 	@NonNull
@@ -90,11 +89,6 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		this.surfaceRenderer = surfaceRenderer;
 		alarmWidget = new AlarmWidget(getApp(), null);
 		getLifecycle().addObserver(this);
-	}
-
-	@NonNull
-	private OsmandApplication getApp() {
-		return (OsmandApplication) getCarContext().getApplicationContext();
 	}
 
 	@NonNull
@@ -349,7 +343,8 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	}
 
 	private void openSearch() {
-		getScreenManager().pushForResult(new SearchScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> { });
+		getScreenManager().pushForResult(new SearchScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> {
+		});
 		// Test
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });
 	}

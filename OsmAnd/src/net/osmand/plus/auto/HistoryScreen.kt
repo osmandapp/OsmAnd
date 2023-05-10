@@ -3,56 +3,60 @@ package net.osmand.plus.auto
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
-import androidx.car.app.Screen
+import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
-import net.osmand.CorwinLogger
 import net.osmand.data.LatLon
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.SearchHistoryHelper
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.search.core.ObjectType
+import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
 import net.osmand.util.MapUtils
 
 class HistoryScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : Screen(carContext) {
+    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val app = app
         val historyHelper = SearchHistoryHelper.getInstance(app)
-        val results = historyHelper.getSearchHistoryResults(true)
+        val results = historyHelper.getHistoryEntries(true)
         val location = app.settings.lastKnownMapLocation
 
+        var collectionSize = 0
         for (result in results) {
-            val listItem = QuickSearchListItem(app, result)
+            if (collectionSize == contentLimit) {
+                break
+            }
+            val searchResult =
+                SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
+            val listItem = QuickSearchListItem(app, searchResult)
+            val pointDescription = result.name
+
             val title = listItem.name
             val icon = CarIcon.Builder(
-                IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(listItem.icon))).build()
+                IconCompat.createWithResource(app, pointDescription.itemIcon)).build()
             val rowBuilder = Row.Builder()
                 .setTitle(title)
                 .setImage(icon)
                 .setOnClickListener { onClickHistoryItem(listItem) }
-            if (result.location == null) {
-                CorwinLogger.log("")
-            }
-            val dist = if (result.location == null) {
+            val dist = if (searchResult.location == null) {
                 0.0
             } else {
                 rowBuilder.setMetadata(
                     Metadata.Builder().setPlace(
                         Place.Builder(
                             CarLocation.create(
-                                result.location.latitude,
-                                result.location.longitude)).build()).build())
+                                result.lat,
+                                result.lon)).build()).build())
                 MapUtils.getDistance(
-                    result.location.latitude, result.location.longitude,
+                    result.lat, result.lon,
                     location.latitude, location.longitude)
             }
             val address = SpannableString(" ")
@@ -60,6 +64,7 @@ class HistoryScreen(
             address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
             rowBuilder.addText(address)
             listBuilder.addItem(rowBuilder.build())
+            collectionSize++
         }
         val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
@@ -76,6 +81,10 @@ class HistoryScreen(
             .setHeaderAction(Action.BACK)
             .setActionStrip(actionStripBuilder.build())
             .build()
+    }
+
+    override fun getConstraintLimitType(): Int {
+        return ConstraintManager.CONTENT_LIMIT_TYPE_PLACE_LIST
     }
 
     private fun onClickHistoryItem(historyItem: QuickSearchListItem) {
@@ -112,7 +121,4 @@ class HistoryScreen(
                 settingsAction,
                 surfaceRenderer)) { }
     }
-
-    private val app: OsmandApplication
-        private get() = carContext.applicationContext as OsmandApplication
 }

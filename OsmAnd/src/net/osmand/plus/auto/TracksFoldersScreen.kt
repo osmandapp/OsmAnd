@@ -2,14 +2,16 @@ package net.osmand.plus.auto
 
 import android.os.AsyncTask
 import androidx.car.app.CarContext
-import androidx.car.app.Screen
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import net.osmand.IndexConstants
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.*
+import net.osmand.plus.configmap.tracks.SelectedTracksHelper
+import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask
+import net.osmand.plus.configmap.tracks.TrackTab
+import net.osmand.plus.configmap.tracks.TrackTabType
+import net.osmand.plus.settings.enums.TracksSortMode
 import net.osmand.plus.track.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -18,14 +20,10 @@ import net.osmand.plus.utils.FileUtils
 class TracksFoldersScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : Screen(carContext),
+    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext),
     TrackFolderLoaderTask.LoadTracksListener {
     private var asyncLoader: TrackFolderLoaderTask? = null
-    private val selectedTracksHelper: SelectedTracksHelper
-
-    init {
-        selectedTracksHelper = SelectedTracksHelper(app)
-    }
+    private val selectedTracksHelper: SelectedTracksHelper = SelectedTracksHelper(app)
 
     override fun onGetTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
@@ -113,9 +111,6 @@ class TracksFoldersScreen(
         finish()
     }
 
-    private val app: OsmandApplication
-        private get() = carContext.applicationContext as OsmandApplication
-
     override fun loadTracksFinished(folder: TrackFolder) {
         selectedTracksHelper.updateTrackItems(folder.flattenedTrackItems)
         invalidate()
@@ -126,7 +121,7 @@ class TracksFoldersScreen(
             SearchScreen(
                 carContext,
                 settingsAction,
-                surfaceRenderer)) { obj: Any? -> }
+                surfaceRenderer)) { }
     }
 
 }

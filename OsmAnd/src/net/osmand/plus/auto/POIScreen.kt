@@ -1,76 +1,83 @@
 package net.osmand.plus.auto
 
-import android.text.SpannableString
-import android.text.Spanned
 import androidx.car.app.CarContext
-import androidx.car.app.Screen
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
-import androidx.core.graphics.drawable.IconCompat
 import net.osmand.data.LatLon
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.poi.PoiUIFilter
-import net.osmand.plus.render.RenderingIcons
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.search.core.ObjectType
+import net.osmand.search.core.SearchCoreFactory
+import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
-import net.osmand.util.Algorithms
-import net.osmand.util.MapUtils
 
 class POIScreen(
     carContext: CarContext,
     private val settingsAction: Action,
     private val surfaceRenderer: SurfaceRenderer,
-    private val group: PoiUIFilter,
-    private val searchResults: ArrayList<SearchResult>
-) : Screen(carContext) {
+    private val group: PoiUIFilter
+) : BaseOsmAndAndroidAutoSearchScreen(carContext) {
+    private var itemList: ItemList = withNoResults(ItemList.Builder()).build()
+
+    init {
+        loadPOI()
+    }
+
     override fun onGetTemplate(): Template {
-        val listBuilder = ItemList.Builder()
-        setupPOI(listBuilder)
-        return PlaceListNavigationTemplate.Builder()
-            .setItemList(listBuilder.build())
+        val templateBuilder = PlaceListNavigationTemplate.Builder()
+        if (loading) {
+            templateBuilder.setLoading(true)
+        } else {
+            templateBuilder.setLoading(false)
+            templateBuilder.setItemList(itemList)
+        }
+        return templateBuilder
             .setTitle(group.name)
             .setActionStrip(ActionStrip.Builder().addAction(settingsAction).build())
             .setHeaderAction(Action.BACK)
             .build()
     }
 
-    private fun setupPOI(listBuilder: ItemList.Builder) {
-        val location = app.settings.lastKnownMapLocation
-        for (point in searchResults) {
-            val title = point.localeName
-            var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
-            if (groupIcon == null) {
-                groupIcon = app.getDrawable(R.drawable.mx_special_custom_category)
-            }
-            val icon = CarIcon.Builder(
-                IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(groupIcon))).build()
-            val description =
-                if (point.alternateName != null) point.alternateName else ""
-            val dist = MapUtils.getDistance(
-                point.location.latitude, point.location.longitude,
-                location.latitude, location.longitude)
-            val address =
-                SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
-            val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist))
-            address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
-            listBuilder.addItem(Row.Builder()
-                .setTitle(title)
-                .setImage(icon)
-                .addText(address)
-                .setOnClickListener { onClickPOI(point) }
-                .setMetadata(
-                    Metadata.Builder().setPlace(
-                        Place.Builder(
-                            CarLocation.create(
-                                point.location.latitude,
-                                point.location.longitude)).build()).build())
-                .build())
-        }
+    private fun withNoResults(builder: ItemList.Builder): ItemList.Builder {
+        return builder.setNoItemsMessage(carContext.getString(R.string.no_poi_for_category))
     }
 
-    private fun onClickPOI(point: SearchResult) {
+    override fun onClickSearchMore() {
+        invalidate()
+    }
+
+    override fun onSearchDone(
+        phrase: SearchPhrase,
+        searchResults: List<SearchResult>?,
+        itemList: ItemList?,
+        resultsCount: Int) {
+
+        loading = false
+        if (resultsCount == 0) {
+            this.itemList = withNoResults(ItemList.Builder()).build()
+        } else {
+            this.itemList = itemList!!
+        }
+        invalidate()
+    }
+
+    private fun loadPOI() {
+        val objectLocalizedName = group.name;
+        val sr = SearchResult()
+        sr.localeName = objectLocalizedName
+        sr.`object` = group
+        sr.priority = SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY.toDouble()
+        sr.priorityDistance = 0.0
+        sr.objectType = ObjectType.POI_TYPE
+        searchHelper.completeQueryWithObject(sr)
+        loading = true
+        invalidate()
+    }
+
+    override fun onClickSearchResult(point: SearchResult) {
         val result = SearchResult()
         result.location = LatLon(point.location.latitude, point.location.longitude)
         result.objectType = ObjectType.POI
@@ -92,7 +99,4 @@ class POIScreen(
             session.startNavigation()
         }
     }
-
-    private val app: OsmandApplication
-        private get() = carContext.applicationContext as OsmandApplication
 }

@@ -3,15 +3,12 @@ package net.osmand.plus.auto
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
-import androidx.car.app.Screen
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import net.osmand.data.LatLon
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.mapmarkers.MapMarker
-import net.osmand.plus.utils.AndroidUtils
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.MapUtils
@@ -19,20 +16,22 @@ import net.osmand.util.MapUtils
 class MapMarkersScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : Screen(carContext) {
+    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
-        val app = app
         val markers = app.mapMarkersHelper.mapMarkers
         val location = app.settings.lastKnownMapLocation
-        val iconsCache = app.uiUtilities
         for (marker in markers) {
             val title = marker.getName(app)
             val markerColor = MapMarker.getColorId(marker.colorIndex)
-            val iconDrawable = iconsCache.getIcon(R.drawable.ic_action_flag, markerColor)
             val icon = CarIcon.Builder(
-                IconCompat.createWithBitmap(AndroidUtils.drawableToBitmap(iconDrawable))).build()
+                IconCompat.createWithResource(carContext, R.drawable.ic_action_flag))
+                .setTint(
+                    CarColor.createCustom(
+                        markerColor,
+                        markerColor))
+                .build()
             val rowBuilder = Row.Builder()
                 .setTitle(title)
                 .setImage(icon)
@@ -51,7 +50,6 @@ class MapMarkersScreen(
                             CarLocation.create(
                                 location.latitude,
                                 location.longitude)).build()).build())
-
             }
             listBuilder.addItem(rowBuilder.build())
         }
@@ -92,8 +90,8 @@ class MapMarkersScreen(
     private fun onRouteSelected() {
         app.osmandMap.mapLayers.mapControlsLayer.startNavigation()
         val session = app.carNavigationSession
-        session?.let{
-            if(it.hasStarted()){
+        session?.let {
+            if (it.hasStarted()) {
                 session.startNavigation()
             }
         }
@@ -106,7 +104,4 @@ class MapMarkersScreen(
                 settingsAction,
                 surfaceRenderer)) { }
     }
-
-    private val app: OsmandApplication
-        private get() = carContext.applicationContext as OsmandApplication
 }

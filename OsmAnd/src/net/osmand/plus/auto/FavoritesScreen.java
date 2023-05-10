@@ -7,7 +7,7 @@ import android.text.SpannableString;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
-import androidx.car.app.Screen;
+import androidx.car.app.constraints.ConstraintManager;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarIcon;
@@ -24,7 +24,6 @@ import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.utils.AndroidUtils;
@@ -41,7 +40,7 @@ import java.util.List;
 /**
  * Screen for showing a list of favorite places.
  */
-public final class FavoritesScreen extends Screen {
+public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 	private static final String TAG = "NavigationDemo";
 
 	@NonNull
@@ -76,9 +75,18 @@ public final class FavoritesScreen extends Screen {
 				.build();
 	}
 
+	@Override
+	protected int getConstraintLimitType() {
+		return ConstraintManager.CONTENT_LIMIT_TYPE_PLACE_LIST;
+	}
+
 	private void setupFavorites(ItemList.Builder listBuilder) {
 		LatLon location = getApp().getSettings().getLastKnownMapLocation();
+		int collectionSize = 0;
 		for (FavouritePoint point : getFavorites()) {
+			if (collectionSize == getContentLimit()) {
+				break;
+			}
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
@@ -97,6 +105,7 @@ public final class FavoritesScreen extends Screen {
 					.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
+			collectionSize++;
 		}
 	}
 
@@ -139,8 +148,4 @@ public final class FavoritesScreen extends Screen {
 		}
 	}
 
-	@NonNull
-	private OsmandApplication getApp() {
-		return ((OsmandApplication) getCarContext().getApplicationContext());
-	}
 }

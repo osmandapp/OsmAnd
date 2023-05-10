@@ -3,11 +3,9 @@ package net.osmand.plus.auto
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
-import androidx.car.app.Screen
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.configmap.tracks.TrackTab
@@ -18,19 +16,18 @@ import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
+import net.osmand.util.MapUtils
 
 class TracksScreen(
     carContext: CarContext,
     private val settingsAction: Action,
     private val surfaceRenderer: SurfaceRenderer,
     private val trackTab: TrackTab
-) : Screen(carContext) {
-    val gpxDbHelper: GpxDbHelper
-    var trackInfoLoadingCount = 0
-    var isTrackInfoLoaded = false
+) : BaseOsmAndAndroidAutoScreen(carContext) {
+    val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 
     init {
-        gpxDbHelper = app.gpxDbHelper
+        prepareTrackItems()
     }
 
     override fun onGetTemplate(): Template {
@@ -40,15 +37,8 @@ class TracksScreen(
         } else {
             trackTab.getName(app, false)
         }
-        if (!isTrackInfoLoaded) {
-            prepareTrackItems()
-        }
-        if (isTrackInfoLoaded) {
-            templateBuilder.setLoading(false)
-            setupTracks(templateBuilder)
-        } else {
-            templateBuilder.setLoading(true)
-        }
+        templateBuilder.setLoading(false)
+        setupTracks(templateBuilder)
 
         return templateBuilder
             .setTitle(title)
@@ -63,24 +53,18 @@ class TracksScreen(
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
                 if (item != null) {
                     track.dataItem = item
-                } else {
-                    trackInfoLoadingCount++
                 }
             }
         }
-        isTrackInfoLoaded = trackInfoLoadingCount == 0
     }
 
     private fun updateTrack(trackItem: TrackItem, dataItem: GpxDataItem?) {
         trackItem.dataItem = dataItem
-        trackInfoLoadingCount--
-        if (trackInfoLoadingCount == 0) {
-            isTrackInfoLoaded = true
-            invalidate()
-        }
+        invalidate()
     }
 
     private fun setupTracks(templateBuilder: PlaceListNavigationTemplate.Builder) {
+        val latLon = app.mapViewTrackingUtilities.defaultLocation
         val listBuilder = ItemList.Builder()
         for (track in trackTab.trackItems) {
             val title = track.name
@@ -95,7 +79,11 @@ class TracksScreen(
             var dist = 0f
             track.dataItem?.let { dataItem ->
                 description = dataItem.nearestCityName ?: ""
-                dist = dataItem.analysis?.totalDistance ?: 0f
+                dist = if (dataItem.analysis == null) {
+                    0f
+                } else {
+                    MapUtils.getDistance(latLon, dataItem.analysis?.latLonStart).toFloat()
+                }
             }
             val address =
                 SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
@@ -133,7 +121,4 @@ class TracksScreen(
             session.startNavigation()
         }
     }
-
-    private val app: OsmandApplication
-        private get() = carContext.applicationContext as OsmandApplication
 }
