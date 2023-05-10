@@ -5147,7 +5147,7 @@
     <string name="external_device_characteristic_total_distance">Összes távolság</string>
     <string name="external_device_characteristic_battery_level">Akkumulátor</string>
     <string name="external_device_characteristic_heart_rate">Pulzusszám</string>
-    <string name="external_device_characteristic_systolic">Cisztolés</string>
+    <string name="external_device_characteristic_systolic">Szisztolés</string>
     <string name="external_device_characteristic_diastolic">Diasztolés</string>
     <string name="external_device_characteristic_pulse_rate">Pulzusszám</string>
     <string name="external_device_characteristic_temperature">Hőmérséklet</string>
@@ -5186,4 +5186,17 @@
     <string name="no_search_results">Nincs találat</string>
     <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
     <string name="number_of_tracks">%1$s nyomvonal</string>
+    <string name="device_connected">%1$s kapcsolódva</string>
+    <string name="bicycle_scd_device_name">Kerékpáros eszköz</string>
+    <string name="external_device_blood_pressure">Vérnyomás</string>
+    <string name="no_bt_permission">Bluetooth engedély nincs megadva</string>
+    <string name="shared_string_chest">Mellkas</string>
+    <string name="shared_string_wrist">Csukló</string>
+    <string name="shared_string_finger">Ujj</string>
+    <string name="running_scds_device_name">Működő eszköz</string>
+    <string name="beats_per_minute_short">ütés</string>
+    <string name="shared_string_ear_lobe">Fülcimpa</string>
+    <string name="shared_string_foot">Láb</string>
+    <string name="device_disconnected">%1$s lekapcsolódott</string>
+    <string name="shared_string_hand">Kéz</string>
 </resources>
