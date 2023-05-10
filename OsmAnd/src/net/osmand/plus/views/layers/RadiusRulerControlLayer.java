@@ -603,8 +603,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private LatLon getCenterLatLon(@NonNull RotatedTileBox tb) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			PointI center31 = mapRenderer.getTarget();
-			return center31 != null ? point31ToLatLon(center31) : tb.getCenterLatLon();
+			QuadPoint centerPixel = tb.getCenterPixelPoint();
+			return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixel.x, centerPixel.y);
 		} else {
 			return tb.getCenterLatLon();
 		}
