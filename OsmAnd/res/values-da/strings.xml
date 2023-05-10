@@ -5210,4 +5210,15 @@
     <string name="shared_string_ear_lobe">Øreflip</string>
     <string name="shared_string_foot">Fod</string>
     <string name="device_disconnected">%1$s afbrød forbindelsen</string>
+    <string name="rendering_attr_lightDetail_name">Lysdetalje</string>
+    <string name="rendering_attr_lightDetail_description">Standard: sømærke navn (lystegn.gruppe.periode), vælg yderligere oplysninger om sektor 1 til 3 eller sektor 1,2,3,4,5 lystegn</string>
+    <string name="rendering_value_sectors_name">Sektorer</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_small_name">Lille</string>
+    <string name="rendering_value_name_only_name">Kun navn</string>
+    <string name="beats_per_minute_short">spm</string>
 </resources>
