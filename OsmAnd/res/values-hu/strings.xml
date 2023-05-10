@@ -5199,4 +5199,7 @@
     <string name="shared_string_foot">Láb</string>
     <string name="device_disconnected">%1$s lekapcsolódott</string>
     <string name="shared_string_hand">Kéz</string>
+    <string name="rendering_value_name_only_name">Csak név</string>
+    <string name="rendering_value_sectors_name">Szektorok</string>
+    <string name="rendering_value_small_name">Kicsi</string>
 </resources>
