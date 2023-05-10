@@ -103,7 +103,6 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.plus.views.controls.FabMarginSettings;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
@@ -2655,40 +2654,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference(this, "quick_action_list", "").makeGlobal().storeLastModifiedTime();
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
-	public final FabMarginPreference QUICK_ACTION_FAB_MARGIN = (FabMarginPreference) new FabMarginPreference(this, "quick_action_margin", new FabMarginSettings()) {
-		@Nullable
-		@Override
-		public Pair<Integer, Integer> getPortraitFabMargin() {
-			if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.isSet() && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.isSet()) {
-				if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get() != 0 && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get() != 0) {
-					setPortraitFabMargin(QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get(), QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get());
-				}
-				removeFromProfilePreferences(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN);
-			}
-			return get().getPortraitFabMargin();
-		}
-
-		@Nullable
-		@Override
-		public Pair<Integer, Integer> getLandscapeFabMargin() {
-			if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
-				if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get() != 0 && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get() != 0) {
-					setLandscapeFabMargin(QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
-				}
-				removeFromProfilePreferences(QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN);
-			}
-			return get().getLandscapeFabMargin();
-		}
-	}.makeProfile();
-
-	@Deprecated
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_PORTRAIT = new IntPreference(this, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, 0).makeProfile();
-	@Deprecated
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT = new IntPreference(this, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0).makeProfile();
-	@Deprecated
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN = new IntPreference(this, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0).makeProfile();
-	@Deprecated
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN = new IntPreference(this, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0).makeProfile();
+	public final FabMarginPreference QUICK_ACTION_FAB_MARGIN = new FabMarginPreference(this, "quick_fab_margin");
 
 	/**
 	 * map 3d mode
@@ -2696,7 +2662,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE_IN_3D_MODE, Map3DModeVisibility.values()).makeProfile().cache();
 
-	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = (FabMarginPreference) new FabMarginPreference(this, "map_3d_mode_margin", new FabMarginSettings()).makeProfile();
+	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
 
 	/**
 	 * the location of a parked car

@@ -17,57 +17,44 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.controls.FabMarginSettings;
 
-public class FabMarginPreference extends CommonPreference<FabMarginSettings> {
-	public FabMarginPreference(OsmandSettings settings, String id, FabMarginSettings defaultValue) {
-		super(settings, id, defaultValue);
+public class FabMarginPreference {
+	private static final String X_PORTRAIT_MARGIN = "_x_portrait_margin";
+	private static final String Y_PORTRAIT_MARGIN = "_y_portrait_margin";
+	private static final String X_LANDSCAPE_MARGIN = "_x_landscape_margin";
+	private static final String Y_LANDSCAPE_MARGIN = "_y_landscape_margin";
+
+	private final CommonPreference<Integer> FAB_MARGIN_X_PORTRAIT;
+	private final CommonPreference<Integer> FAB_MARGIN_Y_PORTRAIT;
+	private final CommonPreference<Integer> FAB_MARGIN_X_LANDSCAPE;
+	private final CommonPreference<Integer> FAB_MARGIN_Y_LANDSCAPE;
+
+	public FabMarginPreference(OsmandSettings settings, String prefix) {
+		FAB_MARGIN_X_PORTRAIT = new IntPreference(settings, prefix + X_PORTRAIT_MARGIN, 0).makeProfile();
+		FAB_MARGIN_Y_PORTRAIT = new IntPreference(settings, prefix + Y_PORTRAIT_MARGIN, 0).makeProfile();
+		FAB_MARGIN_X_LANDSCAPE = new IntPreference(settings, prefix + X_LANDSCAPE_MARGIN, 0).makeProfile();
+		FAB_MARGIN_Y_LANDSCAPE = new IntPreference(settings, prefix + Y_LANDSCAPE_MARGIN, 0).makeProfile();
 	}
 
 	public void setPortraitFabMargin(int x, int y) {
-		get().setPortraitFabMargin(this, x, y);
+		FAB_MARGIN_X_PORTRAIT.set(x);
+		FAB_MARGIN_Y_PORTRAIT.set(y);
 	}
 
 	public void setLandscapeFabMargin(int x, int y) {
-		get().setLandscapeFabMargin(this, x, y);
+		FAB_MARGIN_X_LANDSCAPE.set(x);
+		FAB_MARGIN_Y_LANDSCAPE.set(y);
 	}
 
 	@Nullable
 	public Pair<Integer, Integer> getPortraitFabMargin() {
-		return get().getPortraitFabMargin();
+		return new Pair<>(FAB_MARGIN_X_PORTRAIT.get(), FAB_MARGIN_Y_PORTRAIT.get());
 	}
 
 	@Nullable
 	public Pair<Integer, Integer> getLandscapeFabMargin() {
-		return get().getLandscapeFabMargin();
-	}
+		return new Pair<>(FAB_MARGIN_X_LANDSCAPE.get(), FAB_MARGIN_Y_LANDSCAPE.get());
 
-	@Override
-	public FabMarginSettings getValue(Object prefs, FabMarginSettings defaultValue) {
-		String s = getSettingsAPI().getString(prefs, getId(), defaultValue.writeToJsonString());
-		return readValue(s);
-	}
-
-	@Override
-	protected boolean setValue(Object prefs, FabMarginSettings val) {
-		return super.setValue(prefs, val)
-				&& getSettingsAPI().edit(prefs).putString(getId(), val.writeToJsonString()).commit();
-	}
-
-	private FabMarginSettings readValue(String s) {
-		FabMarginSettings value = getDefaultValue().newInstance();
-		value.readFromJsonString(s);
-		return value;
-	}
-
-	@Override
-	protected String toString(FabMarginSettings o) {
-		return o.writeToJsonString();
-	}
-
-	@Override
-	public FabMarginSettings parseString(String s) {
-		return readValue(s);
 	}
 
 	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton, FrameLayout.LayoutParams params,

@@ -595,7 +595,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void destroyLayer() {
 		super.destroyLayer();
-		mapButtons.clear();
 		destroyButtons();
 	}
 
