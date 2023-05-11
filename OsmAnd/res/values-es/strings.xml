@@ -5196,4 +5196,5 @@
     <string name="no_search_results">No hay resultados</string>
     <string name="search_track_by_name">Buscar las pista por nombre</string>
     <string name="number_of_tracks">%1$s pistas</string>
+    <string name="rendering_attr_lightDetail_name">Iluminación</string>
 </resources>
