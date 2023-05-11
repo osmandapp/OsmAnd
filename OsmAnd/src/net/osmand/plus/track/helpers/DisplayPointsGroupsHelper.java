@@ -32,10 +32,13 @@ public class DisplayPointsGroupsHelper {
 		comparator = OsmAndCollator.primaryCollator()::compare;
 	}
 
-	public static DisplayGroupsHolder getGroups(@NonNull OsmandApplication app,
-	                                            @NonNull List<GpxDisplayGroup> displayGroups,
-	                                            @Nullable Set<?> filteredItems) {
-		return new DisplayPointsGroupsHelper(app).getGroups(displayGroups, filteredItems);
+	public static DisplayGroupsHolder getGroups(
+			@NonNull OsmandApplication app,
+			@NonNull List<GpxDisplayGroup> displayGroups,
+			@Nullable Set<?> filteredItems
+	) {
+		DisplayPointsGroupsHelper helper = new DisplayPointsGroupsHelper(app);
+		return helper.getGroups(displayGroups, filteredItems);
 	}
 
 	private DisplayGroupsHolder getGroups(@NonNull List<GpxDisplayGroup> displayGroups,
@@ -130,18 +133,18 @@ public class DisplayPointsGroupsHelper {
 		Collections.sort(categories, comparator);
 		for (String category : categories) {
 			List<GpxDisplayItem> values = itemsMap.get(category);
-			GpxDisplayGroup headerGroup = new GpxDisplayGroup(group);
-			headerGroup.setName(category);
+			GpxDisplayGroup categoryGroup = new GpxDisplayGroup(group);
+			categoryGroup.setName(category);
 			for (GpxDisplayItem i : values) {
 				if (i.locationStart != null && i.locationStart.getColor() != 0) {
-					headerGroup.setColor(i.locationStart.getColor(group.getColor()));
+					categoryGroup.setColor(i.locationStart.getColor(group.getColor()));
 					break;
 				}
 			}
-			group.clearDisplayItems();
-			group.addDisplayItems(values);
-			itemGroups.put(headerGroup, values);
-			this.groups.add(headerGroup);
+			categoryGroup.clearDisplayItems();
+			categoryGroup.addDisplayItems(values);
+			itemGroups.put(categoryGroup, values);
+			this.groups.add(categoryGroup);
 		}
 	}
 
