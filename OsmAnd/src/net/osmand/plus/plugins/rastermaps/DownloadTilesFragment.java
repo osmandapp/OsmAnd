@@ -342,7 +342,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (multipleZoomsSupported) {
 			slider.setValueFrom(minZoom);
 			slider.setValueTo(maxZoom);
-			selectedMaxZoom = Math.max(selectedMinZoom, selectedMaxZoom);
 			slider.setValues(((float) selectedMinZoom), ((float) selectedMaxZoom));
 			slider.addOnChangeListener((slider1, value, fromUser) -> {
 				List<Float> minMax = slider.getValues();
@@ -553,6 +552,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			int currentZoom = mapView.getZoom();
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
+			}
+			if (currentZoom > selectedMaxZoom && currentZoom <= maxZoom) {
+				selectedMaxZoom = currentZoom;
 			}
 
 			if (downloadType != DownloadType.ALL) {
