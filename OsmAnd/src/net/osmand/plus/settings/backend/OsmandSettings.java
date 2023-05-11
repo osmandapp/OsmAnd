@@ -451,8 +451,11 @@ public class OsmandSettings {
 			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
 		}
 		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
-		if (appMode != nextAppMode){
-			return setApplicationMode(nextAppMode);
+		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
+			String pattern = ctx.getString(R.string.application_profile_changed);
+			String message = String.format(pattern, nextAppMode.toHumanString());
+			ctx.showShortToastMessage(message);
+			return true;
 		}
 		return false;
 	}
