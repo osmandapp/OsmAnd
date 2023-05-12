@@ -5136,8 +5136,7 @@
     <string name="rendering_value_defaultMedium_name">Bawaan (sedang)</string>
     <string name="proxy_port_max_warning">Nilai porta maksimum adalah %1$s</string>
     <string name="weather_download_error">Tidak dapat mengunduh ubin %1$s.</string>
-    <string name="external_device_forget_sensor_description">Sensor akan dihapus dari daftar.
-\nAnda dapat menyandingkan sensor ini lagi kapan pun.</string>
+    <string name="external_device_forget_sensor_description">Sensor akan dihapus dari daftar. Anda dapat menyandingkan sensor ini lagi kapan pun.</string>
     <string name="external_device_disconnected">Terputus</string>
     <string name="external_device_connected">Terhubung</string>
     <string name="external_device_menu_forget">Abaikan</string>
@@ -5198,4 +5197,27 @@
     <string name="search_track_by_name">Cari trek berdasarkan nama</string>
     <string name="no_search_results">Tidak ada hasil</string>
     <string name="number_of_tracks">%1$s trek</string>
+    <string name="rendering_attr_lightDetail_description">Bawaan: nama garis laut (karakter cahaya.grup.periode), pilih informasi tambahan di bagian 1 sampai 3 atau sektor karakter cahaya 1,2,3,4,5</string>
+    <string name="rendering_value_sectors_name">Sektor</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_name_only_name">Nama saja</string>
+    <string name="running_scds_device_name">Perangkat berjalan</string>
+    <string name="bicycle_scd_device_name">Perangkat sepeda</string>
+    <string name="no_bt_permission">Izin Bluetooth tidak diberikan</string>
+    <string name="shared_string_hand">Tangan</string>
+    <string name="shared_string_ear_lobe">Daun telinga</string>
+    <string name="shared_string_foot">Kaki</string>
+    <string name="rendering_attr_lightDetail_name">Detail cahaya</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="device_disconnected">%1$s terputus</string>
+    <string name="shared_string_finger">Jari</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="shared_string_wrist">Gelang tangan</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_small_name">Kecil</string>
+    <string name="device_connected">%1$s terhubung</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="shared_string_chest">Dada</string>
+    <string name="external_device_blood_pressure">Tekanan darah</string>
 </resources>
