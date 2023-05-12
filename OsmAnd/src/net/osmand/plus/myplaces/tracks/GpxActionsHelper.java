@@ -1,5 +1,9 @@
 package net.osmand.plus.myplaces.tracks;
 
+import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
+
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +23,8 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
@@ -160,6 +166,16 @@ public class GpxActionsHelper {
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
 		PopUpMenu.show(displayData);
+	}
+
+	public void showTracksVisibilityDialog() {
+		Bundle prevIntentParams = new Bundle();
+		prevIntentParams.putInt(TAB_ID, GPX_TAB);
+
+		Bundle bundle = new Bundle();
+		bundle.putString(OPEN_TRACKS_TAB, TrackTabType.ON_MAP.name());
+
+		MapActivity.launchMapActivityMoveToTop(activity, prevIntentParams, null, bundle);
 	}
 
 	public void deleteGpxFiles(@NonNull List<GPXInfo> gpxInfos) {

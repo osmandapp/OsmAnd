@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,8 +44,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -54,14 +55,15 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.GpxSearchFilter;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask.LoadTracksListener;
@@ -93,7 +95,6 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -916,7 +917,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		private final Map<String, List<GPXInfo>> data = new LinkedHashMap<>();
 		private final List<String> category = new ArrayList<>();
 		private final List<GPXInfo> selected = new ArrayList<>();
-		private SearchFilter filter;
+		private GpxSearchFilter filter;
 
 		private final GpxDataItemCallback updateGpxCallback = new GpxDataItemCallback() {
 
@@ -1196,8 +1197,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		@Override
 		public Filter getFilter() {
 			if (filter == null) {
-				filter = new SearchFilter();
+				filter = new GpxSearchFilter(getSearchFilterCallback());
 			}
+			filter.setGpxInfos(asyncLoader.getGpxInfos());
 			return filter;
 		}
 
@@ -1218,50 +1220,30 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private class SearchFilter extends Filter {
+	@NonNull
+	private CallbackWithObject<Pair<CharSequence, List<GPXInfo>>> getSearchFilterCallback() {
+		return result -> {
+			updateFilteredList(result.first, result.second);
+			return true;
+		};
+	}
 
-		@Override
-		protected FilterResults performFiltering(CharSequence constraint) {
-			FilterResults results = new FilterResults();
-			List<GPXInfo> raw = asyncLoader.getGpxInfos();
-			if (constraint == null || constraint.length() == 0 || raw == null) {
-				results.values = raw;
-				results.count = 1;
-			} else {
-				String namePart = constraint.toString();
-				NameStringMatcher matcher = new NameStringMatcher(namePart.trim(), StringMatcherMode.CHECK_CONTAINS);
-				List<GPXInfo> res = new ArrayList<>();
-				for (GPXInfo gpxInfo : raw) {
-					if (matcher.matches(gpxInfo.getName())) {
-						res.add(gpxInfo);
-					}
+	private void updateFilteredList(CharSequence constraint, List<GPXInfo> gpxInfos) {
+		if (gpxInfos != null) {
+			synchronized (allGpxAdapter) {
+				allGpxAdapter.clear();
+				for (GPXInfo i : gpxInfos) {
+					allGpxAdapter.addLocalIndexInfo(i);
 				}
-				results.values = res;
-				results.count = res.size();
+				// disable sort
+				// allGpxAdapter.sort();
+				allGpxAdapter.refreshSelected();
 			}
-			return results;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results) {
-			if (results.values != null) {
-				synchronized (allGpxAdapter) {
-					allGpxAdapter.clear();
-					for (GPXInfo i : ((List<GPXInfo>) results.values)) {
-						allGpxAdapter.addLocalIndexInfo(i);
-					}
-					// disable sort
-					// allGpxAdapter.sort();
-					allGpxAdapter.refreshSelected();
-				}
-				allGpxAdapter.notifyDataSetChanged();
-				if (constraint != null && constraint.length() > 3) {
-					collapseTrees(10);
-				}
+			allGpxAdapter.notifyDataSetChanged();
+			if (constraint != null && constraint.length() > 3) {
+				collapseTrees(10);
 			}
 		}
-
 	}
 
 	@Override
