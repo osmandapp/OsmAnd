@@ -2,12 +2,14 @@ package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
+import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.FColorRGB;
@@ -16,6 +18,7 @@ import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.TileIdList;
+import net.osmand.core.jni.Utilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
@@ -302,10 +305,56 @@ public class NativeUtilities {
 		}
 	}
 
+	@NonNull
+	public static PointI getPoint31FromLatLon(@NonNull LatLon latLon) {
+		return getPoint31FromLatLon(latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	@NonNull
 	public static PointI getPoint31FromLatLon(double lat, double lon) {
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);
 		return new PointI(x31, y31);
+	}
+
+	@Nullable
+	public static Pair<PointF, PointF> clipLineInVisibleRect(@NonNull MapRendererView mapRenderer,
+	                                                         @NonNull RotatedTileBox tileBox,
+	                                                         @NonNull PointI start31,
+	                                                         @NonNull PointI end31) {
+		AreaI screenBbox = mapRenderer.getVisibleBBox31();
+		PointI clippedStart31 = null;
+		PointI clippedEnd31 = null;
+		if (screenBbox.contains(start31)) {
+			clippedStart31 = start31;
+		}
+		if (screenBbox.contains(end31)) {
+			clippedEnd31 = end31;
+		}
+		if (clippedStart31 == null && clippedEnd31 == null) {
+			clippedStart31 = new PointI(0, 0);
+			clippedEnd31 = new PointI(0, 0);
+			if (Utilities.calculateIntersection(start31, end31, screenBbox, clippedStart31)) {
+				Utilities.calculateIntersection(end31, start31, screenBbox, clippedEnd31);
+			} else {
+				return null;
+			}
+		} else if (clippedStart31 == null) {
+			clippedStart31 = new PointI(0, 0);
+			if (!Utilities.calculateIntersection(start31, end31, screenBbox, clippedStart31)) {
+				return null;
+			}
+		} else if (clippedEnd31 == null) {
+			clippedEnd31 = new PointI(0, 0);
+			if (!Utilities.calculateIntersection(end31, start31, screenBbox, clippedEnd31)) {
+				return null;
+			}
+		}
+		PointF startPixel = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox,
+				clippedStart31.getX(), clippedStart31.getY());
+		PointF endPixel = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox,
+				clippedEnd31.getX(), clippedEnd31.getY());
+		return Pair.create(startPixel, endPixel);
 	}
 
 	public static TileIdList convertToQListTileIds(@NonNull List<Long> tileIds) {

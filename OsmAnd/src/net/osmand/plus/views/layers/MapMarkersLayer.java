@@ -15,27 +15,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.VectorDouble;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
@@ -45,6 +37,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -74,6 +68,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
@@ -417,14 +416,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						if (center31 == null) {
 							continue;
 						}
-						PointF[] line = calculateLineInScreenRect(tileBox, marker31, center31);
+						Pair<PointF, PointF> line =
+								NativeUtilities.clipLineInVisibleRect(mapRenderer, tileBox, center31, marker31);
 						if (line == null) {
 							continue;
 						}
 						PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 						cx = centerPixel.x;
 						cy = centerPixel.y;
-						bearing = (float) getAngleBetween(centerPixel, line[1]) - tileBox.getRotate();
+						bearing = (float) getAngleBetween(centerPixel, line.second) - tileBox.getRotate();
 					} else {
 						QuadPoint cp = tileBox.getCenterPixelPoint();
 						cx = cp.x;
@@ -813,7 +813,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		PointI start = NativeUtilities.getPoint31FromLatLon(loc.getLatitude(), loc.getLongitude());
+		PointI start = NativeUtilities.getPoint31FromLatLon(loc);
 		PointI end = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
 
 		if (vectorLinesCollection == null) {
@@ -870,54 +870,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			vectorLinesCollection = null;
 			needDrawLines = true;
 		}
-	}
-
-	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, MapMarker marker, LatLon loc) {
-		PointI locPointI = NativeUtilities.getPoint31FromLatLon(loc.getLatitude(), loc.getLongitude());
-		PointI markerPointI = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-		return calculateLineInScreenRect(tileBox, markerPointI, locPointI);
-	}
-
-	/**
-	 * OpenGL
-	 */
-	@Nullable
-	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, PointI markerPointI, PointI locPointI) {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null) {
-			return null;
-		}
-		AreaI screenBbox = mapRenderer.getVisibleBBox31();
-		PointI firstPoint = null;
-		PointI secondPoint = null;
-		if (screenBbox.contains(locPointI)) {
-			firstPoint = locPointI;
-		}
-		if (screenBbox.contains(markerPointI)) {
-			secondPoint = markerPointI;
-		}
-		if (firstPoint == null && secondPoint == null) {
-			firstPoint = new PointI(0, 0);
-			secondPoint = new PointI(0, 0);
-			if (Utilities.calculateIntersection(locPointI, markerPointI, screenBbox, firstPoint)) {
-				Utilities.calculateIntersection(markerPointI, locPointI, screenBbox, secondPoint);
-			} else {
-				return null;
-			}
-		} else if (firstPoint == null) {
-			firstPoint = new PointI(0, 0);
-			if (!Utilities.calculateIntersection(locPointI, markerPointI, screenBbox, firstPoint)) {
-				return null;
-			}
-		} else if (secondPoint == null) {
-			secondPoint = new PointI(0, 0);
-			if (!Utilities.calculateIntersection(markerPointI, locPointI, screenBbox, secondPoint)) {
-				return null;
-			}
-		}
-		PointF l = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox, firstPoint.getX(), firstPoint.getY());
-		PointF m = NativeUtilities.getElevatedPixelFrom31(mapRenderer, tileBox, secondPoint.getX(), secondPoint.getY());
-		return new PointF[] {l, m};
 	}
 
 	/**
@@ -1028,12 +980,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				//draw line in OpenGL
 				initVectorLinesCollection(loc, marker, color, isLast);
 				displayedMarkers.add(marker);
-				PointF[] line = calculateLineInScreenRect(tileBox, marker, loc);
+
+				PointI lineStart31 = NativeUtilities.getPoint31FromLatLon(loc);
+				PointI lineEnd31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
+				Pair<PointF, PointF> line = NativeUtilities.clipLineInVisibleRect(mapRenderer, tileBox, lineStart31, lineEnd31);
 				if (line != null) {
-					locX = line[0].x;
-					locY = line[0].y;
-					markerX = line[1].x;
-					markerY = line[1].y;
+					locX = line.first.x;
+					locY = line.first.y;
+					markerX = line.second.x;
+					markerY = line.second.y;
 				} else {
 					continue;
 				}
