@@ -83,6 +83,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private PagerSlidingTabStrip tabLayout;
 	private ProgressBar progressBar;
 	private TracksTabAdapter adapter;
+	private ImageView searchButton;
 
 	private View applyButton;
 	private View selectionButton;
@@ -153,7 +154,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		ImageView searchButton = toolbar.findViewById(R.id.search);
+		searchButton = toolbar.findViewById(R.id.search);
 		ImageView switchGroup = toolbar.findViewById(R.id.switch_group);
 		ImageView actionsButton = toolbar.findViewById(R.id.actions_button);
 
@@ -275,6 +276,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 		UiUtilities.setupDialogButton(nightMode, applyButton, TERTIARY, apply);
 		UiUtilities.setupDialogButton(nightMode, selectionButton, TERTIARY, select);
+		TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
+		searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 	}
 
 	@NonNull
