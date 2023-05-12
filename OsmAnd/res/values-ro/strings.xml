@@ -922,7 +922,7 @@
     <string name="select_gpx">Selectează GPX…</string>
     <string name="route_descr_select_destination">Setați destinația</string>
     <string name="route_preferences">Preferințe rută</string>
-    <string name="route_info">Informații rută</string>
+    <string name="route_info">Informații despre traseu</string>
     <string name="routing_attr_avoid_toll_name">Fără drumuri cu taxă</string>
     <string name="routing_attr_avoid_toll_description">Evitați drumurile cu taxă</string>
     <string name="routing_attr_avoid_unpaved_name">Fără drumuri neasfaltate</string>
@@ -5190,4 +5190,16 @@
     <string name="external_device_details_connect">Conectați-vă</string>
     <string name="external_device_details_pair">Perechea</string>
     <string name="external_device_details_disconnect">Deconectați</string>
+    <string name="external_device_characteristic_stride_length">Lungimea pasului</string>
+    <string name="ant_plus_pair_new_sensor">Cuplați noul senzor</string>
+    <string name="ant_plus_pair_new_sensor_ble">Cuplați senzorul Bluetooth LE</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Cuplați senzorul ANT+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Puteți asocia senzorii Bluetooth LE și ANT+ cu OsmAnd.</string>
+    <string name="speak_route_deviation">Anunță abaterea de la traseu</string>
+    <string name="ble_search_again">Căutați din nou</string>
+    <string name="ant_plus_nothing_found_text">Nu se poate găsi niciun senzor</string>
+    <string name="ant_plus_nothing_found_description">Asigură-te:
+\n- Bluetooth este pornit
+\n- Senzorul este activat
+\n- Acest dispozitiv se află în apropierea senzorului</string>
 </resources>
