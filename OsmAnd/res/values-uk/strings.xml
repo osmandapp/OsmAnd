@@ -3026,7 +3026,7 @@
     <string name="custom_routing">Користувацький профіль маршрутизації</string>
     <string name="special_routing_type">Спеціальна маршрутизація</string>
     <string name="third_party_routing_type">Стороння маршрутизація</string>
-    <string name="application_profiles_descr">Оберіть профілі, видимі у застосунку.</string>
+    <string name="application_profiles_descr">Оберіть профілі, що будуть показуватись у застосунку.</string>
     <string name="application_profiles">Профілі застосунку</string>
     <string name="quick_action_need_to_add_item_to_list">Потрібно додати принаймні один елемент до списку у налаштуваннях \'Швидкі дії\'</string>
     <string name="routing_attr_piste_type_downhill_name">Альпійські та гірські лижі</string>
@@ -3249,7 +3249,7 @@
     <string name="quick_action_contour_lines_descr">Увімк/вимк показ ізоліній на мапі.</string>
     <string name="quick_action_hillshade_descr">Кнопка, що показує чи приховує рельєф на мапі.</string>
     <string name="tts_initialization_error">Не вдається запустити рушій TTS.</string>
-    <string name="simulate_your_location_gpx_descr">Відтворити свою позицію за допомогою записаного треку GPX.</string>
+    <string name="simulate_your_location_gpx_descr">Симуляція положення за допомогою записаного треку GPX.</string>
     <string name="export_profile">Експорт профілю</string>
     <string name="exported_osmand_profile">Профіль OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' вже існує. Перезаписати\?</string>
@@ -3916,7 +3916,7 @@
     <string name="shared_string_enter_param">Введіть параметр</string>
     <string name="keep_it_empty_if_not">Залишить порожнім, якщо не маєте ключа API</string>
     <string name="online_routing_example_hint">URL-адреса з усіма параметрами виглядатиме так:</string>
-    <string name="test_route_calculation">Тестове обчислення маршруту</string>
+    <string name="test_route_calculation">Тестове прокладання маршруту</string>
     <string name="routing_engine_vehicle_type_driving">Автівка</string>
     <string name="routing_engine_vehicle_type_foot">Пішки</string>
     <string name="routing_engine_vehicle_type_bike">Велосипед</string>
@@ -4326,8 +4326,8 @@
     <string name="routing_attr_only_permitted_ways_name">Шляхи з явним дозволом для руху</string>
     <string name="routing_attr_only_permitted_streets_description">Використовувати лише вулиці з явним дозволом для руху</string>
     <string name="routing_attr_only_permitted_streets_name">Вулиці з явним дозволом для руху</string>
-    <string name="routing_attr_allow_gate_description">Дозволити використання воріт</string>
-    <string name="routing_attr_allow_gate_name">Дозволити використання воріт</string>
+    <string name="routing_attr_allow_gate_description">Вважати, що ворота відкриті</string>
+    <string name="routing_attr_allow_gate_name">Вважати, що ворота відкриті</string>
     <string name="routing_attr_prefer_tactile_paving_description">Надавати перевагу тактильному покриттю</string>
     <string name="routing_attr_prefer_tactile_paving_name">Надавати перевагу тактильному покриттю</string>
     <string name="search_title">Пошук: %1$s</string>
@@ -4672,8 +4672,8 @@
     <string name="map_widget_trip_recording_distance">Відстань</string>
     <string name="routing_attr_hazmat_category_name">Категорія небезпеки</string>
     <string name="map_widget_true_bearing">Справжній азимут</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Сховати військові райони</string>
-    <string name="rendering_attr_hideMilitaryAreas_description">Сховати військові райони</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Не показувати військові обʼєкти</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Не показувати військові обʼєкти</string>
     <string name="explore_plans">Ознайомитися з тарифними планами</string>
     <string name="shared_string_mode">Режим</string>
     <string name="time_to_navigation_point_widget_settings_desc">Торкніться віджета, щоб змінити режими.</string>
@@ -4712,7 +4712,7 @@
     <string name="altitude_correction">Корекція висоти</string>
     <string name="updated_map_time">Оновлено: %1$s.</string>
     <string name="includes_osm_changes_until">Містить зміни з OSM, зроблені до %1$s.</string>
-    <string name="no_altitude_data_desc">Щоб отримати дані %1$s прикріпіть свій трек до доріг або обчисліть його онлайн.</string>
+    <string name="no_altitude_data_desc">Щоб отримати дані %1$s прикріпіть свій трек до доріг або побудуйте його онлайн.</string>
     <string name="calculate_online_altitude_descr">Отримуйте висоти онлайн з серверів OsmAnd на основі супутникових знімків та цифрових моделей висот. Розбіжність із записаною пристроєм висотою може бути використана для коригування висоти.</string>
     <string name="marker_2nd">Друга позначка</string>
     <string name="switch_widget_mode_desc">Перемикайте режим торкаючись віджета.</string>
@@ -4805,7 +4805,7 @@
     <string name="map_widget_zoom_level">Масштаб</string>
     <string name="map_widget_camera_tilt">Нахил камери</string>
     <string name="developer_widgets">Віджети розробника</string>
-    <string name="map_widget_target_distance_desc">Показує відстань між камерою і цільовим розташуванням.</string>
+    <string name="map_widget_target_distance_desc">Показує відстань між камерою і ціллю.</string>
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
     <string name="map_widget_zoom_level_desc">Показує поточний масштаб мапи.</string>
     <string name="external_sensor_widgets">Зовнішні датчики</string>
