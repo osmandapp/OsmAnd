@@ -4659,9 +4659,9 @@
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektrisch</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
-    <string name="co2_mission">CO2-Emission</string>
+    <string name="co2_mission">CO₂-Emission</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO2-Ausstoß zu berechnen.</string>
+    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO₂-Ausstoß zu berechnen.</string>
     <string name="routing_attr_motor_type_name">Kraftstoffverbrauch des Motors</string>
     <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
     <string name="compass_on_circles">Kompass auf Kreisen</string>
