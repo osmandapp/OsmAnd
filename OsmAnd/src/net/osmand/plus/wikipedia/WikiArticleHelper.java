@@ -13,6 +13,7 @@ import android.view.ContextThemeWrapper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
@@ -22,6 +23,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
@@ -283,11 +285,8 @@ public class WikiArticleHelper {
 		new AlertDialog.Builder(context)
 				.setTitle(url)
 				.setMessage(R.string.online_webpage_warning)
-				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						AndroidUtils.openUrl(context, Uri.parse(url), nightMode);
-					}
+				.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+					AndroidUtils.openUrl(context, Uri.parse(url), nightMode);
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
@@ -372,5 +371,19 @@ public class WikiArticleHelper {
 			System.err.println(e.getMessage());
 		}
 		return title;
+	}
+
+	public static void askShowArticle(
+			@NonNull FragmentActivity activity, boolean nightMode,
+			@NonNull LatLon latLon, @NonNull String text
+	) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		if (Version.isPaidVersion(app)) {
+			WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(activity, nightMode);
+			wikiArticleHelper.showWikiArticle(latLon, text);
+		} else {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			WikipediaArticleWikiLinkFragment.showInstance(fragmentManager, text);
+		}
 	}
 }
