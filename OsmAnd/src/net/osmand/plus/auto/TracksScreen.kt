@@ -66,7 +66,11 @@ class TracksScreen(
     private fun setupTracks(templateBuilder: PlaceListNavigationTemplate.Builder) {
         val latLon = app.mapViewTrackingUtilities.defaultLocation
         val listBuilder = ItemList.Builder()
+        var itemsCount = 0
         for (track in trackTab.trackItems) {
+            if (itemsCount == contentLimit) {
+                break
+            }
             val title = track.name
             val icon = CarIcon.Builder(
                 IconCompat.createWithResource(app, R.drawable.ic_action_polygom_dark))
@@ -95,6 +99,7 @@ class TracksScreen(
                 .addText(address)
                 .setOnClickListener { onClickTrack(track) }
                 .build())
+            itemsCount++
         }
         templateBuilder.setItemList(listBuilder.build())
     }
@@ -104,21 +109,6 @@ class TracksScreen(
         result.objectType = ObjectType.GPX_TRACK
         result.`object` = trackItem
         result.relatedObject = GPXInfo(trackItem.name, trackItem.file)
-        screenManager.pushForResult(
-            RoutePreviewScreen(carContext, settingsAction, surfaceRenderer, result)
-        ) { obj: Any? ->
-            if (obj != null) {
-                onRouteSelected()
-            }
-        }
-        finish()
-    }
-
-    private fun onRouteSelected() {
-        app.osmandMap.mapLayers.mapControlsLayer.startNavigation()
-        val session = app.carNavigationSession
-        if (session != null && session.hasStarted()) {
-            session.startNavigation()
-        }
+        openRoutePreview(settingsAction, surfaceRenderer, result)
     }
 }

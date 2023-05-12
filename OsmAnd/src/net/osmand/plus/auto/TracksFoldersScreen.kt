@@ -77,9 +77,13 @@ class TracksFoldersScreen(
             return
         }
         templateBuilder.setLoading(false)
+        var itemsCount = 1
         for (trackTab in selectedTracksHelper.trackTabs.values) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
+            }
+            if (itemsCount == contentLimit) {
+                break
             }
             val title = trackTab.getName(app, false)
             val iconColorId = ColorUtilities.getDefaultIconColorId(app.daynightHelper.isNightMode)
@@ -93,6 +97,7 @@ class TracksFoldersScreen(
                     .setBrowsable(true)
                     .setOnClickListener { onClickTabFolder(trackTab) }
                     .build())
+            itemsCount++
         }
         templateBuilder.setItemList(listBuilder.build())
     }

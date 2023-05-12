@@ -82,21 +82,6 @@ class POIScreen(
         result.location = LatLon(point.location.latitude, point.location.longitude)
         result.objectType = ObjectType.POI
         result.`object` = point.`object`
-        screenManager.pushForResult(
-            RoutePreviewScreen(carContext, settingsAction, surfaceRenderer, result)
-        ) { obj: Any? ->
-            if (obj != null) {
-                onRouteSelected(result)
-            }
-        }
-        finish()
-    }
-
-    private fun onRouteSelected(sr: SearchResult) {
-        app.osmandMap.mapLayers.mapControlsLayer.startNavigation()
-        val session = app.carNavigationSession
-        if (session != null && session.hasStarted()) {
-            session.startNavigation()
-        }
+        openRoutePreview(settingsAction, surfaceRenderer, result)
     }
 }

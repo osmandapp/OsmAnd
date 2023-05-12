@@ -94,24 +94,7 @@ class HistoryScreen(
             historyItem.searchResult.location.longitude)
         result.objectType = ObjectType.RECENT_OBJ
         result.`object` = historyItem.searchResult.`object`
-        screenManager.pushForResult(
-            RoutePreviewScreen(carContext, settingsAction, surfaceRenderer, result)
-        ) { obj: Any? ->
-            if (obj != null) {
-                onRouteSelected()
-            }
-        }
-        finish()
-    }
-
-    private fun onRouteSelected() {
-        app.osmandMap.mapLayers.mapControlsLayer.startNavigation()
-        val session = app.carNavigationSession
-        session?.let {
-            if (it.hasStarted()) {
-                session.startNavigation()
-            }
-        }
+        openRoutePreview(settingsAction, surfaceRenderer, result)
     }
 
     private fun openSearch() {

@@ -115,12 +115,7 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 
 	private void showResult(SearchResult sr) {
 		showResult = false;
-		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-				obj -> {
-					if (obj != null) {
-						onRouteSelected(sr);
-					}
-				});
+		openRoutePreview(settingsAction, surfaceRenderer, sr);
 	}
 
 	@Override
@@ -141,10 +136,5 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 			this.itemList = itemList;
 			invalidate();
 		}
-	}
-
-	private void onRouteSelected(@NonNull SearchResult sr) {
-		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
-		finish();
 	}
 }

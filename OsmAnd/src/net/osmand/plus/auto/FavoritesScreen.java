@@ -115,13 +115,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		result.objectType = ObjectType.FAVORITE;
 		result.object = point;
 		result.localeName = point.getAddress();
-		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, result),
-				obj -> {
-					if (obj != null) {
-						onRouteSelected(result);
-					}
-				});
-		finish();
+		openRoutePreview(settingsAction, surfaceRenderer, result);
 	}
 
 	@NonNull
@@ -129,14 +123,10 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		ArrayList<FavouritePoint> filteredFavorites = new ArrayList<>();
 		if (selectedGroup == null) {
 			filteredFavorites.addAll(getApp().getFavoritesHelper().getFavouritePoints());
-			Collections.sort(filteredFavorites, (left, right) -> Long.compare(right.getTimestamp(), left.getTimestamp()));
 		} else {
-			for (FavouritePoint point : getApp().getFavoritesHelper().getFavouritePoints()) {
-				if (getApp().getFavoritesHelper().getGroup(point) == selectedGroup) {
-					filteredFavorites.add(point);
-				}
-			}
+			filteredFavorites.addAll(selectedGroup.getPoints());
 		}
+		Collections.sort(filteredFavorites, (left, right) -> Long.compare(right.getTimestamp(), left.getTimestamp()));
 		return filteredFavorites;
 	}
 

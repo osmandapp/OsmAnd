@@ -171,12 +171,7 @@ public final class SearchScreen extends BaseOsmAndAndroidAutoSearchScreen implem
 
 	private void showResult(SearchResult sr) {
 		showResult = false;
-		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-				obj -> {
-					if (obj != null) {
-						onRouteSelected(sr);
-					}
-				});
+		openRoutePreview(settingsAction, surfaceRenderer, sr);
 	}
 
 	@Override
@@ -373,18 +368,16 @@ public final class SearchScreen extends BaseOsmAndAndroidAutoSearchScreen implem
 		routingHelper.onSettingsChanged(true);
 	}
 
-	private void onRouteSelected(@NonNull SearchResult sr) {
-		OsmandApplication app = getApp();
+	@Override
+	protected void onSearchResultSelected(@NonNull SearchResult sr) {
 		if (sr.objectType == ObjectType.ROUTE) {
-			ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
-			ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
+			ApplicationMode lastAppMode = getApp().getSettings().LAST_ROUTE_APPLICATION_MODE.get();
+			ApplicationMode currentAppMode = getApp().getRoutingHelper().getAppMode();
 			if (lastAppMode == ApplicationMode.DEFAULT) {
 				lastAppMode = currentAppMode;
 			}
 			updateApplicationMode(currentAppMode, lastAppMode);
-			app.getTargetPointsHelper().restoreTargetPoints(true);
+			getApp().getTargetPointsHelper().restoreTargetPoints(true);
 		}
-		app.getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
-		finish();
 	}
 }

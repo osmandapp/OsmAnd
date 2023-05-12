@@ -22,7 +22,11 @@ class MapMarkersScreen(
         val listBuilder = ItemList.Builder()
         val markers = app.mapMarkersHelper.mapMarkers
         val location = app.settings.lastKnownMapLocation
+        var itemsCount = 0
         for (marker in markers) {
+            if (itemsCount == contentLimit) {
+                break
+            }
             val title = marker.getName(app)
             val markerColor = MapMarker.getColorId(marker.colorIndex)
             val icon = CarIcon.Builder(
@@ -52,6 +56,7 @@ class MapMarkersScreen(
                                 location.longitude)).build()).build())
             }
             listBuilder.addItem(rowBuilder.build())
+            itemsCount++
         }
         val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
@@ -77,24 +82,7 @@ class MapMarkersScreen(
             mapMarker.point.longitude)
         result.objectType = ObjectType.MAP_MARKER
         result.`object` = mapMarker
-        screenManager.pushForResult(
-            RoutePreviewScreen(carContext, settingsAction, surfaceRenderer, result)
-        ) { obj: Any? ->
-            if (obj != null) {
-                onRouteSelected()
-            }
-        }
-        finish()
-    }
-
-    private fun onRouteSelected() {
-        app.osmandMap.mapLayers.mapControlsLayer.startNavigation()
-        val session = app.carNavigationSession
-        session?.let {
-            if (it.hasStarted()) {
-                session.startNavigation()
-            }
-        }
+        openRoutePreview(settingsAction, surfaceRenderer, result)
     }
 
     private fun openSearch() {
