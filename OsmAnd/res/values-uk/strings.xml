@@ -5203,17 +5203,17 @@
     <string name="number_of_tracks">%1$s треків</string>
     <string name="running_scds_device_name">Пристрій для бігу</string>
     <string name="bicycle_scd_device_name">Пристрій для велосипеда</string>
-    <string name="external_device_blood_pressure">Кров’яний тиск</string>
+    <string name="external_device_blood_pressure">Кровʼяний тиск</string>
     <string name="no_bt_permission">Дозвіл на використання Bluetooth не надано</string>
     <string name="beats_per_minute_short">уд/хв</string>
     <string name="shared_string_chest">Груди</string>
-    <string name="shared_string_wrist">Зап\'ястя</string>
+    <string name="shared_string_wrist">Запʼястя</string>
     <string name="shared_string_finger">Палець</string>
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_ear_lobe">Мочка вуха</string>
     <string name="shared_string_foot">Стопа</string>
-    <string name="device_disconnected">%1$s від\'єднано</string>
-    <string name="device_connected">%1$s під\'єднано</string>
+    <string name="device_disconnected">%1$s відʼєднано</string>
+    <string name="device_connected">%1$s підʼєднано</string>
     <string name="rendering_value_sector1_name">Сектор 1</string>
     <string name="rendering_attr_lightDetail_name">Світлові знаки</string>
     <string name="rendering_value_sector3_name">Сектор 3</string>
@@ -5223,4 +5223,5 @@
     <string name="rendering_value_sector5_name">Сектор 5</string>
     <string name="rendering_value_small_name">Маленька</string>
     <string name="rendering_value_name_only_name">Тільки назва</string>
+    <string name="rendering_attr_lightDetail_description">Типово: назва морського знака (light character.group.period), виберіть додаткову інформацію про сектори 1-3 або сектор 1,2,3,4,5 світлового знака</string>
 </resources>
