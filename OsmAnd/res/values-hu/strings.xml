@@ -5202,4 +5202,9 @@
     <string name="rendering_value_name_only_name">Csak név</string>
     <string name="rendering_value_sectors_name">Szektorok</string>
     <string name="rendering_value_small_name">Kicsi</string>
+    <string name="rendering_value_sector2_name">Szektor 2</string>
+    <string name="rendering_value_sector1_name">Szektor 1</string>
+    <string name="rendering_value_sector3_name">Szektor 3</string>
+    <string name="rendering_value_sector4_name">Szektor 4</string>
+    <string name="rendering_value_sector5_name">Szektor 5</string>
 </resources>
