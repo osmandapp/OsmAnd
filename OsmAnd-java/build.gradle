@@ -55,6 +55,17 @@ task collectTestResources(type: Copy) {
 }
 
 
+task processResources {
+	dependsOn collectRoutingResources,
+		collectRenderingStylesResources,
+		collectRegionsInfoResources,
+		collectMiscResources
+}
+
+task processTestResources {
+	dependsOn collectTestResources
+}
+
 task collectExternalResources {
 	dependsOn collectRoutingResources,
 		collectRenderingStylesResources,
