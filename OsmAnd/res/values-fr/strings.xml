@@ -2298,7 +2298,7 @@
     <string name="hide_from_zoom_level">Masquer à partir du niveau de zoom</string>
     <string name="hillshade_menu_download_descr">Téléchargez la sur-couche \'Ombrage du relief\' pour mieux visualiser le relief.</string>
     <string name="quick_action_showhide_osmbugs_descr">Bouton pour afficher ou masquer les notes OSM sur la carte.</string>
-    <string name="sorted_by_distance">Trier par distance</string>
+    <string name="sorted_by_distance">Triés par distance</string>
     <string name="search_favorites">Rechercher dans les favoris</string>
     <string name="restart_search">Relancer la recherche</string>
     <string name="nothing_found">Aucun résultat</string>
