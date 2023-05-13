@@ -3798,7 +3798,7 @@
 \nВи можете скасувати підписку в будь-який момент. Керуйте своїми підписками в налаштуваннях AppGallery.</string>
     <string name="use_live_routing">Дані OsmAnd Live</string>
     <string name="complex_routing_descr">Двоступеневе створення маршруту для автомобільної навігації.</string>
-    <string name="use_native_pt">Розвиток власного громадського транспорту</string>
+    <string name="use_native_pt">Нативні функції під час розрахунку громадського транспорту</string>
     <string name="use_native_pt_desc">Перемкнутися на прокладання маршрутів для громадського транспорту за допомогою Java (безпечно)</string>
     <string name="perform_oauth_authorization_description">Увійти за допомогою OAuth для користування функцією osmedit</string>
     <string name="perform_oauth_authorization">Увійти через OAuth</string>
