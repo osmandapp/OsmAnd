@@ -4341,7 +4341,6 @@
     <string name="poi_dog">Psi</string>
     <string name="poi_dog_leashed">Psi: samo na povodcu</string>
     <string name="poi_dog_unleashed">Psi: ni jih treba imeti na povodcu</string>
-    <string name="poi_playground_type">Vrsta igrišča</string>
     <string name="poi_playground_slide">Tobogan</string>
     <string name="poi_playground_balancebeam">Ravnotežna gred</string>
     <string name="poi_playground_playhouse">Igralnica</string>
@@ -4380,7 +4379,6 @@
     <string name="poi_climbing_grade_filter">Plezalna ocena</string>
     <string name="poi_climbing_bolt">Plezalni svedrovec</string>
     <string name="poi_climbing_bolts_filter">Plezalni svedrovci</string>
-    <string name="poi_climbing_bolted_filter">S sidrišči</string>
     <string name="poi_climbing_rock_basalt">Plezalna kamnina: bazalt</string>
     <string name="poi_climbing_rock_conglomerate">Plezalna kamnina: konglomerat</string>
     <string name="poi_climbing_rock_gritstone">Plezalna kamnina: silicijev peščenjak</string>
@@ -4415,11 +4413,9 @@
     <string name="poi_socket_type2_cable_output_filter">Izhod s kabelskim priključkom Type 2</string>
     <string name="poi_socket_type3c_output_filter">Izhod s priključkom Type 3c</string>
     <string name="poi_socket_type2_cable_output">Vtičnica: Type 2 kabel: izhod</string>
-    <string name="poi_socket_type3a">Type 3a izhod</string>
     <string name="poi_socket_type3a_current">Vtičnica: Type 3a: tok</string>
     <string name="poi_socket_type3a_output">Vtičnica: Type 3a: izhod</string>
     <string name="poi_socket_type3a_voltage">Vtičnica: Type 3a: napetost</string>
-    <string name="poi_socket_type3c">Type 3c izhod</string>
     <string name="poi_socket_type3c_current">Vtičnica: Type 3c: tok</string>
     <string name="poi_socket_type3c_output">Vtičnica: Type 3c: izhod</string>
     <string name="poi_socket_cee_blue_voltage">Vtičnica: CEE modra: napetost</string>

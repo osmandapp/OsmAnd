@@ -589,7 +589,6 @@
     <string name="save_changes_into_file">Enregistrar lei modificacions dins un fichier</string>
     <string name="gps_filter_actions_description">OsmAnd aplica lei modificacions a la traça sensa enregistrar dins lo fichier. Podètz enregistrar lei modificacions a la man.</string>
     <string name="storage_migration_wrong_folder_warning">Trobam pas de donadas OsmAnd dins lo dorsier chausit. Recomençatz.</string>
-    <string name="ltr_or_rtl_combine">%1$s 2%2$s</string>
     <string name="shared_storage">Memorizacion partejada</string>
     <string name="shared_string_migration">Migracion</string>
     <string name="icon_group_education">Educacion</string>
@@ -926,7 +925,6 @@
     <string name="srtm_plugin_name">Corbas de nivèu</string>
     <string name="stop_navigation_service">Arrèst</string>
     <string name="osmand_short_description_80_chars">Visualizacion e navigacion dei mapas mondialas mobilas OSM</string>
-    <string name="index_settings">Gestion de fichiers de mapas</string>
     <string name="general_settings">Paramètres generaus</string>
     <string name="general_settings_descr">Configuratz lei paramètres generaus e de visualizacion de l\'aplicacion.</string>
     <string name="global_app_settings">Paramètres globaus de l\'aplicacion</string>

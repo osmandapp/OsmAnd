@@ -72,10 +72,11 @@ public class AntBikeSpeedDistanceDevice extends AntAbstractDevice<AntPlusBikeSpe
 	}
 
 	@Override
-	public void disconnect() {
-		super.disconnect();
+	public boolean disconnect() {
+		boolean res = super.disconnect();
 		if (spdCadDevice != null) {
-			spdCadDevice.disconnect();
+			res |= spdCadDevice.disconnect();
 		}
+		return res;
 	}
 }

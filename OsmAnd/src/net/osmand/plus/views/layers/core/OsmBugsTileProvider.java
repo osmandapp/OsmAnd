@@ -259,6 +259,11 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	}
 
 	@Override
+	public boolean supportsNaturalObtainDataAsync() {
+		return true;
+	}
+
+	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
 		return MapMarker.PinIconVerticalAlignment.Top;
 	}

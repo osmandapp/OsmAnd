@@ -698,7 +698,6 @@
     <string name="general_settings">Opće postavke</string>
     <string name="general_settings_descr">Definiraj opće postavke</string>
     <string name="routing_settings_descr">Odredite mogućnosti za navigaciju</string>
-    <string name="index_settings">Upravljanje podacima</string>
     <string name="routing_settings">Navigacija</string>
     <string name="settings_preset_descr">Odaberite korisnički profil s već prilagođenim kartama i navigacijskim postavkama.</string>
     <string name="settings_preset">Korisnički profil</string>

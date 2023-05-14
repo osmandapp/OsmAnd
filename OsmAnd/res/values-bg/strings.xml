@@ -490,7 +490,6 @@
     <string name="routing_settings">Навигация</string>
     <string name="routing_settings_descr">Настройки за навигацията</string>
     <string name="global_settings">Общи настройки</string>
-    <string name="index_settings">Управление на карти</string>
     <string name="general_settings">Общи настройки</string>
     <string name="general_settings_descr">Настройване на екрана и общите настройки на приложението</string>
     <string name="global_app_settings">Общи настройки на приложението</string>
@@ -2358,7 +2357,6 @@
     <string name="restore_selected_data">Възстановяване на избраните данни</string>
     <string name="receiving_data_from_server">Получаване на данни от сървъра …</string>
     <string name="restore_complete">Възстановено</string>
-    <string name="grey_color_slope">Сивият цвят се използва, когато наклонът е неопределен.</string>
     <string name="backup_version_history">История на версиите</string>
     <string name="backup_storage_taken">Заето място за съхранение</string>
     <string name="delete_version_history">Изтриване на историята на версиите</string>

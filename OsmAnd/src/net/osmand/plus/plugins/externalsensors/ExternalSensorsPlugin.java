@@ -108,6 +108,11 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		return devicesHelper.getPairedDevices();
 	}
 
+	@NonNull
+	public List<AbstractDevice<?>> getUnpairedDevices() {
+		return devicesHelper.getUnpairedDevices();
+	}
+
 	@Nullable
 	public AbstractDevice<?> getDevice(@NonNull String deviceId) {
 		return devicesHelper.getDevice(deviceId);
@@ -254,14 +259,14 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		if (isDevicePaired(device)) {
 			devicesHelper.setDeviceEnabled(device, true);
 		}
-		device.connect(app, activity);
+		devicesHelper.connectDevice(activity, device);
 	}
 
 	public void disconnectDevice(@NonNull AbstractDevice<?> device) {
 		if (isDevicePaired(device)) {
 			devicesHelper.setDeviceEnabled(device, false);
 		}
-		device.disconnect();
+		devicesHelper.disconnectDevice(device);
 	}
 
 	@Nullable

@@ -164,6 +164,11 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    }
 
    @Override
+   public boolean supportsNaturalObtainDataAsync() {
+      return false;
+   }
+
+   @Override
    public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
       return MapMarker.PinIconVerticalAlignment.CenterVertical;
    }
