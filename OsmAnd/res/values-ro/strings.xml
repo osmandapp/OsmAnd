@@ -335,7 +335,6 @@
     <string name="routing_settings">Navigare (funcție de profil)</string>
     <string name="routing_settings_descr">Precizați opțiunile de navigare.</string>
     <string name="global_settings">Setări globale</string>
-    <string name="index_settings">Organizează fișierele cu hărți</string>
     <string name="general_settings">Setări generale</string>
     <string name="general_settings_descr">Configurați afișajul și setările comune pentru aplicație.</string>
     <string name="global_app_settings">Setări globale aplicație</string>
@@ -2967,7 +2966,6 @@
     <string name="restore_selected_data">Restaurați datele selectate</string>
     <string name="receiving_data_from_server">Se primesc datele de la server…</string>
     <string name="restore_complete">Restaurat</string>
-    <string name="grey_color_slope">Culoarea gri este utilizată atunci când panta este nedefinită.</string>
     <string name="backup_version_history">Istoricul versiunii</string>
     <string name="backup_storage_taken">Depozit luat</string>
     <string name="backup_version_history_delete_descr">Ștergeți toate datele pentru tipurile de date depreciate din OsmAnd Cloud\?</string>
@@ -2985,7 +2983,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obțineți descărcări nelimitate pentru toate hărțile offline ale continentelor și regiunilor.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obțineți acces la actualizări lunare regulate pentru hărțile offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obțineți acces la actualizări mai frecvente ale hărților. Actualizări din oră în oră, zilnic sau săptămânal. Actualizările sunt descărcate incremental, numai pentru zona modificată.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Obțineți acces la widget-uri OsmAnd avansate.</string>
     <string name="purchases_feature_desc_osmand_cloud">Obțineți OsmAnd Cloud pentru a stoca online toate datele OsmAnd. Fără date pierdute după reinstalare. Faceți copii de rezervă și restaurați toate informațiile cu ușurință.</string>
     <string name="unlimited_map_downloads">Descărcări nelimitate de hărți</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia și Wikivoyage offline</string>
@@ -2994,7 +2991,6 @@
     <string name="offline_wikivoyage">Wikivoyage offline</string>
     <string name="terrain_maps">Hărți de teren</string>
     <string name="nautical_depth">Adâncimea nautică</string>
-    <string name="advanced_widgets">Widget-uri avansate</string>
     <string name="you_can_get_feature_as_part_of_pattern">Obțineți \"%1$s\" ca parte a planului %2$s. Comparație:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s sau %2$s</string>
     <string name="continue_with">Continuați cu %1$s</string>
@@ -3273,8 +3269,6 @@
     <string name="copy_poi_name">Copiați numele POI</string>
     <string name="quick_action_show_hide_title">Afișați / ascundeți</string>
     <string name="shared_string_interval">Intervalul</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ascundeți limitele rezervațiilor naturale, ale zonelor protejate și ale parcurilor naționale.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limite naturale</string>
     <string name="track_has_no_altitude">Track-ul nu conține date de altitudine.</string>
     <string name="track_has_no_speed">Track-ul nu conține date privind viteza.</string>
     <string name="select_another_colorization">Vă rugăm să selectați un alt tip de colorare.</string>
@@ -4249,7 +4243,6 @@
 \n - Opțiunea de înregistrare GPX vă permite să vă înregistrați călătoria și să o partajați
 \n - Prin intermediul unui plugin suplimentar, puteți activa liniile de contur și umbrirea dealurilor</string>
     <string name="option_available_only_in_osmand_pro">Disponibil ca parte a abonamentului OsmAnd Pro.</string>
-    <string name="pro_widgets">Widget-uri Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Obțineți acces la caracteristicile OsmAnd Pro: Colorarea traseelor și multe altele.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorați planurile OsmAnd pentru a găsi unul potrivit pentru dumneavoastră.</string>
     <string name="routes_color_by_type">Colorează rutele după…</string>
@@ -4976,8 +4969,6 @@
     <string name="quick_action_air_pressure_layer">Un comutator pentru a afișa sau ascunde stratul de presiune atmosferică pe hartă.</string>
     <string name="rendering_attr_showMtbScale_name">Afișați scara MTB</string>
     <string name="rendering_attr_showMtbScale_description">Afișați traseele în funcție de scara lor MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Arată scara MTB în urcare</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Afișați traseele în funcție de scara de urcare a MTB.</string>
     <string name="mtb_segment_classification">Clasificare segment</string>
     <string name="mtb_scale">Scala MTB</string>
     <string name="mtb_imba">IMBA</string>

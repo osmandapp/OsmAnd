@@ -326,7 +326,6 @@
     <string name="routing_settings">導航</string>
     <string name="routing_settings_descr">為導航指定選項。</string>
     <string name="global_settings">整體設定</string>
-    <string name="index_settings">管理地圖檔案</string>
     <string name="general_settings">一般設定</string>
     <string name="general_settings_descr">設定應用程式顯示和共通設定。</string>
     <string name="global_app_settings">整體程式設定</string>
@@ -4011,8 +4010,6 @@
     <string name="track_has_no_altitude">軌跡不包含海拔資料。</string>
     <string name="track_has_no_speed">軌跡不包含速度資料。</string>
     <string name="select_another_colorization">請選擇另一種顏色。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">自然界線</string>
     <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的資料。</string>
     <string name="trip_recording_save_and_continue">儲存並繼續</string>
     <string name="lost_data_warning">所有未儲存的資料都將會遺失。</string>
@@ -4242,7 +4239,6 @@
     <string name="promo_subscription">促銷訂閱</string>
     <string name="track_has_no_needed_data">軌跡遺失對應的資料。</string>
     <string name="option_available_only_in_osmand_pro">作為 OsmAnd Pro 訂閱的一部分提供。</string>
-    <string name="pro_widgets">Pro 小工具</string>
     <string name="purchases_feature_desc_pro_widgets">存取 OsmAnd Pro 功能：路線著色等。</string>
     <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 方案以找到適合您的。</string>
     <string name="routes_color_by_type">使用……為路線著色</string>
@@ -4455,7 +4451,6 @@
     <string name="gps_filter_actions_description">OsmAnd 將套用變更至軌跡而不更新檔案。您可以手動儲存變更。</string>
     <string name="shared_string_gps_filter">GPS 過濾條件</string>
     <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_precision">精確</string>
     <string name="shared_string_statistics">統計</string>
     <string name="shared_string_size">大小</string>
@@ -4815,7 +4810,6 @@
     <string name="worldwide_maps">世界地圖</string>
     <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
     <string name="shared_string_cross_buy">跨平台購買</string>
-    <string name="map_widget_fps_info">地圖繪製 FPS（每秒畫面）</string>
     <string name="map_widget_target_distance">地圖視角至目標的距離</string>
     <string name="favorites_backup">收藏備份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台上免費使用您的訂閱功能（Android/iOS/網頁版）。</string>
@@ -4963,8 +4957,6 @@
     <string name="cloud_layer">雲層圖層</string>
     <string name="rendering_attr_showMtbScale_name">顯示山地自行車比例</string>
     <string name="rendering_attr_showMtbScale_description">根據山地自行車比例顯示路徑。</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">顯示山地自行車比例上坡</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">根據山地自行車上坡比例顯示路徑。</string>
     <string name="mtb_scale">山地自行車比例</string>
     <string name="mtb_imba">國際山地自行車協會</string>
     <string name="mtb_imba_full">國際山地自行車協會</string>

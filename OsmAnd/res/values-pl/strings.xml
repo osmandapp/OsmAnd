@@ -214,7 +214,6 @@
     <string name="general_settings_descr">Skonfiguruj wyświetlanie i wspólne ustawienia dla aplikacji.</string>
     <string name="general_settings">Ogólne</string>
     <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu.</string>
-    <string name="index_settings">Zarządzaj plikami map</string>
     <string name="osmand_service">Tryb tła</string>
     <string name="osmand_service_descr">OsmAnd działa w tle z wyłączonym ekranem.</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
@@ -3983,7 +3982,6 @@
     <string name="temporary_conditional_routing_descr">Użyj ograniczeń drogowych, które są aktywne w danej chwili na mapie</string>
     <string name="routing_attr_short_way_description">Zoptymalizowana krótsza trasa (oszczędność energii)</string>
     <string name="routing_attr_driving_style_description">Wybierz cel jazdy, aby wyznaczyć krótszą, szybszą lub bezpieczniejszą trasę</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ukryj granice rezerwatów przyrody, obszarów chronionych i parków narodowych.</string>
     <string name="contact_support_description">W razie jakichkolwiek pytań prosimy o kontakt pod adresem %1$s.</string>
     <string name="empty_purchases_description">Jeśli Twoje zakupy nie są tutaj widoczne, dotknij \"%1$s\" lub skontaktuj się z naszym zespołem wsparcia.</string>
     <string name="snap_to_road_descr">Ikona aktualnej lokalizacji zostanie przyciągnięta do bieżącej trasy nawigacji</string>
@@ -4022,7 +4020,6 @@
     <string name="routing_attr_height_obstacles_description">Przewidywany czas podróży będzie odzwierciedlał wpływ wysokości. Preferencje dotyczące trasy mogą pomóc uniknąć stromych podjazdów:</string>
     <string name="select_another_colorization">Wybierz inny rodzaj kolorystyki.</string>
     <string name="shared_string_interval">Interwał</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturalne granice</string>
     <string name="track_has_no_altitude">Trasa nie zawiera danych dotyczących wysokości.</string>
     <string name="track_has_no_speed">Trasa nie zawiera danych dotyczących prędkości.</string>
     <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres czasu, w którym OsmAnd będzie żądał danych o aktualnej pozycji.</string>
@@ -4249,7 +4246,6 @@
     <string name="promo_subscription">Subskrypcja promocyjna</string>
     <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
     <string name="option_available_only_in_osmand_pro">Dostępne w ramach subskrypcji OsmAnd Pro.</string>
-    <string name="pro_widgets">Widżety Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro: Kolorowanie tras i nie tylko.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiedni dla Ciebie.</string>
     <string name="travel_routes">Trasy podróży</string>

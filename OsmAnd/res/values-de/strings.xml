@@ -307,7 +307,6 @@
     <string name="routing_settings_2">Navigationseinstellungen</string>
     <string name="routing_settings_descr">Optionen für die Navigation festlegen.</string>
     <string name="global_settings">Globale Einstellungen</string>
-    <string name="index_settings">Kartenverwaltung</string>
     <string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien.</string>
     <string name="general_settings">Allgemein</string>
     <string name="general_settings_2">Allgemeine Einstellungen</string>
@@ -4026,8 +4025,6 @@
     <string name="update_frequency">Aktualisierungsintervall</string>
     <string name="live_update_delete_updates_msg">Alle %s Live-Updates löschen\?</string>
     <string name="select_category_descr">Kategorie auswählen oder eine neue hinzufügen</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
     <string name="trip_recording_save_and_continue">Speichern und fortfahren</string>
     <string name="lost_data_warning">Alle nicht gespeicherten Daten gehen verloren.</string>
     <string name="show_start_dialog">Startdialog anzeigen</string>
@@ -4473,7 +4470,6 @@
     <string name="gps_filter_actions_description">OsmAnd wendet die Änderungen auf den Track an, ohne die Datei zu aktualisieren. Sie können die Änderungen manuell speichern.</string>
     <string name="shared_string_gps_filter">GPS-Filter</string>
     <string name="storage_migration_wrong_folder_warning">Keine OsmAnd-Daten im ausgewählten Ordner gefunden. Bitte versuchen Sie es erneut.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="use_routing_fallback_description">Offline-Routenführung verwenden, wenn Online-Routenführung nicht erreichbar ist.</string>
     <string name="use_routing_fallback">Alternativ Offline-Routenführung nutzen</string>
     <string name="created_on">Erstellt am</string>
@@ -4975,8 +4971,6 @@
     <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
     <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
     <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">MTB-Skala aufwärts anzeigen</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Wege nach MTB-Skala aufwärts anzeigen.</string>
     <string name="mtb_scale">MTB-Skala</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Abschnittsklassifizierung</string>
@@ -5047,12 +5041,8 @@
     <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
     <string name="shared_string_kilograms">Kilogramm</string>
     <string name="shared_string_yards">Yards</string>
-    <string name="default_tracks_appearance_description">Diese Erscheinungsbild-Einstellungen werden auf alle im vorherigen Bildschirm ausgewählten Titel angewendet.
-\n
-\nSie werden auch als \"%1$s\" gespeichert, um von %2$s für alle anderen Spuren ohne implizites oder spezifisch eingestelltes Aussehen angewendet zu werden.</string>
     <string name="recently_visible">Kürzlich sichtbar %1$s</string>
     <string name="empty_tracks_description">Sie können mit OsmAnd Trackdateien importieren, erstellen oder aufzeichnen.</string>
-    <string name="default_tracks_appearance">Standarddarstellung des Tracks</string>
     <string name="no_visible_tracks_description">Wählen Sie Tracks, um sie auf der Karte anzuzeigen.</string>
     <string name="empty_tracks">Sie haben keine Trackdateien.</string>
     <string name="no_visible_tracks">Keine Tracks auf der Karte</string>

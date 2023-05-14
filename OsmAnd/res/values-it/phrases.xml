@@ -2312,11 +2312,9 @@
     <string name="poi_operational_status_needs_maintenance">Necessità di manutenzione</string>
     <string name="poi_water_supply_pump">Pompa</string>
     <string name="poi_socket_schuko">Presa: Schuko</string>
-    <string name="poi_car_yes">Auto: sì</string>
     <string name="poi_car_no">Auto: no</string>
     <string name="poi_bicycle_yes">Bicicletta: sì</string>
     <string name="poi_bicycle_no">Bicicletta: no</string>
-    <string name="poi_truck_yes">Camion: sì</string>
     <string name="poi_truck_no">Camion: no</string>
     <string name="poi_parking_fee_yes">Sì</string>
     <string name="poi_parking_fee_no">No</string>

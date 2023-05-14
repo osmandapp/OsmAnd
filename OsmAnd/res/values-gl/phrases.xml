@@ -2044,9 +2044,7 @@
     <string name="poi_boat_dinghy_rental_yes">Botes: si</string>
     <string name="poi_boat_kayak_rental_yes">Caiaques: si</string>
     <string name="poi_boat_canoe_rental_yes">Canoas: si</string>
-    <string name="poi_car_yes">Automóbil: si</string>
     <string name="poi_scooter_yes">Scooter: si</string>
-    <string name="poi_truck_yes">Camións: si</string>
     <string name="poi_climbing_sport_yes">Deporte: si</string>
     <string name="poi_climbing_boulder_yes">Búlder: si</string>
     <string name="poi_climbing_toprope_yes">Moulinette: si</string>

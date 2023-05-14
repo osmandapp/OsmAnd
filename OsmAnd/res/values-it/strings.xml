@@ -31,7 +31,6 @@
     <string name="routing_settings">Navigazione</string>
     <string name="routing_settings_descr">Specifica le opzioni di navigazione.</string>
     <string name="global_settings">Impostazioni globali</string>
-    <string name="index_settings">Gestisci i file delle mappe</string>
     <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo.</string>
     <string name="general_settings">Impostazioni generali</string>
     <string name="general_settings_descr">Configura schermo e le impostazioni globali dell\'app.</string>
@@ -4005,8 +4004,6 @@
     <string name="copy_poi_name">Copia il nome del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/nascondi</string>
     <string name="shared_string_interval">Intervallo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Nascondi i confini delle riserve naturali, delle aree protette e dei parchi naturali.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Confini naturali</string>
     <string name="track_has_no_altitude">La traccia non contiene i dati di altitudine.</string>
     <string name="track_has_no_speed">La traccia non contiene i dati di velocità.</string>
     <string name="select_another_colorization">Prego selezionare un altro tipo di colorazione.</string>
@@ -4251,7 +4248,6 @@
     <string name="backup_storage_taken">Memoria occupata</string>
     <string name="backup_version_history_delete_descr">Eliminare il registro delle modifiche per i tipi di dati deprecati da OsmAnd Cloud\?</string>
     <string name="send_logcat_log">Invia registro di log</string>
-    <string name="grey_color_slope">Il colore grigio è utilizzato quando la pendenza non è definita.</string>
     <string name="delete_version_history">Cancella la cronologia delle versioni</string>
     <string name="routing_attr_avoid_tunnels_description">Evita i tunnel</string>
     <string name="routing_attr_avoid_tunnels_name">Evita i tunnel</string>

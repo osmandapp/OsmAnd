@@ -52,7 +52,6 @@
     <string name="routing_settings">Navigation</string>
     <string name="routing_settings_descr">Paramétrer les options de guidage.</string>
     <string name="global_settings">Paramètres globaux</string>
-    <string name="index_settings">Gérer les données hors-ligne</string>
     <string name="index_settings_descr">Télécharger ou mettre à jour les données pour l\'utilisation hors-ligne.</string>
     <string name="general_settings">Général</string>
     <string name="general_settings_descr">Configurer l\'affichage et les paramètres généraux de l\'application.</string>
@@ -4013,8 +4012,6 @@
     <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
     <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
     <string name="routing_attr_short_way_description">Itinéraire court optimisé (plus économe en énergie)</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionner un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
@@ -4232,7 +4229,6 @@
     <string name="direct_line_maps_required_descr">Le calcul d\'itinéraire est plus long que d\'habitude.
 \n
 \nPeut-être que certaines cartes sont absentes.</string>
-    <string name="pro_widgets">Widgets Pro</string>
     <string name="routes_color_by_type">Colorer les itinéraires selon…</string>
     <string name="shared_string_relation">Relation</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Colorer selon l\'affiliation au réseau.</string>
@@ -4455,7 +4451,6 @@
     <string name="save_changes_into_file">Enregistrer les modifications dans le fichier</string>
     <string name="save_as_copy">Enregistrer comme copie</string>
     <string name="shared_string_gps_filter">Filtre GPS</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="distance_between_points">Distance entre les points</string>
     <string name="shared_string_precision">Précision</string>
     <string name="gps_filter_speed_altitude_desc">Seuls les points correspondant à l\'intervalle défini apparaîtront sur la carte et le graphique, les autres points de la trace seront masqués.</string>

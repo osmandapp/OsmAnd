@@ -117,7 +117,6 @@
     <string name="routing_settings">Navigācija</string>
     <string name="routing_settings_descr">Mainīt maršruta iestatījumus</string>
     <string name="global_settings">Globālie iestatījumi</string>
-    <string name="index_settings">Kartes faili</string>
     <string name="index_settings_descr">Lejupielādēt un pārvaldīt bezsaistes kartes failus, kas saglabāti jūsu ierīcē.</string>
     <string name="general_settings">Vispārīgie iestatījumi</string>
     <string name="general_settings_descr">Mainīt lietotnes iestatījumus.</string>

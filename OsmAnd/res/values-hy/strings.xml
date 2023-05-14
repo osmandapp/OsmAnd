@@ -1835,7 +1835,6 @@
     <string name="routing_settings">Նավիգացիա</string>
     <string name="routing_settings_descr">Նշեք նավարկության ընտրանքները։</string>
     <string name="global_settings">Ընդհանուր «Կարգավորումներ»</string>
-    <string name="index_settings">Քարտեզների կառավարում</string>
     <string name="general_settings">Ընդհանուր</string>
     <string name="general_settings_descr">Էկրանի պարամետրերը, տեղայնացում, միավորներ և այլն։</string>
     <string name="global_app_settings">Հավելվածի ընդհանուր կարգավորումները</string>

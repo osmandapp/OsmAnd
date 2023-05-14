@@ -784,7 +784,6 @@
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Especificar as opcións para a navegación.</string>
     <string name="global_settings">Axustes globais</string>
-    <string name="index_settings">Xestionar os ficheiros de mapas</string>
     <string name="general_settings">Xeral</string>
     <string name="general_settings_descr">Configurar a pantalla e os axustes globais da aplicación.</string>
     <string name="global_app_settings">Axustes globais da aplicación</string>
@@ -3999,7 +3998,6 @@ Lon %2$s</string>
     <string name="copy_poi_name">Copiar nome do PDI</string>
     <string name="quick_action_show_hide_title">Amosar/Agochar</string>
     <string name="shared_string_interval">Intre</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Espazos naturais</string>
     <string name="track_has_no_altitude">A pista non contén datos de altitude.</string>
     <string name="track_has_no_speed">A pista non contén datos de velocidade.</string>
     <string name="select_another_colorization">Escolle outro tipo de cor.</string>
@@ -4022,7 +4020,6 @@ Lon %2$s</string>
     <string name="temporary_conditional_routing_descr">Empregar as restricións de estrada que están activas agora no mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada máis curta (baixo consumo)</string>
     <string name="routing_attr_driving_style_description">Escolle o propósito da condución para obter unha ruta máis curta, máis rápida ou máis segura</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Agochar reservas naturais, áreas protexidas e de parques nacionais.</string>
     <string name="release_4_0_beta">• Engadiuse a opción para baixar as curvas de nivel en pés.
 \n
 \n• Paisaxe do plan de ruta: engadíronse lapelas para alternar entre puntos ou gráficos
