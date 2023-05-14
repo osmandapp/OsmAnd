@@ -1032,8 +1032,6 @@
     <string name="track_recording_will_be_continued">Perekaman akan dilanjutkan.</string>
     <string name="copy_poi_name">Salin nama POI</string>
     <string name="quick_action_show_hide_title">Tampilkan/sembunyikan</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Sembunyikan batasan cagar alam, kawasan lindung, dan taman nasional.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Batasan alam</string>
     <string name="trip_recording_save_and_continue">Simpan dan lanjut</string>
     <string name="lost_data_warning">Seluruh data yang tidak disimpan akan hilang.</string>
     <string name="trip_recording_show_start_dialog_setting">Jika dinonaktifkan, perekaman akan dimulai tepat setelah mengetuk widget atau item menu, tanpa dialog konfirmasi.</string>
@@ -1331,7 +1329,6 @@
     <string name="global_app_settings">Pengaturan global aplikasi</string>
     <string name="general_settings_descr">Siapkan tampilan dan pengaturan umum untuk aplikasi.</string>
     <string name="general_settings">Umum</string>
-    <string name="index_settings">Kelola berkas-berkas peta</string>
     <string name="global_settings">Pengaturan Global</string>
     <string name="routing_settings_descr">Tetapkan pilihan untuk navigasi.</string>
     <string name="routing_settings">Navigasi</string>
@@ -4973,8 +4970,6 @@
 \n
 \nSilakan mendukung peningkatan dengan menyediakan catatan kesalahan Anda.</string>
     <string name="rendering_attr_showMtbScale_description">Tampilkan trek berdasarkan skala MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Tampilkan skala naik MTB</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Tampilkan jalur menurut skala naik MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Tampilkan skala MTB</string>
     <string name="mtb_scale">Skala MTB</string>
     <string name="mtb_imba">iMBA</string>

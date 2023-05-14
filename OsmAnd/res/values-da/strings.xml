@@ -375,7 +375,6 @@
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
     <string name="routing_settings_descr">Indstillinger for navigation.</string>
     <string name="global_settings">Globale indstillinger</string>
-    <string name="index_settings">Administrer kortfiler</string>
     <string name="general_settings">Generelt</string>
     <string name="general_settings_descr">Konfigurer visning og generelle indstillinger.</string>
     <string name="global_app_settings">Globale app-indstillinger</string>
@@ -3849,8 +3848,6 @@
     <string name="on_pause">På pause</string>
     <string name="map_widget_distance_by_tap">Afstand ved tryk</string>
     <string name="live_update_delete_updates_msg">Slet alle %s liveopdateringer\?</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul afgrænsninger for naturreservater, beskyttede områder og nationalparker.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrænser</string>
     <string name="trip_recording_logging_interval_info">Logningsintervallet angiver den tidsperiode, hvor OsmAnd anmoder om de aktuelle positionsdata.</string>
     <string name="trip_recording_save_and_continue">Gem og fortsæt</string>
     <string name="lost_data_warning">Alle ikke-gemte data går tabt.</string>
@@ -4460,7 +4457,6 @@
     <string name="gps_filter_precision">GPS-præcision</string>
     <string name="gps_filter_smoothing">Udjævning</string>
     <string name="save_as_copy">Gem som kopi</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_actions_description">OsmAnd vil anvende ændringerne på sporet uden at opdatere filen. Du kan gemme ændringer manuelt.</string>
     <string name="gps_filter_smoothing_desc">Indstil afstandsgrænsen mellem punkter.
 \nSporpunkter, der er ikke er mindst denne afstand fra det sidste synlige punkt, skjules.
@@ -4975,8 +4971,6 @@
     <string name="cloud_layer">Skylag</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="rendering_attr_showMtbScale_description">Vis spor efter deres MTB-skala.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Vis MTB-skala op ad bakke</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>

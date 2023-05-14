@@ -1294,7 +1294,6 @@
     <string name="first_time_msg">Thank you for using OsmAnd. Download regional data for offline use via \'Settings\' → \'Manage map files\' to view maps, locate addresses, look up POIs, find public transport and more.</string>
     <string name="local_openstreetmap_uploadall">Upload all</string>
     <string name="local_openstreetmap_settings">OSM- POIs/-notes saved on device</string>
-    <string name="index_settings">Manage map files</string>
     <string name="local_index_mi_upload_gpx">Unviar a OSM</string>
     <string name="reading_cached_tiles">Lleendo les teseles de la caché…</string>
     <string name="reading_indexes">Reading local data…</string>
@@ -3819,8 +3818,6 @@
     <string name="copy_poi_name">Copiar el nome del PdI</string>
     <string name="quick_action_show_hide_title">Amosar/anubrir</string>
     <string name="shared_string_interval">Intervalu</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas, and national park boundaries.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="select_another_colorization">Please select another type of coloring.</string>

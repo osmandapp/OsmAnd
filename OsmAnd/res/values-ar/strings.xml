@@ -468,7 +468,6 @@
     <string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
     <string name="routing_settings">التوجيه مع الطرق</string>
     <string name="routing_settings_descr">حدد خيارات للتنقل.</string>
-    <string name="index_settings">إدارة بيانات الخرائط</string>
     <string name="general_settings">إعدادات عامة</string>
     <string name="general_settings_descr">قم بإعداد العرض والإعدادات العامة للتطبيق.</string>
     <string name="open_street_map_login_descr">مطلوب للمساهمة في Open Street Map (Osm).</string>
@@ -4087,8 +4086,6 @@
     <string name="shared_string_interval">الفاصل الزمني</string>
     <string name="track_has_no_altitude">لا يحتوي المسار على بيانات الارتفاع.</string>
     <string name="track_has_no_speed">لا يحتوي المسار على بيانات السرعة.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">إخفاء المحميات الطبيعية والمناطق المحمية وحدود المتنزهات الوطنية.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">حدود الطبيعة</string>
     <string name="trip_recording_show_start_dialog_setting">في حالة تعطيل التسجيل، سيبدأ التسجيل مباشرة بعد النقر على عنصر واجهة المستخدم أو عنصر القائمة، مما يؤدي إلى تخطي مربع حوار التأكيد.</string>
     <string name="trip_recording_logging_interval_info">تعيين الفاصل الزمني لتسجيل الفترة الزمنية أوسماند سيطلب بيانات الموقع الحالي.</string>
     <string name="lost_data_warning">سيتم فقدان كافة البيانات غير المحفوظة.</string>
@@ -4318,7 +4315,6 @@
     <string name="promo_subscription">اشتراك برومو</string>
     <string name="track_has_no_needed_data">يفتقد المسار إلى البيانات المعنية.</string>
     <string name="option_available_only_in_osmand_pro">متاح كجزء من اشتراك OsmAnd Pro.</string>
-    <string name="pro_widgets">ويدجت برو</string>
     <string name="purchases_feature_desc_pro_widgets">احصل على إمكانية الوصول إلى ميزات أوسماند الاحترافية: تلوين المسار وأكثر.</string>
     <string name="explore_osmnad_plans_to_find_suitable">استكشف خطط أوسماند لتجد التي تناسبك.</string>
     <string name="routes_color_by_type">لون المسارات حسب…</string>
@@ -4519,7 +4515,6 @@
     <string name="shared_string_downhill">المنحدر</string>
     <string name="shared_string_statistics">إحصائيات</string>
     <string name="distance_between_points">المسافة بين النقاط</string>
-    <string name="ltr_or_rtl_combine">%1$s%2$s</string>
     <string name="save_changes_into_file">احفظ التغييرات في ملف</string>
     <string name="storage_migration_wrong_folder_warning">لم يتم العثور على بيانات OsmAnd في المجلد المحدد. حاول مرة اخرى.</string>
     <string name="shared_string_precision">الدقة</string>
@@ -5037,8 +5032,6 @@
     <string name="cloud_layer">طبقة السحب</string>
     <string name="precipitation_layer">طبقة هطول الأمطار</string>
     <string name="rendering_attr_showMtbScale_description">عرض المسارات وفقا لمقياس MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">عرض مقياس MTB صعودا</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">عرض المسارات وفقا لمقياس MTB.</string>
     <string name="rendering_attr_showMtbScale_name">عرض مقياس MTB</string>
     <string name="mtb_scale">مقياس MTB</string>
     <string name="mtb_imba_full">الرابطة الدولية لركوب الدراجات الجبلية</string>

@@ -1513,7 +1513,6 @@
     <string name="poi_escape_lane">Jalur keluar</string>
     <string name="poi_standpipe">Pipa berdiri</string>
     <string name="poi_wastewater_plant">Pabrik limbah air</string>
-    <string name="poi_climbing_bolted_filter">" "</string>
     <string name="poi_fire_water_pond">Danau air api</string>
     <string name="poi_fuel_biogas">Biogas</string>
     <string name="poi_fuel_octane_95">Oktan 95</string>

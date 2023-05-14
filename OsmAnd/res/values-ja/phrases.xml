@@ -3299,13 +3299,11 @@
     <string name="poi_socket_as3112">ソケット:AS/NZS 3112の数</string>
     <string name="poi_socket_as3112_current">ソケット:AS/NZS 3112の電流(A)</string>
     <string name="poi_socket_as3112_output">ソケット:AS/NZS 3112の電力(W)</string>
-    <string name="poi_car_yes">自動車:可</string>
     <string name="poi_car_no">自動車:不可</string>
     <string name="poi_bicycle_yes">自転車:可</string>
     <string name="poi_bicycle_no">自転車:不可</string>
     <string name="poi_scooter_yes">スクーター:可</string>
     <string name="poi_scooter_no">スクーター:不可</string>
-    <string name="poi_truck_yes">トラック:可</string>
     <string name="poi_truck_no">トラック:不可</string>
     <string name="poi_parking_fee_yes">必要</string>
     <string name="poi_parking_fee_no">不要</string>
@@ -3986,7 +3984,6 @@
     <string name="poi_post_office_type">タイプ</string>
     <string name="poi_authentication_chip_card">スマートカード認証</string>
     <string name="poi_authentication_app">アプリによる認証</string>
-    <string name="poi_callable">呼び出し可</string>
     <string name="poi_medical_supply_filter">医薬品カテゴリー</string>
     <string name="poi_service_fleurop_filter">花の配達サービス</string>
     <string name="poi_mattress_filter">マットレス</string>

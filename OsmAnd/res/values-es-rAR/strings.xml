@@ -1017,7 +1017,6 @@
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Indica las opciones de navegación.</string>
     <string name="global_settings">Ajustes globales</string>
-    <string name="index_settings">Gestionar mapas</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación.</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
@@ -4019,8 +4018,6 @@
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
     <string name="select_another_colorization">Elige otro tipo de color.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="trip_recording_logging_interval_info">El intervalo de registro define el período de tiempo en el que OsmAnd pedirá los datos de la ubicación actual.</string>
     <string name="trip_recording_save_and_continue">Guardar y continuar</string>
     <string name="lost_data_warning">Se perderán todos los datos no guardados.</string>
@@ -4250,7 +4247,6 @@
     <string name="promo_subscription">Suscripción promocional</string>
     <string name="track_has_no_needed_data">La traza no contiene los datos necesarios.</string>
     <string name="option_available_only_in_osmand_pro">Disponible como parte de la suscripción a OsmAnd Pro.</string>
-    <string name="pro_widgets">Widgets avanzados</string>
     <string name="purchases_feature_desc_pro_widgets">Obtén acceso a las funciones de OsmAnd Pro: Coloración de rutas y más.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explora los planes de OsmAnd para encontrar uno adecuado para ti.</string>
     <string name="routes_color_by_type">Colorear rutas por…</string>
@@ -4458,7 +4454,6 @@
     <string name="gps_filter_smoothing">Suavizado</string>
     <string name="shared_string_statistics">Estadísticas</string>
     <string name="storage_migration_wrong_folder_warning">No se han encontrado datos de OsmAnd en la carpeta elegida. Inténtalo de nuevo.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_precision">Precisión del GPS</string>
     <string name="save_changes_into_file">Guardar cambios en el archivo</string>
     <string name="shared_string_precision">Precisión</string>
@@ -4985,8 +4980,6 @@
     <string name="quick_action_temperature_layer">Un botón que alterna la capa de temperatura en el mapa.</string>
     <string name="quick_action_air_pressure_layer">Un botón que alterna la capa de presión atmosférica en el mapa.</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala de MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_scale">Escala de MTB</string>

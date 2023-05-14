@@ -508,7 +508,6 @@
     <string name="index_name_asia">Asiya</string>
     <string name="index_name_oceania">Avstraliya və Okeaniya</string>
     <string name="amenity_type_osmwiki">Vikipediya (oflayn)</string>
-    <string name="index_settings">Xəritə fayllarını idarə et</string>
     <string name="general_settings">Ümumi</string>
     <string name="global_app_settings">Əsas proqram parametrləri</string>
     <string name="user_name">OSM istifadəçi adınız</string>
@@ -2899,7 +2898,6 @@
     <string name="map_widget_monitoring">Səfər qeydetmə</string>
     <string name="distance_between_points">Nöqtələr arasındakı məsafə</string>
     <string name="storage_migration_wrong_folder_warning">Seçilmiş qovluqda OsmAnd məlumatları tapılmadı. Təkrar cəhd edin.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="plan_route_split_before">Əvvəl böl</string>
     <string name="route_descr_select_start_point">Çıxış nöqtəsini seçin</string>
     <string name="add_destination_query">Əvvəlcə təyinatı seçin</string>

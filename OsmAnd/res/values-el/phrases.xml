@@ -3297,13 +3297,11 @@
     <string name="poi_socket_as3112">Ρευματοδότης: AS/NZS 3112</string>
     <string name="poi_socket_as3112_current">Ρευματοδότης: AS/NZS 3112: ρεύμα</string>
     <string name="poi_socket_as3112_output">Ρευματοδότης: AS/NZS 3112: έξοδος</string>
-    <string name="poi_car_yes">Αυτοκίνητο: ναι</string>
     <string name="poi_car_no">Αυτοκίνητο: όχι</string>
     <string name="poi_bicycle_yes">Ποδήλατο: ναι</string>
     <string name="poi_bicycle_no">Ποδήλατο: όχι</string>
     <string name="poi_scooter_yes">Σκούτερ: ναι</string>
     <string name="poi_scooter_no">Σκούτερ: όχι</string>
-    <string name="poi_truck_yes">Φορτηγό: ναι</string>
     <string name="poi_truck_no">Φορτηγό: όχι</string>
     <string name="poi_parking_fee_yes">Τέλος στάθμευσης: ναι</string>
     <string name="poi_parking_fee_no">Τέλος στάθμευσης: όχι</string>

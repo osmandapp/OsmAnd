@@ -163,7 +163,6 @@
     <string name="routing_settings">Навігація</string>
     <string name="routing_settings_descr">Визначити параметри навігації.</string>
     <string name="global_settings">Загальні налаштування</string>
-    <string name="index_settings">Керування мапами</string>
     <string name="general_settings">Загальні</string>
     <string name="general_settings_descr">Налаштування екрана та загальні параметри застосунку.</string>
     <string name="global_app_settings">Загальні налаштування застосунку</string>
@@ -4027,8 +4026,6 @@
     <string name="track_has_no_altitude">Трек не містить даних про висоту.</string>
     <string name="track_has_no_speed">Трек не містить даних про швидкість.</string>
     <string name="select_another_colorization">Виберіть інший тип забарвлення.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Сховати природні заповідники, заповідні території та межі національних парків.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Межі природи</string>
     <string name="trip_recording_logging_interval_info">Інтервал запису встановлює проміжок часу, впродовж якого OsmAnd запитуватиме дані про поточне розташування.</string>
     <string name="trip_recording_save_and_continue">Зберегти й продовжити</string>
     <string name="lost_data_warning">Усі незбережені дані буде втрачено.</string>
@@ -4268,7 +4265,6 @@
     <string name="map_updates_are_unavailable_yet">Оновлення мап досі недоступні. :-(</string>
     <string name="connect_track_points_as">Зʼєднати точки маршруту</string>
     <string name="option_available_only_in_osmand_pro">Доступно як частина передплати OsmAnd Pro.</string>
-    <string name="pro_widgets">Віджети Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Отримайте доступ до можливостей OsmAnd Pro: Забарвлення маршрутів та багато іншого.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ознайомтеся з тарифними планами OsmAnd, щоб знайти відповідний для вас.</string>
     <string name="routes_color_by_type">Забарвлення маршрутів від…</string>
@@ -4458,7 +4454,6 @@
     <string name="elevation_profile">Профіль висоти</string>
     <string name="shared_string_grade">Клас</string>
     <string name="shared_string_precision">Точність</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_hdop_desc">Встановіть максимально допустиме значення для HDOP.
 \nТочки з більшим значенням будуть приховані.</string>
     <string name="shared_string_statistics">Статистика</string>
@@ -4976,9 +4971,7 @@
     <string name="quick_action_air_pressure_layer">Перемикач для показу або приховування шару атмосферного тиску на мапі.</string>
     <string name="temperature_layer">Температурний шар</string>
     <string name="quick_action_temperature_layer">Перемикач для показу або приховування температурного шару на мапі.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Показати шкалу MTB для підйому</string>
     <string name="rendering_attr_showMtbScale_description">Показати траси згідно з їхньою шкалою MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Показати траси згідно зі шкалою підйомів MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Показати шкалу MTB</string>
     <string name="mtb_scale">Шкала MTB</string>
     <string name="mtb_imba">IMBA</string>

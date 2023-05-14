@@ -107,7 +107,6 @@
     <string name="routing_settings">Navigáció</string>
     <string name="routing_settings_descr">Navigáció beállításainak megadása.</string>
     <string name="global_settings">Globális beállítások</string>
-    <string name="index_settings">Térképfájlok kezelése</string>
     <string name="index_settings_descr">A készüléken tárolt offline térképfájlok letöltése és kezelése.</string>
     <string name="general_settings">Általános</string>
     <string name="general_settings_descr">A kijelző és az alkalmazás általános beállításai.</string>
@@ -4010,8 +4009,6 @@
     <string name="track_recording_will_be_continued">A felvétel folytatódni fog.</string>
     <string name="copy_poi_name">Érdekes pont nevének másolása</string>
     <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Természetvédelmi területek határai</string>
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Kérjük, válasszon másik színezéstípust.</string>
@@ -4759,7 +4756,6 @@
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
     <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
-    <string name="attach_to_roads_banner_desc">Kapcsolja a nyomvonalát az utakhoz, hogy részletes navigációs utasításokat kaphasson.</string>
     <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)\?</string>
@@ -4961,8 +4957,6 @@
     <string name="cloud_layer">Felhőzet réteg</string>
     <string name="precipitation_layer">Csapadék réteg</string>
     <string name="quick_action_temperature_layer">A hőmérséklet réteget megjelenítő vagy elrejtő kapcsoló.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">MTB hegymeneti skála megjelenítése</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Nyomvonalak megjelenítése MTB hegymeneti nehézségi szintek szerint.</string>
     <string name="rendering_attr_showMtbScale_name">MTB skála megjelenítése</string>
     <string name="rendering_attr_showMtbScale_description">Nyomvonalak megjelenítése MTB nehézségi szintek szerint.</string>
     <string name="mtb_scale">MTB skála</string>

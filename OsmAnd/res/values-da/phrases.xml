@@ -3285,13 +3285,11 @@
     <string name="poi_socket_as3112">Stikkontakt: AS/NZS 3112</string>
     <string name="poi_socket_as3112_current">Stikkontakt: AS/NZS 3112: strøm</string>
     <string name="poi_socket_as3112_output">Stikkontakt: AS/NZS 3112: udgang</string>
-    <string name="poi_car_yes">Bil: ja</string>
     <string name="poi_car_no">Bil: nej</string>
     <string name="poi_bicycle_yes">Cykel: ja</string>
     <string name="poi_bicycle_no">Cykel: nej</string>
     <string name="poi_scooter_yes">Scooter: ja</string>
     <string name="poi_scooter_no">Scooter: nej</string>
-    <string name="poi_truck_yes">Lastbil: ja</string>
     <string name="poi_truck_no">Lastbil: nej</string>
     <string name="poi_parking_fee_yes">Parkeringsafgift: ja</string>
     <string name="poi_parking_fee_no">Parkeringsafgift: nej</string>
@@ -3954,7 +3952,6 @@
     <string name="poi_hoops">Bøjler</string>
     <string name="poi_waste_transfer_station">Overførselsstation for affald</string>
     <string name="poi_service_vehicle_inspection_yes">Bilsyn</string>
-    <string name="poi_callable">Kaldbar</string>
     <string name="poi_butcher_type">Primær kødtype</string>
     <string name="poi_tobacco_filter">Tobak</string>
     <string name="poi_membership_filter">Medlemskab påkrævet</string>

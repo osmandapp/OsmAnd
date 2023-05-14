@@ -530,7 +530,6 @@
     <string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
     <string name="shared_string_download_map">Hämta karta</string>
     <string name="poi_filter_sightseeing">Sevärdheter</string>
-    <string name="index_settings">Hantera kartfiler</string>
     <string name="select_max_zoom_preload_area">Maximal zoom att förladda</string>
     <string name="maps_could_not_be_downloaded">Denna karta kunde inte laddas ner</string>
     <string name="continuous_rendering">Kontinuerlig rendering</string>
@@ -3313,8 +3312,6 @@
     <string name="copy_poi_name">Kopiera POI namn</string>
     <string name="quick_action_show_hide_title">Visa/Göm</string>
     <string name="shared_string_interval">Intervall</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Dölj naturreservat, skyddade områden och nationalparkgränser.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgränser</string>
     <string name="track_has_no_altitude">Spåret innehåller inte höjddata.</string>
     <string name="track_has_no_speed">Spåret innehåller inte hastighetsdata.</string>
     <string name="select_another_colorization">Vänligen välj en annan typ av färgning.</string>
@@ -3854,7 +3851,6 @@
     <string name="gps_filter_smoothing">Utjämning</string>
     <string name="save_as_copy">Spara som kopia</string>
     <string name="shared_string_gps_filter">GPS-filter</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="exit_without_saving_warning">Avsluta utan att spara ändringar\?</string>
     <string name="from_to_with_params">Från %1$s till %2$s</string>
     <string name="storage_copied_files_size">Behandlade %1$s fil(er), %2$s</string>
