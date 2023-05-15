@@ -975,7 +975,7 @@ public class GeneralRouter implements VehicleRouter {
 			return false;
 		}
 
-		public Double calculateExpr(BitSet types, ParameterContext paramContext) {
+		private Double calculateExprValue(BitSet types, ParameterContext paramContext) {
 			double f1 = calculateExprValue(0, types, paramContext);
 			double f2 = calculateExprValue(1, types, paramContext);
 			if (!Double.isNaN(f1) && !Double.isNaN(f2)) {
@@ -1080,33 +1080,36 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public void printRule(PrintStream out) {
-			out.print(" Select " + selectValue  + " if ");
-			for(int k = 0; k < filterTypes.length(); k++) {
-				if(filterTypes.get(k)) {
+			out.print(" Select " + selectValue + " if ");
+			for (int k = 0; k < filterTypes.length(); k++) {
+				if (filterTypes.get(k)) {
 					String key = universalRulesById.get(k);
 					out.print(key + " ");
 				}
 			}
-			if(filterNotTypes.length() > 0) {
+			if (filterNotTypes.length() > 0) {
 				out.print(" ifnot ");
 			}
-			for(int k = 0; k < filterNotTypes.length(); k++) {
-				if(filterNotTypes.get(k)) {
+			for (int k = 0; k < filterNotTypes.length(); k++) {
+				if (filterNotTypes.get(k)) {
 					String key = universalRulesById.get(k);
 					out.print(key + " ");
 				}
 			}
-			for(int k = 0; k < parameters.size(); k++) {
-				out.print(" param="+parameters.get(k));
+			for (int k = 0; k < parameters.size(); k++) {
+				out.print(" param=" + parameters.get(k));
 			}
-			if(onlyTags.size() > 0) {
+			if (onlyTags.size() > 0) {
 				out.print(" match tag = " + onlyTags);
 			}
-			if(onlyNotTags.size() > 0) {
+			if (onlyNotTags.size() > 0) {
 				out.print(" not match tag = " + onlyNotTags);
 			}
-			if(conditionExpressions.size() > 0) {
+			if (conditionExpressions.size() > 0) {
 				out.println(" subexpressions " + conditionExpressions.size());
+			}
+			if (selectExpression != null) {
+				out.println("  selectexpression " + selectExpression.expressionType);
 			}
 			out.println();
 		}
@@ -1147,12 +1150,12 @@ public class GeneralRouter implements VehicleRouter {
 		}
 
 		public void registerMinExpression(String value1, String value2, String valueType) {
-			selectExpression =new RouteAttributeExpression(new String[]{value1, value2}, valueType,
+			selectExpression = new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
 					RouteAttributeExpression.MIN_EXPRESSION);
 		}
 
 		public void registerMaxExpression(String value1, String value2, String valueType) {
-			selectExpression =new RouteAttributeExpression(new String[]{value1, value2}, valueType,
+			selectExpression = new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
 					RouteAttributeExpression.MAX_EXPRESSION);
 		}
 
@@ -1171,7 +1174,7 @@ public class GeneralRouter implements VehicleRouter {
 
 		protected Object calcSelectValue(BitSet types, ParameterContext paramContext) {
 			if (selectExpression != null) {
-				selectValue = selectExpression.calculateExpr(types, paramContext);
+				selectValue = selectExpression.calculateExprValue(types, paramContext);
 			} else if (selectValue instanceof String && selectValue.toString().startsWith("$")) {
 				BitSet mask = tagRuleMask.get(selectValue.toString().substring(1));
 				if (mask != null && mask.intersects(types)) {
