@@ -5225,4 +5225,6 @@
     <string name="rendering_value_sector5_name">Sector 5</string>
     <string name="rendering_value_small_name">Pequeño</string>
     <string name="rendering_value_name_only_name">Sólo nombre</string>
+    <string name="poi_categories">Categorías de PDI</string>
+    <string name="no_poi_for_category">PDI no encontrado</string>
 </resources>
