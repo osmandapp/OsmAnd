@@ -167,6 +167,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private void updateButtonsState() {
 		String apply = getString(R.string.shared_string_apply).toUpperCase();
 		String select = getString(!areAllTracksSelected() ? R.string.shared_string_select_all : R.string.shared_string_deselect_all).toUpperCase();
+		String count = "(" + adapter.getFilteredItems().size() + ")";
+		select = getString(R.string.ltr_or_rtl_combine_via_space, select, count);
 		applyButton.setEnabled(selectionHelper.hasItemsToApply());
 		UiUtilities.setupDialogButton(nightMode, applyButton, TERTIARY, apply);
 		UiUtilities.setupDialogButton(nightMode, selectionButton, TERTIARY, select);
