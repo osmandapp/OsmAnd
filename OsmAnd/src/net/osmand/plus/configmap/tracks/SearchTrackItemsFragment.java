@@ -34,6 +34,7 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTra
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -76,6 +77,9 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		if (fragment instanceof TracksFragment) {
 			TracksFragment tracksFragment = (TracksFragment) fragment;
 			selectionHelper = tracksFragment.getItemsSelectionHelper();
+		} else if (fragment instanceof AvailableTracksFragment) {
+			AvailableTracksFragment tracksFragment = (AvailableTracksFragment) fragment;
+			selectionHelper = tracksFragment.getSelectionHelper();
 		}
 	}
 
@@ -313,7 +317,6 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
 		adapter.setTracksSortMode(sortMode);
-		adapter.notifyDataSetChanged();
 
 		Fragment fragment = requireParentFragment();
 		if (fragment instanceof SortTracksListener) {

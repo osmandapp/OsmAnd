@@ -1,10 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
-import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
-import static net.osmand.plus.myplaces.MyPlacesActivity.TRACKS_TAB;
-import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -21,39 +16,41 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
-import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder.FolderSelectionListener;
-import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder.VisibleTracksListener;
-import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
+import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment implements SortTracksListener,
-		TrackSelectionListener, FolderSelectionListener, VisibleTracksListener, GpxFilesDeletionListener {
+		TrackSelectionListener, TrackGroupsListener {
 
-	protected GpxActionsHelper gpxActionsHelper;
-	protected TrackFolder trackFolder;
+	protected TrackFolder rootFolder;
+	protected TrackFolder selectedFolder;
 
 	protected TrackFoldersAdapter adapter;
+	protected TextView toolbarTitle;
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -61,12 +58,12 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		gpxActionsHelper = new GpxActionsHelper(requireActivity(), nightMode);
-		gpxActionsHelper.setTargetFragment(this);
-		gpxActionsHelper.setDeletionListener(this);
+	@NonNull
+	protected abstract List<Object> getAdapterItems();
+
+	public void setTrackFolder(@NonNull TrackFolder trackFolder) {
+		this.rootFolder = trackFolder;
+		this.selectedFolder = trackFolder;
 	}
 
 	@NonNull
@@ -77,7 +74,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 		Dialog dialog = new Dialog(activity, themeId) {
 			@Override
 			public void onBackPressed() {
-				dismiss();
+				BaseTrackFolderFragment.this.onBackPressed();
 			}
 		};
 		Window window = dialog.getWindow();
@@ -96,95 +93,96 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 		FragmentActivity activity = requireActivity();
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View view = themedInflater.inflate(R.layout.track_folder_fragment, container, false);
-		view.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		setupToolbar(view);
+		setupContent(view);
+		updateContent();
 
+		return view;
+	}
+
+	protected void setupToolbar(@NonNull View view) {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+
+		ImageView closeButton = toolbar.findViewById(R.id.close_button);
+		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
+		closeButton.setOnClickListener(v -> onBackPressed());
+		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+	}
+
+	protected void setupContent(@NonNull View view) {
 		adapter = new TrackFoldersAdapter(app, nightMode);
 		adapter.setSortTracksListener(this);
-		adapter.setVisibleTracksListener(this);
+		adapter.setTrackGroupsListener(this);
 		adapter.setTrackSelectionListener(this);
-		adapter.setFolderSelectionListener(this);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setItemAnimator(null);
 		recyclerView.setAdapter(adapter);
+	}
 
-		if (trackFolder != null) {
-			updateAdapter();
+	private void onBackPressed() {
+		if (selectedFolder.equals(rootFolder)) {
+			dismiss();
+		} else {
+			selectedFolder = selectedFolder.getParentFolder();
+			updateContent();
 		}
-
-		return view;
 	}
 
-	@NonNull
-	protected List<Object> getAdapterItems() {
-		List<Object> items = new ArrayList<>();
-		items.add(TYPE_SORT_TRACKS);
-		items.addAll(trackFolder.getSubFolders());
-		items.addAll(trackFolder.getTrackItems());
-		return items;
+	@Override
+	public void onTracksGroupClicked(@NonNull TracksGroup group) {
+		if (group instanceof TrackFolder) {
+			selectedFolder = (TrackFolder) group;
+		} else if (group instanceof VisibleTracksGroup) {
+			boolean selected = !isTracksGroupSelected(group);
+			onTracksGroupSelected(group, selected);
+		}
+		updateContent();
 	}
 
-	protected void setupToolbar(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-
-		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(trackFolder.getName());
-
-		ImageView closeButton = toolbar.findViewById(R.id.close_button);
-		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext())));
-		closeButton.setOnClickListener(v -> dismiss());
-		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+	protected void updateContent() {
+		adapter.setItems(getAdapterItems());
 	}
 
-	protected void updateAdapter() {
-		adapter.updateItems(getAdapterItems());
+	@Nullable
+	protected GpxActionsHelper getGpxActionsHelper() {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof AvailableTracksFragment) {
+			return ((AvailableTracksFragment) fragment).getGpxActionsHelper();
+		}
+		return null;
 	}
 
 	@Override
 	public void showSortByDialog() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			SortByBottomSheet.showInstance(activity.getSupportFragmentManager(), this);
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			SortByBottomSheet.showInstance(manager, this);
 		}
 	}
 
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
+		Map<String, String> tabsSortModes = settings.getTrackTabsSortModes();
+		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
+			if (Algorithms.stringsEqual(entry.getKey(), selectedFolder.getDirFile().getName())) {
+				return TracksSortMode.getByValue(entry.getValue());
+			}
+		}
 		return TracksSortMode.getDefaultSortMode();
 	}
 
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+		adapter.setSortMode(sortMode);
 
-	}
+		Map<String, String> tabsSortModes = settings.getTrackTabsSortModes();
+		tabsSortModes.put(selectedFolder.getDirFile().getName(), sortMode.name());
 
-	@Override
-	public void showTracksDialog() {
-		Bundle bundle = new Bundle();
-		bundle.putString(OPEN_TRACKS_TAB, TrackTabType.ON_MAP.name());
-
-		Bundle prevIntentParams = new Bundle();
-		prevIntentParams.putInt(TAB_ID, TRACKS_TAB);
-
-		MapActivity.launchMapActivityMoveToTop(requireActivity(), prevIntentParams, null, bundle);
-	}
-
-	@Override
-	public void onGpxFilesDeletionStarted() {
-
-	}
-
-	@Override
-	public void onGpxFilesDeleted(GPXInfo... values) {
-
-	}
-
-	@Override
-	public void onGpxFilesDeletionFinished(boolean shouldUpdateFolders) {
-
+		settings.saveTabsSortModes(tabsSortModes);
 	}
 }

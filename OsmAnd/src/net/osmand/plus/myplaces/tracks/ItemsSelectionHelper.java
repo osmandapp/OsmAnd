@@ -65,15 +65,27 @@ public class ItemsSelectionHelper<T> {
 		return selectedItems.contains(item);
 	}
 
-	public boolean isItemsSelected(@NonNull Set<T> items) {
+	public boolean isItemsSelected(@NonNull Collection<T> items) {
 		return selectedItems.containsAll(items);
+	}
+
+	public boolean isAllItemsSelected() {
+		return selectedItems.containsAll(allItems);
 	}
 
 	public boolean hasSelectedItems() {
 		return !selectedItems.isEmpty();
 	}
 
-	public int getSelectedItemsSize(){
+	public int getSelectedItemsSize() {
 		return selectedItems.size();
+	}
+
+	public void clearSelectedItems() {
+		selectedItems.clear();
+	}
+
+	public void selectAllItems() {
+		selectedItems.addAll(allItems);
 	}
 }

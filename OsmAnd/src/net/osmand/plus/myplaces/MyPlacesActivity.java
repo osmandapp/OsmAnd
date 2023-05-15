@@ -24,7 +24,6 @@ import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
-import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -105,14 +104,14 @@ public class MyPlacesActivity extends TabActivity {
 		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null) {
 				Uri uri = data.getData();
-				AvailableGPXFragment fragment = getGpxFragment();
+				AvailableTracksFragment fragment = getGpxFragment();
 				if (fragment != null) {
 					fragment.startImport();
 				}
 				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
 					public void onImportComplete(boolean success) {
-						AvailableGPXFragment fragment = getGpxFragment();
+						AvailableTracksFragment fragment = getGpxFragment();
 						if (fragment != null) {
 							fragment.finishImport(success);
 						}
@@ -135,12 +134,12 @@ public class MyPlacesActivity extends TabActivity {
 	}
 
 	@Nullable
-	private AvailableGPXFragment getGpxFragment() {
-		AvailableGPXFragment gpxFragment = null;
+	private AvailableTracksFragment getGpxFragment() {
+		AvailableTracksFragment gpxFragment = null;
 		for (WeakReference<FragmentStateHolder> fragmentStateHolder : fragmentsStateList) {
 			FragmentStateHolder frag = fragmentStateHolder.get();
-			if (frag instanceof AvailableGPXFragment) {
-				gpxFragment = (AvailableGPXFragment) frag;
+			if (frag instanceof AvailableTracksFragment) {
+				gpxFragment = (AvailableTracksFragment) frag;
 			}
 		}
 		return gpxFragment;

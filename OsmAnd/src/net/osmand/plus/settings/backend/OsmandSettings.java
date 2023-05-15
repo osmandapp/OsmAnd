@@ -125,6 +125,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -1849,7 +1850,31 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
-	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;");
+	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").cache();
+
+	@NonNull
+	public Map<String, String> getTrackTabsSortModes() {
+		Map<String, String> tabsSortModes = new HashMap<>();
+
+		List<String> sortModes = TRACKS_TABS_SORT_MODES.getStringsList();
+		if (!Algorithms.isEmpty(sortModes)) {
+			for (String sortMode : sortModes) {
+				String[] tabSortMode = sortMode.split(",,");
+				if (tabSortMode.length == 2) {
+					tabsSortModes.put(tabSortMode[0], tabSortMode[1]);
+				}
+			}
+		}
+		return tabsSortModes;
+	}
+
+	public void saveTabsSortModes(@NonNull Map<String, String> tabsSortModes) {
+		List<String> sortTypes = new ArrayList<>();
+		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
+			sortTypes.add(entry.getKey() + ",," + entry.getValue());
+		}
+		TRACKS_TABS_SORT_MODES.setStringsList(sortTypes);
+	}
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 

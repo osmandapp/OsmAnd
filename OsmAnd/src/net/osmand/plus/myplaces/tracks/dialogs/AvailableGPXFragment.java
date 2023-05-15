@@ -469,7 +469,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener));
-		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
+
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
@@ -519,7 +519,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.shared_string_delete) {
-			gpxActionsHelper.deleteGpxFiles(selectedItems);
+//			gpxActionsHelper.deleteGpxFiles(selectedItems);
 		}
 		if (actionMode != null) {
 			actionMode.finish();
@@ -896,9 +896,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void onGpxFilesDeleted(GPXInfo... values) {
-		for (GPXInfo g : values) {
-			allGpxAdapter.delete(g);
+	public void onGpxFilesDeleted(File... values) {
+		for (File g : values) {
+//			allGpxAdapter.delete(g);
 		}
 		allGpxAdapter.notifyDataSetChanged();
 	}
@@ -1034,7 +1034,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			ImageView icon = v.findViewById(R.id.icon);
 			ImageButton options = v.findViewById(R.id.options);
 			options.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-			options.setOnClickListener(view -> gpxActionsHelper.openPopUpMenu(view, child));
+//			options.setOnClickListener(view -> gpxActionsHelper.showItemPopupMenu(view, child));
 
 			CheckBox checkbox = v.findViewById(R.id.check_local_index);
 			checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
@@ -1266,7 +1266,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 			updateSelectionMode(actionMode);
 		} else {
-			gpxActionsHelper.openTrackOnMap(gpxInfo);
+//			gpxActionsHelper.openTrackOnMap(gpxInfo);
 		}
 		allGpxAdapter.notifyDataSetInvalidated();
 		return true;

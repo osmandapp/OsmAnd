@@ -7,42 +7,23 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 public class TrackFolderViewHolder extends TracksGroupViewHolder {
 
-	private final FolderSelectionListener listener;
-
-	public TrackFolderViewHolder(@NonNull View view, @Nullable FolderSelectionListener listener,
+	public TrackFolderViewHolder(@NonNull View view, @Nullable TrackGroupsListener listener,
 	                             boolean nightMode, boolean selectionMode) {
-		super(view, nightMode, selectionMode);
-		this.listener = listener;
+		super(view, listener, nightMode, selectionMode);
 	}
 
-	public void bindView(@NonNull TrackFolder folder) {
-		title.setText(folder.getName());
+	@Override
+	public void bindView(@NonNull TracksGroup tracksGroup) {
+		super.bindView(tracksGroup);
+
+		TrackFolder folder = (TrackFolder) tracksGroup;
+		title.setText(folder.getName(app));
 		description.setText(GpxUiHelper.getFolderDescription(app, folder));
 		icon.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, folder.getColor()));
-
-		boolean selected = listener != null && listener.isFolderSelected(folder);
-		checkbox.setChecked(selected);
-
-		itemView.setOnClickListener(v -> {
-			if (listener != null) {
-				listener.onFolderSelected(folder);
-			}
-		});
-	}
-
-	public interface FolderSelectionListener {
-
-		default boolean isFolderSelected(@NonNull TrackFolder folder) {
-			return false;
-		}
-
-
-		default void onFolderSelected(@NonNull TrackFolder folder) {
-
-		}
 	}
 }
