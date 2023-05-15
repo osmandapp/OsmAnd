@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Screen for asking the user to grant location permission.
  */
-public class RequestPermissionScreen extends Screen {
+public class RequestPermissionScreen extends BaseOsmAndAndroidAutoScreen {
 
 	/**
 	 * Callback called when the location permission is granted.
