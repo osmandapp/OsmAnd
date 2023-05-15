@@ -67,6 +67,10 @@ public class BinaryMapRouteReaderAdapter {
 		public final static int TRAFFIC_SIGNALS = 6;
 		public final static int RAILWAY_CROSSING = 7;
 		private final static int LANES = 8;
+		
+		public final static int PROFILE_NONE = 0;
+		public final static int PROFILE_TRUCK = 1000;
+		
 		private String t;
 		private String v;
 		private int intValue;
@@ -74,7 +78,6 @@ public class BinaryMapRouteReaderAdapter {
 		private int type;
 		private List<RouteTypeCondition> conditions = null;
 		private int forward;
-		private boolean truck;
 
 		public RouteTypeRule() {
 		}
@@ -194,16 +197,13 @@ public class BinaryMapRouteReaderAdapter {
 			return 0;
 		}
 
-		public float maxSpeed() {
-			if (type == MAXSPEED) {
+		public float maxSpeed(int profile) {
+			if (type == (MAXSPEED + profile)) {
 				return floatValue;
 			}
 			return -1;
 		}
-
-		public boolean isTruck() {
-			return truck;
-		}
+		
 
 		public int lanes() {
 			if (type == LANES) {
@@ -271,12 +271,12 @@ public class BinaryMapRouteReaderAdapter {
 			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
 			} else if (t.startsWith("maxspeed") && v != null) {
-				boolean maxSpeed = t.equalsIgnoreCase("maxspeed");
-				truck = t.equalsIgnoreCase("maxspeed:hgv");
 				forward = t.endsWith(":forward") ? 1 : t.endsWith(":backward") ? -1 : 0;
-				if (maxSpeed || truck) {
+				floatValue = RouteDataObject.parseSpeed(v, 0);
+				if (t.equalsIgnoreCase("maxspeed")) {
 					type = MAXSPEED;
-					floatValue = RouteDataObject.parseSpeed(v, 0);
+				} else if (t.equalsIgnoreCase("maxspeed:hgv")) {
+					type = MAXSPEED + PROFILE_TRUCK;
 				}
 			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
