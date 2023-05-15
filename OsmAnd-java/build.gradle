@@ -49,8 +49,14 @@ task collectTestResources(type: Copy) {
 	}
 	from("../../resources/poi") {
 		include "poi_types.xml"
-		include "/phrases/en/*"
 		//include "/phrases/ru/*"
+	}
+}
+
+task collectTestPhrasesResources(type: Copy) {
+	into "src/test/resources/phrases/en/"
+	from("../OsmAnd/res/values") {
+		include "phrases.xml"
 	}
 }
 
@@ -60,6 +66,7 @@ task collectExternalResources {
 		collectRenderingStylesResources,
 		collectRegionsInfoResources,
 		collectTestResources,
+		collectTestPhrasesResources,
 		collectMiscResources
 }
 
