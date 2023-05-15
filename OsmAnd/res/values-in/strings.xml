@@ -5215,4 +5215,6 @@
     <string name="beats_per_minute_short">bpm</string>
     <string name="shared_string_chest">Dada</string>
     <string name="external_device_blood_pressure">Tekanan darah</string>
+    <string name="poi_categories">Kategori POI</string>
+    <string name="no_poi_for_category">POI tidak ditemukan</string>
 </resources>
