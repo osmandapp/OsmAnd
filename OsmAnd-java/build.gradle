@@ -35,7 +35,7 @@ task collectRenderingStylesResources(type: Sync) {
 }
 
 task collectRegionsInfoResources(type: Download)  {
-	src 'https://builder.osmand.net/basemap/regions.ocbf'
+	src 'https://creator.osmand.net/basemap/regions.ocbf'
 	dest 'src/main/resources/net/osmand/map/regions.ocbf'
 	onlyIfModified true
 }
