@@ -97,8 +97,6 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	public static final String TAG = LiveUpdatesFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(LiveUpdatesFragment.class);
 
-	private boolean nightMode;
-
 	private View toolbarSwitchContainer;
 	private ExpandableListView listView;
 	private TextViewEx descriptionTime;
@@ -134,13 +132,12 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		setHasOptionsMenu(true);
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
+		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.fragment_live_updates, container, false);
 		createToolbar(view.findViewById(R.id.app_bar));
 
 		listView = view.findViewById(android.R.id.list);

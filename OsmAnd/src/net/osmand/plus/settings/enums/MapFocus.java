@@ -1,14 +1,18 @@
 package net.osmand.plus.settings.enums;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.POSITION_PLACEMENT_AUTOMATIC;
+import static net.osmand.plus.settings.backend.OsmandSettings.POSITION_PLACEMENT_BOTTOM;
+import static net.osmand.plus.settings.backend.OsmandSettings.POSITION_PLACEMENT_CENTER;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 
 public enum MapFocus {
 
-	CENTER(R.string.position_on_map_center, R.drawable.ic_action_display_position_center, 1),
-	BOTTOM(R.string.position_on_map_bottom, R.drawable.ic_action_display_position_bottom, 2),
-	AUTOMATIC(R.string.shared_string_automatic, R.drawable.ic_action_display_position_auto, 0);
+	CENTER(R.string.position_on_map_center, R.drawable.ic_action_display_position_center, POSITION_PLACEMENT_CENTER),
+	BOTTOM(R.string.position_on_map_bottom, R.drawable.ic_action_display_position_bottom, POSITION_PLACEMENT_BOTTOM),
+	AUTOMATIC(R.string.shared_string_automatic, R.drawable.ic_action_display_position_auto, POSITION_PLACEMENT_AUTOMATIC);
 
 	private int titleId;
 	private int iconId;

@@ -92,6 +92,8 @@ import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
@@ -430,6 +432,34 @@ public class OsmandSettings {
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE;
 
+	public boolean switchAppModeToNext() {
+		return switchAppMode(true);
+	}
+
+	public boolean switchAppModeToPrevious() {
+		return switchAppMode(false);
+	}
+
+	public boolean switchAppMode(boolean next) {
+		ApplicationMode appMode = getApplicationMode();
+		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
+		int indexOfCurrent = enabledModes.indexOf(appMode);
+		int indexOfNext;
+		if (next) {
+			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
+		} else {
+			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
+		}
+		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
+		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
+			String pattern = ctx.getString(R.string.application_profile_changed);
+			String message = String.format(pattern, nextAppMode.toHumanString());
+			ctx.showShortToastMessage(message);
+			return true;
+		}
+		return false;
+	}
+
 	public boolean setApplicationMode(ApplicationMode appMode) {
 		return setApplicationMode(appMode, true);
 	}
@@ -654,7 +684,7 @@ public class OsmandSettings {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
-	public void removeFromGlobalPreferences(@NonNull String ... prefIds) {
+	public void removeFromGlobalPreferences(@NonNull String... prefIds) {
 		SettingsEditor editor = settingsAPI.edit(globalPreferences);
 		for (String prefId : prefIds) {
 			editor.remove(prefId);
@@ -1483,7 +1513,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_EXIT_NUMBER_NAMES = new BooleanPreference(this, "exit_number_names", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_ROUTE_RECALCULATION = new BooleanPreference(this, "speak_route_recalculation", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_GPS_SIGNAL_STATUS = new BooleanPreference(this, "speak_gps_signal_status", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SPEAK_ROUTE_DEVIATION= new BooleanPreference(this, "speak_route_deviation", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SPEAK_ROUTE_DEVIATION = new BooleanPreference(this, "speak_route_deviation", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_UNINSTALLED = new BooleanPreference(this, "speed_cameras_uninstalled", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> SPEED_CAMERAS_ALERT_SHOWED = new BooleanPreference(this, "speed_cameras_alert_showed", false).makeGlobal().makeShared();
@@ -1823,7 +1853,15 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
-	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", 0).makeProfile();
+	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", InputDevice.KEYBOARD.getValue()).makeProfile();
+
+	public InputDevice getSelectedInputDevice() {
+		return getSelectedInputDevice(getApplicationMode());
+	}
+
+	public InputDevice getSelectedInputDevice(@NonNull ApplicationMode appMode) {
+		return InputDevice.getByValue(EXTERNAL_INPUT_DEVICE.getModeValue(appMode));
+	}
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference(this, "route_map_markers_start_my_loc", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_ROUND_TRIP = new BooleanPreference(this, "route_map_markers_round_trip", false).makeGlobal().makeShared().cache();
@@ -2124,6 +2162,9 @@ public class OsmandSettings {
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_HEIGHT = "last_known_map_height"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_LAT_HEIGHT_SHIFTED = "last_known_map_lat_height_shifted"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_LON_HEIGHT_SHIFTED = "last_known_map__lon_height_shifted"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM_FLOAT_PART = "last_known_map_zoom_float_part";
 
@@ -2142,6 +2183,15 @@ public class OsmandSettings {
 		return settingsAPI.contains(globalPreferences, LAST_KNOWN_MAP_LAT);
 	}
 
+	public float getLastKnownMapHeight() {
+		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_HEIGHT, 0);
+	}
+
+	public LatLon getLastKnownMapLocationShifted() {
+		float lat = settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_LAT_HEIGHT_SHIFTED, 0);
+		float lon = settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_LON_HEIGHT_SHIFTED, 0);
+		return new LatLon(lat, lon);
+	}
 
 	public LatLon getAndClearMapLocationToShow() {
 		if (!settingsAPI.contains(globalPreferences, MAP_LAT_TO_SHOW)) {
@@ -2203,7 +2253,7 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory && pointDescription != null) {
-			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
+			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription, HistorySource.SEARCH);
 		}
 	}
 
@@ -2220,10 +2270,13 @@ public class OsmandSettings {
 	}
 
 	// Do not use that method if you want to show point on map. Use setMapLocationToShow
-	public void setLastKnownMapLocation(double latitude, double longitude) {
+	public void setLastKnownMapLocation(LatLon mapLocation, float heightInMeters, LatLon mapLocationShifted) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
-		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) latitude);
-		edit.putFloat(LAST_KNOWN_MAP_LON, (float) longitude);
+		edit.putFloat(LAST_KNOWN_MAP_LAT, (float) mapLocation.getLatitude());
+		edit.putFloat(LAST_KNOWN_MAP_LON, (float) mapLocation.getLongitude());
+		edit.putFloat(LAST_KNOWN_MAP_HEIGHT, heightInMeters);
+		edit.putFloat(LAST_KNOWN_MAP_LAT_HEIGHT_SHIFTED, (float) mapLocationShifted.getLatitude());
+		edit.putFloat(LAST_KNOWN_MAP_LON_HEIGHT_SHIFTED, (float) mapLocationShifted.getLongitude());
 		edit.commit();
 	}
 
@@ -2534,7 +2587,7 @@ public class OsmandSettings {
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 		if (add && NAVIGATION_HISTORY.get()) {
 			if (p != null && !p.isSearchingAddress(ctx)) {
-				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p);
+				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, p, HistorySource.NAVIGATION);
 			}
 		}
 		backupTargetPoints();
@@ -2995,11 +3048,6 @@ public class OsmandSettings {
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
 	public static final int SYSTEM_DEFAULT_THEME = 2;
-
-	public static final int NO_EXTERNAL_DEVICE = 0;
-	public static final int GENERIC_EXTERNAL_DEVICE = 1;
-	public static final int WUNDERLINQ_EXTERNAL_DEVICE = 2;
-	public static final int PARROT_EXTERNAL_DEVICE = 3;
 
 	public final CommonPreference<Integer> SEARCH_TAB =
 			new IntPreference(this, "SEARCH_TAB", 0).makeGlobal().cache();

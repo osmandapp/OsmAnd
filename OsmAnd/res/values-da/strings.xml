@@ -375,7 +375,6 @@
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
     <string name="routing_settings_descr">Indstillinger for navigation.</string>
     <string name="global_settings">Globale indstillinger</string>
-    <string name="index_settings">Administrer kortfiler</string>
     <string name="general_settings">Generelt</string>
     <string name="general_settings_descr">Konfigurer visning og generelle indstillinger.</string>
     <string name="global_app_settings">Globale app-indstillinger</string>
@@ -1807,7 +1806,7 @@
     <string name="shared_string_sound">Lyd</string>
     <string name="select_voice_provider">Vælg talevejledning</string>
     <string name="select_voice_provider_descr">Vælg eller hent talevejledning på dit sprog.</string>
-    <string name="live_updates">Realtidsopdateringer</string>
+    <string name="live_updates">Live-opdateringer</string>
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>
     <string name="update_time">Opdateringstidspunkt</string>
@@ -1832,7 +1831,7 @@
     <string name="item_removed">Emne fjernet</string>
     <string name="n_items_removed">Emner slettet</string>
     <string name="shared_string_undo_all">Fortryd alle</string>
-    <string name="rendering_attr_hideIcons_name">IP ikoner</string>
+    <string name="rendering_attr_hideIcons_name">IP-ikoner</string>
     <string name="switch_start_finish">Byt om på startpunkt og destination</string>
     <string name="number_of_contributors">Antal bidragydere</string>
     <string name="number_of_edits">Antal redigeringer</string>
@@ -1851,9 +1850,9 @@
     <string name="find_parking">Find parkering</string>
     <string name="show_polygons">Vis polygoner</string>
     <string name="rendering_attr_showMtbRoutes_name">Mountainbike-ruter</string>
-    <string name="show_map_markers_description">Aktivér kortmarkør funktionen.</string>
+    <string name="show_map_markers_description">Aktivér kortmarkør-funktionen.</string>
     <string name="clear_active_markers_q">Fjern alle aktive markører?</string>
-    <string name="clear_markers_history_q">Ryd kortmarkørhistoriken?</string>
+    <string name="clear_markers_history_q">Ryd kortmarkørhistorikken\?</string>
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kortmarkører</string>
     <string name="map_marker">Kortmarkør</string>
@@ -1864,7 +1863,7 @@
     <string name="shared_string_add_to_map_markers">Tilføj til kortmarkører</string>
     <string name="map_marker_1st">Første kortmarkør</string>
     <string name="map_marker_2nd">Anden kortmarkør</string>
-    <string name="shared_string_toolbar">Værktøjslinie</string>
+    <string name="shared_string_toolbar">Værktøjslinje</string>
     <string name="shared_string_widgets">Moduler</string>
     <string name="download_files_error_not_enough_space">Ikke nok plads!
 \nBrug for {3} MB midlertidigt, {1} MB permanent.
@@ -1885,7 +1884,7 @@
     <string name="osm_live_subscribe_btn">Tilmeld</string>
     <string name="osm_live_email_desc">Nødvendig for at opdatere dig om dine bidrag.</string>
     <string name="osm_live_user_public_name">Offentligt navn</string>
-    <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
+    <string name="osm_live_hide_user_name">Vis ikke mit navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
     <string name="osm_live_month_cost">Omkostning pr. måned</string>
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
@@ -1893,7 +1892,7 @@
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Indtast en gyldig e-mailadresse</string>
     <string name="osm_live_enter_user_name">Indtast et offentligt navn</string>
-    <string name="osm_live_thanks">Tak for støtte til OsmAnd!
+    <string name="osm_live_thanks">Tak for din støtte til OsmAnd!
 \nFor at aktivere alle nye funktioner, er det nødvendigt at genstarte OsmAnd.</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM-brugere, som indsender ændringer til kortet i det pågældende område.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
@@ -1910,7 +1909,7 @@
     <string name="shared_string_move_up">Flyt ↑</string>
     <string name="shared_string_move_down">Flyt ↓</string>
     <string name="full_report">Fuldstændig rapport</string>
-    <string name="open_street_map_login_and_pass">OSM brugernavn og adgangskode</string>
+    <string name="open_street_map_login_and_pass">OSM-brugernavn og adgangskode</string>
     <string name="storage_permission_restart_is_required">Appen har nu lov til at skrive til eksternt lager, men en genstart er påkrævet.</string>
     <string name="report">Rapport</string>
     <string name="file_name_containes_illegal_char">Filnavn indeholder ikke-tilladte tegn</string>
@@ -2889,8 +2888,8 @@
     <string name="rendering_attr_highway_class_state_road_name">Statsvej</string>
     <string name="rendering_attr_highway_class_service_name">Service</string>
     <string name="rendering_attr_highway_class_steps_name">Trin</string>
-    <string name="routing_attr_avoid_sett_name">Ingen brosten eller natursten</string>
-    <string name="routing_attr_avoid_sett_description">Undgår brosten og natursten</string>
+    <string name="routing_attr_avoid_sett_name">Ingen brosten</string>
+    <string name="routing_attr_avoid_sett_description">Undgår brosten</string>
     <string name="shared_string_degrees">Grader</string>
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Enhed for vinkelmåling</string>
@@ -2995,7 +2994,7 @@
     <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski.</string>
     <string name="routing_attr_piste_type_sled_name">Slæde</string>
     <string name="routing_attr_piste_type_sled_description">Pister til kælkning.</string>
-    <string name="routing_attr_allow_intermediate_name">Tillad mellemliggende ruter</string>
+    <string name="routing_attr_allow_intermediate_name">Tillad middelsvære ruter</string>
     <string name="routing_attr_allow_intermediate_description">Mere vanskelige ruter med stejlere sektioner. Generelt med nogle forhindringer som bør undgås.</string>
     <string name="routing_attr_allow_advanced_name">Tillad avancerede ruter</string>
     <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige forhindringer og stejle sektioner.</string>
@@ -3006,7 +3005,7 @@
     <string name="routing_attr_allow_classic_only_name">Tillad kun klassiske ruter</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Dette omfatter ruter forberedt af en mindre snescooter med løsere pister og spor lavet manuelt af skiløbere.</string>
     <string name="routing_attr_difficulty_preference_name">Foretrukket sværhedsgrad</string>
-    <string name="routing_attr_difficulty_preference_description">Foretræk ruter af denne vanskelighed, selv om ruteføring over sværere eller lettere pister stadig er mulig, hvis de er kortere.</string>
+    <string name="routing_attr_difficulty_preference_description">Foretræk ruter af denne sværhedsgrad, selv om ruteføring over sværere eller lettere pister stadig er mulig, hvis de er kortere.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' og \'Off-piste\' er uofficielle ruter og passager. Typisk upræparerede, ikke vedligeholdt og ikke kontrolleret om aftenen. Adgang på egen risiko.</string>
     <string name="shared_string_color_magenta">Magenta</string>
@@ -3134,7 +3133,7 @@
     <string name="list_of_installed_plugins">Installerede udvidelser</string>
     <string name="configure_navigation">Konfigurer navigation</string>
     <string name="general_settings_profile_descr">Tema, enheder, region</string>
-    <string name="configure_profile">Konfigurere profil</string>
+    <string name="configure_profile">Konfigurer profil</string>
     <string name="screen_alerts_descr">Advarsler vises nederst til venstre under navigationen.</string>
     <string name="switch_profile">Skift profil</string>
     <string name="language_and_output">Sprog og output</string>
@@ -3568,7 +3567,7 @@
     <string name="details_dialog_decr">Vis eller skjul yderligere kort-detaljer</string>
     <string name="shared_string_night_map">Natkort</string>
     <string name="add_online_source">Tilføj onlinekilde</string>
-    <string name="quick_action_remove_next_destination">Slet nærmeste destinationspunkt</string>
+    <string name="quick_action_remove_next_destination">Slet næste destinationspunkt</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper som zoom</string>
     <string name="please_provide_point_name_error">Angiv et navn til punktet</string>
     <string name="search_download_wikipedia_maps">Hent Wikipedia-kort</string>
@@ -3763,10 +3762,10 @@
     <string name="upload_photo">Sender</string>
     <string name="opr_use_dev_url">Brug test.openplacereviews.org</string>
     <string name="activity_type_winter_name">Vinter</string>
-    <string name="activity_type_riding_name">Ride</string>
-    <string name="activity_type_cycling_name">Cykle</string>
-    <string name="activity_type_running_name">Løbe</string>
-    <string name="activity_type_walking_name">Gå</string>
+    <string name="activity_type_riding_name">Ridning</string>
+    <string name="activity_type_cycling_name">Cykling</string>
+    <string name="activity_type_running_name">Løb</string>
+    <string name="activity_type_walking_name">Gang</string>
     <string name="activity_type_motorbike_name">Motorcykel</string>
     <string name="activity_type_car_name">Bil</string>
     <string name="announcement_time_title">Meddelelsestidspunkt</string>
@@ -3849,8 +3848,6 @@
     <string name="on_pause">På pause</string>
     <string name="map_widget_distance_by_tap">Afstand ved tryk</string>
     <string name="live_update_delete_updates_msg">Slet alle %s liveopdateringer\?</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul afgrænsninger for naturreservater, beskyttede områder og nationalparker.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrænser</string>
     <string name="trip_recording_logging_interval_info">Logningsintervallet angiver den tidsperiode, hvor OsmAnd anmoder om de aktuelle positionsdata.</string>
     <string name="trip_recording_save_and_continue">Gem og fortsæt</string>
     <string name="lost_data_warning">Alle ikke-gemte data går tabt.</string>
@@ -4460,7 +4457,6 @@
     <string name="gps_filter_precision">GPS-præcision</string>
     <string name="gps_filter_smoothing">Udjævning</string>
     <string name="save_as_copy">Gem som kopi</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_actions_description">OsmAnd vil anvende ændringerne på sporet uden at opdatere filen. Du kan gemme ændringer manuelt.</string>
     <string name="gps_filter_smoothing_desc">Indstil afstandsgrænsen mellem punkter.
 \nSporpunkter, der er ikke er mindst denne afstand fra det sidste synlige punkt, skjules.
@@ -4612,7 +4608,7 @@
     <string name="widget_secondary_desc_part_of">En del af %1$s-udvidelsen.</string>
     <string name="elevation_profile_widget_desc">Viser højden og hældningsprofilen for den aktuelle rute.</string>
     <string name="parking_widget_desc">Viser afstanden fra skærmens centrum til dit parkeringssted.</string>
-    <string name="altitude_widget_desc">Viser højden over havniveau for den aktuelle geografiske placering.</string>
+    <string name="altitude_widget_desc">Viser højden over havets overflade for den aktuelle geolokalisering.</string>
     <string name="arrival_time_widget_desc">Ankomsttidspunkt på bestemmelsesstedet.</string>
     <string name="map_markers_bar_widget_desc">Modulet i topbjælken viser afstanden og retningen til den næste kortmarkør fra din aktuelle position. Det er muligt at konfigurere i modulet, om der skal vises 1 eller 2 markører.</string>
     <string name="coordinates_widget_desc">Viser de geografiske koordinater for den aktuelle geoplacering.</string>
@@ -4726,7 +4722,7 @@
     <string name="download_complete">Download fuldført</string>
     <string name="auto_backup_title">Automatisk sikkerhedskopiering</string>
     <string name="duplacate_widget_added_snackbar">En modul-dublet tilføjes listen.</string>
-    <string name="shared_string_duplicate">Dublet</string>
+    <string name="shared_string_duplicate">Duplikér</string>
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
     <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du starte en videooptagelse.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
@@ -4838,7 +4834,7 @@
     <string name="map_widget_altitude_desc">Viser højden for den aktuelle geoplacering eller højden for det aktuelle kortcentrum</string>
     <string name="map_center_widget">Koordinater: Kortets centrum</string>
     <string name="current_location_widget">Koordinater: Nuværende placering</string>
-    <string name="map_widget_altitude_map_center">Højde: Kortets centrum</string>
+    <string name="map_widget_altitude_map_center">Højde: kortcentrum</string>
     <string name="map_widget_altitude_map_center_desc">Viser højden over havniveau for det aktuelle kortcentrum.</string>
     <string name="map_widget_rendering_fps">Kortgengivelse FPS</string>
     <string name="map_widget_rendering_fps_desc">Viser, hvor hurtigt kortet og kortelementer vises og opdateres, udtrykt i billeder pr. sekund (FPS).</string>
@@ -4975,8 +4971,6 @@
     <string name="cloud_layer">Skylag</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="rendering_attr_showMtbScale_description">Vis spor efter deres MTB-skala.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Vis MTB-skala op ad bakke</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
@@ -5124,7 +5118,7 @@
     <string name="shared_string_all_world">Hele verden</string>
     <string name="weather_forecast">Vejrudsigt</string>
     <string name="offline_weather_forecast_desc">Du kan hente vejrudsigt for 7 dage.</string>
-    <string name="clear_online_cache_description">Dette vil rydde al cache for online vejrfliser.</string>
+    <string name="clear_online_cache_description">Dette vil rydde cachehukommelsen for online vejrfliser.</string>
     <string name="offline_weather_forecast">Offline vejrudsigt</string>
     <string name="common_weight_limit_error">Mindste værdi er \"%1$s\" %2$s. Brug profilen \"%3$s\", hvis køretøjets vægt er mindre end minimumsværdien.</string>
     <string name="shared_string_pounds">pund</string>
@@ -5136,4 +5130,89 @@
     <string name="shutter_sound">Lukkerlyd</string>
     <string name="camera_app">Kamera-app</string>
     <string name="proxy_port_max_warning">Maksimal portværdi er %1$s</string>
+    <string name="weather_download_error">Kunne ikke downloade %1$s fliser.</string>
+    <string name="ble_search_again">Søg igen</string>
+    <string name="external_device_characteristic_pulse_rate">Pulshastighed</string>
+    <string name="external_device_characteristic_distance">Afstand</string>
+    <string name="external_device_forget_sensor_description">Sensor fjernes fra listen. Du vil til enhver tid kunne parre denne sensor igen.</string>
+    <string name="external_device_characteristic_total_distance">Samlet afstand</string>
+    <string name="external_device_characteristic_battery_level">Batteri</string>
+    <string name="external_device_low_battery">Lavt batteri</string>
+    <string name="external_device_connected">Forbundet</string>
+    <string name="external_device_menu_forget">Glem</string>
+    <string name="external_device_characteristic_speed">Hastighed</string>
+    <string name="external_device_characteristic_cuff_pressure">Manchettryk</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="external_device_forget_sensor">Glem sensor</string>
+    <string name="external_device_disconnected">Frakoblet</string>
+    <string name="external_device_characteristic_cadence">Kadence</string>
+    <string name="external_device_characteristic_temperature">Temperatur</string>
+    <string name="external_device_details_connection">Forbindelse</string>
+    <string name="external_device_details_disconnect">Frakobl</string>
+    <string name="bluetooth_disconnected">Frakoblet, %s</string>
+    <string name="bluetooth_not_supported">Bluetooth understøttes ikke</string>
+    <string name="ant_plus_nothing_found_text">Kan ikke finde nogen sensorer</string>
+    <string name="external_device_characteristic_heart_rate">Puls</string>
+    <string name="external_device_characteristic_arterial_pressure">Arterielt tryk</string>
+    <string name="ant_plus_nothing_found_description">Sørg for at:
+\n- Bluetooth er slået til
+\n- Sensoren er aktiveret
+\n- Denne enhed er placeret i nærheden af sensoren</string>
+    <string name="external_device_characteristic_systolic">Systolisk</string>
+    <string name="external_device_characteristic_diastolic">Diastolisk</string>
+    <string name="ant_plus_searching_text">Søger efter sensorer</string>
+    <string name="external_device_details_battery">Batteri</string>
+    <string name="external_device_details_speed">Hastighed</string>
+    <string name="external_device_details_connect">Tilslut</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth er slået fra</string>
+    <string name="ant_plus_bluetooth_off_description">Slå Bluetooth-søgning og parring af sensorer til.</string>
+    <string name="external_device_characteristic_stride_length">Skridtlængde</string>
+    <string name="external_device_details_information">Information</string>
+    <string name="external_device_details_received_data">Modtagede data</string>
+    <string name="external_device_details_total_distance">Samlet afstand</string>
+    <string name="external_device_details_distance">Afstand</string>
+    <string name="ant_plus_searching_text_description">Hold enheden tæt på sensoren. Du skal aktivere sensoren, så OsmAnd kan finde den.</string>
+    <string name="ant_plus_searching">Søger</string>
+    <string name="external_device_details_pair">Par</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="bluetooth_found_title">Fandt: %d</string>
+    <string name="ant_plus_help_title">Jeg ved ikke, hvilken type sensor jeg har</string>
+    <string name="ant_plus_open_settings">Åbn indstillinger</string>
+    <string name="bluetooth_connected">Forbundet, %s</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Du kan parre Bluetooth LE- og ANT+-sensorer med OsmAnd.</string>
+    <string name="ant_plus_pair_new_sensor_ble">Par Bluetooth LE-sensor</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Par ANT+-sensor</string>
+    <string name="learn_more_about_sensors_link">Få mere at vide om sensorer.</string>
+    <string name="external_device_characteristic_gear_ratio">Gearforhold</string>
+    <string name="ant_plus_pair_new_sensor">Par ny sensor</string>
+    <string name="file_already_exists">Fil eksisterer allerede</string>
+    <string name="file_already_exists_description">\"%1$s\". Der findes allerede en fil med dette navn. Hvis den erstattes, overskrives alle ændringer, der er foretaget med den aktuelle version.</string>
+    <string name="nav_profile_confirm_delete">Er du sikker på, at du vil slette \"%1$s\"\?</string>
+    <string name="is_imported">%1$s importeres.</string>
+    <string name="no_search_results">Ingen resultater</string>
+    <string name="search_track_by_name">Søg spor efter navn</string>
+    <string name="number_of_tracks">%1$s spor</string>
+    <string name="device_connected">%1$s oprettede forbindelse</string>
+    <string name="running_scds_device_name">Løbeenhed</string>
+    <string name="bicycle_scd_device_name">Cykelenhed</string>
+    <string name="external_device_blood_pressure">Blodtryk</string>
+    <string name="no_bt_permission">Bluetooth-tilladelse er ikke givet</string>
+    <string name="shared_string_chest">Bryst</string>
+    <string name="shared_string_wrist">Håndled</string>
+    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_hand">Hånd</string>
+    <string name="shared_string_ear_lobe">Øreflip</string>
+    <string name="shared_string_foot">Fod</string>
+    <string name="device_disconnected">%1$s afbrød forbindelsen</string>
+    <string name="rendering_attr_lightDetail_name">Lysdetalje</string>
+    <string name="rendering_attr_lightDetail_description">Standard: sømærke navn (lystegn.gruppe.periode), vælg yderligere oplysninger om sektor 1 til 3 eller sektor 1,2,3,4,5 lystegn</string>
+    <string name="rendering_value_sectors_name">Sektorer</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_small_name">Lille</string>
+    <string name="rendering_value_name_only_name">Kun navn</string>
+    <string name="beats_per_minute_short">spm</string>
 </resources>

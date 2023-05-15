@@ -1,9 +1,9 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DATE_DESCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DISTANCE_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DATE_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,8 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseBottomSheetDialogFragment;
-import net.osmand.plus.configmap.tracks.SortByBottomSheet.SortModesAdapter.SortModeViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -45,9 +46,8 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		nightMode = isNightMode(true);
 
 		Fragment target = getTargetFragment();
-		if (target instanceof TracksFragment) {
-			TrackTab trackTab = ((TracksFragment) target).getSelectedTab();
-			tracksSortMode = trackTab.getSortMode();
+		if (target instanceof SortTracksListener) {
+			tracksSortMode = ((SortTracksListener) target).getTracksSortMode();
 		}
 	}
 
@@ -56,8 +56,8 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		Context context = requireContext();
-		inflater = UiUtilities.getInflater(context, nightMode);
-		View view = inflater.inflate(R.layout.bottom_sheet_track_group_list, null);
+		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		View view = themedInflater.inflate(R.layout.bottom_sheet_track_group_list, null);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.sort_by);
@@ -102,9 +102,9 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 			holder.itemView.setOnClickListener(view -> {
 				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
-				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksFragment) {
+				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof SortTracksListener) {
 					TracksSortMode mode = sortModes.get(position);
-					((TracksFragment) target).setTracksSortMode(mode);
+					((SortTracksListener) target).setTracksSortMode(mode);
 				}
 				dismiss();
 			});
@@ -121,21 +121,21 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		public int getItemCount() {
 			return sortModes.size();
 		}
+	}
 
-		class SortModeViewHolder extends RecyclerView.ViewHolder {
+	private static class SortModeViewHolder extends RecyclerView.ViewHolder {
 
-			private final TextView title;
-			private final ImageView groupTypeIcon;
-			private final ImageView selectedIcon;
-			private final View divider;
+		private final TextView title;
+		private final ImageView groupTypeIcon;
+		private final ImageView selectedIcon;
+		private final View divider;
 
-			public SortModeViewHolder(@NonNull View itemView) {
-				super(itemView);
-				title = itemView.findViewById(R.id.title);
-				groupTypeIcon = itemView.findViewById(R.id.icon);
-				selectedIcon = itemView.findViewById(R.id.secondary_icon);
-				divider = itemView.findViewById(R.id.divider);
-			}
+		SortModeViewHolder(@NonNull View itemView) {
+			super(itemView);
+			title = itemView.findViewById(R.id.title);
+			groupTypeIcon = itemView.findViewById(R.id.icon);
+			selectedIcon = itemView.findViewById(R.id.secondary_icon);
+			divider = itemView.findViewById(R.id.divider);
 		}
 	}
 

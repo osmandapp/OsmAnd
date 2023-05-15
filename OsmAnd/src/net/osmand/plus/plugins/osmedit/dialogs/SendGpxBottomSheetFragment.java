@@ -23,8 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.track.helpers.GPXInfo;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
@@ -38,6 +37,7 @@ import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,16 +45,12 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
 
-	private GPXInfo[] gpxInfos;
+	private File[] files;
 	private UploadVisibility selectedUploadVisibility;
 	private OsmEditingPlugin plugin;
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
-
-	public void setGpxInfos(GPXInfo[] gpxInfos) {
-		this.gpxInfos = gpxInfos;
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -72,10 +68,10 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		messageField = sendGpxView.findViewById(R.id.message_field);
 
 		TextView accountName = sendGpxView.findViewById(R.id.user_name);
-		if (!Algorithms.isEmpty(plugin.OSM_USER_DISPLAY_NAME.get())) {
-			accountName.setText(plugin.OSM_USER_DISPLAY_NAME.get());
-		} else {
+		if (Algorithms.isEmpty(plugin.OSM_USER_DISPLAY_NAME.get())) {
 			accountName.setText(plugin.OSM_USER_NAME_OR_EMAIL.get());
+		} else {
+			accountName.setText(plugin.OSM_USER_DISPLAY_NAME.get());
 		}
 
 		TextView visibilityName = sendGpxView.findViewById(R.id.visibility_name);
@@ -88,6 +84,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			String title = getString(visibilityType.getTitleId());
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = visibilityType;
 			itemsVisibility.add(item);
 		}
@@ -109,15 +106,12 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		chipsView.notifyDataSetChanged();
 
 		LinearLayout account = sendGpxView.findViewById(R.id.account_container);
-		account.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					showOpenStreetMapScreen(activity);
-				}
-				dismiss();
+		account.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				showOpenStreetMapScreen(activity);
 			}
+			dismiss();
 		});
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
@@ -131,8 +125,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			BaseSettingsFragment.showInstance(activity, OPEN_STREET_MAP_EDITING);
 		} else {
 			Bundle prevIntentParams = null;
-			if (activity instanceof FavoritesActivity) {
-				prevIntentParams = ((FavoritesActivity) activity).storeCurrentState();
+			if (activity instanceof MyPlacesActivity) {
+				prevIntentParams = ((MyPlacesActivity) activity).storeCurrentState();
 			} else if (activity.getIntent() != null) {
 				prevIntentParams = activity.getIntent().getExtras();
 			}
@@ -164,16 +158,16 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, commonDescription,
 					tags, selectedUploadVisibility, this);
-			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfos);
+			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
 		}
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull GPXInfo[] info, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull File[] files, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SendGpxBottomSheetFragment fragment = new SendGpxBottomSheetFragment();
+			fragment.files = files;
 			fragment.setTargetFragment(target, 0);
-			fragment.setGpxInfos(info);
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}

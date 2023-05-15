@@ -1,5 +1,9 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
+
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,17 +14,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.EngineType;
@@ -32,17 +39,21 @@ import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
+import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.ROUTING;
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 
@@ -69,10 +80,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-									@Nullable Fragment target,
-									ApplicationMode appMode,
-									String selectedItemKey,
-									boolean usedOnMap) {
+	                                @Nullable Fragment target,
+	                                ApplicationMode appMode,
+	                                String selectedItemKey,
+	                                boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
@@ -175,7 +186,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 		for (ProfilesGroup group : profileGroups) {
 			List<RoutingDataObject> items = group.getProfiles();
 			if (!Algorithms.isEmpty(items)) {
-				addGroupHeader(group.getTitle(), group.getDescription(app, nightMode));
+				addGroupHeader(group);
 				for (RoutingDataObject item : items) {
 					addProfileItem(item);
 				}
@@ -206,6 +217,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				return;
 			}
 			mapActivity.getImportHelper().chooseFileToImport(ROUTING, (CallbackWithObject<Builder>) builder -> {
+				Fragment targetFragment = getTargetFragment();
+				if (targetFragment instanceof NavigationFragment) {
+					((NavigationFragment) targetFragment).updateRoutingProfiles();
+				}
 				updateMenuItems();
 				return false;
 			});
@@ -220,6 +235,101 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			}
 			dismiss();
 		});
+	}
+
+	private void addGroupHeader(ProfilesGroup group) {
+		CharSequence title = group.getTitle();
+		CharSequence description = group.getDescription(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
+		View view = inflater.inflate(R.layout.group_title_with_desription_and_option, null);
+		View container = view.findViewById(R.id.container);
+		container.setPadding(container.getPaddingLeft(), 0, container.getPaddingRight(), 0);
+
+		View options = view.findViewById(R.id.options);
+		boolean groupImported = isGroupImported(group);
+		if (groupImported) {
+			options.setOnClickListener(itemView -> openPopUpMenu(itemView, group));
+		}
+		AndroidUiHelper.updateVisibility(options, groupImported);
+
+		TextView tvTitle = view.findViewById(R.id.title);
+		TextView tvDescription = view.findViewById(R.id.description);
+		tvTitle.setText(title);
+		if (description != null) {
+			tvDescription.setText(description);
+			tvDescription.setOnTouchListener(new ClickableSpanTouchListener());
+		} else {
+			tvDescription.setVisibility(View.GONE);
+		}
+
+		items.add(new BaseBottomSheetItem.Builder()
+				.setCustomView(view)
+				.create()
+		);
+	}
+
+	private void openPopUpMenu(View view, ProfilesGroup group) {
+		UiUtilities iconsCache = app.getUIUtilities();
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_delete)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(getOptionDeleteClickListener(group))
+				.create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private boolean isGroupImported(ProfilesGroup group) {
+		for (RoutingDataObject profile : group.getProfiles()) {
+			String fileName = profile.getFileName();
+			if (fileName == null || !fileName.contentEquals(group.getTitle())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Nullable
+	private ProfileDataObject getSelectedRoutingProfile(ProfilesGroup group) {
+		for (RoutingDataObject profile : group.getProfiles()) {
+			if (isSelected(profile)) {
+				return profile;
+			}
+		}
+		return null;
+	}
+
+	protected View.OnClickListener getOptionDeleteClickListener(ProfilesGroup group) {
+		String fileName = String.valueOf(group.getTitle());
+		return view -> {
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
+			builder.setTitle(getString(R.string.shared_string_delete_file));
+			builder.setMessage(getString(R.string.nav_profile_confirm_delete, fileName));
+			builder.setNeutralButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_ok, (dialogInterface, i) -> {
+						File dir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+						File routingFile = new File(dir, fileName);
+						if (routingFile.exists() && routingFile.delete()) {
+							updateRouteProfileInAppModes(group.getProfiles());
+							ProfileDataObject selectedProfile = getSelectedRoutingProfile(group);
+							if (selectedProfile != null) {
+								setDefaultRouteProfile(getAppMode());
+							}
+							app.getCustomRoutingConfigs().remove(fileName);
+							updateMenuItems();
+						}
+					});
+
+			builder.show();
+		};
 	}
 
 	@Override
@@ -266,6 +376,35 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			});
 		}
 		items.add(builder.create());
+	}
+
+	private void setDefaultRouteProfile(ApplicationMode applicationMode) {
+		String routingProfile = applicationMode.getDefaultRoutingProfile();
+		String derivedProfile = applicationMode.getDefaultDerivedProfile();
+		Bundle args = new Bundle();
+		args.putString(PROFILE_KEY_ARG, routingProfile);
+		args.putBoolean(PROFILES_LIST_UPDATED_ARG, false);
+		if (!Algorithms.isEmpty(derivedProfile)) {
+			args.putString(DERIVED_PROFILE_ARG, derivedProfile);
+		}
+		Fragment target = getTargetFragment();
+		if (target instanceof OnSelectProfileCallback) {
+			((OnSelectProfileCallback) target).onProfileSelected(args);
+		}
+		dismiss();
+	}
+
+	private void updateRouteProfileInAppModes(List<RoutingDataObject> deletedRoutingProfiles) {
+		List<ApplicationMode> applicationModes = ApplicationMode.allPossibleValues();
+		Fragment targetFragment = getTargetFragment();
+		for (ApplicationMode mode : applicationModes) {
+			String routingProfile = mode.getRoutingProfile();
+			for (RoutingDataObject deletedRoutingProfile : deletedRoutingProfiles) {
+				if (targetFragment instanceof NavigationFragment && routingProfile.equals(deletedRoutingProfile.getStringKey())) {
+					((NavigationFragment) targetFragment).updateAppMode(mode, mode.getDefaultRoutingProfile(), mode.getDefaultDerivedProfile());
+				}
+			}
+		}
 	}
 
 	@Override

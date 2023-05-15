@@ -2,6 +2,8 @@ package net.osmand.plus.utils;
 
 
 import static android.content.Context.POWER_SERVICE;
+import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
@@ -10,6 +12,7 @@ import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -26,8 +29,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.StatFs;
@@ -64,6 +69,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -81,6 +87,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
@@ -198,6 +205,31 @@ public class AndroidUtils {
 		return createCheckedColorStateList(ctx, nightMode,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_dark);
+	}
+
+	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
+		Paint bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
+		int layers = layerDrawable.getNumberOfLayers() - 1;
+		for (int i = 0; i <= layers; i++) {
+			Drawable drawable = layerDrawable.getDrawable(i);
+			if (drawable != null) {
+				int width = (int) (drawable.getIntrinsicWidth() * scale);
+				int height = (int) (drawable.getIntrinsicHeight() * scale);
+				if (drawable instanceof VectorDrawable) {
+					Rect boundsVector = new Rect(locationX - width / 2, locationY - height / 2,
+							locationX + width / 2, locationY + height / 2);
+					drawable.setBounds(boundsVector);
+					drawable.draw(canvas);
+				} else {
+					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
+					Bitmap scaledBitmap = scaleBitmap(srcBitmap, width, height, true);
+					canvas.drawBitmap(scaledBitmap, locationX - width / 2f, locationY - height / 2f, bitmapPaint);
+					if (scaledBitmap != srcBitmap) {
+						scaledBitmap.recycle();
+					}
+				}
+			}
+		}
 	}
 
 	public static String addColon(@NonNull OsmandApplication app, @StringRes int stringRes) {
@@ -941,8 +973,8 @@ public class AndroidUtils {
 		return isSupportRTL() && getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
-	public static ArrayList<View> getChildrenViews(ViewGroup vg) {
-		ArrayList<View> result = new ArrayList<>();
+	public static List<View> getChildrenViews(ViewGroup vg) {
+		List<View> result = new ArrayList<>();
 		for (int i = 0; i < vg.getChildCount(); i++) {
 			View child = vg.getChildAt(i);
 			result.add(child);
@@ -1006,22 +1038,22 @@ public class AndroidUtils {
 		int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
 		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
 			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
-			SpannableStringBuilder ssb = new SpannableStringBuilder(nStr);
+			SpannableStringBuilder builder = new SpannableStringBuilder(nStr);
 			if (baseStyle != null) {
 				if (indexOfPlaceholder > 0) {
-					ssb.setSpan(baseStyle, 0, indexOfPlaceholder, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+					builder.setSpan(baseStyle, 0, indexOfPlaceholder, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 				if (indexOfPlaceholder + stringToInsertAndStyle.length() < nStr.length()) {
-					ssb.setSpan(baseStyle,
+					builder.setSpan(baseStyle,
 							indexOfPlaceholder + stringToInsertAndStyle.length(),
 							nStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
 			if (replaceStyle != null) {
-				ssb.setSpan(replaceStyle, indexOfPlaceholder,
+				builder.setSpan(replaceStyle, indexOfPlaceholder,
 						indexOfPlaceholder + stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
-			return ssb;
+			return builder;
 		} else {
 			return baseString;
 		}
@@ -1043,10 +1075,10 @@ public class AndroidUtils {
 			char c = nameWithoutExt.charAt(i);
 			if (Character.isDigit(c)) {
 				numberSection.insert(0, c);
-			} else if (Character.isSpaceChar(c) && numberSection.length() > 0) {
-				hasNameNumberSection = true;
-				break;
 			} else {
+				if (Character.isSpaceChar(c) && numberSection.length() > 0) {
+					hasNameNumberSection = true;
+				}
 				break;
 			}
 			i--;
@@ -1075,36 +1107,6 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
-	}
-
-	@NonNull
-	public static String checkEmoticons(@NonNull String name) {
-		char[] chars = name.toCharArray();
-		char ch1;
-		char ch2;
-
-		int index = 0;
-		StringBuilder builder = new StringBuilder();
-		while (index < chars.length) {
-			ch1 = chars[index];
-			if ((int) ch1 == 0xD83C) {
-				ch2 = chars[index + 1];
-				if ((int) ch2 >= 0xDF00 && (int) ch2 <= 0xDFFF) {
-					index += 2;
-					continue;
-				}
-			} else if ((int) ch1 == 0xD83D) {
-				ch2 = chars[index + 1];
-				if ((int) ch2 >= 0xDC00 && (int) ch2 <= 0xDDFF) {
-					index += 2;
-					continue;
-				}
-			}
-			builder.append(ch1);
-			++index;
-		}
-		builder.trimToSize(); // remove trailing null characters
-		return builder.toString();
 	}
 
 	@NonNull
@@ -1235,4 +1237,19 @@ public class AndroidUtils {
 		}
 	}
 
+	public static boolean hasPermission(Context context, String permission) {
+		return ActivityCompat.checkSelfPermission(
+				context,
+				permission
+		) == PackageManager.PERMISSION_GRANTED;
+	}
+
+	@Nullable
+	public static <T extends Serializable> T getSerializable(@NonNull Bundle bundle, @NonNull String key, @NonNull Class<T> clazz) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return bundle.getSerializable(key, clazz);
+		} else {
+			return (T) bundle.getSerializable(key);
+		}
+	}
 }

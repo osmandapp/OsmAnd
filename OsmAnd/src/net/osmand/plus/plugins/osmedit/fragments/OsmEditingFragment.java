@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 import android.content.Intent;
@@ -33,7 +33,6 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -219,7 +218,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements Validate
 			bundle.putInt(TAB_ID, OSM_EDIT_TAB);
 
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
-			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
+			Intent favorites = new Intent(preference.getContext(), appCustomization.getMyPlacesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);

@@ -2,8 +2,8 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FAV_FILE_PREFIX;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
+import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
+import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
 
 import android.content.Context;
 
@@ -16,8 +16,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;

@@ -97,7 +97,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private int expireTimeMinutes = EXPIRE_TIME_NEVER;
 	private boolean elliptic;
 	private boolean sqliteDB;
-	private boolean nightMode;
 	private boolean fromTemplate;
 	private boolean wasChanged;
 
@@ -122,12 +121,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 					.add(fragment, TAG)
 					.commitAllowingStateLoss();
 		}
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 	}
 
 	@Override

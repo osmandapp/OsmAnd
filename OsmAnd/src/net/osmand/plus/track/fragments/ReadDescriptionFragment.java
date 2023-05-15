@@ -25,7 +25,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -69,13 +68,17 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		boolean nightMode = isNightMode(true);
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
 		setupImage(view);
 		setupContentView(view);
 		return view;
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@Override
@@ -88,14 +91,14 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 		Activity ctx = requireActivity();
-		int themeId = isNightMode(true) ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
 		if (window != null) {
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			int statusBarColor = isNightMode(true) ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+			int statusBarColor = nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 			window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
 		}
 		return dialog;
@@ -194,7 +197,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	private void loadWebViewData() {
 		String content = mContent;
 		if (content != null) {
-			content = setupContentStyle(content, isNightMode(true));
+			content = setupContentStyle(content, nightMode);
 			String encoded = Base64.encodeToString(content.getBytes(), Base64.NO_PADDING);
 			mWebView.loadData(encoded, "text/html", "base64");
 		}
@@ -230,7 +233,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		View editBtn = view.findViewById(R.id.btn_edit);
 
 		Context ctx = editBtn.getContext();
-		AndroidUtils.setBackground(ctx, editBtn, isNightMode(true), R.drawable.ripple_light, R.drawable.ripple_dark);
+		AndroidUtils.setBackground(ctx, editBtn, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 
 		editBtn.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -240,7 +243,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,
 				editBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
-		int backgroundColor = ColorUtilities.getActivityBgColorId(isNightMode(false));
+		int backgroundColor = ColorUtilities.getActivityBgColorId(nightMode);
 		view.findViewById(R.id.root).setBackgroundResource(backgroundColor);
 	}
 

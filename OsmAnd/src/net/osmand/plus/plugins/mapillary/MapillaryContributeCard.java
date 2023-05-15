@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.mapillary;
 
 import android.view.View;
-import android.widget.TextView;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;

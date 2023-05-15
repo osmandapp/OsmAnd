@@ -675,7 +675,6 @@
     <string name="free_version_title">ഫ്രീ വേര്‍ഷ</string>
     <string name="routing_settings">വഴികാട്ടി</string>
     <string name="routing_settings_descr">വഴികാട്ടി സജ്ജീകരിക്കുക</string>
-    <string name="index_settings">ഭൂപട ഫയലുകള്‍ കൈകാര്യം ചെയ്യുക</string>
     <string name="choose_auto_follow_route">"സ്വയം ഭുപടദൃഷ്യം നടുവിലാക്കുക "</string>
     <string name="auto_follow_route_navigation">"നാവിഗേഷനില്‍ മാത്രം നടുവിലാക്കുക "</string>
     <string name="auto_follow_route_navigation_descr">നാവിഗേഷനില്‍ മാത്രം ഭുപടദൃഷ്യം സ്വയം- നടുവിലാക്കുക.</string>

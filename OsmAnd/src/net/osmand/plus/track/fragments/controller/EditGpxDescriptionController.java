@@ -1,6 +1,5 @@
 package net.osmand.plus.track.fragments.controller;
 
-import android.os.AsyncTask;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -10,11 +9,10 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
 import net.osmand.plus.track.fragments.ReadGpxDescriptionFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.wikivoyage.ArticleWebViewClient;
 
@@ -48,23 +46,15 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 		gpx.metadata.getExtensionsToWrite().put("desc", editedText);
 
 		File file = trackMenuFragment.getDisplayHelper().getFile();
-		new SaveGpxAsyncTask(file, gpx, new SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
+		SaveGpxHelper.saveGpx(file, gpx, errorMessage -> {
+			if (errorMessage != null) {
+				log.error(errorMessage);
 			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (errorMessage != null) {
-					log.error(errorMessage);
-				}
-				if (activity.getTrackMenuFragment() != null) {
-					TrackMenuFragment trackMenuFragment = activity.getTrackMenuFragment();
-					trackMenuFragment.updateContent();
-				}
-				callback.onDescriptionSaved();
+			if (activity.getTrackMenuFragment() != null) {
+				activity.getTrackMenuFragment().updateContent();
 			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			callback.onDescriptionSaved();
+		});
 	}
 
 	@Nullable

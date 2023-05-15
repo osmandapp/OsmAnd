@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXInfo;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.utils.AndroidUtils;
@@ -17,7 +16,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-public class UploadGPXFilesTask extends AsyncTask<GPXInfo, String, String> {
+public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 
 	private final OsmandApplication app;
 	private final WeakReference<Activity> activityRef;
@@ -41,15 +40,14 @@ public class UploadGPXFilesTask extends AsyncTask<GPXInfo, String, String> {
 	}
 
 	@Override
-	protected String doInBackground(GPXInfo... params) {
+	protected String doInBackground(File... params) {
 		int count = 0;
 		int total = 0;
-		for (GPXInfo info : params) {
-			if (!isCancelled() && info.getFile() != null) {
-				File file = info.getFile();
+		for (File file : params) {
+			if (!isCancelled() && file != null) {
 				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app);
 				String gpxDescription = Algorithms.isEmpty(commonDescription.trim())
-						? Algorithms.getFileNameWithoutExtension(info.getFileName())
+						? Algorithms.getFileNameWithoutExtension(file.getName())
 						: commonDescription;
 				String warning = remoteUtil.uploadGPXFile(tags, gpxDescription, visibility, file);
 				total++;
@@ -66,14 +64,14 @@ public class UploadGPXFilesTask extends AsyncTask<GPXInfo, String, String> {
 	@Override
 	protected void onProgressUpdate(String... values) {
 		if (values.length > 0) {
-			StringBuilder b = new StringBuilder();
+			StringBuilder builder = new StringBuilder();
 			for (int i = 0; i < values.length; i++) {
 				if (i > 0) {
-					b.append("\n");
+					builder.append("\n");
 				}
-				b.append(values[i]);
+				builder.append(values[i]);
 			}
-			app.showToastMessage(b.toString());
+			app.showToastMessage(builder.toString());
 		}
 	}
 

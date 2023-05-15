@@ -5,7 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:clickable="true"
+	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
@@ -43,6 +45,17 @@
 					android:layout_weight="1"
 					android:text="@string/shared_string_gpx_tracks"
 					android:textSize="@dimen/dialog_header_text_size" />
+
+				<ImageButton
+					android:id="@+id/search"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/search_button"
+					osmand:srcCompat="@drawable/ic_action_search_dark"
+					android:tint="?attr/default_icon_color"
+					tools:tint="?attr/default_icon_color" />
 
 				<ImageButton
 					android:id="@+id/switch_group"

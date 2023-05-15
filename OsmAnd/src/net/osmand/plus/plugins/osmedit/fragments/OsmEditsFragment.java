@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 import android.app.Dialog;
@@ -43,8 +43,8 @@ import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
-import net.osmand.plus.myplaces.ui.FavoritesFragmentStateHolder;
+import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsAdapter;
@@ -82,7 +82,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
-		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
+		OnNodeCommittedListener, FragmentStateHolder, OsmAuthorizationListener, ShareOsmPointsListener {
 
 	public static final int EXPORT_TYPE_ALL = 0;
 	public static final int EXPORT_TYPE_POI = 1;
@@ -386,8 +386,8 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	private void enableSelectionMode(boolean selectionMode) {
 		listAdapter.setSelectionMode(selectionMode);
 		//noinspection ConstantConditions
-		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode && AndroidUiHelper.isOrientationPortrait(getActivity()));
-		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
+		((MyPlacesActivity) getActivity()).setToolbarVisibility(!selectionMode && AndroidUiHelper.isOrientationPortrait(getActivity()));
+		((MyPlacesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
 	public OsmandActionBarActivity getActionBarActivity() {
@@ -636,7 +636,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		Bundle bundle = new Bundle();
 		bundle.putInt(TAB_ID, OSM_EDIT_TAB);
 
-		Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+		Intent intent = new Intent(app, app.getAppCustomization().getMyPlacesActivity());
 		intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -682,7 +682,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		boolean isOsmPoint = osmPoint instanceof OpenstreetmapPoint;
 		String type = osmPoint.getGroup() == Group.POI ? PointDescription.POINT_TYPE_POI : PointDescription.POINT_TYPE_OSM_BUG;
 		String name = (isOsmPoint ? ((OpenstreetmapPoint) osmPoint).getName() : ((OsmNotesPoint) osmPoint).getText());
-		FavoritesActivity.showOnMap(requireActivity(), this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
+		((MyPlacesActivity) getActivity()).showOnMap(this, osmPoint.getLatitude(), osmPoint.getLongitude(), 15,
 				new PointDescription(type, name), true, osmPoint);
 	}
 
@@ -722,7 +722,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
 			OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-			@SuppressWarnings("unchecked") ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
+			List<OsmPoint> points = (List<OsmPoint>) AndroidUtils.getSerializable(getArguments(), POINTS_LIST, ArrayList.class);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			assert points != null;

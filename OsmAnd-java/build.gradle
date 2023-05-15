@@ -41,6 +41,13 @@ task collectRegionsInfoResources(type: Download)  {
 }
 
 
+task collectTestPhrasesResources(type: Copy) {
+	into "src/test/resources/phrases/en/"
+	from("../OsmAnd/res/values") {
+		include "phrases.xml"
+	}
+}
+
 task collectTestResources(type: Copy) {
 	into "src/test/resources/"
 	from("../../resources/test-resources") {
@@ -49,17 +56,27 @@ task collectTestResources(type: Copy) {
 	}
 	from("../../resources/poi") {
 		include "poi_types.xml"
-		include "/phrases/en/*"
-		//include "/phrases/ru/*"
 	}
 }
 
+
+processResources {
+	dependsOn collectRoutingResources,
+		collectRenderingStylesResources,
+		collectRegionsInfoResources,
+		collectMiscResources
+}
+
+processTestResources {
+	dependsOn collectTestResources, collectTestPhrasesResources
+}
 
 task collectExternalResources {
 	dependsOn collectRoutingResources,
 		collectRenderingStylesResources,
 		collectRegionsInfoResources,
 		collectTestResources,
+		collectTestPhrasesResources,
 		collectMiscResources
 }
 

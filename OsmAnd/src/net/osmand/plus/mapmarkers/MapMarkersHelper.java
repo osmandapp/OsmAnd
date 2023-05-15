@@ -18,11 +18,11 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
-import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -912,7 +912,7 @@ public class MapMarkersHelper {
 			ctx.getFavoritesHelper().saveCurrentPointsIntoFile();
 		}
 		for (GPXFile gpxFile : gpxFiles) {
-			GpxUiHelper.saveGpx(gpxFile, null);
+			SaveGpxHelper.saveGpx(gpxFile);
 		}
 		if (!gpxFiles.isEmpty()) {
 			updateTrackMarkersModifiedTime();

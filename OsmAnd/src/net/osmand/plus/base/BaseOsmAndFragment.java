@@ -2,6 +2,7 @@ package net.osmand.plus.base;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -32,6 +33,17 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
 	private int statusBarColor = -1;
 	private boolean transitionAnimationAllowed = true;
+	protected boolean nightMode;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		nightMode = isNightMode(useMapNightMode());
+	}
+
+	protected boolean useMapNightMode() {
+		return false;
+	}
 
 	@Override
 	public void onResume() {
@@ -208,10 +220,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		OsmandApplication app = requireMyApplication();
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !app.getSettings().isLightContent();
+		return requireMyApplication().getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

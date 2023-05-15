@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
@@ -107,6 +108,10 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 			FragmentManager fm = getFragmentManager();
 			if (fm != null && file != null) {
 				ImportCompleteFragment.showInstance(fm, items, file.getName(), needRestart);
+			}
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.disableFirstUsageFragment();
 			}
 		}
 	}

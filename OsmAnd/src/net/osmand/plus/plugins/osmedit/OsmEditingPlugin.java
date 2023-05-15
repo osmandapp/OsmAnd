@@ -47,9 +47,9 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
-import net.osmand.plus.myplaces.ui.AvailableGPXFragment;
-import net.osmand.plus.track.helpers.GPXInfo;
-import net.osmand.plus.myplaces.ui.FavoritesActivity;
+import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
+import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
@@ -86,6 +86,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -388,8 +389,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
-		mTabs.add(favoritesActivity.getTabIndicator(OSM_EDIT_TAB, OsmEditsFragment.class));
+	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
+		mTabs.add(myPlacesActivity.getTabIndicator(OSM_EDIT_TAB, OsmEditsFragment.class));
 		if (intent != null && "OSM".equals(intent.getStringExtra("TAB"))) {
 			app.getSettings().FAVORITES_TAB.set(OSM_EDIT_TAB);
 		}
@@ -480,18 +481,24 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
-			AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
-			optionsMenuAdapter.addItem(new ContextMenuItem(null)
+			AvailableGPXFragment gpxFragment = ((AvailableGPXFragment) fragment);
+			adapter.addItem(new ContextMenuItem(null)
 					.setTitleId(R.string.local_index_mi_upload_gpx, activity)
 					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setColor(app, R.color.color_white)
 					.setListener((uiAdapter, view, item, isChecked) -> {
-						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
-								R.drawable.ic_action_upload_to_openstreetmap, items ->
-										sendGPXFiles(activity, f,
-												items.toArray(new GPXInfo[0])));
+						gpxFragment.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
+								R.drawable.ic_action_upload_to_openstreetmap, items -> {
+									int size = items.size();
+									File[] files = new File[size];
+									for (int i = 0; i < size; i++) {
+										files[i] = items.get(i).getFile();
+									}
+									sendGPXFiles(activity, gpxFragment, files);
+								}
+						);
 						return true;
 					}));
 		}
@@ -528,7 +535,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean sendGPXFiles(FragmentActivity activity, Fragment fragment, GPXInfo... info) {
+	public boolean sendGPXFiles(FragmentActivity activity, Fragment fragment, File... files) {
 		String name = OSM_USER_NAME_OR_EMAIL.get();
 		String pwd = OSM_USER_PASSWORD.get();
 		String authToken = OSM_USER_ACCESS_TOKEN.get();
@@ -536,7 +543,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			LoginBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), fragment);
 			return false;
 		} else {
-			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), info, fragment);
+			SendGpxBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), files, fragment);
 			return true;
 		}
 	}

@@ -23,6 +23,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.bottomsheets.ClearAllHistoryBottomSheet;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.search.core.SearchResult;
@@ -78,7 +79,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		Preference preference = findPreference(SEARCH_HISTORY);
 		if (settings.SEARCH_HISTORY.get()) {
 			SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-			int size = historyHelper.getSearchHistoryResults(false, true).size();
+			int size = historyHelper.getHistoryResults(HistorySource.SEARCH, false, true).size();
 			String description = getString(R.string.shared_string_items);
 			preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_colon, description, String.valueOf(size)));
 			preference.setIcon(getActiveIcon(R.drawable.ic_action_search_dark));
@@ -151,6 +152,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 				ApplicationMode mode = getSelectedAppMode();
 				List<ExportSettingsType> types = new ArrayList<>();
 				types.add(ExportSettingsType.SEARCH_HISTORY);
+				types.add(ExportSettingsType.NAVIGATION_HISTORY);
 				types.add(ExportSettingsType.HISTORY_MARKERS);
 				ExportSettingsFragment.showInstance(activity.getSupportFragmentManager(), mode, types, true);
 			}
@@ -194,7 +196,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 
 	private static int calculateNavigationItemsCount(@NonNull OsmandApplication app) {
 		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		int count = historyHelper.getSearchHistoryResults(true, true).size();
+		int count = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, true).size();
 		if (app.getTargetPointsHelper().isBackupPointsAvailable()) {
 			// Take "Previous Route" item into account during calculations
 			count++;

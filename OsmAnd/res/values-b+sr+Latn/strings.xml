@@ -1519,7 +1519,6 @@
     <string name="global_app_settings">Opšte postavke aplikacije</string>
     <string name="general_settings_descr">Podesite prikaz i opšte postavke aplikacije.</string>
     <string name="general_settings">Opšte</string>
-    <string name="index_settings">Upravljanje fajlovima karata</string>
     <string name="global_settings">Opšte postavke</string>
     <string name="routing_settings_descr">Odaberite opcije navođenja.</string>
     <string name="routing_settings">Navođenje</string>
@@ -4018,8 +4017,6 @@
     <string name="copy_poi_name">Kopiraj ime tačke od interesa</string>
     <string name="quick_action_show_hide_title">Prikaži/sakrij</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Sakrij rezervate prirode, zaštićena područja i granice nacionalnih parkova</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Prirodne granice</string>
     <string name="track_has_no_altitude">Putanja ne sadrži podatke o nadmorskoj visini.</string>
     <string name="track_has_no_speed">Putanja ne sadrži podatke o brzini.</string>
     <string name="select_another_colorization">Odaberite drugi tip bojenja.</string>

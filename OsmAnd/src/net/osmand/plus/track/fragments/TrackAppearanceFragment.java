@@ -7,7 +7,6 @@ import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,8 +44,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.ActionsCard;
@@ -713,25 +712,27 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (splitIntervalCard != null) {
 			splitIntervalCard.updateContent();
 		}
-		SplitTrackListener splitTrackListener = new SplitTrackListener() {
+		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
+		SplitTrackListener listener = getSplitTrackListener();
 
+		double splitInterval = splitType == GpxSplitType.DISTANCE ? distanceSplit : timeSplit;
+		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, trackDrawInfo.isJoinSegments());
+
+		app.getGpxDisplayHelper().splitTrackAsync(selectedGpxFile, groups, params, listener);
+	}
+
+	@NonNull
+	private SplitTrackListener getSplitTrackListener() {
+		return new SplitTrackListener() {
 			@Override
-			public void trackSplittingStarted() {
-
-			}
-
-			@Override
-			public void trackSplittingFinished() {
-				if (selectedGpxFile != null) {
+			public void trackSplittingFinished(boolean success) {
+				if (success && selectedGpxFile != null) {
 					List<GpxDisplayGroup> groups = getGpxDisplayGroups();
 					selectedGpxFile.setDisplayGroups(groups, app);
+					refreshMap();
 				}
-				refreshMap();
 			}
 		};
-		List<GpxDisplayGroup> groups = getGpxDisplayGroups();
-		new SplitTrackAsyncTask(app, splitType, groups, splitTrackListener, trackDrawInfo.isJoinSegments(),
-				timeSplit, distanceSplit).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void setupCards() {

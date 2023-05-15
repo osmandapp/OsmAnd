@@ -13,7 +13,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
@@ -48,7 +48,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 	private void copyToFavorites() {
 		ParkingPositionPlugin plugin = PluginsHelper.getPlugin(ParkingPositionPlugin.class);
 		FavouritesHelper favouritesHelper = app.getFavoritesHelper();
-		for (GpxDisplayItem item : group.getModifiableList()) {
+		for (GpxDisplayItem item : group.getDisplayItems()) {
 			if (item.locationStart != null) {
 				FavouritePoint point = FavouritePoint.fromWpt(item.locationStart, groupName);
 				if (!Algorithms.isEmpty(item.description)) {

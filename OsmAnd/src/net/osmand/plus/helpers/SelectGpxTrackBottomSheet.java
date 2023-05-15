@@ -19,7 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,7 +42,9 @@ public class SelectGpxTrackBottomSheet extends MenuBottomSheetDialogFragment {
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.gpx_track_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		GpxTrackAdapter adapter = new GpxTrackAdapter(requireContext(), gpxInfoList, showCurrentGpx, true);
+		GpxTrackAdapter adapter = new GpxTrackAdapter(requireContext(), gpxInfoList);
+		adapter.setShowCurrentGpx(showCurrentGpx);
+		adapter.setShowFolderName(true);
 		adapter.setAdapterListener(position -> {
 			if (position != RecyclerView.NO_POSITION) {
 				onItemClick(position);

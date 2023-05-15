@@ -87,6 +87,8 @@ public class MultiTouchSupport {
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
+	private PointF firstPoint = new PointF();
+	private PointF secondPoint = new PointF();
 	private PointF firstFingerStart = new PointF();
 	private PointF secondFingerStart = new PointF();
 	private static final int TILT_X_THRESHOLD_PX = 40;
@@ -136,6 +138,8 @@ public class MultiTouchSupport {
 			}
 			if (actionCode == MotionEvent.ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				firstPoint = new PointF(x1, y1);
+				secondPoint = new PointF(x2, y2);
 				firstFingerStart = new PointF(x1, y1);
 				secondFingerStart = new PointF(x2, y2);
 				listener.onGestureInit(x1, y1, x2, y2);
@@ -152,6 +156,8 @@ public class MultiTouchSupport {
 				}
 				return true;
 			} else if (actionCode == MotionEvent.ACTION_MOVE) {
+				firstPoint = new PointF(x1, y1);
+				secondPoint = new PointF(x2, y2);
 				if (inZoomMode) {
 
 					// Keep zoom center fixed or flexible
@@ -205,11 +211,18 @@ public class MultiTouchSupport {
 
 	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
 		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
-				|| Math.abs(angle - angleStarted) > ANGLE_THRESHOLD && angleDefined);
+				|| Math.abs(MapUtils.unifyRotationTo360(angle - angleStarted)) > ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {
 		return centerPoint;
+	}
+
+	public PointF getFirstPoint() {
+		return firstPoint;
+	}
+	public PointF getSecondPoint() {
+		return secondPoint;
 	}
 
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {

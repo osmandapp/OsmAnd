@@ -13,7 +13,9 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 
 import org.apache.commons.logging.Log;
 
@@ -27,8 +29,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		OpeningHoursParser.BasicOpeningHourRule item =
-				(OpeningHoursParser.BasicOpeningHourRule) getArguments().getSerializable(ITEM);
+		BasicOpeningHourRule item = AndroidUtils.getSerializable(getArguments(), ITEM, BasicOpeningHourRule.class);
 		int positionToAdd = getArguments().getInt(POSITION_TO_ADD);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

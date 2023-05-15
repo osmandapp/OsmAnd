@@ -12,6 +12,9 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -46,6 +49,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.snackbar.SnackbarContentLayout;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -160,7 +164,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getActiveIcon(@DrawableRes int id, boolean nightMode) {
-		return getDrawable(id, ColorUtilities.getActiveColorId(nightMode));
+		return getDrawable(id, ColorUtilities.getActiveIconColorId(nightMode));
 	}
 
 	public Drawable getIcon(@DrawableRes int id) {
@@ -325,9 +329,9 @@ public class UiUtilities {
 		background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(activeColor, 0.5f));
 		if (buttonType == CustomRadioButtonType.START) {
 			if (isLayoutRtl) {
-				background.setCornerRadii(new float[] {0, 0, radius, radius, radius, radius, 0, 0});
+				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
 			} else {
-				background.setCornerRadii(new float[] {radius, radius, 0, 0, 0, 0, radius, radius});
+				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
 			}
 			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
 			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
@@ -343,7 +347,7 @@ public class UiUtilities {
 				centerButtonContainer.setBackgroundColor(Color.TRANSPARENT);
 			}
 		} else if (buttonType == CustomRadioButtonType.CENTER) {
-			background.setCornerRadii(new float[] {0, 0, 0, 0, 0, 0, 0, 0});
+			background.setCornerRadii(new float[]{0, 0, 0, 0, 0, 0, 0, 0});
 			centerButtonContainer.setBackground(background);
 			AndroidUiHelper.updateVisibility(centerButtonContainer, true);
 
@@ -362,9 +366,9 @@ public class UiUtilities {
 			}
 		} else {
 			if (isLayoutRtl) {
-				background.setCornerRadii(new float[] {radius, radius, 0, 0, 0, 0, radius, radius});
+				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
 			} else {
-				background.setCornerRadii(new float[] {0, 0, radius, radius, radius, radius, 0, 0});
+				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
 			}
 			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
 			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
@@ -385,10 +389,10 @@ public class UiUtilities {
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ColorUtilities.getDefaultIconColor(ctx, nightMode);
 		int[][] states = {
-				new int[] {-android.R.attr.state_checked},
-				new int[] {android.R.attr.state_checked}
+				new int[]{-android.R.attr.state_checked},
+				new int[]{android.R.attr.state_checked}
 		};
-		ColorStateList csl = new ColorStateList(states, new int[] {inactiveColor, activeColor});
+		ColorStateList csl = new ColorStateList(states, new int[]{inactiveColor, activeColor});
 		DrawableCompat.setTintList(DrawableCompat.wrap(drawable), csl);
 	}
 
@@ -451,9 +455,9 @@ public class UiUtilities {
 			return;
 		}
 		int[][] states = {
-				new int[] {-android.R.attr.state_enabled},
-				new int[] {-android.R.attr.state_checked},
-				new int[] {android.R.attr.state_checked}
+				new int[]{-android.R.attr.state_enabled},
+				new int[]{-android.R.attr.state_checked},
+				new int[]{android.R.attr.state_checked}
 		};
 		if (compoundButton instanceof SwitchCompat) {
 			int[] thumbColors = {inactiveColorPrimary, inactiveColorPrimary, activeColor};
@@ -502,17 +506,17 @@ public class UiUtilities {
 
 		// colors
 		int[][] states = {
-				new int[] {android.R.attr.state_enabled},
-				new int[] {-android.R.attr.state_enabled}
+				new int[]{android.R.attr.state_enabled},
+				new int[]{-android.R.attr.state_enabled}
 		};
 		if (activeColor == null) {
 			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
 		}
 		int activeDisableColor = ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
-		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
+		ColorStateList activeCsl = new ColorStateList(states, new int[]{activeColor, activeDisableColor});
 		int inactiveColor = ColorUtilities.getColorWithAlpha(activeColor, 0.5f);
 		int inactiveDisableColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveDisableColor});
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[]{inactiveColor, inactiveDisableColor});
 		slider.setTrackActiveTintList(activeCsl);
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);
@@ -521,7 +525,7 @@ public class UiUtilities {
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
-		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+		slider.setTickTintList(new ColorStateList(states, new int[]{ticksColor, ticksColor}));
 
 		// sizes
 		slider.setThumbRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size));
@@ -543,16 +547,16 @@ public class UiUtilities {
 
 		// colors
 		int[][] states = {
-				new int[] {android.R.attr.state_enabled},
-				new int[] {-android.R.attr.state_enabled}
+				new int[]{android.R.attr.state_enabled},
+				new int[]{-android.R.attr.state_enabled}
 		};
 		if (activeColor == null) {
 			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
 		}
 		int activeDisableColor = ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
-		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
+		ColorStateList activeCsl = new ColorStateList(states, new int[]{activeColor, activeDisableColor});
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {activeDisableColor, inactiveColor});
+		ColorStateList inactiveCsl = new ColorStateList(states, new int[]{activeDisableColor, inactiveColor});
 		slider.setTrackActiveTintList(activeCsl);
 		slider.setTrackInactiveTintList(inactiveCsl);
 		slider.setHaloTintList(activeCsl);
@@ -561,7 +565,7 @@ public class UiUtilities {
 		int ticksColor = showTicks ?
 				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
-		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
+		slider.setTickTintList(new ColorStateList(states, new int[]{ticksColor, ticksColor}));
 
 		// sizes
 		slider.setThumbRadius(ctx.getResources().getDimensionPixelSize(R.dimen.slider_thumb_size));
@@ -688,5 +692,35 @@ public class UiUtilities {
 			setSpan(spannable, new CustomTypefaceSpan(typeface), text, s);
 		}
 		return spannable;
+	}
+
+	public static void setupClickableText(OsmandApplication app,
+	                                      TextView textView,
+	                                      String text,
+	                                      String clickableText,
+	                                      boolean isNightMode,
+	                                      @NonNull CallbackWithObject<Void> onClickedText) {
+		SpannableString spannableString = new SpannableString(text);
+		ClickableSpan clickableSpan = new ClickableSpan() {
+			@Override
+			public void onClick(@NonNull View view) {
+				onClickedText.processResult(null);
+			}
+
+			@Override
+			public void updateDrawState(@NonNull TextPaint ds) {
+				super.updateDrawState(ds);
+				ds.setUnderlineText(false);
+			}
+		};
+		try {
+			int startIndex = text.indexOf(clickableText);
+			spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			textView.setText(spannableString);
+			textView.setMovementMethod(LinkMovementMethod.getInstance());
+			textView.setHighlightColor(ColorUtilities.getActiveColor(app, isNightMode));
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + clickableText + " " + e);
+		}
 	}
 }

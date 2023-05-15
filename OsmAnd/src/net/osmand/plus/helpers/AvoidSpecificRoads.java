@@ -1,7 +1,6 @@
 package net.osmand.plus.helpers;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
@@ -27,15 +24,16 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
@@ -121,14 +119,11 @@ public class AvoidSpecificRoads {
 				ImageButton remove = v.findViewById(R.id.info_close);
 				remove.setVisibility(View.VISIBLE);
 				remove.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark));
-				remove.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						remove(item);
-						removeImpassableRoad(item);
-						notifyDataSetChanged();
-						recalculateRoute(item != null ? item.appModeKey : null);
-					}
+				remove.setOnClickListener(view -> {
+					remove(item);
+					removeImpassableRoad(item);
+					notifyDataSetChanged();
+					recalculateRoute(item != null ? item.appModeKey : null);
 				});
 				return v;
 			}
@@ -209,12 +204,7 @@ public class AvoidSpecificRoads {
 					dialog.dismiss();
 				});
 			}
-			builder.setPositiveButton(R.string.shared_string_select_on_map, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					selectFromMap(mapActivity, mode);
-				}
-			});
+			builder.setPositiveButton(R.string.shared_string_select_on_map, (dialogInterface, i) -> selectFromMap(mapActivity, mode));
 			builder.setNegativeButton(R.string.shared_string_close, null);
 			builder.show();
 		}
@@ -225,13 +215,10 @@ public class AvoidSpecificRoads {
 	}
 
 	public void selectFromMap(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {
-		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
-		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
-			@Override
-			public boolean processResult(LatLon result) {
-				addImpassableRoad(mapActivity, result, true, false, mode != null ? mode.getStringKey() : null);
-				return true;
-			}
+		ContextMenuLayer menuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+		menuLayer.setSelectOnMap(result -> {
+			addImpassableRoad(mapActivity, result, true, false, mode != null ? mode.getStringKey() : null);
+			return true;
 		});
 	}
 
@@ -343,9 +330,9 @@ public class AvoidSpecificRoads {
 	}
 
 	private void addImpassableRoadInternal(@NonNull AvoidRoadInfo avoidRoadInfo,
-										   boolean showDialog,
-										   @Nullable MapActivity activity,
-										   @NonNull LatLon loc) {
+	                                       boolean showDialog,
+	                                       @Nullable MapActivity activity,
+	                                       @NonNull LatLon loc) {
 		boolean roadAdded = false;
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 			if (!builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
@@ -376,13 +363,14 @@ public class AvoidSpecificRoads {
 	}
 
 	private void showOnMap(MapActivity ctx, double lat, double lon, String name) {
-		int zoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
+		int zoom = Math.max(ctx.getMapView().getZoom(), 15);
 		PointDescription pd = new PointDescription("", name);
 		ctx.getMyApplication().getSettings().setMapLocationToShow(lat, lon, zoom, pd, false, null);
 		MapActivity.launchMapActivityMoveToTop(ctx);
 	}
 
-	public LatLon getLocation(AvoidRoadInfo avoidRoadInfo) {
+	@Nullable
+	public LatLon getLocation(@NonNull AvoidRoadInfo avoidRoadInfo) {
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 			if (builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
 				return new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude);

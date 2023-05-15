@@ -1913,7 +1913,6 @@
     <string name="routing_settings">Navigeerimine</string>
     <string name="routing_settings_descr">Seadista navigeerimisvalikud.</string>
     <string name="global_settings">Üldised seaded</string>
-    <string name="index_settings">Halda kaardifaile</string>
     <string name="general_settings">Üldine</string>
     <string name="general_settings_descr">Seadista ekraan ja rakenduse üldised seaded.</string>
     <string name="global_app_settings">Rakenduse üldised seaded</string>
@@ -4024,8 +4023,6 @@
     <string name="shared_string_turn">Pööra</string>
     <string name="purchases">Ostud</string>
     <string name="map_widget_distance_by_tap">Kaugus toksamise järgi</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Peida (loodus)kaitsealade ja rahvusparkide piirid.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
     <string name="trip_recording_save_and_continue">Salvesta ja jätka</string>
     <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>
     <string name="verification_code_missing_description">Võib võtta 10 minutit. Kasuta allolevat nuppu kui see ei ole Sinu rämpsposti kaustas.</string>

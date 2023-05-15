@@ -3285,13 +3285,11 @@
     <string name="poi_socket_as3112">Разетка: AS/NZS 3112</string>
     <string name="poi_socket_as3112_current">Разетка: AS/NZS 3112: ток</string>
     <string name="poi_socket_as3112_output">Разетка: AS/NZS 3112: магутнасць</string>
-    <string name="poi_car_yes">Аўтамабіль: так</string>
     <string name="poi_car_no">Аўтамабіль: не</string>
     <string name="poi_bicycle_yes">Ровар: так</string>
     <string name="poi_bicycle_no">Ровар: не</string>
     <string name="poi_scooter_yes">Скутэр: так</string>
     <string name="poi_scooter_no">Скутэр: не</string>
-    <string name="poi_truck_yes">Грузавік: так</string>
     <string name="poi_truck_no">Грузавік: не</string>
     <string name="poi_parking_fee_yes">Аплата за паркоўку: так</string>
     <string name="poi_parking_fee_no">Аплата за паркоўку: не</string>

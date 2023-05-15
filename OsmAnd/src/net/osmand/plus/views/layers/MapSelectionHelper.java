@@ -64,8 +64,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.router.network.NetworkRouteSelector;
-import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -148,7 +146,7 @@ public class MapSelectionHelper {
 		Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 		for (OsmandMapLayer layer : view.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
-				List<Object> objects = new ArrayList<>();;
+				List<Object> objects = new ArrayList<>();
 				IContextMenuProvider provider = (IContextMenuProvider) layer;
 				provider.collectObjectsFromPoint(point, tileBox, objects, unknownLocation, false);
 				for (Object o : objects) {
@@ -250,10 +248,12 @@ public class MapSelectionHelper {
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
 				if (isTravelGpx) {
 					addTravelGpx(result, renderedObject, filter);
-				} else if (isRoute) {
-					addRoute(result, tileBox, point);
 				} else {
-					if (!addAmenity(result, renderedObject, searchLatLon)) {
+					if (isRoute) {
+						addRoute(result, tileBox, point);
+					}
+					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
+					if (!amenityAdded && !isRoute) {
 						result.selectedObjects.put(renderedObject, null);
 					}
 				}
@@ -327,19 +327,14 @@ public class MapSelectionHelper {
 							boolean isRoute = !Algorithms.isEmpty(RouteType.getRouteKeys(tags));
 							if (isRoute) {
 								addRoute(result, tileBox, point);
-							} else {
-								IOnPathMapSymbol onPathMapSymbol = null;
-								try {
-									onPathMapSymbol = IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
-								} catch (Exception ignore) {
-								}
-								if (onPathMapSymbol == null) {
-									amenity = getAmenity(result.objectLatLon, obfMapObject);
-									if (amenity != null) {
-										amenity.setMapIconName(getMapIconName(symbolInfo));
-									} else {
-										addRenderedObject(result, symbolInfo, obfMapObject);
-									}
+							}
+							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
+							if (onPathMapSymbol == null) {
+								amenity = getAmenity(result.objectLatLon, obfMapObject);
+								if (amenity != null) {
+									amenity.setMapIconName(getMapIconName(symbolInfo));
+								} else if (!isRoute) {
+									addRenderedObject(result, symbolInfo, obfMapObject);
 								}
 							}
 						}
@@ -352,6 +347,7 @@ public class MapSelectionHelper {
 		}
 	}
 
+	@Nullable
 	private String getMapIconName(MapSymbolInformation symbolInfo) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null && rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
@@ -385,13 +381,22 @@ public class MapSelectionHelper {
 		}
 	}
 
-	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
-		RasterMapSymbol rasterMapSymbol  = null;
+	@Nullable
+	private IOnPathMapSymbol getOnPathMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
 		try {
-			rasterMapSymbol = RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+			return IOnPathMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
 		} catch (Exception ignore) {
 		}
-		return rasterMapSymbol;
+		return null;
+	}
+
+	@Nullable
+	private RasterMapSymbol getRasterMapSymbol(@NonNull MapSymbolInformation symbolInfo) {
+		try {
+			return RasterMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+		} catch (Exception ignore) {
+		}
+		return null;
 	}
 
 	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {

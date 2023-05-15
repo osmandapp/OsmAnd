@@ -57,6 +57,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRulesStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,8 +79,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private PromoBannerCard promoCard;
 	private View applyButton;
 
-	private boolean nightMode;
-
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -92,13 +91,17 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		gpxDbHelper = app.getGpxDbHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectedTracksHelper = getSelectedTracksHelper();
-		nightMode = isNightMode(true);
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
 		} else {
 			trackDrawInfo = new TrackDrawInfo(app, TrackDrawInfo.DEFAULT);
 		}
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull
@@ -146,10 +149,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		String appearance = getString(R.string.change_appearance);
-		String count = String.valueOf(selectedTracksHelper.getSelectedTracks().size());
+		String count = "(" + String.valueOf(selectedTracksHelper.getSelectedTracks().size()) + ")";
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_dash, appearance, count));
+		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count));
 		toolbarTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView toolbarSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
@@ -382,8 +385,9 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			}
 		};
 		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
-			if (trackItem.getFile() != null) {
-				GpxDataItem item = gpxDbHelper.getItem(trackItem.getFile(), callback);
+			File file = trackItem.getFile();
+			if (file != null) {
+				GpxDataItem item = gpxDbHelper.getItem(file, callback);
 				if (item != null) {
 					updateTrackAppearance(item);
 				}

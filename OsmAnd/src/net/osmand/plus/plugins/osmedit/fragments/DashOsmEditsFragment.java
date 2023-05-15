@@ -73,7 +73,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		Button manage = view.findViewById(R.id.show_all);
 		manage.setText(R.string.shared_string_manage);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
-			startFavoritesActivity(R.string.osm_edits);
+			startMyPlacesActivity(R.string.osm_edits);
 			closeDashboard();
 		});
 

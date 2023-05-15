@@ -90,12 +90,12 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.MeasurementToolMode;
-import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
-import net.osmand.plus.myplaces.ui.GPXTabItemType;
-import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet;
-import net.osmand.plus.myplaces.ui.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.myplaces.ui.SegmentActionsListener;
-import net.osmand.plus.myplaces.ui.SplitSegmentDialogFragment;
+import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
+import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
+import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
+import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
+import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.SimulatePositionFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -104,8 +104,6 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.cards.DescriptionCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
@@ -123,7 +121,7 @@ import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSe
 import net.osmand.plus.track.fragments.controller.EditGpxDescriptionController;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
@@ -131,6 +129,7 @@ import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -1128,9 +1127,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
 					File file = new File(gpxFile.path);
-					GPXInfo gpxInfo = new GPXInfo(file.getName(), file);
-					gpxInfo.setGpxFile(gpxFile);
-					osmEditingPlugin.sendGPXFiles(mapActivity, this, gpxInfo);
+					osmEditingPlugin.sendGPXFiles(mapActivity, this, file);
 				}
 			} else if (buttonIndex == EDIT_BUTTON_INDEX) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap();
@@ -1562,21 +1559,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void saveGpx(SelectedGpxFile selectedGpxFile, GPXFile gpxFile) {
-		new SaveGpxAsyncTask(new File(gpxFile.path), gpxFile, new SaveGpxListener() {
-			@Override
-			public void gpxSavingStarted() {
+		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
+			if (selectedGpxFile != null) {
+				List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
+						new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
+				selectedGpxFile.setDisplayGroups(groups, app);
+				selectedGpxFile.processPoints(app);
 			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (selectedGpxFile != null) {
-					List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
-					selectedGpxFile.setDisplayGroups(groups, app);
-					selectedGpxFile.processPoints(app);
-				}
-				updateContent();
-			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			updateContent();
+		});
 	}
 
 	private boolean isCurrentRecordingTrack() {

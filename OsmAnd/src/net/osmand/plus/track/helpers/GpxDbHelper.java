@@ -18,6 +18,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -307,7 +308,12 @@ public class GpxDbHelper {
 	}
 
 	private void searchNearestCity(@NonNull GpxDataItem item) {
-		LatLon latLon = item.getAnalysis().latLonStart;
+		GPXTrackAnalysis analysis = item.getAnalysis();
+		LatLon latLon = analysis != null ? analysis.latLonStart : null;
+		if (latLon == null) {
+			item.setNearestCityName("");
+			return;
+		}
 		SearchSettings settings = getSearchSettings(latLon);
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 

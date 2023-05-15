@@ -44,7 +44,6 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
@@ -74,7 +73,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -114,6 +113,7 @@ import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.VoiceProviderDialog;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
@@ -139,7 +139,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	final AppInitializer appInitializer = new AppInitializer(this);
 	Handler uiHandler;
-	OsmandSettings osmandSettings;
+	OsmandSettings settings;
 	OsmAndAppCustomization appCustomization;
 	NavigationService navigationService;
 	DownloadService downloadService;
@@ -229,17 +229,17 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
 		appCustomization.setup(this);
-		osmandSettings = appCustomization.getOsmandSettings();
+		settings = appCustomization.getOsmandSettings();
 		appInitializer.initVariables();
 		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppVersionUpgradeOnInit.VERSION_2_3) {
-			osmandSettings.freezeExternalStorageDirectory();
+			settings.freezeExternalStorageDirectory();
 		} else if (appInitializer.isFirstTime()) {
-			osmandSettings.initExternalStorageDirectory();
+			settings.initExternalStorageDirectory();
 		}
-		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		externalStorageDirectory = settings.getExternalStorageDirectory();
 		if (!FileUtils.isWritable(externalStorageDirectory)) {
 			externalStorageDirectoryReadOnly = true;
-			externalStorageDirectory = osmandSettings.getInternalAppPath();
+			externalStorageDirectory = settings.getInternalAppPath();
 		}
 
 		Algorithms.removeAllFiles(getAppPath(IndexConstants.TEMP_DIR));
@@ -328,7 +328,7 @@ public class OsmandApplication extends MultiDexApplication {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
 		if (RateUsHelper.shouldShowRateDialog(this)) {
-			osmandSettings.RATE_US_STATE.set(RateUsHelper.RateUsState.IGNORED);
+			settings.RATE_US_STATE.set(RateUsHelper.RateUsState.IGNORED);
 		}
 		getNotificationHelper().removeNotifications(false);
 	}
@@ -362,7 +362,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public LocationServiceHelper createLocationServiceHelper() {
-		LocationSource source = osmandSettings.LOCATION_SOURCE.get();
+		LocationSource source = settings.LOCATION_SOURCE.get();
 		if (source == LocationSource.GOOGLE_PLAY_SERVICES) {
 			return new GmsLocationServiceHelper(this);
 		}
@@ -380,14 +380,14 @@ public class OsmandApplication extends MultiDexApplication {
 	 * @return Reference to instance of OsmandSettings
 	 */
 	public OsmandSettings getSettings() {
-		if (osmandSettings == null) {
+		if (settings == null) {
 			LOG.error("Trying to access settings before they were created");
 		}
-		return osmandSettings;
+		return settings;
 	}
 
-	public void setOsmandSettings(OsmandSettings osmandSettings) {
-		this.osmandSettings = osmandSettings;
+	public void setSettings(OsmandSettings settings) {
+		this.settings = settings;
 		PluginsHelper.initPlugins(this);
 	}
 
@@ -593,24 +593,19 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(@NonNull Context context,
-	                                   @NonNull ApplicationMode appMode,
-	                                   @Nullable Runnable onCommandPlayerCreated,
-	                                   boolean warnNoProvider,
-	                                   boolean showProgress,
-	                                   boolean forceInitialization,
-	                                   boolean applyAllModes) {
-		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(appMode);
+	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
+	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			osmandSettings.VOICE_MUTE.setModeValue(appMode, true);
+			settings.VOICE_MUTE.setModeValue(appMode, true);
 		} else if (Algorithms.isEmpty(voiceProvider)) {
 			if (warnNoProvider && context instanceof MapActivity) {
-				OsmAndDialogs.showVoiceProviderDialog((MapActivity) context, appMode, applyAllModes);
+				VoiceProviderDialog.showVoiceProviderDialog((MapActivity) context, appMode, applyAllModes);
 			}
 		} else {
 			if (player == null || !voiceProvider.equals(player.getCurrentVoice()) || forceInitialization) {
-				appInitializer.initVoiceDataInDifferentThread(context, appMode, voiceProvider,
-						onCommandPlayerCreated, showProgress);
+				appInitializer.initVoiceDataInDifferentThread(context, appMode, voiceProvider, onCommandPlayerCreated, showProgress);
 			}
 		}
 	}
@@ -692,16 +687,16 @@ public class OsmandApplication extends MultiDexApplication {
 		routingHelper.getVoiceRouter().interruptRouteCommands();
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
-		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
-		osmandSettings.setApplicationMode(valueOfStringKey(osmandSettings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT));
+		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
+		settings.setApplicationMode(valueOfStringKey(settings.LAST_USED_APPLICATION_MODE.get(), ApplicationMode.DEFAULT));
 		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
 	public void startApplication() {
 		feedbackHelper.setExceptionHandler();
-		if (NetworkUtils.getProxy() == null && osmandSettings.isProxyEnabled()) {
+		if (NetworkUtils.getProxy() == null && settings.isProxyEnabled()) {
 			try {
-				NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
+				NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 			} catch (RuntimeException e) {
 				showToastMessage(e.getMessage());
 			}
@@ -726,8 +721,7 @@ public class OsmandApplication extends MultiDexApplication {
 			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
 			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(),
-						getString(msgId, args), CarToast.LENGTH_SHORT).show();
+				CarToast.makeText(carNavigationSession.getCarContext(), getString(msgId, args), CarToast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -737,8 +731,7 @@ public class OsmandApplication extends MultiDexApplication {
 			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
 			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(),
-						msg, CarToast.LENGTH_SHORT).show();
+				CarToast.makeText(carNavigationSession.getCarContext(), msg, CarToast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -748,8 +741,7 @@ public class OsmandApplication extends MultiDexApplication {
 			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
 			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(),
-						getString(msgId, args), CarToast.LENGTH_LONG).show();
+				CarToast.makeText(carNavigationSession.getCarContext(), getString(msgId, args), CarToast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -760,8 +752,7 @@ public class OsmandApplication extends MultiDexApplication {
 				Toast.makeText(this, text, Toast.LENGTH_LONG).show();
 				NavigationSession carNavigationSession = this.carNavigationSession;
 				if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-					CarToast.makeText(carNavigationSession.getCarContext(),
-							text, CarToast.LENGTH_LONG).show();
+					CarToast.makeText(carNavigationSession.getCarContext(), text, CarToast.LENGTH_LONG).show();
 				}
 			});
 		}
@@ -790,24 +781,23 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
 
+	@NonNull
 	public File getAppPath(@Nullable String path) {
-		if (path == null) {
-			path = "";
-		}
-		return new File(externalStorageDirectory, path);
+		String child = path != null ? path : "";
+		return new File(externalStorageDirectory, child);
 	}
 
 	public void setExternalStorageDirectory(int type, String directory) {
-		osmandSettings.setExternalStorageDirectory(type, directory);
-		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		settings.setExternalStorageDirectory(type, directory);
+		externalStorageDirectory = settings.getExternalStorageDirectory();
 		externalStorageDirectoryReadOnly = false;
 		getResourceManager().resetStoreDirectory();
 	}
 
-	public void applyTheme(Context c) {
+	public void applyTheme(@NonNull Context context) {
 		int themeResId;
-		boolean doNotUseAnimations = osmandSettings.DO_NOT_USE_ANIMATIONS.get();
-		if (!osmandSettings.isLightContent()) {
+		boolean doNotUseAnimations = settings.DO_NOT_USE_ANIMATIONS.get();
+		if (!settings.isLightContent()) {
 			if (doNotUseAnimations) {
 				themeResId = R.style.OsmandDarkTheme_NoAnimation;
 			} else {
@@ -820,8 +810,8 @@ public class OsmandApplication extends MultiDexApplication {
 				themeResId = R.style.OsmandLightTheme;
 			}
 		}
-		localeHelper.setLanguage(c);
-		c.setTheme(themeResId);
+		localeHelper.setLanguage(context);
+		context.setTheme(themeResId);
 	}
 
 	IBRouterService reconnectToBRouter() {
@@ -995,10 +985,8 @@ public class OsmandApplication extends MultiDexApplication {
 		WorldRegion.RegionParams params = reg.getParams();
 //		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
-				MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
-		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
-				MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
+		MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ? MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
+		MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ? MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
 		for (DrivingRegion r : DrivingRegion.values()) {
 			if (r.leftHandDriving == leftHand && (r.defMetrics == mc1 || r.defMetrics == mc2)) {
 				drg = r;
@@ -1006,29 +994,29 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 		if (drg != null) {
-			osmandSettings.DRIVING_REGION.set(drg);
+			settings.DRIVING_REGION.set(drg);
 		}
 	}
 
 	public String getUserAndroidId() {
-		String userAndroidId = osmandSettings.USER_ANDROID_ID.get();
+		String userAndroidId = settings.USER_ANDROID_ID.get();
 		if (Algorithms.isEmpty(userAndroidId) || isUserAndroidIdExpired()) {
 			userAndroidId = UUID.randomUUID().toString();
-			osmandSettings.USER_ANDROID_ID.set(userAndroidId);
+			settings.USER_ANDROID_ID.set(userAndroidId);
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.MONTH, 3);
-			osmandSettings.USER_ANDROID_ID_EXPIRED_TIME.set(calendar.getTimeInMillis());
+			settings.USER_ANDROID_ID_EXPIRED_TIME.set(calendar.getTimeInMillis());
 		}
 		return userAndroidId;
 	}
 
 	public boolean isUserAndroidIdExpired() {
-		long expiredTime = osmandSettings.USER_ANDROID_ID_EXPIRED_TIME.get();
+		long expiredTime = settings.USER_ANDROID_ID_EXPIRED_TIME.get();
 		return expiredTime <= 0 || expiredTime <= System.currentTimeMillis();
 	}
 
 	public boolean isUserAndroidIdAllowed() {
-		return osmandSettings.SEND_UNIQUE_USER_IDENTIFIER.get();
+		return settings.SEND_UNIQUE_USER_IDENTIFIER.get();
 	}
 
 	public void logEvent(@NonNull String event) {
@@ -1072,6 +1060,6 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean useOpenGlRenderer() {
-		return NativeCoreContext.isInit() && osmandSettings.USE_OPENGL_RENDER.get();
+		return NativeCoreContext.isInit() && settings.USE_OPENGL_RENDER.get();
 	}
 }

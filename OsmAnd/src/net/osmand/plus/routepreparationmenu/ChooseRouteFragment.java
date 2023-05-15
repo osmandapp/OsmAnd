@@ -68,9 +68,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -560,29 +559,22 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			}
 			File dst = new File(dir, "route.gpx");
 
-			new SaveGpxAsyncTask(dst, gpx, new SaveGpxListener() {
-				@Override
-				public void gpxSavingStarted() {
-				}
+			SaveGpxHelper.saveGpx(dst, gpx, errorMessage -> {
+				if (errorMessage == null) {
+					Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
+							routingHelper.getGeneralRouteInformation(), IntentHelper.generateRouteUrl(app)).toString()));
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
+					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
 
-				@Override
-				public void gpxSavingFinished(Exception errorMessage) {
-					if (errorMessage == null) {
-						Intent sendIntent = new Intent();
-						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
-								routingHelper.getGeneralRouteInformation(), IntentHelper.generateRouteUrl(app)).toString()));
-						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
-
-						AndroidUtils.startActivityIfSafe(activity, chooserIntent);
-					}
+					AndroidUtils.startActivityIfSafe(activity, chooserIntent);
 				}
-			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			});
 		}
 	}
 

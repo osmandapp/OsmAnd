@@ -198,6 +198,10 @@ public class AidlTileProvider extends interface_MapTiledCollectionProvider {
 		return ZoomLevel.MaxZoomLevel;
 	}
 
+	@Override
+	public boolean supportsNaturalObtainDataAsync() {
+		return false;
+	}
 
 	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/spinnerListBackground"
     android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical"
     tools:context="net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment">
 

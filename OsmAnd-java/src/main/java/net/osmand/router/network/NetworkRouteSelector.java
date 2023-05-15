@@ -13,8 +13,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import static net.osmand.router.network.NetworkRouteContext.getYFromTileId;
-import static net.osmand.router.network.NetworkRouteContext.getXFromTileId;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;

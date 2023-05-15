@@ -23,6 +23,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,21 +43,19 @@ public class LocalIndexHelper {
 		this.app = app;
 	}
 
-	public String getInstalledDate(File f) {
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(getInstallationDate(f));
+	@NonNull
+	public String getInstalledDate(@NonNull File file) {
+		return getInstalledDate(file.lastModified());
 	}
 
-	public Date getInstallationDate(File f) {
-		long t = f.lastModified();
-		return new Date(t);
-	}
-
+	@NonNull
 	public String getInstalledDate(long time) {
-		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(time));
+		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+		return format.format(new Date(time));
 	}
 
 	public void updateDescription(@NonNull LocalIndexInfo info) {
-		File f = new File(info.getPathToData());
+		File file = new File(info.getPathToData());
 		if (info.getType() == LocalIndexType.MAP_DATA) {
 			Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 			String fileModifiedDate = indexFileNames.get(info.getFileName());
@@ -68,14 +67,14 @@ public class LocalIndexHelper {
 					log.error(e);
 				}
 			} else {
-				info.setDescription(getInstalledDate(f));
+				info.setDescription(getInstalledDate(file));
 			}
 		} else if (info.getType() == LocalIndexType.TILES_DATA) {
 			ITileSource template;
-			if (f.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(f)) {
+			if (file.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(file)) {
 				template = TileSourceManager.createTileSourceTemplate(new File(info.getPathToData()));
-			} else if (f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)) {
-				template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
+			} else if (file.isFile() && file.getName().endsWith(SQLiteTileSource.EXT)) {
+				template = new SQLiteTileSource(app, file, TileSourceManager.getKnownSourceTemplates());
 			} else {
 				return;
 			}
@@ -88,22 +87,23 @@ public class LocalIndexHelper {
 		} else if (info.getType() == LocalIndexType.SRTM_DATA) {
 			info.setDescription(app.getString(R.string.download_srtm_maps));
 		} else if (info.getType() == LocalIndexType.WIKI_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.TRAVEL_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.DEACTIVATED) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.VOICE_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.FONT_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.DEPTH_DATA) {
-			info.setDescription(getInstalledDate(f));
+			info.setDescription(getInstalledDate(file));
 		}
 	}
 
+	@Nullable
 	private LocalIndexInfo getLocalIndexInfo(LocalIndexType type, String downloadName, boolean roadMap, boolean backuped) {
 
 		File fileDir = null;

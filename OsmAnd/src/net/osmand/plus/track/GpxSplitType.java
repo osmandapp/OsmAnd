@@ -50,7 +50,7 @@ public enum GpxSplitType {
 	@NonNull
 	public static GpxSplitType getSplitTypeByTypeId(int typeId) {
 		for (GpxSplitType splitType : values()) {
-			if (splitType.getType() == typeId) {
+			if (splitType.type == typeId) {
 				return splitType;
 			}
 		}

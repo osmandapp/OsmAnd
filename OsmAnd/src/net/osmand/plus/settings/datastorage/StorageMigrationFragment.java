@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -82,7 +81,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private int generalProgress;
 	private boolean copyFinished;
 
-	private boolean nightMode;
 	private boolean usedOnMap;
 
 	private AlertDialog closeDialog = null;
@@ -111,6 +109,11 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 			}
 		}
 		nightMode = isNightMode(usedOnMap);
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return usedOnMap;
 	}
 
 	@Nullable

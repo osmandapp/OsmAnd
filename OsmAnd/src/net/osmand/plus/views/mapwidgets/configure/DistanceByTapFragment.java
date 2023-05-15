@@ -52,7 +52,6 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +59,6 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 
 		app = getMyApplication();
 		settings = getSettings();
-		nightMode = isNightMode(false);
 		selectedAppMode = settings.getApplicationMode();
 	}
 

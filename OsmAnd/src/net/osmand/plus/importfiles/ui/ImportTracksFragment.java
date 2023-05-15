@@ -2,9 +2,9 @@ package net.osmand.plus.importfiles.ui;
 
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.myplaces.ui.AvailableGPXFragment.SELECTED_FOLDER_KEY;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.ui.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment.SELECTED_FOLDER_KEY;
+import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -35,7 +35,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -52,9 +51,9 @@ import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListe
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
-import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
-import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet;
-import net.osmand.plus.myplaces.ui.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
+import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
+import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -102,12 +101,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	private TextView progressTitle;
 	private RecyclerView recyclerView;
 
-	private boolean nightMode;
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
 
 		if (savedInstanceState == null) {
 			collectTracks();
@@ -121,6 +117,11 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 				showExitDialog();
 			}
 		});
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull
@@ -321,7 +322,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		} else {
 			File destinationDir = getFolderFile(selectedFolder);
 			SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
-			saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener);
+			saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener, false);
 			saveAsOneTrackTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
@@ -479,7 +480,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			bundle.putInt(TAB_ID, GPX_TAB);
 			bundle.putString(SELECTED_FOLDER_KEY, folder);
 
-			Intent intent = new Intent(app, app.getAppCustomization().getFavoritesActivity());
+			Intent intent = new Intent(app, app.getAppCustomization().getMyPlacesActivity());
 			intent.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			activity.startActivity(intent);
 		}

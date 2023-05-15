@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 import android.os.ParcelFileDescriptor;
 
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
-import net.osmand.plus.myplaces.FavouritesFileHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesFileHelper;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsDbHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;

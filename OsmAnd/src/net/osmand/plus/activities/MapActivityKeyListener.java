@@ -1,23 +1,24 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.settings.backend.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapControlsLayer;
 
 public class MapActivityKeyListener implements KeyEvent.Callback {
 
@@ -73,10 +74,12 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		OsmandMap osmandMap = app.getOsmandMap();
+		InputDevice device = settings.getSelectedInputDevice();
+		if (device == InputDevice.NONE) {
+			return false;
+		}
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			OsmandMapTileView mapView = mapActivity.getMapView();
-
 			if (!app.accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
@@ -88,34 +91,32 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 			mapActivity.toggleDrawer();
 			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_C) {
-			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-		} else if (keyCode == KeyEvent.KEYCODE_D) {
-			mapActivity.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
+		} else if (isLetterKeyCode(keyCode)) {
+			return onLetterKeyUp(keyCode);
 		} else if (keyCode == KeyEvent.KEYCODE_MINUS) {
-			osmandMap.changeZoom(-1);
+			changeZoom(-1);
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_PLUS || keyCode == KeyEvent.KEYCODE_EQUALS) {
-			osmandMap.changeZoom(1);
+			changeZoom(1);
 			return true;
 		} else if (mapScrollHelper.isAvailableKeyCode(keyCode)) {
 			return mapScrollHelper.onKeyUp(keyCode);
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
+		} else if (device == InputDevice.PARROT) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-				osmandMap.changeZoom(-1);
+				changeZoom(-1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-				osmandMap.changeZoom(1);
+				changeZoom(1);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
+		} else if (device == InputDevice.WUNDER_LINQ) {
 			// WunderLINQ device, motorcycle smart phone control
 			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-				osmandMap.changeZoom(-1);
+				changeZoom(-1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-				osmandMap.changeZoom(1);
+				changeZoom(1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
 				String callingApp = "wunderlinq://datagrid";
@@ -124,8 +125,11 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 				AndroidUtils.startActivityIfSafe(mapActivity, intent);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
-			// currently doesn't process specific commands
+		} else if (device == InputDevice.KEYBOARD) {
+			if (keyCode == KeyEvent.KEYCODE_BACK) {
+				mapActivity.onBackPressed();
+				return true;
+			}
 		} else if (PluginsHelper.onMapActivityKeyUp(mapActivity, keyCode)) {
 			return true;
 		}
@@ -135,6 +139,44 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 	@Override
 	public boolean onKeyMultiple(int keyCode, int count, KeyEvent event) {
 		return false;
+	}
+
+	private boolean isLetterKeyCode(int keyCode) {
+		return keyCode >= KeyEvent.KEYCODE_A && keyCode <= KeyEvent.KEYCODE_Z;
+	}
+
+	private boolean onLetterKeyUp(int keyCode) {
+		if (!mapActivity.isMapVisible()) {
+			return false;
+		}
+		if (keyCode == KeyEvent.KEYCODE_C) {
+			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_D) {
+			mapActivity.getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_N) {
+			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+			if (mapControlsLayer != null) {
+				mapControlsLayer.doRoute();
+			}
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_O) {
+			settings.switchAppModeToPrevious();
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_P) {
+			settings.switchAppModeToNext();
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_S) {
+			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			return true;
+		}
+		return false;
+	}
+
+	private void changeZoom(int step) {
+		OsmandMap osmandMap = app.getOsmandMap();
+		osmandMap.changeZoom(step);
 	}
 }
 

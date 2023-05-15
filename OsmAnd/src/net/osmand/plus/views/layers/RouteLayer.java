@@ -663,7 +663,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 			} else {
 				// action point
-				if (previousAction == null) {
+				if (previousAction == null && lastProjection != null) {
 					addPreviousToActionPoints(actionPoints, lastProjection, routeNodes, DISTANCE_ACTION,
 							prevFinishPoint, routePoint, loc);
 				}
@@ -680,25 +680,26 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 
-	private void addPreviousToActionPoints(List<Location> actionPoints, Location lastProjection, List<Location> routeNodes, double DISTANCE_ACTION,
-			int prevFinishPoint, int routePoint, Location loc) {
+	private void addPreviousToActionPoints(List<Location> actionPoints, Location lastProjection,
+	                                       List<Location> routeNodes, double distanceAction,
+	                                       int prevFinishPoint, int routePoint, Location loc) {
 		// put some points in front
 		int ind = actionPoints.size();
 		Location lprevious = loc;
 		double dist = 0;
 		for (int k = routePoint - 1; k >= -1; k--) {
-			Location l = k == -1 ? lastProjection : routeNodes.get(k);
-			float locDist = lprevious.distanceTo(l);
+			Location location = k == -1 ? lastProjection : routeNodes.get(k);
+			float locDist = lprevious.distanceTo(location);
 			dist += locDist;
-			if (dist >= DISTANCE_ACTION) {
+			if (dist >= distanceAction) {
 				if (locDist > 1) {
 					actionPoints.add(ind,
-							calculateProjection(1 - (dist - DISTANCE_ACTION) / locDist, lprevious, l));
+							calculateProjection(1 - (dist - distanceAction) / locDist, lprevious, location));
 				}
 				break;
 			} else {
-				actionPoints.add(ind, l);
-				lprevious = l;
+				actionPoints.add(ind, location);
+				lprevious = location;
 			}
 			if (prevFinishPoint == k) {
 				if (ind >= 2) {

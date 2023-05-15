@@ -1,7 +1,5 @@
 package net.osmand.plus.backup;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -216,16 +214,15 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation) {
+	public void syncSettingsItems(@NonNull String key, @NonNull SyncOperationType operation) throws IllegalStateException {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
-			syncBackupTasks.put(key, syncTask);
+			registerSyncBackupTask(key, syncTask);
 			syncTask.executeOnExecutor(getBackupHelper().getExecutor());
 		} else {
 			throw new IllegalStateException("Already syncing " + key);
 		}
 	}
-
 
 	public void syncSettingsItems(@NonNull String key,
 	                              @Nullable LocalFile localFile,
@@ -233,7 +230,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	                              @NonNull SyncOperationType operation) {
 		if (!syncBackupTasks.containsKey(key)) {
 			SyncBackupTask syncTask = new SyncBackupTask(getApp(), key, operation, getOnBackupSyncListener());
-			syncBackupTasks.put(key, syncTask);
+			registerSyncBackupTask(key, syncTask);
 			switch (operation) {
 				case SYNC_OPERATION_DELETE:
 					if (remoteFile != null) {
@@ -258,8 +255,26 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
+	public void registerSyncBackupTask(@NonNull String key, @NonNull SyncBackupTask task) {
+		syncBackupTasks.put(key, task);
+		getOnBackupSyncListener().onBackupSyncTasksUpdated();
+	}
+
+	public void unregisterSyncBackupTask(@NonNull String key) {
+		syncBackupTasks.remove(key);
+		getOnBackupSyncListener().onBackupSyncTasksUpdated();
+	}
+
 	private OnBackupSyncListener getOnBackupSyncListener() {
 		return new OnBackupSyncListener() {
+
+			@Override
+			public void onBackupSyncTasksUpdated() {
+				for (OnBackupSyncListener listener : syncListeners) {
+					listener.onBackupSyncTasksUpdated();
+				}
+			}
+
 			@Override
 			public void onBackupSyncStarted() {
 				for (OnBackupSyncListener listener : syncListeners) {

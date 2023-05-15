@@ -1,5 +1,8 @@
 package net.osmand.plus.track.helpers;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
@@ -12,9 +15,6 @@ import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
 
 import java.io.File;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
@@ -124,11 +124,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		}
 
 		app.getGpsFilterHelper().filterGpxFile(this, true);
-	}
-
-	@Override
-	protected boolean processSplit(@NonNull OsmandApplication app) {
-		return GpxDisplayHelper.processSplit(app, this);
 	}
 
 	@NonNull

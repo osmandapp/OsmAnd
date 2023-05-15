@@ -530,7 +530,7 @@
     <string name="map_overlay">Карта наложения</string>
     <string name="map_overlay_descr">Выберите слой наложения поверх основной карты</string>
     <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены.</string>
-    <string name="select_tile_source_to_install">Выберите тайловые карты для установки или обновления.</string>
+    <string name="select_tile_source_to_install">Выберите источники тайловых карт:</string>
     <string name="internet_not_available">Для данной операции требуется подключение к интернету, но оно недоступно.</string>
     <string name="install_more">Загрузить ещё…</string>
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
@@ -624,7 +624,6 @@
     <string name="filter_existing_indexes">Загруженные</string>
     <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие.</string>
     <string name="general_settings">Общие</string>
-    <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">OsmAnd работает в фоновом режиме с выключенным экраном.</string>
     <string name="fast_route_mode">Самый быстрый маршрут</string>
@@ -1338,7 +1337,7 @@
     <string name="routing_attr_avoid_unpaved_description">Избегать грунтовых дорог</string>
     <string name="routing_attr_avoid_ferries_name">Без паромов</string>
     <string name="routing_attr_avoid_ferries_description">Избегать паромные переправы</string>
-    <string name="routing_attr_weight_name">Предельная масса</string>
+    <string name="routing_attr_weight_name">Масса</string>
     <string name="routing_attr_weight_description">Укажите допустимый предел массы автомобиля для учёта при построении маршрута.</string>
     <string name="map_widget_map_rendering">Отображение карты</string>
     <string name="amenity_type_seamark">Навигационные знаки (водоёмы)</string>
@@ -1801,7 +1800,7 @@
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границ</string>
-    <string name="routing_attr_height_name">Предельная высота</string>
+    <string name="routing_attr_height_name">Высота</string>
     <string name="routing_attr_height_description">Укажите высоту транспортного средства для учёта при построении маршрута.</string>
     <string name="use_fast_recalculation">Умный пересчёт маршрута</string>
     <string name="use_fast_recalculation_desc">Пересчитывается только начальная часть маршрута. Полезно для дальних поездок.</string>
@@ -2917,8 +2916,8 @@
     <string name="avoid_pt_types">Исключить виды транспорта…</string>
     <string name="save_poi_value_exceed_length_title">Длина значения «%s»</string>
     <string name="quick_action_day_night_mode">Режим %s</string>
-    <string name="routing_attr_avoid_sett_name">Без булыжников или брусчатки</string>
-    <string name="routing_attr_avoid_sett_description">Избегать мощёных улиц и брусчатки</string>
+    <string name="routing_attr_avoid_sett_name">Без брусчатки</string>
+    <string name="routing_attr_avoid_sett_description">Избегать брусчатки</string>
     <string name="shared_string_milliradians">Миллирадианы</string>
     <string name="angular_measeurement">Угловые единицы</string>
     <string name="angular_measeurement_descr">Изменить, в чём измеряется азимут.</string>
@@ -3169,7 +3168,7 @@
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтный парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Самоходные и несамоходные сани (упряжки)</string>
     <string name="routeInfo_piste_difficulty_name">Сложность горнолыжной трассы</string>
-    <string name="routing_attr_width_name">Ограничение по ширине</string>
+    <string name="routing_attr_width_name">Ширина</string>
     <string name="routing_attr_width_description">Укажите ширину транспортного средства для учёта при построении маршрута.</string>
     <string name="app_mode_utv">Мотовездеход</string>
     <string name="shared_string_calculate">Рассчитать</string>
@@ -3670,7 +3669,7 @@
     <string name="shared_string_uninstall_and_restart">Удалить и перезапустить</string>
     <string name="shared_string_uninstall">Удалить</string>
     <string name="routing_attr_length_description">Укажите длину транспортного средства, разрешённую для движения по маршрутам.</string>
-    <string name="routing_attr_length_name">Предельная длина</string>
+    <string name="routing_attr_length_name">Длина</string>
     <string name="speed_cameras_removed_descr">В этом устройстве нет камер контроля скорости.</string>
     <string name="app_mode_inline_skates">Роликовые коньки</string>
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
@@ -4172,7 +4171,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
     <string name="purchases_feature_desc_osmand_cloud">Облачное хранилище OsmAnd Cloud для хранения всех данных приложения. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Доступ к расширенным виджетам OsmAnd.</string>
     <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
@@ -4180,7 +4178,6 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа: контурные линии, затенение рельефа (отмывка), уклоны</string>
     <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
-    <string name="advanced_widgets">Расширенные виджеты</string>
     <string name="you_can_get_feature_as_part_of_pattern">Получить «%1$s» как часть тарифного плана %2$s. Сравнение планов:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
     <string name="continue_with">Продолжить с %1$s</string>
@@ -4461,7 +4458,6 @@
     <string name="gps_filter_smoothing">Сглаживание</string>
     <string name="gps_filter_actions_description">OsmAnd применит изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
     <string name="shared_string_gps_filter">GPS фильтр</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="save_changes_into_file">Сохранить изменения в файл</string>
     <string name="save_as_copy">Сохранить как копию</string>
     <string name="gps_filter_hdop_desc">Установите максимально допустимое значение для HDOP.
@@ -4695,7 +4691,7 @@
     <string name="routing_attr_motor_type_hybrid_name">Гибрид</string>
     <string name="kg">кг</string>
     <string name="routing_attr_motor_type_diesel_name">Дизельное топливо</string>
-    <string name="routing_attr_motor_type_name">Двигатель автомобиля</string>
+    <string name="routing_attr_motor_type_name">Используемое топливо</string>
     <string name="routing_attr_motor_type_description">Выберите тип топлива для вашего двигателя, это необходимо для оценки выбросов CO2.</string>
     <string name="routing_attr_motor_type_petrol_name">Бензин</string>
     <string name="routing_attr_motor_type_electric_name">Электричество</string>
@@ -4875,7 +4871,7 @@
 \n
 \n• Виджет «Маркер карты»: добавлена возможность изменения поведения при нажатии
 \n
-\n• Исправлена опция \"Показать положение\"
+\n• Исправлена опция \"Отображать позицию\"
 \n
 \n• GPX: добавлена поддержка тегов «link», «cmt», «desc» и любых пользовательских расширений
 \n
@@ -4975,8 +4971,6 @@
     <string name="cloud_layer">Слой облачности</string>
     <string name="rendering_attr_showMtbScale_name">Показать MTB сложность</string>
     <string name="rendering_attr_showMtbScale_description">Показать MTB трейлы в соответствии с их сложностью.</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
@@ -5083,7 +5077,7 @@
 \n
 \n• Добавлен график «Скорость/Уклон» для анализа пути.
 \n
-\n• Android 13 переместил выбор языка приложения в системные настройки.
+\n• В Android 13 выбор языка приложения перемещён в системные настройки.
 \n
 \n• Исправлены проблемы с отображением веганских мест.
 \n
@@ -5125,4 +5119,66 @@
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
     <string name="shutter_sound">Звук затвора</string>
     <string name="camera_app">Приложение камеры</string>
+    <string name="proxy_port_max_warning">Максимальное значение порта - %1$s</string>
+    <string name="weather_download_error">Не удалось загрузить тайлы %1$s.</string>
+    <string name="is_imported">%1$s импортирован.</string>
+    <string name="file_already_exists">Файл уже существует</string>
+    <string name="nav_profile_confirm_delete">Вы уверены, что хотите удалить \"%1$s\"\?</string>
+    <string name="external_device_menu_forget">Забыть</string>
+    <string name="file_already_exists_description">\"%1$s\". Файл с таким именем уже существует. Замена перезапишет все изменения, сделанные в текущей версии.</string>
+    <string name="external_device_characteristic_speed">Скорость</string>
+    <string name="external_device_characteristic_heart_rate">Частота сердцебиения</string>
+    <string name="external_device_characteristic_systolic">Систолическое</string>
+    <string name="external_device_characteristic_cadence">Каденс</string>
+    <string name="external_device_characteristic_arterial_pressure">Артериальное давление</string>
+    <string name="external_device_characteristic_temperature">Температура</string>
+    <string name="external_device_details_information">Информация</string>
+    <string name="external_device_details_received_data">Полученные данные</string>
+    <string name="external_device_details_battery">Батарея</string>
+    <string name="external_device_details_speed">Скорость</string>
+    <string name="external_device_details_connection">Подключение</string>
+    <string name="external_device_details_total_distance">Общее расстояние</string>
+    <string name="external_device_details_distance">Расстояние</string>
+    <string name="external_device_details_disconnect">Отключить</string>
+    <string name="bluetooth_disconnected">Отключено, %s</string>
+    <string name="external_device_details_pair">Сопряжение</string>
+    <string name="external_device_details_connect">Подключить</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="bluetooth_connected">Подключено, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_not_supported">Bluetooth не поддерживается</string>
+    <string name="bluetooth_found_title">Найдено: %d</string>
+    <string name="ant_plus_nothing_found_text">Датчики не обнаружены</string>
+    <string name="ble_search_again">Повторный поиск</string>
+    <string name="ant_plus_help_title">Я не знаю какой у меня тип датчика.</string>
+    <string name="ant_plus_searching_text_description">Удерживайте устройство рядом с датчиком. Активируйте датчик, чтобы OsmAnd мог его найти.</string>
+    <string name="ant_plus_searching">Поиск</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth выключен</string>
+    <string name="ant_plus_bluetooth_off_description">Включите Bluetooth для поиска и сопряжения датчиков.</string>
+    <string name="ant_plus_searching_text">Поиск датчиков</string>
+    <string name="ant_plus_pair_new_sensor">Сопряжение нового датчика</string>
+    <string name="ant_plus_open_settings">Открыть настройки</string>
+    <string name="ant_plus_pair_new_sensor_ble">Сопряжение датчика Bluetooth LE</string>
+    <string name="no_search_results">Ничего не найдено</string>
+    <string name="external_device_characteristic_distance">Расстояние</string>
+    <string name="external_device_characteristic_total_distance">Общее расстояние</string>
+    <string name="external_device_characteristic_battery_level">Батарея</string>
+    <string name="external_device_characteristic_gear_ratio">Передаточное число</string>
+    <string name="external_device_characteristic_diastolic">Диастолическое</string>
+    <string name="external_device_characteristic_pulse_rate">Частота пульса</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Сопряжение датчика ANT+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Сопрягайте датчики Bluetooth LE и ANT+ с OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Узнать больше о датчиках.</string>
+    <string name="search_track_by_name">Поиск трека по названию</string>
+    <string name="ant_plus_nothing_found_description">Убедитесь, что:
+\n- Bluetooth включен
+\n- датчик активирован
+\n- устройство находится рядом с датчиком</string>
+    <string name="external_device_low_battery">Низкий заряд батареи</string>
+    <string name="external_device_forget_sensor_description">Датчик будет удален из списка. Вы сможете снова выполнить сопряжение этого датчика в любое время.</string>
+    <string name="external_device_disconnected">Отключён</string>
+    <string name="external_device_connected">Подключён</string>
+    <string name="external_device_forget_sensor">Забыть датчик</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_foot">Нога</string>
 </resources>

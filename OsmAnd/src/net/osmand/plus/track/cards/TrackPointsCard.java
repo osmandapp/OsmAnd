@@ -40,9 +40,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.myplaces.DeletePointsTask;
-import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
-import net.osmand.plus.myplaces.ui.EditTrackGroupDialogFragment;
+import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
+import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
+import net.osmand.plus.myplaces.tracks.dialogs.EditTrackGroupDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
@@ -636,7 +636,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
 				for (GpxDisplayGroup g : getOriginalGroups()) {
-					for (GpxDisplayItem i : g.getModifiableList()) {
+					for (GpxDisplayItem i : g.getDisplayItems()) {
 						if (i.name.toLowerCase().contains(cs)) {
 							filter.add(i);
 						} else if (i.locationStart != null && !TextUtils.isEmpty(i.locationStart.category)

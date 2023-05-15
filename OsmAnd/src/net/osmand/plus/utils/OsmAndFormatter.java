@@ -147,7 +147,7 @@ public class OsmAndFormatter {
 			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
 
 			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				DateFormat dateFormat = new SimpleDateFormat("MMM d, HH:mm:ss");
+				DateFormat dateFormat = new SimpleDateFormat("d MMM yyyy, HH:mm:ss");
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTimeInMillis(lastUploadedTimems);
 				return dateFormat.format(calendar.getTime());
@@ -892,11 +892,11 @@ public class OsmAndFormatter {
 
 		private final boolean separateWithSpace;
 
-		public FormattedValue(float valueSrc, @NonNull String value, @NonNull String unit) {
+		public FormattedValue(float valueSrc, String value, String unit) {
 			this(valueSrc, value, unit, true);
 		}
 
-		public FormattedValue(float valueSrc, @NonNull String value, @NonNull String unit, boolean separateWithSpace) {
+		public FormattedValue(float valueSrc, String value, String unit, boolean separateWithSpace) {
 			this.value = value;
 			this.valueSrc = valueSrc;
 			this.unit = unit;

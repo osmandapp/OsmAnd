@@ -90,7 +90,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private boolean signIn;
 
 	private long lastTimeCodeSent;
-	private boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -115,7 +114,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		app = requireMyApplication();
 		settings = app.getSettings();
 		backupHelper = app.getBackupHelper();
-		nightMode = isNightMode(false);
 
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {

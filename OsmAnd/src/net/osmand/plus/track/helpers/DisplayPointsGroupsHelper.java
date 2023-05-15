@@ -32,10 +32,13 @@ public class DisplayPointsGroupsHelper {
 		comparator = OsmAndCollator.primaryCollator()::compare;
 	}
 
-	public static DisplayGroupsHolder getGroups(@NonNull OsmandApplication app,
-	                                            @NonNull List<GpxDisplayGroup> displayGroups,
-	                                            @Nullable Set<?> filteredItems) {
-		return new DisplayPointsGroupsHelper(app).getGroups(displayGroups, filteredItems);
+	public static DisplayGroupsHolder getGroups(
+			@NonNull OsmandApplication app,
+			@NonNull List<GpxDisplayGroup> displayGroups,
+			@Nullable Set<?> filteredItems
+	) {
+		DisplayPointsGroupsHelper helper = new DisplayPointsGroupsHelper(app);
+		return helper.getGroups(displayGroups, filteredItems);
 	}
 
 	private DisplayGroupsHolder getGroups(@NonNull List<GpxDisplayGroup> displayGroups,
@@ -62,7 +65,7 @@ public class DisplayPointsGroupsHelper {
 	private void processDisplayGroups(List<GpxDisplayGroup> displayGroups, Set<?> filteredItems) {
 		for (int i = 0; i < displayGroups.size(); i++) {
 			GpxDisplayGroup group = displayGroups.get(i);
-			if (group.getModifiableList().isEmpty()) {
+			if (group.getDisplayItems().isEmpty()) {
 				continue;
 			}
 			Map<String, List<GpxDisplayItem>> itemsMap = collectItemsByCategory(group, i);
@@ -78,7 +81,7 @@ public class DisplayPointsGroupsHelper {
 	private Map<String, List<GpxDisplayItem>> collectItemsByCategory(GpxDisplayGroup group, int index) {
 		Map<String, List<GpxDisplayItem>> itemsMap = new HashMap<>();
 
-		for (GpxDisplayItem item : group.getModifiableList()) {
+		for (GpxDisplayItem item : group.getDisplayItems()) {
 			String category;
 			if (item.locationStart != null) {
 				if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
@@ -130,19 +133,18 @@ public class DisplayPointsGroupsHelper {
 		Collections.sort(categories, comparator);
 		for (String category : categories) {
 			List<GpxDisplayItem> values = itemsMap.get(category);
-			GpxDisplayGroup headerGroup = group.cloneInstance();
-			headerGroup.setName(category);
+			GpxDisplayGroup categoryGroup = new GpxDisplayGroup(group);
+			categoryGroup.setName(category);
 			for (GpxDisplayItem i : values) {
 				if (i.locationStart != null && i.locationStart.getColor() != 0) {
-					headerGroup.setColor(i.locationStart.getColor(group.getColor()));
+					categoryGroup.setColor(i.locationStart.getColor(group.getColor()));
 					break;
 				}
 			}
-			List<GpxDisplayItem> headerGroupItems = headerGroup.getModifiableList();
-			headerGroupItems.clear();
-			headerGroupItems.addAll(values);
-			itemGroups.put(headerGroup, values);
-			this.groups.add(headerGroup);
+			categoryGroup.clearDisplayItems();
+			categoryGroup.addDisplayItems(values);
+			itemGroups.put(categoryGroup, values);
+			this.groups.add(categoryGroup);
 		}
 	}
 

@@ -1,11 +1,11 @@
 package net.osmand.plus.track.cards;
 
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.ColorUtilities;
@@ -20,8 +20,6 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.SaveGpxAsyncTask;
-import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -115,25 +113,18 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 		filteredSelectedGpxFile.getSourceSelectedGpxFile().setGpxFile(newGpxFile, app);
 
 		File outFile = new File(newGpxFile.path);
-		new SaveGpxAsyncTask(outFile, newGpxFile, new SaveGpxListener() {
 
-			@Override
-			public void gpxSavingStarted() {
+		SaveGpxHelper.saveGpx(outFile, newGpxFile, errorMessage -> {
+			if (app != null) {
+				String toastMessage = errorMessage == null
+						? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
+						: errorMessage.getMessage();
+				app.showToastMessage(toastMessage);
 			}
-
-			@Override
-			public void gpxSavingFinished(Exception errorMessage) {
-				if (app != null) {
-					String toastMessage = errorMessage == null
-							? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
-							: errorMessage.getMessage();
-					app.showToastMessage(toastMessage);
-				}
-				if (target instanceof SaveIntoFileListener) {
-					((SaveIntoFileListener) target).onSavedIntoFile(newGpxFile.path);
-				}
+			if (target instanceof SaveIntoFileListener) {
+				((SaveIntoFileListener) target).onSavedIntoFile(newGpxFile.path);
 			}
-		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 
 		updateMainContent();
 	}

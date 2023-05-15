@@ -81,7 +81,9 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 		sendIntent.setType("text/plain");
 		sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		AndroidUtils.startActivityIfSafe(app, sendIntent);
+		Intent chooserIntent = Intent.createChooser(sendIntent, app.getString(R.string.shared_string_share));
+
+		AndroidUtils.startActivityIfSafe(app, chooserIntent);
 	}
 
 	public interface OnShareHistoryListener {

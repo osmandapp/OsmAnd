@@ -56,16 +56,18 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		bindBackground(item, holder.button, holder.container);
 		bindTitle(item, holder.title);
 		bindIcon(item, holder.image);
-		bindClickListener(item, holder.button);
+		bindButton(item, holder.button);
 
 		if (item.onAfterViewBoundCallback != null) {
 			item.onAfterViewBoundCallback.onAfterViewBound(item, holder);
 		}
 	}
 
-	private void bindBackground(@NonNull ChipItem chip,
-	                            @NonNull View button,
-	                            @NonNull View wrapper) {
+	private void bindBackground(
+			@NonNull ChipItem chip,
+			@NonNull View button,
+			@NonNull View wrapper
+	) {
 		GradientDrawable background = (GradientDrawable) getDrawable(R.drawable.bg_selected_chip).mutate();
 		int color = getBgColor(chip);
 		background.setColor(color);
@@ -81,8 +83,10 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		AndroidUtils.setBackground(wrapper, ripple);
 	}
 
-	private void bindTitle(@NonNull ChipItem chip,
-	                       @NonNull TextView tvTitle) {
+	private void bindTitle(
+			@NonNull ChipItem chip,
+			@NonNull TextView tvTitle
+	) {
 		if (chip.title == null) {
 			tvTitle.setVisibility(View.GONE);
 			return;
@@ -93,8 +97,10 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		tvTitle.setTextColor(color);
 	}
 
-	private void bindIcon(@NonNull ChipItem chip,
-	                      @NonNull ImageView ivImage) {
+	private void bindIcon(
+			@NonNull ChipItem chip,
+			@NonNull ImageView ivImage
+	) {
 		if (chip.icon == null) {
 			ivImage.setVisibility(View.GONE);
 			return;
@@ -106,14 +112,19 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipViewHolder> {
 		AndroidUtils.setMargins(lp, 0, 0, getDrawablePadding(chip), 0);
 	}
 
-	private void bindClickListener(@NonNull ChipItem chip,
-	                               @NonNull View button) {
+	private void bindButton(
+			@NonNull ChipItem chip,
+			@NonNull View button
+	) {
 		button.setOnClickListener(v -> {
 			if (onSelectChipListener != null && onSelectChipListener.onSelectChip(chip)) {
 				dataHolder.setSelected(chip);
 				notifyDataSetChanged();
 			}
 		});
+		if (chip.contentDescription != null) {
+			button.setContentDescription(chip.contentDescription);
+		}
 	}
 
 	@ColorInt

@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -11,8 +9,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
 public class AttachTrackToRoadsBannerCard extends MapBaseCard {
 

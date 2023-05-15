@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
@@ -16,19 +17,24 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GPXInfo;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -38,22 +44,26 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 	private final OsmandApplication app;
 	private final LayoutInflater themedInflater;
 	private final UiUtilities iconsCache;
-	private List<GPXInfo> gpxInfoList;
-	private HorizontalChipsView categoriesChipView;
-	private OnItemClickListener onItemClickListener;
 
+	private List<GPXInfo> gpxInfoList;
+	private Map<String, List<GPXInfo>> gpxInfoCategories = new HashMap<>();
+
+	private OnItemClickListener onItemClickListener;
+	private OnSelectChipListener onSelectChipListener;
+
+	private String selectedCategory;
 	private boolean showFolderName;
 	private boolean showCurrentGpx;
+	private boolean showCategories;
 
-	public GpxTrackAdapter(Context ctx, List<GPXInfo> gpxInfoList, boolean showCurrentGpx, boolean showFolderName) {
+	public GpxTrackAdapter(@NonNull Context ctx, @NonNull List<GPXInfo> gpxInfoList) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
 		iconsCache = app.getUIUtilities();
 		this.gpxInfoList = gpxInfoList;
-		this.showFolderName = showFolderName;
-		this.showCurrentGpx = showCurrentGpx;
 	}
 
+	@NonNull
 	public List<GPXInfo> getGpxInfoList() {
 		return gpxInfoList;
 	}
@@ -70,13 +80,25 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		this.showFolderName = showFolderName;
 	}
 
-	public void setCategoriesChipView(HorizontalChipsView chipView) {
-		this.categoriesChipView = chipView;
+	public void setShowCategories(boolean showCategories) {
+		this.showCategories = showCategories;
+	}
+
+	public void setSelectedCategory(String selectedCategory) {
+		this.selectedCategory = selectedCategory;
+	}
+
+	public void setOnSelectChipListener(@Nullable OnSelectChipListener onSelectChipListener) {
+		this.onSelectChipListener = onSelectChipListener;
+	}
+
+	public void setGpxInfoCategories(@NonNull Map<String, List<GPXInfo>> gpxInfoCategories) {
+		this.gpxInfoCategories = gpxInfoCategories;
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		return categoriesChipView != null && position == 0 ? TRACK_CATEGORY_VIEW_TYPE : TRACK_INFO_VIEW_TYPE;
+		return showCategories && position == 0 ? TRACK_CATEGORY_VIEW_TYPE : TRACK_INFO_VIEW_TYPE;
 	}
 
 	@NonNull
@@ -92,7 +114,8 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
 			return new TrackViewHolder(view);
 		} else {
-			return new TrackCategoriesViewHolder(categoriesChipView);
+			View view = themedInflater.inflate(R.layout.gpx_track_select_category_item, parent, false);
+			return new TrackCategoriesViewHolder(view, gpxInfoCategories, selectedCategory, onSelectChipListener);
 		}
 	}
 
@@ -114,37 +137,32 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 				itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
 			}
 			updateGpxInfoView(trackViewHolder, itemTitle, info, dataItem, currentlyRecordingTrack, app);
-			trackViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (onItemClickListener != null) {
-						onItemClickListener.onItemClick(listPosition);
-					}
+			trackViewHolder.itemView.setOnClickListener(v -> {
+				if (onItemClickListener != null) {
+					onItemClickListener.onItemClick(listPosition);
 				}
 			});
 		} else {
-			TrackCategoriesViewHolder categoriesViewHolder = (TrackCategoriesViewHolder) holder;
-			categoriesViewHolder.trackCategories.notifyDataSetChanged();
+			TrackCategoriesViewHolder viewHolder = (TrackCategoriesViewHolder) holder;
+			viewHolder.chipsView.notifyDataSetChanged();
 		}
 	}
 
 
 	@Override
 	public int getItemCount() {
-		return gpxInfoList.size() + (categoriesChipView == null ? 0 : 1);
+		return gpxInfoList.size() + (showCategories ? 1 : 0);
 	}
 
 	private int mapToListPosition(int position) {
-		return categoriesChipView == null ? position : position - 1;
+		return showCategories ? position - 1 : position;
 	}
 
 	private boolean isFirstListItem(int position) {
-		return position == 0 && categoriesChipView == null || position == 1 && categoriesChipView != null;
+		return position == 0 && !showCategories || position == 1 && showCategories;
 	}
 
-	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info,
-	                               GpxDataItem dataItem, boolean currentlyRecordingTrack,
-	                               OsmandApplication app) {
+	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
 		holder.title.setText(itemTitle.replace("/", " • ").trim());
 		GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
@@ -185,8 +203,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 				notifyItemChanged(gpxInfoList.indexOf(info));
 			}
 		};
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR),
-				info.getFileName()), callback);
+		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()), callback);
 	}
 
 	public void setAdapterListener(OnItemClickListener onItemClickListener) {
@@ -195,14 +212,14 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	static class TrackViewHolder extends RecyclerView.ViewHolder {
 
-		ImageView icon;
-		TextView title;
-		TextView distance;
-		TextView pointsCount;
-		TextView time;
-		LinearLayout readSection;
-		LinearLayout unknownSection;
-		TextView dateAndSize;
+		private final ImageView icon;
+		private final TextView title;
+		private final TextView distance;
+		private final TextView pointsCount;
+		private final TextView time;
+		private final LinearLayout readSection;
+		private final LinearLayout unknownSection;
+		private final TextView dateAndSize;
 
 		TrackViewHolder(View itemView) {
 			super(itemView);
@@ -219,16 +236,33 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	static class TrackCategoriesViewHolder extends RecyclerView.ViewHolder {
 
-		private final HorizontalChipsView trackCategories;
+		private final HorizontalChipsView chipsView;
 
-		TrackCategoriesViewHolder(@NonNull HorizontalChipsView itemView) {
+		TrackCategoriesViewHolder(@NonNull View itemView, @NonNull Map<String, List<GPXInfo>> categories,
+		                          @NonNull String selectedCategory, @Nullable OnSelectChipListener listener) {
 			super(itemView);
-			trackCategories = itemView;
+			chipsView = itemView.findViewById(R.id.track_categories);
+			chipsView.setItems(getChipItems(categories));
+			chipsView.setSelected(chipsView.getChipById(selectedCategory));
+			chipsView.setOnSelectChipListener(chip -> {
+				chipsView.smoothScrollTo(chip);
+				if (listener != null) {
+					listener.onSelectChip(chip);
+				}
+				return true;
+			});
+		}
 
-			ViewGroup parent = (ViewGroup) itemView.getParent();
-			if (parent != null) {
-				parent.removeView(itemView);
+		@NonNull
+		private List<ChipItem> getChipItems(@NonNull Map<String, List<GPXInfo>> categories) {
+			List<ChipItem> items = new ArrayList<>();
+			for (String title : categories.keySet()) {
+				ChipItem item = new ChipItem(title);
+				item.title = title;
+				item.contentDescription = title;
+				items.add(item);
 			}
+			return items;
 		}
 	}
 

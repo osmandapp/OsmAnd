@@ -26,7 +26,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.myplaces.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -52,6 +52,7 @@ import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.NavigationHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
@@ -60,6 +61,7 @@ import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.Algorithms;
@@ -311,11 +313,17 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
 			}
 		}
-		List<HistoryEntry> historyEntries = settingsTypes == null || settingsTypes.contains(ExportSettingsType.SEARCH_HISTORY)
-				? SearchHistoryHelper.getInstance(app).getHistoryEntries(false)
+		List<HistoryEntry> searchHistoryEntries = settingsTypes == null || settingsTypes.contains(ExportSettingsType.SEARCH_HISTORY)
+				? SearchHistoryHelper.getInstance(app).getHistoryEntries(HistorySource.SEARCH, false)
 				: Collections.emptyList();
-		if (!historyEntries.isEmpty() || addEmptyItems) {
-			myPlacesItems.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
+		if (!searchHistoryEntries.isEmpty() || addEmptyItems) {
+			myPlacesItems.put(ExportSettingsType.SEARCH_HISTORY, searchHistoryEntries);
+		}
+		List<HistoryEntry> navigationHistoryEntries = settingsTypes == null || settingsTypes.contains(ExportSettingsType.NAVIGATION_HISTORY)
+				? SearchHistoryHelper.getInstance(app).getHistoryEntries(HistorySource.NAVIGATION, false)
+				: Collections.emptyList();
+		if (!navigationHistoryEntries.isEmpty() || addEmptyItems) {
+			myPlacesItems.put(ExportSettingsType.NAVIGATION_HISTORY, navigationHistoryEntries);
 		}
 		List<MapMarkersGroup> markersGroups = settingsTypes == null || settingsTypes.contains(ExportSettingsType.ITINERARY_GROUPS)
 				? app.getMapMarkersHelper().getVisibleMapMarkersGroups()
@@ -462,7 +470,8 @@ public abstract class SettingsHelper {
 		List<OpenstreetmapPoint> osmEditsPointList = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersHistoryGroups = new ArrayList<>();
-		List<HistoryEntry> historyEntries = new ArrayList<>();
+		List<HistoryEntry> historySearchEntries = new ArrayList<>();
+		List<HistoryEntry> historyNavigationEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
@@ -506,7 +515,12 @@ public abstract class SettingsHelper {
 					itineraryGroups.add((MapMarkersGroup) object);
 				}
 			} else if (object instanceof HistoryEntry) {
-				historyEntries.add((HistoryEntry) object);
+				HistoryEntry entry = (HistoryEntry) object;
+				if (entry.getSource() == HistorySource.NAVIGATION) {
+					historyNavigationEntries.add(entry);
+				} else {
+					historySearchEntries.add(entry);
+				}
 			} else if (object instanceof GlobalSettingsItem) {
 				result.add((GlobalSettingsItem) object);
 			} else if (object instanceof OnlineRoutingEngine) {
@@ -593,9 +607,13 @@ public abstract class SettingsHelper {
 			HistoryMarkersSettingsItem baseItem = getBaseItem(SettingsItemType.HISTORY_MARKERS, HistoryMarkersSettingsItem.class, settingsItems);
 			result.add(new HistoryMarkersSettingsItem(app, baseItem, mapMarkers));
 		}
-		if (!historyEntries.isEmpty()) {
+		if (!historySearchEntries.isEmpty()) {
 			SearchHistorySettingsItem baseItem = getBaseItem(SettingsItemType.SEARCH_HISTORY, SearchHistorySettingsItem.class, settingsItems);
-			result.add(new SearchHistorySettingsItem(app, baseItem, historyEntries));
+			result.add(new SearchHistorySettingsItem(app, baseItem, historySearchEntries));
+		}
+		if (!historyNavigationEntries.isEmpty()) {
+			NavigationHistorySettingsItem baseItem = getBaseItem(SettingsItemType.NAVIGATION_HISTORY, NavigationHistorySettingsItem.class, settingsItems);
+			result.add(new NavigationHistorySettingsItem(app, baseItem, historyNavigationEntries));
 		}
 		if (!onlineRoutingEngines.isEmpty()) {
 			OnlineRoutingSettingsItem baseItem = getBaseItem(SettingsItemType.ONLINE_ROUTING_ENGINES, OnlineRoutingSettingsItem.class, settingsItems);
@@ -686,7 +704,8 @@ public abstract class SettingsHelper {
 		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
 		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 		List<MapMarkersGroup> markersGroups = new ArrayList<>();
-		List<HistoryEntry> historyEntries = new ArrayList<>();
+		List<HistoryEntry> historySearchEntries = new ArrayList<>();
+		List<HistoryEntry> historyNavigationEntries = new ArrayList<>();
 		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
@@ -780,7 +799,11 @@ public abstract class SettingsHelper {
 					break;
 				case SEARCH_HISTORY:
 					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
-					historyEntries.addAll(searchHistorySettingsItem.getItems());
+					historySearchEntries.addAll(searchHistorySettingsItem.getItems());
+					break;
+				case NAVIGATION_HISTORY:
+					NavigationHistorySettingsItem navigationHistorySettingsItem = (NavigationHistorySettingsItem) item;
+					historyNavigationEntries.addAll(navigationHistorySettingsItem.getItems());
 					break;
 				case GPX:
 					tracksFilesList.add((GpxSettingsItem) item);
@@ -887,8 +910,13 @@ public abstract class SettingsHelper {
 					}
 					break;
 				case SEARCH_HISTORY:
-					if (!historyEntries.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historyEntries);
+					if (!historySearchEntries.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.SEARCH_HISTORY, historySearchEntries);
+					}
+					break;
+				case NAVIGATION_HISTORY:
+					if (!historyNavigationEntries.isEmpty() || addEmptyItems) {
+						settingsToOperate.put(ExportSettingsType.NAVIGATION_HISTORY, historyNavigationEntries);
 					}
 					break;
 				case GPX:

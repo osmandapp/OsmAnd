@@ -6,7 +6,8 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	android:background="?attr/activity_background_color"
-	android:clickable="true">
+	android:clickable="true"
+	android:focusable="true">
 
 	<include layout="@layout/download_tiles_toolbar" />
 

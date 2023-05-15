@@ -41,7 +41,6 @@ import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -125,18 +124,6 @@ public class RoutingOptionsHelper {
 		routingHelper.getVoiceRouter().setMuteForMode(mode, mute);
 	}
 
-	public void switchMusic() {
-		OsmandSettings settings = app.getSettings();
-		boolean mt = !settings.INTERRUPT_MUSIC.get();
-		settings.INTERRUPT_MUSIC.set(mt);
-	}
-
-	public void selectRestrictedRoads(MapActivity mapActivity) {
-		mapActivity.getDashboard().setDashboardVisibility(false, DashboardOnMap.DashboardType.ROUTE_PREFERENCES);
-		mapActivity.getMapRouteInfoMenu().hide();
-		mapActivity.getMyApplication().getAvoidSpecificRoads().showDialog(mapActivity, null);
-	}
-
 	public void selectVoiceGuidance(MapActivity mapActivity, CallbackWithObject<String> callback, ApplicationMode applicationMode) {
 		ContextMenuAdapter contextMenuAdapter = new ContextMenuAdapter(app);
 
@@ -169,9 +156,9 @@ public class RoutingOptionsHelper {
 		entries[k] = mapActivity.getResources().getString(R.string.install_more);
 		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 
-		boolean nightMode = isNightMode(app);
+		boolean nightMode = isNightMode();
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
-		int themeRes = getThemeRes(app);
+		int themeRes = getThemeRes();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
 		int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
 		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
@@ -362,7 +349,7 @@ public class RoutingOptionsHelper {
 			selectedIndex = 0;
 		}
 
-		boolean nightMode = isNightMode(app);
+		boolean nightMode = isNightMode();
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
 		int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
@@ -658,15 +645,12 @@ public class RoutingOptionsHelper {
 		return parameter;
 	}
 	
-	public boolean isNightMode(OsmandApplication app) {
-		if (app == null) {
-			return false;
-		}
+	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightModeForMapControls();
 	}
 	
-	public int getThemeRes(OsmandApplication app) {
-		return isNightMode(app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	public int getThemeRes() {
+		return isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	public static class LocalRoutingParameter {

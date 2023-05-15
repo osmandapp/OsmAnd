@@ -761,7 +761,6 @@
     <string name="osmand_parking_hours">Horas</string>
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
-    <string name="index_settings">Gerenciar arquivos de mapas</string>
     <string name="context_menu_item_search">Pesquise por perto</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
@@ -4009,12 +4008,10 @@
     <string name="copy_poi_name">Copiar nome de POI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar reserva natural, áreas protegidas e limites de parque nacional.</string>
     <string name="map_widget_distance_by_tap">Distância por toque</string>
     <string name="track_has_no_altitude">A trilha não contém dados de altitude.</string>
     <string name="track_has_no_speed">A trilha não contém dados de velocidade.</string>
     <string name="select_another_colorization">Selecione outro tipo de cor.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturais</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="trip_recording_save_and_continue">Salvar e continuar</string>
     <string name="lost_data_warning">Todos os dados não salvos serão perdidos.</string>
@@ -4251,7 +4248,6 @@
 \n
 \nTalvez alguns mapas não estejam carregados, você pode executar uma verificação online dos mapas necessários.</string>
     <string name="option_available_only_in_osmand_pro">Disponível como parte da assinatura do OsmAnd Pro.</string>
-    <string name="pro_widgets">Pro Widgets</string>
     <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro: Coloração de rotas e muito mais.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para você.</string>
     <string name="routes_color_by_type">Rotas de cores por…</string>
@@ -4442,7 +4438,6 @@
     <string name="gps_filter_actions_description">OsmAnd aplicará as alterações à trilha sem atualizar o arquivo. Você pode salvar as alterações manualmente.</string>
     <string name="shared_string_gps_filter">Filtro GPS</string>
     <string name="storage_migration_wrong_folder_warning">Nenhum dado OsmAnd encontrado na pasta selecionada. Por favor, tente novamente.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_downhill">Descida</string>
     <string name="shared_string_hide_slope">Esconder inclinação</string>
     <string name="shared_string_uphill">Subida</string>
@@ -4957,10 +4952,8 @@
     <string name="wind_layer">Camada de vento</string>
     <string name="cloud_layer">Camada de nuvem</string>
     <string name="precipitation_layer">Camada de precipitação</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
     <string name="rendering_attr_showMtbScale_description">Exibir trilhas de acordo com sua escala MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Linhas isoladas de velocidade do vento</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinhas de precipitação</string>
@@ -5125,4 +5118,51 @@
     <string name="speak_route_deviation">Anunciar desvio da rota</string>
     <string name="shutter_sound">Som do obturador</string>
     <string name="camera_app">Aplicativo de câmera</string>
+    <string name="proxy_port_max_warning">O valor máximo da porta é %1$s</string>
+    <string name="weather_download_error">Não foi possível baixar %1$s mosaicos.</string>
+    <string name="external_device_forget_sensor_description">O sensor será removido da lista. Você poderá emparelhar este sensor novamente a qualquer momento.</string>
+    <string name="external_device_disconnected">Desconectado</string>
+    <string name="external_device_connected">Conectado</string>
+    <string name="external_device_menu_forget">Esquecer</string>
+    <string name="external_device_characteristic_speed">Velocidade</string>
+    <string name="external_device_characteristic_distance">Distância</string>
+    <string name="external_device_characteristic_total_distance">Distância total</string>
+    <string name="external_device_characteristic_battery_level">Bateria</string>
+    <string name="external_device_characteristic_cadence">Cadência</string>
+    <string name="external_device_characteristic_pulse_rate">Frequência de pulso</string>
+    <string name="external_device_characteristic_stride_length">Comprimento do passo</string>
+    <string name="external_device_characteristic_temperature">Temperatura</string>
+    <string name="external_device_details_information">Informação</string>
+    <string name="external_device_details_received_data">Dados recebidos</string>
+    <string name="external_device_details_connection">Conexão</string>
+    <string name="external_device_details_battery">Bateria</string>
+    <string name="external_device_details_speed">Velocidade</string>
+    <string name="external_device_details_total_distance">Distância total</string>
+    <string name="external_device_details_distance">Distância</string>
+    <string name="external_device_details_connect">Conectar</string>
+    <string name="external_device_details_disconnect">Desconectar</string>
+    <string name="bluetooth_disconnected">Desconectado, %s</string>
+    <string name="bluetooth_connected">Conectado, %s</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Encontrado: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth não suportado</string>
+    <string name="ble_search_again">Pesquisar novamente</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth está desligado</string>
+    <string name="ant_plus_bluetooth_off_description">Ative os sensores de localização e emparelhamento do Bluetooth.</string>
+    <string name="ant_plus_searching_text">Procurando por sensores</string>
+    <string name="ant_plus_searching_text_description">Por favor, segure o dispositivo perto do sensor. Você precisa ativar o sensor para que o OsmAnd possa encontrá-lo.</string>
+    <string name="ant_plus_help_title">Eu não sei que tipo de sensor eu tenho</string>
+    <string name="ant_plus_searching">Procurando</string>
+    <string name="ant_plus_pair_new_sensor">Emparelhar novo sensor</string>
+    <string name="learn_more_about_sensors_link">Saiba mais sobre sensores.</string>
+    <string name="external_device_characteristic_arterial_pressure">Pressão arterial</string>
+    <string name="external_device_characteristic_heart_rate">Frequência cardíaca</string>
+    <string name="ant_plus_nothing_found_description">Certificar-se:
+\n- O Bluetooth está ativado
+\n– O sensor está ativado
+\n– Este dispositivo está localizado perto do sensor</string>
+    <string name="ant_plus_nothing_found_text">Não foi possível encontrar nenhum sensor</string>
+    <string name="ant_plus_open_settings">Abrir configurações</string>
+    <string name="external_device_low_battery">Bateria fraca</string>
 </resources>

@@ -7,30 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-import net.osmand.plus.myplaces.DefaultFavoritesListener;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.SpecialPointType;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.myplaces.FavoritesListener;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
-import net.osmand.plus.views.layers.MapControlsLayer;
-
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -39,6 +15,29 @@ import androidx.annotation.StringRes;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
+
+import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.SpecialPointType;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.layers.MapControlsLayer;
+
+import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LauncherShortcutsHelper {
 
@@ -49,13 +48,13 @@ public class LauncherShortcutsHelper {
 	private static final int VISIBLE_DYNAMIC_SHORTCUTS_LIMIT = 4;
 	@ColorRes
 	private static final int SHORTCUT_ICON_COLOR_RES = R.color.active_color_primary_light;
-	
+
 	private final OsmandApplication app;
 	private final FavoritesListener favoritesListener;
 
 	public LauncherShortcutsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.favoritesListener = new DefaultFavoritesListener() {
+		this.favoritesListener = new FavoritesListener() {
 			@Override
 			public void onFavoritesLoaded() {
 				updateLauncherShortcuts();
@@ -141,8 +140,8 @@ public class LauncherShortcutsHelper {
 		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
 			mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {
-			Intent favoritesActivityIntent = new Intent(mapActivity, app.getAppCustomization().getFavoritesActivity());
-			mapActivity.startActivity(favoritesActivityIntent);
+			Intent activityIntent = new Intent(mapActivity, app.getAppCustomization().getMyPlacesActivity());
+			mapActivity.startActivity(activityIntent);
 		} else if (Shortcut.NAVIGATE_TO.id.equals(shortcutId)) {
 			navigateTo(mapActivity, null);
 		}

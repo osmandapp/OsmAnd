@@ -518,7 +518,6 @@
     <string name="routing_settings">Nabigazioa</string>
     <string name="routing_settings_descr">Zehaztu nabigaziorako aukerak.</string>
     <string name="global_settings">Ezarpen Globalak</string>
-    <string name="index_settings">Kudeatu mapa-fitxategiak</string>
     <string name="general_settings">Orokorra</string>
     <string name="general_settings_descr">Erarri pantaila eta aplikazioaren ezarpen arruntak.</string>
     <string name="global_app_settings">Aplikazioaren ezarpen globalak</string>
@@ -5058,7 +5057,7 @@
     <string name="simulation_position_description">Hautatu kokapena mugitzeko iturri gisa erabiliko den arrasto-fitxategi bat.</string>
     <string name="empty_tracks">Ez duzu arrasto-fitxategirik.</string>
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
-    <string name="release_4_4">• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
+    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
 \n
 \n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
 \n
@@ -5078,7 +5077,17 @@
 \n
 \n • Leku beganoak bistaratzeko arazoak konpondu dira
 \n
-\n</string>
+\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da 
+\n
+\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\" 
+\n
+\n • Ziklomotor profil berria
+\n
+\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\" 
+\n
+\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
+\n
+\n"</string>
     <string name="switch_folder">Aldatu karpeta</string>
     <string name="cloud_version_confirm_delete">\"%1$s\" OsmAnd Cloud-etik ezabatu\?</string>
     <string name="shared_string_delete_file">Ezabatu fitxategia</string>
@@ -5114,4 +5123,60 @@
     <string name="disable_vertex_hillshade_3d">Desgaitu gailurren mendi-itzalak 3Dn</string>
     <string name="enable_3d_maps">Gaitu 3D mapak</string>
     <string name="test_heightmap">Probatu altuera-mapa</string>
+    <string name="ant_plus_pair_new_sensor_ble">Parekatu Bluetooth LE sentsorea</string>
+    <string name="external_device_low_battery">Bateria baxua</string>
+    <string name="external_device_forget_sensor_description">Sentsorea zerrendatik kenduko da. Sentsore hau berriro parekatu ahal izango duzu edozein unetan.</string>
+    <string name="external_device_disconnected">Deskonektatuta</string>
+    <string name="external_device_connected">Konektatuta</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_details_pair">Parekatu</string>
+    <string name="external_device_characteristic_heart_rate">Bihotz taupadak</string>
+    <string name="weather_download_error">Ezin izan dira %1$s fitxa deskargatu.</string>
+    <string name="proxy_port_max_warning">Portuaren gehieneko balioa %1$s da</string>
+    <string name="external_device_menu_forget">Ahaztu</string>
+    <string name="external_device_characteristic_total_distance">Distantzia osoa</string>
+    <string name="external_device_characteristic_speed">Abiadura</string>
+    <string name="external_device_characteristic_distance">Distantzia</string>
+    <string name="external_device_characteristic_battery_level">Bateria</string>
+    <string name="external_device_characteristic_gear_ratio">Engranaje-erlazioa</string>
+    <string name="external_device_characteristic_cadence">Kadentzia</string>
+    <string name="bluetooth_connected">Konektatuta, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="ant_plus_nothing_found_description">Ziurtatu:
+\n– Bluetootha aktibatuta dago
+\n– Sentsore aktibatuta dago
+\n– Gailu hau sentsorearen ondoan dago</string>
+    <string name="external_device_characteristic_cuff_pressure">Eskumuturreko presioa</string>
+    <string name="external_device_characteristic_systolic">Sistole</string>
+    <string name="external_device_details_total_distance">Distantzia osoa</string>
+    <string name="bluetooth_not_supported">Bluetootha ez da onartzen</string>
+    <string name="external_device_characteristic_diastolic">Diastole</string>
+    <string name="external_device_characteristic_stride_length">Pausoaren luzera</string>
+    <string name="external_device_details_connection">Konexioa</string>
+    <string name="external_device_characteristic_arterial_pressure">Arteria-presioa</string>
+    <string name="external_device_characteristic_pulse_rate">Pultsua</string>
+    <string name="external_device_characteristic_temperature">Tenperatura</string>
+    <string name="external_device_details_received_data">Jasotako datuak</string>
+    <string name="external_device_details_battery">Bateria</string>
+    <string name="external_device_details_speed">Abiadura</string>
+    <string name="external_device_details_information">Informazioa</string>
+    <string name="external_device_details_distance">Distantzia</string>
+    <string name="external_device_details_connect">Konektatu</string>
+    <string name="external_device_details_disconnect">Deskonektatu</string>
+    <string name="bluetooth_disconnected">Deskonektatua, %s</string>
+    <string name="bluetooth_found_title">Aurkitua: %d</string>
+    <string name="ant_plus_nothing_found_text">Ezin da sentsorerik aurkitu</string>
+    <string name="ant_plus_bluetooth_off">Bluetootha desaktibatuta dago</string>
+    <string name="ant_plus_bluetooth_off_description">Aktibatu Bluetooth-a bilatzeko eta parekatu sentsoreak.</string>
+    <string name="ble_search_again">Bilatu berriro</string>
+    <string name="ant_plus_searching_text_description">Eduki gailua sentsoretik gertu. Sentsorea aktibatu behar duzu OsmAnd-ek aurki dezan.</string>
+    <string name="ant_plus_searching_text">Sentsoreen bilaketa</string>
+    <string name="ant_plus_help_title">Ez dakit zer sentsore mota daukadan</string>
+    <string name="ant_plus_searching">Bilatzen</string>
+    <string name="ant_plus_pair_new_sensor">Parekatu sentsore berria</string>
+    <string name="ant_plus_open_settings">Ireki ezarpenak</string>
+    <string name="learn_more_about_sensors_link">Lortu informazio gehiago sentsoreei buruz.</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Parekatu ANT+ sentsorea</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LE eta ANT+ sentsoreak OsmAnd-ekin parekatu ditzakezu.</string>
+    <string name="external_device_forget_sensor">Ahaztu sentsorea</string>
 </resources>

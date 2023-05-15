@@ -72,8 +72,8 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkerSelectionFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.myplaces.FavoritesListener;
-import net.osmand.plus.myplaces.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavoritesListener;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
@@ -112,6 +112,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
@@ -478,20 +479,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void routeCalculationFinished() {
-		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		OsmandApplication app = getApp();
-		if (app != null && fragmentRef != null && fragment.isVisible()) {
+		if (app != null) {
 			RouteCalculationResult route = app.getRoutingHelper().getRoute();
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
-			if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
-				openMenuAfterCalculation(fragment, app);
-			}
-			if (setRouteCalculationInProgress(routeCalculating)) {
-				fragment.updateInfo();
-				if (!routeCalculationInProgress) {
-					fragment.hideRouteCalculationProgressBar();
+
+			WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+			MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
+
+			boolean calculationStatusChanged = setRouteCalculationInProgress(routeCalculating);
+			if (fragmentRef != null && fragment.isVisible()) {
+				if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
 					openMenuAfterCalculation(fragment, app);
+				}
+				if (calculationStatusChanged) {
+					fragment.updateInfo();
+					if (!routeCalculationInProgress) {
+						fragment.hideRouteCalculationProgressBar();
+						openMenuAfterCalculation(fragment, app);
+					}
 				}
 			}
 		}
@@ -767,7 +773,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				// History card
 				if (historyEnabled) {
 					SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-					List<SearchResult> results = historyHelper.getSearchHistoryResults(true);
+					List<SearchResult> results = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, false);
 					if (!Algorithms.isEmpty(results)) {
 						HistoryCard historyCard = new HistoryCard(mapActivity, results);
 						historyCard.setListener(this);

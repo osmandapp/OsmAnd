@@ -189,7 +189,6 @@
     <string name="routing_settings">Navigacija</string>
     <string name="routing_settings_descr">Nurodykite navigacijos nustatymus.</string>
     <string name="global_settings">Globalūs nustatymai</string>
-    <string name="index_settings">Valdyti žemėlapius</string>
     <string name="general_settings">Bendrieji nustatymai</string>
     <string name="general_settings_descr">Derinkite globaliuosius nustatymus.</string>
     <string name="global_app_settings">Globalūs programos nustatymai</string>

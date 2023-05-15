@@ -16,7 +16,7 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.myplaces.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
+import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
@@ -79,16 +79,17 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.helpers.GpxNavigationParams;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.myplaces.FavoriteGroup;
-import net.osmand.plus.myplaces.FavouritesHelper;
-import net.osmand.plus.myplaces.TrackBitmapDrawer;
-import net.osmand.plus.myplaces.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.myplaces.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
+import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -203,6 +204,9 @@ public class OsmandAidlApi {
 	private static final String AIDL_FORCE = "aidl_force";
 	private static final String AIDL_LOCATION_PERMISSION = "aidl_location_permission";
 	private static final String AIDL_PASS_WHOLE_ROUTE = "aidl_pass_whole_route";
+	private static final String AIDL_SNAP_TO_ROAD = "aidl_snap_to_road";
+	private static final String AIDL_SNAP_TO_ROAD_MODE = "aidl_snap_to_road_mode";
+	private static final String AIDL_SNAP_TO_ROAD_THRESHOLD = "aidl_snap_to_road_threshold";
 	private static final String AIDL_SEARCH_QUERY = "aidl_search_query";
 	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
 	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
@@ -753,10 +757,14 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					GPXFile gpx = loadGpxFileFromIntent(mapActivity, intent);
 					if (gpx != null) {
-						boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
-						boolean passWholeRoute = intent.getBooleanExtra(AIDL_PASS_WHOLE_ROUTE, false);
-						boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
-						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, force, locationPermission, passWholeRoute);
+						GpxNavigationParams params = new GpxNavigationParams();
+						params.setForce(intent.getBooleanExtra(AIDL_FORCE, false));
+						params.setCheckLocationPermission(intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false));
+						params.setPassWholeRoute(intent.getBooleanExtra(AIDL_PASS_WHOLE_ROUTE, false));
+						params.setSnapToRoad(intent.getBooleanExtra(AIDL_SNAP_TO_ROAD, false));
+						params.setSnapToRoadMode(intent.getStringExtra(AIDL_SNAP_TO_ROAD_MODE));
+						params.setSnapToRoadThreshold(intent.getIntExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, 50));
+						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, params);
 					}
 				}
 			}
@@ -1856,7 +1864,9 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean navigateGpxV2(String data, Uri uri, boolean force, boolean requestLocationPermission, boolean passWholeRoute) {
+	boolean navigateGpxV2(String data, Uri uri, boolean force, boolean requestLocationPermission,
+	                      boolean passWholeRoute, boolean snapToRoad, String snapToRoadMode,
+	                      int snapToRoadThreshold) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_GPX);
 		intent.putExtra(AIDL_DATA, data);
@@ -1864,6 +1874,9 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_FORCE, force);
 		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
 		intent.putExtra(AIDL_PASS_WHOLE_ROUTE, passWholeRoute);
+		intent.putExtra(AIDL_SNAP_TO_ROAD, snapToRoad);
+		intent.putExtra(AIDL_SNAP_TO_ROAD_MODE, snapToRoadMode);
+		intent.putExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, snapToRoadThreshold);
 		app.sendBroadcast(intent);
 		return true;
 	}
