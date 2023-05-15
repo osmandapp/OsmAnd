@@ -861,7 +861,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
+	private void refreshBaseMapInternal(@NonNull RotatedTileBox tileBox, @NonNull DrawSettings drawSettings) {
 		if (tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0 || mapRenderer != null) {
 			return;
 		}
@@ -926,7 +926,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void refreshMapInternal(DrawSettings drawSettings) {
+	private void refreshMapInternal(@NonNull DrawSettings drawSettings) {
 		if (view == null) {
 			return;
 		}
@@ -1103,13 +1103,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		canvas.drawCircle(x, y, 7 * dm.density, paintCenter);
 	}
 
-	private void refreshBufferImage(DrawSettings drawSettings) {
-		if (mapRenderer != null) {
-			return;
-		}
-		if (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
+	private void refreshBufferImage(@NonNull DrawSettings drawSettings) {
+		if (mapRenderer == null && (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering())) {
 			Message msg = Message.obtain(baseHandler, () -> {
 				baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
+				if (mapRenderer != null) {
+					handler.removeMessages(MAP_FORCE_REFRESH_MESSAGE);
+					return;
+				}
 				try {
 					DrawSettings param = drawSettings;
 					Boolean currentNightMode = nightMode;
@@ -1157,7 +1158,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void sendRefreshMapMsg(DrawSettings drawSettings, int delay) {
+	private void sendRefreshMapMsg(@NonNull DrawSettings drawSettings, int delay) {
 		if (!handler.hasMessages(MAP_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
 			Message msg = Message.obtain(handler, () -> {
 				DrawSettings param = drawSettings;
@@ -1418,8 +1419,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointI secondPosition = new PointI((int) secondPoint.x, (int) secondPoint.y);
 			PointD zoomAndRotation = new PointD();
 			boolean canChange = mapRenderer.getZoomAndRotationAfterPinch(
-					new PointI(firstTouchLocationX, firstTouchLocationY), firstTouchLocationHeight,	firstPosition,
-					new PointI(secondTouchLocationX, secondTouchLocationY),	secondTouchLocationHeight, secondPosition,
+					new PointI(firstTouchLocationX, firstTouchLocationY), firstTouchLocationHeight, firstPosition,
+					new PointI(secondTouchLocationX, secondTouchLocationY), secondTouchLocationHeight, secondPosition,
 					zoomAndRotation);
 			if (canChange) {
 				if (startZooming) {
@@ -2127,8 +2128,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				MeasurementToolLayer layer = mapActivity.getMapLayers().getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
-					if (!targetChanged)
-					{
+					if (!targetChanged) {
 						targetChanged = true;
 						// Remember last target position before it is changed with map gesture
 						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();

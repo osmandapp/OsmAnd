@@ -230,7 +230,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return new ArrayList<>(favouritesHelper.getFavoriteGroups());
 	}
 
-	public void showFavorites() {
+	public synchronized void showFavorites() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;

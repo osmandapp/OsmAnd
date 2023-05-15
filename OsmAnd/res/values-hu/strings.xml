@@ -425,13 +425,13 @@
     <string name="sd_mounted_ro">A memóriakártya csak olvasható.
 \nJelenleg csak a betöltött térkép nézegethető, nem lehet új területeket letölteni.</string>
     <string name="unzipping_file">Fájl kitömörítése (unzip)…</string>
-    <string name="route_tr">Forduljon jobbra, és haladjon tovább itt:</string>
-    <string name="route_tshr">Forduljon élesen jobbra, és haladjon tovább itt:</string>
-    <string name="route_tslr">Forduljon enyhén jobbra, és haladjon tovább itt:</string>
+    <string name="route_tr">Forduljon jobbra, és haladjon tovább ezen:</string>
+    <string name="route_tshr">Forduljon élesen jobbra, és haladjon tovább ezen:</string>
+    <string name="route_tslr">Forduljon enyhén jobbra, és haladjon tovább ezen:</string>
     <string name="route_tl">Forduljon balra, és haladjon tovább itt:</string>
     <string name="route_tshl">Forduljon élesen balra, és haladjon tovább itt:</string>
-    <string name="route_tsll">Forduljon enyhén balra, és haladjon tovább itt:</string>
-    <string name="route_tu">Forduljon meg, és haladjon tovább itt:</string>
+    <string name="route_tsll">Forduljon enyhén balra, és haladjon tovább ezen:</string>
+    <string name="route_tu">Forduljon meg, és haladjon tovább ezen:</string>
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Régiók letöltése</string>
@@ -687,9 +687,9 @@
     <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
     <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét.</string>
     <string name="rendering_attr_hmRendered_name">Több térképrészlet megjelenítése</string>
-    <string name="route_roundabout">Körforgalom: hajtson ki a(z) %1$d kijáraton és haladjon tovább itt:</string>
-    <string name="route_kl">Tartson balra, és haladjon tovább itt:</string>
-    <string name="route_kr">Tartson jobbra, és haladjon tovább itt:</string>
+    <string name="route_roundabout">Körforgalom: hajtson ki a(z) %1$d kijáraton és haladjon tovább ezen:</string>
+    <string name="route_kl">Tartson balra, és haladjon tovább ezen:</string>
+    <string name="route_kr">Tartson jobbra, és haladjon tovább ezen:</string>
     <string name="asap">MOST</string>
     <string name="gpxup_public">Nyilvános</string>
     <string name="gpxup_identifiable">Azonosítható</string>
@@ -2016,7 +2016,7 @@
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
     <string name="rendering_attr_contourColorScheme_description">Szintvonalak színsémája</string>
-    <string name="route_roundabout_short">Hajtson ki a(z) %1$d kijáraton, és haladjon tovább itt:</string>
+    <string name="route_roundabout_short">Hajtson ki a(z) %1$d kijáraton, és haladjon tovább ezen:</string>
     <string name="upload_poi">POI feltöltése</string>
     <string name="route_calculation">Útvonalszámítás</string>
     <string name="gpx_no_tracks_title">Még nincsenek nyomvonalfájljai</string>
@@ -4052,7 +4052,7 @@
     <string name="expired">Lejárt</string>
     <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
     <string name="exit_number">Kijárat száma</string>
-    <string name="announce_when_exceeded">Bemondás túlhaladáskor</string>
+    <string name="announce_when_exceeded">Bemondás túllépéskor</string>
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Teljesítmény</string>
     <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
@@ -4443,8 +4443,8 @@
     <string name="save_as_copy">Mentés másolatként</string>
     <string name="shared_string_gps_filter">GPS szűrő</string>
     <string name="gps_filter_speed_altitude_desc">Csak a megadott intervallumba eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
-    <string name="shared_string_uphill">Emelkedő</string>
-    <string name="shared_string_downhill">Lejtő</string>
+    <string name="shared_string_uphill">Emelkedés</string>
+    <string name="shared_string_downhill">Lejtés</string>
     <string name="shared_string_show_slope">Lejtő megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtő elrejtése</string>
     <string name="shared_string_grade">Osztály</string>

@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectGpxTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
@@ -36,10 +36,8 @@ public class SelectedTracksHelper {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final GpxSelectionHelper selectionHelper;
+	private final ItemsSelectionHelper<TrackItem> itemsSelectionHelper;
 
-	private final Set<TrackItem> allTrackItems = new HashSet<>();
-	private final Set<TrackItem> selectedTrackItems = new HashSet<>();
-	private final Set<TrackItem> originalSelectedTrackItems = new HashSet<>();
 	private final Set<TrackItem> recentlyVisibleTrackItem = new HashSet<>();
 	private final Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 
@@ -48,6 +46,12 @@ public class SelectedTracksHelper {
 		this.app = app;
 		this.settings = app.getSettings();
 		this.selectionHelper = app.getSelectedGpxHelper();
+		this.itemsSelectionHelper = new ItemsSelectionHelper<>();
+	}
+
+	@NonNull
+	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
+		return itemsSelectionHelper;
 	}
 
 	@NonNull
@@ -56,45 +60,27 @@ public class SelectedTracksHelper {
 	}
 
 	@NonNull
-	public Set<TrackItem> getSelectedTracks() {
-		return new HashSet<>(selectedTrackItems);
-	}
-
-	@NonNull
 	public Set<TrackItem> getRecentlyVisibleTracks() {
 		return new HashSet<>(recentlyVisibleTrackItem);
 	}
 
-	public boolean hasItemsToApply() {
-		return !Algorithms.objectEquals(selectedTrackItems, originalSelectedTrackItems);
-	}
-
-	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
-		if (selected) {
-			selectedTrackItems.addAll(trackItems);
-		} else {
-			selectedTrackItems.removeAll(trackItems);
-		}
-	}
-
 	public void updateTrackItems(@NonNull List<TrackItem> trackItems) {
-		allTrackItems.clear();
-		allTrackItems.addAll(trackItems);
-
+		List<TrackItem> allTrackItems = new ArrayList<>(trackItems);
 		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || selectionHelper.getSelectedCurrentRecordingTrack() != null) {
 			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
 			allTrackItems.add(trackItem);
 		}
+		itemsSelectionHelper.setAllItems(allTrackItems);
 
 		Map<String, TrackTab> trackTabs = new LinkedHashMap<>();
 		for (TrackItem item : trackItems) {
 			addLocalIndexInfo(trackTabs, item);
 		}
-		updateTrackTabs(trackTabs, trackItems);
+		updateTrackTabs(trackTabs);
 	}
 
-	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs, @NonNull List<TrackItem> trackItems) {
+	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs) {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
 
@@ -114,7 +100,7 @@ public class SelectedTracksHelper {
 		return trackTab;
 	}
 
-	public void updateTracksOnMap(){
+	public void updateTracksOnMap() {
 		TrackTab onMapTab = getTracksOnMapTab();
 		trackTabs.put(TrackTabType.ON_MAP.name(), onMapTab);
 		sortTrackTab(onMapTab);
@@ -140,6 +126,8 @@ public class SelectedTracksHelper {
 	private List<Object> getAllTabItems() {
 		List<Object> items = new ArrayList<>();
 		items.add(TYPE_SORT_TRACKS);
+
+		Set<TrackItem> allTrackItems = itemsSelectionHelper.getAllItems();
 		if (Algorithms.isEmpty(allTrackItems)) {
 			items.add(TYPE_NO_TRACKS);
 		} else {
@@ -161,9 +149,10 @@ public class SelectedTracksHelper {
 	@NonNull
 	private List<Object> getVisibleItems() {
 		List<Object> items = new ArrayList<>();
-		if (!Algorithms.isEmpty(originalSelectedTrackItems)) {
-			items.addAll(originalSelectedTrackItems);
-		} else if (Algorithms.isEmpty(allTrackItems)) {
+		Set<TrackItem> originalSelectedItems = itemsSelectionHelper.getOriginalSelectedItems();
+		if (!Algorithms.isEmpty(originalSelectedItems)) {
+			items.addAll(originalSelectedItems);
+		} else if (Algorithms.isEmpty(itemsSelectionHelper.getAllItems())) {
 			items.add(TYPE_NO_TRACKS);
 		} else {
 			items.add(TYPE_NO_VISIBLE_TRACKS);
@@ -183,17 +172,17 @@ public class SelectedTracksHelper {
 	}
 
 	private void processVisibleTracks() {
-		selectedTrackItems.clear();
-		originalSelectedTrackItems.clear();
+		List<TrackItem> selectedItems = new ArrayList<>();
 		if (selectionHelper.isAnyGpxFileSelected()) {
-			for (TrackItem info : allTrackItems) {
+			for (TrackItem info : itemsSelectionHelper.getAllItems()) {
 				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(info.getPath());
 				if (selectedGpxFile != null) {
-					selectedTrackItems.add(info);
-					originalSelectedTrackItems.add(info);
+					selectedItems.add(info);
 				}
 			}
 		}
+		itemsSelectionHelper.setSelectedItems(selectedItems);
+		itemsSelectionHelper.setOriginalSelectedItems(selectedItems);
 	}
 
 	@Nullable
@@ -214,7 +203,7 @@ public class SelectedTracksHelper {
 	}
 
 	public void addTrackItem(@NonNull TrackItem item) {
-		allTrackItems.add(item);
+		itemsSelectionHelper.addItemToAll(item);
 
 		TrackTab onMapTab = trackTabs.get(TrackTabType.ON_MAP.name());
 		if (onMapTab != null) {
@@ -238,7 +227,7 @@ public class SelectedTracksHelper {
 		selectionHelper.clearAllGpxFilesToShow(true);
 
 		Map<String, Boolean> selectedFileNames = new HashMap<>();
-		for (TrackItem trackItem : selectedTrackItems) {
+		for (TrackItem trackItem : itemsSelectionHelper.getSelectedItems()) {
 			String path = trackItem.isShowCurrentTrack() ? CURRENT_TRACK : trackItem.getPath();
 			selectedFileNames.put(path, true);
 		}
@@ -277,7 +266,7 @@ public class SelectedTracksHelper {
 		if (!Algorithms.isEmpty(sortModes)) {
 			for (String sortMode : sortModes) {
 				String[] tabSortMode = sortMode.split(",,");
-				if (tabSortMode != null && tabSortMode.length == 2) {
+				if (tabSortMode.length == 2) {
 					TrackTab trackTab = trackTabs.get(tabSortMode[0]);
 					if (trackTab != null) {
 						trackTab.setSortMode(TracksSortMode.getByValue(tabSortMode[1]));

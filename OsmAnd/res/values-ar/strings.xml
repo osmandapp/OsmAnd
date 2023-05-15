@@ -4814,7 +4814,7 @@
     <string name="auto_25_chars_route_roundabout_kr">خذ %1$d مخرجا واحتفظ باليمين</string>
     <string name="auto_backup_title">النسخ الاحتياطي التلقائي</string>
     <string name="duplacate_widget_added_snackbar">تتم إضافة الويدجت بعد ذلك في القائمة.</string>
-    <string name="shared_string_duplicate">مكرر</string>
+    <string name="shared_string_duplicate">نسخ</string>
     <string name="av_notes_photo_widget_desc">النقرعلى الويدجت يسمح لك بالتقاط صورة.</string>
     <string name="av_notes_video_widget_desc">النقرعلى الويدجت يسمح لك بالتقاط الفيديو.</string>
     <string name="av_notes_audio_widget_desc">النقرعلى الويدجت يسمح لك بتدوين الملاحظات الصوتية.</string>
@@ -5215,7 +5215,7 @@
     <string name="external_device_characteristic_gear_ratio">نسبة مئوية</string>
     <string name="external_device_characteristic_cadence">إيقاع</string>
     <string name="external_device_characteristic_heart_rate">معدل نبضات القلب</string>
-    <string name="external_device_characteristic_systolic">انقباضي</string>
+    <string name="external_device_characteristic_systolic">الانقباضي</string>
     <string name="external_device_characteristic_diastolic">انبساطي</string>
     <string name="external_device_characteristic_arterial_pressure">الضغط الشرياني</string>
     <string name="external_device_characteristic_cuff_pressure">ضغط الكف</string>
@@ -5254,4 +5254,27 @@
     <string name="no_search_results">لا توجد نتائج</string>
     <string name="search_track_by_name">بحث عن المسار بالاسم</string>
     <string name="number_of_tracks">%1$s مسار</string>
+    <string name="rendering_value_name_only_name">الاسم فقط</string>
+    <string name="shared_string_foot">القدم</string>
+    <string name="rendering_attr_lightDetail_name">تفاصيل الضوء</string>
+    <string name="rendering_attr_lightDetail_description">الافتراضي: اسم العلامة البحرية (صفة الضوء.المجموعة.الفترة) ، حدد معلومات إضافية عن القطاعات من 1 إلى 3 أو صفة ضوء القطاع 5،4،3،2،1</string>
+    <string name="rendering_value_sectors_name">القطاعات</string>
+    <string name="rendering_value_sector1_name">القطاع 1</string>
+    <string name="rendering_value_sector2_name">القطاع 2</string>
+    <string name="rendering_value_sector3_name">القطاع 3</string>
+    <string name="rendering_value_sector4_name">القطاع 4</string>
+    <string name="rendering_value_sector5_name">القطاع 5</string>
+    <string name="rendering_value_small_name">صغير</string>
+    <string name="device_disconnected">%1$s منفصل</string>
+    <string name="device_connected">%1$s متصل</string>
+    <string name="running_scds_device_name">تشغيل الجهاز</string>
+    <string name="bicycle_scd_device_name">جهاز دراجة</string>
+    <string name="external_device_blood_pressure">ضغط الدم</string>
+    <string name="no_bt_permission">لم يتم منح إذن البلوتوث</string>
+    <string name="beats_per_minute_short">نبضة في الدقيقة</string>
+    <string name="shared_string_chest">الصدر</string>
+    <string name="shared_string_wrist">الرسغ</string>
+    <string name="shared_string_finger">إصبع</string>
+    <string name="shared_string_hand">اليد</string>
+    <string name="shared_string_ear_lobe">شحمة الأذن</string>
 </resources>

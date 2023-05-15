@@ -4,7 +4,6 @@ import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
-import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.Distance;
@@ -28,19 +27,18 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.IndexConstants;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 
 /**
  * The route preview screen for the app.
  */
-public final class RoutePreviewScreen extends Screen implements IRouteInformationListener,
+public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implements IRouteInformationListener,
 		DefaultLifecycleObserver {
 
 	@NonNull
@@ -66,9 +64,9 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 		calculating = true;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
-			File file = new File(getApp().getAppPath(IndexConstants.GPX_INDEX_DIR), gpxInfo.getFileName());
+			File file = gpxInfo.getFile();
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
-			if(selectedGpxFile == null){
+			if (selectedGpxFile == null) {
 				GpxFileLoaderTask.loadGpxFile(file, null, new CallbackWithObject<GPXFile>() {
 					@Override
 					public boolean processResult(GPXFile gpxFile) {
@@ -83,11 +81,6 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
 					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
 		}
-	}
-
-	@NonNull
-	public OsmandApplication getApp() {
-		return (OsmandApplication) getCarContext().getApplicationContext();
 	}
 
 	@Override
