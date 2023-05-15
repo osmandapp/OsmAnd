@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,8 +44,8 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -54,14 +55,15 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.GpxSearchFilter;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
-import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask;
 import net.osmand.plus.myplaces.tracks.tasks.LoadGpxInfosTask.LoadTracksListener;
@@ -93,7 +95,6 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -384,9 +385,41 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
+				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		SearchView searchView = new SearchView(getActivity());
+		updateSearchView(searchView);
+		mi.setActionView(searchView);
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				allGpxAdapter.getFilter().filter(query);
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				allGpxAdapter.getFilter().filter(newText);
+				return true;
+			}
+		});
+		mi.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				return true;
+			}
+
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				// Needed to hide intermediate progress bar after closing action mode
+				new Handler().postDelayed(() -> hideProgressBar(), 100);
+				return true;
+			}
+		});
 
 		inflater.inflate(R.menu.track_sort_menu_item, menu);
-		MenuItem mi = menu.findItem(R.id.action_sort);
+		mi = menu.findItem(R.id.action_sort);
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 		mi.setIcon(getIcon(settings.TRACKS_SORT_BY_MODE.get().getIconId(), iconColorId));
@@ -436,7 +469,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getActivity())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener));
-//		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
+		PluginsHelper.onOptionsMenuActivity(getActivity(), this, optionsMenuAdapter);
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
 			ContextMenuItem contextMenuItem = optionsMenuAdapter.getItem(j);
@@ -454,6 +487,33 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
 			}
+		}
+	}
+
+	private void updateSearchView(@NonNull SearchView searchView) {
+		//do not ever do like this
+		if (!app.getSettings().isLightContent()) {
+			return;
+		}
+		try {
+			ImageView cancelIcon = searchView.findViewById(R.id.search_close_btn);
+			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
+			//styling search hint icon and text
+			SearchView.SearchAutoComplete searchEdit = searchView.findViewById(R.id.search_src_text);
+			searchEdit.setTextColor(app.getColor(R.color.color_white));
+			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
+			float rawTextSize = searchEdit.getTextSize();
+			int textSize = (int) (rawTextSize * 1.25);
+
+			//setting icon as spannable
+			Drawable searchIcon = AppCompatResources.getDrawable(app, R.drawable.ic_action_search_dark);
+			if (searchIcon != null) {
+				searchIcon.setBounds(0, 0, textSize, textSize);
+				stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				searchEdit.setHint(stopHint);
+			}
+		} catch (Exception e) {
+			// ignore
 		}
 	}
 
@@ -852,11 +912,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter {
+	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		private final Map<String, List<GPXInfo>> data = new LinkedHashMap<>();
 		private final List<String> category = new ArrayList<>();
 		private final List<GPXInfo> selected = new ArrayList<>();
+		private GpxSearchFilter filter;
 
 		private final GpxDataItemCallback updateGpxCallback = new GpxDataItemCallback() {
 
@@ -1133,6 +1194,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			return true;
 		}
 
+		@Override
+		public Filter getFilter() {
+			if (filter == null) {
+				filter = new GpxSearchFilter(getSearchFilterCallback());
+			}
+			filter.setGpxInfos(asyncLoader.getGpxInfos());
+			return filter;
+		}
+
 		public void delete(GPXInfo g) {
 			int found = -1;
 			// search from end
@@ -1147,6 +1217,40 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				data.get(category.get(found)).remove(g);
 				selected.remove(g);
 			}
+		}
+	}
+
+	@NonNull
+	private CallbackWithObject<Pair<CharSequence, List<GPXInfo>>> getSearchFilterCallback() {
+		return result -> {
+			updateFilteredList(result.first, result.second);
+			return true;
+		};
+	}
+
+	private void updateFilteredList(CharSequence constraint, List<GPXInfo> gpxInfos) {
+		if (gpxInfos != null) {
+			synchronized (allGpxAdapter) {
+				allGpxAdapter.clear();
+				for (GPXInfo i : gpxInfos) {
+					allGpxAdapter.addLocalIndexInfo(i);
+				}
+				// disable sort
+				// allGpxAdapter.sort();
+				allGpxAdapter.refreshSelected();
+			}
+			allGpxAdapter.notifyDataSetChanged();
+			if (constraint != null && constraint.length() > 3) {
+				collapseTrees(10);
+			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (asyncLoader != null) {
+			asyncLoader.cancel(true);
 		}
 	}
 

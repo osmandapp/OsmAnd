@@ -48,6 +48,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
 	protected BluetoothGatt bluetoothGatt;
+	protected String deviceName;
 
 	private final Handler callbackHandler = new Handler();
 	private final Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -62,25 +63,31 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 	@Nullable
 	public static BLEAbstractDevice createDeviceByUUID(@NonNull BluetoothAdapter bluetoothAdapter,
-	                                                   @NonNull UUID uuid, @NonNull String address) {
+	                                                   @NonNull UUID uuid, @NonNull String address,
+	                                                   @NonNull String name, int rssi) {
+		BLEAbstractDevice device = null;
 		if (BLEHeartRateDevice.getServiceUUID().equals(uuid)) {
-			return new BLEHeartRateDevice(bluetoothAdapter, address);
+			device = new BLEHeartRateDevice(bluetoothAdapter, address);
 		} else if (BLETemperatureDevice.getServiceUUID().equals(uuid)) {
-			return new BLETemperatureDevice(bluetoothAdapter, address);
+			device = new BLETemperatureDevice(bluetoothAdapter, address);
 		} else if (BLEBikeSCDDevice.getServiceUUID().equals(uuid)) {
-			return new BLEBikeSCDDevice(bluetoothAdapter, address);
+			device = new BLEBikeSCDDevice(bluetoothAdapter, address);
 		} else if (BLERunningSCDDevice.getServiceUUID().equals(uuid)) {
-			return new BLERunningSCDDevice(bluetoothAdapter, address);
+			device = new BLERunningSCDDevice(bluetoothAdapter, address);
 		} else if (BLEBPICPDevice.getServiceUUID().equals(uuid)) {
-			return new BLEBPICPDevice(bluetoothAdapter, address);
+			device = new BLEBPICPDevice(bluetoothAdapter, address);
 		}
-		return null;
+		if (device != null) {
+			device.deviceName = name;
+			device.rssi = rssi;
+		}
+		return device;
 	}
 
 	@NonNull
 	@Override
 	public String getName() {
-		String name = device != null ? device.getName() : null;
+		String name = device != null ? device.getName() : deviceName;
 		if (name == null) {
 			name = getClass().getSimpleName();
 		}
@@ -270,14 +277,15 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 	@SuppressLint("MissingPermission")
 	@Override
-	public void disconnect() {
+	public boolean disconnect() {
 		state = DeviceConnectionState.DISCONNECTED;
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
 			LOG.debug("BluetoothAdapter not initialized");
-			return;
+			return false;
 		}
 		bluetoothGatt.disconnect();
 		device = null;
+		return true;
 	}
 
 	@Override

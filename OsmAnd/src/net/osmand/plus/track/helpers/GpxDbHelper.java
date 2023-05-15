@@ -308,7 +308,12 @@ public class GpxDbHelper {
 	}
 
 	private void searchNearestCity(@NonNull GpxDataItem item) {
-		LatLon latLon = item.getAnalysis().latLonStart;
+		GPXTrackAnalysis analysis = item.getAnalysis();
+		LatLon latLon = analysis != null ? analysis.latLonStart : null;
+		if (latLon == null) {
+			item.setNearestCityName("");
+			return;
+		}
 		SearchSettings settings = getSearchSettings(latLon);
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 

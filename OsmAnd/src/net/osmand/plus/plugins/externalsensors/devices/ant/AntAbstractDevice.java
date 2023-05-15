@@ -107,12 +107,14 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 	}
 
 	@Override
-	public void disconnect() {
+	public boolean disconnect() {
 		if (releaseHandle != null) {
 			state = DeviceConnectionState.DISCONNECTED;
 			releaseHandle.close();
 			releaseHandle = null;
+			return true;
 		}
+		return false;
 	}
 
 	protected void requestAccessToPcc(@Nullable Activity activity, @NonNull Context context) {

@@ -2808,13 +2808,11 @@
     <string name="poi_socket_tesla_roadster_current">Rafmagnsinnstunga: Tesla Roadster: straumur</string>
     <string name="poi_socket_tesla_roadster_output">Rafmagnsinnstunga: Tesla Roadster: úttak</string>
     <string name="poi_socket_nema_5_15">Rafmagnsinnstunga: NEMA 5-15R</string>
-    <string name="poi_car_yes">Bílar: já</string>
     <string name="poi_car_no">Bílar: nei</string>
     <string name="poi_bicycle_yes">Reiðhjól: já</string>
     <string name="poi_bicycle_no">Reiðhjól: nei</string>
     <string name="poi_scooter_yes">Skellinöðrur: já</string>
     <string name="poi_scooter_no">Skellinöðrur: nei</string>
-    <string name="poi_truck_yes">Flutningabifreiðir: já</string>
     <string name="poi_truck_no">Flutningabifreiðir: nei</string>
     <string name="poi_parking_fee_yes">Já</string>
     <string name="poi_parking_fee_no">Nei</string>
@@ -4021,12 +4019,9 @@
     <string name="poi_arch">Bogi</string>
     <string name="poi_payment_reverse_charge_calls_yes">Símtöl þar sem viðtakandi borgar: já</string>
     <string name="poi_payment_reverse_charge_calls_no">Símtöl þar sem viðtakandi borgar: nei</string>
-    <string name="poi_callable_no">Nei</string>
-    <string name="poi_callable_yes">Já</string>
     <string name="poi_payment_calling_cards_yes">Tekið við símakortum</string>
     <string name="poi_payment_calling_cards_no">Ekki tekið við símakortum</string>
     <string name="poi_manufacturer">Framleiðandi</string>
-    <string name="poi_callable">Hægt að ná í</string>
     <string name="poi_groundskeeping">Garðvöruverslun</string>
     <string name="poi_satellite_dish">Gervihnattadiskur</string>
     <string name="poi_research_institute">Rannsóknastofnun</string>
@@ -4397,7 +4392,6 @@
     <string name="poi_socket_type3a_output_filter">Úttak Type 3a innstungu</string>
     <string name="poi_socket_type3c_output_filter">Úttak Type 3c innstungu</string>
     <string name="poi_climbing_quality">Gæði klifurleiðar</string>
-    <string name="poi_climbing_bolted_filter">" "</string>
     <string name="poi_socket_type2_cable">Rafmagnsinnstunga: Type 2 kapall</string>
     <string name="poi_socket_type2_cable_current">Rafmagnsinnstunga: Type 2 kapall: straumur</string>
     <string name="poi_climbing_rock_basalt">Steintegund í klifurleið: basalt</string>
@@ -4406,7 +4400,6 @@
     <string name="poi_climbing_grade_novice">Nýgræðingar</string>
     <string name="poi_climbing_grade_super_expert">Ofur-sérfræðingar</string>
     <string name="poi_climbing_bolts">Klifurboltar</string>
-    <string name="poi_socket_type3a">Type 3a úttak</string>
     <string name="poi_socket_type1_combo_voltage">Rafmagnsinnstunga: Type 1 combo: spenna</string>
     <string name="poi_socket_nema_14_30_voltage">Rafmagnsinnstunga: NEMA 14-30 : spenna</string>
     <string name="poi_socket_nema_14_50_voltage">Rafmagnsinnstunga: NEMA 14-50 : spenna</string>
@@ -4431,7 +4424,6 @@
     <string name="poi_climbing_grade_advanced">Lengra komnir</string>
     <string name="poi_climbing_grade_expert">Sérfræðingar</string>
     <string name="poi_climbing_bolt_anchor">Akkeri</string>
-    <string name="poi_socket_type3c">Type 3c úttak</string>
     <string name="poi_osmand_climbing_bolts_yes">Já</string>
     <string name="poi_osmand_climbing_bolts_no">Nei</string>
     <string name="poi_socket_type3a_current">Rafmagnsinnstunga: Type 3a: straumur</string>

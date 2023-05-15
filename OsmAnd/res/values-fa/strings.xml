@@ -347,7 +347,6 @@
     <string name="file_can_not_be_renamed">نام پرونده تغییر نکرد.</string>
     <string name="file_with_name_already_exists">پرونده‌ای با همین نام وجود دارد.</string>
     <string name="poi_filter_by_name">جست‌وجو بر اساس نام</string>
-    <string name="index_settings">مدیریت پرونده‌های نقشه</string>
     <string name="general_settings">عمومی</string>
     <string name="general_settings_descr">نما و تنظیمات عمومی برنامه را تنظیم کنید.</string>
     <string name="global_app_settings">تنظیمات کلی برنامه</string>
@@ -3902,7 +3901,6 @@
     <string name="routing_engine_vehicle_type_bike">دوچرخه</string>
     <string name="routing_engine_vehicle_type_car">خودرو</string>
     <string name="app_restart_required">برای به کار بستن برخی تنظیمات، لازم است برنامه باز و بسته شود.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">پنهان‌کردن مرز ذخیره‌گاه‌های طبیعی، مناطق حفاظت‌شده و پارک‌های ملی.</string>
     <string name="last_time_checked">آخرین زمان بررسی: %s</string>
     <string name="latest_openstreetmap_update">آخرین روزآمدسازهٔ اوپن‌استریت‌مپ:</string>
     <string name="updated">روزآمدشده: %s</string>
@@ -3913,7 +3911,6 @@
     <string name="track_recording_will_be_continued">ضبط ادامه می‌یابد.</string>
     <string name="copy_poi_name">کپی نام نقطهٔ توجه</string>
     <string name="quick_action_show_hide_title">آشکار/پنهان‌سازی</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">مرزهای حفاظت محیط‌زیست</string>
     <string name="track_has_no_altitude">رد فاقد دادهٔ ارتفاع است.</string>
     <string name="track_has_no_speed">رد فاقد دادهٔ سرعت است.</string>
     <string name="routing_attr_short_way_description">مسیر کوتاه‌ترِ بهینه (صرفه‌جویی انرژی)</string>
@@ -4271,7 +4268,6 @@
     <string name="attribute">خصوصیت</string>
     <string name="promo_subscription">اشتراک با کد تبلیغی</string>
     <string name="track_has_no_needed_data">دادهٔ موردنیاز در این رد وجود ندارد.</string>
-    <string name="pro_widgets">Pro Widgets</string>
     <string name="option_available_only_in_osmand_pro">این گزینه با اشتراک OsmAnd Pro فعال می‌شود.</string>
     <string name="purchases_feature_desc_pro_widgets">به قابلیت‌های OsmAnd Pro دست یابید: رنگ مسیر و بیشتر.</string>
     <string name="explore_osmnad_plans_to_find_suitable">در میان طرح‌های OsmAnd کاوش کنید تا طرح مناسب خود را بیابید.</string>

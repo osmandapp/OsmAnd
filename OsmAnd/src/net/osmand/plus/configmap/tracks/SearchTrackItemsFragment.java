@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,44 +28,55 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.ImportTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener, OsmAndLocationListener, TrackItemsContainer, SortTracksListener {
+public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
+		OsmAndLocationListener, TrackItemsContainer, SortTracksListener {
 
 	public static final String TAG = SearchTrackItemsFragment.class.getSimpleName();
 
-	private TrackTab trackTab;
-	private SearchableTrackAdapter adapter;
+	private ItemsSelectionHelper<TrackItem> selectionHelper;
+
+	private SearchTracksAdapter adapter;
+
+	private View applyButton;
+	private View buttonsContainer;
+	private View selectionButton;
+	private View clearSearchQuery;
+	private EditText searchEditText;
 
 	private Location location;
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 
-	private View applyButton;
-	private View buttonsContainer;
-	private View selectionButton;
-
-	private View searchContainer;
-	private View clearSearchQuery;
-	private EditText searchEditText;
-	private SelectedTracksHelper selectedTracksHelper;
-
 	@Override
 	protected boolean useMapNightMode() {
 		return true;
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Fragment fragment = requireParentFragment();
+		if (fragment instanceof TracksFragment) {
+			TracksFragment tracksFragment = (TracksFragment) fragment;
+			selectionHelper = tracksFragment.getItemsSelectionHelper();
+		}
 	}
 
 	@Nullable
@@ -74,10 +86,22 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		View view = inflater.inflate(R.layout.gpx_search_items_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
-		TracksFragment tracksFragment = (TracksFragment) requireParentFragment();
-		selectedTracksHelper = tracksFragment.getSelectedTracksHelper();
-		trackTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
-		adapter = new SearchableTrackAdapter(app, trackTab, tracksFragment, nightMode, this);
+		Fragment fragment = requireParentFragment();
+		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
+		adapter = new SearchTracksAdapter(app, trackItems, nightMode);
+		adapter.setTracksSortMode(getTracksSortMode());
+		adapter.setSortTracksListener(this);
+		adapter.setFilterCallback(filteredItems -> {
+			adapter.updateFilteredItems(filteredItems);
+			updateButtonsState();
+			return true;
+		});
+		if (fragment instanceof TrackSelectionListener) {
+			adapter.setSelectionListener((TrackSelectionListener) fragment);
+		}
+		if (fragment instanceof ImportTracksListener) {
+			adapter.setImportTracksListener((ImportTracksListener) fragment);
+		}
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -103,7 +127,6 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		searchEditText.requestFocus();
 		AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		startLocationUpdate();
-		trackTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
 	}
 
 	private void setupButtons(@NonNull View view) {
@@ -113,51 +136,45 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
-			Set<TrackItem> items = new HashSet<>(adapter.getCurrentTrackItems());
-			selectedTracksHelper.onTrackItemsSelected(items, !areAllTracksSelected());
+			Set<TrackItem> items = new HashSet<>(adapter.getFilteredItems());
+			selectionHelper.onItemsSelected(items, !areAllTracksSelected());
 			onTrackItemsSelected(items);
 		});
 		updateButtonsState();
 	}
 
 	private void saveChanges() {
-		selectedTracksHelper.saveTracksVisibility();
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) activity;
-			DashboardOnMap dashboard = mapActivity.getDashboard();
-			if (dashboard.isVisible()) {
-				dashboard.refreshContent(false);
-			}
+		Fragment fragment = requireParentFragment();
+		if (fragment instanceof TracksFragment) {
+			TracksFragment tracksFragment = (TracksFragment) fragment;
+			tracksFragment.saveChanges();
+			tracksFragment.updateTabsContent();
 		}
-		selectedTracksHelper.updateTracksOnMap();
-		TracksFragment tracksFragment = (TracksFragment) requireParentFragment();
-		tracksFragment.updateTabsContent();
-		app.getOsmandMap().getMapView().refreshMap();
-		resetSearchQuery();
 		dismissAllowingStateLoss();
 	}
 
 	private boolean areAllTracksSelected() {
-		Set<TrackItem> selectedTracks = selectedTracksHelper.getSelectedTracks();
-		List<TrackItem> currentItems = adapter.getCurrentTrackItems();
+		List<TrackItem> filteredItems = adapter.getFilteredItems();
 		int selectedTracksCount = 0;
-		for (TrackItem item :
-				currentItems) {
-			if (selectedTracks.contains(item)) {
+		for (TrackItem item : filteredItems) {
+			if (selectionHelper.isItemSelected(item)) {
 				selectedTracksCount++;
 			}
 		}
-		return selectedTracksCount == currentItems.size();
+		return selectedTracksCount == filteredItems.size();
 	}
 
 	private void updateButtonsState() {
-		buttonsContainer.setVisibility(adapter.getCurrentTrackItems().size() > 0 ? View.VISIBLE : View.GONE);
 		String apply = getString(R.string.shared_string_apply).toUpperCase();
 		String select = getString(!areAllTracksSelected() ? R.string.shared_string_select_all : R.string.shared_string_deselect_all).toUpperCase();
-		applyButton.setEnabled(selectedTracksHelper.hasItemsToApply());
+		String count = "(" + adapter.getFilteredItems().size() + ")";
+		select = getString(R.string.ltr_or_rtl_combine_via_space, select, count);
+		applyButton.setEnabled(selectionHelper.hasItemsToApply());
 		UiUtilities.setupDialogButton(nightMode, applyButton, TERTIARY, apply);
 		UiUtilities.setupDialogButton(nightMode, selectionButton, TERTIARY, select);
+
+		boolean visible = adapter.getFilteredItems().size() > 0;
+		AndroidUiHelper.updateVisibility(buttonsContainer, visible);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -176,7 +193,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupSearch(@NonNull View view) {
-		searchContainer = view.findViewById(R.id.search_container);
+		View searchContainer = view.findViewById(R.id.search_container);
 		clearSearchQuery = searchContainer.findViewById(R.id.clearButton);
 		clearSearchQuery.setVisibility(View.GONE);
 		ImageButton backButton = view.findViewById(R.id.back_button);
@@ -184,8 +201,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		backButton.setOnClickListener((v) -> dismiss());
 		searchEditText = searchContainer.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_track_by_name);
-		searchEditText.setTextColor(getActivity().getColor(R.color.color_white));
-		searchEditText.setHintTextColor(getActivity().getColor(R.color.white_50_transparent));
+		searchEditText.setTextColor(ContextCompat.getColor(app, R.color.color_white));
+		searchEditText.setHintTextColor(ContextCompat.getColor(app, R.color.white_50_transparent));
 		searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -197,8 +214,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 			@Override
 			public void afterTextChanged(Editable query) {
-				clearSearchQuery.setVisibility(query.length() > 0 ? View.VISIBLE : View.GONE);
-				filterTracks(query.toString().toLowerCase().trim());
+				filterTracks(query.toString());
+				AndroidUiHelper.updateVisibility(clearSearchQuery, query.length() > 0);
 			}
 		});
 		clearSearchQuery.setOnClickListener((v) -> resetSearchQuery());
@@ -206,22 +223,22 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 	private void resetSearchQuery() {
 		filterTracks(null);
-		searchEditText.setText("");
+		searchEditText.setText(null);
 	}
 
 	private void filterTracks(@Nullable String query) {
-		adapter.setFilterTracksQuery(query);
+		adapter.getFilter().filter(query);
 	}
 
 	@Override
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
-		adapter.onTrackItemsSelected(trackItems);
+		adapter.notifyDataSetChanged();
 		updateButtonsState();
 	}
 
 	@Override
 	public void updateContent() {
-		adapter.updateContent();
+		adapter.notifyDataSetChanged();
 		updateButtonsState();
 		updateLocationUi();
 	}
@@ -287,23 +304,31 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 	@Override
 	public void showSortByDialog() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			SortByBottomSheet.showInstance(getFragmentManager(), this);
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			SortByBottomSheet.showInstance(manager, this);
 		}
 	}
 
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
-		trackTab.setSortMode(sortMode);
 		adapter.setTracksSortMode(sortMode);
 		adapter.notifyDataSetChanged();
+
+		Fragment fragment = requireParentFragment();
+		if (fragment instanceof SortTracksListener) {
+			((SortTracksListener) fragment).setTracksSortMode(sortMode);
+		}
 	}
 
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		return trackTab.getSortMode();
+		Fragment fragment = requireParentFragment();
+		if (fragment instanceof SortTracksListener) {
+			return ((SortTracksListener) fragment).getTracksSortMode();
+		}
+		return TracksSortMode.getDefaultSortMode();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

@@ -107,7 +107,6 @@
     <string name="routing_settings">Navigáció</string>
     <string name="routing_settings_descr">Navigáció beállításainak megadása.</string>
     <string name="global_settings">Globális beállítások</string>
-    <string name="index_settings">Térképfájlok kezelése</string>
     <string name="index_settings_descr">A készüléken tárolt offline térképfájlok letöltése és kezelése.</string>
     <string name="general_settings">Általános</string>
     <string name="general_settings_descr">A kijelző és az alkalmazás általános beállításai.</string>
@@ -426,13 +425,13 @@
     <string name="sd_mounted_ro">A memóriakártya csak olvasható.
 \nJelenleg csak a betöltött térkép nézegethető, nem lehet új területeket letölteni.</string>
     <string name="unzipping_file">Fájl kitömörítése (unzip)…</string>
-    <string name="route_tr">Forduljon jobbra, és haladjon tovább itt:</string>
-    <string name="route_tshr">Forduljon élesen jobbra, és haladjon tovább itt:</string>
-    <string name="route_tslr">Forduljon enyhén jobbra, és haladjon tovább itt:</string>
+    <string name="route_tr">Forduljon jobbra, és haladjon tovább ezen:</string>
+    <string name="route_tshr">Forduljon élesen jobbra, és haladjon tovább ezen:</string>
+    <string name="route_tslr">Forduljon enyhén jobbra, és haladjon tovább ezen:</string>
     <string name="route_tl">Forduljon balra, és haladjon tovább itt:</string>
     <string name="route_tshl">Forduljon élesen balra, és haladjon tovább itt:</string>
-    <string name="route_tsll">Forduljon enyhén balra, és haladjon tovább itt:</string>
-    <string name="route_tu">Forduljon meg, és haladjon tovább itt:</string>
+    <string name="route_tsll">Forduljon enyhén balra, és haladjon tovább ezen:</string>
+    <string name="route_tu">Forduljon meg, és haladjon tovább ezen:</string>
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Régiók letöltése</string>
@@ -688,9 +687,9 @@
     <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
     <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét.</string>
     <string name="rendering_attr_hmRendered_name">Több térképrészlet megjelenítése</string>
-    <string name="route_roundabout">Körforgalom: hajtson ki a(z) %1$d kijáraton és haladjon tovább itt:</string>
-    <string name="route_kl">Tartson balra, és haladjon tovább itt:</string>
-    <string name="route_kr">Tartson jobbra, és haladjon tovább itt:</string>
+    <string name="route_roundabout">Körforgalom: hajtson ki a(z) %1$d kijáraton és haladjon tovább ezen:</string>
+    <string name="route_kl">Tartson balra, és haladjon tovább ezen:</string>
+    <string name="route_kr">Tartson jobbra, és haladjon tovább ezen:</string>
     <string name="asap">MOST</string>
     <string name="gpxup_public">Nyilvános</string>
     <string name="gpxup_identifiable">Azonosítható</string>
@@ -2017,7 +2016,7 @@
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
     <string name="rendering_attr_contourColorScheme_description">Szintvonalak színsémája</string>
-    <string name="route_roundabout_short">Hajtson ki a(z) %1$d kijáraton, és haladjon tovább itt:</string>
+    <string name="route_roundabout_short">Hajtson ki a(z) %1$d kijáraton, és haladjon tovább ezen:</string>
     <string name="upload_poi">POI feltöltése</string>
     <string name="route_calculation">Útvonalszámítás</string>
     <string name="gpx_no_tracks_title">Még nincsenek nyomvonalfájljai</string>
@@ -4010,8 +4009,6 @@
     <string name="track_recording_will_be_continued">A felvétel folytatódni fog.</string>
     <string name="copy_poi_name">Érdekes pont nevének másolása</string>
     <string name="quick_action_show_hide_title">Megjelenítés / elrejtés</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Természetvédelmi területek, védett területek és nemzeti parkok határainak elrejtése.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Természetvédelmi területek határai</string>
     <string name="track_has_no_altitude">A nyomvonal nem tartalmaz magassági adatokat.</string>
     <string name="track_has_no_speed">A nyomvonal nem tartalmaz sebességadatokat.</string>
     <string name="select_another_colorization">Kérjük, válasszon másik színezéstípust.</string>
@@ -4055,7 +4052,7 @@
     <string name="expired">Lejárt</string>
     <string name="update_all_maps_added">Frissüljön minden térkép, amely hozzá lett adva ehhez: %1$s\?</string>
     <string name="exit_number">Kijárat száma</string>
-    <string name="announce_when_exceeded">Bemondás túlhaladáskor</string>
+    <string name="announce_when_exceeded">Bemondás túllépéskor</string>
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Teljesítmény</string>
     <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
@@ -4446,8 +4443,8 @@
     <string name="save_as_copy">Mentés másolatként</string>
     <string name="shared_string_gps_filter">GPS szűrő</string>
     <string name="gps_filter_speed_altitude_desc">Csak a megadott intervallumba eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
-    <string name="shared_string_uphill">Emelkedő</string>
-    <string name="shared_string_downhill">Lejtő</string>
+    <string name="shared_string_uphill">Emelkedés</string>
+    <string name="shared_string_downhill">Lejtés</string>
     <string name="shared_string_show_slope">Lejtő megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtő elrejtése</string>
     <string name="shared_string_grade">Osztály</string>
@@ -4759,7 +4756,6 @@
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
     <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
-    <string name="attach_to_roads_banner_desc">Kapcsolja a nyomvonalát az utakhoz, hogy részletes navigációs utasításokat kaphasson.</string>
     <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
     <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)\?</string>
@@ -4961,8 +4957,6 @@
     <string name="cloud_layer">Felhőzet réteg</string>
     <string name="precipitation_layer">Csapadék réteg</string>
     <string name="quick_action_temperature_layer">A hőmérséklet réteget megjelenítő vagy elrejtő kapcsoló.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">MTB hegymeneti skála megjelenítése</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Nyomvonalak megjelenítése MTB hegymeneti nehézségi szintek szerint.</string>
     <string name="rendering_attr_showMtbScale_name">MTB skála megjelenítése</string>
     <string name="rendering_attr_showMtbScale_description">Nyomvonalak megjelenítése MTB nehézségi szintek szerint.</string>
     <string name="mtb_scale">MTB skála</string>
@@ -5147,7 +5141,7 @@
     <string name="external_device_characteristic_total_distance">Összes távolság</string>
     <string name="external_device_characteristic_battery_level">Akkumulátor</string>
     <string name="external_device_characteristic_heart_rate">Pulzusszám</string>
-    <string name="external_device_characteristic_systolic">Cisztolés</string>
+    <string name="external_device_characteristic_systolic">Szisztolés</string>
     <string name="external_device_characteristic_diastolic">Diasztolés</string>
     <string name="external_device_characteristic_pulse_rate">Pulzusszám</string>
     <string name="external_device_characteristic_temperature">Hőmérséklet</string>
@@ -5186,4 +5180,27 @@
     <string name="no_search_results">Nincs találat</string>
     <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
     <string name="number_of_tracks">%1$s nyomvonal</string>
+    <string name="device_connected">%1$s kapcsolódva</string>
+    <string name="bicycle_scd_device_name">Kerékpáros eszköz</string>
+    <string name="external_device_blood_pressure">Vérnyomás</string>
+    <string name="no_bt_permission">Bluetooth engedély nincs megadva</string>
+    <string name="shared_string_chest">Mellkas</string>
+    <string name="shared_string_wrist">Csukló</string>
+    <string name="shared_string_finger">Ujj</string>
+    <string name="running_scds_device_name">Működő eszköz</string>
+    <string name="beats_per_minute_short">ütés</string>
+    <string name="shared_string_ear_lobe">Fülcimpa</string>
+    <string name="shared_string_foot">Láb</string>
+    <string name="device_disconnected">%1$s lekapcsolódott</string>
+    <string name="shared_string_hand">Kéz</string>
+    <string name="rendering_value_name_only_name">Csak név</string>
+    <string name="rendering_value_sectors_name">Szektorok</string>
+    <string name="rendering_value_small_name">Kicsi</string>
+    <string name="rendering_value_sector2_name">Szektor 2</string>
+    <string name="rendering_value_sector1_name">Szektor 1</string>
+    <string name="rendering_value_sector3_name">Szektor 3</string>
+    <string name="rendering_value_sector4_name">Szektor 4</string>
+    <string name="rendering_value_sector5_name">Szektor 5</string>
+    <string name="poi_categories">POI kategóriák</string>
+    <string name="no_poi_for_category">POI nem található</string>
 </resources>

@@ -94,7 +94,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 
 	public abstract boolean connect(@NonNull Context context, @Nullable Activity activity);
 
-	public abstract void disconnect();
+	public abstract boolean disconnect();
 
 	@Override
 	public boolean equals(Object o) {

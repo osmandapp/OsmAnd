@@ -2,6 +2,9 @@ package net.osmand.plus.track.helpers;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
@@ -244,6 +247,27 @@ public class GpxUiHelper {
 			}
 			SelectGpxTrackBottomSheet.showInstance(activity.getSupportFragmentManager(), showCurrentGpx, callbackWithObject, list);
 		}
+	}
+
+	@NonNull
+	public static String getFolderName(@NonNull Context context, @NonNull File dir, boolean includeParentDir) {
+		String name = dir.getName();
+		if (GPX_INDEX_DIR.equals(name + File.separator)) {
+			return context.getString(R.string.shared_string_tracks);
+		}
+		String dirPath = dir.getPath() + File.separator;
+		if (dirPath.endsWith(GPX_IMPORT_DIR) || dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
+			return Algorithms.capitalizeFirstLetter(name);
+		}
+		if (includeParentDir) {
+			File parent = dir.getParentFile();
+			String parentName = parent != null ? parent.getName() : "";
+			if (!Algorithms.isEmpty(parentName) && !GPX_INDEX_DIR.equals(parentName + File.separator)) {
+				name = parentName + File.separator + name;
+			}
+			return name;
+		}
+		return name;
 	}
 
 	@NonNull

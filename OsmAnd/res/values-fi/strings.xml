@@ -162,7 +162,6 @@
     <string name="routing_settings">Navigointi</string>
     <string name="routing_settings_descr">Määritä navigointiasetukset.</string>
     <string name="global_settings">Globaalit asetukset</string>
-    <string name="index_settings">Hallitse karttatiedostoja</string>
     <string name="general_settings">Yleiset asetukset</string>
     <string name="general_settings_descr">Määritä näyttö ja yleiset asetukset.</string>
     <string name="global_app_settings">Globaalit sovellusasetukset</string>
@@ -2936,7 +2935,6 @@
     <string name="live_update_delete_updates_msg">Poistetaanko kaikki %s live-päivitykset\?</string>
     <string name="purchases">Ostot</string>
     <string name="copy_poi_name">Kopioi KP:n nimi</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Piilota luonnonsuojelualueiden, suojelualueiden ja kansallispuistojen rajat.</string>
     <string name="track_has_no_altitude">Jälki ei sisällä korkeustietoja.</string>
     <string name="track_has_no_speed">Jälki ei sisällä nopeustietoja.</string>
     <string name="select_another_colorization">Valitse toinen väritystyyppi.</string>
@@ -3598,7 +3596,6 @@
     <string name="save_global_track_interval_descr">Määritä kirjausväli yleiseen reitin tallennukseen (kytketään päälle kartalta Matkatallennus-widgetillä).</string>
     <string name="send_files_to_openstreetmap">Lähetä GPX-tiedosto OpenStreetMapiin</string>
     <string name="enter_text_separated">Kirjoita tunnisteet pilkuilla erotettuina.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Luonnon rajat</string>
     <string name="routeInfo_surface_name">Pinta</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Luokka 4</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Tasainen</string>

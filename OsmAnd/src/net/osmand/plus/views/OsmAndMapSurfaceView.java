@@ -8,55 +8,31 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
-	
-	private OsmandMapTileView mapView;
-	private OnClickListener onClickListener;
 
-	public OsmAndMapSurfaceView(Context context, AttributeSet attrs) {
+	@Nullable
+	private OsmandMapTileView mapView;
+
+	public OsmAndMapSurfaceView(@NonNull Context context) {
+		this(context, null);
+	}
+
+	public OsmAndMapSurfaceView(@NonNull Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 		init();
-
 	}
-
-	public OsmAndMapSurfaceView(Context context) {
-		super(context);
-		init();
-	}
-	
-	@Override
-	public void setOnClickListener(OnClickListener l) {
-		super.setOnClickListener(l);
-		this.onClickListener = l;
-	}
-	
 
 	private void init() {
-		getHolder().addCallback(this);	
-	}
-	
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-		if(mapView != null) {
-			mapView.refreshMap();
-		}
+		getHolder().addCallback(this);
 	}
 
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		if(mapView != null) {
-			mapView.refreshMap();
-		}
+	@Nullable
+	public OsmandMapTileView getMapView() {
+		return mapView;
 	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-	}
-	
-	
 
 	public void setMapView(@Nullable OsmandMapTileView mapView) {
 		if (this.mapView != null && mapView == null) {
@@ -69,32 +45,50 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	}
 
 	@Override
+	public void surfaceCreated(SurfaceHolder holder) {
+		if (mapView != null) {
+			mapView.refreshMap();
+		}
+	}
+
+	@Override
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		if (mapView != null) {
+			mapView.refreshMap();
+		}
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder holder) {
+	}
+
+	@Override
 	public boolean onTrackballEvent(MotionEvent event) {
-		if(mapView == null) {
+		if (mapView == null) {
 			return super.onTrackballEvent(event);
 		}
 		Boolean r = mapView.onTrackballEvent(event);
-		if(r == null) {
+		if (r == null) {
 			return super.onTrackballEvent(event);
 		}
 		return r;
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if(mapView == null) {
+		if (mapView == null) {
 			return super.onKeyDown(keyCode, event);
 		}
 		Boolean r = mapView.onKeyDown(keyCode, event);
-		if(r == null) {
+		if (r == null) {
 			return super.onKeyDown(keyCode, event);
 		}
 		return r;
 	}
-	
+
 	@Override
 	public boolean onGenericMotionEvent(MotionEvent event) {
-		if(mapView == null) {
+		if (mapView == null) {
 			return super.onGenericMotionEvent(event);
 		}
 		return mapView.onGenericMotionEvent(event);
@@ -102,13 +96,9 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(mapView == null) {
+		if (mapView == null) {
 			return super.onTouchEvent(event);
 		}
 		return mapView.onTouchEvent(event);
-	}
-
-	public OsmandMapTileView getMapView() {
-		return mapView;
 	}
 }

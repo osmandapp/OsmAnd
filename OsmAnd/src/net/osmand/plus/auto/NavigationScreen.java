@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
-import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarColor;
@@ -39,41 +38,18 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.views.OsmandMap;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public final class NavigationScreen extends Screen implements SurfaceRendererCallback,
+public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implements SurfaceRendererCallback,
 		IRouteInformationListener, DefaultLifecycleObserver {
-	/**
-	 * Invalid zoom focal point value, used for the zoom buttons.
-	 */
-	private static final float INVALID_FOCAL_POINT_VAL = -1f;
-
-	/**
-	 * Zoom-in scale factor, used for the zoom-in button.
-	 */
-	private static final float ZOOM_IN_BUTTON_SCALE_FACTOR = 1.1f;
-
-	/**
-	 * Zoom-out scale factor, used for the zoom-out button.
-	 */
-	private static final float ZOOM_OUT_BUTTON_SCALE_FACTOR = 0.9f;
-
-	/**
-	 * A listener for navigation start and stop signals.
-	 */
-	public interface Listener {
-		boolean requestLocationNavigation();
-		void updateNavigation(boolean navigating);
-		void stopNavigation();
-	}
 
 	@NonNull
-	private final Listener listener;
+	private final NavigationListener listener;
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
@@ -105,7 +81,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	public NavigationScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
-			@NonNull Listener listener,
+			@NonNull NavigationListener listener,
 			@NonNull SurfaceRenderer surfaceRenderer) {
 		super(carContext);
 		this.listener = listener;
@@ -113,11 +89,6 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		this.surfaceRenderer = surfaceRenderer;
 		alarmWidget = new AlarmWidget(getApp(), null);
 		getLifecycle().addObserver(this);
-	}
-
-	@NonNull
-	private OsmandApplication getApp() {
-		return (OsmandApplication) getCarContext().getApplicationContext();
 	}
 
 	@NonNull
@@ -189,7 +160,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		junctionImage = null;
 
 		updateNavigation();
-		invalidate();
+		finish();
 	}
 
 	private void updateNavigation() {
@@ -233,11 +204,6 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_search_dark)).build())
 							.setOnClickListener(this::openSearch)
 							.build());
-			actionStripBuilder.addAction(
-					new Action.Builder()
-							.setTitle(getApp().getString(R.string.shared_string_favorites))
-							.setOnClickListener(this::openFavorites)
-							.build());
 		}
 		builder.setActionStrip(actionStripBuilder.build());
 
@@ -275,9 +241,9 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 														R.drawable.ic_zoom_in))
 												.build())
 								.setOnClickListener(
-										() -> surfaceRenderer.handleScale(INVALID_FOCAL_POINT_VAL,
-												INVALID_FOCAL_POINT_VAL,
-												ZOOM_IN_BUTTON_SCALE_FACTOR))
+										() -> surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
+												NavigationSession.INVALID_FOCAL_POINT_VAL,
+												NavigationSession.ZOOM_IN_BUTTON_SCALE_FACTOR))
 								.build())
 				.addAction(
 						new Action.Builder()
@@ -288,9 +254,9 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 														R.drawable.ic_zoom_out))
 												.build())
 								.setOnClickListener(
-										() -> surfaceRenderer.handleScale(INVALID_FOCAL_POINT_VAL,
-												INVALID_FOCAL_POINT_VAL,
-												ZOOM_OUT_BUTTON_SCALE_FACTOR))
+										() -> surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
+												NavigationSession.INVALID_FOCAL_POINT_VAL,
+												NavigationSession.ZOOM_OUT_BUTTON_SCALE_FACTOR))
 								.build())
 
 				.build());
@@ -372,16 +338,13 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		listener.stopNavigation();
 	}
 
-	private void openFavorites() {
-		getScreenManager().pushForResult(new FavoritesScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> { });
-	}
-
 	private void compassClick() {
 		getApp().getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
 	}
 
 	private void openSearch() {
-		getScreenManager().pushForResult(new SearchScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> { });
+		getScreenManager().pushForResult(new SearchScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> {
+		});
 		// Test
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });
 	}

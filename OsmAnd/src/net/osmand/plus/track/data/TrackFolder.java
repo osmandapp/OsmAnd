@@ -1,9 +1,12 @@
 package net.osmand.plus.track.data;
 
+import android.content.Context;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -72,7 +75,7 @@ public class TrackFolder {
 	}
 
 	@NonNull
-	public String getName() {
-		return Algorithms.capitalizeFirstLetter(dirFile.getName());
+	public String getName(@NonNull Context context, boolean includeParentDir) {
+		return GpxUiHelper.getFolderName(context, dirFile, includeParentDir);
 	}
 }

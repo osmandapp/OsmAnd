@@ -553,6 +553,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
 			}
+			if (currentZoom > selectedMaxZoom && currentZoom <= maxZoom) {
+				selectedMaxZoom = currentZoom;
+			}
 
 			if (downloadType != DownloadType.ALL) {
 				updateDownloadTilesDesc();

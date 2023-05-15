@@ -3284,13 +3284,11 @@
     <string name="poi_socket_as3112">Conector: AS/NZS 3112</string>
     <string name="poi_socket_as3112_current">Conector: AS/NZS 3112: corriente</string>
     <string name="poi_socket_as3112_output">Conector: AS/NZS 3112: salida</string>
-    <string name="poi_car_yes">Automóvil: sí</string>
     <string name="poi_car_no">Automóvil: no</string>
     <string name="poi_bicycle_yes">Bicicleta: sí</string>
     <string name="poi_bicycle_no">Bicicleta: no</string>
     <string name="poi_scooter_yes">Escúter: sí</string>
     <string name="poi_scooter_no">Escúter: no</string>
-    <string name="poi_truck_yes">Camión: sí</string>
     <string name="poi_truck_no">Camión: no</string>
     <string name="poi_parking_fee_yes">Sí</string>
     <string name="poi_parking_fee_no">No</string>
@@ -3957,7 +3955,6 @@
     <string name="poi_power_terminal">Terminal de energía</string>
     <string name="poi_picnic_table_yes">Mesa de picnic: sí</string>
     <string name="poi_groundskeeping">Equipos de jardinería</string>
-    <string name="poi_callable">Recibe llamadas</string>
     <string name="poi_butcher_type">Tipo de carne principal</string>
     <string name="poi_coffee_filter">Café</string>
     <string name="poi_ice_cream_filter">Helado</string>
@@ -4032,8 +4029,6 @@
     <string name="poi_payment_reverse_charge_calls_no">Llamadas de cobro revertido: no</string>
     <string name="poi_payment_calling_cards_yes">Acepta tarjetas telefónicas</string>
     <string name="poi_payment_reverse_charge_calls_yes">Llamadas de cobro revertido: sí</string>
-    <string name="poi_callable_yes">Sí;Recibe llamadas</string>
-    <string name="poi_callable_no">No</string>
     <string name="poi_country_store">Productos de campo;Tienda de campo</string>
     <string name="poi_prep_school">Centro de tutorización;Academia de estudios;Profesor/a particular</string>
     <string name="poi_winery">Bodega</string>
@@ -4423,7 +4418,6 @@
     <string name="poi_socket_type3a_current">Conector: Tipo 3a: corriente</string>
     <string name="poi_socket_type3a_output">Conector: Tipo 3a: salida</string>
     <string name="poi_socket_type3a_voltage">Conector: Tipo 3a: tensión</string>
-    <string name="poi_socket_type3c">Salida del tipo 3c</string>
     <string name="poi_socket_type3c_output">Enchufe: Tipo 3c: salida</string>
     <string name="poi_socket_type3c_voltage">Conector: Tipo 3c: tensión</string>
     <string name="poi_socket_cee_blue_voltage">Conector: CEE azul: voltaje</string>
@@ -4462,7 +4456,6 @@
     <string name="poi_socket_schuko_voltage_high">Alto</string>
     <string name="poi_socket_schuko_voltage_medium">Medio</string>
     <string name="poi_socket_schuko_voltage_low">Bajo</string>
-    <string name="poi_socket_type3a">Salida del tipo 3a</string>
     <string name="poi_socket_type3c_current">Conector: Tipo 3c: corriente</string>
     <string name="poi_socket_cee_red_32a_voltage">Conector: CEE rojo 32A: voltaje</string>
     <string name="poi_socket_chademo_voltage">Conector: CHAdeMO: voltaje</string>
@@ -4547,7 +4540,6 @@
     <string name="poi_barrier_coupure">Barrera de seguridad</string>
     <string name="poi_sinkhole_estavelle">estavelle</string>
     <string name="poi_barrier_planter">Jardinera</string>
-    <string name="poi_barrier_spikes">Picos</string>
     <string name="poi_sump_buster">Bomba de limpieza</string>
     <string name="poi_wedge">Cuña</string>
     <string name="poi_wicket_gate">Postigo</string>

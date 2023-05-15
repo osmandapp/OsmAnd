@@ -156,6 +156,11 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
         return ZoomLevel.MaxZoomLevel;
     }
 
+    @Override
+    public boolean supportsNaturalObtainDataAsync() {
+        return false;
+    }
+
     public void addToData(@NonNull AudioVideoNotesPlugin.Recording recording, float textScale) {
         if (providerInstance != null) {
             throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");

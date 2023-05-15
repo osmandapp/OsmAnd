@@ -304,7 +304,6 @@
     <string name="routing_settings">Πλοήγηση</string>
     <string name="routing_settings_descr">Καθορίστε τις επιλογές πλοήγησης.</string>
     <string name="global_settings">Καθολικές Ρυθμίσεις</string>
-    <string name="index_settings">Διαχείριση αρχείων χαρτών</string>
     <string name="general_settings">Γενικές</string>
     <string name="general_settings_descr">Διαμόρφωση οθόνης και κοινές ρυθμίσεις για την εφαρμογή.</string>
     <string name="global_app_settings">Καθολικές ρυθμίσεις εφαρμογής</string>

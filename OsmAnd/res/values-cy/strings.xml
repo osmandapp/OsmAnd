@@ -3696,7 +3696,6 @@
     <string name="wrong_format">Fformat anghywir</string>
     <string name="apply_filters">Gosod hidlyddion</string>
     <string name="amenity_type_user_defined">Dewis y defnyddiwr</string>
-    <string name="index_settings">Rheoli ffeiliau\'r ap</string>
     <string name="global_app_settings">Gosodiadau\'r ap cyfan</string>
     <string name="local_index_mi_upload_gpx">Anfon at OSM</string>
     <string name="favourites_delete_multiple_succesful">Dileuwyd hoff bwyntiau.</string>

@@ -624,7 +624,6 @@
     <string name="filter_existing_indexes">Загруженные</string>
     <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие.</string>
     <string name="general_settings">Общие</string>
-    <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">OsmAnd работает в фоновом режиме с выключенным экраном.</string>
     <string name="fast_route_mode">Самый быстрый маршрут</string>
@@ -4172,7 +4171,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
     <string name="purchases_feature_desc_osmand_cloud">Облачное хранилище OsmAnd Cloud для хранения всех данных приложения. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Доступ к расширенным виджетам OsmAnd.</string>
     <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
@@ -4180,7 +4178,6 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа: контурные линии, затенение рельефа (отмывка), уклоны</string>
     <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
-    <string name="advanced_widgets">Расширенные виджеты</string>
     <string name="you_can_get_feature_as_part_of_pattern">Получить «%1$s» как часть тарифного плана %2$s. Сравнение планов:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
     <string name="continue_with">Продолжить с %1$s</string>
@@ -4461,7 +4458,6 @@
     <string name="gps_filter_smoothing">Сглаживание</string>
     <string name="gps_filter_actions_description">OsmAnd применит изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
     <string name="shared_string_gps_filter">GPS фильтр</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="save_changes_into_file">Сохранить изменения в файл</string>
     <string name="save_as_copy">Сохранить как копию</string>
     <string name="gps_filter_hdop_desc">Установите максимально допустимое значение для HDOP.
@@ -4975,8 +4971,6 @@
     <string name="cloud_layer">Слой облачности</string>
     <string name="rendering_attr_showMtbScale_name">Показать MTB сложность</string>
     <string name="rendering_attr_showMtbScale_description">Показать MTB трейлы в соответствии с их сложностью.</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
@@ -5185,4 +5179,6 @@
     <string name="external_device_disconnected">Отключён</string>
     <string name="external_device_connected">Подключён</string>
     <string name="external_device_forget_sensor">Забыть датчик</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_foot">Нога</string>
 </resources>
