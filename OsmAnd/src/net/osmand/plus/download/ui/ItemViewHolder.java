@@ -67,6 +67,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemViewHolder {
@@ -508,9 +509,22 @@ public class ItemViewHolder {
 				confirmRemove(downloadItem, downloadedFiles);
 				return true;
 			};
-		} else if (downloadItem instanceof WeatherIndexItem && downloadItem.isDownloaded()) {
+		} else if ((downloadItem instanceof WeatherIndexItem
+				|| (downloadItem instanceof MultipleDownloadItem && downloadItem.getType() == WEATHER_FORECAST))
+				&& downloadItem.isDownloaded()) {
 			removeItemClickListener = _item -> {
-				WeatherIndexItemViewHolder.confirmWeatherRemove(context, (WeatherIndexItem) downloadItem);
+				List<String> regionIds = new ArrayList<>();
+				if (downloadItem instanceof WeatherIndexItem) {
+					regionIds.add(((WeatherIndexItem) downloadItem).getRegionId());
+				} else {
+					MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
+					for (DownloadItem item : multipleDownloadItem.getAllItems()) {
+						if (item instanceof WeatherIndexItem) {
+							regionIds.add(((WeatherIndexItem) item).getRegionId());
+						}
+					}
+				}
+				WeatherIndexItemViewHolder.confirmWeatherRemove(context, regionIds);
 				return true;
 			};
 		}
