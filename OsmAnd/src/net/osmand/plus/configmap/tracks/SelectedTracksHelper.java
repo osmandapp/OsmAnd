@@ -127,7 +127,7 @@ public class SelectedTracksHelper {
 		List<Object> items = new ArrayList<>();
 		items.add(TYPE_SORT_TRACKS);
 
-		List<TrackItem> allTrackItems = itemsSelectionHelper.getAllItems();
+		Set<TrackItem> allTrackItems = itemsSelectionHelper.getAllItems();
 		if (Algorithms.isEmpty(allTrackItems)) {
 			items.add(TYPE_NO_TRACKS);
 		} else {
@@ -149,7 +149,7 @@ public class SelectedTracksHelper {
 	@NonNull
 	private List<Object> getVisibleItems() {
 		List<Object> items = new ArrayList<>();
-		List<TrackItem> originalSelectedItems = itemsSelectionHelper.getOriginalSelectedItems();
+		Set<TrackItem> originalSelectedItems = itemsSelectionHelper.getOriginalSelectedItems();
 		if (!Algorithms.isEmpty(originalSelectedItems)) {
 			items.addAll(originalSelectedItems);
 		} else if (Algorithms.isEmpty(itemsSelectionHelper.getAllItems())) {

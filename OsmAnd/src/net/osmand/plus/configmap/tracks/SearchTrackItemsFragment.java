@@ -39,6 +39,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		Fragment fragment = requireParentFragment();
-		adapter = new SearchTracksAdapter(app, selectionHelper.getAllItems(), nightMode);
+		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
+		adapter = new SearchTracksAdapter(app, trackItems, nightMode);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setFilterCallback(filteredItems -> {
@@ -152,11 +154,10 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private boolean areAllTracksSelected() {
-		List<TrackItem> selectedTracks = selectionHelper.getSelectedItems();
 		List<TrackItem> filteredItems = adapter.getFilteredItems();
 		int selectedTracksCount = 0;
 		for (TrackItem item : filteredItems) {
-			if (selectedTracks.contains(item)) {
+			if (selectionHelper.isItemSelected(item)) {
 				selectedTracksCount++;
 			}
 		}

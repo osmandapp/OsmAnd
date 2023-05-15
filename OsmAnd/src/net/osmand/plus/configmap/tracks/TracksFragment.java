@@ -194,7 +194,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		String appearance = getString(R.string.change_appearance);
-		String count = "(" + itemsSelectionHelper.getSelectedItems().size() + ")";
+		String count = "(" + itemsSelectionHelper.getSelectedItemsSize() + ")";
 		items.add(new PopUpMenuItem.Builder(view.getContext())
 				.setTitle(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count))
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
@@ -287,7 +287,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	private void updateButtonsState() {
-		boolean anySelected = !Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems());
+		boolean anySelected = itemsSelectionHelper.hasSelectedItems();
 		String apply = getString(R.string.shared_string_apply).toUpperCase();
 		String select = getString(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent).toUpperCase();
 
@@ -485,7 +485,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	@Override
 	public boolean isTrackItemSelected(@NonNull TrackItem trackItem) {
-		return itemsSelectionHelper.getSelectedItems().contains(trackItem);
+		return itemsSelectionHelper.isItemSelected(trackItem);
 	}
 
 	@Override

@@ -151,7 +151,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 		String appearance = getString(R.string.change_appearance);
 		ItemsSelectionHelper<TrackItem> selectionHelper =  selectedTracksHelper.getItemsSelectionHelper();
-		String count = "(" + selectionHelper.getSelectedItems().size() + ")";
+		String count = "(" + selectionHelper.getSelectedItemsSize() + ")";
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count));

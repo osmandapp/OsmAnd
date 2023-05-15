@@ -42,7 +42,7 @@ public class RecentlyVisibleViewHolder extends RecyclerView.ViewHolder {
 		title.setText(app.getString(R.string.recently_visible, "(" + recentlyVisibleTracks.size() + ")"));
 
 		ItemsSelectionHelper<TrackItem> selectionHelper =  helper.getItemsSelectionHelper();
-		boolean selected = selectionHelper.getSelectedItems().containsAll(recentlyVisibleTracks);
+		boolean selected = selectionHelper.isItemsSelected(recentlyVisibleTracks);
 		checkbox.setChecked(selected);
 		int color = ColorUtilities.getAppModeColor(app, nightMode);
 		UiUtilities.setupCompoundButton(selected, color, checkbox);

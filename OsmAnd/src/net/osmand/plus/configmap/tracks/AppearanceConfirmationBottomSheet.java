@@ -26,7 +26,7 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 		SelectedTracksHelper helper = getSelectedTracksHelper();
 		if (helper != null) {
 			ItemsSelectionHelper<TrackItem> selectionHelper =  helper.getItemsSelectionHelper();
-			int count = selectionHelper.getSelectedItems().size();
+			int count = selectionHelper.getSelectedItemsSize();
 			items.add(new BottomSheetItemWithDescription.Builder()
 					.setDescription(getString(R.string.change_default_tracks_appearance_confirmation_description, String.valueOf(count)))
 							.setDescriptionColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
