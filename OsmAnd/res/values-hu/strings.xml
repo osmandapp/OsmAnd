@@ -5201,4 +5201,6 @@
     <string name="rendering_value_sector3_name">Szektor 3</string>
     <string name="rendering_value_sector4_name">Szektor 4</string>
     <string name="rendering_value_sector5_name">Szektor 5</string>
+    <string name="poi_categories">POI kategóriák</string>
+    <string name="no_poi_for_category">POI nem található</string>
 </resources>

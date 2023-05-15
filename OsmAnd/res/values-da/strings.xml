@@ -5215,4 +5215,6 @@
     <string name="rendering_value_small_name">Lille</string>
     <string name="rendering_value_name_only_name">Kun navn</string>
     <string name="beats_per_minute_short">spm</string>
+    <string name="poi_categories">IP-kategorier</string>
+    <string name="no_poi_for_category">IP ikke fundet</string>
 </resources>

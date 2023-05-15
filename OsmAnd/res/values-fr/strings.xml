@@ -5201,4 +5201,6 @@
     <string name="shared_string_hand">Main</string>
     <string name="rendering_value_name_only_name">Nom uniquement</string>
     <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (light character.group.period), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
+    <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
+    <string name="poi_categories">Catégories de PI</string>
 </resources>

@@ -2121,4 +2121,7 @@
     <string name="app_mode_osm">OSM</string>
     <string name="app_mode_car">Automobila</string>
     <string name="app_mode_default">Mapa de basa</string>
+    <string name="no_poi_for_category">Ponch d\'interès non trobat</string>
+    <string name="rendering_attr_lightDetail_name">Menut dau Senhau lumenós</string>
+    <string name="rendering_value_sectors_name">Sectors</string>
 </resources>
