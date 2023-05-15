@@ -162,6 +162,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void disable(@NonNull OsmandApplication app) {
+		super.disable(app);
+		toggleWikipediaPoi(false, null);
+	}
+
+	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		if (isEnabled()) {
 			if (isLocked()) {
@@ -477,9 +483,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	protected void prepareExtraTopPoiFilters(Set<PoiUIFilter> poiUIFilters) {
 		for (PoiUIFilter filter : poiUIFilters) {
 			if (filter.isTopWikiFilter()) {
-				boolean prepareByDefault = true;
 				if (hasCustomSettings()) {
-					prepareByDefault = false;
 					String wikiLang = "wiki:lang:";
 					StringBuilder sb = new StringBuilder();
 					for (String lang : getLanguagesToShow()) {
@@ -489,8 +493,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 						sb.append(wikiLang).append(lang);
 					}
 					filter.setFilterByName(sb.toString());
-				}
-				if (prepareByDefault) {
+				} else {
 					filter.setFilterByName(null);
 				}
 				return;
