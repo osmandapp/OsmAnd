@@ -69,12 +69,10 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	private Float heading;
 	private Location location;
 	private boolean locationUpdateStarted;
-	private boolean nightMode;
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull

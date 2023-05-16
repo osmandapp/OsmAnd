@@ -36,7 +36,6 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
-	private boolean nightMode;
 
 	public TrackTab getTrackTab() {
 		return trackTab;
@@ -50,7 +49,11 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
-		nightMode = isNightMode(true);
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@Nullable

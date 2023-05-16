@@ -5,7 +5,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	android:background="?attr/list_background_color">
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true">
 
 	<androidx.appcompat.widget.Toolbar
 		android:id="@+id/toolbar"

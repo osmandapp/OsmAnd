@@ -66,6 +66,8 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 				!app.getSettings().isLightSystemDefaultTheme();
 
 		RelativeLayout view = new RelativeLayout(activity);
+		view.setClickable(true);
+		view.setFocusable(true);
 		view.setOnClickListener(null);
 
 		int backgroundColorId = systemDefaultNightMode ?

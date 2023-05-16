@@ -83,11 +83,16 @@ public class SearchHistoryHelper {
 
 	@NonNull
 	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints) {
-		return getHistoryEntries(onlyPoints, false);
+		return getHistoryEntries(null, onlyPoints, false);
 	}
 
 	@NonNull
-	public List<HistoryEntry> getHistoryEntries(boolean onlyPoints, boolean includeDeleted) {
+	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints) {
+		return getHistoryEntries(source, onlyPoints, false);
+	}
+
+	@NonNull
+	public List<HistoryEntry> getHistoryEntries(@Nullable HistorySource source, boolean onlyPoints, boolean includeDeleted) {
 		if (loadedEntries == null) {
 			checkLoadedEntries();
 		}
@@ -96,7 +101,7 @@ public class SearchHistoryHelper {
 			PointDescription description = entry.getName();
 
 			boolean exists = isPointDescriptionExists(description);
-			if (includeDeleted || exists) {
+			if ((includeDeleted || exists) && (source == null || entry.source == source)) {
 				if (!onlyPoints || (!description.isPoiType() && !description.isCustomPoiFilter())) {
 					entries.add(entry);
 				}
@@ -123,11 +128,9 @@ public class SearchHistoryHelper {
 		List<SearchResult> searchResults = new ArrayList<>();
 
 		SearchPhrase phrase = SearchPhrase.emptyPhrase();
-		for (HistoryEntry entry : getHistoryEntries(onlyPoints, includeDeleted)) {
+		for (HistoryEntry entry : getHistoryEntries(source, onlyPoints, includeDeleted)) {
 			SearchResult result = SearchHistoryAPI.createSearchResult(app, entry, phrase);
-			if (source == null || entry.source == source) {
-				searchResults.add(result);
-			}
+			searchResults.add(result);
 		}
 		return searchResults;
 	}

@@ -78,7 +78,6 @@
     <string name="routing_settings">내비게이션</string>
     <string name="routing_settings_descr">운행을 위한 옵션을 설정합니다</string>
     <string name="global_settings">일반 설정</string>
-    <string name="index_settings">지도 관리</string>
     <string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
     <string name="general_settings">일반</string>
     <string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>

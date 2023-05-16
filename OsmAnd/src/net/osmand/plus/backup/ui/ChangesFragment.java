@@ -64,7 +64,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	private View buttonsShadow;
 
 	private RecentChangesType tabType;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			tabType = RecentChangesType.valueOf(savedInstanceState.getString(SELECTED_TAB_TYPE_KEY, RECENT_CHANGES_LOCAL.name()));
 		}

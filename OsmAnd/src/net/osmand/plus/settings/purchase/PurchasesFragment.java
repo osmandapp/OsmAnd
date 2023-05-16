@@ -49,14 +49,6 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	private ViewGroup cardsContainer;
 	private LayoutInflater themedInflater;
 
-	private boolean nightMode;
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
-	}
-
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);

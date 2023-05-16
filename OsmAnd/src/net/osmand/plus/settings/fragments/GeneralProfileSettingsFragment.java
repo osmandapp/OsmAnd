@@ -78,35 +78,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		updateDialogControllerCallbacks();
 	}
 
-	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = (buttonView, isChecked) -> {
-		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		if (isChecked) {
-			getPreferenceManager().showDialog(externalInputDevice);
-			buttonView.setChecked(false);
-		} else {
-			if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
-				externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
-			} else {
-				buttonView.setChecked(true);
-			}
-		}
-	};
-
-	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
-		super.onBindPreferenceViewHolder(preference, holder);
-
-		String prefId = preference.getKey();
-		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
-			boolean checked = settings.EXTERNAL_INPUT_DEVICE.getModeValue(getSelectedAppMode()) != OsmandSettings.NO_EXTERNAL_DEVICE;
-
-			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
-			switchView.setOnCheckedChangeListener(null);
-			switchView.setChecked(checked);
-			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
-		}
-	}
-
 	private void setupAppThemePref() {
 		ListPreferenceEx appTheme =
 				findPreference(settings.OSMAND_THEME.getId());
@@ -294,8 +265,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		uiPreference.setSummary(R.string.sett_no_ext_input);
-		InputDevice[] devices = InputDevice.values();
+		uiPreference.setDescription(R.string.external_input_device_descr);
 
+		InputDevice[] devices = InputDevice.values();
 		String[] entries = new String[devices.length];
 		Integer[] values = new Integer[devices.length];
 		for (int i = 0; i < devices.length; i++) {
@@ -305,6 +277,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		}
 		uiPreference.setEntries(entries);
 		uiPreference.setEntryValues(values);
+		uiPreference.setIcon(getExternalInputDeviceIcon());
+	}
+
+	private Drawable getExternalInputDeviceIcon() {
+		return settings.getSelectedInputDevice(getSelectedAppMode()) != InputDevice.NONE ?
+				getActiveIcon(R.drawable.ic_action_keyboard) :
+				getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
 
 	private void setupTrackballForMovementsPref() {

@@ -101,12 +101,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	private TextView progressTitle;
 	private RecyclerView recyclerView;
 
-	private boolean nightMode;
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
 
 		if (savedInstanceState == null) {
 			collectTracks();
@@ -120,6 +117,11 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 				showExitDialog();
 			}
 		});
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull

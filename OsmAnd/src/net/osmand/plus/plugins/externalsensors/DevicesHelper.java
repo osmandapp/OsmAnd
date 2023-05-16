@@ -55,7 +55,9 @@ import net.osmand.plus.plugins.externalsensors.devices.ble.BLERunningSCDDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLETemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -64,6 +66,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DevicesHelper implements DeviceListener, DevicePreferencesListener {
@@ -76,6 +79,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public final static String MATCH_NUM_PREFERENCE = "MATCH_NUM";
 
 	private static final Log LOG = PlatformUtil.getLog(DevicesHelper.class);
+
+	private final static List<UUID> SUPPORTED_BLE_SERVICE_UUIDS = Arrays.asList(
+			BLEBikeSCDDevice.getServiceUUID(),
+			BLEBPICPDevice.getServiceUUID(),
+			BLEHeartRateDevice.getServiceUUID(),
+			BLERunningSCDDevice.getServiceUUID(),
+			BLETemperatureDevice.getServiceUUID());
 
 	private final OsmandApplication app;
 	private final DevicesSettings devicesSettings;
@@ -97,6 +107,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	void setActivity(@Nullable Activity activity) {
 		if (this.activity != null) {
+			dropUnpairedDevices();
 			deinitBLE();
 			devicesSettings.removeListener(this);
 		}
@@ -201,16 +212,15 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		private void addScanResult(ScanResult result) {
 			ScanRecord scanRecord = result.getScanRecord();
 			if (isSupportedBleDevice(scanRecord)) {
+				String deviceName = result.getDevice().getName();
 				String address = result.getDevice().getAddress();
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				for (ParcelUuid uuid : uuids) {
 					BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
-							bluetoothAdapter, uuid.getUuid(), address);
+							bluetoothAdapter, uuid.getUuid(), address, deviceName, result.getRssi());
 					if (device != null) {
 						if (!devices.containsKey(device.getDeviceId())) {
 							devices.put(device.getDeviceId(), device);
-							device.addListener(DevicesHelper.this);
-							device.connect(app, activity);
 						}
 						break;
 					}
@@ -228,8 +238,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 		if (uuids != null) {
 			for (ParcelUuid uuid : uuids) {
-				// TODO: should be based on ble sensors classes
-				if (GattAttributes.SUPPORTED_CHARACTERISTICS.contains(uuid.getUuid())) {
+				if (SUPPORTED_BLE_SERVICE_UUIDS.contains(uuid.getUuid())) {
 					return true;
 				}
 			}
@@ -237,29 +246,41 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		return false;
 	}
 
+	void connectDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
+		device.addListener(this);
+		device.connect(app, activity);
+	}
+
+	void disconnectDevice(@NonNull AbstractDevice<?> device) {
+		disconnectDevice(device, true);
+	}
+
+	void disconnectDevice(@NonNull AbstractDevice<?> device, boolean notify) {
+		device.removeListener(this);
+		if (device.disconnect() && notify) {
+			onDeviceDisconnect(device);
+		}
+	}
+
 	void connectDevices(@Nullable Activity activity) {
 		for (AbstractDevice<?> device : getDevices()) {
 			if (isDeviceEnabled(device)) {
-				device.addListener(this);
-				device.connect(app, activity);
+				connectDevice(activity, device);
 			}
 		}
 	}
 
 	void disconnectDevices() {
 		for (AbstractDevice<?> device : getDevices()) {
-			device.disconnect();
-			device.removeListener(this);
+			disconnectDevice(device);
 		}
 	}
 
 	void updateDevice(@Nullable Activity activity, @NonNull AbstractDevice<?> device) {
 		if (isDeviceEnabled(device) && device.isDisconnected()) {
-			device.addListener(this);
-			device.connect(app, activity);
+			connectDevice(activity, device);
 		} else if (!isDeviceEnabled(device) && device.isConnected()) {
-			device.disconnect();
-			device.removeListener(this);
+			disconnectDevice(device);
 		}
 	}
 
@@ -269,11 +290,14 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	}
 
+	void dropUnpairedDevice(@NonNull AbstractDevice<?> device) {
+		disconnectDevice(device);
+		devices.remove(device.getDeviceId());
+	}
+
 	void dropUnpairedDevices() {
 		for (AbstractDevice<?> device : getUnpairedDevices()) {
-			device.disconnect();
-			device.removeListener(this);
-			devices.remove(device.getDeviceId());
+			dropUnpairedDevice(device);
 		}
 	}
 
@@ -350,7 +374,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				LOG.debug(device + " sensor connected");
 				if (antScanning && isAntDevice(device)) {
 					devices.put(device.getDeviceId(), device);
-					device.addListener(this);
 				} else if (bleScanning && isBLEDevice(device)) {
 					// skip
 				} else {
@@ -373,7 +396,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 						updateDevice(activity, device);
 					} else {
 						LOG.debug("Reconnect " + device + " after timeout");
-						device.connect(app, activity);
+						connectDevice(activity, device);
 					}
 				}
 				break;
@@ -390,6 +413,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	@Override
 	public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
+		for (SensorDataField dataField : data.getDataFields()) {
+			FormattedValue fmtValue = dataField.getFormattedValue(app);
+			if (fmtValue != null) {
+				LOG.debug("onSensorData '" + sensor.getDevice().getName() + "' <" + sensor.getName() + ">: "
+						+ fmtValue.value + (!Algorithms.isEmpty(fmtValue.unit) ? " " + fmtValue.unit : ""));
+			}
+		}
 	}
 
 	public boolean isDevicePaired(@NonNull AbstractDevice<?> device) {
@@ -402,7 +432,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettings.getDeviceSettings(deviceId);
 		if (!paired) {
 			devicesSettings.setDeviceSettings(deviceId, null);
-			dropUnpairedDevices();
+			dropUnpairedDevice(device);
 		} else {
 			if (settings == null) {
 				if (!Algorithms.isEmpty(deviceId)) {
@@ -410,6 +440,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 					devicesSettings.setDeviceSettings(deviceId, settings);
 				}
 			}
+			//connectDevice(activity, device);
 		}
 		app.runInUIThread(() -> {
 			MapActivity mapActivity = getMapActivity();
@@ -497,16 +528,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 					AntBikePowerDevice.createSearchableDevice());
 
 			for (AntAbstractDevice<?> device : antSearchableDevices) {
-				device.addListener(this);
-				device.connect(app, activity);
+				connectDevice(activity, device);
 			}
 			antScanning = true;
 		} else {
 			for (AntAbstractDevice<?> device : antSearchableDevices) {
-				if (!device.isSearchDone()) {
-					device.disconnect();
-					device.removeListener(this);
-				}
+				disconnectDevice(device, false);
 			}
 			antSearchableDevices = new ArrayList<>();
 			antScanning = false;

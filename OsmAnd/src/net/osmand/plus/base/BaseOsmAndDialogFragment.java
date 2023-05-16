@@ -19,6 +19,7 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
+	protected boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,9 +28,14 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 
-		int themeId = isNightMode(false) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		nightMode = isNightMode(useMapNightMode());
+		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+	}
+
+	protected boolean useMapNightMode() {
+		return false;
 	}
 
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
@@ -49,9 +55,6 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !settings.isLightContent();
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 }

@@ -1155,8 +1155,8 @@
     <string name="poi_payment_pikepass_yes">PIKEPASS</string>
     <string name="poi_payment_pikepass_no">PIKEPASS non accettato</string>
     <string name="poi_payment_pikepass_designated">PIKEPASS (riservato)</string>
-    <string name="poi_payment_visa_debit_yes">Carte di debito Visa</string>
-    <string name="poi_payment_visa_debit_no">Carte di debito Visa non accettato</string>
+    <string name="poi_payment_visa_debit_yes">Carte Visa Debit</string>
+    <string name="poi_payment_visa_debit_no">Non si accettano carte Visa Debit</string>
     <string name="poi_payment_cryptocurrencies_no">Cryptomonete non accettate</string>
     <string name="poi_payment_others_yes">Altro</string>
     <string name="poi_payment_others_no">Altri metodi di pagamento non accettati</string>
@@ -1340,8 +1340,8 @@
     <string name="poi_payment_u_key_yes">U-Key</string>
     <string name="poi_payment_u_key_no">U-Key non accettato</string>
     <string name="poi_payment_pro100_yes">PRO100</string>
-    <string name="poi_payment_yandexmoney_yes">Yandex. Money</string>
-    <string name="poi_payment_yandexmoney_no">Yandex. Money non accettato</string>
+    <string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
+    <string name="poi_payment_yandexmoney_no">Yandex.Money non accettato</string>
     <string name="poi_diet_vegetarian_filter_yes">Vegetariana</string>
     <string name="poi_diet_vegetarian_no">Dieta vegetariana: no</string>
     <string name="poi_diet_vegan_filter_yes">Vegana</string>
@@ -2312,11 +2312,9 @@
     <string name="poi_operational_status_needs_maintenance">Necessità di manutenzione</string>
     <string name="poi_water_supply_pump">Pompa</string>
     <string name="poi_socket_schuko">Presa: Schuko</string>
-    <string name="poi_car_yes">Auto: sì</string>
     <string name="poi_car_no">Auto: no</string>
     <string name="poi_bicycle_yes">Bicicletta: sì</string>
     <string name="poi_bicycle_no">Bicicletta: no</string>
-    <string name="poi_truck_yes">Camion: sì</string>
     <string name="poi_truck_no">Camion: no</string>
     <string name="poi_parking_fee_yes">Sì</string>
     <string name="poi_parking_fee_no">No</string>
@@ -3934,4 +3932,11 @@
     <string name="poi_barrier_tyres">Pneumatici</string>
     <string name="poi_self_checkout">Cassa automatica</string>
     <string name="poi_water_filter">Acqua;Acqua potabile</string>
+    <string name="poi_payment_mir_no">Non si accettano carte Mir</string>
+    <string name="poi_payment_centre">Centro di pagamento</string>
+    <string name="poi_payment_calling_cards_yes">Si accettano carte telefoniche</string>
+    <string name="poi_payment_reverse_charge_calls_no">Chiamate a carico del destinatario: no</string>
+    <string name="poi_payment_reverse_charge_calls_yes">Chiamate a carico del destinatario: sì</string>
+    <string name="poi_payment_calling_cards_no">Non si accettano carte telefoniche</string>
+    <string name="poi_payment_mir_yes">Carte Mir</string>
 </resources>

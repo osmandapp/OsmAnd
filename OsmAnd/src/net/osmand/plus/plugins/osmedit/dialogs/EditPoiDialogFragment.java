@@ -152,7 +152,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		boolean nightMode = isNightMode(false);
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 
@@ -245,7 +244,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		int activeColor = ColorUtilities.getActiveColor(getContext(), isNightMode(false));
+		int activeColor = ColorUtilities.getActiveColor(getContext(), nightMode);
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {

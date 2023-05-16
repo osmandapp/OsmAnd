@@ -2027,7 +2027,6 @@
     <string name="fav_export_confirmation">Датотека са већ извезеним омиљеним тачкама већ постоји. Заменити га\?</string>
     <string name="profile_settings">Поставке нарочите за профил</string>
     <string name="routing_settings_descr">Одаберите могућности навођења.</string>
-    <string name="index_settings">Управљање фајловима карата</string>
     <string name="general_settings_descr">Подесите приказ и опште поставке програма.</string>
     <string name="reading_cached_tiles">Читам ускладиштене сличице…</string>
     <string name="version_index_is_big_for_memory">Садржај „{0}“ не може да стане у складиште</string>
@@ -3917,8 +3916,6 @@
     <string name="copy_poi_name">Умножи име тачке занимања</string>
     <string name="quick_action_show_hide_title">Прикажи/сакриј</string>
     <string name="shared_string_interval">Међувреме</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Сакриј резервате природе, заштићена подручја и границе националних паркова.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Природне границе</string>
     <string name="track_has_no_altitude">Путања не садржи податке о надморској висини.</string>
     <string name="track_has_no_speed">Путања не садржи податке о брзини.</string>
     <string name="opr_use_dev_url">Користи test.openplacereviews.org</string>
@@ -4439,7 +4436,6 @@
     <string name="save_changes_into_file">Сачувај измене у датотеку</string>
     <string name="gps_filter_smoothing">Углачавање</string>
     <string name="reading_files">Читам датотеке…</string>
-    <string name="ltr_or_rtl_combine">%1$s%2$s</string>
     <string name="memory_allocated_for_routing">Складиште додељено за израчунавање пута</string>
     <string name="no_items_selected_warning">Одаберите бар једну ставку</string>
     <string name="shared_string_hide_all">Сакриј све</string>

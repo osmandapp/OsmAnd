@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--
     	 Disclaimer : 
@@ -9,7 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     -->
     <string name="shared_string_no">नही</string>
-    <string name="shared_string_yes">हा</string>
+    <string name="shared_string_yes">हाँ</string>
     <string name="prefer_motorways">बडी सड़को को प्राधान्य दो</string>
     <string name="prefer_in_routing_title">प्राधान्य…</string>
     <string name="shared_string_walk">टहल लो</string>
@@ -114,8 +114,8 @@
     <string name="shared_string_icon">चिह्न</string>
     <string name="collected_data">आकड़ों को एकत्र किया</string>
     <string name="press_again_to_change_the_map_orientation">मैप ओरिएंटेशन बदलने के लिए फिर से टैप करें</string>
-    <string name="shared_string_min_speed">Min.speed</string>
-    <string name="shared_string_max_speed">मैक्स गति</string>
+    <string name="shared_string_min_speed">न्यूनतम गति</string>
+    <string name="shared_string_max_speed">अधिकतम गति</string>
     <string name="default_speed_setting_title">डिफ़ॉल्ट गति</string>
     <string name="default_speed_setting_descr">डिफ़ॉल्ट गति सेटिंग्स बदलें</string>
     <string name="minmax_speed_dialog_title">न्यूनतम / अधिकतम गति सेट करें</string>
@@ -136,7 +136,7 @@
     <string name="edit_profile_nav_settings_subtitle">प्रोफ़ाइल के लिए डिफ़ॉल्ट नेविगेशन सेटिंग्स चुनें</string>
     <string name="routing_attr_max_num_changes_description">अधिकतम परिवर्तन निर्दिष्ट करें</string>
     <string name="routing_attr_max_num_changes_name">परिवर्तनों की संख्या</string>
-    <string name="turn_screen_on_router">बारी आने पर जगाओ</string>
+    <string name="turn_screen_on_router">मोड़ आने पर स्क्रीन औन करें</string>
     <string name="turn_screen_on_time_descr">वह समय सेट करें जिसके लिए स्क्रीन चालू होगी।</string>
     <string name="turn_screen_on_sensor">निकटता सेंसर का उपयोग करें</string>
     <string name="turn_screen_on_sensor_descr">नेविगेट करते समय स्क्रीन को चालू करने के लिए स्क्रीन के शीर्ष पर अपना हाथ लहरें।</string>
@@ -144,29 +144,40 @@
     <string name="rendering_attr_winter_road_name">सर्दियों की सड़क</string>
     <string name="rendering_attr_ice_road_name">बर्फ की सड़क</string>
     <string name="routeInfo_winter_ice_road_name">सर्दी और बर्फ की सड़क</string>
-    <string name="rendering_attr_tracktype_grade1_name">ठोस (प्रशस्त)</string>
-    <string name="rendering_attr_tracktype_grade2_name">ठोस (कच्चे)</string>
+    <string name="rendering_attr_tracktype_grade1_name">ठोस (पक्की) सड़क</string>
+    <string name="rendering_attr_tracktype_grade2_name">ठोस (कच्ची) सड़क</string>
     <string name="rendering_attr_tracktype_grade3_name">ज्यादातर ठोस</string>
     <string name="rendering_attr_tracktype_grade4_name">ज्यादातर नरम</string>
     <string name="rendering_attr_tracktype_grade5_name">मुलायम</string>
-    <string name="routeInfo_tracktype_name">सतह दृढ़ता</string>
-    <string name="shared_string_file_is_saved">%s सहेजा गया है</string>
-    <string name="shared_string_open_track">खुला ट्रैक</string>
+    <string name="routeInfo_tracktype_name">सतह की दृढ़ता</string>
+    <string name="shared_string_file_is_saved">%s सेव हो गया है</string>
+    <string name="shared_string_open_track">ट्रैक खोलें</string>
     <string name="shared_string_track_is_saved">ट्रैक %s सहेजा गया है</string>
     <string name="app_mode_camper">पर्यटक</string>
     <string name="app_mode_campervan">शिविर वैन</string>
     <string name="rendering_attr_showLez_description">मानचित्र पर कम उत्सर्जन क्षेत्र दिखाएं। रूटिंग को प्रभावित नहीं करता है।</string>
     <string name="rendering_attr_showLez_name">कम उत्सर्जन क्षेत्र दिखाएं</string>
-    <string name="temporary_conditional_routing">अस्थायी सीमाओं पर विचार करें</string>
+    <string name="temporary_conditional_routing">अस्थाई रुकावटों का इस्तेमाल करें</string>
     <string name="shared_string_default">चूक</string>
     <string name="price_free">मुफ़्त</string>
-    <string name="default_speed_dialog_msg">"अज्ञात मार्ग द्वारा  आने जाने  का  समय  निर्णय करना और सभी  पटरी  पर वेग नियंत्रित करना (routing पर स्वाधीन हो जायेगा )"</string>
+    <string name="default_speed_dialog_msg">"अज्ञात मार्ग द्वारा  आने जाने  का  समय  निर्णय करना और सभी  पटरी  पर वेग नियंत्रित करना (इससे रूटिंग पर असर पड़ सकता है )"</string>
     <string name="lang_pnb">पंजाबी</string>
-    <string name="lang_ne">नेपाल के नागरिक</string>
-    <string name="lang_my">"बर्मा  के नागरिक"</string>
-    <string name="lang_mn">मंगोलिया के नागरिक</string>
-    <string name="lang_kk">कज़ाकिस्तान के नागरिक</string>
+    <string name="lang_ne">नेपाली</string>
+    <string name="lang_my">बर्मी</string>
+    <string name="lang_mn">मंगोली</string>
+    <string name="lang_kk">कज़ाकिस्तानी</string>
     <string name="lang_gu">गुजराती</string>
-    <string name="custom_color">असामान्य रंग</string>
+    <string name="custom_color">कोई और रंग</string>
     <string name="extra_maps_menu_group">ज़्यादा मापें</string>
+    <string name="rendering_value_sector1_name">सेक्टर १</string>
+    <string name="rendering_value_sector4_name">सेक्टर ४</string>
+    <string name="copying_completed">कौपी हो गया</string>
+    <string name="device_connected">%1$s कनेक्ट हो गया है</string>
+    <string name="device_disconnected">%1$s डिस्कनेक्ट हो गया है</string>
+    <string name="delete_all_confirmation">हाँ, सब डिलीट करें</string>
+    <string name="rendering_value_sector2_name">सेक्टर २</string>
+    <string name="rendering_value_sector3_name">सेक्टर ३</string>
+    <string name="rendering_value_sector5_name">सेक्टर ५</string>
+    <string name="rendering_value_small_name">छोटा</string>
+    <string name="rendering_value_name_only_name">सिर्फ़ नाम</string>
 </resources>

@@ -40,7 +40,7 @@ public class SaveExtraValidationDialogFragment extends DialogFragment {
 
 	private boolean isNightMode() {
 		OsmandApplication app = ((OsmandApplication) requireActivity().getApplication());
-		return !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(false);
 	}
 
 	private String getMessageToShow() {

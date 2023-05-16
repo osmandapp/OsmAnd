@@ -107,7 +107,6 @@
     <string name="routing_settings">Navigace</string>
     <string name="routing_settings_descr">Určit možnosti navigace.</string>
     <string name="global_settings">Obecná nastavení</string>
-    <string name="index_settings">Spravovat mapové soubory</string>
     <string name="index_settings_descr">Stáhnout a spravovat off-line mapy uložené ve vašem zařízení.</string>
     <string name="general_settings">Obecné</string>
     <string name="general_settings_descr">Nastavení zobrazení a dalších společných parametrů aplikace.</string>
@@ -4018,8 +4017,6 @@
     <string name="track_has_no_altitude">Stopa neobsahuje údaje o nadmořské výšce.</string>
     <string name="track_has_no_speed">Stopa neobsahuje údaje o rychlosti.</string>
     <string name="select_another_colorization">Vyberte prosím jiný typ obarvení.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skrýt hranice přírodních rezervací, chráněných území a národních parků.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice přírody</string>
     <string name="trip_recording_logging_interval_info">Interval záznamu nastaví, jak často bude OsmAnd zjišťovat aktuální polohu.</string>
     <string name="trip_recording_save_and_continue">Uložit a pokračovat</string>
     <string name="lost_data_warning">Všechna neuložená data budou ztracena.</string>

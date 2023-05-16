@@ -518,7 +518,6 @@
     <string name="routing_settings">Nabigazioa</string>
     <string name="routing_settings_descr">Zehaztu nabigaziorako aukerak.</string>
     <string name="global_settings">Ezarpen Globalak</string>
-    <string name="index_settings">Kudeatu mapa-fitxategiak</string>
     <string name="general_settings">Orokorra</string>
     <string name="general_settings_descr">Erarri pantaila eta aplikazioaren ezarpen arruntak.</string>
     <string name="global_app_settings">Aplikazioaren ezarpen globalak</string>
@@ -5177,4 +5176,5 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Parekatu ANT+ sentsorea</string>
     <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LE eta ANT+ sentsoreak OsmAnd-ekin parekatu ditzakezu.</string>
     <string name="external_device_forget_sensor">Ahaztu sentsorea</string>
+    <string name="rendering_attr_lightDetail_name">Argitasuna</string>
 </resources>

@@ -148,16 +148,6 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		}
 	}
 
-	public List<TrackItem> getCurrentTrackItems() {
-		List<TrackItem> trackItems = new ArrayList<>();
-		for (Object objectItem : getItems()) {
-			if (objectItem instanceof TrackItem) {
-				trackItems.add((TrackItem) objectItem);
-			}
-		}
-		return trackItems;
-	}
-
 	@Override
 	public int getItemCount() {
 		return getItems().size();

@@ -49,8 +49,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	protected ChangesAdapter adapter;
 	protected RecentChangesType tabType = getChangesTabType();
 
-	protected boolean nightMode;
-
 	@NonNull
 	public abstract RecentChangesType getChangesTabType();
 
@@ -63,7 +61,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = isNightMode(false);
 	}
 
 	@Nullable

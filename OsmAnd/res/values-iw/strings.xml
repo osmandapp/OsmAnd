@@ -293,7 +293,6 @@
     <string name="routing_settings">ניווט</string>
     <string name="routing_settings_descr">נא לציין אפשרויות ניווט.</string>
     <string name="global_settings">הגדרות כלליות</string>
-    <string name="index_settings">ניהול קובצי מפה</string>
     <string name="general_settings">כללי</string>
     <string name="general_settings_descr">הגדרת תצוגה ותצורה נפוצה עבור היישומון.</string>
     <string name="global_app_settings">הגדרות יישומים כלליות</string>
@@ -4020,8 +4019,6 @@
     <string name="quick_action_coordinates_widget_descr">מפסק להצגה או הסתרה של וידג׳ט נקודות הציון במפה.</string>
     <string name="map_widget_distance_by_tap">מרחק בנגיעה</string>
     <string name="latest_openstreetmap_update">קיים עדכון ל־OpenStreetMap:</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">להסתיר גבולות של שמורות טבע, אזורים מוגנים ופארקים ציבוריים.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">גבולות טבעיים</string>
     <string name="live_update_delete_updates_msg">למחוק את כל העדכונים החיים של %s\?</string>
     <string name="trip_recording_logging_interval_info">ההפרשים בין רשומות התיעוד מגדירים את משך הזמן בו OsmAnd יבקש את נתוני המקום הנוכחי.</string>
     <string name="trip_recording_save_and_continue">לשמור ולהמשיך</string>

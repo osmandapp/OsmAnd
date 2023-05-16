@@ -137,23 +137,25 @@
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
     <string name="index_srtm_parts">части</string>
     <string name="index_srtm_ele">Контурни линии</string>
-    <string name="srtm_plugin_description">Тази добавка осигурява показване на релефни контури върху офлайн картите на OsmAnd. Тази функционалност е много оценявана от спортисти, туристи, всички които се интересуват от ландшафта.
+    <string name="srtm_plugin_description">Информацията за терена, като контурни линии, хълмове и склонове, ви помага визуално да оцените разположението на земята и релефа, възможността за навигация и др. Топографската информация може да бъде представена на картата чрез засенчване на склонове, контурни линии и/или оцветяване на стръмнини.
 \n
-\nГлобалните данни (между 70 градуса северна ширина и 70 градуса южна ширина) се основават на измервания от SRTM и ASTER - радари намиращи се на борда на Terra - сателит на НАСА за наблюдение на НАСА. ASTER е съвместен проект между НАСА и Япония.</string>
+\nДанните, върху които лежи тази функционалност, произхождат от SRTM и ASTER.
+\n
+\nДокументацията е достъпна на адрес https://osmand.net/docs/user/plugins/contour-lines .</string>
     <string name="srtm_plugin_name">Контурни линии</string>
     <string name="download_select_map_types">Други карти</string>
     <string name="download_roads_only_item">Само пътища</string>
     <string name="download_srtm_maps">Контурни линии</string>
     <string name="download_regular_maps">Стандартна карта</string>
     <string name="download_roads_only_maps">Пътна карта</string>
-    <string name="rendering_attr_noAdminboundaries_name">Скриване на границите</string>
-    <string name="rendering_attr_noAdminboundaries_description">Не показвай административни граници (admin нива 5–9)</string>
+    <string name="rendering_attr_noAdminboundaries_name">Граници</string>
+    <string name="rendering_attr_noAdminboundaries_description">Скриване на регионални граници (admin нива 5–9).</string>
     <string name="map_widget_max_speed">Ограничение на скоростта</string>
     <string name="route_descr_lat_lon">Ширина %1$.3f, дължина %2$.3f</string>
     <string name="no_buildings_found">Няма намерени номера.</string>
     <string name="incremental_search_city">Търсене на град възходящо</string>
     <string name="search_villages_and_postcodes">Търсене на повече селища/пощенски кодове</string>
-    <string name="rendering_attr_showRoadMaps_description">Ако е избрано ще се показват карти съдържащи само пътища:</string>
+    <string name="rendering_attr_showRoadMaps_description">Изберете кога да се показват карти само с пътища:</string>
     <string name="rendering_attr_showRoadMaps_name">Карти само с пътища</string>
     <string name="safe_mode_description">Стартиране на приложението в сервизен режим (safe mode) - използване на по-бавен Android код.</string>
     <string name="safe_mode">Безопасен режим</string>
@@ -321,8 +323,7 @@
     <string name="osmand_parking_pm">сл. обяд</string>
     <string name="osmand_parking_am">сутринта</string>
     <string name="osmand_parking_position_name">Паркинг</string>
-    <string name="osmand_parking_plugin_description">Запазва мястото и времето на паркиране, включително времето за платен паркинг.
-\nВремето и мястото са видими както на картата, така и в приспособлението. Можете да добавите напомняне в календара на Android.</string>
+    <string name="osmand_parking_plugin_description">Маркирайте мястото, където е паркиран автомобилът ви, и уведомете календара за изтичането на времето. За да поставите отмета, изберете място на картата, отидете в „Действия“ и докоснете „Добавяне на място за паркиране“.</string>
     <string name="osmand_parking_plugin_name">Място на паркиране</string>
     <string name="context_menu_item_add_parking_point">Маркирайте като място на паркиране</string>
     <string name="context_menu_item_delete_parking_point">Изтриване на маркера за паркиране</string>
@@ -334,13 +335,13 @@
     <string name="route_roundabout">Кръгово: Излезте от %1$d изход и продължете</string>
     <string name="route_kl">Продължете по левия път</string>
     <string name="route_kr">Продължете по десния път</string>
-    <string name="rendering_attr_noPolygons_description">Прозрачни въздушни снимки на местността</string>
-    <string name="rendering_attr_noPolygons_name">Скрий полигоните</string>
+    <string name="rendering_attr_noPolygons_description">Показване само на контури, без оцветяване.</string>
+    <string name="rendering_attr_noPolygons_name">Многоъгълници</string>
     <string name="rendering_attr_appMode_name">Режим на показване</string>
     <string name="rendering_attr_appMode_description">Оптимизирай картата за</string>
     <string name="rendering_attr_contourLines_description">Показване след ниво увеличение (при вкл. добавка):</string>
     <string name="rendering_attr_contourLines_name">Показване на контурни линии</string>
-    <string name="rendering_attr_hmRendered_description">Увеличаване на детайлността на картата</string>
+    <string name="rendering_attr_hmRendered_description">Показват се повече подробности на картата.</string>
     <string name="rendering_attr_hmRendered_name">Показвай повече детайли на картата</string>
     <string name="local_index_routing_data">Данни за маршрута</string>
     <string name="navigate_point_format">Формат</string>
@@ -359,25 +360,27 @@
     <string name="first_time_msg">Благодарим ви, че използвате OsmAnd. Изтеглете местни данни за използване извън мрежа от „Настройки“, профил, „Настройки на картата“, за да виждате карта, търсите адреси, POI, обществен транспорт и други.</string>
     <string name="basemap_was_selected_to_download">Базовата карта, необходима за осигуряване на основната функционалност, е в опашката за изтегляне.</string>
     <string name="select_index_file_to_download">Нищо не е намерено. Ако не намирате Вашия регион, можете да си направите сами карти (виж http://osmand.net).</string>
-    <string name="local_indexes_cat_tile">Карти от мрежата и складирани карти (растер)</string>
+    <string name="local_indexes_cat_tile">Карти от мрежата и временни плочки от карти (растер)</string>
     <string name="local_indexes_cat_map">Стандартни карти (векторни)</string>
     <string name="index_settings_descr">Сваляне и управление на картите извън мрежа на устройството.</string>
     <string name="map_online_plugin_is_not_installed">Включете добавката за онлайн карти и ще можете да избирате различни източници на карти</string>
     <string name="map_online_data">Карти от мрежата</string>
     <string name="map_online_data_descr">Използване на карти от мрежата (изтегляне върху картата с памет).</string>
     <string name="shared_string_online_maps">Онлайн карти</string>
-    <string name="online_map_settings_descr">Изберете източници за карти от мрежата или складирани карти.</string>
-    <string name="osmand_rastermaps_plugin_description">Можете да ползвате много видове онлайн (растерни) карти: OSM растерни изображения (като Mapnik), сателитни снимки, слоеве със специално предназначение - прогнози за времето, климатични карти, географски терени и др.
+    <string name="online_map_settings_descr">Изберете източници за карти от мрежата или временни плочки от карти.</string>
+    <string name="osmand_rastermaps_plugin_description">Можете да ползвате много видове отдалечени (още познати като плочки или растер) карти като предварително подготвени плочки на OSM, сателитни изображения, слоеве със специално предназначение - прогнози за времето, климатични карти, геологични карти, теренни карти и др.
 \n
-\nНякои от тези карти могат да бъдат използвани като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на картата\".
+\nВсяка от тези карти може да бъде използвана като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната векторна карта извън мрежа). С цел подложната карта да бъде по-видима някои елементи от векторна карта на OSM могат да бъдат скрити от менюто „Настройки на картата“.
 \n
-\nРастерните карти могат да бъдат получени директно чрез онлайн източници, или могат да бъдат подготвени за офлайн употреба (и ръчно копирани в папката за данни OsmAnd) под формата на sqlite база данни от друго приложение.</string>
+\nРастерните карти могат да бъдат получени директно от отдалечени източници, или могат да бъдат подготвени за употреба извън мрежа (и ръчно копирани в папката за данни на OsmAnd) под формата на хранилище на SQLite от различни инструменти.</string>
     <string name="osmand_accessibility_description">Настройки на специалните функции за достъпност. Настройване скоростта на гласовите напътствия и допълнителни настройки за хора със специални потребности.</string>
     <string name="osmand_development_plugin_description">Добавката показва настройки за отстраняване на неизправности по програмата - тестване или симулиране на маршрут, честота на опресняване на екрана, работата на гласовите напътствия. Тези настройки са предназначени за разработчици и не са необходими на обикновения потребител.</string>
     <string name="plugins_screen">Добавки</string>
     <string name="prefs_plugins_descr">Добавките внасят допълнителна функционалност на приложението</string>
     <string name="prefs_plugins">Добавки</string>
-    <string name="osm_editing_plugin_description">Добавка за изпращане на данни към OSM - обекти (POI), бележки, GPX записани маршрути. За подробности по проекта OSM посетете https://openstreetmap.org. Вашият принос към проекта ще бъде оценен с благодарности. Необходимо е да се регистрирате на сайта на OSM и да въведете Вашето потребителско име и парола в това приложение.</string>
+    <string name="osm_editing_plugin_description">Дайте своя принос към OpenStreetMap - глобална общност, която поддържа цялостна карта на света и предоставя актуални данни с отворен код на всеки потребител.
+\n
+\nИнструкции за редактиране на картата можете да намерите на адрес https://osmand.net/docs/user/plugins/osm-editing .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">По-бързо изчертаване на векторни карти. Възможно е да не работи добре при някои устройства.</string>
     <string name="play_commands_of_currently_selected_voice">Изберете глас и го изпробвайте като пуснете обявлениятя:</string>
     <string name="debugging_and_development">За разработчици</string>
@@ -461,7 +464,7 @@
     <string name="local_openstreetmap_settings_descr">Показване и управление на локално записаните в устройството забележителности и бележки за OSM</string>
     <string name="live_monitoring_interval_descr">Интервал на проследяване в реално време.</string>
     <string name="live_monitoring_interval">Интервал за проследвяане</string>
-    <string name="live_monitoring_url_descr">Задайте интернет адрес със следните параметри: геогр.ширина={0}, геогр.дължина={1}, време={2}, hdop={3}, надм.височина={4}, скорост={5}, посока={6}.</string>
+    <string name="live_monitoring_url_descr">Задайте интернет адрес със следните параметри: геогр.ширина={0}, геогр.дължина={1}, време={2}, hdop={3}, надм.височина={4}, скорост={5}, направление={6}.</string>
     <string name="live_monitoring_url">Адрес за проследяване в реално време</string>
     <string name="gpx_monitoring_disabled_warn">Запишете следата чрез добавката за GPX или чрез настройките на \'Запис на пътуване\'.</string>
     <string name="show_current_gpx_title">Показване на текущото трасе</string>
@@ -490,7 +493,6 @@
     <string name="routing_settings">Навигация</string>
     <string name="routing_settings_descr">Настройки за навигацията</string>
     <string name="global_settings">Общи настройки</string>
-    <string name="index_settings">Управление на карти</string>
     <string name="general_settings">Общи настройки</string>
     <string name="general_settings_descr">Настройване на екрана и общите настройки на приложението</string>
     <string name="global_app_settings">Общи настройки на приложението</string>
@@ -537,7 +539,7 @@
     <string name="search_position_current_location_found">Моето място (намерено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Предпочитани…</string>
-    <string name="shared_string_undefined">Неопределена</string>
+    <string name="shared_string_undefined">Неопределенo</string>
     <string name="search_position_map_view">Текущ център на картата</string>
     <string name="select_search_position">Начална точка:</string>
     <string name="context_menu_item_search">Търси близо до това място</string>
@@ -734,9 +736,9 @@
     <string name="transport_context_menu">Търсене за общ. транспорт на тази спирка</string>
     <string name="poi_context_menu_modify">Промяна на POI</string>
     <string name="poi_context_menu_delete">Изтриване на POI</string>
-    <string name="rotate_map_compass_opt">По компаса</string>
+    <string name="rotate_map_compass_opt">Според компаса</string>
     <string name="rotate_map_bearing_opt">Посока на движение</string>
-    <string name="rotate_map_north_opt">Без завъртане (север е нагоре)</string>
+    <string name="rotate_map_north_opt">Север е горе (фиксирана)</string>
     <string name="rotate_map_to_descr">Завъртане на картата:</string>
     <string name="rotate_map_to">Ориентация на картата</string>
     <string name="show_route">Детайли на маршрута</string>
@@ -925,7 +927,7 @@
     <string name="map_view_3d">Карта в 3D</string>
     <string name="show_poi_over_map_description">Покажи POI на картата (ползвай последния избран филтър)</string>
     <string name="show_poi_over_map">Покажи POI</string>
-    <string name="map_tile_source_descr">Изберете източник на карта от мрежата или складирана карта (растер).</string>
+    <string name="map_tile_source_descr">Изберете източник на карта от мрежата или временни плочки от карти (растер).</string>
     <string name="map_tile_source">Източник на растерни карти</string>
     <string name="map_source">Източник на карти</string>
     <string name="use_internet">Ползвай интернет</string>
@@ -1126,9 +1128,9 @@
     <string name="home">Табло за управление</string>
     <string name="gpx_start_new_segment">Започни нов сегмент</string>
     <string name="rendering_attr_hideBuildings_name">Сгради</string>
-    <string name="rendering_attr_hideNonVehicleHighways_name">Скрий пътищата, които не са за автомобили</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Непроходими пътища</string>
     <string name="rendering_attr_hideText_name">Текст</string>
-    <string name="rendering_attr_hideWoodScrubs_name">Скрий гори и храсти</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Гори и храсти</string>
     <string name="rendering_attr_buildings15zoom_name">Сгради при мащаб 15</string>
     <string name="rendering_attr_moreDetailed_name">С повече детайли</string>
     <string name="rendering_attr_lessDetailed_name">С по-малко детайли</string>
@@ -1144,11 +1146,11 @@
     <string name="live_monitoring_m_descr">Изпращане на изминатия път по Интернет, при условие, че записът в GPX е включен.</string>
     <string name="live_monitoring_start">Начало на проследяване в реално време</string>
     <string name="live_monitoring_stop">Край на проследяване в реално време</string>
-    <string name="rendering_attr_hideAccess_name">Скриване на ограниченията за достъп</string>
-    <string name="rendering_attr_showAccess_name">Покажи ограниченията за достъп</string>
+    <string name="rendering_attr_hideAccess_name">Ограничения за достъп</string>
+    <string name="rendering_attr_showAccess_name">Ограничения за достъп и пътни такси</string>
     <string name="rendering_attr_showSurfaceGrade_name">Качество на пътя</string>
     <string name="rendering_attr_showSurfaces_name">Вид на пътната настилка</string>
-    <string name="rendering_attr_showCycleRoutes_name">Показване велосипедни маршрути</string>
+    <string name="rendering_attr_showCycleRoutes_name">Велосипедни маршрути</string>
     <string name="local_index_select_gpx_file">Избери за показване</string>
     <string name="gpx_split_interval">Интервал</string>
     <string name="sort_by_distance">Сортиране по разстояние</string>
@@ -1281,8 +1283,8 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_dismiss">Отхвърляне</string>
     <string name="shared_string_do_not_use">Не използвай</string>
-    <string name="shared_string_enable">Разреши</string>
-    <string name="shared_string_disable">Забрани</string>
+    <string name="shared_string_enable">Включване</string>
+    <string name="shared_string_disable">Изключване</string>
     <string name="shared_string_enabled">Включено</string>
     <string name="shared_string_disabled">Изключено</string>
     <string name="shared_string_deselect">Отмяна на избора</string>
@@ -1332,9 +1334,9 @@
     <string name="proxy_pref_descr">Настройка на прокси сървър.</string>
     <string name="settings_privacy">Поверителност</string>
     <string name="shared_string_gpx_points">Точки</string>
-    <string name="record_plugin_description">Записвайте пътуванията или тренировките си и анализирайте данните по отношение на скоростта, натрупаните изкачвания и спускания, профила на надморската височина и т.н. Записаните маршрути могат да бъдат архивират, споделятни с приятели, редактирани или обработвани впоследствие.
+    <string name="record_plugin_description">Записвайте пътуванията или тренировките си и анализирайте данните по отношение на скоростта, натрупаните изкачвания и спускания, профила на надморската височина и т.н. Записаните маршрути могат да бъдат архивират, споделяни с приятели, редактирани или обработвани впоследствие.
 \n
-\nДокументацията е на адрес https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nДокументацията е достъпна на адрес https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>
     <string name="gpx_info_subtracks">Сегменти: %1$s</string>
@@ -1375,7 +1377,7 @@
     <string name="anonymous_user">Анонимен потребител</string>
     <string name="logged_as">Влезли сте като %1$s</string>
     <string name="print_route">Печат на маршрут</string>
-    <string name="enable_proxy_title">Разреши HTTP прокси</string>
+    <string name="enable_proxy_title">Включване на прокси по HTTP</string>
     <string name="enable_proxy_descr">Настройване на прокси за HTTP за всички мрежови заявки.</string>
     <string name="proxy_host_title">Хост за прокси сървър</string>
     <string name="proxy_host_descr">Укажете хост на сървъра за прокси (например 127.0.0.1).</string>
@@ -1464,11 +1466,9 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="plugin_nautical_descr">Добавката обогатява приложението OsmAnd карти и навигация като създава карти за гребане, ветроходство и други водни спортове.
+    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.
 \n
-\nСпециалната добавка за карти на OsmAnd добавя морски навигационни символи и диаграми за вътрешна и крайбрежна навигация. Описанието на всеки навигационен символ показва подробностите, необходими за разпознаването и значението му (категория, фигура, цвят, последователност, препратка и др.).
-\n
-\nЗа да се върнете към някой от обикновените режими на картите на OsmAnd, просто изключете добавката или сменете в менюто \"Настройки на картата\" -&gt; \"Стил на картата\".</string>
+\nДокументацията е достъпна на адрес https://osmand.net/docs/user/plugins/nautical-charts .</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
@@ -1708,8 +1708,8 @@
     <string name="use_points_as_intermediates">Изчисляване на маршрут между точки</string>
     <string name="route_descr_destination">Крайна цел</string>
     <string name="rendering_attr_alpineHiking_name">Трудност по скалата на SAC</string>
-    <string name="rendering_attr_alpineHiking_description">Оцветяване на пътеките по скалата на SAC</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Наслагване на туристически символи</string>
+    <string name="rendering_attr_alpineHiking_description">Оцветяване на пътищата по скалата на SAC.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Туристически маршрути</string>
     <string name="interrupt_music_descr">Прекъсване на музиката при гласово анонсиране</string>
     <string name="interrupt_music">Прекъсване на музика</string>
     <string name="share_route_as_gpx">Споделете маршрута като GPX файл</string>
@@ -1741,9 +1741,7 @@
     <string name="poi_dialog_reopen">Повторно отваряне</string>
     <string name="poi_action_delete">изтриване</string>
     <string name="favourites_context_menu_add">Добавяне към избраните</string>
-    <string name="plugin_ski_descr">Тази добавка за OsmAnd показва ски писти, алпийски маршрути, кабинкови лифтове и ски лифтове. Маршрутите и пистите са оцветени съобразно тяхната трудност. Можете да ползвате специален картен стил \"Зима\", който оцветява пейзажа в съответните цветове.
-\n
-\nТози стил може да бъде деактивиран от това меню или чрез промяна в \"Стил на картата\" от менюто \"Настройки на картата\".</string>
+    <string name="plugin_ski_descr">Предназначението е за навигация в зони за зимни спортове: преглед на пистите за ски и лифтове, както и трасетата за ски бягане, като цветните линии показват степента на трудност. За да използвате, включете добавката, а също така отидете в „Настройки на картата\" и изберете стил на картата „Зима и ски“.</string>
     <string name="copying_osmand_one_file_descr">Копиране на файл (%s) на новата дестинация…</string>
     <string name="copying_osmand_files_descr">Копиране на файлове с данни на OsmAnd към ново местоназначение (%s)…</string>
     <string name="calculate_osmand_route_gpx">Изчисляване OsmAnd офлайн маршрут</string>
@@ -1761,7 +1759,7 @@
     <string name="android_19_location_disabled">След версия 4.4 (KitKat) на Android старата папка за съхранение (%s) е изведена от употреба. Желаете ли всички файлове на OsmAnd да бъдат копирани в новото хранилище\?
 \n Бележка 1: Старите файлове ще останат непроменени (но могат да бъдат премахнати ръчно).
 \n Бележка 2: В новото хранилище няма да може да споделяте файлове между OsmAnd и OsmAnd +.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Оцветяване на пътеките според OSMC следите</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Оцветяване на пътищата спрямо следи от OSMC.</string>
     <string name="shared_string_near">Близо</string>
     <string name="shared_string_hide">Скриване</string>
     <string name="av_video_quality_low">Най-ниско качество</string>
@@ -1776,7 +1774,7 @@
     <string name="looking_up_address">Търсене на адрес</string>
     <string name="local_index_description">Докоснете върху елемент за да видите повече информация, натиснете и задръжте за да деактивирате или да изтриете. Данни в устройството (%1$s свободни):</string>
     <string name="number_of_rows_in_dash">Брой редове %1$s</string>
-    <string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>
+    <string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Изборът може да бъде променен по-късно.</string>
     <string name="rendering_attr_horseRoutes_name">Пътеки за конна езда</string>
     <string name="only_download_over_wifi">Изтегляне само чрез Wi-Fi</string>
     <string name="live_update">Обновяване на живо</string>
@@ -1876,7 +1874,7 @@
     <string name="map_markers">Маркери</string>
     <string name="map_marker">Маркер на картата</string>
     <string name="consider_turning_polygons_off">Препоръчително е да изключите изчертаване на полигони.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Покажи маршрути за планинско колоездене</string>
+    <string name="rendering_attr_showMtbRoutes_name">Маршрути за планинско колоездене</string>
     <string name="show_polygons">Покажи полигони</string>
     <string name="osm_live_email_desc">Необходимо е, за да ви покажем информация за приносите.</string>
     <string name="report">Доклад</string>
@@ -1915,8 +1913,8 @@
     <!-- string name="lat_lon_pattern">Шир.: %1$.5f Дълж.: %2$.5f</string -->
     <string name="follow_us">Следвайте ни</string>
     <string name="access_no_destination">Не е зададено местоназначение</string>
-    <string name="map_widget_magnetic_bearing">Посока по магнитния компас</string>
-    <string name="map_widget_bearing">Относителна посока</string>
+    <string name="map_widget_magnetic_bearing">Направление по магнитния компас</string>
+    <string name="map_widget_bearing">Относително направление</string>
     <string name="access_disable_offroute_recalc">Маршрутът да не се преизчислява, когато се отклоните от него</string>
     <string name="osm_live_banner_desc">Получете неограничено изтегляне на карти, включително седмични, дневни и дори почасови.</string>
     <string name="osmand_plus_banner_desc">Неограничено изтегляне на карти, обновявания и добавка Уикипедия.</string>
@@ -1997,7 +1995,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Странични ефекти: В резултат на филтриране на точността, точки може да липсват напълно. Например, под мостове, дървета, между високи сгради или при определени метеорологични условия.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Препоръка: Трудно е да се предвиди какво ще бъде записано и какво - не. Най-добре е да изключите този филтър.</string>
     <string name="monitoring_min_accuracy_descr_remark">Бележка: Ако GPS-ът е бил изключен точно преди започване на запис, то първите точки на измерване, може да имат проблем с прецизността. Тъй че в нашата програма имаме намерение да въведем изчакване поне секунда, преди да започнем да записваме точки (или записваме най-добрата от 3 последователни точки), нооо това не е имплементирано още.</string>
-    <string name="monitoring_min_distance_descr">Този филтър предотвратява дублирането на точки, които са били записани при твърде малко движение и прави пространственото представяне на трасето по-добро, дори без обработка.</string>
+    <string name="monitoring_min_distance_descr">Включен, филтърът предотвратява дублирането на точки, които са били записани при твърде малко движение и прави пространственото представяне на трасето по-добро, дори без обработка.</string>
     <string name="monitoring_min_distance_descr_side_effect">Странични ефекти: Периодите на почивка не се записват изобщо или са отбелязани само от една точка. Малките движение в реалният живот може да бъдат филтрирани. Вашият файл съдържа по-малко информация за последваща обработка и има по-лоши статистики заради филтрирането на очевидно ненужни точки по време на запис, докато в същото време ще запази потенциалните артефакти причинени от лошо приемане на GPS модула.</string>
     <string name="monitoring_min_distance_descr_recommendation">Препоръка: Настройка от 5 метра ще работи добре, ако нямате по-детайлни изисквания.</string>
     <string name="live_monitoring_time_buffer">Времеви буфер</string>
@@ -2031,7 +2029,7 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизация</string>
     <string name="shared_string_include_data">Включване на допълнителни данни</string>
-    <string name="import_profile_dialog_description">Добавеният профил съдържа допълнителни данни. Натиснете „„„„„„„&lt;Добавяне&gt;, за да добавите само профила или изберете допълнителни данни за импортиране.</string>
+    <string name="import_profile_dialog_description">Внесеният профил съдържа допълнителни данни. Натиснете „Внасяне“, за да внесете само профила или да изберете допълнителните данни.</string>
     <string name="export_profile_dialog_description">Може да изберете допълнителни данни за експортиране заедно с профила.</string>
     <string name="shared_string_app_default_w_val">Приложение по подразбиране (%s)</string>
     <string name="no_recalculation_setting">Спиране на преизчисляването</string>
@@ -2113,7 +2111,7 @@
     <string name="configure_profile_info">Настройки за профил:</string>
     <string name="list_of_installed_plugins">Инсталирани добавки</string>
     <string name="live_monitoring">Проследяване в реално време</string>
-    <string name="accessibility_prefs_descr">Изберете икона, цвят и име</string>
+    <string name="accessibility_prefs_descr">Изберете пиктограма, цвят и име</string>
     <string name="multimedia_notes_prefs_descr">Размер на картината, качество на аудио и видео</string>
     <string name="monitoring_prefs_descr">Маршрутизация, точност на регистриране</string>
     <string name="import_profile">Импортиране на профил</string>
@@ -2149,7 +2147,7 @@
     <string name="importing_from">Импортиране на данни от %1$s</string>
     <string name="profile_backup_failed">Неуспех при създаването на резервно копие на профила.</string>
     <string name="saving_new_profile">Запазване на нов профил</string>
-    <string name="shared_string_drawer">Чекмедже</string>
+    <string name="shared_string_drawer">Странично меню</string>
     <string name="some_articles_may_not_available_in_lang">Някои статии в Уикипедия може да не са достъпни на вашия език.</string>
     <string name="lang_zhyue">Кантонски</string>
     <string name="lang_zhminnan">Южен Мин</string>
@@ -2358,7 +2356,6 @@
     <string name="restore_selected_data">Възстановяване на избраните данни</string>
     <string name="receiving_data_from_server">Получаване на данни от сървъра …</string>
     <string name="restore_complete">Възстановено</string>
-    <string name="grey_color_slope">Сивият цвят се използва, когато наклонът е неопределен.</string>
     <string name="backup_version_history">История на версиите</string>
     <string name="backup_storage_taken">Заето място за съхранение</string>
     <string name="delete_version_history">Изтриване на историята на версиите</string>
@@ -2449,7 +2446,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Оцветяване маршрутите в зависимост от възела (международен, регионален, местен), към който принадлежат.</string>
     <string name="walking_route_osmc_description">Оцветяване маршрутите въз основа на цвета, зададен на устройството (ако е наличен в OpenStreetMap) и тип (международен, регионален, местен).</string>
     <string name="travel_routes">Маршрути за пътуване</string>
-    <string name="setting_supported_by_style">Тази настройка се поддържа от стила на картата \"%1$s</string>
+    <string name="setting_supported_by_style">Тази настройка се поддържа от стила на картата „%1$s“</string>
     <string name="online_direct_line_maps_link">Проверете необходимите карти.</string>
     <string name="offline_maps_required_descr">За изчисляване на маршрута са необходими допълнителни офлайн карти.</string>
     <string name="online_maps_searching_descr">Отдалечено търсене…</string>
@@ -2631,7 +2628,7 @@
     <string name="subscription_expired_title">Абонаментът за OsmAnd Live е изтекъл</string>
     <string name="subscription_paused_title">Абонаментът за OsmAnd Live е временно спрян</string>
     <string name="app_mode_public_transport">Обществен транспорт</string>
-    <string name="live_monitoring_adress_descr">Задайте интернет адрес със следните параметри: геогр.ширина={0}, геогр.дължина={1}, време={2}, hdop={3}, надм.височина={4}, скорост={5}, посока={6}.</string>
+    <string name="live_monitoring_adress_descr">Задайте интернет адрес със следните параметри: геогр.ширина={0}, геогр.дължина={1}, време={2}, hdop={3}, надм.височина={4}, скорост={5}, направление={6}.</string>
     <string name="shared_string_options">Настройки</string>
     <string name="shared_string_overview">Преглед</string>
     <string name="live_monitoring_max_interval_to_send">Временен буфер за проследяване в реално време</string>
@@ -2742,7 +2739,7 @@
     <string name="shared_string_speed">Скорост</string>
     <string name="track_attach_to_the_roads_descr">Трасето ще бъде прикрепено към пътя с помощта на карти за работа извън мрежа, а геометрията му ще бъде променена.</string>
     <string name="private_access_routing_req">Крайната точка се намира на частна територия. Разрешавате ли използване на частни пътища за пътуването\?</string>
-    <string name="map_widget_true_bearing">Истинска посока</string>
+    <string name="map_widget_true_bearing">Истинско направление</string>
     <string name="routing_attr_avoid_fords_description">Избягване на бродове</string>
     <string name="routing_attr_hazmat_category_name">Категория опасни товари</string>
     <string name="app_mode_wheelchair">Инвалиден стол</string>
@@ -2752,8 +2749,8 @@
     <string name="app_mode_enduro_motorcycle">Ендуро</string>
     <string name="app_mode_motor_scooter">Скутер</string>
     <string name="app_mode_ufo">НЛО</string>
-    <string name="bearing_desc">Приспособлението за посока показва абсолютната или относителната посока към дадена цел в ъглови единици (градуси 180, градуси 360, милирадиани).</string>
-    <string name="shared_string_bearing">Посока</string>
+    <string name="bearing_desc">Показва абсолютното или относителното направление към дадена цел в ъглови единици (градуси 180, градуси 360, милирадиани).</string>
+    <string name="shared_string_bearing">Направление</string>
     <string name="app_mode_go_cart">Картинг</string>
     <string name="app_mode_inline_skates">Ролкови кънки</string>
     <string name="app_mode_taxi">Такси</string>
@@ -2764,12 +2761,12 @@
     <string name="import_as_one_track">Внасяне като едно трасе</string>
     <string name="magnetic_bearing_widget_desc">Ъгълът между магнитния север и крайната точка, спрямо вашето местоположение.</string>
     <string name="app_mode_mountain_bicycle">Планински велосипед</string>
-    <string name="bearing_secondary_desc">Можете да промените формата на показваните данни от меню %1$s – %2$s – %3$s.</string>
+    <string name="bearing_secondary_desc">Можете да промените формата на използваните данни от: %1$s – %2$s – %3$s.</string>
     <string name="routing_attr_avoid_4wd_only_description">Избягване на пътища, подходящи за превозни средства с пълно задвижване</string>
     <string name="routing_attr_goods_restrictions_description">Отчита правата за достъп на леки транспортни средства, превозващи стоки</string>
-    <string name="navigation_points_desc">Навигационните приспособления се включват по време на навигация, за да показват информация като разтояние, време на пристигане или оставащо време, предстоящите завои, посоката на движение, име на текущата улица, информация за лентата на движение, максималната скорост, приближаващи опасности, POI, пътни точки.</string>
+    <string name="navigation_points_desc">Приспособленията за маршрутизиране се включват по време на навигация, за да показват информация като разстояние, време на пристигане или оставащо време, предстоящи завои, направление на движение, име на текущата/следващата улица, информация за платното на движение, максимална скорост, приближаващи опасности, POI, отправни точки.</string>
     <string name="navigation_points">Точки на навигация</string>
-    <string name="route_maneuvers_desc">Навигационните приспособления се включват по време на навигация, за да показват информация като разтояние, време на пристигане или оставащо време, предстоящите завои, посоката на движение, име на текущата улица, информация за лентата на движение, максималната скорост, приближаващи опасности, POI, пътни точки.</string>
+    <string name="route_maneuvers_desc">Приспособленията за маршрутизиране се включват по време на навигация, за да показват информация като разстояние, време на пристигане или оставащо време, предстоящи завои, направление на движение, име на текущата улица, информация за платното на движение, максимална скорост, приближаващи опасности, POI, отправни точки.</string>
     <string name="shared_string_widget">Приспособление</string>
     <string name="routing_attr_carriage_restrictions_description">Отчита правата за достъп на транспортни средства с животинска тяга</string>
     <string name="routing_attr_avoid_4wd_only_name">Без пътища за 4WD</string>
@@ -2818,13 +2815,13 @@
     <string name="rendering_value_defaultMedium_name">По подразбиране (средно)</string>
     <string name="map_widget_intermediate_time">Време до междинна точка</string>
     <string name="access_intermediate_arrival_time">Време на пристигане в междинна точка</string>
-    <string name="proxy_port_max_warning">Максималната стойност на порта е %1$s</string>
+    <string name="proxy_port_max_warning">Максимална стойност на порта - %1$s</string>
     <string name="shutter_sound">Звук при снимане</string>
     <string name="camera_app">Приложение за камера</string>
     <string name="speak_route_deviation">Обявяване при отклонение от маршрута</string>
-    <string name="clear_online_cache_description">Това ще изчисти кеша за онлайн слоя за времето.</string>
+    <string name="clear_online_cache_description">По този начин временните данни за времето от мрежата ще бъдат премахнати.</string>
     <string name="free_maps_updates">Безплатни актуализации (спешни)</string>
-    <string name="weather_download_error">Не могат да се изтеглят плочки %1$s.</string>
+    <string name="weather_download_error">%1$s плочки не могат да бъдат изтеглени.</string>
     <string name="select_layer">Изберете слой</string>
     <string name="save_as_new_track">Запазване като ново трасе</string>
     <string name="rendering_attr_smoothness_impassable_name">Непроходима</string>
@@ -2940,4 +2937,157 @@
     <string name="exit_without_saving">Излизане без запазване\?</string>
     <string name="configure_screen_quick_action">Бързо действие</string>
     <string name="quick_action_map_source_title">Източници на карти</string>
+    <string name="waypoint_appearance">Външен вид на отправна точка</string>
+    <string name="approximate_bearing">Приблизително направление</string>
+    <string name="change_appearance">Промяна на външен вид</string>
+    <string name="offline_weather_forecast_desc">Можете да изтеглите 7 дневна прогноза.</string>
+    <string name="share_as_file">Споделяне като файл</string>
+    <string name="x_axis">Ос X</string>
+    <string name="si_nm_mt">Морски мили/метри</string>
+    <string name="map_settings_weather_precip">Валежи</string>
+    <string name="weather_precip_milimeters">Милиметри</string>
+    <string name="weather_wind_mph">мили/ч</string>
+    <string name="weather_wind_kmh">км/ч</string>
+    <string name="weather_wind_knots">Възли</string>
+    <string name="weather_wind_miles_per_hour">Мили в час</string>
+    <string name="weather_pressure_hpa">хПа</string>
+    <string name="sound_beep_minimal">Звуков сигнал: минимален</string>
+    <string name="sound_beep_complex_loud">Звуков сигнал: сложен силен</string>
+    <string name="explore_weather_forecast">Изучавайте на прогнозата за времето.</string>
+    <string name="choose_icon_color_name">Пиктограма, цвят и име</string>
+    <string name="profile_appearance">Външен вид на профила</string>
+    <string name="skip_download">Без изтегляне</string>
+    <string name="ant_plus_pair_new_sensor">Сдвояване с нов датчик</string>
+    <string name="weather_forecast_is_outdated">Прогнозата е стара.</string>
+    <string name="rendering_attr_weatherCloudContours_name">Изолинии на облачността (изонефи)</string>
+    <string name="open_weather_action">Отваряне на прогнозата</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии на валежа (изогети)</string>
+    <string name="map_settings_weather_temp">Температура</string>
+    <string name="weather_offline_forecast">Прогноза за времето извън мрежа</string>
+    <string name="map_settings_weather_air_pressure">Атмосферно налягане</string>
+    <string name="weather_pressure_hectopascals">Хектопаскали</string>
+    <string name="rotate_map_manual_opt">Ръчно завъртане (фиксирана)</string>
+    <string name="sound_beep_complex">Звуков сигнал: сложен</string>
+    <string name="approximate_bearing_descr">Извежда направлението от следвания маршрут.</string>
+    <string name="weather_pressure_inches_of_mercury">Инчове живачен стълб</string>
+    <string name="weather_plugin_description">Добавката осигурява:
+\n- 24-часова и 7-дневна прогноза за времето с 5 слоя
+\n- приспособления, базирани на местоположението
+\n- изолинии за температура/налягане
+\n
+\nДанните за времето се предоставят от Глобалната система за прогнози (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="empty_screen_weather_clouds_layer">Включете, за да видите слой с облачното покритие на картата.</string>
+    <string name="default_appearance">Външен вид по подразбиране</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Променяне на външния вид на %1$s трасета\?</string>
+    <string name="determine_location">Позволете ни да определим местоположението ви</string>
+    <string name="si_nm_ft">Морски мили/футове</string>
+    <string name="share_link">Препратка за споделяне</string>
+    <string name="value_downloaded_of_mb">Изтегляне на %1$.1f/%2$.1f</string>
+    <string name="weight_limit_error">Минималната стойност е „%1$s“ тона. Използвайте профила „%2$s“, ако теглото на превозното средство е по-малко от минималната стойност.</string>
+    <string name="quick_action_add_parking">Добавяне на място за паркиране</string>
+    <string name="routing_attr_goods_restrictions_name">Доставка на стоки</string>
+    <string name="empty_screen_weather_contours">Включете, за да видите контурите на времето на картата.</string>
+    <string name="empty_screen_weather_pressure_layer">Включете, за да видите слой с атмосферното налягане на картата.</string>
+    <string name="empty_screen_weather_wind_layer">Включете, за да видите слой с вятъра на картата.</string>
+    <string name="empty_screen_weather_precipitation_layer">Включете, за да видите слой с валежите на картата.</string>
+    <string name="weather_temperature_fahrenheit">Градуси по Фаренхайт</string>
+    <string name="true_bearing_wdiget_desc">Оказва ъгълът между истинския север и крайната точка, спрямо вашето местоположение.</string>
+    <string name="quick_action_map_styles">Стилове на картата</string>
+    <string name="ui_customization_short_descr">Елементи на странич. меню, контекстуално меню</string>
+    <string name="clear_online_cache">Изчистване на временни данни</string>
+    <string name="shared_string_original">Оригинал</string>
+    <string name="map_look_descr">Външен вид на картата</string>
+    <string name="sound_beep_simple_loud">Звуков сигнал: обикновен силен</string>
+    <string name="delete_cloud_version">Изтриване на облачната версия</string>
+    <string name="local_version_do_not_exist">Липсва местна версия.</string>
+    <string name="shared_string_in_progress">В процес</string>
+    <string name="quick_action_map_style_action">Добавяне на стил на картата</string>
+    <string name="route_line_use_map_style_color">Използване на подразбирания цвят на стила на картата (%1$s).</string>
+    <string name="simulation_position_description">Изберете файл с трасе, който ще се използва като източник за преместване на местоположението.</string>
+    <string name="set_up_backup">Настройка на резервно копие</string>
+    <string name="weather_pressure_millimeters_of_mercury">Милиметри живачен стълб</string>
+    <string name="weather_online_cache">Временни данни</string>
+    <string name="external_device_characteristic_distance">Разстояние</string>
+    <string name="external_device_characteristic_temperature">Температура</string>
+    <string name="external_device_characteristic_battery_level">Батерия</string>
+    <string name="external_device_characteristic_cadence">Каданс</string>
+    <string name="external_device_characteristic_heart_rate">Сърдечен ритъм</string>
+    <string name="external_device_characteristic_systolic">Систолично</string>
+    <string name="external_device_characteristic_diastolic">Диастолично</string>
+    <string name="external_device_characteristic_arterial_pressure">Артериално налягане</string>
+    <string name="external_device_characteristic_pulse_rate">Честота на пулса</string>
+    <string name="external_device_details_information">Информация</string>
+    <string name="external_device_details_battery">Батерия</string>
+    <string name="external_device_details_speed">Скорост</string>
+    <string name="external_device_details_distance">Разстояние</string>
+    <string name="external_device_details_connect">Свързване</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="ant_plus_searching">Търсене</string>
+    <string name="ant_plus_open_settings">Настройки</string>
+    <string name="weather_forecast">Прогноза за времето</string>
+    <string name="offline_weather_forecast">Прогноза за времето извън мрежа</string>
+    <string name="movement_speed">Скорост на движение</string>
+    <string name="map_settings_weather_wind">Вятър</string>
+    <string name="map_settings_weather_cloud">Облачност</string>
+    <string name="weather_precip_in">инч</string>
+    <string name="empty_screen_weather_temperature_layer">Включете, за да видите слой с температурата на картата.</string>
+    <string name="empty_screen_view_selected_weather_data">Включете, за да видите избраните метеорологични данни на картата.</string>
+    <string name="measurement_units">Мерни единици</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="appearance_on_the_map">Външен вид в картата</string>
+    <string name="weather_precip_mm">мм</string>
+    <string name="weather_widget_group_desc">Набор от приспособления с различна информация за прогнозата.</string>
+    <string name="sound_beep_simple">Звуков сигнал: обикновен</string>
+    <string name="quick_action_map_style">Промяна на стила на картата</string>
+    <string name="quick_action_map_style_switch">Стилът на картата е променен на „%s“.</string>
+    <string name="route_line_use_map_style_width">Използване на подразбираната ширина на стила на картата (%1$s).</string>
+    <string name="general_settings_profile_descr">Тема на приложението, единици, регион</string>
+    <string name="weather_precip_inches">Инчове</string>
+    <string name="weather_wind_kn">вз</string>
+    <string name="external_device_menu_forget">Забравяне</string>
+    <string name="external_device_characteristic_speed">Скорост</string>
+    <string name="relative_bearing_widget_desc">Оказва ъгълът между посоката на движение и крайната точка.</string>
+    <string name="external_device_details_pair">Сдвояване</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="y_axis">Ос Y</string>
+    <string name="cloud_version_confirm_delete">Изтриване на „%1$s“ от облачната услуга на OsmAnd\?</string>
+    <string name="shared_string_delete_file">Изтриване на файл</string>
+    <string name="open_weather_action_description">Отваря екран с подробности за прогнозата.</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии на скоростта на вятъра (изотахи)</string>
+    <string name="shared_string_weather">Време</string>
+    <string name="weather_wind_ms">м/с</string>
+    <string name="weather_wind_kilimeters_per_hour">Километри в час</string>
+    <string name="weather_wind_meters_per_second">Метри в секунда</string>
+    <string name="weather_widgets_secondary_desc">Мерните единици могат да бъдат променени в настройките на добавката „Време“.</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_prefs_descr">24-часова и 7-дневна прогноза, обновявана през 3 часа</string>
+    <string name="weather_temperature_celsius">Градуси по Целзий</string>
+    <string name="action_not_supported_with_map_style">Това действие не се поддържа от избрания стил на картата.</string>
+    <string name="rendering_attr_lightDetail_name">Подробности за светлината</string>
+    <string name="rendering_attr_lightDetail_description">По подразбиране: име на морски знак (светлина знак.група.период), изберете допълнителна информация за сектори от 1 до 3 или сектор 1, 2, 3, 4, 5 на светлинния знак</string>
+    <string name="poi_categories">Категории на POE</string>
+    <string name="is_imported">%1$s внесено.</string>
+    <string name="rendering_attr_surface_grass_name">Трева</string>
+    <string name="rendering_attr_highway_class_road_name">Път</string>
+    <string name="rendering_attr_highway_class_street_name">Улица</string>
+    <string name="rendering_attr_highway_class_footway_name">Пешеходна</string>
+    <string name="rendering_attr_highway_class_path_name">Пътека</string>
+    <string name="no_poi_for_category">POI не е намерено</string>
+    <string name="file_already_exists_description">„%1$s“. Файл с това име съществува. Замяната ще презапише всички промени, направени с текущата версия.</string>
+    <string name="rendering_attr_surface_snow_name">Сняг</string>
+    <string name="rendering_attr_surface_metal_name">Метал</string>
+    <string name="rendering_attr_undefined_name">Неопределено</string>
+    <string name="rendering_attr_highway_class_steps_name">Стъпала</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Велоалея</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">-</string>
+    <string name="rendering_attr_surface_concrete_name">Бетон</string>
+    <string name="rendering_attr_surface_wood_name">Дърво</string>
+    <string name="rendering_attr_surface_dirt_name">Кал</string>
+    <string name="rendering_attr_surface_ground_name">Пръст</string>
+    <string name="rendering_attr_surface_mud_name">Рядка кал</string>
+    <string name="rendering_attr_surface_ice_name">Лед</string>
+    <string name="rendering_attr_surface_salt_name">Сол</string>
+    <string name="rendering_attr_surface_asphalt_name">Асфалт</string>
+    <string name="rendering_attr_highway_class_motorway_name">Автомагистрала</string>
+    <string name="rendering_attr_highway_class_state_road_name">Главен път</string>
 </resources>

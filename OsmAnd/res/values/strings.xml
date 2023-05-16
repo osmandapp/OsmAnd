@@ -16,6 +16,17 @@
     <string name="map_3d_mode_hint">Long tap on button allows to change button position.</string>
     <string name="visible_in_3d_mode">Visible in 3D mode</string>
     <string name="map_3d_mode_description">Touch map with two fingers and moves them up and down to adjust map tilt.</string>
+    <string name="no_poi_for_category">POI not found</string>
+    <string name="rendering_attr_lightDetail_name">Light detail</string>
+    <string name="rendering_attr_lightDetail_description">Default: seamark name (light character.group.period), select additional information on sectors 1 to 3 or sector 1,2,3,4,5 light character</string>
+    <string name="rendering_value_sectors_name">Sectors</string>
+    <string name="rendering_value_sector1_name">Sector 1</string>
+    <string name="rendering_value_sector2_name">Sector 2</string>
+    <string name="rendering_value_sector3_name">Sector 3</string>
+    <string name="rendering_value_sector4_name">Sector 4</string>
+    <string name="rendering_value_sector5_name">Sector 5</string>
+    <string name="rendering_value_small_name">Small</string>
+    <string name="rendering_value_name_only_name">Name only</string>
     <string name="device_disconnected">%1$s disconnected</string>
     <string name="device_connected">%1$s connected</string>
     <string name="running_scds_device_name">Running device</string>
@@ -32,6 +43,7 @@
     <string name="number_of_tracks">%1$s tracks</string>
     <string name="search_track_by_name">Search track by name</string>
     <string name="no_search_results">No results</string>
+    <string name="poi_categories">POI Categories</string>
     <string name="is_imported">%1$s is imported.</string>
     <string name="file_already_exists_description">\"%1$s\". A file with that name already exists. Replace will overwrite all changes made with the current version.</string>
     <string name="file_already_exists">File already exists</string>

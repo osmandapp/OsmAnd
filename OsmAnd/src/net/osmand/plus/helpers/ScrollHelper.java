@@ -141,10 +141,10 @@ public class ScrollHelper {
 
 	public boolean isOverrideBySelectedExternalDevice(int keyCode) {
 		OsmandSettings settings = app.getSettings();
-		if (settings.isSelectedInputDevice(InputDevice.PARROT)) {
+		InputDevice selected = settings.getSelectedInputDevice();
+		if (selected == InputDevice.PARROT) {
 			return keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
-
-		} else if (settings.isSelectedInputDevice(InputDevice.WUNDER_LINQ)) {
+		} else if (selected == InputDevice.WUNDER_LINQ) {
 			return keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN;
 		}
 		return false;

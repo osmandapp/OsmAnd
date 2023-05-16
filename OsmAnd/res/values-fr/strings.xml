@@ -52,7 +52,6 @@
     <string name="routing_settings">Navigation</string>
     <string name="routing_settings_descr">Paramétrer les options de guidage.</string>
     <string name="global_settings">Paramètres globaux</string>
-    <string name="index_settings">Gérer les données hors-ligne</string>
     <string name="index_settings_descr">Télécharger ou mettre à jour les données pour l\'utilisation hors-ligne.</string>
     <string name="general_settings">Général</string>
     <string name="general_settings_descr">Configurer l\'affichage et les paramètres généraux de l\'application.</string>
@@ -2298,7 +2297,7 @@
     <string name="hide_from_zoom_level">Masquer à partir du niveau de zoom</string>
     <string name="hillshade_menu_download_descr">Téléchargez la sur-couche \'Ombrage du relief\' pour mieux visualiser le relief.</string>
     <string name="quick_action_showhide_osmbugs_descr">Bouton pour afficher ou masquer les notes OSM sur la carte.</string>
-    <string name="sorted_by_distance">Trier par distance</string>
+    <string name="sorted_by_distance">Triés par distance</string>
     <string name="search_favorites">Rechercher dans les favoris</string>
     <string name="restart_search">Relancer la recherche</string>
     <string name="nothing_found">Aucun résultat</string>
@@ -2897,7 +2896,7 @@
     <string name="routing_attr_avoid_ferry_description">Éviter le ferry</string>
     <string name="send_log">Envoyer le journal</string>
     <string name="routing_attr_avoid_bus_description">Éviter le bus et le trolleybus</string>
-    <string name="routing_attr_avoid_sett_name">Éviter les pavés</string>
+    <string name="routing_attr_avoid_sett_name">Sans pavés</string>
     <string name="routing_attr_avoid_sett_description">Éviter les pavés</string>
     <string name="files_moved">%1$d fichiers déplacés (%2$s).</string>
     <string name="files_copied">%1$d fichiers copiés (%2$s).</string>
@@ -4013,8 +4012,6 @@
     <string name="track_has_no_altitude">La trace ne contient aucune donnée d\'altitude.</string>
     <string name="track_has_no_speed">La trace ne contient aucune donnée de vitesse.</string>
     <string name="routing_attr_short_way_description">Itinéraire court optimisé (plus économe en énergie)</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Masquer les limites des réserves naturelles, des zones protégées et des parcs nationaux.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturelles</string>
     <string name="select_segments_description">%1$s contient plusieurs segments, vous devez sélectionner un tronçon pour le guidage.</string>
     <string name="routing_attr_driving_style_description">Sélectionner un mode de conduite pour calculer l\'itinéraire le plus court, le plus rapide ou le plus sûr</string>
     <string name="quick_action_coordinates_widget_descr">Bouton pour afficher ou masquer le widget Coordonnées sur la carte.</string>
@@ -4232,7 +4229,6 @@
     <string name="direct_line_maps_required_descr">Le calcul d\'itinéraire est plus long que d\'habitude.
 \n
 \nPeut-être que certaines cartes sont absentes.</string>
-    <string name="pro_widgets">Widgets Pro</string>
     <string name="routes_color_by_type">Colorer les itinéraires selon…</string>
     <string name="shared_string_relation">Relation</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Colorer selon l\'affiliation au réseau.</string>
@@ -4455,7 +4451,6 @@
     <string name="save_changes_into_file">Enregistrer les modifications dans le fichier</string>
     <string name="save_as_copy">Enregistrer comme copie</string>
     <string name="shared_string_gps_filter">Filtre GPS</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="distance_between_points">Distance entre les points</string>
     <string name="shared_string_precision">Précision</string>
     <string name="gps_filter_speed_altitude_desc">Seuls les points correspondant à l\'intervalle défini apparaîtront sur la carte et le graphique, les autres points de la trace seront masqués.</string>
@@ -4767,8 +4762,8 @@
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Fixe (rotation manuelle)</string>
     <string name="shared_string_large">Grand</string>
-    <string name="distance_by_tap_use_description">Ajoutez un point en tapant sur la carte pour afficher la distance entre ce point et votre position actuelle.
-\nTapez avec 2 doigts sur la carte pour afficher la distance entre les points.</string>
+    <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement d\'appui et votre position actuelle.
+\nTapez avec 2 doigts sur la carte pour afficher la distance séparant ces 2 points.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
     <string name="shared_string_switch_mode">Basculer de mode</string>
@@ -5173,10 +5168,36 @@
     <string name="external_device_characteristic_distance">Distance</string>
     <string name="external_device_characteristic_total_distance">Distance totale</string>
     <string name="external_device_characteristic_battery_level">Batterie</string>
-    <string name="external_device_characteristic_gear_ratio">Rapport de démultiplication</string>
+    <string name="external_device_characteristic_gear_ratio">Démultiplication</string>
     <string name="external_device_characteristic_cadence">Cadence</string>
     <string name="external_device_characteristic_heart_rate">Fréquence cardiaque</string>
     <string name="external_device_characteristic_systolic">Systolique</string>
     <string name="no_search_results">Aucun résultat</string>
     <string name="search_track_by_name">Rechercher les traces par nom</string>
+    <string name="rendering_value_sector1_name">Secteur 1</string>
+    <string name="rendering_value_sector2_name">Secteur 2</string>
+    <string name="rendering_value_sectors_name">Secteurs</string>
+    <string name="rendering_value_sector4_name">Secteur 4</string>
+    <string name="rendering_value_small_name">Petit</string>
+    <string name="rendering_value_sector3_name">Secteur 3</string>
+    <string name="shared_string_ear_lobe">Lobe d\'oreille</string>
+    <string name="shared_string_foot">Pied</string>
+    <string name="number_of_tracks">%1$s traces</string>
+    <string name="rendering_attr_lightDetail_name">Détails du signal lumineux</string>
+    <string name="device_disconnected">%1$s déconnecté</string>
+    <string name="device_connected">%1$s connecté</string>
+    <string name="running_scds_device_name">Appareil en fonctionnement</string>
+    <string name="bicycle_scd_device_name">Appareil pour vélo</string>
+    <string name="external_device_blood_pressure">Pression artérielle</string>
+    <string name="no_bt_permission">L\'autorisation Bluetooth n\'a pas été accordée</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="rendering_value_sector5_name">Secteur 5</string>
+    <string name="shared_string_chest">Poitrine</string>
+    <string name="shared_string_wrist">Poignet</string>
+    <string name="shared_string_finger">Doigt</string>
+    <string name="shared_string_hand">Main</string>
+    <string name="rendering_value_name_only_name">Nom uniquement</string>
+    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (light character.group.period), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
+    <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
+    <string name="poi_categories">Catégories de PI</string>
 </resources>

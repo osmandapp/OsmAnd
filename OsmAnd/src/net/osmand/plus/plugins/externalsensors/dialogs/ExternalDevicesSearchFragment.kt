@@ -15,14 +15,13 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ScanDevicesListener
 import net.osmand.plus.plugins.externalsensors.adapters.FoundDevicesAdapter
+import net.osmand.plus.plugins.externalsensors.adapters.FoundDevicesAdapter.DeviceClickListener
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 
-class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
-    ScanDevicesListener,
-    FoundDevicesAdapter.DeviceClickListener {
+class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener, DeviceClickListener {
     private var currentState = SearchStates.NOTHING_FOUND
     private var stateNoBluetoothView: View? = null
     private var stateSearchingView: View? = null
@@ -118,14 +117,13 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
     }
 
     private fun bindFoundDevices() {
-        val devices = plugin.devices
+        val devices = plugin.unpairedDevices
         val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
         formatString?.let {
             foundDevicesCountView?.text =
                 String.format(formatString, devices.size)
         }
         adapter.setItems(devices)
-
     }
 
     override fun onCreateView(
@@ -190,8 +188,8 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(),
         }
     }
 
-    override fun dismiss() {
-        super.dismiss()
+    override fun onDestroy() {
+        super.onDestroy()
         plugin.dropUnpairedDevices()
     }
 

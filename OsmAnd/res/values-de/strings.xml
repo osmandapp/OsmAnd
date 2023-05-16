@@ -307,7 +307,6 @@
     <string name="routing_settings_2">Navigationseinstellungen</string>
     <string name="routing_settings_descr">Optionen für die Navigation festlegen.</string>
     <string name="global_settings">Globale Einstellungen</string>
-    <string name="index_settings">Kartenverwaltung</string>
     <string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien.</string>
     <string name="general_settings">Allgemein</string>
     <string name="general_settings_2">Allgemeine Einstellungen</string>
@@ -2894,8 +2893,8 @@
     <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
     <string name="save_poi_value_exceed_length_title">Länge des Wertes „%s“</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
-    <string name="routing_attr_avoid_sett_name">Kein Kopfsteinpflaster oder Pflastersteine</string>
-    <string name="routing_attr_avoid_sett_description">Vermeidet Kopfsteinpflaster und Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_name">Keine Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_description">Vermeidet Pflastersteine</string>
     <string name="shared_string_degrees">Grad</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
@@ -4026,8 +4025,6 @@
     <string name="update_frequency">Aktualisierungsintervall</string>
     <string name="live_update_delete_updates_msg">Alle %s Live-Updates löschen\?</string>
     <string name="select_category_descr">Kategorie auswählen oder eine neue hinzufügen</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
     <string name="trip_recording_save_and_continue">Speichern und fortfahren</string>
     <string name="lost_data_warning">Alle nicht gespeicherten Daten gehen verloren.</string>
     <string name="show_start_dialog">Startdialog anzeigen</string>
@@ -4473,7 +4470,6 @@
     <string name="gps_filter_actions_description">OsmAnd wendet die Änderungen auf den Track an, ohne die Datei zu aktualisieren. Sie können die Änderungen manuell speichern.</string>
     <string name="shared_string_gps_filter">GPS-Filter</string>
     <string name="storage_migration_wrong_folder_warning">Keine OsmAnd-Daten im ausgewählten Ordner gefunden. Bitte versuchen Sie es erneut.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="use_routing_fallback_description">Offline-Routenführung verwenden, wenn Online-Routenführung nicht erreichbar ist.</string>
     <string name="use_routing_fallback">Alternativ Offline-Routenführung nutzen</string>
     <string name="created_on">Erstellt am</string>
@@ -4659,9 +4655,9 @@
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_electric_name">Elektrisch</string>
     <string name="routing_attr_motor_type_hybrid_name">Hybrid</string>
-    <string name="co2_mission">CO2-Emission</string>
+    <string name="co2_mission">CO₂-Emission</string>
     <string name="routing_attr_motor_type_diesel_name">Diesel</string>
-    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO2-Ausstoß zu berechnen.</string>
+    <string name="routing_attr_motor_type_description">Wählen Sie die Kraftstoffart Ihres Motors, um den CO₂-Ausstoß zu berechnen.</string>
     <string name="routing_attr_motor_type_name">Kraftstoffverbrauch des Motors</string>
     <string name="routing_attr_goods_restrictions_description">Berücksichtigung von Zufahrtsgenehmigungen für leichte Lastkraftwagen (Güter)</string>
     <string name="compass_on_circles">Kompass auf Kreisen</string>
@@ -4735,7 +4731,7 @@
 \nWenn Sie OsmAnd Cloud verwenden, kann dies zu Missverständnissen nach der Neuinstallation führen.</string>
     <string name="auto_backup_title">Automatische Sicherung</string>
     <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird der Liste hinzugefügt.</string>
-    <string name="shared_string_duplicate">Duplikat</string>
+    <string name="shared_string_duplicate">Duplizieren</string>
     <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget können Sie ein Foto aufnehmen.</string>
     <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget können Sie ein Video aufnehmen.</string>
     <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie eine Audionotiz aufnehmen.</string>
@@ -4972,8 +4968,6 @@
     <string name="quick_action_cloud_layer">Ein Schalter zum Ein- oder Ausblenden der Bewölkungsebene auf der Karte.</string>
     <string name="rendering_attr_showMtbScale_name">MTB-Skala anzeigen</string>
     <string name="rendering_attr_showMtbScale_description">Wege nach MTB-Skala anzeigen.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">MTB-Skala aufwärts anzeigen</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Wege nach MTB-Skala aufwärts anzeigen.</string>
     <string name="mtb_scale">MTB-Skala</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Abschnittsklassifizierung</string>
@@ -5044,12 +5038,8 @@
     <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
     <string name="shared_string_kilograms">Kilogramm</string>
     <string name="shared_string_yards">Yards</string>
-    <string name="default_tracks_appearance_description">Diese Erscheinungsbild-Einstellungen werden auf alle im vorherigen Bildschirm ausgewählten Titel angewendet.
-\n
-\nSie werden auch als \"%1$s\" gespeichert, um von %2$s für alle anderen Spuren ohne implizites oder spezifisch eingestelltes Aussehen angewendet zu werden.</string>
     <string name="recently_visible">Kürzlich sichtbar %1$s</string>
     <string name="empty_tracks_description">Sie können mit OsmAnd Trackdateien importieren, erstellen oder aufzeichnen.</string>
-    <string name="default_tracks_appearance">Standarddarstellung des Tracks</string>
     <string name="no_visible_tracks_description">Wählen Sie Tracks, um sie auf der Karte anzuzeigen.</string>
     <string name="empty_tracks">Sie haben keine Trackdateien.</string>
     <string name="no_visible_tracks">Keine Tracks auf der Karte</string>
@@ -5197,4 +5187,27 @@
     <string name="is_imported">%1$s ist importiert.</string>
     <string name="no_search_results">Keine Ergebnisse</string>
     <string name="search_track_by_name">Track nach Namen suchen</string>
+    <string name="device_connected">%1$s wurde verbunden</string>
+    <string name="running_scds_device_name">Laufendes Gerät</string>
+    <string name="bicycle_scd_device_name">Fahrradgerät</string>
+    <string name="external_device_blood_pressure">Blutdruck</string>
+    <string name="no_bt_permission">Bluetooth-Erlaubnis wird nicht erteilt</string>
+    <string name="beats_per_minute_short">spm</string>
+    <string name="shared_string_chest">Brust</string>
+    <string name="shared_string_wrist">Handgelenk</string>
+    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_hand">Hand</string>
+    <string name="shared_string_ear_lobe">Ohrläppchen</string>
+    <string name="number_of_tracks">%1$s Tracks</string>
+    <string name="shared_string_foot">Fuß</string>
+    <string name="device_disconnected">%1$s wurde getrennt</string>
+    <string name="rendering_attr_lightDetail_name">Helles Detail</string>
+    <string name="rendering_value_sectors_name">Sektoren</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_small_name">Klein</string>
+    <string name="rendering_value_name_only_name">Nur Name</string>
 </resources>

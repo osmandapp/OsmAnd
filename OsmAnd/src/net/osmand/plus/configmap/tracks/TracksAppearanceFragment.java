@@ -31,6 +31,7 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
@@ -79,8 +80,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private PromoBannerCard promoCard;
 	private View applyButton;
 
-	private boolean nightMode;
-
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -93,13 +92,17 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		gpxDbHelper = app.getGpxDbHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectedTracksHelper = getSelectedTracksHelper();
-		nightMode = isNightMode(true);
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
 		} else {
 			trackDrawInfo = new TrackDrawInfo(app, TrackDrawInfo.DEFAULT);
 		}
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@NonNull
@@ -147,7 +150,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		String appearance = getString(R.string.change_appearance);
-		String count = "(" + String.valueOf(selectedTracksHelper.getSelectedTracks().size()) + ")";
+		ItemsSelectionHelper<TrackItem> selectionHelper =  selectedTracksHelper.getItemsSelectionHelper();
+		String count = "(" + selectionHelper.getSelectedItemsSize() + ")";
 
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, appearance, count));
@@ -382,7 +386,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 				updateTrackAppearance(item);
 			}
 		};
-		for (TrackItem trackItem : selectedTracksHelper.getSelectedTracks()) {
+		ItemsSelectionHelper<TrackItem> selectionHelper =  selectedTracksHelper.getItemsSelectionHelper();
+		for (TrackItem trackItem : selectionHelper.getSelectedItems()) {
 			File file = trackItem.getFile();
 			if (file != null) {
 				GpxDataItem item = gpxDbHelper.getItem(file, callback);

@@ -192,7 +192,6 @@
     <string name="routing_settings">Navigering</string>
     <string name="routing_settings_descr">Spesifiser navigeringsalternativer.</string>
     <string name="global_settings">Globale innstillinger</string>
-    <string name="index_settings">Karthåndtering</string>
     <string name="general_settings">Generelt</string>
     <string name="general_settings_descr">Sett opp visning og generelle programinnstillinger.</string>
     <string name="global_app_settings">Globale programinnstillinger</string>
@@ -3909,8 +3908,6 @@
     <string name="track_has_no_speed">Sporet inneholder ikke hastighetsdata.</string>
     <string name="select_another_colorization">Velg en annen type fargelegging.</string>
     <string name="shared_strings_all_regions">Alle regioner</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrenser</string>
     <string name="hillshade_slope_contour_lines">Relieffskygge/bakkehelning/koter</string>
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_hiking_name">Turgåing</string>
@@ -4115,7 +4112,6 @@
     <string name="backup_version_history_delete_descr">Slett endringsloggen for foreldede datatyper fra OsmAnd-sky\?</string>
     <string name="purchases_feature_desc_nautical">Få tilgang til havdybdeinfo</string>
     <string name="purchases_feature_desc_monthly_map_updates">Få tilgang til regelmessige månedlige oppdateringer for frakoblede kart.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Få tilgang til avanserte OsmAnd-programtillegg.</string>
     <string name="purchases_feature_desc_osmand_cloud">Skaff deg OsmAnd-sky for å lagre all OsmAnd-data på nett. Ingen mistet data etter reinstallasjon. Sikkerhetskopier og gjenopprett info.</string>
     <string name="unlimited_map_downloads">Last ned så mange kart du vil</string>
     <string name="wikipedia_and_wikivoyage_offline">Frakoblet Wikipedia og Wikivoyage</string>

@@ -532,7 +532,6 @@
     <string name="poi_context_menu_showdescription">显示 POI 描述。</string>
     <string name="fav_export_confirmation">已存在上次导出的收藏夹文件。是否要替换它？</string>
     <string name="routing_settings_descr">指定导航选项。</string>
-    <string name="index_settings">数据管理</string>
     <string name="general_settings_descr">配置应用的显示与公用设置。</string>
     <string name="global_app_settings">应用程序全局设置</string>
     <string name="download_files_not_enough_space">可用空间不足以下载 %1$s MB (可用空间：%2$s)。</string>
@@ -3519,7 +3518,6 @@
     <string name="copy_poi_name">复制兴趣点名称</string>
     <string name="quick_action_show_hide_title">显示/隐藏</string>
     <string name="shared_string_interval">间隔</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隐藏自然保护区、保护区和国家公园边界。</string>
     <string name="track_has_no_altitude">轨迹不包含高度数据。</string>
     <string name="track_has_no_speed">轨迹不包含速度数据。</string>
     <string name="select_another_colorization">请选择另一种着色类型。</string>

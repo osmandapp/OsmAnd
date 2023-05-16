@@ -33,7 +33,6 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 
 	@Nullable
 	private MapMarkerEditor editor;
-	private boolean nightMode;
 	private boolean cancelled;
 
 	private EditText nameEdit;
@@ -42,7 +41,6 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		editor = ((MapActivity) requireActivity()).getContextMenu().getMapMarkerEditor();
-		nightMode = isNightMode(true);
 	}
 
 	@Override

@@ -453,8 +453,11 @@ public class OsmandSettings {
 			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
 		}
 		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
-		if (appMode != nextAppMode){
-			return setApplicationMode(nextAppMode);
+		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
+			String pattern = ctx.getString(R.string.application_profile_changed);
+			String message = String.format(pattern, nextAppMode.toHumanString());
+			ctx.showShortToastMessage(message);
+			return true;
 		}
 		return false;
 	}
@@ -1858,12 +1861,14 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
-	public static final int NO_EXTERNAL_DEVICE = 0;
-
 	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference(this, "external_input_device", InputDevice.KEYBOARD.getValue()).makeProfile();
 
-	public boolean isSelectedInputDevice(@NonNull InputDevice device) {
-		return EXTERNAL_INPUT_DEVICE.get() == device.getValue();
+	public InputDevice getSelectedInputDevice() {
+		return getSelectedInputDevice(getApplicationMode());
+	}
+
+	public InputDevice getSelectedInputDevice(@NonNull ApplicationMode appMode) {
+		return InputDevice.getByValue(EXTERNAL_INPUT_DEVICE.getModeValue(appMode));
 	}
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference(this, "route_map_markers_start_my_loc", false).makeGlobal().makeShared().cache();

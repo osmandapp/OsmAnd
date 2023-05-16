@@ -119,7 +119,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
-		
+
 		orderModified = app.getSettings().POI_FILTERS_ORDER.get() != null;
 		activationModified = app.getSettings().INACTIVE_POI_FILTERS.get() != null;
 
@@ -172,7 +172,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 					items.remove(item);
 					adapter.notifyDataSetChanged();
 					Snackbar snackbar = Snackbar.make(requireView(),
-							getString(R.string.item_deleted, poiInfo.name), Snackbar.LENGTH_LONG)
+									getString(R.string.item_deleted, poiInfo.name), Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
@@ -401,7 +401,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 				initFiltersOrders(app, true);
 			}
 		})));
-		items.add(new ListItem(DESCRIPTION, 
+		items.add(new ListItem(DESCRIPTION,
 //				app.getString(R.string.add_new_custom_category_button_promo) + '\n' + 
 				app.getString(R.string.reset_to_default_category_button_promo)));
 
@@ -500,11 +500,8 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		return (OsmandApplication) activity.getApplication();
 	}
 
-	public static boolean isNightMode(OsmandApplication app, boolean usedOnMap) {
-		if (app != null) {
-			return usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
-		}
-		return false;
+	public static boolean isNightMode(@NonNull OsmandApplication app, boolean usedOnMap) {
+		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 
 	@Override

@@ -1017,7 +1017,6 @@
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Indica las opciones de navegación.</string>
     <string name="global_settings">Ajustes globales</string>
-    <string name="index_settings">Gestionar mapas</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación.</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
@@ -2881,8 +2880,8 @@
     <string name="avoid_pt_types_descr">Marca los tipos de transporte público a evitar para la navegación:</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="quick_action_day_night_mode">modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Sin empedrado ni adoquinado</string>
-    <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
+    <string name="routing_attr_avoid_sett_name">Sin adoquinado natural</string>
+    <string name="routing_attr_avoid_sett_description">Evitar calles con adoquines naturales</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
@@ -3668,7 +3667,7 @@
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
-    <string name="quick_action_remove_next_destination">Borrar el punto de destino más cercano</string>
+    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
     <string name="plugin_wikipedia_description">Obtén información sobre los puntos de interés de Wikipedia, una guía de bolsillo sin conexión que incluye artículos sobre objetos y destinos.</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
@@ -4015,8 +4014,6 @@
     <string name="copy_poi_name">Copiar nombre del PDI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Oculta fronteras de reservas naturales, áreas protegidas y parques nacionales.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteras naturales</string>
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
     <string name="select_another_colorization">Elige otro tipo de color.</string>
@@ -4249,7 +4246,6 @@
     <string name="promo_subscription">Suscripción promocional</string>
     <string name="track_has_no_needed_data">La traza no contiene los datos necesarios.</string>
     <string name="option_available_only_in_osmand_pro">Disponible como parte de la suscripción a OsmAnd Pro.</string>
-    <string name="pro_widgets">Widgets avanzados</string>
     <string name="purchases_feature_desc_pro_widgets">Obtén acceso a las funciones de OsmAnd Pro: Coloración de rutas y más.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explora los planes de OsmAnd para encontrar uno adecuado para ti.</string>
     <string name="routes_color_by_type">Colorear rutas por…</string>
@@ -4453,7 +4449,6 @@
     <string name="save_changes_into_file">Guardar cambios en el archivo</string>
     <string name="save_as_copy">Guardar como copia</string>
     <string name="shared_string_gps_filter">Filtro del GPS</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_precision">Precisión del GPS</string>
     <string name="shared_string_statistics">Estadísticas</string>
     <string name="gps_filter_smoothing_desc">Define el umbral de distancia entre puntos.
@@ -4981,9 +4976,7 @@
     <string name="cloud_layer">Capa de nubes</string>
     <string name="storage_migration_fragment_close_descr">La copia sólo se ha completado en un %1$s%%. Si se detiene ahora, es posible que la aplicación no funcione correctamente.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala de MTB</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala MTB de ascenso</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según la escala de MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Muestra los senderos según la escala MTB de ascenso.</string>
     <string name="open_weather_action_description">Permite abrir una pantalla con información meteorológica detallada.</string>
     <string name="open_weather_action">Ver meteorología</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolíneas de nubes</string>
@@ -5198,4 +5191,11 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Vincular sensor de ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puedes vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
     <string name="learn_more_about_sensors_link">Véase más sobre sensores.</string>
+    <string name="file_already_exists_description">«%1$s». Ya existe un archivo con ese nombre. Al reemplazarlo, se sobrescribirán todos los cambios realizados con la versión actual.</string>
+    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»\?</string>
+    <string name="number_of_tracks">%1$s trazas</string>
+    <string name="search_track_by_name">Buscar traza por el nombre</string>
+    <string name="no_search_results">Sin resultados</string>
+    <string name="is_imported">%1$s se ha importado.</string>
+    <string name="file_already_exists">El archivo ya existe</string>
 </resources>

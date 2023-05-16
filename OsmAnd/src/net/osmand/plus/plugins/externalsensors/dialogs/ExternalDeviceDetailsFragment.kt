@@ -213,11 +213,11 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     }
 
     private fun connectDevice() {
-        device.connect(app, activity)
+        plugin.connectDevice(activity, device)
     }
 
     private fun disconnectDevice() {
-        device.disconnect()
+        plugin.disconnectDevice(device)
     }
 
     override fun onDeviceConnect(device: AbstractDevice<out AbstractSensor>, result: DeviceConnectionResult, error: String?) {

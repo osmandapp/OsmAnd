@@ -84,6 +84,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			String title = getString(visibilityType.getTitleId());
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = visibilityType;
 			itemsVisibility.add(item);
 		}

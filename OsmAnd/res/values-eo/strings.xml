@@ -1310,7 +1310,6 @@
     <string name="profile_settings">Specifaj agordoj de profilo</string>
     <string name="routing_settings_descr">Difini agordojn de navigado.</string>
     <string name="global_settings">Ĝeneralaj agordoj</string>
-    <string name="index_settings">Administri map-dosierojn</string>
     <string name="general_settings">Ĝeneralaj</string>
     <string name="general_settings_descr">Agordi vidigon kaj ĝenerale la aplikaĵon.</string>
     <string name="global_app_settings">Ĝeneralaj agordoj de aplikaĵo</string>
@@ -2883,7 +2882,7 @@
     <string name="angular_measeurement">Unuo de anguloj</string>
     <string name="angular_measeurement_descr">Elekti mezurunuon por azimuto.</string>
     <string name="routing_attr_avoid_sett_name">Sen malglata ŝtonpavimo</string>
-    <string name="routing_attr_avoid_sett_description">Eviti rulŝtonajn kahelojn kaj kvadratajn ŝtonojn</string>
+    <string name="routing_attr_avoid_sett_description">Eviti malglatan pavimon de kvadrataj ŝtonoj</string>
     <string name="routing_attr_avoid_tram_name">Sen tramoj</string>
     <string name="routing_attr_avoid_tram_description">Eviti tramojn</string>
     <string name="routing_attr_avoid_bus_name">Sen busoj</string>
@@ -4016,8 +4015,6 @@
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
     <string name="shared_string_interval">Intertempo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Kaŝi limojn de naturaj rezervejoj, protektataj areoj kaj naciaj parkoj.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limoj de rezervejoj</string>
     <string name="trip_recording_logging_interval_info">La periodo de intertempo de registrado estas tempo post kiu OsmAnd petos pri aktualaj datumoj de pozicio.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
@@ -4460,7 +4457,6 @@
     <string name="shared_string_gps_filter">Filtrilo</string>
     <string name="storage_migration_wrong_folder_warning">Ne trovis datumojn de OsmAnd en la elektita dosierujo. Reprovu.</string>
     <string name="gps_filter_precision">Precizo de GPS-legoj</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="created_on">Kreita je</string>
     <string name="use_routing_fallback">Provi malkonektan navigilon</string>
     <string name="shared_string_size">Grando</string>
@@ -5032,11 +5028,7 @@
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuroj\?</string>
-    <string name="default_tracks_appearance_description">La jenaj agordoj pri aspekto aplikiĝos al ĉiuj spuroj elektitaj sur la antaŭa ekrano.
-\n
-\nIli ankaŭ estos konservitaj kiel “%1$s”, kiu estos aplikita de %2$s por ĉiu aliaj spuroj sen propre alĝustigita aspekto.</string>
     <string name="recently_visible">Antaŭe vidigitaj %1$s</string>
-    <string name="default_tracks_appearance">Implicita aspekto de spuro</string>
     <string name="no_visible_tracks_description">Elektu spurojn por vidigi ilin sur la mapo.</string>
     <string name="no_visible_tracks">Neniu spuro sur la mapo</string>
     <string name="switch_folder">Ŝanĝi dosierujon</string>
@@ -5126,4 +5118,65 @@
     <string name="camera_app">Aplikaĵo de fotilo</string>
     <string name="proxy_port_max_warning">La maksimuma numero de pordo estas %1$s</string>
     <string name="weather_download_error">Ne povas elŝuti %1$s kahelojn.</string>
+    <string name="is_imported">%1$s estas enportita.</string>
+    <string name="ant_plus_searching_text">Serĉado de sentiloj</string>
+    <string name="ant_plus_searching">Serĉado</string>
+    <string name="ant_plus_pair_new_sensor">Kupli novan sentilon</string>
+    <string name="ant_plus_open_settings">Malfermi agordojn</string>
+    <string name="ant_plus_pair_new_sensor_ble">Kupli sentilon BLE</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Kupli sentilon ANT+</string>
+    <string name="search_track_by_name">Serĉi spuron laŭ nomo</string>
+    <string name="no_search_results">Neniu serĉ-rezulto</string>
+    <string name="file_already_exists">Dosiero jam ekzistas</string>
+    <string name="nav_profile_confirm_delete">Ĉu vi certe volas forigi la profilon “%1$s”\?</string>
+    <string name="external_device_characteristic_battery_level">Baterio</string>
+    <string name="external_device_characteristic_gear_ratio">Rapidmalpliigilo</string>
+    <string name="external_device_characteristic_stride_length">Paŝlongo</string>
+    <string name="external_device_characteristic_temperature">Temperaturo</string>
+    <string name="external_device_details_information">Informo</string>
+    <string name="bluetooth_disconnected">Malkonektita, %s</string>
+    <string name="external_device_details_connect">Konekti</string>
+    <string name="external_device_details_pair">Kupli</string>
+    <string name="external_device_details_disconnect">Malkonekti</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Trovis: %d</string>
+    <string name="ant_plus_nothing_found_description">Certiĝu, ke:
+\n– protokolo Bludento estas aktiva
+\n– sentilo estas aktiva
+\n– tiu ĉi aparato troviĝas proksime al sentilo</string>
+    <string name="ant_plus_bluetooth_off">Bludento estas malaktiva</string>
+    <string name="bluetooth_not_supported">Bludento ne subtenata</string>
+    <string name="ble_search_again">Serĉi denove</string>
+    <string name="ant_plus_nothing_found_text">Trovis neniun sentilon</string>
+    <string name="ant_plus_bluetooth_off_description">Aktivigu Bludenton kaj kupli per ĝi sentilon.</string>
+    <string name="ant_plus_help_title">Mi ne scias pri speco de posedata sentilo</string>
+    <string name="ant_plus_pair_bluetooth_prompt">OsmAnd laboras kun sentiloj BLE (Bludento Malgrand-Energia) kaj ANT+.</string>
+    <string name="learn_more_about_sensors_link">Pliaj informoj pri sentiloj.</string>
+    <string name="external_device_forget_sensor_description">La sentilo estos forigita al la listo. Vi ĉiam povos denove kupli ĝin.</string>
+    <string name="external_device_disconnected">Ne konektita</string>
+    <string name="file_already_exists_description">Jam ekzistas dosiero kun la nomo “%1$s”. Anstataŭigo superskribos ĉiujn ĝiajn ŝanĝojn per la enportata versio.</string>
+    <string name="external_device_characteristic_speed">Rapido</string>
+    <string name="external_device_characteristic_total_distance">Tuta distanco</string>
+    <string name="external_device_characteristic_cadence">Pedal-rapido</string>
+    <string name="external_device_characteristic_systolic">Sistola</string>
+    <string name="external_device_characteristic_diastolic">Diastola</string>
+    <string name="external_device_characteristic_cuff_pressure">Premo en manumo</string>
+    <string name="external_device_characteristic_arterial_pressure">Arteria premo</string>
+    <string name="external_device_characteristic_pulse_rate">Pulso</string>
+    <string name="external_device_details_received_data">Ricevitaj datumoj</string>
+    <string name="external_device_details_connection">Konekto</string>
+    <string name="external_device_details_battery">Baterio</string>
+    <string name="external_device_details_distance">Distanco</string>
+    <string name="bluetooth_connected">Konektita, %s</string>
+    <string name="ant_plus_searching_text_description">Tenu la aparaton proksime al la sentilo. Vi devas aktivigi la sentilon, por ke OsmAnd povu trovi ĝin.</string>
+    <string name="number_of_tracks">%1$s spuroj</string>
+    <string name="external_device_connected">Konektita</string>
+    <string name="external_device_menu_forget">Malkupli</string>
+    <string name="external_device_characteristic_distance">Distanco</string>
+    <string name="external_device_characteristic_heart_rate">Korbata frekvenco</string>
+    <string name="external_device_details_total_distance">Tuta distanco</string>
+    <string name="external_device_details_speed">Rapido</string>
+    <string name="external_device_low_battery">Preskaŭ malŝargita baterio</string>
+    <string name="external_device_forget_sensor">Malkupli sentilon</string>
 </resources>

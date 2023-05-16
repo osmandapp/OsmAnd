@@ -120,7 +120,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		app = requireMyApplication();
 		settings = requireSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
-		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
 		tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
@@ -140,6 +139,11 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				downloadType = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_TYPE, DownloadType.class);
 			}
 		}
+	}
+
+	@Override
+	protected boolean useMapNightMode() {
+		return true;
 	}
 
 	@Override
@@ -548,6 +552,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			int currentZoom = mapView.getZoom();
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
+			}
+			if (currentZoom > selectedMaxZoom && currentZoom <= maxZoom) {
+				selectedMaxZoom = currentZoom;
 			}
 
 			if (downloadType != DownloadType.ALL) {

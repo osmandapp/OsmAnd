@@ -57,7 +57,6 @@
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Indica las opciones de navegación.</string>
     <string name="global_settings">Ajustes globales</string>
-    <string name="index_settings">Gestionar mapas</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en el dispositivo.</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación.</string>
@@ -3669,7 +3668,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Controla el nivel de zum del mapa usando los botones de volumen del dispositivo.</string>
     <string name="use_volume_buttons_as_zoom">Botones de volumen como zum</string>
     <string name="lenght_limit_description">Proporciona la longitud del vehículo, se pueden aplicar algunas restricciones de rutas para vehículos largos.</string>
-    <string name="quick_action_remove_next_destination">Borrar el siguiente punto de destino</string>
+    <string name="quick_action_remove_next_destination">Eliminar el próximo punto de destino</string>
     <string name="please_provide_point_name_error">Proporciona un nombre para el punto</string>
     <string name="quick_action_remove_next_destination_descr">Quita el siguiente destino de la ruta. Si es el destino final, la navegación se detendrá.</string>
     <string name="search_download_wikipedia_maps">Descargar datos de Wikipedia</string>
@@ -3949,7 +3948,6 @@
     <string name="activity_type_car_name">Coche</string>
     <string name="shared_string_api_key">Clave de la API</string>
     <string name="uploaded_count">Se subieron %1$d de %2$d</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Límites de reservas naturales</string>
     <string name="shared_string_subtype">Subtipo</string>
     <string name="shared_string_vehicle">Vehículo</string>
     <string name="shared_string_server_url">URL del servidor</string>
@@ -4018,7 +4016,6 @@
     <string name="copy_poi_name">Copiar nombre del PDI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar los límites de las reservas naturales, las áreas protegidas y los parques nacionales.</string>
     <string name="track_has_no_altitude">La traza no contiene datos de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
     <string name="select_another_colorization">Elige otro tipo de color.</string>
@@ -4488,7 +4485,6 @@
     <string name="rendering_value_omit_name">Omitir</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
     <string name="rendering_attr_seabedDetail_description">Información de texto adicional sobre la calificación de la superficie del fondo marino, los tipos de superficie combinados, la categoría y el taxón de la maleza o la hierba marina</string>
-    <string name="rendering_attr_OSMMapperAssistantWaterwayTunnels_description">Mostrar los túneles fluviales</string>
     <string name="rendering_value_category_name">Categoría</string>
     <string name="rendering_value_all_name">Todo</string>
     <string name="selected_waypoints_descr">Los puntos de referencia marcados serán añadidos a la traza «%1$s»</string>
@@ -4807,7 +4803,6 @@
     <string name="favorites_backup">Respaldo de favoritos</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
-    <string name="map_widget_fps_info">Representación de mapas en FPS (fotogramas por segundo)</string>
     <string name="ant_go_to_store">Ir a la tienda</string>
     <string name="ant_read_data">Leer datos</string>
     <string name="ant_write_to_gpx">Escribir datos en la traza</string>
@@ -4820,8 +4815,6 @@
     <string name="map_widget_ant_bicycle_speed_desc">Muestra la velocidad de desplazamiento</string>
     <string name="map_widget_ant_bicycle_dist">Distancia en bicicleta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Muestra la distancia recorrida</string>
-    <string name="antplus_plugin_name">ANT+</string>
-    <string name="antplus_plugin_description">Descripción de ANT+</string>
     <string name="nautical_depth_points">Puntos de profundidad náutica</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="worldwide_maps">Mapas del mundo</string>
@@ -4969,8 +4962,6 @@
     <string name="cloud_layer">Capa de nubes</string>
     <string name="precipitation_layer">Capa de precipitaciones</string>
     <string name="rendering_attr_showMtbScale_description">Muestra los senderos según su escala MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar la escala MTB cuesta arriba</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Muestrar los senderos según la escala MTB de ascenso.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar la escala de las MTB</string>
     <string name="mtb_imba_full">Asociación Internacional de Ciclismo de Montaña</string>
     <string name="mtb_imba">IMBA</string>
@@ -5140,7 +5131,7 @@
     <string name="external_device_characteristic_gear_ratio">Reductores de velocidad</string>
     <string name="external_device_characteristic_cadence">Ritmo</string>
     <string name="external_device_characteristic_heart_rate">Ritmo cardiaco</string>
-    <string name="external_device_characteristic_systolic">Sístole</string>
+    <string name="external_device_characteristic_systolic">Sístolica</string>
     <string name="external_device_characteristic_diastolic">Diastole</string>
     <string name="external_device_characteristic_arterial_pressure">Presión arterial</string>
     <string name="external_device_characteristic_cuff_pressure">Presión del brazalete</string>
@@ -5193,4 +5184,27 @@
     <string name="no_search_results">No hay resultados</string>
     <string name="search_track_by_name">Buscar las pista por nombre</string>
     <string name="number_of_tracks">%1$s pistas</string>
+    <string name="rendering_attr_lightDetail_name">Iluminación</string>
+    <string name="rendering_attr_lightDetail_description">Predeterminado: nombre de línea de mar (carácter de luz.grupo.período), selecciona la información adicional en las secciones de la 1 a la 3 o el carácter de luz del sector 1,2,3,4,5</string>
+    <string name="rendering_value_sectors_name">Sectores</string>
+    <string name="rendering_value_sector1_name">Sector 1</string>
+    <string name="rendering_value_sector2_name">Sector 2</string>
+    <string name="rendering_value_sector3_name">Sector 3</string>
+    <string name="rendering_value_sector4_name">Sector 4</string>
+    <string name="rendering_value_sector5_name">Sector 5</string>
+    <string name="rendering_value_small_name">Pequeño</string>
+    <string name="rendering_value_name_only_name">Solo el nombre</string>
+    <string name="device_disconnected">Desconectado %1$s</string>
+    <string name="device_connected">Conectado %1$s</string>
+    <string name="running_scds_device_name">Ejecutandose</string>
+    <string name="bicycle_scd_device_name">cuentakilómetros para bicicleta</string>
+    <string name="external_device_blood_pressure">Tensión</string>
+    <string name="no_bt_permission">No se concedió el permiso del Bluetooth</string>
+    <string name="beats_per_minute_short">Pulsaciones por minuto</string>
+    <string name="shared_string_wrist">Muñeca</string>
+    <string name="shared_string_finger">Dedo</string>
+    <string name="shared_string_hand">Mano</string>
+    <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
+    <string name="shared_string_foot">Pie</string>
+    <string name="shared_string_chest">Pecho</string>
 </resources>

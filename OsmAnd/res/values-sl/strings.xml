@@ -553,7 +553,6 @@
     <string name="profile_settings">Nastavitve profila</string>
     <string name="settings_preset">Privzeti profil</string>
     <string name="global_settings">Splošne nastavitve</string>
-    <string name="index_settings">Upravljalnik datotek zemljevidov</string>
     <string name="osmand_service">Delovanje v ozadju</string>
     <string name="osmand_service_descr">Program se izvaja v ozadju, ko je zaslon izklopljen.</string>
     <string name="daynight_mode_auto">Preklopi ob sončnem vzhodu in zahodu</string>
@@ -2881,8 +2880,8 @@
     <string name="shared_string_walk">Pešačenje</string>
     <string name="save_poi_value_exceed_length">Skrajšajte dolžino oznake »%s« na manj kot 255 znakov.</string>
     <string name="save_poi_value_exceed_length_title">Dolžina vrednosti »%s«</string>
-    <string name="routing_attr_avoid_sett_name">Brez tlakovcem vseh vrst</string>
-    <string name="routing_attr_avoid_sett_description">Izogni se tlakovcem vseh vrst</string>
+    <string name="routing_attr_avoid_sett_name">Brez tlakovcev</string>
+    <string name="routing_attr_avoid_sett_description">Izogni se tlakovcev</string>
     <string name="routing_attr_avoid_tram_name">Brez tramvajev</string>
     <string name="routing_attr_avoid_tram_description">Načrtovanje poti brez potovanja s tramvajem</string>
     <string name="routing_attr_avoid_bus_name">Brez avtobusov</string>
@@ -5178,4 +5177,18 @@
 \n- je senzor aktiviran;
 \n- se ta naprava nahaja v bližini senzorja.</string>
     <string name="external_device_low_battery">Nizka baterija</string>
+    <string name="number_of_tracks">%1$s sledi</string>
+    <string name="device_connected">%1$s povezan</string>
+    <string name="running_scds_device_name">Naprava za tek</string>
+    <string name="bicycle_scd_device_name">Kolesarska naprava</string>
+    <string name="external_device_blood_pressure">Krvni pritisk</string>
+    <string name="no_bt_permission">Dovoljenje Bluetooth ni odobreno</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="shared_string_chest">Prsni koš</string>
+    <string name="shared_string_wrist">Zapestje</string>
+    <string name="shared_string_finger">Prst</string>
+    <string name="shared_string_hand">Roka</string>
+    <string name="shared_string_ear_lobe">Uhelj</string>
+    <string name="shared_string_foot">Noga</string>
+    <string name="device_disconnected">%1$s odklopljen</string>
 </resources>

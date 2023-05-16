@@ -204,6 +204,11 @@ public class TilePointsProvider<T extends TilePointsProvider.ICollectionPoint> e
 	}
 
 	@Override
+	public boolean supportsNaturalObtainDataAsync() {
+		return false;
+	}
+
+	@Override
 	public MapMarker.PinIconVerticalAlignment getPinIconVerticalAlignment() {
 		return MapMarker.PinIconVerticalAlignment.CenterVertical;
 	}
