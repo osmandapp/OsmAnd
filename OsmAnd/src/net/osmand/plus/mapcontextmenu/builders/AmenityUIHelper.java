@@ -32,6 +32,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -40,7 +41,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -56,7 +56,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
-import net.osmand.plus.wikipedia.WikipediaArticleWikiLinkFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -810,17 +809,13 @@ public class AmenityUIHelper extends MenuBuilder {
 		} else if (isUrl) {
 			ll.setOnClickListener(v -> {
 				if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					if (text.contains(WIKI_LINK) && wikiAmenity != null) {
-						if (Version.isPaidVersion(app)) {
-							WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(mapActivity, !light);
-							wikiArticleHelper.showWikiArticle(wikiAmenity.getLocation(), text);
-						} else {
-							WikipediaArticleWikiLinkFragment.showInstance(mapActivity.getSupportFragmentManager(), text);
-						}
+					String url = hiddenUrl == null ? text : hiddenUrl;
+					if (url.contains(WIKI_LINK)) {
+						LatLon location = wikiAmenity != null ? wikiAmenity.getLocation() : getLatLon();
+						WikiArticleHelper.askShowArticle(mapActivity, !light, location, url);
 					} else {
-						String uri = hiddenUrl == null ? text : hiddenUrl;
 						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setData(Uri.parse(uri));
+						intent.setData(Uri.parse(url));
 						AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 					}
 				}
