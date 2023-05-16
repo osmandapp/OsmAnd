@@ -1818,6 +1818,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private boolean startZooming;
 		private float initialElevation;
 		private float prevAngle;
+		private float zone0AngleThreshold;
+		private float zone1AngleThreshold;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
