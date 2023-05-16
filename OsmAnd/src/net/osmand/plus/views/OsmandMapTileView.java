@@ -1801,6 +1801,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private static final float ZONE_1_ANGLE_THRESHOLD = 15;
 		private static final float ZONE_2_ANGLE_THRESHOLD = 30;
 		private static final float ZONE_3_ANGLE_THRESHOLD = 60;
+		private static final float NORTH_LOCK_ANGLE_THRESHOLD = 30;
 		private static final float ZONE_0_ZOOM_THRESHOLD = 0.15f;
 		private static final float ZONE_1_ZOOM_THRESHOLD = 0.6f;
 		private static final float ZONE_2_ZOOM_THRESHOLD = 1.5f;
@@ -1950,16 +1951,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		private boolean isAngleOverThreshold(float angle, double deltaZoom) {
+
+			// Avoid accidental rotation in "North is up (fixed)" mode
+			if (settings.getCompassMode() == CompassMode.NORTH_IS_UP) {
+				zone0AngleThreshold = NORTH_LOCK_ANGLE_THRESHOLD;
+				zone1AngleThreshold = NORTH_LOCK_ANGLE_THRESHOLD;
+			} else {
+				zone0AngleThreshold = ZONE_0_ANGLE_THRESHOLD;
+				zone1AngleThreshold = ZONE_1_ANGLE_THRESHOLD;
+			}
+
 			if (startRotating) {
 				return true;
 			} else if (!startZooming) {
-				return Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD;
+				return Math.abs(angle) >= zone0AngleThreshold;
 			} else if (deltaZoom >= ZONE_2_ZOOM_THRESHOLD) {
 				return Math.abs(angle) >= ZONE_3_ANGLE_THRESHOLD;
 			} else if (deltaZoom >= ZONE_1_ZOOM_THRESHOLD) {
 				return Math.abs(angle) >= ZONE_2_ANGLE_THRESHOLD;
 			} else {
-				return Math.abs(angle) >= ZONE_1_ANGLE_THRESHOLD;
+				return Math.abs(angle) >= zone1AngleThreshold;
 			}
 		}
 
