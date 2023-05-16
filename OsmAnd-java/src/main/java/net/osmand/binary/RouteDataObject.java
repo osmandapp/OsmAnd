@@ -600,13 +600,11 @@ public class RouteDataObject {
 	}
 
 	public float getMaximumSpeed(boolean direction, int profile) {
-		int sz = types.length;
-		float maxSpeed = -1, maxProfileSpeed = -1;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			boolean forwardDirection = r.isForward() == 1;
-			boolean noDirection = r.isForward() == 0;
-			if (noDirection || (forwardDirection == direction)) {
+		float maxSpeed = 0, maxProfileSpeed = 0;
+		for (int type : types) {
+			RouteTypeRule r = region.quickGetEncodingRule(type);
+			boolean forwardDirection = r.isForward() >= 0;
+			if (forwardDirection == direction) {
 				// priority over default
 				maxSpeed = r.maxSpeed(profile) > 0 ? r.maxSpeed(RouteTypeRule.PROFILE_NONE) : maxSpeed;
 				maxProfileSpeed = r.maxSpeed(profile) > 0 ? r.maxSpeed(profile) : maxProfileSpeed;

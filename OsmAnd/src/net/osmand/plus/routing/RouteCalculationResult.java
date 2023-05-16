@@ -1075,10 +1075,10 @@ public class RouteCalculationResult {
 		return null;
 	}
 
-	public float getCurrentMaxSpeed(boolean truckProfile) {
+	public float getCurrentMaxSpeed(int profile) {
 		RouteSegmentResult res = getCurrentSegmentResult();
 		if (res != null) {
-			return res.getObject().getMaximumSpeed(res.isForwardDirection(), truckProfile);
+			return res.getObject().getMaximumSpeed(res.isForwardDirection(), profile);
 		}
 		return 0;
 	}
