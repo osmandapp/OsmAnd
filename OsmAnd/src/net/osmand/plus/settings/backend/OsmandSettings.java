@@ -694,14 +694,6 @@ public class OsmandSettings {
 		editor.commit();
 	}
 
-	public void removeFromProfilePreferences(@NonNull String... prefIds) {
-		SettingsEditor editor = settingsAPI.edit(profilePreferences);
-		for (String prefId : prefIds) {
-			editor.remove(prefId);
-		}
-		editor.commit();
-	}
-
 	public int getSavedGlobalPrefsCount() {
 		return ((SharedPreferences) globalPreferences).getAll().size();
 	}
@@ -2644,15 +2636,6 @@ public class OsmandSettings {
 	/**
 	 * quick actions prefs
 	 */
-
-	@Deprecated
-	public static final String QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN = "quick_fab_margin_x_portrait_margin";
-	@Deprecated
-	public static final String QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN = "quick_fab_margin_y_portrait_margin";
-	@Deprecated
-	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
-	@Deprecated
-	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
 
 	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference(this, "quick_action_state", false).makeProfile();
 

@@ -1,7 +1,8 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.calculateTotalSizePx;
 import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
+import static net.osmand.plus.utils.AndroidUtils.*;
+import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
 import static net.osmand.plus.views.OsmandMapTileView.*;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
@@ -76,9 +77,15 @@ public class Map3DButton extends MapButton {
 			view.setScaleX(1.5f);
 			view.setScaleY(1.5f);
 			view.setAlpha(0.95f);
-			view.setOnTouchListener(settings.MAP_3D_MODE_FAB_MARGIN.getMoveFabOnTouchListener(app, mapActivity, fabButton));
+			view.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, fabButton, settings.MAP_3D_MODE_FAB_MARGIN));
 			return true;
 		};
+	}
+
+	@Override
+	protected void updateState(boolean nightMode) {
+		boolean is3DMode = !isDefaultElevationAngle();
+		updateButton(is3DMode);
 	}
 
 	private void updateButton(boolean is3DMode) {

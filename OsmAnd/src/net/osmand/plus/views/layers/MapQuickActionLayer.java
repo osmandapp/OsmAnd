@@ -1,7 +1,8 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.calculateTotalSizePx;
 import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
+import static net.osmand.plus.utils.AndroidUtils.*;
+import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.animation.Animator;
@@ -123,7 +124,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
                 quickActionButton.setScaleX(1.5f);
                 quickActionButton.setScaleY(1.5f);
                 quickActionButton.setAlpha(0.95f);
-                quickActionButton.setOnTouchListener(settings.QUICK_ACTION_FAB_MARGIN.getMoveFabOnTouchListener(app, mapActivity, quickActionButton));
+                quickActionButton.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, quickActionButton, settings.QUICK_ACTION_FAB_MARGIN));
                 return true;
             });
         } else {
@@ -238,7 +239,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         }
         AnimatorSet set = new AnimatorSet();
         List<Animator> animators = new ArrayList<>();
-        int[] animationCoordinates = AndroidUtils.getCenterViewCoordinates(quickActionButton);
+        int[] animationCoordinates = getCenterViewCoordinates(quickActionButton);
         int centerX = quickActionsWidget.getWidth() / 2;
         int centerY = quickActionsWidget.getHeight() / 2;
         float initialValueX = show ? animationCoordinates[0] - centerX : 0;

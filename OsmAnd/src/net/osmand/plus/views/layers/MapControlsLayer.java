@@ -158,6 +158,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapRouteInfoMenu = null;
 			compassButton = null;
 			zoomText = null;
+			if (map3DButton != null) {
+				map3DButton.onDestroyButton();
+			}
+			map3DButton = null;
 		}
 	}
 
@@ -179,9 +183,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapButtons.add(compassButton);
 	}
 
-	private void initFabButtons(MapActivity mapActivity){
+	private void initFabButtons(MapActivity mapActivity) {
 		ImageView map3DButtonView = mapActivity.findViewById(R.id.map_3d_button);
-		if(map3DButton != null){
+		if (map3DButton != null) {
 			map3DButton.onDestroyButton();
 		}
 		map3DButton = new Map3DButton(mapActivity, map3DButtonView, MAP_3D_HUD_ID);
@@ -598,8 +602,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		destroyButtons();
 	}
 
-	private void destroyButtons(){
-		for(MapButton button : mapButtons){
+	private void destroyButtons() {
+		for (MapButton button : mapButtons) {
 			button.onDestroyButton();
 		}
 		mapButtons.clear();
