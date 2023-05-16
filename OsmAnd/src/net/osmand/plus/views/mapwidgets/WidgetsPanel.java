@@ -168,7 +168,7 @@ public enum WidgetsPanel {
 	}
 
 	public boolean isDuplicatesAllowed() {
-		return this == LEFT || this == RIGHT;
+		return this == LEFT || this == RIGHT || this == TOP || this == BOTTOM;
 	}
 
 	@NonNull
@@ -189,10 +189,8 @@ public enum WidgetsPanel {
 	public List<WidgetsPanel> getMergedPanels() {
 		if (this == LEFT || this == RIGHT) {
 			return Arrays.asList(LEFT, RIGHT);
-		} else if (this == TOP) {
-			return Collections.singletonList(TOP);
-		} else if (this == BOTTOM) {
-			return Collections.singletonList(BOTTOM);
+		} else if (this == TOP || this == BOTTOM) {
+			return Arrays.asList(TOP, BOTTOM);
 		}
 		throw new IllegalStateException("Unsupported widgets panel");
 	}

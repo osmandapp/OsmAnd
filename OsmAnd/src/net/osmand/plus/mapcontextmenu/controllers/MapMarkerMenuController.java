@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment.addSelectedWidgets;
+
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -14,13 +16,21 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MapMarkerMenuController extends MenuController {
 
@@ -58,9 +68,9 @@ public class MapMarkerMenuController extends MenuController {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
 						OsmandApplication app = activity.getMyApplication();
-						OsmandPreference<Boolean> indication = app.getSettings().SHOW_MAP_MARKERS_BAR_WIDGET;
-						if (!indication.get()) {
-							indication.set(true);
+						OsmandSettings settings = app.getSettings();
+						if (!WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(app, mapActivity, settings.getApplicationMode())) {
+							enableTopMapMarkerWidget(app, mapActivity);
 						}
 						MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
@@ -71,6 +81,12 @@ public class MapMarkerMenuController extends MenuController {
 			rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
 			rightTitleButtonController.startIcon = createShowOnTopbarIcon(ColorUtilities.getDefaultIconColorId(!isLight()));
 		}
+	}
+
+	private void enableTopMapMarkerWidget(OsmandApplication app, MapActivity mapActivity) {
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		List<String> widgetsIds = new ArrayList<>(Collections.singleton(WidgetType.MARKERS_TOP_BAR.id));
+		addSelectedWidgets(mapActivity, widgetsIds, WidgetsPanel.TOP, widgetRegistry, app.getSettings().getApplicationMode());
 	}
 
 	@Nullable

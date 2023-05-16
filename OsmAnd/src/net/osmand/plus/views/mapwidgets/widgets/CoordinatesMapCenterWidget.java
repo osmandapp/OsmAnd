@@ -18,12 +18,6 @@ public class CoordinatesMapCenterWidget extends CoordinatesBaseWidget {
 
 	private final OsmandMapTileView mapTileView;
 
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_MAP_CENTER_COORDINATES_WIDGET;
-	}
-
 	public CoordinatesMapCenterWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, COORDINATES_MAP_CENTER);
 		mapTileView = app.getOsmandMap().getMapView();

@@ -31,6 +31,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 
 import java.util.LinkedList;
 
@@ -198,7 +199,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				imgList.add(getArrowTwoImg());
 			}
 		}
-		if (settings.SHOW_MAP_MARKERS_BAR_WIDGET.get()) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(app, mapActivity, app.getSettings().getApplicationMode())) {
 			imgList.add(getTopBar1Img());
 			if (count == 2) {
 				imgList.add(getTopBar2Img());

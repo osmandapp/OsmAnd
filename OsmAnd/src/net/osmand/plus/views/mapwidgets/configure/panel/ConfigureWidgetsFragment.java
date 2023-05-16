@@ -255,17 +255,26 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	@Override
 	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel) {
+		addSelectedWidgets(requireMapActivity(), widgetsIds, panel, widgetRegistry, selectedAppMode);
+		onWidgetsConfigurationChanged();
+	}
+
+	public static void addSelectedWidgets(@NonNull MapActivity mapActivity, @NonNull List<String> widgetsIds,
+	                                      @NonNull WidgetsPanel panel, @NonNull MapWidgetRegistry widgetRegistry,
+	                                      @NonNull ApplicationMode selectedAppMode) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(mapActivity);
+
 		int filter = AVAILABLE_MODE | ENABLED_MODE;
-		MapActivity mapActivity = requireMapActivity();
 		for (String widgetId : widgetsIds) {
 			MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 			Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode,
 					filter, Arrays.asList(WidgetsPanel.values()));
 			if (panel.isDuplicatesAllowed() && (widgetInfo == null || widgetInfos.contains(widgetInfo))) {
-				widgetInfo = createDuplicateWidget(widgetId, panel);
+				widgetInfo = createDuplicateWidget(app, widgetId, panel, widgetsFactory, selectedAppMode);
 			}
 			if (widgetInfo != null) {
-				addWidgetToEnd(mapActivity, widgetInfo, panel);
+				addWidgetToEnd(mapActivity, widgetInfo, panel, widgetRegistry, selectedAppMode);
 				widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, true, false);
 			}
 		}
@@ -274,16 +283,16 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		if (mapInfoLayer != null) {
 			mapInfoLayer.recreateControls();
 		}
-		onWidgetsConfigurationChanged();
 	}
 
-	private MapWidgetInfo createDuplicateWidget(@NonNull String widgetId, @NonNull WidgetsPanel panel) {
+	public static MapWidgetInfo createDuplicateWidget(@NonNull OsmandApplication app, @NonNull String widgetId, @NonNull WidgetsPanel panel,
+	                                                  @NonNull MapWidgetsFactory widgetsFactory, @NonNull ApplicationMode selectedAppMode) {
 		WidgetType widgetType = WidgetType.getById(widgetId);
 		if (widgetType != null) {
 			String id = widgetId.contains(DELIMITER) ? widgetId : WidgetType.getDuplicateWidgetId(widgetId);
 			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType);
 			if (widget != null) {
-				settings.CUSTOM_WIDGETS_KEYS.addValue(id);
+				app.getSettings().CUSTOM_WIDGETS_KEYS.addValue(id);
 				WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
 				return creator.createCustomWidgetInfo(id, widget, widgetType, panel);
 			}
@@ -291,7 +300,10 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		return null;
 	}
 
-	private void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget, @NonNull WidgetsPanel widgetsPanel) {
+	private static void addWidgetToEnd(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,
+	                                   @NonNull WidgetsPanel widgetsPanel, @NonNull MapWidgetRegistry widgetRegistry,
+	                                   @NonNull ApplicationMode selectedAppMode) {
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		Map<Integer, List<String>> pagedOrder = new TreeMap<>();
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity,
 				selectedAppMode, ENABLED_MODE, Collections.singletonList(widgetsPanel));

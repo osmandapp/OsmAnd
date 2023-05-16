@@ -30,6 +30,7 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -38,6 +39,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -86,7 +88,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private void updateShowDirectionMarkers() {
-		showDirectionEnabled = app.getSettings().SHOW_MAP_MARKERS_BAR_WIDGET.get();
+		OsmandSettings settings = app.getSettings();
+		showDirectionEnabled = WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(app, mapActivity, settings.getApplicationMode());
+
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));

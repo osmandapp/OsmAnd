@@ -125,7 +125,7 @@ public class MapWidgetsFactory {
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
 				return new SunriseSunsetWidget(mapActivity, sunsetState);
 			case ELEVATION_PROFILE:
-				return new ElevationProfileWidget(mapActivity);
+				return new ElevationProfileWidget(mapActivity, customId);
 			default:
 				return PluginsHelper.createMapWidget(mapActivity, widgetType);
 		}

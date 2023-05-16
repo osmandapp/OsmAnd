@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
@@ -19,6 +22,7 @@ import androidx.appcompat.widget.SwitchCompat;
 public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String KEY_SHOW_SLOPE = "show_slope";
+	public CommonPreference<Boolean> showSlopePreference;
 
 	private boolean showSlope;
 
@@ -33,9 +37,15 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		showSlope = bundle.containsKey(KEY_SHOW_SLOPE)
-				? bundle.getBoolean(KEY_SHOW_SLOPE)
-				: settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.getModeValue(appMode);
+		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+
+		if (bundle.containsKey(KEY_SHOW_SLOPE)) {
+			showSlope = bundle.getBoolean(KEY_SHOW_SLOPE);
+		} else if (widgetInfo != null) {
+			ElevationProfileWidget widget = ((ElevationProfileWidget) widgetInfo.widget);
+			showSlopePreference = widget.showSlopePreference;
+			showSlope = showSlopePreference.getModeValue(appMode);
+		}
 	}
 
 	@Override
@@ -68,7 +78,7 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 
 	@Override
 	protected void applySettings() {
-		settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.setModeValue(appMode, showSlope);
+		showSlopePreference.setModeValue(appMode, showSlope);
 	}
 
 	@Override
