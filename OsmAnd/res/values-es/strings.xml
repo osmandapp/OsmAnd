@@ -5210,4 +5210,6 @@
     <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
     <string name="shared_string_foot">Pie</string>
     <string name="shared_string_chest">Pecho</string>
+    <string name="poi_categories">Categoría de los POI</string>
+    <string name="no_poi_for_category">POI no encontrado</string>
 </resources>
