@@ -5181,4 +5181,5 @@
     <string name="external_device_forget_sensor">Забыть датчик</string>
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
+    <string name="no_poi_for_category">POI не найдена</string>
 </resources>
