@@ -4161,8 +4161,6 @@
     <string name="time_to_destination_widget_desc">Widget menampilkan \"Waktu tiba\" atau \"Waktu tersisa untuk bepergian\" ke titik tujuan terakhir. Waktu selalu diperbarui saat navigasi dan sama dengan waktu rute dari lokasi saat ini.</string>
     <string name="time_to_intermediate_widget_desc">Widget menampilkan \"Waktu tiba\" atau \"Waktu tersisa untuk bepergian\" ke titik tujuan terakhir. Waktu selalu diperbarui saat navigasi, ketika titik perantara dilewati, waktunya akan diperbarui ke titik perantara berikut.</string>
     <string name="rendering_attr_depthContourWidth_description">Lebar garis kontur</string>
-    <string name="accessibility_2d_view_off">Tampilan 2.5D nonaktif</string>
-    <string name="accessibility_2d_view_on">Tampilan 2.5D aktif</string>
     <string name="download_complete">Unduhan selesai</string>
     <string name="clear_markers_history_q">Hapus semua riwayat penanda peta\?</string>
     <string name="osn_close_dialog_error">Tidak dapat menutup catatan.</string>
@@ -4488,7 +4486,6 @@
     <string name="osmand_accessibility_description">Membuat fitur aksesibilitas perangkat tersedia langsung di OsmAnd. Ini memfasilitasi mis. menyesuaikan kecepatan bicara untuk suara teks kesuara, mengatur navigasi D-pad, menggunakan trackball untuk kontrol perbesaran, atau umpan balik teks ke suara, misalnya untuk mengumumkan posisi Anda secara otomatis.</string>
     <string name="map_markers_desc">Widget menampilkan jarak atau perkiraan waktu tiba (PWT) untuk dua penanda pertama di daftar penanda peta.</string>
     <string name="routing_attr_no_new_routing_name">TIdak ada aturan perutean v1.9</string>
-    <string name="shared_string_2_5_d_view">Tampilan 2.5D</string>
     <string name="unknown_location">Posisi belum diketahui.</string>
     <string name="keep_informing_never">Hanya secara manual (ketuk panah)</string>
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>

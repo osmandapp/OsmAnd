@@ -4727,8 +4727,6 @@
     <string name="lang_ckb">Kurdo central</string>
     <string name="live_update_frequency_hour_variant">Las actualizaciones de mapas se comprueban cada hora.</string>
     <string name="routing_attr_goods_restrictions_name">Entrega de mercancías</string>
-    <string name="accessibility_2d_view_off">Vista 2.5D desactivada</string>
-    <string name="accessibility_2d_view_on">Vista 2.5D activada</string>
     <string name="download_complete">Descarga completa</string>
     <string name="auto_backup_title">Copia de seguridad automática</string>
     <string name="duplacate_widget_added_snackbar">Se ha añadido a la lista un widget duplicado.</string>
@@ -4784,7 +4782,6 @@
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="display_position">Posición de la ubicación</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
     <string name="click_on_widget">Pulsar en el widget</string>

@@ -4676,7 +4676,6 @@
     <string name="track_file">Pad bestand</string>
     <string name="altitude_correction">Hoogte correctie</string>
     <string name="get_altitude_data">Hoogte gegevens ophalen</string>
-    <string name="shared_string_2_5_d_view">2,5D zicht</string>
     <string name="routing_attr_avoid_highway_name">Snelwegen vermijden</string>
     <string name="colour_of_circles">Kleur van cirkels</string>
     <string name="circle_settings">Cirkel instellingen</string>
@@ -4717,7 +4716,6 @@
     <string name="next_turn_widget_desc">De widget toont informatie over uw volgende afslag met afbeelding van de beweging en afstand ertoe.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Kleurschema van dieptelijnen</string>
     <string name="rendering_attr_depthContourWidth_description">Dikte van dieptelijnen</string>
-    <string name="accessibility_2d_view_off">2,5D zicht uit</string>
     <string name="marker_2nd">Twee markering</string>
     <string name="side_marker_eta">Verwachte aankomsttijd</string>
     <string name="points_selection_descr">Sluiten en alle aanpassingen kwijtraken\?</string>
@@ -4872,7 +4870,6 @@
     <string name="compass_visible_if_map_rotated_desc">Verborgen wanneer het noorden boven is</string>
     <string name="compass_visible_if_map_rotated">Zichtbaar wanneer de kaart gedraaid is</string>
     <string name="compass_click_desc">Hint: Druk op het kompaswidget om de oriëntatie van kaart te wisselen.</string>
-    <string name="accessibility_2d_view_on">2,5D zicht aan</string>
     <string name="routing_attr_goods_restrictions_name">Bezorging van goederen</string>
     <string name="routing_attr_goods_restrictions_description">Denk over toegang voor lichte transportvoertuigen</string>
     <string name="marker_1st">Eerste markering</string>

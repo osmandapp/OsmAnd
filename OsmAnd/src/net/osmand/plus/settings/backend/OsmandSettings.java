@@ -77,6 +77,7 @@ import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.backend.preferences.FloatPreference;
 import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -95,6 +96,7 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
@@ -1754,8 +1756,6 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
-	public final CommonPreference<Boolean> ENABLE_3D_VIEW = new BooleanPreference(this, "enable_3d_view", true).makeProfile();
-
 	public final CommonPreference<Long> LAST_MAP_ACTIVITY_PAUSED_TIME = new LongPreference(this, "last_map_activity_paused_time", 0).makeGlobal().cache();
 	public final CommonPreference<Boolean> MAP_LINKED_TO_LOCATION = new BooleanPreference(this, "map_linked_to_location", true).makeGlobal().cache();
 
@@ -2337,9 +2337,7 @@ public class OsmandSettings {
 	}
 
 	public float getLastKnownMapElevation(@NonNull ApplicationMode appMode) {
-		return ENABLE_3D_VIEW.getModeValue(appMode) ?
-				LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode) :
-				LAST_KNOWN_MAP_ELEVATION.getProfileDefaultValue(appMode);
+		return LAST_KNOWN_MAP_ELEVATION.getModeValue(appMode);
 	}
 
 	public void setLastKnownMapElevation(float elevation) {
@@ -2347,9 +2345,7 @@ public class OsmandSettings {
 	}
 
 	public void setLastKnownMapElevation(@NonNull ApplicationMode appMode, float elevation) {
-		if (ENABLE_3D_VIEW.get()) {
-			LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
-		}
+		LAST_KNOWN_MAP_ELEVATION.setModeValue(appMode, elevation);
 	}
 
 	public static final String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
@@ -2641,43 +2637,20 @@ public class OsmandSettings {
 	 * quick actions prefs
 	 */
 
-	public static final String QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN = "quick_fab_margin_x_portrait_margin";
-	public static final String QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN = "quick_fab_margin_y_portrait_margin";
-	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
-	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
-
 	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference(this, "quick_action_state", false).makeProfile();
 
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference(this, "quick_action_list", "").makeGlobal().storeLastModifiedTime();
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
+	public final FabMarginPreference QUICK_ACTION_FAB_MARGIN = new FabMarginPreference(this, "quick_fab_margin");
 
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_PORTRAIT = new IntPreference(this, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, 0).makeProfile();
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT = new IntPreference(this, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0).makeProfile();
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN = new IntPreference(this, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0).makeProfile();
-	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN = new IntPreference(this, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0).makeProfile();
+	/**
+	 * map 3d mode
+	 */
 
-	public boolean setPortraitFabMargin(int x, int y) {
-		return QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.set(x) && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.set(y);
-	}
+	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE_IN_3D_MODE, Map3DModeVisibility.values()).makeProfile().cache();
 
-	public boolean setLandscapeFabMargin(int x, int y) {
-		return QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.set(x) && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.set(y);
-	}
-
-	public Pair<Integer, Integer> getPortraitFabMargin() {
-		if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.isSet() && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.isSet()) {
-			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get(), QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get());
-		}
-		return null;
-	}
-
-	public Pair<Integer, Integer> getLandscapeFabMargin() {
-		if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
-			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
-		}
-		return null;
-	}
+	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
 
 	/**
 	 * the location of a parked car

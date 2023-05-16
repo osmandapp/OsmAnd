@@ -209,4 +209,6 @@ public abstract class MapButton {
 	protected void setContentDesc(@StringRes int descId) {
 		view.setContentDescription(app.getString(descId));
 	}
+
+	public void onDestroyButton() {}
 }
