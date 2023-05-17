@@ -2857,10 +2857,10 @@
     <string name="rendering_attr_highway_class_road_name">Route</string>
     <string name="rendering_attr_highway_class_street_name">Rue</string>
     <string name="rendering_attr_highway_class_service_name">Service</string>
-    <string name="rendering_attr_highway_class_footway_name">Passerelle</string>
+    <string name="rendering_attr_highway_class_footway_name">Voie piétonne</string>
     <string name="rendering_attr_highway_class_track_name">Piste</string>
     <string name="rendering_attr_highway_class_bridleway_name">Passage piéton</string>
-    <string name="rendering_attr_highway_class_steps_name">Étapes</string>
+    <string name="rendering_attr_highway_class_steps_name">Escalier</string>
     <string name="rendering_attr_highway_class_path_name">Chemin</string>
     <string name="rendering_attr_highway_class_cycleway_name">Voie cyclable</string>
     <string name="rendering_attr_undefined_name">Non défini</string>
