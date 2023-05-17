@@ -128,7 +128,7 @@ public class RouteInfoCard extends MapBaseCard {
 	private List<LatLon> collectTrackPoints() {
 		List<LatLon> points = new ArrayList<>();
 		if (gpxFile != null) {
-			for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
+			for (WptPt wptPt : gpxFile.getAllPoints()) {
 				points.add(new LatLon(wptPt.lat, wptPt.lon));
 			}
 		}
