@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.externalsensors.adapters.DeviceCharacteristicsAdapter
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener
@@ -15,6 +17,7 @@ import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.utils.UiUtilities
@@ -98,9 +101,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         return device is BLEAbstractDevice
     }
 
-    private fun updateConnectedState(
-        view: View
-    ) {
+    private fun updateConnectedState(view: View) {
         val isConnected = device.isConnected
         val rssi = device.rssi
         val signalLevelIcon: Int = if (rssi > -50) {
@@ -118,6 +119,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         )
         val connectionStateIcon: ImageView = view.findViewById(R.id.connection_state_icon)
         connectionStateIcon.setImageResource(signalLevelIcon)
+        batteryLevel?.text = device.batteryLevel.toString()
     }
 
     private fun getConnectionTypeName() = if (isBle()) getBleText() else getAntText()
@@ -220,7 +222,10 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         plugin.disconnectDevice(device)
     }
 
-    override fun onDeviceConnect(device: AbstractDevice<out AbstractSensor>, result: DeviceConnectionResult, error: String?) {
+    override fun onDeviceConnect(
+        device: AbstractDevice<out AbstractSensor>,
+        result: DeviceConnectionResult,
+        error: String?) {
         app.runInUIThread {
             updateConnectedState()
             updateButtonState()
@@ -236,7 +241,19 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 
     override fun onSensorData(sensor: AbstractSensor, data: SensorData) {
         app.runInUIThread {
-            receivedDataAdapter.setItems(data.dataFields)
+            updateConnectedState()
+            val dataFields = ArrayList<SensorDataField>()
+            for (sensor in device.sensors) {
+                val sensorDataList = sensor.lastSensorDataList
+                sensorDataList?.let {
+                    for (sensorData in sensorDataList) {
+                        sensorData?.let {
+                            dataFields.addAll(sensorData.dataFields)
+                        }
+                    }
+                }
+            }
+            receivedDataAdapter.setItems(dataFields)
             if (device.isBatteryLow) {
                 app.showShortToastMessage(R.string.external_device_low_battery)
             }
@@ -248,5 +265,11 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         connectionState = null
         batteryLevel = null
         receivedDataView = null
+    }
+
+    @ColorRes
+    override fun getStatusBarColorId(): Int {
+        AndroidUiHelper.setStatusBarContentColor(view, nightMode)
+        return if (nightMode) R.color.status_bar_color_dark else R.color.activity_background_color_light
     }
 }

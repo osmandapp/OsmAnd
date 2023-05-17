@@ -64,13 +64,15 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/menu_icon"
-                    android:layout_width="@dimen/standard_icon_size"
-                    android:layout_height="@dimen/standard_icon_size"
+                    android:layout_width="@dimen/icon_size_double"
+                    android:layout_height="@dimen/icon_size_double"
                     android:layout_gravity="center"
+                    android:scaleType="center"
                     android:layout_marginHorizontal="@dimen/content_padding"
                     android:layout_marginVertical="@dimen/content_padding_small"
                     android:src="@drawable/ic_overflow_menu_white"
-                    android:tint="?attr/secondary_icon_color" />
+                    android:tint="?attr/secondary_icon_color"
+                    android:visibility="gone"/>
 
 
             </LinearLayout>

@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="rssi_widget_desc">Shows the RSSI level of your external device.</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
     <string name="map_3d_mode_hint">Long tap on button allows to change button position.</string>
