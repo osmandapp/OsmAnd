@@ -606,11 +606,11 @@ public class RouteDataObject {
 			boolean forwardDirection = r.isForward() >= 0;
 			if (forwardDirection == direction) {
 				// priority over default
-				maxSpeed = r.maxSpeed(profile) > 0 ? r.maxSpeed(RouteTypeRule.PROFILE_NONE) : maxSpeed;
+				maxSpeed = r.maxSpeed(RouteTypeRule.PROFILE_NONE) > 0 ? r.maxSpeed(RouteTypeRule.PROFILE_NONE) : maxSpeed;
 				maxProfileSpeed = r.maxSpeed(profile) > 0 ? r.maxSpeed(profile) : maxProfileSpeed;
 			}
 		}
-		return maxProfileSpeed >= 0 ? maxProfileSpeed : maxSpeed;
+		return maxProfileSpeed > 0 ? maxProfileSpeed : maxSpeed;
 	}
 
 	public static float parseSpeed(String v, float def) {
