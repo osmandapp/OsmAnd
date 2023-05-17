@@ -752,7 +752,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (routeInfoCard != null && routeInfoCard.getView() != null) {
 						reattachCard(cardsContainer, routeInfoCard);
 					} else {
-						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, getLatLon());
+						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, displayHelper.getGpx());
 						cardsContainer.addView(routeInfoCard.build(mapActivity));
 					}
 				}
