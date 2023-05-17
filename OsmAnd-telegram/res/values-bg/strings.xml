@@ -88,7 +88,7 @@
     <string name="privacy">Поверителност</string>
     <string name="proxy">Прокси</string>
     <string name="proxy_settings">Настройки на прокси сървъра</string>
-    <string name="proxy_disconnected">Връзката е прекъсната</string>
+    <string name="proxy_disconnected">Изключено</string>
     <string name="proxy_connected">Свързан</string>
     <string name="proxy_type">Тип прокси</string>
     <string name="shared_string_enable">Включване</string>
