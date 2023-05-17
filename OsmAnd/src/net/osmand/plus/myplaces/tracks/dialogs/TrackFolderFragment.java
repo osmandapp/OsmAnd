@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 
 import android.view.LayoutInflater;
@@ -8,15 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -27,16 +26,6 @@ import java.util.List;
 public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
-
-	@NonNull
-	@Override
-	protected List<Object> getAdapterItems() {
-		List<Object> items = new ArrayList<>();
-		items.add(TYPE_SORT_TRACKS);
-		items.addAll(selectedFolder.getSubFolders());
-		items.addAll(selectedFolder.getTrackItems());
-		return items;
-	}
 
 	@Override
 	protected void setupToolbar(@NonNull View view) {
@@ -74,7 +63,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		button.setOnClickListener(v -> {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				TracksSelectionFragment.showInstance(manager, selectedFolder, getTargetFragment());
+				TracksSelectionFragment.showInstance(manager, selectedFolder);
 			}
 		});
 		container.addView(button);
@@ -88,12 +77,12 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder selectedFolder) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TrackFolderFragment fragment = new TrackFolderFragment();
 			fragment.setRetainInstance(true);
-			fragment.setTrackFolder(trackFolder);
-			fragment.setTargetFragment(target, 0);
+			fragment.setRootFolder(selectedFolder);
+			fragment.setSelectedFolder(selectedFolder);
 			fragment.show(manager, TAG);
 		}
 	}

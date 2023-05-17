@@ -38,13 +38,13 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 		super(view);
 		this.listener = listener;
 		this.nightMode = nightMode;
-		app = (OsmandApplication) itemView.getContext().getApplicationContext().getApplicationContext();
+		app = (OsmandApplication) view.getContext().getApplicationContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
 
 		title = view.findViewById(R.id.title);
 		description = view.findViewById(R.id.description);
 		icon = view.findViewById(R.id.icon);
-		checkbox = itemView.findViewById(R.id.checkbox);
+		checkbox = view.findViewById(R.id.checkbox);
 		checkboxContainer = view.findViewById(R.id.checkbox_container);
 		menuButton = view.findViewById(R.id.menu_button);
 

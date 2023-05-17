@@ -114,12 +114,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
 
-	private static final int SEARCH_ID = -1;
-
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxSelectionHelper selectedGpxHelper;
-	private GpxActionsHelper gpxActionsHelper;
 
 	private boolean selectionMode;
 	private final List<GPXInfo> selectedItems = new ArrayList<>();
@@ -130,10 +127,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private ContextMenuAdapter optionsMenuAdapter;
 	private boolean updateEnable;
 	private GPXInfo currentRecording;
-	private boolean showOnMapMode;
-	private View currentGpxView;
 	private View footerView;
-	private boolean importing;
 	private View emptyView;
 	private SelectGpxTaskListener gpxTaskListener;
 	private String selectedFolder;
@@ -173,146 +167,22 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		asyncLoader = new LoadGpxInfosTask(app, this);
 		selectedGpxHelper = app.getSelectedGpxHelper();
 		allGpxAdapter = new GpxIndexesAdapter();
-		gpxActionsHelper = new GpxActionsHelper(requireActivity(), nightMode);
-		gpxActionsHelper.setTargetFragment(this);
+		GpxActionsHelper gpxActionsHelper = new GpxActionsHelper(this, nightMode);
 		gpxActionsHelper.setDeletionListener(this);
 		setAdapter(allGpxAdapter);
-	}
-
-	public void startImport() {
-		importing = true;
-	}
-
-	public void finishImport(boolean success) {
-		if (success) {
-			reloadTracks();
-		}
-		importing = false;
-	}
-
-	private void startHandler() {
-		Handler updateCurrentRecordingTrack = new Handler();
-		updateCurrentRecordingTrack.postDelayed(() -> {
-			if (getView() != null && updateEnable) {
-				updateCurrentTrack();
-				if (selectedGpxHelper.getSelectedCurrentRecordingTrack() != null) {
-					allGpxAdapter.notifyDataSetChanged();
-				}
-				startHandler();
-			}
-		}, 2000);
-	}
-
-	public List<GPXInfo> getSelectedItems() {
-		return selectedItems;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!importing) {
-			if (asyncLoader == null || asyncLoader.getGpxInfos() == null) {
-				asyncLoader = new LoadGpxInfosTask(app, this);
-				asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			} else {
-				allGpxAdapter.refreshSelected();
-				allGpxAdapter.notifyDataSetChanged();
-			}
+		if (asyncLoader == null || asyncLoader.getGpxInfos() == null) {
+			asyncLoader = new LoadGpxInfosTask(app, this);
+			asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		} else {
+			allGpxAdapter.refreshSelected();
+			allGpxAdapter.notifyDataSetChanged();
 		}
-		updateCurrentTrack();
-
-		updateEnable = true;
-		startHandler();
 		restoreState(getArguments());
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		updateEnable = false;
-		if (actionMode != null) {
-			actionMode.finish();
-		}
-	}
-
-	public void updateCurrentTrack() {
-		OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
-		if (currentGpxView == null || plugin == null) {
-			return;
-		}
-
-		boolean isRecording = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-
-		ImageView icon = currentGpxView.findViewById(R.id.icon);
-		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.monitoring_rec_big));
-		icon.setVisibility(selectionMode && showOnMapMode ? View.GONE : View.VISIBLE);
-
-		SavingTrackHelper sth = app.getSavingTrackHelper();
-
-		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
-		Button stop = currentGpxView.findViewById(R.id.action_button);
-		if (isRecording) {
-			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.VISIBLE);
-			TextView segmentTime = currentGpxView.findViewById(R.id.segment_time);
-			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int) (sth.getDuration() / 1000)));
-			segmentTime.setVisibility(View.VISIBLE);
-			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_stop, activeColorId);
-			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
-			stop.setText(app.getString(R.string.shared_string_control_stop));
-			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
-		} else {
-			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.GONE);
-			currentGpxView.findViewById(R.id.segment_time).setVisibility(View.GONE);
-			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_start, activeColorId);
-			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
-			stop.setText(app.getString(R.string.shared_string_record));
-			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
-		}
-		stop.setOnClickListener(v -> {
-			if (isRecording) {
-				plugin.stopRecording();
-				updateCurrentTrack();
-			} else if (app.getLocationProvider().checkGPSEnabled(getActivity())) {
-				plugin.startGPXMonitoring(getActivity());
-				updateCurrentTrack();
-			}
-		});
-		Button save = currentGpxView.findViewById(R.id.save_button);
-		Drawable saveIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gsave_dark, activeColorId);
-		save.setCompoundDrawablesWithIntrinsicBounds(saveIcon, null, null, null);
-		save.setOnClickListener(v -> {
-			plugin.saveCurrentTrack(() -> {
-				if (isResumed()) {
-					reloadTracks();
-				}
-			});
-			updateCurrentTrack();
-		});
-		if (sth.getPoints() > 0 || sth.getDistance() > 0) {
-			save.setVisibility(View.VISIBLE);
-		} else {
-			save.setVisibility(View.GONE);
-		}
-		save.setContentDescription(app.getString(R.string.save_current_track));
-
-		((TextView) currentGpxView.findViewById(R.id.points_count)).setText(String.valueOf(sth.getPoints()));
-		((TextView) currentGpxView.findViewById(R.id.distance))
-				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
-
-		CheckBox checkbox = currentGpxView.findViewById(R.id.check_local_index);
-		checkbox.setVisibility(selectionMode && showOnMapMode ? View.VISIBLE : View.GONE);
-		if (selectionMode && showOnMapMode) {
-			checkbox.setChecked(selectedItems.contains(currentRecording));
-			checkbox.setOnClickListener(v -> {
-				if (checkbox.isChecked()) {
-					selectedItems.add(currentRecording);
-				} else {
-					selectedItems.remove(currentRecording);
-				}
-				updateSelectionMode(actionMode);
-			});
-		}
-
 	}
 
 	@Override
@@ -320,19 +190,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		View v = inflater.inflate(R.layout.available_gpx, container, false);
 		listView = v.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
-		if (PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			currentGpxView = inflater.inflate(R.layout.current_gpx_item, null, false);
-			createCurrentTrackView();
-			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(v1 -> {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					String name = getString(R.string.shared_string_tracks);
-					boolean temporarySelected = selectedGpxHelper.getSelectedCurrentRecordingTrack() == null;
-					TrackMenuFragment.openTrack(activity, null, storeState(), name, TrackMenuTab.OVERVIEW, temporarySelected);
-				}
-			});
-			listView.addHeaderView(currentGpxView);
-		}
+
 		footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 		listView.addFooterView(footerView);
 		emptyView = v.findViewById(android.R.id.empty);
@@ -343,23 +201,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (adapter != null) {
 			listView.setAdapter(adapter);
 		}
-
-		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-			@Override
-			public void onScrollStateChanged(AbsListView absListView, int i) {
-				View currentFocus = getActivity().getCurrentFocus();
-				if (currentFocus != null) {
-					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
-				}
-			}
-
-			@Override
-			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-
-			}
-		});
-
 		return v;
 	}
 
@@ -367,14 +208,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
-	}
-
-	public void createCurrentTrackView() {
-		ImageView distanceI = currentGpxView.findViewById(R.id.distance_icon);
-		distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_distance_16));
-		ImageView pointsI = currentGpxView.findViewById(R.id.points_icon);
-		pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_waypoint_16));
-		updateCurrentTrack();
 	}
 
 	public void reloadTracks() {
@@ -385,44 +218,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
-				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		SearchView searchView = new SearchView(getActivity());
-		updateSearchView(searchView);
-		mi.setActionView(searchView);
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				allGpxAdapter.getFilter().filter(query);
-				return true;
-			}
-
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				allGpxAdapter.getFilter().filter(newText);
-				return true;
-			}
-		});
-		mi.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
-				return true;
-			}
-
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				// Needed to hide intermediate progress bar after closing action mode
-				new Handler().postDelayed(() -> hideProgressBar(), 100);
-				return true;
-			}
-		});
-
-		inflater.inflate(R.menu.track_sort_menu_item, menu);
-		mi = menu.findItem(R.id.action_sort);
-		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
-		mi.setIcon(getIcon(settings.TRACKS_SORT_BY_MODE.get().getIconId(), iconColorId));
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			menu = ((MyPlacesActivity) getActivity()).getClearToolbar(true).getMenu();
@@ -490,33 +285,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	private void updateSearchView(@NonNull SearchView searchView) {
-		//do not ever do like this
-		if (!app.getSettings().isLightContent()) {
-			return;
-		}
-		try {
-			ImageView cancelIcon = searchView.findViewById(R.id.search_close_btn);
-			cancelIcon.setImageResource(R.drawable.ic_action_gremove_dark);
-			//styling search hint icon and text
-			SearchView.SearchAutoComplete searchEdit = searchView.findViewById(R.id.search_src_text);
-			searchEdit.setTextColor(app.getColor(R.color.color_white));
-			SpannableStringBuilder stopHint = new SpannableStringBuilder("   ");
-			float rawTextSize = searchEdit.getTextSize();
-			int textSize = (int) (rawTextSize * 1.25);
-
-			//setting icon as spannable
-			Drawable searchIcon = AppCompatResources.getDrawable(app, R.drawable.ic_action_search_dark);
-			if (searchIcon != null) {
-				searchIcon.setBounds(0, 0, textSize, textSize);
-				stopHint.setSpan(new ImageSpan(searchIcon), 1, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-				searchEdit.setHint(stopHint);
-			}
-		} catch (Exception e) {
-			// ignore
-		}
-	}
-
 	public void doAction(int actionResId) {
 		if (actionResId == R.string.shared_string_delete) {
 //			gpxActionsHelper.deleteGpxFiles(selectedItems);
@@ -539,45 +307,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		}
-		if (itemId == R.id.action_sort) {
-			Activity activity = getActivity();
-			if (activity != null) {
-				showSortPopUpMenu(activity.findViewById(R.id.action_sort), item);
-			}
-		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void showSortPopUpMenu(@NonNull View anchorView, @NonNull MenuItem item) {
-		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		for (TracksSortByMode mode : TracksSortByMode.values()) {
-			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitleId(mode.getNameId())
-					.setIcon(getContentIcon(mode.getIconId()))
-					.setOnClickListener(v -> {
-						updateTracksSort(mode);
-						int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
-						item.setIcon(getIcon(mode.getIconId(), iconColorId));
-					})
-					.setSelected(settings.TRACKS_SORT_BY_MODE.get() == mode)
-					.create()
-			);
-		}
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = anchorView;
-		displayData.menuItems = menuItems;
-		displayData.nightMode = nightMode;
-		PopUpMenu.show(displayData);
 	}
 
 	private void addTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
-	}
-
-	private void updateTracksSort(TracksSortByMode sortByMode) {
-		settings.TRACKS_SORT_BY_MODE.set(sortByMode);
-		reloadTracks();
 	}
 
 	private void openCoordinatesInput() {
@@ -617,7 +352,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private void openShowOnMapMode() {
 		enableSelectionMode(true);
-		showOnMapMode = true;
 		selectedItems.clear();
 		selectedGroups.clear();
 		Set<GPXInfo> originalSelectedItems = allGpxAdapter.getSelectedGpx();
@@ -633,7 +367,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				it.setIcon(R.drawable.ic_action_done);
 				it.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
 						| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-				updateCurrentTrack();
 				return true;
 			}
 
@@ -653,9 +386,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				showOnMapMode = false;
 				enableSelectionMode(false);
-				updateCurrentTrack();
 				allGpxAdapter.notifyDataSetChanged();
 			}
 

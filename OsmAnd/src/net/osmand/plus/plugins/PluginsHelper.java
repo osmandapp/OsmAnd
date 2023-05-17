@@ -25,6 +25,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
@@ -639,9 +640,9 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, List<PopUpMenuItem> items) {
+	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedTrackItems, List<PopUpMenuItem> items) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.optionsMenuFragment(activity, fragment, items);
+			plugin.optionsMenuFragment(activity, fragment, selectedTrackItems, items);
 		}
 	}
 

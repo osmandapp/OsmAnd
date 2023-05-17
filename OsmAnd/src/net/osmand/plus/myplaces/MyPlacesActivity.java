@@ -2,7 +2,6 @@ package net.osmand.plus.myplaces;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -20,8 +19,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
-import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
@@ -101,48 +98,13 @@ public class MyPlacesActivity extends TabActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
-			if (data != null) {
-				Uri uri = data.getData();
-				AvailableTracksFragment fragment = getGpxFragment();
-				if (fragment != null) {
-					fragment.startImport();
-				}
-				importHelper.setGpxImportListener(new GpxImportListener() {
-					@Override
-					public void onImportComplete(boolean success) {
-						AvailableTracksFragment fragment = getGpxFragment();
-						if (fragment != null) {
-							fragment.finishImport(success);
-						}
-						importHelper.setGpxImportListener(null);
-					}
-				});
-				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {
-					if (fragment != null) {
-						fragment.finishImport(false);
-					}
-				}
-			}
-		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
+		if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
 			if (data != null && data.getData() != null) {
 				importHelper.handleFavouritesImport(data.getData());
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
 		}
-	}
-
-	@Nullable
-	private AvailableTracksFragment getGpxFragment() {
-		AvailableTracksFragment gpxFragment = null;
-		for (WeakReference<FragmentStateHolder> fragmentStateHolder : fragmentsStateList) {
-			FragmentStateHolder frag = fragmentStateHolder.get();
-			if (frag instanceof AvailableTracksFragment) {
-				gpxFragment = (AvailableTracksFragment) frag;
-			}
-		}
-		return gpxFragment;
 	}
 
 	private void setTabs(@NonNull List<TabItem> tabItems) {

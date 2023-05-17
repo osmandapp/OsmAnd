@@ -272,19 +272,15 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static String getFolderDescription(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+		long lastModified = folder.getLastModified();
 		int tracksCount = folder.getFlattenedTrackItems().size();
-		String pattern = app.getString(R.string.ltr_or_rtl_combine_via_comma);
-		return String.format(pattern, formatLastUpdateTime(app, folder), formatTracksCount(app, tracksCount));
-	}
 
-	@NonNull
-	public static String formatLastUpdateTime(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
-		return OsmAndFormatter.getFormattedDate(app, folder.getLastModified());
-	}
-
-	@NonNull
-	public static String formatTracksCount(@NonNull OsmandApplication app, int tracksCount) {
-		return app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
+		String numberOfTracks = app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
+		if (lastModified > 0) {
+			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, tracksCount);
+		}
+		return numberOfTracks;
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app,

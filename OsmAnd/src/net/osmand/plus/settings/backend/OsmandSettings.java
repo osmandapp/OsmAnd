@@ -101,6 +101,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -1850,6 +1851,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", false).makeProfile().cache();
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
+	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").cache();
 
 	@NonNull

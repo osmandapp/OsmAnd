@@ -11,7 +11,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackItem {
+public class ImportTrackItem {
 
 	public final int index;
 	public final String name;
@@ -22,7 +22,7 @@ public class TrackItem {
 	public Bitmap bitmap;
 	public TrackBitmapDrawer bitmapDrawer;
 
-	public TrackItem(@NonNull SelectedGpxFile selectedGpxFile, @NonNull String name, int index) {
+	public ImportTrackItem(@NonNull SelectedGpxFile selectedGpxFile, @NonNull String name, int index) {
 		this.name = name;
 		this.index = index;
 		this.selectedGpxFile = selectedGpxFile;

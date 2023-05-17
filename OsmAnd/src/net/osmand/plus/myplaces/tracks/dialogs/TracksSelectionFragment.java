@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 
 import android.os.Bundle;
@@ -25,10 +24,8 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,7 +39,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
 
-	private ItemsSelectionHelper<TrackItem> selectionHelper;
+	private ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private TextView toolbarTitle;
 	private ImageButton selectionButton;
@@ -55,9 +52,9 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		selectionHelper = new ItemsSelectionHelper<>();
+	public void setRootFolder(@NonNull TrackFolder rootFolder) {
+		super.setRootFolder(rootFolder);
+		selectionHelper.clearSelectedItems();
 		selectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
 	}
 
@@ -68,16 +65,6 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 		adapter.setSelectionMode(true);
 		updateSelection();
 		return view;
-	}
-
-	@NonNull
-	@Override
-	protected List<Object> getAdapterItems() {
-		List<Object> items = new ArrayList<>();
-		items.add(TYPE_SORT_TRACKS);
-		items.addAll(selectedFolder.getSubFolders());
-		items.addAll(selectedFolder.getTrackItems());
-		return items;
 	}
 
 	@Override
@@ -128,6 +115,10 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 			GpxActionsHelper gpxActionsHelper = getGpxActionsHelper();
 			if (gpxActionsHelper != null) {
 				CallbackWithObject<Boolean> callback = result -> {
+					Fragment target = getParentFragment();
+					if (target instanceof AvailableTracksFragment) {
+						((AvailableTracksFragment) target).updateAdapter();
+					}
 					dismiss();
 					return true;
 				};
@@ -170,7 +161,8 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 	public boolean isTracksGroupSelected(@NonNull TracksGroup group) {
 		if (group instanceof TrackFolder) {
 			TrackFolder folder = (TrackFolder) group;
-			return selectionHelper.isItemsSelected(folder.getFlattenedTrackItems());
+			List<TrackItem> trackItems = folder.getFlattenedTrackItems();
+			return !trackItems.isEmpty() && selectionHelper.isItemsSelected(trackItems);
 		}
 		return selectionHelper.isItemsSelected(group.getTrackItems());
 	}
@@ -187,12 +179,12 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 		updateSelection();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksSelectionFragment fragment = new TracksSelectionFragment();
 			fragment.setRetainInstance(true);
-			fragment.setTrackFolder(trackFolder);
-			fragment.setTargetFragment(target, 0);
+			fragment.setRootFolder(trackFolder);
+			fragment.setSelectedFolder(trackFolder);
 			fragment.show(manager, TAG);
 		}
 	}

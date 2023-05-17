@@ -1,9 +1,9 @@
 package net.osmand.plus.myplaces.tracks;
 
-import static net.osmand.plus.myplaces.MyPlacesActivity.OPEN_GPX_DOCUMENT_REQUEST;
+import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -60,25 +60,24 @@ public class GpxActionsHelper {
 	private final OsmandSettings settings;
 	private final UiUtilities uiUtilities;
 	private final GpxSelectionHelper gpxSelectionHelper;
-	private final ItemsSelectionHelper<TrackItem> selectionHelper;
+	private final ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
 
+	private final Fragment fragment;
 	private final FragmentActivity activity;
 	private final boolean nightMode;
 
 	@Nullable
-	private Fragment targetFragment;
-	@Nullable
 	private GpxFilesDeletionListener deletionListener;
 
-	public GpxActionsHelper(@NonNull FragmentActivity activity, boolean nightMode) {
-		this.activity = activity;
+	public GpxActionsHelper(@NonNull Fragment fragment, boolean nightMode) {
+		this.fragment = fragment;
+		this.activity = fragment.requireActivity();
 		this.nightMode = nightMode;
 
 		app = (OsmandApplication) activity.getApplication();
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
-		selectionHelper = new ItemsSelectionHelper<>();
 	}
 
 	@NonNull
@@ -86,34 +85,34 @@ public class GpxActionsHelper {
 		return selectionHelper;
 	}
 
-	public void setTargetFragment(@Nullable Fragment targetFragment) {
-		this.targetFragment = targetFragment;
-	}
-
 	public void setDeletionListener(@Nullable GpxFilesDeletionListener deletionListener) {
 		this.deletionListener = deletionListener;
 	}
 
-	public void showPopUpMenu(@NonNull View anchorView, @NonNull TrackFolder trackFolder) {
+	public void showMainPopUpMenu(@NonNull View anchorView, @NonNull TrackFolder trackFolder) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_deselect_all))
 				.setOnClickListener(v -> {
-					FragmentManager manager = activity.getSupportFragmentManager();
-					TracksSelectionFragment.showInstance(manager, trackFolder, targetFragment);
+					FragmentManager manager = fragment.getChildFragmentManager();
+					TracksSelectionFragment.showInstance(manager, trackFolder);
+				})
+				.create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.add_new_folder)
+				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_add_outlined))
+				.setOnClickListener(v -> {
+
 				})
 				.create());
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_import)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_import))
-				.setOnClickListener(v -> {
-					Intent intent = ImportHelper.getImportTrackIntent();
-					intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-					AndroidUtils.startActivityForResultIfSafe(activity, intent, OPEN_GPX_DOCUMENT_REQUEST);
-				})
+				.setOnClickListener(v -> importTracks())
 				.create()
 		);
 
@@ -124,21 +123,27 @@ public class GpxActionsHelper {
 		PopUpMenu.show(displayData);
 	}
 
-	public void showItemsPopupMenu(@NonNull View view, @NonNull Set<TrackItem> trackItems, @Nullable CallbackWithObject<Boolean> callback) {
+	public void importTracks() {
+		Intent intent = ImportHelper.getImportTrackIntent();
+		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+		AndroidUtils.startActivityForResultIfSafe(fragment, intent, IMPORT_FILE_REQUEST);
+	}
+
+	public void showItemsPopupMenu(@NonNull View view, @NonNull Set<TrackItem> selectedTrackItems, @Nullable CallbackWithObject<Boolean> callback) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(trackItems, null);
+					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, null);
 					if (callback != null) {
 						callback.processResult(true);
 					}
 				})
 				.create()
 		);
-		PluginsHelper.onOptionsMenuActivity(activity, targetFragment, items);
+		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, items);
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_move)
@@ -158,7 +163,7 @@ public class GpxActionsHelper {
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
-				.setOnClickListener(v -> showDeleteConfirmationDialog(trackItems, callback))
+				.setOnClickListener(v -> showDeleteConfirmationDialog(selectedTrackItems, callback))
 				.showTopDivider(true)
 				.create()
 		);
@@ -224,7 +229,7 @@ public class GpxActionsHelper {
 					.setTitleId(R.string.shared_string_rename)
 					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_edit_dark))
 					.setOnClickListener(v -> {
-						FileUtils.renameFile(activity, file, targetFragment, false);
+						FileUtils.renameFile(activity, file, fragment, false);
 					})
 					.create()
 			);
@@ -233,7 +238,7 @@ public class GpxActionsHelper {
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(R.string.shared_string_export)
 						.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_export))
-						.setOnClickListener(v -> osmEditingPlugin.sendGPXFiles(activity, targetFragment, file))
+						.setOnClickListener(v -> osmEditingPlugin.sendGPXFiles(activity, fragment, file))
 						.create()
 				);
 			}
@@ -272,30 +277,36 @@ public class GpxActionsHelper {
 
 	private void moveGpx(@NonNull TrackItem trackItem) {
 		FragmentManager manager = activity.getSupportFragmentManager();
-		MoveGpxFileBottomSheet.showInstance(manager, targetFragment, trackItem.getPath(), false, false);
+		MoveGpxFileBottomSheet.showInstance(manager, fragment, trackItem.getPath(), false, false);
 	}
 
 	@Nullable
 	private Bundle getFragmentStoreState() {
-		if (targetFragment instanceof FragmentStateHolder) {
-			return ((FragmentStateHolder) targetFragment).storeState();
+		if (fragment instanceof FragmentStateHolder) {
+			return ((FragmentStateHolder) fragment).storeState();
 		}
 		return null;
 	}
 
 	private void showGpxOnMap(@NonNull TrackItem trackItem) {
-		getGpxFile(trackItem, gpxFile -> {
-			WptPt loc = gpxFile.findPointToShow();
-			if (loc != null) {
-				settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
-				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
-				Bundle bundle = getFragmentStoreState();
-				MapActivity.launchMapActivityMoveToTop(activity, bundle);
-			} else {
-				app.showToastMessage(R.string.gpx_file_is_empty);
-			}
-			return true;
-		});
+		Bundle bundle = getFragmentStoreState();
+		if (trackItem.isShowCurrentTrack()) {
+			String name = app.getString(R.string.shared_string_tracks);
+			boolean temporarySelected = app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() == null;
+			TrackMenuFragment.openTrack(activity, null, bundle, name, OVERVIEW, temporarySelected);
+		} else {
+			getGpxFile(trackItem, gpxFile -> {
+				WptPt loc = gpxFile.findPointToShow();
+				if (loc != null) {
+					settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
+					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
+					MapActivity.launchMapActivityMoveToTop(activity, bundle);
+				} else {
+					app.showToastMessage(R.string.gpx_file_is_empty);
+				}
+				return true;
+			});
+		}
 	}
 
 	private void getGpxFile(@NonNull TrackItem trackItem, @NonNull CallbackWithObject<GPXFile> callback) {

@@ -27,6 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
@@ -362,7 +363,7 @@ public abstract class OsmandPlugin {
 	protected void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 	}
 
-	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, List<PopUpMenuItem> items) {
+	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedTrackItems, List<PopUpMenuItem> items) {
 	}
 
 	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {

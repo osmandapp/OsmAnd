@@ -11,11 +11,16 @@
 	Thx - Hardy
 -->
 
+    <string name="tracks_empty_folder_description">This folder doesn\’t have any track yet.</string>
+    <string name="tracks_empty_folder">Empty folder</string>
+    <string name="track_not_recorded">Not recorded</string>
+    <string name="shared_string_new_track">New track</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
     <string name="map_3d_mode_hint">Long tap on button allows to change button position.</string>
     <string name="visible_in_3d_mode">Visible in 3D mode</string>
     <string name="map_3d_mode_description">Touch map with two fingers and moves them up and down to adjust map tilt.</string>
+    <string name="shared_string_visible_on_map">Visible on map</string>
     <string name="no_poi_for_category">POI not found</string>
     <string name="rendering_attr_lightDetail_name">Light detail</string>
     <string name="rendering_attr_lightDetail_description">Default: seamark name (light character.group.period), select additional information on sectors 1 to 3 or sector 1,2,3,4,5 light character</string>

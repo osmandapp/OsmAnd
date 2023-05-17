@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
+import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -25,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
+import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -39,16 +44,16 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment implements SortTracksListener,
-		TrackSelectionListener, TrackGroupsListener {
+		TrackSelectionListener, TrackGroupsListener, EmptyTracksListener {
 
 	protected TrackFolder rootFolder;
 	protected TrackFolder selectedFolder;
-
 	protected TrackFoldersAdapter adapter;
 	protected TextView toolbarTitle;
 
@@ -59,11 +64,21 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@NonNull
-	protected abstract List<Object> getAdapterItems();
+	public TrackFolder getRootFolder() {
+		return rootFolder;
+	}
 
-	public void setTrackFolder(@NonNull TrackFolder trackFolder) {
-		this.rootFolder = trackFolder;
-		this.selectedFolder = trackFolder;
+	@NonNull
+	public TrackFolder getSelectedFolder() {
+		return selectedFolder;
+	}
+
+	public void setRootFolder(@NonNull TrackFolder rootFolder) {
+		this.rootFolder = rootFolder;
+	}
+
+	public void setSelectedFolder(@NonNull TrackFolder selectedFolder) {
+		this.selectedFolder = selectedFolder;
 	}
 
 	@NonNull
@@ -116,6 +131,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 		adapter.setSortTracksListener(this);
 		adapter.setTrackGroupsListener(this);
 		adapter.setTrackSelectionListener(this);
+		adapter.setEmptyTracksListener(this);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -124,12 +140,27 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 	}
 
 	private void onBackPressed() {
-		if (selectedFolder.equals(rootFolder)) {
+		if (rootFolder.equals(selectedFolder)) {
 			dismiss();
 		} else {
 			selectedFolder = selectedFolder.getParentFolder();
 			updateContent();
 		}
+	}
+
+	@NonNull
+	private List<Object> getAdapterItems() {
+		List<Object> items = new ArrayList<>();
+		items.add(TYPE_SORT_TRACKS);
+
+		List<TrackFolder> folders = selectedFolder.getSubFolders();
+		List<TrackItem> trackItems = selectedFolder.getTrackItems();
+		if (folders.isEmpty() && trackItems.isEmpty()) {
+			items.add(TYPE_EMPTY_FOLDER);
+		}
+		items.addAll(folders);
+		items.addAll(trackItems);
+		return items;
 	}
 
 	@Override
@@ -149,7 +180,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 
 	@Nullable
 	protected GpxActionsHelper getGpxActionsHelper() {
-		Fragment fragment = getTargetFragment();
+		Fragment fragment = getParentFragment();
 		if (fragment instanceof AvailableTracksFragment) {
 			return ((AvailableTracksFragment) fragment).getGpxActionsHelper();
 		}
@@ -184,5 +215,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 		tabsSortModes.put(selectedFolder.getDirFile().getName(), sortMode.name());
 
 		settings.saveTabsSortModes(tabsSortModes);
+	}
+
+	@Override
+	public void importTracks() {
+		GpxActionsHelper gpxActionsHelper = getGpxActionsHelper();
+		if (gpxActionsHelper != null) {
+			gpxActionsHelper.importTracks();
+		}
 	}
 }

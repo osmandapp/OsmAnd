@@ -78,8 +78,8 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	private static final String SELECTED_DIRECTORY_KEY = "selected_directory_key";
 
-	private final List<TrackItem> trackItems = new ArrayList<>();
-	private final Set<TrackItem> selectedTracks = new HashSet<>();
+	private final List<ImportTrackItem> trackItems = new ArrayList<>();
+	private final Set<ImportTrackItem> selectedTracks = new HashSet<>();
 
 	private GPXFile gpxFile;
 	private String fileName;
@@ -269,7 +269,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		for (TrackItem item : trackItems) {
+		for (ImportTrackItem item : trackItems) {
 			if (item.bitmapDrawer != null) {
 				item.bitmapDrawer.setDrawEnabled(false);
 			}
@@ -374,7 +374,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@Override
-	public void onTrackItemPointsSelected(@NonNull TrackItem item) {
+	public void onTrackItemPointsSelected(@NonNull ImportTrackItem item) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPoints(), this);
@@ -382,7 +382,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@Override
-	public void onPointsSelected(@NonNull TrackItem trackItem, @NonNull Set<WptPt> selectedPoints) {
+	public void onPointsSelected(@NonNull ImportTrackItem trackItem, @NonNull Set<WptPt> selectedPoints) {
 		trackItem.selectedPoints.clear();
 		trackItem.selectedPoints.addAll(selectedPoints);
 
@@ -405,7 +405,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@Override
-	public void onTrackItemSelected(@NonNull TrackItem item, boolean selected) {
+	public void onTrackItemSelected(@NonNull ImportTrackItem item, boolean selected) {
 		if (selected) {
 			selectedTracks.add(item);
 		} else {
@@ -424,7 +424,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			}
 
 			@Override
-			public void tracksCollectionFinished(List<TrackItem> items) {
+			public void tracksCollectionFinished(List<ImportTrackItem> items) {
 				collectTracksTask = null;
 				trackItems.addAll(items);
 				selectedTracks.addAll(items);

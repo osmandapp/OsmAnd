@@ -14,11 +14,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksComparator;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.EmptyFolderViewHolder;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
@@ -39,9 +43,11 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	// values are used to sort items in TracksComparator
 	public static final int TYPE_SORT_TRACKS = 0;
-	public static final int TYPE_VISIBLE_TRACKS = 1;
-	public static final int TYPE_FOLDER = 2;
-	public static final int TYPE_TRACK = 3;
+	public static final int TYPE_RECORDING_TRACK = 1;
+	public static final int TYPE_VISIBLE_TRACKS = 2;
+	public static final int TYPE_FOLDER = 3;
+	public static final int TYPE_TRACK = 4;
+	public static final int TYPE_EMPTY_FOLDER = 5;
 
 	private final OsmandApplication app;
 	private final UpdateLocationViewCache locationViewCache;
@@ -53,6 +59,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private TrackGroupsListener trackGroupsListener;
 	@Nullable
 	private TrackSelectionListener trackSelectionListener;
+	@Nullable
+	private RecordingTrackListener recordingTrackListener;
+	@Nullable
+	private EmptyTracksListener emptyTracksListener;
 
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 	private boolean nightMode;
@@ -100,6 +110,14 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.trackGroupsListener = trackGroupsListener;
 	}
 
+	public void setRecordingTrackListener(@Nullable RecordingTrackListener recordingTrackListener) {
+		this.recordingTrackListener = recordingTrackListener;
+	}
+
+	public void setEmptyTracksListener(@Nullable EmptyTracksListener emptyTracksListener) {
+		this.emptyTracksListener = emptyTracksListener;
+	}
+
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -117,6 +135,12 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_SORT_TRACKS:
 				view = inflater.inflate(R.layout.sort_type_view, parent, false);
 				return new SortTracksViewHolder(view, sortListener, nightMode);
+			case TYPE_RECORDING_TRACK:
+				view = inflater.inflate(R.layout.current_gpx_item, parent, false);
+				return new RecordingTrackViewHolder(view, trackSelectionListener, recordingTrackListener, nightMode);
+			case TYPE_EMPTY_FOLDER:
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
+				return new EmptyFolderViewHolder(view, emptyTracksListener, nightMode);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -126,7 +150,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
 		if (object instanceof TrackItem) {
-			return TYPE_TRACK;
+			return ((TrackItem) object).isShowCurrentTrack() ? TYPE_RECORDING_TRACK : TYPE_TRACK;
 		} else if (object instanceof TrackFolder) {
 			return TYPE_FOLDER;
 		} else if (object instanceof VisibleTracksGroup) {
@@ -135,6 +159,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			int item = (Integer) object;
 			if (TYPE_SORT_TRACKS == item) {
 				return TYPE_SORT_TRACKS;
+			} else if (TYPE_EMPTY_FOLDER == item) {
+				return TYPE_EMPTY_FOLDER;
 			}
 		}
 		throw new IllegalArgumentException("Unsupported view type");
@@ -161,6 +187,14 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 			VisibleTracksViewHolder viewHolder = (VisibleTracksViewHolder) holder;
 			viewHolder.bindView(tracksGroup);
+		} else if (holder instanceof RecordingTrackViewHolder) {
+			TrackItem trackItem = (TrackItem) items.get(position);
+
+			RecordingTrackViewHolder viewHolder = (RecordingTrackViewHolder) holder;
+			viewHolder.bindView(trackItem);
+		} else if (holder instanceof EmptyFolderViewHolder) {
+			EmptyFolderViewHolder viewHolder = (EmptyFolderViewHolder) holder;
+			viewHolder.bindView();
 		}
 	}
 
@@ -169,7 +203,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return items.size();
 	}
 
-	private void updateItem(@NonNull Object object) {
+	public void updateItem(@NonNull Object object) {
 		int index = items.indexOf(object);
 		if (index != -1) {
 			notifyItemChanged(index);

@@ -77,6 +77,10 @@ public class ItemsSelectionHelper<T> {
 		return !selectedItems.isEmpty();
 	}
 
+	public boolean hasAnyItems() {
+		return !allItems.isEmpty();
+	}
+
 	public int getSelectedItemsSize() {
 		return selectedItems.size();
 	}
@@ -87,5 +91,11 @@ public class ItemsSelectionHelper<T> {
 
 	public void selectAllItems() {
 		selectedItems.addAll(allItems);
+	}
+
+	public interface SelectionHelperProvider<T> {
+
+		@NonNull
+		ItemsSelectionHelper<T> getSelectionHelper();
 	}
 }

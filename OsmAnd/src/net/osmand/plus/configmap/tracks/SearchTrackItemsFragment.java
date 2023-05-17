@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,11 +28,12 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.ImportTracksListener;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -41,7 +41,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -50,7 +49,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 	public static final String TAG = SearchTrackItemsFragment.class.getSimpleName();
 
-	private ItemsSelectionHelper<TrackItem> selectionHelper;
+	private final ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private SearchTracksAdapter adapter;
 
@@ -73,13 +72,9 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Fragment fragment = requireParentFragment();
-		if (fragment instanceof TracksFragment) {
-			TracksFragment tracksFragment = (TracksFragment) fragment;
-			selectionHelper = tracksFragment.getItemsSelectionHelper();
-		} else if (fragment instanceof AvailableTracksFragment) {
-			AvailableTracksFragment tracksFragment = (AvailableTracksFragment) fragment;
-			selectionHelper = tracksFragment.getSelectionHelper();
+
+		if (!selectionHelper.hasAnyItems()) {
+			setupSelectionHelper();
 		}
 	}
 
@@ -90,21 +85,19 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		View view = inflater.inflate(R.layout.gpx_search_items_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
-		Fragment fragment = requireParentFragment();
+		Fragment fragment = getParentFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
 		adapter = new SearchTracksAdapter(app, trackItems, nightMode);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
+		adapter.setSelectionListener(getTrackSelectionListener());
 		adapter.setFilterCallback(filteredItems -> {
 			adapter.updateFilteredItems(filteredItems);
 			updateButtonsState();
 			return true;
 		});
-		if (fragment instanceof TrackSelectionListener) {
-			adapter.setSelectionListener((TrackSelectionListener) fragment);
-		}
-		if (fragment instanceof ImportTracksListener) {
-			adapter.setImportTracksListener((ImportTracksListener) fragment);
+		if (fragment instanceof EmptyTracksListener) {
+			adapter.setImportTracksListener((EmptyTracksListener) fragment);
 		}
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -133,6 +126,18 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		startLocationUpdate();
 	}
 
+	private void setupSelectionHelper() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof SelectionHelperProvider) {
+			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
+			ItemsSelectionHelper<TrackItem> helper = helperProvider.getSelectionHelper();
+
+			selectionHelper.setAllItems(helper.getAllItems());
+			selectionHelper.setSelectedItems(helper.getSelectedItems());
+			selectionHelper.setOriginalSelectedItems(helper.getOriginalSelectedItems());
+		}
+	}
+
 	private void setupButtons(@NonNull View view) {
 		buttonsContainer = view.findViewById(R.id.buttons_container);
 		applyButton = view.findViewById(R.id.apply_button);
@@ -140,7 +145,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
-			Set<TrackItem> items = new HashSet<>(adapter.getFilteredItems());
+			Set<TrackItem> items = adapter.getFilteredItems();
 			selectionHelper.onItemsSelected(items, !areAllTracksSelected());
 			onTrackItemsSelected(items);
 		});
@@ -148,24 +153,25 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void saveChanges() {
-		Fragment fragment = requireParentFragment();
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof SelectionHelperProvider) {
+			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
+			ItemsSelectionHelper<TrackItem> itemsSelectionHelper = helperProvider.getSelectionHelper();
+			itemsSelectionHelper.setSelectedItems(selectionHelper.getSelectedItems());
+		}
 		if (fragment instanceof TracksFragment) {
 			TracksFragment tracksFragment = (TracksFragment) fragment;
 			tracksFragment.saveChanges();
 			tracksFragment.updateTabsContent();
 		}
-		dismissAllowingStateLoss();
+		if (fragment instanceof AvailableTracksFragment) {
+			((AvailableTracksFragment) fragment).saveTracksVisibility();
+		}
+		dismiss();
 	}
 
 	private boolean areAllTracksSelected() {
-		List<TrackItem> filteredItems = adapter.getFilteredItems();
-		int selectedTracksCount = 0;
-		for (TrackItem item : filteredItems) {
-			if (selectionHelper.isItemSelected(item)) {
-				selectedTracksCount++;
-			}
-		}
-		return selectedTracksCount == filteredItems.size();
+		return selectionHelper.isItemsSelected(adapter.getFilteredItems());
 	}
 
 	private void updateButtonsState() {
@@ -314,29 +320,43 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		}
 	}
 
-	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
-		adapter.setTracksSortMode(sortMode);
-
-		Fragment fragment = requireParentFragment();
-		if (fragment instanceof SortTracksListener) {
-			((SortTracksListener) fragment).setTracksSortMode(sortMode);
-		}
-	}
-
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		Fragment fragment = requireParentFragment();
-		if (fragment instanceof SortTracksListener) {
-			return ((SortTracksListener) fragment).getTracksSortMode();
-		}
-		return TracksSortMode.getDefaultSortMode();
+		return settings.SEARCH_TRACKS_SORT_MODE.get();
+	}
+
+	@Override
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+		settings.SEARCH_TRACKS_SORT_MODE.set(sortMode);
+		adapter.setTracksSortMode(getTracksSortMode());
+	}
+
+	@NonNull
+	private TrackSelectionListener getTrackSelectionListener() {
+		return new TrackSelectionListener() {
+			@Override
+			public boolean isTrackItemSelected(@NonNull TrackItem trackItem) {
+				return selectionHelper.isItemSelected(trackItem);
+			}
+
+			@Override
+			public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
+				selectionHelper.onItemsSelected(trackItems, selected);
+				adapter.onItemsSelected(trackItems);
+				updateButtonsState();
+			}
+
+			@Override
+			public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+			}
+		};
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchTrackItemsFragment fragment = new SearchTrackItemsFragment();
+			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
 	}

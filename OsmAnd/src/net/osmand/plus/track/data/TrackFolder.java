@@ -117,4 +117,10 @@ public class TrackFolder implements TracksGroup {
 		TrackFolder trackFolder = (TrackFolder) obj;
 		return Algorithms.objectEquals(trackFolder.dirFile, dirFile);
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return dirFile.getAbsolutePath();
+	}
 }

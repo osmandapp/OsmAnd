@@ -49,9 +49,6 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
-import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
@@ -95,6 +92,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -485,23 +483,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, List<PopUpMenuItem> items) {
-		if (fragment instanceof AvailableTracksFragment) {
-			AvailableTracksFragment tracksFragment = (AvailableTracksFragment) fragment;
-			items.add(new Builder(app)
-					.setTitleId(R.string.upload_to_openstreetmap)
-					.setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_upload_to_openstreetmap))
-					.setOnClickListener(v -> {
-						ItemsSelectionHelper<TrackItem> selectionHelper = tracksFragment.getSelectionHelper();
-						List<File> files = new ArrayList<>();
-						for (TrackItem item : selectionHelper.getSelectedItems()) {
-							files.add(item.getFile());
-						}
-						sendGPXFiles(activity, fragment, files.toArray(new File[0]));
-					})
-					.create()
-			);
-		}
+	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedTrackItems, List<PopUpMenuItem> items) {
+		items.add(new Builder(app)
+				.setTitleId(R.string.upload_to_openstreetmap)
+				.setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_upload_to_openstreetmap))
+				.setOnClickListener(v -> {
+					List<File> files = new ArrayList<>();
+					for (TrackItem item : selectedTrackItems) {
+						files.add(item.getFile());
+					}
+					sendGPXFiles(activity, fragment, files.toArray(new File[0]));
+				})
+				.create()
+		);
 	}
 
 	public enum UploadVisibility {
