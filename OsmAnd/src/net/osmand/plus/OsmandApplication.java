@@ -950,7 +950,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(serviceIntent);
+			runInUIThread(() -> startForegroundService(serviceIntent));
 		} else {
 			startService(serviceIntent);
 		}

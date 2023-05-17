@@ -5,6 +5,7 @@ import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER_GPX;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,16 +135,18 @@ public class OsmAndLocationSimulation {
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 			} else {
-				List<SimulatedLocation> currentRoute = getSimulatedLocationsForRoute(app.getRoutingHelper().getRoute());
-				if (currentRoute.isEmpty()) {
-					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
-							Toast.LENGTH_LONG).show();
-				} else {
-					startAnimationThread(app, new ArrayList<>(currentRoute), false, 1);
-					if (runnable != null) {
-						runnable.run();
+				LoadSimulatedLocationsTask loadSimulatedLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), locations -> {
+					if (locations.isEmpty()) {
+						Toast.makeText(app, R.string.animate_routing_route_not_calculated,
+								Toast.LENGTH_LONG).show();
+					} else {
+						startAnimationThread(app, new ArrayList<>(locations), false, 1);
+						if (runnable != null) {
+							runnable.run();
+						}
 					}
-				}
+				});
+				loadSimulatedLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		} else {
 			stop();
@@ -417,36 +420,57 @@ public class OsmAndLocationSimulation {
 		return simulatedLocations;
 	}
 
-	public List<SimulatedLocation> getSimulatedLocationsForRoute(RouteCalculationResult route) {
-		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-		for (Location l : route.getImmutableAllLocations()) {
-			SimulatedLocation sm = new SimulatedLocation(l, SIMULATED_PROVIDER);
-			simulatedLocations.add(sm);
+	private static class LoadSimulatedLocationsTask extends AsyncTask<Void, Void, List<SimulatedLocation>>{
+		private final RouteCalculationResult route;
+		private final LoadSimulatedLocationsListener listener;
+		LoadSimulatedLocationsTask(RouteCalculationResult route, LoadSimulatedLocationsListener listener){
+			this.route = route;
+			this.listener = listener;
 		}
-		List<RouteSegmentResult> segments = route.getImmutableAllSegments();
-		for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
-			RouteSegmentResult s = segments.get(routeInd);
-			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-			int i = s.getStartPointIndex();
-			while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
-				LatLon point = s.getPoint(i);
-				for (SimulatedLocation sd : simulatedLocations) {
-					LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
-					if (latLon.equals(point)) {
-						sd.setHighwayType(s.getObject().getHighway());
-						sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
-						if (s.getObject().hasTrafficLightAt(i)) {
-							sd.setTrafficLight(true);
+
+		@Override
+		protected List<SimulatedLocation> doInBackground(Void... voids) {
+			List<SimulatedLocation> simulatedLocations = new ArrayList<>();
+			for (Location l : route.getImmutableAllLocations()) {
+				SimulatedLocation sm = new SimulatedLocation(l, SIMULATED_PROVIDER);
+				simulatedLocations.add(sm);
+			}
+			List<RouteSegmentResult> segments = route.getImmutableAllSegments();
+
+			for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
+				RouteSegmentResult s = segments.get(routeInd);
+				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+				int i = s.getStartPointIndex();
+
+				while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
+					LatLon point = s.getPoint(i);
+					for (SimulatedLocation sd : simulatedLocations) {
+						LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
+						if (latLon.equals(point)) {
+							sd.setHighwayType(s.getObject().getHighway());
+							sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
+							if (s.getObject().hasTrafficLightAt(i)) {
+								sd.setTrafficLight(true);
+							}
 						}
 					}
+					if (i == s.getEndPointIndex()) {
+						break;
+					}
+					i += plus ? 1 : -1;
 				}
-				if (i == s.getEndPointIndex()) {
-					break;
-				}
-				i += plus ? 1 : -1;
 			}
+			return simulatedLocations;
 		}
-		return simulatedLocations;
+
+		@Override
+		protected void onPostExecute(List<SimulatedLocation> simulatedLocations) {
+			listener.onLocationsLoaded(simulatedLocations);
+		}
+	}
+
+	public interface LoadSimulatedLocationsListener{
+		void onLocationsLoaded(List<SimulatedLocation> locations);
 	}
 
 	private static class SimulatedLocation extends Location {
