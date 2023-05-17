@@ -2321,7 +2321,7 @@
 \n • Mellemøsten: **
 \n • Afrika: **
 \n • Antarktis: *
-\n De fleste lande i verden kan hentes!
+\n De fleste lande i verden kan hentes
 \n Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …
 \n</string>
     <string name="fonts_header">Skrifttyper for kort</string>
@@ -5214,4 +5214,9 @@
     <string name="beats_per_minute_short">spm</string>
     <string name="poi_categories">IP-kategorier</string>
     <string name="no_poi_for_category">IP ikke fundet</string>
+    <string name="map_3d_mode_action">3D-tilstand</string>
+    <string name="map_3d_mode_hint">Et langt tryk på knappen gør det muligt at ændre knappens position.</string>
+    <string name="map_3d_mode_description">Berør kortet med to fingre, og bevæg dem op og ned for at justere kortets hældning.</string>
+    <string name="map_2d_mode_action">2D-tilstand</string>
+    <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
 </resources>
