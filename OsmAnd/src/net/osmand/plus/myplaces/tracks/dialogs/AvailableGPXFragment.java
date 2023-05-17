@@ -904,12 +904,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void onGpxFilesDeletionFinished(boolean shouldUpdateFolders) {
+	public void onGpxFilesDeletionFinished() {
 		hideProgressBar();
-
-		if (shouldUpdateFolders) {
-			reloadTracks();
-		}
+		reloadTracks();
 	}
 
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {

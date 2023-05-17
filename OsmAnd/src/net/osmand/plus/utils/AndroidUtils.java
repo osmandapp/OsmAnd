@@ -7,6 +7,7 @@ import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.ActivityNotFoundException;
@@ -51,18 +52,21 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.DisplayCutout;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,7 +85,10 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1251,5 +1258,94 @@ public class AndroidUtils {
 		} else {
 			return (T) bundle.getSerializable(key);
 		}
+	}
+
+	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull FabMarginPreference preference) {
+		return new View.OnTouchListener() {
+			private int initialMarginX = 0;
+			private int initialMarginY = 0;
+			private float initialTouchX = 0;
+			private float initialTouchY = 0;
+
+			@SuppressLint("ClickableViewAccessibility")
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (mapActivity == null) {
+					return false;
+				}
+				switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						setUpInitialValues(v, event);
+						return true;
+					case MotionEvent.ACTION_UP:
+						fabButton.setOnTouchListener(null);
+						fabButton.setPressed(false);
+						fabButton.setScaleX(1);
+						fabButton.setScaleY(1);
+						fabButton.setAlpha(1f);
+						FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+						if (AndroidUiHelper.isOrientationPortrait(mapActivity))
+							preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
+						else
+							preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
+						return true;
+					case MotionEvent.ACTION_MOVE:
+						if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
+							setUpInitialValues(v, event);
+
+						int padding = calculateTotalSizePx(app, R.dimen.map_button_margin);
+						FrameLayout parent = (FrameLayout) v.getParent();
+						FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+						int deltaX = (int) (initialTouchX - event.getRawX());
+						int deltaY = (int) (initialTouchY - event.getRawY());
+
+						int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
+						int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
+
+						if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
+							param.bottomMargin = newMarginY;
+
+						if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
+							param.rightMargin = newMarginX;
+						}
+
+						v.setLayoutParams(param);
+
+						return true;
+				}
+				return false;
+			}
+
+			private int interpolate(int value, int divider, int boundsSize) {
+				if (value <= divider && value > 0)
+					return value * value / divider;
+				else {
+					int leftMargin = boundsSize - value - divider;
+					if (leftMargin <= divider && value < boundsSize - divider)
+						return leftMargin - (leftMargin * leftMargin / divider) + value;
+					else
+						return value;
+				}
+			}
+
+			private void setUpInitialValues(View v, MotionEvent event) {
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+				initialMarginX = params.rightMargin;
+				initialMarginY = params.bottomMargin;
+
+				initialTouchX = event.getRawX();
+				initialTouchY = event.getRawY();
+			}
+		};
+	}
+
+	public static int calculateTotalSizePx(OsmandApplication app, @DimenRes int... dimensId) {
+		int result = 0;
+		for (int id : dimensId) {
+			result += app.getResources().getDimensionPixelSize(id);
+		}
+		return result;
 	}
 }

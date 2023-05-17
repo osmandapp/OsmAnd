@@ -4716,8 +4716,6 @@
     <string name="lang_ckb">Curdo central</string>
     <string name="live_update_frequency_day_variant">As atualizações do mapa são feitas diariamente.</string>
     <string name="routing_attr_motor_type_name">Combustível do veículo</string>
-    <string name="accessibility_2d_view_off">Vista 2.5D desativada</string>
-    <string name="accessibility_2d_view_on">Vista 2.5D ativada</string>
     <string name="download_complete">Descarregamento concluído</string>
     <string name="av_notes_video_widget_desc">Tocar no widget permite começar a gravar um vídeo.</string>
     <string name="av_notes_audio_widget_desc">Tocar no widget permite gravar notas de áudio.</string>
@@ -4777,7 +4775,6 @@
     <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
     <string name="how_to_use">Como usar:</string>
     <string name="shared_string_large">Larga</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
     <string name="map_marker_interval_dialog_desc">Especifique o intervalo de tempo para o qual a velocidade média será medida para calcular a hora prevista de chegada.</string>

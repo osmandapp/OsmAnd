@@ -165,6 +165,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean showMapPosition = true;
 
 	private List<IMapLocationListener> locationListeners = new ArrayList<>();
+	private List<ElevationListener> elevationListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -741,6 +742,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
 		locationListeners = Algorithms.removeFromList(locationListeners, listener);
+	}
+
+	public void addElevationListener(@NonNull ElevationListener listener) {
+		if (!elevationListeners.contains(listener)) {
+			elevationListeners = Algorithms.addToList(elevationListeners, listener);
+		}
+	}
+
+	public void removeElevationListener(@NonNull ElevationListener listener) {
+		elevationListeners = Algorithms.removeFromList(elevationListeners, listener);
 	}
 
 	public void setOnDrawMapListener(@Nullable OnDrawMapListener listener) {
@@ -2066,6 +2077,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
 		application.getOsmandMap().setMapElevation(angle);
+		notifyElevationListener(angle);
+	}
+
+	private void notifyElevationListener(float angle) {
+		for (ElevationListener listener : elevationListeners) {
+			listener.onElevationChanged(angle);
+		}
 	}
 
 	private void notifyLocationListeners(double lat, double lon) {
@@ -2197,5 +2215,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean isSteplessZoomSupported() {
 		return hasMapRenderer();
+	}
+
+	public interface ElevationListener {
+		void onElevationChanged(float angle);
 	}
 }

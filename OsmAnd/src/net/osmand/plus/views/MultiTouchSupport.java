@@ -226,7 +226,7 @@ public class MultiTouchSupport {
 	}
 
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {
-		return isTiltSupported(app) && app.getSettings().ENABLE_3D_VIEW.get();
+		return isTiltSupported(app);
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {

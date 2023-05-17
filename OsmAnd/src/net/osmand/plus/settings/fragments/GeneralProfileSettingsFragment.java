@@ -57,7 +57,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
-		setup3DViewPref();
 		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
@@ -122,16 +121,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			uiPreference.setIcon(icon);
 			uiPreference.setSummary(compassMode.getTitleId());
 		}
-	}
-
-	private void setup3DViewPref() {
-		Drawable disabled = getContentIcon(R.drawable.ic_action_2_5d_view_disabled);
-		Drawable enabled = getActiveIcon(R.drawable.ic_action_2_5d_view_on);
-		Drawable icon = getPersistentPrefIcon(enabled, disabled);
-
-		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
-		enabled3DView.setVisible(MultiTouchSupport.isTiltSupported(app));
-		enabled3DView.setIcon(icon);
 	}
 
 	private void setupPositionPlacementOnMapPref() {

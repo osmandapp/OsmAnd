@@ -4734,8 +4734,6 @@
     <string name="coordinates_widget_secondary_desc">Þú getur breytt sniði hnita í %1$s – %2$s – %3$s.</string>
     <string name="routing_attr_avoid_4wd_only_description">Forðast vegi sem henta aðeins fjórhjóladrifsfarartækjum</string>
     <string name="current_speed_widget_desc">Sýnir fyrirliggjandi hraða þinn eins og GPS-skynjarinn mælir hann.</string>
-    <string name="accessibility_2d_view_off">Slökkt á 2.5D-sýn</string>
-    <string name="accessibility_2d_view_on">Kveikt á 2.5D-sýn</string>
     <string name="time_to_go_desc">Tími í mínútum eða klukkustundum þar til þú nærð á áfangastað.</string>
     <string name="radius_ruler_mode_desc">Með því að slá á viðmótshlutann er skipt yfir í mælistiku út frá miðju hrings.</string>
     <string name="duplacate_widget_added_snackbar">Tvítaki viðmótshluta er bætt við á listann.</string>
@@ -4769,7 +4767,6 @@
     <string name="favorite_delete_group">Eyða hópi</string>
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
-    <string name="shared_string_2_5_d_view">2.5 D sýn</string>
     <string name="rotate_map_manual_opt">Snúið handvirkt (fast)</string>
     <string name="external_sensor_widgets">ANT+ viðmótshlutar</string>
     <string name="map_widget_ant_heart_rate">Hjartsláttur</string>

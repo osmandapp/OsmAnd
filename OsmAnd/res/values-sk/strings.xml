@@ -4705,9 +4705,7 @@
     <string name="live_update_frequency_week_variant">Aktualizácie máp sú kontrolované každý týždeň.</string>
     <string name="calculate_online_altitude_descr">Výškové údaje budú vypočítané na serveri OsmAnd, na základe satelitných snímkov a výškových modelov. Rozdiel od nadmorskej výšky zaznamenanej zariadením môže byť použitý ako oprava výšky.</string>
     <string name="lang_ckb">Kurdsky Sorání</string>
-    <string name="accessibility_2d_view_on">2,5D zobrazenie zapnuté</string>
     <string name="download_complete">Sťahovanie dokončené</string>
-    <string name="accessibility_2d_view_off">2,5D zobrazenie vypnuté</string>
     <string name="auto_backup_title">Automatické zálohovanie</string>
     <string name="duplacate_widget_added_snackbar">Duplicitný nástroj je pridávaný ako ďalší v zozname.</string>
     <string name="shared_string_duplicate">Duplikát</string>
@@ -4820,7 +4818,6 @@
     <string name="developer_widgets">Nástroje pre vývojárov</string>
     <string name="coordinates_widget_current_location">Súradnice: súčasná poloha</string>
     <string name="map_marker_interval_dialog_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť pre výpočet odhadovaného času príjazdu.</string>
-    <string name="shared_string_2_5_d_view">2,5D zobrazenie</string>
     <string name="available_as_part_of_subscription_plan">Dostupné ako súčasť predplatného %1$s.</string>
     <string name="favorite_confirm_delete_group">Naozaj chcete odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)\?</string>
     <string name="coordinates_widget_map_center_desc">Zobrazuje zemepisné súradnice stredu mapy</string>
