@@ -62,6 +62,7 @@ import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ import androidx.core.content.ContextCompat;
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
+	private static final int START_ZOOM = 3;
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
@@ -644,25 +646,49 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() < 3 || !getApplication().getSettings().SHOW_MAP_MARKERS.get() || excludeUntouchableObjects) {
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
+		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+
+		if (tileBox.getZoom() < START_ZOOM
+				|| !settings.SHOW_MAP_MARKERS.get()
+				|| excludeUntouchableObjects
+				|| Algorithms.isEmpty(mapMarkers)) {
 			return;
 		}
-		amenities.clear();
-		OsmandApplication app = getApplication();
-		int r = tileBox.getDefaultRadiusPoi();
-		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
-		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
+		amenities.clear();
+		MapRendererView mapRenderer = getMapRenderer();
+		float radius = getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
+		QuadRect screenArea = new QuadRect(
+				point.x - radius,
+				point.y - radius / 2f,
+				point.x + radius,
+				point.y + radius * 4f
+		);
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromScreenArea(mapRenderer, screenArea);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
+		boolean selectMarkerOnSingleTap = settings.SELECT_MARKER_ON_SINGLE_TAP.get();
+
+		for (MapMarker marker : mapMarkers) {
 			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tileBox, latLon);
-					if (calculateBelongs((int) point.x, (int) point.y, (int) pixel.x, (int) pixel.y, r)) {
+					boolean add = mapRenderer != null
+							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+							: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
+					if (add) {
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
 						} else {
-							if (isMarkerOnFavorite(marker) && app.getSettings().SHOW_FAVORITES.get()
-									|| isMarkerOnWaypoint(marker) && app.getSettings().SHOW_WPT.get()) {
+							if (isMarkerOnFavorite(marker) && settings.SHOW_FAVORITES.get()
+									|| isMarkerOnWaypoint(marker) && settings.SHOW_WPT.get()) {
 								continue;
 							}
 							Amenity mapObj = getMapObjectByMarker(marker);
@@ -694,10 +720,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return MapSelectionHelper.findAmenity(getApplication(), marker.point, Collections.singletonList(mapObjName), -1, 15);
 		}
 		return null;
-	}
-
-	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius * 1.5 && (ey - objy) <= radius * 1.5 && (objy - ey) <= 2.5 * radius;
 	}
 
 	@Override

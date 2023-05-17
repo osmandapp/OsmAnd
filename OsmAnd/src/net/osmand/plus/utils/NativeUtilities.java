@@ -20,10 +20,13 @@ import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.TileIdList;
 import net.osmand.core.jni.Utilities;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
+import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NativeUtilities {
@@ -62,6 +65,111 @@ public class NativeUtilities {
 		int g = (color >> 8) & 0xFF;
 		int b = (color) & 0xFF;
 		return new ColorARGB((short)alpha, (short)r , (short)g, (short)b);
+	}
+
+	public static boolean isSegmentCrossingPolygon(@NonNull PointI start31,
+	                                               @NonNull PointI end31,
+	                                               @NonNull List<PointI> polygon31) {
+		for (int i = 1; i < polygon31.size(); i++) {
+			PointI polygonLineStart31 = polygon31.get(i - 1);
+			PointI polygonLineEnd31 = polygon31.get(i);
+			if (areSegmentsCrossing(polygonLineStart31, polygonLineEnd31, start31, end31)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	// Detect by checking that start and end of ab/cd segment lie on different sides of cd/ab segment
+	// https://e-maxx.ru/algo/segments_intersection_checking
+	public static boolean areSegmentsCrossing(@NonNull PointI a31, @NonNull PointI b31,
+	                                          @NonNull PointI c31, @NonNull PointI d31) {
+		return checkSegmentsProjectionsIntersect(a31.getX(), b31.getX(), c31.getX(), d31.getX())
+				&& checkSegmentsProjectionsIntersect(a31.getY(), b31.getY(), c31.getY(), d31.getY())
+				&& getSignedArea31(a31, b31, c31) * getSignedArea31(a31, b31, d31) <= 0
+				&& getSignedArea31(c31, d31, a31) * getSignedArea31(c31, d31, b31) <= 0;
+	}
+
+	private static boolean checkSegmentsProjectionsIntersect(int a, int b, int c, int d) {
+		if (a > b) {
+			int t = a;
+			a = b;
+			b = t;
+		}
+		if (c > d) {
+			int t = c;
+			c = d;
+			d = t;
+		}
+		return Math.max(a, c) <= Math.min(b, d);
+	}
+
+	public static int getSignedArea31(@NonNull PointI a31, @NonNull PointI b31, @NonNull PointI c31) {
+		return (b31.getX() - a31.getX()) * (c31.getY() - a31.getY())
+				- (b31.getY() - a31.getY()) * (c31.getX() - a31.getX());
+	}
+
+	public static boolean isPointInsidePolygon(@NonNull LatLon latLon, @NonNull List<PointI> polygon31) {
+		return isPointInsidePolygon(getPoint31FromLatLon(latLon), polygon31);
+	}
+
+	public static boolean isPointInsidePolygon(double lat, double lon, @NonNull List<PointI> polygon31) {
+		return isPointInsidePolygon(getPoint31FromLatLon(lat, lon), polygon31);
+	}
+
+	public static boolean isPointInsidePolygon(@NonNull PointI point31, @NonNull List<PointI> polygon31) {
+		int intersections = 0;
+		for (int i = 1; i < polygon31.size(); i++) {
+			PointI previousPoint = polygon31.get(i - 1);
+			PointI currentPoint = polygon31.get(i);
+			int intersectedX = MapAlgorithms.ray_intersect_x(previousPoint.getX(),
+					previousPoint.getY(),
+					currentPoint.getX(),
+					currentPoint.getY(),
+					point31.getY());
+			if (Integer.MIN_VALUE != intersectedX && point31.getX() >= intersectedX) {
+				intersections++;
+			}
+		}
+		return intersections % 2 == 1;
+	}
+
+	@Nullable
+	public static List<PointI> getPolygon31FromPixelAndRadius(@NonNull MapRendererView mapRenderer,
+	                                                          @NonNull PointF pixel,
+	                                                          float radius) {
+		QuadRect pixelArea = new QuadRect(
+				pixel.x - radius,
+				pixel.y - radius,
+				pixel.x + radius,
+				pixel.y + radius
+		);
+		return getPolygon31FromScreenArea(mapRenderer, pixelArea);
+	}
+
+	@Nullable
+	public static List<PointI> getPolygon31FromScreenArea(@NonNull MapRendererView mapRenderer,
+	                                                      @NonNull QuadRect screenArea) {
+		float leftPix = (float) screenArea.left;
+		float topPix = (float) screenArea.top;
+		float rightPix = (float) screenArea.right;
+		float bottomPix = (float) screenArea.bottom;
+
+		List<PointI> polygon31 = new ArrayList<>();
+		polygon31.add(get31FromElevatedPixel(mapRenderer, leftPix, topPix));
+		polygon31.add(get31FromElevatedPixel(mapRenderer, rightPix, topPix));
+		polygon31.add(get31FromElevatedPixel(mapRenderer, rightPix, bottomPix));
+		polygon31.add(get31FromElevatedPixel(mapRenderer, leftPix, bottomPix));
+		polygon31.add(polygon31.get(0));
+
+		for (PointI point31 : polygon31) {
+			if (point31 == null) {
+				return null;
+			}
+		}
+
+		return polygon31;
 	}
 
 	@Nullable

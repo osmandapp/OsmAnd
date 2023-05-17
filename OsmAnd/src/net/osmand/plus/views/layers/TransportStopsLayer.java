@@ -141,25 +141,35 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
 	                          List<TransportStop> objects) {
-		int ex = (int) point.x;
-		int ey = (int) point.y;
-		int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
-		int radius = rp * 3 / 2;
+		MapRendererView mapRenderer = getMapRenderer();
+		float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
 		try {
-			TreeSet<String> ms = new TreeSet<>();
+			TreeSet<String> addedTransportStops = new TreeSet<>();
 			for (int i = 0; i < objects.size(); i++) {
 				TransportStop transportStop = objects.get(i);
-				if (transportStop.getLocation() == null) {
+
+				if (addedTransportStops.contains(transportStop.getName())) {
 					continue;
 				}
-				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb,
-						transportStop.getLocation());
-				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
-					if (!ms.add(transportStop.getName())) {
-						// only unique names
-						continue;
-					}
-					radius = rp;
+
+				LatLon latLon = transportStop.getLocation();
+				if (latLon == null) {
+					continue;
+				}
+
+				boolean add = mapRenderer != null
+						? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+						: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+				if (add) {
+					addedTransportStops.add(transportStop.getName());
 					res.add(transportStop);
 				}
 			}
