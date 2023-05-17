@@ -5213,4 +5213,8 @@
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
     <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_2d_mode_action">2D Modus</string>
+    <string name="map_3d_mode_action">3D Modus</string>
+    <string name="map_3d_mode_hint">Gedrückt halten um den Knopf zu verschieben.</string>
+    <string name="visible_in_3d_mode">Sichtbar im 3D Modus</string>
 </resources>
