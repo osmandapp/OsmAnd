@@ -5275,4 +5275,6 @@
     <string name="shared_string_hand">اليد</string>
     <string name="shared_string_ear_lobe">شحمة الأذن</string>
     <string name="no_poi_for_category">لم يتم العثور على نقاط الاهتمام</string>
+    <string name="map_3d_mode_action">الوضع ثلاثي الأبعاد</string>
+    <string name="map_2d_mode_action">الوضع ثنائي الأبعاد</string>
 </resources>
