@@ -561,7 +561,7 @@
     <string name="loading_poi_obj">Завантаження точок інтересу…</string>
     <string name="auth_failed">Помилка авторизації</string>
     <string name="failed_op">помилка</string>
-    <string name="converting_names">Конвертація місцевих/англійських назв…</string>
+    <string name="converting_names">Конвертація назв, місцеві → англійські…</string>
     <string name="loading_streets_buildings">Завантажуються будинки та вулиці…</string>
     <string name="loading_postcodes">Завантажуються поштові індекси…</string>
     <string name="loading_streets">Завантажуються вулиці…</string>
@@ -3797,7 +3797,7 @@
 \nВи можете скасувати підписку в будь-який момент. Керуйте своїми підписками в налаштуваннях AppGallery.</string>
     <string name="use_live_routing">Дані OsmAnd Live</string>
     <string name="complex_routing_descr">Двоступеневе створення маршруту для автомобільної навігації.</string>
-    <string name="use_native_pt">Нативні функції під час розрахунку громадського транспорту</string>
+    <string name="use_native_pt">Вбудовані функції прокладання маршрутів для громадського транспорту</string>
     <string name="use_native_pt_desc">Перемкнутися на прокладання маршрутів для громадського транспорту за допомогою Java (безпечно)</string>
     <string name="perform_oauth_authorization_description">Увійти за допомогою OAuth для користування функцією osmedit</string>
     <string name="perform_oauth_authorization">Увійти через OAuth</string>
@@ -5017,7 +5017,7 @@
     <string name="changes">Зміни %1$s</string>
     <string name="sync_now">Синхронізувати зараз</string>
     <string name="cloud_all_changes_downloaded">Усі зміни завантажено</string>
-    <string name="av_audio_format_bottom_sheet_descr">Виберіть аудіоформат. Формат контейнера типу файлу для аудіо — 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Виберіть аудіоформат. Формат контейнера аудіофайлів — 3GPP (.3gp).</string>
     <string name="si_nm_ft">Морські милі/фути</string>
     <string name="si_nm_mt">Морські милі/метри</string>
     <string name="set_up_backup">Налаштувати резервне копіювання</string>
@@ -5215,5 +5215,5 @@
     <string name="rendering_value_name_only_name">Тільки назва</string>
     <string name="rendering_attr_lightDetail_description">Типово: назва морського знака (light character.group.period), виберіть додаткову інформацію про сектори 1-3 або сектор 1,2,3,4,5 світлового знака</string>
     <string name="poi_categories">Категорії Точок Інтересу</string>
-    <string name="no_poi_for_category">Об\'єктів не знайдено</string>
+    <string name="no_poi_for_category">Точку інтересу не знайдено</string>
 </resources>
