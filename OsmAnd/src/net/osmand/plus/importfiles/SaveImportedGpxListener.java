@@ -13,5 +13,5 @@ public interface SaveImportedGpxListener {
 
 	void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile);
 
-	void onGpxSavingFinished(@NonNull List<String> warnings, @NonNull String gpxFileName);
+	void onGpxSavingFinished(@NonNull List<String> warnings);
 }

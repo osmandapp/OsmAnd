@@ -537,6 +537,7 @@ public class ImportHelper {
 	@NonNull
 	private SaveImportedGpxListener getSaveGpxListener(@NonNull GPXFile gpxFile, @Nullable OnSuccessfulGpxImport onGpxImport) {
 		return new SaveImportedGpxListener() {
+			String importedFileName;
 
 			@Override
 			public void onGpxSavingStarted() {
@@ -544,15 +545,16 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
-
+				String[] splintedPath = gpxFile.path.split("/");
+				importedFileName = splintedPath[splintedPath.length - 1];
 			}
 
 			@Override
-			public void onGpxSavingFinished(@NonNull List<String> warnings, @NonNull String gpxFileName) {
+			public void onGpxSavingFinished(@NonNull List<String> warnings) {
 				boolean success = Algorithms.isEmpty(warnings);
 				if (success) {
 					Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
-									app.getString(R.string.is_imported, gpxFileName),
+									app.getString(R.string.is_imported, importedFileName),
 									BaseTransientBottomBar.LENGTH_LONG)
 							.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
 

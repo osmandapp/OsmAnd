@@ -36,7 +36,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 
 	private final GPXFile gpxFile;
 	private final String fileName;
-	private String importedTrackName;
 	private final File destinationDir;
 	private final SaveImportedGpxListener listener;
 	private final boolean overwrite;
@@ -53,7 +52,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 		this.destinationDir = destinationDir;
 		this.listener = listener;
 		this.overwrite = overwrite;
-		this.importedTrackName = fileName;
 	}
 
 	@Override
@@ -125,7 +123,6 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			fileName = AndroidUtils.createNewFileName(fileName);
 			destFile = new File(importDir, fileName);
 		}
-		importedTrackName = fileName;
 		return destFile;
 	}
 
@@ -135,7 +132,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 			List<String> warnings = Algorithms.isEmpty(warning)
 					? Collections.emptyList()
 					: Collections.singletonList(warning);
-			listener.onGpxSavingFinished(warnings, importedTrackName);
+			listener.onGpxSavingFinished(warnings);
 		}
 	}
 }

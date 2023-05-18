@@ -455,7 +455,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			}
 
 			@Override
-			public void onGpxSavingFinished(@NonNull List<String> warnings, @NonNull String gpxFileName) {
+			public void onGpxSavingFinished(@NonNull List<String> warnings) {
 				clearTaskCallback.run();
 				updateProgress();
 				dismissAndOpenTracks();

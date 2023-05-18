@@ -64,7 +64,7 @@ public class SaveTracksTask extends AsyncTask<Void, Void, List<String>> {
 	@Override
 	protected void onPostExecute(@NonNull List<String> warnings) {
 		if (listener != null) {
-			listener.onGpxSavingFinished(warnings, "");
+			listener.onGpxSavingFinished(warnings);
 		}
 	}
 }
