@@ -795,23 +795,15 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void applyTheme(@NonNull Context context) {
-		int themeResId;
-		boolean doNotUseAnimations = settings.DO_NOT_USE_ANIMATIONS.get();
+		int themeId;
+		boolean noAnimation = settings.DO_NOT_USE_ANIMATIONS.get();
 		if (!settings.isLightContent()) {
-			if (doNotUseAnimations) {
-				themeResId = R.style.OsmandDarkTheme_NoAnimation;
-			} else {
-				themeResId = R.style.OsmandDarkTheme;
-			}
+			themeId = noAnimation ? R.style.OsmandDarkTheme_NoAnimation : R.style.OsmandDarkTheme;
 		} else {
-			if (doNotUseAnimations) {
-				themeResId = R.style.OsmandLightTheme_NoAnimation;
-			} else {
-				themeResId = R.style.OsmandLightTheme;
-			}
+			themeId = noAnimation ? R.style.OsmandLightTheme_NoAnimation : R.style.OsmandLightTheme;
 		}
 		localeHelper.setLanguage(context);
-		context.setTheme(themeResId);
+		context.setTheme(themeId);
 	}
 
 	IBRouterService reconnectToBRouter() {
