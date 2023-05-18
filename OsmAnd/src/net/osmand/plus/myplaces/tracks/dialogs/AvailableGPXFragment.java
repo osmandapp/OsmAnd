@@ -55,13 +55,12 @@ import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.myplaces.tracks.GpxSearchFilter;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
@@ -116,8 +115,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private static final int SEARCH_ID = -1;
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private GpxSelectionHelper selectedGpxHelper;
 	private GpxActionsHelper gpxActionsHelper;
 
@@ -165,9 +162,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
-		app = (OsmandApplication) context.getApplicationContext();
-		settings = app.getSettings();
-		nightMode = !settings.isLightContent();
 		currentRecording = new GPXInfo(getString(R.string.shared_string_currently_recording_track), null);
 		currentRecording.setGpxFile(app.getSavingTrackHelper().getCurrentGpx());
 		asyncLoader = new LoadGpxInfosTask(app, this);
@@ -482,9 +476,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				OsmandApplication app = requireMyApplication();
 				int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
+				Drawable icMenuItem = uiUtilities.getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
 			}
 		}

@@ -42,7 +42,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTilesInfo;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.resources.BitmapTilesCache;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -65,10 +64,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private DownloadTilesHelper downloadTilesHelper;
-	private boolean nightMode;
 
 	private UpdateTilesHandler handler;
 
@@ -116,9 +112,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (args != null) {
 			layerToDownload = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_LAYER, MapLayerType.class);
 		}
-
-		app = requireMyApplication();
-		settings = requireSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
@@ -142,7 +135,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

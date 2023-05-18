@@ -76,7 +76,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	public static final String TAG = "PlanRouteFragment";
 	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
-	private OsmandApplication app;
 	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
 
@@ -87,7 +86,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	private int toolbarHeight;
 	private int closedListContainerHeight;
 
-	private boolean nightMode;
 	private boolean portrait;
 	private boolean fullScreen;
 	private boolean isInPlanRouteMode;
@@ -99,9 +97,13 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	private RecyclerView markersRv;
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();
@@ -170,7 +172,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);

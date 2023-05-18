@@ -38,12 +38,9 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	public static final String KEY_APP_MODE = "app_mode";
 	public static final String KEY_WIDGET_ID = "widget_id";
 
-	protected OsmandApplication app;
-	protected OsmandSettings settings;
 	protected MapWidgetRegistry widgetRegistry;
 	protected ApplicationMode appMode;
 	protected String widgetId;
-	protected boolean nightMode;
 
 	protected View view;
 
@@ -53,10 +50,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		nightMode = !settings.isLightContent();
 	}
 
 	protected void initParams(@NonNull Bundle bundle) {

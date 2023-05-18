@@ -82,8 +82,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private static final String SHOW_START_FINISH_ICONS_INITIAL_VALUE_KEY = "showStartFinishIconsInitialValueKey";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private GpxDbHelper gpxDbHelper;
 
 	@Nullable
@@ -161,8 +159,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		gpxDbHelper = app.getGpxDbHelper();
 
 		if (savedInstanceState != null) {

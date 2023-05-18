@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -23,7 +22,6 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -45,9 +43,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
-	private OsmandApplication app;
 	private MapActivity mapActivity;
-	private OsmandSettings settings;
 	private ApplicationMode appMode;
 
 	private ContextMenuAdapter adapter;
@@ -59,15 +55,17 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private View.OnClickListener itemsClickListener;
 	private final Map<Integer, View> views = new HashMap<>();
 
-	private boolean nightMode;
 	private boolean useAnimation;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		mapActivity = (MapActivity) getMyActivity();
-		settings = app.getSettings();
 		collapsedIds = settings.COLLAPSED_CONFIGURE_MAP_CATEGORIES;
 	}
 
@@ -113,7 +111,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			appMode = settings.getApplicationMode();
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 
 			viewCreator = new ViewCreator(activity, nightMode);

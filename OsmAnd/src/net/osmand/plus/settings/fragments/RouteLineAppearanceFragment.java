@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -35,7 +36,6 @@ import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeLis
 import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
@@ -43,8 +43,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
-
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		implements ColorPickerListener, OnMapThemeChangeListener, OnSelectedColorChangeListener,
@@ -57,7 +55,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private PreviewRouteLineInfo previewRouteLineInfo;
 
 	private ApplicationMode appMode;
-	private OsmandSettings settings;
 
 	private int toolbarHeightPx;
 	private HeaderInfo selectedHeader;
@@ -117,7 +114,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		settings = requireSettings();
 		setupAppMode(savedInstanceState);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
@@ -139,7 +135,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
 		if (appMode == null) {
-			appMode =  settings.getApplicationMode();
+			appMode = settings.getApplicationMode();
 		}
 	}
 
@@ -151,7 +147,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
 		boolean showTurnArrows = settings.ROUTE_SHOW_TURN_ARROWS.getModeValue(appMode);
 
-		PreviewRouteLineInfo previewRouteLineInfo =  new PreviewRouteLineInfo(colorDay, colorNight,
+		PreviewRouteLineInfo previewRouteLineInfo = new PreviewRouteLineInfo(colorDay, colorNight,
 				coloringType, routeInfoAttribute, widthKey, showTurnArrows);
 
 		previewRouteLineInfo.setIconId(appMode.getNavigationIcon().getIconId());
@@ -386,12 +382,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			lineBounds.bottom = bottomSheetStart - pathMargin;
 		} else {
 			int dialogWidth = getLandscapeNoShadowWidth();
-			lineBounds.left = isRtl ? screenWidth - dialogWidth: dialogWidth;
+			lineBounds.left = isRtl ? screenWidth - dialogWidth : dialogWidth;
 			lineBounds.top = statusBarHeight + pathMargin;
 			lineBounds.right = isRtl ? 0 : screenWidth;
 			lineBounds.bottom = screenHeight - pathMargin;
 			centerX = (lineBounds.left + lineBounds.right) / 2;
-			centerY = (screenHeight + statusBarHeight) / 2 ;
+			centerY = (screenHeight + statusBarHeight) / 2;
 		}
 		previewRouteLineInfo.setLineBounds(lineBounds);
 		previewRouteLineInfo.setCenterX(centerX);
@@ -422,11 +418,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void setMapThemeProvider(@Nullable MapThemeProvider provider) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			DayNightHelper helper = app.getDaynightHelper();
-			helper.setMapThemeProvider(provider);
-		}
+		DayNightHelper helper = app.getDaynightHelper();
+		helper.setMapThemeProvider(provider);
 	}
 
 	@Override

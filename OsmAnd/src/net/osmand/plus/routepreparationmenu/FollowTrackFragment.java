@@ -16,18 +16,15 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
@@ -45,7 +42,9 @@ import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -71,7 +70,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private static final String SELECTING_TRACK = "selecting_track";
 
-	private OsmandApplication app;
 	private ImportHelper importHelper;
 
 	private GPXFile gpxFile;
@@ -123,7 +121,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		MapActivity mapActivity = requireMapActivity();
 		importHelper = new ImportHelper(mapActivity);
 

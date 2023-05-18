@@ -67,7 +67,6 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -308,8 +307,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
-		OsmandApplication app = requireMyApplication();
-		OsmandSettings settings = app.getSettings();
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(),
 				new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
@@ -446,12 +443,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private void buildMenuButtons(@NonNull View view) {
-		OsmandApplication app = requireMyApplication();
 		AppCompatImageView backButton = view.findViewById(R.id.back_button);
 		AppCompatImageButton backButtonFlow = view.findViewById(R.id.back_button_flow);
-		OnClickListener backOnClick = v -> {
-			dismiss(true);
-		};
+		OnClickListener backOnClick = v -> dismiss(true);
 		backButton.setOnClickListener(backOnClick);
 		backButtonFlow.setOnClickListener(backOnClick);
 		int navigationIconResId = AndroidUtils.getNavigationIconResId(getContext());
@@ -595,8 +589,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	private File generateRouteInfoHtml(List<RouteDirectionInfo> directionsInfo, String title) {
-		OsmandApplication app = getMyApplication();
-		if (app == null || directionsInfo == null) {
+		if (directionsInfo == null) {
 			return null;
 		}
 		final String fileName = "route_info.html";
@@ -625,10 +618,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private StringBuilder generateHtml(List<RouteDirectionInfo> directionInfos, String title, String url) {
 		StringBuilder html = new StringBuilder();
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return html;
-		}
 		if (!TextUtils.isEmpty(title)) {
 			html.append("<h1>");
 			html.append(url);
@@ -657,10 +646,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private StringBuilder generateHtmlPrint(List<RouteDirectionInfo> directionsInfo, String title) {
 		StringBuilder html = new StringBuilder();
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return html;
-		}
 		boolean accessibilityEnabled = app.accessibilityEnabled();
 		html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
 		html.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
@@ -910,15 +895,12 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	@Override
 	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-			if (folderName != null && !fileDir.getName().equals(folderName)) {
-				fileDir = new File(fileDir, folderName);
-			}
-			File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
-			new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
+		File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		if (folderName != null && !fileDir.getName().equals(folderName)) {
+			fileDir = new File(fileDir, folderName);
 		}
+		File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
+		new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 	}
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {
