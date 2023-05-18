@@ -5214,4 +5214,9 @@
     <string name="external_device_blood_pressure">Tekanan darah</string>
     <string name="poi_categories">Kategori POI</string>
     <string name="no_poi_for_category">POI tidak ditemukan</string>
+    <string name="map_2d_mode_action">Mode 2D</string>
+    <string name="visible_in_3d_mode">Terlihat dalam mode 3D</string>
+    <string name="map_3d_mode_action">Mode 3D</string>
+    <string name="map_3d_mode_hint">Ketuk lama pada tombol memungkinkan mengubah posisi tombol.</string>
+    <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
 </resources>
