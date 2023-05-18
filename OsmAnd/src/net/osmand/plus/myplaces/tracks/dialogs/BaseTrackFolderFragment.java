@@ -33,7 +33,6 @@ import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyT
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
@@ -179,7 +178,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Nullable
-	protected GpxActionsHelper getGpxActionsHelper() {
+	protected PopupActionsHelper getGpxActionsHelper() {
 		Fragment fragment = getParentFragment();
 		if (fragment instanceof AvailableTracksFragment) {
 			return ((AvailableTracksFragment) fragment).getGpxActionsHelper();
@@ -219,9 +218,9 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndDialogFragment i
 
 	@Override
 	public void importTracks() {
-		GpxActionsHelper gpxActionsHelper = getGpxActionsHelper();
-		if (gpxActionsHelper != null) {
-			gpxActionsHelper.importTracks();
+		PopupActionsHelper popupActionsHelper = getGpxActionsHelper();
+		if (popupActionsHelper != null) {
+			popupActionsHelper.importTracks();
 		}
 	}
 }

@@ -16,13 +16,13 @@ public class VisibleTracksViewHolder extends TracksGroupViewHolder {
 	}
 
 	@Override
-	public void bindView(@NonNull TracksGroup group) {
-		super.bindView(group);
+	public void bindView(@NonNull TracksGroup tracksGroup, boolean showDivider) {
+		super.bindView(tracksGroup, showDivider);
 
-		title.setText(group.getName(app));
+		title.setText(tracksGroup.getName(app));
 		icon.setImageDrawable(uiUtilities.getActiveIcon(R.drawable.ic_show_on_map, nightMode));
 
-		int count = group.getTrackItems().size();
+		int count = tracksGroup.getTrackItems().size();
 		String tracks = app.getString(R.string.shared_string_gpx_tracks);
 		description.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, tracks, String.valueOf(count)));
 	}

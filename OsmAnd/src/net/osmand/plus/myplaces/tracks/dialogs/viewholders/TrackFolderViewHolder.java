@@ -18,8 +18,8 @@ public class TrackFolderViewHolder extends TracksGroupViewHolder {
 	}
 
 	@Override
-	public void bindView(@NonNull TracksGroup tracksGroup) {
-		super.bindView(tracksGroup);
+	public void bindView(@NonNull TracksGroup tracksGroup, boolean showDivider) {
+		super.bindView(tracksGroup, showDivider);
 
 		TrackFolder folder = (TrackFolder) tracksGroup;
 		title.setText(folder.getName(app));

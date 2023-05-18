@@ -1,5 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -168,25 +170,26 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+		boolean lastItem = position != getItemCount() - 1;
+
 		if (holder instanceof SortTracksViewHolder) {
 			SortTracksViewHolder viewHolder = (SortTracksViewHolder) holder;
 			viewHolder.bindView(hasTrackItems());
 		} else if (holder instanceof TrackViewHolder) {
 			TrackItem trackItem = (TrackItem) items.get(position);
-			boolean hideDivider = position == getItemCount() - 1;
 
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
-			viewHolder.bindView(sortMode, trackItem, !hideDivider, false, selectionMode);
+			viewHolder.bindView(NAME_ASCENDING, trackItem, lastItem, false, selectionMode);
 		} else if (holder instanceof TrackFolderViewHolder) {
 			TrackFolder trackFolder = (TrackFolder) items.get(position);
 
 			TrackFolderViewHolder viewHolder = (TrackFolderViewHolder) holder;
-			viewHolder.bindView(trackFolder);
+			viewHolder.bindView(trackFolder, lastItem);
 		} else if (holder instanceof VisibleTracksViewHolder) {
 			VisibleTracksGroup tracksGroup = (VisibleTracksGroup) items.get(position);
 
 			VisibleTracksViewHolder viewHolder = (VisibleTracksViewHolder) holder;
-			viewHolder.bindView(tracksGroup);
+			viewHolder.bindView(tracksGroup, lastItem);
 		} else if (holder instanceof RecordingTrackViewHolder) {
 			TrackItem trackItem = (TrackItem) items.get(position);
 

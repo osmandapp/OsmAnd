@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.tracks;
+package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
@@ -25,8 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
-import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
-import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
@@ -47,6 +46,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class GpxActionsHelper {
+public class PopupActionsHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -69,7 +69,7 @@ public class GpxActionsHelper {
 	@Nullable
 	private GpxFilesDeletionListener deletionListener;
 
-	public GpxActionsHelper(@NonNull Fragment fragment, boolean nightMode) {
+	public PopupActionsHelper(@NonNull Fragment fragment, boolean nightMode) {
 		this.fragment = fragment;
 		this.activity = fragment.requireActivity();
 		this.nightMode = nightMode;
@@ -89,7 +89,7 @@ public class GpxActionsHelper {
 		this.deletionListener = deletionListener;
 	}
 
-	public void showMainPopUpMenu(@NonNull View anchorView, @NonNull TrackFolder trackFolder) {
+	public void showMainPopUpMenu(@NonNull View view, @NonNull TrackFolder trackFolder) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -105,7 +105,8 @@ public class GpxActionsHelper {
 				.setTitleId(R.string.add_new_folder)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_add_outlined))
 				.setOnClickListener(v -> {
-
+					FragmentManager manager = activity.getSupportFragmentManager();
+					AddNewTrackFolderBottomSheet.showInstance(manager, null, fragment, false);
 				})
 				.create());
 
@@ -117,7 +118,7 @@ public class GpxActionsHelper {
 		);
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = anchorView;
+		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
 		PopUpMenu.show(displayData);
@@ -129,41 +130,33 @@ public class GpxActionsHelper {
 		AndroidUtils.startActivityForResultIfSafe(fragment, intent, IMPORT_FILE_REQUEST);
 	}
 
-	public void showItemsPopupMenu(@NonNull View view, @NonNull Set<TrackItem> selectedTrackItems, @Nullable CallbackWithObject<Boolean> callback) {
+	public void showItemsPopupMenu(@NonNull View view, @NonNull Set<TrackItem> selectedItems, @Nullable CallbackWithObject<Boolean> callback) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, null);
+					gpxSelectionHelper.saveTracksVisibility(selectedItems, null);
 					if (callback != null) {
 						callback.processResult(true);
 					}
 				})
 				.create()
 		);
-		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, items);
+		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedItems, items);
 
+		String delete = app.getString(R.string.shared_string_delete);
 		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.shared_string_move)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_move))
-				.setOnClickListener(v -> {
-				})
-				.showTopDivider(true)
-				.create()
-		);
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.change_appearance)
-				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_appearance))
-				.setOnClickListener(v -> {
-				})
-				.create()
-		);
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.shared_string_delete)
+				.setTitle(delete)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_delete_outlined))
-				.setOnClickListener(v -> showDeleteConfirmationDialog(selectedTrackItems, callback))
+				.setOnClickListener(v -> {
+					if (selectedItems.isEmpty()) {
+						showEmptyItemsToast(delete);
+					} else {
+						showDeleteConfirmationDialog(selectedItems, callback);
+					}
+				})
 				.showTopDivider(true)
 				.create()
 		);
@@ -173,6 +166,11 @@ public class GpxActionsHelper {
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
 		PopUpMenu.show(displayData);
+	}
+
+	private void showEmptyItemsToast(@NonNull String action) {
+		String message = app.getString(R.string.local_index_no_items_to_do, action.toLowerCase());
+		app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
 	}
 
 	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems, @Nullable CallbackWithObject<Boolean> callback) {

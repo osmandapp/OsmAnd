@@ -640,9 +640,9 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedTrackItems, List<PopUpMenuItem> items) {
+	public static void onOptionsMenuActivity(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedItems, List<PopUpMenuItem> items) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.optionsMenuFragment(activity, fragment, selectedTrackItems, items);
+			plugin.optionsMenuFragment(activity, fragment, selectedItems, items);
 		}
 	}
 

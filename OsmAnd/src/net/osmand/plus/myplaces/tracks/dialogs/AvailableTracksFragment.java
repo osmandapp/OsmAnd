@@ -48,10 +48,10 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
-import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
+import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
@@ -59,6 +59,7 @@ import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletion
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
@@ -79,7 +80,7 @@ import java.util.Set;
 
 public class AvailableTracksFragment extends BaseOsmAndFragment implements FragmentStateHolder,
 		SelectionHelperProvider<TrackItem>, SortTracksListener, OsmAuthorizationListener,
-		OnTrackFileMoveListener, RenameCallback {
+		OnTrackFileMoveListener, RenameCallback, UploadGpxListener, OnTrackFolderAddListener {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -89,7 +90,7 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private GpxSelectionHelper gpxSelectionHelper;
-	private GpxActionsHelper gpxActionsHelper;
+	private PopupActionsHelper popupActionsHelper;
 	private ImportHelper importHelper;
 
 	private TrackFolder trackFolder;
@@ -103,14 +104,14 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 	private boolean updateEnable;
 
 	@NonNull
-	public GpxActionsHelper getGpxActionsHelper() {
-		return gpxActionsHelper;
+	public PopupActionsHelper getGpxActionsHelper() {
+		return popupActionsHelper;
 	}
 
 	@NonNull
 	@Override
 	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
-		return gpxActionsHelper.getSelectionHelper();
+		return popupActionsHelper.getSelectionHelper();
 	}
 
 	private void setTrackFolder(@NonNull TrackFolder trackFolder) {
@@ -139,8 +140,8 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		importHelper = new ImportHelper(requireActivity());
 
-		gpxActionsHelper = new GpxActionsHelper(this, nightMode);
-		gpxActionsHelper.setDeletionListener(getTracksDeletionListener());
+		popupActionsHelper = new PopupActionsHelper(this, nightMode);
+		popupActionsHelper.setDeletionListener(getTracksDeletionListener());
 
 		visibleTracksGroup = new VisibleTracksGroup(app);
 		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
@@ -220,7 +221,7 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 		if (itemId == R.id.action_menu) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				gpxActionsHelper.showMainPopUpMenu(activity.findViewById(R.id.action_menu), trackFolder);
+				popupActionsHelper.showMainPopUpMenu(activity.findViewById(R.id.action_menu), trackFolder);
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -292,10 +293,7 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 	}
 
 	private void openTrackFolder(@NonNull TrackFolder folder) {
-		FragmentManager manager = getFragmentManager();
-		if (manager != null) {
-			TrackFolderFragment.showInstance(getChildFragmentManager(), folder);
-		}
+		TrackFolderFragment.showInstance(getChildFragmentManager(), folder);
 	}
 
 	public void saveTracksVisibility() {
@@ -338,6 +336,15 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 		app.startActivity(intent);
 	}
 
+	@Override
+	public void onGpxUploaded(String result) {
+		FragmentManager manager = getChildFragmentManager();
+		TracksSelectionFragment fragment = (TracksSelectionFragment) manager.findFragmentByTag(TracksSelectionFragment.TAG);
+		if (fragment != null && fragment.isAdded()) {
+			fragment.dismissAllowingStateLoss();
+		}
+	}
+
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
@@ -361,6 +368,15 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 	}
 
 	public void renamedTo(File file) {
+		reloadTracks();
+	}
+
+	@Override
+	public void onTrackFolderAdd(String folderName) {
+		File dir = new File(trackFolder.getDirFile(), folderName);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
 		reloadTracks();
 	}
 
@@ -406,13 +422,13 @@ public class AvailableTracksFragment extends BaseOsmAndFragment implements Fragm
 			@Override
 			public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
 				if (!trackItems.isEmpty()) {
-					gpxActionsHelper.openTrackOnMap(trackItems.iterator().next());
+					popupActionsHelper.openTrackOnMap(trackItems.iterator().next());
 				}
 			}
 
 			@Override
 			public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
-				gpxActionsHelper.showItemPopupMenu(view, trackItem);
+				popupActionsHelper.showItemPopupMenu(view, trackItem);
 			}
 		};
 	}

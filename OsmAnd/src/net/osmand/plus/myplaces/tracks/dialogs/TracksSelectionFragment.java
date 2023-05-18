@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +20,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
@@ -30,7 +27,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -112,8 +108,8 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
 		button.setOnClickListener(v -> {
-			GpxActionsHelper gpxActionsHelper = getGpxActionsHelper();
-			if (gpxActionsHelper != null) {
+			PopupActionsHelper popupActionsHelper = getGpxActionsHelper();
+			if (popupActionsHelper != null) {
 				CallbackWithObject<Boolean> callback = result -> {
 					Fragment target = getParentFragment();
 					if (target instanceof AvailableTracksFragment) {
@@ -122,7 +118,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment {
 					dismiss();
 					return true;
 				};
-				gpxActionsHelper.showItemsPopupMenu(button, selectionHelper.getSelectedItems(), callback);
+				popupActionsHelper.showItemsPopupMenu(button, selectionHelper.getSelectedItems(), callback);
 			}
 		});
 		container.addView(button);

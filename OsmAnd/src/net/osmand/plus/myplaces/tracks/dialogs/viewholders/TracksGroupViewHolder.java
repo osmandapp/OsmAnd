@@ -30,6 +30,7 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 	protected final CompoundButton checkbox;
 	protected final View checkboxContainer;
 	protected final View menuButton;
+	protected final View divider;
 
 	protected final boolean nightMode;
 
@@ -47,6 +48,7 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 		checkbox = view.findViewById(R.id.checkbox);
 		checkboxContainer = view.findViewById(R.id.checkbox_container);
 		menuButton = view.findViewById(R.id.menu_button);
+		divider = view.findViewById(R.id.divider);
 
 		setupSelectionMode(selectionMode);
 	}
@@ -62,7 +64,7 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
 	}
 
-	public void bindView(@NonNull TracksGroup tracksGroup) {
+	public void bindView(@NonNull TracksGroup tracksGroup, boolean showDivider) {
 		boolean selected = listener != null && listener.isTracksGroupSelected(tracksGroup);
 		checkbox.setChecked(selected);
 
@@ -76,6 +78,7 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 				listener.onTracksGroupClicked(tracksGroup);
 			}
 		});
+		AndroidUiHelper.updateVisibility(divider, showDivider);
 	}
 
 	public interface TrackGroupsListener {
