@@ -86,28 +86,32 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		button.setChecked(pref.get());
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, button);
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				pref.set(!pref.get());
-				View view = getView();
-				if (view != null) {
-					setupHeader(view);
-					setupTypesCard(view);
-				}
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.updateLayers();
-				}
+		container.setOnClickListener(v -> {
+			pref.set(!pref.get());
+			if (!pref.get()) {
+				getCycleNodeNetworkPreference().set(false);
+			}
+			View mainView = getView();
+			if (mainView != null) {
+				setupHeader(mainView);
+				setupTypesCard(mainView);
+			}
+			MapActivity mapActivity = (MapActivity) getMyActivity();
+			if (mapActivity != null) {
+				mapActivity.refreshMapComplete();
+				mapActivity.updateLayers();
 			}
 		});
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.secondary_icon), false);
 	}
 
+	private CommonPreference<Boolean> getCycleNodeNetworkPreference() {
+		return settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
+	}
+
 	private void setupTypesCard(@NonNull View view) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
+		CommonPreference<Boolean> pref = getCycleNodeNetworkPreference();
 
 		View container = view.findViewById(R.id.card_container);
 		TextView title = container.findViewById(R.id.title);
