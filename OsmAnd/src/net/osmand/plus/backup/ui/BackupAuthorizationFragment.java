@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -35,8 +34,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 
 	public static final String TAG = BackupAuthorizationFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-
 	private View signUpButton;
 	private View signInButton;
 
@@ -44,12 +41,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getActivityBgColorId(nightMode);
-	}
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 	}
 
 	@Nullable

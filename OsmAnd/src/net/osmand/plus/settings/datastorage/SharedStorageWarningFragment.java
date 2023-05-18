@@ -57,7 +57,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	public static final String STORAGE_MIGRATION = "storage_migration";
 	private static final int FOLDER_ACCESS_REQUEST = 1009;
 
-	private OsmandApplication app;
 	private DataStorageHelper storageHelper;
 	private DocumentFilesCollectTask collectTask;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -73,7 +72,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private View progressContainer;
 	private View buttonsContainer;
 
-	private boolean nightMode;
 	private boolean usedOnMap;
 
 	@Override
@@ -82,11 +80,14 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return usedOnMap;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		storageHelper = new DataStorageHelper(app);
-		nightMode = isNightMode(usedOnMap);
 
 		if (selectedStorage == null) {
 			selectedStorage = storageHelper.getStorage(DataStorageHelper.INTERNAL_STORAGE);

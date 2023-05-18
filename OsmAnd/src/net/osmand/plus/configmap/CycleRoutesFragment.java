@@ -34,17 +34,9 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = CycleRoutesFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
-	private boolean nightMode;
-
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Override

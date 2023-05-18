@@ -27,8 +27,6 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-
 	private TrackTab trackTab;
 	private TracksAdapter adapter;
 
@@ -46,13 +44,7 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	}
 
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-	}
-
-	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

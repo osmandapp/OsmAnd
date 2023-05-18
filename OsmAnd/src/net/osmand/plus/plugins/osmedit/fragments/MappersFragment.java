@@ -65,19 +65,17 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final int CHANGES_FOR_MAPPER_PROMO = 30;
 	private static final int DAYS_FOR_MAPPER_PROMO_CHECK = 60;
 
-	private OsmandApplication app;
 	private OsmEditingPlugin plugin;
 	private Map<String, Contribution> changesInfo = new LinkedHashMap<>();
 
 	private View mainView;
-	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
 			MappersFragment fragment = new MappersFragment();
 			fragment.setRetainInstance(true);
-			fm.beginTransaction()
+			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
@@ -92,9 +90,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
-		nightMode = !app.getSettings().isLightContent();
 
 		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override

@@ -37,7 +37,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupError;
@@ -48,7 +47,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -68,8 +66,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private BackupHelper backupHelper;
 
 	private View mainView;
@@ -111,8 +107,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		backupHelper = app.getBackupHelper();
 
 		if (savedInstanceState != null) {

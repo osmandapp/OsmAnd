@@ -185,14 +185,11 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
 			MapMarkersHelper helper = app.getMapMarkersHelper();
 			MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 			if (group != null) {
 				helper.runSynchronization(group);
 			}
-		}
 	}
 
 	private void doAddWaypointTemplate(String name, String address, String category, String description) {
@@ -245,7 +242,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					}
 				} else {
 					addWpt(gpx, description, name, category, getColor(), getIconName(), getBackgroundType().getTypeName(), extensions);
-					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
+					saveGpx(app, gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
 			}
@@ -278,7 +275,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), description, name, category,
 							Algorithms.colorToString(getColor()), getIconName(), getBackgroundType().getTypeName());
 					gpx.updateWptPt(wpt, wptInfo);
-					saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
+					saveGpx(app, gpx, editor.isGpxSelected());
 				}
 				syncGpx(gpx);
 			}
@@ -304,7 +301,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 							savingTrackHelper.deletePointData(wpt);
 						} else {
 							gpx.deleteWptPt(wpt);
-							saveGpx(getMyApplication(), gpx, editor.isGpxSelected());
+							saveGpx(app, gpx, editor.isGpxSelected());
 						}
 						syncGpx(gpx);
 					}

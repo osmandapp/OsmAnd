@@ -42,21 +42,18 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	public static final String DEPTH_CONTOUR_WIDTH = "depthContourWidth";
 	public static final String DEPTH_CONTOUR_COLOR_SCHEME = "depthContourColorScheme";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private CommonPreference<Boolean> preference;
 	private final List<RenderingRuleProperty> properties = new ArrayList<>();
 
-	private boolean nightMode;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app);
 		for (RenderingRuleProperty property : customRules) {
 			String attrName = property.getAttrName();
