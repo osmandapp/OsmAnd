@@ -3335,4 +3335,9 @@
     <string name="rendering_engine_failed">Рендирането на картите на OsmAnd скоро се срина.</string>
     <string name="dismiss_changes_descr">Всички промени ще бъдат отхвърлени.</string>
     <string name="map_rendering_engine_v1">Версия 1</string>
+    <string name="map_widget_ant_bicycle_cadence">Каданс на велосипеда</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Показва скоростта на движение</string>
+    <string name="map_widget_ant_bicycle_speed">Скорост на велосипеда</string>
+    <string name="map_widget_ant_bicycle_power_desc">Показва мощността на велосипедиста, която се използва за придвижване на велосипеда напред</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Показва честотата на въртене на педалите на велосипеда.</string>
 </resources>
