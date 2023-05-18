@@ -545,8 +545,7 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
-				String[] splintedPath = gpxFile.path.split("/");
-				importedFileName = splintedPath[splintedPath.length - 1];
+				importedFileName = new File(gpxFile.path).getName();
 			}
 
 			@Override
