@@ -5218,7 +5218,7 @@
     <string name="no_poi_for_category">Точку інтересу не знайдено</string>
     <string name="map_3d_mode_action">3D-режим</string>
     <string name="map_2d_mode_action">2D-режим</string>
-    <string name="map_3d_mode_description">Торкніться мапи двома пальцями та рухайте ними вгору і вниз, щоб регулювати нахил мапи.</string>
+    <string name="map_3d_mode_description">Рух двома пальцями вздовж екрану, вгору-вниз, дозволяє змінювати кут нахилу мапи.</string>
     <string name="map_3d_mode_hint">Затискання кнопки дозволяє змінити положення кнопки.</string>
     <string name="visible_in_3d_mode">Видимий у 3D-режимі</string>
 </resources>
