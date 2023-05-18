@@ -851,7 +851,7 @@
     <string name="poi_arts_centre">Мистецький центр</string>
     <string name="poi_cinema">Кінотеатр</string>
     <string name="poi_casino">Казино</string>
-    <string name="poi_additional_type">Дадатково</string>
+    <string name="poi_additional_type">Додатково</string>
     <string name="poi_free_flying_characteristics">Характеристика</string>
     <string name="poi_free_flying_characteristic">Характеристика</string>
     <string name="poi_denomination_uniting">Об\'єднана Церква в Австралії</string>
@@ -4566,4 +4566,21 @@
     <string name="poi_cemt">ЄКМТ</string>
     <string name="poi_cemt_ii">II</string>
     <string name="poi_cemt_vib">VIb</string>
+    <string name="poi_lock_name">Назва шлюзу</string>
+    <string name="poi_lock_ref">Код шлюзу</string>
+    <string name="poi_lock_height">Висота шлюзу</string>
+    <string name="poi_boat_permissive">Прохід човнів: permissive</string>
+    <string name="poi_boat_unknown">Прохід човнів: unknown</string>
+    <string name="poi_boat_no">Прохід човнів: no</string>
+    <string name="poi_ship_private">Прохід кораблів: private</string>
+    <string name="poi_ship_destination">Прохід кораблів: destination</string>
+    <string name="poi_ship_permissive">Прохід кораблів: permissive</string>
+    <string name="poi_ship_no">Прохід кораблів: no</string>
+    <string name="poi_boat_yes">Прохід човнів: yes</string>
+    <string name="poi_boat_private">Прохід човнів: private</string>
+    <string name="poi_ship_delivery">Прохід кораблів: delivery</string>
+    <string name="poi_boat_designated">Прохід човнів: designated</string>
+    <string name="poi_ship_yes">Прохід кораблів: yes</string>
+    <string name="poi_boat_destination">Прохід човнів: destination</string>
+    <string name="poi_ship_designated">Прохід кораблів: designated</string>
 </resources>
