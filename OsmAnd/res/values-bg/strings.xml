@@ -73,7 +73,7 @@
     <string name="local_openstreetmap_act_title">Изменения в OSM</string>
     <string name="shared_string_more_actions">Други действия</string>
     <string name="layer_hillshade">Релеф на местността</string>
-    <string name="map_widget_gps_info">GPS информация</string>
+    <string name="map_widget_gps_info">Информация от GPS</string>
     <string name="access_arrival_time">Време на пристигане</string>
     <string name="item_checked">отметнато</string>
     <string name="item_unchecked">не е отметнато</string>
@@ -990,7 +990,7 @@
     <string name="poi_remove_success">Премахнато</string>
     <string name="poi_action_add">добавяне</string>
     <string name="poi_action_change">промяна</string>
-    <string name="poi_action_succeded_template">Действието{0} приключи успешно.</string>
+    <string name="poi_action_succeded_template">Действието {0} е завършено.</string>
     <string name="poi_error_unexpected_template">Възникна грешка при изпълнението на действие {0}.</string>
     <string name="poi_error_io_error_template">Възникна входно/изходна грешка при изпълнението на {0}.</string>
     <string name="poi_error_info_not_loaded">Информация за точката не беше заредена</string>
@@ -1214,7 +1214,7 @@
     <string name="filter_poi_hint">Филтриране по име</string>
     <string name="shared_string_is_open">Отвори</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM mapper помощник</string>
-    <string name="agps_info">A-GPS информация</string>
+    <string name="agps_info">Информация за A-GPS</string>
     <string name="shared_string_manage">Управление</string>
     <string name="shared_string_edit">Редактиране</string>
     <string name="shared_string_places">Места</string>
@@ -1225,7 +1225,7 @@
     <string name="routing_attr_no_new_routing_name">Без ползване на алгоритми от v1.9</string>
     <string name="routing_attr_no_new_routing_description">За изграждане на маршрути да не се използват алгоритмите, въведени в издание 1.9.</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номер</string>
-    <string name="application_dir_change_warning3">Да премести ли OsmAnd своите файлове на новото място\?</string>
+    <string name="application_dir_change_warning3">Преместване на файловете с данни на OsmAnd на новото място\?</string>
     <string name="general_settings_2">Общи настройки</string>
     <string name="save_global_track_interval">Интервал за запис</string>
     <string name="search_for">Търси</string>
@@ -1498,7 +1498,7 @@
     <string name="user_hates_app_get_feedback">Споделете защо.</string>
     <string name="try_again">Нов опит</string>
     <string name="no_updates_available">Няма налични обновявания</string>
-    <string name="restart_is_required">Изисква се рестартиране за да бъдат приложени всички промени.</string>
+    <string name="restart_is_required">За да бъдат приложени промените е необходим рестарт.</string>
     <string name="voice_pref_title">Глас</string>
     <string name="always_center_position_on_map">Винаги показвай позицията в центъра</string>
     <string name="lang_pt_br">Португалски (Бразилия)</string>
@@ -2066,9 +2066,9 @@
     <string name="custom_osmand_plugin">Персонализиран плъгин OsmAnd</string>
     <string name="shared_string_items">Елементи</string>
     <string name="changes_applied_to_profile">Промените са приложени към %1$s профил.</string>
-    <string name="settings_item_read_error">%1$s не може да прочете.</string>
+    <string name="settings_item_read_error">Грешка при прочитане на „%1$s“.</string>
     <string name="settings_item_write_error">%1$s не може да се запише.</string>
-    <string name="settings_item_import_error">%1$s не можа да се импортира.</string>
+    <string name="settings_item_import_error">Грешка при внасяне от „%1$s“.</string>
     <string name="select_track_file">Изберете файл следа</string>
     <string name="shared_string_languages">Езици</string>
     <string name="shared_string_language">Език</string>
@@ -2141,7 +2141,7 @@
     <string name="shared_string_zoom_levels">Нива на мащабиране</string>
     <string name="shared_string_legend">Легенда</string>
     <string name="shared_string_hillshade">Оцветяване на релефа</string>
-    <string name="shared_string_import_complete">Импортирането завърши</string>
+    <string name="shared_string_import_complete">Внасянето е завършено</string>
     <string name="items_added">Добавени са елементи</string>
     <string name="shared_string_importing">Импортиране</string>
     <string name="importing_from">Импортиране на данни от %1$s</string>
@@ -2340,7 +2340,7 @@
     <string name="data_storage_space_description">%1$s GB свободни (от %2$s GB)</string>
     <string name="slope_description">Стръмността на терена е онагледена чрез цветове.</string>
     <string name="terrain_empty_state_text">Показва хълмове или склонове на картата. Прочетете повече за тези типове карти на нашия сайт.</string>
-    <string name="import_complete_description">Внесени са всички данни от %1$s. Използвайте бутоните по-долу, за да отворите която и да било част от приложението и да я управлявате.</string>
+    <string name="import_complete_description">Внесена е цялата информация от %1$s. Използвайте бутоните по-долу, за да отворите която и да било част от приложението и да я управлявате.</string>
     <string name="checking_for_duplicate_description">OsmAnd проверете %1$s за дубликати със съществуващите елементи в приложението.
 \n
 \nМоже да отнеме известно време.</string>
@@ -2466,7 +2466,7 @@
     <string name="coords_search">Търсене по координати</string>
     <string name="quick_action_show_hide_title">Показване/скриване</string>
     <string name="shared_string_interval">Интервал</string>
-    <string name="complete_purchase">Завърши покупката</string>
+    <string name="complete_purchase">Завършване на покупката</string>
     <string name="shared_string_search_history">История на търсенето</string>
     <string name="app_mode_kayak">Каяк</string>
     <string name="app_mode_motorboat">Моторна лодка</string>
@@ -2538,7 +2538,7 @@
     <string name="lang_hu_formal">Унгарски (официален)</string>
     <string name="lang_gn_py">Гуарани</string>
     <string name="map_widget_distance_to_destination">Разстояние до местоназначението</string>
-    <string name="map_widget_current_speed">Текуща скорост</string>
+    <string name="map_widget_current_speed">Моментна скорост</string>
     <string name="shared_string_done">Готово</string>
     <string name="access_collapsed_list">Сгънат списък</string>
     <string name="access_tree_list">Дървовиден списък</string>
@@ -2778,7 +2778,7 @@
     <string name="battery_widget_desc">Показва нивото на батерията на устройство.</string>
     <string name="max_speed_widget_desc">Показва ограничението на скоростта на текущия път.</string>
     <string name="altitude_widget_desc">Показва надморската височина на текущото местоположение.</string>
-    <string name="current_speed_widget_desc">Показва текущата скорост, получена от дтачика за GPS.</string>
+    <string name="current_speed_widget_desc">Показва моментната скорост, получена от дтачика за GPS.</string>
     <string name="time_to_go_desc">Времето в минути или часове, необходимо за достигане в крайната точка.</string>
     <string name="route_parameters_info">Настройки на маршрутизацията за профил „%1$s“.</string>
     <string name="backup_now">Създаване на резервно копие</string>
@@ -3062,7 +3062,7 @@
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_prefs_descr">24-часова и 7-дневна прогноза, обновявана през 3 часа</string>
     <string name="weather_temperature_celsius">Градуси по Целзий</string>
-    <string name="action_not_supported_with_map_style">Това действие не се поддържа от избрания стил на картата.</string>
+    <string name="action_not_supported_with_map_style">Избраният стил на картата не поддържа това действие.</string>
     <string name="rendering_attr_lightDetail_name">Подробности за светлината</string>
     <string name="rendering_attr_lightDetail_description">По подразбиране: име на морски знак (светлина знак.група.период), изберете допълнителна информация за сектори от 1 до 3 или сектор 1, 2, 3, 4, 5 на светлинния знак</string>
     <string name="poi_categories">Категории на POE</string>
@@ -3095,7 +3095,7 @@
     <string name="metric_lbs">лири</string>
     <string name="shared_string_apply_changes">Прилагане на промените</string>
     <string name="last_synchronized">Последна синхронизация</string>
-    <string name="av_audio_format_bottom_sheet_descr">Изберете аудио формат. Контейнерният формат за аудиофайлове е 3GPP (.3gp).</string>
+    <string name="av_audio_format_bottom_sheet_descr">Изберете вида на аудио файла. Контейнерният формат за аудио е 3GPP (.3gp).</string>
     <string name="local_changes">Местни промени</string>
     <string name="cloud_version_will_be_removed">Облачната версия ще бъде премахната</string>
     <string name="shared_string_cloud">Облак</string>
@@ -3130,7 +3130,7 @@
     <string name="favorite_delete_group">Премахване на група</string>
     <string name="shortcut_navigate_to_work">Към „На работа“</string>
     <string name="change_data_storage_full_description">Преместване на файловете с данни на OsmAnd на новото място\?
-\n%1$s &gt; %2$s</string>
+\n%1$s → %2$s</string>
     <string name="selected_value">Избрана стойност</string>
     <string name="quick_action_remove_next_destination_descr">Следващата междинна точка ще бъде премахната. Ако това е крайната точка, маршрутизирането ще спре.</string>
     <string name="osmand_plus_extended_description_part3">Преглед на карти
@@ -3258,4 +3258,81 @@
     <string name="cloud_all_changes_downloaded">Всички промени са изтеглени</string>
     <string name="always_ask_waypoint_appearance_description">При докосване на действието се отваря екрана „Добавяне на отправна точка“ и там можете да промените името и външния вид.</string>
     <string name="subsequent_dest_description">Текущата крайна точка става последна междинна</string>
+    <string name="mtb_scale">Скала за MTB</string>
+    <string name="shared_string_layers">Слоеве</string>
+    <string name="files_copied">Копирани са %1$d файла (%2$s).</string>
+    <string name="files_moved">Преместени са %1$d файла (%2$s).</string>
+    <string name="shared_string_expires">Изтича</string>
+    <string name="download_complete">Изтеглнето е зършено</string>
+    <string name="cloud_all_changes_uploaded_descr">Всички промени от устройството са синхронизирани с облачната услута на OsmAnd.</string>
+    <string name="map_widget_ant_heart_rate">Сърдечен ритъм</string>
+    <string name="shared_string_complete">завършено</string>
+    <string name="backup_complete">Резервното копие е завършено</string>
+    <string name="mtb_imba">МАПК (IMBA)</string>
+    <string name="mtb_imba_full">Международна асоциация за планинско колоездене</string>
+    <string name="map_widget_altitude_map_center">Надм. височина: център на картата</string>
+    <string name="quick_action_air_pressure_layer">Бутон за превключване на видимостта на слоя с атмосферното налягане на картата.</string>
+    <string name="cloud_layer">Слой с облачност</string>
+    <string name="switch_mode_by_tapping_on_widget">Превключете режима с докосване на приспособлението.</string>
+    <string name="map_rendering_engine_v2">Версия 2(OpenGL)</string>
+    <string name="rendering_attr_piste_type_nordic_name">Скибягане</string>
+    <string name="rendering_attr_showMtbScale_description">Показване на пътеките, в зависимост от сложността по скалата за MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">Показване на скалата за MTB</string>
+    <string name="share_crash_log">Споделяне на дневника</string>
+    <string name="quick_action_wind_layer">Бутон за превключване на видимостта на слоя с вятъра на картата.</string>
+    <string name="temperature_layer">Слой с температура</string>
+    <string name="map_widget_altitude_current_location">Надм. височина: текущо местоположение</string>
+    <string name="map_widget_ruler_control">Линия за радиус</string>
+    <string name="map_widget_group_sunrise_sunset">Изгрев, залез</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Тези приспособления показват информация за следващия изгрев и залез на слънцето.</string>
+    <string name="map_widget_altitude_map_center_desc">Показва надморската височина в текущия център на картата.</string>
+    <string name="progress_complete">%1$s завършено</string>
+    <string name="map_widget_altitude_desc">Показва надморската височина на текущото местоположение или текущия център на картата</string>
+    <string name="map_widget_rendering_fps_desc">Показва колко бързо се изобразяват и опресняват картата и елементите ѝ, изразено в кадри в секунда.</string>
+    <string name="coordinates_widget_map_center_desc">Показва географските координати на текущия център на картата</string>
+    <string name="dismiss_changes">Отхвърляне на промените\?</string>
+    <string name="restart_now">Рестартиране</string>
+    <string name="download_cloud_version">Изтегляне на версията в облака</string>
+    <string name="last_sync">Последна синхронизация</string>
+    <string name="map_widget_sunset_desc">Показва времето на следващия залез или времето, оставащо до залеза на слънцето.</string>
+    <string name="map_widget_sunrise_desc">Показва времето на следващия изгрев или времето, оставащо до изгрева на слънцето.</string>
+    <string name="shared_string_restart">Рестартиране</string>
+    <string name="copying_completed">Копирането е завършено</string>
+    <string name="shared_string_do_not_exist">Не съществува</string>
+    <string name="quick_action_temperature_layer">Бутон за превключване на видимостта на слоя с температурата на картата.</string>
+    <string name="quick_action_cloud_layer">Бутон за превключване на видимостта на слоя с облачнистта на картата.</string>
+    <string name="shared_string_contours">Контури</string>
+    <string name="precipitation_layer">Слой с валежи</string>
+    <string name="wind_widget_desc">Показва скоростта на вятъра в текущия център на картата.</string>
+    <string name="map_widget_ant_bicycle_power">Мощност на велосипеда</string>
+    <string name="storage_copied_files_size">Обработени са %1$s файла, %2$s</string>
+    <string name="radius_ruler_item">Линия за радиус</string>
+    <string name="dont_move_maps">Без преместване</string>
+    <string name="storage_migration_fragment_close_descr">Копирането е завършено само на %1$s%. Ако го спрете сега, приложението може да не работи.</string>
+    <string name="shared_string_osmand_usage">Използвано от OsmAnd</string>
+    <string name="map_widget_rendering_fps">Изчертаване в кадри/сек</string>
+    <string name="from_to_with_params">От „%1$s“ в „%2$s“</string>
+    <string name="files_present">%1$d файла (%2$s) съществуват на предишното място „%3$s“.</string>
+    <string name="files_failed">%1$d файла не могат да бъдат копирани (%2$s).</string>
+    <string name="migration_files_present">%1$d файла (%2$s) вече съществуват в целевата папка „%3$s“ и не са презаписвани.</string>
+    <string name="map_widget_altitude_current_location_desc">Показва надморската височина на текущото местоположение.</string>
+    <string name="map_widget_ant_heart_rate_desc">Показва честотата на съкращаване на сърдечния мускул на потребителя по време на дадена дейност в реално време</string>
+    <string name="group_will_be_removed_after_restart">Групата ще е изчезнала при следващото стартиране на приложението.</string>
+    <string name="cloud_no_conflicts">Липсват конфликти.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Грешка при получаване на списъка с файлове от сървъра.</string>
+    <string name="shared_string_purchased_on">Поръчано на</string>
+    <string name="mtb_segment_classification">Класификация на сегменти</string>
+    <string name="quick_action_precipitation_layer">Бутон за превключване на видимостта на слоя с валежите на картата.</string>
+    <string name="pressure_layer">Слой с налягане</string>
+    <string name="wind_layer">Слой с вятър</string>
+    <string name="air_pressure_widget_desc">Показва атмосферното налягане в текущия център на картата.</string>
+    <string name="clouds_widget_desc">Показва облачната покривка в текущия център на картата.</string>
+    <string name="precipitation_widget_desc">Показва валежите в текущия център на картата.</string>
+    <string name="temperature_widget_desc">Показва температурата в текущия център на картата.</string>
+    <string name="rendering_engine_failed_descr">OsmAnd се върна към изчертаване на картите „Версия 1“. Можете да се опитате да превключите обратно към новата машина за рендиране „Версия 2 (OpenGL)\" в Настройки.
+\n
+\nПодкрепете подобренията, като предоставите дневника си за грешки.</string>
+    <string name="rendering_engine_failed">Рендирането на картите на OsmAnd скоро се срина.</string>
+    <string name="dismiss_changes_descr">Всички промени ще бъдат отхвърлени.</string>
+    <string name="map_rendering_engine_v1">Версия 1</string>
 </resources>
