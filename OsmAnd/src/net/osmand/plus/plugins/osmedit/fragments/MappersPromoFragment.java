@@ -153,7 +153,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		button.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA, getTargetFragment(), useMapNightMode(), null);
+				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA, getTargetFragment(), isUsedOnMap(), null);
 			}
 		});
 	}

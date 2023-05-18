@@ -28,13 +28,13 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 
-		nightMode = isNightMode(useMapNightMode());
+		nightMode = isNightMode(isUsedOnMap());
 		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
 
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return false;
 	}
 

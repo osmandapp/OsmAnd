@@ -77,7 +77,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

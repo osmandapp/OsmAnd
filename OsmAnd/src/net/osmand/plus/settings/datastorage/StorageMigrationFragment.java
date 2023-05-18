@@ -112,7 +112,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return usedOnMap;
 	}
 

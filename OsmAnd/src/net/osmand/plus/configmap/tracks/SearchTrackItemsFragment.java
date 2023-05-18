@@ -65,7 +65,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private boolean compassUpdateAllowed = true;
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

@@ -98,7 +98,7 @@ public class SelectTrackFileDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

@@ -71,7 +71,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	private boolean locationUpdateStarted;
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

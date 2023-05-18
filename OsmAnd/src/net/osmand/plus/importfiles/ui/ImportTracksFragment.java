@@ -120,7 +120,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

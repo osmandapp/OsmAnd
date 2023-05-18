@@ -71,7 +71,7 @@ public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 
