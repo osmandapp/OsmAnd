@@ -5210,4 +5210,6 @@
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Klein</string>
     <string name="rendering_value_name_only_name">Nur Name</string>
+    <string name="poi_categories">OVI-Kategorien</string>
+    <string name="no_poi_for_category">OVI nicht gefunden</string>
 </resources>

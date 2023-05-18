@@ -5274,4 +5274,5 @@
     <string name="shared_string_finger">إصبع</string>
     <string name="shared_string_hand">اليد</string>
     <string name="shared_string_ear_lobe">شحمة الأذن</string>
+    <string name="no_poi_for_category">لم يتم العثور على نقاط الاهتمام</string>
 </resources>

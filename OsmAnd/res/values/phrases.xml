@@ -197,6 +197,7 @@
 	<string name="poi_hiking_filter">Suitable for hiking</string>
 	<string name="poi_self_checkout">Self checkout</string>
 	<string name="poi_waste_accepted">Accepted waste</string>
+	<string name="poi_cemt">CEMT</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -2654,10 +2655,10 @@
 
 	<string name="poi_conveying_yes">Conveying: yes</string>
 
-	<string name="poi_bridge_ref">Bridge ref</string>
-	<string name="poi_tunnel_ref">Tunnel ref</string>
+	<string name="poi_bridge_ref">Bridge reference</string>
+	<string name="poi_tunnel_ref">Tunnel reference</string>
 
-	<string name="poi_ref">Ref</string>
+	<string name="poi_ref">Reference</string>
 
 	<string name="poi_cargo_passengers">Passengers</string>
 	<string name="poi_cargo_vehicle">Vehicles</string>
@@ -4399,7 +4400,7 @@
 	<string name="poi_conference_centre">Conference centre</string>
 	<string name="poi_geodesist">Geodesist</string>
 
-	<string name="poi_local_ref">Local ref</string>
+	<string name="poi_local_ref">Local reference</string>
 
 	<string name="poi_camp_pitch">Camp pitch</string>
 
@@ -5109,5 +5110,39 @@
 	<string name="poi_toy_library">Toy library</string>
 
 	<string name="poi_surface_chipseal">Chipseal</string>
+
+	<string name="poi_lock_name">Lock name</string>
+	<string name="poi_draft">Fairway depth</string>
+	<string name="poi_maxlength">Maximum length</string>
+	<string name="poi_lock_ref">Reference of a lock</string>
+	<string name="poi_lock_height">Height of a lock</string>
+	<string name="poi_boat_private">Boat access: private</string>
+	<string name="poi_boat_designated">Boat access: designated</string>
+	<string name="poi_boat_destination">Boat access: destination</string>
+	<string name="poi_boat_permissive">Boat access: permissive</string>
+	<string name="poi_boat_unknown">Boat access: unknown</string>
+	<string name="poi_boat_yes">Boat access: yes</string>
+	<string name="poi_boat_no">Boat access: no</string>
+	<string name="poi_ship_private">Ship access: private</string>
+	<string name="poi_ship_designated">Ship access: designated</string>
+	<string name="poi_ship_destination">Ship access: destination</string>
+	<string name="poi_ship_permissive">Ship access: permissive</string>
+	<string name="poi_ship_delivery">Ship access: delivery</string>
+	<string name="poi_ship_yes">Ship access: yes</string>
+	<string name="poi_ship_no">Ship access: no</string>
+	<string name="poi_cemt_0">0</string>
+	<string name="poi_cemt_i">I</string>
+	<string name="poi_cemt_ii">II</string>
+	<string name="poi_cemt_iii">III</string>
+	<string name="poi_cemt_iv">IV</string>
+	<string name="poi_cemt_va">Va</string>
+	<string name="poi_cemt_vb">Vb</string>
+	<string name="poi_cemt_via">VIa</string>
+	<string name="poi_cemt_vib">VIb</string>
+	<string name="poi_cemt_vic">VIc</string>
+	<string name="poi_cemt_vii">VII</string>
+
+	<string name="poi_sac_scale">SAC scale</string>
+	<string name="poi_cai_scale">CAI scale</string>
 
 </resources>
