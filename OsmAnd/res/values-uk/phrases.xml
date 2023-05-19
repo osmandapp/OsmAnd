@@ -1674,13 +1674,13 @@
     <string name="poi_conveying_yes">Ескалатор/траволатор</string>
     <string name="poi_health_service_child_care_no">Медичні послуги: догляд за дітьми: немає</string>
     <string name="poi_payment_cash_no">Готівкові кошти не приймаються</string>
-    <string name="poi_bridge_ref">Мітка моста</string>
+    <string name="poi_bridge_ref">Номер мосту</string>
     <string name="poi_health_service_prevention_yes">Медичні послуги: профілактика: є</string>
     <string name="poi_payment_debit_cards_yes">Дебетові карти</string>
-    <string name="poi_tunnel_ref">Мітка тунелю</string>
+    <string name="poi_tunnel_ref">Номер тунелю</string>
     <string name="poi_health_service_prevention_no">Медичні послуги: профілактика: немає</string>
     <string name="poi_payment_debit_cards_no">Дебетові картки не приймаються</string>
-    <string name="poi_ref">Мітка</string>
+    <string name="poi_ref">Номер</string>
     <string name="poi_health_service_prevention_vaccination_yes">Медичні послуги: вакцинація: є</string>
     <string name="poi_payment_bitcoin_yes">Біткоіни</string>
     <string name="poi_cargo_passengers">Пасажири</string>
@@ -3888,7 +3888,7 @@
     <string name="poi_summit_register_yes">Реєстр вершин: так</string>
     <string name="poi_gladed_yes">Розчищена поляна: так</string>
     <string name="poi_mobile_library">Місце зупинка мобільної бібліотеки</string>
-    <string name="poi_local_ref">Локальне посилання</string>
+    <string name="poi_local_ref">Локальний номер</string>
     <string name="poi_geodesist">Геодезист</string>
     <string name="poi_conference_centre">Конференц-центр</string>
     <string name="poi_camp_pitch">Місце для табору</string>
