@@ -1277,8 +1277,8 @@
     <string name="rendering_attr_coloredBuildings_name">Różne kolory typów budynków</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
     <string name="pause_navigation">Zatrzymaj nawigację</string>
-    <string name="rendering_attr_alpineHikingScale_name">Klasyfikacja trudności wspinaczki alpinistycznej (SAC)</string>
-    <string name="rendering_attr_alpineHikingScale_description">Renderuj ścieżki zgodnie ze skalą SAC.</string>
+    <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności wspinaczki alpinistycznej (SAC)</string>
+    <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki zgodnie ze skalą SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Szlaki turystyczne</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderowanie szlaków według śladów OSMC.</string>
     <string name="arrival_distance_factor_early">Wcześnie</string>
