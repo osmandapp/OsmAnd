@@ -56,15 +56,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private boolean saved;
 
 	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		editor = requireMapActivity().getContextMenu().getFavoritePointEditor();
-	}
-
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		favouritesHelper = app.getFavoritesHelper();
+		editor = requireMapActivity().getContextMenu().getFavoritePointEditor();
 
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
