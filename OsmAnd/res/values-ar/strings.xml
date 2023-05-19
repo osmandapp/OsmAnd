@@ -1874,8 +1874,8 @@
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
     <string name="routing_attr_height_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
-    <string name="rendering_attr_alpineHiking_name">مقياس رياضة الهايكنق (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
+    <string name="rendering_attr_alpineHikingScale_name">مقياس رياضة الهايكنق (SAC)</string>
+    <string name="rendering_attr_alpineHikingScale_description">تقديم المسارات وفقاً لمقياس SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">طرق المشي الخلوي</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>

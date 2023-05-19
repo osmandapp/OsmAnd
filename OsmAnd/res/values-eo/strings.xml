@@ -992,8 +992,8 @@
     <string name="download_srtm_maps">Nivelkurboj</string>
     <string name="download_regular_maps">Plena mapo</string>
     <string name="download_roads_only_maps">Nur-voja mapo</string>
-    <string name="rendering_attr_alpineHiking_name">Montogrimpada skalo (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Bildigi vojojn laŭ skalo de SAC (Svisa Alpismo-Klubo).</string>
+    <string name="rendering_attr_alpineHikingScale_name">Montogrimpada skalo (SAC)</string>
+    <string name="rendering_attr_alpineHikingScale_description">Bildigi vojojn laŭ skalo de SAC (Svisa Alpismo-Klubo).</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turismaj kursoj</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Bildigi vojojn laŭ OSMC-kursoj.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>

@@ -3929,8 +3929,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Standard map</string>
     <string name="download_roads_only_maps">Roads-only map</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale</string>
-    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC/CAI scale.</string>
+    <string name="rendering_attr_alpineHikingScale_name">Alpine hiking scale</string>
+    <string name="rendering_attr_alpineHikingScale_description">Render paths according to the SAC/CAI scale.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking routes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
