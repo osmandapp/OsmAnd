@@ -8,6 +8,7 @@ import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.OsmAndLocationSimulation.*;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
@@ -556,6 +557,39 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void finish() {
 				progressCallback.onCalculationFinish();
+			}
+		});
+
+		app.getLocationProvider().getLocationSimulation().setLocationsListener(new LoadSimulatedLocationsListener() {
+			@Override
+			public void onLocationsStartedLoading() {
+				if(!app.getRoutingHelper().isRouteBeingCalculated()){
+					pb.setVisibility(View.VISIBLE);
+				}
+			}
+
+			@Override
+			public void onLocationsLoading(int progress) {
+				if(!app.getRoutingHelper().isRouteBeingCalculated()){
+					app.runInUIThread(() -> {
+						if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
+							if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
+								pb.setVisibility(View.GONE);
+								return;
+							}
+							if (pb.getVisibility() == View.GONE) {
+								pb.setVisibility(View.VISIBLE);
+							}
+							pb.setProgress(progress);
+							pb.invalidate();
+						}
+					});
+				}
+			}
+
+			@Override
+			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
+				pb.setVisibility(View.GONE);
 			}
 		});
 	}
