@@ -68,8 +68,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private DownloadTilesHelper downloadTilesHelper;
-	private boolean nightMode;
-
 	private UpdateTilesHandler handler;
 
 	private OsmandMapTileView mapView;
