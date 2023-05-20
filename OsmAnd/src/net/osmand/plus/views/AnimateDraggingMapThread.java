@@ -509,7 +509,7 @@ public class AnimateDraggingMapThread {
 		int targetIntZoom = this.targetIntZoom;
 		double targetFloatZoom = this.targetFloatZoom;
 
-		PointI initTarget31 = mapRenderer.getTarget();
+		PointI initFlatTarget31 = mapRenderer.getState().getTarget31();
 		float initZoom = mapRenderer.getZoom();
 		int zoomThreshold = ((int) (targetFloatZoom * 2));
 		float initAzimuth = mapRenderer.getAzimuth();
@@ -533,13 +533,14 @@ public class AnimateDraggingMapThread {
 				break;
 			}
 			PointI target31 = mapRenderer.getTarget();
+			PointI flatTarget31 = mapRenderer.getState().getTarget31();
 			float azimuth = mapRenderer.getAzimuth();
 			float zoom = mapRenderer.getZoom();
 			float elevationAngle = mapRenderer.getElevationAngle();
 
 			if (!animateTarget) {
-				animateTarget = initTarget31.getX() != target31.getX()
-					|| initTarget31.getY() != target31.getY();
+				animateTarget = initFlatTarget31.getX() != flatTarget31.getX()
+					|| initFlatTarget31.getY() != flatTarget31.getY();
 			}
 			if (!animateZoom) {
 				animateZoom = initZoom != zoom && targetIntZoom > 0;
@@ -768,7 +769,6 @@ public class AnimateDraggingMapThread {
 
 			// Rescale speed to 31 coordinates
 			PointD velocity = new PointD(-velocityInMapSpaceX * scale31, -velocityInMapSpaceY * scale31);
-			invalidateMapTarget();
 			animator.animateFlatTargetWith(velocity,
 					new PointD(TARGET_MOVE_DECELERATION * scale31, TARGET_MOVE_DECELERATION * scale31),
 					userInteractionAnimationKey);
@@ -776,6 +776,9 @@ public class AnimateDraggingMapThread {
 
 		startThreadAnimating(() -> {
 			if (mapRenderer != null) {
+				if (animator != null) {
+					invalidateMapTarget();
+				}
 				animatingMapAnimator();
 			} else {
 				float curX = endX;
