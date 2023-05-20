@@ -1,5 +1,17 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DRAWER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.plus.AppInitializer.InitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
+import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
+import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -20,6 +32,21 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManager.BackStackEntry;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -116,6 +143,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapLayers;
@@ -140,33 +168,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManager.BackStackEntry;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FRAGMENT_DRAWER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.plus.AppInitializer.InitEvents.FAVORITES_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
-import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
-import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
-import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener,
@@ -1101,8 +1102,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			float y = event.getY();
 			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 			QuadPoint cp = tb.getCenterPixelPoint();
-			LatLon newCenterLatLon = tb.getLatLonFromPixel(cp.x + x * 15, cp.y + y * 15);
-			app.getOsmandMap().setMapLocation(newCenterLatLon.getLatitude(), newCenterLatLon.getLongitude());
+			LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
+					cp.x + x * 15, cp.y + y * 15);
+			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
 		}
 		return super.onTrackballEvent(event);
@@ -1331,8 +1333,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void scrollMap(float dx, float dy) {
 		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 		QuadPoint cp = tb.getCenterPixelPoint();
-		LatLon newCenterLatLon = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
-		app.getOsmandMap().setMapLocation(newCenterLatLon.getLatitude(), newCenterLatLon.getLongitude());
+		LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
+				cp.x + dx, cp.y + dy);
+		app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 	}
 
 	public void showMapControls() {
