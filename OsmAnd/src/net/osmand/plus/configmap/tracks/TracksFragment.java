@@ -325,6 +325,16 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		}
 	}
 
+	@Nullable
+	public TrackTab getTab(@NonNull String name) {
+		for (TrackTab trackTab : getTrackTabs()) {
+			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
+				return trackTab;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public void showSortByDialog() {
 		FragmentActivity activity = getActivity();

@@ -39,23 +39,19 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private CommonPreference<String> pref;
 	@Nullable
 	private RenderingRuleProperty property;
 	private String previousValue;
 
-	private boolean nightMode;
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		pref = settings.getCustomRenderProperty(HIKING_ROUTES_OSMC_ATTR);
 		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING_ROUTES_OSMC_ATTR);
 		if (property == null) {
@@ -115,14 +111,11 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		button.setChecked(enabled);
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, button);
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				pref.set(!button.isChecked() ? previousValue : "");
-				setupHeader(view);
-				setupTypesCard(view);
-				refreshMap();
-			}
+		container.setOnClickListener(v -> {
+			pref.set(!button.isChecked() ? previousValue : "");
+			setupHeader(view);
+			setupTypesCard(view);
+			refreshMap();
 		});
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.secondary_icon), false);
@@ -163,20 +156,17 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private TextRadioItem createRadioButton(@NonNull String value) {
 		String name = AndroidUtils.getRenderingStringPropertyValue(app, value);
 		TextRadioItem item = new TextRadioItem(name);
-		item.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View v) {
-				pref.set(value);
-				previousValue = value;
+		item.setOnClickListener((radioItem, v) -> {
+			pref.set(value);
+			previousValue = value;
 
-				View view = getView();
-				if (view != null) {
-					setupHeader(view);
-					setupTypesCard(view);
-				}
-				refreshMap();
-				return true;
+			View view = getView();
+			if (view != null) {
+				setupHeader(view);
+				setupTypesCard(view);
 			}
+			refreshMap();
+			return true;
 		});
 		return item;
 	}

@@ -27,7 +27,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
@@ -56,7 +55,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 
 	private static final String SELECTED_TAB_TYPE_KEY = "SELECTED_TAB_TYPE_KEY";
 
-	private OsmandApplication app;
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
@@ -68,7 +66,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
 		if (savedInstanceState != null) {

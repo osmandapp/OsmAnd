@@ -23,7 +23,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -48,7 +47,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         MapActivity mapActivity = (MapActivity) requireActivity();
-        OsmandApplication app = requireMyApplication();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
         MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 

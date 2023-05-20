@@ -70,8 +70,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private ApplicationMode selectedAppMode;
@@ -87,7 +85,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private ViewGroup actionsCardContainer;
 	private NestedScrollView scrollView;
 
-	private boolean nightMode;
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
@@ -96,8 +93,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
@@ -107,7 +102,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
 		View view = themedInflater.inflate(R.layout.fragment_configure_screen, container, false);
@@ -167,9 +161,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void setupAppBar() {
-		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-			currentAppBarOffset = verticalOffset;
-		});
+		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> currentAppBarOffset = verticalOffset);
 		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
 		param.setBehavior(new AppBarLayout.Behavior());
 		setAppBarOffset(currentAppBarOffset);

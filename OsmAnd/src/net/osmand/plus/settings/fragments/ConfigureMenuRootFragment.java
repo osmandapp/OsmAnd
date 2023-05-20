@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -28,7 +32,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -54,19 +57,13 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMenuRootFragment.class.getName();
 	private static final String APP_MODE_KEY = "app_mode_key";
 	private static final Log LOG = PlatformUtil.getLog(TAG);
 
-	private OsmandApplication app;
 	private LayoutInflater mInflater;
-	private boolean nightMode;
 	private ApplicationMode appMode;
 	private Activity activity;
 
@@ -92,7 +89,6 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
-		app = requireMyApplication();
 		nightMode = !app.getSettings().isLightContentForMode(appMode);
 		mInflater = UiUtilities.getInflater(app, nightMode);
 		activity = getActivity();

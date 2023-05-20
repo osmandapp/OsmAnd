@@ -35,57 +35,44 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 	private static final String TAG = OprStartFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(OprStartFragment.class);
 	private static final String openPlaceReviewsUrl = "OpenPlaceReviews.org";
-	private boolean nightMode;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		View view = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container, false);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
-		View v = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), v);
-
-		Toolbar toolbar = v.findViewById(R.id.toolbar);
-		int icBackResId = AndroidUtils.getNavigationIconResId(v.getContext());
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		int icBackResId = AndroidUtils.getNavigationIconResId(view.getContext());
 		toolbar.setNavigationIcon(getContentIcon(icBackResId));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
-		View createAccount = v.findViewById(R.id.register_opr_create_account);
+		View createAccount = view.findViewById(R.id.register_opr_create_account);
 		UiUtilities.setupDialogButton(nightMode, createAccount, UiUtilities.DialogButtonType.PRIMARY,
 				R.string.register_opr_create_new_account);
-		createAccount.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				handleCreateAccount();
-			}
-		});
-		View haveAccount = v.findViewById(R.id.register_opr_have_account);
+		createAccount.setOnClickListener(v -> handleCreateAccount());
+		View haveAccount = view.findViewById(R.id.register_opr_have_account);
 		UiUtilities.setupDialogButton(nightMode, haveAccount, UiUtilities.DialogButtonType.SECONDARY,
 				R.string.register_opr_have_account);
-		haveAccount.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				handleHaveAccount();
-			}
-		});
-		setURLSpan(v);
-		return v;
+		haveAccount.setOnClickListener(v -> handleHaveAccount());
+		setURLSpan(view);
+		return view;
 	}
 
 	private void handleHaveAccount() {
-		String url = OPRConstants.getLoginUrl(requireMyApplication());
+		String url = OPRConstants.getLoginUrl(app);
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
 	}
 
 	private void handleCreateAccount() {
-		String url = OPRConstants.getRegisterUrl(requireMyApplication());
+		String url = OPRConstants.getRegisterUrl(app);
 		CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 		CustomTabsIntent customTabsIntent = builder.build();
 		customTabsIntent.launchUrl(requireContext(), Uri.parse(url));
