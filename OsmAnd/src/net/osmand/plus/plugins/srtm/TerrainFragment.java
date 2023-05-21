@@ -72,7 +72,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private SRTMPlugin srtmPlugin;
 	private boolean terrainEnabled;
 
-	private int colorProfile;
+	private int profileColor;
 
 	private TextView downloadDescriptionTv;
 	private TextView transparencyValueTv;
@@ -148,7 +148,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View root = UiUtilities.getInflater(inflater.getContext(), nightMode).inflate(R.layout.fragment_terrain, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_terrain, container, false);
+		profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 
 		showHideTopShadow(root);
 
@@ -198,8 +200,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		slopeBtn.setOnClickListener(this);
 		slopeBtn.setText(R.string.shared_string_slope);
 
-		UiUtilities.setupSlider(transparencySlider, nightMode, colorProfile);
-		UiUtilities.setupSlider(zoomSlider, nightMode, colorProfile, true);
+		UiUtilities.setupSlider(transparencySlider, nightMode, profileColor);
+		UiUtilities.setupSlider(zoomSlider, nightMode, profileColor, true);
 
 		transparencySlider.addOnChangeListener(transparencySliderChangeListener);
 		zoomSlider.addOnChangeListener(zoomSliderChangeListener);
@@ -236,7 +238,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			String transparency = transparencyValue + "%";
 			int minZoom = srtmPlugin.getTerrainMinZoom();
 			int maxZoom = srtmPlugin.getTerrainMaxZoom();
-			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
+			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, profileColor));
 			stateTv.setText(R.string.shared_string_enabled);
 			transparencySlider.setValue(transparencyValue);
 			transparencyValueTv.setText(transparency);

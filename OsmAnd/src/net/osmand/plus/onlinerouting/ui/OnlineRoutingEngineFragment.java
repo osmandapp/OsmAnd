@@ -123,7 +123,8 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	public View onCreateView(@NonNull LayoutInflater inflater,
 							 @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
-		view = getInflater().inflate(
+		updateNightMode();
+		view = themedInflater.inflate(
 				R.layout.online_routing_engine_fragment, container, false);
 		segmentsContainer = view.findViewById(R.id.segments_container);
 		scrollView = view.findViewById(R.id.segments_scroll);
@@ -371,7 +372,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	}
 
 	private void setupResultsContainer() {
-		testResultsContainer = getInflater().inflate(
+		testResultsContainer = themedInflater.inflate(
 				R.layout.bottom_sheet_item_with_descr_64dp, segmentsContainer, false);
 		testResultsContainer.setVisibility(View.GONE);
 		segmentsContainer.addView(testResultsContainer);
@@ -613,10 +614,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		} else {
 			return null;
 		}
-	}
-
-	private LayoutInflater getInflater() {
-		return UiUtilities.getInflater(mapActivity, isNightMode());
 	}
 
 	@Override

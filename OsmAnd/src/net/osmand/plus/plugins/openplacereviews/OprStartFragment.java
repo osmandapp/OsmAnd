@@ -43,6 +43,7 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = UiUtilities.getInflater(requireMyActivity(), nightMode).inflate(R.layout.fragment_opr_login, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

@@ -170,6 +170,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		View view = inflater.inflate(R.layout.favorites_tree, container, false);
 		ExpandableListView listView = view.findViewById(android.R.id.list);
 		favouritesAdapter.synchronizeGroups();

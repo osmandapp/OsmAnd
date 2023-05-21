@@ -33,7 +33,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -43,7 +42,6 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -75,7 +73,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
-	private LayoutInflater themedInflater;
 
 	private AppBarLayout appBar;
 	private Toolbar toolbar;
@@ -102,8 +99,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_configure_screen, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);

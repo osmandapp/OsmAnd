@@ -25,7 +25,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public class MapMarkerEditorFragment extends BaseOsmAndFragment {
@@ -44,9 +43,9 @@ public class MapMarkerEditorFragment extends BaseOsmAndFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		Context context = requireContext();
-		View view = UiUtilities.getInflater(context, nightMode)
-				.inflate(R.layout.map_marker_editor_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.map_marker_editor_fragment, container, false);
 
 		MapMarkerEditor editor = this.editor;
 		if (editor == null) {

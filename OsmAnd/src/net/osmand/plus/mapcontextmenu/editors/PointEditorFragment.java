@@ -66,10 +66,11 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		Context context = requireContext();
 		PointEditor editor = getEditor();
 		if (editor == null) {
-			view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
+			view = themedInflater.inflate(getLayoutId(), container, false);
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 			return view;
 		}

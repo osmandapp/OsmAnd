@@ -74,6 +74,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	public View onCreateView(@NonNull LayoutInflater inflater,
 	                         @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = inflater.inflate(R.layout.fragment_configure_map, container, false);
 		llList = view.findViewById(R.id.list);
 		onDataSetInvalidated();

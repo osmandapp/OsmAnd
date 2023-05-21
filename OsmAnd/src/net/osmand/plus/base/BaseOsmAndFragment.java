@@ -3,6 +3,9 @@ package net.osmand.plus.base;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import androidx.annotation.ColorInt;
@@ -29,6 +32,8 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected UiUtilities uiUtilities;
 	protected boolean nightMode;
 
+	protected LayoutInflater themedInflater;
+
 	private int statusBarColor = -1;
 	private boolean transitionAnimationAllowed = true;
 
@@ -38,7 +43,18 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
+		updateNightMode();
+	}
+
+	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
+		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
 	protected boolean isUsedOnMap() {

@@ -65,6 +65,7 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			toolbarLayout = view.findViewById(R.id.toolbar_layout);

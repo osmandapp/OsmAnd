@@ -46,11 +46,11 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        updateNightMode();
         MapActivity mapActivity = (MapActivity) requireActivity();
         ApplicationMode appMode = app.getSettings().getApplicationMode();
         MapillaryPlugin plugin = PluginsHelper.getPlugin(MapillaryPlugin.class);
 
-        boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
         int currentModeColor = appMode.getProfileColor(nightMode);
