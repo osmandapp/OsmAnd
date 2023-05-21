@@ -2127,6 +2127,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.attach(fragment)
 					.commit();
 		}
+
+		DashboardOnMap dashboard = getDashboard();
+		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
+			dashboard.refreshContent(true);
+		}
 	}
 
 	@Override
