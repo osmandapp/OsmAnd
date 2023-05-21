@@ -1683,12 +1683,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		boolean wasInTiltMode = multiTouchSupport != null && multiTouchSupport.isInTiltMode();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
-		MeasurementToolLayer layer = mapActivity.getMapLayers().getMeasurementToolLayer();
+
+		MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 		if (mapRenderer != null && multiTouchSupport != null && (layer == null || !layer.isInMeasurementMode())) {
 			int actionCode = event.getActionMasked();
 			if (actionCode != MotionEvent.ACTION_DOWN
-				&& actionCode != MotionEvent.ACTION_UP
-				&& actionCode != MotionEvent.ACTION_CANCEL) {
+					&& actionCode != MotionEvent.ACTION_UP
+					&& actionCode != MotionEvent.ACTION_CANCEL) {
 				int actionIndex = event.getActionIndex();
 				boolean primaryTouch = actionCode == MotionEvent.ACTION_POINTER_DOWN && actionIndex == 0;
 				boolean primaryClear = actionCode == MotionEvent.ACTION_POINTER_UP && actionIndex == 0;
@@ -1831,7 +1832,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
-			MeasurementToolLayer layer = mapActivity.getMapLayers().getMeasurementToolLayer();
+			MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 			MapRendererView mapRenderer = getMapRenderer();
 			boolean finished = mapRenderer != null && (layer == null || !layer.isInMeasurementMode());
 			// 1.5 works better even on dm.density=1 devices
@@ -2043,7 +2044,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 			// Keep zoom center fixed or flexible
 			if (mapRenderer != null) {
-				MeasurementToolLayer layer = mapActivity.getMapLayers().getMeasurementToolLayer();
+				MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 				if (layer == null || !layer.isInMeasurementMode())
 					zoomAndRotateToAnimate(startZooming, startRotating);
 				else {
@@ -2143,7 +2144,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 			if (multiTouchSupport != null && !multiTouchSupport.isInTiltMode()) {
-				MeasurementToolLayer layer = mapActivity.getMapLayers().getMeasurementToolLayer();
+				MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
 					if (!targetChanged) {
