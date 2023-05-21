@@ -5115,8 +5115,8 @@
     <string name="proxy_port_max_warning">Valore massimo della porta è %1$s</string>
     <string name="shared_string_pounds">libbre</string>
     <string name="disable_vertex_hillshade_3d">Disabilita l\'ombreggiatura dei vertici in 3D</string>
-    <string name="is_imported">%1$s importati.</string>
-    <string name="file_already_exists_description">\"%1$s\". Un file con lo stesso nome esiste già. ith that name already exists. Sostituisci sovrascriverà tutte le modifiche dell\'attuale versione.</string>
+    <string name="is_imported">%1$s importato.</string>
+    <string name="file_already_exists_description">\"%1$s\". Un file con quel nome esiste già. La sua sostituzione sovrascriverà tutte le modifiche dell\'attuale versione.</string>
     <string name="file_already_exists">Il file esiste già</string>
     <string name="search_track_by_name">Cerca la traccia per nome</string>
     <string name="rendering_value_sector5_name">Settore 5</string>
@@ -5136,9 +5136,20 @@
     <string name="shared_string_foot">Piede</string>
     <string name="number_of_tracks">%1$s tracce</string>
     <string name="no_search_results">Nessun risultato</string>
-    <string name="nav_profile_confirm_delete">Confermi di voler eliminare \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Sicuro di voler eliminare \"%1$s\"\?</string>
     <string name="external_device_low_battery">Batteria in esaurimento</string>
     <string name="device_disconnected">%1$s disconnesso</string>
     <string name="device_connected">%1$s connesso</string>
     <string name="beats_per_minute_short">bpm</string>
+    <string name="no_poi_for_category">POI non trovato</string>
+    <string name="poi_categories">Categorie POI</string>
+    <string name="map_3d_mode_hint">Toccare a lungo il pulsante consente di modificarne la posizione.</string>
+    <string name="visible_in_3d_mode">Visibile in modalità 3D</string>
+    <string name="map_3d_mode_description">Tocca la mappa con due dita e spostale su e giù per regolare l\'inclinazione della mappa.</string>
+    <string name="map_2d_mode_action">Modalità 2D</string>
+    <string name="map_3d_mode_action">Modalità 3D</string>
+    <string name="external_device_forget_sensor_description">Il sensore verrà rimosso dall\'elenco. Potrai associare nuovamente questo sensore in qualsiasi momento.</string>
+    <string name="rendering_value_sectors_name">Settori</string>
+    <string name="rendering_value_sector1_name">Settore 1</string>
+    <string name="rendering_value_sector2_name">Settore 2</string>
 </resources>
