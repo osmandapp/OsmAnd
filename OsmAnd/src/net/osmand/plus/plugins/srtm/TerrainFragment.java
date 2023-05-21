@@ -114,7 +114,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		@Override
 		public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 			List<Float> values = slider.getValues();
-			if (values.size() > 0) {
+			if (values.size() > 1) {
 				minZoomTv.setText(String.valueOf(values.get(0).intValue()));
 				maxZoomTv.setText(String.valueOf(values.get(1).intValue()));
 				srtmPlugin.setTerrainZoomValues(values.get(0).intValue(), values.get(1).intValue(), srtmPlugin.getTerrainMode());
@@ -135,7 +135,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		colorProfile = settings.getApplicationMode().getProfileColor(nightMode);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
 	}
