@@ -65,6 +65,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
+	public static final float TOUCH_RADIUS_MULTIPLIER = 1.5f;
 
 	@NonNull
 	private final Context ctx;

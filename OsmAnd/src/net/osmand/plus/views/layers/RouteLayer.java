@@ -758,21 +758,29 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	}
 
 	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res, @NonNull List<TransportStop> routeTransportStops) {
-		int ex = (int) point.x;
-		int ey = (int) point.y;
-		int rp = getRadiusPoi(tb);
-		int radius = rp * 3 / 2;
+		MapRendererView mapRenderer = getMapRenderer();
+		float radius = getRadiusPoi(tb) * TOUCH_RADIUS_MULTIPLIER;
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
 		try {
 			for (int i = 0; i < routeTransportStops.size(); i++) {
-				TransportStop n = routeTransportStops.get(i);
-				if (n.getLocation() == null) {
+				TransportStop transportStop = routeTransportStops.get(i);
+				LatLon latLon = transportStop.getLocation();
+				if (latLon == null) {
 					continue;
 				}
-				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-						n.getLocation().getLatitude(), n.getLocation().getLongitude());
-				if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
-					radius = rp;
-					res.add(n);
+
+				boolean add = mapRenderer != null
+						? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+						: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+				if (add) {
+					res.add(transportStop);
 				}
 			}
 		} catch (IndexOutOfBoundsException e) {

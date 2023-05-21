@@ -530,6 +530,30 @@ public class RotatedTileBox {
 		return MapUtils.getDistance(lat1,lon1, lat2, lon2);
 	}
 
+	public boolean isLatLonNearPixel(LatLon latLon, float centerPixX, float centerPixY, float radius) {
+		return isLatLonNearPixel(latLon.getLatitude(), latLon.getLongitude(), centerPixX, centerPixY, radius);
+	}
+
+	public boolean isLatLonNearPixel(double lat, double lon, float centerPixX, float centerPixY, float radius) {
+		QuadRect pixelArea = new QuadRect(
+				centerPixX - radius,
+				centerPixY - radius,
+				centerPixX + radius,
+				centerPixY + radius
+		);
+		return isLatLonInsidePixelArea(lat, lon, pixelArea);
+	}
+
+	public boolean isLatLonInsidePixelArea(LatLon latLon, QuadRect pixelArea) {
+		return isLatLonInsidePixelArea(latLon.getLatitude(), latLon.getLongitude(), pixelArea);
+	}
+
+	public boolean isLatLonInsidePixelArea(double lat, double lon, QuadRect pixelArea) {
+		float pixX = getPixXFromLatLon(lat, lon);
+		float pixY = getPixYFromLatLon(lat, lon);
+		return pixelArea.contains(pixX, pixY, pixX, pixY);
+	}
+
 	public static class RotatedTileBoxBuilder {
 
 		private RotatedTileBox tb;

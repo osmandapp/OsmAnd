@@ -43,6 +43,7 @@ import androidx.transition.TransitionManager;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -307,10 +308,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (selectFromMapTouch) {
 				selectFromMapTouch = false;
-				LatLon latLon = NativeUtilities.getLatLonFromPixel(mapActivity.getMapView().getMapRenderer(), tileBox, point.x, point.y);
+
 				Pair<LatLon, PointDescription> pair = getObjectLocation(mapActivity.getMapView(), point, tileBox);
-				LatLon selectedPoint = pair != null ? pair.first : latLon;
-				PointDescription name = pair != null ? pair.second : null;
+				LatLon selectedPoint;
+				PointDescription name = null;
+				if (pair != null) {
+					selectedPoint = pair.first;
+					name = pair.second;
+				} else {
+					MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
+					selectedPoint = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, point);
+				}
 				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
 				if (selectFromMapWaypoints) {
 					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
@@ -323,6 +331,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return false;
 	}
 
+	@Nullable
 	private Pair<LatLon, PointDescription> getObjectLocation(OsmandMapTileView mapView, PointF point, RotatedTileBox tileBox) {
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {

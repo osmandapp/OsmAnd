@@ -37,8 +37,8 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapAnimator;
-import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.PointD;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -802,7 +802,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void restoreScreenCenter() {
 		restoreMapRatio();
 		RotatedTileBox box = currentViewport.copy();
-		LatLon screenCenter = NativeUtilities.getLatLonFromPixel(mapRenderer, box,
+		LatLon screenCenter = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, box,
 				box.getPixWidth() / 2f, box.getPixHeight() / 2f);
 		PointF ratio = calculateRatio();
 		setLatLon(screenCenter.getLatitude(), screenCenter.getLongitude(), ratio.x, ratio.y);
@@ -1850,8 +1850,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				if (newZoom != initialViewport.getZoom()) {
 					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
 				} else {
-					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
-					LatLon p2 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x2, y2);
+					LatLon p1 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x1, y1);
+					LatLon p2 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x2, y2);
 					showMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
 				}
@@ -1868,8 +1868,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
 				} else {
 					MapRendererView mapRenderer = getMapRenderer();
-					LatLon p1 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x1, y1);
-					LatLon p2 = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport, x2, y2);
+					LatLon p1 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x1, y1);
+					LatLon p2 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x2, y2);
 					showMessage(OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(
 							p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
 				}
@@ -1892,8 +1892,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						animator.cancelAllAnimations();
 					}
 				}
-				firstTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, currentViewport, x1, y1);
-				secondTouchPointLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, currentViewport, x2, y2);
+				firstTouchPointLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, x1, y1);
+				secondTouchPointLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, currentViewport, x2, y2);
 				multiTouch = true;
 				wasZoomInMultiTouch = false;
 				multiTouchStartTime = System.currentTimeMillis();
@@ -1935,7 +1935,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getCurrentRotatedTileBox().copy();
 			MapRendererView mapRenderer = getMapRenderer();
-			initialCenterLatLon = NativeUtilities.getLatLonFromPixel(mapRenderer, initialViewport,
+			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
 			startRotating = false;
 			startZooming = false;
@@ -1990,7 +1990,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					zoom.zoomIn();
 
 					RotatedTileBox tb = getCurrentRotatedTileBox();
-					LatLon latlon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, e.getX(), e.getY());
+					LatLon latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, e.getX(), e.getY());
 					if (mapRenderer != null) {
 						PointI start31 = mapRenderer.getTarget();
 						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,

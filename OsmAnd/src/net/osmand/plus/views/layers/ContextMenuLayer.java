@@ -259,7 +259,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		float textScale = selectionHelper.hasTouchedMapObjects() ? getTextScale() : 1f;
 		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getTouchedSmallMapObjects().entrySet()) {
 			LatLon latLon = entry.getKey();
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), box, latLon);
 			BackgroundType background = entry.getValue();
 			Bitmap pressedBitmapSmall = background.getTouchBackground(mapActivity, true);
 			Rect destRect = getIconDestinationRect(
@@ -268,7 +268,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		for (Entry<LatLon, BackgroundType> entry : selectionHelper.getTouchedFullMapObjects().entrySet()) {
 			LatLon latLon = entry.getKey();
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), box, latLon);
 			BackgroundType background = entry.getValue();
 			Bitmap pressedBitmap = background.getTouchBackground(mapActivity, false);
 			int offsetY = background.getOffsetY(mapActivity, textScale);
@@ -406,19 +406,23 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		hideVisibleMenues();
 		MapRendererView mapRenderer = getMapRenderer();
-		LatLon pointLatLon = mapRenderer == null ? NativeUtilities.getLatLonFromPixel(null, tileBox, point.x, point.y)
-			: NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
-		menu.show(pointLatLon, null, null);
+		LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, point);
+		menu.show(latLon, null, null);
 
 		view.refreshMap();
 		return true;
 	}
 
+	@NonNull
+	public LatLon getMovableCenterLatLon(@NonNull RotatedTileBox tileBox) {
+		return applyingMarkerLatLon != null
+				? applyingMarkerLatLon
+				: tileBox.getCenterLatLon();
+	}
 
 	public PointF getMovableCenterPoint(RotatedTileBox tb) {
 		if (applyingMarkerLatLon != null) {
-			return NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-					applyingMarkerLatLon.getLatitude(), applyingMarkerLatLon.getLongitude());
+			return NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, applyingMarkerLatLon);
 		} else {
 			return new PointF(tb.getPixWidth() / 2f, tb.getPixHeight() / 2f);
 		}
@@ -472,8 +476,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
 		PointF newMarkerPosition = getMovableCenterPoint(tileBox);
-		LatLon ll = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
-				newMarkerPosition.x, newMarkerPosition.y);
+		LatLon ll = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, newMarkerPosition);
 		applyingMarkerLatLon = ll;
 
 		Object obj = getMoveableObject();
@@ -510,9 +513,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		RotatedTileBox tileBox = getMapView().getCurrentRotatedTileBox();
-		PointF newMarkerPosition = getMovableCenterPoint(tileBox);
-		LatLon ll = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox,
-				newMarkerPosition.x, newMarkerPosition.y);
+		LatLon ll = getMovableCenterLatLon(tileBox);
 		applyingMarkerLatLon = ll;
 
 		Object obj = getMoveableObject();
@@ -685,11 +686,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	public boolean showContextMenu(double latitude, double longitude, boolean showUnknownLocation) {
-		return showContextMenu(getPointFromLatLon(latitude, longitude),
-				getMapView().getCurrentRotatedTileBox(), showUnknownLocation);
-	}
-
 	public boolean showContextMenu(@NonNull LatLon latLon,
 	                               @Nullable PointDescription pointDescription,
 	                               @Nullable Object object,
@@ -713,7 +709,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return true;
 	}
 
-	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
+	public boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
 		if (menu == null || mAddGpxPointBottomSheetHelper == null) {
 			return false;
 		}
@@ -765,11 +761,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		return false;
-	}
-
-	private PointF getPointFromLatLon(double latitude, double longitude) {
-		RotatedTileBox cp = getMapView().getCurrentRotatedTileBox();
-		return NativeUtilities.getPixelFromLatLon(getMapRenderer(), cp, latitude, longitude);
 	}
 
 	public boolean disableSingleTap() {
@@ -828,7 +819,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			markerY = tb.getCenterPixelY();
 		} else if (menu != null && menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
 			markerX = pixel.x;
 			markerY = pixel.y;
 		} else {
@@ -859,8 +850,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		if (selectOnMap != null) {
 			MapRendererView mapRenderer = getMapRenderer();
-			LatLon latlon = mapRenderer == null ? NativeUtilities.getLatLonFromPixel(null, tileBox, point.x, point.y)
-				: NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, point.x, point.y);
+			LatLon latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, point);
 			menu.init(latlon, null, null);
 			CallbackWithObject<LatLon> cb = selectOnMap;
 			cb.processResult(latlon);

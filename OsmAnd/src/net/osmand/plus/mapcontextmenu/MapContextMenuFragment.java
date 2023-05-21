@@ -250,7 +250,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				origMarkerX = box.getCenterPixelX();
 				origMarkerY = box.getCenterPixelY();
 			} else {
-				PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
+				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(map.getMapRenderer(), box, latLon);
 				origMarkerX = (int) pixel.x;
 				origMarkerY = (int) pixel.y;
 			}
@@ -959,7 +959,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void setCustomMapRatio() {
 		LatLon latLon = menu.getLatLon();
 		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-		PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(map.getMapRenderer(), tb, latLon);
 		float ratioX = pixel.x / tb.getPixWidth();
 		float ratioY = pixel.y / tb.getPixHeight();
 		map.setCustomMapRatio(ratioX, ratioY);
