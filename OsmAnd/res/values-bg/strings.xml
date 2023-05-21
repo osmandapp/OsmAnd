@@ -3512,4 +3512,5 @@
     <string name="map_widget_distance_by_tap">Разстояние чрез докосване</string>
     <string name="app_restart_required">За да бъдат приложени настройките е необходимо рестартиране на приложението.</string>
     <string name="hide_from_zoom_level">Скрити при увеличение</string>
+    <string name="go_to_marker_location">Към до местоположението на маркера</string>
 </resources>
