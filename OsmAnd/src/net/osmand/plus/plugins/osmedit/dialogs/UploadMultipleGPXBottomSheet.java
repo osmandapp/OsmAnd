@@ -14,7 +14,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -40,8 +39,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<T
 		TextView pointsCount = view.findViewById(R.id.points_count);
 
 		TrackItem trackItem = item.getObject();
-		GPXInfo gpxInfo = new GPXInfo(trackItem.getName(), trackItem.getFile());
-		GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(gpxInfo, app, null);
+		GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(trackItem, app, null);
 		if (analysis != null) {
 			pointsCount.setText(String.valueOf(analysis.wptPoints));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));

@@ -185,7 +185,12 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			}
 		});
 		actionsButton.setOnClickListener(this::showOptionsMenu);
-		searchButton.setOnClickListener((v) -> SearchTrackItemsFragment.showInstance(getChildFragmentManager()));
+		searchButton.setOnClickListener((v) -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this);
+			}
+		});
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
 
 		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);

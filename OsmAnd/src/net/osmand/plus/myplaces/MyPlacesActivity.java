@@ -72,8 +72,7 @@ public class MyPlacesActivity extends TabActivity {
 			actionBar.setTitle(R.string.shared_string_my_places);
 			actionBar.setElevation(0);
 		}
-
-		setContentView(R.layout.tab_content);
+		setContentView(R.layout.my_places);
 		viewPager = findViewById(R.id.pager);
 
 		List<TabItem> tabItems = getTabItems();

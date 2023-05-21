@@ -85,7 +85,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		View view = inflater.inflate(R.layout.gpx_search_items_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
-		Fragment fragment = getParentFragment();
+		Fragment fragment = getTargetFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
 		adapter = new SearchTracksAdapter(app, trackItems, nightMode);
 		adapter.setTracksSortMode(getTracksSortMode());
@@ -127,7 +127,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupSelectionHelper() {
-		Fragment fragment = getParentFragment();
+		Fragment fragment = getTargetFragment();
 		if (fragment instanceof SelectionHelperProvider) {
 			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
 			ItemsSelectionHelper<TrackItem> helper = helperProvider.getSelectionHelper();
@@ -153,7 +153,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void saveChanges() {
-		Fragment fragment = getParentFragment();
+		Fragment fragment = getTargetFragment();
 		if (fragment instanceof SelectionHelperProvider) {
 			SelectionHelperProvider<TrackItem> helperProvider = (SelectionHelperProvider<TrackItem>) fragment;
 			ItemsSelectionHelper<TrackItem> itemsSelectionHelper = helperProvider.getSelectionHelper();
@@ -353,10 +353,11 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		};
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchTrackItemsFragment fragment = new SearchTrackItemsFragment();
 			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}
 	}
