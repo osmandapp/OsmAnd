@@ -88,12 +88,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private void updateShowDirectionMarkers() {
-		OsmandSettings settings = app.getSettings();
-		showDirectionEnabled = WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(app, mapActivity, settings.getApplicationMode());
-
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));
+		showDirectionEnabled = WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(mapActivity);
 	}
 
 	private int getToIndex(int markersCount) {

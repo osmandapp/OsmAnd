@@ -23,6 +23,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 import java.util.Set;
 
 public class WidgetsVisibilityHelper {
@@ -85,6 +86,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
+
 	public boolean shouldHideMapMarkersWidget() {
 		View streetName = mapActivity.findViewById(R.id.street_name_widget);
 		return streetName != null && streetName.getVisibility() == View.VISIBLE
@@ -101,10 +103,13 @@ public class WidgetsVisibilityHelper {
 				|| isSelectingTilesZone();
 	}
 
-	public static boolean isMapMarkerBarWidgetEnabled(@NonNull OsmandApplication app, @NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
+	public static boolean isMapMarkerBarWidgetEnabled(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		List<WidgetsPanel> panels = WidgetsPanel.TOP.getMergedPanels();
+
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				ENABLED_MODE, WidgetsPanel.TOP.getMergedPanels());
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, panels);
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
 			if (widgetInfo.key.contains(MARKERS_TOP_BAR.id)) {

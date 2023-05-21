@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment.addSelectedWidgets;
-
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -16,19 +18,15 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
 import net.osmand.util.Algorithms;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,11 +65,10 @@ public class MapMarkerMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						OsmandApplication app = activity.getMyApplication();
-						OsmandSettings settings = app.getSettings();
-						if (!WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(app, mapActivity, settings.getApplicationMode())) {
-							enableTopMapMarkerWidget(app, mapActivity);
+						if (!WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(mapActivity)) {
+							enableTopMapMarkerWidget(mapActivity);
 						}
+						OsmandApplication app = activity.getMyApplication();
 						MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 						markersHelper.moveMarkerToTop(getMapMarker());
 						activity.getContextMenu().close();
@@ -83,10 +80,12 @@ public class MapMarkerMenuController extends MenuController {
 		}
 	}
 
-	private void enableTopMapMarkerWidget(OsmandApplication app, MapActivity mapActivity) {
+	private void enableTopMapMarkerWidget(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		List<String> widgetsIds = Collections.singletonList(WidgetType.MARKERS_TOP_BAR.id);
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		List<String> widgetsIds = new ArrayList<>(Collections.singleton(WidgetType.MARKERS_TOP_BAR.id));
-		addSelectedWidgets(mapActivity, widgetsIds, WidgetsPanel.TOP, widgetRegistry, app.getSettings().getApplicationMode());
+		ConfigureWidgetsFragment.addSelectedWidgets(mapActivity, widgetsIds, WidgetsPanel.TOP, widgetRegistry, appMode);
 	}
 
 	@Nullable
@@ -96,7 +95,7 @@ public class MapMarkerMenuController extends MenuController {
 			ShapeDrawable bg = new ShapeDrawable(new OvalShape());
 			bg.getPaint().setColor(ContextCompat.getColor(mapActivity, bgColorRes));
 			Drawable ic = getIcon(R.drawable.ic_action_marker_passed, 0);
-			return new LayerDrawable(new Drawable[]{bg, ic});
+			return new LayerDrawable(new Drawable[] {bg, ic});
 		} else {
 			return null;
 		}
@@ -105,7 +104,7 @@ public class MapMarkerMenuController extends MenuController {
 	private LayerDrawable createShowOnTopbarIcon(int bgColorRes) {
 		Drawable background = getIcon(R.drawable.ic_action_device_top, bgColorRes);
 		Drawable topbar = getIcon(R.drawable.ic_action_device_topbar, R.color.active_color_primary_light);
-		return new LayerDrawable(new Drawable[]{background, topbar});
+		return new LayerDrawable(new Drawable[] {background, topbar});
 	}
 
 	@Override
