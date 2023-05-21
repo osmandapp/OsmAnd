@@ -44,6 +44,10 @@
 				<include
 					android:id="@+id/MapHudButtonsOverlayQuickActions"
 					layout="@layout/map_hud_quick_actions" />
+
+				<include
+					android:id="@+id/MapHudButtonsOverlay3DMode"
+					layout="@layout/map_hud_3d_mode" />
 			</FrameLayout>
 
 			<FrameLayout

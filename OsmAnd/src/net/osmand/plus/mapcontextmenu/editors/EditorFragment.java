@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 
 import android.app.Activity;
 import android.content.Context;
@@ -33,7 +33,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.data.BackgroundType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -55,8 +54,6 @@ import java.util.List;
 
 public abstract class EditorFragment extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
-	protected OsmandApplication app;
-
 	protected IconsCard iconsCard;
 	protected ColorsCard colorsCard;
 	protected ShapesCard shapesCard;
@@ -74,7 +71,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private int layoutHeightPrevious;
 
 	protected boolean cancelled;
-	protected boolean nightMode;
 
 	@ColorInt
 	public int getColor() {
@@ -118,11 +114,13 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();

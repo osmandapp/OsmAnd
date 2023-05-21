@@ -4720,8 +4720,6 @@
     <string name="goods_delivery_desc_4">Используйте профиль «Грузовик» для автомобилей массой более 3,5 тонн.</string>
     <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
     <string name="download_complete">Загрузка завершена</string>
-    <string name="accessibility_2d_view_on">2.5D вид вкл.</string>
-    <string name="accessibility_2d_view_off">2.5D вид выкл.</string>
     <string name="auto_backup_title">Автоматическое резервное копирование</string>
     <string name="relative_bearing_widget_desc">Показывает угол между вашим направлением движения и целевой точкой.</string>
     <string name="first_marker_widget_desc">Вы можете настроить виджет так, чтобы он показывал расстояние или расчётное время прибытия до первого маркера карты.</string>
@@ -4887,7 +4885,6 @@
 \n
 \n</string>
     <string name="how_to_use">Как использовать:</string>
-    <string name="shared_string_2_5_d_view">2,5 D вид</string>
     <string name="worldwide_maps">Карты мира</string>
     <string name="coordinates_widget_map_center_desc">Виджет показывает географические координаты текущего центра карты</string>
     <string name="map_settings_weather_air_pressure">Давление</string>
@@ -5181,4 +5178,5 @@
     <string name="external_device_forget_sensor">Забыть датчик</string>
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
+    <string name="no_poi_for_category">POI не найдена</string>
 </resources>

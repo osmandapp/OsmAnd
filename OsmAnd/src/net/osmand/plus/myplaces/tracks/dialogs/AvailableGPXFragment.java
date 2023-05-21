@@ -48,20 +48,18 @@ import net.osmand.CallbackWithObject;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.GpxActionsHelper;
 import net.osmand.plus.myplaces.tracks.GpxSearchFilter;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
@@ -73,7 +71,6 @@ import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.plugins.osmedit.dialogs.UploadMultipleGPXBottomSheet;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.data.GPXInfo;
@@ -116,8 +113,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	private static final int SEARCH_ID = -1;
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private GpxSelectionHelper selectedGpxHelper;
 	private GpxActionsHelper gpxActionsHelper;
 
@@ -137,37 +132,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private View emptyView;
 	private SelectGpxTaskListener gpxTaskListener;
 	private String selectedFolder;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gpxTaskListener = new SelectGpxTaskListener() {
-			@Override
-			public void gpxSelectionInProgress() {
-				allGpxAdapter.notifyDataSetInvalidated();
-			}
-
-			@Override
-			public void gpxSelectionStarted() {
-				showProgressBar();
-			}
-
-			@Override
-			public void gpxSelectionFinished() {
-				hideProgressBar();
-				allGpxAdapter.refreshSelected();
-				allGpxAdapter.notifyDataSetChanged();
-			}
-		};
-	}
-
-	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		app = (OsmandApplication) context.getApplicationContext();
-		settings = app.getSettings();
-		nightMode = !settings.isLightContent();
 		currentRecording = new GPXInfo(getString(R.string.shared_string_currently_recording_track), null);
 		currentRecording.setGpxFile(app.getSavingTrackHelper().getCurrentGpx());
 		asyncLoader = new LoadGpxInfosTask(app, this);
@@ -177,6 +145,31 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		gpxActionsHelper.setTargetFragment(this);
 		gpxActionsHelper.setDeletionListener(this);
 		setAdapter(allGpxAdapter);
+	}
+
+	@NonNull
+	private SelectGpxTaskListener getSelectGpxTaskListener() {
+		if (gpxTaskListener == null) {
+			gpxTaskListener = new SelectGpxTaskListener() {
+				@Override
+				public void gpxSelectionInProgress() {
+					allGpxAdapter.notifyDataSetInvalidated();
+				}
+
+				@Override
+				public void gpxSelectionStarted() {
+					showProgressBar();
+				}
+
+				@Override
+				public void gpxSelectionFinished() {
+					hideProgressBar();
+					allGpxAdapter.refreshSelected();
+					allGpxAdapter.notifyDataSetChanged();
+				}
+			};
+		}
+		return gpxTaskListener;
 	}
 
 	public void startImport() {
@@ -482,9 +475,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				OsmandApplication app = requireMyApplication();
 				int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
+				Drawable icMenuItem = uiUtilities.getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
 			}
 		}
@@ -670,7 +662,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			String path = gpxInfo.isCurrentRecordingTrack() ? CURRENT_TRACK : gpxInfo.getFile().getAbsolutePath();
 			selectedItemsFileNames.put(path, selectedItems.contains(gpxInfo));
 		}
-		selectedGpxHelper.runSelection(selectedItemsFileNames, gpxTaskListener);
+		selectedGpxHelper.runSelection(selectedItemsFileNames, getSelectGpxTaskListener());
 	}
 
 	public void openSelectionMode(int actionResId, int darkIcon, int lightIcon,
@@ -904,12 +896,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void onGpxFilesDeletionFinished(boolean shouldUpdateFolders) {
+	public void onGpxFilesDeletionFinished() {
 		hideProgressBar();
-
-		if (shouldUpdateFolders) {
-			reloadTracks();
-		}
+		reloadTracks();
 	}
 
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {

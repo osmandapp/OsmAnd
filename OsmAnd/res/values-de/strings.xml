@@ -4718,8 +4718,6 @@
     <string name="marker_2nd">Zweite Markierung</string>
     <string name="goods_delivery_desc_4">Verwenden Sie das LKW-Profil für Fahrzeuggewichte von mehr als 3,5 Tonnen.</string>
     <string name="routing_attr_goods_restrictions_name">Lieferverkehr</string>
-    <string name="accessibility_2d_view_off">2,5D-Ansicht aus</string>
-    <string name="accessibility_2d_view_on">2,5D-Ansicht an</string>
     <string name="download_complete">Download abgeschlossen</string>
     <string name="auto_25_chars_route_tl_kr">Links abbiegen und rechts halten</string>
     <string name="auto_25_chars_route_tr_kr">Rechts abbiegen und rechts halten</string>
@@ -4780,7 +4778,6 @@
     <string name="shared_string_large">Groß</string>
     <string name="go_to_marker_location">Zum Standort der Markierung gehen</string>
     <string name="shared_string_switch_mode">Modus wechseln</string>
-    <string name="shared_string_2_5_d_view">2,5-D-Ansicht</string>
     <string name="map_markers_desc">Das Widget zeigt die Entfernung oder die geschätzte Ankunftszeit (ETA) der ersten beiden Markierungen in der Liste der Kartenmarkierungen an.</string>
     <string name="map_marker_interval_dialog_desc">Geben Sie das Zeitintervall an, für das die Durchschnittsgeschwindigkeit zur Berechnung der geschätzten Ankunftszeit gemessen wird.</string>
     <string name="click_on_widget">Klicken Sie auf das Widget</string>
@@ -5104,10 +5101,10 @@
     <string name="shared_string_nearest">Am nächsten</string>
     <string name="app_mode_moped">Moped</string>
     <string name="generate_slope_from_3d_maps">Erzeugen von Hangneigungskarten aus 3D-Karten</string>
-    <string name="disable_vertex_hillshade_3d">Vertex-Relief in 3D deaktivieren</string>
+    <string name="disable_vertex_hillshade_3d">Eckpunkt-Schummerung in 3D deaktivieren</string>
     <string name="enable_3d_maps">3D-Karten aktivieren</string>
     <string name="test_heightmap">Höhenkarte testen</string>
-    <string name="generate_hillshade_from_3d_maps">Erzeugen von gerasterten Reliefkarten aus 3D-Karten</string>
+    <string name="generate_hillshade_from_3d_maps">Schummerungs-Rasterkarten aus 3D-Karten erzeugen</string>
     <string name="app_mode_climbing">Klettern</string>
     <string name="offline_weather_forecast">Offline-Wettervorhersage</string>
     <string name="offline_weather_forecast_desc">Sie können die Wettervorhersage für 7 Tage herunterladen.</string>
@@ -5213,4 +5210,11 @@
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Klein</string>
     <string name="rendering_value_name_only_name">Nur Name</string>
+    <string name="poi_categories">OVI-Kategorien</string>
+    <string name="no_poi_for_category">OVI nicht gefunden</string>
+    <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_2d_mode_action">2D Modus</string>
+    <string name="map_3d_mode_action">3D Modus</string>
+    <string name="map_3d_mode_hint">Gedrückt halten um den Knopf zu verschieben.</string>
+    <string name="visible_in_3d_mode">Sichtbar im 3D Modus</string>
 </resources>

@@ -33,7 +33,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = TransportLinesFragment.class.getSimpleName();
 
-	private OsmandApplication app;
 	private MapActivity mapActivity;
 	private TransportLinesMenu menu;
 
@@ -44,7 +43,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		mapActivity = (MapActivity) requireMyActivity();
 		menu = new TransportLinesMenu(app);
 	}

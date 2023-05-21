@@ -4710,8 +4710,6 @@
     <string name="goods_delivery_desc_2">Yük teslimatı için kapalı olan yollardan kaçınılacaktır.</string>
     <string name="goods_delivery_desc_3">Yalnızca ağırlığı 3,5 tonu geçmeyen yük taşıyan araçlar için geçerlidir.</string>
     <string name="routing_attr_goods_restrictions_name">Yük teslimatı</string>
-    <string name="accessibility_2d_view_off">2.5B görünüm kapalı</string>
-    <string name="accessibility_2d_view_on">2.5B görünüm açık</string>
     <string name="download_complete">İndirme tamamlandı</string>
     <string name="trip_recording_duration_widget_desc">Mevcut kayıtlı seyahatin süresini gösterir.</string>
     <string name="auto_25_chars_route_tr_kr">Sağa dönün ve sağdan devam edin</string>

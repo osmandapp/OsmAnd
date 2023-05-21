@@ -70,9 +70,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private MapLayers mapLayers;
 	private MapWidgetRegistry widgetRegistry;
 	private MapWidgetsFactory widgetsFactory;
@@ -86,8 +83,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	private ViewPager2 viewPager;
 	private WidgetsTabAdapter widgetsTabAdapter;
 	private View compensationView;
-
-	private boolean nightMode;
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
@@ -104,8 +99,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		mapLayers = app.getOsmandMap().getMapLayers();
 		widgetRegistry = mapLayers.getMapWidgetRegistry();
 		widgetsFactory = new MapWidgetsFactory((MapActivity) requireMyActivity());
@@ -120,7 +113,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
 		View view = inflater.inflate(R.layout.fragment_configure_widgets, container, false);

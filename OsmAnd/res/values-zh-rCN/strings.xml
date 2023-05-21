@@ -4384,7 +4384,6 @@
     <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
     <string name="switch_widget_mode_desc">轻按小工具可切换模式。</string>
     <string name="side_marker_eta">预计的到达时间</string>
-    <string name="accessibility_2d_view_off">2.5D 视图关闭</string>
     <string name="download_complete">下载完成</string>
     <string name="marker_1st">第一个标记</string>
     <string name="goods_delivery_desc_3">仅适用于不超过 3.5 吨的送货卡车。</string>
@@ -4394,7 +4393,6 @@
     <string name="transport_hazmat_no_desc">道路和隧道可能会限制危险材料的运输。</string>
     <string name="transport_hazmat_title">危险品运输</string>
     <string name="calculate_online_altitude_descr">基于卫星图像和数字高程模型，在 OsmAnd 服务器上在线计算高程。与设备记录的高度的差异可以用作高程校正。</string>
-    <string name="accessibility_2d_view_on">2.5D 视图开启</string>
     <string name="compass_always_hidden">始终隐藏</string>
     <string name="compass_always_visible">始终可见</string>
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
@@ -4637,7 +4635,6 @@
     <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置的小工具。</string>
     <string name="distance_by_tap_use_description">轻按地图查看您当前位置与点击点之间的距离。
 \n用两根手指在地图上同时轻按以查看单击点之间的距离</string>
-    <string name="shared_string_2_5_d_view">2.5D 视图</string>
     <string name="calculating_altitude">正在计算海拔</string>
     <string name="shared_string_speed">速度</string>
     <string name="map_widget_camera_tilt_desc">显示透视模式下的相机倾斜角度。默认为90°（无倾斜）。</string>

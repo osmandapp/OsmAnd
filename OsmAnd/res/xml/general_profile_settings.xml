@@ -19,13 +19,6 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/rotate_map_to" />
 
-	<SwitchPreferenceCompat
-		android:key="enable_3d_view"
-		android:layout="@layout/preference_switch_with_descr"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
-		android:title="@string/shared_string_2_5_d_view" />
-
 	<Preference
 		android:key="position_placement_on_map"
 		android:layout="@layout/preference_with_descr"

@@ -168,8 +168,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
 	private TrackDisplayHelper displayHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedGpxFile selectedGpxFile;
@@ -292,9 +290,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		displayHelper = new TrackDisplayHelper(app);
-		uiUtilities = app.getUIUtilities();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 
@@ -752,7 +748,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (routeInfoCard != null && routeInfoCard.getView() != null) {
 						reattachCard(cardsContainer, routeInfoCard);
 					} else {
-						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey);
+						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, getLatLon());
 						cardsContainer.addView(routeInfoCard.build(mapActivity));
 					}
 				}

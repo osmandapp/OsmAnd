@@ -2857,10 +2857,10 @@
     <string name="rendering_attr_highway_class_road_name">Route</string>
     <string name="rendering_attr_highway_class_street_name">Rue</string>
     <string name="rendering_attr_highway_class_service_name">Service</string>
-    <string name="rendering_attr_highway_class_footway_name">Passerelle</string>
+    <string name="rendering_attr_highway_class_footway_name">Voie piétonne</string>
     <string name="rendering_attr_highway_class_track_name">Piste</string>
     <string name="rendering_attr_highway_class_bridleway_name">Passage piéton</string>
-    <string name="rendering_attr_highway_class_steps_name">Étapes</string>
+    <string name="rendering_attr_highway_class_steps_name">Escalier</string>
     <string name="rendering_attr_highway_class_path_name">Chemin</string>
     <string name="rendering_attr_highway_class_cycleway_name">Voie cyclable</string>
     <string name="rendering_attr_undefined_name">Non défini</string>
@@ -4703,9 +4703,7 @@
     <string name="reset_all_settings_desc">Réinitialiser tous les paramètres à leurs valeurs par défaut \?</string>
     <string name="goods_delivery_desc_3">S\'applique uniquement aux véhicules pesant moins de 3,5 tonnes.</string>
     <string name="routing_attr_goods_restrictions_name">Livraison de marchandises</string>
-    <string name="accessibility_2d_view_on">Vue 2.5D activée</string>
     <string name="download_complete">Téléchargement terminé</string>
-    <string name="accessibility_2d_view_off">Vue 2.5D désactivée</string>
     <string name="widget_with_dot">Gadget.</string>
     <string name="compass_visible_if_map_rotated_desc">Masqué lorsque le Nord est vers le haut</string>
     <string name="compass_always_hidden">Toujours masqué</string>
@@ -4762,7 +4760,6 @@
     <string name="display_position">Emplacement sur l’écran</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
-    <string name="shared_string_2_5_d_view">Vue 2.5D</string>
     <string name="rotate_map_manual_opt">Fixe (rotation manuelle)</string>
     <string name="shared_string_large">Grand</string>
     <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement d\'appui et votre position actuelle.

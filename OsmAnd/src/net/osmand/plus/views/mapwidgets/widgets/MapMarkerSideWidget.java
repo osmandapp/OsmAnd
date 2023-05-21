@@ -87,12 +87,9 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		RoutingHelper routingHelper = app.getRoutingHelper();
 		MapMarker marker = getMarker();
 
-		boolean hideWidget = marker == null
-				|| routingHelper.isRoutePlanningMode()
-				|| routingHelper.isFollowingMode();
+		boolean hideWidget = marker == null;
 		if (hideWidget) {
 			cachedMeters = 0;
 			lastUpdatedTime = 0;
