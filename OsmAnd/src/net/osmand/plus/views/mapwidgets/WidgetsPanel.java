@@ -166,10 +166,6 @@ public enum WidgetsPanel {
 		return this == LEFT || this == RIGHT;
 	}
 
-	public boolean isDuplicatesAllowed() {
-		return this == LEFT || this == RIGHT || this == TOP || this == BOTTOM;
-	}
-
 	@NonNull
 	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings) {
 		if (this == LEFT) {

@@ -22,7 +22,7 @@ import androidx.appcompat.widget.SwitchCompat;
 public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String KEY_SHOW_SLOPE = "show_slope";
-	public CommonPreference<Boolean> showSlopePreference;
+	private CommonPreference<Boolean> showSlopePreference;
 
 	private boolean showSlope;
 

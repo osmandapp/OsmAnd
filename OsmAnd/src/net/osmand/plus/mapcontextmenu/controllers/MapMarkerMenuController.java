@@ -20,6 +20,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.WidgetUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -84,8 +85,7 @@ public class MapMarkerMenuController extends MenuController {
 		OsmandApplication app = mapActivity.getMyApplication();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		List<String> widgetsIds = Collections.singletonList(WidgetType.MARKERS_TOP_BAR.id);
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		ConfigureWidgetsFragment.addSelectedWidgets(mapActivity, widgetsIds, WidgetsPanel.TOP, widgetRegistry, appMode);
+		WidgetUtils.addSelectedWidgets(mapActivity, widgetsIds, WidgetsPanel.TOP, appMode);
 	}
 
 	@Nullable
