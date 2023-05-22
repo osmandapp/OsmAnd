@@ -38,6 +38,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
+import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
@@ -70,7 +71,7 @@ import java.util.Set;
 
 public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment implements FragmentStateHolder,
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener,
-		OsmAuthorizationListener, GpxFilesDeletionListener, SelectGpxTaskListener {
+		OsmAuthorizationListener, GpxFilesDeletionListener, SelectGpxTaskListener, OnTrackFolderAddListener {
 
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
 
@@ -246,7 +247,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 					.setOnClickListener(v -> {
 						FragmentManager manager = getFragmentManager();
 						if (manager != null) {
-							MoveGpxFileBottomSheet.showInstance(manager, this, file.getAbsolutePath(), isUsedOnMap(), false);
+							MoveGpxFileBottomSheet.showInstance(manager, getMainFragment(), file.getAbsolutePath(), isUsedOnMap(), false);
 						}
 					})
 					.create()
@@ -257,7 +258,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 					.setOnClickListener(v -> {
 						FragmentActivity activity = getActivity();
 						if (activity != null) {
-							FileUtils.renameFile(activity, file, this, isUsedOnMap());
+							FileUtils.renameFile(activity, file, getMainFragment(), isUsedOnMap());
 						}
 					})
 					.create()
@@ -300,8 +301,14 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	public void deleteGpxFiles(@NonNull File... files) {
-		DeleteGpxFilesTask deleteFilesTask = new DeleteGpxFilesTask(app, this);
+		DeleteGpxFilesTask deleteFilesTask = new DeleteGpxFilesTask(app, getMainFragment());
 		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
+	}
+
+	@NonNull
+	private BaseTrackFolderFragment getMainFragment() {
+		BaseTrackFolderFragment target = (BaseTrackFolderFragment) getTargetFragment();
+		return target != null ? target : this;
 	}
 
 	private void showTrackOnMap(@NonNull TrackItem trackItem) {
@@ -359,7 +366,15 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void importTracks() {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FILE_REQUEST);
+		AndroidUtils.startActivityForResultIfSafe(getMainFragment(), intent, IMPORT_FILE_REQUEST);
+	}
+
+	@Override
+	public void onTrackFolderAdd(String folderName) {
+		File dir = new File(selectedFolder.getDirFile(), folderName);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
 	}
 
 	@Override

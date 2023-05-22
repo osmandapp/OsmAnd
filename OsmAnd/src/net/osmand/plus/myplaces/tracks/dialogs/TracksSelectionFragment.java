@@ -45,7 +45,7 @@ import java.util.Set;
 
 public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener {
 
-	public static final String TAG = TrackFolderFragment.class.getSimpleName();
+	public static final String TAG = TracksSelectionFragment.class.getSimpleName();
 
 	private ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
 

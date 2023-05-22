@@ -36,7 +36,6 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
-import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -54,7 +53,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AvailableTracksFragment extends BaseTrackFolderFragment implements SelectionHelperProvider<TrackItem>,
-		OnTrackFileMoveListener, RenameCallback, OnTrackFolderAddListener {
+		OnTrackFileMoveListener, RenameCallback {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -285,10 +284,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onTrackFolderAdd(String folderName) {
-		File dir = new File(selectedFolder.getDirFile(), folderName);
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
+		super.onTrackFolderAdd(folderName);
 		reloadTracks();
 	}
 
