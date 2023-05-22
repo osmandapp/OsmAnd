@@ -1,6 +1,7 @@
-package net.osmand.plus.myplaces.controller;
+package net.osmand.plus.myplaces.tracks.controller;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -13,7 +14,7 @@ enum TrackFolderOption {
 	CHANGE_APPEARANCE(R.string.change_default_appearance, R.drawable.ic_action_appearance),
 	EXPORT(R.string.shared_string_export, R.drawable.ic_action_upload),
 	MOVE(R.string.shared_string_move, R.drawable.ic_action_folder_move),
-	DELETE_FOLDER(R.string.shared_string_delete_folder, R.drawable.ic_action_delete_dark);
+	DELETE_FOLDER(R.string.delete_folder, R.drawable.ic_action_delete_dark);
 
 	@StringRes
 	private final int titleId;
@@ -37,5 +38,10 @@ enum TrackFolderOption {
 
 	public boolean shouldShowBottomDivider() {
 		return Algorithms.equalsToAny(this, SHOW_ALL_TRACKS, CHANGE_APPEARANCE, MOVE);
+	}
+
+	@NonNull
+	public static TrackFolderOption[] getAvailableOptions() {
+		return new TrackFolderOption[] {SHOW_ALL_TRACKS, EDIT_NAME, DELETE_FOLDER};
 	}
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 
@@ -47,16 +48,12 @@ public class CustomizableOptionsBottomSheet extends CustomizableBottomSheet {
 		return true;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String processId, boolean usedOnMap) {
-		try {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String processId, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, processId)) {
 			CustomizableOptionsBottomSheet fragment = new CustomizableOptionsBottomSheet();
 			fragment.setProcessId(processId);
 			fragment.setUsedOnMap(usedOnMap);
-			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
+			fragment.show(manager, TAG);
 		}
 	}
 }

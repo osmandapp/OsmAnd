@@ -43,6 +43,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.plus.track.helpers.folder.TrackFolderOptionsListener;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.util.Algorithms;
@@ -53,7 +54,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AvailableTracksFragment extends BaseTrackFolderFragment implements SelectionHelperProvider<TrackItem>,
-		OnTrackFileMoveListener, RenameCallback {
+		OnTrackFileMoveListener, RenameCallback, TrackFolderOptionsListener {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 
@@ -278,6 +279,22 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
+	public void onFolderRenamed(@NonNull File oldDir, @NonNull File newDir) {
+		reloadTracks();
+	}
+
+	@Override
+	public void onFolderDeleted() {
+		reloadTracks();
+	}
+
+	@Override
+	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
+		List<TrackItem> trackItems = folder.getFlattenedTrackItems();
+		app.getSelectedGpxHelper().saveTracksVisibility(trackItems, this, false);
+	}
+
+	@Override
 	public void onGpxFilesDeletionFinished() {
 		reloadTracks();
 	}
@@ -367,7 +384,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			private void checkSubfolder(@NonNull TrackFolder folder) {
 				if (preSelectedFolder != null) {
 					for (TrackFolder subfolder : folder.getFlattenedSubFolders()) {
-						if (Algorithms.stringsEqual(subfolder.getDirFile().getName(), preSelectedFolder)) {
+						if (Algorithms.stringsEqual(subfolder.getDirName(), preSelectedFolder)) {
 							openTrackFolder(subfolder);
 							break;
 						}

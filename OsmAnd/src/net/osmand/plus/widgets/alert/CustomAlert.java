@@ -2,9 +2,7 @@ package net.osmand.plus.widgets.alert;
 
 import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +14,6 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.FragmentActivity;
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

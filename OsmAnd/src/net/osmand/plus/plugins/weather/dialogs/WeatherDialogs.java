@@ -18,10 +18,9 @@ import java.util.List;
 
 public class WeatherDialogs {
 
-	public static void showChooseUnitDialog(
-			@NonNull Context ctx, @NonNull WeatherBand band, int selected,
-			int profileColor, boolean nightMode, @NonNull OnClickListener listener
-	) {
+	public static void showChooseUnitDialog(@NonNull Context ctx, @NonNull WeatherBand band,
+	                                        int selected, int profileColor, boolean nightMode,
+	                                        @NonNull OnClickListener listener) {
 		List<? extends WeatherUnit> bandUnits = band.getAvailableBandUnits();
 		String[] entries = new String[bandUnits.size()];
 		for (int i = 0; i < entries.length; i++) {
@@ -43,5 +42,4 @@ public class WeatherDialogs {
 				.setPositiveButtonTextColor(ColorUtilities.getColor(ctx, R.color.color_osm_edit_delete));
 		CustomAlert.showSimpleMessage(dialogData, R.string.clear_online_cache_description);
 	}
-
 }

@@ -1,11 +1,11 @@
-package net.osmand.plus.myplaces.controller;
+package net.osmand.plus.myplaces.tracks.controller;
 
 import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
 import static net.osmand.plus.track.helpers.folder.TrackFolderOptionDialogs.showDeleteFolderDialog;
 import static net.osmand.plus.track.helpers.folder.TrackFolderOptionDialogs.showRenameFolderDialog;
-import static net.osmand.plus.track.helpers.folder.TrackFolderUiHelper.getFolderDescription;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,24 +20,25 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.folder.TrackFolderHelper;
 import net.osmand.plus.track.helpers.folder.TrackFolderOptionsListener;
-import net.osmand.plus.track.helpers.loadinfo.TracksInfoLoader;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.io.File;
 
-public class TrackFolderOptionsController extends BaseDialogController
-		implements IDisplayDataProvider, IDialogItemClicked, TrackFolderOptionsListener {
+public class TrackFolderOptionsController extends BaseDialogController implements IDisplayDataProvider,
+		IDialogItemClicked, TrackFolderOptionsListener {
 
 	public static final String PROCESS_ID = "tracks_folder_options";
 
-	private TrackFolderOptionsListener externalOptionsListener;
 	private final TrackFolderHelper trackFolderHelper;
 	private TrackFolder trackFolder;
+	private TrackFolderOptionsListener optionsListener;
 
 	public TrackFolderOptionsController(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
 		super(app);
@@ -47,7 +48,7 @@ public class TrackFolderOptionsController extends BaseDialogController
 	}
 
 	public void setTrackFolderOptionsListener(@Nullable TrackFolderOptionsListener listener) {
-		this.externalOptionsListener = listener;
+		this.optionsListener = listener;
 	}
 
 	@NonNull
@@ -65,8 +66,8 @@ public class TrackFolderOptionsController extends BaseDialogController
 		displayData.putExtra(BACKGROUND_COLOR, folderColorAlpha);
 
 		displayData.addDisplayItem(new DisplayItem()
-				.setTitle(trackFolder.getName())
-				.setDescription(getFolderDescription(app, trackFolder))
+				.setTitle(trackFolder.getName(app))
+				.setDescription(GpxUiHelper.getFolderDescription(app, trackFolder))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setIcon(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, trackFolder.getColor()))
 				.setShowBottomDivider(true, 0)
@@ -74,7 +75,7 @@ public class TrackFolderOptionsController extends BaseDialogController
 		);
 
 		int dividerPadding = calculateSubtitleDividerPadding();
-		for (TrackFolderOption listOption : TrackFolderOption.values()) {
+		for (TrackFolderOption listOption : TrackFolderOption.getAvailableOptions()) {
 			displayData.addDisplayItem(new DisplayItem()
 					.setTitle(getString(listOption.getTitleId()))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_56dp_padding_32dp)
@@ -95,7 +96,7 @@ public class TrackFolderOptionsController extends BaseDialogController
 		if (option == TrackFolderOption.DETAILS) {
 			showDetails();
 		} else if (option == TrackFolderOption.SHOW_ALL_TRACKS) {
-			showAllTracksOnMap();
+			showFolderTracksOnMap(trackFolder);
 		} else if (option == TrackFolderOption.EDIT_NAME) {
 			showRenameDialog();
 		} else if (option == TrackFolderOption.CHANGE_APPEARANCE) {
@@ -113,8 +114,13 @@ public class TrackFolderOptionsController extends BaseDialogController
 
 	}
 
-	private void showAllTracksOnMap() {
+	@Override
+	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
+		dialogManager.askDismissDialog(PROCESS_ID);
 
+		if (optionsListener != null) {
+			optionsListener.showFolderTracksOnMap(folder);
+		}
 	}
 
 	private void showRenameDialog() {
@@ -144,16 +150,17 @@ public class TrackFolderOptionsController extends BaseDialogController
 	}
 
 	@Override
-	public void onFolderRenamed(@NonNull File newDir) {
-		TracksInfoLoader.loadTracksInfoForDirectory(app, newDir, result -> {
-			trackFolder = result;
+	public void onFolderRenamed(@NonNull File oldDir, @NonNull File newDir) {
+		TrackFolderLoaderTask task = new TrackFolderLoaderTask(app, newDir, folder -> {
+			trackFolder = folder;
 			dialogManager.askRefreshDialogCompletely(PROCESS_ID);
 
 			// Notify external listener
-			if (externalOptionsListener != null) {
-				externalOptionsListener.onFolderRenamed(newDir);
+			if (optionsListener != null) {
+				optionsListener.onFolderRenamed(oldDir, newDir);
 			}
 		});
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
@@ -162,8 +169,8 @@ public class TrackFolderOptionsController extends BaseDialogController
 		dialogManager.askDismissDialog(PROCESS_ID);
 
 		// Notify external listener
-		if (externalOptionsListener != null) {
-			externalOptionsListener.onFolderDeleted();
+		if (optionsListener != null) {
+			optionsListener.onFolderDeleted();
 		}
 	}
 
@@ -173,23 +180,18 @@ public class TrackFolderOptionsController extends BaseDialogController
 		return contentPadding * 3 + iconWidth;
 	}
 
-	public static void showDialog(
-			@NonNull FragmentActivity activity, @NonNull File rootDir,
-			@Nullable TrackFolderOptionsListener trackFolderOptionsListener
-	) {
+	public static void showDialog(@NonNull FragmentActivity activity, @NonNull File rootDir,
+	                              @Nullable TrackFolderOptionsListener trackFolderOptionsListener) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		TracksInfoLoader.loadTracksInfoForDirectory(app, rootDir, result -> {
-			showDialog(activity, result, trackFolderOptionsListener);
-		});
+		TrackFolderLoaderTask task = new TrackFolderLoaderTask(app, rootDir, folder -> showDialog(activity, folder, trackFolderOptionsListener));
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void showDialog(
-			@NonNull FragmentActivity activity, @NonNull TrackFolder folder,
-			@Nullable TrackFolderOptionsListener trackFolderOptionsListener
-	) {
+	public static void showDialog(@NonNull FragmentActivity activity, @NonNull TrackFolder folder,
+	                              @Nullable TrackFolderOptionsListener listener) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		TrackFolderOptionsController controller = new TrackFolderOptionsController(app, folder);
-		controller.setTrackFolderOptionsListener(trackFolderOptionsListener);
+		controller.setTrackFolderOptionsListener(listener);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);

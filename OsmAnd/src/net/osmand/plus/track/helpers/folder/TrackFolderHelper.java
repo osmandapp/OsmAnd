@@ -19,21 +19,20 @@ public class TrackFolderHelper {
 		this.app = app;
 	}
 
-	public TrackFolderHelper setListener(@NonNull TrackFolderOptionsListener listener) {
+	public void setListener(@NonNull TrackFolderOptionsListener listener) {
 		this.listener = listener;
-		return this;
 	}
 
-	public void deleteTrackFolder(@NonNull TrackFolder trackFolder) {
+	public void deleteTrackFolder(@NonNull TrackFolder folder) {
 		// Remove all individual GPX files
-		for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+		for (TrackItem trackItem : folder.getFlattenedTrackItems()) {
 			File file = trackItem.getFile();
 			if (file != null) {
 				FileUtils.removeGpxFile(app, file);
 			}
 		}
 		// Remove root directory and all subdirectories
-		Algorithms.removeAllFiles(trackFolder.getDirFile());
+		Algorithms.removeAllFiles(folder.getDirFile());
 		if (listener != null) {
 			listener.onFolderDeleted();
 		}
@@ -44,7 +43,7 @@ public class TrackFolderHelper {
 		File newDir = new File(oldDir.getParentFile(), newName);
 		if (oldDir.renameTo(newDir)) {
 			if (listener != null) {
-				listener.onFolderRenamed(newDir);
+				listener.onFolderRenamed(oldDir, newDir);
 			}
 		}
 	}

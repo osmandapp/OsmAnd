@@ -1,11 +1,15 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
+import static net.osmand.plus.base.dialog.data.DialogExtra.CONTROLS_COLOR;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -19,7 +23,6 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
-import net.osmand.plus.base.dialog.utils.ParametersExtractor;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -32,7 +35,6 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 	protected OsmandApplication app;
 	protected DialogManager manager;
 	protected DisplayData displayData;
-	protected ParametersExtractor extractor;
 	protected String processId;
 
 	public void setProcessId(@NonNull String processId) {
@@ -44,7 +46,6 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 		super.onCreate(savedInstanceState);
 		this.app = requiredMyApplication();
 		this.manager = app.getDialogManager();
-		this.extractor = new ParametersExtractor(app);
 		if (savedInstanceState != null) {
 			processId = savedInstanceState.getString(PROCESS_ID_ATTR);
 		}
@@ -96,18 +97,40 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 
 	@NonNull
 	public ColorStateList createCompoundButtonTintList(@NonNull DisplayItem displayItem) {
-		int controlsColor = extractor.getControlsColor(displayData, displayItem, nightMode);
+		int controlsColor = getControlsColor(displayData, displayItem, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		return AndroidUtils.createCheckedColorIntStateList(defaultColor, controlsColor);
 	}
 
 	@Nullable
 	public Drawable createSelectableBackground(@NonNull DisplayItem displayItem) {
-		Integer color = extractor.getBackgroundColor(displayData, displayItem);
+		Integer color = getBackgroundColor(displayData, displayItem);
 		if (color != null) {
 			return UiUtilities.getColoredSelectableDrawable(app, color);
 		}
 		return null;
+	}
+
+	@ColorInt
+	public int getControlsColor(@NonNull DisplayData displayData, @NonNull DisplayItem item, boolean nightMode) {
+		Integer color = item.getControlsColor();
+		if (color == null) {
+			color = (Integer) displayData.getExtra(CONTROLS_COLOR);
+		}
+		if (color == null) {
+			color = ColorUtilities.getActiveColor(app, nightMode);
+		}
+		return color;
+	}
+
+	@ColorInt
+	@Nullable
+	public Integer getBackgroundColor(@NonNull DisplayData displayData, @NonNull DisplayItem item) {
+		Integer color = item.getBackgroundColor();
+		if (color == null) {
+			color = (Integer) displayData.getExtra(BACKGROUND_COLOR);
+		}
+		return color;
 	}
 
 	@Nullable

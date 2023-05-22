@@ -1,7 +1,6 @@
 package net.osmand.plus.track.data;
 
 import android.content.Context;
-import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -31,6 +30,11 @@ public class TrackFolder implements TracksGroup {
 	@NonNull
 	public File getDirFile() {
 		return dirFile;
+	}
+
+	@NonNull
+	public String getDirName() {
+		return dirFile.getName();
 	}
 
 	@Nullable
@@ -64,15 +68,6 @@ public class TrackFolder implements TracksGroup {
 
 	public int getTotalTracksCount() {
 		return getFlattenedTrackItems().size();
-	}
-
-	public long getLastModified() {
-		long lastModified = 0;
-		for (TrackItem item : getFlattenedTrackItems()) {
-			long fileLastModified = item.getLastModified();
-			lastModified = Math.max(lastModified, fileLastModified);
-		}
-		return lastModified;
 	}
 
 	@NonNull
@@ -136,11 +131,5 @@ public class TrackFolder implements TracksGroup {
 	@Override
 	public String toString() {
 		return dirFile.getAbsolutePath();
-	}
-
-
-	@NonNull
-	public String getOriginalName() {
-		return dirFile.getName();
 	}
 }
