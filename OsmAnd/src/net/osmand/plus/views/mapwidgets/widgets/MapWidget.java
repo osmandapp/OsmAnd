@@ -64,11 +64,6 @@ public abstract class MapWidget {
 		return view;
 	}
 
-	@Nullable
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return null;
-	}
-
 	/**
 	 * @return preference that needs to be reset after deleting widget
 	 */

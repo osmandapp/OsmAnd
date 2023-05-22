@@ -340,7 +340,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		for (MapWidgetInfo widgetInfo : widgets) {
 			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
 			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)
-					|| enabled && !selectedPanel.isDuplicatesAllowed()) {
+					|| enabled) {
 				continue;
 			}
 
@@ -426,20 +426,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 	private void applyWidgetsPanel(@NonNull List<String> enabledWidgetsIds) {
 		WidgetsPanel currentPanel = dataHolder.getSelectedPanel();
-		if (currentPanel.isDuplicatesAllowed()) {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof ConfigureWidgetsFragment) {
-				((ConfigureWidgetsFragment) fragment).onWidgetsSelectedToAdd(enabledWidgetsIds, currentPanel);
-			}
-		} else {
-			for (String widgetId : enabledWidgetsIds) {
-				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-				if (widgetInfo != null && widgetInfo.widgetPanel != currentPanel) {
-					widgetRegistry.getWidgetsForPanel(widgetInfo.widgetPanel).remove(widgetInfo);
-					widgetRegistry.getWidgetsForPanel(currentPanel).add(widgetInfo);
-					widgetInfo.widgetPanel = currentPanel;
-				}
-			}
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof ConfigureWidgetsFragment) {
+			((ConfigureWidgetsFragment) fragment).onWidgetsSelectedToAdd(enabledWidgetsIds, currentPanel);
 		}
 	}
 

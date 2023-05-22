@@ -246,8 +246,10 @@ public enum WidgetType {
 
 	@NonNull
 	public WidgetsPanel getPanel(@NonNull String widgetId, @NonNull ApplicationMode mode, @NonNull OsmandSettings settings) {
-		if (defaultPanel == TOP || defaultPanel == BOTTOM) {
-			return defaultPanel;
+		if (defaultPanel == TOP) {
+			return BOTTOM.contains(widgetId, settings, mode) ? BOTTOM : TOP;
+		} else if (defaultPanel == BOTTOM) {
+			return TOP.contains(widgetId, settings, mode) ? TOP : BOTTOM;
 		} else if (defaultPanel == LEFT) {
 			return RIGHT.contains(widgetId, settings, mode) ? RIGHT : LEFT;
 		} else if (defaultPanel == RIGHT) {
