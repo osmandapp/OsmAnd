@@ -67,9 +67,7 @@ public class MyLocationButton extends MapButton {
 		if (!hasLocation) {
 			setNoLocationState();
 		} else if (linkedToLocation) {
-			if (!MultiTouchSupport.isTiltSupportEnabled(app)) {
-				setMapLinkedToLocationState();
-			}
+			setMapLinkedToLocationState();
 		} else {
 			setReturnToLocationState();
 		}

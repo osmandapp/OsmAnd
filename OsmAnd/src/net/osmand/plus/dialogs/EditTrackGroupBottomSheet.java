@@ -5,7 +5,6 @@ import static net.osmand.plus.utils.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -14,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
@@ -56,15 +56,7 @@ public abstract class EditTrackGroupBottomSheet extends MenuBottomSheetDialogFra
 	protected void setupEditText(View mainView) {
 		editText = mainView.findViewById(R.id.name_edit_text);
 		editText.setText(groupName);
-		editText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+		editText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				updateGroupName(s.toString());
