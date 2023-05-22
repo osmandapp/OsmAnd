@@ -30,7 +30,7 @@ import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 
 import java.util.List;
 
-class TrackViewHolder extends ViewHolder {
+class ImportTrackViewHolder extends ViewHolder {
 
 	final OsmandApplication app;
 	final UiUtilities uiUtilities;
@@ -50,8 +50,8 @@ class TrackViewHolder extends ViewHolder {
 
 	final boolean nightMode;
 
-	TrackViewHolder(@NonNull View view, @NonNull TracksDrawParams drawParams,
-	                @Nullable ImportTracksListener listener, boolean nightMode) {
+	ImportTrackViewHolder(@NonNull View view, @NonNull TracksDrawParams drawParams,
+	                      @Nullable ImportTracksListener listener, boolean nightMode) {
 		super(view);
 		this.app = (OsmandApplication) view.getContext().getApplicationContext();
 		this.uiUtilities = app.getUIUtilities();
@@ -73,7 +73,7 @@ class TrackViewHolder extends ViewHolder {
 		selectedCheckBox = selectionRow.findViewById(R.id.compound_button);
 	}
 
-	public void bindView(@NonNull TrackItem item, @NonNull List<WptPt> points, boolean selected,
+	public void bindView(@NonNull ImportTrackItem item, @NonNull List<WptPt> points, boolean selected,
 	                     @Nullable TrackBitmapDrawerListener drawerListener) {
 		setupHeaderRow(item);
 		setupPointsRow(item, points);
@@ -82,19 +82,19 @@ class TrackViewHolder extends ViewHolder {
 		drawTrackImage(item, drawerListener);
 	}
 
-	private void setupStatisticsRow(@NonNull TrackItem item) {
+	private void setupStatisticsRow(@NonNull ImportTrackItem item) {
 		GPXTrackAnalysis analysis = item.selectedGpxFile.getTrackAnalysis(app);
 		GpxBlockStatisticsBuilder builder = new GpxBlockStatisticsBuilder(app, item.selectedGpxFile, nightMode);
 		builder.setBlocksView(recyclerView, false);
 		builder.initStatBlocks(null, ColorUtilities.getActiveColor(app, nightMode), analysis);
 	}
 
-	private void setupHeaderRow(@NonNull TrackItem item) {
+	private void setupHeaderRow(@NonNull ImportTrackItem item) {
 		title.setText(item.name);
 		trackIndex.setText(String.valueOf(item.index));
 	}
 
-	private void setupSelectionRow(@NonNull TrackItem item, boolean selected) {
+	private void setupSelectionRow(@NonNull ImportTrackItem item, boolean selected) {
 		selectedCheckBox.setChecked(selected);
 
 		selectedTitle.setText(selected ? R.string.shared_string_selected : R.string.shared_string_select);
@@ -110,7 +110,7 @@ class TrackViewHolder extends ViewHolder {
 		UiUtilities.setupCompoundButton(selectedCheckBox, nightMode, CompoundButtonType.GLOBAL);
 	}
 
-	private void setupPointsRow(@NonNull TrackItem item, @NonNull List<WptPt> points) {
+	private void setupPointsRow(@NonNull ImportTrackItem item, @NonNull List<WptPt> points) {
 		pointsRow.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.onTrackItemPointsSelected(item);
@@ -124,7 +124,7 @@ class TrackViewHolder extends ViewHolder {
 		pointsCounter.setText(app.getString(R.string.ltr_or_rtl_combine_via_slash, selectedPoints, allPoints));
 	}
 
-	private void drawTrackImage(@NonNull TrackItem item, @Nullable TrackBitmapDrawerListener drawerListener) {
+	private void drawTrackImage(@NonNull ImportTrackItem item, @Nullable TrackBitmapDrawerListener drawerListener) {
 		if (item.bitmapDrawer == null) {
 			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
 			item.bitmapDrawer = new TrackBitmapDrawer(app, gpxFile, drawParams, null);

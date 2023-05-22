@@ -300,8 +300,23 @@ public class ColorUtilities {
 		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
 	}
 
+	@ColorInt
+	public static int getToolbarActiveColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getToolbarActiveColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getToolbarActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.toolbar_active_color_dark : R.color.toolbar_active_color_light;
+	}
+
 	@ColorRes
 	public static int getStatusBarColorId(boolean nightMode) {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
+	@ColorRes
+	public static int getStatusBarActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.status_bar_active_color_dark : R.color.status_bar_active_color_light;
 	}
 }

@@ -27,6 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
@@ -51,6 +52,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
 
@@ -190,7 +192,8 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	public void addPluginIndexItems(@NonNull IndexFileList indexes) {}
+	public void addPluginIndexItems(@NonNull IndexFileList indexes) {
+	}
 
 	public List<IndexItem> getSuggestedMaps() {
 		return Collections.emptyList();
@@ -360,7 +363,7 @@ public abstract class OsmandPlugin {
 	protected void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 	}
 
-	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+	protected void optionsMenuFragment(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedItems, List<PopUpMenuItem> items) {
 	}
 
 	protected boolean searchFinished(QuickSearchDialogFragment searchFragment, SearchPhrase phrase, boolean isResultEmpty) {
@@ -479,5 +482,6 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) { }
+	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
+	}
 }
