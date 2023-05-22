@@ -29,7 +29,7 @@ public class SensorTextWidget extends TextInfoWidget {
 		sensor.device.addListener(new AbstractDevice.DeviceListener() {
 			@Override
 			public void onDeviceConnect(@NonNull AbstractDevice<?> device, @NonNull DeviceConnectionResult result, @Nullable String error) {
-				mainHandler.post(() -> updateInfo(null));
+				app.runInUIThread(() -> updateInfo(null));
 			}
 
 			@Override
@@ -38,7 +38,7 @@ public class SensorTextWidget extends TextInfoWidget {
 
 			@Override
 			public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
-				mainHandler.post(() -> updateInfo(null));
+				app.runInUIThread(() -> updateInfo(null));
 			}
 		});
 		this.sensor = sensor;
