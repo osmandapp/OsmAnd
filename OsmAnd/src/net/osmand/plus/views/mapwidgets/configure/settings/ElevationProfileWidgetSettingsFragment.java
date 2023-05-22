@@ -43,8 +43,7 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 			showSlope = bundle.getBoolean(KEY_SHOW_SLOPE);
 		} else if (widgetInfo != null) {
 			ElevationProfileWidget widget = ((ElevationProfileWidget) widgetInfo.widget);
-			showSlopePreference = widget.getShowSlopePreference();
-			showSlope = showSlopePreference.getModeValue(appMode);
+			showSlope = widget.getShowSlope(appMode);
 		}
 	}
 

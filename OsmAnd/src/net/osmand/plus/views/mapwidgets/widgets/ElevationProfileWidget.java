@@ -63,9 +63,6 @@ public class ElevationProfileWidget extends MapWidget {
 	private static final String SHOW_SLOPE_PREF_ID = "show_slope_elevation_widget";
 
 	private final CommonPreference<Boolean> showSlopePreference;
-	public CommonPreference<Boolean> getShowSlopePreference() {
-		return showSlopePreference;
-	}
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
@@ -109,6 +106,10 @@ public class ElevationProfileWidget extends MapWidget {
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 		setupStatisticBlocks();
+	}
+
+	public Boolean getShowSlope(@NonNull ApplicationMode appMode) {
+		return showSlopePreference.getModeValue(appMode);
 	}
 
 	@NonNull
