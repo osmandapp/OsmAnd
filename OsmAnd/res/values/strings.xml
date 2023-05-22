@@ -111,7 +111,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Pair ANT+ sensor</string>
     <string name="ant_plus_pair_bluetooth_prompt">You can pair Bluetooth LE and ANT+ sensors with OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Learn more about sensors.</string>
-
     <string name="shutter_sound">Shutter sound</string>
     <string name="camera_app">Camera app</string>
     <string name="speak_route_deviation">Announce deviation from the route</string>
