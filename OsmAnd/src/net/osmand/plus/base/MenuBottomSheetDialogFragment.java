@@ -68,14 +68,14 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
-		nightMode = isNightMode(requiredMyApplication());
-		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		Activity activity = requireActivity();
+		nightMode = isNightMode(requiredMyApplication());
+		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View mainView = themedInflater.inflate(R.layout.bottom_sheet_menu_base, null);
 		if (useScrollableItemsContainer()) {

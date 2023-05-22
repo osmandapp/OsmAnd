@@ -82,8 +82,8 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.gpx_search_items_fragment, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.gpx_search_items_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		Fragment fragment = requireParentFragment();

@@ -108,6 +108,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		Activity activity = requireActivity();
 		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 		Dialog dialog = new Dialog(activity, themeId) {
@@ -129,8 +130,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireActivity(), nightMode);
-		View view = inflater.inflate(R.layout.tracks_appearance_fragment, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.tracks_appearance_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
 
 		setupToolbar(view);

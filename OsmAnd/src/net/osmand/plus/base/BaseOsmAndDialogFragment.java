@@ -2,6 +2,7 @@ package net.osmand.plus.base;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
@@ -20,6 +21,7 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
 	protected boolean nightMode;
+	protected LayoutInflater themedInflater;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,14 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		settings = app.getSettings();
 		iconsCache = app.getUIUtilities();
 
-		nightMode = isNightMode(isUsedOnMap());
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
+		updateNightMode();
+		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+	}
+
+	protected void updateNightMode() {
+		nightMode = isNightMode(isUsedOnMap());
+		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 	}
 
 	protected boolean isUsedOnMap() {

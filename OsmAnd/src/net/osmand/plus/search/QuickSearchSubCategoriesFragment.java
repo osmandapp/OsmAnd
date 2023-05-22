@@ -126,18 +126,14 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View root = inflater.inflate(R.layout.fragment_subcategories, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_subcategories, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, color);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismissFragment();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismissFragment());
 		TextView title = root.findViewById(R.id.title);
 		title.setText(poiCategory.getTranslation());
 		addButton = root.findViewById(R.id.add_button);

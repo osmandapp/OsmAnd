@@ -58,11 +58,12 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
+		updateNightMode();
 		if (countryItems.size() == 0) {
 			initCountries(app);
 		}
 
-		View view = inflater.inflate(R.layout.fragment_search_list, container, false);
+		View view = themedInflater.inflate(R.layout.fragment_search_list, container, false);
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<CountryItem> adapter = new ListAdapter(getListItemIcon());
 		if (countryItems.size() > 0) {
@@ -71,12 +72,9 @@ public class CountrySelectionFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				mListener.onSearchResult(adapter.getItem(position));
-				dismiss();
-			}
+		listView.setOnItemClickListener((parent, v, position, id) -> {
+			mListener.onSearchResult(adapter.getItem(position));
+			dismiss();
 		});
 		EditText searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {

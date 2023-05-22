@@ -108,7 +108,6 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 				}
 			}
 		}
-		nightMode = isNightMode(usedOnMap);
 	}
 
 	@Override
@@ -119,7 +118,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		mainView = themedInflater.inflate(R.layout.copy_files_fragment, container, false);
 		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
 

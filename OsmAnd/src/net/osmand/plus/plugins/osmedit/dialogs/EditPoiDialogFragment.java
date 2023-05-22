@@ -152,7 +152,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 
 		if (savedInstanceState != null) {
@@ -167,12 +167,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismissCheckForChanges();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> dismissCheckForChanges());
 
 		viewPager = view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);

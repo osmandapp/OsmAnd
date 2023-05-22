@@ -125,6 +125,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		if (savedInstanceState != null) {
 			editedLayerName = savedInstanceState.getString(EDIT_LAYER_NAME_KEY);
 			minZoom = savedInstanceState.getInt(MIN_ZOOM_KEY);
@@ -134,8 +135,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
-		View root = UiUtilities.getInflater(requireContext(), nightMode)
-				.inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = themedInflater.inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
@@ -149,14 +149,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		iconHelp.setOnClickListener(view -> onHelpClick());
 		toolbar.setNavigationIcon(closeDrawable);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (wasChanged || fromTemplate) {
-					showExitDialog();
-				} else {
-					dismiss();
-				}
+		toolbar.setNavigationOnClickListener(v -> {
+			if (wasChanged || fromTemplate) {
+				showExitDialog();
+			} else {
+				dismiss();
 			}
 		});
 		int boxStrokeColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light);
@@ -166,12 +163,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		nameEditText = root.findViewById(R.id.name_edit_text);
 		nameEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		nameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-		nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					nameEditText.setSelection(nameEditText.getText().length());
-				}
+		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				nameEditText.setSelection(nameEditText.getText().length());
 			}
 		});
 		urlInputLayout = root.findViewById(R.id.url_input_layout);
@@ -179,12 +173,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		urlEditText = root.findViewById(R.id.url_edit_text);
 		urlEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		urlEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-		urlEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					urlEditText.setSelection(urlEditText.getText().length());
-				}
+		urlEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				urlEditText.setSelection(urlEditText.getText().length());
 			}
 		});
 		contentContainer = root.findViewById(R.id.content_container);
@@ -196,12 +187,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		saveBtnTitle.setTypeface(FontCache.getRobotoMedium(requireContext()));
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
-		saveBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				saveTemplate();
-				dismiss();
-			}
+		saveBtn.setOnClickListener(view -> {
+			saveTemplate();
+			dismiss();
 		});
 		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
