@@ -79,7 +79,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	}
 
 	@Override
-	protected boolean isNightMode(@NonNull OsmandApplication app) {
+	public boolean isNightMode(@NonNull OsmandApplication app) {
 		if (usedOnMap) {
 			return app.getDaynightHelper().isNightModeForMapControlsForProfile(currentAppMode);
 		} else {

@@ -5,7 +5,6 @@ import static net.osmand.util.Algorithms.collectDirs;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,14 +70,11 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 				.setTitle(getString(R.string.add_new_folder))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-									null, MoveGpxFileBottomSheet.this, usedOnMap);
-						}
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
+								null, MoveGpxFileBottomSheet.this, usedOnMap);
 					}
 				})
 				.setCustomView(addNewFolderView)
@@ -90,11 +86,12 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		items.add(dividerItem);
 
 		List<File> dirs = new ArrayList<>();
-		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, showAllFolders ? null : fileDir);
-		if (showAllFolders || !Algorithms.objectEquals(fileDir, app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
-			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
+		File rootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		collectDirs(rootDir, dirs, showAllFolders ? null : fileDir);
+		if (showAllFolders || !Algorithms.objectEquals(fileDir, rootDir)) {
+			dirs.add(0, rootDir);
 		}
-		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
+		String gpxDir = rootDir.getPath();
 		for (File dir : dirs) {
 			String dirName = dir.getPath();
 			if (dirName.startsWith(gpxDir)) {
@@ -117,16 +114,13 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 					.setTitle(capitalizeFirstLetter(dirName))
 					.setIcon(getActiveIcon(R.drawable.ic_action_folder))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Fragment fragment = getTargetFragment();
-							if (fragment instanceof OnTrackFileMoveListener) {
-								OnTrackFileMoveListener listener = (OnTrackFileMoveListener) fragment;
-								listener.onFileMove(file, new File(dir, file.getName()));
-							}
-							dismiss();
+					.setOnClickListener(v -> {
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof OnTrackFileMoveListener) {
+							OnTrackFileMoveListener listener = (OnTrackFileMoveListener) fragment;
+							listener.onFileMove(file, new File(dir, file.getName()));
 						}
+						dismiss();
 					})
 					.setTag(dir)
 					.create();
@@ -146,7 +140,8 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnTrackFileMoveListener) {
 			File file = new File(filePath);
-			File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName);
+			File rootDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			File destFolder = new File(rootDir, folderName);
 			OnTrackFileMoveListener listener = (OnTrackFileMoveListener) fragment;
 			listener.onFileMove(file, new File(destFolder, file.getName()));
 		}

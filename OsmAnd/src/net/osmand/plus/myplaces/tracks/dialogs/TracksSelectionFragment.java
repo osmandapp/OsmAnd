@@ -143,6 +143,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
 		button.setOnClickListener(v -> showOptionsMenu(button));
+		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
 
@@ -151,6 +152,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		boolean selected = selectionHelper.isAllItemsSelected();
 		int iconId = selected ? R.drawable.ic_action_deselect_all : R.drawable.ic_action_select_all;
 		selectionButton.setImageDrawable(getIcon(iconId));
+		selectionButton.setContentDescription(getString(selected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all));
 	}
 
 	@Override

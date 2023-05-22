@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.widgets.alert;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,62 +13,52 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 
+import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-public class DialogListItemAdapter extends BaseAdapter {
+class SelectionDialogAdapter extends BaseAdapter {
 
 	public static final int INVALID_ID = -1;
 
-	private final CharSequence[] mData;
-	private final boolean multiChoice;
+	private final CharSequence[] items;
+	private final boolean useMultiSelection;
 	private final boolean nightMode;
-	private int selected = INVALID_ID;
+	private int selectedIndex = INVALID_ID;
 	private final boolean[] checkedItems;
 	@ColorInt
-	private int controlsColor = INVALID_ID;
+	private final Integer controlsColor;
 
 	private AlertDialog dialog;
 	private final View.OnClickListener listener;
 	private final LayoutInflater inflater;
 
-	@NonNull
-	public static DialogListItemAdapter createSingleChoiceAdapter(@NonNull CharSequence[] mData, boolean nightMode, int selected, @NonNull OsmandApplication app,
-	                                                              @ColorInt int controlsColor, int themeRes, @Nullable View.OnClickListener listener) {
-		return new DialogListItemAdapter(mData, selected, null, nightMode, app, controlsColor, themeRes, listener, false);
-	}
-
-	@NonNull
-	public static DialogListItemAdapter createMultiChoiceAdapter(@NonNull CharSequence[] mData, boolean nightMode, @Nullable boolean[] checkedItems,
-	                                                             @NonNull OsmandApplication app, @ColorInt int controlsColor, int themeRes,
-	                                                             @Nullable View.OnClickListener listener) {
-		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app, controlsColor, themeRes, listener, true);
-	}
-
-	private DialogListItemAdapter(@NonNull CharSequence[] mData, int selected, @NonNull boolean[] checkedItems, boolean nightMode,
-	                              @NonNull OsmandApplication app, int controlsColor, int themeRes,
-	                              @Nullable View.OnClickListener listener, boolean multiChoice) {
-		this.mData = mData;
-		this.selected = selected;
+	public SelectionDialogAdapter(
+			@NonNull Context ctx, @NonNull CharSequence[] items, int selected,
+			@Nullable boolean[] checkedItems, @ColorInt @Nullable Integer controlsColor,
+			boolean nightMode, @Nullable View.OnClickListener listener,
+			boolean useMultiSelection
+	) {
+		this.items = items;
+		this.selectedIndex = selected;
 		this.checkedItems = checkedItems;
 		this.nightMode = nightMode;
-		this.multiChoice = multiChoice;
+		this.useMultiSelection = useMultiSelection;
 		this.controlsColor = controlsColor;
 		this.listener = listener;
-		inflater = LayoutInflater.from(new ContextThemeWrapper(app, themeRes));
+		inflater = UiUtilities.getInflater(ctx, nightMode);
 	}
 
 	@Override
 	public int getCount() {
-		return mData.length;
+		return items.length;
 	}
 
 	@NonNull
 	@Override
 	public Object getItem(int position) {
-		return mData[position];
+		return items[position];
 	}
 
 	@Override
@@ -93,7 +83,7 @@ public class DialogListItemAdapter extends BaseAdapter {
 		View button = view.findViewById(R.id.button);
 		button.setTag(position);
 		CompoundButton cb;
-		if (multiChoice) {
+		if (useMultiSelection) {
 			cb = view.findViewById(R.id.checkbox);
 			view.findViewById(R.id.radio).setVisibility(View.INVISIBLE);
 			cb.setChecked(checkedItems[position]);
@@ -104,20 +94,20 @@ public class DialogListItemAdapter extends BaseAdapter {
 		} else {
 			cb = view.findViewById(R.id.radio);
 			view.findViewById(R.id.checkbox).setVisibility(View.INVISIBLE);
-			cb.setChecked(position == selected);
+			cb.setChecked(position == selectedIndex);
 			button.setOnClickListener(v -> {
 				listener.onClick(v);
 				dialog.dismiss();
 			});
 		}
 		cb.setVisibility(View.VISIBLE);
-		if (controlsColor != INVALID_ID) {
+		if (controlsColor != null) {
 			UiUtilities.setupCompoundButton(nightMode, controlsColor, cb);
 			Drawable selectable = UiUtilities.getColoredSelectableDrawable(ctx, controlsColor, 0.3f);
 			AndroidUtils.setBackground(button, selectable);
 		}
 		TextView text = view.findViewById(R.id.text);
-		text.setText(mData[position]);
+		text.setText(items[position]);
 		return view;
 	}
 }

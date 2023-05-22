@@ -83,6 +83,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), getTargetFragment());
 			}
 		});
+		button.setContentDescription(getString(R.string.shared_string_search));
 		container.addView(button);
 	}
 
@@ -90,6 +91,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
 		button.setOnClickListener(v -> showFolderOptionsMenu(v, selectedFolder));
+		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
 

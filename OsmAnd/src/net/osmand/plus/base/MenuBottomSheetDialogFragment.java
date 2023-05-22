@@ -474,7 +474,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return new LayerDrawable(layers);
 	}
 
-	protected boolean isNightMode(@NonNull OsmandApplication app) {
+	public boolean isNightMode(@NonNull OsmandApplication app) {
 		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 
