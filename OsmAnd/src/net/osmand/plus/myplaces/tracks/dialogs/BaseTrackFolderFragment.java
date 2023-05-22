@@ -200,6 +200,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 						AddNewTrackFolderBottomSheet.showInstance(manager, null, this, isUsedOnMap());
 					}
 				})
+				.showTopDivider(true)
 				.create());
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -395,6 +396,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		File dir = new File(selectedFolder.getDirFile(), folderName);
 		if (!dir.exists()) {
 			dir.mkdirs();
+		}
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnTrackFolderAddListener) {
+			((OnTrackFolderAddListener) fragment).onTrackFolderAdd(folderName);
 		}
 	}
 
