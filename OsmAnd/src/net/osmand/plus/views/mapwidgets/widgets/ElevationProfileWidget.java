@@ -108,8 +108,12 @@ public class ElevationProfileWidget extends MapWidget {
 		setupStatisticBlocks();
 	}
 
-	public Boolean getShowSlope(@NonNull ApplicationMode appMode) {
+	public Boolean shouldShowSlope(@NonNull ApplicationMode appMode) {
 		return showSlopePreference.getModeValue(appMode);
+	}
+
+	public void setShouldShowSlope(@NonNull ApplicationMode appMode, boolean shouldShowSlope) {
+		showSlopePreference.setModeValue(appMode, shouldShowSlope);
 	}
 
 	@NonNull
@@ -304,7 +308,7 @@ public class ElevationProfileWidget extends MapWidget {
 				}
 
 				if (locationHighlight != null && touchHighlight != null) {
-					chart.highlightValues(new Highlight[] {locationHighlight, touchHighlight});
+					chart.highlightValues(new Highlight[]{locationHighlight, touchHighlight});
 				} else if (locationHighlight != null) {
 					chart.highlightValue(locationHighlight, true);
 				} else if (touchHighlight != null) {
@@ -329,7 +333,7 @@ public class ElevationProfileWidget extends MapWidget {
 					if (h != null) {
 						h = createHighlight(h.getX(), false);
 						if (locationHighlight != null) {
-							chart.highlightValues(new Highlight[] {locationHighlight, h});
+							chart.highlightValues(new Highlight[]{locationHighlight, h});
 						} else {
 							chart.highlightValue(h, true);
 						}
@@ -419,7 +423,7 @@ public class ElevationProfileWidget extends MapWidget {
 			}
 		} else if (newLocationHighlight != null) {
 			if (highlighted == null) {
-				highlighted = new Highlight[] {newLocationHighlight};
+				highlighted = new Highlight[]{newLocationHighlight};
 			} else {
 				Highlight[] newHighlighted = new Highlight[highlighted.length + 1];
 				newHighlighted[0] = newLocationHighlight;

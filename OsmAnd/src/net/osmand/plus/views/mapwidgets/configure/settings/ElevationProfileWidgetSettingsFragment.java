@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
@@ -22,8 +21,7 @@ import androidx.appcompat.widget.SwitchCompat;
 public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 
 	private static final String KEY_SHOW_SLOPE = "show_slope";
-	private CommonPreference<Boolean> showSlopePreference;
-
+	private ElevationProfileWidget elevationWidget;
 	private boolean showSlope;
 
 	private ImageView icon;
@@ -42,8 +40,8 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 		if (bundle.containsKey(KEY_SHOW_SLOPE)) {
 			showSlope = bundle.getBoolean(KEY_SHOW_SLOPE);
 		} else if (widgetInfo != null) {
-			ElevationProfileWidget widget = ((ElevationProfileWidget) widgetInfo.widget);
-			showSlope = widget.getShowSlope(appMode);
+			elevationWidget = ((ElevationProfileWidget) widgetInfo.widget);
+			showSlope = elevationWidget.shouldShowSlope(appMode);
 		}
 	}
 
@@ -77,7 +75,9 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 
 	@Override
 	protected void applySettings() {
-		showSlopePreference.setModeValue(appMode, showSlope);
+		if (elevationWidget != null) {
+			elevationWidget.setShouldShowSlope(appMode, showSlope);
+		}
 	}
 
 	@Override
