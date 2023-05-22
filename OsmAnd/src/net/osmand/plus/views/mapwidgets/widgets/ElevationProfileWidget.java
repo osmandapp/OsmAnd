@@ -61,7 +61,11 @@ import java.util.List;
 
 public class ElevationProfileWidget extends MapWidget {
 	private static final String SHOW_SLOPE_PREF_ID = "show_slope_elevation_widget";
-	public final CommonPreference<Boolean> showSlopePreference;
+
+	private final CommonPreference<Boolean> showSlopePreference;
+	public CommonPreference<Boolean> getShowSlopePreference() {
+		return showSlopePreference;
+	}
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
