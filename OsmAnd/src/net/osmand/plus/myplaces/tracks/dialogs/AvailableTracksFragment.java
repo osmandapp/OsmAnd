@@ -19,7 +19,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.gpx.GPXFile;
@@ -385,30 +384,39 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				List<TrackFolder> folders = rootFolder.getFlattenedSubFolders();
 				folders.add(rootFolder);
 
-				for (Fragment fragment : getChildFragmentManager().getFragments()) {
-					if (fragment instanceof BaseTrackFolderFragment) {
-						BaseTrackFolderFragment folderFragment = (BaseTrackFolderFragment) fragment;
-						TrackFolder rootFolder = folderFragment.getRootFolder();
-						TrackFolder selectedFolder = folderFragment.getSelectedFolder();
-
-						boolean rootFolderUpdated = false;
-						boolean selectedFolderUpdated = false;
-						for (TrackFolder folder : folders) {
-							if (rootFolder.equals(folder)) {
-								folderFragment.setRootFolder(folder);
-								rootFolderUpdated = true;
-							}
-							if (selectedFolder.equals(folder)) {
-								folderFragment.setSelectedFolder(folder);
-								selectedFolderUpdated = true;
-							}
-							if (rootFolderUpdated && selectedFolderUpdated) {
-								break;
-							}
-						}
-						folderFragment.updateContent();
+				MyPlacesActivity activity = getMyActivity();
+				if (activity != null) {
+					TrackFolderFragment folderFragment = activity.getFragment(TrackFolderFragment.TAG);
+					if (folderFragment != null) {
+						updateFragmentFolders(folderFragment, folders);
+					}
+					TracksSelectionFragment selectionFragment = activity.getFragment(TracksSelectionFragment.TAG);
+					if (selectionFragment != null) {
+						updateFragmentFolders(selectionFragment, folders);
 					}
 				}
+			}
+
+			public void updateFragmentFolders(@NonNull BaseTrackFolderFragment fragment, @NonNull List<TrackFolder> folders) {
+				TrackFolder rootFolder = fragment.getRootFolder();
+				TrackFolder selectedFolder = fragment.getSelectedFolder();
+
+				boolean rootFolderUpdated = false;
+				boolean selectedFolderUpdated = false;
+				for (TrackFolder folder : folders) {
+					if (rootFolder.equals(folder)) {
+						fragment.setRootFolder(folder);
+						rootFolderUpdated = true;
+					}
+					if (selectedFolder.equals(folder)) {
+						fragment.setSelectedFolder(folder);
+						selectedFolderUpdated = true;
+					}
+					if (rootFolderUpdated && selectedFolderUpdated) {
+						break;
+					}
+				}
+				fragment.updateContent();
 			}
 		};
 	}

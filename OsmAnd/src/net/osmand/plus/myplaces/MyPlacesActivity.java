@@ -187,4 +187,10 @@ public class MyPlacesActivity extends TabActivity {
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
 		MapActivity.launchMapActivityMoveToTop(this, bundle);
 	}
+
+	@Nullable
+	public <T> T getFragment(String fragmentTag) {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
+	}
 }
