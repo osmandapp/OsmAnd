@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.dialogs.FavoriteDialogs.KEY_FAVORITE;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -31,6 +32,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.Algorithms;
@@ -54,21 +56,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private boolean saved;
 
 	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		editor = requireMapActivity().getContextMenu().getFavoritePointEditor();
-	}
-
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		favouritesHelper = app.getFavoritesHelper();
+		editor = requireMapActivity().getContextMenu().getFavoritePointEditor();
 
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null) {
 			FavouritePoint favorite = editor.getFavorite();
 			if (favorite == null && savedInstanceState != null) {
-				favorite = (FavouritePoint) savedInstanceState.getSerializable(FavoriteDialogs.KEY_FAVORITE);
+				favorite = AndroidUtils.getSerializable(savedInstanceState, KEY_FAVORITE, FavouritePoint.class);
 			}
 			this.favorite = favorite;
 			this.group = favouritesHelper.getGroup(favorite);
@@ -99,12 +96,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
+		outState.putSerializable(KEY_FAVORITE, getFavorite());
 	}
 
 	private void replacePressed() {
 		Bundle args = new Bundle();
-		args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
+		args.putSerializable(KEY_FAVORITE, getFavorite());
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			SelectFavouriteToReplaceBottomSheet.showInstance(activity, args);
@@ -155,12 +152,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	protected String getLastUsedGroup() {
 		String lastCategory = "";
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
-			if (!Algorithms.isEmpty(lastCategory) && !app.getFavoritesHelper().groupExists(lastCategory)) {
-				lastCategory = "";
-			}
+		lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
+		if (!Algorithms.isEmpty(lastCategory) && !app.getFavoritesHelper().groupExists(lastCategory)) {
+			lastCategory = "";
 		}
 		return lastCategory;
 	}
@@ -261,14 +255,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description, String address,
 	                            @ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
 	                            FavouritesHelper helper) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
-			favorite.setColor(color);
-			favorite.setBackgroundType(backgroundType);
-			favorite.setIconId(iconId);
-			helper.editFavouriteName(favorite, name, category, description, address);
-		}
+		app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+		favorite.setColor(color);
+		favorite.setBackgroundType(backgroundType);
+		favorite.setIconId(iconId);
+		helper.editFavouriteName(favorite, name, category, description, address);
 	}
 
 	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,

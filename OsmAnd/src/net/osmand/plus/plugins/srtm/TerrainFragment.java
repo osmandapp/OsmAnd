@@ -35,7 +35,6 @@ import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -48,7 +47,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -71,11 +69,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-	private OsmandSettings settings;
 	private SRTMPlugin srtmPlugin;
-	private boolean nightMode;
 	private boolean terrainEnabled;
 
 	private int colorProfile;
@@ -140,14 +134,15 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = requireMyApplication();
-		settings = app.getSettings();
-		uiUtilities = app.getUIUtilities();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		colorProfile = settings.getApplicationMode().getProfileColor(nightMode);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Nullable
@@ -298,10 +293,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupClickableText(TextView textView,
-									String text,
-									String clickableText,
-									String url,
-									boolean medium) {
+	                                String text,
+	                                String clickableText,
+	                                String url,
+	                                boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
@@ -412,16 +407,16 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
 										if (downloadThread.isDownloading(indexItem)) {
 											downloadThread.cancelDownload(indexItem);
-												item.setProgress(ContextMenuItem.INVALID_ID);
-												item.setLoading(false);
-												item.setSecondaryIcon(R.drawable.ic_action_import);
-												uiAdapter.onDataSetChanged();
+											item.setProgress(ContextMenuItem.INVALID_ID);
+											item.setLoading(false);
+											item.setSecondaryIcon(R.drawable.ic_action_import);
+											uiAdapter.onDataSetChanged();
 										} else {
 											new DownloadValidationManager(app).startDownload(mapActivity1, indexItem);
-												item.setProgress(ContextMenuItem.INVALID_ID);
-												item.setLoading(true);
-												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-												uiAdapter.onDataSetChanged();
+											item.setProgress(ContextMenuItem.INVALID_ID);
+											item.setLoading(true);
+											item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+											uiAdapter.onDataSetChanged();
 										}
 									}
 									return false;

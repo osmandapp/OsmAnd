@@ -42,14 +42,11 @@ import java.util.List;
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
 		OnBackupSyncListener {
 
-	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
 	protected NetworkSettingsHelper settingsHelper;
 
 	protected ChangesAdapter adapter;
 	protected RecentChangesType tabType = getChangesTabType();
-
-	protected boolean nightMode;
 
 	@NonNull
 	public abstract RecentChangesType getChangesTabType();
@@ -60,10 +57,8 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = isNightMode(false);
 	}
 
 	@Nullable

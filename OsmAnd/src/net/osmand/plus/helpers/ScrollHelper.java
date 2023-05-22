@@ -1,12 +1,10 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
-
 import android.view.KeyEvent;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.InputDevice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -143,11 +141,10 @@ public class ScrollHelper {
 
 	public boolean isOverrideBySelectedExternalDevice(int keyCode) {
 		OsmandSettings settings = app.getSettings();
-
-		if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
+		InputDevice selected = settings.getSelectedInputDevice();
+		if (selected == InputDevice.PARROT) {
 			return keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT;
-
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
+		} else if (selected == InputDevice.WUNDER_LINQ) {
 			return keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_DOWN;
 		}
 		return false;

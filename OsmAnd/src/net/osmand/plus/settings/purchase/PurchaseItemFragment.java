@@ -21,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -56,12 +55,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	private boolean isToolbarInitialized;
 	private LayoutInflater themedInflater;
 
-	private boolean nightMode;
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		Bundle args = getArguments();
 		if (args != null) {
 			purchaseSku = args.getString(PURCHASE_SKU_ARG);

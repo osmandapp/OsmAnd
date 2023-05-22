@@ -21,6 +21,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.search.core.SearchResult;
 
@@ -45,7 +46,7 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 	protected void updateHistoryItems() {
 		clearItems();
 		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
-		List<SearchResult> searchResults = historyHelper.getSearchHistoryResults(true, true);
+		List<SearchResult> searchResults = historyHelper.getHistoryResults(HistorySource.NAVIGATION, true, true);
 		sortSearchResults(searchResults);
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();

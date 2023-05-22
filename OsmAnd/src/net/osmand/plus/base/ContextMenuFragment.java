@@ -76,7 +76,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	private FrameLayout bottomContainer;
 
 	private boolean portrait;
-	private boolean nightMode;
 	private boolean moving;
 	private boolean forceUpdateLayout;
 	private boolean initLayout = true;
@@ -192,11 +191,13 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		return null;
 	}
 
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
 	public void updateNightMode() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		}
+		nightMode = isNightMode();
 	}
 
 	public String getPreferredMapLang() {
@@ -350,7 +351,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 			private boolean hasMoved;
 
 			{
-				OsmandApplication app = requireMyApplication();
 				scroller = new OverScroller(app);
 				ViewConfiguration configuration = ViewConfiguration.get(requireContext());
 				minimumVelocity = configuration.getScaledMinimumFlingVelocity();
@@ -1040,8 +1040,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	public void showLocationOnMap(LatLon latLon) {
-		OsmandApplication app = getMyApplication();
-		if (latLon == null && app != null) {
+		if (latLon == null) {
 			Location lastLocation = app.getLocationProvider().getLastKnownLocation();
 			if (lastLocation != null) {
 				latLon = new LatLon(lastLocation.getLatitude(), lastLocation.getLongitude());
@@ -1091,7 +1090,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	public int dpToPx(float dp) {
-		return AndroidUtils.dpToPx(requireMyApplication(), dp);
+		return AndroidUtils.dpToPx(app, dp);
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {

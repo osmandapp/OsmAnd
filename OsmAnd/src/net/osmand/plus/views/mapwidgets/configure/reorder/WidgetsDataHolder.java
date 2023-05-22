@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -184,8 +185,8 @@ public class WidgetsDataHolder {
 	}
 
 	public void restoreData(@NonNull Bundle bundle) {
-		pages = (TreeMap<Integer, List<String>>) bundle.getSerializable(PAGES_ATTR);
-		orders = (HashMap<String, Integer>) bundle.getSerializable(ORDERS_ATTR);
+		pages = (TreeMap<Integer, List<String>>) AndroidUtils.getSerializable(bundle, PAGES_ATTR, TreeMap.class);
+		orders = (HashMap<String, Integer>) AndroidUtils.getSerializable(bundle, ORDERS_ATTR, HashMap.class);
 		selectedPanel = WidgetsPanel.valueOf(bundle.getString(SELECTED_PANEL_KEY));
 	}
 }

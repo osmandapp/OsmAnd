@@ -797,7 +797,6 @@
     <string name="index_name_tts_voice">Indicatziones vocales (TTS-sintetizadas, preferìbiles)</string>
     <string name="amenity_type_user_defined">Definidu dae s’impitadore</string>
     <string name="fav_export_confirmation">Esistint giai documentos cun preferidos esportados. Los boles remplasare?</string>
-    <string name="index_settings">Amministra sos documentos de sas mapas</string>
     <string name="open_street_map_login_descr">Netzessàriu pro sos contributos a openstreetmap.org.</string>
     <string name="osmand_service">Modalidade de isfundu</string>
     <string name="osmand_service_descr">OsmAnd sighit a funtzionare in s’isfundu, cun s’ischermu mortu.</string>
@@ -4012,8 +4011,6 @@
     <string name="copy_poi_name">Còpia su nùmene de su PDI</string>
     <string name="quick_action_show_hide_title">Ammustra/cua</string>
     <string name="shared_string_interval">Intervallu</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Cua sas làcanas de sas riservas naturales, de sas àreas amparadas e de sos parcos natzionales.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Làcanas naturales</string>
     <string name="track_has_no_altitude">Sa rasta non cuntenet datos de artària.</string>
     <string name="track_has_no_speed">Sa rasta non cuntenet datos de lestresa.</string>
     <string name="select_another_colorization">Ischerta un\'àtera casta de colorimentu.</string>
@@ -4162,7 +4159,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">Otene iscarrigamentos chene lìmites de mapas pro totu sos continentes e sas regiones.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Otene atzessu a agiornamentos regulares mensiles pro sas mapas non in lìnia.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Otene atzessu a agiornamentos de sas mapas prus frecuentes: cada ora, cada die o cada chida. Sos agiornamentos s\'ant a iscarrigare in manera incrementale, petzi pro s\'àrea mudada.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Otene atzessu a sos widgets avantzados de OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Imprea OsmAnd Cloud pro archiviare totu sos datos de OsmAnd in lìnia. No as a pèrdere prus sos datos a pustis de un\'installatzione noa. Sarva e riprìstina totu sas informatziones in manera fàtzile.</string>
     <string name="unlimited_map_downloads">Iscarrigamentos chene lìmites de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia e Wikivoyage non in lìnia</string>
@@ -4171,7 +4167,6 @@
     <string name="offline_wikivoyage">Wikivoyage non in lìnia</string>
     <string name="terrain_maps">Mapas de su terrinu</string>
     <string name="nautical_depth">Profundidade nàutica</string>
-    <string name="advanced_widgets">Widgets avantzados</string>
     <string name="you_can_get_feature_as_part_of_pattern">Otene “%1$s” comente parte de su pranu %2$s. Cunfrontu:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
     <string name="continue_with">Sighi cun %1$s</string>
@@ -4633,8 +4628,6 @@
     <string name="compass_desc">Ammustrat sa diretzione pro su nord.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Ischema de colores de sas curvas de livellu de profundidade</string>
     <string name="rendering_attr_depthContourWidth_description">Largària de sas curvas de livellu de profundidade</string>
-    <string name="accessibility_2d_view_off">Vista 2.5 istudada</string>
-    <string name="accessibility_2d_view_on">Vista 2.5 alluta</string>
     <string name="download_complete">Iscarrigamentu agabbadu</string>
     <string name="side_marker_eta">Ora carculada de arrivu</string>
     <string name="updated_map_time">Agiornadu: %1$s.</string>
@@ -4772,7 +4765,6 @@
     <string name="included_in_your_current_plan">Incluidu in su pianu currente tuo \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Toca in sa mapa pro bìdere sa distàntzia intre sa positzione atuale tua e su puntu tocadu.
 \nToca cun duos pòddighes in sa mapa pro bìdere sa distàntzia intre sos puntos tocados</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="shared_string_shows">Ammustrat</string>
     <string name="shared_string_large">Mannu</string>
     <string name="shared_string_normal">Normale</string>
@@ -4966,10 +4958,8 @@
     <string name="weather_temperature_celsius">Cèlsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="quick_action_temperature_layer">Unu butone pro ammustrare o cuare s\'istratu de sa temperadura in sa mapa.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Ammustra sos grados de dificultade MTB pro s\'artziada (pro bitzicletas de monte)</string>
     <string name="rendering_attr_showMtbScale_name">Ammustra sos grados de dificultade MTB (pro bitzicletas de monte)</string>
     <string name="rendering_attr_showMtbScale_description">Ammustra sas camineras segundu sos grados de dificultade MTB (pro bitzicletas de monte).</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Ammustra sas camineras segundu sos grados de dificultade MTB pro s\'artziada (pro bitzicletas de monte).</string>
     <string name="mtb_segment_classification">Classificatzione de su segmentu</string>
     <string name="mtb_scale">Iscala MTB (pro bitzicletas de monte)</string>
     <string name="mtb_imba">IMBA</string>

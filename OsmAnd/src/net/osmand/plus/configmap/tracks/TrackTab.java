@@ -1,17 +1,12 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
-
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,7 +20,7 @@ public class TrackTab {
 	@Nullable
 	public final File directory;
 
-	private TracksSortMode sortMode = LAST_MODIFIED;
+	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 
 	public TrackTab(@NonNull File directory) {
 		this.directory = directory;
@@ -52,23 +47,7 @@ public class TrackTab {
 			return context.getString(type.titleId);
 		}
 		if (directory != null) {
-			String name = directory.getName();
-			if (GPX_INDEX_DIR.equals(name + File.separator)) {
-				return context.getString(R.string.shared_string_tracks);
-			}
-			String dirPath = directory.getPath() + File.separator;
-			if (dirPath.endsWith(GPX_IMPORT_DIR) || dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
-				return Algorithms.capitalizeFirstLetter(name);
-			}
-			if (includeParentDir) {
-				File parent = directory.getParentFile();
-				String parentName = parent != null ? parent.getName() : "";
-				if (!Algorithms.isEmpty(parentName) && !GPX_INDEX_DIR.equals(parentName + File.separator)) {
-					name = parentName + File.separator + name;
-				}
-				return name;
-			}
-			return name;
+			return GpxUiHelper.getFolderName(context, directory, includeParentDir);
 		}
 		return "";
 	}
@@ -85,8 +64,9 @@ public class TrackTab {
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
 		for (Object object : items) {
-			if (object instanceof TrackItem)
+			if (object instanceof TrackItem) {
 				trackItems.add((TrackItem) object);
+			}
 		}
 		return trackItems;
 	}

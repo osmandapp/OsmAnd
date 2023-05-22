@@ -624,7 +624,6 @@
     <string name="filter_existing_indexes">Загруженные</string>
     <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие.</string>
     <string name="general_settings">Общие</string>
-    <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">OsmAnd работает в фоновом режиме с выключенным экраном.</string>
     <string name="fast_route_mode">Самый быстрый маршрут</string>
@@ -2917,8 +2916,8 @@
     <string name="avoid_pt_types">Исключить виды транспорта…</string>
     <string name="save_poi_value_exceed_length_title">Длина значения «%s»</string>
     <string name="quick_action_day_night_mode">Режим %s</string>
-    <string name="routing_attr_avoid_sett_name">Без булыжников или брусчатки</string>
-    <string name="routing_attr_avoid_sett_description">Избегать мощёных улиц и брусчатки</string>
+    <string name="routing_attr_avoid_sett_name">Без брусчатки</string>
+    <string name="routing_attr_avoid_sett_description">Избегать брусчатки</string>
     <string name="shared_string_milliradians">Миллирадианы</string>
     <string name="angular_measeurement">Угловые единицы</string>
     <string name="angular_measeurement_descr">Изменить, в чём измеряется азимут.</string>
@@ -4172,7 +4171,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
     <string name="purchases_feature_desc_osmand_cloud">Облачное хранилище OsmAnd Cloud для хранения всех данных приложения. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Доступ к расширенным виджетам OsmAnd.</string>
     <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
@@ -4180,7 +4178,6 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа: контурные линии, затенение рельефа (отмывка), уклоны</string>
     <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
-    <string name="advanced_widgets">Расширенные виджеты</string>
     <string name="you_can_get_feature_as_part_of_pattern">Получить «%1$s» как часть тарифного плана %2$s. Сравнение планов:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
     <string name="continue_with">Продолжить с %1$s</string>
@@ -4461,7 +4458,6 @@
     <string name="gps_filter_smoothing">Сглаживание</string>
     <string name="gps_filter_actions_description">OsmAnd применит изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
     <string name="shared_string_gps_filter">GPS фильтр</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="save_changes_into_file">Сохранить изменения в файл</string>
     <string name="save_as_copy">Сохранить как копию</string>
     <string name="gps_filter_hdop_desc">Установите максимально допустимое значение для HDOP.
@@ -4724,8 +4720,6 @@
     <string name="goods_delivery_desc_4">Используйте профиль «Грузовик» для автомобилей массой более 3,5 тонн.</string>
     <string name="routing_attr_goods_restrictions_name">Доставка товаров</string>
     <string name="download_complete">Загрузка завершена</string>
-    <string name="accessibility_2d_view_on">2.5D вид вкл.</string>
-    <string name="accessibility_2d_view_off">2.5D вид выкл.</string>
     <string name="auto_backup_title">Автоматическое резервное копирование</string>
     <string name="relative_bearing_widget_desc">Показывает угол между вашим направлением движения и целевой точкой.</string>
     <string name="first_marker_widget_desc">Вы можете настроить виджет так, чтобы он показывал расстояние или расчётное время прибытия до первого маркера карты.</string>
@@ -4891,7 +4885,6 @@
 \n
 \n</string>
     <string name="how_to_use">Как использовать:</string>
-    <string name="shared_string_2_5_d_view">2,5 D вид</string>
     <string name="worldwide_maps">Карты мира</string>
     <string name="coordinates_widget_map_center_desc">Виджет показывает географические координаты текущего центра карты</string>
     <string name="map_settings_weather_air_pressure">Давление</string>
@@ -4975,8 +4968,6 @@
     <string name="cloud_layer">Слой облачности</string>
     <string name="rendering_attr_showMtbScale_name">Показать MTB сложность</string>
     <string name="rendering_attr_showMtbScale_description">Показать MTB трейлы в соответствии с их сложностью.</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Показать трассы в соответствии MTB-шкалой подъёма.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Показать MTB-шкалу подъёма</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
@@ -5127,4 +5118,70 @@
     <string name="camera_app">Приложение камеры</string>
     <string name="proxy_port_max_warning">Максимальное значение порта - %1$s</string>
     <string name="weather_download_error">Не удалось загрузить тайлы %1$s.</string>
+    <string name="is_imported">%1$s импортирован.</string>
+    <string name="file_already_exists">Файл уже существует</string>
+    <string name="nav_profile_confirm_delete">Вы уверены, что хотите удалить \"%1$s\"\?</string>
+    <string name="external_device_menu_forget">Забыть</string>
+    <string name="file_already_exists_description">\"%1$s\". Файл с таким именем уже существует. Замена перезапишет все изменения, сделанные в текущей версии.</string>
+    <string name="external_device_characteristic_speed">Скорость</string>
+    <string name="external_device_characteristic_heart_rate">Частота сердцебиения</string>
+    <string name="external_device_characteristic_systolic">Систолическое</string>
+    <string name="external_device_characteristic_cadence">Каденс</string>
+    <string name="external_device_characteristic_arterial_pressure">Артериальное давление</string>
+    <string name="external_device_characteristic_temperature">Температура</string>
+    <string name="external_device_details_information">Информация</string>
+    <string name="external_device_details_received_data">Полученные данные</string>
+    <string name="external_device_details_battery">Батарея</string>
+    <string name="external_device_details_speed">Скорость</string>
+    <string name="external_device_details_connection">Подключение</string>
+    <string name="external_device_details_total_distance">Общее расстояние</string>
+    <string name="external_device_details_distance">Расстояние</string>
+    <string name="external_device_details_disconnect">Отключить</string>
+    <string name="bluetooth_disconnected">Отключено, %s</string>
+    <string name="external_device_details_pair">Сопряжение</string>
+    <string name="external_device_details_connect">Подключить</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="bluetooth_connected">Подключено, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_not_supported">Bluetooth не поддерживается</string>
+    <string name="bluetooth_found_title">Найдено: %d</string>
+    <string name="ant_plus_nothing_found_text">Датчики не обнаружены</string>
+    <string name="ble_search_again">Повторный поиск</string>
+    <string name="ant_plus_help_title">Я не знаю какой у меня тип датчика.</string>
+    <string name="ant_plus_searching_text_description">Удерживайте устройство рядом с датчиком. Активируйте датчик, чтобы OsmAnd мог его найти.</string>
+    <string name="ant_plus_searching">Поиск</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth выключен</string>
+    <string name="ant_plus_bluetooth_off_description">Включите Bluetooth для поиска и сопряжения датчиков.</string>
+    <string name="ant_plus_searching_text">Поиск датчиков</string>
+    <string name="ant_plus_pair_new_sensor">Сопряжение нового датчика</string>
+    <string name="ant_plus_open_settings">Открыть настройки</string>
+    <string name="ant_plus_pair_new_sensor_ble">Сопряжение датчика Bluetooth LE</string>
+    <string name="no_search_results">Ничего не найдено</string>
+    <string name="external_device_characteristic_distance">Расстояние</string>
+    <string name="external_device_characteristic_total_distance">Общее расстояние</string>
+    <string name="external_device_characteristic_battery_level">Батарея</string>
+    <string name="external_device_characteristic_gear_ratio">Передаточное число</string>
+    <string name="external_device_characteristic_diastolic">Диастолическое</string>
+    <string name="external_device_characteristic_pulse_rate">Частота пульса</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Сопряжение датчика ANT+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Сопрягайте датчики Bluetooth LE и ANT+ с OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Узнать больше о датчиках.</string>
+    <string name="search_track_by_name">Поиск трека по названию</string>
+    <string name="ant_plus_nothing_found_description">Убедитесь, что:
+\n- Bluetooth включен
+\n- датчик активирован
+\n- устройство находится рядом с датчиком</string>
+    <string name="external_device_low_battery">Низкий заряд батареи</string>
+    <string name="external_device_forget_sensor_description">Датчик будет удален из списка. Вы сможете снова выполнить сопряжение этого датчика в любое время.</string>
+    <string name="external_device_disconnected">Отключён</string>
+    <string name="external_device_connected">Подключён</string>
+    <string name="external_device_forget_sensor">Забыть датчик</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_foot">Нога</string>
+    <string name="no_poi_for_category">POI не найдена</string>
+    <string name="rendering_value_caiScale_name">Шкала CAI</string>
+    <string name="map_3d_mode_action">Режим 3D</string>
+    <string name="map_2d_mode_action">Режим 2D</string>
+    <string name="map_3d_mode_description">Коснитесь карты двумя пальцами и перемещайте их вверх и вниз для регулировки наклона карты.</string>
+    <string name="rendering_value_sacScale_name">Шкала SAC</string>
 </resources>

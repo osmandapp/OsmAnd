@@ -6,12 +6,10 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 
-import net.osmand.core.android.MapRendererView;
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.routing.ColoringType;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 

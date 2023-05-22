@@ -4030,7 +4030,6 @@
     <string name="routing_settings">Navigacija</string>
     <string name="amenity_type_osmwiki">Vikipedija (oflajn)</string>
     <string name="global_settings">Globalni postavki</string>
-    <string name="index_settings">Upravuvajte so datotekite na kartite</string>
     <string name="pref_overlay">Preklopuvanje / podloga</string>
     <string name="pref_raster_map">Postavki za izvorot na kartata</string>
     <string name="pref_vector_map">Postavki za vektorska karta</string>
@@ -4745,8 +4744,6 @@
     <string name="trip_recording_duration_widget_desc">Go prikazuva vremeto na snimanjeto na patekata, vremetraenjeto vo minuti/casovi od momentalno snimenoto patuvanje.</string>
     <string name="trip_recording_distance_widget_desc">Go prikazuva rastojanieto na tekovno snimenoto patuvanje.</string>
     <string name="time_to_intermediate_widget_desc">Vidzetot pokazuva „Vreme na pristignuvanje“ ili „Vreme za odenje“ do prvata sredna tocka. Vremeto postojano se azurira za vreme na navigacijata, stom ce pominat srednite tocki, vremeto ce se azurira na slednata sredna tocka.</string>
-    <string name="accessibility_2d_view_off">Isklucen 2,5 D</string>
-    <string name="accessibility_2d_view_on">Vklucen 2.5 D</string>
     <string name="download_complete">Simnuvanjeto e kompletno</string>
     <string name="compass_visible_if_map_rotated_desc">Skrieno koga sever e gore</string>
     <string name="distance_to_intermediate_widget_desc">Vidzetot go pokazuva rastojanieto ostaveno do prvata sredna tocka. Otkako ce se pominat srednite tocki, rastojanieto ce se azurira do slednata sredna tocka.</string>

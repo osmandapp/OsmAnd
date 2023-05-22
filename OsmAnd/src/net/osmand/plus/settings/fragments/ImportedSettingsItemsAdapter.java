@@ -86,7 +86,7 @@ public class ImportedSettingsItemsAdapter extends
 				break;
 			case POI_TYPES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_info_dark, activeColorRes));
-				holder.title.setText(R.string.search_activity);
+				holder.title.setText(R.string.shared_string_search);
 				break;
 			case MAP_SOURCES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_layers, activeColorRes));
@@ -151,6 +151,10 @@ public class ImportedSettingsItemsAdapter extends
 			case SEARCH_HISTORY:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_history, activeColorRes));
 				holder.title.setText(R.string.shared_string_search_history);
+				break;
+			case NAVIGATION_HISTORY:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_gdirections_dark, activeColorRes));
+				holder.title.setText(R.string.navigation_history);
 				break;
 			case ONLINE_ROUTING_ENGINES:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_world_globe_dark, activeColorRes));

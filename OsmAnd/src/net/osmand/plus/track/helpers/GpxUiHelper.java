@@ -2,9 +2,13 @@ package net.osmand.plus.track.helpers;
 
 import static android.text.format.DateUtils.SECOND_IN_MILLIS;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import static net.osmand.util.Algorithms.formatDuration;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -54,6 +58,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -67,6 +72,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
@@ -242,6 +248,40 @@ public class GpxUiHelper {
 			}
 			SelectGpxTrackBottomSheet.showInstance(activity.getSupportFragmentManager(), showCurrentGpx, callbackWithObject, list);
 		}
+	}
+
+	@NonNull
+	public static String getFolderName(@NonNull Context context, @NonNull File dir, boolean includeParentDir) {
+		String name = dir.getName();
+		if (GPX_INDEX_DIR.equals(name + File.separator)) {
+			return context.getString(R.string.shared_string_tracks);
+		}
+		String dirPath = dir.getPath() + File.separator;
+		if (dirPath.endsWith(GPX_IMPORT_DIR) || dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
+			return Algorithms.capitalizeFirstLetter(name);
+		}
+		if (includeParentDir) {
+			File parent = dir.getParentFile();
+			String parentName = parent != null ? parent.getName() : "";
+			if (!Algorithms.isEmpty(parentName) && !GPX_INDEX_DIR.equals(parentName + File.separator)) {
+				name = parentName + File.separator + name;
+			}
+			return name;
+		}
+		return name;
+	}
+
+	@NonNull
+	public static String getFolderDescription(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+		long lastModified = folder.getLastModified();
+		int tracksCount = folder.getFlattenedTrackItems().size();
+
+		String numberOfTracks = app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
+		if (lastModified > 0) {
+			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, tracksCount);
+		}
+		return numberOfTracks;
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app,
@@ -1153,5 +1193,101 @@ public class GpxUiHelper {
 
 	public static boolean isGpxFile(@NonNull File file) {
 		return file.isFile() && file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
+	}
+
+	public static void updateGpxInfoView(@NonNull View view, @NonNull TrackItem trackItem,
+	                                     @NonNull OsmandApplication app, boolean isDashItem,
+	                                     @Nullable GpxDataItemCallback callback) {
+		TextView viewName = view.findViewById(R.id.name);
+		if (isDashItem) {
+			view.findViewById(R.id.divider_dash).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.divider_list).setVisibility(View.GONE);
+		} else {
+			view.findViewById(R.id.divider_list).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.divider_dash).setVisibility(View.GONE);
+		}
+
+		viewName.setText(trackItem.getName());
+
+		ImageView icon = view.findViewById(R.id.icon);
+		icon.setVisibility(View.VISIBLE);
+		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+
+		if (getSelectedGpxFile(app, trackItem) != null) {
+			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
+		}
+		GPXTrackAnalysis analysis = getGpxTrackAnalysis(trackItem, app, callback);
+		boolean sectionRead = analysis == null;
+		if (sectionRead) {
+			view.findViewById(R.id.read_section).setVisibility(View.GONE);
+			view.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
+			String date = "";
+			String size = "";
+
+			File file = trackItem.getFile();
+			long fileSize = file != null ? file.length() : 0;
+			if (fileSize > 0) {
+				size = AndroidUtils.formatSize(view.getContext(), fileSize + 512);
+			}
+			DateFormat format = OsmAndFormatter.getDateFormat(app);
+			long lastModified = trackItem.getLastModified();
+			if (lastModified > 0) {
+				date = (format.format(new Date(lastModified)));
+			}
+			TextView sizeText = view.findViewById(R.id.date_and_size_details);
+			sizeText.setText(date + " • " + size);
+
+		} else {
+			view.findViewById(R.id.read_section).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.unknown_section).setVisibility(View.GONE);
+			ImageView distanceI = view.findViewById(R.id.distance_icon);
+			distanceI.setVisibility(View.VISIBLE);
+			distanceI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_distance_16));
+			ImageView pointsI = view.findViewById(R.id.points_icon);
+			pointsI.setVisibility(View.VISIBLE);
+			pointsI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_waypoint_16));
+			ImageView timeI = view.findViewById(R.id.time_icon);
+			timeI.setVisibility(View.VISIBLE);
+			timeI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_time_16));
+			TextView time = view.findViewById(R.id.time);
+			TextView distance = view.findViewById(R.id.distance);
+			TextView pointsCount = view.findViewById(R.id.points_count);
+			pointsCount.setText(String.valueOf(analysis.wptPoints));
+			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+
+			if (analysis.isTimeSpecified()) {
+				time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+			} else {
+				time.setText("");
+			}
+		}
+		view.findViewById(R.id.description).setVisibility(View.GONE);
+		view.findViewById(R.id.check_item).setVisibility(View.GONE);
+	}
+
+	private static SelectedGpxFile getSelectedGpxFile(@NonNull OsmandApplication app, @NonNull TrackItem trackItem) {
+		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		return trackItem.isShowCurrentTrack() ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
+				selectedGpxHelper.getSelectedFileByPath(trackItem.getPath());
+	}
+
+	@Nullable
+	public static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull TrackItem trackItem,
+	                                                   @NonNull OsmandApplication app,
+	                                                   @Nullable GpxDataItemCallback callback) {
+		SelectedGpxFile selectedGpxFile = getSelectedGpxFile(app, trackItem);
+		GPXTrackAnalysis analysis = null;
+		if (selectedGpxFile != null && selectedGpxFile.isLoaded()) {
+			analysis = selectedGpxFile.getTrackAnalysis(app);
+		} else if (trackItem.isShowCurrentTrack()) {
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
+		} else if (trackItem.getFile() != null) {
+			GpxDataItem dataItem = app.getGpxDbHelper().getItem(trackItem.getFile(), callback);
+			if (dataItem != null) {
+				analysis = dataItem.getAnalysis();
+			}
+		}
+		return analysis;
 	}
 }

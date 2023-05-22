@@ -21,6 +21,7 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.util.Algorithms;
 
+import java.util.List;
 import java.util.Set;
 
 public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -33,9 +34,9 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_TRACK = 4;
 
 	private final UpdateLocationViewCache locationViewCache;
-	private final TrackTab trackTab;
+	private TrackTab trackTab;
 	private final TracksFragment fragment;
-	private final boolean nightMode;
+	protected final boolean nightMode;
 
 	public TracksAdapter(@NonNull OsmandApplication app, @NonNull TrackTab trackTab, @NonNull TracksFragment fragment, boolean nightMode) {
 		this.trackTab = trackTab;
@@ -51,6 +52,11 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return trackTab;
 	}
 
+	public void setTrackTab(TrackTab trackTab) {
+		this.trackTab = trackTab;
+		notifyDataSetChanged();
+	}
+
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -60,25 +66,30 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				View view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new TrackViewHolder(view, fragment, locationViewCache, nightMode);
 			case TYPE_NO_TRACKS:
-				view = inflater.inflate(R.layout.empty_state, parent, false);
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new EmptyTracksViewHolder(view, fragment, nightMode);
 			case TYPE_NO_VISIBLE_TRACKS:
-				view = inflater.inflate(R.layout.empty_state, parent, false);
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new NoVisibleTracksViewHolder(view, fragment, nightMode);
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);
 				return new RecentlyVisibleViewHolder(view, fragment, nightMode);
 			case TYPE_SORT_TRACKS:
-				view = inflater.inflate(R.layout.sort_type_view, parent, false);
-				return new SortTracksViewHolder(view, fragment, nightMode);
+				return createSortTracksViewHolder(parent, inflater);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
 	}
 
+	@NonNull
+	protected SortTracksViewHolder createSortTracksViewHolder(@NonNull ViewGroup parent, LayoutInflater inflater) {
+		View view = inflater.inflate(R.layout.sort_type_view, parent, false);
+		return new SortTracksViewHolder(view, fragment, nightMode);
+	}
+
 	@Override
 	public int getItemViewType(int position) {
-		Object object = trackTab.items.get(position);
+		Object object = getItems().get(position);
 		if (object instanceof TrackItem) {
 			return TYPE_TRACK;
 		} else if (object instanceof Integer) {
@@ -96,14 +107,20 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		throw new IllegalArgumentException("Unsupported view type");
 	}
 
+	protected List<Object> getItems() {
+		return trackTab.items;
+	}
+
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof TrackViewHolder) {
-			TrackItem item = (TrackItem) trackTab.items.get(position);
+			TrackItem item = (TrackItem) getItems().get(position);
+
+			boolean shouldShowFolder = trackTab.type.shouldShowFolder();
 			boolean hideDivider = position == getItemCount() - 1
-					|| Algorithms.objectEquals(trackTab.items.get(position + 1), TYPE_RECENTLY_VISIBLE_TRACKS);
+					|| Algorithms.objectEquals(getItems().get(position + 1), TYPE_RECENTLY_VISIBLE_TRACKS);
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
-			viewHolder.bindView(trackTab, item, !hideDivider);
+			viewHolder.bindView(trackTab.getSortMode(), item, !hideDivider, shouldShowFolder, true);
 		} else if (holder instanceof NoVisibleTracksViewHolder) {
 			((NoVisibleTracksViewHolder) holder).bindView();
 		} else if (holder instanceof EmptyTracksViewHolder) {
@@ -111,9 +128,8 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof RecentlyVisibleViewHolder) {
 			((RecentlyVisibleViewHolder) holder).bindView();
 		} else if (holder instanceof SortTracksViewHolder) {
-			TracksSortMode sortMode = trackTab.getSortMode();
 			boolean enabled = !Algorithms.isEmpty(trackTab.getTrackItems());
-			((SortTracksViewHolder) holder).bindView(sortMode, enabled);
+			((SortTracksViewHolder) holder).bindView(enabled);
 		}
 	}
 
@@ -125,7 +141,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	}
 
 	private void updateItem(@NonNull Object object) {
-		int index = trackTab.items.indexOf(object);
+		int index = getItems().indexOf(object);
 		if (index != -1) {
 			notifyItemChanged(index);
 		}
@@ -133,6 +149,6 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	@Override
 	public int getItemCount() {
-		return trackTab.items.size();
+		return getItems().size();
 	}
 }

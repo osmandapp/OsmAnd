@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
+import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
@@ -26,6 +28,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
@@ -33,8 +36,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 
 public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
@@ -58,7 +59,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (app == null || plugin == null) return;
 
-		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
+		poi = AndroidUtils.getSerializable(getArguments(), OPENSTREETMAP_POINT, OsmPoint[].class);
 		boolean isNightMode = app.getDaynightHelper().isNightModeForMapControls();
 		View sendOsmPoiView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_poi_fragment, null);

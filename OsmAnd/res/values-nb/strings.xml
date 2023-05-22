@@ -192,7 +192,6 @@
     <string name="routing_settings">Navigering</string>
     <string name="routing_settings_descr">Spesifiser navigeringsalternativer.</string>
     <string name="global_settings">Globale innstillinger</string>
-    <string name="index_settings">Karthåndtering</string>
     <string name="general_settings">Generelt</string>
     <string name="general_settings_descr">Sett opp visning og generelle programinnstillinger.</string>
     <string name="global_app_settings">Globale programinnstillinger</string>
@@ -523,7 +522,7 @@
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region">Region for bilkjøring</string>
     <string name="speak_title">Meld om…</string>
-    <string name="speak_descr">Sett opp annonsering av gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser.</string>
+    <string name="speak_descr">Sett opp annonsering av gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, og fartsgrenser.</string>
     <string name="speak_street_names">Gatenavn (TTS)</string>
     <string name="speak_speed_limit">Fartsgrense</string>
     <string name="speak_cameras">Fotobokser</string>
@@ -549,7 +548,7 @@
     <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksimum zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
-    <string name="edit_tilesource_maxzoom">Maksimum-zoom</string>
+    <string name="edit_tilesource_maxzoom">Maks.-zoom</string>
     <string name="edit_tilesource_minzoom">Minste forstørrelse</string>
     <string name="edit_tilesource_url_to_load">Nettadresse</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
@@ -639,7 +638,7 @@
     <string name="routing_preferences_descr">Ruteplanleggingsinnstillinger</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenser</string>
     <string name="map_widget_max_speed">Fartsgrense</string>
-    <string name="map_widget_transparent">Gjennomsiktige moduler</string>
+    <string name="map_widget_transparent">Gjennomsiktige miniprogrammer</string>
     <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="plugins_screen">Programtillegg</string>
     <string name="prefs_plugins_descr">Programtillegg aktiverer avanserte innstillinger og flere funksjoner.</string>
@@ -740,11 +739,11 @@
     <string name="clear_destination">Slett reisemål</string>
     <string name="street_name">Gatenavn</string>
     <string name="choose_osmand_theme">Drakt</string>
-    <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemål (og mellomliggende reisemål)\?</string>
+    <string name="clear_dest_confirm">Fjern reisemål (og mellomliggende reisemål)\?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
-    <string name="safe_mode_description">Kjør programmet i sikker modus (med tregere Android i stedet for egen kode).</string>
+    <string name="safe_mode_description">Kjør programmet i sikker (tregere) modus.</string>
     <string name="safe_mode">Sikker modus</string>
-    <string name="native_library_not_running">Programmet kjører i sikker modus (skru det av i \'Innstillinger\').</string>
+    <string name="native_library_not_running">Programmet kjører i sikker modus (skru det av i «Innstillinger»).</string>
     <string name="interrupt_music_descr">Talemeldinger stopper midlertidig musikkavspilling.</string>
     <string name="interrupt_music">Stopp musikk midlertidig</string>
     <string name="gpxup_public">Offentlig</string>
@@ -841,7 +840,7 @@
     <string name="rendering_attr_showRoadMaps_description">Velg når det skal vises rene veikart:</string>
     <string name="rendering_attr_showRoadMaps_name">Rene veikart</string>
     <string name="osmand_play_title_30_chars">OsmAnd kart &amp; navigering</string>
-    <string name="osmand_plus_play_title_30_chars">OsmAnd+ kart &amp; navigering</string>
+    <string name="osmand_plus_play_title_30_chars">OsmAnd+ kart og navigering</string>
     <string name="map_widget_view_direction">Synsretning</string>
     <string name="gpxup_private">Privat</string>
     <string name="share_route_as_gpx">Del rute som GPX-fil</string>
@@ -854,7 +853,7 @@
     <string name="gpx_option_destination_point">Bruk gjeldende reisemål</string>
     <string name="error_doing_search">Kunne ikke utføre (nett)frakoblet søk.</string>
     <string name="send_location">Send posisjon</string>
-    <string name="amenity_type_administrative">Administrative</string>
+    <string name="amenity_type_administrative">Administrativt</string>
     <string name="unzipping_file">Pakker ut fil…</string>
     <string name="transport_Stop">Stoppested</string>
     <string name="transport_stops">Stoppesteder</string>
@@ -888,7 +887,7 @@
     <string name="dash_download_new_one">Last ned nytt kart</string>
     <string name="dash_download_manage">Administrer</string>
     <string name="traffic_warning_calming">Trafikkdemping</string>
-    <string name="background_service_is_enabled_question">OsmAnd-bakgrunnstjeneste kjører fortsatt. Skal den også stoppes\?</string>
+    <string name="background_service_is_enabled_question">OsmAnd-bakgrunnstjeneste kjører fortsatt. Stopp den også\?</string>
     <string name="sleep_mode_stop_dialog">Stoppe GPS-bakgrunnsmodus\?</string>
     <string name="stop_navigation_service">Stopp</string>
     <string name="confirm_every_run">Spør alltid</string>
@@ -926,7 +925,7 @@
     <string name="layer_hillshade">Relieffskyggelag</string>
     <string name="download_hillshade_maps">Relieffskygger</string>
     <string name="local_indexes_cat_av">Audio/Video-data</string>
-    <string name="stop_routing_confirm">Er du sikker på at du vil stoppe navigeringen\?</string>
+    <string name="stop_routing_confirm">Stopp navigeringen\?</string>
     <string name="av_def_action_picture">Ta bilde</string>
     <string name="recording_context_menu_precord">Ta bilde</string>
     <string name="dropbox_plugin_name">Dropbox-programtillegg</string>
@@ -1794,7 +1793,7 @@
     <string name="disable_complex_routing">Slå av kompleks ruteplanlegging</string>
     <string name="app_modes_choose_descr">Velg viste profiler.</string>
     <string name="local_index_tile_data_zooms">Zoomnivåer nedlastet: %1$s</string>
-    <string name="edit_tilesource_successfully">Fliskilde %1$s lagret</string>
+    <string name="edit_tilesource_successfully">%1$s-fliskilde lagret</string>
     <string name="intermediate_items_sort_by_distance">Sorter dør-til-dør</string>
     <string name="local_osm_changes_backup">Sikkerhetskopier som OSM-endring</string>
     <string name="gpx_saved_sucessfully">GPX-fil lagret til {0}</string>
@@ -1803,7 +1802,7 @@
     <string name="distance_measurement_finish_subtrack">Begynn nytt underspor</string>
     <string name="distance_measurement_load_gpx">Åpne eksisterende GPX-fil</string>
     <string name="use_magnetic_sensor_descr">For kompassavlesningen, bruk den magnetiske sensoren istedenfor orienteringssensoren.</string>
-    <string name="download_using_mobile_internet">Ikke tilkoblet Wi-Fi. Bruk gjeldende internettforbindelse for nedlasting\?</string>
+    <string name="download_using_mobile_internet">Ikke tilkoblet Wi-Fi. Bruk gjeldende Internett-forbindelse til nedlasting\?</string>
     <string name="contribution_activity">Installasjonsversjon</string>
     <string name="item_checked">valgt</string>
     <string name="item_unchecked">fravalgt</string>
@@ -2599,7 +2598,7 @@
     <string name="unlimited_downloads">Ubegrensede nedlastinger</string>
     <string name="unlock_all_features">Lås opp alle OsmAnd-funksjoner</string>
     <string name="purchase_dialog_title">Velg plan</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="wikivoyage_offline">Frakoblet Wikivoyage</string>
     <string name="wikivoyage_travel_guide">Reiseguider</string>
     <string name="monthly_map_updates">Månedlige kartoppdateringer</string>
     <string name="daily_map_updates">Timevise kartoppdateringer</string>
@@ -3909,8 +3908,6 @@
     <string name="track_has_no_speed">Sporet inneholder ikke hastighetsdata.</string>
     <string name="select_another_colorization">Velg en annen type fargelegging.</string>
     <string name="shared_strings_all_regions">Alle regioner</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrenser</string>
     <string name="hillshade_slope_contour_lines">Relieffskygge/bakkehelning/koter</string>
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_hiking_name">Turgåing</string>
@@ -4115,7 +4112,6 @@
     <string name="backup_version_history_delete_descr">Slett endringsloggen for foreldede datatyper fra OsmAnd-sky\?</string>
     <string name="purchases_feature_desc_nautical">Få tilgang til havdybdeinfo</string>
     <string name="purchases_feature_desc_monthly_map_updates">Få tilgang til regelmessige månedlige oppdateringer for frakoblede kart.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Få tilgang til avanserte OsmAnd-programtillegg.</string>
     <string name="purchases_feature_desc_osmand_cloud">Skaff deg OsmAnd-sky for å lagre all OsmAnd-data på nett. Ingen mistet data etter reinstallasjon. Sikkerhetskopier og gjenopprett info.</string>
     <string name="unlimited_map_downloads">Last ned så mange kart du vil</string>
     <string name="wikipedia_and_wikivoyage_offline">Frakoblet Wikipedia og Wikivoyage</string>
@@ -4729,7 +4725,6 @@
     <string name="auto_25_chars_route_tl_kl">Sving til venstre og hold til venstre</string>
     <string name="auto_25_chars_route_tl_kr">Sving til venstre og hold til høyre</string>
     <string name="auto_25_chars_route_tr_kl">Sving til høyre og hold til venstre</string>
-    <string name="accessibility_2d_view_on">2,5D-visning på</string>
     <string name="goods_delivery_desc">Kjøretøy som transporterer varer kan ha begrenset tilgang til noen veier.</string>
     <string name="included_in_your_current_plan">Inkludert i din nåværende «%1$s»-plan</string>
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
@@ -4774,7 +4769,6 @@
     <string name="map_widget_camera_distance">Kamerahøyde</string>
     <string name="auto_25_chars_route_roundabout_kl">Ta %1$d avkjøringen og hold til venstre</string>
     <string name="auto_25_chars_route_roundabout_kr">Ta %1$d avkjøringen og hold til høyre</string>
-    <string name="shared_string_2_5_d_view">2.5 D-visning</string>
     <string name="external_sensors_plugin_name">Eksterne sensorer</string>
     <string name="map_widget_altitude_map_center">Høyde: kartsenter</string>
     <string name="map_widget_altitude_map_center_desc">Viser høyde over havet til gjeldende kartsenter.</string>
@@ -4844,7 +4838,6 @@
     <string name="turn_on_nautical_depth_description">Slå på for å vise nautiske dybdedata på kartet.</string>
     <string name="weather_wind_kmh">km/t</string>
     <string name="weather_wind_ms">m/s</string>
-    <string name="accessibility_2d_view_off">2.5D-visning av</string>
     <string name="attach_roads_descr">Tilnærm sporet ditt til tillatte veier for å rute mellom punkter og tilknytte nøyaktige svinginstruksjoner og ruteegenskaper.</string>
     <string name="mtb_scale">Fjellsykkel-skala</string>
     <string name="mtb_segment_classification">Segmentklassifisering</string>
@@ -5174,4 +5167,6 @@
     <string name="file_already_exists_description">«%1$s». En fil med dette navnet finnes allerede. Erstatting med nåværende versjon overskriver alle endringer gjort.</string>
     <string name="nav_profile_confirm_delete">Slett «%1$s»\?</string>
     <string name="file_already_exists">Filen finnes allerede</string>
+    <string name="no_search_results">Resultatløst</string>
+    <string name="search_track_by_name">Søk etter spor ved navn</string>
 </resources>

@@ -761,7 +761,6 @@
     <string name="osmand_parking_hours">Horas</string>
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
-    <string name="index_settings">Gerenciar arquivos de mapas</string>
     <string name="context_menu_item_search">Pesquise por perto</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
@@ -4009,12 +4008,10 @@
     <string name="copy_poi_name">Copiar nome de POI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar reserva natural, áreas protegidas e limites de parque nacional.</string>
     <string name="map_widget_distance_by_tap">Distância por toque</string>
     <string name="track_has_no_altitude">A trilha não contém dados de altitude.</string>
     <string name="track_has_no_speed">A trilha não contém dados de velocidade.</string>
     <string name="select_another_colorization">Selecione outro tipo de cor.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Limites naturais</string>
     <string name="segments_count">Segmento %1$d</string>
     <string name="trip_recording_save_and_continue">Salvar e continuar</string>
     <string name="lost_data_warning">Todos os dados não salvos serão perdidos.</string>
@@ -4251,7 +4248,6 @@
 \n
 \nTalvez alguns mapas não estejam carregados, você pode executar uma verificação online dos mapas necessários.</string>
     <string name="option_available_only_in_osmand_pro">Disponível como parte da assinatura do OsmAnd Pro.</string>
-    <string name="pro_widgets">Pro Widgets</string>
     <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro: Coloração de rotas e muito mais.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para você.</string>
     <string name="routes_color_by_type">Rotas de cores por…</string>
@@ -4442,7 +4438,6 @@
     <string name="gps_filter_actions_description">OsmAnd aplicará as alterações à trilha sem atualizar o arquivo. Você pode salvar as alterações manualmente.</string>
     <string name="shared_string_gps_filter">Filtro GPS</string>
     <string name="storage_migration_wrong_folder_warning">Nenhum dado OsmAnd encontrado na pasta selecionada. Por favor, tente novamente.</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_downhill">Descida</string>
     <string name="shared_string_hide_slope">Esconder inclinação</string>
     <string name="shared_string_uphill">Subida</string>
@@ -4730,8 +4725,6 @@
 \nAo utilizar o OsmAnd Cloud, isto pode levar a mal entendidos após a reinstalação.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar trilhas dedicadas para mountain bike.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT</string>
-    <string name="accessibility_2d_view_off">Visualização 2.5D desligada</string>
-    <string name="accessibility_2d_view_on">Visualização 2.5D ligada</string>
     <string name="average_speed_skip_stops_desc">A velocidade menor que %1$s será contada e afetará a velocidade média.</string>
     <string name="attach_roads_warning">Apenas uma trilha gravada pode ser anexada às estradas.</string>
     <string name="without_profiles_changing">Sem alteração de perfis</string>
@@ -4740,7 +4733,7 @@
     <string name="available_as_part_of_subscription_plan">Disponível como parte da assinatura %1$s.</string>
     <string name="distance_to_intermediate_widget_desc">O widget mostra a distância restante até o primeiro ponto intermediário. Uma vez que os pontos intermediários são passados, a distância será atualizada para o próximo ponto intermediário.</string>
     <string name="second_next_turn_widget_desc">O widget mostra informações sobre sua segunda próxima curva, que é ativada se a curva estiver próxima.</string>
-    <string name="shared_string_duplicate">Duplicado</string>
+    <string name="shared_string_duplicate">Duplicar</string>
     <string name="trip_recording_uphill_widget_desc">Mostra a soma de todas as subidas da viagem atualmente registrada.</string>
     <string name="relative_bearing_widget_desc">Mostra o ângulo entre a direção do seu movimento para frente e o ponto alvo.</string>
     <string name="second_marker_widget_desc">Você pode configurar o widget para mostrar a distância ou o tempo estimado de chegada até o segundo marcador do mapa.</string>
@@ -4782,7 +4775,6 @@
     <string name="coordinates_widget_map_center">Coordenadas: centro do mapa</string>
     <string name="quick_action_current_location_widget_descr">Uma alternância para mostrar ou ocultar o widget localização atual no mapa.</string>
     <string name="how_to_use">Como usar:</string>
-    <string name="shared_string_2_5_d_view">Visualização 2.5 D</string>
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
 \nToque com 2 dedos no mapa para ver a distância entre os pontos</string>
     <string name="shared_string_shows">Mostrar</string>
@@ -4957,10 +4949,8 @@
     <string name="wind_layer">Camada de vento</string>
     <string name="cloud_layer">Camada de nuvem</string>
     <string name="precipitation_layer">Camada de precipitação</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Mostrar trilhos conforme escala MTB de subida.</string>
     <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
     <string name="rendering_attr_showMtbScale_description">Exibir trilhas de acordo com sua escala MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Mostrar escala de MTB em subidas</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Linhas isoladas de velocidade do vento</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolinhas de precipitação</string>
@@ -5172,4 +5162,39 @@
     <string name="ant_plus_nothing_found_text">Não foi possível encontrar nenhum sensor</string>
     <string name="ant_plus_open_settings">Abrir configurações</string>
     <string name="external_device_low_battery">Bateria fraca</string>
+    <string name="rendering_attr_lightDetail_name">Detalhe da luz</string>
+    <string name="shared_string_finger">Dedo</string>
+    <string name="shared_string_hand">Mão</string>
+    <string name="shared_string_ear_lobe">Lóbulo da orelha</string>
+    <string name="no_bt_permission">A permissão Bluetooth não é concedida</string>
+    <string name="file_already_exists_description">%1$s\". Já existe um arquivo com esse nome. Substituir substituirá todas as alterações feitas com a versão atual</string>
+    <string name="rendering_value_sector4_name">Setor 4</string>
+    <string name="rendering_value_sector5_name">Setor 5</string>
+    <string name="rendering_value_small_name">Pequeno</string>
+    <string name="map_3d_mode_action">Modo 3D</string>
+    <string name="visible_in_3d_mode">Visível no modo 3D</string>
+    <string name="map_3d_mode_description">Toque no mapa com dois dedos e mova-os para cima e para baixo para ajustar a inclinação do mapa.</string>
+    <string name="no_poi_for_category">POI não encontrada</string>
+    <string name="rendering_value_sectors_name">Setores</string>
+    <string name="rendering_value_name_only_name">Somente nome</string>
+    <string name="running_scds_device_name">Dispositivo em execução</string>
+    <string name="bicycle_scd_device_name">Dispositivo de bicicleta</string>
+    <string name="external_device_blood_pressure">Pressão arterial</string>
+    <string name="shared_string_wrist">Pulso</string>
+    <string name="shared_string_foot">Pé</string>
+    <string name="shared_string_chest">Peito</string>
+    <string name="rendering_value_caiScale_name">Escala CAI</string>
+    <string name="search_track_by_name">Pesquisar trilha por nome</string>
+    <string name="no_search_results">SME resultados</string>
+    <string name="file_already_exists">O arquivo já existe</string>
+    <string name="nav_profile_confirm_delete">Tem certeza de que deseja excluir \"%1$s\"\?</string>
+    <string name="map_2d_mode_action">Modo 2D</string>
+    <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>
+    <string name="rendering_value_sector1_name">Setor 1</string>
+    <string name="rendering_value_sector2_name">Setor 2</string>
+    <string name="rendering_value_sector3_name">Setor 3</string>
+    <string name="poi_categories">Categorías de POI</string>
+    <string name="rendering_value_sacScale_name">Escala SAC</string>
+    <string name="external_device_characteristic_systolic">Sistólica</string>
+    <string name="external_device_characteristic_diastolic">Diastólica</string>
 </resources>

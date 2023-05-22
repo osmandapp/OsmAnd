@@ -166,7 +166,6 @@
     <string name="routing_settings">Navegació</string>
     <string name="routing_settings_descr">Especifiqueu les opcions de navegació.</string>
     <string name="global_settings">Paràmetres globals</string>
-    <string name="index_settings">Gestió de fitxers de mapes</string>
     <string name="general_settings">Paràmetres generals</string>
     <string name="general_settings_descr">Configureu els paràmetres generals i de visualització de l\'aplicació.</string>
     <string name="user_name">El vostre nom d\'usuari d\'OSM</string>
@@ -3801,8 +3800,6 @@
     <string name="copy_poi_name">Copia el nom del PDI</string>
     <string name="quick_action_show_hide_title">Mostra/amaga</string>
     <string name="shared_string_interval">Interval</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Amaga reserves naturals, àrees protegides i delimitacions de parcs nacionals</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Fronteres naturals</string>
     <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
     <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
     <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
@@ -3867,7 +3864,6 @@
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="shared_string_precision">Precisió</string>
     <string name="gps_filter_precision">Precisió mínima del GPS</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_hide_all">Amaga-ho tot</string>
     <string name="files_remaining">Fitxers restants: %1$s %2$s</string>
     <string name="copying_file">Copiant fitxer %1$s…</string>
@@ -4279,7 +4275,6 @@
     <string name="select_layer">Selecciona una capa</string>
     <string name="routing_attr_motor_type_name">Combustible utilitzat pel motor</string>
     <string name="favorite_confirm_delete_group">Esteu segur que voleu suprimir el grup «%1$s» i tots els punts inclosos (%2$d)\?</string>
-    <string name="shared_string_2_5_d_view">Vista 2.5 D</string>
     <string name="auto_backup_preference_desc">Per defecte, Android desa còpies de seguretat dels favorits, fitxes de mapes i configuració d\'OsmAnd per restaurar-los en dispositius nous o després de la reinstal·lació. Aquesta còpia de seguretat està limitada a 25 MB.
 \nQuan utilitzeu OsmAnd Cloud, això pot provocar malentesos després de la reinstal·lació.</string>
     <string name="routing_attr_motor_type_lpg_name">Gas liquat del petroli (GLP)</string>

@@ -2,7 +2,9 @@ package net.osmand.plus.onlinerouting.ui;
 
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
 import static net.osmand.plus.profiles.SelectOnlineApproxProfileBottomSheet.NETWORK_KEY;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.*;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,9 +29,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -57,11 +57,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.DERIVED_PROFILE_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-
 public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements OnSelectProfileCallback {
 
 
@@ -73,7 +68,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private static final String APP_MODE_KEY = "app_mode";
 	private static final String EDITED_ENGINE_KEY = "edited_engine_key";
 
-	private OsmandApplication app;
 	private ApplicationMode appMode;
 	private String approxRouteProfile;
 	private String approxDerivedProfile;
@@ -107,7 +101,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		mapActivity = getMapActivity();
 		helper = app.getOnlineRoutingHelper();
 		if (savedInstanceState != null) {
@@ -205,6 +198,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			String title = type.getTitle();
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = type;
 			typeItems.add(item);
 		}
@@ -253,6 +247,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			String title = vehicle.getTitle(app);
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = vehicle;
 			vehicleItems.add(item);
 		}
@@ -355,6 +350,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 			String title = location.getName();
 			ChipItem item = new ChipItem(title);
 			item.title = title;
+			item.contentDescription = title;
 			item.tag = location;
 			locationItems.add(item);
 		}

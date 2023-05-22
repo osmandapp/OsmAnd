@@ -30,7 +30,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -50,17 +49,9 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	private ApplicationMode selectedAppMode;
 	private LinearLayout buttonsCard;
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-	private boolean nightMode;
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		app = getMyApplication();
-		settings = getSettings();
-		nightMode = isNightMode(false);
 		selectedAppMode = settings.getApplicationMode();
 	}
 
@@ -99,25 +90,19 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateToolbarNavigationIcon() {
-		navigationIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		navigationIcon.setOnClickListener(view -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 	}
 
 	private void updateToolbarActionButton() {
-		toolbar.findViewById(R.id.action_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Activity activity = getActivity();
-				if (activity != null) {
-					AndroidUtils.openUrl(activity, R.string.docs_widget_distance_by_tap, nightMode);
-				}
+		toolbar.findViewById(R.id.action_button).setOnClickListener(view -> {
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.openUrl(activity, R.string.docs_widget_distance_by_tap, nightMode);
 			}
 		});
 	}
@@ -134,14 +119,11 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 		switchView.setChecked(checked);
 		UiUtilities.setupCompoundButton(switchView, nightMode, TOOLBAR);
 
-		toolbarSwitchContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !checked);
+		toolbarSwitchContainer.setOnClickListener(view -> {
+			settings.SHOW_DISTANCE_RULER.setModeValue(selectedAppMode, !checked);
 
-				updateToolbarSwitch();
-				setupConfigButtons();
-			}
+			updateToolbarSwitch();
+			setupConfigButtons();
 		});
 	}
 

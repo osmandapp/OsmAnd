@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.binary.BinaryMapRouteReaderAdapter.*;
+
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -179,6 +182,13 @@ public class ApplicationMode {
 			}
 		}
 		return true;
+	}
+
+	public int getRouteTypeProfile(){
+		if(isDerivedRoutingFrom(TRUCK)){
+			return RouteTypeRule.PROFILE_TRUCK;
+		}
+		return RouteTypeRule.PROFILE_NONE;
 	}
 
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {

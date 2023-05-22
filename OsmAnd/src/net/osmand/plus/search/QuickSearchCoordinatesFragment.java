@@ -54,6 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -249,16 +250,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			}
 		});
 
-		TextWatcher textWatcher = new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
+		TextWatcher textWatcher = new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				parseLocation();

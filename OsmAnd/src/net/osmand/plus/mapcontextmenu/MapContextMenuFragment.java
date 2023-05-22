@@ -159,7 +159,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private int origMarkerY;
 	private boolean customMapCenter;
 	private boolean moving;
-	private boolean nightMode;
 	private boolean centered;
 	private boolean initLayout = true;
 	private boolean wasDrawerDisabled;
@@ -202,7 +201,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		processScreenHeight(container);
 
 		MapActivity mapActivity = requireMapActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
@@ -252,7 +250,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				origMarkerX = box.getCenterPixelX();
 				origMarkerY = box.getCenterPixelY();
 			} else {
-				PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), box, latLon.getLatitude(), latLon.getLongitude());
+				PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(map.getMapRenderer(), box, latLon);
 				origMarkerX = (int) pixel.x;
 				origMarkerY = (int) pixel.y;
 			}
@@ -631,7 +629,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateActionButtons(MapActivity mapActivity) {
-		OsmandApplication app = mapActivity.getMyApplication();
 		LinearLayout buttons = view.findViewById(R.id.context_menu_buttons);
 		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
@@ -639,8 +636,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		// Action buttons
 		ContextMenuAdapter adapter = menu.getActionsContextMenuAdapter(false);
 		List<ContextMenuItem> items = adapter.getVisibleItems();
-		List<String> mainIds = ((MainContextMenuItemsSettings) mapActivity.getMyApplication()
-				.getSettings().CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
+		List<String> mainIds = ((MainContextMenuItemsSettings) settings.CONTEXT_MENU_ACTIONS_ITEMS.get()).getMainIds();
 		ContextMenuAdapter mainAdapter = new ContextMenuAdapter(app);
 		ContextMenuAdapter additionalAdapter = new ContextMenuAdapter(app);
 
@@ -672,12 +668,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		if (!mainIds.isEmpty()) {
 			for (ContextMenuItem item : mainAdapter.getItems()) {
-				buttons.addView(getActionView(item, mainAdapter.getItems().indexOf(item), mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+				buttons.addView(getActionView(item, mainAdapter.getItems().indexOf(item), additionalAdapter, mainListener, additionalListener), params);
 			}
 		} else {
 			int mainButtonsQuantity = Math.min(MAIN_BUTTONS_QUANTITY, items.size());
 			for (int i = 0; i < mainButtonsQuantity; i++) {
-				buttons.addView(getActionView(items.get(i), i, mainAdapter, additionalAdapter, mainListener, additionalListener), params);
+				buttons.addView(getActionView(items.get(i), i, additionalAdapter, mainListener, additionalListener), params);
 			}
 		}
 		buttons.setGravity(Gravity.CENTER);
@@ -685,11 +681,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private View getActionView(ContextMenuItem contextMenuItem,
 	                           int position,
-	                           ContextMenuAdapter mainAdapter,
 	                           ContextMenuAdapter additionalAdapter,
 	                           ContextMenuItemClickListener mainListener,
 	                           ContextMenuItemClickListener additionalListener) {
-		UiUtilities uiUtilities = requireMyApplication().getUIUtilities();
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = inflater.inflate(R.layout.context_menu_action_item, null);
 		LinearLayout item = view.findViewById(R.id.item);
@@ -719,38 +713,30 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	@Nullable
 	private TransportStopRouteAdapter createTransportStopRouteAdapter(List<TransportStopRoute> routes, boolean needMoreItem) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return null;
-		}
 		List<Object> items = new ArrayList<Object>(routes);
 		if (needMoreItem) {
 			items.add(TRANSPORT_BADGE_MORE_ITEM);
 		}
 		TransportStopRouteAdapter adapter = new TransportStopRouteAdapter(app, items, nightMode);
-		adapter.setListener(new TransportStopRouteAdapter.OnClickListener() {
-			@Override
-			public void onClick(int position) {
-				Object object = adapter.getItem(position);
-				MapActivity mapActivity = getMapActivity();
-				if (object != null && mapActivity != null) {
-					OsmandApplication app = mapActivity.getMyApplication();
-					if (object instanceof TransportStopRoute) {
-						TransportStopRoute route = (TransportStopRoute) object;
-						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
-								route.getDescription(app, false));
-						menu.show(menu.getLatLon(), pd, route);
-						TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
-						stopsLayer.setRoute(route);
-						int cz = route.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
-						app.getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
-					} else if (object instanceof String) {
-						if (object.equals(TRANSPORT_BADGE_MORE_ITEM)) {
-							if (menu.isLandscapeLayout()) {
-								changeMenuState(getFullScreenTopPosY(), false, false);
-							} else {
-								openMenuFullScreen();
-							}
+		adapter.setListener(position -> {
+			Object object = adapter.getItem(position);
+			MapActivity mapActivity = getMapActivity();
+			if (object != null && mapActivity != null) {
+				if (object instanceof TransportStopRoute) {
+					TransportStopRoute route = (TransportStopRoute) object;
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
+							route.getDescription(app, false));
+					menu.show(menu.getLatLon(), pd, route);
+					TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
+					stopsLayer.setRoute(route);
+					int cz = route.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
+					app.getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
+				} else if (object instanceof String) {
+					if (object.equals(TRANSPORT_BADGE_MORE_ITEM)) {
+						if (menu.isLandscapeLayout()) {
+							changeMenuState(getFullScreenTopPosY(), false, false);
+						} else {
+							openMenuFullScreen();
 						}
 					}
 				}
@@ -973,7 +959,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private void setCustomMapRatio() {
 		LatLon latLon = menu.getLatLon();
 		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
-		PointF pixel = NativeUtilities.getPixelFromLatLon(map.getMapRenderer(), tb, latLon.getLatitude(), latLon.getLongitude());
+		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(map.getMapRenderer(), tb, latLon);
 		float ratioX = pixel.x / tb.getPixWidth();
 		float ratioY = pixel.y / tb.getPixHeight();
 		map.setCustomMapRatio(ratioX, ratioY);
@@ -983,7 +969,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomIn() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandMap osmandMap = mapActivity.getMyApplication().getOsmandMap();
+			OsmandMap osmandMap = app.getOsmandMap();
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
 			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (!containsLatLon) {
@@ -1010,7 +996,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				restoreCustomMapRatio();
 			}
-			mapActivity.getMyApplication().getOsmandMap().changeZoom(-1, System.currentTimeMillis());
+			app.getOsmandMap().changeZoom(-1, System.currentTimeMillis());
 		}
 	}
 
@@ -1318,8 +1304,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void buildHeader() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && view != null) {
+		if (view != null) {
 			ImageView iconView = view.findViewById(R.id.context_menu_icon_view);
 			Drawable icon = menu.getRightIcon();
 			int iconId = menu.getRightIconId();
@@ -1369,7 +1354,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			if (MapRouteInfoMenu.chooseRoutesVisible) {
 				mapActivity.getChooseRouteFragment().dismiss();
 			}
-			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity.getMyApplication(), false);
+			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app, false);
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
 			mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -1415,8 +1400,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	public void rebuildMenu(boolean centered) {
-		OsmandApplication app = getMyApplication();
-		if (app != null && view != null) {
+		if (view != null) {
 			buildHeader();
 
 			LinearLayout bottomLayout = view.findViewById(R.id.context_menu_bottom_view);
@@ -1456,7 +1440,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		LinearLayout convertView = null;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
 			convertView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 			if (transportStopRoute != null) {
 				String routeDescription = transportStopRoute.getDescription(app);
@@ -1479,7 +1462,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void updateLocalRoutesBadges(List<TransportStopRoute> localTransportStopRoutes, int localColumnsPerRow) {
 		int localRoutesSize = localTransportStopRoutes.size();
-		OsmandApplication app = requireMyApplication();
 		TransportRouteResult activeRoute = app.getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
 		if (localRoutesSize > 0 && activeRoute != null) {
 			for (int i = 0; i < localTransportStopRoutes.size(); i++) {
@@ -1488,27 +1470,24 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					View routeBadge = createRouteBadge(stopRoute);
 					mainRouteBadgeContainer.addView(routeBadge);
 					mainRouteBadgeContainer.setVisibility(View.VISIBLE);
-					mainRouteBadgeContainer.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							dismissMenu();
-							ChooseRouteFragment.showInstance(requireMyActivity().getSupportFragmentManager(),
-									requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getCurrentRoute(),
-									ContextMenuFragment.MenuState.FULL_SCREEN);
-							/* fit route segment on map
-							TransportRouteResult activeRoute = requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
-							if (activeRoute != null) {
-								TransportRouteResultSegment segment = activeRoute.getRouteStopSegment(stopRoute.stop);
-								if (segment != null) {
-									QuadRect rect = segment.getSegmentRect();
-									if (rect != null) {
-										//openMenuHeaderOnly();
-										fitRectOnMap(rect);
-									}
+					mainRouteBadgeContainer.setOnClickListener(v -> {
+						dismissMenu();
+						ChooseRouteFragment.showInstance(requireMyActivity().getSupportFragmentManager(),
+								app.getRoutingHelper().getTransportRoutingHelper().getCurrentRoute(),
+								ContextMenuFragment.MenuState.FULL_SCREEN);
+						/* fit route segment on map
+						TransportRouteResult activeRoute = requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
+						if (activeRoute != null) {
+							TransportRouteResultSegment segment = activeRoute.getRouteStopSegment(stopRoute.stop);
+							if (segment != null) {
+								QuadRect rect = segment.getSegmentRect();
+								if (rect != null) {
+									//openMenuHeaderOnly();
+									fitRectOnMap(rect);
 								}
 							}
-							*/
 						}
+						*/
 					});
 					localTransportStopRoutes.remove(i);
 					localRoutesSize--;
@@ -1539,7 +1518,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		boolean moreLocalItems = localRoutesMoreTv.getVisibility() == View.VISIBLE;
 		if (maxLocalRows <= 5 && !moreLocalItems && nearbyRoutesSize > 0) {
 			String nearInDistance = getString(R.string.transport_nearby_routes) + " "
-					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, getMyApplication()) + ":";
+					+ OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app) + ":";
 			nearbyRoutesWithinTv.setText(nearInDistance);
 			int minBadgeWidth = getMinBadgeWidth(nearbyTransportStopRoutes);
 			int nearbyColumnsPerRow = getRoutesBadgesColumnsPerRow(nearInDistance, minBadgeWidth);
@@ -1882,8 +1861,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateCompassVisibility() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && view != null) {
+		if (view != null) {
 			View compassView = view.findViewById(R.id.compass_layout);
 			if (menu.displayDistanceDirection()) {
 				updateDistanceDirection();
@@ -1924,9 +1902,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	private void updateDistanceDirection() {
-		OsmandApplication app = getMyApplication();
 		FragmentActivity activity = getActivity();
-		if (app != null && activity != null && view != null) {
+		if (activity != null && view != null) {
 			TextView distanceText = view.findViewById(R.id.distance);
 			ImageView direction = view.findViewById(R.id.direction);
 			UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, menu.getLatLon());
@@ -2194,14 +2171,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				view.setVisibility(View.GONE);
 			}
 		}
-	}
-
-	@Nullable
-	public OsmandApplication getMyApplication() {
-		if (getActivity() == null) {
-			return null;
-		}
-		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	public static boolean showInstance(MapContextMenu menu, MapActivity mapActivity,

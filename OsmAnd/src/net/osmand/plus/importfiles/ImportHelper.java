@@ -343,7 +343,7 @@ public class ImportHelper {
 	public void handleXmlFileImport(@NonNull Uri intentUri, @NonNull String fileName, @Nullable CallbackWithObject routingCallback) {
 		if (fileExists(intentUri, fileName)) {
 			SaveExistingFileListener listener = overwrite -> executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback, overwrite));
-			FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), fileName, listener);
+			app.runInUIThread(() -> FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), fileName, listener));
 		} else {
 			executeImportTask(new XmlImportTask(activity, intentUri, fileName, routingCallback, true));
 		}
@@ -528,7 +528,7 @@ public class ImportHelper {
 
 		if (existingFilePath != null) {
 			SaveExistingFileListener saveFileListener = overwrite -> executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, overwrite));
-			FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), name, saveFileListener);
+			app.runInUIThread(() -> FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), name, saveFileListener));
 		} else {
 			executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, false));
 		}
@@ -537,6 +537,7 @@ public class ImportHelper {
 	@NonNull
 	private SaveImportedGpxListener getSaveGpxListener(@NonNull GPXFile gpxFile, @Nullable OnSuccessfulGpxImport onGpxImport) {
 		return new SaveImportedGpxListener() {
+			String importedFileName;
 
 			@Override
 			public void onGpxSavingStarted() {
@@ -544,7 +545,7 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
-
+				importedFileName = new File(gpxFile.path).getName();
 			}
 
 			@Override
@@ -552,7 +553,7 @@ public class ImportHelper {
 				boolean success = Algorithms.isEmpty(warnings);
 				if (success) {
 					Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
-									app.getString(R.string.is_imported, gpxFile.metadata.name),
+									app.getString(R.string.is_imported, importedFileName),
 									BaseTransientBottomBar.LENGTH_LONG)
 							.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
 

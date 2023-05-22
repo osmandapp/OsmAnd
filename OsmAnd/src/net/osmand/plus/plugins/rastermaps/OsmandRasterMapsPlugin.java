@@ -656,7 +656,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			return false;
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		return context instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+		return app.getDaynightHelper().isNightMode(context instanceof MapActivity);
 	}
 
 	private static int getThemeRes(Context context) {

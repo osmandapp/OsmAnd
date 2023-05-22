@@ -797,7 +797,6 @@ public class ExternalApiHelper {
 	private void showOnMap(double lat, double lon, Object object, PointDescription pointDescription) {
 		MapContextMenu mapContextMenu = mapActivity.getContextMenu();
 		mapContextMenu.setMapCenter(new LatLon(lat, lon));
-		mapContextMenu.setMapPosition(mapActivity.getMapView().getMapPosition());
 		mapContextMenu.setCenterMarker(true);
 		mapContextMenu.setMapZoom(15);
 		mapContextMenu.show(new LatLon(lat, lon), pointDescription, object);

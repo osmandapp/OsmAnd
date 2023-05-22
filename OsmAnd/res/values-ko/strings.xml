@@ -78,7 +78,6 @@
     <string name="routing_settings">내비게이션</string>
     <string name="routing_settings_descr">운행을 위한 옵션을 설정합니다</string>
     <string name="global_settings">일반 설정</string>
-    <string name="index_settings">지도 관리</string>
     <string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
     <string name="general_settings">일반</string>
     <string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
@@ -2689,7 +2688,6 @@
     <string name="quick_actions_delete">삭제 작업</string>
     <string name="routing_attr_motor_type_hybrid_name">하이브리드</string>
     <string name="rendering_attr_depthContourWidth_description">깊이 등고선 선 폭</string>
-    <string name="accessibility_2d_view_on">2.5D 뷰 켜기</string>
     <string name="download_complete">다운로드 완료</string>
     <string name="import_as_one_track">하나의 트랙으로 가져오기</string>
     <string name="rendering_attr_depthContourColorScheme_description">깊이 등고선 색 구성표</string>
@@ -2699,7 +2697,6 @@
     <string name="kg">킬로그램</string>
     <string name="routing_attr_motor_type_diesel_name">디젤</string>
     <string name="routing_attr_motor_type_petrol_name">가솔린</string>
-    <string name="accessibility_2d_view_off">2.5D 뷰 끄기</string>
     <string name="average_speed_skip_stops">정류장 고려</string>
     <string name="map_widget_true_bearing">트루 베어링</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (제한 없음)</string>
@@ -2854,7 +2851,6 @@
     <string name="shared_string_duplicate">복제</string>
     <string name="click_on_widget">위젯 클릭</string>
     <string name="shared_string_normal">보통</string>
-    <string name="shared_string_2_5_d_view">2.5 D 뷰</string>
     <string name="how_to_use">사용하는 방법:</string>
     <string name="included_in_your_current_plan">현재 \"%1$s\" 요금제에 포함</string>
     <string name="download_tiles">타일 다운로드</string>

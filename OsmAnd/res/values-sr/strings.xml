@@ -2027,7 +2027,6 @@
     <string name="fav_export_confirmation">Датотека са већ извезеним омиљеним тачкама већ постоји. Заменити га\?</string>
     <string name="profile_settings">Поставке нарочите за профил</string>
     <string name="routing_settings_descr">Одаберите могућности навођења.</string>
-    <string name="index_settings">Управљање фајловима карата</string>
     <string name="general_settings_descr">Подесите приказ и опште поставке програма.</string>
     <string name="reading_cached_tiles">Читам ускладиштене сличице…</string>
     <string name="version_index_is_big_for_memory">Садржај „{0}“ не може да стане у складиште</string>
@@ -3917,8 +3916,6 @@
     <string name="copy_poi_name">Умножи име тачке занимања</string>
     <string name="quick_action_show_hide_title">Прикажи/сакриј</string>
     <string name="shared_string_interval">Међувреме</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Сакриј резервате природе, заштићена подручја и границе националних паркова.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Природне границе</string>
     <string name="track_has_no_altitude">Путања не садржи податке о надморској висини.</string>
     <string name="track_has_no_speed">Путања не садржи податке о брзини.</string>
     <string name="opr_use_dev_url">Користи test.openplacereviews.org</string>
@@ -4439,7 +4436,6 @@
     <string name="save_changes_into_file">Сачувај измене у датотеку</string>
     <string name="gps_filter_smoothing">Углачавање</string>
     <string name="reading_files">Читам датотеке…</string>
-    <string name="ltr_or_rtl_combine">%1$s%2$s</string>
     <string name="memory_allocated_for_routing">Складиште додељено за израчунавање пута</string>
     <string name="no_items_selected_warning">Одаберите бар једну ставку</string>
     <string name="shared_string_hide_all">Сакриј све</string>
@@ -4706,7 +4702,6 @@
     <string name="auto_25_chars_route_tr_kr">Скрените десно и држите десно</string>
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
     <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
-    <string name="accessibility_2d_view_off">Поглед 2.5д је искључен</string>
     <string name="rotate_map_manual_opt">Непроменљиво (ручно окретање)</string>
     <string name="coordinates_widget_map_center">Координате: средиште карте</string>
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
@@ -4735,12 +4730,10 @@
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
-    <string name="shared_string_2_5_d_view">поглед 2.5д</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
     <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)\?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
-    <string name="accessibility_2d_view_on">Полгед 2.5д је укључен</string>
     <string name="download_complete">Преузимање је завршено</string>
     <string name="trip_recording_uphill_widget_desc">Приказује укупно све успоне на путу који се тренутно снима.</string>
     <string name="side_marker_eta">Процењено време доласка</string>

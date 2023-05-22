@@ -1,5 +1,10 @@
 package net.osmand.plus.plugins.mapillary;
 
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.IMAGE_ID_KEY;
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.SEQUENCE_ID_KEY;
+import static net.osmand.plus.plugins.mapillary.MapillaryVectorLayer.EXTENT;
+import static net.osmand.plus.plugins.mapillary.MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;
@@ -54,11 +59,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.IMAGE_ID_KEY;
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.SEQUENCE_ID_KEY;
-import static net.osmand.plus.plugins.mapillary.MapillaryVectorLayer.EXTENT;
-import static net.osmand.plus.plugins.mapillary.MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
 
 public class MapillaryImageDialog extends ContextMenuCardDialog {
 
@@ -148,10 +148,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.sequenceId = bundle.getString(KEY_MAPILLARY_DIALOG_SEQUENCE_ID);
 		this.imageUrl = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_URL);
 		this.viewerUrl = bundle.getString(KEY_MAPILLARY_DIALOG_VIEWER_URL);
-		Object latLonObj = bundle.getSerializable(KEY_MAPILLARY_DIALOG_LATLON);
-		if (latLonObj != null) {
-			this.latLon = (LatLon) latLonObj;
-		}
+		this.latLon = AndroidUtils.getSerializable(bundle, KEY_MAPILLARY_DIALOG_LATLON, LatLon.class);
 		this.compassAngle = bundle.getDouble(KEY_MAPILLARY_DIALOG_COMPASS_ANGLE, Double.NaN);
 	}
 
@@ -428,7 +425,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
-		float ellipticTileCorrection  = 0;
+		float ellipticTileCorrection = 0;
 		if (map.isEllipticYTile()) {
 			ellipticTileCorrection = (float) (MapUtils.getTileEllipsoidNumberY(nzoom, tileBox.getLatitude()) - tileBox.getCenterTileY());
 		}
@@ -464,7 +461,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 						}
 					}
 					if (tile != null) {
-						tiles.put(tileId, new Pair<>(new QuadPointDouble(tileX,  tileY), tile));
+						tiles.put(tileId, new Pair<>(new QuadPointDouble(tileX, tileY), tile));
 					}
 				}
 			}

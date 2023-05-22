@@ -171,7 +171,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, usedOnMap);
+			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, useMapNightMode());
 			card.setListener(this);
 			container.addView(card.build(activity));
 		}

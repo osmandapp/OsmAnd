@@ -121,7 +121,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
 
-	private static final double TOUCH_RADIUS_MULTIPLIER = 1.5;
 	private static final int DEFAULT_WIDTH_MULTIPLIER = 7;
 	private static final int START_ZOOM = 7;
 
@@ -1351,81 +1350,93 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return selectedGpxFile.isGroupHidden(point.category);
 	}
 
-	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius && Math.abs(objy - ey) <= radius);
-	}
-
 	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
-		int r = (int) (getScaledTouchRadius(app, tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER);
-		int ex = (int) point.x;
-		int ey = (int) point.y;
+		MapRendererView mapRenderer = getMapRenderer();
+		float radius = getScaledTouchRadius(app, tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
 		List<SelectedGpxFile> visibleGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		for (SelectedGpxFile g : visibleGpxFiles) {
 			List<WptPt> pts = getSelectedFilePoints(g);
-			// int fcolor = g.getColor() == 0 ? clr : g.getColor();
-			for (WptPt n : pts) {
-				if (isPointHidden(g, n)) {
+			for (WptPt waypoint : pts) {
+				if (isPointHidden(g, waypoint)) {
 					continue;
 				}
-				PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.lat, n.lon);
-				if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
-					res.add(n);
+
+				boolean add = mapRenderer != null
+						? NativeUtilities.isPointInsidePolygon(waypoint.lat, waypoint.lon, touchPolygon31)
+						: tb.isLatLonNearPixel(waypoint.lat, waypoint.lon, point.x, point.y, radius);
+				if (add) {
+					res.add(waypoint);
 				}
 			}
 		}
 	}
 
 	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res, boolean showTrackPointMenu) {
-		int r = getScaledTouchRadius(app, tb.getDefaultRadiusPoi());
-		int mx = (int) point.x;
-		int my = (int) point.y;
 		List<SelectedGpxFile> selectedGpxFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+		if (selectedGpxFiles.isEmpty()) {
+			return;
+		}
+
+		MapRendererView mapRenderer = getMapRenderer();
+		int radius = getScaledTouchRadius(app, tb.getDefaultRadiusPoi());
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
+		LatLon latLonFromPixel = null;
+
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
 			if (!isGpxFileVisible(selectedGpxFile, tb)) {
 				continue;
 			}
 
-			Pair<WptPt, WptPt> line = findSegmentLineNearPoint(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
-			if (line != null) {
-				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tb, mx, my);
-				if (latLon != null) {
-					res.add(createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLon,
-							showTrackPointMenu));
+			Pair<WptPt, WptPt> line = null;
+			for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
+				line = mapRenderer != null
+						? findLineInPolygon31(touchPolygon31, segment.points)
+						: findLineNearPoint(tb, segment.points, radius, (int) point.x, (int) point.y);
+				if (line != null) {
+					break;
 				}
 			}
-		}
-	}
-
-	@Nullable
-	private Pair<WptPt, WptPt> findSegmentLineNearPoint(List<TrkSegment> segments, RotatedTileBox tileBox,
-	                                                    int radius, int x, int y) {
-		for (TrkSegment segment : segments) {
-			Pair<WptPt, WptPt> points = findLineNearPoint(getMapRenderer(), tileBox, segment.points, radius, x, y);
-			if (points != null) {
-				return points;
+			if (line != null) {
+				if (latLonFromPixel == null) {
+					latLonFromPixel = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, point.x, point.y);
+				}
+				res.add(createSelectedGpxPoint(selectedGpxFile, line.first, line.second, latLonFromPixel,
+						showTrackPointMenu));
 			}
 		}
-		return null;
 	}
 
 	@Nullable
-	public static Pair<WptPt, WptPt> findLineNearPoint(@Nullable MapRendererView mapRenderer,
-	                                                   @NonNull RotatedTileBox tb, List<WptPt> points,
+	public static Pair<WptPt, WptPt> findLineNearPoint(@NonNull RotatedTileBox tb,
+	                                                   @NonNull List<WptPt> points,
 	                                                   int r, int mx, int my) {
 		if (Algorithms.isEmpty(points)) {
 			return null;
 		}
 		WptPt prevPoint = points.get(0);
-		PointF pixelPrev = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, prevPoint.lat, prevPoint.lon);
-		int ppx = (int) pixelPrev.x;
-		int ppy = (int) pixelPrev.y;
+		int ppx = (int) tb.getPixXFromLatLon(prevPoint.lat, prevPoint.lon);
+		int ppy = (int) tb.getPixYFromLatLon(prevPoint.lat, prevPoint.lon);
 		int pcross = placeInBbox(ppx, ppy, mx, my, r, r);
 
 		for (int i = 1; i < points.size(); i++) {
 			WptPt point = points.get(i);
-			PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, point.lat, point.lon);
-			int px = (int) pixel.x;
-			int py = (int) pixel.y;
+			int px = (int) tb.getPixXFromLatLon(point.lat, point.lon);
+			int py = (int) tb.getPixYFromLatLon(point.lat, point.lon);
 			int cross = placeInBbox(px, py, mx, my, r, r);
 			if (cross == 0) {
 				return new Pair<>(prevPoint, point);
@@ -1460,6 +1471,38 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			ppy = py;
 			prevPoint = point;
 		}
+		return null;
+	}
+
+	@Nullable
+	public static Pair<WptPt, WptPt> findLineInPolygon31(@NonNull List<PointI> polygon31,
+	                                                     @NonNull List<WptPt> points) {
+		if (points.size() < 2) {
+			return null;
+		}
+
+		WptPt firstPoint = points.get(0);
+		PointI previousPoint31 = NativeUtilities.getPoint31FromLatLon(firstPoint.lat, firstPoint.lon);
+
+		if (NativeUtilities.isPointInsidePolygon(previousPoint31, polygon31)) {
+			WptPt secondPoint = points.get(1);
+			return Pair.create(firstPoint, secondPoint);
+		}
+
+		for (int i = 1; i < points.size(); i++) {
+			WptPt currentPoint = points.get(i);
+			PointI currentPoint31 = NativeUtilities.getPoint31FromLatLon(currentPoint.lat, currentPoint.lon);
+
+			boolean lineInside = NativeUtilities.isPointInsidePolygon(currentPoint31, polygon31)
+					|| NativeUtilities.isSegmentCrossingPolygon(previousPoint31, currentPoint31, polygon31);
+			if (lineInside) {
+				WptPt previousPoint = points.get(i - 1);
+				return new Pair<>(previousPoint, currentPoint);
+			}
+
+			previousPoint31 = currentPoint31;
+		}
+
 		return null;
 	}
 
@@ -1672,7 +1715,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			getTracksFromPoint(tileBox, point, trackPoints, true);
 
 			if (!Algorithms.isEmpty(trackPoints)) {
-				LatLon latLon = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, point.x, point.y);
+				LatLon latLon = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, point);
 				if (trackPoints.size() == 1) {
 					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
 					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, null);

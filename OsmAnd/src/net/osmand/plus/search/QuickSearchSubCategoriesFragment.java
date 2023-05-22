@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +22,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +56,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	private View footerShadow;
 	private FrameLayout addButton;
 	private boolean selectAll;
-	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentManager fm,
 									@Nullable Fragment targetFragment,
@@ -76,7 +73,6 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			poiCategory = app.getPoiTypes().getPoiCategoryByName(savedInstanceState.getString(CATEGORY_NAME_KEY));
 			selectAll = savedInstanceState.getBoolean(ALL_SELECTED_KEY);
@@ -184,20 +180,10 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 		listView.addFooterView(footerShadow);
 		listView.addHeaderView(headerSelectAll);
 		searchEditText = root.findViewById(R.id.search);
-		searchEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-			}
-
+		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 				searchSubCategory(charSequence.toString());
-			}
-
-			@Override
-			public void afterTextChanged(Editable editable) {
-
 			}
 		});
 		ImageView searchIcon = root.findViewById(R.id.search_icon);

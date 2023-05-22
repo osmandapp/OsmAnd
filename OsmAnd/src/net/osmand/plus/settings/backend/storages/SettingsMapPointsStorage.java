@@ -5,6 +5,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.HistorySource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,7 +89,7 @@ abstract class SettingsMapPointsStorage {
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, PointDescription.serializeToString(historyDescription));
 		if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.getContext())) {
-			SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription);
+			SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
 		}
 		return savePoints(ps, ds);
 	}
@@ -100,7 +101,7 @@ abstract class SettingsMapPointsStorage {
 		if (i != -1) {
 			ds.set(i, PointDescription.serializeToString(historyDescription));
 			if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.getContext())) {
-				SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription);
+				SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
 			}
 			return savePoints(ps, ds);
 		} else {

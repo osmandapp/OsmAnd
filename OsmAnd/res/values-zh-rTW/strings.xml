@@ -326,7 +326,6 @@
     <string name="routing_settings">導航</string>
     <string name="routing_settings_descr">為導航指定選項。</string>
     <string name="global_settings">整體設定</string>
-    <string name="index_settings">管理地圖檔案</string>
     <string name="general_settings">一般設定</string>
     <string name="general_settings_descr">設定應用程式顯示和共通設定。</string>
     <string name="global_app_settings">整體程式設定</string>
@@ -1171,7 +1170,7 @@
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">"
 \n
-\n在地圖上長按以查看"</string>
+\n長按以在地圖上檢視"</string>
     <string name="delay_navigation_start">自動開始轉向建議指引</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
@@ -1231,9 +1230,9 @@
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-    <string name="rendering_attr_alpineHiking_name">登山健行等級（SAC）</string>
+    <string name="rendering_attr_alpineHiking_name">登山健行等級</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">登山健行路線</string>
-    <string name="rendering_attr_alpineHiking_description">依據 SAC 評級繪製路徑。</string>
+    <string name="rendering_attr_alpineHiking_description">依據 SAC/CAI 等級繪製路徑。</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑。</string>
     <string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
@@ -2714,7 +2713,7 @@
     <string name="ski_map_render_descr">用於滑雪。特色是滑雪道、滑雪纜車、越野賽道等等。讓次要地點變暗。</string>
     <string name="light_rs_render_descr">簡易的車輛駕駛樣式。柔和的夜間模式、等高線、對比鮮明的橘色道路、並讓次要地點變暗。</string>
     <string name="topo_render_descr">用於遠足、徒步旅行和在大自然中騎車。容易在戶外閱讀的地圖。對比鮮明的道路與自然地點、不同的路徑類型、進階等高線選項、額外的細節。調整表面完整性可以分辨道路品質。無夜間模式。</string>
-    <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是等高線、路徑、路面品質、進入限制、路障、根據 SAC 比例繪製的路徑、激流運動項目。</string>
+    <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是等高線、路徑、路面品質、進入限制、路障、根據 SAC/CAI 等級繪製的路徑、激流運動項目。</string>
     <string name="shared_string_bookmark">書籤</string>
     <string name="off_road_render_descr">基於「Topo」樣式，適用於越野駕駛，使用綠色衛星圖作為底圖。減少主要道路的寬度，增加車跡、路徑、腳踏車與其他路徑的寬度。</string>
     <string name="touring_view_render_descr">以高對比與最多細節的旅遊樣式。包含所有 OsmAnd 預設樣式的選項，並盡可能地顯示更多細節，特別是道路、路徑與其他旅行方式。明確區分道路類型的旅遊地圖集。白天、夜晚與戶外都適用。</string>
@@ -2892,8 +2891,8 @@
     <string name="rendering_attr_undefined_name">未定義</string>
     <string name="use_osm_live_public_transport_description">為 OsmAnd Live 變更啟用大眾運輸。</string>
     <string name="use_osm_live_public_transport">OsmAnd Live 大眾運輸</string>
-    <string name="routing_attr_avoid_sett_name">避免鵝卵石或枕木</string>
-    <string name="routing_attr_avoid_sett_description">避免鵝卵石或枕木</string>
+    <string name="routing_attr_avoid_sett_name">避免枕木</string>
+    <string name="routing_attr_avoid_sett_description">避免枕木</string>
     <string name="files_moved">已移動 %1$d 個檔案 (%2$s)。</string>
     <string name="files_copied">已複製 %1$d 個檔案 (%2$s)。</string>
     <string name="files_failed">無法複製 %1$d 檔案 (%2$s)。</string>
@@ -3661,7 +3660,7 @@
     <string name="use_volume_buttons_as_zoom_descr">使用裝置音量按鈕控制地圖縮放等級。</string>
     <string name="use_volume_buttons_as_zoom">音量按鈕以縮放</string>
     <string name="lenght_limit_description">提供您的車輛長度，某些路徑限制可能適用於較長的車輛。</string>
-    <string name="quick_action_remove_next_destination">刪除最近的目的地點</string>
+    <string name="quick_action_remove_next_destination">刪除下一個目的地點</string>
     <string name="please_provide_point_name_error">請提供點的名稱</string>
     <string name="quick_action_remove_next_destination_descr">刪除您路線上的下一個目的地。如果其為您最後的目的地，導航將會中止。</string>
     <string name="search_download_wikipedia_maps">下載維基百科地圖</string>
@@ -4011,8 +4010,6 @@
     <string name="track_has_no_altitude">軌跡不包含海拔資料。</string>
     <string name="track_has_no_speed">軌跡不包含速度資料。</string>
     <string name="select_another_colorization">請選擇另一種顏色。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隱藏自然保留區、保護區與國家公園界線。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">自然界線</string>
     <string name="trip_recording_logging_interval_info">紀錄間隔設定的時段，OsmAnd 將會要求目前位置的資料。</string>
     <string name="trip_recording_save_and_continue">儲存並繼續</string>
     <string name="lost_data_warning">所有未儲存的資料都將會遺失。</string>
@@ -4242,7 +4239,6 @@
     <string name="promo_subscription">促銷訂閱</string>
     <string name="track_has_no_needed_data">軌跡遺失對應的資料。</string>
     <string name="option_available_only_in_osmand_pro">作為 OsmAnd Pro 訂閱的一部分提供。</string>
-    <string name="pro_widgets">Pro 小工具</string>
     <string name="purchases_feature_desc_pro_widgets">存取 OsmAnd Pro 功能：路線著色等。</string>
     <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 方案以找到適合您的。</string>
     <string name="routes_color_by_type">使用……為路線著色</string>
@@ -4455,7 +4451,6 @@
     <string name="gps_filter_actions_description">OsmAnd 將套用變更至軌跡而不更新檔案。您可以手動儲存變更。</string>
     <string name="shared_string_gps_filter">GPS 過濾條件</string>
     <string name="storage_migration_wrong_folder_warning">在選定的資料夾中找不到 OsmAnd 資料。請再試一次。</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="shared_string_precision">精確</string>
     <string name="shared_string_statistics">統計</string>
     <string name="shared_string_size">大小</string>
@@ -4708,9 +4703,7 @@
     <string name="reset_all_settings_desc">將所有設定重設為預設值？</string>
     <string name="goods_delivery_desc">某些道路可能會限制送貨車輛。</string>
     <string name="routing_attr_goods_restrictions_name">貨運</string>
-    <string name="accessibility_2d_view_on">2.5D 檢視開啟</string>
     <string name="download_complete">下載完成</string>
-    <string name="accessibility_2d_view_off">2.5D 檢視關閉</string>
     <string name="av_notes_photo_widget_desc">點擊小工具可以讓您拍照。</string>
     <string name="av_notes_video_widget_desc">點擊小工具可以讓您錄製影片。</string>
     <string name="av_notes_audio_widget_desc">點擊小工具可以讓您製作音訊註記。</string>
@@ -4768,7 +4761,6 @@
     <string name="how_to_use">如何使用：</string>
     <string name="distance_by_tap_use_description">點擊地圖以檢視您目前位置與點擊點之間的距離。
 \n用兩根手指在地圖上點擊以檢視與點擊點之間的距離</string>
-    <string name="shared_string_2_5_d_view">2.5 D 檢視</string>
     <string name="rotate_map_manual_opt">手動旋轉（固定）</string>
     <string name="shared_string_large">大</string>
     <string name="display_position">顯示位置</string>
@@ -4815,7 +4807,6 @@
     <string name="worldwide_maps">世界地圖</string>
     <string name="map_widget_ant_bicycle_dist_desc">顯示行使距離</string>
     <string name="shared_string_cross_buy">跨平台購買</string>
-    <string name="map_widget_fps_info">地圖繪製 FPS（每秒畫面）</string>
     <string name="map_widget_target_distance">地圖視角至目標的距離</string>
     <string name="favorites_backup">收藏備份</string>
     <string name="purchases_feature_desc_cross_buy">在不同的平台上免費使用您的訂閱功能（Android/iOS/網頁版）。</string>
@@ -4963,8 +4954,6 @@
     <string name="cloud_layer">雲層圖層</string>
     <string name="rendering_attr_showMtbScale_name">顯示山地自行車比例</string>
     <string name="rendering_attr_showMtbScale_description">根據山地自行車比例顯示路徑。</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">顯示山地自行車比例上坡</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">根據山地自行車上坡比例顯示路徑。</string>
     <string name="mtb_scale">山地自行車比例</string>
     <string name="mtb_imba">國際山地自行車協會</string>
     <string name="mtb_imba_full">國際山地自行車協會</string>
@@ -5179,4 +5168,43 @@
     <string name="ant_plus_pair_new_sensor_ble">配對低功耗藍牙感應器</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">配對 ANT+ 感應器</string>
     <string name="learn_more_about_sensors_link">取得更多關於感應器的資訊。</string>
+    <string name="is_imported">%1$s 已匯入。</string>
+    <string name="file_already_exists_description">「%1$s」。同名檔案已存在。取代將會覆寫對目前版本的所有變動。</string>
+    <string name="file_already_exists">檔案已存在</string>
+    <string name="nav_profile_confirm_delete">您確定要刪除「%1$s」嗎？</string>
+    <string name="no_search_results">無結果</string>
+    <string name="search_track_by_name">透過名稱搜尋軌跡</string>
+    <string name="number_of_tracks">%1$s 個軌跡</string>
+    <string name="no_poi_for_category">找不到興趣點</string>
+    <string name="rendering_value_sectors_name">區段</string>
+    <string name="rendering_value_sector4_name">區段 4</string>
+    <string name="rendering_value_sector5_name">區段 5</string>
+    <string name="rendering_value_small_name">小</string>
+    <string name="rendering_value_name_only_name">僅名稱</string>
+    <string name="poi_categories">POI 類別</string>
+    <string name="rendering_attr_lightDetail_name">燈光詳細資訊</string>
+    <string name="rendering_attr_lightDetail_description">預設：海標名稱（燈光特性.群組.週期），選取區段 1 至 3 或區段 1,2,3,4,5 燈光特性</string>
+    <string name="rendering_value_sector1_name">區段 1</string>
+    <string name="rendering_value_sector2_name">區段 2</string>
+    <string name="rendering_value_sector3_name">區段 3</string>
+    <string name="device_disconnected">%1$s 已斷線</string>
+    <string name="device_connected">%1$s 已連線</string>
+    <string name="running_scds_device_name">正在執行的裝置</string>
+    <string name="shared_string_hand">手</string>
+    <string name="shared_string_ear_lobe">耳垂</string>
+    <string name="bicycle_scd_device_name">腳踏車裝置</string>
+    <string name="external_device_blood_pressure">血壓</string>
+    <string name="no_bt_permission">未授予藍牙權限</string>
+    <string name="beats_per_minute_short">每分鐘心跳次數</string>
+    <string name="shared_string_chest">胸部</string>
+    <string name="shared_string_wrist">手腕</string>
+    <string name="shared_string_finger">手指</string>
+    <string name="shared_string_foot">腳</string>
+    <string name="map_3d_mode_hint">長按按鈕可以變更按鈕位置。</string>
+    <string name="visible_in_3d_mode">在 3D 模式下可見</string>
+    <string name="rendering_value_sacScale_name">SAC 等級</string>
+    <string name="rendering_value_caiScale_name">CAI 等級</string>
+    <string name="map_2d_mode_action">2D 模式</string>
+    <string name="map_3d_mode_action">3D 模式</string>
+    <string name="map_3d_mode_description">用兩根手指觸控地圖並上下移動以調整地圖傾斜度。</string>
 </resources>

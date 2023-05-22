@@ -21,19 +21,19 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.data.GPXInfo;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.myplaces.tracks.dialogs.AvailableGPXFragment;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.OsmAndFormatter;
 
@@ -159,11 +159,11 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 
 		for (String filename : list) {
-			File file = new File(filename);
-			GPXInfo info = new GPXInfo(filename, file);
-			info.subfolder = "";
 			View itemView = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			AvailableGPXFragment.updateGpxInfoView(itemView, info, app, true, null);
+
+			File file = new File(filename);
+			TrackItem trackItem = new TrackItem(file);
+			GpxUiHelper.updateGpxInfoView(itemView, trackItem, app, true, null);
 
 			itemView.setOnClickListener(v -> openGpxContextMenu(file));
 			ImageButton showOnMap = itemView.findViewById(R.id.show_on_map);
@@ -250,17 +250,13 @@ public class DashTrackFragment extends DashBaseFragment {
 		SelectedGpxFile selected = selectedGpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 		if (selected != null) {
 			showOnMap.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_show_on_map, R.color.color_distance));
-			showOnMap.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					GpxSelectionParams params = GpxSelectionParams.newInstance()
-							.hideFromMap().syncGroup().saveSelection();
-					selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
-					GPXInfo info = new GPXInfo(file.getName(), file);
-					info.subfolder = "";
-					AvailableGPXFragment.updateGpxInfoView(pView, info, app, true, null);
-					updateShowOnMap(app, file, v, showOnMap);
-				}
+			showOnMap.setOnClickListener(v -> {
+				GpxSelectionParams params = GpxSelectionParams.newInstance()
+						.hideFromMap().syncGroup().saveSelection();
+				selectedGpxHelper.selectGpxFile(selected.getGpxFile(), params);
+				TrackItem trackItem = new TrackItem(file);
+				GpxUiHelper.updateGpxInfoView(pView, trackItem, app, true, null);
+				updateShowOnMap(app, file, v, showOnMap);
 			});
 		} else {
 			showOnMap.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_show_on_map));

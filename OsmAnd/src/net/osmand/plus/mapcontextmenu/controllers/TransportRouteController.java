@@ -205,7 +205,6 @@ public class TransportRouteController extends MenuController {
 				mapContextMenu.updateMapCenter(stopLocation);
 			} else {
 				mapContextMenu.setMapCenter(stopLocation);
-				mapContextMenu.setMapPosition(getMapActivity().getMapView().getMapPosition());
 			}
 			mapContextMenu.setCenterMarker(true);
 			mapContextMenu.setZoomOutOnly(movingBetweenStops);

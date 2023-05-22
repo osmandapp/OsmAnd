@@ -20,7 +20,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -28,7 +27,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
@@ -57,7 +55,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 
 	private static final String SELECTED_TAB_TYPE_KEY = "SELECTED_TAB_TYPE_KEY";
 
-	private OsmandApplication app;
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
@@ -65,15 +62,12 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	private View buttonsShadow;
 
 	private RecentChangesType tabType;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = isNightMode(false);
 		if (savedInstanceState != null) {
 			tabType = RecentChangesType.valueOf(savedInstanceState.getString(SELECTED_TAB_TYPE_KEY, RECENT_CHANGES_LOCAL.name()));
 		}
@@ -250,6 +244,10 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		app.runInUIThread(this::setupBottomButtons);
 	}
 
+	public void onBackupSyncTasksUpdated() {
+		app.runInUIThread(this::setupBottomButtons);
+	}
+
 	@Override
 	public void onBackupSyncFinished(@Nullable String error) {
 		if (!Algorithms.isEmpty(error)) {
@@ -257,7 +255,6 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		} else if (!settingsHelper.isBackupSyncing() && !backupHelper.isBackupPreparing()) {
 			backupHelper.prepareBackup();
 		}
-		app.runInUIThread(this::setupBottomButtons);
 	}
 
 	@Nullable

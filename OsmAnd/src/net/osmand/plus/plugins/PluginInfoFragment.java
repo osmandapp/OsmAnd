@@ -54,10 +54,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	public static final String PLUGIN_INFO = "plugin_info";
 
 	private OsmandPlugin plugin;
-	private OsmandApplication app;
 
 	private View mainView;
-	private boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -77,14 +75,12 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		app = requireMyApplication();
 		plugin = getPluginFromArgs();
 		if (plugin == null) {
 			return null;
 		}
 
 		Context context = requireContext();
-		nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		mainView = themedInflater.inflate(R.layout.plugin, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);

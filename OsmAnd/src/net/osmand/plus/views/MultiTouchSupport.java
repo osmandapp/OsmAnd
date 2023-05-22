@@ -6,7 +6,6 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.PointI;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.MapUtils;
 
@@ -212,22 +211,22 @@ public class MultiTouchSupport {
 
 	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
 		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
-				|| Math.abs(angle - angleStarted) > ANGLE_THRESHOLD && angleDefined);
+				|| Math.abs(MapUtils.unifyRotationTo360(angle - angleStarted)) > ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {
 		return centerPoint;
 	}
 
-	public PointI getFirstPoint() {
-		return new PointI((int) firstPoint.x, (int) firstPoint.y);
+	public PointF getFirstPoint() {
+		return firstPoint;
 	}
-	public PointI getSecondPoint() {
-		return new PointI((int) secondPoint.x, (int) secondPoint.y);
+	public PointF getSecondPoint() {
+		return secondPoint;
 	}
 
 	public static boolean isTiltSupportEnabled(@NonNull OsmandApplication app) {
-		return isTiltSupported(app) && app.getSettings().ENABLE_3D_VIEW.get();
+		return isTiltSupported(app);
 	}
 
 	public static boolean isTiltSupported(@NonNull OsmandApplication app) {

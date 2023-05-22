@@ -1,7 +1,5 @@
 package net.osmand.plus.auto;
 
-import android.content.SharedPreferences;
-
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.Screen;
@@ -20,7 +18,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 /**
  * Settings screen demo.
  */
-public final class SettingsScreen extends Screen {
+public final class SettingsScreen extends BaseOsmAndAndroidAutoScreen {
 
 	@NonNull
 	final OsmandSettings osmandSettings;

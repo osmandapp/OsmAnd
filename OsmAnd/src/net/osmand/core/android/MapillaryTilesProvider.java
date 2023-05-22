@@ -26,7 +26,6 @@ import net.osmand.core.jni.AlphaChannelPresence;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IMapTiledDataProvider;
 import net.osmand.core.jni.IQueryController;
-import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
@@ -52,7 +51,6 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.MapUtils;
 
 import java.io.ByteArrayOutputStream;

@@ -42,7 +42,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTilesInfo;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.resources.BitmapTilesCache;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -65,10 +64,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private DownloadTilesHelper downloadTilesHelper;
-	private boolean nightMode;
 
 	private UpdateTilesHandler handler;
 
@@ -114,13 +110,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
 		if (args != null) {
-			layerToDownload = args.getSerializable(KEY_DOWNLOAD_LAYER, MapLayerType.class);
+			layerToDownload = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_LAYER, MapLayerType.class);
 		}
-
-		app = requireMyApplication();
-		settings = requireSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
-		nightMode = isNightMode(true);
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
 		tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
@@ -132,14 +124,19 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (savedInstanceState != null) {
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
-			downloadType = savedInstanceState.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
+			downloadType = AndroidUtils.getSerializable(savedInstanceState, KEY_DOWNLOAD_TYPE, DownloadType.class);
 		} else {
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			selectedMinZoom = Math.min(mapView.getZoom(), selectedMaxZoom);
 			if (args != null) {
-				downloadType = args.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
+				downloadType = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_TYPE, DownloadType.class);
 			}
 		}
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Override
@@ -548,6 +545,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			int currentZoom = mapView.getZoom();
 			if (currentZoom > selectedMinZoom && currentZoom <= maxZoom) {
 				selectedMinZoom = currentZoom;
+			}
+			if (currentZoom > selectedMaxZoom && currentZoom <= maxZoom) {
+				selectedMaxZoom = currentZoom;
 			}
 
 			if (downloadType != DownloadType.ALL) {

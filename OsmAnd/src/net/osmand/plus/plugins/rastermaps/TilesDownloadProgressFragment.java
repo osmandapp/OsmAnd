@@ -26,13 +26,11 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -62,8 +60,6 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	private static final String KEY_DOWNLOADED_SIZE_MB = "downloaded_size_mb";
 	private static final String KEY_DOWNLOADED_TILES_NUMBER = "downloaded_tiles_number";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private DownloadTilesHelper downloadTilesHelper;
 
 	private ITileSource tileSource;
@@ -81,16 +77,10 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	private float approxSizeMb;
 	private float downloadedSizeMb;
 
-	private boolean nightMode;
-
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		downloadTilesHelper = app.getDownloadTilesHelper();
-		nightMode = isNightMode(true);
 
 		Bundle args = getArguments();
 		if (args != null) {
@@ -108,6 +98,11 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		});
 	}
 
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
 	private void restoreState(@NonNull Bundle savedState) {
 		progress = savedState.getInt(KEY_PROGRESS);
 		downloadedSizeMb = savedState.getFloat(KEY_DOWNLOADED_SIZE_MB);
@@ -122,9 +117,10 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 		latLonRect.top = args.getDouble(KEY_TOP_LAT);
 		latLonRect.right = args.getDouble(KEY_RIGHT_LON);
 		latLonRect.bottom = args.getDouble(KEY_BOTTOM_LAT);
-		downloadType = args.getSerializable(KEY_DOWNLOAD_TYPE, DownloadType.class);
 
-		MapLayerType layerType = args.getSerializable(KEY_DOWNLOAD_LAYER, MapLayerType.class);
+		MapLayerType layerType = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_LAYER, MapLayerType.class);
+		downloadType = AndroidUtils.getSerializable(args, KEY_DOWNLOAD_TYPE, DownloadType.class);
+
 		tileSource = settings.getLayerTileSource(layerType.getMapLayerSettings(app), false);
 		if (tileSource == null) {
 			tileSource = settings.getMapTileSource(false);

@@ -131,6 +131,7 @@ public abstract class VehicleSizes {
 		String none = app.getString(R.string.shared_string_none);
 		ChipItem chip = new ChipItem(none);
 		chip.title = none;
+		chip.contentDescription = none;
 		chip.tag = 0.0f;
 		chips.add(chip);
 
@@ -142,6 +143,7 @@ public abstract class VehicleSizes {
 			String title = String.format(pattern, valueStr, metricShort);
 			chip = new ChipItem(title);
 			chip.title = title;
+			chip.contentDescription = title;
 			chip.tag = value;
 			chips.add(chip);
 		}

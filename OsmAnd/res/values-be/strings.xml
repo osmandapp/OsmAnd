@@ -528,7 +528,6 @@
     <string name="routing_settings">Навігацыя</string>
     <string name="routing_settings_descr">Вызначыць параметры навігацыі.</string>
     <string name="global_settings">Агульныя налады</string>
-    <string name="index_settings">Кіраваць файламі мапаў</string>
     <string name="general_settings">Агульныя</string>
     <string name="general_settings_descr">Налады экрана і агульныя налады праграмы.</string>
     <string name="global_app_settings">Агульныя налады праграмы</string>
@@ -4723,8 +4722,6 @@
     <string name="routing_attr_motor_type_electric_name">Электрычны</string>
     <string name="lang_ckb">Курдская (цэнтральная)</string>
     <string name="co2_mission">Выкіды CO2</string>
-    <string name="accessibility_2d_view_off">Выгляд 2.5D адключаны</string>
-    <string name="accessibility_2d_view_on">Выгляд 2.5D уключаны</string>
     <string name="download_complete">Спампоўванне завершана</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Паказваць адмысловыя маршруты для горных ровараў.</string>
     <string name="av_notes_audio_widget_desc">Націсканнем на віджэт можна ствараць аўдыянататкі.</string>
@@ -4790,7 +4787,6 @@
     <string name="how_to_use">Як выкарыстоўваць:</string>
     <string name="distance_by_tap_use_description">Дакраніцеся да мапы, каб праглядзець адлегласць паміж вашым бягучым месцазнаходжаннем і пунктам, на які вы націснеце.
 \nДакраніцеся двума пальцамі да мапы, каб убачыць адлегласць паміж націснутымі пунктамі</string>
-    <string name="shared_string_2_5_d_view">Выгляд 2.5 D</string>
     <string name="quick_action_map_center_widget_descr">Пераключальнік для паказу або хавання віджэта цэнтра мапы.</string>
     <string name="quick_action_current_location_widget_descr">Пераключальнік для паказу або хавання віджэта бягучага месцазнаходжанне.</string>
     <string name="coordinates_widget_map_center_desc">Паказвае геаграфічныя каардынаты бягучага цэнтра мапы</string>

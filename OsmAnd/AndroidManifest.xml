@@ -92,15 +92,15 @@
 		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
 		<meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
 
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="net.osmand.plus.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true" >
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/paths" />
-        </provider>
+		<provider
+			android:name="androidx.core.content.FileProvider"
+			android:authorities="net.osmand.plus.fileprovider"
+			android:exported="false"
+			android:grantUriPermissions="true" >
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/paths" />
+		</provider>
 
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" />
@@ -172,9 +172,9 @@
 			<!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i-->
 			<!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
 			<!-- Capture file open requests (pathPattern is honoured) where no MIME type is provided in the Intent.  An Intent with a null
-           MIME type will never be matched by a filter with a set MIME type, so we need a second intent-filter if we wish to also
-           match files with this extension and a non-null MIME type (even if it is non-null but zero length).
-           https://stackoverflow.com/a/31028507/4654078 -->
+		   MIME type will never be matched by a filter with a set MIME type, so we need a second intent-filter if we wish to also
+		   match files with this extension and a non-null MIME type (even if it is non-null but zero length).
+		   https://stackoverflow.com/a/31028507/4654078 -->
 
 			<intent-filter
 				android:label="@string/app_name"
@@ -578,18 +578,9 @@
 		</activity>
 
 		<activity android:name="net.osmand.plus.activities.HelpActivity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
-		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
 		<activity android:name="net.osmand.plus.myplaces.MyPlacesActivity" android:windowSoftInputMode="adjustPan" />
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
-		<activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchAddressActivity" android:label="@string/select_address_activity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchCityByNameActivity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchRegionByNameActivity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchStreetByNameActivity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity" />
-		<activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity" />
 		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
 		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity" android:exported="true" android:label="@string/app_name">
 			<intent-filter>
@@ -601,7 +592,7 @@
 				<data android:scheme="geo" />
 				<action android:name="android.intent.action.VIEW"/>
 				<category android:name="android.intent.category.DEFAULT"/>
-				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 			<intent-filter>
 				<data android:scheme="http" />
@@ -1095,8 +1086,6 @@
 				<data android:host="www.google.ws" />
 			</intent-filter>
 		</activity>
-		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity" />
-		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
 
 		<activity android:name="net.osmand.plus.plugins.development.TestVoiceActivity" />
 		<activity android:name="net.osmand.plus.plugins.development.LogcatActivity" />
@@ -1127,8 +1116,8 @@
 
 		<!-- keep android:process on a separate line !! -->
 		<service
-		    android:process="net.osmand.plus"
-		    android:label="@string/process_navigation_service"
+			android:process="net.osmand.plus"
+			android:label="@string/process_navigation_service"
 			android:name="net.osmand.plus.NavigationService"
 			android:exported="true"
 			android:foregroundServiceType="location"
@@ -1157,9 +1146,6 @@
 			android:label="@string/process_downloading_service"
 			android:stopWithTask="false" />
 
-		<service
-			android:name=".plugins.antplus.BluetoothLeService" />
-
 		<meta-data android:name="com.google.android.gms.car.application"
 			android:resource="@xml/car_app_desc"
 			tools:ignore="MetadataTagInsideApplicationTag" />
@@ -1180,7 +1166,7 @@
 
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 
-        <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
+		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
 
 	</application>
 

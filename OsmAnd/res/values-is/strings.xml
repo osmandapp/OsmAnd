@@ -879,7 +879,6 @@
     <string name="index_name_germany">Evrópa - Þýskaland</string>
     <string name="index_name_oceania">Ástralía og Eyjaálfa</string>
     <string name="index_name_other">Kort yfir heiminn og umfjöllunarefni</string>
-    <string name="index_settings">Sýsla með kortaskrár</string>
     <string name="global_app_settings">Víðværar stillingar forrits</string>
     <string name="user_name">OSM-notandanafnið þitt</string>
     <string name="user_password">Lykilorð</string>
@@ -4023,8 +4022,6 @@
     <string name="track_has_no_altitude">Ferillinn inniheldur ekki hæðargögn.</string>
     <string name="track_has_no_speed">Ferillinn inniheldur ekki hraðagögn.</string>
     <string name="select_another_colorization">Veldu aðra tegund litunar.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Fela mörk friðlanda, verndaðra svæða og þjóðgarða.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Mörk náttúru</string>
     <string name="trip_recording_logging_interval_info">Millibil skráninga stillir tímabilið milli þess sem OsmAnd biður um staðsetningargögn.</string>
     <string name="trip_recording_show_start_dialog_setting">Ef þetta er óvirkt, mun upptaka hefjast strax eftir að ýtt er á hnappinn eða valmyndarfærsluna , staðfestingarglugga er þá sleppt.</string>
     <string name="release_4_0_beta">• Bætt við möguleika á að sækja hæðarlínur í fetum
@@ -4737,8 +4734,6 @@
     <string name="coordinates_widget_secondary_desc">Þú getur breytt sniði hnita í %1$s – %2$s – %3$s.</string>
     <string name="routing_attr_avoid_4wd_only_description">Forðast vegi sem henta aðeins fjórhjóladrifsfarartækjum</string>
     <string name="current_speed_widget_desc">Sýnir fyrirliggjandi hraða þinn eins og GPS-skynjarinn mælir hann.</string>
-    <string name="accessibility_2d_view_off">Slökkt á 2.5D-sýn</string>
-    <string name="accessibility_2d_view_on">Kveikt á 2.5D-sýn</string>
     <string name="time_to_go_desc">Tími í mínútum eða klukkustundum þar til þú nærð á áfangastað.</string>
     <string name="radius_ruler_mode_desc">Með því að slá á viðmótshlutann er skipt yfir í mælistiku út frá miðju hrings.</string>
     <string name="duplacate_widget_added_snackbar">Tvítaki viðmótshluta er bætt við á listann.</string>
@@ -4772,7 +4767,6 @@
     <string name="favorite_delete_group">Eyða hópi</string>
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
-    <string name="shared_string_2_5_d_view">2.5 D sýn</string>
     <string name="rotate_map_manual_opt">Snúið handvirkt (fast)</string>
     <string name="external_sensor_widgets">ANT+ viðmótshlutar</string>
     <string name="map_widget_ant_heart_rate">Hjartsláttur</string>

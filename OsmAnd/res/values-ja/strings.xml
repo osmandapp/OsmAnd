@@ -143,7 +143,6 @@ MB)をダウンロードしますか?</string>
     <string name="general_settings_descr">アプリの表示オプションや共通の設定をおこないます。</string>
     <string name="general_settings">全般設定</string>
     <string name="index_settings_descr">マップなどのデータを取得/更新します</string>
-    <string name="index_settings">マップデータ等管理</string>
     <string name="osmand_service">バックグラウンドモード</string>
     <string name="osmand_service_descr">画面オフの間もOsmAndはバックグラウンドモードで動作します</string>
     <string name="fast_route_mode">最速ルート</string>
@@ -3931,8 +3930,6 @@ POIの更新は利用できません</string>
     <string name="copy_poi_name">POI名をコピー</string>
     <string name="quick_action_show_hide_title">表示/非表示</string>
     <string name="shared_string_interval">間隔</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">自然保護区、保護地域、国立公園の境界を非表示にします。</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">自然保護区の境界</string>
     <string name="track_has_no_altitude">経路には標高データは含まれていません。</string>
     <string name="track_has_no_speed">経路には速度データは含まれていません。</string>
     <string name="select_another_colorization">別タイプのカラーリングを選択してください。</string>
@@ -4940,7 +4937,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_normal">中</string>
     <string name="distance_by_tap_use_description">マップをタップすると、現在地とタップした地点の間の距離が表示されます。
 \nマップ上を2本指でタップすると、タップした地点間の距離が表示されます</string>
-    <string name="shared_string_2_5_d_view">2.5D表示</string>
     <string name="without_profiles_changing">プロファイルを変更しない</string>
     <string name="included_in_your_current_plan">現在の\"%1$s\"プランに含まれています</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTBのIMBA基準トレイルを表示</string>
@@ -4953,8 +4949,6 @@ POIの更新は利用できません</string>
     <string name="compass_visible_if_map_rotated">マップが回転している場合に表示</string>
     <string name="compass_click_desc">ヒント:コンパスウィジェットをタップして、マップの方向モードを切り替えます。</string>
     <string name="rendering_attr_depthContourColorScheme_description">等深線の配色</string>
-    <string name="accessibility_2d_view_off">2.5D表示をOFF</string>
-    <string name="accessibility_2d_view_on">2.5D表示をON</string>
     <string name="goods_delivery_desc_3">3.5トン以下の配送トラックにのみ適用されます。</string>
     <string name="goods_delivery_desc">一部の道路では配送車両が制限される場合があります。</string>
     <string name="routing_attr_motor_type_electric_name">電気</string>

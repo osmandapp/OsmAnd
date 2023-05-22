@@ -35,6 +35,7 @@ import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
@@ -515,6 +516,11 @@ public class IntentHelper {
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
 				boolean temporarySelected = intent.getBooleanExtra(TEMPORARY_SELECTED, false);
 				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, temporarySelected, name, null, tabName);
+				clearIntent(intent);
+			}
+			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
+				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
+				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName);
 				clearIntent(intent);
 			}
 			if (intent.getExtras() != null) {

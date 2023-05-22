@@ -10,9 +10,6 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -20,6 +17,7 @@ import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,10 +29,14 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		ContextMenuLayer.IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
@@ -144,10 +146,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		return (int) (r * tb.getDensity());
 	}
 
-	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius;
-	}
-
 	@Override
 	public boolean disableSingleTap() {
 		return false;
@@ -171,19 +169,32 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			int compare = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox));
-			int radius = compare * 3 / 2;
+		Map<LatLon, AvoidRoadInfo> impassableRoads = avoidSpecificRoads.getImpassableRoads();
+		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects && !Algorithms.isEmpty(impassableRoads)) {
+			MapRendererView mapRenderer = getMapRenderer();
+			float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
+			QuadRect screenArea = new QuadRect(
+					point.x - radius,
+					point.y - radius / 2f,
+					point.x + radius,
+					point.y + radius * 3f
+			);
+			List<PointI> touchPolygon31 = null;
+			if (mapRenderer != null) {
+				touchPolygon31 = NativeUtilities.getPolygon31FromScreenArea(mapRenderer, screenArea);
+				if (touchPolygon31 == null) {
+					return;
+				}
+			}
 
-			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
+			for (Map.Entry<LatLon, AvoidRoadInfo> entry : impassableRoads.entrySet()) {
 				LatLon location = entry.getKey();
 				AvoidRoadInfo road = entry.getValue();
 				if (location != null && road != null) {
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, location.getLatitude(), location.getLongitude());
-					if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, compare)) {
-						compare = radius;
+					boolean add = mapRenderer != null
+							? NativeUtilities.isPointInsidePolygon(location, touchPolygon31)
+							: tileBox.isLatLonInsidePixelArea(location, screenArea);
+					if (add) {
 						o.add(road);
 					}
 				}

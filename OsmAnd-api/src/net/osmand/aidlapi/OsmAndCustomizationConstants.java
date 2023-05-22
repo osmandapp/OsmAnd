@@ -80,6 +80,7 @@ public interface OsmAndCustomizationConstants {
 	String COMPASS_HUD_ID = HUD_BTN_ID_SCHEME + "compass";
 	String QUICK_SEARCH_HUD_ID = HUD_BTN_ID_SCHEME + "quick_search";
 	String BACK_TO_LOC_HUD_ID = HUD_BTN_ID_SCHEME + "back_to_loc";
+	String MAP_3D_HUD_ID = HUD_BTN_ID_SCHEME + "map_3d";
 	String MENU_HUD_ID = HUD_BTN_ID_SCHEME + "menu";
 	String ROUTE_PLANNING_HUD_ID = HUD_BTN_ID_SCHEME + "route_planning";
 	String ZOOM_IN_HUD_ID = HUD_BTN_ID_SCHEME + "zoom_id";

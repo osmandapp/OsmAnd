@@ -27,7 +27,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupError;
@@ -60,7 +59,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	private static final String DIALOG_TYPE_KEY = "dialog_type_key";
 	private static final String CHANGES_VISIBLE_KEY = "changes_visible_key";
 
-	private OsmandApplication app;
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
@@ -68,7 +66,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 
 	private LoginDialogType dialogType;
 	private boolean changesVisible;
-	private boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -86,10 +83,8 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = !requireMyApplication().getSettings().isLightContent();
 
 		if (savedInstanceState != null) {
 			changesVisible = savedInstanceState.getBoolean(CHANGES_VISIBLE_KEY);

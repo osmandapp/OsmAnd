@@ -1032,8 +1032,6 @@
     <string name="track_recording_will_be_continued">Perekaman akan dilanjutkan.</string>
     <string name="copy_poi_name">Salin nama POI</string>
     <string name="quick_action_show_hide_title">Tampilkan/sembunyikan</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Sembunyikan batasan cagar alam, kawasan lindung, dan taman nasional.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Batasan alam</string>
     <string name="trip_recording_save_and_continue">Simpan dan lanjut</string>
     <string name="lost_data_warning">Seluruh data yang tidak disimpan akan hilang.</string>
     <string name="trip_recording_show_start_dialog_setting">Jika dinonaktifkan, perekaman akan dimulai tepat setelah mengetuk widget atau item menu, tanpa dialog konfirmasi.</string>
@@ -1331,7 +1329,6 @@
     <string name="global_app_settings">Pengaturan global aplikasi</string>
     <string name="general_settings_descr">Siapkan tampilan dan pengaturan umum untuk aplikasi.</string>
     <string name="general_settings">Umum</string>
-    <string name="index_settings">Kelola berkas-berkas peta</string>
     <string name="global_settings">Pengaturan Global</string>
     <string name="routing_settings_descr">Tetapkan pilihan untuk navigasi.</string>
     <string name="routing_settings">Navigasi</string>
@@ -3194,7 +3191,7 @@
     <string name="lang_th">Thai</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Jangan pergi offpiste</string>
     <string name="plugin_wikipedia_description">Dapatkan info tentang tempat menarik dari Wikipedia, panduan saku offline yang menampilkan artikel tentang tempat dan tujuan.</string>
-    <string name="quick_action_remove_next_destination">Hapus titik tujuan terdekat</string>
+    <string name="quick_action_remove_next_destination">Hapus titik tujuan berikutnya</string>
     <string name="speed_cameras_removed_descr">Perangkat ini tidak memiliki kamera kecepatan.</string>
     <string name="nm">nmi</string>
     <string name="lang_is">Islandia</string>
@@ -4001,7 +3998,7 @@
     <string name="live_update_frequency_week_variant">Pembaruan peta akan diperiksa setiap minggu.</string>
     <string name="transfers_size">%1$d transfer</string>
     <string name="topo_render_descr">Untuk hiking, trekking, dan bersepeda alam. Dapat dibaca di luar ruangan. Jalan yang kontras dan objek alami, jenis rute yang berbeda, opsi garis kontur lanjutan, detail tambahan. Menyesuaikan Integritas permukaan membedakan kualitas jalan. Tidak ada mode malam.</string>
-    <string name="default_render_descr">Gaya penggunaan umum. Kota padat ditampilkan dengan bersih. Menampilkan garis kontur, rute, kualitas permukaan, pembatasan akses, perisai jalan, perenderan jalur sesuai dengan skala SAC, item olahraga arung.</string>
+    <string name="default_render_descr">Gaya penggunaan umum. Kota padat ditampilkan dengan bersih. Menampilkan garis kontur, rute, kualitas permukaan, pembatasan akses, perisai jalan, perenderan jalur sesuai dengan skala SAC/CAI, item olahraga arung.</string>
     <string name="touring_view_render_descr">Gaya tur dengan kontras tinggi dan detail maksimum. Mencakup semua opsi gaya bawaan OsmAnd, sekaligus menampilkan sedetail mungkin, khususnya jalan, jalur, dan cara lain untuk bepergian. Perbedaan \"atlas tur\" yang jelas antara jenis jalan. Cocok untuk penggunaan siang, malam, dan luar ruangan.</string>
     <string name="access_smart_autoannounce">Pengumuman otomatis pintar</string>
     <string name="access_autoannounce_period">Periode pengumuman otomatis</string>
@@ -4164,8 +4161,6 @@
     <string name="time_to_destination_widget_desc">Widget menampilkan \"Waktu tiba\" atau \"Waktu tersisa untuk bepergian\" ke titik tujuan terakhir. Waktu selalu diperbarui saat navigasi dan sama dengan waktu rute dari lokasi saat ini.</string>
     <string name="time_to_intermediate_widget_desc">Widget menampilkan \"Waktu tiba\" atau \"Waktu tersisa untuk bepergian\" ke titik tujuan terakhir. Waktu selalu diperbarui saat navigasi, ketika titik perantara dilewati, waktunya akan diperbarui ke titik perantara berikut.</string>
     <string name="rendering_attr_depthContourWidth_description">Lebar garis kontur</string>
-    <string name="accessibility_2d_view_off">Tampilan 2.5D nonaktif</string>
-    <string name="accessibility_2d_view_on">Tampilan 2.5D aktif</string>
     <string name="download_complete">Unduhan selesai</string>
     <string name="clear_markers_history_q">Hapus semua riwayat penanda peta\?</string>
     <string name="osn_close_dialog_error">Tidak dapat menutup catatan.</string>
@@ -4473,8 +4468,8 @@
     <string name="rotate_map_manual_opt">Fiks (diputar secara manual)</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
-    <string name="routing_attr_avoid_sett_description">Menghindari batu bulat dan sett</string>
-    <string name="routing_attr_avoid_sett_name">Tidak ada batu bulat atau sett</string>
+    <string name="routing_attr_avoid_sett_description">Menghindari sett</string>
+    <string name="routing_attr_avoid_sett_name">Tidak ada sett</string>
     <string name="map_widget_target_distance_desc">Menampilkan jarak antara kamera dan lokasi sasaran.</string>
     <string name="map_widget_zoom_level_desc">Menampilkan tingkat perbesaran peta saat ini.</string>
     <string name="bg_service_screen_lock_toast">Layar terkunci</string>
@@ -4491,7 +4486,6 @@
     <string name="osmand_accessibility_description">Membuat fitur aksesibilitas perangkat tersedia langsung di OsmAnd. Ini memfasilitasi mis. menyesuaikan kecepatan bicara untuk suara teks kesuara, mengatur navigasi D-pad, menggunakan trackball untuk kontrol perbesaran, atau umpan balik teks ke suara, misalnya untuk mengumumkan posisi Anda secara otomatis.</string>
     <string name="map_markers_desc">Widget menampilkan jarak atau perkiraan waktu tiba (PWT) untuk dua penanda pertama di daftar penanda peta.</string>
     <string name="routing_attr_no_new_routing_name">TIdak ada aturan perutean v1.9</string>
-    <string name="shared_string_2_5_d_view">Tampilan 2.5D</string>
     <string name="unknown_location">Posisi belum diketahui.</string>
     <string name="keep_informing_never">Hanya secara manual (ketuk panah)</string>
     <string name="auto_follow_route_navigation_descr">Tengahkan tampilan peta secara otomatis hanya pada saat navigasi.</string>
@@ -4530,7 +4524,7 @@
     <string name="speak_descr">Atur pengumuman nama jalan, peringatan lalu lintas (pemberhentian paksa, polisi tidur), peringatan kamera kecepatan, dan batas kecepatan.</string>
     <string name="intermediate_items_sort_return">Urutan tujuan perantara yang dioptimalkan dalam perjalanan ke tujuan.</string>
     <string name="use_kalman_filter_compass_descr">Mengurangi kebisingan dalam pembacaan kompas tetapi menambahkan inersia.</string>
-    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine</string>
     <string name="rendering_attr_noAdminboundaries_description">Menekan tampilan batas wilayah (tingkat admin 5–9).</string>
     <string name="gps_not_available">Harap aktifkan GPS di pengaturan</string>
     <string name="gpx_monitoring_disabled_warn">Catat trek menggunakan widget GPX atau melalui pengaturan \'Perekaman perjalanan\'.</string>
@@ -4672,7 +4666,7 @@
     <string name="ending_point_too_far">Titik akhir terlalu jauh dari jalan terdekat.</string>
     <string name="recording_playing">Audio dari rekaman yang ditentukan sedang diputar.
 \n%1$s</string>
-    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC.</string>
+    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC/CAI.</string>
     <string name="non_optimal_route_calculation">Hitung kemungkinan rute yang tidak optimal untuk jarak jauh</string>
     <string name="osmand_extended_description_part2">Navigasi GPS
 \n - Pilih antara mode luring (tanpa biaya roaming saat Anda berada di luar negeri) atau daring (lebih cepat)
@@ -4973,8 +4967,6 @@
 \n
 \nSilakan mendukung peningkatan dengan menyediakan catatan kesalahan Anda.</string>
     <string name="rendering_attr_showMtbScale_description">Tampilkan trek berdasarkan skala MTB.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Tampilkan skala naik MTB</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Tampilkan jalur menurut skala naik MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Tampilkan skala MTB</string>
     <string name="mtb_scale">Skala MTB</string>
     <string name="mtb_imba">iMBA</string>
@@ -5136,8 +5128,7 @@
     <string name="rendering_value_defaultMedium_name">Bawaan (sedang)</string>
     <string name="proxy_port_max_warning">Nilai porta maksimum adalah %1$s</string>
     <string name="weather_download_error">Tidak dapat mengunduh ubin %1$s.</string>
-    <string name="external_device_forget_sensor_description">Sensor akan dihapus dari daftar.
-\nAnda dapat menyandingkan sensor ini lagi kapan pun.</string>
+    <string name="external_device_forget_sensor_description">Sensor akan dihapus dari daftar. Anda dapat menyandingkan sensor ini lagi kapan pun.</string>
     <string name="external_device_disconnected">Terputus</string>
     <string name="external_device_connected">Terhubung</string>
     <string name="external_device_menu_forget">Abaikan</string>
@@ -5157,4 +5148,77 @@
     <string name="external_device_characteristic_temperature">Suhu</string>
     <string name="external_device_forget_sensor">Abaikan sensor</string>
     <string name="external_device_low_battery">Baterai lemah</string>
+    <string name="nav_profile_confirm_delete">Apakah Anda yakin ingin menghapus \"%1$s\"\?</string>
+    <string name="external_device_details_information">Informasi</string>
+    <string name="external_device_details_connection">Koneksi</string>
+    <string name="is_imported">%1$s telah diimpor.</string>
+    <string name="file_already_exists_description">\"%1$s\". Sebuah berkas dengan nama itu sudah ada. Menggantikan akan menimpa semua perubahan yang dibuat dengan versi saat ini.</string>
+    <string name="external_device_details_received_data">Data yang diterima</string>
+    <string name="ant_plus_searching_text_description">Silakan pegang perangkat dengkat dengan sensor. Anda harus mengaktifkan sensor supaya OsmAnd dapat menemukannya.</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Sandingkan sensor ANT+</string>
+    <string name="learn_more_about_sensors_link">Pelajari lebih lanjut tentang sensor.</string>
+    <string name="file_already_exists">Berkas sudah ada</string>
+    <string name="external_device_details_battery">Baterai</string>
+    <string name="external_device_details_speed">Kecepatan</string>
+    <string name="external_device_details_total_distance">Jarak total</string>
+    <string name="external_device_details_distance">Jarak</string>
+    <string name="external_device_details_connect">Hubungkan</string>
+    <string name="external_device_details_pair">Sandingkan</string>
+    <string name="external_device_details_disconnect">Putuskan</string>
+    <string name="bluetooth_disconnected">Terputus, %s</string>
+    <string name="bluetooth_connected">Terhubung, %s</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Ditemukan: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth tidak didukung</string>
+    <string name="ble_search_again">Cari lagi</string>
+    <string name="ant_plus_nothing_found_text">Tidak dapat mencari sensor</string>
+    <string name="ant_plus_bluetooth_off_description">Nyalakan Bluetooth cari dan sandingkan sensor.</string>
+    <string name="ant_plus_searching_text">Mencari sensor</string>
+    <string name="ant_plus_help_title">Saya tidak tahu jenis sensor apa yang saya punya</string>
+    <string name="ant_plus_searching">Mencari</string>
+    <string name="ant_plus_pair_new_sensor">Sandingkan sensor baru</string>
+    <string name="ant_plus_open_settings">Buka pengaturan</string>
+    <string name="ant_plus_pair_new_sensor_ble">Sandingkan sensor Bluetooth LE</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Anda dapat menyandingkan sensor Bluetooth LE dan ANT+ dengan OsmAnd.</string>
+    <string name="ant_plus_nothing_found_description">Pastikan:
+\n– Bluetooth dinyalakan
+\n– Sensor diaktifkan
+\n– Perangkat ini di dekat sensor</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth dinonaktifkan</string>
+    <string name="search_track_by_name">Cari trek berdasarkan nama</string>
+    <string name="no_search_results">Tidak ada hasil</string>
+    <string name="number_of_tracks">%1$s trek</string>
+    <string name="rendering_attr_lightDetail_description">Bawaan: nama garis laut (karakter cahaya.grup.periode), pilih informasi tambahan di bagian 1 sampai 3 atau sektor karakter cahaya 1,2,3,4,5</string>
+    <string name="rendering_value_sectors_name">Sektor</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_name_only_name">Nama saja</string>
+    <string name="running_scds_device_name">Perangkat berjalan</string>
+    <string name="bicycle_scd_device_name">Perangkat sepeda</string>
+    <string name="no_bt_permission">Izin Bluetooth tidak diberikan</string>
+    <string name="shared_string_hand">Tangan</string>
+    <string name="shared_string_ear_lobe">Daun telinga</string>
+    <string name="shared_string_foot">Kaki</string>
+    <string name="rendering_attr_lightDetail_name">Detail cahaya</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="device_disconnected">%1$s terputus</string>
+    <string name="shared_string_finger">Jari</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="shared_string_wrist">Gelang tangan</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_small_name">Kecil</string>
+    <string name="device_connected">%1$s terhubung</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="shared_string_chest">Dada</string>
+    <string name="external_device_blood_pressure">Tekanan darah</string>
+    <string name="poi_categories">Kategori POI</string>
+    <string name="no_poi_for_category">POI tidak ditemukan</string>
+    <string name="map_2d_mode_action">Mode 2D</string>
+    <string name="visible_in_3d_mode">Terlihat dalam mode 3D</string>
+    <string name="map_3d_mode_action">Mode 3D</string>
+    <string name="map_3d_mode_hint">Ketuk lama pada tombol memungkinkan mengubah posisi tombol.</string>
+    <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
+    <string name="rendering_value_sacScale_name">Skala SAC</string>
+    <string name="rendering_value_caiScale_name">Skala CAI</string>
 </resources>

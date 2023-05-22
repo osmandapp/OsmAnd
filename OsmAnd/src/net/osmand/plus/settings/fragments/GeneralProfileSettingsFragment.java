@@ -34,6 +34,7 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.InputDevice;
 import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
@@ -56,7 +57,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
-		setup3DViewPref();
 		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
@@ -76,35 +76,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupTrackballForMovementsPref();
 
 		updateDialogControllerCallbacks();
-	}
-
-	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = (buttonView, isChecked) -> {
-		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		if (isChecked) {
-			getPreferenceManager().showDialog(externalInputDevice);
-			buttonView.setChecked(false);
-		} else {
-			if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
-				externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
-			} else {
-				buttonView.setChecked(true);
-			}
-		}
-	};
-
-	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
-		super.onBindPreferenceViewHolder(preference, holder);
-
-		String prefId = preference.getKey();
-		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
-			boolean checked = settings.EXTERNAL_INPUT_DEVICE.getModeValue(getSelectedAppMode()) != OsmandSettings.NO_EXTERNAL_DEVICE;
-
-			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
-			switchView.setOnCheckedChangeListener(null);
-			switchView.setChecked(checked);
-			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
-		}
 	}
 
 	private void setupAppThemePref() {
@@ -150,16 +121,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			uiPreference.setIcon(icon);
 			uiPreference.setSummary(compassMode.getTitleId());
 		}
-	}
-
-	private void setup3DViewPref() {
-		Drawable disabled = getContentIcon(R.drawable.ic_action_2_5d_view_disabled);
-		Drawable enabled = getActiveIcon(R.drawable.ic_action_2_5d_view_on);
-		Drawable icon = getPersistentPrefIcon(enabled, disabled);
-
-		SwitchPreferenceCompat enabled3DView = findPreference(settings.ENABLE_3D_VIEW.getId());
-		enabled3DView.setVisible(MultiTouchSupport.isTiltSupported(app));
-		enabled3DView.setIcon(icon);
 	}
 
 	private void setupPositionPlacementOnMapPref() {
@@ -302,19 +263,27 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupExternalInputDevicePref() {
-		ListPreferenceEx externalInputDevice = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		externalInputDevice.setSummary(R.string.sett_no_ext_input);
-		externalInputDevice.setEntries(new String[] {
-				getString(R.string.sett_generic_ext_input),
-				getString(R.string.sett_wunderlinq_ext_input),
-				getString(R.string.sett_parrot_ext_input)
-		});
+		ListPreferenceEx uiPreference = findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		uiPreference.setSummary(R.string.sett_no_ext_input);
+		uiPreference.setDescription(R.string.external_input_device_descr);
 
-		externalInputDevice.setEntryValues(new Integer[] {
-				OsmandSettings.GENERIC_EXTERNAL_DEVICE,
-				OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE,
-				OsmandSettings.PARROT_EXTERNAL_DEVICE}
-		);
+		InputDevice[] devices = InputDevice.values();
+		String[] entries = new String[devices.length];
+		Integer[] values = new Integer[devices.length];
+		for (int i = 0; i < devices.length; i++) {
+			InputDevice device = devices[i];
+			entries[i] = getString(device.getTitleId());
+			values[i] = device.getValue();
+		}
+		uiPreference.setEntries(entries);
+		uiPreference.setEntryValues(values);
+		uiPreference.setIcon(getExternalInputDeviceIcon());
+	}
+
+	private Drawable getExternalInputDeviceIcon() {
+		return settings.getSelectedInputDevice(getSelectedAppMode()) != InputDevice.NONE ?
+				getActiveIcon(R.drawable.ic_action_keyboard) :
+				getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
 
 	private void setupTrackballForMovementsPref() {

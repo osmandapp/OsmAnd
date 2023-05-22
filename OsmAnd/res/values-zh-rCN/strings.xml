@@ -532,7 +532,6 @@
     <string name="poi_context_menu_showdescription">显示 POI 描述。</string>
     <string name="fav_export_confirmation">已存在上次导出的收藏夹文件。是否要替换它？</string>
     <string name="routing_settings_descr">指定导航选项。</string>
-    <string name="index_settings">数据管理</string>
     <string name="general_settings_descr">配置应用的显示与公用设置。</string>
     <string name="global_app_settings">应用程序全局设置</string>
     <string name="download_files_not_enough_space">可用空间不足以下载 %1$s MB (可用空间：%2$s)。</string>
@@ -3519,7 +3518,6 @@
     <string name="copy_poi_name">复制兴趣点名称</string>
     <string name="quick_action_show_hide_title">显示/隐藏</string>
     <string name="shared_string_interval">间隔</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隐藏自然保护区、保护区和国家公园边界。</string>
     <string name="track_has_no_altitude">轨迹不包含高度数据。</string>
     <string name="track_has_no_speed">轨迹不包含速度数据。</string>
     <string name="select_another_colorization">请选择另一种着色类型。</string>
@@ -4386,7 +4384,6 @@
     <string name="compass_click_desc">点击指南针以切换地图方向模式。</string>
     <string name="switch_widget_mode_desc">轻按小工具可切换模式。</string>
     <string name="side_marker_eta">预计的到达时间</string>
-    <string name="accessibility_2d_view_off">2.5D 视图关闭</string>
     <string name="download_complete">下载完成</string>
     <string name="marker_1st">第一个标记</string>
     <string name="goods_delivery_desc_3">仅适用于不超过 3.5 吨的送货卡车。</string>
@@ -4396,7 +4393,6 @@
     <string name="transport_hazmat_no_desc">道路和隧道可能会限制危险材料的运输。</string>
     <string name="transport_hazmat_title">危险品运输</string>
     <string name="calculate_online_altitude_descr">基于卫星图像和数字高程模型，在 OsmAnd 服务器上在线计算高程。与设备记录的高度的差异可以用作高程校正。</string>
-    <string name="accessibility_2d_view_on">2.5D 视图开启</string>
     <string name="compass_always_hidden">始终隐藏</string>
     <string name="compass_always_visible">始终可见</string>
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
@@ -4639,7 +4635,6 @@
     <string name="quick_action_current_location_widget_descr">用于在地图上显示或隐藏当前位置的小工具。</string>
     <string name="distance_by_tap_use_description">轻按地图查看您当前位置与点击点之间的距离。
 \n用两根手指在地图上同时轻按以查看单击点之间的距离</string>
-    <string name="shared_string_2_5_d_view">2.5D 视图</string>
     <string name="calculating_altitude">正在计算海拔</string>
     <string name="shared_string_speed">速度</string>
     <string name="map_widget_camera_tilt_desc">显示透视模式下的相机倾斜角度。默认为90°（无倾斜）。</string>
@@ -5096,4 +5091,7 @@
     <string name="external_device_forget_sensor">遗忘传感器</string>
     <string name="external_device_forget_sensor_description">传感器将从列表中移除。你可以稍后重新和该传感器配对。</string>
     <string name="external_device_details_pair">配对</string>
+    <string name="is_imported">%1$s 已导入。</string>
+    <string name="file_already_exists">文件已存在</string>
+    <string name="nav_profile_confirm_delete">您确定要删除“%1$s”吗？</string>
 </resources>

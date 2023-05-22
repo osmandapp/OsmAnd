@@ -107,7 +107,6 @@
     <string name="routing_settings">Navigace</string>
     <string name="routing_settings_descr">Určit možnosti navigace.</string>
     <string name="global_settings">Obecná nastavení</string>
-    <string name="index_settings">Spravovat mapové soubory</string>
     <string name="index_settings_descr">Stáhnout a spravovat off-line mapy uložené ve vašem zařízení.</string>
     <string name="general_settings">Obecné</string>
     <string name="general_settings_descr">Nastavení zobrazení a dalších společných parametrů aplikace.</string>
@@ -4018,8 +4017,6 @@
     <string name="track_has_no_altitude">Stopa neobsahuje údaje o nadmořské výšce.</string>
     <string name="track_has_no_speed">Stopa neobsahuje údaje o rychlosti.</string>
     <string name="select_another_colorization">Vyberte prosím jiný typ obarvení.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skrýt hranice přírodních rezervací, chráněných území a národních parků.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Hranice přírody</string>
     <string name="trip_recording_logging_interval_info">Interval záznamu nastaví, jak často bude OsmAnd zjišťovat aktuální polohu.</string>
     <string name="trip_recording_save_and_continue">Uložit a pokračovat</string>
     <string name="lost_data_warning">Všechna neuložená data budou ztracena.</string>
@@ -4770,7 +4767,6 @@
     <string name="location_simulation_speedup">Zrychlení simulace</string>
     <string name="ant_go_to_store">Přejít do obchodu</string>
     <string name="how_to_use">Způsob použití:</string>
-    <string name="shared_string_2_5_d_view">2.5 D pohled</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Žádné preference</string>
     <string name="goods_delivery_desc_3">Platí pouze pro dodávkové vozy o hmotnosti do 3,5 tuny.</string>
     <string name="rendering_attr_horse_scale_impossible_name">Nemožné</string>
@@ -4912,8 +4908,6 @@
     <string name="compass_always_visible">Vždy viditelný</string>
     <string name="compass_click_desc">Tip: Klepnutím na nástroj kompasu přepněte režim orientace mapy.</string>
     <string name="compass_desc">Ukazuje směr k severu.</string>
-    <string name="accessibility_2d_view_off">2,5D zobrazení vypnuto</string>
-    <string name="accessibility_2d_view_on">2,5D zobrazení zapnuto</string>
     <string name="download_complete">Stahování dokončeno</string>
     <string name="marker_2nd">Druhá značka</string>
     <string name="switch_widget_mode_desc">Klepnutím na nástroj přepnete režimy.</string>

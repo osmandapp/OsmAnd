@@ -62,6 +62,8 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		mainLl.setOrientation(LinearLayout.VERTICAL);
 		mainLl.addView(appBar);
 		mainLl.addView(webView);
+		mainLl.setClickable(true);
+		mainLl.setFocusable(true);
 
 		return mainLl;
 	}

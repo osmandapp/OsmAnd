@@ -302,7 +302,6 @@
     <string name="poi_parking_fee_no">رسوم وقوف السيارات: لا</string>
     <string name="poi_parking_fee_yes">رسوم وقوف السيارات: نعم</string>
     <string name="poi_truck_no">شاحنة: لا</string>
-    <string name="poi_truck_yes">شاحنة: نعم</string>
     <string name="poi_scooter_no">سكوتر: لا</string>
     <string name="poi_scooter_yes">سكوتر: نعم</string>
     <string name="poi_bicycle_no">الدراجة: لا</string>
@@ -346,7 +345,6 @@
     <string name="poi_liaison_representative_office">مكتب تمثيلي</string>
     <string name="poi_liaison_liaison_office">مكتب</string>
     <string name="poi_car_no">السيارة: لا</string>
-    <string name="poi_car_yes">السيارة: نعم</string>
     <string name="poi_socket_as3112_output">المقبس: AS / NZS 3112: الإخراج</string>
     <string name="poi_socket_as3112_current">المقبس: AS / NZS 3112: التيار</string>
     <string name="poi_socket_as3112">المقبس: AS / NZS 3112</string>

@@ -375,7 +375,6 @@
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
     <string name="routing_settings_descr">Indstillinger for navigation.</string>
     <string name="global_settings">Globale indstillinger</string>
-    <string name="index_settings">Administrer kortfiler</string>
     <string name="general_settings">Generelt</string>
     <string name="general_settings_descr">Konfigurer visning og generelle indstillinger.</string>
     <string name="global_app_settings">Globale app-indstillinger</string>
@@ -1230,8 +1229,8 @@
     <string name="rendering_attr_subwayMode_name">Metroruter</string>
     <string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
-    <string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skalaen.</string>
+    <string name="rendering_attr_alpineHiking_name">Alpin vandreskala</string>
+    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC/CAI-skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandreruter</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC-spor.</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
@@ -2322,7 +2321,7 @@
 \n • Mellemøsten: **
 \n • Afrika: **
 \n • Antarktis: *
-\n De fleste lande i verden kan hentes!
+\n De fleste lande i verden kan hentes
 \n Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …
 \n</string>
     <string name="fonts_header">Skrifttyper for kort</string>
@@ -2728,7 +2727,7 @@
     <string name="ski_map_render_descr">Til skiløb. Viser pister, skilifte, cross country-spor, etc. Dæmper sekundære kortobjekter.</string>
     <string name="light_rs_render_descr">Enkel stil til kørsel. Skånsom for øjnene i nat-tilstand, højdekurver, veje med kontrast i orange, dæmper sekundære kortobjekter.</string>
     <string name="topo_render_descr">Til vandring, gåture og cykling i naturen. God læsbarhed udendørs. Kontrast mellem veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, ekstra detaljer. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
-    <string name="default_render_descr">Stilart til almindelig brug. Tæt bebyggede byer vises klart. Højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting (sport) elementer.</string>
+    <string name="default_render_descr">Stilart til almindelig brug. Tæt bebyggede byer vises klart. Højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC/CAI-skalaen, rafting-elementer (vandsport).</string>
     <string name="touring_view_render_descr">Touring-stilart med høj kontrast og maksimal detalje. Indeholder alle indstillingsmuligheder fra OsmAnd-standardstilen, mens der vises så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. Klar \"touring atlas\" sondring mellem alle forskellige vejtyper. Velegnet til dag, nat og udendørsbrug.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
     <string name="off_road_render_descr">Til off-road kørsel baseret på \'Topo\'-stilen. Velegnet til brug med grønne satellitbilleder som underlejringskort. Reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter.</string>
@@ -2889,8 +2888,8 @@
     <string name="rendering_attr_highway_class_state_road_name">Statsvej</string>
     <string name="rendering_attr_highway_class_service_name">Service</string>
     <string name="rendering_attr_highway_class_steps_name">Trin</string>
-    <string name="routing_attr_avoid_sett_name">Ingen brosten eller natursten</string>
-    <string name="routing_attr_avoid_sett_description">Undgår brosten og natursten</string>
+    <string name="routing_attr_avoid_sett_name">Ingen brosten</string>
+    <string name="routing_attr_avoid_sett_description">Undgår brosten</string>
     <string name="shared_string_degrees">Grader</string>
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Enhed for vinkelmåling</string>
@@ -3568,7 +3567,7 @@
     <string name="details_dialog_decr">Vis eller skjul yderligere kort-detaljer</string>
     <string name="shared_string_night_map">Natkort</string>
     <string name="add_online_source">Tilføj onlinekilde</string>
-    <string name="quick_action_remove_next_destination">Slet nærmeste destinationspunkt</string>
+    <string name="quick_action_remove_next_destination">Slet næste destinationspunkt</string>
     <string name="use_volume_buttons_as_zoom">Lydstyrkeknapper som zoom</string>
     <string name="please_provide_point_name_error">Angiv et navn til punktet</string>
     <string name="search_download_wikipedia_maps">Hent Wikipedia-kort</string>
@@ -3849,8 +3848,6 @@
     <string name="on_pause">På pause</string>
     <string name="map_widget_distance_by_tap">Afstand ved tryk</string>
     <string name="live_update_delete_updates_msg">Slet alle %s liveopdateringer\?</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul afgrænsninger for naturreservater, beskyttede områder og nationalparker.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrænser</string>
     <string name="trip_recording_logging_interval_info">Logningsintervallet angiver den tidsperiode, hvor OsmAnd anmoder om de aktuelle positionsdata.</string>
     <string name="trip_recording_save_and_continue">Gem og fortsæt</string>
     <string name="lost_data_warning">Alle ikke-gemte data går tabt.</string>
@@ -4460,7 +4457,6 @@
     <string name="gps_filter_precision">GPS-præcision</string>
     <string name="gps_filter_smoothing">Udjævning</string>
     <string name="save_as_copy">Gem som kopi</string>
-    <string name="ltr_or_rtl_combine">%1$s %2$s</string>
     <string name="gps_filter_actions_description">OsmAnd vil anvende ændringerne på sporet uden at opdatere filen. Du kan gemme ændringer manuelt.</string>
     <string name="gps_filter_smoothing_desc">Indstil afstandsgrænsen mellem punkter.
 \nSporpunkter, der er ikke er mindst denne afstand fra det sidste synlige punkt, skjules.
@@ -4721,12 +4717,10 @@
     <string name="goods_delivery_desc_3">Gælder kun for varevogne på højst 3,5 tons.</string>
     <string name="goods_delivery_desc">Der kan være restriktioner for varebiler på visse veje.</string>
     <string name="routing_attr_goods_restrictions_name">Varelevering</string>
-    <string name="accessibility_2d_view_off">2.5D-visning slået fra</string>
-    <string name="accessibility_2d_view_on">2.5D-visning slået til</string>
     <string name="download_complete">Download fuldført</string>
     <string name="auto_backup_title">Automatisk sikkerhedskopiering</string>
     <string name="duplacate_widget_added_snackbar">En modul-dublet tilføjes listen.</string>
-    <string name="shared_string_duplicate">Dublet</string>
+    <string name="shared_string_duplicate">Duplikér</string>
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
     <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du starte en videooptagelse.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
@@ -4782,7 +4776,6 @@
     <string name="how_to_use">Brugervejledning:</string>
     <string name="distance_by_tap_use_description">Tryk på kortet for at få vist afstanden mellem din nuværende placering og det punkt, du har trykket på.
 \nTryk med 2 fingre på kortet for at få vist afstanden mellem de klikkede punkter</string>
-    <string name="shared_string_2_5_d_view">2.5 D-visning</string>
     <string name="shared_string_large">Stor</string>
     <string name="rotate_map_manual_opt">Fast (manuelt roteret)</string>
     <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
@@ -4975,8 +4968,6 @@
     <string name="cloud_layer">Skylag</string>
     <string name="rendering_attr_showMtbScale_name">Vis MTB-skala</string>
     <string name="rendering_attr_showMtbScale_description">Vis spor efter deres MTB-skala.</string>
-    <string name="rendering_attr_showMtbScaleUphill_name">Vis MTB-skala op ad bakke</string>
-    <string name="rendering_attr_showMtbScaleUphill_description">Vis spor efter MTB-skala op ad bakke.</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">International Mountain Bicycling Association</string>
     <string name="mtb_segment_classification">Segmentklassificering</string>
@@ -5195,4 +5186,39 @@
     <string name="file_already_exists_description">\"%1$s\". Der findes allerede en fil med dette navn. Hvis den erstattes, overskrives alle ændringer, der er foretaget med den aktuelle version.</string>
     <string name="nav_profile_confirm_delete">Er du sikker på, at du vil slette \"%1$s\"\?</string>
     <string name="is_imported">%1$s importeres.</string>
+    <string name="no_search_results">Ingen resultater</string>
+    <string name="search_track_by_name">Søg spor efter navn</string>
+    <string name="number_of_tracks">%1$s spor</string>
+    <string name="device_connected">%1$s oprettede forbindelse</string>
+    <string name="running_scds_device_name">Løbeenhed</string>
+    <string name="bicycle_scd_device_name">Cykelenhed</string>
+    <string name="external_device_blood_pressure">Blodtryk</string>
+    <string name="no_bt_permission">Bluetooth-tilladelse er ikke givet</string>
+    <string name="shared_string_chest">Bryst</string>
+    <string name="shared_string_wrist">Håndled</string>
+    <string name="shared_string_finger">Finger</string>
+    <string name="shared_string_hand">Hånd</string>
+    <string name="shared_string_ear_lobe">Øreflip</string>
+    <string name="shared_string_foot">Fod</string>
+    <string name="device_disconnected">%1$s afbrød forbindelsen</string>
+    <string name="rendering_attr_lightDetail_name">Lysdetalje</string>
+    <string name="rendering_attr_lightDetail_description">Standard: sømærke navn (lystegn.gruppe.periode), vælg yderligere oplysninger om sektor 1 til 3 eller sektor 1,2,3,4,5 lystegn</string>
+    <string name="rendering_value_sectors_name">Sektorer</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_small_name">Lille</string>
+    <string name="rendering_value_name_only_name">Kun navn</string>
+    <string name="beats_per_minute_short">spm</string>
+    <string name="poi_categories">IP-kategorier</string>
+    <string name="no_poi_for_category">IP ikke fundet</string>
+    <string name="map_3d_mode_action">3D-tilstand</string>
+    <string name="map_3d_mode_hint">Et langt tryk på knappen gør det muligt at ændre knappens position.</string>
+    <string name="map_3d_mode_description">Berør kortet med to fingre, og bevæg dem op og ned for at justere kortets hældning.</string>
+    <string name="map_2d_mode_action">2D-tilstand</string>
+    <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
+    <string name="rendering_value_sacScale_name">SAC-skala</string>
+    <string name="rendering_value_caiScale_name">CAI-skala</string>
 </resources>

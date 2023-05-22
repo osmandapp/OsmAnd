@@ -122,7 +122,7 @@ public class OsmAndLocationSimulation {
 				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
 				builder.setView(view);
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+					boolean nightMode1 = app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
 					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
 						startAnimationThread(app, result[0], 0, true, speedup.getValue() + 1);
 						if (runnable != null) {

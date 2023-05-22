@@ -22,12 +22,10 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.IndexConstants;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -42,8 +40,6 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 
 	public static final String TRACK_FILE_NAME = "track_file_name";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private OsmAndLocationSimulation simulation;
 
 	private ImageView trackIcon;
@@ -59,7 +55,6 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	@Nullable
 	private GPXFile gpxFile;
 
-	private boolean nightMode;
 	private boolean usedOnMap;
 	private LocationSimulationListener simulationListener;
 
@@ -74,11 +69,14 @@ public class SimulatePositionFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return usedOnMap;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		simulation = app.getLocationProvider().getLocationSimulation();
 
 		if (simulation.isRouteAnimating() && gpxFile == null) {

@@ -1,21 +1,22 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DATE_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DATE_DESCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DISTANCE_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DISTANCE_DESCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DURATION_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.DURATION_DESCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.LAST_MODIFIED;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_ASCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NAME_DESCENDING;
-import static net.osmand.plus.configmap.tracks.TracksSortMode.NEAREST;
+import static net.osmand.plus.settings.enums.TracksSortMode.DATE_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DATE_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DURATION_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.DURATION_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
+import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,15 +29,15 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.TrackTab;
-import net.osmand.plus.configmap.tracks.TracksSortMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -66,10 +67,11 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private final TextView description;
 	private final ImageView imageView;
 	private final CompoundButton checkbox;
+	private final View menuButton;
 	private final View divider;
 	private final ImageView directionIcon;
 
-	public TrackViewHolder(@NonNull View itemView, @NonNull TrackSelectionListener listener,
+	public TrackViewHolder(@NonNull View itemView, @Nullable TrackSelectionListener listener,
 	                       @NonNull UpdateLocationViewCache viewCache, boolean nightMode) {
 		super(itemView);
 		this.app = (OsmandApplication) itemView.getContext().getApplicationContext();
@@ -83,37 +85,55 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		description = itemView.findViewById(R.id.description);
 		directionIcon = itemView.findViewById(R.id.direction_icon);
 		checkbox = itemView.findViewById(R.id.checkbox);
-		imageView = itemView.findViewById(R.id.track_icon);
+		menuButton = itemView.findViewById(R.id.menu_button);
+		imageView = itemView.findViewById(R.id.icon);
 		divider = itemView.findViewById(R.id.divider);
 	}
 
-	public void bindView(@NonNull TrackTab trackTab, @NonNull TrackItem trackItem, boolean showDivider) {
+	public void bindView(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
+	                     boolean showDivider, boolean shouldShowFolder, boolean selectionMode) {
 		title.setText(trackItem.getName());
 
-		boolean selected = listener.isTrackItemSelected(trackItem);
+		boolean selected = listener != null && listener.isTrackItemSelected(trackItem);
 		checkbox.setChecked(selected);
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		UiUtilities.setupCompoundButton(nightMode, activeColor, checkbox);
-		itemView.setOnClickListener(v -> listener.onTrackItemsSelected(Collections.singleton(trackItem), !selected));
+		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
+		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), selectionMode);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
+
+		int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
+		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
+		AndroidUtils.setMargins(params, margin, 0, selectionMode ? 0 : margin, 0);
+
+		itemView.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.onTrackItemsSelected(Collections.singleton(trackItem), !selected);
+			}
+		});
+		menuButton.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.onTrackItemOptionsSelected(v, trackItem);
+			}
+		});
 		itemView.setOnLongClickListener(view -> {
-			listener.onTrackItemLongClick(view, trackItem);
+			if (listener != null) {
+				listener.onTrackItemLongClick(view, trackItem);
+			}
 			return true;
 		});
-
+		bindInfoRow(sortMode, trackItem, shouldShowFolder);
 		AndroidUiHelper.updateVisibility(divider, showDivider);
-		bindInfoRow(trackTab, trackItem);
 	}
 
-	public void bindInfoRow(@NonNull TrackTab trackTab, @NonNull TrackItem trackItem) {
+	public void bindInfoRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem, boolean shouldShowFolder) {
 		File file = trackItem.getFile();
 		GpxDataItem item = trackItem.getDataItem();
 		if (item != null) {
-			bindInfoRow(trackTab, trackItem, item);
+			bindInfoRow(sortMode, trackItem, item, shouldShowFolder);
 		} else if (file != null) {
 			item = gpxDbHelper.getItem(file, trackItem::setDataItem);
 			if (item != null) {
 				trackItem.setDataItem(item);
-				bindInfoRow(trackTab, trackItem, item);
+				bindInfoRow(sortMode, trackItem, item, shouldShowFolder);
 			}
 		} else if (trackItem.isShowCurrentTrack()) {
 			String width = settings.CURRENT_TRACK_WIDTH.get();
@@ -123,30 +143,31 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
-			buildDescriptionRow(trackTab, trackItem, analysis, null);
+			buildDescriptionRow(sortMode, trackItem, analysis, null, shouldShowFolder);
 		}
 	}
 
-	public void bindInfoRow(@NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GpxDataItem dataItem) {
+	public void bindInfoRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
+	                        @NonNull GpxDataItem dataItem, boolean shouldShowFolder) {
 		setupIcon(dataItem);
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		String cityName = dataItem.getNearestCityName();
-		buildDescriptionRow(trackTab, trackItem, analysis, cityName);
+		buildDescriptionRow(sortMode, trackItem, analysis, cityName, shouldShowFolder);
 	}
 
-	private void buildDescriptionRow(@NonNull TrackTab trackTab, @NonNull TrackItem item,
-	                                 @Nullable GPXTrackAnalysis analysis, @Nullable String cityName) {
-		TracksSortMode sortMode = trackTab.getSortMode();
+	private void buildDescriptionRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem item,
+	                                 @Nullable GPXTrackAnalysis analysis, @Nullable String cityName,
+	                                 boolean shouldShowFolder) {
 		if (analysis != null) {
 			SpannableStringBuilder builder = new SpannableStringBuilder();
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
-				appendNameDescription(builder, trackTab, item, analysis);
+				appendNameDescription(builder, item, analysis, shouldShowFolder);
 			} else if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
 				appendCreationTimeDescription(builder, analysis);
 			} else if (sortMode == DISTANCE_ASCENDING || sortMode == DISTANCE_DESCENDING) {
-				appendDistanceDescription(builder, trackTab, item, analysis);
+				appendDistanceDescription(builder, item, analysis, shouldShowFolder);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
-				appendDurationDescription(builder, trackTab, item, analysis);
+				appendDurationDescription(builder, item, analysis, shouldShowFolder);
 			} else if (sortMode == NEAREST) {
 				appendNearestDescription(builder, analysis, cityName);
 			} else if (sortMode == LAST_MODIFIED) {
@@ -170,14 +191,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		imageView.setImageDrawable(getTrackIcon(app, width, showArrows, trackColor));
 	}
 
-	private void appendNameDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
+	private void appendNameDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,
+	                                   @NonNull GPXTrackAnalysis analysis, boolean shouldShowFolder) {
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		if (analysis.isTimeSpecified()) {
 			builder.append(" • ");
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
-		appendFolderName(builder, trackTab, trackItem);
+		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
 	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
@@ -211,7 +233,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendPoints(builder, analysis);
 	}
 
-	private void appendDistanceDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
+	private void appendDistanceDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,
+	                                       @NonNull GPXTrackAnalysis analysis, boolean shouldShowFolder) {
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 		setupTextSpan(builder);
 
@@ -220,10 +243,11 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			appendDuration(builder, analysis);
 		}
 		appendPoints(builder, analysis);
-		appendFolderName(builder, trackTab, trackItem);
+		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
-	private void appendDurationDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
+	private void appendDurationDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,
+	                                       @NonNull GPXTrackAnalysis analysis, boolean shouldShowFolder) {
 		if (analysis.isTimeSpecified()) {
 			appendDuration(builder, analysis);
 			setupTextSpan(builder);
@@ -232,7 +256,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 
 		appendPoints(builder, analysis);
-		appendFolderName(builder, trackTab, trackItem);
+		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder,
@@ -270,8 +294,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		}
 	}
 
-	private void appendFolderName(@NonNull SpannableStringBuilder builder, @NonNull TrackTab trackTab, @NonNull TrackItem trackItem) {
-		String folderName = getFolderName(trackTab, trackItem);
+	private void appendFolderName(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, boolean shouldShowFolder) {
+		String folderName = getFolderName(trackItem, shouldShowFolder);
 		if (!Algorithms.isEmpty(folderName)) {
 			builder.append(" | ");
 			builder.append(Algorithms.capitalizeFirstLetter(folderName));
@@ -279,10 +303,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	@Nullable
-	private String getFolderName(@NonNull TrackTab trackTab, @NonNull TrackItem trackItem) {
+	private String getFolderName(@NonNull TrackItem trackItem, boolean shouldShowFolder) {
 		String folderName = null;
 		File file = trackItem.getFile();
-		if (trackTab.type.shouldShowFolder() && file != null) {
+		if (shouldShowFolder && file != null) {
 			String[] path = file.getAbsolutePath().split(File.separator);
 			folderName = path.length > 1 ? path[path.length - 2] : null;
 		}
@@ -296,10 +320,20 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public interface TrackSelectionListener {
-		boolean isTrackItemSelected(@NonNull TrackItem trackItem);
+		default boolean isTrackItemSelected(@NonNull TrackItem trackItem) {
+			return false;
+		}
 
-		void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected);
+		default void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
 
-		void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem);
+		}
+
+		default void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+
+		}
+
+		default void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
+
+		}
 	}
 }
