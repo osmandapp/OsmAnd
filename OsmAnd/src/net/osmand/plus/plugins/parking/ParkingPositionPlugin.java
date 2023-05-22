@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -414,7 +415,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		if (widgetType == PARKING) {
 			return new ParkingMapWidget(this, mapActivity);
 		}
@@ -424,7 +425,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-		MapWidget widget = createMapWidgetForParams(mapActivity, PARKING);
+		MapWidget widget = createMapWidgetForParams(mapActivity, PARKING, null);
 		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 

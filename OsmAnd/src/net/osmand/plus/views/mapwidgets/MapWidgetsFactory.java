@@ -127,7 +127,7 @@ public class MapWidgetsFactory {
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity);
 			default:
-				return PluginsHelper.createMapWidget(mapActivity, widgetType);
+				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId);
 		}
 	}
 

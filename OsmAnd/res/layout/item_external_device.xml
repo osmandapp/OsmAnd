@@ -62,18 +62,32 @@
 
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/menu_icon"
-                    android:layout_width="@dimen/icon_size_double"
-                    android:layout_height="@dimen/icon_size_double"
-                    android:layout_gravity="center"
-                    android:scaleType="center"
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/content_padding"
                     android:layout_marginVertical="@dimen/content_padding_small"
-                    android:src="@drawable/ic_overflow_menu_white"
-                    android:tint="?attr/secondary_icon_color"
-                    android:visibility="gone"/>
+                    >
 
+                    <RadioButton
+                        android:id="@+id/selection_mark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:saveEnabled="false"
+                        android:visibility="gone"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/menu_icon"
+                        android:layout_width="@dimen/icon_size_double"
+                        android:layout_height="@dimen/icon_size_double"
+                        android:layout_gravity="center"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_overflow_menu_white"
+                        android:tint="?attr/secondary_icon_color"
+                        android:visibility="gone"/>
+                </FrameLayout>
 
             </LinearLayout>
 

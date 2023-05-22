@@ -150,7 +150,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		if (widgetType == WidgetType.MAPILLARY) {
 			return new MapillaryMapWidget(mapActivity);
 		}
@@ -235,7 +235,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY);
+		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY, null);
 		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 

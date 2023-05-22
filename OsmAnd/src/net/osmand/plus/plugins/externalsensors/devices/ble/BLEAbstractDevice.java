@@ -160,18 +160,18 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 					} else if (bondState == BOND_BONDING) {
 						LOG.debug("Waiting for bonding to complete");
 					}
-					state = DeviceConnectionState.CONNECTED;
+					setCurrentState(DeviceConnectionState.CONNECTED);
 				} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 					fireDeviceDisconnectedEvent();
 					gatt.close();
 					bluetoothGatt = null;
-					state = DeviceConnectionState.DISCONNECTED;
+					setCurrentState(DeviceConnectionState.DISCONNECTED);
 				}
 			} else {
 				fireDeviceDisconnectedEvent();
 				gatt.close();
 				bluetoothGatt = null;
-				state = DeviceConnectionState.DISCONNECTED;
+				setCurrentState(DeviceConnectionState.DISCONNECTED);
 			}
 		}
 
@@ -181,6 +181,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			if (status == 129) {
 				LOG.error("Service discovery failed");
 				gatt.disconnect();
+				setCurrentState(DeviceConnectionState.DISCONNECTED);
 				return;
 			}
 			if (status == BluetoothGatt.GATT_SUCCESS) {
@@ -254,7 +255,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 			if (bluetoothGatt != null) {
 				if (bluetoothGatt.connect()) {
-					state = DeviceConnectionState.CONNECTING;
+					setCurrentState(DeviceConnectionState.CONNECTING);
 					return true;
 				} else {
 					return false;
@@ -270,7 +271,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
 			LOG.debug("Trying to create new connection");
-			state = DeviceConnectionState.CONNECTING;
+			setCurrentState(DeviceConnectionState.CONNECTING);
 		}
 		return true;
 	}
@@ -278,7 +279,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	@Override
 	public boolean disconnect() {
-		state = DeviceConnectionState.DISCONNECTED;
+		setCurrentState(DeviceConnectionState.DISCONNECTED);
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
 			LOG.debug("BluetoothAdapter not initialized");
 			return false;

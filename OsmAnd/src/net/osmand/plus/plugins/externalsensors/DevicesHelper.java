@@ -188,6 +188,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		public void onScanResult(int callbackType, ScanResult result) {
 			super.onScanResult(callbackType, result);
 			BluetoothDevice device = result.getDevice();
+			ScanRecord record = result.getScanRecord();
+			LOG.debug("BLE scan result " + device.getAddress() + "; name " + device.getName() + "; " + record.getServiceUuids());
 			if (device.getName() != null) {
 				addScanResult(result);
 			}
@@ -316,6 +318,16 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			}
 		}
 		return res;
+	}
+
+	@Nullable
+	AbstractDevice<?> getPairedDeviceById(@NonNull String deviceId) {
+		for (AbstractDevice<?> device : getDevices()) {
+			if (isDevicePaired(device) && deviceId.equals(device.getDeviceId())) {
+				return device;
+			}
+		}
+		return null;
 	}
 
 	@NonNull
@@ -547,6 +559,15 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			}
 			if (!requestBLE()) {
 				app.showShortToastMessage("Bluetooth isnt available");
+				return;
+			}
+
+			if(bleScanner == null){
+				initBLE();
+			}
+
+			if(bleScanner == null){
+				app.showShortToastMessage("Can't initialize ble");
 				return;
 			}
 

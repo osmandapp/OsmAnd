@@ -20,15 +20,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -45,10 +46,12 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	private final DevicesHelper devicesHelper;
 	private ScanDevicesListener scanDevicesListener;
+	private OsmandSettings settings;
 
 	public ExternalSensorsPlugin(OsmandApplication app) {
 		super(app);
 		devicesHelper = new DevicesHelper(app, this);
+		settings = app.getSettings();
 	}
 
 	@Override
@@ -108,6 +111,11 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		return devicesHelper.getPairedDevices();
 	}
 
+	@Nullable
+	public AbstractDevice<?> getPairedDeviceById(String deviceId) {
+		return devicesHelper.getPairedDeviceById(deviceId);
+	}
+
 	@NonNull
 	public List<AbstractDevice<?>> getUnpairedDevices() {
 		return devicesHelper.getUnpairedDevices();
@@ -159,14 +167,39 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos,
 	                          @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-		for (AbstractDevice<?> device : getDevices()) {
-			for (AbstractSensor sensor : device.getSensors()) {
-				for (SensorWidgetDataFieldType fieldType : sensor.getSupportedWidgetDataFieldTypes()) {
-					MapWidget widget = new SensorTextWidget(mapActivity, sensor, fieldType);
-					widgetsInfos.add(creator.createWidgetInfo(widget));
-				}
-			}
+
+		MapWidget heartRateWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.HEART_RATE);
+		widgetsInfos.add(creator.createWidgetInfo(heartRateWidget));
+
+		MapWidget bikePowerWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_POWER);
+		widgetsInfos.add(creator.createWidgetInfo(bikePowerWidget));
+
+		MapWidget bikeCadenceWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_SPEED);
+		widgetsInfos.add(creator.createWidgetInfo(bikeCadenceWidget));
+
+		MapWidget bikeSpeedWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_CADENCE);
+		widgetsInfos.add(creator.createWidgetInfo(bikeSpeedWidget));
+
+		MapWidget bikeDistanceWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_DISTANCE);
+		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
+	}
+
+	@Override
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
+		ApplicationMode appMode = settings.getApplicationMode();
+		switch (widgetType) {
+			case ANT_HEART_RATE:
+				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.HEART_RATE, customId);
+			case ANT_BICYCLE_POWER:
+				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_POWER, customId);
+			case ANT_BICYCLE_CADENCE:
+				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_CADENCE, customId);
+			case ANT_BICYCLE_SPEED:
+				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_SPEED, customId);
+			case ANT_BICYCLE_DISTANCE:
+				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_DISTANCE, customId);
 		}
+		return null;
 	}
 
 	public CommonPreference<Boolean> registerBooleanPref(@NonNull String prefId, boolean defValue) {

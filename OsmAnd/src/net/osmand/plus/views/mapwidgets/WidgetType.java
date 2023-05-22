@@ -31,6 +31,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidge
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkersBarWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.RadiusRulerWidgetSettingsFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
@@ -272,6 +273,13 @@ public enum WidgetType {
 			return new AverageSpeedWidgetSettingFragment();
 		} else if (this == SUNRISE || this == SUNSET) {
 			return new SunriseSunsetSettingsFragment();
+		} else if (this == ANT_HEART_RATE ||
+				this == ANT_BICYCLE_POWER ||
+				this == ANT_BICYCLE_CADENCE ||
+				this == ANT_BICYCLE_SPEED ||
+				this == ANT_BICYCLE_DISTANCE ||
+				this == RSSI) {
+			return new SensorWidgetSettingFragment();
 		}
 		return null;
 	}

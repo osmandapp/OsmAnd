@@ -187,22 +187,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
-		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE);
+		MapWidget distanceWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DISTANCE, null);
 		widgetsInfos.add(creator.createWidgetInfo(distanceWidget));
 
-		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME);
+		MapWidget timeWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_TIME, null);
 		widgetsInfos.add(creator.createWidgetInfo(timeWidget));
 
-		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL);
+		MapWidget uphillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_UPHILL, null);
 		widgetsInfos.add(creator.createWidgetInfo(uphillWidget));
 
-		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL);
+		MapWidget downhillWidget = createMapWidgetForParams(mapActivity, TRIP_RECORDING_DOWNHILL, null);
 		widgetsInfos.add(creator.createWidgetInfo(downhillWidget));
 	}
 
 	@Nullable
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case TRIP_RECORDING_DISTANCE:
 				return new TripRecordingDistanceWidget(mapActivity);

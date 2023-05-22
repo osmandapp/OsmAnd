@@ -224,23 +224,23 @@ public class WeatherPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
-		MapWidget temperatureWidget = createMapWidgetForParams(mapActivity, WEATHER_TEMPERATURE_WIDGET);
+		MapWidget temperatureWidget = createMapWidgetForParams(mapActivity, WEATHER_TEMPERATURE_WIDGET, null);
 		if (temperatureWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(temperatureWidget));
 		}
-		MapWidget precipitationWidget = createMapWidgetForParams(mapActivity, WEATHER_PRECIPITATION_WIDGET);
+		MapWidget precipitationWidget = createMapWidgetForParams(mapActivity, WEATHER_PRECIPITATION_WIDGET, null);
 		if (precipitationWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(precipitationWidget));
 		}
-		MapWidget windWidget = createMapWidgetForParams(mapActivity, WEATHER_WIND_WIDGET);
+		MapWidget windWidget = createMapWidgetForParams(mapActivity, WEATHER_WIND_WIDGET, null);
 		if (windWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(windWidget));
 		}
-		MapWidget cloudsWidget = createMapWidgetForParams(mapActivity, WEATHER_CLOUDS_WIDGET);
+		MapWidget cloudsWidget = createMapWidgetForParams(mapActivity, WEATHER_CLOUDS_WIDGET, null);
 		if (cloudsWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(cloudsWidget));
 		}
-		MapWidget airPressureWidget = createMapWidgetForParams(mapActivity, WEATHER_AIR_PRESSURE_WIDGET);
+		MapWidget airPressureWidget = createMapWidgetForParams(mapActivity, WEATHER_AIR_PRESSURE_WIDGET, null);
 		if (airPressureWidget != null) {
 			widgetInfos.add(creator.createWidgetInfo(airPressureWidget));
 		}
@@ -248,7 +248,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	@Nullable
 	@Override
-	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case WEATHER_TEMPERATURE_WIDGET:
 				return new WeatherWidget(mapActivity, widgetType, WEATHER_BAND_TEMPERATURE);

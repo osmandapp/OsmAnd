@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
+    <string name="external_sensors_not_found">Sensors not found</string>
+    <string name="external_sensors_source_of_data">Source of data</string>
     <string name="rssi_widget_desc">Shows the RSSI level of your external device.</string>
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">This folder doesn\’t have any track yet.</string>

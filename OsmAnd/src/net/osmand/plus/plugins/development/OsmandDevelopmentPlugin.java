@@ -180,24 +180,24 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
-		MapWidget fpsWidget = createMapWidgetForParams(mapActivity, DEV_FPS);
+		MapWidget fpsWidget = createMapWidgetForParams(mapActivity, DEV_FPS, null);
 		widgetsInfos.add(creator.createWidgetInfo(fpsWidget));
 
-		MapWidget cameraTiltWidget = createMapWidgetForParams(mapActivity, DEV_CAMERA_TILT);
+		MapWidget cameraTiltWidget = createMapWidgetForParams(mapActivity, DEV_CAMERA_TILT, null);
 		widgetsInfos.add(creator.createWidgetInfo(cameraTiltWidget));
 
-		MapWidget cameraDistanceWidget = createMapWidgetForParams(mapActivity, DEV_CAMERA_DISTANCE);
+		MapWidget cameraDistanceWidget = createMapWidgetForParams(mapActivity, DEV_CAMERA_DISTANCE, null);
 		widgetsInfos.add(creator.createWidgetInfo(cameraDistanceWidget));
 
-		MapWidget zoomLevelWidget = createMapWidgetForParams(mapActivity, DEV_ZOOM_LEVEL);
+		MapWidget zoomLevelWidget = createMapWidgetForParams(mapActivity, DEV_ZOOM_LEVEL, null);
 		widgetsInfos.add(creator.createWidgetInfo(zoomLevelWidget));
 
-		MapWidget targetDistanceWidget = createMapWidgetForParams(mapActivity, DEV_TARGET_DISTANCE);
+		MapWidget targetDistanceWidget = createMapWidgetForParams(mapActivity, DEV_TARGET_DISTANCE, null);
 		widgetsInfos.add(creator.createWidgetInfo(targetDistanceWidget));
 	}
 
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case DEV_FPS:
 				return new FPSTextInfoWidget(mapActivity);

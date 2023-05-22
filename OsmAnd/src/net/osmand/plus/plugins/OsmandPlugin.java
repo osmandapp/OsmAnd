@@ -384,7 +384,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		return null;
 	}
 

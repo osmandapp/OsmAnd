@@ -25,7 +25,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	protected final String deviceId;
 	protected int batteryLevel = -1;
 	protected int rssi = -1;
-	protected DeviceConnectionState state = DeviceConnectionState.DISCONNECTED;
+	private DeviceConnectionState state = DeviceConnectionState.DISCONNECTED;
 	protected List<DeviceListener> listeners = new ArrayList<>();
 	protected List<T> sensors = new ArrayList<>();
 
@@ -43,6 +43,10 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 
 	public AbstractDevice(@NonNull String deviceId) {
 		this.deviceId = deviceId;
+	}
+
+	protected void setCurrentState(DeviceConnectionState newState) {
+		state = newState;
 	}
 
 	@NonNull

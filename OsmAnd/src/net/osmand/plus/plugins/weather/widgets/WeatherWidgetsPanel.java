@@ -63,11 +63,11 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 	}
 
 	private void createWidgets(@NonNull MapActivity activity) {
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET, null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET, null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET, null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET, null));
+		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET, null));
 	}
 
 	public void setSelectedDate(@Nullable Date date) {
