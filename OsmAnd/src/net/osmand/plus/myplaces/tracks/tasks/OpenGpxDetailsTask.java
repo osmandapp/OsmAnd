@@ -25,34 +25,24 @@ import java.util.List;
 public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplayItem> {
 
 	private final GpxDisplayHelper gpxDisplayHelper;
-	private final GPXInfo gpxInfo;
+	private final GPXFile gpxFile;
 
-	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GPXInfo gpxInfo) {
+	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile) {
 		super(activity);
-		this.gpxInfo = gpxInfo;
+		this.gpxFile = gpxFile;
 		this.gpxDisplayHelper = app.getGpxDisplayHelper();
 	}
 
 	@Nullable
 	@Override
 	protected GpxDisplayItem doInBackground(Void... voids) {
+		Track generalTrack = gpxFile.getGeneralTrack();
+
 		GpxDisplayGroup gpxDisplayGroup = null;
-		GPXFile gpxFile = null;
-		Track generalTrack = null;
-		if (gpxInfo.getGpxFile() == null) {
-			if (gpxInfo.getFile() != null) {
-				gpxFile = GPXUtilities.loadGPXFile(gpxInfo.getFile());
-			}
-		} else {
-			gpxFile = gpxInfo.getGpxFile();
-		}
-		if (gpxFile != null) {
-			generalTrack = gpxFile.getGeneralTrack();
-		}
 		if (generalTrack != null) {
 			gpxFile.addGeneralTrack();
 			gpxDisplayGroup = gpxDisplayHelper.buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
-		} else if (gpxFile != null && !gpxFile.tracks.isEmpty()) {
+		} else if (!gpxFile.tracks.isEmpty()) {
 			gpxDisplayGroup = gpxDisplayHelper.buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
 		}
 		List<GpxDisplayItem> items = null;

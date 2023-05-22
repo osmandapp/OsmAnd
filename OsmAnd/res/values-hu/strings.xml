@@ -1264,8 +1264,8 @@
     <string name="lang_sr">szerb (cirill betűs)</string>
     <string name="lang_zh_cn">kínai (egyszerűsített)</string>
     <string name="lang_zh_tw">kínai (hagyományos)</string>
-    <string name="rendering_attr_alpineHiking_name">Alpesi túra nehézségi szint (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Ösvények megjelenítése az SAC nehézségi skála szerint.</string>
+    <string name="rendering_attr_alpineHiking_name">Alpesi túra nehézségi szint</string>
+    <string name="rendering_attr_alpineHiking_description">Ösvények megjelenítése az SAC/CAI nehézségi skála szerint.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Túraútvonalak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
@@ -2612,7 +2612,7 @@
     <string name="light_rs_render_descr">Egyszerű vezetési stílus. Kellemes éjszakai mód, szintvonalak, kontrasztos narancsszínű utak, elhalványított másodlagos térképobjektumok.</string>
     <string name="topo_render_descr">Túrázáshoz és természetben történő kerékpározáshoz. Szabad téren is olvasható. Kontrasztos utak és természeti objektumok, különböző úttípusok, speciális szintvonalbeállítások, további részletek. A felület sértetlenségének kiigazítása láthatóbbá teszi az útminőséget. Éjszakai mód nincs.</string>
     <string name="touring_view_render_descr">Turisztikai stílus erős kontraszttal és a legtöbb részlettel. Tartalmazza az OsmAnd alapértelmezett stílus össze beállítását, miközben megjeleníti a lehető legtöbb részletet, különösen utakat, ösvényeket és más utazási útvonalakat. A „Turistaatlasz-szerű” stílus világos különbséget tesz az úttípusok között. Alkalmas nappali, éjszakai és szabad téri használatra is.</string>
-    <string name="default_render_descr">Általános felhasználású stílus. A sűrű városok világosan jelennek meg. Jellemzői a szintvonalak, az útvonalak, a felszínminőség, a használati korlátozások, útszámozások, vadvízisport-létesítmények. Az ösvények az SAC-skála szerint jelennek meg.</string>
+    <string name="default_render_descr">Általános felhasználású stílus. A sűrű városok világosan jelennek meg. Jellemzői a szintvonalak, az útvonalak, a felszínminőség, a használati korlátozások, útszámozások, ösvények SAC/CAI-skála szerint, vadvízi sportlétesítmények.</string>
     <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
     <string name="shared_string_dont">Nem</string>
     <string name="shared_string_do">Igen</string>
@@ -5200,4 +5200,11 @@
     <string name="rendering_value_sector5_name">Szektor 5</string>
     <string name="poi_categories">POI kategóriák</string>
     <string name="no_poi_for_category">POI nem található</string>
+    <string name="map_2d_mode_action">2D mód</string>
+    <string name="map_3d_mode_action">3D mód</string>
+    <string name="map_3d_mode_hint">A gomb hosszú érintése lehetővé teszi a gomb pozíciójának megváltoztatását.</string>
+    <string name="visible_in_3d_mode">Látható 3D módban</string>
+    <string name="map_3d_mode_description">Érintse meg a térképet két ujjal, és mozgassa fel és le a térkép dőlésszögének beállításához.</string>
+    <string name="rendering_value_caiScale_name">CAI skála</string>
+    <string name="rendering_value_sacScale_name">SAC skála</string>
 </resources>

@@ -392,7 +392,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	@SuppressLint("ClickableViewAccessibility")
 	private void addRouteCard(LinearLayout cardsContainer,
 	                          RouteInfoCard routeInfoCard) {
-		OsmandApplication app = requireMyApplication();
 		menuCards.add(routeInfoCard);
 		routeInfoCard.setListener(this);
 		cardsContainer.addView(routeInfoCard.build(app));
@@ -401,13 +400,11 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public Drawable getCollapseIcon(boolean collapsed) {
-		OsmandApplication app = requireMyApplication();
 		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up, R.color.description_font_and_bottom_sheet_icons);
 	}
 
 	private void buildSegmentItem(View view, TransportRouteResultSegment segment,
 								  TransportRouteResultSegment nextSegment, int[] startTime, double walkSpeed, double boardingTime) {
-		OsmandApplication app = requireMyApplication();
 		TransportRoute transportRoute = segment.route;
 		List<TransportStop> stops = segment.getTravelStops();
 		TransportStop startStop = stops.get(0);
@@ -569,7 +566,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void buildTransportRouteRow(@NonNull ViewGroup parent, TransportRouteResult routeResult, boolean showDivider) {
-		OsmandApplication app = requireMyApplication();
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		TargetPoint startPoint = targetPointsHelper.getPointToStart();
 		TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
@@ -594,7 +590,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private void buildStartItem(@NonNull View view, TargetPoint start, int[] startTime,
 								TransportRouteResultSegment segment, double walkSpeed) {
-		OsmandApplication app = requireMyApplication();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
 		LinearLayout imagesContainer = (LinearLayout) createImagesContainer(view.getContext());
@@ -652,12 +647,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void showRouteOnMap() {
-		OsmandApplication app = requireMyApplication();
 		if (transportCard == null) {
 			RouteCalculationResult route = app.getRoutingHelper().getRoute();
-			if (route != null) {
-				showRouteOnMap(route);
-			}
+			showRouteOnMap(route);
 		} else {
 			TransportRouteResult route = app.getTransportRoutingHelper().getCurrentRouteResult();
 			if (route != null) {
@@ -675,7 +667,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void showWalkingRouteOnMap(@Nullable TransportRouteResultSegment startSegment, @Nullable TransportRouteResultSegment endSegment) {
-		OsmandApplication app = requireMyApplication();
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(startSegment, endSegment);
 		if (walkingRouteSegment != null) {
 			showRouteOnMap(walkingRouteSegment);
@@ -691,7 +682,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void showRouteOnMap(@NonNull TransportRouteResult result) {
-		OsmandApplication app = requireMyApplication();
 		QuadRect rect = app.getTransportRoutingHelper().getTransportRouteRect(result);
 		if (rect != null) {
 			openMenuHeaderOnly();
@@ -700,7 +690,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void addWalkRouteIcon(LinearLayout container) {
-		OsmandApplication app = requireMyApplication();
 		ImageView walkLineImage = new ImageView(container.getContext());
 		walkLineImage.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.walk_route_item_light));
 		LinearLayout.LayoutParams walkImageLayoutParams = new LinearLayout.LayoutParams(dpToPx(10), dpToPx(14));
@@ -711,7 +700,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private void buildDestinationItem(@NonNull View view, TargetPoint destination, int[] startTime,
 									  TransportRouteResultSegment segment, double walkSpeed) {
-		OsmandApplication app = requireMyApplication();
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 
@@ -737,12 +725,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app));
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildWalkRow(infoContainer, spannable, imagesContainer, new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showWalkingRouteOnMap(segment, null);
-			}
-		});
+		buildWalkRow(infoContainer, spannable, imagesContainer, v -> showWalkingRouteOnMap(segment, null));
 		buildRowDivider(infoContainer, true);
 		addWalkRouteIcon(imagesContainer);
 
@@ -756,31 +739,23 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showLocationOnMap(destination.point);
-			}
-		});
+		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, v -> showLocationOnMap(destination.point));
 
 		((ViewGroup) view).addView(baseItemView);
 	}
 
 	@ColorInt
 	private int getActiveColor() {
-		OsmandApplication app = requireMyApplication();
 		return ContextCompat.getColor(app, ColorUtilities.getActiveColorId(isNightMode()));
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
-		OsmandApplication app = requireMyApplication();
 		return ColorUtilities.getPrimaryTextColor(app, isNightMode());
 	}
 
 	@ColorInt
 	protected int getSecondaryColor() {
-		OsmandApplication app = requireMyApplication();
 		return ContextCompat.getColor(app, R.color.description_font_and_bottom_sheet_icons);
 	}
 
@@ -797,12 +772,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -831,22 +803,19 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 			iconViewCollapse.setImageDrawable(getCollapseIcon(collapsableView.getContentView().getVisibility() == View.GONE));
 			llIconCollapse.addView(iconViewCollapse);
-			ll.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					LinearLayout contentView = (LinearLayout) collapsableView.getContentView();
-					if (contentView.getVisibility() == View.VISIBLE) {
-						contentView.setVisibility(View.GONE);
-						iconViewCollapse.setImageDrawable(getCollapseIcon(true));
-						collapsableView.setCollapsed(true);
-						contentView.getChildAt(contentView.getChildCount() - 1).setVisibility(View.VISIBLE);
-					} else {
-						contentView.setVisibility(View.VISIBLE);
-						iconViewCollapse.setImageDrawable(getCollapseIcon(false));
-						collapsableView.setCollapsed(false);
-					}
-					doAfterMenuStateChange(0, 0);
+			ll.setOnClickListener(v -> {
+				LinearLayout contentView = (LinearLayout) collapsableView.getContentView();
+				if (contentView.getVisibility() == View.VISIBLE) {
+					contentView.setVisibility(View.GONE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(true));
+					collapsableView.setCollapsed(true);
+					contentView.getChildAt(contentView.getChildCount() - 1).setVisibility(View.VISIBLE);
+				} else {
+					contentView.setVisibility(View.VISIBLE);
+					iconViewCollapse.setImageDrawable(getCollapseIcon(false));
+					collapsableView.setCollapsed(false);
 				}
+				doAfterMenuStateChange(0, 0);
 			});
 			if (collapsableView.isCollapsed()) {
 				collapsableView.getContentView().setVisibility(View.GONE);
@@ -880,12 +849,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -953,12 +919,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 36, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(routeDescription, v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 36, v -> {
+			copyToClipboard(routeDescription, v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -979,7 +942,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void buildEndStopRow(@NonNull View view, Drawable icon, String timeText, Spannable title, Spannable secondaryText, OnClickListener onClickListener) {
-		OsmandApplication app = requireMyApplication();
+		
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -991,12 +954,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -1046,7 +1006,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 
 	protected void updateDestinationStreetName(LatLon latLon) {
-		OsmandApplication app = requireMyApplication();
 		WeakReference<RouteDetailsFragment> fragmentRef = new WeakReference<>(this);
 		GeocodingLookupService.AddressLookupRequest addressLookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon, new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
@@ -1075,12 +1034,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -1111,7 +1067,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void buildStartRow(@NonNull View view, Drawable icon, String timeText, Spannable title, LinearLayout imagesContainer, OnClickListener onClickListener) {
-		OsmandApplication app = requireMyApplication();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1123,12 +1078,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -1175,7 +1127,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	public void buildDestinationRow(@NonNull View view, String timeText, Spannable title, Spannable secondaryText,
 									LatLon location, LinearLayout imagesContainer, OnClickListener onClickListener) {
-		OsmandApplication app = requireMyApplication();
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		baseItemView.setLayoutParams(baseViewLayoutParams);
@@ -1187,12 +1138,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 48, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -1260,12 +1208,9 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		baseView.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		baseItemView.addView(baseView);
 
-		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 36, new OnLongClickListener() {
-			@Override
-			public boolean onLongClick(View v) {
-				copyToClipboard(title.toString(), v.getContext());
-				return true;
-			}
+		LinearLayout ll = buildHorizontalContainerView(view.getContext(), 36, v -> {
+			copyToClipboard(title.toString(), v.getContext());
+			return true;
 		});
 		baseView.addView(ll);
 
@@ -1297,32 +1242,26 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private CollapsableView getCollapsableTransportStopRoutesView(@NonNull Context context, TransportStopRoute transportStopRoute, List<TransportStop> stops) {
-		LinearLayout view = buildCollapsableContentView(context, false);
+		LinearLayout view = buildCollapsableContentView(context);
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 		for (int i = 0; i < stops.size(); i++) {
 			TransportStop stop = stops.get(i);
-			buildIntermediateRow(view, icon, new SpannableString(stop.getName(getPreferredMapLang(), isTransliterateNames())), new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showLocationOnMap(stop.getLocation());
-				}
-			});
+			buildIntermediateRow(view, icon, new SpannableString(stop.getName(getPreferredMapLang(), isTransliterateNames())), v -> showLocationOnMap(stop.getLocation()));
 		}
 		return new CollapsableView(view, null, true);
 	}
 
-	protected LinearLayout buildCollapsableContentView(@NonNull Context context, boolean collapsed) {
+	protected LinearLayout buildCollapsableContentView(@NonNull Context context) {
 		LinearLayout view = new LinearLayout(context);
 		view.setOrientation(LinearLayout.VERTICAL);
-		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
+		view.setVisibility(View.VISIBLE);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		view.setLayoutParams(llParams);
 		return view;
 	}
 
 	private void buildTitleView(Spannable title, LinearLayout container) {
-		OsmandApplication app = requireMyApplication();
 		TextViewEx titleView = new TextViewEx(container.getContext());
 		FrameLayout.LayoutParams titleParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleParams.gravity = Gravity.CENTER_VERTICAL | Gravity.START;
@@ -1336,7 +1275,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void buildDescriptionView(Spannable description, LinearLayout container, int paddingTop, int paddingBottom) {
-		OsmandApplication app = requireMyApplication();
 		TextViewEx textViewDescription = new TextViewEx(container.getContext());
 		LinearLayout.LayoutParams descriptionParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		AndroidUtils.setMargins(descriptionParams, 0, dpToPx(paddingTop), 0, dpToPx(paddingBottom));
@@ -1408,7 +1346,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private double getWalkTime(@Nullable TransportRouteResultSegment segment,
 							   @Nullable TransportRouteResultSegment nextSegment, double walkDistPT, double walkSpeedPT) {
-		OsmandApplication app = requireMyApplication();
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(segment, nextSegment);
 		if (walkingRouteSegment != null) {
 			return walkingRouteSegment.getRoutingTime();
@@ -1418,7 +1355,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 
 	private double getWalkDistance(@Nullable TransportRouteResultSegment segment,
 								   @Nullable TransportRouteResultSegment nextSegment, double walkDistPT) {
-		OsmandApplication app = requireMyApplication();
 		RouteCalculationResult walkingRouteSegment = app.getTransportRoutingHelper().getWalkingRouteSegment(segment, nextSegment);
 		if (walkingRouteSegment != null) {
 			return walkingRouteSegment.getWholeDistance();
@@ -1427,7 +1363,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	public void buildRowDivider(@NonNull View view, boolean needMargin) {
-		OsmandApplication app = requireMyApplication();
 		View horizontalLine = new View(view.getContext());
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM | Gravity.START;
@@ -1440,7 +1375,6 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	}
 
 	private void makeGpx() {
-		OsmandApplication app = requireMyApplication();
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 	}

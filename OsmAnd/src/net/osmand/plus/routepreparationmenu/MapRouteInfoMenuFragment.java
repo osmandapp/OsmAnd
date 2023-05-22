@@ -15,10 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
@@ -101,7 +100,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 		MapActivity mapActivity = requireMapActivity();
 		menu = mapActivity.getMapRouteInfoMenu();
 
@@ -134,28 +133,25 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			if (menu == null) {
-				dismiss();
-				return;
-			}
-			updateInfo();
-			View mainView = getMainView();
-			if (mainView != null) {
-				View progressBar = mainView.findViewById(R.id.progress_bar);
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				boolean progressVisible = progressBar != null && progressBar.getVisibility() == View.VISIBLE;
-				boolean routeCalculating = routingHelper.isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
-				if (progressVisible && !routeCalculating) {
-					hideRouteCalculationProgressBar();
-					openMenuHalfScreen();
-				} else if (!progressVisible && routeCalculating && !routingHelper.isOsmandRouting()) {
-					updateRouteCalculationProgress(0);
-				}
-			}
-			menu.onResume();
+		if (menu == null) {
+			dismiss();
+			return;
 		}
+		updateInfo();
+		View mainView = getMainView();
+		if (mainView != null) {
+			View progressBar = mainView.findViewById(R.id.progress_bar);
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			boolean progressVisible = progressBar != null && progressBar.getVisibility() == View.VISIBLE;
+			boolean routeCalculating = routingHelper.isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
+			if (progressVisible && !routeCalculating) {
+				hideRouteCalculationProgressBar();
+				openMenuHalfScreen();
+			} else if (!progressVisible && routeCalculating && !routingHelper.isOsmandRouting()) {
+				updateRouteCalculationProgress(0);
+			}
+		}
+		menu.onResume();
 	}
 
 	@Override
@@ -183,15 +179,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	@Override
 	protected void updateMenuState(int currentMenuState, int newMenuState) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			if (app.getRoutingHelper().isRouteCalculated()) {
-				ApplicationMode mV = app.getRoutingHelper().getAppMode();
-				if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
-					app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
-				} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
-					app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
-				}
+		if (app.getRoutingHelper().isRouteCalculated()) {
+			ApplicationMode mV = app.getRoutingHelper().getAppMode();
+			if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
+				app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
+			} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
+				app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
 			}
 		}
 	}
@@ -275,14 +268,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	private void adjustMapPosition(int y) {
-		OsmandApplication app = getMyApplication();
 		MapActivity mapActivity = getMapActivity();
-		if (menu == null || menu.isSelectFromMapTouch() || app == null || mapActivity == null) {
+		if (menu == null || menu.isSelectFromMapTouch() || mapActivity == null) {
 			return;
 		}
 
 		RoutingHelper rh = app.getRoutingHelper();
-		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
+		if (rh.isRoutePlanningMode()) {
+			mapActivity.getMapView();
 			QuadRect r = menu.getRouteRect(mapActivity);
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			int tileBoxWidthPx = 0;
@@ -340,13 +333,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	}
 
 	private boolean isPublicTransportMode() {
-		OsmandApplication app = getMyApplication();
-		return app != null && app.getRoutingHelper().isPublicTransportMode();
+		return app.getRoutingHelper().isPublicTransportMode();
 	}
 
 	private boolean isOsmandRouting() {
-		OsmandApplication app = getMyApplication();
-		return app != null && app.getRoutingHelper().isOsmandRouting();
+		return app.getRoutingHelper().isOsmandRouting();
 	}
 
 	public void updateRouteCalculationProgress(int progress) {

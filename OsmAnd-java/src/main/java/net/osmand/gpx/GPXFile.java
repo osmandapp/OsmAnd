@@ -63,6 +63,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return getNonEmptyTrkSegments(true).size() > 0;
 	}
 
+	public List<GPXUtilities.WptPt> getAllPoints() {
+		List<GPXUtilities.WptPt> total = new ArrayList<>();
+		total.addAll(getPoints());
+		total.addAll(getAllSegmentsPoints());
+		return total;
+	}
+
 	public List<GPXUtilities.WptPt> getPoints() {
 		return Collections.unmodifiableList(points);
 	}

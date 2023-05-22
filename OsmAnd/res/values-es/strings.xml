@@ -1271,8 +1271,8 @@
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="continue_navigation">Continuar navegación</string>
     <string name="pause_navigation">Pausar navegación</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC.</string>
+    <string name="rendering_attr_alpineHiking_name">Escala de excursionismo alpina</string>
+    <string name="rendering_attr_alpineHiking_description">Renderizar caminos de acuerdo con la escala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="arrival_distance_factor_early">Lejos</string>
@@ -2721,7 +2721,7 @@
     <string name="ski_map_render_descr">Para esquiar. Cuenta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa los objetos de mapas secundarios.</string>
     <string name="light_rs_render_descr">Estilo de conducción simple. Modo nocturno suave, curvas de nivel, caminos contrastantes con estilo naranja, atenúa los objetos de mapas secundarios.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
-    <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Cuenta con curvas de nivel, recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SA y características de deportes acuáticos.</string>
+    <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Presenta curvas de nivel, rutas, calidad de la superficie, restricciones de acceso, escudos de carreteras, representación de caminos según la escala SAC/CAI, elementos deportivos de aguas bravas.</string>
     <string name="shared_string_bookmark">Favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
@@ -5098,9 +5098,9 @@
     <string name="app_mode_moped">Ciclomotor</string>
     <string name="disable_vertex_hillshade_3d">Desactivar la sombra de los vértices en 3D</string>
     <string name="enable_3d_maps">Activar los mapas en 3D</string>
-    <string name="test_heightmap">Mapa de altura de prueba</string>
-    <string name="generate_slope_from_3d_maps">Generación de mapas ráster de pendientes a partir de mapas 3D</string>
-    <string name="generate_hillshade_from_3d_maps">Generación de mapas ráster de colinas a partir de mapas 3D</string>
+    <string name="test_heightmap">Mapa de alturas en prueba</string>
+    <string name="generate_slope_from_3d_maps">Generar mapas ráster de pendiente a partir de mapas 3D</string>
+    <string name="generate_hillshade_from_3d_maps">Genere mapas ráster de sombreado a partir de mapas 3D</string>
     <string name="app_mode_climbing">Escalada</string>
     <string name="clear_online_cache">Borrar la caché en línea</string>
     <string name="offline_cache">Caché sin conexión</string>
@@ -5207,4 +5207,13 @@
     <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
     <string name="shared_string_foot">Pie</string>
     <string name="shared_string_chest">Pecho</string>
+    <string name="poi_categories">Categoría de los POI</string>
+    <string name="no_poi_for_category">POI no encontrado</string>
+    <string name="map_2d_mode_action">Modalidad 2D</string>
+    <string name="map_3d_mode_action">Modalidad 3D</string>
+    <string name="map_3d_mode_hint">El toque largo en el botón permite cambiar la posición del botón.</string>
+    <string name="rendering_value_caiScale_name">Escala CAI</string>
+    <string name="visible_in_3d_mode">Visible en 3D</string>
+    <string name="map_3d_mode_description">Toca el mapa con dos dedos y muévelos arriba y abajo para ajustar la inclinación del mapa.</string>
+    <string name="rendering_value_sacScale_name">Escala SAC</string>
 </resources>

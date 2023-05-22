@@ -82,7 +82,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	private List<String> mainActionItems;
 	private ApplicationMode appMode;
 	private LayoutInflater mInflater;
-	private OsmandApplication app;
 	private ScreenType screenType;
 	private boolean nightMode;
 	private boolean wasReset;
@@ -137,7 +136,6 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			screenType = AndroidUtils.getSerializable(savedInstanceState, ITEM_TYPE_KEY, ScreenType.class);

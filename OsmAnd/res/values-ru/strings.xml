@@ -5178,4 +5178,10 @@
     <string name="external_device_forget_sensor">Забыть датчик</string>
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
+    <string name="no_poi_for_category">POI не найдена</string>
+    <string name="rendering_value_caiScale_name">Шкала CAI</string>
+    <string name="map_3d_mode_action">Режим 3D</string>
+    <string name="map_2d_mode_action">Режим 2D</string>
+    <string name="map_3d_mode_description">Коснитесь карты двумя пальцами и перемещайте их вверх и вниз для регулировки наклона карты.</string>
+    <string name="rendering_value_sacScale_name">Шкала SAC</string>
 </resources>

@@ -67,7 +67,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
 
-	private OsmandApplication app;
 	private WeatherHelper weatherHelper;
 	private WeatherPlugin plugin;
 
@@ -83,7 +82,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private WeatherContour previousWeatherContour;
 
-	private boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -91,11 +89,14 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		weatherHelper = app.getWeatherHelper();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
 		currentDate.setTimeInMillis(WeatherHelper.roundForecastTimeToHour(System.currentTimeMillis()));

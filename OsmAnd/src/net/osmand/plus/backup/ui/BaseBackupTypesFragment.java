@@ -15,11 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
@@ -35,6 +31,9 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ import java.util.Map;
 public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
 
-	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
 
 	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
@@ -56,7 +54,6 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	protected ProgressBar progressBar;
 	protected BackupClearType clearType;
 
-	protected boolean nightMode;
 	protected boolean wasDrawerDisabled;
 
 	@Override
@@ -67,9 +64,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
-		nightMode = !app.getSettings().isLightContent();
 		clearType = getClearType();
 		dataList = getDataList();
 		selectedItemsMap = getSelectedItems();

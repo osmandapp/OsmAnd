@@ -1170,7 +1170,7 @@
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">"
 \n
-\n在地圖上長按以查看"</string>
+\n長按以在地圖上檢視"</string>
     <string name="delay_navigation_start">自動開始轉向建議指引</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
@@ -1230,9 +1230,9 @@
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-    <string name="rendering_attr_alpineHiking_name">登山健行等級（SAC）</string>
+    <string name="rendering_attr_alpineHiking_name">登山健行等級</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">登山健行路線</string>
-    <string name="rendering_attr_alpineHiking_description">依據 SAC 評級繪製路徑。</string>
+    <string name="rendering_attr_alpineHiking_description">依據 SAC/CAI 等級繪製路徑。</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑。</string>
     <string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
@@ -2713,7 +2713,7 @@
     <string name="ski_map_render_descr">用於滑雪。特色是滑雪道、滑雪纜車、越野賽道等等。讓次要地點變暗。</string>
     <string name="light_rs_render_descr">簡易的車輛駕駛樣式。柔和的夜間模式、等高線、對比鮮明的橘色道路、並讓次要地點變暗。</string>
     <string name="topo_render_descr">用於遠足、徒步旅行和在大自然中騎車。容易在戶外閱讀的地圖。對比鮮明的道路與自然地點、不同的路徑類型、進階等高線選項、額外的細節。調整表面完整性可以分辨道路品質。無夜間模式。</string>
-    <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是等高線、路徑、路面品質、進入限制、路障、根據 SAC 比例繪製的路徑、激流運動項目。</string>
+    <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是等高線、路徑、路面品質、進入限制、路障、根據 SAC/CAI 等級繪製的路徑、激流運動項目。</string>
     <string name="shared_string_bookmark">書籤</string>
     <string name="off_road_render_descr">基於「Topo」樣式，適用於越野駕駛，使用綠色衛星圖作為底圖。減少主要道路的寬度，增加車跡、路徑、腳踏車與其他路徑的寬度。</string>
     <string name="touring_view_render_descr">以高對比與最多細節的旅遊樣式。包含所有 OsmAnd 預設樣式的選項，並盡可能地顯示更多細節，特別是道路、路徑與其他旅行方式。明確區分道路類型的旅遊地圖集。白天、夜晚與戶外都適用。</string>
@@ -5175,4 +5175,36 @@
     <string name="no_search_results">無結果</string>
     <string name="search_track_by_name">透過名稱搜尋軌跡</string>
     <string name="number_of_tracks">%1$s 個軌跡</string>
+    <string name="no_poi_for_category">找不到興趣點</string>
+    <string name="rendering_value_sectors_name">區段</string>
+    <string name="rendering_value_sector4_name">區段 4</string>
+    <string name="rendering_value_sector5_name">區段 5</string>
+    <string name="rendering_value_small_name">小</string>
+    <string name="rendering_value_name_only_name">僅名稱</string>
+    <string name="poi_categories">POI 類別</string>
+    <string name="rendering_attr_lightDetail_name">燈光詳細資訊</string>
+    <string name="rendering_attr_lightDetail_description">預設：海標名稱（燈光特性.群組.週期），選取區段 1 至 3 或區段 1,2,3,4,5 燈光特性</string>
+    <string name="rendering_value_sector1_name">區段 1</string>
+    <string name="rendering_value_sector2_name">區段 2</string>
+    <string name="rendering_value_sector3_name">區段 3</string>
+    <string name="device_disconnected">%1$s 已斷線</string>
+    <string name="device_connected">%1$s 已連線</string>
+    <string name="running_scds_device_name">正在執行的裝置</string>
+    <string name="shared_string_hand">手</string>
+    <string name="shared_string_ear_lobe">耳垂</string>
+    <string name="bicycle_scd_device_name">腳踏車裝置</string>
+    <string name="external_device_blood_pressure">血壓</string>
+    <string name="no_bt_permission">未授予藍牙權限</string>
+    <string name="beats_per_minute_short">每分鐘心跳次數</string>
+    <string name="shared_string_chest">胸部</string>
+    <string name="shared_string_wrist">手腕</string>
+    <string name="shared_string_finger">手指</string>
+    <string name="shared_string_foot">腳</string>
+    <string name="map_3d_mode_hint">長按按鈕可以變更按鈕位置。</string>
+    <string name="visible_in_3d_mode">在 3D 模式下可見</string>
+    <string name="rendering_value_sacScale_name">SAC 等級</string>
+    <string name="rendering_value_caiScale_name">CAI 等級</string>
+    <string name="map_2d_mode_action">2D 模式</string>
+    <string name="map_3d_mode_action">3D 模式</string>
+    <string name="map_3d_mode_description">用兩根手指觸控地圖並上下移動以調整地圖傾斜度。</string>
 </resources>

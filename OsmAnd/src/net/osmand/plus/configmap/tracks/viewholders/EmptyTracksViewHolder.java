@@ -16,14 +16,14 @@ import net.osmand.plus.utils.UiUtilities;
 
 public class EmptyTracksViewHolder extends RecyclerView.ViewHolder {
 
-	private final OsmandApplication app;
-	private final TextView title;
-	private final TextView description;
-	private final ImageView icon;
-	private final View button;
-	private final boolean nightMode;
+	protected final OsmandApplication app;
+	protected final TextView title;
+	protected final TextView description;
+	protected final ImageView icon;
+	protected final View button;
+	protected final boolean nightMode;
 
-	public EmptyTracksViewHolder(@NonNull View view, @Nullable ImportTracksListener listener, boolean nightMode) {
+	public EmptyTracksViewHolder(@NonNull View view, @Nullable EmptyTracksListener listener, boolean nightMode) {
 		super(view);
 		this.nightMode = nightMode;
 		app = (OsmandApplication) itemView.getContext().getApplicationContext().getApplicationContext();
@@ -46,7 +46,7 @@ public class EmptyTracksViewHolder extends RecyclerView.ViewHolder {
 		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_import);
 	}
 
-	public interface ImportTracksListener {
+	public interface EmptyTracksListener {
 		void importTracks();
 	}
 }

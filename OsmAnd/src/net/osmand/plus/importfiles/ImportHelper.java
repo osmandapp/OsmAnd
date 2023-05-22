@@ -524,7 +524,7 @@ public class ImportHelper {
 	                              boolean useImportDir, @Nullable OnSuccessfulGpxImport onGpxImport) {
 		String existingFilePath = getExistingFilePath(app, name);
 		File destinationDir = app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
-		SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, onGpxImport, name);
+		SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, onGpxImport);
 
 		if (existingFilePath != null) {
 			SaveExistingFileListener saveFileListener = overwrite -> executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, overwrite));
@@ -535,8 +535,9 @@ public class ImportHelper {
 	}
 
 	@NonNull
-	private SaveImportedGpxListener getSaveGpxListener(@NonNull GPXFile gpxFile, @Nullable OnSuccessfulGpxImport onGpxImport, @NonNull String name) {
+	private SaveImportedGpxListener getSaveGpxListener(@NonNull GPXFile gpxFile, @Nullable OnSuccessfulGpxImport onGpxImport) {
 		return new SaveImportedGpxListener() {
+			String importedFileName;
 
 			@Override
 			public void onGpxSavingStarted() {
@@ -544,7 +545,7 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
-
+				importedFileName = new File(gpxFile.path).getName();
 			}
 
 			@Override
@@ -552,7 +553,7 @@ public class ImportHelper {
 				boolean success = Algorithms.isEmpty(warnings);
 				if (success) {
 					Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
-									app.getString(R.string.is_imported, name),
+									app.getString(R.string.is_imported, importedFileName),
 									BaseTransientBottomBar.LENGTH_LONG)
 							.setAction(R.string.shared_string_open, view -> openTrack(gpxFile, onGpxImport));
 

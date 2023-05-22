@@ -1229,8 +1229,8 @@
     <string name="rendering_attr_subwayMode_name">Metroruter</string>
     <string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
-    <string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skalaen.</string>
+    <string name="rendering_attr_alpineHiking_name">Alpin vandreskala</string>
+    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC/CAI-skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandreruter</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC-spor.</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
@@ -2321,7 +2321,7 @@
 \n • Mellemøsten: **
 \n • Afrika: **
 \n • Antarktis: *
-\n De fleste lande i verden kan hentes!
+\n De fleste lande i verden kan hentes
 \n Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, …
 \n</string>
     <string name="fonts_header">Skrifttyper for kort</string>
@@ -2727,7 +2727,7 @@
     <string name="ski_map_render_descr">Til skiløb. Viser pister, skilifte, cross country-spor, etc. Dæmper sekundære kortobjekter.</string>
     <string name="light_rs_render_descr">Enkel stil til kørsel. Skånsom for øjnene i nat-tilstand, højdekurver, veje med kontrast i orange, dæmper sekundære kortobjekter.</string>
     <string name="topo_render_descr">Til vandring, gåture og cykling i naturen. God læsbarhed udendørs. Kontrast mellem veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, ekstra detaljer. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
-    <string name="default_render_descr">Stilart til almindelig brug. Tæt bebyggede byer vises klart. Højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting (sport) elementer.</string>
+    <string name="default_render_descr">Stilart til almindelig brug. Tæt bebyggede byer vises klart. Højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC/CAI-skalaen, rafting-elementer (vandsport).</string>
     <string name="touring_view_render_descr">Touring-stilart med høj kontrast og maksimal detalje. Indeholder alle indstillingsmuligheder fra OsmAnd-standardstilen, mens der vises så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. Klar \"touring atlas\" sondring mellem alle forskellige vejtyper. Velegnet til dag, nat og udendørsbrug.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
     <string name="off_road_render_descr">Til off-road kørsel baseret på \'Topo\'-stilen. Velegnet til brug med grønne satellitbilleder som underlejringskort. Reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter.</string>
@@ -5214,4 +5214,11 @@
     <string name="beats_per_minute_short">spm</string>
     <string name="poi_categories">IP-kategorier</string>
     <string name="no_poi_for_category">IP ikke fundet</string>
+    <string name="map_3d_mode_action">3D-tilstand</string>
+    <string name="map_3d_mode_hint">Et langt tryk på knappen gør det muligt at ændre knappens position.</string>
+    <string name="map_3d_mode_description">Berør kortet med to fingre, og bevæg dem op og ned for at justere kortets hældning.</string>
+    <string name="map_2d_mode_action">2D-tilstand</string>
+    <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
+    <string name="rendering_value_sacScale_name">SAC-skala</string>
+    <string name="rendering_value_caiScale_name">CAI-skala</string>
 </resources>

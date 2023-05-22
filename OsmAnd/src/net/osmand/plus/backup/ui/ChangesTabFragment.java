@@ -42,7 +42,6 @@ import java.util.List;
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
 		OnBackupSyncListener {
 
-	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
 	protected NetworkSettingsHelper settingsHelper;
 
@@ -58,7 +57,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
 	}

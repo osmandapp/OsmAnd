@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -30,19 +32,22 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RouteInfoCard extends MapBaseCard {
 
 	private final RouteKey routeKey;
-	private final LatLon latLon;
+	private final GPXFile gpxFile;
 
 	public RouteInfoCard(
 			@NonNull MapActivity activity,
 			@NonNull RouteKey routeKey,
-			@Nullable LatLon latLon
+			@NonNull GPXFile gpxFile
 	) {
 		super(activity);
 		this.routeKey = routeKey;
-		this.latLon = latLon;
+		this.gpxFile = gpxFile;
 	}
 
 	@Override
@@ -84,7 +89,7 @@ public class RouteInfoCard extends MapBaseCard {
 			TextView tvContent = view.findViewById(R.id.title);
 			tvContent.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
 			view.setOnClickListener(v -> {
-				WikiArticleHelper.askShowArticle(activity, nightMode, latLon, url);
+				WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), url);
 			});
 		}
 	}
@@ -118,5 +123,15 @@ public class RouteInfoCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), container.getChildCount() > 0);
 		container.addView(view);
 		return view;
+	}
+
+	private List<LatLon> collectTrackPoints() {
+		List<LatLon> points = new ArrayList<>();
+		if (gpxFile != null) {
+			for (WptPt wptPt : gpxFile.getAllPoints()) {
+				points.add(new LatLon(wptPt.lat, wptPt.lon));
+			}
+		}
+		return points;
 	}
 }

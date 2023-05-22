@@ -65,7 +65,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
-import net.osmand.plus.widgets.tools.TextWatcherAdapter;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -355,7 +355,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			profileName.setImeOptions(EditorInfo.IME_ACTION_DONE);
 			profileName.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 			profileName.setText(changedProfile.name);
-			profileName.addTextChangedListener(new TextWatcherAdapter() {
+			profileName.addTextChangedListener(new SimpleTextWatcher() {
 
 				@Override
 				public void afterTextChanged(Editable s) {

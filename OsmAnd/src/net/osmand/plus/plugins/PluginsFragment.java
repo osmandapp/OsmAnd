@@ -53,11 +53,8 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 	public static final String OPEN_PLUGINS = "open_plugins";
 
-	private OsmandApplication app;
 	private PluginsListAdapter adapter;
-
 	private LayoutInflater themedInflater;
-	private boolean nightMode;
 	private boolean wasDrawerDisabled;
 
 	@Override
@@ -83,9 +80,6 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		app = requireMyApplication();
-		nightMode = !app.getSettings().isLightContent();
-
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		View view = themedInflater.inflate(R.layout.plugins, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -94,13 +88,10 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		toolbarTitle.setText(R.string.plugins_screen);
 
 		ImageView closeButton = view.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Activity activity = getMyActivity();
-				if (activity != null) {
-					activity.onBackPressed();
-				}
+		closeButton.setOnClickListener(v -> {
+			Activity activity = getMyActivity();
+			if (activity != null) {
+				activity.onBackPressed();
 			}
 		});
 		UiUtilities.rotateImageByLayoutDirection(closeButton);
@@ -109,18 +100,15 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		ListView listView = view.findViewById(R.id.plugins_list);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Object tag = view.getTag();
-				if (tag instanceof OsmandPlugin) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), PluginsFragment.this, (OsmandPlugin) tag);
-					}
-				} else if (tag instanceof ConnectedApp) {
-					switchEnabled((ConnectedApp) tag);
+		listView.setOnItemClickListener((parent, view1, position, id) -> {
+			Object tag = view1.getTag();
+			if (tag instanceof OsmandPlugin) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), PluginsFragment.this, (OsmandPlugin) tag);
 				}
+			} else if (tag instanceof ConnectedApp) {
+				switchEnabled((ConnectedApp) tag);
 			}
 		});
 		return view;
@@ -252,12 +240,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 					pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
 				}
 				pluginLogo.setImageDrawable(UiUtilities.tintDrawable(pluginIcon, color));
-				pluginLogo.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						enableDisablePlugin(plugin);
-					}
-				});
+				pluginLogo.setOnClickListener(v -> enableDisablePlugin(plugin));
 				pluginOptions.setVisibility(View.VISIBLE);
 				pluginOptions.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 				pluginOptions.setOnClickListener(v -> showOptionsMenu(v, plugin));
@@ -289,40 +272,31 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				plugin.isEnabled() ?
 						R.string.shared_string_disable :
 						R.string.shared_string_enable);
-		enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				enableDisablePlugin(plugin);
-				optionsMenu.dismiss();
-				return true;
-			}
+		enableDisableItem.setOnMenuItemClickListener(item -> {
+			enableDisablePlugin(plugin);
+			optionsMenu.dismiss();
+			return true;
 		});
 
 		SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
 		if (settingsScreenType != null && plugin.isActive()) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
-			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						BaseSettingsFragment.showInstance(activity, settingsScreenType);
-					}
-					optionsMenu.dismiss();
-					return true;
+			settingsItem.setOnMenuItemClickListener(item -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					BaseSettingsFragment.showInstance(activity, settingsScreenType);
 				}
+				optionsMenu.dismiss();
+				return true;
 			});
 		}
 
 		if (plugin instanceof CustomOsmandPlugin) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_delete);
-			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					showDeletePluginDialog((CustomOsmandPlugin) plugin);
-					optionsMenu.dismiss();
-					return true;
-				}
+			settingsItem.setOnMenuItemClickListener(item -> {
+				showDeletePluginDialog((CustomOsmandPlugin) plugin);
+				optionsMenu.dismiss();
+				return true;
 			});
 		}
 
@@ -336,12 +310,9 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 			builder.setTitle(getString(R.string.delete_confirmation_msg, plugin.getName()));
 			builder.setMessage(R.string.are_you_sure);
 			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					PluginsHelper.removeCustomPlugin(app, plugin);
-					adapter.remove(plugin);
-				}
+			builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+				PluginsHelper.removeCustomPlugin(app, plugin);
+				adapter.remove(plugin);
 			});
 			builder.show();
 		}

@@ -1271,8 +1271,8 @@
     <string name="continue_navigation">Reprendre le guidage</string>
     <string name="pause_navigation">Suspendre le guidage</string>
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
-    <string name="rendering_attr_alpineHiking_name">Difficulté des sentiers de randonnée (CAS)</string>
-    <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des sentiers de randonnée selon l\'échelle de cotation du CAS.</string>
+    <string name="rendering_attr_alpineHiking_name">Échelle des sentiers de randonnée</string>
+    <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des sentiers de randonnée selon l\'échelle SAC / CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinéraires de randonnée</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Rendu des itinéraires de randonnée d\'après OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Colorer les bâtiments par type</string>
@@ -2717,7 +2717,7 @@
     <string name="nautical_render_descr">Pour le guidage en mer et en rivière. Fonctions clés : bouées, phares, balises, chenaux de navigation, ports, lignes de profondeur.</string>
     <string name="ski_map_render_descr">Sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, courses hors-piste, rendu hivernal et masquage des objets secondaires.</string>
     <string name="light_rs_render_descr">Style simple pour la conduite. Mode nuit doux, courbes de niveau, routes contrastées de couleur orange, objets secondaires atténués.</string>
-    <string name="default_render_descr">Style générique. Zones urbaines affichées clairement, courbes de niveau, routes et revêtement des routes, restrictions d\'accès, chemins identifiés sur l\'échelle SAC.</string>
+    <string name="default_render_descr">Style générique. Zones urbaines affichées de manière claire, courbes de niveau, routes et revêtement des routes, restrictions d\'accès, rendu des chemins selon l\'échelle SAC / CAI, sports d\'eau vive.</string>
     <string name="shared_string_bookmark">Favori</string>
     <string name="topo_render_descr">Pour les activités en extérieur (randonnée, VTT). Lisibilité optimisée pour l\'extérieur, routes et éléments naturels contrastés, distinction des types de routes en fonction de leur revêtement, options avancées pour les courbes de niveau, nombreux détails. Pas de mode nuit.</string>
     <string name="off_road_render_descr">Pour la conduite sur voies non revêtues. Style basé sur le style « Topo » et à utiliser avec la sous-couche verte d\'images satellites. Largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes.</string>
@@ -2857,10 +2857,10 @@
     <string name="rendering_attr_highway_class_road_name">Route</string>
     <string name="rendering_attr_highway_class_street_name">Rue</string>
     <string name="rendering_attr_highway_class_service_name">Service</string>
-    <string name="rendering_attr_highway_class_footway_name">Passerelle</string>
+    <string name="rendering_attr_highway_class_footway_name">Voie piétonne</string>
     <string name="rendering_attr_highway_class_track_name">Piste</string>
     <string name="rendering_attr_highway_class_bridleway_name">Passage piéton</string>
-    <string name="rendering_attr_highway_class_steps_name">Étapes</string>
+    <string name="rendering_attr_highway_class_steps_name">Escalier</string>
     <string name="rendering_attr_highway_class_path_name">Chemin</string>
     <string name="rendering_attr_highway_class_cycleway_name">Voie cyclable</string>
     <string name="rendering_attr_undefined_name">Non défini</string>
@@ -4762,7 +4762,7 @@
     <string name="how_to_use">Comment utiliser :</string>
     <string name="rotate_map_manual_opt">Fixe (rotation manuelle)</string>
     <string name="shared_string_large">Grand</string>
-    <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement d\'appui et votre position actuelle.
+    <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement appuyé et votre position actuelle.
 \nTapez avec 2 doigts sur la carte pour afficher la distance séparant ces 2 points.</string>
     <string name="map_markers_desc">Le widget affiche la Distance ou l\'Heure d\'arrivée estimée (ETA) pour les deux premiers marqueurs de la liste des marqueurs de la carte.</string>
     <string name="go_to_marker_location">Aller au marqueur</string>
@@ -5200,4 +5200,11 @@
     <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (light character.group.period), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
     <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
     <string name="poi_categories">Catégories de PI</string>
+    <string name="map_2d_mode_action">Mode 2D</string>
+    <string name="map_3d_mode_hint">Un appui long sur le bouton permet de modifier sa position.</string>
+    <string name="map_3d_mode_description">Touchez la carte avec deux doigts et déplacez-les vers le haut ou vers le bas pour modifier l\'inclinaison de la carte.</string>
+    <string name="map_3d_mode_action">Mode 3D</string>
+    <string name="rendering_value_sacScale_name">Échelle SAC</string>
+    <string name="rendering_value_caiScale_name">Échelle CAI</string>
+    <string name="visible_in_3d_mode">Visible en mode 3D</string>
 </resources>

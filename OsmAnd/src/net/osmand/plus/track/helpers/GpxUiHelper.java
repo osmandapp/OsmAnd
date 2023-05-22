@@ -58,6 +58,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SelectGpxTrackBottomSheet;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -272,19 +273,15 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static String getFolderDescription(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
+		long lastModified = folder.getLastModified();
 		int tracksCount = folder.getFlattenedTrackItems().size();
-		String pattern = app.getString(R.string.ltr_or_rtl_combine_via_comma);
-		return String.format(pattern, formatLastUpdateTime(app, folder), formatTracksCount(app, tracksCount));
-	}
 
-	@NonNull
-	public static String formatLastUpdateTime(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
-		return OsmAndFormatter.getFormattedDate(app, folder.getLastModified());
-	}
-
-	@NonNull
-	public static String formatTracksCount(@NonNull OsmandApplication app, int tracksCount) {
-		return app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
+		String numberOfTracks = app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
+		if (lastModified > 0) {
+			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, tracksCount);
+		}
+		return numberOfTracks;
 	}
 
 	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app,
@@ -1198,7 +1195,7 @@ public class GpxUiHelper {
 		return file.isFile() && file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
 	}
 
-	public static void updateGpxInfoView(@NonNull View view, @NonNull GPXInfo gpxInfo,
+	public static void updateGpxInfoView(@NonNull View view, @NonNull TrackItem trackItem,
 	                                     @NonNull OsmandApplication app, boolean isDashItem,
 	                                     @Nullable GpxDataItemCallback callback) {
 		TextView viewName = view.findViewById(R.id.name);
@@ -1210,17 +1207,17 @@ public class GpxUiHelper {
 			view.findViewById(R.id.divider_dash).setVisibility(View.GONE);
 		}
 
-		viewName.setText(gpxInfo.getName());
+		viewName.setText(trackItem.getName());
 
 		ImageView icon = view.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 
-		if (getSelectedGpxFile(gpxInfo, app) != null) {
+		if (getSelectedGpxFile(app, trackItem) != null) {
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
 		}
-		GPXTrackAnalysis analysis = getGpxTrackAnalysis(gpxInfo, app, callback);
+		GPXTrackAnalysis analysis = getGpxTrackAnalysis(trackItem, app, callback);
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
 			view.findViewById(R.id.read_section).setVisibility(View.GONE);
@@ -1228,11 +1225,13 @@ public class GpxUiHelper {
 			String date = "";
 			String size = "";
 
-			if (gpxInfo.getIncreasedFileSize() > 0) {
-				size = AndroidUtils.formatSize(view.getContext(), gpxInfo.getIncreasedFileSize());
+			File file = trackItem.getFile();
+			long fileSize = file != null ? file.length() : 0;
+			if (fileSize > 0) {
+				size = AndroidUtils.formatSize(view.getContext(), fileSize + 512);
 			}
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
-			long lastModified = gpxInfo.getLastModified();
+			long lastModified = trackItem.getLastModified();
 			if (lastModified > 0) {
 				date = (format.format(new Date(lastModified)));
 			}
@@ -1263,32 +1262,28 @@ public class GpxUiHelper {
 				time.setText("");
 			}
 		}
-
-		TextView descr = view.findViewById(R.id.description);
-		descr.setVisibility(View.GONE);
-
+		view.findViewById(R.id.description).setVisibility(View.GONE);
 		view.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
-
-	private static SelectedGpxFile getSelectedGpxFile(GPXInfo gpxInfo, OsmandApplication app) {
+	private static SelectedGpxFile getSelectedGpxFile(@NonNull OsmandApplication app, @NonNull TrackItem trackItem) {
 		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-		return gpxInfo.isCurrentRecordingTrack() ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
-				selectedGpxHelper.getSelectedFileByName(gpxInfo.getFileName());
+		return trackItem.isShowCurrentTrack() ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
+				selectedGpxHelper.getSelectedFileByPath(trackItem.getPath());
 	}
 
 	@Nullable
-	public static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull GPXInfo gpxInfo,
+	public static GPXTrackAnalysis getGpxTrackAnalysis(@NonNull TrackItem trackItem,
 	                                                   @NonNull OsmandApplication app,
 	                                                   @Nullable GpxDataItemCallback callback) {
-		SelectedGpxFile selectedGpxFile = getSelectedGpxFile(gpxInfo, app);
+		SelectedGpxFile selectedGpxFile = getSelectedGpxFile(app, trackItem);
 		GPXTrackAnalysis analysis = null;
 		if (selectedGpxFile != null && selectedGpxFile.isLoaded()) {
 			analysis = selectedGpxFile.getTrackAnalysis(app);
-		} else if (gpxInfo.isCurrentRecordingTrack()) {
+		} else if (trackItem.isShowCurrentTrack()) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
-		} else if (gpxInfo.getFile() != null) {
-			GpxDataItem dataItem = app.getGpxDbHelper().getItem(gpxInfo.getFile(), callback);
+		} else if (trackItem.getFile() != null) {
+			GpxDataItem dataItem = app.getGpxDbHelper().getItem(trackItem.getFile(), callback);
 			if (dataItem != null) {
 				analysis = dataItem.getAnalysis();
 			}

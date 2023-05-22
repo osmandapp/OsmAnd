@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +43,7 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
@@ -519,21 +519,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		this.template = template;
 	}
 
-	class MapSourceTextWatcher implements TextWatcher {
+	class MapSourceTextWatcher extends SimpleTextWatcher {
 		private final TextInputLayout relatedInputLayout;
 
 		public MapSourceTextWatcher(TextInputLayout textInputLayout) {
 			this.relatedInputLayout = textInputLayout;
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-		}
-
-		@Override
-		public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
 		}
 
 		@Override
