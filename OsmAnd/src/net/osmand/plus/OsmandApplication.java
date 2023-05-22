@@ -127,6 +127,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -483,9 +484,10 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
 		Locale preferredLocale = localeHelper.getPreferredLocale();
-		if (preferredLocale != null && !newConfig.locale.getLanguage().equals(preferredLocale.getLanguage())) {
+		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
-			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+			Resources resources = getBaseContext().getResources();
+			resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
