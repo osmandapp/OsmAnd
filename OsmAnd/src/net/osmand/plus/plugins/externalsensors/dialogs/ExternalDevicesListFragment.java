@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
@@ -68,19 +69,16 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		noBluetoothCard = view.findViewById(R.id.no_bluetooth_card);
 
 		ImageView sensorIcon = view.findViewById(R.id.sensor_icon);
-		sensorIcon.setBackgroundResource(nightMode ? R.drawable.img_help_sensors_night : R.drawable.img_help_sensors_day);
+		sensorIcon.setBackgroundResource(nightMode ? R.drawable.bg_empty_external_device_list_icon_night : R.drawable.bg_empty_external_device_list_icon_day);
+		sensorIcon.setImageResource(nightMode ? R.drawable.img_help_sensors_night : R.drawable.img_help_sensors_day);
 		TextView learnMore = view.findViewById(R.id.learn_more_button);
 		String docsLinkText = app.getString(R.string.learn_more_about_sensors_link);
 		UiUtilities.setupClickableText(app, learnMore, docsLinkText, docsLinkText, nightMode, new CallbackWithObject<Void>() {
 			@Override
 			public boolean processResult(Void unused) {
 				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					String docsUrl = getString(R.string.docs_external_sensors);
-					intent.setData(Uri.parse(docsUrl));
-					AndroidUtils.startActivityIfSafe(activity, intent);
-				}
+				boolean nightMode = !app.getSettings().isLightContent();
+				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
 				return false;
 			}
 		});
@@ -122,7 +120,6 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 	}
 
 	private void showPairNewSensorBottomSheet() {
-		dismiss();
 		PairNewDeviceBottomSheet.showInstance(requireActivity().getSupportFragmentManager());
 	}
 
@@ -191,7 +188,7 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 			emptyView.setVisibility(View.VISIBLE);
 			contentView.setVisibility(View.GONE);
 			requireActivity().runOnUiThread(() -> {
-				appBar.setExpanded(false);
+				appBar.setExpanded(true);
 			});
 		} else {
 			requireActivity().runOnUiThread(() -> {

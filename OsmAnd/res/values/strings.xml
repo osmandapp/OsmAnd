@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="rssi_widget_desc">Shows the RSSI level of your external device.</string>
+    <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">This folder doesn\’t have any track yet.</string>
     <string name="tracks_empty_folder">Empty folder</string>
     <string name="track_not_recorded">Not recorded</string>
@@ -110,7 +111,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Pair ANT+ sensor</string>
     <string name="ant_plus_pair_bluetooth_prompt">You can pair Bluetooth LE and ANT+ sensors with OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Learn more about sensors.</string>
-
     <string name="shutter_sound">Shutter sound</string>
     <string name="camera_app">Camera app</string>
     <string name="speak_route_deviation">Announce deviation from the route</string>
