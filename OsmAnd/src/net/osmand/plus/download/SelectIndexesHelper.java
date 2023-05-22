@@ -96,10 +96,6 @@ public class SelectIndexesHelper {
 			public void onDialogCreated() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
 			}
-
-			@Override
-			public void onCloseDialog() {
-			}
 		});
 
 		msDialog.setSelectionUpdateListener(this::updateSize);
@@ -144,12 +140,7 @@ public class SelectIndexesHelper {
 			}
 		});
 
-		msDialog.setSelectionUpdateListener(new SelectionUpdateListener() {
-			@Override
-			public void onSelectionUpdate() {
-				updateSize();
-			}
-		});
+		msDialog.setSelectionUpdateListener(this::updateSize);
 
 		msDialog.setOnApplySelectionListener(getOnApplySelectionListener(listener));
 	}

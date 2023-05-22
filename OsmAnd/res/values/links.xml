@@ -23,6 +23,7 @@
     <string name="docs_widget_trip_recording" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-trip-recording-widgets</string>
     <string name="docs_widget_current_time" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#current-time</string>
     <string name="docs_widget_battery" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#battery-level</string>
+    <string name="docs_widget_rssi" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets</string>
     <string name="docs_widget_radius_ruler" translatable="false">https://docs.osmand.net/docs/user/widgets/radius-ruler</string>
     <string name="docs_widget_fps" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-fps-info-android</string>
     <string name="docs_widget_mapillary" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-mapillary-widget</string>
@@ -38,6 +39,7 @@
     <string name="docs_legal_terms_of_use" translatable="false">https://osmand.net/docs/legal/terms-of-use</string>
     <string name="docs_legal_privacy_policy" translatable="false">https://osmand.net/docs/legal/privacy-policy</string>
     <string name="docs_external_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/external-sensors</string>
+    <string name="docs_external_sensors_unknown_type" translatable="false">https://docs.osmand.net/docs/intro</string>
     <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
 
     <string name="community_twitter" translatable="false">https://twitter.com/osmandapp</string>

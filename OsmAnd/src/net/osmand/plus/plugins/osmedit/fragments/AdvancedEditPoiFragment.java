@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +40,7 @@ import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnFragmentA
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.OnSaveButtonClickListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -268,15 +268,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			valueEditText.setText(value);
 			valueEditText.setAdapter(valueAdapter);
 			valueEditText.setThreshold(3);
-			valueEditText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
+			valueEditText.addTextChangedListener(new SimpleTextWatcher() {
 				@Override
 				public void afterTextChanged(Editable s) {
 					if (!editPoiData.isInEdit()) {

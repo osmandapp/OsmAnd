@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -140,13 +141,11 @@ public class QuickAction {
 	public LatLon getMapLocation(@NonNull Context context) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		MapRendererView mapRenderer = mapView.getMapRenderer();
 		RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
-		LatLon latLon = NativeUtilities.getLatLonFromPixel(mapView.getMapRenderer(),
-				tb, tb.getCenterPixelX(), tb.getCenterPixelY());
-		if (latLon == null) {
-			latLon = tb.getCenterLatLon();
-		}
-		return latLon;
+		int centerPixX = tb.getCenterPixelX();
+		int centerPixY = tb.getCenterPixelY();
+		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixX, centerPixY);
 	}
 
     public void execute(@NonNull MapActivity mapActivity) {

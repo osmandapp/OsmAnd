@@ -96,7 +96,7 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 	}
 
 	@ColorRes
-	private int getStatusBarColorId() {
+	protected int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}

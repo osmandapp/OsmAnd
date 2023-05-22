@@ -51,6 +51,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -316,17 +317,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private TextWatcher getTextWatcher() {
-		return new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-			}
-
+		return new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				buttonContinue.setEnabled(!Algorithms.isEmpty(s));
@@ -335,17 +326,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private TextWatcher getPromoTextWatcher(EditText editText) {
-		return new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-			}
-
+		return new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));

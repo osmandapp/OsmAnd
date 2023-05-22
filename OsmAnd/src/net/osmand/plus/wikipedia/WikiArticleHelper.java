@@ -22,6 +22,8 @@ import net.osmand.util.Algorithms;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Collections;
+import java.util.List;
 
 
 public class WikiArticleHelper {
@@ -54,15 +56,27 @@ public class WikiArticleHelper {
 				url.replace(PAGE_PREFIX_FILE, PAGE_PREFIX_HTTPS) : url;
 	}
 
-	public void showWikiArticle(LatLon articleLatLon, String url) {
-		if (articleLatLon != null) {
-			articleSearchTask = new WikiArticleSearchTask(articleLatLon, activity, nightMode, url);
+	public void showWikiArticle(@Nullable LatLon location, @NonNull String url) {
+		if (location != null) {
+			showWikiArticle(Collections.singletonList(location), url);
+		}
+	}
+
+	public void showWikiArticle(@Nullable List<LatLon> locations, @NonNull String url) {
+		if (!Algorithms.isEmpty(locations)) {
+			articleSearchTask = new WikiArticleSearchTask(locations, url, activity, nightMode);
 			articleSearchTask.execute();
 		}
 	}
 
+	public void stopSearchAsyncTask() {
+		if (articleSearchTask != null && articleSearchTask.getStatus() == AsyncTask.Status.RUNNING) {
+			articleSearchTask.cancel(false);
+		}
+	}
+
 	@NonNull
-	public static String getLang(String url) {
+	public static String getLanguageFromUrl(String url) {
 		if (url.startsWith(PAGE_PREFIX_HTTP)) {
 			return url.substring(url.startsWith(PAGE_PREFIX_HTTP) ? PAGE_PREFIX_HTTP.length() : 0, url.indexOf("."));
 		} else if (url.startsWith(PAGE_PREFIX_HTTPS)) {
@@ -89,12 +103,6 @@ public class WikiArticleHelper {
 			Log.w(TAG, e.getMessage(), e);
 		}
 		return articleName;
-	}
-
-	public void stopSearchAsyncTask() {
-		if (articleSearchTask != null && articleSearchTask.getStatus() == AsyncTask.Status.RUNNING) {
-			articleSearchTask.cancel(false);
-		}
 	}
 
 	public static void warnAboutExternalLoad(String url, Context context, boolean nightMode) {
@@ -196,10 +204,17 @@ public class WikiArticleHelper {
 			@NonNull FragmentActivity activity, boolean nightMode,
 			@NonNull LatLon latLon, @NonNull String text
 	) {
+		askShowArticle(activity, nightMode, Collections.singletonList(latLon), text);
+	}
+
+	public static void askShowArticle(
+			@NonNull FragmentActivity activity, boolean nightMode,
+			@NonNull List<LatLon> locations, @NonNull String text
+	) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		if (Version.isPaidVersion(app)) {
 			WikiArticleHelper wikiArticleHelper = new WikiArticleHelper(activity, nightMode);
-			wikiArticleHelper.showWikiArticle(latLon, text);
+			wikiArticleHelper.showWikiArticle(locations, text);
 		} else {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			WikipediaArticleWikiLinkFragment.showInstance(fragmentManager, text);

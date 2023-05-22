@@ -26,6 +26,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -125,19 +126,11 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             }
             return false;
         });
-        textView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
+        textView.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 view.findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
                 enableButtonApply(view);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
         ImageView imageView = view.findViewById(R.id.warning_image_view);

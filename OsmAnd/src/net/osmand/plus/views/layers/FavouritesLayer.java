@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -79,10 +80,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		defaultColor = ContextCompat.getColor(getContext(), R.color.color_favorite);
 		grayColor = ContextCompat.getColor(getContext(), R.color.color_favorite_gray);
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-	}
-
-	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5);
 	}
 
 	@Override
@@ -286,20 +283,34 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
-		int r = getScaledTouchRadius(view.getApplication(), tb.getDefaultRadiusPoi());
-		int ex = (int) point.x;
-		int ey = (int) point.y;
-		for (FavouritePoint n : favouritesHelper.getFavouritePoints()) {
-			getFavFromPoint(tb, res, r, ex, ey, n);
+		List<FavouritePoint> favouritePoints = favouritesHelper.getFavouritePoints();
+		if (Algorithms.isEmpty(favouritePoints)) {
+			return;
 		}
-	}
 
-	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
-								 FavouritePoint n) {
-		if (n.isVisible()) {
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
-			if (calculateBelongs(ex, ey, (int) pixel.x, (int) pixel.y, r)) {
-				res.add(n);
+		MapRendererView mapRenderer = getMapRenderer();
+		float radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
+		for (FavouritePoint favouritePoint : favouritePoints) {
+			if (!favouritePoint.isVisible()) {
+				continue;
+			}
+
+			double lat = favouritePoint.getLatitude();
+			double lon = favouritePoint.getLongitude();
+
+			boolean add = mapRenderer != null
+					? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
+					: tb.isLatLonNearPixel(lat, lon, point.x, point.y, radius);
+			if (add) {
+				res.add(favouritePoint);
 			}
 		}
 	}

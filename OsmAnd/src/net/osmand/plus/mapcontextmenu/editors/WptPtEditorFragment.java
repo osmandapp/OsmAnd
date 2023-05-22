@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -29,8 +28,8 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.PointImageDrawable;
@@ -55,17 +54,13 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	private boolean saved;
 
-	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		editor = requireMapActivity().getContextMenu().getWptPtPointEditor();
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		savingTrackHelper = app.getSavingTrackHelper();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
+		editor = requireMapActivity().getContextMenu().getWptPtPointEditor();
 
 		WptPtEditor editor = getWptPtEditor();
 		if (editor != null) {
@@ -185,11 +180,11 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
-			MapMarkersHelper helper = app.getMapMarkersHelper();
-			MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
-			if (group != null) {
-				helper.runSynchronization(group);
-			}
+		MapMarkersHelper helper = app.getMapMarkersHelper();
+		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
+		if (group != null) {
+			helper.runSynchronization(group);
+		}
 	}
 
 	private void doAddWaypointTemplate(String name, String address, String category, String description) {

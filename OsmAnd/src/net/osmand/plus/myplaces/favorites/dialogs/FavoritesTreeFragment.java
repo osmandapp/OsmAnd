@@ -7,7 +7,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.IMPORT_FAVOURITES_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -42,7 +41,6 @@ import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -88,7 +86,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
-	private OsmandApplication app;
 	private FavouritesHelper helper;
 	private FavouritesAdapter favouritesAdapter;
 
@@ -112,9 +109,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private boolean locationUpdateStarted;
 
 	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		this.app = (OsmandApplication) context.getApplicationContext();
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		favouritesAdapter = new FavouritesAdapter();
 
 		helper = app.getFavoritesHelper();
@@ -135,11 +131,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		}
 		setAdapter(favouritesAdapter);
 
-		boolean light = app.getSettings().isLightContent();
-		arrowImageDisabled = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImageDisabled = AppCompatResources.getDrawable(app, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
-		arrowImageDisabled.setColorFilter(ColorUtilities.getDefaultIconColor(context, !light), PorterDuff.Mode.MULTIPLY);
-
+		arrowImageDisabled.setColorFilter(ColorUtilities.getDefaultIconColor(app, nightMode), PorterDuff.Mode.MULTIPLY);
 	}
 
 	private void deleteFavorites() {

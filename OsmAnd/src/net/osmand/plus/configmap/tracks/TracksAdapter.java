@@ -21,7 +21,6 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -67,10 +66,10 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				View view = inflater.inflate(R.layout.track_list_item, parent, false);
 				return new TrackViewHolder(view, fragment, locationViewCache, nightMode);
 			case TYPE_NO_TRACKS:
-				view = inflater.inflate(R.layout.empty_state, parent, false);
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new EmptyTracksViewHolder(view, fragment, nightMode);
 			case TYPE_NO_VISIBLE_TRACKS:
-				view = inflater.inflate(R.layout.empty_state, parent, false);
+				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new NoVisibleTracksViewHolder(view, fragment, nightMode);
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);

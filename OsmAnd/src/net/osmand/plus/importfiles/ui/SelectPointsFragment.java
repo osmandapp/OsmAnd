@@ -55,7 +55,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	public static final String TAG = ImportTracksFragment.class.getSimpleName();
 
-	private TrackItem trackItem;
+	private ImportTrackItem trackItem;
 	private final List<WptPt> points = new ArrayList<>();
 	private final Set<WptPt> selectedPoints = new HashSet<>();
 
@@ -335,7 +335,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackItem trackItem,
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull ImportTrackItem trackItem,
 	                                @NonNull List<WptPt> points, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectPointsFragment fragment = new SelectPointsFragment();
@@ -350,6 +350,6 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	public interface PointsSelectionListener {
 
-		void onPointsSelected(@NonNull TrackItem trackItem, @NonNull Set<WptPt> folder);
+		void onPointsSelected(@NonNull ImportTrackItem trackItem, @NonNull Set<WptPt> folder);
 	}
 }

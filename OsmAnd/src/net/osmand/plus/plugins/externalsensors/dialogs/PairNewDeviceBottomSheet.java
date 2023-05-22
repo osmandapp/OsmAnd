@@ -1,7 +1,9 @@
 package net.osmand.plus.plugins.externalsensors.dialogs;
 
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -59,10 +61,10 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.setTitle(getString(R.string.ant_plus_help_title))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(v -> {
-					MapActivity mapActivity = (MapActivity) getActivity();
-					if (mapActivity != null) {
-						hideBottomSheet();
-					}
+					dismiss();
+					FragmentActivity activity = getActivity();
+					boolean nightMode = getMyApplication().getDaynightHelper().isNightMode(false);
+					AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
 				})
 				.create();
 		items.add(helpItem);

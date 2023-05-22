@@ -1,17 +1,10 @@
 package net.osmand.plus.plugins.mapillary;
 
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
-import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
@@ -52,6 +45,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.CAPTURED_AT_KEY;
+import static net.osmand.plus.plugins.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 
 public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
@@ -568,51 +568,91 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			return;
 		}
 
-		PointI point31 = NativeUtilities.get31FromPixel(mapRenderer, tb, (int) point.x, (int) point.y);
-		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getQuadTreeByPoint(point31);
+		PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, point.x, point.y);
+		if (center31 == null) {
+			return;
+		}
+
+		double centerLat = MapUtils.get31LatitudeY(center31.getY());
+		double centerLon = MapUtils.get31LongitudeX(center31.getX());
+
+		int radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi());
+		QuadRect latLonRect = getLatLonRectFromPointOpenGl(mapRenderer, point, radius);
+		if (latLonRect == null) {
+			return;
+		}
+
+		QuadTree<MapillaryImage> quadTree = mapillaryTilesProvider.getQuadTreeByPoint(center31);
 		if (quadTree == null) {
 			return;
 		}
 
-		final int radius = getRadius(tb) / 2;
-		LatLon topLeft = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x - radius, point.y - radius);
-		LatLon bottomRight = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x + radius, point.y + radius);
-		LatLon center = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, point.x, point.y);
-		double left = topLeft.getLongitude();
-		double top = topLeft.getLatitude();
-		double right = bottomRight.getLongitude();
-		double bottom = bottomRight.getLatitude();
-		QuadRect rect = new QuadRect(left, top, right, bottom);
 		List<MapillaryImage> res = new ArrayList<>();
-		quadTree.queryInBox(rect, res);
+		quadTree.queryInBox(latLonRect, res);
 		if (res.isEmpty()) {
 			return;
 		}
 
-		double dist = MapUtils.getDistance(topLeft, bottomRight);
-		MapillaryImage img = null;
+		double minDistance = Double.NaN;
+		MapillaryImage closestImage = null;
 		for (MapillaryImage image : res) {
-			if (image == null)
+			if (image == null) {
 				continue;
+			}
 
-			double d = MapUtils.getDistance(center, image.getLatitude(), image.getLongitude());
-			if (d < dist) {
-				img = image;
-				dist = d;
+			double distance = MapUtils.getDistance(centerLat, centerLon, image.getLatitude(), image.getLongitude());
+			if (closestImage == null || distance < minDistance) {
+				closestImage = image;
+				minDistance = distance;
 			}
 		}
-		if (img == null) {
-			img = res.get(0);
+
+		if (closestImage != null) {
+			double lat = closestImage.getLatitude();
+			double lon = closestImage.getLongitude();
+			PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tb, lat, lon);
+			if (Math.abs(pixel.x - point.x) <= radius && Math.abs(pixel.y - point.y) <= radius) {
+				images.add(closestImage);
+			}
 		}
-		images.add(img);
+	}
+
+	@Nullable
+	private QuadRect getLatLonRectFromPointOpenGl(@NonNull MapRendererView mapRenderer,
+	                                              @NonNull PointF pixel,
+	                                              float radius) {
+		List<PointI> touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, pixel, radius);
+		if (touchPolygon31 == null) {
+			return null;
+		}
+
+		int minX31 = Integer.MAX_VALUE;
+		int minY31 = Integer.MAX_VALUE;
+		int maxX31 = Integer.MIN_VALUE;
+		int maxY31 = Integer.MIN_VALUE;
+		for (PointI point31 : touchPolygon31) {
+			int x31 = point31.getX();
+			int y31 = point31.getY();
+
+			minX31 = Math.min(minX31, x31);
+			minY31 = Math.min(minY31, y31);
+			maxX31 = Math.max(maxX31, x31);
+			maxY31 = Math.max(maxY31, y31);
+		}
+
+		return new QuadRect(
+				MapUtils.get31LongitudeX(minX31),
+				MapUtils.get31LatitudeY(minY31),
+				MapUtils.get31LongitudeX(maxX31),
+				MapUtils.get31LatitudeY(maxY31)
+		);
 	}
 
 	private void getImagesFromPointCanvas(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
 		Map<QuadPointDouble, Map<?, ?>> points = this.visiblePoints;
 		float ex = point.x;
 		float ey = point.y;
-		int rp = getRadius(tb);
-		int radius = rp * 3 / 2;
+		int radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi());
 		float x, y;
 		double minSqDist = Double.NaN;
 		double sqDist;
@@ -623,11 +663,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 			double tileY = entry.getKey().y;
 			Map<?, ?> userData = entry.getValue();
 
-			PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-					MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileY),
-					MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileX));
-			x = pixel.x;
-			y = pixel.y;
+			x = tb.getPixXFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+			y = tb.getPixYFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 				sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
 				if (img == null || minSqDist > sqDist) {
@@ -644,23 +681,6 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		if (img != null) {
 			images.add(img);
 		}
-	}
-
-	public int getRadius(RotatedTileBox tb) {
-		int r;
-		double zoom = tb.getZoom();
-		if (zoom < MIN_IMAGE_LAYER_ZOOM) {
-			r = 0;
-		} else if (zoom <= 15) {
-			r = 10;
-		} else if (zoom <= 16) {
-			r = 14;
-		} else if (zoom <= 17) {
-			r = 16;
-		} else {
-			r = 18;
-		}
-		return (int) (r * view.getScaleCoefficient());
 	}
 
 	private long getFilterKey() {

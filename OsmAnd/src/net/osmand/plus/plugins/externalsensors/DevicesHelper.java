@@ -17,7 +17,6 @@ import android.bluetooth.le.ScanSettings;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -26,7 +25,6 @@ import android.os.ParcelUuid;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.preference.PreferenceManager;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc;
@@ -73,16 +71,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	public static final int ENABLE_BLUETOOTH_REQUEST_CODE = 400;
 
-	public final static String SCAN_MODE_PREFERENCE = "SCAN_MODE";
-	public final static String MATCH_MODE_PREFERENCE = "MATCH_MODE";
-	public final static String CALLBACK_TYPE_PREFERENCE = "CALLBACK_TYPE";
-	public final static String MATCH_NUM_PREFERENCE = "MATCH_NUM";
-
 	private static final Log LOG = PlatformUtil.getLog(DevicesHelper.class);
 
 	private final static List<UUID> SUPPORTED_BLE_SERVICE_UUIDS = Arrays.asList(
 			BLEBikeSCDDevice.getServiceUUID(),
-			BLEBPICPDevice.getServiceUUID(),
 			BLEHeartRateDevice.getServiceUUID(),
 			BLERunningSCDDevice.getServiceUUID(),
 			BLETemperatureDevice.getServiceUUID());
@@ -231,6 +223,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		@Override
 		public void onScanFailed(int errorCode) {
 			super.onScanFailed(errorCode);
+			LOG.error("BLE scan failed. Error " + errorCode);
 		}
 	};
 
@@ -557,31 +550,18 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return;
 			}
 
-			List<ScanFilter> filters = null;
-			/*
-			ArrayList<UUID> serviceUUIDs = new ArrayList<>();
-			// TODO: filterList always empty?
-			for (DeviceType type : filterList) {
-				serviceUUIDs.add(UUID.fromString(type.getUUIDService()));
+			ArrayList<ScanFilter> filters = new ArrayList<>();
+			for (UUID serviceUUID : SUPPORTED_BLE_SERVICE_UUIDS) {
+				ScanFilter filter = new ScanFilter.Builder()
+						.setServiceUuid(new ParcelUuid(serviceUUID))
+						.build();
+				filters.add(filter);
 			}
-			if (!serviceUUIDs.isEmpty()) {
-				filters = new ArrayList<>();
-				for (UUID serviceUUID : serviceUUIDs) {
-					ScanFilter filter = new ScanFilter.Builder()
-							.setServiceUuid(new ParcelUuid(serviceUUID))
-							.build();
-					filters.add(filter);
-				}
-			}
-			 */
-
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
-			// TODO: Are preferences needed? Will constants be enough?
 			ScanSettings scanSettings = new ScanSettings.Builder()
-					.setScanMode(Integer.parseInt(preferences.getString(SCAN_MODE_PREFERENCE, "1")))
-					.setCallbackType(Integer.parseInt(preferences.getString(CALLBACK_TYPE_PREFERENCE, "1")))
-					.setMatchMode(Integer.parseInt(preferences.getString(MATCH_MODE_PREFERENCE, "2")))
-					.setNumOfMatches(Integer.parseInt(preferences.getString(MATCH_NUM_PREFERENCE, "1")))
+					.setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
+					.setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
+					.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
+					.setNumOfMatches(ScanSettings.MATCH_NUM_ONE_ADVERTISEMENT)
 					.setReportDelay(0L)
 					.build();
 
@@ -595,24 +575,24 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_SCAN)) {
 				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.BLUETOOTH_SCAN}, 4);
+				ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH_SCAN}, 4);
 			}
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_CONNECT)) {
 				hasNeededPermissions = false;
 				ActivityCompat.requestPermissions(
 						activity,
-						new String[]{Manifest.permission.BLUETOOTH_CONNECT},
+						new String[] {Manifest.permission.BLUETOOTH_CONNECT},
 						5
 				);
 			}
 		} else {
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH)) {
 				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.BLUETOOTH}, 2);
+				ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH}, 2);
 			}
 			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_ADMIN)) {
 				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.BLUETOOTH_ADMIN}, 3);
+				ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH_ADMIN}, 3);
 			}
 		}
 		return hasNeededPermissions;

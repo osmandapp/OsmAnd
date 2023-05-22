@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -54,18 +56,15 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
-
 /**
  * Created by okorsun on 20.12.16.
  */
 
-public class QuickActionListFragment extends BaseOsmAndFragment
-		implements QuickActionUpdatesListener, OnConfirmButtonClickListener {
+public class QuickActionListFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
+		OnConfirmButtonClickListener {
 
 	public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
-	public static final String FROM_DASHBOARD_KEY = "from_dashboard";
 	public static final String ACTIONS_TO_DELETE_KEY = "actions_to_delete";
 	public static final String SCREEN_TYPE_KEY = "screen_type";
 
@@ -74,7 +73,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
 	private static final int ITEMS_IN_GROUP = 6;
 
-	private RecyclerView recyclerView;
 	private FloatingActionButton fab;
 	private View bottomPanel;
 	private Toolbar toolbar;
@@ -87,7 +85,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 	private QuickActionRegistry quickActionRegistry;
 	private final ArrayList<Long> actionsToDelete = new ArrayList<>();
 	private int screenType = SCREEN_TYPE_REORDER;
-	private boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,7 +125,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.quick_action_list, container, false);
 
-		recyclerView = view.findViewById(R.id.recycler_view);
+		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		fab = view.findViewById(R.id.fabButton);
 		fab.setOnClickListener(v -> showAddQuickActionDialog());
 
@@ -201,24 +198,16 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 					AndroidUtils.getNavigationIconResId(app),
 					activeButtonsColorResId);
 			navigationIcon.setImageDrawable(icBack);
-			navigationIcon.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						activity.onBackPressed();
-					}
+			navigationIcon.setOnClickListener(view -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					activity.onBackPressed();
 				}
 			});
 		} else if (screenType == SCREEN_TYPE_DELETE) {
 			Drawable icClose = getIcon(R.drawable.ic_action_close, activeButtonsColorResId);
 			navigationIcon.setImageDrawable(icClose);
-			navigationIcon.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					changeScreenType(SCREEN_TYPE_REORDER);
-				}
-			});
+			navigationIcon.setOnClickListener(view -> changeScreenType(SCREEN_TYPE_REORDER));
 		}
 	}
 
@@ -246,27 +235,19 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 			items.add(new ListItem(ItemType.BUTTON,
 					new ControlButton(getString(R.string.quick_action_new_action),
 							R.drawable.ic_action_plus,
-							new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									showAddQuickActionDialog();
-								}
-							})));
+							view -> showAddQuickActionDialog())));
 			items.add(new ListItem(ItemType.BUTTON,
 					new ControlButton(getString(R.string.shared_string_delete_all),
 							R.drawable.ic_action_delete_dark,
-							new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									actionsToDelete.clear();
-									for (ListItem item : adapter.items) {
-										if (item.type == ItemType.ACTION) {
-											QuickAction action = (QuickAction) item.value;
-											actionsToDelete.add(action.id);
-										}
+							view -> {
+								actionsToDelete.clear();
+								for (ListItem item : adapter.items) {
+									if (item.type == ItemType.ACTION) {
+										QuickAction action = (QuickAction) item.value;
+										actionsToDelete.add(action.id);
 									}
-									showConfirmDeleteActionsBottomSheet(ma);
 								}
+								showConfirmDeleteActionsBottomSheet(ma);
 							})));
 		}
 		items.add(new ListItem(ItemType.BOTTOM_SHADOW));
@@ -403,7 +384,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onConfirmButtonClick() {
-		if (adapter != null && actionsToDelete != null) {
+		if (adapter != null) {
 			adapter.deleteItems(actionsToDelete);
 			actionsToDelete.clear();
 			if (screenType == SCREEN_TYPE_DELETE) {
@@ -853,8 +834,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 		showInstance(activity, false);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                boolean animate) {
+	public static void showInstance(@NonNull FragmentActivity activity, boolean animate) {
 		FragmentManager fm = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			int slideInAnim = 0;

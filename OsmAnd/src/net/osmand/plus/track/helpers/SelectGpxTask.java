@@ -106,11 +106,16 @@ public class SelectGpxTask extends AsyncTask<Void, Void, String> {
 
 	public interface SelectGpxTaskListener {
 
-		void gpxSelectionInProgress();
+		default void gpxSelectionStarted() {
 
-		void gpxSelectionStarted();
+		}
 
-		void gpxSelectionFinished();
+		default void gpxSelectionInProgress() {
 
+		}
+
+		default void gpxSelectionFinished() {
+
+		}
 	}
 }
