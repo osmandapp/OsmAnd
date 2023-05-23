@@ -48,7 +48,7 @@ public class MapTileLayer extends BaseMapLayer {
 	private static final int SHOWN_MAP_ZOOM_MAX = 20;
 	private static final int SHOWN_MAP_ZOOM_MIN = 1;
 
-	protected final boolean possibleMapSource;
+	protected final boolean mainLayer;
 	protected ITileSource map;
 	protected MapTileAdapter mapTileAdapter;
 
@@ -68,9 +68,9 @@ public class MapTileLayer extends BaseMapLayer {
 	private int cachedAlpha = -1;
 	private StateChangedListener<Float> parameterListener;
 
-	public MapTileLayer(@NonNull Context context, boolean possibleMapSource) {
+	public MapTileLayer(@NonNull Context context, boolean mainLayer) {
 		super(context);
-		this.possibleMapSource = possibleMapSource;
+		this.mainLayer = mainLayer;
 		this.settings = getApplication().getSettings();
 		this.resourceManager = getApplication().getResourceManager();
 	}
@@ -264,7 +264,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected boolean setLayerProvider(@Nullable ITileSource map) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			MapRendererContext mapRendererContext = possibleMapSource ? NativeCoreContext.getMapRendererContext() : null;
+			MapRendererContext mapRendererContext = mainLayer ? NativeCoreContext.getMapRendererContext() : null;
 			int layerIndex = view.getLayerIndex(this);
 			if (map != null) {
 				TileSourceProxyProvider prov = new TileSourceProxyProvider(getApplication(), map);
@@ -471,7 +471,7 @@ public class MapTileLayer extends BaseMapLayer {
 			}
 		}
 
-		if (possibleMapSource && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
+		if (mainLayer && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
 			if (resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)) {
 				getApplication().showToastMessage(R.string.switch_to_vector_map_to_see);
 				warningToSwitchMapShown++;
