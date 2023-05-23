@@ -2043,7 +2043,7 @@
     <string name="online_map">Hartă online</string>
     <string name="roads_only">Doar drumurile</string>
     <string name="rendering_attr_pisteRoutes_name">Pârtii de ski</string>
-    <string name="free">Gratis %1$s</string>
+    <string name="free">Disponibil %1$s</string>
     <string name="device_memory">Memorie dispozitiv</string>
     <string name="edit_group">Editează grupul</string>
     <string name="parking_place">Spotul de parcare</string>
