@@ -40,6 +40,8 @@ public class MultiTouchSupport {
 		void onChangingViewAngle(float angle);
 
 		void onChangeViewAngleStarted();
+
+		void onViewAngleChanged(float angle);
 	}
 
 	private final OsmandApplication app;
@@ -152,6 +154,9 @@ public class MultiTouchSupport {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
 				} else if (inTiltMode) {
+					float dy2 = secondFingerStart.y - y2;
+					float viewAngle = dy2 / 8f;
+					listener.onViewAngleChanged(viewAngle);
 					inTiltMode = false;
 				}
 				return true;

@@ -45,7 +45,11 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowQuickActionButton() {
 		return isQuickActionLayerOn()
-				&& !isInChangeMarkerPositionMode()
+				&& shouldShowFabButton();
+	}
+
+	public boolean shouldShowFabButton(){
+		return !isInChangeMarkerPositionMode()
 				&& !isInGpxDetailsMode()
 				&& !isInMeasurementToolMode()
 				&& !isInPlanRouteMode()
