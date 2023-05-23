@@ -101,7 +101,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 		if (mapContext != null) {
 			mapContext.resetRasterAndSymbolsProvider(ProviderType.MAIN);
-			mapContext.resetHeightmapProvider();
 		}
 	}
 
