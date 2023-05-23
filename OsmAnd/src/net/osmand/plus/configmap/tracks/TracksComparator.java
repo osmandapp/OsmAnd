@@ -48,6 +48,12 @@ public class TracksComparator implements Comparator<Object> {
 		if (o2 instanceof Integer) {
 			return 1;
 		}
+		if (o1 instanceof TrackItem && ((TrackItem) o1).isShowCurrentTrack()) {
+			return -1;
+		}
+		if (o2 instanceof TrackItem && ((TrackItem) o2).isShowCurrentTrack()) {
+			return 1;
+		}
 		if (o1 instanceof VisibleTracksGroup) {
 			return -1;
 		}
