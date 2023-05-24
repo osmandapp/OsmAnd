@@ -5231,4 +5231,15 @@
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
     <string name="rendering_value_sacScale_name">Escala SAC</string>
+    <string name="delete_folder_question">¿Borrar carpeta\?</string>
+    <string name="delete_folder">Borrar carpeta</string>
+    <string name="shared_string_new_track">Nueva traza</string>
+    <string name="delete_track_folder_dialog_message">Esto borrará la carpeta «%1$s» y todas las trazas (%2$s) incluidas.</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="track_not_recorded">No grabado</string>
+    <string name="show_all_tracks_on_the_map">Mostrar todas las trazas en el mapa</string>
+    <string name="rssi_widget_desc">Muestra el nivel RSSI del dispositivo externo.</string>
+    <string name="tracks_empty_folder">Carpeta vacía</string>
+    <string name="tracks_empty_folder_description">Esta carpeta no contiene trazas aún.</string>
+    <string name="shared_string_visible_on_map">Visible en el mapa</string>
 </resources>
