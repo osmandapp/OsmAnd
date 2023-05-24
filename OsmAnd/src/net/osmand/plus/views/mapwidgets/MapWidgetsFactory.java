@@ -75,7 +75,7 @@ public class MapWidgetsFactory {
 			case STREET_NAME:
 				return new StreetNameWidget(mapActivity);
 			case MARKERS_TOP_BAR:
-				return new MapMarkersBarWidget(mapActivity);
+				return new MapMarkersBarWidget(mapActivity, customId);
 			case LANES:
 				return new LanesWidget(mapActivity);
 			case DISTANCE_TO_DESTINATION:
