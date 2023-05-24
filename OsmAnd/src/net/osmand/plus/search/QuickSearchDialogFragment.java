@@ -19,7 +19,6 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -103,6 +102,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -553,15 +553,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 		searchEditText.addTextChangedListener(
-				new TextWatcher() {
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
-					}
-
+				new SimpleTextWatcher() {
 					@Override
 					public void afterTextChanged(Editable s) {
 						String newQueryText = s.toString();

@@ -18,14 +18,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.DialogListItemAdapter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -35,6 +34,8 @@ import net.osmand.plus.settings.enums.DistanceByTapTextSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 public class DistanceByTapFragment extends BaseOsmAndFragment {
 
@@ -127,26 +128,21 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	}
 
 	protected void showTextSizeDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(R.string.text_size);
-
 		String[] items = new String[DistanceByTapTextSize.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = DistanceByTapTextSize.values()[i].toHumanString(app);
 		}
 		int selected = settings.DISTANCE_BY_TAP_TEXT_SIZE.get().ordinal();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					settings.DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
-					setupConfigButtons();
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
+				.setTitle(R.string.text_size)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
+			int which = (int) v.getTag();
+			settings.DISTANCE_BY_TAP_TEXT_SIZE.set(DistanceByTapTextSize.values()[which]);
+			setupConfigButtons();
+		});
 	}
 
 	private View createButtonWithState(int iconId,

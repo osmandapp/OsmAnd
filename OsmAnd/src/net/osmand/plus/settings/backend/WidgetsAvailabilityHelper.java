@@ -21,7 +21,9 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.CURRENT_TIME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.DISTANCE_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.GPS_INFO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.INTERMEDIATE_DESTINATION;
+import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAGNETIC_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
 import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
@@ -30,6 +32,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNRISE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
@@ -108,6 +111,11 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(ALTITUDE_MAP_CENTER, all);
 		regWidgetAvailability(SUNRISE, all);
 		regWidgetAvailability(SUNSET, all);
+
+		// vertical
+		regWidgetVisibility(STREET_NAME, CAR);
+		regWidgetVisibility(LANES, CAR, BICYCLE);
+		regWidgetVisibility(MARKERS_TOP_BAR, all);
 
 		// all = null everything
 		regWidgetAvailability(SIDE_MARKER_1, all);

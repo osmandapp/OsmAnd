@@ -66,7 +66,7 @@ public class WikivoyageUtils {
 	public static void processWikivoyageDomain(@NonNull FragmentActivity activity,
 	                                           @NonNull String url, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		String lang = WikiArticleHelper.getLang(url);
+		String lang = WikiArticleHelper.getLanguageFromUrl(url);
 		String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
 		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(articleName, lang);
 		if (articleId != null) {

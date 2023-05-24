@@ -2482,9 +2482,9 @@
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">التخصص الصحي: ولادة (قيصرية): لا</string>
     <string name="poi_health_specialty_radiotherapy_yes">العلاج الإشعاعي</string>
     <string name="poi_cargo_hgv">مركبات الحمولة الثقيلة</string>
-    <string name="poi_ref">الرقم المرجعي</string>
-    <string name="poi_tunnel_ref">مرجع النفق</string>
-    <string name="poi_bridge_ref">مرجع الجسر</string>
+    <string name="poi_ref">المرجعية</string>
+    <string name="poi_tunnel_ref">مرجعية النفق</string>
+    <string name="poi_bridge_ref">مرجعية الجسر</string>
     <string name="poi_conveying_yes">نقل: نعم</string>
     <string name="poi_boat_storage">مخزن القوارب</string>
     <string name="poi_labor_camp">النوع: معسكر العمل</string>
@@ -3694,7 +3694,7 @@
     <string name="poi_piste_name">اسم الزحلقة</string>
     <string name="poi_piste_ski_jump">القفز على الجليد</string>
     <string name="poi_geodesist">الجيوديسيا (شكل الأرض ومساحتها)</string>
-    <string name="poi_local_ref">المرجع المحلي</string>
+    <string name="poi_local_ref">المرجعية المحلية</string>
     <string name="poi_piste">الزحلقه</string>
     <string name="poi_training_hairdressing">التدريب: تصفيف الشعر</string>
     <string name="poi_training_aviation">التدريب: الطيران</string>
@@ -4550,4 +4550,5 @@
     <string name="poi_barrier_board">حاجز لوحي</string>
     <string name="poi_toy_library">مكتبة ألعاب</string>
     <string name="poi_surface_chipseal">اسفلت خشن</string>
+    <string name="poi_cemt">الاتحاد الأوروبي للتكنولوجيا البحرية</string>
 </resources>

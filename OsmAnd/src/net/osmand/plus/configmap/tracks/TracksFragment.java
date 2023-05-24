@@ -39,7 +39,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
-import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.ImportTracksListener;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -48,6 +48,7 @@ import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
@@ -74,7 +75,8 @@ import java.util.List;
 import java.util.Set;
 
 public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
-		OnTrackFileMoveListener, RenameCallback, TrackSelectionListener, SortTracksListener, ImportTracksListener {
+		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
+		TrackSelectionListener, SortTracksListener, EmptyTracksListener {
 
 	public static final String TAG = TracksFragment.class.getSimpleName();
 
@@ -104,7 +106,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@NonNull
-	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
 		return itemsSelectionHelper;
 	}
 
@@ -182,7 +185,12 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			}
 		});
 		actionsButton.setOnClickListener(this::showOptionsMenu);
-		searchButton.setOnClickListener((v) -> SearchTrackItemsFragment.showInstance(getChildFragmentManager()));
+		searchButton.setOnClickListener((v) -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this);
+			}
+		});
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
 
 		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
@@ -271,12 +279,12 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> {
 			saveChanges();
-			dismissAllowingStateLoss();
+			dismiss();
 		});
 
 		selectionButton = view.findViewById(R.id.selection_button);
 		selectionButton.setOnClickListener(v -> {
-			Set<TrackItem> selectedTracks = new HashSet<>(itemsSelectionHelper.getSelectedItems());
+			Set<TrackItem> selectedTracks = itemsSelectionHelper.getSelectedItems();
 			if (Algorithms.isEmpty(selectedTracks)) {
 				onTrackItemsSelected(selectedTracksHelper.getRecentlyVisibleTracks(), true);
 			} else {
@@ -320,6 +328,16 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				break;
 			}
 		}
+	}
+
+	@Nullable
+	public TrackTab getTab(@NonNull String name) {
+		for (TrackTab trackTab : getTrackTabs()) {
+			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
+				return trackTab;
+			}
+		}
+		return null;
 	}
 
 	@Override

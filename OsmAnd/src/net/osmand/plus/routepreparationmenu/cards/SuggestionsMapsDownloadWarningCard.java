@@ -123,11 +123,6 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 				progressBar.setVisibility(View.VISIBLE);
 				dialog.setCustomView(view);
 			}
-
-			@Override
-			public void onCloseDialog() {
-
-			}
 		});
 		msDialog.setSelectionUpdateListener(this::updateSize);
 		msDialog.setOnApplySelectionListener(selItems -> {

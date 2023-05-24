@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -218,21 +219,29 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		return calculatedFilters;
 	}
 
-	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am) {
+	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> result) {
 		List<Amenity> objects = data.getResults();
-		if (objects != null) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			int compare = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb));
-			int radius = compare * 3 / 2;
+		if (tb.getZoom() >= START_ZOOM && !Algorithms.isEmpty(objects)) {
+			MapRendererView mapRenderer = getMapRenderer();
+			float radius = getScaledTouchRadius(view.getApplication(), getRadiusPoi(tb)) * TOUCH_RADIUS_MULTIPLIER;
+			List<PointI> touchPolygon31 = null;
+			if (mapRenderer != null) {
+				touchPolygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, point, radius);
+				if (touchPolygon31 == null) {
+					return;
+				}
+			}
+
 			try {
 				for (int i = 0; i < objects.size(); i++) {
-					Amenity n = objects.get(i);
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb,
-							n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					if (Math.abs(pixel.x - ex) <= compare && Math.abs(pixel.y - ey) <= compare) {
-						compare = radius;
-						am.add(n);
+					Amenity amenity = objects.get(i);
+					LatLon latLon = amenity.getLocation();
+
+					boolean add = mapRenderer != null
+							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+							: tb.isLatLonNearPixel(latLon, point.x, point.y, radius);
+					if (add) {
+						result.add(amenity);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {

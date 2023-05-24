@@ -167,7 +167,7 @@ public class BLEBloodPressureSensor extends BLEAbstractSensor {
 		boolean timestampPresent = (flag & 0x02) == 0x02;
 		boolean pulseRatePresent = (flag & 0x04) == 0x04;
 
-		// TODO: Looks like wrong reading according to GATT spec v8: "Present if bit 0 of Flags field is set to 0"
+		// TODO (BLE): Looks like wrong reading according to GATT spec v8: "Present if bit 0 of Flags field is set to 0"
 		float systolic = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, 1);
 		float diastolic = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, 3);
 		float arterialPressure = characteristic.getFloatValue(BluetoothGattCharacteristic.FORMAT_SFLOAT, 5);

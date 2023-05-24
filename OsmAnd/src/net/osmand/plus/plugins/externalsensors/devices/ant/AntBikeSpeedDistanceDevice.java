@@ -17,7 +17,7 @@ import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeDistanceSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ant.AntBikeSpeedSensor;
 
-public class AntBikeSpeedDistanceDevice extends AntAbstractDevice<AntPlusBikeSpeedDistancePcc> {
+public class AntBikeSpeedDistanceDevice extends AntLegacyDevice<AntPlusBikeSpeedDistancePcc> {
 
 	private AntBikeSpeedCadenceDevice spdCadDevice;
 

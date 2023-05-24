@@ -856,7 +856,7 @@
     <string name="add_as_last_destination_point">Додати останнім проміжним пунктом</string>
     <string name="add_as_first_destination_point">Додати першим проміжним пунктом</string>
     <string name="replace_destination_point">Замінити пункт призначення</string>
-    <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
+    <string name="new_destination_point_dialog">Пункт призначення вже задано:</string>
     <string name="shared_string_target_points">Пункти призначення</string>
     <string name="intermediate_point_too_far">Проміжний пункт %1$s далеко від найближчої дороги.</string>
     <string name="arrived_at_intermediate_point">Ви прибули в проміжний пункт призначення</string>
@@ -1235,7 +1235,7 @@
     <string name="speech_rate">Швидкість вимови</string>
     <string name="complex_route_calculation_failed">Збій швидкого прокладання маршруту (%s), перемикання на повільний режим обчислення.</string>
     <string name="disable_complex_routing_descr">Вимкнути двоступеневе прокладання маршрутів для автомобільної навігації.</string>
-    <string name="disable_complex_routing">Вимкнути складну маршрутизацію</string>
+    <string name="disable_complex_routing">Вимкнути багатоступеневе прокладання маршруту</string>
     <string name="amenity_type_seamark">Навігаційний знак</string>
     <string name="app_modes_choose_descr">Виберіть показані профілі.</string>
     <string name="app_modes_choose">Профілі застосунку</string>
@@ -1275,7 +1275,7 @@
     <string name="continue_navigation">Продовжити навігацію</string>
     <string name="pause_navigation">Призупинити навігацію</string>
     <string name="rendering_attr_subwayMode_name">Маршрути метро</string>
-    <string name="rendering_attr_alpineHiking_name">Альпіністська шкала складності маршруту</string>
+    <string name="rendering_attr_alpineHiking_name">Альпіністська шкала складності маршруту (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Показ маршрутів за шкалою SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Піші туристичні маршрути</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Показ шляхів згідно з OSMC-маркуванням.</string>
@@ -5219,7 +5219,7 @@
     <string name="map_3d_mode_action">3D-режим</string>
     <string name="map_2d_mode_action">2D-режим</string>
     <string name="map_3d_mode_description">Рух двома пальцями вздовж екрану, вгору-вниз, дозволяє змінювати кут нахилу мапи.</string>
-    <string name="map_3d_mode_hint">Затискання кнопки дозволяє змінити положення кнопки.</string>
+    <string name="map_3d_mode_hint">Затискання кнопки дозволяє змінити її положення.</string>
     <string name="visible_in_3d_mode">Видимий у 3D-режимі</string>
     <string name="rendering_value_caiScale_name">Шкала CAI</string>
     <string name="rendering_value_sacScale_name">Шкала SAC</string>

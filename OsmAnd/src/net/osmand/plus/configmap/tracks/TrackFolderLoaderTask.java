@@ -41,7 +41,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 
 	@Override
 	protected TrackFolder doInBackground(Void... voids) {
-		TrackFolder tracksFolder = new TrackFolder(dir);
+		TrackFolder tracksFolder = new TrackFolder(dir, null);
 		loadGPXFolder(tracksFolder, "");
 		return tracksFolder;
 	}
@@ -51,7 +51,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 		File[] files = listFilesSorted(sortByMode, folderFile);
 		for (File file : files) {
 			if (file.isDirectory()) {
-				TrackFolder folder = new TrackFolder(file);
+				TrackFolder folder = new TrackFolder(file, trackFolder);
 				trackFolder.addFolder(folder);
 				loadGPXFolder(folder, getSubfolderTitle(file, subfolder));
 			} else if (isGpxFile(file)) {

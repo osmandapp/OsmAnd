@@ -15,12 +15,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
 public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_CURRENT_LOCATION_COORDINATES_WIDGET;
-	}
-
 	public CoordinatesCurrentLocationWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, COORDINATES_CURRENT_LOCATION);
 	}

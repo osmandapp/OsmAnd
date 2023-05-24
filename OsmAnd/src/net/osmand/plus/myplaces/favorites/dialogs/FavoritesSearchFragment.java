@@ -9,7 +9,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +39,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -112,15 +112,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 		searchEditText = view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_favorites);
 		searchEditText.addTextChangedListener(
-				new TextWatcher() {
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
-					}
-
+				new SimpleTextWatcher() {
 					@Override
 					public void afterTextChanged(Editable s) {
 						String newQueryText = s.toString();

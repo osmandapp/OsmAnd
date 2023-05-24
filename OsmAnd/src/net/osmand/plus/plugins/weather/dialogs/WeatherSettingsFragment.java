@@ -129,7 +129,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 		if (WEATHER_ONLINE_CACHE.equals(key) && offlineForecastHelper.canClearOnlineCache()) {
 			Context ctx = getContext();
 			if (ctx != null) {
-				WeatherDialogs.showClearOnlineCacheDialog(ctx);
+				WeatherDialogs.showClearOnlineCacheDialog(ctx, isNightMode());
 			}
 			return false;
 		}

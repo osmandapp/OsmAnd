@@ -447,5 +447,6 @@
 	<dimen name="radius_double_large">18dp</dimen>
 
 	<dimen name="bottom_space_height">160dp</dimen>
+	<dimen name="external_devices_empty_content_centre_margin">126dp</dimen>
 
 </resources>
