@@ -4415,4 +4415,18 @@
     <string name="poi_socket_type2_cable_voltage_filter">Напружанне раздыма кабеля тыпу 2</string>
     <string name="poi_socket_type3a_output_filter">Выхад раздыма тыпу 3a</string>
     <string name="poi_socket_type2_cable_output_filter">Кабельны выхад тыпу 2</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_water_filter">Вада;Пітная вада</string>
+    <string name="poi_socket_type3a_voltage">Раздым: кабель (тып 3a): напружанне</string>
+    <string name="poi_socket_type2_cable">Раздым: кабель (тып 2)</string>
+    <string name="poi_socket_type3a_current">Раздым: кабель (тып 3a): ток</string>
+    <string name="poi_socket_type3a_output">Раздым: кабель (тып 3a): магутнасць</string>
+    <string name="poi_socket_type3c_voltage">Раздым: кабель (тып 3c): напружанне</string>
+    <string name="poi_self_checkout">Самастойнае афармленне</string>
+    <string name="poi_socket_type3c_current">Раздым: кабель (тып 3c): ток</string>
+    <string name="poi_socket_type3c_output">Раздым: кабель (тып 3c): магутнасць</string>
+    <string name="poi_recycling_pet_drink_bottles">Пластыкавыя бутэлькі ад напояў</string>
+    <string name="poi_socket_type2_cable_current">Раздым: кабель (тып 2): ток</string>
+    <string name="poi_socket_type2_cable_output">Раздым: кабель (тып 2): магутнасць</string>
+    <string name="poi_waste_accepted">Прыманыя адыходы</string>
 </resources>
