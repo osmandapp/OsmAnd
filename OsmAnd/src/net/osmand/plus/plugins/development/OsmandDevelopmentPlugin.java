@@ -81,7 +81,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		enable3DMapsListener = change -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null && mapContext.isVectorLayerEnabled()) {
+			if (mapContext != null) {
 				mapContext.recreateHeightmapProvider();
 			}
 		};

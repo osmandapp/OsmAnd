@@ -3,6 +3,10 @@ package net.osmand.plus.views.mapwidgets;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -11,12 +15,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 
 public enum WidgetsPanel {
 
@@ -167,10 +166,6 @@ public enum WidgetsPanel {
 		return this == LEFT || this == RIGHT;
 	}
 
-	public boolean isDuplicatesAllowed() {
-		return this == LEFT || this == RIGHT;
-	}
-
 	@NonNull
 	public ListStringPreference getOrderPreference(@NonNull OsmandSettings settings) {
 		if (this == LEFT) {
@@ -189,10 +184,8 @@ public enum WidgetsPanel {
 	public List<WidgetsPanel> getMergedPanels() {
 		if (this == LEFT || this == RIGHT) {
 			return Arrays.asList(LEFT, RIGHT);
-		} else if (this == TOP) {
-			return Collections.singletonList(TOP);
-		} else if (this == BOTTOM) {
-			return Collections.singletonList(BOTTOM);
+		} else if (this == TOP || this == BOTTOM) {
+			return Arrays.asList(TOP, BOTTOM);
 		}
 		throw new IllegalStateException("Unsupported widgets panel");
 	}

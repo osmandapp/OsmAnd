@@ -32,14 +32,12 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -57,6 +55,8 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
@@ -516,24 +516,21 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		boolean nightMode = isNightMode();
 		ApplicationMode appMode = getSelectedAppMode();
 		int profileColor = appMode.getProfileColor(nightMode);
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
+		int selected = preference.getModeValue(appMode) ? 0 : 1;
 		String[] entries = new String[] {
 				getCameraAppTitle(true),
 				getCameraAppTitle(false)
 		};
-		int selected = preference.getModeValue(appMode) ? 0 : 1;
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				entries, nightMode, selected, app, profileColor, themeRes, v -> {
-					boolean useSystemApp = (int) v.getTag() == 0;
-					onConfirmPreferenceChange(preference.getId(), useSystemApp, ApplyQueryType.SNACK_BAR);
-				}
-		);
-		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-		builder.setTitle(getString(R.string.camera_app));
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(ctx, nightMode)
+				.setTitle(getString(R.string.camera_app))
+				.setControlsColor(profileColor);
+
+		CustomAlert.showSingleSelection(dialogData, entries, selected, v -> {
+			boolean useSystemApp = (int) v.getTag() == 0;
+			onConfirmPreferenceChange(preference.getId(), useSystemApp, ApplyQueryType.SNACK_BAR);
+		});
 	}
 
 	@NonNull

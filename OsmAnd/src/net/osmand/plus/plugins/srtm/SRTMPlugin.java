@@ -3,12 +3,12 @@ package net.osmand.plus.plugins.srtm;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Drawable;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,7 +26,10 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -490,17 +493,12 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void selectPropertyValue(MapActivity activity,
-	                                RenderingRuleProperty p,
-	                                CommonPreference<String> pref,
-	                                Runnable callback) {
-		String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(activity,
-				p.getAttrName(), p.getName());
+	public void selectPropertyValue(
+			MapActivity activity, RenderingRuleProperty p,
+			CommonPreference<String> pref, Runnable callback
+	) {
 		boolean nightMode = isNightMode(activity, app);
-		int themeRes = getThemeRes(activity, app);
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-		b.setTitle(propertyDescr);
-
+		String title = AndroidUtils.getRenderingStringPropertyDescription(activity, p.getAttrName(), p.getName());
 		List<String> possibleValuesList = new ArrayList<>(Arrays.asList(p.getPossibleValues()));
 		possibleValuesList.remove(CONTOUR_LINES_DISABLED_VALUE);
 		String[] possibleValues = possibleValuesList.toArray(new String[0]);
@@ -521,33 +519,25 @@ public class SRTMPlugin extends OsmandPlugin {
 					possibleValues[j]);
 		}
 
-		int selectedModeColor = settings.getApplicationMode().getProfileColor(nightMode);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				possibleValuesString, nightMode, i, app, selectedModeColor, themeRes, new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						int which = (int) v.getTag();
-						if (which == 0) {
-							pref.set("");
-						} else {
-							pref.set(possibleValues[which - 1]);
-						}
-						activity.refreshMapComplete();
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(title)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+				.setNegativeButton(R.string.shared_string_dismiss, null)
+				.setOnDismissListener(dialog -> {
+					if (callback != null) {
+						callback.run();
 					}
-				}
-		);
-		b.setNegativeButton(R.string.shared_string_dismiss, null);
-		b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if (callback != null) {
-					callback.run();
-				}
+				});
+
+		CustomAlert.showSingleSelection(dialogData, possibleValuesString, i, v -> {
+			int which = (int) v.getTag();
+			if (which == 0) {
+				pref.set("");
+			} else {
+				pref.set(possibleValues[which - 1]);
 			}
+			activity.refreshMapComplete();
 		});
-		b.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(b.show());
 	}
 
 	private static boolean isNightMode(Activity activity, OsmandApplication app) {
@@ -555,10 +545,6 @@ public class SRTMPlugin extends OsmandPlugin {
 			return false;
 		}
 		return app.getDaynightHelper().isNightMode(activity instanceof MapActivity);
-	}
-
-	private static int getThemeRes(Activity activity, OsmandApplication app) {
-		return isNightMode(activity, app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	@Override

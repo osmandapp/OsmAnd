@@ -14,6 +14,10 @@
     <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
     <string name="external_sensors_not_found">Sensors not found</string>
     <string name="external_sensors_source_of_data">Source of data</string>
+    <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
+    <string name="delete_folder_question">Delete folder?</string>
+    <string name="delete_folder">Delete folder</string>
+    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
     <string name="rssi_widget_desc">Shows the RSSI level of your external device.</string>
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">This folder doesn\’t have any track yet.</string>

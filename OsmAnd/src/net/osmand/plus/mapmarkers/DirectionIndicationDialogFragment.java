@@ -1,5 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
@@ -18,6 +20,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ListPopupWindow;
+import androidx.appcompat.widget.Toolbar;
+
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -31,15 +38,9 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 
 import java.util.LinkedList;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ListPopupWindow;
-import androidx.appcompat.widget.Toolbar;
-
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
 
@@ -170,9 +171,9 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private CharSequence[] getMenuTitles() {
 		if (settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1) {
-			return new CharSequence[]{getActiveString(R.string.shared_string_one), getString(R.string.shared_string_two)};
+			return new CharSequence[] {getActiveString(R.string.shared_string_one), getString(R.string.shared_string_two)};
 		}
-		return new CharSequence[]{getString(R.string.shared_string_one), getActiveString(R.string.shared_string_two)};
+		return new CharSequence[] {getString(R.string.shared_string_one), getActiveString(R.string.shared_string_two)};
 	}
 
 	private SpannableString getActiveString(int id) {
@@ -198,7 +199,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				imgList.add(getArrowTwoImg());
 			}
 		}
-		if (settings.SHOW_MAP_MARKERS_BAR_WIDGET.get()) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(mapActivity)) {
 			imgList.add(getTopBar1Img());
 			if (count == 2) {
 				imgList.add(getTopBar2Img());

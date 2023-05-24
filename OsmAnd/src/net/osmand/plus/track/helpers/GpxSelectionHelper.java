@@ -471,7 +471,13 @@ public class GpxSelectionHelper {
 	}
 
 	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, @Nullable SelectGpxTaskListener listener) {
-		clearAllGpxFilesToShow(true);
+		saveTracksVisibility(trackItems, listener, true);
+	}
+
+	public void saveTracksVisibility(@NonNull Collection<TrackItem> trackItems, @Nullable SelectGpxTaskListener listener, boolean clearPrevious) {
+		if (clearPrevious) {
+			clearAllGpxFilesToShow(true);
+		}
 
 		Map<String, Boolean> selectedFileNames = new HashMap<>();
 		for (TrackItem trackItem : trackItems) {

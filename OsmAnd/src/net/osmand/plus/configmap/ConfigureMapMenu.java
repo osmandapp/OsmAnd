@@ -40,12 +40,10 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTE
 
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.annotation.StyleRes;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -142,11 +140,6 @@ public class ConfigureMapMenu {
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
-	}
-
-	@StyleRes
-	protected static int getThemeRes(boolean nightMode) {
-		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	private void createLayersItems(@NonNull List<RenderingRuleProperty> customRules,
@@ -504,8 +497,6 @@ public class ConfigureMapMenu {
 	                                           boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-		int themeRes = getThemeRes(nightMode);
 
 		adapter.addItem(new ContextMenuItem(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true)
@@ -552,7 +543,7 @@ public class ConfigureMapMenu {
 				.setIcon(ConfigureMapUtils.getDayNightIcon(activity))
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapModeDialog(activity, themeRes, nightMode);
+						ConfigureMapDialogs.showMapModeDialog(activity, nightMode);
 					}
 					return false;
 				})
@@ -566,7 +557,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_magnifier)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapMagnifierDialog(activity, themeRes, nightMode, item, uiAdapter);
+						ConfigureMapDialogs.showMapMagnifierDialog(activity, nightMode, item, uiAdapter);
 					}
 					return false;
 				})
@@ -585,7 +576,7 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_text_size)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showTextSizeDialog(activity, themeRes, nightMode, item, uiAdapter);
+						ConfigureMapDialogs.showTextSizeDialog(activity, nightMode, item, uiAdapter);
 					}
 					return false;
 				})
@@ -600,19 +591,19 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_language)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapLanguageDialog(activity, themeRes, nightMode, item, uiAdapter);
+						ConfigureMapDialogs.showMapLanguageDialog(activity, nightMode, item, uiAdapter);
 					}
 					return false;
 				})
 				.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE));
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
-				UI_CATEGORY_DETAILS, activity, DETAILS_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_DETAILS, activity, DETAILS_ID, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				UI_CATEGORY_HIDE, activity, HIDE_ID, nightMode, selectedProfileColor);
+				UI_CATEGORY_HIDE, activity, HIDE_ID, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -632,8 +623,7 @@ public class ConfigureMapMenu {
 	                                         String category,
 	                                         MapActivity activity,
 	                                         String id,
-	                                         boolean nightMode,
-	                                         @ColorInt int selectedProfileColor) {
+	                                         boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 
@@ -655,7 +645,7 @@ public class ConfigureMapMenu {
 					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), properties, preferences, uiAdapter, item);
 				} else {
 					ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
-							activity.getString(strId), properties, preferences, nightMode, selectedProfileColor);
+							activity.getString(strId), properties, preferences, nightMode);
 				}
 				return false;
 			};
