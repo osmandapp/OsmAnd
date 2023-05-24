@@ -39,6 +39,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	private final MapMarkersHelper markersHelper;
 	private final boolean portraitMode;
+	private final String customId;
 
 	private final View markerContainer2nd;
 	private final ImageView arrowImg;
@@ -57,11 +58,12 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		return R.layout.map_markers_widget;
 	}
 
-	public MapMarkersBarWidget(@NonNull MapActivity mapActivity) {
+	public MapMarkersBarWidget(@NonNull MapActivity mapActivity, String customId) {
 		super(mapActivity, MARKERS_TOP_BAR);
 
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		this.customId = customId;
 
 		markerContainer2nd = view.findViewById(R.id.map_markers_top_bar_2nd);
 		arrowImg = view.findViewById(R.id.map_marker_arrow);
@@ -239,13 +241,17 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 		boolean mapCenterVisible = visibilityHelper.shouldShowTopMapCenterCoordinatesWidget();
 		boolean currentCoordinatesVisible = visibilityHelper.shouldShowTopCurrentLocationCoordinatesWidget();
-		for (MapWidget widget : followingWidgets) {
-			WidgetsPanel panel = widget.widgetType.getPanel(settings);
-			if (panel == WidgetsPanel.BOTTOM || widget instanceof MapMarkersBarWidget
-				|| (widget instanceof CoordinatesBaseWidget && (mapCenterVisible || currentCoordinatesVisible))) {
-				showBottomShadow = false;
-				break;
+		WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
+		if (widgetsPanel == WidgetsPanel.TOP) {
+			for (MapWidget widget : followingWidgets) {
+				if (widget instanceof MapMarkersBarWidget
+						|| (widget instanceof CoordinatesBaseWidget && (mapCenterVisible || currentCoordinatesVisible))) {
+					showBottomShadow = false;
+					break;
+				}
 			}
+		} else {
+			showBottomShadow = false;
 		}
 		showHideBottomShadow(showBottomShadow);
 	}
