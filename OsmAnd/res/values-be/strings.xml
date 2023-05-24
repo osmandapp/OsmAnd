@@ -4890,4 +4890,12 @@
     <string name="map_widget_altitude_current_location_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання.</string>
     <string name="map_widget_altitude_desc">Паказвае вышыню над узроўнем мора для бягучага месцазнаходжання або для цэнтра мапы</string>
     <string name="map_widget_altitude_map_center_desc">Паказвае вышыню над узроўнем мора для цэнтра мапы.</string>
+    <string name="send_uuid_preference">Адпраўляць унікальны ідэнтыфікатар карыстальніка (UUID)</string>
+    <string name="shared_string_identifiers">Ідэнтыфікатары</string>
+    <string name="delete_track_folder_dialog_message">Гэта выдаліць папку \"%1$s\" і ўсе ўключаныя трэкі (%2$s).</string>
+    <string name="delete_folder_question">Выдаліць папку\?</string>
+    <string name="delete_folder">Выдаліць папку</string>
+    <string name="show_all_tracks_on_the_map">Паказаць усе сляды на карце</string>
+    <string name="rssi_widget_desc">Паказвае ўзровень магутнасці сігналу (RSSI) на вашай знешняй прыладзе.</string>
+    <string name="map_widget_rssi">Узровень магутнасці сігналу (Rssi)</string>
 </resources>
