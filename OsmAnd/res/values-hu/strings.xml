@@ -5207,4 +5207,15 @@
     <string name="map_3d_mode_description">Érintse meg a térképet két ujjal, és mozgassa fel és le a térkép dőlésszögének beállításához.</string>
     <string name="rendering_value_caiScale_name">CAI skála</string>
     <string name="rendering_value_sacScale_name">SAC skála</string>
+    <string name="show_all_tracks_on_the_map">Minden nyomvonal megjelenítése a térképen</string>
+    <string name="rssi_widget_desc">Mutatja a külső eszköze jelszintjét.</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="tracks_empty_folder_description">Ebben a mappában még nincs nyomvonal.</string>
+    <string name="tracks_empty_folder">Üres mappa</string>
+    <string name="track_not_recorded">Nem lett rögzítve</string>
+    <string name="shared_string_new_track">Új nyomvonal</string>
+    <string name="shared_string_visible_on_map">Látható a térképen</string>
+    <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) %1$s mappát és minden benne tárolt nyomvonalat (%2$s).</string>
+    <string name="delete_folder_question">Mappa törlése\?</string>
+    <string name="delete_folder">Mappa törlése</string>
 </resources>
