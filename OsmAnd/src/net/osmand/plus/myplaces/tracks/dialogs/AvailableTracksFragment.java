@@ -168,6 +168,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		items.add(visibleTracksGroup);
 		items.addAll(rootFolder.getSubFolders());
 		items.addAll(rootFolder.getTrackItems());
+		if (rootFolder.getFlattenedTrackItems().size() != 0) {
+			items.add(rootFolder.getFolderStats());
+		}
 		return items;
 	}
 

@@ -154,9 +154,11 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		List<TrackItem> trackItems = selectedFolder.getTrackItems();
 		if (folders.isEmpty() && trackItems.isEmpty()) {
 			items.add(TYPE_EMPTY_FOLDER);
+		} else {
+			items.addAll(folders);
+			items.addAll(trackItems);
+			items.add(selectedFolder.getFolderStats());
 		}
-		items.addAll(folders);
-		items.addAll(trackItems);
 		return items;
 	}
 

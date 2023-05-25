@@ -1,11 +1,14 @@
 package net.osmand.plus.track.data;
 
+import static net.osmand.plus.track.helpers.GPXDatabase.*;
+
 import android.content.Context;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
@@ -71,6 +74,42 @@ public class TrackFolder implements TracksGroup {
 	}
 
 	@NonNull
+	public FolderStats getFolderStats() {
+		List<TrackItem> flattenedTrackItems = getFlattenedTrackItems();
+		int tracksCount = flattenedTrackItems.size();
+		float totalDistance = 0f;
+		int duration = 0;
+		long fileSize = 0;
+		double diffElevationUp = 0.0;
+		double diffElevationDown = 0.0;
+		for (TrackItem trackItem : flattenedTrackItems) {
+			GPXTrackAnalysis analysis = getTrackAnalysis(trackItem);
+			if (analysis != null) {
+				totalDistance += analysis.totalDistance;
+				diffElevationUp += analysis.diffElevationUp;
+				diffElevationDown += analysis.diffElevationDown;
+				File file = trackItem.getFile();
+				if (file != null && file.exists()) {
+					fileSize += trackItem.getFile().length();
+				}
+				if (analysis.isTimeSpecified()) {
+					duration += analysis.timeSpan / 1000.0f;
+				}
+			}
+		}
+		return new FolderStats(tracksCount, totalDistance, duration, fileSize, diffElevationUp, diffElevationDown);
+	}
+
+	@Nullable
+	public GPXTrackAnalysis getTrackAnalysis(TrackItem trackItem) {
+		GpxDataItem gpxDataItem = trackItem.getDataItem();
+		if (gpxDataItem != null) {
+			return gpxDataItem.getAnalysis();
+		}
+		return null;
+	}
+
+	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
 		List<TrackItem> items = new ArrayList<>(trackItems);
 		for (TrackFolder folder : subFolders) {
@@ -131,5 +170,23 @@ public class TrackFolder implements TracksGroup {
 	@Override
 	public String toString() {
 		return dirFile.getAbsolutePath();
+	}
+
+	public static class FolderStats {
+		public int tracksCount;
+		public float totalDistance;
+		public int duration;
+		public long fileSize;
+		public double diffElevationUp;
+		public double diffElevationDown;
+
+		public FolderStats(int tracksCount, float totalDistance, int duration, long fileSize, double diffElevationUp, double diffElevationDown) {
+			this.tracksCount = tracksCount;
+			this.totalDistance = totalDistance;
+			this.duration = duration;
+			this.fileSize = fileSize;
+			this.diffElevationUp = diffElevationUp;
+			this.diffElevationDown = diffElevationDown;
+		}
 	}
 }
