@@ -5214,7 +5214,7 @@
     <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Ce dossier ne contient aucune trace.</string>
     <string name="tracks_empty_folder">Dossier vide</string>
-    <string name="track_not_recorded">Pas enregistré</string>
+    <string name="track_not_recorded">Non enregistré</string>
     <string name="shared_string_new_track">Nouvelle trace</string>
     <string name="shared_string_visible_on_map">Visible sur la carte</string>
     <string name="delete_track_folder_dialog_message">Cela supprimera le dossier \"%1$s\" ainsi que toutes les traces (%2$s) dans celui-ci.</string>
