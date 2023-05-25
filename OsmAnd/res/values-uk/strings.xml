@@ -27,7 +27,7 @@
     <string name="modify_transparency">Змінити прозорість (0 – прозорий, 255 – непрозорий)</string>
     <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за користування OsmAnd. Завантажуйте регіональні дані для користування в офлайн-режимі за допомогою «Меню» → «Завантажити мапи» для перегляду мап, пошуку адрес, точок інтересу, громадського транспорту тощо.</string>
-    <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення загальних можливостей, перебуває в черзі завантаження.</string>
+    <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення загальних можливостей, очікує на завантаження.</string>
     <string name="select_index_file_to_download">Нічого не знайдено, але ви можете створити мапу самостійно (див. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн та кешовані растрові мапи</string>
     <string name="local_indexes_cat_map">Стандартні мапи (векторні)</string>
@@ -557,7 +557,7 @@
     <string name="opening_hours">Робочі години</string>
     <string name="opening_changeset">Відкривається набір змін…</string>
     <string name="closing_changeset">Закривається набір змін…</string>
-    <string name="commiting_node">Надсилання точки…</string>
+    <string name="commiting_node">Збереження точки…</string>
     <string name="loading_poi_obj">Завантаження точок інтересу…</string>
     <string name="auth_failed">Помилка авторизації</string>
     <string name="failed_op">помилка</string>
@@ -2166,7 +2166,7 @@
     <string name="quick_action_add_poi_descr">Натискання цієї кнопки додає POI посередині екрану.</string>
     <string name="quick_action_navigation_voice_descr">Перемикач, щоб вимкнути або увімкнути голосові інструкції під час навігації.</string>
     <string name="quick_action_add_parking_descr">Кнопка для додавання місця стоянки посередині екрана.</string>
-    <string name="quick_action_interim_dialog">Показати проміжний діалог</string>
+    <string name="quick_action_interim_dialog">Показувати проміжний діалог</string>
     <string name="favorite_autofill_toast_text">" збережено до "</string>
     <string name="quick_action_add_create_items">Створення елементів</string>
     <string name="add_new_folder">Додати нову теку</string>
@@ -2190,7 +2190,7 @@
     <string name="routing_attr_driving_style_balance_name">Збалансовано</string>
     <string name="routing_attr_driving_style_safety_name">Надавати перевагу побічним шляхам</string>
     <string name="routing_attr_driving_style_speed_name">Коротші маршрути</string>
-    <string name="animate_my_location">Анімувати моє розташування</string>
+    <string name="animate_my_location">Анімувати моє положення</string>
     <string name="animate_my_location_desc">Увімкнути пересування мапи за моїм місцем розташування під час навігації.</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення під час запуску</string>
     <string name="subscribe_email_desc">Підпишіться на нашу email-розсилку про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
@@ -5231,7 +5231,7 @@
     <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новий трек</string>
     <string name="shared_string_visible_on_map">Показати на мапі</string>
-    <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма треками (%2$s) з неї.</string>
-    <string name="delete_folder_question">Видалити теку\?</string>
-    <string name="delete_folder">Видалити теку</string>
+    <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде вилучено разом з усіма треками (%2$s) в ній.</string>
+    <string name="delete_folder_question">Вилучити теку\?</string>
+    <string name="delete_folder">Вилучити теку</string>
 </resources>
