@@ -3714,4 +3714,9 @@
     <string name="shared_storage_third_step">Дайте разрешение за достъп до папката. Без него OsmAnd не може да копира файлове.</string>
     <string name="icon_group_industrial">Промишленост</string>
     <string name="shared_string_migration">Мигриране</string>
+    <string name="app_profile_type">Вид на профила на приложението</string>
+    <string name="show_parameter_seekbar">Лента за търсене на параметри</string>
+    <string name="fold_unfold">свиване/разгъване</string>
+    <string name="map_marker_options">Параметри на маркерите</string>
+    <string name="add_to_group">Добавяне в група</string>
 </resources>
