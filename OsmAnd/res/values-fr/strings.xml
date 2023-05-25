@@ -5087,9 +5087,9 @@
 \n• Correction des gestes pour incliner, zoomer et tourner la carte
 \n
 \n</string>
-    <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrage du relief à partir de cartes 3D</string>
+    <string name="generate_hillshade_from_3d_maps">Générer des cartes matricielles d\'ombrages du relief à partir de cartes 3D</string>
     <string name="generate_slope_from_3d_maps">Générer des cartes matricielles des pentes à partir de cartes 3D</string>
-    <string name="disable_vertex_hillshade_3d">Désactiver l\'ombrage du relief en 3D</string>
+    <string name="disable_vertex_hillshade_3d">Désactiver l\'ombrage des sommets en 3D</string>
     <string name="enable_3d_maps">Activer les cartes en 3D</string>
     <string name="clear_online_cache_description">Cela videra le cache des tuiles météo en ligne.</string>
     <string name="clear_online_cache">Vider le cache en ligne</string>
@@ -5104,7 +5104,7 @@
     <string name="free_maps_updates">Mises à jour gratuites (urgence)</string>
     <string name="common_weight_limit_error">La valeur minimale est \"%1$s\" %2$s. Si le poids de votre véhicule est inférieur à cette valeur, utilisez le profil \"%3$s\".</string>
     <string name="weather_forecast">Prévisions météo</string>
-    <string name="test_heightmap">Carte de hauteur test</string>
+    <string name="test_heightmap">Carte d\'altitude de test</string>
     <string name="offline_weather_forecast_desc">Vous pouvez télécharger les prévisions météo des 7 prochains jours.</string>
     <string name="offline_weather_forecast">Prévisions météo hors-ligne</string>
     <string name="rendering_value_defaultMedium_name">Par défaut (moyen)</string>
@@ -5207,4 +5207,15 @@
     <string name="rendering_value_sacScale_name">Échelle SAC</string>
     <string name="rendering_value_caiScale_name">Échelle CAI</string>
     <string name="visible_in_3d_mode">Visible en mode 3D</string>
+    <string name="delete_folder_question">Supprimer le dossier \?</string>
+    <string name="delete_folder">Supprimer le dossier</string>
+    <string name="show_all_tracks_on_the_map">Afficher toutes les traces sur la carte</string>
+    <string name="rssi_widget_desc">Affiche le niveau RSSI de votre appareil externe.</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="tracks_empty_folder_description">Ce dossier ne contient aucune trace.</string>
+    <string name="tracks_empty_folder">Dossier vide</string>
+    <string name="track_not_recorded">Pas enregistré</string>
+    <string name="shared_string_new_track">Nouvelle trace</string>
+    <string name="shared_string_visible_on_map">Visible sur la carte</string>
+    <string name="delete_track_folder_dialog_message">Cela supprimera le dossier \"%1$s\" ainsi que toutes les traces (%2$s) dans celui-ci.</string>
 </resources>
