@@ -1733,8 +1733,6 @@ public class GPXUtilities {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 		}
 
-		createArtificialPrimeMeridianPoints(gpxFile);
-
 		return gpxFile;
 	}
 
