@@ -532,7 +532,7 @@
     <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены.</string>
     <string name="select_tile_source_to_install">Выберите источники тайловых карт:</string>
     <string name="internet_not_available">Для данной операции требуется подключение к интернету, но оно недоступно.</string>
-    <string name="install_more">Загрузить ещё…</string>
+    <string name="install_more">Добавить ещё…</string>
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
     <string name="level_to_switch_vector_raster">Минимальный масштаб векторных карт</string>
     <string name="error_doing_search">Не удалось выполнить локальный поиск.</string>
@@ -1518,13 +1518,13 @@
     <string name="rendering_attr_subwayMode_name">Линии метро</string>
     <string name="continue_navigation">Продолжить навигацию</string>
     <string name="pause_navigation">Приостановить навигацию</string>
-    <string name="rendering_attr_alpineHiking_description">Раскраска троп и дорог согласно шкале SAC.</string>
+    <string name="rendering_attr_alpineHiking_description">Раскраска троп и дорог согласно шкале SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Отрисовка дорог в соответствии с трассировкой OSMC.</string>
     <string name="arrival_distance_factor_early">Раннее</string>
     <string name="arrival_distance_factor_normally">По умолчанию</string>
     <string name="arrival_distance_factor_late">Позднее</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
-    <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале SAC</string>
+    <string name="rendering_attr_alpineHiking_name">Шкала сложности горных походов</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Пешеходные маршруты</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршрутных такси</string>
@@ -2753,7 +2753,7 @@
     <string name="download_all">Скачать все</string>
     <string name="light_rs_render_descr">Простой стиль для вождения. Мягкий ночной режим, контурные линии, контрастные дороги в оранжевом стиле, тусклые второстепенные объекты карты.</string>
     <string name="topo_render_descr">Для пеших походов, трекинга и велопоездок на природе. Хорошо читается при сложном освещении. Контрастные дороги и природные объекты, различные типы маршрутов, контурные линии с расширенными настройками, дополнительные детали. Параметр «дорожное покрытие» позволяет различать поверхность и качество дорог. Ночной режим отсутствует.</string>
-    <string name="default_render_descr">Стиль общего назначения. Густонаселённые города показаны упрощённо. Выделяет контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация пешеходных маршрутов по шкале SAC, объекты спортивных сплавов.</string>
+    <string name="default_render_descr">Стиль общего назначения. Густонаселённые города показаны упрощённо. Выделяет контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация пешеходных маршрутов по шкале SAC/CAI, объекты спортивных сплавов.</string>
     <string name="open_wikipedia_link_online">Открыть ссылку Википедии в онлайн</string>
     <string name="open_wikipedia_link_online_description">Ссылка будет открыта в веб-браузере.</string>
     <string name="read_wikipedia_offline_description">Подпишитесь на OsmAnd Live и читайте Википедию и Викигид в режиме офлайн.</string>
@@ -4428,7 +4428,7 @@
     <string name="shared_storage_last_step">Вы сможете указать новое хранилище данных после выбора общего хранилища.</string>
     <string name="shared_storage_first_step">Нажмите «%1$s».
 \nВ открывшемся файловом менеджере найдите и откройте папку osmand.</string>
-    <string name="storage_copied_files_size">Скопировано файлов: %1$s %2$s</string>
+    <string name="storage_copied_files_size">Обработано %1$s файла(ов), %2$s</string>
     <string name="storage_found_files_size">Найдено файлов: %1$s %2$s</string>
     <string name="storage_copying_files_size">Копируется файлов: %1$s %2$s</string>
     <string name="shared_string_memory">Память</string>
