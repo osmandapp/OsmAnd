@@ -1032,12 +1032,9 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "desc", route.desc);
 
 			for (WptPt p : route.points) {
-				boolean artificial = Math.abs(p.lon) == PRIME_MERIDIAN;
-				if (!artificial) {
-					serializer.startTag(null, "rtept"); //$NON-NLS-1$
-					writeWpt(serializer, p, progress);
-					serializer.endTag(null, "rtept"); //$NON-NLS-1$
-				}
+				serializer.startTag(null, "rtept"); //$NON-NLS-1$
+				writeWpt(serializer, p, progress);
+				serializer.endTag(null, "rtept"); //$NON-NLS-1$
 			}
 			writeExtensions(serializer, route, null);
 			serializer.endTag(null, "rte"); //$NON-NLS-1$
@@ -1054,12 +1051,9 @@ public class GPXUtilities {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
 					writeNotNullText(serializer, "name", segment.name);
 					for (WptPt p : segment.points) {
-						boolean artificial = Math.abs(p.lon) == PRIME_MERIDIAN;
-						if (!artificial) {
-							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-							writeWpt(serializer, p, progress);
-							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
-						}
+						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
+						writeWpt(serializer, p, progress);
+						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
 					}
 					assignRouteExtensionWriter(segment);
 					writeExtensions(serializer, segment, null);
@@ -1893,36 +1887,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static void createArtificialPrimeMeridianPoints(GPXFile gpxFile) {
-		if (gpxFile.getNonEmptySegmentsCount() == 0) {
-			for (Route route : gpxFile.routes) {
-				createArtificialPrimeMeridianPoints(route.points);
-			}
-		} else {
-			for (Track track : gpxFile.tracks) {
-				for (TrkSegment segment : track.segments) {
-					createArtificialPrimeMeridianPoints(segment.points);
-				}
-			}
-		}
-	}
-
-	private static void createArtificialPrimeMeridianPoints(List<WptPt> points) {
-		for (int i = 1; i < points.size(); ) {
-			WptPt previous = points.get(i - 1);
-			WptPt current = points.get(i);
-			if (Math.abs(current.lon - previous.lon) >= 180) {
-				WptPt projection = projectionOnPrimeMeridian(previous, current);
-				WptPt oppositeSideProjection = new WptPt(projection);
-				oppositeSideProjection.lon = -oppositeSideProjection.lon;
-				points.addAll(i, Arrays.asList(projection, oppositeSideProjection));
-				i += 2;
-			}
-			i++;
-		}
-	}
-
-	private static WptPt projectionOnPrimeMeridian(WptPt previous, WptPt next) {
+	public static WptPt projectionOnPrimeMeridian(WptPt previous, WptPt next) {
 		double lat = MapUtils.getProjection(0, 0, previous.lat, previous.lon, next.lat, next.lon)
 				.getLatitude();
 		double lon = previous.lon < 0 ? -PRIME_MERIDIAN : PRIME_MERIDIAN;
