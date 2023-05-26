@@ -48,14 +48,11 @@ public class Map3DButton extends MapButton {
 
 	private View.OnClickListener getOnCLickListener(OsmandMapTileView mapView) {
 		return view -> {
-			float tiltAngle;
-			if (!isDefaultElevationAngle()) {
+			boolean defaultElevationAngle = isDefaultElevationAngle();
+			float tiltAngle = defaultElevationAngle ? DEFAULT_ELEVATION_ANGLE : getElevationAngle(mapView.getZoom());
+			if (!defaultElevationAngle) {
 				settings.MAP_3D_MODE_ELEVATION_ANGLE.set(app.getOsmandMap().getMapView().getElevationAngle());
-				tiltAngle = DEFAULT_ELEVATION_ANGLE;
-			} else {
-				tiltAngle = getElevationAngle(mapView.getZoom());
 			}
-
 			animateDraggingMapThread.startTilting(tiltAngle);
 			mapView.refreshMap();
 		};
