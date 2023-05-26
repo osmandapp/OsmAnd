@@ -307,13 +307,9 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onFileMove(@NonNull File src, @NonNull File dest) {
-		File destFolder = dest.getParentFile();
-		if (destFolder != null && !destFolder.exists() && !destFolder.mkdirs()) {
-			app.showToastMessage(R.string.file_can_not_be_moved);
-		} else if (dest.exists()) {
+		if (dest.exists()) {
 			app.showToastMessage(R.string.file_with_name_already_exists);
-		} else if (src.renameTo(dest)) {
-			app.getGpxDbHelper().rename(src, dest);
+		} else if (FileUtils.renameGpxFile(app, src, dest) != null) {
 			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
@@ -361,6 +357,56 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		};
 	}
 
+	@Override
+	public void restoreState(Bundle bundle) {
+		super.restoreState(bundle);
+
+		if (rootFolder != null) {
+			if (!Algorithms.isEmpty(selectedItemPath)) {
+				TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
+				if (trackItem != null) {
+					showTrackItem(rootFolder, trackItem);
+				}
+				selectedItemPath = null;
+			} else if (!Algorithms.isEmpty(preSelectedFolder)) {
+				openSubfolder(rootFolder, new File(preSelectedFolder));
+				preSelectedFolder = null;
+			}
+		}
+	}
+
+	private void showTrackItem(@NonNull TrackFolder folder, @NonNull TrackItem trackItem) {
+		File file = trackItem.getFile();
+		File dirFile = file != null ? file.getParentFile() : null;
+		if (dirFile != null) {
+			if (Algorithms.objectEquals(selectedFolder.getDirFile(), dirFile)) {
+				int index = adapter.getItemPosition(trackItem);
+				if (index != -1) {
+					recyclerView.scrollToPosition(index);
+				}
+			} else {
+				openSubfolder(folder, dirFile);
+			}
+		}
+	}
+
+	private void openSubfolder(@NonNull TrackFolder folder, @NonNull File file) {
+		TrackFolder subfolder = getSubfolder(folder, file);
+		if (subfolder != null) {
+			openTrackFolder(subfolder);
+		}
+	}
+
+	@Nullable
+	private TrackFolder getSubfolder(@NonNull TrackFolder folder, @NonNull File file) {
+		for (TrackFolder subfolder : folder.getFlattenedSubFolders()) {
+			if (Algorithms.objectEquals(subfolder.getDirFile(), file)) {
+				return subfolder;
+			}
+		}
+		return null;
+	}
+
 	@NonNull
 	private LoadTracksListener getLoadTracksListener() {
 		return new LoadTracksListener() {
@@ -378,19 +424,8 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				updateContent();
 				updateFragmentsFolders();
 				updateProgressVisibility(false);
-				checkSubfolder(folder);
-			}
 
-			private void checkSubfolder(@NonNull TrackFolder folder) {
-				if (preSelectedFolder != null) {
-					for (TrackFolder subfolder : folder.getFlattenedSubFolders()) {
-						if (Algorithms.stringsEqual(subfolder.getDirName(), preSelectedFolder)) {
-							openTrackFolder(subfolder);
-							break;
-						}
-					}
-					preSelectedFolder = null;
-				}
+				restoreState(getArguments());
 			}
 
 			public void updateFragmentsFolders() {

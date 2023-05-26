@@ -31,12 +31,16 @@ public class CenterWidgetInfo extends MapWidgetInfo {
 	public WidgetsPanel getUpdatedPanel() {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
-		if (widgetType.defaultPanel == BOTTOM && TOP.contains(key, settings)) {
-			widgetPanel = TOP;
-		} else if (widgetType.defaultPanel == TOP && BOTTOM.contains(key, settings)) {
-			widgetPanel = BOTTOM;
+		if (widgetType != null) {
+			if (widgetType.defaultPanel == BOTTOM && TOP.contains(key, settings)) {
+				widgetPanel = TOP;
+			} else if (widgetType.defaultPanel == TOP && BOTTOM.contains(key, settings)) {
+				widgetPanel = BOTTOM;
+			} else {
+				widgetPanel = widgetType.defaultPanel;
+			}
 		} else {
-			widgetPanel = widgetType.defaultPanel;
+			widgetPanel = TOP.contains(key, settings) ? TOP : BOTTOM;
 		}
 		return widgetPanel;
 	}

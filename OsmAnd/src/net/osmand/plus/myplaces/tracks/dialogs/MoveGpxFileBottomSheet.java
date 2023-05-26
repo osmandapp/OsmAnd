@@ -74,7 +74,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-								null, MoveGpxFileBottomSheet.this, usedOnMap);
+								null, null, MoveGpxFileBottomSheet.this, usedOnMap);
 					}
 				})
 				.setCustomView(addNewFolderView)
@@ -162,7 +162,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target,
-									@NonNull String filePath, boolean usedOnMap, boolean showAllFolders) {
+	                                @NonNull String filePath, boolean usedOnMap, boolean showAllFolders) {
 		try {
 			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 				MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();

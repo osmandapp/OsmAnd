@@ -47,13 +47,18 @@ public class SideWidgetInfo extends MapWidgetInfo {
 	public WidgetsPanel getUpdatedPanel() {
 		OsmandSettings settings = widget.getMyApplication().getSettings();
 		WidgetType widgetType = getWidgetType();
-		if (widgetType.defaultPanel == LEFT && RIGHT.contains(key, settings)) {
-			widgetPanel = RIGHT;
-		} else if (widgetType.defaultPanel == RIGHT && LEFT.contains(key, settings)) {
-			widgetPanel = LEFT;
+		if (widgetType != null) {
+			if (widgetType.defaultPanel == LEFT && RIGHT.contains(key, settings)) {
+				widgetPanel = RIGHT;
+			} else if (widgetType.defaultPanel == RIGHT && LEFT.contains(key, settings)) {
+				widgetPanel = LEFT;
+			} else {
+				widgetPanel = widgetType.defaultPanel;
+			}
 		} else {
-			widgetPanel = widgetType.defaultPanel;
+			widgetPanel = LEFT.contains(key, settings) ? LEFT : RIGHT;
 		}
+
 		return widgetPanel;
 	}
 }

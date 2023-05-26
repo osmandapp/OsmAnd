@@ -25,10 +25,13 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
+
+	private TextView toolbarTitle;
 
 	@Override
 	protected int getLayoutId() {
@@ -60,6 +63,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	private void setupToolbar(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbarTitle = view.findViewById(R.id.toolbar_title);
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
@@ -114,28 +118,41 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	protected void updateContent() {
 		super.updateContent();
-		View view = getView();
-		if (view != null) {
-			TextView title = view.findViewById(R.id.toolbar_title);
-			title.setText(selectedFolder.getName(app));
-		}
+		toolbarTitle.setText(selectedFolder.getName(app));
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		updateActionBar(false);
+		restoreState(getArguments());
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onDestroy() {
+		super.onDestroy();
 		updateActionBar(true);
 	}
 
 	@Override
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 		showItemOptionsMenu(view, trackItem);
+	}
+
+	@Override
+	public void restoreState(Bundle bundle) {
+		super.restoreState(bundle);
+
+		if (!Algorithms.isEmpty(selectedItemPath)) {
+			TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
+			if (trackItem != null) {
+				int index = adapter.getItemPosition(trackItem);
+				if (index != -1) {
+					recyclerView.scrollToPosition(index);
+				}
+			}
+			selectedItemPath = null;
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {

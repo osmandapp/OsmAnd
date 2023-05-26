@@ -77,14 +77,17 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		GpxFilesDeletionListener, SelectGpxTaskListener, OnTrackFolderAddListener {
 
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
+	public static final String SELECTED_ITEM_PATH_KEY = "selected_item_path_key";
 
 	protected ImportHelper importHelper;
 	protected GpxSelectionHelper gpxSelectionHelper;
 
 	protected TrackFolder rootFolder;
 	protected TrackFolder selectedFolder;
-	protected TrackFoldersAdapter adapter;
 
+	protected TrackFoldersAdapter adapter;
+	protected RecyclerView recyclerView;
+	protected String selectedItemPath;
 	protected String preSelectedFolder;
 
 	@ColorRes
@@ -139,7 +142,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		adapter.setTrackSelectionListener(this);
 		adapter.setEmptyTracksListener(this);
 
-		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+		recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setItemAnimator(null);
 		recyclerView.setAdapter(adapter);
@@ -161,6 +164,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	protected void updateContent() {
+		adapter.setSortMode(getTracksSortMode());
 		adapter.setItems(getAdapterItems());
 	}
 
@@ -197,9 +201,11 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 				.setOnClickListener(v -> {
 					FragmentManager manager = getFragmentManager();
 					if (manager != null) {
-						AddNewTrackFolderBottomSheet.showInstance(manager, null, this, isUsedOnMap());
+						File dir = selectedFolder.getDirFile();
+						AddNewTrackFolderBottomSheet.showInstance(manager, dir, null, this, isUsedOnMap());
 					}
 				})
+				.showTopDivider(true)
 				.create());
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -317,6 +323,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	private void showTrackOnMap(@NonNull TrackItem trackItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
+			selectedItemPath = trackItem.getPath();
+
 			Bundle bundle = storeState();
 			String screenName = app.getString(R.string.shared_string_tracks);
 			boolean temporary = gpxSelectionHelper.getSelectedFileByPath(trackItem.getPath()) == null;
@@ -327,7 +335,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void onTracksGroupClicked(@NonNull TracksGroup group) {
 		if (group instanceof TrackFolder) {
-			selectedFolder = (TrackFolder) group;
+			setSelectedFolder((TrackFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
 			boolean selected = !isTracksGroupSelected(group);
 			onTracksGroupSelected(group, selected);
@@ -396,13 +404,18 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnTrackFolderAddListener) {
+			((OnTrackFolderAddListener) fragment).onTrackFolderAdd(folderName);
+		}
 	}
 
 	@Override
 	public Bundle storeState() {
 		Bundle bundle = new Bundle();
 		bundle.putInt(TAB_ID, GPX_TAB);
-		bundle.putString(SELECTED_FOLDER_KEY, selectedFolder.getDirName());
+		bundle.putString(SELECTED_ITEM_PATH_KEY, selectedItemPath);
+		bundle.putString(SELECTED_FOLDER_KEY, selectedFolder.getDirFile().getAbsolutePath());
 		return bundle;
 	}
 
@@ -410,7 +423,18 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void restoreState(Bundle bundle) {
 		if (bundle != null && bundle.getInt(TAB_ID) == GPX_TAB) {
 			preSelectedFolder = bundle.getString(SELECTED_FOLDER_KEY);
+			selectedItemPath = bundle.getString(SELECTED_ITEM_PATH_KEY);
 		}
+	}
+
+	@Nullable
+	protected TrackItem geTrackItem(@NonNull TrackFolder folder, @NonNull String path) {
+		for (TrackItem trackItem : folder.getFlattenedTrackItems()) {
+			if (Algorithms.stringsEqual(trackItem.getPath(), path)) {
+				return trackItem;
+			}
+		}
+		return null;
 	}
 
 	@Override
