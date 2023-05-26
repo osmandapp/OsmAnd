@@ -31,6 +31,7 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -218,7 +219,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private class DashboardActionButton {
 		private Drawable icon;
 		private String text;
-		private View.OnClickListener onClickListener;
+		private OnClickListener onClickListener;
 	}
 
 	public DashboardOnMap(MapActivity ma) {
@@ -250,7 +251,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
-		View.OnClickListener listener = new View.OnClickListener() {
+		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				hideDashboard();

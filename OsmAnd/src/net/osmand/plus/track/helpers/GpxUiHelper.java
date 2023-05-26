@@ -279,7 +279,7 @@ public class GpxUiHelper {
 		String numberOfTracks = app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
 		if (lastModified > 0) {
 			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
-			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, tracksCount);
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, numberOfTracks);
 		}
 		return numberOfTracks;
 	}

@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
+import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackTabType;
+import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
@@ -41,6 +43,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHol
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.folder.TrackFolderOptionsListener;
@@ -50,6 +53,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -255,15 +259,15 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (group instanceof TrackFolder) {
 			openTrackFolder((TrackFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
-			showTracksVisibilityDialog();
+			showTracksVisibilityDialog(TrackTabType.ON_MAP.name());
 		}
 	}
 
-	private void showTracksVisibilityDialog() {
+	private void showTracksVisibilityDialog(@NonNull String tabName) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Bundle bundle = new Bundle();
-			bundle.putString(OPEN_TRACKS_TAB, TrackTabType.ON_MAP.name());
+			bundle.putString(OPEN_TRACKS_TAB, tabName);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}
@@ -290,8 +294,32 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		List<TrackItem> trackItems = folder.getFlattenedTrackItems();
-		app.getSelectedGpxHelper().saveTracksVisibility(trackItems, this, false);
+		showTracksVisibilityDialog(folder.getDirName());
+	}
+
+	@Override
+	public void showExportDialog(@NonNull TrackFolder folder) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			List<File> selectedFiles = new ArrayList<>();
+			for (TrackItem trackItem : folder.getFlattenedTrackItems()) {
+				selectedFiles.add(trackItem.getFile());
+			}
+			HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
+			selectedTypes.put(ExportSettingsType.TRACKS, selectedFiles);
+
+			Bundle bundle = new Bundle();
+			bundle.putSerializable(SELECTED_TYPES, selectedTypes);
+			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
+		}
+	}
+
+	@Override
+	public void showChangeAppearanceDialog(@NonNull TrackFolder folder) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), this);
+		}
 	}
 
 	@Override

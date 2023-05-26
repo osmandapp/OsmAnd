@@ -93,12 +93,9 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 
 		dismissButton = mainView.findViewById(R.id.dismiss_button);
 		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), getDismissButtonTextId());
-		dismissButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				onDismissButtonClickAction();
-				dismiss();
-			}
+		dismissButton.setOnClickListener(v -> {
+			onDismissButtonClickAction();
+			dismiss();
 		});
 		if (hideButtonsContainer()) {
 			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
@@ -109,12 +106,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 				rightButton = mainView.findViewById(R.id.right_bottom_button);
 				UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), rightBottomButtonTextId);
 				rightButton.setVisibility(View.VISIBLE);
-				rightButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						onRightBottomButtonClick();
-					}
-				});
+				rightButton.setOnClickListener(v -> onRightBottomButtonClick());
 			}
 		}
 		updateBackground();

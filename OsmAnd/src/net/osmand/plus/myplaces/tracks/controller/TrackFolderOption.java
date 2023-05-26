@@ -42,6 +42,6 @@ enum TrackFolderOption {
 
 	@NonNull
 	public static TrackFolderOption[] getAvailableOptions() {
-		return new TrackFolderOption[] {SHOW_ALL_TRACKS, EDIT_NAME, DELETE_FOLDER};
+		return new TrackFolderOption[] {SHOW_ALL_TRACKS, EDIT_NAME, CHANGE_APPEARANCE, EXPORT, DELETE_FOLDER};
 	}
 }

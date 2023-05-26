@@ -149,14 +149,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		iconHelp.setOnClickListener(view -> onHelpClick());
 		toolbar.setNavigationIcon(closeDrawable);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (wasChanged || fromTemplate) {
-					showExitDialog();
-				} else {
-					dismiss();
-				}
+		toolbar.setNavigationOnClickListener(v -> {
+			if (wasChanged || fromTemplate) {
+				showExitDialog();
+			} else {
+				dismiss();
 			}
 		});
 		int boxStrokeColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light);
@@ -196,12 +193,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		saveBtnTitle.setTypeface(FontCache.getRobotoMedium(requireContext()));
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
-		saveBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				saveTemplate();
-				dismiss();
-			}
+		saveBtn.setOnClickListener(view -> {
+			saveTemplate();
+			dismiss();
 		});
 		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -448,30 +442,27 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private OnClickListener getClickListener(ConfigurationItem item) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentManager fm = getFragmentManager();
-				boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
-				if (fm != null && !fm.isStateSaved()) {
-					switch (item) {
-						case ZOOM_LEVELS:
-							InputZoomLevelsBottomSheet.showInstance(
-									fm, EditMapSourceDialogFragment.this,
-									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom, newMapSource
-							);
-							break;
-						case EXPIRE_TIME:
-							ExpireTimeBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, expireTimeMinutes);
-							break;
-						case MERCATOR_PROJECTION:
-							MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
-							break;
-						case STORAGE_FORMAT:
-							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
-							break;
-					}
+		return view -> {
+			FragmentManager fm = getFragmentManager();
+			boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
+			if (fm != null && !fm.isStateSaved()) {
+				switch (item) {
+					case ZOOM_LEVELS:
+						InputZoomLevelsBottomSheet.showInstance(
+								fm, EditMapSourceDialogFragment.this,
+								R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
+								minZoom, maxZoom, newMapSource
+						);
+						break;
+					case EXPIRE_TIME:
+						ExpireTimeBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, expireTimeMinutes);
+						break;
+					case MERCATOR_PROJECTION:
+						MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
+						break;
+					case STORAGE_FORMAT:
+						TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
+						break;
 				}
 			}
 		};
