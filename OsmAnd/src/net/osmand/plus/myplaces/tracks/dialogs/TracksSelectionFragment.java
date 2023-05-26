@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +97,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	protected void setupAdapter(@NonNull View view) {
 		super.setupAdapter(view);
 		adapter.setSelectionMode(true);
+		adapter.setShouldShowFolder(true);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -247,7 +246,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	private void dismiss() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack(TAG, POP_BACK_STACK_INCLUSIVE);
+			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 		}
 	}
 
@@ -300,8 +299,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
+					.commitNowAllowingStateLoss();
 		}
 	}
 }

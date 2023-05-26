@@ -236,7 +236,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					AddNewTrackFolderBottomSheet.showInstance(activity.getSupportFragmentManager(),
-							null, SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap);
+							null, null, SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap);
 				}
 			}
 		};
