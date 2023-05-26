@@ -2668,7 +2668,7 @@ public class OsmandSettings {
 
 	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
 
-	public final CommonPreference<Float> ELEVATION_ANGLE_BEFORE_DEFAULT = new FloatPreference(this, "elevation_angle_before_default", 90).makeProfile();
+	public final CommonPreference<Float> MAP_3D_MODE_ELEVATION_ANGLE = new FloatPreference(this, "map_3d_mode_elevation_angle", 90).makeProfile();
 
 	/**
 	 * the location of a parked car

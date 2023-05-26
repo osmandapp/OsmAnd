@@ -1924,13 +1924,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		@Override
-		public void onViewAngleChanged(float angle) {
-			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
-				notifyOnElevationChanged(normalizeElevationAngle(initialElevation - angle));
-			}
-		}
-
-		@Override
 		public void onChangeViewAngleStarted() {
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
 				initialElevation = elevationAngle;
@@ -2094,12 +2087,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	private void notifyOnElevationChanged(float angle) {
-		for (ElevationListener listener : elevationListeners) {
-			listener.onElevationChanged(angle);
-		}
-	}
-
 	private void notifyLocationListeners(double lat, double lon) {
 		for (IMapLocationListener listener : locationListeners) {
 			listener.locationChanged(lat, lon, this);
@@ -2232,7 +2219,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public interface ElevationListener {
-		void onElevationChanged(float angle);
 		void onElevationChanging(float angle);
 	}
 }

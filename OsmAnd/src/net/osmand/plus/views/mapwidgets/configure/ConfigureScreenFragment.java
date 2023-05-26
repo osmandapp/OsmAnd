@@ -279,7 +279,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				})
 				.createButton());
 
-		if (settings.USE_OPENGL_RENDER.get()) {
+		if (app.useOpenGlRenderer()) {
 			Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
 			buttonsCard.addView(new ButtonBuilder()
 					.setTitle(getString(R.string.map_3d_mode_action))

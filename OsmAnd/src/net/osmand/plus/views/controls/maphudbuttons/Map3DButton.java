@@ -47,34 +47,28 @@ public class Map3DButton extends MapButton {
 	}
 
 	private ElevationListener getElevationListener() {
-		return new ElevationListener() {
-			@Override
-			public void onElevationChanged(float angle) {
-				if (angle != 90) {
-					settings.ELEVATION_ANGLE_BEFORE_DEFAULT.set(angle);
-				}
-			}
-
-			@Override
-			public void onElevationChanging(float angle) {
-				updateButton(angle != DEFAULT_ELEVATION_ANGLE);
-			}
-		};
+		return angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 	}
 
 	private View.OnClickListener getOnCLickListener(OsmandMapTileView mapView) {
 		return view -> {
-			animateDraggingMapThread.startTilting(isDefaultElevationAngle()
-					? getElevationAngle(mapView.getZoom())
-					: DEFAULT_ELEVATION_ANGLE);
+			float tiltAngle;
+			if (!isDefaultElevationAngle()) {
+				settings.MAP_3D_MODE_ELEVATION_ANGLE.set(app.getOsmandMap().getMapView().getElevationAngle());
+				tiltAngle = DEFAULT_ELEVATION_ANGLE;
+			} else {
+				tiltAngle = getElevationAngle(mapView.getZoom());
+			}
+
+			animateDraggingMapThread.startTilting(tiltAngle);
 			mapView.refreshMap();
 		};
 	}
 
 	private float getElevationAngle(int zoom) {
-		float elevationBeforeDefault = settings.ELEVATION_ANGLE_BEFORE_DEFAULT.get();
-		if (elevationBeforeDefault != 90) {
-			return elevationBeforeDefault;
+		float map3DModeElevationAngle = settings.MAP_3D_MODE_ELEVATION_ANGLE.get();
+		if (map3DModeElevationAngle != 90) {
+			return map3DModeElevationAngle;
 		} else if (zoom < 10) {
 			return 55;
 		} else if (zoom < 12) {
@@ -140,7 +134,7 @@ public class Map3DButton extends MapButton {
 		boolean shouldShowFabButton = mapActivity.getWidgetsVisibilityHelper().shouldShowFabButton();
 		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.get();
 
-		return settings.USE_OPENGL_RENDER.get() &&
+		return app.useOpenGlRenderer() &&
 				shouldShowFabButton &&
 				visibility == Map3DModeVisibility.VISIBLE
 				|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE
