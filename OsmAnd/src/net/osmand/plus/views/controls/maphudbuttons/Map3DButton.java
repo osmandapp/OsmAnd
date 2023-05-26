@@ -30,7 +30,7 @@ public class Map3DButton extends MapButton {
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
 		super(mapActivity, fabButton, id);
 		OsmandMapTileView mapView = mapActivity.getMapView();
-		elevationListener = getElevationListener();
+		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 		animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 
 		updateButton(!isDefaultElevationAngle());
@@ -44,10 +44,6 @@ public class Map3DButton extends MapButton {
 
 	private void setElevationListener(OsmandMapTileView mapView) {
 		mapView.addElevationListener(elevationListener);
-	}
-
-	private ElevationListener getElevationListener() {
-		return angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 	}
 
 	private View.OnClickListener getOnCLickListener(OsmandMapTileView mapView) {

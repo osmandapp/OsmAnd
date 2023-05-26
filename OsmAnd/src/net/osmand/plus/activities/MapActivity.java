@@ -1265,8 +1265,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mapLayers.getMapQuickActionLayer() != null) {
 			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
-		if (mapLayers.getMapControlsLayer() != null) {
-		}
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 		if(mapControlsLayer != null){
 			mapControlsLayer.refreshButtons();
