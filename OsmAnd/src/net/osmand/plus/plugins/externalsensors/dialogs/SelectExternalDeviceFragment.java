@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -191,9 +192,12 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull SensorWidgetSettingFragment targetFragment,
+	                                @NonNull Fragment targetFragment,
 	                                @NonNull SensorWidgetDataFieldType fieldType,
 	                                @Nullable String selectedDeviceId) {
+		if (!(targetFragment instanceof SelectDeviceListener)) {
+			throw new IllegalArgumentException("targetFragment should implement SelectDeviceListener interface");
+		}
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectExternalDeviceFragment fragment = new SelectExternalDeviceFragment();
 			Bundle arguments = new Bundle();
@@ -221,7 +225,13 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	}
 
 	public void onDeviceSelected(@Nullable AbstractDevice<?> device) {
-		((SensorWidgetSettingFragment) getTargetFragment()).selectNewDevice(device);
-		dismiss();
+		if (getTargetFragment() instanceof SelectDeviceListener) {
+			((SelectDeviceListener) getTargetFragment()).selectNewDevice(device, widgetDataFieldType);
+			dismiss();
+		}
+	}
+
+	public interface SelectDeviceListener {
+		void selectNewDevice(AbstractDevice<?> device, SensorWidgetDataFieldType requestedWidgetDataFieldType);
 	}
 }

@@ -38,7 +38,9 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ExternalSensorsPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(ExternalSensorsPlugin.class);
@@ -128,8 +130,9 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
+		Set<String> deviceIdsEnabledForWritingToTrack = getEnabledDevicesToWriteToTrack();
 		for (AbstractDevice<?> device : devicesHelper.getDevices()) {
-			if (devicesHelper.isDeviceEnabled(device) && devicesHelper.shouldDeviceWriteGpx(device)
+			if (devicesHelper.isDeviceEnabled(device) && deviceIdsEnabledForWritingToTrack.contains(device.getDeviceId())
 					&& device.isConnected()) {
 				try {
 					device.writeSensorDataToJson(json);
@@ -139,6 +142,18 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 			}
 		}
 	}
+
+	private Set<String> getEnabledDevicesToWriteToTrack() {
+		ApplicationMode selectedAppMode = settings.getApplicationMode();
+		Set<String> linkedSensors = new HashSet<>();
+		linkedSensors.add(settings.SPEED_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(settings.CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(settings.POWER_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(settings.HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(settings.TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		return linkedSensors;
+	}
+
 
 	@Override
 	public void mapActivityCreate(@NonNull MapActivity activity) {

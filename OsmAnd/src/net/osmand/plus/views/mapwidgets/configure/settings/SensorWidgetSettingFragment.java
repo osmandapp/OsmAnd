@@ -15,12 +15,13 @@ import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
-public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment {
+public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
 
 	private SensorTextWidget sensorWidget;
 	protected ExternalSensorsPlugin plugin;
@@ -56,7 +57,8 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment {
 		}
 	}
 
-	public void selectNewDevice(AbstractDevice<?> device) {
+	@Override
+	public void selectNewDevice(AbstractDevice<?> device, SensorWidgetDataFieldType requestedWidgetDataFieldType) {
 		sourceDevice = device;
 		newSourceDeviceSet = true;
 		updateSourceDeviceUI();

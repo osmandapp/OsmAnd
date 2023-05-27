@@ -441,7 +441,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		} else {
 			if (settings == null) {
 				if (!Algorithms.isEmpty(deviceId)) {
-					settings = new DeviceSettings(deviceId, device.getDeviceType(), device.getName(), true, false);
+					settings = new DeviceSettings(deviceId, device.getDeviceType(), device.getName(), true);
 					devicesSettings.setDeviceSettings(deviceId, settings);
 				}
 			}
@@ -465,7 +465,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettings.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
-				settings = new DeviceSettings(deviceId, device.getDeviceType(), device.getName(), enabled, false);
+				settings = new DeviceSettings(deviceId, device.getDeviceType(), device.getName(), enabled);
 				devicesSettings.setDeviceSettings(deviceId, settings);
 			}
 		} else {
@@ -486,30 +486,11 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettings.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
-				settings = new DeviceSettings(deviceId, device.getDeviceType(), name, false, false);
+				settings = new DeviceSettings(deviceId, device.getDeviceType(), name, false);
 				devicesSettings.setDeviceSettings(deviceId, settings);
 			}
 		} else {
 			settings.deviceName = name;
-			devicesSettings.setDeviceSettings(deviceId, settings);
-		}
-	}
-
-	public boolean shouldDeviceWriteGpx(@NonNull AbstractDevice<?> device) {
-		DeviceSettings settings = devicesSettings.getDeviceSettings(device.getDeviceId());
-		return settings != null && settings.deviceWriteGpx;
-	}
-
-	public void setDeviceWriteGpx(@NonNull AbstractDevice<?> device, boolean writeGpx) {
-		String deviceId = device.getDeviceId();
-		DeviceSettings settings = devicesSettings.getDeviceSettings(deviceId);
-		if (settings == null) {
-			if (!Algorithms.isEmpty(deviceId)) {
-				settings = new DeviceSettings(deviceId, device.getDeviceType(), device.getName(), false, writeGpx);
-				devicesSettings.setDeviceSettings(deviceId, settings);
-			}
-		} else {
-			settings.deviceWriteGpx = writeGpx;
 			devicesSettings.setDeviceSettings(deviceId, settings);
 		}
 	}

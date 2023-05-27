@@ -10,6 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.viewholders.FoundDeviceViewHolder;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 
@@ -32,7 +33,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		if (position == 0) {
-			holder.selectionMark.setChecked(selectedDeviceId == null);
+			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId));
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, null));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.shared_string_none);
@@ -42,7 +43,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 			holder.description.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.GONE);
 			AbstractDevice<?> device = items.get(position - 1);
-			if (selectedDeviceId != null) {
+			if (!Algorithms.isEmpty(selectedDeviceId)) {
 				holder.selectionMark.setChecked(selectedDeviceId.equals(device.getDeviceId()));
 			}
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, device));

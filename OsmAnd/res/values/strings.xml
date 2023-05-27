@@ -11,6 +11,13 @@
 	Thx - Hardy
 -->
 
+    <string name="write_data_from_sensor_to_track">Write data from external sensors to GPX while trip recording.</string>
+    <string name="write_to_track_speed_sensor">Speed</string>
+    <string name="write_to_track_cadence_sensor">Bicycle cadence</string>
+    <string name="write_to_track_power_sensor">Bicycle power</string>
+    <string name="write_to_track_heart_rate_sensor">Heart rate</string>
+    <string name="write_to_track_temperature_sensor">Temperature</string>
+    <string name="save_track_external_sensors_data">Data</string>
     <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
     <string name="external_sensors_not_found">Sensors not found</string>
     <string name="external_sensors_source_of_data">Source of data</string>
