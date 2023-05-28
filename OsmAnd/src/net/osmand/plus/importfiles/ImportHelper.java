@@ -205,7 +205,7 @@ public class ImportHelper {
 		handleGpxOrFavouritesImport(uri, fileName, saveFile, false, true, false);
 	}
 
-	public void handleGpxFilesImport(@NonNull List<Uri> filesUri, boolean useImportDir) {
+	public void handleGpxFilesImport(@NonNull List<Uri> filesUri, ImportDestination useImportDir) {
 		boolean showDialogs = filesUri.size() == 1;
 		for (Uri uri : filesUri) {
 			String fileName = getGpxFileName(getNameFromContentUri(app, uri));
@@ -278,7 +278,7 @@ public class ImportHelper {
 	public void handleGpxImport(@NonNull Uri uri, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
 	                            boolean useImportDir, boolean save) {
 		CallbackWithObject<Pair<GPXFile, Long>> callback = pair -> {
-			handleResult(pair.first, fileName, onGpxImport, pair.second, save, useImportDir, true);
+			handleResult(pair.first, fileName, onGpxImport, pair.second, save, useImportDirectory(app, useImportDir), true);
 			return true;
 		};
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
@@ -461,7 +461,7 @@ public class ImportHelper {
 	}
 
 	protected void handleResult(GPXFile result, String name, long fileSize, boolean save, boolean useImportDir) {
-		handleResult(result, name, OPEN_GPX_CONTEXT_MENU, fileSize, save, useImportDir, true);
+		handleResult(result, name, OPEN_GPX_CONTEXT_MENU, fileSize, save, useImportDirectory(app, useImportDir), true);
 	}
 
 	private boolean checkGpxFile(@Nullable GPXFile gpxFile, boolean showDialogs) {
@@ -476,7 +476,7 @@ public class ImportHelper {
 	}
 
 	protected void handleResult(GPXFile result, String name, OnSuccessfulGpxImport onGpxImport,
-	                            long fileSize, boolean save, boolean useImportDir, boolean showDialogs) {
+	                            long fileSize, boolean save, ImportDestination importDestination, boolean showDialogs) {
 		boolean success = checkGpxFile(result, showDialogs);
 		if (success) {
 			if (save) {
@@ -485,7 +485,7 @@ public class ImportHelper {
 					FragmentManager manager = activity.getSupportFragmentManager();
 					ImportTracksFragment.showInstance(manager, result, name, gpxImportListener, fileSize);
 				} else {
-					importAsOneTrack(result, name, useImportDir, onGpxImport);
+					importAsOneTrack(result, name, importDestination, onGpxImport);
 				}
 			} else {
 				showNeededScreen(onGpxImport, result);
@@ -521,17 +521,28 @@ public class ImportHelper {
 	}
 
 	private void importAsOneTrack(@NonNull GPXFile gpxFile, @NonNull String name,
-	                              boolean useImportDir, @Nullable OnSuccessfulGpxImport onGpxImport) {
-		String existingFilePath = getExistingFilePath(app, name);
-		File destinationDir = app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
+	                              ImportDestination destinationDir, @Nullable OnSuccessfulGpxImport onGpxImport) {
+		String existingFilePath = getExistingFilePath(name, destinationDir);
 		SaveImportedGpxListener listener = getSaveGpxListener(gpxFile, onGpxImport);
 
 		if (existingFilePath != null) {
-			SaveExistingFileListener saveFileListener = overwrite -> executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, overwrite));
+			SaveExistingFileListener saveFileListener = overwrite -> executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir.getDestinationDir(), name, listener, overwrite));
 			app.runInUIThread(() -> FileExistBottomSheet.showInstance(activity.getSupportFragmentManager(), name, saveFileListener));
 		} else {
-			executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir, name, listener, false));
+			executeImportTask(new SaveGpxAsyncTask(app, gpxFile, destinationDir.getDestinationDir(), name, listener, false));
 		}
+	}
+
+	public static ImportDestination useImportDirectory(@NonNull OsmandApplication app, boolean useImportDir){
+		return () -> app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
+	}
+
+	public static ImportDestination useCustomTracksDirectory(String folderPath){
+		return () -> new File(folderPath);
+	}
+
+	public interface ImportDestination {
+		File getDestinationDir();
 	}
 
 	@NonNull
@@ -579,9 +590,8 @@ public class ImportHelper {
 	}
 
 	@Nullable
-	public static String getExistingFilePath(@NonNull OsmandApplication app, @NonNull String name) {
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		List<GPXInfo> gpxInfoList = GpxUiHelper.getSortedGPXFilesInfoByDate(dir, true);
+	public static String getExistingFilePath(@NonNull String name, @NonNull ImportDestination importDestination) {
+		List<GPXInfo> gpxInfoList = GpxUiHelper.getGPXFiles(importDestination.getDestinationDir(), true, false);
 		for (GPXInfo gpxInfo : gpxInfoList) {
 			String filePath = gpxInfo.getFileName();
 			String fileName = Algorithms.getFileWithoutDirs(filePath);

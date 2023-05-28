@@ -1,13 +1,16 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.importfiles.ImportHelper.useCustomTracksDirectory;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +28,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,6 +39,7 @@ import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyT
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
@@ -90,6 +95,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	protected String selectedItemPath;
 	protected String preSelectedFolder;
 
+	protected boolean importing;
+
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
@@ -133,6 +140,71 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		setupAdapter(view);
 
 		return view;
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				List<Uri> filesUri = IntentHelper.getIntentUris(data);
+				if (!Algorithms.isEmpty(filesUri)) {
+					startImport();
+					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
+					importHelper.handleGpxFilesImport(filesUri, useCustomTracksDirectory(selectedFolder.getDirFile().getPath()));
+				}
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	public void updateProgressVisibility(boolean visible) {
+		MyPlacesActivity activity = getMyActivity();
+		if (activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(visible);
+		}
+	}
+
+	private void startImport() {
+		importing = true;
+		updateProgressVisibility(true);
+	}
+
+	private void finishImport() {
+		importing = false;
+		updateProgressVisibility(false);
+		BaseTrackFolderFragment mainFragment = getMainFragment();
+		if (mainFragment instanceof AvailableTracksFragment) {
+			AvailableTracksFragment fragment = (AvailableTracksFragment) mainFragment;
+			fragment.reloadTracks();
+		}
+	}
+
+	@NonNull
+	protected ImportHelper.GpxImportListener getGpxImportListener(int filesSize) {
+		return new ImportHelper.GpxImportListener() {
+			private int counter;
+
+			@Override
+			public void onImportComplete(boolean success) {
+				if (!success) {
+					counter++;
+				}
+				checkImportFinished();
+			}
+
+			@Override
+			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+				counter++;
+				checkImportFinished();
+			}
+
+			private void checkImportFinished() {
+				if (counter == filesSize) {
+					finishImport();
+				}
+			}
+		};
 	}
 
 	protected void setupAdapter(@NonNull View view) {
@@ -395,7 +467,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void importTracks() {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-		AndroidUtils.startActivityForResultIfSafe(getMainFragment(), intent, IMPORT_FILE_REQUEST);
+		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FILE_REQUEST);
 	}
 
 	@Override

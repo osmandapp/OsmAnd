@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.importfiles.ImportHelper.useImportDirectory;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 
 import android.app.Activity;
@@ -21,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
@@ -31,7 +31,6 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.helpers.IntentHelper;
-import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
@@ -66,7 +65,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	private VisibleTracksGroup visibleTracksGroup;
 	private TrackFolderLoaderTask asyncLoader;
 
-	private boolean importing;
 	private boolean updateEnable;
 
 
@@ -179,7 +177,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		adapter.updateItem(visibleTracksGroup);
 	}
 
-	private void reloadTracks() {
+	protected void reloadTracks() {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
 		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, getLoadTracksListener());
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -208,12 +206,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		updateProgressVisibility(true);
 	}
 
-	private void finishImport() {
-		importing = false;
-		updateProgressVisibility(false);
-		reloadTracks();
-	}
-
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -222,7 +214,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				if (!Algorithms.isEmpty(filesUri)) {
 					startImport();
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, true);
+					importHelper.handleGpxFilesImport(filesUri, useImportDirectory(app, true));
 				}
 			}
 		} else {
@@ -465,33 +457,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 					}
 				}
 				fragment.updateContent();
-			}
-		};
-	}
-
-	@NonNull
-	private GpxImportListener getGpxImportListener(int filesSize) {
-		return new GpxImportListener() {
-			private int counter;
-
-			@Override
-			public void onImportComplete(boolean success) {
-				if (!success) {
-					counter++;
-				}
-				checkImportFinished();
-			}
-
-			@Override
-			public void onSaveComplete(boolean success, GPXFile gpxFile) {
-				counter++;
-				checkImportFinished();
-			}
-
-			private void checkImportFinished() {
-				if (counter == filesSize) {
-					finishImport();
-				}
 			}
 		};
 	}
