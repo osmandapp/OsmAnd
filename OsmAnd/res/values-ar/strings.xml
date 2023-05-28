@@ -2231,7 +2231,7 @@
     <string name="quick_action_auto_zoom_off">إيقاف التكبير التلقائي</string>
     <string name="quick_action_add_first_intermediate">إضافة وجهة وسطى</string>
     <string name="analyze_on_map">تحليل</string>
-    <string name="shared_string_visible">المعروضة على الخريطة</string>
+    <string name="shared_string_visible">مرئي</string>
     <string name="restore_purchases">استعادة المشتريات</string>
     <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">هضابي</string>

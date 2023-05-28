@@ -1821,7 +1821,7 @@
     <string name="reports_for">Отчет за</string>
     <string name="data_is_not_available">Данните не са достъпни</string>
     <string name="road_blocked">Блокиран път</string>
-    <string name="shared_string_select">Избор</string>
+    <string name="shared_string_select">Избиране</string>
     <string name="clear_updates_proposition_message">Премахване на изтеглените обновления и възстановете оригиналното издание на картата</string>
     <string name="add_time_span">Добавете времеви интервал</string>
     <string name="shared_string_remove">Премахване</string>
@@ -3719,4 +3719,52 @@
     <string name="fold_unfold">свиване/разгъване</string>
     <string name="map_marker_options">Параметри на маркерите</string>
     <string name="add_to_group">Добавяне в група</string>
+    <string name="gps_filter_actions_description">OsmAnd ще приложи промените към трасето, без да променя файла. Можете да запишете промените ръчно.</string>
+    <string name="shared_string_memory">Памет</string>
+    <string name="storage_migration_wrong_folder_warning">В избраната папка не са открити данни от OsmAnd. Изберете друга папка.</string>
+    <string name="transparent_status_bar">Прозрачна лента за състоянието</string>
+    <string name="continue_on_phone">Продължаване на мобилното устройство</string>
+    <string name="use_external_timestamps_description">За изчисляване на очакваното време и средната скорост се използват времеви маркери на маршрутизатора</string>
+    <string name="markers_history_is_disabled_descr">Включете историята, за да бъде запазван списък с посетените маркери на картата.</string>
+    <string name="history_is_disabled_descr">Включете историята, за да получите по-бърз достъп до последно използваните резултати.</string>
+    <string name="shared_string_articles">Статии</string>
+    <string name="exit_pan_mode_descr">Докоснете „Избиране“, за да излезете от режима на панорама</string>
+    <string name="android_auto_map_placeholder_title">Картата се показва на екрана на превозното средство.</string>
+    <string name="is_disabled">%1$s е изключена</string>
+    <string name="gps_filter_hdop_desc">Задайте максимално допустимата стойност за HDOP.
+\nТочките с по-висока стойност ще бъдат скрити.</string>
+    <string name="shortcut_navigate_to">Маршрут до…</string>
+    <string name="included_categories">Включени категории</string>
+    <string name="location_access_request_result">Одобрено: %1$s Отхвърлено: %2$s</string>
+    <string name="upload_gpx_description_hint">Оставете полето празно, като описание ще бъдат използвани имената на трасета. Въведеното описание ще бъде приложено към всяко трасе.</string>
+    <string name="search_title">Търсене: %1$s</string>
+    <string name="shared_storage_warning_title">Променени правила за достъп до хранилището</string>
+    <string name="purchases_feature_desc_android_auto">Извежда картите и маршрутизацията на OsmAnd на екрана на автомобила и се интегрира с управлението на автомобила.</string>
+    <string name="use_external_timestamps">Използване на външни времеви маркери</string>
+    <string name="android_auto_map_placeholder_descr">Изключете устройството от Android Auto, за да видите картата в приложението.</string>
+    <string name="search_history_is_disabled_descr">Можете да включите историята на търсенията в настройките.</string>
+    <string name="android_auto_purchase_request_title">Купете OsmAnd Pro или Maps+, за да използвате OsmAnd с Android Auto</string>
+    <string name="gps_filter_smoothing_desc">Задава праговото разстояние между точките.
+\nТочките на трасето, които не са отдалечени поне на това разстояние от последната видима точка, ще бъдат скрити.
+\nИмайте предвид, че високите прагове могат прекомерно много да опростят геометрията на трасето.</string>
+    <string name="routing_attr_only_permitted_ways_name">Разрешени маршрути</string>
+    <string name="memory_allocated_for_routing_ds">По-голяемия обем от памет ще ускори изчислението на дълги маршрути (над 500 км), но може да повлияе на работата на други приложения.
+\nНе оказва влияние върху скоростта на изчисляване на кратките маршрути.</string>
+    <string name="shared_string_travelbooks">Пътеводител</string>
+    <string name="approx_safe_mode_description">Извършва на осредняване на GPX с помощта на по-бавен код на Android вместо собствен код.</string>
+    <string name="reading_files">Четене на файлове…</string>
+    <string name="app_modes_options">Режими на приложението</string>
+    <string name="gps_filter_speed_altitude_desc">На графиката и картата ще се появят само точките от трасето, които отговарят на зададения интервал, а останалите ще бъдат скрити.</string>
+    <string name="memory_allocated_for_routing">Памет, заделена за маршрутизиране</string>
+    <string name="display_groups_visibility_dialog_description">Можете да управлявате видимостта на групата в картата. Ако трасето е скрито, всички групи също ще бъдат скрити.</string>
+    <string name="shared_string_hide_all">Скриване всичко</string>
+    <string name="no_plugins_enabled">Нямате включени добавки. Списъкът с наличните добавки се намира в меню „Добавки“.</string>
+    <string name="icon_group_nautical">Морски</string>
+    <string name="location_access_request_title">За да маршрутизира OsmAnd се нуждае от достъп до местоположението.</string>
+    <string name="location_access_request_action">Предоставяне на достъп</string>
+    <string name="shortcut_start_recording">Начало на запис</string>
+    <string name="transparent_status_bar_descr">Картата е видима през лентата за състоянието</string>
+    <string name="approx_safe_mode">Безопасно осредняване на GPX</string>
+    <string name="safe_settings">Безопасни действия</string>
+    <string name="shared_app_storage_description">Споделената памет вече не е достъпна поради променен достъп до хранилището на Android.</string>
 </resources>
