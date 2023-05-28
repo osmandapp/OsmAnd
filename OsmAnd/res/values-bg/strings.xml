@@ -1068,12 +1068,12 @@
     <string name="edit_tilesource_choose_existing">Изберете съществуващ…</string>
     <string name="maps_define_edit">Въвеждане/редактиране…</string>
     <string name="guidance_preferences_descr">Настройки на маршрутизация</string>
-    <string name="routing_preferences_descr">Предпочитания за маршрутизиране</string>
-    <string name="speech_rate_descr">Скорост на TTS</string>
-    <string name="speech_rate">Темпо на гласовите напътствия</string>
+    <string name="routing_preferences_descr">Настройки на маршрутизиране</string>
+    <string name="speech_rate_descr">Определете скоростта на говора при преобразуване на текст в реч.</string>
+    <string name="speech_rate">Скорост на гласовите напътствия</string>
     <string name="complex_route_calculation_failed">Бързото изчисляване на маршрут се провали (%s), преминава се на бавно изчисляване.</string>
-    <string name="disable_complex_routing_descr">Премахване на двойното изчисляване на маршрути</string>
-    <string name="disable_complex_routing">Премахване на сложното маршрутизиране</string>
+    <string name="disable_complex_routing_descr">Изключване на двустъпковото маршрутизиране.</string>
+    <string name="disable_complex_routing">Изключване на сложно маршрутизиране</string>
     <string name="calculate_osmand_route_without_internet">Изчисляване на OsmAnd сегмент от маршрута без Интернет</string>
     <string name="gpx_option_calculate_first_last_segment">Намиране на маршрут OsmAnd за первия и последния сегмент от маршрута</string>
     <string name="use_displayed_track_for_navigation">Искате ли да ползвате показания маршрут за навигация?</string>
@@ -2220,7 +2220,7 @@
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Аварийни служби</string>
     <string name="icon_group_travel">Пътуване</string>
-    <string name="clear_osm_token">Изчистете маркера OAuth на OpenStreetMap</string>
+    <string name="clear_osm_token">Изчистете споделената тайна на OAuth от OpenStreetMap</string>
     <string name="all_previous_segments_will_be_recalc">Всички предишни сегменти ще бъдат преизчислени спрямо избрания профил.</string>
     <string name="open_saved_track">Отваряне на записано трасе</string>
     <string name="shared_string_is_saved">е записан</string>
@@ -2393,28 +2393,28 @@
     <string name="backup_delete_types">Премахване на изключените видове данни</string>
     <string name="shared_string_discussion">Дискусия</string>
     <string name="shared_string_view_all">Виж всички</string>
-    <string name="backup_error_user_is_already_registered">Този имейл адрес се използва от друг акаунт</string>
+    <string name="backup_error_user_is_already_registered">Този адрес на електронна поща се използва от друг профил</string>
     <string name="backup_error_subscription_was_expired">Изтекъл абонамент</string>
     <string name="backup_error_subscription_was_expired_descr">Абонаментът ви за OsmAnd Pro е изтекъл, подновете го, за да създавате резервни копия. Все още можете да възстановявате данни от облака.</string>
-    <string name="backup_error_subscription_was_used">Абонамент или промоция, използвани от друг акаунт %1$s</string>
-    <string name="backup_error_size_is_exceeded">Превишен е максималният размер на OsmAnd Cloud %1$s</string>
+    <string name="backup_error_subscription_was_used">Абонамент или промокод, използвани от друг профил %1$s</string>
+    <string name="backup_error_size_is_exceeded">Максималният размер на OsmAnd Cloud превишава %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Файлът трябва да бъде изпратен във формат .gzip</string>
     <string name="backup_error_file_not_available">Файлът не е наличен</string>
-    <string name="backup_error_token_is_not_valid">Нещо не е наред с предоставения идентификатор на устройство или токен</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Невалиден или изтекъл токен</string>
-    <string name="backup_error_user_is_not_registered">Няма потребител, регистриран с този имейл адрес</string>
+    <string name="backup_error_token_is_not_valid">Нещо не е наред с предоставения идентификатор на устройство или низ на споделена тайна</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Невалиден или изтекъл низ на споделена тайна</string>
+    <string name="backup_error_user_is_not_registered">Потребител с този адрес на електронна поща не е регистриран</string>
     <string name="backup_error_no_valid_subscription">Няма валиден абонамент</string>
-    <string name="connect_track_points_as">Свързване на точки от маршрута</string>
+    <string name="connect_track_points_as">Съединяване на точки от маршрута</string>
     <string name="add_line">Добави линия</string>
     <string name="contour_lines_hillshades_slope">Контурни линии, засенчване на релефа, склонове</string>
-    <string name="duration_moment_ago">преди малко</string>
+    <string name="duration_moment_ago">току-що</string>
     <string name="logout_from_osmand_cloud">Изход от OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Изход от системата\?
 \nЩе трябва да влезете отново, за да направите резервно копие или да възстановите данните.</string>
     <string name="backup_deleting_all_data">Премахване на всички данни…</string>
     <string name="backup_deleted_all_data">Всички данни са премахнати.</string>
     <string name="backup_deleting_all_data_descr">Изчакайте, докато OsmAnd премахне данните от облака. Всички данни на устройството ще останат непроменени.</string>
-    <string name="backup_deleted_all_data_descr">Всичките ви данни са премахнати от OsmAnd Cloud.</string>
+    <string name="backup_deleted_all_data_descr">Всички ваши данни са премахнати от OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Цялата хронология на изданията е премахната.</string>
     <string name="backup_data_removed">Всички данни са премахнати.</string>
     <string name="shared_string_progress">Напредък</string>
@@ -2422,20 +2422,20 @@
     <string name="backup_dont_have_any_descr">Настройте автоматично резервно копие, за да не се притеснявате, че ще загубите информация.</string>
     <string name="backup_welcome_back">Добре дошли отново!</string>
     <string name="backup_welcome_back_descr">Възстановяване на данните на това устройство от OsmAnd Cloud.</string>
-    <string name="backup_restore_now">Възстанови сега</string>
+    <string name="backup_restore_now">Възстановяване</string>
     <string name="attribute">Атрибут</string>
     <string name="shared_string_purchased">Закупен</string>
-    <string name="explore_wikipedia_offline">Разгледайте Уикипедия офлайн.</string>
-    <string name="on_hold_since">На изчакване от %1$s</string>
+    <string name="explore_wikipedia_offline">Четете Уикипедия без мрежа.</string>
+    <string name="on_hold_since">Прекъснат от %1$s</string>
     <string name="active_till">Активен до %1$s</string>
     <string name="promo_subscription">Промоционален абонамент</string>
     <string name="option_available_only_in_osmand_pro">Достъпно като част от абонамента за OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Получете достъп до възможностите на OsmAnd Pro: оцветяване на маршрути и др.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Разгледайте плановете на OsmAnd, за да намерите подходящия за вас.</string>
     <string name="routes_color_by_type">Маршрути с цвят по…</string>
-    <string name="shared_string_relation">Връзка</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Оцветяване на маршрутите въз основа на цвета, зададен на устройството (ако е наличен в OpenStreetMap) и символа на информационната туристическа значка.</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Оцветяване въз основа на принадлежността към мрежа.</string>
+    <string name="shared_string_relation">Релация</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Оцветяване на маршрутите в зависимост от цвета, зададен на устройството (ако е наличен в OpenStreetMap) и символа на информационната туристическа значка.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Оцветяване в зависимост от принадлежността към мрежа.</string>
     <string name="direct_line_maps_required_descr">Изчисляването на маршрута отнема повече време от обичайното.
 \n
 \nМоже би някои карти не са заредени.</string>
@@ -2444,21 +2444,21 @@
 \nМоже би някои карти не са заредени. Направете проверка на необходимите карти.</string>
     <string name="contributions_may_calculate_with_delay">Изчисляването на приносите може да отнеме няколко часа.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Оцветяване маршрутите в зависимост от възела (международен, регионален, местен), към който принадлежат.</string>
-    <string name="walking_route_osmc_description">Оцветяване маршрутите въз основа на цвета, зададен на устройството (ако е наличен в OpenStreetMap) и тип (международен, регионален, местен).</string>
+    <string name="walking_route_osmc_description">Оцветяване маршрутите в зависимост от цвета, зададен на устройството (ако е наличен в OpenStreetMap) и тип (международен, регионален, местен).</string>
     <string name="travel_routes">Маршрути за пътуване</string>
     <string name="setting_supported_by_style">Тази настройка се поддържа от стила на картата „%1$s“</string>
     <string name="online_direct_line_maps_link">Проверяване на карти</string>
     <string name="offline_maps_required_descr">За изчисляване на маршрута са необходими допълнителни карти за работа без достъп до интернет.</string>
     <string name="online_maps_searching_descr">Отдалечено търсене…</string>
     <string name="reset_to_original">Връщане към първоначалното състояние</string>
-    <string name="backup_error_no_subscription">Няма наличен абонамент</string>
-    <string name="map_updates_for_mappers">Обновявания за картографи</string>
+    <string name="backup_error_no_subscription">Няма абонамент</string>
+    <string name="map_updates_for_mappers">Обновяване за картографи</string>
     <string name="benefits_for_contributors">Ползи за активните сътрудници на OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Активните сътрудници на OpenStreetMap.org могат да имат право на неограничени почасови обновявания на картата.</string>
+    <string name="benefits_for_contributors_primary_descr">Активните сътрудници на OpenStreetMap.org могат да получат право на неограничени почасови обновявания на картата.</string>
     <string name="benefits_for_contributors_secondary_descr">Влезте в OpenStreetMap и проверете дали имате право да получавате неограничени месечни и почасови обновявания на картата.</string>
     <string name="use_login_and_password">Използвайте потребителско име и парола</string>
     <string name="available_until">Налично до %1$s</string>
-    <string name="enough_contributions_descr">Поздравления, направили сте достатъчно приноси към OpenStreetMap и можете да се наслаждавате на неограничени обновявания на картата!</string>
+    <string name="enough_contributions_descr">Поздравления, имате необходимия принос към OpenStreetMap и можете да се наслаждавате на неограничено обновяване на картата!</string>
     <string name="shared_string_contributions">Принос</string>
     <string name="map_updates_are_unavailable_yet">Обновяванията на картата за сега са недостъпни. :-(</string>
     <string name="save_poi_too_many_uppercase">Името съдържа прекалено много главни букви. Продължаване \?</string>
@@ -3611,7 +3611,7 @@
     <string name="av_notes_choose_action_widget_desc">Избор на действие.</string>
     <string name="time_to_intermediate_widget_desc">Приспособлението показва „Време на пристигане“ или „Време до пристигане“ до първата междинна точка. Времето се обновява постоянно по време на маршрутизиране, при достигане междинна точка, времето се обновява да показва оставащото до следващата междинна точка.</string>
     <string name="apply_to_existing">Прилагане към съществуващите</string>
-    <string name="routeInfo_horse_scale_description">Оцветяване на маршрутите въз основа на трудността на пътеката за езда</string>
+    <string name="routeInfo_horse_scale_description">Оцветяване на маршрутите в зависимост от трудността на пътеката за езда</string>
     <string name="second_marker_widget_desc">Можете да настроите приспособлението да показва разстоянието или очакваното време на пристигане до втория маркер на картата.</string>
     <string name="second_next_turn_widget_desc">Приспособлението показва информация за втория следващ завой, което се включва, при наближаването на завоя.</string>
     <string name="compass_always_hidden">Винаги скрит</string>
@@ -3747,7 +3747,7 @@
     <string name="gps_filter_smoothing_desc">Задава праговото разстояние между точките.
 \nТочките на трасето, които не са отдалечени поне на това разстояние от последната видима точка, ще бъдат скрити.
 \nИмайте предвид, че високите прагове могат прекомерно много да опростят геометрията на трасето.</string>
-    <string name="routing_attr_only_permitted_ways_name">Разрешени маршрути</string>
+    <string name="routing_attr_only_permitted_ways_name">Изрично разрешени маршрути</string>
     <string name="memory_allocated_for_routing_ds">По-голяемия обем от памет ще ускори изчислението на дълги маршрути (над 500 км), но може да повлияе на работата на други приложения.
 \nНе оказва влияние върху скоростта на изчисляване на кратките маршрути.</string>
     <string name="shared_string_travelbooks">Пътеводител</string>
@@ -3767,4 +3767,44 @@
     <string name="approx_safe_mode">Безопасно осредняване на GPX</string>
     <string name="safe_settings">Безопасни действия</string>
     <string name="shared_app_storage_description">Споделената памет вече не е достъпна поради променен достъп до хранилището на Android.</string>
+    <string name="routing_attr_allow_gate_name">Използване на порти</string>
+    <string name="shared_string_mini">мини</string>
+    <string name="travel_route_types">Видове маршрути</string>
+    <string name="empty_category_name">Празно име на категория</string>
+    <string name="token_is_not_valid">Споделената тайна е недействителна</string>
+    <string name="grey_color_undefined">Частите без данни са сиви.</string>
+    <string name="osm_live_payment_subscription_management_amz">Плащането се извършва от сметката ви в Amazon при потвърждаване на покупката.
+\n
+\nТя се подновява, освен ако не бъде отказана преди избрания период на подновяване.
+\n
+\nУправлявайте или отменяйте абонаментите си от настройките на Amazon по всяко време.</string>
+    <string name="shared_string_logout">Излизане</string>
+    <string name="start_point">Начало</string>
+    <string name="shared_string_predefined">Предварително зададени</string>
+    <string name="shared_string_files">Файлове</string>
+    <string name="pro_features">Възможности на Pro</string>
+    <string name="routeInfo_roadClass_description">Оцветяване на маршрутите или трасетата в зависимост от класификацията на пътя.</string>
+    <string name="add_group_to_markers">Добавяне на група към списъка с маркери</string>
+    <string name="no_activity_for_intent">Инсталирайте приложение, което може да извърши това действие.</string>
+    <string name="routeInfo_tracktype_description">Оцветяване на маршрутите или трасетата в зависимост от настилката. Обикновено се прилага към пътни мрежи, без настилка в по-голямата си част.</string>
+    <string name="purchases_restored">Покупките са възстановени</string>
+    <string name="routing_engine_vehicle_type_truck">Камион</string>
+    <string name="not_enough_contributions_descr">За да получите достъп до неограничен брой почасови обновявания на картите, се изискват минимум %1$s промени през последните два месеца %2$s.</string>
+    <string name="sample_wikivoyage">Пример от Wikivoyage</string>
+    <string name="routing_attr_allow_gate_description">Използване на порти</string>
+    <string name="mapillary_menu_filter_description_new">Филтрирайте изображенията по дата или по вид. Включено само при голямо увеличение.</string>
+    <string name="service_is_not_available_please_try_later">Услугата е недостъпна. Опитайте по-късно.</string>
+    <string name="routeInfo_smoothness_description">Класификация на маневреността на пътища/пешеходни алеи за колесни превозни средства, по-специално по отношение на гладкост/еднородност на повърхността.</string>
+    <string name="backup_view_conflicts">Преглед на конфликти</string>
+    <string name="backup_setup">Настройка на резервно копие</string>
+    <string name="track_has_no_needed_data">В трасето липсват съответните данни.</string>
+    <string name="routeInfo_surface_description">Предоставя информация за физическата повърхност на пътя/пешеходната алея.</string>
+    <string name="remove_group_from_markers">Премахване на група от списъка с маркери</string>
+    <string name="routing_attr_only_permitted_streets_name">Изрично разрешени улици</string>
+    <string name="routing_attr_only_permitted_streets_description">Използват се само изрично разрешените улици</string>
+    <string name="amz_manage_subscription_descr">Управлявайте абонамента си с помощта на приложението или страницата на Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Откажете го по всяко време от приложението на Amazon</string>
+    <string name="routeInfo_winter_ice_road_description">Оцветяване на маршрутите или трасетата в зависимост от зимната класификация на пътя.</string>
+    <string name="auto_backup_preference_desc">По подразбиране Android запазва резервни копия на избрани точки, карти и настройки на OsmAnd, за да ги възстанови на нови устройства или след преинсталиране. Това резервно копие е ограничено до 25 MB.
+\nКогато използвате OsmAnd Cloud, това може да доведе до недоразумения след преинсталиране.</string>
 </resources>
