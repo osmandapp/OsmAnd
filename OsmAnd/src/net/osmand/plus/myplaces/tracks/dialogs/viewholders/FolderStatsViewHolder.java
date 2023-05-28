@@ -31,18 +31,17 @@ public class FolderStatsViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private String getFormattedStats(FolderStats stats) {
-		SpannableStringBuilder builder = new SpannableStringBuilder();
-		appendField(builder, app.getString(R.string.shared_string_tracks), String.valueOf(stats.tracksCount), false);
-		appendField(builder, app.getString(R.string.distance).toLowerCase(), OsmAndFormatter.getFormattedDistance(stats.totalDistance, app), false);
-		appendField(builder, app.getString(R.string.shared_string_uphill).toLowerCase(), OsmAndFormatter.getFormattedAlt(stats.diffElevationUp, app), false);
-		appendField(builder, app.getString(R.string.shared_string_downhill).toLowerCase(), OsmAndFormatter.getFormattedAlt(stats.diffElevationDown, app), false);
-		appendField(builder, app.getString(R.string.duration).toLowerCase(), Algorithms.formatDuration(stats.duration, app.accessibilityEnabled()), false);
-		appendField(builder, app.getString(R.string.shared_string_size).toLowerCase(), AndroidUtils.formatSize(app, stats.fileSize), true);
+		SpannableStringBuilder builder = new SpannableStringBuilder(app.getString(R.string.shared_string_tracks) + " - " + stats.tracksCount + ", ");
+		appendField(builder, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(stats.totalDistance, app), false);
+		appendField(builder, app.getString(R.string.shared_string_uphill), OsmAndFormatter.getFormattedAlt(stats.diffElevationUp, app), false);
+		appendField(builder, app.getString(R.string.shared_string_downhill), OsmAndFormatter.getFormattedAlt(stats.diffElevationDown, app), false);
+		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(stats.duration, app.accessibilityEnabled()), false);
+		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, stats.fileSize), true);
 		return builder.toString();
 	}
 
 	private void appendField(@NonNull SpannableStringBuilder builder, @NonNull String field, @NonNull String value, boolean lastItem) {
-		builder.append(field).append(" - ").append(value);
+		builder.append(field.toLowerCase()).append(" - ").append(value);
 		if (lastItem) {
 			builder.append(".");
 		} else {

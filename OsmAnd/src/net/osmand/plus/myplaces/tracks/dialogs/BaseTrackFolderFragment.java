@@ -157,7 +157,9 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		} else {
 			items.addAll(folders);
 			items.addAll(trackItems);
-			items.add(selectedFolder.getFolderStats());
+			if (!(this instanceof TracksSelectionFragment)) {
+				items.add(selectedFolder.getFolderStats());
+			}
 		}
 		return items;
 	}

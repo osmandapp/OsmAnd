@@ -176,9 +176,15 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		throw new IllegalArgumentException("Unsupported view type");
 	}
 
+	private boolean isLastItem(int position){
+		boolean isStatsLastItem = items.get(getItemCount() - 1) instanceof FolderStats;
+		int offset = (isStatsLastItem && getItemCount() >= 2) ? 2 : 1;
+		return position != getItemCount() - offset;
+	}
+
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		boolean lastItem = position != getItemCount() - 2;
+		boolean lastItem = isLastItem(position);
 
 		if (holder instanceof SortTracksViewHolder) {
 			SortTracksViewHolder viewHolder = (SortTracksViewHolder) holder;
