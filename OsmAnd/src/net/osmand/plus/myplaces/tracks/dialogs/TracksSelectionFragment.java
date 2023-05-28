@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +43,7 @@ import java.util.Set;
 
 public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener {
 
-	public static final String TAG = TrackFolderFragment.class.getSimpleName();
+	public static final String TAG = TracksSelectionFragment.class.getSimpleName();
 
 	private ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
 
@@ -99,6 +97,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	protected void setupAdapter(@NonNull View view) {
 		super.setupAdapter(view);
 		adapter.setSelectionMode(true);
+		adapter.setShouldShowFolder(true);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -143,6 +142,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
 		button.setOnClickListener(v -> showOptionsMenu(button));
+		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
 
@@ -151,6 +151,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		boolean selected = selectionHelper.isAllItemsSelected();
 		int iconId = selected ? R.drawable.ic_action_deselect_all : R.drawable.ic_action_select_all;
 		selectionButton.setImageDrawable(getIcon(iconId));
+		selectionButton.setContentDescription(getString(selected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all));
 	}
 
 	@Override
@@ -245,7 +246,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	private void dismiss() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack(TAG, POP_BACK_STACK_INCLUSIVE);
+			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 		}
 	}
 
@@ -298,8 +299,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
+					.commitNowAllowingStateLoss();
 		}
 	}
 }

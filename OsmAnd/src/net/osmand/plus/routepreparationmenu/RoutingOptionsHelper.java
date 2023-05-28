@@ -37,7 +37,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -55,9 +54,12 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -157,32 +159,23 @@ public class RoutingOptionsHelper {
 		contextMenuAdapter.addItem(new ContextMenuItem(null).setTitle(entries[k]));
 
 		boolean nightMode = isNightMode();
-		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
-		int themeRes = getThemeRes();
-		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		int selectedModeColor = selectedAppMode.getProfileColor(nightMode);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				entries, nightMode, selected, app, selectedModeColor, themeRes, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						int which = (int) v.getTag();
-						String value = entrieValues[which];
-						if (MORE_VALUE.equals(value)) {
-							Intent intent = new Intent(mapActivity, DownloadActivity.class);
-							intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-							intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
-							mapActivity.startActivity(intent);
-						} else {
-							if (callback != null) {
-								callback.processResult(value);
-							}
-						}
-					}
+		AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, entries, selected, v -> {
+			int which = (int) v.getTag();
+			String value = entrieValues[which];
+			if (MORE_VALUE.equals(value)) {
+				Intent intent = new Intent(mapActivity, DownloadActivity.class);
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
+				mapActivity.startActivity(intent);
+			} else {
+				if (callback != null) {
+					callback.processResult(value);
 				}
-		);
-		AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
-		bld.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(bld.show());
+			}
+		});
 	}
 
 	public String getVoiceProviderName(Context ctx, String value) {
@@ -647,10 +640,6 @@ public class RoutingOptionsHelper {
 	
 	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightModeForMapControls();
-	}
-	
-	public int getThemeRes() {
-		return isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	public static class LocalRoutingParameter {

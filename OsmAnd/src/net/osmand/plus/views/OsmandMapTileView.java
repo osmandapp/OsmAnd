@@ -2078,12 +2078,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
 		application.getOsmandMap().setMapElevation(angle);
-		notifyElevationListener(angle);
+		notifyOnElevationChanging(angle);
 	}
 
-	private void notifyElevationListener(float angle) {
+	private void notifyOnElevationChanging(float angle) {
 		for (ElevationListener listener : elevationListeners) {
-			listener.onElevationChanged(angle);
+			listener.onElevationChanging(angle);
 		}
 	}
 
@@ -2219,6 +2219,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public interface ElevationListener {
-		void onElevationChanged(float angle);
+		void onElevationChanging(float angle);
 	}
 }

@@ -5175,4 +5175,9 @@
 \n- Senzor je aktivován
 \n- Toto zařízení je umístěno v blízkosti senzoru</string>
     <string name="ant_plus_pair_new_sensor_ble">Párování senzoru Bluetooth LE</string>
+    <string name="delete_track_folder_dialog_message">Tím se odstraní složka \"%1$s\" a všechny stopy (%2$s) v ní obsažené.</string>
+    <string name="delete_folder_question">Smazat složku\?</string>
+    <string name="delete_folder">Smazat složku</string>
+    <string name="show_all_tracks_on_the_map">Zobrazit všechny stopy na mapě</string>
+    <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externího zařízení.</string>
 </resources>

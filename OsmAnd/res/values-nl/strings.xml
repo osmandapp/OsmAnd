@@ -844,7 +844,7 @@
     <string name="srtm_plugin_name">Hoogtelijnen</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
-    <string name="audionotes_plugin_description">Maak audio-, foto-, video-notities tijdens een reis door gebruik te maken van een knop op de kaart of de locatie context menu.</string>
+    <string name="audionotes_plugin_description">Maak audio/foto/video-notities tijdens een reis door gebruik te maken van een knop op de kaart of het locatie context menu.</string>
     <string name="audionotes_plugin_name">Audio-/videonotities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
@@ -3956,12 +3956,9 @@
     <string name="select_segments_description">%1$s bevat meer dan één segment, je moet het noodzakelijke deel selecteren om te navigeren.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="hillshade_slope_contour_lines">Reliëfschaduw / Helling / Contourlijnen</string>
-    <string name="open_place_reviews_plugin_description">Lever een bijdragen aan het OpenPlaceReviews-project met bijvoorbeeld foto\'s, beoordelingen of links van openbare plaatsen zoals restaurants, hotels of musea.
+    <string name="open_place_reviews_plugin_description">Lever een bijdragen aan het OpenPlaceReviews-project met foto\'s, beoordelingen, of links van openbare plaatsen zoals restaurants, hotels of musea.
 \n
-\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: https://osmand.net/docs/user/plugins/openplacereviews.
-\n
-\nAlle OpenPlaceReview-gegevens zijn openbaar en voor iedereen beschikbaar: https://openplacereviews.org/data.
-\nU kunt meer lezen op: https://openplacereviews.org.</string>
+\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: https://osmand.net/docs/user/plugins/openplacereviews.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Gebruik test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Inloggen op OpenPlaceReviews</string>
@@ -5158,4 +5155,35 @@
     <string name="sort_distance_ascending">Kortste afstand eerst</string>
     <string name="sort_distance_descending">Langste afstand eerst</string>
     <string name="sort_date_ascending">Nieuwste datum eerst</string>
+    <string name="shared_string_hand">Hand</string>
+    <string name="shared_string_ear_lobe">Oorlel</string>
+    <string name="shared_string_foot">Voet</string>
+    <string name="rendering_value_sectors_name">Sectoren</string>
+    <string name="rendering_attr_lightDetail_name">Licht detail</string>
+    <string name="rendering_value_sector3_name">Sector 3</string>
+    <string name="rendering_value_sector4_name">Sector 4</string>
+    <string name="rendering_value_sector5_name">Sector 5</string>
+    <string name="rendering_value_small_name">Klein</string>
+    <string name="rendering_value_name_only_name">Alleen naam</string>
+    <string name="shared_string_chest">Borst</string>
+    <string name="shared_string_wrist">Pols</string>
+    <string name="shared_string_finger">Vinger</string>
+    <string name="device_disconnected">%1$s is losgekoppeld</string>
+    <string name="device_connected">%1$s is verbonden</string>
+    <string name="show_all_tracks_on_the_map">Alle tracks op de kaart tonen</string>
+    <string name="rssi_widget_desc">Toont het RSSI-niveau van je externe apparaat.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder">Lege map</string>
+    <string name="shared_string_new_track">Nieuwe track</string>
+    <string name="rendering_value_sacScale_name">SAC schaal</string>
+    <string name="rendering_value_caiScale_name">CAI schaal</string>
+    <string name="map_3d_mode_hint">Door de knop lang ingedrukt te houden, kan de positie van de knop gewijzigd worden.</string>
+    <string name="map_3d_mode_description">Gebruik 2 vingers en beweeg ze naar boven en beneden om de oriëntatie van de kaart aan te passen.</string>
+    <string name="shared_string_visible_on_map">Zichtbaar op de kaart</string>
+    <string name="rendering_value_sector1_name">Sector 1</string>
+    <string name="rendering_value_sector2_name">Sector 2</string>
+    <string name="delete_folder_question">Map verwijderen\?</string>
+    <string name="delete_folder">Map verwijderen</string>
+    <string name="tracks_empty_folder_description">Deze map heeft nog geen tracks.</string>
+    <string name="visible_in_3d_mode">Zichtbaar in 3D mode</string>
 </resources>

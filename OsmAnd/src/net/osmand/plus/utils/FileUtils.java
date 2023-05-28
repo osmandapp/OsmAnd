@@ -51,8 +51,9 @@ public class FileUtils {
 		if (dest == null) {
 			return null;
 		}
-		if (!dest.getParentFile().exists()) {
-			dest.getParentFile().mkdirs();
+		File destDir = dest.getParentFile();
+		if (!destDir.exists()) {
+			destDir.mkdirs();
 		}
 		if (source.renameTo(dest)) {
 			String[] suffixes = {"-journal", "-wal", "-shm"};
@@ -96,8 +97,9 @@ public class FileUtils {
 		if (dest == null) {
 			return null;
 		}
-		if (!dest.getParentFile().exists()) {
-			dest.getParentFile().mkdirs();
+		File destDir = dest.getParentFile();
+		if (!destDir.exists()) {
+			destDir.mkdirs();
 		}
 		File res = source.renameTo(dest) ? dest : null;
 		if (res != null) {
@@ -110,19 +112,23 @@ public class FileUtils {
 		return res;
 	}
 
+	@Nullable
 	public static File renameGpxFile(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
-		if (!dest.getParentFile().exists()) {
-			dest.getParentFile().mkdirs();
+		File destDir = dest.getParentFile();
+		if (!destDir.exists()) {
+			destDir.mkdirs();
 		}
 		if (src.renameTo(dest)) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(src.getAbsolutePath());
+			dest.setLastModified(System.currentTimeMillis());
+
+			GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 			app.getGpxDbHelper().rename(src, dest);
 			app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
-			if (selected != null && selected.getGpxFile() != null) {
-				selected.resetSplitProcessed();
-				selected.getGpxFile().path = dest.getAbsolutePath();
-				helper.updateSelectedGpxFile(selected);
+			if (selectedGpxFile != null) {
+				selectedGpxFile.resetSplitProcessed();
+				selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
+				gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
 			}
 			return dest;
 		}
@@ -135,7 +141,7 @@ public class FileUtils {
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
 			file.delete();
 			app.getGpxDbHelper().remove(file);
-			if (selected != null && selected.getGpxFile() != null) {
+			if (selected != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);

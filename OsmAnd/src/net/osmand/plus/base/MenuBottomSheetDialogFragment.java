@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -28,14 +27,14 @@ import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,13 +209,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
+	@NonNull
 	protected OnGlobalLayoutListener getShadowLayoutListener() {
-		return new OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				setShadowOnScrollableView();
-			}
-		};
+		return this::setShadowOnScrollableView;
 	}
 
 	protected void drawTopShadow(boolean showTopShadow) {
@@ -389,12 +384,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		int buttonTextId = getDismissButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), buttonTextId);
-			dismissButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onDismissButtonClickAction();
-					dismiss();
-				}
+			dismissButton.setOnClickListener(v -> {
+				onDismissButtonClickAction();
+				dismiss();
 			});
 		}
 		AndroidUiHelper.updateVisibility(dismissButton, buttonTextId != DEFAULT_VALUE);
@@ -406,12 +398,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		int buttonTextId = getRightBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), buttonTextId);
-			rightButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onRightBottomButtonClick();
-				}
-			});
+			rightButton.setOnClickListener(v -> onRightBottomButtonClick());
 		}
 		View divider = buttonsContainer.findViewById(R.id.buttons_divider);
 		divider.getLayoutParams().height = getFirstDividerHeight();
@@ -429,12 +416,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		int buttonTextId = getThirdBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
 			UiUtilities.setupDialogButton(nightMode, thirdButton, getThirdBottomButtonType(), buttonTextId);
-			thirdButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onThirdBottomButtonClick();
-				}
-			});
+			thirdButton.setOnClickListener(v -> onThirdBottomButtonClick());
 		}
 		View divider = buttonsContainer.findViewById(R.id.buttons_divider_top);
 		divider.getLayoutParams().height = getSecondDividerHeight();
@@ -474,7 +456,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return new LayerDrawable(layers);
 	}
 
-	protected boolean isNightMode(@NonNull OsmandApplication app) {
+	public boolean isNightMode(@NonNull OsmandApplication app) {
 		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
 
@@ -500,16 +482,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		} else {
 			scrollView = itemsContainer;
 		}
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new OnScrollChangedListener() {
-
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
-				}
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+			if (scrollToBottomAvailable) {
+				showShadowButton();
+			} else {
+				hideShadowButton();
 			}
 		});
 	}

@@ -2231,7 +2231,7 @@
     <string name="quick_action_auto_zoom_off">إيقاف التكبير التلقائي</string>
     <string name="quick_action_add_first_intermediate">إضافة وجهة وسطى</string>
     <string name="analyze_on_map">تحليل</string>
-    <string name="shared_string_visible">المعروضة على الخريطة</string>
+    <string name="shared_string_visible">مرئي</string>
     <string name="restore_purchases">استعادة المشتريات</string>
     <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">هضابي</string>
@@ -5283,4 +5283,15 @@
     <string name="visible_in_3d_mode">مرئي في وضع 3D</string>
     <string name="map_3d_mode_description">المس الخريطة بإصبعين وحركها لأعلى ولأسفل لضبط إمالة الخريطة.</string>
     <string name="rendering_value_sacScale_name">مقياس ساك</string>
+    <string name="show_all_tracks_on_the_map">عرض جميع المسارات على الخريطة</string>
+    <string name="rssi_widget_desc">يعرض مستوى RSSI لجهازك الخارجي.</string>
+    <string name="map_widget_rssi">قوة الإشارة</string>
+    <string name="tracks_empty_folder_description">لايوجد مسارات في هذا المجلد.</string>
+    <string name="tracks_empty_folder">مجلد فارغ</string>
+    <string name="track_not_recorded">غير مسجل</string>
+    <string name="shared_string_new_track">مسار جديد</string>
+    <string name="shared_string_visible_on_map">مرئي على الخريطة</string>
+    <string name="delete_folder">حذف مجلد</string>
+    <string name="delete_track_folder_dialog_message">سيؤدي هذا إلى حذف مجلد \"%1$s\" وجميع المسارات (%2$s) المضمنة.</string>
+    <string name="delete_folder_question">حذف المجلد؟</string>
 </resources>

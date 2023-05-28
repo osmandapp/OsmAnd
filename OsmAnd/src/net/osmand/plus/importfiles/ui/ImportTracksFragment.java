@@ -359,7 +359,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		if (activity != null) {
 			String name = Algorithms.getFileNameWithoutExtension(fileName);
 			FragmentManager manager = activity.getSupportFragmentManager();
-			AddNewTrackFolderBottomSheet.showInstance(manager, name, this, true);
+			AddNewTrackFolderBottomSheet.showInstance(manager, null, name, this, true);
 		}
 	}
 
