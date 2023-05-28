@@ -30,12 +30,14 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	protected final boolean nightMode;
 	protected List<AbstractDevice<?>> items = new ArrayList<>();
 	protected DeviceClickListener deviceClickListener;
+	protected UiUtilities uiUtils;
 
 	public FoundDevicesAdapter(@NonNull OsmandApplication app, boolean nightMode, DeviceClickListener deviceClickListener) {
 		this.app = app;
 		this.plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		this.nightMode = nightMode;
 		this.deviceClickListener = deviceClickListener;
+		uiUtils = app.getUIUtilities();
 	}
 
 	@NonNull

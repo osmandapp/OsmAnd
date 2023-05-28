@@ -30,7 +30,7 @@ public class SensorTextWidget extends TextInfoWidget {
 	                        @NonNull SensorWidgetDataFieldType fieldType, @Nullable String customId) {
 		super(mapActivity, fieldType.getWidgetType());
 		this.fieldType = fieldType;
-		deviceIdPref = registerSkipStopsPref(customId);
+		deviceIdPref = registerSensorDevicePref(customId);
 		externalDeviceId = getDeviceId(appMode);
 		plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		applyDeviceId();
@@ -136,7 +136,7 @@ public class SensorTextWidget extends TextInfoWidget {
 	};
 
 	@NonNull
-	private CommonPreference<String> registerSkipStopsPref(@Nullable String customId) {
+	private CommonPreference<String> registerSensorDevicePref(@Nullable String customId) {
 		String prefId = Algorithms.isEmpty(customId) ? fieldType.name() : fieldType.name() + customId;
 		return settings.registerStringPreference(prefId, null)
 				.makeProfile()
@@ -156,7 +156,7 @@ public class SensorTextWidget extends TextInfoWidget {
 
 	@Override
 	public void copySettings(@NonNull ApplicationMode appMode, @Nullable String customId) {
-		registerSkipStopsPref(customId).setModeValue(appMode, deviceIdPref.getModeValue(appMode));
+		registerSensorDevicePref(customId).setModeValue(appMode, deviceIdPref.getModeValue(appMode));
 	}
 
 	public SensorWidgetDataFieldType getFieldType() {

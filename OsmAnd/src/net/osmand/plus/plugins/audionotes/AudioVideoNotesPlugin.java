@@ -737,16 +737,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
-		MapWidget onRequestWidget = createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST, null);
+		MapWidget onRequestWidget = createMapWidgetForParams(mapActivity, AV_NOTES_ON_REQUEST);
 		widgetsInfos.add(creator.createWidgetInfo(onRequestWidget));
 
-		MapWidget audioWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO, null);
+		MapWidget audioWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_AUDIO);
 		widgetsInfos.add(creator.createWidgetInfo(audioWidget));
 
-		MapWidget videoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO, null);
+		MapWidget videoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_RECORD_VIDEO);
 		widgetsInfos.add(creator.createWidgetInfo(videoWidget));
 
-		MapWidget photoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO, null);
+		MapWidget photoWidget = createMapWidgetForParams(mapActivity, AV_NOTES_TAKE_PHOTO);
 		widgetsInfos.add(creator.createWidgetInfo(photoWidget));
 	}
 

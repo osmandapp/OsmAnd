@@ -235,7 +235,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void createWidgets(@NonNull MapActivity mapActivity, @NonNull List<MapWidgetInfo> widgetsInfos, @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY, null);
+		MapWidget widget = createMapWidgetForParams(mapActivity, WidgetType.MAPILLARY);
 		widgetsInfos.add(creator.createWidgetInfo(widget));
 	}
 

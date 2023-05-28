@@ -170,7 +170,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			emptyView.setVisibility(View.VISIBLE);
 			contentView.setVisibility(View.GONE);
 		} else {
-			requireActivity().runOnUiThread(() -> {
+			app.runInUIThread(() -> {
 				appBar.setExpanded(false);
 				devicesListAdapter.setItems(filteredDevices);
 				contentView.setVisibility(View.VISIBLE);

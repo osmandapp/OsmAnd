@@ -21,7 +21,6 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -33,6 +32,8 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.*;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -183,19 +184,19 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	                          @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 
-		MapWidget heartRateWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.HEART_RATE);
+		MapWidget heartRateWidget = new SensorTextWidget(mapActivity, appMode, HEART_RATE);
 		widgetsInfos.add(creator.createWidgetInfo(heartRateWidget));
 
-		MapWidget bikePowerWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_POWER);
+		MapWidget bikePowerWidget = new SensorTextWidget(mapActivity, appMode, BIKE_POWER);
 		widgetsInfos.add(creator.createWidgetInfo(bikePowerWidget));
 
-		MapWidget bikeCadenceWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_SPEED);
+		MapWidget bikeCadenceWidget = new SensorTextWidget(mapActivity, appMode, BIKE_SPEED);
 		widgetsInfos.add(creator.createWidgetInfo(bikeCadenceWidget));
 
-		MapWidget bikeSpeedWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_CADENCE);
+		MapWidget bikeSpeedWidget = new SensorTextWidget(mapActivity, appMode, BIKE_CADENCE);
 		widgetsInfos.add(creator.createWidgetInfo(bikeSpeedWidget));
 
-		MapWidget bikeDistanceWidget = new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_DISTANCE);
+		MapWidget bikeDistanceWidget = new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE);
 		widgetsInfos.add(creator.createWidgetInfo(bikeDistanceWidget));
 	}
 
@@ -203,16 +204,16 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		ApplicationMode appMode = settings.getApplicationMode();
 		switch (widgetType) {
-			case ANT_HEART_RATE:
-				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.HEART_RATE, customId);
-			case ANT_BICYCLE_POWER:
-				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_POWER, customId);
-			case ANT_BICYCLE_CADENCE:
-				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_CADENCE, customId);
-			case ANT_BICYCLE_SPEED:
-				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_SPEED, customId);
-			case ANT_BICYCLE_DISTANCE:
-				return new SensorTextWidget(mapActivity, appMode, SensorWidgetDataFieldType.BIKE_DISTANCE, customId);
+			case HEART_RATE:
+				return new SensorTextWidget(mapActivity, appMode, HEART_RATE, customId);
+			case BICYCLE_POWER:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_POWER, customId);
+			case BICYCLE_CADENCE:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_CADENCE, customId);
+			case BICYCLE_SPEED:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_SPEED, customId);
+			case BICYCLE_DISTANCE:
+				return new SensorTextWidget(mapActivity, appMode, BIKE_DISTANCE, customId);
 		}
 		return null;
 	}

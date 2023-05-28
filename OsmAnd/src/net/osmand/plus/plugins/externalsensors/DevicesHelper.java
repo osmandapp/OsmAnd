@@ -543,11 +543,11 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return;
 			}
 
-			if(bleScanner == null){
+			if (bleScanner == null) {
 				initBLE();
 			}
 
-			if(bleScanner == null){
+			if (bleScanner == null) {
 				app.showShortToastMessage("Can't initialize ble");
 				return;
 			}

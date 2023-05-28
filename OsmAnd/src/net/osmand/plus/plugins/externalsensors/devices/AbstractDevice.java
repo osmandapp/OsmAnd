@@ -45,7 +45,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		this.deviceId = deviceId;
 	}
 
-	protected void setCurrentState(DeviceConnectionState newState) {
+	protected void setCurrentState(@NonNull DeviceConnectionState newState) {
 		state = newState;
 	}
 

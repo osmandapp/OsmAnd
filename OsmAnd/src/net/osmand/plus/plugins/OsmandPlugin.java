@@ -388,6 +388,10 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+		return createMapWidgetForParams(mapActivity, widgetType, null);
+	}
+
 	public List<String> indexingFiles(@Nullable IProgress progress) {
 		return null;
 	}

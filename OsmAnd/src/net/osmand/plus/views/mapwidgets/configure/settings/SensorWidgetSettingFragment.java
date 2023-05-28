@@ -27,9 +27,8 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment impl
 	protected ExternalSensorsPlugin plugin;
 	private UiUtilities uiUtils;
 
-	private WidgetType widgetType = WidgetType.RSSI;
+	private WidgetType widgetType;
 	private AbstractDevice<?> sourceDevice;
-	private boolean newSourceDeviceSet;
 	private AppCompatImageView deviceIcon;
 
 	@NonNull
@@ -60,7 +59,6 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment impl
 	@Override
 	public void selectNewDevice(AbstractDevice<?> device, SensorWidgetDataFieldType requestedWidgetDataFieldType) {
 		sourceDevice = device;
-		newSourceDeviceSet = true;
 		updateSourceDeviceUI();
 	}
 

@@ -15,7 +15,6 @@ import net.osmand.util.Algorithms;
 public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 
 	private final SelectDeviceListener deviceClickListener;
-	private UiUtilities uiUtils;
 	private String selectedDeviceId;
 	private int selectedPosition = -1;
 
@@ -23,7 +22,6 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	                               @NonNull SelectDeviceListener deviceClickListener) {
 		super(app, nightMode, null);
 		this.deviceClickListener = deviceClickListener;
-		uiUtils = app.getUIUtilities();
 	}
 
 	public void setDeviceId(@Nullable String selectedDeviceId) {
@@ -43,9 +41,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 			holder.description.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.GONE);
 			AbstractDevice<?> device = items.get(position - 1);
-			if (!Algorithms.isEmpty(selectedDeviceId)) {
-				holder.selectionMark.setChecked(selectedDeviceId.equals(device.getDeviceId()));
-			}
+			holder.selectionMark.setChecked(Algorithms.stringsEqual(selectedDeviceId, device.getDeviceId()));
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, device));
 		}
 		if (holder.selectionMark.isChecked()) {

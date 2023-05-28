@@ -187,11 +187,11 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		if (devices.isEmpty()) {
 			emptyView.setVisibility(View.VISIBLE);
 			contentView.setVisibility(View.GONE);
-			requireActivity().runOnUiThread(() -> {
+			app.runInUIThread(() -> {
 				appBar.setExpanded(true);
 			});
 		} else {
-			requireActivity().runOnUiThread(() -> {
+			app.runInUIThread(() -> {
 				appBar.setExpanded(false);
 				connectedListAdapter.setItems(connectedDevices);
 				disconnectedListAdapter.setItems(disconnectedDevices);
