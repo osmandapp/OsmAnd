@@ -124,13 +124,17 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	void deinitBLE() {
 		try {
 			if (bluetoothAdapter != null) {
+				if (bleScanner != null && bluetoothAdapter.isEnabled()) {
+					try {
+						bleScanner.stopScan(bleScanCallback);
+					} catch (Throwable error) {
+						LOG.error("Stop ble scan error. " + error);
+					}
+				}
 				bluetoothAdapter.cancelDiscovery();
 				bluetoothAdapter = null;
 			}
-			if (bleScanner != null) {
-				bleScanner.stopScan(bleScanCallback);
-				bleScanner = null;
-			}
+			bleScanner = null;
 		} catch (SecurityException error) {
 			LOG.debug("No permission on disable BLE");
 		}
