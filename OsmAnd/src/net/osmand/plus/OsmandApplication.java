@@ -596,8 +596,8 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
-	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
-	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+									   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+									   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			settings.VOICE_MUTE.setModeValue(appMode, true);
@@ -832,7 +832,12 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public String getLanguage() {
-		return localeHelper.getLanguage();
+		String appLang = localeHelper.getLanguage();
+		// assume english is default though it's not correct
+		if (Algorithms.isEmpty(appLang)) {
+			appLang = "en";
+		}
+		return appLang;
 	}
 
 	@Override

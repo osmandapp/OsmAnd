@@ -346,12 +346,7 @@ public class TravelObfHelper implements TravelHelper {
 	public synchronized List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
-		String appLang;
-		if (Algorithms.isEmpty(app.getLanguage())) {
-			appLang = "en";
-		} else {
-			appLang = app.getLanguage();
-		}
+		String appLang = app.getLanguage();
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		SearchSettings settings = searchUICore.getSearchSettings();
 		SearchPhrase phrase = searchUICore.getPhrase().generateNewPhrase(searchQuery, settings);
