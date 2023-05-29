@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
@@ -103,7 +102,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		mainView = themedInflater.inflate(R.layout.fragment_mappers_osm, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 

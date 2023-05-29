@@ -575,8 +575,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
-			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
+			if (isCurrentType(DASHBOARD) || isCurrentTypeHasIndividualFragment()) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -760,6 +759,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				mapActivity.refreshMapComplete();
 			}
 		}
+	}
+
+	public void refreshContent() {
+		refreshContent(!isCurrentTypeHasIndividualFragment());
 	}
 
 	public void refreshContent(boolean force) {
@@ -1020,6 +1023,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isNoCurrentType(@NonNull DashboardType... types) {
 		return !isCurrentType(types);
+	}
+
+	public boolean isCurrentTypeHasIndividualFragment() {
+		return isCurrentType(
+				CONFIGURE_MAP, MAPILLARY, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
+				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES
+		);
 	}
 
 	void onDetach(DashBaseFragment dashBaseFragment) {

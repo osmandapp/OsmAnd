@@ -307,6 +307,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			return null;
 		}
 
+		updateNightMode();
+
 		MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
 		app.setMeasurementEditingContext(editingCtx);
@@ -346,8 +348,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
-		View view = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.fragment_measurement_tool, container, false);
+		View view = themedInflater.inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
 		detailsMenu = new GraphDetailsMenu();

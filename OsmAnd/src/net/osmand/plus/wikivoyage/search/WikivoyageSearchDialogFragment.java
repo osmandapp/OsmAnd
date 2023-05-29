@@ -50,6 +50,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		searchHelper = new WikivoyageSearchHelper(app);
 
 		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);

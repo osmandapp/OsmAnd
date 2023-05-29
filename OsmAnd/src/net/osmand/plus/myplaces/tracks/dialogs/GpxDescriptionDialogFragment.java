@@ -18,6 +18,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.WebViewEx;
 
 public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
@@ -28,6 +29,7 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		Context ctx = getContext();
 
 		Toolbar topBar = new Toolbar(ctx);
@@ -35,14 +37,9 @@ public class GpxDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		topBar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(ctx)));
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(R.string.shared_string_description);
-		topBar.setBackgroundColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTabBackground)));
-		topBar.setTitleTextColor(ContextCompat.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor)));
-		topBar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		topBar.setBackgroundColor(ColorUtilities.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTabBackground)));
+		topBar.setTitleTextColor(ColorUtilities.getColor(ctx, AndroidUtils.resolveAttribute(ctx, R.attr.pstsTextColor)));
+		topBar.setNavigationOnClickListener(v -> dismiss());
 
 		AppBarLayout appBar = new AppBarLayout(ctx);
 		appBar.addView(topBar);

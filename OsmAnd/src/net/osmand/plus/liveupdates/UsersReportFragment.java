@@ -29,7 +29,8 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_simple_list, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.fragment_simple_list, container, false);
 		ListView listView = view.findViewById(android.R.id.list);
 		ArrayAdapter<Object> adapter = new ListAdapter(getListItemIcon());
 		String url = getArguments().getString(URL_REQUEST);

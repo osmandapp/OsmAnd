@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
@@ -40,7 +39,6 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemClickListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -96,8 +94,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(app, nightMode);
-		View root = inflater.inflate(R.layout.fragment_import_complete, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_import_complete, container, false);
 		TextView description = root.findViewById(R.id.description);
 		TextView btnClose = root.findViewById(R.id.button_close);
 		ViewGroup buttonContainer = root.findViewById(R.id.button_container);

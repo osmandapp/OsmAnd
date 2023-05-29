@@ -141,8 +141,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = requireMapActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.download_tiles_fragment, container, false);
 
 		mapWindow = view.findViewById(R.id.map_window);

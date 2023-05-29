@@ -68,7 +68,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
 		InputFilter[] lengthLimit = {

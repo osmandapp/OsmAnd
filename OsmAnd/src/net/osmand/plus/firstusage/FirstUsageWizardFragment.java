@@ -150,6 +150,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		view = UiUtilities.getInflater(getContext(), deviceNightMode).inflate(R.layout.first_usage_wizard_fragment, container, false);
 		activity = requireActivity();
 		AndroidUtils.addStatusBarPadding21v(activity, view);

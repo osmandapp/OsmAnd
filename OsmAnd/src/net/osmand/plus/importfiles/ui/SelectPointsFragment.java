@@ -71,7 +71,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	private boolean locationUpdateStarted;
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 
@@ -93,7 +93,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.select_track_points_fragment, container, false);
 
 		setupToolbar(view);

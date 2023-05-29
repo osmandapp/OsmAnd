@@ -198,6 +198,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			return null;
 		}
 
+		updateNightMode();
 		processScreenHeight(container);
 
 		MapActivity mapActivity = requireMapActivity();
@@ -213,30 +214,18 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		view = inflater.inflate(R.layout.fragment_map_context_menu, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
-
-		nightMode = menu.isNightMode();
 		mainView = view.findViewById(R.id.context_menu_main);
 
 		toolbarContainer = view.findViewById(R.id.context_menu_toolbar_container);
 		ImageView toolbarBackButton = view.findViewById(R.id.context_menu_toolbar_back);
 		toolbarTextView = view.findViewById(R.id.context_menu_toolbar_text);
 		updateVisibility(toolbarContainer, 0);
-		toolbarBackButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openMenuHeaderOnly();
-			}
-		});
+		toolbarBackButton.setOnClickListener(v -> openMenuHeaderOnly());
 		toolbarBackButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 
 		topButtonContainer = view.findViewById(R.id.context_menu_top_button_container);
 		ImageView backButton = view.findViewById(R.id.context_menu_top_back);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openMenuHeaderOnly();
-			}
-		});
+		backButton.setOnClickListener(v -> openMenuHeaderOnly());
 		backButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 		updateVisibility(topButtonContainer, 0);
 

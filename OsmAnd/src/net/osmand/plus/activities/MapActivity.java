@@ -2122,6 +2122,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
+
+		app.getLocaleHelper().setLanguage(this);
+
 		List<Fragment> fragments = getSupportFragmentManager().getFragments();
 		for (Fragment fragment : fragments) {
 			getSupportFragmentManager()
@@ -2129,6 +2132,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.detach(fragment)
 					.attach(fragment)
 					.commit();
+		}
+
+		DashboardOnMap dashboard = getDashboard();
+		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
+			dashboard.refreshContent(true);
 		}
 	}
 

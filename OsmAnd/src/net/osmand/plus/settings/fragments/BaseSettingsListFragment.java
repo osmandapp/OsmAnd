@@ -87,7 +87,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View root = themedInflater.inflate(R.layout.fragment_import, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), root);
 

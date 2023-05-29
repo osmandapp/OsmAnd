@@ -1536,18 +1536,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public boolean isNightMode() {
-		MapActivity mapActivity = getMapActivity();
-		MenuController menuController = getMenuController();
-		if (menuController != null) {
-			return !menuController.isLight();
-		} else if (mapActivity != null) {
-			return mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		} else {
-			return false;
-		}
-	}
-
 	public boolean hasHiddenBottomInfo() {
 		return getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}

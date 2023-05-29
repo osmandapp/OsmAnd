@@ -6,22 +6,18 @@ import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -41,8 +37,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) requireMyActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
 		showHideTopShadow(view);

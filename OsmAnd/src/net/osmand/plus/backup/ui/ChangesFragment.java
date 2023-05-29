@@ -76,7 +76,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_osmand_cloud_changes, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

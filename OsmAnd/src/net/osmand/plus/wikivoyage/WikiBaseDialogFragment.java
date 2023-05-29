@@ -73,21 +73,14 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	protected View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		return LayoutInflater.from(new ContextThemeWrapper(getContext(), themeRes))
-				.inflate(layoutId, container, false);
+		return themedInflater.inflate(layoutId, container, false);
 	}
 
 	protected void setupToolbar(Toolbar toolbar) {
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(getContext()));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				closeFragment();
-			}
-		});
+		toolbar.setNavigationOnClickListener(v -> closeFragment());
 	}
 	
 	protected void closeFragment() {

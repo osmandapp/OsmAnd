@@ -155,7 +155,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	private boolean updateTheme() {
-		boolean nightMode = !settings.isLightContentForMode(getSelectedAppMode());
+		ApplicationMode appMode = getSelectedAppMode();
+		boolean nightMode = !settings.isLightContentForMode(appMode);
 		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
 		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
