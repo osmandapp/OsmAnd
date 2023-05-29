@@ -50,6 +50,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -157,10 +158,19 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		List<TrackItem> trackItems = selectedFolder.getTrackItems();
 		if (folders.isEmpty() && trackItems.isEmpty()) {
 			items.add(TYPE_EMPTY_FOLDER);
+		} else {
+			items.addAll(folders);
+			items.addAll(trackItems);
+
+			if (shouldShowFolderStats()) {
+				items.add(TrackFolderAnalysis.getFolderAnalysis(selectedFolder));
+			}
 		}
-		items.addAll(folders);
-		items.addAll(trackItems);
 		return items;
+	}
+
+	protected boolean shouldShowFolderStats(){
+		return true;
 	}
 
 	protected void updateContent() {

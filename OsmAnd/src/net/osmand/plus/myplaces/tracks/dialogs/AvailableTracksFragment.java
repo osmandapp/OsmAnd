@@ -42,6 +42,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.folder.TrackFolderOptionsListener;
 import net.osmand.plus.utils.FileUtils;
@@ -168,6 +169,10 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		items.add(visibleTracksGroup);
 		items.addAll(rootFolder.getSubFolders());
 		items.addAll(rootFolder.getTrackItems());
+
+		if (rootFolder.getFlattenedTrackItems().size() != 0) {
+			items.add(TrackFolderAnalysis.getFolderAnalysis(rootFolder));
+		}
 		return items;
 	}
 
