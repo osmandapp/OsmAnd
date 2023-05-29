@@ -278,7 +278,7 @@ public class ImportHelper {
 	public void handleGpxImport(@NonNull Uri uri, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
 	                            boolean useImportDir, boolean save) {
 		CallbackWithObject<Pair<GPXFile, Long>> callback = pair -> {
-			handleResult(pair.first, fileName, onGpxImport, pair.second, save, getDestinationDir(app, useImportDir), true);
+			handleResult(pair.first, fileName, onGpxImport, pair.second, save, getGpxDestinationDir(app, useImportDir), true);
 			return true;
 		};
 		executeImportTask(new GpxImportTask(activity, uri, fileName, callback));
@@ -461,7 +461,7 @@ public class ImportHelper {
 	}
 
 	protected void handleResult(GPXFile result, String name, long fileSize, boolean save, boolean useImportDir) {
-		handleResult(result, name, OPEN_GPX_CONTEXT_MENU, fileSize, save, getDestinationDir(app, useImportDir), true);
+		handleResult(result, name, OPEN_GPX_CONTEXT_MENU, fileSize, save, getGpxDestinationDir(app, useImportDir), true);
 	}
 
 	private boolean checkGpxFile(@Nullable GPXFile gpxFile, boolean showDialogs) {
@@ -534,7 +534,7 @@ public class ImportHelper {
 	}
 
 	@NonNull
-	public static File getDestinationDir(@NonNull OsmandApplication app, boolean useImportDir) {
+	public static File getGpxDestinationDir(@NonNull OsmandApplication app, boolean useImportDir) {
 		return app.getAppPath(useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR);
 	}
 

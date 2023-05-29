@@ -228,7 +228,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				if (!Algorithms.isEmpty(filesUri)) {
 					startImport();
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getDestinationDir(app, true));
+					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getGpxDestinationDir(app, true));
 				}
 			}
 		} else {
