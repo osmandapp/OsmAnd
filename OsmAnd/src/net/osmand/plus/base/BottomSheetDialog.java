@@ -96,12 +96,9 @@ public class BottomSheetDialog extends Dialog {
 			container.addView(view, params);
 		}
 
-		res.findViewById(R.id.touch_outside).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (cancelable && isShowing() && shouldWindowCloseOnTouchOutside()) {
-					cancel();
-				}
+		res.findViewById(R.id.touch_outside).setOnClickListener(v -> {
+			if (cancelable && isShowing() && shouldWindowCloseOnTouchOutside()) {
+				cancel();
 			}
 		});
 

@@ -12,4 +12,8 @@ public interface TrackFolderOptionsListener {
 	void onFolderDeleted();
 
 	void showFolderTracksOnMap(@NonNull TrackFolder folder);
+
+	void showExportDialog(@NonNull TrackFolder folder);
+
+	void showChangeAppearanceDialog(@NonNull TrackFolder trackFolder);
 }

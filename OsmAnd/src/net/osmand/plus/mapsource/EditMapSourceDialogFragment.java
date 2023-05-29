@@ -436,30 +436,27 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private OnClickListener getClickListener(ConfigurationItem item) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentManager fm = getFragmentManager();
-				boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
-				if (fm != null && !fm.isStateSaved()) {
-					switch (item) {
-						case ZOOM_LEVELS:
-							InputZoomLevelsBottomSheet.showInstance(
-									fm, EditMapSourceDialogFragment.this,
-									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom, newMapSource
-							);
-							break;
-						case EXPIRE_TIME:
-							ExpireTimeBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, expireTimeMinutes);
-							break;
-						case MERCATOR_PROJECTION:
-							MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
-							break;
-						case STORAGE_FORMAT:
-							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
-							break;
-					}
+		return view -> {
+			FragmentManager fm = getFragmentManager();
+			boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
+			if (fm != null && !fm.isStateSaved()) {
+				switch (item) {
+					case ZOOM_LEVELS:
+						InputZoomLevelsBottomSheet.showInstance(
+								fm, EditMapSourceDialogFragment.this,
+								R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
+								minZoom, maxZoom, newMapSource
+						);
+						break;
+					case EXPIRE_TIME:
+						ExpireTimeBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, expireTimeMinutes);
+						break;
+					case MERCATOR_PROJECTION:
+						MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
+						break;
+					case STORAGE_FORMAT:
+						TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
+						break;
 				}
 			}
 		};

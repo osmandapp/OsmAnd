@@ -11,18 +11,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.FlowLayout.LayoutParams;
 import net.osmand.util.Algorithms;
@@ -32,7 +32,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColorsCard extends MapBaseCard implements ColorPickerListener {
+public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public static final int MAX_CUSTOM_COLORS = 6;
 	public static final double MINIMUM_CONTRAST_RATIO = 1.5;
@@ -56,14 +56,14 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		return R.layout.colors_card;
 	}
 
-	public ColorsCard(@NonNull MapActivity mapActivity,
+	public ColorsCard(@NonNull FragmentActivity activity,
 	                  @Nullable ApplicationMode appMode,
 	                  @Nullable Fragment targetFragment,
 	                  @ColorInt int selectedColor,
 	                  @NonNull List<Integer> colors,
 	                  @NonNull ListStringPreference colorsListPreference,
 	                  boolean usedOnMap) {
-		super(mapActivity, usedOnMap);
+		super(activity, usedOnMap);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
@@ -166,15 +166,9 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 			notifyCardPressed();
 		});
 		if (customColor) {
-			backgroundCircle.setOnLongClickListener(new View.OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View v) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), targetFragment, color);
-					}
-					return false;
-				}
+			backgroundCircle.setOnLongClickListener(v -> {
+				CustomColorBottomSheet.showInstance(activity.getSupportFragmentManager(), targetFragment, color);
+				return false;
 			});
 		}
 		colorItemView.setTag(color);
@@ -194,15 +188,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorResId));
 
 		backgroundCircle.setImageDrawable(backgroundIcon);
-		backgroundCircle.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					CustomColorBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), targetFragment, null);
-				}
-			}
-		});
+		backgroundCircle.setOnClickListener(v -> CustomColorBottomSheet.showInstance(activity.getSupportFragmentManager(), targetFragment, null));
 		return colorItemView;
 	}
 
