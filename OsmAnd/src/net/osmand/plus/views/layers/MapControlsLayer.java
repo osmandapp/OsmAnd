@@ -609,6 +609,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapButtons.clear();
 	}
 
+	public void refreshButtons(){
+		for (MapButton button : mapButtons){
+			button.refresh();
+		}
+	}
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		updateControls(tileBox, nightMode);

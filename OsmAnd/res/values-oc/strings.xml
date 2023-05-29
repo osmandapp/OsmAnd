@@ -353,7 +353,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar lei rotas que riscan de gelar e lei gas.</string>
     <string name="use_location">Utilizar la posicion</string>
     <string name="add_location_as_first_point_descr">Ajustar vòstra posicion per ponch de partença e planificar un percors perfècte.</string>
-    <string name="my_location">Vòstra posicion</string>
+    <string name="my_location">Ma posicion</string>
     <string name="shared_string_finish">Finir</string>
     <string name="plan_route">Planificar un percors</string>
     <string name="shared_string_sort">Ordenar</string>
@@ -371,7 +371,7 @@
     <string name="make_active">Activar</string>
     <string name="today">Uei</string>
     <string name="yesterday">Ièr</string>
-    <string name="last_seven_days">Darriers 7 jorns</string>
+    <string name="last_seven_days">7 jorns darriers</string>
     <string name="this_year">Aquest an</string>
     <string name="show_direction">Indicacion de la distància</string>
     <string name="sort_by">Ordenar per</string>
@@ -662,7 +662,7 @@
     <string name="select_color">Chausissètz la color</string>
     <string name="day_off_label">Barrat</string>
     <string name="explore_wikipedia_offline">Explorar la Wiquipèdia fòra de linha.</string>
-    <string name="quick_action_remove_next_destination">Suprimir lo ponch de destinacion pus pròche</string>
+    <string name="quick_action_remove_next_destination">Suprimir lo ponch d’etapa pus pròche</string>
     <string name="track_show_start_finish_icons">Mostrar lei icònas de començament e de fin</string>
     <string name="shared_string_terrain">Relèu</string>
     <string name="rendering_attr_showLez_name">Mostrar lei zònas d\'escampament bas</string>
@@ -935,7 +935,7 @@
     <string name="gps_filter_precision">Precision GPS</string>
     <string name="is_disabled">%1$s es desactivat</string>
     <string name="history_actions_descr">Podètz exportar l\'istoric dins un fichier.</string>
-    <string name="map_markers_history">Istoric dei marcadors de la mapa</string>
+    <string name="map_markers_history">Istoric dei marcas</string>
     <string name="navigation_history">Istoric de navigacion</string>
     <string name="history_preferences_descr">Podètz desactivar l\'enregistrament de l\'istoric per cada mena d\'istoric.</string>
     <string name="location_access_request_action">Acordar la permission</string>
@@ -1486,7 +1486,7 @@
     <string name="enter_verification_code">Intratz un senhau de l\'usatge unic</string>
     <string name="verification_code_missing">Ai pas recebut de còde de verificacion</string>
     <string name="local_backup_descr">Sauvagardar ò restaurar de donadas partent d\'un fichier locau.</string>
-    <string name="shared_string_external">Extèrne</string>
+    <string name="shared_string_external">Externe</string>
     <string name="select_backup_data_descr">Seleccionar lei donadas e lei dorsiers de sauvagardar.</string>
     <string name="backup_version_history">Istoric de la version</string>
     <string name="restore_from_file">Restaurar dau fichier</string>
@@ -1556,7 +1556,7 @@
     <string name="backup_data">Sauvagarda dei donadas</string>
     <string name="shared_string_online">En linha</string>
     <string name="backup_conflicts">Conflictes</string>
-    <string name="purchases_feature_desc_wikipedia">Exploratz Wikipèdia fòra de linha. Articles segon lo país e disponibles dins totei lei lengas.</string>
+    <string name="purchases_feature_desc_wikipedia">Dona d’informacions sus lei ponchs d’interès dins la Wikipèdia. Oblidètz pas de teledescargar la Guida de viatge de cada region per ne’n profichar fòra de linha.</string>
     <string name="purchases_feature_desc_wikivoyage">Exploratz Wikiviatge fòra de linha. Articles segon lo país e disponibles dins totei lei lengas.</string>
     <string name="user_points">Ponchs de l\'utilizator</string>
     <string name="announce_when_exceeded">Avisar se i a despassament</string>
@@ -2254,4 +2254,52 @@
     <string name="external_device_forget_sensor_description">Aqueste captador serà eliminat de la lista. Podretz apariar mai lo captador quand vodretz.</string>
     <string name="external_device_disconnected">Desconnectat</string>
     <string name="external_device_characteristic_heart_rate">Frequéncia cardiaca</string>
+    <string name="map_widget_camera_distance">Elevacion de l’aparelh fòto</string>
+    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="nothing_found">Ges de resultat</string>
+    <string name="route_info">Informacions sus lo percors</string>
+    <string name="quick_action_transport_descr">Boton per mostrar ò amagar lo transpòrt public sus la mapa.</string>
+    <string name="shared_string_min">Min</string>
+    <string name="parking_place">Luòc d\'aparcament</string>
+    <string name="shared_string_legal">Legau</string>
+    <string name="change_application_profile">Cambiar lo perfiu de l\'aplicacion</string>
+    <string name="nothing_found_descr">Modificar ò relargar la recèrca.</string>
+    <string name="si_nm_mt">Milas marins/ mètres</string>
+    <string name="driving_region_europe_asia">Euròpa, Asia, America latina e semblants</string>
+    <string name="position_on_map_center">Au centre</string>
+    <string name="km">km</string>
+    <string name="shared_string_max">Max</string>
+    <string name="moving_time">Durada de movement</string>
+    <string name="depth_contours">Isobates</string>
+    <string name="shared_string_angle">Angle</string>
+    <string name="type_city_town">Escrivètz la vila ò la localitat</string>
+    <string name="si_nm_ft">Milas marins/ pès</string>
+    <string name="map_widget_target_distance">Distància de l’aparelh fòto a la tòca</string>
+    <string name="shared_string_duplicate">Doblar</string>
+    <string name="quick_action_showhide_mapillary_descr">Boton per mostrar ò amagar la jaça Mapillary sus la mapa.</string>
+    <string name="gpx_parse_error">Lo fichier GPX es endecat. 
+\n
+\nIndicatz-o a l\'equipa de supòrt per aprefondir la causa.</string>
+    <string name="save_heading_descr">Sauvar l’orientacion de cada ponch de la traça quora s’enregistra.</string>
+    <string name="driving_region_uk">Reiaume Unit, Índia e semblant</string>
+    <string name="map_widget_parking">Aparcament</string>
+    <string name="position_on_map_bottom">En bas</string>
+    <string name="animate_my_location">Animar sa posicion</string>
+    <string name="map_widget_zoom_level">Nivèu de zoom</string>
+    <string name="coordinates_widget_map_center">Coordonadas: centre de la mapa</string>
+    <string name="map_widget_rendering_fps">Rendut FPS de la mapa</string>
+    <string name="nautical_depth_points">Ponchs d’escandau marin</string>
+    <string name="kg">kg</string>
+    <string name="map_widget_altitude">Altitud</string>
+    <string name="top_widgets_panel">Panèu superior</string>
+    <string name="select_postcode">Recercar lo còde postau</string>
+    <string name="gpx_selection_segment_title">Estirada</string>
+    <string name="map_widget_trip_recording_downhill">Descenda</string>
+    <string name="map_widget_trip_recording_duration">Durada</string>
+    <string name="map_widget_trip_recording_uphill">Montada</string>
+    <string name="arrived_at_destination">Siatz arribat.</string>
+    <string name="add_waypoint">Ajustar un ponch d\'etapa au percors</string>
+    <string name="wiki_article_search_text">Recèrca de l’article Wiki correspondent</string>
+    <string name="confirm_usage_speed_cameras">Dins un molon de país (Alemanha, França, Itàlia e d\'autres) l\'emplec d\'avisadors de radars es pas permés per la lèi. OsmAnd a ges de responsabilitat per cas de violacion de la lèi. Acceptatz ren que s\'aquesta fonccion es autorizada.</string>
+    <string name="add_group">Ajustatz un grop</string>
 </resources>

@@ -27,6 +27,9 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
@@ -341,6 +344,15 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 			@Override
 			public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+				Fragment target = getTargetFragment();
+				FragmentManager manager = getFragmentManager();
+				if (target instanceof BaseTrackFolderFragment && manager != null) {
+					BaseTrackFolderFragment fragment = (BaseTrackFolderFragment) target;
+					TrackFolder trackFolder = fragment.getSelectedFolder();
+					TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
+
+					app.runInUIThread(() -> dismissAllowingStateLoss());
+				}
 			}
 		};
 	}

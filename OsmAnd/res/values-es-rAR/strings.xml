@@ -3755,7 +3755,7 @@
     <string name="all_next_segments_will_be_recalc">Todos los segmentos posteriores serán recalculados usando el perfil elegido.</string>
     <string name="all_previous_segments_will_be_recalc">Todos los segmentos anteriores serán recalculados usando el perfil elegido.</string>
     <string name="open_saved_track">Abrir traza guardada</string>
-    <string name="shared_string_is_saved">está guardado</string>
+    <string name="shared_string_is_saved">se ha guardado</string>
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
     <string name="one_point_error">Añade al menos dos puntos.</string>

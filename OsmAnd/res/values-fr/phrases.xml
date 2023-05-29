@@ -863,7 +863,7 @@
     <string name="poi_abandoned_poi">Structure à l\'abandon</string>
     <string name="poi_access_private">Propriété privée</string>
     <string name="poi_access_no">Accès interdit</string>
-    <string name="poi_access_permissive">Accès autorisé</string>
+    <string name="poi_access_permissive">Accès toléré</string>
     <string name="poi_access_customers">Accès client</string>
     <string name="poi_access_delivery">Accès réservé aux livraisons</string>
     <string name="poi_recycling_glass">Verre</string>
@@ -2696,7 +2696,7 @@
     <string name="poi_step_condition_even">État des marches : régulières</string>
     <string name="poi_step_condition_uneven">État des marches : irrégulières</string>
     <string name="poi_step_count">Nombre de marches</string>
-    <string name="poi_ref">Réf</string>
+    <string name="poi_ref">Référence</string>
     <string name="poi_inscription_n">Inscription : N</string>
     <string name="poi_inscription_nw">Inscription : NO</string>
     <string name="poi_inscription_w">Inscription : O</string>

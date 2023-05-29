@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +70,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 	private boolean nightMode;
 	private boolean selectionMode;
+	private boolean shouldShowFolder;
 
 	public TrackFoldersAdapter(@NonNull OsmandApplication app, boolean nightMode) {
 		this.app = app;
@@ -101,6 +100,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
+	}
+
+	public void setShouldShowFolder(boolean shouldShowFolder) {
+		this.shouldShowFolder = shouldShowFolder;
 	}
 
 	public void setSortTracksListener(@Nullable SortTracksListener sortListener) {
@@ -193,7 +196,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			TrackItem trackItem = (TrackItem) items.get(position);
 
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
-			viewHolder.bindView(NAME_ASCENDING, trackItem, lastItem, false, selectionMode);
+			viewHolder.bindView(sortMode, trackItem, lastItem, shouldShowFolder, selectionMode);
 		} else if (holder instanceof TrackFolderViewHolder) {
 			TrackFolder trackFolder = (TrackFolder) items.get(position);
 
@@ -225,8 +228,12 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return items.size();
 	}
 
+	public int getItemPosition(@NonNull Object object) {
+		return items.indexOf(object);
+	}
+
 	public void updateItem(@NonNull Object object) {
-		int index = items.indexOf(object);
+		int index = getItemPosition(object);
 		if (index != -1) {
 			notifyItemChanged(index);
 		}

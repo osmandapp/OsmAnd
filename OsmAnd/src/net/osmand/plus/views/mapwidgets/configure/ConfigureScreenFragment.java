@@ -279,21 +279,23 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				})
 				.createButton());
 
-		Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
-		buttonsCard.addView(new ButtonBuilder()
-				.setTitle(getString(R.string.map_3d_mode_action))
-				.setDescription(map3DModeVisibility.getTitle(app))
-				.setIconId(map3DModeVisibility.iconId)
-				.setEnabled(true)
-				.showShortDivider(true)
-				.setClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager fragmentManager = activity.getSupportFragmentManager();
-						Map3DModeBottomSheet.showInstance(fragmentManager, this, selectedAppMode);
-					}
-				})
-				.createButton());
+		if (app.useOpenGlRenderer()) {
+			Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
+			buttonsCard.addView(new ButtonBuilder()
+					.setTitle(getString(R.string.map_3d_mode_action))
+					.setDescription(map3DModeVisibility.getTitle(app))
+					.setIconId(map3DModeVisibility.iconId)
+					.setEnabled(true)
+					.showShortDivider(true)
+					.setClickListener(v -> {
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							FragmentManager fragmentManager = activity.getSupportFragmentManager();
+							Map3DModeBottomSheet.showInstance(fragmentManager, this, selectedAppMode);
+						}
+					})
+					.createButton());
+		}
 
 		boolean distanceByTapEnabled = settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode);
 		buttonsCard.addView(new ButtonBuilder()
