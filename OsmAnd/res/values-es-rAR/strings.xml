@@ -4441,7 +4441,7 @@
     <string name="exit_without_saving_warning">¿Salir sin guardar los cambios\?</string>
     <string name="shared_string_show_slope">Mostrar pendiente</string>
     <string name="shared_string_hide_slope">Ocultar pendiente</string>
-    <string name="shared_string_grade">Calificación</string>
+    <string name="shared_string_grade">Pendiente</string>
     <string name="shared_string_uphill">Ascenso</string>
     <string name="shared_string_downhill">Descenso</string>
     <string name="elevation_profile">Perfil de elevación</string>
