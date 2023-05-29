@@ -14,10 +14,12 @@ import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
 import net.osmand.core.jni.MapPrimitivesProvider;
+import net.osmand.core.jni.MapPrimitivesProvider.Mode;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
+import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
@@ -59,6 +61,7 @@ public class MapRendererContext {
 	private static final String TAG = "MapRendererContext";
 
 	public static final int OBF_RASTER_LAYER = 0;
+	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
 
@@ -66,7 +69,9 @@ public class MapRendererContext {
 
 	// input parameters
 	private MapStylesCollection mapStylesCollection;
-	private IObfsCollection obfsCollection;
+	private Map<ProviderType, ObfsCollection> obfsCollections;
+	@NonNull
+	private ProviderType providerType;
 
 	private boolean nightMode;
 	private boolean useAppLocale;
@@ -89,6 +94,7 @@ public class MapRendererContext {
 	public MapRendererContext(OsmandApplication app, float density) {
 		this.app = app;
 		this.density = density;
+		this.providerType = ProviderType.getProviderType(isVectorLayerEnabled());
 	}
 
 	/**
@@ -137,18 +143,12 @@ public class MapRendererContext {
 		}
 	}
 
-	/**
-	 * Setup OBF map on layer 0 with symbols
-	 *
-	 * @param obfsCollection OBFs collection
-	 */
-	public void setupObfMap(MapStylesCollection mapStylesCollection, IObfsCollection obfsCollection) {
-		this.obfsCollection = obfsCollection;
+	public void setupObfMap(@NonNull MapStylesCollection mapStylesCollection,
+	                        @NonNull Map<ProviderType, ObfsCollection> obfsCollections) {
 		this.mapStylesCollection = mapStylesCollection;
+		this.obfsCollections = obfsCollections;
 		updateMapPresentationEnvironment();
-		if (isVectorLayerEnabled()) {
-			recreateRasterAndSymbolsProvider();
-		}
+		recreateRasterAndSymbolsProvider(providerType);
 	}
 
 	protected int getRasterTileSize() {
@@ -205,8 +205,8 @@ public class MapRendererContext {
 		QStringStringHash convertedStyleSettings = getMapStyleSettings();
 		mapPresentationEnvironment.setSettings(convertedStyleSettings);
 
-		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null) && isVectorLayerEnabled()) {
-			recreateRasterAndSymbolsProvider();
+		if ((obfMapRasterLayerProvider != null || obfMapSymbolsProvider != null)) {
+			recreateRasterAndSymbolsProvider(providerType);
 			setMapBackgroundColor();
 		}
 		PluginsHelper.updateMapPresentationEnvironment(this);
@@ -289,25 +289,29 @@ public class MapRendererContext {
 		return convertedStyleSettings;
 	}
 
-	public void recreateRasterAndSymbolsProvider() {
-		// Create new map primitiviser
-		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
+	public void recreateRasterAndSymbolsProvider(@NonNull ProviderType providerType) {
+		IObfsCollection obfsCollection = obfsCollections.get(providerType);
+		if (obfsCollection == null) {
+			return;
+		}
+
 		mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
 		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
-		// Create new map primitives provider
-		MapPrimitivesProvider mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider, mapPrimitiviser,
-				getRasterTileSize());
-		updateObfMapRasterLayerProvider(mapPrimitivesProvider);
-		updateObfMapSymbolsProvider(mapPrimitivesProvider);
+		MapPrimitivesProvider mapPrimitivesProvider = new MapPrimitivesProvider(obfMapObjectsProvider,
+				mapPrimitiviser, getRasterTileSize(), providerType.surfaceMode);
+		updateObfMapRasterLayerProvider(mapPrimitivesProvider, providerType);
+		updateObfMapSymbolsProvider(mapPrimitivesProvider, providerType);
+		this.providerType = providerType;
 	}
 
-	public void resetRasterAndSymbolsProvider() {
+	public void resetRasterAndSymbolsProvider(@NonNull ProviderType providerType) {
 		MapRendererView mapRendererView = this.mapRendererView;
-		if (mapRendererView != null) {
-			mapRendererView.resetMapLayerProvider(OBF_RASTER_LAYER);
-		}
-		if (obfMapSymbolsProvider != null && mapRendererView != null) {
-			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
+		ProviderType currentProviderType = this.providerType;
+		if (mapRendererView != null && currentProviderType == providerType) {
+			mapRendererView.resetMapLayerProvider(currentProviderType.layerIndex);
+			if (obfMapRasterLayerProvider != null) {
+				mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
+			}
 		}
 	}
 
@@ -331,28 +335,33 @@ public class MapRendererContext {
 		}
 	}
 
-	private void updateObfMapRasterLayerProvider(MapPrimitivesProvider mapPrimitivesProvider) {
+	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
+	                                             @NonNull ProviderType providerType) {
 		// Create new OBF map raster layer provider
-		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider);
+		obfMapRasterLayerProvider = new MapRasterLayerProvider_Software(mapPrimitivesProvider, providerType.fillBackground);
 		// In case there's bound view and configured layer, perform setup
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
-			mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
+			int previousLayerIndex = this.providerType.layerIndex;
+			int newLayerIndex = providerType.layerIndex;
+
+			mapRendererView.resetMapLayerProvider(previousLayerIndex);
+			mapRendererView.setMapLayerProvider(newLayerIndex, obfMapRasterLayerProvider);
 		}
 	}
 
-	private void updateObfMapSymbolsProvider(MapPrimitivesProvider mapPrimitivesProvider) {
+	private void updateObfMapSymbolsProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
+	                                         @NonNull ProviderType providerType) {
 		// If there's current provider and bound view, remove it
 		MapRendererView mapRendererView = this.mapRendererView;
-		if (obfMapSymbolsProvider != null && mapRendererView != null) {
+		if (obfMapSymbolsProvider != null && mapRendererView != null && this.providerType == providerType) {
 			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		}
 		// Create new OBF map symbols provider
-		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider,
-				getReferenceTileSize());
+		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize());
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
-			mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
+			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 	}
 
@@ -369,18 +378,13 @@ public class MapRendererContext {
 		}
 		updateElevationConfiguration();
 
-		if (isVectorLayerEnabled()) {
-			// Layers
-			if (obfMapRasterLayerProvider != null) {
-				mapRendererView.setMapLayerProvider(OBF_RASTER_LAYER, obfMapRasterLayerProvider);
-			}
-			// Symbols
-			if (obfMapSymbolsProvider != null) {
-				mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
-			}
-			// Heightmap
-			recreateHeightmapProvider();
+		if (obfMapRasterLayerProvider != null) {
+			mapRendererView.setMapLayerProvider(providerType.layerIndex, obfMapRasterLayerProvider);
 		}
+		if (obfMapSymbolsProvider != null) {
+			mapRendererView.addSymbolsProvider(MapRendererContext.OBF_SYMBOL_SECTION, obfMapSymbolsProvider);
+		}
+		recreateHeightmapProvider();
 	}
 
 	public void updateElevationConfiguration() {
@@ -510,6 +514,30 @@ public class MapRendererContext {
 		if (!mapStylesCollection.addStyleFromByteArray(
 				SwigUtilities.createQByteArrayAsCopyOf(content), name)) {
 			Log.w(TAG, "Failed to add style from byte array");
+		}
+	}
+
+	public enum ProviderType {
+
+		MAIN(OBF_RASTER_LAYER, OBF_SYMBOL_SECTION, Mode.WithSurface, true),
+		CONTOUR_LINES(OBF_CONTOUR_LINES_RASTER_LAYER, OBF_SYMBOL_SECTION, Mode.WithoutSurface, false);
+
+		public final int layerIndex;
+		public final int symbolsSectionIndex;
+		public final boolean fillBackground;
+		@NonNull
+		public final Mode surfaceMode;
+
+		ProviderType(int layerIndex, int symbolsSectionIndex, @NonNull Mode surfaceMode, boolean fillBackground) {
+			this.layerIndex = layerIndex;
+			this.symbolsSectionIndex = symbolsSectionIndex;
+			this.surfaceMode = surfaceMode;
+			this.fillBackground = fillBackground;
+		}
+
+		@NonNull
+		public static ProviderType getProviderType(boolean vectorLayerEnabled) {
+			return vectorLayerEnabled ? MAIN : CONTOUR_LINES;
 		}
 	}
 }

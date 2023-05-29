@@ -106,7 +106,7 @@
     <string name="min_logging_accuracy">Минимална точност на регистриране</string>
     <string name="min_logging_distance_descr">Филтър: минимално разстояние за регистриране на нова точка</string>
     <string name="min_logging_distance">Минимално разстояние за регистриране</string>
-    <string name="shared_string_select">Избор</string>
+    <string name="shared_string_select">Избиране</string>
     <string name="timeline_no_data">Няма данни</string>
     <string name="timeline_no_data_descr">Нямаме събрани данни за избрания ден</string>
     <string name="start_end_date">Дата Начало - Край</string>

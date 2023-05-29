@@ -32,6 +32,11 @@ public class TrackFolder implements TracksGroup {
 		return dirFile;
 	}
 
+	@NonNull
+	public String getDirName() {
+		return dirFile.getName();
+	}
+
 	@Nullable
 	public TrackFolder getParentFolder() {
 		return parentFolder;
@@ -59,6 +64,10 @@ public class TrackFolder implements TracksGroup {
 	@ColorInt
 	public int getColor() {
 		return Algorithms.parseColor("#727272");
+	}
+
+	public int getTotalTracksCount() {
+		return getFlattenedTrackItems().size();
 	}
 
 	@NonNull

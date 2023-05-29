@@ -37,6 +37,7 @@ import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -44,7 +45,6 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
@@ -60,6 +60,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElevationProfileWidget extends MapWidget {
+	private static final String SHOW_SLOPE_PREF_ID = "show_slope_elevation_widget";
+
+	private final CommonPreference<Boolean> showSlopePreference;
 
 	private static final int MAX_DISTANCE_TO_SHOW_IM_METERS = 10_000;
 
@@ -97,11 +100,28 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 	};
 
-	public ElevationProfileWidget(@NonNull MapActivity mapActivity) {
+	public ElevationProfileWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, ELEVATION_PROFILE);
+		this.showSlopePreference = registerShowSlopePref(customId);
 		settings.MAP_LINKED_TO_LOCATION.addListener(linkedToLocationListener);
 		updateVisibility(false);
 		setupStatisticBlocks();
+	}
+
+	public Boolean shouldShowSlope(@NonNull ApplicationMode appMode) {
+		return showSlopePreference.getModeValue(appMode);
+	}
+
+	public void setShouldShowSlope(@NonNull ApplicationMode appMode, boolean shouldShowSlope) {
+		showSlopePreference.setModeValue(appMode, shouldShowSlope);
+	}
+
+	@NonNull
+	private CommonPreference<Boolean> registerShowSlopePref(@Nullable String customId) {
+		String prefId = Algorithms.isEmpty(customId) ? SHOW_SLOPE_PREF_ID : SHOW_SLOPE_PREF_ID + customId;
+		return settings.registerBooleanPreference(prefId, false)
+				.makeProfile()
+				.cache();
 	}
 
 	private void restoreLastState() {
@@ -127,12 +147,6 @@ public class ElevationProfileWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.elevation_profile_widget;
-	}
-
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_ELEVATION_PROFILE_WIDGET;
 	}
 
 	private void setupStatisticBlocks() {
@@ -198,7 +212,7 @@ public class ElevationProfileWidget extends MapWidget {
 		boolean routeChanged = this.route != route;
 		this.route = route;
 		lastRoute = route.toString();
-		boolean showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
+		boolean showSlopes = showSlopePreference.get();
 		boolean slopesChanged = showSlopes != this.showSlopes;
 		this.showSlopes = showSlopes;
 		return routeChanged || slopesChanged;
@@ -294,7 +308,7 @@ public class ElevationProfileWidget extends MapWidget {
 				}
 
 				if (locationHighlight != null && touchHighlight != null) {
-					chart.highlightValues(new Highlight[] {locationHighlight, touchHighlight});
+					chart.highlightValues(new Highlight[]{locationHighlight, touchHighlight});
 				} else if (locationHighlight != null) {
 					chart.highlightValue(locationHighlight, true);
 				} else if (touchHighlight != null) {
@@ -319,7 +333,7 @@ public class ElevationProfileWidget extends MapWidget {
 					if (h != null) {
 						h = createHighlight(h.getX(), false);
 						if (locationHighlight != null) {
-							chart.highlightValues(new Highlight[] {locationHighlight, h});
+							chart.highlightValues(new Highlight[]{locationHighlight, h});
 						} else {
 							chart.highlightValue(h, true);
 						}
@@ -409,7 +423,7 @@ public class ElevationProfileWidget extends MapWidget {
 			}
 		} else if (newLocationHighlight != null) {
 			if (highlighted == null) {
-				highlighted = new Highlight[] {newLocationHighlight};
+				highlighted = new Highlight[]{newLocationHighlight};
 			} else {
 				Highlight[] newHighlighted = new Highlight[highlighted.length + 1];
 				newHighlighted[0] = newLocationHighlight;

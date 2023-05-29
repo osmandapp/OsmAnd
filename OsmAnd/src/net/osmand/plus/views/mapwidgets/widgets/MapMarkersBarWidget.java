@@ -20,12 +20,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -39,6 +39,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	private final MapMarkersHelper markersHelper;
 	private final boolean portraitMode;
+	private final String customId;
 
 	private final View markerContainer2nd;
 	private final ImageView arrowImg;
@@ -57,11 +58,12 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		return R.layout.map_markers_widget;
 	}
 
-	public MapMarkersBarWidget(@NonNull MapActivity mapActivity) {
+	public MapMarkersBarWidget(@NonNull MapActivity mapActivity, String customId) {
 		super(mapActivity, MARKERS_TOP_BAR);
 
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		this.customId = customId;
 
 		markerContainer2nd = view.findViewById(R.id.map_markers_top_bar_2nd);
 		arrowImg = view.findViewById(R.id.map_marker_arrow);
@@ -221,16 +223,11 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		addressText.setText(descr);
 	}
 
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_MAP_MARKERS_BAR_WIDGET;
-	}
 
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility) {
+		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
 			mapActivity.updateStatusBarColor();
 		}
 		return updatedVisibility;
@@ -244,11 +241,17 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 		boolean mapCenterVisible = visibilityHelper.shouldShowTopMapCenterCoordinatesWidget();
 		boolean currentCoordinatesVisible = visibilityHelper.shouldShowTopCurrentLocationCoordinatesWidget();
-		for (MapWidget widget : followingWidgets) {
-			if (widget instanceof CoordinatesBaseWidget && (mapCenterVisible || currentCoordinatesVisible)) {
-				showBottomShadow = false;
-				break;
+		WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
+		if (widgetsPanel == WidgetsPanel.TOP) {
+			for (MapWidget widget : followingWidgets) {
+				if (widget instanceof MapMarkersBarWidget
+						|| (widget instanceof CoordinatesBaseWidget && (mapCenterVisible || currentCoordinatesVisible))) {
+					showBottomShadow = false;
+					break;
+				}
 			}
+		} else {
+			showBottomShadow = false;
 		}
 		showHideBottomShadow(showBottomShadow);
 	}

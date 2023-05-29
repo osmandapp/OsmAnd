@@ -7,15 +7,15 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.DialogListItemAdapter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -42,43 +42,44 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapDialogs {
 
-	protected static void showMapModeDialog(@NonNull MapActivity activity, int themeRes, boolean nightMode) {
+	protected static void showMapModeDialog(
+			@NonNull MapActivity activity, boolean nightMode
+	) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 		OsmandMapTileView view = activity.getMapView();
-		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-		bld.setTitle(R.string.daynight);
+		int selectedIndex = settings.DAYNIGHT_MODE.get().ordinal();
 		String[] items = new String[DayNightMode.values().length];
 		for (int i = 0; i < items.length; i++) {
 			items[i] = DayNightMode.values()[i].toHumanString(app);
 		}
-		int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
-		bld.setNegativeButton(R.string.shared_string_dismiss, null);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				items, nightMode, i, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					view.getSettings().DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-					if (view.getMapRenderer() == null) {
-						activity.refreshMapComplete();
-					}
-					activity.getDashboard().refreshContent(false);
-				}
-		);
-		bld.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(bld.show());
+
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.daynight)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+				.setNegativeButton(R.string.shared_string_dismiss, null);
+
+		CustomAlert.showSingleSelection(dialogData, items, selectedIndex, v -> {
+			int which = (int) v.getTag();
+			settings.DAYNIGHT_MODE.set(DayNightMode.values()[which]);
+			if (view.getMapRenderer() == null) {
+				activity.refreshMapComplete();
+			}
+			activity.getDashboard().refreshContent(false);
+		});
 	}
 
-	protected static void showMapMagnifierDialog(MapActivity activity, int themeRes, boolean nightMode,
-	                                             ContextMenuItem item, OnDataChangeUiAdapter uiAdapter) {
+	protected static void showMapMagnifierDialog(
+			@NonNull MapActivity activity, boolean nightMode,
+			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
+	) {
 		OsmandApplication app = activity.getMyApplication();
+		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 		OsmandSettings settings = app.getSettings();
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 		OsmandMapTileView view = activity.getMapView();
-		OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
-		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
+		OsmandPreference<Float> mapDensity = settings.MAP_DENSITY;
 		int p = (int) (mapDensity.get() * 100);
 		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 		List<String> values = new ArrayList<>();
@@ -101,40 +102,36 @@ public class ConfigureMapDialogs {
 			tlist.insert(i, p);
 		}
 
-		bld.setTitle(R.string.map_magnifier);
-		bld.setNegativeButton(R.string.shared_string_dismiss, null);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				values.toArray(new String[0]), nightMode, i, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					int value = tlist.get(which);
-					mapDensity.set(value / 100.0f);
-					view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
-					MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-					if (mapContext != null) {
-						mapContext.updateMapSettings();
-					}
-					item.setDescription(
-							String.format(Locale.UK, "%.0f", 100f * activity.getMyApplication()
-									.getSettings().MAP_DENSITY.get())
-									+ " %");
-					uiAdapter.onDataSetInvalidated();
-				}
-		);
-		bld.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(bld.show());
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.map_magnifier)
+				.setControlsColor(profileColor)
+				.setNegativeButton(R.string.shared_string_dismiss, null);
+
+		CustomAlert.showSingleSelection(dialogData, values.toArray(new String[0]), i, v -> {
+			int which = (int) v.getTag();
+			int value = tlist.get(which);
+			mapDensity.set(value / 100.0f);
+			view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.updateMapSettings();
+			}
+			item.setDescription(
+					String.format(Locale.UK, "%.0f", 100f * activity.getMyApplication()
+							.getSettings().MAP_DENSITY.get())
+							+ " %");
+			uiAdapter.onDataSetInvalidated();
+		});
 	}
 
-	protected static void showTextSizeDialog(MapActivity activity, int themeRes, boolean nightMode,
-	                                         ContextMenuItem item, OnDataChangeUiAdapter uiAdapter) {
+	protected static void showTextSizeDialog(
+			@NonNull MapActivity activity, boolean nightMode,
+			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
+	) {
 		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-
+		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 
 		OsmandMapTileView view = activity.getMapView();
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-		// test old descr as title
-		b.setTitle(R.string.text_size);
 		Float[] txtValues = {0.33f, 0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
 		int selected = -1;
 		String[] txtNames = new String[txtValues.length];
@@ -144,33 +141,36 @@ public class ConfigureMapDialogs {
 				selected = i;
 			}
 		}
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				txtNames, nightMode, selected, app, selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					view.getSettings().TEXT_SCALE.set(txtValues[which]);
-					activity.refreshMapComplete();
-					item.setDescription(ConfigureMapUtils.getScale(activity));
-					uiAdapter.onDataSetInvalidated();
-				});
-		b.setAdapter(dialogAdapter, null);
-		b.setNegativeButton(R.string.shared_string_dismiss, null);
-		dialogAdapter.setDialog(b.show());
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.text_size)
+				.setControlsColor(profileColor)
+				.setNegativeButton(R.string.shared_string_dismiss, null);
+
+		CustomAlert.showSingleSelection(dialogData, txtNames, selected, v -> {
+			int which = (int) v.getTag();
+			view.getSettings().TEXT_SCALE.set(txtValues[which]);
+			activity.refreshMapComplete();
+			item.setDescription(ConfigureMapUtils.getScale(activity));
+			uiAdapter.onDataSetInvalidated();
+		});
 	}
 
-	protected static void showMapLanguageDialog(MapActivity activity, int themeRes, boolean nightMode,
-	                                            ContextMenuItem item, OnDataChangeUiAdapter uiAdapter) {
+	protected static void showMapLanguageDialog(
+			@NonNull MapActivity activity, boolean nightMode,
+			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
+	) {
 
 		int[] selectedLanguageIndex = new int[1];
 		boolean[] transliterateNames = new boolean[1];
 
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
-		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
+		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 
 
 		OsmandMapTileView view = activity.getMapView();
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
-
+		Context ctx = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder b = new AlertDialog.Builder(ctx);
 		b.setTitle(activity.getString(R.string.map_locale));
 
 		Map<String, String> mapLanguages = ConfigureMapUtils.getSorterMapLanguages(app);
@@ -190,13 +190,13 @@ public class ConfigureMapDialogs {
 		OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
 
 		ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
-				new ContextThemeWrapper(activity, themeRes), R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
+				ctx, R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
 			@NonNull
 			@Override
 			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 				View v = super.getView(position, convertView, parent);
 				AppCompatCheckedTextView checkedTextView = v.findViewById(R.id.text1);
-				UiUtilities.setupCompoundButtonDrawable(app, nightMode, selectedProfileColor, checkedTextView.getCheckMarkDrawable());
+				UiUtilities.setupCompoundButtonDrawable(app, nightMode, profileColor, checkedTextView.getCheckMarkDrawable());
 
 				if (position == selectedLanguageIndex[0] && position > 0) {
 					checkedTextView.setChecked(true);
@@ -208,7 +208,7 @@ public class ConfigureMapDialogs {
 					SwitchCompat check = v.findViewById(R.id.check);
 					check.setChecked(transliterateNames[0]);
 					check.setOnCheckedChangeListener(translitChangdListener);
-					UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, check);
+					UiUtilities.setupCompoundButton(nightMode, profileColor, check);
 				} else {
 					checkedTextView.setChecked(position == selectedLanguageIndex[0]);
 					v.findViewById(R.id.topDivider).setVisibility(View.GONE);
@@ -246,113 +246,94 @@ public class ConfigureMapDialogs {
 		b.show();
 	}
 
-	protected static void showRenderingPropertyDialog(@NonNull MapActivity activity, @NonNull RenderingRuleProperty p,
-	                                                  @NonNull CommonPreference<String> pref, @NonNull ContextMenuItem item,
-	                                                  @NonNull OnDataChangeUiAdapter uiAdapter, boolean nightMode) {
+	protected static void showRenderingPropertyDialog(
+			@NonNull MapActivity activity, @NonNull RenderingRuleProperty p,
+			@NonNull CommonPreference<String> pref, @NonNull ContextMenuItem item,
+			@NonNull OnDataChangeUiAdapter uiAdapter, boolean nightMode
+	) {
 		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		int currentProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
-
-		int themeRes = ConfigureMapMenu.getThemeRes(nightMode);
-		AlertDialog.Builder b = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
-
-		String propertyDescr = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
-
-		// test old descr as title
-		b.setTitle(propertyDescr);
-
-		int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-		if (i >= 0) {
-			i++;
+		String title = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
+		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
+		int selectedIndex = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+		if (selectedIndex >= 0) {
+			selectedIndex++;
 		} else if (Algorithms.isEmpty(pref.get())) {
-			i = 0;
+			selectedIndex = 0;
 		}
 
-		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-				possibleValuesString, nightMode, i, app, currentProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					if (which == 0) {
-						pref.set("");
-					} else {
-						pref.set(p.getPossibleValues()[which - 1]);
-					}
-					activity.refreshMapComplete();
-					item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
-					String id = item.getId();
-					if (!Algorithms.isEmpty(id)) {
-						uiAdapter.onRefreshItem(id);
-					} else {
-						uiAdapter.onDataSetChanged();
-					}
-				}
-		);
-		b.setNegativeButton(R.string.shared_string_dismiss, null);
-		b.setAdapter(dialogAdapter, null);
-		dialogAdapter.setDialog(b.show());
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(title)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+				.setNegativeButton(R.string.shared_string_dismiss, null);
+
+		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
+			int which = (int) v.getTag();
+			if (which == 0) {
+				pref.set("");
+			} else {
+				pref.set(p.getPossibleValues()[which - 1]);
+			}
+			activity.refreshMapComplete();
+			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
+			String id = item.getId();
+			if (!Algorithms.isEmpty(id)) {
+				uiAdapter.onRefreshItem(id);
+			} else {
+				uiAdapter.onDataSetChanged();
+			}
+		});
 	}
 
-	protected static void showPreferencesDialog(OnDataChangeUiAdapter uiAdapter,
-	                                            ContextMenuItem item,
-	                                            MapActivity activity,
-	                                            String category,
-	                                            List<RenderingRuleProperty> ps,
-	                                            List<CommonPreference<Boolean>> prefs,
-	                                            boolean nightMode,
-	                                            @ColorInt int selectedProfileColor) {
+	protected static void showPreferencesDialog(
+			@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull ContextMenuItem item,
+			@NonNull MapActivity activity, @NonNull String category,
+			@NonNull List<RenderingRuleProperty> properties,
+			@NonNull List<CommonPreference<Boolean>> prefs, boolean nightMode
+	) {
 		if (!AndroidUtils.isActivityNotDestroyed(activity)) {
 			return;
 		}
-
-		int themeRes = ConfigureMapMenu.getThemeRes(nightMode);
-		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+		OsmandApplication app = activity.getMyApplication();
 		boolean[] checkedItems = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
 			checkedItems[i] = prefs.get(i).get();
 		}
-		String[] vals = new String[ps.size()];
-		for (int i = 0; i < ps.size(); i++) {
-			RenderingRuleProperty p = ps.get(i);
+		String[] propertyNames = new String[properties.size()];
+		for (int i = 0; i < properties.size(); i++) {
+			RenderingRuleProperty p = properties.get(i);
 			String propertyName = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(),
 					p.getName());
-			vals[i] = propertyName;
+			propertyNames[i] = propertyName;
 		}
 
-		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createMultiChoiceAdapter(
-				vals, nightMode, checkedItems, activity.getMyApplication(), selectedProfileColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					checkedItems[which] = !checkedItems[which];
-				}
-		);
-		builder.setAdapter(dialogAdapter, null);
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(category)
+				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
+				.setNegativeButton(R.string.shared_string_cancel, (dialog, whichButton) -> {
+					boolean selected = false;
+					for (int i = 0; i < prefs.size(); i++) {
+						selected |= prefs.get(i).get();
+					}
+					item.setSelected(selected);
+					item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					uiAdapter.onDataSetInvalidated();
+				})
+				.setPositiveButton(R.string.shared_string_ok, (dialog, whichButton) -> {
+					boolean selected = false;
+					for (int i = 0; i < prefs.size(); i++) {
+						prefs.get(i).set(checkedItems[i]);
+						selected |= checkedItems[i];
+					}
+					item.setSelected(selected);
+					item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					uiAdapter.onDataSetInvalidated();
+					activity.refreshMapComplete();
+					activity.getMapLayers().updateLayers(activity);
+				});
 
-		builder.setTitle(category);
-
-		builder.setNegativeButton(R.string.shared_string_cancel, (dialog, whichButton) -> {
-			boolean selected = false;
-			for (int i = 0; i < prefs.size(); i++) {
-				selected |= prefs.get(i).get();
-			}
-			item.setSelected(selected);
-			item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			uiAdapter.onDataSetInvalidated();
+		CustomAlert.showMultiSelection(dialogData, propertyNames, checkedItems, v -> {
+			int which = (int) v.getTag();
+			checkedItems[which] = !checkedItems[which];
 		});
-
-		builder.setPositiveButton(R.string.shared_string_ok, (dialog, whichButton) -> {
-			boolean selected = false;
-			for (int i = 0; i < prefs.size(); i++) {
-				prefs.get(i).set(checkedItems[i]);
-				selected |= checkedItems[i];
-			}
-			item.setSelected(selected);
-			item.setColor(activity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-			uiAdapter.onDataSetInvalidated();
-			activity.refreshMapComplete();
-			activity.getMapLayers().updateLayers(activity);
-		});
-		AlertDialog dialog = builder.create();
-		dialogAdapter.setDialog(dialog);
-		dialog.show();
 	}
 }

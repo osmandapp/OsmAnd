@@ -5219,4 +5219,15 @@
     <string name="visible_in_3d_mode">Sichtbar im 3D Modus</string>
     <string name="rendering_value_caiScale_name">CAI Skala</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
+    <string name="delete_folder_question">Ordner löschen\?</string>
+    <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">Dieser Ordner hat noch keinen Track.</string>
+    <string name="tracks_empty_folder">Leerer Ordner</string>
+    <string name="track_not_recorded">Nicht aufgezeichnet</string>
+    <string name="shared_string_new_track">Neue Strecke</string>
+    <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
+    <string name="delete_track_folder_dialog_message">Dies löscht den Ordner \"%1$s\" und alle darin enthaltenen Tracks (%2$s).</string>
+    <string name="delete_folder">Ordner löschen</string>
+    <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
 </resources>
