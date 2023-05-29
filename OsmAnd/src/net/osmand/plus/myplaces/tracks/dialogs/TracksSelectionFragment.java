@@ -286,6 +286,11 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
+	protected boolean shouldShowFolderStats() {
+		return false;
+	}
+
+	@Override
 	public void onGpxUploaded(String result) {
 		dismiss();
 	}
