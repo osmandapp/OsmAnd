@@ -30,6 +30,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
 
+	private TextView toolbarTitle;
+
 	@Override
 	protected int getLayoutId() {
 		return R.layout.track_folder_fragment;
@@ -60,6 +62,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	private void setupToolbar(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbarTitle = view.findViewById(R.id.toolbar_title);
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
@@ -83,6 +86,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), getTargetFragment());
 			}
 		});
+		button.setContentDescription(getString(R.string.shared_string_search));
 		container.addView(button);
 	}
 
@@ -90,6 +94,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
 		button.setOnClickListener(v -> showFolderOptionsMenu(v, selectedFolder));
+		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
 
@@ -112,11 +117,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	protected void updateContent() {
 		super.updateContent();
-		View view = getView();
-		if (view != null) {
-			TextView title = view.findViewById(R.id.toolbar_title);
-			title.setText(selectedFolder.getName(app));
-		}
+		toolbarTitle.setText(selectedFolder.getName(app));
 	}
 
 	@Override
@@ -126,8 +127,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onDestroy() {
+		super.onDestroy();
 		updateActionBar(true);
 	}
 

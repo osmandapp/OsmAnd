@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -33,12 +34,14 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 	protected final View divider;
 
 	protected final boolean nightMode;
+	protected final boolean selectionMode;
 
 	public TracksGroupViewHolder(@NonNull View view, @Nullable TrackGroupsListener listener,
 	                             boolean nightMode, boolean selectionMode) {
 		super(view);
 		this.listener = listener;
 		this.nightMode = nightMode;
+		this.selectionMode = selectionMode;
 		app = (OsmandApplication) view.getContext().getApplicationContext().getApplicationContext();
 		uiUtilities = app.getUIUtilities();
 
@@ -58,7 +61,7 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) icon.getLayoutParams();
 		AndroidUtils.setMargins(params, margin, 0, selectionMode ? 0 : margin, 0);
 
-		AndroidUiHelper.updateVisibility(menuButton, false);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
 		AndroidUiHelper.updateVisibility(checkboxContainer, selectionMode);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.direction_icon), false);
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
@@ -73,12 +76,19 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 				listener.onTracksGroupSelected(tracksGroup, !selected);
 			}
 		});
+		menuButton.setOnClickListener(v -> {
+			if (listener != null) {
+				listener.onTracksGroupOptionsSelected(v, tracksGroup);
+			}
+		});
 		itemView.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.onTracksGroupClicked(tracksGroup);
 			}
 		});
+		boolean isFolder = tracksGroup instanceof TrackFolder;
 		AndroidUiHelper.updateVisibility(divider, showDivider);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode && isFolder);
 	}
 
 	public interface TrackGroupsListener {
@@ -92,6 +102,10 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		default void onTracksGroupClicked(@NonNull TracksGroup group) {
+
+		}
+
+		default void onTracksGroupOptionsSelected(@NonNull View view, @NonNull TracksGroup group) {
 
 		}
 	}

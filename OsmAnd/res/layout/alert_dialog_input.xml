@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/text_box"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		osmand:hasClearButton="true"
+		osmand:secondaryColor="?android:textColorSecondary"
+		android:layout_marginTop="@dimen/dialog_content_bottom_margin"
+		android:layout_marginHorizontal="@dimen/dialog_content_margin">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/edit_text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier" />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+</FrameLayout>

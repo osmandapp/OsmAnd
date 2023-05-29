@@ -238,7 +238,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		boolean alreadyEnabled = alreadySelectedWidgetsIds != null
 				? alreadySelectedWidgetsIds.contains(widgetId)
 				: isWidgetEnabled(mapActivity, widgetId);
-		if (alreadyEnabled && !widgetsPanel.isDuplicatesAllowed()) {
+		if (alreadyEnabled) {
 			checkBox.setChecked(true);
 			view.setSelected(true);
 			view.setOnClickListener(v -> app.showShortToastMessage(R.string.import_duplicates_title));

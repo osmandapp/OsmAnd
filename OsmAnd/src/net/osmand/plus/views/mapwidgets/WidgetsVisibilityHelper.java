@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -14,11 +17,14 @@ import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
+import java.util.Set;
 
 public class WidgetsVisibilityHelper {
 
@@ -80,10 +86,10 @@ public class WidgetsVisibilityHelper {
 				&& !isInWeatherForecastMode()
 				&& !isSelectingTilesZone();
 	}
+
 	public boolean shouldHideMapMarkersWidget() {
 		View streetName = mapActivity.findViewById(R.id.street_name_widget);
-		return !settings.SHOW_MAP_MARKERS_BAR_WIDGET.get()
-				|| streetName != null && streetName.getVisibility() == View.VISIBLE
+		return streetName != null && streetName.getVisibility() == View.VISIBLE
 				|| routingHelper.isFollowingMode()
 				|| routingHelper.isRoutePlanningMode()
 				|| isMapRouteInfoMenuVisible()
@@ -95,6 +101,22 @@ public class WidgetsVisibilityHelper {
 				|| isInGpsFilteringMode()
 				|| isInWeatherForecastMode()
 				|| isSelectingTilesZone();
+	}
+
+	public static boolean isMapMarkerBarWidgetEnabled(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
+		List<WidgetsPanel> panels = WidgetsPanel.TOP.getMergedPanels();
+
+		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, ENABLED_MODE, panels);
+
+		for (MapWidgetInfo widgetInfo : enabledWidgets) {
+			if (widgetInfo.key.contains(MARKERS_TOP_BAR.id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
@@ -173,8 +195,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowElevationProfileWidget() {
-		return settings.SHOW_ELEVATION_PROFILE_WIDGET.get() && isRouteCalculated()
-				&& WidgetType.ELEVATION_PROFILE.isPurchased(app)
+		return isRouteCalculated() && WidgetType.ELEVATION_PROFILE.isPurchased(app)
 				&& !isInChangeMarkerPositionMode()
 				&& !isInMeasurementToolMode()
 				&& !isInChoosingRoutesMode()

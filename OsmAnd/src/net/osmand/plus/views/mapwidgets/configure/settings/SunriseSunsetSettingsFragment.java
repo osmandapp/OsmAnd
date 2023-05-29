@@ -13,15 +13,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
 
@@ -78,26 +78,20 @@ public class SunriseSunsetSettingsFragment extends WidgetSettingsBaseFragment {
 	}
 
 	private void showPreferenceDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(timeDescription.getContext());
-		builder.setTitle(R.string.shared_string_show);
-
 		CharSequence[] items = new CharSequence[2];
 		items[0] = getFormattedTime(true);
 		items[1] = getFormattedTime(false);
-
 		int selected = showTimeToLeft ? 0 : 1;
-		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(items,
-				nightMode, selected, app, activeColor, themeRes, v -> {
-					int which = (int) v.getTag();
-					showTimeToLeft = which == 0;
-					updateTimeDescription();
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(timeDescription.getContext(), nightMode)
+				.setTitle(R.string.shared_string_show)
+				.setControlsColor(ColorUtilities.getActiveColor(app, nightMode));
+
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
+			int which = (int) v.getTag();
+			showTimeToLeft = which == 0;
+			updateTimeDescription();
+		});
 	}
 
 	private void updateTimeDescription() {

@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,7 +26,10 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -138,35 +140,31 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 
 	@ColorInt
 	private int getProfileColor() {
-		return settings.getApplicationMode().getProfileColor(nightMode);
+		return ColorUtilities.getAppModeColor(app, nightMode);
 	}
 
 	private void showPreferenceDialog(@NonNull RenderingRuleProperty property,
 	                                  @NonNull CommonPreference<String> pref,
 	                                  @Nullable TextView description) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName()));
-
 		String[] possibleValues = property.getPossibleValues();
 		String[] possibleValuesString = new String[possibleValues.length];
-
 		for (int i = 0; i < possibleValues.length; i++) {
 			possibleValuesString[i] = AndroidUtils.getRenderingStringPropertyValue(app, possibleValues[i]);
 		}
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(possibleValuesString,
-				nightMode, Arrays.asList(possibleValues).indexOf(pref.get()), app, getProfileColor(), themeRes, v -> {
-					int which = (int) v.getTag();
-					pref.set(possibleValues[which]);
-					refreshMap();
+		int selectedIndex = Arrays.asList(possibleValues).indexOf(pref.get());
 
-					if (description != null) {
-						description.setText(AndroidUtils.getRenderingStringPropertyValue(app, pref.get()));
-					}
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
+				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName()))
+				.setControlsColor(getProfileColor());
+
+		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
+			int which = (int) v.getTag();
+			pref.set(possibleValues[which]);
+			refreshMap();
+			if (description != null) {
+				description.setText(AndroidUtils.getRenderingStringPropertyValue(app, pref.get()));
+			}
+		});
 	}
 
 	private void refreshMap() {
