@@ -30,9 +30,8 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected UiUtilities uiUtilities;
-	protected boolean nightMode;
-
 	protected LayoutInflater themedInflater;
+	protected boolean nightMode;
 
 	private int statusBarColor = -1;
 	private boolean transitionAnimationAllowed = true;
@@ -49,12 +48,6 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
 	protected boolean isUsedOnMap() {

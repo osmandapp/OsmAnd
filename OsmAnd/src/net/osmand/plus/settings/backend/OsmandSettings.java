@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -3087,7 +3088,15 @@ public class OsmandSettings {
 	public boolean isLightSystemTheme() {
 		UiModeManager uiModeManager = (UiModeManager) ctx.getSystemService(Context.UI_MODE_SERVICE);
 		int mode = uiModeManager.getNightMode();
-		return mode != UiModeManager.MODE_NIGHT_YES;
+		if (mode == UiModeManager.MODE_NIGHT_YES) {
+			return false;
+		}
+		if (mode == UiModeManager.MODE_NIGHT_NO) {
+			return true;
+		}
+		Configuration config = ctx.getResources().getConfiguration();
+		int systemNightState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		return systemNightState != Configuration.UI_MODE_NIGHT_YES;
 	}
 
 	public boolean isSystemThemeUsed(@NonNull ApplicationMode appMode) {

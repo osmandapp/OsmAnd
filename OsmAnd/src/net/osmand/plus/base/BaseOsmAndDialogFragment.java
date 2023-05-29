@@ -20,8 +20,8 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
-	protected boolean nightMode;
 	protected LayoutInflater themedInflater;
+	protected boolean nightMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
