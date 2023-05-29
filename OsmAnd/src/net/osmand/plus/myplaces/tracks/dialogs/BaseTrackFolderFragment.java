@@ -1,7 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
-import static net.osmand.plus.importfiles.ImportHelper.useCustomTracksDirectory;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
@@ -41,10 +40,11 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelecti
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
+import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
@@ -151,7 +151,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 				if (!Algorithms.isEmpty(filesUri)) {
 					startImport();
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, useCustomTracksDirectory(selectedFolder.getDirFile().getPath()));
+					importHelper.handleGpxFilesImport(filesUri, selectedFolder.getDirFile());
 				}
 			}
 		} else {
@@ -159,21 +159,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		}
 	}
 
-	public void updateProgressVisibility(boolean visible) {
-		MyPlacesActivity activity = getMyActivity();
-		if (activity != null) {
-			activity.setSupportProgressBarIndeterminateVisibility(visible);
-		}
-	}
-
-	private void startImport() {
+	protected void startImport() {
 		importing = true;
-		updateProgressVisibility(true);
 	}
 
-	private void finishImport() {
+	protected void finishImport() {
 		importing = false;
-		updateProgressVisibility(false);
+
 		BaseTrackFolderFragment mainFragment = getMainFragment();
 		if (mainFragment instanceof AvailableTracksFragment) {
 			AvailableTracksFragment fragment = (AvailableTracksFragment) mainFragment;
@@ -182,8 +174,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@NonNull
-	protected ImportHelper.GpxImportListener getGpxImportListener(int filesSize) {
-		return new ImportHelper.GpxImportListener() {
+	protected GpxImportListener getGpxImportListener(int filesSize) {
+		return new GpxImportListener() {
 			private int counter;
 
 			@Override

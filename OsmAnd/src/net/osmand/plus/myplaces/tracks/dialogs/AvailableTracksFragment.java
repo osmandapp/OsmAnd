@@ -3,7 +3,6 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.configmap.tracks.TracksFragment.OPEN_TRACKS_TAB;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
-import static net.osmand.plus.importfiles.ImportHelper.useImportDirectory;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
@@ -33,6 +32,7 @@ import net.osmand.plus.configmap.tracks.TrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
@@ -210,9 +210,14 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		selectionHelper.setOriginalSelectedItems(selectedItems);
 	}
 
-	private void startImport() {
-		importing = true;
+	@Override
+	protected void startImport() {
 		updateProgressVisibility(true);
+	}
+
+	@Override
+	protected void finishImport() {
+		updateProgressVisibility(false);
 	}
 
 	@Override
@@ -223,7 +228,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				if (!Algorithms.isEmpty(filesUri)) {
 					startImport();
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, useImportDirectory(app, true));
+					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getDestinationDir(app, true));
 				}
 			}
 		} else {

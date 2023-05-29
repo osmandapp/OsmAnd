@@ -2,7 +2,6 @@ package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
-import static net.osmand.plus.importfiles.ImportHelper.useImportDirectory;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 
@@ -443,7 +442,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				if (!Algorithms.isEmpty(filesUri)) {
 					AndroidUiHelper.updateVisibility(progressBar, true);
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, useImportDirectory(app, true));
+					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getDestinationDir(app, true));
 				}
 			}
 		} else {
