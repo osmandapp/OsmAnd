@@ -69,7 +69,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View mainView = inflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
+		updateNightMode();
+		View mainView = themedInflater.inflate(R.layout.wikipedia_dialog_fragment, container, false);
 
 		setupToolbar(mainView.findViewById(R.id.toolbar));
 

@@ -5,7 +5,6 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -133,9 +132,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-		Context context = requireContext();
-		view = UiUtilities.getInflater(context, nightMode).inflate(getLayoutId(), container, false);
+		updateNightMode();
+		view = themedInflater.inflate(getLayoutId(), container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		setupToolbar();

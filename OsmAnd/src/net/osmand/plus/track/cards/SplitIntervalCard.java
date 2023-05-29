@@ -7,24 +7,24 @@ import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
-public class SplitIntervalCard extends MapBaseCard {
+public class SplitIntervalCard extends BaseCard {
 
 	private final TrackDrawInfo trackDrawInfo;
 
-	public SplitIntervalCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo) {
-		super(mapActivity);
+	public SplitIntervalCard(@NonNull FragmentActivity activity, @NonNull TrackDrawInfo trackDrawInfo) {
+		super(activity);
 		this.trackDrawInfo = trackDrawInfo;
 	}
 

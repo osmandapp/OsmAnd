@@ -16,6 +16,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +26,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.GpxAppearanceAdapter;
@@ -41,7 +42,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackColoringCard extends MapBaseCard {
+public class TrackColoringCard extends BaseCard {
 
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
@@ -52,10 +53,10 @@ public class TrackColoringCard extends MapBaseCard {
 	private TrackAppearanceItem selectedAppearanceItem;
 	private final List<TrackAppearanceItem> appearanceItems;
 
-	public TrackColoringCard(@NonNull MapActivity mapActivity,
+	public TrackColoringCard(@NonNull FragmentActivity activity,
 	                         @Nullable SelectedGpxFile selectedGpxFile,
 	                         @NonNull TrackDrawInfo trackDrawInfo) {
-		super(mapActivity);
+		super(activity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.selectedGpxFile = selectedGpxFile;
 		appearanceItems = listTrackAppearanceItems();
@@ -169,8 +170,10 @@ public class TrackColoringCard extends MapBaseCard {
 		selectedAppearanceItem = item;
 		trackDrawInfo.setColoringType(ColoringType.getNonNullTrackColoringTypeByName(item.getAttrName()));
 		trackDrawInfo.setRouteInfoAttribute(ColoringType.getRouteInfoAttribute(item.getAttrName()));
-		mapActivity.refreshMap();
 
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).refreshMap();
+		}
 		updateHeader();
 	}
 
@@ -280,7 +283,7 @@ public class TrackColoringCard extends MapBaseCard {
 		}
 
 		private void showSnackbar(View view, String attrName) {
-			if (view == null || mapActivity == null) {
+			if (view == null || activity == null) {
 				return;
 			}
 			String text = "";
@@ -294,7 +297,7 @@ public class TrackColoringCard extends MapBaseCard {
 			}
 			text += " " + app.getString(R.string.select_another_colorization);
 			Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
-					.setAnchorView(mapActivity.findViewById(R.id.dismiss_button));
+					.setAnchorView(activity.findViewById(R.id.dismiss_button));
 			UiUtilities.setupSnackbar(snackbar, nightMode);
 			snackbar.show();
 		}

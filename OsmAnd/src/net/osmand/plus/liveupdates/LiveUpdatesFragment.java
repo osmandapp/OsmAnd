@@ -137,7 +137,8 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.fragment_live_updates, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.fragment_live_updates, container, false);
 		createToolbar(view.findViewById(R.id.app_bar));
 
 		listView = view.findViewById(android.R.id.list);
@@ -152,34 +153,28 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		listView.setAdapter(adapter);
 		expandAllGroups();
 
-		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-			@Override
-			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app) && settings.IS_LIVE_UPDATES_ON.get()) {
-					if (getFragmentManager() != null) {
-						LiveUpdatesSettingsBottomSheet
-								.showInstance(getFragmentManager(), LiveUpdatesFragment.this,
-										adapter.getChild(groupPosition, childPosition).getFileNameWithoutRoadSuffix());
-					}
-					return true;
-				} else {
-					return false;
+		listView.setOnChildClickListener((parent, v, groupPosition, childPosition, id) -> {
+			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app) && settings.IS_LIVE_UPDATES_ON.get()) {
+				if (getFragmentManager() != null) {
+					LiveUpdatesSettingsBottomSheet
+							.showInstance(getFragmentManager(), LiveUpdatesFragment.this,
+									adapter.getChild(groupPosition, childPosition).getFileNameWithoutRoadSuffix());
 				}
+				return true;
+			} else {
+				return false;
 			}
 		});
 
 		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
 		int swipeColor = ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
 		swipeRefresh.setColorSchemeColors(swipeColor);
-		swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-			@Override
-			public void onRefresh() {
-				if (settings.IS_LIVE_UPDATES_ON.get()) {
-					showUpdateDialog(getActivity(), getFragmentManager(), LiveUpdatesFragment.this);
-					startUpdateDateAsyncTask();
-				}
-				swipeRefresh.setRefreshing(false);
+		swipeRefresh.setOnRefreshListener(() -> {
+			if (settings.IS_LIVE_UPDATES_ON.get()) {
+				showUpdateDialog(getActivity(), getFragmentManager(), LiveUpdatesFragment.this);
+				startUpdateDateAsyncTask();
 			}
+			swipeRefresh.setRefreshing(false);
 		});
 
 		View timeContainer = headerView.findViewById(R.id.item_import_container);

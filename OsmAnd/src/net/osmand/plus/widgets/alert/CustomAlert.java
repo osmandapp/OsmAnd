@@ -26,17 +26,11 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class CustomAlert {
 
-	public static void showSimpleMessage(
-			@NonNull AlertDialogData data,
-			@StringRes int messageId
-	) {
+	public static void showSimpleMessage(@NonNull AlertDialogData data, @StringRes int messageId) {
 		showSimpleMessage(data, data.getContext().getString(messageId));
 	}
 
-	public static void showSimpleMessage(
-			@NonNull AlertDialogData data,
-			@NonNull String message
-	) {
+	public static void showSimpleMessage(@NonNull AlertDialogData data, @NonNull String message) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		builder.setMessage(message);
 
@@ -44,12 +38,8 @@ public class CustomAlert {
 		applyAdditionalParameters(dialog, data);
 	}
 
-	public static void showInput(
-			@NonNull AlertDialogData data,
-			@NonNull FragmentActivity activity,
-			@Nullable String initialText,
-			@Nullable String caption
-	) {
+	public static void showInput(@NonNull AlertDialogData data, @NonNull FragmentActivity activity,
+	                             @Nullable String initialText, @Nullable String caption) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		LayoutInflater inflater = LayoutInflater.from(data.getContext());
 		UiUtilities iconsCache = app.getUIUtilities();
@@ -84,10 +74,8 @@ public class CustomAlert {
 		AndroidUtils.softKeyboardDelayed(activity, editText);
 	}
 
-	public static void showSingleSelection(
-			@NonNull AlertDialogData data, @NonNull CharSequence[] items,
-			int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener
-	) {
+	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
+	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), items, selectedEntryIndex, null,
@@ -100,10 +88,8 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	public static void showMultiSelection(
-			@NonNull AlertDialogData data, @NonNull CharSequence[] items,
-			@Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener
-	) {
+	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
+	                                      @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), items, INVALID_ID, checkedItems,
@@ -116,7 +102,7 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	private static AlertDialog.Builder createAlertDialogBuilder(AlertDialogData data) {
+	private static AlertDialog.Builder createAlertDialogBuilder(@NonNull AlertDialogData data) {
 		Context ctx = data.getContext();
 		AlertDialog.Builder builder = new Builder(ctx);
 
@@ -144,13 +130,10 @@ public class CustomAlert {
 		return builder;
 	}
 
-	private static void applyAdditionalParameters(
-			@NonNull AlertDialog dialog, @NonNull AlertDialogData data
-	) {
+	private static void applyAdditionalParameters(@NonNull AlertDialog dialog, @NonNull AlertDialogData data) {
 		if (data.getPositiveButtonTextColor() != null) {
 			Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
 			button.setTextColor(data.getPositiveButtonTextColor());
 		}
 	}
-
 }

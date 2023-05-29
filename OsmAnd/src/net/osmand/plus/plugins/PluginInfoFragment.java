@@ -3,7 +3,6 @@ package net.osmand.plus.plugins;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -21,13 +20,11 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -80,8 +77,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			return null;
 		}
 
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		mainView = themedInflater.inflate(R.layout.plugin, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
@@ -111,7 +107,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(descriptionView, Linkify.ALL)) {
 			int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
-			descriptionView.setLinkTextColor(ContextCompat.getColor(context, linkTextColorId));
+			descriptionView.setLinkTextColor(ColorUtilities.getColor(app, linkTextColorId));
 			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
 			AndroidUtils.removeLinkUnderline(descriptionView);
 		}

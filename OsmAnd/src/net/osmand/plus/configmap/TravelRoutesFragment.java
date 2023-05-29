@@ -99,7 +99,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.travel_routes_fragment, container, false);
 
 		showHideTopShadow(view);

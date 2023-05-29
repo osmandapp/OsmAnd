@@ -119,7 +119,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private ViewGroup pagesView;
 
 	private boolean portrait;
-	private boolean nightMode;
 	private boolean wasDrawerDisabled;
 	private int currentMenuState;
 	private int routesCount;
@@ -141,8 +140,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
@@ -901,6 +900,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 		File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
 		new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	public class RoutesPagerAdapter extends FragmentPagerAdapter {

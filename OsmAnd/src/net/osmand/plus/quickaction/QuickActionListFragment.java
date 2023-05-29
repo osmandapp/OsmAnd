@@ -120,8 +120,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.quick_action_list, container, false);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);

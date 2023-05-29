@@ -82,7 +82,8 @@ public class ReportsFragment extends BaseOsmAndFragment implements OnFragmentInt
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_reports, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.fragment_reports, container, false);
 		monthReportsSpinner = view.findViewById(R.id.monthReportsSpinner);
 		View monthButton = view.findViewById(R.id.monthButton);
 		monthReportsSpinner.setOnTouchListener((v, event) -> {

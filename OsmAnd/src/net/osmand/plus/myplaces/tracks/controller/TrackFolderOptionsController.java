@@ -100,9 +100,9 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 		} else if (option == TrackFolderOption.EDIT_NAME) {
 			showRenameDialog();
 		} else if (option == TrackFolderOption.CHANGE_APPEARANCE) {
-			showChangeAppearanceDialog();
+			showChangeAppearanceDialog(trackFolder);
 		} else if (option == TrackFolderOption.EXPORT) {
-			showExportDialog();
+			showExportDialog(trackFolder);
 		} else if (option == TrackFolderOption.MOVE) {
 			showMoveDialog();
 		} else if (option == TrackFolderOption.DELETE_FOLDER) {
@@ -130,12 +130,22 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 		}
 	}
 
-	private void showChangeAppearanceDialog() {
+	@Override
+	public void showChangeAppearanceDialog(@NonNull TrackFolder folder) {
+		dialogManager.askDismissDialog(PROCESS_ID);
 
+		if (optionsListener != null) {
+			optionsListener.showChangeAppearanceDialog(folder);
+		}
 	}
 
-	private void showExportDialog() {
+	@Override
+	public void showExportDialog(@NonNull TrackFolder folder) {
+		dialogManager.askDismissDialog(PROCESS_ID);
 
+		if (optionsListener != null) {
+			optionsListener.showExportDialog(folder);
+		}
 	}
 
 	private void showMoveDialog() {

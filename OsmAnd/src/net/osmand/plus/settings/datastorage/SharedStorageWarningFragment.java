@@ -103,7 +103,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		mainView = themedInflater.inflate(R.layout.shared_storage_warning, container, false);
 
 		stepsContainer = mainView.findViewById(R.id.steps_container);

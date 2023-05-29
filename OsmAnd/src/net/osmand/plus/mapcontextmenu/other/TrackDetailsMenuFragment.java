@@ -28,7 +28,6 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProv
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.MapUtils;
 
 public class TrackDetailsMenuFragment extends BaseOsmAndFragment
@@ -82,8 +81,9 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity mapActivity = requireMapActivity();
-		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.track_details, container, false);
+		View view = themedInflater.inflate(R.layout.track_details, container, false);
 		if (!AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 		}

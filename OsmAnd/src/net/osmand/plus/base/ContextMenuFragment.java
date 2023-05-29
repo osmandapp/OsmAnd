@@ -40,7 +40,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.LockableScrollView;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -196,10 +195,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		return true;
 	}
 
-	public void updateNightMode() {
-		nightMode = isNightMode();
-	}
-
 	public String getPreferredMapLang() {
 		return preferredMapLang;
 	}
@@ -271,10 +266,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
-		MapActivity mapActivity = requireMapActivity();
-		OsmandApplication app = mapActivity.getMyApplication();
-
 		updateNightMode();
+		MapActivity mapActivity = requireMapActivity();
+
 		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 
