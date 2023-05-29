@@ -29,7 +29,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TrackFolder.FolderStats;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -151,7 +151,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new EmptyFolderViewHolder(view, emptyTracksListener, nightMode);
 			case TYPE_FOLDER_STATS:
 				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
-				return new FolderStatsViewHolder(view, nightMode);
+				return new FolderStatsViewHolder(app, view);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -166,6 +166,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return TYPE_FOLDER;
 		} else if (object instanceof VisibleTracksGroup) {
 			return TYPE_VISIBLE_TRACKS;
+		} else if (object instanceof TrackFolderAnalysis) {
+			return TYPE_FOLDER_STATS;
 		} else if (object instanceof Integer) {
 			int item = (Integer) object;
 			if (TYPE_SORT_TRACKS == item) {
@@ -173,16 +175,15 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			} else if (TYPE_EMPTY_FOLDER == item) {
 				return TYPE_EMPTY_FOLDER;
 			}
-		} else if (object instanceof FolderStats) {
-			return TYPE_FOLDER_STATS;
 		}
 		throw new IllegalArgumentException("Unsupported view type");
 	}
 
-	private boolean isLastItem(int position){
-		boolean isStatsLastItem = items.get(getItemCount() - 1) instanceof FolderStats;
-		int offset = (isStatsLastItem && getItemCount() >= 2) ? 2 : 1;
-		return position != getItemCount() - offset;
+	private boolean isLastItem(int position) {
+		int itemCount = getItemCount();
+		boolean isStatsLastItem = items.get(itemCount - 1) instanceof TrackFolderAnalysis;
+		int offset = (isStatsLastItem && itemCount >= 2) ? 2 : 1;
+		return position != itemCount - offset;
 	}
 
 	@Override
@@ -216,10 +217,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			EmptyFolderViewHolder viewHolder = (EmptyFolderViewHolder) holder;
 			viewHolder.bindView();
 		} else if (holder instanceof FolderStatsViewHolder) {
-			FolderStats folderStats = (FolderStats) items.get(position);
+			TrackFolderAnalysis folderAnalysis = (TrackFolderAnalysis) items.get(position);
 
 			FolderStatsViewHolder viewHolder = (FolderStatsViewHolder) holder;
-			viewHolder.bindView(folderStats);
+			viewHolder.bindView(folderAnalysis);
 		}
 	}
 
