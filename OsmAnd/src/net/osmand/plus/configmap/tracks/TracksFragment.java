@@ -442,7 +442,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				if (!Algorithms.isEmpty(filesUri)) {
 					AndroidUiHelper.updateVisibility(progressBar, true);
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, true);
+					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getGpxDestinationDir(app, true));
 				}
 			}
 		} else {
