@@ -99,7 +99,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	public void processPoints(OsmandApplication app) {
 		processedPointsToDisplay = gpxFile.proccessPoints();
 		updateBounds();
-		updatePath31(hasMapRenderer(app));
+		updateArea(hasMapRenderer(app));
 	}
 
 	private int calculatePointsCount(@NonNull GPXFile gpxFile) {
