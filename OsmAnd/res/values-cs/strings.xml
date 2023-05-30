@@ -5054,35 +5054,35 @@
     <string name="movement_speed">Rychlost pohybu</string>
     <string name="simulation_position_description">Vyberte soubor stopy, který bude použit jako zdroj pro přesun polohy.</string>
     <string name="shared_string_add_manually">Přidejte ručně…</string>
-    <string name="release_4_4">- Vylepšená nabídka \"Stopy\" v \"Konfiguraci mapy\"
+    <string name="release_4_4">• Vylepšená nabídka \"Stopy\" v \"Nastavení mapy\"
 \n
-\n - Kontextová nabídka nyní zobrazuje lokalizované názvy bodů zájmu
+\n • Kontextová nabídka nyní zobrazuje lokalizované názvy bodů zájmu
 \n
-\n - Přidána možnost sdílení trasy pomocí odkazu
+\n • Přidána možnost sdílení trasy pomocí odkazu
 \n
-\n - Přidána jednotka délky \"Námořní míle/stopa\".
+\n • Přidána jednotka délky \"Námořní míle/stopa\".
 \n
-\n - Přidán nový pevný režim orientace mapy
+\n • Přidán nový pevný režim orientace mapy
 \n
-\n - Zjednodušená úvodní obrazovka
+\n • Zjednodušená úvodní obrazovka
 \n
-\n - Opravena poloha polohy v režimu rozdělené obrazovky v systému Android Auto
+\n • Opraveno umístění polohy v režimu rozdělené obrazovky v systému Android Auto
 \n
-\n - Přidán graf \"Rychlost/Sklon\" pro analýzu trasy
+\n • Přidán graf \"Rychlost/Sklon\" pro analýzu trasy
 \n
-\n - Systém Android 13 přesunul výběr jazyka aplikace do nastavení systému
+\n • Systém Android 13 přesunul výběr jazyka aplikace do nastavení systému
 \n
-\n - Opraveny problémy se zobrazováním veganských míst
+\n • Opraveny problémy se zobrazováním veganských míst
 \n
-\n - Přidána možnost stahování online dlaždic používaných jako \"Překryvné\" nebo \"Podkryvné\" mapy
+\n • Přidána možnost stahování online dlaždic používaných jako překryvné nebo podkladové mapy
 \n
-\n - Přidána podpora imperiálních jednotek pro \"Parametry vozidla\"
+\n • Přidána podpora imperiálních jednotek pro \"Parametry vozidla\"
 \n
-\n - Nový profil Moped
+\n • Nový profil Moped
 \n
-\n - Do položky \"Zobrazení polohy\" byla přidána nová možnost \"Automaticky\"
+\n • Do položky \"Zobrazení polohy\" byla přidána nová možnost \"Automaticky\"
 \n
-\n - Opravena gesta pro naklápění, přibližování a otáčení mapy
+\n • Opravena gesta pro naklápění, přibližování a otáčení mapy
 \n
 \n</string>
     <string name="enable_3d_maps">Povolit 3D mapy</string>
