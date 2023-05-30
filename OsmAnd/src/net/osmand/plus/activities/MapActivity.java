@@ -8,7 +8,7 @@ import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
-import static net.osmand.plus.OsmAndLocationSimulation.*;
+import static net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
@@ -66,6 +66,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -452,12 +453,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void createProgressBarForRouting() {
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 		RouteCalculationProgressListener progressCallback = new RouteCalculationProgressListener() {
 
 			@Override
 			public void onCalculationStart() {
-				setupRouteCalculationProgressBar(pb);
+				setupRouteCalculationProgressBar(progressBar);
 				mapRouteInfoMenu.routeCalculationStarted();
 				RoutingHelper routingHelper = getRoutingHelper();
 				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
@@ -520,7 +521,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void onCalculationFinish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
-				pb.setVisibility(View.GONE);
+				AndroidUiHelper.updateVisibility(progressBar, false);
 
 				// for voice navigation. (routingAppMode may have changed.)
 				ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
@@ -548,17 +549,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				progressCallback.onCalculationFinish();
 			}
 		});
-
 		app.getLocationProvider().getLocationSimulation().addListener(new LoadSimulatedLocationsListener() {
 			@Override
 			public void onLocationsStartedLoading() {
 				if (!isRouteBeingCalculated()) {
-					pb.setVisibility(View.VISIBLE);
+					AndroidUiHelper.updateVisibility(progressBar, true);
 				}
 			}
 
 			@Override
-			public void onLocationsLoading(int progress) {
+			public void onLocationsLoadingProgress(int progress) {
 				if (!isRouteBeingCalculated()) {
 					updateProgress(progress);
 				}
@@ -567,30 +567,30 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
 				if (!isRouteBeingCalculated()) {
-					pb.setVisibility(View.GONE);
+					AndroidUiHelper.updateVisibility(progressBar, false);
 				}
 			}
 		});
 	}
 
-	private void updateProgress(int progress){
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+	private void updateProgress(int progress) {
+		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
 			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
-				pb.setVisibility(View.GONE);
+				AndroidUiHelper.updateVisibility(progressBar, false);
 				return;
 			}
-			if (pb.getVisibility() == View.GONE) {
-				pb.setVisibility(View.VISIBLE);
+			if (progressBar.getVisibility() == View.GONE) {
+				AndroidUiHelper.updateVisibility(progressBar, true);
 			}
-			pb.setProgress(progress);
-			pb.invalidate();
-			pb.requestLayout();
+			progressBar.setProgress(progress);
+			progressBar.invalidate();
+			progressBar.requestLayout();
 		}
 	}
 
 	private boolean isRouteBeingCalculated() {
-		return app.getRoutingHelper().isRouteBeingCalculated();
+		return app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 	}
 
 	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
@@ -818,7 +818,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -1299,7 +1299,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-		if(mapControlsLayer != null){
+		if (mapControlsLayer != null) {
 			mapControlsLayer.refreshButtons();
 			if (!mapControlsLayer.isMapControlsVisible() && !settings.MAP_EMPTY_STATE_ALLOWED.get()) {
 				showMapControls();

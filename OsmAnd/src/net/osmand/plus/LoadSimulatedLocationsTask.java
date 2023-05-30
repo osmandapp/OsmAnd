@@ -1,6 +1,6 @@
 package net.osmand.plus;
 
-import static net.osmand.plus.OsmAndLocationSimulation.*;
+import static net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
 import static net.osmand.plus.SimulationProvider.SIMULATED_PROVIDER;
 
 import android.os.AsyncTask;
@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.router.RouteSegmentResult;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<SimulatedLocation>> {
+
 	private final RouteCalculationResult route;
 	private final LoadSimulatedLocationsListener listener;
 
@@ -34,43 +36,71 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 
 	@Override
 	protected List<SimulatedLocation> doInBackground(Void... voids) {
-		List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-		for (Location l : route.getImmutableAllLocations()) {
-			SimulatedLocation sm = new SimulatedLocation(l, SIMULATED_PROVIDER);
-			simulatedLocations.add(sm);
-		}
+		return getSimulatedLocationsForRoute();
+	}
+
+	@NonNull
+	private List<SimulatedLocation> getSimulatedLocationsForRoute() {
+		List<SimulatedLocation> locations = new ArrayList<>();
+		prepareImmutableLocations(locations);
+
 		List<RouteSegmentResult> segments = route.getImmutableAllSegments();
-
-		for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
-			RouteSegmentResult s = segments.get(routeInd);
-			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-			int i = s.getStartPointIndex();
-			if (!isCancelled()) {
-				int progress = ((routeInd + 1) * 100) / segments.size();
-				publishProgress(progress);
-			} else {
+		int segmentsSize = segments.size();
+		for (int routeInd = 0; routeInd < segmentsSize; routeInd++) {
+			if (isCancelled()) {
 				break;
-			}
+			} else {
+				int progress = ProgressHelper.normalizeProgressPercent((routeInd * 100) / segmentsSize);
+				publishProgress(progress);
 
-			while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
-				LatLon point = s.getPoint(i);
-				for (SimulatedLocation sd : simulatedLocations) {
-					LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
-					if (latLon.equals(point)) {
-						sd.setHighwayType(s.getObject().getHighway());
-						sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
-						if (s.getObject().hasTrafficLightAt(i)) {
-							sd.setTrafficLight(true);
-						}
+				RouteSegmentResult segment = segments.get(routeInd);
+				prepareRouteSegmentResult(locations, segment, routeInd, segmentsSize);
+			}
+		}
+		return locations;
+	}
+
+	private void prepareRouteSegmentResult(@NonNull List<SimulatedLocation> locations, @NonNull RouteSegmentResult segmentResult, int routeInd, int segmentsSize) {
+		boolean plus = segmentResult.getStartPointIndex() < segmentResult.getEndPointIndex();
+		int startPointIndex = segmentResult.getStartPointIndex();
+
+		while (startPointIndex != segmentResult.getEndPointIndex() || routeInd == segmentsSize - 1) {
+			LatLon point = segmentResult.getPoint(startPointIndex);
+			for (SimulatedLocation location : locations) {
+				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
+				if (latLon.equals(point)) {
+					location.setHighwayType(segmentResult.getObject().getHighway());
+					location.setSpeedLimit(segmentResult.getObject().getMaximumSpeed(true));
+					if (segmentResult.getObject().hasTrafficLightAt(startPointIndex)) {
+						location.setTrafficLight(true);
 					}
 				}
-				if (i == s.getEndPointIndex()) {
-					break;
-				}
-				i += plus ? 1 : -1;
 			}
+			if (startPointIndex == segmentResult.getEndPointIndex()) {
+				break;
+			}
+			startPointIndex += plus ? 1 : -1;
 		}
-		return simulatedLocations;
+	}
+
+	private void prepareImmutableLocations(@NonNull List<SimulatedLocation> locations) {
+		for (Location location : route.getImmutableAllLocations()) {
+			locations.add(new SimulatedLocation(location, SIMULATED_PROVIDER));
+		}
+	}
+
+	@Override
+	protected void onProgressUpdate(Integer... values) {
+		Integer progress = values[0];
+
+		if (listener != null) {
+			listener.onLocationsLoadingProgress(progress);
+		}
+	}
+
+	@Override
+	protected void onCancelled() {
+		onPostExecute(null);
 	}
 
 	@Override
@@ -80,19 +110,11 @@ public class LoadSimulatedLocationsTask extends AsyncTask<Void, Integer, List<Si
 		}
 	}
 
-	@Override
-	protected void onProgressUpdate(Integer... values) {
-		Integer progress = values[0];
+	public interface LoadSimulatedLocationsListener {
+		void onLocationsStartedLoading();
 
-		if (listener != null) {
-			listener.onLocationsLoading(progress);
-		}
-	}
+		void onLocationsLoadingProgress(int progress);
 
-	@Override
-	protected void onCancelled() {
-		if (listener != null) {
-			listener.onLocationsLoaded(null);
-		}
+		void onLocationsLoaded(@Nullable List<SimulatedLocation> locations);
 	}
 }

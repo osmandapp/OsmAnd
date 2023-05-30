@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +19,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.Location;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
@@ -49,9 +49,9 @@ public class OsmAndLocationSimulation {
 
 	private Thread routeAnimation;
 
+	private LoadSimulatedLocationsTask loadLocationsTask;
 	private List<LoadSimulatedLocationsListener> loadLocationsListeners = new ArrayList<>();
 
-	private LoadSimulatedLocationsTask loadSimulatedLocationsTask;
 	@Nullable
 	private GPXFile gpxFile = null;
 	private List<LocationSimulationListener> listeners = new ArrayList<>();
@@ -65,8 +65,8 @@ public class OsmAndLocationSimulation {
 		return routeAnimation != null;
 	}
 
-	public boolean isRoutePreparing() {
-		return loadSimulatedLocationsTask != null && loadSimulatedLocationsTask.getStatus() == AsyncTask.Status.RUNNING;
+	public boolean isLoadingRouteLocations() {
+		return loadLocationsTask != null && loadLocationsTask.getStatus() == AsyncTask.Status.RUNNING;
 	}
 
 	public void addListener(@NonNull LoadSimulatedLocationsListener listener) {
@@ -148,11 +148,8 @@ public class OsmAndLocationSimulation {
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
 			} else {
-				if (loadSimulatedLocationsTask != null) {
-					stopLoadSimulatedLocationsTask();
-				}
-				loadSimulatedLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadSimulatedLocationsListener(runnable));
-				loadSimulatedLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				stopLoadLocationsTask();
+				startLoadLocationsTask(runnable);
 			}
 		} else {
 			stop();
@@ -162,57 +159,56 @@ public class OsmAndLocationSimulation {
 		}
 	}
 
-	private LoadSimulatedLocationsListener getLoadSimulatedLocationsListener(Runnable runnable) {
+	@NonNull
+	private LoadSimulatedLocationsListener getLoadLocationsListener(@Nullable Runnable runnable) {
 		return new LoadSimulatedLocationsListener() {
 			@Override
 			public void onLocationsStartedLoading() {
-				notifyLoadLocationsListeners();
+				for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+					listener.onLocationsStartedLoading();
+				}
 			}
 
 			@Override
-			public void onLocationsLoading(int progress) {
-				notifyLoadLocationsListeners(progress);
+			public void onLocationsLoadingProgress(int progress) {
+				for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+					listener.onLocationsLoadingProgress(progress);
+				}
 			}
 
 			@Override
-			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
-				notifyLoadLocationsListeners(locations);
-				if (Algorithms.isEmpty(locations)) {
-					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
-							Toast.LENGTH_LONG).show();
+			public void onLocationsLoaded(@Nullable List<SimulatedLocation> currentRoute) {
+				loadLocationsTask = null;
+				notifyLocationsLoaded(currentRoute);
+
+				if (Algorithms.isEmpty(currentRoute)) {
+					app.showToastMessage(R.string.animate_routing_route_not_calculated);
 				} else {
-					startAnimationThread(app, new ArrayList<>(locations), false, 1);
+					startAnimationThread(app, new ArrayList<>(currentRoute), false, 1);
 					if (runnable != null) {
 						runnable.run();
 					}
 				}
-				loadSimulatedLocationsTask = null;
 			}
 		};
 	}
 
-	private void notifyLoadLocationsListeners(){
-		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
-			listener.onLocationsStartedLoading();
-		}
-	}
-
-	private void notifyLoadLocationsListeners(int progress){
-		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
-			listener.onLocationsLoading(progress);
-		}
-	}
-
-	private void notifyLoadLocationsListeners(@Nullable List<SimulatedLocation> locations){
+	private void notifyLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
 		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
 			listener.onLocationsLoaded(locations);
 		}
 	}
 
-	private void stopLoadSimulatedLocationsTask() {
-		if (loadSimulatedLocationsTask != null && loadSimulatedLocationsTask.getStatus() == AsyncTask.Status.RUNNING) {
-			loadSimulatedLocationsTask.cancel(false);
+	private void startLoadLocationsTask(@Nullable Runnable runnable) {
+		loadLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadLocationsListener(runnable));
+		loadLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	private void stopLoadLocationsTask() {
+		if (loadLocationsTask != null && loadLocationsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			loadLocationsTask.cancel(false);
 		}
+		loadLocationsTask = null;
 	}
 
 	public void startStopRouteAnimation(@Nullable Activity activity) {
@@ -406,10 +402,7 @@ public class OsmAndLocationSimulation {
 	public void stop() {
 		gpxFile = null;
 		routeAnimation = null;
-		if (loadSimulatedLocationsTask != null) {
-			stopLoadSimulatedLocationsTask();
-			loadSimulatedLocationsTask = null;
-		}
+		stopLoadLocationsTask();
 		notifyListeners(false);
 	}
 
@@ -418,16 +411,16 @@ public class OsmAndLocationSimulation {
 		double lon1 = toRad(start.getLongitude());
 		double R = 6371; // radius of earth in km
 		double d = meters / 1000; // in km
-		float brng = (float) (toRad(start.bearingTo(end)));
+		float bearing = (float) (toRad(start.bearingTo(end)));
 		double lat2 = Math.asin(Math.sin(lat1) * Math.cos(d / R)
-				+ Math.cos(lat1) * Math.sin(d / R) * Math.cos(brng));
+				+ Math.cos(lat1) * Math.sin(d / R) * Math.cos(bearing));
 		double lon2 = lon1
-				+ Math.atan2(Math.sin(brng) * Math.sin(d / R) * Math.cos(lat1),
+				+ Math.atan2(Math.sin(bearing) * Math.sin(d / R) * Math.cos(lat1),
 				Math.cos(d / R) - Math.sin(lat1) * Math.sin(lat2));
 		SimulatedLocation nl = new SimulatedLocation(start);
 		nl.setLatitude(toDegree(lat2));
 		nl.setLongitude(toDegree(lon2));
-		nl.setBearing(brng);
+		nl.setBearing(bearing);
 		nl.setTrafficLight(false);
 		return nl;
 	}
@@ -481,14 +474,6 @@ public class OsmAndLocationSimulation {
 			prevLocation = location;
 		}
 		return simulatedLocations;
-	}
-
-	public interface LoadSimulatedLocationsListener {
-		void onLocationsStartedLoading();
-
-		void onLocationsLoading(int progress);
-
-		void onLocationsLoaded(@Nullable List<SimulatedLocation> locations);
 	}
 
 	public static class SimulatedLocation extends Location {

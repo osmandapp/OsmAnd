@@ -684,7 +684,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void stopNavigation() {
 		OsmAndLocationSimulation locationSimulation = locationProvider.getLocationSimulation();
-		if (locationSimulation.isRouteAnimating() || locationSimulation.isRoutePreparing()) {
+		if (locationSimulation.isRouteAnimating() || locationSimulation.isLoadingRouteLocations()) {
 			locationSimulation.stop();
 		}
 		routingHelper.getVoiceRouter().interruptRouteCommands();
