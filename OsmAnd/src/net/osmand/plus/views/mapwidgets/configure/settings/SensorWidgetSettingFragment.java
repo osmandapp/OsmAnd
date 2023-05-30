@@ -34,6 +34,9 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment impl
 	@NonNull
 	@Override
 	public WidgetType getWidget() {
+		if(widgetType == null){
+			throw new IllegalArgumentException("widgetType should be initialized prior to call to getWidget()");
+		}
 		return widgetType;
 	}
 

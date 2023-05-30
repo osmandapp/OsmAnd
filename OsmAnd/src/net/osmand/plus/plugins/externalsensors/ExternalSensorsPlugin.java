@@ -2,6 +2,11 @@ package net.osmand.plus.plugins.externalsensors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ANT_PLUS;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_CADENCE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_DISTANCE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -33,8 +38,6 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.*;
-
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +54,19 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	private ScanDevicesListener scanDevicesListener;
 	private OsmandSettings settings;
 
+	public final CommonPreference<String> SPEED_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE;
+	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE;
+
 	public ExternalSensorsPlugin(OsmandApplication app) {
 		super(app);
+		SPEED_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("speed_sensor_write_to_track_device", "").makeProfile().cache();
+		CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("cadence_sensor_write_to_track_device", "").makeProfile().cache();
+		POWER_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("power_sensor_write_to_track_device", "").makeProfile().cache();
+		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("heart_rate_sensor_write_to_track_device", "").makeProfile().cache();
+		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("temperature_sensor_write_to_track_device", "").makeProfile().cache();
 		devicesHelper = new DevicesHelper(app, this);
 		settings = app.getSettings();
 	}
@@ -147,11 +161,11 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	private Set<String> getEnabledDevicesToWriteToTrack() {
 		ApplicationMode selectedAppMode = settings.getApplicationMode();
 		Set<String> linkedSensors = new HashSet<>();
-		linkedSensors.add(settings.SPEED_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(settings.CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(settings.POWER_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(settings.HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(settings.TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(SPEED_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(POWER_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
+		linkedSensors.add(TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
 		return linkedSensors;
 	}
 
@@ -330,4 +344,21 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 			devicesHelper.setDeviceName(device, newName);
 		}
 	}
+
+	public CommonPreference<String> getPrefSettingsForWidgetType(@NonNull WriteToGpxWidgetType widgetType) {
+		switch (widgetType) {
+			case BIKE_SPEED:
+				return SPEED_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case BIKE_POWER:
+				return POWER_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case BIKE_CADENCE:
+				return CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case HEART_RATE:
+				return HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE;
+			case TEMPERATURE:
+				return TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE;
+		}
+		throw new IllegalArgumentException("Unknown widget type");
+	}
+
 }

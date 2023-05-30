@@ -9,29 +9,4 @@
 		android:selectable="false"
 		android:title="@string/write_data_from_sensor_to_track" />
 
-	<Preference
-		android:key="speed_sensor_write_to_track_device"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/write_to_track_speed_sensor" />
-
-	<Preference
-		android:key="cadence_sensor_write_to_track_device"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/write_to_track_cadence_sensor" />
-
-	<Preference
-		android:key="power_sensor_write_to_track_device"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/write_to_track_power_sensor" />
-
-	<Preference
-		android:key="heart_rate_sensor_write_to_track_device"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/write_to_track_heart_rate_sensor" />
-
-	<Preference
-		android:key="temperature_sensor_write_to_track_device"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/write_to_track_temperature_sensor" />
-
 </PreferenceScreen>

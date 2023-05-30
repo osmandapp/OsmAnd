@@ -5,6 +5,7 @@ import net.osmand.plus.plugins.accessibility.AccessibilitySettingsFragment;
 import net.osmand.plus.plugins.externalsensors.AntPlusSettingsFragment;
 import net.osmand.plus.plugins.audionotes.MultimediaNotesFragment;
 import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
+import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
 import net.osmand.plus.plugins.openplacereviews.OprSettingsFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;

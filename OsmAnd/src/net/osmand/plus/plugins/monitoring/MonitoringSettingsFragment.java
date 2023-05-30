@@ -32,6 +32,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
+import net.osmand.plus.plugins.externalsensors.WriteToGpxWidgetType;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -302,20 +303,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private List<String> getLinkedSensors() {
 		ApplicationMode selectedAppMode = getSelectedAppMode();
 		List<String> linkedSensors = new ArrayList<>();
-		if (!Algorithms.isEmpty(settings.SPEED_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode))) {
-			linkedSensors.add(app.getString(R.string.write_to_track_speed_sensor));
-		}
-		if (!Algorithms.isEmpty(settings.CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode))) {
-			linkedSensors.add(app.getString(R.string.write_to_track_cadence_sensor));
-		}
-		if (!Algorithms.isEmpty(settings.POWER_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode))) {
-			linkedSensors.add(app.getString(R.string.write_to_track_power_sensor));
-		}
-		if (!Algorithms.isEmpty(settings.HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode))) {
-			linkedSensors.add(app.getString(R.string.write_to_track_heart_rate_sensor));
-		}
-		if (!Algorithms.isEmpty(settings.TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode))) {
-			linkedSensors.add(app.getString(R.string.write_to_track_temperature_sensor));
+		ExternalSensorsPlugin sensorsPlugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
+		if (sensorsPlugin != null) {
+			for (WriteToGpxWidgetType widgetType : WriteToGpxWidgetType.values()) {
+				CommonPreference<String> preference = sensorsPlugin.getPrefSettingsForWidgetType(widgetType);
+				if (!Algorithms.isEmpty(preference.getModeValue(selectedAppMode))) {
+					linkedSensors.add(app.getString(widgetType.getTitleId()));
+				}
+			}
 		}
 		return linkedSensors;
 	}

@@ -3130,20 +3130,4 @@ public class OsmandSettings {
 		}
 	}
 
-	public final CommonPreference<String> SPEED_SENSOR_WRITE_TO_TRACK_DEVICE =
-			new StringPreference(this, "speed_sensor_write_to_track_device", "").makeProfile().cache();
-
-	public final CommonPreference<String> CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE =
-			new StringPreference(this, "cadence_sensor_write_to_track_device", "").makeProfile().cache();
-
-	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE =
-			new StringPreference(this, "power_sensor_write_to_track_device", "").makeProfile().cache();
-
-	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE =
-			new StringPreference(this, "heart_rate_sensor_write_to_track_device", "").makeProfile().cache();
-
-	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE =
-			new StringPreference(this, "temperature_sensor_write_to_track_device", "").makeProfile().cache();
-
-
 }

@@ -5,6 +5,7 @@ import static android.bluetooth.BluetoothDevice.BOND_BONDING;
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.bluetooth.BluetoothGatt.GATT_SUCCESS;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -21,6 +22,7 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
@@ -31,6 +33,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBatterySensor;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -86,6 +89,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 	@NonNull
 	@Override
+	@RequiresPermission(Manifest.permission.BLUETOOTH)
+	@SuppressLint("MissingPermission")
 	public String getName() {
 		String name = device != null ? device.getName() : deviceName;
 		if (name == null) {
@@ -247,6 +252,10 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	@Override
 	public boolean connect(@NonNull Context context, @Nullable Activity activity) {
+		if(!AndroidUtils.hasBLEPermission(activity)){
+			LOG.error("Try to connect " + deviceName + " while no ble permission");
+			return false;
+		}
 		if (isDisconnected()) {
 			if (bluetoothAdapter == null) {
 				LOG.debug("BluetoothAdapter not initialized");

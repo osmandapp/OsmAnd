@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.externalsensors.dialogs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,7 +27,6 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +45,8 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	private View noBluetoothCard;
 	private String selectedDeviceId;
 	private SensorWidgetDataFieldType widgetDataFieldType;
+	private View stateNoBluetoothView;
+	private States currentState = States.NOTHING_FOUND;
 
 	@Override
 	protected int getLayoutId() {
@@ -62,6 +64,14 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		}
 	}
 
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		updateCurrentStateView();
+		return view;
+	}
+
 	@Override
 	protected void setupUI(@NonNull View view) {
 		super.setupUI(view);
@@ -74,6 +84,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty));
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional));
 		setupOpenBtSettingsButton(view.findViewById(R.id.bt_settings_button_container));
+		setupNoBluetoothView(view);
 		devicesListAdapter = new DevicesForWidgetAdapter(app, nightMode, this);
 		devicesListAdapter.setDeviceId(selectedDeviceId);
 		devicesList.setAdapter(devicesListAdapter);
@@ -91,6 +102,25 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		AndroidUiHelper.updateVisibility(dismissButton, true);
 	}
 
+	private void setupNoBluetoothView(View parentView) {
+		stateNoBluetoothView = parentView.findViewById(R.id.state_no_bluetooth);
+		View openSettingButton = stateNoBluetoothView.findViewById(R.id.dismiss_button);
+		int buttonTextId = R.string.ant_plus_open_settings;
+		UiUtilities.setupDialogButton(
+				nightMode,
+				openSettingButton,
+				UiUtilities.DialogButtonType.SECONDARY,
+				buttonTextId
+		);
+		openSettingButton.setOnClickListener(v -> {
+					Intent intentOpenBluetoothSettings = new Intent();
+					intentOpenBluetoothSettings.setAction(Settings.ACTION_BLUETOOTH_SETTINGS);
+					startActivity(intentOpenBluetoothSettings);
+				}
+		);
+		AndroidUiHelper.updateVisibility(openSettingButton, true);
+	}
+
 	private void setupOpenBtSettingsButton(@NonNull View view) {
 		View dismissButton = view.findViewById(R.id.dismiss_button);
 		int buttonTextId = R.string.ant_plus_open_settings;
@@ -105,6 +135,21 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			startActivity(intentOpenBluetoothSettings);
 		});
 		AndroidUiHelper.updateVisibility(dismissButton, true);
+	}
+
+	private void updateCurrentStateView() {
+		AndroidUiHelper.updateVisibility(
+				stateNoBluetoothView,
+				currentState == States.NO_BLUETOOTH
+		);
+		AndroidUiHelper.updateVisibility(
+				emptyView,
+				currentState == States.NOTHING_FOUND
+		);
+		AndroidUiHelper.updateVisibility(
+				contentView,
+				currentState == States.CONTENT
+		);
 	}
 
 	private void showPairNewSensorBottomSheet() {
@@ -167,16 +212,19 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			}
 		}
 		if (devices.isEmpty()) {
-			emptyView.setVisibility(View.VISIBLE);
-			contentView.setVisibility(View.GONE);
+			if (plugin.isBlueToothEnabled()) {
+				currentState = States.NOTHING_FOUND;
+			} else {
+				currentState = States.NO_BLUETOOTH;
+			}
 		} else {
+			currentState = States.CONTENT;
 			app.runInUIThread(() -> {
 				appBar.setExpanded(false);
 				devicesListAdapter.setItems(filteredDevices);
-				contentView.setVisibility(View.VISIBLE);
-				emptyView.setVisibility(View.GONE);
 			});
 		}
+		updateCurrentStateView();
 	}
 
 	private boolean isDeviceForWidgetFieldType(AbstractDevice<?> device) {
@@ -229,6 +277,10 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			((SelectDeviceListener) getTargetFragment()).selectNewDevice(device, widgetDataFieldType);
 			dismiss();
 		}
+	}
+
+	enum States {
+		NO_BLUETOOTH, NOTHING_FOUND, CONTENT
 	}
 
 	public interface SelectDeviceListener {

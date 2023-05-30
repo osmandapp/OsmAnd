@@ -21,7 +21,8 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 
-class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener, DeviceClickListener {
+class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener,
+    DeviceClickListener {
     private var currentState = SearchStates.NOTHING_FOUND
     private var stateNoBluetoothView: View? = null
     private var stateSearchingView: View? = null
@@ -34,8 +35,8 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     companion object {
         val TAG: String = Companion::class.java.simpleName
-        private const val BLE_SEARCH_KEY : String = "BLE_SEARCH"
-        private const val ANT_SEARCH_KEY : String = "ANT_SEARCH"
+        private const val BLE_SEARCH_KEY: String = "BLE_SEARCH"
+        private const val ANT_SEARCH_KEY: String = "ANT_SEARCH"
         fun showInstance(manager: FragmentManager, bleSearch: Boolean, antSearch: Boolean) {
             if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
                 val fragment = ExternalDevicesSearchFragment()
@@ -152,6 +153,9 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     override fun onResume() {
         super.onResume()
+        if (currentState == SearchStates.NO_BLUETOOTH && plugin.isBlueToothEnabled) {
+            currentState = SearchStates.SEARCHING
+        }
         if (currentState == SearchStates.SEARCHING) {
             startSearch()
         } else if (currentState == SearchStates.DEVICES_LIST) {

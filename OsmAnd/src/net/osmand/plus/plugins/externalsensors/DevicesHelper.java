@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.externalsensors;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,12 +18,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.ParcelUuid;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
 import com.dsi.ant.plugins.antplus.pccbase.AntPluginPcc;
@@ -188,14 +185,19 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	private final ScanCallback bleScanCallback = new ScanCallback() {
+		@SuppressLint("MissingPermission")
 		@Override
 		public void onScanResult(int callbackType, ScanResult result) {
 			super.onScanResult(callbackType, result);
 			BluetoothDevice device = result.getDevice();
 			ScanRecord record = result.getScanRecord();
-			LOG.debug("BLE scan result " + device.getAddress() + "; name " + device.getName() + "; " + record.getServiceUuids());
-			if (device.getName() != null) {
-				addScanResult(result);
+			if (AndroidUtils.hasBLEPermission(activity)) {
+				LOG.debug("BLE scan result " + device.getAddress() + "; name " + device.getName() + "; " + record.getServiceUuids());
+				if (device.getName() != null) {
+					addScanResult(result);
+				}
+			} else {
+				LOG.error("Try to add ble device while no permission");
 			}
 		}
 
@@ -207,7 +209,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			}
 		}
 
+		@SuppressLint("MissingPermission")
 		private void addScanResult(ScanResult result) {
+			if (!AndroidUtils.hasBLEPermission(activity)) {
+				LOG.error("Try to addScanResult while no permission");
+				return;
+			}
 			ScanRecord scanRecord = result.getScanRecord();
 			if (isSupportedBleDevice(scanRecord)) {
 				String deviceName = result.getDevice().getName();
@@ -534,11 +541,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void scanBLEDevices(boolean enable) {
 		if (!enable) {
 			if (bleScanner != null) {
-				bleScanner.stopScan(bleScanCallback);
+				if (AndroidUtils.hasBLEPermission(activity)) {
+					bleScanner.stopScan(bleScanCallback);
+				}
 				bleScanning = false;
 			}
 		} else {
-			if (!requestBLEPermissions()) {
+			if (!AndroidUtils.requestBLEPermissions(activity)) {
 				app.showShortToastMessage("Permissions not granted");
 				return;
 			}
@@ -574,34 +583,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			bleScanner.startScan(filters, scanSettings, bleScanCallback);
 			bleScanning = true;
 		}
-	}
-
-	private boolean requestBLEPermissions() {
-		boolean hasNeededPermissions = true;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_SCAN)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH_SCAN}, 4);
-			}
-			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_CONNECT)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(
-						activity,
-						new String[] {Manifest.permission.BLUETOOTH_CONNECT},
-						5
-				);
-			}
-		} else {
-			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH}, 2);
-			}
-			if (!AndroidUtils.hasPermission(activity, Manifest.permission.BLUETOOTH_ADMIN)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.BLUETOOTH_ADMIN}, 3);
-			}
-		}
-		return hasNeededPermissions;
 	}
 
 	public boolean isBLEEnabled() {
@@ -644,8 +625,9 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	}
 
+	@SuppressLint("MissingPermission")
 	public boolean isBLEDeviceConnected(@NonNull String address) {
-		if (isBLEEnabled()) {
+		if (isBLEEnabled() && AndroidUtils.hasBLEPermission(activity)) {
 			BluetoothManager bluetoothManager = (BluetoothManager) activity.getSystemService(Context.BLUETOOTH_SERVICE);
 			BluetoothDevice device = bluetoothAdapter.getRemoteDevice(address);
 			return bluetoothManager.getConnectionState(device, BluetoothProfile.GATT) == BluetoothProfile.STATE_CONNECTED;

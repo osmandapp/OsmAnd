@@ -112,7 +112,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/external_sensor_widgets"
 		tools:icon="@drawable/ic_action_sensor"
-		app:fragment="net.osmand.plus.settings.fragments.ExternalSettingsWriteToTrackSettingsFragment"
+		app:fragment="net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment"
 		app:isPreferenceVisible="false"
 		/>
 
