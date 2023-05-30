@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.track.data.TrackFolder;
@@ -155,7 +156,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		super.updateContent();
 		updateToolbar();
 	}
@@ -227,7 +228,10 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			for (TrackItem trackItem : trackItems) {
 				files.add(trackItem.getFile());
 			}
-			deleteGpxFiles(files.toArray(new File[0]));
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null) {
+				foldersHelper.deleteGpxFiles(files.toArray(new File[0]));
+			}
 			dismiss();
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);

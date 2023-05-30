@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -22,6 +23,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -32,6 +35,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
 
 	private TextView toolbarTitle;
+	private ProgressBar progressBar;
 
 	@Override
 	protected int getLayoutId() {
@@ -56,9 +60,18 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			setupToolbar(view);
+			setupProgressBar(view);
 		}
 		updateContent();
 		return view;
+	}
+
+	private void setupProgressBar(@NonNull View view) {
+		progressBar = view.findViewById(R.id.progress_bar);
+
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		boolean importing = foldersHelper != null && foldersHelper.isImporting();
+		AndroidUiHelper.updateVisibility(progressBar, importing);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -94,7 +107,12 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	private void setupMenuButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
-		button.setOnClickListener(v -> showFolderOptionsMenu(v, selectedFolder));
+		button.setOnClickListener(v -> {
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null) {
+				foldersHelper.showFolderOptionsMenu(v, selectedFolder, this);
+			}
+		});
 		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
@@ -116,7 +134,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	}
 
 	@Override
-	protected void updateContent() {
+	public void updateContent() {
 		super.updateContent();
 		toolbarTitle.setText(selectedFolder.getName(app));
 	}
@@ -135,8 +153,21 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	}
 
 	@Override
+	public void onImportStarted() {
+		AndroidUiHelper.updateVisibility(progressBar, true);
+	}
+
+	@Override
+	public void onImportFinished() {
+		AndroidUiHelper.updateVisibility(progressBar, false);
+	}
+
+	@Override
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
-		showItemOptionsMenu(view, trackItem);
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null) {
+			foldersHelper.showItemOptionsMenu(view, trackItem, this);
+		}
 	}
 
 	@Override

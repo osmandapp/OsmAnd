@@ -182,10 +182,6 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		return nightMode;
 	}
 
-	public boolean isNightMode() {
-		return nightMode;
-	}
-
 	protected String getThemeInfoProviderTag() {
 		return null;
 	}

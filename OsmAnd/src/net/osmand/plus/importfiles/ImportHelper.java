@@ -136,6 +136,13 @@ public class ImportHelper {
 	}
 
 	public interface GpxImportListener {
+
+		default void onImportStarted() {
+		}
+
+		default void onImportFinished() {
+		}
+
 		default void onImportComplete(boolean success) {
 		}
 
@@ -206,6 +213,9 @@ public class ImportHelper {
 	}
 
 	public void handleGpxFilesImport(@NonNull List<Uri> filesUri, @NonNull File destinationDir) {
+		if (gpxImportListener != null) {
+			gpxImportListener.onImportStarted();
+		}
 		boolean showDialogs = filesUri.size() == 1;
 		for (Uri uri : filesUri) {
 			String fileName = getGpxFileName(getNameFromContentUri(app, uri));
