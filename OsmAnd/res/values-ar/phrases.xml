@@ -4551,4 +4551,12 @@
     <string name="poi_toy_library">مكتبة ألعاب</string>
     <string name="poi_surface_chipseal">اسفلت خشن</string>
     <string name="poi_cemt">الاتحاد الأوروبي للتكنولوجيا البحرية</string>
+    <string name="poi_cemt_vb">Vb</string>
+    <string name="poi_cemt_vii">VII</string>
+    <string name="poi_cemt_va">Va</string>
+    <string name="poi_cemt_via">VIa</string>
+    <string name="poi_cemt_vib">VIb</string>
+    <string name="poi_cai_scale">مقياس CAI</string>
+    <string name="poi_cemt_vic">VIc</string>
+    <string name="poi_sac_scale">مقياس SAC</string>
 </resources>

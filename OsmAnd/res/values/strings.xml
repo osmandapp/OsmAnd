@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="write_data_from_sensor_to_track">Write data from external sensors to GPX while trip recording.</string>
+    <string name="save_track_external_sensors_data">Data</string>
+    <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
+    <string name="external_sensors_not_found">Sensors not found</string>
+    <string name="external_sensors_source_of_data">Source of data</string>
     <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
     <string name="delete_folder_question">Delete folder?</string>
     <string name="delete_folder">Delete folder</string>

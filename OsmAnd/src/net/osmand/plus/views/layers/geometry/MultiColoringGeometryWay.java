@@ -205,7 +205,9 @@ public abstract class MultiColoringGeometryWay
 		if (style instanceof GeometryGradientWayStyle<?> && styles.size() > 1) {
 			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) styles.get(styles.size() - 2);
 			GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
-			prevStyle.nextColor = currStyle.currColor;
+			if (!prevStyle.equals(currStyle)) {
+				prevStyle.nextColor = currStyle.currColor;
+			}
 		}
 	}
 

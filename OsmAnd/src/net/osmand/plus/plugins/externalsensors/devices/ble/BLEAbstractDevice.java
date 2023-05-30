@@ -5,6 +5,7 @@ import static android.bluetooth.BluetoothDevice.BOND_BONDING;
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.bluetooth.BluetoothGatt.GATT_SUCCESS;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -21,6 +22,7 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
@@ -31,6 +33,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEAbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.ble.BLEBatterySensor;
+import net.osmand.plus.utils.AndroidUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -86,6 +89,8 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 	@NonNull
 	@Override
+	@RequiresPermission(Manifest.permission.BLUETOOTH)
+	@SuppressLint("MissingPermission")
 	public String getName() {
 		String name = device != null ? device.getName() : deviceName;
 		if (name == null) {
@@ -160,18 +165,18 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 					} else if (bondState == BOND_BONDING) {
 						LOG.debug("Waiting for bonding to complete");
 					}
-					state = DeviceConnectionState.CONNECTED;
+					setCurrentState(DeviceConnectionState.CONNECTED);
 				} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 					fireDeviceDisconnectedEvent();
 					gatt.close();
 					bluetoothGatt = null;
-					state = DeviceConnectionState.DISCONNECTED;
+					setCurrentState(DeviceConnectionState.DISCONNECTED);
 				}
 			} else {
 				fireDeviceDisconnectedEvent();
 				gatt.close();
 				bluetoothGatt = null;
-				state = DeviceConnectionState.DISCONNECTED;
+				setCurrentState(DeviceConnectionState.DISCONNECTED);
 			}
 		}
 
@@ -181,6 +186,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			if (status == 129) {
 				LOG.error("Service discovery failed");
 				gatt.disconnect();
+				setCurrentState(DeviceConnectionState.DISCONNECTED);
 				return;
 			}
 			if (status == BluetoothGatt.GATT_SUCCESS) {
@@ -246,6 +252,10 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	@Override
 	public boolean connect(@NonNull Context context, @Nullable Activity activity) {
+		if(!AndroidUtils.hasBLEPermission(activity)){
+			LOG.error("Try to connect " + deviceName + " while no ble permission");
+			return false;
+		}
 		if (isDisconnected()) {
 			if (bluetoothAdapter == null) {
 				LOG.debug("BluetoothAdapter not initialized");
@@ -254,7 +264,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 			if (bluetoothGatt != null) {
 				if (bluetoothGatt.connect()) {
-					state = DeviceConnectionState.CONNECTING;
+					setCurrentState(DeviceConnectionState.CONNECTING);
 					return true;
 				} else {
 					return false;
@@ -270,7 +280,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 
 			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
 			LOG.debug("Trying to create new connection");
-			state = DeviceConnectionState.CONNECTING;
+			setCurrentState(DeviceConnectionState.CONNECTING);
 		}
 		return true;
 	}
@@ -278,7 +288,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	@Override
 	public boolean disconnect() {
-		state = DeviceConnectionState.DISCONNECTED;
+		setCurrentState(DeviceConnectionState.DISCONNECTED);
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
 			LOG.debug("BluetoothAdapter not initialized");
 			return false;

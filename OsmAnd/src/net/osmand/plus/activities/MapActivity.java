@@ -8,6 +8,7 @@ import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
 import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.OsmAndLocationSimulation.SimulatedLocation;
 import static net.osmand.plus.firstusage.FirstUsageWizardFragment.FIRST_USAGE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.views.AnimateDraggingMapThread.TARGET_NO_ROTATION;
@@ -65,6 +66,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -451,12 +453,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void createProgressBarForRouting() {
-		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 		RouteCalculationProgressListener progressCallback = new RouteCalculationProgressListener() {
 
 			@Override
 			public void onCalculationStart() {
-				setupRouteCalculationProgressBar(pb);
+				setupRouteCalculationProgressBar(progressBar);
 				mapRouteInfoMenu.routeCalculationStarted();
 				RoutingHelper routingHelper = getRoutingHelper();
 				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
@@ -468,18 +470,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void onUpdateCalculationProgress(int progress) {
 				mapRouteInfoMenu.updateRouteCalculationProgress(progress);
 				dashboardOnMap.updateRouteCalculationProgress(progress);
-				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-					if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
-						pb.setVisibility(View.GONE);
-						return;
-					}
-					if (pb.getVisibility() == View.GONE) {
-						pb.setVisibility(View.VISIBLE);
-					}
-					pb.setProgress(progress);
-					pb.invalidate();
-					pb.requestLayout();
-				}
+				updateProgress(progress);
 			}
 
 			@Override
@@ -530,7 +521,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void onCalculationFinish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
-				pb.setVisibility(View.GONE);
+				AndroidUiHelper.updateVisibility(progressBar, false);
 
 				// for voice navigation. (routingAppMode may have changed.)
 				ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
@@ -558,6 +549,48 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				progressCallback.onCalculationFinish();
 			}
 		});
+		app.getLocationProvider().getLocationSimulation().addListener(new LoadSimulatedLocationsListener() {
+			@Override
+			public void onLocationsStartedLoading() {
+				if (!isRouteBeingCalculated()) {
+					AndroidUiHelper.updateVisibility(progressBar, true);
+				}
+			}
+
+			@Override
+			public void onLocationsLoadingProgress(int progress) {
+				if (!isRouteBeingCalculated()) {
+					updateProgress(progress);
+				}
+			}
+
+			@Override
+			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
+				if (!isRouteBeingCalculated()) {
+					AndroidUiHelper.updateVisibility(progressBar, false);
+				}
+			}
+		});
+	}
+
+	private void updateProgress(int progress) {
+		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
+		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
+			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
+				AndroidUiHelper.updateVisibility(progressBar, false);
+				return;
+			}
+			if (progressBar.getVisibility() == View.GONE) {
+				AndroidUiHelper.updateVisibility(progressBar, true);
+			}
+			progressBar.setProgress(progress);
+			progressBar.invalidate();
+			progressBar.requestLayout();
+		}
+	}
+
+	private boolean isRouteBeingCalculated() {
+		return app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
 	}
 
 	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
@@ -1266,7 +1299,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-		if(mapControlsLayer != null){
+		if (mapControlsLayer != null) {
 			mapControlsLayer.refreshButtons();
 			if (!mapControlsLayer.isMapControlsVisible() && !settings.MAP_EMPTY_STATE_ALLOWED.get()) {
 				showMapControls();
@@ -2125,19 +2158,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getLocaleHelper().setLanguage(this);
 
-		List<Fragment> fragments = getSupportFragmentManager().getFragments();
-		for (Fragment fragment : fragments) {
-			getSupportFragmentManager()
-					.beginTransaction()
-					.detach(fragment)
-					.attach(fragment)
-					.commit();
-		}
+		app.runInUIThread(() -> {
+			List<Fragment> fragments = getSupportFragmentManager().getFragments();
+			for (Fragment fragment : fragments) {
+				getSupportFragmentManager()
+						.beginTransaction()
+						.detach(fragment)
+						.attach(fragment)
+						.commit();
+			}
 
-		DashboardOnMap dashboard = getDashboard();
-		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
-			dashboard.refreshContent(true);
-		}
+			DashboardOnMap dashboard = getDashboard();
+			if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
+				dashboard.refreshContent(true);
+			}
+		});
 	}
 
 	@Override

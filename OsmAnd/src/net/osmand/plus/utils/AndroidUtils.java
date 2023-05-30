@@ -1,6 +1,10 @@
 package net.osmand.plus.utils;
 
 
+import static android.Manifest.permission.BLUETOOTH;
+import static android.Manifest.permission.BLUETOOTH_ADMIN;
+import static android.Manifest.permission.BLUETOOTH_CONNECT;
+import static android.Manifest.permission.BLUETOOTH_SCAN;
 import static android.content.Context.POWER_SERVICE;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
@@ -1249,6 +1253,49 @@ public class AndroidUtils {
 				context,
 				permission
 		) == PackageManager.PERMISSION_GRANTED;
+	}
+
+	public static boolean hasBLEPermission(Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			return hasPermission(context, BLUETOOTH_SCAN) &&
+					hasPermission(context, BLUETOOTH_CONNECT);
+		} else {
+			return hasPermission(context, BLUETOOTH) &&
+					hasPermission(context, BLUETOOTH_ADMIN);
+		}
+	}
+
+	private static final int BLUETOOTH_REQUEST_CODE = 2;
+	private static final int BLUETOOTH_ADMIN_REQUEST_CODE = 2;
+	private static final int BLUETOOTH_SCAN_REQUEST_CODE = 4;
+	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
+
+	public static boolean requestBLEPermissions(@NonNull Activity activity) {
+		boolean hasNeededPermissions = true;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
+				hasNeededPermissions = false;
+				ActivityCompat.requestPermissions(activity, new String[] {BLUETOOTH_SCAN}, BLUETOOTH_SCAN_REQUEST_CODE);
+			}
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_CONNECT)) {
+				hasNeededPermissions = false;
+				ActivityCompat.requestPermissions(
+						activity,
+						new String[] {BLUETOOTH_CONNECT},
+						BLUETOOTH_CONNECT_REQUEST_CODE
+				);
+			}
+		} else {
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH)) {
+				hasNeededPermissions = false;
+				ActivityCompat.requestPermissions(activity, new String[] {BLUETOOTH}, BLUETOOTH_REQUEST_CODE);
+			}
+			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
+				hasNeededPermissions = false;
+				ActivityCompat.requestPermissions(activity, new String[] {BLUETOOTH_ADMIN}, BLUETOOTH_ADMIN_REQUEST_CODE);
+			}
+		}
+		return hasNeededPermissions;
 	}
 
 	@Nullable

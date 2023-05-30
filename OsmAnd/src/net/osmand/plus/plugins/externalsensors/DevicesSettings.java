@@ -31,10 +31,9 @@ class DevicesSettings {
 		DeviceType deviceType;
 		String deviceName;
 		boolean deviceEnabled;
-		boolean deviceWriteGpx;
 
 		public DeviceSettings(@NonNull String deviceId, @NonNull DeviceType deviceType,
-		                      @NonNull String deviceName, boolean deviceEnabled, boolean deviceWriteGpx) {
+		                      @NonNull String deviceName, boolean deviceEnabled) {
 			if (Algorithms.isEmpty(deviceId)) {
 				throw new IllegalArgumentException("Device ID is empty");
 			}
@@ -42,12 +41,11 @@ class DevicesSettings {
 			this.deviceType = deviceType;
 			this.deviceName = deviceName;
 			this.deviceEnabled = deviceEnabled;
-			this.deviceWriteGpx = deviceWriteGpx;
 		}
 
 		public DeviceSettings(@NonNull DeviceSettings settings) {
 			this(settings.deviceId, settings.deviceType, settings.deviceName,
-					settings.deviceEnabled, settings.deviceWriteGpx);
+					settings.deviceEnabled);
 		}
 	}
 

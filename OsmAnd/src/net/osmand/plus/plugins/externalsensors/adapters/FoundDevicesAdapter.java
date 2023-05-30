@@ -30,12 +30,14 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	protected final boolean nightMode;
 	protected List<AbstractDevice<?>> items = new ArrayList<>();
 	protected DeviceClickListener deviceClickListener;
+	protected UiUtilities uiUtils;
 
 	public FoundDevicesAdapter(@NonNull OsmandApplication app, boolean nightMode, DeviceClickListener deviceClickListener) {
 		this.app = app;
 		this.plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		this.nightMode = nightMode;
 		this.deviceClickListener = deviceClickListener;
+		uiUtils = app.getUIUtilities();
 	}
 
 	@NonNull
@@ -43,11 +45,12 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	public FoundDeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.item_external_device, parent, false);
-		return new FoundDeviceViewHolder(view, nightMode);
+		return new FoundDeviceViewHolder(view);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
+		holder.menuIcon.setVisibility(View.VISIBLE);
 		AbstractDevice<?> device = items.get(position);
 		DeviceType deviceType = device.getDeviceType();
 		holder.name.setText(plugin.getDeviceName(device));

@@ -100,6 +100,16 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@NonNull
 	@Override
+	public String requireProcessedFileName() {
+		String fileName = requireFileName();
+		if (fileName.contains("/")) {
+			fileName = fileName.replaceAll("/", "_%_");
+		}
+		return fileName;
+	}
+
+	@NonNull
+	@Override
 	public String getName() {
 		FavoriteGroup singleGroup = getSingleGroup();
 		String groupName = singleGroup != null ? singleGroup.getName() : null;
