@@ -469,18 +469,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void onUpdateCalculationProgress(int progress) {
 				mapRouteInfoMenu.updateRouteCalculationProgress(progress);
 				dashboardOnMap.updateRouteCalculationProgress(progress);
-				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-					if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
-						pb.setVisibility(View.GONE);
-						return;
-					}
-					if (pb.getVisibility() == View.GONE) {
-						pb.setVisibility(View.VISIBLE);
-					}
-					pb.setProgress(progress);
-					pb.invalidate();
-					pb.requestLayout();
-				}
+				updateProgress(progress);
 			}
 
 			@Override
@@ -560,38 +549,48 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		});
 
-		app.getLocationProvider().getLocationSimulation().setLocationsListener(new LoadSimulatedLocationsListener() {
+		app.getLocationProvider().getLocationSimulation().addListener(new LoadSimulatedLocationsListener() {
 			@Override
 			public void onLocationsStartedLoading() {
-				if(!app.getRoutingHelper().isRouteBeingCalculated()){
+				if (!isRouteBeingCalculated()) {
 					pb.setVisibility(View.VISIBLE);
 				}
 			}
 
 			@Override
 			public void onLocationsLoading(int progress) {
-				if(!app.getRoutingHelper().isRouteBeingCalculated()){
-					app.runInUIThread(() -> {
-						if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-							if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
-								pb.setVisibility(View.GONE);
-								return;
-							}
-							if (pb.getVisibility() == View.GONE) {
-								pb.setVisibility(View.VISIBLE);
-							}
-							pb.setProgress(progress);
-							pb.invalidate();
-						}
-					});
+				if (!isRouteBeingCalculated()) {
+					updateProgress(progress);
 				}
 			}
 
 			@Override
 			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
-				pb.setVisibility(View.GONE);
+				if (!isRouteBeingCalculated()) {
+					pb.setVisibility(View.GONE);
+				}
 			}
 		});
+	}
+
+	private void updateProgress(int progress){
+		ProgressBar pb = findViewById(R.id.map_horizontal_progress);
+		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
+			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
+				pb.setVisibility(View.GONE);
+				return;
+			}
+			if (pb.getVisibility() == View.GONE) {
+				pb.setVisibility(View.VISIBLE);
+			}
+			pb.setProgress(progress);
+			pb.invalidate();
+			pb.requestLayout();
+		}
+	}
+
+	private boolean isRouteBeingCalculated() {
+		return app.getRoutingHelper().isRouteBeingCalculated();
 	}
 
 	public void setupRouteCalculationProgressBar(@NonNull ProgressBar pb) {
@@ -819,7 +818,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}

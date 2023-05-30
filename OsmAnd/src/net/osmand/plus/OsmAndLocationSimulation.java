@@ -18,16 +18,13 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -51,7 +48,9 @@ public class OsmAndLocationSimulation {
 	private final OsmAndLocationProvider provider;
 
 	private Thread routeAnimation;
-	private LoadSimulatedLocationsListener locationsListener;
+
+	private List<LoadSimulatedLocationsListener> loadLocationsListeners = new ArrayList<>();
+
 	private LoadSimulatedLocationsTask loadSimulatedLocationsTask;
 	@Nullable
 	private GPXFile gpxFile = null;
@@ -67,11 +66,15 @@ public class OsmAndLocationSimulation {
 	}
 
 	public boolean isRoutePreparing() {
-		return loadSimulatedLocationsTask != null;
+		return loadSimulatedLocationsTask != null && loadSimulatedLocationsTask.getStatus() == AsyncTask.Status.RUNNING;
 	}
 
-	public void setLocationsListener(LoadSimulatedLocationsListener listener) {
-		this.locationsListener = listener;
+	public void addListener(@NonNull LoadSimulatedLocationsListener listener) {
+		loadLocationsListeners = Algorithms.addToList(loadLocationsListeners, listener);
+	}
+
+	public void removeListener(@NonNull LoadSimulatedLocationsListener listener) {
+		loadLocationsListeners = Algorithms.removeFromList(loadLocationsListeners, listener);
 	}
 
 	@Nullable
@@ -146,40 +149,9 @@ public class OsmAndLocationSimulation {
 				builder.show();
 			} else {
 				if (loadSimulatedLocationsTask != null) {
-					loadSimulatedLocationsTask.cancel(true);
+					stopLoadSimulatedLocationsTask();
 				}
-				loadSimulatedLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), new LoadSimulatedLocationsListener() {
-					@Override
-					public void onLocationsStartedLoading() {
-						if (locationsListener != null) {
-							locationsListener.onLocationsStartedLoading();
-						}
-					}
-
-					@Override
-					public void onLocationsLoading(int progress) {
-						if (locationsListener != null) {
-							locationsListener.onLocationsLoading(progress);
-						}
-					}
-
-					@Override
-					public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
-						if (locationsListener != null) {
-							locationsListener.onLocationsLoaded(locations);
-						}
-						if (Algorithms.isEmpty(locations)) {
-							Toast.makeText(app, R.string.animate_routing_route_not_calculated,
-									Toast.LENGTH_LONG).show();
-						} else {
-							startAnimationThread(app, new ArrayList<>(locations), false, 1);
-							if (runnable != null) {
-								runnable.run();
-							}
-						}
-						loadSimulatedLocationsTask = null;
-					}
-				});
+				loadSimulatedLocationsTask = new LoadSimulatedLocationsTask(app.getRoutingHelper().getRoute(), getLoadSimulatedLocationsListener(runnable));
 				loadSimulatedLocationsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		} else {
@@ -187,6 +159,59 @@ public class OsmAndLocationSimulation {
 			if (runnable != null) {
 				runnable.run();
 			}
+		}
+	}
+
+	private LoadSimulatedLocationsListener getLoadSimulatedLocationsListener(Runnable runnable) {
+		return new LoadSimulatedLocationsListener() {
+			@Override
+			public void onLocationsStartedLoading() {
+				notifyLoadLocationsListeners();
+			}
+
+			@Override
+			public void onLocationsLoading(int progress) {
+				notifyLoadLocationsListeners(progress);
+			}
+
+			@Override
+			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
+				notifyLoadLocationsListeners(locations);
+				if (Algorithms.isEmpty(locations)) {
+					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
+							Toast.LENGTH_LONG).show();
+				} else {
+					startAnimationThread(app, new ArrayList<>(locations), false, 1);
+					if (runnable != null) {
+						runnable.run();
+					}
+				}
+				loadSimulatedLocationsTask = null;
+			}
+		};
+	}
+
+	private void notifyLoadLocationsListeners(){
+		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+			listener.onLocationsStartedLoading();
+		}
+	}
+
+	private void notifyLoadLocationsListeners(int progress){
+		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+			listener.onLocationsLoading(progress);
+		}
+	}
+
+	private void notifyLoadLocationsListeners(@Nullable List<SimulatedLocation> locations){
+		for (LoadSimulatedLocationsListener listener : loadLocationsListeners) {
+			listener.onLocationsLoaded(locations);
+		}
+	}
+
+	private void stopLoadSimulatedLocationsTask() {
+		if (loadSimulatedLocationsTask != null && loadSimulatedLocationsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			loadSimulatedLocationsTask.cancel(false);
 		}
 	}
 
@@ -382,7 +407,7 @@ public class OsmAndLocationSimulation {
 		gpxFile = null;
 		routeAnimation = null;
 		if (loadSimulatedLocationsTask != null) {
-			loadSimulatedLocationsTask.cancel(true);
+			stopLoadSimulatedLocationsTask();
 			loadSimulatedLocationsTask = null;
 		}
 		notifyListeners(false);
@@ -458,80 +483,12 @@ public class OsmAndLocationSimulation {
 		return simulatedLocations;
 	}
 
-	private static class LoadSimulatedLocationsTask extends AsyncTask<Void, Void, List<SimulatedLocation>> {
-		private final RouteCalculationResult route;
-		private final LoadSimulatedLocationsListener listener;
-
-		LoadSimulatedLocationsTask(RouteCalculationResult route, LoadSimulatedLocationsListener listener) {
-			this.route = route;
-			this.listener = listener;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			listener.onLocationsStartedLoading();
-		}
-
-		@Override
-		protected List<SimulatedLocation> doInBackground(Void... voids) {
-			List<SimulatedLocation> simulatedLocations = new ArrayList<>();
-			for (Location l : route.getImmutableAllLocations()) {
-				SimulatedLocation sm = new SimulatedLocation(l, SIMULATED_PROVIDER);
-				simulatedLocations.add(sm);
-			}
-			List<RouteSegmentResult> segments = route.getImmutableAllSegments();
-
-			for (int routeInd = 0; routeInd < segments.size(); routeInd++) {
-				RouteSegmentResult s = segments.get(routeInd);
-				boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-				int i = s.getStartPointIndex();
-				if (!isCancelled()) {
-					int progress = ((routeInd + 1) * 100) / segments.size();
-					listener.onLocationsLoading(progress);
-				} else {
-					break;
-				}
-
-				while (i != s.getEndPointIndex() || routeInd == segments.size() - 1) {
-					LatLon point = s.getPoint(i);
-					for (SimulatedLocation sd : simulatedLocations) {
-						LatLon latLon = new LatLon(sd.getLatitude(), sd.getLongitude());
-						if (latLon.equals(point)) {
-							sd.setHighwayType(s.getObject().getHighway());
-							sd.setSpeedLimit(s.getObject().getMaximumSpeed(true));
-							if (s.getObject().hasTrafficLightAt(i)) {
-								sd.setTrafficLight(true);
-							}
-						}
-					}
-					if (i == s.getEndPointIndex()) {
-						break;
-					}
-					i += plus ? 1 : -1;
-				}
-			}
-			return simulatedLocations;
-		}
-
-		@Override
-		protected void onPostExecute(List<SimulatedLocation> simulatedLocations) {
-			listener.onLocationsLoaded(simulatedLocations);
-		}
-
-		@Override
-		protected void onCancelled() {
-			super.onCancelled();
-			listener.onLocationsLoaded(null);
-		}
-	}
-
 	public interface LoadSimulatedLocationsListener {
 		void onLocationsStartedLoading();
 
 		void onLocationsLoading(int progress);
 
-		@Nullable
-		void onLocationsLoaded(List<SimulatedLocation> locations);
+		void onLocationsLoaded(@Nullable List<SimulatedLocation> locations);
 	}
 
 	public static class SimulatedLocation extends Location {
