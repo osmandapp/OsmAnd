@@ -5208,4 +5208,13 @@
     <string name="shared_string_visible_on_map">Видно на карте</string>
     <string name="number_of_tracks">%1$s треков</string>
     <string name="delete_track_folder_dialog_message">Это приведет к удалению папки «%1$s» и всех треков (%2$s) содержащихся в ней.</string>
+    <string name="rendering_attr_lightDetail_description">По умолчанию: название плавучего знака (Light character.group.period), выберите дополнительную информацию о секторах 1-3 или сектор 1,2,3,4,5 светового знака</string>
+    <string name="rendering_attr_lightDetail_name">Навигационные огни</string>
+    <string name="rendering_value_sectors_name">Сектора</string>
+    <string name="rendering_value_sector1_name">Сектор 1</string>
+    <string name="rendering_value_sector2_name">Сектор 2</string>
+    <string name="rendering_value_sector3_name">Сектор 3</string>
+    <string name="rendering_value_sector4_name">Сектор 4</string>
+    <string name="rendering_value_sector5_name">Сектор 5</string>
+    <string name="rendering_value_name_only_name">Только название</string>
 </resources>
