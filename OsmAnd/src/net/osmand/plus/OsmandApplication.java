@@ -486,11 +486,12 @@ public class OsmandApplication extends MultiDexApplication {
 		Resources resources = getResources();
 		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 
+		resources = getBaseContext().getResources();
+		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
-			resources = getBaseContext().getResources();
-			resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
