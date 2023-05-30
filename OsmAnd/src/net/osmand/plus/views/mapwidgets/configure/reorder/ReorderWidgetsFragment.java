@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -31,7 +30,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -72,8 +70,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
 
 	private ApplicationMode selectedAppMode;
@@ -82,10 +78,8 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	private View view;
 	private Toolbar toolbar;
 	private RecyclerView recyclerView;
-
 	private ReorderWidgetsAdapter adapter;
 
-	private boolean nightMode;
 
 	public void setSelectedAppMode(@NonNull ApplicationMode selectedAppMode) {
 		this.selectedAppMode = selectedAppMode;
@@ -98,8 +92,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
 		if (savedInstanceState != null) {
@@ -114,9 +106,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
-
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_reorder_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -348,9 +338,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, selectedPanel.getMergedPanels());
 
 		for (MapWidgetInfo widgetInfo : widgets) {
-			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
-			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)
-					|| enabled && !selectedPanel.isDuplicatesAllowed()) {
+			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)) {
 				continue;
 			}
 
@@ -436,20 +424,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 	private void applyWidgetsPanel(@NonNull List<String> enabledWidgetsIds) {
 		WidgetsPanel currentPanel = dataHolder.getSelectedPanel();
-		if (currentPanel.isDuplicatesAllowed()) {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof ConfigureWidgetsFragment) {
-				((ConfigureWidgetsFragment) fragment).onWidgetsSelectedToAdd(enabledWidgetsIds, currentPanel);
-			}
-		} else {
-			for (String widgetId : enabledWidgetsIds) {
-				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-				if (widgetInfo != null && widgetInfo.widgetPanel != currentPanel) {
-					widgetRegistry.getWidgetsForPanel(widgetInfo.widgetPanel).remove(widgetInfo);
-					widgetRegistry.getWidgetsForPanel(currentPanel).add(widgetInfo);
-					widgetInfo.widgetPanel = currentPanel;
-				}
-			}
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof ConfigureWidgetsFragment) {
+			((ConfigureWidgetsFragment) fragment).onWidgetsSelectedToAdd(enabledWidgetsIds, currentPanel);
 		}
 	}
 

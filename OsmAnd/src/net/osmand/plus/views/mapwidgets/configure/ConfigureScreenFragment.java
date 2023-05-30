@@ -33,7 +33,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -43,7 +42,6 @@ import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -70,14 +68,11 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private MapWidgetRegistry widgetRegistry;
 	private WidgetsSettingsHelper widgetsSettingsHelper;
 	private ApplicationMode selectedAppMode;
 
 	private MapActivity mapActivity;
-	private LayoutInflater themedInflater;
 
 	private AppBarLayout appBar;
 	private Toolbar toolbar;
@@ -87,7 +82,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private ViewGroup actionsCardContainer;
 	private NestedScrollView scrollView;
 
-	private boolean nightMode;
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
@@ -96,8 +90,6 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		mapActivity = (MapActivity) requireMyActivity();
 		selectedAppMode = settings.getApplicationMode();
 		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
@@ -107,9 +99,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_configure_screen, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -167,9 +157,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void setupAppBar() {
-		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-			currentAppBarOffset = verticalOffset;
-		});
+		appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> currentAppBarOffset = verticalOffset);
 		CoordinatorLayout.LayoutParams param = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
 		param.setBehavior(new AppBarLayout.Behavior());
 		setAppBarOffset(currentAppBarOffset);
@@ -287,21 +275,23 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 				})
 				.createButton());
 
-		Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
-		buttonsCard.addView(new ButtonBuilder()
-				.setTitle(getString(R.string.map_3d_mode_action))
-				.setDescription(map3DModeVisibility.getTitle(app))
-				.setIconId(map3DModeVisibility.iconId)
-				.setEnabled(true)
-				.showShortDivider(true)
-				.setClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager fragmentManager = activity.getSupportFragmentManager();
-						Map3DModeBottomSheet.showInstance(fragmentManager, this, selectedAppMode);
-					}
-				})
-				.createButton());
+		if (app.useOpenGlRenderer()) {
+			Map3DModeVisibility map3DModeVisibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(selectedAppMode);
+			buttonsCard.addView(new ButtonBuilder()
+					.setTitle(getString(R.string.map_3d_mode_action))
+					.setDescription(map3DModeVisibility.getTitle(app))
+					.setIconId(map3DModeVisibility.iconId)
+					.setEnabled(true)
+					.showShortDivider(true)
+					.setClickListener(v -> {
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							FragmentManager fragmentManager = activity.getSupportFragmentManager();
+							Map3DModeBottomSheet.showInstance(fragmentManager, this, selectedAppMode);
+						}
+					})
+					.createButton());
+		}
 
 		boolean distanceByTapEnabled = settings.SHOW_DISTANCE_RULER.getModeValue(selectedAppMode);
 		buttonsCard.addView(new ButtonBuilder()

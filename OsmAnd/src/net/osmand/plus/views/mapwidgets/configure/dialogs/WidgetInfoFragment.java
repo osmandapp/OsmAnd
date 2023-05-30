@@ -86,10 +86,8 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			initFromBundle(args);
 		}
 
+		updateNightMode();
 		iconsHelper = new WidgetIconsHelper(app, appMode.getProfileColor(nightMode), nightMode);
-
-		Context context = UiUtilities.getThemedContext(requireContext(), nightMode);
-		LayoutInflater themedInflater = LayoutInflater.from(context);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -437,7 +435,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 				case SETTINGS:
 					return widgetType != null && widgetType.getSettingsFragment(ctx) != null;
 				case DUPLICATE:
-					return widgetType != null && widgetType.isPurchased(ctx) && widgetType.defaultPanel.isDuplicatesAllowed();
+					return widgetType != null && widgetType.isPurchased(ctx);
 				case REMOVE:
 					return true;
 				default:

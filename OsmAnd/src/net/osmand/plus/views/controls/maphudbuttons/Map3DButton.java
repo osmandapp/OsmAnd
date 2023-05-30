@@ -32,6 +32,7 @@ public class Map3DButton extends MapButton {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 		animateDraggingMapThread = mapView.getAnimatedDraggingThread();
+
 		updateButton(!isDefaultElevationAngle());
 		setRoundTransparentBackground();
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
@@ -47,15 +48,21 @@ public class Map3DButton extends MapButton {
 
 	private View.OnClickListener getOnCLickListener(OsmandMapTileView mapView) {
 		return view -> {
-			animateDraggingMapThread.startTilting(isDefaultElevationAngle()
-					? getElevationAngle(mapView.getZoom())
-					: DEFAULT_ELEVATION_ANGLE);
+			boolean defaultElevationAngle = isDefaultElevationAngle();
+			float tiltAngle = defaultElevationAngle ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE;
+			if (!defaultElevationAngle) {
+				settings.MAP_3D_MODE_ELEVATION_ANGLE.set(app.getOsmandMap().getMapView().getElevationAngle());
+			}
+			animateDraggingMapThread.startTilting(tiltAngle);
 			mapView.refreshMap();
 		};
 	}
 
 	private float getElevationAngle(int zoom) {
-		if (zoom < 10) {
+		float map3DModeElevationAngle = settings.MAP_3D_MODE_ELEVATION_ANGLE.get();
+		if (map3DModeElevationAngle != 90) {
+			return map3DModeElevationAngle;
+		} else if (zoom < 10) {
 			return 55;
 		} else if (zoom < 12) {
 			return 50;
@@ -111,9 +118,18 @@ public class Map3DButton extends MapButton {
 	}
 
 	@Override
+	public void refresh() {
+		setMap3DButtonMargin(view);
+	}
+
+	@Override
 	protected boolean shouldShow() {
+		boolean shouldShowFabButton = mapActivity.getWidgetsVisibilityHelper().shouldShowFabButton();
 		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.get();
-		return visibility == Map3DModeVisibility.VISIBLE
+
+		return app.useOpenGlRenderer() &&
+				shouldShowFabButton &&
+				visibility == Map3DModeVisibility.VISIBLE
 				|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE
 				&& !isDefaultElevationAngle());
 	}
@@ -122,7 +138,7 @@ public class Map3DButton extends MapButton {
 		return app.getOsmandMap().getMapView().getElevationAngle() == DEFAULT_ELEVATION_ANGLE;
 	}
 
-	public void onDestroyButton(){
+	public void onDestroyButton() {
 		mapActivity.getMapView().removeElevationListener(elevationListener);
 	}
 }

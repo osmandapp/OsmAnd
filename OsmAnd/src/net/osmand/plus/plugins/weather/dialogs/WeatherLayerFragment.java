@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -31,7 +30,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -44,20 +42,16 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	private static final int TRANSPARENCY_MIN = 0;
 	private static final int TRANSPARENCY_MAX = 100;
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private WeatherBand weatherBand;
 
-	private boolean nightMode;
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		WeatherPlugin plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 		if (plugin != null) {
 			weatherBand = app.getWeatherHelper().getWeatherBand(plugin.getCurrentConfigureBand());
@@ -67,7 +61,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_weather_layer, container, false);
 
 		setupHeader(view);

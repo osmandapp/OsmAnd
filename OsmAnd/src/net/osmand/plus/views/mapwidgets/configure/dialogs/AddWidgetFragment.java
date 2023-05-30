@@ -72,6 +72,7 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
 			initFromBundle(savedInstanceState);
@@ -80,8 +81,6 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 			selectWidgetByDefault();
 		}
 
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
@@ -233,29 +232,19 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		CheckBox checkBox = view.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
 
-		MapActivity mapActivity = requireMapActivity();
-		WidgetsPanel widgetsPanel = widgetsDataHolder.getWidgetsPanel();
-		boolean alreadyEnabled = alreadySelectedWidgetsIds != null
-				? alreadySelectedWidgetsIds.contains(widgetId)
-				: isWidgetEnabled(mapActivity, widgetId);
-		if (alreadyEnabled && !widgetsPanel.isDuplicatesAllowed()) {
-			checkBox.setChecked(true);
+		if (selectedWidgetsIds.containsValue(widgetId)) {
 			view.setSelected(true);
-			view.setOnClickListener(v -> app.showShortToastMessage(R.string.import_duplicates_title));
-		} else {
-			if (selectedWidgetsIds.containsValue(widgetId)) {
-				view.setSelected(true);
-				checkBox.setChecked(true);
-			}
-
-			view.setOnClickListener(v -> {
-				boolean selected = !view.isSelected();
-				view.setSelected(selected);
-				checkBox.setChecked(selected);
-				updateWidgetSelection(order, widgetId, selected);
-				enableDisableApplyButton();
-			});
+			checkBox.setChecked(true);
 		}
+
+		view.setOnClickListener(v -> {
+			boolean selected = !view.isSelected();
+			view.setSelected(selected);
+			checkBox.setChecked(selected);
+			updateWidgetSelection(order, widgetId, selected);
+			enableDisableApplyButton();
+		});
+
 	}
 
 	private boolean isWidgetEnabled(@NonNull MapActivity mapActivity, @NonNull String widgetId) {

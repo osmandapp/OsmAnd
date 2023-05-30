@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -42,6 +43,7 @@ import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.OsmBugsTileProvider;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -236,23 +238,39 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	public void getBugFromPoint(RotatedTileBox tb, PointF point, List<? super OpenStreetNote> res) {
 		List<OpenStreetNote> objects = data.getResults();
-		if (objects != null && view != null) {
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			int rad = getScaledTouchRadius(getApplication(), getRadiusBug(tb));
-			int radius = rad * 3;
-			int small = rad * 3 / 4;
+		if (view != null && !Algorithms.isEmpty(objects) && tb.getZoom() >= startZoom) {
+			MapRendererView mapRenderer = getMapRenderer();
+			float radius = getScaledTouchRadius(getApplication(), getRadiusBug(tb)) * TOUCH_RADIUS_MULTIPLIER;
+			QuadRect screenArea = new QuadRect(
+					point.x - radius,
+					point.y - radius / 3f,
+					point.x + radius,
+					point.y + radius * 2f
+			);
+			List<PointI> touchPolygon31 = null;
+			if (mapRenderer != null) {
+				touchPolygon31 = NativeUtilities.getPolygon31FromScreenArea(mapRenderer, screenArea);
+				if (touchPolygon31 == null) {
+					return;
+				}
+			}
+
 			boolean showClosed = plugin.SHOW_CLOSED_OSM_BUGS.get();
 			try {
 				for (int i = 0; i < objects.size(); i++) {
-					OpenStreetNote n = objects.get(i);
-					if (!n.isOpened() && !showClosed) {
+					OpenStreetNote note = objects.get(i);
+					if (!note.isOpened() && !showClosed) {
 						continue;
 					}
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, n.getLatitude(), n.getLongitude());
-					if (Math.abs(pixel.x - ex) <= radius && Math.abs(pixel.y - ey) <= radius) {
-						radius = small;
-						res.add(n);
+
+					double lat = note.getLatitude();
+					double lon = note.getLongitude();
+
+					boolean add = mapRenderer != null
+							? NativeUtilities.isPointInsidePolygon(lat, lon, touchPolygon31)
+							: tb.isLatLonInsidePixelArea(lat, lon, screenArea);
+					if (add) {
+						res.add(note);
 					}
 				}
 			} catch (IndexOutOfBoundsException e) {

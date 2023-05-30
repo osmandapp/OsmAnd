@@ -26,6 +26,10 @@
 	<color name="app_bar_color_dark">#252727</color>
 	<color name="status_bar_color_light">#e68200</color>
 	<color name="status_bar_color_dark">#232525</color>
+	<color name="toolbar_active_color_light">#237BFF</color>
+	<color name="toolbar_active_color_dark">#0E3A7C</color>
+	<color name="status_bar_active_color_light">#0F6FFF</color>
+	<color name="status_bar_active_color_dark">#0B2F65</color>
 	<color name="material_text_input_layout_bg">#4DCCCCCC</color>
 
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
@@ -515,4 +519,6 @@
 	<color name="track_gradient_end">#F3374D</color>
 
 	<color name="ble_unpaired_device_btn_bg">#14CC70</color>
+	<color name="external_device_empty_icon_bg_night">#121212</color>
+	<color name="external_device_empty_icon_bg_day">#F3F4F6</color>
 </resources>

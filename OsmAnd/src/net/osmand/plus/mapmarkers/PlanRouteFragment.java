@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +75,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	public static final String TAG = "PlanRouteFragment";
 	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
-	private OsmandApplication app;
 	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
 
@@ -87,7 +85,6 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	private int toolbarHeight;
 	private int closedListContainerHeight;
 
-	private boolean nightMode;
 	private boolean portrait;
 	private boolean fullScreen;
 	private boolean isInPlanRouteMode;
@@ -99,9 +96,13 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	private RecyclerView markersRv;
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();
@@ -115,6 +116,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity mapActivity = getMapActivity();
 		markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		planRouteContext = markersHelper.getPlanRouteContext();
@@ -170,14 +172,12 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
 
-		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutRes, null);
+		View view = themedInflater.inflate(layoutRes, null);
 
 		mainView = fullScreen ? view : view.findViewById(R.id.main_view);
 

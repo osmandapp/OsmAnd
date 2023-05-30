@@ -9,24 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.interfaces.IDialogController;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -43,7 +39,6 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.MultiTouchSupport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,7 +85,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		values.add(OsmandSettings.OSMAND_DARK_THEME);
 		values.add(OsmandSettings.OSMAND_LIGHT_THEME);
 
-		if (settings.isSupportSystemDefaultTheme()) {
+		if (settings.isSupportSystemTheme()) {
 			entries.add(getString(R.string.system_default_theme));
 			values.add(OsmandSettings.SYSTEM_DEFAULT_THEME);
 		}
@@ -104,7 +99,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private Drawable getOsmandThemeIcon() {
 		int iconId;
 		ApplicationMode mode = getSelectedAppMode();
-		if (settings.isSystemDefaultThemeUsedForMode(mode)) {
+		if (settings.isSystemThemeUsed(mode)) {
 			iconId = R.drawable.ic_action_android;
 		} else {
 			iconId = settings.isLightContentForMode(mode) ? R.drawable.ic_action_sun : R.drawable.ic_action_moon;

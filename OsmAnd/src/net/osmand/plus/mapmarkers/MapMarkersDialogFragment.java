@@ -55,6 +55,8 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	private static final int GROUPS_POSITION = 1;
 	private static final int HISTORY_MARKERS_POSITION = 2;
 
+	private OsmandApplication app;
+
 	private MapMarkersActiveFragment activeFragment;
 	private MapMarkersGroupsFragment groupsFragment;
 	private MapMarkersHistoryFragment historyFragment;
@@ -72,10 +74,9 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		OsmandApplication app = getMyApplication();
+		app = getMyApplication();
 		lightTheme = app.getSettings().isLightContent();
-		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
+		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 	}
 
 	@NonNull
@@ -98,6 +99,8 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+		lightTheme = app.getSettings().isLightContent();
+		inflater = UiUtilities.getInflater(getContext(), !lightTheme);
 		List<Fragment> fragments = getChildFragmentManager().getFragments();
 		for (Fragment fragment : fragments) {
 			if (fragment instanceof MapMarkersActiveFragment) {

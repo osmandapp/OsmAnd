@@ -1,11 +1,12 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
+import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NAME;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
-import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 
 import android.content.ClipData;
 import android.content.Intent;
@@ -51,8 +52,10 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationList
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -521,6 +524,14 @@ public class IntentHelper {
 			if (intent.hasExtra(TracksFragment.OPEN_TRACKS_TAB)) {
 				String tabName = intent.getStringExtra(TracksFragment.OPEN_TRACKS_TAB);
 				TracksFragment.showInstance(mapActivity.getSupportFragmentManager(), tabName);
+				clearIntent(intent);
+			}
+			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
+				ApplicationMode mode = settings.getApplicationMode();
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				HashMap<ExportSettingsType, List<?>> selectedTypes = (HashMap<ExportSettingsType, List<?>>) intent.getSerializableExtra(SELECTED_TYPES);
+				ExportSettingsFragment.showInstance(manager, mode, selectedTypes, true);
+
 				clearIntent(intent);
 			}
 			if (intent.getExtras() != null) {

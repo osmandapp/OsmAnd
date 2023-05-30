@@ -211,4 +211,6 @@ public abstract class MapButton {
 	}
 
 	public void onDestroyButton() {}
+
+	public void refresh() {}
 }

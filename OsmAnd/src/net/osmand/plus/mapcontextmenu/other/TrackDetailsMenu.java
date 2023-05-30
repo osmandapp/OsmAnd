@@ -25,6 +25,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -147,7 +148,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public void updateMyLocation(View mainView, Location location) {
+	public void updateMyLocation(@NonNull View mainView, @NonNull Location location) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			LineChart chart = mainView.findViewById(R.id.chart);
@@ -155,20 +156,13 @@ public class TrackDetailsMenu {
 			TrkSegment segment = getTrackSegment(chart);
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-			if (ds != null && ds.size() > 0 && gpxItem != null && segment != null) {
+			if (!Algorithms.isEmpty(ds) && gpxItem != null && segment != null) {
 				MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 				RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox();
-				PointF pixel = NativeUtilities.getPixelFromLatLon(mapRenderer, tb, location.getLatitude(), location.getLongitude());
-				int mx = (int) pixel.x;
-				int my = (int) pixel.y;
-				int r = (int) (MAX_DISTANCE_LOCATION_PROJECTION * tb.getPixDensity());
-				Pair<WptPt, WptPt> points = GPXLayer.findLineNearPoint(
-						mapRenderer, tb, segment.points, r, mx, my);
+				LatLon latLon = new LatLon(location.getLatitude(), location.getLongitude());
+				Pair<WptPt, WptPt> points = getTrackLineNearPoint(mapRenderer, tb, latLon, segment);
 				if (points != null) {
-					LatLon latLon = NativeUtilities.getLatLonFromPixel(mapRenderer, tb, mx, my);
-					if (latLon != null) {
-						gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
-					}
+					gpxItem.locationOnMap = GPXLayer.createProjectionPoint(points.first, points.second, latLon);
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
@@ -205,6 +199,24 @@ public class TrackDetailsMenu {
 				}
 				myLocation = location;
 			}
+		}
+	}
+
+	@Nullable
+	private Pair<WptPt, WptPt> getTrackLineNearPoint(@Nullable MapRendererView mapRenderer,
+	                                                 @NonNull RotatedTileBox tileBox,
+	                                                 @NonNull LatLon pointLatLon,
+	                                                 @NonNull TrkSegment segment) {
+		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tileBox, pointLatLon);
+		float radius = (float) (MAX_DISTANCE_LOCATION_PROJECTION * tileBox.getPixDensity());
+
+		if (mapRenderer != null) {
+			List<PointI> polygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, pixel, radius);
+			return polygon31 != null
+					? GPXLayer.findLineInPolygon31(polygon31, segment.points)
+					: null;
+		} else {
+			return GPXLayer.findLineNearPoint(tileBox, segment.points, (int) radius, (int) pixel.x, (int) pixel.y);
 		}
 	}
 

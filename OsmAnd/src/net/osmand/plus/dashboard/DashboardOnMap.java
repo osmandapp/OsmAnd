@@ -31,6 +31,7 @@ import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -218,7 +219,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private class DashboardActionButton {
 		private Drawable icon;
 		private String text;
-		private View.OnClickListener onClickListener;
+		private OnClickListener onClickListener;
 	}
 
 	public DashboardOnMap(MapActivity ma) {
@@ -250,7 +251,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = mapActivity.findViewById(R.id.dashboard);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
-		View.OnClickListener listener = new View.OnClickListener() {
+		OnClickListener listener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				hideDashboard();
@@ -575,8 +576,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
-			if (isCurrentType(DASHBOARD, CONFIGURE_MAP, MAPILLARY, CYCLE_ROUTES, HIKING_ROUTES,
-					TRAVEL_ROUTES, TRANSPORT_LINES, TERRAIN, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES)) {
+			if (isCurrentType(DASHBOARD) || isCurrentTypeHasIndividualFragment()) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
 					addOrUpdateDashboardFragments();
@@ -760,6 +760,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				mapActivity.refreshMapComplete();
 			}
 		}
+	}
+
+	public void refreshContent() {
+		refreshContent(!isCurrentTypeHasIndividualFragment());
 	}
 
 	public void refreshContent(boolean force) {
@@ -1020,6 +1024,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isNoCurrentType(@NonNull DashboardType... types) {
 		return !isCurrentType(types);
+	}
+
+	public boolean isCurrentTypeHasIndividualFragment() {
+		return isCurrentType(
+				CONFIGURE_MAP, MAPILLARY, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
+				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES
+		);
 	}
 
 	void onDetach(DashBaseFragment dashBaseFragment) {

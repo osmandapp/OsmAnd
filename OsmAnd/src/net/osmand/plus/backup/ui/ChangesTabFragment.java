@@ -34,7 +34,6 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -42,7 +41,6 @@ import java.util.List;
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
 		OnBackupSyncListener {
 
-	protected OsmandApplication app;
 	protected BackupHelper backupHelper;
 	protected NetworkSettingsHelper settingsHelper;
 
@@ -58,7 +56,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
 	}
@@ -66,8 +63,8 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		FragmentActivity activity = requireActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
 		View view = themedInflater.inflate(R.layout.fragment_changes_tab, container, false);
 
 		adapter = new ChangesAdapter(app, this, nightMode);

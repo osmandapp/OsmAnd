@@ -17,13 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -38,12 +36,9 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	public static final String KEY_APP_MODE = "app_mode";
 	public static final String KEY_WIDGET_ID = "widget_id";
 
-	protected OsmandApplication app;
-	protected OsmandSettings settings;
 	protected MapWidgetRegistry widgetRegistry;
 	protected ApplicationMode appMode;
 	protected String widgetId;
-	protected boolean nightMode;
 
 	protected View view;
 
@@ -53,10 +48,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
 		widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		nightMode = !settings.isLightContent();
 	}
 
 	protected void initParams(@NonNull Bundle bundle) {
@@ -74,9 +66,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 			initParams(args);
 		}
 
-
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.base_widget_fragment_layout, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

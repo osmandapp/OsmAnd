@@ -140,6 +140,7 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.widgets.IconPopupMenu;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -168,8 +169,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
 	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
 	private TrackDisplayHelper displayHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
 	private SelectedGpxFile selectedGpxFile;
@@ -292,9 +291,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		displayHelper = new TrackDisplayHelper(app);
-		uiUtilities = app.getUIUtilities();
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 
@@ -603,15 +600,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 		searchEditText = toolbarContainer.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_poi_filter);
-		searchEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
+		searchEditText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (pointsCard != null) {
@@ -752,7 +741,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (routeInfoCard != null && routeInfoCard.getView() != null) {
 						reattachCard(cardsContainer, routeInfoCard);
 					} else {
-						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, getLatLon());
+						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, displayHelper.getGpx());
 						cardsContainer.addView(routeInfoCard.build(mapActivity));
 					}
 				}

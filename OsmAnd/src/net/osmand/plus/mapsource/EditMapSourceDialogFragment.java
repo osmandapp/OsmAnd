@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +43,7 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapsource.ExpireTimeBottomSheet.OnExpireValueSetListener;
 import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
@@ -125,6 +125,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		if (savedInstanceState != null) {
 			editedLayerName = savedInstanceState.getString(EDIT_LAYER_NAME_KEY);
 			minZoom = savedInstanceState.getInt(MIN_ZOOM_KEY);
@@ -134,8 +135,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			sqliteDB = savedInstanceState.getBoolean(SQLITE_DB_KEY);
 			fromTemplate = savedInstanceState.getBoolean(FROM_TEMPLATE_KEY);
 		}
-		View root = UiUtilities.getInflater(requireContext(), nightMode)
-				.inflate(R.layout.fragment_edit_map_source, container, false);
+		View root = themedInflater.inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
 		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
@@ -149,14 +149,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		iconHelp.setOnClickListener(view -> onHelpClick());
 		toolbar.setNavigationIcon(closeDrawable);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (wasChanged || fromTemplate) {
-					showExitDialog();
-				} else {
-					dismiss();
-				}
+		toolbar.setNavigationOnClickListener(v -> {
+			if (wasChanged || fromTemplate) {
+				showExitDialog();
+			} else {
+				dismiss();
 			}
 		});
 		int boxStrokeColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light);
@@ -166,12 +163,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		nameEditText = root.findViewById(R.id.name_edit_text);
 		nameEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		nameEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-		nameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					nameEditText.setSelection(nameEditText.getText().length());
-				}
+		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				nameEditText.setSelection(nameEditText.getText().length());
 			}
 		});
 		urlInputLayout = root.findViewById(R.id.url_input_layout);
@@ -179,12 +173,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		urlEditText = root.findViewById(R.id.url_edit_text);
 		urlEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		urlEditText.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-		urlEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					urlEditText.setSelection(urlEditText.getText().length());
-				}
+		urlEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				urlEditText.setSelection(urlEditText.getText().length());
 			}
 		});
 		contentContainer = root.findViewById(R.id.content_container);
@@ -196,12 +187,9 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		saveBtnTitle.setTypeface(FontCache.getRobotoMedium(requireContext()));
 		saveBtnTitle.setTextColor(ContextCompat.getColorStateList(app,
 				nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
-		saveBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				saveTemplate();
-				dismiss();
-			}
+		saveBtn.setOnClickListener(view -> {
+			saveTemplate();
+			dismiss();
 		});
 		ScrollView scrollView = root.findViewById(R.id.scroll_view);
 		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -448,30 +436,27 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private OnClickListener getClickListener(ConfigurationItem item) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				FragmentManager fm = getFragmentManager();
-				boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
-				if (fm != null && !fm.isStateSaved()) {
-					switch (item) {
-						case ZOOM_LEVELS:
-							InputZoomLevelsBottomSheet.showInstance(
-									fm, EditMapSourceDialogFragment.this,
-									R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
-									minZoom, maxZoom, newMapSource
-							);
-							break;
-						case EXPIRE_TIME:
-							ExpireTimeBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, expireTimeMinutes);
-							break;
-						case MERCATOR_PROJECTION:
-							MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
-							break;
-						case STORAGE_FORMAT:
-							TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
-							break;
-					}
+		return view -> {
+			FragmentManager fm = getFragmentManager();
+			boolean newMapSource = Algorithms.isEmpty(editedLayerName) || fromTemplate;
+			if (fm != null && !fm.isStateSaved()) {
+				switch (item) {
+					case ZOOM_LEVELS:
+						InputZoomLevelsBottomSheet.showInstance(
+								fm, EditMapSourceDialogFragment.this,
+								R.string.map_source_zoom_levels, R.string.map_source_zoom_levels_descr,
+								minZoom, maxZoom, newMapSource
+						);
+						break;
+					case EXPIRE_TIME:
+						ExpireTimeBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, expireTimeMinutes);
+						break;
+					case MERCATOR_PROJECTION:
+						MercatorProjectionBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, elliptic);
+						break;
+					case STORAGE_FORMAT:
+						TileStorageFormatBottomSheet.showInstance(fm, EditMapSourceDialogFragment.this, sqliteDB, newMapSource);
+						break;
 				}
 			}
 		};
@@ -519,21 +504,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		this.template = template;
 	}
 
-	class MapSourceTextWatcher implements TextWatcher {
+	class MapSourceTextWatcher extends SimpleTextWatcher {
 		private final TextInputLayout relatedInputLayout;
 
 		public MapSourceTextWatcher(TextInputLayout textInputLayout) {
 			this.relatedInputLayout = textInputLayout;
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-		}
-
-		@Override
-		public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
 		}
 
 		@Override

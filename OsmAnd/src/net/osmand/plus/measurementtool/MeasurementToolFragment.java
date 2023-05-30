@@ -165,7 +165,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public @interface MeasurementToolMode {
 	}
 
-	private OsmandApplication app;
 	private MapDisplayPositionManager mapDisplayPositionManager;
 
 	private String previousToolBarTitle = "";
@@ -203,7 +202,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private int modes;
 
 	private boolean portrait;
-	private boolean nightMode;
 
 	private MeasurementEditingContext editingCtx;
 	private GraphDetailsMenu detailsMenu;
@@ -282,9 +280,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		mapDisplayPositionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 		if (editingCtx == null) {
 			editingCtx = new MeasurementEditingContext(app);
@@ -304,6 +306,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity == null) {
 			return null;
 		}
+
+		updateNightMode();
 
 		MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
@@ -339,14 +343,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		measurementLayer.setEditingCtx(editingCtx);
 
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		int btnWidth = getResources().getDimensionPixelOffset(R.dimen.gpx_group_button_width);
 
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
-		View view = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.fragment_measurement_tool, container, false);
+		View view = themedInflater.inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
 		detailsMenu = new GraphDetailsMenu();
@@ -1706,7 +1708,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		mapDisplayPositionManager.updateMapDisplayPosition(true);
 	}
 
-	@Nullable @Override
+	@Nullable
+	@Override
 	public Integer getMapDisplayPosition() {
 		if (infoExpanded) {
 			return portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT;

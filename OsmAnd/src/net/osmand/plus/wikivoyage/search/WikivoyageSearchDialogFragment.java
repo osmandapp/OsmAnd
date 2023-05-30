@@ -3,7 +3,6 @@ package net.osmand.plus.wikivoyage.search;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.wikivoyage.WikiBaseDialogFragment;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
@@ -50,6 +50,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		searchHelper = new WikivoyageSearchHelper(app);
 
 		View mainView = inflate(R.layout.fragment_wikivoyage_search_dialog, container);
@@ -62,17 +63,7 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 		searchEt = toolbar.findViewById(R.id.searchEditText);
 		searchEt.setHint(R.string.shared_string_search);
-		searchEt.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-			}
-
+		searchEt.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				String newQuery = s.toString();

@@ -19,7 +19,6 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -103,6 +102,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -233,22 +233,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		super.onCreate(savedInstanceState);
 		FragmentActivity activity = requireActivity();
 		app = getMyApplication();
-		nightMode = !app.getSettings().isLightContent();
 		navigationInfo = new NavigationInfo(app);
 		accessibilityAssistant = new AccessibilityAssistant(activity);
-
-		boolean isLightTheme = app.getSettings().isLightContent();
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
+		setStyle(STYLE_NO_FRAME, isNightMode() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 	}
 
 	@Override
 	@SuppressLint("PrivateResource, ValidFragment")
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
+		nightMode = isNightMode();
 		MapActivity mapActivity = getMapActivity();
 		UiUtilities iconsCache = app.getUIUtilities();
-		View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		View view = themedInflater.inflate(R.layout.search_dialog_fragment, container, false);
 
 		toolbarController = new QuickSearchToolbarController();
 		toolbarController.setOnBackButtonClickListener(v ->
@@ -553,15 +551,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 		searchEditText.addTextChangedListener(
-				new TextWatcher() {
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
-					}
-
+				new SimpleTextWatcher() {
 					@Override
 					public void afterTextChanged(Editable s) {
 						String newQueryText = s.toString();
@@ -2281,6 +2271,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public boolean isNightMode() {
+		return !app.getSettings().isLightContent();
+	}
+
 	public interface SearchResultListener {
 		void searchStarted(SearchPhrase phrase);
 
@@ -2431,19 +2425,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(R.string.confirmation_to_delete_history_items)
-					.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Fragment parentFragment = getParentFragment();
-							if (parentFragment instanceof QuickSearchDialogFragment) {
-								QuickSearchDialogFragment searchDialogFragment = (QuickSearchDialogFragment) parentFragment;
-								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(searchDialogFragment.getMyApplication());
-								for (QuickSearchListItem searchListItem : selectedItems) {
-									helper.remove(searchListItem.getSearchResult().object);
-								}
-								searchDialogFragment.reloadHistory();
-								searchDialogFragment.enableSelectionMode(false, -1);
+					.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+						Fragment parentFragment = getParentFragment();
+						if (parentFragment instanceof QuickSearchDialogFragment) {
+							QuickSearchDialogFragment searchDialogFragment = (QuickSearchDialogFragment) parentFragment;
+							SearchHistoryHelper helper = SearchHistoryHelper.getInstance(searchDialogFragment.getMyApplication());
+							for (QuickSearchListItem searchListItem : selectedItems) {
+								helper.remove(searchListItem.getSearchResult().object);
 							}
+							searchDialogFragment.reloadHistory();
+							searchDialogFragment.enableSelectionMode(false, -1);
 						}
 					})
 					.setNegativeButton(R.string.shared_string_no, null);

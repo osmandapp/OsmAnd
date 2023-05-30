@@ -54,8 +54,8 @@
     <string name="pause_navigation">Navigation pausieren</string>
     <string name="keep_navigation_service">Aktiv erhalten</string>
     <string name="stop_navigation_service">Beenden</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen.</string>
+    <string name="rendering_attr_alpineHiking_name">Alpine Tourenskala</string>
+    <string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC/CAI-Wanderskala darstellen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Wanderrouten</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Wandersymbole anzeigen (OSMC).</string>
     <string name="arrival_distance_factor_early">Früh</string>
@@ -4772,7 +4772,7 @@
     <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe \"%1$s\" und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
-    <string name="display_position">Anzeigeposition</string>
+    <string name="display_position">Positionsanzeige</string>
     <string name="how_to_use">Anleitung:</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Groß</string>
@@ -5086,7 +5086,7 @@
 \n
 \n• Neues Moped-Profil
 \n
-\n• Neue Option \"Automatisch\" bei \"Anzeigeposition\" hinzugefügt
+\n• Neue Option \"Automatisch\" bei \"Positionsanzeige\" hinzugefügt
 \n
 \n• Kartengesten für Neigen, Zoomen und Drehen korrigiert
 \n
@@ -5100,11 +5100,11 @@
     <string name="selected_value">Ausgewählter Wert</string>
     <string name="shared_string_nearest">Am nächsten</string>
     <string name="app_mode_moped">Moped</string>
-    <string name="generate_slope_from_3d_maps">Erzeugen von Hangneigungskarten aus 3D-Karten</string>
-    <string name="disable_vertex_hillshade_3d">Vertex-Relief in 3D deaktivieren</string>
+    <string name="generate_slope_from_3d_maps">Erzeugen von Hangrasterkarten aus 3D-Karten</string>
+    <string name="disable_vertex_hillshade_3d">Eckpunkt-Schummerung in 3D deaktivieren</string>
     <string name="enable_3d_maps">3D-Karten aktivieren</string>
-    <string name="test_heightmap">Höhenkarte testen</string>
-    <string name="generate_hillshade_from_3d_maps">Erzeugen von gerasterten Reliefkarten aus 3D-Karten</string>
+    <string name="test_heightmap">Test-Höhenkarte</string>
+    <string name="generate_hillshade_from_3d_maps">Schummerungs-Rasterkarten aus 3D-Karten erzeugen</string>
     <string name="app_mode_climbing">Klettern</string>
     <string name="offline_weather_forecast">Offline-Wettervorhersage</string>
     <string name="offline_weather_forecast_desc">Sie können die Wettervorhersage für 7 Tage herunterladen.</string>
@@ -5210,4 +5210,24 @@
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Klein</string>
     <string name="rendering_value_name_only_name">Nur Name</string>
+    <string name="poi_categories">OVI-Kategorien</string>
+    <string name="no_poi_for_category">OVI nicht gefunden</string>
+    <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_2d_mode_action">2D Modus</string>
+    <string name="map_3d_mode_action">3D Modus</string>
+    <string name="map_3d_mode_hint">Gedrückt halten um den Knopf zu verschieben.</string>
+    <string name="visible_in_3d_mode">Sichtbar im 3D Modus</string>
+    <string name="rendering_value_caiScale_name">CAI Skala</string>
+    <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
+    <string name="delete_folder_question">Ordner löschen\?</string>
+    <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">Dieser Ordner hat noch keinen Track.</string>
+    <string name="tracks_empty_folder">Leerer Ordner</string>
+    <string name="track_not_recorded">Nicht aufgezeichnet</string>
+    <string name="shared_string_new_track">Neue Strecke</string>
+    <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
+    <string name="delete_track_folder_dialog_message">Dies löscht den Ordner \"%1$s\" und alle darin enthaltenen Tracks (%2$s).</string>
+    <string name="delete_folder">Ordner löschen</string>
+    <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
 </resources>

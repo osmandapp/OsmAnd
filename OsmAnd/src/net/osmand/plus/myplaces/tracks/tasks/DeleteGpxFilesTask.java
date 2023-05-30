@@ -9,17 +9,15 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
 
-public class DeleteGpxFilesTask extends AsyncTask<GPXInfo, GPXInfo, String> {
+public class DeleteGpxFilesTask extends AsyncTask<File, File, String> {
 
 	private final OsmandApplication app;
 	@Nullable
 	private final GpxFilesDeletionListener listener;
-	private boolean shouldUpdateFolders;
 
 	public DeleteGpxFilesTask(@NonNull OsmandApplication app, @Nullable GpxFilesDeletionListener listener) {
 		this.app = app;
@@ -27,21 +25,16 @@ public class DeleteGpxFilesTask extends AsyncTask<GPXInfo, GPXInfo, String> {
 	}
 
 	@Override
-	protected String doInBackground(GPXInfo... params) {
+	protected String doInBackground(File... params) {
 		int count = 0;
 		int total = 0;
-		File gpxPath = app.getAppPath(GPX_INDEX_DIR);
-		for (GPXInfo info : params) {
-			if (!isCancelled() && (info.getGpxFile() == null || !info.isCurrentRecordingTrack())) {
+		for (File file : params) {
+			if (!isCancelled() && (file.exists())) {
 				total++;
-				boolean successful = FileUtils.removeGpxFile(app, info.getFile());
+				boolean successful = FileUtils.removeGpxFile(app, file);
 				if (successful) {
-					File parentFile = info.getFile().getParentFile();
-					if (parentFile != null && !parentFile.equals(gpxPath)) {
-						shouldUpdateFolders |= parentFile.delete();
-					}
 					count++;
-					publishProgress(info);
+					publishProgress(file);
 				}
 			}
 		}
@@ -49,7 +42,7 @@ public class DeleteGpxFilesTask extends AsyncTask<GPXInfo, GPXInfo, String> {
 	}
 
 	@Override
-	protected void onProgressUpdate(GPXInfo... values) {
+	protected void onProgressUpdate(File... values) {
 		if (listener != null) {
 			listener.onGpxFilesDeleted(values);
 		}
@@ -67,16 +60,20 @@ public class DeleteGpxFilesTask extends AsyncTask<GPXInfo, GPXInfo, String> {
 		app.showToastMessage(result);
 
 		if (listener != null) {
-			listener.onGpxFilesDeletionFinished(shouldUpdateFolders);
+			listener.onGpxFilesDeletionFinished();
 		}
 	}
 
-
 	public interface GpxFilesDeletionListener {
-		void onGpxFilesDeletionStarted();
+		default void onGpxFilesDeletionStarted() {
 
-		void onGpxFilesDeleted(GPXInfo... values);
+		}
 
-		void onGpxFilesDeletionFinished(boolean shouldUpdateFolders);
+		default void onGpxFilesDeleted(File... values) {
+		}
+
+		default void onGpxFilesDeletionFinished() {
+
+		}
 	}
 }

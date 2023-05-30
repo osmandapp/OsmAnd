@@ -17,6 +17,7 @@ import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
 import android.annotation.SuppressLint;
+import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -28,7 +29,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 import net.osmand.IndexConstants;
 import net.osmand.Period;
@@ -101,6 +101,7 @@ import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -127,6 +128,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -850,8 +852,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
-	public final OsmandPreference<Boolean> SHOW_ELEVATION_PROFILE_WIDGET = new BooleanPreference(this, "show_elevation_profile_widget", false).makeProfile();
-	public final OsmandPreference<Boolean> SHOW_SLOPES_ON_ELEVATION_WIDGET = new BooleanPreference(this, "show_slopes_on_elevation_widget", false).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -1490,12 +1490,6 @@ public class OsmandSettings {
 	}
 
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference(this, "show_cameras", false).makeProfile().cache();
-	public final CommonPreference<Boolean> SHOW_LANES = new BooleanPreference(this, "show_lanes", false).makeProfile().cache();
-
-	{
-		SHOW_LANES.setModeDefaultValue(ApplicationMode.CAR, true);
-		SHOW_LANES.setModeDefaultValue(ApplicationMode.BICYCLE, true);
-	}
 
 	public final OsmandPreference<Boolean> SHOW_WPT = new BooleanPreference(this, "show_gpx_wpt", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORITES = new BooleanPreference(this, "show_nearby_favorites", false).makeProfile().cache();
@@ -1839,17 +1833,40 @@ public class OsmandSettings {
 
 	public final ListStringPreference CUSTOM_WIDGETS_KEYS = (ListStringPreference) new ListStringPreference(this, "custom_widgets_keys", null, WIDGET_SEPARATOR).makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS_BAR_WIDGET = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
-
 	public final OsmandPreference<Integer> DISPLAYED_MARKERS_WIDGETS_COUNT = new IntPreference(this, "displayed_markers_widgets_count", 1).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_CURRENT_LOCATION_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", false).makeProfile().cache();
-	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_CURRENT_LOCATION_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", true).makeProfile().cache();
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
-	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;");
+	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
+	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").cache();
+
+	@NonNull
+	public Map<String, String> getTrackTabsSortModes() {
+		Map<String, String> tabsSortModes = new HashMap<>();
+
+		List<String> sortModes = TRACKS_TABS_SORT_MODES.getStringsList();
+		if (!Algorithms.isEmpty(sortModes)) {
+			for (String sortMode : sortModes) {
+				String[] tabSortMode = sortMode.split(",,");
+				if (tabSortMode.length == 2) {
+					tabsSortModes.put(tabSortMode[0], tabSortMode[1]);
+				}
+			}
+		}
+		return tabsSortModes;
+	}
+
+	public void saveTabsSortModes(@NonNull Map<String, String> tabsSortModes) {
+		List<String> sortTypes = new ArrayList<>();
+		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
+			sortTypes.add(entry.getKey() + ",," + entry.getValue());
+		}
+		TRACKS_TABS_SORT_MODES.setStringsList(sortTypes);
+	}
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
@@ -2652,6 +2669,8 @@ public class OsmandSettings {
 
 	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
 
+	public final CommonPreference<Float> MAP_3D_MODE_ELEVATION_ANGLE = new FloatPreference(this, "map_3d_mode_elevation_angle", 90).makeProfile();
+
 	/**
 	 * the location of a parked car
 	 */
@@ -3018,22 +3037,22 @@ public class OsmandSettings {
 		SHOW_STREET_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
-	public static final int OSMAND_DARK_THEME = 0;
-	public static final int OSMAND_LIGHT_THEME = 1;
-	public static final int SYSTEM_DEFAULT_THEME = 2;
-
 	public final CommonPreference<Integer> SEARCH_TAB =
 			new IntPreference(this, "SEARCH_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> FAVORITES_TAB =
 			new IntPreference(this, "FAVORITES_TAB", 0).makeGlobal().cache();
 
+	public static final int OSMAND_DARK_THEME = 0;
+	public static final int OSMAND_LIGHT_THEME = 1;
+	public static final int SYSTEM_DEFAULT_THEME = 2;
+
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference(this, "osmand_theme", isSupportSystemDefaultTheme() ? SYSTEM_DEFAULT_THEME : OSMAND_LIGHT_THEME) {
+			new IntPreference(this, "osmand_theme", isSupportSystemTheme() ? SYSTEM_DEFAULT_THEME : OSMAND_LIGHT_THEME) {
 				@Override
 				public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 					Integer theme = parseString(json.getString(getId()));
-					if (theme == SYSTEM_DEFAULT_THEME && !isSupportSystemDefaultTheme()) {
+					if (theme == SYSTEM_DEFAULT_THEME && !isSupportSystemTheme()) {
 						theme = OSMAND_LIGHT_THEME;
 					}
 					setModeValue(appMode, theme);
@@ -3051,28 +3070,32 @@ public class OsmandSettings {
 		return isLightContentForMode(APPLICATION_MODE.get());
 	}
 
-	public boolean isLightContentForMode(ApplicationMode mode) {
-		if (isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME) {
-			return isLightSystemDefaultTheme();
+	public boolean isLightContentForMode(ApplicationMode appMode) {
+		if (isSystemThemeUsed(appMode)) {
+			return isLightSystemTheme();
 		}
-		return OSMAND_THEME.getModeValue(mode) != OSMAND_DARK_THEME;
+		return OSMAND_THEME.getModeValue(appMode) != OSMAND_DARK_THEME;
 	}
 
-	public boolean isLightSystemDefaultTheme() {
+	public boolean isLightSystemTheme() {
+		UiModeManager uiModeManager = (UiModeManager) ctx.getSystemService(Context.UI_MODE_SERVICE);
+		int mode = uiModeManager.getNightMode();
+		if (mode == UiModeManager.MODE_NIGHT_YES) {
+			return false;
+		}
+		if (mode == UiModeManager.MODE_NIGHT_NO) {
+			return true;
+		}
 		Configuration config = ctx.getResources().getConfiguration();
-		int systemNightModeState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-		return systemNightModeState != Configuration.UI_MODE_NIGHT_YES;
+		int systemNightState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		return systemNightState != Configuration.UI_MODE_NIGHT_YES;
 	}
 
-	public boolean isSystemDefaultThemeUsed() {
-		return isSystemDefaultThemeUsedForMode(APPLICATION_MODE.get());
+	public boolean isSystemThemeUsed(@NonNull ApplicationMode appMode) {
+		return isSupportSystemTheme() && OSMAND_THEME.getModeValue(appMode) == SYSTEM_DEFAULT_THEME;
 	}
 
-	public boolean isSystemDefaultThemeUsedForMode(ApplicationMode mode) {
-		return isSupportSystemDefaultTheme() && OSMAND_THEME.getModeValue(mode) == SYSTEM_DEFAULT_THEME;
-	}
-
-	public boolean isSupportSystemDefaultTheme() {
+	public boolean isSupportSystemTheme() {
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
 	}
 

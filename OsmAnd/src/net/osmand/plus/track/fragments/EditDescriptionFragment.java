@@ -36,7 +36,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.dialog_edit_gpx_description, container, false);
 
 		etText = view.findViewById(R.id.description);
@@ -64,7 +64,7 @@ public class EditDescriptionFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 

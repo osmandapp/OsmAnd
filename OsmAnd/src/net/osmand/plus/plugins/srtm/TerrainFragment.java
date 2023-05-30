@@ -35,7 +35,6 @@ import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -48,7 +47,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -71,14 +69,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	public static final String TAG = TerrainFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TerrainFragment.class.getSimpleName());
 
-	private OsmandApplication app;
-	private UiUtilities uiUtilities;
-	private OsmandSettings settings;
 	private SRTMPlugin srtmPlugin;
-	private boolean nightMode;
 	private boolean terrainEnabled;
 
-	private int colorProfile;
+	private int profileColor;
 
 	private TextView downloadDescriptionTv;
 	private TextView transparencyValueTv;
@@ -120,7 +114,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		@Override
 		public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
 			List<Float> values = slider.getValues();
-			if (values.size() > 0) {
+			if (values.size() > 1) {
 				minZoomTv.setText(String.valueOf(values.get(0).intValue()));
 				maxZoomTv.setText(String.valueOf(values.get(1).intValue()));
 				srtmPlugin.setTerrainZoomValues(values.get(0).intValue(), values.get(1).intValue(), srtmPlugin.getTerrainMode());
@@ -140,20 +134,22 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = requireMyApplication();
-		settings = app.getSettings();
-		uiUtilities = app.getUIUtilities();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		colorProfile = settings.getApplicationMode().getProfileColor(nightMode);
-		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 		super.onCreate(savedInstanceState);
+		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View root = UiUtilities.getInflater(inflater.getContext(), nightMode).inflate(R.layout.fragment_terrain, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_terrain, container, false);
+		profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 
 		showHideTopShadow(root);
 
@@ -203,8 +199,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		slopeBtn.setOnClickListener(this);
 		slopeBtn.setText(R.string.shared_string_slope);
 
-		UiUtilities.setupSlider(transparencySlider, nightMode, colorProfile);
-		UiUtilities.setupSlider(zoomSlider, nightMode, colorProfile, true);
+		UiUtilities.setupSlider(transparencySlider, nightMode, profileColor);
+		UiUtilities.setupSlider(zoomSlider, nightMode, profileColor, true);
 
 		transparencySlider.addOnChangeListener(transparencySliderChangeListener);
 		zoomSlider.addOnChangeListener(zoomSliderChangeListener);
@@ -241,7 +237,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			String transparency = transparencyValue + "%";
 			int minZoom = srtmPlugin.getTerrainMinZoom();
 			int maxZoom = srtmPlugin.getTerrainMaxZoom();
-			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, colorProfile));
+			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, profileColor));
 			stateTv.setText(R.string.shared_string_enabled);
 			transparencySlider.setValue(transparencyValue);
 			transparencyValueTv.setText(transparency);
@@ -298,10 +294,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupClickableText(TextView textView,
-									String text,
-									String clickableText,
-									String url,
-									boolean medium) {
+	                                String text,
+	                                String clickableText,
+	                                String url,
+	                                boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
@@ -412,16 +408,16 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
 										if (downloadThread.isDownloading(indexItem)) {
 											downloadThread.cancelDownload(indexItem);
-												item.setProgress(ContextMenuItem.INVALID_ID);
-												item.setLoading(false);
-												item.setSecondaryIcon(R.drawable.ic_action_import);
-												uiAdapter.onDataSetChanged();
+											item.setProgress(ContextMenuItem.INVALID_ID);
+											item.setLoading(false);
+											item.setSecondaryIcon(R.drawable.ic_action_import);
+											uiAdapter.onDataSetChanged();
 										} else {
 											new DownloadValidationManager(app).startDownload(mapActivity1, indexItem);
-												item.setProgress(ContextMenuItem.INVALID_ID);
-												item.setLoading(true);
-												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-												uiAdapter.onDataSetChanged();
+											item.setProgress(ContextMenuItem.INVALID_ID);
+											item.setLoading(true);
+											item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+											uiAdapter.onDataSetChanged();
 										}
 									}
 									return false;

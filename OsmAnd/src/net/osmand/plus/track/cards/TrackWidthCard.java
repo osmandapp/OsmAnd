@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,9 +19,8 @@ import com.google.android.material.slider.Slider;
 import com.google.android.material.slider.Slider.OnSliderTouchListener;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.AppearanceListItem;
@@ -35,7 +35,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class TrackWidthCard extends MapBaseCard {
+public class TrackWidthCard extends BaseCard {
 
 	private static final String CUSTOM_WIDTH = "custom_width";
 	private static final int CUSTOM_WIDTH_MIN = 1;
@@ -50,9 +50,9 @@ public class TrackWidthCard extends MapBaseCard {
 	private View sliderContainer;
 	private RecyclerView groupRecyclerView;
 
-	public TrackWidthCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo,
+	public TrackWidthCard(@NonNull FragmentActivity activity, @NonNull TrackDrawInfo trackDrawInfo,
 	                      @NonNull OnNeedScrollListener onNeedScrollListener) {
-		super(mapActivity);
+		super(activity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.onNeedScrollListener = onNeedScrollListener;
 	}
@@ -198,12 +198,12 @@ public class TrackWidthCard extends MapBaseCard {
 
 	private void setGpxWidth(String width) {
 		trackDrawInfo.setWidth(width);
-		mapActivity.refreshMap();
+		app.getOsmandMap().getMapView().refreshMap();
 	}
 
 	private void setShowArrows(boolean showArrows) {
 		trackDrawInfo.setShowArrows(showArrows);
-		mapActivity.refreshMap();
+		app.getOsmandMap().getMapView().refreshMap();
 	}
 
 	private void scrollMenuToSelectedItem() {

@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.MISC;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
+
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,22 +11,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.CompoundButtonCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -33,10 +38,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
-import static net.osmand.view.ThreeStateCheckbox.State.MISC;
-import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
@@ -362,11 +363,11 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 	interface OnItemSelectedListener {
 
-		void onItemsSelected(ExportSettingsType type, List<?> selectedItems);
+		void onItemsSelected(@NonNull ExportSettingsType type, List<?> selectedItems);
 
-		void onCategorySelected(ExportSettingsCategory type, boolean selected);
+		void onCategorySelected(@NonNull ExportSettingsCategory type, boolean selected);
 
-		void onTypeClicked(ExportSettingsType type);
+		void onTypeClicked(@NonNull ExportSettingsType type);
 
 	}
 }

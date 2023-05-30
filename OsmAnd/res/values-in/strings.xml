@@ -3998,7 +3998,7 @@
     <string name="live_update_frequency_week_variant">Pembaruan peta akan diperiksa setiap minggu.</string>
     <string name="transfers_size">%1$d transfer</string>
     <string name="topo_render_descr">Untuk hiking, trekking, dan bersepeda alam. Dapat dibaca di luar ruangan. Jalan yang kontras dan objek alami, jenis rute yang berbeda, opsi garis kontur lanjutan, detail tambahan. Menyesuaikan Integritas permukaan membedakan kualitas jalan. Tidak ada mode malam.</string>
-    <string name="default_render_descr">Gaya penggunaan umum. Kota padat ditampilkan dengan bersih. Menampilkan garis kontur, rute, kualitas permukaan, pembatasan akses, perisai jalan, perenderan jalur sesuai dengan skala SAC, item olahraga arung.</string>
+    <string name="default_render_descr">Gaya penggunaan umum. Kota padat ditampilkan dengan bersih. Menampilkan garis kontur, rute, kualitas permukaan, pembatasan akses, perisai jalan, perenderan jalur sesuai dengan skala SAC/CAI, item olahraga arung.</string>
     <string name="touring_view_render_descr">Gaya tur dengan kontras tinggi dan detail maksimum. Mencakup semua opsi gaya bawaan OsmAnd, sekaligus menampilkan sedetail mungkin, khususnya jalan, jalur, dan cara lain untuk bepergian. Perbedaan \"atlas tur\" yang jelas antara jenis jalan. Cocok untuk penggunaan siang, malam, dan luar ruangan.</string>
     <string name="access_smart_autoannounce">Pengumuman otomatis pintar</string>
     <string name="access_autoannounce_period">Periode pengumuman otomatis</string>
@@ -4524,7 +4524,7 @@
     <string name="speak_descr">Atur pengumuman nama jalan, peringatan lalu lintas (pemberhentian paksa, polisi tidur), peringatan kamera kecepatan, dan batas kecepatan.</string>
     <string name="intermediate_items_sort_return">Urutan tujuan perantara yang dioptimalkan dalam perjalanan ke tujuan.</string>
     <string name="use_kalman_filter_compass_descr">Mengurangi kebisingan dalam pembacaan kompas tetapi menambahkan inersia.</string>
-    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine</string>
     <string name="rendering_attr_noAdminboundaries_description">Menekan tampilan batas wilayah (tingkat admin 5–9).</string>
     <string name="gps_not_available">Harap aktifkan GPS di pengaturan</string>
     <string name="gpx_monitoring_disabled_warn">Catat trek menggunakan widget GPX atau melalui pengaturan \'Perekaman perjalanan\'.</string>
@@ -4666,7 +4666,7 @@
     <string name="ending_point_too_far">Titik akhir terlalu jauh dari jalan terdekat.</string>
     <string name="recording_playing">Audio dari rekaman yang ditentukan sedang diputar.
 \n%1$s</string>
-    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC.</string>
+    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC/CAI.</string>
     <string name="non_optimal_route_calculation">Hitung kemungkinan rute yang tidak optimal untuk jarak jauh</string>
     <string name="osmand_extended_description_part2">Navigasi GPS
 \n - Pilih antara mode luring (tanpa biaya roaming saat Anda berada di luar negeri) atau daring (lebih cepat)
@@ -5214,4 +5214,11 @@
     <string name="external_device_blood_pressure">Tekanan darah</string>
     <string name="poi_categories">Kategori POI</string>
     <string name="no_poi_for_category">POI tidak ditemukan</string>
+    <string name="map_2d_mode_action">Mode 2D</string>
+    <string name="visible_in_3d_mode">Terlihat dalam mode 3D</string>
+    <string name="map_3d_mode_action">Mode 3D</string>
+    <string name="map_3d_mode_hint">Ketuk lama pada tombol memungkinkan mengubah posisi tombol.</string>
+    <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
+    <string name="rendering_value_sacScale_name">Skala SAC</string>
+    <string name="rendering_value_caiScale_name">Skala CAI</string>
 </resources>

@@ -27,7 +27,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupError;
@@ -49,7 +48,6 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurchaseListener,
@@ -60,7 +58,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	private static final String DIALOG_TYPE_KEY = "dialog_type_key";
 	private static final String CHANGES_VISIBLE_KEY = "changes_visible_key";
 
-	private OsmandApplication app;
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
@@ -68,7 +65,6 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 
 	private LoginDialogType dialogType;
 	private boolean changesVisible;
-	private boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -86,10 +82,8 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = !requireMyApplication().getSettings().isLightContent();
 
 		if (savedInstanceState != null) {
 			changesVisible = savedInstanceState.getBoolean(CHANGES_VISIBLE_KEY);
@@ -102,7 +96,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.osmand_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

@@ -6,22 +6,18 @@ import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -34,23 +30,14 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = CycleRoutesFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
-	private boolean nightMode;
-
 	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) requireMyActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
 		showHideTopShadow(view);
@@ -86,28 +73,32 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		button.setChecked(pref.get());
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, button);
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				pref.set(!pref.get());
-				View view = getView();
-				if (view != null) {
-					setupHeader(view);
-					setupTypesCard(view);
-				}
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.updateLayers();
-				}
+		container.setOnClickListener(v -> {
+			pref.set(!pref.get());
+			if (!pref.get()) {
+				getCycleNodeNetworkPreference().set(false);
+			}
+			View mainView = getView();
+			if (mainView != null) {
+				setupHeader(mainView);
+				setupTypesCard(mainView);
+			}
+			MapActivity mapActivity = (MapActivity) getMyActivity();
+			if (mapActivity != null) {
+				mapActivity.refreshMapComplete();
+				mapActivity.updateLayers();
 			}
 		});
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.secondary_icon), false);
 	}
 
+	private CommonPreference<Boolean> getCycleNodeNetworkPreference() {
+		return settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
+	}
+
 	private void setupTypesCard(@NonNull View view) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
+		CommonPreference<Boolean> pref = getCycleNodeNetworkPreference();
 
 		View container = view.findViewById(R.id.card_container);
 		TextView title = container.findViewById(R.id.title);

@@ -3,7 +3,6 @@ package net.osmand.plus.configmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -14,17 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.render.RenderingRuleProperty;
@@ -39,23 +34,19 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private CommonPreference<String> pref;
 	@Nullable
 	private RenderingRuleProperty property;
 	private String previousValue;
 
-	private boolean nightMode;
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		pref = settings.getCustomRenderProperty(HIKING_ROUTES_OSMC_ATTR);
 		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING_ROUTES_OSMC_ATTR);
 		if (property == null) {
@@ -78,8 +69,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) requireMyActivity();
-		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
 		showHideTopShadow(view);
@@ -115,14 +105,11 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		button.setChecked(enabled);
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, button);
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				pref.set(!button.isChecked() ? previousValue : "");
-				setupHeader(view);
-				setupTypesCard(view);
-				refreshMap();
-			}
+		container.setOnClickListener(v -> {
+			pref.set(!button.isChecked() ? previousValue : "");
+			setupHeader(view);
+			setupTypesCard(view);
+			refreshMap();
 		});
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.secondary_icon), false);
@@ -163,20 +150,17 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private TextRadioItem createRadioButton(@NonNull String value) {
 		String name = AndroidUtils.getRenderingStringPropertyValue(app, value);
 		TextRadioItem item = new TextRadioItem(name);
-		item.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View v) {
-				pref.set(value);
-				previousValue = value;
+		item.setOnClickListener((radioItem, v) -> {
+			pref.set(value);
+			previousValue = value;
 
-				View view = getView();
-				if (view != null) {
-					setupHeader(view);
-					setupTypesCard(view);
-				}
-				refreshMap();
-				return true;
+			View view = getView();
+			if (view != null) {
+				setupHeader(view);
+				setupTypesCard(view);
 			}
+			refreshMap();
+			return true;
 		});
 		return item;
 	}

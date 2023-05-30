@@ -91,7 +91,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
 
-	private OsmandApplication app;
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
 
@@ -140,7 +139,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		downloadThread = app.getDownloadThread();
 		validationManager = new DownloadValidationManager(app);
 		if (wizardType == null) {
@@ -152,6 +150,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		view = UiUtilities.getInflater(getContext(), deviceNightMode).inflate(R.layout.first_usage_wizard_fragment, container, false);
 		activity = requireActivity();
 		AndroidUtils.addStatusBarPadding21v(activity, view);
@@ -329,7 +328,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	@SuppressLint("StaticFieldLeak")
 	private void doWizardTypeTask() {
-		OsmandApplication app = requireMyApplication();
 		switch (wizardType) {
 			case SEARCH_LOCATION:
 				if (searchLocationByIp) {

@@ -8,7 +8,7 @@ import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.viewholders.*
-import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.ImportTracksListener
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
@@ -36,7 +36,7 @@ class SearchTracksAdapter(
 
     private var sortTracksListener: SortTracksListener? = null
     private var selectionListener: TrackSelectionListener? = null
-    private var importTracksListener: ImportTracksListener? = null
+    private var emptyTracksListener: EmptyTracksListener? = null
 
     init {
         updateFilteredItems(trackItems)
@@ -45,14 +45,15 @@ class SearchTracksAdapter(
         locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode)
     }
 
-    fun getFilteredItems(): List<TrackItem> {
-        return ArrayList(filteredItems)
+    fun getFilteredItems(): Set<TrackItem> {
+        return HashSet(filteredItems)
     }
 
     fun setTracksSortMode(sortMode: TracksSortMode) {
         this.sortMode = sortMode
         val latLon = app.mapViewTrackingUtilities.defaultLocation
         Collections.sort(items, TracksComparator(sortMode, latLon))
+        notifyDataSetChanged()
     }
 
     fun setSortTracksListener(sortTracksListener: SortTracksListener?) {
@@ -63,8 +64,8 @@ class SearchTracksAdapter(
         this.selectionListener = selectionListener
     }
 
-    fun setImportTracksListener(importTracksListener: ImportTracksListener?) {
-        this.importTracksListener = importTracksListener
+    fun setImportTracksListener(emptyTracksListener: EmptyTracksListener?) {
+        this.emptyTracksListener = emptyTracksListener
     }
 
     fun setFilterCallback(filterCallback: CallbackWithObject<List<TrackItem>>) {
@@ -95,8 +96,8 @@ class SearchTracksAdapter(
                 TrackViewHolder(view, selectionListener, locationViewCache, nightMode)
             }
             TracksAdapter.TYPE_NO_TRACKS -> {
-                val view = inflater.inflate(R.layout.empty_state, parent, false)
-                EmptyTracksViewHolder(view, importTracksListener, nightMode)
+                val view = inflater.inflate(R.layout.track_folder_empty_state, parent, false)
+                EmptyTracksViewHolder(view, emptyTracksListener, nightMode)
             }
             TYPE_NO_FOUND_TRACKS -> {
                 val view = inflater.inflate(R.layout.empty_search_results, parent, false)
@@ -149,6 +150,19 @@ class SearchTracksAdapter(
 
     override fun getFilter(): Filter {
         return filter
+    }
+
+    fun updateItem(item: Any) {
+        val index = items.indexOf(item)
+        if (index != -1) {
+            notifyItemChanged(index)
+        }
+    }
+
+    fun onItemsSelected(items: Set<Any>) {
+        for (item in items) {
+            updateItem(item)
+        }
     }
 
     companion object {

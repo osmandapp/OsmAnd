@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -42,26 +41,22 @@ public class SavedArticlesTabFragment extends BaseOsmAndFragment implements Trav
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		OsmandApplication app = requireMyApplication();
+		updateNightMode();
 		dataHelper = app.getTravelHelper().getBookmarksHelper();
-
-		View mainView = inflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
+		View mainView = themedInflater.inflate(R.layout.fragment_saved_articles_tab, container, false);
 
 		adapter = new SavedArticlesRvAdapter(app);
-		adapter.setListener(new SavedArticlesRvAdapter.Listener() {
-			@Override
-			public void openArticle(TravelArticle article) {
-				if (article instanceof TravelGpx) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						File file = app.getTravelHelper().createGpxFile(article);
-						TrackMenuFragment.openTrack(getActivity(), file, null);
-					}
-				} else {
-					FragmentManager fm = getFragmentManager();
-					if (fm != null) {
-						WikivoyageArticleDialogFragment.showInstance(app, fm, article.generateIdentifier(), article.getLang());
-					}
+		adapter.setListener(article -> {
+			if (article instanceof TravelGpx) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					File file = app.getTravelHelper().createGpxFile(article);
+					TrackMenuFragment.openTrack(getActivity(), file, null);
+				}
+			} else {
+				FragmentManager fm = getFragmentManager();
+				if (fm != null) {
+					WikivoyageArticleDialogFragment.showInstance(app, fm, article.generateIdentifier(), article.getLang());
 				}
 			}
 		});

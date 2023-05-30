@@ -30,12 +30,10 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 
 	public static final String TAG = ExternalDevicesBaseFragment.class.getSimpleName();
 	protected ExternalSensorsPlugin plugin;
-	protected boolean nightMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 	}
 
@@ -45,11 +43,16 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		MapActivity activity = requireMapActivity();
-		View view = UiUtilities.getInflater(activity, nightMode).inflate(getLayoutId(), container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(getLayoutId(), container, false);
 		setupToolbar(view);
 		setupUI(view);
 		return view;
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	protected void setupUI(@NonNull View view) {
@@ -93,7 +96,7 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 	}
 
 	@ColorRes
-	private int getStatusBarColorId() {
+	protected int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}

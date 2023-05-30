@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -19,7 +18,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
@@ -52,7 +50,6 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 	private static final Log log = PlatformUtil.getLog(BackupSettingsFragment.class);
 
-	private OsmandApplication app;
 	private BackupHelper backupHelper;
 	private NetworkSettingsHelper settingsHelper;
 
@@ -61,7 +58,6 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 	private ProgressBar progressBar;
 
-	private boolean nightMode;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -71,16 +67,14 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
 		settingsHelper = app.getNetworkSettingsHelper();
-		nightMode = !app.getSettings().isLightContent();
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_backup_settings, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		progressBar = view.findViewById(R.id.progress_bar);
@@ -137,13 +131,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		ImageView icon = container.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_storage));
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					BackupTypesFragment.showInstance(activity.getSupportFragmentManager());
-				}
+		container.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				BackupTypesFragment.showInstance(activity.getSupportFragmentManager());
 			}
 		});
 		setupSelectableBackground(container);
@@ -192,13 +183,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		ImageView icon = container.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_storage));
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					VersionHistoryFragment.showInstance(activity.getSupportFragmentManager());
-				}
+		container.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				VersionHistoryFragment.showInstance(activity.getSupportFragmentManager());
 			}
 		});
 		setupSelectableBackground(container);
@@ -233,18 +221,15 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		ImageView icon = container.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_file_delete, R.color.color_osm_edit_delete));
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!settingsHelper.isBackupExporting()) {
-					if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles())) {
-						FragmentManager fragmentManager = getFragmentManager();
-						if (fragmentManager != null) {
-							DeleteAllDataBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
-						}
-					} else {
-						app.showShortToastMessage(R.string.backup_data_removed);
+		container.setOnClickListener(v -> {
+			if (!settingsHelper.isBackupExporting()) {
+				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles())) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						DeleteAllDataBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
 					}
+				} else {
+					app.showShortToastMessage(R.string.backup_data_removed);
 				}
 			}
 		});
@@ -262,18 +247,15 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 		ImageView icon = container.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_history_delete, R.color.color_osm_edit_delete));
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!settingsHelper.isBackupExporting()) {
-					if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles(RemoteFilesType.OLD))) {
-						FragmentManager fragmentManager = getFragmentManager();
-						if (fragmentManager != null) {
-							RemoveOldVersionsBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
-						}
-					} else {
-						app.showShortToastMessage(R.string.backup_version_history_removed);
+		container.setOnClickListener(v -> {
+			if (!settingsHelper.isBackupExporting()) {
+				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles(RemoteFilesType.OLD))) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						RemoveOldVersionsBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
 					}
+				} else {
+					app.showShortToastMessage(R.string.backup_version_history_removed);
 				}
 			}
 		});

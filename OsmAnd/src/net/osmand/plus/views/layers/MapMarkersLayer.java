@@ -15,27 +15,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.VectorDouble;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
@@ -45,6 +37,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -68,6 +62,7 @@ import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -75,9 +70,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
+	private static final int START_ZOOM = 3;
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
@@ -413,18 +414,19 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float cy;
 					if (mapRenderer != null) {
 						PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-						PointI center31 = NativeUtilities.get31FromPixel(mapRenderer, tileBox, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+						PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 						if (center31 == null) {
 							continue;
 						}
-						PointF[] line = calculateLineInScreenRect(tileBox, marker31, center31);
+						Pair<PointF, PointF> line =
+								NativeUtilities.clipLineInVisibleRect(mapRenderer, tileBox, center31, marker31);
 						if (line == null) {
 							continue;
 						}
 						PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 						cx = centerPixel.x;
 						cy = centerPixel.y;
-						bearing = (float) getAngleBetween(centerPixel, line[1]) - tileBox.getRotate();
+						bearing = (float) getAngleBetween(centerPixel, line.second) - tileBox.getRotate();
 					} else {
 						QuadPoint cp = tileBox.getCenterPixelPoint();
 						cx = cp.x;
@@ -524,7 +526,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				&& !getApplication().getOsmandMap().getMapView().isCarView()) {
 			widgetHeight = markersWidgetsHelper.getMapMarkersBarWidgetHeight();
 		}
-		PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tb, lat, lon);
+		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, lat, lon);
 		double tx = pixel.x;
 		double ty = pixel.y;
 		return tx >= -w && tx <= tb.getPixWidth() + w && ty >= widgetHeight - h && ty <= tb.getPixHeight() + h;
@@ -559,7 +561,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				case MotionEvent.ACTION_DOWN:
 					float x = event.getX();
 					float y = event.getY();
-					fingerLocation = NativeUtilities.getLatLonFromPixel(getMapRenderer(), tileBox, x, y);
+					fingerLocation = NativeUtilities.getLatLonFromElevatedPixel(getMapRenderer(), tileBox, x, y);
 					hasMoved = false;
 					moving = true;
 					break;
@@ -644,25 +646,49 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		if (tileBox.getZoom() < 3 || !getApplication().getSettings().SHOW_MAP_MARKERS.get() || excludeUntouchableObjects) {
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
+		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
+
+		if (tileBox.getZoom() < START_ZOOM
+				|| !settings.SHOW_MAP_MARKERS.get()
+				|| excludeUntouchableObjects
+				|| Algorithms.isEmpty(mapMarkers)) {
 			return;
 		}
-		amenities.clear();
-		OsmandApplication app = getApplication();
-		int r = tileBox.getDefaultRadiusPoi();
-		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
-		for (MapMarker marker : app.getMapMarkersHelper().getMapMarkers()) {
+		amenities.clear();
+		MapRendererView mapRenderer = getMapRenderer();
+		float radius = getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
+		QuadRect screenArea = new QuadRect(
+				point.x - radius,
+				point.y - radius / 2f,
+				point.x + radius,
+				point.y + radius * 4f
+		);
+		List<PointI> touchPolygon31 = null;
+		if (mapRenderer != null) {
+			touchPolygon31 = NativeUtilities.getPolygon31FromScreenArea(mapRenderer, screenArea);
+			if (touchPolygon31 == null) {
+				return;
+			}
+		}
+
+		boolean selectMarkerOnSingleTap = settings.SELECT_MARKER_ON_SINGLE_TAP.get();
+
+		for (MapMarker marker : mapMarkers) {
 			if ((!unknownLocation && selectMarkerOnSingleTap) || !isSynced(marker)) {
 				LatLon latLon = marker.point;
 				if (latLon != null) {
-					PointF pixel = NativeUtilities.getPixelFromLatLon(getMapRenderer(), tileBox, latLon.getLatitude(), latLon.getLongitude());
-					if (calculateBelongs((int) point.x, (int) point.y, (int) pixel.x, (int) pixel.y, r)) {
+					boolean add = mapRenderer != null
+							? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+							: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
+					if (add) {
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
 						} else {
-							if (isMarkerOnFavorite(marker) && app.getSettings().SHOW_FAVORITES.get()
-									|| isMarkerOnWaypoint(marker) && app.getSettings().SHOW_WPT.get()) {
+							if (isMarkerOnFavorite(marker) && settings.SHOW_FAVORITES.get()
+									|| isMarkerOnWaypoint(marker) && settings.SHOW_WPT.get()) {
 								continue;
 							}
 							Amenity mapObj = getMapObjectByMarker(marker);
@@ -694,10 +720,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return MapSelectionHelper.findAmenity(getApplication(), marker.point, Collections.singletonList(mapObjName), -1, 15);
 		}
 		return null;
-	}
-
-	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return Math.abs(objx - ex) <= radius * 1.5 && (ey - objy) <= radius * 1.5 && (objy - ey) <= 2.5 * radius;
 	}
 
 	@Override
@@ -813,7 +835,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		PointI start = NativeUtilities.getPoint31FromLatLon(loc.getLatitude(), loc.getLongitude());
+		PointI start = NativeUtilities.getPoint31FromLatLon(loc);
 		PointI end = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
 
 		if (vectorLinesCollection == null) {
@@ -870,54 +892,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			vectorLinesCollection = null;
 			needDrawLines = true;
 		}
-	}
-
-	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, MapMarker marker, LatLon loc) {
-		PointI locPointI = NativeUtilities.getPoint31FromLatLon(loc.getLatitude(), loc.getLongitude());
-		PointI markerPointI = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-		return calculateLineInScreenRect(tileBox, markerPointI, locPointI);
-	}
-
-	/**
-	 * OpenGL
-	 */
-	@Nullable
-	private PointF[] calculateLineInScreenRect(RotatedTileBox tileBox, PointI markerPointI, PointI locPointI) {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null) {
-			return null;
-		}
-		AreaI screenBbox = mapRenderer.getVisibleBBox31();
-		PointI firstPoint = null;
-		PointI secondPoint = null;
-		if (screenBbox.contains(locPointI)) {
-			firstPoint = locPointI;
-		}
-		if (screenBbox.contains(markerPointI)) {
-			secondPoint = markerPointI;
-		}
-		if (firstPoint == null && secondPoint == null) {
-			firstPoint = new PointI(0, 0);
-			secondPoint = new PointI(0, 0);
-			if (Utilities.calculateIntersection(locPointI, markerPointI, screenBbox, firstPoint)) {
-				Utilities.calculateIntersection(markerPointI, locPointI, screenBbox, secondPoint);
-			} else {
-				return null;
-			}
-		} else if (firstPoint == null) {
-			firstPoint = new PointI(0, 0);
-			if (!Utilities.calculateIntersection(locPointI, markerPointI, screenBbox, firstPoint)) {
-				return null;
-			}
-		} else if (secondPoint == null) {
-			secondPoint = new PointI(0, 0);
-			if (!Utilities.calculateIntersection(markerPointI, locPointI, screenBbox, secondPoint)) {
-				return null;
-			}
-		}
-		PointF l = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, firstPoint);
-		PointF m = NativeUtilities.getPixelFrom31(mapRenderer, tileBox, secondPoint);
-		return new PointF[] {l, m};
 	}
 
 	/**
@@ -1028,12 +1002,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				//draw line in OpenGL
 				initVectorLinesCollection(loc, marker, color, isLast);
 				displayedMarkers.add(marker);
-				PointF[] line = calculateLineInScreenRect(tileBox, marker, loc);
+
+				PointI lineStart31 = NativeUtilities.getPoint31FromLatLon(loc);
+				PointI lineEnd31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
+				Pair<PointF, PointF> line = NativeUtilities.clipLineInVisibleRect(mapRenderer, tileBox, lineStart31, lineEnd31);
 				if (line != null) {
-					locX = line[0].x;
-					locY = line[0].y;
-					markerX = line[1].x;
-					markerY = line[1].y;
+					locX = line.first.x;
+					locY = line.first.y;
+					markerX = line.second.x;
+					markerY = line.second.y;
 				} else {
 					continue;
 				}

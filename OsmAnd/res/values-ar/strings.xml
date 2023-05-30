@@ -1874,8 +1874,8 @@
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
     <string name="routing_attr_height_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
-    <string name="rendering_attr_alpineHiking_name">مقياس رياضة الهايكنق (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
+    <string name="rendering_attr_alpineHiking_name">مقياس رياضة الهايكنق</string>
+    <string name="rendering_attr_alpineHiking_description">تجسيد المسارات وفقا لمقياس SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">طرق المشي الخلوي</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>
@@ -2231,7 +2231,7 @@
     <string name="quick_action_auto_zoom_off">إيقاف التكبير التلقائي</string>
     <string name="quick_action_add_first_intermediate">إضافة وجهة وسطى</string>
     <string name="analyze_on_map">تحليل</string>
-    <string name="shared_string_visible">المعروضة على الخريطة</string>
+    <string name="shared_string_visible">مرئي</string>
     <string name="restore_purchases">استعادة المشتريات</string>
     <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">هضابي</string>
@@ -2804,7 +2804,7 @@
     <string name="light_rs_render_descr">أسلوب قيادة بسيط. الوضع الليلي اللطيف ، وخطوط الكنتور ، مقارنة بالطرق ذات اللون البرتقالي ، يعتم الكائنات في الخريطة الثانوية.</string>
     <string name="topo_render_descr">على النقيض من نمط مصممة أساسا للمشي والتنزه وركوب الدراجات في الطبيعة. قراءة جيدة في الإضاءة الخارجية المعقدة. الميزات الرئيسية: مقارنة الطرق والأجسام الطبيعية، أنواع مختلفة من طرق، والخطوط الكنتورية مع إعدادات متقدمة، تفاصيل أكثر في مستويات التكبير/التصغير المقابلة من النمط الافتراضي. يسمح الخيار تكامل سطحي التمييز بين نوعية سطح الطريق. لا يوجد وضع ليلي.</string>
     <string name="touring_view_render_descr">أسلوب الملاحة مع التباين العالي والحد الأعلى من التفاصيل. يتضمن كل خيارات النمط الافتراضي أوسماند، مع عرض أكبر قدر ممكن من التفاصيل ، ولا سيما الطرق والمسارات وطرق السفر الأخرى. التمييز الواضح بين \"جولة الأطلس\" بين أنواع الطرق. مناسبة للاستخدام النهاري والليلي وفي الهواء الطلق.</string>
-    <string name="default_render_descr">أسلوب الغرض العام. تقديم نظافة مبسطة في المدن المكتظة بالسكان. الملامح الرئيسية: خطوط الكنتور ، والطرق ، وجودة السطح ، والقيود المفروضة على الوصول ، ودروع الطريق ، والمسارات التي تظهر وفقاً لمقياس SAC ، وميزات رياضة الماء الأبيض.</string>
+    <string name="default_render_descr">الغرض العام. إظهار المدن الكثيفة بشكل واضح. بخطوط الكنتور ، والطرق ، وجودة السطح ، وقيود الوصول ، ودروع الطرق ، وعرض المسارات وفقا لمقياس SAC / CAI ، وميزات رياضة الماء الأبيض.</string>
     <string name="travel_card_download_descr">قم بتنزيل أدلة السفر هذه من ويكي الرحلات لعرض مقالات حول الأماكن في العالم بدون إنترنت.</string>
     <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس Wikivoyage. اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.</string>
     <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
@@ -2938,7 +2938,7 @@
 \n</string-->
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام أوسماند لايف.</string>
     <string name="use_osm_live_public_transport">أوسماند لايف وسائل النقل العام</string>
-    <string name="routing_attr_avoid_sett_name">عدم تجنب الحصى والطرق المرصوفة</string>
+    <string name="routing_attr_avoid_sett_name">بدون ضبط</string>
     <string name="routing_attr_avoid_sett_description">تجنب الطرق المرصوفة</string>
     <string name="routing_attr_avoid_train_name">بدون قطارات</string>
     <string name="routing_attr_avoid_train_description">تجنب القطارات</string>
@@ -5253,7 +5253,7 @@
     <string name="number_of_tracks">%1$s مسار</string>
     <string name="rendering_value_name_only_name">الاسم فقط</string>
     <string name="shared_string_foot">القدم</string>
-    <string name="rendering_attr_lightDetail_name">تفاصيل الضوء</string>
+    <string name="rendering_attr_lightDetail_name">تفاصيل خفيفة</string>
     <string name="rendering_attr_lightDetail_description">الافتراضي: اسم العلامة البحرية (صفة الضوء.المجموعة.الفترة) ، حدد معلومات إضافية عن القطاعات من 1 إلى 3 أو صفة ضوء القطاع 5،4،3،2،1</string>
     <string name="rendering_value_sectors_name">القطاعات</string>
     <string name="rendering_value_sector1_name">القطاع 1</string>
@@ -5265,7 +5265,7 @@
     <string name="device_disconnected">%1$s منفصل</string>
     <string name="device_connected">%1$s متصل</string>
     <string name="running_scds_device_name">تشغيل الجهاز</string>
-    <string name="bicycle_scd_device_name">جهاز دراجة</string>
+    <string name="bicycle_scd_device_name">جهاز الدراجة</string>
     <string name="external_device_blood_pressure">ضغط الدم</string>
     <string name="no_bt_permission">لم يتم منح إذن البلوتوث</string>
     <string name="beats_per_minute_short">نبضة في الدقيقة</string>
@@ -5274,4 +5274,24 @@
     <string name="shared_string_finger">إصبع</string>
     <string name="shared_string_hand">اليد</string>
     <string name="shared_string_ear_lobe">شحمة الأذن</string>
+    <string name="no_poi_for_category">لم يتم العثور على نقاط الاهتمام</string>
+    <string name="map_3d_mode_action">الوضع ثلاثي الأبعاد</string>
+    <string name="map_2d_mode_action">الوضع ثنائي الأبعاد</string>
+    <string name="poi_categories">فئات نقاط الاهتمام</string>
+    <string name="rendering_value_caiScale_name">مقياس CAI</string>
+    <string name="map_3d_mode_hint">النقرمطولا على الزر لتغيير موضع الزر.</string>
+    <string name="visible_in_3d_mode">مرئي في وضع 3D</string>
+    <string name="map_3d_mode_description">المس الخريطة بإصبعين وحركها لأعلى ولأسفل لضبط إمالة الخريطة.</string>
+    <string name="rendering_value_sacScale_name">مقياس ساك</string>
+    <string name="show_all_tracks_on_the_map">عرض جميع المسارات على الخريطة</string>
+    <string name="rssi_widget_desc">يعرض مستوى RSSI لجهازك الخارجي.</string>
+    <string name="map_widget_rssi">قوة الإشارة</string>
+    <string name="tracks_empty_folder_description">لايوجد مسارات في هذا المجلد.</string>
+    <string name="tracks_empty_folder">مجلد فارغ</string>
+    <string name="track_not_recorded">غير مسجل</string>
+    <string name="shared_string_new_track">مسار جديد</string>
+    <string name="shared_string_visible_on_map">مرئي على الخريطة</string>
+    <string name="delete_folder">حذف مجلد</string>
+    <string name="delete_track_folder_dialog_message">سيؤدي هذا إلى حذف مجلد \"%1$s\" وجميع المسارات (%2$s) المضمنة.</string>
+    <string name="delete_folder_question">حذف المجلد؟</string>
 </resources>

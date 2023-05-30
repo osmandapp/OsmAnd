@@ -1544,11 +1544,11 @@ public class RouteResultPreparation {
 					TurnType.hasAnySlightTurnLane(rawLanes[ind])) {
 				String[] laneTurns = splitLaneOptions[ind].split(";");
 				int cnt = 0;
-				for(String lTurn : laneTurns) {
+				for (String lTurn : laneTurns) {
 					boolean added = addedTurns.add(TurnType.convertType(lTurn));
-					if(added) {
+					if (added) {
 						cnt++;
-						diffTurnRoads --;
+						diffTurnRoads--;
 					}
 				}
 				lanes -= cnt;

@@ -1299,8 +1299,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
 		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-		if (mapControlsLayer != null && (!mapControlsLayer.isMapControlsVisible() && !settings.MAP_EMPTY_STATE_ALLOWED.get())) {
-			showMapControls();
+		if(mapControlsLayer != null){
+			mapControlsLayer.refreshButtons();
+			if (!mapControlsLayer.isMapControlsVisible() && !settings.MAP_EMPTY_STATE_ALLOWED.get()) {
+				showMapControls();
+			}
 		}
 
 		mapLayers.updateLayers(this);
@@ -2152,6 +2155,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
+
+		app.getLocaleHelper().setLanguage(this);
+
 		List<Fragment> fragments = getSupportFragmentManager().getFragments();
 		for (Fragment fragment : fragments) {
 			getSupportFragmentManager()
@@ -2159,6 +2165,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.detach(fragment)
 					.attach(fragment)
 					.commit();
+		}
+
+		DashboardOnMap dashboard = getDashboard();
+		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
+			dashboard.refreshContent(true);
 		}
 	}
 

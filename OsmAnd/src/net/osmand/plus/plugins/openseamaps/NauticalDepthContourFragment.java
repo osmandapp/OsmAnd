@@ -13,21 +13,20 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.DialogListItemAdapter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -42,21 +41,18 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	public static final String DEPTH_CONTOUR_WIDTH = "depthContourWidth";
 	public static final String DEPTH_CONTOUR_COLOR_SCHEME = "depthContourColorScheme";
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
-
 	private CommonPreference<Boolean> preference;
 	private final List<RenderingRuleProperty> properties = new ArrayList<>();
 
-	private boolean nightMode;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		app = requireMyApplication();
-		settings = app.getSettings();
-		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app);
 		for (RenderingRuleProperty property : customRules) {
 			String attrName = property.getAttrName();
@@ -71,7 +67,7 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_nautical_depth_contours, container, false);
 
 		setupHeader(view);
@@ -141,35 +137,31 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 
 	@ColorInt
 	private int getProfileColor() {
-		return settings.getApplicationMode().getProfileColor(nightMode);
+		return ColorUtilities.getAppModeColor(app, nightMode);
 	}
 
 	private void showPreferenceDialog(@NonNull RenderingRuleProperty property,
 	                                  @NonNull CommonPreference<String> pref,
 	                                  @Nullable TextView description) {
-		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireContext(), nightMode));
-		builder.setTitle(AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName()));
-
 		String[] possibleValues = property.getPossibleValues();
 		String[] possibleValuesString = new String[possibleValues.length];
-
 		for (int i = 0; i < possibleValues.length; i++) {
 			possibleValuesString[i] = AndroidUtils.getRenderingStringPropertyValue(app, possibleValues[i]);
 		}
-		DialogListItemAdapter adapter = DialogListItemAdapter.createSingleChoiceAdapter(possibleValuesString,
-				nightMode, Arrays.asList(possibleValues).indexOf(pref.get()), app, getProfileColor(), themeRes, v -> {
-					int which = (int) v.getTag();
-					pref.set(possibleValues[which]);
-					refreshMap();
+		int selectedIndex = Arrays.asList(possibleValues).indexOf(pref.get());
 
-					if (description != null) {
-						description.setText(AndroidUtils.getRenderingStringPropertyValue(app, pref.get()));
-					}
-				}
-		);
-		builder.setAdapter(adapter, null);
-		adapter.setDialog(builder.show());
+		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
+				.setTitle(AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName()))
+				.setControlsColor(getProfileColor());
+
+		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
+			int which = (int) v.getTag();
+			pref.set(possibleValues[which]);
+			refreshMap();
+			if (description != null) {
+				description.setText(AndroidUtils.getRenderingStringPropertyValue(app, pref.get()));
+			}
+		});
 	}
 
 	private void refreshMap() {

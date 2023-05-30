@@ -34,12 +34,12 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -78,12 +78,6 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.street_name_widget;
-	}
-
-	@Nullable
-	@Override
-	public OsmandPreference<Boolean> getWidgetVisibilityPref() {
-		return settings.SHOW_STREET_NAME;
 	}
 
 	public StreetNameWidget(@NonNull MapActivity mapActivity) {
@@ -357,7 +351,7 @@ public class StreetNameWidget extends MapWidget {
 	@Override
 	protected boolean updateVisibility(boolean visible) {
 		boolean updatedVisibility = super.updateVisibility(visible);
-		if (updatedVisibility) {
+		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
 				mapInfoLayer.recreateTopWidgetsPanel();
@@ -427,17 +421,14 @@ public class StreetNameWidget extends MapWidget {
 		}
 
 		private void computeParams() {
-			boolean widgetEnabled = settings.SHOW_STREET_NAME.get();
 			boolean onRoute = routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute();
 			boolean mapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
 			if (onRoute) {
 				if (routingHelper.isFollowingMode()) {
-					if (widgetEnabled) {
-						NextDirectionInfo nextDirInfo =
-								routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-						streetName = routingHelper.getCurrentName(nextDirInfo);
-						turnArrowColorId = R.color.nav_arrow;
-					}
+					NextDirectionInfo nextDirInfo =
+							routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+					streetName = routingHelper.getCurrentName(nextDirInfo);
+					turnArrowColorId = R.color.nav_arrow;
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
 					boolean routeMenuVisible = mapActivity.getMapRouteInfoMenu().isVisible();
@@ -449,7 +440,7 @@ public class StreetNameWidget extends MapWidget {
 						showClosestWaypointFirstInAddress = false;
 					}
 				}
-			} else if (mapLinkedToLocation && widgetEnabled) {
+			} else if (mapLinkedToLocation) {
 				streetName = new CurrentStreetName();
 				OsmAndLocationProvider locationProvider = app.getLocationProvider();
 				RouteDataObject lastKnownSegment = locationProvider.getLastKnownRouteSegment();

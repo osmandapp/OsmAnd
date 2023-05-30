@@ -11,11 +11,24 @@
 	Thx - Hardy
 -->
 
+    <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
+    <string name="delete_folder_question">Delete folder?</string>
+    <string name="delete_folder">Delete folder</string>
+    <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
+    <string name="rssi_widget_desc">Shows the RSSI level of your external device.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">This folder doesn\’t have any track yet.</string>
+    <string name="tracks_empty_folder">Empty folder</string>
+    <string name="track_not_recorded">Not recorded</string>
+    <string name="shared_string_new_track">New track</string>
+    <string name="rendering_value_sacScale_name">SAC scale</string>
+    <string name="rendering_value_caiScale_name">CAI scale</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
     <string name="map_3d_mode_hint">Long tap on button allows to change button position.</string>
     <string name="visible_in_3d_mode">Visible in 3D mode</string>
     <string name="map_3d_mode_description">Touch map with two fingers and moves them up and down to adjust map tilt.</string>
+    <string name="shared_string_visible_on_map">Visible on map</string>
     <string name="no_poi_for_category">POI not found</string>
     <string name="rendering_attr_lightDetail_name">Light detail</string>
     <string name="rendering_attr_lightDetail_description">Default: seamark name (light character.group.period), select additional information on sectors 1 to 3 or sector 1,2,3,4,5 light character</string>
@@ -103,7 +116,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Pair ANT+ sensor</string>
     <string name="ant_plus_pair_bluetooth_prompt">You can pair Bluetooth LE and ANT+ sensors with OsmAnd.</string>
     <string name="learn_more_about_sensors_link">Learn more about sensors.</string>
-
     <string name="shutter_sound">Shutter sound</string>
     <string name="camera_app">Camera app</string>
     <string name="speak_route_deviation">Announce deviation from the route</string>
@@ -2296,7 +2308,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="light_rs_render_descr">Simple driving style. Gentle night mode, contour lines, contrasting orange styled roads, dims secondary map objects.</string>
     <string name="topo_render_descr">For hiking, trekking, and nature cycling. Readable outdoors. Contrasting roads and natural objects, different route types, advanced contour line options, extra details. Adjusting "Surface integrity" distinguishes road quality. No night mode.</string>
     <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. Includes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
-    <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC scale, whitewater sports items.</string>
+    <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC/CAI scale, whitewater sports items.</string>
     <string name="open_wikipedia_link_online">Open Wikipedia link online</string>
     <string name="open_wikipedia_link_online_description">The link will be opened in a web browser.</string>
     <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
@@ -3927,8 +3939,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Standard map</string>
     <string name="download_roads_only_maps">Roads-only map</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC scale.</string>
+    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale</string>
+    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC/CAI scale.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking routes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
