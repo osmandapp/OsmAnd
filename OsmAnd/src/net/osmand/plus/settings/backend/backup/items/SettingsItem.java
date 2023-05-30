@@ -84,6 +84,12 @@ public abstract class SettingsItem {
 	public abstract String getPublicName(@NonNull Context ctx);
 
 	@NonNull
+	public String requireFileName() {
+		String fileName = getFileName();
+		return Algorithms.isEmpty(fileName) ? getDefaultFileName() : fileName;
+	}
+
+	@NonNull
 	public String getDefaultFileName() {
 		return getName() + getDefaultFileExtension();
 	}
@@ -178,10 +184,7 @@ public abstract class SettingsItem {
 			json.put("pluginId", pluginId);
 		}
 		if (getWriter() != null) {
-			String fileName = getFileName();
-			if (Algorithms.isEmpty(fileName)) {
-				fileName = getDefaultFileName();
-			}
+			String fileName = requireFileName();
 			json.put("file", fileName);
 		}
 	}
