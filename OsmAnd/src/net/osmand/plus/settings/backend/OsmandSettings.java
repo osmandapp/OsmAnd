@@ -17,7 +17,6 @@ import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
 import android.annotation.SuppressLint;
-import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -3062,10 +3061,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED =
 			new BooleanPreference(this, "open_only_header_route_calculated", false).makeProfile();
 
-	public boolean isLightActionBar() {
-		return isLightContent();
-	}
-
 	public boolean isLightContent() {
 		return isLightContentForMode(APPLICATION_MODE.get());
 	}
@@ -3078,17 +3073,19 @@ public class OsmandSettings {
 	}
 
 	public boolean isLightSystemTheme() {
-		UiModeManager uiModeManager = (UiModeManager) ctx.getSystemService(Context.UI_MODE_SERVICE);
-		int mode = uiModeManager.getNightMode();
-		if (mode == UiModeManager.MODE_NIGHT_YES) {
-			return false;
+		return !getNightMode(ctx.getResources().getConfiguration());
+	}
+
+	private boolean getNightMode(@NonNull Configuration config) {
+		int currentNightMode = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+		switch (currentNightMode) {
+			case Configuration.UI_MODE_NIGHT_NO:
+				return false;
+			case Configuration.UI_MODE_NIGHT_YES:
+				return true;
 		}
-		if (mode == UiModeManager.MODE_NIGHT_NO) {
-			return true;
-		}
-		Configuration config = ctx.getResources().getConfiguration();
-		int systemNightState = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
-		return systemNightState != Configuration.UI_MODE_NIGHT_YES;
+		LOG.info("Undefined night mode" + config);
+		return false;
 	}
 
 	public boolean isSystemThemeUsed(@NonNull ApplicationMode appMode) {
