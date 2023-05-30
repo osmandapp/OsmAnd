@@ -27,7 +27,7 @@ public class ZipWriter extends AbstractWriter {
 	public void write(@NonNull SettingsItem item) throws IOException {
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
-			String fileName = item.requireFileName();
+			String fileName = item.requireProcessedFileName();
 			writeEntry(itemWriter, fileName, zos);
 		}
 	}
