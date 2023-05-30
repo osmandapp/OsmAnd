@@ -581,9 +581,9 @@ public class PluginsHelper {
 	}
 
 	@Nullable
-	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	public static MapWidget createMapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType);
+			MapWidget widget = plugin.createMapWidgetForParams(mapActivity, widgetType, customId);
 			if (widget != null) {
 				return widget;
 			}

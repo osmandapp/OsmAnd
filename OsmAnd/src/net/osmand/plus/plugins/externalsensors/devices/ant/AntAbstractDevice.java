@@ -40,7 +40,7 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 	protected final IDeviceStateChangeReceiver deviceStateChangeReceiver =
 			newDeviceState -> {
 				if (newDeviceState == DeviceState.DEAD || newDeviceState == DeviceState.CLOSED) {
-					state = DeviceConnectionState.DISCONNECTED;
+					setCurrentState(DeviceConnectionState.DISCONNECTED);
 					for (DeviceListener listener : listeners) {
 						listener.onDeviceDisconnect(this);
 					}
@@ -109,7 +109,7 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 	@Override
 	public boolean disconnect() {
 		if (releaseHandle != null) {
-			state = DeviceConnectionState.DISCONNECTED;
+			setCurrentState(DeviceConnectionState.DISCONNECTED);
 			releaseHandle.close();
 			releaseHandle = null;
 			return true;
@@ -120,10 +120,10 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 	protected void requestAccessToPcc(@Nullable Activity activity, @NonNull Context context) {
 		// starts the plugins UI search
 		if (deviceNumber != -1) {
-			state = DeviceConnectionState.CONNECTING;
+			setCurrentState(DeviceConnectionState.CONNECTING);
 			releaseHandle = requestAccess(context, deviceNumber);
 		} else {
-			state = DeviceConnectionState.CONNECTING;
+			setCurrentState(DeviceConnectionState.CONNECTING);
 			releaseHandle = requestAccess(activity, context);
 		}
 	}
@@ -180,9 +180,9 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 			DeviceConnectionResult connectionResult;
 			int deviceNumber;
 			String error = null;
-			state = resultCode == SUCCESS
+			setCurrentState(resultCode == SUCCESS
 					? DeviceConnectionState.CONNECTED
-					: DeviceConnectionState.DISCONNECTED;
+					: DeviceConnectionState.DISCONNECTED);
 			switch (resultCode) {
 				case SUCCESS:
 					pcc = result;

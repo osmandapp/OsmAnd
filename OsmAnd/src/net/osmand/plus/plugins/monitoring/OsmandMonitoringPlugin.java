@@ -202,7 +202,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Nullable
 	@Override
-	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
+	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId) {
 		switch (widgetType) {
 			case TRIP_RECORDING_DISTANCE:
 				return new TripRecordingDistanceWidget(mapActivity);

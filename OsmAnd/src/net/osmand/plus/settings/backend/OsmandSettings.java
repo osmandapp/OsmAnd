@@ -3145,4 +3145,5 @@ public class OsmandSettings {
 			setPreference(QUICK_ACTION.getId(), actionState, mode);
 		}
 	}
+
 }
