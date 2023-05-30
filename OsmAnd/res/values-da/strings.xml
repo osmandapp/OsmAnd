@@ -5221,4 +5221,15 @@
     <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
     <string name="rendering_value_sacScale_name">SAC-skala</string>
     <string name="rendering_value_caiScale_name">CAI-skala</string>
+    <string name="rssi_widget_desc">Viser RSSI-niveauet for din eksterne enhed.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">Denne mappe indeholder endnu ingen spor.</string>
+    <string name="delete_folder">Slet mappe</string>
+    <string name="show_all_tracks_on_the_map">Vis alle spor på kortet</string>
+    <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s), den indeholder.</string>
+    <string name="delete_folder_question">Slet mappe\?</string>
+    <string name="tracks_empty_folder">Tom mappe</string>
+    <string name="track_not_recorded">Ikke optaget</string>
+    <string name="shared_string_new_track">Nyt spor</string>
+    <string name="shared_string_visible_on_map">Synlig på kort</string>
 </resources>

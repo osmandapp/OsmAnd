@@ -5101,8 +5101,8 @@
     <string name="shared_string_nearest">Mais perto</string>
     <string name="app_mode_moped">Ciclomotor</string>
     <string name="enable_3d_maps">Ativar mapas 3D</string>
-    <string name="disable_vertex_hillshade_3d">Desativar sombras de vértice em 3D</string>
-    <string name="generate_slope_from_3d_maps">Gera mapas raster de declives a partir de mapas 3D</string>
+    <string name="disable_vertex_hillshade_3d">Desativar vértices de sombras de relevo em 3D</string>
+    <string name="generate_slope_from_3d_maps">Gerar mapas raster de declives a partir de mapas 3D</string>
     <string name="weather_forecast_is_outdated">A previsão está desatualizada.</string>
     <string name="shared_string_all_world">Mundo inteiro</string>
     <string name="clear_online_cache_description">Isto irá limpar os ficheiros temporários dos mosaicos de previsão meteorológica online.</string>
@@ -5115,11 +5115,11 @@
     <string name="free_maps_updates">Atualizações gratuitas (emergências)</string>
     <string name="shared_string_alt_name">Nome alternativo</string>
     <string name="metric_lbs">lbs</string>
-    <string name="test_heightmap">Mapa de testes de altitude</string>
+    <string name="test_heightmap">Testar mapa de altitude</string>
     <string name="common_weight_limit_error">O valor mínimo é \"%1$s\" %2$s. Use o perfil \"%3$s\" se o peso do veículo for inferior ao valor mínimo.</string>
     <string name="offline_weather_forecast">Previsão meteorológica sem ligação à Internet</string>
     <string name="offline_weather_forecast_desc">Pode descarregar a previsão meteorológica para os próximos 7 dias.</string>
-    <string name="generate_hillshade_from_3d_maps">Gera mapas com sombras de relevo a partir de mapas 3D</string>
+    <string name="generate_hillshade_from_3d_maps">Gerar mapas de sombras de relevo a partir de mapas 3D</string>
     <string name="select_layer">Selecionar camada</string>
     <string name="rendering_value_defaultMedium_name">Padrão (médio)</string>
     <string name="speak_route_deviation">Avisar afastamento da rota</string>

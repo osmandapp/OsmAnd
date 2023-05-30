@@ -279,7 +279,7 @@ public class GpxUiHelper {
 		String numberOfTracks = app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
 		if (lastModified > 0) {
 			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
-			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, tracksCount);
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, numberOfTracks);
 		}
 		return numberOfTracks;
 	}
@@ -755,8 +755,13 @@ public class GpxUiHelper {
 
 	@NonNull
 	public static List<GPXInfo> getGPXFiles(@NonNull File dir, boolean absolutePath) {
+		return getGPXFiles(dir, absolutePath, true);
+	}
+
+	@NonNull
+	public static List<GPXInfo> getGPXFiles(@NonNull File dir, boolean absolutePath, boolean includeSubFolders) {
 		List<GPXInfo> gpxInfos = new ArrayList<>();
-		readGpxDirectory(dir, gpxInfos, "", absolutePath);
+		readGpxDirectory(dir, gpxInfos, "", absolutePath, includeSubFolders);
 		return gpxInfos;
 	}
 
@@ -834,6 +839,11 @@ public class GpxUiHelper {
 
 	public static void readGpxDirectory(@Nullable File dir, @NonNull List<GPXInfo> list,
 	                                    @NonNull String parent, boolean absolutePath) {
+		readGpxDirectory(dir, list, parent, absolutePath, true);
+	}
+
+	public static void readGpxDirectory(@Nullable File dir, @NonNull List<GPXInfo> list,
+	                                    @NonNull String parent, boolean absolutePath, boolean includeSubFolders) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
@@ -842,7 +852,7 @@ public class GpxUiHelper {
 					if (isGpxFile(file)) {
 						String fileName = absolutePath ? file.getAbsolutePath() : parent + name;
 						list.add(new GPXInfo(fileName, file));
-					} else if (file.isDirectory()) {
+					} else if (file.isDirectory() && includeSubFolders) {
 						readGpxDirectory(file, list, parent + name + "/", absolutePath);
 					}
 				}

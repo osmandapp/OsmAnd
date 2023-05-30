@@ -53,7 +53,6 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 	private View view;
 	private boolean isToolbarInitialized;
-	private LayoutInflater themedInflater;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,8 +65,8 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		iconsCache = app.getUIUtilities();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_purchase_item, container, false);
 		return view;
 	}

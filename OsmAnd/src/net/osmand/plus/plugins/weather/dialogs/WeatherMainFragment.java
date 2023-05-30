@@ -62,7 +62,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_weather_main, container, false);
 
 		setupHeader(view);

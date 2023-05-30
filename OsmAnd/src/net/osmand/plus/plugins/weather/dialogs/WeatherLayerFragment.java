@@ -61,7 +61,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_weather_layer, container, false);
 
 		setupHeader(view);

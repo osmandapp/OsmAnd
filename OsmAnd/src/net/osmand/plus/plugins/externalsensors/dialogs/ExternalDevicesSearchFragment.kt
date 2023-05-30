@@ -21,8 +21,8 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 
-class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener,
-    DeviceClickListener {
+class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener, DeviceClickListener {
+
     private var currentState = SearchStates.NOTHING_FOUND
     private var stateNoBluetoothView: View? = null
     private var stateSearchingView: View? = null

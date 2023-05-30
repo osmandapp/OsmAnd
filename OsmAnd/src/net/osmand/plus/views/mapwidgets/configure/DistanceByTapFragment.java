@@ -45,7 +45,6 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	private View toolbarSwitchContainer;
 	private ImageView navigationIcon;
 
-	private LayoutInflater themedInflater;
 	private ApplicationMode selectedAppMode;
 	private LinearLayout buttonsCard;
 
@@ -59,8 +58,7 @@ public class DistanceByTapFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		Context context = requireContext();
-		themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.distance_by_tap_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

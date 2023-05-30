@@ -79,8 +79,8 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(app, nightMode);
-		View root = inflater.inflate(R.layout.fragment_import_duplicates, container, false);
+		updateNightMode();
+		View root = themedInflater.inflate(R.layout.fragment_import_duplicates, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		setupToolbar(toolbar);
 		ComplexButton replaceAllBtn = root.findViewById(R.id.replace_all_btn);

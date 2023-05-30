@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nMantén pulsado para opciones"</string>
+\nPulsación larga para opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -1205,7 +1205,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">"
 \n
-\nMantén pulsado para ver en el mapa"</string>
+\nPulsación larga para ver en el mapa"</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
@@ -4423,7 +4423,7 @@
     <string name="safe_settings">Modo seguro</string>
     <string name="shared_string_show_slope">Mostrar pendiente</string>
     <string name="shared_string_hide_slope">Ocultar pendiente</string>
-    <string name="shared_string_grade">Calificación</string>
+    <string name="shared_string_grade">Pendiente</string>
     <string name="shared_string_uphill">Ascenso</string>
     <string name="shared_string_downhill">Descenso</string>
     <string name="elevation_profile">Perfil de elevación</string>
@@ -5216,4 +5216,15 @@
     <string name="visible_in_3d_mode">Visible en 3D</string>
     <string name="map_3d_mode_description">Toca el mapa con dos dedos y muévelos arriba y abajo para ajustar la inclinación del mapa.</string>
     <string name="rendering_value_sacScale_name">Escala SAC</string>
+    <string name="delete_folder">Borrar la carpeta</string>
+    <string name="show_all_tracks_on_the_map">Mostrar todas las vías en el mapa</string>
+    <string name="rssi_widget_desc">Muestra el nivel RSSI de tu dispositivo externo.</string>
+    <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (Rssi)</string>
+    <string name="tracks_empty_folder_description">Esta carpeta aún no tiene ninguna pista.</string>
+    <string name="tracks_empty_folder">Carpeta vacía</string>
+    <string name="track_not_recorded">Sin guardar</string>
+    <string name="shared_string_new_track">Nueva pista</string>
+    <string name="shared_string_visible_on_map">Visible en el mapa</string>
+    <string name="delete_track_folder_dialog_message">Esto borrará la carpeta \"%1$s\" y todas las pistas (%2$s) incluidas.</string>
+    <string name="delete_folder_question">¿Borrar la carpeta\?</string>
 </resources>

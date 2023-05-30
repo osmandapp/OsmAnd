@@ -5037,7 +5037,7 @@
     <string name="simulation_preview_mode_desc">Rychlost simulace bude maximální na rovných úsecích a zpomalí se pouze na křižovatkách.</string>
     <string name="shared_string_inches">palců</string>
     <string name="approximate_bearing_descr">Odvození azimutu od sledované navigační trasy.</string>
-    <string name="approximate_bearing">Přibližné určení polohy</string>
+    <string name="approximate_bearing">Přibližný směr</string>
     <string name="inch">\"</string>
     <string name="sound_beep_minimal">Pípnutí: minimální</string>
     <string name="sound_beep_complex_loud">Pípnutí: komplexní hlasité</string>
@@ -5048,7 +5048,7 @@
     <string name="cloud_version_confirm_delete">Odstranit \"%1$s\" z OsmAnd Cloud\?</string>
     <string name="shared_string_delete_file">Smazat soubor</string>
     <string name="delete_cloud_version">Smazat verzi cloudu</string>
-    <string name="local_version_do_not_exist">Není přítomna žádná místní verze.</string>
+    <string name="local_version_do_not_exist">Neexistuje žádná místní verze.</string>
     <string name="shared_string_in_progress">Probíhá</string>
     <string name="shared_string_original">Originál</string>
     <string name="movement_speed">Rychlost pohybu</string>
@@ -5175,4 +5175,9 @@
 \n- Senzor je aktivován
 \n- Toto zařízení je umístěno v blízkosti senzoru</string>
     <string name="ant_plus_pair_new_sensor_ble">Párování senzoru Bluetooth LE</string>
+    <string name="delete_track_folder_dialog_message">Tím se odstraní složka \"%1$s\" a všechny stopy (%2$s) v ní obsažené.</string>
+    <string name="delete_folder_question">Smazat složku\?</string>
+    <string name="delete_folder">Smazat složku</string>
+    <string name="show_all_tracks_on_the_map">Zobrazit všechny stopy na mapě</string>
+    <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externího zařízení.</string>
 </resources>

@@ -108,28 +108,22 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 		AndroidUiHelper.updateVisibility(bottomButtons, isChecked());
 		if (leftBtn != null) {
 			leftBtn.setText(leftBtnTitleRes);
-			leftBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					isLeftBtnSelected = true;
-					if (onBottomBtnClickListener != null) {
-						onBottomBtnClickListener.onBottomBtnClick(true);
-					}
-					updateBottomButtons();
+			leftBtn.setOnClickListener(view -> {
+				isLeftBtnSelected = true;
+				if (onBottomBtnClickListener != null) {
+					onBottomBtnClickListener.onBottomBtnClick(true);
 				}
+				updateBottomButtons();
 			});
 		}
 		if (rightBtn != null) {
 			rightBtn.setText(rightBtnTitleRes);
-			rightBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					isLeftBtnSelected = false;
-					if (onBottomBtnClickListener != null) {
-						onBottomBtnClickListener.onBottomBtnClick(false);
-					}
-					updateBottomButtons();
+			rightBtn.setOnClickListener(view -> {
+				isLeftBtnSelected = false;
+				if (onBottomBtnClickListener != null) {
+					onBottomBtnClickListener.onBottomBtnClick(false);
 				}
+				updateBottomButtons();
 			});
 		}
 		updateBottomButtons();

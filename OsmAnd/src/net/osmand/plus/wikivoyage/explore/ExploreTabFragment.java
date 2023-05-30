@@ -71,6 +71,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		downloadManager = new DownloadValidationManager(app);
 
 		View mainView = inflater.inflate(R.layout.fragment_explore_tab, container, false);

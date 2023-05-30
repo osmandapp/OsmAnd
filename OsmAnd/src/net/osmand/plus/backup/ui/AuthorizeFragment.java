@@ -123,7 +123,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_cloud_authorize, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

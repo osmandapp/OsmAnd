@@ -8,27 +8,27 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
-public class ColoringTypeCard extends MapBaseCard {
+public class ColoringTypeCard extends BaseCard {
 
 	private final GPXTrackAnalysis analysis;
 	private ColoringType coloringType;
 
-	public ColoringTypeCard(@NonNull MapActivity mapActivity,
+	public ColoringTypeCard(@NonNull FragmentActivity activity,
 	                        @Nullable GPXTrackAnalysis analysis,
 	                        @NonNull ColoringType coloringType) {
-		super(mapActivity);
+		super(activity);
 		this.analysis = analysis;
 		this.coloringType = coloringType;
 	}

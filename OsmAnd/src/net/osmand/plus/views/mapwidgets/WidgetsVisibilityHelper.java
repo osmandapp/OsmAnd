@@ -45,7 +45,11 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowQuickActionButton() {
 		return isQuickActionLayerOn()
-				&& !isInChangeMarkerPositionMode()
+				&& shouldShowFabButton();
+	}
+
+	public boolean shouldShowFabButton(){
+		return !isInChangeMarkerPositionMode()
 				&& !isInGpxDetailsMode()
 				&& !isInMeasurementToolMode()
 				&& !isInPlanRouteMode()
@@ -165,6 +169,7 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowTopButtons() {
 		return !mapActivity.shouldHideTopControls()
+				&& !isInMeasurementToolMode()
 				&& !isTrackDetailsMenuOpened()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()

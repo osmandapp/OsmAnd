@@ -86,15 +86,12 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		compoundButton.setChecked(selectedTypes == items.getTypes().size());
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
-		view.findViewById(R.id.switch_container).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				compoundButton.performClick();
-				if (listener != null) {
-					listener.onCategorySelected(category, compoundButton.isChecked());
-				}
-				notifyDataSetChanged();
+		view.findViewById(R.id.switch_container).setOnClickListener(view1 -> {
+			compoundButton.performClick();
+			if (listener != null) {
+				listener.onCategorySelected(category, compoundButton.isChecked());
 			}
+			notifyDataSetChanged();
 		});
 		setupSelectableBackground(view);
 		adjustIndicator(app, groupPosition, isExpanded, view, !nightMode);
@@ -128,15 +125,12 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		compoundButton.setChecked(selected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				compoundButton.performClick();
-				if (listener != null) {
-					listener.onTypeSelected(type, compoundButton.isChecked());
-				}
-				notifyDataSetChanged();
+		view.setOnClickListener(view1 -> {
+			compoundButton.performClick();
+			if (listener != null) {
+				listener.onTypeSelected(type, compoundButton.isChecked());
 			}
+			notifyDataSetChanged();
 		});
 		setupSelectableBackground(view);
 		setupChildIcon(view, type.getIconRes(), selected);

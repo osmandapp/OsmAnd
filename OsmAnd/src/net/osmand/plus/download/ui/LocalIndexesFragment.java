@@ -89,7 +89,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.local_index, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.local_index, container, false);
 
 		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
 		getDownloadActivity().getAccessibilityAssistant().registerPage(view, DownloadActivity.LOCAL_TAB_NUMBER);
@@ -343,7 +344,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		boolean nightMode = !app.getSettings().isLightContent();
 		UiUtilities iconsCache = app.getUIUtilities();
 		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		optionsMenuAdapter = new ContextMenuAdapter(app);

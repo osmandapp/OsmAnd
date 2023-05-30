@@ -88,8 +88,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 		super.onCreate(savedInstanceState);
 		downloadThread = app.getDownloadThread();
 		purchaseHelper = getDownloadActivity().getPurchaseHelper();
-		int themeId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		setStyle(STYLE_NO_FRAME, themeId);
+		setStyle(STYLE_NO_FRAME, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 		setHasOptionsMenu(true);
 	}
 
@@ -99,6 +98,7 @@ public class DownloadResourceGroupFragment extends BaseOsmAndDialogFragment impl
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		updateNightMode();
 		view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 		if (savedInstanceState != null) {
 			groupId = savedInstanceState.getString(REGION_ID_DLG_KEY);

@@ -87,8 +87,8 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	}
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themeInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View rootView = themeInflater.inflate(R.layout.fragment_plan_route_warning, container, false);
+		updateNightMode();
+		View rootView = themedInflater.inflate(R.layout.fragment_plan_route_warning, container, false);
 
 		applyButton = rootView.findViewById(R.id.right_bottom_button);
 		cancelButton = rootView.findViewById(R.id.dismiss_button);

@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.LabelFormatter;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -113,8 +112,9 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity activity = requireMapActivity();
-		View view = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.fragment_weather_forecast, container, false);
+		View view = themedInflater.inflate(R.layout.fragment_weather_forecast, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
 		widgetsPanel = view.findViewById(R.id.weather_widgets_panel);

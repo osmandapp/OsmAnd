@@ -51,6 +51,7 @@ import net.osmand.plus.importfiles.ui.ExitImportBottomSheet.OnExitConfirmedListe
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
+import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
@@ -107,10 +108,12 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 		if (savedInstanceState == null) {
 			collectTracks();
-			selectedFolder = app.getAppPath(GPX_IMPORT_DIR).getName();
-		} else {
-			selectedFolder = savedInstanceState.getString(SELECTED_DIRECTORY_KEY);
 		}
+		if (selectedFolder == null) {
+			String importDir = app.getAppPath(GPX_IMPORT_DIR).getName();
+			selectedFolder = savedInstanceState != null ? savedInstanceState.getString(SELECTED_DIRECTORY_KEY) : importDir;
+		}
+
 		FragmentActivity activity = requireActivity();
 		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
@@ -120,7 +123,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 
@@ -138,7 +141,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_import_tracks, container, false);
 
 		setupToolbar(view);
@@ -359,7 +362,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		if (activity != null) {
 			String name = Algorithms.getFileNameWithoutExtension(fileName);
 			FragmentManager manager = activity.getSupportFragmentManager();
-			AddNewTrackFolderBottomSheet.showInstance(manager, name, this, true);
+			AddNewTrackFolderBottomSheet.showInstance(manager, null, name, this, true);
 		}
 	}
 
@@ -464,9 +467,12 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	private void dismissAndOpenTracks() {
-		MapActivity mapActivity = getMapActivity();
-		TracksFragment fragment = mapActivity != null ? mapActivity.getFragment(TracksFragment.TAG) : null;
-		if (fragment == null) {
+		FragmentActivity activity = getActivity();
+		TracksFragment tracksFragment = null;
+		if (activity instanceof MapActivity) {
+			tracksFragment = ((MapActivity) activity).getFragment(TracksFragment.TAG);
+		}
+		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();
 		}
 		dismissAllowingStateLoss();
@@ -499,12 +505,14 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull GPXFile gpxFile,
 	                                @NonNull String fileName,
+	                                @Nullable String selectedFolder,
 	                                @Nullable GpxImportListener importListener,
 	                                long fileSize) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ImportTracksFragment fragment = new ImportTracksFragment();
 			fragment.gpxFile = gpxFile;
 			fragment.fileName = fileName;
+			fragment.selectedFolder = selectedFolder;
 			fragment.fileSize = fileSize;
 			fragment.importListener = importListener;
 			fragment.setRetainInstance(true);

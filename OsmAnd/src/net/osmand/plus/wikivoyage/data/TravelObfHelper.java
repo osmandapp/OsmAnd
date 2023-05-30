@@ -383,7 +383,7 @@ public class TravelObfHelper implements TravelHelper {
 				File file = entry.getKey();
 				for (Amenity amenity : entry.getValue()) {
 					Set<String> nameLangs = getLanguages(amenity);
-					if (nameLangs.contains(appLang)) {
+					if (nameLangs.contains(appLang) || Algorithms.isEmpty(appLang)) {
 						TravelArticle article = readArticle(file, amenity, appLang);
 						ArrayList<String> langs = new ArrayList<>(nameLangs);
 						Collections.sort(langs, new Comparator<String>() {

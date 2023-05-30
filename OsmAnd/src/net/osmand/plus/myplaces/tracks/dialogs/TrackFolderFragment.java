@@ -25,6 +25,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 public class TrackFolderFragment extends BaseTrackFolderFragment {
 
@@ -124,6 +125,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	public void onResume() {
 		super.onResume();
 		updateActionBar(false);
+		restoreState(getArguments());
 	}
 
 	@Override
@@ -135,6 +137,22 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 		showItemOptionsMenu(view, trackItem);
+	}
+
+	@Override
+	public void restoreState(Bundle bundle) {
+		super.restoreState(bundle);
+
+		if (!Algorithms.isEmpty(selectedItemPath)) {
+			TrackItem trackItem = geTrackItem(rootFolder, selectedItemPath);
+			if (trackItem != null) {
+				int index = adapter.getItemPosition(trackItem);
+				if (index != -1) {
+					recyclerView.scrollToPosition(index);
+				}
+			}
+			selectedItemPath = null;
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {

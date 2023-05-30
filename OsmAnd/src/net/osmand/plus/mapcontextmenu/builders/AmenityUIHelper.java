@@ -238,6 +238,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					wikiAmenity.setType(type);
 					wikiAmenity.setSubType(subtype);
 					wikiAmenity.setAdditionalInfo(additionalInfoFiltered);
+					wikiAmenity.setLocation(getLatLon());
 					String name = additionalInfoFiltered.get("name");
 					if (Algorithms.isEmpty(name)) {
 						wikiAmenity.setName(name);

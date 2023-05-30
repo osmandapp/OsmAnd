@@ -34,7 +34,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
-import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -101,6 +100,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		OsmandApplication app = mapActivity.getMyApplication();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -126,43 +126,35 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		ImageView backButton = view.findViewById(R.id.back_button);
 		Drawable icBack = getContentIcon(AndroidUtils.getNavigationIconResId(mapActivity));
 		backButton.setImageDrawable(icBack);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		backButton.setOnClickListener(v -> dismiss());
 
 		updateTitle();
 
-		view.findViewById(R.id.sort_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean hasActivePoints = false;
-				List<Object> items = listAdapter.getActiveObjects();
-				if (items.size() > 0) {
-					if (items.size() > 1) {
-						hasActivePoints = true;
-					} else {
-						Object item = items.get(0);
-						if (item instanceof LocationPointWrapper) {
-							LocationPointWrapper w = (LocationPointWrapper) item;
-							if (w.getPoint() instanceof TargetPoint) {
-								hasActivePoints = !((TargetPoint) w.point).start;
-							}
-						} else {
-							hasActivePoints = true;
+		view.findViewById(R.id.sort_button).setOnClickListener(v -> {
+			boolean hasActivePoints = false;
+			List<Object> items = listAdapter.getActiveObjects();
+			if (items.size() > 0) {
+				if (items.size() > 1) {
+					hasActivePoints = true;
+				} else {
+					Object item = items.get(0);
+					if (item instanceof LocationPointWrapper) {
+						LocationPointWrapper w = (LocationPointWrapper) item;
+						if (w.getPoint() instanceof TargetPoint) {
+							hasActivePoints = !((TargetPoint) w.point).start;
 						}
+					} else {
+						hasActivePoints = true;
 					}
 				}
+			}
 
-				if (hasActivePoints) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
-						fragment.setUsedOnMap(true);
-						fragment.show(mapActivity.getSupportFragmentManager(), TargetOptionsBottomSheetDialogFragment.TAG);
-					}
+			if (hasActivePoints) {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					TargetOptionsBottomSheetDialogFragment fragment = new TargetOptionsBottomSheetDialogFragment();
+					fragment.setUsedOnMap(true);
+					fragment.show(activity.getSupportFragmentManager(), TargetOptionsBottomSheetDialogFragment.TAG);
 				}
 			}
 		});
@@ -180,12 +172,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			view.findViewById(R.id.control_buttons).setLayoutParams(params);
 		}
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		view.setOnClickListener(v -> dismiss());
 
 		mainView.setOnClickListener(null);
 
@@ -253,48 +240,34 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		FrameLayout clearButton = view.findViewById(R.id.clear_all_button);
 		TextView clearButtonDescr = view.findViewById(R.id.clear_all_button_descr);
 		clearButtonDescr.setText(R.string.shared_string_clear_all);
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				app.getTargetPointsHelper().clearAllPoints(true);
-				updateTitle();
-				reloadAdapter();
-			}
+		clearButton.setOnClickListener(v -> {
+			app.getTargetPointsHelper().clearAllPoints(true);
+			updateTitle();
+			reloadAdapter();
 		});
 
 		View applyButton = view.findViewById(R.id.start_button);
-		applyButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				cancelTimer();
-				updateRouteCalculationProgress(0);
-				applyPointsChanges();
-				updateTitle();
-			}
+		applyButton.setOnClickListener(v -> {
+			cancelTimer();
+			updateRouteCalculationProgress(0);
+			applyPointsChanges();
+			updateTitle();
 		});
 
 		View cancelButton = view.findViewById(R.id.cancel_button);
 		TextViewEx cancelTitle = view.findViewById(R.id.cancel_button_descr);
 		cancelTitle.setText(R.string.shared_string_undo);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				cancelTimer();
-				reloadAdapter();
-				updateRouteCalculationProgress(0);
-				updateTitle();
-			}
+		cancelButton.setOnClickListener(v -> {
+			cancelTimer();
+			reloadAdapter();
+			updateRouteCalculationProgress(0);
+			updateTitle();
 		});
 
-		onStateChangedListener = new StateChangedListener<Void>() {
-			@Override
-			public void stateChanged(Void change) {
-				app.runInUIThread(() -> {
-					reloadAdapter();
-					updateTitle();
-				});
-			}
-		};
+		onStateChangedListener = change -> app.runInUIThread(() -> {
+			reloadAdapter();
+			updateTitle();
+		});
 
 		updateListAdapter();
 		applyDayNightMode();

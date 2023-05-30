@@ -106,7 +106,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_reorder_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -338,9 +338,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, selectedPanel.getMergedPanels());
 
 		for (MapWidgetInfo widgetInfo : widgets) {
-			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
-			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)
-					|| enabled) {
+			if (!WidgetsAvailabilityHelper.isWidgetAvailable(app, widgetInfo.key, selectedAppMode)) {
 				continue;
 			}
 

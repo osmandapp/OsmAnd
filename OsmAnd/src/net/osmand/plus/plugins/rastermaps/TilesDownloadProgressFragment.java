@@ -146,8 +146,7 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		Context context = requireContext();
-		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
+		updateNightMode();
 		view = themedInflater.inflate(R.layout.tiles_download_progress_fragment, container, false);
 
 		setupToolbar();

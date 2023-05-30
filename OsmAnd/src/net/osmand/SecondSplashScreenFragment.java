@@ -56,7 +56,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		FragmentActivity activity = requireActivity();
-		nightMode = settings.isSupportSystemDefaultTheme() && !settings.isLightSystemDefaultTheme();
+		nightMode = settings.isSupportSystemTheme() && !settings.isLightSystemTheme();
 
 		RelativeLayout view = new RelativeLayout(activity);
 		view.setClickable(true);

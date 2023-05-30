@@ -56,8 +56,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
 
-		mainView = UiUtilities.getInflater(getContext(), nightMode)
-				.inflate(R.layout.fragment_direction_indication_dialog, container);
+		updateNightMode();
+		mainView = themedInflater.inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(getContext())));

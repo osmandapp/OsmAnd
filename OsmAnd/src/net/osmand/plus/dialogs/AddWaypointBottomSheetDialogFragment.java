@@ -46,12 +46,9 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getIcon(R.drawable.list_destination, 0))
 				.setTitle(getString(R.string.replace_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						targetPointsHelper.navigateToPoint(latLon, true, -1, name);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					targetPointsHelper.navigateToPoint(latLon, true, -1, name);
+					dismiss();
 				})
 				.create();
 		items.add(replaceDestItem);
@@ -62,12 +59,9 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getIcon(R.drawable.list_startpoint, 0))
 				.setTitle(getString(R.string.make_as_start_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						targetPointsHelper.setStartPoint(latLon, true, name);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					targetPointsHelper.setStartPoint(latLon, true, name);
+					dismiss();
 				})
 				.create();
 		items.add(replaceStartItem);
@@ -80,13 +74,10 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getSubsequentDestIcon())
 				.setTitle(getString(R.string.keep_and_add_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						targetPointsHelper.navigateToPoint(latLon, true,
-								targetPointsHelper.getIntermediatePoints().size() + 1, name);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					targetPointsHelper.navigateToPoint(latLon, true,
+							targetPointsHelper.getIntermediatePoints().size() + 1, name);
+					dismiss();
 				})
 				.create();
 		items.add(subsequentDestItem);
@@ -97,12 +88,9 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getFirstIntermDestIcon())
 				.setTitle(getString(R.string.add_as_first_destination_point))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						targetPointsHelper.navigateToPoint(latLon, true, 0, name);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					targetPointsHelper.navigateToPoint(latLon, true, 0, name);
+					dismiss();
 				})
 				.create();
 		items.add(firstIntermItem);

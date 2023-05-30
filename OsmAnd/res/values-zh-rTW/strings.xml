@@ -1226,7 +1226,7 @@
     <string name="lang_sc">薩丁尼亞島</string>
     <string name="lang_sr">塞爾維亞語（西里爾文）</string>
     <string name="lang_zh_cn">中文（简体）</string>
-    <string name="lang_zh_tw">中文（正體）</string>
+    <string name="lang_zh_tw">繁體中文</string>
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
@@ -5207,4 +5207,15 @@
     <string name="map_2d_mode_action">2D 模式</string>
     <string name="map_3d_mode_action">3D 模式</string>
     <string name="map_3d_mode_description">用兩根手指觸控地圖並上下移動以調整地圖傾斜度。</string>
+    <string name="show_all_tracks_on_the_map">在地圖上顯示所有軌跡</string>
+    <string name="delete_folder_question">刪除資料夾？</string>
+    <string name="delete_track_folder_dialog_message">這將會刪除「%1$s」資料夾與其包含的所有軌跡 (%2$s)。</string>
+    <string name="delete_folder">刪除資料夾</string>
+    <string name="rssi_widget_desc">顯示您外部裝置的 RSSI 層級。</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">此資料夾尚無任何軌跡。</string>
+    <string name="tracks_empty_folder">空資料夾</string>
+    <string name="track_not_recorded">未記錄</string>
+    <string name="shared_string_new_track">新軌跡</string>
+    <string name="shared_string_visible_on_map">在地圖上可見</string>
 </resources>

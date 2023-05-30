@@ -27,7 +27,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 public class BackupAuthorizationFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
@@ -46,7 +45,7 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_authorize_cloud, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 

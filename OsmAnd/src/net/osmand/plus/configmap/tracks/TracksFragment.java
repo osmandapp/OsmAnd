@@ -70,7 +70,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -126,7 +125,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@Override
-	protected boolean useMapNightMode() {
+	protected boolean isUsedOnMap() {
 		return true;
 	}
 
@@ -157,8 +156,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		inflater = UiUtilities.getInflater(requireActivity(), nightMode);
-		View view = inflater.inflate(R.layout.tracks_fragment, container, false);
+		updateNightMode();
+		View view = themedInflater.inflate(R.layout.tracks_fragment, container, false);
 
 		setupToolbar(view);
 		setupTabLayout(view);
@@ -443,7 +442,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				if (!Algorithms.isEmpty(filesUri)) {
 					AndroidUiHelper.updateVisibility(progressBar, true);
 					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, true);
+					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getGpxDestinationDir(app, true));
 				}
 			}
 		} else {
@@ -605,13 +604,9 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	@Override
 	public void onFileMove(@NonNull File src, @NonNull File dest) {
-		File destFolder = dest.getParentFile();
-		if (destFolder != null && !destFolder.exists() && !destFolder.mkdirs()) {
-			app.showToastMessage(R.string.file_can_not_be_moved);
-		} else if (dest.exists()) {
+		if (dest.exists()) {
 			app.showToastMessage(R.string.file_with_name_already_exists);
-		} else if (src.renameTo(dest)) {
-			app.getGpxDbHelper().rename(src, dest);
+		} else if (FileUtils.renameGpxFile(app, src, dest) != null) {
 			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);

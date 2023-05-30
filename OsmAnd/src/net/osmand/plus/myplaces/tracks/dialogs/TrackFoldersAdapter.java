@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +21,7 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.EmptyFolderViewHolder;
+import net.osmand.plus.myplaces.tracks.dialogs.viewholders.FolderStatsViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHolder.RecordingTrackListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder;
@@ -30,6 +29,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -50,6 +50,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public static final int TYPE_FOLDER = 3;
 	public static final int TYPE_TRACK = 4;
 	public static final int TYPE_EMPTY_FOLDER = 5;
+	public static final int TYPE_FOLDER_STATS = 6;
 
 	private final OsmandApplication app;
 	private final UpdateLocationViewCache locationViewCache;
@@ -69,6 +70,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 	private boolean nightMode;
 	private boolean selectionMode;
+	private boolean shouldShowFolder;
 
 	public TrackFoldersAdapter(@NonNull OsmandApplication app, boolean nightMode) {
 		this.app = app;
@@ -98,6 +100,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public void setSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
+	}
+
+	public void setShouldShowFolder(boolean shouldShowFolder) {
+		this.shouldShowFolder = shouldShowFolder;
 	}
 
 	public void setSortTracksListener(@Nullable SortTracksListener sortListener) {
@@ -143,6 +149,9 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case TYPE_EMPTY_FOLDER:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
 				return new EmptyFolderViewHolder(view, emptyTracksListener, nightMode);
+			case TYPE_FOLDER_STATS:
+				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
+				return new FolderStatsViewHolder(app, view);
 			default:
 				throw new IllegalArgumentException("Unsupported view type " + viewType);
 		}
@@ -157,6 +166,8 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return TYPE_FOLDER;
 		} else if (object instanceof VisibleTracksGroup) {
 			return TYPE_VISIBLE_TRACKS;
+		} else if (object instanceof TrackFolderAnalysis) {
+			return TYPE_FOLDER_STATS;
 		} else if (object instanceof Integer) {
 			int item = (Integer) object;
 			if (TYPE_SORT_TRACKS == item) {
@@ -168,9 +179,16 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		throw new IllegalArgumentException("Unsupported view type");
 	}
 
+	private boolean isLastItem(int position) {
+		int itemCount = getItemCount();
+		boolean isStatsLastItem = items.get(itemCount - 1) instanceof TrackFolderAnalysis;
+		int offset = (isStatsLastItem && itemCount >= 2) ? 2 : 1;
+		return position != itemCount - offset;
+	}
+
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		boolean lastItem = position != getItemCount() - 1;
+		boolean lastItem = isLastItem(position);
 
 		if (holder instanceof SortTracksViewHolder) {
 			SortTracksViewHolder viewHolder = (SortTracksViewHolder) holder;
@@ -179,7 +197,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 			TrackItem trackItem = (TrackItem) items.get(position);
 
 			TrackViewHolder viewHolder = (TrackViewHolder) holder;
-			viewHolder.bindView(NAME_ASCENDING, trackItem, lastItem, false, selectionMode);
+			viewHolder.bindView(sortMode, trackItem, lastItem, shouldShowFolder, selectionMode);
 		} else if (holder instanceof TrackFolderViewHolder) {
 			TrackFolder trackFolder = (TrackFolder) items.get(position);
 
@@ -198,6 +216,11 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		} else if (holder instanceof EmptyFolderViewHolder) {
 			EmptyFolderViewHolder viewHolder = (EmptyFolderViewHolder) holder;
 			viewHolder.bindView();
+		} else if (holder instanceof FolderStatsViewHolder) {
+			TrackFolderAnalysis folderAnalysis = (TrackFolderAnalysis) items.get(position);
+
+			FolderStatsViewHolder viewHolder = (FolderStatsViewHolder) holder;
+			viewHolder.bindView(folderAnalysis);
 		}
 	}
 
@@ -206,8 +229,12 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 		return items.size();
 	}
 
+	public int getItemPosition(@NonNull Object object) {
+		return items.indexOf(object);
+	}
+
 	public void updateItem(@NonNull Object object) {
-		int index = items.indexOf(object);
+		int index = getItemPosition(object);
 		if (index != -1) {
 			notifyItemChanged(index);
 		}

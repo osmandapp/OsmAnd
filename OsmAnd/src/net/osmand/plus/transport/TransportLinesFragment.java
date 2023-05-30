@@ -52,7 +52,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		isShowAnyTransport = menu.isShowAnyTransport();
 
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		updateNightMode();
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 		view = themedInflater.inflate(R.layout.fragment_transport_lines, container, false);
 
@@ -126,6 +126,11 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private void updateScreenMode(boolean enabled) {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.empty_screen), !enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.normal_screen), enabled);
+	}
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
 	}
 
 	public static void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,

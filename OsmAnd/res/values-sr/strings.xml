@@ -903,7 +903,7 @@
     <string name="recording_description">Снимам %1$s %3$s %2$s</string>
     <string name="audionotes_location_not_defined">Кликните „Користи положај…“ да додате белешку одређеној локацији.</string>
     <string name="index_srtm_parts">делови</string>
-    <string name="rendering_attr_alpineHiking_description">Приказуј путеве према лествици САЦ-а.</string>
+    <string name="rendering_attr_alpineHiking_description">Приказуј путеве према лествици САЦ-а/САИ-а.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Приказуј путеве према путањама ОСМЦ-а.</string>
     <string name="rendering_attr_showRoadMaps_description">Одаберите када ће се приказивати само путне карте:</string>
     <string name="rendering_attr_showRoadMaps_name">Само путне карте</string>
@@ -2416,7 +2416,7 @@
 \n
 \nСнимљене путање се могу делити са пријатељима или слати на ОСМ. Спортисти могу да користе снимљене путање да прате своја вежбања. Директно у ОсмАнд-у може да се ради основно проучавање путања, као што су рачунање брзине круга, просечна брзина итд. Наравно, путање се даље могу проучавати у другим нарочитим алатима за проучавање.</string>
     <string name="rendering_attr_pisteGrooming_name">Равнање стазе</string>
-    <string name="rendering_attr_alpineHiking_name">Алпска лествица за планинарење (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Алпска лествица за планинарење</string>
     <string name="osmand_plus_extended_description_part8">Приближна покривеност карте и каквоћа:
 \n • Западна Европа: ****
 \n • Источна Европа: ***
@@ -2563,7 +2563,7 @@
     <string name="ski_map_render_descr">За скијање. Приказује стазе, скијашке жичаре, сеоске стазе итд. Замагљује мање битне ставке на карти.</string>
     <string name="light_rs_render_descr">Једноставан приказ вожње. Пријатан за очи ноћу, изохипсе, поморанџасти путеви са добрим сенчењем, замагљује мање битне ставке на карти.</string>
     <string name="topo_render_descr">За шетање, пешачење, трчање и бициклизам у природи. Добра читљивост у условима спољне осветљености. Добар контраст за путеве и природне објекте, различити типови путања, изохипсе са напредним подешавањима, више детаља. Могућност врста подлоге Вам омогућава да разликујете путеве са различитим квалитетима подлога. Нема ноћног рада.</string>
-    <string name="default_render_descr">Стил опште намене. Густи градови су приказани јасно. Приказује изохипсе, путање, квалитет подлоге, забране приступа, блокаде путева, исцртавање путева по алпској лествици САЦ, објекти за спортове на брзацима.</string>
+    <string name="default_render_descr">Стил опште намене. Густи градови су приказани јасно. Приказује изохипсе, путање, квалитет подлоге, забране приступа, блокаде путева, исцртавање путева по алпској лествици САЦ/САИ, објекти за спортове на брзацима.</string>
     <string name="open_wikipedia_link_online">Отвори Википедија везу са интернетом</string>
     <string name="open_wikipedia_link_online_description">Веза ће бити отворена у веб читачу.</string>
     <string name="read_wikipedia_offline_description">Да бисте читали чланке са Википедије и Викивоајажа, купите чланарину на ОсмАнд уживо.</string>
@@ -3665,7 +3665,7 @@
 \n
 \n%2$s: су ступњеви при којима ће изворне плочице бити видљиве, а умањење или увећање биће изван ових вредности.</string>
     <string name="lenght_limit_description">Унесите дужину возила, нека ограничења пута могу бити примењена за дужа возила.</string>
-    <string name="quick_action_remove_next_destination">Обриши најближу одредишну тачку</string>
+    <string name="quick_action_remove_next_destination">Обриши следећу одредишну тачку</string>
     <string name="please_provide_point_name_error">Молимо одредите име тачке</string>
     <string name="quick_action_remove_next_destination_descr">Уклања тренутну одредишну тачку. Ако је она и завршна тачка, навођење ће се зауставити.</string>
     <string name="search_download_wikipedia_maps">Преузмите карте Википедије</string>
@@ -5081,6 +5081,16 @@
 \n
 \n • Исправљена је грешка приликом приказа места пошћења
 \n
+\n • Додата је могућност преузимања плочица са мреже користећи „прочељне“ или „подметнуте“ карте
+\n
+\n • Додата је могућност употребе империјалне мерне јединице за „особине возила“
+\n
+\n • Нови пресек мопед
+\n
+\n • „Положај приказа“ је добио нову могућност „самосталан“
+\n
+\n • Исправљено је управљање покретима картом за нагиб, приближавање и обртање
+\n
 \n</string>
     <string name="enable_3d_maps">Омогући просторне, 3Д-карте</string>
     <string name="test_heightmap">Опитај висинску карту</string>
@@ -5088,4 +5098,129 @@
     <string name="generate_hillshade_from_3d_maps">Образуј оквирне карте сенчених падина из просторних, 3Д карата</string>
     <string name="generate_slope_from_3d_maps">Образуј оквире карата нагиба из просторних, 3Д карата</string>
     <string name="disable_vertex_hillshade_3d">Онемогући вртложно сенчење у просторном прегледу 3Д</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="rendering_value_small_name">Мали</string>
+    <string name="rendering_value_name_only_name">Само име</string>
+    <string name="device_disconnected">Одспојен %1$s</string>
+    <string name="is_imported">%1$s је увезен.</string>
+    <string name="file_already_exists_description">„%1$s“. Датотека са таквим именом већ постоји. Замена ће преписати све измене садашњим издањем.</string>
+    <string name="file_already_exists">Датотека већ постоји</string>
+    <string name="nav_profile_confirm_delete">Да ли сте сигурни да желите избрисати „%1$s“\?</string>
+    <string name="external_device_low_battery">Батерија је отпразна</string>
+    <string name="external_device_menu_forget">Заборави</string>
+    <string name="external_device_characteristic_speed">Брзина</string>
+    <string name="external_device_characteristic_distance">Растојање</string>
+    <string name="external_device_characteristic_total_distance">Укупно растојање</string>
+    <string name="external_device_characteristic_battery_level">Батерија</string>
+    <string name="external_device_characteristic_gear_ratio">Распон брзина</string>
+    <string name="external_device_characteristic_cadence">Ритам</string>
+    <string name="external_device_characteristic_pulse_rate">Брзина откуцаја срца</string>
+    <string name="external_device_characteristic_stride_length">Дужина корака</string>
+    <string name="external_device_characteristic_temperature">Топлота</string>
+    <string name="external_device_details_information">Податак</string>
+    <string name="external_device_details_received_data">Примљени подаци</string>
+    <string name="shutter_sound">Звук окидача</string>
+    <string name="offline_cache">Ванмрежни захват</string>
+    <string name="shared_string_all_world">Цели свет</string>
+    <string name="external_device_characteristic_diastolic">Дијастолички</string>
+    <string name="external_device_characteristic_systolic">Систолички</string>
+    <string name="common_weight_limit_error">Најмања вредност је „%1$s“ %2$s. Користите пресек „%3$s“ ако ли је тежина возила мања од најмање вредности.</string>
+    <string name="external_device_details_pair">Упари</string>
+    <string name="external_device_details_disconnect">Прекини везу</string>
+    <string name="ant_plus_open_settings">Отвори поставке</string>
+    <string name="rendering_value_defaultMedium_name">Подразумевано (између)</string>
+    <string name="weather_download_error">Нисам успео да преузмем %1$s плочица.</string>
+    <string name="search_track_by_name">Тражи траг по имену</string>
+    <string name="number_of_tracks">%1$s трагова</string>
+    <string name="external_device_connected">Повезан</string>
+    <string name="external_device_characteristic_heart_rate">Брзина откуцаја срца</string>
+    <string name="external_device_forget_sensor_description">Пријемник ће бити уклоњен са списка. Моћи ћете да упарите овај пријемник кад год пожелите.</string>
+    <string name="external_device_disconnected">Неповезан</string>
+    <string name="external_device_details_connect">Повежи</string>
+    <string name="bluetooth_disconnected">Неповезан, %s</string>
+    <string name="bluetooth_connected">Повезан, %s</string>
+    <string name="ant_plus_help_title">Не знак какву врсту пријемника имам</string>
+    <string name="ant_plus_searching_text_description">Молим, држите уређај близу пријемника. Морате укључити пријемник да би га Осман пронашао.</string>
+    <string name="free_maps_updates">Слободне надградње (хитност)</string>
+    <string name="camera_app">Програм камере</string>
+    <string name="speak_route_deviation">Најави одступање од пута</string>
+    <string name="weather_forecast_is_outdated">Временске прилике су застареле.</string>
+    <string name="select_layer">Одаберите слој</string>
+    <string name="external_device_details_total_distance">Укупно растојање</string>
+    <string name="external_device_details_connection">Веза</string>
+    <string name="external_device_details_distance">Растојање</string>
+    <string name="external_device_ble">БЛЕ</string>
+    <string name="external_device_ant">АНТ</string>
+    <string name="external_device_details_battery">Батерија</string>
+    <string name="external_device_details_speed">Брзина</string>
+    <string name="rendering_attr_lightDetail_name">Подробност светла</string>
+    <string name="rendering_value_sectors_name">Одсечци</string>
+    <string name="rendering_value_sector1_name">Одсечак 1</string>
+    <string name="rendering_attr_lightDetail_description">Подразумевано: име поморске ознаке (светла особина.група.раздобље), означите додатне податке на одсечцима 1 до 3 1,2,3,4,5 особина светла</string>
+    <string name="bicycle_scd_device_name">Уређај бицикла</string>
+    <string name="external_device_blood_pressure">Крвни притисак</string>
+    <string name="no_bt_permission">Дозвола Блутуту није одобрена</string>
+    <string name="beats_per_minute_short">бпм</string>
+    <string name="running_scds_device_name">Радећи уређај</string>
+    <string name="shared_string_chest">Груди</string>
+    <string name="shared_string_wrist">Зглоб</string>
+    <string name="shared_string_finger">Прст</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_ear_lobe">Ушна шкољка</string>
+    <string name="shared_string_foot">Нога</string>
+    <string name="external_device_characteristic_arterial_pressure">Артеријски притисак</string>
+    <string name="external_device_characteristic_cuff_pressure">Притисак наруквице</string>
+    <string name="ble_search_again">Поново претражи</string>
+    <string name="ant_plus_searching_text">Претражујем пријемнике</string>
+    <string name="ant_plus_searching">Претражујем</string>
+    <string name="ant_plus_pair_new_sensor">Упарите нови пријемник</string>
+    <string name="bluetooth_found_title">Пронађен: %d</string>
+    <string name="bluetooth_not_supported">Блутут није подржан</string>
+    <string name="ant_plus_nothing_found_text">Нисам успео да пронађем ни један пријемник</string>
+    <string name="ant_plus_pair_new_sensor_ble">Упари пријемник Блутут ЛЕ</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Упари пријемник АНТ+</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Можете упарити пријемнике Блутута ЛЕ и АНТ+ са Османдом.</string>
+    <string name="learn_more_about_sensors_link">Сазнајте подробније о пријемницима.</string>
+    <string name="shared_string_pounds">фунта</string>
+    <string name="weather_forecast">Временске прилике</string>
+    <string name="offline_weather_forecast">Ванмрежне временске прилике</string>
+    <string name="offline_weather_forecast_desc">Можете преузети седмодневне временске прилике.</string>
+    <string name="delete_folder_question">Да ли избрисати фасциклу\?</string>
+    <string name="show_all_tracks_on_the_map">Приказуј све трагове на карти</string>
+    <string name="rssi_widget_desc">Приказуј ступањ РССИ Вашег спољњег уређаја.</string>
+    <string name="map_widget_rssi">РССИ</string>
+    <string name="tracks_empty_folder_description">Ова фасцикла још увек не садржи икакав траг.</string>
+    <string name="tracks_empty_folder">Празна фасцикла</string>
+    <string name="map_3d_mode_description">Додирните карту двома прстима и преместите их навише и наниже ради прилагођавања нагиба карте.</string>
+    <string name="shared_string_visible_on_map">Видљиво на карти</string>
+    <string name="no_poi_for_category">Није пронађена тачка занимања</string>
+    <string name="rendering_value_sector2_name">Одсечак 2</string>
+    <string name="rendering_value_sector3_name">Одсечак 3</string>
+    <string name="rendering_value_sector4_name">Одсечак 4</string>
+    <string name="rendering_value_sector5_name">Одсечак 5</string>
+    <string name="no_search_results">Нема налаза</string>
+    <string name="poi_categories">Врсте тачака занимања</string>
+    <string name="external_device_forget_sensor">Заборави пријемник</string>
+    <string name="clear_online_cache_description">Ово ће очистити захват за мрежне временске плочице.</string>
+    <string name="clear_online_cache">Очисти мрежни захват</string>
+    <string name="shared_string_alt_name">Заменско име</string>
+    <string name="token_is_not_valid">Тока није вредећа</string>
+    <string name="device_connected">Неповезан је %1$s</string>
+    <string name="ant_plus_nothing_found_description">Проверите да ли је:
+\n- Блутут укључен
+\n- Пријемник укључен
+\n- Овај уређај смештен близу пријемника</string>
+    <string name="ant_plus_bluetooth_off">Блутут је искључен</string>
+    <string name="ant_plus_bluetooth_off_description">Укључите претрагу Блутута и упарите пријемнике.</string>
+    <string name="delete_folder">Избриши фасциклу</string>
+    <string name="delete_track_folder_dialog_message">Ово ће избрисати фасциклу „%1$s“ и све садржане стазе (%2$s).</string>
+    <string name="track_not_recorded">Није снимљено</string>
+    <string name="shared_string_new_track">Нови траг</string>
+    <string name="rendering_value_sacScale_name">Лествица САЦ</string>
+    <string name="rendering_value_caiScale_name">Лествица ЦАИ</string>
+    <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
+    <string name="visible_in_3d_mode">Видљиво у просторном приказу (3д)</string>
+    <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>
+    <string name="map_3d_mode_hint">Дуги тап на дугме омогућава промену положаја дугмета.</string>
+    <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
 </resources>

@@ -47,16 +47,13 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
-	private LayoutInflater themedInflater;
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_purchases, container, false);
 		createToolbar(view, nightMode);
 		cardsContainer = view.findViewById(R.id.cards_container);
-
 		return view;
 	}
 

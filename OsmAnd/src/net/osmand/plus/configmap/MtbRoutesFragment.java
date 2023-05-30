@@ -49,7 +49,7 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
+		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_mtb_routes, container, false);
 
 		setupHeader(view);
