@@ -169,7 +169,6 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowTopButtons() {
 		return !mapActivity.shouldHideTopControls()
-				&& !isInMeasurementToolMode()
 				&& !isTrackDetailsMenuOpened()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()
