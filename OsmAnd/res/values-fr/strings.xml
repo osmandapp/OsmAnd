@@ -5218,4 +5218,8 @@
     <string name="shared_string_new_track">Nouvelle trace</string>
     <string name="shared_string_visible_on_map">Visible sur la carte</string>
     <string name="delete_track_folder_dialog_message">Cela supprimera le dossier \"%1$s\" ainsi que toutes les traces (%2$s) dans celui-ci.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Aucun capteur de ce type n\'est connecté</string>
+    <string name="save_track_external_sensors_data">Données</string>
+    <string name="external_sensors_source_of_data">Source des données</string>
+    <string name="external_sensors_not_found">Capteurs non trouvés</string>
 </resources>
