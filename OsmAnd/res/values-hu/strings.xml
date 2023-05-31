@@ -5218,4 +5218,9 @@
     <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) %1$s mappát és minden benne tárolt nyomvonalat (%2$s).</string>
     <string name="delete_folder_question">Mappa törlése\?</string>
     <string name="delete_folder">Mappa törlése</string>
+    <string name="external_sensors_not_found">Nem találhatók érzékelők</string>
+    <string name="external_sensors_source_of_data">Az adat forrása</string>
+    <string name="save_track_external_sensors_data">Adat</string>
+    <string name="write_data_from_sensor_to_track">Adatok írása külső érzékelőkről GPX fájlba az utazás rögzítése során.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nincs ilyen típusú érzékelő kapcsolódva</string>
 </resources>

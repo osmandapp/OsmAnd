@@ -5234,4 +5234,9 @@
     <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде вилучено разом з усіма треками (%2$s) в ній.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
+    <string name="external_sensors_not_found">Датчиків не знайдено</string>
+    <string name="external_sensors_source_of_data">Джерело даних</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Немає підключених датчиків цього типу</string>
+    <string name="write_data_from_sensor_to_track">Записувати дані з зовнішніх датчиків у GPX під час запису треку.</string>
+    <string name="save_track_external_sensors_data">Дані</string>
 </resources>
