@@ -464,7 +464,7 @@ public class OsmAndLocationSimulation {
 				}
 				String br = location.getExtensionsToRead().get("bearing");
 				if (!Algorithms.isEmpty(br)) {
-					l.setBearing((float) Double.parseDouble(br));
+					l.setBearing((float) Algorithms.parseDoubleSilently(br, 0));
 				}
 				if (!Double.isNaN(location.ele)) {
 					l.setAltitude(location.ele);
