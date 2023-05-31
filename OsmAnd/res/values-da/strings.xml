@@ -5232,4 +5232,9 @@
     <string name="track_not_recorded">Ikke optaget</string>
     <string name="shared_string_new_track">Nyt spor</string>
     <string name="shared_string_visible_on_map">Synlig på kort</string>
+    <string name="write_data_from_sensor_to_track">Skriv data fra eksterne sensorer til GPX under turoptagelse.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Der er ikke tilsluttet sensorer af denne type</string>
+    <string name="save_track_external_sensors_data">Data</string>
+    <string name="external_sensors_not_found">Sensorer ikke fundet</string>
+    <string name="external_sensors_source_of_data">Datakilde</string>
 </resources>
