@@ -541,7 +541,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void scanBLEDevices(boolean enable) {
 		if (!enable) {
 			if (bleScanner != null) {
-				if (AndroidUtils.hasBLEPermission(activity)) {
+				if (AndroidUtils.hasBLEPermission(activity) && bleScanning) {
 					bleScanner.stopScan(bleScanCallback);
 				}
 				bleScanning = false;
@@ -586,7 +586,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	public boolean isBLEEnabled() {
-		return activity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)
+		return activity != null && activity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)
 				&& bluetoothAdapter != null && bluetoothAdapter.isEnabled();
 	}
 
