@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Видимые</string>
+    <string name="shared_string_visible">Виден</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -3501,7 +3501,7 @@
     <string name="context_menu_actions">Действия контекстного меню</string>
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы из %1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
-    <string name="shared_string_hidden">Скрыты</string>
+    <string name="shared_string_hidden">Скрыт</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
     <string name="main_actions_descr">Только четыре кнопки.</string>
@@ -5217,4 +5217,9 @@
     <string name="rendering_value_sector4_name">Сектор 4</string>
     <string name="rendering_value_sector5_name">Сектор 5</string>
     <string name="rendering_value_name_only_name">Только название</string>
+    <string name="save_track_external_sensors_data">Данные</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Подключённых датчиков данного типа нет</string>
+    <string name="write_data_from_sensor_to_track">Записать данные с внешних датчиков в GPX-файл во время записи маршрута.</string>
+    <string name="external_sensors_not_found">Датчики не найдены</string>
+    <string name="external_sensors_source_of_data">Источник данных</string>
 </resources>
