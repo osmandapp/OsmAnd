@@ -113,6 +113,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -1075,34 +1076,20 @@ public class AndroidUtils {
 	}
 
 	public static String createNewFileName(String oldName) {
-		int firstDotIndex = oldName.indexOf('.');
+		int firstDotIndex = oldName.lastIndexOf('.');
 		String nameWithoutExt = oldName.substring(0, firstDotIndex);
 		String ext = oldName.substring(firstDotIndex);
-
-		StringBuilder numberSection = new StringBuilder();
-		int i = nameWithoutExt.length() - 1;
-		boolean hasNameNumberSection = false;
-		do {
-			char c = nameWithoutExt.charAt(i);
-			if (Character.isDigit(c)) {
-				numberSection.insert(0, c);
-			} else {
-				if (Character.isSpaceChar(c) && numberSection.length() > 0) {
-					hasNameNumberSection = true;
-				}
-				break;
-			}
-			i--;
-		} while (i >= 0);
-		int newNumberValue = Integer.parseInt(hasNameNumberSection ? numberSection.toString() : "0") + 1;
-
 		String newName;
-		if (newNumberValue == 1) {
-			newName = nameWithoutExt + " " + newNumberValue + ext;
+		boolean oldNameMatches = Pattern.compile("\\s[(]\\d+[)]$").matcher(nameWithoutExt).find();
+		if (oldNameMatches) {
+			int lastOpenBraceIndex = nameWithoutExt.lastIndexOf('(');
+			int lastCloseBraceIndex = nameWithoutExt.lastIndexOf(')');
+			String number = nameWithoutExt.substring(lastOpenBraceIndex + 1, lastCloseBraceIndex);
+			int newNumber = Integer.parseInt(number) + 1;
+			newName = nameWithoutExt.substring(0, lastOpenBraceIndex + 1) + newNumber + ")" + ext;
 		} else {
-			newName = nameWithoutExt.substring(0, i) + " " + newNumberValue + ext;
+			newName = nameWithoutExt + " (1)" + ext;
 		}
-
 		return newName;
 	}
 
