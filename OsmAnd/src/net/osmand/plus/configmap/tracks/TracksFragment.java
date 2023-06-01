@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 
@@ -47,6 +48,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
+import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
@@ -440,9 +443,13 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 			if (data != null) {
 				List<Uri> filesUri = IntentHelper.getIntentUris(data);
 				if (!Algorithms.isEmpty(filesUri)) {
-					AndroidUiHelper.updateVisibility(progressBar, true);
-					importHelper.setGpxImportListener(getGpxImportListener(filesUri.size()));
-					importHelper.handleGpxFilesImport(filesUri, ImportHelper.getGpxDestinationDir(app, true));
+					int filesSize = filesUri.size();
+					boolean singleTrack = filesSize == 1;
+					File dir = ImportHelper.getGpxDestinationDir(app, true);
+					OnSuccessfulGpxImport onGpxImport = singleTrack ? OPEN_GPX_CONTEXT_MENU : null;
+
+					importHelper.setGpxImportListener(getGpxImportListener(filesSize));
+					importHelper.handleGpxFilesImport(filesUri, dir, onGpxImport, true, singleTrack);
 				}
 			}
 		} else {
@@ -452,15 +459,17 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	@NonNull
 	private GpxImportListener getGpxImportListener(int filesSize) {
-		return new GpxImportListener() {
-			private int importCounter;
+		return new MultipleTracksImportListener(filesSize) {
 
 			@Override
-			public void onImportComplete(boolean success) {
-				if (!success) {
-					importCounter++;
-				}
-				checkImportFinished();
+			public void onImportStarted() {
+				AndroidUiHelper.updateVisibility(progressBar, true);
+			}
+
+			@Override
+			public void onImportFinished() {
+				importHelper.setGpxImportListener(null);
+				AndroidUiHelper.updateVisibility(progressBar, false);
 			}
 
 			@Override
@@ -468,15 +477,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 				if (isAdded() && success) {
 					addTrackItem(new TrackItem(new File(gpxFile.path)));
 				}
-				importCounter++;
-				checkImportFinished();
-			}
-
-			private void checkImportFinished() {
-				if (importCounter == filesSize) {
-					importHelper.setGpxImportListener(null);
-					AndroidUiHelper.updateVisibility(progressBar, false);
-				}
+				super.onSaveComplete(success, gpxFile);
 			}
 		};
 	}

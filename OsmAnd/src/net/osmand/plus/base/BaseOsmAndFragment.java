@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import androidx.annotation.ColorInt;
@@ -48,6 +46,10 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
 		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+	}
+
+	public boolean isNightMode() {
+		return nightMode;
 	}
 
 	protected boolean isUsedOnMap() {

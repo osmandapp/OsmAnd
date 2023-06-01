@@ -47,7 +47,6 @@ public class MyPlacesActivity extends TabActivity {
 	public static final int GPX_TAB = R.string.shared_string_tracks;
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
-	private OsmandApplication app;
 	private OsmandSettings settings;
 	private ImportHelper importHelper;
 
@@ -59,7 +58,7 @@ public class MyPlacesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
-		app = getMyApplication();
+		OsmandApplication app = getMyApplication();
 		settings = app.getSettings();
 		importHelper = new ImportHelper(this);
 		app.applyTheme(this);
