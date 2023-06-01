@@ -861,23 +861,22 @@ public class Algorithms {
 		}
 	}
 
-	public static boolean removeAllFiles(File f) {
-		if (f == null) {
+	public static boolean removeAllFiles(File file) {
+		if (file == null) {
 			return false;
 		}
-		if (f.isDirectory()) {
-			File[] fs = f.listFiles();
-			if (fs != null) {
-				for (File c : fs) {
-					removeAllFiles(c);
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			if (!isEmpty(files)) {
+				for (File f : files) {
+					removeAllFiles(f);
 				}
 			}
-			return f.delete();
+			return file.delete();
 		} else {
-			return f.delete();
+			return file.delete();
 		}
 	}
-
 
 	public static long parseLongFromBytes(byte[] bytes, int offset) {
 		long o = 0xff & bytes[offset + 7];

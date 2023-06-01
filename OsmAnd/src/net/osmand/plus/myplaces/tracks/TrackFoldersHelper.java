@@ -33,12 +33,13 @@ import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
-import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask;
-import net.osmand.plus.myplaces.tracks.tasks.DeleteGpxFilesTask.GpxFilesDeletionListener;
+import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask;
+import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask.GpxFilesDeletionListener;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -51,6 +52,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -196,28 +199,31 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		PopUpMenu.show(displayData);
 	}
 
-	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
+	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups,
+	                                 @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
 		List<PopUpMenuItem> items = new ArrayList<>();
+		Set<TrackItem> selectedTrackItems = getSelectedTrackItems(trackItems, tracksGroups);
+
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(trackItems, fragment);
+					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, fragment);
 					fragment.dismiss();
 				})
 				.create()
 		);
-		PluginsHelper.onOptionsMenuActivity(activity, fragment, trackItems, items);
+		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, items);
 
 		String delete = app.getString(R.string.shared_string_delete);
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitle(delete)
 				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
-					if (trackItems.isEmpty()) {
+					if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
 						showEmptyItemsToast(delete);
 					} else {
-						showDeleteConfirmationDialog(trackItems, fragment);
+						showDeleteConfirmationDialog(trackItems, tracksGroups, fragment);
 					}
 				})
 				.showTopDivider(true)
@@ -231,21 +237,34 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		PopUpMenu.show(displayData);
 	}
 
+	@NonNull
+	private Set<TrackItem> getSelectedTrackItems(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups) {
+		Set<TrackItem> items = new HashSet<>(trackItems);
+		for (TracksGroup tracksGroup : tracksGroups) {
+			if (tracksGroup instanceof TrackFolder) {
+				TrackFolder trackFolder = (TrackFolder) tracksGroup;
+				items.addAll(trackFolder.getFlattenedTrackItems());
+			} else if (tracksGroup instanceof VisibleTracksGroup) {
+				items.addAll(tracksGroup.getTrackItems());
+			}
+		}
+		return items;
+	}
+
 	private void showEmptyItemsToast(@NonNull String action) {
 		String message = app.getString(R.string.local_index_no_items_to_do, action.toLowerCase());
 		app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
 	}
 
-	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
+	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems,
+	                                          @NonNull Set<TracksGroup> tracksGroups,
+	                                          @NonNull BaseTrackFolderFragment fragment) {
+		String size = String.valueOf(trackItems.size() + tracksGroups.size());
 		String delete = app.getString(R.string.shared_string_delete);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setMessage(app.getString(R.string.local_index_action_do, delete.toLowerCase(), String.valueOf(trackItems.size())));
+		builder.setMessage(app.getString(R.string.local_index_action_do, delete.toLowerCase(), size));
 		builder.setPositiveButton(delete, (dialog, which) -> {
-			List<File> files = new ArrayList<>();
-			for (TrackItem trackItem : trackItems) {
-				files.add(trackItem.getFile());
-			}
-			deleteGpxFiles(files.toArray(new File[0]));
+			deleteTracks(trackItems, tracksGroups);
 			fragment.dismiss();
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -261,19 +280,19 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private void showDeleteConfirmationDialog(@NonNull TrackItem trackItem) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setMessage(app.getString(R.string.delete_confirmation_msg, trackItem.getName()));
-		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> deleteGpxFiles(trackItem.getFile()));
+		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> deleteTracks(Collections.singleton(trackItem), null));
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
 	}
 
-	public void deleteGpxFiles(@NonNull File... files) {
-		DeleteGpxFilesTask deleteFilesTask = new DeleteGpxFilesTask(app, new GpxFilesDeletionListener() {
+	public void deleteTracks(@Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups) {
+		DeleteTracksTask deleteFilesTask = new DeleteTracksTask(app, trackItems, tracksGroups, new GpxFilesDeletionListener() {
 			@Override
 			public void onGpxFilesDeletionFinished() {
 				reloadTracks();
 			}
 		});
-		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
+		deleteFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void deleteTrackFolder(@NonNull TrackFolder folder) {

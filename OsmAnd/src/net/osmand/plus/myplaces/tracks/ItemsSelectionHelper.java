@@ -30,22 +30,22 @@ public class ItemsSelectionHelper<T> {
 		return new HashSet<>(originalSelectedItems);
 	}
 
-	public void setAllItems(@NonNull Collection<T> allItems) {
+	public void setAllItems(@NonNull Collection<? extends T> allItems) {
 		this.allItems.clear();
 		this.allItems.addAll(allItems);
 	}
 
-	public void setSelectedItems(Collection<T> selectedItems) {
+	public void setSelectedItems(Collection<? extends T> selectedItems) {
 		this.selectedItems.clear();
 		this.selectedItems.addAll(selectedItems);
 	}
 
-	public void setOriginalSelectedItems(Collection<T> originalSelectedItems) {
+	public void setOriginalSelectedItems(Collection<? extends T> originalSelectedItems) {
 		this.originalSelectedItems.clear();
 		this.originalSelectedItems.addAll(originalSelectedItems);
 	}
 
-	public void onItemsSelected(@NonNull Collection<T> items, boolean selected) {
+	public void onItemsSelected(@NonNull Collection<? extends T> items, boolean selected) {
 		if (selected) {
 			selectedItems.addAll(items);
 		} else {
@@ -65,7 +65,7 @@ public class ItemsSelectionHelper<T> {
 		return selectedItems.contains(item);
 	}
 
-	public boolean isItemsSelected(@NonNull Collection<T> items) {
+	public boolean isItemsSelected(@NonNull Collection<? extends T> items) {
 		return selectedItems.containsAll(items);
 	}
 
