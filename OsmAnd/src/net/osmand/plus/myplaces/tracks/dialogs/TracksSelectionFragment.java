@@ -31,14 +31,14 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener {
 
 	public static final String TAG = TracksSelectionFragment.class.getSimpleName();
 
-	private ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
+	private ItemsSelectionHelper<TrackItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
+	private ItemsSelectionHelper<TracksGroup> groupsSelectionHelper = new ItemsSelectionHelper<>();
 
 	private TextView toolbarTitle;
 	private ImageButton selectionButton;
@@ -76,8 +76,11 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void setRootFolder(@NonNull TrackFolder rootFolder) {
 		super.setRootFolder(rootFolder);
-		selectionHelper.clearSelectedItems();
-		selectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
+		itemsSelectionHelper.clearSelectedItems();
+		groupsSelectionHelper.clearSelectedItems();
+
+		itemsSelectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
+		groupsSelectionHelper.setAllItems(rootFolder.getSubFolders());
 	}
 
 	@Nullable
@@ -125,10 +128,12 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	private void setupSelectionButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
 		selectionButton = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		selectionButton.setOnClickListener(v -> {
-			if (selectionHelper.isAllItemsSelected()) {
-				selectionHelper.clearSelectedItems();
+			if (isAllItemsSelected()) {
+				itemsSelectionHelper.clearSelectedItems();
+				groupsSelectionHelper.clearSelectedItems();
 			} else {
-				selectionHelper.selectAllItems();
+				itemsSelectionHelper.selectAllItems();
+				groupsSelectionHelper.selectAllItems();
 			}
 			updateSelection();
 			adapter.notifyDataSetChanged();
@@ -143,17 +148,22 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		button.setOnClickListener(v -> {
 			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 			if (foldersHelper != null) {
-				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(trackItems, v, this);
+				Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
+				Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
+				foldersHelper.showItemsOptionsMenu(trackItems, tracksGroups, v, this);
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
 
+	private boolean isAllItemsSelected() {
+		return itemsSelectionHelper.isAllItemsSelected() && groupsSelectionHelper.isAllItemsSelected();
+	}
+
 	private void updateSelection() {
 		updateToolbar();
-		boolean selected = selectionHelper.isAllItemsSelected();
+		boolean selected = isAllItemsSelected();
 		int iconId = selected ? R.drawable.ic_action_deselect_all : R.drawable.ic_action_select_all;
 		selectionButton.setImageDrawable(getIcon(iconId));
 		selectionButton.setContentDescription(getString(selected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all));
@@ -166,7 +176,9 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	}
 
 	private void updateToolbar() {
-		toolbarTitle.setText(String.valueOf(selectionHelper.getSelectedItemsSize()));
+		int selectedTracks = itemsSelectionHelper.getSelectedItemsSize();
+		int selectedGroups = groupsSelectionHelper.getSelectedItemsSize();
+		toolbarTitle.setText(String.valueOf(selectedTracks + selectedGroups));
 	}
 
 	@Override
@@ -192,34 +204,24 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public boolean isTrackItemSelected(@NonNull TrackItem trackItem) {
-		return selectionHelper.isItemSelected(trackItem);
+		return itemsSelectionHelper.isItemSelected(trackItem);
 	}
 
 	@Override
 	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
-		selectionHelper.onItemsSelected(trackItems, selected);
+		itemsSelectionHelper.onItemsSelected(trackItems, selected);
 		adapter.onItemsSelected(trackItems);
 		updateSelection();
 	}
 
 	@Override
 	public boolean isTracksGroupSelected(@NonNull TracksGroup group) {
-		if (group instanceof TrackFolder) {
-			TrackFolder folder = (TrackFolder) group;
-			List<TrackItem> trackItems = folder.getFlattenedTrackItems();
-			return !trackItems.isEmpty() && selectionHelper.isItemsSelected(trackItems);
-		}
-		return selectionHelper.isItemsSelected(group.getTrackItems());
+		return groupsSelectionHelper.isItemsSelected(Collections.singleton(group));
 	}
 
 	@Override
 	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
-		if (group instanceof TrackFolder) {
-			TrackFolder folder = (TrackFolder) group;
-			selectionHelper.onItemsSelected(folder.getFlattenedTrackItems(), selected);
-		} else {
-			selectionHelper.onItemsSelected(group.getTrackItems(), selected);
-		}
+		groupsSelectionHelper.onItemsSelected(Collections.singleton(group), selected);
 		adapter.onItemsSelected(Collections.singleton(group));
 		updateSelection();
 	}
