@@ -5218,4 +5218,9 @@
     <string name="track_not_recorded">未記錄</string>
     <string name="shared_string_new_track">新軌跡</string>
     <string name="shared_string_visible_on_map">在地圖上可見</string>
+    <string name="write_data_from_sensor_to_track">在旅程錄製時從外部感應器寫入資料至 GPX。</string>
+    <string name="external_sensors_source_of_data">資料來源</string>
+    <string name="save_track_external_sensors_data">資料</string>
+    <string name="there_are_no_connected_sensors_of_this_type">沒有此類型的已連結感應器</string>
+    <string name="external_sensors_not_found">找不到感應器</string>
 </resources>
