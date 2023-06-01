@@ -96,6 +96,9 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	protected abstract int getLayoutId();
 
 	@NonNull
+	protected abstract String getFragmentTag();
+
+	@NonNull
 	public TrackFolder getRootFolder() {
 		return rootFolder;
 	}
@@ -166,8 +169,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Nullable
 	public TrackFoldersHelper getTrackFoldersHelper() {
 		Fragment target = getTargetFragment();
-		if (target instanceof AvailableTracksFragment) {
-			return ((AvailableTracksFragment) target).getTrackFoldersHelper();
+		if (target instanceof BaseTrackFolderFragment) {
+			return ((BaseTrackFolderFragment) target).getTrackFoldersHelper();
 		}
 		return null;
 	}
@@ -242,6 +245,16 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			String screenName = app.getString(R.string.shared_string_tracks);
 			boolean temporary = gpxSelectionHelper.getSelectedFileByPath(trackItem.getPath()) == null;
 			TrackMenuFragment.openTrack(activity, trackItem.getFile(), bundle, screenName, OVERVIEW, temporary);
+		}
+	}
+
+	public void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (!fragmentManager.isStateSaved()) {
+				fragmentManager.popBackStack(getFragmentTag(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			}
 		}
 	}
 
@@ -320,6 +333,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		File dir = new File(selectedFolder.getDirFile(), folderName);
 		if (!dir.exists()) {
 			dir.mkdirs();
+			dir.setLastModified(System.currentTimeMillis());
 		}
 		reloadTracks();
 	}

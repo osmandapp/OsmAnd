@@ -1,7 +1,5 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
-import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +38,12 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	protected int getLayoutId() {
 		return R.layout.track_folder_fragment;
+	}
+
+	@NonNull
+	@Override
+	public String getFragmentTag() {
+		return TAG;
 	}
 
 	@Override
@@ -110,7 +114,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		button.setOnClickListener(v -> {
 			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 			if (foldersHelper != null) {
-				foldersHelper.showFolderOptionsMenu(v, selectedFolder, this);
+				foldersHelper.showFolderOptionsMenu(selectedFolder, v, this);
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_more));
@@ -123,13 +127,6 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		} else {
 			selectedFolder = selectedFolder.getParentFolder();
 			updateContent();
-		}
-	}
-
-	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack(TAG, POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -166,7 +163,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			foldersHelper.showItemOptionsMenu(view, trackItem, this);
+			foldersHelper.showItemOptionsMenu(trackItem, view, this);
 		}
 	}
 

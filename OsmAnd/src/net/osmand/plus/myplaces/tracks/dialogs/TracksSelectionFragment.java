@@ -12,7 +12,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
@@ -24,20 +23,13 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.util.Algorithms;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -56,6 +48,12 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getStatusBarActiveColorId(nightMode);
+	}
+
+	@NonNull
+	@Override
+	public String getFragmentTag() {
+		return TAG;
 	}
 
 	@Override
@@ -142,7 +140,13 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	private void setupMenuButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
 		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
-		button.setOnClickListener(v -> showOptionsMenu(button));
+		button.setOnClickListener(v -> {
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null) {
+				Set<TrackItem> trackItems = selectionHelper.getSelectedItems();
+				foldersHelper.showItemsOptionsMenu(trackItems, v, this);
+			}
+		});
 		button.setContentDescription(getString(R.string.shared_string_more));
 		container.addView(button);
 	}
@@ -177,80 +181,12 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		updateActionBar(true);
 	}
 
-	private void showOptionsMenu(@NonNull View view) {
-		Set<TrackItem> selectedTracks = selectionHelper.getSelectedItems();
-
-		List<PopUpMenuItem> items = new ArrayList<>();
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitleId(R.string.shared_string_show_on_map)
-				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
-				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(selectedTracks, this);
-					dismiss();
-				})
-				.create()
-		);
-		PluginsHelper.onOptionsMenuActivity(requireActivity(), this, selectedTracks, items);
-
-		String delete = app.getString(R.string.shared_string_delete);
-		items.add(new PopUpMenuItem.Builder(app)
-				.setTitle(delete)
-				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
-				.setOnClickListener(v -> {
-					if (selectedTracks.isEmpty()) {
-						showEmptyItemsToast(delete);
-					} else {
-						showDeleteConfirmationDialog(selectedTracks);
-					}
-				})
-				.showTopDivider(true)
-				.create()
-		);
-
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = view;
-		displayData.menuItems = items;
-		displayData.nightMode = nightMode;
-		PopUpMenu.show(displayData);
-	}
-
-	private void showEmptyItemsToast(@NonNull String action) {
-		String message = getString(R.string.local_index_no_items_to_do, action.toLowerCase());
-		app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
-	}
-
-	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems) {
-		String delete = getString(R.string.shared_string_delete);
-		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
-		builder.setMessage(getString(R.string.local_index_action_do, delete.toLowerCase(), String.valueOf(trackItems.size())));
-		builder.setPositiveButton(delete, (dialog, which) -> {
-			List<File> files = new ArrayList<>();
-			for (TrackItem trackItem : trackItems) {
-				files.add(trackItem.getFile());
-			}
-			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
-			if (foldersHelper != null) {
-				foldersHelper.deleteGpxFiles(files.toArray(new File[0]));
-			}
-			dismiss();
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.show();
-	}
-
 	private void onBackPressed() {
 		if (rootFolder.equals(selectedFolder)) {
 			dismiss();
 		} else {
 			selectedFolder = selectedFolder.getParentFolder();
 			updateContent();
-		}
-	}
-
-	private void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 		}
 	}
 
@@ -308,7 +244,8 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
-					.commitNowAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 }

@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -51,12 +52,14 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
 	private final ImportHelper importHelper;
+	private final GpxSelectionHelper gpxSelectionHelper;
 	private final MyPlacesActivity activity;
 
 	private TrackFolderLoaderTask asyncLoader;
@@ -71,6 +74,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.importHelper = new ImportHelper(activity);
 		this.app = activity.getMyApplication();
 		this.uiUtilities = app.getUIUtilities();
+		this.gpxSelectionHelper = app.getSelectedGpxHelper();
 	}
 
 	@NonNull
@@ -91,60 +95,13 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		this.gpxImportListener = gpxImportListener;
 	}
 
-	public void handleImport(@Nullable Intent data, @NonNull File destinationDir) {
-		if (data != null) {
-			List<Uri> filesUri = IntentHelper.getIntentUris(data);
-			if (!Algorithms.isEmpty(filesUri)) {
-				importHelper.setGpxImportListener(new MultipleTracksImportListener(filesUri.size()) {
-					@Override
-					public void onImportStarted() {
-						importing = true;
-						if (gpxImportListener != null) {
-							gpxImportListener.onImportStarted();
-						}
-					}
-
-					@Override
-					public void onImportFinished() {
-						importing = false;
-						if (gpxImportListener != null) {
-							gpxImportListener.onImportFinished();
-						}
-						reloadTracks();
-					}
-				});
-				importHelper.handleGpxFilesImport(filesUri, destinationDir);
-			}
-		}
-	}
-
 	public void reloadTracks() {
 		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
-		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, getLoadTracksListener());
+		asyncLoader = new TrackFolderLoaderTask(app, gpxDir, loadTracksListener);
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	@NonNull
-	private LoadTracksListener getLoadTracksListener() {
-		return new LoadTracksListener() {
-
-			@Override
-			public void loadTracksStarted() {
-				if (loadTracksListener != null) {
-					loadTracksListener.loadTracksStarted();
-				}
-			}
-
-			@Override
-			public void loadTracksFinished(@NonNull TrackFolder folder) {
-				if (loadTracksListener != null) {
-					loadTracksListener.loadTracksFinished(folder);
-				}
-			}
-		};
-	}
-
-	public void showFolderOptionsMenu(@NonNull View view, @NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment) {
+	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -179,7 +136,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		PopUpMenu.show(displayData);
 	}
 
-	public void showItemOptionsMenu(@NonNull View view, @NonNull TrackItem trackItem, @NonNull BaseTrackFolderFragment fragment) {
+	public void showItemOptionsMenu(@NonNull TrackItem trackItem, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
 		items.add(new PopUpMenuItem.Builder(app)
@@ -239,6 +196,62 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		PopUpMenu.show(displayData);
 	}
 
+	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_show_on_map)
+				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
+				.setOnClickListener(v -> {
+					gpxSelectionHelper.saveTracksVisibility(trackItems, fragment);
+					fragment.dismiss();
+				})
+				.create()
+		);
+		PluginsHelper.onOptionsMenuActivity(activity, fragment, trackItems, items);
+
+		String delete = app.getString(R.string.shared_string_delete);
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(delete)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(v -> {
+					if (trackItems.isEmpty()) {
+						showEmptyItemsToast(delete);
+					} else {
+						showDeleteConfirmationDialog(trackItems, fragment);
+					}
+				})
+				.showTopDivider(true)
+				.create()
+		);
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = fragment.isNightMode();
+		PopUpMenu.show(displayData);
+	}
+
+	private void showEmptyItemsToast(@NonNull String action) {
+		String message = app.getString(R.string.local_index_no_items_to_do, action.toLowerCase());
+		app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
+	}
+
+	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
+		String delete = app.getString(R.string.shared_string_delete);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setMessage(app.getString(R.string.local_index_action_do, delete.toLowerCase(), String.valueOf(trackItems.size())));
+		builder.setPositiveButton(delete, (dialog, which) -> {
+			List<File> files = new ArrayList<>();
+			for (TrackItem trackItem : trackItems) {
+				files.add(trackItem.getFile());
+			}
+			deleteGpxFiles(files.toArray(new File[0]));
+			fragment.dismiss();
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.show();
+	}
+
 	private void importTracks(@NonNull BaseTrackFolderFragment fragment) {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -271,6 +284,34 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			}
 		}
 		Algorithms.removeAllFiles(folder.getDirFile());
+	}
+
+	public void handleImport(@Nullable Intent data, @NonNull File destinationDir) {
+		if (data != null) {
+			List<Uri> filesUri = IntentHelper.getIntentUris(data);
+			if (!Algorithms.isEmpty(filesUri)) {
+				importHelper.setGpxImportListener(new MultipleTracksImportListener(filesUri.size()) {
+					@Override
+					public void onImportStarted() {
+						importing = true;
+						if (gpxImportListener != null) {
+							gpxImportListener.onImportStarted();
+						}
+					}
+
+					@Override
+					public void onImportFinished() {
+						importing = false;
+						if (gpxImportListener != null) {
+							gpxImportListener.onImportFinished();
+						}
+						reloadTracks();
+					}
+				});
+				boolean singleTrack = filesUri.size() == 1;
+				importHelper.handleGpxFilesImport(filesUri, destinationDir, OPEN_GPX_CONTEXT_MENU, !singleTrack, singleTrack);
+			}
+		}
 	}
 
 	@Nullable

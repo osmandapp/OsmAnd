@@ -57,6 +57,13 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		return R.layout.recycler_view_fragment;
 	}
 
+
+	@NonNull
+	@Override
+	public String getFragmentTag() {
+		return TAG;
+	}
+
 	@NonNull
 	@Override
 	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
@@ -140,7 +147,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				View view = activity.findViewById(R.id.action_menu);
-				trackFoldersHelper.showFolderOptionsMenu(view, rootFolder, this);
+				trackFoldersHelper.showFolderOptionsMenu(rootFolder, view, this);
 			}
 		}
 		return super.onOptionsItemSelected(item);
@@ -230,7 +237,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
-		trackFoldersHelper.showItemOptionsMenu(view, trackItem, this);
+		trackFoldersHelper.showItemOptionsMenu(trackItem, view, this);
 	}
 
 	@Override
