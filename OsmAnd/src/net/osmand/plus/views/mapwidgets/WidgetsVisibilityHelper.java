@@ -92,11 +92,7 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldHideMapMarkersWidget() {
-		View streetName = mapActivity.findViewById(R.id.street_name_widget);
-		return streetName != null && streetName.getVisibility() == View.VISIBLE
-				|| routingHelper.isFollowingMode()
-				|| routingHelper.isRoutePlanningMode()
-				|| isMapRouteInfoMenuVisible()
+		return isMapRouteInfoMenuVisible()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
 				|| isInTrackAppearanceMode()

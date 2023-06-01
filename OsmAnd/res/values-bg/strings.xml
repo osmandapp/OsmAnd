@@ -11,7 +11,7 @@
     <string name="route_via">През:</string>
     <string name="route_from">От:</string>
     <string name="speak_speed_limit">Ограничения на скоростта</string>
-    <string name="speak_cameras">Камери за скорост</string>
+    <string name="speak_cameras">Камери за контрол на скоростта</string>
     <string name="speak_traffic_warnings">Предупреждения за трафика</string>
     <string name="app_mode_default">Карта</string>
     <string name="settings_preset">Текущ профил</string>
@@ -200,7 +200,7 @@
     <string name="poi_filter_for_tourists">За туристи</string>
     <string name="poi_filter_fuel">Бензиностанции</string>
     <string name="show_warnings_title">Показване на предупреждения…</string>
-    <string name="show_warnings_descr">Настройте предупреждения (ограничения на скоростта, знак „Стоп“, легнали полицаи, тунели), камери за превишена скорост и информация за пътни ленти.</string>
+    <string name="show_warnings_descr">Настройте предупреждения (ограничения на скоростта, знак „Стоп“, легнали полицаи, тунели), камери за контрол на скорост и информация за пътни ленти.</string>
     <string name="use_compass_navigation_descr">Използва се компаса, ако посоката не е определена по друг начин.</string>
     <string name="use_compass_navigation">Използване на компаса</string>
     <string name="avoid_motorway">Без магистрали</string>
@@ -286,11 +286,11 @@
     <string name="map_widget_next_turn_small">Следващ завой (малка икона)</string>
     <string name="map_widget_next_next_turn">Втори завой</string>
     <string name="map_widget_mini_route">Малка карта с маршрута</string>
-    <string name="bg_service_screen_lock">Заключване на екрана</string>
-    <string name="bg_service_screen_unlock">Отключи екрана</string>
+    <string name="bg_service_screen_lock">Заключване</string>
+    <string name="bg_service_screen_unlock">Отключване</string>
     <string name="bg_service_screen_lock_toast">Екранът е заключен</string>
     <string name="bg_service_interval">Интервал за събуждане:</string>
-    <string name="show_cameras">Показвай камери за скорост</string>
+    <string name="show_cameras">Камери за контрол на скоростта</string>
     <string name="show_traffic_warnings">Показвай пътни предупреждения</string>
     <string name="avoid_toll_roads">Пътища без такса</string>
     <string name="continue_follow_previous_route_auto">Да продължи ли последната незавършена маршрутизация\? (%1$s секунди)</string>
@@ -322,7 +322,7 @@
     <string name="osmand_parking_position_description_add">Вземете Вашия автомобил в:</string>
     <string name="osmand_parking_pm">сл. обяд</string>
     <string name="osmand_parking_am">сутринта</string>
-    <string name="osmand_parking_position_name">Паркинг</string>
+    <string name="osmand_parking_position_name">Място на паркиране</string>
     <string name="osmand_parking_plugin_description">Отбележете мястото, на което е паркирано превозното средство, и уведомете календара за времето на изтичане на плащането. За да поставите отметка, изберете място на картата, отидете в „Действия“ и докоснете „Добавяне на място за паркиране“.</string>
     <string name="osmand_parking_plugin_name">Място на паркиране</string>
     <string name="context_menu_item_add_parking_point">Място на паркиране</string>
@@ -1019,7 +1019,7 @@
     <string name="speak_title">Обявяване…</string>
     <string name="speak_street_names">Имена на улици (синтезиран глас)</string>
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
-    <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (знак \'Стоп\', легнали полицаи), предупреждения за камери и ограничения на скоростта.</string>
+    <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (знак \'Стоп\', легнали полицаи), предупреждения за камери за контрол на скоростта и ограничения на скоростта.</string>
     <string name="osb_author_dialog_password">Парола за OSM (по желание)</string>
     <string name="driving_region_descr">Изберете регион на шофиране: САЩ, Европа, Великобритания, Азия или друг.</string>
     <string name="driving_region">Район на шофиране</string>
@@ -1170,7 +1170,7 @@
     <string name="traffic_warning_payment">Плащане на такса</string>
     <string name="traffic_warning_stop">Стоп</string>
     <string name="traffic_warning_calming">Легнал полицай</string>
-    <string name="traffic_warning_speed_camera">Камера за скорост</string>
+    <string name="traffic_warning_speed_camera">Камери за контрол на скоростта</string>
     <string name="traffic_warning">Предупреждение за трафика</string>
     <string name="fav_point_dublicate">Дублиране името на запазено място</string>
     <string name="fav_point_dublicate_message">Мястото беше запазено под името %1$s за избягване на дублирането в имената.</string>
@@ -1252,7 +1252,7 @@
     <string name="welcome_header">Добре дошли</string>
     <string name="storage_directory_internal_app">Вътрешна памет на приложението</string>
     <string name="storage_directory_multiuser">Споделено съхраняване</string>
-    <string name="confirm_usage_speed_cameras">В много държави (Германия, Франция, Италия и други) използването на предупреждения за камери е незаконно. OsmAnd не поема никаква отговорност, ако Вие нарушавате съответния закон. Моля, изберете \'Да\', само ако имате право да използвате тази функция.</string>
+    <string name="confirm_usage_speed_cameras">В много държави (Германия, Франция, Италия и други) използването на предупреждения за камери за контрол на скоростта е незаконно. OsmAnd не поема никаква отговорност, ако Вие нарушавате съответния закон. Моля, изберете \'Да\', само ако имате право да използвате тази функция.</string>
     <string name="welmode_download_maps">Изтегляне на карти</string>
     <string name="welcome_select_region">За правилното показване на пътните знаци и правилата за движение, изберете района, в който шофирате:</string>
     <string name="welcome_text">OsmAnd осигурява глобална офлайн карта и навигация.</string>
@@ -3461,7 +3461,7 @@
     <string name="marker_moved_to_active">Маркерът е преместен във включените</string>
     <string name="plugin_mapillary_descr">Снимки от нивото на улицата. Можете да дадете своя принос. За да видите съществуващите данни като слой на картата, включете „Снимки от улицата“ в менюто „Настройки на картата“.</string>
     <string name="hillshade_description">За да бъдат онагледени склоновете, върховете и низините се използват нюанси на сивото.</string>
-    <string name="speed_cameras_legal_descr">В някои страни или региони използването на приложения за предупреждение за камери за скорост е забранено от закона.
+    <string name="speed_cameras_legal_descr">В някои страни или региони използването на приложения за предупреждение за камери за контрол на скоростта е незаконно.
 \n
 \nТрябва да направите избор в зависимост от закона на вашата държава.
 \n
@@ -3811,4 +3811,9 @@
     <string name="provided_by">Предоставен от %1$s</string>
     <string name="snap_to_road_descr">Иконата за текуща позиция ще се прикрепи към текущия навигационен маршрут.</string>
     <string name="terrain_maps">Карти на терена</string>
+    <string name="speed_cameras_restart_descr">Рестартирайте приложението, за да бъдат премахнати данните за предупреждение за камери за контрол на скоростта.</string>
+    <string name="uninstall_speed_cameras">Премахване на камери за контрол на скоростта</string>
+    <string name="speed_camera_pois">POI на камери за контрол на скоростта</string>
+    <string name="speed_cameras_alert">Предупрежденията за камери за контрол на скоростта в някои страни са забранени от закона.</string>
+    <string name="speed_cameras_removed_descr">Устройство тоне разполага с предупреждение за камери за контрол на скоростта.</string>
 </resources>

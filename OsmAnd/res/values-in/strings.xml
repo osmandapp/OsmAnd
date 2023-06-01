@@ -5221,4 +5221,10 @@
     <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
     <string name="rendering_value_sacScale_name">Skala SAC</string>
     <string name="rendering_value_caiScale_name">Skala CAI</string>
+    <string name="external_sensors_source_of_data">Sumber data</string>
+    <string name="save_track_external_sensors_data">Data</string>
+    <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Tidak ada sensor dengan jenis ini yang terhubung</string>
+    <string name="external_sensors_not_found">Sensor tidak ditemukan</string>
+    <string name="delete_track_folder_dialog_message">Ini akan menghapus folder</string>
 </resources>
