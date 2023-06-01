@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPulsación larga para opciones"</string>
+\nPulsación larga para las opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -5227,4 +5227,9 @@
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
     <string name="delete_track_folder_dialog_message">Esto borrará la carpeta \"%1$s\" y todas las pistas (%2$s) incluidas.</string>
     <string name="delete_folder_question">¿Borrar la carpeta\?</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hay sensores conectados de este tipo</string>
+    <string name="write_data_from_sensor_to_track">Agrega los datos de los sensores externos a GPX mientras grabas un viaje.</string>
+    <string name="save_track_external_sensors_data">Datos</string>
+    <string name="external_sensors_not_found">No se encontraron sensores</string>
+    <string name="external_sensors_source_of_data">Fuente de los datos</string>
 </resources>
