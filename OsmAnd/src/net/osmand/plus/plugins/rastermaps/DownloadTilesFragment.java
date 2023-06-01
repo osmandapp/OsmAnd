@@ -263,7 +263,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 		tvMapSource.setText(layerToDownload.getNameId());
 		ivIcon.setImageResource(layerToDownload.getIconId());
-		tvSelectedMapSource.setText(tileSource.getName().replace(SQLITE_EXT, ""));
+		tvSelectedMapSource.setText(settings.getTileSourceTitle(tileSource, tileSource.getName()));
 	}
 
 	private void setupTilesToDownloadSetting() {

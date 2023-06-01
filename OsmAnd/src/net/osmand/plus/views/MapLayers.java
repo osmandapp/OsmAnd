@@ -66,7 +66,6 @@ import net.osmand.plus.widgets.ctxmenu.ViewCreator;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -440,11 +439,14 @@ public class MapLayers {
 		adapter.addItem(item);
 	}
 
-	public void selectMapLayer(@NonNull MapActivity mapActivity,
-	                           @NonNull ContextMenuItem item,
-	                           @NonNull OnDataChangeUiAdapter uiAdapter) {
+	public void selectMapSourceLayer(
+			@NonNull MapActivity mapActivity,
+			@NonNull ContextMenuItem item,
+			@NonNull OnDataChangeUiAdapter uiAdapter
+	) {
 		selectMapLayer(mapActivity, true, app.getSettings().MAP_TILE_SOURCES, mapSourceName -> {
-			item.setDescription(Algorithms.isEmpty(mapSourceName) ? app.getString(R.string.vector_data) : mapSourceName);
+			OsmandSettings settings = app.getSettings();
+			item.setDescription(settings.getSelectedMapSourceTitle());
 			uiAdapter.onDataSetChanged();
 			return true;
 		});

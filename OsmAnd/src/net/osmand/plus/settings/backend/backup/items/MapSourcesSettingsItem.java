@@ -139,10 +139,8 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 			number++;
 			if (item instanceof SQLiteTileSource) {
 				SQLiteTileSource oldItem = (SQLiteTileSource) item;
-				SQLiteTileSource renamedItem = new SQLiteTileSource(
-						oldItem,
-						oldItem.getName() + "_" + number,
-						app);
+				String newName = oldItem.getName() + "_" + number;
+				SQLiteTileSource renamedItem = new SQLiteTileSource(oldItem, newName, app);
 				if (!isDuplicate(renamedItem)) {
 					return renamedItem;
 				}

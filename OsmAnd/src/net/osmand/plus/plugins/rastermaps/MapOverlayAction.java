@@ -142,11 +142,13 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getTranslatedItemName(Context context, String item) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
 		if (item.equals(KEY_NO_OVERLAY)) {
 			return context.getString(R.string.no_overlay);
 		} else {
 			return item.endsWith(IndexConstants.SQLITE_EXT)
-					? Algorithms.getFileNameWithoutExtension(item)
+					? settings.getTileSourceTitle(item)
 					: item;
 		}
 	}

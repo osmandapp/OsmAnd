@@ -1920,6 +1920,27 @@ public class OsmandSettings {
 		return null;
 	}
 
+	public String getSelectedMapSourceTitle() {
+		return MAP_ONLINE_DATA.get() ?
+				getTileSourceTitle(MAP_TILE_SOURCES.get()) :
+				ctx.getString(R.string.vector_data);
+	}
+
+	public String getTileSourceTitle(@NonNull String fileName) {
+		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+			ITileSource tileSource = getTileSourceByName(fileName, false);
+			return getTileSourceTitle(tileSource, fileName);
+		}
+		return fileName;
+	}
+
+	public String getTileSourceTitle(@Nullable ITileSource tileSource, @NonNull String fileName) {
+		if (tileSource instanceof SQLiteTileSource) {
+			return ((SQLiteTileSource) tileSource).getTitle();
+		}
+		return fileName.replace(IndexConstants.SQLITE_EXT, "");
+	}
+
 	@Nullable
 	public ITileSource getTileSourceByName(String tileName, boolean warnWhenSelected) {
 		if (tileName == null || tileName.length() == 0) {
@@ -1972,26 +1993,23 @@ public class OsmandSettings {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
-				Arrays.sort(files, new Comparator<File>() {
-					@Override
-					public int compare(File object1, File object2) {
-						if (object1.lastModified() > object2.lastModified()) {
-							return -1;
-						} else if (object1.lastModified() == object2.lastModified()) {
-							return 0;
-						}
-						return 1;
+				Arrays.sort(files, (f1, f2) -> {
+					if (f1.lastModified() > f2.lastModified()) {
+						return -1;
+					} else if (f1.lastModified() == f2.lastModified()) {
+						return 0;
 					}
+					return 1;
 				});
 				for (File f : files) {
-					if (f.getName().endsWith(IndexConstants.SQLITE_EXT)) {
+					String fileName = f.getName();
+					if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 						if (sqlite) {
-							String n = f.getName();
-							map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
+							map.put(fileName, getTileSourceTitle(fileName));
 						}
-					} else if (f.isDirectory() && !f.getName().equals(IndexConstants.TEMP_SOURCE_TO_LOAD)
-							&& !f.getName().startsWith(".")) {
-						map.put(f.getName(), f.getName());
+					} else if (f.isDirectory() && !fileName.equals(IndexConstants.TEMP_SOURCE_TO_LOAD)
+							&& !fileName.startsWith(".")) {
+						map.put(fileName, fileName);
 					}
 				}
 			}

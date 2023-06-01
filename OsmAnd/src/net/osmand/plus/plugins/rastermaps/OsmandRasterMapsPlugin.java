@@ -426,8 +426,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		};
 
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
-		if (overlayMapDescr != null && overlayMapDescr.contains(".sqlitedb")) {
-			overlayMapDescr = overlayMapDescr.replaceFirst(".sqlitedb", "");
+		if (overlayMapDescr != null) {
+			overlayMapDescr = settings.getTileSourceTitle(overlayMapDescr);
 		}
 		boolean hasOverlayDescription = overlayMapDescr != null;
 		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
@@ -441,8 +441,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setListener(listener)
 				.setItemDeleteAction(settings.MAP_OVERLAY, settings.MAP_OVERLAY_PREVIOUS, settings.MAP_OVERLAY_TRANSPARENCY));
 		String underlayMapDescr = settings.MAP_UNDERLAY.get();
-		if (underlayMapDescr != null && underlayMapDescr.contains(".sqlitedb")) {
-			underlayMapDescr = underlayMapDescr.replaceFirst(".sqlitedb", "");
+		if (underlayMapDescr != null) {
+			underlayMapDescr = settings.getTileSourceTitle(underlayMapDescr);
 		}
 		boolean hasUnderlayDescription = underlayMapDescr != null;
 		underlayMapDescr = hasUnderlayDescription ? underlayMapDescr : mapActivity.getString(R.string.shared_string_none);
