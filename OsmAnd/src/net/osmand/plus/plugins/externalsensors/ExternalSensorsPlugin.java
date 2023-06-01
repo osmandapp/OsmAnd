@@ -258,10 +258,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		}
 	}
 
-	public boolean isBlueToothEnabled() {
-		return devicesHelper.isBLEEnabled();
-	}
-
 	public void searchAntDevices() {
 		devicesHelper.scanAntDevices(true);
 		new Handler(Looper.myLooper()).postDelayed(this::finishAntDevicesSearch, DEVICES_SEARCH_TIMEOUT);

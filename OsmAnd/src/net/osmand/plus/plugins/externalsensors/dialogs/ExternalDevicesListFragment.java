@@ -151,7 +151,7 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 	@Override
 	public void onResume() {
 		super.onResume();
-		noBluetoothCard.setVisibility(plugin.isBlueToothEnabled() ? View.GONE : View.VISIBLE);
+		noBluetoothCard.setVisibility(AndroidUtils.isBluetoothEnabled(requireActivity()) ? View.GONE : View.VISIBLE);
 		updatePairedSensorsListeners(true);
 		updatePairedSensorsList();
 	}

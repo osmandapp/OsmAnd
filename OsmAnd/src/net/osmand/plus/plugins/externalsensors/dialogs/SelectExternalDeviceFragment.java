@@ -181,7 +181,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	@Override
 	public void onResume() {
 		super.onResume();
-		noBluetoothCard.setVisibility(plugin.isBlueToothEnabled() ? View.GONE : View.VISIBLE);
+		noBluetoothCard.setVisibility(AndroidUtils.isBluetoothEnabled(requireActivity()) ? View.GONE : View.VISIBLE);
 		updatePairedSensorsListeners(true);
 		updatePairedSensorsList();
 	}
@@ -212,7 +212,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			}
 		}
 		if (devices.isEmpty()) {
-			if (plugin.isBlueToothEnabled()) {
+			if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
 				currentState = States.NOTHING_FOUND;
 			} else {
 				currentState = States.NO_BLUETOOTH;
