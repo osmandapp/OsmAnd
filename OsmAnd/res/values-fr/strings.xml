@@ -5222,4 +5222,5 @@
     <string name="save_track_external_sensors_data">Données</string>
     <string name="external_sensors_source_of_data">Source des données</string>
     <string name="external_sensors_not_found">Capteurs non trouvés</string>
+    <string name="write_data_from_sensor_to_track">Ajouter les données des capteurs externes dans le fichier GPX lors de l\'enregistrement d\'un trajet.</string>
 </resources>
