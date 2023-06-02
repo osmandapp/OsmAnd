@@ -114,7 +114,7 @@ public class RouteResultPreparationTest {
             ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
                     RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
         }
-        ctx.leftSideNavigation = false;
+        ctx.leftSideNavigation = te.isLeftSide();
         
         List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null);
         Set<Long> reachedSegments = new TreeSet<Long>();

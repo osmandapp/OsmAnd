@@ -23,6 +23,7 @@ public class TestEntry {
     private Map<String, String> params;
     private int planRoadDirection;
     private boolean shortWay;
+	private boolean leftSide;
 
     
     public void setShortWay(boolean shortWay) {
@@ -32,6 +33,14 @@ public class TestEntry {
     public boolean isShortWay() {
     	return shortWay;
     }
+
+	public boolean isLeftSide() {
+		return leftSide;
+	}
+
+	public void setLeftSide(boolean leftSide) {
+		this.leftSide = leftSide;
+	}
     
     public List<LatLon> getTransitPoint() {
     	ArrayList<LatLon> arrayList = new ArrayList<>();

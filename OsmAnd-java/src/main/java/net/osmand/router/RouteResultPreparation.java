@@ -46,6 +46,8 @@ public class RouteResultPreparation {
 	private static final float TURN_DEGREE_MIN = 45;
 	private static final float UNMATCHED_TURN_DEGREE_MINIMUM = 45;
 	private static final float SPLIT_TURN_DEGREE_NOT_STRAIGHT = 100;
+	private static final float DEGREE_THROUGH = 5;
+	private static final float DEGREE_ATTACHED_MIN = 20;
 	public static final int SHIFT_ID = 6;
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
@@ -1360,7 +1362,7 @@ public class RouteResultPreparation {
 		}
 		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
 		// keep left/right
-		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
+		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm, leftSide);
 		if(rs.roadsOnLeft  + rs.roadsOnRight == 0) {
 			return null;
 		}
@@ -1547,9 +1549,9 @@ public class RouteResultPreparation {
 				for (String lTurn : laneTurns) {
 					boolean added = addedTurns.add(TurnType.convertType(lTurn));
 					if (added) {
-						cnt++;
 						diffTurnRoads--;
 					}
+					cnt++;
 				}
 				lanes -= cnt;
 				// we already found slight turn others are turn in different direction
@@ -1566,7 +1568,7 @@ public class RouteResultPreparation {
 	}
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
-			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm) {
+			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm, boolean leftSide) {
 		RoadSplitStructure rs = new RoadSplitStructure();
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		for (RouteSegmentResult attached : attachedRoutes) {
@@ -1603,13 +1605,17 @@ public class RouteResultPreparation {
 			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 				if (smallTargetVariation || smallStraightVariation) {
 					if (attachedOnTheRight) {
-						rs.keepLeft = true;
+						if (!isAvoidKeep(prevSegm, currentSegm, mpi)) {
+							rs.keepLeft = true;
+						}
 						rs.rightLanes += lanes;
 						if(turnLanesAttachedRoad != null) {
 							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
-						rs.keepRight = true;
+						if (!isAvoidKeep(prevSegm, currentSegm, mpi) || leftSide) {
+							rs.keepRight = true;
+						}
 						rs.leftLanes += lanes;
 						if(turnLanesAttachedRoad != null) {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
@@ -1626,6 +1632,21 @@ public class RouteResultPreparation {
 			}
 		}
 		return rs;
+	}
+
+	/** For avoid "keep left/right" must be "through" lane and attached route is clearly deviates from the main route (there is no "fork") */
+	private boolean isAvoidKeep(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, double angleAttached) {
+		if (angleAttached < DEGREE_ATTACHED_MIN) {
+			return false;
+		}
+		String turnLanes = getTurnLanesString(prevSegm);
+		if (turnLanes != null && turnLanes.contains("through")) {
+			double angleThough = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
+			if (angleThough <= DEGREE_THROUGH) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private boolean hasTU(String turnLanesPrevSegm, boolean attachedOnTheRight) {
