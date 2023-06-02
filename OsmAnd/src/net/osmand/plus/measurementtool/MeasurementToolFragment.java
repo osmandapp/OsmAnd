@@ -1885,7 +1885,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	protected static void showGpxOnMap(@NonNull OsmandApplication app, @NonNull GPXFile gpx, boolean isNewGpx) {
-		GPXUtilities.createArtificialPrimeMeridianPoints(gpx);
 		GpxSelectionParams params = GpxSelectionParams.newInstance()
 				.showOnMap().selectedByUser().syncGroup().addToMarkers().addToHistory()
 				.saveSelection();
