@@ -948,7 +948,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			PointI fixedPixel = mapRenderer.getState().getFixedPixel();
-			updateMapRenderer = fixedPixel.getX() <= 0 || fixedPixel.getY() <= 0;
+			updateMapRenderer = fixedPixel.getX() < 0 || fixedPixel.getY() < 0;
 		}
 		if (updateMapRenderer || currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
 				currentViewport.getCenterPixelY() != cy || currentViewport.getCenterPixelX() != cx) {
