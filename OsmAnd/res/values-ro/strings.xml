@@ -89,7 +89,7 @@
 \n - mod de deplasare cu mașina, bicicleta sau pieton opțional cu:
 \n - comutare automată zi/noapte
 \n - zoom dependent de viteză
-\n - aliniere hartă funcție de busolă și de direcția de deplasare
+\n - aliniere hartă în funcție de busolă și de direcția de deplasare
 \n - orientare pe benzile de circulație, afișare viteză, voce înregistrată sau Text To Speech
 \n</string>
     <string name="filterpoi_activity">Creează filtru POI</string>
@@ -485,7 +485,7 @@
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Distribuiți locația folosind</string>
     <string name="send_location_sms_pattern">Poziția: %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">Pentru a vedea locația, urmați linkul web %1$s sau linkul de intenție Android %2$s</string>
+    <string name="send_location_email_pattern">Pentru a vedea locația, urmați linkul web %1$s sau linkul de intent Android %2$s</string>
     <string name="send_location">Trimite poziția curentă</string>
     <string name="context_menu_item_share_location">Distribuiți locația</string>
     <string name="add_waypoint_dialog_added">Punct de reper GPX \'\'{0}\'\' adăugat</string>
