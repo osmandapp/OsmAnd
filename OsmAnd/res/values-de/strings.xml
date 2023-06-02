@@ -801,7 +801,7 @@
     <string name="shared_string_cancel">Abbrechen</string>
     <string name="shared_string_apply">Anwenden</string>
     <string name="shared_string_add">Hinzufügen</string>
-    <string name="shared_string_no">Nein</string>
+    <string name="shared_string_no">nein</string>
     <string name="add_favorite_dialog_top_text">Favorit benennen</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
     <string name="add_favorite_dialog_favourite_added_template">Favorit \'\'{0}\'\' hinzugefügt.</string>
@@ -5230,4 +5230,5 @@
     <string name="delete_track_folder_dialog_message">Dies löscht den Ordner \"%1$s\" und alle darin enthaltenen Tracks (%2$s).</string>
     <string name="delete_folder">Ordner löschen</string>
     <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
+    <string name="save_track_external_sensors_data">Daten</string>
 </resources>
