@@ -3916,7 +3916,7 @@
     <string name="poi_speedway">Course de motos</string>
     <string name="poi_gladed_yes">Satisfait : oui</string>
     <string name="poi_camp_pitch">Emplacement de camping</string>
-    <string name="poi_mobile_library">Arrêt pour la bibliothèque mobile</string>
+    <string name="poi_mobile_library">Arrêt de bibliothèque mobile</string>
     <string name="poi_office_diplomatic">Bureau diplomatique</string>
     <string name="poi_horseshoes">Fers à cheval</string>
     <string name="poi_cycle_polo">Polo-vélo</string>
@@ -4574,4 +4574,8 @@
     <string name="poi_cemt_via">6a</string>
     <string name="poi_sac_scale">Échelle SAC</string>
     <string name="poi_cai_scale">Échelle CAI</string>
+    <string name="poi_barrier_bar">Barre</string>
+    <string name="poi_lock_name">Nom de l\'écluse</string>
+    <string name="poi_lock_ref">Référence d\'une écluse</string>
+    <string name="poi_lock_height">Hauteur d\'une écluse</string>
 </resources>

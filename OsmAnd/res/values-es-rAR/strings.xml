@@ -5242,4 +5242,9 @@
     <string name="tracks_empty_folder">Carpeta vacía</string>
     <string name="tracks_empty_folder_description">Esta carpeta no contiene trazas aún.</string>
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
+    <string name="external_sensors_not_found">Sensores no encontrados</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
+    <string name="external_sensors_source_of_data">Origen de los datos</string>
+    <string name="save_track_external_sensors_data">Datos</string>
+    <string name="write_data_from_sensor_to_track">Escribir datos de sensores externos en el GPX mientras se graba el viaje.</string>
 </resources>
