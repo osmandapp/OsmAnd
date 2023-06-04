@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
@@ -37,13 +38,16 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.FavoritesTileProvider;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
-		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
+		                                                               IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
 	private static final int START_ZOOM = 6;
+	private static final Log LOG = PlatformUtil.getLog(FavouritesLayer.class);
 
 	private FavouritesHelper favouritesHelper;
 	private MapMarkersHelper mapMarkersHelper;
@@ -61,6 +65,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean nightMode;
 	private boolean changeMarkerPositionMode;
 	private long favoritesChangedTime;
+
+	private List<FavouritePoint> androidAutoFavouritePoints = null;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
@@ -111,6 +117,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
+	public void setAndroidAutoFavouritePoints(@Nullable List<FavouritePoint> points) {
+		androidAutoFavouritePoints = points;
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
@@ -130,7 +140,20 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean favoritesChanged = this.favoritesChangedTime != favoritesChangedTime;
 		this.favoritesChangedTime = favoritesChangedTime;
 
-		if (hasMapRenderer()) {
+		if (androidAutoFavouritePoints != null) {
+			cache.clear();
+			float iconSize = getIconSize(view.getApplication());
+			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+			QuadRect latLonBounds = tileBox.getLatLonBounds();
+			List<LatLon> fullObjectsLatLon = new ArrayList<>();
+			List<LatLon> smallObjectsLatLon = new ArrayList<>();
+			drawPoints(androidAutoFavouritePoints, latLonBounds, false, tileBox, boundIntersections, iconSize, canvas, fullObjectsLatLon, smallObjectsLatLon);
+			this.fullObjectsLatLon = fullObjectsLatLon;
+			this.smallObjectsLatLon = smallObjectsLatLon;
+			if (textVisible) {
+				textLayer.putData(this, cache);
+			}
+		} else if (hasMapRenderer()) {
 			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
 					|| favoritesChanged || textScaleChanged || textVisibleChanged) {
 				showFavorites();
@@ -148,49 +171,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					List<LatLon> fullObjectsLatLon = new ArrayList<>();
 					List<LatLon> smallObjectsLatLon = new ArrayList<>();
 					for (FavoriteGroup group : getFavoriteGroups()) {
-						List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-						boolean synced = isSynced(group);
-						for (FavouritePoint favoritePoint : group.getPoints()) {
-							double lat = favoritePoint.getLatitude();
-							double lon = favoritePoint.getLongitude();
-							if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()
-									&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
-									&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
-								MapMarker marker = null;
-								if (synced) {
-									marker = mapMarkersHelper.getMapMarker(favoritePoint);
-									if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
-										continue;
-									}
-								}
-								cache.add(favoritePoint);
-								float x = tileBox.getPixXFromLatLon(lat, lon);
-								float y = tileBox.getPixYFromLatLon(lat, lon);
-
-								if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-									@ColorInt
-									int color;
-									if (marker != null && marker.history) {
-										color = grayColor;
-									} else {
-										color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
-									}
-									PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
-											getContext(), color, true, favoritePoint);
-									pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
-									smallObjectsLatLon.add(new LatLon(lat, lon));
-								} else {
-									fullObjects.add(new Pair<>(favoritePoint, marker));
-									fullObjectsLatLon.add(new LatLon(lat, lon));
-								}
-							}
-						}
-						for (Pair<FavouritePoint, MapMarker> pair : fullObjects) {
-							FavouritePoint favoritePoint = pair.first;
-							float x = tileBox.getPixXFromLatLon(favoritePoint.getLatitude(), favoritePoint.getLongitude());
-							float y = tileBox.getPixYFromLatLon(favoritePoint.getLatitude(), favoritePoint.getLongitude());
-							drawBigPoint(canvas, favoritePoint, x, y, pair.second, textScale);
-						}
+						drawPoints(group.getPoints(), latLonBounds, isSynced(group), tileBox, boundIntersections, iconSize, canvas,
+								fullObjectsLatLon, smallObjectsLatLon);
 					}
 					this.fullObjectsLatLon = fullObjectsLatLon;
 					this.smallObjectsLatLon = smallObjectsLatLon;
@@ -201,6 +183,55 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 		mapActivityInvalidated = false;
+	}
+
+	private void drawPoints(List<FavouritePoint> pointsToDraw, QuadRect latLonBounds, boolean synced, RotatedTileBox tileBox,
+	                        QuadTree<QuadRect> boundIntersections, float iconSize, Canvas canvas,
+	                        List<LatLon> fullObjectsLatLon, List<LatLon> smallObjectsLatLon) {
+		List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
+
+		for (FavouritePoint favoritePoint : pointsToDraw) {
+			double lat = favoritePoint.getLatitude();
+			double lon = favoritePoint.getLongitude();
+			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()
+					    && lat >= latLonBounds.bottom && lat <= latLonBounds.top
+					    && lon >= latLonBounds.left && lon <= latLonBounds.right) {
+				MapMarker marker = null;
+				if (synced) {
+					marker = mapMarkersHelper.getMapMarker(favoritePoint);
+					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+						continue;
+					}
+				}
+				cache.add(favoritePoint);
+				float x = tileBox.getPixXFromLatLon(lat, lon);
+				float y = tileBox.getPixYFromLatLon(lat, lon);
+
+				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+					@ColorInt
+					int color;
+					if (marker != null && marker.history) {
+						color = grayColor;
+					} else {
+						color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+					}
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
+							getContext(), color, true, favoritePoint);
+					pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
+					smallObjectsLatLon.add(new LatLon(lat, lon));
+				} else {
+					fullObjects.add(new Pair<>(favoritePoint, marker));
+					fullObjectsLatLon.add(new LatLon(lat, lon));
+				}
+			}
+		}
+		for (Pair<FavouritePoint, MapMarker> pair : fullObjects) {
+			FavouritePoint favoritePoint = pair.first;
+			float x = tileBox.getPixXFromLatLon(favoritePoint.getLatitude(), favoritePoint.getLongitude());
+			float y = tileBox.getPixYFromLatLon(favoritePoint.getLatitude(), favoritePoint.getLongitude());
+			drawBigPoint(canvas, favoritePoint, x, y, pair.second, textScale);
+		}
+
 	}
 
 	private boolean isSynced(@NonNull FavoriteGroup group) {

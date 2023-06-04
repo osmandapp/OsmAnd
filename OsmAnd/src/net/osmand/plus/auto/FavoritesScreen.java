@@ -21,6 +21,8 @@ import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -60,6 +62,14 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		this.settingsAction = settingsAction;
 		this.surfaceRenderer = surfaceRenderer;
 		selectedGroup = group;
+		getLifecycle().addObserver(new DefaultLifecycleObserver() {
+			@Override
+			public void onDestroy(@NonNull LifecycleOwner owner) {
+				DefaultLifecycleObserver.super.onDestroy(owner);
+				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setAndroidAutoFavouritePoints(null);
+				getApp().getOsmandMap().refreshMap();
+			}
+		});
 	}
 
 	@NonNull
@@ -83,7 +93,10 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 	private void setupFavorites(ItemList.Builder listBuilder) {
 		LatLon location = getApp().getSettings().getLastKnownMapLocation();
 		int collectionSize = 0;
-		for (FavouritePoint point : getFavorites()) {
+		List<FavouritePoint> favoritesPoints = getFavorites();
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setAndroidAutoFavouritePoints(favoritesPoints);
+		getApp().getOsmandMap().refreshMap();
+		for (FavouritePoint point : favoritesPoints) {
 			if (collectionSize == getContentLimit()) {
 				break;
 			}

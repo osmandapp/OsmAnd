@@ -58,6 +58,6 @@ abstract class BaseOsmAndAndroidAutoScreen(carContext: CarContext) : Screen(carC
     }
 
     companion object {
-        private const val DEFAULT_CONTENT_LIMIT = 12
+        private const val DEFAULT_CONTENT_LIMIT = 100
     }
 }

@@ -19,9 +19,15 @@ import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -65,19 +71,17 @@ import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
+	private static final Log LOG = PlatformUtil.getLog(FavouritesLayer.class);
 	private static final int START_ZOOM = 3;
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
@@ -129,6 +133,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean carView;
 	private float textScale = 1f;
 	private double markerSizePx;
+
+	private List<MapMarker> androidAutoMarkers;
 
 	//OpenGL
 	private int markersCount;
@@ -267,12 +273,17 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		initUI();
 	}
 
+	public void setAndroidAutoMarkers(@Nullable List<MapMarker> markers) {
+		androidAutoMarkers = markers;
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
-		if (!settings.SHOW_MAP_MARKERS.get()) {
+		if ((!settings.SHOW_MAP_MARKERS.get() && !app.getOsmandMap().getMapView().isCarView())
+				    || (app.getOsmandMap().getMapView().isCarView() && androidAutoMarkers == null)) {
 			clearMapMarkersCollections();
 			clearVectorLinesCollections();
 			resetCachedRenderer();
@@ -281,6 +292,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+		if (app.getOsmandMap().getMapView().isCarView()) {
+			activeMapMarkers = androidAutoMarkers;
+		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {

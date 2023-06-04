@@ -311,7 +311,7 @@ public class NavigationService extends Service {
 						destinations = Collections.singletonList(destination);
 					}
 					TravelEstimate lastStepTravelEstimate = tripHelper.getLastStepTravelEstimate();
-					navigationScreen.updateTrip(true, routingHelper.isRouteBeingCalculated(),
+					navigationScreen.updateTrip(routingHelper.isRouteBeingCalculated(),
 							false/*routingHelper.isRouteWasFinished()*/,
 							destinations, trip.getSteps(), destinationTravelEstimate,
 							lastStepTravelEstimate != null ? lastStepTravelEstimate.getRemainingDistance() : null,

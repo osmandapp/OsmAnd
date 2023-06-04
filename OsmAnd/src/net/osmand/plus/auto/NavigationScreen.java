@@ -46,7 +46,7 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implements SurfaceRendererCallback,
-		IRouteInformationListener, DefaultLifecycleObserver {
+		                                                                                   IRouteInformationListener, DefaultLifecycleObserver {
 
 	@NonNull
 	private final NavigationListener listener;
@@ -122,7 +122,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	 * Updates the navigation screen with the next instruction.
 	 */
 	public void updateTrip(
-			boolean navigating,
 			boolean rerouting,
 			boolean arrived,
 			@Nullable List<Destination> destinations,
@@ -132,7 +131,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 			boolean shouldShowNextStep,
 			boolean shouldShowLanes,
 			@Nullable CarIcon junctionImage) {
-		this.navigating = navigating;
 		this.rerouting = rerouting;
 		this.arrived = arrived;
 		this.destinations = destinations;
@@ -148,7 +146,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	}
 
 	public void stopTrip() {
-		navigating = false;
 		rerouting = false;
 		arrived = false;
 		destinations = null;
@@ -164,8 +161,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	}
 
 	private void updateNavigation() {
-		listener.updateNavigation(navigating);
-		adjustMapPosition(navigating);
+		adjustMapPosition(true);
 	}
 
 	private void adjustMapPosition(boolean shiftMapIfSessionRunning) {
@@ -192,19 +188,11 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 						.setOnClickListener(this::compassClick)
 						.build());
 		actionStripBuilder.addAction(settingsAction);
-		if (navigating) {
-			actionStripBuilder.addAction(
-					new Action.Builder()
-							.setTitle(getApp().getString(R.string.shared_string_control_stop))
-							.setOnClickListener(this::stopNavigation)
-							.build());
-		} else {
-			actionStripBuilder.addAction(
-					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_search_dark)).build())
-							.setOnClickListener(this::openSearch)
-							.build());
-		}
+		actionStripBuilder.addAction(
+				new Action.Builder()
+						.setTitle(getApp().getString(R.string.shared_string_control_stop))
+						.setOnClickListener(this::stopNavigation)
+						.build());
 		builder.setActionStrip(actionStripBuilder.build());
 
 		// Set the map action strip with the pan and zoom buttons.
@@ -273,52 +261,50 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 			invalidate();
 		});
 
-		if (navigating) {
-			if (destinationTravelEstimate != null) {
-				builder.setDestinationTravelEstimate(destinationTravelEstimate);
+		if (destinationTravelEstimate != null) {
+			builder.setDestinationTravelEstimate(destinationTravelEstimate);
+		}
+		if (isRerouting()) {
+			builder.setNavigationInfo(new RoutingInfo.Builder().setLoading(true).build());
+		} else if (arrived) {
+			MessageInfo messageInfo = new MessageInfo.Builder(
+					getCarContext().getString(R.string.arrived_at_destination)).build();
+			builder.setNavigationInfo(messageInfo);
+		} else if (!Algorithms.isEmpty(steps)) {
+			RoutingInfo.Builder info = new RoutingInfo.Builder();
+			Step firstStep = steps.get(0);
+			Step.Builder currentStep = new Step.Builder();
+			CarText cue = firstStep.getCue();
+			if (cue != null) {
+				currentStep.setCue(cue.toCharSequence());
 			}
-			if (isRerouting()) {
-				builder.setNavigationInfo(new RoutingInfo.Builder().setLoading(true).build());
-			} else if (arrived) {
-				MessageInfo messageInfo = new MessageInfo.Builder(
-						getCarContext().getString(R.string.arrived_at_destination)).build();
-				builder.setNavigationInfo(messageInfo);
-			} else if (!Algorithms.isEmpty(steps)) {
-				RoutingInfo.Builder info = new RoutingInfo.Builder();
-				Step firstStep = steps.get(0);
-				Step.Builder currentStep = new Step.Builder();
-				CarText cue = firstStep.getCue();
-				if (cue != null) {
-					currentStep.setCue(cue.toCharSequence());
-				}
-				Maneuver maneuver = firstStep.getManeuver();
-				if (maneuver != null) {
-					currentStep.setManeuver(maneuver);
-				}
-				CarText road = firstStep.getRoad();
-				if (road != null) {
-					currentStep.setRoad(road.toCharSequence());
-				}
-				if (shouldShowLanes) {
-					for (Lane lane : firstStep.getLanes()) {
-						currentStep.addLane(lane);
-					}
-					CarIcon lanesImage = firstStep.getLanesImage();
-					if (lanesImage != null) {
-						currentStep.setLanesImage(lanesImage);
-					}
-				}
-				if (stepRemainingDistance != null) {
-					info.setCurrentStep(currentStep.build(), stepRemainingDistance);
-					if (shouldShowNextStep && steps.size() > 1) {
-						info.setNextStep(steps.get(1));
-					}
-				}
-				if (junctionImage != null) {
-					info.setJunctionImage(junctionImage);
-				}
-				builder.setNavigationInfo(info.build());
+			Maneuver maneuver = firstStep.getManeuver();
+			if (maneuver != null) {
+				currentStep.setManeuver(maneuver);
 			}
+			CarText road = firstStep.getRoad();
+			if (road != null) {
+				currentStep.setRoad(road.toCharSequence());
+			}
+			if (shouldShowLanes) {
+				for (Lane lane : firstStep.getLanes()) {
+					currentStep.addLane(lane);
+				}
+				CarIcon lanesImage = firstStep.getLanesImage();
+				if (lanesImage != null) {
+					currentStep.setLanesImage(lanesImage);
+				}
+			}
+			if (stepRemainingDistance != null) {
+				info.setCurrentStep(currentStep.build(), stepRemainingDistance);
+				if (shouldShowNextStep && steps.size() > 1) {
+					info.setNextStep(steps.get(1));
+				}
+			}
+			if (junctionImage != null) {
+				info.setJunctionImage(junctionImage);
+			}
+			builder.setNavigationInfo(info.build());
 		}
 		return builder.build();
 	}

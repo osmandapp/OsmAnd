@@ -246,10 +246,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return requestLocationPermission();
 	}
 
-	@Override
-	public void updateNavigation(boolean navigating) {
-	}
-
 	public void startNavigation() {
 		createNavigationScreen();
 		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);

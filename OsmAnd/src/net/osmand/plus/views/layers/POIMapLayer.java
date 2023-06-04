@@ -100,6 +100,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private PoiUIFilter routeTrackFilter;
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
+	private Set<PoiUIFilter> androidAutoPoiFilters = null;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -324,10 +325,17 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		this.fileVisibilityChanged = true;
 	}
 
+	public void setAndroidAutoPoints(@Nullable Set<PoiUIFilter> points){
+		androidAutoPoiFilters = points;
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
+		if(androidAutoPoiFilters != null && app.getOsmandMap().getMapView().isCarView()){
+			selectedPoiFilters = androidAutoPoiFilters;
+		}
 		boolean showTravel = app.getSettings().SHOW_TRAVEL.get();
 		boolean routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();
 		boolean routeArticlePointsFilterEnabled = travelRendererHelper.getRouteArticlePointsProperty().get();

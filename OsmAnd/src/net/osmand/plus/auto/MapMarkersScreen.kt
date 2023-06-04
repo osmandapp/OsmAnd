@@ -3,9 +3,21 @@ package net.osmand.plus.auto
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarColor
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.CarLocation
+import androidx.car.app.model.DistanceSpan
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Metadata
+import androidx.car.app.model.Place
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.plus.mapmarkers.MapMarker
@@ -18,15 +30,25 @@ class MapMarkersScreen(
     private val settingsAction: Action,
     private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
 
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onDestroy(owner: LifecycleOwner) {
+                super.onDestroy(owner)
+                app.osmandMap.mapLayers.mapMarkersLayer.setAndroidAutoMarkers(null)
+                app.osmandMap.refreshMap()
+            }
+        })
+    }
+
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
-        val markers = app.mapMarkersHelper.mapMarkers
+        val markersSize = app.mapMarkersHelper.mapMarkers.size
+        val markers =
+            app.mapMarkersHelper.mapMarkers.subList(0, markersSize.coerceAtMost(contentLimit - 1))
         val location = app.settings.lastKnownMapLocation
-        var itemsCount = 0
+        app.osmandMap.mapLayers.mapMarkersLayer.setAndroidAutoMarkers(markers)
+        app.osmandMap.refreshMap()
         for (marker in markers) {
-            if (itemsCount == contentLimit) {
-                break
-            }
             val title = marker.getName(app)
             val markerColor = MapMarker.getColorId(marker.colorIndex)
             val icon = CarIcon.Builder(
@@ -56,7 +78,6 @@ class MapMarkersScreen(
                                 location.longitude)).build()).build())
             }
             listBuilder.addItem(rowBuilder.build())
-            itemsCount++
         }
         val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
