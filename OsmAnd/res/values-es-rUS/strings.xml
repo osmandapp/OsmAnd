@@ -5241,4 +5241,9 @@
     <string name="rendering_attr_lightDetail_description">Predefinido: nombre de la baliza náutica (carácter de luz.grupo.período), elige información adicional sobre los sectores 1 al 3 o el carácter de luz del sector 1 al 5</string>
     <string name="device_connected">%1$s conectado</string>
     <string name="shared_string_wrist">Muñeca</string>
+    <string name="write_data_from_sensor_to_track">Escribir datos de sensores externos en el GPX mientras se graba el viaje.</string>
+    <string name="save_track_external_sensors_data">Datos</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
+    <string name="external_sensors_not_found">Sensores no encontrados</string>
+    <string name="external_sensors_source_of_data">Origen de los datos</string>
 </resources>
