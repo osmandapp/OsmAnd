@@ -6,7 +6,7 @@
     <string name="poi_car_rental">レンタカー</string>
     <string name="poi_car_wash">洗車場</string>
     <string name="poi_casino">賭場・カジノ</string>
-    <string name="poi_city">市</string>
+    <string name="poi_city">市町村・特別区</string>
     <string name="poi_college">大学(単科)</string>
     <string name="poi_dentist">歯科医</string>
     <string name="poi_embassy">大使館</string>
@@ -323,9 +323,9 @@
     <string name="poi_village">村</string>
     <string name="poi_hamlet">集落</string>
     <string name="poi_isolated_dwelling">孤立住居</string>
-    <string name="poi_suburb">区・区画</string>
+    <string name="poi_suburb">行政区</string>
     <string name="poi_quarter">大字</string>
-    <string name="poi_neighbourhood">小字・丁目</string>
+    <string name="poi_neighbourhood">町・字・丁目</string>
     <string name="poi_locality">非居住地</string>
     <string name="poi_place_allotments">住居付き農園</string>
     <string name="poi_place_farm">農場</string>
