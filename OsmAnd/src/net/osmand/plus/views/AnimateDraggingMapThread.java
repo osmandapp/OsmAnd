@@ -71,7 +71,10 @@ public class AnimateDraggingMapThread {
 	private boolean animatingMapMove;
 	private boolean animatingMapRotation;
 	private boolean animatingMapTilt;
-	private boolean inconsistentMapTarget;
+	private volatile boolean inconsistentMapTarget;
+	private volatile boolean targetChanged;
+	private volatile int targetPixelX;
+	private volatile int targetPixelY;
 
 	private float interpolation;
 
@@ -133,7 +136,12 @@ public class AnimateDraggingMapThread {
 		MapRendererView renderer = getMapRenderer();
 		if (renderer != null && inconsistentMapTarget) {
 			inconsistentMapTarget = false;
-			renderer.resetMapTarget();
+			if (targetChanged) {
+				targetChanged = false;
+				renderer.resetMapTargetPixelCoordinates(new PointI(targetPixelX, targetPixelY));
+			} else {
+				renderer.resetMapTarget();
+			}
 		}
 	}
 
@@ -416,9 +424,18 @@ public class AnimateDraggingMapThread {
 					duration = targetAnimation.getDuration() - targetAnimation.getTimePassed();
 				}
 				if (animateZoom) {
-					animator.animateZoomToAndPan(endZoom + endZoomFloatPart, finish31,
-							Math.max(duration, ZOOM_MOVE_ANIMATION_TIME / 1000f),
-							TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
+					if (!targetChanged) {
+						// Remember last target position before it is changed with animation
+						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
+						targetPixelX = targetPixelPosition.getX();
+						targetPixelY = targetPixelPosition.getY();
+						targetChanged = true;
+					}
+					PointI touchPoint = new PointI();
+					mapRenderer.getElevatedPointFromLocation(finish31, touchPoint, false);
+					mapRenderer.setMapTarget(touchPoint, finish31);
+					animator.animateZoomTo(endZoom + endZoomFloatPart, ZOOM_MOVE_ANIMATION_TIME / 1000f,
+					TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 				} else {
 					animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
 				}
@@ -434,6 +451,8 @@ public class AnimateDraggingMapThread {
 
 			boolean animateZoom = endZoom != startZoom || startZoomFP != endZoomFloatPart;
 			if (mapRenderer != null) {
+				if (targetChanged)
+					invalidateMapTarget();
 				if (animateZoom) {
 					animatingMapZoom = true;
 				}
