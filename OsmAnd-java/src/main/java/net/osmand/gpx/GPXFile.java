@@ -1,7 +1,6 @@
 package net.osmand.gpx;
 
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXTrackAnalysis.SplitSegment;
 import net.osmand.gpx.GPXUtilities.Route;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;

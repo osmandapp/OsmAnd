@@ -134,7 +134,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else {
 				split = false;
-				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, segment)};
+				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.prepareInformation(0, segment)};
 			}
 			for (GPXTrackAnalysis analysis : as) {
 				if (progress != null && progress.isInterrupted()) {

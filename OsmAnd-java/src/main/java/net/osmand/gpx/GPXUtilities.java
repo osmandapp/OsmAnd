@@ -13,6 +13,8 @@ import net.osmand.binary.StringBundleXmlReader;
 import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.SplitMetric.DistanceSplitMetric;
+import net.osmand.gpx.SplitMetric.TimeSplitMetric;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -533,16 +535,16 @@ public class GPXUtilities {
 		}
 
 		public List<GPXTrackAnalysis> splitByDistance(double meters, boolean joinSegments) {
-			return split(GPXTrackAnalysis.getDistanceMetric(), GPXTrackAnalysis.getTimeSplit(), meters, joinSegments);
+			return split(new DistanceSplitMetric(), new TimeSplitMetric(), meters, joinSegments);
 		}
 
 		public List<GPXTrackAnalysis> splitByTime(int seconds, boolean joinSegments) {
-			return split(GPXTrackAnalysis.getTimeSplit(), GPXTrackAnalysis.getDistanceMetric(), seconds, joinSegments);
+			return split(new TimeSplitMetric(), new DistanceSplitMetric(), seconds, joinSegments);
 		}
 
-		private List<GPXTrackAnalysis> split(GPXTrackAnalysis.SplitMetric metric, GPXTrackAnalysis.SplitMetric secondaryMetric, double metricLimit, boolean joinSegments) {
-			List<GPXTrackAnalysis.SplitSegment> splitSegments = new ArrayList<>();
-			GPXTrackAnalysis.splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this, joinSegments);
+		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit, boolean joinSegments) {
+			List<SplitSegment> splitSegments = new ArrayList<>();
+			SplitMetric.splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this, joinSegments);
 			return convert(splitSegments);
 		}
 	}
@@ -807,9 +809,9 @@ public class GPXUtilities {
 	}
 
 
-	private static List<GPXTrackAnalysis> convert(List<GPXTrackAnalysis.SplitSegment> splitSegments) {
+	private static List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
 		List<GPXTrackAnalysis> ls = new ArrayList<>();
-		for (GPXTrackAnalysis.SplitSegment s : splitSegments) {
+		for (SplitSegment s : splitSegments) {
 			GPXTrackAnalysis a = new GPXTrackAnalysis();
 			a.prepareInformation(0, s);
 			ls.add(a);
