@@ -119,7 +119,13 @@ public class AntBatterySensor<T extends AntPlusCommonPcc> extends AntAbstractSen
 		BatteryData data = batteryData;
 		double rssi = data != null ? data.getBatteryTime() : 0;
 		if (rssi > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(rssi));
+			json.put(getGPGTrackTagName(), DECIMAL_FORMAT.format(rssi));
 		}
+	}
+
+	@NonNull
+	@Override
+	protected String getGPGTrackTagName() {
+		return "battery_time";
 	}
 }

@@ -132,7 +132,14 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 		BikeCadenceData data = lastBikeCadenceData;
 		int calculatedCadence = data != null ? data.getCalculatedCadence() : 0;
 		if (calculatedCadence > 0) {
-			json.put(getSensorId(), calculatedCadence);
+			json.put(getGPGTrackTagName(), calculatedCadence);
 		}
 	}
+
+	@NonNull
+	@Override
+	protected String getGPGTrackTagName() {
+		return "cadence";
+	}
+
 }

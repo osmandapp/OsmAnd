@@ -27,6 +27,9 @@ public abstract class AbstractSensor {
 	}
 
 	@NonNull
+	abstract protected String getGPGTrackTagName();
+
+	@NonNull
 	public AbstractDevice<?> getDevice() {
 		return device;
 	}

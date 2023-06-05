@@ -297,12 +297,20 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		BikeCadenceData cadenceData = lastBikeCadenceData;
 		if (cadenceData != null) {
-			json.put(getSensorId() + "_cadence", cadenceData.cadence);
+			json.put(getGPGTrackTagName() + "_cadence", cadenceData.cadence);
 		}
 		BikeSpeedDistanceData speedDistanceData = lastBikeSpeedDistanceData;
 		if (speedDistanceData != null) {
-			json.put(getSensorId() + "_speed", speedDistanceData.speed);
-			json.put(getSensorId() + "_distance", speedDistanceData.distance);
+			json.put(getGPGTrackTagName() + "_speed", speedDistanceData.speed);
+			json.put(getGPGTrackTagName() + "_distance", speedDistanceData.distance);
 		}
 	}
+
+
+	@NonNull
+	@Override
+	protected String getGPGTrackTagName() {
+		return "bike";
+	}
+
 }

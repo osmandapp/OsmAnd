@@ -141,7 +141,15 @@ public class BLEBatterySensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		BatteryData data = lastBatteryData;
 		if (data != null) {
-			json.put(getSensorId(), data.batteryLevel);
+			json.put(getGPGTrackTagName(), data.batteryLevel);
 		}
 	}
+
+
+	@NonNull
+	@Override
+	protected String getGPGTrackTagName() {
+		return "battery_time";
+	}
+
 }

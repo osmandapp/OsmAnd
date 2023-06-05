@@ -119,7 +119,15 @@ public class AntRssiCommonSensor<T extends AntPlusCommonPcc> extends AntAbstract
 		RssiData data = rssiData;
 		double rssi = data != null ? data.getRssi() : 0;
 		if (rssi > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(rssi));
+			json.put(getGPGTrackTagName(), DECIMAL_FORMAT.format(rssi));
 		}
 	}
+
+
+	@NonNull
+	@Override
+	protected String getGPGTrackTagName() {
+		return "rssi";
+	}
+
 }

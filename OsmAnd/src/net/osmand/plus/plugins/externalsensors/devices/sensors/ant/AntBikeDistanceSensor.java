@@ -126,7 +126,14 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 		BikeDistanceData data = lastBikeDistanceData;
 		double accumulatedDistance = data != null ? data.getAccumulatedDistance() : 0;
 		if (accumulatedDistance > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(accumulatedDistance));
+			json.put(getGPGTrackTagName(), DECIMAL_FORMAT.format(accumulatedDistance));
 		}
 	}
+
+	@NonNull
+	@Override
+	protected String getGPGTrackTagName() {
+		return "bike_distance";
+	}
+
 }
