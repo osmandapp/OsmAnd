@@ -21,8 +21,6 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
@@ -145,7 +143,7 @@ public class GpxMarkerView extends MarkerView {
 			} else {
 				if (xAxisType == GPXDataSetAxisType.TIME) {
 					updateXAxisValueWithTime(entry);
-				} else if (xAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+				} else if (xAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 					updateXAxisValueWithTimeOfDay(entry);
 				}
 				AndroidUiHelper.updateVisibility(xAxisContainer.findViewById(R.id.x_axis_unit), false);

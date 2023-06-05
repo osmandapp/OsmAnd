@@ -47,7 +47,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXHighlight;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter;

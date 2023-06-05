@@ -1,8 +1,8 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.ALTITUDE;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.SLOPE;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.SPEED;
+import static net.osmand.plus.charts.LineGraphType.ALTITUDE;
+import static net.osmand.plus.charts.LineGraphType.SLOPE;
+import static net.osmand.plus.charts.LineGraphType.SPEED;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
 import android.annotation.SuppressLint;
@@ -47,7 +47,7 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.LineGraphType;
+import net.osmand.plus.charts.LineGraphType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;

@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.ALTITUDE;
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.SLOPE;
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetType.SPEED;
+import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
+import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
+import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
@@ -16,7 +16,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.SelectedGpxMenuBuilder;
 import net.osmand.plus.settings.backend.OsmandSettings;

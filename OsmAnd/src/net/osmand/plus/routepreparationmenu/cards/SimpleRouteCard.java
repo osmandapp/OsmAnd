@@ -3,7 +3,7 @@ package net.osmand.plus.routepreparationmenu.cards;
 import static net.osmand.plus.helpers.FontCache.getRobotoMedium;
 import static net.osmand.plus.helpers.FontCache.getRobotoRegular;
 import static net.osmand.plus.utils.AndroidUtils.spToPx;
-import static net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType.DISTANCE;
+import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.ChartUtils.createGPXElevationDataSet;
 import static net.osmand.plus.charts.ChartUtils.createGPXSlopeDataSet;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;

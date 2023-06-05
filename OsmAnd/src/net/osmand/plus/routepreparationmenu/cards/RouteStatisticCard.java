@@ -29,7 +29,7 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.ArrayList;

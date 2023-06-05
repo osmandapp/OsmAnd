@@ -47,8 +47,8 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -166,7 +166,7 @@ public class TrackDetailsMenu {
 
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
-							gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+							gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 						pos = gpxItem.locationOnMap.time / 1000f;
 					} else {
 						double totalDistance = 0;
@@ -348,7 +348,7 @@ public class TrackDetailsMenu {
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			GPXFile gpxFile = gpxItem.group.getGpxFile();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
-					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+					gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 				float time = pos * 1000;
 				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
 			} else {
@@ -370,7 +370,7 @@ public class TrackDetailsMenu {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment != null) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-				if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+				if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 					float startTime = startPos * 1000;
 					float endTime = endPos * 1000;
 					for (WptPt p : segment.points) {
@@ -733,7 +733,7 @@ public class TrackDetailsMenu {
 		if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time));
 			xAxisTitle.setText(app.getString(R.string.shared_string_time));
-		} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
+		} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_span));
 			xAxisTitle.setText(app.getString(R.string.time_of_day));
 		} else {
@@ -759,7 +759,7 @@ public class TrackDetailsMenu {
 		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 
 		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
-			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIMEOFDAY) {
+			if (type == GPXDataSetAxisType.TIME || type == GPXDataSetAxisType.TIME_OF_DAY) {
 				if (analysis.isTimeSpecified()) {
 					availableTypes.add(type);
 				}

@@ -1,9 +1,9 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.ALTITUDE;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.SLOPE;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.SPEED;
+import static net.osmand.plus.charts.LineGraphType.ALTITUDE;
+import static net.osmand.plus.charts.LineGraphType.SLOPE;
+import static net.osmand.plus.charts.LineGraphType.SPEED;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
@@ -42,9 +42,9 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
-import net.osmand.plus.charts.ChartUtils.LineGraphType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.LineGraphType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;

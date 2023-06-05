@@ -191,7 +191,7 @@ public class GPXUtilities {
 		public void setColor(int color) {
 			setColor(Algorithms.colorToString(color));
 		}
-		
+
 		public void setColor(String color) {
 			getExtensionsToWrite().put(COLOR_NAME_EXTENSION, color);
 		}
@@ -219,20 +219,19 @@ public class GPXUtilities {
 		return defColor;
 	}
 
-	public static class Elevation {
+	public static class PointData {
 		public float distance;
 		public float timeDiff;
-		public float elevation;
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;
 	}
 
-	public static class Speed {
-		public float distance;
-		public float timeDiff;
+	public static class Elevation extends PointData {
+		public float elevation;
+	}
+
+	public static class Speed extends PointData {
 		public float speed;
-		public boolean firstPoint = false;
-		public boolean lastPoint = false;
 	}
 
 	public static class WptPt extends GPXExtensions {
@@ -322,7 +321,7 @@ public class GPXUtilities {
 			this.hdop = hdop;
 			this.heading = heading;
 		}
-		
+
 		public WptPt(double lat, double lon, String desc, String name, String category, String color, String icon, String background) {
 			this.lat = lat;
 			this.lon = lon;

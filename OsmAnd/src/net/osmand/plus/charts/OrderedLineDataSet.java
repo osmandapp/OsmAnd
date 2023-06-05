@@ -3,9 +3,6 @@ package net.osmand.plus.charts;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
-
 import java.util.List;
 
 public class OrderedLineDataSet extends LineDataSet {
@@ -21,8 +18,8 @@ public class OrderedLineDataSet extends LineDataSet {
 	float divY = 1f;
 	float mulY = 1f;
 
-	OrderedLineDataSet(List<Entry> yVals, String label, ChartUtils.GPXDataSetType dataSetType,
-	                   ChartUtils.GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
+	OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
+	                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
 		super(yVals, label);
 		setHighlightLineWidth(1);
 		this.dataSetType = dataSetType;
@@ -30,11 +27,11 @@ public class OrderedLineDataSet extends LineDataSet {
 		this.leftAxis = leftAxis;
 	}
 
-	public ChartUtils.GPXDataSetType getDataSetType() {
+	public GPXDataSetType getDataSetType() {
 		return dataSetType;
 	}
 
-	public ChartUtils.GPXDataSetAxisType getDataSetAxisType() {
+	public GPXDataSetAxisType getDataSetAxisType() {
 		return dataSetAxisType;
 	}
 

@@ -2,6 +2,9 @@ package net.osmand.plus.charts;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
+import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
+import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
 import static net.osmand.plus.utils.OsmAndFormatter.FEET_IN_ONE_METER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
@@ -39,12 +42,12 @@ import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
+import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ChartUtils {
@@ -255,7 +258,7 @@ public class ChartUtils {
 		float x = 0f;
 		for (GPXUtilities.Elevation e : elevationData) {
 			i++;
-			if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
+			if (axisType == TIME || axisType == TIME_OF_DAY) {
 				x = e.timeDiff;
 			} else {
 				x = e.distance;
@@ -346,7 +349,7 @@ public class ChartUtils {
 
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
 	                                              @NonNull HorizontalBarChart mChart,
-	                                              @NonNull RouteStatisticsHelper.RouteStatistics routeStatistics,
+	                                              @NonNull RouteStatistics routeStatistics,
 	                                              @NonNull GPXTrackAnalysis analysis,
 	                                              boolean useRightAxis,
 	                                              boolean nightMode) {
@@ -363,12 +366,12 @@ public class ChartUtils {
 		}
 		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
 
-		List<RouteStatisticsHelper.RouteSegmentAttribute> segments = routeStatistics.elements;
+		List<RouteSegmentAttribute> segments = routeStatistics.elements;
 		List<BarEntry> entries = new ArrayList<>();
 		float[] stacks = new float[segments.size()];
 		int[] colors = new int[segments.size()];
 		for (int i = 0; i < stacks.length; i++) {
-			RouteStatisticsHelper.RouteSegmentAttribute segment = segments.get(i);
+			RouteSegmentAttribute segment = segments.get(i);
 			stacks[i] = segment.getDistance() / divX;
 			colors[i] = segment.getColor();
 		}
@@ -398,15 +401,7 @@ public class ChartUtils {
 		boolean light = settings.isLightContent();
 		float convEle = useFeet ? 3.28084f : 1.0f;
 
-		float divX;
-		XAxis xAxis = mChart.getXAxis();
-		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
-		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
-			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
-		} else {
-			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
-		}
+		float divX = getDivX(ctx, mChart, analysis, axisType, calcWithoutGaps);
 
 		String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
 
@@ -474,15 +469,7 @@ public class ChartUtils {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 
-		float divX;
-		XAxis xAxis = mChart.getXAxis();
-		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
-		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
-			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
-		} else {
-			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
-		}
+		float divX = getDivX(ctx, mChart, analysis, axisType, calcWithoutGaps);
 
 		SpeedConstants sps = settings.SPEED_SYSTEM.get();
 		float mulSpeed = Float.NaN;
@@ -525,9 +512,7 @@ public class ChartUtils {
 
 			GPXUtilities.Speed s = speedData.get(i);
 
-			float stepX = axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY
-					? s.timeDiff
-					: s.distance;
+			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? s.timeDiff : s.distance;
 
 			if (i == 0 || stepX > 0) {
 				if (!(calcWithoutGaps && s.firstPoint)) {
@@ -620,6 +605,19 @@ public class ChartUtils {
 		return dataSet;
 	}
 
+	private static float getDivX(@NonNull OsmandApplication app, @NonNull LineChart lineChart,
+	                             @NonNull GPXTrackAnalysis analysis, @NonNull GPXDataSetAxisType axisType,
+	                             boolean calcWithoutGaps) {
+		XAxis xAxis = lineChart.getXAxis();
+		if (axisType == TIME && analysis.isTimeSpecified()) {
+			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
+		} else if (axisType == TIME_OF_DAY && analysis.isTimeSpecified()) {
+			return setupXAxisTimeOfDay(xAxis, analysis.startTime);
+		} else {
+			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+		}
+	}
+
 	public static OrderedLineDataSet createGPXSlopeDataSet(@NonNull OsmandApplication ctx,
 	                                                       @NonNull LineChart mChart,
 	                                                       @NonNull GPXTrackAnalysis analysis,
@@ -635,15 +633,7 @@ public class ChartUtils {
 		float convEle = useFeet ? 3.28084f : 1.0f;
 		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
-		float divX;
-		XAxis xAxis = mChart.getXAxis();
-		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
-		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
-			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
-		} else {
-			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
-		}
+		float divX = getDivX(ctx, mChart, analysis, axisType, calcWithoutGaps);
 
 		final String mainUnitY = "%";
 
@@ -661,7 +651,7 @@ public class ChartUtils {
 
 		List<Entry> values;
 		if (eleValues == null) {
-			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f, false, calcWithoutGaps);
+			values = calculateElevationArray(analysis, DISTANCE, 1f, 1f, false, calcWithoutGaps);
 		} else {
 			values = new ArrayList<>(eleValues.size());
 			for (Entry e : eleValues) {
@@ -730,7 +720,7 @@ public class ChartUtils {
 		lastIndex = calculatedSlopeDist.length - 1;
 		float timeSpanInSeconds = analysis.timeSpan / 1000f;
 		for (int i = 0; i < calculatedSlopeDist.length; i++) {
-			if ((axisType == GPXDataSetAxisType.TIMEOFDAY || axisType == GPXDataSetAxisType.TIME) && analysis.isTimeSpecified()) {
+			if ((axisType == TIME_OF_DAY || axisType == TIME) && analysis.isTimeSpecified()) {
 				x = (timeSpanInSeconds * i) / calculatedSlopeDist.length;
 			} else {
 				x = (float) calculatedSlopeDist[i] / divX;
@@ -796,96 +786,6 @@ public class ChartUtils {
 		return dataSet;
 	}
 
-	public enum GPXDataSetType {
-		ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average),
-		SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed),
-		SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);
-
-		private final int stringId;
-		private final int imageId;
-
-		GPXDataSetType(int stringId, int imageId) {
-			this.stringId = stringId;
-			this.imageId = imageId;
-		}
-
-		public String getName(@NonNull Context ctx) {
-			return ctx.getString(stringId);
-		}
-
-		public int getStringId() {
-			return stringId;
-		}
-
-		public int getImageId() {
-			return imageId;
-		}
-
-		public Drawable getImageDrawable(@NonNull OsmandApplication app) {
-			return app.getUIUtilities().getThemedIcon(imageId);
-		}
-
-		public static String getName(@NonNull Context ctx, @NonNull GPXDataSetType[] types) {
-			List<String> list = new ArrayList<>();
-			for (GPXDataSetType type : types) {
-				list.add(type.getName(ctx));
-			}
-			Collections.sort(list);
-			StringBuilder sb = new StringBuilder();
-			for (String s : list) {
-				if (sb.length() > 0) {
-					sb.append("/");
-				}
-				sb.append(s);
-			}
-			return sb.toString();
-		}
-
-		public static Drawable getImageDrawable(@NonNull OsmandApplication app, @NonNull GPXDataSetType[] types) {
-			if (types.length > 0) {
-				return types[0].getImageDrawable(app);
-			} else {
-				return null;
-			}
-		}
-	}
-
-	public enum GPXDataSetAxisType {
-		DISTANCE(R.string.distance, R.drawable.ic_action_marker_dark),
-		TIME(R.string.shared_string_time, R.drawable.ic_action_time),
-		TIMEOFDAY(R.string.time_of_day, R.drawable.ic_action_time_span);
-
-		private final int stringId;
-		private final int imageId;
-
-		GPXDataSetAxisType(int stringId, int imageId) {
-			this.stringId = stringId;
-			this.imageId = imageId;
-		}
-
-		public String getName(Context ctx) {
-			return ctx.getString(stringId);
-		}
-
-		public int getStringId() {
-			return stringId;
-		}
-
-		public int getImageId() {
-			return imageId;
-		}
-
-		public Drawable getImageDrawable(OsmandApplication app) {
-			return app.getUIUtilities().getThemedIcon(imageId);
-		}
-	}
-
-	public enum LineGraphType {
-		ALTITUDE,
-		SLOPE,
-		SPEED
-	}
-
 	public static List<ILineDataSet> getDataSets(LineChart chart,
 	                                             OsmandApplication app,
 	                                             GPXTrackAnalysis analysis,
@@ -921,35 +821,29 @@ public class ChartUtils {
 		return result;
 	}
 
+	@Nullable
 	private static OrderedLineDataSet getDataSet(@NonNull LineChart chart,
 	                                             @NonNull OsmandApplication app,
 	                                             @NonNull GPXTrackAnalysis analysis,
 	                                             boolean calcWithoutGaps,
 	                                             boolean useRightAxis,
 	                                             @NonNull LineGraphType type) {
-		OrderedLineDataSet dataSet = null;
 		switch (type) {
 			case ALTITUDE: {
 				if (analysis.hasElevationData) {
-					dataSet = createGPXElevationDataSet(app, chart,
-							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
+					return createGPXElevationDataSet(app, chart, analysis, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
-				break;
 			}
 			case SLOPE:
 				if (analysis.hasElevationData) {
-					dataSet = createGPXSlopeDataSet(app, chart,
-							analysis, GPXDataSetAxisType.DISTANCE, null, useRightAxis, true, calcWithoutGaps);
+					return createGPXSlopeDataSet(app, chart, analysis, DISTANCE, null, useRightAxis, true, calcWithoutGaps);
 				}
-				break;
 			case SPEED: {
 				if (analysis.hasSpeedData) {
-					dataSet = createGPXSpeedDataSet(app, chart,
-							analysis, GPXDataSetAxisType.DISTANCE, useRightAxis, true, calcWithoutGaps);
+					return createGPXSpeedDataSet(app, chart, analysis, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
-				break;
 			}
 		}
-		return dataSet;
+		return null;
 	}
 }
