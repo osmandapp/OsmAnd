@@ -2010,8 +2010,6 @@ public class RouteResultPreparation {
 			if (!turnType.keepLeft() && !turnType.keepRight()) {
 				continue;
 			}
-			RouteSegmentResult prev = result.get(i - 1);
-			String turnLanesPrev = getTurnLanesString(prev);
 			if (turnType.isOnlyThroughActive()) {
 				TurnType newTurnType = new TurnType(TurnType.C, turnType.getExitOut(), turnType.getTurnAngle(),
 						turnType.isSkipToSpeak(), turnType.getLanes(),
