@@ -284,6 +284,35 @@ public class TurnType {
         return s.toString();
 	}
 
+	public boolean isOnlyThroughActive() {
+		if (lanes == null) {
+			return false;
+		}
+		boolean hasThrough = false;
+		for (int h = 0; h < lanes.length; h++) {
+			boolean active = lanes[h] % 2 == 1;
+			int primary = TurnType.getPrimaryTurn(lanes[h]);
+			if (primary == 0) {
+				primary = 1;
+			}
+			if (!active && primary == TurnType.C) {
+				return false;
+			}
+			int secondary = TurnType.getSecondaryTurn(lanes[h]);
+			if (!active && secondary == TurnType.C) {
+				return false;
+			}
+			int tertiary = TurnType.getTertiaryTurn(lanes[h]);
+			if (!active && tertiary == TurnType.C) {
+				return false;
+			}
+			if (primary == TurnType.C || secondary == TurnType.C || tertiary == TurnType.C) {
+				hasThrough = true;
+			}
+		}
+		return hasThrough;
+	}
+
 	public static int[] lanesFromString(String lanesString) {
 		if (Algorithms.isEmpty(lanesString)) {
 			return null;
