@@ -2,6 +2,7 @@ package net.osmand.plus.routepreparationmenu;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_HEIGHTMAP_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.FOLLOW_TRACK_MODE;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
@@ -695,6 +696,17 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				openPlanRoute(gpxFile, segmentIndex, CALCULATE_SRTM_MODE | FOLLOW_TRACK_MODE);
+			}
+		});
+	}
+
+	@Override
+	public void calculateOfflineSelected(int segmentIndex) {
+		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		gpxFile.path = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
+		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
+			if (errorMessage == null) {
+				openPlanRoute(gpxFile, segmentIndex, CALCULATE_HEIGHTMAP_MODE | FOLLOW_TRACK_MODE);
 			}
 		});
 	}

@@ -24,6 +24,9 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -56,7 +59,12 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 			dividerItem.setMargins(margin, 0, 0, 0);
 			items.add(dividerItem);
 
-			createOnlineItem();
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			if (plugin != null && plugin.isHeightmapEnabled()) {
+				createOfflineItem();
+			} else {
+				createOnlineItem();
+			}
 		} else {
 			createOsmAndProItem();
 		}
@@ -89,6 +97,23 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 					Fragment fragment = getTargetFragment();
 					if (fragment instanceof CalculateAltitudeListener) {
 						((CalculateAltitudeListener) fragment).calculateOnlineSelected(segmentIndex);
+					}
+					dismiss();
+				})
+				.create();
+		items.add(attachToRoadsItem);
+	}
+
+	private void createOfflineItem() {
+		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
+				.setDescription(getString(R.string.calculate_offline_altitude_descr))
+				.setTitle(getString(R.string.calculate_offline))
+				.setIcon(getActiveIcon(R.drawable.ic_action_world_globe))
+				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
+				.setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof CalculateAltitudeListener) {
+						((CalculateAltitudeListener) fragment).calculateOfflineSelected(segmentIndex);
 					}
 					dismiss();
 				})
@@ -155,5 +180,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 		void attachToRoadsSelected(int segmentIndex);
 
 		void calculateOnlineSelected(int segmentIndex);
+
+		void calculateOfflineSelected(int segmentIndex);
 	}
 }
