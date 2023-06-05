@@ -284,23 +284,14 @@ public class TurnType {
         return s.toString();
 	}
 
-	public boolean isOnlyThroughActive() {
-		int cnt = countTurnTypeDirections(TurnType.C, true);
-		int cntAll = countTurnTypeDirections(TurnType.C, false);
-		if(cnt > 0 && cnt == cntAll) {
-			return true;
-		}
-		return false;
-	}
-
-	public int countTurnTypeDirections(int type, boolean isActive) {
+	public int countTurnTypeDirections(int type, boolean onlyActive) {
 		if (lanes == null) {
 			return 0;
 		}
 		int cnt = 0;
 		for (int h = 0; h < lanes.length; h++) {
 			boolean active = lanes[h] % 2 == 1;
-			if (isActive && !active) {
+			if (onlyActive && !active) {
 				continue;
 			}
 			int primary = TurnType.getPrimaryTurn(lanes[h]);
@@ -309,6 +300,9 @@ public class TurnType {
 			}
 			if (primary == type) {
 				cnt++;
+			}
+			if (onlyActive) {
+				continue;
 			}
 			int secondary = TurnType.getSecondaryTurn(lanes[h]);
 			if (secondary == type) {

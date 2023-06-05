@@ -2010,7 +2010,9 @@ public class RouteResultPreparation {
 			if (!turnType.keepLeft() && !turnType.keepRight()) {
 				continue;
 			}
-			if (turnType.isOnlyThroughActive()) {
+			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
+			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
+			if(cnt > 0 && cnt == cntAll) {
 				TurnType newTurnType = new TurnType(TurnType.C, turnType.getExitOut(), turnType.getTurnAngle(),
 						turnType.isSkipToSpeak(), turnType.getLanes(),
 						turnType.isPossibleLeftTurn(), turnType.isPossibleRightTurn());
