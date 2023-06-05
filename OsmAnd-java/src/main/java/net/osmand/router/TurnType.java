@@ -305,7 +305,7 @@ public class TurnType {
 			}
 			int primary = TurnType.getPrimaryTurn(lanes[h]);
 			if (primary == 0) {
-				primary = 1;
+				primary = TurnType.C;
 			}
 			if (primary == type) {
 				cnt++;
