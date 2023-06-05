@@ -237,7 +237,7 @@ public class ElevationProfileWidget extends MapWidget {
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 
-		if (analysis.hasElevationData) {
+		if (analysis.hasElevationData()) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
 					GPXDataSetAxisType.DISTANCE, false, true, false);

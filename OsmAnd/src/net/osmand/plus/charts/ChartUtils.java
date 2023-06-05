@@ -33,7 +33,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.PointAttribute.Elevation;
+import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -241,10 +242,13 @@ public class ChartUtils {
 		return 1f;
 	}
 
-	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, GPXDataSetAxisType axisType,
-	                                                   float divX, float convEle, boolean useGeneralTrackPoints, boolean calcWithoutGaps) {
+	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis,
+	                                                   GPXDataSetAxisType axisType,
+	                                                   float divX, float convEle,
+	                                                   boolean useGeneralTrackPoints,
+	                                                   boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
-		List<GPXUtilities.Elevation> elevationData = analysis.elevationData;
+		List<Elevation> elevationData = analysis.getElevationData().getAttributes();
 		float nextX = 0;
 		float nextY;
 		float elev;
@@ -256,19 +260,19 @@ public class ChartUtils {
 		float lastXSameY = -1;
 		boolean hasSameY = false;
 		float x = 0f;
-		for (GPXUtilities.Elevation e : elevationData) {
+		for (Elevation elevation : elevationData) {
 			i++;
 			if (axisType == TIME || axisType == TIME_OF_DAY) {
-				x = e.timeDiff;
+				x = elevation.timeDiff;
 			} else {
-				x = e.distance;
+				x = elevation.distance;
 			}
 			if (x >= 0) {
-				if (!(calcWithoutGaps && e.firstPoint && lastEntry != null)) {
+				if (!(calcWithoutGaps && elevation.isFirstPoint() && lastEntry != null)) {
 					nextX += x / divX;
 				}
-				if (!Float.isNaN(e.elevation)) {
-					elev = e.elevation;
+				if (elevation.hasValidValue()) {
+					elev = elevation.value;
 					if (prevElevOrig != -80000) {
 						if (elev > prevElevOrig) {
 							//elev -= 1f;
@@ -287,10 +291,10 @@ public class ChartUtils {
 						}
 						hasSameY = false;
 					}
-					if (useGeneralTrackPoints && e.firstPoint && lastEntry != null) {
+					if (useGeneralTrackPoints && elevation.isFirstPoint() && lastEntry != null) {
 						values.add(new Entry(nextX, lastEntry.getY()));
 					}
-					prevElevOrig = e.elevation;
+					prevElevOrig = elevation.value;
 					prevElev = elev;
 					nextY = elev * convEle;
 					lastEntry = new Entry(nextX, nextY);
@@ -419,8 +423,7 @@ public class ChartUtils {
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE,
-				axisType, !useRightAxis);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType, !useRightAxis);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
 		dataSet.divX = divX;
 		dataSet.mulY = convEle;
@@ -505,39 +508,35 @@ public class ChartUtils {
 		yAxis.setAxisMinimum(0f);
 
 		ArrayList<Entry> values = new ArrayList<>();
-		List<GPXUtilities.Speed> speedData = analysis.speedData;
+		List<Speed> speedData = analysis.getSpeedData().getAttributes();
 		float currentX = 0;
 
 		for (int i = 0; i < speedData.size(); i++) {
+			Speed speed = speedData.get(i);
 
-			GPXUtilities.Speed s = speedData.get(i);
-
-			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? s.timeDiff : s.distance;
+			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? speed.timeDiff : speed.distance;
 
 			if (i == 0 || stepX > 0) {
-				if (!(calcWithoutGaps && s.firstPoint)) {
+				if (!(calcWithoutGaps && speed.isFirstPoint())) {
 					currentX += stepX / divX;
 				}
 
-				float currentY = Float.isNaN(divSpeed)
-						? s.speed * mulSpeed
-						: divSpeed / s.speed;
+				float currentY = Float.isNaN(divSpeed) ? speed.value * mulSpeed : divSpeed / speed.value;
 				if (currentY < 0 || Float.isInfinite(currentY)) {
 					currentY = 0;
 				}
 
-				if (s.firstPoint && currentY != 0) {
+				if (speed.isFirstPoint() && currentY != 0) {
 					values.add(new Entry(currentX, 0));
 				}
 				values.add(new Entry(currentX, currentY));
-				if (s.lastPoint && currentY != 0) {
+				if (speed.isLastPoint() && currentY != 0) {
 					values.add(new Entry(currentX, 0));
 				}
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED,
-				axisType, !useRightAxis);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType, !useRightAxis);
 
 		String format = null;
 		if (dataSet.getYMax() < 3) {
@@ -742,8 +741,7 @@ public class ChartUtils {
 			slopeValues.add(lastEntry);
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE,
-				axisType, !useRightAxis);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE, axisType, !useRightAxis);
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
@@ -797,13 +795,13 @@ public class ChartUtils {
 		}
 		List<ILineDataSet> result = new ArrayList<>();
 		if (secondType == null) {
-			ILineDataSet dataSet = getDataSet(chart, app, analysis, calcWithoutGaps, false, firstType);
+			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, calcWithoutGaps, false);
 			if (dataSet != null) {
 				result.add(dataSet);
 			}
 		} else {
-			OrderedLineDataSet dataSet1 = getDataSet(chart, app, analysis, calcWithoutGaps, false, firstType);
-			OrderedLineDataSet dataSet2 = getDataSet(chart, app, analysis, calcWithoutGaps, true, secondType);
+			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, calcWithoutGaps, false);
+			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, calcWithoutGaps, true);
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {
@@ -822,24 +820,24 @@ public class ChartUtils {
 	}
 
 	@Nullable
-	private static OrderedLineDataSet getDataSet(@NonNull LineChart chart,
-	                                             @NonNull OsmandApplication app,
-	                                             @NonNull GPXTrackAnalysis analysis,
-	                                             boolean calcWithoutGaps,
-	                                             boolean useRightAxis,
-	                                             @NonNull LineGraphType type) {
-		switch (type) {
+	public static OrderedLineDataSet getDataSet(@NonNull OsmandApplication app,
+	                                            @NonNull LineChart chart,
+	                                            @NonNull GPXTrackAnalysis analysis,
+	                                            @NonNull LineGraphType graphType,
+	                                            boolean calcWithoutGaps,
+	                                            boolean useRightAxis) {
+		switch (graphType) {
 			case ALTITUDE: {
-				if (analysis.hasElevationData) {
+				if (analysis.hasElevationData()) {
 					return createGPXElevationDataSet(app, chart, analysis, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 			}
 			case SLOPE:
-				if (analysis.hasElevationData) {
+				if (analysis.hasElevationData()) {
 					return createGPXSlopeDataSet(app, chart, analysis, DISTANCE, null, useRightAxis, true, calcWithoutGaps);
 				}
 			case SPEED: {
-				if (analysis.hasSpeedData) {
+				if (analysis.hasSpeedData()) {
 					return createGPXSpeedDataSet(app, chart, analysis, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 			}

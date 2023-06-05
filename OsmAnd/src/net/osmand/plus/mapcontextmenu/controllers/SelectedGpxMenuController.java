@@ -117,12 +117,12 @@ public class SelectedGpxMenuController extends MenuController {
 				}
 				if (gpxItem != null && gpxItem.analysis != null) {
 					ArrayList<GPXDataSetType> list = new ArrayList<>();
-					if (gpxItem.analysis.hasElevationData) {
+					if (gpxItem.analysis.hasElevationData()) {
 						list.add(ALTITUDE);
 					}
-					if (gpxItem.analysis.hasSpeedData) {
+					if (gpxItem.analysis.hasSpeedData()) {
 						list.add(SPEED);
-					} else if (gpxItem.analysis.hasElevationData) {
+					} else if (gpxItem.analysis.hasElevationData()) {
 						list.add(SLOPE);
 					}
 					if (list.size() > 0) {

@@ -328,7 +328,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_ALTITUDE: {
-				if (analysis.hasElevationData) {
+				if (analysis.hasElevationData()) {
 					items.add(statBlock);
 				}
 				break;
@@ -346,7 +346,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_TIME_SPAN: {
-				if (analysis.hasSpeedData) {
+				if (analysis.hasSpeedData()) {
 					items.add(statBlock);
 				}
 				break;
@@ -443,7 +443,7 @@ public class GpxBlockStatisticsBuilder {
 					GPXTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
 					if (blocksClickable && analysis != null && actionsListener != null) {
 						ArrayList<GPXDataSetType> list = new ArrayList<>();
-						if (analysis.hasElevationData || analysis.isSpeedSpecified() || analysis.hasSpeedData) {
+						if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {
 							if (item.firstType != null) {
 								list.add(item.firstType);
 							}

@@ -39,7 +39,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,6 +68,9 @@ public class GPXUtilities {
 	public static final String GAP_PROFILE_TYPE = "gap";
 	public static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
 	public static final String DEFAULT_ICON_NAME = "special_star";
+
+	public static final String POINT_ELEVATION = "ele";
+	public static final String POINT_SPEED = "speed";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -217,21 +219,6 @@ public class GPXUtilities {
 			}
 		}
 		return defColor;
-	}
-
-	public static class PointData {
-		public float distance;
-		public float timeDiff;
-		public boolean firstPoint = false;
-		public boolean lastPoint = false;
-	}
-
-	public static class Elevation extends PointData {
-		public float elevation;
-	}
-
-	public static class Speed extends PointData {
-		public float speed;
 	}
 
 	public static class WptPt extends GPXExtensions {
@@ -503,7 +490,7 @@ public class GPXUtilities {
 			}
 			return point;
 		}
-		
+
 		void updatePoint(WptPt pt) {
 			this.lat = Double.parseDouble(LAT_LON_FORMAT.format(pt.lat));
 			this.lon = Double.parseDouble(LAT_LON_FORMAT.format(pt.lon));
@@ -1149,7 +1136,7 @@ public class GPXUtilities {
 		serializer.attribute(null, "lon", LAT_LON_FORMAT.format(p.lon));
 
 		if (!Double.isNaN(p.ele)) {
-			writeNotNullText(serializer, "ele", DECIMAL_FORMAT.format(p.ele));
+			writeNotNullText(serializer, POINT_ELEVATION, DECIMAL_FORMAT.format(p.ele));
 		}
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", formatTime(p.time));
@@ -1164,7 +1151,7 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop));
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put("speed", DECIMAL_FORMAT.format(p.speed));
+			p.getExtensionsToWrite().put(POINT_SPEED, DECIMAL_FORMAT.format(p.speed));
 		}
 		if (!Float.isNaN(p.heading)) {
 			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
@@ -1317,7 +1304,7 @@ public class GPXUtilities {
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
 	}
-	
+
 	private static SimpleDateFormat getTimeFormatterTZ() {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN_TZ, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1428,7 +1415,7 @@ public class GPXUtilities {
 											String t = entry.getKey().toLowerCase();
 											String value = entry.getValue();
 											parse.getExtensionsToWrite().put(t, value);
-											if (tag.equals("speed") && parse instanceof WptPt) {
+											if (tag.equals(POINT_SPEED) && parse instanceof WptPt) {
 												try {
 													((WptPt) parse).speed = Float.parseFloat(value);
 												} catch (NumberFormatException e) {
@@ -1596,12 +1583,12 @@ public class GPXUtilities {
 								((WptPt) parse).desc = readText(parser, "desc");
 							} else if (tag.equals("cmt")) {
 								((WptPt) parse).comment = readText(parser, "cmt");
-							} else if (tag.equals("speed")) {
+							} else if (tag.equals(POINT_SPEED)) {
 								try {
-									String value = readText(parser, "speed");
+									String value = readText(parser, POINT_SPEED);
 									if (!Algorithms.isEmpty(value)) {
 										((WptPt) parse).speed = Float.parseFloat(value);
-										parse.getExtensionsToWrite().put("speed", value);
+										parse.getExtensionsToWrite().put(POINT_SPEED, value);
 									}
 								} catch (NumberFormatException e) {
 								}
@@ -1613,8 +1600,8 @@ public class GPXUtilities {
 								if (((WptPt) parse).category == null) {
 									((WptPt) parse).category = readText(parser, "type");
 								}
-							} else if (tag.equals("ele")) {
-								String text = readText(parser, "ele");
+							} else if (tag.equals(POINT_ELEVATION)) {
+								String text = readText(parser, POINT_ELEVATION);
 								if (text != null) {
 									try {
 										((WptPt) parse).ele = Float.parseFloat(text);

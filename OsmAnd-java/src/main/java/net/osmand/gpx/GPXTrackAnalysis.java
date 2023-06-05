@@ -1,12 +1,18 @@
 package net.osmand.gpx;
 
+import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
+import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
+
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttribute.Elevation;
+import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.router.RouteColorize;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class GPXTrackAnalysis {
@@ -78,11 +84,8 @@ public class GPXTrackAnalysis {
 		return left != 0 && right != 0 && top != 0 && bottom != 0;
 	}
 
-	public List<GPXUtilities.Elevation> elevationData;
-	public List<GPXUtilities.Speed> speedData;
+	public Map<String, PointAttributesData> pointAttributesData;
 
-	public boolean hasElevationData;
-	public boolean hasSpeedData;
 	public boolean hasSpeedInTrack = false;
 
 	public boolean isSpeedSpecified() {
@@ -125,8 +128,7 @@ public class GPXTrackAnalysis {
 		double totalSpeedSum = 0;
 		points = 0;
 
-		elevationData = new ArrayList<>();
-		speedData = new ArrayList<>();
+		pointAttributesData = new HashMap<>();
 
 		for (final SplitSegment s : splitSegments) {
 			final int numberOfPoints = s.getNumberOfPoints();
@@ -173,19 +175,6 @@ public class GPXTrackAnalysis {
 					right = Math.max(right, point.getLongitude());
 					top = Math.max(top, point.getLatitude());
 					bottom = Math.min(bottom, point.getLatitude());
-				}
-
-				double elevation = point.ele;
-				GPXUtilities.Elevation elevation1 = new GPXUtilities.Elevation();
-				if (!Double.isNaN(elevation)) {
-					totalElevation += elevation;
-					elevationPoints++;
-					minElevation = Math.min(elevation, minElevation);
-					maxElevation = Math.max(elevation, maxElevation);
-
-					elevation1.elevation = (float) elevation;
-				} else {
-					elevation1.elevation = Float.NaN;
 				}
 
 				float speed = (float) point.speed;
@@ -252,14 +241,6 @@ public class GPXTrackAnalysis {
 					//		totalDistanceMoving0 += calculations[0];
 					//	}
 				}
-
-				elevation1.timeDiff = ((float) timeDiffMillis) / 1000;
-				elevation1.distance = (j > 0) ? calculations[0] : 0;
-				elevationData.add(elevation1);
-				if (!hasElevationData && !Float.isNaN(elevation1.elevation) && totalDistance > 0) {
-					hasElevationData = true;
-				}
-
 				minSpeed = Math.min(speed, minSpeed);
 				if (speed > 0) {
 					totalSpeedSum += speed;
@@ -267,14 +248,25 @@ public class GPXTrackAnalysis {
 					speedCount++;
 				}
 
-				GPXUtilities.Speed speed1 = new GPXUtilities.Speed();
-				speed1.speed = speed;
-				speed1.timeDiff = ((float) timeDiffMillis) / 1000;
-				speed1.distance = elevation1.distance;
-				speedData.add(speed1);
-				if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {
-					hasSpeedData = true;
+				float distance = (j > 0) ? calculations[0] : 0;
+
+				float pointElevation;
+				if (Double.isNaN(point.ele)) {
+					pointElevation = Float.NaN;
+				} else {
+					pointElevation = (float) point.ele;
+
+					totalElevation += point.ele;
+					elevationPoints++;
+					minElevation = Math.min(point.ele, minElevation);
+					maxElevation = Math.max(point.ele, maxElevation);
 				}
+				Elevation elevation = new Elevation(pointElevation, distance, timeDiff);
+				addPointAttribute(elevation);
+
+				Speed speedAttr = new Speed(speed, distance, timeDiff);
+				addPointAttribute(speedAttr);
+
 				if (s.segment.generalSegment) {
 					distanceOfSingleSegment += calculations[0];
 					if (point.firstPoint) {
@@ -282,8 +274,8 @@ public class GPXTrackAnalysis {
 						timeMovingOfSingleSegment = 0;
 						distanceMovingOfSingleSegment = 0;
 						if (j > 0) {
-							elevation1.firstPoint = true;
-							speed1.firstPoint = true;
+							elevation.setFirstPoint(true);
+							speedAttr.setFirstPoint(true);
 						}
 					}
 					if (point.lastPoint) {
@@ -291,8 +283,8 @@ public class GPXTrackAnalysis {
 						timeMovingWithoutGaps += timeMovingOfSingleSegment;
 						totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment;
 						if (j < numberOfPoints - 1) {
-							elevation1.lastPoint = true;
-							speed1.lastPoint = true;
+							elevation.setLastPoint(true);
+							speedAttr.setLastPoint(true);
 						}
 					}
 				}
@@ -309,8 +301,8 @@ public class GPXTrackAnalysis {
 			diffElevationDown += elevationDiffsCalc.diffElevationDown;
 		}
 		if (totalDistance < 0) {
-			hasElevationData = false;
-			hasSpeedData = false;
+			getElevationData().setHasData(false);
+			getSpeedData().setHasData(false);
 		}
 		if (!isTimeSpecified()) {
 			startTime = filestamp;
@@ -343,6 +335,41 @@ public class GPXTrackAnalysis {
 			avgSpeed = -1;
 		}
 		return this;
+	}
+
+	public boolean hasElevationData() {
+		return getElevationData().hasData();
+	}
+
+	public boolean hasSpeedData() {
+		return getSpeedData().hasData();
+	}
+
+	public PointAttributesData<Elevation> getElevationData() {
+		return getAttributesData(POINT_ELEVATION);
+	}
+
+	public PointAttributesData<Speed> getSpeedData() {
+		return getAttributesData(POINT_SPEED);
+	}
+
+	private PointAttributesData getAttributesData(String key) {
+		PointAttributesData data = pointAttributesData.get(key);
+		if (data == null) {
+			data = new PointAttributesData(key);
+			pointAttributesData.put(key, data);
+		}
+		return data;
+	}
+
+	private void addPointAttribute(PointAttribute attribute) {
+		String key = attribute.getKey();
+		PointAttributesData data = getAttributesData(key);
+		data.addPointAttribute(attribute);
+
+		if (!data.hasData() && attribute.hasValidValue() && totalDistance > 0) {
+			data.setHasData(true);
+		}
 	}
 
 	public abstract static class ElevationDiffsCalculator {
@@ -563,8 +590,8 @@ public class GPXTrackAnalysis {
 	}
 
 	static void splitSegment(GPXTrackAnalysis.SplitMetric metric, GPXTrackAnalysis.SplitMetric secondaryMetric,
-									 double metricLimit, List<GPXTrackAnalysis.SplitSegment> splitSegments,
-									 TrkSegment segment, boolean joinSegments) {
+	                         double metricLimit, List<SplitSegment> splitSegments,
+	                         TrkSegment segment, boolean joinSegments) {
 		double currentMetricEnd = metricLimit;
 		double secondaryMetricEnd = 0;
 		GPXTrackAnalysis.SplitSegment sp = new GPXTrackAnalysis.SplitSegment(segment, 0, 0);

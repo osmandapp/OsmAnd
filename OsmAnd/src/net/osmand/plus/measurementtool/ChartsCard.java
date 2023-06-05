@@ -382,7 +382,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 		}
 
 		// update common graph data
-		boolean hasElevationData = analysis.hasElevationData;
+		boolean hasElevationData = analysis.hasElevationData();
 		boolean hasSpeedData = analysis.isSpeedSpecified();
 		addCommonType(R.string.shared_string_overview, true, hasElevationData, ALTITUDE, SLOPE);
 		addCommonType(R.string.altitude, true, hasElevationData, ALTITUDE, null);

@@ -83,15 +83,16 @@ public class SimpleRouteCard extends MapBaseCard {
 
 	private void setupSecondRow() {
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
-		if (analysis.hasElevationData) {
+		boolean hasElevationData = analysis.hasElevationData();
+		if (hasElevationData) {
 			TextView uphill = view.findViewById(R.id.uphill);
 			TextView downhill = view.findViewById(R.id.downhill);
 
 			uphill.setText(getFormattedAlt(analysis.diffElevationUp, app));
 			downhill.setText(getFormattedAlt(analysis.diffElevationDown, app));
 		}
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.uphill_container), analysis.hasElevationData);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.downhill_container), analysis.hasElevationData);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.uphill_container), hasElevationData);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.downhill_container), hasElevationData);
 		setupEmission();
 	}
 
@@ -112,7 +113,7 @@ public class SimpleRouteCard extends MapBaseCard {
 		LineChart chart = view.findViewById(R.id.chart);
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
-		if (analysis.hasElevationData) {
+		if (analysis.hasElevationData()) {
 			ChartUtils.setupGPXChart(chart, 10f, 4f, false);
 
 			LineData data = lineData;
@@ -132,7 +133,7 @@ public class SimpleRouteCard extends MapBaseCard {
 			}
 			chart.setData(data);
 		}
-		AndroidUiHelper.updateVisibility(chart, analysis.hasElevationData);
+		AndroidUiHelper.updateVisibility(chart, analysis.hasElevationData());
 	}
 
 	private void setupDetailsButton() {

@@ -675,10 +675,10 @@ public class TrackDetailsMenu {
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
-			for (int i = 0; i < gpxItem.chartTypes.length; i++) {
+			for (GPXDataSetType dataSetType : gpxItem.chartTypes) {
 				OrderedLineDataSet dataSet = null;
 				boolean withoutGaps = selectedGpxFile != null && (!selectedGpxFile.isJoinSegments() && gpxItem.isGeneralTrack());
-				switch (gpxItem.chartTypes[i]) {
+				switch (dataSetType) {
 					case ALTITUDE:
 						dataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
 								gpxItem.chartAxisType, false, true, withoutGaps);
@@ -771,23 +771,26 @@ public class TrackDetailsMenu {
 		return availableTypes;
 	}
 
-	public List<GPXDataSetType[]> getAvailableYTypes(GPXTrackAnalysis analysis) {
+	@NonNull
+	public List<GPXDataSetType[]> getAvailableYTypes(@NonNull GPXTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 
-		if (analysis.hasElevationData) {
+		boolean hasElevationData = analysis.hasElevationData();
+		boolean hasSpeedData = analysis.hasSpeedData();
+		if (hasElevationData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE});
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE});
 		}
-		if (analysis.hasSpeedData) {
+		if (hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SPEED});
 		}
-		if (analysis.hasElevationData) {
+		if (hasElevationData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE});
 		}
-		if (analysis.hasElevationData && analysis.hasSpeedData) {
+		if (hasElevationData && hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED});
 		}
-		if (analysis.hasElevationData && analysis.hasSpeedData) {
+		if (hasElevationData && hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
 		}
 		return availableTypes;

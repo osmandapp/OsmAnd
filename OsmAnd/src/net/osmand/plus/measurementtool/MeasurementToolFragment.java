@@ -1975,7 +1975,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GPXTrackAnalysis analysis = selectedGpxFile != null
 				? selectedGpxFile.getTrackAnalysis(app)
 				: gpxFile.getAnalysis(System.currentTimeMillis());
-		return analysis.hasElevationData;
+		return analysis.hasElevationData();
 	}
 
 	private void updateDistancePointsText() {

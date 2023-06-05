@@ -1135,7 +1135,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				GPXTrackAnalysis analysis = this.analysis != null
 						? this.analysis
 						: selectedGpxFile.getTrackAnalysis(app);
-				if (analysis.hasElevationData) {
+				if (analysis.hasElevationData()) {
 					OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 					if (plugin != null && plugin.isHeightmapEnabled()) {
 						calculateOfflineSelected(-1);

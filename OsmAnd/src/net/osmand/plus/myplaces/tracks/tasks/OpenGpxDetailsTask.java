@@ -59,12 +59,12 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 
 		if (gpxItem != null && gpxItem.analysis != null) {
 			ArrayList<GPXDataSetType> list = new ArrayList<>();
-			if (gpxItem.analysis.hasElevationData) {
+			if (gpxItem.analysis.hasElevationData()) {
 				list.add(GPXDataSetType.ALTITUDE);
 			}
-			if (gpxItem.analysis.hasSpeedData) {
+			if (gpxItem.analysis.hasSpeedData()) {
 				list.add(GPXDataSetType.SPEED);
-			} else if (gpxItem.analysis.hasElevationData) {
+			} else if (gpxItem.analysis.hasElevationData()) {
 				list.add(GPXDataSetType.SLOPE);
 			}
 			if (!list.isEmpty()) {

@@ -34,8 +34,8 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public GPXTrackAnalysis getAnalysis() {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
-		if(gpxFile.hasAltitude){
-			analysis =  gpxFile.getAnalysis(0);
+		if (gpxFile.hasAltitude) {
+			analysis = gpxFile.getAnalysis(0);
 		} else {
 			analysis.diffElevationDown = diffElevationDown;
 			analysis.diffElevationUp = diffElevationUp;
@@ -45,7 +45,7 @@ public class TravelGpx extends TravelArticle {
 			analysis.totalDistanceWithoutGaps = totalDistance;
 			analysis.avgElevation = avgElevation;
 			if (!Double.isNaN(maxElevation) || !Double.isNaN(minElevation)) {
-				analysis.hasElevationData = true;
+				analysis.getElevationData().setHasData(true);
 			}
 		}
 		return analysis;
