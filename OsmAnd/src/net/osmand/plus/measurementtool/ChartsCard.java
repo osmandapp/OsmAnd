@@ -221,20 +221,33 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 				&& Algorithms.objectEquals(visibleType.getTitle(), type.getTitle());
 	}
 
+	@Nullable
 	private ChartType<?> getFirstAvailableType() {
-		ChartType<?> chartType = getFirstOnlineType();
-		if (chartType == null) {
+		ChartType<?> onlineType = getFirstOnlineType();
+		ChartType<?> offlineType = getFirstOfflineType();
+		if (onlineType == null && offlineType == null) {
 			for (ChartType<?> type : chartTypes) {
 				if (type.isAvailable()) {
-					chartType = type;
+					return type;
 				}
 			}
 		}
-		return chartType;
+		return offlineType != null ? offlineType : onlineType;
 	}
 
 	private ChartType<?> getFirstOnlineType() {
 		if (fragment.isCalculateSrtmMode()) {
+			for (ChartType<?> type : chartTypes) {
+				if (type.isAvailable() && Algorithms.stringsEqual(type.title, app.getString(R.string.altitude))) {
+					return type;
+				}
+			}
+		}
+		return null;
+	}
+
+	private ChartType<?> getFirstOfflineType() {
+		if (fragment.isCalculateHeightmapMode()) {
 			for (ChartType<?> type : chartTypes) {
 				if (type.isAvailable() && Algorithms.stringsEqual(type.title, app.getString(R.string.altitude))) {
 					return type;
@@ -271,6 +284,12 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			String buttonText = app.getString(R.string.shared_string_cancel);
 			showMessage(null, desc, INVALID_ID, progressSize);
 			showButton(buttonText, v -> fragment.stopUploadFileTask(), true);
+		} else if (visibleType.canBeCalculated() && fragment.isCalculatingHeightmapData()) {
+			String desc = app.getString(R.string.calculating_altitude);
+			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
+			String buttonText = app.getString(R.string.shared_string_cancel);
+			showMessage(null, desc, INVALID_ID, progressSize);
+			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(), true);
 		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
 			String title = app.getString(R.string.no_altitude_data);
 			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());

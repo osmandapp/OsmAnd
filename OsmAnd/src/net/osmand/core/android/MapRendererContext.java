@@ -20,10 +20,15 @@ import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListFloat;
+import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.QStringStringHash;
 import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SqliteHeightmapTileProvider;
 import net.osmand.core.jni.SwigUtilities;
+import net.osmand.core.jni.ZoomLevel;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -36,12 +41,14 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -441,6 +448,32 @@ public class MapRendererContext {
 		return mapPrimitiviser;
 	}
 
+	@Nullable
+	public float[] calculateHeights(@NonNull List<LatLon> points) {
+		MapRendererView mapRendererView = this.mapRendererView;
+		GeoTiffCollection collection = getGeoTiffCollection();
+		if (mapRendererView != null) {
+			QListPointI qpoints = new QListPointI();
+			for (LatLon latLon : points) {
+				qpoints.add(new PointI(
+						MapUtils.get31TileNumberX(latLon.getLongitude()),
+						MapUtils.get31TileNumberY(latLon.getLatitude())));
+			}
+			QListFloat heights = new QListFloat();
+			if (collection.calculateHeights(
+					ZoomLevel.ZoomLevel14, mapRendererView.getElevationDataTileSize(), qpoints, heights)) {
+				if (heights.size() == points.size()) {
+					int size = (int)heights.size();
+					float[] res = new float[size];
+					for (int i = 0; i < size; i++) {
+						res[i] = heights.get(i);
+					}
+					return res;
+				}
+			}
+		}
+		return null;
+	}
 
 	private static class CachedMapPresentation {
 		String langId;
