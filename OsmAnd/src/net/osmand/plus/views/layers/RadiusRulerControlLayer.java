@@ -374,7 +374,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		for (int a = -180; a <= 180; a += CIRCLE_ANGLE_STEP) {
 			LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, circleRadius / tb.getPixDensity(), a);
-			if (isLatLonOutOfBounds(latLon)) {
+			if (Math.abs(latLon.getLatitude()) > 90) {
 				if (points.size() > 0) {
 					arrays.add(points);
 					points = new ArrayList<>();
@@ -625,7 +625,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private PointF getPointFromCenterByRadius(double radius, double angle, RotatedTileBox tb) {
 		LatLon centerLatLon = getCenterLatLon(tb);
 		LatLon latLon = MapUtils.rhumbDestinationPoint(centerLatLon, radius / tb.getPixDensity(), angle);
-		return isLatLonOutOfBounds(latLon)
+		return Math.abs(latLon.getLatitude()) > 90
 				? null
 				: NativeUtilities.getElevatedPixelFromLatLon(getMapRenderer(), tb, latLon);
 	}
@@ -711,10 +711,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		} else {
 			return "";
 		}
-	}
-
-	private boolean isLatLonOutOfBounds(@NonNull LatLon latLon) {
-		return Math.abs(latLon.getLatitude()) > 90 || Math.abs(latLon.getLongitude()) > 180;
 	}
 
 	private enum TextAlignment {

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
@@ -169,7 +170,14 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 		HeartRateData data = lastHeartRateData;
 		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
 		if (computedHeartRate > 0) {
-			json.put(getSensorId(), computedHeartRate);
+			json.put(getGpxTagName(), computedHeartRate);
 		}
 	}
+
+	@NonNull
+	@Override
+	protected String getGpxTagName() {
+		return GPXUtilities.SENSOR_TAG_HEART_RATE;
+	}
+
 }

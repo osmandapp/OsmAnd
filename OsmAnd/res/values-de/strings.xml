@@ -5231,4 +5231,8 @@
     <string name="delete_folder">Ordner löschen</string>
     <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
     <string name="save_track_external_sensors_data">Daten</string>
+    <string name="write_data_from_sensor_to_track">Daten von externen Sensoren während der Fahrtaufzeichnung in GPX schreiben.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Es sind keine Sensoren dieses Typs angeschlossen</string>
+    <string name="external_sensors_source_of_data">Quelle der Daten</string>
+    <string name="external_sensors_not_found">Sensoren nicht gefunden</string>
 </resources>

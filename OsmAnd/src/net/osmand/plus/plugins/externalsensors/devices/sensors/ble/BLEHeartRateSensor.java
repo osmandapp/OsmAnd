@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
@@ -192,7 +193,14 @@ public class BLEHeartRateSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		HeartRateData data = lastHeartRateData;
 		if (data != null) {
-			json.put(getSensorId(), data.heartRate);
+			json.put(getGpxTagName(), data.heartRate);
 		}
 	}
+
+	@NonNull
+	@Override
+	protected String getGpxTagName() {
+		return GPXUtilities.SENSOR_TAG_HEART_RATE;
+	}
+
 }

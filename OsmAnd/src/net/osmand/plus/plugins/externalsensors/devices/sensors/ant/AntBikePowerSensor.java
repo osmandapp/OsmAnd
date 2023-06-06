@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
@@ -151,7 +152,14 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 		BikePowerData data = lastBikePowerData;
 		double calculatedPower = data != null ? data.getCalculatedPower() : 0;
 		if (calculatedPower > 0) {
-			json.put(getSensorId(),  DECIMAL_FORMAT.format(calculatedPower));
+			json.put(getGpxTagName(),  DECIMAL_FORMAT.format(calculatedPower));
 		}
 	}
+
+	@NonNull
+	@Override
+	protected String getGpxTagName() {
+		return GPXUtilities.SENSOR_TAG_BIKE_POWER;
+	}
+
 }

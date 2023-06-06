@@ -112,6 +112,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			}
 		}, 100);
 
+		refreshControlsButtons();
 		return mainView;
 	}
 
@@ -273,6 +274,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 				((GpxApproximationFragmentListener) fragment).onCancelGpxApproximation();
 			}
 		}
+		refreshControlsButtons();
+	}
+
+	private void refreshControlsButtons(){
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
 	}
 
 	@Override

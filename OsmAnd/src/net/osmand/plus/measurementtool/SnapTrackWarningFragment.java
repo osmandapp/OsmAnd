@@ -116,6 +116,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 			int landscapeWidth = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 			rootView.setLayoutParams(new FrameLayout.LayoutParams(landscapeWidth, MATCH_PARENT));
 		}
+		refreshControlsButtons();
 		return rootView;
 	}
 
@@ -211,6 +212,13 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		if (fragment != null && !continued) {
 			fragment.onActivityResult(REQUEST_CODE, CANCEL_RESULT_CODE, null);
 		}
+		if (!continued) {
+			refreshControlsButtons();
+		}
+	}
+
+	private void refreshControlsButtons(){
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
 	}
 
 	public MapActivity getMapActivity() {

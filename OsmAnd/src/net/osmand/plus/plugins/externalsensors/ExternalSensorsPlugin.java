@@ -25,7 +25,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -42,6 +44,7 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -128,6 +131,32 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		return devicesHelper.getPairedDevices();
 	}
 
+	private boolean isDeviceForWidgetFieldType(@NonNull AbstractDevice<?> device, @NonNull SensorWidgetDataFieldType fieldType) {
+		for (AbstractSensor sensor : device.getSensors()) {
+			for (SensorWidgetDataFieldType type :
+					sensor.getSupportedWidgetDataFieldTypes()) {
+				if (type == fieldType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	public List<AbstractDevice<?>> getPairedDevicesByWidgetType(@NonNull SensorWidgetDataFieldType fieldType) {
+		List<AbstractDevice<?>> devices = getPairedDevices();
+		ArrayList<AbstractDevice<?>> filteredDevices = new ArrayList<>();
+		for (AbstractDevice<?> device : devices) {
+			if (isDeviceForWidgetFieldType(device, fieldType)) {
+				filteredDevices.add(device);
+			}
+		}
+
+		return devicesHelper.getPairedDevices();
+	}
+
+
 	@Nullable
 	public AbstractDevice<?> getPairedDeviceById(String deviceId) {
 		return devicesHelper.getPairedDeviceById(deviceId);
@@ -148,7 +177,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		Set<String> deviceIdsEnabledForWritingToTrack = getEnabledDevicesToWriteToTrack();
 		for (AbstractDevice<?> device : devicesHelper.getDevices()) {
 			if (devicesHelper.isDeviceEnabled(device) && deviceIdsEnabledForWritingToTrack.contains(device.getDeviceId())
-					&& device.isConnected()) {
+					    && device.isConnected()) {
 				try {
 					device.writeSensorDataToJson(json);
 				} catch (JSONException e) {
@@ -248,13 +277,13 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (isActive()) {
 			helper.addItem(new ContextMenuItem(DRAWER_ANT_PLUS_ID)
-					.setTitleId(R.string.external_sensors_plugin_name, mapActivity)
-					.setIcon(R.drawable.ic_action_sensor)
-					.setListener((uiAdapter, view, item, isChecked) -> {
-						app.logEvent("externalSettingsOpen");
-						ExternalDevicesListFragment.showInstance(mapActivity.getSupportFragmentManager());
-						return true;
-					}));
+					               .setTitleId(R.string.external_sensors_plugin_name, mapActivity)
+					               .setIcon(R.drawable.ic_action_sensor)
+					               .setListener((uiAdapter, view, item, isChecked) -> {
+						               app.logEvent("externalSettingsOpen");
+						               ExternalDevicesListFragment.showInstance(mapActivity.getSupportFragmentManager());
+						               return true;
+					               }));
 		}
 	}
 

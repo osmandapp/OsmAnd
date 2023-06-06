@@ -32,7 +32,7 @@
     <string name="rendering_value_caiScale_name">CAI scale</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
-    <string name="map_3d_mode_hint">Long tap on button allows to change button position.</string>
+    <string name="map_3d_mode_hint">Long tap the button allows to change button position.</string>
     <string name="visible_in_3d_mode">Visible in 3D mode</string>
     <string name="map_3d_mode_description">Touch map with two fingers and moves them up and down to adjust map tilt.</string>
     <string name="shared_string_visible_on_map">Visible on map</string>
@@ -483,7 +483,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Hint: Tap on the compass widget to switch the map orientation mode.</string>
+    <string name="compass_click_desc">Hint: Tap the compass button to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>

@@ -205,12 +205,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 
 	private void updatePairedSensorsList() {
 		List<AbstractDevice<?>> devices = plugin.getPairedDevices();
-		ArrayList<AbstractDevice<?>> filteredDevices = new ArrayList<>();
-		for (AbstractDevice<?> device : devices) {
-			if (isDeviceForWidgetFieldType(device)) {
-				filteredDevices.add(device);
-			}
-		}
+		List<AbstractDevice<?>> filteredDevices = plugin.getPairedDevicesByWidgetType(widgetDataFieldType);
 		if (devices.isEmpty()) {
 			if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
 				currentState = States.NOTHING_FOUND;
@@ -227,17 +222,6 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		updateCurrentStateView();
 	}
 
-	private boolean isDeviceForWidgetFieldType(AbstractDevice<?> device) {
-		for (AbstractSensor sensor : device.getSensors()) {
-			for (SensorWidgetDataFieldType type :
-					sensor.getSupportedWidgetDataFieldTypes()) {
-				if (type == widgetDataFieldType) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull Fragment targetFragment,

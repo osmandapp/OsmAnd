@@ -234,6 +234,7 @@ public class RouteResultPreparation {
 		determineTurnsToMerge(ctx.leftSideNavigation, result);
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
+		avoidKeepForThroughMoving(result);
 		addTurnInfoDescriptions(result);
 	}
 
@@ -1999,5 +2000,25 @@ public class RouteResultPreparation {
 				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
 	}
 
+	private void avoidKeepForThroughMoving(List<RouteSegmentResult> result) {
+		for (int i = 1; i < result.size(); i++) {
+			RouteSegmentResult curr = result.get(i);
+			TurnType turnType = curr.getTurnType();
+			if (turnType == null) {
+				continue;
+			}
+			if (!turnType.keepLeft() && !turnType.keepRight()) {
+				continue;
+			}
+			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
+			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
+			if(cnt > 0 && cnt == cntAll) {
+				TurnType newTurnType = new TurnType(TurnType.C, turnType.getExitOut(), turnType.getTurnAngle(),
+						turnType.isSkipToSpeak(), turnType.getLanes(),
+						turnType.isPossibleLeftTurn(), turnType.isPossibleRightTurn());
+				curr.setTurnType(newTurnType);
+			}
+		}
+	}
 
 }

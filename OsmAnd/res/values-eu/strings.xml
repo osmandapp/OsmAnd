@@ -5213,4 +5213,5 @@
     <string name="search_track_by_name">Bilatu arrastoa izenaren arabera</string>
     <string name="no_search_results">Ez dago emaitzarik</string>
     <string name="rendering_value_small_name">Txikia</string>
+    <string name="write_data_from_sensor_to_track">Idatzi datuak GPXra kanpoko sentsoreetatik bidaia grabatzen duzun bitartean.</string>
 </resources>
