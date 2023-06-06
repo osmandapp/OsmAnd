@@ -15,6 +15,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.measurementtool.GpxApproximationFragment;
+import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -165,6 +167,7 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowTopButtons() {
 		return !mapActivity.shouldHideTopControls()
+				&& !isInAttachToRoads()
 				&& !isTrackDetailsMenuOpened()
 				&& !isInPlanRouteMode()
 				&& !isInChoosingRoutesMode()
@@ -251,6 +254,17 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isInMeasurementToolMode() {
 		return mapLayers.getMeasurementToolLayer().isInMeasurementMode();
+	}
+
+	private boolean isInAttachToRoads() {
+		if (isInMeasurementToolMode()) {
+			for (Fragment fragment : mapActivity.getSupportFragmentManager().getFragments()) {
+				if (fragment instanceof SnapTrackWarningFragment || fragment instanceof GpxApproximationFragment) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private boolean isInPlanRouteMode() {
