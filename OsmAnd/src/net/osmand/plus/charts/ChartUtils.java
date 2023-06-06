@@ -402,9 +402,9 @@ public class ChartUtils {
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		String mainUnitY = graphType.getMainUnitY(app);
+		String mainUnitY = getMainUnitY(app, graphType);
 
-		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId());
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
@@ -420,7 +420,7 @@ public class ChartUtils {
 		dataSet.units = mainUnitY;
 
 		boolean nightMode = !settings.isLightContent();
-		int color = ColorUtilities.getColor(app, graphType.getFillColorId());
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
 		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
 		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
 
@@ -472,7 +472,7 @@ public class ChartUtils {
 		SpeedConstants speedConstants = settings.SPEED_SYSTEM.get();
 		float mulSpeed = Float.NaN;
 		float divSpeed = Float.NaN;
-		String mainUnitY = graphType.getMainUnitY(app);
+		String mainUnitY = getMainUnitY(app, graphType);
 		if (speedConstants == SpeedConstants.KILOMETERS_PER_HOUR) {
 			mulSpeed = 3.6f;
 		} else if (speedConstants == SpeedConstants.MILES_PER_HOUR) {
@@ -488,7 +488,7 @@ public class ChartUtils {
 		}
 
 		boolean speedInTrack = analysis.hasSpeedInTrack();
-		int textColor = ColorUtilities.getColor(app, speedInTrack ? R.color.gpx_chart_orange_label : R.color.gpx_chart_red_label);
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
@@ -551,7 +551,7 @@ public class ChartUtils {
 		}
 		dataSet.units = mainUnitY;
 
-		int color = ColorUtilities.getColor(app, speedInTrack ? R.color.gpx_chart_orange : R.color.gpx_chart_red);
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId(!speedInTrack));
 		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
 
 		return dataSet;
@@ -597,9 +597,9 @@ public class ChartUtils {
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		String mainUnitY = graphType.getMainUnitY(app);
+		String mainUnitY = getMainUnitY(app, graphType);
 
-		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId());
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
@@ -702,7 +702,7 @@ public class ChartUtils {
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
-		int color = ColorUtilities.getColor(app, graphType.getFillColorId());
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
 		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
 
 		/*
@@ -715,6 +715,33 @@ public class ChartUtils {
 		*/
 
 		return dataSet;
+	}
+
+
+	@NonNull
+	private static String getMainUnitY(@NonNull OsmandApplication app, @NonNull GPXDataSetType dataSetType) {
+		OsmandSettings settings = app.getSettings();
+		switch (dataSetType) {
+			case ALTITUDE: {
+				boolean shouldUseFeet = settings.METRIC_SYSTEM.get().shouldUseFeet();
+				return app.getString(shouldUseFeet ? R.string.foot : R.string.m);
+			}
+			case SLOPE: {
+				return "%";
+			}
+			case SPEED: {
+				return settings.SPEED_SYSTEM.get().toShortString(app);
+			}
+			case SENSOR_HEART_RATE: {
+				return app.getString(R.string.beats_per_minute_short);
+			}
+			case SENSOR_SPEED:
+			case SENSOR_BIKE_POWER:
+			case SENSOR_BIKE_CADENCE:
+			case SENSOR_TEMPERATURE:
+				return "";
+		}
+		return "";
 	}
 
 	public static List<ILineDataSet> getDataSets(LineChart chart,
@@ -817,7 +844,7 @@ public class ChartUtils {
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId());
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
@@ -857,7 +884,7 @@ public class ChartUtils {
 			format = "{0,number,0.#} ";
 		}
 		String formatY = format;
-		String mainUnitY = graphType.getMainUnitY(app);
+		String mainUnitY = getMainUnitY(app, graphType);
 		yAxis.setValueFormatter((value, axis) -> {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
@@ -869,7 +896,7 @@ public class ChartUtils {
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
-		int color = ColorUtilities.getColor(app, graphType.getFillColorId());
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
 		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
 
 		return dataSet;

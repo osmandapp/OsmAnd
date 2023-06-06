@@ -1,7 +1,6 @@
 package net.osmand.plus.charts;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -9,21 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.OsmandSettings;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public enum GPXDataSetType {
 
 	ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_blue_label, R.color.gpx_chart_blue),
-	SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
-	SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent, GPXUtilities.POINT_SPEED, R.color.gpx_chart_orange_label, R.color.gpx_chart_orange),
+	SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_orange_label, R.color.gpx_chart_orange),
+	SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent, GPXUtilities.POINT_SPEED, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
 
-	SENSOR_SPEED(R.string.shared_string_speed, R.drawable.ic_action_sensor_speed_outlined, GPXUtilities.SENSOR_TAG_SPEED, R.color.gpx_chart_yellow_label, R.color.gpx_chart_yellow),//R.color.gpx_chart_red_label, R.color.gpx_chart_red
+	SENSOR_SPEED(R.string.shared_string_speed, R.drawable.ic_action_sensor_speed_outlined, GPXUtilities.SENSOR_TAG_SPEED, R.color.gpx_chart_yellow_label, R.color.gpx_chart_yellow),
 	SENSOR_HEART_RATE(R.string.map_widget_ant_heart_rate, R.drawable.ic_action_sensor_heart_rate_outlined, GPXUtilities.SENSOR_TAG_HEART_RATE, R.color.gpx_chart_pink_label, R.color.gpx_chart_pink),
 	SENSOR_BIKE_POWER(R.string.map_widget_ant_bicycle_power, R.drawable.ic_action_sensor_bicycle_power_outlined, GPXUtilities.SENSOR_TAG_BIKE_POWER, R.color.gpx_chart_teal_label, R.color.gpx_chart_teal),
 	SENSOR_BIKE_CADENCE(R.string.map_widget_ant_bicycle_cadence, R.drawable.ic_action_sensor_cadence_outlined, GPXUtilities.SENSOR_TAG_CADENCE, R.color.gpx_chart_indigo_label, R.color.gpx_chart_indigo),
@@ -69,66 +62,18 @@ public enum GPXDataSetType {
 	}
 
 	@ColorRes
-	public int getTextColorId() {
+	public int getTextColorId(boolean additional) {
+		if (this == SPEED) {
+			return additional ? R.color.gpx_chart_red_label : textColorId;
+		}
 		return textColorId;
 	}
 
 	@ColorRes
-	public int getFillColorId() {
+	public int getFillColorId(boolean additional) {
+		if (this == SPEED) {
+			return additional ? R.color.gpx_chart_red : fillColorId;
+		}
 		return fillColorId;
-	}
-
-	public Drawable getImageDrawable(@NonNull OsmandApplication app) {
-		return app.getUIUtilities().getThemedIcon(iconId);
-	}
-
-	public static String getName(@NonNull Context ctx, @NonNull GPXDataSetType[] types) {
-		List<String> list = new ArrayList<>();
-		for (GPXDataSetType type : types) {
-			list.add(type.getName(ctx));
-		}
-		Collections.sort(list);
-		StringBuilder builder = new StringBuilder();
-		for (String s : list) {
-			if (builder.length() > 0) {
-				builder.append("/");
-			}
-			builder.append(s);
-		}
-		return builder.toString();
-	}
-
-	public static Drawable getImageDrawable(@NonNull OsmandApplication app, @NonNull GPXDataSetType[] types) {
-		if (types.length > 0) {
-			return types[0].getImageDrawable(app);
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	public String getMainUnitY(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		switch (this) {
-			case ALTITUDE: {
-				boolean shouldUseFeet = settings.METRIC_SYSTEM.get().shouldUseFeet();
-				return app.getString(shouldUseFeet ? R.string.foot : R.string.m);
-			}
-			case SLOPE: {
-				return "%";
-			}
-			case SPEED: {
-				return settings.SPEED_SYSTEM.get().toShortString(app);
-			}
-			case SENSOR_HEART_RATE: {
-				return app.getString(R.string.beats_per_minute_short);
-			}
-			case SENSOR_SPEED:
-			case SENSOR_BIKE_POWER:
-			case SENSOR_BIKE_CADENCE:
-			case SENSOR_TEMPERATURE:
-				return "";
-		}
-		return "";
 	}
 }

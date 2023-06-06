@@ -5,6 +5,7 @@ import static android.text.format.DateUtils.HOUR_IN_MILLIS;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
@@ -719,8 +720,8 @@ public class TrackDetailsMenu {
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
 		List<GPXDataSetType[]> availableTypes = getAvailableYTypes(analysis);
 
-		yAxisIcon.setImageDrawable(GPXDataSetType.getImageDrawable(app, gpxItem.chartTypes));
-		yAxisTitle.setText(GPXDataSetType.getName(app, gpxItem.chartTypes));
+		yAxisIcon.setImageDrawable(getImageDrawable(app, gpxItem.chartTypes));
+		yAxisTitle.setText(getGpxDataSetsName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
 			yAxis.setOnClickListener(v -> {
 				AnalyzeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
@@ -867,6 +868,32 @@ public class TrackDetailsMenu {
 				chart.highlightValue(null);
 			}
 		}
+	}
+
+	@Nullable
+	private Drawable getImageDrawable(@NonNull OsmandApplication app, @NonNull GPXDataSetType[] types) {
+		if (types.length > 0) {
+			return app.getUIUtilities().getThemedIcon(types[0].getIconId());
+		} else {
+			return null;
+		}
+	}
+
+	@NonNull
+	public static String getGpxDataSetsName(@NonNull Context ctx, @NonNull GPXDataSetType[] types) {
+		List<String> list = new ArrayList<>();
+		for (GPXDataSetType type : types) {
+			list.add(type.getName(ctx));
+		}
+		Collections.sort(list);
+		StringBuilder builder = new StringBuilder();
+		for (String s : list) {
+			if (builder.length() > 0) {
+				builder.append("/");
+			}
+			builder.append(s);
+		}
+		return builder.toString();
 	}
 
 	public enum ChartPointLayer {

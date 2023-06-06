@@ -94,7 +94,7 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private View createAxisType(GPXDataSetType[] types) {
-		String title = GPXDataSetType.getName(app, types);
+		String title = TrackDetailsMenu.getGpxDataSetsName(app, types);
 		int iconId = types[0].getIconId();
 		boolean selected = Arrays.equals(types, gpxDisplayItem.chartTypes);
 
