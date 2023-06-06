@@ -15,11 +15,12 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -33,6 +34,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.PointAttribute;
 import net.osmand.gpx.PointAttribute.Elevation;
 import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.plus.OsmandApplication;
@@ -268,7 +270,7 @@ public class ChartUtils {
 				x = elevation.distance;
 			}
 			if (x >= 0) {
-				if (!(calcWithoutGaps && elevation.isFirstPoint() && lastEntry != null)) {
+				if (!(calcWithoutGaps && elevation.firstPoint && lastEntry != null)) {
 					nextX += x / divX;
 				}
 				if (elevation.hasValidValue()) {
@@ -291,7 +293,7 @@ public class ChartUtils {
 						}
 						hasSameY = false;
 					}
-					if (useGeneralTrackPoints && elevation.isFirstPoint() && lastEntry != null) {
+					if (useGeneralTrackPoints && elevation.firstPoint && lastEntry != null) {
 						values.add(new Entry(nextX, lastEntry.getY()));
 					}
 					prevElevOrig = elevation.value;
@@ -352,22 +354,16 @@ public class ChartUtils {
 	}
 
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
-	                                              @NonNull HorizontalBarChart mChart,
+	                                              @NonNull HorizontalBarChart chart,
 	                                              @NonNull RouteStatistics routeStatistics,
 	                                              @NonNull GPXTrackAnalysis analysis,
 	                                              boolean useRightAxis,
 	                                              boolean nightMode) {
 
-		XAxis xAxis = mChart.getXAxis();
+		XAxis xAxis = chart.getXAxis();
 		xAxis.setEnabled(false);
 
-		YAxis yAxis;
-		if (useRightAxis) {
-			yAxis = mChart.getAxisRight();
-			yAxis.setEnabled(true);
-		} else {
-			yAxis = mChart.getAxisLeft();
-		}
+		YAxis yAxis = getYAxis(chart, null, useRightAxis);
 		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
 
 		List<RouteSegmentAttribute> segments = routeStatistics.elements;
@@ -386,40 +382,33 @@ public class ChartUtils {
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
 		dataSet.setBarWidth(1);
-		mChart.getAxisRight().setAxisMaximum(dataSet.getYMax());
-		mChart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
+		chart.getAxisRight().setAxisMaximum(dataSet.getYMax());
+		chart.getAxisLeft().setAxisMaximum(dataSet.getYMax());
 
 		return dataSet;
 	}
 
-	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication ctx,
-	                                                           @NonNull LineChart mChart,
+	public static OrderedLineDataSet createGPXElevationDataSet(@NonNull OsmandApplication app,
+	                                                           @NonNull LineChart chart,
 	                                                           @NonNull GPXTrackAnalysis analysis,
+	                                                           @NonNull GPXDataSetType graphType,
 	                                                           @NonNull GPXDataSetAxisType axisType,
 	                                                           boolean useRightAxis,
 	                                                           boolean drawFilled,
 	                                                           boolean calcWithoutGaps) {
-		OsmandSettings settings = ctx.getSettings();
-		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
-		boolean light = settings.isLightContent();
+		OsmandSettings settings = app.getSettings();
+		boolean useFeet = settings.METRIC_SYSTEM.get().shouldUseFeet();
 		float convEle = useFeet ? 3.28084f : 1.0f;
 
-		float divX = getDivX(ctx, mChart, analysis, axisType, calcWithoutGaps);
+		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
+		String mainUnitY = graphType.getMainUnitY(app);
 
-		YAxis yAxis;
-		if (useRightAxis) {
-			yAxis = mChart.getAxisRight();
-			yAxis.setEnabled(true);
-		} else {
-			yAxis = mChart.getAxisLeft();
-		}
-		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId());
+		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx));
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, app));
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
@@ -430,15 +419,24 @@ public class ChartUtils {
 		dataSet.divY = Float.NaN;
 		dataSet.units = mainUnitY;
 
-		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
+		boolean nightMode = !settings.isLightContent();
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId());
+		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
+		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
+
+		return dataSet;
+	}
+
+	private static void setupDataSet(OsmandApplication app, OrderedLineDataSet dataSet,
+	                                 @ColorInt int color, @ColorInt int fillColor,
+	                                 boolean drawFilled, boolean useRightAxis, boolean nightMode) {
+		dataSet.setColor(color);
 		dataSet.setLineWidth(1f);
 		if (drawFilled) {
 			dataSet.setFillAlpha(128);
-			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
-			dataSet.setDrawFilled(true);
-		} else {
-			dataSet.setDrawFilled(false);
+			dataSet.setFillColor(fillColor);
 		}
+		dataSet.setDrawFilled(drawFilled);
 
 		dataSet.setDrawValues(false);
 		dataSet.setValueTextSize(9f);
@@ -451,60 +449,47 @@ public class ChartUtils {
 		dataSet.setHighlightEnabled(true);
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(mChart.getContext(), !light));
+		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 
-		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-
-		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}
-		return dataSet;
 	}
 
-	public static OrderedLineDataSet createGPXSpeedDataSet(@NonNull OsmandApplication ctx,
-	                                                       @NonNull LineChart mChart,
+	public static OrderedLineDataSet createGPXSpeedDataSet(@NonNull OsmandApplication app,
+	                                                       @NonNull LineChart chart,
 	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean useRightAxis,
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
-		OsmandSettings settings = ctx.getSettings();
-		boolean light = settings.isLightContent();
+		OsmandSettings settings = app.getSettings();
+		boolean nightMode = !settings.isLightContent();
 
-		float divX = getDivX(ctx, mChart, analysis, axisType, calcWithoutGaps);
+		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		SpeedConstants sps = settings.SPEED_SYSTEM.get();
+		SpeedConstants speedConstants = settings.SPEED_SYSTEM.get();
 		float mulSpeed = Float.NaN;
 		float divSpeed = Float.NaN;
-		String mainUnitY = sps.toShortString(ctx);
-		if (sps == SpeedConstants.KILOMETERS_PER_HOUR) {
+		String mainUnitY = graphType.getMainUnitY(app);
+		if (speedConstants == SpeedConstants.KILOMETERS_PER_HOUR) {
 			mulSpeed = 3.6f;
-		} else if (sps == SpeedConstants.MILES_PER_HOUR) {
+		} else if (speedConstants == SpeedConstants.MILES_PER_HOUR) {
 			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-		} else if (sps == SpeedConstants.NAUTICALMILES_PER_HOUR) {
+		} else if (speedConstants == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
-		} else if (sps == SpeedConstants.MINUTES_PER_KILOMETER) {
+		} else if (speedConstants == SpeedConstants.MINUTES_PER_KILOMETER) {
 			divSpeed = METERS_IN_KILOMETER / 60.0f;
-		} else if (sps == SpeedConstants.MINUTES_PER_MILE) {
+		} else if (speedConstants == SpeedConstants.MINUTES_PER_MILE) {
 			divSpeed = METERS_IN_ONE_MILE / 60.0f;
 		} else {
 			mulSpeed = 1f;
 		}
 
-		YAxis yAxis;
-		if (useRightAxis) {
-			yAxis = mChart.getAxisRight();
-			yAxis.setEnabled(true);
-		} else {
-			yAxis = mChart.getAxisLeft();
-		}
-		if (analysis.hasSpeedInTrack()) {
-			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
-		} else {
-			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_label));
-		}
-
+		boolean speedInTrack = analysis.hasSpeedInTrack();
+		int textColor = ColorUtilities.getColor(app, speedInTrack ? R.color.gpx_chart_orange_label : R.color.gpx_chart_red_label);
+		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
 		ArrayList<Entry> values = new ArrayList<>();
@@ -517,7 +502,7 @@ public class ChartUtils {
 			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? speed.timeDiff : speed.distance;
 
 			if (i == 0 || stepX > 0) {
-				if (!(calcWithoutGaps && speed.isFirstPoint())) {
+				if (!(calcWithoutGaps && speed.firstPoint)) {
 					currentX += stepX / divX;
 				}
 
@@ -526,11 +511,11 @@ public class ChartUtils {
 					currentY = 0;
 				}
 
-				if (speed.isFirstPoint() && currentY != 0) {
+				if (speed.firstPoint && currentY != 0) {
 					values.add(new Entry(currentX, 0));
 				}
 				values.add(new Entry(currentX, currentY));
-				if (speed.isLastPoint() && currentY != 0) {
+				if (speed.lastPoint && currentY != 0) {
 					values.add(new Entry(currentX, 0));
 				}
 			}
@@ -547,7 +532,7 @@ public class ChartUtils {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
 			} else {
-				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx);
+				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, app);
 			}
 		});
 
@@ -566,41 +551,9 @@ public class ChartUtils {
 		}
 		dataSet.units = mainUnitY;
 
-		if (analysis.hasSpeedInTrack()) {
-			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
-		} else {
-			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_red));
-		}
-		dataSet.setLineWidth(1f);
-		if (drawFilled) {
-			dataSet.setFillAlpha(128);
-			if (analysis.hasSpeedInTrack()) {
-				dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
-			} else {
-				dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_red));
-			}
-			dataSet.setDrawFilled(true);
-		} else {
-			dataSet.setDrawFilled(false);
-		}
-		dataSet.setDrawValues(false);
-		dataSet.setValueTextSize(9f);
-		dataSet.setFormLineWidth(1f);
-		dataSet.setFormSize(15.f);
+		int color = ColorUtilities.getColor(app, speedInTrack ? R.color.gpx_chart_orange : R.color.gpx_chart_red);
+		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
 
-		dataSet.setDrawCircles(false);
-		dataSet.setDrawCircleHole(false);
-
-		dataSet.setHighlightEnabled(true);
-		dataSet.setDrawVerticalHighlightIndicator(true);
-		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(mChart.getContext(), !light));
-
-		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-
-		if (useRightAxis) {
-			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
-		}
 		return dataSet;
 	}
 
@@ -617,36 +570,40 @@ public class ChartUtils {
 		}
 	}
 
-	public static OrderedLineDataSet createGPXSlopeDataSet(@NonNull OsmandApplication ctx,
-	                                                       @NonNull LineChart mChart,
+	private static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
+		YAxis yAxis = useRightAxis ? chart.getAxisRight() : chart.getAxisLeft();
+		yAxis.setEnabled(true);
+		if (textColor != null) {
+			yAxis.setTextColor(textColor);
+		}
+		return yAxis;
+	}
+
+	public static OrderedLineDataSet createGPXSlopeDataSet(@NonNull OsmandApplication app,
+	                                                       @NonNull LineChart chart,
 	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       @Nullable List<Entry> eleValues,
 	                                                       boolean useRightAxis,
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
-		OsmandSettings settings = ctx.getSettings();
-		boolean light = settings.isLightContent();
+		OsmandSettings settings = app.getSettings();
+		boolean nightMode = !settings.isLightContent();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
 		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
-		float divX = getDivX(ctx, mChart, analysis, axisType, calcWithoutGaps);
+		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		final String mainUnitY = "%";
+		String mainUnitY = graphType.getMainUnitY(app);
 
-		YAxis yAxis;
-		if (useRightAxis) {
-			yAxis = mChart.getAxisRight();
-			yAxis.setEnabled(true);
-		} else {
-			yAxis = mChart.getAxisLeft();
-		}
-		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId());
+		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, ctx));
+		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, app));
 
 		List<Entry> values;
 		if (eleValues == null) {
@@ -745,30 +702,8 @@ public class ChartUtils {
 		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
-		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
-		dataSet.setLineWidth(1f);
-		if (drawFilled) {
-			dataSet.setFillAlpha(128);
-			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
-			dataSet.setDrawFilled(true);
-		} else {
-			dataSet.setDrawFilled(false);
-		}
-
-		dataSet.setDrawValues(false);
-		dataSet.setValueTextSize(9f);
-		dataSet.setFormLineWidth(1f);
-		dataSet.setFormSize(15.f);
-
-		dataSet.setDrawCircles(false);
-		dataSet.setDrawCircleHole(false);
-
-		dataSet.setHighlightEnabled(true);
-		dataSet.setDrawVerticalHighlightIndicator(true);
-		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(mChart.getContext(), !light));
-
-		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId());
+		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
 
 		/*
 		dataSet.setFillFormatter(new IFillFormatter() {
@@ -778,17 +713,15 @@ public class ChartUtils {
 			}
 		});
 		*/
-		if (useRightAxis) {
-			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
-		}
+
 		return dataSet;
 	}
 
 	public static List<ILineDataSet> getDataSets(LineChart chart,
 	                                             OsmandApplication app,
 	                                             GPXTrackAnalysis analysis,
-	                                             @NonNull LineGraphType firstType,
-	                                             @Nullable LineGraphType secondType,
+	                                             @NonNull GPXDataSetType firstType,
+	                                             @Nullable GPXDataSetType secondType,
 	                                             boolean calcWithoutGaps) {
 		if (app == null || chart == null || analysis == null) {
 			return new ArrayList<>();
@@ -823,25 +756,122 @@ public class ChartUtils {
 	public static OrderedLineDataSet getDataSet(@NonNull OsmandApplication app,
 	                                            @NonNull LineChart chart,
 	                                            @NonNull GPXTrackAnalysis analysis,
-	                                            @NonNull LineGraphType graphType,
+	                                            @NonNull GPXDataSetType graphType,
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
 			case ALTITUDE: {
 				if (analysis.hasElevationData()) {
-					return createGPXElevationDataSet(app, chart, analysis, DISTANCE, useRightAxis, true, calcWithoutGaps);
+					return createGPXElevationDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 			}
-			case SLOPE:
+			case SLOPE: {
 				if (analysis.hasElevationData()) {
-					return createGPXSlopeDataSet(app, chart, analysis, DISTANCE, null, useRightAxis, true, calcWithoutGaps);
+					return createGPXSlopeDataSet(app, chart, analysis, graphType, DISTANCE, null, useRightAxis, true, calcWithoutGaps);
 				}
+			}
 			case SPEED: {
 				if (analysis.hasSpeedData()) {
-					return createGPXSpeedDataSet(app, chart, analysis, DISTANCE, useRightAxis, true, calcWithoutGaps);
+					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+			}
+			case SENSOR_SPEED: {
+				if (analysis.hasSensorSpeedData()) {
+					return createSensorDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+			}
+			case SENSOR_HEART_RATE: {
+				if (analysis.hasHeartRateData()) {
+					return createSensorDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+			}
+			case SENSOR_BIKE_POWER: {
+				if (analysis.hasBikePowerData()) {
+					return createSensorDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+			}
+			case SENSOR_BIKE_CADENCE: {
+				if (analysis.hasBikeCadenceData()) {
+					return createSensorDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+				}
+			}
+			case SENSOR_TEMPERATURE: {
+				if (analysis.hasTemperatureData()) {
+					return createSensorDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}
 			}
 		}
 		return null;
+	}
+
+	public static OrderedLineDataSet createSensorDataSet(@NonNull OsmandApplication app,
+	                                                     @NonNull LineChart chart,
+	                                                     @NonNull GPXTrackAnalysis analysis,
+	                                                     @NonNull GPXDataSetType graphType,
+	                                                     @NonNull GPXDataSetAxisType axisType,
+	                                                     boolean useRightAxis,
+	                                                     boolean drawFilled,
+	                                                     boolean calcWithoutGaps) {
+		OsmandSettings settings = app.getSettings();
+		boolean nightMode = !settings.isLightContent();
+
+		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
+
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId());
+		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
+		yAxis.setAxisMinimum(0f);
+
+		ArrayList<Entry> values = new ArrayList<>();
+		List<PointAttribute> attributes = analysis.getAttributesData(graphType.getDataKey()).getAttributes();
+		float currentX = 0;
+
+		for (int i = 0; i < attributes.size(); i++) {
+			PointAttribute attribute = attributes.get(i);
+
+			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
+
+			if (i == 0 || stepX > 0) {
+				if (!(calcWithoutGaps && attribute.firstPoint)) {
+					currentX += stepX / divX;
+				}
+
+				float currentY = attribute.value.floatValue();
+				if (currentY < 0 || Float.isInfinite(currentY)) {
+					currentY = 0;
+				}
+
+				if (attribute.firstPoint && currentY != 0) {
+					values.add(new Entry(currentX, 0));
+				}
+				values.add(new Entry(currentX, currentY));
+				if (attribute.lastPoint && currentY != 0) {
+					values.add(new Entry(currentX, 0));
+				}
+			}
+		}
+
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
+
+		String format = null;
+		if (dataSet.getYMax() < 3) {
+			format = "{0,number,0.#} ";
+		}
+		String formatY = format;
+		String mainUnitY = graphType.getMainUnitY(app);
+		yAxis.setValueFormatter((value, axis) -> {
+			if (!Algorithms.isEmpty(formatY)) {
+				return MessageFormat.format(formatY + mainUnitY, value);
+			} else {
+				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, app);
+			}
+		});
+
+		dataSet.divX = divX;
+		dataSet.units = mainUnitY;
+
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId());
+		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
+
+		return dataSet;
 	}
 }

@@ -33,6 +33,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
@@ -121,9 +122,9 @@ public class SimpleRouteCard extends MapBaseCard {
 				List<ILineDataSet> dataSets = new ArrayList<>();
 				OrderedLineDataSet slopeDataSet;
 				OrderedLineDataSet elevationDataSet = createGPXElevationDataSet(app, chart, analysis,
-						DISTANCE, false, true, false);
+						GPXDataSetType.ALTITUDE, DISTANCE, false, true, false);
 				dataSets.add(elevationDataSet);
-				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, DISTANCE,
+				slopeDataSet = createGPXSlopeDataSet(app, chart, analysis, GPXDataSetType.SLOPE, DISTANCE,
 						elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);

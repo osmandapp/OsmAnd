@@ -524,6 +524,26 @@ public class GPXUtilities {
 				setAddress(address);
 			}
 		}
+
+		public int getHeartRate() {
+			return Algorithms.parseIntSilently(getExtensionsToRead().get(SENSOR_TAG_HEART_RATE), 0);
+		}
+
+		public float getSensorSpeed() {
+			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_SPEED), 0);
+		}
+
+		public float getBikePower() {
+			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_BIKE_POWER), 0);
+		}
+
+		public float getBikeCadence() {
+			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_CADENCE), 0);
+		}
+
+		public float getTemperature() {
+			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_TEMPERATURE), 0);
+		}
 	}
 
 	public static class TrkSegment extends GPXExtensions {

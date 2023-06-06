@@ -2,12 +2,24 @@ package net.osmand.gpx;
 
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
+import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_CADENCE;
+import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_CADENCE;
+import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_HEART_RATE;
+import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_SPEED;
+import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_TEMPERATURE;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.gpx.PointAttribute.BikeCadence;
+import net.osmand.gpx.PointAttribute.BikePower;
 import net.osmand.gpx.PointAttribute.Elevation;
+import net.osmand.gpx.PointAttribute.HeartRate;
+import net.osmand.gpx.PointAttribute.SensorSpeed;
 import net.osmand.gpx.PointAttribute.Speed;
+import net.osmand.gpx.PointAttribute.Temperature;
+import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
 import java.util.HashMap;
@@ -113,6 +125,26 @@ public class GPXTrackAnalysis {
 		return getSpeedData().hasData();
 	}
 
+	public boolean hasHeartRateData() {
+		return getHeartRateData().hasData();
+	}
+
+	public boolean hasSensorSpeedData() {
+		return getSensorSpeedData().hasData();
+	}
+
+	public boolean hasBikeCadenceData() {
+		return getBikeCadenceData().hasData();
+	}
+
+	public boolean hasBikePowerData() {
+		return getBikePowerData().hasData();
+	}
+
+	public boolean hasTemperatureData() {
+		return getTemperatureData().hasData();
+	}
+
 	public PointAttributesData<Elevation> getElevationData() {
 		return getAttributesData(POINT_ELEVATION);
 	}
@@ -121,13 +153,44 @@ public class GPXTrackAnalysis {
 		return getAttributesData(POINT_SPEED);
 	}
 
-	private PointAttributesData getAttributesData(String key) {
+	public PointAttributesData<HeartRate> getHeartRateData() {
+		return getAttributesData(SENSOR_TAG_HEART_RATE);
+	}
+
+	public PointAttributesData<SensorSpeed> getSensorSpeedData() {
+		return getAttributesData(SENSOR_TAG_SPEED);
+	}
+
+	public PointAttributesData<BikeCadence> getBikeCadenceData() {
+		return getAttributesData(SENSOR_TAG_CADENCE);
+	}
+
+	public PointAttributesData<BikePower> getBikePowerData() {
+		return getAttributesData(SENSOR_TAG_BIKE_POWER);
+	}
+
+	public PointAttributesData<Temperature> getTemperatureData() {
+		return getAttributesData(SENSOR_TAG_TEMPERATURE);
+	}
+
+	public <T extends PointAttribute> PointAttributesData<T> getAttributesData(String key) {
 		PointAttributesData data = pointAttributesData.get(key);
 		if (data == null) {
 			data = new PointAttributesData(key);
 			pointAttributesData.put(key, data);
 		}
 		return data;
+	}
+
+	private void addPointAttributes(WptPt point, float pointElevation, float pointSpeed, float distance,
+	                                int timeDiff, boolean firstPoint, boolean lastPoint) {
+		addPointAttribute(new Elevation(pointElevation, distance, timeDiff, firstPoint, lastPoint));
+		addPointAttribute(new Speed(pointSpeed, distance, timeDiff, firstPoint, lastPoint));
+		addPointAttribute(new HeartRate(point.getHeartRate(), distance, timeDiff, firstPoint, lastPoint));
+		addPointAttribute(new SensorSpeed(point.getSensorSpeed(), distance, timeDiff, firstPoint, lastPoint));
+		addPointAttribute(new BikePower(point.getBikePower(), distance, timeDiff, firstPoint, lastPoint));
+		addPointAttribute(new BikeCadence(point.getBikeCadence(), distance, timeDiff, firstPoint, lastPoint));
+		addPointAttribute(new Temperature(point.getTemperature(), distance, timeDiff, firstPoint, lastPoint));
 	}
 
 	private void addPointAttribute(PointAttribute attribute) {
@@ -281,47 +344,34 @@ public class GPXTrackAnalysis {
 					maxSpeed = Math.max(speed, maxSpeed);
 					speedCount++;
 				}
-
-				float distance = (j > 0) ? calculations[0] : 0;
-
-				float pointElevation;
-				if (Double.isNaN(point.ele)) {
-					pointElevation = Float.NaN;
-				} else {
-					pointElevation = (float) point.ele;
-
+				boolean isNaN = Double.isNaN(point.ele);
+				float elevation = isNaN ? Float.NaN : (float) point.ele;
+				if (!isNaN) {
 					totalElevation += point.ele;
 					elevationPoints++;
 					minElevation = Math.min(point.ele, minElevation);
 					maxElevation = Math.max(point.ele, maxElevation);
 				}
-				Elevation elevation = new Elevation(pointElevation, distance, timeDiff);
-				addPointAttribute(elevation);
 
-				Speed speedAttr = new Speed(speed, distance, timeDiff);
-				addPointAttribute(speedAttr);
-
+				boolean firstPoint = false;
+				boolean lastPoint = false;
 				if (s.segment.generalSegment) {
 					distanceOfSingleSegment += calculations[0];
 					if (point.firstPoint) {
+						firstPoint = j > 0;
 						distanceOfSingleSegment = 0;
 						timeMovingOfSingleSegment = 0;
 						distanceMovingOfSingleSegment = 0;
-						if (j > 0) {
-							elevation.setFirstPoint(true);
-							speedAttr.setFirstPoint(true);
-						}
 					}
 					if (point.lastPoint) {
+						lastPoint = j < numberOfPoints - 1;
 						totalDistanceWithoutGaps += distanceOfSingleSegment;
 						timeMovingWithoutGaps += timeMovingOfSingleSegment;
 						totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment;
-						if (j < numberOfPoints - 1) {
-							elevation.setLastPoint(true);
-							speedAttr.setLastPoint(true);
-						}
 					}
 				}
+				float distance = (j > 0) ? calculations[0] : 0;
+				addPointAttributes(point, elevation, speed, distance, timeDiff, firstPoint, lastPoint);
 			}
 
 			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(0, numberOfPoints) {
@@ -335,8 +385,9 @@ public class GPXTrackAnalysis {
 			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
 		}
 		if (totalDistance < 0) {
-			getElevationData().setHasData(false);
-			getSpeedData().setHasData(false);
+			for (String key : PointAttributesData.getSupportedDataTypes()) {
+				getAttributesData(key).setHasData(false);
+			}
 		}
 		if (!isTimeSpecified()) {
 			startTime = filestamp;

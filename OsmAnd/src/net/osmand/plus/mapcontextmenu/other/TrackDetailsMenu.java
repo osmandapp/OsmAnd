@@ -36,25 +36,23 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.charts.TrackChartPoints;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
-import net.osmand.plus.charts.GpxMarkerView;
-import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.GpxMarkerView;
 import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.charts.TrackChartPoints;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.GPXLayer;
-import net.osmand.plus.views.mapwidgets.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -73,7 +71,7 @@ public class TrackDetailsMenu {
 	@Nullable
 	private SelectedGpxFile selectedGpxFile;
 	@Nullable
-	private TrackDetailsBarController toolbarController;
+	private TrackDetailsToolbarController toolbarController;
 	@Nullable
 	private TrkSegment segment;
 	@Nullable
@@ -257,7 +255,7 @@ public class TrackDetailsMenu {
 			if (!portrait) {
 				mapActivity.getMapView().setMapPositionX(1);
 			} else {
-				TrackDetailsBarController toolbarController = new TrackDetailsBarController();
+				TrackDetailsToolbarController toolbarController = new TrackDetailsToolbarController();
 				this.toolbarController = toolbarController;
 				if (gpxItem.group != null) {
 					toolbarController.setTitle(gpxItem.group.getGpxName());
@@ -291,7 +289,7 @@ public class TrackDetailsMenu {
 				GpxSelectionHelper helper = mapActivity.getMyApplication().getSelectedGpxHelper();
 				helper.selectGpxFile(gpxItem.group.getGpxFile(), params);
 			}
-			TrackDetailsBarController toolbarController = this.toolbarController;
+			TrackDetailsToolbarController toolbarController = this.toolbarController;
 			if (toolbarController != null) {
 				mapActivity.hideTopToolbar(toolbarController);
 			}
@@ -681,16 +679,24 @@ public class TrackDetailsMenu {
 				switch (dataSetType) {
 					case ALTITUDE:
 						dataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, false, true, withoutGaps);
+								dataSetType, gpxItem.chartAxisType, false, true, withoutGaps);
 						break;
 					case SPEED:
 						dataSet = ChartUtils.createGPXSpeedDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
+								dataSetType, gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 					case SLOPE:
 						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
 						dataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
+								dataSetType, gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
+						break;
+					case SENSOR_SPEED:
+					case SENSOR_HEART_RATE:
+					case SENSOR_BIKE_POWER:
+					case SENSOR_BIKE_CADENCE:
+					case SENSOR_TEMPERATURE:
+						dataSet = ChartUtils.createSensorDataSet(app, chart, analysis, dataSetType,
+								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
 						break;
 				}
 				if (dataSet != null) {
@@ -793,6 +799,21 @@ public class TrackDetailsMenu {
 		if (hasElevationData && hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
 		}
+		if (analysis.hasSensorSpeedData()) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_SPEED});
+		}
+		if (analysis.hasHeartRateData()) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_HEART_RATE});
+		}
+		if (analysis.hasBikePowerData()) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_BIKE_POWER});
+		}
+		if (analysis.hasBikeCadenceData()) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_BIKE_CADENCE});
+		}
+		if (analysis.hasTemperatureData()) {
+			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_TEMPERATURE});
+		}
 		return availableTypes;
 	}
 
@@ -852,30 +873,5 @@ public class TrackDetailsMenu {
 		GPX,
 		ROUTE,
 		MEASUREMENT_TOOL
-	}
-
-	private static class TrackDetailsBarController extends TopToolbarController {
-
-		TrackDetailsBarController() {
-			super(TopToolbarControllerType.TRACK_DETAILS);
-			setBackBtnIconClrIds(0, 0);
-			setRefreshBtnIconClrIds(0, 0);
-			setCloseBtnIconClrIds(0, 0);
-			setTitleTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
-			setDescrTextClrIds(R.color.text_color_tab_active_light, R.color.text_color_tab_active_dark);
-			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
-					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
-		}
-
-		@Override
-		public void updateToolbar(@NonNull TopToolbarView toolbarView) {
-			super.updateToolbar(toolbarView);
-			AndroidUiHelper.updateVisibility(toolbarView.getShadowView(), false);
-		}
-
-		@Override
-		public int getStatusBarColor(Context context, boolean nightMode) {
-			return NO_COLOR;
-		}
 	}
 }

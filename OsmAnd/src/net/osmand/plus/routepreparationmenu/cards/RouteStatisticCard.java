@@ -21,6 +21,7 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
@@ -202,10 +203,10 @@ public class RouteStatisticCard extends MapBaseCard {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			OrderedLineDataSet slopeDataSet;
 			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, mChart, analysis,
-					GPXDataSetAxisType.DISTANCE, false, true, false);
+					GPXDataSetType.ALTITUDE, GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 			slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, mChart, analysis,
-					GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
+					GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}

@@ -148,7 +148,7 @@ public class Algorithms {
 	}
 
 	public static long parseLongSilently(String input, long def) {
-		if (input != null && input.length() > 0) {
+		if (!isEmpty(input)) {
 			try {
 				return Long.parseLong(input);
 			} catch (NumberFormatException e) {
@@ -159,7 +159,7 @@ public class Algorithms {
 	}
 
 	public static int parseIntSilently(String input, int def) {
-		if (input != null && input.length() > 0) {
+		if (!isEmpty(input)) {
 			try {
 				return Integer.parseInt(input);
 			} catch (NumberFormatException e) {
@@ -170,9 +170,20 @@ public class Algorithms {
 	}
 
 	public static double parseDoubleSilently(String input, double def) {
-		if (input != null && input.length() > 0) {
+		if (!isEmpty(input)) {
 			try {
 				return Double.parseDouble(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+
+	public static float parseFloatSilently(String input, float def) {
+		if (!isEmpty(input)) {
+			try {
+				return Float.parseFloat(input);
 			} catch (NumberFormatException e) {
 				return def;
 			}
