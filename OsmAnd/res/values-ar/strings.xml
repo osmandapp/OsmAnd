@@ -4804,7 +4804,7 @@
     <string name="compass_visible_if_map_rotated">مرئي إذا تم تدوير الخريطة</string>
     <string name="compass_always_hidden">مخفي دائما</string>
     <string name="compass_always_visible">مرئي دائما</string>
-    <string name="compass_click_desc">تلميح: انقرعلى البوصلة لتبديل وضع اتجاه الخريطة.</string>
+    <string name="compass_click_desc">تلميح: انقر زر البوصلة لتبديل وضع اتجاه الخريطة.</string>
     <string name="rendering_attr_depthContourWidth_description">عرض عمق خط الخطوط المحيطية</string>
     <string name="download_complete">تم التحميل</string>
     <string name="compass_desc">يظهر الاتجاه إلى الشمال.</string>
@@ -5279,7 +5279,7 @@
     <string name="map_2d_mode_action">الوضع ثنائي الأبعاد</string>
     <string name="poi_categories">فئات نقاط الاهتمام</string>
     <string name="rendering_value_caiScale_name">مقياس CAI</string>
-    <string name="map_3d_mode_hint">النقرمطولا على الزر لتغيير موضع الزر.</string>
+    <string name="map_3d_mode_hint">انقر مطولا على الزر لتغيير موضع الزر.</string>
     <string name="visible_in_3d_mode">مرئي في وضع 3D</string>
     <string name="map_3d_mode_description">المس الخريطة بإصبعين وحركها لأعلى ولأسفل لضبط إمالة الخريطة.</string>
     <string name="rendering_value_sacScale_name">مقياس ساك</string>
@@ -5299,4 +5299,7 @@
     <string name="external_sensors_source_of_data">مصدر البيانات</string>
     <string name="save_track_external_sensors_data">بيانات</string>
     <string name="there_are_no_connected_sensors_of_this_type">لا توجد أجهزة استشعار متصلة من هذا النوع</string>
+    <string name="error_calculate">نتيجة الحساب فارغة</string>
+    <string name="calculate_offline_altitude_descr">احسب الارتفاع في وضع دون اتصال ، بناءًا على بيانات خريطة الارتفاع. يمكن استخدام الاختلافات مقابل الارتفاع المسجل بالجهاز كتصحيح للارتفاع.</string>
+    <string name="calculate_offline">حساب دون اتصال بالنت</string>
 </resources>

@@ -4747,7 +4747,7 @@
 \nNår du bruger OsmAnd Cloud, kan dette føre til misforståelser efter geninstallation.</string>
     <string name="compass_always_visible">Altid synlig</string>
     <string name="compass_always_hidden">Altid skjult</string>
-    <string name="compass_click_desc">Tip: Tryk på kompass-modulet for at skifte måden hvorpå kortet er orienteret.</string>
+    <string name="compass_click_desc">Tip: Tryk på kompass-knappen for at skifte kortets orientering.</string>
     <string name="auto_25_chars_route_tr_kl">Drej til højre og hold til venstre</string>
     <string name="auto_25_chars_route_tr_kr">Drej til højre og hold til højre</string>
     <string name="auto_25_chars_route_tu_kl">Foretag U-vending og hold til venstre</string>
@@ -5215,7 +5215,7 @@
     <string name="poi_categories">IP-kategorier</string>
     <string name="no_poi_for_category">IP ikke fundet</string>
     <string name="map_3d_mode_action">3D-tilstand</string>
-    <string name="map_3d_mode_hint">Et langt tryk på knappen gør det muligt at ændre knappens position.</string>
+    <string name="map_3d_mode_hint">Med langt tryk på knappen kan knapposition ændres.</string>
     <string name="map_3d_mode_description">Berør kortet med to fingre, og bevæg dem op og ned for at justere kortets hældning.</string>
     <string name="map_2d_mode_action">2D-tilstand</string>
     <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
@@ -5237,4 +5237,7 @@
     <string name="save_track_external_sensors_data">Data</string>
     <string name="external_sensors_not_found">Sensorer ikke fundet</string>
     <string name="external_sensors_source_of_data">Datakilde</string>
+    <string name="calculate_offline">Beregn offline</string>
+    <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på højdekortdata. Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
+    <string name="error_calculate">Beregningsresultatet er tomt</string>
 </resources>
