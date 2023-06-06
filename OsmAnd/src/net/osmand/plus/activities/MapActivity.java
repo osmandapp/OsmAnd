@@ -55,6 +55,8 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -160,6 +162,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControlle
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -1133,11 +1136,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
 			float x = event.getX();
 			float y = event.getY();
-			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
-			QuadPoint cp = tb.getCenterPixelPoint();
-			LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
-					cp.x + x * 15, cp.y + y * 15);
-			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
+			scrollMap(x * 15, y * 15);
 			return true;
 		}
 		return super.onTrackballEvent(event);
@@ -1369,8 +1368,43 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void scrollMap(float dx, float dy) {
 		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 		QuadPoint cp = tb.getCenterPixelPoint();
-		LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
-				cp.x + dx, cp.y + dy);
+		MapRendererView renderer = getMapView().getMapRenderer();
+		LatLon l;
+		if (renderer != null) {
+			PointI point31 = new PointI();
+			if (renderer.getLocationFromScreenPoint(new PointI((int) (cp.x + dx), (int) (cp.y + dy)), point31)) {
+				PointI target31 = renderer.getState().getTarget31();
+				int deltaX = point31.getX() - target31.getX();
+				int deltaY = point31.getY() - target31.getY();
+				PointI mapTarget31 = renderer.getState().getFixedLocation31();
+				int nextTargetX = mapTarget31.getX();
+				int nextTargetY = mapTarget31.getY();
+				if (Integer.MAX_VALUE - nextTargetX < deltaX) {
+					deltaX -= Integer.MAX_VALUE;
+					deltaX--;
+				}
+				if (Integer.MAX_VALUE - nextTargetY < deltaY) {
+					deltaY -= Integer.MAX_VALUE;
+					deltaY--;
+				}
+				nextTargetX += deltaX;
+				nextTargetY += deltaY;
+				if (nextTargetX < 0) {
+					nextTargetX += Integer.MAX_VALUE;
+					nextTargetX++;
+				}
+				if (nextTargetY < 0) {
+					nextTargetY += Integer.MAX_VALUE;
+					nextTargetY++;
+				}
+				l = new LatLon(MapUtils.get31LatitudeY(nextTargetY), MapUtils.get31LongitudeX(nextTargetX));
+			} else {
+				return;
+			}
+		} else {
+			l = NativeUtilities.getLatLonFromPixel(renderer, tb,
+					cp.x + dx, cp.y + dy);
+		}
 		app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 	}
 
