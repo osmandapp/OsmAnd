@@ -120,7 +120,7 @@ public class AntBatterySensor<T extends AntPlusCommonPcc> extends AntAbstractSen
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return "";
 	}
 }

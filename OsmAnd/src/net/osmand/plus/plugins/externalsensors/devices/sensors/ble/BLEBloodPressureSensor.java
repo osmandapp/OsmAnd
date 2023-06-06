@@ -201,7 +201,7 @@ public class BLEBloodPressureSensor extends BLEAbstractSensor {
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return "";
 	}
 

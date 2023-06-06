@@ -127,13 +127,13 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		BikeSpeedData data = lastBikeSpeedData;
 		double calculatedSpeed = data != null ? data.getCalculatedSpeed() : 0;
 		if (calculatedSpeed > 0) {
-			json.put(getGPGTrackTagName(), DECIMAL_FORMAT.format(calculatedSpeed));
+			json.put(getGpxTagName(), DECIMAL_FORMAT.format(calculatedSpeed));
 		}
 	}
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_SPEED;
 	}
 

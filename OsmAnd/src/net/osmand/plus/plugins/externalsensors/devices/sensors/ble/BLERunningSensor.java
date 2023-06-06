@@ -337,13 +337,13 @@ public class BLERunningSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		RunningSpeedData speedData = lastRunningSpeedData;
 		if (speedData != null) {
-			json.put(getGPGTrackTagName(), speedData.speed);
+			json.put(getGpxTagName(), speedData.speed);
 		}
 	}
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_SPEED;
 	}
 

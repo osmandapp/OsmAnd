@@ -140,13 +140,13 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		TemperatureData data = lastTemperatureData;
 		if (data != null) {
-			json.put(getGPGTrackTagName(), data.temperature);
+			json.put(getGpxTagName(), data.temperature);
 		}
 	}
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_TEMPERATURE;
 	}
 

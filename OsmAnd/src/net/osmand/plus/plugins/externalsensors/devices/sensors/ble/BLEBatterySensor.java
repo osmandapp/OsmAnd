@@ -144,7 +144,7 @@ public class BLEBatterySensor extends BLEAbstractSensor {
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return "";
 	}
 

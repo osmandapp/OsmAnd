@@ -123,7 +123,7 @@ public class AntRssiLegacySensor<T extends AntPlusLegacyCommonPcc> extends AntAb
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return "";
 	}
 

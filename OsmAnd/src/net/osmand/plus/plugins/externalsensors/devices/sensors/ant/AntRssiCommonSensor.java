@@ -121,7 +121,7 @@ public class AntRssiCommonSensor<T extends AntPlusCommonPcc> extends AntAbstract
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return "";
 	}
 

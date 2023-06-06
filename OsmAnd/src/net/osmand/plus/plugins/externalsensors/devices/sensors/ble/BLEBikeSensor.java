@@ -298,14 +298,14 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		BikeSpeedDistanceData speedDistanceData = lastBikeSpeedDistanceData;
 		if (speedDistanceData != null) {
-			json.put(getGPGTrackTagName(), speedDistanceData.speed);
+			json.put(getGpxTagName(), speedDistanceData.speed);
 		}
 	}
 
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_SPEED;
 	}
 

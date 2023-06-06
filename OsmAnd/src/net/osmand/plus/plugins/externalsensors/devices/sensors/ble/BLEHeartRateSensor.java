@@ -193,13 +193,13 @@ public class BLEHeartRateSensor extends BLEAbstractSensor {
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
 		HeartRateData data = lastHeartRateData;
 		if (data != null) {
-			json.put(getGPGTrackTagName(), data.heartRate);
+			json.put(getGpxTagName(), data.heartRate);
 		}
 	}
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_HEART_RATE;
 	}
 

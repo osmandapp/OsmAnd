@@ -170,13 +170,13 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 		HeartRateData data = lastHeartRateData;
 		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
 		if (computedHeartRate > 0) {
-			json.put(getGPGTrackTagName(), computedHeartRate);
+			json.put(getGpxTagName(), computedHeartRate);
 		}
 	}
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_HEART_RATE;
 	}
 

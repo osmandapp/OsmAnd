@@ -152,13 +152,13 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 		BikePowerData data = lastBikePowerData;
 		double calculatedPower = data != null ? data.getCalculatedPower() : 0;
 		if (calculatedPower > 0) {
-			json.put(getGPGTrackTagName(),  DECIMAL_FORMAT.format(calculatedPower));
+			json.put(getGpxTagName(),  DECIMAL_FORMAT.format(calculatedPower));
 		}
 	}
 
 	@NonNull
 	@Override
-	protected String getGPGTrackTagName() {
+	protected String getGpxTagName() {
 		return GPXUtilities.SENSOR_TAG_BIKE_POWER;
 	}
 

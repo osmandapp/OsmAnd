@@ -27,7 +27,7 @@ public abstract class AbstractSensor {
 	}
 
 	@NonNull
-	abstract protected String getGPGTrackTagName();
+	abstract protected String getGpxTagName();
 
 	@NonNull
 	public AbstractDevice<?> getDevice() {
