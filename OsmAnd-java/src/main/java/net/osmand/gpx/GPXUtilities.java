@@ -81,6 +81,13 @@ public class GPXUtilities {
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
+	public static final String SENSOR_TAG_HEART_RATE = "heart_rate_sensor";
+	public static final String SENSOR_TAG_SPEED = "speed_sensor";
+	public static final String SENSOR_TAG_CADENCE = "bike_cadence_sensor";
+	public static final String SENSOR_TAG_BIKE_POWER = "power_sensor";
+	public static final String SENSOR_TAG_TEMPERATURE = "temperature_sensor";
+	public static final String SENSOR_TAG_DISTANCE = "bike_distance_sensor";
+
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));

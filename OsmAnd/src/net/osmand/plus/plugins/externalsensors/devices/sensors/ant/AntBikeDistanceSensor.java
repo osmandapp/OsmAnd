@@ -9,6 +9,7 @@ import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc.CalculatedAccumulatedDistanceReceiver;
 import com.dsi.ant.plugins.antplus.pcc.defines.EventFlag;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
@@ -126,7 +127,14 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 		BikeDistanceData data = lastBikeDistanceData;
 		double accumulatedDistance = data != null ? data.getAccumulatedDistance() : 0;
 		if (accumulatedDistance > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(accumulatedDistance));
+			json.put(getGpxTagName(), DECIMAL_FORMAT.format(accumulatedDistance));
 		}
 	}
+
+	@NonNull
+	@Override
+	protected String getGpxTagName() {
+		return GPXUtilities.SENSOR_TAG_DISTANCE;
+	}
+
 }

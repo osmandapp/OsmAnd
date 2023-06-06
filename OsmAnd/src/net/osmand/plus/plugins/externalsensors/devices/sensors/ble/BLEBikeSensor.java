@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
@@ -295,14 +296,17 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 
 	@Override
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		BikeCadenceData cadenceData = lastBikeCadenceData;
-		if (cadenceData != null) {
-			json.put(getSensorId() + "_cadence", cadenceData.cadence);
-		}
 		BikeSpeedDistanceData speedDistanceData = lastBikeSpeedDistanceData;
 		if (speedDistanceData != null) {
-			json.put(getSensorId() + "_speed", speedDistanceData.speed);
-			json.put(getSensorId() + "_distance", speedDistanceData.distance);
+			json.put(getGpxTagName(), speedDistanceData.speed);
 		}
 	}
+
+
+	@NonNull
+	@Override
+	protected String getGpxTagName() {
+		return GPXUtilities.SENSOR_TAG_SPEED;
+	}
+
 }

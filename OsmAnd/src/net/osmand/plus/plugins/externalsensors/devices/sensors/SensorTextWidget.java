@@ -18,7 +18,6 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public class SensorTextWidget extends TextInfoWidget {
-
 	private AbstractSensor sensor;
 	private final SensorWidgetDataFieldType fieldType;
 	private Number cachedNumber;
@@ -40,6 +39,17 @@ public class SensorTextWidget extends TextInfoWidget {
 
 	private void applyDeviceId() {
 		AbstractDevice<?> device = null;
+		if (externalDeviceId == null) {
+			List<AbstractDevice<?>> deviceList = plugin.getPairedDevicesByWidgetType(fieldType);
+			if (Algorithms.isEmpty(deviceList)) {
+				externalDeviceId = "";
+			} else {
+				device = deviceList.get(0);
+				externalDeviceId = device.getDeviceId();
+			}
+			saveDeviceId(externalDeviceId);
+
+		}
 		if (externalDeviceId != null && plugin != null) {
 			device = plugin.getPairedDeviceById(externalDeviceId);
 		}
@@ -139,8 +149,8 @@ public class SensorTextWidget extends TextInfoWidget {
 	private CommonPreference<String> registerSensorDevicePref(@Nullable String customId) {
 		String prefId = Algorithms.isEmpty(customId) ? fieldType.name() : fieldType.name() + customId;
 		return settings.registerStringPreference(prefId, null)
-				.makeProfile()
-				.cache();
+				       .makeProfile()
+				       .cache();
 	}
 
 	@Nullable
@@ -148,10 +158,15 @@ public class SensorTextWidget extends TextInfoWidget {
 		return deviceIdPref.getModeValue(appMode);
 	}
 
-	public void setDeviceId(@NonNull ApplicationMode appMode, @Nullable String deviceId) {
+	public void setDeviceId(@NonNull String deviceId) {
+		saveDeviceId(deviceId);
+		applyDeviceId();
+	}
+
+	private void saveDeviceId(@NonNull String deviceId) {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		deviceIdPref.setModeValue(appMode, deviceId);
 		externalDeviceId = deviceId;
-		applyDeviceId();
 	}
 
 	@Override

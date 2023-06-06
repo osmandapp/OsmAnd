@@ -116,10 +116,13 @@ public class AntRssiCommonSensor<T extends AntPlusCommonPcc> extends AntAbstract
 
 	@Override
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		RssiData data = rssiData;
-		double rssi = data != null ? data.getRssi() : 0;
-		if (rssi > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(rssi));
-		}
 	}
+
+
+	@NonNull
+	@Override
+	protected String getGpxTagName() {
+		return "";
+	}
+
 }
