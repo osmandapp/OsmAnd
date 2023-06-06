@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
@@ -158,7 +159,7 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "bike_power";
+		return GPXUtilities.SENSOR_TAG_BIKE_POWER;
 	}
 
 }

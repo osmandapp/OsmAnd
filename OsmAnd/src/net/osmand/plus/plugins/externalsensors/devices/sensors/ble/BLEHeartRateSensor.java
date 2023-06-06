@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEHeartRateDevice;
@@ -199,7 +200,7 @@ public class BLEHeartRateSensor extends BLEAbstractSensor {
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "heart_rate";
+		return GPXUtilities.SENSOR_TAG_HEART_RATE;
 	}
 
 }

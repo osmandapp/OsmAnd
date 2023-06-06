@@ -9,6 +9,7 @@ import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc;
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeSpeedDistancePcc.CalculatedSpeedReceiver;
 import com.dsi.ant.plugins.antplus.pcc.defines.EventFlag;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
@@ -133,7 +134,7 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "bike_speed";
+		return GPXUtilities.SENSOR_TAG_SPEED;
 	}
 
 }

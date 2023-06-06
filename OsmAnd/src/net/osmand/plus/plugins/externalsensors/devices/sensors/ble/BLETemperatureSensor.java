@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
@@ -146,7 +147,7 @@ public class BLETemperatureSensor extends BLEAbstractSensor {
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "temperature";
+		return GPXUtilities.SENSOR_TAG_TEMPERATURE;
 	}
 
 }

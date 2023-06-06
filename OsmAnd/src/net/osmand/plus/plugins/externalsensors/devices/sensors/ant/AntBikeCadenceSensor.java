@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeCadencePcc;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
@@ -139,7 +140,7 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "cadence";
+		return GPXUtilities.SENSOR_TAG_CADENCE;
 	}
 
 }

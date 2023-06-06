@@ -175,18 +175,13 @@ public class BLECuffPressureSensor extends BLEAbstractSensor {
 
 	@Override
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		CuffPressureData data = lastCuffPressureData;
-		if (data != null) {
-			json.put(getGPGTrackTagName(), data.cuffPressure);
-			json.put(getGPGTrackTagName() + "_pulseRate", data.pulseRate);
-		}
 	}
 
 
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "cuff_pressure";
+		return "";
 	}
 
 }

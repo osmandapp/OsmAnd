@@ -196,20 +196,13 @@ public class BLEBloodPressureSensor extends BLEAbstractSensor {
 
 	@Override
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		BloodPressureData data = lastBloodPressureData;
-		if (data != null) {
-			json.put(getGPGTrackTagName() + "_systolic", data.systolic);
-			json.put(getGPGTrackTagName() + "_diastolic", data.diastolic);
-			json.put(getGPGTrackTagName() + "_arterial", data.arterialPressure);
-			json.put(getGPGTrackTagName() + "_pulseRate", data.pulseRate);
-		}
 	}
 
 
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "blood_pressure";
+		return "";
 	}
 
 }

@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
@@ -334,28 +335,16 @@ public class BLERunningSensor extends BLEAbstractSensor {
 
 	@Override
 	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		RunningCadenceData cadenceData = lastRunningCadenceData;
-		if (cadenceData != null) {
-			json.put(getGPGTrackTagName() + "_cadence", cadenceData.cadence);
-		}
 		RunningSpeedData speedData = lastRunningSpeedData;
 		if (speedData != null) {
-			json.put(getGPGTrackTagName() + "_speed", speedData.speed);
-		}
-		RunningDistanceData distanceData = lastRunningDistanceData;
-		if (distanceData != null) {
-			json.put(getGPGTrackTagName() + "_total_distance", distanceData.totalDistance);
-		}
-		RunningStrideLengthData strideLengthData = lastRunningStrideLengthData;
-		if (strideLengthData != null) {
-			json.put(getGPGTrackTagName() + "_stride_length", strideLengthData.strideLength);
+			json.put(getGPGTrackTagName(), speedData.speed);
 		}
 	}
 
 	@NonNull
 	@Override
 	protected String getGPGTrackTagName() {
-		return "running";
+		return GPXUtilities.SENSOR_TAG_SPEED;
 	}
 
 }
