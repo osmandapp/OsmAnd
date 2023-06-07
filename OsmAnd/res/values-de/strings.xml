@@ -3806,7 +3806,7 @@
     <string name="use_native_pt_desc">Wechseln zur Java (sicher) Berechnung des ÖPNV-Routings</string>
     <string name="osm_edit_logout_success">Abgemeldet</string>
     <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
-    <string name="perform_oauth_authorization">Anmelden über OAuth</string>
+    <string name="perform_oauth_authorization">Anmeldung über OAuth</string>
     <string name="clear_osm_token">OpenStreetMap OAuth-Token löschen</string>
     <string name="what_is_new">Was ist neu</string>
     <string name="snowmobile_render_descr">Für das Schneemobilfahren mit speziellen Straßen und Tracks.</string>
@@ -5237,4 +5237,5 @@
     <string name="external_sensors_not_found">Sensoren nicht gefunden</string>
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
+    <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
 </resources>
