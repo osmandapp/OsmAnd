@@ -4745,7 +4745,7 @@
     <string name="compass_visible_if_map_rotated">Visível se o mapa estiver rodado</string>
     <string name="compass_always_hidden">Sempre oculto</string>
     <string name="compass_visible_if_map_rotated_desc">Oculto quando o Norte está acima</string>
-    <string name="compass_click_desc">Dica: toque na bússola para alterar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Dica: toque no botão da bússola para alterar o modo de orientação do mapa.</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
@@ -5236,4 +5236,7 @@
     <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>
     <string name="visible_in_3d_mode">Visível no modo 3D</string>
     <string name="map_3d_mode_description">Toque no mapa com dois dedos e mova-os para cima e para baixo para ajustar a inclinação do mapa.</string>
+    <string name="calculate_offline">Calcular offline</string>
+    <string name="calculate_offline_altitude_descr">Calcula a elevação sem ligação à Internet, com base nos dados do mapa de altitude. As diferenças em relação à altitude registada pelo dispositivo podem ser usadas como correção da elevação.</string>
+    <string name="error_calculate">O resultado do cálculo está vazio</string>
 </resources>
