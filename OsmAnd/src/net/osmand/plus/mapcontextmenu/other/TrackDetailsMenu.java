@@ -45,6 +45,7 @@ import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -691,14 +692,9 @@ public class TrackDetailsMenu {
 						dataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 								dataSetType, gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
 						break;
-					case SENSOR_SPEED:
-					case SENSOR_HEART_RATE:
-					case SENSOR_BIKE_POWER:
-					case SENSOR_BIKE_CADENCE:
-					case SENSOR_TEMPERATURE:
-						dataSet = ChartUtils.createSensorDataSet(app, chart, analysis, dataSetType,
-								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
-						break;
+					default: {
+						dataSet = PluginsHelper.getOrderedLineDataSet(chart, analysis, dataSetType, gpxItem.chartAxisType, withoutGaps, false);
+					}
 				}
 				if (dataSet != null) {
 					dataSets.add(dataSet);
@@ -800,21 +796,8 @@ public class TrackDetailsMenu {
 		if (hasElevationData && hasSpeedData) {
 			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SLOPE, GPXDataSetType.SPEED});
 		}
-		if (analysis.hasSensorSpeedData()) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_SPEED});
-		}
-		if (analysis.hasHeartRateData()) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_HEART_RATE});
-		}
-		if (analysis.hasBikePowerData()) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_BIKE_POWER});
-		}
-		if (analysis.hasBikeCadenceData()) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_BIKE_CADENCE});
-		}
-		if (analysis.hasTemperatureData()) {
-			availableTypes.add(new GPXDataSetType[] {GPXDataSetType.SENSOR_TEMPERATURE});
-		}
+		PluginsHelper.getAvailableGPXDataSetTypes(analysis, availableTypes);
+
 		return availableTypes;
 	}
 

@@ -85,13 +85,6 @@ public class GPXUtilities {
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-	public static final String SENSOR_TAG_HEART_RATE = "heart_rate_sensor";
-	public static final String SENSOR_TAG_SPEED = "speed_sensor";
-	public static final String SENSOR_TAG_CADENCE = "bike_cadence_sensor";
-	public static final String SENSOR_TAG_BIKE_POWER = "power_sensor";
-	public static final String SENSOR_TAG_TEMPERATURE = "temperature_sensor";
-	public static final String SENSOR_TAG_DISTANCE = "bike_distance_sensor";
-
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
@@ -524,26 +517,6 @@ public class GPXUtilities {
 				setAddress(address);
 			}
 		}
-
-		public int getHeartRate() {
-			return Algorithms.parseIntSilently(getExtensionsToRead().get(SENSOR_TAG_HEART_RATE), 0);
-		}
-
-		public float getSensorSpeed() {
-			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_SPEED), 0);
-		}
-
-		public float getBikePower() {
-			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_BIKE_POWER), 0);
-		}
-
-		public float getBikeCadence() {
-			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_CADENCE), 0);
-		}
-
-		public float getTemperature() {
-			return Algorithms.parseFloatSilently(getExtensionsToRead().get(SENSOR_TAG_TEMPERATURE), 0);
-		}
 	}
 
 	public static class TrkSegment extends GPXExtensions {
@@ -837,13 +810,13 @@ public class GPXUtilities {
 
 
 	private static List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
-		List<GPXTrackAnalysis> ls = new ArrayList<>();
-		for (SplitSegment s : splitSegments) {
-			GPXTrackAnalysis a = new GPXTrackAnalysis();
-			a.prepareInformation(0, s);
-			ls.add(a);
+		List<GPXTrackAnalysis> list = new ArrayList<>();
+		for (SplitSegment segment : splitSegments) {
+			GPXTrackAnalysis analysis = new GPXTrackAnalysis();
+			analysis.prepareInformation(0, null, segment);
+			list.add(analysis);
 		}
-		return ls;
+		return list;
 	}
 
 	public static QuadRect calculateBounds(List<WptPt> pts) {

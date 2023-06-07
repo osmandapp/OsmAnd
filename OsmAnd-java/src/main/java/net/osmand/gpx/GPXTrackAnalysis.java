@@ -2,24 +2,12 @@ package net.osmand.gpx;
 
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_BIKE_POWER;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_HEART_RATE;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_SPEED;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_TEMPERATURE;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointAttribute.BikeCadence;
-import net.osmand.gpx.PointAttribute.BikePower;
 import net.osmand.gpx.PointAttribute.Elevation;
-import net.osmand.gpx.PointAttribute.HeartRate;
-import net.osmand.gpx.PointAttribute.SensorSpeed;
 import net.osmand.gpx.PointAttribute.Speed;
-import net.osmand.gpx.PointAttribute.Temperature;
-import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
 import java.util.HashMap;
@@ -125,52 +113,12 @@ public class GPXTrackAnalysis {
 		return getSpeedData().hasData();
 	}
 
-	public boolean hasHeartRateData() {
-		return getHeartRateData().hasData();
-	}
-
-	public boolean hasSensorSpeedData() {
-		return getSensorSpeedData().hasData();
-	}
-
-	public boolean hasBikeCadenceData() {
-		return getBikeCadenceData().hasData();
-	}
-
-	public boolean hasBikePowerData() {
-		return getBikePowerData().hasData();
-	}
-
-	public boolean hasTemperatureData() {
-		return getTemperatureData().hasData();
-	}
-
 	public PointAttributesData<Elevation> getElevationData() {
 		return getAttributesData(POINT_ELEVATION);
 	}
 
 	public PointAttributesData<Speed> getSpeedData() {
 		return getAttributesData(POINT_SPEED);
-	}
-
-	public PointAttributesData<HeartRate> getHeartRateData() {
-		return getAttributesData(SENSOR_TAG_HEART_RATE);
-	}
-
-	public PointAttributesData<SensorSpeed> getSensorSpeedData() {
-		return getAttributesData(SENSOR_TAG_SPEED);
-	}
-
-	public PointAttributesData<BikeCadence> getBikeCadenceData() {
-		return getAttributesData(SENSOR_TAG_CADENCE);
-	}
-
-	public PointAttributesData<BikePower> getBikePowerData() {
-		return getAttributesData(SENSOR_TAG_BIKE_POWER);
-	}
-
-	public PointAttributesData<Temperature> getTemperatureData() {
-		return getAttributesData(SENSOR_TAG_TEMPERATURE);
 	}
 
 	public <T extends PointAttribute> PointAttributesData<T> getAttributesData(String key) {
@@ -182,18 +130,7 @@ public class GPXTrackAnalysis {
 		return data;
 	}
 
-	private void addPointAttributes(WptPt point, float pointElevation, float pointSpeed, float distance,
-	                                int timeDiff, boolean firstPoint, boolean lastPoint) {
-		addPointAttribute(new Elevation(pointElevation, distance, timeDiff, firstPoint, lastPoint));
-		addPointAttribute(new Speed(pointSpeed, distance, timeDiff, firstPoint, lastPoint));
-		addPointAttribute(new HeartRate(point.getHeartRate(), distance, timeDiff, firstPoint, lastPoint));
-		addPointAttribute(new SensorSpeed(point.getSensorSpeed(), distance, timeDiff, firstPoint, lastPoint));
-		addPointAttribute(new BikePower(point.getBikePower(), distance, timeDiff, firstPoint, lastPoint));
-		addPointAttribute(new BikeCadence(point.getBikeCadence(), distance, timeDiff, firstPoint, lastPoint));
-		addPointAttribute(new Temperature(point.getTemperature(), distance, timeDiff, firstPoint, lastPoint));
-	}
-
-	private void addPointAttribute(PointAttribute attribute) {
+	public void addPointAttribute(PointAttribute attribute) {
 		String key = attribute.getKey();
 		PointAttributesData data = getAttributesData(key);
 		data.addPointAttribute(attribute);
@@ -203,11 +140,11 @@ public class GPXTrackAnalysis {
 		}
 	}
 
-	public static GPXTrackAnalysis prepareInformation(long filetimestamp, TrkSegment segment) {
-		return new GPXTrackAnalysis().prepareInformation(filetimestamp, new SplitSegment(segment));
+	public static GPXTrackAnalysis prepareInformation(long filetimestamp, TrackPointsAnalyser pointsAnalyzer, TrkSegment segment) {
+		return new GPXTrackAnalysis().prepareInformation(filetimestamp, pointsAnalyzer, new SplitSegment(segment));
 	}
 
-	public GPXTrackAnalysis prepareInformation(long filestamp, SplitSegment... splitSegments) {
+	public GPXTrackAnalysis prepareInformation(long filestamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) {
 		float[] calculations = new float[1];
 
 		long startTimeOfSingleSegment = 0;
@@ -371,7 +308,13 @@ public class GPXTrackAnalysis {
 					}
 				}
 				float distance = (j > 0) ? calculations[0] : 0;
-				addPointAttributes(point, elevation, speed, distance, timeDiff, firstPoint, lastPoint);
+
+				addPointAttribute(new Elevation(elevation, distance, timeDiff, firstPoint, lastPoint));
+				addPointAttribute(new Speed(speed, distance, timeDiff, firstPoint, lastPoint));
+
+				if (pointsAnalyser != null) {
+					pointsAnalyser.onAnalysePoint(this, point, distance, timeDiff, firstPoint, lastPoint);
+				}
 			}
 
 			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(0, numberOfPoints) {
@@ -385,9 +328,8 @@ public class GPXTrackAnalysis {
 			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
 		}
 		if (totalDistance < 0) {
-			for (String key : PointAttributesData.getSupportedDataTypes()) {
-				getAttributesData(key).setHasData(false);
-			}
+			getSpeedData().setHasData(false);
+			getElevationData().setHasData(false);
 		}
 		if (!isTimeSpecified()) {
 			startTime = filestamp;
@@ -420,5 +362,9 @@ public class GPXTrackAnalysis {
 			avgSpeed = -1;
 		}
 		return this;
+	}
+
+	public interface TrackPointsAnalyser {
+		void onAnalysePoint(GPXTrackAnalysis analysis, WptPt point, float distance, int timeDiff, boolean firstPoint, boolean lastPoint);
 	}
 }

@@ -1,6 +1,7 @@
 package net.osmand.gpx;
 
 import net.osmand.data.QuadRect;
+import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.gpx.GPXUtilities.Route;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
@@ -283,29 +284,27 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
-		return getAnalysis(fileTimestamp, null, null);
+		return getAnalysis(fileTimestamp, null, null, null);
 	}
 
-	public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance) {
+	public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance, TrackPointsAnalyser pointsAnalyzer) {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 		analysis.name = path;
 		analysis.wptPoints = points.size();
 		analysis.wptCategoryNames = getWaypointCategories();
 
 		List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
-		analysis.prepareInformation(fileTimestamp, segments.toArray(new SplitSegment[0]));
+		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, segments.toArray(new SplitSegment[0]));
 		return analysis;
 	}
 
-	private List<SplitSegment> getSplitSegments(GPXTrackAnalysis g,
-												Double fromDistance,
-												Double toDistance) {
+	private List<SplitSegment> getSplitSegments(GPXTrackAnalysis analysis, Double fromDistance, Double toDistance) {
 		List<SplitSegment> splitSegments = new ArrayList<>();
 		for (int i = 0; i < tracks.size(); i++) {
 			GPXUtilities.Track subtrack = tracks.get(i);
 			for (GPXUtilities.TrkSegment segment : subtrack.segments) {
 				if (!segment.generalSegment) {
-					g.totalTracks++;
+					analysis.totalTracks++;
 					if (segment.points.size() > 1) {
 						splitSegments.add(createSplitSegment(segment, fromDistance, toDistance));
 					}
@@ -315,9 +314,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return splitSegments;
 	}
 
-	private SplitSegment createSplitSegment(GPXUtilities.TrkSegment segment,
-														 Double fromDistance,
-														 Double toDistance) {
+	private SplitSegment createSplitSegment(TrkSegment segment, Double fromDistance, Double toDistance) {
 		if (fromDistance != null && toDistance != null) {
 			int startInd = getPointIndexByDistance(segment.points, fromDistance);
 			int endInd = getPointIndexByDistance(segment.points, toDistance);

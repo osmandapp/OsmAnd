@@ -12,14 +12,14 @@ public class OrderedLineDataSet extends LineDataSet {
 
 	private final boolean leftAxis;
 
-	float priority;
-	String units;
-	float divX = 1f;
-	float divY = 1f;
-	float mulY = 1f;
+	private String units;
+	private float priority;
+	private float divX = 1f;
+	private float divY = 1f;
+	private float mulY = 1f;
 
-	OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
-	                   GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
+	public OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
+	                          GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
 		super(yVals, label);
 		setHighlightLineWidth(1);
 		this.dataSetType = dataSetType;
@@ -39,20 +39,40 @@ public class OrderedLineDataSet extends LineDataSet {
 		return priority;
 	}
 
+	public void setPriority(float priority) {
+		this.priority = priority;
+	}
+
 	public float getDivX() {
 		return divX;
+	}
+
+	public void setDivX(float divX) {
+		this.divX = divX;
 	}
 
 	public float getDivY() {
 		return divY;
 	}
 
+	public void setDivY(float divY) {
+		this.divY = divY;
+	}
+
 	public float getMulY() {
 		return mulY;
 	}
 
+	public void setMulY(float mulY) {
+		this.mulY = mulY;
+	}
+
 	public String getUnits() {
 		return units;
+	}
+
+	public void setUnits(String units) {
+		this.units = units;
 	}
 
 	public boolean isLeftAxis() {

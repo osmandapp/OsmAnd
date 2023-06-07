@@ -2,11 +2,6 @@ package net.osmand.gpx;
 
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_BIKE_POWER;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_HEART_RATE;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_SPEED;
-import static net.osmand.gpx.GPXUtilities.SENSOR_TAG_TEMPERATURE;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,10 +35,5 @@ public class PointAttributesData<T extends PointAttribute> {
 
 	public void addPointAttribute(T attribute) {
 		attributes.add(attribute);
-	}
-
-	public static String[] getSupportedDataTypes() {
-		return new String[] {POINT_ELEVATION, POINT_SPEED, SENSOR_TAG_SPEED, SENSOR_TAG_HEART_RATE,
-				SENSOR_TAG_BIKE_POWER, SENSOR_TAG_CADENCE, SENSOR_TAG_TEMPERATURE};
 	}
 }
