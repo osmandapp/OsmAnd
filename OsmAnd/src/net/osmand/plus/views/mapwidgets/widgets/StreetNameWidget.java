@@ -362,22 +362,23 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
+	                       int order, @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
-		boolean specialPosition = specialContainer != null;
-		if (specialPosition) {
+		boolean useSpecialPosition = widgetsPanel == WidgetsPanel.TOP && specialContainer != null;
+		if (useSpecialPosition) {
 			specialContainer.removeAllViews();
 
 			boolean currentLocationVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCurrentLocationCoordinatesWidget();
 			boolean mapCenterVisible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopMapCenterCoordinatesWidget();
 			for (MapWidget widget : followingWidgets) {
 				if (widget instanceof CoordinatesBaseWidget && (currentLocationVisible || mapCenterVisible)) {
-					specialPosition = false;
+					useSpecialPosition = false;
 					break;
 				}
 			}
 		}
-		if (specialPosition) {
+		if (useSpecialPosition) {
 			specialContainer.addView(view);
 		} else {
 			container.addView(view, order);
@@ -385,8 +386,8 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView() {
-		super.detachView();
+	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
+		super.detachView(widgetsPanel);
 		// Clear in case link to previous view of StreetNameWidget is lost
 		ViewGroup specialContainer = getSpecialContainer();
 		if (specialContainer != null) {
