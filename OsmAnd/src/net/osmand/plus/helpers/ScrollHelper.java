@@ -33,13 +33,14 @@ public class ScrollHelper {
 	private final Runnable scrollingRunnable = () -> {
 		isInContinuousScrolling = true;
 		while (hasActiveDirections()) {
-			notifyListener(true);
+			notifyListener(true, false);
 			try {
 				Thread.sleep(REFRESHING_DELAY_MS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		notifyListener(true, true);
 		isInContinuousScrolling = false;
 	};
 
@@ -72,9 +73,10 @@ public class ScrollHelper {
 		if (shortPress) {
 			List<Direction> lastDirections = getLastDirections();
 			addDirections(lastDirections);
-			notifyListener(false);
+			notifyListener(false, false);
 			removeDirections(lastDirections);
 		}
+		notifyListener(false, true);
 		return true;
 	}
 
@@ -123,9 +125,9 @@ public class ScrollHelper {
 		return false;
 	}
 
-	private void notifyListener(boolean continuousScrolling) {
+	private void notifyListener(boolean continuousScrolling, boolean stop) {
 		if (onScrollEventListener != null) {
-			onScrollEventListener.onScrollEvent(continuousScrolling, 
+			onScrollEventListener.onScrollEvent(continuousScrolling, stop,
 					UP.isActive(), DOWN.isActive(), LEFT.isActive(), RIGHT.isActive());
 		}
 	}
@@ -187,7 +189,7 @@ public class ScrollHelper {
 	}
 	
 	public interface OnScrollEventListener {
-		void onScrollEvent(boolean continuousScrolling, boolean up, boolean down, boolean left, boolean right);
+		void onScrollEvent(boolean continuousScrolling, boolean stop, boolean up, boolean down, boolean left, boolean right);
 	}
 	
 }
