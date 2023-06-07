@@ -735,9 +735,13 @@ public class ChartUtils {
 			case SENSOR_HEART_RATE: {
 				return app.getString(R.string.beats_per_minute_short);
 			}
+			case SENSOR_BIKE_POWER: {
+				return app.getString(R.string.power_watts_unit);
+			}
+			case SENSOR_BIKE_CADENCE: {
+				return app.getString(R.string.revolutions_per_minute_unit);
+			}
 			case SENSOR_SPEED:
-			case SENSOR_BIKE_POWER:
-			case SENSOR_BIKE_CADENCE:
 			case SENSOR_TEMPERATURE:
 				return "";
 		}

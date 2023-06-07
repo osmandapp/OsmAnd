@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="power_watts_unit">Watts</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
     <string name="calculate_offline">Calculate offline</string>
     <string name="calculate_offline_altitude_descr">Calculate elevation offline, based on heightmap data. Differences vs. device recorded altitude may be used as elevation correction.</string>
     <string name="error_calculate">Calculation result is empty</string>
