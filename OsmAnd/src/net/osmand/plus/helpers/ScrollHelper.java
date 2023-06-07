@@ -27,8 +27,8 @@ public class ScrollHelper {
 	private final Direction RIGHT = new Direction(KeyEvent.KEYCODE_DPAD_RIGHT);
 
 	private final Map<Integer, Direction> availableDirections;
-	private boolean isInContinuousScrolling;
-	private long startContinuousScrollingTime = INVALID_VALUE;
+	private volatile boolean isInContinuousScrolling;
+	private volatile long startContinuousScrollingTime = INVALID_VALUE;
 
 	private final Runnable scrollingRunnable = () -> {
 		isInContinuousScrolling = true;
@@ -40,7 +40,13 @@ public class ScrollHelper {
 				e.printStackTrace();
 			}
 		}
-		notifyListener(true, true);
+		if (System.currentTimeMillis() - startContinuousScrollingTime < LONG_PRESS_TIME_MS) {
+			List<Direction> lastDirections = getLastDirections();
+			addDirections(lastDirections);
+			notifyListener(false, false);
+			removeDirections(lastDirections);
+		}
+		notifyListener(false, true);
 		isInContinuousScrolling = false;
 	};
 
@@ -69,14 +75,6 @@ public class ScrollHelper {
 
 	public boolean onKeyUp(int keyCode) {
 		removeDirection(keyCode);
-		boolean shortPress = !hasActiveDirections() && ((System.currentTimeMillis() - startContinuousScrollingTime) < LONG_PRESS_TIME_MS);
-		if (shortPress) {
-			List<Direction> lastDirections = getLastDirections();
-			addDirections(lastDirections);
-			notifyListener(false, false);
-			removeDirections(lastDirections);
-		}
-		notifyListener(false, true);
 		return true;
 	}
 
@@ -111,7 +109,9 @@ public class ScrollHelper {
 		if (availableDirections.containsKey(keyCode)) {
 			long keyUpTime = System.currentTimeMillis();
 			Direction direction = availableDirections.get(keyCode);
-			direction.setTimeUp(keyUpTime);
+			if (direction.isActive()) {
+				direction.setTimeUp(keyUpTime);
+			}
 			direction.setActive(false);
 		}
 	}
@@ -164,8 +164,8 @@ public class ScrollHelper {
 
 	private static class Direction {
 		private final int keyCode;
-		private long timeUp = INVALID_VALUE;
-		private boolean isActive;
+		private volatile long timeUp = INVALID_VALUE;
+		private volatile boolean isActive;
 		
 		public Direction(int keyCode) {
 			this.keyCode = keyCode;
