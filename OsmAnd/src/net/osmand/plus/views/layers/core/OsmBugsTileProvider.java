@@ -37,7 +37,6 @@ import net.osmand.util.MapUtils;
 import java.util.List;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 
 public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
@@ -188,10 +187,11 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
-		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+		if (isMapRendererLost()) {
 			return new QListMapTiledCollectionPoint();
 		}
+
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		RotatedTileBox tb = app.getOsmandMap().getMapView().getRotatedTileBox();
 		TileBoxRequest request = new TileBoxRequest(tb);
 		OsmandMapLayer.MapLayerData<List<OsmBugsLayer.OpenStreetNote>>.DataReadyCallback dataReadyCallback = layerData.getDataReadyCallback(request);
@@ -202,7 +202,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			start[0] = System.currentTimeMillis();
 		});
 		while (System.currentTimeMillis() - start[0] < layerData.DATA_REQUEST_TIMEOUT) {
-			if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
+			if (isMapRendererLost()) {
 				return new QListMapTiledCollectionPoint();
 			}	
 			synchronized (dataReadyCallback.getSync()) {
@@ -216,6 +216,11 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 			}
 		}
 		layerData.removeDataReadyCallback(dataReadyCallback);
+
+		if (isMapRendererLost()) {
+			return new QListMapTiledCollectionPoint();
+		}
+
 		List<OsmBugsLayer.OpenStreetNote> results = dataReadyCallback.getResults();
 		if (Algorithms.isEmpty(results)) {
 			return new QListMapTiledCollectionPoint();
@@ -276,5 +281,9 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 	@Override
 	public PointI getPinIconOffset() {
 		return offset;
+	}
+
+	private boolean isMapRendererLost() {
+		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
 	}
 }
