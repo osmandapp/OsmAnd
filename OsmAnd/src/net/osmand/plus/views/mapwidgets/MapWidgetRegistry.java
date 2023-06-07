@@ -66,7 +66,7 @@ public class MapWidgetRegistry {
 			if (widgetInfo.isEnabledForAppMode(mode)) {
 				widgetsToShow.add(widgetInfo.widget);
 			} else {
-				widgetInfo.widget.detachView();
+				widgetInfo.widget.detachView(widgetPanel);
 			}
 		}
 
@@ -75,7 +75,7 @@ public class MapWidgetRegistry {
 			List<MapWidget> followingWidgets = i + 1 == widgetsToShow.size()
 					? new ArrayList<>()
 					: widgetsToShow.subList(i + 1, widgetsToShow.size());
-			widget.attachView(container, i, followingWidgets);
+			widget.attachView(container, widgetPanel, i, followingWidgets);
 		}
 	}
 
