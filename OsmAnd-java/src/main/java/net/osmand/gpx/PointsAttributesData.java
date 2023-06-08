@@ -1,19 +1,16 @@
 package net.osmand.gpx;
 
-import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
-import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PointAttributesData<T extends PointAttribute> {
+public class PointsAttributesData<T extends PointAttribute> {
 
 	private String key;
 	private List<T> attributes = new ArrayList<>();
 	private boolean hasData;
 
-	public PointAttributesData(String key) {
+	public PointsAttributesData(String key) {
 		this.key = key;
 	}
 

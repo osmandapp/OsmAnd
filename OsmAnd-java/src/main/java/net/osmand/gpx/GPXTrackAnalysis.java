@@ -63,7 +63,7 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public Map<String, PointAttributesData> pointAttributesData;
+	public Map<String, PointsAttributesData> pointAttributesData;
 
 	public boolean hasSpeedInTrack = false;
 
@@ -113,18 +113,19 @@ public class GPXTrackAnalysis {
 		return getSpeedData().hasData();
 	}
 
-	public PointAttributesData<Elevation> getElevationData() {
+	
+	public PointsAttributesData<Elevation> getElevationData() {
 		return getAttributesData(POINT_ELEVATION);
 	}
 
-	public PointAttributesData<Speed> getSpeedData() {
+	public PointsAttributesData<Speed> getSpeedData() {
 		return getAttributesData(POINT_SPEED);
 	}
 
-	public <T extends PointAttribute> PointAttributesData<T> getAttributesData(String key) {
-		PointAttributesData data = pointAttributesData.get(key);
+	public <T extends PointAttribute> PointsAttributesData<T> getAttributesData(String key) {
+		PointsAttributesData data = pointAttributesData.get(key);
 		if (data == null) {
-			data = new PointAttributesData(key);
+			data = new PointsAttributesData(key);
 			pointAttributesData.put(key, data);
 		}
 		return data;
@@ -132,7 +133,7 @@ public class GPXTrackAnalysis {
 
 	public void addPointAttribute(PointAttribute attribute) {
 		String key = attribute.getKey();
-		PointAttributesData data = getAttributesData(key);
+		PointsAttributesData data = getAttributesData(key);
 		data.addPointAttribute(attribute);
 
 		if (!data.hasData() && attribute.hasValidValue() && totalDistance > 0) {

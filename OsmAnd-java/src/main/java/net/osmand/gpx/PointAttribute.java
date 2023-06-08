@@ -6,7 +6,7 @@ import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
 public abstract class PointAttribute<T extends Number> {
 
 	public final T value;
-	public final float distance;
+	public float distance;
 	public final float timeDiff;
 	public final boolean firstPoint;
 	public final boolean lastPoint;
