@@ -25,6 +25,10 @@ public class PointAttributesData<T extends PointAttribute> {
 		return Collections.unmodifiableList(attributes);
 	}
 
+	public T getPointAttribute(int index) {
+		return attributes.get(index);
+	}
+
 	public boolean hasData() {
 		return hasData;
 	}
