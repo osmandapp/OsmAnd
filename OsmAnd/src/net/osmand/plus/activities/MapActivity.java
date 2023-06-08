@@ -1816,8 +1816,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		MapRendererView renderer = getMapView().getMapRenderer();
 		if (stop) {
 			if (renderer != null) {
-				LatLon l = NativeUtilities.getLatLonFromElevatedPixel(renderer, tb,	cp.x, cp.y);
-				app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
+				PointI target31 = new PointI();
+				renderer.getLocationFromElevatedPoint(renderer.getState().getFixedPixel(), target31);
+				app.getOsmandMap().setMapLocation(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
 			}
 			return;
 		}
@@ -1826,7 +1827,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		int dy = (up ? -scrollingUnit : 0) + (down ? scrollingUnit : 0);
 		if (renderer != null) {
 			PointI point31 = new PointI();
-			if (renderer.getLocationFromScreenPoint(new PointI((int) (cp.x + dx), (int) (cp.y + dy)), point31)) {
+			PointI center = renderer.getState().getFixedPixel();
+			if (renderer.getLocationFromScreenPoint(new PointI((int) (center.getX() + dx), (int) (center.getY() + dy)), point31)) {
 				renderer.setTarget(point31, false, false);
 			}
 		} else {
