@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_CADENCE;
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_DISTANCE;
 import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_SPEED;
 
 import android.bluetooth.BluetoothGatt;

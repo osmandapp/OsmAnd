@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_CADENCE;
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_DISTANCE;
 import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_SPEED;
 
 import android.bluetooth.BluetoothGatt;
@@ -300,18 +302,18 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		switch (widgetDataFieldType) {
 			case BIKE_SPEED:
 				if (lastBikeSpeedDistanceData != null) {
-					json.put(GPXUtilities.SENSOR_TAG_SPEED, lastBikeSpeedDistanceData.speed);
+					json.put(SENSOR_TAG_SPEED, lastBikeSpeedDistanceData.speed);
 				}
 				break;
 			case BIKE_CADENCE:
 				BikeCadenceData cadenceData = lastBikeCadenceData;
 				if (cadenceData != null) {
-					json.put(GPXUtilities.SENSOR_TAG_CADENCE, cadenceData.cadence);
+					json.put(SENSOR_TAG_CADENCE, cadenceData.cadence);
 				}
 				break;
 			case BIKE_DISTANCE:
 				if (lastBikeSpeedDistanceData != null) {
-					json.put(GPXUtilities.SENSOR_TAG_DISTANCE, lastBikeSpeedDistanceData.distance);
+					json.put(SENSOR_TAG_DISTANCE, lastBikeSpeedDistanceData.distance);
 				}
 				break;
 			default:
