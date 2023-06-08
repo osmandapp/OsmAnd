@@ -1,13 +1,13 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
 import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_BIKE_POWER;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikePowerPcc;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
@@ -159,7 +159,7 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 	@NonNull
 	@Override
 	protected String getGpxTagName() {
-		return GPXUtilities.SENSOR_TAG_BIKE_POWER;
+		return SENSOR_TAG_BIKE_POWER;
 	}
 
 }

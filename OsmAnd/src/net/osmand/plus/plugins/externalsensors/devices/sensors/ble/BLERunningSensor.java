@@ -1,12 +1,13 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_SPEED;
+
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.GattAttributes;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
@@ -344,7 +345,7 @@ public class BLERunningSensor extends BLEAbstractSensor {
 	@NonNull
 	@Override
 	protected String getGpxTagName() {
-		return GPXUtilities.SENSOR_TAG_SPEED;
+		return SENSOR_TAG_SPEED;
 	}
 
 }

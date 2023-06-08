@@ -1,11 +1,12 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_HEART_RATE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusHeartRatePcc;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
@@ -177,7 +178,7 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 	@NonNull
 	@Override
 	protected String getGpxTagName() {
-		return GPXUtilities.SENSOR_TAG_HEART_RATE;
+		return SENSOR_TAG_HEART_RATE;
 	}
 
 }

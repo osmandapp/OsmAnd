@@ -16,12 +16,19 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
@@ -174,10 +181,10 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
-		Set<String> deviceIdsEnabledForWritingToTrack = getEnabledDevicesToWriteToTrack();
+		Set<String> deviceIds = getEnabledDevicesToWriteToTrack();
 		for (AbstractDevice<?> device : devicesHelper.getDevices()) {
-			if (devicesHelper.isDeviceEnabled(device) && deviceIdsEnabledForWritingToTrack.contains(device.getDeviceId())
-					    && device.isConnected()) {
+			if (devicesHelper.isDeviceEnabled(device) && deviceIds.contains(device.getDeviceId())
+					&& device.isConnected()) {
 				try {
 					device.writeSensorDataToJson(json);
 				} catch (JSONException e) {
@@ -277,13 +284,13 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (isActive()) {
 			helper.addItem(new ContextMenuItem(DRAWER_ANT_PLUS_ID)
-					               .setTitleId(R.string.external_sensors_plugin_name, mapActivity)
-					               .setIcon(R.drawable.ic_action_sensor)
-					               .setListener((uiAdapter, view, item, isChecked) -> {
-						               app.logEvent("externalSettingsOpen");
-						               ExternalDevicesListFragment.showInstance(mapActivity.getSupportFragmentManager());
-						               return true;
-					               }));
+					.setTitleId(R.string.external_sensors_plugin_name, mapActivity)
+					.setIcon(R.drawable.ic_action_sensor)
+					.setListener((uiAdapter, view, item, isChecked) -> {
+						app.logEvent("externalSettingsOpen");
+						ExternalDevicesListFragment.showInstance(mapActivity.getSupportFragmentManager());
+						return true;
+					}));
 		}
 	}
 
@@ -386,4 +393,24 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		throw new IllegalArgumentException("Unknown widget type");
 	}
 
+	@Override
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
+	                              float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+		SensorAttributesUtils.onAnalysePoint(analysis, point, distance, timeDiff, firstPoint, lastPoint);
+	}
+
+	@Nullable
+	@Override
+	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
+	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GPXDataSetType graphType,
+	                                                @NonNull GPXDataSetAxisType axisType,
+	                                                boolean calcWithoutGaps, boolean useRightAxis) {
+		return SensorAttributesUtils.getOrderedLineDataSet(app, chart, analysis, graphType, axisType, calcWithoutGaps, useRightAxis);
+	}
+
+	@Override
+	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+		SensorAttributesUtils.getAvailableGPXDataSetTypes(analysis, availableTypes);
+	}
 }

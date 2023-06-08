@@ -112,7 +112,7 @@ public class GpxUiHelper {
 	}
 
 	public static String getDescription(OsmandApplication app, TrkSegment t, boolean html) {
-		return getDescription(app, GPXTrackAnalysis.segment(0, t), html);
+		return getDescription(app, GPXTrackAnalysis.prepareInformation(0, null, t), html);
 	}
 
 	public static String getColorValue(String clr, String value, boolean html) {
