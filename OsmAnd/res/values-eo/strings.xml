@@ -5227,4 +5227,7 @@
     <string name="external_device_blood_pressure">Sangopremo</string>
     <string name="no_bt_permission">Mankas permeso por uzi Bludenton</string>
     <string name="beats_per_minute_short">korbatoj/min</string>
+    <string name="error_calculate">Rezulto de kalkulo estas nula</string>
+    <string name="calculate_offline">Kalkuli malkonekte</string>
+    <string name="calculate_offline_altitude_descr">Kalkuli altitudon eksterrete uzante datumojn de altmapo. Malsameco kun altitudo registrita de la aparato povas esti uzata kiel korekto.</string>
 </resources>
