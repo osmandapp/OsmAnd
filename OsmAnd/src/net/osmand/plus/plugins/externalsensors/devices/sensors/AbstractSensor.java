@@ -27,9 +27,6 @@ public abstract class AbstractSensor {
 	}
 
 	@NonNull
-	abstract protected String getGpxTagName();
-
-	@NonNull
 	public AbstractDevice<?> getDevice() {
 		return device;
 	}
@@ -43,7 +40,7 @@ public abstract class AbstractSensor {
 	@Nullable
 	public abstract List<SensorData> getLastSensorDataList();
 
-	public abstract void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException;
+	public abstract void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException;
 
 	@Override
 	public boolean equals(Object o) {

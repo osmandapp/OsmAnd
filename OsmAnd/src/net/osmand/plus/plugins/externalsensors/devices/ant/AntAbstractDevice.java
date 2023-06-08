@@ -165,6 +165,9 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 				LOG.debug(this + " connecting");
 				resetConnection(activity, context);
 			}
+			for (DeviceListener listener : listeners) {
+				listener.onDeviceConnecting(this);
+			}
 		}
 		return true;
 	}

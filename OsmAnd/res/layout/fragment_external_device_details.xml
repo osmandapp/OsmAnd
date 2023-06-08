@@ -41,16 +41,15 @@
 					android:id="@+id/widget_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_margin="@dimen/content_padding"
-					android:background="@drawable/bg_widget_type_icon"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="@drawable/bg_widget_type_icon_light"
 					android:scaleType="center"
 					tools:src="@drawable/widget_sensor_distance_day" />
 
 				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:layout_marginTop="@dimen/content_padding"
-					android:layout_marginBottom="@dimen/content_padding"
 					android:orientation="vertical">
 
 					<TextView
@@ -63,7 +62,7 @@
 
 					<LinearLayout
 						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
+						android:layout_height="0dp"
 						android:layout_weight="1"
 						android:orientation="horizontal">
 
@@ -117,7 +116,18 @@
 						android:paddingRight="@dimen/content_padding_small"
 						android:textSize="@dimen/default_desc_text_size"
 						osmand:typeface="@string/font_roboto_medium"
-						tools:text="Pair" />
+						tools:text="Pair"
+						tools:visibility="gone" />
+
+					<ProgressBar
+						android:id="@+id/progress_bar"
+						style="?android:attr/progressBarStyleHorizontal"
+						android:layout_width="120dp"
+						android:layout_height="4dp"
+						android:layout_gravity="center"
+						android:indeterminate="true"
+						android:visibility="gone"
+						tools:visibility="visible" />
 
 				</FrameLayout>
 			</FrameLayout>
@@ -166,6 +176,8 @@
 					android:textSize="@dimen/default_list_text_size" />
 
 			</LinearLayout>
+
+			<include layout="@layout/divider" />
 
 			<LinearLayout
 				android:layout_width="match_parent"

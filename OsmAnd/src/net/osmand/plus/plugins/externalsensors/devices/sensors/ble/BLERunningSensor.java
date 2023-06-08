@@ -335,17 +335,25 @@ public class BLERunningSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		RunningSpeedData speedData = lastRunningSpeedData;
-		if (speedData != null) {
-			json.put(getGpxTagName(), speedData.speed);
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
+		switch (widgetDataFieldType) {
+			case BIKE_SPEED:
+				if (lastRunningSpeedData != null) {
+					json.put(SENSOR_TAG_SPEED, lastRunningSpeedData.speed);
+				}
+				break;
+			case BIKE_CADENCE:
+				if (lastRunningCadenceData != null) {
+					json.put(SENSOR_TAG_CADENCE, lastRunningCadenceData.cadence);
+				}
+				break;
+			case BIKE_DISTANCE:
+				if (lastRunningDistanceData != null) {
+					json.put(SENSOR_TAG_DISTANCE, lastRunningDistanceData.totalDistance);
+				}
+				break;
+			default:
+				break;
 		}
 	}
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return SENSOR_TAG_SPEED;
-	}
-
 }

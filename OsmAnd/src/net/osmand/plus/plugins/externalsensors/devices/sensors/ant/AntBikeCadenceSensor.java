@@ -7,14 +7,13 @@ import androidx.annotation.Nullable;
 
 import com.dsi.ant.plugins.antplus.pcc.AntPlusBikeCadencePcc;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.BikeCadenceDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
-import net.osmand.plus.utils.OsmAndFormatter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,22 +34,6 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 		// The cadence calculated from the raw values in the sensor broadcast. Units: rpm.
 		private final int calculatedCadence;
 
-		private static class BikeCadenceDataField extends SensorWidgetDataField {
-
-			public BikeCadenceDataField(int nameId, int unitNameId, @NonNull Number cadenceValue) {
-				super(SensorWidgetDataFieldType.BIKE_CADENCE, nameId, unitNameId, cadenceValue);
-			}
-
-			@Nullable
-			@Override
-			public OsmAndFormatter.FormattedValue getFormattedValue(@NonNull OsmandApplication app) {
-				float cadence = getNumberValue().floatValue();
-				return cadence > 0
-						? new OsmAndFormatter.FormattedValue(cadence, String.valueOf(cadence), "rpm")
-						: null;
-			}
-		}
-
 		BikeCadenceData(long timestamp, int calculatedCadence) {
 			this.timestamp = timestamp;
 			this.calculatedCadence = calculatedCadence;
@@ -68,7 +51,7 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.map_widget_ant_bicycle_cadence, -1, calculatedCadence));
+					new BikeCadenceDataField(R.string.map_widget_ant_bicycle_cadence, -1, calculatedCadence));
 		}
 
 		@NonNull
@@ -130,18 +113,11 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		BikeCadenceData data = lastBikeCadenceData;
 		int calculatedCadence = data != null ? data.getCalculatedCadence() : 0;
 		if (calculatedCadence > 0) {
-			json.put(getGpxTagName(), calculatedCadence);
+			json.put(SENSOR_TAG_CADENCE, calculatedCadence);
 		}
 	}
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return SENSOR_TAG_CADENCE;
-	}
-
 }

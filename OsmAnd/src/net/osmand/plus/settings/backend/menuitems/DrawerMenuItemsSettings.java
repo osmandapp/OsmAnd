@@ -137,6 +137,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		hiddenByDefault.add(DRAWER_BACKUP_RESTORE_ID);
 		hiddenByDefault.add(DRAWER_LIVE_UPDATES_ID);
 		hiddenByDefault.add(DRAWER_OSMAND_VERSION_ID);
+		hiddenByDefault.add(DRAWER_ANT_PLUS_ID);
 		return hiddenByDefault;
 	}
 }
