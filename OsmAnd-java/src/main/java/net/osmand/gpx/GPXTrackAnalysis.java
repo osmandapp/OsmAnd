@@ -63,7 +63,7 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public Map<String, PointsAttributesData> pointAttributesData;
+	public Map<String, PointsAttributesData> pointsAttributesData;
 
 	public boolean hasSpeedInTrack = false;
 
@@ -123,10 +123,10 @@ public class GPXTrackAnalysis {
 	}
 
 	public <T extends PointAttribute> PointsAttributesData<T> getAttributesData(String key) {
-		PointsAttributesData data = pointAttributesData.get(key);
+		PointsAttributesData data = pointsAttributesData.get(key);
 		if (data == null) {
 			data = new PointsAttributesData(key);
-			pointAttributesData.put(key, data);
+			pointsAttributesData.put(key, data);
 		}
 		return data;
 	}
@@ -163,7 +163,7 @@ public class GPXTrackAnalysis {
 		double totalSpeedSum = 0;
 		points = 0;
 
-		pointAttributesData = new HashMap<>();
+		pointsAttributesData = new HashMap<>();
 
 		for (final SplitSegment s : splitSegments) {
 			final int numberOfPoints = s.getNumberOfPoints();

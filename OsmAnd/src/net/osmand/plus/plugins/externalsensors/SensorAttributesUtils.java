@@ -13,7 +13,7 @@ import com.github.mikephil.charting.data.Entry;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.gpx.PointAttribute;
-import net.osmand.gpx.PointAttributesData;
+import net.osmand.gpx.PointsAttributesData;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
@@ -63,27 +63,27 @@ public class SensorAttributesUtils {
 	}
 
 	@NonNull
-	public static PointAttributesData<HeartRate> getHeartRateData(@NonNull GPXTrackAnalysis analysis) {
+	public static PointsAttributesData<HeartRate> getHeartRateData(@NonNull GPXTrackAnalysis analysis) {
 		return analysis.getAttributesData(SENSOR_TAG_HEART_RATE);
 	}
 
 	@NonNull
-	public static PointAttributesData<SensorSpeed> getSensorSpeedData(@NonNull GPXTrackAnalysis analysis) {
+	public static PointsAttributesData<SensorSpeed> getSensorSpeedData(@NonNull GPXTrackAnalysis analysis) {
 		return analysis.getAttributesData(SENSOR_TAG_SPEED);
 	}
 
 	@NonNull
-	public static PointAttributesData<BikeCadence> getBikeCadenceData(@NonNull GPXTrackAnalysis analysis) {
+	public static PointsAttributesData<BikeCadence> getBikeCadenceData(@NonNull GPXTrackAnalysis analysis) {
 		return analysis.getAttributesData(SENSOR_TAG_CADENCE);
 	}
 
 	@NonNull
-	public static PointAttributesData<BikePower> getBikePowerData(@NonNull GPXTrackAnalysis analysis) {
+	public static PointsAttributesData<BikePower> getBikePowerData(@NonNull GPXTrackAnalysis analysis) {
 		return analysis.getAttributesData(SENSOR_TAG_BIKE_POWER);
 	}
 
 	@NonNull
-	public static PointAttributesData<Temperature> getTemperatureData(@NonNull GPXTrackAnalysis analysis) {
+	public static PointsAttributesData<Temperature> getTemperatureData(@NonNull GPXTrackAnalysis analysis) {
 		return analysis.getAttributesData(SENSOR_TAG_TEMPERATURE);
 	}
 
