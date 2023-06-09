@@ -50,7 +50,10 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
                 }
                 fragment.arguments = args
                 fragment.retainInstance = true
-                fragment.show(manager, TAG)
+                manager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment, TAG)
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
             }
         }
     }

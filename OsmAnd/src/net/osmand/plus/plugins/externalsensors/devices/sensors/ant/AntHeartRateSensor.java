@@ -167,18 +167,11 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		HeartRateData data = lastHeartRateData;
 		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
 		if (computedHeartRate > 0) {
-			json.put(getGpxTagName(), computedHeartRate);
+			json.put(SENSOR_TAG_HEART_RATE, computedHeartRate);
 		}
 	}
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return SENSOR_TAG_HEART_RATE;
-	}
-
 }

@@ -153,7 +153,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			if (status == GATT_SUCCESS) {
 				if (newState == BluetoothProfile.STATE_CONNECTED) {
 					int bondState = device.getBondState();
-					fireDeviceConnectedEvent();
 
 					if (bondState == BOND_NONE || bondState == BOND_BONDED) {
 						LOG.debug("Discovering services");
@@ -166,6 +165,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 						LOG.debug("Waiting for bonding to complete");
 					}
 					setCurrentState(DeviceConnectionState.CONNECTED);
+					fireDeviceConnectedEvent();
 				} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 					fireDeviceDisconnectedEvent();
 					gatt.close();
@@ -281,6 +281,9 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
 			LOG.debug("Trying to create new connection");
 			setCurrentState(DeviceConnectionState.CONNECTING);
+			for (DeviceListener listener : listeners) {
+				listener.onDeviceConnecting(this);
+			}
 		}
 		return true;
 	}

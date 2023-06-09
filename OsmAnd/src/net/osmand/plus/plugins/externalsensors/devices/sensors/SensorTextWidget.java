@@ -143,6 +143,10 @@ public class SensorTextWidget extends TextInfoWidget {
 		public void onSensorData(@NonNull AbstractSensor sensor, @NonNull SensorData data) {
 			app.runInUIThread(() -> updateInfo(null));
 		}
+
+		@Override
+		public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
+		}
 	};
 
 	@NonNull

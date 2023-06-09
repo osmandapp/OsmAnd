@@ -83,7 +83,7 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 		@NonNull
 		@Override
 		public List<SensorDataField> getDataFields() {
-			return Collections.singletonList(new SensorDataField(R.string.map_widget_ant_bicycle_power, -1, calculatedPower));
+			return Collections.singletonList(new BikePowerDataField(R.string.map_widget_ant_bicycle_power, -1, calculatedPower));
 		}
 
 		@NonNull
@@ -148,18 +148,11 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		BikePowerData data = lastBikePowerData;
 		double calculatedPower = data != null ? data.getCalculatedPower() : 0;
 		if (calculatedPower > 0) {
-			json.put(getGpxTagName(),  DECIMAL_FORMAT.format(calculatedPower));
+			json.put(SENSOR_TAG_BIKE_POWER, DECIMAL_FORMAT.format(calculatedPower));
 		}
 	}
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return SENSOR_TAG_BIKE_POWER;
-	}
-
 }

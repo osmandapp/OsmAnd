@@ -58,7 +58,7 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.map_widget_ant_bicycle_speed, -1, calculatedSpeed));
+					new SensorSpeedWidgetDataField(R.string.map_widget_ant_bicycle_speed, R.string.m_s, calculatedSpeed));
 		}
 
 		@NonNull
@@ -72,7 +72,7 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		@Override
 		public List<SensorWidgetDataField> getWidgetFields() {
 			return Collections.singletonList(
-					new SensorSpeedWidgetDataField(R.string.map_widget_ant_bicycle_speed, -1, calculatedSpeed));
+					new SensorSpeedWidgetDataField(R.string.map_widget_ant_bicycle_speed, R.string.m_s, calculatedSpeed));
 		}
 
 		@NonNull
@@ -116,25 +116,18 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		getAntDevice().getPcc().subscribeCalculatedSpeedEvent(new CalculatedSpeedReceiver(new BigDecimal(WHEEL_CIRCUMFERENCE)) {
 			@Override
 			public void onNewCalculatedSpeed(long estTimestamp, EnumSet<EventFlag> enumSet, BigDecimal calculatedSpeed) {
-				lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());
+				lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());//m/s
 				getDevice().fireSensorDataEvent(AntBikeSpeedSensor.this, lastBikeSpeedData);
 			}
 		});
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		BikeSpeedData data = lastBikeSpeedData;
 		double calculatedSpeed = data != null ? data.getCalculatedSpeed() : 0;
 		if (calculatedSpeed > 0) {
-			json.put(getGpxTagName(), DECIMAL_FORMAT.format(calculatedSpeed));
+			json.put(SENSOR_TAG_SPEED, DECIMAL_FORMAT.format(calculatedSpeed));
 		}
 	}
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return SENSOR_TAG_SPEED;
-	}
-
 }

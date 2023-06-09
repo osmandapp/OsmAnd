@@ -195,14 +195,6 @@ public class BLEBloodPressureSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
-
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return "";
-	}
-
 }

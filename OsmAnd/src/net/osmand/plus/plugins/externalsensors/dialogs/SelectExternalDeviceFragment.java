@@ -238,8 +238,15 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setArguments(arguments);
 			fragment.setRetainInstance(true);
-			fragment.show(manager, TAG);
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
 	}
 
 	@Override
@@ -259,7 +266,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	public void onDeviceSelected(@Nullable AbstractDevice<?> device) {
 		if (getTargetFragment() instanceof SelectDeviceListener) {
 			((SelectDeviceListener) getTargetFragment()).selectNewDevice(device, widgetDataFieldType);
-			dismiss();
+			requireActivity().onBackPressed();
 		}
 	}
 

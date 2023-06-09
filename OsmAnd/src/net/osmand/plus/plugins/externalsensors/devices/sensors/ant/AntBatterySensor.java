@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
-import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -50,7 +48,7 @@ public class AntBatterySensor<T extends AntPlusCommonPcc> extends AntAbstractSen
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.map_widget_battery, -1, cumulativeOperatingTime));
+					new SensorBatteryTimeWidgetDataField(R.string.map_widget_battery, -1, cumulativeOperatingTime));
 		}
 
 		@NonNull
@@ -115,12 +113,7 @@ public class AntBatterySensor<T extends AntPlusCommonPcc> extends AntAbstractSen
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
 
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return "";
-	}
 }

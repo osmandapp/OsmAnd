@@ -381,6 +381,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@Override
+	public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
+	}
+
+	@Override
 	public void onDeviceConnect(@NonNull AbstractDevice<?> device, @NonNull DeviceConnectionResult result, @Nullable String error) {
 		if (!Algorithms.isEmpty(error)) {
 			LOG.error(device + " sensor connection error: " + error);

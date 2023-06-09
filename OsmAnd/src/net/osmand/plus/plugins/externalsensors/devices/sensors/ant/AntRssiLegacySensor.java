@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
-import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,7 +9,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntLegacyDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
-import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorSpeedWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataField;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 
@@ -117,14 +114,6 @@ public class AntRssiLegacySensor<T extends AntPlusLegacyCommonPcc> extends AntAb
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
-
-
-	@NonNull
-	@Override
-	protected String getGpxTagName() {
-		return "";
-	}
-
 }
