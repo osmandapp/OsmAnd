@@ -73,14 +73,13 @@ public class RasterMapMenu {
 			throw new RuntimeException("Unexpected raster map type");
 		}
 
-		String mapTypeDescr = mapTypePreference.get();
-		if (mapTypeDescr != null && mapTypeDescr.contains(".sqlitedb")) {
-			mapTypeDescr = mapTypeDescr.replaceFirst(".sqlitedb", "");
+		String mapSourceTitle = mapTypePreference.get();
+		if (mapSourceTitle != null) {
+			mapSourceTitle = settings.getTileSourceTitle(mapSourceTitle);
 		}
 
-		boolean mapSelected = mapTypeDescr != null;
-		int toggleActionStringId = mapSelected ? R.string.shared_string_on
-				: R.string.shared_string_off;
+		boolean mapSelected = mapSourceTitle != null;
+		int toggleActionStringId = mapSelected ? R.string.shared_string_on : R.string.shared_string_off;
 
 		OnMapSelectedCallback onMapSelectedCallback =
 				canceled -> {
@@ -150,7 +149,7 @@ public class RasterMapMenu {
 			}
 		};
 
-		mapTypeDescr = mapSelected ? mapTypeDescr : mapActivity.getString(R.string.shared_string_none);
+		mapSourceTitle = mapSelected ? mapSourceTitle : mapActivity.getString(R.string.shared_string_none);
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
 				.setHideDivider(true)
@@ -162,7 +161,7 @@ public class RasterMapMenu {
 					.setHideDivider(true)
 					.setListener(l)
 					.setLayout(R.layout.list_item_icon_and_menu_wide)
-					.setDescription(mapTypeDescr));
+					.setDescription(mapSourceTitle));
 			OnIntegerValueChangedListener integerListener =
 					newValue -> {
 						mapTransparencyPreference.set(newValue);

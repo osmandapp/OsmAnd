@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getApproxTilesSizeMb;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getTilesNumber;
 
@@ -263,7 +262,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 		tvMapSource.setText(layerToDownload.getNameId());
 		ivIcon.setImageResource(layerToDownload.getIconId());
-		tvSelectedMapSource.setText(tileSource.getName().replace(SQLITE_EXT, ""));
+		tvSelectedMapSource.setText(settings.getTileSourceTitle(tileSource, tileSource.getName()));
 	}
 
 	private void setupTilesToDownloadSetting() {
