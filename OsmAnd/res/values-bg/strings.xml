@@ -3444,7 +3444,7 @@
     <string name="external_sensor_widgets">Външни сензори</string>
     <string name="how_to_use">Как да използвате:</string>
     <string name="reset_all_settings_desc">Възстановяване на настройките по подразбиране\?</string>
-    <string name="compass_click_desc">Съвет: Докоснете приспособлението с компаса, за да превключите режима на ориентация на картата.</string>
+    <string name="compass_click_desc">Съвет: Докоснете бутона с компаса, за да превключите режима на ориентация на картата.</string>
     <string name="map_marker_average_speed_desc">Задайте интервала от време, за който да бъде усреднена скоростта (за оценка на времето на пристигане).</string>
     <string name="parking_widget_desc">Показва разстоянието от центъра на екрана до мястото на паркиране.</string>
     <string name="lanes_widgets_desc">Показва схема на лентите на текущия път и подчертава тези, които трябва да използвате при маршрутизиране.</string>
@@ -3821,4 +3821,7 @@
     <string name="write_data_from_sensor_to_track">Запазва данните от външните сензори в GPX по време на запис на пътуването.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Няма свързани сензори от този вид</string>
     <string name="external_sensors_not_found">Не са намерени сензори</string>
+    <string name="error_calculate">Резултатът от изчислението е празен</string>
+    <string name="calculate_offline">Изчисляване без мрежа</string>
+    <string name="calculate_offline_altitude_descr">Изчисляване на надморската височина въз основа на данни от карта на височината. Разликите спрямо отчетената от устройството надморска височина могат да бъдат използвани за корекция на надморската височина.</string>
 </resources>

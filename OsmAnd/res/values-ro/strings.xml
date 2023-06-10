@@ -406,7 +406,7 @@
     <string name="vector_data_missing">Descărcați date (\'offline\') pentru a utiliza hărțile offline.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nApăsați lung pentru afișarea opțiunilor"</string>
+\nAtingeți lung pentru opțiuni"</string>
     <string name="local_index_installed">Versiunea locală</string>
     <string name="local_index_items_backuped">%1$d din %2$d element(e) dezactivate .</string>
     <string name="local_index_items_deleted">%1$d din %2$d element(e) șterse.</string>
@@ -1129,7 +1129,7 @@
     <string name="none_selected_gpx">Specificați mai întâi un fișier GPX prin apăsare lungă.</string>
     <string name="selected_gpx_info_show">"
 \n
-\nApăsați lung pentru a vizualiza pe hartă"</string>
+\nAtingeți lung pentru a vizualiza pe hartă"</string>
     <string name="shared_string_selected">Selectată</string>
     <string name="shared_string_selected_lowercase">selectat</string>
     <string name="delay_navigation_start">Porniți ghidarea asistată automat</string>
@@ -2854,7 +2854,7 @@
     <string name="shared_string_bearing">Direcție</string>
     <string name="item_deleted">%1$s șters</string>
     <string name="shared_string_uninstall_and_restart">Dezinstalare și repornire</string>
-    <string name="quick_action_remove_next_destination">Ștergerea celui mai apropiat punct de destinație</string>
+    <string name="quick_action_remove_next_destination">Ștergeți următorul punct de destinație</string>
     <string name="please_provide_point_name_error">Vă rugăm să furnizați un nume pentru acest punct</string>
     <string name="search_download_wikipedia_maps">Descărcare hărți Wikipedia</string>
     <string name="app_mode_enduro_motorcycle">Motocicletă enduro</string>
@@ -3236,10 +3236,10 @@
     <string name="activity_type_cycling_name">Ciclism</string>
     <string name="activity_type_hiking_name">Drumeție</string>
     <string name="activity_type_running_name">Alergare</string>
-    <string name="activity_type_walking_name">Mers pe jos</string>
-    <string name="activity_type_offroad_name">Teren accidentat</string>
+    <string name="activity_type_walking_name">Mersul pe jos</string>
+    <string name="activity_type_offroad_name">Off-road</string>
     <string name="activity_type_motorbike_name">Motocicletă</string>
-    <string name="activity_type_car_name">Mașină</string>
+    <string name="activity_type_car_name">Autoturism</string>
     <string name="temporary_conditional_routing_descr">Utilizați restricțiile rutiere care sunt active acum pe hartă</string>
     <string name="routing_attr_short_way_description">Traseu mai scurt optimizat (economie de energie)</string>
     <string name="routing_attr_driving_style_description">Selectați scopul conducerii pentru a obține un traseu mai scurt, mai rapid sau mai sigur</string>
@@ -3550,8 +3550,8 @@
     <string name="interrupt_music_descr">Indicațiile vocale pun pe pauză redarea muzicii.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Redă traseele în funcție de urmele OSMC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rute de drumeție</string>
-    <string name="rendering_attr_alpineHiking_description">Redă traseele în funcție de scara SAC.</string>
-    <string name="rendering_attr_alpineHiking_name">Scala de drumeție alpină (SAC)</string>
+    <string name="rendering_attr_alpineHiking_description">Redă traseele în conformitate cu scara SAC/CAI.</string>
+    <string name="rendering_attr_alpineHiking_name">Scară pentru drumeții alpine</string>
     <string name="precise_routing_mode_descr">Calculați rute precise fără erori. În continuare limitat la distanță și lent.</string>
     <string name="download_hillshade_maps">Nuanțe de deal</string>
     <string name="layer_hillshade">Strat Hillshade</string>
@@ -4015,7 +4015,7 @@
     <string name="purchase_cancelled_dialog_descr">Reînnoiți abonamentul pentru a continua să utilizați toate funcțiile:</string>
     <string name="how_to_open_link">Cum se deschide link-ul\?</string>
     <string name="read_wikipedia_offline_description">Obțineți abonamentul OsmAnd Live pentru a citi articolele Wikipedia și Wikivoyage offline.</string>
-    <string name="default_render_descr">Stil de uz general. Orașele dense sunt reprezentate lizibil. Prezintă curbe de nivel, rute, calitatea suprafeței, restricții de acces, scuturi rutiere, redarea drumurilor în funcție de scara SAC, elemente pentru sporturi de apă.</string>
+    <string name="default_render_descr">Stil de uz general. Orașele dense sunt reprezentate curate. Prezintă curbe de nivel, trasee, calitatea suprafeței, restricții de acces, scuturi rutiere, redarea traseelor conform scării SAC/CAI, elemente de sporturi de apă albă.</string>
     <string name="snowmobile_render_descr">Pentru conducerea snowmobilelor cu drumuri și piste dedicate.</string>
     <string name="turn_screen_on_router">Trezirea la întoarcere</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
@@ -4125,8 +4125,8 @@
     <string name="routing_attr_piste_type_downhill_description">Pârtii pentru schi alpin sau coborâre și acces la teleschiuri.</string>
     <string name="routing_attr_piste_type_downhill_name">Schi alpin și schi de coborâre</string>
     <string name="quick_action_need_to_add_item_to_list">Adăugați cel puțin un element la lista din setările \"Acțiune rapidă\"</string>
-    <string name="routing_attr_avoid_sett_description">Fără pavaj sau asfalt</string>
-    <string name="routing_attr_avoid_sett_name">Fără pavaj sau așezări</string>
+    <string name="routing_attr_avoid_sett_description">Evită setarea</string>
+    <string name="routing_attr_avoid_sett_name">Fără setare</string>
     <string name="run_full_osmand_msg">Folosiți Harta {0} care este dezvoltată de OsmAnd. Doriți să lansați versiunea completă a OsmAnd\?</string>
     <string name="routeInfo_smoothness_name">Netezime</string>
     <string name="routeInfo_surface_name">Suprafața</string>
@@ -4716,7 +4716,7 @@
     <string name="routing_attr_goods_restrictions_name">Livrarea mărfurilor</string>
     <string name="lang_ckb">Kurdă centrală</string>
     <string name="trip_recording_duration_widget_desc">Afișează timpul de călătorie înregistrat în prezent.</string>
-    <string name="compass_click_desc">Tip: Apăsați pe widgetul busolă pentru a comuta modul de orientare a hărții.</string>
+    <string name="compass_click_desc">Indicație: Atingeți butonul busolă pentru a comuta modul de orientare a hărții.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Arată trasee MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Arată trasee dedicate ciclismului montan.</string>
     <string name="auto_25_chars_route_tl_kl">Virați la stânga și păstrați stânga</string>
@@ -5190,4 +5190,52 @@
 \n- Bluetooth este pornit
 \n- Senzorul este activat
 \n- Acest dispozitiv se află în apropierea senzorului</string>
+    <string name="shutter_sound">Sunet de obturator</string>
+    <string name="no_poi_for_category">POI nu a fost găsit</string>
+    <string name="error_calculate">Rezultatul calculului este gol</string>
+    <string name="external_sensors_source_of_data">Sursa de date</string>
+    <string name="delete_track_folder_dialog_message">Acest lucru va șterge folderul \"%1$s\" și toate piesele (%2$s) incluse.</string>
+    <string name="delete_folder_question">Ștergeți folderul\?</string>
+    <string name="calculate_offline_altitude_descr">Calculează altitudinea offline, pe baza datelor din harta înălțimii. Diferențele față de altitudinea înregistrată de dispozitiv pot fi utilizate ca corecție a altitudinii.</string>
+    <string name="shared_string_visible_on_map">Vizibil pe hartă</string>
+    <string name="visible_in_3d_mode">Vizibil în modul 3D</string>
+    <string name="poi_categories">Categorii de POI</string>
+    <string name="camera_app">Aplicația pentru aparat foto</string>
+    <string name="file_already_exists">Fișierul există deja</string>
+    <string name="nav_profile_confirm_delete">Sunteți sigur că doriți să ștergeți \"%1$s\"\?</string>
+    <string name="external_device_connected">Conectat</string>
+    <string name="external_device_menu_forget">Uitați de</string>
+    <string name="ant_plus_searching">Căutare</string>
+    <string name="learn_more_about_sensors_link">Aflați mai multe despre senzori.</string>
+    <string name="calculate_offline">Calculați offline</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nu există senzori conectați de acest tip</string>
+    <string name="external_sensors_not_found">Senzorii nu au fost găsiți</string>
+    <string name="write_data_from_sensor_to_track">Scrieți date de la senzori externi în GPX în timpul înregistrării călătoriei.</string>
+    <string name="save_track_external_sensors_data">Date</string>
+    <string name="external_device_forget_sensor_description">Senzorul va fi eliminat din listă. Veți putea să împerecheați din nou acest senzor în orice moment.</string>
+    <string name="external_device_disconnected">Deconectat</string>
+    <string name="rendering_value_caiScale_name">Scala CAI</string>
+    <string name="ant_plus_searching_text">Căutarea de senzori</string>
+    <string name="map_3d_mode_description">Atingeți harta cu două degete și deplasați-le în sus și în jos pentru a regla înclinarea hărții.</string>
+    <string name="external_device_characteristic_pulse_rate">Frecvența pulsului</string>
+    <string name="ant_plus_help_title">Nu știu ce tip de senzor am</string>
+    <string name="ant_plus_searching_text_description">Vă rugăm să țineți dispozitivul aproape de senzor. Trebuie să activați senzorul pentru ca OsmAnd să îl poată găsi.</string>
+    <string name="ant_plus_open_settings">Deschideți setările</string>
+    <string name="external_device_characteristic_cuff_pressure">Presiunea manșetei</string>
+    <string name="ant_plus_bluetooth_off_description">Activați Bluetooth găsiți și asociați senzorii.</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth este dezactivat</string>
+    <string name="map_3d_mode_action">mod 3D</string>
+    <string name="rendering_value_sacScale_name">Scala SAC</string>
+    <string name="map_3d_mode_hint">Atingerea lungă a butonului permite schimbarea poziției acestuia.</string>
+    <string name="tracks_empty_folder">Folder gol</string>
+    <string name="track_not_recorded">Neînregistrat</string>
+    <string name="shared_string_new_track">Track nou</string>
+    <string name="delete_folder">Ștergeți folderul</string>
+    <string name="show_all_tracks_on_the_map">Afișați toate pistele pe hartă</string>
+    <string name="rssi_widget_desc">Afișează nivelul RSSI al dispozitivului dumneavoastră extern.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">Acest folder nu are încă nici un track.</string>
+    <string name="map_2d_mode_action">mod 2D</string>
+    <string name="external_device_low_battery">Baterie descărcată</string>
+    <string name="external_device_forget_sensor">Uitați de senzor</string>
 </resources>

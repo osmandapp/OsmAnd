@@ -5223,4 +5223,9 @@
     <string name="save_track_external_sensors_data">Adat</string>
     <string name="write_data_from_sensor_to_track">Adatok írása külső érzékelőkről GPX fájlba az utazás rögzítése során.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Nincs ilyen típusú érzékelő kapcsolódva</string>
+    <string name="error_calculate">A számítási eredmény üres</string>
+    <string name="rendering_attr_lightDetail_description">Alapértelmezett: tengeri jel neve (light character.group.period), válasszon további információkat az 1-3 szektorhoz vagy az 1,2,3,4,5-ös szektor világos karakterhez</string>
+    <string name="calculate_offline">Offline kalkuláció</string>
+    <string name="calculate_offline_altitude_descr">A magasság kiszámítása offline, a magasságtérkép adatai alapján. Az eszköz által rögzített eltérő magasságokhoz korrekcióként használható.</string>
+    <string name="rendering_attr_lightDetail_name">Fény részletek</string>
 </resources>
