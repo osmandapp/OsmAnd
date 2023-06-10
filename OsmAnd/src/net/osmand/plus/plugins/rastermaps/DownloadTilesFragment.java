@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.rastermaps;
 
-import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getApproxTilesSizeMb;
 import static net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.getTilesNumber;
 

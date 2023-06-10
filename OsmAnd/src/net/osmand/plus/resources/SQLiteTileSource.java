@@ -31,7 +31,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -43,7 +42,6 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String MAX_ZOOM = "maxzoom";
 	private static final String URL = "url";
 	private static final String RANDOMS = "randoms";
-	private static final String TITLE = "title";
 	private static final String ELLIPSOID = "ellipsoid";
 	private static final String INVERTED_Y = "inverted_y";
 	private static final String REFERER = "referer";
@@ -54,6 +52,7 @@ public class SQLiteTileSource implements ITileSource {
 	private static final String TILENUMBERING = "tilenumbering";
 	private static final String BIG_PLANET_TILE_NUMBERING = "BigPlanet";
 	private static final String TILESIZE = "tilesize";
+	private static final String TITLE = "title";
 
 	private final OsmandApplication app;
 
@@ -80,12 +79,12 @@ public class SQLiteTileSource implements ITileSource {
 	private boolean tileSizeSpecified;
 	private boolean onlyReadonlyAvailable;
 
-	public SQLiteTileSource(OsmandApplication app, File f, List<TileSourceTemplate> toFindUrl) {
+	public SQLiteTileSource(@NonNull OsmandApplication app, @Nullable File file, @NonNull List<TileSourceTemplate> toFindUrl) {
 		this.app = app;
-		this.file = f;
-		if (f != null) {
-			int i = f.getName().lastIndexOf('.');
-			fileName = f.getName().substring(0, i);
+		this.file = file;
+		if (file != null) {
+			int i = file.getName().lastIndexOf('.');
+			fileName = file.getName().substring(0, i);
 			i = fileName.lastIndexOf('.');
 			if (i > 0) {
 				String sourceName = fileName.substring(i + 1);
@@ -96,7 +95,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
-	private void setTileSourceTemplate(String sourceName, List<TileSourceTemplate> toFindUrl) {
+	private void setTileSourceTemplate(@NonNull String sourceName, @NonNull List<TileSourceTemplate> toFindUrl) {
 		for (TileSourceTemplate is : toFindUrl) {
 			if (is.getName().equalsIgnoreCase(sourceName)) {
 				base = is;
@@ -110,7 +109,7 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
-	public SQLiteTileSource(OsmandApplication app, String name, int minZoom, int maxZoom, String urlTemplate,
+	public SQLiteTileSource(@NonNull OsmandApplication app, String name, int minZoom, int maxZoom, String urlTemplate,
 	                        String randoms, boolean isEllipsoid, boolean invertedY, String referer, String userAgent,
 	                        boolean timeSupported, long expirationTimeMillis, boolean inversiveZoom, String rule) {
 		this.app = app;
@@ -130,7 +129,7 @@ public class SQLiteTileSource implements ITileSource {
 		this.inversiveZoom = inversiveZoom;
 	}
 
-	public SQLiteTileSource(SQLiteTileSource tileSource, String name, OsmandApplication app) {
+	public SQLiteTileSource(@NonNull SQLiteTileSource tileSource, @NonNull String name, @NonNull OsmandApplication app) {
 		this.app = app;
 		this.title = name;
 		this.fileName = name;
@@ -227,19 +226,19 @@ public class SQLiteTileSource implements ITileSource {
 		}
 	}
 
+	@Nullable
 	public String getTitle() {
+		if (title == null) {
+			getDatabase();
+		}
 		if (title != null) {
 			return title;
 		}
-		SQLiteConnection db = getDatabase();
-		if (db != null && title != null) {
-			return title;
+		if (fileName != null) {
+			int index = fileName.lastIndexOf('.');
+			return index > 0 ? fileName.substring(0, index) : fileName;
 		}
-		if (fileName != null && fileName.contains(".")) {
-			int i = fileName.lastIndexOf('.');
-			return fileName.substring(0, i);
-		}
-		return fileName;
+		return null;
 	}
 
 	@Override
@@ -277,13 +276,13 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			try {
 				SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
-				if(cursor.moveToFirst()) {
+				if (cursor.moveToFirst()) {
 					String[] columnNames = cursor.getColumnNames();
 					List<String> list = Arrays.asList(columnNames);
 					int url = list.indexOf(URL);
-					if(url != -1) {
+					if (url != -1) {
 						String template = cursor.getString(url);
-						if(!Algorithms.isEmpty(template)){
+						if (!Algorithms.isEmpty(template)) {
 							urlTemplate = TileSourceTemplate.normalizeUrl(template);
 						}
 					}
@@ -292,11 +291,11 @@ public class SQLiteTileSource implements ITileSource {
 						title = cursor.getString(titleId);
 					}
 					int ruleId = list.indexOf(RULE);
-					if(ruleId != -1) {
+					if (ruleId != -1) {
 						rule = cursor.getString(ruleId);
 					}
 					int refererId = list.indexOf(REFERER);
-					if(refererId != -1) {
+					if (refererId != -1) {
 						referer = cursor.getString(refererId);
 					}
 					int userAgentId = list.indexOf(USER_AGENT);
@@ -397,11 +396,11 @@ public class SQLiteTileSource implements ITileSource {
 				minZoom = 17 - maxZoom;
 				maxZoom = 17 - mnz;
 			}
-			if (getUrlTemplate() != null && !Objects.equals(r.getUrlTemplate(), getUrlTemplate())) {
+			if (getUrlTemplate() != null && !Algorithms.stringsEqual(r.getUrlTemplate(), getUrlTemplate())) {
 				db.execSQL("update info set " + URL + " = '" + r.getUrlTemplate() + "'");
 				changed = true;
 			}
-			if (!Objects.equals(r.getName(), getTitle())) {
+			if (!Algorithms.stringsEqual(r.getName(), getTitle())) {
 				db.execSQL("update info set " + TITLE + " = '" + r.getName() + "'");
 				changed = true;
 			}

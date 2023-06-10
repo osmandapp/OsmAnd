@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.backend;
 
 
+import static net.osmand.IndexConstants.SQLITE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
@@ -119,7 +120,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -1920,25 +1920,26 @@ public class OsmandSettings {
 		return null;
 	}
 
+	@NonNull
 	public String getSelectedMapSourceTitle() {
-		return MAP_ONLINE_DATA.get() ?
-				getTileSourceTitle(MAP_TILE_SOURCES.get()) :
-				ctx.getString(R.string.vector_data);
+		return MAP_ONLINE_DATA.get() ? getTileSourceTitle(MAP_TILE_SOURCES.get()) : ctx.getString(R.string.vector_data);
 	}
 
+	@NonNull
 	public String getTileSourceTitle(@NonNull String fileName) {
-		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+		if (fileName.endsWith(SQLITE_EXT)) {
 			ITileSource tileSource = getTileSourceByName(fileName, false);
 			return getTileSourceTitle(tileSource, fileName);
 		}
 		return fileName;
 	}
 
+	@NonNull
 	public String getTileSourceTitle(@Nullable ITileSource tileSource, @NonNull String fileName) {
 		if (tileSource instanceof SQLiteTileSource) {
 			return ((SQLiteTileSource) tileSource).getTitle();
 		}
-		return fileName.replace(IndexConstants.SQLITE_EXT, "");
+		return fileName.replace(SQLITE_EXT, "");
 	}
 
 	@Nullable
@@ -1951,7 +1952,7 @@ public class OsmandSettings {
 		File dir = new File(tPath, tileName);
 		if (!dir.exists()) {
 			return checkAmongAvailableTileSources(dir, knownTemplates);
-		} else if (tileName.endsWith(IndexConstants.SQLITE_EXT)) {
+		} else if (tileName.endsWith(SQLITE_EXT)) {
 			return new SQLiteTileSource(ctx, dir, knownTemplates);
 		} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 			TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
@@ -2003,7 +2004,7 @@ public class OsmandSettings {
 				});
 				for (File f : files) {
 					String fileName = f.getName();
-					if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+					if (fileName.endsWith(SQLITE_EXT)) {
 						if (sqlite) {
 							map.put(fileName, getTileSourceTitle(fileName));
 						}
