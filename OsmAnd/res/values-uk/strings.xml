@@ -5242,4 +5242,8 @@
     <string name="calculate_offline_altitude_descr">Розраховуйте висоту офлайн на основі даних карти висот. Відмінності від висоти, записаної пристроєм, можна використовувати як поправку висоти.</string>
     <string name="error_calculate">Результати розрахунків порожні</string>
     <string name="calculate_offline">Розрахувати офлайн</string>
+    <string name="routing_attr_allow_via_ferrata_name">Дозволити через феррату</string>
+    <string name="routing_attr_allow_via_ferrata_description">Дозволити шляхи віа феррата.</string>
+    <string name="power_watts_unit">Ватт</string>
+    <string name="revolutions_per_minute_unit">ОБ/ХВ</string>
 </resources>
