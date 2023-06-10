@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPulsación larga para opciones"</string>
+\nPulsación larga para las opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -3854,7 +3854,7 @@
     <string name="use_live_routing">Datos de «OsmAnd Live»</string>
     <string name="complex_routing_descr">Navegación bifásica en automóvil.</string>
     <string name="perform_oauth_authorization_description">Ingresar con OAuth para usar las funciones de edición de OSM</string>
-    <string name="perform_oauth_authorization">Ingresar a través de OAuth</string>
+    <string name="perform_oauth_authorization">Iniciar sesión mediante OAuth</string>
     <string name="clear_osm_token">Vaciar clave OAuth de OpenStreetMap</string>
     <string name="osm_edit_logout_success">Sesión finalizada</string>
     <string name="use_two_phase_routing">Usar el algoritmo de navegación A* bifásica</string>
@@ -4703,7 +4703,7 @@
     <string name="auto_25_chars_route_roundabout_kr">Toma la salida %1$d y mantente a la derecha</string>
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
-    <string name="compass_click_desc">Sugerencia: Pulse sobre el widget de la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: pulsa el botón de la brújula para cambiar el modo de la orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="altitude_correction">Corrección de la elevación</string>
     <string name="kg">kg</string>
@@ -5211,7 +5211,7 @@
     <string name="no_poi_for_category">POI no encontrado</string>
     <string name="map_2d_mode_action">Modalidad 2D</string>
     <string name="map_3d_mode_action">Modalidad 3D</string>
-    <string name="map_3d_mode_hint">El toque largo en el botón permite cambiar la posición del botón.</string>
+    <string name="map_3d_mode_hint">Pulsar prolongadamente el botón permite cambiar tu posición.</string>
     <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="visible_in_3d_mode">Visible en 3D</string>
     <string name="map_3d_mode_description">Toca el mapa con dos dedos y muévelos arriba y abajo para ajustar la inclinación del mapa.</string>
@@ -5227,4 +5227,12 @@
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
     <string name="delete_track_folder_dialog_message">Esto borrará la carpeta \"%1$s\" y todas las pistas (%2$s) incluidas.</string>
     <string name="delete_folder_question">¿Borrar la carpeta\?</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hay sensores conectados de este tipo</string>
+    <string name="write_data_from_sensor_to_track">Agrega los datos de los sensores externos a GPX mientras grabas un viaje.</string>
+    <string name="save_track_external_sensors_data">Datos</string>
+    <string name="external_sensors_not_found">No se encontraron sensores</string>
+    <string name="external_sensors_source_of_data">Fuente de los datos</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándose en los datos del mapa de la elevación del terreno. Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
+    <string name="error_calculate">El resultado del cálculo está vacío</string>
+    <string name="calculate_offline">Calcular sin conexión</string>
 </resources>

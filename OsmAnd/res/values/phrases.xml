@@ -5145,4 +5145,7 @@
 	<string name="poi_sac_scale">SAC scale</string>
 	<string name="poi_cai_scale">CAI scale</string>
 
+	<string name="poi_tunnel_name">Tunnel name</string>
+	<string name="poi_bridge_name">Bridge name</string>
+
 </resources>

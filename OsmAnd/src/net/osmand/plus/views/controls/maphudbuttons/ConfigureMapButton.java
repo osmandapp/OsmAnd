@@ -32,4 +32,9 @@ public class ConfigureMapButton extends MapButton {
 	protected boolean shouldShow() {
 		return !isRouteDialogOpened() && widgetsVisibilityHelper.shouldShowTopButtons();
 	}
+
+	@Override
+	public void refresh() {
+		updateVisibility(shouldShow());
+	}
 }

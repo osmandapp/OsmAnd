@@ -4756,7 +4756,7 @@
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
-    <string name="compass_click_desc">Sugerencia: Pulsa el widget de la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: Pulsa el botón de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Esquema de color para las curvas de nivel de profundidad</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y quédate en la derecha</string>
@@ -5226,7 +5226,7 @@
     <string name="no_poi_for_category">PDI no encontrado</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
-    <string name="map_3d_mode_hint">Mantén pulsado en el botón para cambiar la ubicación del botón.</string>
+    <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>
     <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
@@ -5242,4 +5242,12 @@
     <string name="tracks_empty_folder">Carpeta vacía</string>
     <string name="tracks_empty_folder_description">Esta carpeta no contiene trazas aún.</string>
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
+    <string name="external_sensors_not_found">Sensores no encontrados</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
+    <string name="external_sensors_source_of_data">Origen de los datos</string>
+    <string name="save_track_external_sensors_data">Datos</string>
+    <string name="write_data_from_sensor_to_track">Escribir datos de sensores externos en el GPX mientras se graba el viaje.</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa de altura. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
+    <string name="error_calculate">El resultado del cálculo está vacío</string>
+    <string name="calculate_offline">Calcular sin conexión</string>
 </resources>

@@ -104,6 +104,7 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
+						android:contentDescription="@string/access_shared_string_navigate_up"
 						android:tint="@color/icon_color_default_light"
 						osmand:srcCompat="@drawable/ic_arrow_back" />
 
@@ -124,6 +125,7 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
+						android:contentDescription="@string/shared_string_help"
 						osmand:srcCompat="@drawable/ic_action_help"
 						tools:tint="@color/icon_color_default_light" />
 

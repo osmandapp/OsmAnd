@@ -234,8 +234,9 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
-		super.attachView(container, order, followingWidgets);
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
+	                       int order, @NonNull List<MapWidget> followingWidgets) {
+		super.attachView(container, panel, order, followingWidgets);
 
 		boolean showBottomShadow = true;
 		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();

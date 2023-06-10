@@ -5227,4 +5227,14 @@
     <string name="there_are_no_connected_sensors_of_this_type">Tidak ada sensor dengan jenis ini yang terhubung</string>
     <string name="external_sensors_not_found">Sensor tidak ditemukan</string>
     <string name="delete_track_folder_dialog_message">Ini akan menghapus folder</string>
+    <string name="tracks_empty_folder_description">Folder ini belum memiliki trek apa pun.</string>
+    <string name="delete_folder">Hapus folder</string>
+    <string name="rssi_widget_desc">Menampilkan tingkat RSSI dari perangkat eksternal Anda.</string>
+    <string name="shared_string_new_track">Trek baru</string>
+    <string name="delete_folder_question">Hapus folder\?</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="show_all_tracks_on_the_map">Tampilkan semua trek di peta</string>
+    <string name="shared_string_visible_on_map">Terlihat pada peta</string>
+    <string name="track_not_recorded">Tidak direkam</string>
+    <string name="tracks_empty_folder">Folder kosong</string>
 </resources>

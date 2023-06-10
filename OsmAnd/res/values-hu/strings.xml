@@ -4719,7 +4719,7 @@
     <string name="compass_visible_if_map_rotated">Látható, ha a térkép el van forgatva</string>
     <string name="compass_always_hidden">Mindig el van rejtve</string>
     <string name="compass_always_visible">Mindig látható</string>
-    <string name="compass_click_desc">Tipp: Koppintson az iránytű widgetre a térkép tájolási módjai közötti váltáshoz.</string>
+    <string name="compass_click_desc">Tipp: Koppintson az iránytű gombra a térkép tájolási módjai közötti váltáshoz.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak vastagsága</string>

@@ -948,7 +948,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			PointI fixedPixel = mapRenderer.getState().getFixedPixel();
-			updateMapRenderer = fixedPixel.getX() <= 0 || fixedPixel.getY() <= 0;
+			updateMapRenderer = fixedPixel.getX() < 0 || fixedPixel.getY() < 0;
 		}
 		if (updateMapRenderer || currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
 				currentViewport.getCenterPixelY() != cy || currentViewport.getCenterPixelX() != cx) {
@@ -1714,6 +1714,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						targetPixelY = targetPixelPosition.getY();
 						touchPoint = multiTouchSupport.getFirstPoint();
 						findFirstTouchMapLocation(touchPoint.x, touchPoint.y);
+						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 					}
 					rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
 				} else if (primaryClear) {
@@ -1995,10 +1996,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						PointI start31 = mapRenderer.getTarget();
 						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,
 								latlon.getLatitude(), latlon.getLongitude(), false);
-						latlon = new LatLon(MapUtils.get31LatitudeY((int) Math.round(
-								(double) (finish31.getY() - start31.getY()) * 0.5d + (double) start31.getY())),
-								MapUtils.get31LongitudeX((int) Math.round(
-										(double) (finish31.getX() - start31.getX()) * 0.5d + (double) start31.getX())));
 					}
 					getAnimatedDraggingThread().startMoving(
 							latlon.getLatitude(), latlon.getLongitude(), zoom.getBaseZoom(), zoom.getZoomFloatPart(),
@@ -2045,7 +2042,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			// Keep zoom center fixed or flexible
 			if (mapRenderer != null) {
 				MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
-				if (layer == null || !layer.isInMeasurementMode())
+				if ((layer == null || !layer.isInMeasurementMode()) &&
+						(doubleTapScaleDetector == null || !doubleTapScaleDetector.isInZoomMode()))
 					zoomAndRotateToAnimate(startZooming, startRotating);
 				else {
 					zoomToAnimate(initialViewport, deltaZoom, multiTouchCenterX, multiTouchCenterY);

@@ -33,7 +33,10 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
                 val arguments = Bundle()
                 arguments.putString(DEVICE_ID_KEY, device.deviceId)
                 fragment.arguments = arguments
-                fragment.show(manager, TAG)
+                manager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment, TAG)
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
             }
         }
     }
@@ -41,6 +44,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     lateinit var device: AbstractDevice<out AbstractSensor>
     private var connectionState: TextView? = null
     private var batteryLevel: TextView? = null
+    private var progress: View? = null
     private var receivedDataView: RecyclerView? = null
     private lateinit var receivedDataAdapter: DeviceCharacteristicsAdapter
 
@@ -64,7 +68,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         val closeButton = view.findViewById<View>(R.id.close_button)
         if (closeButton != null) {
             closeButton.setOnClickListener {
-                dismiss()
+                requireActivity().onBackPressed()
             }
             if (closeButton is ImageView) {
                 UiUtilities.rotateImageByLayoutDirection(closeButton)
@@ -76,13 +80,9 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         super.setupUI(view)
         val deviceName: TextView = view.findViewById(R.id.device_name)
         deviceName.text = plugin.getDeviceName(device)
-        val widgetIcon: ImageView = view.findViewById(R.id.widget_icon)
-        val deviceType = device.deviceType
-        deviceType.let {
-            widgetIcon.setImageResource(if (nightMode) it.nightIconId else it.dayIconId)
-        }
         connectionState = view.findViewById(R.id.connection_state)
         batteryLevel = view.findViewById(R.id.battery_level)
+        progress = view.findViewById(R.id.progress_bar)
         updateConnectedState(view)
         updateButtonState(view)
         val connectionTypeTextView: TextView = view.findViewById(R.id.connection_type)
@@ -120,6 +120,18 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         val connectionStateIcon: ImageView = view.findViewById(R.id.connection_state_icon)
         connectionStateIcon.setImageResource(signalLevelIcon)
         batteryLevel?.text = device.batteryLevel.toString()
+        val widgetIcon: ImageView = view.findViewById(R.id.widget_icon)
+        val deviceType = device.deviceType
+        deviceType.let {
+            widgetIcon.background = ContextCompat.getDrawable(
+                requireActivity(),
+                if (isConnected) {
+                    if (nightMode) R.drawable.bg_widget_type_icon_dark else R.drawable.bg_widget_type_icon_light
+                } else {
+                    if (nightMode) R.drawable.bg_widget_type_disconnected_icon_dark else R.drawable.bg_widget_type_disconnected_icon_light
+                })
+            widgetIcon.setImageResource(if (!isConnected) it.disconnectedIconId else if (nightMode) it.nightIconId else it.dayIconId)
+        }
     }
 
     private fun getConnectionTypeName() = if (isBle()) getBleText() else getAntText()
@@ -136,15 +148,6 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         val pairButtonText = view.findViewById<TextView>(R.id.button_text)
         val pairButton = view.findViewById<View>(R.id.pair_btn)
         val pairButtonContainer = view.findViewById<View>(R.id.button_container)
-        view.post {
-            AndroidUtils.setBackground(
-                app,
-                pairButtonContainer,
-                nightMode,
-                R.drawable.ripple_solid_light,
-                R.drawable.ripple_solid_dark
-            )
-        }
         val connectedStateBtnTextColor = ColorUtilities.getButtonSecondaryTextColorId(nightMode)
         val disconnectedStateBtnTextColor =
             if (nightMode) R.color.dlg_btn_primary_text_dark else R.color.dlg_btn_primary_text_light
@@ -157,13 +160,17 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         val disconnectedStateBtnBgColorLight = R.drawable.dlg_btn_primary_light
         val disconnectedStateBtnBgColorDark = R.drawable.dlg_btn_primary_dark
 
+        val connectingStateBtnBgColorLight = R.color.active_color_secondary_light
+        val connectingStateBtnBgColorDark = R.color.active_color_secondary_dark
+
         val unpairedStateBtnBgColorLight = R.color.ble_unpaired_device_btn_bg
         val unpairedStateBtnBgColorDark = R.color.ble_unpaired_device_btn_bg
 
         val lightResId: Int
         val darkResId: Int
-        val pairBtnTextColorId: Int
-        val pairBtnTextId: Int
+        var pairBtnTextColorId = 0
+        var pairBtnTextId = 0
+        var isConnecting = false
         if (!plugin.isDevicePaired(device)) {
             lightResId = unpairedStateBtnBgColorLight
             darkResId = unpairedStateBtnBgColorDark
@@ -176,6 +183,11 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
             pairBtnTextColorId = connectedStateBtnTextColor
             pairBtnTextId = R.string.external_device_details_disconnect
             pairButton.setOnClickListener { disconnectDevice() }
+        } else if (device.isConnecting) {
+            lightResId = connectingStateBtnBgColorLight
+            darkResId = connectingStateBtnBgColorDark
+            pairButton.setOnClickListener(null)
+            isConnecting = true
         } else {
             lightResId = disconnectedStateBtnBgColorLight
             darkResId = disconnectedStateBtnBgColorDark
@@ -183,18 +195,31 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
             pairBtnTextId = R.string.external_device_details_connect
             pairButton.setOnClickListener { connectDevice() }
         }
-
-        AndroidUtils.setBackground(
-            app,
-            pairButton,
-            nightMode,
-            lightResId,
-            darkResId
-        )
-
-        pairButtonText.text = getString(pairBtnTextId)
-        val colorStateList = ContextCompat.getColorStateList(app, pairBtnTextColorId)
-        pairButtonText.setTextColor(colorStateList)
+        view.post {
+            AndroidUtils.setBackground(
+                app,
+                pairButtonContainer,
+                nightMode,
+                R.drawable.ripple_solid_light,
+                R.drawable.ripple_solid_dark
+            )
+            AndroidUtils.setBackground(
+                app,
+                pairButton,
+                nightMode,
+                lightResId,
+                darkResId
+            )
+            if (pairBtnTextId != 0) {
+                pairButtonText.text = getString(pairBtnTextId)
+            }
+            if (pairBtnTextColorId != 0) {
+                val colorStateList = ContextCompat.getColorStateList(app, pairBtnTextColorId)
+                pairButtonText.setTextColor(colorStateList)
+            }
+            progress?.visibility = if (isConnecting) View.VISIBLE else View.GONE
+            pairButtonText.visibility = if (isConnecting) View.GONE else View.VISIBLE
+        }
     }
 
     override fun onResume() {
@@ -212,6 +237,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     private fun pairDevice() {
         plugin.pairDevice(device)
         updateButtonState()
+        connectDevice()
     }
 
     private fun connectDevice() {
@@ -220,6 +246,12 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
 
     private fun disconnectDevice() {
         plugin.disconnectDevice(device)
+    }
+
+    override fun onDeviceConnecting(device: AbstractDevice<*>) {
+        app.runInUIThread {
+            updateButtonState()
+        }
     }
 
     override fun onDeviceConnect(

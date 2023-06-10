@@ -380,7 +380,7 @@
     <string name="poi_canadian_football">Fotbal canadian</string>
     <string name="poi_bowls">Boluri</string>
     <string name="poi_boules">Popice</string>
-    <string name="poi_bmx">BICICLETA BMX</string>
+    <string name="poi_bmx">Bicicleta BMX</string>
     <string name="poi_beachvolleyball">Volei pe plajă</string>
     <string name="poi_basketball">Baschet</string>
     <string name="poi_baseball">Baseball</string>
@@ -395,7 +395,7 @@
     <string name="poi_horse_track">Pista de cai</string>
     <string name="poi_bicycle_track">Pistă pentru biciclete</string>
     <string name="poi_running_track">Pistă de alergare</string>
-    <string name="poi_leisure_track">Pista de sport</string>
+    <string name="poi_leisure_track">Pistă de sport</string>
     <string name="poi_pitch">Teren</string>
     <string name="poi_ice_rink">Patinoar</string>
     <string name="poi_golf_course">Teren de golf</string>
@@ -600,12 +600,12 @@
     <string name="poi_power_pole">Stâlp de alimentare</string>
     <string name="poi_power_tower">Turn de putere</string>
     <string name="poi_power_generator">Generator de energie</string>
-    <string name="poi_power_plant">Centrala electrică</string>
+    <string name="poi_power_plant">Centrală electrică</string>
     <string name="poi_power_transformer">Transformator</string>
     <string name="poi_denomination_quaker">Cucernic</string>
     <string name="poi_denomination_mennonite">Menonit</string>
     <string name="poi_denomination_uniting">Uniune</string>
-    <string name="poi_denomination_iglesia_ni_cristo">Biserica în Hristos</string>
+    <string name="poi_denomination_iglesia_ni_cristo">Biserică în Hristos</string>
     <string name="poi_denomination_salvation_army">Armata Salvării</string>
     <string name="poi_denomination_church_of_scotland">Biserica Scoției</string>
     <string name="poi_denomination_united_reformed">Unită reformată</string>
@@ -631,7 +631,7 @@
     <string name="poi_denomination_sunni">Suniți</string>
     <string name="poi_denomination_lutheran">Luteran</string>
     <string name="poi_denomination_orthodox">Ortodox</string>
-    <string name="poi_denomination_roman_catholic">Romano- catolic</string>
+    <string name="poi_denomination_roman_catholic">Romano-catolic</string>
     <string name="poi_denomination_baptist">Baptistă</string>
     <string name="poi_denomination_catholic">Catolic</string>
     <string name="poi_religion_zoroastrian">Zoroastrismul</string>
@@ -745,7 +745,7 @@
     <string name="poi_railway_buffer_stop">Oprire tampon de cale ferată</string>
     <string name="poi_subway_station">Da;Stație de metrou</string>
     <string name="poi_subway_entrance">Intrarea la metrou</string>
-    <string name="poi_halt">Stație de cale ferată;Stație de tren;Stație de cale ferată;Stație de cale ferată;Stație de tren;Gara</string>
+    <string name="poi_halt">Stație de cale ferată;Stație de tren;Stație de cale ferată;Stație de cale ferată;Stație de tren;Gară</string>
     <string name="poi_railway_platform">Platformă de cale ferată;Platformă de tren</string>
     <string name="poi_railway_station">Stație auto;Stație de cale ferată;Stație de tren</string>
     <string name="poi_bus_station">Stație de autobuz</string>
@@ -803,7 +803,7 @@
     <string name="poi_service_tyres">Anvelope</string>
     <string name="poi_car_repair">Reparații auto</string>
     <string name="poi_traffic_signals">Semafor</string>
-    <string name="poi_traffic_calming_island">Insula de trafic</string>
+    <string name="poi_traffic_calming_island">Insulă de trafic</string>
     <string name="poi_traffic_calming_choker">Guler</string>
     <string name="poi_traffic_calming_table">Tabel de viteză</string>
     <string name="poi_traffic_calming_rumble_strip">Fâșie de zgomot</string>
@@ -1003,7 +1003,7 @@
     <string name="poi_craft_glaziery">Vitrărie artizanală</string>
     <string name="poi_craft_gardener">Grădinar</string>
     <string name="poi_craft_electrician">Electrician</string>
-    <string name="poi_craft_dressmaker">Croitoreasa</string>
+    <string name="poi_craft_dressmaker">Croitoreasă</string>
     <string name="poi_craft_clockmaker">Ceasornicar</string>
     <string name="poi_craft_caterer">Catering</string>
     <string name="poi_craft_carpet_layer">Montaj mochete</string>
@@ -1035,14 +1035,14 @@
     <string name="poi_enforcement_maxheight">Aplicare: înălțimea maximă</string>
     <string name="poi_enforcement_traffic_signals">Punerea în aplicare: semafoare</string>
     <string name="poi_rural">Rurală</string>
-    <string name="poi_urban">Urbana</string>
+    <string name="poi_urban">Urbană</string>
     <string name="poi_trees_pomegranate">Rodii</string>
     <string name="poi_trees_coffea">Cafea</string>
     <string name="poi_trees_date">Data</string>
     <string name="poi_trees_rubber">Cauciuc</string>
     <string name="poi_trees_mango">Fruct de Mango</string>
     <string name="poi_trees_nectorine">Nectarină</string>
-    <string name="poi_trees_meadow_orchard">Livada de pajiști</string>
+    <string name="poi_trees_meadow_orchard">Livadă de pajiști</string>
     <string name="poi_trees_kiwi">Kiwi</string>
     <string name="poi_trees_coca">Cocaină</string>
     <string name="poi_trees_tea">Ceai</string>
@@ -1177,7 +1177,7 @@
     <string name="poi_turnstile">Turnichet</string>
     <string name="poi_swing_gate">Poarta batantă</string>
     <string name="poi_sally_port">Portul Sally</string>
-    <string name="poi_kissing_gate">Poarta sărutului</string>
+    <string name="poi_kissing_gate">Poarta Sărutului</string>
     <string name="poi_horse_stile">Atelaj pentru cai</string>
     <string name="poi_height_restrictor">Limitator de înălțime</string>
     <string name="poi_jersey_barrier">Barieră Jersey</string>
@@ -1673,7 +1673,7 @@
     <string name="poi_vending_parking_tickets">Tichete de parcare</string>
     <string name="poi_maxstay">Limită timp parcare</string>
     <string name="poi_diaper_room">Cameră pentru schimbarea scutecelor</string>
-    <string name="poi_diaper_no">Nici o masă pentru schimbarea scutecelor</string>
+    <string name="poi_diaper_no">Fără masă pentru schimbarea scutecelor</string>
     <string name="poi_diaper_yes">Masă de schimbat scutece</string>
     <string name="poi_diaper_table_count">Număr de mese de schimbat scutece</string>
     <string name="poi_toilets_access_public">Acces la toalete: publice</string>
@@ -2480,7 +2480,7 @@
     <string name="poi_cypress">Cipresiu</string>
     <string name="poi_palm">Palmier</string>
     <string name="poi_chimney">Șemineu</string>
-    <string name="poi_beach_rocky">Stâncoasa</string>
+    <string name="poi_beach_rocky">Stâncoasă</string>
     <string name="poi_beach_shingle">Șindrilă</string>
     <string name="poi_beach_sand">Nisip</string>
     <string name="poi_wetland_mud">Noroi</string>
@@ -2731,7 +2731,7 @@
     <string name="poi_health_person_type_healer">Rolul lucrătorului medical: vindecător</string>
     <string name="poi_health_person_type_assistant">Rolul lucrătorului medical: asistent</string>
     <string name="poi_health_amenity_type_scales">Balanța publică</string>
-    <string name="poi_health_amenity_type_first_aid_kit">Trusa de prim ajutor</string>
+    <string name="poi_health_amenity_type_first_aid_kit">Trusă de prim ajutor</string>
     <string name="poi_fire_hydrant_type_wall">Perete</string>
     <string name="poi_fire_hydrant_type_pond">Iaz</string>
     <string name="poi_fire_hydrant_type_dry_barrel">Butoi uscat</string>
@@ -2924,13 +2924,13 @@
     <string name="poi_socket_as3112">Socket: AS/NZS 3112 (Soclu: AS/NZS 3112)</string>
     <string name="poi_socket_bs1363_output">Socket: BS 1363: ieșire</string>
     <string name="poi_socket_bs1363_current">Socket: BS 1363: curent</string>
-    <string name="poi_socket_bs1363">Socket: BS 1363 ( Soclu: BS 1363)</string>
+    <string name="poi_socket_bs1363">Socket: BS 1363 (Soclu: BS 1363)</string>
     <string name="poi_socket_schuko_output">Socket: Schuko: ieșire</string>
     <string name="poi_socket_schuko_current">Socket: Schuko: curent</string>
-    <string name="poi_socket_schuko">Socket: Schuko ( priză Schuko)</string>
+    <string name="poi_socket_schuko">Socket: Schuko (priză Schuko)</string>
     <string name="poi_socket_nema_14_50_output">Socket: NEMA 14-50: ieșire</string>
     <string name="poi_socket_nema_14_50_current">Socket: NEMA 14-50: curent</string>
-    <string name="poi_socket_nema_14_50">Socket: NEMA 14-50 ( Soclu: NEMA 14-50)</string>
+    <string name="poi_socket_nema_14_50">Socket: NEMA 14-50 (Soclu: NEMA 14-50)</string>
     <string name="poi_socket_nema_14_30_output">Socket: NEMA 14-30: ieșire</string>
     <string name="poi_socket_nema_14_30_current">Socket: NEMA 14-30: curent</string>
     <string name="poi_socket_nema_14_30">Socket: NEMA 14-30 (Soclu: NEMA 14-30)</string>
@@ -3172,7 +3172,7 @@
     <string name="poi_cuisine_pastel">Culoare pastel</string>
     <string name="poi_cuisine_baguette">Baghetă</string>
     <string name="poi_cuisine_fondue">Fondant</string>
-    <string name="poi_cuisine_pita">Pita (Pâine)</string>
+    <string name="poi_cuisine_pita">Pită (pâine)</string>
     <string name="poi_cuisine_sub">Sub (bagheterie)</string>
     <string name="poi_cuisine_brunch">Gustări</string>
     <string name="poi_cuisine_potato">Cartofi</string>
@@ -3185,9 +3185,9 @@
     <string name="poi_cuisine_yakitori">Iakitori</string>
     <string name="poi_cuisine_bubble_tea">Ceai cu bule</string>
     <string name="poi_cuisine_brasserie">Braserie</string>
-    <string name="poi_cuisine_udon">Udon ( macaroane japoneze)</string>
+    <string name="poi_cuisine_udon">Udon (macaroane japoneze)</string>
     <string name="poi_cuisine_suki">Sukis</string>
-    <string name="poi_cuisine_yakiniku">Yakiniku ( grătar in stil japonez)</string>
+    <string name="poi_cuisine_yakiniku">Yakiniku (grătar in stil japonez)</string>
     <string name="poi_cuisine_crepes">Crepuri</string>
     <string name="poi_cuisine_empanada">Împănada</string>
     <string name="poi_cuisine_gyros">Gyros (grecesc)</string>
@@ -3772,7 +3772,7 @@
     <string name="poi_zurkhaneh_sport">Sportul Zurkhaneh</string>
     <string name="poi_wrestling">Lupte libere</string>
     <string name="poi_weightlifting">Haltere</string>
-    <string name="poi_wakeboarding">Planșa de schi nautic</string>
+    <string name="poi_wakeboarding">Planșă de schi nautic</string>
     <string name="poi_ultimate">Ultimul</string>
     <string name="poi_table_soccer">Fotbal de masă</string>
     <string name="poi_speedway">Autostrada de viteză</string>
@@ -3885,7 +3885,7 @@
     <string name="poi_volcano_type_mud">Noroi</string>
     <string name="poi_volcano_type_lava_dome">Cupola de lavă</string>
     <string name="poi_volcano_type_caldera">Cazan</string>
-    <string name="poi_volcano_type_maar">Maar ( crater adânc)</string>
+    <string name="poi_volcano_type_maar">Maar (crater adânc)</string>
     <string name="poi_volcano_type_shield">Scut</string>
     <string name="poi_volcano_type_stratovolcano">Vulcanul Strato</string>
     <string name="poi_volcano_type_scoria">Scorbură</string>
@@ -4305,7 +4305,7 @@
     <string name="poi_payment_mastercard_contactless_no">MasterCard contactless neacceptat</string>
     <string name="poi_payment_visa_contactless_no">Visa contactless neacceptat</string>
     <string name="poi_shop_fuel">Benzinarie</string>
-    <string name="poi_printer_ink">Magazin pentru cartuse de imprimanta</string>
+    <string name="poi_printer_ink">Magazin pentru cartușe de imprimanta</string>
     <string name="poi_water_sports">Magazin pentru sporturi acvatice</string>
     <string name="poi_rice">Magazin de orez</string>
     <string name="poi_fish_pass">Trecătoare pentru pești</string>
@@ -4341,7 +4341,7 @@
     <string name="poi_dog_unleashed">Câini: nu este nevoie să fie ținuți în lesă</string>
     <string name="poi_dog_designated">Desemnat pentru câini</string>
     <string name="poi_first_aid_kit">Trusa de prim ajutor</string>
-    <string name="poi_playground_structure">Structura</string>
+    <string name="poi_playground_structure">Structură</string>
     <string name="poi_playground_balancebeam">Grindă de echilibru</string>
     <string name="poi_playground_playhouse">Casa de jocuri</string>
     <string name="poi_playground_sandpit">Groapa de nisip</string>

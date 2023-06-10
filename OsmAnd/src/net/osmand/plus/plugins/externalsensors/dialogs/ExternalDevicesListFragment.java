@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
@@ -207,7 +206,10 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ExternalDevicesListFragment fragment = new ExternalDevicesListFragment();
 			fragment.setRetainInstance(true);
-			fragment.show(manager, TAG);
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -251,6 +253,10 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 	public void changeSensorName(@NonNull String sensorId, @NonNull String newName) {
 		plugin.changeDeviceName(sensorId, newName);
 		updatePairedSensorsList();
+	}
+
+	@Override
+	public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
 	}
 
 	@Override
