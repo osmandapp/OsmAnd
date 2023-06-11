@@ -4583,4 +4583,6 @@
     <string name="poi_cemt_vib">VIb</string>
     <string name="poi_cemt_vic">VIc</string>
     <string name="poi_cemt_vii">VII</string>
+    <string name="poi_tunnel_name">Name des Tunnels</string>
+    <string name="poi_bridge_name">Name der Brücke</string>
 </resources>
