@@ -102,12 +102,9 @@ public class BottomSheetDialog extends Dialog {
 			}
 		});
 
-		container.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View view, MotionEvent motionEvent) {
-				// Consume the event and prevent it from falling through
-				return true;
-			}
+		container.setOnTouchListener((v, motionEvent) -> {
+			// Consume the event and prevent it from falling through
+			return true;
 		});
 
 		return res;

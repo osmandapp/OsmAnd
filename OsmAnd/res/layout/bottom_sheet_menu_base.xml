@@ -38,6 +38,7 @@
 			android:layout_gravity="bottom"
 			android:background="@drawable/shadow"
 			android:visibility="gone" />
+
 	</FrameLayout>
 
 </LinearLayout>
