@@ -33,6 +33,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import net.osmand.gpx.GPXInterpolator;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.PointAttribute.Elevation;
 import net.osmand.gpx.PointAttribute.Speed;
@@ -622,27 +623,28 @@ public class ChartUtils {
 			return null;
 		}
 
-		int lastIndex = values.size() - 1;
-
 		double STEP = 5;
 		int l = 10;
 		while (l > 0 && totalDistance / STEP > MAX_CHART_DATA_ITEMS) {
 			STEP = Math.max(STEP, totalDistance / (values.size() * l--));
 		}
+		GPXInterpolator interpolator = new GPXInterpolator(values.size(), totalDistance, STEP) {
+			@Override
+			public double getX(int index) {
+				return values.get(index).getX();
+			}
 
-		double[] calculatedDist = new double[(int) (totalDistance / STEP) + 1];
-		double[] calculatedH = new double[(int) (totalDistance / STEP) + 1];
-		int nextW = 0;
-		for (int k = 0; k < calculatedDist.length; k++) {
-			if (k > 0) {
-				calculatedDist[k] = calculatedDist[k - 1] + STEP;
+			@Override
+			public double getY(int index) {
+				return values.get(index).getY();
 			}
-			while (nextW < lastIndex && calculatedDist[k] > values.get(nextW).getX()) {
-				nextW++;
-			}
-			double pd = nextW == 0 ? 0 : values.get(nextW - 1).getX();
-			double ph = nextW == 0 ? values.get(0).getY() : values.get(nextW - 1).getY();
-			calculatedH[k] = ph + (values.get(nextW).getY() - ph) / (values.get(nextW).getX() - pd) * (calculatedDist[k] - pd);
+		};
+		interpolator.interpolate();
+
+		double[] calculatedDist = interpolator.getCalculatedX();
+		double[] calculatedH = interpolator.getCalculatedY();
+		if (calculatedDist == null || calculatedH == null) {
+			return null;
 		}
 
 		double SLOPE_PROXIMITY = Math.max(100, STEP * 2);
@@ -673,7 +675,7 @@ public class ChartUtils {
 		float lastXSameY = 0;
 		boolean hasSameY = false;
 		Entry lastEntry = null;
-		lastIndex = calculatedSlopeDist.length - 1;
+		int lastIndex = calculatedSlopeDist.length - 1;
 		float timeSpanInSeconds = analysis.timeSpan / 1000f;
 		for (int i = 0; i < calculatedSlopeDist.length; i++) {
 			if ((axisType == TIME_OF_DAY || axisType == TIME) && analysis.isTimeSpecified()) {

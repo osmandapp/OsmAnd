@@ -3,6 +3,7 @@ package net.osmand.gpx;
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
@@ -10,11 +11,15 @@ import net.osmand.gpx.PointAttribute.Elevation;
 import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.router.RouteColorize.ColorizationType;
 
+import org.apache.commons.logging.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class GPXTrackAnalysis {
+
+	public static final Log LOG = PlatformUtil.getLog(GPXTrackAnalysis.class);
 
 	public String name;
 
@@ -318,16 +323,24 @@ public class GPXTrackAnalysis {
 				}
 			}
 
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(0, numberOfPoints) {
+			double distance = Math.abs(s.segment.points.get(s.endPointInd).distance - s.segment.points.get(s.startPointInd).distance);
+			ElevationDiffsCalculator elevationDiffsCalcEx = new ElevationDiffsCalculator() {
+
 				@Override
-				public WptPt getPoint(int index) {
-					return s.get(index);
+				public double getElevation(int index) {
+					return s.get(index).ele;
+				}
+
+				@Override
+				public int getPointsCount() {
+					return s.getNumberOfPoints();
 				}
 			};
-			elevationDiffsCalc.calculateElevationDiffs();
-			diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
-			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+			elevationDiffsCalcEx.calculateElevationDiffs();
+			diffElevationUp += elevationDiffsCalcEx.getDiffElevationUp();
+			diffElevationDown += elevationDiffsCalcEx.getDiffElevationDown();
 		}
+
 		if (totalDistance < 0) {
 			getSpeedData().setHasData(false);
 			getElevationData().setHasData(false);
