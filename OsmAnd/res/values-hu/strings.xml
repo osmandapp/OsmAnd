@@ -5228,4 +5228,8 @@
     <string name="calculate_offline">Offline kalkuláció</string>
     <string name="calculate_offline_altitude_descr">A magasság kiszámítása offline, a magasságtérkép adatai alapján. Az eszköz által rögzített eltérő magasságokhoz korrekcióként használható.</string>
     <string name="rendering_attr_lightDetail_name">Fény részletek</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="revolutions_per_minute_unit">ford/perc</string>
+    <string name="routing_attr_allow_via_ferrata_description">Tervezés mászóutakon keresztül is.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Mászóút engedélyezése</string>
 </resources>
