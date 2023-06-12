@@ -393,12 +393,6 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.GEOTIFF_FILE) {
-				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-				if (plugin == null || !plugin.isHeightmapEnabled()) {
-					continue;
-				}
-			}
 			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
 				// Hide heightmaps of sqlite format
 				continue;

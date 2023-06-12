@@ -120,7 +120,7 @@ public class ViewCreator {
 
 		ImageView secondaryIcon = convertView.findViewById(R.id.secondary_icon);
 		if (secondaryIcon != null) {
-			setupSecondaryIcon(secondaryIcon, item.getSecondaryIcon());
+			setupSecondaryIcon(secondaryIcon, item.getSecondaryIcon(), item);
 		}
 
 		CompoundButton toggle = convertView.findViewById(R.id.toggle_item);
@@ -335,9 +335,10 @@ public class ViewCreator {
 		}
 	}
 
-	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @DrawableRes int secondaryIconId) {
+	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @DrawableRes int secondaryIconId, @NonNull ContextMenuItem item) {
 		if (secondaryIconId != INVALID_ID) {
 			int colorId = ColorUtilities.getDefaultIconColorId(nightMode);
+			colorId = item.useNaturalSecondIconColor() ? 0 : colorId;
 			Drawable drawable = iconsCache.getIcon(secondaryIconId, colorId);
 			secondaryIcon.setImageDrawable(drawable);
 			if (secondaryIconId == R.drawable.ic_action_additional_option) {

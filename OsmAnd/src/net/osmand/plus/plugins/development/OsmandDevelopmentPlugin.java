@@ -74,7 +74,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
 		ENABLE_HEIGHTMAP = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
-		ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeGlobal().makeShared().cache();
+		ENABLE_3D_MAPS = settings.ENABLE_3D_MAPS;
 		DISABLE_VERTEX_HILLSHADE_3D = registerBooleanPreference("disable_vertex_hillshade_3d", true).makeGlobal().makeShared().cache();
 		GENERATE_SLOPE_FROM_3D_MAPS = registerBooleanPreference("generate_slope_from_3d_maps", true).makeGlobal().makeShared().cache();
 		GENERATE_HILLSHADE_FROM_3D_MAPS = registerBooleanPreference("generate_hillshade_from_3d_maps", true).makeGlobal().makeShared().cache();

@@ -7,6 +7,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_BORDERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
@@ -19,8 +20,10 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.chooseplan.button.PurchasingUtils.PROMO_PREFIX;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
@@ -51,10 +54,12 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
@@ -228,6 +233,8 @@ public class ConfigureMapMenu {
 		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 
+		addRelief3DItem(adapter, activity, nightMode, listener);
+
 		selected = settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.get();
 		adapter.addItem(new ContextMenuItem(MAP_BORDERS_ID)
 				.setTitleId(R.string.show_borders_of_downloaded_maps, activity)
@@ -236,6 +243,40 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_download)
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
+	}
+
+	private void addRelief3DItem(@NonNull ContextMenuAdapter adapter,
+	                             @NonNull MapActivity activity,
+	                             boolean nightMode,
+	                             MapLayerMenuListener listener) {
+		OsmandApplication app = activity.getMyApplication();
+		if (app.useOpenGlRenderer()) {
+			boolean enabled3DMode = app.getSettings().ENABLE_3D_MAPS.get();
+			ContextMenuItem item = new ContextMenuItem(MAP_ENABLE_3D_MAPS_ID)
+					.setLayout(R.layout.list_item_osmpro_icon)
+					.setTitleId(R.string.relief_3d, app)
+					.setIcon(R.drawable.ic_action_3d_relief)
+					.setUseNaturalSecondIconColor(true)
+					.setSecondaryIcon(!InAppPurchaseHelper.isOsmAndProAvailable(app) ? (nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day) : INVALID_ID)
+					.setListener(listener);
+
+			if (!Version.isPaidVersion(app)) {
+				item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+			} else {
+				item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
+				item.setSelected(enabled3DMode);
+				item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
+			}
+
+			ContextMenuItem terrainItem = adapter.getItemById(TERRAIN_ID);
+			if (terrainItem == null) {
+				terrainItem = adapter.getItemById(PROMO_PREFIX + TERRAIN_ID);
+			}
+			if (terrainItem != null) {
+				item.setOrder(terrainItem.getOrder());
+			}
+			adapter.addItem(item);
+		}
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,

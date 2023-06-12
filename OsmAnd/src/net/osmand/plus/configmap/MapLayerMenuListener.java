@@ -7,14 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.views.MapLayers;
@@ -103,6 +109,13 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			return false;
 		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
 			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
+		} else if (itemId == R.string.relief_3d) {
+			if (Version.isPaidVersion(mapActivity.getMyApplication())) {
+				settings.ENABLE_3D_MAPS.set(isChecked);
+				item.setDescription(mapActivity.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+			} else {
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
+			}
 		}
 		if (uiAdapter != null) {
 			uiAdapter.onDataSetChanged();

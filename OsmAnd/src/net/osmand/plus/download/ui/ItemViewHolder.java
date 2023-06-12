@@ -2,6 +2,7 @@ package net.osmand.plus.download.ui;
 
 import static net.osmand.plus.download.DownloadActivityType.DEPTH_CONTOUR_FILE;
 import static net.osmand.plus.download.DownloadActivityType.DEPTH_MAP_FILE;
+import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
@@ -106,6 +107,7 @@ public class ItemViewHolder {
 		DOWNLOAD,
 		ASK_FOR_SEAMARKS_PLUGIN,
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
+		ASK_FOR_RELIEF_3D_PURCHASE,
 		ASK_FOR_SRTM_PLUGIN_ENABLE,
 		ASK_FOR_FULL_VERSION_PURCHASE,
 		ASK_FOR_DEPTH_CONTOURS_PURCHASE,
@@ -471,6 +473,8 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((item.getType() == DEPTH_CONTOUR_FILE || item.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
+			} else if (type == GEOTIFF_FILE && !Version.isPaidVersion(context.getMyApplication())) {
+				action = RightButtonAction.ASK_FOR_RELIEF_3D_PURCHASE;
 			}
 		}
 		return action;
@@ -492,6 +496,9 @@ public class ItemViewHolder {
 						case ASK_FOR_WEATHER_PURCHASE:
 							context.getMyApplication().logEvent("in_app_purchase_show_from_weather_context_menu");
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WEATHER);
+							break;
+						case ASK_FOR_RELIEF_3D_PURCHASE:
+							ChoosePlanFragment.showInstance(context, OsmAndFeature.RELIEF_3D);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.NAUTICAL);
