@@ -24,6 +24,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -165,6 +166,31 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		if (foldersHelper != null) {
 			foldersHelper.showItemOptionsMenu(trackItem, view, this);
 		}
+	}
+
+	@Override
+	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+		showTracksSelection();
+	}
+
+	@Override
+	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
+		showTracksSelection();
+	}
+
+	private void showTracksSelection() {
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null) {
+			foldersHelper.showTracksSelection(selectedFolder, this);
+		}
+	}
+
+	@Override
+	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
+		if (group instanceof TrackFolder) {
+			setSelectedFolder((TrackFolder) group);
+		}
+		updateContent();
 	}
 
 	@Override

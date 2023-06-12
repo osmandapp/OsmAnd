@@ -227,7 +227,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Override
-	public void onTracksGroupClicked(@NonNull TracksGroup group) {
+	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
 		if (group instanceof TrackFolder) {
 			openTrackFolder((TrackFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
@@ -238,6 +238,16 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 		trackFoldersHelper.showItemOptionsMenu(trackItem, view, this);
+	}
+
+	@Override
+	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+		trackFoldersHelper.showTracksSelection(selectedFolder, this);
+	}
+
+	@Override
+	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
+		trackFoldersHelper.showTracksSelection(selectedFolder, this);
 	}
 
 	@Override
