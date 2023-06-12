@@ -115,6 +115,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -1076,36 +1078,21 @@ public class AndroidUtils {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
-	public static String createNewFileName(String oldName) {
-		int firstDotIndex = oldName.indexOf('.');
-		String nameWithoutExt = oldName.substring(0, firstDotIndex);
-		String ext = oldName.substring(firstDotIndex);
+	@NonNull
+	public static String createNewFileName(@NonNull String fileName) {
+		int index = fileName.lastIndexOf('.');
+		String name = fileName.substring(0, index);
+		String extension = fileName.substring(index);
 
-		StringBuilder numberSection = new StringBuilder();
-		int i = nameWithoutExt.length() - 1;
-		boolean hasNameNumberSection = false;
-		do {
-			char c = nameWithoutExt.charAt(i);
-			if (Character.isDigit(c)) {
-				numberSection.insert(0, c);
-			} else {
-				if (Character.isSpaceChar(c) && numberSection.length() > 0) {
-					hasNameNumberSection = true;
-				}
-				break;
-			}
-			i--;
-		} while (i >= 0);
-		int newNumberValue = Integer.parseInt(hasNameNumberSection ? numberSection.toString() : "0") + 1;
+		Matcher matcher = Pattern.compile("\\s[(]\\d+[)]$").matcher(name);
+		if (matcher.find()) {
+			int startIndex = name.lastIndexOf('(');
+			int endIndex = name.lastIndexOf(')');
+			int counter = Algorithms.parseIntSilently(name.substring(startIndex + 1, endIndex), 1);
 
-		String newName;
-		if (newNumberValue == 1) {
-			newName = nameWithoutExt + " " + newNumberValue + ext;
-		} else {
-			newName = nameWithoutExt.substring(0, i) + " " + newNumberValue + ext;
+			return name.substring(0, startIndex + 1) + (counter + 1) + ")" + extension;
 		}
-
-		return newName;
+		return name + " (2)" + extension;
 	}
 
 	public static StringBuilder formatWarnings(List<String> warnings) {
