@@ -28,12 +28,9 @@ class HistoryScreen(
         val historyHelper = SearchHistoryHelper.getInstance(app)
         val results = historyHelper.getHistoryEntries(true)
         val location = app.settings.lastKnownMapLocation
-
-        var collectionSize = 0
-        for (result in results) {
-            if (collectionSize == contentLimit) {
-                break
-            }
+        val resultsSize = results.size
+        val limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
+        for (result in limitedResults) {
             val searchResult =
                 SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
             val listItem = QuickSearchListItem(app, searchResult)
@@ -64,7 +61,6 @@ class HistoryScreen(
             address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
             rowBuilder.addText(address)
             listBuilder.addItem(rowBuilder.build())
-            collectionSize++
         }
         val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
@@ -75,8 +71,8 @@ class HistoryScreen(
                             carContext, R.drawable.ic_action_search_dark)).build())
                 .setOnClickListener { openSearch() }
                 .build())
-        return PlaceListNavigationTemplate.Builder()
-            .setItemList(listBuilder.build())
+        return ListTemplate.Builder()
+            .setSingleList(listBuilder.build())
             .setTitle(app.getString(R.string.shared_string_history))
             .setHeaderAction(Action.BACK)
             .setActionStrip(actionStripBuilder.build())

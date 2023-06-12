@@ -78,8 +78,8 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.NetworkRouteSelectionTask;
-import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -164,6 +164,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private final List<WptPt> pointsCache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
+	private List<SelectedGpxFile> androidAutoDisplayTracks;
 
 	private Paint paintOuterRect;
 	private Paint paintInnerRect;
@@ -337,7 +338,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
-		List<SelectedGpxFile> visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+		List<SelectedGpxFile> visibleGPXFiles;
+		if (getMapView().isCarView()) {
+			if (androidAutoDisplayTracks == null) {
+				visibleGPXFiles = new ArrayList<>();
+			} else {
+				visibleGPXFiles = androidAutoDisplayTracks;
+			}
+		} else {
+			visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
+		}
 
 		boolean tmpVisibleTrackChanged = updateTmpVisibleTrack(visibleGPXFiles);
 
@@ -1874,5 +1884,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (group != null) {
 			mapMarkersHelper.runSynchronization(group);
 		}
+	}
+
+	public void setAndroidAutoDisplayTracks(@Nullable List<SelectedGpxFile> tracks) {
+		androidAutoDisplayTracks = tracks;
 	}
 }

@@ -113,7 +113,6 @@ class TracksFoldersScreen(
                 settingsAction,
                 surfaceRenderer,
                 trackTab)) { }
-        finish()
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {

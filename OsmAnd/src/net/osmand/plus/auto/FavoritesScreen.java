@@ -92,14 +92,12 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 
 	private void setupFavorites(ItemList.Builder listBuilder) {
 		LatLon location = getApp().getSettings().getLastKnownMapLocation();
-		int collectionSize = 0;
 		List<FavouritePoint> favoritesPoints = getFavorites();
-		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setAndroidAutoFavouritePoints(favoritesPoints);
+		int favoritesPointsSize = favoritesPoints.size();
+		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setAndroidAutoFavouritePoints(limitedFavoritesPoints);
 		getApp().getOsmandMap().refreshMap();
-		for (FavouritePoint point : favoritesPoints) {
-			if (collectionSize == getContentLimit()) {
-				break;
-			}
+		for (FavouritePoint point : limitedFavoritesPoints) {
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
@@ -118,7 +116,6 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 					.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
-			collectionSize++;
 		}
 	}
 

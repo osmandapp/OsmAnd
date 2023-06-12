@@ -94,7 +94,10 @@ class POIScreen(
     private fun setupPOI(listBuilder: ItemList.Builder, searchResults: List<SearchResult>?) {
         val location = app.settings.lastKnownMapLocation
         searchResults?.let {
-            for (point in searchResults) {
+            val searchResultsSize = searchResults.size
+            val limitedSearchResults =
+                searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
+            for (point in limitedSearchResults) {
                 val title = point.localeName
                 var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
                 if (groupIcon == null) {

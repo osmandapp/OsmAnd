@@ -384,7 +384,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 
-		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
+		boolean isCarView = getMapView().isCarView();
+		if ((tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) && !isCarView || isCarView && Algorithms.isEmpty(androidAutoMarkers)) {
 			clearVectorLinesCollections();
 			return;
 		}
@@ -394,8 +395,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		updateBitmaps(false);
 
+		List<MapMarker> markers = isCarView ? androidAutoMarkers : markersHelper.getMapMarkers();
 		if (mapRenderer == null) {
-			for (MapMarker marker : markersHelper.getMapMarkers()) {
+			for (MapMarker marker : markers) {
 				if (isMarkerVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 						&& !isInMotion(marker) && !isSynced(marker)) {
 					Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
@@ -410,66 +412,67 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 
-		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer != null) {
-			drawLineAndText(canvas, tileBox, nightMode);
-		} else {
-			clearVectorLinesCollections();
-		}
-
-		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
-			LatLon loc = tileBox.getCenterLatLon();
-			int i = 0;
-			for (MapMarker marker : markersHelper.getMapMarkers()) {
-				if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
-					canvas.save();
-					float bearing;
-					float radiusBearing = DIST_TO_SHOW * tileBox.getDensity();
-					float cx;
-					float cy;
-					if (mapRenderer != null) {
-						PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
-						PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-						if (center31 == null) {
-							continue;
+		if (!getMapView().isCarView()) {
+			if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && mapRenderer != null) {
+				drawLineAndText(canvas, tileBox, nightMode);
+			} else {
+				clearVectorLinesCollections();
+			}
+			if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
+				LatLon loc = tileBox.getCenterLatLon();
+				int i = 0;
+				for (MapMarker marker : markersHelper.getMapMarkers()) {
+					if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
+						canvas.save();
+						float bearing;
+						float radiusBearing = DIST_TO_SHOW * tileBox.getDensity();
+						float cx;
+						float cy;
+						if (mapRenderer != null) {
+							PointI marker31 = NativeUtilities.getPoint31FromLatLon(marker.getLatitude(), marker.getLongitude());
+							PointI center31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+							if (center31 == null) {
+								continue;
+							}
+							Pair<PointF, PointF> line =
+									NativeUtilities.clipLineInVisibleRect(mapRenderer, tileBox, center31, marker31);
+							if (line == null) {
+								continue;
+							}
+							PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+							cx = centerPixel.x;
+							cy = centerPixel.y;
+							bearing = (float) getAngleBetween(centerPixel, line.second) - tileBox.getRotate();
+						} else {
+							QuadPoint cp = tileBox.getCenterPixelPoint();
+							cx = cp.x;
+							cy = cp.y;
+							net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
+									marker.getLatitude(), marker.getLongitude(), calculations);
+							bearing = calculations[1] - 90;
 						}
-						Pair<PointF, PointF> line =
-								NativeUtilities.clipLineInVisibleRect(mapRenderer, tileBox, center31, marker31);
-						if (line == null) {
-							continue;
-						}
-						PointF centerPixel = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-						cx = centerPixel.x;
-						cy = centerPixel.y;
-						bearing = (float) getAngleBetween(centerPixel, line.second) - tileBox.getRotate();
-					} else {
-						QuadPoint cp = tileBox.getCenterPixelPoint();
-						cx = cp.x;
-						cy = cp.y;
-						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
-								marker.getLatitude(), marker.getLongitude(), calculations);
-						bearing = calculations[1] - 90;
+						canvas.rotate(bearing, cx, cy);
+						canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
+						canvas.drawBitmap(arrowShadow, cx, cy, bitmapPaint);
+						canvas.drawBitmap(arrowToDestination, cx, cy, getMarkerDestPaint(marker.colorIndex));
+						canvas.drawBitmap(arrowLight, cx, cy, bitmapPaint);
+						canvas.restore();
 					}
-					canvas.rotate(bearing, cx, cy);
-					canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
-					canvas.drawBitmap(arrowShadow, cx, cy, bitmapPaint);
-					canvas.drawBitmap(arrowToDestination, cx, cy, getMarkerDestPaint(marker.colorIndex));
-					canvas.drawBitmap(arrowLight, cx, cy, bitmapPaint);
-					canvas.restore();
-				}
-				i++;
-				if (i > displayedWidgets - 1) {
-					break;
+					i++;
+					if (i > displayedWidgets - 1) {
+						break;
+					}
 				}
 			}
-		}
-		Object movableObject = contextMenuLayer.getMoveableObject();
-		if (movableObject instanceof MapMarker) {
-			MapMarker movableMarker = (MapMarker) movableObject;
-			setMovableObject(movableMarker.getLatitude(), movableMarker.getLongitude());
-			drawMovableMarker(canvas, tileBox, (MapMarker) movableObject);
-		}
-		if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
-			cancelMovableObject();
+			Object movableObject = contextMenuLayer.getMoveableObject();
+			if (movableObject instanceof MapMarker) {
+				MapMarker movableMarker = (MapMarker) movableObject;
+				setMovableObject(movableMarker.getLatitude(), movableMarker.getLongitude());
+				drawMovableMarker(canvas, tileBox, (MapMarker) movableObject);
+			}
+			if (this.movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
+				cancelMovableObject();
+			}
 		}
 	}
 
