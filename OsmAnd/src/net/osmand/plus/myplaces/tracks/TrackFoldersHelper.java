@@ -110,10 +110,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
-				.setOnClickListener(v -> {
-					FragmentManager manager = activity.getSupportFragmentManager();
-					TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
-				}).create());
+				.setOnClickListener(v -> showTracksSelection(trackFolder, fragment)).create());
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.add_new_folder)
@@ -136,7 +133,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.show(displayData);
+		PopUpMenu.showSystemMenu(displayData);
 	}
 
 	public void showItemOptionsMenu(@NonNull TrackItem trackItem, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
@@ -196,7 +193,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.show(displayData);
+		PopUpMenu.showSystemMenu(displayData);
 	}
 
 	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups,
@@ -234,7 +231,12 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.show(displayData);
+		PopUpMenu.showSystemMenu(displayData);
+	}
+
+	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
 	}
 
 	@NonNull
