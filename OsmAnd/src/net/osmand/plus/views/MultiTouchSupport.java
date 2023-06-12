@@ -95,7 +95,8 @@ public class MultiTouchSupport {
 	private static final int TILT_Y_THRESHOLD_PX = 10;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
 	private static final double DELTA_DISTANCE_THRESHOLD = 0.04;
-	private static final double ANGLE_THRESHOLD = 4;
+	private static final float TILT_ANGLE_THRESHOLD = 20;
+	private static final double DELTA_ANGLE_THRESHOLD = 4;
 	private static final float MAX_DELTA_ZOOM = 4;
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -178,18 +179,18 @@ public class MultiTouchSupport {
 					float dy1 = Math.abs(firstFingerStart.y - y1);
 					float dy2 = Math.abs(secondFingerStart.y - y2);
 					float startDy = Math.abs(secondFingerStart.y - firstFingerStart.y);
+					boolean useZoom = isZoomRotationGesture(distance, angle, angleDefined);
 					if (dx1 < TILT_X_THRESHOLD_PX && dx2 < TILT_X_THRESHOLD_PX
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
-							&& startDy < TILT_Y_THRESHOLD_PX * 6
+							&& (Math.abs(angleStarted) < TILT_ANGLE_THRESHOLD || 180 - Math.abs(angleStarted) < TILT_ANGLE_THRESHOLD)
 							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX
 							&& startedMode == MODE.NONE
-							&& !isZoomRotationGesture(distance, angle, angleDefined)
+							&& !useZoom
 							|| startedMode == MODE.TILT) {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (isZoomRotationGesture(distance, angle, angleDefined)
-							&& (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
+					} else if (useZoom && (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
 						if (startedMode == MODE.NONE) {
 							angleRelative = 0;
 							zoomRelative = 0;
@@ -211,7 +212,7 @@ public class MultiTouchSupport {
 
 	private boolean isZoomRotationGesture(float distance, float angle, boolean angleDefined) {
 		return (Math.abs(1 - distance / zoomStartedDistance) > DELTA_DISTANCE_THRESHOLD
-				|| Math.abs(MapUtils.unifyRotationTo360(angle - angleStarted)) > ANGLE_THRESHOLD && angleDefined);
+				|| Math.abs(MapUtils.unifyRotationTo360(angle - angleStarted)) > DELTA_ANGLE_THRESHOLD && angleDefined);
 	}
 
 	public PointF getCenterPoint() {
