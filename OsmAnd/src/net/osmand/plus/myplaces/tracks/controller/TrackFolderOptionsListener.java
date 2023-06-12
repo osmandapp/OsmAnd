@@ -1,4 +1,4 @@
-package net.osmand.plus.track.helpers.folder;
+package net.osmand.plus.myplaces.tracks.controller;
 
 import androidx.annotation.NonNull;
 

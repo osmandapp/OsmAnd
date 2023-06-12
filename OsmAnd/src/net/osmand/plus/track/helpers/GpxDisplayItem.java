@@ -6,8 +6,8 @@ import android.graphics.Matrix;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
 
 public class GpxDisplayItem {
 

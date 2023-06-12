@@ -483,11 +483,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	@Override
 	public void onConfigurationChanged(@NonNull Configuration newConfig) {
+		Resources resources = getResources();
+		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
+		resources = getBaseContext().getResources();
+		resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
+
 		Locale preferredLocale = localeHelper.getPreferredLocale();
 		if (preferredLocale != null && !Objects.equals(newConfig.locale.getLanguage(), preferredLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
-			Resources resources = getBaseContext().getResources();
-			resources.updateConfiguration(newConfig, resources.getDisplayMetrics());
 			Locale.setDefault(preferredLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
@@ -596,8 +600,8 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
-									   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
-									   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			settings.VOICE_MUTE.setModeValue(appMode, true);

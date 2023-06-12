@@ -21,7 +21,8 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.UiUtilities
 
-class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener, DeviceClickListener {
+class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener,
+    DeviceClickListener {
 
     private var currentState = SearchStates.NOTHING_FOUND
     private var stateNoBluetoothView: View? = null
@@ -49,7 +50,10 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
                 }
                 fragment.arguments = args
                 fragment.retainInstance = true
-                fragment.show(manager, TAG)
+                manager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment, TAG)
+                    .addToBackStack(null)
+                    .commitAllowingStateLoss()
             }
         }
     }
@@ -144,7 +148,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentState = if (!plugin.isBlueToothEnabled) {
+        currentState = if (!AndroidUtils.isBluetoothEnabled(requireActivity())) {
             SearchStates.NO_BLUETOOTH
         } else {
             SearchStates.SEARCHING
@@ -153,7 +157,8 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     override fun onResume() {
         super.onResume()
-        if (currentState == SearchStates.NO_BLUETOOTH && plugin.isBlueToothEnabled) {
+        if (currentState == SearchStates.NO_BLUETOOTH && AndroidUtils.isBluetoothEnabled(
+                requireActivity())) {
             currentState = SearchStates.SEARCHING
         }
         if (currentState == SearchStates.SEARCHING) {

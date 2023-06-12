@@ -2158,19 +2158,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getLocaleHelper().setLanguage(this);
 
-		List<Fragment> fragments = getSupportFragmentManager().getFragments();
-		for (Fragment fragment : fragments) {
-			getSupportFragmentManager()
-					.beginTransaction()
-					.detach(fragment)
-					.attach(fragment)
-					.commit();
-		}
+		app.runInUIThread(() -> {
+			List<Fragment> fragments = getSupportFragmentManager().getFragments();
+			for (Fragment fragment : fragments) {
+				getSupportFragmentManager()
+						.beginTransaction()
+						.detach(fragment)
+						.attach(fragment)
+						.commit();
+			}
 
-		DashboardOnMap dashboard = getDashboard();
-		if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
-			dashboard.refreshContent(true);
-		}
+			DashboardOnMap dashboard = getDashboard();
+			if (dashboard.isVisible() && !dashboard.isCurrentTypeHasIndividualFragment()) {
+				dashboard.refreshContent(true);
+			}
+		});
 	}
 
 	@Override

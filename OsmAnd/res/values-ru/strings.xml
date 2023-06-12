@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Видимые</string>
+    <string name="shared_string_visible">Виден</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -3501,7 +3501,7 @@
     <string name="context_menu_actions">Действия контекстного меню</string>
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы из %1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
-    <string name="shared_string_hidden">Скрыты</string>
+    <string name="shared_string_hidden">Скрыт</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
     <string name="main_actions_descr">Только четыре кнопки.</string>
@@ -5208,4 +5208,18 @@
     <string name="shared_string_visible_on_map">Видно на карте</string>
     <string name="number_of_tracks">%1$s треков</string>
     <string name="delete_track_folder_dialog_message">Это приведет к удалению папки «%1$s» и всех треков (%2$s) содержащихся в ней.</string>
+    <string name="rendering_attr_lightDetail_description">По умолчанию: название плавучего знака (Light character.group.period), выберите дополнительную информацию о секторах 1-3 или сектор 1,2,3,4,5 светового знака</string>
+    <string name="rendering_attr_lightDetail_name">Навигационные огни</string>
+    <string name="rendering_value_sectors_name">Сектора</string>
+    <string name="rendering_value_sector1_name">Сектор 1</string>
+    <string name="rendering_value_sector2_name">Сектор 2</string>
+    <string name="rendering_value_sector3_name">Сектор 3</string>
+    <string name="rendering_value_sector4_name">Сектор 4</string>
+    <string name="rendering_value_sector5_name">Сектор 5</string>
+    <string name="rendering_value_name_only_name">Только название</string>
+    <string name="save_track_external_sensors_data">Данные</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Подключённых датчиков данного типа нет</string>
+    <string name="write_data_from_sensor_to_track">Записать данные с внешних датчиков в GPX-файл во время записи маршрута.</string>
+    <string name="external_sensors_not_found">Датчики не найдены</string>
+    <string name="external_sensors_source_of_data">Источник данных</string>
 </resources>

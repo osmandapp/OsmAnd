@@ -132,11 +132,13 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getTranslatedItemName(Context context, String item) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
 		if (item.equals(LAYER_OSM_VECTOR)) {
 			return context.getString(R.string.vector_data);
 		} else {
 			return item.endsWith(IndexConstants.SQLITE_EXT)
-					? Algorithms.getFileNameWithoutExtension(item)
+					? settings.getTileSourceTitle(item)
 					: item;
 		}
 	}

@@ -584,7 +584,7 @@
     <string name="vector_data_missing">Descarregar dados offline para utilizar mapas offline.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nToque longo para opções"</string>
+\nToque longo para ver opções"</string>
     <string name="local_index_installed">Versão local</string>
     <string name="local_index_items_backuped">%1$d de %2$d itens desativados.</string>
     <string name="local_index_items_deleted">%1$d de %2$d itens eliminados.</string>
@@ -1426,7 +1426,7 @@
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_coloredBuildings_name">Colorir edifícios por tipo</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de caminhada (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Escala de caminhada alpina</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhadas</string>
     <string name="rendering_attr_showCycleRoutes_name">Rotas para bicicletas</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
@@ -2150,7 +2150,7 @@
     <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. É suave para os olhos no modo noturno. Características principais: curvas de nível, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
     <string name="topo_render_descr">Para caminhadas, pedestrianismo e ciclismo de natureza. Legível em exteriores. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
     <string name="touring_view_render_descr">Estilo turístico com alto contraste e máximo detalhe. Inclui todas as opções do estilo OsmAnd padrão, enquanto mostra o máximo de detalhes possíveis, particularmente estradas, caminhos e outras formas de viajar. Distinção clara do \"atlas turístico\" entre as categorias de estrada. Adequado para uso diurno, noturno e ao ar livre.</string>
-    <string name="default_render_descr">Estilo de propósito geral. Renderização simplificada e limpa em cidades densamente povoadas. Características principais: curvas de nível, rotas, qualidade da superfície, restrições de acesso, placas das referências da estradas, renderização de caminhos de acordo com a escala SAC, características desportivas de águas brancas.</string>
+    <string name="default_render_descr">Estilo de utilização geral. As cidades densamente povoadas são mostradas simplificadas e de forma clara. Características principais: curvas de nível, rotas, qualidade da superfície, restrições de acesso, placas das referências da estradas, renderização de caminhos de acordo com a escala SAC/CAI, características desportivas de águas bravas.</string>
     <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
     <string name="open_wikipedia_link_online_description">A hiperligação será aberta no navegador de Internet.</string>
     <string name="read_wikipedia_offline_description">Obtenha uma subscrição do OsmAnd Live para ler artigos da Wikipédia e da Wikivoyage desligado da Internet.</string>
@@ -2482,8 +2482,8 @@
     <string name="driving_region_australia">Austrália</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
-    <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC.</string>
+    <string name="rendering_attr_alpineHiking_description">Apresentar caminhos de acordo com a escala de SAC/CAI.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Apresentar caminhos de acordo com traços OSMC.</string>
     <string name="map_widget_intermediate_time">Hora intermédia</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de direções de navegação automatizada do OSM) é uma aplicação de mapas e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM.
 \n
@@ -4745,7 +4745,7 @@
     <string name="compass_visible_if_map_rotated">Visível se o mapa estiver rodado</string>
     <string name="compass_always_hidden">Sempre oculto</string>
     <string name="compass_visible_if_map_rotated_desc">Oculto quando o Norte está acima</string>
-    <string name="compass_click_desc">Dica: toque na bússola para alterar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Dica: toque no botão da bússola para alterar o modo de orientação do mapa.</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
@@ -5211,4 +5211,32 @@
     <string name="bluetooth_not_supported">Bluetooth não suportado</string>
     <string name="ble_search_again">Pesquisar novamente</string>
     <string name="ant_plus_nothing_found_text">Não foi possível encontrar nenhum sensor</string>
+    <string name="write_data_from_sensor_to_track">Guardar dados de sensores externos no ficheiro GPX durante a gravação da viagem.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Não há sensores conectados deste tipo</string>
+    <string name="external_sensors_not_found">Sensores não encontrados</string>
+    <string name="external_sensors_source_of_data">Fonte dos dados</string>
+    <string name="rssi_widget_desc">Mostra o nível RSSI do seu dispositivo externo.</string>
+    <string name="map_widget_rssi">Rssi (intensidade do sinal recebido)</string>
+    <string name="tracks_empty_folder_description">Esta pasta ainda não tem nenhum trilho.</string>
+    <string name="shared_string_new_track">Novo trilho</string>
+    <string name="shared_string_visible_on_map">Visível no mapa</string>
+    <string name="poi_categories">Categorias de POI</string>
+    <string name="no_poi_for_category">POI não encontrado</string>
+    <string name="save_track_external_sensors_data">Dados</string>
+    <string name="tracks_empty_folder">Pasta vazia</string>
+    <string name="track_not_recorded">Não gravado</string>
+    <string name="delete_track_folder_dialog_message">Isto eliminará a pasta \"%1$s\" e todos os trilhos (%2$s) incluídos.</string>
+    <string name="delete_folder_question">Eliminar pasta\?</string>
+    <string name="delete_folder">Eliminar pasta</string>
+    <string name="show_all_tracks_on_the_map">Mostrar todos os trilhos no mapa</string>
+    <string name="rendering_value_sacScale_name">Escala SAC</string>
+    <string name="rendering_value_caiScale_name">Escala CAI</string>
+    <string name="map_2d_mode_action">Modo 2D</string>
+    <string name="map_3d_mode_action">Modo 3D</string>
+    <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>
+    <string name="visible_in_3d_mode">Visível no modo 3D</string>
+    <string name="map_3d_mode_description">Toque no mapa com dois dedos e mova-os para cima e para baixo para ajustar a inclinação do mapa.</string>
+    <string name="calculate_offline">Calcular offline</string>
+    <string name="calculate_offline_altitude_descr">Calcula a elevação sem ligação à Internet, com base nos dados do mapa de altitude. As diferenças em relação à altitude registada pelo dispositivo podem ser usadas como correção da elevação.</string>
+    <string name="error_calculate">O resultado do cálculo está vazio</string>
 </resources>

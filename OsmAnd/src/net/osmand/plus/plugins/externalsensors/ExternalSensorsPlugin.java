@@ -16,16 +16,25 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -37,11 +46,13 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -128,6 +139,32 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		return devicesHelper.getPairedDevices();
 	}
 
+	private boolean isDeviceForWidgetFieldType(@NonNull AbstractDevice<?> device, @NonNull SensorWidgetDataFieldType fieldType) {
+		for (AbstractSensor sensor : device.getSensors()) {
+			for (SensorWidgetDataFieldType type :
+					sensor.getSupportedWidgetDataFieldTypes()) {
+				if (type == fieldType) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	public List<AbstractDevice<?>> getPairedDevicesByWidgetType(@NonNull SensorWidgetDataFieldType fieldType) {
+		List<AbstractDevice<?>> devices = getPairedDevices();
+		ArrayList<AbstractDevice<?>> filteredDevices = new ArrayList<>();
+		for (AbstractDevice<?> device : devices) {
+			if (isDeviceForWidgetFieldType(device, fieldType)) {
+				filteredDevices.add(device);
+			}
+		}
+
+		return filteredDevices;
+	}
+
+
 	@Nullable
 	public AbstractDevice<?> getPairedDeviceById(String deviceId) {
 		return devicesHelper.getPairedDeviceById(deviceId);
@@ -145,30 +182,26 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@Override
 	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
-		Set<String> deviceIdsEnabledForWritingToTrack = getEnabledDevicesToWriteToTrack();
-		for (AbstractDevice<?> device : devicesHelper.getDevices()) {
-			if (devicesHelper.isDeviceEnabled(device) && deviceIdsEnabledForWritingToTrack.contains(device.getDeviceId())
-					&& device.isConnected()) {
+		for(WriteToGpxWidgetType writeToGpxWidgetType : WriteToGpxWidgetType.values()){
+			attachDeviceSensorInfoToRecordedTrack(writeToGpxWidgetType, json);
+		}
+	}
+
+	private void attachDeviceSensorInfoToRecordedTrack(WriteToGpxWidgetType writeToGpxWidgetType, JSONObject json){
+		ApplicationMode selectedAppMode = settings.getApplicationMode();
+		CommonPreference<String> preference = getPrefSettingsForWidgetType(writeToGpxWidgetType);
+		String speedDeviceId = preference.getModeValue(selectedAppMode);
+		if (!Algorithms.isEmpty(speedDeviceId)) {
+			AbstractDevice<?> device = devicesHelper.getDevice(speedDeviceId);
+			if (device != null) {
 				try {
-					device.writeSensorDataToJson(json);
+					device.writeSensorDataToJson(json, writeToGpxWidgetType.getSensorType());
 				} catch (JSONException e) {
 					LOG.error(e);
 				}
 			}
 		}
 	}
-
-	private Set<String> getEnabledDevicesToWriteToTrack() {
-		ApplicationMode selectedAppMode = settings.getApplicationMode();
-		Set<String> linkedSensors = new HashSet<>();
-		linkedSensors.add(SPEED_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(POWER_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		linkedSensors.add(TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE.getModeValue(selectedAppMode));
-		return linkedSensors;
-	}
-
 
 	@Override
 	public void mapActivityCreate(@NonNull MapActivity activity) {
@@ -256,10 +289,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 						return true;
 					}));
 		}
-	}
-
-	public boolean isBlueToothEnabled() {
-		return devicesHelper.isBLEEnabled();
 	}
 
 	public void searchAntDevices() {
@@ -361,4 +390,24 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		throw new IllegalArgumentException("Unknown widget type");
 	}
 
+	@Override
+	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
+	                              float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+		SensorAttributesUtils.onAnalysePoint(analysis, point, distance, timeDiff, firstPoint, lastPoint);
+	}
+
+	@Nullable
+	@Override
+	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
+	                                                @NonNull GPXTrackAnalysis analysis,
+	                                                @NonNull GPXDataSetType graphType,
+	                                                @NonNull GPXDataSetAxisType axisType,
+	                                                boolean calcWithoutGaps, boolean useRightAxis) {
+		return SensorAttributesUtils.getOrderedLineDataSet(app, chart, analysis, graphType, axisType, calcWithoutGaps, useRightAxis);
+	}
+
+	@Override
+	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+		SensorAttributesUtils.getAvailableGPXDataSetTypes(analysis, availableTypes);
+	}
 }

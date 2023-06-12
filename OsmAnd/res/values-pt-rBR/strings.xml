@@ -5193,8 +5193,18 @@
     <string name="rendering_value_sector1_name">Setor 1</string>
     <string name="rendering_value_sector2_name">Setor 2</string>
     <string name="rendering_value_sector3_name">Setor 3</string>
-    <string name="poi_categories">Categorías de POI</string>
+    <string name="poi_categories">Categorias de POI</string>
     <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="external_device_characteristic_systolic">Sistólica</string>
     <string name="external_device_characteristic_diastolic">Diastólica</string>
+    <string name="delete_folder">Excluir pasta</string>
+    <string name="shared_string_visible_on_map">Visível no mapa</string>
+    <string name="tracks_empty_folder">Pasta vazia</string>
+    <string name="track_not_recorded">Não gravado</string>
+    <string name="shared_string_new_track">Nova trilha</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="number_of_tracks">%1$s trilhas</string>
+    <string name="delete_folder_question">Excluir pasta\?</string>
+    <string name="show_all_tracks_on_the_map">Mostrar todas as trilhas no mapa</string>
+    <string name="tracks_empty_folder_description">Esta pasta ainda não tem nenhuma trilha</string>
 </resources>

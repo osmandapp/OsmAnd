@@ -89,7 +89,7 @@ public class TrackFolder implements TracksGroup {
 	}
 
 	public long getLastModified() {
-		long lastUpdateTime = 0;
+		long lastUpdateTime = dirFile.lastModified();
 		for (TrackFolder folder : subFolders) {
 			long folderLastUpdate = folder.getLastModified();
 			lastUpdateTime = Math.max(lastUpdateTime, folderLastUpdate);

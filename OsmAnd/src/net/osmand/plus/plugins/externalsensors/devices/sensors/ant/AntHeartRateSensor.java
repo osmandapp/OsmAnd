@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_HEART_RATE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -165,11 +167,11 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		HeartRateData data = lastHeartRateData;
 		int computedHeartRate = data != null ? data.getComputedHeartRate() : 0;
 		if (computedHeartRate > 0) {
-			json.put(getSensorId(), computedHeartRate);
+			json.put(SENSOR_TAG_HEART_RATE, computedHeartRate);
 		}
 	}
 }

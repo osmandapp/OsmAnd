@@ -3,6 +3,7 @@ package net.osmand.plus.track.fragments;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.ATTACH_ROADS_MODE;
+import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_HEIGHTMAP_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.CALCULATE_SRTM_MODE;
 import static net.osmand.plus.measurementtool.MeasurementToolFragment.PLAN_ROUTE_MODE;
 import static net.osmand.plus.track.cards.OptionsCard.ALTITUDE_CORRECTION_BUTTON_INDEX;
@@ -97,6 +98,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.development.SimulatePositionFragment;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -1133,8 +1135,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				GPXTrackAnalysis analysis = this.analysis != null
 						? this.analysis
 						: selectedGpxFile.getTrackAnalysis(app);
-				if (analysis.hasElevationData) {
-					calculateOnlineSelected(-1);
+				if (analysis.hasElevationData()) {
+					OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+					if (plugin != null && plugin.isHeightmapEnabled()) {
+						calculateOfflineSelected(-1);
+					} else {
+						calculateOnlineSelected(-1);
+					}
 				} else {
 					showTrackAltitudeDialog(-1);
 				}
@@ -1590,6 +1597,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void calculateOnlineSelected(int segmentIndex) {
 		openPlanRoute(segmentIndex, CALCULATE_SRTM_MODE);
+	}
+
+	@Override
+	public void calculateOfflineSelected(int segmentIndex) {
+		openPlanRoute(segmentIndex, CALCULATE_HEIGHTMAP_MODE);
 	}
 
 	@Override

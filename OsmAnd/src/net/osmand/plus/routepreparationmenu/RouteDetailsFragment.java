@@ -52,7 +52,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;

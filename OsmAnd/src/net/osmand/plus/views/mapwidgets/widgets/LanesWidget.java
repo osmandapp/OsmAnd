@@ -23,6 +23,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 
@@ -154,7 +155,8 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, int order, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
+	                       int order, @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
@@ -174,8 +176,8 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void detachView() {
-		super.detachView();
+	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
+		super.detachView(widgetsPanel);
 		// Clear in case link to previous view of LanesWidget is lost
 		getSpecialContainer().removeAllViews();
 	}

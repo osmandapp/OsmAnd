@@ -1263,7 +1263,7 @@
     <string name="share_route_subject">Маршрут поширений через OsmAnd</string>
     <string name="arrival_distance">Оголошення про прибуття</string>
     <string name="arrival_distance_descr">Як швидко ви хочете отримати оголошення про прибуття\?</string>
-    <string name="keep_informing_never">Лише вручну (торканням стрілки)</string>
+    <string name="keep_informing_never">Вручну (натисканням на стрілку)</string>
     <string name="keep_informing_descr">Повторювати навігаційні інструкції через регулярні проміжки часу.</string>
     <string name="keep_informing">Повторювати навігаційні інструкції</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> класифікація мап із зображенням.</string>
@@ -2250,7 +2250,7 @@
     <string name="nautical_maps">Морські мапи</string>
     <string name="analyze_on_map">Аналізувати на мапі</string>
     <string name="shared_string_visible">Показуються</string>
-    <string name="restore_purchases">Відновлення придбань</string>
+    <string name="restore_purchases">Відновлення покупок</string>
     <string name="shared_string_automatic">Автоматично</string>
     <string name="do_not_send_anonymous_app_usage">Не надсилати анонімну статистику про користування застосунком</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збирає відомості про те, які ви використовуєте частини застосунку. Ваше місце розташування ніколи не надсилається, як і все, що ви вводите, які місця переглядаєте, що шукаєте чи завантажуєте.</string>
@@ -3021,10 +3021,10 @@
     <string name="routing_profile_geocoding">Геокодування</string>
     <string name="routing_profile_straightline">Пряма лінія</string>
     <string name="routing_profile_broutrer">BRouter (офлайн)</string>
-    <string name="osmand_default_routing">Маршрутизація OsmAnd</string>
-    <string name="custom_routing">Користувацький профіль маршрутизації</string>
-    <string name="special_routing_type">Спеціальна маршрутизація</string>
-    <string name="third_party_routing_type">Стороння маршрутизація</string>
+    <string name="osmand_default_routing">Прокладання маршрутів OsmAnd</string>
+    <string name="custom_routing">Власний профіль прокладання маршрутів</string>
+    <string name="special_routing_type">Прокладання спеціалізованих маршрутів</string>
+    <string name="third_party_routing_type">Сторонній сервіс прокладання маршрутів</string>
     <string name="application_profiles_descr">Оберіть профілі, що будуть показуватись у застосунку.</string>
     <string name="application_profiles">Профілі застосунку</string>
     <string name="quick_action_need_to_add_item_to_list">Потрібно додати принаймні один елемент до списку у налаштуваннях \'Швидкі дії\'</string>
@@ -3350,7 +3350,7 @@
     <string name="monitoring_min_accuracy">Мінімальна точність</string>
     <string name="monitoring_min_distance">Мінімальне зміщення</string>
     <string name="reset_plugin_to_default">Скинути налаштування втулка на типові</string>
-    <string name="multimedia_rec_split_title">Розділений записувач</string>
+    <string name="multimedia_rec_split_title">Розділення запису</string>
     <string name="multimedia_use_system_camera">Використовувати системний застосунок</string>
     <string name="multimedia_photo_play_sound">Звук затвора камери</string>
     <string name="osm_authorization_success">Авторизація пройшла успішно</string>
@@ -3538,7 +3538,7 @@
     <string name="lang_ba">Башкирська</string>
     <string name="lang_an">Арагонська</string>
     <string name="lang_lmo">Ломбардська</string>
-    <string name="custom_color">Користувацький колір</string>
+    <string name="custom_color">Власний колір</string>
     <string name="extra_maps_menu_group">Додаткові мапи</string>
     <string name="download_unsupported_action">Непідтримувана дія %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -3551,7 +3551,7 @@
     <string name="map_markers_item">Позначки</string>
     <string name="favorites_item">Закладки</string>
     <string name="subscription_osmandlive_item">Передплата — OsmAnd Live</string>
-    <string name="osmand_purchases_item">Придбання OsmAnd</string>
+    <string name="osmand_purchases_item">Покупки в OsmAnd</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
     <string name="osm_live_payment_subscription_management">Кошти будуть списані з рахунку, зареєстрованому у вашому обліковому записі Google Play після підтвердження придбання.
 \n
@@ -4017,7 +4017,7 @@
     <string name="update_frequency">Частота оновлень</string>
     <string name="delete_updates">Вилучити оновлення</string>
     <string name="live_update_delete_updates_msg">Вилучити всі live-оновлення для %s\?</string>
-    <string name="purchases">Придбання</string>
+    <string name="purchases">Покупки</string>
     <string name="select_category_descr">Виберіть категорію або додайте нову</string>
     <string name="track_recording_will_be_continued">Записування буде продовжено.</string>
     <string name="copy_poi_name">Копіювати назву точки інтересу</string>
@@ -4050,7 +4050,7 @@
     <string name="no_purchases">Ви ще нічого не придбали</string>
     <string name="new_device_account">Новий пристрій / новий обліковий запис</string>
     <string name="contact_support_description">Якщо маєте будь-які питання, звʼяжіться з нами за адресою %1$s.</string>
-    <string name="empty_purchases_description">Якщо ваші придбання не з\'явилися тут, натисніть «%1$s», або зв\'яжіться з нашою службою підтримки.</string>
+    <string name="empty_purchases_description">Якщо ваші покупки не зʼявилися тут, натисніть «%1$s», або звʼяжіться з нашою службою підтримки.</string>
     <string name="contact_support">Звернутися до служби підтримки</string>
     <string name="troubleshooting">Розвʼязання проблем</string>
     <string name="troubleshooting_description">Перейдіть за цим посиланням, якщо у вас виникли проблеми з придбанням.</string>
@@ -4123,9 +4123,9 @@
     <string name="backup_now">Створити резервну копію зараз</string>
     <string name="make_backup">Створити резервну копію</string>
     <string name="make_backup_descr">На цьому пристрої є багато змін, зробіть резервну копію цих даних, щоб не втратити їх.</string>
-    <string name="backup_conflicts">Неузгодженості</string>
+    <string name="backup_conflicts">Конфлікти</string>
     <string name="backup_confilcts_descr">Не вдалося надіслати деякі файли на сервер, оскільки на сервері зберігається новіша версія.</string>
-    <string name="backup_view_conflicts">Переглянути неузгодженості</string>
+    <string name="backup_view_conflicts">Переглянути конфлікти</string>
     <string name="backup_no_internet_descr">Перевірте зʼєднання з Інтернетом та завантажте знову.</string>
     <string name="backup_pause_all">Призупинити все</string>
     <string name="upload_local_version">Надіслати локальну версію</string>
@@ -4289,7 +4289,7 @@
     <string name="map_updates_for_mappers">Оновлення мап для маперів</string>
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
     <string name="pro_features">Pro функції</string>
-    <string name="purchases_restored">Придбання відновлено</string>
+    <string name="purchases_restored">Покупки відновлено</string>
     <string name="grey_color_undefined">Частки без даних – сірі.</string>
     <string name="no_activity_for_intent">Встановіть відповідний застосунок, що може виконувати цю дію.</string>
     <string name="osm_live_payment_subscription_management_amz">Кошти будуть списані з рахунку, зареєстрованому у вашому обліковому записі Amazon після підтвердження придбання.
@@ -4806,7 +4806,7 @@
 \nЗапустити для цього Play Маркет\?</string>
     <string name="ant_missing_dependency">Відсутня залежність</string>
     <string name="ant_go_to_store">Перейти до маркету</string>
-    <string name="ant_read_data">Прочитати дані</string>
+    <string name="ant_read_data">Отримання даних</string>
     <string name="ant_write_to_gpx">Записати дані до треку</string>
     <string name="ant_heart_rate_write_gpx_desc">Додавати пульс до треку</string>
     <string name="map_widget_ant_heart_rate">Пульс</string>
@@ -4816,7 +4816,7 @@
     <string name="map_widget_ant_bicycle_dist">Відстань на велосипеді</string>
     <string name="map_widget_ant_bicycle_dist_desc">Показує пройдену відстань</string>
     <string name="worldwide_maps">Мапи світу</string>
-    <string name="map_widget_ant_bicycle_power">Витрачена під час велоїзди сила</string>
+    <string name="map_widget_ant_bicycle_power">Потужність велосипеда</string>
     <string name="map_widget_ant_bicycle_power_desc">Показує силу велосипедиста, використану для руху велосипеда</string>
     <string name="map_widget_ant_bicycle_cadence">Швидкість обертання педалей</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показує швидкість, з якою користувач крутить педалі</string>
@@ -5234,4 +5234,12 @@
     <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде вилучено разом з усіма треками (%2$s) в ній.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
+    <string name="external_sensors_not_found">Датчиків не знайдено</string>
+    <string name="external_sensors_source_of_data">Джерело даних</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Немає підключених датчиків цього типу</string>
+    <string name="write_data_from_sensor_to_track">Записувати дані з зовнішніх датчиків у GPX під час запису треку.</string>
+    <string name="save_track_external_sensors_data">Дані</string>
+    <string name="calculate_offline_altitude_descr">Розраховуйте висоту офлайн на основі даних карти висот. Відмінності від висоти, записаної пристроєм, можна використовувати як поправку висоти.</string>
+    <string name="error_calculate">Результати розрахунків порожні</string>
+    <string name="calculate_offline">Розрахувати офлайн</string>
 </resources>

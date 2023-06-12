@@ -14,6 +14,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -1381,5 +1383,11 @@ public class AndroidUtils {
 			result += app.getResources().getDimensionPixelSize(id);
 		}
 		return result;
+	}
+
+	public static boolean isBluetoothEnabled(@NonNull Context context) {
+		BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
+		BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+		return bluetoothAdapter != null && bluetoothAdapter.isEnabled();
 	}
 }

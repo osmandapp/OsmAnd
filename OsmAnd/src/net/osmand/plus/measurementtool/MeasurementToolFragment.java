@@ -59,7 +59,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -69,9 +68,9 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
@@ -111,6 +110,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils.OnFileUploadCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.HeightsResolverTask;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UploadFileTask;
@@ -159,9 +159,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public static final int UNDO_MODE = 0x8;
 	public static final int ATTACH_ROADS_MODE = 0x10;
 	public static final int CALCULATE_SRTM_MODE = 0x20;
+	public static final int CALCULATE_HEIGHTMAP_MODE = 0x40;
 
 	@Retention(RetentionPolicy.SOURCE)
-	@IntDef({PLAN_ROUTE_MODE, DIRECTION_MODE, FOLLOW_TRACK_MODE, UNDO_MODE, ATTACH_ROADS_MODE, CALCULATE_SRTM_MODE})
+	@IntDef({PLAN_ROUTE_MODE, DIRECTION_MODE, FOLLOW_TRACK_MODE, UNDO_MODE, ATTACH_ROADS_MODE, CALCULATE_SRTM_MODE, CALCULATE_HEIGHTMAP_MODE})
 	public @interface MeasurementToolMode {
 	}
 
@@ -208,6 +209,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private LatLon initialPoint;
 	private UploadFileTask calculateSrtmTask;
+	private HeightsResolverTask calculateHeightmapTask;
 
 	enum FinalSaveAction {
 		SHOW_SNACK_BAR_AND_CLOSE,
@@ -273,6 +275,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	protected boolean isCalculateSrtmMode() {
 		return (this.modes & CALCULATE_SRTM_MODE) == CALCULATE_SRTM_MODE;
+	}
+
+	protected boolean isCalculateHeightmapMode() {
+		return (this.modes & CALCULATE_HEIGHTMAP_MODE) == CALCULATE_HEIGHTMAP_MODE;
 	}
 
 	private boolean isUndoMode() {
@@ -529,7 +535,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			if (isFollowTrackMode()) {
 				startTrackNavigation();
 			} else if (editingCtx.isNewData() || editingCtx.hasChanges()
-					|| isCalculateSrtmMode() && editingCtx.hasElevationData()) {
+					|| (isCalculateSrtmMode() || isCalculateHeightmapMode()) && editingCtx.hasElevationData()) {
 				saveChanges(FinalSaveAction.SHOW_SNACK_BAR_AND_CLOSE, false);
 			} else {
 				MapActivity activity = getMapActivity();
@@ -575,6 +581,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			} else if (gpxData != null && isCalculateSrtmMode()) {
 				if (!hasAltitude()) {
 					calculateSrtmTrack();
+				}
+				setInfoType(InfoType.GRAPH);
+				infoTypeBtn.setSelectedItem(graphBtn);
+			} else if (gpxData != null && isCalculateHeightmapMode()) {
+				if (!hasAltitude()) {
+					calculateHeightmapTrack();
 				}
 				setInfoType(InfoType.GRAPH);
 				infoTypeBtn.setSelectedItem(graphBtn);
@@ -714,7 +726,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public boolean isInEditMode() {
 		return !isPlanRouteMode() && !editingCtx.isNewData() && !isDirectionMode()
-				&& !isFollowTrackMode() && !isAttachRoadsMode() && !isCalculateSrtmMode();
+				&& !isFollowTrackMode() && !isAttachRoadsMode()
+				&& !isCalculateSrtmMode() && !isCalculateHeightmapMode();
 	}
 
 	public boolean isShowSnapWarning() {
@@ -891,6 +904,35 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void stopUploadFileTask() {
 		if (isCalculatingSrtmData()) {
 			calculateSrtmTask.cancel(false);
+		}
+		quit(false);
+	}
+
+	private void calculateHeightmapTrack() {
+		GpxData gpxData = editingCtx.getGpxData();
+		if (isCalculateHeightmapMode() && gpxData != null && calculateHeightmapTask == null) {
+			GPXFile gpxFile = gpxData.getGpxFile();
+			calculateHeightmapTask = new HeightsResolverTask(new File(gpxFile.path), gpx -> {
+				calculateHeightmapTask = null;
+				if (gpx != null) {
+					editingCtx.clearSegments();
+					addNewGpxData(gpx);
+				} else {
+					updateInfoView();
+					app.showToastMessage(R.string.error_calculate);
+				}
+			});
+			calculateHeightmapTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	public boolean isCalculatingHeightmapData() {
+		return calculateHeightmapTask != null && calculateHeightmapTask.getStatus() == Status.RUNNING;
+	}
+
+	public void stopCalculatingHeightMapTask() {
+		if (isCalculatingHeightmapData()) {
+			calculateHeightmapTask.cancel(false);
 		}
 		quit(false);
 	}
@@ -1157,6 +1199,15 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void calculateOnlineSelected(int segmentIndex) {
 		setMode(CALCULATE_SRTM_MODE, true);
 		calculateSrtmTrack();
+		setInfoType(InfoType.GRAPH);
+		infoTypeBtn.setSelectedItem(graphBtn);
+		updateInfoView();
+	}
+
+	@Override
+	public void calculateOfflineSelected(int segmentIndex) {
+		setMode(CALCULATE_HEIGHTMAP_MODE, true);
+		calculateHeightmapTrack();
 		setInfoType(InfoType.GRAPH);
 		infoTypeBtn.setSelectedItem(graphBtn);
 		updateInfoView();
@@ -1885,7 +1936,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	protected static void showGpxOnMap(@NonNull OsmandApplication app, @NonNull GPXFile gpx, boolean isNewGpx) {
-		GPXUtilities.createArtificialPrimeMeridianPoints(gpx);
 		GpxSelectionParams params = GpxSelectionParams.newInstance()
 				.showOnMap().selectedByUser().syncGroup().addToMarkers().addToHistory()
 				.saveSelection();
@@ -1925,7 +1975,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GPXTrackAnalysis analysis = selectedGpxFile != null
 				? selectedGpxFile.getTrackAnalysis(app)
 				: gpxFile.getAnalysis(System.currentTimeMillis());
-		return analysis.hasElevationData;
+		return analysis.hasElevationData();
 	}
 
 	private void updateDistancePointsText() {
