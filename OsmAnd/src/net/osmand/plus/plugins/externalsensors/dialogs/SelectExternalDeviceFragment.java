@@ -184,6 +184,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		noBluetoothCard.setVisibility(AndroidUtils.isBluetoothEnabled(requireActivity()) ? View.GONE : View.VISIBLE);
 		updatePairedSensorsListeners(true);
 		updatePairedSensorsList();
+		updateCurrentStateView();
 	}
 
 	@Override
@@ -206,7 +207,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	private void updatePairedSensorsList() {
 		List<AbstractDevice<?>> devices = plugin.getPairedDevices();
 		List<AbstractDevice<?>> filteredDevices = plugin.getPairedDevicesByWidgetType(widgetDataFieldType);
-		if (devices.isEmpty()) {
+		if (filteredDevices.isEmpty()) {
 			if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
 				currentState = States.NOTHING_FOUND;
 			} else {

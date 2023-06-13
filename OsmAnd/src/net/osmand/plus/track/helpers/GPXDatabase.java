@@ -225,6 +225,16 @@ public class GPXDatabase {
 			GPX_COL_MAX_FILTER_ALTITUDE + " = ?, " +
 			GPX_COL_MAX_FILTER_HDOP + " = ? ";
 
+	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
+			GPX_TABLE_NAME + " SET " +
+			GPX_COL_COLOR + " = ?, " +
+			GPX_COL_WIDTH + " = ?, " +
+			GPX_COL_SHOW_ARROWS + " = ?, " +
+			GPX_COL_SHOW_START_FINISH + " = ?, " +
+			GPX_COL_SPLIT_TYPE + " = ?, " +
+			GPX_COL_SPLIT_INTERVAL + " = ?, " +
+			GPX_COL_COLORING_TYPE + " = ? ";
+
 	private final OsmandApplication app;
 
 	public static class GpxDataItem {
@@ -845,6 +855,35 @@ public class GPXDatabase {
 				db.close();
 			}
 		}
+	}
+
+	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,
+	                                boolean showArrows, boolean showStartFinish, int splitType,
+	                                double splitInterval, @Nullable String coloringType) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileDir = getFileDir(item.file);
+				String fileName = getFileName(item.file);
+
+				db.execSQL(GPX_TABLE_UPDATE_APPEARANCE + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {(color == 0 ? "" : Algorithms.colorToString(color)), width,
+								showArrows ? 1 : 0, showStartFinish ? 1 : 0, splitType,
+								splitInterval, coloringType, fileName, fileDir});
+
+				item.color = color;
+				item.width = width;
+				item.showArrows = showArrows;
+				item.showStartFinish = showStartFinish;
+				item.splitType = splitType;
+				item.splitInterval = splitInterval;
+				item.coloringType = coloringType;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public boolean remove(File file) {

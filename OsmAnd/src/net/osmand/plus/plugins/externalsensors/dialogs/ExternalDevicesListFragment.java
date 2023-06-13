@@ -39,6 +39,8 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		DeviceListener, OnSaveSensorNameCallback {
 
 	public static final String TAG = ExternalDevicesListFragment.class.getSimpleName();
+	protected View dividerBeforeButton;
+	protected View dividerBetweenDeviceGroups;
 	protected View emptyView;
 	protected View contentView;
 	protected View connectedPrompt;
@@ -66,6 +68,8 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		disconnectedPrompt = view.findViewById(R.id.disconnected_prompt);
 		appBar = view.findViewById(R.id.appbar);
 		noBluetoothCard = view.findViewById(R.id.no_bluetooth_card);
+		dividerBeforeButton = view.findViewById(R.id.pair_btn_additional_divider);
+		dividerBetweenDeviceGroups = view.findViewById(R.id.divider_between_device_groups);
 
 		ImageView sensorIcon = view.findViewById(R.id.sensor_icon);
 		sensorIcon.setBackgroundResource(nightMode ? R.drawable.bg_empty_external_device_list_icon_night : R.drawable.bg_empty_external_device_list_icon_day);
@@ -187,17 +191,20 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 			emptyView.setVisibility(View.VISIBLE);
 			contentView.setVisibility(View.GONE);
 			app.runInUIThread(() -> {
-				appBar.setExpanded(true);
+				appBar.setExpanded(true, false);
 			});
 		} else {
 			app.runInUIThread(() -> {
-				appBar.setExpanded(false);
+				appBar.setExpanded(false, false);
 				connectedListAdapter.setItems(connectedDevices);
 				disconnectedListAdapter.setItems(disconnectedDevices);
 				contentView.setVisibility(View.VISIBLE);
 				emptyView.setVisibility(View.GONE);
-				connectedPrompt.setVisibility(connectedDevices.size() > 0 ? View.VISIBLE : View.GONE);
-				disconnectedPrompt.setVisibility(disconnectedDevices.size() > 0 ? View.VISIBLE : View.GONE);
+				boolean hasConnectedDevices = connectedDevices.size() > 0;
+				boolean hasDisConnectedDevices = disconnectedDevices.size() > 0;
+				connectedPrompt.setVisibility(hasConnectedDevices ? View.VISIBLE : View.GONE);
+				disconnectedPrompt.setVisibility(hasDisConnectedDevices ? View.VISIBLE : View.GONE);
+				dividerBetweenDeviceGroups.setVisibility(hasConnectedDevices && hasDisConnectedDevices ? View.VISIBLE : View.GONE);
 			});
 		}
 	}

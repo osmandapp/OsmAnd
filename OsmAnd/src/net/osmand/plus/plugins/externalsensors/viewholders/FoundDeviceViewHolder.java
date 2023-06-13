@@ -17,6 +17,7 @@ public class FoundDeviceViewHolder extends RecyclerView.ViewHolder {
 	public final ImageView icon;
 	public final ImageView menuIcon;
 	public final RadioButton selectionMark;
+	public final View divider;
 
 	public FoundDeviceViewHolder(@NonNull View view) {
 		super(view);
@@ -25,5 +26,6 @@ public class FoundDeviceViewHolder extends RecyclerView.ViewHolder {
 		icon = view.findViewById(R.id.icon);
 		menuIcon = view.findViewById(R.id.menu_icon);
 		selectionMark = view.findViewById(R.id.selection_mark);
+		divider = view.findViewById(R.id.short_divider);
 	}
 }

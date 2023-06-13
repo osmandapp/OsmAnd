@@ -32,10 +32,11 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 		holder.menuIcon.setVisibility(View.VISIBLE);
 		holder.menuIcon.setOnClickListener(v -> showOptionsMenu(v, device));
 		holder.itemView.setOnClickListener(v -> {
-			if(plugin != null && plugin.isDevicePaired(device)){
+			if (plugin != null && plugin.isDevicePaired(device)) {
 				deviceMenuClickListener.onSettings(device);
 			}
 		});
+		holder.divider.setVisibility(position == getItemCount() - 1 ? View.GONE : View.VISIBLE);
 	}
 
 	private void showOptionsMenu(View view, AbstractDevice<?> device) {

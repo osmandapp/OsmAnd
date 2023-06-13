@@ -42,7 +42,6 @@ import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
@@ -677,15 +676,15 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 		} else if (gpxDataItem != null) {
-			GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType());
-			gpxDbHelper.updateColor(gpxDataItem, trackDrawInfo.getColor());
-			gpxDbHelper.updateWidth(gpxDataItem, trackDrawInfo.getWidth());
-			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
-			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
-			gpxDbHelper.updateSplit(gpxDataItem, splitType, trackDrawInfo.getSplitInterval());
-			ColoringType coloringType = trackDrawInfo.getColoringType();
-			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
-			gpxDbHelper.updateColoringType(gpxDataItem, coloringType.getName(routeInfoAttribute));
+			int color = trackDrawInfo.getColor();
+			String width = trackDrawInfo.getWidth();
+			boolean showArrows = trackDrawInfo.isShowArrows();
+			boolean showStartFinish = trackDrawInfo.isShowStartFinish();
+			int splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType();
+			double splitInterval = trackDrawInfo.getSplitInterval();
+			String coloringType = trackDrawInfo.getColoringTypeName();
+
+			gpxDbHelper.updateAppearance(gpxDataItem, color, width, showArrows, showStartFinish, splitType, splitInterval, coloringType);
 		}
 	}
 

@@ -41,7 +41,6 @@ import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
-import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
@@ -259,17 +258,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void onTracksGroupClicked(@NonNull TracksGroup group) {
-		if (group instanceof TrackFolder) {
-			setSelectedFolder((TrackFolder) group);
-		} else if (group instanceof VisibleTracksGroup) {
-			boolean selected = !isTracksGroupSelected(group);
-			onTracksGroupSelected(group, selected);
-		}
-		updateContent();
-	}
-
-	@Override
 	public void onTracksGroupOptionsSelected(@NonNull View view, @NonNull TracksGroup group) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null && group instanceof TrackFolder) {
@@ -380,8 +368,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void onFolderRenamed(@NonNull File oldDir, @NonNull File newDir) {
-		reloadTracks();
+	public void onFolderRenamed(@NonNull File newDir) {
+		updateContent();
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, null));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.shared_string_none);
-			holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_sensor, nightMode));
+			holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_sensor_off, nightMode));
 		} else {
 			super.onBindViewHolder(holder, position - 1);
 			holder.description.setVisibility(View.VISIBLE);

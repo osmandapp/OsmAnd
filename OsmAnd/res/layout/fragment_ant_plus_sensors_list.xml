@@ -22,6 +22,7 @@
 			osmand:expandedTitleMargin="@dimen/content_padding"
 			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
 			osmand:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+			osmand:scrimAnimationDuration="0"
 			osmand:title="@string/external_sensors_plugin_name">
 
 			<androidx.appcompat.widget.Toolbar
@@ -142,6 +143,10 @@
 							android:textSize="@dimen/default_desc_text_size"
 							osmand:typeface="@string/font_roboto_medium" />
 
+						<include
+							android:id="@+id/divider_between_device_groups"
+							layout="@layout/divider" />
+
 						<androidx.recyclerview.widget.RecyclerView
 							android:id="@+id/disconnected_devices_list"
 							android:layout_width="match_parent"
@@ -151,6 +156,10 @@
 					</LinearLayout>
 
 				</androidx.core.widget.NestedScrollView>
+
+				<include
+					android:id="@+id/pair_btn_additional_divider"
+					layout="@layout/divider" />
 
 				<include
 					android:id="@+id/pair_btn_additional"

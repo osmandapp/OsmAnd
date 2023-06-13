@@ -54,7 +54,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 		AbstractDevice<?> device = items.get(position);
 		DeviceType deviceType = device.getDeviceType();
 		holder.name.setText(plugin.getDeviceName(device));
-		holder.icon.setImageResource(nightMode ? deviceType.nightIconId : deviceType.dayIconId);
+		holder.icon.setImageResource(device.isConnected() ? (nightMode ? deviceType.nightIconId : deviceType.dayIconId) : deviceType.disconnectedIconId);
 		int rssi = device.getRssi();
 		Drawable signalLevelIcon;
 		UiUtilities uiUtils = app.getUIUtilities();

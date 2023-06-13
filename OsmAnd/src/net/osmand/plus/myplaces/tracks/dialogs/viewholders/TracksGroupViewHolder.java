@@ -71,19 +71,20 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 		boolean selected = listener != null && listener.isTracksGroupSelected(tracksGroup);
 		checkbox.setChecked(selected);
 
-		checkboxContainer.setOnClickListener(v -> {
+		itemView.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.onTracksGroupSelected(tracksGroup, !selected);
 			}
 		});
+		itemView.setOnLongClickListener(view -> {
+			if (listener != null) {
+				listener.onTracksGroupLongClick(view, tracksGroup);
+			}
+			return true;
+		});
 		menuButton.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.onTracksGroupOptionsSelected(v, tracksGroup);
-			}
-		});
-		itemView.setOnClickListener(v -> {
-			if (listener != null) {
-				listener.onTracksGroupClicked(tracksGroup);
 			}
 		});
 		boolean isFolder = tracksGroup instanceof TrackFolder;
@@ -101,7 +102,7 @@ public class TracksGroupViewHolder extends RecyclerView.ViewHolder {
 
 		}
 
-		default void onTracksGroupClicked(@NonNull TracksGroup group) {
+		default void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
 
 		}
 

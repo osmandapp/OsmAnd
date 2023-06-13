@@ -17,12 +17,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
@@ -110,10 +112,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
-				.setOnClickListener(v -> {
-					FragmentManager manager = activity.getSupportFragmentManager();
-					TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
-				}).create());
+				.setOnClickListener(v -> showTracksSelection(trackFolder, fragment)).create());
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.add_new_folder)
@@ -136,7 +135,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.show(displayData);
+		PopUpMenu.showSystemMenu(displayData);
 	}
 
 	public void showItemOptionsMenu(@NonNull TrackItem trackItem, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
@@ -196,7 +195,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.show(displayData);
+		PopUpMenu.showSystemMenu(displayData);
 	}
 
 	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups,
@@ -215,6 +214,19 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		);
 		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, items);
 
+		String changeAppearance = app.getString(R.string.change_appearance);
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(changeAppearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> {
+					if (selectedTrackItems.isEmpty()) {
+						showEmptyItemsToast(changeAppearance);
+					} else {
+						TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), fragment);
+					}
+				})
+				.create()
+		);
 		String delete = app.getString(R.string.shared_string_delete);
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitle(delete)
@@ -234,11 +246,16 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.show(displayData);
+		PopUpMenu.showSystemMenu(displayData);
+	}
+
+	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
 	}
 
 	@NonNull
-	private Set<TrackItem> getSelectedTrackItems(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups) {
+	public Set<TrackItem> getSelectedTrackItems(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups) {
 		Set<TrackItem> items = new HashSet<>(trackItems);
 		for (TracksGroup tracksGroup : tracksGroups) {
 			if (tracksGroup instanceof TrackFolder) {
@@ -354,6 +371,19 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
+		}
+	}
+
+	public void renameFolder(@NonNull TrackFolder trackFolder, @NonNull String name, @Nullable CallbackWithObject<TrackFolder> callback) {
+		File oldDir = trackFolder.getDirFile();
+		File newDir = new File(oldDir.getParentFile(), name);
+		if (oldDir.renameTo(newDir)) {
+			TrackFolderLoaderTask task = new TrackFolderLoaderTask(app, newDir, newFolder -> {
+				if (callback != null) {
+					callback.processResult(newFolder);
+				}
+			});
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 }
