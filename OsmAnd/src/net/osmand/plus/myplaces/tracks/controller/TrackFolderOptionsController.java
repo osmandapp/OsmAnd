@@ -4,7 +4,6 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
 import static net.osmand.plus.utils.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
 import net.osmand.plus.track.data.TrackFolder;
@@ -40,11 +38,13 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 
 	private TrackFoldersHelper foldersHelper;
 	private TrackFolder trackFolder;
+	private TrackFolder parentFolder;
 	private TrackFolderOptionsListener optionsListener;
 
 	public TrackFolderOptionsController(@NonNull TrackFoldersHelper foldersHelper, @NonNull TrackFolder folder) {
 		super(foldersHelper.getApp());
 		this.trackFolder = folder;
+		this.parentFolder = folder.getParentFolder();
 		this.foldersHelper = foldersHelper;
 	}
 
@@ -146,11 +146,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 						if (destFolder.exists()) {
 							app.showToastMessage(R.string.file_with_name_already_exist);
 						} else {
-							File oldDir = trackFolder.getDirFile();
-							File newDir = new File(oldDir.getParentFile(), newName);
-							if (oldDir.renameTo(newDir)) {
-								onFolderRenamed(oldDir, newDir);
-							}
+							renameFolder(newName);
 						}
 					}
 				}
@@ -158,6 +154,23 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 			String caption = activity.getString(R.string.enter_new_name);
 			CustomAlert.showInput(dialogData, activity, trackFolder.getDirName(), caption);
 		}
+	}
+
+	private void renameFolder(@NonNull String newName) {
+		foldersHelper.renameFolder(trackFolder, newName, folder -> {
+			if (parentFolder != null) {
+				parentFolder.removeSubFolder(trackFolder, false);
+				parentFolder.addSubFolder(folder, true);
+			}
+			trackFolder = folder;
+			dialogManager.askRefreshDialogCompletely(PROCESS_ID);
+
+			// Notify external listener
+			if (optionsListener != null) {
+				optionsListener.onFolderRenamed(folder.getDirFile());
+			}
+			return true;
+		});
 	}
 
 	@Override
@@ -197,20 +210,6 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 			String message = ctx.getString(R.string.delete_track_folder_dialog_message, folderName, tracksCount);
 			CustomAlert.showSimpleMessage(dialogData, message);
 		}
-	}
-
-	@Override
-	public void onFolderRenamed(@NonNull File oldDir, @NonNull File newDir) {
-		TrackFolderLoaderTask task = new TrackFolderLoaderTask(app, newDir, folder -> {
-			trackFolder = folder;
-			dialogManager.askRefreshDialogCompletely(PROCESS_ID);
-
-			// Notify external listener
-			if (optionsListener != null) {
-				optionsListener.onFolderRenamed(oldDir, newDir);
-			}
-		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
