@@ -4101,7 +4101,7 @@
     <string name="backup_into_file">Als Datei sichern</string>
     <string name="restore_from_file">Von Datei wiederherstellen</string>
     <string name="osmand_cloud_help_descr">Sie benötigen Hilfe\? Bitte kontaktieren Sie uns unter %1$s</string>
-    <string name="osmand_cloud_login_descr">Bitte geben Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben. An diese wird ein Einmal-Passwort für den nächsten Schritt gesendet.</string>
+    <string name="osmand_cloud_login_descr">Bitte geben Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben. An diese wird ein Einmal-Passwort gesendet.</string>
     <string name="verify_email_address">Überprüfen Sie die E-Mail-Adresse</string>
     <string name="verify_email_address_descr">Bestätigungscode wurde an %1$s gesendet. Bitte geben Sie ihn in das Feld unten ein.</string>
     <string name="cloud_email_not_registered">Diese E-Mail-Adresse ist nicht für OsmAnd Cloud registriert</string>
@@ -5242,4 +5242,5 @@
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">U/min</string>
     <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
+    <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
 </resources>
