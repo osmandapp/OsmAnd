@@ -160,6 +160,14 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		putToCache(item);
 	}
 
+	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,
+	                                boolean showArrows, boolean showStartFinish, int splitType,
+	                                double splitInterval, @Nullable String coloringType) {
+		boolean res = database.updateAppearance(item, color, width, showArrows, showStartFinish, splitType, splitInterval, coloringType);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean remove(@NonNull File file) {
 		boolean res = database.remove(file);
 		itemsCache.remove(file);
