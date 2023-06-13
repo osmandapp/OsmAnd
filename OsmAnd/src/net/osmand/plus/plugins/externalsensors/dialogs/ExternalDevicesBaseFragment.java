@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.utils.AndroidUtils;
@@ -42,6 +44,12 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndFragment {
 		setupUI(view);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		return view;
+	}
+
+	@ColorRes
+	public int getStatusBarColorId() {
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
 	@Override
