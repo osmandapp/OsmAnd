@@ -26,7 +26,7 @@
 			android:ellipsize="end"
 			android:paddingTop="@dimen/content_padding_half"
 			android:paddingBottom="@dimen/content_padding_half"
-			android:textColor="?android:textColorSecondary"
+			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			tools:text="Title" />
 

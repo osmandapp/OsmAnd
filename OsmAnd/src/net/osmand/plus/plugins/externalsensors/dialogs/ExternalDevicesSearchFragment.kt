@@ -123,12 +123,17 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     private fun bindFoundDevices() {
         val devices = plugin.unpairedDevices
-        val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
-        formatString?.let {
-            foundDevicesCountView?.text =
-                String.format(formatString, devices.size)
+        if (devices.isEmpty()) {
+            setCurrentState(SearchStates.NOTHING_FOUND)
+        } else {
+            setCurrentState(SearchStates.DEVICES_LIST)
+            val formatString = activity?.resources?.getString(R.string.bluetooth_found_title)
+            formatString?.let {
+                foundDevicesCountView?.text =
+                    String.format(formatString, devices.size)
+            }
+            adapter.setItems(devices)
         }
-        adapter.setItems(devices)
     }
 
     override fun onCreateView(
@@ -219,12 +224,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
     }
 
     override fun onScanFinished(foundDevices: List<AbstractDevice<out AbstractSensor>>) {
-        if (foundDevices.isEmpty()) {
-            setCurrentState(SearchStates.NOTHING_FOUND)
-        } else {
-            setCurrentState(SearchStates.DEVICES_LIST)
-            bindFoundDevices()
-        }
+        bindFoundDevices()
     }
 
     internal enum class SearchStates {
