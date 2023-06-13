@@ -15,7 +15,6 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
-import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
@@ -858,18 +857,12 @@ public class GPXDatabase {
 		}
 	}
 
-	public boolean updateAppearance(@NonNull GpxDataItem item, @NonNull TrackDrawInfo drawInfo) {
+	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,
+	                                boolean showArrows, boolean showStartFinish, int splitType,
+	                                double splitInterval, @Nullable String coloringType) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				int color = drawInfo.getColor();
-				String width = drawInfo.getWidth();
-				boolean showArrows = drawInfo.isShowArrows();
-				boolean showStartFinish = drawInfo.isShowStartFinish();
-				int splitType = GpxSplitType.getSplitTypeByTypeId(drawInfo.getSplitType()).getType();
-				double splitInterval = drawInfo.getSplitInterval();
-				String coloringType = drawInfo.getColoringType().getName(drawInfo.getRouteInfoAttribute());
-
 				String fileDir = getFileDir(item.file);
 				String fileName = getFileName(item.file);
 

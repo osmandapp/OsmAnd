@@ -113,14 +113,10 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {
-		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(appearanceInfo.splitType);
-		gpxDbHelper.updateColor(dataItem, appearanceInfo.color);
-		gpxDbHelper.updateWidth(dataItem, appearanceInfo.width);
-		gpxDbHelper.updateShowArrows(dataItem, appearanceInfo.showArrows);
-		gpxDbHelper.updateShowStartFinish(dataItem, appearanceInfo.showStartFinish);
-		gpxDbHelper.updateSplit(dataItem, splitType, appearanceInfo.splitInterval);
-		gpxDbHelper.updateColoringType(dataItem, appearanceInfo.coloringType);
+		app.getGpxDbHelper().updateAppearance(dataItem, appearanceInfo.color, appearanceInfo.width,
+				appearanceInfo.showArrows, appearanceInfo.showStartFinish, splitType.getType(),
+				appearanceInfo.splitInterval, appearanceInfo.coloringType);
 	}
 
 	private void createGpxAppearanceInfo() {

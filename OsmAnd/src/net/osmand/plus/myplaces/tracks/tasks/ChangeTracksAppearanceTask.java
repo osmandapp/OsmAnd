@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
@@ -54,7 +55,15 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	}
 
 	private void updateTrackAppearance(@NonNull GpxDataItem item) {
-		gpxDbHelper.updateAppearance(item, trackDrawInfo);
+		int color = trackDrawInfo.getColor();
+		String width = trackDrawInfo.getWidth();
+		boolean showArrows = trackDrawInfo.isShowArrows();
+		boolean showStartFinish = trackDrawInfo.isShowStartFinish();
+		int splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType();
+		double splitInterval = trackDrawInfo.getSplitInterval();
+		String coloringType = trackDrawInfo.getColoringTypeName();
+
+		gpxDbHelper.updateAppearance(item, color, width, showArrows, showStartFinish, splitType, splitInterval, coloringType);
 
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
 		if (selectedGpxFile != null) {
