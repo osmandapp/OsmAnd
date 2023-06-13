@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
@@ -158,6 +159,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public void resetGpsFilters(@NonNull GpxDataItem item) {
 		database.resetGpsFilters(item);
 		putToCache(item);
+	}
+
+	public boolean updateAppearance(@NonNull GpxDataItem item, @NonNull TrackDrawInfo drawInfo) {
+		boolean res = database.updateAppearance(item, drawInfo);
+		putToCache(item);
+		return res;
 	}
 
 	public boolean remove(@NonNull File file) {

@@ -677,15 +677,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 		} else if (gpxDataItem != null) {
-			GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType());
-			gpxDbHelper.updateColor(gpxDataItem, trackDrawInfo.getColor());
-			gpxDbHelper.updateWidth(gpxDataItem, trackDrawInfo.getWidth());
-			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
-			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
-			gpxDbHelper.updateSplit(gpxDataItem, splitType, trackDrawInfo.getSplitInterval());
-			ColoringType coloringType = trackDrawInfo.getColoringType();
-			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
-			gpxDbHelper.updateColoringType(gpxDataItem, coloringType.getName(routeInfoAttribute));
+			gpxDbHelper.updateAppearance(gpxDataItem, trackDrawInfo);
 		}
 	}
 
