@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -532,13 +533,15 @@ public class LocalIndexHelper {
 			return index;
 		}
 
-		public String getBasename(LocalIndexInfo localIndexInfo) {
+		@NonNull
+		public String getBasename(@NonNull OsmandApplication app, @NonNull LocalIndexInfo localIndexInfo) {
 			String fileName = localIndexInfo.getFileName();
 			if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 				return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 			}
 			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-				return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
+				OsmandSettings settings = app.getSettings();
+				return settings.getTileSourceTitle(fileName);
 			}
 			if (localIndexInfo.getType() == TRAVEL_DATA &&
 					fileName.endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
