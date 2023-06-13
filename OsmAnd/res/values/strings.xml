@@ -1047,7 +1047,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="enter_verification_code">Enter one-time password</string>
     <string name="verify_email_address_descr">Verification code sent to %1$s. Please enter it in the field below.</string>
     <string name="verify_email_address">Verify the e-mail address</string>
-    <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password for the next step will be sent to it.</string>
+    <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password will be sent to it.</string>
     <string name="osmand_cloud_create_account_descr">Please enter your e-mail address, a verification code will be sent there,\nand all your data will be linked to it.</string>
     <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
     <string name="restore_from_file">Restore from file</string>
