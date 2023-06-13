@@ -324,7 +324,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void checkWasChanged() {
-		if (!Algorithms.objectEquals(editedLayerName, nameEditText.getText().toString())
+		if (!Algorithms.objectEquals(title, nameEditText.getText().toString())
 				|| !Algorithms.objectEquals(urlToLoad, urlEditText.getText().toString())) {
 			wasChanged = true;
 		}
