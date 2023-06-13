@@ -121,7 +121,7 @@
     <string name="recording_context_menu_arecord">Направи аудио бележка</string>
     <string name="recording_context_menu_vrecord">Направи видео бележка</string>
     <string name="layer_recordings">Маркери за бележки</string>
-    <string name="recording_can_not_be_played">Записът не може да бъде възпроизведен</string>
+    <string name="recording_can_not_be_played">Записът не може да бъде възпроизведен.</string>
     <string name="recording_context_menu_delete">Изтриване на запис</string>
     <string name="recording_context_menu_play">Старт</string>
     <string name="recording_description">Запис %1$s %3$s %2$s</string>
@@ -291,24 +291,24 @@
     <string name="bg_service_screen_lock_toast">Екранът е заключен</string>
     <string name="bg_service_interval">Интервал за събуждане:</string>
     <string name="show_cameras">Камери за контрол на скоростта</string>
-    <string name="show_traffic_warnings">Показвай пътни предупреждения</string>
+    <string name="show_traffic_warnings">Предупреждения при пътуване</string>
     <string name="avoid_toll_roads">Пътища без такса</string>
     <string name="continue_follow_previous_route_auto">Да продължи ли последната незавършена маршрутизация\? (%1$s секунди)</string>
-    <string name="route_updated_loc_found">Маршрутът ще бъде изчислен след намиране на вашето място</string>
+    <string name="route_updated_loc_found">Изчаква се местоположение, за да бъде изчислен маршрута</string>
     <string name="osmand_parking_hours">Часа</string>
     <string name="osmand_parking_minutes">Минути</string>
-    <string name="osmand_parking_position_description_add_time">Паркирахте на</string>
+    <string name="osmand_parking_position_description_add_time">Автомобилът е паркиран на</string>
     <string name="select_animate_speedup">Скорост на симулацията:</string>
     <string name="global_app_allocated_memory_descr">Памет за приложението %1$s MB (Ограничение за Android: %2$s MB, Dalvik: %3$s MB).</string>
     <string name="global_app_allocated_memory">Заета памет</string>
     <string name="native_app_allocated_memory_descr">Цялата системна памет за приложението: %1$s МБ (Dalvik: %2$s МБ, други: %3$s МБ).
 \nПропорционална памет: %4$s МБ (Ограничение на Android: %5$s МБ, Dalvik: %6$s МБ).</string>
     <string name="native_app_allocated_memory">Системна памет</string>
-    <string name="starting_point_too_far">Началната позиция е твърде далеч от път.</string>
+    <string name="starting_point_too_far">Отправната позиция е твърде далеч от път.</string>
     <string name="shared_location">Споделено място</string>
     <string name="osmand_parking_event">Вземете колата от паркинга</string>
     <string name="osmand_parking_warning">Предупреждение</string>
-    <string name="osmand_parking_warning_text">Предупреждението за вземане на колата е добавено във Вашия календар. Ще остане там, докато не го изтриете ръчно.</string>
+    <string name="osmand_parking_warning_text">Известие да си вземете автомобила е добавено в календара и щ остане там, докато не го премахнете ръчно.</string>
     <string name="osmand_parking_time_limit_title">Настройте ограничението по време</string>
     <string name="osmand_parking_delete_confirm">Да се изтрие ли позицията на паркираната кола?</string>
     <string name="osmand_parking_delete">Изтриване на маркера за паркинг</string>
@@ -1086,7 +1086,7 @@
     <string name="route_info">Информация за маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Предпочитане на магистрали</string>
     <string name="routing_attr_prefer_motorway_description">Предпочитане на магистрали</string>
-    <string name="routing_attr_avoid_toll_name">Пътища без такса</string>
+    <string name="routing_attr_avoid_toll_name">Без пътища с такса</string>
     <string name="routing_attr_avoid_toll_description">Избягване на платени пътища</string>
     <string name="routing_attr_avoid_unpaved_name">Без черни пътища</string>
     <string name="routing_attr_avoid_unpaved_description">Избягване на черни (неасфалтирани) пътища</string>
@@ -3444,7 +3444,7 @@
     <string name="external_sensor_widgets">Външни сензори</string>
     <string name="how_to_use">Как да използвате:</string>
     <string name="reset_all_settings_desc">Възстановяване на настройките по подразбиране\?</string>
-    <string name="compass_click_desc">Съвет: Докоснете приспособлението с компаса, за да превключите режима на ориентация на картата.</string>
+    <string name="compass_click_desc">Съвет: Докоснете бутона с компаса, за да превключите режима на ориентация на картата.</string>
     <string name="map_marker_average_speed_desc">Задайте интервала от време, за който да бъде усреднена скоростта (за оценка на времето на пристигане).</string>
     <string name="parking_widget_desc">Показва разстоянието от центъра на екрана до мястото на паркиране.</string>
     <string name="lanes_widgets_desc">Показва схема на лентите на текущия път и подчертава тези, които трябва да използвате при маршрутизиране.</string>
@@ -3816,4 +3816,12 @@
     <string name="speed_camera_pois">POI на камери за контрол на скоростта</string>
     <string name="speed_cameras_alert">Предупрежденията за камери за контрол на скоростта в някои страни са забранени от закона.</string>
     <string name="speed_cameras_removed_descr">Устройство тоне разполага с предупреждение за камери за контрол на скоростта.</string>
+    <string name="save_track_external_sensors_data">Данни</string>
+    <string name="external_sensors_source_of_data">Източник на данни</string>
+    <string name="write_data_from_sensor_to_track">Запазва данните от външните сензори в GPX по време на запис на пътуването.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Няма свързани сензори от този вид</string>
+    <string name="external_sensors_not_found">Не са намерени сензори</string>
+    <string name="error_calculate">Резултатът от изчислението е празен</string>
+    <string name="calculate_offline">Изчисляване без мрежа</string>
+    <string name="calculate_offline_altitude_descr">Изчисляване на надморската височина въз основа на данни от карта на височината. Разликите спрямо отчетената от устройството надморска височина могат да бъдат използвани за корекция на надморската височина.</string>
 </resources>

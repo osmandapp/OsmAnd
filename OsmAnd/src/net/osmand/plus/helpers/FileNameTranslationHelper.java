@@ -14,6 +14,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -40,7 +41,7 @@ public class FileNameTranslationHelper {
 	}
 
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
-		String basename = getBasename(fileName);
+		String basename = getBasename(ctx, fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
 			return getWikiName(ctx, basename);
 		} else if (basename.endsWith(WIKIVOYAGE_NAME)) {
@@ -162,12 +163,14 @@ public class FileNameTranslationHelper {
 		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
-	private static String getBasename(String fileName) {
+	private static String getBasename(Context ctx, String fileName) {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
+			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+			OsmandSettings settings = app.getSettings();
+			return settings.getTileSourceTitle(fileName);
 		}
 		if (fileName.endsWith(IndexConstants.WEATHER_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.WEATHER_EXT.length());

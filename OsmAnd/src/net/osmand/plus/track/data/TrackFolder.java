@@ -21,10 +21,19 @@ public class TrackFolder implements TracksGroup {
 	private final List<TrackItem> trackItems = new ArrayList<>();
 	private final List<TrackFolder> subFolders = new ArrayList<>();
 
+	private List<TrackItem> flattenedTrackItems;
+	private List<TrackFolder> flattenedSubFolders;
+	private long lastModified = -1;
 
 	public TrackFolder(@NonNull File dirFile, @Nullable TrackFolder parentFolder) {
 		this.dirFile = dirFile;
 		this.parentFolder = parentFolder;
+	}
+
+	@NonNull
+	@Override
+	public String getName(@NonNull Context context) {
+		return GpxUiHelper.getFolderName(context, dirFile, false);
 	}
 
 	@NonNull
@@ -53,12 +62,28 @@ public class TrackFolder implements TracksGroup {
 		return trackItems;
 	}
 
-	public void addFolder(@NonNull TrackFolder folder) {
+	public void addSubFolder(@NonNull TrackFolder folder, boolean reloadCache) {
 		subFolders.add(folder);
+
+		if (reloadCache) {
+			resetCashedData();
+		}
 	}
 
-	public void addTrackItem(@NonNull TrackItem trackItem) {
+	public void removeSubFolder(@NonNull TrackFolder folder, boolean reloadCache) {
+		subFolders.remove(folder);
+
+		if (reloadCache) {
+			resetCashedData();
+		}
+	}
+
+	public void addTrackItem(@NonNull TrackItem trackItem, boolean reloadCache) {
 		trackItems.add(trackItem);
+
+		if (reloadCache) {
+			resetCashedData();
+		}
 	}
 
 	@ColorInt
@@ -72,39 +97,43 @@ public class TrackFolder implements TracksGroup {
 
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
-		List<TrackItem> items = new ArrayList<>(trackItems);
-		for (TrackFolder folder : subFolders) {
-			items.addAll(folder.getFlattenedTrackItems());
+		if (flattenedTrackItems == null) {
+			flattenedTrackItems = new ArrayList<>(trackItems);
+			for (TrackFolder folder : subFolders) {
+				flattenedTrackItems.addAll(folder.getFlattenedTrackItems());
+			}
 		}
-		return items;
+		return flattenedTrackItems;
 	}
 
 	@NonNull
 	public List<TrackFolder> getFlattenedSubFolders() {
-		List<TrackFolder> folders = new ArrayList<>(subFolders);
-		for (TrackFolder folder : subFolders) {
-			folders.addAll(folder.getFlattenedSubFolders());
+		if (flattenedSubFolders == null) {
+			flattenedSubFolders = new ArrayList<>(subFolders);
+			for (TrackFolder folder : subFolders) {
+				flattenedSubFolders.addAll(folder.getFlattenedSubFolders());
+			}
 		}
-		return folders;
+		return flattenedSubFolders;
 	}
 
 	public long getLastModified() {
-		long lastUpdateTime = 0;
-		for (TrackFolder folder : subFolders) {
-			long folderLastUpdate = folder.getLastModified();
-			lastUpdateTime = Math.max(lastUpdateTime, folderLastUpdate);
+		if (lastModified < 0) {
+			lastModified = dirFile.lastModified();
+			for (TrackFolder folder : subFolders) {
+				lastModified = Math.max(lastModified, folder.getLastModified());
+			}
+			for (TrackItem item : trackItems) {
+				lastModified = Math.max(lastModified, item.getLastModified());
+			}
 		}
-		for (TrackItem item : trackItems) {
-			long fileLastUpdate = item.getLastModified();
-			lastUpdateTime = Math.max(lastUpdateTime, fileLastUpdate);
-		}
-		return lastUpdateTime;
+		return lastModified;
 	}
 
-	@NonNull
-	@Override
-	public String getName(@NonNull Context context) {
-		return GpxUiHelper.getFolderName(context, dirFile, false);
+	public void resetCashedData() {
+		lastModified = -1;
+		flattenedTrackItems = null;
+		flattenedSubFolders = null;
 	}
 
 	@Override

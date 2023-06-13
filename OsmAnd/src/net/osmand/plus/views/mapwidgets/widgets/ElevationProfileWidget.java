@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
+import static net.osmand.gpx.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -32,11 +32,12 @@ import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.ElevationDiffsCalculator;
+import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.charts.TrackChartPoints;
@@ -47,7 +48,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXHighlight;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -60,6 +61,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElevationProfileWidget extends MapWidget {
+
 	private static final String SHOW_SLOPE_PREF_ID = "show_slope_elevation_widget";
 
 	private final CommonPreference<Boolean> showSlopePreference;
@@ -237,15 +239,15 @@ public class ElevationProfileWidget extends MapWidget {
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 
-		if (analysis.hasElevationData) {
+		if (analysis.hasElevationData()) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
-					GPXDataSetAxisType.DISTANCE, false, true, false);
+					GPXDataSetType.ALTITUDE, GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 
 			if (showSlopes) {
 				OrderedLineDataSet slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
-						GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
+						GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 				if (slopeDataSet != null) {
 					dataSets.add(slopeDataSet);
 				}
@@ -308,7 +310,7 @@ public class ElevationProfileWidget extends MapWidget {
 				}
 
 				if (locationHighlight != null && touchHighlight != null) {
-					chart.highlightValues(new Highlight[]{locationHighlight, touchHighlight});
+					chart.highlightValues(new Highlight[] {locationHighlight, touchHighlight});
 				} else if (locationHighlight != null) {
 					chart.highlightValue(locationHighlight, true);
 				} else if (touchHighlight != null) {
@@ -333,7 +335,7 @@ public class ElevationProfileWidget extends MapWidget {
 					if (h != null) {
 						h = createHighlight(h.getX(), false);
 						if (locationHighlight != null) {
-							chart.highlightValues(new Highlight[]{locationHighlight, h});
+							chart.highlightValues(new Highlight[] {locationHighlight, h});
 						} else {
 							chart.highlightValue(h, true);
 						}
@@ -423,7 +425,7 @@ public class ElevationProfileWidget extends MapWidget {
 			}
 		} else if (newLocationHighlight != null) {
 			if (highlighted == null) {
-				highlighted = new Highlight[]{newLocationHighlight};
+				highlighted = new Highlight[] {newLocationHighlight};
 			} else {
 				Highlight[] newHighlighted = new Highlight[highlighted.length + 1];
 				newHighlighted[0] = newLocationHighlight;

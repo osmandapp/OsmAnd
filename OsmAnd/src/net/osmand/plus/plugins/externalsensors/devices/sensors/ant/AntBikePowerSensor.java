@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
 import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_BIKE_POWER;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,7 +83,7 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 		@NonNull
 		@Override
 		public List<SensorDataField> getDataFields() {
-			return Collections.singletonList(new SensorDataField(R.string.map_widget_ant_bicycle_power, -1, calculatedPower));
+			return Collections.singletonList(new BikePowerDataField(R.string.map_widget_ant_bicycle_power, -1, calculatedPower));
 		}
 
 		@NonNull
@@ -147,11 +148,11 @@ public class AntBikePowerSensor extends AntAbstractSensor<AntPlusBikePowerPcc> {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		BikePowerData data = lastBikePowerData;
 		double calculatedPower = data != null ? data.getCalculatedPower() : 0;
 		if (calculatedPower > 0) {
-			json.put(getSensorId(),  DECIMAL_FORMAT.format(calculatedPower));
+			json.put(SENSOR_TAG_BIKE_POWER, DECIMAL_FORMAT.format(calculatedPower));
 		}
 	}
 }

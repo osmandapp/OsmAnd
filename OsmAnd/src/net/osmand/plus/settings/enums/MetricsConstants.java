@@ -27,4 +27,8 @@ public enum MetricsConstants {
 	public String toTTSString() {
 		return ttsString;
 	}
+
+	public boolean shouldUseFeet() {
+		return this == MILES_AND_FEET || this == MILES_AND_YARDS || this == NAUTICAL_MILES_AND_FEET;
+	}
 }

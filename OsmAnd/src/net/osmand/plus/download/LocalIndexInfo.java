@@ -6,6 +6,7 @@ import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXFile;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.LocalIndexHelper.LocalIndexType;
 
 import java.io.File;
@@ -176,8 +177,8 @@ public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 		return fileName;
 	}
 
-	public String getBaseName() {
-		return type.getBasename(this);
+	public String getBaseName(@NonNull OsmandApplication app) {
+		return type.getBasename(app, this);
 	}
 
 	@Override

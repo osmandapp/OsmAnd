@@ -101,7 +101,7 @@
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_gravity="center_vertical"
 				android:layout_margin="@dimen/text_margin_small"
-				android:contentDescription="@string/shared_string_more"
+				android:contentDescription="@string/shared_string_menu"
 				android:src="@drawable/ic_overflow_menu_white"
 				android:tint="?attr/default_icon_color" />
 

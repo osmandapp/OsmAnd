@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
-import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -115,11 +113,6 @@ public class AntRssiCommonSensor<T extends AntPlusCommonPcc> extends AntAbstract
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		RssiData data = rssiData;
-		double rssi = data != null ? data.getRssi() : 0;
-		if (rssi > 0) {
-			json.put(getSensorId(), DECIMAL_FORMAT.format(rssi));
-		}
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
 }

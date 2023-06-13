@@ -86,7 +86,9 @@ public class MapLayerBottomSheet extends BaseBottomSheetDialogFragment {
 			MapLayerType layerType = layerTypes.get(position);
 
 			holder.title.setText(layerType.getNameId());
-			holder.description.setText(layerType.getMapSourceNameForLayer(app));
+			String mapSource = layerType.getMapSourceNameForLayer(app);
+			String mapSourceTitle = settings.getTileSourceTitle(mapSource);
+			holder.description.setText(mapSourceTitle);
 			holder.layerIcon.setImageResource(layerType.getIconId());
 			int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 			holder.layerIcon.setImageTintList(ColorStateList.valueOf(iconColor));

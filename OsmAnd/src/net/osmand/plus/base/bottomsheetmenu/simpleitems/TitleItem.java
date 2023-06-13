@@ -16,8 +16,7 @@ public class TitleItem extends SimpleBottomSheetItem {
 	}
 
 	public TitleItem(CharSequence title, @ColorRes int titleColorId) {
-		this.title = title;
-		this.layoutId = R.layout.bottom_sheet_item_title;
+		this(title);
 		this.titleColorId = titleColorId;
 	}
 

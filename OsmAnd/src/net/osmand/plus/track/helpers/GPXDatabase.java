@@ -225,6 +225,16 @@ public class GPXDatabase {
 			GPX_COL_MAX_FILTER_ALTITUDE + " = ?, " +
 			GPX_COL_MAX_FILTER_HDOP + " = ? ";
 
+	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
+			GPX_TABLE_NAME + " SET " +
+			GPX_COL_COLOR + " = ?, " +
+			GPX_COL_WIDTH + " = ?, " +
+			GPX_COL_SHOW_ARROWS + " = ?, " +
+			GPX_COL_SHOW_START_FINISH + " = ?, " +
+			GPX_COL_SPLIT_TYPE + " = ?, " +
+			GPX_COL_SPLIT_INTERVAL + " = ?, " +
+			GPX_COL_COLORING_TYPE + " = ? ";
+
 	private final OsmandApplication app;
 
 	public static class GpxDataItem {
@@ -606,7 +616,7 @@ public class GPXDatabase {
 
 	public boolean rename(@Nullable GpxDataItem item, File currentFile, File newFile) {
 		SQLiteConnection db = openConnection(false);
-		if (db != null){
+		if (db != null) {
 			try {
 				String newFileName = getFileName(newFile);
 				String newFileDir = getFileDir(newFile);
@@ -615,8 +625,8 @@ public class GPXDatabase {
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
 								GPX_COL_NAME + " = ? " + ", " +
 								GPX_COL_DIR + " = ? " +
-						" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] { newFileName, newFileDir, fileName, fileDir });
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {newFileName, newFileDir, fileName, fileDir});
 				if (item != null) {
 					item.file = newFile;
 				}
@@ -630,13 +640,13 @@ public class GPXDatabase {
 
 	public boolean updateColor(GpxDataItem item, int color) {
 		SQLiteConnection db = openConnection(false);
-		if (db != null){
+		if (db != null) {
 			try {
 				String fileName = getFileName(item.file);
 				String fileDir = getFileDir(item.file);
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + GPX_COL_COLOR + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] { (color == 0 ? "" : Algorithms.colorToString(color)), fileName, fileDir });
+						new Object[] {(color == 0 ? "" : Algorithms.colorToString(color)), fileName, fileDir});
 				item.color = color;
 			} finally {
 				db.close();
@@ -745,7 +755,7 @@ public class GPXDatabase {
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
 								GPX_COL_SHOW_AS_MARKERS + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[]{showAsMarkers ? 1 : 0, fileName, fileDir});
+						new Object[] {showAsMarkers ? 1 : 0, fileName, fileDir});
 				item.setShowAsMarkers(showAsMarkers);
 			} finally {
 				db.close();
@@ -764,7 +774,7 @@ public class GPXDatabase {
 				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
 								GPX_COL_JOIN_SEGMENTS + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[]{joinSegments ? 1 : 0, fileName, fileDir});
+						new Object[] {joinSegments ? 1 : 0, fileName, fileDir});
 				item.joinSegments = joinSegments;
 			} finally {
 				db.close();
@@ -776,7 +786,7 @@ public class GPXDatabase {
 
 	public boolean updateSplit(@NonNull GpxDataItem item, int splitType, double splitInterval) {
 		SQLiteConnection db = openConnection(false);
-		if (db != null){
+		if (db != null) {
 			try {
 				String fileName = getFileName(item.file);
 				String fileDir = getFileDir(item.file);
@@ -784,7 +794,7 @@ public class GPXDatabase {
 								GPX_COL_SPLIT_TYPE + " = ?, " +
 								GPX_COL_SPLIT_INTERVAL + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] { splitType, splitInterval, fileName, fileDir });
+						new Object[] {splitType, splitInterval, fileName, fileDir});
 				item.splitType = splitType;
 				item.splitInterval = splitInterval;
 			} finally {
@@ -797,7 +807,7 @@ public class GPXDatabase {
 
 	public boolean updateGpsFiltersConfig(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
 		SQLiteConnection db = openConnection(false);
-		if (db != null){
+		if (db != null) {
 			try {
 				double smoothingThreshold = selectedGpxFile.getSmoothingFilter().getSelectedMaxValue();
 				double minSpeed = selectedGpxFile.getSpeedFilter().getSelectedMinValue();
@@ -847,6 +857,35 @@ public class GPXDatabase {
 		}
 	}
 
+	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,
+	                                boolean showArrows, boolean showStartFinish, int splitType,
+	                                double splitInterval, @Nullable String coloringType) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileDir = getFileDir(item.file);
+				String fileName = getFileName(item.file);
+
+				db.execSQL(GPX_TABLE_UPDATE_APPEARANCE + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {(color == 0 ? "" : Algorithms.colorToString(color)), width,
+								showArrows ? 1 : 0, showStartFinish ? 1 : 0, splitType,
+								splitInterval, coloringType, fileName, fileDir});
+
+				item.color = color;
+				item.width = width;
+				item.showArrows = showArrows;
+				item.showStartFinish = showStartFinish;
+				item.splitType = splitType;
+				item.splitInterval = splitInterval;
+				item.coloringType = coloringType;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean remove(File file) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
@@ -854,7 +893,7 @@ public class GPXDatabase {
 				String fileName = getFileName(file);
 				String fileDir = getFileDir(file);
 				db.execSQL("DELETE FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] { fileName, fileDir });
+						new Object[] {fileName, fileDir});
 			} finally {
 				db.close();
 			}
@@ -964,23 +1003,23 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateAnalysis(GpxDataItem item, GPXTrackAnalysis a, SQLiteConnection db) {
-		if (a == null) {
+	public boolean updateAnalysis(@NonNull GpxDataItem item, @Nullable GPXTrackAnalysis analysis, @NonNull SQLiteConnection db) {
+		if (analysis == null) {
 			return false;
 		}
 		String fileName = getFileName(item.file);
 		String fileDir = getFileDir(item.file);
 		long fileLastModifiedTime = item.file.lastModified();
-		Double startLat = a.latLonStart != null ? a.latLonStart.getLatitude() : null;
-		Double startLon = a.latLonStart != null ? a.latLonStart.getLongitude() : null;
+		Double startLat = analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null;
+		Double startLon = analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null;
 		db.execSQL(GPX_TABLE_UPDATE_ANALYSIS + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-				new Object[] {a.totalDistance, a.totalTracks, a.startTime, a.endTime,
-						a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp,
-						a.diffElevationDown, a.avgElevation, a.minElevation, a.maxElevation,
-						a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, fileLastModifiedTime,
-						Algorithms.encodeCollection(a.wptCategoryNames), startLat, startLon, fileName, fileDir});
+				new Object[] {analysis.totalDistance, analysis.totalTracks, analysis.startTime, analysis.endTime,
+						analysis.timeSpan, analysis.timeMoving, analysis.totalDistanceMoving, analysis.diffElevationUp,
+						analysis.diffElevationDown, analysis.avgElevation, analysis.minElevation, analysis.maxElevation,
+						analysis.maxSpeed, analysis.avgSpeed, analysis.points, analysis.wptPoints, fileLastModifiedTime,
+						Algorithms.encodeCollection(analysis.wptCategoryNames), startLat, startLon, fileName, fileDir});
 		item.fileLastModifiedTime = fileLastModifiedTime;
-		item.analysis = a;
+		item.analysis = analysis;
 		return true;
 	}
 

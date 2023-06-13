@@ -276,7 +276,7 @@
     <string name="poi_landuse_railway">Área ferroviaria</string>
     <string name="poi_canal">Canal</string>
     <string name="poi_pier">Muelle</string>
-    <string name="poi_surveillance">Vigilancia</string>
+    <string name="poi_surveillance">Vigilancia;Cámara de seguridad;Cámara de vigilancia</string>
     <string name="poi_observatory">Observatorio</string>
     <string name="poi_astronomical_observatory">Astronómico</string>
     <string name="poi_tower">Torre</string>

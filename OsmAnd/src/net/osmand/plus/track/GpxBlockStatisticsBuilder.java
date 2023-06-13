@@ -32,7 +32,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.SegmentActionsListener;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
@@ -328,7 +328,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_ALTITUDE: {
-				if (analysis.hasElevationData) {
+				if (analysis.hasElevationData()) {
 					items.add(statBlock);
 				}
 				break;
@@ -346,7 +346,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_TIME_SPAN: {
-				if (analysis.hasSpeedData) {
+				if (analysis.hasSpeedData()) {
 					items.add(statBlock);
 				}
 				break;
@@ -443,7 +443,7 @@ public class GpxBlockStatisticsBuilder {
 					GPXTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
 					if (blocksClickable && analysis != null && actionsListener != null) {
 						ArrayList<GPXDataSetType> list = new ArrayList<>();
-						if (analysis.hasElevationData || analysis.isSpeedSpecified() || analysis.hasSpeedData) {
+						if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {
 							if (item.firstType != null) {
 								list.add(item.firstType);
 							}

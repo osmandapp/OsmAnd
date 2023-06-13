@@ -21,6 +21,7 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonChartAdapter;
@@ -29,7 +30,7 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.OrderedLineDataSet;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.utils.OsmAndFormatter;
 
 import java.util.ArrayList;
@@ -143,7 +144,8 @@ public class RouteStatisticCard extends MapBaseCard {
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
 		buildHeader(analysis);
-		if (analysis.hasElevationData) {
+		boolean hasElevationData = analysis.hasElevationData();
+		if (hasElevationData) {
 			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
 
 			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
@@ -171,10 +173,10 @@ public class RouteStatisticCard extends MapBaseCard {
 			}
 			analyseButton.setOnClickListener(onAnalyseClickListener);
 		}
-		view.findViewById(R.id.altitude_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.slope_info_divider).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.slope_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.buttons_container).setVisibility(analysis.hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.altitude_container).setVisibility(hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.slope_info_divider).setVisibility(hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.slope_container).setVisibility(hasElevationData ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.buttons_container).setVisibility(hasElevationData ? View.VISIBLE : View.GONE);
 	}
 
 	@Nullable
@@ -197,14 +199,14 @@ public class RouteStatisticCard extends MapBaseCard {
 		ChartUtils.setupGPXChart(mChart, 24f, 16f, true);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
-		if (analysis.hasElevationData) {
+		if (analysis.hasElevationData()) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			OrderedLineDataSet slopeDataSet;
 			OrderedLineDataSet elevationDataSet = ChartUtils.createGPXElevationDataSet(app, mChart, analysis,
-					GPXDataSetAxisType.DISTANCE, false, true, false);
+					GPXDataSetType.ALTITUDE, GPXDataSetAxisType.DISTANCE, false, true, false);
 			dataSets.add(elevationDataSet);
 			slopeDataSet = ChartUtils.createGPXSlopeDataSet(app, mChart, analysis,
-					GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
+					GPXDataSetType.SLOPE, GPXDataSetAxisType.DISTANCE, elevationDataSet.getEntries(), true, true, false);
 			if (slopeDataSet != null) {
 				dataSets.add(slopeDataSet);
 			}

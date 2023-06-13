@@ -8,13 +8,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -61,12 +59,12 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 
 		if (gpxItem != null && gpxItem.analysis != null) {
 			ArrayList<GPXDataSetType> list = new ArrayList<>();
-			if (gpxItem.analysis.hasElevationData) {
+			if (gpxItem.analysis.hasElevationData()) {
 				list.add(GPXDataSetType.ALTITUDE);
 			}
-			if (gpxItem.analysis.hasSpeedData) {
+			if (gpxItem.analysis.hasSpeedData()) {
 				list.add(GPXDataSetType.SPEED);
-			} else if (gpxItem.analysis.hasElevationData) {
+			} else if (gpxItem.analysis.hasElevationData()) {
 				list.add(GPXDataSetType.SLOPE);
 			}
 			if (!list.isEmpty()) {

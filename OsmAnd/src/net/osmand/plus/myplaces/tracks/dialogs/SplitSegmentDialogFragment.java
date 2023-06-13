@@ -564,7 +564,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 					View elevationDivider = convertView.findViewById(R.id.elevation_divider);
 					View elevationSection = convertView.findViewById(R.id.elevation_layout);
-					if (analysis.hasElevationData) {
+					if (analysis.hasElevationData()) {
 						elevationDivider.setVisibility(View.VISIBLE);
 						elevationSection.setVisibility(View.VISIBLE);
 
@@ -623,7 +623,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 					View speedDivider = convertView.findViewById(R.id.speed_divider);
 					View speedSection = convertView.findViewById(R.id.speed_layout);
-					if (analysis.hasSpeedData) {
+					if (analysis.hasSpeedData()) {
 						speedDivider.setVisibility(View.VISIBLE);
 						speedSection.setVisibility(View.VISIBLE);
 

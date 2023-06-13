@@ -1,5 +1,9 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_CADENCE;
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_DISTANCE;
+import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_SPEED;
+
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 
@@ -294,15 +298,26 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		BikeCadenceData cadenceData = lastBikeCadenceData;
-		if (cadenceData != null) {
-			json.put(getSensorId() + "_cadence", cadenceData.cadence);
-		}
-		BikeSpeedDistanceData speedDistanceData = lastBikeSpeedDistanceData;
-		if (speedDistanceData != null) {
-			json.put(getSensorId() + "_speed", speedDistanceData.speed);
-			json.put(getSensorId() + "_distance", speedDistanceData.distance);
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
+		switch (widgetDataFieldType) {
+			case BIKE_SPEED:
+				if (lastBikeSpeedDistanceData != null) {
+					json.put(SENSOR_TAG_SPEED, lastBikeSpeedDistanceData.speed);
+				}
+				break;
+			case BIKE_CADENCE:
+				BikeCadenceData cadenceData = lastBikeCadenceData;
+				if (cadenceData != null) {
+					json.put(SENSOR_TAG_CADENCE, cadenceData.cadence);
+				}
+				break;
+			case BIKE_DISTANCE:
+				if (lastBikeSpeedDistanceData != null) {
+					json.put(SENSOR_TAG_DISTANCE, lastBikeSpeedDistanceData.distance);
+				}
+				break;
+			default:
+				break;
 		}
 	}
 }

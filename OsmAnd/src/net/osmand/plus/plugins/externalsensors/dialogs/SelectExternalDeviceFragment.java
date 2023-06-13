@@ -181,9 +181,10 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	@Override
 	public void onResume() {
 		super.onResume();
-		noBluetoothCard.setVisibility(plugin.isBlueToothEnabled() ? View.GONE : View.VISIBLE);
+		noBluetoothCard.setVisibility(AndroidUtils.isBluetoothEnabled(requireActivity()) ? View.GONE : View.VISIBLE);
 		updatePairedSensorsListeners(true);
 		updatePairedSensorsList();
+		updateCurrentStateView();
 	}
 
 	@Override
@@ -205,14 +206,9 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 
 	private void updatePairedSensorsList() {
 		List<AbstractDevice<?>> devices = plugin.getPairedDevices();
-		ArrayList<AbstractDevice<?>> filteredDevices = new ArrayList<>();
-		for (AbstractDevice<?> device : devices) {
-			if (isDeviceForWidgetFieldType(device)) {
-				filteredDevices.add(device);
-			}
-		}
-		if (devices.isEmpty()) {
-			if (plugin.isBlueToothEnabled()) {
+		List<AbstractDevice<?>> filteredDevices = plugin.getPairedDevicesByWidgetType(widgetDataFieldType);
+		if (filteredDevices.isEmpty()) {
+			if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
 				currentState = States.NOTHING_FOUND;
 			} else {
 				currentState = States.NO_BLUETOOTH;
@@ -227,17 +223,6 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 		updateCurrentStateView();
 	}
 
-	private boolean isDeviceForWidgetFieldType(AbstractDevice<?> device) {
-		for (AbstractSensor sensor : device.getSensors()) {
-			for (SensorWidgetDataFieldType type :
-					sensor.getSupportedWidgetDataFieldTypes()) {
-				if (type == widgetDataFieldType) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
 	                                @NonNull Fragment targetFragment,
@@ -254,8 +239,15 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setArguments(arguments);
 			fragment.setRetainInstance(true);
-			fragment.show(manager, TAG);
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public void onDeviceConnecting(@NonNull AbstractDevice<?> device) {
 	}
 
 	@Override
@@ -275,7 +267,7 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	public void onDeviceSelected(@Nullable AbstractDevice<?> device) {
 		if (getTargetFragment() instanceof SelectDeviceListener) {
 			((SelectDeviceListener) getTargetFragment()).selectNewDevice(device, widgetDataFieldType);
-			dismiss();
+			requireActivity().onBackPressed();
 		}
 	}
 

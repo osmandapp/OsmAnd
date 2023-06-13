@@ -597,10 +597,6 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 		}
 	}
 
-	private boolean isNightMode() {
-		return !app.getSettings().isLightContentForMode(getAppMode());
-	}
-
 	@NonNull
 	private ApplicationMode getAppMode() {
 		return appMode != null ? appMode : app.getSettings().getApplicationMode();

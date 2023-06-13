@@ -14,6 +14,8 @@
 	<color name="text_color_tertiary_dark">#404040</color>
 	<color name="active_color_primary_light">#237bff</color>
 	<color name="active_color_primary_dark">#d28521</color>
+	<color name="active_color_secondary_light">#DEEBFF</color>
+	<color name="active_color_secondary_dark">#4D300E</color>
 	<color name="divider_color_light">#e6e6e6</color>
 	<color name="divider_color_dark">#2c3033</color>
 	<color name="activity_background_color_light">#f0f0f0</color>
@@ -303,6 +305,14 @@
 	<color name="gpx_chart_orange_label">#b27700</color>
 	<color name="gpx_chart_red_label">#b20000</color>
 	<color name="gpx_chart_green_label">#197d2a</color>
+	<color name="gpx_chart_pink">#D24669</color>
+	<color name="gpx_chart_pink_label">#A42847</color>
+	<color name="gpx_chart_yellow">#E5E51A</color>
+	<color name="gpx_chart_yellow_label">#B7B715</color>
+	<color name="gpx_chart_teal">#16BBCA</color>
+	<color name="gpx_chart_teal_label">#14A1B8</color>
+	<color name="gpx_chart_indigo">#5720C5</color>
+	<color name="gpx_chart_indigo_label">#5720C5</color>
 
 	<color name="gpx_split_segment_icon_color">#b3b3b3</color>
 	<color name="gpx_pale_green">#87CC70</color>

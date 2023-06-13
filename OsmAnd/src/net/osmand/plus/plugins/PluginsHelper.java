@@ -11,12 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.github.mikephil.charting.charts.LineChart;
+
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -25,6 +29,9 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
@@ -34,9 +41,9 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
-import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.openplacereviews.OpenPlaceReviewsPlugin;
@@ -783,6 +790,34 @@ public class PluginsHelper {
 	public static void updateMapPresentationEnvironment(MapRendererContext mapRendererContext) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.updateMapPresentationEnvironment(mapRendererContext);
+		}
+	}
+
+	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point,
+	                                  float distance, int timeDiff, boolean firstPoint, boolean lastPoint) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.onAnalysePoint(analysis, point, distance, timeDiff, firstPoint, lastPoint);
+		}
+	}
+
+	@Nullable
+	public static OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart,
+	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GPXDataSetType graphType,
+	                                                       @NonNull GPXDataSetAxisType axisType,
+	                                                       boolean calcWithoutGaps, boolean useRightAxis) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			OrderedLineDataSet dataSet = plugin.getOrderedLineDataSet(chart, analysis, graphType, axisType, calcWithoutGaps, useRightAxis);
+			if (dataSet != null) {
+				return dataSet;
+			}
+		}
+		return null;
+	}
+
+	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.getAvailableGPXDataSetTypes(analysis, availableTypes);
 		}
 	}
 }

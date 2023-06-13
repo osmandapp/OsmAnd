@@ -82,7 +82,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		editText.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
-				updateFileNameFromEditText(s.toString());
+				updateFileNameFromEditText(s.toString().trim());
 			}
 		});
 		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
