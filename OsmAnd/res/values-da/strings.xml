@@ -4056,7 +4056,7 @@
     <string name="osmand_cloud_help_descr">Brug for hjælp\? Kontakt os venligst på %1$s</string>
     <string name="osmand_cloud_create_account_descr">Indtast din e-mailadresse, en bekræftelseskode vil blive sendt dertil,
 \nog alle dine data vil blive knyttet til den.</string>
-    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til det næste trin til den.</string>
+    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til den.</string>
     <string name="verify_email_address">Bekræft e-mailadressen</string>
     <string name="verify_email_address_descr">Verifikationskode sendt til %1$s. Indtast den venligst i feltet nedenfor.</string>
     <string name="enter_verification_code">Indtast engangsadgangskode</string>
@@ -5244,4 +5244,5 @@
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">OPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Tillad via ferrata</string>
+    <string name="shared_string_close_the_dialog">Luk dialogen</string>
 </resources>
