@@ -867,8 +867,10 @@ public class GPXDatabase {
 				String fileName = getFileName(item.file);
 
 				db.execSQL(GPX_TABLE_UPDATE_APPEARANCE + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] {color, width, showArrows ? 1 : 0, showStartFinish ? 1 : 0,
-								splitType, splitInterval, coloringType, fileName, fileDir});
+						new Object[] {(color == 0 ? "" : Algorithms.colorToString(color)), width,
+								showArrows ? 1 : 0, showStartFinish ? 1 : 0, splitType,
+								splitInterval, coloringType, fileName, fileDir});
+
 				item.color = color;
 				item.width = width;
 				item.showArrows = showArrows;
