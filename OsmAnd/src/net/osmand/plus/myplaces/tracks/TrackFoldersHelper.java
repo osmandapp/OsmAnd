@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -356,6 +357,19 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
+		}
+	}
+
+	public void renameFolder(@NonNull TrackFolder trackFolder, @NonNull String name, @Nullable CallbackWithObject<TrackFolder> callback) {
+		File oldDir = trackFolder.getDirFile();
+		File newDir = new File(oldDir.getParentFile(), name);
+		if (oldDir.renameTo(newDir)) {
+			TrackFolderLoaderTask task = new TrackFolderLoaderTask(app, newDir, newFolder -> {
+				if (callback != null) {
+					callback.processResult(newFolder);
+				}
+			});
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 }

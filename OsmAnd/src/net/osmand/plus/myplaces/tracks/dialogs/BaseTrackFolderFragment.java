@@ -368,8 +368,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void onFolderRenamed(@NonNull File oldDir, @NonNull File newDir) {
-		reloadTracks();
+	public void onFolderRenamed(@NonNull File newDir) {
+		updateContent();
 	}
 
 	@Override
