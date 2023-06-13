@@ -30,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -48,6 +49,7 @@ import net.osmand.plus.mapsource.InputZoomLevelsBottomSheet.OnZoomSetListener;
 import net.osmand.plus.mapsource.MercatorProjectionBottomSheet.OnMercatorSelectedListener;
 import net.osmand.plus.mapsource.TileStorageFormatBottomSheet.OnTileStorageFormatSelectedListener;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -90,6 +92,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private TileSourceTemplate template;
 	@Nullable
 	private String editedLayerName;
+	private String title = "";
 	private String urlToLoad = "";
 	private int minZoom = MIN_ZOOM;
 	private int maxZoom = MAX_ZOOM;
@@ -99,13 +102,14 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private boolean fromTemplate;
 	private boolean wasChanged;
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	public static void showInstance(@NonNull FragmentActivity activity,
 	                                @Nullable Fragment targetFragment,
-	                                @Nullable String editedLayerName) {
+	                                @Nullable String editedFileName) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
 			fragment.setTargetFragment(targetFragment, 0);
-			fragment.setEditedLayerName(editedLayerName);
+			fragment.setEditedLayerName(editedFileName);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
@@ -231,6 +235,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			if (fromTemplate) {
 				editedLayerName = template.getName();
 			}
+			title = settings.getTileSourceTitle(editedLayerName);
 			urlToLoad = template.getUrlTemplate();
 			expireTimeMinutes = template.getExpirationTimeMinutes();
 			minZoom = template.getMinimumZoomSupported();
@@ -392,7 +397,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void updateUi() {
-		nameEditText.setText(editedLayerName != null ? editedLayerName.replace(IndexConstants.SQLITE_EXT, "") : "");
+		nameEditText.setText(title);
 		urlEditText.setText(urlToLoad);
 		nameEditText.addTextChangedListener(new MapSourceTextWatcher(nameInputLayout));
 		urlEditText.addTextChangedListener(new MapSourceTextWatcher(urlInputLayout));
