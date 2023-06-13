@@ -347,8 +347,8 @@
     <string name="poi_caravan_site">Campingvognsplads</string>
     <string name="poi_picnic_site">Picnicplads</string>
     <string name="poi_spring">Kilde</string>
-    <string name="poi_cemetery">Kirkegård</string>
-    <string name="poi_grave_yard">Gravplads</string>
+    <string name="poi_cemetery">Gravplads</string>
+    <string name="poi_grave_yard">Kirkegård</string>
     <string name="poi_shelter">Shelter</string>
     <string name="poi_funicular">Kabelbane</string>
     <string name="poi_resort">Feriested</string>
@@ -715,7 +715,7 @@
     <string name="poi_sailing">Sejlads</string>
     <string name="poi_charity">Genbrugsbutik, velgørenhed</string>
     <string name="poi_photo">Fotoforretning</string>
-    <string name="poi_tomb">Grav</string>
+    <string name="poi_tomb">Gravkammer</string>
     <string name="poi_wilderness_hut">Vildmarkshytte</string>
     <string name="poi_payment_terminal">Betalingsterminal</string>
     <string name="poi_piste">Piste</string>

@@ -2345,4 +2345,8 @@
     <string name="rendering_value_car_name">Automobila</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="routing_attr_allow_intermediate_description">Percors pus dificils amb de pendas sobdas. Generalament d’obstacles que faudrà evitar.</string>
+    <string name="weather_forecast">Previsions dau temps que fa</string>
+    <string name="purchases_feature_desc_cross_buy">Utilisatz vòstre abonament sus totei lei plataformas (Android, iOS, web) sensa còst suplementari.</string>
+    <string name="compass_visible_if_map_rotated">Visible se la mapa es revirada</string>
+    <string name="osm_live_banner_desc">Teledescargatz un nombre de mapas illimitat, amb d’actualizacions setmanieras, jornadieras emai oràrias.</string>
 </resources>

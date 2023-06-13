@@ -5238,4 +5238,8 @@
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
     <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
+    <string name="routing_attr_allow_via_ferrata_description">Klettersteige zulassen.</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="revolutions_per_minute_unit">U/min</string>
+    <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
 </resources>

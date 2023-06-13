@@ -4583,4 +4583,6 @@
     <string name="poi_ship_yes">Прохід кораблів: yes</string>
     <string name="poi_boat_destination">Прохід човнів: destination</string>
     <string name="poi_ship_designated">Прохід кораблів: designated</string>
+    <string name="poi_tunnel_name">Назва тунелю</string>
+    <string name="poi_bridge_name">Назва мосту</string>
 </resources>

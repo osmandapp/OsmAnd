@@ -5226,4 +5226,8 @@
     <string name="calculate_offline_altitude_descr">根據高度圖資料，離線計算海拔。與裝置記錄的海拔差異可用作高度校正。</string>
     <string name="error_calculate">計算結果為空</string>
     <string name="calculate_offline">離線計算</string>
+    <string name="routing_attr_allow_via_ferrata_description">允許鐵索攀岩路徑。</string>
+    <string name="power_watts_unit">瓦</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">允許鐵索攀岩</string>
 </resources>
