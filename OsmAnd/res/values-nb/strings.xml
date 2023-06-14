@@ -4004,7 +4004,7 @@
     <string name="choose_what_to_restore">Velg hva som skal gjenopprettes.</string>
     <string name="restore_selected_data">Gjenopprett valgt data</string>
     <string name="backup_version_history">Versjonshistorikk</string>
-    <string name="osmand_cloud_login_descr">Skriv inn e-postadressen du brukte for registrering. Du vil bli tilsendt et engangspassord som trengs i neste steg.</string>
+    <string name="osmand_cloud_login_descr">Skriv inn e-postadressen du brukte for registrering. Du vil bli tilsendt et engangspassord.</string>
     <string name="file_size_needed_for_import">Trengs for import</string>
     <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
     <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
