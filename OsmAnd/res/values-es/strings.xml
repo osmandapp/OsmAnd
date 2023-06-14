@@ -4350,7 +4350,7 @@
     <string name="enter_verification_code">Ingresa la contraseña de un solo uso</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
-    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos un código temporal necesario para el siguiente paso.</string>
+    <string name="osmand_cloud_login_descr">Por favor, introduce la dirección del correo electrónico con la que te registrarte. Se enviará una contraseña de un solo uso.</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
 \ny todos los datos se vincularán a él.</string>
     <string name="backup_into_file">Crear copia de seguridad local</string>
@@ -5239,4 +5239,5 @@
     <string name="power_watts_unit">Vatios</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Permitir vía férrea</string>
+    <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
 </resources>
