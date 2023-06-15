@@ -1,7 +1,5 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
 
@@ -55,7 +53,6 @@ import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.render.RenderingRulesStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -355,11 +352,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	public void saveTracksAppearance() {
-		saveDefaultAppearance();
-		updateSelectedTracksAppearance();
-	}
-
-	private void updateSelectedTracksAppearance() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			CallbackWithObject<Void> callback = result -> {
@@ -384,14 +376,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			((TracksSelectionFragment) fragment).dismiss();
 		}
 		dismiss();
-	}
-
-	private void saveDefaultAppearance() {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		String colorName = GpxAppearanceAdapter.parseTrackColorName(renderer, trackDrawInfo.getColor());
-
-		settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).set(colorName);
-		settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).set(trackDrawInfo.getWidth());
 	}
 
 	@Override

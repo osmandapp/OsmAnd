@@ -395,16 +395,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void showExportDialog(@NonNull TrackFolder folder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			List<File> selectedFiles = new ArrayList<>();
-			for (TrackItem trackItem : folder.getFlattenedTrackItems()) {
-				selectedFiles.add(trackItem.getFile());
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null) {
+				foldersHelper.showExportDialog(folder.getFlattenedTrackItems(), this);
 			}
-			HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
-			selectedTypes.put(ExportSettingsType.TRACKS, selectedFiles);
-
-			Bundle bundle = new Bundle();
-			bundle.putSerializable(SELECTED_TYPES, selectedTypes);
-			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}
 

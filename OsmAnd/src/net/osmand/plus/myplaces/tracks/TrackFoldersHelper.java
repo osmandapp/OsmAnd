@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.DrawableRes;
@@ -21,6 +22,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -40,6 +42,7 @@ import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask.GpxFilesDeletionLi
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -54,7 +57,9 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -208,6 +213,15 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
 					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, fragment);
+					fragment.dismiss();
+				})
+				.create()
+		);
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_share)
+				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
+				.setOnClickListener(v -> {
+					showExportDialog(selectedTrackItems, fragment);
 					fragment.dismiss();
 				})
 				.create()
@@ -385,5 +399,18 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			});
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
+	}
+
+	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
+		List<File> selectedFiles = new ArrayList<>();
+		for (TrackItem trackItem : trackItems) {
+			selectedFiles.add(trackItem.getFile());
+		}
+		HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
+		selectedTypes.put(ExportSettingsType.TRACKS, selectedFiles);
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(SELECTED_TYPES, selectedTypes);
+		MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState(), null, bundle);
 	}
 }
