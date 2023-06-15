@@ -4585,4 +4585,6 @@
     <string name="poi_cai_scale">CAI-skalo</string>
     <string name="poi_bridge_name">Nomo de ponto</string>
     <string name="poi_tunnel_name">Nomo de tunelo</string>
+    <string name="poi_vending_machine_fuel">jes</string>
+    <string name="poi_vending_machine_fuel_filter">Brulaĵ-vendilo;brulaĵvendilo;fuelvendilo;fuelpumpilo;fuelkolono;brulaĵpumpilo</string>
 </resources>
