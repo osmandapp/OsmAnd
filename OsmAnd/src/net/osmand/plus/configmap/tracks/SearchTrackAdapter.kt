@@ -51,9 +51,13 @@ class SearchTracksAdapter(
 
     fun setTracksSortMode(sortMode: TracksSortMode) {
         this.sortMode = sortMode
+        sortItems()
+        notifyDataSetChanged()
+    }
+
+    private fun sortItems() {
         val latLon = app.mapViewTrackingUtilities.defaultLocation
         Collections.sort(items, TracksComparator(sortMode, latLon))
-        notifyDataSetChanged()
     }
 
     fun setSortTracksListener(sortTracksListener: SortTracksListener?) {
@@ -85,6 +89,7 @@ class SearchTracksAdapter(
         } else {
             items.addAll(filteredItems)
         }
+        sortItems()
         notifyDataSetChanged()
     }
 
