@@ -5180,4 +5180,8 @@
     <string name="delete_folder">Smazat složku</string>
     <string name="show_all_tracks_on_the_map">Zobrazit všechny stopy na mapě</string>
     <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externího zařízení.</string>
+    <string name="shared_string_close_the_dialog">Zavřít dialogové okno</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">Povolit via ferrata</string>
+    <string name="routing_attr_allow_via_ferrata_description">Povolit stezky via ferrata.</string>
 </resources>

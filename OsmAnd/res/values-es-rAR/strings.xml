@@ -4093,7 +4093,7 @@
     <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
 \ny todos los datos se vincularán a él.</string>
-    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos un código temporal necesario para el siguiente paso.</string>
+    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos una contraseña de un solo uso.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
     <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
@@ -5254,4 +5254,5 @@
     <string name="routing_attr_allow_via_ferrata_description">Permitir senderos de via ferrata.</string>
     <string name="power_watts_unit">Vatios (watts)</string>
     <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
 </resources>
