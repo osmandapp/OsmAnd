@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,12 +42,14 @@ import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask.GpxFilesDeletionListener;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -193,15 +196,15 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				}))
 				.create());
 
+		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
+		if (plugin != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.shared_string_export)
+					.setIcon(getContentIcon(R.drawable.ic_action_export))
+					.setOnClickListener(v -> exportTrackItem(plugin, trackItem, fragment))
+					.create());
+		}
 		if (file != null) {
-			OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-			if (osmEditingPlugin != null) {
-				items.add(new PopUpMenuItem.Builder(app)
-						.setTitleId(R.string.shared_string_export)
-						.setIcon(getContentIcon(R.drawable.ic_action_export))
-						.setOnClickListener(v -> osmEditingPlugin.sendGPXFiles(activity, fragment, file))
-						.create());
-			}
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_delete)
 					.setIcon(getContentIcon(R.drawable.ic_action_delete_dark))
@@ -274,6 +277,21 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
 		PopUpMenu.showSystemMenu(displayData);
+	}
+
+	private void exportTrackItem(@NonNull OsmEditingPlugin plugin, @NonNull TrackItem trackItem, @NonNull BaseTrackFolderFragment fragment) {
+		if (trackItem.isShowCurrentTrack()) {
+			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+			GPXFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
+
+			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
+				if (errorMessage == null) {
+					plugin.sendGPXFiles(activity, fragment, new File(gpxFile.path));
+				}
+			});
+		} else {
+			plugin.sendGPXFiles(activity, fragment, trackItem.getFile());
+		}
 	}
 
 	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment) {
