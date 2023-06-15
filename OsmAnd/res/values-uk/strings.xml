@@ -4986,7 +4986,7 @@
     <string name="cloud_sync_progress">Синхронізація…%1$s</string>
     <string name="checking_progress">Перевірка…</string>
     <string name="shared_string_modified">Змінено</string>
-    <string name="shared_string_unsynced">Несинхронізоване</string>
+    <string name="shared_string_unsynced">Не синхронізовано</string>
     <string name="check_for_updates">Перевірити наявність оновлень</string>
     <string name="cloud_changes">Зміни у хмарі</string>
     <string name="shared_string_uploaded">Надіслано</string>
@@ -5244,7 +5244,7 @@
     <string name="calculate_offline">Розрахувати офлайн</string>
     <string name="routing_attr_allow_via_ferrata_name">Дозволити віа феррата</string>
     <string name="routing_attr_allow_via_ferrata_description">Дозволити шляхи віа феррата.</string>
-    <string name="power_watts_unit">Ват</string>
-    <string name="revolutions_per_minute_unit">ОБ/ХВ</string>
+    <string name="power_watts_unit">Ватт</string>
+    <string name="revolutions_per_minute_unit">об/хв</string>
     <string name="shared_string_close_the_dialog">Закрити діалогове вікно</string>
 </resources>
