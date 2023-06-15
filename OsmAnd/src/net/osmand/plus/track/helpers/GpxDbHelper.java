@@ -131,7 +131,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return res;
 	}
 
-	public boolean updateWidth(@NonNull GpxDataItem item, String width) {
+	public boolean updateWidth(@NonNull GpxDataItem item, @NonNull String width) {
 		boolean res = database.updateWidth(item, width);
 		putToCache(item);
 		return res;

@@ -599,15 +599,15 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private void moveGpxFile(@NonNull File file) {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			MoveGpxFileBottomSheet.showInstance(manager, this, file.getAbsolutePath(), false, false);
+			MoveGpxFileBottomSheet.showInstance(manager, file, this, false, false);
 		}
 	}
 
 	@Override
-	public void onFileMove(@NonNull File src, @NonNull File dest) {
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
 		if (dest.exists()) {
 			app.showToastMessage(R.string.file_with_name_already_exists);
-		} else if (FileUtils.renameGpxFile(app, src, dest) != null) {
+		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
 			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
