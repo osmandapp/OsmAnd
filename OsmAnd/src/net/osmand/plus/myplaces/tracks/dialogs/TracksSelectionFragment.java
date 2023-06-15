@@ -81,7 +81,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		itemsSelectionHelper.clearSelectedItems();
 		groupsSelectionHelper.clearSelectedItems();
 
-		itemsSelectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
+		itemsSelectionHelper.setAllItems(rootFolder.getTrackItems());
 		groupsSelectionHelper.setAllItems(rootFolder.getSubFolders());
 	}
 
