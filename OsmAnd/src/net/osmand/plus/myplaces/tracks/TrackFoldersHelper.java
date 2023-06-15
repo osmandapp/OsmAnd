@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
+import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -19,7 +20,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -153,19 +153,17 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.create());
 
 		File file = trackItem.getFile();
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.analyze_on_map)
+				.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
+				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, result -> {
+					OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result, null);
+					detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					return true;
+				}))
+				.create());
+
 		if (file != null) {
-			GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(trackItem, app, null);
-			if (analysis != null && analysis.totalDistance != 0 && !trackItem.isShowCurrentTrack()) {
-				items.add(new PopUpMenuItem.Builder(app)
-						.setTitleId(R.string.analyze_on_map)
-						.setIcon(getContentIcon(R.drawable.ic_action_info_dark))
-						.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, result -> {
-							OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(activity, result);
-							detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-							return true;
-						}))
-						.create());
-			}
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_move)
 					.setIcon(getContentIcon(R.drawable.ic_action_folder_stroke))
