@@ -198,6 +198,7 @@
 	<string name="poi_self_checkout">Self checkout</string>
 	<string name="poi_waste_accepted">Accepted waste</string>
 	<string name="poi_cemt">CEMT</string>
+	<string name="poi_vending_machine_fuel_filter">Automatic fuel dispensers;Fuel vending machine</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -5147,5 +5148,7 @@
 
 	<string name="poi_tunnel_name">Tunnel name</string>
 	<string name="poi_bridge_name">Bridge name</string>
+
+	<string name="poi_vending_machine_fuel">Yes</string>
 
 </resources>
