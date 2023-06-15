@@ -40,6 +40,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeleteTracksTask.GpxFilesDeletionListener;
+import net.osmand.plus.myplaces.tracks.tasks.MoveTrackFoldersTask;
 import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
@@ -172,7 +173,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					.setIcon(getContentIcon(R.drawable.ic_action_folder_stroke))
 					.setOnClickListener(v -> {
 						FragmentManager manager = activity.getSupportFragmentManager();
-						MoveGpxFileBottomSheet.showInstance(manager, fragment, file.getAbsolutePath(), false, false);
+						MoveGpxFileBottomSheet.showInstance(manager, file, fragment, false, false);
 					})
 					.create());
 
@@ -244,6 +245,21 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		);
 		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, items);
 
+		String move = app.getString(R.string.shared_string_move);
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(move)
+				.setIcon(getContentIcon(R.drawable.ic_action_folder_move))
+				.setOnClickListener(v -> {
+					if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
+						showEmptyItemsToast(move);
+					} else {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						MoveGpxFileBottomSheet.showInstance(manager, null, fragment, false, true);
+					}
+				})
+				.showTopDivider(true)
+				.create()
+		);
 		String changeAppearance = app.getString(R.string.change_appearance);
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitle(changeAppearance)
@@ -409,14 +425,20 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	@Override
-	public void onFileMove(@NonNull File src, @NonNull File dest) {
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
 		if (dest.exists()) {
 			app.showToastMessage(R.string.file_with_name_already_exists);
-		} else if (FileUtils.renameGpxFile(app, src, dest) != null) {
+		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
 			reloadTracks();
 		} else {
 			app.showToastMessage(R.string.file_can_not_be_moved);
 		}
+	}
+
+	public void moveTracks(@NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
+	                       @NonNull File dest, @Nullable CallbackWithObject<Void> callback) {
+		MoveTrackFoldersTask task = new MoveTrackFoldersTask(activity, dest, items, groups, callback);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void renameFolder(@NonNull TrackFolder trackFolder, @NonNull String name, @Nullable CallbackWithObject<TrackFolder> callback) {

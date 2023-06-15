@@ -950,12 +950,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void onFileMove(@NonNull File src, @NonNull File dest) {
-		File file = FileUtils.renameGpxFile(app, src, dest);
-		if (file != null) {
-			updateFile(file);
-		} else {
-			app.showToastMessage(R.string.file_can_not_be_renamed);
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
+		if (src != null) {
+			File file = FileUtils.renameGpxFile(app, src, dest);
+			if (file != null) {
+				updateFile(file);
+			} else {
+				app.showToastMessage(R.string.file_can_not_be_renamed);
+			}
 		}
 	}
 
@@ -1128,7 +1130,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == RENAME_BUTTON_INDEX) {
 				FileUtils.renameFile(mapActivity, new File(gpxFile.path), this, true);
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {
-				MoveGpxFileBottomSheet.showInstance(fragmentManager, this, gpxFile.path, true, false);
+				MoveGpxFileBottomSheet.showInstance(fragmentManager, new File(gpxFile.path), this, true, false);
 			} else if (buttonIndex == GPS_FILTER_BUTTON_INDEX) {
 				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile, this);
 			} else if (buttonIndex == ALTITUDE_CORRECTION_BUTTON_INDEX) {

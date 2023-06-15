@@ -121,18 +121,23 @@ public class FileUtils {
 		if (src.renameTo(dest)) {
 			dest.setLastModified(System.currentTimeMillis());
 
-			GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
-			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
-			app.getGpxDbHelper().rename(src, dest);
-			app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
-			if (selectedGpxFile != null) {
-				selectedGpxFile.resetSplitProcessed();
-				selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
-				gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
-			}
+			updateMovedGpx(app, src, dest);
 			return dest;
 		}
 		return null;
+	}
+
+	public static void updateMovedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
+		app.getGpxDbHelper().rename(src, dest);
+		app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
+
+		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
+		if (selectedGpxFile != null) {
+			selectedGpxFile.resetSplitProcessed();
+			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
+			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
+		}
 	}
 
 	public static boolean removeGpxFile(@NonNull OsmandApplication app, @NonNull File file) {
