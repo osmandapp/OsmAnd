@@ -5097,7 +5097,7 @@
     <string name="test_heightmap">Тестировать карты высот</string>
     <string name="enable_3d_maps">Включить 3D-карты</string>
     <string name="app_mode_climbing">Альпинизм</string>
-    <string name="offline_cache">Офлайн кеш</string>
+    <string name="offline_cache">Офлайн-кеш</string>
     <string name="shared_string_alt_name">Альтернативное название</string>
     <string name="token_is_not_valid">Токен недействителен</string>
     <string name="clear_online_cache">Очистить онлайн-кеш</string>
