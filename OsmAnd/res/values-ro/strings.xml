@@ -2914,7 +2914,7 @@
     <string name="osmand_cloud_help_descr">Aveți nevoie de ajutor\? Vă rugăm să ne contactați la %1$s</string>
     <string name="osmand_cloud_create_account_descr">Vă rugăm să introduceți adresa dvs. de e-mail, un cod de verificare va fi trimis acolo,
 \nși toate datele dvs. vor fi legate de aceasta.</string>
-    <string name="osmand_cloud_login_descr">Vă rugăm să introduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
+    <string name="osmand_cloud_login_descr">Vă rugăm să introduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică va fi trimisă la aceasta.</string>
     <string name="verify_email_address">Verificați adresa de e-mail</string>
     <string name="verify_email_address_descr">Codul de verificare a fost trimis la %1$s. Vă rugăm să îl introduceți în câmpul de mai jos.</string>
     <string name="enter_verification_code">Introduceți parola unică</string>
@@ -5238,4 +5238,9 @@
     <string name="map_2d_mode_action">mod 2D</string>
     <string name="external_device_low_battery">Baterie descărcată</string>
     <string name="external_device_forget_sensor">Uitați de senzor</string>
+    <string name="shared_string_close_the_dialog">Închideți dialogul</string>
+    <string name="routing_attr_allow_via_ferrata_name">Permiteți calea ferată</string>
+    <string name="routing_attr_allow_via_ferrata_description">Permiteți trasee pe calea ferată.</string>
+    <string name="power_watts_unit">Wați</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
 </resources>

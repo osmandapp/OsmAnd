@@ -4019,7 +4019,7 @@
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
     <string name="trip_recording_show_start_dialog_setting">Se malaktiva, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la ekranon de konfirmo.</string>
-    <string name="show_start_dialog">Montri komencan dialogon</string>
+    <string name="show_start_dialog">Montri la fenestron “Ekigi”</string>
     <string name="specify_color_for_map_mode">Elektu koloron por la map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
@@ -4090,7 +4090,7 @@
     <string name="restore_from_file">Restarigi el dosiero</string>
     <string name="osmand_cloud_help_descr">Ĉu vi bezonas helpon\? Kontaktu nin ĉe %1$s</string>
     <string name="osmand_cloud_create_account_descr">Enigu vian retpoŝtan adreson, kontrolkodo estos tien sendita kaj ĉiuj viaj datumoj estos al ĝi ligitaj.</string>
-    <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Dum la sekva etapo unufoja pasvorto estos al ĝi sendita.</string>
+    <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Unufoja pasvorto estos al ĝi sendita.</string>
     <string name="verify_email_address">Kontroli retpoŝtan adreson</string>
     <string name="verify_email_address_descr">Kontrolkodo sendita al %1$s, enigu ĝin en la kampon sube.</string>
     <string name="cloud_email_already_registered">Tiu ĉi retpoŝta adreso jam estas registrita.</string>
@@ -5234,4 +5234,5 @@
     <string name="power_watts_unit">Vatoj</string>
     <string name="revolutions_per_minute_unit">Rivoluoj/min</string>
     <string name="routing_attr_allow_via_ferrata_name">Permesi viaferataojn</string>
+    <string name="shared_string_close_the_dialog">Fermi la fenestron</string>
 </resources>
