@@ -614,6 +614,10 @@ public class OsmandRegions {
 
 
 	public Map<String, LinkedList<BinaryMapDataObject>> cacheAllCountries() throws IOException {
+		return cacheAllCountries(true);
+	}
+	
+	public Map<String, LinkedList<BinaryMapDataObject>> cacheAllCountries(boolean useDownloadName) throws IOException {
 		quadTree = new QuadTree<String>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
@@ -624,7 +628,7 @@ public class OsmandRegions {
 					return false;
 				}
 				initTypes(object);
-				String nm = mapIndexFields.get(mapIndexFields.downloadNameType, object);
+				String nm = mapIndexFields.get(useDownloadName? mapIndexFields.downloadNameType :mapIndexFields.fullNameType, object);
 				if (!countriesByDownloadName.containsKey(nm)) {
 					LinkedList<BinaryMapDataObject> ls = new LinkedList<BinaryMapDataObject>();
 					countriesByDownloadName.put(nm, ls);
