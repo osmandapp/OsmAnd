@@ -85,7 +85,9 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 
 			FragmentActivity activity = activityRef.get();
 			if (activity instanceof MapActivity) {
-				((MapActivity) activity).getContextMenu().hide();
+				MapActivity mapActivity = (MapActivity) activity;
+				mapActivity.getContextMenu().hide();
+				mapActivity.getDashboard().hideDashboard();
 			}
 			Context context = activity != null ? activity : app;
 			MapActivity.launchMapActivityMoveToTop(context);
