@@ -36,7 +36,7 @@
     <string name="av_locations_selected_desc">Файл GPX с координатами и данными выбранных заметок.</string>
     <string name="av_locations_all_desc">Файл GPX с координатами и данными всех заметок.</string>
     <string name="favorite_empty_place_name">Место</string>
-    <string name="private_access_routing_req">Пункт назначения находится на частной территории. Разрешить использование частных дорог на этом маршруте\?</string>
+    <string name="private_access_routing_req">Пункт назначения расположен на частной территории. Разрешить использование частных дорог на маршруте\?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено</string>
@@ -58,7 +58,7 @@
     <string name="change_color">Выбрать цвет</string>
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
-    <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
+    <string name="routing_attr_allow_private_name">Въезд на частную территорию</string>
     <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Виден</string>
+    <string name="shared_string_visible">Отображаемые</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -106,10 +106,10 @@
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
     <string name="no_overlay">Без наложения</string>
     <string name="no_underlay">Без подложки</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Любые перепады</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Любая сложность</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Без крутых подъёмов</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Максимально ровный</string>
-    <string name="routing_attr_driving_style_speed_name">Улицы с оживлённым движением</string>
+    <string name="routing_attr_driving_style_speed_name">Предпочитать оживлённые улицы</string>
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать тихие улицы</string>
     <string name="relief_smoothness_factor_descr">Выберите предпочтительный рельеф.</string>
@@ -138,7 +138,7 @@
     <string name="shared_string_time">Время</string>
     <string name="total_distance">Длина маршрута</string>
     <string name="routing_attr_driving_style_name">Стиль езды</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Колебания высоты ландшафта</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Перепады высоты ландшафта</string>
     <string name="routing_attr_height_obstacles_name">Рельеф</string>
     <string name="quick_action_duplicates">Действие переименовано в %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
@@ -349,7 +349,7 @@
     <string name="unknown_location">Местоположение ещё не определено.</string>
     <string name="modify_transparency">Задать прозрачность (0 – прозрачный, 255 – непрозрачный)</string>
     <string name="confirm_interrupt_download">Прервать загрузку\?</string>
-    <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из интернета с помощью пункта меню «Настройки» → «Управление файлами карт». После загрузки вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
+    <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из интернета с помощью пункта меню «Настройки» → «Загрузка карт». После загрузки вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
     <string name="basemap_was_selected_to_download">Карта мира, необходимая для обеспечения базовой функциональности, находится в очереди загрузки.</string>
     <string name="select_index_file_to_download">Ничего не найдено. Если для вашего региона нет карты, вы можете создать её (см. osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн и кешированные карты (растровые)</string>
@@ -376,7 +376,7 @@
     <string name="play_commands_of_currently_selected_voice">Выберите голос и опробуйте его на оповещении:</string>
     <string name="debugging_and_development">Отладка и разработка</string>
     <string name="native_rendering">Быстрая отрисовка</string>
-    <string name="test_voice_prompts">Тест голосовых подсказок</string>
+    <string name="test_voice_prompts">Тест речевых указаний</string>
     <string name="switch_to_raster_map_to_see">Скачайте локальную векторную карту для этой местности в меню («Загрузка карт»), или переключитесь на плагин «Онлайн-карты».</string>
     <string name="send_files_to_osm">Отправить файлы GPX в OSM\?</string>
     <string name="gpx_visibility_txt">Видимость</string>
@@ -422,8 +422,8 @@
     <string name="index_name_oceania">Австралия и Океания</string>
     <string name="index_name_other">Карты мира</string>
     <string name="index_name_wiki">Всемирная Википедия</string>
-    <string name="index_name_voice">Голосовые подсказки (записанные, ограниченная функциональность)</string>
-    <string name="index_name_tts_voice">Голосовые подсказки (TTS, предпочтительно)</string>
+    <string name="index_name_voice">Речевые указания (запись, неполные возможности)</string>
+    <string name="index_name_tts_voice">Речевые указания (TTS, предпочтительно)</string>
     <string name="amenity_type_osmwiki">Википедия (локально)</string>
     <string name="amenity_type_user_defined">Пользовательские</string>
     <string name="fav_export_confirmation">Файл экспорта избранных точек уже существует. Заменить его\?</string>
@@ -494,8 +494,8 @@
     <string name="local_index_transport_data">Данные публичного транспорта</string>
     <string name="local_index_map_data">Карта</string>
     <string name="local_indexes_cat_backup">Архивировано</string>
-    <string name="local_indexes_cat_tts">Голосовые подсказки (TTS)</string>
-    <string name="local_indexes_cat_voice">Голосовые подсказки (записанные)</string>
+    <string name="local_indexes_cat_tts">Речевые указания (TTS)</string>
+    <string name="local_indexes_cat_voice">Речевые указания (запись)</string>
     <string name="local_indexes_cat_poi">Данные POI</string>
     <string name="ttsvoice">TTS</string>
     <string name="search_offline_clear_search">Новый поиск</string>
@@ -513,8 +513,8 @@
     <string name="switch_to_vector_map_to_see">Для этого региона есть локальные векторные карты.
 \n\t
 \n\tДля использования выберите их в качестве источника (Меню → Настройка карты → Источник карты → Локальные векторные карты).</string>
-    <string name="choose_audio_stream">Аудиоканал голосовых инструкций</string>
-    <string name="choose_audio_stream_descr">Выберите канал вывода голосовых подсказок.</string>
+    <string name="choose_audio_stream">Аудиоканал речевой навигации</string>
+    <string name="choose_audio_stream_descr">Выберите канал вывода речевых указаний.</string>
     <string name="voice_stream_voice_call">Голосовые звонки (для прерывания автомобильной стереосистемы Bluetooth)</string>
     <string name="voice_stream_notification">Уведомления</string>
     <string name="voice_stream_music">Мультимедиа, навигация</string>
@@ -609,8 +609,8 @@
     <string name="loading_builds_failed">Не удалось получить список сборок OsmAnd</string>
     <string name="loading_builds">Загружаются сборки OsmAnd…</string>
     <string name="select_build_to_install">Выберите сборку для установки</string>
-    <string name="voice_is_not_available_msg">Голосовая навигация недоступна. Перейдите в «Настройки» → «Настройки навигации», выберите профиль → «Голосовые данные» и выберите или загрузите пакет голосовых подсказок.</string>
-    <string name="voice_is_not_available_title">Выберите пакет голосовых подсказок</string>
+    <string name="voice_is_not_available_msg">Голосовая навигация недоступна. Перейдите в «Настройки» → «Настройки навигации», выберите профиль → «Голосовые данные» и выберите или загрузите голосовой пакет.</string>
+    <string name="voice_is_not_available_title">Выберите голосовой пакет</string>
     <string name="trace_rendering_descr">Показывать производительность отрисовки и навигации.</string>
     <string name="trace_rendering">Отладочная информация о производительности</string>
     <string name="daynight_mode_day">День</string>
@@ -710,8 +710,8 @@
     <string name="voice_provider">Голосовые данные</string>
     <string name="voice_data_initializing">Инициализируются голосовые данные…</string>
     <string name="voice_data_not_supported">Неподдерживаемая версия голосовых данных</string>
-    <string name="voice_data_corrupted">Выбранные голосовые данные не правильного формата</string>
-    <string name="voice_data_unavailable">Выбранный пакет голосовых подсказок не доступен</string>
+    <string name="voice_data_corrupted">Неправильный формат голосовых данных</string>
+    <string name="voice_data_unavailable">Выбранный пакет недоступен</string>
     <string name="sd_unmounted">SD-карта недоступна. 
 \nВы не сможете работать с картой.</string>
     <string name="sd_mounted_ro">Карта памяти доступна только для чтения. 
@@ -834,7 +834,7 @@
     <string name="save_current_track">Сохранить текущий трек</string>
     <string name="save_track_interval_descr">Укажите интервал фиксирования точек для записи трека во время навигации</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
-    <string name="save_track_to_gpx">Автозапись трека во время навигации</string>
+    <string name="save_track_to_gpx">Автозапись трека при навигации</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="open_street_map_login_descr">Необходимы для авторизации на openstreetmap.org.</string>
@@ -1298,7 +1298,7 @@
     <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и тому подобное</string>
     <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Маршрут до этой точки</string>
-    <string name="context_menu_item_directions_from">Маршрут от этой точки</string>
+    <string name="context_menu_item_directions_from">Маршрут от этой точки</string>
     <string name="driving_region_canada">Канада</string>
     <string name="about_version">Версия:</string>
     <string name="local_index_tile_data_expire">Время действия (в минутах): %1$s</string>
@@ -1424,14 +1424,14 @@
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Разное</string>
     <string name="localization_pref_title">Локализация</string>
-    <string name="interrupt_music_descr">Приостановка воспроизведения во время подсказок.</string>
+    <string name="interrupt_music_descr">Приостановка воспроизведения во время указаний.</string>
     <string name="interrupt_music">Прерывать музыку</string>
     <string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
     <string name="navigation_intent_invalid">Неправильный формат: %s</string>
     <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
     <string name="keep_informing_never">При нажатии на стрелку (вручную)</string>
     <string name="keep_informing_descr">Повторять навигационные инструкции с заданным интервалом.</string>
-    <string name="keep_informing">Повторение подсказок</string>
+    <string name="keep_informing">Повторение указаний</string>
     <string name="arrival_distance">Оповещение о прибытии</string>
     <string name="arrival_distance_descr">Как скоро следует сообщать о прибытии?</string>
     <string name="share_fav_subject">Места, отправленные в OsmAnd</string>
@@ -1566,7 +1566,7 @@
     <string name="fav_point_emoticons_message">Избранная точка переименована на «%1$s», чтобы сохранить строку, содержащую эмотикон в файл.</string>
     <string name="print_route">Печать маршрута</string>
     <string name="fav_point_dublicate">Введено повторяющееся название избранной точки</string>
-    <string name="fav_point_dublicate_message">Избранная точка переименована в %1$s для избежания повторов.</string>
+    <string name="fav_point_dublicate_message">Имя изменено на %1$s во избежание повторов.</string>
     <string name="text_size_descr">Установите размер текста для карты.</string>
     <string name="text_size">Размер текста</string>
     <string name="local_index_description">Нажмите на любой элемент списка для подробной информации, удерживайте для отправки в архив или удаления. Текущие данные на устройстве (%1$s свободно):</string>
@@ -1618,7 +1618,7 @@
     <string name="map_locale">Язык карты</string>
     <string name="navigate_point_northing">Северной широты</string>
     <string name="navigate_point_easting">Восточной долготы</string>
-    <string name="voices">Голосовые подсказки</string>
+    <string name="voices">Речевые указания</string>
     <string name="error_avoid_specific_road">Объезд не найден</string>
     <string name="rendering_attr_roadStyle_name">Стиль дорог</string>
     <string name="rendering_value_default_name">По умолчанию</string>
@@ -1917,7 +1917,7 @@
     <string name="count_of_lines">Количество строк</string>
     <string name="show_on_start">Показывать при запуске</string>
     <string name="are_you_sure">Вы уверены?</string>
-    <string name="unsaved_changes_will_be_lost">Все несохранённые изменения будут потеряны. Продолжить\?</string>
+    <string name="unsaved_changes_will_be_lost">Несохранённые изменения будут потеряны. Продолжить\?</string>
     <string name="simulate_your_location_descr">Моделировать ваше местоположение, используя рассчитанный маршрут или записанный трек GPX.</string>
     <string name="simulate_your_location_stop_descr">Остановить моделирование своего местоположения.</string>
     <string name="favorite_category_add_new">Создать новую</string>
@@ -2215,7 +2215,7 @@
     <string name="get_it">Получить</string>
     <string name="osm_live_banner_desc">Получите неограниченное количество загрузок карт, а также еженедельные, ежедневные и даже почасовые обновления.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину «Википедия».</string>
-    <string name="select_voice_provider">Голосовые инструкции</string>
+    <string name="select_voice_provider">Голосовое сопровождение</string>
     <string name="osm_live_payment_desc">Абонентская плата взимается за выбранный период. Отменить подписку можно в Google Play в любой момент.</string>
     <string name="donation_to_osm">Пожертвование для сообщества OSM</string>
     <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена участникам OSM. Стоимость подписки при этом остаётся прежней.</string>
@@ -2233,7 +2233,7 @@
     <string name="navigate_point_olc_info_area">Корректный полный OLC
 \nОписывает область: %1$s x %2$s</string>
     <string name="auto_split_recording_descr">Начинать новый сегмент после 6-минутного перерыва, новый трек после 2-часового и новый файл после длительного перерыва (если изменилась дата).</string>
-    <string name="auto_split_recording_title">Авторазрыв записи после перерыва</string>
+    <string name="auto_split_recording_title">Авторазрыв после перерыва</string>
     <string name="lang_zh_hk">Китайский (Гонконг)</string>
     <string name="configure_screen_quick_action">Быстрое действие</string>
     <string name="quick_action_item_action">Действие %d</string>
@@ -2258,8 +2258,8 @@
     <string name="shared_string_action_name">Название действия</string>
     <string name="lang_sr_latn">Сербский (латиница)</string>
     <string name="quick_action_navigation_voice">Голосовая навигация</string>
-    <string name="quick_action_navigation_voice_off">Включить подсказки</string>
-    <string name="quick_action_navigation_voice_on">Выключить подсказки</string>
+    <string name="quick_action_navigation_voice_off">Включить звук</string>
+    <string name="quick_action_navigation_voice_on">Выключить звук</string>
     <string name="file_can_not_be_moved">Не удалось переместить файл.</string>
     <string name="sea_depth_thanks">Благодарим вас за покупку контуров морских глубин</string>
     <string name="shared_string_add_photos">Добавить фото</string>
@@ -2484,7 +2484,7 @@
 \nПолучайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот (через плагин), переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое.</string>
     <string name="osmand_extended_description_part2">GPS-навигация
 \n• Выбор между автономным (без платы за роуминг) и онлайн-режимом (быстрее)
-\n• Пошаговые голосовые подсказки (записанные или синтезированные) доведут до места назначения
+\n• Пошаговые голосовые указания (записанные или синтезированные) доведут до места назначения
 \n• Повторный расчёт маршрута после значительного отклонения от существующего
 \n• Навигация по полосам, названия улиц и расчётное время прибытия окажут неоценимую помощь в пути.
 \n• Чтобы сделать ваше путешествие более безопасным, дневной/ночной режим переключается автоматически
@@ -2531,7 +2531,7 @@
 \n Некоторые из главных возможностей:</string>
     <string name="osmand_plus_extended_description_part2">Навигация
 \n• Работает через интернет (быстрее) или автономно (без платы за роуминг за границей)
-\n• Пошаговые голосовые подсказки (записанные или синтезированные голоса)
+\n• Пошаговые голосовые указания (записанные или синтезированные голоса)
 \n• Полосы движения, отображение названия улицы и расчётное время прибытия
 \n• Поддержка промежуточных точек на маршруте
 \n• Автоматическая перестройка маршрута при отклонении от существующего
@@ -2778,7 +2778,7 @@
 \n
 \nПерсональная информация не собирается, требуются только данные поиска, с целью улучшить поиск.</string>
     <string name="send_search_query">Отправить поисковый запрос?</string>
-    <string name="test_voice_desrc">Нажмите кнопку и прослушайте соответствующую голосовую подсказку, чтобы узнать, отсутствует она или ошибочна</string>
+    <string name="test_voice_desrc">Нажмите кнопку и прослушайте указание для проверки на предмет отсутствия или неисправности</string>
     <string name="thank_you_for_feedback">Спасибо за ваш отзыв</string>
     <string name="poi_cannot_be_found">Не удалось найти точку или путь.</string>
     <string name="search_no_results_feedback">Нет результатов поиска\? 
@@ -2826,7 +2826,7 @@
     <string name="avoid_roads_descr">Выберите на карте или в списке ниже дорогу, которой хотите избежать при навигации:</string>
     <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
-    <string name="voice_announcements">Голосовые подсказки</string>
+    <string name="voice_announcements">Речевые указания</string>
     <string name="quick_action_switch_day_night_descr">Переключатель между дневным и ночным режимами для OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Дневной режим</string>
     <string name="quick_action_switch_night_mode">Ночной режим</string>
@@ -3136,9 +3136,9 @@
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Скорость движения, размеры, масса транспортного средства</string>
     <string name="vehicle_parameters">Параметры транспортного средства</string>
-    <string name="voice_announces_info">Голосовые инструкции работают только при навигации.</string>
+    <string name="voice_announces_info">Голосовые оповещения работают только при навигации.</string>
     <string name="voice_announces_descr">Навигационные инструкции и оповещения</string>
-    <string name="voice_announces">Голосовые подсказки</string>
+    <string name="voice_announces">Речевые указания</string>
     <string name="screen_alerts">Экранные оповещения</string>
     <string name="route_parameters_descr">Настройки маршрутизации</string>
     <string name="route_parameters">Параметры маршрута</string>
@@ -3309,8 +3309,8 @@
     <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведёт к возврату порядка сортировки по умолчанию.</string>
     <string name="add_custom_category">Создать свою категорию</string>
     <string name="rendering_attr_streetLightingNight_name">Показывать только ночью</string>
-    <string name="plugin_prefs_reset_successful">Все настройки плагина восстановлены до состояния по умолчанию.</string>
-    <string name="profile_prefs_reset_successful">Все настройки профиля восстановлены до состояния по умолчанию.</string>
+    <string name="plugin_prefs_reset_successful">Все настройки плагина восстановлены до начальных.</string>
+    <string name="profile_prefs_reset_successful">Все настройки профиля восстановлены до начальных.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Закат в %1$s</string>
     <string name="sunrise_at">Восход в %1$s</string>
@@ -3360,7 +3360,7 @@
     <string name="export_profile_dialog_description">Вы можете выбрать дополнительные данные для экспорта вместе с профилем.</string>
     <string name="shared_string_app_default_w_val">Приложение по умолчанию (%s)</string>
     <string name="no_recalculation_setting">Не перестраивать</string>
-    <string name="route_recalculation_dist_title">Минимальное отклонение для перестроения маршрута</string>
+    <string name="route_recalculation_dist_title">Отклонение для перестроения маршрута</string>
     <string name="route_recalculation_dist_descr">Маршрут будет пересчитан, если расстояние до него больше заданного параметра</string>
     <string name="profile_type_custom_string">Пользовательский профиль</string>
     <string name="shared_string_angle_param">Угол: %s°</string>
@@ -3444,8 +3444,8 @@
     <string name="items_added">Объекты добавлены</string>
     <string name="shared_string_import_complete">Импорт завершен</string>
     <string name="import_complete_description">Все данные из %1$s импортированы, вы можете использовать кнопки ниже, чтобы открыть соответствующий раздел приложения для управления ими.</string>
-    <string name="recalculate_route_distance_promo">Максимальное расстояние между маршрутом и текущей позицией, после которого маршрут будет пересчитан.</string>
-    <string name="select_distance_route_will_recalc">Отклонение, при котором маршрут будет пересчитан.</string>
+    <string name="recalculate_route_distance_promo">Предельно допустимое отдаление от маршрута, после которого маршрут перестроится.</string>
+    <string name="select_distance_route_will_recalc">Пороговое отклонение для пересчёта маршрута.</string>
     <string name="shared_string_legend">Легенда</string>
     <string name="search_offline_geo_error">Невозможно разобрать геоссылку «%s».</string>
     <string name="hillshade_download_description">Для затенения рельефа требуются дополнительные карты.</string>
@@ -3499,7 +3499,8 @@
     <string name="shared_string_items">Элементы</string>
     <string name="ui_customization">Настройки интерфейса</string>
     <string name="context_menu_actions">Действия контекстного меню</string>
-    <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы из %1$s.</string>
+    <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы: 
+\n%1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
     <string name="shared_string_hidden">Скрыт</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
@@ -3580,7 +3581,7 @@
 \n
 \n</string>
     <string name="additional_actions_descr">Функции, доступные при нажатии кнопки «%1$s».</string>
-    <string name="add_edit_favorite">Добавить или изменить избранное</string>
+    <string name="add_edit_favorite">Добавить/изменить избранное</string>
     <string name="create_edit_poi">Создать или изменить POI</string>
     <string name="back_to_editing">Возврат к редактированию</string>
     <string name="parking_positions">Парковки</string>
@@ -3737,7 +3738,7 @@
     <string name="import_track_descr">Выберите файл трека или импортируйте его со своего устройства.</string>
     <string name="select_another_track">Выбрать другой трек</string>
     <string name="navigate_to_track_descr">Ведение от моей позиции к треку</string>
-    <string name="pass_whole_track_descr">Точка трека для навигации</string>
+    <string name="pass_whole_track_descr">Точка для навигации</string>
     <string name="start_of_the_track">Начало трека</string>
     <string name="nearest_point">Ближайшая точка</string>
     <string name="attach_to_the_roads">Привязка к дороге</string>
@@ -3899,7 +3900,7 @@
     <string name="shared_string_folders">Папки</string>
     <string name="select_folder">Выбор папки</string>
     <string name="select_folder_descr">Выберите папку или добавьте новую</string>
-    <string name="voice_prompts_timetable">Время голосовых подсказок</string>
+    <string name="voice_prompts_timetable">Время звучания указаний</string>
     <string name="routing_attr_prefer_hiking_routes_description">Предпочитать пешеходные маршруты</string>
     <string name="shared_string_subtype">Подтип</string>
     <string name="shared_string_enter_param">Введите параметр</string>
@@ -4015,7 +4016,7 @@
     <string name="track_recording_description">Остановить запись\?
 \nВсе несохранённые данные будут потеряны.</string>
     <string name="on_pause">На паузе</string>
-    <string name="routing_attr_height_obstacles_description">Расчёт времени в пути с учётом перепадов высоты. Предпочитаемая рельефность маршрута:</string>
+    <string name="routing_attr_height_obstacles_description">Расчёт времени в пути с учётом перепадов высот. Выберите предпочитаемую рельефность маршрута:</string>
     <string name="quick_action_coordinates_widget_descr">Переключатель для отображения или скрытия виджета координат.</string>
     <string name="select_category_descr">Выберите категорию или добавьте новую</string>
     <string name="copy_poi_name">Копировать имя POI</string>
@@ -4077,7 +4078,7 @@
     <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от угла подъёма.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
-    <string name="language_description">Выберите предпочтительный язык и тип голосовых подсказок.</string>
+    <string name="language_description">Выберите предпочтительный язык и тип речевых указаний.</string>
     <string name="tts_description">Синтезатор речи (TTS) умеет произносить все типы инструкций: повороты, названия улиц, точки интереса (POI) и пр.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Записанный голос звучит лучше, но предупреждает только о поворотах (использует предустановленные фразы). Не умеет объявлять названия улиц и POI.</string>
@@ -4106,8 +4107,8 @@
     <string name="verification_code_missing">Я не получил код подтверждения</string>
     <string name="verification_code_missing_description">Время ожидания кода может составить 10 минут. Проверьте папку со спамом, если и его нет, воспользуйтесь кнопкой ниже.</string>
     <string name="local_backup">Локальное резервное копирование</string>
-    <string name="osmand_cloud_authorize_descr">Не теряйте данные. Используйте резервное копирование для лёгкого сохранения и восстановления информации.</string>
-    <string name="backup_and_restore">Резервное копирование и восстановление</string>
+    <string name="osmand_cloud_authorize_descr">Не теряйте данные. Используйте резервное копирование для сохранения и восстановления информации.</string>
+    <string name="backup_and_restore">Резервное копирование и восстановление</string>
     <string name="last_backup">Последнее резервное копирование</string>
     <string name="duration_ago">%1$s назад</string>
     <string name="select_nav_profile_dialog_message">«Режим навигации» определяет правила расчёта маршрутов, с доступными офлайн- или онлайн-механизмами маршрутизации.</string>
@@ -4146,7 +4147,7 @@
     <string name="backup_delete_all_data_descr">Все данные в OsmAnd Cloud будут удалены. Локальные версии останутся нетронутыми.</string>
     <string name="backup_data">Резервное копирование данных</string>
     <string name="select_backup_data_descr">Выберите данные и папки для резервного копирования.</string>
-    <string name="backup_restore_data_descr">Восстановление данных на устройстве, используя онлайн-резервные копии.</string>
+    <string name="backup_restore_data_descr">Восстановление данных на устройстве из резервных копий в облаке.</string>
     <string name="backup_restore_data">Восстановить данные</string>
     <string name="restore_from_osmand_cloud">Восстановить из OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
@@ -4457,16 +4458,16 @@
     <string name="gps_filter_precision">Точность GPS</string>
     <string name="gps_filter_smoothing">Сглаживание</string>
     <string name="gps_filter_actions_description">OsmAnd применит изменения к треку, не сохраняя их в файл. Вы можете сохранить изменения вручную.</string>
-    <string name="shared_string_gps_filter">GPS фильтр</string>
+    <string name="shared_string_gps_filter">GPS-фильтр</string>
     <string name="save_changes_into_file">Сохранить изменения в файл</string>
     <string name="save_as_copy">Сохранить как копию</string>
     <string name="gps_filter_hdop_desc">Установите максимально допустимое значение для HDOP.
 \nТочки с более высоким значением будут скрыты.</string>
     <string name="shared_string_precision">Точность</string>
     <string name="gps_filter_speed_altitude_desc">На графике и карте будут отображаться только точки трека, соответствующие заданному интервалу, остальные будут скрыты.</string>
-    <string name="gps_filter_smoothing_desc">Установите пороговое расстояние между точками.
-\nТочки трека, находящиеся на расстоянии менее заданного от последней видимой точки, будут скрыты.
-\nИмейте в виду, что высокие пороговые значения могут чрезмерно упростить геометрию трека.</string>
+    <string name="gps_filter_smoothing_desc">Задайте минимальное пороговое расстояние между точками.
+\nТочки трека, расстояние между которыми меньше порогового, будут скрыты.
+\nИмейте в виду, что высокие пороговые значения могут чрезмерно сгладить трек.</string>
     <string name="storage_migration_wrong_folder_warning">В выбранной папке данные OsmAnd не найдены. Повторите попытку.</string>
     <string name="created_on">Создан</string>
     <string name="use_routing_fallback">Использовать резервную маршрутизацию</string>
@@ -4499,7 +4500,7 @@
     <string name="rendering_attr_seabedDetail_name">Детали морского дна</string>
     <string name="rendering_value_all_name">Все</string>
     <string name="rendering_value_omit_name">Пропустить</string>
-    <string name="save_track_to_gpx_descrp">Автозапуск записи трека во время навигации и автосохранение по окончании.</string>
+    <string name="save_track_to_gpx_descrp">Автозапуск записи трека во время навигации и автосохранение по завершении.</string>
     <string name="gpx_no_routes_title">Нет маршрутов</string>
     <string name="gpx_no_routes_descr">Для добавления маршрута в файл вы можете воспользоваться инструментом «%1$s».</string>
     <string name="please_provide_group_name_message">Укажите название группы.</string>
@@ -4542,7 +4543,7 @@
     <string name="configure_screen_widgets_descr">Выберите сторону экрана, чтобы добавить виджеты или изменить их порядок.</string>
     <string name="osm_carto_render_descr">Стиль похож на OpenStreetMap-carto, используемый на главном странице сайта OSM.</string>
     <string name="simulation_real_mode_title">Реалистичное моделирование</string>
-    <string name="simulation_constant_mode_desc">Моделирование с постоянной заданной скоростью.</string>
+    <string name="simulation_constant_mode_desc">Моделирование с заданной скоростью.</string>
     <string name="simulation_preview_mode_title">Быстрый просмотр</string>
     <string name="shared_string_visible_widgets">Видимые виджеты</string>
     <string name="routing_attr_carriage_restrictions_description">Учитывать права доступа для гужевых транспортных средств</string>
@@ -4555,12 +4556,12 @@
     <string name="shared_string_item">Пункт</string>
     <string name="shared_string_buttons">Кнопки</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Троллейбусные маршруты</string>
-    <string name="simulation_real_mode_desc">На прямых участках дороги скорость будет приближена к максимально допустимой.
-\nНа перекрестках моделирование будет замедляться.
-\nДополнительные штрафы будут применяться на светофорах, знаках остановк и т.д.</string>
-    <string name="simulation_constant_mode_title">Фиксированная скорость</string>
-    <string name="simulation_preview_mode_desc">Моделирование с максимальной скоростью на прямых участках и замедлением на перекрестках.</string>
-    <string name="speed_mode">Скоростной режим</string>
+    <string name="simulation_real_mode_desc">Максимальная разрешённая скорость на прямых участках.
+\nЗамедление на перекрёстках.
+\nДополнительные штрафы на светофорах, знаках остановки и пр.</string>
+    <string name="simulation_constant_mode_title">Постоянная скорость</string>
+    <string name="simulation_preview_mode_desc">Моделирование с максимальной скоростью на прямых участках и замедлением на перекрёстках.</string>
+    <string name="speed_mode">Режим скорости</string>
     <string name="rendering_attr_horse_scale_common_name">Обычный</string>
     <string name="rendering_attr_horse_scale_demanding_name">Требовательный</string>
     <string name="rendering_attr_horse_scale_critical_name">Критический</string>
@@ -4659,7 +4660,7 @@
     <string name="map_widget_trip_recording_distance">Расстояние</string>
     <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
     <string name="routing_attr_avoid_fords_name">Без бродов</string>
-    <string name="routing_attr_allow_private_for_truck_name">Разрешить частный доступ (грузовик)</string>
+    <string name="routing_attr_allow_private_for_truck_name">Въезд на частную территорию (грузовик)</string>
     <string name="rendering_attr_weatherPressureContours_name">Изобары</string>
     <string name="rendering_attr_weatherTempContours_name">Изотермы</string>
     <string name="routing_attr_avoid_fords_description">Избегать броды</string>
@@ -4749,7 +4750,7 @@
     <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
     <string name="compass_always_hidden">Всегда скрыт</string>
     <string name="compass_always_visible">Всегда виден</string>
-    <string name="compass_click_desc">Нажмите на компас, чтобы переключить режим ориентации карты.</string>
+    <string name="compass_click_desc">Нажмите на компас для смены режима ориентации.</string>
     <string name="compass_desc">Показывает направление на север.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цвет контурных линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
@@ -4766,7 +4767,7 @@
     <string name="attach_roads_warning">К дорогам можно привязать только записанный трек.</string>
     <string name="without_profiles_changing">Без смены профиля</string>
     <string name="connect_with_straight_line">Соединить прямой линией</string>
-    <string name="attach_roads_descr">Привяжите трек к действующим дорогам для навигации между точками и соответствия навигационных инструкций маршруту.</string>
+    <string name="attach_roads_descr">«Автопритягивание» трека к подходящим дорогам для маршрутизации и совпадения навигационных указаний с дорогой.</string>
     <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
     <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>
@@ -4915,7 +4916,7 @@
     <string name="weather_pressure_inches_of_mercury">Дюймы ртутного столба</string>
     <string name="weather_pressure_millimeters_of_mercury">Миллиметры ртутного столба</string>
     <string name="weather_prefs_descr">Прогноз на 24 часа и 7 дней, обновляемый каждые 3 часа</string>
-    <string name="weather_temperature_celsius">Градус Цельсия</string>
+    <string name="weather_temperature_celsius">Градусы Цельсия</string>
     <string name="weather_widgets_secondary_desc">Единицы измерения можно изменить в настройках плагина «Погода».</string>
     <string name="map_settings_weather_temp">Температура</string>
     <string name="map_settings_weather_precip">Осадки</string>
@@ -4932,7 +4933,7 @@
     <string name="weather_wind_miles_per_hour">Миль в час</string>
     <string name="weather_wind_kilimeters_per_hour">Километров в час</string>
     <string name="clouds_widget_desc">Виджет показывает облачность для текущего центра карты.</string>
-    <string name="weather_temperature_fahrenheit">Градус Фаренгейта</string>
+    <string name="weather_temperature_fahrenheit">Градусы Фаренгейта</string>
     <string name="precipitation_widget_desc">Виджет показывает количество осадков для текущего центра карты.</string>
     <string name="action_not_supported_with_map_style">Действие не поддерживается с выбранным стилем карты.</string>
     <string name="weather_plugin_description">Плагин погоды предоставляет:
@@ -4966,12 +4967,12 @@
     <string name="quick_action_air_pressure_layer">Переключатель для отображения или скрытия слоя давления на карте.</string>
     <string name="precipitation_layer">Слой осадков</string>
     <string name="cloud_layer">Слой облачности</string>
-    <string name="rendering_attr_showMtbScale_name">Показать MTB сложность</string>
+    <string name="rendering_attr_showMtbScale_name">Показать MTB-сложность</string>
     <string name="rendering_attr_showMtbScale_description">Показать MTB-трейлы в соответствии с их сложностью.</string>
     <string name="mtb_imba">МАГВ (IMBA)</string>
     <string name="mtb_imba_full">Международная ассоциация горного велоспорта</string>
     <string name="mtb_segment_classification">Классификация сегментов</string>
-    <string name="mtb_scale">MTB сложность</string>
+    <string name="mtb_scale">MTB-сложность</string>
     <string name="rendering_attr_weatherCloudContours_name">Изолинии облачности (изонефы)</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии скорости ветра (изотахи)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Изолинии осадков (изогиеты)</string>
@@ -5089,7 +5090,7 @@
     <string name="sort_date_descending">Сначала старые</string>
     <string name="shared_string_nearest">Ближайшие</string>
     <string name="sort_duration_ascending">Сначала менее продолжительные</string>
-    <string name="simulation_position_description">Выберите файл трека, который будет использоваться в качестве источника для моделирования местоположения.</string>
+    <string name="simulation_position_description">Выберите файл трека в качестве источника для моделирования движения.</string>
     <string name="app_mode_moped">Мопед</string>
     <string name="generate_hillshade_from_3d_maps">Создание растровых карт с затемнением рельефа (отмывкой) на основе 3D-карт</string>
     <string name="generate_slope_from_3d_maps">Создание растровых карт склонов на основе 3D-карт</string>
@@ -5189,7 +5190,7 @@
     <string name="visible_in_3d_mode">Виден в режиме 3D</string>
     <string name="poi_categories">Категории POI</string>
     <string name="shared_string_ear_lobe">Мочка уха</string>
-    <string name="map_3d_mode_hint">Долгое нажатие на кнопку позволяет изменить её положение.</string>
+    <string name="map_3d_mode_hint">Удерживайте кнопку для изменения положения.</string>
     <string name="shared_string_chest">Грудь</string>
     <string name="external_device_blood_pressure">Артериальное давление</string>
     <string name="no_bt_permission">Разрешение Bluetooth не предоставлено</string>
@@ -5203,11 +5204,11 @@
     <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">В этой папке еще нет ни одного трека.</string>
     <string name="tracks_empty_folder">Пустая папка</string>
-    <string name="track_not_recorded">Не записывается</string>
+    <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новый трек</string>
     <string name="shared_string_visible_on_map">Видно на карте</string>
     <string name="number_of_tracks">%1$s треков</string>
-    <string name="delete_track_folder_dialog_message">Это приведет к удалению папки «%1$s» и всех треков (%2$s) содержащихся в ней.</string>
+    <string name="delete_track_folder_dialog_message">Папка «%1$s» будет удалена со всеми треками (%2$s).</string>
     <string name="rendering_attr_lightDetail_description">По умолчанию: название плавучего знака (Light character.group.period), выберите дополнительную информацию о секторах 1-3 или сектор 1,2,3,4,5 светового знака</string>
     <string name="rendering_attr_lightDetail_name">Навигационные огни</string>
     <string name="rendering_value_sectors_name">Сектора</string>
