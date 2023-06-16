@@ -1102,6 +1102,16 @@ public class RouteDataObject {
 	}
 
 	public void setRestriction(int k, long to, int type, long viaWay) {
+		if (restrictions == null) {
+			restrictions = new long[k + 1];
+		}
+		if (restrictions.length <= k) {
+			long[] copy = restrictions;
+			restrictions = new long[k + 1];
+			for (int i = 0; i < copy.length; i++) {
+				restrictions[i] = copy[i];
+			}
+		}
 		long valto = (to << RouteDataObject.RESTRICTION_SHIFT) | ((long) type & RouteDataObject.RESTRICTION_MASK);
 		restrictions[k] = valto;
 		if (viaWay != 0) {
