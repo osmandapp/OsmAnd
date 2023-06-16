@@ -617,7 +617,7 @@ public class OsmandRegions {
 		return cacheAllCountries(true);
 	}
 	
-	public Map<String, LinkedList<BinaryMapDataObject>> cacheAllCountries(boolean useDownloadName) throws IOException {
+	public Map<String, LinkedList<BinaryMapDataObject>> cacheAllCountries(final boolean useDownloadName) throws IOException {
 		quadTree = new QuadTree<String>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
 		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
