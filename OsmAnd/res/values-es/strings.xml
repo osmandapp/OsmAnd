@@ -3752,7 +3752,7 @@
     <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
-    <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
+    <string name="pass_whole_track_descr">Punto desde el que navegar la traza</string>
     <string name="start_of_the_track">Inicio de la traza</string>
     <string name="nearest_point">Punto más cercano</string>
     <string name="attach_to_the_roads">Unir a los caminos</string>
