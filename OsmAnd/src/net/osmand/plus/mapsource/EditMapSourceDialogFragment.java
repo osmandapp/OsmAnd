@@ -92,7 +92,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private TileSourceTemplate template;
 	@Nullable
 	private String editedLayerName;
-	private String title = "";
 	private String urlToLoad = "";
 	private int minZoom = MIN_ZOOM;
 	private int maxZoom = MAX_ZOOM;
@@ -235,7 +234,6 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 			if (fromTemplate) {
 				editedLayerName = template.getName();
 			}
-			title = settings.getTileSourceTitle(editedLayerName);
 			urlToLoad = template.getUrlTemplate();
 			expireTimeMinutes = template.getExpirationTimeMinutes();
 			minZoom = template.getMinimumZoomSupported();
@@ -324,7 +322,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void checkWasChanged() {
-		if (!Algorithms.objectEquals(title, nameEditText.getText().toString())
+		if (!Algorithms.objectEquals(editedLayerName, nameEditText.getText().toString())
 				|| !Algorithms.objectEquals(urlToLoad, urlEditText.getText().toString())) {
 			wasChanged = true;
 		}
@@ -397,7 +395,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void updateUi() {
-		nameEditText.setText(title);
+		nameEditText.setText(getTitle());
 		urlEditText.setText(urlToLoad);
 		nameEditText.addTextChangedListener(new MapSourceTextWatcher(nameInputLayout));
 		urlEditText.addTextChangedListener(new MapSourceTextWatcher(urlInputLayout));
@@ -418,6 +416,11 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
 		dismissDialog.setPositiveButton(R.string.shared_string_exit, (dialog, which) -> dismiss());
 		dismissDialog.show();
+	}
+
+	@NonNull
+	private String getTitle() {
+		return editedLayerName != null ? settings.getTileSourceTitle(editedLayerName) : "";
 	}
 
 	private String getDescription(ConfigurationItem item) {
