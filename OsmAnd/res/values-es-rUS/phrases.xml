@@ -4583,4 +4583,8 @@
     <string name="poi_cemt_vii">VII</string>
     <string name="poi_sac_scale">Escala SAC</string>
     <string name="poi_cai_scale">Escala CAI</string>
+    <string name="poi_vending_machine_fuel_filter">Surtidores automáticos de combustible;Máquina expendedora de combustible</string>
+    <string name="poi_vending_machine_fuel">Sí</string>
+    <string name="poi_tunnel_name">Nombre del túnel</string>
+    <string name="poi_bridge_name">Nombre del puente</string>
 </resources>
