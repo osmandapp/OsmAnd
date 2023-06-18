@@ -3139,7 +3139,7 @@
     <string name="osmand_settings">Ajustes de OsmAnd</string>
     <string name="copy_from_other_profile">Copiar desde otro perfil</string>
     <string name="turn_screen_on">Encender pantalla</string>
-    <string name="map_during_navigation_info">Mapa durante la navegación</string>
+    <string name="map_during_navigation_info">Mapa al navegar</string>
     <string name="map_during_navigation">Mapa durante la navegación</string>
     <string name="shared_string_other">Otros</string>
     <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
@@ -3699,7 +3699,7 @@
     <string name="simplified_track">Traza simplificada</string>
     <string name="show_gpx">Trazas</string>
     <string name="shared_string_save_as_gpx">Guardar como nuevo archivo de traza</string>
-    <string name="shared_string_is_saved">está guardado</string>
+    <string name="shared_string_is_saved">se ha guardado</string>
     <string name="shared_string_gpx_route">Ruta de la traza</string>
     <string name="shared_string_gpx_files">Trazas</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
@@ -3726,7 +3726,7 @@
     <string name="plan_route_create_new_route">Crear nueva ruta</string>
     <string name="plan_route_change_route_type_before">Cambiar el tipo de ruta anterior</string>
     <string name="plan_route_change_route_type_after">Cambiar el tipo de ruta posterior</string>
-    <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
+    <string name="pass_whole_track_descr">Punto desde el que navegar la traza</string>
     <string name="overwrite_track">Sobrescribir traza</string>
     <string name="open_saved_track">Abrir traza guardada</string>
     <string name="only_selected_segment_recalc">Sólo el segmento marcado será recalculado usando el perfil elegido.</string>
@@ -4092,7 +4092,7 @@
     <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
 \ny todos los datos se vincularán a él.</string>
-    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos un código temporal necesario para el siguiente paso.</string>
+    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos una contraseña de un solo uso.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
     <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
@@ -4772,7 +4772,7 @@
     <string name="compass_visible_if_map_rotated">Visible al girar el mapa</string>
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
-    <string name="compass_click_desc">Sugerencia: Pulsa el widget de la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: Pulsa el botón de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
@@ -5207,7 +5207,7 @@
     <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
-    <string name="map_3d_mode_hint">Mantén pulsado en el botón para cambiar la ubicación del botón.</string>
+    <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
     <string name="delete_track_folder_dialog_message">Esto borrará la carpeta «%1$s» y todas las trazas (%2$s) incluidas.</string>
@@ -5246,4 +5246,12 @@
     <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
     <string name="external_sensors_not_found">Sensores no encontrados</string>
     <string name="external_sensors_source_of_data">Origen de los datos</string>
+    <string name="calculate_offline">Calcular sin conexión</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa de altura. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Permitir via ferrata</string>
+    <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
+    <string name="routing_attr_allow_via_ferrata_description">Permitir senderos de via ferrata.</string>
+    <string name="power_watts_unit">Vatios (watts)</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="error_calculate">El resultado del cálculo está vacío</string>
 </resources>
