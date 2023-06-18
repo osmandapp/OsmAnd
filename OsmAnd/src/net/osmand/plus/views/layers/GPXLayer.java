@@ -164,7 +164,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private final List<WptPt> pointsCache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
-	private List<SelectedGpxFile> androidAutoDisplayTracks;
+	public CustomMapObjects<SelectedGpxFile> customObjectsDelegate;
 
 	private Paint paintOuterRect;
 	private Paint paintInnerRect;
@@ -339,12 +339,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		List<SelectedGpxFile> visibleGPXFiles;
-		if (getMapView().isCarView()) {
-			if (androidAutoDisplayTracks == null) {
-				visibleGPXFiles = new ArrayList<>();
-			} else {
-				visibleGPXFiles = androidAutoDisplayTracks;
-			}
+		if (customObjectsDelegate != null) {
+			visibleGPXFiles = customObjectsDelegate.getMapObjects();
 		} else {
 			visibleGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 		}
@@ -821,7 +817,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				List<Pair<WptPt, MapMarker>> fullObjects = new ArrayList<>();
 				int fileColor = getFileColor(g);
 				boolean synced = isSynced(g.getGpxFile());
-				boolean selected = GpxSelectionHelper.isGpxFileSelected(app, g.getGpxFile());
+				boolean selected = isGpxFileSelected(g.getGpxFile());
 				for (WptPt wpt : getSelectedFilePoints(g)) {
 					if (wpt.lat >= latLonBounds.bottom && wpt.lat <= latLonBounds.top
 							&& wpt.lon >= latLonBounds.left && wpt.lon <= latLonBounds.right
@@ -922,7 +918,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				int fileColor = getFileColor(g);
 				boolean synced = isSynced(g.getGpxFile());
-				boolean selected = GpxSelectionHelper.isGpxFileSelected(app, g.getGpxFile());
+				boolean selected = isGpxFileSelected(g.getGpxFile());
 				for (WptPt wpt : getSelectedFilePoints(g)) {
 					if (wpt != contextMenuLayer.getMoveableObject() && !isPointHidden(g, wpt)) {
 						pointFileMap.put(wpt, g);
@@ -1220,7 +1216,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private int getTrackColor(GPXFile gpxFile, int defaultColor) {
 		int color = 0;
-		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+		if (!isGpxFileSelected(gpxFile)) {
 			color = ColorUtilities.getColorWithAlpha(disabledColor, 0.5f);
 		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
 			color = trackDrawInfo.getColor();
@@ -1238,7 +1234,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 
-		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+		if (!isGpxFileSelected(gpxFile)) {
 			return ColoringType.TRACK_SOLID.getName(null);
 		}
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
@@ -1276,6 +1272,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
+	private boolean isGpxFileSelected(GPXFile gpxFile) {
+		return customObjectsDelegate != null || GpxSelectionHelper.isGpxFileSelected(app, gpxFile);
+	}
+
 	private String getTrackWidthName(GPXFile gpxFile, String defaultWidth) {
 		String width = null;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
@@ -1292,7 +1292,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {
-		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+		if (!isGpxFileSelected(gpxFile)) {
 			return false;
 		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowArrows();
@@ -1308,7 +1308,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private boolean isShowStartFinishForTrack(@NonNull GPXFile gpxFile) {
-		if (!GpxSelectionHelper.isGpxFileSelected(app, gpxFile)) {
+		if (!isGpxFileSelected(gpxFile)) {
 			return false;
 		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowStartFinish();
@@ -1886,7 +1886,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	public void setAndroidAutoDisplayTracks(@Nullable List<SelectedGpxFile> tracks) {
-		androidAutoDisplayTracks = tracks;
+	public void setCustomMapObjects(List<SelectedGpxFile> gpxFiles) {
+		if (customObjectsDelegate != null) {
+			customObjectsDelegate.setCustomMapObjects(gpxFiles);
+			getApplication().getOsmandMap().refreshMap();
+		}
 	}
 }

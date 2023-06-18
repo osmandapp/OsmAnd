@@ -66,7 +66,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 			@Override
 			public void onDestroy(@NonNull LifecycleOwner owner) {
 				DefaultLifecycleObserver.super.onDestroy(owner);
-				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setAndroidAutoFavouritePoints(null);
+				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(null);
 				getApp().getOsmandMap().refreshMap();
 			}
 		});
@@ -95,7 +95,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		List<FavouritePoint> favoritesPoints = getFavorites();
 		int favoritesPointsSize = favoritesPoints.size();
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
-		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setAndroidAutoFavouritePoints(limitedFavoritesPoints);
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
 		getApp().getOsmandMap().refreshMap();
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			String title = point.getDisplayName(getApp());

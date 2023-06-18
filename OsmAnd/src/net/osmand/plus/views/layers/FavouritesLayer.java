@@ -66,7 +66,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean changeMarkerPositionMode;
 	private long favoritesChangedTime;
 
-	private List<FavouritePoint> androidAutoFavouritePoints = null;
+	public CustomMapObjects<FavouritePoint> customObjectsDelegate;
 
 	//OpenGl
 	private FavoritesTileProvider favoritesMapLayerProvider;
@@ -117,10 +117,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	public void setAndroidAutoFavouritePoints(@Nullable List<FavouritePoint> points) {
-		androidAutoFavouritePoints = points;
-	}
-
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
@@ -140,18 +136,31 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean favoritesChanged = this.favoritesChangedTime != favoritesChangedTime;
 		this.favoritesChangedTime = favoritesChangedTime;
 
-		if (androidAutoFavouritePoints != null) {
-			cache.clear();
-			float iconSize = getIconSize(view.getApplication());
-			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
-			QuadRect latLonBounds = tileBox.getLatLonBounds();
-			List<LatLon> fullObjectsLatLon = new ArrayList<>();
-			List<LatLon> smallObjectsLatLon = new ArrayList<>();
-			drawPoints(androidAutoFavouritePoints, latLonBounds, false, tileBox, boundIntersections, iconSize, canvas, fullObjectsLatLon, smallObjectsLatLon);
-			this.fullObjectsLatLon = fullObjectsLatLon;
-			this.smallObjectsLatLon = smallObjectsLatLon;
-			if (textVisible) {
-				textLayer.putData(this, cache);
+		if (customObjectsDelegate != null) {
+			MapRendererView mapRenderer = getMapRenderer();
+			List<FavouritePoint> points = customObjectsDelegate.getMapObjects();
+			if (mapRenderer != null) {
+				if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || textScaleChanged || textVisibleChanged) {
+					clearFavorites();
+					favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getPointsOrder(), isTextVisible(),
+							getTextStyle(textScale), view.getDensity());
+					showFavoritePoints(textScale, true, points);
+					favoritesMapLayerProvider.drawSymbols(mapRenderer);
+					mapRendererChanged = false;
+				}
+			} else {
+				cache.clear();
+				float iconSize = getIconSize(view.getApplication());
+				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+				QuadRect latLonBounds = tileBox.getLatLonBounds();
+				List<LatLon> fullObjectsLatLon = new ArrayList<>();
+				List<LatLon> smallObjectsLatLon = new ArrayList<>();
+				drawPoints(points, latLonBounds, false, tileBox, boundIntersections, iconSize, canvas, fullObjectsLatLon, smallObjectsLatLon);
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
+				if (textVisible) {
+					textLayer.putData(this, cache);
+				}
 			}
 		} else if (hasMapRenderer()) {
 			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
@@ -272,26 +281,30 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			for (FavoriteGroup group : getFavoriteGroups()) {
 				boolean synced = isSynced(group);
 				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
-				for (FavouritePoint favoritePoint : points) {
-					if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
-						MapMarker marker = null;
-						if (synced) {
-							marker = mapMarkersHelper.getMapMarker(favoritePoint);
-							if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
-								continue;
-							}
-						}
-						int color;
-						if ((marker != null && marker.history)) {
-							color = grayColor;
-						} else {
-							color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
-						}
-						favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale);
-					}
-				}
+				showFavoritePoints(textScale, synced, points);
 			}
 			favoritesMapLayerProvider.drawSymbols(mapRenderer);
+		}
+	}
+
+	private void showFavoritePoints(float textScale, boolean synced, List<FavouritePoint> points) {
+		for (FavouritePoint favoritePoint : points) {
+			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()) {
+				MapMarker marker = null;
+				if (synced) {
+					marker = mapMarkersHelper.getMapMarker(favoritePoint);
+					if (marker == null || marker.history && !view.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
+						continue;
+					}
+				}
+				int color;
+				if ((marker != null && marker.history)) {
+					color = grayColor;
+				} else {
+					color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+				}
+				favoritesMapLayerProvider.addToData(favoritePoint, color, true, marker != null, textScale);
+			}
 		}
 	}
 
@@ -432,6 +445,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 		if (callback != null) {
 			callback.onApplyMovedObject(result, o);
+		}
+	}
+
+	public void setCustomMapObjects(List<FavouritePoint> favouritePoints) {
+		if (customObjectsDelegate != null) {
+			customObjectsDelegate.setCustomMapObjects(favouritePoints);
+			getApplication().getOsmandMap().refreshMap();
 		}
 	}
 }

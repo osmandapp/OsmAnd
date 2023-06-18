@@ -1,5 +1,6 @@
 package net.osmand.plus.auto
 
+import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
 import androidx.car.app.CarContext
@@ -29,33 +30,35 @@ class TracksScreen(
     private val trackTab: TrackTab
 ) : BaseOsmAndAndroidAutoScreen(carContext) {
     val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
-    var isLoading = true
     var loadGpxFilesThread: Thread? = null
-    private val selectedGpxFiles = ArrayList<SelectedGpxFile>()
+    private val loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
+    private lateinit var loadTracksTask: LoadTracksTask
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onCreate(owner: LifecycleOwner) {
                 super.onCreate(owner)
-                isLoading = true
-                loadGpxFilesThread = Thread {
-                    try {
-                        prepareTrackItems()
-                        isLoading = false
-                        invalidate()
-                    } catch (_: Throwable) {
-                    }
-                }
-                loadGpxFilesThread?.start()
+                loadTracksTask = LoadTracksTask()
+                loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
             }
 
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
                 loadGpxFilesThread?.interrupt()
-                app.osmandMap.mapLayers.gpxLayer.setAndroidAutoDisplayTracks(null)
-                app.osmandMap.refreshMap()
+                app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
             }
         })
+    }
+
+    private inner class LoadTracksTask : AsyncTask<Unit, Unit, Unit>() {
+        override fun doInBackground(vararg params: Unit?) {
+            prepareTrackItems()
+        }
+
+        override fun onPostExecute(result: Unit?) {
+            super.onPostExecute(result)
+            invalidate()
+        }
     }
 
     override fun onGetTemplate(): Template {
@@ -65,6 +68,7 @@ class TracksScreen(
         } else {
             trackTab.getName(app, false)
         }
+        val isLoading = loadTracksTask.status != AsyncTask.Status.FINISHED
         templateBuilder.setLoading(isLoading)
         if (!isLoading) {
             setupTracks(templateBuilder)
@@ -78,7 +82,7 @@ class TracksScreen(
     }
 
     private fun prepareTrackItems() {
-        selectedGpxFiles.clear()
+        loadedGpxFiles.clear()
         for (track in trackTab.trackItems) {
             track.file?.let { file ->
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
@@ -88,10 +92,9 @@ class TracksScreen(
                 val gpxFile = GPXUtilities.loadGPXFile(file)
                 val selectedGpxFile = SelectedGpxFile()
                 selectedGpxFile.setGpxFile(gpxFile, app)
-                selectedGpxFiles.add(selectedGpxFile)
+                loadedGpxFiles[track] = selectedGpxFile
             }
         }
-        isLoading = false
         invalidate()
     }
 
@@ -104,9 +107,14 @@ class TracksScreen(
         val latLon = app.mapViewTrackingUtilities.defaultLocation
         val listBuilder = ItemList.Builder()
         val tracksSize = trackTab.trackItems.size
+        val selectedGpxFiles = ArrayList<SelectedGpxFile>()
         val tracks =
             trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
         for (track in tracks) {
+            val gpxFile = loadedGpxFiles[track]
+            gpxFile?.let {
+                selectedGpxFiles.add(it)
+            }
             val title = track.name
             val icon = CarIcon.Builder(
                 IconCompat.createWithResource(app, R.drawable.ic_action_polygom_dark))
@@ -136,11 +144,7 @@ class TracksScreen(
                 .setOnClickListener { onClickTrack(track) }
                 .build())
         }
-        val selectedTracksSize = selectedGpxFiles.size
-        val selectedTracks =
-            selectedGpxFiles.subList(0, selectedTracksSize.coerceAtMost(contentLimit - 1))
-        app.osmandMap.mapLayers.gpxLayer.setAndroidAutoDisplayTracks(selectedTracks)
-        app.osmandMap.refreshMap()
+        app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(selectedGpxFiles)
         templateBuilder.setItemList(listBuilder.build())
     }
 

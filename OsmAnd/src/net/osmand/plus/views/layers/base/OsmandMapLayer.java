@@ -960,4 +960,21 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			}
 		}
 	}
+
+	public static class CustomMapObjects<T> {
+		protected List<T> customMapObjects;
+
+		@NonNull
+		public List<T> getMapObjects() {
+			if (customMapObjects == null) {
+				return new ArrayList<>();
+			} else {
+				return customMapObjects;
+			}
+		}
+
+		public void setCustomMapObjects(List<T> customMapObjects) {
+			this.customMapObjects = customMapObjects;
+		}
+	}
 }

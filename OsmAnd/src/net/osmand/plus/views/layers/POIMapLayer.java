@@ -100,7 +100,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private PoiUIFilter routeTrackFilter;
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
-	private Set<PoiUIFilter> androidAutoPoiFilters = null;
+	public CustomMapObjects<Amenity> customObjectsDelegate;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -147,6 +147,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 			@Override
 			protected List<Amenity> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				if (customObjectsDelegate != null) {
+					return customObjectsDelegate.getMapObjects();
+				}
 				if (calculatedFilters.isEmpty()) {
 					return new ArrayList<>();
 				}
@@ -287,7 +290,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private boolean shouldDraw(int zoom) {
-		if (!filters.isEmpty() && zoom >= START_ZOOM) {
+		if (!filters.isEmpty() && zoom >= START_ZOOM || customObjectsDelegate != null) {
 			return true;
 		} else if (filters.isEmpty()) {
 			if ((travelRendererHelper.getRouteArticlesProperty().get() && routeArticleFilter != null
@@ -325,17 +328,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		this.fileVisibilityChanged = true;
 	}
 
-	public void setAndroidAutoPoints(@Nullable Set<PoiUIFilter> points){
-		androidAutoPoiFilters = points;
-	}
-
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		super.onPrepareBufferImage(canvas, tileBox, settings);
 		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
-		if(androidAutoPoiFilters != null && app.getOsmandMap().getMapView().isCarView()){
-			selectedPoiFilters = androidAutoPoiFilters;
-		}
 		boolean showTravel = app.getSettings().SHOW_TRAVEL.get();
 		boolean routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();
 		boolean routeArticlePointsFilterEnabled = travelRendererHelper.getRouteArticlePointsProperty().get();
@@ -681,5 +677,13 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public void routeWasFinished() {
+	}
+
+	public void setCustomMapObjects(List<Amenity> poiUIFilters) {
+		if (customObjectsDelegate != null) {
+			data.clearCache();
+			customObjectsDelegate.setCustomMapObjects(poiUIFilters);
+			getApplication().getOsmandMap().refreshMap();
+		}
 	}
 }

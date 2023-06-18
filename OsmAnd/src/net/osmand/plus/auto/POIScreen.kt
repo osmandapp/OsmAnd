@@ -18,6 +18,7 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.plus.R
 import net.osmand.plus.poi.PoiUIFilter
@@ -43,8 +44,7 @@ class POIScreen(
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
-                app.osmandMap.mapLayers.poiMapLayer.setAndroidAutoPoints(null)
-                app.osmandMap.refreshMap()
+                app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
             }
         })
     }
@@ -77,9 +77,6 @@ class POIScreen(
         searchResults: List<SearchResult>?,
         itemList: ItemList?,
         resultsCount: Int) {
-        app.osmandMap.mapLayers.poiMapLayer.setAndroidAutoPoints(setOf(group))
-        app.osmandMap.refreshMap()
-
         loading = false
         if (resultsCount == 0) {
             this.itemList = withNoResults(ItemList.Builder()).build()
@@ -93,11 +90,15 @@ class POIScreen(
 
     private fun setupPOI(listBuilder: ItemList.Builder, searchResults: List<SearchResult>?) {
         val location = app.settings.lastKnownMapLocation
+        val mapPoint = ArrayList<Amenity>()
         searchResults?.let {
             val searchResultsSize = searchResults.size
             val limitedSearchResults =
                 searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
             for (point in limitedSearchResults) {
+                if (point.`object` is Amenity) {
+                    mapPoint.add(point.`object` as Amenity)
+                }
                 val title = point.localeName
                 var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
                 if (groupIcon == null) {
@@ -128,6 +129,7 @@ class POIScreen(
                     .build())
             }
         }
+        app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(mapPoint)
     }
 
     private fun loadPOI() {

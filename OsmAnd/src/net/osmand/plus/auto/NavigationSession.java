@@ -33,6 +33,7 @@ import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallb
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 /**
  * Session class for the Navigation sample app.
@@ -103,11 +104,19 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onStart(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+		getApp().getOsmandMap().getMapLayers().getGpxLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+		getApp().getOsmandMap().getMapLayers().getPoiMapLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+		getApp().getOsmandMap().getMapLayers().getMapMarkersLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 	}
 
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().removeListener(this);
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().customObjectsDelegate = null;
+		getApp().getOsmandMap().getMapLayers().getGpxLayer().customObjectsDelegate = null;
+		getApp().getOsmandMap().getMapLayers().getPoiMapLayer().customObjectsDelegate = null;
+		getApp().getOsmandMap().getMapLayers().getMapMarkersLayer().customObjectsDelegate = null;
 	}
 
 	@Override

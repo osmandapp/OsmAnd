@@ -34,7 +34,7 @@ class MapMarkersScreen(
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
-                app.osmandMap.mapLayers.mapMarkersLayer.setAndroidAutoMarkers(null)
+                app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(null)
                 app.osmandMap.refreshMap()
             }
         })
@@ -46,7 +46,7 @@ class MapMarkersScreen(
         val markers =
             app.mapMarkersHelper.mapMarkers.subList(0, markersSize.coerceAtMost(contentLimit - 1))
         val location = app.settings.lastKnownMapLocation
-        app.osmandMap.mapLayers.mapMarkersLayer.setAndroidAutoMarkers(markers)
+        app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
         app.osmandMap.refreshMap()
         for (marker in markers) {
             val title = marker.getName(app)

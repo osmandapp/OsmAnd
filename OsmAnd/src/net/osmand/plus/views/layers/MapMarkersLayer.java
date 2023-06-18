@@ -81,7 +81,6 @@ import java.util.List;
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
-	private static final Log LOG = PlatformUtil.getLog(FavouritesLayer.class);
 	private static final int START_ZOOM = 3;
 	private static final long USE_FINGER_LOCATION_DELAY = 1000;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
@@ -134,7 +133,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float textScale = 1f;
 	private double markerSizePx;
 
-	private List<MapMarker> androidAutoMarkers;
+	public CustomMapObjects<MapMarker> customObjectsDelegate;
 
 	//OpenGL
 	private int markersCount;
@@ -273,17 +272,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		initUI();
 	}
 
-	public void setAndroidAutoMarkers(@Nullable List<MapMarker> markers) {
-		androidAutoMarkers = markers;
-	}
-
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if ((!settings.SHOW_MAP_MARKERS.get() && !app.getOsmandMap().getMapView().isCarView())
-				    || (app.getOsmandMap().getMapView().isCarView() && androidAutoMarkers == null)) {
+				    || (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects()))) {
 			clearMapMarkersCollections();
 			clearVectorLinesCollections();
 			resetCachedRenderer();
@@ -292,8 +287,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
-		if (app.getOsmandMap().getMapView().isCarView()) {
-			activeMapMarkers = androidAutoMarkers;
+		if (customObjectsDelegate != null) {
+			activeMapMarkers = customObjectsDelegate.getMapObjects();
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
@@ -384,8 +379,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 
-		boolean isCarView = getMapView().isCarView();
-		if ((tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) && !isCarView || isCarView && Algorithms.isEmpty(androidAutoMarkers)) {
+		if (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects())
+				    || customObjectsDelegate == null && (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get())) {
 			clearVectorLinesCollections();
 			return;
 		}
@@ -395,7 +390,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		updateBitmaps(false);
 
-		List<MapMarker> markers = isCarView ? androidAutoMarkers : markersHelper.getMapMarkers();
+		List<MapMarker> markers = customObjectsDelegate != null ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		if (mapRenderer == null) {
 			for (MapMarker marker : markers) {
 				if (isMarkerVisible(tileBox, marker) && !overlappedByWaypoint(marker)
@@ -1088,6 +1083,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				canvas.drawTextOnPath(text, linePath, hOffset, -verticalOffset, textAttrs.paint);
 			}
 			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		}
+	}
+
+	public void setCustomMapObjects(List<MapMarker> mapMarkers) {
+		if (customObjectsDelegate != null) {
+			customObjectsDelegate.setCustomMapObjects(mapMarkers);
+			getApplication().getOsmandMap().refreshMap();
 		}
 	}
 }
