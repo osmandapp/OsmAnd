@@ -5177,4 +5177,20 @@
     <string name="revolutions_per_minute_unit">o/min</string>
     <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på høydekartdata. Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
     <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s) den inneholder.</string>
+    <string name="rendering_value_sectors_name">Sektorer</string>
+    <string name="shared_string_close_the_dialog">Lukk dialogen</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="shared_string_new_track">Nytt spor</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_name_only_name">Kun navn</string>
+    <string name="shared_string_ear_lobe">Øreflipp</string>
+    <string name="save_track_external_sensors_data">Data</string>
+    <string name="tracks_empty_folder">Tom mappe</string>
+    <string name="shared_string_hand">Hånd</string>
+    <string name="delete_folder_question">Slett mappen\?</string>
+    <string name="delete_folder">Slett mappen</string>
+    <string name="show_all_tracks_on_the_map">Vis alle sporene på kartet</string>
 </resources>
