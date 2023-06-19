@@ -42,7 +42,7 @@
             tools:visibility="visible"/>
 
         <LinearLayout
-            android:id="@+id/altitude_container"
+            android:id="@+id/first_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -53,7 +53,7 @@
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
-                android:id="@+id/text_alt_value"
+                android:id="@+id/text_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -64,7 +64,7 @@
                 tools:text="100 " />
 
             <TextView
-                android:id="@+id/text_alt_units"
+                android:id="@+id/text_units"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -84,7 +84,7 @@
             android:background="?attr/dashboard_divider" />
 
         <LinearLayout
-            android:id="@+id/speed_container"
+            android:id="@+id/second_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -95,7 +95,7 @@
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
-                android:id="@+id/text_spd_value"
+                android:id="@+id/text_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -106,7 +106,7 @@
                 tools:text="100 "/>
 
             <TextView
-                android:id="@+id/text_spd_units"
+                android:id="@+id/text_units"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -118,7 +118,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/slope_container"
+            android:id="@+id/third_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -129,7 +129,7 @@
             android:paddingBottom="@dimen/chart_marker_vertical_padding">
 
             <TextView
-                android:id="@+id/text_slp_value"
+                android:id="@+id/text_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -140,7 +140,7 @@
                 tools:text="100 "/>
 
             <TextView
-                android:id="@+id/text_slp_units"
+                android:id="@+id/text_units"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"

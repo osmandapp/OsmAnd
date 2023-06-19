@@ -112,7 +112,7 @@ public class GpxUiHelper {
 	}
 
 	public static String getDescription(OsmandApplication app, TrkSegment t, boolean html) {
-		return getDescription(app, GPXTrackAnalysis.segment(0, t), html);
+		return getDescription(app, GPXTrackAnalysis.prepareInformation(0, null, t), html);
 	}
 
 	public static String getColorValue(String clr, String value, boolean html) {
@@ -220,7 +220,7 @@ public class GpxUiHelper {
 				list.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), null));
 			}
 
-			ContextMenuAdapter adapter = createGpxContextMenuAdapter(app, list, false);
+			ContextMenuAdapter adapter = createGpxContextMenuAdapter(app, list);
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter, dialogThemeRes, nightMode);
 		}
 		return null;
@@ -276,7 +276,8 @@ public class GpxUiHelper {
 		long lastModified = folder.getLastModified();
 		int tracksCount = folder.getFlattenedTrackItems().size();
 
-		String numberOfTracks = app.getString(R.string.number_of_tracks, String.valueOf(tracksCount));
+		String empty = app.getString(R.string.shared_string_empty);
+		String numberOfTracks = tracksCount > 0 ? app.getString(R.string.number_of_tracks, String.valueOf(tracksCount)) : empty;
 		if (lastModified > 0) {
 			String formattedDate = OsmAndFormatter.getFormattedDate(app, lastModified);
 			return app.getString(R.string.ltr_or_rtl_combine_via_comma, formattedDate, numberOfTracks);
@@ -284,11 +285,9 @@ public class GpxUiHelper {
 		return numberOfTracks;
 	}
 
-	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app,
-	                                                              List<GPXInfo> allGpxList,
-	                                                              boolean needSelectItems) {
+	private static ContextMenuAdapter createGpxContextMenuAdapter(OsmandApplication app, List<GPXInfo> allGpxList) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-		fillGpxContextMenuAdapter(adapter, allGpxList, needSelectItems);
+		fillGpxContextMenuAdapter(adapter, allGpxList, false);
 		return adapter;
 	}
 

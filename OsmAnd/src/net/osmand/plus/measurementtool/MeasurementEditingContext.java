@@ -222,7 +222,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean hasElevationData() {
-		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().getAnalysis(0).hasElevationData;
+		return gpxData != null && gpxData.getGpxFile() != null && gpxData.getGpxFile().getAnalysis(0).hasElevationData();
 	}
 
 	public CalculationMode getLastCalculationMode() {

@@ -10,7 +10,14 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_close_the_dialog">Close the dialog</string>
+    <string name="routing_attr_allow_via_ferrata_name">Allow via ferrata</string>
+    <string name="routing_attr_allow_via_ferrata_description">Allow via ferrata paths.</string>
+    <string name="power_watts_unit">Watts</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="calculate_offline">Calculate offline</string>
+    <string name="calculate_offline_altitude_descr">Calculate elevation offline, based on heightmap data. Differences vs. device recorded altitude may be used as elevation correction.</string>
+    <string name="error_calculate">Calculation result is empty</string>
     <string name="write_data_from_sensor_to_track">Write data from external sensors to GPX while trip recording.</string>
     <string name="save_track_external_sensors_data">Data</string>
     <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
@@ -30,7 +37,7 @@
     <string name="rendering_value_caiScale_name">CAI scale</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
-    <string name="map_3d_mode_hint">Long tap on button allows to change button position.</string>
+    <string name="map_3d_mode_hint">Long tap the button allows to change button position.</string>
     <string name="visible_in_3d_mode">Visible in 3D mode</string>
     <string name="map_3d_mode_description">Touch map with two fingers and moves them up and down to adjust map tilt.</string>
     <string name="shared_string_visible_on_map">Visible on map</string>
@@ -481,7 +488,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Hint: Tap on the compass widget to switch the map orientation mode.</string>
+    <string name="compass_click_desc">Hint: Tap the compass button to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
@@ -1040,7 +1047,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="enter_verification_code">Enter one-time password</string>
     <string name="verify_email_address_descr">Verification code sent to %1$s. Please enter it in the field below.</string>
     <string name="verify_email_address">Verify the e-mail address</string>
-    <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password for the next step will be sent to it.</string>
+    <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password will be sent to it.</string>
     <string name="osmand_cloud_create_account_descr">Please enter your e-mail address, a verification code will be sent there,\nand all your data will be linked to it.</string>
     <string name="osmand_cloud_help_descr">Need help? Please contact us at %1$s</string>
     <string name="restore_from_file">Restore from file</string>

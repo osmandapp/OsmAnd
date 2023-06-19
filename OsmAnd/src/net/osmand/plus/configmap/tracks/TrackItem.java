@@ -19,7 +19,6 @@ public class TrackItem {
 	@Nullable
 	private final File file;
 	private final long lastModified;
-	private final boolean showCurrentTrack;
 
 	private GpxDataItem dataItem;
 
@@ -28,12 +27,10 @@ public class TrackItem {
 		path = file.getAbsolutePath();
 		name = GpxUiHelper.getGpxTitle(file.getName());
 		lastModified = file.lastModified();
-		showCurrentTrack = false;
 	}
 
 	public TrackItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		showCurrentTrack = gpxFile.showCurrentTrack;
-		if (showCurrentTrack) {
+		if (gpxFile.showCurrentTrack) {
 			file = null;
 			path = gpxFile.path;
 			name = app.getString(R.string.shared_string_currently_recording_track);
@@ -75,7 +72,7 @@ public class TrackItem {
 	}
 
 	public boolean isShowCurrentTrack() {
-		return showCurrentTrack;
+		return file == null;
 	}
 
 	@NonNull
@@ -97,14 +94,11 @@ public class TrackItem {
 		}
 
 		TrackItem trackItem = (TrackItem) obj;
-		return Algorithms.stringsEqual(trackItem.path, path)
-				&& Algorithms.stringsEqual(trackItem.name, name)
-				&& trackItem.lastModified == lastModified
-				&& trackItem.showCurrentTrack == showCurrentTrack;
+		return Algorithms.objectEquals(file, trackItem.file);
 	}
 
 	@Override
 	public int hashCode() {
-		return Algorithms.hash(path, name, lastModified, dataItem, file);
+		return Algorithms.hash(file);
 	}
 }

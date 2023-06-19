@@ -140,8 +140,10 @@ public class DiscountHelper {
 	private static void processDiscountResponse(String response, MapActivity mapActivity) {
 		try {
 			OsmandApplication app = mapActivity.getMyApplication();
-
 			JSONObject obj = new JSONObject(response);
+			if (obj.length() == 0) {
+				return;
+			}
 			ControllerData data = ControllerData.parse(app, obj);
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			Date start = df.parse(obj.getString("start"));

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -30,6 +31,8 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	protected List<T> sensors = new ArrayList<>();
 
 	public interface DeviceListener {
+
+		void onDeviceConnecting(@NonNull AbstractDevice<?> device);
 
 		@AnyThread
 		void onDeviceConnect(@NonNull AbstractDevice<?> device, @NonNull DeviceConnectionResult result,
@@ -139,9 +142,11 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 		}
 	}
 
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 		for (T sensor : sensors) {
-			sensor.writeSensorDataToJson(json);
+			if (sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType)) {
+				sensor.writeSensorDataToJson(json, widgetDataFieldType);
+			}
 		}
 	}
 

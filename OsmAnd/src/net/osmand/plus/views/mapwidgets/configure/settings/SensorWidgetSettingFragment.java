@@ -77,7 +77,7 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment impl
 
 	@Nullable
 	private String getSourceDeviceId() {
-		return sourceDevice == null ? null : sourceDevice.getDeviceId();
+		return sourceDevice == null ? "" : sourceDevice.getDeviceId();
 	}
 
 	private void setupDataSource() {
@@ -101,6 +101,6 @@ public class SensorWidgetSettingFragment extends WidgetSettingsBaseFragment impl
 
 	@Override
 	protected void applySettings() {
-		sensorWidget.setDeviceId(appMode, getSourceDeviceId());
+		sensorWidget.setDeviceId(getSourceDeviceId());
 	}
 }

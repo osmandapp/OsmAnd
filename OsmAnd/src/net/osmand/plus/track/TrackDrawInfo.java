@@ -180,6 +180,11 @@ public class TrackDrawInfo {
 		return coloringType == null ? ColoringType.TRACK_SOLID : coloringType;
 	}
 
+	@Nullable
+	public String getColoringTypeName() {
+		return getColoringType().getName(routeInfoAttribute);
+	}
+
 	public String getRouteInfoAttribute() {
 		return routeInfoAttribute;
 	}

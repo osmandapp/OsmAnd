@@ -284,6 +284,38 @@ public class TurnType {
         return s.toString();
 	}
 
+	public int countTurnTypeDirections(int type, boolean onlyActive) {
+		if (lanes == null) {
+			return 0;
+		}
+		int cnt = 0;
+		for (int h = 0; h < lanes.length; h++) {
+			boolean active = lanes[h] % 2 == 1;
+			if (onlyActive && !active) {
+				continue;
+			}
+			int primary = TurnType.getPrimaryTurn(lanes[h]);
+			if (primary == 0) {
+				primary = TurnType.C;
+			}
+			if (primary == type) {
+				cnt++;
+			}
+			if (onlyActive) {
+				continue;
+			}
+			int secondary = TurnType.getSecondaryTurn(lanes[h]);
+			if (secondary == type) {
+				cnt++;
+			}
+			int tertiary = TurnType.getTertiaryTurn(lanes[h]);
+			if (tertiary == type) {
+				cnt++;
+			}
+		}
+		return cnt;
+	}
+
 	public static int[] lanesFromString(String lanesString) {
 		if (Algorithms.isEmpty(lanesString)) {
 			return null;

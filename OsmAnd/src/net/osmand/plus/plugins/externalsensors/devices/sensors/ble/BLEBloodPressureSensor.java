@@ -195,13 +195,6 @@ public class BLEBloodPressureSensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		BloodPressureData data = lastBloodPressureData;
-		if (data != null) {
-			json.put(getSensorId() + "_systolic", data.systolic);
-			json.put(getSensorId() + "_diastolic", data.diastolic);
-			json.put(getSensorId() + "_arterialPressure", data.arterialPressure);
-			json.put(getSensorId() + "_pulseRate", data.pulseRate);
-		}
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
 }

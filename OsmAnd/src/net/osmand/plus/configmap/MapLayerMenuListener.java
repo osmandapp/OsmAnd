@@ -98,7 +98,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 				mapActivity.getMyApplication().showToastMessage(R.string.map_online_plugin_is_not_installed);
 			} else if (uiAdapter != null) {
-				mapActivity.getMapLayers().selectMapLayer(mapActivity, item, uiAdapter);
+				mapActivity.getMapLayers().selectMapSourceLayer(mapActivity, item, uiAdapter);
 			}
 			return false;
 		} else if (itemId == R.string.show_borders_of_downloaded_maps) {

@@ -4741,7 +4741,7 @@
     <string name="next_turn_widget_desc">小工具會顯示您下一個轉彎的資訊，其中包含操作與距離的圖片。</string>
     <string name="compass_always_visible">一律可見</string>
     <string name="compass_desc">顯示北邊的方向。</string>
-    <string name="compass_click_desc">秘訣：點擊指南針小工具切換地圖方向模式。</string>
+    <string name="compass_click_desc">秘訣：點擊指南針按鈕切換地圖方向模式。</string>
     <string name="rendering_attr_depthContourWidth_description">等深線寬度</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">顯示山地自行車 IMBA 路徑</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地自行車專用路徑。</string>
@@ -5218,4 +5218,12 @@
     <string name="track_not_recorded">未記錄</string>
     <string name="shared_string_new_track">新軌跡</string>
     <string name="shared_string_visible_on_map">在地圖上可見</string>
+    <string name="write_data_from_sensor_to_track">在旅程錄製時從外部感應器寫入資料至 GPX。</string>
+    <string name="external_sensors_source_of_data">資料來源</string>
+    <string name="save_track_external_sensors_data">資料</string>
+    <string name="there_are_no_connected_sensors_of_this_type">沒有此類型的已連結感應器</string>
+    <string name="external_sensors_not_found">找不到感應器</string>
+    <string name="calculate_offline_altitude_descr">根據高度圖資料，離線計算海拔。與裝置記錄的海拔差異可用作高度校正。</string>
+    <string name="error_calculate">計算結果為空</string>
+    <string name="calculate_offline">離線計算</string>
 </resources>

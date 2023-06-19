@@ -1,4 +1,4 @@
-package net.osmand.plus.myplaces.tracks.dialogs;
+package net.osmand.plus.track.fragments;
 
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
 import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
@@ -37,7 +37,6 @@ import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;

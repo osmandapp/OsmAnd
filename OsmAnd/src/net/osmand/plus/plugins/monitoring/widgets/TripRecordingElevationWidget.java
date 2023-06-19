@@ -33,7 +33,7 @@ public abstract class TripRecordingElevationWidget extends TextInfoWidget {
 
 		updateInfo(null);
 		setOnClickListener(v -> {
-			if (getAnalysis().hasElevationData) {
+			if (getAnalysis().hasElevationData()) {
 				Bundle params = new Bundle();
 				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
 				params.putString(TrackMenuFragment.CHART_TAB_NAME, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE.name());

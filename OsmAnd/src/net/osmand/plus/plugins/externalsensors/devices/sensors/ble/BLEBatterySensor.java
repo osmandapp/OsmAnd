@@ -58,7 +58,7 @@ public class BLEBatterySensor extends BLEAbstractSensor {
 		@Nullable
 		@Override
 		public List<SensorWidgetDataField> getWidgetFields() {
-			return  Collections.singletonList(
+			return Collections.singletonList(
 					new SensorWidgetDataField(SensorWidgetDataFieldType.BATTERY, R.string.map_widget_battery, -1, batteryLevel));
 		}
 
@@ -138,10 +138,6 @@ public class BLEBatterySensor extends BLEAbstractSensor {
 	}
 
 	@Override
-	public void writeSensorDataToJson(@NonNull JSONObject json) throws JSONException {
-		BatteryData data = lastBatteryData;
-		if (data != null) {
-			json.put(getSensorId(), data.batteryLevel);
-		}
+	public void writeSensorDataToJson(@NonNull JSONObject json, @NonNull SensorWidgetDataFieldType widgetDataFieldType) throws JSONException {
 	}
 }

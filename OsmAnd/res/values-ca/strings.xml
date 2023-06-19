@@ -4309,4 +4309,18 @@
 \n • Corregir errors amb RTL
 \n
 \n</string>
+    <string name="save_track_external_sensors_data">Dades</string>
+    <string name="external_sensors_not_found">No s\'han trobat sensors</string>
+    <string name="external_sensors_source_of_data">Procedència de les dades</string>
+    <string name="error_calculate">El càlcul no té resultat</string>
+    <string name="write_data_from_sensor_to_track">Incorpora dades de sensors externs de GPX mentre s\'enregistra el desplaçament.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">No hi ha sensors connectats d\'aquest tipus</string>
+    <string name="delete_folder">Suprimeix la carpeta</string>
+    <string name="show_all_tracks_on_the_map">Visualitza totes les traces al mapa</string>
+    <string name="calculate_offline_altitude_descr">Calcula localment l\'alçada, a partir de dades del mapa de relleu. Les diferències respecte l\'altitud registrada pel dispositiu es poden utilitzar com a correcció d\'elevació.</string>
+    <string name="delete_track_folder_dialog_message">Això eliminarà la carpeta \"%1$s\" i totes les traces que inclou (%2$s).</string>
+    <string name="calculate_offline">Càlcul local</string>
+    <string name="rssi_widget_desc">Mostra el nivell RSSI del vostre dispositiu extern.</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="delete_folder_question">Segur que voleu suprimir la carpeta\?</string>
 </resources>

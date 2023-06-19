@@ -2,6 +2,7 @@ package net.osmand.plus.myplaces.tracks.dialogs.viewholders;
 
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY_ACTIVE;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +20,6 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelecti
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -117,11 +117,9 @@ public class RecordingTrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void setupButton(@NonNull View button, @StringRes int titleId, @StringRes int descriptionId, @DrawableRes int iconId) {
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY_ACTIVE, app.getString(titleId), iconId);
-		saveButton.setContentDescription(app.getString(descriptionId));
-
-		TextView textView = button.findViewById(R.id.button_text);
-		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));
+		Context context = button.getContext();
+		UiUtilities.setupDialogButton(nightMode, button, SECONDARY_ACTIVE, context.getString(titleId), iconId);
+		saveButton.setContentDescription(context.getString(descriptionId));
 	}
 
 	public interface RecordingTrackListener {

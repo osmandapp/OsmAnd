@@ -1119,8 +1119,8 @@
     <string name="interrupt_music_descr">Ahots iragarpenek musika pausatuko dute.</string>
     <string name="interrupt_music">Eten musika</string>
     <string name="index_item_world_altitude_correction">Munduko garaiera zuzenketa</string>
-    <string name="rendering_attr_alpineHiking_name">SAC Alpetar bidezidor kirol eskala (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Marraztu bideak SAC eskalaren arabera.</string>
+    <string name="rendering_attr_alpineHiking_name">Alpetar bidezidor kirol eskala</string>
+    <string name="rendering_attr_alpineHiking_description">Marraztu bideak SAC/CAI eskalaren arabera.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Mendiko ibilbideak</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Marraztu bideak OSMC aztarnen arabera.</string>
     <string name="about_version">Bertsioa:</string>
@@ -2641,8 +2641,6 @@
     <string name="shared_string_only_with_wifi">Soilik Wi-Fi bidez</string>
     <string name="wikivoyage_download_pics">Deskargatu irudiak</string>
     <string name="wikivoyage_download_pics_descr">Artikuluetako irudiak konexiorik gabe erabiltzeko deskargatu daitezke.
-\n
-\n
 \nEzarpen hau \'Arakatu\' → \'Aukerak\' atalean aldatu dezakezu.</string>
     <string name="shared_string_wifi_only">Soilik Wi-Fi</string>
     <string name="select_travel_book">Hautatu bidai-liburu bat</string>
@@ -2725,7 +2723,7 @@
     <string name="light_rs_render_descr">Gidatzeko estilo sinplea. Begietara xamurra gau moduan, sestra-kurbak, kontraste handiko errepide laranjak, bestelako mapako objektuak leunduak.</string>
     <string name="topo_render_descr">Bidezidor kirol eta mendiko bizikletarako. Irakurgarria kanpoaldean. Bide eta objektu naturalen kontrastea, ibilbide mota desberdinak, sestra-kurbak ezarpen aurreratuak, xehetasun gehiago. Azaleraren egonkortasunaren aukerak bidearen kalitatea bereizten du. Gau modurik ez.</string>
     <string name="touring_view_render_descr">Errepiderako kontraste eta xehetasun handiko estiloa. Lehenetsitako estiloaren konfigurazio aukera guztiak ditu eta ahal beste xehetasun erakusten ditu, bereziki errepideak, bideak eta bestelako garraio-bideak. Bide moten arteko bereizketa bisual argia. Egunez, gauez zein naturan erabiltzeko egokia.</string>
-    <string name="default_render_descr">Erabilera orokorrerako estiloa. Biztanle askoko hirietan garbia. sestra-kurbak, ibilbideak, zoladuraren kalitatea, sarbide-mugak, bideak SAC eskalaren arabera marrazten dira, ur kiroletarako elementuak.</string>
+    <string name="default_render_descr">Erabilera orokorrerako estiloa. Biztanle askoko hirietan garbia. sestra-kurbak, ibilbideak, zoladuraren kalitatea, sarbide-mugak, bideak SAC/CAI eskalaren arabera marrazten dira, ur kiroletarako elementuak.</string>
     <string name="access_intermediate_arrival_time">Tarteko iritsiera ordua</string>
     <string name="map_widget_intermediate_time">Tarteko denbora</string>
     <string name="quick_action_edit_actions">Editatu ekintzak</string>
@@ -4578,7 +4576,7 @@
     <string name="compass_visible_if_map_rotated">Ikusgai mapa biratzen bada</string>
     <string name="compass_always_hidden">Beti ezkutuan</string>
     <string name="compass_always_visible">Beti ikusgai</string>
-    <string name="compass_click_desc">Aholkua: sakatu iparrorratza trepeta maparen orientazio modua aldatzeko.</string>
+    <string name="compass_click_desc">Aholkua: sakatu iparrorratzaren botoia maparen orientazio modua aldatzeko.</string>
     <string name="compass_desc">Iparraldeko norabidea erakusten du.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Sakonerako sestra-marren kolore-eskema</string>
     <string name="rendering_attr_depthContourWidth_description">Sakonerako sestra-marren zabalera</string>
@@ -5056,31 +5054,59 @@
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
     <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
 \n
+\n
+\n
 \n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
+\n
+\n
 \n
 \n • Ibilbidea esteka bidez partekatzeko aukera gehitu da
 \n
+\n
+\n
 \n • \"Itsas milia/oinak\" luzera-unitatea gehitu da
+\n
+\n
 \n
 \n • Maparen orientazioak modu finko berria gehitu du
 \n
+\n
+\n
 \n • Hasierako pantaila sinplifikatua
+\n
+\n
 \n
 \n • Kokapen finkoa pantaila zatitu moduan Android Auto-n
 \n
+\n
+\n
 \n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko
+\n
+\n
 \n
 \n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du
 \n
+\n
+\n
 \n • Leku beganoak bistaratzeko arazoak konpondu dira
+\n
+\n
 \n
 \n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da 
 \n
+\n
+\n
 \n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\" 
+\n
+\n
 \n
 \n • Ziklomotor profil berria
 \n
+\n
+\n
 \n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\" 
+\n
+\n
 \n
 \n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
 \n
@@ -5213,4 +5239,25 @@
     <string name="search_track_by_name">Bilatu arrastoa izenaren arabera</string>
     <string name="no_search_results">Ez dago emaitzarik</string>
     <string name="rendering_value_small_name">Txikia</string>
+    <string name="write_data_from_sensor_to_track">Idatzi datuak GPXra kanpoko sentsoreetatik bidaia grabatzen duzun bitartean.</string>
+    <string name="calculate_offline_altitude_descr">Kalkulatu kota konexiorik gabe, altuera-mapen datuetan oinarrituta. Gailuak erregistratutako altueraren desberdintasunak kota zuzentzeko erabil daitezke.</string>
+    <string name="error_calculate">Kalkuluaren emaitza hutsik dago</string>
+    <string name="calculate_offline">Kalkulatu konexiorik gabe</string>
+    <string name="rendering_value_sacScale_name">SAC eskala</string>
+    <string name="delete_track_folder_dialog_message">Honek \"%1$s\" karpeta eta barne dauden arrasto guztiak (%2$s) ezabatuko ditu.</string>
+    <string name="delete_folder_question">Karpeta ezabatu\?</string>
+    <string name="delete_folder">Ezabatu karpeta</string>
+    <string name="rssi_widget_desc">Zure kanpoko gailuaren RSSI maila erakusten du.</string>
+    <string name="map_widget_rssi">Jasotako seinalearen indarraren adierazlea (Rssi)</string>
+    <string name="tracks_empty_folder_description">Karpeta honek oraindik ez du arrastorik.</string>
+    <string name="tracks_empty_folder">Karpeta hutsa</string>
+    <string name="track_not_recorded">Grabatu gabe</string>
+    <string name="shared_string_new_track">Arrasto berria</string>
+    <string name="rendering_value_caiScale_name">CAI eskala</string>
+    <string name="shared_string_visible_on_map">Mapan ikusgai</string>
+    <string name="save_track_external_sensors_data">Datuak</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Ez dago mota honetako sentsorerik konektatuta</string>
+    <string name="external_sensors_not_found">Ez da sentsorerik aurkitu</string>
+    <string name="external_sensors_source_of_data">Datuen iturria</string>
+    <string name="show_all_tracks_on_the_map">Erakutsi arrasto guztiak mapan</string>
 </resources>

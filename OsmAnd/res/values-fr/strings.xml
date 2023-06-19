@@ -4713,7 +4713,7 @@
     <string name="auto_backup_title">Backup automatique</string>
     <string name="shared_string_duplicate">Dupliquer</string>
     <string name="rendering_attr_depthContourWidth_description">Largeur des lignes de profondeur</string>
-    <string name="compass_click_desc">Astuce : appuyez sur la boussole pour changer le mode d\'orientation de la carte.</string>
+    <string name="compass_click_desc">Astuce : appuyez sur la boussole pour basculer entre les modes d\'orientation de la carte.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Jeu de couleurs des lignes de profondeur</string>
     <string name="av_notes_photo_widget_desc">Appuyez sur le gadget pour prendre une photo.</string>
     <string name="av_notes_video_widget_desc">Appuyez sur le gadget pour enregistrer une vidéo.</string>
@@ -5218,4 +5218,12 @@
     <string name="shared_string_new_track">Nouvelle trace</string>
     <string name="shared_string_visible_on_map">Visible sur la carte</string>
     <string name="delete_track_folder_dialog_message">Cela supprimera le dossier \"%1$s\" ainsi que toutes les traces (%2$s) dans celui-ci.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Aucun capteur de ce type n\'est connecté</string>
+    <string name="save_track_external_sensors_data">Données</string>
+    <string name="external_sensors_source_of_data">Source des données</string>
+    <string name="external_sensors_not_found">Capteurs non trouvés</string>
+    <string name="write_data_from_sensor_to_track">Ajouter les données des capteurs externes dans le fichier GPX lors de l\'enregistrement d\'un trajet.</string>
+    <string name="error_calculate">Le résultat du calcul est vide</string>
+    <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte altimétrique. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
+    <string name="calculate_offline">Calculer hors ligne</string>
 </resources>

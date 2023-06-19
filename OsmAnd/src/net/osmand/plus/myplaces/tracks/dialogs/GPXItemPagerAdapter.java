@@ -1,9 +1,10 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.ALTITUDE;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.SLOPE;
-import static net.osmand.plus.charts.ChartUtils.LineGraphType.SPEED;
+import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
+import static net.osmand.plus.charts.GPXDataSetType.SENSOR_HEART_RATE;
+import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
+import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
@@ -42,9 +43,8 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetAxisType;
-import net.osmand.plus.charts.ChartUtils.GPXDataSetType;
-import net.osmand.plus.charts.ChartUtils.LineGraphType;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
@@ -172,14 +172,14 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		List<GPXTabItemType> tabTypeList = new ArrayList<>();
 		boolean showCurrentTrack = isShowCurrentTrack();
 		if (showCurrentTrack) {
-			if (analysis != null && (analysis.hasElevationData || analysis.hasSpeedData)) {
+			if (analysis != null && (analysis.hasElevationData() || analysis.hasSpeedData())) {
 				tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 			}
 		} else {
 			tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 		}
 		if (analysis != null) {
-			if (analysis.hasElevationData) {
+			if (analysis.hasElevationData()) {
 				tabTypeList.add(GPX_TAB_ITEM_ALTITUDE);
 			} else if (showEmptyAltitudeTab && !showCurrentTrack) {
 				tabTypeList.add(GPX_TAB_ITEM_NO_ALTITUDE);
@@ -192,7 +192,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private List<ILineDataSet> getDataSets(LineChart chart, GPXTabItemType tabType,
-	                                       LineGraphType firstType, LineGraphType secondType) {
+	                                       GPXDataSetType firstType, GPXDataSetType secondType) {
 		List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
 		boolean withoutGaps = true;
 		if (isShowCurrentTrack()) {
@@ -316,7 +316,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void setupSpeedTab(View view, LineChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
-			if (analysis.hasSpeedData) {
+			if (analysis.hasSpeedData()) {
 				ChartUtils.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
@@ -369,7 +369,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void setupAltitudeTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
-			if (analysis.hasElevationData) {
+			if (analysis.hasElevationData()) {
 				ChartUtils.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
@@ -406,7 +406,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private void setupGeneralTab(View view, LineChart chart, int position) {
 		if (analysis != null) {
-			if (analysis.hasElevationData || analysis.hasSpeedData) {
+			if (analysis.hasElevationData() || analysis.hasSpeedData()) {
 				ChartUtils.setupGPXChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 				updateChart(chart);
@@ -808,8 +808,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private void updateGraphTab(int position) {
-		LineGraphType firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
-		LineGraphType secondType = null;
+		GPXDataSetType firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
+		GPXDataSetType secondType = null;
 		if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
 			secondType = SLOPE;
 		} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {

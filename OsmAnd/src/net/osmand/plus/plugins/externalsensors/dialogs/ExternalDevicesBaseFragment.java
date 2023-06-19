@@ -1,32 +1,27 @@
 package net.osmand.plus.plugins.externalsensors.dialogs;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 
-public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragment {
+public abstract class ExternalDevicesBaseFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ExternalDevicesBaseFragment.class.getSimpleName();
 	protected ExternalSensorsPlugin plugin;
@@ -47,7 +42,14 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 		View view = themedInflater.inflate(getLayoutId(), container, false);
 		setupToolbar(view);
 		setupUI(view);
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		return view;
+	}
+
+	@ColorRes
+	public int getStatusBarColorId() {
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(app));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
-			dismiss();
+			requireActivity().onBackPressed();
 		});
 	}
 
@@ -74,32 +76,6 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndDialogFragme
 		return 5.0f;
 	}
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-		Activity activity = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
-		Dialog dialog = new Dialog(activity, themeId) {
-			@Override
-			public void onBackPressed() {
-				dismiss();
-			}
-		};
-		Window window = dialog.getWindow();
-		if (window != null) {
-			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
-				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
-			}
-			window.setStatusBarColor(ContextCompat.getColor(app, getStatusBarColorId()));
-		}
-		return dialog;
-	}
-
-	@ColorRes
-	protected int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
 
 	@NonNull
 	protected MapActivity requireMapActivity() {

@@ -4719,7 +4719,7 @@
     <string name="compass_visible_if_map_rotated">Látható, ha a térkép el van forgatva</string>
     <string name="compass_always_hidden">Mindig el van rejtve</string>
     <string name="compass_always_visible">Mindig látható</string>
-    <string name="compass_click_desc">Tipp: Koppintson az iránytű widgetre a térkép tájolási módjai közötti váltáshoz.</string>
+    <string name="compass_click_desc">Tipp: Koppintson az iránytű gombra a térkép tájolási módjai közötti váltáshoz.</string>
     <string name="compass_desc">Az északi irányt mutatja.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Mélységvonalak színsémája</string>
     <string name="rendering_attr_depthContourWidth_description">Mélységvonalak vastagsága</string>
@@ -5218,4 +5218,14 @@
     <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) %1$s mappát és minden benne tárolt nyomvonalat (%2$s).</string>
     <string name="delete_folder_question">Mappa törlése\?</string>
     <string name="delete_folder">Mappa törlése</string>
+    <string name="external_sensors_not_found">Nem találhatók érzékelők</string>
+    <string name="external_sensors_source_of_data">Az adat forrása</string>
+    <string name="save_track_external_sensors_data">Adat</string>
+    <string name="write_data_from_sensor_to_track">Adatok írása külső érzékelőkről GPX fájlba az utazás rögzítése során.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nincs ilyen típusú érzékelő kapcsolódva</string>
+    <string name="error_calculate">A számítási eredmény üres</string>
+    <string name="rendering_attr_lightDetail_description">Alapértelmezett: tengeri jel neve (light character.group.period), válasszon további információkat az 1-3 szektorhoz vagy az 1,2,3,4,5-ös szektor világos karakterhez</string>
+    <string name="calculate_offline">Offline kalkuláció</string>
+    <string name="calculate_offline_altitude_descr">A magasság kiszámítása offline, a magasságtérkép adatai alapján. Az eszköz által rögzített eltérő magasságokhoz korrekcióként használható.</string>
+    <string name="rendering_attr_lightDetail_name">Fény részletek</string>
 </resources>
