@@ -114,7 +114,11 @@ public class CategoryAnimator {
 		divider.setVisibility(View.VISIBLE);
 
 		// Description will be invisible until collapsing animation finished
-		tvDescription.setVisibility(View.INVISIBLE);
+		if (category.getDescription() == null) {
+			tvDescription.setVisibility(View.GONE);
+		} else {
+			tvDescription.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	private void onMainAnimationUpdate(int val, float minValue, float maxValue) {
@@ -150,7 +154,7 @@ public class CategoryAnimator {
 
 		// Update views visibility
 		AndroidUiHelper.updateVisibility(divider, isExpanding);
-		AndroidUiHelper.updateVisibility(tvDescription, !isExpanding);
+		AndroidUiHelper.updateVisibility(tvDescription, !isExpanding && category.getDescription() != null);
 		AndroidUiHelper.updateVisibility(itemsContainer, isExpanding);
 
 		// Set items container height as WRAP_CONTENT

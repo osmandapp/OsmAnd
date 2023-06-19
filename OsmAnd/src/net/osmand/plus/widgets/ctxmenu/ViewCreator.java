@@ -181,6 +181,8 @@ public class ViewCreator {
 			return getHelpToImproveItemView(convertView);
 		} else if (layoutId == R.layout.main_menu_drawer_osmand_version) {
 			return getOsmAndVersionView(convertView, item);
+		} else if (layoutId == R.layout.list_item_terrain_description) {
+			return getTerrainDescriptionView(convertView, item);
 		}
 		return null;
 	}
@@ -281,6 +283,18 @@ public class ViewCreator {
 			intent.setData(Uri.parse("mailto:"));
 			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
 			AndroidUtils.startActivityIfSafe(ctx, intent);
+		});
+		return view;
+	}
+
+	private View getTerrainDescriptionView(@NonNull View view, @NonNull ContextMenuItem item) {
+		View btnGet = view.findViewById(R.id.button_get);
+		UiUtilities.setupDialogButton(nightMode, btnGet, UiUtilities.DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
+		btnGet.setOnClickListener(v -> {
+			ItemClickListener listener = item.getSpecialViewClickListener();
+			if (listener != null) {
+				listener.onContextMenuClick(uiAdapter, view, item, false);
+			}
 		});
 		return view;
 	}

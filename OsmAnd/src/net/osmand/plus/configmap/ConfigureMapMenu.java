@@ -20,6 +20,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTION_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
@@ -56,11 +58,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -87,6 +93,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -140,10 +147,39 @@ public class ConfigureMapMenu {
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
+		if (app.useOpenGlRenderer()) {
+			createTerrainItems(customRules, adapter, mapActivity, nightMode);
+		}
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
+	}
+
+	private void createTerrainItems(@NonNull List<RenderingRuleProperty> customRules,
+	                                @NonNull ContextMenuAdapter adapter,
+	                                @NonNull MapActivity activity,
+	                                boolean nightMode) {
+		OsmandApplication app = activity.getMyApplication();
+		MapLayerMenuListener listener = new MapLayerMenuListener(activity);
+
+		adapter.addItem(new ContextMenuItem(TERRAIN_CATEGORY_ID)
+				.setCategory(true)
+				.setTitle(app.getString(R.string.shared_string_terrain))
+				.setLayout(R.layout.list_group_title_with_switch));
+
+		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+			PluginsHelper.registerLayerContextMenu(adapter, activity, customRules, Collections.singletonList(SRTMPlugin.class));
+			addRelief3DItem(adapter, activity, nightMode, listener);
+		} else {
+			addTerrainDescriptionItem(adapter, activity);
+			if (PluginsHelper.isEnabled(NauticalMapsPlugin.class)) {
+				adapter.addItem(new ContextMenuItem("nautical_divider")
+						.setLayout(R.layout.card_divider_16dp_margin)
+						.setClickable(false));
+			}
+		}
+		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules, Collections.singletonList(NauticalMapsPlugin.class));
 	}
 
 	private void createLayersItems(@NonNull List<RenderingRuleProperty> customRules,
@@ -230,10 +266,16 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
 				.setListener(listener));
 
-		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
+		if (app.useOpenGlRenderer()) {
+			ArrayList<Class> terrainPlugins = new ArrayList<>();
+			terrainPlugins.add(SRTMPlugin.class);
+			terrainPlugins.add(NauticalMapsPlugin.class);
+			PluginsHelper.registerLayerContextMenuExcluded(adapter, activity, customRules, terrainPlugins);
+		} else {
+			PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
+			addRelief3DItem(adapter, activity, nightMode, listener);
+		}
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
-
-		addRelief3DItem(adapter, activity, nightMode, listener);
 
 		selected = settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.get();
 		adapter.addItem(new ContextMenuItem(MAP_BORDERS_ID)
@@ -243,6 +285,18 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_download)
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
+	}
+
+	private void addTerrainDescriptionItem(@NonNull ContextMenuAdapter adapter,
+	                                       @NonNull MapActivity activity) {
+		adapter.addItem(new ContextMenuItem(TERRAIN_DESCRIPTION_ID)
+				.setLayout(R.layout.list_item_terrain_description)
+				.setTitleId(TERRAIN_DESCRIPTION_ID.hashCode(), null)
+				.setClickable(false)
+				.setSpecialViewListener((uiAdapter, view, item, isChecked) -> {
+					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+					return true;
+				}));
 	}
 
 	private void addRelief3DItem(@NonNull ContextMenuAdapter adapter,

@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slopes in %1$s.</string>
+    <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
     <string name="terrain_map">Terrain map</string>
     <string name="relief_3d">3D Relief</string>
     <string name="relief_3d_description">Own and observe the scale model of your neighborhood or the whole continent.</string>
