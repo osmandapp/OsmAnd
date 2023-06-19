@@ -2,10 +2,7 @@ package net.osmand.plus.plugins.srtm;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Drawable;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import net.osmand.data.LatLon;
@@ -46,7 +43,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
@@ -261,6 +257,30 @@ public class SRTMPlugin extends OsmandPlugin {
 				return SLOPE_TRANSPARENCY.get();
 		}
 		return 100;
+	}
+
+	public void resetZoomLevelsToDefault() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				HILLSHADE_MIN_ZOOM.resetToDefault();
+				HILLSHADE_MAX_ZOOM.resetToDefault();
+				break;
+			case SLOPE:
+				SLOPE_MIN_ZOOM.resetToDefault();
+				SLOPE_MAX_ZOOM.resetToDefault();
+				break;
+		}
+	}
+
+	public void resetTransparencyToDefault() {
+		switch (getTerrainMode()) {
+			case HILLSHADE:
+				HILLSHADE_TRANSPARENCY.resetToDefault();
+				break;
+			case SLOPE:
+				SLOPE_TRANSPARENCY.resetToDefault();
+				break;
+		}
 	}
 
 	public int getTerrainMinZoom() {

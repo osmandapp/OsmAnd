@@ -77,6 +77,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
@@ -2064,6 +2065,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	public DownloadTilesFragment getDownloadTilesFragment() {
 		return getFragment(DownloadTilesFragment.TAG);
+	}
+
+	@Nullable
+	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
+		return getFragment(ConfigureMapOptionFragment.TAG);
 	}
 
 	@Nullable
