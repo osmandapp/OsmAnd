@@ -463,7 +463,12 @@ public class ElevationProfileWidget extends MapWidget {
 			int pointsCount = lastPointIndex - firstPointIndex + 1;
 			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 				@Override
-				public double getElevation(int index) {
+				public double getPointDistance(int index) {
+					return points.get(index).distance;
+				}
+
+				@Override
+				public double getPointElevation(int index) {
 					return points.get(index).ele;
 				}
 

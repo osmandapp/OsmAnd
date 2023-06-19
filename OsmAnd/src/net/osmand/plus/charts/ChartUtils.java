@@ -33,6 +33,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import net.osmand.gpx.ElevationDiffsCalculator;
+import net.osmand.gpx.ElevationDiffsCalculator.Extremum;
 import net.osmand.gpx.GPXInterpolator;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.PointAttribute.Elevation;
@@ -405,15 +407,45 @@ public class ChartUtils {
 
 		String mainUnitY = graphType.getMainUnitY(app);
 
-		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
-		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
-		yAxis.setGranularity(1f);
-		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, app));
+		if (graphType != GPXDataSetType.ALTITUDE_EXTRM) {
+			int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
+			YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
+			yAxis.setGranularity(1f);
+			yAxis.resetAxisMinimum();
+			yAxis.setValueFormatter((value, axis) -> OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitY, app));
+		}
 
 		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
+		if (values.size() > 0 && graphType == GPXDataSetType.ALTITUDE_EXTRM) {
+			List<Entry> elevationEntries = values;
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
+				@Override
+				public double getPointDistance(int index) {
+					return elevationEntries.get(index).getX() * divX;
+				}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType, !useRightAxis);
+				@Override
+				public double getPointElevation(int index) {
+					return elevationEntries.get(index).getY();
+				}
+
+				@Override
+				public int getPointsCount() {
+					return elevationEntries.size();
+				}
+			};
+			elevationDiffsCalc.calculateElevationDiffs();
+			List<Extremum> extremums = elevationDiffsCalc.getExtremums();
+			if (extremums.size() < 3) {
+				return null;
+			}
+			values = new ArrayList<>();
+			for (Extremum extremum : extremums) {
+				values.add(new Entry((float) (extremum.getDist() / divX), (float) extremum.getEle()));
+			}
+		}
+
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 		dataSet.setPriority((float) ((analysis.avgElevation - analysis.minElevation) * convEle));
 		dataSet.setDivX(divX);
 		dataSet.setMulY(convEle);
@@ -422,36 +454,51 @@ public class ChartUtils {
 
 		boolean nightMode = !settings.isLightContent();
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
-		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
+		setupDataSet(app, dataSet, color, color, drawFilled, graphType == GPXDataSetType.ALTITUDE_EXTRM, useRightAxis, nightMode);
 		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
 
 		return dataSet;
 	}
 
 	public static void setupDataSet(OsmandApplication app, OrderedLineDataSet dataSet,
-	                                @ColorInt int color, @ColorInt int fillColor,
-	                                boolean drawFilled, boolean useRightAxis, boolean nightMode) {
-		dataSet.setColor(color);
+	                                @ColorInt int color, @ColorInt int fillColor, boolean drawFilled,
+	                                boolean drawCircles, boolean useRightAxis, boolean nightMode) {
+		if (drawCircles) {
+			dataSet.setCircleColor(color);
+			dataSet.setCircleRadius(3);
+			dataSet.setCircleHoleColor(0);
+			dataSet.setCircleHoleRadius(2);
+			dataSet.setDrawCircleHole(false);
+			dataSet.setDrawCircles(true);
+			dataSet.setColor(0);
+		} else {
+			dataSet.setDrawCircles(false);
+			dataSet.setDrawCircleHole(false);
+			dataSet.setColor(color);
+		}
+
 		dataSet.setLineWidth(1f);
-		if (drawFilled) {
+		if (drawFilled && !drawCircles) {
 			dataSet.setFillAlpha(128);
 			dataSet.setFillColor(fillColor);
 		}
-		dataSet.setDrawFilled(drawFilled);
+		dataSet.setDrawFilled(drawFilled && !drawCircles);
 
 		dataSet.setDrawValues(false);
-		dataSet.setValueTextSize(9f);
-		dataSet.setFormLineWidth(1f);
-		dataSet.setFormSize(15.f);
+		if (drawCircles) {
+			dataSet.setHighlightEnabled(false);
+			dataSet.setDrawVerticalHighlightIndicator(false);
+			dataSet.setDrawHorizontalHighlightIndicator(false);
+		} else {
+			dataSet.setValueTextSize(9f);
+			dataSet.setFormLineWidth(1f);
+			dataSet.setFormSize(15.f);
 
-		dataSet.setDrawCircles(false);
-		dataSet.setDrawCircleHole(false);
-
-		dataSet.setHighlightEnabled(true);
-		dataSet.setDrawVerticalHighlightIndicator(true);
-		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
-
+			dataSet.setHighlightEnabled(true);
+			dataSet.setDrawVerticalHighlightIndicator(true);
+			dataSet.setDrawHorizontalHighlightIndicator(false);
+			dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
+		}
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}
@@ -553,7 +600,7 @@ public class ChartUtils {
 		dataSet.setUnits(mainUnitY);
 
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(!speedInTrack));
-		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
+		setupDataSet(app, dataSet, color, color, drawFilled, false, useRightAxis, nightMode);
 
 		return dataSet;
 	}
@@ -647,7 +694,7 @@ public class ChartUtils {
 			return null;
 		}
 
-		double SLOPE_PROXIMITY = Math.max(100, STEP * 2);
+		double SLOPE_PROXIMITY = Math.max(20, STEP * 2);
 
 		if (totalDistance - SLOPE_PROXIMITY < 0) {
 			if (useRightAxis) {
@@ -656,13 +703,22 @@ public class ChartUtils {
 			return null;
 		}
 
-		double[] calculatedSlopeDist = new double[(int) ((totalDistance - SLOPE_PROXIMITY) / STEP) + 1];
-		double[] calculatedSlope = new double[(int) ((totalDistance - SLOPE_PROXIMITY) / STEP) + 1];
+		double[] calculatedSlopeDist = new double[(int) (totalDistance / STEP) + 1];
+		double[] calculatedSlope = new double[(int) (totalDistance / STEP) + 1];
 
-		int index = (int) ((SLOPE_PROXIMITY / STEP) / 2);
+		int threshold = (int) ((SLOPE_PROXIMITY / STEP) / 2);
+		if (threshold < 2 || calculatedSlopeDist.length <= 4) {
+			return null;
+		}
 		for (int k = 0; k < calculatedSlopeDist.length; k++) {
-			calculatedSlopeDist[k] = calculatedDist[index + k];
-			calculatedSlope[k] = (calculatedH[2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
+			calculatedSlopeDist[k] = calculatedDist[k];
+			if (k < threshold) {
+				calculatedSlope[k] = (-1.5 * calculatedH[k] + 2.0 * calculatedH[k + 1] - 0.5 * calculatedH[k + 2]) * 100 / STEP;
+			} else if (k >= calculatedSlopeDist.length - threshold) {
+				calculatedSlope[k] = (0.5 * calculatedH[k - 2] - 2.0 * calculatedH[k - 1] + 1.5 * calculatedH[k]) * 100 / STEP;
+			} else {
+				calculatedSlope[k] = (calculatedH[threshold + k] - calculatedH[k - threshold]) * 100 / SLOPE_PROXIMITY;
+			}
 			if (Double.isNaN(calculatedSlope[k])) {
 				calculatedSlope[k] = 0;
 			}
@@ -705,7 +761,7 @@ public class ChartUtils {
 		dataSet.setUnits(mainUnitY);
 
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
-		setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
+		setupDataSet(app, dataSet, color, color, drawFilled, false, useRightAxis, nightMode);
 
 		/*
 		dataSet.setFillFormatter(new IFillFormatter() {
@@ -751,6 +807,12 @@ public class ChartUtils {
 				result.add(dataSet2);
 			}
 		}
+		if (firstType == GPXDataSetType.ALTITUDE || secondType == GPXDataSetType.ALTITUDE) {
+			OrderedLineDataSet dataSet = getDataSet(app, chart, analysis, GPXDataSetType.ALTITUDE_EXTRM, calcWithoutGaps, false);
+			if (dataSet != null) {
+				result.add(dataSet);
+			}
+		}
 		return result;
 	}
 
@@ -762,7 +824,8 @@ public class ChartUtils {
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
-			case ALTITUDE: {
+			case ALTITUDE:
+			case ALTITUDE_EXTRM: {
 				if (analysis.hasElevationData()) {
 					return createGPXElevationDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
 				}

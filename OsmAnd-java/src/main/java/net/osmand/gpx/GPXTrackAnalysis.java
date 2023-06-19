@@ -323,11 +323,14 @@ public class GPXTrackAnalysis {
 				}
 			}
 
-			double distance = Math.abs(s.segment.points.get(s.endPointInd).distance - s.segment.points.get(s.startPointInd).distance);
-			ElevationDiffsCalculator elevationDiffsCalcEx = new ElevationDiffsCalculator() {
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
+				@Override
+				public double getPointDistance(int index) {
+					return s.get(index).distance;
+				}
 
 				@Override
-				public double getElevation(int index) {
+				public double getPointElevation(int index) {
 					return s.get(index).ele;
 				}
 
@@ -336,9 +339,9 @@ public class GPXTrackAnalysis {
 					return s.getNumberOfPoints();
 				}
 			};
-			elevationDiffsCalcEx.calculateElevationDiffs();
-			diffElevationUp += elevationDiffsCalcEx.getDiffElevationUp();
-			diffElevationDown += elevationDiffsCalcEx.getDiffElevationDown();
+			elevationDiffsCalc.calculateElevationDiffs();
+			diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
+			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
 		}
 
 		if (totalDistance < 0) {

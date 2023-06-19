@@ -16,8 +16,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 public enum GPXDataSetType {
 
 	ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_blue_label, R.color.gpx_chart_blue),
-	SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_orange_label, R.color.gpx_chart_orange),
-	SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent, GPXUtilities.POINT_SPEED, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
+	SPEED(R.string.shared_string_speed, R.drawable.ic_action_speed, GPXUtilities.POINT_SPEED, R.color.gpx_chart_orange_label, R.color.gpx_chart_orange),
+	SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_green_label, R.color.gpx_chart_green),
+	ALTITUDE_EXTRM(R.string.altitude, R.drawable.ic_action_altitude_average, GPXUtilities.POINT_ELEVATION, R.color.gpx_chart_blue_label, R.color.gpx_chart_blue),
 
 	SENSOR_SPEED(R.string.shared_string_speed, R.drawable.ic_action_sensor_speed_outlined, SensorAttributesUtils.SENSOR_TAG_SPEED, R.color.gpx_chart_yellow_label, R.color.gpx_chart_yellow),
 	SENSOR_HEART_RATE(R.string.map_widget_ant_heart_rate, R.drawable.ic_action_sensor_heart_rate_outlined, SensorAttributesUtils.SENSOR_TAG_HEART_RATE, R.color.gpx_chart_pink_label, R.color.gpx_chart_pink),
@@ -37,7 +38,7 @@ public enum GPXDataSetType {
 	@ColorRes
 	private final int fillColorId;
 
-	GPXDataSetType(@StringRes int titleId, @DrawableRes int iconId, @NonNull String dataKey, @StringRes int textColorId, @DrawableRes int fillColorId) {
+	GPXDataSetType(@StringRes int titleId, @DrawableRes int iconId, @NonNull String dataKey, @ColorRes int textColorId, @ColorRes int fillColorId) {
 		this.titleId = titleId;
 		this.iconId = iconId;
 		this.dataKey = dataKey;

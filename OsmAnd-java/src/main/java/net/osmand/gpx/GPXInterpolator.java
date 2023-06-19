@@ -9,6 +9,8 @@ public abstract class GPXInterpolator {
 	private double[] calculatedX;
 	private double[] calculatedY;
 	private int calculatedPointsCount;
+	private double minY = Double.MAX_VALUE;
+	private double maxY = Double.MIN_VALUE;
 
 	public GPXInterpolator(int pointsCount, double totalLength, double step) {
 		this.pointsCount = pointsCount;
@@ -40,6 +42,14 @@ public abstract class GPXInterpolator {
 		return calculatedPointsCount;
 	}
 
+	public double getMinY() {
+		return minY;
+	}
+
+	public double getMaxY() {
+		return maxY;
+	}
+
 	public abstract double getX(int index);
 
 	public abstract double getY(int index);
@@ -53,6 +63,10 @@ public abstract class GPXInterpolator {
 		for (int k = 0; k < calculatedX.length; k++) {
 			if (k > 0) {
 				calculatedX[k] = calculatedX[k - 1] + step;
+			} else {
+				calculatedY[k] = getY(0);
+				takeMinMax(calculatedY[k]);
+				continue;
 			}
 			while (nextW < lastIndex && calculatedX[k] > getX(nextW)) {
 				nextW++;
@@ -60,6 +74,16 @@ public abstract class GPXInterpolator {
 			double px = nextW == 0 ? 0 : getX(nextW - 1);
 			double py = nextW == 0 ? getY(0) : getY(nextW - 1);
 			calculatedY[k] = py + (getY(nextW) - py) / (getX(nextW) - px) * (calculatedX[k] - px);
+			takeMinMax(calculatedY[k]);
+		}
+	}
+
+	private void takeMinMax(double value) {
+		if (minY > value) {
+			minY = value;
+		}
+		if (maxY < value) {
+			maxY = value;
 		}
 	}
 }

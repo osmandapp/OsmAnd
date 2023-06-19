@@ -81,12 +81,16 @@ public class GpxMarkerView extends MarkerView {
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_divider), showIcon);
 			AndroidUiHelper.updateVisibility(findViewById(R.id.icon_container), showIcon);
 		}
-		if (chartData.getDataSetCount() == 1) {
+		int dataSetCount = chartData.getDataSetCount();
+		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet)chartData.getDataSetByIndex(dataSetCount - 1) : null;
+		if (lastDataSet != null && lastDataSet.getDataSetType() == GPXDataSetType.ALTITUDE_EXTRM) {
+			dataSetCount--;
+		}
+		if (dataSetCount == 1) {
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
-
 			updateMarker(firstContainer, dataSet, entry);
 			AndroidUiHelper.updateVisibility(divider, false);
-		} else if (chartData.getDataSetCount() == 2) {
+		} else if (dataSetCount == 2) {
 			OrderedLineDataSet firstDataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 			OrderedLineDataSet secondDataSet = ((OrderedLineDataSet) chartData.getDataSetByIndex(1));
 			updateMarkerWithTwoDataSets(firstDataSet, secondDataSet, entry);
@@ -219,13 +223,17 @@ public class GpxMarkerView extends MarkerView {
 	@Override
 	public MPPointF getOffset() {
 		ChartData<?> chartData = getChartView().getData();
-		int dataSetsCount = chartData.getDataSetCount();
+		int dataSetCount = chartData.getDataSetCount();
+		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet)chartData.getDataSetByIndex(dataSetCount - 1) : null;
+		if (lastDataSet != null && lastDataSet.getDataSetType() == GPXDataSetType.ALTITUDE_EXTRM) {
+			dataSetCount--;
+		}
 		int halfDp = AndroidUtils.dpToPx(getContext(), .5f);
-		if (dataSetsCount == 2) {
+		if (dataSetCount == 2) {
 			int x = divider.getLeft();
 			return new MPPointF(-x - halfDp, 0);
 		} else {
-			if (dataSetsCount == 1) {
+			if (dataSetCount == 1) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 				if (dataSet.getDataSetType() == GPXDataSetType.SPEED && includeXAxisDataSet) {
 					int x = xAxisContainer.getLeft();
