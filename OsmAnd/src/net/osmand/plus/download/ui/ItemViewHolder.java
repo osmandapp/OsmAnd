@@ -107,7 +107,7 @@ public class ItemViewHolder {
 		DOWNLOAD,
 		ASK_FOR_SEAMARKS_PLUGIN,
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
-		ASK_FOR_RELIEF_3D_PURCHASE,
+		ASK_FOR_3D_RELIEF_PURCHASE,
 		ASK_FOR_SRTM_PLUGIN_ENABLE,
 		ASK_FOR_FULL_VERSION_PURCHASE,
 		ASK_FOR_DEPTH_CONTOURS_PURCHASE,
@@ -473,8 +473,8 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((item.getType() == DEPTH_CONTOUR_FILE || item.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
-			} else if (type == GEOTIFF_FILE && !Version.isPaidVersion(context.getMyApplication())) {
-				action = RightButtonAction.ASK_FOR_RELIEF_3D_PURCHASE;
+			} else if (type == GEOTIFF_FILE && !InAppPurchaseHelper.isOsmAndProAvailable(context.getMyApplication())) {
+				action = RightButtonAction.ASK_FOR_3D_RELIEF_PURCHASE;
 			}
 		}
 		return action;
@@ -497,7 +497,7 @@ public class ItemViewHolder {
 							context.getMyApplication().logEvent("in_app_purchase_show_from_weather_context_menu");
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WEATHER);
 							break;
-						case ASK_FOR_RELIEF_3D_PURCHASE:
+						case ASK_FOR_3D_RELIEF_PURCHASE:
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.RELIEF_3D);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
