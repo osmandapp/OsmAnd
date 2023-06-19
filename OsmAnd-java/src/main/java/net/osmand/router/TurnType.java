@@ -459,6 +459,10 @@ public class TurnType {
 	public static boolean isKeepDirectionTurn(int type) {
 		return type == C || type == KL || type == KR;
 	}
+
+	public static boolean isSharpOrReverse(int type) {
+		return type == TurnType.TSHL || type == TurnType.TSHR || type == TurnType.TU || type == TurnType.TRU;
+	}
 	
 	public static boolean hasAnySlightTurnLane(int type) {
 		return TurnType.isSlightTurn(TurnType.getPrimaryTurn(type))
