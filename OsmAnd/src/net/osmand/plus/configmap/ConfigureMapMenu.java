@@ -294,7 +294,7 @@ public class ConfigureMapMenu {
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
 				//.setLayout(R.layout.configure_map_item_with_additional_right_desc)
 //				.setSecondaryDescription(pref.get() ? null : app.getString(R.string.shared_string_off))
-				.setDescription(pref.get() ? app.getString(MtbRoutesFragment.getSelectedClassification(settings).nameId) : app.getString(R.string.shared_string_off))
+				.setDescription(pref.get() ? app.getString(MtbRoutesFragment.getSelectedClassification(settings).nameId) : app.getString(R.string.shared_string_disabled))
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					activity.getDashboard().setDashboardVisibility(true, DashboardType.MTB_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
