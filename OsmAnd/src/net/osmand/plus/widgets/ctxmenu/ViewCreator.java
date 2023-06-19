@@ -128,6 +128,16 @@ public class ViewCreator {
 			setupToggle(toggle, convertView, item);
 		}
 
+		if (item.isShowProIcon()) {
+			ImageView proIcon = convertView.findViewById(R.id.pro_icon);
+			if (proIcon != null) {
+				setupProIcon(proIcon);
+			}
+			if (toggle != null) {
+				AndroidUiHelper.updateVisibility(toggle, false);
+			}
+		}
+
 		Slider slider = convertView.findViewById(R.id.slider);
 		if (slider != null) {
 			setupSlider(slider, item);
@@ -347,6 +357,11 @@ public class ViewCreator {
 		} else {
 			AndroidUiHelper.updateVisibility(icon, false);
 		}
+	}
+
+	private void setupProIcon(@NonNull ImageView proIcon) {
+		proIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day));
+		AndroidUiHelper.updateVisibility(proIcon, true);
 	}
 
 	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @DrawableRes int secondaryIconId, @NonNull ContextMenuItem item) {

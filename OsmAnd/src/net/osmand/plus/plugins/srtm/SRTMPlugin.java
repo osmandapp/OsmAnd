@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -45,8 +46,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.plus.chooseplan.button.PurchasingUtils.PROMO_PREFIX;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -356,6 +360,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			} else {
 				createContextMenuItems(adapter, mapActivity);
 			}
+			add3DReliefItem(adapter, mapActivity);
 		}
 	}
 
@@ -445,6 +450,44 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 
 		);
+	}
+
+	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter,
+	                             @NonNull MapActivity activity) {
+		OsmandApplication app = activity.getMyApplication();
+		if (app.useOpenGlRenderer() && !super.needsInstallation()) {
+			boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
+			ContextMenuItem item = new ContextMenuItem(MAP_ENABLE_3D_MAPS_ID)
+					.setTitleId(R.string.relief_3d, app)
+					.setIcon(R.drawable.ic_action_3d_relief)
+					.setUseNaturalSecondIconColor(true)
+					.setListener((uiAdapter, view, contextItem, isChecked) -> {
+						if (InAppPurchaseHelper.isOsmAndProAvailable(activity.getMyApplication())) {
+							settings.ENABLE_3D_MAPS.set(isChecked);
+							contextItem.setDescription(activity.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+						} else {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
+						}
+						return true;
+					});
+
+			if (!InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+				item.showProIcon(true);
+			} else {
+				item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
+				item.setSelected(enabled3DMode);
+				item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
+			}
+
+			ContextMenuItem terrainItem = adapter.getItemById(TERRAIN_ID);
+			if (terrainItem == null) {
+				terrainItem = adapter.getItemById(PROMO_PREFIX + TERRAIN_ID);
+			}
+			if (terrainItem != null) {
+				item.setOrder(terrainItem.getOrder());
+			}
+			adapter.addItem(item);
+		}
 	}
 
 	@Nullable

@@ -148,7 +148,7 @@ public class ConfigureMapMenu {
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
 		if (app.useOpenGlRenderer()) {
-			createTerrainItems(customRules, adapter, mapActivity, nightMode);
+			createTerrainItems(customRules, adapter, mapActivity);
 		}
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
@@ -158,19 +158,16 @@ public class ConfigureMapMenu {
 
 	private void createTerrainItems(@NonNull List<RenderingRuleProperty> customRules,
 	                                @NonNull ContextMenuAdapter adapter,
-	                                @NonNull MapActivity activity,
-	                                boolean nightMode) {
+	                                @NonNull MapActivity activity) {
 		OsmandApplication app = activity.getMyApplication();
-		MapLayerMenuListener listener = new MapLayerMenuListener(activity);
 
 		adapter.addItem(new ContextMenuItem(TERRAIN_CATEGORY_ID)
 				.setCategory(true)
 				.setTitle(app.getString(R.string.shared_string_terrain))
 				.setLayout(R.layout.list_group_title_with_switch));
 
-		if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+		if (Version.isPaidVersion(app)) {
 			PluginsHelper.registerLayerContextMenu(adapter, activity, customRules, Collections.singletonList(SRTMPlugin.class));
-			addRelief3DItem(adapter, activity, nightMode, listener);
 		} else {
 			addTerrainDescriptionItem(adapter, activity);
 			if (PluginsHelper.isEnabled(NauticalMapsPlugin.class)) {
@@ -273,7 +270,6 @@ public class ConfigureMapMenu {
 			PluginsHelper.registerLayerContextMenuExcluded(adapter, activity, customRules, terrainPlugins);
 		} else {
 			PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
-			addRelief3DItem(adapter, activity, nightMode, listener);
 		}
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 
@@ -297,40 +293,6 @@ public class ConfigureMapMenu {
 					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
 					return true;
 				}));
-	}
-
-	private void addRelief3DItem(@NonNull ContextMenuAdapter adapter,
-	                             @NonNull MapActivity activity,
-	                             boolean nightMode,
-	                             MapLayerMenuListener listener) {
-		OsmandApplication app = activity.getMyApplication();
-		if (app.useOpenGlRenderer()) {
-			boolean enabled3DMode = app.getSettings().ENABLE_3D_MAPS.get();
-			ContextMenuItem item = new ContextMenuItem(MAP_ENABLE_3D_MAPS_ID)
-					.setLayout(R.layout.list_item_osmpro_icon)
-					.setTitleId(R.string.relief_3d, app)
-					.setIcon(R.drawable.ic_action_3d_relief)
-					.setUseNaturalSecondIconColor(true)
-					.setSecondaryIcon(!InAppPurchaseHelper.isOsmAndProAvailable(app) ? (nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day) : INVALID_ID)
-					.setListener(listener);
-
-			if (!Version.isPaidVersion(app)) {
-				item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
-			} else {
-				item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
-				item.setSelected(enabled3DMode);
-				item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
-			}
-
-			ContextMenuItem terrainItem = adapter.getItemById(TERRAIN_ID);
-			if (terrainItem == null) {
-				terrainItem = adapter.getItemById(PROMO_PREFIX + TERRAIN_ID);
-			}
-			if (terrainItem != null) {
-				item.setOrder(terrainItem.getOrder());
-			}
-			adapter.addItem(item);
-		}
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,
