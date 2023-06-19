@@ -2094,35 +2094,26 @@ public class RouteResultPreparation {
 		for (int i = startActiveIndex, j = 0; i <= endActiveIndex; i++, j++) {
 			activeLines[j] = lanesArray[i];
 		}
-		Set<Integer> leftDirections = new HashSet<Integer>(){{
-			add(TurnType.TL);
-			add(TurnType.TSHL);
-			add(TurnType.TSLL);
-		}};
-		Set<Integer> rightDirections = new HashSet<Integer>(){{
-			add(TurnType.TR);
-			add(TurnType.TSHR);
-			add(TurnType.TSLR);
-		}};
-		Set<Integer> sharpLeftDirections = new HashSet<Integer>(){{
-			add(TurnType.TSHL);
-			add(TurnType.TU);
-		}};
+		boolean possibleSharpLeftOrUTurn = startActiveIndex == 0;
+		boolean possibleSharpRightOrUTurn = endActiveIndex == lanesArray.length - 1;
 		for (int i = 0; i < activeLines.length; i++) {
 			int turnType = TurnType.getPrimaryTurn(activeLines[i]);
 			if (turnType == mainTurnType) {
 				return true;
 			}
-			if (TurnType.isLeftTurnNoUTurn(mainTurnType) && leftDirections.contains(turnType)) {
+			if (TurnType.isLeftTurnNoUTurn(mainTurnType) && TurnType.isLeftTurnNoUTurn(turnType)) {
 				return true;
 			}
-			if (TurnType.isRightTurnNoUTurn(mainTurnType) && rightDirections.contains(turnType)) {
+			if (TurnType.isRightTurnNoUTurn(mainTurnType) && TurnType.isRightTurnNoUTurn(turnType)) {
 				return true;
 			}
 			if (mainTurnType == TurnType.C && TurnType.isSlightTurn(turnType)) {
 				return true;
 			}
-			if (sharpLeftDirections.contains(mainTurnType) && sharpLeftDirections.contains(turnType)) {
+			if (possibleSharpLeftOrUTurn && TurnType.isSharpLeftOrUTurn(mainTurnType) && TurnType.isSharpLeftOrUTurn(turnType)) {
+				return true;
+			}
+			if (possibleSharpRightOrUTurn && TurnType.isSharpRightOrUTurn(mainTurnType) && TurnType.isSharpRightOrUTurn(turnType)) {
 				return true;
 			}
 		}
