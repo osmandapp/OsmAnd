@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+
     <string name="shared_string_close_the_dialog">Close the dialog</string>
     <string name="routing_attr_allow_via_ferrata_name">Allow via ferrata</string>
     <string name="routing_attr_allow_via_ferrata_description">Allow via ferrata paths.</string>

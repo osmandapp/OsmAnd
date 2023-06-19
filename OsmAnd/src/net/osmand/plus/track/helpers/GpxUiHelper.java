@@ -977,15 +977,19 @@ public class GpxUiHelper {
 	}
 
 	public static void saveAndShareGpx(@NonNull Context context, @NonNull GPXFile gpxFile) {
-		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		File tempDir = FileUtils.getTempDir(app);
-		String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
-		File file = new File(tempDir, fileName);
+		File file = getGpxTempFile(context, gpxFile);
 		SaveGpxHelper.saveGpx(file, gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				shareGpx(context, file);
 			}
 		});
+	}
+
+	@NonNull
+	public static File getGpxTempFile(@NonNull Context context, @NonNull GPXFile gpxFile) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
+		return new File(FileUtils.getTempDir(app), fileName);
 	}
 
 	public static void saveAndShareCurrentGpx(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
@@ -1031,12 +1035,9 @@ public class GpxUiHelper {
 	}
 
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-				addAppearanceToGpx(gpxFile, item);
-				saveAndShareGpx(app, gpxFile);
-			}
+		GpxDataItemCallback callback = item -> {
+			addAppearanceToGpx(gpxFile, item);
+			saveAndShareGpx(app, gpxFile);
 		};
 		return app.getGpxDbHelper().getItem(new File(gpxFile.path), callback);
 	}

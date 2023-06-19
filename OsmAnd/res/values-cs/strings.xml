@@ -1083,7 +1083,7 @@
     <string name="shared_string_select_on_map">Vybrat na mapě</string>
     <string name="shared_string_favorite">Oblíbené</string>
     <string name="route_preferences">Předvolby trasy</string>
-    <string name="route_info">Informace trasy</string>
+    <string name="route_info">Informace o trase</string>
     <string name="routing_attr_prefer_motorway_name">Upřednostňovat dálnice</string>
     <string name="routing_attr_prefer_motorway_description">Upřednostňovat dálnice</string>
     <string name="routing_attr_avoid_toll_name">Žádné placené silnice</string>
@@ -2693,7 +2693,7 @@
     <string name="open_in_browser_wiki">Otevřít článek online</string>
     <string name="open_in_browser_wiki_description">Zobrazit článek ve webovém prohlížeči.</string>
     <string name="download_wiki_region_placeholder">tato oblast</string>
-    <string name="wiki_article_search_text">Hledání příslušného wiki článku</string>
+    <string name="wiki_article_search_text">Vyhledávání odpovídajícího článku na wiki</string>
     <string name="wiki_article_not_found">Článek nebyl nalezen</string>
     <string name="how_to_open_wiki_title">Jak otevřít články Wikipedie?</string>
     <string name="hide_full_description">Skrýt plný popis</string>
@@ -3436,7 +3436,7 @@
     <string name="shared_string_uninstall_and_restart">Odinstalovat a restartovat</string>
     <string name="speed_cameras_removed_descr">Toto zařízení nemá rychlostní kamery.</string>
     <string name="app_mode_inline_skates">Inline brusle</string>
-    <string name="quick_action_remove_next_destination">Smazat nejbližší cílový bod</string>
+    <string name="quick_action_remove_next_destination">Smazat následující cílový bod</string>
     <string name="use_volume_buttons_as_zoom_descr">Ovládat úroveň přiblížení mapy pomocí tlačítek hlasitosti zařízení.</string>
     <string name="use_volume_buttons_as_zoom">Tlačítka hlasitosti pro přibližování</string>
     <string name="threshold_distance">Mezní vzdálenost</string>
@@ -3493,7 +3493,7 @@
     <string name="start_finish_icons">Ikony startu a cíle</string>
     <string name="contour_lines_thanks">Děkujeme za zakoupení modulu \'Vrstevnice\'</string>
     <string name="perform_oauth_authorization_description">Přihlásit se pomocí OAuth pro použití funkcí editace OSM</string>
-    <string name="perform_oauth_authorization">Přihlásit pomocí OAuth</string>
+    <string name="perform_oauth_authorization">Přihlášení pomocí OAuth</string>
     <string name="clear_osm_token">Vymazat OpenStreetMap OAuth token</string>
     <string name="osm_edit_logout_success">Byli jste odhlášeni</string>
     <string name="file_already_imported">Soubor je již importovaný v OsmAnd</string>
@@ -3975,16 +3975,16 @@
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Sněžný skútr</string>
-    <string name="activity_type_riding_name">Jízda na koni</string>
-    <string name="activity_type_racing_name">Závody</string>
+    <string name="activity_type_riding_name">Jezdectví</string>
+    <string name="activity_type_racing_name">Závodění</string>
     <string name="activity_type_mountainbike_name">Horské kolo</string>
-    <string name="activity_type_cycling_name">Jízda na kole</string>
+    <string name="activity_type_cycling_name">Cyklistika</string>
     <string name="activity_type_hiking_name">Turistika</string>
     <string name="activity_type_running_name">Běh</string>
     <string name="activity_type_walking_name">Chůze</string>
-    <string name="activity_type_offroad_name">Terénní jízda</string>
-    <string name="activity_type_motorbike_name">Motocykl</string>
-    <string name="activity_type_car_name">Automobil</string>
+    <string name="activity_type_offroad_name">Off-road</string>
+    <string name="activity_type_motorbike_name">Motokolo</string>
+    <string name="activity_type_car_name">Auto</string>
     <string name="temporary_conditional_routing_descr">Použít omezení, která jsou nyní aktivní na mapě</string>
     <string name="routing_attr_short_way_description">Optimalizovaná kratší trasa (úspora energie)</string>
     <string name="routing_attr_driving_style_description">Vyberte účel řízení pro získání kratší, rychlejší nebo bezpečnější trasy</string>
@@ -4870,7 +4870,7 @@
     <string name="routing_attr_carriage_restrictions_description">Zohlednit omezení vjezdu pro vozidla tažená koňmi</string>
     <string name="rendering_attr_horse_scale_common_name">Společné</string>
     <string name="rendering_attr_showTramRoutes_name">Tramvajové linky</string>
-    <string name="shared_string_duplicate">Duplikát</string>
+    <string name="shared_string_duplicate">Duplicitní</string>
     <string name="favorite_delete_group">Odstranit skupinu</string>
     <string name="shared_string_identifiers">Identifikátory</string>
     <string name="terms_of_service_desc">Stažením map souhlasíte s %1$s a %2$s.</string>
@@ -5086,7 +5086,7 @@
 \n
 \n</string>
     <string name="enable_3d_maps">Povolit 3D mapy</string>
-    <string name="generate_hillshade_from_3d_maps">Generování rastrových map kopců z 3D map</string>
+    <string name="generate_hillshade_from_3d_maps">Generovat rastrové mapy stínování kopců z 3D map</string>
     <string name="sort_distance_ascending">Nejkratší vzdálenost jako první</string>
     <string name="sort_distance_descending">Nejdelší vzdálenost jako první</string>
     <string name="sort_date_ascending">Nejnovější datum jako první</string>
@@ -5100,8 +5100,8 @@
     <string name="shared_string_alt_name">Alternativní název</string>
     <string name="token_is_not_valid">Token není platný</string>
     <string name="app_mode_climbing">Horolezectví</string>
-    <string name="generate_slope_from_3d_maps">Generování rastrových map svahů z 3D map</string>
-    <string name="disable_vertex_hillshade_3d">Zakázat stínování vrcholů ve 3D</string>
+    <string name="generate_slope_from_3d_maps">Generovat rastrové mapy svahů z 3D map</string>
+    <string name="disable_vertex_hillshade_3d">Vypnout stínování vrcholů ve 3D</string>
     <string name="test_heightmap">Test výškové mapy</string>
     <string name="common_weight_limit_error">Minimální hodnota je \"%1$s\" %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%3$s\".</string>
     <string name="shared_string_pounds">libry</string>
@@ -5180,4 +5180,8 @@
     <string name="delete_folder">Smazat složku</string>
     <string name="show_all_tracks_on_the_map">Zobrazit všechny stopy na mapě</string>
     <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externího zařízení.</string>
+    <string name="shared_string_close_the_dialog">Zavřít dialogové okno</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">Povolit via ferrata</string>
+    <string name="routing_attr_allow_via_ferrata_description">Povolit stezky via ferrata.</string>
 </resources>

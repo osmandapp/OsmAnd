@@ -4085,7 +4085,7 @@
     <string name="osmand_cloud_help_descr">需要協助嗎？請在 %1$s 聯絡我們</string>
     <string name="osmand_cloud_create_account_descr">請輸入您的電子郵件地址，驗證碼將會傳送到那裡，
 \n您所有的資料也會與其連結。</string>
-    <string name="osmand_cloud_login_descr">請輸入您註冊的電子郵件地址。下一步的一次性密碼將傳送給它。</string>
+    <string name="osmand_cloud_login_descr">請輸入您註冊的電子郵件地址。拋棄式密碼將會傳送至該處。</string>
     <string name="verify_email_address">驗證電子郵件地址</string>
     <string name="verify_email_address_descr">驗證碼已傳送至 %1$s。請在下方欄位輸入。</string>
     <string name="cloud_email_not_registered">此電子郵件尚未註冊 OsmAnd Cloud</string>
@@ -5226,4 +5226,9 @@
     <string name="calculate_offline_altitude_descr">根據高度圖資料，離線計算海拔。與裝置記錄的海拔差異可用作高度校正。</string>
     <string name="error_calculate">計算結果為空</string>
     <string name="calculate_offline">離線計算</string>
+    <string name="routing_attr_allow_via_ferrata_description">允許鐵索攀岩路徑。</string>
+    <string name="power_watts_unit">瓦</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">允許鐵索攀岩</string>
+    <string name="shared_string_close_the_dialog">關閉對話方塊</string>
 </resources>

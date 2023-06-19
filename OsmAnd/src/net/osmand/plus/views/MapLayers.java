@@ -527,7 +527,7 @@ public class MapLayers {
 				}
 				break;
 			case LAYER_ADD:
-				OsmandRasterMapsPlugin.defineNewEditLayer(mapActivity.getSupportFragmentManager(), null, null);
+				OsmandRasterMapsPlugin.defineNewEditLayer(mapActivity, null, null);
 				break;
 			case LAYER_INSTALL_MORE:
 				OsmandRasterMapsPlugin.installMapLayers(mapActivity, new ResultMatcher<TileSourceTemplate>() {

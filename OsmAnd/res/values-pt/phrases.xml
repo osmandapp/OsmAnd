@@ -4583,4 +4583,8 @@
     <string name="poi_ship_yes">Acesso de navio: sim</string>
     <string name="poi_sac_scale">Escala SAC</string>
     <string name="poi_cai_scale">Escala CAI</string>
+    <string name="poi_vending_machine_fuel">Sim</string>
+    <string name="poi_tunnel_name">Nome do túnel</string>
+    <string name="poi_bridge_name">Nome da ponte</string>
+    <string name="poi_vending_machine_fuel_filter">Dispensador automático de combustível;Máquina de venda de combustível</string>
 </resources>

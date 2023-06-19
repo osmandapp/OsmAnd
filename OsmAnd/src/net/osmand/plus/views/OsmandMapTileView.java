@@ -384,12 +384,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void zoomIn() {
-		OsmandMap map = application.getOsmandMap();
-		if (isZooming()) {
-			map.changeZoom(2, System.currentTimeMillis());
-		} else {
-			map.changeZoom(1, System.currentTimeMillis());
-		}
+		application.getOsmandMap().changeZoom(1, System.currentTimeMillis());
 	}
 
 	public void scrollMap(float dx, float dy) {

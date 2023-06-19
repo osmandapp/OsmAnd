@@ -8,7 +8,6 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,6 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
@@ -40,6 +38,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -123,15 +122,12 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
 		View selectFolderView = View.inflate(themedCtx, R.layout.select_folder_row, null);
-		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					File dest = getFile(app, folderName, destFileName);
-					MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(),
-							SaveAsNewTrackBottomSheetDialogFragment.this, dest.getAbsolutePath(), usedOnMap, true);
-				}
+		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				File dest = getFile(app, folderName, destFileName);
+				MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(),
+						dest, SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap, true);
 			}
 		});
 		BaseBottomSheetItem selectFolderItem = new BaseBottomSheetItem.Builder()
@@ -167,14 +163,11 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 							R.color.list_background_color_dark, simplifiedTrack, nightMode))
 					.setTitle(getString(R.string.simplified_track))
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							simplifiedTrack = !simplifiedTrack;
-							simplifiedTrackItem[0].setChecked(simplifiedTrack);
-							AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode));
-							simplifiedTrackItem[0].setDescription(getSimplifiedTrackDescription());
-						}
+					.setOnClickListener(v -> {
+						simplifiedTrack = !simplifiedTrack;
+						simplifiedTrackItem[0].setChecked(simplifiedTrack);
+						AndroidUtils.setBackground(simplifiedTrackItem[0].getView(), UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light, R.color.list_background_color_dark, simplifiedTrack, nightMode));
+						simplifiedTrackItem[0].setDescription(getSimplifiedTrackDescription());
 					})
 					.create();
 			items.add(simplifiedTrackItem[0]);
@@ -190,15 +183,12 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 						R.color.list_background_color_dark, showOnMap, nightMode))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_and_descr)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						showOnMap = !showOnMap;
-						showOnMapItem[0].setChecked(showOnMap);
-						AndroidUtils.setBackground(showOnMapItem[0].getView(),
-								UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light,
-										R.color.list_background_color_dark, showOnMap, nightMode));
-					}
+				.setOnClickListener(v -> {
+					showOnMap = !showOnMap;
+					showOnMapItem[0].setChecked(showOnMap);
+					AndroidUtils.setBackground(showOnMapItem[0].getView(),
+							UiUtilities.getStrokedBackgroundForCompoundButton(app, R.color.activity_background_color_light,
+									R.color.list_background_color_dark, showOnMap, nightMode));
 				})
 				.create();
 		items.add(showOnMapItem[0]);
@@ -310,7 +300,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	@Override
-	public void onFileMove(@NonNull File src, @NonNull File dest) {
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
 		File destFolder = dest.getParentFile();
 		if (destFolder != null) {
 			folderName = destFolder.getName();

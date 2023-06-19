@@ -365,7 +365,7 @@
     <string name="index_name_asia">Asien</string>
     <string name="index_name_oceania">Australien og Oceanien</string>
     <string name="index_name_other">Verdens- og emnekort</string>
-    <string name="index_name_wiki">Globale Wikipedia interessepunkter</string>
+    <string name="index_name_wiki">Globale Wikipedia-interessepunkter</string>
     <string name="index_name_voice">Talemeddelelser (optaget, begrænset funktionalitet)</string>
     <string name="index_name_tts_voice">Talemeddelelser (TTS, foretrukket)</string>
     <string name="amenity_type_user_defined">Brugerdefineret</string>
@@ -1548,7 +1548,7 @@
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter\?</string>
     <string name="disable_recording_once_app_killed">Forhindr selvstændig logning</string>
     <string name="gps_network_not_enabled">Placeringtjenesten er slukket. Slå det til\?</string>
-    <string name="archive_wikipedia_data">Der er gamle inkompatible Wikipedia data. Skal de arkiveres?</string>
+    <string name="archive_wikipedia_data">Der er gamle inkompatible Wikipedia-data. Skal de arkiveres\?</string>
     <string name="download_wikipedia_files">Hent yderligere data fra Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
@@ -2009,7 +2009,7 @@
     <string name="si_mi_meters">Mil/meter</string>
     <string name="get_for">Få for %1$s</string>
     <string name="osm_live_banner_desc">Få ubegrænset downloads af kort, tilføjelse af opdateringer ugentligt, dagligt eller hver time.</string>
-    <string name="osmand_plus_banner_desc">Ubegrænset adgang til kort, opdateringer og Wikipedia udvidelse.</string>
+    <string name="osmand_plus_banner_desc">Ubegrænset adgang til kort, opdateringer og Wikipedia-udvidelse.</string>
     <string name="get_it">Få det</string>
     <string name="osm_live_payment_desc">Abonnement opkræves pr. valgte periode. Kan opsiges på Google Play når som helst.</string>
     <string name="donation_to_osm">Donation til OSM fællesskabet</string>
@@ -2062,7 +2062,7 @@
     <string name="upload_poi">Overfør IP</string>
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
     <string name="search_map_hint">By eller område</string>
-    <string name="wiki_around">Wikipedia artikler i nærheden</string>
+    <string name="wiki_around">Wikipedia-artikler i nærheden</string>
     <string name="routing_attr_allow_motorway_name">Brug motorveje</string>
     <string name="routing_attr_allow_motorway_description">Tillader motorveje.</string>
     <string name="lang_sr_latn">Serbisk (latin)</string>
@@ -2707,7 +2707,7 @@
     <string name="download_wiki_region_placeholder">denne region</string>
     <string name="wiki_article_search_text">Søger efter den tilsvarende wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel ikke fundet</string>
-    <string name="how_to_open_wiki_title">Hvordan åbner man Wikipedia artikler?</string>
+    <string name="how_to_open_wiki_title">Hvordan åbner man Wikipedia-artikler\?</string>
     <string name="osmand_team">OsmAnd-team</string>
     <string name="maps_you_need_descr">Baseret på artikler der er bogmærket, anbefales det at hente følgende kort:</string>
     <string name="maps_you_need">Kort der er brug for</string>
@@ -2716,9 +2716,9 @@
     <string name="purchase_cancelled_dialog_title">OsmAnd Live-abonnement er annulleret</string>
     <string name="purchase_cancelled_dialog_descr">Forny abonnement for at fortsætte med at bruge alle funktioner:</string>
     <string name="download_all">Download alle</string>
-    <string name="open_wikipedia_link_online">Åbn Wikipedia link online</string>
+    <string name="open_wikipedia_link_online">Åbn Wikipedia-link online</string>
     <string name="open_wikipedia_link_online_description">Linket vil blive åbnet i en webbrowser.</string>
-    <string name="read_wikipedia_offline_description">Abonner på OsmAnd Live for at læse Wikipedia og Wikivoyage artikler offline.</string>
+    <string name="read_wikipedia_offline_description">Abonnér på OsmAnd Live for at læse Wikipedia- og Wikivoyage-artikler offline.</string>
     <string name="how_to_open_link">Hvordan linket åbnes?</string>
     <string name="read_wikipedia_offline">Læs Wikipedia offline</string>
     <string name="hide_full_description">Skjul fuld beskrivelse</string>
@@ -2734,7 +2734,7 @@
     <string name="access_intermediate_arrival_time">Mellemliggende ankomsttid</string>
     <string name="map_widget_intermediate_time">Mellemliggende tid</string>
     <string name="unirs_render_descr">Ændring af standard stil for at øge kontrasten på fodgænger- og cykelveje. Bruger Mapniks oprindelige farver.</string>
-    <string name="get_osmand_live">Abonner på OsmAnd Live og brug alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
+    <string name="get_osmand_live">Abonnér på OsmAnd Live og få adgang til alle funktioner: daglige opdateringer af kort, alle gratis og betalte udvidelser, Wikipedia, Wikivoyage og meget mere.</string>
     <string name="quick_action_edit_actions">Rediger genveje</string>
     <string name="error_notification_desc">Send et skærmbillede af meddelelsen til support@osmand.net</string>
     <string name="coord_input_edit_point">Rediger punkt</string>
@@ -3462,7 +3462,7 @@
     <string name="shared_string_languages">Sprog</string>
     <string name="shared_string_language">Sprog</string>
     <string name="shared_string_all_languages">Alle sprog</string>
-    <string name="wiki_menu_download_descr">Yderligere kort er nødvendige for at se Wikipedia Interessepunkter på kortet.</string>
+    <string name="wiki_menu_download_descr">Yderligere kort er nødvendige for at se Wikipedia-interessepunkter på kortet.</string>
     <string name="ui_customization_short_descr">Skuffeelementer, kontekstmenu</string>
     <string name="shared_string_drawer">Skuffe</string>
     <string name="ui_customization">Tilpasning af brugergrænseflade</string>
@@ -4056,7 +4056,7 @@
     <string name="osmand_cloud_help_descr">Brug for hjælp\? Kontakt os venligst på %1$s</string>
     <string name="osmand_cloud_create_account_descr">Indtast din e-mailadresse, en bekræftelseskode vil blive sendt dertil,
 \nog alle dine data vil blive knyttet til den.</string>
-    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til det næste trin til den.</string>
+    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til den.</string>
     <string name="verify_email_address">Bekræft e-mailadressen</string>
     <string name="verify_email_address_descr">Verifikationskode sendt til %1$s. Indtast den venligst i feltet nedenfor.</string>
     <string name="enter_verification_code">Indtast engangsadgangskode</string>
@@ -5240,4 +5240,9 @@
     <string name="calculate_offline">Beregn offline</string>
     <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på højdekortdata. Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
     <string name="error_calculate">Beregningsresultatet er tomt</string>
+    <string name="routing_attr_allow_via_ferrata_description">Tillad via ferrata-stier.</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="revolutions_per_minute_unit">OPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">Tillad via ferrata</string>
+    <string name="shared_string_close_the_dialog">Luk dialogen</string>
 </resources>

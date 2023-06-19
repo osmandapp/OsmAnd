@@ -4089,7 +4089,7 @@
     <string name="osmand_cloud_help_descr">Potrzebujesz pomocy\? Skontaktuj się z nami pod adresem %1$s</string>
     <string name="osmand_cloud_create_account_descr">Wprowadź swój adres e-mail, zostanie na niego wysłany kod weryfikacyjny,
 \ni wszystkie Twoje dane zostaną przypisane do niego.</string>
-    <string name="osmand_cloud_login_descr">Wprowadź adres e-mail, którego użyłeś do rejestracji. Zostanie wysłane na niego jednorazowe hasło do użycia w następnym roku.</string>
+    <string name="osmand_cloud_login_descr">Podaj adres e-mail, na który się zarejestrowałeś. Zostanie do niego wysłane jednorazowe hasło.</string>
     <string name="verify_email_address">Zweryfikuj adres e-mail</string>
     <string name="verify_email_address_descr">Kod weryfikacyjny wysłany na %1$s. Wprowadź go w polu poniżej.</string>
     <string name="cloud_email_not_registered">Ten adres e-mail nie jest zarejestrowany w OsmAnd Cloud</string>
@@ -4721,7 +4721,7 @@
     <string name="widget_with_dot">Widżet.</string>
     <string name="compass_visible_if_map_rotated_desc">Ukryty, gdy Północ jest na górze</string>
     <string name="compass_always_visible">Zawsze widoczny</string>
-    <string name="compass_click_desc">Wskazówka: Stuknij widżet kompasu, aby przełączyć tryb orientacji mapy.</string>
+    <string name="compass_click_desc">Wskazówka: Stuknij przycisk kompasu, aby przełączyć tryb orientacji mapy.</string>
     <string name="marker_1st">Pierwszy znacznik mapy</string>
     <string name="average_speed_skip_stops_desc">Prędkość mniejsza niż %1$s zostanie zliczona i wpłynie na średnią prędkość.</string>
     <string name="auto_backup_title">Automatyczne tworzenie kopii zapasowych</string>
@@ -5226,4 +5226,12 @@
     <string name="shared_string_visible_on_map">Widoczne na mapie</string>
     <string name="rssi_widget_desc">Pokazuje poziom RSSI urządzenia zewnętrznego.</string>
     <string name="shared_string_new_track">Nowa ścieżka</string>
+    <string name="write_data_from_sensor_to_track">Zapisuj dane z czujników zewnętrznych do GPX podczas nagrywania trasy.</string>
+    <string name="calculate_offline">Oblicz offline</string>
+    <string name="error_calculate">Wynik obliczeń jest pusty</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Brak podłączonych czujników tego typu</string>
+    <string name="shared_string_close_the_dialog">Zamknij okno dialogowe</string>
+    <string name="calculate_offline_altitude_descr">Obliczanie wysokości w trybie offline na podstawie danych mapy wysokości. Różnice w stosunku do wysokości rejestrowanej przez urządzenie mogą być wykorzystane jako korekcja wysokości.</string>
+    <string name="external_sensors_not_found">Nie znaleziono czujników</string>
+    <string name="external_sensors_source_of_data">Źródło danych</string>
 </resources>

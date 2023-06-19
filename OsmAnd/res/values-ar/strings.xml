@@ -4160,7 +4160,7 @@
     <string name="osmand_cloud_help_descr">هل تحتاج إلى مساعدة؟ يرجى الاتصال بنا على %1$s</string>
     <string name="osmand_cloud_create_account_descr">الرجاء إدخال عنوان بريدك الإلكتروني ، سيتم ربط جميع بياناتك به.
 \nسنرسل لك رمز التحقق إلى عنوان البريد الإلكتروني هذا.</string>
-    <string name="osmand_cloud_login_descr">الرجاء إدخال عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سنرسل لك كلمة مرور لمرة واحدة مطلوبة في الخطوة التالية.</string>
+    <string name="osmand_cloud_login_descr">الرجاء إدخال عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سنرسل لك كلمة مرور لمرة واحدة .</string>
     <string name="verify_email_address">التحقق من عنوان البريد الإلكتروني</string>
     <string name="verify_email_address_descr">أرسلنا رمز التحقق إلى %1$s ، يرجى إدخاله في الحقل أدناه.</string>
     <string name="cloud_email_not_registered">هذا البريد الإلكتروني غير مسجل في سحابة أوسماند</string>
@@ -5302,4 +5302,9 @@
     <string name="error_calculate">نتيجة الحساب فارغة</string>
     <string name="calculate_offline_altitude_descr">احسب الارتفاع في وضع دون اتصال ، بناءًا على بيانات خريطة الارتفاع. يمكن استخدام الاختلافات مقابل الارتفاع المسجل بالجهاز كتصحيح للارتفاع.</string>
     <string name="calculate_offline">حساب دون اتصال بالنت</string>
+    <string name="routing_attr_allow_via_ferrata_name">السماح عبر فيراتا</string>
+    <string name="routing_attr_allow_via_ferrata_description">السماح عبر مسارات فيراتا.</string>
+    <string name="power_watts_unit">واتس</string>
+    <string name="revolutions_per_minute_unit">.RPM</string>
+    <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
 </resources>

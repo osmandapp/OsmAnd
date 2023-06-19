@@ -31,6 +31,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
@@ -80,7 +81,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		itemsSelectionHelper.clearSelectedItems();
 		groupsSelectionHelper.clearSelectedItems();
 
-		itemsSelectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
+		itemsSelectionHelper.setAllItems(rootFolder.getTrackItems());
 		groupsSelectionHelper.setAllItems(rootFolder.getSubFolders());
 	}
 
@@ -235,6 +236,21 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onGpxUploaded(String result) {
 		dismiss();
+	}
+
+	@Override
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null) {
+			Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
+
+			foldersHelper.moveTracks(trackItems, tracksGroups, dest, result -> {
+				reloadTracks();
+				dismiss();
+				return false;
+			});
+		}
 	}
 
 	@NonNull

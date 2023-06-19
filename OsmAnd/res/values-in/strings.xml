@@ -1878,7 +1878,7 @@
     <string name="osmand_cloud_help_descr">Butuh bantuan\? Silakan hubungi kami di %1$s</string>
     <string name="osmand_cloud_create_account_descr">Mohon masukkan alamat surel Anda, sebuah kode verifikasi akan dikirim,
 \ndan semua data akan ditautkan ke alamat surel.</string>
-    <string name="osmand_cloud_login_descr">Mohon masukkan alamat surel yang Anda daftarkan. Sebuah kata sandi sekali pakai untuk langkah berikutnya akan dikirim.</string>
+    <string name="osmand_cloud_login_descr">Mohon masukkan alamat surel yang Anda daftarkan. Sebuah kata sandi sekali pakai akan dikirim.</string>
     <string name="verify_email_address">Verifikasi alamat surel</string>
     <string name="verify_email_address_descr">Kode verifikasi terkirim ke %1$s, mohon masukkan di bidang di bawah ini.</string>
     <string name="cloud_email_not_registered">Alamat surel ini belum terdaftar di OsmAnd Cloud</string>
@@ -5240,4 +5240,9 @@
     <string name="error_calculate">Hasil kalkulasi kosong</string>
     <string name="calculate_offline">Kalkulasi secara luring</string>
     <string name="calculate_offline_altitude_descr">Kalkulasi ketinggian secara luring, berdasarkan data peta ketinggian. Perbedaan antara ketinggian yang direkam oleh perangkat mungkin digunakan sebagai koreksi ketinggian.</string>
+    <string name="routing_attr_allow_via_ferrata_description">Izinkan melalui jalur ferrata.</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">Izinkan melalui ferrata</string>
+    <string name="shared_string_close_the_dialog">Tutup dialog</string>
 </resources>

@@ -4583,4 +4583,8 @@
     <string name="poi_sac_scale">SAC 等級</string>
     <string name="poi_cai_scale">CAI 等級</string>
     <string name="poi_ship_destination">船舶進入：目的地</string>
+    <string name="poi_tunnel_name">隧道名稱</string>
+    <string name="poi_bridge_name">橋樑名稱</string>
+    <string name="poi_vending_machine_fuel_filter">自動加油機；燃油自動販賣機</string>
+    <string name="poi_vending_machine_fuel">是</string>
 </resources>
