@@ -27,19 +27,26 @@ public class ScrollHelper {
 	private final Direction RIGHT = new Direction(KeyEvent.KEYCODE_DPAD_RIGHT);
 
 	private final Map<Integer, Direction> availableDirections;
-	private boolean isInContinuousScrolling;
-	private long startContinuousScrollingTime = INVALID_VALUE;
+	private volatile boolean isInContinuousScrolling;
+	private volatile long startContinuousScrollingTime = INVALID_VALUE;
 
 	private final Runnable scrollingRunnable = () -> {
 		isInContinuousScrolling = true;
 		while (hasActiveDirections()) {
-			notifyListener(true);
+			notifyListener(true, false);
 			try {
 				Thread.sleep(REFRESHING_DELAY_MS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		if (System.currentTimeMillis() - startContinuousScrollingTime < LONG_PRESS_TIME_MS) {
+			List<Direction> lastDirections = getLastDirections();
+			addDirections(lastDirections);
+			notifyListener(false, false);
+			removeDirections(lastDirections);
+		}
+		notifyListener(false, true);
 		isInContinuousScrolling = false;
 	};
 
@@ -68,13 +75,6 @@ public class ScrollHelper {
 
 	public boolean onKeyUp(int keyCode) {
 		removeDirection(keyCode);
-		boolean shortPress = !hasActiveDirections() && ((System.currentTimeMillis() - startContinuousScrollingTime) < LONG_PRESS_TIME_MS);
-		if (shortPress) {
-			List<Direction> lastDirections = getLastDirections();
-			addDirections(lastDirections);
-			notifyListener(false);
-			removeDirections(lastDirections);
-		}
 		return true;
 	}
 
@@ -109,7 +109,9 @@ public class ScrollHelper {
 		if (availableDirections.containsKey(keyCode)) {
 			long keyUpTime = System.currentTimeMillis();
 			Direction direction = availableDirections.get(keyCode);
-			direction.setTimeUp(keyUpTime);
+			if (direction.isActive()) {
+				direction.setTimeUp(keyUpTime);
+			}
 			direction.setActive(false);
 		}
 	}
@@ -123,9 +125,9 @@ public class ScrollHelper {
 		return false;
 	}
 
-	private void notifyListener(boolean continuousScrolling) {
+	private void notifyListener(boolean continuousScrolling, boolean stop) {
 		if (onScrollEventListener != null) {
-			onScrollEventListener.onScrollEvent(continuousScrolling, 
+			onScrollEventListener.onScrollEvent(continuousScrolling, stop,
 					UP.isActive(), DOWN.isActive(), LEFT.isActive(), RIGHT.isActive());
 		}
 	}
@@ -162,8 +164,8 @@ public class ScrollHelper {
 
 	private static class Direction {
 		private final int keyCode;
-		private long timeUp = INVALID_VALUE;
-		private boolean isActive;
+		private volatile long timeUp = INVALID_VALUE;
+		private volatile boolean isActive;
 		
 		public Direction(int keyCode) {
 			this.keyCode = keyCode;
@@ -187,7 +189,7 @@ public class ScrollHelper {
 	}
 	
 	public interface OnScrollEventListener {
-		void onScrollEvent(boolean continuousScrolling, boolean up, boolean down, boolean left, boolean right);
+		void onScrollEvent(boolean continuousScrolling, boolean stop, boolean up, boolean down, boolean left, boolean right);
 	}
 	
 }

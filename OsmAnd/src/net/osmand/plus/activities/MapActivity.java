@@ -55,6 +55,8 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -161,6 +163,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControlle
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -1134,10 +1137,47 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()) {
 			float x = event.getX();
 			float y = event.getY();
+			float dx = x * 15;
+			float dy = y * 15;
 			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
 			QuadPoint cp = tb.getCenterPixelPoint();
-			LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
-					cp.x + x * 15, cp.y + y * 15);
+			MapRendererView renderer = getMapView().getMapRenderer();
+			LatLon l;
+			if (renderer != null) {
+				PointI point31 = new PointI();
+				if (renderer.getLocationFromScreenPoint(new PointI((int) (cp.x + dx), (int) (cp.y + dy)), point31)) {
+					PointI target31 = renderer.getState().getTarget31();
+					int deltaX = point31.getX() - target31.getX();
+					int deltaY = point31.getY() - target31.getY();
+					PointI mapTarget31 = renderer.getState().getFixedLocation31();
+					int nextTargetX = mapTarget31.getX();
+					int nextTargetY = mapTarget31.getY();
+					if (Integer.MAX_VALUE - nextTargetX < deltaX) {
+						deltaX -= Integer.MAX_VALUE;
+						deltaX--;
+					}
+					if (Integer.MAX_VALUE - nextTargetY < deltaY) {
+						deltaY -= Integer.MAX_VALUE;
+						deltaY--;
+					}
+					nextTargetX += deltaX;
+					nextTargetY += deltaY;
+					if (nextTargetX < 0) {
+						nextTargetX += Integer.MAX_VALUE;
+						nextTargetX++;
+					}
+					if (nextTargetY < 0) {
+						nextTargetY += Integer.MAX_VALUE;
+						nextTargetY++;
+					}
+					l = new LatLon(MapUtils.get31LatitudeY(nextTargetY), MapUtils.get31LongitudeX(nextTargetX));
+				} else {
+					return true;
+				}
+			} else {
+				l = NativeUtilities.getLatLonFromPixel(renderer, tb,
+						cp.x + dx, cp.y + dy);
+			}
 			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
 		}
@@ -1365,14 +1405,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		return super.onKeyUp(keyCode, event);
-	}
-
-	public void scrollMap(float dx, float dy) {
-		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
-		QuadPoint cp = tb.getCenterPixelPoint();
-		LatLon l = NativeUtilities.getLatLonFromPixel(getMapView().getMapRenderer(), tb,
-				cp.x + dx, cp.y + dy);
-		app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
 	}
 
 	public void showMapControls() {
@@ -1779,11 +1811,31 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
-	public void onScrollEvent(boolean continuousScrolling, boolean up, boolean down, boolean left, boolean right) {
+	public void onScrollEvent(boolean continuousScrolling, boolean stop, boolean up, boolean down, boolean left, boolean right) {
+		RotatedTileBox tb = getMapView().getCurrentRotatedTileBox();
+		QuadPoint cp = tb.getCenterPixelPoint();
+		MapRendererView renderer = getMapView().getMapRenderer();
+		if (stop) {
+			if (renderer != null) {
+				PointI target31 = new PointI();
+				renderer.getLocationFromElevatedPoint(renderer.getState().getFixedPixel(), target31);
+				app.getOsmandMap().setMapLocation(MapUtils.get31LatitudeY(target31.getY()), MapUtils.get31LongitudeX(target31.getX()));
+			}
+			return;
+		}
 		int scrollingUnit = continuousScrolling ? SMALL_SCROLLING_UNIT : BIG_SCROLLING_UNIT;
 		int dx = (left ? -scrollingUnit : 0) + (right ? scrollingUnit : 0);
 		int dy = (up ? -scrollingUnit : 0) + (down ? scrollingUnit : 0);
-		scrollMap(dx, dy);
+		if (renderer != null) {
+			PointI point31 = new PointI();
+			PointI center = renderer.getState().getFixedPixel();
+			if (renderer.getLocationFromScreenPoint(new PointI((int) (center.getX() + dx), (int) (center.getY() + dy)), point31)) {
+				renderer.setTarget(point31, false, false);
+			}
+		} else {
+			LatLon l = NativeUtilities.getLatLonFromPixel(renderer, tb, cp.x + dx, cp.y + dy);
+			app.getOsmandMap().setMapLocation(l.getLatitude(), l.getLongitude());
+		}
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

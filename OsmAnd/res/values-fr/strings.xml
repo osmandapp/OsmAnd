@@ -5226,4 +5226,9 @@
     <string name="error_calculate">Le résultat du calcul est vide</string>
     <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte altimétrique. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
+    <string name="routing_attr_allow_via_ferrata_description">Autoriser les itinéraires comprenant des via ferrata.</string>
+    <string name="power_watts_unit">Watts</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="routing_attr_allow_via_ferrata_name">Autoriser les via ferrata</string>
+    <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
 </resources>

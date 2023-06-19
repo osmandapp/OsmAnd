@@ -6,7 +6,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
-import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
 import android.app.Activity;
@@ -41,14 +40,12 @@ import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
-import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
@@ -64,7 +61,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -259,17 +255,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void onTracksGroupClicked(@NonNull TracksGroup group) {
-		if (group instanceof TrackFolder) {
-			setSelectedFolder((TrackFolder) group);
-		} else if (group instanceof VisibleTracksGroup) {
-			boolean selected = !isTracksGroupSelected(group);
-			onTracksGroupSelected(group, selected);
-		}
-		updateContent();
-	}
-
-	@Override
 	public void onTracksGroupOptionsSelected(@NonNull View view, @NonNull TracksGroup group) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null && group instanceof TrackFolder) {
@@ -321,7 +306,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void onFileMove(@NonNull File src, @NonNull File dest) {
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
 			foldersHelper.onFileMove(src, dest);
@@ -380,8 +365,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void onFolderRenamed(@NonNull File oldDir, @NonNull File newDir) {
-		reloadTracks();
+	public void onFolderRenamed(@NonNull File newDir) {
+		updateContent();
 	}
 
 	@Override
@@ -407,16 +392,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void showExportDialog(@NonNull TrackFolder folder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			List<File> selectedFiles = new ArrayList<>();
-			for (TrackItem trackItem : folder.getFlattenedTrackItems()) {
-				selectedFiles.add(trackItem.getFile());
+			TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+			if (foldersHelper != null) {
+				foldersHelper.showExportDialog(folder.getFlattenedTrackItems(), this);
 			}
-			HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
-			selectedTypes.put(ExportSettingsType.TRACKS, selectedFiles);
-
-			Bundle bundle = new Bundle();
-			bundle.putSerializable(SELECTED_TYPES, selectedTypes);
-			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}
 

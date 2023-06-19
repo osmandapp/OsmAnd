@@ -225,6 +225,16 @@ public class GPXDatabase {
 			GPX_COL_MAX_FILTER_ALTITUDE + " = ?, " +
 			GPX_COL_MAX_FILTER_HDOP + " = ? ";
 
+	private static final String GPX_TABLE_UPDATE_APPEARANCE = "UPDATE " +
+			GPX_TABLE_NAME + " SET " +
+			GPX_COL_COLOR + " = ?, " +
+			GPX_COL_WIDTH + " = ?, " +
+			GPX_COL_SHOW_ARROWS + " = ?, " +
+			GPX_COL_SHOW_START_FINISH + " = ?, " +
+			GPX_COL_SPLIT_TYPE + " = ?, " +
+			GPX_COL_SPLIT_INTERVAL + " = ?, " +
+			GPX_COL_COLORING_TYPE + " = ? ";
+
 	private final OsmandApplication app;
 
 	public static class GpxDataItem {
@@ -700,7 +710,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateShowStartFinish(GpxDataItem item, boolean showStartFinish) {
+	public boolean updateShowStartFinish(@NonNull GpxDataItem item, boolean showStartFinish) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -718,7 +728,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateWidth(GpxDataItem item, String width) {
+	public boolean updateWidth(@NonNull GpxDataItem item, @NonNull String width) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -736,7 +746,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateShowAsMarkers(GpxDataItem item, boolean showAsMarkers) {
+	public boolean updateShowAsMarkers(@NonNull GpxDataItem item, boolean showAsMarkers) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -755,7 +765,7 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean updateJoinSegments(GpxDataItem item, boolean joinSegments) {
+	public boolean updateJoinSegments(@NonNull GpxDataItem item, boolean joinSegments) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -847,7 +857,36 @@ public class GPXDatabase {
 		}
 	}
 
-	public boolean remove(File file) {
+	public boolean updateAppearance(@NonNull GpxDataItem item, int color, @NonNull String width,
+	                                boolean showArrows, boolean showStartFinish, int splitType,
+	                                double splitInterval, @Nullable String coloringType) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileDir = getFileDir(item.file);
+				String fileName = getFileName(item.file);
+
+				db.execSQL(GPX_TABLE_UPDATE_APPEARANCE + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {(color == 0 ? "" : Algorithms.colorToString(color)), width,
+								showArrows ? 1 : 0, showStartFinish ? 1 : 0, splitType,
+								splitInterval, coloringType, fileName, fileDir});
+
+				item.color = color;
+				item.width = width;
+				item.showArrows = showArrows;
+				item.showStartFinish = showStartFinish;
+				item.splitType = splitType;
+				item.splitInterval = splitInterval;
+				item.coloringType = coloringType;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean remove(@NonNull File file) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -863,11 +902,11 @@ public class GPXDatabase {
 		return false;
 	}
 
-	public boolean remove(GpxDataItem item) {
+	public boolean remove(@NonNull GpxDataItem item) {
 		return remove(item.file);
 	}
 
-	public boolean add(GpxDataItem item) {
+	public boolean add(@NonNull GpxDataItem item) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -880,17 +919,22 @@ public class GPXDatabase {
 		return false;
 	}
 
-	private String getFileName(File itemFile) {
-		return itemFile.getName();
+	@NonNull
+	private String getFileName(@NonNull File file) {
+		return file.getName();
 	}
 
-	private String getFileDir(File itemFile) {
-		String fileDir = itemFile.getParentFile() == null ? ""
-				: new File(itemFile.getPath().replace(app.getAppPath(GPX_INDEX_DIR).getPath() + "/", "")).getParent();
+	@NonNull
+	private String getFileDir(@NonNull File file) {
+		if (file.getParentFile() == null) {
+			return "";
+		}
+		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
+		String fileDir = new File(file.getPath().replace(gpxDir.getPath() + "/", "")).getParent();
 		return fileDir != null ? fileDir : "";
 	}
 
-	void insert(GpxDataItem item, SQLiteConnection db) {
+	void insert(@NonNull GpxDataItem item, @NonNull SQLiteConnection db) {
 		String fileName = getFileName(item.file);
 		String fileDir = getFileDir(item.file);
 		GPXTrackAnalysis trackAnalysis = item.getAnalysis();
@@ -949,14 +993,14 @@ public class GPXDatabase {
 		db.execSQL(AndroidUtils.createDbInsertQuery(GPX_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
 
-	public boolean updateAnalysis(GpxDataItem item, GPXTrackAnalysis a) {
-		if (a == null) {
+	public boolean updateAnalysis(@NonNull GpxDataItem item, @Nullable GPXTrackAnalysis analysis) {
+		if (analysis == null) {
 			return false;
 		}
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				return updateAnalysis(item, a, db);
+				return updateAnalysis(item, analysis, db);
 			} finally {
 				db.close();
 			}
@@ -984,7 +1028,7 @@ public class GPXDatabase {
 		return true;
 	}
 
-	public boolean clearAnalysis(GpxDataItem item) {
+	public boolean clearAnalysis(@NonNull GpxDataItem item) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -1001,6 +1045,7 @@ public class GPXDatabase {
 		return false;
 	}
 
+	@NonNull
 	private GpxDataItem readItem(SQLiteCursor query) {
 		String fileName = query.getString(0);
 		String fileDir = query.getString(1);

@@ -30,6 +30,7 @@ import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -180,8 +181,16 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	public void setRootFolder(@NonNull TrackFolder rootFolder) {
 		super.setRootFolder(rootFolder);
+		setupSelectionHelper(rootFolder);
+	}
 
-		List<TrackItem> trackItems = rootFolder.getFlattenedTrackItems();
+	private void setupSelectionHelper(@NonNull TrackFolder folder) {
+		List<TrackItem> trackItems = folder.getFlattenedTrackItems();
+		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
+			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
+			trackItems.add(trackItem);
+		}
 		List<TrackItem> selectedItems = new ArrayList<>();
 		if (gpxSelectionHelper.isAnyGpxFileSelected()) {
 			for (TrackItem info : trackItems) {
@@ -190,7 +199,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				}
 			}
 		}
-		ItemsSelectionHelper<TrackItem> selectionHelper = getSelectionHelper();
 		selectionHelper.setAllItems(trackItems);
 		selectionHelper.setSelectedItems(selectedItems);
 		selectionHelper.setOriginalSelectedItems(selectedItems);
@@ -221,13 +229,13 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	public void saveTracksVisibility() {
-		Set<TrackItem> selectedTracks = getSelectionHelper().getSelectedItems();
+		Set<TrackItem> selectedTracks = selectionHelper.getSelectedItems();
 		app.getSelectedGpxHelper().saveTracksVisibility(selectedTracks, null);
 		updateVisibleTracks();
 	}
 
 	@Override
-	public void onTracksGroupClicked(@NonNull TracksGroup group) {
+	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
 		if (group instanceof TrackFolder) {
 			openTrackFolder((TrackFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
@@ -238,6 +246,16 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
 		trackFoldersHelper.showItemOptionsMenu(trackItem, view, this);
+	}
+
+	@Override
+	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
+		trackFoldersHelper.showTracksSelection(selectedFolder, this);
+	}
+
+	@Override
+	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
+		trackFoldersHelper.showTracksSelection(selectedFolder, this);
 	}
 
 	@Override
@@ -292,7 +310,8 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 					showTrackItem(rootFolder, trackItem);
 				}
 				selectedItemPath = null;
-			} else if (!Algorithms.isEmpty(preSelectedFolder)) {
+			} else if (!Algorithms.isEmpty(preSelectedFolder)
+					&& !preSelectedFolder.equals(rootFolder.getDirFile().getAbsolutePath())) {
 				openSubfolder(rootFolder, new File(preSelectedFolder));
 				preSelectedFolder = null;
 			}

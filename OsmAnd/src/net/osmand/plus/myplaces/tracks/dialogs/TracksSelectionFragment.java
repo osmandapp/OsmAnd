@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.track.data.TrackFolder;
@@ -30,10 +31,11 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
-public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener {
+public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener, SelectionHelperProvider<TrackItem> {
 
 	public static final String TAG = TracksSelectionFragment.class.getSimpleName();
 
@@ -79,7 +81,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		itemsSelectionHelper.clearSelectedItems();
 		groupsSelectionHelper.clearSelectedItems();
 
-		itemsSelectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
+		itemsSelectionHelper.setAllItems(rootFolder.getTrackItems());
 		groupsSelectionHelper.setAllItems(rootFolder.getSubFolders());
 	}
 
@@ -234,6 +236,35 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 	@Override
 	public void onGpxUploaded(String result) {
 		dismiss();
+	}
+
+	@Override
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null) {
+			Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
+
+			foldersHelper.moveTracks(trackItems, tracksGroups, dest, result -> {
+				reloadTracks();
+				dismiss();
+				return false;
+			});
+		}
+	}
+
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
+		ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null) {
+			Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
+
+			selectionHelper.setSelectedItems(foldersHelper.getSelectedTrackItems(trackItems, tracksGroups));
+		}
+		return selectionHelper;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder, @Nullable Fragment target) {

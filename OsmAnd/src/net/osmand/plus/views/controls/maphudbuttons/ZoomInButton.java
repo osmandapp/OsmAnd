@@ -19,12 +19,7 @@ public class ZoomInButton extends MapButton {
 			if (mapActivity.getContextMenu().zoomInPressed()) {
 				return;
 			}
-			OsmandMap osmandMap = app.getOsmandMap();
-			if (mapActivity.getMapView().isZooming()) {
-				osmandMap.changeZoom(2, System.currentTimeMillis());
-			} else {
-				osmandMap.changeZoom(1, System.currentTimeMillis());
-			}
+			app.getOsmandMap().changeZoom(1, System.currentTimeMillis());
 		});
 		setOnLongClickListener(MapControlsLayer.getOnClickMagnifierListener(mapActivity.getMapView()));
 	}

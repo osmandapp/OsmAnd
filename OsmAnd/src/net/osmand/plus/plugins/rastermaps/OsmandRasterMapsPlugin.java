@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
@@ -600,8 +600,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void defineNewEditLayer(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, @Nullable String editedLayerName) {
-		EditMapSourceDialogFragment.showInstance(fm, targetFragment, editedLayerName);
+	public static void defineNewEditLayer(@NonNull FragmentActivity activity, @Nullable Fragment targetFragment, @Nullable String editedFileName) {
+		EditMapSourceDialogFragment.showInstance(activity, targetFragment, editedFileName);
 	}
 
 	public MapTileLayer getUnderlayLayer() {

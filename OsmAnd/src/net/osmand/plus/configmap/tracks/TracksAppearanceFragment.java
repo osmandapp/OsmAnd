@@ -1,7 +1,5 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
 import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
 
@@ -26,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -34,11 +33,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.ColoringTypeCard;
 import net.osmand.plus.track.cards.ColorsCard;
@@ -50,26 +50,18 @@ import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.render.RenderingRulesStorage;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ColorPickerListener, InAppPurchaseListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
-	private GpxDbHelper gpxDbHelper;
-	private GpxSelectionHelper gpxSelectionHelper;
 	private ItemsSelectionHelper<TrackItem> selectionHelper;
 
 	private TrackDrawInfo trackDrawInfo;
@@ -91,8 +83,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		gpxDbHelper = app.getGpxDbHelper();
-		gpxSelectionHelper = app.getSelectedGpxHelper();
 		selectionHelper = getItemsSelectionHelper();
 
 		if (savedInstanceState != null) {
@@ -362,9 +352,19 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	public void saveTracksAppearance() {
-		saveDefaultAppearance();
-		updateSelectedTracksAppearance();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			CallbackWithObject<Void> callback = result -> {
+				onAppearanceSaved();
+				return true;
+			};
+			Set<TrackItem> items = selectionHelper.getSelectedItems();
+			ChangeTracksAppearanceTask appearanceTask = new ChangeTracksAppearanceTask(activity, trackDrawInfo, items, callback);
+			appearanceTask.execute();
+		}
+	}
 
+	private void onAppearanceSaved() {
 		FragmentActivity activity = getActivity();
 		if (activity instanceof MapActivity) {
 			((MapActivity) activity).refreshMapComplete();
@@ -372,57 +372,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof TracksFragment) {
 			((TracksFragment) fragment).updateTabsContent();
+		} else if (fragment instanceof TracksSelectionFragment) {
+			((TracksSelectionFragment) fragment).dismiss();
 		}
 		dismiss();
-	}
-
-	private void updateSelectedTracksAppearance() {
-		GpxDataItemCallback callback = new GpxDataItemCallback() {
-			@Override
-			public boolean isCancelled() {
-				return !isAdded();
-			}
-
-			@Override
-			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-				updateTrackAppearance(item);
-			}
-		};
-		for (TrackItem trackItem : selectionHelper.getSelectedItems()) {
-			File file = trackItem.getFile();
-			if (file != null) {
-				GpxDataItem item = gpxDbHelper.getItem(file, callback);
-				if (item != null) {
-					updateTrackAppearance(item);
-				}
-			}
-		}
-	}
-
-	private void saveDefaultAppearance() {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		String colorName = GpxAppearanceAdapter.parseTrackColorName(renderer, trackDrawInfo.getColor());
-
-		settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).set(colorName);
-		settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).set(trackDrawInfo.getWidth());
-	}
-
-	private void updateTrackAppearance(@NonNull GpxDataItem item) {
-		gpxDbHelper.updateColor(item, trackDrawInfo.getColor());
-		gpxDbHelper.updateWidth(item, trackDrawInfo.getWidth());
-		gpxDbHelper.updateShowArrows(item, trackDrawInfo.isShowArrows());
-		gpxDbHelper.updateShowStartFinish(item, trackDrawInfo.isShowStartFinish());
-
-		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType());
-		gpxDbHelper.updateSplit(item, splitType, trackDrawInfo.getSplitInterval());
-		ColoringType coloringType = trackDrawInfo.getColoringType();
-		String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
-		gpxDbHelper.updateColoringType(item, coloringType.getName(routeInfoAttribute));
-
-		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
-		if (selectedGpxFile != null) {
-			selectedGpxFile.resetSplitProcessed();
-		}
 	}
 
 	@Override
