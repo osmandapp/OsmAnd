@@ -707,8 +707,8 @@ public class ChartUtils {
 		double[] calculatedSlopeDist = new double[(int) (totalDistance / STEP) + 1];
 		double[] calculatedSlope = new double[(int) (totalDistance / STEP) + 1];
 
-		int threshold = (int) ((SLOPE_PROXIMITY / STEP) / 2);
-		if (threshold < 2 || calculatedSlopeDist.length <= 4) {
+		int threshold = Math.max(2, (int) ((SLOPE_PROXIMITY / STEP) / 2));
+		if (calculatedSlopeDist.length <= 4) {
 			return null;
 		}
 		for (int k = 0; k < calculatedSlopeDist.length; k++) {
