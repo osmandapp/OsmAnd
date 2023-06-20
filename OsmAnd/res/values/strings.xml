@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="free_mode">Free mode</string>
     <string name="terrain_map">Terrain map</string>
     <string name="relief_3d">3D Relief</string>
     <string name="relief_3d_description">Own and observe the scale model of your neighborhood or the whole continent.</string>
