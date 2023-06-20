@@ -6,11 +6,9 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -65,8 +63,9 @@ final class MapLayerMenuListener extends OnRowItemClick {
 	@Override
 	public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
 	                                  @NotNull ContextMenuItem item, boolean isChecked) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
 		if (item.getSelected() != null) {
 			item.setColor(mapActivity, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}
@@ -84,7 +83,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.shared_string_favorites) {
 			settings.SHOW_FAVORITES.set(isChecked);
 		} else if (itemId == R.string.layer_gpx_layer) {
-			GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
+			GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
 			if (selectedGpxHelper.isAnyGpxFileSelected()) {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
@@ -99,20 +98,13 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.layer_map) {
 			if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
-				mapActivity.getMyApplication().showToastMessage(R.string.map_online_plugin_is_not_installed);
+				app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			} else if (uiAdapter != null) {
 				mapActivity.getMapLayers().selectMapSourceLayer(mapActivity, item, uiAdapter);
 			}
 			return false;
 		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
 			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
-		} else if (itemId == R.string.relief_3d) {
-			if (Version.isPaidVersion(mapActivity.getMyApplication())) {
-				settings.ENABLE_3D_MAPS.set(isChecked);
-				item.setDescription(mapActivity.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
-			} else {
-				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
-			}
 		}
 		if (uiAdapter != null) {
 			uiAdapter.onDataSetChanged();

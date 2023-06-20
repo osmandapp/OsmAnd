@@ -86,6 +86,7 @@ public class ItemViewHolder {
 	private boolean nauticalPluginDisabled;
 	private boolean depthContoursPurchased;
 	private boolean weatherPurchased;
+	private boolean relief3dPurchased;
 
 	protected final DownloadActivity context;
 
@@ -172,6 +173,7 @@ public class ItemViewHolder {
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
 		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(app);
 		weatherPurchased = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		relief3dPurchased = InAppPurchaseHelper.isOsmAndProAvailable(app);
 	}
 
 	public void bindDownloadItem(DownloadItem downloadItem) {
@@ -473,7 +475,7 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((item.getType() == DEPTH_CONTOUR_FILE || item.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
-			} else if (type == GEOTIFF_FILE && !InAppPurchaseHelper.isOsmAndProAvailable(context.getMyApplication())) {
+			} else if (type == GEOTIFF_FILE && !relief3dPurchased) {
 				action = RightButtonAction.ASK_FOR_3D_RELIEF_PURCHASE;
 			}
 		}

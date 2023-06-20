@@ -50,7 +50,6 @@ public interface OsmAndCustomizationConstants {
 	String WIKIPEDIA_ID = SHOW_ITEMS_ID_SCHEME + "wikipedia";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
-	String MAP_ENABLE_3D_MAPS_ID = SHOW_ITEMS_ID_SCHEME + "enable_3d_maps";
 	String MAP_BORDERS_ID = SHOW_ITEMS_ID_SCHEME + "map_borders";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
@@ -63,6 +62,7 @@ public interface OsmAndCustomizationConstants {
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
 	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
 	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
+	String MAP_ENABLE_3D_MAPS_ID = SHOW_ITEMS_ID_SCHEME + "enable_3d_maps";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
