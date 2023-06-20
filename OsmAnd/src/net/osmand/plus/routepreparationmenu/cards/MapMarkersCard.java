@@ -37,7 +37,7 @@ public class MapMarkersCard extends MapBaseCard {
 		super(mapActivity);
 		markers = mapMarkers;
 
-		screenOrientation = app.getUIUtilities().getScreenOrientation();
+		screenOrientation = app.getUIUtilities().getScreenOrientation(mapActivity);
 
 		MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 		if (trackingUtils != null) {

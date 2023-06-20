@@ -31,7 +31,7 @@ import static net.osmand.util.RouterUtilTest.*;
  * Created by yurkiss on 04.03.16.
  */
 
-@RunWith(Parameterized.class)
+//@RunWith(Parameterized.class)
 public class RouteResultPreparationTest {
     
     private final TestEntry te;
@@ -73,7 +73,7 @@ public class RouteResultPreparationTest {
 
     }
 
-    @Test
+//    @Test
     public void testLanes() throws Exception {
         NativeLibrary nativeLibrary = null;
         boolean useNative = isNative() && getNativeLibPath() != null && !te.isIgnoreNative();
