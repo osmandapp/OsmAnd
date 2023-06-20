@@ -58,7 +58,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> generateHillshadeFrom3DMapsListener;
 
 	public final OsmandPreference<Boolean> ENABLE_HEIGHTMAP;
-	public final OsmandPreference<Boolean> ENABLE_3D_MAPS;
 	public final OsmandPreference<Boolean> DISABLE_VERTEX_HILLSHADE_3D;
 	public final OsmandPreference<Boolean> GENERATE_SLOPE_FROM_3D_MAPS;
 	public final OsmandPreference<Boolean> GENERATE_HILLSHADE_FROM_3D_MAPS;
@@ -74,7 +73,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
 		ENABLE_HEIGHTMAP = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
-		ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeGlobal().makeShared().cache();
 		DISABLE_VERTEX_HILLSHADE_3D = registerBooleanPreference("disable_vertex_hillshade_3d", true).makeGlobal().makeShared().cache();
 		GENERATE_SLOPE_FROM_3D_MAPS = registerBooleanPreference("generate_slope_from_3d_maps", true).makeGlobal().makeShared().cache();
 		GENERATE_HILLSHADE_FROM_3D_MAPS = registerBooleanPreference("generate_hillshade_from_3d_maps", true).makeGlobal().makeShared().cache();
@@ -85,7 +83,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				mapContext.recreateHeightmapProvider();
 			}
 		};
-		ENABLE_3D_MAPS.addListener(enable3DMapsListener);
+		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
 		disableVertexHillshade3DListener = change -> {
 			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
@@ -113,7 +111,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		enableHeightmapListener = change -> {
 			// Notify listeners of dependent preferences
-			if (ENABLE_3D_MAPS.get()) {
+			if (settings.ENABLE_3D_MAPS.get()) {
 				enable3DMapsListener.stateChanged(change);
 			}
 			if (DISABLE_VERTEX_HILLSHADE_3D.get()) {
@@ -265,7 +263,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	// If enabled, map should be rendered with elevation data (in 3D)
 	public boolean is3DMapsEnabled() {
-		return isHeightmapEnabled() && ENABLE_3D_MAPS.get();
+		return isHeightmapEnabled() && settings.ENABLE_3D_MAPS.get();
 	}
 
 	public boolean disableVertexHillshade3D() {

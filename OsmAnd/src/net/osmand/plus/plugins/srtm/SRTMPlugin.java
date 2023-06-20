@@ -1,17 +1,25 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.plus.chooseplan.button.PurchasingUtils.PROMO_PREFIX;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.graphics.drawable.Drawable;
-import android.view.ContextThemeWrapper;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -43,14 +51,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -336,6 +336,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			} else {
 				createContextMenuItems(adapter, mapActivity);
 			}
+			add3DReliefItem(adapter, mapActivity);
 		}
 	}
 
@@ -425,6 +426,44 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 
 		);
+	}
+
+	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+		if (app.useOpenGlRenderer()) {
+			ContextMenuItem item = new ContextMenuItem(MAP_ENABLE_3D_MAPS_ID)
+					.setTitleId(R.string.relief_3d, app)
+					.setIcon(R.drawable.ic_action_3d_relief)
+					.setListener((uiAdapter, view, contextItem, isChecked) -> {
+						if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+							settings.ENABLE_3D_MAPS.set(isChecked);
+							contextItem.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+							uiAdapter.onDataSetChanged();
+						} else {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
+						}
+						return true;
+					});
+
+			boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
+			if (!InAppPurchaseHelper.isOsmAndProAvailable(app)) {
+				boolean nightMode = isNightMode(activity, app);
+				item.setUseNaturalSecondIconColor(true);
+				item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+			} else {
+				item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
+				item.setSelected(enabled3DMode);
+				item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
+			}
+
+			ContextMenuItem terrainItem = adapter.getItemById(TERRAIN_ID);
+			if (terrainItem == null) {
+				terrainItem = adapter.getItemById(PROMO_PREFIX + TERRAIN_ID);
+			}
+			if (terrainItem != null) {
+				item.setOrder(terrainItem.getOrder());
+			}
+			adapter.addItem(item);
+		}
 	}
 
 	@Nullable

@@ -130,7 +130,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private void setupHeightmapRelatedPrefs() {
 		boolean heightmapEnabled = plugin.isHeightmapEnabled();
 
-		SwitchPreferenceEx enable3DMapsSwitch = findPreference(plugin.ENABLE_3D_MAPS.getId());
+		SwitchPreferenceEx enable3DMapsSwitch = findPreference(settings.ENABLE_3D_MAPS.getId());
 		enable3DMapsSwitch.setIconSpaceReserved(false);
 		enable3DMapsSwitch.setEnabled(heightmapEnabled);
 

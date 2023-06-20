@@ -53,13 +53,15 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/secondary_icon"
-            android:layout_width="@dimen/standard_icon_size"
-            android:layout_height="@dimen/standard_icon_size"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/content_padding"
-            tools:src="@drawable/ic_action_info_dark"/>
+	    <ImageView
+		    android:id="@+id/secondary_icon"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_vertical"
+		    android:layout_margin="@dimen/content_padding"
+		    android:minWidth="@dimen/standard_icon_size"
+		    android:minHeight="@dimen/standard_icon_size"
+		    tools:src="@drawable/ic_action_info_dark" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/toggle_item"

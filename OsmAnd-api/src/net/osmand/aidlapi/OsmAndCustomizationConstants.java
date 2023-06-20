@@ -62,6 +62,7 @@ public interface OsmAndCustomizationConstants {
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
 	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
 	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
+	String MAP_ENABLE_3D_MAPS_ID = SHOW_ITEMS_ID_SCHEME + "enable_3d_maps";
 
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
