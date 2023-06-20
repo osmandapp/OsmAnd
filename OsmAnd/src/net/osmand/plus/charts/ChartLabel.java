@@ -50,11 +50,16 @@ public class ChartLabel extends YAxisLabelView {
 			return;
 		}
 
-		LineData lineData = lineChart.getLineData();
-		if (lineData.getDataSetCount() == 1) {
+		LineData chartData = lineChart.getLineData();
+		int dataSetCount = chartData.getDataSetCount();
+		OrderedLineDataSet lastDataSet = dataSetCount > 0 ? (OrderedLineDataSet)chartData.getDataSetByIndex(dataSetCount - 1) : null;
+		if (lastDataSet != null && lastDataSet.getDataSetType() == GPXDataSetType.ALTITUDE_EXTRM) {
+			dataSetCount--;
+		}
+		if (dataSetCount == 1) {
 			String plainText = lineChart.getAxisLeft().getFormattedLabel(labelIndex);
 			SpannableString displayText = new SpannableString(plainText);
-			int color = lineData.getDataSetByIndex(0).getColor();
+			int color = chartData.getDataSetByIndex(0).getColor();
 			displayText.setSpan(new ForegroundColorSpan(color), 0, displayText.length(), SPAN_FLAG);
 			label.setText(displayText);
 		} else {
@@ -64,8 +69,8 @@ public class ChartLabel extends YAxisLabelView {
 					leftText, rightText);
 			SpannableString displayText = new SpannableString(combinedPlainText);
 
-			ILineDataSet startDataSet = getDataSet(lineData, true);
-			ILineDataSet endDataSet = getDataSet(lineData, false);
+			ILineDataSet startDataSet = getDataSet(chartData, true);
+			ILineDataSet endDataSet = getDataSet(chartData, false);
 			if (startDataSet != null && endDataSet != null) {
 				int edge = leftText.length() + 1;
 				displayText.setSpan(new ForegroundColorSpan(startDataSet.getColor()), 0, edge, SPAN_FLAG);
