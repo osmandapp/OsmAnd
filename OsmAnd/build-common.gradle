@@ -136,7 +136,7 @@ task validateTranslate {
 
 
 task downloadDefaultWikivoyage(type: Download) {
-	src 'https://creator.osmand.net/wikivoyage-gen/sqlite/Default_wikivoyage_2.travel.obf'
+	src 'https://creator.osmand.net/basemap/Default_wikivoyage_2.travel.obf'
 	dest 'assets/Default_wikivoyage.travel.obf'
 	onlyIfModified true
 }
@@ -149,7 +149,7 @@ task downloadWorldMiniBasemap(type: Download)  {
 
 task downloadDefaultWikivoyageAnt {
 	doLast {
-		ant.get(src: 'https://creator.osmand.net/wikivoyage-gen/sqlite/Default_wikivoyage_2.travel.obf', dest: 'assets/Default_wikivoyage.travel.obf', skipexisting: 'true')
+		ant.get(src: 'https://creator.osmand.net/basemap/Default_wikivoyage_2.travel.obf', dest: 'assets/Default_wikivoyage.travel.obf', skipexisting: 'true')
 	}
 }
 
