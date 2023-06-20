@@ -163,8 +163,8 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         val connectingStateBtnBgColorLight = R.color.active_color_secondary_light
         val connectingStateBtnBgColorDark = R.color.active_color_secondary_dark
 
-        val unpairedStateBtnBgColorLight = R.color.ble_unpaired_device_btn_bg
-        val unpairedStateBtnBgColorDark = R.color.ble_unpaired_device_btn_bg
+        val unpairedStateBtnBgColorLight = R.color.osmand_live_active
+        val unpairedStateBtnBgColorDark = R.color.osmand_live_active
 
         val lightResId: Int
         val darkResId: Int

@@ -1260,31 +1260,30 @@ public class AndroidUtils {
 	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
 
 	public static boolean requestBLEPermissions(@NonNull Activity activity) {
-		boolean hasNeededPermissions = true;
+		ArrayList<String> neededPermissions = new ArrayList<>();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[] {BLUETOOTH_SCAN}, BLUETOOTH_SCAN_REQUEST_CODE);
+				neededPermissions.add(BLUETOOTH_SCAN);
 			}
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_CONNECT)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(
-						activity,
-						new String[] {BLUETOOTH_CONNECT},
-						BLUETOOTH_CONNECT_REQUEST_CODE
-				);
+				neededPermissions.add(BLUETOOTH_CONNECT);
 			}
 		} else {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[] {BLUETOOTH}, BLUETOOTH_REQUEST_CODE);
+				neededPermissions.add(BLUETOOTH);
 			}
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
-				hasNeededPermissions = false;
-				ActivityCompat.requestPermissions(activity, new String[] {BLUETOOTH_ADMIN}, BLUETOOTH_ADMIN_REQUEST_CODE);
+				neededPermissions.add(BLUETOOTH_ADMIN);
 			}
 		}
-		return hasNeededPermissions;
+		if (!Algorithms.isEmpty(neededPermissions)) {
+			ActivityCompat.requestPermissions(
+					activity,
+					neededPermissions.toArray(new String[0]),
+					BLUETOOTH_CONNECT_REQUEST_CODE);
+
+		}
+		return Algorithms.isEmpty(neededPermissions);
 	}
 
 	@Nullable

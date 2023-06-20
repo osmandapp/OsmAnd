@@ -528,7 +528,5 @@
 	<color name="track_gradient_center">#D4EF32</color>
 	<color name="track_gradient_end">#F3374D</color>
 
-	<color name="ble_unpaired_device_btn_bg">#14CC70</color>
-	<color name="external_device_empty_icon_bg_night">#121212</color>
 	<color name="external_device_empty_icon_bg_day">#F3F4F6</color>
 </resources>
