@@ -15,6 +15,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,6 +38,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -84,7 +87,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 
-	private final OsmandSettings settings;
+	private final StateChangedListener<Boolean> enable3DMapsListener;
 
 	private TerrainLayer terrainLayer;
 
@@ -95,7 +98,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
-		settings = app.getSettings();
 
 		HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
 		HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
@@ -109,6 +111,14 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN_MODE = registerEnumStringPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
+
+		enable3DMapsListener = change -> {
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.recreateHeightmapProvider();
+			}
+		};
+		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 	}
 
 	@Override
@@ -440,6 +450,8 @@ public class SRTMPlugin extends OsmandPlugin {
 							contextItem.setSelected(isChecked);
 							contextItem.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
 							uiAdapter.onDataSetChanged();
+
+							app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(activity));
 						} else {
 							ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
 						}
