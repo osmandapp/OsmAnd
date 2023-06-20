@@ -36,7 +36,6 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class AvailableTracksFragment extends BaseTrackFolderFragment implements SelectionHelperProvider<TrackItem> {
 
@@ -141,7 +140,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (itemId == R.id.action_search) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this);
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, false);
 			}
 		}
 		if (itemId == R.id.action_menu) {
@@ -226,12 +225,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (activity != null) {
 			TrackFolderFragment.showInstance(activity.getSupportFragmentManager(), trackFolder, this);
 		}
-	}
-
-	public void saveTracksVisibility() {
-		Set<TrackItem> selectedTracks = selectionHelper.getSelectedItems();
-		app.getSelectedGpxHelper().saveTracksVisibility(selectedTracks, null);
-		updateVisibleTracks();
 	}
 
 	@Override

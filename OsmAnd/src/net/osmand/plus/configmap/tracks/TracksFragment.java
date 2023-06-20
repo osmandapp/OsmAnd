@@ -197,7 +197,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		searchButton.setOnClickListener((v) -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this);
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, true);
 			}
 		});
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());

@@ -102,7 +102,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), getTargetFragment());
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), getTargetFragment(), false);
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_search));
