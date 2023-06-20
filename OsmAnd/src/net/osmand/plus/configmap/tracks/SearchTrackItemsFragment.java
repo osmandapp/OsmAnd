@@ -47,6 +47,7 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -345,19 +346,17 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 			@Override
 			public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-				Fragment target = getTargetFragment();
-				FragmentManager manager = getFragmentManager();
-				if (target instanceof BaseTrackFolderFragment && manager != null) {
-					BaseTrackFolderFragment fragment = (BaseTrackFolderFragment) target;
-					TrackFolder trackFolder = fragment.getSelectedFolder();
-					TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
-
-					app.runInUIThread(() -> dismissAllowingStateLoss());
+				if (!selectionMode) {
+					showTracksSelection(trackItem);
 				}
 			}
 
 			@Override
 			public void onTrackItemOptionsSelected(@NonNull View view, @NonNull TrackItem trackItem) {
+				showItemOptionsMenu(view, trackItem);
+			}
+
+			private void showItemOptionsMenu(@NonNull View view, @NonNull TrackItem trackItem) {
 				Fragment targetFragment = getTargetFragment();
 				if (targetFragment instanceof BaseTrackFolderFragment) {
 					BaseTrackFolderFragment fragment = (BaseTrackFolderFragment) targetFragment;
@@ -369,7 +368,19 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 				}
 			}
 
-			public void showTrackOnMap(@NonNull TrackItem trackItem) {
+			private void showTracksSelection(@NonNull TrackItem trackItem) {
+				Fragment target = getTargetFragment();
+				FragmentManager manager = getFragmentManager();
+				if (target instanceof BaseTrackFolderFragment && manager != null) {
+					BaseTrackFolderFragment fragment = (BaseTrackFolderFragment) target;
+					TrackFolder trackFolder = fragment.getSelectedFolder();
+					TracksSelectionFragment.showInstance(manager, trackFolder, fragment, Collections.singleton(trackItem), null);
+
+					app.runInUIThread(() -> dismissAllowingStateLoss());
+				}
+			}
+
+			private void showTrackOnMap(@NonNull TrackItem trackItem) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					String screenName = getString(R.string.shared_string_tracks);

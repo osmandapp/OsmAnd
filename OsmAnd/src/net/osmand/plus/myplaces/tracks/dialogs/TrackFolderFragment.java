@@ -29,6 +29,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.util.Collections;
+import java.util.Set;
+
 public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackFolderFragment.class.getSimpleName();
@@ -170,18 +173,20 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-		showTracksSelection();
+		showTracksSelection(trackItem, null);
 	}
 
 	@Override
 	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
-		showTracksSelection();
+		showTracksSelection(null, group);
 	}
 
-	private void showTracksSelection() {
+	private void showTracksSelection(@Nullable TrackItem trackItem, @Nullable TracksGroup tracksGroup) {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null) {
-			foldersHelper.showTracksSelection(selectedFolder, this);
+			Set<TrackItem> trackItems = trackItem != null ? Collections.singleton(trackItem) : null;
+			Set<TracksGroup> tracksGroups = tracksGroup != null ? Collections.singleton(tracksGroup) : null;
+			foldersHelper.showTracksSelection(selectedFolder, this, trackItems, tracksGroups);
 		}
 	}
 

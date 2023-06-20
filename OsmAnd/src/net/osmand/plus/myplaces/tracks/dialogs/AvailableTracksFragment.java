@@ -35,6 +35,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AvailableTracksFragment extends BaseTrackFolderFragment implements SelectionHelperProvider<TrackItem> {
@@ -243,12 +244,12 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this);
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, Collections.singleton(trackItem), null);
 	}
 
 	@Override
 	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this);
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, null, Collections.singleton(group));
 	}
 
 	@Override
