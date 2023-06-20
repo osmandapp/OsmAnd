@@ -136,26 +136,26 @@ task validateTranslate {
 
 
 task downloadDefaultWikivoyage(type: Download) {
-	src 'https://builder.osmand.net/wikivoyage-gen/sqlite/Default_wikivoyage_2.travel.obf'
+	src 'https://creator.osmand.net/wikivoyage-gen/sqlite/Default_wikivoyage_2.travel.obf'
 	dest 'assets/Default_wikivoyage.travel.obf'
 	onlyIfModified true
 }
 
 task downloadWorldMiniBasemap(type: Download)  {
-	src 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf'
+	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
 	dest 'assets/World_basemap_mini.obf'
 	onlyIfModified true
 }
 
 task downloadDefaultWikivoyageAnt {
 	doLast {
-		ant.get(src: 'https://builder.osmand.net/wikivoyage-gen/sqlite/Default_wikivoyage_2.travel.obf', dest: 'assets/Default_wikivoyage.travel.obf', skipexisting: 'true')
+		ant.get(src: 'https://creator.osmand.net/wikivoyage-gen/sqlite/Default_wikivoyage_2.travel.obf', dest: 'assets/Default_wikivoyage.travel.obf', skipexisting: 'true')
 	}
 }
 
 task downloadWorldMiniBasemapAnt {
 	doLast {
-		ant.get(src: 'https://builder.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
+		ant.get(src: 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf', dest: 'assets/World_basemap_mini.obf', skipexisting: 'true')
 	}
 }
 
