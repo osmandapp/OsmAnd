@@ -436,6 +436,8 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setListener((uiAdapter, view, contextItem, isChecked) -> {
 						if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 							settings.ENABLE_3D_MAPS.set(isChecked);
+							contextItem.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							contextItem.setSelected(isChecked);
 							contextItem.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
 							uiAdapter.onDataSetChanged();
 						} else {
