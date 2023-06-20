@@ -42,6 +42,7 @@ import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
@@ -807,7 +808,8 @@ public class ChartUtils {
 				result.add(dataSet2);
 			}
 		}
-		if (firstType == GPXDataSetType.ALTITUDE || secondType == GPXDataSetType.ALTITUDE) {
+		if ((firstType == GPXDataSetType.ALTITUDE || secondType == GPXDataSetType.ALTITUDE)
+				&& PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
 			OrderedLineDataSet dataSet = getDataSet(app, chart, analysis, GPXDataSetType.ALTITUDE_EXTRM, calcWithoutGaps, false);
 			if (dataSet != null) {
 				result.add(dataSet);
