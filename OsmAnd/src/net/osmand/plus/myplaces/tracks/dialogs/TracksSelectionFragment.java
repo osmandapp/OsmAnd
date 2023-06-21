@@ -30,7 +30,9 @@ import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
@@ -43,6 +45,11 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 
 	private TextView toolbarTitle;
 	private ImageButton selectionButton;
+
+	@Nullable
+	private Set<TrackItem> preselectedTrackItems;
+	@Nullable
+	private Set<TracksGroup> preselectedTracksGroups;
 
 	@Override
 	@ColorRes
@@ -80,8 +87,15 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		itemsSelectionHelper.clearSelectedItems();
 		groupsSelectionHelper.clearSelectedItems();
 
-		itemsSelectionHelper.setAllItems(rootFolder.getFlattenedTrackItems());
+		itemsSelectionHelper.setAllItems(rootFolder.getTrackItems());
 		groupsSelectionHelper.setAllItems(rootFolder.getSubFolders());
+
+		if (!Algorithms.isEmpty(preselectedTrackItems)) {
+			itemsSelectionHelper.setSelectedItems(preselectedTrackItems);
+		}
+		if (!Algorithms.isEmpty(preselectedTracksGroups)) {
+			groupsSelectionHelper.setSelectedItems(preselectedTracksGroups);
+		}
 	}
 
 	@Nullable
@@ -237,6 +251,21 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		dismiss();
 	}
 
+	@Override
+	public void onFileMove(@Nullable File src, @NonNull File dest) {
+		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
+		if (foldersHelper != null) {
+			Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
+			Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
+
+			foldersHelper.moveTracks(trackItems, tracksGroups, dest, result -> {
+				reloadTracks();
+				dismiss();
+				return false;
+			});
+		}
+	}
+
 	@NonNull
 	@Override
 	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
@@ -251,9 +280,13 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 		return selectionHelper;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder trackFolder,
+	                                @Nullable Fragment target, @Nullable Set<TrackItem> trackItems,
+	                                @Nullable Set<TracksGroup> tracksGroups) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksSelectionFragment fragment = new TracksSelectionFragment();
+			fragment.preselectedTrackItems = trackItems;
+			fragment.preselectedTracksGroups = tracksGroups;
 			fragment.setRetainInstance(true);
 			fragment.setRootFolder(trackFolder);
 			fragment.setSelectedFolder(trackFolder);

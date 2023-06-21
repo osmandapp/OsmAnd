@@ -19,7 +19,7 @@ public class PointsAttributesData<T extends PointAttribute> {
 	}
 
 	public List<T> getAttributes() {
-		return Collections.unmodifiableList(attributes);
+		return attributes;
 	}
 
 	public T getPointAttribute(int index) {

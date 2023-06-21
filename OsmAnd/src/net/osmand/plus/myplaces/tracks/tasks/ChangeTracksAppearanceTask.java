@@ -49,6 +49,8 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 				if (item != null) {
 					updateTrackAppearance(item);
 				}
+			} else if (trackItem.isShowCurrentTrack()) {
+				updateCurrentTrackAppearance();
 			}
 		}
 		return null;
@@ -69,6 +71,15 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		if (selectedGpxFile != null) {
 			selectedGpxFile.resetSplitProcessed();
 		}
+	}
+
+	private void updateCurrentTrackAppearance() {
+		settings.CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
+		settings.CURRENT_TRACK_COLORING_TYPE.set(trackDrawInfo.getColoringType());
+		settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(trackDrawInfo.getRouteInfoAttribute());
+		settings.CURRENT_TRACK_WIDTH.set(trackDrawInfo.getWidth());
+		settings.CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
+		settings.CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
 	}
 
 	@NonNull

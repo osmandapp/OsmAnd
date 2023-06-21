@@ -24,7 +24,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
@@ -60,7 +59,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 			items.add(dividerItem);
 
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin != null && plugin.isHeightmapEnabled()) {
+			if (plugin != null && plugin.isHeightmapAllowed()) {
 				createOfflineItem();
 			} else {
 				createOnlineItem();

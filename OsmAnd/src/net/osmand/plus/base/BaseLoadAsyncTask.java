@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 
 import java.lang.ref.WeakReference;
@@ -16,6 +17,7 @@ import java.lang.ref.WeakReference;
 public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
 	protected OsmandApplication app;
+	protected OsmandSettings settings;
 	protected WeakReference<FragmentActivity> activityRef;
 	protected ProgressDialog progress;
 	private final OnCancelListener cancelListener = dialog -> cancel(false);
@@ -23,6 +25,7 @@ public abstract class BaseLoadAsyncTask<Params, Progress, Result> extends AsyncT
 
 	public BaseLoadAsyncTask(@NonNull FragmentActivity activity) {
 		app = (OsmandApplication) activity.getApplicationContext();
+		settings = app.getSettings();
 		activityRef = new WeakReference<>(activity);
 	}
 

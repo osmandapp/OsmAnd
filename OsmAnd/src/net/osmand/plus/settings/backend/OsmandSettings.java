@@ -834,6 +834,8 @@ public class OsmandSettings {
 		return false;
 	}
 
+	public final CommonPreference<Boolean> ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeProfile().makeShared().cache();
+
 	public final CommonPreference<CompassVisibility> COMPASS_VISIBILITY = new EnumStringPreference<CompassVisibility>(this, "compass_visibility", CompassVisibility.VISIBLE_IF_MAP_ROTATED, CompassVisibility.values()) {
 
 		@Override

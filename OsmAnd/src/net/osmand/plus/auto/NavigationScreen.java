@@ -46,7 +46,7 @@ import net.osmand.util.Algorithms;
 import java.util.List;
 
 public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implements SurfaceRendererCallback,
-		                                                                                   IRouteInformationListener, DefaultLifecycleObserver {
+		IRouteInformationListener, DefaultLifecycleObserver {
 
 	@NonNull
 	private final NavigationListener listener;
@@ -122,6 +122,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	 * Updates the navigation screen with the next instruction.
 	 */
 	public void updateTrip(
+			boolean navigating,
 			boolean rerouting,
 			boolean arrived,
 			@Nullable List<Destination> destinations,
@@ -131,6 +132,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 			boolean shouldShowNextStep,
 			boolean shouldShowLanes,
 			@Nullable CarIcon junctionImage) {
+		this.navigating = navigating;
 		this.rerouting = rerouting;
 		this.arrived = arrived;
 		this.destinations = destinations;
@@ -146,6 +148,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	}
 
 	public void stopTrip() {
+		navigating = false;
 		rerouting = false;
 		arrived = false;
 		destinations = null;
@@ -161,7 +164,8 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	}
 
 	private void updateNavigation() {
-		adjustMapPosition(true);
+		listener.updateNavigation(navigating);
+		adjustMapPosition(navigating);
 	}
 
 	private void adjustMapPosition(boolean shiftMapIfSessionRunning) {
@@ -188,11 +192,19 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 						.setOnClickListener(this::compassClick)
 						.build());
 		actionStripBuilder.addAction(settingsAction);
-		actionStripBuilder.addAction(
-				new Action.Builder()
-						.setTitle(getApp().getString(R.string.shared_string_control_stop))
-						.setOnClickListener(this::stopNavigation)
-						.build());
+		if (navigating) {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setTitle(getApp().getString(R.string.shared_string_control_stop))
+							.setOnClickListener(this::stopNavigation)
+							.build());
+		} else {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_actions_menu)).build())
+							.setOnClickListener(this::goBack)
+							.build());
+		}
 		builder.setActionStrip(actionStripBuilder.build());
 
 		// Set the map action strip with the pan and zoom buttons.
@@ -261,50 +273,52 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 			invalidate();
 		});
 
-		if (destinationTravelEstimate != null) {
-			builder.setDestinationTravelEstimate(destinationTravelEstimate);
-		}
-		if (isRerouting()) {
-			builder.setNavigationInfo(new RoutingInfo.Builder().setLoading(true).build());
-		} else if (arrived) {
-			MessageInfo messageInfo = new MessageInfo.Builder(
-					getCarContext().getString(R.string.arrived_at_destination)).build();
-			builder.setNavigationInfo(messageInfo);
-		} else if (!Algorithms.isEmpty(steps)) {
-			RoutingInfo.Builder info = new RoutingInfo.Builder();
-			Step firstStep = steps.get(0);
-			Step.Builder currentStep = new Step.Builder();
-			CarText cue = firstStep.getCue();
-			if (cue != null) {
-				currentStep.setCue(cue.toCharSequence());
+		if (navigating) {
+			if (destinationTravelEstimate != null) {
+				builder.setDestinationTravelEstimate(destinationTravelEstimate);
 			}
-			Maneuver maneuver = firstStep.getManeuver();
-			if (maneuver != null) {
-				currentStep.setManeuver(maneuver);
-			}
-			CarText road = firstStep.getRoad();
-			if (road != null) {
-				currentStep.setRoad(road.toCharSequence());
-			}
-			if (shouldShowLanes) {
-				for (Lane lane : firstStep.getLanes()) {
-					currentStep.addLane(lane);
+			if (isRerouting()) {
+				builder.setNavigationInfo(new RoutingInfo.Builder().setLoading(true).build());
+			} else if (arrived) {
+				MessageInfo messageInfo = new MessageInfo.Builder(
+						getCarContext().getString(R.string.arrived_at_destination)).build();
+				builder.setNavigationInfo(messageInfo);
+			} else if (!Algorithms.isEmpty(steps)) {
+				RoutingInfo.Builder info = new RoutingInfo.Builder();
+				Step firstStep = steps.get(0);
+				Step.Builder currentStep = new Step.Builder();
+				CarText cue = firstStep.getCue();
+				if (cue != null) {
+					currentStep.setCue(cue.toCharSequence());
 				}
-				CarIcon lanesImage = firstStep.getLanesImage();
-				if (lanesImage != null) {
-					currentStep.setLanesImage(lanesImage);
+				Maneuver maneuver = firstStep.getManeuver();
+				if (maneuver != null) {
+					currentStep.setManeuver(maneuver);
 				}
-			}
-			if (stepRemainingDistance != null) {
-				info.setCurrentStep(currentStep.build(), stepRemainingDistance);
-				if (shouldShowNextStep && steps.size() > 1) {
-					info.setNextStep(steps.get(1));
+				CarText road = firstStep.getRoad();
+				if (road != null) {
+					currentStep.setRoad(road.toCharSequence());
 				}
+				if (shouldShowLanes) {
+					for (Lane lane : firstStep.getLanes()) {
+						currentStep.addLane(lane);
+					}
+					CarIcon lanesImage = firstStep.getLanesImage();
+					if (lanesImage != null) {
+						currentStep.setLanesImage(lanesImage);
+					}
+				}
+				if (stepRemainingDistance != null) {
+					info.setCurrentStep(currentStep.build(), stepRemainingDistance);
+					if (shouldShowNextStep && steps.size() > 1) {
+						info.setNextStep(steps.get(1));
+					}
+				}
+				if (junctionImage != null) {
+					info.setJunctionImage(junctionImage);
+				}
+				builder.setNavigationInfo(info.build());
 			}
-			if (junctionImage != null) {
-				info.setJunctionImage(junctionImage);
-			}
-			builder.setNavigationInfo(info.build());
 		}
 		return builder.build();
 	}
@@ -328,9 +342,8 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		getApp().getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
 	}
 
-	private void openSearch() {
-		getScreenManager().pushForResult(new SearchScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> {
-		});
+	private void goBack() {
+		finish();
 		// Test
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });
 	}

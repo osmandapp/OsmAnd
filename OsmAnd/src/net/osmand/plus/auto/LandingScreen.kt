@@ -103,26 +103,41 @@ class LandingScreen(
 
     private fun onCategoryClick(category: PlaceCategory) {
         when (category) {
+            PlaceCategory.FREE_MODE ->
+                app.carNavigationSession?.let {
+                    screenManager.push(
+                        NavigationScreen(
+                            carContext,
+                            settingsAction,
+                            it,
+                            surfaceRenderer
+                        ))
+                }
+
             PlaceCategory.FAVORITES -> screenManager.push(
                 FavoriteGroupsScreen(
                     carContext,
                     settingsAction,
                     surfaceRenderer))
+
             PlaceCategory.HISTORY -> screenManager.push(
                 HistoryScreen(
                     carContext,
                     settingsAction,
                     surfaceRenderer))
+
             PlaceCategory.MAP_MARKERS -> screenManager.push(
                 MapMarkersScreen(
                     carContext,
                     settingsAction,
                     surfaceRenderer))
+
             PlaceCategory.POI -> screenManager.push(
                 POICategoriesScreen(
                     carContext,
                     settingsAction,
                     surfaceRenderer))
+
             PlaceCategory.TRACKS -> screenManager.push(
                 TracksFoldersScreen(
                     carContext,
@@ -134,6 +149,7 @@ class LandingScreen(
     internal enum class PlaceCategory(
         @DrawableRes val iconId: Int,
         @StringRes val titleId: Int) {
+        FREE_MODE(R.drawable.ic_map, R.string.free_mode),
         HISTORY(R.drawable.ic_action_history, R.string.shared_string_history),
         POI(R.drawable.ic_action_info_dark, R.string.poi_categories),
         FAVORITES(R.drawable.ic_action_favorite, R.string.shared_string_favorites),

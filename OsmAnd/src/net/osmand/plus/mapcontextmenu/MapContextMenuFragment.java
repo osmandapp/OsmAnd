@@ -958,20 +958,14 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomIn() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			OsmandMap osmandMap = app.getOsmandMap();
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
 			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
-			if (!containsLatLon) {
+			if (containsLatLon) {
+				setCustomMapRatio();
+			} else {
 				restoreCustomMapRatio();
 			}
-			if (map.isZooming() && (map.hasCustomMapRatio() || !containsLatLon)) {
-				osmandMap.changeZoom(2, System.currentTimeMillis());
-			} else {
-				if (containsLatLon) {
-					setCustomMapRatio();
-				}
-				osmandMap.changeZoom(1, System.currentTimeMillis());
-			}
+			map.zoomIn();
 		}
 	}
 
@@ -985,7 +979,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				restoreCustomMapRatio();
 			}
-			app.getOsmandMap().changeZoom(-1, System.currentTimeMillis());
+			map.zoomOut();
 		}
 	}
 

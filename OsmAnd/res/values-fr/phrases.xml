@@ -4578,4 +4578,6 @@
     <string name="poi_lock_name">Nom de l\'écluse</string>
     <string name="poi_lock_ref">Référence d\'une écluse</string>
     <string name="poi_lock_height">Hauteur d\'une écluse</string>
+    <string name="poi_bridge_name">Nom du pont</string>
+    <string name="poi_tunnel_name">Nom du tunnel</string>
 </resources>

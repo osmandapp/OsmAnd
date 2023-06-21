@@ -4583,4 +4583,8 @@
     <string name="poi_cemt_0">0</string>
     <string name="poi_cemt_i">I</string>
     <string name="poi_surface_chipseal">Sigiliu de cip</string>
+    <string name="poi_vending_machine_fuel">Da</string>
+    <string name="poi_vending_machine_fuel_filter">Distribuitoare automate de combustibil; Mașină de distribuție de combustibil</string>
+    <string name="poi_tunnel_name">Denumirea tunelului</string>
+    <string name="poi_bridge_name">Numele podului</string>
 </resources>

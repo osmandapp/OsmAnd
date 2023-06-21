@@ -12,18 +12,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
@@ -34,29 +30,16 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
-	private static final String SHOW_HEIGHTMAP_PROMO = "show_heightmaps_promo";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
 	private OsmandDevelopmentPlugin plugin;
-	private StateChangedListener<Boolean> enableHeightmapListener;
 	private LocationSimulationListener simulationListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-
-		enableHeightmapListener = change -> {
-			MapActivity mapActivity = getMapActivity();
-			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
-			if (mapActivity != null) {
-				setupHeightmapRelatedPrefs();
-				if (mapInfoLayer != null) {
-					mapInfoLayer.recreateAllControls(mapActivity);
-				}
-			}
-		};
 		simulationListener = simulating -> app.runInUIThread(this::setupSimulateYourLocationPref);
 	}
 
@@ -67,7 +50,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 		Preference heightmapCategoryPref = findPreference("heightmap");
 		heightmapCategoryPref.setIconSpaceReserved(false);
-		setupEnableHeightmapPref();
 		setupHeightmapRelatedPrefs();
 
 		Preference safeCategory = findPreference("safe");
@@ -117,34 +99,20 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		safeMode.setIconSpaceReserved(false);
 	}
 
-	private void setupEnableHeightmapPref() {
-		SwitchPreferenceEx testHeightmapSwitch = findPreference(plugin.ENABLE_HEIGHTMAP.getId());
-		testHeightmapSwitch.setIconSpaceReserved(false);
-		testHeightmapSwitch.setVisible(plugin.isHeightmapAllowed());
-
-		Preference showHeightmapsPromo = findPreference(SHOW_HEIGHTMAP_PROMO);
-		showHeightmapsPromo.setIconSpaceReserved(false);
-		showHeightmapsPromo.setVisible(!plugin.isHeightmapPurchased());
-	}
-
 	private void setupHeightmapRelatedPrefs() {
-		boolean heightmapEnabled = plugin.isHeightmapEnabled();
-
-		SwitchPreferenceEx enable3DMapsSwitch = findPreference(plugin.ENABLE_3D_MAPS.getId());
-		enable3DMapsSwitch.setIconSpaceReserved(false);
-		enable3DMapsSwitch.setEnabled(heightmapEnabled);
+		boolean heightmapAllowed = plugin.isHeightmapAllowed();
 
 		SwitchPreferenceEx disableVertexHillshadeSwitch = findPreference(plugin.DISABLE_VERTEX_HILLSHADE_3D.getId());
 		disableVertexHillshadeSwitch.setIconSpaceReserved(false);
-		disableVertexHillshadeSwitch.setEnabled(heightmapEnabled);
+		disableVertexHillshadeSwitch.setEnabled(heightmapAllowed);
 
 		SwitchPreferenceEx generateSlopeFrom3DMapsSwitch = findPreference(plugin.GENERATE_SLOPE_FROM_3D_MAPS.getId());
 		generateSlopeFrom3DMapsSwitch.setIconSpaceReserved(false);
-		generateSlopeFrom3DMapsSwitch.setEnabled(heightmapEnabled);
+		generateSlopeFrom3DMapsSwitch.setEnabled(heightmapAllowed);
 
 		SwitchPreferenceEx generateHillshadeFrom3DMapsSwitch = findPreference(plugin.GENERATE_HILLSHADE_FROM_3D_MAPS.getId());
 		generateHillshadeFrom3DMapsSwitch.setIconSpaceReserved(false);
-		generateHillshadeFrom3DMapsSwitch.setEnabled(heightmapEnabled);
+		generateHillshadeFrom3DMapsSwitch.setEnabled(heightmapAllowed);
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -282,12 +250,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			if (fragmentManager != null) {
 				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
 			}
-		} else if (SHOW_HEIGHTMAP_PROMO.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
-			}
-			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -321,14 +283,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		plugin.ENABLE_HEIGHTMAP.addListener(enableHeightmapListener);
 		app.getLocationProvider().getLocationSimulation().addSimulationListener(simulationListener);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		plugin.ENABLE_HEIGHTMAP.removeListener(enableHeightmapListener);
 		app.getLocationProvider().getLocationSimulation().removeSimulationListener(simulationListener);
 	}
 

@@ -292,9 +292,9 @@ public class ConfigureMapMenu {
 				.setIcon(getIconIdForAttr(attrName))
 				.setSelected(pref.get())
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
-				.setLayout(R.layout.configure_map_item_with_additional_right_desc)
-				.setDescription(pref.get() ? app.getString(MtbRoutesFragment.getSelectedClassification(settings).nameId) : null)
-				.setSecondaryDescription(pref.get() ? null : app.getString(R.string.shared_string_off))
+				//.setLayout(R.layout.configure_map_item_with_additional_right_desc)
+//				.setSecondaryDescription(pref.get() ? null : app.getString(R.string.shared_string_off))
+				.setDescription(pref.get() ? app.getString(MtbRoutesFragment.getSelectedClassification(settings).nameId) : app.getString(R.string.shared_string_disabled))
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					activity.getDashboard().setDashboardVisibility(true, DashboardType.MTB_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 					return false;
@@ -444,7 +444,7 @@ public class ConfigureMapMenu {
 		attrs.put(SHOW_CYCLE_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
 		attrs.put(SHOW_MTB_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
 		attrs.put(HIKING_ROUTES_OSMC_ATTR, RendererRegistry.DEFAULT_RENDER);
-		attrs.put(ALPINE_HIKING_ATTR, RendererRegistry.DEFAULT_RENDER);
+		//attrs.put(ALPINE_HIKING_ATTR, RendererRegistry.DEFAULT_RENDER);
 		attrs.put(PISTE_ROUTES_ATTR, RendererRegistry.WINTER_SKI_RENDER);
 		attrs.put(HORSE_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
 		attrs.put(WHITE_WATER_SPORTS_ATTR, RendererRegistry.DEFAULT_RENDER);

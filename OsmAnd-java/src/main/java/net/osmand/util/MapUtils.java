@@ -96,7 +96,7 @@ public class MapUtils {
 		return getDistance(l.getLatitude(), l.getLongitude(), latitude, longitude);
 	}
 
-	private static double scalarMultiplication(double xA, double yA, double xB, double yB, double xC, double yC) {
+	public static double scalarMultiplication(double xA, double yA, double xB, double yB, double xC, double yC) {
 		// Scalar multiplication between (AB, AC)
 		return (xB - xA) * (xC - xA) + (yB - yA) * (yC - yA);
 	}

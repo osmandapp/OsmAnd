@@ -488,10 +488,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void optionsMenuFragment(FragmentActivity activity, Fragment fragment, Set<TrackItem> selectedItems, List<PopUpMenuItem> items) {
+		String title = app.getString(R.string.upload_to_openstreetmap);
 		items.add(new Builder(app)
-				.setTitleId(R.string.upload_to_openstreetmap)
+				.setTitle(title)
 				.setIcon(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_upload_to_openstreetmap))
-				.setOnClickListener(v -> showUploadConfirmationDialog(activity, fragment, selectedItems))
+				.setOnClickListener(v -> {
+					if (selectedItems.isEmpty()) {
+						String message = app.getString(R.string.local_index_no_items_to_do, title.toLowerCase());
+						app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
+					} else {
+						showUploadConfirmationDialog(activity, fragment, selectedItems);
+					}
+				})
 				.create()
 		);
 	}

@@ -23,7 +23,8 @@ import java.util.*
 class SearchTracksAdapter(
     private val app: OsmandApplication,
     private val trackItems: List<TrackItem>,
-    private val nightMode: Boolean
+    private val nightMode: Boolean,
+    private val selectionMode: Boolean
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
@@ -51,9 +52,13 @@ class SearchTracksAdapter(
 
     fun setTracksSortMode(sortMode: TracksSortMode) {
         this.sortMode = sortMode
+        sortItems()
+        notifyDataSetChanged()
+    }
+
+    private fun sortItems() {
         val latLon = app.mapViewTrackingUtilities.defaultLocation
         Collections.sort(items, TracksComparator(sortMode, latLon))
-        notifyDataSetChanged()
     }
 
     fun setSortTracksListener(sortTracksListener: SortTracksListener?) {
@@ -85,6 +90,7 @@ class SearchTracksAdapter(
         } else {
             items.addAll(filteredItems)
         }
+        sortItems()
         notifyDataSetChanged()
     }
 
@@ -131,7 +137,7 @@ class SearchTracksAdapter(
         if (holder is TrackViewHolder) {
             val item = items[position] as TrackItem
             val showDivider = position != itemCount - 1
-            holder.bindView(sortMode, item, showDivider, true, true)
+            holder.bindView(sortMode, item, showDivider, true, selectionMode)
         } else if (holder is NoVisibleTracksViewHolder) {
             holder.bindView()
         } else if (holder is EmptyTracksViewHolder) {

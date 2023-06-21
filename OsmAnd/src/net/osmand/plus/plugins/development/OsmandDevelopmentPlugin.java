@@ -1,7 +1,18 @@
 package net.osmand.plus.plugins.development;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
@@ -38,27 +49,12 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
-
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private final StateChangedListener<Boolean> enableHeightmapListener;
-	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> disableVertexHillshade3DListener;
 	private final StateChangedListener<Boolean> generateSlopeFrom3DMapsListener;
 	private final StateChangedListener<Boolean> generateHillshadeFrom3DMapsListener;
 
-	public final OsmandPreference<Boolean> ENABLE_HEIGHTMAP;
-	public final OsmandPreference<Boolean> ENABLE_3D_MAPS;
 	public final OsmandPreference<Boolean> DISABLE_VERTEX_HILLSHADE_3D;
 	public final OsmandPreference<Boolean> GENERATE_SLOPE_FROM_3D_MAPS;
 	public final OsmandPreference<Boolean> GENERATE_HILLSHADE_FROM_3D_MAPS;
@@ -73,19 +69,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
-		ENABLE_HEIGHTMAP = registerBooleanPreference("show_heightmaps", false).makeGlobal().makeShared().cache();
-		ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeGlobal().makeShared().cache();
 		DISABLE_VERTEX_HILLSHADE_3D = registerBooleanPreference("disable_vertex_hillshade_3d", true).makeGlobal().makeShared().cache();
 		GENERATE_SLOPE_FROM_3D_MAPS = registerBooleanPreference("generate_slope_from_3d_maps", true).makeGlobal().makeShared().cache();
 		GENERATE_HILLSHADE_FROM_3D_MAPS = registerBooleanPreference("generate_hillshade_from_3d_maps", true).makeGlobal().makeShared().cache();
-
-		enable3DMapsListener = change -> {
-			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-			if (mapContext != null) {
-				mapContext.recreateHeightmapProvider();
-			}
-		};
-		ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 
 		disableVertexHillshade3DListener = change -> {
 			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
@@ -110,25 +96,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		};
 		GENERATE_HILLSHADE_FROM_3D_MAPS.addListener(generateHillshadeFrom3DMapsListener);
-
-		enableHeightmapListener = change -> {
-			// Notify listeners of dependent preferences
-			if (ENABLE_3D_MAPS.get()) {
-				enable3DMapsListener.stateChanged(change);
-			}
-			if (DISABLE_VERTEX_HILLSHADE_3D.get()) {
-				disableVertexHillshade3DListener.stateChanged(change);
-			}
-			if (GENERATE_SLOPE_FROM_3D_MAPS.get()) {
-				generateSlopeFrom3DMapsListener.stateChanged(change);
-			}
-			if (GENERATE_HILLSHADE_FROM_3D_MAPS.get()) {
-				generateHillshadeFrom3DMapsListener.stateChanged(change);
-			}
-
-			app.getDownloadThread().runReloadIndexFilesSilent();
-		};
-		ENABLE_HEIGHTMAP.addListener(enableHeightmapListener);
 	}
 
 	@Override
@@ -256,28 +223,21 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return quickActionTypes;
 	}
 
-	// If enabled:
-	// * heightmap-related setting should be available for configuration
-	// * heightmaps should be available for downloads
-	public boolean isHeightmapEnabled() {
-		return isHeightmapAllowed() && ENABLE_HEIGHTMAP.get();
-	}
-
 	// If enabled, map should be rendered with elevation data (in 3D)
 	public boolean is3DMapsEnabled() {
-		return isHeightmapEnabled() && ENABLE_3D_MAPS.get();
+		return isHeightmapAllowed() && settings.ENABLE_3D_MAPS.get();
 	}
 
 	public boolean disableVertexHillshade3D() {
-		return isHeightmapEnabled() && DISABLE_VERTEX_HILLSHADE_3D.get();
+		return isHeightmapAllowed() && DISABLE_VERTEX_HILLSHADE_3D.get();
 	}
 
 	public boolean generateSlopeFrom3DMaps() {
-		return isHeightmapEnabled() && GENERATE_SLOPE_FROM_3D_MAPS.get();
+		return isHeightmapAllowed() && GENERATE_SLOPE_FROM_3D_MAPS.get();
 	}
 
 	public boolean generateHillshadeFrom3DMaps() {
-		return isHeightmapEnabled() && GENERATE_HILLSHADE_FROM_3D_MAPS.get();
+		return isHeightmapAllowed() && GENERATE_HILLSHADE_FROM_3D_MAPS.get();
 	}
 
 	public boolean isHeightmapAllowed() {
