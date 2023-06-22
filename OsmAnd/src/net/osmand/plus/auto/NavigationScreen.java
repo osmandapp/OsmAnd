@@ -164,7 +164,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	}
 
 	private void updateNavigation() {
-		listener.updateNavigation(navigating);
 		adjustMapPosition(navigating);
 	}
 

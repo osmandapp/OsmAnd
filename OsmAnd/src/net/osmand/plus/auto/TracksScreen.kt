@@ -56,7 +56,6 @@ class TracksScreen(
         }
 
         override fun onPostExecute(result: Unit?) {
-            super.onPostExecute(result)
             invalidate()
         }
     }

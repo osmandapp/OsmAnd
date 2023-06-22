@@ -67,7 +67,6 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 			public void onDestroy(@NonNull LifecycleOwner owner) {
 				DefaultLifecycleObserver.super.onDestroy(owner);
 				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(null);
-				getApp().getOsmandMap().refreshMap();
 			}
 		});
 	}
@@ -96,7 +95,6 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		int favoritesPointsSize = favoritesPoints.size();
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
 		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
-		getApp().getOsmandMap().refreshMap();
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));

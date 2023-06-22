@@ -83,6 +83,23 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected PointI movableObject;
 	protected int pointsOrder = 0;
 
+	public static class CustomMapObjects<T> {
+		protected List<T> customMapObjects;
+
+		@NonNull
+		public List<T> getMapObjects() {
+			if (customMapObjects == null) {
+				return new ArrayList<>();
+			} else {
+				return customMapObjects;
+			}
+		}
+
+		public void setCustomMapObjects(List<T> customMapObjects) {
+			this.customMapObjects = customMapObjects;
+		}
+	}
+
 	public enum MapGestureType {
 		DOUBLE_TAP_ZOOM_IN,
 		DOUBLE_TAP_ZOOM_CHANGE,
@@ -961,20 +978,4 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
-	public static class CustomMapObjects<T> {
-		protected List<T> customMapObjects;
-
-		@NonNull
-		public List<T> getMapObjects() {
-			if (customMapObjects == null) {
-				return new ArrayList<>();
-			} else {
-				return customMapObjects;
-			}
-		}
-
-		public void setCustomMapObjects(List<T> customMapObjects) {
-			this.customMapObjects = customMapObjects;
-		}
-	}
 }

@@ -129,49 +129,23 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean textVisible = isTextVisible();
 		boolean textVisibleChanged = this.textVisible != textVisible;
 		this.textVisible = textVisible;
-		boolean showFavorites = this.settings.SHOW_FAVORITES.get();
+		boolean showFavorites = this.settings.SHOW_FAVORITES.get() || customObjectsDelegate != null;
 		boolean showFavoritesChanged = !Algorithms.objectEquals(this.showFavorites, showFavorites);
 		this.showFavorites = showFavorites;
 		long favoritesChangedTime = favouritesHelper.getLastModifiedTime();
 		boolean favoritesChanged = this.favoritesChangedTime != favoritesChangedTime;
 		this.favoritesChangedTime = favoritesChangedTime;
 
-		if (customObjectsDelegate != null) {
-			MapRendererView mapRenderer = getMapRenderer();
-			List<FavouritePoint> points = customObjectsDelegate.getMapObjects();
-			if (mapRenderer != null) {
-				if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || textScaleChanged || textVisibleChanged) {
-					clearFavorites();
-					favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getPointsOrder(), isTextVisible(),
-							getTextStyle(textScale), view.getDensity());
-					showFavoritePoints(textScale, true, points);
-					favoritesMapLayerProvider.drawSymbols(mapRenderer);
-					mapRendererChanged = false;
-				}
-			} else {
-				cache.clear();
-				float iconSize = getIconSize(view.getApplication());
-				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
-				QuadRect latLonBounds = tileBox.getLatLonBounds();
-				List<LatLon> fullObjectsLatLon = new ArrayList<>();
-				List<LatLon> smallObjectsLatLon = new ArrayList<>();
-				drawPoints(points, latLonBounds, false, tileBox, boundIntersections, iconSize, canvas, fullObjectsLatLon, smallObjectsLatLon);
-				this.fullObjectsLatLon = fullObjectsLatLon;
-				this.smallObjectsLatLon = smallObjectsLatLon;
-				if (textVisible) {
-					textLayer.putData(this, cache);
-				}
-			}
-		} else if (hasMapRenderer()) {
+		if (hasMapRenderer()) {
 			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
-					|| favoritesChanged || textScaleChanged || textVisibleChanged) {
+					    || favoritesChanged || textScaleChanged || textVisibleChanged || customObjectsDelegate != null) {
 				showFavorites();
 				mapRendererChanged = false;
 			}
 		} else {
 			cache.clear();
 			if (showFavorites && favouritesHelper.isFavoritesLoaded()) {
-				if (tileBox.getZoom() >= START_ZOOM) {
+				if (tileBox.getZoom() >= START_ZOOM || customObjectsDelegate != null) {
 					float iconSize = getIconSize(view.getApplication());
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
@@ -179,9 +153,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					QuadRect latLonBounds = tileBox.getLatLonBounds();
 					List<LatLon> fullObjectsLatLon = new ArrayList<>();
 					List<LatLon> smallObjectsLatLon = new ArrayList<>();
-					for (FavoriteGroup group : getFavoriteGroups()) {
-						drawPoints(group.getPoints(), latLonBounds, isSynced(group), tileBox, boundIntersections, iconSize, canvas,
+					if(customObjectsDelegate != null){
+						drawPoints(customObjectsDelegate.getMapObjects(), latLonBounds, false, tileBox, boundIntersections, iconSize, canvas,
 								fullObjectsLatLon, smallObjectsLatLon);
+					} else {
+						for (FavoriteGroup group : getFavoriteGroups()) {
+							drawPoints(group.getPoints(), latLonBounds, isSynced(group), tileBox, boundIntersections, iconSize, canvas,
+									fullObjectsLatLon, smallObjectsLatLon);
+						}
 					}
 					this.fullObjectsLatLon = fullObjectsLatLon;
 					this.smallObjectsLatLon = smallObjectsLatLon;
@@ -277,7 +256,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getPointsOrder(), isTextVisible(),
 				getTextStyle(textScale), view.getDensity());
 
-		if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
+		if(customObjectsDelegate != null){
+			List<FavouritePoint> points = customObjectsDelegate.getMapObjects();
+			showFavoritePoints(textScale, false, points);
+			favoritesMapLayerProvider.drawSymbols(mapRenderer);
+		} else if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
 			for (FavoriteGroup group : getFavoriteGroups()) {
 				boolean synced = isSynced(group);
 				List<FavouritePoint> points = new ArrayList<>(group.getPoints());
