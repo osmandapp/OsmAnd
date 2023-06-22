@@ -121,7 +121,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
-				.setOnClickListener(v -> showTracksSelection(trackFolder, fragment, null, Collections.singleton(trackFolder))).create());
+				.setOnClickListener(v -> showTracksSelection(trackFolder, fragment, null, null)).create());
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.add_new_folder)
