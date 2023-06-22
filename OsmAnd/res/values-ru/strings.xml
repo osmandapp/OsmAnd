@@ -5234,4 +5234,6 @@
     <string name="device_connected">Устройство [%1$s] подключено</string>
     <string name="error_calculate">Результат вычислений пуст</string>
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
+    <string name="relief_3d">3D-рельеф</string>
+    <string name="terrain_map">Карта рельефа</string>
 </resources>
