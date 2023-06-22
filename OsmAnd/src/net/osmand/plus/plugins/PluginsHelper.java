@@ -611,22 +611,6 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules, @NonNull List<Class> plugins) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			if (plugins.contains(plugin.getClass())) {
-				plugin.registerLayerContextMenuActions(adapter, mapActivity, customRules);
-			}
-		}
-	}
-
-	public static void registerLayerContextMenuExcluded(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules, @NonNull List<Class> excludedPlugins) {
-		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			if (!excludedPlugins.contains(plugin.getClass())) {
-				plugin.registerLayerContextMenuActions(adapter, mapActivity, customRules);
-			}
-		}
-	}
-
 	public static void registerConfigureMapCategory(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerConfigureMapCategoryActions(adapter, mapActivity, customRules);

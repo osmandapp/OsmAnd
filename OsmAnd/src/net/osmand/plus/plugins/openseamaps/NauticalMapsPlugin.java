@@ -100,11 +100,17 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		return PLUGIN_NAUTICAL;
 	}
 
+	public void registerTerrainCard(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+		if ((isEnabled() || hasDepthMaps()) && app.useOpenGlRenderer()) {
+			createNauticalItem(adapter, mapActivity, customRules);
+		}
+	}
+
 	@Override
 	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter,
 	                                            @NonNull MapActivity mapActivity,
 	                                            @NonNull List<RenderingRuleProperty> customRules) {
-		if (isEnabled() || hasDepthMaps()) {
+		if ((isEnabled() || hasDepthMaps()) && !app.useOpenGlRenderer()) {
 			createNauticalItem(menuAdapter, mapActivity, customRules);
 		}
 	}

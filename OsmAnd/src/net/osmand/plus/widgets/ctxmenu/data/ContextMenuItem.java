@@ -48,8 +48,6 @@ public class ContextMenuItem {
 	private int icon = INVALID_ID;
 	@DrawableRes
 	private int secondaryIcon = INVALID_ID;
-	boolean showProIcon = false;
-
 	private Boolean selected;
 	private int progress = INVALID_ID;
 	private boolean loading;
@@ -130,10 +128,6 @@ public class ContextMenuItem {
 
 	public boolean useNaturalIconColor() {
 		return useNaturalIconColor;
-	}
-
-	public boolean isShowProIcon() {
-		return showProIcon;
 	}
 
 	public boolean useNaturalSecondIconColor() {
@@ -275,12 +269,6 @@ public class ContextMenuItem {
 	@NonNull
 	public ContextMenuItem setUseNaturalIconColor(boolean useNaturalIconColor) {
 		this.useNaturalIconColor = useNaturalIconColor;
-		return this;
-	}
-
-	@NonNull
-	public ContextMenuItem showProIcon(boolean showProIcon) {
-		this.showProIcon = showProIcon;
 		return this;
 	}
 

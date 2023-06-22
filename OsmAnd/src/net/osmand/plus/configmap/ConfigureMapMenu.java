@@ -147,36 +147,20 @@ public class ConfigureMapMenu {
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
-		if (app.useOpenGlRenderer()) {
-			createTerrainItems(customRules, adapter, mapActivity);
-		}
+		registerTerrainCard(adapter, mapActivity, customRules);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
 	}
 
-	private void createTerrainItems(@NonNull List<RenderingRuleProperty> customRules,
-	                                @NonNull ContextMenuAdapter adapter,
-	                                @NonNull MapActivity activity) {
-		OsmandApplication app = activity.getMyApplication();
-
-		adapter.addItem(new ContextMenuItem(TERRAIN_CATEGORY_ID)
-				.setCategory(true)
-				.setTitle(app.getString(R.string.shared_string_terrain))
-				.setLayout(R.layout.list_group_title_with_switch));
-
-		if (Version.isPaidVersion(app)) {
-			PluginsHelper.registerLayerContextMenu(adapter, activity, customRules, Collections.singletonList(SRTMPlugin.class));
-		} else {
-			addTerrainDescriptionItem(adapter, activity);
-			if (PluginsHelper.isEnabled(NauticalMapsPlugin.class)) {
-				adapter.addItem(new ContextMenuItem("nautical_divider")
-						.setLayout(R.layout.card_divider_16dp_margin)
-						.setClickable(false));
-			}
+	private void registerTerrainCard(@NonNull ContextMenuAdapter adapter,
+	                                 @NonNull MapActivity activity,
+	                                 @NonNull List<RenderingRuleProperty> customRules) {
+		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		if (srtmPlugin != null) {
+			srtmPlugin.registerTerrainCard(adapter, activity, customRules);
 		}
-		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules, Collections.singletonList(NauticalMapsPlugin.class));
 	}
 
 	private void createLayersItems(@NonNull List<RenderingRuleProperty> customRules,
@@ -263,14 +247,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES)
 				.setListener(listener));
 
-		if (app.useOpenGlRenderer()) {
-			ArrayList<Class> terrainPlugins = new ArrayList<>();
-			terrainPlugins.add(SRTMPlugin.class);
-			terrainPlugins.add(NauticalMapsPlugin.class);
-			PluginsHelper.registerLayerContextMenuExcluded(adapter, activity, customRules, terrainPlugins);
-		} else {
-			PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
-		}
+		PluginsHelper.registerLayerContextMenu(adapter, activity, customRules);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 
 		selected = settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.get();
@@ -281,18 +258,6 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_download)
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
-	}
-
-	private void addTerrainDescriptionItem(@NonNull ContextMenuAdapter adapter,
-	                                       @NonNull MapActivity activity) {
-		adapter.addItem(new ContextMenuItem(TERRAIN_DESCRIPTION_ID)
-				.setLayout(R.layout.list_item_terrain_description)
-				.setTitleId(TERRAIN_DESCRIPTION_ID.hashCode(), null)
-				.setClickable(false)
-				.setSpecialViewListener((uiAdapter, view, item, isChecked) -> {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
-					return true;
-				}));
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,

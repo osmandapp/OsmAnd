@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
-	android:background="?attr/bg_color">
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
 
 	<LinearLayout
 		android:id="@+id/banner_background"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:padding="@dimen/content_padding">
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -22,18 +24,18 @@
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
 				android:ellipsize="end"
+				android:text="@string/terrain_category_description"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/default_desc_text_size"
-				android:text="@string/terrain_category_description" />
+				android:textSize="@dimen/default_desc_text_size" />
 
 			<ImageView
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
-				android:layout_weight="0"
 				android:layout_gravity="center_vertical"
-				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding"
-				android:src="@drawable/ic_action_srtm_colored_day"/>
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_weight="0"
+				android:src="@drawable/ic_action_srtm_colored_day" />
 
 		</LinearLayout>
 
@@ -41,8 +43,9 @@
 			android:id="@+id/button_get"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:layout_marginTop="@dimen/content_padding">
+			android:layout_marginTop="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:orientation="vertical">
 
 			<FrameLayout
 				android:id="@+id/button_container"
@@ -58,19 +61,19 @@
 					android:drawablePadding="@dimen/content_padding_half"
 					android:duplicateParentState="true"
 					android:gravity="center_vertical|start"
-					android:textColor="?attr/active_color_basic"
-					android:paddingVertical="@dimen/content_padding_half"
 					android:paddingHorizontal="@dimen/content_padding_small"
+					android:paddingVertical="@dimen/content_padding_half"
 					android:text="@string/explore_plans"
+					android:textColor="?attr/active_color_basic"
 					android:textSize="@dimen/default_desc_text_size"
 					osmand:typeface="@string/font_roboto_medium" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
-					android:layout_marginVertical="@dimen/content_padding_half"
-					android:layout_marginHorizontal="@dimen/content_padding_small"
 					android:layout_gravity="center_vertical|end"
+					android:layout_marginHorizontal="@dimen/content_padding_small"
+					android:layout_marginVertical="@dimen/content_padding_half"
 					android:src="@drawable/ic_arrow_forward"
 					android:tint="?attr/active_color_basic" />
 
@@ -80,4 +83,12 @@
 
 	</LinearLayout>
 
-</FrameLayout>
+	<View
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/content_padding"
+		android:background="?attr/dashboard_divider"
+		android:focusable="false" />
+
+</LinearLayout>

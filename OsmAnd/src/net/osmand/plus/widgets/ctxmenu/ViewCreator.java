@@ -30,6 +30,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -289,6 +291,9 @@ public class ViewCreator {
 	private View getTerrainDescriptionView(@NonNull View view, @NonNull ContextMenuItem item) {
 		View btnGet = view.findViewById(R.id.button_get);
 		UiUtilities.setupDialogButton(nightMode, btnGet, UiUtilities.DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
+		View divider = view.findViewById(R.id.bottom_divider);
+		AndroidUiHelper.updateVisibility(divider, PluginsHelper.isEnabled(NauticalMapsPlugin.class));
+
 		btnGet.setOnClickListener(v -> {
 			ItemClickListener listener = item.getItemClickListener();
 			if (listener != null) {
