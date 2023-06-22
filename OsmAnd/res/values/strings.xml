@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="saving_points">Saving points…</string>
+    <string name="saving">Saving…</string>
     <string name="free_mode">Free mode</string>
     <string name="terrain_map">Terrain map</string>
     <string name="relief_3d">3D Relief</string>

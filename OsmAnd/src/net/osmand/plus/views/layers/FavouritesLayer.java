@@ -396,7 +396,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean result = false;
 		if (o instanceof FavouritePoint) {
 			favouritesHelper.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
-			favouritesHelper.lookupAddress((FavouritePoint) o);
+			favouritesHelper.lookupAddress((FavouritePoint) o, false);
 			result = true;
 		}
 		if (callback != null) {

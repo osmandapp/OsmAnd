@@ -3,7 +3,10 @@ package net.osmand.plus.myplaces.favorites;
 import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -38,6 +42,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class FavouritesHelper {
@@ -321,7 +327,7 @@ public class FavouritesHelper {
 			point.setCalendarEvent(addToCalendar);
 			point.setTimestamp(System.currentTimeMillis());
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
-			lookupAddress(point);
+			lookupAddress(point, false);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
@@ -337,7 +343,7 @@ public class FavouritesHelper {
 		if (point != null) {
 			point.setIconId(specialType.getIconId(app));
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
-			lookupAddress(point);
+			lookupAddress(point, false);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
@@ -362,7 +368,7 @@ public class FavouritesHelper {
 			return true;
 		}
 		if (lookupAddress && !point.isAddressSpecified()) {
-			lookupAddress(point);
+			lookupAddress(point, true);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
 		FavoriteGroup group = getOrCreateGroup(point);
@@ -381,35 +387,71 @@ public class FavouritesHelper {
 		}
 		if (saveImmediately) {
 			sortAll();
-			saveCurrentPointsIntoFile();
-		}
+			saveCurrentPointsIntoFileAsync(new SaveCurrentPointsListener() {
+				private ProgressDialog progressDialog;
 
-		runSyncWithMarkers(group);
-		if (point.isHomeOrWork()) {
-			app.getLauncherShortcutsHelper().updateLauncherShortcuts();
+				@Override
+				public void saveCurrentPointsStarted() {
+					Activity activity = app.getOsmandMap().getMapView().getMapActivity();
+					if (AndroidUtils.isActivityNotDestroyed(activity)) {
+						String dialogTitle = activity.getString(R.string.saving);
+						String dialogMessage = activity.getString(R.string.saving_points);
+						progressDialog = ProgressDialog.show(activity, dialogTitle, dialogMessage);
+					}
+				}
+
+				@Override
+				public void saveCurrentPointsFinished() {
+					Activity activity = app.getOsmandMap().getMapView().getMapActivity();
+					if (progressDialog != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+						progressDialog.dismiss();
+					}
+				}
+			});
 		}
 
 		return true;
 	}
 
-	public void lookupAddress(@NonNull FavouritePoint point) {
+	public void lookupAddress(@NonNull FavouritePoint point, boolean async) {
 		AddressLookupRequest request = addressRequestMap.get(point);
 		double latitude = point.getLatitude();
 		double longitude = point.getLongitude();
 		if (request == null || !request.getLatLon().equals(new LatLon(latitude, longitude))) {
 			cancelAddressRequest(point);
-			request = new AddressLookupRequest(new LatLon(latitude, longitude), address -> {
-				addressRequestMap.remove(point);
-				editAddressDescription(point, address);
-				app.runInUIThread(() -> {
-					for (FavoritesListener listener : listeners) {
-						listener.onFavoriteDataUpdated(point);
-					}
-				});
-			}, null);
+			request = getAddressLookupRequest(new LatLon(latitude, longitude), point, async);
 			addressRequestMap.put(point, request);
 			app.getGeocodingLookupService().lookupAddress(request);
 		}
+	}
+
+	private AddressLookupRequest getAddressLookupRequest(@NonNull LatLon latLon, @NonNull FavouritePoint point, boolean async) {
+		return new AddressLookupRequest(latLon, address -> {
+			addressRequestMap.remove(point);
+			if (async) {
+				editAddressDescriptionAsync(point, address, new SaveCurrentPointsListener() {
+					@Override
+					public void saveCurrentPointsStarted() {
+					}
+
+					@Override
+					public void saveCurrentPointsFinished() {
+						app.runInUIThread(() -> {
+							for (FavoritesListener listener : listeners) {
+								listener.onFavoriteDataUpdated(point);
+							}
+						});
+						app.getOsmandMap().refreshMap();
+					}
+				});
+			}
+			editAddressDescription(point, address);
+			app.runInUIThread(() -> {
+				for (FavoritesListener listener : listeners) {
+					listener.onFavoriteDataUpdated(point);
+				}
+			});
+		}, null);
 	}
 
 	private void cancelAddressRequest(@NonNull FavouritePoint point) {
@@ -458,6 +500,12 @@ public class FavouritesHelper {
 		runSyncWithMarkers(getOrCreateGroup(p));
 	}
 
+	private void editAddressDescriptionAsync(@NonNull FavouritePoint p, @Nullable String address, @Nullable SaveCurrentPointsListener listener) {
+		p.setAddress(address);
+		saveCurrentPointsIntoFileAsync(listener);
+		runSyncWithMarkers(getOrCreateGroup(p));
+	}
+
 	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
 		return editFavourite(p, lat, lon, null);
 	}
@@ -491,6 +539,53 @@ public class FavouritesHelper {
 		onFavouritePropertiesUpdated();
 	}
 
+	private final ExecutorService savePointsIntoFileSingleThreadExecutor = Executors.newSingleThreadExecutor();
+
+	public void saveCurrentPointsIntoFileAsync(@Nullable SaveCurrentPointsListener listener) {
+		SaveCurrentPointsIntoFileTask saveCurrentPointsIntoFileTask = new SaveCurrentPointsIntoFileTask(favoriteGroups, listener);
+		saveCurrentPointsIntoFileTask.executeOnExecutor(savePointsIntoFileSingleThreadExecutor);
+	}
+
+	private class SaveCurrentPointsIntoFileTask extends AsyncTask<Void, String, Void> {
+		private final List<FavoriteGroup> favoriteGroups;
+		private final SaveCurrentPointsListener listener;
+
+		public SaveCurrentPointsIntoFileTask(List<FavoriteGroup> favoriteGroups, @Nullable SaveCurrentPointsListener listener) {
+			this.favoriteGroups = favoriteGroups;
+			this.listener = listener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			if (listener != null) {
+				listener.saveCurrentPointsStarted();
+			}
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			fileHelper.saveCurrentPointsIntoFile(new ArrayList<>(favoriteGroups));
+			updateLastModifiedTime();
+			onFavouritePropertiesUpdated();
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			if (listener != null) {
+				listener.saveCurrentPointsFinished();
+			}
+		}
+	}
+
+	public interface SaveCurrentPointsListener {
+
+		void saveCurrentPointsStarted();
+
+		void saveCurrentPointsFinished();
+	}
+
 	public Exception exportFavorites() {
 		return fileHelper.saveExternalFiles(new ArrayList<>(favoriteGroups), Collections.emptySet());
 	}
@@ -499,7 +594,16 @@ public class FavouritesHelper {
 		boolean remove = favoriteGroups.remove(group);
 		if (remove) {
 			flatGroups.remove(group.getName());
-			saveCurrentPointsIntoFile();
+			saveCurrentPointsIntoFileAsync(new SaveCurrentPointsListener() {
+				@Override
+				public void saveCurrentPointsStarted() {
+				}
+
+				@Override
+				public void saveCurrentPointsFinished() {
+					app.getOsmandMap().refreshMap();
+				}
+			});
 			removeFromMarkers(group);
 			return true;
 		}
