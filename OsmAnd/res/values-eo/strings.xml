@@ -187,7 +187,7 @@
     <string name="index_name_russia">Rusujo</string>
     <string name="index_name_africa">Afriko</string>
     <string name="index_name_asia">Azio</string>
-    <string name="index_name_oceania">Aŭstralio kaj Oceanio</string>
+    <string name="index_name_oceania">Oceanio</string>
     <string name="index_name_other">Mondaj kaj temaj mapoj</string>
     <string name="shared_string_move_up">Movi ↑</string>
     <string name="shared_string_move_down">Movi ↓</string>
@@ -5235,4 +5235,8 @@
     <string name="revolutions_per_minute_unit">Rivoluoj/min</string>
     <string name="routing_attr_allow_via_ferrata_name">Permesi viaferataojn</string>
     <string name="shared_string_close_the_dialog">Fermi la fenestron</string>
+    <string name="relief_3d">3-dimensia reliefo</string>
+    <string name="free_mode">Libera reĝimo</string>
+    <string name="terrain_map">Terena mapo</string>
+    <string name="relief_3d_description">Havigu kaj vidu skalitan modelon de via najbaraĵo aŭ de la tuta kontinento.</string>
 </resources>
