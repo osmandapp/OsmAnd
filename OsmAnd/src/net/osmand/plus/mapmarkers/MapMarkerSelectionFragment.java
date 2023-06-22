@@ -60,7 +60,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
 			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
 
-			screenOrientation = app.getUIUtilities().getScreenOrientation();
+			screenOrientation = app.getUIUtilities().getScreenOrientation(mapActivity);
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 			if (trackingUtils != null) {

@@ -229,7 +229,7 @@ public class SensorAttributesUtils {
 		dataSet.setUnits(mainUnitY);
 
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
-		ChartUtils.setupDataSet(app, dataSet, color, color, drawFilled, useRightAxis, nightMode);
+		ChartUtils.setupDataSet(app, dataSet, color, color, drawFilled, false, useRightAxis, nightMode);
 
 		return dataSet;
 	}

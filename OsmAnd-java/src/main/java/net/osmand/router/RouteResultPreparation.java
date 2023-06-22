@@ -2060,7 +2060,7 @@ public class RouteResultPreparation {
 		}
 		int[] uniqTurnTypes = getUniqTurnTypes(turnLanesPrevSegm);
 		for (int lane : uniqTurnTypes) {
-			if (lane == TurnType.TSHL || lane == TurnType.TSHR || lane == TurnType.TU || lane == TurnType.TRU) {
+			if (TurnType.isSharpOrReverse(lane)) {
 				return true;
 			}
 		}
@@ -2094,44 +2094,26 @@ public class RouteResultPreparation {
 		for (int i = startActiveIndex, j = 0; i <= endActiveIndex; i++, j++) {
 			activeLines[j] = lanesArray[i];
 		}
-		boolean left = TurnType.isLeftTurnNoUTurn(mainTurnType);
-		boolean right = TurnType.isRightTurnNoUTurn(mainTurnType);
-		Set<Integer> leftDirections = new HashSet<Integer>(){{
-			add(TurnType.TL);
-			add(TurnType.TSHL);
-			add(TurnType.TSLL);
-		}};
-		Set<Integer> rightDirections = new HashSet<Integer>(){{
-			add(TurnType.TR);
-			add(TurnType.TSHR);
-			add(TurnType.TSLR);
-		}};
-		Set<Integer> sharpRightDirections = new HashSet<Integer>(){{
-			add(TurnType.TSHR);
-			add(TurnType.TRU);
-		}};
-		Set<Integer> sharpLeftDirections = new HashSet<Integer>(){{
-			add(TurnType.TSHL);
-			add(TurnType.TU);
-		}};
+		boolean possibleSharpLeftOrUTurn = startActiveIndex == 0;
+		boolean possibleSharpRightOrUTurn = endActiveIndex == lanesArray.length - 1;
 		for (int i = 0; i < activeLines.length; i++) {
 			int turnType = TurnType.getPrimaryTurn(activeLines[i]);
 			if (turnType == mainTurnType) {
 				return true;
 			}
-			if (left && leftDirections.contains(turnType)) {
+			if (TurnType.isLeftTurnNoUTurn(mainTurnType) && TurnType.isLeftTurnNoUTurn(turnType)) {
 				return true;
 			}
-			if (right && rightDirections.contains(turnType)) {
+			if (TurnType.isRightTurnNoUTurn(mainTurnType) && TurnType.isRightTurnNoUTurn(turnType)) {
 				return true;
 			}
 			if (mainTurnType == TurnType.C && TurnType.isSlightTurn(turnType)) {
 				return true;
 			}
-			if (sharpLeftDirections.contains(mainTurnType) && sharpLeftDirections.contains(turnType)) {
+			if (possibleSharpLeftOrUTurn && TurnType.isSharpLeftOrUTurn(mainTurnType) && TurnType.isSharpLeftOrUTurn(turnType)) {
 				return true;
 			}
-			if (sharpRightDirections.contains(mainTurnType) && sharpLeftDirections.contains(turnType)) {
+			if (possibleSharpRightOrUTurn && TurnType.isSharpRightOrUTurn(mainTurnType) && TurnType.isSharpRightOrUTurn(turnType)) {
 				return true;
 			}
 		}
@@ -2155,7 +2137,8 @@ public class RouteResultPreparation {
 			}
 		}
 		TurnType t = TurnType.valueOf(tp, leftSide);
-		if (cnt == 3 && TurnType.isSlightTurn(t.getValue())) {
+		// mute when most lanes have a straight/slight direction
+		if (cnt >= 3 && TurnType.isSlightTurn(t.getValue())) {
 			t.setSkipToSpeak(true);
 		}
 		return t;

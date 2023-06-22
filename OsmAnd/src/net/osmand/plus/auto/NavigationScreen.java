@@ -201,8 +201,8 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		} else {
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_search_dark)).build())
-							.setOnClickListener(this::openSearch)
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_actions_menu)).build())
+							.setOnClickListener(this::goBack)
 							.build());
 		}
 		builder.setActionStrip(actionStripBuilder.build());
@@ -342,9 +342,8 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		getApp().getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
 	}
 
-	private void openSearch() {
-		getScreenManager().pushForResult(new SearchScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> {
-		});
+	private void goBack() {
+		finish();
 		// Test
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });
 	}

@@ -35,8 +35,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class AvailableTracksFragment extends BaseTrackFolderFragment implements SelectionHelperProvider<TrackItem> {
 
@@ -141,7 +141,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (itemId == R.id.action_search) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this);
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, false);
 			}
 		}
 		if (itemId == R.id.action_menu) {
@@ -228,12 +228,6 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		}
 	}
 
-	public void saveTracksVisibility() {
-		Set<TrackItem> selectedTracks = selectionHelper.getSelectedItems();
-		app.getSelectedGpxHelper().saveTracksVisibility(selectedTracks, null);
-		updateVisibleTracks();
-	}
-
 	@Override
 	public void onTracksGroupSelected(@NonNull TracksGroup group, boolean selected) {
 		if (group instanceof TrackFolder) {
@@ -250,12 +244,12 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this);
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, Collections.singleton(trackItem), null);
 	}
 
 	@Override
 	public void onTracksGroupLongClick(@NonNull View view, @NonNull TracksGroup group) {
-		trackFoldersHelper.showTracksSelection(selectedFolder, this);
+		trackFoldersHelper.showTracksSelection(selectedFolder, this, null, Collections.singleton(group));
 	}
 
 	@Override

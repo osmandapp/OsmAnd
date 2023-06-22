@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
-import static net.osmand.gpx.ElevationDiffsCalculator.CALCULATED_GPX_WINDOW_LENGTH;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
 import android.graphics.Matrix;
@@ -30,27 +29,27 @@ import com.github.mikephil.charting.utils.ViewPortHandler;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.charts.GPXHighlight;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.GPXDataSetAxisType;
-import net.osmand.plus.charts.GPXHighlight;
-import net.osmand.plus.charts.OrderedLineDataSet;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -461,11 +460,21 @@ public class ElevationProfileWidget extends MapWidget {
 		firstPointIndex = Math.max(0, firstPointIndex - 1);
 		lastPointIndex = Math.min(points.size() - 1, lastPointIndex + 1);
 		if (lastPointIndex > firstPointIndex) {
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(
-					CALCULATED_GPX_WINDOW_LENGTH, firstPointIndex, lastPointIndex - firstPointIndex + 1) {
+			int pointsCount = lastPointIndex - firstPointIndex + 1;
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 				@Override
-				public WptPt getPoint(int index) {
-					return points.get(index);
+				public double getPointDistance(int index) {
+					return points.get(index).distance;
+				}
+
+				@Override
+				public double getPointElevation(int index) {
+					return points.get(index).ele;
+				}
+
+				@Override
+				public int getPointsCount() {
+					return pointsCount;
 				}
 			};
 			elevationDiffsCalc.calculateElevationDiffs();

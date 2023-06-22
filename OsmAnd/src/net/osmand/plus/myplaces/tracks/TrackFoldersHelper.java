@@ -121,7 +121,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_select)
 				.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
-				.setOnClickListener(v -> showTracksSelection(trackFolder, fragment)).create());
+				.setOnClickListener(v -> showTracksSelection(trackFolder, fragment, null, Collections.singleton(trackFolder))).create());
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.add_new_folder)
@@ -310,9 +310,10 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		}
 	}
 
-	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment) {
+	public void showTracksSelection(@NonNull TrackFolder trackFolder, @NonNull BaseTrackFolderFragment fragment,
+	                                @Nullable Set<TrackItem> trackItems, @Nullable Set<TracksGroup> tracksGroups) {
 		FragmentManager manager = activity.getSupportFragmentManager();
-		TracksSelectionFragment.showInstance(manager, trackFolder, fragment);
+		TracksSelectionFragment.showInstance(manager, trackFolder, fragment, trackItems, tracksGroups);
 	}
 
 	@NonNull

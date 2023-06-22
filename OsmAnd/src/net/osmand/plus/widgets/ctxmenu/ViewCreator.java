@@ -1,5 +1,7 @@
 package net.osmand.plus.widgets.ctxmenu;
 
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -14,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,8 +43,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 public class ViewCreator {
 
@@ -120,22 +119,12 @@ public class ViewCreator {
 
 		ImageView secondaryIcon = convertView.findViewById(R.id.secondary_icon);
 		if (secondaryIcon != null) {
-			setupSecondaryIcon(secondaryIcon, item.getSecondaryIcon(), item);
+			setupSecondaryIcon(secondaryIcon, item);
 		}
 
 		CompoundButton toggle = convertView.findViewById(R.id.toggle_item);
 		if (toggle != null && !item.isCategory()) {
 			setupToggle(toggle, convertView, item);
-		}
-
-		if (item.isShowProIcon()) {
-			ImageView proIcon = convertView.findViewById(R.id.pro_icon);
-			if (proIcon != null) {
-				setupProIcon(proIcon);
-			}
-			if (toggle != null) {
-				AndroidUiHelper.updateVisibility(toggle, false);
-			}
 		}
 
 		Slider slider = convertView.findViewById(R.id.slider);
@@ -291,7 +280,7 @@ public class ViewCreator {
 		contactUsButton.setOnClickListener(v -> {
 			Intent intent = new Intent(Intent.ACTION_SENDTO);
 			intent.setData(Uri.parse("mailto:"));
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+			intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
 			AndroidUtils.startActivityIfSafe(ctx, intent);
 		});
 		return view;
@@ -301,7 +290,7 @@ public class ViewCreator {
 		View btnGet = view.findViewById(R.id.button_get);
 		UiUtilities.setupDialogButton(nightMode, btnGet, UiUtilities.DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
 		btnGet.setOnClickListener(v -> {
-			ItemClickListener listener = item.getSpecialViewClickListener();
+			ItemClickListener listener = item.getItemClickListener();
 			if (listener != null) {
 				listener.onContextMenuClick(uiAdapter, view, item, false);
 			}
@@ -359,12 +348,8 @@ public class ViewCreator {
 		}
 	}
 
-	private void setupProIcon(@NonNull ImageView proIcon) {
-		proIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day));
-		AndroidUiHelper.updateVisibility(proIcon, true);
-	}
-
-	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @DrawableRes int secondaryIconId, @NonNull ContextMenuItem item) {
+	private void setupSecondaryIcon(@NonNull ImageView secondaryIcon, @NonNull ContextMenuItem item) {
+		int secondaryIconId = item.getSecondaryIcon();
 		if (secondaryIconId != INVALID_ID) {
 			int colorId = ColorUtilities.getDefaultIconColorId(nightMode);
 			colorId = item.useNaturalSecondIconColor() ? 0 : colorId;

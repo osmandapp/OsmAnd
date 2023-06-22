@@ -221,7 +221,11 @@ public class UiUtilities {
 	}
 
 	public int getScreenOrientation() {
-		int screenOrientation = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+		return getScreenOrientation(app);
+	}
+
+	public int getScreenOrientation(@NonNull Context context) {
+		int screenOrientation = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
 			case ORIENTATION_0:   // Device default (normally portrait)
 				screenOrientation = 0;

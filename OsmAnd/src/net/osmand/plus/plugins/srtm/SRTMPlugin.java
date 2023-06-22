@@ -1,10 +1,22 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.plus.chooseplan.button.PurchasingUtils.PROMO_PREFIX;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,6 +38,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -41,16 +54,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
-import static net.osmand.plus.chooseplan.button.PurchasingUtils.PROMO_PREFIX;
-import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -84,7 +87,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 
-	private final OsmandSettings settings;
+	private final StateChangedListener<Boolean> enable3DMapsListener;
 
 	private TerrainLayer terrainLayer;
 
@@ -95,7 +98,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
-		settings = app.getSettings();
 
 		HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
 		HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
@@ -109,6 +111,14 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN_MODE = registerEnumStringPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
+
+		enable3DMapsListener = change -> {
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.recreateHeightmapProvider();
+			}
+		};
+		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 	}
 
 	@Override
@@ -452,27 +462,31 @@ public class SRTMPlugin extends OsmandPlugin {
 		);
 	}
 
-	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter,
-	                             @NonNull MapActivity activity) {
-		OsmandApplication app = activity.getMyApplication();
-		if (app.useOpenGlRenderer() && !super.needsInstallation()) {
-			boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
+	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+		if (app.useOpenGlRenderer()) {
 			ContextMenuItem item = new ContextMenuItem(MAP_ENABLE_3D_MAPS_ID)
 					.setTitleId(R.string.relief_3d, app)
 					.setIcon(R.drawable.ic_action_3d_relief)
-					.setUseNaturalSecondIconColor(true)
 					.setListener((uiAdapter, view, contextItem, isChecked) -> {
-						if (InAppPurchaseHelper.isOsmAndProAvailable(activity.getMyApplication())) {
+						if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 							settings.ENABLE_3D_MAPS.set(isChecked);
-							contextItem.setDescription(activity.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+							contextItem.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							contextItem.setSelected(isChecked);
+							contextItem.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+							uiAdapter.onDataSetChanged();
+
+							app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(activity));
 						} else {
 							ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
 						}
 						return true;
 					});
 
+			boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
 			if (!InAppPurchaseHelper.isOsmAndProAvailable(app)) {
-				item.showProIcon(true);
+				boolean nightMode = isNightMode(activity, app);
+				item.setUseNaturalSecondIconColor(true);
+				item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 			} else {
 				item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
 				item.setSelected(enabled3DMode);

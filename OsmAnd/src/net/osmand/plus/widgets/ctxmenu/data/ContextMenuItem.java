@@ -59,7 +59,6 @@ public class ContextMenuItem {
 
 	private OnRefreshCallback onRefreshCallback;
 	private ItemClickListener itemClickListener;
-	private ItemClickListener specialViewClickListener;
 	private ItemLongClickListener itemLongClickListener;
 	private OnIntegerValueChangedListener integerListener;
 	private ProgressListener progressListener;
@@ -180,10 +179,6 @@ public class ContextMenuItem {
 	@Nullable
 	public ItemClickListener getItemClickListener() {
 		return itemClickListener;
-	}
-
-	public ItemClickListener getSpecialViewClickListener() {
-		return specialViewClickListener;
 	}
 
 	@Nullable
@@ -359,12 +354,6 @@ public class ContextMenuItem {
 	@NonNull
 	public ContextMenuItem setListener(@Nullable ItemClickListener itemClickListener) {
 		this.itemClickListener = itemClickListener;
-		return this;
-	}
-
-	@NonNull
-	public ContextMenuItem setSpecialViewListener(@Nullable ItemClickListener specialViewClickListener) {
-		this.specialViewClickListener = specialViewClickListener;
 		return this;
 	}
 

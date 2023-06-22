@@ -1138,12 +1138,10 @@ public class ResourceManager {
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		List<AmenityIndexRepository> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			if (!includeTravel) {
-				if (fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			if (fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+				if (!includeTravel || !context.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
 					continue;
 				}
-			} else if (!context.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
-				continue;
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
 			if (r != null) {

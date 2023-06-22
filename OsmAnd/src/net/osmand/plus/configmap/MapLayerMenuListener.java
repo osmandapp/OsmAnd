@@ -6,6 +6,7 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
@@ -68,8 +69,9 @@ final class MapLayerMenuListener extends OnRowItemClick {
 	@Override
 	public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view,
 	                                  @NotNull ContextMenuItem item, boolean isChecked) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		PoiFiltersHelper poiFiltersHelper = app.getPoiFilters();
 		if (item.getSelected() != null) {
 			item.setColor(mapActivity, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}
@@ -87,7 +89,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.shared_string_favorites) {
 			settings.SHOW_FAVORITES.set(isChecked);
 		} else if (itemId == R.string.layer_gpx_layer) {
-			GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
+			GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
 			if (selectedGpxHelper.isAnyGpxFileSelected()) {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
@@ -102,7 +104,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.layer_map) {
 			if (!PluginsHelper.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
-				mapActivity.getMyApplication().showToastMessage(R.string.map_online_plugin_is_not_installed);
+				app.showToastMessage(R.string.map_online_plugin_is_not_installed);
 			} else if (uiAdapter != null) {
 				mapActivity.getMapLayers().selectMapSourceLayer(mapActivity, item, uiAdapter);
 			}

@@ -15,6 +15,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -203,7 +204,7 @@ public class RoutingHelperUtils {
 	@NonNull
 	public static Map<String, RoutingParameter> getParametersForDerivedProfile(@NonNull ApplicationMode appMode, @NonNull GeneralRouter router) {
 		String derivedProfile = appMode.getDerivedProfile();
-		Map<String, RoutingParameter> parameters = new HashMap<>();
+		Map<String, RoutingParameter> parameters = new LinkedHashMap<>();
 		for (Entry<String, RoutingParameter> entry : router.getParameters().entrySet()) {
 			String[] profiles = entry.getValue().getProfiles();
 			if (profiles == null || Arrays.asList(profiles).contains(derivedProfile)) {
