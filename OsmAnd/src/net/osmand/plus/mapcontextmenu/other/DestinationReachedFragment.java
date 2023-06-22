@@ -22,7 +22,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -52,8 +51,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	private boolean nighMode;
 	private boolean isLandscapeLayout;
 	private boolean shouldHideMenu;
-	private MapDisplayPositionManager.IMapDisplayPositionProvider provider;
-	private MapDisplayPositionManager positionManager;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,8 +65,6 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 		if (savedInstanceState != null) {
 			shouldHideMenu = savedInstanceState.getBoolean(SHOULD_HIDE_MENU);
 		}
-		positionManager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-		provider = () -> OsmandSettings.CENTER_CONSTANT;
 	}
 
 	@Nullable
@@ -133,9 +129,6 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 			AndroidUtils.setBackground(view.getContext(), mainView, nighMode,
 					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
-
-		positionManager.registerProvider(provider);
-		positionManager.updateMapDisplayPosition();
 		return view;
 	}
 
@@ -149,12 +142,6 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	public void onStop() {
 		super.onStop();
 		ctxMenu.setBaseFragmentVisibility(true);
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		positionManager.unregisterProvider(provider);
 	}
 
 	@Override
