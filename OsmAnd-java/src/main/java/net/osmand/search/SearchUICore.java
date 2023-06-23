@@ -496,7 +496,7 @@ public class SearchUICore {
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
 		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
-		if (rm.count > rm.totalLimit) {
+		if (totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
 		}
 		resultCollection.addSearchResults(rm.getRequestResults(), true, true);
