@@ -355,6 +355,9 @@ public class SearchUICore {
 			api.search(sphrase, rm);
 
 			SearchResultCollection collection = new SearchResultCollection(sphrase);
+			if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
+				collection.setUseLimit(true);
+			}
 			collection.addSearchResults(rm.getRequestResults(), resortAll, removeDuplicates);
 			if (debugMode) {
 				LOG.info("Finish shallow search <" + sphrase + "> Results=" + rm.getRequestResults().size());
@@ -496,7 +499,7 @@ public class SearchUICore {
 		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
 		searchInternal(searchPhrase, rm);
 		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
-		if (totalLimit != -1 && rm.count > rm.totalLimit) {
+		if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
 			resultCollection.setUseLimit(true);
 		}
 		resultCollection.addSearchResults(rm.getRequestResults(), true, true);
@@ -566,6 +569,9 @@ public class SearchUICore {
 								if (debugMode) {
 									LOG.info("Current data filtered <" + phrase + "> Results=" + quickRes.searchResults.size());
 								}
+								if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
+									quickRes.setUseLimit(true);
+								}
 								if (!rm.isCancelled()) {
 									currentSearchResult = quickRes;
 									rm.filterFinished(phrase);
@@ -584,8 +590,10 @@ public class SearchUICore {
 					}
 					searchInternal(phrase, rm);
 					if (!rm.isCancelled()) {
-						SearchResultCollection collection = new SearchResultCollection(
-								phrase);
+						SearchResultCollection collection = new SearchResultCollection(phrase);
+						if (rm.totalLimit != -1 && rm.count > rm.totalLimit) {
+							collection.setUseLimit(true);
+						}
 						if (debugMode) {
 							LOG.info("Processing search results <" + phrase + ">");
 						}
@@ -728,7 +736,7 @@ public class SearchUICore {
 		private final List<SearchResult> requestResults = new ArrayList<>();
 		private final ResultMatcher<SearchResult> matcher;
 		private final int request;
-		private final int totalLimit;
+		int totalLimit;
 		private SearchResult parentSearchResult;
 		private final AtomicInteger requestNumber;
 		int count = 0;
