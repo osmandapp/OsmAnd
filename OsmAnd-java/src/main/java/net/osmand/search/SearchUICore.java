@@ -97,6 +97,7 @@ public class SearchUICore {
 	public static class SearchResultCollection {
 		private final List<SearchResult> searchResults = new ArrayList<>();
 		private SearchPhrase phrase;
+		private boolean useLimit;
 		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 
 		public SearchResultCollection(SearchPhrase phrase) {
@@ -108,6 +109,14 @@ public class SearchUICore {
 			src.addSearchResults(searchResults, false, false);
 			src.addSearchResults(collection.searchResults, resort, removeDuplicates);
 			return src;
+		}
+		
+		public boolean getUseLimit() {
+			return this.useLimit;
+		}
+		
+		public void setUseLimit(boolean useLimit) {
+			this.useLimit = useLimit;
 		}
 
 		public SearchResultCollection addSearchResults(List<SearchResult> sr, boolean resortAll, boolean removeDuplicates) {
@@ -480,13 +489,18 @@ public class SearchUICore {
 	}
 	
 	public SearchResultCollection immediateSearch(final String text, final LatLon loc) {
-		searchSettings = searchSettings.setOriginalLocation(loc);
-		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
-		final SearchResultMatcher rm = new SearchResultMatcher(null, phrase, requestNumber.get(), requestNumber, totalLimit);
-		searchInternal(phrase, rm);
-		SearchResultCollection collection = new SearchResultCollection(phrase);
-		collection.addSearchResults(rm.getRequestResults(), true, true);
-		return collection;
+		if (loc != null) {
+			searchSettings = searchSettings.setOriginalLocation(loc);
+		}
+		final SearchPhrase searchPhrase = this.phrase.generateNewPhrase(text, searchSettings);
+		final SearchResultMatcher rm = new SearchResultMatcher(null, searchPhrase, requestNumber.get(), requestNumber, totalLimit);
+		searchInternal(searchPhrase, rm);
+		SearchResultCollection resultCollection = new SearchResultCollection(searchPhrase);
+		if (rm.count > rm.totalLimit) {
+			resultCollection.setUseLimit(true);
+		}
+		resultCollection.addSearchResults(rm.getRequestResults(), true, true);
+		return resultCollection;
 	}
 
 	public void search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
