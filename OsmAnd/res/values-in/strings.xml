@@ -5245,4 +5245,8 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Izinkan melalui ferrata</string>
     <string name="shared_string_close_the_dialog">Tutup dialog</string>
+    <string name="relief_3d_description">Miliki dan amati model skala lingkungan Anda atau seluruh benua.</string>
+    <string name="free_mode">Mode bebas</string>
+    <string name="relief_3d">Relief 3D</string>
+    <string name="terrain_map">Peta medan</string>
 </resources>
