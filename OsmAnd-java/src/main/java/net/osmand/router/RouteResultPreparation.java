@@ -1189,6 +1189,30 @@ public class RouteResultPreparation {
 			}
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)), 
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
+
+			String turnTag = getTurnString(rr);
+			if (turnTag != null) {
+				int fromTag = TurnType.convertType(turnTag);
+				if (!TurnType.isSlightTurn(fromTag)) {
+					t = TurnType.valueOf(fromTag, leftSide);
+					int[] lanes = getTurnLanesInfo(prev, rr, t.getValue());
+					t = getActiveTurnType(lanes, leftSide, t);
+					t.setLanes(lanes);
+				} else if (fromTag != TurnType.C) {
+					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
+					if (t != null) {
+						TurnType mainTurnType = TurnType.valueOf(fromTag, leftSide);
+						int[] lanes = t.getLanes();
+						t = getActiveTurnType(t.getLanes(), leftSide, mainTurnType);
+						t.setLanes(lanes);
+					}
+				}
+				if (t != null) {
+					t.setTurnAngle((float) - mpi);
+					return t;
+				}
+			}
+
 			if (mpi >= TURN_DEGREE_MIN) {
 				if (mpi < TURN_DEGREE_MIN) {
 					// Slight turn detection here causes many false positives where drivers would expect a "normal" TL. Best use limit-angle=TURN_DEGREE_MIN, this reduces TSL to the turn-lanes cases.
@@ -1251,7 +1275,7 @@ public class RouteResultPreparation {
 		}
 
 		boolean isSet = false;
-		int[] act = findActiveIndex(prevSegm, currentSegm, lanesArray, null);
+		int[] act = findActiveIndex(prevSegm, currentSegm, lanesArray, null, turnLanes);
 		int startIndex = act[0];
 		int endIndex = act[1];
 		if (startIndex != -1 && endIndex != -1) {
@@ -1386,6 +1410,10 @@ public class RouteResultPreparation {
 		if(rs.roadsOnLeft  + rs.roadsOnRight == 0) {
 			return null;
 		}
+
+		if (turnLanesPrevSegm == null) {
+			turnLanesPrevSegm = getVirtualTurnLanes(prevSegm);
+		}
 		
 		// turn lanes exist
 		if (turnLanesPrevSegm != null) {
@@ -1396,6 +1424,23 @@ public class RouteResultPreparation {
 		if (rs.keepLeft || rs.keepRight) {
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
 			
+		}
+		return null;
+	}
+
+	private String getVirtualTurnLanes(RouteSegmentResult segm) {
+		TurnType t = segm.getTurnType();
+		if (t == null) {
+			return null;
+		}
+		int[] lanes = t.getLanes();
+		String turnLanes = TurnType.convertLanesToOsmString(lanes, true, false);
+		if (turnLanes != null) {
+			int[] uniq = getUniqTurnTypes(turnLanes);
+			// if we have 2 and more active directions
+			if (uniq.length >= 2) {
+				return turnLanes;
+			}
 		}
 		return null;
 	}
@@ -1419,7 +1464,7 @@ public class RouteResultPreparation {
 			}
 		}
 
-		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs);
+		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes);
 		int activeBeginIndex = act[0];
 		int activeEndIndex = act[1];
 		if (rs.keepLeft || rs.keepRight) {
@@ -1685,6 +1730,10 @@ public class RouteResultPreparation {
 		} else {
 			return segment.getObject().getValue("turn:lanes");
 		}
+	}
+
+	private String getTurnString(RouteSegmentResult segment) {
+		return segment.getObject().getValue("turn");
 	}
 
 	
@@ -2000,9 +2049,8 @@ public class RouteResultPreparation {
 		return r;
 	}
 
-	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes, RoadSplitStructure rs) {
+	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes, RoadSplitStructure rs, String turnLanes) {
 		int[] pair = {-1, -1};
-		String turnLanes = getTurnLanesString(prevSegm);
 		if (turnLanes == null) {
 			return pair;
 		}
