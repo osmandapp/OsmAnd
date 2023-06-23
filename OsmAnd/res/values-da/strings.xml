@@ -5001,7 +5001,7 @@
     <string name="cloud_all_changes_uploaded_descr">Alle ændringer foretaget på denne enhed er synkroniseret med OsmAnd Cloud.</string>
     <string name="cloud_no_conflicts">Der er ingen konflikter.</string>
     <string name="download_cloud_version">Download cloud-version</string>
-    <string name="cloud_sync_progress">Synkronisering...%1$s</string>
+    <string name="cloud_sync_progress">Synkroniserer...%1$s</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fillisten kunne ikke hentes fra serveren.</string>
     <string name="import_export">Import/eksport</string>
     <string name="modified_file">Ændret fil</string>
@@ -5247,4 +5247,5 @@
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort</string>
+    <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
 </resources>

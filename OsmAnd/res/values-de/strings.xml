@@ -5244,4 +5244,7 @@
     <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
+    <string name="free_mode">Freier Modus</string>
+    <string name="terrain_map">Geländekarte</string>
+    <string name="relief_3d">3D-Relief</string>
 </resources>

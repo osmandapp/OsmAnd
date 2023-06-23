@@ -5231,4 +5231,8 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Autoriser les via ferrata</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
+    <string name="free_mode">Mode libre</string>
+    <string name="relief_3d">Relief 3D</string>
+    <string name="terrain_map">Carte du relief</string>
+    <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
 </resources>

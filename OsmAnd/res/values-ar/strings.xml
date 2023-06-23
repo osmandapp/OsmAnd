@@ -5307,4 +5307,7 @@
     <string name="power_watts_unit">واتس</string>
     <string name="revolutions_per_minute_unit">.RPM</string>
     <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
+    <string name="free_mode">الوضع الحر</string>
+    <string name="terrain_map">خريطة التضاريس</string>
+    <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
 </resources>

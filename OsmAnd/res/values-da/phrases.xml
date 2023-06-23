@@ -1720,7 +1720,7 @@
     <string name="poi_bridge_structure_floating">Brokonstruktion: pontonbro</string>
     <string name="poi_bridge_structure_humpback">Brokonstruktion: buet bro</string>
     <string name="poi_bridge_structure_cable_stayed">Brokonstruktion: skråstagsbro</string>
-    <string name="poi_bridge_structure_boardwalk">Brokonstruktion: havnepromenade</string>
+    <string name="poi_bridge_structure_boardwalk">Brokonstruktion: plankebro</string>
     <string name="poi_bridge_structure_simple_wooden">Brokonstruktion: simpel træbro</string>
     <string name="poi_bridge_structure_viaduct">Brokonstruktion: viadukt</string>
     <string name="poi_bridge_structure_aqueduct">Brokonstruktion: akvædukt</string>
@@ -3808,10 +3808,10 @@
     <string name="poi_elevator">Elevator</string>
     <string name="poi_nuts">Nøddebutik</string>
     <string name="poi_beehive">Bikube</string>
-    <string name="poi_departures_board_timetable">Tidsplan</string>
-    <string name="poi_departures_board_realtime">Realtid</string>
-    <string name="poi_departures_board_delay">Forsinkelse</string>
-    <string name="poi_departures_board_yes">Ja</string>
+    <string name="poi_departures_board_timetable">Tidsplan;afgangstavle</string>
+    <string name="poi_departures_board_realtime">Realtid;afgangstavle</string>
+    <string name="poi_departures_board_delay">Forsinkelse;afgangstavle</string>
+    <string name="poi_departures_board_yes">Ja;afgangstavle</string>
     <string name="poi_departures_board_no">Afgangstavle: nej</string>
     <string name="poi_recycling_small_electrical_appliances">Små elektriske apparater</string>
     <string name="poi_departures_board">Afgangstavle</string>
@@ -4019,4 +4019,5 @@
     <string name="poi_hot_water_yes">Varmt vand: ja</string>
     <string name="poi_hot_water_no">Varmt vand: nej</string>
     <string name="poi_water_sports">Vandsportsbutik</string>
+    <string name="poi_board_title">Tavletitel</string>
 </resources>
