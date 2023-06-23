@@ -5247,4 +5247,5 @@
     <string name="free_mode">Freier Modus</string>
     <string name="terrain_map">Geländekarte</string>
     <string name="relief_3d">3D-Relief</string>
+    <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
 </resources>
