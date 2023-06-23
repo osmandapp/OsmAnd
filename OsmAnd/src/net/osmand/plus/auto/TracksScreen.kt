@@ -9,6 +9,8 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import net.osmand.data.QuadRect
+import net.osmand.data.RotatedTileBox
 import net.osmand.gpx.GPXUtilities
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -22,6 +24,8 @@ import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
+import kotlin.math.max
+import kotlin.math.min
 
 class TracksScreen(
     carContext: CarContext,
@@ -46,6 +50,7 @@ class TracksScreen(
                 super.onDestroy(owner)
                 loadGpxFilesThread?.interrupt()
                 app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
+                app.osmandMap.mapView.backToLocation()
             }
         })
     }
@@ -109,10 +114,16 @@ class TracksScreen(
         val selectedGpxFiles = ArrayList<SelectedGpxFile>()
         val tracks =
             trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
+        val mapRect = QuadRect()
         for (track in tracks) {
             val gpxFile = loadedGpxFiles[track]
             gpxFile?.let {
                 selectedGpxFiles.add(it)
+                val gpxRect: QuadRect = it.gpxFile.rect
+                mapRect.left = if(mapRect.left == 0.0) gpxRect.left else min(mapRect.left, gpxRect.left)
+                mapRect.right = max(mapRect.right, gpxRect.right)
+                mapRect.top = max(mapRect.top, gpxRect.top)
+                mapRect.bottom = if(mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
             }
             val title = track.name
             val icon = CarIcon.Builder(
@@ -142,6 +153,10 @@ class TracksScreen(
                 .addText(address)
                 .setOnClickListener { onClickTrack(track) }
                 .build())
+        }
+        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
+            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
+            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
         }
         app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(selectedGpxFiles)
         templateBuilder.setItemList(listBuilder.build())

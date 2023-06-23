@@ -20,6 +20,8 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
+import net.osmand.data.QuadRect
+import net.osmand.data.RotatedTileBox
 import net.osmand.plus.R
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.render.RenderingIcons
@@ -30,6 +32,8 @@ import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
+import kotlin.math.max
+import kotlin.math.min
 
 class POIScreen(
     carContext: CarContext,
@@ -45,6 +49,7 @@ class POIScreen(
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
                 app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
+                app.osmandMap.mapView.backToLocation()
             }
         })
     }
@@ -91,13 +96,20 @@ class POIScreen(
     private fun setupPOI(listBuilder: ItemList.Builder, searchResults: List<SearchResult>?) {
         val location = app.settings.lastKnownMapLocation
         val mapPoint = ArrayList<Amenity>()
+        val mapRect = QuadRect()
         searchResults?.let {
             val searchResultsSize = searchResults.size
             val limitedSearchResults =
                 searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
             for (point in limitedSearchResults) {
                 if (point.`object` is Amenity) {
-                    mapPoint.add(point.`object` as Amenity)
+                    val amenity = point.`object` as Amenity
+                    mapPoint.add(amenity)
+                    val amenityLocation = amenity.location
+                    mapRect.left = if(mapRect.left == 0.0) amenityLocation.longitude else min(mapRect.left, amenityLocation.longitude)
+                    mapRect.right = max(mapRect.right, amenityLocation.longitude)
+                    mapRect.bottom = if(mapRect.bottom == 0.0) amenityLocation.latitude else min(mapRect.bottom, amenityLocation.latitude)
+                    mapRect.top = max(mapRect.top, amenityLocation.latitude)
                 }
                 val title = point.localeName
                 var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
@@ -128,6 +140,10 @@ class POIScreen(
                                     point.location.longitude)).build()).build())
                     .build())
             }
+        }
+        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
+            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
+            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
         }
         app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(mapPoint)
     }

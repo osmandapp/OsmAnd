@@ -19,11 +19,15 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.LatLon
+import net.osmand.data.QuadRect
+import net.osmand.data.RotatedTileBox
 import net.osmand.plus.R
 import net.osmand.plus.mapmarkers.MapMarker
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.MapUtils
+import kotlin.math.max
+import kotlin.math.min
 
 class MapMarkersScreen(
     carContext: CarContext,
@@ -35,6 +39,7 @@ class MapMarkersScreen(
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
                 app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(null)
+                app.osmandMap.mapView.backToLocation()
             }
         })
     }
@@ -46,7 +51,14 @@ class MapMarkersScreen(
             app.mapMarkersHelper.mapMarkers.subList(0, markersSize.coerceAtMost(contentLimit - 1))
         val location = app.settings.lastKnownMapLocation
         app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
+        val mapRect = QuadRect()
         for (marker in markers) {
+            val longitude = marker.longitude
+            val latitude = marker.latitude
+            mapRect.left = if(mapRect.left == 0.0) longitude else min(mapRect.left, longitude)
+            mapRect.right = max(mapRect.right, longitude)
+            mapRect.bottom = if(mapRect.bottom == 0.0) latitude else min(mapRect.bottom, latitude)
+            mapRect.top = max(mapRect.top, latitude)
             val title = marker.getName(app)
             val markerColor = MapMarker.getColorId(marker.colorIndex)
             val icon = CarIcon.Builder(
@@ -76,6 +88,10 @@ class MapMarkersScreen(
                                 location.longitude)).build()).build())
             }
             listBuilder.addItem(rowBuilder.build())
+        }
+        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
+            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
+            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
         }
         val actionStripBuilder = ActionStrip.Builder()
         actionStripBuilder.addAction(
