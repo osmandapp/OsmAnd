@@ -1269,7 +1269,7 @@
     <string name="lang_sr">Srbština (cyrilice)</string>
     <string name="lang_zh_cn">Čínština (zjednodušená)</string>
     <string name="lang_zh_tw">Čínština (tradiční)</string>
-    <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vykreslovat cesty podle OSMC značení.</string>
@@ -4043,7 +4043,7 @@
     <string name="osmand_cloud_help_descr">Potřebujete pomoc\? Kontaktujte nás prosím na %1$s</string>
     <string name="osmand_cloud_create_account_descr">Zadejte prosím svoji e-mailovou adresu, na kterou bude zaslán ověřovací kód
 \na všechna data na ni budou navázána.</string>
-    <string name="osmand_cloud_login_descr">Zadejte prosím e-mailovou adresu, se kterou jste se registrovali. Bude na ni zasláno jednorázové heslo potřebné pro další krok.</string>
+    <string name="osmand_cloud_login_descr">Zadejte prosím e-mailovou adresu, se kterou jste se registrovali. Bude na ni zasláno jednorázové heslo.</string>
     <string name="verify_email_address">Ověřit e-mailovou adresu</string>
     <string name="verify_email_address_descr">Ověřovací kód byl odeslán na %1$s. Zadejte ho prosím do políčka níže.</string>
     <string name="cloud_email_not_registered">Tato emailová adresa není registrována pro OsmAnd Cloud</string>
@@ -5217,4 +5217,18 @@
     <string name="rendering_value_caiScale_name">Měřítko CAI</string>
     <string name="map_3d_mode_action">3D režim</string>
     <string name="shared_string_visible_on_map">Viditelné na mapě</string>
+    <string name="file_already_exists">Soubor již existuje</string>
+    <string name="bicycle_scd_device_name">Zařízení kola</string>
+    <string name="device_disconnected">%1$s odpojeno</string>
+    <string name="external_device_blood_pressure">Krevní tlak</string>
+    <string name="relief_3d">3D reliéf</string>
+    <string name="shared_string_wrist">Zápěstí</string>
+    <string name="shared_string_finger">Prst</string>
+    <string name="terrain_map">Mapa terénu</string>
+    <string name="shared_string_chest">Hruď</string>
+    <string name="no_bt_permission">Oprávnění Bluetooth nebylo uděleno</string>
+    <string name="shared_string_hand">Ruka</string>
+    <string name="no_search_results">Žádné výsledky</string>
+    <string name="device_connected">%1$s připojeno</string>
+    <string name="beats_per_minute_short">bpm</string>
 </resources>
