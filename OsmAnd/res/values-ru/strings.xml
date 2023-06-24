@@ -3690,7 +3690,7 @@
     <string name="add_to_a_track">Добавить к треку</string>
     <string name="set_working_days_to_continue">Для продолжения задайте рабочие дни</string>
     <string name="route_between_points">Маршрут между точками</string>
-    <string name="plan_a_route">Составление маршрута</string>
+    <string name="plan_a_route">Планирование маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Выберите интервал, через который будут отображаться метки с расстоянием или временем на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
