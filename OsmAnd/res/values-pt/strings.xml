@@ -5247,4 +5247,5 @@
     <string name="terrain_map">Mapa do terreno</string>
     <string name="relief_3d">Relevo 3D</string>
     <string name="free_mode">Modo livre</string>
+    <string name="relief_3d_description">Possua e observe o modelo do seu bairro ou de todo o continente.</string>
 </resources>

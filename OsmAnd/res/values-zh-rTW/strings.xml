@@ -1083,7 +1083,7 @@
     <string name="lang_af">南非荷蘭語</string>
     <string name="lang_hy">亞美尼亞</string>
     <string name="lang_eu">巴斯克</string>
-    <string name="lang_be">白俄羅斯</string>
+    <string name="lang_be">白羅斯</string>
     <string name="lang_bs">波士尼亞</string>
     <string name="lang_bg">保加利亞</string>
     <string name="lang_ca">加泰隆尼亞</string>
@@ -1099,7 +1099,7 @@
     <string name="lang_hi">印地語</string>
     <string name="lang_hu">匈牙利</string>
     <string name="lang_id">印尼</string>
-    <string name="lang_it">意大利</string>
+    <string name="lang_it">義大利</string>
     <string name="lang_ja">日本</string>
     <string name="lang_ko">南韓</string>
     <string name="lang_lv">拉脫維亞</string>
@@ -1945,7 +1945,7 @@
     <string name="change_markers_position">變更標記的位置</string>
     <string name="current_track">目前的軌跡</string>
     <string name="lang_es_us">西班牙語（美洲）</string>
-    <string name="lang_be_by">白俄羅斯語（拉丁）</string>
+    <string name="lang_be_by">白羅斯語（拉丁）</string>
     <string name="lang_kn">康納達語</string>
     <string name="lang_en_gb">英語（英國）</string>
     <string name="lang_ast">阿斯圖里亞斯語</string>
@@ -5231,4 +5231,8 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">允許鐵索攀岩</string>
     <string name="shared_string_close_the_dialog">關閉對話方塊</string>
+    <string name="terrain_map">地形圖</string>
+    <string name="relief_3d">3D 地形圖</string>
+    <string name="free_mode">免費模式</string>
+    <string name="relief_3d_description">你的社區或是整個大陸的擁有與觀察的縮放尺度。</string>
 </resources>
