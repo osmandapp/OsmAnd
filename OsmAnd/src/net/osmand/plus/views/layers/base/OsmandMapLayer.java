@@ -56,6 +56,7 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -85,18 +86,30 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	public static class CustomMapObjects<T> {
 		protected List<T> customMapObjects;
+		private boolean isChanged;
 
 		@NonNull
 		public List<T> getMapObjects() {
 			if (customMapObjects == null) {
-				return new ArrayList<>();
+				return Collections.emptyList();
 			} else {
 				return customMapObjects;
 			}
 		}
 
 		public void setCustomMapObjects(List<T> customMapObjects) {
+			if(this.customMapObjects != customMapObjects){
+				isChanged = true;
+			}
 			this.customMapObjects = customMapObjects;
+		}
+
+		public void acceptChanges() {
+			isChanged = false;
+		}
+
+		public boolean isChanged() {
+			return isChanged;
 		}
 	}
 

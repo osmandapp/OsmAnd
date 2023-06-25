@@ -278,7 +278,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if ((!settings.SHOW_MAP_MARKERS.get() && customObjectsDelegate == null)
-				    || (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects()))) {
+				|| (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects()))) {
 			clearMapMarkersCollections();
 			clearVectorLinesCollections();
 			resetCachedRenderer();
@@ -286,10 +286,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
-		if (customObjectsDelegate != null) {
-			activeMapMarkers = customObjectsDelegate.getMapObjects();
-		}
+		List<MapMarker> activeMapMarkers = (customObjectsDelegate != null) ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {
@@ -380,7 +377,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandSettings settings = app.getSettings();
 
 		if (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects())
-				    || customObjectsDelegate == null && (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get())) {
+				|| customObjectsDelegate == null && (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get())) {
 			clearVectorLinesCollections();
 			return;
 		}

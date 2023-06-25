@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
-		                                                               IMoveObjectProvider, MapTextProvider<FavouritePoint> {
+		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
 	private static final int START_ZOOM = 6;
 	private static final Log LOG = PlatformUtil.getLog(FavouritesLayer.class);
@@ -138,8 +138,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (hasMapRenderer()) {
 			if (mapActivityInvalidated || mapRendererChanged || nightModeChanged || showFavoritesChanged
-					    || favoritesChanged || textScaleChanged || textVisibleChanged || customObjectsDelegate != null) {
+					|| favoritesChanged || textScaleChanged || textVisibleChanged
+					|| (customObjectsDelegate != null && customObjectsDelegate.isChanged())) {
 				showFavorites();
+				if(customObjectsDelegate != null){
+					customObjectsDelegate.acceptChanges();
+				}
 				mapRendererChanged = false;
 			}
 		} else {
@@ -153,7 +157,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					QuadRect latLonBounds = tileBox.getLatLonBounds();
 					List<LatLon> fullObjectsLatLon = new ArrayList<>();
 					List<LatLon> smallObjectsLatLon = new ArrayList<>();
-					if(customObjectsDelegate != null){
+					if (customObjectsDelegate != null) {
 						drawPoints(customObjectsDelegate.getMapObjects(), latLonBounds, false, tileBox, boundIntersections, iconSize, canvas,
 								fullObjectsLatLon, smallObjectsLatLon);
 					} else {
@@ -182,8 +186,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			double lat = favoritePoint.getLatitude();
 			double lon = favoritePoint.getLongitude();
 			if (favoritePoint.isVisible() && favoritePoint != contextMenuLayer.getMoveableObject()
-					    && lat >= latLonBounds.bottom && lat <= latLonBounds.top
-					    && lon >= latLonBounds.left && lon <= latLonBounds.right) {
+					&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
+					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 				MapMarker marker = null;
 				if (synced) {
 					marker = mapMarkersHelper.getMapMarker(favoritePoint);
@@ -256,7 +260,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		favoritesMapLayerProvider = new FavoritesTileProvider(getContext(), getPointsOrder(), isTextVisible(),
 				getTextStyle(textScale), view.getDensity());
 
-		if(customObjectsDelegate != null){
+		if (customObjectsDelegate != null) {
 			List<FavouritePoint> points = customObjectsDelegate.getMapObjects();
 			showFavoritePoints(textScale, false, points);
 			favoritesMapLayerProvider.drawSymbols(mapRenderer);

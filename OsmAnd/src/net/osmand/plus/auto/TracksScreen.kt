@@ -3,6 +3,7 @@ package net.osmand.plus.auto
 import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
+import androidx.annotation.WorkerThread
 import androidx.car.app.CarContext
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
@@ -35,7 +36,7 @@ class TracksScreen(
 ) : BaseOsmAndAndroidAutoScreen(carContext) {
     val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
     var loadGpxFilesThread: Thread? = null
-    private val loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
+    private var loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
     private lateinit var loadTracksTask: LoadTracksTask
 
     init {
@@ -86,7 +87,7 @@ class TracksScreen(
     }
 
     private fun prepareTrackItems() {
-        loadedGpxFiles.clear()
+        loadedGpxFiles = HashMap()
         for (track in trackTab.trackItems) {
             track.file?.let { file ->
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
@@ -99,7 +100,6 @@ class TracksScreen(
                 loadedGpxFiles[track] = selectedGpxFile
             }
         }
-        invalidate()
     }
 
     private fun updateTrack(trackItem: TrackItem, dataItem: GpxDataItem?) {
