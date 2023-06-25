@@ -260,7 +260,7 @@
     <string name="av_audio_bitrate_descr">Выберите битрейт аудио.</string>
     <string name="shared_string_hide">Скрыть</string>
     <string name="no_address_found">Адрес не определён</string>
-    <string name="shared_string_near">Рядом с</string>
+    <string name="shared_string_near">Вблизи</string>
     <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Изменить POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
@@ -812,7 +812,7 @@
     <string name="error_calculating_route">Не удалось рассчитать маршрут.</string>
     <string name="error_calculating_route_occured">Не удалось рассчитать маршрут.</string>
     <string name="empty_route_calculated">Невозможно построить маршрут.</string>
-    <string name="arrived_at_destination">Вы прибыли.</string>
+    <string name="arrived_at_destination">Вы на месте.</string>
     <string name="invalid_locations">Неправильные координаты</string>
     <string name="go_back_to_osmand">Вернуться к карте</string>
     <string name="loading_data">Загрузка данных…</string>
@@ -2341,7 +2341,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Составить маршрут</string>
+    <string name="plan_route">Составление маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -3783,9 +3783,9 @@
 \n • Исправлены проблемы с импортом/экспортом настроек профиля
 \n
 \n</string>
-    <string name="sort_last_modified">Последнее изменение</string>
-    <string name="sort_name_descending">Имя: Я–А</string>
-    <string name="sort_name_ascending">Имя: А–Я</string>
+    <string name="sort_last_modified">По дате</string>
+    <string name="sort_name_descending">По имени: Я–А</string>
+    <string name="sort_name_ascending">По имени: А–Я</string>
     <string name="start_finish_icons">Значки старта и финиша</string>
     <string name="contour_lines_thanks">Спасибо за покупку «Контурных линий»</string>
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
@@ -3824,7 +3824,7 @@
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
     <string name="use_native_pt">Нативные функции при расчёте общественного транспорта</string>
-    <string name="message_you_need_add_two_points_to_show_graphs">Добавьте не менее двух точек</string>
+    <string name="message_you_need_add_two_points_to_show_graphs">Нужны хотя бы две точки</string>
     <string name="message_need_calculate_route_before_show_graph">Данные «%1$s» доступны только на дорогах, для построения графиков используйте «Маршрут между точками».</string>
     <string name="enter_text_separated">Вводите теги через запятую.</string>
     <string name="use_native_pt_desc">Перейти на расчёт маршрутов общественного транспорта с помощью Java (safe)</string>
@@ -4706,7 +4706,7 @@
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
-    <string name="no_altitude_data_desc">Прикрепите свой трек к дорогам, чтобы получить данные %1$s или рассчитать их онлайн.</string>
+    <string name="no_altitude_data_desc">%1$s: для получения данных проложите маршрут или выполните привязку к дорогам.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
     <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
