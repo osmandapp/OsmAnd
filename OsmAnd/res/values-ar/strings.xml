@@ -5310,4 +5310,5 @@
     <string name="free_mode">الوضع الحر</string>
     <string name="terrain_map">خريطة التضاريس</string>
     <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
+    <string name="relief_3d">الإغاثة ثلاثية الأبعاد</string>
 </resources>
