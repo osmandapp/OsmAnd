@@ -1081,14 +1081,14 @@
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
     <string name="lang_en">英文</string>
     <string name="lang_af">南非荷蘭語</string>
-    <string name="lang_hy">亞美尼亞</string>
+    <string name="lang_hy">亞美尼亞語</string>
     <string name="lang_eu">巴斯克</string>
-    <string name="lang_be">白俄羅斯</string>
+    <string name="lang_be">白羅斯</string>
     <string name="lang_bs">波士尼亞</string>
     <string name="lang_bg">保加利亞</string>
     <string name="lang_ca">加泰隆尼亞</string>
     <string name="lang_cs">捷克</string>
-    <string name="lang_da">丹麥</string>
+    <string name="lang_da">丹麥語</string>
     <string name="lang_nl">荷蘭</string>
     <string name="lang_fi">芬蘭</string>
     <string name="lang_fr">法語</string>
@@ -1098,12 +1098,12 @@
     <string name="lang_iw">希伯來</string>
     <string name="lang_hi">印地語</string>
     <string name="lang_hu">匈牙利</string>
-    <string name="lang_id">印尼</string>
-    <string name="lang_it">意大利</string>
-    <string name="lang_ja">日本</string>
-    <string name="lang_ko">南韓</string>
-    <string name="lang_lv">拉脫維亞</string>
-    <string name="lang_lt">立陶宛</string>
+    <string name="lang_id">印尼語</string>
+    <string name="lang_it">義大利語</string>
+    <string name="lang_ja">日語</string>
+    <string name="lang_ko">韓語</string>
+    <string name="lang_lv">拉脫維亞語</string>
+    <string name="lang_lt">立陶宛語</string>
     <string name="lang_mr">馬拉地</string>
     <string name="lang_no">書面挪威語</string>
     <string name="lang_pl">波蘭</string>
@@ -1222,7 +1222,7 @@
     <string name="gps_wake_up_timer">GPS 喚醒間隔</string>
     <string name="sleep_mode_stop_dialog">要中止 GPS 背景模式嗎？</string>
     <string name="lang_al">阿爾巴尼亞</string>
-    <string name="lang_ar">阿拉伯</string>
+    <string name="lang_ar">阿拉伯語</string>
     <string name="lang_sc">薩丁尼亞島</string>
     <string name="lang_sr">塞爾維亞語（西里爾文）</string>
     <string name="lang_zh_cn">中文（简体）</string>
@@ -1945,7 +1945,7 @@
     <string name="change_markers_position">變更標記的位置</string>
     <string name="current_track">目前的軌跡</string>
     <string name="lang_es_us">西班牙語（美洲）</string>
-    <string name="lang_be_by">白俄羅斯語（拉丁）</string>
+    <string name="lang_be_by">白羅斯語（拉丁）</string>
     <string name="lang_kn">康納達語</string>
     <string name="lang_en_gb">英語（英國）</string>
     <string name="lang_ast">阿斯圖里亞斯語</string>
@@ -4704,9 +4704,9 @@
     <string name="goods_delivery_desc">某些道路可能會限制送貨車輛。</string>
     <string name="routing_attr_goods_restrictions_name">貨運</string>
     <string name="download_complete">下載完成</string>
-    <string name="av_notes_photo_widget_desc">點擊小工具可以讓您拍照。</string>
-    <string name="av_notes_video_widget_desc">點擊小工具可以讓您錄製影片。</string>
-    <string name="av_notes_audio_widget_desc">點擊小工具可以讓您製作音訊註記。</string>
+    <string name="av_notes_photo_widget_desc">點一下小工具能讓你照相。</string>
+    <string name="av_notes_video_widget_desc">點一下小工具讓你錄製影片。</string>
+    <string name="av_notes_audio_widget_desc">點一下小工具讓你錄製語音筆記。</string>
     <string name="trip_recording_uphill_widget_desc">顯示目前記錄的行程的所有爬升高度總和。</string>
     <string name="trip_recording_duration_widget_desc">顯示目前記錄行程的軌跡紀錄時間。</string>
     <string name="trip_recording_distance_widget_desc">顯示目前記錄行程的距離。</string>
@@ -4774,7 +4774,7 @@
     <string name="quick_action_current_location_widget_descr">切換是否要在地圖上顯示或隱藏目前的位置。</string>
     <string name="coordinates_widget_map_center">座標：地圖中心</string>
     <string name="coordinates_widget_map_center_desc">顯示目前地圖中心的地理座標</string>
-    <string name="coordinates_widget_current_location_desc">顯示目前地理位置的地理座標</string>
+    <string name="coordinates_widget_current_location_desc">顯示目前地理位置的經緯度</string>
     <string name="coordinates_widget_current_location">座標：目前位置</string>
     <string name="developer_widgets">開發者小工具</string>
     <string name="map_widget_camera_tilt_desc">用來在透視模式下顯示相機傾斜角度。預設為 90°（無傾斜）。</string>
@@ -5231,4 +5231,8 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">允許鐵索攀岩</string>
     <string name="shared_string_close_the_dialog">關閉對話方塊</string>
+    <string name="terrain_map">地形圖</string>
+    <string name="relief_3d">3D 地形圖</string>
+    <string name="free_mode">免費模式</string>
+    <string name="relief_3d_description">你的社區或是整個大陸的擁有與觀察的縮放尺度。</string>
 </resources>

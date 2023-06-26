@@ -5260,4 +5260,9 @@
     <string name="external_sensors_not_found">Ez da sentsorerik aurkitu</string>
     <string name="external_sensors_source_of_data">Datuen iturria</string>
     <string name="show_all_tracks_on_the_map">Erakutsi arrasto guztiak mapan</string>
+    <string name="shared_string_close_the_dialog">Itxi elkarrizketa-koadroa</string>
+    <string name="routing_attr_allow_via_ferrata_name">Baimendu via ferrata</string>
+    <string name="routing_attr_allow_via_ferrata_description">Baimendu via ferratak dituzten xendak.</string>
+    <string name="power_watts_unit">Watts</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
 </resources>

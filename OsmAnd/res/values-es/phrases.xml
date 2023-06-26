@@ -1194,9 +1194,9 @@
     <string name="poi_covered_no">Al descubierto</string>
     <string name="poi_smoking_no">No</string>
     <string name="poi_smoking_outside">Sólo afuera</string>
-    <string name="poi_smoking_yes">Sí</string>
-    <string name="poi_smoking_separated">En sala separada</string>
-    <string name="poi_smoking_isolated">En sala aislada</string>
+    <string name="poi_smoking_yes">Permitido</string>
+    <string name="poi_smoking_separated">En una habitación separada</string>
+    <string name="poi_smoking_isolated">En una habitación aislada</string>
     <string name="poi_smoking_dedicated">Sólo fumadores</string>
     <string name="poi_toll_no">Sin peaje</string>
     <string name="poi_toll_yes">Peaje</string>
@@ -1485,9 +1485,9 @@
     <string name="poi_outdoor_seating_garden">Mesas al aire libre: jardín</string>
     <string name="poi_outdoor_seating_patio">Mesas al aire libre: patio</string>
     <string name="poi_cocktails_yes">Sí;Cócteles</string>
-    <string name="poi_second_hand_yes">Artículos usados: sí</string>
+    <string name="poi_second_hand_yes">Sí</string>
     <string name="poi_second_hand_no">Artículos usados: no</string>
-    <string name="poi_second_hand_only">Artículos usados: únicamente</string>
+    <string name="poi_second_hand_only">Sólo</string>
     <string name="poi_service_parts">Autopartes</string>
     <string name="poi_service_dealer">Concesionaria</string>
     <string name="poi_service_repair">Reparación</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_tunnel_name">Nombre del túnel</string>
     <string name="poi_vending_machine_fuel">Sí</string>
     <string name="poi_vending_machine_fuel_filter">Surtidores automáticos de combustible</string>
+    <string name="poi_second_hand_filter">Productos de segunda mano</string>
+    <string name="poi_surface_acrylic">Superficie: acrílico</string>
+    <string name="poi_surface_carpet">Superficie: moqueta</string>
+    <string name="poi_surface_plastic">Superficie: plástico</string>
+    <string name="poi_surface_rubber">Superficie: caucho</string>
 </resources>

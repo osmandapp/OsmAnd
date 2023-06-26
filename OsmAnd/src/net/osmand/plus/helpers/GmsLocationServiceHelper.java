@@ -44,29 +44,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 		this.app = app;
 
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app);
-
-		fusedLocationRequest = LocationRequest.create()
-				// Sets the desired interval for active location updates. This interval is inexact. You
-				// may not receive updates at all if no location sources are available, or you may
-				// receive them less frequently than requested. You may also receive updates more
-				// frequently than requested if other applications are requesting location at a more
-				// frequent interval.
-				//
-				// IMPORTANT NOTE: Apps running on Android 8.0 and higher devices (regardless of
-				// targetSdkVersion) may receive updates less frequently than this interval when the app
-				// is no longer in the foreground.
-				.setInterval(100)
-
-				// Sets the fastest rate for active location updates. This interval is exact, and your
-				// application will never receive updates more frequently than this value.
-				//.setFastestInterval(50)
-
-				// Sets the maximum time when batched location updates are delivered. Updates may be
-				// delivered sooner than this interval.
-				.setMaxWaitTime(0)
-
-				.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-
+		fusedLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100).build();
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
 			public void onLocationResult(@NonNull LocationResult locationResult) {

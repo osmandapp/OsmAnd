@@ -199,6 +199,7 @@
 	<string name="poi_waste_accepted">Accepted waste</string>
 	<string name="poi_cemt">CEMT</string>
 	<string name="poi_vending_machine_fuel_filter">Automatic fuel dispensers;Fuel vending machine</string>
+	<string name="poi_second_hand_filter">Second hand goods</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -1902,9 +1903,9 @@
 
 	<string name="poi_cocktails_yes">Yes;Cocktails</string>
 
-	<string name="poi_second_hand_yes">Second-hand goods</string>
+	<string name="poi_second_hand_yes">Yes</string>
 	<string name="poi_second_hand_no">No second-hand goods</string>
-	<string name="poi_second_hand_only">Second-hand goods only</string>
+	<string name="poi_second_hand_only">Only</string>
 
 	<string name="poi_service_parts">Parts</string>
 	<string name="poi_service_dealer">Dealer</string>
@@ -5150,5 +5151,10 @@
 	<string name="poi_bridge_name">Bridge name</string>
 
 	<string name="poi_vending_machine_fuel">Yes</string>
+
+	<string name="poi_surface_acrylic">Surface: acrylic</string>
+	<string name="poi_surface_carpet">Surface: carpet</string>
+	<string name="poi_surface_plastic">Surface: plastic</string>
+	<string name="poi_surface_rubber">Surface: rubber</string>
 
 </resources>

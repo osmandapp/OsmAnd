@@ -208,7 +208,7 @@
     <string name="poi_food_court">Markthalle</string>
     <string name="poi_ford">Furt</string>
     <string name="poi_fort">Fort</string>
-    <string name="poi_fountain">Springbrunnen</string>
+    <string name="poi_fountain">Brunnen</string>
     <string name="poi_frame">Bilderrahmengeschäft</string>
     <string name="poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
     <string name="poi_funeral_directors">Bestatter</string>
@@ -4585,4 +4585,6 @@
     <string name="poi_cemt_vii">VII</string>
     <string name="poi_tunnel_name">Name des Tunnels</string>
     <string name="poi_bridge_name">Name der Brücke</string>
+    <string name="poi_vending_machine_fuel">Ja</string>
+    <string name="poi_vending_machine_fuel_filter">Automatische Zapfsäulen; Kraftstoffautomat</string>
 </resources>

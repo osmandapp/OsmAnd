@@ -765,8 +765,8 @@
     <string name="use_internet_to_download_tile">Fehlende Kartenkacheln herunterladen</string>
     <string name="app_description">Navigationsapp</string>
     <string name="shared_string_exit">Beenden</string>
-    <string name="search_button">Suche</string>
-    <string name="search_activity">Suche</string>
+    <string name="search_button">Suchen</string>
+    <string name="search_activity">Suchen</string>
     <string name="searchpoi_activity">POI wählen</string>
     <string name="search_POI_level_btn">Weitere Ergebnisse</string>
     <string name="incremental_search_street">Suche Straße inkrementell</string>
@@ -1973,7 +1973,7 @@
     <string name="coords_format_descr">Format geographischer Koordinaten.</string>
     <string name="shared_string_is_open_24_7">24/7 geöffnet</string>
     <string name="storage_directory_card">Speicherkarte</string>
-    <string name="map_widget_search">Suche</string>
+    <string name="map_widget_search">Suchen</string>
     <string name="shared_string_from">von</string>
     <string name="city_type_district">Bezirk</string>
     <string name="city_type_neighbourhood">Nachbarschaft</string>
@@ -2699,7 +2699,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unbegrenzte Downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Karten mit Höhenlinien und Relief</string>
+    <string name="contour_lines_hillshade_maps">Karten mit Höhenlinien und Reliefs</string>
     <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
     <string name="purchase_dialog_title">Plan auswählen</string>
     <string name="download_wikipedia_description">Laden Sie die Wikipedia-Artikel für %1$s herunter, um sie offline zu lesen.</string>
@@ -5243,4 +5243,9 @@
     <string name="revolutions_per_minute_unit">U/min</string>
     <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
+    <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
+    <string name="free_mode">Freier Modus</string>
+    <string name="terrain_map">Geländekarte</string>
+    <string name="relief_3d">3D-Relief</string>
+    <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
 </resources>

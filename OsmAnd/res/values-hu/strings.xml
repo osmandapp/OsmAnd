@@ -670,7 +670,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
     <string name="play_commands_of_currently_selected_voice">Hang kijelölése és tesztelése bemondások lejátszásával:</string>
     <string name="debugging_and_development">OsmAnd fejlesztés</string>
-    <string name="native_rendering">Natív térképmegjelenítés</string>
+    <string name="native_rendering">Natív térképrajzolás</string>
     <string name="test_voice_prompts">Hangutasítások tesztelése</string>
     <string name="local_index_routing_data">Útvonaltervezési adatok</string>
     <string name="navigate_point_format">Formátum</string>
@@ -2299,7 +2299,7 @@
     <string name="mapillary_menu_descr_username">Csak az általa hozzáadott képek megjelenítése:</string>
     <string name="mapillary_menu_title_username">Felhasználónév</string>
     <string name="mapillary_menu_filter_description">A képek szűrése feltöltő, dátum vagy típus szerint. Csak magas nagyítási szinteknél lépnek érvénybe.</string>
-    <string name="map_widget_ruler_control">Sugárirányú vonalzó</string>
+    <string name="map_widget_ruler_control">Sugárvonalzó</string>
     <string name="average">Átlag</string>
     <string name="of">%1$d / %2$d</string>
     <string name="ascent_descent">Emelkedő/Lejtő</string>
@@ -3460,7 +3460,7 @@
     <string name="tracker_item">OsmAnd helymegosztás</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Gyorsművelet</string>
-    <string name="radius_ruler_item">Sugárirányú vonalzó</string>
+    <string name="radius_ruler_item">Sugárvonalzó</string>
     <string name="measure_distance_item">Távolságmérés</string>
     <string name="travel_item">Utazás (Wikivoyage és Wikipédia)</string>
     <string name="map_markers_item">Térképjelölők</string>
@@ -3577,7 +3577,7 @@
     <string name="keep_active">Maradjanak</string>
     <string name="shared_string_uninstall">Eltávolít</string>
     <string name="speed_cameras_alert">Bizonyos országokban a törvény tiltja a traffipaxriasztást.</string>
-    <string name="shared_string_bearing">Tájolás</string>
+    <string name="shared_string_bearing">Irányszög</string>
     <string name="item_deleted">%1$s törölve</string>
     <string name="speed_cameras_restart_descr">A traffipaxadatok végleges törléséhez indítsa újra az alkalmazást.</string>
     <string name="shared_string_uninstall_and_restart">Eltávolítás és Újraindítás</string>
@@ -3720,7 +3720,7 @@
     <string name="shared_string_gpx_route">Útvonal követése</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Ajánlás: Nehéz megjósolni, hogy mi lesz a felvételen és mi nem, így talán a legjobb ezt a szűrőt kikapcsolni.</string>
     <string name="map_widget_monitoring">Utazás felvétele</string>
-    <string name="search_offline_geo_error">Nem sikerült elemezni a következő térképmegjelenítési szándékot: „%s”.</string>
+    <string name="search_offline_geo_error">Nem sikerült elemezni a következő térképrajzolási szándékot: „%s”.</string>
     <string name="plan_route_open_existing_track">Meglévő nyomvonal megnyitása</string>
     <string name="track_coloring_solid">Tömör</string>
     <string name="access_hint_enter_address">Adja meg a címet</string>
@@ -4816,7 +4816,7 @@
     <string name="map_widget_altitude_map_center">Magasság: térképközéppont</string>
     <string name="map_widget_altitude_current_location">Magasság: jelenlegi hely</string>
     <string name="map_widget_altitude_desc">Megjeleníti a jelenlegi hely vagy a térképközéppont tengerszint feletti magasságát</string>
-    <string name="map_widget_rendering_fps">Térképmegjelenítés (képkocka/másodperc)</string>
+    <string name="map_widget_rendering_fps">Térképrajzolás (képkocka/mp)</string>
     <string name="map_widget_rendering_fps_desc">Megjeleníti, milyen gyorsan jelenik meg és frissül a térkép és a térképelemek (képkocka/másodperc, frames per second [FPS]).</string>
     <string name="simulate_location_by_gpx">Hely szimulálása GPX-szel</string>
     <string name="location_simulation_cutoff">A szimuláció kihagyja az első métereket</string>
@@ -5233,4 +5233,8 @@
     <string name="routing_attr_allow_via_ferrata_description">Tervezés mászóutakon keresztül is.</string>
     <string name="routing_attr_allow_via_ferrata_name">Mászóút engedélyezése</string>
     <string name="shared_string_close_the_dialog">Párbeszédpanel bezárása</string>
+    <string name="relief_3d">3D domborzat</string>
+    <string name="terrain_map">Terep térkép</string>
+    <string name="relief_3d_description">Sajátítsd el és figyeld meg a környéked vagy az egész kontinens makettjét.</string>
+    <string name="free_mode">Szabad mód</string>
 </resources>

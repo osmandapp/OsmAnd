@@ -1489,9 +1489,9 @@
     <string name="poi_outdoor_seating_garden">室外座位：花園</string>
     <string name="poi_outdoor_seating_patio">室外座位：天井</string>
     <string name="poi_cocktails_yes">是;雞尾酒</string>
-    <string name="poi_second_hand_yes">二手商品</string>
+    <string name="poi_second_hand_yes">是</string>
     <string name="poi_second_hand_no">無二手商品</string>
-    <string name="poi_second_hand_only">只有二手商品</string>
+    <string name="poi_second_hand_only">只有</string>
     <string name="poi_service_parts">零配件</string>
     <string name="poi_service_dealer">經銷商</string>
     <string name="poi_service_repair">維修</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_bridge_name">橋樑名稱</string>
     <string name="poi_vending_machine_fuel_filter">自動加油機；燃油自動販賣機</string>
     <string name="poi_vending_machine_fuel">是</string>
+    <string name="poi_second_hand_filter">二手商品</string>
+    <string name="poi_surface_acrylic">鋪面：壓克力</string>
+    <string name="poi_surface_carpet">鋪面：地毯</string>
+    <string name="poi_surface_rubber">鋪面：橡膠</string>
+    <string name="poi_surface_plastic">鋪面：塑膠</string>
 </resources>

@@ -251,7 +251,7 @@
     <string name="shared_string_online_maps">Onlinekort</string>
     <string name="online_map_settings_descr">Vælg online- eller cachelagrede kilder til kortfliser.</string>
     <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere baggrundssporing og navigation ved periodisk at vække GPS-enheden (med slukket skærm).</string>
-    <string name="osmand_accessibility_description">Gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter f.eks. justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, f.eks. automatisk at annoncere din position.</string>
+    <string name="osmand_accessibility_description">Gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter f.eks. justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, f.eks. automatisk at meddele din position.</string>
     <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, som forbehandlede OSM-kortfliser, satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiske kort og terrænskygger osv.
 \n
 \nEthvert af disse kort kan vises som det vigtigste (basis) kort, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
@@ -708,7 +708,7 @@
     <string name="edit_filter_save_as_menu_item">Gem som</string>
     <string name="filter_current_poiButton">Filter</string>
     <string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
-    <string name="poi_dialog_comment">Kommentar</string>
+    <string name="poi_dialog_comment">Kommentér</string>
     <string name="poi_dialog_opening_hours">Åben</string>
     <string name="poi_error_io_error_template">I/O-fejl under udførelsen af handling {0}.</string>
     <string name="poi_error_unexpected_template">Kunne ikke udføre handling {0}.</string>
@@ -3316,7 +3316,7 @@
     <string name="video_notes">Videonoter</string>
     <string name="photo_notes">Fotonoter</string>
     <string name="route_recalculation">Genberegning af rute</string>
-    <string name="accessibility_announce">Annoncere</string>
+    <string name="accessibility_announce">Meddel</string>
     <string name="login_and_pass">Brugernavn og adgangskode</string>
     <string name="plugin_global_prefs_info">Disse indstillinger for udvidelsen er globale og gælder for alle profiler</string>
     <string name="osm_editing">OSM redigering</string>
@@ -3581,7 +3581,7 @@
     <string name="online_map_url_helper_text">Angiv eller indsæt URL-adressen til onlinekilden.</string>
     <string name="shared_string_legal">Juridisk</string>
     <string name="keep_active">Hold aktiv</string>
-    <string name="speed_cameras_alert">I nogle lande er indberetninger om hastighedskameraer forbudt i henhold til loven.</string>
+    <string name="speed_cameras_alert">I nogle lande er advarsler om fartkameraer forbudt ved lov.</string>
     <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
     <string name="vessel_width_limit_description">Indstil fartøjets bredde for at undgå smalle broer</string>
     <string name="plugin_wikipedia_description">Få oplysninger om interessepunkter fra Wikipedia, en offline lommeguide med artikler om steder og destinationer.</string>
@@ -4174,7 +4174,7 @@
     <string name="vessel_height_limit_description">Indstil fartøjets højde for at undgå lave broer. Husk at hvis broen er bevægelig, vil vi bruge dens højde i åben tilstand.</string>
     <string name="routing_attr_length_description">Angiv køretøjslængde der skal være tilladt på ruter.</string>
     <string name="shared_string_bearing">Kurs</string>
-    <string name="speed_cameras_restart_descr">Genstart appen for at slette alle data fra fartkameraer.</string>
+    <string name="speed_cameras_restart_descr">Genstart appen for at slette alle data om fartkameraer.</string>
     <string name="speed_cameras_removed_descr">Denne enhed har ikke fartkameraer.</string>
     <string name="use_volume_buttons_as_zoom_descr">Kontrollér kortets zoom-niveau ved hjælp af lydstyrkeknapperne på enheden.</string>
     <string name="quick_action_remove_next_destination_descr">Sletter den næste destination på din rute. Hvis det er den endelige destination, stopper navigationen.</string>
@@ -4722,7 +4722,7 @@
     <string name="duplacate_widget_added_snackbar">En modul-dublet tilføjes listen.</string>
     <string name="shared_string_duplicate">Duplikér</string>
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
-    <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du starte en videooptagelse.</string>
+    <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du optage en video.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
     <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedkørsler på den aktuelt registreret tur.</string>
     <string name="trip_recording_uphill_widget_desc">Viser summen af alle stigninger på den aktuelt registreret tur.</string>
@@ -5001,7 +5001,7 @@
     <string name="cloud_all_changes_uploaded_descr">Alle ændringer foretaget på denne enhed er synkroniseret med OsmAnd Cloud.</string>
     <string name="cloud_no_conflicts">Der er ingen konflikter.</string>
     <string name="download_cloud_version">Download cloud-version</string>
-    <string name="cloud_sync_progress">Synkronisering...%1$s</string>
+    <string name="cloud_sync_progress">Synkroniserer...%1$s</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fillisten kunne ikke hentes fra serveren.</string>
     <string name="import_export">Import/eksport</string>
     <string name="modified_file">Ændret fil</string>
@@ -5245,4 +5245,7 @@
     <string name="revolutions_per_minute_unit">OPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Tillad via ferrata</string>
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
+    <string name="relief_3d">3D-relief</string>
+    <string name="terrain_map">Terrænkort</string>
+    <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
 </resources>

@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPulsación larga para las opciones"</string>
+\nToque largo para opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -1205,7 +1205,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">"
 \n
-\nPulsación larga para ver en el mapa"</string>
+\nToque largo para ver en el mapa"</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
@@ -2030,7 +2030,7 @@
     <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación de viaje.</string>
     <string name="shared_string_trip">Viaje</string>
     <string name="shared_string_recorded">Grabado</string>
-    <string name="shared_string_record">Grabar</string>
+    <string name="shared_string_record">Registro</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color para las curvas de nivel</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
     <string name="save_track_min_speed_descr">Filtro: No registrar puntos por debajo de esta velocidad.</string>
@@ -2656,7 +2656,7 @@
     <string name="shared_string_contents">Contenido</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="shared_string_dont">No</string>
-    <string name="shared_string_do">Sí</string>
+    <string name="shared_string_do">Hacer</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descargar las imágenes</string>
     <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
@@ -3684,7 +3684,7 @@
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
     <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
-    <string name="monitoring_control_start">Grabar</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activado desde el widget «Grabación de viaje» en el mapa).</string>
     <string name="gpx_monitoring_stop">Pausar grabación de viaje</string>
     <string name="gpx_monitoring_start">Reanudar grabación de viaje</string>
@@ -3752,7 +3752,7 @@
     <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
-    <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
+    <string name="pass_whole_track_descr">Punto desde el que navegar la traza</string>
     <string name="start_of_the_track">Inicio de la traza</string>
     <string name="nearest_point">Punto más cercano</string>
     <string name="attach_to_the_roads">Unir a los caminos</string>
@@ -5240,4 +5240,8 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Permitir vía férrea</string>
     <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
+    <string name="free_mode">Modo libre</string>
+    <string name="relief_3d">Relieve en 3D</string>
+    <string name="terrain_map">Mapa del terreno</string>
+    <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>
 </resources>

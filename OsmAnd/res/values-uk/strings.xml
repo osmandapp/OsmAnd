@@ -5247,4 +5247,8 @@
     <string name="power_watts_unit">Ватт</string>
     <string name="revolutions_per_minute_unit">об/хв</string>
     <string name="shared_string_close_the_dialog">Закрити діалогове вікно</string>
+    <string name="terrain_map">Мапа рельєфу</string>
+    <string name="relief_3d">3D-рельєф</string>
+    <string name="free_mode">Вільний режим</string>
+    <string name="relief_3d_description">Придбайте та спостерігайте за масштабною моделлю вашого району або цілого континенту.</string>
 </resources>

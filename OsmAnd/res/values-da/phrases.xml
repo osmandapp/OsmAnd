@@ -1251,10 +1251,10 @@
     <string name="poi_garden_type_private">Havetype: privat</string>
     <string name="poi_garden_type_botanical">Havetype: botanisk</string>
     <string name="poi_garden_style_french">Havestil: Fransk</string>
-    <string name="poi_garden_style_english">Havestil: Eengelsk</string>
+    <string name="poi_garden_style_english">Havestil: Engelsk</string>
     <string name="poi_garden_style_japanese">Havestil: Japansk</string>
     <string name="poi_garden_style_kitchen">Havestil: køkken</string>
-    <string name="poi_garden_style_rosarium">Havestil: rosen</string>
+    <string name="poi_garden_style_rosarium">Havestil: rosenhave</string>
     <string name="poi_capacity">Kapacitet</string>
     <string name="poi_capacity_disabled_yes">Ja</string>
     <string name="poi_capacity_disabled_no">Ingen pladser forbeholdt handicappede</string>
@@ -1720,7 +1720,7 @@
     <string name="poi_bridge_structure_floating">Brokonstruktion: pontonbro</string>
     <string name="poi_bridge_structure_humpback">Brokonstruktion: buet bro</string>
     <string name="poi_bridge_structure_cable_stayed">Brokonstruktion: skråstagsbro</string>
-    <string name="poi_bridge_structure_boardwalk">Brokonstruktion: havnepromenade</string>
+    <string name="poi_bridge_structure_boardwalk">Brokonstruktion: plankebro</string>
     <string name="poi_bridge_structure_simple_wooden">Brokonstruktion: simpel træbro</string>
     <string name="poi_bridge_structure_viaduct">Brokonstruktion: viadukt</string>
     <string name="poi_bridge_structure_aqueduct">Brokonstruktion: akvædukt</string>
@@ -3366,7 +3366,7 @@
     <string name="poi_shop_boat">Bådforretning</string>
     <string name="poi_cannabis">Cannabisbutik</string>
     <string name="poi_socket">Stikkontakt</string>
-    <string name="poi_socket_chademo_output_filter">CHAdeMO-udgang</string>
+    <string name="poi_socket_chademo_output_filter">CHAdeMO-stikudgang</string>
     <string name="poi_socket_type2_output_filter">Type 2-udgang</string>
     <string name="poi_socket_type2_combo_output_filter">Type 2-combo-udgang</string>
     <string name="poi_socket_type3_output_filter">Type 3-udgang</string>
@@ -3808,10 +3808,10 @@
     <string name="poi_elevator">Elevator</string>
     <string name="poi_nuts">Nøddebutik</string>
     <string name="poi_beehive">Bikube</string>
-    <string name="poi_departures_board_timetable">Tidsplan</string>
-    <string name="poi_departures_board_realtime">Realtid</string>
-    <string name="poi_departures_board_delay">Forsinkelse</string>
-    <string name="poi_departures_board_yes">Ja</string>
+    <string name="poi_departures_board_timetable">Tidsplan;afgangstavle</string>
+    <string name="poi_departures_board_realtime">Realtid;afgangstavle</string>
+    <string name="poi_departures_board_delay">Forsinkelse;afgangstavle</string>
+    <string name="poi_departures_board_yes">Ja;afgangstavle</string>
     <string name="poi_departures_board_no">Afgangstavle: nej</string>
     <string name="poi_recycling_small_electrical_appliances">Små elektriske apparater</string>
     <string name="poi_departures_board">Afgangstavle</string>
@@ -4015,4 +4015,10 @@
     <string name="poi_waste_accepted">Accepteret affald</string>
     <string name="poi_water_filter">Vand;drikkevand</string>
     <string name="poi_recycling_pet_drink_bottles">PET-drikkeflasker</string>
+    <string name="poi_playground_water">Vand</string>
+    <string name="poi_hot_water_yes">Varmt vand: ja</string>
+    <string name="poi_hot_water_no">Varmt vand: nej</string>
+    <string name="poi_water_sports">Vandsportsbutik</string>
+    <string name="poi_board_title">Tavletitel</string>
+    <string name="poi_socket_chademo_voltage_filter">CHAdeMO-stikspænding</string>
 </resources>

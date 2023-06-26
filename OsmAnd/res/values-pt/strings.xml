@@ -5244,4 +5244,8 @@
     <string name="routing_attr_allow_via_ferrata_name">Permitir via ferrata</string>
     <string name="power_watts_unit">Watts</string>
     <string name="shared_string_close_the_dialog">Fechar o ecrã</string>
+    <string name="terrain_map">Mapa do terreno</string>
+    <string name="relief_3d">Relevo 3D</string>
+    <string name="free_mode">Modo livre</string>
+    <string name="relief_3d_description">Possua e observe o modelo do seu bairro ou de todo o continente.</string>
 </resources>

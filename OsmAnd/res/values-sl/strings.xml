@@ -1165,7 +1165,7 @@
     <string name="gpx_option_calculate_first_last_segment">Izračunanje prvega in zadnjega odseka poti</string>
     <string name="use_displayed_track_for_navigation">Ali želite uporabiti prikazano sled za navigacijo?</string>
     <string name="route_preferences">Nastavitve poti</string>
-    <string name="route_info">Podrobnosti poti</string>
+    <string name="route_info">Informacije o poti</string>
     <string name="calculate_osmand_route_gpx">Izračun poti brez povezave</string>
     <string name="interrupt_music_descr">Glasovni pozivi začasno ustavijo predvajanje glasbe.</string>
     <string name="interrupt_music">Prekini predvajanje glasbe</string>
@@ -1429,7 +1429,7 @@
     <string name="osmand_parking_time_left">preostalo je</string>
     <string name="parking_place_limited">Parkiranje je časovno omejeno na</string>
     <string name="your_edits">Vaša urejanja</string>
-    <string name="drawer">Seznam</string>
+    <string name="drawer">Samo seznam</string>
     <string name="short_location_on_map">ZD (λ) %1$s
 \nZŠ (β) %2$s</string>
     <string name="tips_and_tricks_descr">Pogosta vprašanja, nedavne spremembe in druge podrobnosti.</string>
@@ -2750,7 +2750,7 @@
     <string name="light_rs_render_descr">Preprost način za vožnjo. Nežen nočni način, izohipse, kontrastne oranžne ceste. Zatemni sekundarne objekte zemljevida.</string>
     <string name="topo_render_descr">Za pohodništvo, treking in kolesarjenje v naravi. Berljivo na prostem. Kontrastne ceste in naravni objekti, različne vrste poti, napredne možnosti izohips, dodatne podrobnosti. Prilagajanje celovitosti površine za razlikovanje kakovosti cest. Ni nočnega načina.</string>
     <string name="touring_view_render_descr">Turistični slog z visokim kontrastom in največ podrobnostmi. Vključuje vse možnosti privzetega sloga OsmAnd, hkrati pa prikazuje čim več podrobnosti, zlasti o cestah, stezah in drugih načinih potovanja. Jasno razlikovanje med vrstami cest. Primeren za dnevno in nočno uporabo, ter uporabo na prostem.</string>
-    <string name="default_render_descr">Slog za splošno uporabo. Poenostavljen prikaz za uporabo v strnjenih naseljih. Vsebuje izohipse, poti, kakovost površine, omejitve dostopa, cestne ovire, upodabljanje poti po lestvici SAC, objekte za športe na divjih vodah.</string>
+    <string name="default_render_descr">Slog za splošno uporabo. Poenostavljen prikaz za uporabo v strnjenih naseljih. Vsebuje izohipse, poti, kakovost površine, omejitve dostopa, cestne ovire, upodabljanje poti po lestvici SAC/CAI, objekte za športe na divjih vodah.</string>
     <string name="read_wikipedia_offline_description">Naročite se na storitev OsmAnd Live za dostop brez povezave do prispevkov na Wikipediji in Wikivoyage.</string>
     <string name="purchase_cancelled_dialog_descr">Obnovite naročilo za uporabo vseh zmožnosti programa:</string>
     <string name="maps_you_need_descr">Na osnovi shranjenih zaznamkov je priporočljivo prejeti zemljevide:</string>
@@ -3826,7 +3826,7 @@
     <string name="cloud_email_not_registered">Ta e-poštni naslov ni registriran za OsmAnd Cloud</string>
     <string name="shared_string_hide_slope">Skrij naklon</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Izogibanje območjem odprtim samo za vozila z nizkimi emisijami</string>
-    <string name="osmand_cloud_login_descr">Prosimo, vnesi e-poštni naslov, s katerim si se registriral. Poslano mu bo enkratno geslo za naslednji korak.</string>
+    <string name="osmand_cloud_login_descr">Prosimo, vnesi e-poštni naslov, s katerim si se registriral. Na ta naslov bo poslano enkratno geslo.</string>
     <string name="shared_string_show_slope">Prikaži naklon</string>
     <string name="shared_string_uphill">Navkreber</string>
     <string name="shared_string_max_height">Maks. višina</string>
@@ -4729,7 +4729,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Pokaži poti MTB IMBA</string>
     <string name="auto_25_chars_route_tr_kr">Zavij desno in drži se desne</string>
     <string name="auto_25_chars_route_tu_kr">Obrni se in drži se desne</string>
-    <string name="compass_click_desc">Namig: tapni gradnik kompasa, če želiš preklopiti način usmerjenosti zemljevida.</string>
+    <string name="compass_click_desc">Namig: tapni na gumb kompas, če želiš preklopiti način usmerjenosti zemljevida.</string>
     <string name="true_bearing_wdiget_desc">Kot med pravim (geografskim) severom in ciljno točko, opazovano s tvoje lokacije.</string>
     <string name="relative_bearing_widget_desc">Prikazuje kot med tvojo smerjo gibanja v naprej in ciljno točko.</string>
     <string name="first_marker_widget_desc">Gradnik lahko nastaviš tako, da prikaže ali razdaljo ali predvideni čas prihoda do prve oznake na zemljevidu.</string>
@@ -5207,4 +5207,31 @@
     <string name="rendering_value_sector4_name">Sektor 4</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_name_only_name">Samo ime</string>
+    <string name="routing_attr_allow_via_ferrata_name">Dovoli preko ferate</string>
+    <string name="calculate_offline_altitude_descr">Na podlagi podatkov iz zemljevida višin lahko brez povezave izračunamo nadmorsko višino. Razlike glede na zabeleženo nadmorsko višino naprave se lahko uporabijo kot popravek nadmorske višine.</string>
+    <string name="show_all_tracks_on_the_map">Prikaži vse sledi na zemljevidu</string>
+    <string name="shared_string_new_track">Nova sled</string>
+    <string name="rendering_attr_lightDetail_description">Privzeto: ime pomorske oznake (light character.group.period), izberi dodatne informacije o sektorjih 1 do 3 ali sektorjih 1,2,3,4,5 light character</string>
+    <string name="calculate_offline">Izračunaj brez povezave</string>
+    <string name="error_calculate">Rezultat izračuna je prazen</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder">Prazna mapa</string>
+    <string name="write_data_from_sensor_to_track">Zapisovanje podatkov iz zunanjih senzorjev v GPX med snemanjem potovanja.</string>
+    <string name="save_track_external_sensors_data">Podatki</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Ni povezanih senzorjev te vrste</string>
+    <string name="no_poi_for_category">Točke POI ni bilo mogoče najti</string>
+    <string name="shared_string_close_the_dialog">Zapri pogovorno okno</string>
+    <string name="routing_attr_allow_via_ferrata_description">Dovoli poti po feratah.</string>
+    <string name="power_watts_unit">Vatov</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="external_sensors_not_found">Senzorji niso bili najdeni</string>
+    <string name="external_sensors_source_of_data">Vir podatkov</string>
+    <string name="rssi_widget_desc">Prikazuje raven RSSI zunanje naprave.</string>
+    <string name="tracks_empty_folder_description">V tej mapi še ni nobene sledi.</string>
+    <string name="track_not_recorded">Ni zabeleženo</string>
+    <string name="shared_string_visible_on_map">Vidno na zemljevidu</string>
+    <string name="poi_categories">Kategorije POI</string>
+    <string name="delete_track_folder_dialog_message">To bo izbrisalo mapo \"%1$s\" in vse vključene sledi (%2$s).</string>
+    <string name="delete_folder_question">Želiš izbrisati mapo\?</string>
+    <string name="delete_folder">Izbriši mapo</string>
 </resources>

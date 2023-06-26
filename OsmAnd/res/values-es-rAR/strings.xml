@@ -389,7 +389,7 @@
 \n
 \nVéase - https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
-    <string name="srtm_plugin_description">La información del terreno, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y más. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel y/o el color de la inclinación. 
+    <string name="srtm_plugin_description">La información topográfica, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y más. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel y/o el color de la inclinación.
 \n
 \nLos datos subyacentes provienen de SRTM y ASTER.
 \n
@@ -3140,7 +3140,7 @@
     <string name="osmand_settings">Ajustes de OsmAnd</string>
     <string name="copy_from_other_profile">Copiar desde otro perfil</string>
     <string name="turn_screen_on">Encender pantalla</string>
-    <string name="map_during_navigation_info">Mapa durante la navegación</string>
+    <string name="map_during_navigation_info">Mapa al navegar</string>
     <string name="map_during_navigation">Mapa durante la navegación</string>
     <string name="shared_string_other">Otros</string>
     <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
@@ -3458,7 +3458,7 @@
     <string name="terrain_empty_state_text">Muestra los sombreados o pendientes en el mapa. Más información sobre estos tipos de mapas en nuestro sitio.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="download_slope_maps">Pendientes</string>
-    <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa del terreno en el mapa.</string>
+    <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa topográfica en el mapa.</string>
     <string name="delete_description">Borrar descripción</string>
     <string name="add_description">Añadir descripción</string>
     <string name="select_group">Elegir grupo</string>
@@ -3729,7 +3729,7 @@
     <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
-    <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
+    <string name="pass_whole_track_descr">Punto desde el que navegar la traza</string>
     <string name="start_of_the_track">Inicio de la traza</string>
     <string name="nearest_point">Punto más cercano</string>
     <string name="attach_to_the_roads">Unir a los caminos</string>
@@ -4164,10 +4164,10 @@
     <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas del terreno: curvas de nivel, sombreados, pendiente</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas topográficos: curvas de nivel, sombreados, pendiente</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
     <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
-    <string name="terrain_maps">Mapas del terreno</string>
+    <string name="terrain_maps">Mapas topográficos</string>
     <string name="nautical_depth">Profundidad náutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Consigue «%1$s» como parte del plan %2$s. Comparación:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
@@ -5255,4 +5255,8 @@
     <string name="power_watts_unit">Vatios (watts)</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
+    <string name="terrain_map">Mapa topográfico</string>
+    <string name="free_mode">Modo libre</string>
+    <string name="relief_3d">Relieve 3D</string>
+    <string name="relief_3d_description">Obtén y observa el modelo a escala de tu barrio o de todo el continente.</string>
 </resources>
