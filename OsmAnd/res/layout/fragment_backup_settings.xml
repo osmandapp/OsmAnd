@@ -282,6 +282,12 @@
 					android:id="@+id/delete_old_container"
 					layout="@layout/preference_with_descr" />
 
+				<include layout="@layout/divider_half_item_with_background" />
+
+				<include
+					android:id="@+id/delete_account_container"
+					layout="@layout/preference_with_descr" />
+
 			</LinearLayout>
 
 			<include layout="@layout/card_bottom_divider" />

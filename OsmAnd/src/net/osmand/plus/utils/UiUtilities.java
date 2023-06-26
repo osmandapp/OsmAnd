@@ -81,7 +81,8 @@ public class UiUtilities {
 		SECONDARY_HARMFUL,
 		SECONDARY_ACTIVE,
 		STROKED,
-		TERTIARY
+		TERTIARY,
+		TERTIARY_HARMFUL
 	}
 
 	public enum CompoundButtonType {
@@ -630,6 +631,11 @@ public class UiUtilities {
 				textAndIconColorResId = nightMode ? R.color.active_color_primary_dark : R.color.button_color_active_light;
 				int disabledColor = ColorUtilities.getSecondaryTextColorId(nightMode);
 				colorStateList = AndroidUtils.createEnabledColorStateList(ctx, disabledColor, textAndIconColorResId);
+				break;
+			case TERTIARY_HARMFUL:
+				AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				AndroidUtils.setBackground(buttonView, AppCompatResources.getDrawable(ctx, R.drawable.dlg_btn_tertiary_harmfull));
+				textAndIconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 				break;
 		}
 		if (textAndIconColorResId != INVALID_ID) {
