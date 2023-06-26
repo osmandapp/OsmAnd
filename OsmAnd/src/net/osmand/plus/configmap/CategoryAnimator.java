@@ -62,9 +62,7 @@ public class CategoryAnimator {
 		// Determine passed distance in current direction
 		float currentHeaderHeight = header.getHeight();
 		float wholeDistance = maxHeaderHeight - minHeaderHeight;
-		float leftDistance = isExpanding ?
-				(currentHeaderHeight - minHeaderHeight) :
-				(maxHeaderHeight - currentHeaderHeight);
+		float leftDistance = isExpanding ? (currentHeaderHeight - minHeaderHeight) : (maxHeaderHeight - currentHeaderHeight);
 		float passedDistance = wholeDistance - leftDistance;
 
 		// Determine restrictions
@@ -97,7 +95,7 @@ public class CategoryAnimator {
 	private void calculateCommonParameters() {
 		descHeight = getDimen(R.dimen.default_desc_line_height);
 		int titleHeight = getDimen(R.dimen.default_title_line_height);
-		int verticalMargin = getDimen(R.dimen.content_padding_small)*2;
+		int verticalMargin = getDimen(R.dimen.content_padding_small) * 2;
 		minHeaderHeight = titleHeight + verticalMargin - AndroidUtils.dpToPx(ctx, 3);
 		maxHeaderHeight = minHeaderHeight + descHeight;
 
@@ -114,7 +112,8 @@ public class CategoryAnimator {
 		divider.setVisibility(View.VISIBLE);
 
 		// Description will be invisible until collapsing animation finished
-		tvDescription.setVisibility(View.INVISIBLE);
+		boolean hasDescription = category.getDescription() != null;
+		tvDescription.setVisibility(hasDescription ? View.INVISIBLE : View.GONE);
 	}
 
 	private void onMainAnimationUpdate(int val, float minValue, float maxValue) {
@@ -148,9 +147,10 @@ public class CategoryAnimator {
 		ivIndicator.setRotation(0);
 		ivIndicator.setImageResource(indicatorRes);
 
+		boolean hasDescription = category.getDescription() != null;
 		// Update views visibility
 		AndroidUiHelper.updateVisibility(divider, isExpanding);
-		AndroidUiHelper.updateVisibility(tvDescription, !isExpanding);
+		AndroidUiHelper.updateVisibility(tvDescription, !isExpanding && hasDescription);
 		AndroidUiHelper.updateVisibility(itemsContainer, isExpanding);
 
 		// Set items container height as WRAP_CONTENT
