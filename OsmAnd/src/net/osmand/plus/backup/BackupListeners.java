@@ -12,6 +12,7 @@ public class BackupListeners {
 	private final List<OnDeleteFilesListener> deleteFilesListeners = new ArrayList<>();
 	private final List<OnRegisterUserListener> registerUserListeners = new ArrayList<>();
 	private final List<OnRegisterDeviceListener> registerDeviceListeners = new ArrayList<>();
+	private final List<OnDeleteAccountListener> deleteAccountListeners = new ArrayList<>();
 
 	public interface OnDeleteFilesListener {
 		default void onFilesDeleteStarted(@NonNull List<RemoteFile> files) { }
@@ -33,6 +34,10 @@ public class BackupListeners {
 
 	public interface OnUpdateSubscriptionListener {
 		void onUpdateSubscription(int status, @Nullable String message, @Nullable String error);
+	}
+
+	public interface OnDeleteAccountListener {
+		void onDeleteAccount(int status, @Nullable String message, @Nullable BackupError error);
 	}
 
 	public interface OnDownloadFileListListener {
@@ -69,6 +74,7 @@ public class BackupListeners {
 		boolean isDownloadCancelled();
 	}
 
+	@NonNull
 	public List<OnDeleteFilesListener> getDeleteFilesListeners() {
 		return deleteFilesListeners;
 	}
@@ -83,6 +89,7 @@ public class BackupListeners {
 		deleteFilesListeners.remove(listener);
 	}
 
+	@NonNull
 	public List<OnRegisterUserListener> getRegisterUserListeners() {
 		return registerUserListeners;
 	}
@@ -97,6 +104,7 @@ public class BackupListeners {
 		registerUserListeners.remove(listener);
 	}
 
+	@NonNull
 	public List<OnRegisterDeviceListener> getRegisterDeviceListeners() {
 		return registerDeviceListeners;
 	}
@@ -109,5 +117,20 @@ public class BackupListeners {
 
 	public void removeRegisterDeviceListener(@NonNull OnRegisterDeviceListener listener) {
 		registerDeviceListeners.remove(listener);
+	}
+
+	@NonNull
+	public List<OnDeleteAccountListener> getDeleteAccountListeners() {
+		return deleteAccountListeners;
+	}
+
+	public void addDeleteAccountListener(@NonNull OnDeleteAccountListener listener) {
+		if (!deleteAccountListeners.contains(listener)) {
+			deleteAccountListeners.add(listener);
+		}
+	}
+
+	public void removeDeleteAccountListener(@NonNull OnDeleteAccountListener listener) {
+		deleteAccountListeners.remove(listener);
 	}
 }

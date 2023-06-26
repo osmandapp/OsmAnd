@@ -61,9 +61,7 @@ public class DeleteOldFilesCommand extends BaseDeleteFilesCommand {
 		super.onProgressUpdate(objects);
 		for (OnDeleteFilesListener listener : getListeners()) {
 			Object obj = objects[0];
-			if (obj instanceof Map) {
-				listener.onFilesDeleteDone((Map) obj);
-			} else if (obj instanceof List) {
+			if (obj instanceof List) {
 				listener.onFilesDeleteStarted((List) obj);
 			} else if (obj instanceof Integer && objects.length == 2) {
 				int status = (Integer) obj;
@@ -119,8 +117,6 @@ public class DeleteOldFilesCommand extends BaseDeleteFilesCommand {
 				if (!filesToDelete.isEmpty()) {
 					publishProgress(filesToDelete);
 					deleteFiles(filesToDelete);
-				} else {
-					publishProgress(Collections.emptyMap());
 				}
 			}
 		};
