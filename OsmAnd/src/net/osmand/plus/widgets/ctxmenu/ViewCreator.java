@@ -37,6 +37,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
@@ -288,18 +289,17 @@ public class ViewCreator {
 		return view;
 	}
 
+	@NonNull
 	private View getTerrainDescriptionView(@NonNull View view, @NonNull ContextMenuItem item) {
-		View btnGet = view.findViewById(R.id.button_get);
-		UiUtilities.setupDialogButton(nightMode, btnGet, UiUtilities.DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
-		View divider = view.findViewById(R.id.bottom_divider);
-		AndroidUiHelper.updateVisibility(divider, PluginsHelper.isEnabled(NauticalMapsPlugin.class));
-
-		btnGet.setOnClickListener(v -> {
+		View button = view.findViewById(R.id.button_get);
+		button.setOnClickListener(v -> {
 			ItemClickListener listener = item.getItemClickListener();
 			if (listener != null) {
 				listener.onContextMenuClick(uiAdapter, view, item, false);
 			}
 		});
+		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), PluginsHelper.isEnabled(NauticalMapsPlugin.class));
 		return view;
 	}
 

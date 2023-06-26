@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
@@ -46,6 +47,32 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	private View applyButton;
 	protected LinearLayout contentContainer;
 
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		MapActivity activity = requireMapActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				activity.getSupportFragmentManager().popBackStack();
+				activity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, false);
+			}
+		});
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,23 +88,16 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			activity.onBackPressed();
 		});
 
-		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, false);
-			}
-		});
-
-		updateApplyButton(false);
 		setupToolBar(view);
 		buildZoomButtons(view);
 		moveCompassButton(view);
 		setupMainContent();
+		updateApplyButton(false);
 
-		requireMapActivity().refreshMap();
+		refreshMap();
 		return view;
 	}
+
 
 	protected abstract String getToolbarTitle();
 
@@ -88,17 +108,6 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	}
 
 	protected abstract void setupMainContent();
-
-	@Override
-	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
-	}
-
-	@Override
-	protected boolean isUsedOnMap() {
-		return true;
-	}
 
 	protected void updateApplyButton(boolean enable) {
 		applyButton.setEnabled(enable);
@@ -130,11 +139,13 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupToolBar(@NonNull View view) {
+		ViewCompat.setElevation(view.findViewById(R.id.toolbar), 5.0f);
+
 		TextView title = view.findViewById(R.id.title);
 		title.setText(getToolbarTitle());
 
 		ImageView backButton = view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(requireMapActivity()), ColorUtilities.getDefaultIconColorId(nightMode)));
+		backButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext()), ColorUtilities.getDefaultIconColorId(nightMode)));
 		backButton.setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
@@ -144,7 +155,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 		ImageButton resetButton = view.findViewById(R.id.reset_button);
 		resetButton.setImageDrawable(getIcon(R.drawable.ic_action_reset, ColorUtilities.getDefaultIconColorId(nightMode)));
-		resetButton.setOnClickListener(view1 -> onResetToDefault());
+		resetButton.setOnClickListener(v -> onResetToDefault());
 	}
 
 	private void moveCompassButton(@NonNull View view) {
@@ -203,7 +214,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 				mapInfoLayer.removeRulerWidgets(Collections.singletonList(rulerWidget));
 			}
 		}
-		requireMapActivity().refreshMap();
+		refreshMap();
 	}
 
 	@Nullable

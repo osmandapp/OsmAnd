@@ -4,8 +4,6 @@ import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,8 +29,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.google.android.material.slider.RangeSlider;
-import com.google.android.material.slider.Slider;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;

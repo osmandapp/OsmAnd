@@ -48,6 +48,7 @@ public class ContextMenuItem {
 	private int icon = INVALID_ID;
 	@DrawableRes
 	private int secondaryIcon = INVALID_ID;
+
 	private Boolean selected;
 	private int progress = INVALID_ID;
 	private boolean loading;

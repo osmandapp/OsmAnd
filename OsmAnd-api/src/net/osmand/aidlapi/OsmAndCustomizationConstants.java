@@ -42,8 +42,6 @@ public interface OsmAndCustomizationConstants {
 	String APP_PROFILES_ID = CONFIGURE_MAP_ITEM_ID_SCHEME + "app_profiles";
 
 	String SHOW_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "category";
-	String TERRAIN_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "terrain_category";
-	String TERRAIN_DESCRIPTION_ID = SHOW_ITEMS_ID_SCHEME + "terrain_description";
 	String FAVORITES_ID = SHOW_ITEMS_ID_SCHEME + "favorites";
 	String POI_OVERLAY_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay";
 	String POI_OVERLAY_LABELS_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay_labels";
@@ -52,7 +50,6 @@ public interface OsmAndCustomizationConstants {
 	String WIKIPEDIA_ID = SHOW_ITEMS_ID_SCHEME + "wikipedia";
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
-	String MAP_ENABLE_3D_MAPS_ID = SHOW_ITEMS_ID_SCHEME + "enable_3d_maps";
 	String MAP_BORDERS_ID = SHOW_ITEMS_ID_SCHEME + "map_borders";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
@@ -64,7 +61,11 @@ public interface OsmAndCustomizationConstants {
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
 	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
+	String TERRAIN_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "terrain_category";
+	String TERRAIN_DESCRIPTION_ID = SHOW_ITEMS_ID_SCHEME + "terrain_description";
 	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
+	String MAP_ENABLE_3D_MAPS_ID = SHOW_ITEMS_ID_SCHEME + "enable_3d_maps";
+
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
 	String MAP_MODE_ID = RENDERING_ITEMS_ID_SCHEME + "map_mode";

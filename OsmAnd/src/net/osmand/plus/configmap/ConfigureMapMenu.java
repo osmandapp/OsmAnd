@@ -7,7 +7,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_BORDERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
@@ -20,12 +19,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.plus.chooseplan.button.PurchasingUtils.PROMO_PREFIX;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
@@ -56,17 +51,11 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -93,7 +82,6 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -147,20 +135,10 @@ public class ConfigureMapMenu {
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
-		registerTerrainCard(adapter, mapActivity, customRules);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
 		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
 		return adapter;
-	}
-
-	private void registerTerrainCard(@NonNull ContextMenuAdapter adapter,
-	                                 @NonNull MapActivity activity,
-	                                 @NonNull List<RenderingRuleProperty> customRules) {
-		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		if (srtmPlugin != null) {
-			srtmPlugin.registerTerrainCard(adapter, activity, customRules);
-		}
 	}
 
 	private void createLayersItems(@NonNull List<RenderingRuleProperty> customRules,

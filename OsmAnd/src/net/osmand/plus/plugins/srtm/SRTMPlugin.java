@@ -21,7 +21,6 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -362,22 +361,25 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void registerTerrainCard(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
+	@Override
+	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
+	                                                   @NonNull MapActivity mapActivity,
+	                                                   @NonNull List<RenderingRuleProperty> customRules) {
 		if (isEnabled() && app.useOpenGlRenderer()) {
 			adapter.addItem(new ContextMenuItem(TERRAIN_CATEGORY_ID)
 					.setCategory(true)
 					.setTitle(app.getString(R.string.shared_string_terrain))
 					.setLayout(R.layout.list_group_title_with_switch));
 
-			if (!Version.isPaidVersion(app)) {
+			if (isLocked()) {
 				addTerrainDescriptionItem(adapter, mapActivity);
 			} else {
 				createContextMenuItems(adapter, mapActivity);
 				add3DReliefItem(adapter, mapActivity);
 			}
-			NauticalMapsPlugin nauticalMapsPlugin = PluginsHelper.getPlugin(NauticalMapsPlugin.class);
-			if (nauticalMapsPlugin != null) {
-				nauticalMapsPlugin.registerTerrainCard(adapter, mapActivity, customRules);
+			NauticalMapsPlugin nauticalPlugin = PluginsHelper.getPlugin(NauticalMapsPlugin.class);
+			if (nauticalPlugin != null) {
+				nauticalPlugin.createAdapterItem(adapter, mapActivity, customRules);
 			}
 		}
 	}
