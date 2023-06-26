@@ -708,7 +708,7 @@
     <string name="edit_filter_save_as_menu_item">Gem som</string>
     <string name="filter_current_poiButton">Filter</string>
     <string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
-    <string name="poi_dialog_comment">Kommentar</string>
+    <string name="poi_dialog_comment">Kommentér</string>
     <string name="poi_dialog_opening_hours">Åben</string>
     <string name="poi_error_io_error_template">I/O-fejl under udførelsen af handling {0}.</string>
     <string name="poi_error_unexpected_template">Kunne ikke udføre handling {0}.</string>
@@ -4722,7 +4722,7 @@
     <string name="duplacate_widget_added_snackbar">En modul-dublet tilføjes listen.</string>
     <string name="shared_string_duplicate">Duplikér</string>
     <string name="av_notes_photo_widget_desc">Ved at trykke på modulet kan du tage et billede.</string>
-    <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du starte en videooptagelse.</string>
+    <string name="av_notes_video_widget_desc">Ved at trykke på modulet kan du optage en video.</string>
     <string name="av_notes_audio_widget_desc">Ved at trykke på modulet kan du optage en lydnote.</string>
     <string name="trip_recording_downhill_widget_desc">Viser summen af alle nedkørsler på den aktuelt registreret tur.</string>
     <string name="trip_recording_uphill_widget_desc">Viser summen af alle stigninger på den aktuelt registreret tur.</string>
