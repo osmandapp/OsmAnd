@@ -141,7 +141,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					|| favoritesChanged || textScaleChanged || textVisibleChanged
 					|| (customObjectsDelegate != null && customObjectsDelegate.isChanged())) {
 				showFavorites();
-				if(customObjectsDelegate != null){
+				if (customObjectsDelegate != null) {
 					customObjectsDelegate.acceptChanges();
 				}
 				mapRendererChanged = false;
