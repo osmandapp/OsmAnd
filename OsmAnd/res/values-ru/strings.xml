@@ -442,7 +442,7 @@
     <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернётся к текущей позиции.</string>
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
-    <string name="auto_follow_location_enabled">Возврат к позиции на карте...</string>
+    <string name="auto_follow_location_enabled">Возврат к текущей позиции...</string>
     <string name="poi_query_by_name_matches_categories">Найдено несколько связанных категорий POI.</string>
     <string name="data_to_search_poi_not_available">Загрузите данные для локального поиска POI.</string>
     <string name="poi_filter_by_name">Поиск по имени</string>
@@ -4446,7 +4446,7 @@
     <string name="migration_files_present">%1$d файлов (%2$s) присутствуют в выбранном местоположении «%3$s».</string>
     <string name="show_parameter_seekbar">Показать параметр ползунка</string>
     <string name="app_modes_options">Выбор режимов приложения</string>
-    <string name="exit_without_saving_warning">Выйти без сохранения изменений\?</string>
+    <string name="exit_without_saving_warning">Изменения не сохранятся.</string>
     <string name="shared_string_hide_slope">Скрыть уклон</string>
     <string name="shared_string_show_slope">Показать уклон</string>
     <string name="shared_string_uphill">Подъём</string>
