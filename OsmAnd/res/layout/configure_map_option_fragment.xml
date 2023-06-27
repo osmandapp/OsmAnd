@@ -93,7 +93,7 @@
 			android:clickable="true"
 			android:focusable="true"
 			android:orientation="vertical"
-			android:padding="@dimen/content_padding">
+			android:paddingVertical="@dimen/content_padding">
 
 			<LinearLayout
 				android:id="@+id/main_content"
@@ -110,6 +110,7 @@
 				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/dialog_button_height"
+				android:layout_marginHorizontal="@dimen/content_padding"
 				android:layout_marginTop="@dimen/content_padding" />
 
 		</LinearLayout>
