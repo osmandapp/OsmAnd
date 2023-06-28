@@ -1,11 +1,18 @@
 package net.osmand.plus.auto
 
+import android.os.AsyncTask
 import android.text.SpannableString
 import android.text.Spanned
+import androidx.annotation.WorkerThread
 import androidx.car.app.CarContext
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import net.osmand.data.QuadRect
+import net.osmand.data.RotatedTileBox
+import net.osmand.gpx.GPXUtilities
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.configmap.tracks.TrackTab
@@ -13,10 +20,13 @@ import net.osmand.plus.configmap.tracks.TrackTabType
 import net.osmand.plus.track.data.GPXInfo
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
+import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
+import kotlin.math.max
+import kotlin.math.min
 
 class TracksScreen(
     carContext: CarContext,
@@ -25,9 +35,35 @@ class TracksScreen(
     private val trackTab: TrackTab
 ) : BaseOsmAndAndroidAutoScreen(carContext) {
     val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
+    var loadGpxFilesThread: Thread? = null
+    private var loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
+    private lateinit var loadTracksTask: LoadTracksTask
 
     init {
-        prepareTrackItems()
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onCreate(owner: LifecycleOwner) {
+                super.onCreate(owner)
+                loadTracksTask = LoadTracksTask()
+                loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+            }
+
+            override fun onDestroy(owner: LifecycleOwner) {
+                super.onDestroy(owner)
+                loadGpxFilesThread?.interrupt()
+                app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
+                app.osmandMap.mapView.backToLocation()
+            }
+        })
+    }
+
+    private inner class LoadTracksTask : AsyncTask<Unit, Unit, Unit>() {
+        override fun doInBackground(vararg params: Unit?) {
+            prepareTrackItems()
+        }
+
+        override fun onPostExecute(result: Unit?) {
+            invalidate()
+        }
     }
 
     override fun onGetTemplate(): Template {
@@ -37,8 +73,11 @@ class TracksScreen(
         } else {
             trackTab.getName(app, false)
         }
-        templateBuilder.setLoading(false)
-        setupTracks(templateBuilder)
+        val isLoading = loadTracksTask.status != AsyncTask.Status.FINISHED
+        templateBuilder.setLoading(isLoading)
+        if (!isLoading) {
+            setupTracks(templateBuilder)
+        }
 
         return templateBuilder
             .setTitle(title)
@@ -48,12 +87,17 @@ class TracksScreen(
     }
 
     private fun prepareTrackItems() {
+        loadedGpxFiles = HashMap()
         for (track in trackTab.trackItems) {
             track.file?.let { file ->
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
                 if (item != null) {
                     track.dataItem = item
                 }
+                val gpxFile = GPXUtilities.loadGPXFile(file)
+                val selectedGpxFile = SelectedGpxFile()
+                selectedGpxFile.setGpxFile(gpxFile, app)
+                loadedGpxFiles[track] = selectedGpxFile
             }
         }
     }
@@ -66,10 +110,20 @@ class TracksScreen(
     private fun setupTracks(templateBuilder: PlaceListNavigationTemplate.Builder) {
         val latLon = app.mapViewTrackingUtilities.defaultLocation
         val listBuilder = ItemList.Builder()
-        var itemsCount = 0
-        for (track in trackTab.trackItems) {
-            if (itemsCount == contentLimit) {
-                break
+        val tracksSize = trackTab.trackItems.size
+        val selectedGpxFiles = ArrayList<SelectedGpxFile>()
+        val tracks =
+            trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
+        val mapRect = QuadRect()
+        for (track in tracks) {
+            val gpxFile = loadedGpxFiles[track]
+            gpxFile?.let {
+                selectedGpxFiles.add(it)
+                val gpxRect: QuadRect = it.gpxFile.rect
+                mapRect.left = if(mapRect.left == 0.0) gpxRect.left else min(mapRect.left, gpxRect.left)
+                mapRect.right = max(mapRect.right, gpxRect.right)
+                mapRect.top = max(mapRect.top, gpxRect.top)
+                mapRect.bottom = if(mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
             }
             val title = track.name
             val icon = CarIcon.Builder(
@@ -99,8 +153,12 @@ class TracksScreen(
                 .addText(address)
                 .setOnClickListener { onClickTrack(track) }
                 .build())
-            itemsCount++
         }
+        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
+            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
+            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
+        }
+        app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(selectedGpxFiles)
         templateBuilder.setItemList(listBuilder.build())
     }
 

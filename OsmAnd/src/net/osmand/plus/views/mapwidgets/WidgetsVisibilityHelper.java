@@ -90,7 +90,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isInGpsFilteringMode()
 				&& !isInWeatherForecastMode()
-				&& !isSelectingTilesZone();
+				&& !isSelectingTilesZone()
+				&& !isInConfigureMapOptionMode();
 	}
 
 	public boolean shouldHideMapMarkersWidget() {
@@ -102,7 +103,8 @@ public class WidgetsVisibilityHelper {
 				|| isInRouteLineAppearanceMode()
 				|| isInGpsFilteringMode()
 				|| isInWeatherForecastMode()
-				|| isSelectingTilesZone();
+				|| isSelectingTilesZone()
+				|| isInConfigureMapOptionMode();
 	}
 
 	public static boolean isMapMarkerBarWidgetEnabled(@NonNull MapActivity mapActivity) {
@@ -134,7 +136,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode()
 				&& !isInWeatherForecastMode()
-				&& !isSelectingTilesZone();
+				&& !isSelectingTilesZone()
+				&& !isInConfigureMapOptionMode();
 	}
 
 	public boolean shouldShowZoomButtons() {
@@ -177,7 +180,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode()
 				&& !isInWeatherForecastMode()
-				&& !isSelectingTilesZone();
+				&& !isSelectingTilesZone()
+				&& !isInConfigureMapOptionMode();
 	}
 
 	public boolean shouldShowBackToLocationButton() {
@@ -223,7 +227,8 @@ public class WidgetsVisibilityHelper {
 		return !isInRouteLineAppearanceMode()
 				&& !isInGpsFilteringMode()
 				&& !isInWeatherForecastMode()
-				&& !isSelectingTilesZone();
+				&& !isSelectingTilesZone()
+				&& !isInConfigureMapOptionMode();
 	}
 
 	private boolean isQuickActionLayerOn() {
@@ -325,6 +330,10 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isInGpsFilteringMode() {
 		return mapActivity.getGpsFilterFragment() != null;
+	}
+
+	private boolean isInConfigureMapOptionMode() {
+		return mapActivity.getConfigureMapOptionFragment() != null;
 	}
 
 	private boolean isInWeatherForecastMode() {

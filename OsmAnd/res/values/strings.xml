@@ -28,6 +28,8 @@
     <string name="backup_error_delete_account_email_match">Email doesn\'t match login username</string>
     <string name="verify_account_deletion_descr">We need to verify your account before delete it.\n\nPlease enter the e-mail address you registered with. A one-time password for the next step will be sent to it.</string>
     <string name="verify_account">Verify your account</string>
+    <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slopes in %1$s.</string>
+    <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
     <string name="free_mode">Free mode</string>
     <string name="terrain_map">Terrain map</string>
     <string name="relief_3d">3D Relief</string>
@@ -4868,7 +4870,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="data_settings_descr">Specify language, download/reload data.</string>
     <string name="data_settings">Data</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="update_tile">Update map</string>
+    <string name="update_tile">Update</string>
     <string name="reload_tile">Reload tile</string>
     <string name="mark_point">Target</string>
     <string name="use_english_names_descr">Select between local and English names.</string>
