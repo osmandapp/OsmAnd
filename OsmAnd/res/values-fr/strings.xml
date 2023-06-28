@@ -489,7 +489,7 @@
     <string name="save_current_track">Enregistrer la trace en cours</string>
     <string name="save_track_interval_descr">Indiquez l\'intervalle d\'enregistrement de la trace pendant le guidage</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant le guidage</string>
-    <string name="update_tile">Mettre à jour la carte</string>
+    <string name="update_tile">Mettre à jour</string>
     <string name="reload_tile">Actualiser la tuile</string>
     <string name="mark_point">Cible</string>
     <string name="shared_string_add_to_favorites">Ajouter aux favoris</string>
@@ -5235,4 +5235,6 @@
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Carte du relief</string>
     <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
+    <string name="terrain_category_description">Courbes de niveaux, ombrage du relief avec des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les vallées.</string>
+    <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
 </resources>
