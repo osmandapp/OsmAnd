@@ -106,9 +106,9 @@
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
     <string name="no_overlay">Без наложения</string>
     <string name="no_underlay">Без подложки</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Любая сложность</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Максимально сложный</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Без крутых подъёмов</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Максимально ровный</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Максимально плоский</string>
     <string name="routing_attr_driving_style_speed_name">Предпочитать оживлённые улицы</string>
     <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать тихие улицы</string>
@@ -811,7 +811,7 @@
     <string name="error_occurred_saving_gpx">Не удалось сохранить файл GPX.</string>
     <string name="error_calculating_route">Не удалось рассчитать маршрут.</string>
     <string name="error_calculating_route_occured">Не удалось рассчитать маршрут.</string>
-    <string name="empty_route_calculated">Невозможно построить маршрут.</string>
+    <string name="empty_route_calculated">Данные маршрута потеряны</string>
     <string name="arrived_at_destination">Вы на месте.</string>
     <string name="invalid_locations">Неправильные координаты</string>
     <string name="go_back_to_osmand">Вернуться к карте</string>
@@ -1162,8 +1162,8 @@
     <string name="poi_filter_sightseeing">Достопримечательности</string>
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Первый промежуточный пункт</string>
-    <string name="add_as_last_destination_point">Добавить перед конечным пунктом</string>
-    <string name="add_as_first_destination_point">Добавить в начало маршрута</string>
+    <string name="add_as_last_destination_point">Последний промежуточный пункт</string>
+    <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже задан:</string>
     <string name="target_point">Пункт %1$s</string>
@@ -1365,7 +1365,7 @@
     <string name="route_descr_select_destination">Задать пункт назначения</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Информация про маршрут</string>
-    <string name="keep_and_add_destination_point">Добавить в конец маршрута</string>
+    <string name="keep_and_add_destination_point">Следующий пункт назначения</string>
     <string name="use_displayed_track_for_navigation">Использовать показанный путь для навигации?</string>
     <string name="calculate_osmand_route_without_internet">Рассчитать сегмент маршрута OsmAnd без интернета</string>
     <string name="gpx_option_calculate_first_last_segment">Рассчитать маршрут OsmAnd для первого и последнего сегмента маршрута</string>
@@ -2117,7 +2117,7 @@
     <string name="shared_string_move_up">Переместить ↑</string>
     <string name="shared_string_move_down">Переместить ↓</string>
     <string name="finish_navigation">Завершить навигацию</string>
-    <string name="avoid_road">Обходить</string>
+    <string name="avoid_road">Избегать на маршруте</string>
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Введите публичное имя</string>
@@ -2632,8 +2632,8 @@
     <string name="copy_location_name">Копировать местоположение/название POI</string>
     <string name="toast_empty_name_error">Место без названия</string>
     <string name="shared_string_current">Текущий</string>
-    <string name="last_intermediate_dest_description">Сделать последним промежуточным пунктом</string>
-    <string name="first_intermediate_dest_description">Сделать первым промежуточным пунктом</string>
+    <string name="last_intermediate_dest_description">Добавить последним промежуточным пунктом</string>
+    <string name="first_intermediate_dest_description">Добавить первым промежуточным пунктом</string>
     <string name="subsequent_dest_description">Текущий конечный пункт станет последним промежуточным</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
@@ -3980,7 +3980,7 @@
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
-    <string name="reverse_all_points">Инвертировать все точки</string>
+    <string name="reverse_all_points">Реверсировать все точки</string>
     <string name="routing_attr_allow_streams_description">Разрешить ручьи и канавы</string>
     <string name="routing_attr_allow_streams_name">Разрешить ручьи и канавы</string>
     <string name="open_place_reviews_plugin_description">Внесите свой вклад в проект OpenPlaceReviews, например, фотографии, обзоры или ссылки для общественных мест, таких как рестораны, отели или музеи. 
@@ -4816,7 +4816,7 @@
     <string name="map_widget_ant_bicycle_cadence">Каденс</string>
     <string name="map_widget_camera_tilt_desc">Виджет показывает угол наклона камеры в режиме перспективы. По умолчанию 90° (без наклона).</string>
     <string name="external_sensors_support">Поддержка внешних датчиков</string>
-    <string name="show_borders_of_downloaded_maps">Показать границы загруженных карт</string>
+    <string name="show_borders_of_downloaded_maps">Границы загруженных карт</string>
     <string name="map_widget_ant_bicycle_power_desc">Показывает выходную мощность велосипедиста, которая используется для движения велосипеда вперед</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показывает частоту вращения педалей велосипеда</string>
     <string name="depth_contours">Контуры глубин</string>

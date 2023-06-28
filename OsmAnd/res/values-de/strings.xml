@@ -4732,9 +4732,9 @@
     <string name="auto_backup_title">Automatische Sicherung</string>
     <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird der Liste hinzugefügt.</string>
     <string name="shared_string_duplicate">Duplizieren</string>
-    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget können Sie ein Foto aufnehmen.</string>
-    <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget können Sie ein Video aufnehmen.</string>
-    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie eine Audionotiz aufnehmen.</string>
+    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget kann ein Foto aufgenommen werden.</string>
+    <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget kann ein Video aufgenommen werden.</string>
+    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget kann eine Sprachnotiz aufgenommen werden.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
@@ -4787,7 +4787,7 @@
     <string name="coordinates_widget_map_center_desc">Zeigt die geographischen Koordinaten der aktuellen Kartenmitte</string>
     <string name="quick_action_map_center_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets „Kartenmitte“ auf der Karte.</string>
     <string name="quick_action_current_location_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets \"Aktueller Standort\" auf der Karte.</string>
-    <string name="coordinates_widget_current_location_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts</string>
+    <string name="coordinates_widget_current_location_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an</string>
     <string name="coordinates_widget_map_center">Koordinaten: Kartenmitte</string>
     <string name="coordinates_widget_current_location">Koordinaten: Aktueller Standort</string>
     <string name="map_widget_zoom_level_desc">Zeigt die aktuelle Zoomstufe der Karte an.</string>
