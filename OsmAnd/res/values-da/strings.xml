@@ -867,7 +867,7 @@
     <string name="save_current_track">Gem det aktuelle spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Angiv logningsinterval for optagelse af spor under navigation</string>
-    <string name="update_tile">Opdater kort</string>
+    <string name="update_tile">Opdatér</string>
     <string name="reload_tile">Genindlæs kortfliser</string>
     <string name="mark_point">Mål</string>
     <string name="use_english_names_descr">Vælg mellem lokale eller engelske navne.</string>
@@ -3437,8 +3437,8 @@
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten er genberegnet</string>
     <string name="shared_string_terrain">Terræn</string>
-    <string name="hillshade_description">Terrænskyggekort viser skråninger, toppe og lavland ved hjælp af mørke skygger.</string>
-    <string name="slope_description">Hældning bruger farver til visualisering af terrænstejlhed.</string>
+    <string name="hillshade_description">Terrænskyggekort viser hældninger, toppe og lavland ved hjælp af mørke skygger.</string>
+    <string name="slope_description">Hældning bruger farver til visualisering af terrænets stejlhed.</string>
     <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
     <string name="hillshade_download_description">Yderligere kort er nødvendige for at se terrænskygge på kortet.</string>
     <string name="slope_download_description">Yderligere kort er nødvendige for at se hældninger på kortet.</string>
@@ -5248,4 +5248,7 @@
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort</string>
     <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
+    <string name="free_mode">Fri tilstand</string>
+    <string name="terrain_category_description">Terrænkonturlinjer, fuldt terrænskyggekort med mørke nuancer og hældningskort med farver til at vise toppe og lavland.</string>
+    <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældninger i %1$s.</string>
 </resources>
