@@ -29,6 +29,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteAccountListener;
@@ -56,6 +57,8 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 
 	private static final Log log = PlatformUtil.getLog(DeleteAccountFragment.class);
 
+	private static final String DELETE_TOKEN_KEY = "delete_token_key";
+
 	private BackupHelper backupHelper;
 
 	private CollapsingToolbarLayout toolbarLayout;
@@ -68,6 +71,7 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	private View deleteButton;
 	private View deleteButtonWarning;
 
+	private String token;
 	private DeletionStatus deletionStatus = NOT_STARTED;
 	private int progress;
 	private int maxProgress;
@@ -82,6 +86,10 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		backupHelper = app.getBackupHelper();
+
+		if (savedInstanceState != null) {
+			token = savedInstanceState.getString(DELETE_TOKEN_KEY);
+		}
 	}
 
 	@Nullable
@@ -114,13 +122,19 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 		backupHelper.getBackupListeners().removeDeleteAccountListener(this);
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		outState.putString(DELETE_TOKEN_KEY, token);
+		super.onSaveInstanceState(outState);
+	}
+
 	private void setupToolbar(@NonNull View view) {
 		AppBarLayout appBarLayout = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 		toolbarLayout = view.findViewById(R.id.toolbar_layout);
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(app), ColorUtilities.getPrimaryIconColorId(nightMode)));
+		toolbar.setNavigationIcon(getIcon(R.drawable.ic_action_close, ColorUtilities.getPrimaryIconColorId(nightMode)));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -271,7 +285,7 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	private void deleteAccount() {
 		try {
 			updateContent();
-			backupHelper.deleteAccount(settings.BACKUP_USER_EMAIL.get(), 0);
+			backupHelper.deleteAccount(settings.BACKUP_USER_EMAIL.get(), token);
 		} catch (UserNotRegisteredException e) {
 			updateContent();
 			log.error(e);
@@ -302,21 +316,37 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 
 	@Override
 	public void onDeleteAccount(int status, @Nullable String message, @Nullable BackupError error) {
+		progress = maxProgress;
 		deletionStatus = FINISHED;
 		updateContent();
 
-		String errorMessage = error != null ? error.getLocalizedError(app) : message;
-		if (!Algorithms.isEmpty(errorMessage)) {
-			app.showToastMessage(errorMessage);
+		if (error == null) {
+			logout();
+		}
+		String text = error != null ? error.getLocalizedError(app) : message;
+		if (!Algorithms.isEmpty(text)) {
+			app.showToastMessage(text);
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
+	protected void logout() {
+		backupHelper.logout();
+
+		MapActivity activity = (MapActivity) getActivity();
+		if (activity != null) {
+			activity.dismissFragment(BackupCloudFragment.TAG);
+			BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String token) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			DeleteAccountFragment fragment = new DeleteAccountFragment();
+			fragment.token = token;
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
-					.commit();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

@@ -170,7 +170,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			backupHelper.logout();
-			((MapActivity) activity).dismissBackupCloudFragment();
+			((MapActivity) activity).dismissFragment(BackupCloudFragment.TAG);
 			BackupAuthorizationFragment.showInstance(getActivity().getSupportFragmentManager());
 		}
 	}
@@ -214,13 +214,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 		TextView title = container.findViewById(android.R.id.title);
 		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), getString(R.string.backup_delete_all_data), getString(R.string.backup_delete_all_data)));
-		title.setTextColor(ContextCompat.getColor(app, R.color.color_osm_edit_delete));
-
-		TextView summary = container.findViewById(android.R.id.summary);
-		summary.setText(R.string.backup_delete_all_data_descr);
+		title.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
 
 		ImageView icon = container.findViewById(android.R.id.icon);
-		icon.setImageDrawable(getIcon(R.drawable.ic_action_file_delete, R.color.color_osm_edit_delete));
+		icon.setImageDrawable(getIcon(R.drawable.ic_action_file_delete, R.color.deletion_color_warning));
 
 		container.setOnClickListener(v -> {
 			if (!settingsHelper.isBackupExporting()) {
@@ -243,10 +240,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		String deleteAccount = getString(R.string.delete_account);
 		TextView title = container.findViewById(android.R.id.title);
 		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), deleteAccount, deleteAccount));
-		title.setTextColor(ContextCompat.getColor(app, R.color.color_osm_edit_delete));
+		title.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
 
 		ImageView icon = container.findViewById(android.R.id.icon);
-		icon.setImageDrawable(getIcon(R.drawable.ic_action_user_account_delete, R.color.color_osm_edit_delete));
+		icon.setImageDrawable(getIcon(R.drawable.ic_action_user_account_delete, R.color.deletion_color_warning));
 
 		container.setOnClickListener(v -> {
 			if (!settingsHelper.isBackupExporting()) {
@@ -266,13 +263,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		View container = view.findViewById(R.id.delete_old_container);
 		TextView title = container.findViewById(android.R.id.title);
 		title.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), getString(R.string.backup_delete_old_data), getString(R.string.backup_delete_old_data)));
-		title.setTextColor(ContextCompat.getColor(app, R.color.color_osm_edit_delete));
-
-		TextView summary = container.findViewById(android.R.id.summary);
-		summary.setText(R.string.backup_delete_old_data_descr);
+		title.setTextColor(ContextCompat.getColor(app, R.color.deletion_color_warning));
 
 		ImageView icon = container.findViewById(android.R.id.icon);
-		icon.setImageDrawable(getIcon(R.drawable.ic_action_history_delete, R.color.color_osm_edit_delete));
+		icon.setImageDrawable(getIcon(R.drawable.ic_action_history_delete, R.color.deletion_color_warning));
 		container.setOnClickListener(v -> {
 			if (!settingsHelper.isBackupExporting()) {
 				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles(RemoteFilesType.OLD))) {

@@ -12,6 +12,7 @@ public class BackupListeners {
 	private final List<OnDeleteFilesListener> deleteFilesListeners = new ArrayList<>();
 	private final List<OnRegisterUserListener> registerUserListeners = new ArrayList<>();
 	private final List<OnRegisterDeviceListener> registerDeviceListeners = new ArrayList<>();
+	private final List<OnSendCodeListener> sendCodeListeners = new ArrayList<>();
 	private final List<OnDeleteAccountListener> deleteAccountListeners = new ArrayList<>();
 
 	public interface OnDeleteFilesListener {
@@ -34,6 +35,10 @@ public class BackupListeners {
 
 	public interface OnUpdateSubscriptionListener {
 		void onUpdateSubscription(int status, @Nullable String message, @Nullable String error);
+	}
+
+	public interface OnSendCodeListener {
+		void onSendCode(int status, @Nullable String message, @Nullable BackupError error);
 	}
 
 	public interface OnDeleteAccountListener {
@@ -117,6 +122,21 @@ public class BackupListeners {
 
 	public void removeRegisterDeviceListener(@NonNull OnRegisterDeviceListener listener) {
 		registerDeviceListeners.remove(listener);
+	}
+
+	@NonNull
+	public List<OnSendCodeListener> getSendCodeListeners() {
+		return sendCodeListeners;
+	}
+
+	public void addSendCodeListener(@NonNull OnSendCodeListener listener) {
+		if (!sendCodeListeners.contains(listener)) {
+			sendCodeListeners.add(listener);
+		}
+	}
+
+	public void removeSendCodeListener(@NonNull OnSendCodeListener listener) {
+		sendCodeListeners.remove(listener);
 	}
 
 	@NonNull

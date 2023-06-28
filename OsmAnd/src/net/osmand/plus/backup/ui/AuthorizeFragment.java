@@ -39,10 +39,14 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupListeners;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
+import net.osmand.plus.backup.BackupListeners.OnSendCodeListener;
+import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -56,13 +60,14 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener, OnRegisterDeviceListener {
+public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener, OnRegisterDeviceListener, OnSendCodeListener {
 
 	private static final Log LOG = PlatformUtil.getLog(AuthorizeFragment.class);
 
 	public static final String TAG = AuthorizeFragment.class.getSimpleName();
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
+	private static final String LOGIN_STARTING_DIALOG_TYPE_KEY = "login_starting_dialog_type_key";
 	private static final String SIGN_IN_KEY = "sign_in_key";
 
 	private static final int VERIFICATION_CODE_EXPIRATION_TIME_MIN = 10 * 60 * 1000; // 10 minutes
@@ -82,7 +87,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private View space;
 
 	private LoginDialogType dialogType = SIGN_UP;
-	private LoginDialogType firstDialogType = SIGN_UP;
+	private LoginDialogType startingDialogType = SIGN_UP;
 
 	private boolean signIn;
 
@@ -113,6 +118,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(LOGIN_DIALOG_TYPE_KEY)) {
 				dialogType = LoginDialogType.valueOf(savedInstanceState.getString(LOGIN_DIALOG_TYPE_KEY));
+				startingDialogType = LoginDialogType.valueOf(savedInstanceState.getString(LOGIN_STARTING_DIALOG_TYPE_KEY));
 			}
 			if (savedInstanceState.containsKey(SIGN_IN_KEY)) {
 				signIn = savedInstanceState.getBoolean(SIGN_IN_KEY);
@@ -152,21 +158,26 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(SIGN_IN_KEY, signIn);
 		outState.putString(LOGIN_DIALOG_TYPE_KEY, dialogType.name());
+		outState.putString(LOGIN_STARTING_DIALOG_TYPE_KEY, startingDialogType.name());
 		super.onSaveInstanceState(outState);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		backupHelper.getBackupListeners().addRegisterUserListener(this);
-		backupHelper.getBackupListeners().addRegisterDeviceListener(this);
+		BackupListeners listeners = backupHelper.getBackupListeners();
+		listeners.addSendCodeListener(this);
+		listeners.addRegisterUserListener(this);
+		listeners.addRegisterDeviceListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		backupHelper.getBackupListeners().removeRegisterUserListener(this);
-		backupHelper.getBackupListeners().removeRegisterDeviceListener(this);
+		BackupListeners listeners = backupHelper.getBackupListeners();
+		listeners.removeSendCodeListener(this);
+		listeners.removeRegisterUserListener(this);
+		listeners.removeRegisterDeviceListener(this);
 	}
 
 	private void setupTextWatchers() {
@@ -281,12 +292,12 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		AndroidUtils.softKeyboardDelayed(requireActivity(), editText);
 
 		resendButton.setOnClickListener(v -> {
-			registerUser();
+			resendCode();
 			AndroidUiHelper.updateVisibility(progressBar, true);
 		});
 		codeMissingButton.setOnClickListener(v -> {
 			if (lastTimeCodeSent > 0 && System.currentTimeMillis() - lastTimeCodeSent >= VERIFICATION_CODE_EXPIRATION_TIME_MIN) {
-				registerUser();
+				resendCode();
 				AndroidUiHelper.updateVisibility(progressBar, true);
 			} else {
 				AndroidUiHelper.updateVisibility(resendButton, true);
@@ -296,7 +307,15 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY_ACTIVE, R.string.resend_verification_code);
 
 		buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
-		buttonContinue.setOnClickListener(v -> registerDevice(editText.getText().toString()));
+		buttonContinue.setOnClickListener(v -> tokenSelected(editText.getText().toString()));
+	}
+
+	private void resendCode() {
+		if (startingDialogType != DELETE_ACCOUNT) {
+			registerUser();
+		} else {
+			sendCodeForDeletion(settings.BACKUP_USER_EMAIL.get());
+		}
 	}
 
 	private void setupDeleteAccountContainer(@NonNull View view) {
@@ -312,8 +331,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 			boolean emailMatch = Algorithms.stringsEqual(email, savedEmail);
 			if (AndroidUtils.isValidEmail(email) && emailMatch) {
-				progressBar.setVisibility(View.VISIBLE);
-				backupHelper.registerDevice("");
+				sendCodeForDeletion(email);
 			} else {
 				editText.requestFocus();
 				errorText.setText(emailMatch ? R.string.osm_live_enter_email : R.string.backup_error_delete_account_email_match);
@@ -327,13 +345,36 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), false);
 	}
 
+	private void sendCodeForDeletion(@NonNull String email) {
+		try {
+			progressBar.setVisibility(View.VISIBLE);
+			backupHelper.sendCode(email, "delete");
+		} catch (UserNotRegisteredException e) {
+			progressBar.setVisibility(View.INVISIBLE);
+			LOG.error(e);
+		}
+	}
+
 	private void updateErrorVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(errorText, visible);
 	}
 
-	public void setToken(@Nullable String token) {
+	private void tokenSelected(@NonNull String token) {
+		if (startingDialogType != DELETE_ACCOUNT) {
+			registerDevice(token);
+		} else {
+			MapActivity activity = (MapActivity) getActivity();
+			if (AndroidUtils.isActivityNotDestroyed(activity)) {
+				activity.dismissFragment(TAG);
+				AndroidUtils.hideSoftKeyboard(activity, editText);
+			}
+			openDeletionScreen(token);
+		}
+	}
+
+	public void setToken(@NonNull String token) {
 		editText.setText(token);
-		registerDevice(token);
+		tokenSelected(token);
 	}
 
 	private void registerDevice(@Nullable String token) {
@@ -383,36 +424,21 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				setDialogType(VERIFY_EMAIL);
 				updateContent();
 			} else {
-				boolean choosePlanVisible = false;
-				if (error != null) {
-					int code = error.getCode();
-					choosePlanVisible = !promoCodeSupported()
-							&& (code == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
-							|| code == SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED
-							|| code == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT);
-				}
-				errorText.setText(error != null ? error.getLocalizedError(app) : message);
-				buttonContinue.setEnabled(false);
-				updateErrorVisibility(true);
-				AndroidUiHelper.updateVisibility(buttonChoosePlan, choosePlanVisible);
+				processError(message, error);
 			}
 		}
 	}
 
 	@Override
 	public void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error) {
-		FragmentActivity activity = getActivity();
+		MapActivity activity = (MapActivity) getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			int errorCode = error != null ? error.getCode() : -1;
 			if (dialogType == VERIFY_EMAIL) {
 				progressBar.setVisibility(View.INVISIBLE);
 				if (status == BackupHelper.STATUS_SUCCESS) {
-					dismiss();
-					if (firstDialogType != DELETE_ACCOUNT) {
-						openCloudScreen();
-					} else {
-						openDeletionScreen();
-					}
+					activity.dismissFragment(BackupAuthorizationFragment.TAG);
+					openCloudScreen();
 				} else {
 					errorText.setText(error != null ? error.getLocalizedError(app) : message);
 					buttonContinue.setEnabled(false);
@@ -437,11 +463,34 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		}
 	}
 
-	private void dismiss() {
-		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null && !fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(BackupAuthorizationFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+	@Override
+	public void onSendCode(int status, @Nullable String message, @Nullable BackupError error) {
+		FragmentActivity activity = getActivity();
+		if (AndroidUtils.isActivityNotDestroyed(activity)) {
+			progressBar.setVisibility(View.INVISIBLE);
+			if (status == BackupHelper.STATUS_SUCCESS) {
+				lastTimeCodeSent = System.currentTimeMillis();
+				setDialogType(VERIFY_EMAIL);
+				updateContent();
+			} else {
+				processError(message, error);
+			}
 		}
+	}
+
+	private void processError(@Nullable String message, @Nullable BackupError error) {
+		boolean choosePlanVisible = false;
+		if (error != null) {
+			int code = error.getCode();
+			choosePlanVisible = startingDialogType != DELETE_ACCOUNT && !promoCodeSupported()
+					&& (code == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
+					|| code == SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED
+					|| code == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT);
+		}
+		errorText.setText(error != null ? error.getLocalizedError(app) : message);
+		buttonContinue.setEnabled(false);
+		updateErrorVisibility(true);
+		AndroidUiHelper.updateVisibility(buttonChoosePlan, choosePlanVisible);
 	}
 
 	private void openCloudScreen() {
@@ -451,10 +500,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		}
 	}
 
-	private void openDeletionScreen() {
+	private void openDeletionScreen(@NonNull String token) {
 		FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			DeleteAccountFragment.showInstance(fragmentManager);
+			DeleteAccountFragment.showInstance(fragmentManager, token);
 		}
 	}
 
@@ -527,7 +576,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull LoginDialogType dialogType) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			AuthorizeFragment fragment = new AuthorizeFragment();
-			fragment.firstDialogType = dialogType;
+			fragment.startingDialogType = dialogType;
 			fragment.setDialogType(dialogType);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

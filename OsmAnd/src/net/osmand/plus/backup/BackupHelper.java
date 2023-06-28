@@ -33,6 +33,7 @@ import net.osmand.plus.backup.commands.DeleteFilesCommand;
 import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
 import net.osmand.plus.backup.commands.RegisterDeviceCommand;
 import net.osmand.plus.backup.commands.RegisterUserCommand;
+import net.osmand.plus.backup.commands.SendCodeCommand;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -99,6 +100,7 @@ public class BackupHelper {
 	public static final String DELETE_FILE_URL = SERVER_URL + "/userdata/delete-file";
 	public static final String DELETE_FILE_VERSION_URL = SERVER_URL + "/userdata/delete-file-version";
 	public static final String ACCOUNT_DELETE_URL = SERVER_URL + "/userdata/delete-account";
+	public static final String SEND_CODE_URL = SERVER_URL + "/userdata/send-code";
 
 	private static final String BACKUP_TYPE_PREFIX = "backup_type_";
 	private static final String VERSION_HISTORY_PREFIX = "save_version_history_";
@@ -686,9 +688,14 @@ public class BackupHelper {
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
 
-	public void deleteAccount(@NonNull String email, int token) throws UserNotRegisteredException {
+	public void deleteAccount(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAccountCommand(this, email, token));
+	}
+
+	public void sendCode(@NonNull String email, @NonNull String action) throws UserNotRegisteredException {
+		checkRegistered();
+		executor.runCommand(new SendCodeCommand(this, email, action));
 	}
 
 	public long calculateFileSize(@NonNull RemoteFile remoteFile) {

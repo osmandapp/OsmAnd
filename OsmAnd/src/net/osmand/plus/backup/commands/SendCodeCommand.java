@@ -1,7 +1,8 @@
 package net.osmand.plus.backup.commands;
 
-import static net.osmand.plus.backup.BackupHelper.ACCOUNT_DELETE_URL;
+import static net.osmand.plus.backup.BackupHelper.SEND_CODE_URL;
 import static net.osmand.plus.backup.BackupHelper.STATUS_EMPTY_RESPONSE_ERROR;
+import static net.osmand.plus.backup.BackupHelper.STATUS_PARSE_JSON_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SUCCESS;
 
@@ -11,7 +12,7 @@ import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupListeners.OnDeleteAccountListener;
+import net.osmand.plus.backup.BackupListeners.OnSendCodeListener;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.util.Algorithms;
@@ -19,25 +20,24 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DeleteAccountCommand extends BackupCommand {
+public class SendCodeCommand extends BackupCommand {
 
 	private final String email;
-	private final String token;
+	private final String action;
 
-	public DeleteAccountCommand(@NonNull BackupHelper helper, @NonNull String email, @NonNull String token) {
+	public SendCodeCommand(@NonNull BackupHelper helper, @NonNull String email, @NonNull String action) {
 		super(helper);
 		this.email = email;
-		this.token = token;
+		this.action = action;
 	}
 
 	@NonNull
-	public List<OnDeleteAccountListener> getListeners() {
-		return getHelper().getBackupListeners().getDeleteAccountListeners();
+	public List<OnSendCodeListener> getListeners() {
+		return getHelper().getBackupListeners().getSendCodeListeners();
 	}
 
 
@@ -50,18 +50,17 @@ public class DeleteAccountCommand extends BackupCommand {
 
 		JSONObject json = new JSONObject();
 		try {
-			json.put("username", email);
-			json.put("password", JSONObject.NULL);
-			json.put("token", token);
+			json.put("email", email);
+			json.put("action", action);
 		} catch (JSONException e) {
 
 		}
 
 		String body = json.toString();
-		String operation = "Account Delete";
+		String operation = "Send Code";
 		String contentType = "application/json";
 		OnRequestResultListener listener = getRequestListener(deviceId);
-		String url = ACCOUNT_DELETE_URL + "?" + AndroidNetworkUtils.getParameters(getApp(), parameters, listener, operation, true);
+		String url = SEND_CODE_URL + "?" + AndroidNetworkUtils.getParameters(getApp(), parameters, listener, operation, true);
 
 		AndroidNetworkUtils.sendRequest(getApp(), url, body, operation, contentType, true, true, listener);
 
@@ -70,7 +69,7 @@ public class DeleteAccountCommand extends BackupCommand {
 
 	@NonNull
 	private OnRequestResultListener getRequestListener(String deviceId) {
-		OperationLog operationLog = createOperationLog("accountDelete");
+		OperationLog operationLog = createOperationLog("sendCode");
 
 		return (result, error, resultCode) -> {
 			int status;
@@ -80,9 +79,20 @@ public class DeleteAccountCommand extends BackupCommand {
 				backupError = new BackupError(error);
 				message = "Account deletion error: " + backupError + "\nEmail=" + email + "\nDeviceId=" + deviceId;
 				status = STATUS_SERVER_ERROR;
-			} else if (resultCode != null && resultCode == HttpURLConnection.HTTP_OK) {
-				message = result;
-				status = STATUS_SUCCESS;
+			} else if (!Algorithms.isEmpty(result)) {
+				try {
+					JSONObject resultJson = new JSONObject(result);
+					if (resultJson.has("status") && "ok".equals(resultJson.getString("status"))) {
+						message = "You have been registered successfully. Please check for email with activation code.";
+						status = STATUS_SUCCESS;
+					} else {
+						message = "Account deletion error: unknown";
+						status = STATUS_SERVER_ERROR;
+					}
+				} catch (JSONException e) {
+					message = "Account deletion error: json parsing";
+					status = STATUS_PARSE_JSON_ERROR;
+				}
 			} else {
 				message = "Account deletion error: empty response";
 				status = STATUS_EMPTY_RESPONSE_ERROR;
@@ -94,11 +104,11 @@ public class DeleteAccountCommand extends BackupCommand {
 
 	@Override
 	protected void onProgressUpdate(Object... values) {
-		for (OnDeleteAccountListener listener : getListeners()) {
+		for (OnSendCodeListener listener : getListeners()) {
 			int status = (Integer) values[0];
 			String message = (String) values[1];
 			BackupError backupError = (BackupError) values[2];
-			listener.onDeleteAccount(status, message, backupError);
+			listener.onSendCode(status, message, backupError);
 		}
 	}
 }
