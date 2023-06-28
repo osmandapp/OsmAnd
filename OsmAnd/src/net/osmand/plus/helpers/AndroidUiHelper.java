@@ -119,6 +119,15 @@ public class AndroidUiHelper {
 		}
 	}
 
+	public static void setEnabled(View rootView, boolean enabled, int ... ids) {
+		for (int id : ids) {
+			View view = rootView.findViewById(id);
+			if (view != null && view.isEnabled() != enabled) {
+				view.setEnabled(enabled);
+			}
+		}
+	}
+
 	public static boolean isXLargeDevice(@NonNull Activity ctx) {
 		int lt = (ctx.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK);
 		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
