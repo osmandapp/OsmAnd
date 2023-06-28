@@ -580,10 +580,7 @@ public class AndroidNetworkUtils {
 			} else {
 				long lastModified = connection.getLastModified();
 				if (lastModified > 0 && lastModified <= lastTime) {
-					long currentTime = System.currentTimeMillis();
-					if (currentTime - lastModified > net.osmand.plus.plugins.weather.WeatherHelper.WEATHER_FORECAST_EXPIRE_TIME) {
-						return 0;
-					}
+					return 0;
 				}
 				InputStream inputStream = gzip
 						? new GZIPInputStream(connection.getInputStream())
