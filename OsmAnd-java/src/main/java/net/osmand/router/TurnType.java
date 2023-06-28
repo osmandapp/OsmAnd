@@ -2,6 +2,8 @@ package net.osmand.router;
 
 import net.osmand.util.Algorithms;
 
+import java.util.LinkedHashSet;
+
 import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
@@ -486,7 +488,7 @@ public class TurnType {
 				|| TurnType.getTertiaryTurn(type) == turn;
 	}
 
-	public static void collectTurnTypes(int lane, TIntHashSet set) {
+	public static void collectTurnTypes(int lane, LinkedHashSet<Integer> set) {
 		int pt = TurnType.getPrimaryTurn(lane);
 		if(pt != 0) {
 			set.add(pt);

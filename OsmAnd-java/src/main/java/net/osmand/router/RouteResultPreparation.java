@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -1459,10 +1460,11 @@ public class RouteResultPreparation {
 			} else {
 				//use keepRight and keepLeft turns when attached road doesn't have lanes
 				//or prev segment has more then 1 turn to the active lane
+				int[] naturalRawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
 				if (rs.keepRight) {
-					t = getTurnByCurrentTurns(rs.leftLanesInfo, currentSegm, rawLanes, TurnType.KR, leftSide);
+					t = getTurnByCurrentTurns(rs.leftLanesInfo, rawLanes, TurnType.KR, leftSide);
 				} else if (rs.keepLeft ) {
-					t = getTurnByCurrentTurns(rs.rightLanesInfo, currentSegm, rawLanes, TurnType.KL, leftSide);
+					t = getTurnByCurrentTurns(rs.rightLanesInfo, rawLanes, TurnType.KL, leftSide);
 				}
 			}
 		} else {
@@ -1483,8 +1485,8 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private TurnType getTurnByCurrentTurns(List<int[]> otherSideLanesInfo, RouteSegmentResult currentSegm, int[] rawLanes, int keepTurnType, boolean leftSide) {
-		TIntHashSet otherSideTurns = new TIntHashSet();
+	private TurnType getTurnByCurrentTurns(List<int[]> otherSideLanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
+		LinkedHashSet<Integer> otherSideTurns = new LinkedHashSet<>();
 		if (otherSideLanesInfo != null) {
 			for (int[] li : otherSideLanesInfo) {
 				if (li != null) {
@@ -1494,15 +1496,25 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		TIntHashSet currentTurns = new TIntHashSet();
+		LinkedHashSet<Integer> currentTurns = new LinkedHashSet<>();
 		for (int ln : rawLanes) {
 			TurnType.collectTurnTypes(ln, currentTurns);
 		}
-		// Here we detect single case when turn lane continues on 1 road / single sign and all other lane turns continue on the other side roads  
-		if (currentTurns.containsAll(otherSideTurns)) {
-			currentTurns.removeAll(otherSideTurns);
-			if (currentTurns.size() == 1) {
-				return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+		// Here we detect single case when turn lane continues on 1 road / single sign and all other lane turns continue on the other side roads
+		LinkedList<Integer> analyzedList = new LinkedList<>(currentTurns);
+		if (analyzedList.size() > 1) {
+			if (keepTurnType == TurnType.KL) {
+				// no need analyze turns in left side (current direction)
+				analyzedList.remove(0);
+			} else if (keepTurnType == TurnType.KR) {
+				// no need analyze turns in right side (current direction)
+				analyzedList.remove(analyzedList.size() - 1);
+			}
+			if (analyzedList.containsAll(otherSideTurns)) {
+				currentTurns.removeAll(otherSideTurns);
+				if (currentTurns.size() == 1) {
+					return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+				}
 			}
 		}
 
