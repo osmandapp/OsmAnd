@@ -1646,7 +1646,7 @@
     <string name="proxy_host_descr">Angi din mellomtjeners vertsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Mellomtjener-port</string>
     <string name="gpx_start_new_segment">Start nytt segment</string>
-    <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
+    <string name="no_index_file_to_download">Fant ikke noe å laste ned. Sjekk at du er koblet til Internett.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_file_is_empty">Tom GPX-fil</string>
