@@ -4853,7 +4853,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="data_settings_descr">Specify language, download/reload data.</string>
     <string name="data_settings">Data</string>
     <string name="additional_settings">Additional settings</string>
-    <string name="update_tile">Update map</string>
+    <string name="update_tile">Update</string>
     <string name="reload_tile">Reload tile</string>
     <string name="mark_point">Target</string>
     <string name="use_english_names_descr">Select between local and English names.</string>
