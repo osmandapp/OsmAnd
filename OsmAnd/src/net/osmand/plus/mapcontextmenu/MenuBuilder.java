@@ -73,7 +73,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -490,7 +490,7 @@ public class MenuBuilder {
 		View view = UiUtilities.getInflater(ctx, !light).inflate(R.layout.dialog_button_with_icon, null);
 		int dp6 = ctx.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_title_padding_bottom);
 		View button = view.findViewById(R.id.button);
-		UiUtilities.setupDialogButton(!light, button, UiUtilities.DialogButtonType.STROKED,
+		UiUtilities.setupDialogButton(!light, button, DialogButtonType.STROKED,
 				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
 		TextView textView = view.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(dp6);

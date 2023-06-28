@@ -269,6 +269,10 @@
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
 	<dimen name="content_padding_medium">9dp</dimen>
+	<dimen name="content_padding_round_medium">10dp</dimen>
+	<dimen name="content_padding_minimal">2dp</dimen>
+	<dimen name="content_padding_small_half_inverted">-6dp</dimen>
+	<dimen name="content_padding_minimal_inverted">-2dp</dimen>
 	<dimen name="horizontal_divider_height">24dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_menu_title_padding_top">13dp</dimen>

@@ -10,8 +10,8 @@ import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 
 public class EmptyFolderViewHolder extends EmptyTracksViewHolder {
 
-	public EmptyFolderViewHolder(@NonNull View view, @Nullable EmptyTracksListener listener, boolean nightMode) {
-		super(view, listener, nightMode);
+	public EmptyFolderViewHolder(@NonNull View view, @Nullable EmptyTracksListener listener) {
+		super(view, listener);
 	}
 
 	@Override

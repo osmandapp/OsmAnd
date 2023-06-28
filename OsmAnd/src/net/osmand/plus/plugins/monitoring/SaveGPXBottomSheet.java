@@ -35,6 +35,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -141,8 +142,8 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
-		return UiUtilities.DialogButtonType.SECONDARY;
+	protected DialogButtonType getRightBottomButtonType() {
+		return DialogButtonType.SECONDARY;
 	}
 
 	@Override

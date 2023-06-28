@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -41,19 +42,21 @@
 			android:textColor="?android:textColorSecondary"
 			tools:text="@string/backup_dont_have_any_descr" />
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/sync_button"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
-			android:layout_marginBottom="@dimen/content_padding" />
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding"
+			app:dialogButtonType="primary"
+			app:dialogButtonTitle="@string/sync_now"/>
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/settings_button"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
-			android:layout_marginBottom="@dimen/content_padding" />
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding"
+			tools:dialogButtonType="secondaryActive"
+			tools:dialogButtonTitle="@string/set_up_backup"/>
 
 	</LinearLayout>
 

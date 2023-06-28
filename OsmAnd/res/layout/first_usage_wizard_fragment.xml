@@ -82,6 +82,8 @@
 				android:id="@+id/wizard_card"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:paddingBottom="@dimen/content_padding_small_half"
+				android:layout_marginBottom="@dimen/content_padding_small_half_inverted"
 				android:orientation="vertical">
 
 				<LinearLayout
@@ -148,14 +150,15 @@
 
 				</LinearLayout>
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/wizard_action_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/setting_list_item_small_height"
+					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/content_padding"
-					android:gravity="center" />
-
+					android:gravity="center"
+					osmand:dialogButtonHeight="@dimen/setting_list_item_small_height"
+					tools:dialogButtonType="secondary"
+					tools:dialogButtonTitle="@string/shared_string_download"/>
 
 			</LinearLayout>
 

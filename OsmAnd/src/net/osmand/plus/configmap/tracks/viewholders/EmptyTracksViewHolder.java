@@ -1,7 +1,5 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class EmptyTracksViewHolder extends RecyclerView.ViewHolder {
 
@@ -20,12 +18,10 @@ public class EmptyTracksViewHolder extends RecyclerView.ViewHolder {
 	protected final TextView title;
 	protected final TextView description;
 	protected final ImageView icon;
-	protected final View button;
-	protected final boolean nightMode;
+	protected final DialogButton button;
 
-	public EmptyTracksViewHolder(@NonNull View view, @Nullable EmptyTracksListener listener, boolean nightMode) {
+	public EmptyTracksViewHolder(@NonNull View view, @Nullable EmptyTracksListener listener) {
 		super(view);
-		this.nightMode = nightMode;
 		app = (OsmandApplication) itemView.getContext().getApplicationContext().getApplicationContext();
 
 		title = view.findViewById(R.id.title);
@@ -43,7 +39,7 @@ public class EmptyTracksViewHolder extends RecyclerView.ViewHolder {
 		title.setText(R.string.empty_tracks);
 		description.setText(R.string.empty_tracks_description);
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_folder_open));
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_import);
+		button.setTitleId(R.string.shared_string_import);
 	}
 
 	public interface EmptyTracksListener {

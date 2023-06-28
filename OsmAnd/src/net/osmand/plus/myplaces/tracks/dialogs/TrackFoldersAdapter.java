@@ -148,7 +148,7 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new RecordingTrackViewHolder(view, trackSelectionListener, recordingTrackListener, nightMode);
 			case TYPE_EMPTY_FOLDER:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
-				return new EmptyFolderViewHolder(view, emptyTracksListener, nightMode);
+				return new EmptyFolderViewHolder(view, emptyTracksListener);
 			case TYPE_FOLDER_STATS:
 				view = inflater.inflate(R.layout.folder_stats_item, parent, false);
 				return new FolderStatsViewHolder(app, view);

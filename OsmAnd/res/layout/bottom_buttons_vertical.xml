@@ -7,20 +7,17 @@
 	android:layout_gravity="bottom"
 	android:gravity="center"
 	android:orientation="vertical"
-	android:paddingStart="@dimen/content_padding"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingTop="@dimen/content_padding_small"
-	android:paddingEnd="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding"
-	android:paddingBottom="@dimen/content_padding_small">
+	android:paddingHorizontal="@dimen/content_padding"
+	android:paddingVertical="@dimen/content_padding_small">
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/third_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
+		android:layout_height="wrap_content"
 		android:visibility="gone"
-		tools:visibility="visible" />
+		tools:visibility="visible"
+		tools:dialogButtonType="secondaryActive"
+		tools:dialogButtonTitle="More information"/>
 
 	<View
 		android:id="@+id/buttons_divider_top"
@@ -29,13 +26,14 @@
 		android:visibility="gone"
 		tools:visibility="visible" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/right_bottom_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
+		android:layout_height="wrap_content"
 		android:visibility="gone"
-		tools:visibility="visible" />
+		tools:visibility="visible"
+		tools:dialogButtonType="primary"
+		tools:dialogButtonTitle="Apply"/>
 
 	<View
 		android:id="@+id/buttons_divider"
@@ -43,10 +41,13 @@
 		android:layout_height="@dimen/content_padding"
 		tools:visibility="visible" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/dismiss_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height" />
+		android:layout_height="wrap_content"
+		android:visibility="gone"
+		tools:visibility="visible"
+		tools:dialogButtonType="secondary"
+		tools:dialogButtonTitle="Cancel"/>
 
 </LinearLayout>

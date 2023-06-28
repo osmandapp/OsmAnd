@@ -68,11 +68,13 @@
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="Error text" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/bottom_sheet_list_item_height"
-		android:layout_marginTop="@dimen/content_padding_small" />
+		android:layout_height="wrap_content"
+		osmand:dialogButtonType="secondaryActive"
+		osmand:dialogButtonTopMargin="@dimen/content_padding_small"
+		osmand:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
+		tools:dialogButtonTitle="@string/cloud_email_already_registered"/>
 
 </LinearLayout>

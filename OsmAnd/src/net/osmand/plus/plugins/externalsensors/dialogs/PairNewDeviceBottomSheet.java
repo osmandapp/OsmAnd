@@ -16,7 +16,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment {
 
@@ -72,12 +72,10 @@ public class PairNewDeviceBottomSheet extends BottomSheetBehaviourDialogFragment
 				.create();
 		items.add(helpItem);
 		BaseBottomSheetItem cancelItem = new BottomSheetItemButton.Builder()
-				.setButtonType(UiUtilities.DialogButtonType.SECONDARY)
+				.setButtonType(DialogButtonType.SECONDARY)
 				.setTitle(getString(R.string.shared_string_cancel))
 				.setLayoutId(R.layout.bottom_sheet_button)
-				.setOnClickListener(v -> {
-				 dismiss();
-				})
+				.setOnClickListener(v -> dismiss())
 				.create();
 		items.add(cancelItem);
 		int padding = getResources().getDimensionPixelSize(R.dimen.content_padding_small);

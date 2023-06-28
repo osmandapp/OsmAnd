@@ -36,7 +36,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.text.MessageFormat;
@@ -242,10 +242,9 @@ public class TilesDownloadProgressFragment extends BaseOsmAndFragment implements
 	}
 
 	private void setupCancelCloseButton(boolean downloadFinished) {
-		View cancelButton = view.findViewById(R.id.cancel_button);
+		DialogButton cancelButton = view.findViewById(R.id.cancel_button);
 		cancelButton.setOnClickListener(v -> dismiss(true));
-		int buttonTextId = downloadFinished ? R.string.shared_string_close : R.string.shared_string_cancel;
-		UiUtilities.setupDialogButton(nightMode, cancelButton, DialogButtonType.SECONDARY, buttonTextId);
+		cancelButton.setTitleId(downloadFinished ? R.string.shared_string_close : R.string.shared_string_cancel);
 	}
 
 	public void dismiss(boolean showWarningIfDownloading) {

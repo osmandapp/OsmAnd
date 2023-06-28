@@ -66,7 +66,8 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -110,7 +111,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private boolean mapDownloadCancelled;
 	private static boolean wizardClosed;
 
-	private View wizardButton;
+	private DialogButton wizardButton;
 	private AppCompatImageView wizardIcon;
 	private TextView wizardTitle;
 	private ProgressBar wizardProgressBar;
@@ -182,7 +183,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				AndroidUiHelper.updateVisibility(wizardProgressBarCircle, true);
 				AndroidUiHelper.updateVisibility(wizardIcon, false);
 				wizardButton.setEnabled(false);
-				UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.SECONDARY, getString(R.string.shared_string_download));
+				wizardButton.setButtonType(DialogButtonType.SECONDARY);
+				wizardButton.setTitleId(R.string.shared_string_download);
 				wizardTitle.setText(getString(R.string.search_location));
 				break;
 			case NO_INTERNET:
@@ -192,7 +194,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				AndroidUiHelper.updateVisibility(wizardProgressBarCircle, false);
 				AndroidUiHelper.updateVisibility(wizardIcon, true);
 				wizardButton.setEnabled(true);
-				UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.SECONDARY, getString(R.string.try_again));
+				wizardButton.setButtonType(DialogButtonType.SECONDARY);
+				wizardButton.setTitleId(R.string.try_again);
 				wizardButton.setOnClickListener(view -> showAppropriateWizard(activity, true));
 				wizardTitle.setText(getString(R.string.no_inet_connection));
 				break;
@@ -203,8 +206,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				AndroidUiHelper.updateVisibility(wizardProgressBarCircle, false);
 				AndroidUiHelper.updateVisibility(wizardIcon, true);
 				wizardButton.setEnabled(true);
-
-				UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.SECONDARY, getString(R.string.try_again));
+				wizardButton.setButtonType(DialogButtonType.SECONDARY);
+				wizardButton.setTitleId(R.string.try_again);
 				wizardButton.setOnClickListener(view -> findLocation(getActivity(), false, true));
 				wizardTitle.setText(getString(R.string.location_not_found));
 
@@ -214,7 +217,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				AndroidUiHelper.updateVisibility(wizardProgressBarCircle, true);
 				AndroidUiHelper.updateVisibility(wizardIcon, false);
 				wizardButton.setEnabled(false);
-				UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.SECONDARY, getString(R.string.shared_string_download));
+				wizardButton.setButtonType(DialogButtonType.SECONDARY);
+				wizardButton.setTitleId(R.string.shared_string_download);
 				wizardTitle.setText(getString(R.string.search_map));
 				break;
 			case MAP_FOUND:
@@ -227,8 +231,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				if (mapIndexItem != null) {
 					wizardTitle.setText(mapIndexItem.getVisibleName(getContext(), app.getRegions(), false));
 					wizardButton.setEnabled(true);
-					UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.PRIMARY,
-							getString(R.string.shared_string_download) + " " + mapIndexItem.getSizeDescription(getContext()));
+					wizardButton.setButtonType(DialogButtonType.PRIMARY);
+					wizardButton.setTitle(getString(R.string.shared_string_download) + " " + mapIndexItem.getSizeDescription(getContext()));
 
 					wizardButton.setOnClickListener(view -> {
 						boolean spaceEnoughForLocal = validationManager.isSpaceEnoughForDownload(getActivity(), true, mapIndexItem);
@@ -264,8 +268,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				AndroidUiHelper.updateVisibility(wizardIcon, true);
 				wizardIcon.setImageDrawable(ContextCompat.getDrawable(app, R.drawable.ic_map));
 				wizardIcon.getDrawable().setTint(app.getColor(R.color.icon_color_active_light));
-
-				UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.PRIMARY, getString(R.string.go_to_map));
+				wizardButton.setButtonType(DialogButtonType.PRIMARY);
+				wizardButton.setTitleId(R.string.go_to_map);
 
 				wizardButton.setOnClickListener(view -> {
 					showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
@@ -495,7 +499,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				downloadProgress = indexItem.getSizeDescription(getContext());
 			}
 			if (!mapDownloadCancelled) {
-				UiUtilities.setupDialogButton(deviceNightMode, wizardButton, DialogButtonType.SECONDARY, downloadProgress);
+				wizardButton.setButtonType(DialogButtonType.SECONDARY);
+				wizardButton.setTitle(downloadProgress);
 				wizardProgressBar.setProgress(Math.max(progress, 0));
 			}
 		}

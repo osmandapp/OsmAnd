@@ -19,6 +19,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -29,8 +30,8 @@ public class DownloadMapToolbarController extends TopToolbarController {
 
 	private final boolean nightMode;
 
-	private final View btnClose;
-	private final View btnDownload;
+	private final DialogButton btnClose;
+	private final DialogButton btnDownload;
 	private final TextView tvDescription;
 	private final TextView tvSize;
 
@@ -62,11 +63,7 @@ public class DownloadMapToolbarController extends TopToolbarController {
 		btnClose = mainView.findViewById(R.id.btnClose);
 		btnDownload = mainView.findViewById(R.id.btnDownload);
 
-		UiUtilities.setupDialogButton(nightMode, btnClose, UiUtilities.DialogButtonType.SECONDARY, mapActivity.getString(R.string.shared_string_close));
-		UiUtilities.setupDialogButton(nightMode, btnDownload, UiUtilities.DialogButtonType.PRIMARY, mapActivity.getString(R.string.shared_string_download));
-
 		refreshView();
-
 		setBottomView(mainView);
 		setTopViewVisible(false);
 		setShadowViewVisible(false);

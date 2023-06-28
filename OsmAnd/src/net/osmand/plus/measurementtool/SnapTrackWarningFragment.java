@@ -5,8 +5,8 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -39,6 +39,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
@@ -56,8 +57,8 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
 	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
-	private View cancelButton;
-	private View applyButton;
+	private DialogButton cancelButton;
+	private DialogButton applyButton;
 
 	private boolean editMode;
 	private boolean continued;
@@ -178,8 +179,10 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 				activity.onBackPressed();
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, cancelButton, SECONDARY, R.string.shared_string_cancel);
-		UiUtilities.setupDialogButton(nightMode, applyButton, PRIMARY, R.string.shared_string_continue);
+		cancelButton.setButtonType(SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
+		applyButton.setButtonType(PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_continue);
 		AndroidUiHelper.updateVisibility(applyButton, !editMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), !editMode);
 	}

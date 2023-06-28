@@ -12,8 +12,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -56,7 +55,8 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 	protected void setupRightButton() {
 		super.setupRightButton();
 		int textId = isWptEditor() ? R.string.apply_only_to_new_points : R.string.apply_only_to_new_favorites;
-		UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), getString(textId));
+		rightButton.setButtonType(getRightBottomButtonType());
+		rightButton.setTitleId(textId);
 	}
 
 	@Override
@@ -64,7 +64,8 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 		super.setupThirdButton();
 		String applyExisting = getString(R.string.apply_to_existing);
 		String text = getString(R.string.ltr_or_rtl_combine_via_space, applyExisting, "(" + pointsSize + ")");
-		UiUtilities.setupDialogButton(nightMode, thirdButton, getThirdBottomButtonType(), text);
+		thirdButton.setButtonType(getThirdBottomButtonType());
+		thirdButton.setTitle(text);
 	}
 
 	@Override

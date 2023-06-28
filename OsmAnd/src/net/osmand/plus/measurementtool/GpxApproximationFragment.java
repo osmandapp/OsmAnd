@@ -27,11 +27,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
@@ -52,8 +53,8 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	private boolean applyApproximation;
 
 	private ProgressBar pbProgress;
-	private View btnCancel;
-	private View btnApply;
+	private DialogButton btnCancel;
+	private DialogButton btnApply;
 	private SliderCard sliderCard;
 	private int menuTitleHeight;
 
@@ -151,6 +152,8 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	private void updateButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
+		btnApply.setButtonType(DialogButtonType.PRIMARY);
+		btnApply.setTitleId(R.string.shared_string_apply);
 		btnApply.setOnClickListener(v -> {
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof GpxApproximationFragmentListener) {
@@ -159,14 +162,14 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 			applyApproximation = true;
 			dismiss();
 		});
+		btnCancel.setButtonType(DialogButtonType.SECONDARY);
+		btnCancel.setTitleId(R.string.shared_string_cancel);
 		btnCancel.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
-		UiUtilities.setupDialogButton(isNightMode(), btnCancel, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-		UiUtilities.setupDialogButton(isNightMode(), btnApply, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		AndroidUiHelper.updateVisibility(btnApply, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}

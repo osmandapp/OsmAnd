@@ -53,8 +53,8 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetA
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
@@ -274,9 +274,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			boolean hasPlugins = PluginsHelper.getEnabledSettingsScreenPlugins().size() > 0;
 			AndroidUiHelper.updateVisibility(noPluginsPart, !hasPlugins);
 
-			View openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
+			DialogButton openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
 			if (!hasPlugins) {
-				UiUtilities.setupDialogButton(isNightMode(), openPluginsButton, DialogButtonType.SECONDARY, R.string.plugins_screen);
 				openPluginsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {

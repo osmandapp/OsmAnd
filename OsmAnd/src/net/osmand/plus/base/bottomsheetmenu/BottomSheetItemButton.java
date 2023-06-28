@@ -10,9 +10,10 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.LayoutRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import static net.osmand.plus.utils.UiUtilities.*;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
 
 public class BottomSheetItemButton extends SimpleBottomSheetItem {
 

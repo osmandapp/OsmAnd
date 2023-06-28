@@ -1,6 +1,6 @@
 package net.osmand.plus.backup.ui.status;
 
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.content.Context;
 import android.view.View;
