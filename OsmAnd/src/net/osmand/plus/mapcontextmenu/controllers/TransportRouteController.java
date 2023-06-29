@@ -64,7 +64,7 @@ public class TransportRouteController extends MenuController {
 			public void buttonPressed() {
 				int previousStop = getPreviousStop();
 				if (previousStop != -1) {
-					showTransportStop(getTransportRoute().route.getForwardStops().get(previousStop), true);
+					showTransportStop(getTransportRoute().route.getForwardStops().get(previousStop), true, previousStop);
 				}
 			}
 		};
@@ -75,7 +75,7 @@ public class TransportRouteController extends MenuController {
 			public void buttonPressed() {
 				int nextStop = getNextStop();
 				if (nextStop != -1) {
-					showTransportStop(getTransportRoute().route.getForwardStops().get(nextStop), true);
+					showTransportStop(getTransportRoute().route.getForwardStops().get(nextStop), true, nextStop);
 				}
 			}
 		};
@@ -190,10 +190,11 @@ public class TransportRouteController extends MenuController {
 		}
 	}
 
-	private void showTransportStop(TransportStop stop, boolean movingBetweenStops) {
+	private void showTransportStop(TransportStop stop, boolean movingBetweenStops, int stopIndex) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && mapContextMenu != null) {
 			transportRoute.stop = stop;
+			transportRoute.setStopIndex(stopIndex);
 			transportRoute.refStop = stop;
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
 					transportRoute.getDescription(mapActivity.getMyApplication(), false));
@@ -213,20 +214,9 @@ public class TransportRouteController extends MenuController {
 		}
 	}
 
-	private int getCurrentStop() {
-		List<TransportStop> stops = transportRoute.route.getForwardStops();
-		for (int i = 0; i < stops.size(); i++) {
-			TransportStop stop = stops.get(i);
-			if (stop.getId().equals(transportRoute.stop.getId())) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
 	private int getNextStop() {
 		List<TransportStop> stops = transportRoute.route.getForwardStops();
-		int currentPos = getCurrentStop();
+		int currentPos = transportRoute.getStopIndex();
 		if (currentPos != -1 && currentPos + 1 < stops.size()) {
 			return currentPos + 1;
 		}
@@ -234,7 +224,7 @@ public class TransportRouteController extends MenuController {
 	}
 
 	private int getPreviousStop() {
-		int currentPos = getCurrentStop();
+		int currentPos = transportRoute.getStopIndex();
 		if (currentPos > 0) {
 			return currentPos - 1;
 		}
@@ -264,7 +254,7 @@ public class TransportRouteController extends MenuController {
 		}
 		List<TransportStop> stops = transportRoute.route.getForwardStops();
 		boolean useEnglishNames = mapActivity.getMyApplication().getSettings().usingEnglishNames();
-		int currentStop = getCurrentStop();
+		int currentStop = transportRoute.getStopIndex();
 		int defaultIcon = transportRoute.type == null ? R.drawable.mx_route_bus_ref : transportRoute.type.getResourceId();
 		int startPosition = 0;
 		if (!transportRoute.showWholeRoute) {
@@ -296,7 +286,7 @@ public class TransportRouteController extends MenuController {
 
 						@Override
 						public void onClick(View arg0) {
-							showTransportStop(stop, false);
+							showTransportStop(stop, false, -1);
 						}
 					});
 		}

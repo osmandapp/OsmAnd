@@ -21,6 +21,7 @@ public class TransportStopRoute {
 	public String desc;
 	public TransportRoute route;
 	public TransportStop stop;
+	private int stopIndex = -1;
 	public int distance;
 	public boolean showWholeRoute;
 	private int cachedColor;
@@ -35,6 +36,7 @@ public class TransportStopRoute {
 		r.route = rs;
 		r.stop = s;
 		r.refStop = s;
+		r.initStopIndex();
 		return r;
 	}
 
@@ -151,4 +153,35 @@ public class TransportStopRoute {
 		}
 	}
 
+	private void initStopIndex() {
+		if (route == null || stop == null) {
+			return;
+		}
+		List<TransportStop> stops = route.getForwardStops();
+		for (int i = 0; i < stops.size(); i++) {
+			TransportStop stop = stops.get(i);
+			if (this.stop.getId().equals(stop.getId())) {
+				stopIndex = i;
+				break;
+			}
+		}
+	}
+
+	public int getStopIndex() {
+		if (stopIndex == -1) {
+			initStopIndex();
+		}
+		return stopIndex;
+	}
+
+	public void setStopIndex(int stopIndex) {
+		if (route == null || stop == null) {
+			return;
+		}
+		if (stopIndex == -1) {
+			initStopIndex();
+		} else if (stopIndex < route.getForwardStops().size()) {
+			this.stopIndex = stopIndex;
+		}
+	}
 }
