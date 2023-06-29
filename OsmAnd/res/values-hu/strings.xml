@@ -877,7 +877,7 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
-    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás és a lejtők, segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sokminden mást. A topográfiai információk a térképen lejtőárnyékolással, szintvonalakkal és/vagy meredekségszínezéssel ábrázolhatók.
+    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás és a lejtési viszonyok, segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sokminden mást. A topográfiai információk a térképen lejtőárnyékolással, szintvonalakkal és/vagy meredekségszínezéssel ábrázolhatók.
 \n
 \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak.
 \n
@@ -3672,7 +3672,7 @@
     <string name="plan_route_trim_after">Kiigazítás ez után:</string>
     <string name="add_segment_to_the_track">Hozzáadás nyomvonalfájlhoz</string>
     <string name="all_previous_segments_will_be_recalc">Minden korábbi szakasz újra lesz számítva a kiválasztott profilnak megfelelően.</string>
-    <string name="update_tile">Térkép frissítése</string>
+    <string name="update_tile">Frissítés</string>
     <string name="previous_segment">Előző szakasz</string>
     <string name="monitoring_min_accuracy_descr">Ez csak a minimális pontosságúnak megjelölt mért pontokat veszi fel (méterben/lábban, ahogy azt az Android a lapkakészletnek közvetíti). Ez pontosság (accuracy) a mérések valódi helyzethez való közelsége, és nem kapcsolódik közvetlenül az ismételt mérések szórásának pontosságához (precision).</string>
     <string name="follow_track">Nyomvonal követése</string>
@@ -4170,7 +4170,7 @@
     <string name="nautical_depth">Tengermélységek</string>
     <string name="terrain_maps">Domborzati térképek</string>
     <string name="offline_wikipeadia">Offline Wikipédia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Domborzati térképek: szintvonalak, domborzatárnyékolás, lejtők</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Domborzati térképek: szintvonalak, domborzatárnyékolás, lejtésviszonyok</string>
     <string name="wikipedia_and_wikivoyage_offline">Offline Wikipédia enciklopédia és Wikivoyage útikönyv</string>
     <string name="unlimited_map_downloads">Korlátlan térképletöltés</string>
     <string name="purchases_feature_desc_osmand_cloud">Szerezzen OsmAnd Cloud felhőtárhelyet az összes OsmAnd-adat online tárolásához. Nincs többé adatvesztés az újratelepítés után. Az összes információ biztonsági mentése és visszaállítása egyszerű lesz.</string>
@@ -4445,8 +4445,8 @@
     <string name="gps_filter_speed_altitude_desc">Csak a megadott intervallumba eső nyomvonalpontok fognak megjelenni a diagramon és a térképen, a többi el lesz rejtve.</string>
     <string name="shared_string_uphill">Emelkedés</string>
     <string name="shared_string_downhill">Lejtés</string>
-    <string name="shared_string_show_slope">Lejtő megjelenítése</string>
-    <string name="shared_string_hide_slope">Lejtő elrejtése</string>
+    <string name="shared_string_show_slope">Lejtés megjelenítése</string>
+    <string name="shared_string_hide_slope">Lejtés elrejtése</string>
     <string name="shared_string_grade">Osztály</string>
     <string name="elevation_profile">Magassági profil</string>
     <string name="distance_between_points">Pontok közti távolság</string>
@@ -5235,6 +5235,8 @@
     <string name="shared_string_close_the_dialog">Párbeszédpanel bezárása</string>
     <string name="relief_3d">3D domborzat</string>
     <string name="terrain_map">Terep térkép</string>
-    <string name="relief_3d_description">Sajátítsd el és figyeld meg a környéked vagy az egész kontinens makettjét.</string>
+    <string name="relief_3d_description">Birtokolja és figyelje meg környéke vagy akár az egész kontinens méretarányos modelljét.</string>
     <string name="free_mode">Szabad mód</string>
+    <string name="slope_legend_description">A lejtés színekkel jelzi a terep meredekségét. A lejtési viszonyokról bővebben itt olvashat: %1$s.</string>
+    <string name="terrain_category_description">Szintvonalak, teljes domborzatárnyékolási térkép sötét árnyalatokkal és lejtési viszonyokat ábrázoló térképek, amelyek színekkel jelzik a csúcsokat és alföldeket.</string>
 </resources>
