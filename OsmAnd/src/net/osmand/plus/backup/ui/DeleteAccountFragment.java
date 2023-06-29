@@ -97,7 +97,7 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.fragment_delete_backup_account, container, false);
-		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		AndroidUtils.addStatusBarPadding21v(requireActivity(), view);
 
 		setupToolbar(view);
 		setupProgress(view);
@@ -252,9 +252,10 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 
 		closeButton = view.findViewById(R.id.close_button);
 		closeButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
+			MapActivity activity = (MapActivity) getActivity();
 			if (activity != null) {
-				activity.onBackPressed();
+				activity.dismissFragment(BackupCloudFragment.TAG);
+				BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
 			}
 		});
 		UiUtilities.setupDialogButton(nightMode, closeButton, SECONDARY, getString(R.string.shared_string_close));
@@ -321,21 +322,11 @@ public class DeleteAccountFragment extends BaseOsmAndFragment implements OnDelet
 		updateContent();
 
 		if (error == null) {
-			logout();
+			backupHelper.logout();
 		}
 		String text = error != null ? error.getLocalizedError(app) : message;
 		if (!Algorithms.isEmpty(text)) {
 			app.showToastMessage(text);
-		}
-	}
-
-	protected void logout() {
-		backupHelper.logout();
-
-		MapActivity activity = (MapActivity) getActivity();
-		if (activity != null) {
-			activity.dismissFragment(BackupCloudFragment.TAG);
-			BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
 		}
 	}
 

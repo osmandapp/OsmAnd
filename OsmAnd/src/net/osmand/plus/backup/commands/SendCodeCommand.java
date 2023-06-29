@@ -7,6 +7,7 @@ import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SUCCESS;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
@@ -43,32 +44,40 @@ public class SendCodeCommand extends BackupCommand {
 
 	@Override
 	protected Object doInBackground(Object... objects) {
-		String deviceId = getHelper().getDeviceId();
-		Map<String, String> parameters = new HashMap<>();
-		parameters.put("deviceid", deviceId);
-		parameters.put("accessToken", getHelper().getAccessToken());
-
-		JSONObject json = new JSONObject();
-		try {
-			json.put("email", email);
-			json.put("action", action);
-		} catch (JSONException e) {
-
-		}
-
-		String body = json.toString();
 		String operation = "Send Code";
-		String contentType = "application/json";
-		OnRequestResultListener listener = getRequestListener(deviceId);
-		String url = SEND_CODE_URL + "?" + AndroidNetworkUtils.getParameters(getApp(), parameters, listener, operation, true);
-
-		AndroidNetworkUtils.sendRequest(getApp(), url, body, operation, contentType, true, true, listener);
-
+		OnRequestResultListener listener = getRequestListener();
+		String params = getParams(operation, listener);
+		if (!Algorithms.isEmpty(params)) {
+			String body = getBody();
+			String url = SEND_CODE_URL + "?" + params;
+			AndroidNetworkUtils.sendRequest(getApp(), url, body, operation, "application/json", true, true, listener);
+		}
 		return null;
 	}
 
+	@Nullable
+	private String getParams(String operation, OnRequestResultListener listener) {
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("deviceid", getHelper().getDeviceId());
+		parameters.put("accessToken", getHelper().getAccessToken());
+
+		return AndroidNetworkUtils.getParameters(getApp(), parameters, listener, operation, true);
+	}
+
 	@NonNull
-	private OnRequestResultListener getRequestListener(String deviceId) {
+	private String getBody() {
+		JSONObject json = new JSONObject();
+		try {
+			json.putOpt("email", email);
+			json.putOpt("action", action);
+		} catch (JSONException e) {
+
+		}
+		return json.toString();
+	}
+
+	@NonNull
+	private OnRequestResultListener getRequestListener() {
 		OperationLog operationLog = createOperationLog("sendCode");
 
 		return (result, error, resultCode) -> {
@@ -77,24 +86,24 @@ public class SendCodeCommand extends BackupCommand {
 			BackupError backupError = null;
 			if (!Algorithms.isEmpty(error)) {
 				backupError = new BackupError(error);
-				message = "Account deletion error: " + backupError + "\nEmail=" + email + "\nDeviceId=" + deviceId;
+				message = "Send code error: " + backupError + "\nEmail=" + email + "\nDeviceId=" + getHelper().getDeviceId();
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(result)) {
 				try {
 					JSONObject resultJson = new JSONObject(result);
 					if (resultJson.has("status") && "ok".equals(resultJson.getString("status"))) {
-						message = "You have been registered successfully. Please check for email with activation code.";
+						message = "Code have been sent successfully. Please check for email with activation code.";
 						status = STATUS_SUCCESS;
 					} else {
-						message = "Account deletion error: unknown";
+						message = "Send code error: unknown";
 						status = STATUS_SERVER_ERROR;
 					}
 				} catch (JSONException e) {
-					message = "Account deletion error: json parsing";
+					message = "Send code error: json parsing";
 					status = STATUS_PARSE_JSON_ERROR;
 				}
 			} else {
-				message = "Account deletion error: empty response";
+				message = "Send code error: empty response";
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			publishProgress(status, message, backupError);

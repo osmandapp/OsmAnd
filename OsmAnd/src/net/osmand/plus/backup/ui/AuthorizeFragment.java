@@ -241,7 +241,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		editText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(requireActivity(), editText);
 
-		updateErrorVisibility(false);
+		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(buttonAuthorize, false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), dialogType == SIGN_UP && promoCodeSupported());
 
@@ -272,7 +272,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				editText.requestFocus();
 				errorText.setText(R.string.osm_live_enter_email);
 				buttonContinue.setEnabled(false);
-				updateErrorVisibility(true);
+				AndroidUiHelper.updateVisibility(errorText, true);
 			}
 		});
 	}
@@ -284,7 +284,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
 		View codeMissingDescription = view.findViewById(R.id.code_missing_description);
 
-		updateErrorVisibility(false);
+		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(resendButton, false);
 		AndroidUiHelper.updateVisibility(codeMissingDescription, false);
 
@@ -336,10 +336,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				editText.requestFocus();
 				errorText.setText(emailMatch ? R.string.osm_live_enter_email : R.string.backup_error_delete_account_email_match);
 				buttonContinue.setEnabled(false);
-				updateErrorVisibility(true);
+				AndroidUiHelper.updateVisibility(errorText, true);
 			}
 		});
-		updateErrorVisibility(false);
+		AndroidUiHelper.updateVisibility(errorText, false);
 		AndroidUiHelper.updateVisibility(buttonChoosePlan, false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.button), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.promocode_container), false);
@@ -355,8 +355,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		}
 	}
 
-	private void updateErrorVisibility(boolean visible) {
-		AndroidUiHelper.updateVisibility(errorText, visible);
+	public void setToken(@NonNull String token) {
+		editText.setText(token);
+		tokenSelected(token);
 	}
 
 	private void tokenSelected(@NonNull String token) {
@@ -372,9 +373,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		}
 	}
 
-	public void setToken(@NonNull String token) {
-		editText.setText(token);
-		tokenSelected(token);
+	private void openDeletionScreen(@NonNull String token) {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			DeleteAccountFragment.showInstance(fragmentManager, token);
+		}
 	}
 
 	private void registerDevice(@Nullable String token) {
@@ -410,7 +413,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void registerUser() {
-		boolean login = dialogType == SIGN_IN || dialogType == DELETE_ACCOUNT || signIn;
+		boolean login = dialogType == SIGN_IN || signIn;
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), settings.BACKUP_PROMOCODE.get(), login);
 	}
 
@@ -438,11 +441,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				progressBar.setVisibility(View.INVISIBLE);
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					activity.dismissFragment(BackupAuthorizationFragment.TAG);
-					openCloudScreen();
+					BackupCloudFragment.showInstance(activity.getSupportFragmentManager(), signIn ? SIGN_IN : SIGN_UP);
 				} else {
 					errorText.setText(error != null ? error.getLocalizedError(app) : message);
 					buttonContinue.setEnabled(false);
-					updateErrorVisibility(true);
+					AndroidUiHelper.updateVisibility(errorText, true);
 				}
 			} else {
 				if (errorCode == dialogType.permittedErrorCode) {
@@ -456,7 +459,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 						errorText.setText(error.getLocalizedError(app));
 					}
 					buttonContinue.setEnabled(false);
-					updateErrorVisibility(true);
+					AndroidUiHelper.updateVisibility(errorText, true);
 				}
 				AndroidUiHelper.updateVisibility(buttonChoosePlan, false);
 			}
@@ -489,22 +492,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		}
 		errorText.setText(error != null ? error.getLocalizedError(app) : message);
 		buttonContinue.setEnabled(false);
-		updateErrorVisibility(true);
+		AndroidUiHelper.updateVisibility(errorText, true);
 		AndroidUiHelper.updateVisibility(buttonChoosePlan, choosePlanVisible);
-	}
-
-	private void openCloudScreen() {
-		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null && !fragmentManager.isStateSaved()) {
-			BackupCloudFragment.showInstance(fragmentManager, signIn ? SIGN_IN : SIGN_UP);
-		}
-	}
-
-	private void openDeletionScreen(@NonNull String token) {
-		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			DeleteAccountFragment.showInstance(fragmentManager, token);
-		}
 	}
 
 	private boolean promoCodeSupported() {

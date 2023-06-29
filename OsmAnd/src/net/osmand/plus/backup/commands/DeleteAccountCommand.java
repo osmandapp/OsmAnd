@@ -6,6 +6,7 @@ import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SUCCESS;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
@@ -43,11 +44,28 @@ public class DeleteAccountCommand extends BackupCommand {
 
 	@Override
 	protected Object doInBackground(Object... objects) {
-		String deviceId = getHelper().getDeviceId();
+		String operation = "Account Delete";
+		OnRequestResultListener listener = getRequestListener();
+		String params = getParams(operation, listener);
+		if (!Algorithms.isEmpty(params)) {
+			String body = getBody();
+			String url = ACCOUNT_DELETE_URL + "?" + params;
+			AndroidNetworkUtils.sendRequest(getApp(), url, body, operation, "application/json", true, true, listener);
+		}
+		return null;
+	}
+
+	@Nullable
+	private String getParams(String operation, OnRequestResultListener listener) {
 		Map<String, String> parameters = new HashMap<>();
-		parameters.put("deviceid", deviceId);
+		parameters.put("deviceid", getHelper().getDeviceId());
 		parameters.put("accessToken", getHelper().getAccessToken());
 
+		return AndroidNetworkUtils.getParameters(getApp(), parameters, listener, operation, true);
+	}
+
+	@NonNull
+	private String getBody() {
 		JSONObject json = new JSONObject();
 		try {
 			json.put("username", email);
@@ -56,20 +74,11 @@ public class DeleteAccountCommand extends BackupCommand {
 		} catch (JSONException e) {
 
 		}
-
-		String body = json.toString();
-		String operation = "Account Delete";
-		String contentType = "application/json";
-		OnRequestResultListener listener = getRequestListener(deviceId);
-		String url = ACCOUNT_DELETE_URL + "?" + AndroidNetworkUtils.getParameters(getApp(), parameters, listener, operation, true);
-
-		AndroidNetworkUtils.sendRequest(getApp(), url, body, operation, contentType, true, true, listener);
-
-		return null;
+		return json.toString();
 	}
 
 	@NonNull
-	private OnRequestResultListener getRequestListener(String deviceId) {
+	private OnRequestResultListener getRequestListener() {
 		OperationLog operationLog = createOperationLog("accountDelete");
 
 		return (result, error, resultCode) -> {
@@ -78,7 +87,7 @@ public class DeleteAccountCommand extends BackupCommand {
 			BackupError backupError = null;
 			if (!Algorithms.isEmpty(error)) {
 				backupError = new BackupError(error);
-				message = "Account deletion error: " + backupError + "\nEmail=" + email + "\nDeviceId=" + deviceId;
+				message = "Account deletion error: " + backupError + "\nEmail=" + email + "\nDeviceId=" + getHelper().getDeviceId();
 				status = STATUS_SERVER_ERROR;
 			} else if (resultCode != null && resultCode == HttpURLConnection.HTTP_OK) {
 				message = result;

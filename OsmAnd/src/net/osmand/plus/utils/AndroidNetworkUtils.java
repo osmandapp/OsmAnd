@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -60,26 +61,34 @@ public class AndroidNetworkUtils {
 
 	public interface OnFileUploadCallback {
 		void onFileUploadStarted();
+
 		void onFileUploadProgress(int percent);
+
 		void onFileUploadDone(@NonNull NetworkResult networkResult);
 	}
 
 	public interface OnFilesUploadCallback {
 		@Nullable
 		Map<String, String> getAdditionalParams(@NonNull File file);
+
 		void onFileUploadProgress(@NonNull File file, int percent);
+
 		void onFileUploadDone(@NonNull File file);
+
 		void onFilesUploadDone(@NonNull Map<File, String> errors);
 	}
 
 	public interface OnFilesDownloadCallback {
 		@Nullable
 		Map<String, String> getAdditionalParams(@NonNull File file);
+
 		void onFileDownloadProgress(@NonNull File file, int percent);
+
 		@WorkerThread
 		void onFileDownloadedAsync(@NonNull File file);
 
 		void onFileDownloadDone(@NonNull File file);
+
 		void onFilesDownloadDone(@NonNull Map<File, String> errors);
 	}
 
@@ -115,7 +124,9 @@ public class AndroidNetworkUtils {
 
 	public interface OnSendRequestsListener {
 		void onRequestSending(@NonNull Request request);
+
 		void onRequestSent(@NonNull RequestResponse response);
+
 		void onRequestsSent(@NonNull List<RequestResponse> results);
 	}
 
@@ -393,8 +404,8 @@ public class AndroidNetworkUtils {
 	}
 
 	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull String url,
-	                                 @Nullable Map<String, String> parameters,
-	                                 @Nullable String userOperation, boolean toastAllowed, boolean post) {
+									 @Nullable Map<String, String> parameters,
+									 @Nullable String userOperation, boolean toastAllowed, boolean post) {
 		return sendRequest(ctx, url, parameters, userOperation, toastAllowed, post, null);
 	}
 
@@ -517,7 +528,7 @@ public class AndroidNetworkUtils {
 				}
 				return builder.toString();
 			}
-		} catch (IOException e) {
+		} catch (UnsupportedEncodingException e) {
 			String error = processIOError(app, userOperation, toastAllowed);
 			if (listener != null) {
 				listener.onResult(null, error, null);
