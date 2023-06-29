@@ -35,7 +35,6 @@ class TracksScreen(
     private val trackTab: TrackTab
 ) : BaseOsmAndAndroidAutoScreen(carContext) {
     val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
-    var loadGpxFilesThread: Thread? = null
     private var loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
     private lateinit var loadTracksTask: LoadTracksTask
 
@@ -49,7 +48,6 @@ class TracksScreen(
 
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
-                loadGpxFilesThread?.interrupt()
                 app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
                 app.osmandMap.mapView.backToLocation()
             }
@@ -87,7 +85,7 @@ class TracksScreen(
     }
 
     private fun prepareTrackItems() {
-        loadedGpxFiles = HashMap()
+        val newMap = HashMap<TrackItem, SelectedGpxFile>()
         for (track in trackTab.trackItems) {
             track.file?.let { file ->
                 val item = gpxDbHelper.getItem(file) { updateTrack(track, it) }
@@ -97,14 +95,14 @@ class TracksScreen(
                 val gpxFile = GPXUtilities.loadGPXFile(file)
                 val selectedGpxFile = SelectedGpxFile()
                 selectedGpxFile.setGpxFile(gpxFile, app)
-                loadedGpxFiles[track] = selectedGpxFile
+                newMap[track] = selectedGpxFile
             }
         }
+        loadedGpxFiles = newMap
     }
 
     private fun updateTrack(trackItem: TrackItem, dataItem: GpxDataItem?) {
         trackItem.dataItem = dataItem
-        invalidate()
     }
 
     private fun setupTracks(templateBuilder: PlaceListNavigationTemplate.Builder) {
