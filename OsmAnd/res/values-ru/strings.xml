@@ -49,7 +49,7 @@
     <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_color_scheme">Цвет горизонталей</string>
+    <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
     <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моим положением во время навигации.</string>
@@ -210,7 +210,7 @@
     <string name="rendering_attr_contourColorScheme_description">Цвет горизонталей</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
     <string name="rendering_value_dark_brown_name">Тёмно-коричневый</string>
-    <string name="rendering_attr_contourColorScheme_name">Цветовая гамма горизонталей</string>
+    <string name="rendering_attr_contourColorScheme_name">Цветовая схема горизонталей</string>
     <string name="rendering_attr_surfaceIntegrity_name">Качество дорожного покрытия</string>
     <string name="search_hint">Город, адрес, POI</string>
     <string name="new_filter_desc">Введите имя для нового фильтра. Он добавится в список «Категории».</string>
@@ -4752,7 +4752,7 @@
     <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажмите на компас для смены режима ориентации.</string>
     <string name="compass_desc">Показывает направление на север.</string>
-    <string name="rendering_attr_depthContourColorScheme_description">Цвет контурных линий глубины (изобат)</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
     <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
     <string name="second_next_turn_widget_desc">Виджет показывает информацию о вашем втором следующем повороте, который включается, если поворот находится на расстоянии приближения.</string>
@@ -4942,7 +4942,7 @@
 \n- изолинии температуры / давления.
 \nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="rotate_map_manual_opt">фиксированная (повернутая вручную)</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Цветовая схема линий</string>
     <string name="shared_string_next_sunrise">Следующий восход</string>
     <string name="map_widget_group_sunrise_sunset">Восход, закат</string>
     <string name="depth_contour_lines">Контурные линии глубины (изобаты)</string>
