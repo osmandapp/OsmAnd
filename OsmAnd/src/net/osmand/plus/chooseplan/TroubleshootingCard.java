@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
+import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -47,7 +48,7 @@ public class TroubleshootingCard extends BaseCard {
 		View redeemPromoCode = view.findViewById(R.id.redeem_promo_code);
 		redeemPromoCode.setOnClickListener(v -> {
 			notifyCardPressed();
-			AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), true);
+			AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), LoginDialogType.SIGN_UP);
 		});
 		boolean showPromoCodeBtn = !Version.isGooglePlayEnabled();
 		AndroidUiHelper.updateVisibility(redeemPromoCode, showPromoCodeBtn);

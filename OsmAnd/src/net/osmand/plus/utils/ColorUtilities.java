@@ -189,6 +189,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getPrimaryIconColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getPrimaryIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getPrimaryIconColorId(boolean nightMode) {
+		return nightMode ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
+	}
+
+	@ColorInt
 	public static int getButtonSecondaryTextColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getButtonSecondaryTextColorId(nightMode));
 	}

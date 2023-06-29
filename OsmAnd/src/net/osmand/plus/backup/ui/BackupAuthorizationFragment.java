@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_IN;
+import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_UP;
 import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
 import android.os.Bundle;
@@ -97,7 +99,8 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 		view.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), signUp);
+				LoginDialogType dialogType = signUp ? SIGN_UP : SIGN_IN;
+				AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), dialogType);
 			}
 		});
 	}

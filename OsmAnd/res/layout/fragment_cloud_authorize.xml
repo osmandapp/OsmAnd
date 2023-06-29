@@ -13,7 +13,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
-		osmand:layout_behavior="net.osmand.plus.backup.ui.AuthorizeFragment$FixScrollingFooterBehaviour">
+		osmand:layout_behavior="net.osmand.plus.backup.ui.ScrollingFooterBehaviour">
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"
@@ -62,6 +62,14 @@
 
 				<include
 					android:id="@+id/sign_up_container"
+					layout="@layout/authorize_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:visibility="gone" />
+
+				<include
+					android:id="@+id/delete_account_container"
 					layout="@layout/authorize_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
