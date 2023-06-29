@@ -5247,4 +5247,6 @@
     <string name="terrain_map">Hartă de teren</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="relief_3d_description">Dețineți și observați macheta la scară a cartierului dumneavoastră sau a întregului continent.</string>
+    <string name="terrain_category_description">Liniile de contur ale terenului, harta completă a dealurilor cu nuanțe întunecate și hărți de pantă cu culori pentru a arăta vârfurile și zonele joase.</string>
+    <string name="slope_legend_description">Slope folosește culori pentru a vizualiza panta terenului. Puteți citi mai multe despre pante în %1$s.</string>
 </resources>
