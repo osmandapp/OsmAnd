@@ -41,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WeatherHelper {
 
 	private static final Log log = PlatformUtil.getLog(WeatherHelper.class);
-	public static final int WEATHER_FORECAST_EXPIRE_TIME = 1000 * 60 * 60 * 12; // 12 hours
+	public static final int WEATHER_CACHE_EXPIRE_TIME = 1000 * 60 * 60 * 6; // 6 hours
 
 	private final OsmandApplication app;
 	private final WeatherSettings weatherSettings;
@@ -122,7 +122,7 @@ public class WeatherHelper {
 		WeatherWebClient webClient = new WeatherWebClient();
 		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(
 				new BandIndexGeoBandSettingsHash(), weatherForecastDir.getAbsolutePath(), projResourcesPath,
-				WEATHER_FORECAST_EXPIRE_TIME, tileSize, densityFactor, webClient.instantiateProxy(true)
+				WEATHER_CACHE_EXPIRE_TIME, tileSize, densityFactor, webClient.instantiateProxy(true)
 		);
 		webClient.swigReleaseOwnership();
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
