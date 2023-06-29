@@ -36,6 +36,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
@@ -49,6 +50,7 @@ import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -59,6 +61,7 @@ import net.osmand.plus.myplaces.favorites.ShareFavoritesAsyncTask.ShareFavorites
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.views.PointImageDrawable;
@@ -107,6 +110,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private String groupNameToShow;
 	private boolean compassUpdateAllowed = true;
 	private boolean locationUpdateStarted;
+
+	private View freeFavoritesBackupCard;
+	private View freeFavoritesBackupCardDivider;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,7 +172,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflater.inflate(R.layout.favorites_tree, container, false);
-		ExpandableListView listView = view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
 		favouritesAdapter.synchronizeGroups();
 		if (!favouritesAdapter.isEmpty()) {
 			boolean nightMode = !app.getSettings().isLightContent();
@@ -178,6 +184,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			searchView.setOnClickListener(v -> FavoritesSearchFragment.showInstance(getActivity(), ""));
 			listView.addHeaderView(searchView);
 			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
+			boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+			boolean isRegistered = app.getBackupHelper().isRegistered();
+			if (!proAvailable && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
+				freeFavoritesBackupCardDivider = inflater.inflate(R.layout.list_item_divider, listView, false);
+				listView.addHeaderView(freeFavoritesBackupCardDivider, null, false);
+				freeFavoritesBackupCard = inflater.inflate(R.layout.free_favorites_backup_card, listView, false);
+				setupGetOsmAndCloudButton(freeFavoritesBackupCard);
+				listView.addHeaderView(freeFavoritesBackupCard);
+			}
 			listView.addHeaderView(dividerView, null, false);
 			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
@@ -648,6 +663,38 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void shareFavoritesFinished() {
 		hideProgressBar();
+	}
+
+	private void setupGetOsmAndCloudButton(@NonNull View view) {
+		View dismissButton = view.findViewById(R.id.dismiss_button);
+		UiUtilities iconsCache = app.getUIUtilities();
+		ImageView closeBtn = view.findViewById(R.id.btn_close);
+		closeBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_cancel, isNightMode()));
+		closeBtn.setOnClickListener(v -> {
+			if (listView != null) {
+				if (freeFavoritesBackupCard != null) {
+					listView.removeHeaderView(freeFavoritesBackupCard);
+				}
+				if (freeFavoritesBackupCardDivider != null) {
+					listView.removeHeaderView(freeFavoritesBackupCardDivider);
+				}
+				app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.set(true);
+			}
+		});
+
+		int buttonTextId = R.string.get_osmand_cloud;
+		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
+		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
+		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		dismissButton.setLayoutParams(layoutParams);
+		view.requestLayout();
+		dismissButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				((MyPlacesActivity) getActivity()).showOsmAndCloud(this);
+			}
+		});
+		AndroidUiHelper.updateVisibility(dismissButton, true);
 	}
 
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {

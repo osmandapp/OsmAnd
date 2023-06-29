@@ -44,12 +44,14 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	public static final String TAG = PurchaseItemFragment.class.getName();
 
 	private static final String PURCHASE_SKU_ARG = "purchase_sku_arg";
+	private static final String IS_FREE_ACCOUNT_ARG = "is_free_account_arg";
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
 	private String purchaseSku;
 	private PurchaseUiData purchase;
 	private InAppPurchaseHelper inAppPurchaseHelper;
+	private boolean isFreeAccountPurchase;
 
 	private View view;
 	private boolean isToolbarInitialized;
@@ -59,7 +61,12 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
 		if (args != null) {
-			purchaseSku = args.getString(PURCHASE_SKU_ARG);
+			if (args.containsKey(PURCHASE_SKU_ARG)) {
+				purchaseSku = args.getString(PURCHASE_SKU_ARG);
+			}
+			if (args.containsKey(IS_FREE_ACCOUNT_ARG)) {
+				isFreeAccountPurchase = args.getBoolean(IS_FREE_ACCOUNT_ARG);
+			}
 		}
 	}
 
@@ -91,7 +98,11 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 				}
 			}
 		} else {
-			purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
+			if (isFreeAccountPurchase) {
+				purchase = PurchaseUiDataUtils.createFreeAccPurchaseUiData(app);
+			} else {
+				purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
+			}
 		}
 	}
 
@@ -252,8 +263,8 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 				desc = dateFormat.format(expireTime);
 				break;
 			case EXPIRED:
-				title = app.getString(R.string.expired);
-				desc = dateFormat.format(expireTime);
+				title = expireTime > 0 ? app.getString(R.string.expired) : app.getString(R.string.shared_string_purchased);
+				desc = expireTime > 0 ? dateFormat.format(expireTime) : dateFormat.format(startTime);
 				break;
 			case ON_HOLD:
 				title = app.getString(R.string.on_hold_since, "");
@@ -271,11 +282,21 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable String purchaseSku) {
+		Bundle args = new Bundle();
+		args.putString(PURCHASE_SKU_ARG, purchaseSku);
+		showInstance(manager, args);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, boolean isFreeAccountPurchase) {
+		Bundle args = new Bundle();
+		args.putBoolean(IS_FREE_ACCOUNT_ARG, isFreeAccountPurchase);
+		showInstance(manager, args);
+	}
+
+	private static void showInstance(@NonNull FragmentManager manager, @NonNull Bundle arguments) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			PurchaseItemFragment fragment = new PurchaseItemFragment();
-			Bundle args = new Bundle();
-			args.putString(PURCHASE_SKU_ARG, purchaseSku);
-			fragment.setArguments(args);
+			fragment.setArguments(arguments);
 			fragment.show(manager, TAG);
 		}
 	}

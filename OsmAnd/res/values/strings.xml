@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
+    <string name="free_favorites_backup">Free Favorites Backup</string>
+    <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
+    <string name="free_account">Free account</string>
     <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slopes in %1$s.</string>
     <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
     <string name="free_mode">Free mode</string>

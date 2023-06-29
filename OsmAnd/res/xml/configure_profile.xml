@@ -5,6 +5,10 @@
 	android:title="@string/configure_profile">
 
 	<Preference
+		android:key="free_favorites_backup_card"
+		android:layout="@layout/free_favorites_backup_card"/>
+
+	<Preference
 		android:key="configure_profile_info"
 		android:layout="@layout/preference_info_descr"
 		android:persistent="false"
