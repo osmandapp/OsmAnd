@@ -1,3 +1,8 @@
+---
+name: "Bug report"
+about: Report a bug in OsmAnd
+---
+
 ## Description
 
 ### How to reproduce
