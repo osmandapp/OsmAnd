@@ -4562,7 +4562,7 @@
     <string name="poi_cemt_iii">III</string>
     <string name="poi_cemt_va">Va</string>
     <string name="poi_cemt_vb">Vb</string>
-    <string name="poi_cai_scale">CAI Skala</string>
+    <string name="poi_cai_scale">CAI-Skala</string>
     <string name="poi_cemt_i">1</string>
     <string name="poi_maxlength">Maximale Länge</string>
     <string name="poi_lock_name">Schleusenname</string>
@@ -4578,7 +4578,7 @@
     <string name="poi_boat_unknown">Bootszugang: unbekannt</string>
     <string name="poi_cemt_0">0</string>
     <string name="poi_cemt_iv">IV</string>
-    <string name="poi_sac_scale">SAC Skala</string>
+    <string name="poi_sac_scale">SAC-Skala</string>
     <string name="poi_cemt_via">VIa</string>
     <string name="poi_cemt_vib">VIb</string>
     <string name="poi_cemt_vic">VIc</string>
