@@ -109,8 +109,8 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Максимально сложный</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Без крутых подъёмов</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Максимально плоский</string>
-    <string name="routing_attr_driving_style_speed_name">Предпочитать оживлённые улицы</string>
-    <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
+    <string name="routing_attr_driving_style_speed_name">Предпочитать крупные дороги</string>
+    <string name="routing_attr_driving_style_balance_name">Приоритет быстрейшему маршруту</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать тихие улицы</string>
     <string name="relief_smoothness_factor_descr">Выберите предпочтительный рельеф.</string>
     <string name="shared_string_slope">Уклон</string>
@@ -1145,7 +1145,7 @@
 \n — подсказки полосы движения, отображение ограничения скорости, предварительно записанные и синтезированные голосовые подсказки
 \n</string>
     <string name="avoid_motorway">Без автомагистралей</string>
-    <string name="snap_to_road">Привязка к дороге</string>
+    <string name="snap_to_road">Через привязку к дорогам</string>
     <string name="intermediate_point_too_far">Промежуточный пункт %1$s слишком далеко от ближайшей дороги.</string>
     <string name="arrived_at_intermediate_point">Вы прибыли в промежуточный пункт</string>
     <string name="context_menu_item_intermediate_point">Промежуточный пункт</string>
@@ -3161,7 +3161,7 @@
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s КБ</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия.</string>
     <string name="shared_string_other">Прочее</string>
     <string name="download_detailed_map">Загрузить подробную карту %s для просмотра этой области.</string>
@@ -3203,8 +3203,8 @@
 \n
 \n</string>
     <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
-    <string name="routing_attr_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
-    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги.</string>
+    <string name="routing_attr_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
+    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги и тропы.</string>
     <string name="update_all_maps_q">Обновить все карты (%1$d)\?</string>
     <string name="apply_preference_to_all_profiles">Применить ко всем или только к выбранному профилю.</string>
     <string name="shared_preference">Общий</string>
@@ -4152,7 +4152,7 @@
     <string name="restore_from_osmand_cloud">Восстановить из OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
     <string name="restore_selected_data">Восстановить выбранные данные</string>
-    <string name="receiving_data_from_server">Получение данных с сервера…</string>
+    <string name="receiving_data_from_server">Приём данных с сервера…</string>
     <string name="restore_complete">Восстановление завершено</string>
     <string name="backup_storage_taken">Занято в хранилище</string>
     <string name="backup_version_history">История версий</string>
@@ -4615,8 +4615,8 @@
     <string name="get_altitude_information">Получить информацию о высоте</string>
     <string name="calculating_altitude">Расчет высоты</string>
     <string name="calculate_online">Рассчитать онлайн</string>
-    <string name="track_attach_to_the_roads_descr">Трек будет привязан к дороге с помощью офлайн-карт, геометрия трека будет изменена.</string>
-    <string name="get_altitude_data">Получить данные о высоте</string>
+    <string name="track_attach_to_the_roads_descr">Трек будет привязан к ближайшим дорогам с использованием офлайн-карт, геометрия трека изменится.</string>
+    <string name="get_altitude_data">Получение данных о высоте</string>
     <string name="current_time_widget_desc">Виджет показывает текущее время на вашем устройстве.</string>
     <string name="gps_info_widget_desc">Виджет показывает количество видимых и используемых в данный момент спутников.</string>
     <string name="altitude_widget_desc">Виджет показывает высоту над уровнем моря в текущей геолокации.</string>
@@ -4706,7 +4706,7 @@
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
-    <string name="no_altitude_data_desc">%1$s: для получения данных проложите маршрут или выполните привязку к дорогам.</string>
+    <string name="no_altitude_data_desc">Для расчёта высоты проложите маршрут или выполните привязку к дорогам.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
     <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
@@ -5226,10 +5226,10 @@
     <string name="routing_attr_allow_via_ferrata_description">Разрешить тропы виа феррата.</string>
     <string name="power_watts_unit">Ватты</string>
     <string name="revolutions_per_minute_unit">об/мин</string>
-    <string name="calculate_offline">Рассчитать офлайн</string>
+    <string name="calculate_offline">По карте высот</string>
     <string name="routing_attr_allow_via_ferrata_name">Разрешить виа феррата</string>
     <string name="device_disconnected">Устройство [%1$s] отключено</string>
-    <string name="calculate_offline_altitude_descr">Расчёт высоты офлайн, на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
+    <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
     <string name="running_scds_device_name">Работающее устройство</string>
     <string name="device_connected">Устройство [%1$s] подключено</string>
     <string name="error_calculate">Результат вычислений пуст</string>
