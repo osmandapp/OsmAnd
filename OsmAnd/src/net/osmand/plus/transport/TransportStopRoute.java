@@ -162,6 +162,7 @@ public class TransportStopRoute {
 			TransportStop stop = stops.get(i);
 			if (this.stop.getId().equals(stop.getId())) {
 				stopIndex = i;
+				break;
 			}
 		}
 	}
