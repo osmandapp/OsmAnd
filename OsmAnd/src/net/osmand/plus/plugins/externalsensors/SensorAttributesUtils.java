@@ -181,11 +181,11 @@ public class SensorAttributesUtils {
 		yAxis.setAxisMinimum(0f);
 
 		ArrayList<Entry> values = new ArrayList<>();
-		List<PointAttribute> attributes = analysis.getAttributesData(graphType.getDataKey()).getAttributes();
+		List<PointAttribute<? extends Number>> attributes = analysis.getAttributesData(graphType.getDataKey()).getAttributes();
 		float currentX = 0;
 
 		for (int i = 0; i < attributes.size(); i++) {
-			PointAttribute attribute = attributes.get(i);
+			PointAttribute<? extends Number> attribute = attributes.get(i);
 
 			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
 
