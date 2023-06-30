@@ -1145,7 +1145,7 @@
 \n — подсказки полосы движения, отображение ограничения скорости, предварительно записанные и синтезированные голосовые подсказки
 \n</string>
     <string name="avoid_motorway">Без автомагистралей</string>
-    <string name="snap_to_road">Через привязку к дорогам</string>
+    <string name="snap_to_road">Привязка к дороге</string>
     <string name="intermediate_point_too_far">Промежуточный пункт %1$s слишком далеко от ближайшей дороги.</string>
     <string name="arrived_at_intermediate_point">Вы прибыли в промежуточный пункт</string>
     <string name="context_menu_item_intermediate_point">Промежуточный пункт</string>
@@ -3741,7 +3741,7 @@
     <string name="pass_whole_track_descr">Точка для навигации</string>
     <string name="start_of_the_track">Начало трека</string>
     <string name="nearest_point">Ближайшая точка</string>
-    <string name="attach_to_the_roads">Привязка к дороге</string>
+    <string name="attach_to_the_roads">Через привязку к дорогам</string>
     <string name="delete_address">Удалить адрес</string>
     <string name="add_address">Добавить адрес</string>
     <string name="access_hint_enter_address">Введите адрес</string>
