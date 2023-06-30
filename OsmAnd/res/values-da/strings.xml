@@ -5251,4 +5251,27 @@
     <string name="free_mode">Fri tilstand</string>
     <string name="terrain_category_description">Terrænkonturlinjer, fuldt terrænskyggekort med mørke nuancer og hældningskort med farver til at vise toppe og lavland.</string>
     <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældninger i %1$s.</string>
+    <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.
+\n
+\nAlle data på enheden forbliver uberørte.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Er du sikker på, at du vil slette din OsmAnd Cloud-konto\?
+\n
+\nDenne handling kan ikke fortrydes.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Slet konto\?</string>
+    <string name="action_cannot_be_undone">Denne handling kan ikke fortrydes.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundære enheder vil blive logget af OsmAnd Cloud og miste adgang til betalte funktioner.</string>
+    <string name="osmand_cloud_deletion_account_warning">Din konto og alle kontooplysninger vil blive %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Alle data fra OsmAnd Cloud vil blive %1$s. Data på enheden forbliver uberørt.</string>
+    <string name="manage_subscriptions">Administrer abonnementer.</string>
+    <string name="delete_account_warning">Er du sikker på, at du vil slette %1$s konto\?</string>
+    <string name="shared_string_deleting">Sletter</string>
+    <string name="deleting_complete">Sletning fuldført</string>
+    <string name="delete_account">Slet konto</string>
+    <string name="backup_error_delete_account_email_match">E-mail stemmer ikke overens med login-brugernavn</string>
+    <string name="verify_account">Bekræft din konto</string>
+    <string name="osmand_cloud_deleted_account_descr">Konto og alle data blev slettet fra OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Dette vil ikke annullere dit OsmAnd Pro-abonnement.</string>
+    <string name="verify_account_deletion_descr">Vi er nødt til at verificere din konto, før vi sletter den.
+\n
+\nIndtast venligst den e-mailadresse, du registrerede dig med. En engangskode til næste trin vil blive sendt til den.</string>
 </resources>
