@@ -43,7 +43,7 @@ public enum WidgetGroup {
 	@DrawableRes
 	public final int nightIconId;
 	@StringRes
-	public int docsUrlId;
+	public final int docsUrlId;
 
 	WidgetGroup(@StringRes int titleId,
 	            @StringRes int descId,
