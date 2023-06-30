@@ -104,7 +104,7 @@ public class SideWidgetsPanel extends FrameLayout {
 		adapter = createWidgetsPagerAdapter();
 		adapter.setViewHolderBindListener((viewHolder, index) -> {
 			if (index == viewPager.getCurrentItem()) {
-				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.container);
+				WrapContentViewPager2Callback.resizeViewPagerToWrapContent(viewPager, viewHolder.itemView);
 			}
 		});
 		viewPager = findViewById(R.id.view_pager);
