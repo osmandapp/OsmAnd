@@ -616,6 +616,50 @@ public class AndroidNetworkUtils {
 		return error;
 	}
 
+	public static long downloadModifiedFile(
+			@NonNull String url, @NonNull File fileToSave, boolean gzip, long lastTime, @Nullable IProgress progress) {
+		long result = -1;
+		try {
+			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
+			connection.setConnectTimeout(CONNECTION_TIMEOUT);
+			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			if (gzip) {
+				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
+			}
+			connection.connect();
+			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				return result;
+			} else {
+				long lastModified = connection.getLastModified();
+				if (lastModified > 0 && lastModified <= lastTime) {
+					return 0;
+				}
+				InputStream inputStream = gzip
+						? new GZIPInputStream(connection.getInputStream())
+						: new BufferedInputStream(connection.getInputStream(), 8 * 1024);
+				fileToSave.getParentFile().mkdirs();
+				OutputStream stream = null;
+				try {
+					stream = new FileOutputStream(fileToSave);
+					Algorithms.streamCopy(inputStream, stream, progress, 1024);
+					stream.flush();
+				} finally {
+					Algorithms.closeStream(inputStream);
+					Algorithms.closeStream(stream);
+				}
+				result = lastModified > 0 ? lastModified : 1;
+			}
+		} catch (UnknownHostException e) {
+			LOG.error("UnknownHostException, cannot download file " + url + " " + e.getMessage());
+		} catch (Exception e) {
+			LOG.warn("Cannot download file: " + url, e);
+		}
+		if (progress != null) {
+			progress.finishTask();
+		}
+		return result;
+	}
+
 	private static String streamToString(InputStream inputStream) throws IOException {
 		StringBuilder result = new StringBuilder();
 		if (inputStream != null) {

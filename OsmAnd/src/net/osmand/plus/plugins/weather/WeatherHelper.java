@@ -41,7 +41,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WeatherHelper {
 
 	private static final Log log = PlatformUtil.getLog(WeatherHelper.class);
-
 	private final OsmandApplication app;
 	private final WeatherSettings weatherSettings;
 	private final OfflineForecastHelper offlineForecastHelper;
