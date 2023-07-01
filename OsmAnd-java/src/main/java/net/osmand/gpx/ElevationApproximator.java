@@ -8,40 +8,10 @@ import java.util.List;
 
 public abstract class ElevationApproximator {
 
-	private static final double CULLING_DISTANCE = 24.0;
-	private static final double SLOPE_THRESHOLD = 20.0;
+	private static final double SLOPE_THRESHOLD = 70.0;
 
-	private List<ApproxPoint> approxPoints = new ArrayList<>();
-
-	public static class ApproxPoint {
-		private final double lat;
-		private final double lon;
-		private double dist;
-		private final double ele;
-
-		public ApproxPoint(double lat, double lon, double dist, double ele) {
-			this.lat = lat;
-			this.lon = lon;
-			this.dist = dist;
-			this.ele = ele;
-		}
-
-		public double getLat() {
-			return lat;
-		}
-
-		public double getLon() {
-			return lon;
-		}
-
-		public double getDist() {
-			return dist;
-		}
-
-		public double getEle() {
-			return ele;
-		}
-	}
+	private double[] distances;
+	private double[] elevations;
 
 	public ElevationApproximator() {
 	}
@@ -54,8 +24,12 @@ public abstract class ElevationApproximator {
 
 	public abstract int getPointsCount();
 
-	public List<ApproxPoint> getApproxPoints() {
-		return approxPoints;
+	public double[] getDistances() {
+		return distances;
+	}
+
+	public double[] getElevations() {
+		return elevations;
 	}
 
 	public boolean approximate() {
@@ -64,68 +38,65 @@ public abstract class ElevationApproximator {
 			return false;
 		}
 
-		boolean[] survivor = new boolean[pointsCount];
-		cullRamerDouglasPeucer(survivor, 0, pointsCount - 1);
-		survivor[0] = true;
-		List<ApproxPoint> survivedPoints = new ArrayList<>();
-		ApproxPoint prevPoint = null;
-		for (int i = 0; i < pointsCount; i++) {
-			if (survivor[i]) {
-				double lat = getPointLatitude(i);
-				double lon = getPointLongitude(i);
-				double distance = prevPoint != null ? MapUtils.getDistance(lat, lon, prevPoint.lat, prevPoint.lon) : 0;
-				ApproxPoint pt = new ApproxPoint(lat, lon, distance, getPointElevation(i));
-				survivedPoints.add(pt);
-				prevPoint = pt;
+		boolean[] survived = new boolean[pointsCount];
+		int lastSurvived = 0;
+		survived[0] = true;
+		int survidedCount = 1;
+		for (int i = 1; i < pointsCount - 1; i++) {
+			double prevEle = getPointElevation(lastSurvived);
+			double ele = getPointElevation(i);
+			double eleNext = getPointElevation(i + 1);
+			if ((ele - prevEle) * (eleNext - ele) > 0 && Math.abs(ele - prevEle) > 2) {
+				survived[i] = true;
+				lastSurvived = i;
+				survidedCount++;
 			}
 		}
-		if (survivedPoints.size() < 4) {
+		survived[pointsCount - 1] = true;
+		survidedCount++;
+		if (survidedCount < 4) {
 			return false;
 		}
 
-		List<ApproxPoint> approxPoints = new ArrayList<>();
-		ApproxPoint prevApproxPt = survivedPoints.get(0);
-		for (int i = 1; i < survivedPoints.size() - 1; i++) {
-			ApproxPoint pt = survivedPoints.get(i);
-			ApproxPoint prevPt = survivedPoints.get(i - 1);
-			ApproxPoint nextPt = survivedPoints.get(i + 1);
-			double slopeA = (pt.ele - prevPt.ele) * 100 / Math.abs(pt.dist - prevPt.dist);
-			double slopeB = (nextPt.ele - pt.ele) * 100 / Math.abs(nextPt.dist - pt.dist);
-			if (Math.signum(slopeA) != Math.signum(slopeB)
-					&& Math.abs(slopeA) > SLOPE_THRESHOLD && Math.abs(slopeB) > SLOPE_THRESHOLD) {
+		lastSurvived = 0;
+		survidedCount = 1;
+		for (int i = 1; i < pointsCount; i++) {
+			if (!survived[i]) {
 				continue;
 			}
-			pt.dist = MapUtils.getDistance(pt.lat, pt.lon, prevApproxPt.lat, prevApproxPt.lon);
-			approxPoints.add(pt);
-			prevApproxPt = pt;
-		}
-		this.approxPoints = approxPoints;
-		return true;
-	}
-
-	private void cullRamerDouglasPeucer(boolean[] survivor, int start, int end) {
-		double dmax = Double.NEGATIVE_INFINITY;
-		int index = -1;
-
-		double startLat = getPointLatitude(start);
-		double startLon = getPointLongitude(start);
-		double endLat = getPointLatitude(end);
-		double endLon = getPointLongitude(end);
-
-		for (int i = start + 1; i < end; i++) {
-			double lat = getPointLatitude(i);
-			double lon = getPointLongitude(i);
-			double d = MapUtils.getOrthogonalDistance(lat, lon, startLat, startLon, endLat, endLon);
-			if (d > dmax) {
-				dmax = d;
-				index = i;
+			double ele = getPointElevation(i);
+			double prevEle = getPointElevation(lastSurvived);
+			double dist = MapUtils.getDistance(getPointLatitude(i), getPointLongitude(i),
+					getPointLatitude(lastSurvived), getPointLongitude(lastSurvived));
+			double slope = (ele - prevEle) * 100 / dist;
+			if (Math.abs(slope) > SLOPE_THRESHOLD) {
+				survived[i] = false;
+				continue;
 			}
+			lastSurvived = i;
+			survidedCount++;
 		}
-		if (dmax > CULLING_DISTANCE) {
-			cullRamerDouglasPeucer(survivor, start, index);
-			cullRamerDouglasPeucer(survivor, index, end);
-		} else {
-			survivor[end] = true;
+		if (survidedCount < 4) {
+			return false;
 		}
+
+		double[] distances = new double[survidedCount];
+		double[] elevations = new double[survidedCount];
+		int k = 0;
+		lastSurvived = 0;
+		for (int i = 0; i < pointsCount; i++) {
+			if (!survived[i] || k == survidedCount) {
+				continue;
+			}
+			distances[k] = lastSurvived == i ? 0 :
+					MapUtils.getDistance(getPointLatitude(i), getPointLongitude(i),
+					getPointLatitude(lastSurvived), getPointLongitude(lastSurvived));
+			elevations[k] = getPointElevation(i);
+			k++;
+			lastSurvived = i;
+		}
+		this.distances = distances;
+		this.elevations = elevations;
+		return true;
 	}
 }

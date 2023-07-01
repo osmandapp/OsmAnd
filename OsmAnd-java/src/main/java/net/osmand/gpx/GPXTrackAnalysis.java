@@ -347,23 +347,23 @@ public class GPXTrackAnalysis {
 				}
 			};
 			approximator.approximate();
-			final List<ElevationApproximator.ApproxPoint> approxPoints = approximator.getApproxPoints();
-
-			if (!approxPoints.isEmpty()) {
+			final double[] distances = approximator.getDistances();
+			final double[] elevations = approximator.getElevations();
+			if (distances != null && elevations != null) {
 				ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 					@Override
 					public double getPointDistance(int index) {
-						return approxPoints.get(index).getDist();
+						return distances[index];
 					}
 
 					@Override
 					public double getPointElevation(int index) {
-						return approxPoints.get(index).getEle();
+						return elevations[index];
 					}
 
 					@Override
 					public int getPointsCount() {
-						return approxPoints.size();
+						return distances.length;
 					}
 				};
 				elevationDiffsCalc.calculateElevationDiffs();
