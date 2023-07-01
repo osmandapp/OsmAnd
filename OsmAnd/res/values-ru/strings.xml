@@ -3741,7 +3741,7 @@
     <string name="pass_whole_track_descr">Точка для навигации</string>
     <string name="start_of_the_track">Начало трека</string>
     <string name="nearest_point">Ближайшая точка</string>
-    <string name="attach_to_the_roads">Через привязку к дорогам</string>
+    <string name="attach_to_the_roads">Привязка к дорогам</string>
     <string name="delete_address">Удалить адрес</string>
     <string name="add_address">Добавить адрес</string>
     <string name="access_hint_enter_address">Введите адрес</string>
@@ -4706,7 +4706,7 @@
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
-    <string name="no_altitude_data_desc">Для расчёта высоты проложите маршрут или выполните привязку к дорогам.</string>
+    <string name="no_altitude_data_desc">Для получения данных рассчитайте маршрут онлайн или выполните привязку к дорогам.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
     <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
