@@ -5248,4 +5248,22 @@
     <string name="terrain_map">Geländekarte</string>
     <string name="relief_3d">3D-Relief</string>
     <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Ihr OsmAnd Pro-Abonnement wird dadurch nicht gekündigt.</string>
+    <string name="manage_subscriptions">Abonnements verwalten.</string>
+    <string name="delete_account_warning">Sind Sie sicher, dass Sie das Konto %1$s löschen möchten\?</string>
+    <string name="shared_string_deleting">Wird gelöscht</string>
+    <string name="deleting_complete">Löschen abgeschlossen</string>
+    <string name="delete_account">Konto löschen</string>
+    <string name="backup_error_delete_account_email_match">E-Mail-Adresse stimmt nicht mit Anmelde-Benutzername überein</string>
+    <string name="osmand_cloud_deleted_account_descr">Konto und alle Daten wurden aus der OsmAnd Cloud gelöscht.</string>
+    <string name="action_cannot_be_undone">Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
+    <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodaten werden %1$s</string>
+    <string name="osmand_cloud_deleting_account_descr">In Kürze werden alle Ihre Daten und Ihr Konto von OsmAnd Cloud gelöscht.
+\n
+\nAlle Daten auf dem Gerät bleiben unangetastet.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten\?
+\n
+\nDiese Aktion kann nicht rückgängig gemacht werden.</string>
 </resources>

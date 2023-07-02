@@ -2168,7 +2168,7 @@
     <string name="poi_wildlife_hide">Loc pentru a observa viața sălbatică</string>
     <string name="poi_bicycle_repair_station">Stație de reparații biciclete;Stație de auto-reparare biciclete;Stație de reparații biciclete;Stație de auto-reparare biciclete</string>
     <string name="poi_service_bicycle_charging_no">Încărcare: nu</string>
-    <string name="poi_service_bicycle_charging_yes">Încărcare: da;Încărcarea bicicletei;Încărcarea bicicletei;Încărcarea bicicletei electrice;Încărcarea bicicletei electrice</string>
+    <string name="poi_service_bicycle_charging_yes">Încărcare: da;Încărcarea bicicletei;Încărcarea bicicletei;Încărcarea bicicletei electrice;Încărcare biciclete electrice</string>
     <string name="poi_service_bicycle_second_hand_no">Vânzarea cu amănuntul a bicicletelor second-hand: nu</string>
     <string name="poi_service_bicycle_second_hand_yes">Vânzarea cu amănuntul a bicicletelor second hand;Biciclete second hand;Biciclete second hand</string>
     <string name="poi_service_bicycle_chaintool_no">Unelte pentru lanț de bicicletă: nu</string>

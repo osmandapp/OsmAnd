@@ -5231,4 +5231,19 @@
     <string name="no_search_results">Žádné výsledky</string>
     <string name="device_connected">%1$s připojeno</string>
     <string name="beats_per_minute_short">bpm</string>
+    <string name="osmand_cloud_delete_account_confirmation">Smazat účet\?</string>
+    <string name="action_cannot_be_undone">Tuto akci nelze vzít zpět.</string>
+    <string name="delete_account_warning">Opravdu chcete odstranit účet %1$s\?</string>
+    <string name="shared_string_deleting">Mazání</string>
+    <string name="backup_error_delete_account_email_match">E-mail neodpovídá přihlašovacímu jménu</string>
+    <string name="osmand_cloud_deleting_account_descr">Během několika okamžiků budou všechna vaše data a účet z OsmAnd Cloud odstraněny.
+\n
+\nVšechna data v zařízení zůstanou nedotčena.</string>
+    <string name="osmand_cloud_deleted_account_descr">Účet a všechna data byla z OsmAnd Cloud odstraněna.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Opravdu chcete smazat účet OsmAnd Cloud\?
+\n
+\nTuto akci nelze vzít zpět.</string>
+    <string name="verify_account_deletion_descr">Před smazáním vašeho účtu jej musíme ověřit.
+\n
+\nZadejte prosím e-mailovou adresu, pod kterou jste se zaregistrovali. Na ni vám bude zasláno jednorázové heslo pro další krok.</string>
 </resources>

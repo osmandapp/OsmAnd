@@ -5237,9 +5237,9 @@
     <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
     <string name="terrain_category_description">Courbes de niveaux, ombrage du relief avec des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les vallées.</string>
     <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
-    <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimées du cloud OsmAnd.
+    <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n
-\nToutes les données de l\'appareil ne seront pas affectées.</string>
+\nLes données de l\'appareil ne seront pas affectées.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">Êtes-vous sûr de vouloir supprimer votre compte OsmAnd Cloud \?
 \n
 \nCette action est irréversible.</string>
@@ -5259,5 +5259,5 @@
     <string name="osmand_cloud_deleted_account_descr">Le compte et toutes les données ont été supprimées du cloud OsmAnd.</string>
     <string name="verify_account_deletion_descr">Nous devons vérifier votre compte avant de le supprimer.
 \n
-\nVeuillez entrer l\'e-mail avec laquelle vous vous êtes inscrit. Un mot de passe unique pour la prochaine étape vous sera envoyé.</string>
+\nVeuillez saisir l\'e-mail avec lequel vous vous êtes inscrit. Un mot de passe unique vous sera envoyé pour réaliser l\'étape suivante.</string>
 </resources>
