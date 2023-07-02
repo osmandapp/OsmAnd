@@ -5260,4 +5260,10 @@
     <string name="action_cannot_be_undone">Diese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
     <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodetails werden %1$s</string>
+    <string name="osmand_cloud_deleting_account_descr">In Kürze werden alle Ihre Daten und Ihr Konto von OsmAnd Cloud gelöscht.
+\n
+\nAlle Daten auf dem Gerät bleiben unangetastet.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten\?
+\n
+\nDiese Aktion kann nicht rückgängig gemacht werden.</string>
 </resources>
