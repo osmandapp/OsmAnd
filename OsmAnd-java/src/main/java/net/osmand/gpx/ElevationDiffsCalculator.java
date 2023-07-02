@@ -126,12 +126,10 @@ public abstract class ElevationDiffsCalculator {
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(new File("/Users/crimean/Downloads/2011-09-27_Mulhacen.gpx"));
 		List<WptPt> points = gpxFile.tracks.get(0).segments.get(0).points;
 		calculateDiffs(points);
-		calculateDiffs(points.subList(100, 111));
-		calculateDiffs(points.subList(100, 112));
-		calculateDiffs(points.subList(100, 113));
-		calculateDiffs(points.subList(100, 114));
-		calculateDiffs(points.subList(100, 115));
-		calculateDiffs(points.subList(100, 116));
+		int start = 200;
+		for (int i = start + 150; i < start + 160; i++) {
+			calculateDiffs(points.subList(start, i));
+		}
 	}
 
 	private static void calculateDiffs(final List<WptPt> points) {
