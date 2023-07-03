@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
@@ -44,8 +45,8 @@ public class CustomizableOptionsBottomSheet extends CustomizableBottomSheet {
 	}
 
 	@Override
-	protected boolean hideButtonsContainer() {
-		return true;
+	protected int getDismissButtonTextId() {
+		return R.string.shared_string_close;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull String processId, boolean usedOnMap) {
