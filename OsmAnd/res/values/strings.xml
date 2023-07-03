@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
+    <string name="free_favorites_backup">Free Favorites Backup</string>
+    <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
+    <string name="free_account">Free account</string>
     <string name="folder_export_empty_error">Nothing to export, folder is empty</string>
     <string name="osmand_cloud_deleted_account_descr">Account and all data was deleted from OsmAnd Cloud.</string>
     <string name="osmand_cloud_deleting_account_descr">In few moments all your data and account will be deleted from OsmAnd Cloud.\n\nAll data on the device remain untouched.</string>
@@ -29,10 +33,6 @@
     <string name="backup_error_delete_account_email_match">Email doesn\'t match login username</string>
     <string name="verify_account_deletion_descr">We need to verify your account before delete it.\n\nPlease enter the e-mail address you registered with. A one-time password for the next step will be sent to it.</string>
     <string name="verify_account">Verify your account</string>
-    <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
-    <string name="free_favorites_backup">Free Favorites Backup</string>
-    <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
-    <string name="free_account">Free account</string>
     <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slopes in %1$s.</string>
     <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
     <string name="free_mode">Free mode</string>
