@@ -3,7 +3,6 @@ package net.osmand.plus.importfiles.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -32,30 +31,7 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	private boolean save;
 	private boolean useImportDir;
-
-	public void setImportHelper(ImportHelper importHelper) {
-		this.importHelper = importHelper;
-	}
-
-	public void setGpxFile(GPXFile gpxFile) {
-		this.gpxFile = gpxFile;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public void setFileSize(long fileSize) {
-		this.fileSize = fileSize;
-	}
-
-	public void setSave(boolean save) {
-		this.save = save;
-	}
-
-	public void setUseImportDir(boolean useImportDir) {
-		this.useImportDir = useImportDir;
-	}
+	private boolean showSnackbar;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -77,12 +53,9 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				.setIcon(getContentIcon(R.drawable.ic_action_favorite))
 				.setTitle(getString(R.string.import_as_favorites))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						importHelper.importFavoritesFromGpx(gpxFile, fileName);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					importHelper.importFavoritesFromGpx(gpxFile, fileName);
+					dismiss();
 				})
 				.create();
 		items.add(asFavoritesItem);
@@ -93,12 +66,9 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				.setIcon(getContentIcon(R.drawable.ic_action_polygom_dark))
 				.setTitle(getString(R.string.import_as_gpx))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						importHelper.handleGpxImport(gpxFile, fileName, fileSize, save, useImportDir);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					importHelper.handleGpxImport(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
+					dismiss();
 				})
 				.create();
 		items.add(asGpxItem);
@@ -110,16 +80,18 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 	                                @NonNull String fileName,
 	                                long fileSize,
 	                                boolean save,
-	                                boolean useImportDir) {
+	                                boolean useImportDir,
+	                                boolean showSnackbar) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
 			fragment.setUsedOnMap(true);
-			fragment.setImportHelper(importHelper);
-			fragment.setGpxFile(gpxFile);
-			fragment.setFileName(fileName);
-			fragment.setFileSize(fileSize);
-			fragment.setSave(save);
-			fragment.setUseImportDir(useImportDir);
+			fragment.importHelper = importHelper;
+			fragment.gpxFile = gpxFile;
+			fragment.fileName = fileName;
+			fragment.fileSize = fileSize;
+			fragment.save = save;
+			fragment.useImportDir = useImportDir;
+			fragment.showSnackbar = showSnackbar;
 			fragmentManager.beginTransaction()
 					.add(fragment, TAG)
 					.commitAllowingStateLoss();
