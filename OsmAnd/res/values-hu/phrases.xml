@@ -4563,4 +4563,6 @@
     <string name="poi_waste_accepted">Elfogadott hulladék</string>
     <string name="poi_recycling_asbestos">Azbeszt</string>
     <string name="poi_recycling_pens">Írószer</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_second_hand_filter">Használtcikk</string>
 </resources>

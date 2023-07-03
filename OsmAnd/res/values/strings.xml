@@ -11,6 +11,24 @@
 	Thx - Hardy
 -->
 
+    <string name="folder_export_empty_error">Nothing to export, folder is empty</string>
+    <string name="osmand_cloud_deleted_account_descr">Account and all data was deleted from OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deleting_account_descr">In few moments all your data and account will be deleted from OsmAnd Cloud.\n\nAll data on the device remain untouched.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Are you sure you want to delete OsmAnd Cloud account?\n\nThis action can’t be undone.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Delete account?</string>
+    <string name="action_cannot_be_undone">This action can\'t be undone.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Secondary devices will be logged off from OsmAnd Cloud and lose access to paid features.</string>
+    <string name="osmand_cloud_deletion_account_warning">Your account and all account details will be %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">All data from OsmAnd Cloud will be %1$s. Data on the device remains untouched.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">This will not cancel your OsmAnd Pro subscription.</string>
+    <string name="manage_subscriptions">Manage subscriptions.</string>
+    <string name="delete_account_warning">Are you sure you want to delete %1$s account?</string>
+    <string name="shared_string_deleting">Deleting</string>
+    <string name="deleting_complete">Deleting complete</string>
+    <string name="delete_account">Delete account</string>
+    <string name="backup_error_delete_account_email_match">Email doesn\'t match login username</string>
+    <string name="verify_account_deletion_descr">We need to verify your account before delete it.\n\nPlease enter the e-mail address you registered with. A one-time password for the next step will be sent to it.</string>
+    <string name="verify_account">Verify your account</string>
     <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
     <string name="free_favorites_backup">Free Favorites Backup</string>
     <string name="get_osmand_cloud">Get OsmAnd Cloud</string>

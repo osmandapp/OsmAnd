@@ -1,10 +1,9 @@
 package net.osmand.gpx;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class PointsAttributesData<T extends PointAttribute> {
+public class PointsAttributesData<T extends PointAttribute<?>> {
 
 	private String key;
 	private List<T> attributes = new ArrayList<>();

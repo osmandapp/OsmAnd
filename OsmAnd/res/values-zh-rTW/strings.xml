@@ -738,7 +738,7 @@
     <string name="save_track_interval">在導航期間的記錄間隔</string>
     <string name="save_track_interval_descr">指定導航時的軌跡記錄間隔</string>
     <string name="save_track_to_gpx">導航期間自動記錄軌跡</string>
-    <string name="update_tile">更新地圖</string>
+    <string name="update_tile">更新</string>
     <string name="reload_tile">重新載入圖磚</string>
     <string name="mark_point">目的地</string>
     <string name="use_english_names_descr">選擇當地語言或英文名稱。</string>
@@ -5235,4 +5235,6 @@
     <string name="relief_3d">3D 地形圖</string>
     <string name="free_mode">免費模式</string>
     <string name="relief_3d_description">你的社區或是整個大陸的擁有與觀察的縮放尺度。</string>
+    <string name="terrain_category_description">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
+    <string name="slope_legend_description">斜率使用顏色來視覺化地形的坡度。您可以在 %1$s 中取得更多關於斜率的資訊。</string>
 </resources>

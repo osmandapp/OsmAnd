@@ -347,7 +347,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 			@Override
 			public void onTrackItemLongClick(@NonNull View view, @NonNull TrackItem trackItem) {
 				if (!selectionMode) {
-					showTracksSelection(trackItem);
+//					showTracksSelection(trackItem);
 				}
 			}
 

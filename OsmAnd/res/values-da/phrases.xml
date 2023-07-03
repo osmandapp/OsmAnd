@@ -4021,4 +4021,15 @@
     <string name="poi_water_sports">Vandsportsbutik</string>
     <string name="poi_board_title">Tavletitel</string>
     <string name="poi_socket_chademo_voltage_filter">CHAdeMO-stikspænding</string>
+    <string name="poi_surface_plastic">Overflade: plastik</string>
+    <string name="poi_cemt_0">0</string>
+    <string name="poi_cai_scale">CAI-skala</string>
+    <string name="poi_ship_yes">Skibsadgang: ja</string>
+    <string name="poi_ship_no">Skibsadgang: nej</string>
+    <string name="poi_surface_acrylic">Overflade: akryl</string>
+    <string name="poi_vending_machine_fuel">Ja</string>
+    <string name="poi_bridge_name">Bronavn</string>
+    <string name="poi_tunnel_name">Tunnelnavn</string>
+    <string name="poi_surface_carpet">Overflade: tæppe</string>
+    <string name="poi_surface_rubber">Overflade: gummi</string>
 </resources>

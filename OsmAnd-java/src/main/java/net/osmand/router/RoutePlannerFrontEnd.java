@@ -255,17 +255,18 @@ public class RoutePlannerFrontEnd {
 				gctx.ctx.calculationProgress.totalApproximateDistance = (float) gpxPoints.get(gpxPoints.size() - 1).cumDist;
 				start = gpxPoints.get(0);
 			}
+			float minPointApproximation = gctx.ctx.config.minPointApproximation;
 			while (start != null && !gctx.ctx.calculationProgress.isCancelled) {
 				double routeDist = gctx.ctx.config.maxStepApproximation;
 				GpxPoint next = findNextGpxPointWithin(gpxPoints, start, routeDist);
 				boolean routeFound = false;
-				if (next != null && initRoutingPoint(start, gctx, gctx.ctx.config.minPointApproximation)) {
+				if (next != null && initRoutingPoint(start, gctx, minPointApproximation)) {
 					while (routeDist >= gctx.ctx.config.minStepApproximation && !routeFound) {
-						routeFound = initRoutingPoint(next, gctx, gctx.ctx.config.minPointApproximation);
+						routeFound = initRoutingPoint(next, gctx, minPointApproximation);
 						if (routeFound) {
 							routeFound = findGpxRouteSegment(gctx, gpxPoints, start, next, prev != null);
 							if (routeFound) {
-								routeFound = isRouteCloseToGpxPoints(gctx, gpxPoints, start, next);
+								routeFound = isRouteCloseToGpxPoints(minPointApproximation, gpxPoints, start, next);
 								if (!routeFound) {
 									start.routeToTarget = null;
 								}
@@ -342,7 +343,7 @@ public class RoutePlannerFrontEnd {
 		return gctx;
 	}
 
-	private boolean isRouteCloseToGpxPoints(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
+	private boolean isRouteCloseToGpxPoints(float minPointApproximation, List<GpxPoint> gpxPoints,
 	                                        GpxPoint start, GpxPoint next) {
 		boolean routeIsClose = true;
 		for (RouteSegmentResult r : start.routeToTarget) {
@@ -352,7 +353,7 @@ public class RoutePlannerFrontEnd {
 				LatLon point = r.getPoint(st);
 				boolean pointIsClosed = false;
 				for (int k = start.ind; !pointIsClosed && k < next.ind; k++) {
-					pointIsClosed = pointCloseEnough(gctx, point, gpxPoints.get(k), gpxPoints.get(k + 1));
+					pointIsClosed = pointCloseEnough(minPointApproximation, point, gpxPoints.get(k), gpxPoints.get(k + 1));
 				}
 				if (!pointIsClosed) {
 					routeIsClose = false;
@@ -653,6 +654,9 @@ public class RoutePlannerFrontEnd {
 					if (res.get(0).getObject().getId() == start.pnt.getRoad().getId()) {
 						// start point could shift to +-1 due to direction
 						res.get(0).setStartPointIndex(start.pnt.getSegmentStart());
+						if (res.get(0).getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
+							res.get(0).setObject(start.pnt.road);
+						}
 					} else {
 						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
@@ -671,13 +675,13 @@ public class RoutePlannerFrontEnd {
 		return routeIsCorrect;
 	}
 
-	private boolean pointCloseEnough(GpxRouteApproximation gctx, LatLon point, GpxPoint gpxPoint, GpxPoint gpxPointNext) {
+	private boolean pointCloseEnough(float minPointApproximation, LatLon point, GpxPoint gpxPoint, GpxPoint gpxPointNext) {
 		LatLon gpxPointLL = gpxPoint.pnt != null ? gpxPoint.pnt.getPreciseLatLon() : gpxPoint.loc;
 		LatLon gpxPointNextLL = gpxPointNext.pnt != null ? gpxPointNext.pnt.getPreciseLatLon() : gpxPointNext.loc;
-		LatLon projection = MapUtils.getProjection(point.getLatitude(), point.getLongitude(),
+		double orthogonalDistance = MapUtils.getOrthogonalDistance(point.getLatitude(), point.getLongitude(),
 				gpxPointLL.getLatitude(), gpxPointLL.getLongitude(),
 				gpxPointNextLL.getLatitude(), gpxPointNextLL.getLongitude());
-		return MapUtils.getDistance(projection, point) <= gctx.ctx.config.minPointApproximation;
+		return orthogonalDistance <= minPointApproximation;
 	}
 
 	private boolean pointCloseEnough(GpxRouteApproximation gctx, GpxPoint ipoint, List<RouteSegmentResult> res) {

@@ -274,13 +274,19 @@
 
 				<include
 					android:id="@+id/delete_all_container"
-					layout="@layout/preference_with_descr" />
+					layout="@layout/preference_button" />
 
 				<include layout="@layout/divider_half_item_with_background" />
 
 				<include
 					android:id="@+id/delete_old_container"
-					layout="@layout/preference_with_descr" />
+					layout="@layout/preference_button" />
+
+				<include layout="@layout/divider_half_item_with_background" />
+
+				<include
+					android:id="@+id/delete_account_container"
+					layout="@layout/preference_button" />
 
 			</LinearLayout>
 

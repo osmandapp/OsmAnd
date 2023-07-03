@@ -72,7 +72,6 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setIcon(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, trackFolder.getColor()))
 				.setShowBottomDivider(true, 0)
-				.setClickable(false)
 		);
 
 		int dividerPadding = calculateSubtitleDividerPadding();
