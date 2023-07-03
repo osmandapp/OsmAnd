@@ -58,8 +58,8 @@
     <string name="change_color">Выбрать цвет</string>
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
-    <string name="routing_attr_allow_private_name">Въезд на частную территорию</string>
-    <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
+    <string name="routing_attr_allow_private_name">Частные зоны</string>
+    <string name="routing_attr_allow_private_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
@@ -3156,7 +3156,7 @@
     <string name="change_osmand_data_folder_question">Изменить папку данных OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
     <string name="change_data_storage_folder">Изменение папки хранилища</string>
-    <string name="avoid_in_routing_descr_">Исключить определённые маршруты и типы дорог</string>
+    <string name="avoid_in_routing_descr_">Избегать определённых участков и типов дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
@@ -4558,7 +4558,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">Троллейбусные маршруты</string>
     <string name="simulation_real_mode_desc">Максимальная разрешённая скорость на прямых участках.
 \nЗамедление на перекрёстках.
-\nДополнительные штрафы на светофорах, знаках остановки и пр.</string>
+\nТакже на скорость влияют светофоры, знаки остановки и пр.</string>
     <string name="simulation_constant_mode_title">Постоянная скорость</string>
     <string name="simulation_preview_mode_desc">Моделирование с максимальной скоростью на прямых участках и замедлением на перекрёстках.</string>
     <string name="speed_mode">Режим скорости</string>
@@ -4652,7 +4652,7 @@
     <string name="colour_of_circles">Окраска окружностей</string>
     <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
     <string name="routing_attr_avoid_highway_description">Избегать автомагистралей</string>
-    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ грузовых автомобилей на частную территорию.</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
     <string name="map_widget_trip_recording_duration">Продолжительность</string>
     <string name="map_widget_trip_recording_uphill">Подъём</string>
     <string name="routing_attr_hazmat_category_name">Категория опасности</string>
@@ -4660,7 +4660,7 @@
     <string name="map_widget_trip_recording_distance">Расстояние</string>
     <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
     <string name="routing_attr_avoid_fords_name">Без бродов</string>
-    <string name="routing_attr_allow_private_for_truck_name">Въезд на частную территорию (грузовик)</string>
+    <string name="routing_attr_allow_private_for_truck_name">Частные зоны (грузовик)</string>
     <string name="rendering_attr_weatherPressureContours_name">Изобары</string>
     <string name="rendering_attr_weatherTempContours_name">Изотермы</string>
     <string name="routing_attr_avoid_fords_description">Избегать бродов</string>
