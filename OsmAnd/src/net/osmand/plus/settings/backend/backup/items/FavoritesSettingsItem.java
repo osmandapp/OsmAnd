@@ -180,14 +180,15 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				favoritesHelper.addFavourite(favourite, false, false);
 			}
 			favoritesHelper.sortAll();
-			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.saveCurrentPointsIntoFile(false);
 			favoritesHelper.loadFavorites();
 		}
 	}
 
 	@Override
 	protected void deleteItem(FavoriteGroup item) {
-		favoritesHelper.deleteGroup(item);
+		favoritesHelper.deleteGroup(item, false);
+		favoritesHelper.saveCurrentPointsIntoFile(false);
 	}
 
 	@Override

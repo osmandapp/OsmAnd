@@ -909,7 +909,7 @@ public class MapMarkersHelper {
 		shouldSaveFavourites |= syncPassedPoints(mapMarkersHistory, gpxFiles);
 
 		if (shouldSaveFavourites) {
-			ctx.getFavoritesHelper().saveCurrentPointsIntoFile();
+			ctx.getFavoritesHelper().saveCurrentPointsIntoFile(true);
 		}
 		for (GPXFile gpxFile : gpxFiles) {
 			SaveGpxHelper.saveGpx(gpxFile);
