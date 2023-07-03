@@ -84,7 +84,7 @@ public class ZipImportTask extends BaseLoadAsyncTask<Void, Void, ImportType> {
 		if (importType == ImportType.KMZ) {
 			String dir = useImportDir ? GPX_IMPORT_DIR : GPX_INDEX_DIR;
 			String name = createUniqueFileName(app, "track", dir, GPX_FILE_EXT);
-			importHelper.handleGpxImport(uri, name + GPX_FILE_EXT, OPEN_GPX_CONTEXT_MENU, useImportDir, save);
+			importHelper.handleGpxImport(uri, name + GPX_FILE_EXT, OPEN_GPX_CONTEXT_MENU, useImportDir, save, false);
 		} else if (importType == ImportType.SETTINGS) {
 			String name = createUniqueFileName(app, "settings", TEMP_DIR, OSMAND_SETTINGS_FILE_EXT);
 			importHelper.handleOsmAndSettingsImport(uri, name + OSMAND_SETTINGS_FILE_EXT,

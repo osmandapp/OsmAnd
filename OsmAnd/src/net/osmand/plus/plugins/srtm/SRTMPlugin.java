@@ -114,12 +114,12 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 
-		enable3DMapsListener = change -> {
+		enable3DMapsListener = change -> app.runInUIThread(() -> {
 			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
 			if (mapContext != null) {
 				mapContext.recreateHeightmapProvider();
 			}
-		};
+		});
 		settings.ENABLE_3D_MAPS.addListener(enable3DMapsListener);
 	}
 

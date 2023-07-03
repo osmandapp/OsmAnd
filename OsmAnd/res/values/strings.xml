@@ -12,6 +12,7 @@
 -->
     <string name="saving_points">Saving points…</string>
     <string name="saving">Saving…</string>
+    <string name="folder_export_empty_error">Nothing to export, folder is empty</string>
     <string name="osmand_cloud_deleted_account_descr">Account and all data was deleted from OsmAnd Cloud.</string>
     <string name="osmand_cloud_deleting_account_descr">In few moments all your data and account will be deleted from OsmAnd Cloud.\n\nAll data on the device remain untouched.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">Are you sure you want to delete OsmAnd Cloud account?\n\nThis action can’t be undone.</string>
