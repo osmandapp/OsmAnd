@@ -154,7 +154,7 @@ public class PurchaseUiDataUtils {
 		String title = app.getString(R.string.osmand_start);
 		String purchaseType = app.getString(R.string.free_account);
 		int iconId = R.drawable.ic_action_osmand_start;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.US);
 		Date purchaseDate = null;
 		try {
 			purchaseDate = dateFormat.parse(settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.get());
@@ -163,7 +163,7 @@ public class PurchaseUiDataUtils {
 		long purchaseTime = purchaseDate == null ? 0 : purchaseDate.getTime();
 		long expireTime = 0;
 		SubscriptionState state = ACTIVE;
-		PurchaseOrigin origin = PurchaseOrigin.GOOGLE;
+		PurchaseOrigin origin = PurchaseOrigin.UNDEFINED;
 		boolean isLiveUpdateSubscription = false;
 		boolean autoRenewing = false;
 		boolean renewVisible = false;

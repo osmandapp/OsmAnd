@@ -685,9 +685,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		int buttonTextId = R.string.get_osmand_cloud;
 		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
 		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
-		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-		dismissButton.setLayoutParams(layoutParams);
-		view.requestLayout();
 		dismissButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

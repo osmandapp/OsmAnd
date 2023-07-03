@@ -50,13 +50,13 @@ public enum ExportSettingsType {
 	@DrawableRes
 	private final int drawableRes;
 	private final String itemName;
-	private final boolean isAllowedInFreeVersion;
+	private final boolean allowedInFreeVersion;
 
 	ExportSettingsType(@StringRes int titleId, @DrawableRes int drawableRes, String itemName, boolean allowedInFreeVersion) {
 		this.titleId = titleId;
 		this.drawableRes = drawableRes;
 		this.itemName = itemName;
-		this.isAllowedInFreeVersion = allowedInFreeVersion;
+		this.allowedInFreeVersion = allowedInFreeVersion;
 	}
 
 	@StringRes
@@ -166,6 +166,6 @@ public enum ExportSettingsType {
 	}
 
 	public boolean isAllowedInFreeVersion() {
-		return isAllowedInFreeVersion;
+		return allowedInFreeVersion;
 	}
 }

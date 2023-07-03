@@ -47,6 +47,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 	private static final String IS_FREE_ACCOUNT_ARG = "is_free_account_arg";
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
+	private static final String NO_VALUE = "—";
 
 	private String purchaseSku;
 	private PurchaseUiData purchase;
@@ -149,7 +150,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 
 		String purchasedOn = getString(R.string.shared_string_purchased_on);
 		InAppPurchase.PurchaseOrigin origin = purchase.getOrigin();
-		String platform = getString(origin.getStoreNameId());
+		String platform = isFreeAccountPurchase ? NO_VALUE : getString(origin.getStoreNameId());
 		updateInformationBlock(R.id.platform_block, purchasedOn, platform);
 
 		// Bottom buttons
@@ -259,12 +260,12 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 			case ACTIVE:
 			case CANCELLED:
 			case IN_GRACE_PERIOD:
-				title = getString(R.string.shared_string_expires);
-				desc = dateFormat.format(expireTime);
+				title = expireTime > 0 ? app.getString(R.string.shared_string_expires) : app.getString(R.string.shared_string_purchased);
+				desc = expireTime > 0 ? dateFormat.format(expireTime) : dateFormat.format(startTime);
 				break;
 			case EXPIRED:
-				title = expireTime > 0 ? app.getString(R.string.expired) : app.getString(R.string.shared_string_purchased);
-				desc = expireTime > 0 ? dateFormat.format(expireTime) : dateFormat.format(startTime);
+				title = app.getString(R.string.expired);
+				desc = dateFormat.format(expireTime);
 				break;
 			case ON_HOLD:
 				title = app.getString(R.string.on_hold_since, "");
