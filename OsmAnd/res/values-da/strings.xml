@@ -2948,8 +2948,8 @@
     <string name="osmand_routing_promo">Tilføj din egen modificeret version af filen routing.xml til ..osmand/routing</string>
     <string name="app_mode_skiing">Skiløb</string>
     <string name="base_profile_descr_ski">Skiløb</string>
-    <string name="show_compass_ruler">Vis kompas lineal</string>
-    <string name="hide_compass_ruler">Skjul kompas lineal</string>
+    <string name="show_compass_ruler">Vis kompaslineal</string>
+    <string name="hide_compass_ruler">Skjul kompaslineal</string>
     <string name="select_icon_profile_dialog_title">Vælg ikon</string>
     <string name="settings_routing_mode_string">Tilstand: %s</string>
     <string name="settings_derived_routing_mode_string">Brugertilstand, afledt fra: %s</string>
