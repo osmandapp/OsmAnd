@@ -1495,9 +1495,9 @@
     <string name="poi_outdoor_seating_garden">Seĝoj ekstere: en ĝardeno</string>
     <string name="poi_outdoor_seating_patio">Seĝoj ekstere: en korto</string>
     <string name="poi_cocktails_yes">jes;kokteloj</string>
-    <string name="poi_second_hand_yes">Brokantaĵoj</string>
+    <string name="poi_second_hand_yes">jes</string>
     <string name="poi_second_hand_no">Sen brokantaĵoj</string>
-    <string name="poi_second_hand_only">Nur brokantaĵoj</string>
+    <string name="poi_second_hand_only">nur</string>
     <string name="poi_service_parts">partoj</string>
     <string name="poi_service_dealer">vendado de aŭtoj</string>
     <string name="poi_service_repair">riparo</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_tunnel_name">Nomo de tunelo</string>
     <string name="poi_vending_machine_fuel">jes</string>
     <string name="poi_vending_machine_fuel_filter">Brulaĵ-vendilo;brulaĵvendilo;fuelvendilo;fuelpumpilo;fuelkolono;brulaĵpumpilo</string>
+    <string name="poi_second_hand_filter">Brokantaĵoj</string>
+    <string name="poi_surface_acrylic">Pavimo: rezino akrila</string>
+    <string name="poi_surface_carpet">Pavimo: tapiŝo</string>
+    <string name="poi_surface_plastic">Pavimo: plasto</string>
+    <string name="poi_surface_rubber">Pavimo: gumo</string>
 </resources>

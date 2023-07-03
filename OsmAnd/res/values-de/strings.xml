@@ -765,8 +765,8 @@
     <string name="use_internet_to_download_tile">Fehlende Kartenkacheln herunterladen</string>
     <string name="app_description">Navigationsapp</string>
     <string name="shared_string_exit">Beenden</string>
-    <string name="search_button">Suche</string>
-    <string name="search_activity">Suche</string>
+    <string name="search_button">Suchen</string>
+    <string name="search_activity">Suchen</string>
     <string name="searchpoi_activity">POI wählen</string>
     <string name="search_POI_level_btn">Weitere Ergebnisse</string>
     <string name="incremental_search_street">Suche Straße inkrementell</string>
@@ -1973,7 +1973,7 @@
     <string name="coords_format_descr">Format geographischer Koordinaten.</string>
     <string name="shared_string_is_open_24_7">24/7 geöffnet</string>
     <string name="storage_directory_card">Speicherkarte</string>
-    <string name="map_widget_search">Suche</string>
+    <string name="map_widget_search">Suchen</string>
     <string name="shared_string_from">von</string>
     <string name="city_type_district">Bezirk</string>
     <string name="city_type_neighbourhood">Nachbarschaft</string>
@@ -2699,7 +2699,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unbegrenzte Downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Karten mit Höhenlinien und Relief</string>
+    <string name="contour_lines_hillshade_maps">Karten mit Höhenlinien und Reliefs</string>
     <string name="unlock_all_features">Alle OsmAnd-Funktionen freischalten</string>
     <string name="purchase_dialog_title">Plan auswählen</string>
     <string name="download_wikipedia_description">Laden Sie die Wikipedia-Artikel für %1$s herunter, um sie offline zu lesen.</string>
@@ -2732,7 +2732,7 @@
     <string name="ski_map_render_descr">Für Skifahrer. Enthält Pisten, Lifte, Langlaufloipen und mehr. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, Höhenlinien, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab.</string>
     <string name="topo_render_descr">Für Wanderungen, Trekking und Radfahren in der Natur. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenbeschaffenheit kennzeichnet die Straßenqualität. Kein Nachtmodus.</string>
-    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
+    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC/CAI-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
     <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlage. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
@@ -4732,9 +4732,9 @@
     <string name="auto_backup_title">Automatische Sicherung</string>
     <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird der Liste hinzugefügt.</string>
     <string name="shared_string_duplicate">Duplizieren</string>
-    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget können Sie ein Foto aufnehmen.</string>
-    <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget können Sie ein Video aufnehmen.</string>
-    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie eine Audionotiz aufnehmen.</string>
+    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget kann ein Foto aufgenommen werden.</string>
+    <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget kann ein Video aufgenommen werden.</string>
+    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget kann eine Sprachnotiz aufgenommen werden.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
@@ -4787,7 +4787,7 @@
     <string name="coordinates_widget_map_center_desc">Zeigt die geographischen Koordinaten der aktuellen Kartenmitte</string>
     <string name="quick_action_map_center_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets „Kartenmitte“ auf der Karte.</string>
     <string name="quick_action_current_location_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets \"Aktueller Standort\" auf der Karte.</string>
-    <string name="coordinates_widget_current_location_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts</string>
+    <string name="coordinates_widget_current_location_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an</string>
     <string name="coordinates_widget_map_center">Koordinaten: Kartenmitte</string>
     <string name="coordinates_widget_current_location">Koordinaten: Aktueller Standort</string>
     <string name="map_widget_zoom_level_desc">Zeigt die aktuelle Zoomstufe der Karte an.</string>
@@ -5213,15 +5213,15 @@
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
     <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
-    <string name="map_2d_mode_action">2D Modus</string>
-    <string name="map_3d_mode_action">3D Modus</string>
+    <string name="map_2d_mode_action">2D-Modus</string>
+    <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
-    <string name="visible_in_3d_mode">Sichtbar im 3D Modus</string>
-    <string name="rendering_value_caiScale_name">CAI Skala</string>
+    <string name="visible_in_3d_mode">Sichtbar im 3D-Modus</string>
+    <string name="rendering_value_caiScale_name">CAI-Skala</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="delete_folder_question">Ordner löschen\?</string>
     <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Dieser Ordner hat noch keinen Track.</string>
     <string name="tracks_empty_folder">Leerer Ordner</string>
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
@@ -5243,4 +5243,27 @@
     <string name="revolutions_per_minute_unit">U/min</string>
     <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
+    <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
+    <string name="free_mode">Freier Modus</string>
+    <string name="terrain_map">Geländekarte</string>
+    <string name="relief_3d">3D-Relief</string>
+    <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Ihr OsmAnd Pro-Abonnement wird dadurch nicht gekündigt.</string>
+    <string name="manage_subscriptions">Abonnements verwalten.</string>
+    <string name="delete_account_warning">Sind Sie sicher, dass Sie das Konto %1$s löschen möchten\?</string>
+    <string name="shared_string_deleting">Wird gelöscht</string>
+    <string name="deleting_complete">Löschen abgeschlossen</string>
+    <string name="delete_account">Konto löschen</string>
+    <string name="backup_error_delete_account_email_match">E-Mail-Adresse stimmt nicht mit Anmelde-Benutzername überein</string>
+    <string name="osmand_cloud_deleted_account_descr">Konto und alle Daten wurden aus der OsmAnd Cloud gelöscht.</string>
+    <string name="action_cannot_be_undone">Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
+    <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodaten werden %1$s</string>
+    <string name="osmand_cloud_deleting_account_descr">In Kürze werden alle Ihre Daten und Ihr Konto von OsmAnd Cloud gelöscht.
+\n
+\nAlle Daten auf dem Gerät bleiben unangetastet.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten\?
+\n
+\nDiese Aktion kann nicht rückgängig gemacht werden.</string>
 </resources>

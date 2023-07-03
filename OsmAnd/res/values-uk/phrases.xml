@@ -2832,7 +2832,7 @@
     <string name="poi_public_bookcase">Громадська книжкова шафа</string>
     <string name="poi_cuisine_potato">Картопля</string>
     <string name="poi_e_cigarette">Електронні сигарети</string>
-    <string name="poi_second_hand_yes">Вживані товари</string>
+    <string name="poi_second_hand_yes">Так</string>
     <string name="poi_resource_gold">Золото</string>
     <string name="poi_surface_grass_paver">Поверхня: нещільна кам\'яна бруківка</string>
     <string name="poi_crop_wheat">Вирощується культура: пшениця</string>
@@ -2851,7 +2851,7 @@
     <string name="poi_public_bookcase_type_reading_box">Вид: шафа з книгами</string>
     <string name="poi_cuisine_sub">Сендвіч в формі підводного човна</string>
     <string name="poi_nutrition_supplements">Харчові добавки</string>
-    <string name="poi_second_hand_only">Лише вживані товари</string>
+    <string name="poi_second_hand_only">Лише</string>
     <string name="poi_resource_gravel">Гравій</string>
     <string name="poi_surface_dirt">Поверхня: бруд</string>
     <string name="poi_crop_barley">Вирощується культура: ячмінь</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_bridge_name">Назва мосту</string>
     <string name="poi_vending_machine_fuel_filter">Автоматичні паливні колонки;Автомат з продажу палива</string>
     <string name="poi_vending_machine_fuel">Так</string>
+    <string name="poi_second_hand_filter">Вживані товари</string>
+    <string name="poi_surface_carpet">Поверхня: килимова</string>
+    <string name="poi_surface_acrylic">Поверхня: акрилова</string>
+    <string name="poi_surface_plastic">Поверхня: пластик</string>
+    <string name="poi_surface_rubber">Поверхня: гума</string>
 </resources>

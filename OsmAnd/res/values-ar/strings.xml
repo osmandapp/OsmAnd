@@ -2900,7 +2900,7 @@
     <string name="shared_string_degrees">درجات</string>
     <string name="shared_string_milliradians">مللي راديان</string>
     <string name="angular_measeurement">وحدات القياس الزاوي</string>
-    <string name="angular_measeurement_descr">تغيير قياس زاوية الازيموث.</string>
+    <string name="angular_measeurement_descr">تغيير قياس زاوية السمت.</string>
     <string name="save_poi_value_exceed_length_title">طول \"%s\" قيمة</string>
     <string name="public_transport_warning_descr_blog">اقرأ المزيد حول ملاحة OsmAnd على مدونتنا.</string>
     <string name="public_transport_warning_title">يخضع التنقل في وسائل النقل العام حاليًا للاختبار التجريبي ، ويتوقع أن يكون فيه أخطاء .</string>
@@ -5307,4 +5307,8 @@
     <string name="power_watts_unit">واتس</string>
     <string name="revolutions_per_minute_unit">.RPM</string>
     <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
+    <string name="free_mode">الوضع الحر</string>
+    <string name="terrain_map">خريطة التضاريس</string>
+    <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
+    <string name="relief_3d">تضاريس 3D</string>
 </resources>

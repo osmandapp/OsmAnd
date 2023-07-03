@@ -131,7 +131,7 @@
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPulsación larga para las opciones"</string>
+\nToque largo para opciones"</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
@@ -1205,7 +1205,7 @@
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="selected_gpx_info_show">"
 \n
-\nPulsación larga para ver en el mapa"</string>
+\nToque largo para ver en el mapa"</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
     <string name="shared_string_selected_lowercase">marcado(s)</string>
     <string name="gpx_split_interval">Intervalo de división</string>
@@ -2030,7 +2030,7 @@
     <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación de viaje.</string>
     <string name="shared_string_trip">Viaje</string>
     <string name="shared_string_recorded">Grabado</string>
-    <string name="shared_string_record">Grabar</string>
+    <string name="shared_string_record">Registro</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color para las curvas de nivel</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
     <string name="save_track_min_speed_descr">Filtro: No registrar puntos por debajo de esta velocidad.</string>
@@ -2656,7 +2656,7 @@
     <string name="shared_string_contents">Contenido</string>
     <string name="index_item_world_wikivoyage">Artículos de Wikiviajes en todo el mundo</string>
     <string name="shared_string_dont">No</string>
-    <string name="shared_string_do">Sí</string>
+    <string name="shared_string_do">Hacer</string>
     <string name="shared_string_only_with_wifi">Sólo con Wi-Fi</string>
     <string name="wikivoyage_download_pics">Descargar las imágenes</string>
     <string name="wikivoyage_download_pics_descr">Las imágenes del artículo pueden descargarse para su uso sin conexión. 
@@ -3684,7 +3684,7 @@
     <string name="simplified_track_description">Sólo se guardará la línea de la ruta, los puntos de referencia serán borrados.</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
     <string name="number_of_gpx_files_selected_pattern">Se muestran %s trazas</string>
-    <string name="monitoring_control_start">Grabar</string>
+    <string name="monitoring_control_start">REC</string>
     <string name="save_global_track_interval_descr">Intervalo de registro para la grabación general de trazas (activado desde el widget «Grabación de viaje» en el mapa).</string>
     <string name="gpx_monitoring_stop">Pausar grabación de viaje</string>
     <string name="gpx_monitoring_start">Reanudar grabación de viaje</string>
@@ -3752,7 +3752,7 @@
     <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
     <string name="select_another_track">Elegir otra traza</string>
     <string name="navigate_to_track_descr">Navegar desde mi ubicación a la traza</string>
-    <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
+    <string name="pass_whole_track_descr">Punto desde el que navegar la traza</string>
     <string name="start_of_the_track">Inicio de la traza</string>
     <string name="nearest_point">Punto más cercano</string>
     <string name="attach_to_the_roads">Unir a los caminos</string>
@@ -4716,16 +4716,16 @@
     <string name="shared_string_only_missing">Sólo faltantes</string>
     <string name="download_tiles">Descargar teselas</string>
     <string name="auto_25_chars_route_roundabout_kl">Toma la salida %1$d y mantente a la izquierda</string>
-    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrado actual.</string>
-    <string name="av_notes_audio_widget_desc">Pulsa el widget para grabar notas de audio.</string>
-    <string name="trip_recording_duration_widget_desc">Muestra el tiempo de grabación del viaje actual.</string>
-    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del viaje actual registrado.</string>
+    <string name="trip_recording_distance_widget_desc">Muestra la distancia del viaje registrada actualmente.</string>
+    <string name="av_notes_audio_widget_desc">Si tocas el widget, podrás tomar una nota de voz.</string>
+    <string name="trip_recording_duration_widget_desc">Muestra el tiempo del viaje registrado actualmente.</string>
+    <string name="trip_recording_downhill_widget_desc">Muestra la suma de todos los descensos del trayecto registrado actualmente.</string>
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
     <string name="calculate_online_altitude_descr">Calcula la elevación en línea desde los servidores de OsmAnd, basándose en las imágenes de satélite y en los modelos digitales de elevación. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="co2_mission">Emisión de CO2</string>
     <string name="shared_string_duplicate">Duplicar</string>
-    <string name="av_notes_photo_widget_desc">Pulsa el widget para tomar una foto.</string>
-    <string name="av_notes_video_widget_desc">Pulsa el widget para grabar un video.</string>
+    <string name="av_notes_photo_widget_desc">Si tocas el widget, podrás hacer una foto.</string>
+    <string name="av_notes_video_widget_desc">Si tocas el widget, podrás grabar un vídeo.</string>
     <string name="auto_backup_preference_desc">Predefinidamente, Android guarda copias de seguridad de los favoritos, códigos de mapas y ajustes de OsmAnd para restaurarlos en nuevos dispositivos o al reinstalar. Esta copia de seguridad se limita a 25 MB.
 \nAl usar OsmAnd Cloud, esto puede dar lugar a malentendidos después de la reinstalación.</string>
     <string name="duplacate_widget_added_snackbar">Se ha añadido a la lista un widget duplicado.</string>
@@ -4736,11 +4736,11 @@
     <string name="auto_25_chars_route_tr_kl">Gira a la derecha y mantente a la izquierda</string>
     <string name="auto_25_chars_route_tr_kr">Gira a la derecha y mantente a la derecha</string>
     <string name="true_bearing_wdiget_desc">El ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
-    <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección del movimiento hacia delante y el punto objetivo.</string>
-    <string name="time_to_destination_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al último punto de destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de la ruta desde la ubicación actual.</string>
+    <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección de tu movimiento hacia delante y el punto objetivo.</string>
+    <string name="time_to_destination_widget_desc">El widget muestra la \"Hora de llegada\" o el \"Tiempo que falta\" hasta el último punto del destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de ruta desde la ubicación actual.</string>
     <string name="compass_visible_if_map_rotated_desc">Se oculta cuando el Norte se encuentra arriba</string>
     <string name="second_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el segundo marcador del mapa.</string>
-    <string name="time_to_intermediate_widget_desc">Muestra la «Hora de llegada» o el «Tiempo para ir» al primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, una vez se pasen los puntos intermedios, el tiempo será actualizado al siguiente punto intermedio.</string>
+    <string name="time_to_intermediate_widget_desc">El widget muestra \"La hora de llegada\" o \"El tiempo restante\" hasta el primer punto intermedio. El tiempo se actualiza constantemente durante la navegación, y cuando se pasa un punto intermedio, el tiempo se actualiza al siguiente punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Muestra la distancia que queda hasta el primer punto intermedio. Una vez superados estos, la distancia será actualizada al siguiente punto intermedio.</string>
     <string name="distance_to_destination_widget_desc">Muestra la distancia que queda hasta el último punto de destino.</string>
     <string name="next_turn_widget_desc">Muestra información sobre el próximo giro con una imagen de la maniobra y la distancia hasta ella.</string>
@@ -4773,7 +4773,7 @@
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
     <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
-    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todos los ascensos del viaje actualmente registrado.</string>
+    <string name="trip_recording_uphill_widget_desc">Muestra la suma de todas las subidas del viaje registrado actualmente.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
@@ -4781,7 +4781,7 @@
     <string name="map_widget_camera_tilt_desc">Muestra el ángulo de inclinación de la cámara en modo perspectiva. El valor predefinido es 90° (sin inclinación).</string>
     <string name="developer_widgets">Widgets para desarrolladores</string>
     <string name="coordinates_widget_map_center_desc">Muestra las coordenadas geográficas del centro del mapa actual</string>
-    <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la ubicación geográfica actual</string>
+    <string name="coordinates_widget_current_location_desc">Muestra las coordenadas geográficas de la geolocalización actual</string>
     <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
     <string name="coordinates_widget_map_center">Coordenadas: centro del mapa</string>
     <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
@@ -5240,4 +5240,8 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="routing_attr_allow_via_ferrata_name">Permitir vía férrea</string>
     <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
+    <string name="free_mode">Modo libre</string>
+    <string name="relief_3d">Relieve en 3D</string>
+    <string name="terrain_map">Mapa del terreno</string>
+    <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>
 </resources>

@@ -1705,9 +1705,9 @@
     <string name="poi_service_repair">Reparații</string>
     <string name="poi_service_dealer">Dealerul</string>
     <string name="poi_service_parts">Părți</string>
-    <string name="poi_second_hand_only">Numai bunuri la mâna a doua</string>
+    <string name="poi_second_hand_only">Doar</string>
     <string name="poi_second_hand_no">Fără bunuri second-hand</string>
-    <string name="poi_second_hand_yes">Mărfuri la mâna a doua</string>
+    <string name="poi_second_hand_yes">Da</string>
     <string name="poi_cocktails_yes">Da;Cocteiluri</string>
     <string name="poi_outdoor_seating_patio">Locuri în aer liber: terasă</string>
     <string name="poi_outdoor_seating_garden">Terasă: grădină</string>
@@ -2168,7 +2168,7 @@
     <string name="poi_wildlife_hide">Loc pentru a observa viața sălbatică</string>
     <string name="poi_bicycle_repair_station">Stație de reparații biciclete;Stație de auto-reparare biciclete;Stație de reparații biciclete;Stație de auto-reparare biciclete</string>
     <string name="poi_service_bicycle_charging_no">Încărcare: nu</string>
-    <string name="poi_service_bicycle_charging_yes">Încărcare: da;Încărcarea bicicletei;Încărcarea bicicletei;Încărcarea bicicletei electrice;Încărcarea bicicletei electrice</string>
+    <string name="poi_service_bicycle_charging_yes">Încărcare: da;Încărcarea bicicletei;Încărcarea bicicletei;Încărcarea bicicletei electrice;Încărcare biciclete electrice</string>
     <string name="poi_service_bicycle_second_hand_no">Vânzarea cu amănuntul a bicicletelor second-hand: nu</string>
     <string name="poi_service_bicycle_second_hand_yes">Vânzarea cu amănuntul a bicicletelor second hand;Biciclete second hand;Biciclete second hand</string>
     <string name="poi_service_bicycle_chaintool_no">Unelte pentru lanț de bicicletă: nu</string>
@@ -4543,7 +4543,7 @@
     <string name="poi_spikes">Spike-uri</string>
     <string name="poi_sump_buster">Pompa de curățare</string>
     <string name="poi_wedge">Cuier</string>
-    <string name="poi_barrier_bar">Bară</string>
+    <string name="poi_barrier_bar">Bară de protecție</string>
     <string name="poi_wicket_gate">Poarta de acces</string>
     <string name="poi_barrier_board">Gard barieră</string>
     <string name="poi_barrier_tyres">Anvelope</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_vending_machine_fuel_filter">Distribuitoare automate de combustibil; Mașină de distribuție de combustibil</string>
     <string name="poi_tunnel_name">Denumirea tunelului</string>
     <string name="poi_bridge_name">Numele podului</string>
+    <string name="poi_surface_acrylic">Suprafață: acrilică</string>
+    <string name="poi_surface_rubber">Suprafață: cauciuc</string>
+    <string name="poi_surface_carpet">Suprafață: covor</string>
+    <string name="poi_surface_plastic">Suprafață: plastic</string>
+    <string name="poi_second_hand_filter">Bunuri la mâna a doua</string>
 </resources>

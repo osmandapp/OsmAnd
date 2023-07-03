@@ -74,11 +74,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
@@ -2060,7 +2060,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
 			mapContextMenu.getMultiSelectionMenu().hide();
 		} else if (getTrackMenuFragment() != null) {
-			dismissTrackMenu();
+			dismissFragment(TrackMenuFragment.TAG);
 		}
 	}
 
@@ -2119,21 +2119,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Nullable
+	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
+		return getFragment(ConfigureMapOptionFragment.TAG);
+	}
+
+	@Nullable
 	public WeatherForecastFragment getWeatherForecastFragment() {
 		return getFragment(WeatherForecastFragment.TAG);
 	}
 
-	public void dismissTrackMenu() {
+	public void dismissFragment(@Nullable String name) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(TrackMenuFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
-	public void dismissBackupCloudFragment() {
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(BackupCloudFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fragmentManager.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 

@@ -44,11 +44,13 @@ class FavoriteGroupsScreen(
                 .setBrowsable(true)
                 .setOnClickListener { onClickFavoriteGroup(null) }
                 .build())
-        var collectionSize = 1
-        for (group in favoriteGroups) {
-            if (collectionSize == contentLimit) {
-                break
-            }
+        if (contentLimit < 2) {
+            return
+        }
+        val favoriteGroupsSize = favoriteGroups.size
+        val limitedFavoriteGroups =
+            favoriteGroups.subList(0, favoriteGroupsSize.coerceAtMost(contentLimit - 2))
+        for (group in limitedFavoriteGroups) {
             val title = group.getDisplayName(app)
             val groupIcon = app.favoritesHelper.getColoredIconForGroup(group.name);
             val icon = CarIcon.Builder(
@@ -60,7 +62,6 @@ class FavoriteGroupsScreen(
                     .setBrowsable(true)
                     .setOnClickListener { onClickFavoriteGroup(group) }
                     .build())
-            collectionSize++
         }
     }
 

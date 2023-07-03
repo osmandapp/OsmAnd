@@ -14,6 +14,7 @@ import net.osmand.router.RouteColorize.ColorizationType;
 import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -68,7 +69,7 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public Map<String, PointsAttributesData> pointsAttributesData;
+	public Map<String, PointsAttributesData<?>> pointsAttributesData;
 
 	public boolean hasSpeedInTrack = false;
 
@@ -127,18 +128,19 @@ public class GPXTrackAnalysis {
 		return getAttributesData(POINT_SPEED);
 	}
 
-	public <T extends PointAttribute> PointsAttributesData<T> getAttributesData(String key) {
-		PointsAttributesData data = pointsAttributesData.get(key);
+	public <T extends PointAttribute<? extends Number>> PointsAttributesData<T> getAttributesData(String key) {
+		@SuppressWarnings("unchecked")
+		PointsAttributesData<T> data = (PointsAttributesData<T>) pointsAttributesData.get(key);
 		if (data == null) {
-			data = new PointsAttributesData(key);
+			data = new PointsAttributesData<T>(key);
 			pointsAttributesData.put(key, data);
 		}
 		return data;
 	}
 
-	public void addPointAttribute(PointAttribute attribute) {
+	public <T extends PointAttribute<? extends Number>> void addPointAttribute(T attribute) {
 		String key = attribute.getKey();
-		PointsAttributesData data = getAttributesData(key);
+		PointsAttributesData<T> data = getAttributesData(key);
 		data.addPointAttribute(attribute);
 
 		if (!data.hasData() && attribute.hasValidValue() && totalDistance > 0) {
@@ -323,10 +325,15 @@ public class GPXTrackAnalysis {
 				}
 			}
 
-			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
+			ElevationApproximator approximator = new ElevationApproximator() {
 				@Override
-				public double getPointDistance(int index) {
-					return s.get(index).distance;
+				public double getPointLatitude(int index) {
+					return s.get(index).lat;
+				}
+
+				@Override
+				public double getPointLongitude(int index) {
+					return s.get(index).lon;
 				}
 
 				@Override
@@ -339,9 +346,30 @@ public class GPXTrackAnalysis {
 					return s.getNumberOfPoints();
 				}
 			};
-			elevationDiffsCalc.calculateElevationDiffs();
-			diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
-			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+			approximator.approximate();
+			final double[] distances = approximator.getDistances();
+			final double[] elevations = approximator.getElevations();
+			if (distances != null && elevations != null) {
+				ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
+					@Override
+					public double getPointDistance(int index) {
+						return distances[index];
+					}
+
+					@Override
+					public double getPointElevation(int index) {
+						return elevations[index];
+					}
+
+					@Override
+					public int getPointsCount() {
+						return distances.length;
+					}
+				};
+				elevationDiffsCalc.calculateElevationDiffs();
+				diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
+				diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+			}
 		}
 
 		if (totalDistance < 0) {

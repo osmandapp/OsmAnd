@@ -3,6 +3,7 @@ package net.osmand.plus.widgets.ctxmenu;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
@@ -30,6 +31,21 @@ public class CtxMenuUtils {
 			itemNames.add(item.getTitle());
 		}
 		return itemNames;
+	}
+
+	@Nullable
+	public static String getCategoryDescription(@NonNull List<ContextMenuItem> items) {
+		List<String> itemNames = new ArrayList<>();
+		for (ContextMenuItem item : items) {
+			String title = item.getTitle();
+			if (title != null) {
+				itemNames.add(title);
+			}
+		}
+		if (itemNames.isEmpty()) {
+			return null;
+		}
+		return TextUtils.join(", ", itemNames);
 	}
 
 	public static void removeHiddenItems(@NonNull ContextMenuAdapter adapter) {

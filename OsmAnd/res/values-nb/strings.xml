@@ -423,7 +423,7 @@
     <string name="save_track_interval">Loggeintervall under navigering</string>
     <string name="save_track_interval_descr">Angi loggingsintervall for opptak av spor under navigering</string>
     <string name="save_track_to_gpx">Auto-opptak av spor under navigering</string>
-    <string name="update_tile">Oppdater kart</string>
+    <string name="update_tile">Oppdater</string>
     <string name="reload_tile">Last kartdel på nytt</string>
     <string name="mark_point">Mål</string>
     <string name="use_english_names_descr">Velg mellom lokale og engelske navn.</string>
@@ -1646,7 +1646,7 @@
     <string name="proxy_host_descr">Angi din mellomtjeners vertsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Mellomtjener-port</string>
     <string name="gpx_start_new_segment">Start nytt segment</string>
-    <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
+    <string name="no_index_file_to_download">Fant ikke noe å laste ned. Sjekk at du er koblet til Internett.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_file_is_empty">Tom GPX-fil</string>
@@ -5177,4 +5177,26 @@
     <string name="revolutions_per_minute_unit">o/min</string>
     <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på høydekartdata. Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
     <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s) den inneholder.</string>
+    <string name="rendering_value_sectors_name">Sektorer</string>
+    <string name="shared_string_close_the_dialog">Lukk dialogen</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="shared_string_new_track">Nytt spor</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_name_only_name">Kun navn</string>
+    <string name="shared_string_ear_lobe">Øreflipp</string>
+    <string name="save_track_external_sensors_data">Data</string>
+    <string name="tracks_empty_folder">Tom mappe</string>
+    <string name="shared_string_hand">Hånd</string>
+    <string name="delete_folder_question">Slett mappen\?</string>
+    <string name="delete_folder">Slett mappen</string>
+    <string name="show_all_tracks_on_the_map">Vis alle sporene på kartet</string>
+    <string name="free_mode">Fri modus</string>
+    <string name="relief_3d_description">Ei og observer skalamodellen av ditt nabolag eller hele kontinentet.</string>
+    <string name="terrain_map">Terrengkart</string>
+    <string name="relief_3d">3D-relieff</string>
+    <string name="slope_legend_description">Helning bruker farger for å visualisere terrengbratthet. Du kan lese mer om helninger i %1$s.</string>
+    <string name="terrain_category_description">Terrengkoter, relieffskyggekart med mørke skygger og helningskart med farger for å vise topper og lavland.</string>
 </resources>
