@@ -100,6 +100,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -554,7 +555,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		if (visible) {
 			mapActivity.dismissCardDialog();
-			mapActivity.dismissTrackMenu();
+			mapActivity.dismissFragment(TrackMenuFragment.TAG);
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();

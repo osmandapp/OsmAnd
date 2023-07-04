@@ -529,4 +529,5 @@
 	<color name="track_gradient_end">#F3374D</color>
 
 	<color name="external_device_empty_icon_bg_day">#F3F4F6</color>
+	<color name="deletion_color_warning">#E71D36</color>
 </resources>

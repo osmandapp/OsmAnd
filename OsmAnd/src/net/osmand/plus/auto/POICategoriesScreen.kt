@@ -30,7 +30,11 @@ class POICategoriesScreen(
     }
 
     private fun setupPOICategories(listBuilder: ItemList.Builder) {
-        for (poiFilter in app.poiFilters.getSortedPoiFilters(false)) {
+        val poiFilters = app.poiFilters.getSortedPoiFilters(false)
+        val poiFiltersSize = poiFilters.size
+        val limitedPOIFilters = app.poiFilters.getSortedPoiFilters(false)
+            .subList(0, poiFiltersSize.coerceAtMost(contentLimit - 1))
+        for (poiFilter in limitedPOIFilters) {
             val title = poiFilter.name
             var groupIcon = RenderingIcons.getBigIcon(app, poiFilter.iconId)
             if (groupIcon == null) {

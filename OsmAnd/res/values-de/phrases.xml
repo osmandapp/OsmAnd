@@ -4548,7 +4548,7 @@
     <string name="poi_spikes">Nagelsperre</string>
     <string name="poi_sump_buster">Ölwannenbrecher</string>
     <string name="poi_wedge">Keil</string>
-    <string name="poi_barrier_bar">Balken</string>
+    <string name="poi_barrier_bar">Absperrbalken</string>
     <string name="poi_surface_chipseal">Tränkmakadam</string>
     <string name="poi_cemt">CEMT-Klasse</string>
     <string name="poi_ship_private">Schiffszugang: privat</string>
@@ -4562,7 +4562,7 @@
     <string name="poi_cemt_iii">III</string>
     <string name="poi_cemt_va">Va</string>
     <string name="poi_cemt_vb">Vb</string>
-    <string name="poi_cai_scale">CAI Skala</string>
+    <string name="poi_cai_scale">CAI-Skala</string>
     <string name="poi_cemt_i">1</string>
     <string name="poi_maxlength">Maximale Länge</string>
     <string name="poi_lock_name">Schleusenname</string>
@@ -4578,7 +4578,7 @@
     <string name="poi_boat_unknown">Bootszugang: unbekannt</string>
     <string name="poi_cemt_0">0</string>
     <string name="poi_cemt_iv">IV</string>
-    <string name="poi_sac_scale">SAC Skala</string>
+    <string name="poi_sac_scale">SAC-Skala</string>
     <string name="poi_cemt_via">VIa</string>
     <string name="poi_cemt_vib">VIb</string>
     <string name="poi_cemt_vic">VIc</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_bridge_name">Name der Brücke</string>
     <string name="poi_vending_machine_fuel">Ja</string>
     <string name="poi_vending_machine_fuel_filter">Automatische Zapfsäulen; Kraftstoffautomat</string>
+    <string name="poi_second_hand_filter">Second-Hand-Ware</string>
+    <string name="poi_surface_acrylic">Oberfläche: Acryl</string>
+    <string name="poi_surface_carpet">Oberfläche: Teppich</string>
+    <string name="poi_surface_plastic">Oberfläche: Plastik</string>
+    <string name="poi_surface_rubber">Oberfläche: Gummi</string>
 </resources>

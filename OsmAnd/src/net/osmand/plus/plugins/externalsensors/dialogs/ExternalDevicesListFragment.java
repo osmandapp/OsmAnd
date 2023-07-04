@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.externalsensors.adapters.PairedDevicesAdapter;
@@ -76,14 +75,13 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		sensorIcon.setImageResource(nightMode ? R.drawable.img_help_sensors_night : R.drawable.img_help_sensors_day);
 		TextView learnMore = view.findViewById(R.id.learn_more_button);
 		String docsLinkText = app.getString(R.string.learn_more_about_sensors_link);
-		UiUtilities.setupClickableText(app, learnMore, docsLinkText, docsLinkText, nightMode, new CallbackWithObject<Void>() {
-			@Override
-			public boolean processResult(Void unused) {
-				FragmentActivity activity = getActivity();
+		UiUtilities.setupClickableText(app, learnMore, docsLinkText, docsLinkText, nightMode, unused -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				boolean nightMode = !app.getSettings().isLightContent();
 				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
-				return false;
 			}
+			return false;
 		});
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty));
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional));

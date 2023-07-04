@@ -456,6 +456,10 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
+		if (Algorithms.isEmpty(trackItems)) {
+			app.showToastMessage(R.string.folder_export_empty_error);
+			return;
+		}
 		List<File> selectedFiles = new ArrayList<>();
 		for (TrackItem trackItem : trackItems) {
 			selectedFiles.add(trackItem.getFile());

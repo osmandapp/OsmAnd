@@ -165,9 +165,9 @@ public class Map3DButton extends MapButton {
 
 		return app.useOpenGlRenderer() &&
 				shouldShowFabButton &&
-				visibility == Map3DModeVisibility.VISIBLE
-				|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE
-				&& !isDefaultElevationAngle());
+				(visibility == Map3DModeVisibility.VISIBLE
+						|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE
+						&& !isDefaultElevationAngle()));
 	}
 
 	private boolean isDefaultElevationAngle() {

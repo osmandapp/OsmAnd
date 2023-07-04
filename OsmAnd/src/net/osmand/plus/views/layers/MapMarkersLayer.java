@@ -19,9 +19,15 @@ import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -65,15 +71,12 @@ import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
@@ -129,6 +132,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean carView;
 	private float textScale = 1f;
 	private double markerSizePx;
+
+	public CustomMapObjects<MapMarker> customObjectsDelegate;
 
 	//OpenGL
 	private int markersCount;
@@ -272,7 +277,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
-		if (!settings.SHOW_MAP_MARKERS.get()) {
+		if ((!settings.SHOW_MAP_MARKERS.get() && customObjectsDelegate == null)
+				|| (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects()))) {
 			clearMapMarkersCollections();
 			clearVectorLinesCollections();
 			resetCachedRenderer();
@@ -280,7 +286,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+		List<MapMarker> activeMapMarkers = (customObjectsDelegate != null) ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			if (markersCount != activeMapMarkers.size() || mapActivityInvalidated) {
@@ -370,7 +376,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 
-		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
+		if (customObjectsDelegate != null && Algorithms.isEmpty(customObjectsDelegate.getMapObjects())
+				|| customObjectsDelegate == null && (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get())) {
 			clearVectorLinesCollections();
 			return;
 		}
@@ -380,8 +387,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		updateBitmaps(false);
 
+		List<MapMarker> markers = customObjectsDelegate != null ? customObjectsDelegate.getMapObjects() : markersHelper.getMapMarkers();
 		if (mapRenderer == null) {
-			for (MapMarker marker : markersHelper.getMapMarkers()) {
+			for (MapMarker marker : markers) {
 				if (isMarkerVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 						&& !isInMotion(marker) && !isSynced(marker)) {
 					Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
@@ -401,11 +409,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		} else {
 			clearVectorLinesCollections();
 		}
-
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
 			LatLon loc = tileBox.getCenterLatLon();
 			int i = 0;
-			for (MapMarker marker : markersHelper.getMapMarkers()) {
+			for (MapMarker marker : markers) {
 				if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
 					canvas.save();
 					float bearing;
@@ -1071,6 +1078,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				canvas.drawTextOnPath(text, linePath, hOffset, -verticalOffset, textAttrs.paint);
 			}
 			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		}
+	}
+
+	public void setCustomMapObjects(List<MapMarker> mapMarkers) {
+		if (customObjectsDelegate != null) {
+			customObjectsDelegate.setCustomMapObjects(mapMarkers);
+			getApplication().getOsmandMap().refreshMap();
 		}
 	}
 }

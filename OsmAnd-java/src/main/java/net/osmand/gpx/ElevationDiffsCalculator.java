@@ -1,9 +1,11 @@
 package net.osmand.gpx;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.util.MapUtils;
 
 public abstract class ElevationDiffsCalculator {
@@ -77,14 +79,14 @@ public abstract class ElevationDiffsCalculator {
 		int max = start;
 		double maxDiff = ELE_THRESHOLD;
 		for (int i = start + 1; i < end; i++) {
-			double md = getProjectionDist(getPointDistance(i), getPointElevation(i), 
+			double md = getProjectionDist(getPointDistance(i), getPointElevation(i),
 					firstPointDist, firstPointEle, endPointDist, endPointEle);
 			if (md > maxDiff) {
 				max = i;
 				maxDiff = md;
 			}
 		}
-		if(max != start) {
+		if (max != start) {
 			points[max] = true;
 			findMaximumExtremumBetween(start, max, points);
 			findMaximumExtremumBetween(max, end, points);
@@ -117,6 +119,70 @@ public abstract class ElevationDiffsCalculator {
 			} else {
 				diffElevationDown -= eleDiffSumm;
 			}
+		}
+	}
+
+	public static void main(String[] args) {
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(new File("/Users/crimean/Downloads/2011-09-27_Mulhacen.gpx"));
+		List<WptPt> points = gpxFile.tracks.get(0).segments.get(0).points;
+		calculateDiffs(points);
+		int start = 200;
+		for (int i = start + 150; i < start + 160; i++) {
+			calculateDiffs(points.subList(start, i));
+		}
+	}
+
+	private static void calculateDiffs(final List<WptPt> points) {
+		ElevationApproximator approximator = new ElevationApproximator() {
+			@Override
+			public double getPointLatitude(int index) {
+				return points.get(index).lat;
+			}
+
+			@Override
+			public double getPointLongitude(int index) {
+				return points.get(index).lon;
+			}
+
+			@Override
+			public double getPointElevation(int index) {
+				return points.get(index).ele;
+			}
+
+			@Override
+			public int getPointsCount() {
+				return points.size();
+			}
+		};
+		approximator.approximate();
+		final double[] distances = approximator.getDistances();
+		final double[] elevations = approximator.getElevations();
+
+		if (distances != null && elevations != null) {
+			double diffElevationUp = 0;
+			double diffElevationDown = 0;
+			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
+				@Override
+				public double getPointDistance(int index) {
+					return distances[index];
+				}
+
+				@Override
+				public double getPointElevation(int index) {
+					return elevations[index];
+				}
+
+				@Override
+				public int getPointsCount() {
+					return distances.length;
+				}
+			};
+			elevationDiffsCalc.calculateElevationDiffs();
+			diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
+			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+
+			System.out.println("GPX points=" + points.size() + " approx points=" + distances.length
+					+ " diffUp=" + diffElevationUp + " diffDown=" + diffElevationDown);
 		}
 	}
 }

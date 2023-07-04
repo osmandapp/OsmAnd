@@ -49,7 +49,7 @@
     <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_color_scheme">Цвет горизонталей</string>
+    <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Показывать начиная с масштаба</string>
     <string name="animate_my_location">Анимация моего положения</string>
     <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моим положением во время навигации.</string>
@@ -106,11 +106,11 @@
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
     <string name="no_overlay">Без наложения</string>
     <string name="no_underlay">Без подложки</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Любая сложность</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Максимально сложный</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Без крутых подъёмов</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Максимально ровный</string>
-    <string name="routing_attr_driving_style_speed_name">Предпочитать оживлённые улицы</string>
-    <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Максимально плоский</string>
+    <string name="routing_attr_driving_style_speed_name">Предпочитать крупные дороги</string>
+    <string name="routing_attr_driving_style_balance_name">Приоритет быстрейшему маршруту</string>
     <string name="routing_attr_driving_style_safety_name">Предпочитать тихие улицы</string>
     <string name="relief_smoothness_factor_descr">Выберите предпочтительный рельеф.</string>
     <string name="shared_string_slope">Уклон</string>
@@ -210,7 +210,7 @@
     <string name="rendering_attr_contourColorScheme_description">Цвет горизонталей</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
     <string name="rendering_value_dark_brown_name">Тёмно-коричневый</string>
-    <string name="rendering_attr_contourColorScheme_name">Цветовая гамма горизонталей</string>
+    <string name="rendering_attr_contourColorScheme_name">Цветовая схема горизонталей</string>
     <string name="rendering_attr_surfaceIntegrity_name">Качество дорожного покрытия</string>
     <string name="search_hint">Город, адрес, POI</string>
     <string name="new_filter_desc">Введите имя для нового фильтра. Он добавится в список «Категории».</string>
@@ -811,7 +811,7 @@
     <string name="error_occurred_saving_gpx">Не удалось сохранить файл GPX.</string>
     <string name="error_calculating_route">Не удалось рассчитать маршрут.</string>
     <string name="error_calculating_route_occured">Не удалось рассчитать маршрут.</string>
-    <string name="empty_route_calculated">Невозможно построить маршрут.</string>
+    <string name="empty_route_calculated">Данные маршрута потеряны</string>
     <string name="arrived_at_destination">Вы на месте.</string>
     <string name="invalid_locations">Неправильные координаты</string>
     <string name="go_back_to_osmand">Вернуться к карте</string>
@@ -1162,8 +1162,8 @@
     <string name="poi_filter_sightseeing">Достопримечательности</string>
     <string name="context_menu_item_last_intermediate_point">Последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Первый промежуточный пункт</string>
-    <string name="add_as_last_destination_point">Добавить перед конечным пунктом</string>
-    <string name="add_as_first_destination_point">Добавить в начало маршрута</string>
+    <string name="add_as_last_destination_point">Последний промежуточный пункт</string>
+    <string name="add_as_first_destination_point">Первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже задан:</string>
     <string name="target_point">Пункт %1$s</string>
@@ -1365,7 +1365,7 @@
     <string name="route_descr_select_destination">Задать пункт назначения</string>
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Информация про маршрут</string>
-    <string name="keep_and_add_destination_point">Добавить в конец маршрута</string>
+    <string name="keep_and_add_destination_point">Следующий пункт назначения</string>
     <string name="use_displayed_track_for_navigation">Использовать показанный путь для навигации?</string>
     <string name="calculate_osmand_route_without_internet">Рассчитать сегмент маршрута OsmAnd без интернета</string>
     <string name="gpx_option_calculate_first_last_segment">Рассчитать маршрут OsmAnd для первого и последнего сегмента маршрута</string>
@@ -2117,7 +2117,7 @@
     <string name="shared_string_move_up">Переместить ↑</string>
     <string name="shared_string_move_down">Переместить ↓</string>
     <string name="finish_navigation">Завершить навигацию</string>
-    <string name="avoid_road">Обходить</string>
+    <string name="avoid_road">Избегать на маршруте</string>
     <string name="osm_live_user_public_name">Публичное имя</string>
     <string name="osm_live_support_region">Поддерживаемый регион</string>
     <string name="osm_live_enter_user_name">Введите публичное имя</string>
@@ -2632,8 +2632,8 @@
     <string name="copy_location_name">Копировать местоположение/название POI</string>
     <string name="toast_empty_name_error">Место без названия</string>
     <string name="shared_string_current">Текущий</string>
-    <string name="last_intermediate_dest_description">Сделать последним промежуточным пунктом</string>
-    <string name="first_intermediate_dest_description">Сделать первым промежуточным пунктом</string>
+    <string name="last_intermediate_dest_description">Добавить последним промежуточным пунктом</string>
+    <string name="first_intermediate_dest_description">Добавить первым промежуточным пунктом</string>
     <string name="subsequent_dest_description">Текущий конечный пункт станет последним промежуточным</string>
     <string name="show_closed_notes">Показать закрытые заметки</string>
     <string name="switch_osm_notes_visibility_desc">Показать/скрыть заметки OSM на карте.</string>
@@ -3161,7 +3161,7 @@
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s КБ</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия.</string>
     <string name="shared_string_other">Прочее</string>
     <string name="download_detailed_map">Загрузить подробную карту %s для просмотра этой области.</string>
@@ -3203,8 +3203,8 @@
 \n
 \n</string>
     <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
-    <string name="routing_attr_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
-    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги.</string>
+    <string name="routing_attr_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
+    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги и тропы.</string>
     <string name="update_all_maps_q">Обновить все карты (%1$d)\?</string>
     <string name="apply_preference_to_all_profiles">Применить ко всем или только к выбранному профилю.</string>
     <string name="shared_preference">Общий</string>
@@ -3741,7 +3741,7 @@
     <string name="pass_whole_track_descr">Точка для навигации</string>
     <string name="start_of_the_track">Начало трека</string>
     <string name="nearest_point">Ближайшая точка</string>
-    <string name="attach_to_the_roads">Привязка к дороге</string>
+    <string name="attach_to_the_roads">Привязка к дорогам</string>
     <string name="delete_address">Удалить адрес</string>
     <string name="add_address">Добавить адрес</string>
     <string name="access_hint_enter_address">Введите адрес</string>
@@ -3980,7 +3980,7 @@
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
-    <string name="reverse_all_points">Инвертировать все точки</string>
+    <string name="reverse_all_points">Реверсировать все точки</string>
     <string name="routing_attr_allow_streams_description">Разрешить ручьи и канавы</string>
     <string name="routing_attr_allow_streams_name">Разрешить ручьи и канавы</string>
     <string name="open_place_reviews_plugin_description">Внесите свой вклад в проект OpenPlaceReviews, например, фотографии, обзоры или ссылки для общественных мест, таких как рестораны, отели или музеи. 
@@ -4152,7 +4152,7 @@
     <string name="restore_from_osmand_cloud">Восстановить из OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
     <string name="restore_selected_data">Восстановить выбранные данные</string>
-    <string name="receiving_data_from_server">Получение данных с сервера…</string>
+    <string name="receiving_data_from_server">Приём данных с сервера…</string>
     <string name="restore_complete">Восстановление завершено</string>
     <string name="backup_storage_taken">Занято в хранилище</string>
     <string name="backup_version_history">История версий</string>
@@ -4615,8 +4615,8 @@
     <string name="get_altitude_information">Получить информацию о высоте</string>
     <string name="calculating_altitude">Расчет высоты</string>
     <string name="calculate_online">Рассчитать онлайн</string>
-    <string name="track_attach_to_the_roads_descr">Трек будет привязан к дороге с помощью офлайн-карт, геометрия трека будет изменена.</string>
-    <string name="get_altitude_data">Получить данные о высоте</string>
+    <string name="track_attach_to_the_roads_descr">Трек будет привязан к ближайшим дорогам с использованием офлайн-карт, геометрия трека изменится.</string>
+    <string name="get_altitude_data">Получение данных о высоте</string>
     <string name="current_time_widget_desc">Виджет показывает текущее время на вашем устройстве.</string>
     <string name="gps_info_widget_desc">Виджет показывает количество видимых и используемых в данный момент спутников.</string>
     <string name="altitude_widget_desc">Виджет показывает высоту над уровнем моря в текущей геолокации.</string>
@@ -4706,7 +4706,7 @@
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
-    <string name="no_altitude_data_desc">%1$s: для получения данных проложите маршрут или выполните привязку к дорогам.</string>
+    <string name="no_altitude_data_desc">Для получения данных рассчитайте маршрут онлайн или выполните привязку к дорогам.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
     <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
@@ -4752,7 +4752,7 @@
     <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажмите на компас для смены режима ориентации.</string>
     <string name="compass_desc">Показывает направление на север.</string>
-    <string name="rendering_attr_depthContourColorScheme_description">Цвет контурных линий глубины (изобат)</string>
+    <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
     <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
     <string name="second_next_turn_widget_desc">Виджет показывает информацию о вашем втором следующем повороте, который включается, если поворот находится на расстоянии приближения.</string>
@@ -4816,7 +4816,7 @@
     <string name="map_widget_ant_bicycle_cadence">Каденс</string>
     <string name="map_widget_camera_tilt_desc">Виджет показывает угол наклона камеры в режиме перспективы. По умолчанию 90° (без наклона).</string>
     <string name="external_sensors_support">Поддержка внешних датчиков</string>
-    <string name="show_borders_of_downloaded_maps">Показать границы загруженных карт</string>
+    <string name="show_borders_of_downloaded_maps">Границы загруженных карт</string>
     <string name="map_widget_ant_bicycle_power_desc">Показывает выходную мощность велосипедиста, которая используется для движения велосипеда вперед</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Показывает частоту вращения педалей велосипеда</string>
     <string name="depth_contours">Контуры глубин</string>
@@ -4942,7 +4942,7 @@
 \n- изолинии температуры / давления.
 \nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
     <string name="rotate_map_manual_opt">фиксированная (повернутая вручную)</string>
-    <string name="rendering_attr_depthContourColorScheme_name">Цвет изобат</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Цветовая схема линий</string>
     <string name="shared_string_next_sunrise">Следующий восход</string>
     <string name="map_widget_group_sunrise_sunset">Восход, закат</string>
     <string name="depth_contour_lines">Контурные линии глубины (изобаты)</string>
@@ -5226,10 +5226,10 @@
     <string name="routing_attr_allow_via_ferrata_description">Разрешить тропы виа феррата.</string>
     <string name="power_watts_unit">Ватты</string>
     <string name="revolutions_per_minute_unit">об/мин</string>
-    <string name="calculate_offline">Рассчитать офлайн</string>
+    <string name="calculate_offline">По карте высот</string>
     <string name="routing_attr_allow_via_ferrata_name">Разрешить виа феррата</string>
     <string name="device_disconnected">Устройство [%1$s] отключено</string>
-    <string name="calculate_offline_altitude_descr">Расчёт высоты офлайн, на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
+    <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
     <string name="running_scds_device_name">Работающее устройство</string>
     <string name="device_connected">Устройство [%1$s] подключено</string>
     <string name="error_calculate">Результат вычислений пуст</string>

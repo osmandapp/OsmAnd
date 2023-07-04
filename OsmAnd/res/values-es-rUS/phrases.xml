@@ -1485,9 +1485,9 @@
     <string name="poi_outdoor_seating_garden">Asientos exteriores: jardín</string>
     <string name="poi_outdoor_seating_patio">Asientos exteriores: patio</string>
     <string name="poi_cocktails_yes">Sí;Cócteles</string>
-    <string name="poi_second_hand_yes">Artículos usados: sí</string>
+    <string name="poi_second_hand_yes">Sí</string>
     <string name="poi_second_hand_no">Artículos usados: no</string>
-    <string name="poi_second_hand_only">Artículos usados: únicamente</string>
+    <string name="poi_second_hand_only">Únicamente</string>
     <string name="poi_service_parts">Autopartes</string>
     <string name="poi_service_dealer">Concesionaria</string>
     <string name="poi_service_repair">Reparación</string>
@@ -4587,4 +4587,9 @@
     <string name="poi_vending_machine_fuel">Sí</string>
     <string name="poi_tunnel_name">Nombre del túnel</string>
     <string name="poi_bridge_name">Nombre del puente</string>
+    <string name="poi_surface_carpet">Superficie: alfombra</string>
+    <string name="poi_surface_plastic">Superficie: plástico</string>
+    <string name="poi_surface_rubber">Superficie: goma, caucho</string>
+    <string name="poi_second_hand_filter">Artículos usados</string>
+    <string name="poi_surface_acrylic">Superficie: acrílico</string>
 </resources>
