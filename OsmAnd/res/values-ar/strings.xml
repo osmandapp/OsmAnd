@@ -5311,4 +5311,13 @@
     <string name="terrain_map">خريطة التضاريس</string>
     <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
     <string name="relief_3d">تضاريس 3D</string>
+    <string name="osmand_cloud_deleted_account_descr">تم حذف الحساب وجميع البيانات من OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deleting_account_descr">في غضون لحظات قليلة ، سيتم حذف جميع بياناتك وحسابك من OsmAnd Cloud.
+\n
+\nتظل جميع البيانات الموجودة على الجهاز كما هي.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">هل أنت متأكد من أنك تريد حذف حساب OsmAnd Cloud؟
+\n
+\nلا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="osmand_cloud_delete_account_confirmation">حذف الحساب؟</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">سيتم تسجيل خروج الأجهزة الثانوية من OsmAnd Cloud وستفقد الوصول إلى الميزات المدفوعة.</string>
 </resources>
