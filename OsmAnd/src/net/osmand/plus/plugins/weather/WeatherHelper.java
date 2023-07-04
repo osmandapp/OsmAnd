@@ -108,7 +108,7 @@ public class WeatherHelper {
 		if (weatherTileResourcesManager != null) {
 			return;
 		}
-		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
+		File weatherForecastDir = new File(app.getCacheDir(), WEATHER_FORECAST_DIR);
 		if (!weatherForecastDir.exists()) {
 			weatherForecastDir.mkdir();
 		}
