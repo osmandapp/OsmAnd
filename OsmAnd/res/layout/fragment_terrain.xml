@@ -110,6 +110,7 @@
 							android:text="@string/srtm_color_scheme"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
+							android:textStyle="normal"
 							osmand:typeface="@string/font_roboto_medium" />
 
 						<LinearLayout
@@ -165,7 +166,7 @@
 						android:layout_marginHorizontal="@dimen/content_padding"
 						android:layout_marginBottom="@dimen/content_padding_small"
 						android:adjustViewBounds="true"
-						osmand:srcCompat="@drawable/img_legend_route_slope" />
+						osmand:srcCompat="@drawable/img_legend_slope" />
 
 					<View
 						android:layout_width="match_parent"
@@ -253,6 +254,46 @@
 							tools:text="25%" />
 
 					</LinearLayout>
+
+				</LinearLayout>
+
+				<include layout="@layout/card_bottom_divider" />
+
+				<include layout="@layout/card_top_divider" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/setting_list_item_large_height"
+					android:background="?attr/bg_color"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_margin="@dimen/content_padding"
+						android:src="@drawable/ic_action_storage"
+						android:tint="?attr/default_icon_color" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:paddingHorizontal="@dimen/content_padding"
+						android:text="@string/cache_size"
+						android:textColor="?android:textColorPrimary"
+						android:textSize="@dimen/default_list_text_size"
+						osmand:typeface="@string/font_roboto_regular" />
+
+					<TextView
+						android:id="@+id/cache_size_value"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:gravity="end"
+						android:paddingHorizontal="@dimen/content_padding"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_list_text_size"
+						tools:text="25%" />
 
 				</LinearLayout>
 

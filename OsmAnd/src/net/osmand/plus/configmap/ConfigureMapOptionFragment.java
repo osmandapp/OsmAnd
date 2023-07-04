@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap;
 
+import static android.view.View.*;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
@@ -46,6 +47,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	private RulerWidget rulerWidget;
 	private View applyButton;
 	protected LinearLayout contentContainer;
+	protected LinearLayout bottomContainer;
 
 
 	@Override
@@ -81,6 +83,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
+		bottomContainer = view.findViewById(R.id.bottom_container);
 		contentContainer = view.findViewById(R.id.main_content);
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(viewOnCLick -> {
@@ -91,8 +94,11 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		setupToolBar(view);
 		buildZoomButtons(view);
 		moveCompassButton(view);
+		moveMap3DButton(view.findViewById(R.id.map_3d_button_default_position));
 		setupMainContent();
 		updateApplyButton(false);
+
+		requireMapActivity().getMapLayers().getMapControlsLayer().refreshButtons();
 
 		refreshMap();
 		return view;
@@ -174,13 +180,25 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	private void moveMap3DButton(@NonNull View view) {
+		int btnSizePx = getDimensionPixelSize(R.dimen.map_button_size);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
+
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			MapLayers mapLayers = activity.getMapLayers();
+			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
+			mapControlsLayer.moveMap3DButton((ViewGroup) view, params);
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.disableDrawer();
-		updateWidgetsVisibility(mapActivity, View.GONE);
+		updateWidgetsVisibility(mapActivity, GONE);
 	}
 
 	@Override
@@ -189,7 +207,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 		MapActivity mapActivity = requireMapActivity();
 		mapActivity.enableDrawer();
-		updateWidgetsVisibility(mapActivity, View.VISIBLE);
+		updateWidgetsVisibility(mapActivity, VISIBLE);
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
@@ -208,6 +226,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
 			layer.restoreCompassButton();
+			layer.restoreMap3DButton();
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();

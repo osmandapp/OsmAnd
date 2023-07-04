@@ -102,17 +102,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private void setupHeightmapRelatedPrefs() {
 		boolean heightmapAllowed = plugin.isHeightmapAllowed();
 
-		SwitchPreferenceEx disableVertexHillshadeSwitch = findPreference(plugin.DISABLE_VERTEX_HILLSHADE_3D.getId());
-		disableVertexHillshadeSwitch.setIconSpaceReserved(false);
-		disableVertexHillshadeSwitch.setEnabled(heightmapAllowed);
-
-		SwitchPreferenceEx generateSlopeFrom3DMapsSwitch = findPreference(plugin.GENERATE_SLOPE_FROM_3D_MAPS.getId());
-		generateSlopeFrom3DMapsSwitch.setIconSpaceReserved(false);
-		generateSlopeFrom3DMapsSwitch.setEnabled(heightmapAllowed);
-
-		SwitchPreferenceEx generateHillshadeFrom3DMapsSwitch = findPreference(plugin.GENERATE_HILLSHADE_FROM_3D_MAPS.getId());
-		generateHillshadeFrom3DMapsSwitch.setIconSpaceReserved(false);
-		generateHillshadeFrom3DMapsSwitch.setEnabled(heightmapAllowed);
+		SwitchPreferenceEx useRasterSQLiteDb = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
+		useRasterSQLiteDb.setIconSpaceReserved(false);
+		useRasterSQLiteDb.setEnabled(heightmapAllowed);
 	}
 
 	private void setupSimulateYourLocationPref() {

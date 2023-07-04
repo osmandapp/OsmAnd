@@ -32,6 +32,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -400,9 +401,9 @@ public class MapRendererContext {
 			return;
 		}
 
-		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
-		boolean disableVertexHillshade = developmentPlugin != null && developmentPlugin.disableVertexHillshade3D();
+		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		boolean disableVertexHillshade = srtmPlugin != null && srtmPlugin.isTerrainLayerEnabled() && srtmPlugin.isHillshadeMode();
 		if (disableVertexHillshade) {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);

@@ -47,10 +47,16 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldShowQuickActionButton() {
 		return isQuickActionLayerOn()
+				&& !isInConfigureMapOptionMode()
 				&& shouldShowFabButton();
 	}
 
-	public boolean shouldShowFabButton(){
+	public boolean shouldShowMap3DButton() {
+		return isInConfigureMapOptionMode()
+				|| shouldShowFabButton();
+	}
+
+	public boolean shouldShowFabButton() {
 		return !isInChangeMarkerPositionMode()
 				&& !isInGpxDetailsMode()
 				&& !isInMeasurementToolMode()
@@ -332,7 +338,7 @@ public class WidgetsVisibilityHelper {
 		return mapActivity.getGpsFilterFragment() != null;
 	}
 
-	private boolean isInConfigureMapOptionMode() {
+	public boolean isInConfigureMapOptionMode() {
 		return mapActivity.getConfigureMapOptionFragment() != null;
 	}
 

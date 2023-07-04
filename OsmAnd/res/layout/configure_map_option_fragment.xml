@@ -51,6 +51,12 @@
 
 		</LinearLayout>
 
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:background="@drawable/bg_contextmenu_shadow_top_light"
+			android:rotation="180" />
+
 	</LinearLayout>
 
 	<LinearLayout
@@ -87,6 +93,7 @@
 			android:background="@drawable/bg_contextmenu_shadow_top_light" />
 
 		<LinearLayout
+			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/list_background_color"
