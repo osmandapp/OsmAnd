@@ -33,6 +33,8 @@ import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 
 public class BackupAuthorizationFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 
+	public static final String OPEN_BACKUP_AUTH = "open_backup_auth";
+
 	public static final String TAG = BackupAuthorizationFragment.class.getSimpleName();
 
 	private View signUpButton;

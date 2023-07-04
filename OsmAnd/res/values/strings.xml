@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
+    <string name="free_favorites_backup">Free Favorites Backup</string>
+    <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
+    <string name="free_account">Free account</string>
     <string name="folder_export_empty_error">Nothing to export, folder is empty</string>
     <string name="osmand_cloud_deleted_account_descr">Account and all data was deleted from OsmAnd Cloud.</string>
     <string name="osmand_cloud_deleting_account_descr">In few moments all your data and account will be deleted from OsmAnd Cloud.\n\nAll data on the device remain untouched.</string>

@@ -3164,4 +3164,10 @@ public class OsmandSettings {
 		}
 	}
 
+	public final OsmandPreference<Boolean> FAVORITES_FREE_ACCOUNT_CARD_DISMISSED =
+			new BooleanPreference(this, "favorites_free_account_card_dismissed", false).makeGlobal();
+
+	public final OsmandPreference<Boolean> CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED =
+			new BooleanPreference(this, "configure_profile_free_account_card_dismissed", false).makeGlobal();
+
 }

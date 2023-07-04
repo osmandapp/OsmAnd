@@ -11,21 +11,22 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.backup.RemoteFile;
+import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -83,16 +84,22 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 		}
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
-		compoundButton.setChecked(selectedTypes == items.getTypes().size());
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		compoundButton.setChecked(proAvailable ? selectedTypes == items.getTypes().size() : false);
+		compoundButton.setEnabled(proAvailable);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
-
-		view.findViewById(R.id.switch_container).setOnClickListener(view1 -> {
-			compoundButton.performClick();
-			if (listener != null) {
-				listener.onCategorySelected(category, compoundButton.isChecked());
-			}
-			notifyDataSetChanged();
-		});
+		View switchContainer = view.findViewById(R.id.switch_container);
+		if (proAvailable) {
+			switchContainer.setOnClickListener(view1 -> {
+				compoundButton.performClick();
+				if (listener != null) {
+					listener.onCategorySelected(category, compoundButton.isChecked());
+				}
+				notifyDataSetChanged();
+			});
+		} else {
+			switchContainer.setOnClickListener(null);
+		}
 		setupSelectableBackground(view);
 		adjustIndicator(app, groupPosition, isExpanded, view, !nightMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), isExpanded);
@@ -125,6 +132,11 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		compoundButton.setChecked(selected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
+		ImageView proIcon = view.findViewById(R.id.pro_icon);
+		setupChildIcon(view, type.getIconRes(), selected && type.isAllowedInFreeVersion());
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+		proIcon.setVisibility(type.isAllowedInFreeVersion() || proAvailable ? View.GONE : View.VISIBLE);
 		view.setOnClickListener(view1 -> {
 			compoundButton.performClick();
 			if (listener != null) {
@@ -132,8 +144,9 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 			notifyDataSetChanged();
 		});
+		AndroidUiHelper.updateVisibility(proIcon, !type.isAllowedInFreeVersion());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.switch_container), type.isAllowedInFreeVersion());
 		setupSelectableBackground(view);
-		setupChildIcon(view, type.getIconRes(), selected);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_top_divider), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_bottom_divider), isLastChild);
