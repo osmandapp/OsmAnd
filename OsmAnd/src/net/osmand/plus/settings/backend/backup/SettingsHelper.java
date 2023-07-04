@@ -573,9 +573,9 @@ public abstract class SettingsHelper {
 				for (FavoriteGroup favoriteGroup : favoriteGroups) {
 					FavoritesSettingsItem favSettingsItem = null;
 					for (SettingsItem item : settingsItems) {
-						String fileName = item.getFileName();
-						if (item instanceof FavoritesSettingsItem
-								&& app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup).getName().equals(fileName)) {
+						String fileName = item.requireProcessedFileName();
+						String externalFileName = app.getFavoritesHelper().getFileHelper().getExternalFile(favoriteGroup).getName();
+						if (item instanceof FavoritesSettingsItem && externalFileName.equals(fileName)) {
 							favSettingsItem = (FavoritesSettingsItem) item;
 							break;
 						}

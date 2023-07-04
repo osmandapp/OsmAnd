@@ -37,6 +37,8 @@ public class FileUtils {
 	public static final Pattern ILLEGAL_FILE_NAME_CHARACTERS = Pattern.compile("[?:\"*|/<>]");
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
 
+	public static final String SUBFOLDER_PLACEHOLDER = "_%_";
+
 	public static void renameFile(@NonNull FragmentActivity activity, @NonNull File file,
 	                              @Nullable Fragment target, boolean usedOnMap) {
 		if (file.exists()) {
@@ -125,6 +127,13 @@ public class FileUtils {
 			return dest;
 		}
 		return null;
+	}
+
+	public static String replaceIllegalCharactersInFileName(@NonNull String fileName) {
+		if (fileName.contains("/")) {
+			return fileName.replaceAll("/", SUBFOLDER_PLACEHOLDER);
+		}
+		return fileName;
 	}
 
 	public static void updateMovedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {

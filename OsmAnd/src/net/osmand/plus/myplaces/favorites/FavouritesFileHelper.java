@@ -38,6 +38,7 @@ import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.FAVORITES_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.plus.utils.FileUtils.replaceIllegalCharactersInFileName;
 
 public class FavouritesFileHelper {
 
@@ -71,7 +72,7 @@ public class FavouritesFileHelper {
 	public File getExternalFile(FavoriteGroup group) {
 		File favDir = getExternalDir();
 		String fileName = (group.getName().isEmpty() ? FAV_FILE_PREFIX : FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + group.getName()) + GPX_FILE_EXT;
-		return new File(favDir, fileName);
+		return new File(favDir, replaceIllegalCharactersInFileName(fileName));
 	}
 
 	@NonNull
