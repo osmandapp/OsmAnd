@@ -30,7 +30,9 @@
     • Fixed per-app language selection \n\n
     • Added support for themed icons \n\n
     • OsmAnd Cloud: added option to delete account \n\n
-    • Accessibility: touch target size for  buttons changed to 48 dp; fixed issue with map UI visible for screen readers \n\n
+    • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers \n\n
+    • Japanese voice prompts reworked \n\n
+    • Elevation change and slope evaluation reworked \n\n
     </string>    
     <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
     <string name="free_favorites_backup">Free Favorites Backup</string>
