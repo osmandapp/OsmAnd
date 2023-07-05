@@ -2191,7 +2191,7 @@
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Fladt</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balanceret</string>
-    <string name="routing_attr_driving_style_safety_name">Foretrækk biveje</string>
+    <string name="routing_attr_driving_style_safety_name">Foretræk biveje</string>
     <string name="relief_smoothness_factor_descr">Foretrukket terræn: fladt eller kuperet.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Vælg terræntype</string>
     <string name="full_version_thanks">Tak for købet af den betalte version af OsmAnd.</string>
@@ -5316,4 +5316,8 @@
 \n
 \n</string>
     <string name="free_favorites_backup_description">Registrér dig hos OsmAnd Cloud for at få gratis sikkerhedskopiering af favoritter og indstillinger.</string>
+    <string name="get_osmand_cloud">Få OsmAnd Cloud</string>
+    <string name="free_account">Gratis konto</string>
+    <string name="free_favorites_backup">Gratis sikkerhedskopiering af favoritter</string>
+    <string name="folder_export_empty_error">Intet at eksportere, mappe er tom</string>
 </resources>
