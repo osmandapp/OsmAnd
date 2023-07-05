@@ -334,7 +334,7 @@
     <string name="shared_string_select_all">Összes kijelölése</string>
     <string name="shared_string_refresh">Frissítés</string>
     <string name="fast_route_mode">Leggyorsabb útvonal</string>
-    <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése vagy letiltása az üzemanyag-takarékos útvonal kedvéért.</string>
+    <string name="fast_route_mode_descr">Leggyorsabb útvonal tervezésének engedélyezése vagy letiltása az üzemanyag-takarékos útvonal kedvéért.</string>
     <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} térképcsempe letöltése ({2} Mb )</string>
     <string name="shared_string_download_map">Térkép letöltése</string>
     <string name="select_max_zoom_preload_area">Legnagyobb előtöltendő nagyítás</string>
@@ -729,7 +729,7 @@
     <string name="osmand_parking_position_description_add_time">Az autó leparkolva:</string>
     <string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető.</string>
     <string name="use_compass_navigation">Iránytű használata</string>
-    <string name="route_updated_loc_found">Várakozás a GPS-pozícióra útvonalszámításhoz</string>
+    <string name="route_updated_loc_found">Várakozás a GPS-pozícióra útvonaltervezéshez</string>
     <string name="continue_follow_previous_route_auto">Folytatódjék az előző, befejezetlen navigáció\? (%1$s másodperc)</string>
     <string name="show_cameras">Traffipaxok</string>
     <string name="show_traffic_warnings">Forgalmi figyelmeztetések</string>
@@ -848,7 +848,7 @@
     <string name="gps_not_available">Kérjük, engedélyezze a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
     <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online útvonalrögzítés) használatához engedélyed az „Utazás felvétele” bővítményt</string>
-    <string name="non_optimal_route_calculation">Esetlegesen nem optimális útvonal kiszámítása nagyobb távolságokra</string>
+    <string name="non_optimal_route_calculation">Esetlegesen nem optimális útvonal tervezése nagyobb távolságokra</string>
     <string name="rendering_attr_roadColors_description">Útszínséma kiválasztása:</string>
     <string name="rendering_attr_roadColors_name">Útszín sémája</string>
     <string name="close_changeset">Módosításkészlet lezárása</string>
@@ -1153,8 +1153,8 @@
     <string name="index_name_canada">Észak-Amerika – Kanada</string>
     <string name="index_name_italy">Európa – Olaszország</string>
     <string name="index_name_gb">Európa – Nagy-Britannia</string>
-    <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz offline kiszámítása</string>
-    <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és az utolsó útszakaszra</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz offline tervezése</string>
+    <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal tervezése az első és az utolsó útszakaszra</string>
     <string name="always_center_position_on_map">Pozíció elhelyezése mindig középre</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
@@ -1211,7 +1211,7 @@
     <string name="gpx_file_is_empty">A GPX fájl üres</string>
     <string name="shared_string_tracks">Nyomvonalaim</string>
     <string name="shared_string_my_favorites">Kedvencek</string>
-    <string name="shared_string_my_places">Saját helyek</string>
+    <string name="shared_string_my_places">Kedvencek</string>
     <string name="int_days">nap</string>
     <string name="osmo_connect_menu">Kapcsolódás</string>
     <string name="use_points_as_intermediates">Útvonal tervezése pontok között</string>
@@ -1519,7 +1519,7 @@
     <string name="routing_attr_avoid_borders_description">Elkerüli az országhatár átlépését</string>
     <string name="routing_attr_height_name">Magasság</string>
     <string name="routing_attr_height_description">Adja meg az útvonalakon a járművekre vonatkozó magasságkorlátozást.</string>
-    <string name="use_fast_recalculation">Intelligens útvonal újraszámítás</string>
+    <string name="use_fast_recalculation">Intelligens útvonal újratervezés</string>
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
@@ -1809,7 +1809,7 @@
     <string name="storage_directory_readonly_desc">Az alkalmazás átváltott belső memóriára, mert a kijelölt adattároló mappa írásvédett. Kérjük, jelöljön ki egy írható tárolómappát.</string>
     <string name="storage_directory_shared">Osztott memória</string>
     <string name="shared_string_topbar">Felső sáv</string>
-    <string name="recalculate_route">Útvonal újraszámítása</string>
+    <string name="recalculate_route">Útvonal újratervezése</string>
     <string name="donations">Adományok</string>
     <string name="number_of_recipients">Kedvezményezettek száma</string>
     <string name="osm_user_stat">Szerkesztések: %1$s, helyezés: %2$s, összes szerkesztés: %3$s</string>
@@ -2018,7 +2018,7 @@
     <string name="rendering_attr_contourColorScheme_description">Szintvonalak színsémája</string>
     <string name="route_roundabout_short">Hajtson ki a(z) %1$d kijáraton, és haladjon tovább ezen:</string>
     <string name="upload_poi">POI feltöltése</string>
-    <string name="route_calculation">Útvonalszámítás</string>
+    <string name="route_calculation">Útvonal tervezése</string>
     <string name="gpx_no_tracks_title">Még nincsenek nyomvonalfájljai</string>
     <string name="gpx_no_tracks_title_folder">A mappához ön is adhat nyomvonalfájlokat</string>
     <string name="gpx_add_track">Továbbiak hozzáadása…</string>
@@ -2325,7 +2325,7 @@
     <string name="add_location_as_first_point_descr">A tökéletes útvonal megtervezéséhez adja meg kiindulási pontként saját pozícióját.</string>
     <string name="my_location">Saját helyzetem</string>
     <string name="shared_string_finish">Befejezés</string>
-    <string name="plan_route">Útvonal tervezése</string>
+    <string name="plan_route">Egy útvonal tervezése</string>
     <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
@@ -2795,7 +2795,7 @@
     <string name="avoid_pt_types_descr">A navigáció során elkerülendő tömegközlekedési módok kijelölése:</string>
     <string name="avoid_pt_types">Közlekedési módok kihagyása…</string>
     <string name="shared_string_walk">Séta</string>
-    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashat.</string>
+    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonaltervezés módjáról a blogunkon olvashat.</string>
     <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
     <string name="add_intermediate">Köztes pont hozzáadása</string>
     <string name="transfers_size">%1$d átszállás</string>
@@ -2864,7 +2864,7 @@
     <string name="public_transport_no_route_title">Az OsmAnd sajnos nem talál a beállításoknak megfelelő útvonalat.</string>
     <string name="public_transport_try_ped">Próbálja meg a gyalogos navigációt.</string>
     <string name="public_transport_try_change_settings">Próbálja meg módosítani a beállításokat.</string>
-    <string name="public_transport_calc_pedestrian">Gyalogos útvonal kiszámítása</string>
+    <string name="public_transport_calc_pedestrian">Gyalogútvonal tervezése</string>
     <string name="public_transport_type">Közlekedési mód</string>
     <string name="send_log">Napló küldése</string>
     <string name="searching_gps">Műholdak keresése</string>
@@ -3049,7 +3049,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Útvonaltervezésnél a burkolatlan utak előnyben részesítése a burkoltakkal szemben.</string>
     <string name="osmand_settings_descr">Az egész alkalmazásra érvényes</string>
     <string name="osmand_settings">OsmAnd beállítások</string>
-    <string name="shared_string_calculate">Kiszámítás</string>
+    <string name="shared_string_calculate">Tervezés</string>
     <string name="layer_osm_edits">OSM-szerkesztések</string>
     <string name="quick_action_contour_lines_descr">Gomb, amely a térképen megjeleníti vagy elrejti a szintvonalakat.</string>
     <string name="quick_action_hillshade_descr">Gomb, amely a térképen megjeleníti vagy elrejti a domborzatárnyékolást.</string>
@@ -3103,7 +3103,7 @@
     <string name="personal_category_name">Személyes</string>
     <string name="shared_string_downloading_formatted">%s letöltése</string>
     <string name="new_route_calculated_dist_dbg">Útvonal hossza: %1$s, menetidő: %2$s
-\nSzámítás: %3$.1f másodperc, %4$d útszakasz, %5$d csempe</string>
+\nTervezés: %3$.1f másodperc, %4$d útszakasz, %5$d csempe</string>
     <string name="rendering_attr_piste_type_downhill_name">Lesikló</string>
     <string name="routeInfo_piste_type_name">Sípálya típusa</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Haladó</string>
@@ -3278,7 +3278,7 @@
 \n • További hibajavítások
 \n
 \n</string>
-    <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak. Ezután kérni fog egy célpontot vagy elindítja az útvonalszámítást.</string>
+    <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak. Ezután kérni fog egy célpontot vagy elindítja az útvonaltervezést.</string>
     <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
     <string name="reset_all_profile_settings_descr">Összes profilbeállítás visszaállítása az alapértelmezett állapotba.</string>
     <string name="reset_all_profile_settings">Összes profilbeállítást visszaállítja\?</string>
@@ -3302,7 +3302,7 @@
     <string name="multimedia_notes_view_descr">Az összes OSM-jegyzetét megtalálja a %1$s helyen.</string>
     <string name="video_notes">Videojegyzetek</string>
     <string name="photo_notes">Fényképes jegyzetek</string>
-    <string name="route_recalculation">Útvonal újraszámítása</string>
+    <string name="route_recalculation">Útvonal újratervezése</string>
     <string name="accessibility_announce">Bemondás</string>
     <string name="login_and_pass">Felhasználónév és jelszó</string>
     <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak</string>
@@ -3327,7 +3327,7 @@
     <string name="profile_type_custom_string">Egyéni profil</string>
     <string name="shared_string_angle_param">Szög: %s°</string>
     <string name="shared_string_angle">Szög</string>
-    <string name="recalc_angle_dialog_descr">Egy egyenes szakasz fog megjelenni a helyzetem és a tervezett útvonal között, amíg az útvonal újraszámításra kerül</string>
+    <string name="recalc_angle_dialog_descr">Egy egyenes szakasz fog megjelenni a helyzetem és a tervezett útvonal között, amíg az útvonal újratervezésre kerül</string>
     <string name="recalc_angle_dialog_title">Legkisebb szög a helyzetem és az útvonal között</string>
     <string name="shared_string_preparing">Előkészület</string>
     <string name="shared_string_poi_types">POI-típusok</string>
@@ -3351,13 +3351,13 @@
 \nHa engedélyezve van, az OsmAnd az időkorlátra vonatkozó rendszerbeállítást használja.</string>
     <string name="use_system_screen_timeout">Képernyő-időkorlát: rendszerbeállítás használata</string>
     <string name="copy_coordinates">Koordináták másolása</string>
-    <string name="route_recalculation_dist_descr">Az útvonal újraszámításra kerül, amennyiben az útvonaltól való távolság több, mint a megadott paraméter</string>
+    <string name="route_recalculation_dist_descr">Az útvonal újratervezésre kerül, amennyiben az útvonaltól való távolság több, mint a megadott paraméter</string>
     <string name="route_recalculation_dist_title">Legkisebb távolság, amely felett újraszámítja az útvonalat</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_menu">Menü</string>
     <string name="plugin_disabled">Bővítmény kikapcsolva</string>
     <string name="open_settings">Beállítások megnyitása</string>
-    <string name="no_recalculation_setting">Nincs újraszámítás</string>
+    <string name="no_recalculation_setting">Nincs újratervezés</string>
     <string name="please_provide_profile_name_message">Kérjük, adjon nevet a profilnak</string>
     <string name="select_data_to_import">Válassza ki az importálandó adatot.</string>
     <string name="keep_both">Mindkettő megtartása</string>
@@ -3374,9 +3374,9 @@
     <string name="shared_string_hillshade">Domborzatárnyékolás</string>
     <string name="shared_string_import_complete">Importálás kész</string>
     <string name="items_added">Tételek hozzáadva</string>
-    <string name="recalculate_route_in_deviation">Útvonal újraszámítása letérés esetén</string>
+    <string name="recalculate_route_in_deviation">Útvonal újratervezése letérés esetén</string>
     <string name="select_distance_route_will_recalc">Jelölje ki a távolságot, amelytől kezdve az útvonal újra lesz számítva.</string>
-    <string name="recalculate_route_distance_promo">Az útvonal újraszámításra kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
+    <string name="recalculate_route_distance_promo">Az útvonal újrastervezésre kerül, amennyiben az útvonal és a jelenlegi helyzet közötti távolság nagyobb, mint a kiválasztott érték.</string>
     <string name="n_items_of_z">%1$s a %2$s-ból</string>
     <string name="download_slope_maps">Lejtési viszonyok</string>
     <string name="quick_action_terrain_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzati réteget.</string>
@@ -3631,7 +3631,7 @@
     <string name="app_mode_wheelchair_forward">Előre döntött kerekesszék</string>
     <string name="set_working_days_to_continue">A folytatáshoz állítsa be a munkanapokat</string>
     <string name="route_between_points">Útvonal pontok között</string>
-    <string name="plan_a_route">Útvonaltervezés</string>
+    <string name="plan_a_route">Egy útvonal tervezése</string>
     <string name="add_to_a_track">Hozzáadás nyomvonalhoz</string>
     <string name="pass_whole_track_descr">A nyomvonal elérendő pontja</string>
     <string name="release_3_6">• Profilok: most már módosíthatja a sorrendet, beállíthat egy ikont a térképen, megváltoztathatja az alapprofilok összes beállítását, és visszaállíthatja azokat az alapértelmezett értékekre
@@ -3800,7 +3800,7 @@
     <string name="shared_string_graph">Grafikon</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s adatok csak utakról állnak rendelkezésre. Az ábrák megtekintéséhez az „Útvonal tervezése pontok között” funkcióval számítsa ki az útvonalat.</string>
     <string name="message_graph_will_be_available_after_recalculation">Kérjük, várjon.
-\nAz ábra azútvonal újraszámítása után lesz látható.</string>
+\nAz ábra az útvonal újratervezése után lesz látható.</string>
     <string name="shared_string_local_maps">Helyi térképek</string>
     <string name="icon_group_amenity">Hasznos és fontos létesítmény</string>
     <string name="icon_group_special">Különleges</string>
@@ -3871,7 +3871,7 @@
     <string name="plan_route_split_before">Elvágás ez előtt:</string>
     <string name="plan_route_split_after">Elvágás ez után:</string>
     <string name="plan_route_add_new_segment">Új szakasz hozzáadása</string>
-    <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a saját helyeket is
+    <string name="release_3_9">• Lehetőség az összes adat exportálására és importálására, beleértve a beállításokat, erőforrásokat és a kedvenceket is
 \n
 \n • Útvonaltervezés: grafikonok a nyomvonalszakaszokhoz útvonallal, valamint lehetőség több nyomvonalszakasz létrehozására és szerkesztésére
 \n
@@ -4095,7 +4095,7 @@
     <string name="duration_ago">Ennyi idővel ezelőtt: %1$s</string>
     <string name="last_backup">Legutóbbi biztonsági mentés</string>
     <string name="backup_and_restore">Biztonsági másolat és visszaállítás</string>
-    <string name="select_nav_profile_dialog_message">A „Navigáció típusával” jelölheti ki az útvonal kiszámításának módját a rendelkezésre álló offline és online útvonaltervezők közül.</string>
+    <string name="select_nav_profile_dialog_message">A „Navigáció típusával” jelölheti ki az útvonal tervezésének módját a rendelkezésre álló offline és online útvonaltervezők közül.</string>
     <string name="delete_all_confirmation">Igen, törlődjék minden</string>
     <string name="backup_delete_old_data">Régi változatok eltávolítása</string>
     <string name="backup_delete_old_data_warning">Törölni készül a korábban betöltött adatok változáselőzményeit.
@@ -4260,7 +4260,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Útvonalak színezése a csomóponthálózat típusa szerint (hely, regionális, nemzetközi).</string>
     <string name="travel_routes">Utazási útvonalak</string>
     <string name="setting_supported_by_style">Ez a beállítást a következő térképstílusnál érhető el: „%1$s”</string>
-    <string name="direct_line_maps_required_descr">Az útvonal kiszámítása a szokásosnál tovább tart.
+    <string name="direct_line_maps_required_descr">Az útvonal megtervezése a szokásosnál tovább tart.
 \n
 \nTalán néhány térkép nincs betöltve.</string>
     <string name="online_direct_line_maps_link">Ellenőrizze a szükséges térképeket.</string>
@@ -4428,7 +4428,7 @@
     <string name="app_profile_type">Alkalmazásprofil típusa</string>
     <string name="map_marker_options">Térképjelölő beállításai</string>
     <string name="add_to_group">Csoporthoz adás</string>
-    <string name="memory_allocated_for_routing_ds">A nagyobb memóriakiosztás felgyorsítja a hosszú (500 km-nél hosszabb) útvonalak kiszámítását, de hatással lehet más alkalmazások teljesítményére.
+    <string name="memory_allocated_for_routing_ds">A nagyobb memóriakiosztás felgyorsítja a hosszú (500 km-nél hosszabb) útvonalak megtervezését, de hatással lehet más alkalmazások teljesítményére.
 \nRövid útvonalak kiszámításának sebességére nincs hatással.</string>
     <string name="display_groups_visibility_dialog_description">Beállíthatja a csoport láthatóságát a térképen. Ha a nyomvonal rejtett, az összes csoport rejtve lesz.</string>
     <string name="not_enough_contributions_descr">Legalább %1$s változtatás szükséges az elmúlt két hónapos időszakban %2$s, hogy hozzáférést kapjon a korlátlan óránkénti térképfrissítéshez.</string>
@@ -5280,31 +5280,31 @@
 \n
 \n • Kontúrvonalak minden térképforráshoz
 \n
-\n • Expanded list of default actions for external keyboards
+\n • Kibővitett lista a külső billentyűzetek alapértelmezett műveleteihez
 \n
-\n • Custom routing files, added options to delete or overwrite
+\n • Egyéni útvonal fájlok, opció a törléshez és a felülíráshoz
 \n
-\n • Added option to \"Announce deviation from the route\"
+\n • „Útvonaltól való eltérés bemondása” opció
 \n
-\n • Start screen: added option restore OsmAnd state from file
+\n • Kezdőképernyő: OsmAnd állapot visszaállítása fájlból opció
 \n
-\n • Added \"Hazardous Materials\" classes Truck navigation in North America
+\n • \"Veszélyes anyagok\" osztályai hozzádva teherautó navigációhoz (Észak-Amerika)
 \n
-\n • Added support of \"Via ferrata\" for pedestrian routing
+\n • „Via ferrata” (felszerelt hegyi út) támogatása gyalogos útvonaltervezéshez
 \n
-\n • Added \"CAI\" scale for difficulty classification of the routes
+\n • \"CAI\" skála az útvonalak nehézségének osztályozásához
 \n
-\n • Fixed per-app language selection
+\n • Javítva az alkalmazásonkénti nyelvválasztás funkció
 \n
-\n • Added support for themed icons
+\n • Témaikonok támogatása
 \n
-\n • OsmAnd Cloud: added option to delete account
+\n • OsmAnd Cloud: fiók törlésének lehetősége
 \n
-\n • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers
+\n • Kisegítő lehetőségek: a gombok érzékelési területe 48 dp-re módosítva; javítva a képernyőolvasók számára látható térképkezelőfelülettel kapcsolatos probléma
 \n
-\n • Japanese voice prompts reworked
+\n • A japán hangutasítások átdolgozva
 \n
-\n • Elevation change and slope evaluation reworked
+\n • A magasságváltozás és a lejtés átdolgozva
 \n
 \n</string>
     <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy ingyenesen biztonsági másolatot készíthessen a kedvencekről és a beállításokról.</string>
