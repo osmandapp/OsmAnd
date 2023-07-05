@@ -939,7 +939,7 @@
     <string name="av_use_external_camera_descr">Utiliser l\'application système pour les photos.</string>
     <string name="av_use_external_camera">Option appareil photo</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
-    <string name="max_speed_none">Aucun(e)</string>
+    <string name="max_speed_none">Aucune</string>
     <string name="prefer_motorways">Privilégier les autoroutes</string>
     <string name="prefer_in_routing_title">Privilégier…</string>
     <string name="prefer_in_routing_descr">Privilégier les itinéraires sur Autoroutes.</string>
@@ -5258,4 +5258,52 @@
     <string name="verify_account_deletion_descr">Nous devons vérifier votre compte avant de le supprimer.
 \n
 \nVeuillez saisir l\'e-mail avec lequel vous vous êtes inscrit. Un mot de passe unique vous sera envoyé pour réaliser l\'étape suivante.</string>
+    <string name="free_favorites_backup_description">S\'inscrire au cloud OsmAnd pour obtenir une sauvegarde gratuite de vos favoris et de vos paramètres.</string>
+    <string name="free_favorites_backup">Sauvegarde gratuite des favoris</string>
+    <string name="get_osmand_cloud">Obtenir OsmAnd Cloud</string>
+    <string name="free_account">Compte gratuit</string>
+    <string name="folder_export_empty_error">Rien à exporter, le dossier est vide</string>
+    <string name="release_4_5">• Capteurs BLE/ANT+ : connexion retravaillée, écriture et lecture des données reçues au format GPX
+\n
+\n• Sauvegarde gratuite des favoris et des paramètres dans OsmAnd Cloud
+\n
+\n• Nouveau format pour les cartes de reliefs avec support du relief 3D
+\n
+\n• Gestion des traces : interface améliorée, possibilité de trier, support des sous-dossiers
+\n
+\n• Android Auto : nouveau menu pour accéder aux favoris, traces et catégories de PI
+\n
+\n• Liste de widgets pour les panneaux du haut et du bas
+\n
+\n• Nouveau profil \"Train\" permettant de calculer des itinéraires ferroviaires
+\n
+\n• Les courbes de niveau fonctionnent désormais avec toutes les \"sources de cartes\"
+\n
+\n• Liste des actions par défaut améliorée pour les claviers externes
+\n
+\n• Possibilité de supprimer ou d\'écraser des fichiers de navigation personnalisés
+\n
+\n• Ajout d\'une option pour \"Annoncer une déviation de l\'itinéraire\"
+\n
+\n• Menu de démarrage : possibilité de restaurer le statut de l\'application à partir d\'un fichier
+\n
+\n• Ajout des catégories de \"Matériaux dangereux\" pour la navigation de camions en Amérique du Nord
+\n
+\n• Ajout des \"Via ferrata\" pour la navigation à pied
+\n
+\n• Ajout de l\'échelle CAI pour la classification de difficulté des chemins
+\n
+\n• Correction du bug de sélection de la langue
+\n
+\n• Ajout du support des icônes thématiques
+\n
+\n• OsmAnd Cloud : possibilité de supprimer le compte
+\n
+\n• Accessibilité : taille des boutons augmentée à 48 dp, correction de bugs concernant les cartes et les lecteurs d\'écran
+\n
+\n• Navigation vocale japonaise retravaillée
+\n
+\n• Évaluation des altitudes et des pentes retravaillée
+\n
+\n</string>
 </resources>
