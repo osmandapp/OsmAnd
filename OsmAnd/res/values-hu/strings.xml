@@ -5230,8 +5230,6 @@
     <string name="rendering_attr_lightDetail_name">Fény részletei</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">ford/perc</string>
-    <string name="routing_attr_allow_via_ferrata_description">Tervezés mászóutakon keresztül is.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Mászóút engedélyezése</string>
     <string name="shared_string_close_the_dialog">Párbeszédpanel bezárása</string>
     <string name="relief_3d">3D domborzat</string>
     <string name="terrain_map">Terep térkép</string>

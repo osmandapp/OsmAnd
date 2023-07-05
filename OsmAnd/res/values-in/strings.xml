@@ -5240,10 +5240,8 @@
     <string name="error_calculate">Hasil kalkulasi kosong</string>
     <string name="calculate_offline">Kalkulasi secara luring</string>
     <string name="calculate_offline_altitude_descr">Kalkulasi ketinggian secara luring, berdasarkan data peta ketinggian. Perbedaan antara ketinggian yang direkam oleh perangkat mungkin digunakan sebagai koreksi ketinggian.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Izinkan melalui jalur ferrata.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Izinkan melalui ferrata</string>
     <string name="shared_string_close_the_dialog">Tutup dialog</string>
     <string name="relief_3d_description">Miliki dan amati model skala lingkungan Anda atau seluruh benua.</string>
     <string name="free_mode">Mode bebas</string>

@@ -5237,7 +5237,6 @@
     <string name="terrain_map">Mappa del terreno</string>
     <string name="relief_3d">Rilievo 3D</string>
     <string name="relief_3d_description">Possiedi e osserva il modello in scala del tuo quartiere o dell\'intero continente.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permetti una via ferrrata</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="terrain_category_description">Linee di contorno del terreno, mappa completa delle colline con sfumature scure e mappe dei pendii con colori per mostrare picchi e pianure.</string>

@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import static net.osmand.plus.base.dialog.data.DialogExtra.SELECTED_INDEX;
+import static net.osmand.plus.base.dialog.data.DialogExtra.SHOW_BOTTOM_BUTTONS;
 import static net.osmand.plus.base.dialog.data.DialogExtra.SUBTITLE;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
@@ -83,7 +84,8 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	@Override
 	protected boolean hideButtonsContainer() {
-		return true;
+		Boolean showBottomButtons = (Boolean) displayData.getExtra(SHOW_BOTTOM_BUTTONS);
+		return showBottomButtons == null || !showBottomButtons;
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
