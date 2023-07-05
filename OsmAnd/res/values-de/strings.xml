@@ -5238,10 +5238,8 @@
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
     <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Klettersteige zulassen.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">U/min</string>
-    <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
     <string name="free_mode">Freier Modus</string>

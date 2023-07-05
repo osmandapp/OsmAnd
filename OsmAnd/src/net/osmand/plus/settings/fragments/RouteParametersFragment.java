@@ -550,9 +550,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		switchPref.setChecked(enabled);
 	}
 
-	private void setupViaFerrataPreference(
-			@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen
-	) {
+	private void setupViaFerrataPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
 		viaFerrataParameter = parameter;
 		CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(
 				parameter.getId(), parameter.getDefaultBoolean()
@@ -560,7 +558,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		ApplicationMode appMode = getSelectedAppMode();
 		Preference uiPreference = new Preference(app);
 		uiPreference.setKey(ALLOW_VIA_FERRATA_PREFERENCE);
-		uiPreference.setTitle(R.string.allow_via_ferrata_title);
+		uiPreference.setTitle(R.string.routing_attr_allow_via_ferrata_name);
 		int iconId = R.drawable.ic_action_mountain_ladder;
 		boolean allowed = preference.getModeValue(appMode);
 		uiPreference.setIcon(allowed ? getActiveIcon(iconId) : getContentIcon(iconId));
@@ -569,9 +567,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		screen.addPreference(uiPreference);
 	}
 
-	private void setupHazmatCategoryPreference(
-			@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen
-	) {
+	private void setupHazmatCategoryPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
 		Preference uiPreference = new Preference(app);
 		uiPreference.setKey(HAZMAT_TRANSPORTING_ENABLED);
 		uiPreference.setTitle(R.string.transport_hazmat_title);
@@ -607,9 +603,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		uiPreference.setIcon(icon);
 	}
 
-	private void setupGoodsRestrictionsPreference(
-			@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen
-	) {
+	private void setupGoodsRestrictionsPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
 		Preference uiPreference = new Preference(app);
 		uiPreference.setKey(GOODS_RESTRICTIONS_PREFERENCE);
 		String title = getRoutingStringPropertyName(app, parameter.getId(), parameter.getName());
@@ -729,7 +723,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId) || PREFER_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
 			recalculateRoute();
 		}

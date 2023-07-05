@@ -61,8 +61,8 @@ public class ViaFerrataDialogController extends BaseDialogController
 		int profileColorAlpha = ColorUtilities.getColorWithAlpha(profileColor, 0.3f);
 
 		DisplayData displayData = new DisplayData();
-		displayData.putExtra(TITLE, getString(R.string.allow_via_ferrata_title));
-		displayData.putExtra(SUBTITLE, getString(R.string.allow_via_ferrata_desc));
+		displayData.putExtra(TITLE, getString(R.string.routing_attr_allow_via_ferrata_name));
+		displayData.putExtra(SUBTITLE, getString(R.string.routing_attr_allow_via_ferrata_description));
 		displayData.putExtra(BACKGROUND_COLOR, profileColorAlpha);
 		displayData.putExtra(SHOW_BOTTOM_BUTTONS, true);
 

@@ -13,8 +13,8 @@
 
     <string name="shared_string_avoid">Avoid</string>
     <string name="may_be_used_if_there_is_shortcut">May be used if there is a shortcut</string>
-    <string name="allow_via_ferrata_desc">A mountain route equipped with fixed cables, stemples, ladders, and bridges.</string>
-    <string name="allow_via_ferrata_title">Mountainside route (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_name">Mountainside route (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">A mountain route equipped with fixed cables, stemples, ladders, and bridges.</string>
     <string name="release_4_5">
     • BLE/ANT+ sensors: reworked connection, writing and viewing received data to GPX \n\n
     • Free backup for favorites and settings to \"OsmAnd Cloud\" \n\n
@@ -67,8 +67,6 @@
     <string name="relief_3d">3D Relief</string>
     <string name="relief_3d_description">Own and observe the scale model of your neighborhood or the whole continent.</string>
     <string name="shared_string_close_the_dialog">Close the dialog</string>
-    <string name="routing_attr_allow_via_ferrata_name">Allow via ferrata</string>
-    <string name="routing_attr_allow_via_ferrata_description">Allow via ferrata paths.</string>
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="calculate_offline">Calculate offline</string>
