@@ -5282,4 +5282,52 @@
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_account_warning">La cuenta junto con todos los datos de ésta tiene %1$s</string>
+    <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
+    <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
+    <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
+    <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX.
+\n
+\n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»
+\n
+\n• Nuevo formato para mapas topográficos con soporte para el relieve 3D
+\n
+\n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas
+\n
+\n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI
+\n
+\n• Se ha mejorado la lista de widgets para el panel superior/inferior
+\n
+\n• Nuevo perfil «Tren», permite calcular rutas ferroviarias
+\n
+\n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa»
+\n
+\n• Se ha ampliado la lista de acciones predefinidas para teclados externos
+\n
+\n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta
+\n
+\n• Se ha añadido la opción para «Anunciar desvío de la ruta»
+\n
+\n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo
+\n
+\n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica
+\n
+\n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales
+\n
+\n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas
+\n
+\n• Se ha corregido la elección del idioma por aplicación
+\n
+\n• Se ha añadido soporte para iconos temáticos
+\n
+\n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta
+\n
+\n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla.
+\n
+\n• Se han revisado las indicaciones de voz en japonés.
+\n
+\n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
+\n
+\n</string>
+    <string name="free_account">Cuenta gratuita</string>
+    <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
 </resources>
