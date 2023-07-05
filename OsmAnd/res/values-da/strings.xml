@@ -5274,4 +5274,47 @@
     <string name="verify_account_deletion_descr">Vi er nødt til at verificere din konto, før vi sletter den.
 \n
 \nIndtast venligst den e-mailadresse, du registrerede dig med. En engangskode til næste trin vil blive sendt til den.</string>
+    <string name="release_4_5">• BLE/ANT+ sensors: omarbejdet forbindelse, skrivning og visning af modtagne data til GPX
+\n
+\n • Gratis backup af favoritter og indstillinger til \"OsmAnd Cloud\"
+\n
+\n • Nyt format til terrænkort med understøttelse af 3D-relief 
+\n
+\n • Håndtering af spor: opdateret brugergrænseflade, tilføjet sortering, understøttelse af indlejrede mapper
+\n
+\n • Android Auto: ny startmenu til adgang til favoritter, spor og POI-kategorier 
+\n
+\n • En liste over moduler til top-/bundpanelet
+\n
+\n • Ny \"Tog\"-profil, der gør det muligt at beregne jernbaneruter
+\n
+\n • Konturlinjer fungerer med enhver \"kortkilde\" 
+\n
+\n • Udvidet liste over standardhandlinger for eksterne tastaturer
+\n
+\n • Brugerdefinerede ruteberegnings-filer, tilføjede muligheder for at slette eller overskrive 
+\n
+\n • Tilføjet mulighed for at \"Meddel afvigelse fra ruten\"
+\n
+\n • Startskærm: tilføjet mulighed for at gendanne OsmAnd-tilstand fra fil
+\n
+\n • Tilføjet \"Farlige marteriales\"-klasser for Lastbilnavigation i Nordamerika
+\n
+\n • Tilføjet understøttelse af \"Via ferrata\" til fodgængerruter
+\n
+\n • Tilføjet \"CAI\"-skala til klassificering af ruternes sværhedsgrad
+\n
+\n • Rettet sprogvalg pr. app
+\n
+\n • Tilføjet understøttelse af temaikoner
+\n
+\n • OsmAnd Cloud: tilføjet mulighed for at slette konto
+\n
+\n • Tilgængelighed: Touch-målstørrelse for knapper ændret til 48 dp; løst problem med kort-brugergrænseflade synlig for skærmlæsere
+\n
+\n • Japanske stemmemeddelelser omarbejdet 
+\n
+\n • Evaluering af højdeændringer og hældninger omarbejdet
+\n
+\n</string>
 </resources>
