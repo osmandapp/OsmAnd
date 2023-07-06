@@ -25,7 +25,9 @@ import net.osmand.plus.backup.ui.BackupTypesAdapter.OnItemSelectedListener;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.settings.backend.ExportSettingsCategory;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -142,10 +144,13 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		List<ExportSettingsType> types = categoryItems.getTypes();
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (ExportSettingsType type : types) {
-			List<Object> items = getItemsForType(type);
-			hasItemsToDelete |= !Algorithms.isEmpty(items);
-			selectedItemsMap.put(type, selected ? items : null);
+			if (type.isAllowedInFreeVersion() || proAvailable) {
+				List<Object> items = getItemsForType(type);
+				hasItemsToDelete |= !Algorithms.isEmpty(items);
+				selectedItemsMap.put(type, selected ? items : null);
+			}
 		}
 		if (!selected && hasItemsToDelete) {
 			showClearTypesBottomSheet(types);
@@ -154,11 +159,15 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		List<Object> items = getItemsForType(type);
-		selectedItemsMap.put(type, selected ? items : null);
-
-		if (!selected && !Algorithms.isEmpty(items)) {
-			showClearTypesBottomSheet(Collections.singletonList(type));
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		if (type.isAllowedInFreeVersion() && !proAvailable) {
+			List<Object> items = getItemsForType(type);
+			selectedItemsMap.put(type, selected ? items : null);
+			if (!selected && !Algorithms.isEmpty(items)) {
+				showClearTypesBottomSheet(Collections.singletonList(type));
+			}
+		} else {
+			OsmAndProPlanFragment.showInstance(requireActivity());
 		}
 	}
 

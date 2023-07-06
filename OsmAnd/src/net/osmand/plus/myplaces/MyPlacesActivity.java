@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
@@ -185,6 +186,13 @@ public class MyPlacesActivity extends TabActivity {
 		settings.setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
 		MapActivity.launchMapActivityMoveToTop(this, bundle);
+	}
+
+	public void showOsmAndCloud(@Nullable FragmentStateHolder fragment) {
+		Bundle bundle = fragment != null ? fragment.storeState() : null;
+		Bundle openScreenArguments = new Bundle();
+		openScreenArguments.putBoolean(BackupAuthorizationFragment.OPEN_BACKUP_AUTH, true);
+		MapActivity.launchMapActivityMoveToTop(this, bundle, null, openScreenArguments);
 	}
 
 	@Nullable

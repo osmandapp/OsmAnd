@@ -58,8 +58,8 @@
     <string name="change_color">Выбрать цвет</string>
     <string name="edit_name">Задать имя</string>
     <string name="route_is_too_long_v2">Для больших расстояний: добавьте промежуточные пункты, если маршрут не построен в течение 10 минут.</string>
-    <string name="routing_attr_allow_private_name">Въезд на частную территорию</string>
-    <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
+    <string name="routing_attr_allow_private_name">Частные зоны</string>
+    <string name="routing_attr_allow_private_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
@@ -2484,7 +2484,7 @@
 \nПолучайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот (через плагин), переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте OSM данные и многое другое.</string>
     <string name="osmand_extended_description_part2">GPS-навигация
 \n• Выбор между автономным (без платы за роуминг) и онлайн-режимом (быстрее)
-\n• Пошаговые голосовые указания (записанные или синтезированные) доведут до места назначения
+\n• Пошаговые голосовые инструкции (записанные или синтезированные) доведут до места назначения
 \n• Повторный расчёт маршрута после значительного отклонения от существующего
 \n• Навигация по полосам, названия улиц и расчётное время прибытия окажут неоценимую помощь в пути.
 \n• Чтобы сделать ваше путешествие более безопасным, дневной/ночной режим переключается автоматически
@@ -2826,7 +2826,7 @@
     <string name="avoid_roads_descr">Выберите конкретную дорогу или типы дорог, которых хотите избежать при навигации:</string>
     <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для ведения</string>
-    <string name="voice_announcements">Речевые указания</string>
+    <string name="voice_announcements">Речевая навигация</string>
     <string name="quick_action_switch_day_night_descr">Переключатель между дневным и ночным режимами для OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Дневной режим</string>
     <string name="quick_action_switch_night_mode">Ночной режим</string>
@@ -3138,7 +3138,7 @@
     <string name="vehicle_parameters">Параметры транспортного средства</string>
     <string name="voice_announces_info">Голосовые оповещения работают только при навигации.</string>
     <string name="voice_announces_descr">Навигационные инструкции и оповещения</string>
-    <string name="voice_announces">Речевые указания</string>
+    <string name="voice_announces">Речевая навигация</string>
     <string name="screen_alerts">Экранные оповещения</string>
     <string name="route_parameters_descr">Настройки маршрутизации</string>
     <string name="route_parameters">Параметры маршрута</string>
@@ -3156,7 +3156,7 @@
     <string name="change_osmand_data_folder_question">Изменить папку данных OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
     <string name="change_data_storage_folder">Изменение папки хранилища</string>
-    <string name="avoid_in_routing_descr_">Исключить определённые маршруты и типы дорог</string>
+    <string name="avoid_in_routing_descr_">Избегать определённых участков и типов дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
@@ -4558,7 +4558,7 @@
     <string name="rendering_attr_showTrolleybusRoutes_name">Троллейбусные маршруты</string>
     <string name="simulation_real_mode_desc">Максимальная разрешённая скорость на прямых участках.
 \nЗамедление на перекрёстках.
-\nДополнительные штрафы на светофорах, знаках остановки и пр.</string>
+\nТакже на скорость влияют светофоры, знаки остановки и пр.</string>
     <string name="simulation_constant_mode_title">Постоянная скорость</string>
     <string name="simulation_preview_mode_desc">Моделирование с максимальной скоростью на прямых участках и замедлением на перекрёстках.</string>
     <string name="speed_mode">Режим скорости</string>
@@ -4652,7 +4652,7 @@
     <string name="colour_of_circles">Окраска окружностей</string>
     <string name="routing_attr_avoid_highway_name">Без автомагистралей</string>
     <string name="routing_attr_avoid_highway_description">Избегать автомагистралей</string>
-    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ грузовых автомобилей на частную территорию.</string>
+    <string name="routing_attr_allow_private_for_truck_description">Разрешить доступ в частные зоны (например с проездом через шлагбаум или КПП).</string>
     <string name="map_widget_trip_recording_duration">Продолжительность</string>
     <string name="map_widget_trip_recording_uphill">Подъём</string>
     <string name="routing_attr_hazmat_category_name">Категория опасности</string>
@@ -4660,7 +4660,7 @@
     <string name="map_widget_trip_recording_distance">Расстояние</string>
     <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
     <string name="routing_attr_avoid_fords_name">Без бродов</string>
-    <string name="routing_attr_allow_private_for_truck_name">Въезд на частную территорию (грузовик)</string>
+    <string name="routing_attr_allow_private_for_truck_name">Частные зоны (грузовик)</string>
     <string name="rendering_attr_weatherPressureContours_name">Изобары</string>
     <string name="rendering_attr_weatherTempContours_name">Изотермы</string>
     <string name="routing_attr_avoid_fords_description">Избегать бродов</string>
@@ -5223,11 +5223,9 @@
     <string name="write_data_from_sensor_to_track">Сохранять данные с внешних датчиков в GPX-файл при записи маршрута.</string>
     <string name="external_sensors_not_found">Датчики не найдены</string>
     <string name="external_sensors_source_of_data">Источник данных</string>
-    <string name="routing_attr_allow_via_ferrata_description">Разрешить тропы виа феррата.</string>
     <string name="power_watts_unit">Ватты</string>
     <string name="revolutions_per_minute_unit">об/мин</string>
     <string name="calculate_offline">По карте высот</string>
-    <string name="routing_attr_allow_via_ferrata_name">Разрешить виа феррата</string>
     <string name="device_disconnected">Устройство [%1$s] отключено</string>
     <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
     <string name="running_scds_device_name">Работающее устройство</string>

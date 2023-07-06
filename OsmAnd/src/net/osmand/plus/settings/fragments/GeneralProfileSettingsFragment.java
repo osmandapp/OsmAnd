@@ -403,17 +403,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		return super.onPreferenceClick(preference);
 	}
 
-	private void showSingleSelectionDialog(@NonNull String processId,
-	                                       @NonNull IDialogController controller) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			DialogManager dialogManager = app.getDialogManager();
-			dialogManager.register(processId, controller);
-			FragmentManager fm = activity.getSupportFragmentManager();
-			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
-		}
-	}
-
 	private void updateDialogControllerCallbacks() {
 		IDialogController controller;
 		DialogManager dialogManager = app.getDialogManager();
