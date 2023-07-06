@@ -5258,4 +5258,52 @@
     <string name="delete_account">刪除帳號</string>
     <string name="backup_error_delete_account_email_match">電子郵件與登入使用者名稱並不相符</string>
     <string name="verify_account">驗證您的帳號</string>
+    <string name="free_favorites_backup_description">在 OsmAnd Cloud 中註冊即可免費備份最愛與設定。</string>
+    <string name="free_favorites_backup">免費最愛備份</string>
+    <string name="get_osmand_cloud">取得 OsmAnd Cloud</string>
+    <string name="free_account">免費帳號</string>
+    <string name="folder_export_empty_error">沒有可匯出的內容，資料夾為空</string>
+    <string name="release_4_5">• BLE/ANT+ 偵測器：重新設計了連線、寫入與檢視接收到的資料到 GPX 的流程
+\n
+\n • 免費備份最愛與設定到「OsmAnd Cloud」
+\n
+\n • 支援 3D 地形陰影的地形圖新格式
+\n
+\n • 軌跡管理：更新的使用者介面、新增排序、支援巢狀資料夾
+\n
+\n • Android Auto：用於存取最愛、軌跡與 POI 類別的新開始選單
+\n
+\n • 頂部/底部面板的一個小工具清單
+\n
+\n • 新的「鐵路」設定檔，用以計算鐵道路線
+\n
+\n • 等高線現在可以與任何「地圖來源」共同運作
+\n
+\n • 外部鍵盤預設動作的擴展清單
+\n
+\n • 自訂路線規劃檔案，新增選項以刪除或覆寫
+\n
+\n • 新增了「偏離路線時宣佈」選項
+\n
+\n • 開始畫面：新增選項以從檔案還原 OsmAnd 狀態
+\n
+\n • 在北美新增了「危險材料」類別卡車導航
+\n
+\n • 對步行路線規劃新增了「鐵索攀岩」路線規劃的支援
+\n
+\n • 新增用於路線難度分級的「CAI」等級
+\n
+\n • 修復了不同應用程式語言選擇的問題
+\n
+\n • 新增了主題化圖示的支援
+\n
+\n • OsmAnd Cloud：新增刪除帳號的選項
+\n
+\n • 無障礙功能：按鈕的觸控目標大小變更為 48 dp；修復了地圖使用者介面對螢幕閱讀程式可見的問題
+\n
+\n • 日語語音提示重新設計
+\n
+\n • 重新設計高度變化與坡度評估
+\n
+\n</string>
 </resources>
