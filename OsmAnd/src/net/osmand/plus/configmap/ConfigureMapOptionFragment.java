@@ -91,10 +91,14 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		setupToolBar(view);
 		buildZoomButtons(view);
 		moveCompassButton(view);
+		moveMap3DButton(view);
+
 		setupMainContent();
 		updateApplyButton(false);
 
 		refreshMap();
+		refreshControlsButtons();
+
 		return view;
 	}
 
@@ -139,7 +143,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupToolBar(@NonNull View view) {
-		ViewCompat.setElevation(view.findViewById(R.id.toolbar), 5.0f);
+		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
 		TextView title = view.findViewById(R.id.title);
 		title.setText(getToolbarTitle());
@@ -171,6 +175,18 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			MapLayers mapLayers = activity.getMapLayers();
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 			mapControlsLayer.moveCompassButton((ViewGroup) view, params);
+		}
+	}
+
+	private void moveMap3DButton(@NonNull View view) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			int size = getDimensionPixelSize(R.dimen.map_button_size);
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(size, size);
+
+			MapLayers mapLayers = activity.getMapLayers();
+			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
+			mapControlsLayer.moveMap3DButton(view.findViewById(R.id.hud_button_container), params);
 		}
 	}
 
@@ -208,6 +224,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 			layer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
 			layer.restoreCompassButton();
+			layer.restoreMap3DButton();
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
@@ -215,6 +232,11 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			}
 		}
 		refreshMap();
+		refreshControlsButtons();
+	}
+
+	private void refreshControlsButtons(){
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
 	}
 
 	@Nullable

@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqltiedb for slope / hillshade</string>
+    <string name="cache_size">Cache size</string>
     <string name="shared_string_avoid">Avoid</string>
     <string name="may_be_used_if_there_is_shortcut">May be used if there is a shortcut</string>
     <string name="routing_attr_allow_via_ferrata_name">Mountainside route (Via ferrata)</string>
