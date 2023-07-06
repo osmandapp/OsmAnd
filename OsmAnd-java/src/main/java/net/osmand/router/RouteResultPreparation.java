@@ -1460,7 +1460,6 @@ public class RouteResultPreparation {
 			} else {
 				//use keepRight and keepLeft turns when attached road doesn't have lanes
 				//or prev segment has more then 1 turn to the active lane
-				int[] naturalRawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
 				if (rs.keepRight) {
 					t = getTurnByCurrentTurns(rs.leftLanesInfo, rawLanes, TurnType.KR, leftSide);
 				} else if (rs.keepLeft ) {
@@ -1500,7 +1499,6 @@ public class RouteResultPreparation {
 		for (int ln : rawLanes) {
 			TurnType.collectTurnTypes(ln, currentTurns);
 		}
-		// Here we detect single case when turn lane continues on 1 road / single sign and all other lane turns continue on the other side roads
 		LinkedList<Integer> analyzedList = new LinkedList<>(currentTurns);
 		if (analyzedList.size() > 1) {
 			if (keepTurnType == TurnType.KL) {
@@ -1510,10 +1508,20 @@ public class RouteResultPreparation {
 				// no need analyze turns in right side (current direction)
 				analyzedList.remove(analyzedList.size() - 1);
 			}
+			// Here we detect single case when turn lane continues on 1 road / single sign and all other lane turns continue on the other side roads
 			if (analyzedList.containsAll(otherSideTurns)) {
 				currentTurns.removeAll(otherSideTurns);
 				if (currentTurns.size() == 1) {
 					return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+				}
+			} else {
+				// Avoid "keep" instruction if active side contains only "through" moving
+				analyzedList = new LinkedList<>(currentTurns);
+				if ((keepTurnType == TurnType.KL && analyzedList.get(0) == TurnType.C)) {
+					return TurnType.valueOf(TurnType.C, leftSide);
+				}
+				if (keepTurnType == TurnType.KR && analyzedList.get(analyzedList.size() - 1) == TurnType.C) {
+					return TurnType.valueOf(TurnType.C, leftSide);
 				}
 			}
 		}
