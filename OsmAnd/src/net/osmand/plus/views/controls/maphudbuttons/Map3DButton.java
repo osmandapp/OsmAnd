@@ -26,18 +26,16 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class Map3DButton extends MapButton {
+
 	private final ElevationListener elevationListener;
 	private final AnimateDraggingMapThread animateDraggingMapThread;
 	private boolean specialPosition;
-	private final ViewGroup defaultParentContainer;
-
 
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
 		super(mapActivity, fabButton, id);
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 		animateDraggingMapThread = mapView.getAnimatedDraggingThread();
-		defaultParentContainer = (ViewGroup) fabButton.getParent();
 
 		updateButton(!isDefaultElevationAngle());
 		setRoundTransparentBackground();
@@ -124,12 +122,13 @@ public class Map3DButton extends MapButton {
 		if (parent != null) {
 			specialPosition = false;
 			parent.removeView(view);
-			if (defaultParentContainer != null) {
+			ViewGroup defaultContainer = mapActivity.findViewById(R.id.map_3d_button);
+			if (defaultContainer != null) {
 				int btnSizePx = app.getResources().getDimensionPixelSize(R.dimen.map_button_size);
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
 				params.gravity = Gravity.BOTTOM | Gravity.END;
 				view.setLayoutParams(params);
-				defaultParentContainer.addView(view);
+				defaultContainer.addView(view);
 				setMap3DButtonMargin(view);
 			}
 		}

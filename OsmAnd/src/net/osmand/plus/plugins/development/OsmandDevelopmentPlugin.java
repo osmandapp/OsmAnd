@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -38,7 +37,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -68,9 +66,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
-			SRTMPlugin srtmPlugin = getSrtmPlugin();
-			if (srtmPlugin != null && srtmPlugin.isTerrainLayerEnabled() && (srtmPlugin.isHillshadeMode() || srtmPlugin.isSlopeMode())) {
-				srtmPlugin.updateLayers(app, null);
+			SRTMPlugin plugin = getSrtmPlugin();
+			if (plugin != null && plugin.isTerrainLayerEnabled() && (plugin.isHillshadeMode() || plugin.isSlopeMode())) {
+				plugin.updateLayers(app, null);
 			}
 		};
 		USE_RASTER_SQLITEDB.addListener(useRasterSQLiteDbListener);
@@ -207,7 +205,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	public boolean generateTerrainFrom3DMaps() {
-		return app.useOpenGlRenderer() && isHeightmapAllowed() && !USE_RASTER_SQLITEDB.get();
+		return isHeightmapAllowed() && !USE_RASTER_SQLITEDB.get();
 	}
 
 	public boolean isHeightmapAllowed() {

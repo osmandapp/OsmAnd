@@ -45,6 +45,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -59,6 +60,7 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -206,12 +208,18 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		View zoomLevelsBtn = root.findViewById(R.id.zoom_levels_button);
 
 		visibilityBtn.setOnClickListener(view -> {
-			getMapActivity().getDashboard().hideDashboard();
-			TerrainVisibilityFragment.showInstance(requireActivity().getSupportFragmentManager());
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getDashboard().hideDashboard();
+				TerrainVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
+			}
 		});
 		zoomLevelsBtn.setOnClickListener(view -> {
-			getMapActivity().getDashboard().hideDashboard();
-			TerrainZoomLevelsFragment.showInstance(requireActivity().getSupportFragmentManager());
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getDashboard().hideDashboard();
+				TerrainZoomLevelsFragment.showInstance(mapActivity.getSupportFragmentManager());
+			}
 		});
 	}
 
@@ -219,12 +227,14 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		cacheSizeValueTv.setText(getFormattedCacheSize());
 	}
 
+	@NonNull
 	private String getFormattedCacheSize() {
-		File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
 		long totalSize = 0;
-		File[] geotiffCacheDir = sqliteCacheDir.listFiles();
-		if (geotiffCacheDir != null) {
-			for (File file : geotiffCacheDir) {
+		File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
+
+		File[] files = sqliteCacheDir.listFiles();
+		if (!Algorithms.isEmpty(files)) {
+			for (File file : files) {
 				if (file.isFile()) {
 					totalSize += file.length();
 				}
@@ -374,11 +384,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					.setLoading(true));
 		} else {
 			try {
+				DownloadActivityType type = getDownloadActivityType();
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
 				int currentDownloadingProgress = (int) downloadThread.getCurrentDownloadProgress();
-				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(
-						app, mapActivity.getMapLocation(),
-						getDownloadActivityType(), false, -1, true);
+				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(app,
+						mapActivity.getMapLocation(), type, false, -1, true);
 				if (terrainItems.size() > 0) {
 					downloadContainer.setVisibility(View.VISIBLE);
 					downloadTopDivider.setVisibility(View.VISIBLE);
@@ -387,8 +397,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 						ContextMenuItem _item = new ContextMenuItem(null)
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-								.setDescription(getDownloadActivityType().getString(app) + " • " + indexItem.getSizeDescription(app))
-								.setIcon(getDownloadActivityType().getIconResource())
+								.setDescription(type.getString(app) + " • " + indexItem.getSizeDescription(app))
+								.setIcon(type.getIconResource())
 								.setListener((uiAdapter, view, item, isChecked) -> {
 									MapActivity mapActivity1 = mapActivityRef.get();
 									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
@@ -440,7 +450,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					downloadBottomDivider.setVisibility(View.GONE);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 
@@ -460,8 +470,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		});
 	}
 
+	@NonNull
 	private DownloadActivityType getDownloadActivityType() {
-		if (app.useOpenGlRenderer()) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null && plugin.generateTerrainFrom3DMaps()) {
 			return GEOTIFF_FILE;
 		} else {
 			return srtmPlugin.getTerrainMode() == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE;

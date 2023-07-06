@@ -1,6 +1,13 @@
 package net.osmand.core.android;
 
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
+import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
+
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.ElevationConfiguration;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
@@ -52,13 +59,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
 
 /**
  * Context container and utility class for MapRendererView and derivatives.
@@ -400,15 +400,13 @@ public class MapRendererContext {
 		if (mapRendererView == null) {
 			return;
 		}
-
 		ElevationConfiguration elevationConfiguration = new ElevationConfiguration();
-		SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
-		boolean disableVertexHillshade = srtmPlugin != null && srtmPlugin.isTerrainLayerEnabled() && srtmPlugin.isHillshadeMode();
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		boolean disableVertexHillshade = plugin != null && plugin.isTerrainLayerEnabled() && plugin.isHillshadeMode();
 		if (disableVertexHillshade) {
 			elevationConfiguration.setSlopeAlgorithm(SlopeAlgorithm.None);
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
-
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
 	}
 

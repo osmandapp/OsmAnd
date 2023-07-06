@@ -12,7 +12,7 @@
 		android:orientation="vertical">
 
 		<FrameLayout
-			android:id="@+id/map_3d_button_default_position"
+			android:id="@+id/hud_button_container"
 			android:layout_width="@dimen/map_button_size"
 			android:layout_height="@dimen/map_button_size" />
 

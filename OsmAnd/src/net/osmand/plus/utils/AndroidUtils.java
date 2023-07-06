@@ -361,6 +361,7 @@ public class AndroidUtils {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
 
+	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
 		if (sizeBytes > 0) {
 			int sizeKb = (int) ((sizeBytes + 512) >> 10);
