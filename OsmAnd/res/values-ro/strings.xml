@@ -4743,7 +4743,7 @@
     <string name="auto_25_chars_route_tr_kr">Virați la dreapta și păstrați dreapta</string>
     <string name="av_notes_video_widget_desc">Atingerea widgetului vă permite să înregistrați un videoclip.</string>
     <string name="trip_recording_distance_widget_desc">Afișează distanța de călătorie înregistrată în prezent.</string>
-    <string name="true_bearing_wdiget_desc">Unghiul dintre nordul adevărat și punctul țintă observat de la locația dumneavoastră.</string>
+    <string name="true_bearing_wdiget_desc">Unghiul dintre nordul adevărat și punctul țintă observat din locația dumneavoastră.</string>
     <string name="second_marker_widget_desc">Puteți configura widget-ul pentru a afișa distanța sau ora estimată de sosire până la cel de-al doilea marker de pe hartă.</string>
     <string name="auto_backup_preference_desc">În mod implicit, Android salvează copii de rezervă ale favoritelor, ale token-urilor de hartă și ale setărilor OsmAnd pentru a le restaura pe dispozitive noi sau după reinstalare. Această copie de rezervă este limitată la 25 MB.
 \nAtunci când utilizați OsmAnd Cloud, acest lucru poate duce la neînțelegeri după reinstalare.</string>
@@ -5270,4 +5270,52 @@
     <string name="verify_account_deletion_descr">Trebuie să vă verificăm contul înainte de a-l șterge.
 \n
 \nVă rugăm să introduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
+    <string name="free_favorites_backup_description">Înregistrează-te în OsmAnd Cloud pentru a obține gratuit o copie de rezervă pentru favorite și setări.</string>
+    <string name="get_osmand_cloud">Obțineți OsmAnd Cloud</string>
+    <string name="free_account">Cont gratuit</string>
+    <string name="folder_export_empty_error">Nimic de exportat, dosarul este gol</string>
+    <string name="free_favorites_backup">Backup gratuit pentru favorite</string>
+    <string name="release_4_5">• Senzori BLE/ANT+: conexiune refăcută, scrierea și vizualizarea datelor primite în GPX
+\n
+\n • Copie de rezervă gratuită pentru favorite și setări în \"OsmAnd Cloud\"
+\n
+\n • Format nou pentru hărțile de teren cu suport pentru relief 3D
+\n
+\n • Tracks management: updated UI, added sorting, support of nested folders
+\n
+\n • Android Auto: new start menu for access favorites, tracks and POI categories
+\n
+\n • One list of widgets for the Top/Bottom panel
+\n
+\n • New \"Train\" profile, allows to calculate railways routes
+\n
+\n • Contour lines works with any \"Map source\"
+\n
+\n • Expanded list of default actions for external keyboards
+\n
+\n • Custom routing files, added options to delete or overwrite
+\n
+\n • Added option to \"Announce deviation from the route\"
+\n
+\n • Start screen: added option restore OsmAnd state from file
+\n
+\n • Added \"Hazardous Materials\" classes Truck navigation in North America
+\n
+\n • Added support of \"Via ferrata\" for pedestrian routing
+\n
+\n • Added \"CAI\" scale for difficulty classification of the routes
+\n
+\n • Fixed per-app language selection
+\n
+\n • Added support for themed icons
+\n
+\n • OsmAnd Cloud: added option to delete account
+\n
+\n • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers
+\n
+\n • Japanese voice prompts reworked
+\n
+\n • Elevation change and slope evaluation reworked
+\n
+\n</string>
 </resources>
