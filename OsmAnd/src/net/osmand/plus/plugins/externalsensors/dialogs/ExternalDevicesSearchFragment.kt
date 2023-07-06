@@ -164,7 +164,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
         super.onResume()
         if (currentState == SearchStates.NO_BLUETOOTH && AndroidUtils.isBluetoothEnabled(
                 requireActivity())) {
-            currentState = SearchStates.SEARCHING
+            setCurrentState(SearchStates.SEARCHING)
         }
         if (currentState == SearchStates.SEARCHING) {
             startSearch()

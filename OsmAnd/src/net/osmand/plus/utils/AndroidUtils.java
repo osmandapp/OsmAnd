@@ -1237,14 +1237,14 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean hasPermission(Context context, String permission) {
+	public static boolean hasPermission(@NonNull Context context, String permission) {
 		return ActivityCompat.checkSelfPermission(
 				context,
 				permission
 		) == PackageManager.PERMISSION_GRANTED;
 	}
 
-	public static boolean hasBLEPermission(Context context) {
+	public static boolean hasBLEPermission(@NonNull Context context) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 			return hasPermission(context, BLUETOOTH_SCAN) &&
 					hasPermission(context, BLUETOOTH_CONNECT);

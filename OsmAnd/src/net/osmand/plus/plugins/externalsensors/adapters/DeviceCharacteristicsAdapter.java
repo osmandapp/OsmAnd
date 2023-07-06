@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.plugins.externalsensors.viewholders.DeviceCharacteristicsViewHolder;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
@@ -42,6 +43,7 @@ public class DeviceCharacteristicsAdapter extends RecyclerView.Adapter<DeviceCha
 	public void onBindViewHolder(@NonNull DeviceCharacteristicsViewHolder holder, int position) {
 		SensorDataField field = items.get(position);
 		holder.name.setText(app.getString(field.getNameId()));
+		AndroidUiHelper.updateVisibility(holder.divider, position != items.size() - 1);
 		FormattedValue formattedValue = field.getFormattedValue(app);
 		if (formattedValue != null) {
 			if (!Algorithms.isEmpty(formattedValue.unit)) {
