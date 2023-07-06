@@ -5226,7 +5226,7 @@
     <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Tidak ada sensor dengan jenis ini yang terhubung</string>
     <string name="external_sensors_not_found">Sensor tidak ditemukan</string>
-    <string name="delete_track_folder_dialog_message">Ini akan menghapus folder</string>
+    <string name="delete_track_folder_dialog_message">Ini akan menghapus folder \"%1$s\" dan termasuk semua trek (%2$s).</string>
     <string name="tracks_empty_folder_description">Folder ini belum memiliki trek apa pun.</string>
     <string name="delete_folder">Hapus folder</string>
     <string name="rssi_widget_desc">Menampilkan tingkat RSSI dari perangkat eksternal Anda.</string>
@@ -5272,4 +5272,52 @@
 \n
 \nSilakan masukkan alamat surel yang Anda gunakan untuk mendaftar. Sebuah kata sandi sekali pakai untuk langkah berikutnya akan dikirim.</string>
     <string name="verify_account">Verifikasi akun Anda</string>
+    <string name="free_favorites_backup">Pencadangan Favorit Gratis</string>
+    <string name="release_4_5">• Sensor BLEANT: koneksi ulang, menulis dan melihat data yang diterima ke GPX
+\n
+\n • Pencadangan gratis untuk favorit dan pengaturan ke \"OsmAnd Cloud\"
+\n
+\n • Format baru untuk peta Terrain dengan dukungan 3D Relief
+\n
+\n • Manajemen trek: UI yang diperbarui, penyortiran tambahan, dukungan folder bersarang
+\n
+\n • Android Auto: menu mulai baru untuk mengakses favorit, trek, dan kategori POI
+\n
+\n • Satu daftar widget untuk panel TopBottom
+\n
+\n • Profil \"Kereta\" baru, memungkinkan untuk menghitung rute kereta api
+\n
+\n • Garis kontur berfungsi dengan \"Sumber peta\" apa saja
+\n
+\n • Daftar tindakan default yang diperluas untuk keyboard eksternal
+\n
+\n • File perutean khusus, menambahkan opsi untuk menghapus atau menimpa
+\n
+\n • Menambahkan opsi untuk \"Umumkan penyimpangan dari rute\"
+\n
+\n • Layar Mulai: opsi tambahan memulihkan status OsmAnd dari file
+\n
+\n • Menambahkan kelas \"Bahan Berbahaya\" Navigasi truk di Amerika Utara
+\n
+\n • Menambahkan dukungan \"Via ferrata\" untuk rute pejalan kaki
+\n
+\n • Menambahkan skala \"CAI\" untuk klasifikasi kesulitan rute
+\n
+\n • Memperbaiki pemilihan bahasa per aplikasi
+\n
+\n • Menambahkan dukungan untuk ikon bertema
+\n
+\n • OsmAnd Cloud: menambahkan opsi untuk menghapus akun
+\n
+\n • Aksesibilitas: ukuran target sentuh untuk tombol diubah menjadi 48 dp; memperbaiki masalah UI peta yang terlihat untuk pembaca layar
+\n
+\n • Permintaan suara bahasa Jepang dikerjakan ulang
+\n
+\n • Perubahan elevasi dan evaluasi lereng dikerjakan ulang
+\n
+\n</string>
+    <string name="free_favorites_backup_description">Daftar di OsmAnd Cloud untuk mendapatkan cadangan gratis untuk favorit dan pengaturan.</string>
+    <string name="free_account">Akun gratis</string>
+    <string name="get_osmand_cloud">Dapatkan OsmAnd Cloud</string>
+    <string name="folder_export_empty_error">Tidak ada untuk diekspor, folder kosong</string>
 </resources>
