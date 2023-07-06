@@ -266,7 +266,7 @@
     <string name="poi_power_generator">Générateur d\'énergie</string>
     <string name="poi_power_substation">Poste électrique</string>
     <string name="poi_prison">Prison</string>
-    <string name="poi_pub">Bar</string>
+    <string name="poi_pub">Pub</string>
     <string name="poi_public_transport_platform">Transport en commun (attente des voyageurs)</string>
     <string name="poi_public_transport_station">Transport en commun (gare)</string>
     <string name="poi_quarry">Carrière</string>
@@ -2853,7 +2853,7 @@
     <string name="poi_vhf">Canal VHF</string>
     <string name="poi_mountain_area">Zone montagneuse</string>
     <string name="poi_operational_status_broken">Cassé</string>
-    <string name="poi_operational_status_needs_maintenance">A réparer</string>
+    <string name="poi_operational_status_needs_maintenance">À réparer</string>
     <string name="poi_water_purification_none">Aucune</string>
     <string name="poi_water_purification_reverse_osmosis">Osmose inverse</string>
     <string name="poi_water_supply_pump">Pompe</string>
@@ -3952,7 +3952,7 @@
     <string name="poi_glacier_edge_calving_line">Partie frontale du glacier : eau</string>
     <string name="poi_glacier_status_retreat">Statut du front du glacier : en retrait</string>
     <string name="poi_glacier_status_marked_retreat">Statut du front du glacier : en retrait marqué</string>
-    <string name="poi_glacier_status_oscillating">Statu du front du glacier : flucuant</string>
+    <string name="poi_glacier_status_oscillating">Statut du front du glacier : fluctuant</string>
     <string name="poi_glacier_edge_grounding_line">Partie frontale du glacier : moraine</string>
     <string name="poi_glacier_debris_cover_scarce">Débris en surface : faible couverture</string>
     <string name="poi_glacier_debris_cover_partial">Débris en surface : couverture partielle</string>
