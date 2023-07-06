@@ -279,36 +279,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			loadNativeLibrary();
 			return true;
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.restart();
-			}
+			restartActivity();
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);
-	}
-
-	@Override
-	public void onResetToDefaultConfirmed() {
-		CommonPreference<Boolean> safeMode = (CommonPreference<Boolean>) settings.SAFE_MODE;
-		boolean shouldLoadNativeLibrary = safeMode.get() != safeMode.getDefaultValue();
-
-		CommonPreference<Boolean> transparentStatusBar = (CommonPreference<Boolean>) settings.TRANSPARENT_STATUS_BAR;
-		boolean shouldRestartActivity = transparentStatusBar.get() != transparentStatusBar.getDefaultValue();
-
-		settings.resetPreferences(plugin.getPreferences());
-		app.showToastMessage(R.string.plugin_prefs_reset_successful);
-
-		if (shouldLoadNativeLibrary) {
-			loadNativeLibrary();
-		}
-		if (shouldRestartActivity) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.restart();
-			}
-		}
-		updateAllSettings();
 	}
 
 	@Override
@@ -323,7 +297,33 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		app.getLocationProvider().getLocationSimulation().removeSimulationListener(simulationListener);
 	}
 
-	public void loadNativeLibrary() {
+	@Override
+	public void onResetToDefaultConfirmed() {
+		CommonPreference<Boolean> safeMode = (CommonPreference<Boolean>) settings.SAFE_MODE;
+		CommonPreference<Boolean> transparentStatusBar = (CommonPreference<Boolean>) settings.TRANSPARENT_STATUS_BAR;
+
+		boolean shouldLoadNativeLibrary = safeMode.get() != safeMode.getDefaultValue();
+		boolean shouldRestartActivity = transparentStatusBar.get() != transparentStatusBar.getDefaultValue();
+
+		settings.resetGlobalPreferences(plugin.getPreferences());
+		app.showToastMessage(R.string.plugin_prefs_reset_successful);
+
+		if (shouldLoadNativeLibrary) {
+			loadNativeLibrary();
+		}
+		if (shouldRestartActivity) {
+			restartActivity();
+		}
+		updateAllSettings();
+	}
+
+	private void restartActivity() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.restart();
+		}
+	}
+	private void loadNativeLibrary() {
 		FragmentActivity activity = getActivity();
 		if (!NativeOsmandLibrary.isLoaded() && activity != null) {
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();

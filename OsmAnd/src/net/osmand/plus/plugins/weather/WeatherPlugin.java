@@ -110,11 +110,9 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherHelper = app.getWeatherHelper();
 		weatherSettings = weatherHelper.getWeatherSettings();
 
-		pluginPreferences.add(weatherSettings.weatherWindUnit);
-		pluginPreferences.add(weatherSettings.weatherCloudUnit);
-		pluginPreferences.add(weatherSettings.weatherTempUnit);
-		pluginPreferences.add(weatherSettings.weatherPressureUnit);
-		pluginPreferences.add(weatherSettings.weatherPrecipUnit);
+		for (WeatherBand weatherBand : weatherHelper.getWeatherBands()) {
+			pluginPreferences.add(weatherBand.getBandUnitPref());
+		}
 
 		ApplicationMode[] noAppMode = {};
 		WidgetsAvailabilityHelper.regWidgetVisibility(WEATHER_TEMPERATURE_WIDGET, noAppMode);

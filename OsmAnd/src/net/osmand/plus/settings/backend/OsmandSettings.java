@@ -404,7 +404,7 @@ public class OsmandSettings {
 		}
 	}
 
-	public void resetPreferences(List<OsmandPreference> preferences) {
+	public void resetGlobalPreferences(List<OsmandPreference> preferences) {
 		for (OsmandPreference preference : preferences) {
 			if (preference instanceof CommonPreference) {
 				preference.resetToDefault();

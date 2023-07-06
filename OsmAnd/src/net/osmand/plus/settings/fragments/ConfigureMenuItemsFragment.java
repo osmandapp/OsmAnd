@@ -475,9 +475,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	}
 
 	private void showSelectCopyAppModeDialog() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			SelectCopyAppModeBottomSheet.showInstance(fm, this, appMode);
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			SelectCopyAppModeBottomSheet.showInstance(manager, this, appMode);
 		}
 	}
 

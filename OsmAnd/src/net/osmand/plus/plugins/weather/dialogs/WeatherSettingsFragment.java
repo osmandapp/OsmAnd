@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WeatherSettingsFragment extends BaseSettingsFragment
-		implements WeatherCacheSizeChangeListener, CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class WeatherSettingsFragment extends BaseSettingsFragment implements WeatherCacheSizeChangeListener,
+		CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String WEATHER_ONLINE_CACHE = "weather_online_cache";
 	private static final String WEATHER_OFFLINE_CACHE = "weather_offline_cache";
@@ -88,12 +88,15 @@ public class WeatherSettingsFragment extends BaseSettingsFragment
 	private void setupCacheSizeCategory() {
 		offlineForecastHelper = app.getOfflineForecastHelper();
 		Context ctx = requireContext();
+
 		Preference divider = new Preference(ctx);
 		divider.setLayoutResource(R.layout.simple_divider_item);
+		divider.setKey("weather_cache_divider");
 		divider.setSelectable(false);
 		addOnPreferencesScreen(divider);
 
 		PreferenceCategory category = new PreferenceCategory(ctx);
+		category.setKey("weather_cache_category");
 		category.setLayoutResource(R.layout.preference_category_with_descr);
 		category.setTitle(R.string.data_settings);
 		category.setIconSpaceReserved(true);
@@ -115,15 +118,17 @@ public class WeatherSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupBottomButtons() {
-		Context ctx = requireContext();
+		Context context = requireContext();
 		int profileColor = getActiveProfileColor();
 
-		Preference divider = new Preference(ctx);
+		Preference divider = new Preference(context);
 		divider.setLayoutResource(R.layout.simple_divider_item);
+		divider.setKey("buttons_divider");
 		divider.setSelectable(false);
+		divider.setPersistent(false);
 		addOnPreferencesScreen(divider);
 
-		Preference resetToDefault = new Preference(ctx);
+		Preference resetToDefault = new Preference(context);
 		resetToDefault.setKey(RESET_TO_DEFAULT);
 		resetToDefault.setLayoutResource(R.layout.preference_button);
 		resetToDefault.setTitle(R.string.reset_plugin_to_default);
@@ -131,7 +136,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment
 		resetToDefault.setPersistent(false);
 		addOnPreferencesScreen(resetToDefault);
 
-		Preference copyPluginSettings = new Preference(ctx);
+		Preference copyPluginSettings = new Preference(context);
 		copyPluginSettings.setKey(COPY_PLUGIN_SETTINGS);
 		copyPluginSettings.setLayoutResource(R.layout.preference_button);
 		copyPluginSettings.setTitle(R.string.copy_from_other_profile);
