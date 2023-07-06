@@ -2948,8 +2948,8 @@
     <string name="osmand_routing_promo">Tilføj din egen modificeret version af filen routing.xml til ..osmand/routing</string>
     <string name="app_mode_skiing">Skiløb</string>
     <string name="base_profile_descr_ski">Skiløb</string>
-    <string name="show_compass_ruler">Vis kompas lineal</string>
-    <string name="hide_compass_ruler">Skjul kompas lineal</string>
+    <string name="show_compass_ruler">Vis kompaslineal</string>
+    <string name="hide_compass_ruler">Skjul kompaslineal</string>
     <string name="select_icon_profile_dialog_title">Vælg ikon</string>
     <string name="settings_routing_mode_string">Tilstand: %s</string>
     <string name="settings_derived_routing_mode_string">Brugertilstand, afledt fra: %s</string>
@@ -5240,10 +5240,8 @@
     <string name="calculate_offline">Beregn offline</string>
     <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på højdekortdata. Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
     <string name="error_calculate">Beregningsresultatet er tomt</string>
-    <string name="routing_attr_allow_via_ferrata_description">Tillad via ferrata-stier.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">OPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Tillad via ferrata</string>
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort</string>
@@ -5274,4 +5272,48 @@
     <string name="verify_account_deletion_descr">Vi er nødt til at verificere din konto, før vi sletter den.
 \n
 \nIndtast venligst den e-mailadresse, du registrerede dig med. En engangskode til næste trin vil blive sendt til den.</string>
+    <string name="release_4_5">• BLE/ANT+ sensors: omarbejdet forbindelse, skrivning og visning af modtagne data til GPX
+\n
+\n • Gratis backup af favoritter og indstillinger til \"OsmAnd Cloud\"
+\n
+\n • Nyt format til terrænkort med understøttelse af 3D-relief 
+\n
+\n • Håndtering af spor: opdateret brugergrænseflade, tilføjet sortering, understøttelse af indlejrede mapper
+\n
+\n • Android Auto: ny startmenu til adgang til favoritter, spor og POI-kategorier 
+\n
+\n • En liste over moduler til top-/bundpanelet
+\n
+\n • Ny \"Tog\"-profil, der gør det muligt at beregne jernbaneruter
+\n
+\n • Konturlinjer fungerer med enhver \"kortkilde\" 
+\n
+\n • Udvidet liste over standardhandlinger for eksterne tastaturer
+\n
+\n • Brugerdefinerede ruteberegnings-filer, tilføjede muligheder for at slette eller overskrive 
+\n
+\n • Tilføjet mulighed for at \"Meddel afvigelse fra ruten\"
+\n
+\n • Startskærm: tilføjet mulighed for at gendanne OsmAnd-tilstand fra fil
+\n
+\n • Tilføjet \"Farlige marteriales\"-klasser for Lastbilnavigation i Nordamerika
+\n
+\n • Tilføjet understøttelse af \"Via ferrata\" til fodgængerruter
+\n
+\n • Tilføjet \"CAI\"-skala til klassificering af ruternes sværhedsgrad
+\n
+\n • Rettet sprogvalg pr. app
+\n
+\n • Tilføjet understøttelse af temaikoner
+\n
+\n • OsmAnd Cloud: tilføjet mulighed for at slette konto
+\n
+\n • Tilgængelighed: Touch-målstørrelse for knapper ændret til 48 dp; løst problem med kort-brugergrænseflade synlig for skærmlæsere
+\n
+\n • Japanske stemmemeddelelser omarbejdet 
+\n
+\n • Evaluering af højdeændringer og hældninger omarbejdet
+\n
+\n</string>
+    <string name="free_favorites_backup_description">Registrér dig hos OsmAnd Cloud for at få gratis sikkerhedskopiering af favoritter og indstillinger.</string>
 </resources>

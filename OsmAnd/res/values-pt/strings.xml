@@ -5239,9 +5239,7 @@
     <string name="calculate_offline">Calcular offline</string>
     <string name="calculate_offline_altitude_descr">Calcula a elevação sem ligação à Internet, com base nos dados do mapa de altitude. As diferenças em relação à altitude registada pelo dispositivo podem ser usadas como correção da elevação.</string>
     <string name="error_calculate">O resultado do cálculo está vazio</string>
-    <string name="routing_attr_allow_via_ferrata_description">Permitir trilhos via ferrata.</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permitir via ferrata</string>
     <string name="power_watts_unit">Watts</string>
     <string name="shared_string_close_the_dialog">Fechar o ecrã</string>
     <string name="terrain_map">Mapa do terreno</string>

@@ -5235,10 +5235,8 @@
     <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándose en los datos del mapa de la elevación del terreno. Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
     <string name="calculate_offline">Calcular sin conexión</string>
-    <string name="routing_attr_allow_via_ferrata_description">Permitir vías férreas.</string>
     <string name="power_watts_unit">Vatios</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permitir vía férrea</string>
     <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
     <string name="free_mode">Modo libre</string>
     <string name="relief_3d">Relieve en 3D</string>

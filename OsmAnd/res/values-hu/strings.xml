@@ -5230,8 +5230,6 @@
     <string name="rendering_attr_lightDetail_name">Fény részletei</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">ford/perc</string>
-    <string name="routing_attr_allow_via_ferrata_description">Tervezés mászóutakon keresztül is.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Mászóút engedélyezése</string>
     <string name="shared_string_close_the_dialog">Párbeszédpanel bezárása</string>
     <string name="relief_3d">3D domborzat</string>
     <string name="terrain_map">Terep térkép</string>
@@ -5262,4 +5260,52 @@
 \nA művelet nem visszavonható.</string>
     <string name="action_cannot_be_undone">A művelet nem visszavonható.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Minden adat %1$s lesz az OsmAnd Cloud-ból. Az eszközön lévő adatok érintetlenek maradnak.</string>
+    <string name="folder_export_empty_error">Nincs mit exportálni, a mappa üres</string>
+    <string name="free_favorites_backup">Kedvencek mentése ingyenesen</string>
+    <string name="get_osmand_cloud">Használja a OsmAnd Cloud-ot</string>
+    <string name="free_account">I:gyenes fiók</string>
+    <string name="release_4_5">• BLE/ANT+ érzékelők: átdolgozott kapcsolódás, fogadott adatok írása és megtekintése GPX-ben
+\n
+\n • Biztonsági másolat ingyenesen a kedvencekről és a beállításokról az \"OsmAnd Cloud\"-ba
+\n
+\n • Új formátumú tereptérképek 3D domborzat támogatással
+\n
+\n • Nyomvonalak kezelése: frissített felület, rendezés hozzáadása, beágyazott mappák támogatása
+\n
+\n • Android Auto: új start menü a kedvencek, nyomvonalak és POI kategóriák eléréséhez
+\n
+\n • Közös widgetlista az alsó/felső panelhez
+\n
+\n • Új \"Vonat\" profil, vasúti útvonalak megtervezéséhez
+\n
+\n • Kontúrvonalak minden térképforráshoz
+\n
+\n • Expanded list of default actions for external keyboards
+\n
+\n • Custom routing files, added options to delete or overwrite
+\n
+\n • Added option to \"Announce deviation from the route\"
+\n
+\n • Start screen: added option restore OsmAnd state from file
+\n
+\n • Added \"Hazardous Materials\" classes Truck navigation in North America
+\n
+\n • Added support of \"Via ferrata\" for pedestrian routing
+\n
+\n • Added \"CAI\" scale for difficulty classification of the routes
+\n
+\n • Fixed per-app language selection
+\n
+\n • Added support for themed icons
+\n
+\n • OsmAnd Cloud: added option to delete account
+\n
+\n • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers
+\n
+\n • Japanese voice prompts reworked
+\n
+\n • Elevation change and slope evaluation reworked
+\n
+\n</string>
+    <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy ingyenesen biztonsági másolatot készíthessen a kedvencekről és a beállításokról.</string>
 </resources>
