@@ -5236,4 +5236,75 @@
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
     <string name="relief_3d">3D-рельеф</string>
     <string name="terrain_map">Карта рельефа</string>
+    <string name="free_favorites_backup_description">Зарегистрируйтесь в OsmAnd Cloud для подключения бесплатного резервного копирования избранных точек и настроек</string>
+    <string name="free_favorites_backup">Бесплатное резервное копирование избранных</string>
+    <string name="folder_export_empty_error">Экспорт невозможен, так как папка пуста.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Удалить аккаунт\?</string>
+    <string name="action_cannot_be_undone">Действие нельзя будет отменить.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Вторичные устройства будут отключены от OsmAnd Cloud и потеряют доступ к платным функциям.</string>
+    <string name="osmand_cloud_deletion_account_warning">Ваш аккаунт и все данные аккаунта будут %1$s</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Это действие не отменит вашу подписку OsmAnd Pro.</string>
+    <string name="manage_subscriptions">Управление подписками.</string>
+    <string name="delete_account_warning">Вы уверены, что хотите удалить аккаунт %1$s\?</string>
+    <string name="deleting_complete">Удаление завершено</string>
+    <string name="delete_account">Удалить аккаунт</string>
+    <string name="backup_error_delete_account_email_match">Адрес электронной почты не соответствует имени пользователя для входа.</string>
+    <string name="verify_account">Подтвердите ваш аккаунт</string>
+    <string name="release_4_5">• Датчики BLE/ANT+: переработано подключение, запись и просмотр полученных данных в формате GPX
+\n
+\n • Бесплатное резервное копирование избранных точек и настроек в «OsmAnd Cloud»
+\n
+\n • Новый формат для карт с поддержкой трехмерного рельефа
+\n
+\n • Управление треками: обновленный пользовательский интерфейс, добавлена сортировка, поддержка вложенных папок
+\n
+\n • Android Auto: новое стартовое меню для доступа к избранным, трекам и категориям POI
+\n
+\n • Одинаковый список виджетов для верхней/нижней панели
+\n
+\n • Новый профиль «Поезд» позволяет рассчитывать железнодорожные маршруты
+\n
+\n • Контурные линии работают с любым источником карты
+\n
+\n • Расширенный список действий по умолчанию для внешних клавиатур
+\n
+\n • Пользовательские файлы маршрутизации, добавлены опции удаления или перезаписи
+\n
+\n • Добавлена опция «Оповещать об отклонении от маршрута»
+\n
+\n • Начальный экран: добавлена опция восстановления состояния OsmAnd из файла
+\n
+\n • Добавлена поддержка классов «Опасные вещества» для грузовой навигации в Северной Америке
+\n
+\n • Добавлена поддержка «Via ferrata» для пешеходной навигации
+\n
+\n • Добавлена шкала «CAI» для классификации сложности маршрутов
+\n
+\n • Исправлен выбор языка приложения (Android13)
+\n
+\n • Добавлена поддержка тематических значков (Android13)
+\n
+\n • OsmAnd Cloud: добавлена опция удаления аккаунта
+\n
+\n • Специальные возможности: размер касания кнопок изменен на 48 dp; исправлена проблема с видимостью пользовательского интерфейса карты для программ для чтения экрана
+\n
+\n • Переработаны японские голосовые подсказки
+\n
+\n • Переработано определение изменения высоты и оценка склона
+\n
+\n</string>
+    <string name="get_osmand_cloud">Подключить OsmAnd Cloud</string>
+    <string name="free_account">Бесплатный аккаунт</string>
+    <string name="osmand_cloud_deleting_account_descr">Вскоре все ваши данные и аккаунт будут удалены из OsmAnd Cloud.
+\n
+\nПри этом данные на устройстве сохранятся без изменений.</string>
+    <string name="osmand_cloud_deleted_account_descr">Аккаунт OsmAnd Cloud и связанные с ним удалены.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Все данные из OsmAnd Cloud будут %1$s. Данные на устройстве останутся нетронутыми.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Удалить аккаунта в OsmAnd Cloud\?
+\n
+\nДействие нельзя будет отменить.</string>
+    <string name="shared_string_deleting">Удаление</string>
+    <string name="verify_account_deletion_descr">Мы должны проверить ваш аккаунт, прежде чем удалить его.
+\n
+\nВведите адрес электронной почты, с которого вы зарегистрировались. На него будет отправлен одноразовый пароль для следующего шага.</string>
 </resources>
