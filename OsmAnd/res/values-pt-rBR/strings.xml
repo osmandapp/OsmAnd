@@ -1423,7 +1423,7 @@
     <string name="data_settings_descr">Especificar o idioma, baixar/atualizar dados.</string>
     <string name="data_settings">Dados</string>
     <string name="additional_settings">Configurações adicionais</string>
-    <string name="update_tile">Atualizar mapa</string>
+    <string name="update_tile">Atualizar</string>
     <string name="reload_tile">Atualizar quadrículas</string>
     <string name="mark_point">Destino</string>
     <string name="app_settings">Configurações do aplicativo</string>
@@ -5223,7 +5223,6 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Emparelhar sensor ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Pode emparelhar sensores Bluetooth LE e ANT+ com o OsmAnd.</string>
     <string name="power_watts_unit">Watts</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permitir via ferrata</string>
     <string name="calculate_offline">Calcular offline</string>
     <string name="calculate_offline_altitude_descr">"Calcule a elevação offline, com base nos dados do mapa de altura.  As diferenças em relação à altitude registrada pelo dispositivo podem ser usadas como correção de elevação."</string>
     <string name="error_calculate">O resultado do cálculo está vazio</string>
@@ -5231,4 +5230,12 @@
     <string name="ant_plus_pair_new_sensor_ble">Emparelhar sensor Bluetooth LE</string>
     <string name="external_device_characteristic_cuff_pressure">Pressão do punho</string>
     <string name="external_device_details_pair">Emparelhar</string>
+    <string name="shared_string_close_the_dialog">Fechar tela</string>
+    <string name="free_mode">Modo livre</string>
+    <string name="relief_3d">Relevo 3D</string>
+    <string name="terrain_map">Mapa do terreno</string>
+    <string name="relief_3d_description">Possuir e observar a maquete do seu bairro ou de todo o continente.</string>
+    <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
+    <string name="terrain_category_description">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
+    <string name="slope_legend_description">O Slope usa cores para visualizar a inclinação do terreno. Você pode ler mais sobre Slopes em %1$s.</string>
 </resources>

@@ -17,25 +17,11 @@
 		android:title="@string/download_heightmap_maps" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="disable_vertex_hillshade_3d"
+		android:key="use_raster_sqlitedb"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/disable_vertex_hillshade_3d" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="generate_slope_from_3d_maps"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/generate_slope_from_3d_maps" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="generate_hillshade_from_3d_maps"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/generate_hillshade_from_3d_maps" />
+		android:title="@string/use_raster_sqlitedb_for_slope_hillshade" />
 
 	<PreferenceCategory
 		android:key="safe"
@@ -157,5 +143,16 @@
 		android:selectable="false"
 		android:title="@string/day_night_info"
 		tools:summary="@string/day_night_info_description" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_plugin_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
 
 </PreferenceScreen>

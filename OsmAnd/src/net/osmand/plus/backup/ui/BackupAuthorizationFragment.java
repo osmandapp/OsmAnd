@@ -1,5 +1,8 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_IN;
+import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_UP;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +32,8 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class BackupAuthorizationFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
+
+	public static final String OPEN_BACKUP_AUTH = "open_backup_auth";
 
 	public static final String TAG = BackupAuthorizationFragment.class.getSimpleName();
 
@@ -98,7 +103,8 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), signUp);
+				LoginDialogType dialogType = signUp ? SIGN_UP : SIGN_IN;
+				AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), dialogType);
 			}
 		});
 	}

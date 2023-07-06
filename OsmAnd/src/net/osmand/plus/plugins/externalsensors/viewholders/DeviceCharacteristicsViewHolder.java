@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 public class DeviceCharacteristicsViewHolder extends RecyclerView.ViewHolder {
 
 	public final TextView name;
+	public final View divider;
 	public final TextView value;
 	public final boolean nightMode;
 
@@ -19,5 +20,6 @@ public class DeviceCharacteristicsViewHolder extends RecyclerView.ViewHolder {
 		this.nightMode = nightMode;
 		name = view.findViewById(R.id.title);
 		value = view.findViewById(R.id.value);
+		divider = view.findViewById(R.id.divider);
 	}
 }

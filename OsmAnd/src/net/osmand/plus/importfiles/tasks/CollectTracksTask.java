@@ -63,7 +63,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 
 				String trackName = track.name;
 				if (Algorithms.isEmpty(trackName)) {
-					name = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
+					trackName = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
 				}
 				items.add(new ImportTrackItem(selectedGpxFile, trackName, i));
 			}

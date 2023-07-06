@@ -869,6 +869,12 @@
         <item name="android:textSize">@dimen/dialog_header_text_size</item>
     </style>
 
+
+    <style name="AppBarTitlePrimary" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/dialog_header_text_size</item>
+    </style>
+
     <style name="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:padding">0dp</item>
         <item name="titleMargin">0dp</item>

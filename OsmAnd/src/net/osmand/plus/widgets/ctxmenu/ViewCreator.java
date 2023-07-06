@@ -30,11 +30,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
@@ -180,6 +183,8 @@ public class ViewCreator {
 			return getHelpToImproveItemView(convertView);
 		} else if (layoutId == R.layout.main_menu_drawer_osmand_version) {
 			return getOsmAndVersionView(convertView, item);
+		} else if (layoutId == R.layout.list_item_terrain_description) {
+			return getTerrainDescriptionView(convertView, item);
 		}
 		return null;
 	}
@@ -281,6 +286,20 @@ public class ViewCreator {
 			intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
 			AndroidUtils.startActivityIfSafe(ctx, intent);
 		});
+		return view;
+	}
+
+	@NonNull
+	private View getTerrainDescriptionView(@NonNull View view, @NonNull ContextMenuItem item) {
+		View button = view.findViewById(R.id.button_get);
+		button.setOnClickListener(v -> {
+			ItemClickListener listener = item.getItemClickListener();
+			if (listener != null) {
+				listener.onContextMenuClick(uiAdapter, view, item, false);
+			}
+		});
+		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), PluginsHelper.isEnabled(NauticalMapsPlugin.class));
 		return view;
 	}
 

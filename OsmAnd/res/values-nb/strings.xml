@@ -423,7 +423,7 @@
     <string name="save_track_interval">Loggeintervall under navigering</string>
     <string name="save_track_interval_descr">Angi loggingsintervall for opptak av spor under navigering</string>
     <string name="save_track_to_gpx">Auto-opptak av spor under navigering</string>
-    <string name="update_tile">Oppdater kart</string>
+    <string name="update_tile">Oppdater</string>
     <string name="reload_tile">Last kartdel på nytt</string>
     <string name="mark_point">Mål</string>
     <string name="use_english_names_descr">Velg mellom lokale og engelske navn.</string>
@@ -1646,7 +1646,7 @@
     <string name="proxy_host_descr">Angi din mellomtjeners vertsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Mellomtjener-port</string>
     <string name="gpx_start_new_segment">Start nytt segment</string>
-    <string name="no_index_file_to_download">Ingen nedlastinger funnet, sjekk din internettforbindelse.</string>
+    <string name="no_index_file_to_download">Fant ikke noe å laste ned. Sjekk at du er koblet til Internett.</string>
     <string name="gpx_info_subtracks">Underspor: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_file_is_empty">Tom GPX-fil</string>
@@ -5193,4 +5193,10 @@
     <string name="delete_folder_question">Slett mappen\?</string>
     <string name="delete_folder">Slett mappen</string>
     <string name="show_all_tracks_on_the_map">Vis alle sporene på kartet</string>
+    <string name="free_mode">Fri modus</string>
+    <string name="relief_3d_description">Ei og observer skalamodellen av ditt nabolag eller hele kontinentet.</string>
+    <string name="terrain_map">Terrengkart</string>
+    <string name="relief_3d">3D-relieff</string>
+    <string name="slope_legend_description">Helning bruker farger for å visualisere terrengbratthet. Du kan lese mer om helninger i %1$s.</string>
+    <string name="terrain_category_description">Terrengkoter, relieffskyggekart med mørke skygger og helningskart med farger for å vise topper og lavland.</string>
 </resources>

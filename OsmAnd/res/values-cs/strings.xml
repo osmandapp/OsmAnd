@@ -1269,7 +1269,7 @@
     <string name="lang_sr">Srbština (cyrilice)</string>
     <string name="lang_zh_cn">Čínština (zjednodušená)</string>
     <string name="lang_zh_tw">Čínština (tradiční)</string>
-    <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vykreslovat cesty podle OSMC značení.</string>
@@ -4043,7 +4043,7 @@
     <string name="osmand_cloud_help_descr">Potřebujete pomoc\? Kontaktujte nás prosím na %1$s</string>
     <string name="osmand_cloud_create_account_descr">Zadejte prosím svoji e-mailovou adresu, na kterou bude zaslán ověřovací kód
 \na všechna data na ni budou navázána.</string>
-    <string name="osmand_cloud_login_descr">Zadejte prosím e-mailovou adresu, se kterou jste se registrovali. Bude na ni zasláno jednorázové heslo potřebné pro další krok.</string>
+    <string name="osmand_cloud_login_descr">Zadejte prosím e-mailovou adresu, se kterou jste se registrovali. Bude na ni zasláno jednorázové heslo.</string>
     <string name="verify_email_address">Ověřit e-mailovou adresu</string>
     <string name="verify_email_address_descr">Ověřovací kód byl odeslán na %1$s. Zadejte ho prosím do políčka níže.</string>
     <string name="cloud_email_not_registered">Tato emailová adresa není registrována pro OsmAnd Cloud</string>
@@ -5182,8 +5182,6 @@
     <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externího zařízení.</string>
     <string name="shared_string_close_the_dialog">Zavřít dialogové okno</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Povolit via ferrata</string>
-    <string name="routing_attr_allow_via_ferrata_description">Povolit stezky via ferrata.</string>
     <string name="calculate_offline_altitude_descr">Výpočet nadmořské výšky v režimu offline na základě údajů z výškové mapy. Rozdíly oproti nadmořské výšce zaznamenané zařízením lze použít jako korekci nadmořské výšky.</string>
     <string name="external_sensors_source_of_data">Zdroj údajů</string>
     <string name="map_3d_mode_hint">Dlouhým klepnutím na tlačítko můžete změnit jeho polohu.</string>
@@ -5217,4 +5215,33 @@
     <string name="rendering_value_caiScale_name">Měřítko CAI</string>
     <string name="map_3d_mode_action">3D režim</string>
     <string name="shared_string_visible_on_map">Viditelné na mapě</string>
+    <string name="file_already_exists">Soubor již existuje</string>
+    <string name="bicycle_scd_device_name">Zařízení kola</string>
+    <string name="device_disconnected">%1$s odpojeno</string>
+    <string name="external_device_blood_pressure">Krevní tlak</string>
+    <string name="relief_3d">3D reliéf</string>
+    <string name="shared_string_wrist">Zápěstí</string>
+    <string name="shared_string_finger">Prst</string>
+    <string name="terrain_map">Mapa terénu</string>
+    <string name="shared_string_chest">Hruď</string>
+    <string name="no_bt_permission">Oprávnění Bluetooth nebylo uděleno</string>
+    <string name="shared_string_hand">Ruka</string>
+    <string name="no_search_results">Žádné výsledky</string>
+    <string name="device_connected">%1$s připojeno</string>
+    <string name="beats_per_minute_short">bpm</string>
+    <string name="osmand_cloud_delete_account_confirmation">Smazat účet\?</string>
+    <string name="action_cannot_be_undone">Tuto akci nelze vzít zpět.</string>
+    <string name="delete_account_warning">Opravdu chcete odstranit účet %1$s\?</string>
+    <string name="shared_string_deleting">Mazání</string>
+    <string name="backup_error_delete_account_email_match">E-mail neodpovídá přihlašovacímu jménu</string>
+    <string name="osmand_cloud_deleting_account_descr">Během několika okamžiků budou všechna vaše data a účet z OsmAnd Cloud odstraněny.
+\n
+\nVšechna data v zařízení zůstanou nedotčena.</string>
+    <string name="osmand_cloud_deleted_account_descr">Účet a všechna data byla z OsmAnd Cloud odstraněna.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Opravdu chcete smazat účet OsmAnd Cloud\?
+\n
+\nTuto akci nelze vzít zpět.</string>
+    <string name="verify_account_deletion_descr">Před smazáním vašeho účtu jej musíme ověřit.
+\n
+\nZadejte prosím e-mailovou adresu, pod kterou jste se zaregistrovali. Na ni vám bude zasláno jednorázové heslo pro další krok.</string>
 </resources>

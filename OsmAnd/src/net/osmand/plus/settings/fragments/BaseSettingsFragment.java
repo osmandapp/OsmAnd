@@ -54,6 +54,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
@@ -64,6 +66,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
@@ -786,6 +789,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected Drawable getPersistentPrefIcon(Drawable enabled, Drawable disabled) {
 		return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
+	}
+
+	protected void showSingleSelectionDialog(@NonNull String processId,
+	                                         @NonNull IDialogController controller) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			DialogManager dialogManager = app.getDialogManager();
+			dialogManager.register(processId, controller);
+			FragmentManager fm = activity.getSupportFragmentManager();
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
+		}
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandPreference<Boolean> b, int title, int summary, int layoutId) {

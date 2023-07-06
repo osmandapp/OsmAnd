@@ -404,6 +404,14 @@ public class OsmandSettings {
 		}
 	}
 
+	public void resetGlobalPreferences(List<OsmandPreference> preferences) {
+		for (OsmandPreference preference : preferences) {
+			if (preference instanceof CommonPreference) {
+				preference.resetToDefault();
+			}
+		}
+	}
+
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
 		setAppModeCustomProperties();
@@ -3163,5 +3171,11 @@ public class OsmandSettings {
 			setPreference(QUICK_ACTION.getId(), actionState, mode);
 		}
 	}
+
+	public final OsmandPreference<Boolean> FAVORITES_FREE_ACCOUNT_CARD_DISMISSED =
+			new BooleanPreference(this, "favorites_free_account_card_dismissed", false).makeGlobal();
+
+	public final OsmandPreference<Boolean> CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED =
+			new BooleanPreference(this, "configure_profile_free_account_card_dismissed", false).makeGlobal();
 
 }

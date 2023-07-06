@@ -2732,7 +2732,7 @@
     <string name="ski_map_render_descr">Für Skifahrer. Enthält Pisten, Lifte, Langlaufloipen und mehr. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, Höhenlinien, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab.</string>
     <string name="topo_render_descr">Für Wanderungen, Trekking und Radfahren in der Natur. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenbeschaffenheit kennzeichnet die Straßenqualität. Kein Nachtmodus.</string>
-    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
+    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC/CAI-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
     <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlage. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
@@ -4732,9 +4732,9 @@
     <string name="auto_backup_title">Automatische Sicherung</string>
     <string name="duplacate_widget_added_snackbar">Ein doppeltes Widget wird der Liste hinzugefügt.</string>
     <string name="shared_string_duplicate">Duplizieren</string>
-    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget können Sie ein Foto aufnehmen.</string>
-    <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget können Sie ein Video aufnehmen.</string>
-    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget können Sie eine Audionotiz aufnehmen.</string>
+    <string name="av_notes_photo_widget_desc">Durch Tippen auf das Widget kann ein Foto aufgenommen werden.</string>
+    <string name="av_notes_video_widget_desc">Durch Tippen auf das Widget kann ein Video aufgenommen werden.</string>
+    <string name="av_notes_audio_widget_desc">Durch Tippen auf das Widget kann eine Sprachnotiz aufgenommen werden.</string>
     <string name="trip_recording_downhill_widget_desc">Zeigt die Summe aller Abfahrten der aktuell aufgezeichneten Strecke an.</string>
     <string name="trip_recording_uphill_widget_desc">Zeigt die Summe aller Anstiege der aktuell aufgezeichneten Strecke an.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB-IMBA-Strecken anzeigen</string>
@@ -4755,8 +4755,8 @@
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
-    <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder die geschätzte Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
-    <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder die geschätzte Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
+    <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
+    <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
     <string name="time_to_destination_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit ab dem aktuellen Standort.</string>
     <string name="time_to_intermediate_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert. Sobald ein Zwischenpunkt passiert ist, wird die Zeit bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="compass_always_visible">Immer sichtbar</string>
@@ -4787,7 +4787,7 @@
     <string name="coordinates_widget_map_center_desc">Zeigt die geographischen Koordinaten der aktuellen Kartenmitte</string>
     <string name="quick_action_map_center_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets „Kartenmitte“ auf der Karte.</string>
     <string name="quick_action_current_location_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Widgets \"Aktueller Standort\" auf der Karte.</string>
-    <string name="coordinates_widget_current_location_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts</string>
+    <string name="coordinates_widget_current_location_desc">Zeigt die geografischen Koordinaten des aktuellen Standorts an</string>
     <string name="coordinates_widget_map_center">Koordinaten: Kartenmitte</string>
     <string name="coordinates_widget_current_location">Koordinaten: Aktueller Standort</string>
     <string name="map_widget_zoom_level_desc">Zeigt die aktuelle Zoomstufe der Karte an.</string>
@@ -5213,15 +5213,15 @@
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
     <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
-    <string name="map_2d_mode_action">2D Modus</string>
-    <string name="map_3d_mode_action">3D Modus</string>
+    <string name="map_2d_mode_action">2D-Modus</string>
+    <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
-    <string name="visible_in_3d_mode">Sichtbar im 3D Modus</string>
-    <string name="rendering_value_caiScale_name">CAI Skala</string>
+    <string name="visible_in_3d_mode">Sichtbar im 3D-Modus</string>
+    <string name="rendering_value_caiScale_name">CAI-Skala</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="delete_folder_question">Ordner löschen\?</string>
     <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Dieser Ordner hat noch keinen Track.</string>
     <string name="tracks_empty_folder">Leerer Ordner</string>
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
@@ -5238,10 +5238,37 @@
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
     <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Klettersteige zulassen.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">U/min</string>
-    <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
+    <string name="free_mode">Freier Modus</string>
+    <string name="terrain_map">Geländekarte</string>
+    <string name="relief_3d">3D-Relief</string>
+    <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Ihr OsmAnd Pro-Abonnement wird dadurch nicht gekündigt.</string>
+    <string name="manage_subscriptions">Abonnements verwalten.</string>
+    <string name="delete_account_warning">Sind Sie sicher, dass Sie das Konto %1$s löschen möchten\?</string>
+    <string name="shared_string_deleting">Wird gelöscht</string>
+    <string name="deleting_complete">Löschen abgeschlossen</string>
+    <string name="delete_account">Konto löschen</string>
+    <string name="backup_error_delete_account_email_match">E-Mail-Adresse stimmt nicht mit Anmelde-Benutzername überein</string>
+    <string name="osmand_cloud_deleted_account_descr">Konto und alle Daten wurden aus der OsmAnd Cloud gelöscht.</string>
+    <string name="action_cannot_be_undone">Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
+    <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodaten werden %1$s</string>
+    <string name="osmand_cloud_deleting_account_descr">In Kürze werden alle Ihre Daten und Ihr Konto von OsmAnd Cloud gelöscht.
+\n
+\nAlle Daten auf dem Gerät bleiben unangetastet.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten\?
+\n
+\nDiese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Alle Daten von OsmAnd Cloud werden %1$s. Daten auf dem Gerät bleiben unangetastet.</string>
+    <string name="verify_account_deletion_descr">Wir müssen Ihr Konto verifizieren, bevor wir es löschen können.
+\n
+\nBitte geben Sie die E-Mail Adresse ein, mit der Sie sich registriert haben. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
+    <string name="verify_account">Konto bestätigen</string>
+    <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
+    <string name="terrain_category_description">Höhenlinien, Reliefkarte mit Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
 </resources>

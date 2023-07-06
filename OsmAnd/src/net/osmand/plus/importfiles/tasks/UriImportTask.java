@@ -1,6 +1,23 @@
 package net.osmand.plus.importfiles.tasks;
 
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.MAPS_PATH;
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.IndexConstants.SQLITE_EXT;
+import static net.osmand.IndexConstants.TEMP_DIR;
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+import static net.osmand.IndexConstants.ZIP_EXT;
+import static net.osmand.plus.utils.FileUtils.createUniqueFileName;
+import static net.osmand.util.Algorithms.OBF_FILE_SIGNATURE;
+import static net.osmand.util.Algorithms.SQLITE_FILE_SIGNATURE;
+import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
+import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
+
 import android.net.Uri;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -15,23 +32,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.TEMP_DIR;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.ZIP_EXT;
-import static net.osmand.plus.utils.FileUtils.createUniqueFileName;
-import static net.osmand.util.Algorithms.OBF_FILE_SIGNATURE;
-import static net.osmand.util.Algorithms.SQLITE_FILE_SIGNATURE;
-import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
-import static net.osmand.util.Algorithms.ZIP_FILE_SIGNATURE;
 
 public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
@@ -99,7 +99,7 @@ public class UriImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 					String name = importType == ImportType.RENDERING ? "renderer" + RENDERER_INDEX_EXT : "router" + ROUTING_FILE_EXT;
 					importHelper.handleXmlFileImport(tempUri, name, null);
 				} else if (importType == ImportType.GPX || importType == ImportType.KML) {
-					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, save, useImportDir, false, false);
+					importHelper.handleGpxOrFavouritesImport(tempUri, tempFileName, save, useImportDir, false, false, false);
 				}
 			} else if (OBF_FILE_SIGNATURE == fileSignature) {
 				String name = createUniqueFileName(app, "map", MAPS_PATH, BINARY_MAP_INDEX_EXT);

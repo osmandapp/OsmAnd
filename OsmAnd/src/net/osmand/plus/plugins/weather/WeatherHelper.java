@@ -41,7 +41,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WeatherHelper {
 
 	private static final Log log = PlatformUtil.getLog(WeatherHelper.class);
-
 	private final OsmandApplication app;
 	private final WeatherSettings weatherSettings;
 	private final OfflineForecastHelper offlineForecastHelper;
@@ -109,7 +108,7 @@ public class WeatherHelper {
 		if (weatherTileResourcesManager != null) {
 			return;
 		}
-		File weatherForecastDir = app.getAppPath(WEATHER_FORECAST_DIR);
+		File weatherForecastDir = new File(app.getCacheDir(), WEATHER_FORECAST_DIR);
 		if (!weatherForecastDir.exists()) {
 			weatherForecastDir.mkdir();
 		}

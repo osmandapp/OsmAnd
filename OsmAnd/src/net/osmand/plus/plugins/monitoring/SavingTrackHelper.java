@@ -89,6 +89,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private final SelectedGpxFile currentTrack;
 
+	private int currentTrackIndex = 1;
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
@@ -303,6 +304,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		points = 0;
 		duration = 0;
 		trkPoints = 0;
+		currentTrackIndex++;
 		app.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.clearSegmentsToDisplay();
@@ -815,6 +817,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	public void setLastTimeFileSaved(long lastTimeFileSaved) {
 		this.lastTimeFileSaved = lastTimeFileSaved;
+	}
+
+	public int getCurrentTrackIndex() {
+		return currentTrackIndex;
 	}
 
 	@NonNull

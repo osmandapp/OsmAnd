@@ -1,17 +1,17 @@
 ---
-name: "🐞 Bug report"
+name: "Bug report"
 about: Report a bug in OsmAnd
 ---
 
-### Description
+## Description
 
-### Steps to reproduce
+### How to reproduce
 
 ### Actual result
 
 ### Expected result
 
-### Your Environment
-OsmAnd Version: 
-Android/iOS version: 
+**Environment**
+OsmAnd Version:
+Android/iOS version:
 Device model: 

@@ -419,5 +419,5 @@ dependencies {
 	implementation "androidx.car.app:app:1.2.0"
 	implementation "androidx.car.app:app-projected:1.2.0"
 
-	implementation 'com.google.android.gms:play-services-location:20.0.0'
+	implementation 'com.google.android.gms:play-services-location:21.0.1'
 }

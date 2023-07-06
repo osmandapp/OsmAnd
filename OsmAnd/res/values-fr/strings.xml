@@ -489,7 +489,7 @@
     <string name="save_current_track">Enregistrer la trace en cours</string>
     <string name="save_track_interval_descr">Indiquez l\'intervalle d\'enregistrement de la trace pendant le guidage</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant le guidage</string>
-    <string name="update_tile">Mettre à jour la carte</string>
+    <string name="update_tile">Mettre à jour</string>
     <string name="reload_tile">Actualiser la tuile</string>
     <string name="mark_point">Cible</string>
     <string name="shared_string_add_to_favorites">Ajouter aux favoris</string>
@@ -5226,9 +5226,36 @@
     <string name="error_calculate">Le résultat du calcul est vide</string>
     <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte altimétrique. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
-    <string name="routing_attr_allow_via_ferrata_description">Autoriser les itinéraires comprenant des via ferrata.</string>
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Autoriser les via ferrata</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
+    <string name="free_mode">Mode libre</string>
+    <string name="relief_3d">Relief 3D</string>
+    <string name="terrain_map">Carte du relief</string>
+    <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
+    <string name="terrain_category_description">Courbes de niveaux, ombrage du relief avec des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les vallées.</string>
+    <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
+    <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
+\n
+\nLes données de l\'appareil ne seront pas affectées.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Êtes-vous sûr de vouloir supprimer votre compte OsmAnd Cloud \?
+\n
+\nCette action est irréversible.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Supprimer le compte \?</string>
+    <string name="action_cannot_be_undone">Cette action est irréversible.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Les autres appareils seront déconnectés du cloud OsmAnd et perdront accès aux fonctionnalités payantes.</string>
+    <string name="osmand_cloud_deletion_account_warning">Votre compte et tous ses détails seront %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Toutes les données du cloud OsmAnd seront %1$s. Les données de l\'appareil ne seront pas affectées.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Cela n\'annulera pas votre abonnement OsmAnd Pro.</string>
+    <string name="manage_subscriptions">Gérer les abonnements.</string>
+    <string name="delete_account_warning">Êtes-vous sûr de vouloir supprimer le compte %1$s \?</string>
+    <string name="shared_string_deleting">Suppression</string>
+    <string name="deleting_complete">Suppression terminée</string>
+    <string name="delete_account">Supprimer le compte</string>
+    <string name="backup_error_delete_account_email_match">L\'e-mail ne correspond pas à l\'utilisateur</string>
+    <string name="verify_account">Vérifier votre compte</string>
+    <string name="osmand_cloud_deleted_account_descr">Le compte et toutes les données ont été supprimées du cloud OsmAnd.</string>
+    <string name="verify_account_deletion_descr">Nous devons vérifier votre compte avant de le supprimer.
+\n
+\nVeuillez saisir l\'e-mail avec lequel vous vous êtes inscrit. Un mot de passe unique vous sera envoyé pour réaliser l\'étape suivante.</string>
 </resources>

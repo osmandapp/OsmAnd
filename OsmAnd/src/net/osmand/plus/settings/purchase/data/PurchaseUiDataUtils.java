@@ -19,7 +19,10 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PurchaseUiDataUtils {
 
@@ -85,7 +88,7 @@ public class PurchaseUiDataUtils {
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
 				expireTime, purchaseTime, isSubscription,
 				liveUpdateSubscription, autoRenewing,
-				renewVisible, subscriptionState, origin);
+				renewVisible, subscriptionState, origin, false);
 	}
 
 	@NonNull
@@ -118,7 +121,7 @@ public class PurchaseUiDataUtils {
 		return new PurchaseUiData(sku, title, iconId, purchaseType,
 				expireTime, purchaseTime, isSubscription,
 				isLiveUpdateSubscription, autoRenewing,
-				renewVisible, state, origin);
+				renewVisible, state, origin, false);
 	}
 
 	public static boolean shouldShowBackupSubscription(@NonNull OsmandApplication app,
@@ -136,5 +139,38 @@ public class PurchaseUiDataUtils {
 			return true;
 		}
 		return false;
+	}
+
+	public static boolean shouldShowFreeAccRegistration(@NonNull OsmandApplication app) {
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean isRegistered = app.getBackupHelper().isRegistered();
+		return !proAvailable && isRegistered;
+	}
+
+	@NonNull
+	public static PurchaseUiData createFreeAccPurchaseUiData(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		String sku = null;
+		String title = app.getString(R.string.osmand_start);
+		String purchaseType = app.getString(R.string.free_account);
+		int iconId = R.drawable.ic_action_osmand_start;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.US);
+		Date purchaseDate = null;
+		try {
+			purchaseDate = dateFormat.parse(settings.BACKUP_ACCESS_TOKEN_UPDATE_TIME.get());
+		} catch (Exception error) {
+		}
+		long purchaseTime = purchaseDate == null ? 0 : purchaseDate.getTime();
+		long expireTime = 0;
+		SubscriptionState state = ACTIVE;
+		PurchaseOrigin origin = PurchaseOrigin.UNDEFINED;
+		boolean isLiveUpdateSubscription = false;
+		boolean autoRenewing = false;
+		boolean renewVisible = false;
+		boolean isSubscription = false;
+		return new PurchaseUiData(sku, title, iconId, purchaseType,
+				expireTime, purchaseTime, isSubscription,
+				isLiveUpdateSubscription, autoRenewing,
+				renewVisible, state, origin, true);
 	}
 }

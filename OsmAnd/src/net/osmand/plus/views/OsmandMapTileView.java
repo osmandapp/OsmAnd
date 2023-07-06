@@ -582,7 +582,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setRotate(float rotate, boolean force) {
-		if (multiTouch) {
+		if (multiTouch || Float.isNaN(rotate)) {
 			return;
 		}
 		float diff = MapUtils.unifyRotationDiff(rotate, getRotate());

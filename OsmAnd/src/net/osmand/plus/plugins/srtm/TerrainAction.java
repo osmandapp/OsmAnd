@@ -34,7 +34,7 @@ public class TerrainAction extends QuickAction {
 	public void execute(@NonNull MapActivity mapActivity) {
 		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
-			plugin.toggleTerrain(mapActivity, !plugin.isTerrainLayerEnabled(), () -> {
+			plugin.toggleTerrain(!plugin.isTerrainLayerEnabled(), () -> {
 				if (plugin.isTerrainLayerEnabled()) {
 					PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 				}

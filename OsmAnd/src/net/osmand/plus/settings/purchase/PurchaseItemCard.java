@@ -144,7 +144,7 @@ public class PurchaseItemCard extends BaseCard {
 			case ACTIVE:
 			case CANCELLED:
 			case IN_GRACE_PERIOD:
-				return app.getString(R.string.active_till, dateFormat.format(expireTime));
+				return expireTime > 0 ? app.getString(R.string.active_till, dateFormat.format(expireTime)) : app.getString(R.string.osm_live_active);
 			case EXPIRED:
 				String expired = app.getString(R.string.expired);
 				return app.getString(R.string.ltr_or_rtl_combine_via_space, expired, dateFormat.format(expireTime));

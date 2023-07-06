@@ -5,14 +5,27 @@
 	android:layout_height="wrap_content"
 	android:layout_gravity="end|bottom">
 
-	<ImageButton
-		android:id="@+id/map_my_location_button"
-		android:layout_width="@dimen/map_button_size"
-		android:layout_height="@dimen/map_button_size"
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:background="@drawable/btn_circle"
-		android:contentDescription="@string/shared_string_my_location"
-		tools:src="@drawable/ic_action_remove_dark" />
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:id="@+id/hud_button_container"
+			android:layout_width="@dimen/map_button_size"
+			android:layout_height="@dimen/map_button_size" />
+
+		<ImageButton
+			android:id="@+id/map_my_location_button"
+			android:layout_width="@dimen/map_button_size"
+			android:layout_height="@dimen/map_button_size"
+			android:layout_marginTop="@dimen/map_button_spacing"
+			android:background="@drawable/btn_circle"
+			android:contentDescription="@string/shared_string_my_location"
+			tools:src="@drawable/ic_action_remove_dark" />
+
+	</LinearLayout>
 
 	<LinearLayout
 		android:layout_width="wrap_content"

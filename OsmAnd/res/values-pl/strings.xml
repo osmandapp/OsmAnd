@@ -436,7 +436,7 @@
     <string name="save_track_interval_descr">Określ interwał nagrywania tras podczas nawigacji</string>
     <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
     <string name="save_track_to_gpx">Automatyczne nagrywanie trasy podczas nawigacji</string>
-    <string name="update_tile">Uaktualnij mapę</string>
+    <string name="update_tile">Aktualizuj</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
     <string name="open_street_map_login_descr">Potrzebne do przysyłania zmian do serwisu openstreetmap.org.</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
@@ -5196,7 +5196,7 @@
     <string name="no_search_results">Brak wyników</string>
     <string name="no_poi_for_category">Nie znaleziono punktu POI</string>
     <string name="poi_categories">Kategorie POI</string>
-    <string name="map_3d_mode_hint">Długie dotknięcie przycisku umożliwia zmianę jego pozycji.</string>
+    <string name="map_3d_mode_hint">Długie dotknięcie przycisku pozwala zmienić pozycję przycisku.</string>
     <string name="visible_in_3d_mode">Widoczne w trybie 3D</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="map_2d_mode_action">Tryb 2D</string>
@@ -5234,4 +5234,13 @@
     <string name="calculate_offline_altitude_descr">Obliczanie wysokości w trybie offline na podstawie danych mapy wysokości. Różnice w stosunku do wysokości rejestrowanej przez urządzenie mogą być wykorzystane jako korekcja wysokości.</string>
     <string name="external_sensors_not_found">Nie znaleziono czujników</string>
     <string name="external_sensors_source_of_data">Źródło danych</string>
+    <string name="power_watts_unit">Watów</string>
+    <string name="revolutions_per_minute_unit">obr./min</string>
+    <string name="free_mode">Tryb swobodny</string>
+    <string name="relief_3d">Relief 3D</string>
+    <string name="terrain_map">Mapa terenu</string>
+    <string name="save_track_external_sensors_data">Dane</string>
+    <string name="relief_3d_description">Posiadaj i obserwuj model w skali swojej okolicy lub całego kontynentu.</string>
+    <string name="slope_legend_description">Nachylenie używa kolorów do wizualizacji nachylenia terenu. Więcej informacji na temat stoków można znaleźć w %1$s.</string>
+    <string name="terrain_category_description">Linie konturu terenu, pełna mapa cieni wzgórz z ciemnymi odcieniami i mapy zboczy z kolorami pokazującymi szczyty i niziny.</string>
 </resources>
