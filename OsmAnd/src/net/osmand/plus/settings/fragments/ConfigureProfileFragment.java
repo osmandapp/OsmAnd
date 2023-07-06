@@ -462,9 +462,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				sepAppModeToSelected();
 				ConfigureScreenFragment.showInstance(mapActivity);
 			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, selectedMode);
 			} else if (RESET_TO_DEFAULT.equals(prefId)) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {

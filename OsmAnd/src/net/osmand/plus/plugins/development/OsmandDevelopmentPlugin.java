@@ -63,6 +63,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
+		pluginPreferences.add(settings.SAFE_MODE);
+		pluginPreferences.add(settings.APPROX_SAFE_MODE);
+		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
+		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);
+		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
+		pluginPreferences.add(settings.MEMORY_ALLOCATED_FOR_ROUTING);
+
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {

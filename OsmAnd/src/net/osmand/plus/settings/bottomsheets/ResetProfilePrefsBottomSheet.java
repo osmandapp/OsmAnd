@@ -93,6 +93,12 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 
 	public static boolean showInstance(@NonNull FragmentManager manager,
 	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable Fragment target) {
+		return showInstance(manager, appMode, target, false);
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager manager,
+	                                   @NonNull ApplicationMode appMode,
 	                                   @Nullable Fragment target,
 	                                   boolean usedOnMap) {
 		try {

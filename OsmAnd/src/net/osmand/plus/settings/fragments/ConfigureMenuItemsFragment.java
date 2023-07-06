@@ -427,17 +427,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		items.add(new RearrangeMenuAdapterItem(BUTTON, new RearrangeMenuItemsAdapter.ButtonItem(
 				R.string.copy_from_other_profile,
 				R.drawable.ic_action_copy,
-				view -> {
-					FragmentManager fm = getFragmentManager();
-					if (fm != null) {
-						SelectCopyAppModeBottomSheet.showInstance(
-								fm,
-								ConfigureMenuItemsFragment.this,
-								false,
-								appMode
-						);
-					}
-				})));
+				view -> showSelectCopyAppModeDialog())));
 		return items;
 	}
 
@@ -482,6 +472,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 
 	private void setScreenType(@NonNull ScreenType screenType) {
 		this.screenType = screenType;
+	}
+
+	private void showSelectCopyAppModeDialog() {
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			SelectCopyAppModeBottomSheet.showInstance(manager, this, appMode);
+		}
 	}
 
 	@Override
