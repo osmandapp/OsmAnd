@@ -73,6 +73,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		GENERATE_SLOPE_FROM_3D_MAPS = registerBooleanPreference("generate_slope_from_3d_maps", true).makeGlobal().makeShared().cache();
 		GENERATE_HILLSHADE_FROM_3D_MAPS = registerBooleanPreference("generate_hillshade_from_3d_maps", true).makeGlobal().makeShared().cache();
 
+		pluginPreferences.add(settings.SAFE_MODE);
+		pluginPreferences.add(settings.APPROX_SAFE_MODE);
+		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
+		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);
+		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
+		pluginPreferences.add(settings.MEMORY_ALLOCATED_FOR_ROUTING);
+
 		disableVertexHillshade3DListener = change -> {
 			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 			if (mapRendererContext != null) {

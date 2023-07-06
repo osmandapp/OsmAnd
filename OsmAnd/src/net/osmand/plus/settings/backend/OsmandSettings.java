@@ -404,6 +404,14 @@ public class OsmandSettings {
 		}
 	}
 
+	public void resetPreferences(List<OsmandPreference> preferences) {
+		for (OsmandPreference preference : preferences) {
+			if (preference instanceof CommonPreference) {
+				preference.resetToDefault();
+			}
+		}
+	}
+
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
 		setAppModeCustomProperties();

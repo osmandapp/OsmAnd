@@ -158,4 +158,15 @@
 		android:title="@string/day_night_info"
 		tools:summary="@string/day_night_info_description" />
 
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_plugin_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
+
 </PreferenceScreen>
