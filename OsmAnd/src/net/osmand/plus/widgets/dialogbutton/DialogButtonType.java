@@ -5,7 +5,6 @@ import static net.osmand.plus.widgets.dialogbutton.DialogButtonAttributes.INVALI
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 
 public enum DialogButtonType {
 
@@ -16,7 +15,7 @@ public enum DialogButtonType {
 	),
 	PRIMARY_HARMFUL(
 			R.attr.dlg_btn_primary_text,
-			R.attr.dlg_btn_primary_harmfull,
+			R.attr.dlg_btn_primary_harmful,
 			R.attr.dlg_btn_ripple_solid
 	),
 	SECONDARY(
@@ -43,6 +42,11 @@ public enum DialogButtonType {
 			R.attr.dlg_btn_tertiary_text,
 			INVALID_ID,
 			R.attr.dlg_btn_ripple_tertiary
+	),
+	TERTIARY_HARMFUL(
+			R.attr.dlg_btn_primary_text,
+			R.attr.dlg_btn_tertiary_harmful,
+			R.attr.dlg_btn_ripple_solid
 	);
 
 	DialogButtonType(int contentColorAttr, int backgroundAttr, int rippleAttr) {

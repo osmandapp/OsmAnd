@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -297,7 +298,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.set(true);
 			});
 			View getCloudBtn = holder.findViewById(R.id.dismiss_button);
-			UiUtilities.setupDialogButton(isNightMode(), getCloudBtn, DialogButtonType.SECONDARY, R.string.get_osmand_cloud);
+			UiUtilities.setupDialogButton(isNightMode(), getCloudBtn, SECONDARY, R.string.get_osmand_cloud);
 			getCloudBtn.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {

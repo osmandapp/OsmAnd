@@ -3,7 +3,8 @@ package net.osmand.plus.configmap;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.STROKED;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -115,7 +116,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 	protected void updateApplyButton(boolean enable) {
 		applyButton.setEnabled(enable);
-		setupDialogButton(nightMode, applyButton, enable ? UiUtilities.DialogButtonType.PRIMARY : UiUtilities.DialogButtonType.STROKED, getString(R.string.shared_string_apply));
+		UiUtilities.setupDialogButton(nightMode, applyButton, enable ? PRIMARY : STROKED, getString(R.string.shared_string_apply));
 	}
 
 	protected void refreshMap() {
@@ -235,7 +236,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		refreshControlsButtons();
 	}
 
-	private void refreshControlsButtons(){
+	private void refreshControlsButtons() {
 		app.getOsmandMap().getMapLayers().getMapControlsLayer().refreshButtons();
 	}
 

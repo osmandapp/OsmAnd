@@ -139,15 +139,16 @@
 	    <attr name="dlg_btn_ripple_solid" format="reference" />
 	    <attr name="dlg_btn_ripple_tertiary" format="reference" />
 		<attr name="dlg_btn_primary" format="reference" />
-	    <attr name="dlg_btn_primary_harmfull" format="reference" />
+		<attr name="dlg_btn_primary_harmful" format="reference" />
 		<attr name="dlg_btn_primary_text" format="reference" />
 		<attr name="dlg_btn_secondary" format="reference" />
 		<attr name="dlg_btn_secondary_text" format="reference" />
 		<attr name="dlg_btn_secondary_harmful_text" format="reference" />
-	    <attr name="dlg_btn_transparent" format="reference" />
+		<attr name="dlg_btn_transparent" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
-	    <attr name="dlg_btn_tertiary_text" format="reference" />
-        <attr name="stroked_btn_contour" format="reference" />
+		<attr name="dlg_btn_tertiary_text" format="reference" />
+		<attr name="dlg_btn_tertiary_harmful" format="reference" />
+		<attr name="stroked_btn_contour" format="reference" />
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
 		<attr name="btn_bg_border_inactive" format="reference"/>
