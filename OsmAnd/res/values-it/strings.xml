@@ -5258,4 +5258,54 @@
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
 \n
 \nInserisci l\'indirizzo email con cui ti sei registrato. Ti verrà inviata una password monouso per il passaggio successivo.</string>
+    <string name="free_favorites_backup_description">Registrati in OsmAnd Cloud per ottenere il backup gratuito dei preferiti e delle impostazioni.</string>
+    <string name="free_favorites_backup">Backup gratuito dei preferiti</string>
+    <string name="get_osmand_cloud">Ottieni OsmAnd Cloud</string>
+    <string name="free_account">Account gratuito</string>
+    <string name="folder_export_empty_error">Niente da esportare, la cartella è vuota</string>
+    <string name="release_4_5">• Sensori BLE/ANT+: collegamento rielaborato, scrittura e visualizzazione dei dati ricevuti su GPX
+\n
+\n• Backup gratuito dei preferiti e delle impostazioni su \"OsmAnd Cloud\"
+\n
+\n• Nuovo formato per le mappe del terreno con supporto 3D
+\n
+\n• Gestione delle tracce: interfaccia utente aggiornata, ordinamento aggiunto, supporto di cartelle nidificate
+\n
+\n• Android Auto: nuovo menu di avvio per accedere a preferiti, tracce e categorie dei POI
+\n
+\n• Un elenco di widget per il pannello superiore/inferiore
+\n
+\n• Nuovo profilo \"Treno\", permette di calcolare i percorsi ferroviari
+\n
+\n• Le curve di livello funzionano con qualsiasi \"sorgente mappa\"
+\n
+\n• Elenco ampliato di azioni predefinite per tastiere esterne
+\n
+\n• File di routing personalizzati, opzioni aggiunte per eliminare o sovrascrivere
+\n
+\n• Aggiunta opzione per \"Annuncia deviazione dal percorso\"
+\n
+\n• Schermata iniziale: aggiunta opzione ripristina lo stato di OsmAnd da file
+\n
+\n• Aggiunte classi \"Materiali pericolosi\" Navigazione camion in Nord America
+\n
+\n• Aggiunto il supporto di \"Via ferrata\" per il percorso pedonale
+\n
+\n• Aggiunta scala \"CAI\" per la classificazione delle difficoltà dei percorsi
+\n
+\n• Corretta la selezione della lingua
+\n
+\n• Aggiunto il supporto per le icone a tema
+\n
+\n• OsmAnd Cloud: aggiunta opzione per eliminare account
+\n
+\n• Accessibilità: dimensione per i pulsanti touch modificata a 48 dpi; problema risolto con l\'interfaccia utente della mappa visibile per gli screen reader
+\n
+\n• Prompt vocali giapponesi rielaborati
+\n
+\n• Rielaborato il cambio di quota e la valutazione della pendenza
+\n
+\n</string>
+    <string name="routing_attr_allow_via_ferrata_description">Permetti le vie ferrate.</string>
+    <string name="slope_legend_description">Pendenza utilizza i colori per visualizzare la pendenza del terreno. Puoi leggere di più sulle pendenze in %1$s.</string>
 </resources>
