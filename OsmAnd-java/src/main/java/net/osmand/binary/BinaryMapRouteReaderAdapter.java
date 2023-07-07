@@ -271,7 +271,15 @@ public class BinaryMapRouteReaderAdapter {
 			} else if (t.startsWith("access") && v != null) {
 				type = ACCESS;
 			} else if (t.startsWith("maxspeed") && v != null) {
-				forward = t.endsWith(":forward") ? 1 : t.endsWith(":backward") ? -1 : 0;
+				if (t.endsWith(":forward")) {
+					t = t.substring(0, t.length() - ":forward".length());
+					forward = 1;
+				} else if (t.endsWith(":backward")) {
+					t = t.substring(0, t.length() - ":backward".length());
+					forward = -1;
+				} else {
+					forward = 0;
+				}
 				floatValue = RouteDataObject.parseSpeed(v, 0);
 				if (t.equalsIgnoreCase("maxspeed")) {
 					type = MAXSPEED;
