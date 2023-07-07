@@ -2819,7 +2819,7 @@
 \n
 \n</string-->
     <string name="one_tap_active">انقر لتنشيط توجيه الهدف</string>
-    <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام قائمة السياق أو القطعة.</string>
+    <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام القائمة السفلية أو الملحق.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
@@ -3553,10 +3553,10 @@
     <string name="ui_customization_description">تخصيص كمية العناصر في درج تكوين خريطة قائمة السياق. 
 \n 
 \nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
-    <string name="ui_customization_short_descr">عناصر الدرج، قائمة السياق</string>
+    <string name="ui_customization_short_descr">القائمة الجانبية و السفلية</string>
     <string name="ui_customization">تخصيص واجهة المستخدم</string>
-    <string name="shared_string_drawer">درج</string>
-    <string name="context_menu_actions">إجراءات قائمة السياق</string>
+    <string name="shared_string_drawer">القائمة الجانبية</string>
+    <string name="context_menu_actions">إجراءات القائمة السفلية</string>
     <string name="reorder_or_hide_from">إعادة ترتيب العناصر أو إخفائها من %1$s.</string>
     <string name="shared_string_divider">مفصول</string>
     <string name="divider_descr">عناصر أسفل هذه النقطة مفصولة بفاصل.</string>
@@ -3620,22 +3620,22 @@
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة.</string>
     <string name="navigation_profiles_item">أوضاع الملاحة</string>
-    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت 
-\n 
-\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال 
-\n 
-\n • تخصيص ترتيب العناصر في قائمة السياق ، تكوين الخريطة ، درج 
-\n 
-\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط 
-\n 
-\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة 
-\n 
-\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة 
-\n 
-\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة 
-\n 
-\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية 
-\n 
+    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت
+\n
+\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
+\n
+\n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية
+\n
+\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
+\n
+\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة
+\n
+\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة
+\n
+\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة
+\n
+\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
+\n
 \n • إصلاح الخلل مع اللغات التي تكتب من اليمين
 \n
 \n</string>
