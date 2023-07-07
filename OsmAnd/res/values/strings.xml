@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="free_settings_backup">Free Settings Backup</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqltiedb for slope / hillshade</string>
     <string name="cache_size">Cache size</string>
     <string name="shared_string_avoid">Avoid</string>

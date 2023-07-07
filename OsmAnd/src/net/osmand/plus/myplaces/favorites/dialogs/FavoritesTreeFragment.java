@@ -189,7 +189,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			if (!proAvailable && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
 				freeFavoritesBackupCardDivider = inflater.inflate(R.layout.list_item_divider, listView, false);
 				listView.addHeaderView(freeFavoritesBackupCardDivider, null, false);
-				freeFavoritesBackupCard = inflater.inflate(R.layout.free_favorites_backup_card, listView, false);
+				freeFavoritesBackupCard = inflater.inflate(R.layout.free_backup_card, listView, false);
 				setupGetOsmAndCloudButton(freeFavoritesBackupCard);
 				listView.addHeaderView(freeFavoritesBackupCard);
 			}
