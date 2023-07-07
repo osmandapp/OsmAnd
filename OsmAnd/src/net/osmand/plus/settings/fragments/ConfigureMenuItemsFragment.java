@@ -50,10 +50,12 @@ import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.RearrangeMen
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.CtxMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
@@ -228,20 +230,21 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		toolbarButton.setOnClickListener(view -> exitFragment());
 		appbar.addView(toolbar);
 		recyclerView = root.findViewById(R.id.profiles_list);
-		View cancelButton = root.findViewById(R.id.dismiss_button);
+
+		DialogButton cancelButton = root.findViewById(R.id.dismiss_button);
 		root.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-		View applyButton = root.findViewById(R.id.right_bottom_button);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity fragmentActivity = getActivity();
-				if (fragmentActivity != null) {
-					fragmentActivity.onBackPressed();
-				}
+		cancelButton.setButtonType(DialogButtonType.SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
+		cancelButton.setOnClickListener(v -> {
+			FragmentActivity fragmentActivity = getActivity();
+			if (fragmentActivity != null) {
+				fragmentActivity.onBackPressed();
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+
+		DialogButton applyButton = root.findViewById(R.id.right_bottom_button);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 		applyButton.setVisibility(View.VISIBLE);
 		applyButton.setOnClickListener(v -> {
 			List<ContextMenuItem> defItems = CtxMenuUtils.getCustomizableItems(contextMenuAdapter);

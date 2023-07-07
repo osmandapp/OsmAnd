@@ -39,7 +39,8 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -61,8 +62,8 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	private TrackPointsAdapter adapter;
 
-	private View applyButton;
-	private View selectAllButton;
+	private DialogButton applyButton;
+	private DialogButton selectAllButton;
 	private TextView toolbarTitle;
 	private ExpandableListView listView;
 
@@ -214,10 +215,14 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	protected void updateButtonsState() {
+		applyButton.setTitleId(R.string.shared_string_apply);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+
 		boolean allSelected = selectedPoints.containsAll(points);
 		String selectAllText = getString(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, getString(R.string.shared_string_apply));
-		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY_ACTIVE, selectAllText, R.drawable.ic_action_deselect_all);
+		selectAllButton.setButtonType(DialogButtonType.SECONDARY_ACTIVE);
+		selectAllButton.setTitle(selectAllText);
+		selectAllButton.setIconId(R.drawable.ic_action_deselect_all);
 
 		TextView textView = selectAllButton.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));

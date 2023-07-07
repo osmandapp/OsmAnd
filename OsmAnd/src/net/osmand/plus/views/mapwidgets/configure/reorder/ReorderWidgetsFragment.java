@@ -34,7 +34,6 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -54,6 +53,7 @@ import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.ActionButto
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.PageViewHolder.PageUiInfo;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -210,8 +210,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	private void setupApplyButton() {
-		View applyButton = view.findViewById(R.id.apply_button);
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		DialogButton applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> onApplyChanges());
 	}
 

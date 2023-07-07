@@ -46,10 +46,11 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTileLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -92,7 +93,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private TextView tilesNumberText;
 	private TextView estimatedDownloadSizeText;
 
-	private View downloadButton;
+	private DialogButton downloadButton;
 
 	private int selectedMinZoom;
 	private int selectedMaxZoom;
@@ -400,8 +401,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	private void setupDownloadButton() {
 		downloadButton = view.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, downloadButton, DialogButtonType.PRIMARY,
-				R.string.shared_string_download);
+		downloadButton.setButtonType(DialogButtonType.PRIMARY);
+		downloadButton.setTitleId(R.string.shared_string_download);
 		downloadButton.setOnClickListener(v -> {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {

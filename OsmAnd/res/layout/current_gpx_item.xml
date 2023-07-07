@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
@@ -14,25 +16,29 @@
 	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="@dimen/settings_divider_margin_start"
-		android:layout_marginEnd="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding_small">
+		android:layout_marginTop="@dimen/content_padding_small_half_inverted"
+		android:paddingStart="@dimen/settings_divider_margin_start"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small_half"
+		android:paddingBottom="@dimen/content_padding_small">
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/action_button"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="wrap_content"
-			android:layout_height="@dimen/dialog_button_height" />
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondaryActive"
+			tools:dialogButtonTitle="@string/shortcut_start_recording"/>
 
 		<Space
-			android:layout_width="10dp"
+			android:layout_width="@dimen/content_padding_round_medium"
 			android:layout_height="match_parent" />
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/save_button"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="wrap_content"
-			android:layout_height="@dimen/dialog_button_height" />
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondaryActive"
+			tools:dialogButtonTitle="@string/shared_string_save"/>
 
 	</LinearLayout>
 

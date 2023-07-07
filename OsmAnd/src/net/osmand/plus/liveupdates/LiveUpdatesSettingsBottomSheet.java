@@ -39,6 +39,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -275,7 +276,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		itemUpdateNowButton.setLayoutParams(itemUpdateNowParams);
 		((AppCompatImageView) itemUpdateNowButton.findViewById(R.id.button_icon)).setImageDrawable(
 				AppCompatResources.getDrawable(app, R.drawable.ic_action_update));
-		UiUtilities.setupDialogButton(nightMode, itemUpdateNowButton, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.update_now));
+		UiUtilities.setupDialogButton(nightMode, itemUpdateNowButton, DialogButtonType.SECONDARY, getString(R.string.update_now));
 		itemUpdateNowButton.setMinimumHeight(AndroidUtils.dpToPx(app, dp36));
 
 		items.add(new BaseBottomSheetItem.Builder()

@@ -127,22 +127,26 @@
 				android:orientation="horizontal"
 				android:padding="@dimen/content_padding_half">
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/selection_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonUseUppercaseTitle="true"
+					osmand:dialogButtonType="tertiary"
+					tools:dialogButtonTitle="@string/shared_string_select_recent" />
 
 				<View
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
 					android:layout_weight="1" />
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/apply_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonUseUppercaseTitle="true"
+					osmand:dialogButtonTitle="@string/shared_string_apply"
+					osmand:dialogButtonType="tertiary"/>
 
 
 			</LinearLayout>

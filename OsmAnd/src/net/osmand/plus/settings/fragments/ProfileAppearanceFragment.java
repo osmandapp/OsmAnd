@@ -62,9 +62,10 @@ import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListene
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -119,7 +120,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private FlowLayout locationIconItems;
 	private FlowLayout navIconItems;
 	private OsmandTextFieldBoxes profileNameOtfb;
-	private View saveButton;
+	private DialogButton saveButton;
 
 	private boolean isBaseProfileImported;
 	private boolean isNewProfile;
@@ -252,7 +253,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			View buttonsContainer = themedInflater.inflate(R.layout.bottom_buttons, preferencesContainer, false);
 
 			preferencesContainer.addView(buttonsContainer);
-			View cancelButton = buttonsContainer.findViewById(R.id.dismiss_button);
+			DialogButton cancelButton = buttonsContainer.findViewById(R.id.dismiss_button);
 			saveButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 
 			saveButton.setVisibility(View.VISIBLE);
@@ -260,8 +261,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 			AndroidUtils.setBackground(getContext(), buttonsContainer, ColorUtilities.getListBgColorId(isNightMode()));
 
-			UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-			UiUtilities.setupDialogButton(isNightMode(), saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
+			cancelButton.setButtonType(DialogButtonType.SECONDARY);
+			cancelButton.setTitleId(R.string.shared_string_cancel);
+			saveButton.setButtonType(DialogButtonType.PRIMARY);
+			saveButton.setTitleId(R.string.shared_string_save);
 
 			cancelButton.setOnClickListener(v -> {
 				goBackWithoutSaving();

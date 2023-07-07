@@ -116,6 +116,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UploadFileTask;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
 import net.osmand.plus.widgets.multistatetoggle.MultiStateToggleButton;
@@ -414,19 +415,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		View applyMovePointButton = mainView.findViewById(R.id.apply_move_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyMovePointButton,
-				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+				DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		applyMovePointButton.setMinimumWidth(btnWidth);
 		applyMovePointButton.setOnClickListener(v -> applyMovePointMode());
 
 		View applyPointBeforeAfterButton = mainView.findViewById(R.id.apply_point_before_after_point_button);
 		UiUtilities.setupDialogButton(nightMode, applyPointBeforeAfterButton,
-				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+				DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		applyPointBeforeAfterButton.setMinimumWidth(btnWidth);
 		applyPointBeforeAfterButton.setOnClickListener(v -> applyAddPointBeforeAfterMode());
 
 		View addPointBeforeAfterButton = mainView.findViewById(R.id.add_point_before_after_button);
 		UiUtilities.setupDialogButton(nightMode, addPointBeforeAfterButton,
-				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_add);
+				DialogButtonType.PRIMARY, R.string.shared_string_add);
 		addPointBeforeAfterButton.setMinimumWidth(btnWidth);
 		addPointBeforeAfterButton.setOnClickListener(v -> addPointBeforeAfter());
 
@@ -461,7 +462,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		View addPointButton = mainView.findViewById(R.id.add_point_button);
 		UiUtilities.setupDialogButton(nightMode, addPointButton,
-				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_add);
+				DialogButtonType.PRIMARY, R.string.shared_string_add);
 		addPointButton.setMinimumWidth(btnWidth);
 		addPointButton.setOnClickListener(v -> addCenterPoint());
 

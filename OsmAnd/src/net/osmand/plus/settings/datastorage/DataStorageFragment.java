@@ -58,7 +58,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -410,14 +410,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		}
 	}
 
-	private void setupDetailsButton(StorageItem item, View detailsButton) {
+	private void setupDetailsButton(StorageItem item, DialogButton btnDetails) {
 		boolean sharedStorage = item.getKey().equals(SHARED_STORAGE);
-		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage && (!storageMigration && !firstUsage));
+		AndroidUiHelper.updateVisibility(btnDetails, sharedStorage && (!storageMigration && !firstUsage));
 
 		if (item.getKey().equals(SHARED_STORAGE)) {
-			detailsButton.setClickable(true);
-			UiUtilities.setupDialogButton(isNightMode(), detailsButton, DialogButtonType.SECONDARY, R.string.shared_string_migration);
-			detailsButton.setOnClickListener(v -> {
+			btnDetails.setClickable(true);
+			btnDetails.setOnClickListener(v -> {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
 					SharedStorageWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), false);

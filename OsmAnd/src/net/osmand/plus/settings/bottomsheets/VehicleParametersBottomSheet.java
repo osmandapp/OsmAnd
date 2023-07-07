@@ -34,7 +34,7 @@ import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -199,9 +199,8 @@ public class VehicleParametersBottomSheet extends BasePreferenceBottomSheet {
 
 	private void updateApplyButton(boolean enable) {
 		rightButton.setEnabled(enable);
-		String btnTitle = getString(getRightBottomButtonTextId());
-		DialogButtonType btnType = enable ? DialogButtonType.PRIMARY : DialogButtonType.STROKED;
-		UiUtilities.setupDialogButton(nightMode, rightButton, btnType, btnTitle);
+		rightButton.setButtonType(enable ? DialogButtonType.PRIMARY : DialogButtonType.STROKED);
+		rightButton.setTitleId(getRightBottomButtonTextId());
 	}
 
 	@Override

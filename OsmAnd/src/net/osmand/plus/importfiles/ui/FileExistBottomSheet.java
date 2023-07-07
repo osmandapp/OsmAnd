@@ -1,8 +1,6 @@
 package net.osmand.plus.importfiles.ui;
 
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import static net.osmand.plus.utils.UiUtilities.getInflater;
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -61,7 +59,6 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void setupReplaceButton(@NonNull View view) {
-		setupDialogButton(nightMode, view, DialogButtonType.SECONDARY, R.string.update_existing);
 		view.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.saveExistingFile(true);
@@ -71,7 +68,6 @@ public class FileExistBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void setupDuplicateButton(@NonNull View view) {
-		setupDialogButton(nightMode, view, DialogButtonType.PRIMARY, R.string.keep_both);
 		view.setOnClickListener(v -> {
 			if (listener != null) {
 				listener.saveExistingFile(false);

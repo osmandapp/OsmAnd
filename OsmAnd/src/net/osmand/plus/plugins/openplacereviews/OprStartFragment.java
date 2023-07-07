@@ -54,12 +54,8 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 		toolbar.setNavigationOnClickListener(v -> dismiss());
 
 		View createAccount = view.findViewById(R.id.register_opr_create_account);
-		UiUtilities.setupDialogButton(nightMode, createAccount, UiUtilities.DialogButtonType.PRIMARY,
-				R.string.register_opr_create_new_account);
 		createAccount.setOnClickListener(v -> handleCreateAccount());
 		View haveAccount = view.findViewById(R.id.register_opr_have_account);
-		UiUtilities.setupDialogButton(nightMode, haveAccount, UiUtilities.DialogButtonType.SECONDARY,
-				R.string.register_opr_have_account);
 		haveAccount.setOnClickListener(v -> handleHaveAccount());
 		setURLSpan(view);
 		return view;

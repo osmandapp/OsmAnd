@@ -53,8 +53,8 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -82,7 +82,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private View buttonChoosePlan;
 	private EditText editText;
 	private TextView errorText;
-	private View buttonAuthorize;
+	private DialogButton buttonAuthorize;
 	private View keyboardSpace;
 	private View space;
 
@@ -147,9 +147,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		updateContent();
 		setupSupportButton();
 		setupKeyboardListener();
-
-		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.shared_string_get);
-		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
 
 		return view;
 	}
@@ -249,7 +246,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			setDialogType(nextType);
 			updateContent();
 		});
-		UiUtilities.setupDialogButton(nightMode, buttonAuthorize, DialogButtonType.SECONDARY_ACTIVE, nextType.titleId);
+		buttonAuthorize.setTitleId(nextType.titleId);
+		buttonAuthorize.setButtonType(DialogButtonType.SECONDARY_ACTIVE);
 
 		buttonChoosePlan.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
@@ -280,7 +278,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private void setupVerifyEmailContainer(@NonNull View view) {
 		errorText = view.findViewById(R.id.error_text);
 		editText = view.findViewById(R.id.edit_text);
-		View resendButton = view.findViewById(R.id.button);
+		DialogButton resendButton = view.findViewById(R.id.button);
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
 		View codeMissingDescription = view.findViewById(R.id.code_missing_description);
 
@@ -304,7 +302,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				AndroidUiHelper.updateVisibility(codeMissingDescription, true);
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, resendButton, DialogButtonType.SECONDARY_ACTIVE, R.string.resend_verification_code);
+		resendButton.setButtonType(DialogButtonType.SECONDARY_ACTIVE);
+		resendButton.setTitleId(R.string.resend_verification_code);
 
 		buttonContinue.setEnabled(!Algorithms.isEmpty(editText.getText()));
 		buttonContinue.setOnClickListener(v -> tokenSelected(editText.getText().toString()));

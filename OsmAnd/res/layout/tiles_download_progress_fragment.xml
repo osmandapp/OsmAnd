@@ -78,14 +78,16 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/dialog_button_ex_height"
-			android:paddingStart="@dimen/content_padding"
+			android:paddingHorizontal="@dimen/content_padding"
 			android:paddingTop="@dimen/content_padding_half"
-			android:paddingEnd="@dimen/content_padding"
 			android:paddingBottom="@dimen/content_padding">
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/cancel_button"
-				layout="@layout/bottom_sheet_dialog_button" />
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				osmand:dialogButtonType="secondary"
+				tools:dialogButtonTitle="@string/shared_string_cancel" />
 
 		</LinearLayout>
 

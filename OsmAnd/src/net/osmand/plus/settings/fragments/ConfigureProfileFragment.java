@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,8 +57,8 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetA
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import org.apache.commons.logging.Log;
 
@@ -278,9 +279,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			boolean hasPlugins = PluginsHelper.getEnabledSettingsScreenPlugins().size() > 0;
 			AndroidUiHelper.updateVisibility(noPluginsPart, !hasPlugins);
 
-			View openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
+			DialogButton openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
 			if (!hasPlugins) {
-				UiUtilities.setupDialogButton(isNightMode(), openPluginsButton, DialogButtonType.SECONDARY, R.string.plugins_screen);
 				openPluginsButton.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
@@ -298,7 +298,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.set(true);
 			});
 			View getCloudBtn = holder.findViewById(R.id.dismiss_button);
-			UiUtilities.setupDialogButton(isNightMode(), getCloudBtn, DialogButtonType.SECONDARY, R.string.get_osmand_cloud);
+			UiUtilities.setupDialogButton(isNightMode(), getCloudBtn, SECONDARY, R.string.get_osmand_cloud);
 			getCloudBtn.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {

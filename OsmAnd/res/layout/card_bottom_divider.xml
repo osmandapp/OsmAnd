@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/bottomShadowView"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomShadowView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
-        osmand:srcCompat="@drawable/bg_shadow_list_bottom"/>
+        osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 </LinearLayout>

@@ -12,9 +12,9 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
-		app:srcCompat="@drawable/ic_action_wifi_off"
+		android:contentDescription="@string/no_internet_connection"
 		android:tint="@color/icon_color_default_light"
-		android:contentDescription="@string/no_internet_connection" />
+		app:srcCompat="@drawable/ic_action_wifi_off" />
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/title"
@@ -27,14 +27,15 @@
 		android:textSize="@dimen/default_list_text_size"
 		app:typeface="@string/font_roboto_regular" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/try_again_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="wrap_content"
-		android:layout_height="@dimen/dialog_button_height"
+		android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal"
-		android:layout_marginTop="@dimen/content_padding"
 		android:visibility="gone"
+		app:dialogButtonTopMargin="@dimen/content_padding"
+		app:dialogButtonTitle="@string/try_again"
+		app:dialogButtonType="secondary"
 		tools:visibility="visible" />
 
 </LinearLayout>

@@ -19,7 +19,8 @@ import net.osmand.plus.plugins.externalsensors.adapters.FoundDevicesAdapter.Devi
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
+import net.osmand.plus.widgets.dialogbutton.DialogButton
 
 class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevicesListener,
     DeviceClickListener {
@@ -72,14 +73,9 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     private fun setupNoBluetoothView(parentView: View) {
         stateNoBluetoothView = parentView.findViewById(R.id.state_no_bluetooth)
-        val openSettingButton = stateNoBluetoothView?.findViewById<View>(R.id.dismiss_button)
-        val buttonTextId = R.string.ant_plus_open_settings
-        UiUtilities.setupDialogButton(
-            nightMode,
-            openSettingButton,
-            UiUtilities.DialogButtonType.SECONDARY,
-            buttonTextId
-        )
+        val openSettingButton = stateNoBluetoothView?.findViewById<DialogButton>(R.id.dismiss_button)
+        openSettingButton?.setButtonType(SECONDARY)
+        openSettingButton?.setTitleId(R.string.ant_plus_open_settings)
         openSettingButton?.setOnClickListener {
             val intentOpenBluetoothSettings = Intent()
             intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
@@ -96,14 +92,9 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
 
     private fun setupNothingFoundView(parentView: View) {
         stateNothingFoundView = parentView.findViewById(R.id.state_nothing_found)
-        val searchAgain = stateNothingFoundView?.findViewById<View>(R.id.dismiss_button)
-        val buttonTextId = R.string.ble_search_again
-        UiUtilities.setupDialogButton(
-            nightMode,
-            searchAgain,
-            UiUtilities.DialogButtonType.SECONDARY,
-            buttonTextId
-        )
+        val searchAgain = stateNothingFoundView?.findViewById<DialogButton>(R.id.dismiss_button)
+        searchAgain?.setButtonType(SECONDARY)
+        searchAgain?.setTitleId(R.string.ble_search_again)
         searchAgain?.setOnClickListener {
             setCurrentState(SearchStates.SEARCHING)
             startSearch()

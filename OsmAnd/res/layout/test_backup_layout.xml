@@ -78,12 +78,15 @@
 
 			</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btn_register"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:visibility="gone" />
+				android:layout_height="wrap_content"
+				android:visibility="gone"
+				tools:dialogButtonType="primary"
+				tools:dialogButtonTitle="Register"
+				tools:dialogButtonBottomMargin="@dimen/content_padding_half"
+				tools:visibility="visible"/>
 
 			<net.osmand.plus.widgets.OsmandTextFieldBoxes
 				android:id="@+id/edit_token_label"
@@ -111,11 +114,12 @@
 
 			</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btn_verify"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height" />
+				android:layout_height="wrap_content"
+				tools:dialogButtonType="secondary"
+				tools:dialogButtonTitle="Verify"/>
 
 			<TextView
 				android:layout_width="match_parent"
@@ -125,33 +129,37 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btn_refresh"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginTop="@dimen/content_padding_half" />
+				android:layout_height="wrap_content"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				tools:dialogButtonType="secondaryActive"
+				tools:dialogButtonTitle="Refresh" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btn_backup"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginTop="@dimen/content_padding_half" />
+				android:layout_height="wrap_content"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				tools:dialogButtonType="secondaryActive"
+				tools:dialogButtonTitle="Backup" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btn_restore"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginTop="@dimen/content_padding_half" />
+				android:layout_height="wrap_content"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				tools:dialogButtonType="secondaryActive"
+				tools:dialogButtonTitle="Restore" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btn_logout"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginTop="@dimen/content_padding_half" />
+				android:layout_height="wrap_content"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				tools:dialogButtonType="secondaryActive"
+				tools:dialogButtonTitle="Log out" />
 
 			<TextView
 				android:id="@+id/text_info"

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.wikivoyage.explore.travelcards.TravelNeededMapsCard.CardListener;
 
 public class TravelButtonCard extends BaseTravelCard {
@@ -27,13 +27,9 @@ public class TravelButtonCard extends BaseTravelCard {
 	public void bindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder) {
 		if (viewHolder instanceof TravelButtonVH) {
 			TravelButtonVH holder = (TravelButtonVH) viewHolder;
-			UiUtilities.setupDialogButton(nightMode, holder.button, UiUtilities.DialogButtonType.SECONDARY, R.string.show_more);
-			holder.button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (listener != null) {
-						listener.onPrimaryButtonClick();
-					}
+			holder.button.setOnClickListener(view -> {
+				if (listener != null) {
+					listener.onPrimaryButtonClick();
 				}
 			});
 		}
@@ -41,7 +37,7 @@ public class TravelButtonCard extends BaseTravelCard {
 
 	public static class TravelButtonVH extends RecyclerView.ViewHolder {
 
-		final View button;
+		final DialogButton button;
 
 		public TravelButtonVH(View itemView) {
 			super(itemView);

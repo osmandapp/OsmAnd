@@ -150,11 +150,12 @@
 			android:paddingTop="@dimen/content_padding_small"
 			android:paddingBottom="@dimen/content_padding">
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/details_button"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/route_info_buttons_height" />
+				android:layout_height="wrap_content"
+				osmand:dialogButtonType="stroked"
+				osmand:dialogButtonTitle="@string/shared_string_details"/>
 
 		</FrameLayout>
 

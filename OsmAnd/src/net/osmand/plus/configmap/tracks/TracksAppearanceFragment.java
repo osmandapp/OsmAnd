@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -53,6 +53,7 @@ import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private ColorsCard colorsCard;
 	private ColoringTypeCard coloringTypeCard;
 	private PromoBannerCard promoCard;
-	private View applyButton;
+	private DialogButton applyButton;
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -264,12 +265,13 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 		applyButton = view.findViewById(R.id.right_bottom_button);
 		applyButton.setOnClickListener(v -> AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager()));
+		applyButton.setButtonType(PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 
-		View cancelButton = view.findViewById(R.id.dismiss_button);
+		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(v -> dismiss());
-
-		UiUtilities.setupDialogButton(nightMode, applyButton, PRIMARY, R.string.shared_string_apply);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, SECONDARY, R.string.shared_string_cancel);
+		cancelButton.setButtonType(SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
 
 		AndroidUiHelper.updateVisibility(applyButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
