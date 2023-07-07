@@ -33,10 +33,10 @@ public class DialogButtonViewHolder {
 	public DialogButtonViewHolder(@NonNull LinearLayout view, @NonNull DialogButtonAttributes attrs) {
 		this.view = view;
 		this.attrs = attrs;
-		updateViewComplete();
+		setupViewComplete();
 	}
 
-	public void updateViewComplete() {
+	private void setupViewComplete() {
 		Context context = view.getContext();
 		LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -144,7 +144,7 @@ public class DialogButtonViewHolder {
 		View buttonWrapper = view.findViewById(R.id.button_wrapper);
 		buttonWrapper.getLayoutParams().height = buttonWrapperHeight;
 
-		if (view.getLayoutParams() instanceof  MarginLayoutParams) {
+		if (view.getLayoutParams() instanceof MarginLayoutParams) {
 			int compensationMargin = 0;
 			if (buttonBodyHeight < buttonWrapperHeight) {
 				int extraHeight = buttonWrapperHeight - buttonBodyHeight;
