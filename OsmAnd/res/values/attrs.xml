@@ -257,6 +257,7 @@
 			<enum name="secondaryActive" value="4" />
 			<enum name="stroked" value="5" />
 			<enum name="tertiary" value="6" />
+			<enum name="tertiary_harmful" value="7" />
 		</attr>
 		<attr name="dialogButtonTopMargin" format="dimension" />
 		<attr name="dialogButtonBottomMargin" format="dimension" />
