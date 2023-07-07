@@ -2280,6 +2280,10 @@ public class OsmandSettings {
 		return res;
 	}
 
+	public boolean hasMapZoomToShow() {
+		return settingsAPI.contains(globalPreferences, MAP_ZOOM_TO_SHOW);
+	}
+
 	public int getMapZoomToShow() {
 		return settingsAPI.getInt(globalPreferences, MAP_ZOOM_TO_SHOW, 5);
 	}

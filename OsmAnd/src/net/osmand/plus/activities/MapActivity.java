@@ -184,7 +184,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public static final String INTENT_PARAMS = "intent_prarams";
 
 	private static final int ZOOM_LABEL_DISPLAY = 16;
-	private static final int MIN_ZOOM_LABEL_DISPLAY = 12;
+	private static final int MAX_ZOOM_OUT_STEPS = 2;
 	private static final int SECOND_SPLASH_TIME_OUT = 8000;
 
 	private static final int SMALL_SCROLLING_UNIT = 1;
@@ -1075,11 +1075,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				tb.setPixelDimensions(tbw, tbh);
 
 				tb.setLatLonCenter(latLonToShow.getLatitude(), latLonToShow.getLongitude());
-				tb.setZoom(ZOOM_LABEL_DISPLAY);
-				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > MIN_ZOOM_LABEL_DISPLAY) {
+
+				int zoom = settings.hasMapZoomToShow() ? settings.getMapZoomToShow() : ZOOM_LABEL_DISPLAY;
+				tb.setZoom(zoom);
+				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > zoom - MAX_ZOOM_OUT_STEPS) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
-				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
 				mapContextMenu.setMapZoom(tb.getZoom());
 				if (toShow instanceof GpxDisplayItem) {
 					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
