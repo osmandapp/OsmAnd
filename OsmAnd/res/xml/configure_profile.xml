@@ -6,7 +6,12 @@
 
 	<Preference
 		android:key="free_favorites_backup_card"
-		android:layout="@layout/free_favorites_backup_card"/>
+		android:layout="@layout/free_backup_card"/>
+
+	<Preference
+		android:key="free_favorites_backup_card_divider"
+		android:layout="@layout/card_bottom_divider"
+		android:selectable="false" />
 
 	<Preference
 		android:key="configure_profile_info"

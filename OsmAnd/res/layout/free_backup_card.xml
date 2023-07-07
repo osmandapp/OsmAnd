@@ -5,17 +5,16 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginTop="@dimen/content_padding"
-	android:layout_marginBottom="@dimen/content_padding"
 	android:background="?attr/bg_color"
 	android:orientation="horizontal"
-	android:padding="@dimen/content_padding">
+	android:paddingStart="@dimen/content_padding">
 
 	<ImageView
 		android:id="@+id/icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small"
-		android:layout_marginRight="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/content_padding"
 		android:src="@drawable/ic_action_folder_cloud_colored" />
 
 	<LinearLayout
@@ -31,12 +30,13 @@
 			<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginTop="@dimen/content_padding_small"
 				android:layout_weight="1"
 				android:orientation="vertical">
 
 				<TextView
+					android:id="@+id/title"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="@string/free_favorites_backup"
@@ -47,6 +47,7 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small_half"
 					android:text="@string/free_favorites_backup_description"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="16sp" />
@@ -58,6 +59,7 @@
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_marginLeft="@dimen/content_padding_small"
 				android:layout_marginRight="@dimen/content_padding_small"
+				android:contentDescription="shared_string_close"
 				osmand:srcCompat="@drawable/ic_action_cancel" />
 
 		</LinearLayout>

@@ -289,6 +289,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				});
 			}
 		} else if (FREE_FAVORITES_BACKUP_CARD.equals(preference.getKey())) {
+			TextView title = (TextView) holder.findViewById(R.id.title);
+			title.setText(R.string.free_settings_backup);
 			ImageView closeBtn = (ImageView) holder.findViewById(R.id.btn_close);
 			closeBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_cancel, isNightMode()));
 			ImageView icon = (ImageView) holder.findViewById(R.id.icon);
@@ -339,11 +341,16 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void setupFreeFavoritesBackupCard() {
-		Preference navigationSettings = findPreference("free_favorites_backup_card");
-		if (navigationSettings != null) {
-			boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
-			boolean isRegistered = app.getBackupHelper().isRegistered();
-			navigationSettings.setVisible(!proAvailable && !isRegistered && !app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.get());
+		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean isRegistered = app.getBackupHelper().isRegistered();
+		boolean shouldShowFreeBackupCard = !proAvailable && !isRegistered && !app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.get();
+		Preference freeBackupCard = findPreference("free_favorites_backup_card");
+		if (freeBackupCard != null) {
+			freeBackupCard.setVisible(shouldShowFreeBackupCard);
+		}
+		Preference freeBackupCardDivider = findPreference("free_favorites_backup_card_divider");
+		if (freeBackupCardDivider != null) {
+			freeBackupCardDivider.setVisible(shouldShowFreeBackupCard);
 		}
 	}
 
