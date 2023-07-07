@@ -34,7 +34,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -131,8 +133,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		recyclerView.setAdapter(adapter);
 
-		View cancelButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		DialogButton cancelButton = mainView.findViewById(R.id.dismiss_button);
+		cancelButton.setButtonType(DialogButtonType.SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(v -> {
 			FragmentActivity fragmentActivity = getActivity();
 			if (fragmentActivity != null) {
@@ -142,8 +145,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
-		View applyButton = mainView.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		DialogButton applyButton = mainView.findViewById(R.id.right_bottom_button);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 		applyButton.setVisibility(View.VISIBLE);
 		applyButton.setOnClickListener(v -> {
 			MapActivity mapActivity = (MapActivity) getActivity();

@@ -537,7 +537,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			showCompassModeToast();
 		}
 		if (settings.isCompassMode(CompassMode.MANUALLY_ROTATED)) {
-			settings.setManuallyMapRotation(getMapRotate());
+			Float mapRotate = getMapRotate();
+			if (mapRotate != null) {
+				settings.setManuallyMapRotation(mapRotate);
+			}
 		}
 	}
 

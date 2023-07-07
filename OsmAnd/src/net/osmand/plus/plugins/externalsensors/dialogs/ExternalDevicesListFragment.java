@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.externalsensors.adapters.PairedDevicesAdapter;
@@ -31,6 +30,8 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.dialogs.EditDeviceNameDialog.OnSaveSensorNameCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,14 +77,13 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		sensorIcon.setImageResource(nightMode ? R.drawable.img_help_sensors_night : R.drawable.img_help_sensors_day);
 		TextView learnMore = view.findViewById(R.id.learn_more_button);
 		String docsLinkText = app.getString(R.string.learn_more_about_sensors_link);
-		UiUtilities.setupClickableText(app, learnMore, docsLinkText, docsLinkText, nightMode, new CallbackWithObject<Void>() {
-			@Override
-			public boolean processResult(Void unused) {
-				FragmentActivity activity = getActivity();
+		UiUtilities.setupClickableText(app, learnMore, docsLinkText, docsLinkText, nightMode, unused -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				boolean nightMode = !app.getSettings().isLightContent();
 				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_external_sensors)), nightMode);
-				return false;
 			}
+			return false;
 		});
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_empty));
 		setupPairSensorButton(view.findViewById(R.id.pair_btn_additional));
@@ -95,10 +95,10 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 	}
 
 	private void setupPairSensorButton(@NonNull View view) {
-		View dismissButton = view.findViewById(R.id.dismiss_button);
-		int buttonTextId = R.string.ant_plus_pair_new_sensor;
+		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
+		dismissButton.setButtonType(DialogButtonType.SECONDARY);
+		dismissButton.setTitleId(R.string.ant_plus_pair_new_sensor);
 		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		dismissButton.setLayoutParams(layoutParams);
 		view.requestLayout();
@@ -107,10 +107,10 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 	}
 
 	private void setupOpenBtSettingsButton(@NonNull View view) {
-		View dismissButton = view.findViewById(R.id.dismiss_button);
-		int buttonTextId = R.string.ant_plus_open_settings;
+		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
+		dismissButton.setButtonType(DialogButtonType.SECONDARY);
+		dismissButton.setTitleId(R.string.ant_plus_open_settings);
 		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		dismissButton.setLayoutParams(layoutParams);
 		view.requestLayout();

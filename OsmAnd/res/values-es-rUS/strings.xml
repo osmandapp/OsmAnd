@@ -389,7 +389,7 @@
 \n
 \nVéase - https://osmand.net/docs/user/plugins/trip-recording .</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
-    <string name="srtm_plugin_description">La información del terreno, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y más. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel y/o el color de la inclinación.
+    <string name="srtm_plugin_description">La información topográfica, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y más. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel y/o el color de la inclinación.
 \n
 \nLos datos subyacentes provienen de SRTM y ASTER.
 \n
@@ -1419,7 +1419,7 @@
     <string name="data_settings_descr">Indica el idioma, descargar/recargar datos.</string>
     <string name="data_settings">Datos</string>
     <string name="additional_settings">Ajustes adicionales</string>
-    <string name="update_tile">Actualizar mapa</string>
+    <string name="update_tile">Actualizar</string>
     <string name="reload_tile">Recargar tesela</string>
     <string name="mark_point">Objetivo</string>
     <string name="use_english_names_descr">Elige entre nombres locales o en inglés.</string>
@@ -3139,7 +3139,7 @@
     <string name="osmand_settings">Ajustes de OsmAnd</string>
     <string name="copy_from_other_profile">Copiar desde otro perfil</string>
     <string name="turn_screen_on">Encender pantalla</string>
-    <string name="map_during_navigation_info">Mapa durante la navegación</string>
+    <string name="map_during_navigation_info">Mapa al navegar</string>
     <string name="map_during_navigation">Mapa durante la navegación</string>
     <string name="shared_string_other">Otros</string>
     <string name="vehicle_parameters_descr">Peso, altura, longitud, velocidad</string>
@@ -3459,7 +3459,7 @@
     <string name="recalculate_route_distance_promo">La ruta será recalculada si la distancia a la ubicación actual es mayor que el valor elegido.</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Pendientes</string>
-    <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa del terreno en el mapa.</string>
+    <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa topográfica en el mapa.</string>
     <string name="delete_description">Borrar descripción</string>
     <string name="add_description">Añadir descripción</string>
     <string name="select_group">Elegir grupo</string>
@@ -3699,7 +3699,7 @@
     <string name="simplified_track">Traza simplificada</string>
     <string name="show_gpx">Trazas</string>
     <string name="shared_string_save_as_gpx">Guardar como nuevo archivo de traza</string>
-    <string name="shared_string_is_saved">está guardado</string>
+    <string name="shared_string_is_saved">se ha guardado</string>
     <string name="shared_string_gpx_route">Ruta de la traza</string>
     <string name="shared_string_gpx_files">Trazas</string>
     <string name="shared_string_file_name">Nombre del archivo</string>
@@ -3726,7 +3726,7 @@
     <string name="plan_route_create_new_route">Crear nueva ruta</string>
     <string name="plan_route_change_route_type_before">Cambiar el tipo de ruta anterior</string>
     <string name="plan_route_change_route_type_after">Cambiar el tipo de ruta posterior</string>
-    <string name="pass_whole_track_descr">Punto de la traza para navegar</string>
+    <string name="pass_whole_track_descr">Punto desde el que navegar la traza</string>
     <string name="overwrite_track">Sobrescribir traza</string>
     <string name="open_saved_track">Abrir traza guardada</string>
     <string name="only_selected_segment_recalc">Sólo el segmento marcado será recalculado usando el perfil elegido.</string>
@@ -4092,7 +4092,7 @@
     <string name="osmand_cloud_help_descr">¿Necesitas ayuda\? Ponte en contacto con nosotros en %1$s</string>
     <string name="osmand_cloud_create_account_descr">Ingresa tu correo electrónico, se enviará un código de verificación
 \ny todos los datos se vincularán a él.</string>
-    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos un código temporal necesario para el siguiente paso.</string>
+    <string name="osmand_cloud_login_descr">Ingresa el correo electrónico usado para el registro. Enviaremos una contraseña de un solo uso.</string>
     <string name="verify_email_address">Confirmar dirección de correo electrónico</string>
     <string name="verify_email_address_descr">Código de verificación enviado a «%1$s». Añádelo en el siguiente campo.</string>
     <string name="cloud_email_not_registered">Este correo electrónico no está registrado en OsmAnd Cloud</string>
@@ -4163,10 +4163,10 @@
     <string name="purchases_feature_desc_osmand_cloud">Obtén OsmAnd Cloud para almacenar en línea todos los datos de OsmAnd. No pierdes los datos al reinstalar. Haz copias de seguridad y restaura toda la información fácilmente.</string>
     <string name="unlimited_map_downloads">Descargas de mapas ilimitadas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikiviajes sin conexión</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas del terreno: curvas de nivel, sombreados, pendiente</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Mapas topográficos: curvas de nivel, sombreados, pendiente</string>
     <string name="offline_wikipeadia">Wikipedia sin conexión</string>
     <string name="offline_wikivoyage">Wikiviajes sin conexión</string>
-    <string name="terrain_maps">Mapas del terreno</string>
+    <string name="terrain_maps">Mapas topográficos</string>
     <string name="nautical_depth">Profundidad náutica</string>
     <string name="you_can_get_feature_as_part_of_pattern">Consigue «%1$s» como parte del plan %2$s. Comparación:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
@@ -4772,7 +4772,7 @@
     <string name="compass_visible_if_map_rotated">Visible al girar el mapa</string>
     <string name="compass_always_hidden">Siempre oculto</string>
     <string name="compass_always_visible">Siempre visible</string>
-    <string name="compass_click_desc">Sugerencia: Pulsa el widget de la brújula para cambiar el modo de orientación del mapa.</string>
+    <string name="compass_click_desc">Sugerencia: Pulsa el botón de la brújula para cambiar el modo de orientación del mapa.</string>
     <string name="compass_desc">Muestra la dirección hacia el norte.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
@@ -5207,7 +5207,7 @@
     <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
-    <string name="map_3d_mode_hint">Mantén pulsado en el botón para cambiar la ubicación del botón.</string>
+    <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
     <string name="delete_track_folder_dialog_message">Esto borrará la carpeta «%1$s» y todas las trazas (%2$s) incluidas.</string>
@@ -5246,4 +5246,39 @@
     <string name="there_are_no_connected_sensors_of_this_type">No hay sensores de este tipo conectados</string>
     <string name="external_sensors_not_found">Sensores no encontrados</string>
     <string name="external_sensors_source_of_data">Origen de los datos</string>
+    <string name="calculate_offline">Calcular sin conexión</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa de altura. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
+    <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
+    <string name="power_watts_unit">Vatios (watts)</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="error_calculate">El resultado del cálculo está vacío</string>
+    <string name="free_mode">Modo libre</string>
+    <string name="terrain_map">Mapa topográfico</string>
+    <string name="relief_3d">Relieve 3D</string>
+    <string name="relief_3d_description">Obtén y observa el modelo a escala de tu barrio o de todo el continente.</string>
+    <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deleting_account_descr">En un momento será borrada tu cuenta con todos los datos de OsmAnd Cloud.
+\n
+\nTodos los datos en el dispositivo permanecen intactos.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud\?
+\n
+\nEsta acción no puede deshacerse.</string>
+    <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
+    <string name="action_cannot_be_undone">Esta acción no puede deshacerse.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios serán desvinculados de OsmAnd Cloud y se perderá acceso a las funciones de pago.</string>
+    <string name="osmand_cloud_deletion_account_warning">La cuenta junto con todos los datos de ésta tiene %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud son %1$s. Los datos en el dispositivo se mantienen intactos.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
+    <string name="manage_subscriptions">Gestionar suscripciones.</string>
+    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»\?</string>
+    <string name="shared_string_deleting">Borrando</string>
+    <string name="deleting_complete">Borrado completo</string>
+    <string name="delete_account">Borrar cuenta</string>
+    <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
+    <string name="verify_account_deletion_descr">Debemos comprobar tu cuenta antes de borrarla.
+\n
+\nIngresa el correo electrónico con el cual fue registrado. Se te enviará la contraseña de un solo uso para el siguiente paso.</string>
+    <string name="verify_account">Comprobar cuenta</string>
+    <string name="slope_legend_description">La pendiente usa colores para visualizar la inclinación del terreno. Puedes leer más sobre «Pendientes» en %1$s.</string>
+    <string name="terrain_category_description">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar picos y tierras bajas.</string>
 </resources>

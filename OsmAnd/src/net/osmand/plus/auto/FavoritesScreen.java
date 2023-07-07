@@ -21,12 +21,17 @@ import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
@@ -60,6 +65,14 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		this.settingsAction = settingsAction;
 		this.surfaceRenderer = surfaceRenderer;
 		selectedGroup = group;
+		getLifecycle().addObserver(new DefaultLifecycleObserver() {
+			@Override
+			public void onDestroy(@NonNull LifecycleOwner owner) {
+				DefaultLifecycleObserver.super.onDestroy(owner);
+				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(null);
+				getApp().getOsmandMap().getMapView().backToLocation();
+			}
+		});
 	}
 
 	@NonNull
@@ -82,11 +95,26 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 
 	private void setupFavorites(ItemList.Builder listBuilder) {
 		LatLon location = getApp().getSettings().getLastKnownMapLocation();
-		int collectionSize = 0;
-		for (FavouritePoint point : getFavorites()) {
-			if (collectionSize == getContentLimit()) {
-				break;
+		List<FavouritePoint> favoritesPoints = getFavorites();
+		int favoritesPointsSize = favoritesPoints.size();
+		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
+		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
+		QuadRect mapRect = new QuadRect();
+		for (FavouritePoint point : limitedFavoritesPoints) {
+			double longitude = point.getLongitude();
+			double latitude = point.getLatitude();
+			if (mapRect.left == 0.0) {
+				mapRect.left = longitude;
+			} else {
+				mapRect.left = Math.min(mapRect.left, longitude);
 			}
+			mapRect.right = Math.max(mapRect.right, longitude);
+			if (mapRect.bottom == 0.0) {
+				mapRect.bottom = latitude;
+			} else {
+				mapRect.bottom = Math.min(mapRect.bottom, latitude);
+			}
+			mapRect.top = Math.max(mapRect.top, latitude);
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
@@ -105,7 +133,11 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 					.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
-			collectionSize++;
+		}
+		if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
+			OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+			RotatedTileBox tileBox =mapView.getCurrentRotatedTileBox().copy();
+			mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tileBox.getPixHeight(), tileBox.getPixHeight(), 0);
 		}
 	}
 

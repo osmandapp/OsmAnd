@@ -34,7 +34,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +51,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected boolean nightMode;
 
 	protected int themeRes;
-	protected View dismissButton;
-	protected View rightButton;
-	protected View thirdButton;
+	protected DialogButton dismissButton;
+	protected DialogButton rightButton;
+	protected DialogButton thirdButton;
 	protected View buttonsShadow;
 	protected LinearLayout itemsContainer;
 	protected LinearLayout buttonsContainer;
@@ -369,21 +370,20 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (dismissButton != null) {
 			boolean enabled = isDismissButtonEnabled();
 			dismissButton.setEnabled(enabled);
-			dismissButton.findViewById(R.id.button_text).setEnabled(enabled);
 		}
 		if (rightButton != null) {
 			boolean enabled = isRightBottomButtonEnabled();
 			rightButton.setEnabled(enabled);
-			rightButton.findViewById(R.id.button_text).setEnabled(enabled);
 		}
 	}
 
 	private void setupDismissButton() {
 		dismissButton = buttonsContainer.findViewById(R.id.dismiss_button);
-		dismissButton.getLayoutParams().height = getDismissButtonHeight();
+		dismissButton.setButtonHeight(getDismissButtonHeight());
 		int buttonTextId = getDismissButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
-			UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), buttonTextId);
+			dismissButton.setTitleId(buttonTextId);
+			dismissButton.setButtonType(getDismissButtonType());
 			dismissButton.setOnClickListener(v -> {
 				onDismissButtonClickAction();
 				dismiss();
@@ -394,10 +394,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setupRightButton() {
 		rightButton = buttonsContainer.findViewById(R.id.right_bottom_button);
-		rightButton.getLayoutParams().height = getRightButtonHeight();
+		rightButton.setButtonHeight(getRightButtonHeight());
 		int buttonTextId = getRightBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
-			UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), buttonTextId);
+			rightButton.setTitleId(buttonTextId);
+			rightButton.setButtonType(getRightBottomButtonType());
 			rightButton.setOnClickListener(v -> onRightBottomButtonClick());
 		}
 		View divider = buttonsContainer.findViewById(R.id.buttons_divider);
@@ -412,10 +413,11 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setupThirdButton() {
 		thirdButton = buttonsContainer.findViewById(R.id.third_button);
-		thirdButton.getLayoutParams().height = getThirdButtonHeight();
+		thirdButton.setButtonHeight(getThirdButtonHeight());
 		int buttonTextId = getThirdBottomButtonTextId();
 		if (buttonTextId != DEFAULT_VALUE) {
-			UiUtilities.setupDialogButton(nightMode, thirdButton, getThirdBottomButtonType(), buttonTextId);
+			thirdButton.setTitleId(buttonTextId);
+			thirdButton.setButtonType(getThirdBottomButtonType());
 			thirdButton.setOnClickListener(v -> onThirdBottomButtonClick());
 		}
 		View divider = buttonsContainer.findViewById(R.id.buttons_divider_top);

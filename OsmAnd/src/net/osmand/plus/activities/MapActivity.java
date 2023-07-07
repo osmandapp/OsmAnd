@@ -74,11 +74,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
-import net.osmand.plus.backup.ui.BackupCloudFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.ConfigureMapOptionFragment;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
@@ -184,7 +184,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public static final String INTENT_PARAMS = "intent_prarams";
 
 	private static final int ZOOM_LABEL_DISPLAY = 16;
-	private static final int MIN_ZOOM_LABEL_DISPLAY = 12;
+	private static final int MAX_ZOOM_OUT_STEPS = 2;
 	private static final int SECOND_SPLASH_TIME_OUT = 8000;
 
 	private static final int SMALL_SCROLLING_UNIT = 1;
@@ -1075,11 +1075,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				tb.setPixelDimensions(tbw, tbh);
 
 				tb.setLatLonCenter(latLonToShow.getLatitude(), latLonToShow.getLongitude());
-				tb.setZoom(ZOOM_LABEL_DISPLAY);
-				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > MIN_ZOOM_LABEL_DISPLAY) {
+
+				int zoom = settings.hasMapZoomToShow() ? settings.getMapZoomToShow() : ZOOM_LABEL_DISPLAY;
+				tb.setZoom(zoom);
+				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > zoom - MAX_ZOOM_OUT_STEPS) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
-				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
 				mapContextMenu.setMapZoom(tb.getZoom());
 				if (toShow instanceof GpxDisplayItem) {
 					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
@@ -2060,7 +2061,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
 			mapContextMenu.getMultiSelectionMenu().hide();
 		} else if (getTrackMenuFragment() != null) {
-			dismissTrackMenu();
+			dismissFragment(TrackMenuFragment.TAG);
 		}
 	}
 
@@ -2119,21 +2120,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Nullable
+	public ConfigureMapOptionFragment getConfigureMapOptionFragment() {
+		return getFragment(ConfigureMapOptionFragment.TAG);
+	}
+
+	@Nullable
 	public WeatherForecastFragment getWeatherForecastFragment() {
 		return getFragment(WeatherForecastFragment.TAG);
 	}
 
-	public void dismissTrackMenu() {
+	public void dismissFragment(@Nullable String name) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(TrackMenuFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		}
-	}
-
-	public void dismissBackupCloudFragment() {
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			fragmentManager.popBackStack(BackupCloudFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fragmentManager.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 

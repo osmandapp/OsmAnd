@@ -34,7 +34,8 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -245,9 +246,10 @@ public abstract class PointEditorFragment extends EditorFragment {
 	protected void setupButtons() {
 		super.setupButtons();
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
-		View cancelButton = view.findViewById(R.id.dismiss_button);
+		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setOnClickListener(v -> showExitDialog());
-		UiUtilities.setupDialogButton(nightMode, cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		cancelButton.setButtonType(DialogButtonType.SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
 	}
 
 	@Override

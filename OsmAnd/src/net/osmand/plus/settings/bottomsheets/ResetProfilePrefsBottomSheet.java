@@ -21,7 +21,7 @@ import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 
@@ -89,6 +89,12 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.SECONDARY;
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager manager,
+	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable Fragment target) {
+		return showInstance(manager, appMode, target, false);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager,

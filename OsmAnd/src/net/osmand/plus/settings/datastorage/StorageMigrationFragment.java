@@ -35,7 +35,8 @@ import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -194,7 +195,7 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void setupButtons() {
-		View actionButton = mainView.findViewById(R.id.dismiss_button);
+		DialogButton actionButton = mainView.findViewById(R.id.dismiss_button);
 		actionButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (restartListener != null) {
@@ -205,7 +206,8 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 				}
 			}
 		});
-		UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.PRIMARY, R.string.shared_string_restart);
+		actionButton.setButtonType(DialogButtonType.PRIMARY);
+		actionButton.setTitleId(R.string.shared_string_restart);
 		AndroidUiHelper.updateVisibility(actionButton, copyFinished);
 	}
 

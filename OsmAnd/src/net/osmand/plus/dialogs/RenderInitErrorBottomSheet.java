@@ -15,7 +15,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class RenderInitErrorBottomSheet extends MenuBottomSheetDialogFragment {
 

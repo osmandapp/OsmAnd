@@ -100,6 +100,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private PoiUIFilter routeTrackFilter;
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
+	public CustomMapObjects<Amenity> customObjectsDelegate;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -146,6 +147,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 			@Override
 			protected List<Amenity> calculateResult(@NonNull QuadRect latLonBounds, int zoom) {
+				if (customObjectsDelegate != null) {
+					return customObjectsDelegate.getMapObjects();
+				}
 				if (calculatedFilters.isEmpty()) {
 					return new ArrayList<>();
 				}
@@ -286,7 +290,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private boolean shouldDraw(int zoom) {
-		if (!filters.isEmpty() && zoom >= START_ZOOM) {
+		if (!filters.isEmpty() && zoom >= START_ZOOM || customObjectsDelegate != null) {
 			return true;
 		} else if (filters.isEmpty()) {
 			if ((travelRendererHelper.getRouteArticlesProperty().get() && routeArticleFilter != null
@@ -673,5 +677,13 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 
 	@Override
 	public void routeWasFinished() {
+	}
+
+	public void setCustomMapObjects(List<Amenity> poiUIFilters) {
+		if (customObjectsDelegate != null) {
+			data.clearCache();
+			customObjectsDelegate.setCustomMapObjects(poiUIFilters);
+			getApplication().getOsmandMap().refreshMap();
+		}
 	}
 }

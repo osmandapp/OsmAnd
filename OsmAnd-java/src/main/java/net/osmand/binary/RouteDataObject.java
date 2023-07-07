@@ -2,11 +2,9 @@ package net.osmand.binary;
 
 import java.util.Arrays;
 
-import org.apache.commons.logging.Log;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
@@ -603,8 +601,8 @@ public class RouteDataObject {
 		float maxSpeed = 0, maxProfileSpeed = 0;
 		for (int type : types) {
 			RouteTypeRule r = region.quickGetEncodingRule(type);
-			boolean forwardDirection = r.isForward() >= 0;
-			if (forwardDirection == direction) {
+			boolean forwardDirection = r.isForward() > 0;
+			if (forwardDirection == direction || r.isForward() == 0) {
 				// priority over default
 				maxSpeed = r.maxSpeed(RouteTypeRule.PROFILE_NONE) > 0 ? r.maxSpeed(RouteTypeRule.PROFILE_NONE) : maxSpeed;
 				maxProfileSpeed = r.maxSpeed(profile) > 0 ? r.maxSpeed(profile) : maxProfileSpeed;

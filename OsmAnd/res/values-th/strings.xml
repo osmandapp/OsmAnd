@@ -239,7 +239,6 @@
 \n</string>
     <string name="shared_string_modified">แก้ไข</string>
     <string name="calculate_offline">คํานวณแบบออฟไลน์</string>
-    <string name="routing_attr_allow_via_ferrata_description">อนุญาตผ่านเส้นทางเฟอร์ราตา</string>
     <string name="power_watts_unit">วัตต์</string>
     <string name="revolutions_per_minute_unit">รอบต่อนาที</string>
 </resources>

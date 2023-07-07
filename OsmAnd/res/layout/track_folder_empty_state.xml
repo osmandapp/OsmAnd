@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -35,11 +36,12 @@
 		android:textColor="?android:attr/textColorSecondary"
 		tools:text="@string/empty_tracks_description" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/action_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginBottom="@dimen/content_padding_small" />
+		android:layout_height="wrap_content"
+		app:dialogButtonBottomMargin="@dimen/content_padding_small"
+		app:dialogButtonType="secondary"
+		tools:dialogButtonTitle="@string/shared_string_import"/>
 
 </LinearLayout>

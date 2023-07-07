@@ -50,7 +50,7 @@
     <string name="proxy_settings">Configurações de proxy</string>
     <string name="proxy">Proxy</string>
     <string name="precision">Precisão</string>
-    <string name="bearing">Rumo</string>
+    <string name="bearing">Direção</string>
     <string name="search_contacts">Pesquisar contactos</string>
     <string name="search_contacts_descr">Pesquise em todos os seus grupos e contactos.</string>
     <string name="type_contact_or_group_name">Digite o nome do contacto ou do grupo</string>

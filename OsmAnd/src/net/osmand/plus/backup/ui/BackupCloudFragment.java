@@ -36,7 +36,6 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.SyncBackupTask.OnBackupSyncListener;
-import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.status.BackupStatus;
 import net.osmand.plus.backup.ui.status.CloudSyncCard;
 import net.osmand.plus.backup.ui.status.IntroductionCard;

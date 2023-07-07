@@ -48,6 +48,7 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -146,7 +147,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
 		btnDelete.setOnClickListener(view12 -> showConfirmDeleteActionsBottomSheet(getMapActivity()));
 		UiUtilities.setupDialogButton(nightMode, btnDelete,
-				UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_delete);
+				DialogButtonType.SECONDARY, R.string.shared_string_delete);
 
 		quickActionRegistry = app.getQuickActionRegistry();
 

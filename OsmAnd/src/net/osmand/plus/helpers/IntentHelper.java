@@ -32,8 +32,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
-import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
+import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.configmap.tracks.TracksFragment;
@@ -532,6 +533,10 @@ public class IntentHelper {
 				HashMap<ExportSettingsType, List<?>> selectedTypes = (HashMap<ExportSettingsType, List<?>>) intent.getSerializableExtra(SELECTED_TYPES);
 				ExportSettingsFragment.showInstance(manager, mode, selectedTypes, true);
 
+				clearIntent(intent);
+			}
+			if (intent.hasExtra(BackupAuthorizationFragment.OPEN_BACKUP_AUTH)) {
+				BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				clearIntent(intent);
 			}
 			if (intent.getExtras() != null) {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/color_transparent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/gpx_visibility_txt"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<TextView
+			android:id="@+id/transparency_value_tv"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size" />
+
+	</LinearLayout>
+
+	<com.google.android.material.slider.Slider
+		android:id="@+id/transparency_slider"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:stepSize="1" />
+
+</LinearLayout>

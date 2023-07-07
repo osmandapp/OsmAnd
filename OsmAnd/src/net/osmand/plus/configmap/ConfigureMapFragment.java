@@ -2,7 +2,6 @@ package net.osmand.plus.configmap;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,9 +154,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	                              @NonNull List<ContextMenuItem> nestedItems) {
 		// Use the same layout for all categories views
 		category.setLayout(R.layout.list_item_expandable_category);
-		List<String> titles = CtxMenuUtils.getNames(nestedItems);
-		String description = TextUtils.join(", ", titles);
-		category.setDescription(description);
+		category.setDescription(CtxMenuUtils.getCategoryDescription(nestedItems));
 
 		String id = category.getId();
 		int standardId = category.getTitleId();
@@ -194,11 +191,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		View existedView = views.get(standardId);
 		View view = viewCreator.getView(item, existedView);
 		view.setTag(R.id.item_as_tag, item);
-		view.setOnClickListener(getItemsClickListener());
+
+		boolean clickable = item.isClickable();
+		if (clickable) {
+			view.setOnClickListener(getItemsClickListener());
+		}
 		if (existedView == null) {
 			views.put(standardId, view);
 			container.addView(view);
-			if (item.getLayout() != R.layout.mode_toggles) {
+			if (item.getLayout() != R.layout.mode_toggles && clickable) {
 				setupSelectableBg(view);
 			}
 		}
@@ -213,7 +214,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			ImageView ivIndicator = view.findViewById(R.id.explicit_indicator);
 			ivIndicator.setImageResource(isCollapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), isCollapsed);
+			boolean hasDescription = category.getDescription() != null;
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), isCollapsed && hasDescription);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.items_container), !isCollapsed);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), !isCollapsed);
 		}

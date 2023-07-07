@@ -2,6 +2,8 @@ package net.osmand.router;
 
 import net.osmand.util.Algorithms;
 
+import java.util.LinkedHashSet;
+
 import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
@@ -19,6 +21,7 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
+	private static final int[] TURNS_ORDER = {TU, TSHL, TL, TSLL, C, TSLR, TR, TSHR, TRU};
 
 	public static TurnType straight() {
 		return valueOf(C, false);
@@ -485,7 +488,7 @@ public class TurnType {
 				|| TurnType.getTertiaryTurn(type) == turn;
 	}
 
-	public static void collectTurnTypes(int lane, TIntHashSet set) {
+	public static void collectTurnTypes(int lane, LinkedHashSet<Integer> set) {
 		int pt = TurnType.getPrimaryTurn(lane);
 		if(pt != 0) {
 			set.add(pt);
@@ -627,5 +630,23 @@ public class TurnType {
 	}
 
 	
+	public static int getPrev(int turn) {
+		for (int i = TURNS_ORDER.length - 1; i >= 0; i--) {
+			int t = TURNS_ORDER[i];
+			if (t == turn && i > 0) {
+				return TURNS_ORDER[i - 1];
+			}
+		}
+		return turn;
+	}
 
+	public static int getNext(int turn) {
+		for (int i = 0; i < TURNS_ORDER.length; i++) {
+			int t = TURNS_ORDER[i];
+			if (t == turn && i + 1 < TURNS_ORDER.length) {
+				return TURNS_ORDER[i + 1];
+			}
+		}
+		return turn;
+	}
 }

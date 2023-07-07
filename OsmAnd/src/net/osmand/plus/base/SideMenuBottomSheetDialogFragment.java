@@ -5,17 +5,18 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import net.osmand.plus.utils.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import net.osmand.plus.utils.AndroidUtils;
 
 public abstract class SideMenuBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -29,10 +30,11 @@ public abstract class SideMenuBottomSheetDialogFragment extends MenuBottomSheetD
 
 		Dialog dialog = getDialog();
 		if (dialog != null) {
-			int width = getDimen(R.dimen.dashboard_land_width);
-			CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams(
-					width, CoordinatorLayout.LayoutParams.MATCH_PARENT);
-			dialog.findViewById(R.id.content_container).setLayoutParams(layoutParams);
+			View container = dialog.findViewById(R.id.content_container);
+			ViewGroup.LayoutParams layoutParams = container.getLayoutParams();
+			layoutParams.width = getDimen(R.dimen.dashboard_land_width);
+			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+			container.setLayoutParams(layoutParams);
 
 			Window window = dialog.getWindow();
 			if (window != null) {
@@ -46,16 +48,14 @@ public abstract class SideMenuBottomSheetDialogFragment extends MenuBottomSheetD
 
 	@Override
 	protected Drawable getLandscapeSidesBg(@NonNull Context ctx) {
-		int backgroundResAttr = AndroidUtils.isLayoutRtl(ctx) ?
-				 R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
-		return createBackgroundDrawable(ctx, AndroidUtils.resolveAttribute(ctx, backgroundResAttr));
+		int attrId = AndroidUtils.isLayoutRtl(ctx) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+		return createBackgroundDrawable(ctx, AndroidUtils.resolveAttribute(ctx, attrId));
 	}
 
 	@Override
 	protected Drawable getLandscapeTopsidesBg(@NonNull Context ctx) {
-		int backgroundResAttr = AndroidUtils.isLayoutRtl(ctx) ?
-				R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
-		return createBackgroundDrawable(ctx, AndroidUtils.resolveAttribute(ctx, backgroundResAttr));
+		int attrId = AndroidUtils.isLayoutRtl(ctx) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+		return createBackgroundDrawable(ctx, AndroidUtils.resolveAttribute(ctx, attrId));
 	}
 
 	@Override

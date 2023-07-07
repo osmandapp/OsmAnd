@@ -5,7 +5,7 @@ import android.view.View;
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;

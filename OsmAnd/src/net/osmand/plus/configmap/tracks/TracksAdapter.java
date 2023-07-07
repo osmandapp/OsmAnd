@@ -67,10 +67,10 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 				return new TrackViewHolder(view, fragment, locationViewCache, nightMode);
 			case TYPE_NO_TRACKS:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
-				return new EmptyTracksViewHolder(view, fragment, nightMode);
+				return new EmptyTracksViewHolder(view, fragment);
 			case TYPE_NO_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.track_folder_empty_state, parent, false);
-				return new NoVisibleTracksViewHolder(view, fragment, nightMode);
+				return new NoVisibleTracksViewHolder(view, fragment);
 			case TYPE_RECENTLY_VISIBLE_TRACKS:
 				view = inflater.inflate(R.layout.list_header_switch_item, parent, false);
 				return new RecentlyVisibleViewHolder(view, fragment, nightMode);

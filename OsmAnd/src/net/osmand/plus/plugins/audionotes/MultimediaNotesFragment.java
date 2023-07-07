@@ -483,12 +483,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
 			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, false);
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
 			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
 			requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);

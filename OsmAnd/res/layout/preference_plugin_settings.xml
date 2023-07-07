@@ -55,13 +55,15 @@
 				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/no_plugins_enabled" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/open_plugins_button"
-				layout="@layout/bottom_sheet_dialog_button"
-				android:layout_width="@dimen/map_trans_seek_size"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_marginTop="@dimen/content_padding_small"
-				android:layout_marginBottom="@dimen/content_padding_small" />
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:minWidth="@dimen/map_trans_seek_size"
+				osmand:dialogButtonType="secondary"
+				osmand:dialogButtonTitle="@string/plugins_screen"
+				osmand:dialogButtonTopMargin="@dimen/content_padding_small"
+				osmand:dialogButtonBottomMargin="@dimen/content_padding_small" />
 
 		</LinearLayout>
 

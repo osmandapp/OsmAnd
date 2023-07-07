@@ -129,9 +129,12 @@
 				android:paddingHorizontal="@dimen/content_padding"
 				android:paddingVertical="@dimen/content_padding_small">
 
-			<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/apply_button"
-					layout="@layout/bottom_sheet_dialog_button" />
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					osmand:dialogButtonType="primary"
+					osmand:dialogButtonTitle="@string/shared_string_apply"/>
 
 			</LinearLayout>
 

@@ -32,6 +32,8 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo.ActionButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -178,27 +180,25 @@ public class DownloadItemFragment extends DialogFragment implements DownloadEven
 
 		for (ActionButton actionButton : actionButtons) {
 			View buttonView = UiUtilities.getInflater(ctx, nightMode).inflate(layoutId, buttonsContainer, false);
-			View button = buttonView.findViewById(R.id.dismiss_button);
+			DialogButton button = buttonView.findViewById(R.id.dismiss_button);
 			if (button != null) {
-				UiUtilities.setupDialogButton(nightMode, button, UiUtilities.DialogButtonType.PRIMARY, actionButton.getName());
+				button.setButtonType(DialogButtonType.PRIMARY);
+				button.setTitle(actionButton.getName());
 			} else {
 				TextView buttonText = buttonView.findViewById(R.id.button_text);
 				buttonText.setText(actionButton.getName());
 			}
-			buttonView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (actionButton.getUrl() != null) {
-						AndroidUtils.openUrl(ctx, Uri.parse(actionButton.getUrl()), nightMode);
-					} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
-						boolean isDownloading = ctx.getDownloadThread().isDownloading(indexItem);
-						if (!isDownloading) {
-							ctx.startDownload(indexItem);
-						}
-					} else {
-						String text = ctx.getString(R.string.download_unsupported_action, actionButton.getActionType());
-						Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show();
+			buttonView.setOnClickListener(v -> {
+				if (actionButton.getUrl() != null) {
+					AndroidUtils.openUrl(ctx, Uri.parse(actionButton.getUrl()), nightMode);
+				} else if (ActionButton.DOWNLOAD_ACTION.equalsIgnoreCase(actionButton.getActionType()) && indexItem != null) {
+					boolean isDownloading = ctx.getDownloadThread().isDownloading(indexItem);
+					if (!isDownloading) {
+						ctx.startDownload(indexItem);
 					}
+				} else {
+					String text = ctx.getString(R.string.download_unsupported_action, actionButton.getActionType());
+					Toast.makeText(ctx, text, Toast.LENGTH_SHORT).show();
 				}
 			});
 			buttonsContainer.addView(buttonView);

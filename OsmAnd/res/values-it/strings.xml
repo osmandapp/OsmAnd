@@ -452,7 +452,7 @@
     <string name="save_current_track">Salva la traccia corrente</string>
     <string name="save_track_interval_descr">Specifica l\'intervallo di registrazione per la traccia durante la navigazione</string>
     <string name="save_track_interval">Intervallo di registrazione durante la navigazione</string>
-    <string name="update_tile">Aggiorna mappa</string>
+    <string name="update_tile">Aggiorna</string>
     <string name="reload_tile">Ricarica tasselli</string>
     <string name="mark_point">Obiettivo</string>
     <string name="use_english_names_descr">Seleziona l\'uso dei nomi locali o inglesi.</string>
@@ -4086,7 +4086,7 @@
     <string name="backup_into_file">Salva come file</string>
     <string name="restore_from_file">Ripristina dal file</string>
     <string name="osmand_cloud_help_descr">Serve aiuto\? Per favore contattaci a %1$s</string>
-    <string name="osmand_cloud_login_descr">Per favore immetti l\'indirizzo email con cui ti sei registrato. Ti invieremo una password usa e getta per il prossimo passo.</string>
+    <string name="osmand_cloud_login_descr">Per favore immetti l\'indirizzo email con cui ti sei registrato. Ti invieremo una password usa e getta.</string>
     <string name="verify_email_address">Verifica l\'indirizzo email</string>
     <string name="verify_email_address_descr">Codice di verifica inviato a %1$s. Per favore immettilo nel campo sottostante.</string>
     <string name="cloud_email_not_registered">Questo indirizzo mail non è registrato per OsmAnd Cloud</string>
@@ -4432,8 +4432,8 @@
     <string name="exit_without_saving_warning">Uscire senza salvare le modifiche\?</string>
     <string name="shared_string_show_slope">Mostra pendenza</string>
     <string name="shared_string_hide_slope">Nascondi pendenza</string>
-    <string name="shared_string_uphill">Salita</string>
-    <string name="shared_string_downhill">Discesa</string>
+    <string name="shared_string_uphill">Uphill</string>
+    <string name="shared_string_downhill">Downhill</string>
     <string name="elevation_profile">Profilo elevazione</string>
     <string name="shared_string_precision">Precisione</string>
     <string name="shared_string_statistics">Statistiche</string>
@@ -5227,4 +5227,35 @@
     <string name="external_device_forget_sensor">Dimentica il sensore</string>
     <string name="external_device_menu_forget">Dimentica</string>
     <string name="rendering_attr_lightDetail_name">Dettagli chiari</string>
+    <string name="deleting_complete">Eliminazione completata</string>
+    <string name="verify_account">Verifica il tuo account</string>
+    <string name="manage_subscriptions">Gestisci le iscrizioni.</string>
+    <string name="shared_string_deleting">Eliminazione</string>
+    <string name="delete_account">Elimina l\'account</string>
+    <string name="shared_string_close_the_dialog">Chiudi la finestra di dialogo</string>
+    <string name="free_mode">Modalità gratuita</string>
+    <string name="terrain_map">Mappa del terreno</string>
+    <string name="relief_3d">Rilievo 3D</string>
+    <string name="relief_3d_description">Possiedi e osserva il modello in scala del tuo quartiere o dell\'intero continente.</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="terrain_category_description">Linee di contorno del terreno, mappa completa delle colline con sfumature scure e mappe dei pendii con colori per mostrare picchi e pianure.</string>
+    <string name="osmand_cloud_deleting_account_descr">Tra pochi istanti tutti i tuoi dati e il tuo account verranno cancellati da OsmAnd Cloud.
+\n
+\nTutti i dati sul dispositivo rimarranno intatti.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account su OsmAnd Cloud\?
+\n
+\nQuesta azione non può essere annullata.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Eliminare l\'account\?</string>
+    <string name="action_cannot_be_undone">Questa azione non può essere annullata.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">I dispositivi secondari verranno disconnessi da OsmAnd Cloud e perderanno l\'accesso alle funzionalità a pagamento.</string>
+    <string name="osmand_cloud_deletion_account_warning">Il tuo account e tutti i dettagli dell\'account saranno %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Tutti i dati di OsmAnd Cloud saranno %1$s. I dati sul dispositivo rimarranno intatti.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non annullerà il tuo abbonamento a OsmAnd Pro.</string>
+    <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati dal cloud di OsmAnd.</string>
+    <string name="delete_account_warning">Sei sicuro di voler eliminare l\'account %1$s\?</string>
+    <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
+    <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
+\n
+\nInserisci l\'indirizzo email con cui ti sei registrato. Ti verrà inviata una password monouso per il passaggio successivo.</string>
 </resources>

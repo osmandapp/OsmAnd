@@ -11,11 +11,8 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="@dimen/list_content_padding"
-		android:layout_marginRight="@dimen/list_content_padding"
-		android:orientation="vertical"
-		android:layout_marginEnd="@dimen/list_content_padding"
-		android:layout_marginStart="@dimen/list_content_padding">
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:orientation="vertical">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -63,21 +60,31 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/text_margin_small"
-			android:layout_marginBottom="@dimen/content_padding_small">
+			android:layout_marginTop="@dimen/content_padding_minimal_inverted"
+			android:paddingTop="@dimen/content_padding_small_half"
+			android:paddingBottom="@dimen/content_padding_small_half"
+			android:layout_marginBottom="@dimen/content_padding_small_half">
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btnClose"
-				layout="@layout/bottom_sheet_dialog_button" />
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				osmand:dialogButtonType="secondary"
+				osmand:dialogButtonTitle="@string/shared_string_close" />
 
 			<View
 				android:id="@+id/buttons_divider"
 				android:layout_width="@dimen/content_padding"
 				android:layout_height="match_parent" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/btnDownload"
-				layout="@layout/bottom_sheet_dialog_button" />
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				osmand:dialogButtonType="primary"
+				osmand:dialogButtonTitle="@string/shared_string_download" />
 
 		</LinearLayout>
 

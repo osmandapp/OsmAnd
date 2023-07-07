@@ -27,13 +27,14 @@
 		android:layout_marginBottom="@dimen/content_padding"
 		android:text="@string/no_altitude_data" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/button_action"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="wrap_content"
-		android:layout_height="@dimen/dialog_button_height"
+		android:layout_height="wrap_content"
 		android:layout_gravity="center_horizontal"
-		android:layout_marginBottom="@dimen/dialog_content_margin" />
+		app:dialogButtonType="secondaryActive"
+		app:dialogButtonBottomMargin="@dimen/dialog_content_margin"
+		app:dialogButtonTitle="@string/calculate_altitude"/>
 
 	<include layout="@layout/gpx_item_details_view" />
 

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/buttons_container"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/dialog_button_ex_height"
 	android:gravity="center"
 	android:layout_gravity="bottom"
 	android:orientation="horizontal"
-	android:paddingLeft="@dimen/content_padding"
-	android:paddingRight="@dimen/content_padding"
-	android:paddingEnd="@dimen/content_padding"
-	android:paddingStart="@dimen/content_padding">
+	android:paddingHorizontal="@dimen/content_padding">
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/dismiss_button"
-		layout="@layout/bottom_sheet_dialog_button" />
+		android:layout_width="0dp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		app:dialogButtonType="secondary"
+		tools:dialogButtonTitle="@string/shared_string_close"/>
 
 	<View
 		android:id="@+id/buttons_divider"
@@ -23,10 +25,14 @@
 		android:visibility="gone"
 		tools:visibility="visible" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/right_bottom_button"
-		layout="@layout/bottom_sheet_dialog_button"
+		android:layout_width="0dp"
+		android:layout_weight="1"
+		android:layout_height="wrap_content"
+		app:dialogButtonType="primary"
 		android:visibility="gone"
-		tools:visibility="visible" />
+		tools:visibility="visible"
+		tools:dialogButtonTitle="@string/shared_string_apply" />
 
 </LinearLayout>

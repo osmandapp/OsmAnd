@@ -95,19 +95,18 @@ public class TerrainLayer extends MapTileLayer {
 		}
 
 		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-		boolean slopeFromHeightmap = developmentPlugin != null && developmentPlugin.generateSlopeFrom3DMaps();
-		boolean hillshadeFromHeightmap = developmentPlugin != null && developmentPlugin.generateHillshadeFrom3DMaps();
+		boolean terrainFromHeightmap = developmentPlugin != null && developmentPlugin.generateTerrainFrom3DMaps();
 
 		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 		GeoTiffCollection geoTiffCollection = mapRendererContext != null
 				? mapRendererContext.getGeoTiffCollection()
 				: null;
 
-		if (mode == SLOPE && slopeFromHeightmap && geoTiffCollection != null) {
+		if (mode == SLOPE && terrainFromHeightmap && geoTiffCollection != null) {
 			slopeLayerProvider = createSlopeLayerProvider(geoTiffCollection);
 			mapRenderer.setMapLayerProvider(layerIndex, slopeLayerProvider);
 			hillshadeLayerProvider = null;
-		} else if (mode == HILLSHADE && hillshadeFromHeightmap && geoTiffCollection != null) {
+		} else if (mode == HILLSHADE && terrainFromHeightmap && geoTiffCollection != null) {
 			hillshadeLayerProvider = createHillshadeLayerProvider(geoTiffCollection);
 			mapRenderer.setMapLayerProvider(layerIndex, hillshadeLayerProvider);
 			slopeLayerProvider = null;
