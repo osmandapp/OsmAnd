@@ -1672,31 +1672,31 @@ public class RouteResultPreparation {
 		boolean oneLane = currentLanesCount == 1 && prevLanesCount == 1;
 		int[] lanes;
 		if (oneLane) {
-			lanes = createCombinedSingleLane(rs, deviation);
+			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
 		} else {
 			int ls = currentLanesCount + rs.leftLanes + rs.rightLanes;
 			lanes = new int[ls];
 			for (int it = 0; it < ls; it++) {
 				if (it < rs.leftLanes) {
-					//lanes left from active
+					// lanes left from active
 					if (laneType != TurnType.C) {
-						//avoid repeat of turns, e.g. for TSLL get TL
+						// avoid repeat of turns, e.g. for TSLL get TL
 						lanes[it] = TurnType.getPrev(laneType) << 1;
 					} else {
 						// can be several straight directions
 						lanes[it] = TurnType.C << 1;
 					}
 				} else if (it >= rs.leftLanes + currentLanesCount) {
-					//lanes in right from active
+					// lanes in right from active
 					if (laneType != TurnType.C) {
 						lanes[it] = TurnType.getNext(laneType) << 1;
 					} else {
 						lanes[it] = TurnType.C << 1;
 					}
 				} else {
-					//active lane
+					// active lane
 					if (currentLanesCount == 1) {
-						int[] combined = createCombinedSingleLane(rs, deviation);
+						int[] combined = createCombinedTurnTypeForSingleLane(rs, deviation);
 						lanes[it] = combined[0];
 					} else {
 						lanes[it] = (laneType << 1) + 1;
@@ -1709,7 +1709,7 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private int[] createCombinedSingleLane(RoadSplitStructure rs, double currentDeviation) {
+	private int[] createCombinedTurnTypeForSingleLane(RoadSplitStructure rs, double currentDeviation) {
 		rs.attachedAngles.add(currentDeviation);
 		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
 			@Override
@@ -1721,13 +1721,13 @@ public class RouteResultPreparation {
 		int size = rs.attachedAngles.size();
 		boolean allStraight = rs.allAreStraight();
 		int[] lanes = new int[1];
-		int cnt = 0;
-		//iterate from left to right turns
+		int extraLanes = 0;
+		// iterate from left to right turns
 		for (int i = size - 1; i >= 0; i--) {
 			double angle = rs.attachedAngles.get(i);
 			int turn;
 			if (allStraight) {
-				//create fork intersection
+				// create fork intersection
 				if (i == 0) {
 					turn = TurnType.KL;
 				} else if (i == size - 1) {
@@ -1740,17 +1740,14 @@ public class RouteResultPreparation {
 			}
 			if (angle == currentDeviation) {
 				TurnType.setPrimaryTurn(lanes, 0, turn);
-				continue;
-			}
-			switch (cnt) {
-				case 0:
+			} else {
+				if (extraLanes++ == 0) {
 					TurnType.setSecondaryTurn(lanes, 0, turn);
-					break;
-				case 1:
+				} else {
 					TurnType.setTertiaryTurn(lanes, 0, turn);
-					break;
+					// if (extraLanes > 2): we don't have enough space to display
+				}
 			}
-			cnt++;
 		}
 		lanes[0] |= 1;
 		return lanes;
