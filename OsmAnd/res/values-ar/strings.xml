@@ -5383,4 +5383,9 @@
 \n</string>
     <string name="slope_legend_description">يستخدم الانحدار الألوان لتصور انحدار التضاريس. يمكنك قراءة المزيد عن المنحدرات في %1$s.</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">استخدام طبقة للانحدار والتضاريس</string>
+    <string name="cache_size">حجم ذاكرة التخزين المؤقت</string>
+    <string name="shared_string_avoid">تجنب</string>
+    <string name="may_be_used_if_there_is_shortcut">يمكن استخدامه إذا كان هناك اختصار</string>
+    <string name="routing_attr_allow_via_ferrata_name">طريق سفح الجبل (عبر فيراتا)</string>
+    <string name="routing_attr_allow_via_ferrata_description">طريق جبلي مجهز بالكابلات الثابتة والمعابد والسلالم والجسور.</string>
 </resources>
