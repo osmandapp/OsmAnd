@@ -663,7 +663,7 @@
     <string name="poi_context_menu_delete">Slet interessepunkt</string>
     <string name="rotate_map_compass_opt">Kompasretning</string>
     <string name="rotate_map_bearing_opt">Bevægelsesretning</string>
-    <string name="rotate_map_north_opt">Fast (nord er opad)</string>
+    <string name="rotate_map_north_opt">Nord er opad</string>
     <string name="rotate_map_to_descr">Justering af kort:</string>
     <string name="rotate_map_to">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
@@ -4777,7 +4777,7 @@
     <string name="distance_by_tap_use_description">Tryk på kortet for at få vist afstanden mellem din nuværende placering og det punkt, du har trykket på.
 \nTryk med 2 fingre på kortet for at få vist afstanden mellem de klikkede punkter</string>
     <string name="shared_string_large">Stor</string>
-    <string name="rotate_map_manual_opt">Fast (manuelt roteret)</string>
+    <string name="rotate_map_manual_opt">Manuelt roteret</string>
     <string name="map_marker_interval_dialog_desc">Angiv det tidsinterval, for hvilket gennemsnitshastigheden skal måles for at beregne den forventede ankomsttid.</string>
     <string name="go_to_marker_location">Fortsæt til markørens placering</string>
     <string name="shared_string_shows">Viser</string>
@@ -5320,4 +5320,11 @@
     <string name="free_account">Gratis konto</string>
     <string name="free_favorites_backup">Gratis sikkerhedskopiering af favoritter</string>
     <string name="folder_export_empty_error">Intet at eksportere, mappe er tom</string>
+    <string name="routing_attr_allow_via_ferrata_description">En bjergrute udstyret med fastmonterede kabler, trin, stiger og broer.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Bjergside-rute (Via ferrata)</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Brug raster sqlitedb til hældning / terrænskygge</string>
+    <string name="cache_size">Cache-størrelse</string>
+    <string name="shared_string_avoid">Undgå</string>
+    <string name="may_be_used_if_there_is_shortcut">Kan bruges, hvis der er en genvej</string>
+    <string name="free_settings_backup">Gratis sikkerhedskopiering af indstillinger</string>
 </resources>
