@@ -978,7 +978,7 @@
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
-    <string name="rotate_map_north_opt">ثابت (الشمال لأعلى)</string>
+    <string name="rotate_map_north_opt">الشمال لأعلى</string>
     <string name="rotate_map_compass_opt">اتجاه البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
@@ -4857,7 +4857,7 @@
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
     <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
-    <string name="rotate_map_manual_opt">ثابت (يتم تدويره يدويا)</string>
+    <string name="rotate_map_manual_opt">تدوير يدوي</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
@@ -5382,4 +5382,5 @@
 \n
 \n</string>
     <string name="slope_legend_description">يستخدم الانحدار الألوان لتصور انحدار التضاريس. يمكنك قراءة المزيد عن المنحدرات في %1$s.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">استخدام طبقة للانحدار والتضاريس</string>
 </resources>
