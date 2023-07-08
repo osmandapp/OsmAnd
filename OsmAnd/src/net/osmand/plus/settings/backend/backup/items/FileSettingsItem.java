@@ -349,8 +349,10 @@ public class FileSettingsItem extends StreamSettingsItem {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT));
 		} else if (oldPath.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT));
-		} else {
+		} else if (oldPath.contains(".")) {
 			prefix = oldPath.substring(0, oldPath.lastIndexOf("."));
+		} else {
+			prefix = oldPath;
 		}
 		String suffix = oldPath.replace(prefix, "");
 		int number = 0;
