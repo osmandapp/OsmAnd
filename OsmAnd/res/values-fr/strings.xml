@@ -312,7 +312,7 @@
     <string name="poi_context_menu_delete">Supprimer le point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
-    <string name="rotate_map_north_opt">Fixe (nord en haut)</string>
+    <string name="rotate_map_north_opt">Nord en haut</string>
     <string name="rotate_map_to_descr">Orientation de la carte :</string>
     <string name="rotate_map_to">Orientation de la carte</string>
     <string name="show_route">Itinéraire détaillé</string>
@@ -4760,7 +4760,7 @@
     <string name="display_position">Emplacement sur l’écran</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
-    <string name="rotate_map_manual_opt">Fixe (rotation manuelle)</string>
+    <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
     <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement appuyé et votre position actuelle.
 \nTapez avec 2 doigts sur la carte pour afficher la distance séparant ces 2 points.</string>
@@ -5306,4 +5306,11 @@
 \n• Évaluation des altitudes et des pentes retravaillée
 \n
 \n</string>
+    <string name="routing_attr_allow_via_ferrata_description">Itinéraire de montagne équipé de câbles fixes, de marche pieds, d\'échelles et de passerelles.</string>
+    <string name="cache_size">Taille du cache</string>
+    <string name="shared_string_avoid">Éviter</string>
+    <string name="may_be_used_if_there_is_shortcut">Peut être utilisé si un raccourci existe</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Utiliser le raster sqltiedb pour la pente / l\'ombrage du relief</string>
+    <string name="routing_attr_allow_via_ferrata_name">Itinéraire à flanc de montagne (Via ferrata)</string>
+    <string name="free_settings_backup">Paramètres pour la sauvegarde gratuite</string>
 </resources>
