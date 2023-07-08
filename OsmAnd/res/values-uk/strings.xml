@@ -419,7 +419,7 @@
     <string name="poi_context_menu_delete">Вилучити POI</string>
     <string name="rotate_map_compass_opt">За компасом</string>
     <string name="rotate_map_bearing_opt">За напрямком руху</string>
-    <string name="rotate_map_north_opt">Фіксовано (північ вгорі)</string>
+    <string name="rotate_map_north_opt">Північ угорі</string>
     <string name="rotate_map_to_descr">Орієнтація мапи:</string>
     <string name="rotate_map_to">Орієнтація мапи</string>
     <string name="show_route">Подробиці маршруту</string>
@@ -681,7 +681,7 @@
     <string name="poi_error_unexpected_template">Не вдалося виконати дію {0}.</string>
     <string name="poi_error_io_error_template">Помилка вводу-виводу при виконанні дії {0}.</string>
     <string name="poi_error_info_not_loaded">Помилка при завантаженні відомостей про POI</string>
-    <string name="poi_dialog_opening_hours">Відкрито</string>
+    <string name="poi_dialog_opening_hours">Відчинено</string>
     <string name="poi_dialog_comment">Коментар</string>
     <string name="poi_dialog_comment_default">Зміна POI</string>
     <string name="poi_dialog_other_tags_message">Всі інші теґи зберігаються</string>
@@ -4782,7 +4782,7 @@
     <string name="shared_string_shows">Показує</string>
     <string name="map_markers_desc">Віджет показує відстань або приблизний час прибуття (ETA) для перших двох позначок у списку позначок на мапі.</string>
     <string name="map_marker_interval_dialog_desc">Вкажіть інтервал часу, за який буде вимірюватися середня швидкість для розрахунку очікуваного часу прибуття.</string>
-    <string name="rotate_map_manual_opt">Фіксовано (обертається вручну)</string>
+    <string name="rotate_map_manual_opt">Обертається вручну</string>
     <string name="shared_string_switch_mode">Перемкнути режим</string>
     <string name="shared_string_large">Великий</string>
     <string name="shared_string_normal">Звичайний</string>
@@ -5322,4 +5322,11 @@
 \n</string>
     <string name="get_osmand_cloud">Отримати OsmAnd Cloud</string>
     <string name="free_account">Безплатний обліковий запис</string>
+    <string name="routing_attr_allow_via_ferrata_name">Гірський маршрут (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Гірський маршрут, обладнаний стаціонарними тросами, стелами, драбинами та містками.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Використання растрового sqltiedb для схилів / рельєфу</string>
+    <string name="cache_size">Розмір кешу</string>
+    <string name="shared_string_avoid">Уникати</string>
+    <string name="free_settings_backup">Безплатне резервне копіювання налаштувань</string>
+    <string name="may_be_used_if_there_is_shortcut">Може використовуватися, якщо є ярлик</string>
 </resources>
