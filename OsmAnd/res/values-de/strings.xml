@@ -5279,4 +5279,5 @@
     <string name="get_osmand_cloud">Holen Sie sich OsmAnd Cloud</string>
     <string name="free_account">Kostenloses Konto</string>
     <string name="folder_export_empty_error">Nichts zu exportieren, Ordner ist leer</string>
+    <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
 </resources>
