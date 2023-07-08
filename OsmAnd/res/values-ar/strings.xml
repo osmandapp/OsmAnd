@@ -127,7 +127,7 @@
     <string name="prefs_plugins">الملحقات</string>
     <string name="debugging_and_development">خيارات المطور</string>
     <string name="native_rendering">تقديم الأصلي</string>
-    <string name="test_voice_prompts">اختبار الأوامر الصوتية</string>
+    <string name="test_voice_prompts">اختبار التوجيهات الصوتية</string>
     <string name="send_files_to_osm">إرسال ملفات GPX إلى OSM؟</string>
     <string name="gpx_visibility_txt">الوضوح</string>
     <string name="gpx_tags_txt">وسوم</string>
@@ -514,8 +514,8 @@
     <string name="settings_direction_style">نمط التّوجه</string>
     <string name="settings_direction_style_descr">اختر نمط التّعبير عن الاتجاهات النّسبية أثناء الحركة</string>
     <string name="i_am_here">أنا هنا</string>
-    <string name="index_name_voice">التوجيه الصوتي (صوت طبيعي)</string>
-    <string name="index_name_tts_voice">التوجيه الصوتي (صوت آلي TTS)</string>
+    <string name="index_name_voice">التوجيهات الصوتية (مسجلة وبمزايا محدودة)</string>
+    <string name="index_name_tts_voice">التوجيهات الصوتية (صوت آلي، مفضل)</string>
     <string name="profile_settings">إعدادات خاصة بالوضع</string>
     <string name="zoom_by_trackball_descr">غيّر نمط تكبير الخريطة بواسطة حركات كرة التّتبع الأفقية.</string>
     <string name="zoom_by_trackball">استخدم كرة التّتبع للتّحكم في التّكبير</string>
@@ -700,8 +700,8 @@
     <string name="local_index_transport_data">بيانات وسائل النقل العام</string>
     <string name="local_index_map_data">بيانات الخريطة</string>
     <string name="local_indexes_cat_backup">معطلة</string>
-    <string name="local_indexes_cat_tts">البيانات الصوتية ( TTS )</string>
-    <string name="local_indexes_cat_voice">البيانات الصوتية ( المُسجلة )</string>
+    <string name="local_indexes_cat_tts">التوجيهات الصوتية (صوت آلي)</string>
+    <string name="local_indexes_cat_voice">التوجيهات الصوتية (مسجلة)</string>
     <string name="local_indexes_cat_poi">بيانات POI</string>
     <string name="ttsvoice">تحويل النص إلى كلام -</string>
     <string name="search_offline_clear_search">بحث جديد</string>
@@ -833,7 +833,7 @@
     <string name="index_name_italy">أوروبا - إيطاليا</string>
     <string name="copying_osmand_files">جار نسخ ملفات أوسماند…</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
-    <string name="interrupt_music_descr">الارشادات الصوتية توقف الموسيقى مؤقتًا.</string>
+    <string name="interrupt_music_descr">إيقاف أصوات الوسائط عند التوجيهات الصوتية.</string>
     <string name="interrupt_music">إيقاف الموسيقى</string>
     <string name="loading_smth">جار التحميل %1$s …</string>
     <string name="selected_gpx_info_show">"
@@ -1308,7 +1308,7 @@
     <string name="select_max_zoom_preload_area">حدد أقصى تقريب للتحميل المسبق</string>
     <string name="maps_could_not_be_downloaded">لا يمكن تحميل هذه الخريطة</string>
     <string name="download_type_to_filter">اكتب للتصفية</string>
-    <string name="voices">المطالبات الصوتية</string>
+    <string name="voices">التوجيهات الصوتية</string>
     <string name="gpx_files_not_found">لا يوجد ملفات GPX في مجلد tracks</string>
     <string name="error_reading_gpx">خطأ في قراءة بيانات GPX.</string>
     <string name="vector_data">الخريطة المحملة</string>
@@ -1726,7 +1726,7 @@
     <string name="av_video_quality">جودة مخرج الفيديو</string>
     <string name="osm_edit_deleted_poi">حذف OSM POI</string>
     <string name="download_wikipedia_maps">ويكيبيديا</string>
-    <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه</string>
+    <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه الصوتي</string>
     <string name="fast_route_mode">الطريق الأسرع</string>
     <string name="poi_context_menu_website">عرض موقع الويب ل POI</string>
     <string name="poi_context_menu_call">عرض الهاتف لPOI</string>
@@ -1804,7 +1804,7 @@
     <string name="show_transport_over_map_description">عرض مواقف وسائل النقل العام على الخريطة.</string>
     <string name="transport_stop_to_go_out">اختر موقف النزول</string>
     <string name="add_new_rule">إضافة قاعدة جديدة</string>
-    <string name="voice_data_unavailable">لا تتوفر بيانات الصوت المحدد</string>
+    <string name="voice_data_unavailable">بيانات التوجيهات الصوتية المحددة غير متوفرة</string>
     <string name="voice_data_initializing">تهيئة البيانات الصوتية …</string>
     <string name="layer_osm_bugs">ملاحظات OSM</string>
     <string name="poi_context_menu_delete">حذف POI</string>
@@ -1898,7 +1898,7 @@
     <string name="loading_builds_failed">تعذر استرداد قائمة OsmAnd builds</string>
     <string name="loading_builds">عملية تحميل إصدارات التطبيق جارية …</string>
     <string name="select_build_to_install">حدد إصدار التطبيق للتثبيت</string>
-    <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إدارة الخرائط\" ← \"تحميلات متاحة\" ← \"التوجيه الصوتي\" وحدد أو حمل حزمة صوت.</string>
+    <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إدارة الخرائط\" ← \"تحميلات متاحة\" ← \"التوجيهات الصوتية\" واختر أو حمل حزمة الصوت المناسبة.</string>
     <string name="daynight_descr">اختيار قاعدة تحويل وضع نهار/ ليل.</string>
     <string name="download_files_question">تحميل {0} ملف ({1} مب)؟</string>
     <string name="items_were_selected">{0} عنصر محدد</string>
@@ -2795,7 +2795,7 @@
     <string name="show_along_the_route">إظهار على طول الطريق</string>
     <string name="simulate_navigation">محاكاة الملاحة</string>
     <string name="choose_track_file_to_follow">اختر مسار للمتابعة</string>
-    <string name="voice_announcements">إعلام صوتي</string>
+    <string name="voice_announcements">توجيهات صوتية</string>
     <string name="intermediate_destinations">الوجهات المتوسطة</string>
     <string name="arrive_at_time">الوصول عند %1$s</string>
     <string name="off_road_render_descr">مناسبة للاستخدام أثناء القيادة على الطرق الوعرة. مناسب للاستخدام مع صور الأقمار الصناعية الخضراء كمخطط موضعها. النقاط الرئيسية: تخفيض سمك الطريق الرئيسية، وزيادة سمك المسارات والمسارات ودراجات وطرق أخرى. استناداً إلى نمط \'Topo\'.</string>
@@ -3117,13 +3117,13 @@
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
     <string name="shared_string_other">أخرى</string>
     <string name="vehicle_parameters_descr">الوزن ، الارتفاع ، السرعة</string>
-    <string name="vehicle_parameters">معلمات المركبات</string>
+    <string name="vehicle_parameters">تفضيلات المركبة</string>
     <string name="voice_announces_info">الإعلامات الصوتية تحدث فقط أثناء التنقل.</string>
     <string name="voice_announces_descr">إرشادات التنقل والإعلامات</string>
-    <string name="voice_announces">المطالبات الصوتية</string>
+    <string name="voice_announces">التوجيهات الصوتية</string>
     <string name="screen_alerts">تنبيهات الشاشة</string>
-    <string name="route_parameters_descr">تكوين معلمات الطريق</string>
-    <string name="route_parameters">معلمات الطريق</string>
+    <string name="route_parameters_descr">محددات وتفضيلات مسار التوجيه</string>
+    <string name="route_parameters">تفضيلات اختيار الطريق</string>
     <string name="application_profile_changed">تم تغيير وضع التطبيق إلى \"%s\"</string>
     <string name="logcat_buffer">سجل الاستخدام</string>
     <string name="plugins_settings">ضبط الملحقات</string>
@@ -3965,7 +3965,7 @@
     <string name="routing_attr_allow_streams_name">السماح بالتيارات والمصارف</string>
     <string name="routing_attr_allow_intermittent_description">السماح بالممرات المائية المتقطعة</string>
     <string name="routing_attr_allow_intermittent_name">السماح بالممرات المائية المتقطعة</string>
-    <string name="voice_prompts_timetable">مطالبة صوتية</string>
+    <string name="voice_prompts_timetable">أوقات التوجيهات الصوتية</string>
     <string name="add_online_routing_engine">إضافة محرك توجيه عبر الإنترنت</string>
     <string name="edit_online_routing_engine">تعديل محرك التوجيه عبر الإنترنت</string>
     <string name="shared_string_subtype">النوع الفرعي</string>
