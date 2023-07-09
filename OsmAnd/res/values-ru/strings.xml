@@ -360,14 +360,14 @@
     <string name="map_online_data_descr">Использовать онлайн-карты (загрузка и кеширование на SD-карте).</string>
     <string name="shared_string_online_maps">Онлайн-карты</string>
     <string name="online_map_settings_descr">Выберите источник онлайн или кешированных растровых карт.</string>
-    <string name="osmand_rastermaps_plugin_description">Доступ к разнообразным онлайновым (т. н. плиточным или растровым) картам, таким как заранее отрисованные карты OSM, спутниковые снимки и специальные слои (погодные, климатические, геологические карты, затенение рельефа и другие).
+    <string name="osmand_rastermaps_plugin_description">Доступ к разнообразным онлайновым (т. н. тайловым или растровым) картам, таким как заранее отрисованные карты OSM, спутниковые снимки и специальные слои (погодные, климатические, геологические карты, затенение рельефа и другие).
 \n
 \nЛюбую из карт можно использовать как основную либо в качестве подложки/наложения к другой карте (например, к векторным картам OsmAnd). Некоторые элементы векторных карт OsmAnd можно скрыть в меню «Настройки карты», чтобы сделать подложку более заметной.
 \n
 \nКарты можно загрузить из интернета или вручную скопировать в папку данных OsmAnd в виде файлов базы данных SQLite, используя один из многочисленных инструментов подготовки сторонних карт.</string>
     <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путём периодического пробуждения устройства GPS (с выключенным экраном).</string>
     <string name="osmand_accessibility_description">Поддержка специальных возможностей устройства непосредственно в OsmAnd. Это облегчает, например, настройку скорости речи для преобразования текста в речь, настройку навигации по D-pad, использование трекбола для управления масштабированием или обратной связи между текстом и речью, например, для автоматического объявления вашей позиции.</string>
-    <string name="osmand_development_plugin_description">Предоставляет функциональные возможности для тестирования и отладки OsmAnd: моделирование маршрутов навигации, мониторинг отрисовки экрана, проверка производительности и т. д. Эти настройки предназначены для разработчиков и не нужны обычному пользователю.</string>
+    <string name="osmand_development_plugin_description">Функциональные возможности для тестирования и отладки OsmAnd: моделирование маршрутов навигации, мониторинг отрисовки экрана, проверка производительности и т. д. Эти настройки предназначены для разработчиков и не нужны обычному пользователю.</string>
     <string name="plugins_screen">Плагины</string>
     <string name="prefs_plugins_descr">Плагины активируют дополнительные возможности приложения.</string>
     <string name="prefs_plugins">Плагины</string>
@@ -1799,7 +1799,7 @@
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Копировать</string>
     <string name="application_dir_change_warning3">Переместить файлы данных Osmand в новое место назначения\?</string>
-    <string name="search_poi_category_hint">Напечатайте для поиска</string>
+    <string name="search_poi_category_hint">Введите для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения границ</string>
     <string name="routing_attr_height_name">Высота</string>
@@ -2177,7 +2177,7 @@
     <string name="search_categories">Категории</string>
     <string name="postcode">Почтовый индекс</string>
     <string name="city_type_district">Район</string>
-    <string name="city_type_neighbourhood">Пригород</string>
+    <string name="city_type_neighbourhood">Район</string>
     <string name="map_widget_search">Поиск</string>
     <string name="shared_string_is_open_24_7">Открыто 24/7</string>
     <string name="storage_directory_card">Карта памяти</string>
@@ -2758,9 +2758,9 @@
     <string name="default_render_descr">Стиль общего назначения. Густонаселённые города показаны упрощённо. Выделены контурные линии, маршруты, качество поверхности, частные территории, дорожные щиты, объекты спортивных сплавов, отрисовка пешеходных маршрутов по шкале SAC/CAI.</string>
     <string name="open_wikipedia_link_online">Открыть ссылку Википедии в онлайн</string>
     <string name="open_wikipedia_link_online_description">Ссылка будет открыта в веб-браузере.</string>
-    <string name="read_wikipedia_offline_description">Подпишитесь на OsmAnd Live и читайте Википедию и Викигид в режиме офлайн.</string>
+    <string name="read_wikipedia_offline_description">Подпишитесь на OsmAnd Live и читайте Википедию и Викигид в автономном режиме.</string>
     <string name="how_to_open_link">Как открыть ссылку?</string>
-    <string name="read_wikipedia_offline">Читать Википедию в автономном режиме</string>
+    <string name="read_wikipedia_offline">Читать Википедию в режиме офлайн</string>
     <string name="touring_view_render_descr">Стиль с высоким контрастом и максимальной детализацией. Включает все функции стиля OsmAnd по умолчанию, показывая максимальное количество деталей, в частности дороги, тропы и другие пути. Четкое разграничение типов дорог в стиле «туристического атласа». Подходит для использования днём, ночью и при ярком освещении.</string>
     <string name="shared_string_bookmark">Сохранить</string>
     <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), и для использования с зелеными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина дорожек, тропинок, велосипедных и других маршрутов.</string>
@@ -4168,7 +4168,7 @@
     <string name="purchases_feature_desc_nautical">Информация о морских глубинах</string>
     <string name="purchases_feature_desc_terrain">Контурные линии, карты затенения рельефа (отмывка) и карты уклонов с цветовой визуализацией, вершины и низменности.</string>
     <string name="purchases_feature_desc_wikivoyage">Изучайте Викигид офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
-    <string name="purchases_feature_desc_wikipedia">Изучайте Википедию офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
+    <string name="purchases_feature_desc_wikipedia">Статьи офлайн-Википедии. Разделены по регионам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_combined_wiki">Читайте статьи Википедии и Викигида на ходу, без подключения к интернету. Офлайн-данные разделены по странам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Неограниченные загрузки локальных карт всех континентов и регионов.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
@@ -4308,10 +4308,10 @@
     <string name="add_group_to_markers">Добавить группу в список маркеров</string>
     <string name="remove_group_from_markers">Удалить группу из списка маркеров</string>
     <string name="no_items_of_type_message">У вас нет элементов этого типа</string>
-    <string name="routeInfo_tracktype_description">Раскрашивание маршрута или трека на основе состава их поверхности. Обычно применяется, когда дорожная сеть в основном не имеет покрытия.</string>
+    <string name="routeInfo_tracktype_description">Окраска линии маршрута/трека на основе состава поверхности. Обычно применяется для неасфальтированных дорог.</string>
     <string name="routeInfo_winter_ice_road_description">Окраска маршрута или трека в соответствии с классификацией зимних дорог (зимников).</string>
     <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колёсных транспортных средств в отношении регулярности/ровности поверхности.</string>
-    <string name="routeInfo_surface_description">Предоставляет информацию о физическом покрытии дорог/тротуаров.</string>
+    <string name="routeInfo_surface_description">Информация о физическом покрытии дорог/тротуаров.</string>
     <string name="routeInfo_roadClass_description">Окраска маршрута или трека в соответствии с классификацией дорог.</string>
     <string name="start_point">Старт</string>
     <string name="mapillary_menu_filter_description_new">Фильтр изображений по дате или по типу. Активен только при увеличении крупным планом.</string>
@@ -4569,7 +4569,7 @@
     <string name="rendering_attr_horse_scale_critical_name">Критический</string>
     <string name="rendering_attr_horse_scale_difficult_name">Сложный</string>
     <string name="rendering_attr_horse_scale_impossible_name">Непроходимый</string>
-    <string name="routeInfo_horse_scale_name">Сложность конных маршрутов</string>
+    <string name="routeInfo_horse_scale_name">Конные маршруты</string>
     <string name="rendering_attr_horse_scale_dangerous_name">Опасный</string>
     <string name="routeInfo_horse_scale_description">Отрисовка маршрута в зависимости от сложности конных троп</string>
     <string name="change_default_appearance">Изменить внешний вид по умолчанию</string>
@@ -5185,11 +5185,11 @@
     <string name="rendering_value_caiScale_name">Шкала CAI</string>
     <string name="map_3d_mode_action">Режим 3D</string>
     <string name="map_2d_mode_action">Режим 2D</string>
-    <string name="map_3d_mode_description">Для регулировки наклона карты коснитесь её двумя пальцами и перемещайте их вверх и вниз.</string>
+    <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
     <string name="rendering_value_sacScale_name">Шкала SAC</string>
     <string name="shared_string_finger">Палец</string>
     <string name="external_device_characteristic_cuff_pressure">Давление в манжете</string>
-    <string name="visible_in_3d_mode">Виден в режиме 3D</string>
+    <string name="visible_in_3d_mode">Видно при включении 3D</string>
     <string name="poi_categories">Категории POI</string>
     <string name="shared_string_ear_lobe">Мочка уха</string>
     <string name="map_3d_mode_hint">Удерживайте кнопку для изменения положения.</string>
@@ -5308,7 +5308,7 @@
 \n
 \nВведите адрес электронной почты, с которого вы зарегистрировались. На него будет отправлен одноразовый пароль для следующего шага.</string>
     <string name="cache_size">Размер кеша</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Использовать sqltiedb для затенения рельефа</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Использовать sqltiedb для уклонов / затенения рельефа</string>
     <string name="shared_string_avoid">Избегать</string>
     <string name="free_settings_backup">Резервная копия настроек</string>
 </resources>
