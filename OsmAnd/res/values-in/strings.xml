@@ -2494,7 +2494,7 @@
     <string name="poi_context_menu_modify">Ubah POI</string>
     <string name="poi_context_menu_delete">Hapus POI</string>
     <string name="rotate_map_bearing_opt">Arah gerakan</string>
-    <string name="rotate_map_north_opt">Fiks (utara selalu ke atas)</string>
+    <string name="rotate_map_north_opt">Utara selalu ke atas</string>
     <string name="show_route">Detail rute</string>
     <string name="fav_imported_sucessfully">Favorit telah diimpor</string>
     <string name="import_file_favourites">Simpan data sebagai file GPX atau impor titik jalan ke \'Favorit\'\?</string>
@@ -4465,7 +4465,7 @@
     <string name="local_index_items_restored">%1$d dari %2$d item diaktifkan.</string>
     <string name="quick_action_map_center_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget tengah peta di peta.</string>
     <string name="quick_action_current_location_widget_descr">Sebuah saklar untuk menampilkan atau menyembunyikan widget lokasi saat ini di peta.</string>
-    <string name="rotate_map_manual_opt">Fiks (diputar secara manual)</string>
+    <string name="rotate_map_manual_opt">Diputar secara manual</string>
     <string name="map_online_data">Peta daring dan ubin</string>
     <string name="index_name_voice">Perintah suara (direkam, fitur terbatas)</string>
     <string name="routing_attr_avoid_sett_description">Menghindari sett</string>
@@ -5320,4 +5320,11 @@
     <string name="free_account">Akun gratis</string>
     <string name="get_osmand_cloud">Dapatkan OsmAnd Cloud</string>
     <string name="folder_export_empty_error">Tidak ada untuk diekspor, folder kosong</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Gunakan sqltiedb raster untuk bayangan lereng/bukit</string>
+    <string name="cache_size">Ukuran tembolok</string>
+    <string name="shared_string_avoid">Hindari</string>
+    <string name="may_be_used_if_there_is_shortcut">Dapat digunakan jika ada jalan potong</string>
+    <string name="routing_attr_allow_via_ferrata_name">Rute lereng gunung (Via ferrata)</string>
+    <string name="free_settings_backup">Pencadangan Pengaturan Gratis</string>
+    <string name="routing_attr_allow_via_ferrata_description">Rute gunung yang dilengkapi dengan kabel tetap, tiang, tangga, dan jembatan.</string>
 </resources>
