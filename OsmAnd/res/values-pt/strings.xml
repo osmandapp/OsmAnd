@@ -99,7 +99,7 @@
     <string name="poi_context_menu_delete">Eliminar POI</string>
     <string name="rotate_map_compass_opt">Direção da bússola</string>
     <string name="rotate_map_bearing_opt">Direção do movimento</string>
-    <string name="rotate_map_north_opt">Fixa (norte para cima)</string>
+    <string name="rotate_map_north_opt">O norte está para cima</string>
     <string name="rotate_map_to_descr">Alinhamento do mapa:</string>
     <string name="rotate_map_to">Rotação do mapa</string>
     <string name="show_route">Mostrar rota</string>
@@ -4772,7 +4772,7 @@
     <string name="download_heightmap_maps">Mapa de atitudes</string>
     <string name="display_position">Posição</string>
     <string name="shared_string_normal">Normal</string>
-    <string name="rotate_map_manual_opt">Fixa (rotação manual)</string>
+    <string name="rotate_map_manual_opt">Rotação manual</string>
     <string name="how_to_use">Como usar:</string>
     <string name="shared_string_large">Larga</string>
     <string name="distance_by_tap_use_description">Toque no mapa para ver a distância entre a sua localização atual e o ponto tocado.
@@ -5271,4 +5271,15 @@
     <string name="slope_legend_description">O declive utiliza cores para visualizar a inclinação do terreno. Pode ler mais sobre declives em %1$s.</string>
     <string name="terrain_category_description">Veja curvas de nível do terreno, mapas em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
     <string name="osmand_cloud_delete_account_confirmation">Apagar a conta\?</string>
+    <string name="free_favorites_backup">Cópia de segurança gratuita dos favoritos</string>
+    <string name="get_osmand_cloud">Obtenha o OsmAnd Cloud</string>
+    <string name="free_account">Conta gratuita</string>
+    <string name="free_favorites_backup_description">Registe-se na OsmAnd Cloud para obter uma cópia de segurança gratuita dos seus favoritos e definições.</string>
+    <string name="shared_string_avoid">Evitar</string>
+    <string name="may_be_used_if_there_is_shortcut">Pode ser utilizado se houver um atalho</string>
+    <string name="routing_attr_allow_via_ferrata_name">Rota da montanha (Via ferrata)</string>
+    <string name="cache_size">Tamanho do cache</string>
+    <string name="folder_export_empty_error">Nada para exportar, a pasta está vazia</string>
+    <string name="free_settings_backup">Cópia de segurança gratuita das definições</string>
+    <string name="routing_attr_allow_via_ferrata_description">Percurso de montanha equipado com cabos fixos, estribos, escadas e pontes.</string>
 </resources>

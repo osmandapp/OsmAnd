@@ -1261,7 +1261,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_north_opt">Norte siempre arriba (fijo)</string>
+    <string name="rotate_map_north_opt">Norte siempre arriba</string>
     <string name="rotate_map_to_descr">Alineación del mapa:</string>
     <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -4779,7 +4779,7 @@
     <string name="shared_string_large">Largo</string>
     <string name="display_position">Posición de la ubicación</string>
     <string name="favorite_delete_group">Borrar grupo</string>
-    <string name="rotate_map_manual_opt">Rotación manual (fijo)</string>
+    <string name="rotate_map_manual_opt">Rotación manual</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="go_to_marker_location">Ir a la ubicación del marcador</string>
     <string name="shared_string_switch_mode">Cambiar modo</string>
@@ -5324,4 +5324,16 @@
 \n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
 \n
 \n</string>
+    <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
+    <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
+    <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
+    <string name="free_account">Cuenta gratuita</string>
+    <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
+    <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
+    <string name="cache_size">Tamaño de la caché</string>
+    <string name="shared_string_avoid">Evitar</string>
+    <string name="may_be_used_if_there_is_shortcut">Puede usarse si existe un acceso directo</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqltiedb para pendientes o sombreados</string>
+    <string name="free_settings_backup">Copia de seguridad gratuita de los ajustes</string>
+    <string name="routing_attr_allow_via_ferrata_description">Una ruta de montaña equipada con cables fijos, anclajes, peldaños, escaleras y puentes.</string>
 </resources>

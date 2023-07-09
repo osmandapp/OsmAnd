@@ -5308,4 +5308,7 @@
 \n
 \n</string>
     <string name="free_favorites_backup_description">Regisztráljon az OsmAnd Cloudba, hogy ingyenesen biztonsági másolatot készíthessen a kedvencekről és a beállításokról.</string>
+    <string name="cache_size">Gyorsítótár méret</string>
+    <string name="shared_string_avoid">Elkerülés</string>
+    <string name="free_settings_backup">Beállítások ingyenes lementése</string>
 </resources>
