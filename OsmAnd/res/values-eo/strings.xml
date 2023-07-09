@@ -1602,7 +1602,7 @@
     <string name="error_reading_gpx">Ne povas legi GPX‑datumojn.</string>
     <string name="rotate_map_compass_opt">Direkto de kompaso</string>
     <string name="rotate_map_bearing_opt">Direkto de movado</string>
-    <string name="rotate_map_north_opt">Fiksita (nordo supre)</string>
+    <string name="rotate_map_north_opt">Nordo supre</string>
     <string name="rotate_map_to_descr">Ekran‑turniĝo:</string>
     <string name="rotate_map_to">Map-orientiĝo</string>
     <string name="show_route">Detaloj pri kurso</string>
@@ -1869,7 +1869,7 @@
     <string name="please_specify_poi_type">Bonvolu precizigi specon de interesejo.</string>
     <string name="working_days">Labortagoj</string>
     <string name="recent_places">Antaŭaj ejoj</string>
-    <string name="favourites">Ŝatataj ejoj</string>
+    <string name="favourites">Ŝatataj punktoj</string>
     <string name="saved_at_time">Konservita je: %1$s</string>
     <string name="poi_deleted_localy">Interesejo estos forigita kiam vi alŝutos viajn ŝanĝojn</string>
     <string name="count_of_lines">Nombro de linioj</string>
@@ -4787,7 +4787,7 @@
     <string name="map_widget_camera_tilt_desc">Fenestraĵo montranta fotilan klinecon en 2,5-dimensia vido. Implicite estas 90° (neniu klineco).</string>
     <string name="distance_by_tap_use_description">Frapetu la ekranon per unu fingro por vidigi distancon inter via nuna pozicio kaj la elektita punkto.
 \nFrapetu la ekranon per du fingroj por vidigi distancon inter la elektitaj punktoj.</string>
-    <string name="rotate_map_manual_opt">Fiksita (permane turnita)</string>
+    <string name="rotate_map_manual_opt">Permane turnita</string>
     <string name="map_center_widget">Koordinatoj: map-centro</string>
     <string name="map_widget_altitude_map_center">Altitudo: map-centro</string>
     <string name="map_widget_altitude_current_location_desc">Vidigas altecon super la marnivelo por la nuna pozicio.</string>
@@ -5262,4 +5262,59 @@
     <string name="verify_account">Verigi vian konton</string>
     <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pli la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
     <string name="terrain_category_description">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
+    <string name="routing_attr_allow_via_ferrata_description">Monta vojo kun fiksitaj ŝnuregoj, teniloj, ŝtupetaroj kaj pontetoj.</string>
+    <string name="free_favorites_backup_description">Akiru konton OsmAnd-Nubo por havigi senpagan sekurkopion de ŝatataj punktoj kaj agordoj.</string>
+    <string name="free_favorites_backup">Senpaga sekurkopio de ŝatataj punktoj</string>
+    <string name="get_osmand_cloud">Akiri OsmAnd-Nubon</string>
+    <string name="folder_export_empty_error">Nenio por elporti, dosierujo estas malplena</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Uzi rastruman «sqltiedb» por dekliveco kaj nivelombrumo</string>
+    <string name="cache_size">Grando de kaŝmemoro</string>
+    <string name="shared_string_avoid">Eviti</string>
+    <string name="may_be_used_if_there_is_shortcut">Povas esti uzata se pli mallonga kurso</string>
+    <string name="release_4_5">• sentiloj BLE/ANT+: refaris konektadon, konservadon kaj montradon de ricevitaj datumoj al GPX
+\n
+\n• senpaga sekurkopio de ŝatataj punktoj kaj agordoj al OsmAnd-Nubo
+\n
+\n• nova formo de terenaj mapoj kun 3-dimensia reliefo
+\n
+\n• administri spurojn: plibonigita fasado, aldonis ordigadon kaj subtenon por ingitaj dosierujoj
+\n
+\n• Android Auto: nova komenca ekrano kun aliro al ŝatataj punktoj, spuroj kaj kategorioj de interesejoj
+\n
+\n• la samaj disponeblaj fenestraĵoj por supra kaj malsupra paneloj
+\n
+\n• nova profilo “Vagonaro” por kalkuli fervojajn kursojn
+\n
+\n• nivelkurboj kun ĉiuj map-fonto
+\n
+\n• etendita listo de implicitaj agoj por eksteraj klavaroj
+\n
+\n• propraj dosieroj de navigo, eblo superskribi aŭ forigi
+\n
+\n• eblo “Anonci devojiĝon de la kurso”
+\n
+\n• komenca ekrano: eblo restarigi agordaron de OsmAnd el dosiero
+\n
+\n• aldonis klasojn de danĝeraj materialoj por navigo per kamiono en Usono
+\n
+\n• aldonis subtenon por viaferataojn por piedirada navigo
+\n
+\n• vidigo de malfaciloj de kursoj laŭ la CAI-skalo
+\n
+\n• riparis elektilon de lingvo
+\n
+\n• aldonis subtenon por etosaj emblemoj
+\n
+\n• OsmAnd-Nubo: eblo por forigi konton
+\n
+\n• alirebleco: butona tuŝ-areo ŝanĝita al 48 dp; riparita problemo pri videbla uzant-fasado por ekranlegiloj
+\n
+\n• refaritaj japanaj voĉaj anoncoj
+\n
+\n• refaritaj ŝanĝoj de altitudo kaj pritakso de dekliveco
+\n
+\n</string>
+    <string name="free_account">Senpaga konto</string>
+    <string name="routing_attr_allow_via_ferrata_name">Sekurigita vojo (viaferatao)</string>
+    <string name="free_settings_backup">Senpaga sekurkopio de agordoj</string>
 </resources>
