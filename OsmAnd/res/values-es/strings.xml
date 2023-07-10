@@ -322,7 +322,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_north_opt">Fijo (norte siempre arriba)</string>
+    <string name="rotate_map_north_opt">El norte está arriba</string>
     <string name="rotate_map_to_descr">Alineación del mapa:</string>
     <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -4772,7 +4772,7 @@
     <string name="map_widget_zoom_level_desc">Muestra el nivel de zum actual del mapa.</string>
     <string name="map_widget_camera_distance_desc">Muestra la elevación de la cámara sobre el nivel de la superficie.</string>
     <string name="map_widget_camera_tilt">Inclinación de la cámara</string>
-    <string name="rotate_map_manual_opt">Fijo (rotación manual)</string>
+    <string name="rotate_map_manual_opt">Rotación manual</string>
     <string name="trip_recording_uphill_widget_desc">Muestra la suma de todas las subidas del viaje registrado actualmente.</string>
     <string name="rendering_attr_depthContourWidth_description">La anchura para las curvas de nivel de profundidad</string>
     <string name="routing_attr_motor_type_electric_name">Eléctrico</string>
@@ -5213,7 +5213,7 @@
     <string name="map_3d_mode_action">Modalidad 3D</string>
     <string name="map_3d_mode_hint">Pulsar prolongadamente el botón permite cambiar tu posición.</string>
     <string name="rendering_value_caiScale_name">Escala CAI</string>
-    <string name="visible_in_3d_mode">Visible en 3D</string>
+    <string name="visible_in_3d_mode">Visible en modo 3D</string>
     <string name="map_3d_mode_description">Toca el mapa con dos dedos y muévelos arriba y abajo para ajustar la inclinación del mapa.</string>
     <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="delete_folder">Borrar la carpeta</string>
@@ -5315,4 +5315,11 @@
 \n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
 \n
 \n</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para las pendiente/los sombreado</string>
+    <string name="shared_string_avoid">Evitar</string>
+    <string name="cache_size">Tamaño de la caché</string>
+    <string name="may_be_used_if_there_is_shortcut">Puede utilizarse si existe un acceso directo</string>
+    <string name="free_settings_backup">Copia de seguridad gratuita de la configuración</string>
+    <string name="routing_attr_allow_via_ferrata_description">Recorrido de montaña equipado con cables fijos, piñones, escaleras y puentes.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
 </resources>
