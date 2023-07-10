@@ -11,6 +11,18 @@
 	Thx - Hardy
 -->
 
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosives</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Flammable Liquids</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Flammable Solids</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxidizing Agents and Organic Peroxides</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Toxic and Infectious Substances</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioactive Substances</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Corrosive Substances</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Miscellaneous</string>
+    <string name="shared_string_class">Class</string>
+    <string name="dangerous_goods_description">On some roads and tunnels transporting of hazardous materials is forbidden.</string>
+    <string name="dangerous_goods">Dangerous goods</string>
     <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
     <string name="free_favorites_backup">Free Favorites Backup</string>
     <string name="get_osmand_cloud">Get OsmAnd Cloud</string>

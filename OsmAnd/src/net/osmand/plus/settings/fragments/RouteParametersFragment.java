@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getDangerousGoodsClass;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
 import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
 import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
@@ -50,6 +51,7 @@ import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -74,6 +76,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 	public static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	private static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
+	private static final String HAZMAT_CATEGORY_USA_PREFIX = "hazmat_category_usa_";
 	private static final String PREFER_ROUTING_PARAMETER_PREFIX = "prefer_";
 	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
 	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
@@ -81,6 +84,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private static final String ROUTING_RECALC_DISTANCE = "routing_recalc_distance";
 	private static final String ROUTING_RECALC_WRONG_DIRECTION = "disable_wrong_direction_recalc";
 	private static final String HAZMAT_TRANSPORTING_ENABLED = "hazmat_transporting_enabled";
+	private static final String DANGEROUS_GOODS_USA = "dangerous_goods_usa";
 	private static final String HAZMAT_ROUTING_PREFERENCE = ROUTING_PREFERENCE_PREFIX + HAZMAT_CATEGORY;
 	private static final String GOODS_RESTRICTIONS_PREFERENCE = ROUTING_PREFERENCE_PREFIX + GOODS_RESTRICTIONS;
 
@@ -88,6 +92,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	public static final float DEFAULT_MODE = 0.0f;
 
 	private final List<RoutingParameter> avoidParameters = new ArrayList<>();
+	public final List<RoutingParameter> hazmatCategoryUSAParameters = new ArrayList<>();
 	private final List<RoutingParameter> preferParameters = new ArrayList<>();
 	private final List<RoutingParameter> drivingStyleParameters = new ArrayList<>();
 	private final List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
@@ -263,6 +268,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					reliefFactorParameters.add(routingParameter);
 				} else if (DRIVING_STYLE.equals(routingParameter.getGroup())) {
 					drivingStyleParameters.add(routingParameter);
+				} else if (param.startsWith(HAZMAT_CATEGORY_USA_PREFIX)) {
+					hazmatCategoryUSAParameters.add(routingParameter);
 				} else if ((!param.equals(GeneralRouter.USE_SHORTEST_WAY) || am.isDerivedRoutingFrom(ApplicationMode.CAR))
 						&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 						&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
@@ -293,6 +300,9 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				String title = getString(R.string.prefer_in_routing_title);
 				MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, "", preferParameters);
 				screen.addPreference(preferRouting);
+			}
+			if (hazmatCategoryUSAParameters.size() > 0) {
+				setupHazmatUSACategoryPreference(screen);
 			}
 			Context ctx = requireContext();
 			for (RoutingParameter p : otherRoutingParameters) {
@@ -439,6 +449,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				OsmandPreference<Boolean> pref = getGoodsRestrictionPreference();
 				GoodsRestrictionsBottomSheet.showInstance(manager, this, GOODS_RESTRICTIONS_PREFERENCE, appMode, false, pref.getModeValue(appMode));
 			}
+		} else if (DANGEROUS_GOODS_USA.equals(prefId)) {
+			BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.DANGEROUS_GOODS, getSelectedAppMode(), new Bundle(), RouteParametersFragment.this);
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -533,6 +545,47 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				OsmAndFormatter.getFormattedDistance(allowedValue, app, false));
 		switchPref.setSummary(summary);
 		switchPref.setChecked(enabled);
+	}
+
+	private void setupHazmatUSACategoryPreference(@NonNull PreferenceScreen screen) {
+		if (settings.DRIVING_REGION.get() == DrivingRegion.US) {
+			Preference uiPreference = new Preference(app);
+			uiPreference.setKey(DANGEROUS_GOODS_USA);
+			uiPreference.setTitle(R.string.dangerous_goods);
+			uiPreference.setLayoutResource(R.layout.preference_with_descr);
+			screen.addPreference(uiPreference);
+			updateHazmatUSACategoryPreference();
+		}
+	}
+
+	private void updateHazmatUSACategoryPreference() {
+		Preference uiPreference = findPreference(DANGEROUS_GOODS_USA);
+		if (uiPreference == null || hazmatCategoryUSAParameters.isEmpty()) {
+			return;
+		}
+
+		StringBuilder enabledClasses = new StringBuilder();
+		for (RoutingParameter parameter : hazmatCategoryUSAParameters) {
+			CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			if (preference != null && preference.get()) {
+				if (enabledClasses.toString().isEmpty()) {
+					enabledClasses.append(getDangerousGoodsClass(parameter.getId()));
+				} else {
+					enabledClasses.append(", ").append(getDangerousGoodsClass(parameter.getId()));
+				}
+			}
+		}
+
+		String description = enabledClasses.toString().isEmpty() ? getString(R.string.shared_string_no) : getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_class), enabledClasses.toString());
+		uiPreference.setSummary(description);
+
+		Drawable icon;
+		if (enabledClasses.toString().isEmpty()) {
+			icon = getIcon(R.drawable.ic_action_placard_hazard_off, ColorUtilities.getDefaultIconColorId(isNightMode()));
+		} else {
+			icon = getIcon(R.drawable.ic_action_placard_hazard, R.color.osmand_live_cancelled);
+		}
+		uiPreference.setIcon(icon);
 	}
 
 	private void setupHazmatCategoryPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
@@ -767,6 +820,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		drivingStyleParameters.clear();
 		reliefFactorParameters.clear();
 		otherRoutingParameters.clear();
+		hazmatCategoryUSAParameters.clear();
 	}
 
 	private void recalculateRoute() {
