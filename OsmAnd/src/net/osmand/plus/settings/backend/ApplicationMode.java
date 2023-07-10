@@ -88,8 +88,9 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_motorcycle_dark)
 			.setMaxSpeedConfigLimit(36.11111f)
 			.description(R.string.app_mode_motorcycle).reg();
+
 	public static final ApplicationMode MOPED = create(BICYCLE, R.string.app_mode_moped, "moped")
-			.setMaxSpeedConfigLimit(9.722222f)
+			.setMaxSpeedConfigLimit(12.96296f)
 			.icon(R.drawable.ic_action_motor_scooter)
 			.description(R.string.app_mode_bicycle).reg();
 
