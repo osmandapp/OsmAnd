@@ -572,7 +572,7 @@
     <string name="poi_context_menu_delete">刪除 POI</string>
     <string name="rotate_map_compass_opt">羅盤方向</string>
     <string name="rotate_map_bearing_opt">行進方向</string>
-    <string name="rotate_map_north_opt">固定（北方向上）</string>
+    <string name="rotate_map_north_opt">北方向上</string>
     <string name="rotate_map_to_descr">地圖對齊方式：</string>
     <string name="rotate_map_to">地圖方位</string>
     <string name="show_route">導航路線資訊</string>
@@ -4761,7 +4761,7 @@
     <string name="how_to_use">如何使用：</string>
     <string name="distance_by_tap_use_description">點擊地圖以檢視您目前位置與點擊點之間的距離。
 \n用兩根手指在地圖上點擊以檢視與點擊點之間的距離</string>
-    <string name="rotate_map_manual_opt">手動旋轉（固定）</string>
+    <string name="rotate_map_manual_opt">手動旋轉</string>
     <string name="shared_string_large">大</string>
     <string name="display_position">顯示位置</string>
     <string name="map_marker_interval_dialog_desc">指定將測量平均速度以計算預計到達時間的時間間隔。</string>
@@ -5306,4 +5306,11 @@
 \n • 重新設計高度變化與坡度評估
 \n
 \n</string>
+    <string name="routing_attr_allow_via_ferrata_description">配有固定纜繩、柱子、梯子與橋樑的山路。</string>
+    <string name="routing_attr_allow_via_ferrata_name">山腰路線（鐵索攀岩）</string>
+    <string name="free_settings_backup">免費設定備份</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">為斜率/地形陰影使用點陣 sqltiedb</string>
+    <string name="cache_size">快取大小</string>
+    <string name="shared_string_avoid">避免</string>
+    <string name="may_be_used_if_there_is_shortcut">若有捷徑可以使用</string>
 </resources>
