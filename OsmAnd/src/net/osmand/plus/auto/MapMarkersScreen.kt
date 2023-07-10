@@ -52,13 +52,11 @@ class MapMarkersScreen(
         val location = app.settings.lastKnownMapLocation
         app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
         val mapRect = QuadRect()
+        extendRectToContainPoint(mapRect, location.longitude, location.latitude)
         for (marker in markers) {
             val longitude = marker.longitude
             val latitude = marker.latitude
-            mapRect.left = if(mapRect.left == 0.0) longitude else min(mapRect.left, longitude)
-            mapRect.right = max(mapRect.right, longitude)
-            mapRect.bottom = if(mapRect.bottom == 0.0) latitude else min(mapRect.bottom, latitude)
-            mapRect.top = max(mapRect.top, latitude)
+            extendRectToContainPoint(mapRect, longitude, latitude)
             val title = marker.getName(app)
             val markerColor = MapMarker.getColorId(marker.colorIndex)
             val icon = CarIcon.Builder(
@@ -93,21 +91,22 @@ class MapMarkersScreen(
             val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
             app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
         }
-        val actionStripBuilder = ActionStrip.Builder()
-        actionStripBuilder.addAction(
-            Action.Builder()
-                .setIcon(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(
-                            carContext, R.drawable.ic_action_search_dark)).build())
-                .setOnClickListener { openSearch() }
-                .build())
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.map_markers))
+            .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())
             .setHeaderAction(Action.BACK)
-            .setActionStrip(actionStripBuilder.build())
             .build()
+    }
+
+    private fun extendRectToContainPoint(
+        mapRect: QuadRect,
+        longitude: Double,
+        latitude: Double) {
+        mapRect.left = if (mapRect.left == 0.0) longitude else min(mapRect.left, longitude)
+        mapRect.right = max(mapRect.right, longitude)
+        mapRect.bottom = if (mapRect.bottom == 0.0) latitude else min(mapRect.bottom, latitude)
+        mapRect.top = max(mapRect.top, latitude)
     }
 
     private fun onClickMarkerItem(mapMarker: MapMarker) {
@@ -120,11 +119,4 @@ class MapMarkersScreen(
         openRoutePreview(settingsAction, surfaceRenderer, result)
     }
 
-    private fun openSearch() {
-        screenManager.pushForResult(
-            SearchScreen(
-                carContext,
-                settingsAction,
-                surfaceRenderer)) { }
-    }
 }

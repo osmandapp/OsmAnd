@@ -20,7 +20,7 @@ class FavoriteGroupsScreen(
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.shared_string_favorites))
-            .setActionStrip(ActionStrip.Builder().addAction(settingsAction).build())
+            .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())
             .setHeaderAction(Action.BACK)
             .build()
     }

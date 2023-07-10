@@ -24,7 +24,7 @@ class POICategoriesScreen(
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.poi_categories))
-            .setActionStrip(ActionStrip.Builder().addAction(settingsAction).build())
+            .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())
             .setHeaderAction(Action.BACK)
             .build()
     }
