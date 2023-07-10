@@ -4436,7 +4436,7 @@
     <string name="no_items_selected_warning">Vyberte prosím aspoň jednu položku</string>
     <string name="display_groups_visibility_dialog_description">Můžete nastavit viditelnost skupin na mapě. Je-li stopa skrytá, všechny skupiny budou také skryté.</string>
     <string name="shared_string_hide_all">Skrýt vše</string>
-    <string name="migration_files_present">%1$d soubor(y) (%2$s) se již nachází v cíli \'%3$s\' a nebyl přepsán.</string>
+    <string name="migration_files_present">%1$d soubor(y) (%2$s) se již nachází v cíli \'%3$s\' a nebudou přepsány.</string>
     <string name="exit_without_saving_warning">Ukončit bez uložení změn\?</string>
     <string name="shared_string_precision">Přesnost</string>
     <string name="gps_filter_hdop_desc">Zadejte maximální přípustnou hodnotu pro HDOP.
@@ -4809,7 +4809,7 @@
     <string name="developer_widgets">Nástroje pro vývojáře</string>
     <string name="quick_action_map_center_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje středu mapy na mapě.</string>
     <string name="quick_action_current_location_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje aktuální polohy na mapě.</string>
-    <string name="coordinates_widget_map_center">Počet řádků</string>
+    <string name="coordinates_widget_map_center">Souřadnice: střed mapy</string>
     <string name="shared_string_switch_mode">Režim přepínání</string>
     <string name="click_on_widget">Klikněte na nástroj</string>
     <string name="last_synchronized">Poslední synchronizace</string>
@@ -5092,8 +5092,8 @@
     <string name="sort_date_ascending">Nejnovější datum jako první</string>
     <string name="sort_date_descending">Nejstarší datum jako první</string>
     <string name="selected_value">Vybraná hodnota</string>
-    <string name="sort_duration_ascending">Nejdříve kratší doba trvání</string>
-    <string name="sort_duration_descending">Nejdříve delší doba trvání</string>
+    <string name="sort_duration_ascending">Kratší doba trvání jako první</string>
+    <string name="sort_duration_descending">Delší doba trvání jako první</string>
     <string name="clear_online_cache_description">Tím vymažete veškerou mezipaměť pro online dlaždice počasí.</string>
     <string name="clear_online_cache">Smazat online mezipaměť</string>
     <string name="offline_cache">Offline mezipaměť</string>
@@ -5114,7 +5114,7 @@
     <string name="free_maps_updates">Bezplatné aktualizace (nouzové)</string>
     <string name="app_mode_moped">Moped</string>
     <string name="shared_string_nearest">Nejbližší</string>
-    <string name="select_layer">Vybrat vrstvu</string>
+    <string name="select_layer">Vyberte vrstvu</string>
     <string name="rendering_value_defaultMedium_name">Výchozí (střední)</string>
     <string name="speak_route_deviation">Oznámení o odchýlení od trasy</string>
     <string name="camera_app">Aplikace fotoaparátu</string>
