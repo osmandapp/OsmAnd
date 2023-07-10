@@ -588,7 +588,7 @@
     <string name="poi_context_menu_delete">Șterge POI</string>
     <string name="rotate_map_compass_opt">Direcția busolei</string>
     <string name="rotate_map_bearing_opt">Direcția de deplasare</string>
-    <string name="rotate_map_north_opt">Fixat (nordul este sus)</string>
+    <string name="rotate_map_north_opt">Nordul este sus</string>
     <string name="rotate_map_to_descr">Aliniere hartă:</string>
     <string name="rotate_map_to">Orientare hartă</string>
     <string name="show_route">Detalii rută</string>
@@ -4931,7 +4931,7 @@
     <string name="coordinates_widget_map_center">Coordonate: centrul hărții</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Mare</string>
-    <string name="rotate_map_manual_opt">Fix (rotit manual)</string>
+    <string name="rotate_map_manual_opt">Rotit manual</string>
     <string name="map_markers_desc">Widgetul afișează distanța sau ora estimată de sosire (ETA) pentru primele două repere din lista de repere de pe hartă.</string>
     <string name="map_widget_ant_bicycle_dist_desc">Afișează distanța parcursă</string>
     <string name="nautical_depth_points">Puncte adâncime nautică</string>
@@ -5318,4 +5318,11 @@
 \n • Elevation change and slope evaluation reworked
 \n
 \n</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Utilizați raster sqltiedb raster pentru pantă / hillshade</string>
+    <string name="cache_size">Dimensiunea cache-ului</string>
+    <string name="may_be_used_if_there_is_shortcut">Poate fi utilizat în cazul în care există o scurtătură</string>
+    <string name="routing_attr_allow_via_ferrata_name">Traseu de munte (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Traseu de munte echipat cu cabluri fixe, cu stâlpi, scări și poduri.</string>
+    <string name="shared_string_avoid">Evitați</string>
+    <string name="free_settings_backup">Copie de rezervă gratuită a setărilor</string>
 </resources>
