@@ -63,9 +63,6 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		TextView title = view.findViewById(R.id.toolbar_title);
-		title.setText(R.string.backup_and_restore);
-
 		View subtitle = view.findViewById(R.id.toolbar_subtitle);
 		AndroidUiHelper.updateVisibility(subtitle, false);
 
@@ -81,19 +78,7 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 	}
 
 	private void updateButtons() {
-		boolean subscribed = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		if (subscribed) {
-			setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
-		} else {
-			signUpButton.setButtonType(DialogButtonType.PRIMARY);
-			signUpButton.setTitleId(R.string.shared_string_get);
-			signUpButton.setOnClickListener(v -> {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.OSMAND_CLOUD);
-				}
-			});
-		}
+		setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}
 
