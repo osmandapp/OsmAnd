@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/list_background_color"
@@ -78,22 +79,22 @@
 
 	</LinearLayout>
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/sign_up_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding" />
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		osmand:dialogButtonBottomMargin="@dimen/content_padding"
+		osmand:dialogButtonTitle="@string/shared_string_get"
+		osmand:dialogButtonType="primary" />
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/sign_in_button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding" />
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		osmand:dialogButtonBottomMargin="@dimen/content_padding"
+		osmand:dialogButtonType="secondary"
+		tools:dialogButtonTitle="@string/register_opr_have_account" />
 
 </LinearLayout>

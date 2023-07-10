@@ -51,7 +51,7 @@ public class FabMarginPreference {
 	}
 
 	public static void setFabButtonMargin(@Nullable MapActivity mapActivity, @NonNull ImageView fabButton, FrameLayout.LayoutParams params,
-	                                      Pair<Integer, Integer> fabMargin,
+	                                      @Nullable Pair<Integer, Integer> fabMargin,
 	                                      int defRightMargin, int defBottomMargin) {
 		if (mapActivity == null) {
 			return;

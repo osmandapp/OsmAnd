@@ -34,6 +34,8 @@ import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
@@ -45,7 +47,6 @@ import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -201,10 +202,11 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	protected void setupButtons() {
-		View saveButton = view.findViewById(R.id.right_bottom_button);
+		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		saveButton.setOnClickListener(v -> savePressed());
-		UiUtilities.setupDialogButton(nightMode, saveButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
+		saveButton.setButtonType(DialogButtonType.PRIMARY);
+		saveButton.setTitleId(R.string.shared_string_save);
 		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_container), ColorUtilities.getListBgColorId(nightMode));
 	}
 

@@ -18,18 +18,22 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog;
+import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
 
-public class DevelopmentSettingsFragment extends BaseSettingsFragment {
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ResetToDefaultListener {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
+	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
@@ -80,6 +84,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
 		setupDayNightInfoPref();
+
+		setupResetToDefaultButton();
 	}
 
 	private void setupSafeModePref() {
@@ -102,17 +108,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private void setupHeightmapRelatedPrefs() {
 		boolean heightmapAllowed = plugin.isHeightmapAllowed();
 
-		SwitchPreferenceEx disableVertexHillshadeSwitch = findPreference(plugin.DISABLE_VERTEX_HILLSHADE_3D.getId());
-		disableVertexHillshadeSwitch.setIconSpaceReserved(false);
-		disableVertexHillshadeSwitch.setEnabled(heightmapAllowed);
-
-		SwitchPreferenceEx generateSlopeFrom3DMapsSwitch = findPreference(plugin.GENERATE_SLOPE_FROM_3D_MAPS.getId());
-		generateSlopeFrom3DMapsSwitch.setIconSpaceReserved(false);
-		generateSlopeFrom3DMapsSwitch.setEnabled(heightmapAllowed);
-
-		SwitchPreferenceEx generateHillshadeFrom3DMapsSwitch = findPreference(plugin.GENERATE_HILLSHADE_FROM_3D_MAPS.getId());
-		generateHillshadeFrom3DMapsSwitch.setIconSpaceReserved(false);
-		generateHillshadeFrom3DMapsSwitch.setEnabled(heightmapAllowed);
+		SwitchPreferenceEx useRasterSQLiteDb = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
+		useRasterSQLiteDb.setIconSpaceReserved(false);
+		useRasterSQLiteDb.setEnabled(heightmapAllowed);
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -217,6 +215,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		dayNightInfo.setIconSpaceReserved(false);
 	}
 
+	private void setupResetToDefaultButton() {
+		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
+		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
+	}
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
@@ -250,6 +253,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			if (fragmentManager != null) {
 				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
 			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ConfirmResetToDefaultBottomSheetDialog.showInstance(fragmentManager, this, R.string.debugging_and_development);
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -271,10 +279,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			loadNativeLibrary();
 			return true;
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				mapActivity.restart();
-			}
+			restartActivity();
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);
@@ -292,7 +297,33 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		app.getLocationProvider().getLocationSimulation().removeSimulationListener(simulationListener);
 	}
 
-	public void loadNativeLibrary() {
+	@Override
+	public void onResetToDefaultConfirmed() {
+		CommonPreference<Boolean> safeMode = (CommonPreference<Boolean>) settings.SAFE_MODE;
+		CommonPreference<Boolean> transparentStatusBar = (CommonPreference<Boolean>) settings.TRANSPARENT_STATUS_BAR;
+
+		boolean shouldLoadNativeLibrary = safeMode.get() != safeMode.getDefaultValue();
+		boolean shouldRestartActivity = transparentStatusBar.get() != transparentStatusBar.getDefaultValue();
+
+		settings.resetGlobalPreferences(plugin.getPreferences());
+		app.showToastMessage(R.string.plugin_prefs_reset_successful);
+
+		if (shouldLoadNativeLibrary) {
+			loadNativeLibrary();
+		}
+		if (shouldRestartActivity) {
+			restartActivity();
+		}
+		updateAllSettings();
+	}
+
+	private void restartActivity() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.restart();
+		}
+	}
+	private void loadNativeLibrary() {
 		FragmentActivity activity = getActivity();
 		if (!NativeOsmandLibrary.isLoaded() && activity != null) {
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();

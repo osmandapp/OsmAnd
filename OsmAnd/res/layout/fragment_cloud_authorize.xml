@@ -82,22 +82,27 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/content_padding_small_half"
+					android:layout_marginBottom="@dimen/content_padding_small_half_inverted"
 					android:visibility="gone" />
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/get_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/bottom_sheet_list_item_height"
-					android:layout_marginTop="@dimen/content_padding_small" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonType="secondary"
+					osmand:dialogButtonTitle="@string/shared_string_get"
+					osmand:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
+					osmand:dialogButtonTopMargin="@dimen/content_padding_small" />
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/continue_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/bottom_sheet_list_item_height"
-					android:layout_marginTop="@dimen/dialog_content_margin"
-					android:layout_marginBottom="@dimen/content_padding" />
+					android:layout_height="wrap_content"
+					osmand:dialogButtonType="primary"
+					osmand:dialogButtonTitle="@string/shared_string_continue"
+					osmand:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
+					osmand:dialogButtonTopMargin="@dimen/dialog_content_margin"
+					osmand:dialogButtonBottomMargin="@dimen/content_padding"/>
 
 				<Space
 					android:id="@+id/space"

@@ -8,6 +8,7 @@ import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
 import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
+import static net.osmand.router.GeneralRouter.ALLOW_VIA_FERRATA;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,6 +37,8 @@ import com.google.android.material.slider.Slider;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
@@ -51,6 +54,7 @@ import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
+import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -87,6 +91,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private static final String DANGEROUS_GOODS_USA = "dangerous_goods_usa";
 	private static final String HAZMAT_ROUTING_PREFERENCE = ROUTING_PREFERENCE_PREFIX + HAZMAT_CATEGORY;
 	private static final String GOODS_RESTRICTIONS_PREFERENCE = ROUTING_PREFERENCE_PREFIX + GOODS_RESTRICTIONS;
+	private static final String ALLOW_VIA_FERRATA_PREFERENCE = ROUTING_PREFERENCE_PREFIX + "allow_via_ferrata";
 
 	public static final float DISABLE_MODE = -1.0f;
 	public static final float DEFAULT_MODE = 0.0f;
@@ -98,6 +103,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private final List<RoutingParameter> reliefFactorParameters = new ArrayList<>();
 	private final List<RoutingParameter> otherRoutingParameters = new ArrayList<>();
 	private ListParameters hazmatParameters;
+	private RoutingParameter viaFerrataParameter;
 
 	private StateChangedListener<Boolean> booleanRoutingPrefListener;
 	private StateChangedListener<String> customRoutingPrefListener;
@@ -125,6 +131,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		routeParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString()));
 
 		setupRoutingPrefs();
+		updateDialogController();
 	}
 
 	@Override
@@ -306,7 +313,9 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			}
 			Context ctx = requireContext();
 			for (RoutingParameter p : otherRoutingParameters) {
-				if (HAZMAT_CATEGORY.equals(p.getId())) {
+				if (ALLOW_VIA_FERRATA.equals(p.getId())) {
+					setupViaFerrataPreference(p, screen);
+				} else if (HAZMAT_CATEGORY.equals(p.getId())) {
 					setupHazmatCategoryPreference(p, screen);
 				} else if (GOODS_RESTRICTIONS.equals(p.getId())) {
 					setupGoodsRestrictionsPreference(p, screen);
@@ -430,12 +439,12 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
+		ApplicationMode appMode = getSelectedAppMode();
 		if (settings.ROUTE_STRAIGHT_ANGLE.getId().equals(prefId)) {
 			showSeekbarSettingsDialog(getActivity(), getSelectedAppMode());
 		} else if (HAZMAT_TRANSPORTING_ENABLED.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null && hazmatParameters != null) {
-				ApplicationMode appMode = getSelectedAppMode();
 				OsmandPreference<String> hazmatPreference = getHazmatPreference();
 				String selectedValue = hazmatPreference.getModeValue(appMode);
 				boolean enabled = settings.HAZMAT_TRANSPORTING_ENABLED.getModeValue(appMode);
@@ -445,9 +454,15 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				ApplicationMode appMode = getSelectedAppMode();
 				OsmandPreference<Boolean> pref = getGoodsRestrictionPreference();
 				GoodsRestrictionsBottomSheet.showInstance(manager, this, GOODS_RESTRICTIONS_PREFERENCE, appMode, false, pref.getModeValue(appMode));
+			}
+		} else if (ALLOW_VIA_FERRATA_PREFERENCE.equals(prefId)) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				ViaFerrataDialogController controller = new ViaFerrataDialogController(app, appMode, viaFerrataParameter);
+				showSingleSelectionDialog(ViaFerrataDialogController.PROCESS_ID, controller);
+				controller.setCallback(this);
 			}
 		} else if (DANGEROUS_GOODS_USA.equals(prefId)) {
 			BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.DANGEROUS_GOODS, getSelectedAppMode(), new Bundle(), RouteParametersFragment.this);
@@ -547,6 +562,23 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		switchPref.setChecked(enabled);
 	}
 
+	private void setupViaFerrataPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
+		viaFerrataParameter = parameter;
+		CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(
+				parameter.getId(), parameter.getDefaultBoolean()
+		);
+		ApplicationMode appMode = getSelectedAppMode();
+		Preference uiPreference = new Preference(app);
+		uiPreference.setKey(ALLOW_VIA_FERRATA_PREFERENCE);
+		uiPreference.setTitle(R.string.routing_attr_allow_via_ferrata_name);
+		int iconId = R.drawable.ic_action_mountain_ladder;
+		boolean allowed = preference.getModeValue(appMode);
+		uiPreference.setIcon(allowed ? getActiveIcon(iconId) : getContentIcon(iconId));
+		uiPreference.setLayoutResource(R.layout.preference_with_descr);
+		uiPreference.setSummary(allowed ? R.string.shared_string_allow : R.string.shared_string_avoid);
+		screen.addPreference(uiPreference);
+	}
+
 	private void setupHazmatUSACategoryPreference(@NonNull PreferenceScreen screen) {
 		if (settings.DRIVING_REGION.get() == DrivingRegion.US) {
 			Preference uiPreference = new Preference(app);
@@ -639,6 +671,14 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		uiPreference.setSummary(description);
 		uiPreference.setIcon(icon);
 		screen.addPreference(uiPreference);
+	}
+
+	private void updateDialogController() {
+		DialogManager dialogManager = app.getDialogManager();
+		IDialogController controller = dialogManager.findController(ViaFerrataDialogController.PROCESS_ID);
+		if (controller instanceof ViaFerrataDialogController) {
+			((ViaFerrataDialogController) controller).setCallback(this);
+		}
 	}
 
 	@Override
@@ -736,7 +776,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId) || PREFER_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
 			recalculateRoute();
 		}

@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
+import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
@@ -34,6 +36,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
@@ -42,6 +45,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -56,9 +60,11 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -78,6 +84,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private TextView visibilityTv;
 	private TextView zoomLevelsTv;
 	private TextView coloSchemeTv;
+	private TextView cacheSizeValueTv;
+
 	private View legend;
 
 	private TextView downloadDescriptionTv;
@@ -129,6 +137,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		visibilityTv = root.findViewById(R.id.visibility_value);
 		zoomLevelsTv = root.findViewById(R.id.zoom_value);
 		coloSchemeTv = root.findViewById(R.id.color_scheme_name);
+		cacheSizeValueTv = root.findViewById(R.id.cache_size_value);
+
 		legend = root.findViewById(R.id.legend);
 
 		TextView emptyStateDescriptionTv = root.findViewById(R.id.empty_state_description);
@@ -157,6 +167,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		UiUtilities.setupCompoundButton(switchCompat, nightMode, UiUtilities.CompoundButtonType.PROFILE_DEPENDENT);
 
 		setupColorSchemeCard(root);
+		setupCacheSizeCard();
 		updateUiMode();
 		return root;
 	}
@@ -197,13 +208,39 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		View zoomLevelsBtn = root.findViewById(R.id.zoom_levels_button);
 
 		visibilityBtn.setOnClickListener(view -> {
-			getMapActivity().getDashboard().hideDashboard();
-			TerrainVisibilityFragment.showInstance(requireActivity().getSupportFragmentManager());
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getDashboard().hideDashboard();
+				TerrainVisibilityFragment.showInstance(mapActivity.getSupportFragmentManager());
+			}
 		});
 		zoomLevelsBtn.setOnClickListener(view -> {
-			getMapActivity().getDashboard().hideDashboard();
-			TerrainZoomLevelsFragment.showInstance(requireActivity().getSupportFragmentManager());
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getDashboard().hideDashboard();
+				TerrainZoomLevelsFragment.showInstance(mapActivity.getSupportFragmentManager());
+			}
 		});
+	}
+
+	private void setupCacheSizeCard() {
+		cacheSizeValueTv.setText(getFormattedCacheSize());
+	}
+
+	@NonNull
+	private String getFormattedCacheSize() {
+		long totalSize = 0;
+		File sqliteCacheDir = new File(app.getCacheDir(), GEOTIFF_SQLITE_CACHE_DIR);
+
+		File[] files = sqliteCacheDir.listFiles();
+		if (!Algorithms.isEmpty(files)) {
+			for (File file : files) {
+				if (file.isFile()) {
+					totalSize += file.length();
+				}
+			}
+		}
+		return AndroidUtils.formatSize(app, totalSize);
 	}
 
 	private void showHideTopShadow(@NonNull View view) {
@@ -347,12 +384,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					.setLoading(true));
 		} else {
 			try {
-				TerrainMode mode = srtmPlugin.getTerrainMode();
+				DownloadActivityType type = getDownloadActivityType();
 				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
 				int currentDownloadingProgress = (int) downloadThread.getCurrentDownloadProgress();
-				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(
-						app, mapActivity.getMapLocation(),
-						mode == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE, false, -1, true);
+				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(app,
+						mapActivity.getMapLocation(), type, false, -1, true);
 				if (terrainItems.size() > 0) {
 					downloadContainer.setVisibility(View.VISIBLE);
 					downloadTopDivider.setVisibility(View.VISIBLE);
@@ -361,10 +397,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 						ContextMenuItem _item = new ContextMenuItem(null)
 								.setLayout(R.layout.list_item_icon_and_download)
 								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-								.setDescription(mode == HILLSHADE
-										? HILLSHADE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app)
-										: SLOPE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
-								.setIcon(mode == HILLSHADE ? HILLSHADE_FILE.getIconResource() : SLOPE_FILE.getIconResource())
+								.setDescription(type.getString(app) + " • " + indexItem.getSizeDescription(app))
+								.setIcon(type.getIconResource())
 								.setListener((uiAdapter, view, item, isChecked) -> {
 									MapActivity mapActivity1 = mapActivityRef.get();
 									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
@@ -416,7 +450,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					downloadBottomDivider.setVisibility(View.GONE);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 		}
 
@@ -434,6 +468,16 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				click.onContextMenuClick(listAdapter, view, item, false);
 			}
 		});
+	}
+
+	@NonNull
+	private DownloadActivityType getDownloadActivityType() {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null && plugin.generateTerrainFrom3DMaps()) {
+			return GEOTIFF_FILE;
+		} else {
+			return srtmPlugin.getTerrainMode() == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE;
+		}
 	}
 
 	@Override

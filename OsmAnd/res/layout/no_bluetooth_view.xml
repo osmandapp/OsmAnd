@@ -14,18 +14,25 @@
 	<androidx.appcompat.widget.AppCompatImageView
 		android:layout_width="48dp"
 		android:layout_height="48dp"
-		android:layout_above="@+id/no_bluetooth_text"
+		android:layout_above="@+id/no_bluetooth_text_top_guideline"
 		android:layout_centerHorizontal="true"
 		android:layout_marginBottom="@dimen/horizontal_divider_height"
 		android:src="@drawable/ic_action_bluetooth_disabled"
 		android:tint="?attr/default_icon_color" />
+
+	<View
+		android:id="@+id/no_bluetooth_text_top_guideline"
+		android:layout_width="1dp"
+		android:layout_height="1dp"
+		android:visibility="invisible"
+		android:layout_alignTop="@+id/no_bluetooth_text"/>
 
 	<TextView
 		android:id="@+id/no_bluetooth_text"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true"
-		android:layout_gravity="center_horizontal|top"
+		android:layout_alignParentTop="true"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginTop="@dimen/external_devices_empty_content_centre_margin"
 		android:layout_marginEnd="@dimen/content_padding"

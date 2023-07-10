@@ -144,6 +144,11 @@ public class ColorUtilities {
 	}
 
 	@ColorRes
+	public static int getSecondaryTextColorId() {
+		return R.color.text_color_secondary_dark;
+	}
+
+	@ColorRes
 	public static int getSecondaryTextColorId(boolean nightMode) {
 		return nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 	}

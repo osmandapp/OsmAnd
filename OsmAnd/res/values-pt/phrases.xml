@@ -1698,7 +1698,7 @@
     <string name="poi_cocktails_yes">Sim;Cocktails</string>
     <string name="poi_second_hand_yes">Sim</string>
     <string name="poi_second_hand_no">Produtos usados: não</string>
-    <string name="poi_second_hand_only">Somente</string>
+    <string name="poi_second_hand_only">Unicamente</string>
     <string name="poi_service_parts">Peças</string>
     <string name="poi_service_dealer">Representante de marca</string>
     <string name="poi_service_repair">Reparação</string>
@@ -4539,7 +4539,7 @@
     <string name="poi_sinkhole_pit">Sumidouro: poço</string>
     <string name="poi_sinkhole_estavelle">Sumidouro: estavelle</string>
     <string name="poi_barrier_coupure">Barreira de cheias \"cupure\"</string>
-    <string name="poi_barrier_bar">Barra</string>
+    <string name="poi_barrier_bar">Barreira de barra horizontal</string>
     <string name="poi_barrier_tyres">Pneus</string>
     <string name="poi_spikes">Espigões</string>
     <string name="poi_toy_library">Brinquedoteca</string>
@@ -4587,8 +4587,8 @@
     <string name="poi_tunnel_name">Nome do túnel</string>
     <string name="poi_bridge_name">Nome da ponte</string>
     <string name="poi_vending_machine_fuel_filter">Dispensador automático de combustível;Máquina de venda de combustível</string>
-    <string name="poi_surface_acrylic">Superfície: acrílica</string>
-    <string name="poi_second_hand_filter">Artigos de segunda mão</string>
+    <string name="poi_surface_acrylic">Superfície: acrílico</string>
+    <string name="poi_second_hand_filter">Artigos em segunda mão</string>
     <string name="poi_surface_carpet">Superfície: alcatifa</string>
     <string name="poi_surface_plastic">Superfície: plástico</string>
     <string name="poi_surface_rubber">Superfície: borracha</string>

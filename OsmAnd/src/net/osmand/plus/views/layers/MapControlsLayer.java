@@ -169,8 +169,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return compassButton.moveToSpecialPosition(destLayout, layoutParams);
 	}
 
+	public void moveMap3DButton(ViewGroup destLayout, ViewGroup.LayoutParams layoutParams) {
+		if (map3DButton != null) {
+			map3DButton.moveToSpecialPosition(destLayout, layoutParams);
+		}
+	}
+
 	public void restoreCompassButton() {
 		compassButton.moveToDefaultPosition();
+	}
+
+	public void restoreMap3DButton() {
+		if (map3DButton != null) {
+			map3DButton.restoreSavedPosition();
+		}
 	}
 
 	private void initTopControls() {
@@ -609,8 +621,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapButtons.clear();
 	}
 
-	public void refreshButtons(){
-		for (MapButton button : mapButtons){
+	public void refreshButtons() {
+		for (MapButton button : mapButtons) {
 			button.refresh();
 		}
 	}

@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<LinearLayout
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:padding="@dimen/content_padding"
 		android:background="?attr/wikivoyage_card_bg_color"
 		android:gravity="center_vertical">
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
-			layout="@layout/bottom_sheet_dialog_button" />
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondary"
+			app:dialogButtonTitle="@string/show_more"/>
 
-	</LinearLayout>
+	</FrameLayout>
 
 	<include
 		android:id="@+id/shadow"
 		layout="@layout/card_bottom_divider"
 		android:visibility="visible" />
+
 </LinearLayout>

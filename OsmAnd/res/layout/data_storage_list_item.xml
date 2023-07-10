@@ -84,13 +84,10 @@
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
-				android:layout_marginLeft="@dimen/content_padding"
-				android:layout_marginRight="@dimen/content_padding"
 				android:layout_gravity="center"
 				android:visibility="invisible"
 				osmand:srcCompat="@drawable/mm_storage_tank"
-				android:layout_marginEnd="@dimen/content_padding"
-				android:layout_marginStart="@dimen/content_padding" />
+				android:layout_marginHorizontal="@dimen/content_padding" />
 
 			<LinearLayout
 				android:orientation="vertical"
@@ -112,13 +109,14 @@
 					tools:text="@string/internal_app_storage_description"
 					android:paddingEnd="@dimen/content_padding" />
 
-				<include
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
 					android:id="@+id/details_button"
-					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/dialog_button_height"
+					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:visibility="gone"
+					osmand:dialogButtonTitle="@string/shared_string_migration"
+					osmand:dialogButtonType="secondary"
 					tools:visibility="visible" />
 
 				<FrameLayout

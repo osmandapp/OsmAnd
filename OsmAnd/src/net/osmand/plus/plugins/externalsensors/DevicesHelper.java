@@ -236,6 +236,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		@Override
 		public void onScanFailed(int errorCode) {
 			super.onScanFailed(errorCode);
+			if(errorCode == SCAN_FAILED_ALREADY_STARTED) {
+				scanBLEDevices(false);
+				scanBLEDevices(true);
+			}
 			LOG.error("BLE scan failed. Error " + errorCode);
 		}
 	};
@@ -545,7 +549,9 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void scanBLEDevices(boolean enable) {
 		if (!enable) {
 			if (bleScanner != null) {
-				if (AndroidUtils.hasBLEPermission(activity) && bleScanning) {
+				if (AndroidUtils.hasBLEPermission(activity)
+						&& bleScanning
+						&& AndroidUtils.isBluetoothEnabled(activity)) {
 					bleScanner.stopScan(bleScanCallback);
 				}
 				bleScanning = false;

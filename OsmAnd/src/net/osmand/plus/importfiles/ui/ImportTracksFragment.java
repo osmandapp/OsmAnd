@@ -58,8 +58,8 @@ import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTr
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -95,8 +95,8 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	private ImportTracksAdapter adapter;
 
-	private View importButton;
-	private View selectAllButton;
+	private DialogButton importButton;
+	private DialogButton selectAllButton;
 	private View buttonsContainer;
 	private View progressContainer;
 	private TextView progressTitle;
@@ -227,11 +227,14 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		String importText = getString(R.string.ltr_or_rtl_combine_via_space, getString(R.string.shared_string_import), count);
 
 		importButton.setEnabled(!selectedTracks.isEmpty());
-		UiUtilities.setupDialogButton(nightMode, importButton, DialogButtonType.PRIMARY, importText);
+		importButton.setButtonType(DialogButtonType.PRIMARY);
+		importButton.setTitle(importText);
 
 		boolean allSelected = selectedTracks.containsAll(trackItems);
 		String selectAllText = getString(allSelected ? R.string.shared_string_deselect_all : R.string.shared_string_select_all);
-		UiUtilities.setupDialogButton(nightMode, selectAllButton, DialogButtonType.SECONDARY_ACTIVE, selectAllText, R.drawable.ic_action_deselect_all);
+		selectAllButton.setButtonType(DialogButtonType.SECONDARY_ACTIVE);
+		selectAllButton.setTitle(selectAllText);
+		selectAllButton.setIconId(R.drawable.ic_action_deselect_all);
 
 		TextView textView = selectAllButton.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(app, 12));

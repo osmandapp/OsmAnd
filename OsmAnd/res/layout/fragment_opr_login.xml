@@ -75,26 +75,24 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
-		android:layout_marginLeft="@dimen/content_padding"
-		android:layout_marginTop="@dimen/content_padding_small"
-		android:layout_marginRight="@dimen/content_padding"
-		android:layout_marginBottom="@dimen/content_padding_small"
-		android:orientation="vertical"
-		android:layout_marginStart="@dimen/content_padding"
-		android:layout_marginEnd="@dimen/content_padding">
+		android:paddingVertical="@dimen/content_padding_small"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:orientation="vertical">
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/register_opr_create_account"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
-			android:layout_marginBottom="@dimen/content_padding_small" />
+			android:layout_height="wrap_content"
+			app:dialogButtonBottomMargin="@dimen/content_padding_small"
+			app:dialogButtonType="primary"
+			app:dialogButtonTitle="@string/register_opr_create_new_account"/>
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/register_opr_have_account"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height" />
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondary"
+			app:dialogButtonTitle="@string/register_opr_have_account"/>
 
 	</LinearLayout>
 

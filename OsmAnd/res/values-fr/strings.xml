@@ -312,7 +312,7 @@
     <string name="poi_context_menu_delete">Supprimer le point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
-    <string name="rotate_map_north_opt">Fixe (nord en haut)</string>
+    <string name="rotate_map_north_opt">Nord en haut</string>
     <string name="rotate_map_to_descr">Orientation de la carte :</string>
     <string name="rotate_map_to">Orientation de la carte</string>
     <string name="show_route">Itinéraire détaillé</string>
@@ -939,7 +939,7 @@
     <string name="av_use_external_camera_descr">Utiliser l\'application système pour les photos.</string>
     <string name="av_use_external_camera">Option appareil photo</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
-    <string name="max_speed_none">Aucun(e)</string>
+    <string name="max_speed_none">Aucune</string>
     <string name="prefer_motorways">Privilégier les autoroutes</string>
     <string name="prefer_in_routing_title">Privilégier…</string>
     <string name="prefer_in_routing_descr">Privilégier les itinéraires sur Autoroutes.</string>
@@ -4760,7 +4760,7 @@
     <string name="display_position">Emplacement sur l’écran</string>
     <string name="shared_string_normal">Normal</string>
     <string name="how_to_use">Comment utiliser :</string>
-    <string name="rotate_map_manual_opt">Fixe (rotation manuelle)</string>
+    <string name="rotate_map_manual_opt">Orientation manuelle</string>
     <string name="shared_string_large">Grand</string>
     <string name="distance_by_tap_use_description">Tapez sur la carte pour afficher la distance entre l\'emplacement appuyé et votre position actuelle.
 \nTapez avec 2 doigts sur la carte pour afficher la distance séparant ces 2 points.</string>
@@ -5226,10 +5226,8 @@
     <string name="error_calculate">Le résultat du calcul est vide</string>
     <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte altimétrique. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
-    <string name="routing_attr_allow_via_ferrata_description">Autoriser les itinéraires comprenant des via ferrata.</string>
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Autoriser les via ferrata</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
     <string name="free_mode">Mode libre</string>
     <string name="relief_3d">Relief 3D</string>
@@ -5260,4 +5258,59 @@
     <string name="verify_account_deletion_descr">Nous devons vérifier votre compte avant de le supprimer.
 \n
 \nVeuillez saisir l\'e-mail avec lequel vous vous êtes inscrit. Un mot de passe unique vous sera envoyé pour réaliser l\'étape suivante.</string>
+    <string name="free_favorites_backup_description">S\'inscrire au cloud OsmAnd pour obtenir une sauvegarde gratuite de vos favoris et de vos paramètres.</string>
+    <string name="free_favorites_backup">Sauvegarde gratuite des favoris</string>
+    <string name="get_osmand_cloud">Obtenir OsmAnd Cloud</string>
+    <string name="free_account">Compte gratuit</string>
+    <string name="folder_export_empty_error">Rien à exporter, le dossier est vide</string>
+    <string name="release_4_5">• Capteurs BLE/ANT+ : connexion retravaillée, écriture et lecture des données reçues au format GPX
+\n
+\n• Sauvegarde gratuite des favoris et des paramètres dans OsmAnd Cloud
+\n
+\n• Nouveau format pour les cartes de reliefs avec support du relief 3D
+\n
+\n• Gestion des traces : interface améliorée, possibilité de trier, support des sous-dossiers
+\n
+\n• Android Auto : nouveau menu pour accéder aux favoris, traces et catégories de PI
+\n
+\n• Liste de widgets pour les panneaux du haut et du bas
+\n
+\n• Nouveau profil \"Train\" permettant de calculer des itinéraires ferroviaires
+\n
+\n• Les courbes de niveau fonctionnent désormais avec toutes les \"sources de cartes\"
+\n
+\n• Liste des actions par défaut améliorée pour les claviers externes
+\n
+\n• Possibilité de supprimer ou d\'écraser des fichiers de navigation personnalisés
+\n
+\n• Ajout d\'une option pour \"Annoncer une déviation de l\'itinéraire\"
+\n
+\n• Menu de démarrage : possibilité de restaurer le statut de l\'application à partir d\'un fichier
+\n
+\n• Ajout des catégories de \"Matériaux dangereux\" pour la navigation de camions en Amérique du Nord
+\n
+\n• Ajout des \"Via ferrata\" pour la navigation à pied
+\n
+\n• Ajout de l\'échelle CAI pour la classification de difficulté des chemins
+\n
+\n• Correction du bug de sélection de la langue
+\n
+\n• Ajout du support des icônes thématiques
+\n
+\n• OsmAnd Cloud : possibilité de supprimer le compte
+\n
+\n• Accessibilité : taille des boutons augmentée à 48 dp, correction de bugs concernant les cartes et les lecteurs d\'écran
+\n
+\n• Navigation vocale japonaise retravaillée
+\n
+\n• Évaluation des altitudes et des pentes retravaillée
+\n
+\n</string>
+    <string name="routing_attr_allow_via_ferrata_description">Itinéraire de montagne équipé de câbles fixes, de marche pieds, d\'échelles et de passerelles.</string>
+    <string name="cache_size">Taille du cache</string>
+    <string name="shared_string_avoid">Éviter</string>
+    <string name="may_be_used_if_there_is_shortcut">Peut être utilisé si un raccourci existe</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Utiliser le raster sqltiedb pour la pente / l\'ombrage du relief</string>
+    <string name="routing_attr_allow_via_ferrata_name">Itinéraire à flanc de montagne (Via ferrata)</string>
+    <string name="free_settings_backup">Paramètres pour la sauvegarde gratuite</string>
 </resources>

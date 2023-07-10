@@ -29,7 +29,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -113,8 +113,8 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
-		return (UiUtilities.DialogButtonType.PRIMARY);
+	protected DialogButtonType getRightBottomButtonType() {
+		return (DialogButtonType.PRIMARY);
 	}
 
 	@Override

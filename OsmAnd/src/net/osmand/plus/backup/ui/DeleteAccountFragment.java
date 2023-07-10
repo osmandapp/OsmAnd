@@ -3,8 +3,8 @@ package net.osmand.plus.backup.ui;
 import static net.osmand.plus.backup.ui.DeleteAccountFragment.DeletionStatus.FINISHED;
 import static net.osmand.plus.backup.ui.DeleteAccountFragment.DeletionStatus.NOT_STARTED;
 import static net.osmand.plus.backup.ui.DeleteAccountFragment.DeletionStatus.RUNNING;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY_HARMFUL;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.TERTIARY_HARMFUL;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

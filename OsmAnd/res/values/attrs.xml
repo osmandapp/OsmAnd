@@ -135,12 +135,20 @@
 		<attr name="card_and_list_background_basic" format="reference" />
 		<attr name="activity_background_basic" format="reference" />
 		<attr name="pages_bg" format="reference"/>
+	    <attr name="dlg_btn_ripple" format="reference" />
+	    <attr name="dlg_btn_ripple_solid" format="reference" />
+	    <attr name="dlg_btn_ripple_tertiary" format="reference" />
 		<attr name="dlg_btn_primary" format="reference" />
+		<attr name="dlg_btn_primary_harmful" format="reference" />
 		<attr name="dlg_btn_primary_text" format="reference" />
 		<attr name="dlg_btn_secondary" format="reference" />
 		<attr name="dlg_btn_secondary_text" format="reference" />
+		<attr name="dlg_btn_secondary_harmful_text" format="reference" />
+		<attr name="dlg_btn_transparent" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
-        <attr name="stroked_btn_contour" format="reference" />
+		<attr name="dlg_btn_tertiary_text" format="reference" />
+		<attr name="dlg_btn_tertiary_harmful" format="reference" />
+		<attr name="stroked_btn_contour" format="reference" />
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
 		<attr name="btn_bg_border_inactive" format="reference"/>
@@ -233,6 +241,26 @@
 	<declare-styleable name="FlowLayout">
 		<attr name="horizontalItemsSpacing" format="dimension"/>
 		<attr name="verticalItemsSpacing" format="dimension"/>
+	</declare-styleable>
+
+	<declare-styleable name="DialogButton">
+		<attr name="dialogButtonTitle" format="string"/>
+		<attr name="dialogButtonUseUppercaseTitle" format="boolean" />
+		<attr name="dialogButtonIcon" format="reference" />
+		<attr name="dialogButtonHeight" format="dimension" />
+		<attr name="dialogButtonTouchableHeight" format="dimension" />
+		<attr name="dialogButtonType" format="enum">
+			<enum name="primary" value="0" />
+			<enum name="primaryHarmful" value="1" />
+			<enum name="secondary" value="2" />
+			<enum name="secondaryHarmful" value="3" />
+			<enum name="secondaryActive" value="4" />
+			<enum name="stroked" value="5" />
+			<enum name="tertiary" value="6" />
+			<enum name="tertiary_harmful" value="7" />
+		</attr>
+		<attr name="dialogButtonTopMargin" format="dimension" />
+		<attr name="dialogButtonBottomMargin" format="dimension" />
 	</declare-styleable>
 
     <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />

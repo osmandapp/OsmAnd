@@ -13,13 +13,11 @@ import static net.osmand.plus.utils.OsmAndFormatter.getFormattedAlt;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedDistanceValue;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedDuration;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedTimeShort;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.STROKED;
 
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -43,7 +41,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -138,10 +136,9 @@ public class SimpleRouteCard extends MapBaseCard {
 	}
 
 	private void setupDetailsButton() {
-		View button = view.findViewById(R.id.details_button);
+		DialogButton button = view.findViewById(R.id.details_button);
 		button.setOnClickListener(v -> notifyCardPressed());
-		UiUtilities.setupDialogButton(nightMode, button, STROKED, R.string.shared_string_details);
-		AndroidUtils.setBackground(app, button, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, button.getButtonView(), nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
 	}
 
 	private void setupFirstRow() {

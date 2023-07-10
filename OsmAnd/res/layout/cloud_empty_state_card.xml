@@ -3,6 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical">
 
 	<include layout="@layout/list_item_divider" />
@@ -45,12 +46,12 @@
 			android:text="@string/cloud_all_changes_uploaded_descr"
 			android:textColor="?android:attr/textColorSecondary" />
 
-		<include
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/button"
-			layout="@layout/bottom_sheet_dialog_button"
 			android:layout_width="wrap_content"
-			android:layout_height="@dimen/dialog_button_height"
-			android:layout_marginBottom="@dimen/content_padding_half" />
+			android:layout_height="wrap_content"
+			app:dialogButtonTitle="@string/check_for_updates"
+			app:dialogButtonBottomMargin="@dimen/content_padding_half" />
 
 	</LinearLayout>
 

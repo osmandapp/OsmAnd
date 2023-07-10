@@ -14,6 +14,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -57,15 +58,12 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		items.add(new BottomSheetItemButton.Builder()
 				.setTitle(getString(R.string.open_saved_track))
 				.setLayoutId(R.layout.bottom_sheet_button)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						if (activity != null && !Algorithms.isEmpty(fileName)) {
-							TrackMenuFragment.openTrack(activity, new File(fileName), null);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null && !Algorithms.isEmpty(fileName)) {
+						TrackMenuFragment.openTrack(activity, new File(fileName), null);
 					}
+					dismiss();
 				})
 				.create());
 	}
@@ -90,8 +88,8 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getThirdBottomButtonType() {
-		return UiUtilities.DialogButtonType.SECONDARY;
+	protected DialogButtonType getThirdBottomButtonType() {
+		return DialogButtonType.SECONDARY;
 	}
 
 	@Override
@@ -105,8 +103,8 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	protected UiUtilities.DialogButtonType getRightBottomButtonType() {
-		return UiUtilities.DialogButtonType.SECONDARY;
+	protected DialogButtonType getRightBottomButtonType() {
+		return DialogButtonType.SECONDARY;
 	}
 
 	@Override

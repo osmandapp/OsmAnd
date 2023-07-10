@@ -8,7 +8,9 @@ import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -24,8 +26,10 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class Map3DButton extends MapButton {
+
 	private final ElevationListener elevationListener;
 	private final AnimateDraggingMapThread animateDraggingMapThread;
+	private boolean specialPosition;
 
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
 		super(mapActivity, fabButton, id);
@@ -79,13 +83,16 @@ public class Map3DButton extends MapButton {
 
 	private View.OnLongClickListener getLongClickListener(ImageView fabButton) {
 		return view -> {
-			Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
-			vibrator.vibrate(VIBRATE_SHORT);
-			view.setScaleX(1.5f);
-			view.setScaleY(1.5f);
-			view.setAlpha(0.95f);
-			view.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, fabButton, settings.MAP_3D_MODE_FAB_MARGIN));
-			return true;
+			if (!specialPosition) {
+				Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
+				vibrator.vibrate(VIBRATE_SHORT);
+				view.setScaleX(1.5f);
+				view.setScaleY(1.5f);
+				view.setAlpha(0.95f);
+				view.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, fabButton, settings.MAP_3D_MODE_FAB_MARGIN));
+				return true;
+			}
+			return false;
 		};
 	}
 
@@ -100,8 +107,35 @@ public class Map3DButton extends MapButton {
 		setContentDesc(is3DMode ? R.string.map_2d_mode_action : R.string.map_3d_mode_action);
 	}
 
+	public void moveToSpecialPosition(@NonNull ViewGroup container, @NonNull ViewGroup.LayoutParams params) {
+		ViewGroup parent = (ViewGroup) view.getParent();
+		if (parent != null) {
+			specialPosition = true;
+			parent.removeView(view);
+			view.setLayoutParams(params);
+			container.addView(view);
+		}
+	}
+
+	public void restoreSavedPosition() {
+		ViewGroup parent = (ViewGroup) view.getParent();
+		if (parent != null) {
+			specialPosition = false;
+			parent.removeView(view);
+			ViewGroup defaultContainer = mapActivity.findViewById(R.id.map_3d_button);
+			if (defaultContainer != null) {
+				int btnSizePx = app.getResources().getDimensionPixelSize(R.dimen.map_button_size);
+				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
+				params.gravity = Gravity.BOTTOM | Gravity.END;
+				view.setLayoutParams(params);
+				defaultContainer.addView(view);
+				setMap3DButtonMargin(view);
+			}
+		}
+	}
+
 	private void setMap3DButtonMargin(ImageView fabButton) {
-		if (mapActivity != null) {
+		if (mapActivity != null && !specialPosition) {
 			int defMarginPortrait = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing);
 			int defMarginLandscape = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land);
 			FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) fabButton.getLayoutParams();
@@ -119,12 +153,13 @@ public class Map3DButton extends MapButton {
 
 	@Override
 	public void refresh() {
+		updateVisibility(shouldShow());
 		setMap3DButtonMargin(view);
 	}
 
 	@Override
 	protected boolean shouldShow() {
-		boolean shouldShowFabButton = mapActivity.getWidgetsVisibilityHelper().shouldShowFabButton();
+		boolean shouldShowFabButton = mapActivity.getWidgetsVisibilityHelper().shouldShowMap3DButton();
 		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.get();
 
 		return app.useOpenGlRenderer() &&

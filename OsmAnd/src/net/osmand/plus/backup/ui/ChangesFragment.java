@@ -6,7 +6,6 @@ import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYN
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_CONFLICTS;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_REMOTE;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -42,8 +41,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -145,7 +144,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	}
 
 	private void setupSyncButton(boolean syncing, boolean preparing) {
-		View button = buttonsContainer.findViewById(R.id.action_button);
+		DialogButton button = buttonsContainer.findViewById(R.id.action_button);
 		if (tabType.buttonTextId != -1) {
 			button.setOnClickListener(v -> {
 				if (tabType == RECENT_CHANGES_REMOTE) {
@@ -157,7 +156,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 			});
 			boolean enabled = !syncing && !preparing && hasItems();
 			button.setEnabled(enabled);
-			UiUtilities.setupDialogButton(nightMode, button, SECONDARY, tabType.buttonTextId);
+			button.setTitleId(tabType.buttonTextId);
 
 			if (tabType.buttonIconId != -1) {
 				int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
@@ -173,13 +172,13 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 	}
 
 	private void setupCancelButton(boolean syncing, boolean preparing) {
-		View button = buttonsContainer.findViewById(R.id.cancel_button);
+		DialogButton button = buttonsContainer.findViewById(R.id.cancel_button);
 		button.setOnClickListener(v -> {
 			settingsHelper.cancelSync();
 			setupBottomButtons();
 		});
 		button.setEnabled(syncing && !preparing);
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY, R.string.shared_string_control_stop);
+		button.setTitleId(R.string.shared_string_control_stop);
 		AndroidUiHelper.updateVisibility(button, syncing);
 	}
 

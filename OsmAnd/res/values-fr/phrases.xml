@@ -1233,9 +1233,9 @@
     <string name="poi_takeaway_yes">À emporter</string>
     <string name="poi_takeaway_only">À emporter uniquement</string>
     <string name="poi_cocktails_yes">Oui ; Cocktails</string>
-    <string name="poi_second_hand_yes">Biens d\'occasion</string>
+    <string name="poi_second_hand_yes">Oui</string>
     <string name="poi_second_hand_no">Pas de biens d\'occasion</string>
-    <string name="poi_second_hand_only">Biens d\'occasion uniquement</string>
+    <string name="poi_second_hand_only">Uniquement</string>
     <string name="poi_service_parts">Pièces détachées</string>
     <string name="poi_service_dealer">Vente</string>
     <string name="poi_service_repair">Réparation</string>
@@ -2853,7 +2853,7 @@
     <string name="poi_vhf">Canal VHF</string>
     <string name="poi_mountain_area">Zone montagneuse</string>
     <string name="poi_operational_status_broken">Cassé</string>
-    <string name="poi_operational_status_needs_maintenance">A réparer</string>
+    <string name="poi_operational_status_needs_maintenance">À réparer</string>
     <string name="poi_water_purification_none">Aucune</string>
     <string name="poi_water_purification_reverse_osmosis">Osmose inverse</string>
     <string name="poi_water_supply_pump">Pompe</string>
@@ -3952,7 +3952,7 @@
     <string name="poi_glacier_edge_calving_line">Partie frontale du glacier : eau</string>
     <string name="poi_glacier_status_retreat">Statut du front du glacier : en retrait</string>
     <string name="poi_glacier_status_marked_retreat">Statut du front du glacier : en retrait marqué</string>
-    <string name="poi_glacier_status_oscillating">Statu du front du glacier : flucuant</string>
+    <string name="poi_glacier_status_oscillating">Statut du front du glacier : variable</string>
     <string name="poi_glacier_edge_grounding_line">Partie frontale du glacier : moraine</string>
     <string name="poi_glacier_debris_cover_scarce">Débris en surface : faible couverture</string>
     <string name="poi_glacier_debris_cover_partial">Débris en surface : couverture partielle</string>
@@ -4542,7 +4542,7 @@
     <string name="poi_toy_library">Ludothèque</string>
     <string name="poi_barrier_planter">Jardinière</string>
     <string name="poi_wedge">Cale</string>
-    <string name="poi_wicket_gate">Guichet</string>
+    <string name="poi_wicket_gate">Porte monumentale</string>
     <string name="poi_spikes">Pics</string>
     <string name="poi_barrier_tyres">Pneus</string>
     <string name="poi_cemt">Classification CEMT</string>
@@ -4587,4 +4587,5 @@
     <string name="poi_surface_acrylic">Surface : acrylique</string>
     <string name="poi_surface_carpet">Surface : tapis</string>
     <string name="poi_surface_plastic">Surface : plastique</string>
+    <string name="poi_draft">Profondeur du chenal</string>
 </resources>

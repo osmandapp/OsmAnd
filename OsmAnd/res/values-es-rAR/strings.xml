@@ -1261,7 +1261,7 @@
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">Dirección de la brújula</string>
     <string name="rotate_map_bearing_opt">Dirección del movimiento</string>
-    <string name="rotate_map_north_opt">Norte siempre arriba (fijo)</string>
+    <string name="rotate_map_north_opt">Norte siempre arriba</string>
     <string name="rotate_map_to_descr">Alineación del mapa:</string>
     <string name="rotate_map_to">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
@@ -4792,7 +4792,7 @@
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
-    <string name="rotate_map_manual_opt">Rotación manual (fijo)</string>
+    <string name="rotate_map_manual_opt">Rotación manual</string>
     <string name="map_markers_desc">Muestra la distancia o el tiempo estimado de llegada (ETA) para los dos primeros marcadores en la lista de marcadores del mapa.</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
     <string name="quick_action_current_location_widget_descr">Un botón que muestra u oculta en el mapa, el widget de ubicación actual.</string>
@@ -5250,8 +5250,6 @@
     <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa de altura. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
     <string name="calculate_offline">Calcular sin conexión</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permitir via ferrata</string>
-    <string name="routing_attr_allow_via_ferrata_description">Permitir senderos de via ferrata.</string>
     <string name="power_watts_unit">Vatios (watts)</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
@@ -5284,4 +5282,59 @@
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
     <string name="osmand_cloud_deleted_account_descr">Se ha borrado la cuenta con todos los datos de OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_account_warning">La cuenta junto con todos los datos de ésta tiene %1$s</string>
+    <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
+    <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
+    <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
+    <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX.
+\n
+\n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»
+\n
+\n• Nuevo formato para mapas topográficos con soporte para el relieve 3D
+\n
+\n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas
+\n
+\n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI
+\n
+\n• Se ha mejorado la lista de widgets para el panel superior/inferior
+\n
+\n• Nuevo perfil «Tren», permite calcular rutas ferroviarias
+\n
+\n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa»
+\n
+\n• Se ha ampliado la lista de acciones predefinidas para teclados externos
+\n
+\n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta
+\n
+\n• Se ha añadido la opción para «Anunciar desvío de la ruta»
+\n
+\n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo
+\n
+\n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica
+\n
+\n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales
+\n
+\n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas
+\n
+\n• Se ha corregido la elección del idioma por aplicación
+\n
+\n• Se ha añadido soporte para iconos temáticos
+\n
+\n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta
+\n
+\n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla.
+\n
+\n• Se han revisado las indicaciones de voz en japonés.
+\n
+\n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
+\n
+\n</string>
+    <string name="free_account">Cuenta gratuita</string>
+    <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
+    <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Una ruta de montaña equipada con cables fijos, anclajes, peldaños, escaleras y puentes.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqltiedb para pendientes o sombreados</string>
+    <string name="cache_size">Tamaño de la caché</string>
+    <string name="shared_string_avoid">Evitar</string>
+    <string name="may_be_used_if_there_is_shortcut">Puede usarse si existe un acceso directo</string>
+    <string name="free_settings_backup">Copia de seguridad gratuita de los ajustes</string>
 </resources>

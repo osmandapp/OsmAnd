@@ -17,15 +17,12 @@
 			android:id="@+id/button_text"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:paddingLeft="@dimen/content_padding_small"
-			android:paddingRight="@dimen/content_padding_small"
+			android:paddingHorizontal="@dimen/content_padding_small"
 			android:gravity="center_vertical|start"
 			android:textSize="@dimen/default_desc_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			android:duplicateParentState="true"
-			tools:text="Button"
-			android:paddingStart="@dimen/content_padding_small"
-			android:paddingEnd="@dimen/content_padding_small" />
+			tools:text="Button" />
 
 	</LinearLayout>
 

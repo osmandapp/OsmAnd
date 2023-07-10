@@ -1,7 +1,6 @@
 package net.osmand.plus.backup.ui.status;
 
 import static net.osmand.plus.backup.ui.status.BackupStatus.NO_INTERNET_CONNECTION;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY_ACTIVE;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +17,7 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class WarningStatusCard extends BaseCard {
 
@@ -83,15 +82,13 @@ public class WarningStatusCard extends BaseCard {
 	}
 
 	private void setupButton(@NonNull BackupStatus status) {
-		View actionButton = view.findViewById(R.id.action_button);
+		DialogButton actionButton = view.findViewById(R.id.action_button);
 		if (status == BackupStatus.ERROR) {
 			actionButton.setOnClickListener(v -> onSupportPressed());
 		} else if (status == BackupStatus.SUBSCRIPTION_EXPIRED) {
 			actionButton.setOnClickListener(v -> onSubscriptionExpired());
 		}
-		if (status.actionTitleRes != -1) {
-			UiUtilities.setupDialogButton(nightMode, actionButton, SECONDARY_ACTIVE, status.actionTitleRes);
-		}
+		actionButton.setTitleId(status.actionTitleRes);
 	}
 
 	private void onSupportPressed() {

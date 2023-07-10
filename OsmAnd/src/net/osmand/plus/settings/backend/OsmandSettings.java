@@ -404,6 +404,14 @@ public class OsmandSettings {
 		}
 	}
 
+	public void resetGlobalPreferences(List<OsmandPreference> preferences) {
+		for (OsmandPreference preference : preferences) {
+			if (preference instanceof CommonPreference) {
+				preference.resetToDefault();
+			}
+		}
+	}
+
 	public void resetPreferencesForProfile(ApplicationMode mode) {
 		resetProfilePreferences(mode, new ArrayList<>(registeredPreferences.values()));
 		setAppModeCustomProperties();
@@ -2270,6 +2278,10 @@ public class OsmandSettings {
 		boolean res = this.editObjectToShow;
 		this.editObjectToShow = false;
 		return res;
+	}
+
+	public boolean hasMapZoomToShow() {
+		return settingsAPI.contains(globalPreferences, MAP_ZOOM_TO_SHOW);
 	}
 
 	public int getMapZoomToShow() {

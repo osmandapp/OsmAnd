@@ -1656,7 +1656,7 @@
     <string name="app_settings">Pengaturan aplikasi</string>
     <string name="mark_point">Sasaran</string>
     <string name="reload_tile">Muat ulang ubin</string>
-    <string name="update_tile">Perbarui peta</string>
+    <string name="update_tile">Perbarui</string>
     <string name="additional_settings">Pengaturan tambahan</string>
     <string name="data_settings">Data</string>
     <string name="use_online_routing">Gunakan navigasi daring</string>
@@ -5226,7 +5226,7 @@
     <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Tidak ada sensor dengan jenis ini yang terhubung</string>
     <string name="external_sensors_not_found">Sensor tidak ditemukan</string>
-    <string name="delete_track_folder_dialog_message">Ini akan menghapus folder</string>
+    <string name="delete_track_folder_dialog_message">Ini akan menghapus folder \"%1$s\" dan termasuk semua trek (%2$s).</string>
     <string name="tracks_empty_folder_description">Folder ini belum memiliki trek apa pun.</string>
     <string name="delete_folder">Hapus folder</string>
     <string name="rssi_widget_desc">Menampilkan tingkat RSSI dari perangkat eksternal Anda.</string>
@@ -5240,13 +5240,84 @@
     <string name="error_calculate">Hasil kalkulasi kosong</string>
     <string name="calculate_offline">Kalkulasi secara luring</string>
     <string name="calculate_offline_altitude_descr">Kalkulasi ketinggian secara luring, berdasarkan data peta ketinggian. Perbedaan antara ketinggian yang direkam oleh perangkat mungkin digunakan sebagai koreksi ketinggian.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Izinkan melalui jalur ferrata.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="routing_attr_allow_via_ferrata_name">Izinkan melalui ferrata</string>
     <string name="shared_string_close_the_dialog">Tutup dialog</string>
     <string name="relief_3d_description">Miliki dan amati model skala lingkungan Anda atau seluruh benua.</string>
     <string name="free_mode">Mode bebas</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Peta medan</string>
+    <string name="manage_subscriptions">Kelola langganan.</string>
+    <string name="osmand_cloud_deleted_account_descr">Akun dan semua data telah dihapus dari OsmAnd Cloud.</string>
+    <string name="deleting_complete">Penghapusan selesai</string>
+    <string name="osmand_cloud_deletion_account_warning">Akun dan semua detail akun Anda akan %1$s</string>
+    <string name="shared_string_deleting">Menghapus</string>
+    <string name="delete_account_warning">Apakah Anda ingin menghapus akun %1$s\?</string>
+    <string name="slope_legend_description">Lereng menggunakan warna untuk menampilkan kecuraman medan. Anda dapat mempelajari lebih lanjut tentang Lereng di %1$s.</string>
+    <string name="terrain_category_description">Garis kontur medan, peta bayangan bukit penuh dengan nuansa gelap dan peta lereng dengan warna untuk menunjukkan puncak dan dataran rendah.</string>
+    <string name="osmand_cloud_deleting_account_descr">Dalam beberapa detik, semua data dan akun Anda akan dihapus dari OsmAnd Cloud.
+\n
+\nSemua data di perangkat tidak akan disentuh.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Apakah Anda yakin ingin menghapus akun OsmAnd Cloud\?
+\n
+\nTindakan ini tidak dapat diurungkan.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Hapus akun\?</string>
+    <string name="action_cannot_be_undone">Tindakan ini tidak dapat diurungkan.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Perangkat lainnya akan dikeluarkan dari OsmAnd Cloud dan akan kehilangan akses ke fitur berbayar.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Semua data dari OsmAnd Cloud akan %1$s. Data di perangkat tidak akan disentuh.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Ini tidak akan membatalkan langganan OsmAnd Pro Anda.</string>
+    <string name="delete_account">Hapus akun</string>
+    <string name="backup_error_delete_account_email_match">Surel tidak cocok dengan nama pengguna log masuk</string>
+    <string name="verify_account_deletion_descr">Kami harus memverifikasi akun Anda sebelum menghapusnya.
+\n
+\nSilakan masukkan alamat surel yang Anda gunakan untuk mendaftar. Sebuah kata sandi sekali pakai untuk langkah berikutnya akan dikirim.</string>
+    <string name="verify_account">Verifikasi akun Anda</string>
+    <string name="free_favorites_backup">Pencadangan Favorit Gratis</string>
+    <string name="release_4_5">• Sensor BLEANT: koneksi ulang, menulis dan melihat data yang diterima ke GPX
+\n
+\n • Pencadangan gratis untuk favorit dan pengaturan ke \"OsmAnd Cloud\"
+\n
+\n • Format baru untuk peta Terrain dengan dukungan 3D Relief
+\n
+\n • Manajemen trek: UI yang diperbarui, penyortiran tambahan, dukungan folder bersarang
+\n
+\n • Android Auto: menu mulai baru untuk mengakses favorit, trek, dan kategori POI
+\n
+\n • Satu daftar widget untuk panel TopBottom
+\n
+\n • Profil \"Kereta\" baru, memungkinkan untuk menghitung rute kereta api
+\n
+\n • Garis kontur berfungsi dengan \"Sumber peta\" apa saja
+\n
+\n • Daftar tindakan default yang diperluas untuk keyboard eksternal
+\n
+\n • File perutean khusus, menambahkan opsi untuk menghapus atau menimpa
+\n
+\n • Menambahkan opsi untuk \"Umumkan penyimpangan dari rute\"
+\n
+\n • Layar Mulai: opsi tambahan memulihkan status OsmAnd dari file
+\n
+\n • Menambahkan kelas \"Bahan Berbahaya\" Navigasi truk di Amerika Utara
+\n
+\n • Menambahkan dukungan \"Via ferrata\" untuk rute pejalan kaki
+\n
+\n • Menambahkan skala \"CAI\" untuk klasifikasi kesulitan rute
+\n
+\n • Memperbaiki pemilihan bahasa per aplikasi
+\n
+\n • Menambahkan dukungan untuk ikon bertema
+\n
+\n • OsmAnd Cloud: menambahkan opsi untuk menghapus akun
+\n
+\n • Aksesibilitas: ukuran target sentuh untuk tombol diubah menjadi 48 dp; memperbaiki masalah UI peta yang terlihat untuk pembaca layar
+\n
+\n • Permintaan suara bahasa Jepang dikerjakan ulang
+\n
+\n • Perubahan elevasi dan evaluasi lereng dikerjakan ulang
+\n
+\n</string>
+    <string name="free_favorites_backup_description">Daftar di OsmAnd Cloud untuk mendapatkan cadangan gratis untuk favorit dan pengaturan.</string>
+    <string name="free_account">Akun gratis</string>
+    <string name="get_osmand_cloud">Dapatkan OsmAnd Cloud</string>
+    <string name="folder_export_empty_error">Tidak ada untuk diekspor, folder kosong</string>
 </resources>

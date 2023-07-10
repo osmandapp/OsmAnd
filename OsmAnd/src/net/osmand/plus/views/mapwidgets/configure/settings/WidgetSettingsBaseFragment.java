@@ -1,7 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.settings;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,11 +24,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
@@ -110,7 +110,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 	protected abstract void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container);
 
 	private void setupApplyButton() {
-		View applyButton = view.findViewById(R.id.dismiss_button);
+		DialogButton applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
 			applySettings();
 			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -123,7 +123,8 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 			}
 			dismiss();
 		});
-		UiUtilities.setupDialogButton(nightMode, applyButton, DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
 	}
 
 	protected abstract void applySettings();

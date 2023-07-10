@@ -2,7 +2,6 @@ package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_IN;
 import static net.osmand.plus.backup.ui.LoginDialogType.SIGN_UP;
-import static net.osmand.plus.utils.UiUtilities.setupDialogButton;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,7 +28,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class BackupAuthorizationFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 
@@ -37,8 +37,8 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 
 	public static final String TAG = BackupAuthorizationFragment.class.getSimpleName();
 
-	private View signUpButton;
-	private View signInButton;
+	private DialogButton signUpButton;
+	private DialogButton signInButton;
 
 	@ColorRes
 	public int getStatusBarColorId() {
@@ -85,20 +85,22 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 		if (subscribed) {
 			setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
 		} else {
+			signUpButton.setButtonType(DialogButtonType.PRIMARY);
+			signUpButton.setTitleId(R.string.shared_string_get);
 			signUpButton.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					ChoosePlanFragment.showInstance(activity, OsmAndFeature.OSMAND_CLOUD);
 				}
 			});
-			setupDialogButton(nightMode, signUpButton, DialogButtonType.PRIMARY, R.string.shared_string_get);
 		}
 		setupAuthorizeButton(signInButton, DialogButtonType.SECONDARY, R.string.register_opr_have_account, false);
 	}
 
-	private void setupAuthorizeButton(View view, DialogButtonType buttonType, @StringRes int textId, boolean signUp) {
-		setupDialogButton(nightMode, view, buttonType, textId);
-		view.setOnClickListener(v -> {
+	private void setupAuthorizeButton(DialogButton button, DialogButtonType buttonType, @StringRes int textId, boolean signUp) {
+		button.setButtonType(buttonType);
+		button.setTitleId(textId);
+		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				LoginDialogType dialogType = signUp ? SIGN_UP : SIGN_IN;

@@ -6,6 +6,7 @@ import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.IMPORT_FAVOURITES_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -189,7 +190,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			if (!proAvailable && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
 				freeFavoritesBackupCardDivider = inflater.inflate(R.layout.list_item_divider, listView, false);
 				listView.addHeaderView(freeFavoritesBackupCardDivider, null, false);
-				freeFavoritesBackupCard = inflater.inflate(R.layout.free_favorites_backup_card, listView, false);
+				freeFavoritesBackupCard = inflater.inflate(R.layout.free_backup_card, listView, false);
 				setupGetOsmAndCloudButton(freeFavoritesBackupCard);
 				listView.addHeaderView(freeFavoritesBackupCard);
 			}
@@ -683,8 +684,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		});
 
 		int buttonTextId = R.string.get_osmand_cloud;
-		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
+		UiUtilities.setupDialogButton(nightMode, dismissButton, SECONDARY, buttonTextId);
 		dismissButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {

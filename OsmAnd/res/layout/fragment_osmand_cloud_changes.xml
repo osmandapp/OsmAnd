@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_basic"
@@ -64,26 +65,32 @@
 			android:minHeight="@dimen/bottom_sheet_title_height"
 			android:orientation="horizontal">
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/cancel_button"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="wrap_content"
-				android:layout_height="@dimen/dialog_button_height"
+				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_margin="@dimen/content_padding_half" />
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				app:dialogButtonBottomMargin="@dimen/content_padding_half"
+				app:dialogButtonType="secondary"
+				tools:dialogButtonTitle="@string/shared_string_control_stop"/>
 
 			<View
 				android:layout_width="0dp"
 				android:layout_height="match_parent"
 				android:layout_weight="1" />
 
-			<include
+			<net.osmand.plus.widgets.dialogbutton.DialogButton
 				android:id="@+id/action_button"
-				layout="@layout/bottom_sheet_dialog_button"
 				android:layout_width="wrap_content"
-				android:layout_height="@dimen/dialog_button_height"
+				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:layout_margin="@dimen/content_padding_half" />
+				android:layout_marginHorizontal="@dimen/content_padding_half"
+				app:dialogButtonTopMargin="@dimen/content_padding_half"
+				app:dialogButtonBottomMargin="@dimen/content_padding_half"
+				app:dialogButtonType="secondary"
+				tools:dialogButtonTitle="@string/upload_all"/>
 
 		</LinearLayout>
 

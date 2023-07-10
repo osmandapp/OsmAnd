@@ -6,52 +6,61 @@
 	android:layout_height="match_parent"
 	android:background="@color/color_transparent">
 
-	<LinearLayout
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:layout_height="@dimen/toolbar_height"
+		android:background="?attr/list_background_color">
 
-		<LinearLayout
+		<androidx.appcompat.widget.Toolbar
 			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/list_background_color"
-			android:orientation="horizontal">
+			android:layout_height="@dimen/toolbar_height"
+			android:minHeight="@dimen/toolbar_height">
 
-			<ImageButton
-				android:id="@+id/back_button"
-				style="@style/Widget.AppCompat.ActionButton"
-				android:layout_width="@dimen/toolbar_height"
-				android:layout_height="@dimen/toolbar_height"
-				android:layout_gravity="center_vertical"
-				android:contentDescription="@string/back_to_map"
-				tools:srcCompat="@drawable/ic_arrow_back" />
-
-			<TextView
-				android:id="@+id/title"
-				android:layout_width="0dp"
+			<LinearLayout
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:letterSpacing="@dimen/text_button_letter_spacing"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/default_header_text_size"
-				app:lineHeight="@dimen/default_title_line_height"
-				app:typeface="@string/font_roboto_medium"
-				tools:text="@string/shared_string_toolbar" />
+				android:orientation="horizontal">
 
-			<ImageButton
-				android:id="@+id/reset_button"
-				style="@style/Widget.AppCompat.ActionButton"
-				android:layout_width="@dimen/toolbar_height"
-				android:layout_height="@dimen/toolbar_height"
-				android:layout_gravity="center_vertical"
-				android:contentDescription="@string/reset_to_default"
-				tools:srcCompat="@drawable/ic_action_reset" />
+				<ImageButton
+					android:id="@+id/back_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center_vertical"
+					android:contentDescription="@string/back_to_map"
+					tools:srcCompat="@drawable/ic_arrow_back"
+					tools:tint="?attr/default_icon_color" />
 
-		</LinearLayout>
+				<TextView
+					android:id="@+id/title"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_weight="1"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/default_header_text_size"
+					app:lineHeight="@dimen/default_title_line_height"
+					app:typeface="@string/font_roboto_medium"
+					tools:text="@string/shared_string_toolbar" />
 
-	</LinearLayout>
+				<ImageButton
+					android:id="@+id/reset_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center_vertical"
+					android:contentDescription="@string/reset_to_default"
+					tools:srcCompat="@drawable/ic_action_reset"
+					tools:tint="?attr/default_icon_color" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
 
 	<LinearLayout
 		android:id="@+id/main_view"
@@ -87,6 +96,7 @@
 			android:background="@drawable/bg_contextmenu_shadow_top_light" />
 
 		<LinearLayout
+			android:id="@+id/bottom_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:background="?attr/list_background_color"

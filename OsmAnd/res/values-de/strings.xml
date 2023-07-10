@@ -4755,8 +4755,8 @@
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
-    <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder die geschätzte Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
-    <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder die geschätzte Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
+    <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
+    <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
     <string name="time_to_destination_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit ab dem aktuellen Standort.</string>
     <string name="time_to_intermediate_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert. Sobald ein Zwischenpunkt passiert ist, wird die Zeit bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="compass_always_visible">Immer sichtbar</string>
@@ -5238,10 +5238,8 @@
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
     <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Klettersteige zulassen.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">U/min</string>
-    <string name="routing_attr_allow_via_ferrata_name">Klettersteige zulassen</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
     <string name="free_mode">Freier Modus</string>
@@ -5266,4 +5264,20 @@
     <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten\?
 \n
 \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Alle Daten von OsmAnd Cloud werden %1$s. Daten auf dem Gerät bleiben unangetastet.</string>
+    <string name="verify_account_deletion_descr">Wir müssen Ihr Konto verifizieren, bevor wir es löschen können.
+\n
+\nBitte geben Sie die E-Mail Adresse ein, mit der Sie sich registriert haben. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
+    <string name="verify_account">Konto bestätigen</string>
+    <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
+    <string name="terrain_category_description">Höhenlinien, Reliefkarte mit Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
+    <string name="free_favorites_backup">Kostenloses Favoriten-Backup</string>
+    <string name="shared_string_avoid">Meiden</string>
+    <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
+    <string name="routing_attr_allow_via_ferrata_description">Eine Bergroute, die mit Fixseilen, Stemmeisen, Leitern und Brücken ausgestattet ist.</string>
+    <string name="get_osmand_cloud">Holen Sie sich OsmAnd Cloud</string>
+    <string name="free_account">Kostenloses Konto</string>
+    <string name="folder_export_empty_error">Nichts zu exportieren, Ordner ist leer</string>
+    <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
 </resources>

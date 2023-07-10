@@ -78,11 +78,13 @@
 
 	</LinearLayout>
 
-	<include
+	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/button"
-		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
-		android:layout_marginTop="@dimen/content_padding_half" />
+		android:layout_height="wrap_content"
+		osmand:dialogButtonTopMargin="@dimen/content_padding_half"
+		osmand:dialogButtonBottomMargin="@dimen/content_padding_small_half"
+		osmand:dialogButtonType="secondary"
+		tools:dialogButtonTitle="@string/verify_email_address"/>
 
 </LinearLayout>

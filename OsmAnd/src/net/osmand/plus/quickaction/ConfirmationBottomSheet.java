@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -41,8 +41,8 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 			rightButtonTitle = savedInstanceState.getInt(RIGHT_BUTTON_TITLE_KEY);
 		}
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		UiUtilities.setupDialogButton(nightMode, rightButton,
-				UiUtilities.DialogButtonType.SECONDARY, rightButtonTitle);
+		rightButton.setButtonType(DialogButtonType.SECONDARY);
+		rightButton.setTitleId(rightButtonTitle);
 		TextView tvRightButton = rightButton.findViewById(R.id.button_text);
 		int colorDelete = ContextCompat.getColor(app, R.color.color_osm_edit_delete);
 		tvRightButton.setTextColor(colorDelete);
