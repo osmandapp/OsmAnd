@@ -162,7 +162,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 
 		Bundle args = getArguments();
 		MapActivity activity = getMapActivity();
-		if (activity != null && args != null && args.containsKey(SELECTED_TYPES)) {
+		if (activity != null && args != null && args.containsKey(SELECTED_TYPES) && !exportingStarted) {
 			activity.launchPrevActivityIntent();
 		}
 	}
@@ -182,16 +182,14 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void prepareFile() {
-		if (app != null) {
-			exportingStarted = true;
-			exportStartTime = System.currentTimeMillis();
-			showExportProgressDialog();
-			File tempDir = FileUtils.getTempDir(app);
-			String fileName = getFileName();
-			List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.emptyList(), true);
-			progress.setMax(getMaxProgress(items));
-			app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
-		}
+		exportingStarted = true;
+		exportStartTime = System.currentTimeMillis();
+		showExportProgressDialog();
+		File tempDir = FileUtils.getTempDir(app);
+		String fileName = getFileName();
+		List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.emptyList(), true);
+		progress.setMax(getMaxProgress(items));
+		app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 	}
 
 	private int getMaxProgress(List<SettingsItem> items) {
@@ -247,7 +245,6 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 				@Override
 				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
 					dismissExportProgressDialog();
-					exportingStarted = false;
 					if (succeed) {
 						shareProfile(file);
 						dismissFragment();
