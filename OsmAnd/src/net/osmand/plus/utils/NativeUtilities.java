@@ -67,6 +67,14 @@ public class NativeUtilities {
 		return new ColorARGB((short)alpha, (short)r , (short)g, (short)b);
 	}
 
+	public static float getMetersToTargetOnPlane(@NonNull MapRendererView mapRenderer) {
+		return mapRenderer.getMapTargetDistance(mapRenderer.getState().getTarget31(), false,true) * 1000;
+	}
+
+	public static float getMetersToFixedElevatedTarget(@NonNull MapRendererView mapRenderer) {
+		return mapRenderer.getMapTargetDistance(mapRenderer.getState().getFixedLocation31(), true, true) * 1000;
+	}
+
 	public static boolean isSegmentCrossingPolygon(@NonNull PointI start31,
 	                                               @NonNull PointI end31,
 	                                               @NonNull List<PointI> polygon31) {

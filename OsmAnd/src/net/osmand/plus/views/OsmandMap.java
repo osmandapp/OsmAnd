@@ -19,6 +19,8 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -143,11 +145,19 @@ public class OsmandMap implements NavigationSessionListener {
 			animateDraggingThread.stopAnimatingSync();
 		}
 
-		Zoom zoom = new Zoom(mapView.getZoom(), mapView.getZoomFloatPart(), mapView.getMinZoom(), mapView.getMaxZoom());
+		Zoom zoom = new Zoom(mapView, mapView.getZoom(), mapView.getZoomFloatPart(), mapView.getMinZoom(), mapView.getMaxZoom(), true);
 
-		if (stp > 0 && !zoom.isZoomInAllowed()) {
-			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
-			return;
+		if (stp > 0) {
+			if (!zoom.isZoomInAllowed()) {
+				Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (!zoom.isZoomInAllowedOnTerrain()) {
+				if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
+					Toast.makeText(app, R.string.zoom_level_limited_3d, Toast.LENGTH_SHORT).show();
+				}
+				return;
+			}
 		} else if (stp < 0 && !zoom.isZoomOutAllowed()) {
 			Toast.makeText(app, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show();
 			return;

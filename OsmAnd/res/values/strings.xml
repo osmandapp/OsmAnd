@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="zoom_level_limited_3d">Zoom level is limited when 3D relief is On</string>
     <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
     <string name="free_favorites_backup">Free Favorites Backup</string>
     <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
