@@ -34,14 +34,7 @@ class LandingScreen(
         val actionStripBuilder = ActionStrip.Builder()
         updateCompass()
         actionStripBuilder.addAction(settingsAction)
-        actionStripBuilder.addAction(
-            Action.Builder()
-                .setIcon(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(
-                            carContext, R.drawable.ic_action_search_dark)).build())
-                .setOnClickListener { openSearch() }
-                .build())
+        actionStripBuilder.addAction(createSearchAction())
         val mapActionStripBuilder = ActionStrip.Builder()
             .addAction(
                 Action.Builder(Action.PAN)
@@ -93,13 +86,6 @@ class LandingScreen(
         compassResId = compassMode.getIconId(nightMode)
     }
 
-    private fun openSearch() {
-        screenManager.pushForResult(
-            SearchScreen(
-                carContext,
-                settingsAction,
-                surfaceRenderer)) { obj: Any? -> }
-    }
 
     private fun onCategoryClick(category: PlaceCategory) {
         when (category) {

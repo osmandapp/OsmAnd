@@ -307,19 +307,23 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	}
 
 	private boolean shouldDraw(@NonNull RotatedTileBox tileBox, @NonNull Amenity amenity) {
-		boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
-				|| ROUTE_ARTICLE.equals(amenity.getSubType());
-		boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
-		if (routeArticle) {
-			return tileBox.getZoom() >= START_ZOOM;
-		}  else if (routeTrack) {
-			if (travelRendererHelper.getRouteTracksProperty().get()) {
-				return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
-			} else {
-				return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
-			}
+		if(customObjectsDelegate != null){
+			return true;
 		} else {
-			return tileBox.getZoom() >= START_ZOOM;
+			boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
+					|| ROUTE_ARTICLE.equals(amenity.getSubType());
+			boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
+			if (routeArticle) {
+				return tileBox.getZoom() >= START_ZOOM;
+			}  else if (routeTrack) {
+				if (travelRendererHelper.getRouteTracksProperty().get()) {
+					return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
+				} else {
+					return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
+				}
+			} else {
+				return tileBox.getZoom() >= START_ZOOM;
+			}
 		}
 	}
 

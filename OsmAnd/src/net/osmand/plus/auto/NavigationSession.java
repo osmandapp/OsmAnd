@@ -83,6 +83,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return navigationCarSurface;
 	}
 
+	public Action getSettingsAction() {
+		return settingsAction;
+	}
+
 	public OsmandMapTileView getMapView() {
 		return mapView;
 	}
