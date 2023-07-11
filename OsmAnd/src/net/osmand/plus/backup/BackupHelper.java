@@ -341,7 +341,10 @@ public class BackupHelper {
 			FileSettingsItem fileItem = (FileSettingsItem) item;
 			fileName = getFileItemName(fileItem);
 		} else {
-			fileName = item.requireFileName();
+			fileName = item.getFileName();
+			if (Algorithms.isEmpty(fileName)) {
+				fileName = item.getDefaultFileName();
+			}
 		}
 		if (!Algorithms.isEmpty(fileName) && fileName.charAt(0) == '/') {
 			fileName = fileName.substring(1);
