@@ -476,7 +476,7 @@
     <string name="installing_new_resources">Poteka odpakiranje novih podatkov …</string>
     <string name="rotate_map_compass_opt">– obračanje zemljevida po kompasu</string>
     <string name="rotate_map_bearing_opt">– obračanje zemljevida glede na smer premikanja</string>
-    <string name="rotate_map_north_opt">Fiksno (sever je zgoraj)</string>
+    <string name="rotate_map_north_opt">Sever je zgoraj</string>
     <string name="search_villages_and_postcodes">Poišči več vasi/poštnih številk</string>
     <string name="rendering_attr_showRoadMaps_description">Izberi kdaj naj bodo prikazani zemljevidi le s cestami:</string>
     <string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
@@ -862,7 +862,7 @@
     <string name="osm_settings_descr">Določi nastavitve OpenStreetMap.org (OSM), ki so potrebne za pošiljanje v OSM.</string>
     <string name="data_settings_descr">Določi jezik, prejmi/ponovno naloži podatke.</string>
     <string name="data_settings">Podatki</string>
-    <string name="update_tile">Posodobi zemljevid</string>
+    <string name="update_tile">Posodobi</string>
     <string name="reload_tile">Ponovno naloži predmet zemljevida</string>
     <string name="map_view_3d_descr">Omogoči 3D pogled zemljevida.</string>
     <string name="map_view_3d">3D pogled zemljevida</string>
@@ -4761,7 +4761,7 @@
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
     <string name="display_position">Pokaži položaj</string>
-    <string name="rotate_map_manual_opt">Fiksno (ročno vrtenje)</string>
+    <string name="rotate_map_manual_opt">Ročno vrtenje</string>
     <string name="go_to_marker_location">Pojdi na mesto oznake</string>
     <string name="click_on_widget">Klikni na gradnik</string>
     <string name="shared_string_switch_mode">Preklopi način</string>
@@ -5210,7 +5210,7 @@
     <string name="calculate_offline_altitude_descr">Na podlagi podatkov iz zemljevida višin lahko brez povezave izračunamo nadmorsko višino. Razlike glede na zabeleženo nadmorsko višino naprave se lahko uporabijo kot popravek nadmorske višine.</string>
     <string name="show_all_tracks_on_the_map">Prikaži vse sledi na zemljevidu</string>
     <string name="shared_string_new_track">Nova sled</string>
-    <string name="rendering_attr_lightDetail_description">Privzeto: ime pomorske oznake (light character.group.period), izberi dodatne informacije o sektorjih 1 do 3 ali sektorjih 1,2,3,4,5 light character</string>
+    <string name="rendering_attr_lightDetail_description">Privzeto: ime pomorske oznake (svetli character.group.period), izberi dodatne informacije o sektorjih 1 do 3 ali sektorjih 1, 2, 3, 4, 5 svetli znak</string>
     <string name="calculate_offline">Izračunaj brez povezave</string>
     <string name="error_calculate">Rezultat izračuna je prazen</string>
     <string name="map_widget_rssi">Rssi</string>
@@ -5232,4 +5232,88 @@
     <string name="delete_track_folder_dialog_message">To bo izbrisalo mapo \"%1$s\" in vse vključene sledi (%2$s).</string>
     <string name="delete_folder_question">Želiš izbrisati mapo\?</string>
     <string name="delete_folder">Izbriši mapo</string>
+    <string name="routing_attr_allow_via_ferrata_name">Gorska pot (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Gorska pot, opremljena s pritrjenimi jeklenicami, stopnicami, lestvami in mostovi.</string>
+    <string name="free_favorites_backup_description">Registriraj se v OsmAnd oblak, da dobiš brezplačno varnostno kopiranje za priljubljene in nastavitve.</string>
+    <string name="free_favorites_backup">Brezplačna varnostna kopija priljubljenih</string>
+    <string name="folder_export_empty_error">Nič za izvoz, mapa je prazna</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">S tem ne boš preklical/a naročnine na OsmAnd Pro.</string>
+    <string name="osmand_cloud_deletion_account_warning">Tvoj račun in vsi podatki o računu bodo %1$s</string>
+    <string name="delete_account">Izbriši račun</string>
+    <string name="verify_account">Potrdi svoj račun</string>
+    <string name="release_4_5">• Senzorji BLE/ANT+: predelana povezava, pisanje in ogled prejetih podatkov v GPX
+\n
+\n • Brezplačno varnostno kopiranje priljubljenih in nastavitev v »OsmAnd oblaku«.
+\n
+\n • Nova oblika za zemljevide terena s podporo za 3D relief.
+\n
+\n • Upravljanje sledi: posodobljen uporabniški vmesnik, dodano razvrščanje, podpora ugnezdenih map.
+\n
+\n • Android Auto: nov začetni meni za dostop do priljubljenih, sledi in kategorij POI.
+\n
+\n • En seznam pripomočkov za zgornjo/spodnjo ploščo.
+\n
+\n • Nov profil »Vlak«, omogoča izračun železniških poti.
+\n
+\n • Izohipse delujejo s katerim koli »virom zemljevida«.
+\n
+\n • Razširjen seznam privzetih dejanj za zunanje tipkovnice.
+\n
+\n • Datoteke za usmerjanje po meri, dodane možnosti za brisanje ali prepisovanje.
+\n
+\n • Dodana možnost »Najavi odstopanje od poti«.
+\n
+\n • Začetni zaslon: dodana možnost obnovitve stanja OsmAnd iz datoteke.
+\n
+\n • Dodani razredi »Nevarne snovi« v navigaciji za tovornjake v Severni Ameriki.
+\n
+\n • Dodana podpora za »Via ferrato«, za usmerjanje pešcev.
+\n
+\n • Dodana »CAI« lestvica za težavnostno razvrstitev poti.
+\n
+\n • Popravljena izbira jezika za posamezno aplikacijo.
+\n
+\n • Dodana podpora za tematske ikone.
+\n
+\n • OsmAnd oblak: dodana možnost za brisanje računa.
+\n
+\n • Dostopnost: velikost cilja za dotik za gumbe spremenjena na 48 dp; odpravljena težava z uporabniškim vmesnikom zemljevida, vidnim za bralnike zaslona.
+\n
+\n • Preoblikovana japonska glasovna navodila.
+\n
+\n • Sprememba višine in vrednotenje naklona sta predelana.
+\n
+\n</string>
+    <string name="manage_subscriptions">Upravljanje naročnin.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Vsi podatki iz OsmAnd Cloud-a bodo %1$s. Podatki v napravi bodo ostali nedotaknjeni.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Ali si prepričan/a, da želiš izbrisati račun OsmAnd Cloud\?
+\n
+\nTega dejanja ni mogoče razveljaviti.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Izbrisati račun\?</string>
+    <string name="action_cannot_be_undone">Tega dejanja ni mogoče preklicati.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundarne naprave bodo odjavljene iz OsmAnd Cloud-a in bodo izgubile dostop do plačljivih funkcij.</string>
+    <string name="delete_account_warning">Si zares prepričan/a, da želiš izbrisati račun %1$s\?</string>
+    <string name="shared_string_deleting">Brisanje</string>
+    <string name="deleting_complete">Brisanje končano</string>
+    <string name="relief_3d_description">Imej in opazuj maketo svoje soseske ali cele celine.</string>
+    <string name="free_settings_backup">Brezplačno varnostno kopiranje nastavitev</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Uporaba rastrskega sqltiedb za naklon / senčenje terena</string>
+    <string name="cache_size">Velikost predpomnilnika</string>
+    <string name="shared_string_avoid">Izogibaj se</string>
+    <string name="may_be_used_if_there_is_shortcut">Lahko se uporabi, če obstaja bližnjica</string>
+    <string name="get_osmand_cloud">Pridobi OsmAnd oblak</string>
+    <string name="free_account">Brezplačni račun</string>
+    <string name="osmand_cloud_deleted_account_descr">Račun in vsi podatki so bili izbrisani iz storitve OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deleting_account_descr">V nekaj trenutkih bodo vsi tvoji podatki in račun izbrisani iz OsmAnd Cloud-a.
+\n
+\nVsi podatki v napravi ostanejo nedotaknjeni.</string>
+    <string name="backup_error_delete_account_email_match">E-pošta se ne ujema z uporabniškim imenom za prijavo</string>
+    <string name="slope_legend_description">Naklon uporablja barve za prikaz strmine terena. Več o naklonu lahko prebereš v %1$s.</string>
+    <string name="terrain_category_description">Izohipse terena, popoln zemljevid senčenja terena s temnimi odtenki, in zemljevidi naklonov z barvami, ki prikazujejo vrhove in nižine.</string>
+    <string name="free_mode">Brezplačni način</string>
+    <string name="terrain_map">Zemljevid terena</string>
+    <string name="verify_account_deletion_descr">Tvoj račun moramo preveriti, preden ga izbrišemo.
+\n
+\nVnesi e-poštni naslov, s katerim si se registriral/a. Poslano mu bo enkratno geslo za naslednji korak.</string>
+    <string name="relief_3d">3D relief</string>
 </resources>
