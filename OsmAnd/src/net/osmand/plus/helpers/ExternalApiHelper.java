@@ -657,13 +657,13 @@ public class ExternalApiHelper {
 			if (errorMessage == null && AndroidUtils.isActivityNotDestroyed(activity)) {
 				navigateGpx_ShowOnMap(activity, gpxFile, params);
 			}
-		});
+		}, params.getCustomGpxFileName());
 	}
 
-	private static void saveGpx(MapActivity mapActivity, GPXFile gpxFile, SaveGpxListener listener) {
+	private static void saveGpx(MapActivity mapActivity, GPXFile gpxFile, SaveGpxListener listener, String gpxFileName) {
 		if (Algorithms.isEmpty(gpxFile.path)) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			String destFileName = "route" + IndexConstants.GPX_FILE_EXT;
+			String destFileName = (gpxFileName == null || gpxFileName.isEmpty() ? "route" : gpxFileName) + IndexConstants.GPX_FILE_EXT;
 			File destDir = app.getAppPath(IndexConstants.GPX_IMPORT_DIR);
 			File destFile = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + destFileName);
 			while (destFile.exists()) {

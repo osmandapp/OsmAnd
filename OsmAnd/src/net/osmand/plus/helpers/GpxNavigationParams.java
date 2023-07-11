@@ -8,6 +8,7 @@ public class GpxNavigationParams {
 	private boolean snapToRoad;
 	private String snapToRoadMode;
 	private int snapToRoadThreshold;
+	private String customGpxFileName;
 
 	public boolean isForce() {
 		return force;
@@ -56,4 +57,7 @@ public class GpxNavigationParams {
 	public void setSnapToRoadThreshold(int snapToRoadThreshold) {
 		this.snapToRoadThreshold = snapToRoadThreshold;
 	}
+	public String getCustomGpxFileName() { return customGpxFileName; }
+
+	public void setCustomGpxFileName(String customGpxFileName) { this.customGpxFileName = customGpxFileName; }
 }

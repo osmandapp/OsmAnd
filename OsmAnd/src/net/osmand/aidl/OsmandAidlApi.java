@@ -207,6 +207,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_SNAP_TO_ROAD = "aidl_snap_to_road";
 	private static final String AIDL_SNAP_TO_ROAD_MODE = "aidl_snap_to_road_mode";
 	private static final String AIDL_SNAP_TO_ROAD_THRESHOLD = "aidl_snap_to_road_threshold";
+	private static final String AIDL_CUSTOM_GPX_FILENAME = "aidl_custom_gpx_filename";
 	private static final String AIDL_SEARCH_QUERY = "aidl_search_query";
 	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
 	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
@@ -764,6 +765,7 @@ public class OsmandAidlApi {
 						params.setSnapToRoad(intent.getBooleanExtra(AIDL_SNAP_TO_ROAD, false));
 						params.setSnapToRoadMode(intent.getStringExtra(AIDL_SNAP_TO_ROAD_MODE));
 						params.setSnapToRoadThreshold(intent.getIntExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, 50));
+						params.setCustomGpxFileName(intent.getStringExtra(AIDL_CUSTOM_GPX_FILENAME));
 						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, params);
 					}
 				}
@@ -1866,7 +1868,7 @@ public class OsmandAidlApi {
 
 	boolean navigateGpxV2(String data, Uri uri, boolean force, boolean requestLocationPermission,
 	                      boolean passWholeRoute, boolean snapToRoad, String snapToRoadMode,
-	                      int snapToRoadThreshold) {
+	                      int snapToRoadThreshold, String customGpxFileName) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_GPX);
 		intent.putExtra(AIDL_DATA, data);
@@ -1877,6 +1879,7 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_SNAP_TO_ROAD, snapToRoad);
 		intent.putExtra(AIDL_SNAP_TO_ROAD_MODE, snapToRoadMode);
 		intent.putExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, snapToRoadThreshold);
+		intent.putExtra(AIDL_CUSTOM_GPX_FILENAME, customGpxFileName);
 		app.sendBroadcast(intent);
 		return true;
 	}
