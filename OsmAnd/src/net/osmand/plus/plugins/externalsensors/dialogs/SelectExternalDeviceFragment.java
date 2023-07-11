@@ -26,9 +26,9 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment implements DevicesForWidgetAdapter.SelectDeviceListener,
@@ -91,10 +91,10 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	}
 
 	private void setupPairSensorButton(@NonNull View view) {
-		View dismissButton = view.findViewById(R.id.dismiss_button);
-		int buttonTextId = R.string.ant_plus_pair_new_sensor;
+		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
 		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
+		dismissButton.setButtonType(DialogButtonType.SECONDARY);
+		dismissButton.setTitleId(R.string.ant_plus_pair_new_sensor);
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		dismissButton.setLayoutParams(layoutParams);
 		view.requestLayout();
@@ -104,14 +104,9 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 
 	private void setupNoBluetoothView(View parentView) {
 		stateNoBluetoothView = parentView.findViewById(R.id.state_no_bluetooth);
-		View openSettingButton = stateNoBluetoothView.findViewById(R.id.dismiss_button);
-		int buttonTextId = R.string.ant_plus_open_settings;
-		UiUtilities.setupDialogButton(
-				nightMode,
-				openSettingButton,
-				UiUtilities.DialogButtonType.SECONDARY,
-				buttonTextId
-		);
+		DialogButton openSettingButton = stateNoBluetoothView.findViewById(R.id.dismiss_button);
+		openSettingButton.setButtonType(DialogButtonType.SECONDARY);
+		openSettingButton.setTitleId(R.string.ant_plus_open_settings);
 		openSettingButton.setOnClickListener(v -> {
 					Intent intentOpenBluetoothSettings = new Intent();
 					intentOpenBluetoothSettings.setAction(Settings.ACTION_BLUETOOTH_SETTINGS);
@@ -122,10 +117,10 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	}
 
 	private void setupOpenBtSettingsButton(@NonNull View view) {
-		View dismissButton = view.findViewById(R.id.dismiss_button);
-		int buttonTextId = R.string.ant_plus_open_settings;
+		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
+		dismissButton.setButtonType(DialogButtonType.SECONDARY);
+		dismissButton.setTitleId(R.string.ant_plus_open_settings);
 		ViewGroup.LayoutParams layoutParams = dismissButton.getLayoutParams();
-		UiUtilities.setupDialogButton(nightMode, dismissButton, UiUtilities.DialogButtonType.SECONDARY, buttonTextId);
 		layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		dismissButton.setLayoutParams(layoutParams);
 		view.requestLayout();

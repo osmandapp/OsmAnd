@@ -112,8 +112,13 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap,
+	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
 	                                @NonNull ApplicationMode currentMode) {
+		showInstance(fm, target, false, currentMode);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
+	                                boolean usedOnMap, @NonNull ApplicationMode currentMode) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
 				Bundle args = new Bundle();

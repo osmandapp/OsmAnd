@@ -44,8 +44,9 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -85,7 +86,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 	private OnlineRoutingCard routingFallbackCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
-	private View saveButton;
+	private DialogButton saveButton;
 	private ScrollView scrollView;
 	private AppCompatImageView buttonsShadow;
 	private OnGlobalLayoutListener onGlobalLayout;
@@ -380,16 +381,16 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment implements O
 
 	private void setupButtons() {
 		boolean nightMode = isNightMode();
-		View cancelButton = view.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, cancelButton,
-				DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
+		cancelButton.setButtonType(DialogButtonType.SECONDARY);
+		cancelButton.setTitleId(R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(v -> showExitDialog());
 
 		view.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
 		saveButton = view.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(nightMode, saveButton,
-				UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_save);
+		saveButton.setButtonType(DialogButtonType.PRIMARY);
+		saveButton.setTitleId(R.string.shared_string_save);
 		saveButton.setVisibility(View.VISIBLE);
 		saveButton.setOnClickListener(v -> {
 			onSaveEngine();

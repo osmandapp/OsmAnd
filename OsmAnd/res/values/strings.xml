@@ -11,8 +11,40 @@
 	Thx - Hardy
 -->
 
-    <string name="saving_points">Saving points…</string>
-    <string name="shared_string_saving">Saving…</string>
+    <string name="free_settings_backup">Free Settings Backup</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqltiedb for slope / hillshade</string>
+    <string name="cache_size">Cache size</string>
+    <string name="shared_string_avoid">Avoid</string>
+    <string name="may_be_used_if_there_is_shortcut">May be used if there is a shortcut</string>
+    <string name="routing_attr_allow_via_ferrata_name">Mountainside route (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">A mountain route equipped with fixed cables, stemples, ladders, and bridges.</string>
+    <string name="release_4_5">
+    • BLE/ANT+ sensors: reworked connection, writing and viewing received data to GPX \n\n
+    • Free backup for favorites and settings to \"OsmAnd Cloud\" \n\n
+    • New format for Terrain maps with 3D Relief support \n\n
+    • Tracks management: updated UI, added sorting, support of nested folders \n\n
+    • Android Auto: new start menu for access favorites, tracks and POI categories \n\n
+    • One list of widgets for the Top/Bottom panel \n\n
+    • New \"Train\" profile, allows to calculate railways routes \n\n
+    • Contour lines works with any \"Map source\" \n\n
+    • Expanded list of default actions for external keyboards \n\n
+    • Custom routing files, added options to delete or overwrite \n\n
+    • Added option to \"Announce deviation from the route\" \n\n
+    • Start screen: added option restore OsmAnd state from file \n\n
+    • Added \"Hazardous Materials\" classes Truck navigation in North America \n\n
+    • Added support of \"Via ferrata\" for pedestrian routing \n\n
+    • Added \"CAI\" scale for difficulty classification of the routes \n\n
+    • Fixed per-app language selection \n\n
+    • Added support for themed icons \n\n
+    • OsmAnd Cloud: added option to delete account \n\n
+    • Accessibility: touch target size for buttons changed to 48 dp; fixed issue with map UI visible for screen readers \n\n
+    • Japanese voice prompts reworked \n\n
+    • Elevation change and slope evaluation reworked \n\n
+    </string>    
+    <string name="free_favorites_backup_description">Register in OsmAnd Cloud to get free backup for favorites and settings.</string>
+    <string name="free_favorites_backup">Free Favorites Backup</string>
+    <string name="get_osmand_cloud">Get OsmAnd Cloud</string>
+    <string name="free_account">Free account</string>
     <string name="folder_export_empty_error">Nothing to export, folder is empty</string>
     <string name="osmand_cloud_deleted_account_descr">Account and all data was deleted from OsmAnd Cloud.</string>
     <string name="osmand_cloud_deleting_account_descr">In few moments all your data and account will be deleted from OsmAnd Cloud.\n\nAll data on the device remain untouched.</string>
@@ -38,8 +70,6 @@
     <string name="relief_3d">3D Relief</string>
     <string name="relief_3d_description">Own and observe the scale model of your neighborhood or the whole continent.</string>
     <string name="shared_string_close_the_dialog">Close the dialog</string>
-    <string name="routing_attr_allow_via_ferrata_name">Allow via ferrata</string>
-    <string name="routing_attr_allow_via_ferrata_description">Allow via ferrata paths.</string>
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="calculate_offline">Calculate offline</string>
@@ -4715,8 +4745,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="poi_context_menu_delete">Delete POI</string>
     <string name="rotate_map_compass_opt">Compass direction</string>
     <string name="rotate_map_bearing_opt">Movement direction</string>
-    <string name="rotate_map_north_opt">North is up (fixed)</string>
-    <string name="rotate_map_manual_opt">Manually rotated (fixed)</string>
+    <string name="rotate_map_north_opt">North is up</string>
+    <string name="rotate_map_manual_opt">Manually rotated</string>
     <string name="rotate_map_to_descr">Map alignment:</string>
     <string name="rotate_map_to">Map orientation</string>
     <string name="show_route">Route details</string>

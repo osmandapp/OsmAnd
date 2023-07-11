@@ -5223,7 +5223,6 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Emparelhar sensor ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Pode emparelhar sensores Bluetooth LE e ANT+ com o OsmAnd.</string>
     <string name="power_watts_unit">Watts</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permitir via ferrata</string>
     <string name="calculate_offline">Calcular offline</string>
     <string name="calculate_offline_altitude_descr">"Calcule a elevação offline, com base nos dados do mapa de altura.  As diferenças em relação à altitude registrada pelo dispositivo podem ser usadas como correção de elevação."</string>
     <string name="error_calculate">O resultado do cálculo está vazio</string>
@@ -5236,7 +5235,6 @@
     <string name="relief_3d">Relevo 3D</string>
     <string name="terrain_map">Mapa do terreno</string>
     <string name="relief_3d_description">Possuir e observar a maquete do seu bairro ou de todo o continente.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Permitir caminhos via ferrata.</string>
     <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
     <string name="terrain_category_description">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
     <string name="slope_legend_description">O Slope usa cores para visualizar a inclinação do terreno. Você pode ler mais sobre Slopes em %1$s.</string>

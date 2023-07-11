@@ -1,7 +1,5 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY_ACTIVE;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,6 +26,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment implements InAppPurchaseListener {
 
@@ -128,8 +127,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 		int color = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.switch_button_active);
 		view.setBackground(utilities.getPaintedIcon(R.drawable.promo_banner_bg, color));
 
-		View button = view.findViewById(R.id.button_action);
-		UiUtilities.setupDialogButton(nightMode, button, SECONDARY_ACTIVE, R.string.shared_string_get);
+		DialogButton button = view.findViewById(R.id.button_action);
 		button.findViewById(R.id.button_container).setBackground(null);
 
 		Drawable icon = utilities.getIcon(R.drawable.ic_action_osmand_pro_logo_colored);

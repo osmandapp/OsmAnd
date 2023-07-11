@@ -2,7 +2,6 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
-import static net.osmand.plus.charts.GPXDataSetType.SENSOR_HEART_RATE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
 import static net.osmand.plus.charts.GPXDataSetType.SPEED;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
@@ -59,11 +58,11 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CustomRadioButtonType;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -358,9 +357,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private void setupNoAltitudeTab(@NonNull View view) {
-		View buttonView = view.findViewById(R.id.button_action);
+		DialogButton buttonView = view.findViewById(R.id.button_action);
 		buttonView.setOnClickListener(v -> actionsListener.openGetAltitudeBottomSheet(gpxItem));
-		UiUtilities.setupDialogButton(nightMode, buttonView, DialogButtonType.SECONDARY_ACTIVE, R.string.calculate_altitude);
 
 		if (!hideStatistics) {
 			updateActionButtonsRow(view, GPX_TAB_ITEM_GENERAL, true);

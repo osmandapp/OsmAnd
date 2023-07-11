@@ -5239,10 +5239,8 @@
     <string name="free_mode">Tryb swobodny</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Mapa terenu</string>
-    <string name="routing_attr_allow_via_ferrata_description">Zezwalaj na ścieżki via ferrata.</string>
     <string name="save_track_external_sensors_data">Dane</string>
     <string name="relief_3d_description">Posiadaj i obserwuj model w skali swojej okolicy lub całego kontynentu.</string>
-    <string name="routing_attr_allow_via_ferrata_name">Pozwól na via ferrata</string>
     <string name="slope_legend_description">Nachylenie używa kolorów do wizualizacji nachylenia terenu. Więcej informacji na temat stoków można znaleźć w %1$s.</string>
     <string name="terrain_category_description">Linie konturu terenu, pełna mapa cieni wzgórz z ciemnymi odcieniami i mapy zboczy z kolorami pokazującymi szczyty i niziny.</string>
 </resources>

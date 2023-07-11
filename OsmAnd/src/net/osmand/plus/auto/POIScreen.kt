@@ -42,6 +42,7 @@ class POIScreen(
     private val group: PoiUIFilter
 ) : BaseOsmAndAndroidAutoSearchScreen(carContext), LifecycleObserver {
     private lateinit var itemList: ItemList
+    private var searchRadius = 0.0
 
     init {
         loadPOI()
@@ -64,7 +65,9 @@ class POIScreen(
         }
         return templateBuilder
             .setTitle(group.name)
-            .setActionStrip(ActionStrip.Builder().addAction(settingsAction).build())
+            .setActionStrip(ActionStrip.Builder()
+                .addAction(createSearchAction())
+                .build())
             .setHeaderAction(Action.BACK)
             .build()
     }
@@ -82,21 +85,27 @@ class POIScreen(
         searchResults: List<SearchResult>?,
         itemList: ItemList?,
         resultsCount: Int) {
-        loading = false
-        if (resultsCount == 0) {
-            this.itemList = withNoResults(ItemList.Builder()).build()
+        if(resultsCount < contentLimit && searchRadius < SearchCoreFactory.MAX_DEFAULT_SEARCH_RADIUS) {
+            searchRadius++
+            loadPOI()
         } else {
-            var builder = ItemList.Builder();
-            setupPOI(builder, searchResults)
-            this.itemList = builder.build()
+            loading = false
+            if (resultsCount == 0) {
+                this.itemList = withNoResults(ItemList.Builder()).build()
+            } else {
+                var builder = ItemList.Builder();
+                setupPOI(builder, searchResults)
+                this.itemList = builder.build()
+            }
+            invalidate()
         }
-        invalidate()
     }
 
     private fun setupPOI(listBuilder: ItemList.Builder, searchResults: List<SearchResult>?) {
         val location = app.settings.lastKnownMapLocation
         val mapPoint = ArrayList<Amenity>()
         val mapRect = QuadRect()
+        extendRectToContainPoint(mapRect, location)
         searchResults?.let {
             val searchResultsSize = searchResults.size
             val limitedSearchResults =
@@ -106,10 +115,7 @@ class POIScreen(
                     val amenity = point.`object` as Amenity
                     mapPoint.add(amenity)
                     val amenityLocation = amenity.location
-                    mapRect.left = if(mapRect.left == 0.0) amenityLocation.longitude else min(mapRect.left, amenityLocation.longitude)
-                    mapRect.right = max(mapRect.right, amenityLocation.longitude)
-                    mapRect.bottom = if(mapRect.bottom == 0.0) amenityLocation.latitude else min(mapRect.bottom, amenityLocation.latitude)
-                    mapRect.top = max(mapRect.top, amenityLocation.latitude)
+                    extendRectToContainPoint(mapRect, amenityLocation)
                 }
                 val title = point.localeName
                 var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
@@ -148,13 +154,24 @@ class POIScreen(
         app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(mapPoint)
     }
 
+	private fun extendRectToContainPoint(mapRect: QuadRect, amenityLocation: LatLon) {
+		mapRect.left = if (mapRect.left == 0.0) amenityLocation.longitude else min(
+			mapRect.left,
+			amenityLocation.longitude)
+		mapRect.right = max(mapRect.right, amenityLocation.longitude)
+		mapRect.bottom = if (mapRect.bottom == 0.0) amenityLocation.latitude else min(
+			mapRect.bottom,
+			amenityLocation.latitude)
+		mapRect.top = max(mapRect.top, amenityLocation.latitude)
+	}
+
     private fun loadPOI() {
         val objectLocalizedName = group.name;
         val sr = SearchResult()
         sr.localeName = objectLocalizedName
         sr.`object` = group
         sr.priority = SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY.toDouble()
-        sr.priorityDistance = 0.0
+	    sr.priorityDistance = searchRadius
         sr.objectType = ObjectType.POI_TYPE
         searchHelper.completeQueryWithObject(sr)
         loading = true

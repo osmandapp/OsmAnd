@@ -1,10 +1,8 @@
 package net.osmand.plus.backup.ui.status;
 
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.SECONDARY_ACTIVE;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY_ACTIVE;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +15,8 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.ui.LoginDialogType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class IntroductionCard extends BaseCard {
 
@@ -53,25 +51,25 @@ public class IntroductionCard extends BaseCard {
 			description.setText(R.string.backup_dont_have_any_descr);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_neutral_face));
 		}
-		setupSyncButton(nightMode);
-		setupSettingsButton(nightMode);
+		setupSyncButton();
+		setupSettingsButton();
 	}
 
-	private void setupSyncButton(boolean nightMode) {
-		View syncButton = view.findViewById(R.id.sync_button);
+	private void setupSyncButton() {
+		DialogButton syncButton = view.findViewById(R.id.sync_button);
 		syncButton.setOnClickListener(v -> notifyButtonPressed(SYNC_BUTTON_INDEX));
-		UiUtilities.setupDialogButton(nightMode, syncButton, PRIMARY, R.string.sync_now);
 		AndroidUiHelper.updateVisibility(syncButton, shouldShowSyncButton());
 	}
 
-	private void setupSettingsButton(boolean nightMode) {
+	private void setupSettingsButton() {
 		boolean signIn = dialogType == LoginDialogType.SIGN_IN;
 		int titleId = signIn ? R.string.choose_what_to_sync : R.string.set_up_backup;
 		DialogButtonType buttonType = signIn ? SECONDARY : SECONDARY_ACTIVE;
 
-		View settingsButton = view.findViewById(R.id.settings_button);
+		DialogButton settingsButton = view.findViewById(R.id.settings_button);
+		settingsButton.setTitleId(titleId);
+		settingsButton.setButtonType(buttonType);
 		settingsButton.setOnClickListener(v -> notifyButtonPressed(SETTINGS_BUTTON_INDEX));
-		UiUtilities.setupDialogButton(nightMode, settingsButton, buttonType, titleId);
 	}
 
 	private boolean shouldShowSyncButton() {

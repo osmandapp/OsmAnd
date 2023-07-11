@@ -5,7 +5,6 @@ import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 import static net.osmand.plus.utils.FileUtils.RenameCallback;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -72,6 +71,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -102,8 +102,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	private TracksTabAdapter adapter;
 	private ImageView searchButton;
 
-	private View applyButton;
-	private View selectionButton;
+	private DialogButton applyButton;
+	private DialogButton selectionButton;
 
 	@Nullable
 	private String preselectedTabName;
@@ -305,14 +305,11 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 
 	private void updateButtonsState() {
 		boolean anySelected = itemsSelectionHelper.hasSelectedItems();
-		String apply = getString(R.string.shared_string_apply).toUpperCase();
-		String select = getString(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent).toUpperCase();
+		selectionButton.setTitleId(anySelected ? R.string.shared_string_hide_all : R.string.shared_string_select_recent);
 
 		applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
 		selectionButton.setEnabled(!Algorithms.isEmpty(selectedTracksHelper.getRecentlyVisibleTracks()) || anySelected);
 
-		UiUtilities.setupDialogButton(nightMode, applyButton, TERTIARY, apply);
-		UiUtilities.setupDialogButton(nightMode, selectionButton, TERTIARY, select);
 		TrackTab allTracksTab = selectedTracksHelper.getTrackTabs().get(TrackTabType.ALL.name());
 		searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 	}

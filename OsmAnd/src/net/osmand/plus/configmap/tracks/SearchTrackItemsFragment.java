@@ -1,7 +1,6 @@
 package net.osmand.plus.configmap.tracks;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
-import static net.osmand.plus.utils.UiUtilities.DialogButtonType.TERTIARY;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -42,7 +41,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.MapUtils;
 
@@ -60,9 +59,9 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 
 	private SearchTracksAdapter adapter;
 
-	private View applyButton;
+	private DialogButton applyButton;
 	private View buttonsContainer;
-	private View selectionButton;
+	private DialogButton selectionButton;
 	private View clearSearchQuery;
 	private EditText searchEditText;
 
@@ -176,14 +175,12 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void updateButtonsState() {
-		String apply = getString(R.string.shared_string_apply).toUpperCase();
-		String select = getString(!areAllTracksSelected() ? R.string.shared_string_select_all : R.string.shared_string_deselect_all).toUpperCase();
+		String select = getString(!areAllTracksSelected() ? R.string.shared_string_select_all : R.string.shared_string_deselect_all);
 		String count = "(" + adapter.getFilteredItems().size() + ")";
 		select = getString(R.string.ltr_or_rtl_combine_via_space, select, count);
-		applyButton.setEnabled(selectionHelper.hasItemsToApply());
-		UiUtilities.setupDialogButton(nightMode, applyButton, TERTIARY, apply);
-		UiUtilities.setupDialogButton(nightMode, selectionButton, TERTIARY, select);
+		selectionButton.setTitle(select);
 
+		applyButton.setEnabled(selectionHelper.hasItemsToApply());
 		boolean visible = selectionMode && adapter.getFilteredItems().size() > 0;
 		AndroidUiHelper.updateVisibility(buttonsContainer, visible);
 	}

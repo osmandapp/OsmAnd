@@ -1477,7 +1477,7 @@
     <string name="search_online_address">Serĉi enrete</string>
     <string name="address">Adreso</string>
     <string name="poi">Interesejo</string>
-    <string name="update_tile">Ĝisdatigi mapon</string>
+    <string name="update_tile">Ĝisdatigi</string>
     <string name="use_english_names">Uzi anglajn nomojn sur mapoj</string>
     <string name="use_english_names_descr">Aktivigu por uzi anglajn nomojn anstataŭ lokajn.</string>
     <string name="search_address">Serĉi adreson</string>
@@ -3292,7 +3292,7 @@
     <string name="file_does_not_contain_routing_rules">Neniuj reguloj pri kurs‑difinado en “%1$s”. Bonvolu elekti alian dosieron.</string>
     <string name="not_support_file_type_with_ext">Bonvolu elekti dosieron kun la subtenata finaĵo %1$s.</string>
     <string name="import_from_file">Enporti el dosiero</string>
-    <string name="import_routing_file">Enporti dosieron de navigilo</string>
+    <string name="import_routing_file">Enporti dosieron de navigo</string>
     <string name="import_profile">Enporti profilon</string>
     <string name="monitoring_prefs_descr">Navigado, precizo de registrado</string>
     <string name="multimedia_notes_prefs_descr">Dimensioj de bildo, kvalito de sono kaj video</string>
@@ -5230,13 +5230,36 @@
     <string name="error_calculate">Rezulto de kalkulo estas nula</string>
     <string name="calculate_offline">Kalkuli malkonekte</string>
     <string name="calculate_offline_altitude_descr">Kalkuli altitudon eksterrete uzante datumojn de altmapo. Malsameco kun altitudo registrita de la aparato povas esti uzata kiel korekto.</string>
-    <string name="routing_attr_allow_via_ferrata_description">Permesi navigi per feraj grimp-vojoj.</string>
     <string name="power_watts_unit">Vatoj</string>
     <string name="revolutions_per_minute_unit">Rivoluoj/min</string>
-    <string name="routing_attr_allow_via_ferrata_name">Permesi viaferataojn</string>
     <string name="shared_string_close_the_dialog">Fermi la fenestron</string>
     <string name="relief_3d">3-dimensia reliefo</string>
     <string name="free_mode">Libera reĝimo</string>
     <string name="terrain_map">Terena mapo</string>
     <string name="relief_3d_description">Havigu kaj vidu skalitan modelon de via najbaraĵo aŭ de la tuta kontinento.</string>
+    <string name="osmand_cloud_deleted_account_descr">Forigis konton kaj ĉiujn datumojn el OsmAnd-Nubo.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Aliaj aparatoj estos elsalutintaj el OsmAnd-Nubo kaj perdos aliron al pagendaj ebloj.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Ĉu vi certe volas forigi vian konton OsmAnd-Nubo\?
+\n
+\nTiu ĉi ago estas neinversigebla.</string>
+    <string name="backup_error_delete_account_email_match">Retpoŝta adreso ne kongruas kun uzantnomo</string>
+    <string name="verify_account_deletion_descr">Ni devas verigi vian konton antaŭ forigi ĝin.
+\n
+\nEnigu la retpoŝtan adreson, per kiu ĝi registriĝis. Sekve unufoja pasvorto estos sendita al ĝi.</string>
+    <string name="osmand_cloud_deleting_account_descr">Baldaŭ ĉiuj viaj datumoj kaj via konto estos forigitaj el OsmAnd-Nubo.
+\n
+\nĈiuj datumoj en la aparato ne perdiĝos.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Ĉu forigi konton\?</string>
+    <string name="action_cannot_be_undone">Tiu ĉi ago estas neinversigebla.</string>
+    <string name="osmand_cloud_deletion_account_warning">Via konto kaj ĉiuj ĝiaj detaloj estos %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Ĉiuj viaj datumoj en OsmAnd-Nubo estos %1$s. Datumoj en la aparato ne perdiĝos.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Via abono OsmAnd Pro estos nuligita.</string>
+    <string name="manage_subscriptions">Administri abonojn.</string>
+    <string name="delete_account_warning">Ĉu vi certe volas forigi vian konton %1$s\?</string>
+    <string name="shared_string_deleting">Forigado</string>
+    <string name="deleting_complete">Forigado plenumita</string>
+    <string name="delete_account">Forigi konton</string>
+    <string name="verify_account">Verigi vian konton</string>
+    <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pli la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
+    <string name="terrain_category_description">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
 </resources>

@@ -5,10 +5,7 @@
 	android:id="@+id/button"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/dialog_button_height"
-	android:layout_marginStart="@dimen/content_padding"
-	android:layout_marginLeft="@dimen/content_padding"
-	android:layout_marginEnd="@dimen/content_padding"
-	android:layout_marginRight="@dimen/content_padding"
+	android:layout_marginHorizontal="@dimen/content_padding"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -24,8 +21,7 @@
 			android:id="@+id/button_icon"
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
-			android:layout_marginEnd="@dimen/content_padding_small"
-			android:layout_marginRight="@dimen/content_padding_small"
+			android:layout_marginHorizontal="@dimen/content_padding_small"
 			android:tint="?attr/active_color_basic"
 			tools:srcCompat="@drawable/ic_action_appearance" />
 
@@ -33,8 +29,7 @@
 			android:id="@+id/button_text"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginEnd="@dimen/context_menu_controller_height"
-			android:layout_marginRight="@dimen/context_menu_controller_height"
+			android:layout_marginHorizontal="@dimen/context_menu_controller_height"
 			android:letterSpacing="@dimen/description_letter_spacing"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/default_desc_text_size"

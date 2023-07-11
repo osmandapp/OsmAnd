@@ -127,7 +127,7 @@
     <string name="prefs_plugins">الملحقات</string>
     <string name="debugging_and_development">خيارات المطور</string>
     <string name="native_rendering">تقديم الأصلي</string>
-    <string name="test_voice_prompts">اختبار الأوامر الصوتية</string>
+    <string name="test_voice_prompts">اختبار التوجيهات الصوتية</string>
     <string name="send_files_to_osm">إرسال ملفات GPX إلى OSM؟</string>
     <string name="gpx_visibility_txt">الوضوح</string>
     <string name="gpx_tags_txt">وسوم</string>
@@ -514,8 +514,8 @@
     <string name="settings_direction_style">نمط التّوجه</string>
     <string name="settings_direction_style_descr">اختر نمط التّعبير عن الاتجاهات النّسبية أثناء الحركة</string>
     <string name="i_am_here">أنا هنا</string>
-    <string name="index_name_voice">التوجيه الصوتي (صوت طبيعي)</string>
-    <string name="index_name_tts_voice">التوجيه الصوتي (صوت آلي TTS)</string>
+    <string name="index_name_voice">التوجيهات الصوتية (مسجلة وبمزايا محدودة)</string>
+    <string name="index_name_tts_voice">التوجيهات الصوتية (صوت آلي، مفضل)</string>
     <string name="profile_settings">إعدادات خاصة بالوضع</string>
     <string name="zoom_by_trackball_descr">غيّر نمط تكبير الخريطة بواسطة حركات كرة التّتبع الأفقية.</string>
     <string name="zoom_by_trackball">استخدم كرة التّتبع للتّحكم في التّكبير</string>
@@ -700,8 +700,8 @@
     <string name="local_index_transport_data">بيانات وسائل النقل العام</string>
     <string name="local_index_map_data">بيانات الخريطة</string>
     <string name="local_indexes_cat_backup">معطلة</string>
-    <string name="local_indexes_cat_tts">البيانات الصوتية ( TTS )</string>
-    <string name="local_indexes_cat_voice">البيانات الصوتية ( المُسجلة )</string>
+    <string name="local_indexes_cat_tts">التوجيهات الصوتية (صوت آلي)</string>
+    <string name="local_indexes_cat_voice">التوجيهات الصوتية (مسجلة)</string>
     <string name="local_indexes_cat_poi">بيانات POI</string>
     <string name="ttsvoice">تحويل النص إلى كلام -</string>
     <string name="search_offline_clear_search">بحث جديد</string>
@@ -833,7 +833,7 @@
     <string name="index_name_italy">أوروبا - إيطاليا</string>
     <string name="copying_osmand_files">جار نسخ ملفات أوسماند…</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
-    <string name="interrupt_music_descr">الارشادات الصوتية توقف الموسيقى مؤقتًا.</string>
+    <string name="interrupt_music_descr">إيقاف أصوات الوسائط عند التوجيهات الصوتية.</string>
     <string name="interrupt_music">إيقاف الموسيقى</string>
     <string name="loading_smth">جار التحميل %1$s …</string>
     <string name="selected_gpx_info_show">"
@@ -978,7 +978,7 @@
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
-    <string name="rotate_map_north_opt">ثابت (الشمال لأعلى)</string>
+    <string name="rotate_map_north_opt">الشمال لأعلى</string>
     <string name="rotate_map_compass_opt">اتجاه البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
@@ -1180,7 +1180,7 @@
     <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="rendering_attr_showAccess_name">عرض قيود الدخول</string>
     <string name="rendering_attr_showSurfaces_name">عرض سطح الطريق</string>
-    <string name="rendering_attr_showCycleRoutes_name">طرق الدرجات الهوائية</string>
+    <string name="rendering_attr_showCycleRoutes_name">طرق الدراجات الهوائية</string>
     <string name="delay_navigation_start">بدء التوجيه المفصل تلقائياً</string>
     <string name="gpx_info_subtracks">مسارات فرعية: %1$s</string>
     <string name="gpx_info_waypoints">نقاط الطريق: %1$s</string>
@@ -1308,7 +1308,7 @@
     <string name="select_max_zoom_preload_area">حدد أقصى تقريب للتحميل المسبق</string>
     <string name="maps_could_not_be_downloaded">لا يمكن تحميل هذه الخريطة</string>
     <string name="download_type_to_filter">اكتب للتصفية</string>
-    <string name="voices">المطالبات الصوتية</string>
+    <string name="voices">التوجيهات الصوتية</string>
     <string name="gpx_files_not_found">لا يوجد ملفات GPX في مجلد tracks</string>
     <string name="error_reading_gpx">خطأ في قراءة بيانات GPX.</string>
     <string name="vector_data">الخريطة المحملة</string>
@@ -1351,7 +1351,7 @@
     <string name="map_view_3d">عرض الخريطة 3D</string>
     <string name="mark_point">هدف</string>
     <string name="reload_tile">إعادة تحميل التجانبية/المربع</string>
-    <string name="update_tile">تحديث الخريطة</string>
+    <string name="update_tile">تحديث</string>
     <string name="additional_settings">إعدادات إضافية</string>
     <string name="map_tile_source">مصدر الخريطة التجانبية/المربعية</string>
     <string name="use_internet_to_download_tile">استخدام الإنترنت لتحميل مربعات الخريطة</string>
@@ -1726,7 +1726,7 @@
     <string name="av_video_quality">جودة مخرج الفيديو</string>
     <string name="osm_edit_deleted_poi">حذف OSM POI</string>
     <string name="download_wikipedia_maps">ويكيبيديا</string>
-    <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه</string>
+    <string name="voice_is_not_available_title">لم يتم تحديد صوت للتوجيه الصوتي</string>
     <string name="fast_route_mode">الطريق الأسرع</string>
     <string name="poi_context_menu_website">عرض موقع الويب ل POI</string>
     <string name="poi_context_menu_call">عرض الهاتف لPOI</string>
@@ -1804,7 +1804,7 @@
     <string name="show_transport_over_map_description">عرض مواقف وسائل النقل العام على الخريطة.</string>
     <string name="transport_stop_to_go_out">اختر موقف النزول</string>
     <string name="add_new_rule">إضافة قاعدة جديدة</string>
-    <string name="voice_data_unavailable">لا تتوفر بيانات الصوت المحدد</string>
+    <string name="voice_data_unavailable">بيانات التوجيهات الصوتية المحددة غير متوفرة</string>
     <string name="voice_data_initializing">تهيئة البيانات الصوتية …</string>
     <string name="layer_osm_bugs">ملاحظات OSM</string>
     <string name="poi_context_menu_delete">حذف POI</string>
@@ -1898,7 +1898,7 @@
     <string name="loading_builds_failed">تعذر استرداد قائمة OsmAnd builds</string>
     <string name="loading_builds">عملية تحميل إصدارات التطبيق جارية …</string>
     <string name="select_build_to_install">حدد إصدار التطبيق للتثبيت</string>
-    <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إدارة الخرائط\" ← \"تحميلات متاحة\" ← \"التوجيه الصوتي\" وحدد أو حمل حزمة صوت.</string>
+    <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إدارة الخرائط\" ← \"تحميلات متاحة\" ← \"التوجيهات الصوتية\" واختر أو حمل حزمة الصوت المناسبة.</string>
     <string name="daynight_descr">اختيار قاعدة تحويل وضع نهار/ ليل.</string>
     <string name="download_files_question">تحميل {0} ملف ({1} مب)؟</string>
     <string name="items_were_selected">{0} عنصر محدد</string>
@@ -2795,7 +2795,7 @@
     <string name="show_along_the_route">إظهار على طول الطريق</string>
     <string name="simulate_navigation">محاكاة الملاحة</string>
     <string name="choose_track_file_to_follow">اختر مسار للمتابعة</string>
-    <string name="voice_announcements">إعلام صوتي</string>
+    <string name="voice_announcements">توجيهات صوتية</string>
     <string name="intermediate_destinations">الوجهات المتوسطة</string>
     <string name="arrive_at_time">الوصول عند %1$s</string>
     <string name="off_road_render_descr">مناسبة للاستخدام أثناء القيادة على الطرق الوعرة. مناسب للاستخدام مع صور الأقمار الصناعية الخضراء كمخطط موضعها. النقاط الرئيسية: تخفيض سمك الطريق الرئيسية، وزيادة سمك المسارات والمسارات ودراجات وطرق أخرى. استناداً إلى نمط \'Topo\'.</string>
@@ -2819,7 +2819,7 @@
 \n
 \n</string-->
     <string name="one_tap_active">انقر لتنشيط توجيه الهدف</string>
-    <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام قائمة السياق أو القطعة.</string>
+    <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام القائمة السفلية أو الملحق.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
     <string name="add_track_to_markers_descr">حدد مسار لإضافة نقاط الطريق إلى العلامات(يتم سرد المسارات فقط مع نقاط الطريق).</string>
     <string name="empty_state_markers_active_desc">نقرة طويلة أو قصيرة على الأماكن ثم اضغط على زر التوجيه المباشر.</string>
@@ -3117,13 +3117,13 @@
     <string name="map_during_navigation">خريطة أثناء التنقل</string>
     <string name="shared_string_other">أخرى</string>
     <string name="vehicle_parameters_descr">الوزن ، الارتفاع ، السرعة</string>
-    <string name="vehicle_parameters">معلمات المركبات</string>
+    <string name="vehicle_parameters">تفضيلات المركبة</string>
     <string name="voice_announces_info">الإعلامات الصوتية تحدث فقط أثناء التنقل.</string>
     <string name="voice_announces_descr">إرشادات التنقل والإعلامات</string>
-    <string name="voice_announces">المطالبات الصوتية</string>
+    <string name="voice_announces">التوجيهات الصوتية</string>
     <string name="screen_alerts">تنبيهات الشاشة</string>
-    <string name="route_parameters_descr">تكوين معلمات الطريق</string>
-    <string name="route_parameters">معلمات الطريق</string>
+    <string name="route_parameters_descr">محددات وتفضيلات مسار التوجيه</string>
+    <string name="route_parameters">تفضيلات اختيار الطريق</string>
     <string name="application_profile_changed">تم تغيير وضع التطبيق إلى \"%s\"</string>
     <string name="logcat_buffer">سجل الاستخدام</string>
     <string name="plugins_settings">ضبط الملحقات</string>
@@ -3553,10 +3553,10 @@
     <string name="ui_customization_description">تخصيص كمية العناصر في درج تكوين خريطة قائمة السياق. 
 \n 
 \nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
-    <string name="ui_customization_short_descr">عناصر الدرج، قائمة السياق</string>
+    <string name="ui_customization_short_descr">القائمة الجانبية و السفلية</string>
     <string name="ui_customization">تخصيص واجهة المستخدم</string>
-    <string name="shared_string_drawer">درج</string>
-    <string name="context_menu_actions">إجراءات قائمة السياق</string>
+    <string name="shared_string_drawer">القائمة الجانبية</string>
+    <string name="context_menu_actions">إجراءات القائمة السفلية</string>
     <string name="reorder_or_hide_from">إعادة ترتيب العناصر أو إخفائها من %1$s.</string>
     <string name="shared_string_divider">مفصول</string>
     <string name="divider_descr">عناصر أسفل هذه النقطة مفصولة بفاصل.</string>
@@ -3620,22 +3620,22 @@
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة.</string>
     <string name="navigation_profiles_item">أوضاع الملاحة</string>
-    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت 
-\n 
-\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال 
-\n 
-\n • تخصيص ترتيب العناصر في قائمة السياق ، تكوين الخريطة ، درج 
-\n 
-\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط 
-\n 
-\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة 
-\n 
-\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة 
-\n 
-\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة 
-\n 
-\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية 
-\n 
+    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت
+\n
+\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
+\n
+\n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية
+\n
+\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
+\n
+\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة
+\n
+\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة
+\n
+\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة
+\n
+\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
+\n
 \n • إصلاح الخلل مع اللغات التي تكتب من اليمين
 \n
 \n</string>
@@ -3965,7 +3965,7 @@
     <string name="routing_attr_allow_streams_name">السماح بالتيارات والمصارف</string>
     <string name="routing_attr_allow_intermittent_description">السماح بالممرات المائية المتقطعة</string>
     <string name="routing_attr_allow_intermittent_name">السماح بالممرات المائية المتقطعة</string>
-    <string name="voice_prompts_timetable">مطالبة صوتية</string>
+    <string name="voice_prompts_timetable">أوقات التوجيهات الصوتية</string>
     <string name="add_online_routing_engine">إضافة محرك توجيه عبر الإنترنت</string>
     <string name="edit_online_routing_engine">تعديل محرك التوجيه عبر الإنترنت</string>
     <string name="shared_string_subtype">النوع الفرعي</string>
@@ -4857,7 +4857,7 @@
     <string name="coordinates_widget_map_center_desc">ويدجت عرض الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
     <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
     <string name="map_widget_target_distance_desc">ويدجت عرض المسافة من الكاميرا إلى الموقع المستهدف.</string>
-    <string name="rotate_map_manual_opt">ثابت (يتم تدويره يدويا)</string>
+    <string name="rotate_map_manual_opt">تدوير يدوي</string>
     <string name="map_widget_camera_tilt_desc">ويدجت عرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
     <string name="click_on_widget">انقر على الويدجت</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
@@ -5302,8 +5302,6 @@
     <string name="error_calculate">نتيجة الحساب فارغة</string>
     <string name="calculate_offline_altitude_descr">احسب الارتفاع في وضع دون اتصال ، بناءًا على بيانات خريطة الارتفاع. يمكن استخدام الاختلافات مقابل الارتفاع المسجل بالجهاز كتصحيح للارتفاع.</string>
     <string name="calculate_offline">حساب دون اتصال بالنت</string>
-    <string name="routing_attr_allow_via_ferrata_name">السماح عبر فيراتا</string>
-    <string name="routing_attr_allow_via_ferrata_description">السماح عبر مسارات فيراتا.</string>
     <string name="power_watts_unit">واتس</string>
     <string name="revolutions_per_minute_unit">.RPM</string>
     <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
@@ -5311,4 +5309,83 @@
     <string name="terrain_map">خريطة التضاريس</string>
     <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
     <string name="relief_3d">تضاريس 3D</string>
+    <string name="osmand_cloud_deleted_account_descr">تم حذف الحساب وجميع البيانات من OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deleting_account_descr">في غضون لحظات قليلة ، سيتم حذف جميع بياناتك وحسابك من OsmAnd Cloud.
+\n
+\nتظل جميع البيانات الموجودة على الجهاز كما هي.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">هل أنت متأكد من أنك تريد حذف حساب OsmAnd Cloud؟
+\n
+\nلا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="osmand_cloud_delete_account_confirmation">حذف الحساب؟</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">سيتم تسجيل خروج الأجهزة الثانوية من OsmAnd Cloud وستفقد الوصول إلى الميزات المدفوعة.</string>
+    <string name="folder_export_empty_error">لا شيء للتصدير ، المجلد فارغ</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="verify_account">تحقق من حسابك</string>
+    <string name="free_favorites_backup_description">سجل في OsmAnd Cloud للحصول على نسخة احتياطية مجانية للمفضلة والإعدادات.</string>
+    <string name="free_favorites_backup">نسخ احتياطي مجاني للمفضلة</string>
+    <string name="get_osmand_cloud">احصل على OsmAnd Cloud</string>
+    <string name="free_account">حساب مجاني</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">لن يؤدي هذا إلى إلغاء اشتراكك في OsmAnd Pro.</string>
+    <string name="manage_subscriptions">إدارة الاشتراكات.</string>
+    <string name="delete_account_warning">هل أنت متأكد من أنك تريد حذف حساب %1$s؟</string>
+    <string name="shared_string_deleting">جار الحذف</string>
+    <string name="backup_error_delete_account_email_match">البريد الإلكتروني لا يتطابق مع اسم مستخدم تسجيل الدخول</string>
+    <string name="action_cannot_be_undone">لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="deleting_complete">اكتمل الحذف</string>
+    <string name="osmand_cloud_deletion_account_warning">سيكون حسابك وجميع تفاصيله %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">جميع البيانات من OsmAnd Cloud ستكون %1$s. ستظل البيانات الموجودة على الجهاز كما هي.</string>
+    <string name="terrain_category_description">الخطوط الكنتورية للتضاريس وخريطة التلال الكاملة مع الظلال الداكنة وخرائط المنحدرات بالألوان لإظهار القمم والأراضي المنخفضة.</string>
+    <string name="verify_account_deletion_descr">نحن بحاجة للتحقق من حسابك قبل حذفه. 
+\n
+\nالرجاء إدخال عنوان البريد الإلكتروني الذي قمت بالتسجيل به. سيتم إرسال كلمة مرور لمرة واحدة للخطوة التالية.</string>
+    <string name="release_4_5">• مستشعرات BLE / ANT +: إعادة الاتصال وكتابة وعرض البيانات المستلمة إلى GPX
+\n
+\n • نسخ احتياطي مجاني للمفضلة والإعدادات على \"أوسماند كلاود\"
+\n
+\n • تنسيق جديد لخرائط التضاريس مع دعم التضاريس ثلاثية الأبعاد
+\n
+\n • إدارة المسارات: تحديث واجهة المستخدم والتصنيف ودعم المجلدات المتداخلة
+\n
+\n • أندرويد أوتو: قائمة بدء جديدة للوصول إلى المفضلة والمسارات وفئات النقاط
+\n
+\n • قائمة واحدة من عناصرالويدجت للوحة العلوية / السفلية
+\n
+\n • ملف تعريف \"قطار\" جديد ، يسمح لحساب طرق السكك الحديدية
+\n
+\n • تعمل خطوط الكنتور مع أي \"مصدر خريطة\"
+\n
+\n • قائمة موسعة من الإجراءات الافتراضية للوحات المفاتيح الخارجية
+\n
+\n • ملفات التوجيه المخصصة ، إضافة خيارات للحذف أو الاستبدال
+\n
+\n • تمت إضافة خيار \"الإعلان عن الانحراف عن المسار\"
+\n
+\n • شاشة البدء: خيار مضاف لاستعادة حالة أوسماند من الملف
+\n
+\n • تمت إضافة فئات \"المواد الخطرة\" الخاصة بالشاحنات في أمريكا الشمالية
+\n
+\n • دعم إضافي لـ \"تسلق فراتا\" لتوجيه المشاة
+\n
+\n • تمت إضافة مقياس \"CAI\" لتصنيف صعوبة المسارات
+\n
+\n • تحديد لغة ثابتة لكل تطبيق
+\n
+\n • دعم إضافي للرموز ذات السمات
+\n
+\n • أوسماند كلاود: إضافة خيار حذف الحساب
+\n
+\n • إمكانية الوصول: تم تغيير حجم هدف اللمس للأزرار إلى 48 dp ؛ تم إصلاح المشكلة مع واجهة مستخدم الخريطة المرئية لقارئات الشاشة
+\n
+\n • تمت إعادة صياغة المطالبات الصوتية اليابانية
+\n
+\n • تغيير الارتفاع وإعادة صياغة تقييم الانحدار
+\n
+\n</string>
+    <string name="slope_legend_description">يستخدم الانحدار الألوان لتصور انحدار التضاريس. يمكنك قراءة المزيد عن المنحدرات في %1$s.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">استخدام طبقة للانحدار والتضاريس</string>
+    <string name="cache_size">حجم ذاكرة التخزين المؤقت</string>
+    <string name="shared_string_avoid">تجنب</string>
+    <string name="may_be_used_if_there_is_shortcut">يمكن استخدامه إذا كان هناك اختصار</string>
+    <string name="routing_attr_allow_via_ferrata_name">طريق سفح الجبل (عبر فيراتا)</string>
+    <string name="routing_attr_allow_via_ferrata_description">طريق جبلي مجهز بالكابلات الثابتة والمعابد والسلالم والجسور.</string>
 </resources>

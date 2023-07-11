@@ -15,6 +15,7 @@ public class PurchaseUiData {
 	private final String purchaseType;
 	private final long expireTime;
 	private final long purchaseTime;
+	private final boolean isFreeAccountSubscription;
 	private final boolean isSubscription;
 	private final boolean isLiveUpdateSubscription;
 	private final boolean isAutoRenewing;
@@ -26,7 +27,7 @@ public class PurchaseUiData {
 	                      @NonNull String purchaseType, long expireTime, long purchaseTime,
 	                      boolean isSubscription, boolean isLiveUpdateSubscription,
 	                      boolean isAutoRenewing, boolean isRenewVisible,
-	                      @NonNull SubscriptionState subscriptionState, @NonNull PurchaseOrigin origin) {
+	                      @NonNull SubscriptionState subscriptionState, @NonNull PurchaseOrigin origin, boolean isFreeAccountSubscription) {
 		this.sku = sku;
 		this.title = title;
 		this.iconId = iconId;
@@ -39,6 +40,7 @@ public class PurchaseUiData {
 		this.isRenewVisible = isRenewVisible;
 		this.subscriptionState = subscriptionState;
 		this.origin = origin;
+		this.isFreeAccountSubscription = isFreeAccountSubscription;
 	}
 
 	@NonNull
@@ -97,6 +99,10 @@ public class PurchaseUiData {
 
 	public boolean isPromo() {
 		return origin == PurchaseOrigin.PROMO;
+	}
+
+	public boolean isFreeAccountSubscription() {
+		return isFreeAccountSubscription;
 	}
 
 }

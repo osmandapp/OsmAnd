@@ -2,6 +2,8 @@ package net.osmand.router;
 
 import net.osmand.util.Algorithms;
 
+import java.util.LinkedHashSet;
+
 import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
@@ -19,6 +21,7 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
+	private static final int[] TURNS_ORDER = {TU, TSHL, TL, TSLL, C, TSLR, TR, TSHR, TRU};
 
 	public static TurnType straight() {
 		return valueOf(C, false);
@@ -485,7 +488,7 @@ public class TurnType {
 				|| TurnType.getTertiaryTurn(type) == turn;
 	}
 
-	public static void collectTurnTypes(int lane, TIntHashSet set) {
+	public static void collectTurnTypes(int lane, LinkedHashSet<Integer> set) {
 		int pt = TurnType.getPrimaryTurn(lane);
 		if(pt != 0) {
 			set.add(pt);
@@ -559,6 +562,91 @@ public class TurnType {
 		return turn;
 	}
 
-	
+	public static String convertLanesToOsmString(int[] lns, boolean onlyActive, boolean withCombine) {
+		if (lns != null && lns.length > 0) {
+			StringBuilder s = new StringBuilder();
+			int cnt = 0;
+			for (int h = 0; h < lns.length; h++) {
+				if (onlyActive && lns[h] % 2 == 0) {
+					continue;
+				}
+				int pt = TurnType.getPrimaryTurn(lns[h]);
+				if (pt == 0) {
+					pt = 1;
+				}
+				String primary = TurnType.valueOf(pt, false).toOsmString();
+				if (primary == null) {
+					// something wrong
+					return null;
+				}
+				if (cnt > 0) {
+					s.append("|");
+				}
+				s.append(primary);
+				if (withCombine) {
+					int st = TurnType.getSecondaryTurn(lns[h]);
+					int tt = TurnType.getTertiaryTurn(lns[h]);
+					if (st != 0) {
+						s.append(";").append(TurnType.valueOf(st, false).toOsmString());
+					}
+					if (tt != 0) {
+						s.append(";").append(TurnType.valueOf(tt, false).toOsmString());
+					}
+				}
+				cnt++;
+			}
+			String result = s.toString();
+			if (!result.isEmpty()) {
+				return result;
+			}
+		}
+		return null;
+	}
 
+	private String toOsmString() {
+		switch (value) {
+			case KL:
+			case KR:
+			case C:
+				return "through";
+			case TL:
+				return "left";
+			case TSLL:
+				return "slight_left";
+			case TSHL:
+				return "sharp_left";
+			case TR:
+				return "right";
+			case TSLR:
+				return "slight_right";
+			case TSHR:
+				return "sharp_right";
+			case TU:
+			case TRU:
+				return "reverse";
+			default:
+				return null;
+		}
+	}
+
+	
+	public static int getPrev(int turn) {
+		for (int i = TURNS_ORDER.length - 1; i >= 0; i--) {
+			int t = TURNS_ORDER[i];
+			if (t == turn && i > 0) {
+				return TURNS_ORDER[i - 1];
+			}
+		}
+		return turn;
+	}
+
+	public static int getNext(int turn) {
+		for (int i = 0; i < TURNS_ORDER.length; i++) {
+			int t = TURNS_ORDER[i];
+			if (t == turn && i + 1 < TURNS_ORDER.length) {
+				return TURNS_ORDER[i + 1];
+			}
+		}
+		return turn;
+	}
 }

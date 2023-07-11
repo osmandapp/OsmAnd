@@ -4,7 +4,10 @@ import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
+import androidx.car.app.model.CarIcon
+import androidx.core.graphics.drawable.IconCompat
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
 import net.osmand.search.core.SearchResult
 
 abstract class BaseOsmAndAndroidAutoScreen(carContext: CarContext) : Screen(carContext) {
@@ -54,6 +57,24 @@ abstract class BaseOsmAndAndroidAutoScreen(carContext: CarContext) : Screen(carC
         val session = app.carNavigationSession
         if (session != null && session.hasStarted()) {
             session.startNavigation()
+        }
+    }
+
+    protected fun createSearchAction() = Action.Builder()
+        .setIcon(
+            CarIcon.Builder(
+                IconCompat.createWithResource(
+                    carContext, R.drawable.ic_action_search_dark)).build())
+        .setOnClickListener { openSearch() }
+        .build()
+
+    private fun openSearch() {
+        app.carNavigationSession?.let { navigationSession ->
+            screenManager.pushForResult(
+                SearchScreen(
+                    carContext,
+                    navigationSession.settingsAction,
+                    navigationSession.navigationCarSurface)) { _: Any? -> }
         }
     }
 

@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -38,7 +37,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -51,13 +49,9 @@ import java.util.List;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
-	private final StateChangedListener<Boolean> disableVertexHillshade3DListener;
-	private final StateChangedListener<Boolean> generateSlopeFrom3DMapsListener;
-	private final StateChangedListener<Boolean> generateHillshadeFrom3DMapsListener;
+	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 
-	public final OsmandPreference<Boolean> DISABLE_VERTEX_HILLSHADE_3D;
-	public final OsmandPreference<Boolean> GENERATE_SLOPE_FROM_3D_MAPS;
-	public final OsmandPreference<Boolean> GENERATE_HILLSHADE_FROM_3D_MAPS;
+	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -69,33 +63,22 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_ZOOM_LEVEL, noAppMode);
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
-		DISABLE_VERTEX_HILLSHADE_3D = registerBooleanPreference("disable_vertex_hillshade_3d", true).makeGlobal().makeShared().cache();
-		GENERATE_SLOPE_FROM_3D_MAPS = registerBooleanPreference("generate_slope_from_3d_maps", true).makeGlobal().makeShared().cache();
-		GENERATE_HILLSHADE_FROM_3D_MAPS = registerBooleanPreference("generate_hillshade_from_3d_maps", true).makeGlobal().makeShared().cache();
+		pluginPreferences.add(settings.SAFE_MODE);
+		pluginPreferences.add(settings.APPROX_SAFE_MODE);
+		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
+		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);
+		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
+		pluginPreferences.add(settings.MEMORY_ALLOCATED_FOR_ROUTING);
 
-		disableVertexHillshade3DListener = change -> {
-			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-			if (mapRendererContext != null) {
-				mapRendererContext.updateElevationConfiguration();
+		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
+
+		useRasterSQLiteDbListener = change -> {
+			SRTMPlugin plugin = getSrtmPlugin();
+			if (plugin != null && plugin.isTerrainLayerEnabled() && (plugin.isHillshadeMode() || plugin.isSlopeMode())) {
+				plugin.updateLayers(app, null);
 			}
 		};
-		DISABLE_VERTEX_HILLSHADE_3D.addListener(disableVertexHillshade3DListener);
-
-		generateSlopeFrom3DMapsListener = change -> {
-			SRTMPlugin srtmPlugin = getSrtmPlugin();
-			if (srtmPlugin != null && srtmPlugin.isTerrainLayerEnabled() && srtmPlugin.isSlopeMode()) {
-				srtmPlugin.updateLayers(app, null);
-			}
-		};
-		GENERATE_SLOPE_FROM_3D_MAPS.addListener(generateSlopeFrom3DMapsListener);
-
-		generateHillshadeFrom3DMapsListener = change -> {
-			SRTMPlugin srtmPlugin = getSrtmPlugin();
-			if (srtmPlugin != null && srtmPlugin.isTerrainLayerEnabled() && srtmPlugin.isHillshadeMode()) {
-				srtmPlugin.updateLayers(app, null);
-			}
-		};
-		GENERATE_HILLSHADE_FROM_3D_MAPS.addListener(generateHillshadeFrom3DMapsListener);
+		USE_RASTER_SQLITEDB.addListener(useRasterSQLiteDbListener);
 	}
 
 	@Override
@@ -228,16 +211,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return isHeightmapAllowed() && settings.ENABLE_3D_MAPS.get();
 	}
 
-	public boolean disableVertexHillshade3D() {
-		return isHeightmapAllowed() && DISABLE_VERTEX_HILLSHADE_3D.get();
-	}
-
-	public boolean generateSlopeFrom3DMaps() {
-		return isHeightmapAllowed() && GENERATE_SLOPE_FROM_3D_MAPS.get();
-	}
-
-	public boolean generateHillshadeFrom3DMaps() {
-		return isHeightmapAllowed() && GENERATE_HILLSHADE_FROM_3D_MAPS.get();
+	public boolean generateTerrainFrom3DMaps() {
+		return isHeightmapAllowed() && !USE_RASTER_SQLITEDB.get();
 	}
 
 	public boolean isHeightmapAllowed() {

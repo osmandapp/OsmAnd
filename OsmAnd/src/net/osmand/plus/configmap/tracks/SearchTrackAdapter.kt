@@ -103,7 +103,7 @@ class SearchTracksAdapter(
             }
             TracksAdapter.TYPE_NO_TRACKS -> {
                 val view = inflater.inflate(R.layout.track_folder_empty_state, parent, false)
-                EmptyTracksViewHolder(view, emptyTracksListener, nightMode)
+                EmptyTracksViewHolder(view, emptyTracksListener)
             }
             TYPE_NO_FOUND_TRACKS -> {
                 val view = inflater.inflate(R.layout.empty_search_results, parent, false)

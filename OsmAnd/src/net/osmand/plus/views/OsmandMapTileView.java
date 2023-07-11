@@ -582,7 +582,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setRotate(float rotate, boolean force) {
-		if (multiTouch) {
+		if (multiTouch || Float.isNaN(rotate)) {
 			return;
 		}
 		float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
@@ -1806,7 +1806,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener, DoubleTapZoomListener {
 
 		private static final float ZONE_0_ANGLE_THRESHOLD = 5;
-		private static final float ZONE_1_ANGLE_THRESHOLD = 15;
+		private static final float ZONE_1_ANGLE_THRESHOLD = 20;
 		private static final float ZONE_2_ANGLE_THRESHOLD = 30;
 		private static final float ZONE_3_ANGLE_THRESHOLD = 60;
 		private static final float ZONE_0_ZOOM_THRESHOLD = 0.15f;
