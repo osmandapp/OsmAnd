@@ -58,7 +58,7 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 
 			File internalFile = fileHelper.getInternalFile();
 			GPXFile gpxFile = GPXUtilities.loadGPXFile(internalFile);
-			if (gpxFile.error != null) {
+			if (gpxFile.error == null) {
 				fileHelper.collectFavoriteGroups(gpxFile, deletedGroups);
 			}
 			// Get all points from internal file to filter later
