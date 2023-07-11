@@ -369,7 +369,7 @@
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">A mozgás irányába</string>
-    <string name="rotate_map_north_opt">Rögzített (észak felül)</string>
+    <string name="rotate_map_north_opt">Észak felül</string>
     <string name="rotate_map_to_descr">Térkép igazítása:</string>
     <string name="rotate_map_to">Térkép forgatása</string>
     <string name="show_route">Útvonal részletei</string>
@@ -4760,7 +4760,7 @@
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció megjelenítése</string>
-    <string name="rotate_map_manual_opt">Rögzített (kézzel forgatva)</string>
+    <string name="rotate_map_manual_opt">Kézzel forgatva</string>
     <string name="shared_string_large">Nagy</string>
     <string name="how_to_use">Használat:</string>
     <string name="shared_string_normal">Normál</string>
@@ -5311,4 +5311,8 @@
     <string name="cache_size">Gyorsítótár méret</string>
     <string name="shared_string_avoid">Elkerülés</string>
     <string name="free_settings_backup">Beállítások ingyenes lementése</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Lejtéshez / domborzatárnyékoláshoz sqltiedb raszter használata</string>
+    <string name="may_be_used_if_there_is_shortcut">Használható, ha van parancsikon</string>
+    <string name="routing_attr_allow_via_ferrata_description">Hegyi útvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Hegyoldali útvonal (via ferrata)</string>
 </resources>
