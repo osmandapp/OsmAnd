@@ -1618,7 +1618,7 @@
     <string name="poi_diet_vegetarian_only">Samo za vegetarijance</string>
     <string name="poi_diet_vegan_filter_yes">Veganski</string>
     <string name="poi_diet_vegetarian_few">Vegetarijanski (nekaj)</string>
-    <string name="poi_second_hand_yes">Rabljeno blago</string>
+    <string name="poi_second_hand_yes">Da</string>
     <string name="poi_second_hand_no">Brez rabljenega blaga</string>
     <string name="poi_automated_yes">Da;Avtomatsko</string>
     <string name="poi_brushless_yes">Da;Brezkrtačni</string>
@@ -1970,7 +1970,7 @@
     <string name="poi_drive_through_yes">Da;Drive through</string>
     <string name="poi_microbrewery_yes">Da;Mikropivovarna</string>
     <string name="poi_takeaway_filter_yes">Da;S seboj</string>
-    <string name="poi_second_hand_only">Samo rabljeno blago</string>
+    <string name="poi_second_hand_only">Samo</string>
     <string name="poi_service_parts">Deli</string>
     <string name="poi_service_repair">Popravilo</string>
     <string name="poi_service_repair_no">Brez popravila</string>
@@ -4550,4 +4550,6 @@
     <string name="poi_barrier_coupure">Coupure pregrada</string>
     <string name="poi_toy_library">Knjižnica z igračami</string>
     <string name="poi_cemt">CEMT</string>
+    <string name="poi_vending_machine_fuel_filter">Avtomatske točilne naprave za gorivo;Avtomat za gorivo</string>
+    <string name="poi_second_hand_filter">Rabljeno blago</string>
 </resources>
