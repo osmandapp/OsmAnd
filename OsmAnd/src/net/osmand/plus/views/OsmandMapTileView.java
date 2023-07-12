@@ -1431,11 +1431,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (canChange) {
 				if (startZooming) {
 					float zoomShift = (float) zoomAndRotation.getX();
-					Zoom zoom = new Zoom(currentViewport.getZoom(), (float) currentViewport.getZoomFloatPart(), getMinZoom(), getMaxZoom());
+					float currentZoomFloatPart = (float) (currentViewport.getZoomFloatPart() + currentViewport.getZoomAnimation());
+					Zoom zoom = new Zoom(currentViewport.getZoom(), currentZoomFloatPart, getMinZoom(), getMaxZoom());
 					zoom.calculateAnimatedZoom(currentViewport.getZoom(), zoomShift);
 					int zoomLevel = zoom.getBaseZoom();
 					double zoomAnimation = zoom.getZoomAnimation();
-					double zoomFloatPart = currentViewport.getZoomFloatPart();
+					double zoomFloatPart = zoom.getZoomFloatPart();
 
 					float finalZoomFloatPart = (float) (zoomAnimation + zoomFloatPart);
 					float visualZoom = finalZoomFloatPart >= 0
@@ -1445,7 +1446,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					float zoomMagnifier = application.getOsmandMap().getMapDensity();
 					mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 
-					currentViewport.setZoomAndAnimation(zoomLevel, 0.0, finalZoomFloatPart);
+					currentViewport.setZoomAndAnimation(zoomLevel, zoomAnimation, zoomFloatPart);
 				}
 				if (startRotating) {
 					float angleShift = (float) zoomAndRotation.getY();
@@ -1830,21 +1831,30 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
 			MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 			MapRendererView mapRenderer = getMapRenderer();
-			boolean finished = mapRenderer != null && (layer == null || !layer.isInMeasurementMode());
-			// 1.5 works better even on dm.density=1 devices
-			if (!finished)
-				finishPinchZoom();
+			boolean completedAnimation = mapRenderer != null && (layer == null || !layer.isInMeasurementMode());
+			int newIntZoom = getZoom();
+
+			if (completedAnimation) {
+				float newZoomFloatPart = isSteplessZoomSupported()
+						? (float) (currentViewport.getZoomAnimation() + currentViewport.getZoomFloatPart())
+						: 0.0f;
+				currentViewport.setZoomAndAnimation(newIntZoom, 0.0, newZoomFloatPart);
+				refreshMap();
+			} else {
+				finishZoomAndRotationGesture();
+			}
+
 			if (startRotating) {
-				if (!finished)
+				if (!completedAnimation) {
 					rotateToAnimate(initialViewport.getRotate() + angleRelative);
+				}
 				if (angleRelative != 0) {
 					application.getMapViewTrackingUtilities().checkAndUpdateManualRotationMode();
 				}
 			}
-			int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
-				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom);
+				if (newIntZoom != initialViewport.getZoom()) {
+					showMessage(application.getString(R.string.zoomIs) + " " + newIntZoom);
 				} else {
 					LatLon p1 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x1, y1);
 					LatLon p2 = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport, x2, y2);
@@ -1857,7 +1867,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onZoomEnded(double relativeToStart) {
 			// 1.5 works better even on dm.density=1 devices
-			finishPinchZoom();
+			finishZoomAndRotationGesture();
 			int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
@@ -2053,7 +2063,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			prevAngle = angle;
 		}
 
-		public void finishPinchZoom() {
+		public void finishZoomAndRotationGesture() {
 			double newZoomFloatPart = isSteplessZoomSupported()
 					? currentViewport.getZoomAnimation() + currentViewport.getZoomFloatPart()
 					: 0;
