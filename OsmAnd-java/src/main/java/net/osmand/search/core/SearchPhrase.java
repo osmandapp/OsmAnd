@@ -172,6 +172,7 @@ public class SearchPhrase {
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
 		List<SearchWord> foundWords = new ArrayList<>();
+		thisTxt = Algorithms.normalizeSearchText(thisTxt);
 		if (textToSearch.startsWith(thisTxt)) {
 			// string is longer
 			textToSearch = textToSearch.substring(getText(false).length());
