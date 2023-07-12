@@ -213,6 +213,10 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 			this.showTwoFingersDistance = showTwoFingersDistance;
 			this.showDistBetweenFingerAndLocation = showDistBetweenFingerAndLocation;
+		} else {
+			if (hasMapRenderer) {
+				hideDistanceRulerOpenGl();
+			}
 		}
 	}
 
@@ -325,9 +329,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		boolean clearMyLocationDistance = disableMyLocationDistance || updateMyLocationDistance;
 
 		if (clearTwoFingersDistance || clearMyLocationDistance) {
-			clearVectorLinesCollection();
-			clearMapMarkersCollections();
-			linePath.reset();
+			hideDistanceRulerOpenGl();
 		}
 
 		cachedNightMode = nightMode;
@@ -456,6 +458,12 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 		linePath.reset();
 		GeometryWay.calculatePath(tileBox, tx, ty, linePath);
+	}
+
+	private void hideDistanceRulerOpenGl() {
+		clearVectorLinesCollection();
+		clearMapMarkersCollections();
+		linePath.reset();
 	}
 
 	@Override
