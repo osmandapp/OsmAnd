@@ -5310,7 +5310,6 @@
     <string name="backup_error_delete_account_email_match">E-pošta se ne ujema z uporabniškim imenom za prijavo</string>
     <string name="slope_legend_description">Naklon uporablja barve za prikaz strmine terena. Več o naklonu lahko prebereš v %1$s.</string>
     <string name="terrain_category_description">Izohipse terena, popoln zemljevid senčenja terena s temnimi odtenki, in zemljevidi naklonov z barvami, ki prikazujejo vrhove in nižine.</string>
-    <string name="free_mode">Brezplačni način</string>
     <string name="terrain_map">Zemljevid terena</string>
     <string name="verify_account_deletion_descr">Tvoj račun moramo preveriti, preden ga izbrišemo.
 \n

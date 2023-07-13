@@ -5252,7 +5252,6 @@
     <string name="power_watts_unit">Vatios (watts)</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
-    <string name="free_mode">Modo libre</string>
     <string name="terrain_map">Mapa topográfico</string>
     <string name="relief_3d">Relieve 3D</string>
     <string name="relief_3d_description">Obtén y observa el modelo a escala de tu barrio o de todo el continente.</string>

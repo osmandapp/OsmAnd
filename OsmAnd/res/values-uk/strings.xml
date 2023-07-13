@@ -5247,7 +5247,6 @@
     <string name="shared_string_close_the_dialog">Закрити діалогове вікно</string>
     <string name="terrain_map">Мапа рельєфу</string>
     <string name="relief_3d">3D-рельєф</string>
-    <string name="free_mode">Вільний режим</string>
     <string name="relief_3d_description">Придбайте та спостерігайте за масштабною моделлю вашого району або цілого континенту.</string>
     <string name="terrain_category_description">Ізолінії рельєфу, повноколірне затінення рельєфу та мапи схилів в кольорах для показу вершин та низин.</string>
     <string name="slope_legend_description">Мапа схилів використовує кольори для візуалізації крутості рельєфу. Ви можете прочитати більше про мапу схилів у %1$s.</string>

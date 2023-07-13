@@ -5231,7 +5231,6 @@
     <string name="shared_string_close_the_dialog">關閉對話方塊</string>
     <string name="terrain_map">地形圖</string>
     <string name="relief_3d">3D 地形圖</string>
-    <string name="free_mode">免費模式</string>
     <string name="relief_3d_description">你的社區或是整個大陸的擁有與觀察的縮放尺度。</string>
     <string name="terrain_category_description">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
     <string name="slope_legend_description">斜率使用顏色來視覺化地形的坡度。您可以在 %1$s 中取得更多關於斜率的資訊。</string>

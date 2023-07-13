@@ -5246,7 +5246,6 @@
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort</string>
     <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
-    <string name="free_mode">Fri tilstand</string>
     <string name="terrain_category_description">Terrænkonturlinjer, fuldt terrænskyggekort med mørke nuancer og hældningskort med farver til at vise toppe og lavland.</string>
     <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældninger i %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.

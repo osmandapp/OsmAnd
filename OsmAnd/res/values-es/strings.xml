@@ -5238,7 +5238,6 @@
     <string name="power_watts_unit">Vatios</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
-    <string name="free_mode">Modo libre</string>
     <string name="relief_3d">Relieve en 3D</string>
     <string name="terrain_map">Mapa del terreno</string>
     <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>

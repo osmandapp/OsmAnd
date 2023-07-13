@@ -5236,7 +5236,6 @@
     <string name="external_sensors_source_of_data">Źródło danych</string>
     <string name="power_watts_unit">Watów</string>
     <string name="revolutions_per_minute_unit">obr./min</string>
-    <string name="free_mode">Tryb swobodny</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Mapa terenu</string>
     <string name="save_track_external_sensors_data">Dane</string>
