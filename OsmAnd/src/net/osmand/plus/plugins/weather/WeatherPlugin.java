@@ -33,7 +33,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -129,6 +128,10 @@ public class WeatherPlugin extends OsmandPlugin {
 				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
 					updateMapPresentationEnvironment();
 					updateLayers(app, null);
+
+					if (weatherHelper.shouldUpdateForecastCache()) {
+						weatherHelper.updateForecastCache();
+					}
 				} else if (event == InitEvents.INDEX_REGION_BOUNDARIES) {
 					clearOutdatedCache();
 				}
@@ -150,6 +153,10 @@ public class WeatherPlugin extends OsmandPlugin {
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		if (!app.getAppInitializer().isAppInitializing()) {
 			updateMapPresentationEnvironment();
+
+			if (weatherHelper.shouldUpdateForecastCache()) {
+				weatherHelper.updateForecastCache();
+			}
 		}
 		return super.init(app, activity);
 	}
@@ -551,16 +558,7 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
 		if (item.getType() == WEATHER_FORECAST) {
-			updateForecastCache(item.getTargetFile(app).getAbsolutePath());
+			weatherHelper.updateForecastCache(item.getTargetFile(app).getAbsolutePath());
 		}
-	}
-
-	private void updateForecastCache(@NonNull String filePath) {
-		boolean updateForecastCache = false;
-		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
-		if (resourcesManager != null) {
-			updateForecastCache = resourcesManager.importDbCache(filePath);
-		}
-		log.debug("updateForecastCache " + updateForecastCache);
 	}
 }

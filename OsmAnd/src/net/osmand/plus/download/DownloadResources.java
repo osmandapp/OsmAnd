@@ -155,6 +155,8 @@ public class DownloadResources extends DownloadResourceGroup {
 				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexActivatedFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
 				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexActivatedFileNames);
+		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WEATHER_FORECAST_DIR),
+				IndexConstants.WEATHER_EXT, indexActivatedFileNames);
 
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
@@ -167,8 +169,6 @@ public class DownloadResources extends DownloadResourceGroup {
 				IndexConstants.HEIGHTMAP_SQLITE_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.GEOTIFF_DIR),
 				IndexConstants.TIF_EXT, indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WEATHER_FORECAST_DIR),
-				IndexConstants.WEATHER_EXT, indexFileNames);
 
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
@@ -213,6 +213,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.DEPTH_MAP_FILE
+					|| item.getType() == DownloadActivityType.WEATHER_FORECAST
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
 			} else if (item.getType() == DownloadActivityType.WIKIVOYAGE_FILE
