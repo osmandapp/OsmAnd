@@ -41,7 +41,8 @@ public class IndexConstants {
 	public static final String DOWNLOAD_EXT = ".download";
 	public static final String TIF_EXT = ".tif";
 	public static final String TIFF_DB_EXT = ".tiff.db";
-	public static final String WEATHER_EXT = "_weather";
+	public static final String WEATHER_EXT = ".tifsqlite";
+	public static final String WEATHER_MAP_INDEX_EXT = ".tifsqlite.zip";
 
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip";
 	public static final String TTSVOICE_INDEX_EXT_JS = "tts.js";

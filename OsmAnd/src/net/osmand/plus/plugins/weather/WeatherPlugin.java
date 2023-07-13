@@ -4,6 +4,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FOR
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
+import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
@@ -42,7 +43,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
@@ -127,6 +128,10 @@ public class WeatherPlugin extends OsmandPlugin {
 				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
 					updateMapPresentationEnvironment();
 					updateLayers(app, null);
+
+					if (weatherHelper.shouldUpdateForecastCache()) {
+						weatherHelper.updateForecastCache();
+					}
 				} else if (event == InitEvents.INDEX_REGION_BOUNDARIES) {
 					clearOutdatedCache();
 				}
@@ -148,6 +153,10 @@ public class WeatherPlugin extends OsmandPlugin {
 	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		if (!app.getAppInitializer().isAppInitializing()) {
 			updateMapPresentationEnvironment();
+
+			if (weatherHelper.shouldUpdateForecastCache()) {
+				weatherHelper.updateForecastCache();
+			}
 		}
 		return super.init(app, activity);
 	}
@@ -547,8 +556,9 @@ public class WeatherPlugin extends OsmandPlugin {
 		return hasCustomForecast() && layer instanceof DownloadedRegionsLayer;
 	}
 
-	@Override
-	public void addPluginIndexItems(@NonNull IndexFileList indexes) {
-		weatherHelper.getOfflineForecastHelper().addWeatherIndexItems(indexes);
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+		if (item.getType() == WEATHER_FORECAST) {
+			weatherHelper.updateForecastCache(item.getTargetFile(app).getAbsolutePath());
+		}
 	}
 }

@@ -1,6 +1,10 @@
 package net.osmand.plus.download;
 
 
+import static net.osmand.IndexConstants.WEATHER_EXT;
+import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WEATHER_DATA;
+
 import android.content.Context;
 
 import androidx.annotation.DrawableRes;
@@ -101,6 +105,8 @@ public class LocalIndexHelper {
 			info.setDescription(getInstalledDate(file));
 		} else if (info.getType() == LocalIndexType.DEPTH_DATA) {
 			info.setDescription(getInstalledDate(file));
+		} else if (info.getType() == WEATHER_DATA) {
+			info.setDescription(getInstalledDate(file));
 		}
 	}
 
@@ -136,6 +142,9 @@ public class LocalIndexHelper {
 			fileDir = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
+		} else if (type == WEATHER_DATA) {
+			fileDir = app.getAppPath(WEATHER_FORECAST_DIR);
+			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + WEATHER_EXT;
 		}
 
 		if (backuped) {
@@ -176,6 +185,10 @@ public class LocalIndexHelper {
 		if (info != null) {
 			list.add(info);
 		}
+		info = getLocalIndexInfo(WEATHER_DATA, downloadName, false, false);
+		if (info != null) {
+			list.add(info);
+		}
 		info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, true);
 		if (info != null) {
 			list.add(info);
@@ -193,6 +206,10 @@ public class LocalIndexHelper {
 			list.add(info);
 		}
 		info = getLocalIndexInfo(LocalIndexType.DEPTH_DATA, downloadName, false, true);
+		if (info != null) {
+			list.add(info);
+		}
+		info = getLocalIndexInfo(WEATHER_DATA, downloadName, false, true);
 		if (info != null) {
 			list.add(info);
 		}
@@ -257,6 +274,10 @@ public class LocalIndexHelper {
 				case DEPTH_DATA:
 					loadDepthData(app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR), result, false, readFiles,
 							needDescription, indexFiles, loadTask);
+					break;
+				case WEATHER_DATA:
+					loadDataImpl(app.getAppPath(WEATHER_FORECAST_DIR), WEATHER_DATA, WEATHER_EXT,
+							false, readFiles, needDescription, result, indexFiles, loadTask);
 					break;
 			}
 		}
@@ -495,6 +516,7 @@ public class LocalIndexHelper {
 		DEPTH_DATA(R.string.nautical_depth, R.drawable.ic_action_nautical_depth, 45),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
+		WEATHER_DATA(R.string.weather_forecast, R.drawable.ic_action_umbrella, 65),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
 		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
