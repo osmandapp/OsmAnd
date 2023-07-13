@@ -64,7 +64,7 @@
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
     <string name="type_address">Введите адрес</string>
-    <string name="type_city_town">Город/место/район</string>
+    <string name="type_city_town">Город / населённый пункт</string>
     <string name="type_postcode">Введите почтовый индекс</string>
     <string name="nearest_cities">Ближайшие города</string>
     <string name="select_city">Выберите город</string>
@@ -982,7 +982,7 @@
     <string name="pref_raster_map">Настройки онлайн-карт</string>
     <string name="pref_vector_map">Настройки локальных карт</string>
     <string name="delete_confirmation_msg">Удалить %1$s?</string>
-    <string name="city_type_suburb">Пригород</string>
+    <string name="city_type_suburb">Район</string>
     <string name="city_type_hamlet">Деревня</string>
     <string name="city_type_village">Село</string>
     <string name="city_type_town">Город</string>
