@@ -5234,7 +5234,6 @@
     <string name="relief_3d">3D domborzat</string>
     <string name="terrain_map">Terep térkép</string>
     <string name="relief_3d_description">Birtokolja és figyelje meg környéke vagy akár az egész kontinens méretarányos modelljét.</string>
-    <string name="free_mode">Szabad mód</string>
     <string name="slope_legend_description">A lejtés színekkel jelzi a terep meredekségét. A lejtési viszonyokról bővebben itt olvashat: %1$s.</string>
     <string name="terrain_category_description">Szintvonalak, teljes domborzatárnyékolási térkép sötét árnyalatokkal és lejtési viszonyokat ábrázoló térképek, amelyek színekkel jelzik a csúcsokat és alföldeket.</string>
     <string name="shared_string_deleting">Törlés folyamatban</string>

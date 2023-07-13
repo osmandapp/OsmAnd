@@ -5162,6 +5162,5 @@
     <string name="rendering_value_caiScale_name">CAI-kvarði</string>
     <string name="map_3d_mode_action">3D-þrívíddarhamur</string>
     <string name="shared_string_close_the_dialog">Loka glugganum</string>
-    <string name="free_mode">Frjáls hamur</string>
     <string name="external_sensors_source_of_data">Uppruni gagna</string>
 </resources>

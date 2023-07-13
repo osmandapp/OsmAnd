@@ -185,6 +185,13 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		// Set the action strip.
 		ActionStrip.Builder actionStripBuilder = new ActionStrip.Builder();
 		updateCompass();
+		if (!navigating) {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_list_flat)).build())
+							.setOnClickListener(this::goBack)
+							.build());
+		}
 		actionStripBuilder.addAction(
 				new Action.Builder()
 						.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), compassResId)).build())
@@ -196,12 +203,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 					new Action.Builder()
 							.setTitle(getApp().getString(R.string.shared_string_control_stop))
 							.setOnClickListener(this::stopNavigation)
-							.build());
-		} else {
-			actionStripBuilder.addAction(
-					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_actions_menu)).build())
-							.setOnClickListener(this::goBack)
 							.build());
 		}
 		builder.setActionStrip(actionStripBuilder.build());
@@ -339,6 +340,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 
 	private void compassClick() {
 		getApp().getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
+		invalidate();
 	}
 
 	private void goBack() {

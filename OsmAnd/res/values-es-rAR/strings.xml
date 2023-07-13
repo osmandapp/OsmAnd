@@ -5254,7 +5254,6 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
     <string name="terrain_map">Mapa topográfico</string>
-    <string name="free_mode">Modo libre</string>
     <string name="relief_3d">Relieve 3D</string>
     <string name="relief_3d_description">Obtén y observa el modelo a escala de tu barrio o de todo el continente.</string>
     <string name="deleting_complete">Borrado completo</string>
