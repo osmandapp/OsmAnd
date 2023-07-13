@@ -4,6 +4,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FOR
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
+import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
@@ -32,6 +33,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -42,7 +44,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand.WeatherBandType;
@@ -547,8 +549,18 @@ public class WeatherPlugin extends OsmandPlugin {
 		return hasCustomForecast() && layer instanceof DownloadedRegionsLayer;
 	}
 
-	@Override
-	public void addPluginIndexItems(@NonNull IndexFileList indexes) {
-		weatherHelper.getOfflineForecastHelper().addWeatherIndexItems(indexes);
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+		if (item.getType() == WEATHER_FORECAST) {
+			updateForecastCache(item.getTargetFile(app).getAbsolutePath());
+		}
+	}
+
+	private void updateForecastCache(@NonNull String filePath) {
+		boolean updateForecastCache = false;
+		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
+		if (resourcesManager != null) {
+			updateForecastCache = resourcesManager.importDbCache(filePath);
+		}
+		log.debug("updateForecastCache " + updateForecastCache);
 	}
 }

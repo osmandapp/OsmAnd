@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTION_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
@@ -675,5 +676,22 @@ public class SRTMPlugin extends OsmandPlugin {
 		String attrName = property.getAttrName();
 		String defValue = CONTOUR_LINES_ATTR.equals(attrName) ? CONTOUR_LINES_DISABLED_VALUE : "";
 		return registerRenderingPreference(attrName, defValue);
+	}
+
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+		if (item.getType() == GEOTIFF_FILE) {
+			updateHeightmap(updatingFile, item.getTargetFile(app).getAbsolutePath());
+		}
+	}
+
+	private void updateHeightmap(boolean overwriteExistingFile, @NonNull String filePath) {
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			if (overwriteExistingFile) {
+				mapRendererContext.removeCachedHeightmapTiles(filePath);
+			} else {
+				mapRendererContext.updateCachedHeightmapTiles();
+			}
+		}
 	}
 }

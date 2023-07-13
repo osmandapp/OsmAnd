@@ -22,7 +22,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
@@ -31,15 +30,13 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DatabaseHelper.HistoryDownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
+import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.weather.OfflineForecastHelper;
-import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -284,12 +281,7 @@ public class DownloadIndexesThread {
 
 	public void cancelDownload(IndexItem item, boolean forceUpdateProgress) {
 		app.logMapDownloadEvent("cancel", item);
-		if (item instanceof WeatherIndexItem) {
-			cancelWeatherDownload((WeatherIndexItem) item);
-			if (forceUpdateProgress) {
-				downloadInProgress();
-			}
-		} else if (isCurrentDownloading(item)) {
+		if (isCurrentDownloading(item)) {
 			downloadFileHelper.setInterruptDownloading(true);
 		} else {
 			indexItemDownloading.remove(item);
@@ -297,14 +289,6 @@ public class DownloadIndexesThread {
 				downloadInProgress();
 			}
 		}
-	}
-
-	private void cancelWeatherDownload(@NonNull WeatherIndexItem weatherIndexItem) {
-		if (!isCurrentDownloading(weatherIndexItem)) {
-			indexItemDownloading.remove(weatherIndexItem);
-		}
-		OfflineForecastHelper helper = app.getOfflineForecastHelper();
-		helper.checkAndStopWeatherDownload(weatherIndexItem);
 	}
 
 	public boolean isCurrentDownloading(@NonNull DownloadItem downloadItem) {
@@ -387,7 +371,6 @@ public class DownloadIndexesThread {
 				while (app.isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
-				PluginsHelper.addPluginIndexItems(indexFileList);
 				result = new DownloadResources(app);
 				result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
 				result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
@@ -535,9 +518,8 @@ public class DownloadIndexesThread {
 								File oldFile = new File(folder, fileName);
 								Algorithms.removeAllFiles(oldFile);
 							}
-							if (item.getType() == DownloadActivityType.GEOTIFF_FILE) {
-								updateHeightmap(updatingFile, item.getTargetFile(app).getAbsolutePath());
-							}
+							PluginsHelper.onIndexItemDownloaded(item, updatingFile);
+
 							File bf = item.getBackupFile(app);
 							if (bf.exists()) {
 								Algorithms.removeAllFiles(bf);
@@ -619,17 +601,6 @@ public class DownloadIndexesThread {
 			return null;
 		}
 
-		private void updateHeightmap(boolean overwriteExistingFile, @NonNull String filePath) {
-			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-			if (mapRendererContext != null) {
-				if (overwriteExistingFile) {
-					mapRendererContext.removeCachedHeightmapTiles(filePath);
-				} else {
-					mapRendererContext.updateCachedHeightmapTiles();
-				}
-			}
-		}
-
 		@Override
 		public void showWarning(String warning) {
 			publishProgress(warning);
@@ -638,13 +609,10 @@ public class DownloadIndexesThread {
 		public boolean downloadFile(IndexItem item, List<File> filesToReindex, boolean forceWifi)
 				throws InterruptedException {
 			downloadFileHelper.setInterruptDownloading(false);
-			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
+			DownloadEntry de = item.createDownloadEntry(app);
 			boolean result = false;
 			if (de == null) {
 				return false;
-			} else if (de.isWeather) {
-				OfflineForecastHelper offlineForecastHelper = app.getOfflineForecastHelper();
-				result = offlineForecastHelper.downloadForecastByRegion(de.worldRegion, this);
 			} else if (de.isAsset) {
 				try {
 					if (ctx != null) {
