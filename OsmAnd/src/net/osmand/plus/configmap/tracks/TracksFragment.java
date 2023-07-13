@@ -596,7 +596,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		PopUpMenu.showSystemMenu(displayData);
+		PopUpMenu.show(displayData);
 	}
 
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
