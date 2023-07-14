@@ -4686,7 +4686,7 @@
     <string name="temperature_widget_desc">Zobrazuje teplotu pro aktuální střed mapy.</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="show_map_symbols_desc">Text, dopravní značky a další.</string>
-    <string name="purchases_feature_desc_external_sensors">Zobrazení a záznam dat z externích snímačů: rychlost kola, výkon kola, kadence a tepová frekvence.</string>
+    <string name="purchases_feature_desc_external_sensors">Zobrazení a záznam dat z externích senzorů: rychlost kola, výkon kola, kadence a tepová frekvence.</string>
     <string name="release_4_3">- Nový, rychlejší engine pro vykreslování map verze 2 (OpenGL) se zobrazením 2,5D
 \n
 \n - Plynulá animace změn polohy při pohybu
@@ -4703,7 +4703,7 @@
 \n
 \n - Reorganizace seznamu \"Námořní mapy\"
 \n
-\n - Přidána podpora pro snímače ANT+
+\n - Přidána podpora pro senzory ANT+
 \n
 \n - Přidána možnost zakázat stahování UUID
 \n
@@ -4729,7 +4729,7 @@
     <string name="speak_route_recalculation">Oznámení o přepočtu trasy</string>
     <string name="weather_wind_knots">Uzlech</string>
     <string name="weather_wind_miles_per_hour">mílích za hodinu</string>
-    <string name="external_sensors_support">Podpora externích snímačů</string>
+    <string name="external_sensors_support">Podpora externích senzorů</string>
     <string name="y_axis">Osa Y</string>
     <string name="x_axis">Osa X</string>
     <string name="value_downloaded_of_mb">Stahování %1$.1f/%2$.1f MB</string>
@@ -4839,7 +4839,7 @@
     <string name="map_marker_average_speed_desc">Zadejte časový interval pro průměrování rychlosti (používá se pro odhad času příjezdu).</string>
     <string name="map_widget_zoom_level">Zoom level</string>
     <string name="external_sensors_plugin_name">Externí senzory</string>
-    <string name="external_sensors_plugin_description">Přístup k externím snímačům, které snímají např. srdeční tep, rychlost jízdy na kole, výkon nebo kadenci. Vyžaduje, aby vaše zařízení bylo připojeno k příslušným snímačům prostřednictvím protokolu bezdrátové osobní sítě ANT+.</string>
+    <string name="external_sensors_plugin_description">Přístup k externím senzorům, které snímají např. srdeční tep, rychlost jízdy na kole, výkon nebo kadenci. Vyžaduje, aby vaše zařízení bylo připojeno k příslušným senzorům prostřednictvím protokolu bezdrátové osobní sítě ANT+.</string>
     <string name="marker_1st">První značka</string>
     <string name="rendering_attr_showBusRoutes_name">Autobusové trasy</string>
     <string name="map_widget_altitude_current_location">Nadmořská výška: aktuální poloha</string>
@@ -5122,17 +5122,17 @@
     <string name="weather_download_error">Nepodařilo se stáhnout %1$s dlaždic.</string>
     <string name="proxy_port_max_warning">Maximální hodnota portu je %1$s</string>
     <string name="external_device_low_battery">Slabá baterie</string>
-    <string name="external_device_forget_sensor_description">Snímač bude ze seznamu odstraněn. Tento snímač budete moci kdykoli znovu spárovat.</string>
+    <string name="external_device_forget_sensor_description">Senzor bude ze seznamu odstraněn. Tento senzor budete moci kdykoli znovu spárovat.</string>
     <string name="external_device_disconnected">Odpojeno</string>
     <string name="external_device_connected">Připojeno</string>
-    <string name="external_device_forget_sensor">Zapomenout na snímač</string>
+    <string name="external_device_forget_sensor">Zapomenout senzor</string>
     <string name="external_device_menu_forget">Zapomenout</string>
     <string name="external_device_characteristic_speed">Rychlost</string>
     <string name="external_device_characteristic_battery_level">Baterie</string>
     <string name="external_device_characteristic_gear_ratio">Převodový stupeň</string>
     <string name="external_device_characteristic_cadence">Kadence</string>
     <string name="external_device_characteristic_heart_rate">Tepová frekvence</string>
-    <string name="external_device_characteristic_systolic">Cystolický</string>
+    <string name="external_device_characteristic_systolic">Systolický</string>
     <string name="external_device_characteristic_diastolic">Diastolický</string>
     <string name="external_device_characteristic_arterial_pressure">Arteriální tlak</string>
     <string name="external_device_characteristic_cuff_pressure">Tlak v manžetě</string>
@@ -5156,15 +5156,15 @@
     <string name="ble_search_again">Znovu vyhledat</string>
     <string name="ant_plus_nothing_found_text">Nelze najít žádné senzory</string>
     <string name="ant_plus_bluetooth_off">Bluetooth je vypnuté</string>
-    <string name="ant_plus_bluetooth_off_description">Zapněte vyhledání a spárování snímačů Bluetooth.</string>
+    <string name="ant_plus_bluetooth_off_description">Zapněte vyhledání Bluetooth a spárujte senzory.</string>
     <string name="ant_plus_searching_text">Hledání senzorů</string>
-    <string name="ant_plus_searching_text_description">Zařízení držte v blízkosti snímače. Snímač je třeba aktivovat, aby jej aplikace OsmAnd našla.</string>
-    <string name="ant_plus_help_title">Nevím, jaký typ snímače mám</string>
+    <string name="ant_plus_searching_text_description">Zařízení držte v blízkosti senzoru. Senzor je třeba aktivovat, aby jej aplikace OsmAnd našla.</string>
+    <string name="ant_plus_help_title">Nevím, jaký typ senzoru mám</string>
     <string name="ant_plus_searching">Hledání</string>
     <string name="ant_plus_pair_new_sensor">Spárování nového senzoru</string>
     <string name="ant_plus_open_settings">Otevřít nastavení</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Párování senzoru ANT+</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Se zařízením OsmAnd můžete spárovat snímače Bluetooth LE a ANT+.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Se zařízením OsmAnd můžete spárovat senzory Bluetooth LE a ANT+.</string>
     <string name="learn_more_about_sensors_link">Další informace o senzorech.</string>
     <string name="external_device_characteristic_distance">Vzdálenost</string>
     <string name="external_device_characteristic_total_distance">Celková vzdálenost</string>
@@ -5208,7 +5208,7 @@
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder">Prázdná složka</string>
     <string name="error_calculate">Výsledek výpočtu je prázdný</string>
-    <string name="write_data_from_sensor_to_track">Zápis dat z externích snímačů do GPX během záznamu cesty.</string>
+    <string name="write_data_from_sensor_to_track">Zápis dat z externích senzorů do GPX během záznamu cesty.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Nejsou připojeny žádné senzory tohoto typu</string>
     <string name="external_sensors_not_found">Senzory nenalezeny</string>
     <string name="shared_string_new_track">Nová stopa</string>

@@ -4592,4 +4592,5 @@
     <string name="poi_surface_carpet">Superficie: alfombra</string>
     <string name="poi_surface_rubber">Superficie: goma, caucho</string>
     <string name="poi_second_hand_filter">Artículos usados</string>
+    <string name="poi_assembly_point">Punto de encuentro;Punto de reunión</string>
 </resources>

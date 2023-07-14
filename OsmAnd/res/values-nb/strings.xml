@@ -337,7 +337,7 @@
     <string name="poi_context_menu_delete">Slett interessepunkt</string>
     <string name="rotate_map_compass_opt">Kompassretning</string>
     <string name="rotate_map_bearing_opt">Bevegelsesretning</string>
-    <string name="rotate_map_north_opt">Nord er opp (fast)</string>
+    <string name="rotate_map_north_opt">Nord er opp</string>
     <string name="rotate_map_to_descr">Kartjustering:</string>
     <string name="rotate_map_to">Kartorientering</string>
     <string name="show_route">Rutedetaljer</string>
@@ -4807,7 +4807,7 @@
     <string name="measurement_units">Målingsenheter</string>
     <string name="shared_string_weather">Vær</string>
     <string name="shared_string_layers">Lag</string>
-    <string name="rotate_map_manual_opt">Manuelt rotert (fast)</string>
+    <string name="rotate_map_manual_opt">Manuelt rotert</string>
     <string name="weather_offline_forecast">Frakoblet værvarsel</string>
     <string name="weather_online_cache">Nettbasert hurtiglager</string>
     <string name="explore_weather_forecast">Sjekk værmeldingen.</string>
@@ -5198,4 +5198,7 @@
     <string name="relief_3d">3D-relieff</string>
     <string name="slope_legend_description">Helning bruker farger for å visualisere terrengbratthet. Du kan lese mer om helninger i %1$s.</string>
     <string name="terrain_category_description">Terrengkoter, relieffskyggekart med mørke skygger og helningskart med farger for å vise topper og lavland.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Bruk raster-sqlitedb for bakkehelning / relieffskygge</string>
+    <string name="cache_size">Hurtiglagerstørrelse</string>
+    <string name="shared_string_avoid">Unngå</string>
 </resources>

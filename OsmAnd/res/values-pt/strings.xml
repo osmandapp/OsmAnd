@@ -3491,7 +3491,7 @@
     <string name="reorder_or_hide_from">Reordene ou oculte itens de %1$s.</string>
     <string name="shared_string_divider">Divisor</string>
     <string name="divider_descr">Elementos abaixo deste ponto são separados por um divisor.</string>
-    <string name="shared_string_hidden">Ocultado</string>
+    <string name="shared_string_hidden">oculto</string>
     <string name="hidden_items_descr">Estes itens não aparecem no menu, mas as opções ou complementos representados continuarão a funcionar.</string>
     <string name="reset_items_descr">Ocultar configurações redefine-as no estado original delas.</string>
     <string name="main_actions_descr">Apenas tem 4 botões.</string>
@@ -5273,12 +5273,56 @@
     <string name="free_favorites_backup">Cópia de segurança gratuita dos favoritos</string>
     <string name="get_osmand_cloud">Obtenha o OsmAnd Cloud</string>
     <string name="free_account">Conta gratuita</string>
-    <string name="free_favorites_backup_description">Registe-se na OsmAnd Cloud para obter uma cópia de segurança gratuita dos seus favoritos e definições.</string>
+    <string name="free_favorites_backup_description">Registe-se no OsmAnd Cloud para obter uma cópia de segurança gratuita dos seus favoritos e configurações.</string>
     <string name="shared_string_avoid">Evitar</string>
     <string name="may_be_used_if_there_is_shortcut">Pode ser utilizado se houver um atalho</string>
-    <string name="routing_attr_allow_via_ferrata_name">Rota da montanha (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_name">Rota de montanha (via ferrata)</string>
     <string name="cache_size">Tamanho do cache</string>
     <string name="folder_export_empty_error">Nada para exportar, a pasta está vazia</string>
-    <string name="free_settings_backup">Cópia de segurança gratuita das definições</string>
-    <string name="routing_attr_allow_via_ferrata_description">Percurso de montanha equipado com cabos fixos, estribos, escadas e pontes.</string>
+    <string name="free_settings_backup">Cópia de segurança gratuita das configurações</string>
+    <string name="routing_attr_allow_via_ferrata_description">Percurso de montanha equipado com cabos fixos, grampos, escadas e pontes.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar sqltiedb raster para declives / sombras de relevo</string>
+    <string name="release_4_5">"• Sensores BLE/ANT+: ligação reformulada, escrita e visualização dos dados recebidos no GPX
+\n
+\n • Cópia de segurança gratuita dos favoritos e das configurações para o \"OsmAnd Cloud\"
+\n
+\n • Novo formato para mapas de terreno com suporte de relevo 3D
+\n
+\n • Gestão de trilhos: interface de utilizador atualizada, ordenação adicionada, suporte de pastas aninhadas
+\n
+\n • Android Auto: novo menu inicial para aceder aos favoritos, trajetos e categorias de POI
+\n
+\n • Uma lista de widgets para o painel superior/inferior
+\n
+\n • Novo perfil \"Comboio\"que permite calcular percursos ferroviários
+\n
+\n • As curvas de nível funcionam com qualquer \"fonte de mapa\"
+\n
+\n • Lista alargada de ações predefinidas para teclados externos
+\n
+\n • Ficheiros de encaminhamento personalizados, opções adicionadas para eliminar ou substituir
+\n
+\n • Opção adicionada para \"Anunciar o desvio do itinerário\"
+\n
+\n • Ecrã inicial: opção adicionada para restaurar o estado do OsmAnd a partir de um ficheiro
+\n
+\n • Adicionadas classes de \"Materiais perigosos\"  na navegação de camiões na América do Norte
+\n
+\n • Adicionado o suporte da \"via ferrata\" para o encaminhamento pedestre
+\n
+\n • Adicionada a escala \"CAI\" para classificação da dificuldade dos percursos
+\n
+\n • Correção da seleção do idioma por aplicação
+\n
+\n • Adicionado suporte para ícones temáticos
+\n
+\n • OsmAnd Cloud: adicionada a opção de eliminar a conta
+\n
+\n • Acessibilidade: o tamanho do alvo de toque para os botões foi alterado para 48 dp; foi corrigido um problema com a IU do mapa visível para leitores de ecrã
+\n
+\n • Avisos de voz em japonês reformulados
+\n
+\n • Alteração da elevação e avaliação do declive reformuladas
+\n
+\n"</string>
 </resources>
