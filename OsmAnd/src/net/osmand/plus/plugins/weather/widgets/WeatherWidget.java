@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.weather.widgets;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -11,11 +8,13 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback;
 import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -26,6 +25,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class WeatherWidget extends TextInfoWidget {
 
@@ -100,7 +102,13 @@ public class WeatherWidget extends TextInfoWidget {
 	@Nullable
 	public PointI getPoint31() {
 		MapRendererView mapRenderer = getMyApplication().getOsmandMap().getMapView().getMapRenderer();
-		return mapRenderer != null ? mapRenderer.getTarget() : null;
+		if (mapRenderer != null) {
+			RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+			int centerPixelX = tileBox.getCenterPixelX();
+			int centerPixelY = tileBox.getCenterPixelY();
+			return NativeUtilities.get31FromElevatedPixel(mapRenderer, centerPixelX, centerPixelY);
+		}
+		return null;
 	}
 
 	@Nullable
