@@ -931,6 +931,7 @@ public class MapPoiTypes {
 		if (pt.getNameTag() != null) {
 			a.setName(nameValue);
 		}
+		a.setOrder(pt.getOrder());
 		// additional info
 		Iterator<Entry<String, String>> it = otherTags.entrySet().iterator();
 		while (it.hasNext()) {
