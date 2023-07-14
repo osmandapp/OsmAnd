@@ -143,11 +143,13 @@ public class WeatherWidget extends TextInfoWidget {
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (resourcesManager != null && shouldObtainValue(point31, zoom, dateTime)) {
 			ValueRequest request = new ValueRequest();
+			request.setClientId(TAG);
 			request.setBand(band);
 			request.setDateTime(dateTime);
 			request.setLocalData(false);
 			request.setPoint31(point31);
 			request.setZoom(zoom);
+			request.setAbortIfNotRecent(true);
 			lastPotition31 = point31;
 			lastZoom = zoom;
 			lastDateTime = dateTime;
