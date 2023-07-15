@@ -5311,4 +5311,5 @@
     <string name="use_raster_sqlitedb_for_slope_hillshade">Использовать sqltiedb для уклонов / затенения рельефа</string>
     <string name="shared_string_avoid">Избегать</string>
     <string name="free_settings_backup">Резервная копия настроек</string>
+    <string name="free_ride">Фрирайд</string>
 </resources>
