@@ -4620,7 +4620,7 @@
     <string name="average_speed_skip_stops">Stopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Rechtweisende Peilung</string>
     <string name="average_speed_time_interval_desc">Geben Sie das Zeitintervall für die Mittelwertbildung der Geschwindigkeit an.</string>
-    <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Fahrt an.</string>
+    <string name="average_speed_widget_desc">Zeigt die durchschnittliche Geschwindigkeit der aktuellen Reise.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
     <string name="rendering_attr_weatherPressureContours_name">Isobaren</string>
@@ -4748,7 +4748,7 @@
     <string name="compass_visible_if_map_rotated_desc">Ausgeblendet, wenn Norden oben ist</string>
     <string name="compass_visible_if_map_rotated">Sichtbar, wenn die Karte gedreht wird</string>
     <string name="compass_always_hidden">Immer ausgeblendet</string>
-    <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald ein Zwischenpunkt passiert ist, wird die Entfernung zum nächsten Zwischenpunkt aktualisiert.</string>
+    <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald Zwischenpunkte passiert sind, wird die Distanz bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
     <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
     <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
@@ -4757,8 +4757,8 @@
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
     <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
     <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
-    <string name="time_to_destination_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit ab dem aktuellen Standort.</string>
-    <string name="time_to_intermediate_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert. Sobald ein Zwischenpunkt passiert ist, wird die Zeit bis zum nächsten Zwischenpunkt aktualisiert.</string>
+    <string name="time_to_destination_widget_desc">Das Widget zeigt \"Ankunftszeit\" oder \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit vom aktuellen Standort aus.</string>
+    <string name="time_to_intermediate_widget_desc">Das Widget zeigt \"Ankunftszeit\" oder \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert, sobald Zwischenpunkte passiert sind, wird die Zeit auf den nächsten Zwischenpunkt aktualisiert.</string>
     <string name="compass_always_visible">Immer sichtbar</string>
     <string name="download_tiles">Kacheln herunterladen</string>
     <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
@@ -5280,4 +5280,48 @@
     <string name="folder_export_empty_error">Nichts zu exportieren, Ordner ist leer</string>
     <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
     <string name="cache_size">Cachegröße</string>
+    <string name="routing_attr_allow_via_ferrata_name">Bergroute (Klettersteig)</string>
+    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet
+\n
+\n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“
+\n
+\n • Neues Format für Geländekarten mit 3D-Reliefunterstützung
+\n
+\n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner
+\n
+\n • Android Auto: Neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien
+\n
+\n • Eine Liste von Widgets für das obere/untere Bedienfeld
+\n
+\n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken
+\n
+\n • Konturlinien funktionieren mit jeder „Kartenquelle“
+\n
+\n • Erweiterte Liste von Standardaktionen für externe Tastaturen
+\n
+\n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt
+\n
+\n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt
+\n
+\n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt
+\n
+\n • „Gefährliche Materialien“-Klassen für LKW-Navigation in Nordamerika hinzugefügt
+\n
+\n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt
+\n
+\n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt
+\n
+\n • Die Sprachauswahl pro App wurde korrigiert
+\n
+\n • Unterstützung für thematische Symbole hinzugefügt
+\n
+\n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt
+\n
+\n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dp geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war
+\n
+\n • Japanische Sprachansagen überarbeitet
+\n
+\n • Höhenänderung und Neigungsauswertung überarbeitet
+\n
+\n</string>
 </resources>
