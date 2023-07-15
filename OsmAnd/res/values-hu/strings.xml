@@ -4760,7 +4760,7 @@
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció megjelenítése</string>
-    <string name="rotate_map_manual_opt">Kézzel forgatva</string>
+    <string name="rotate_map_manual_opt">Kézzel forgatott</string>
     <string name="shared_string_large">Nagy</string>
     <string name="how_to_use">Használat:</string>
     <string name="shared_string_normal">Normál</string>
@@ -5314,4 +5314,5 @@
     <string name="may_be_used_if_there_is_shortcut">Használható, ha van parancsikon</string>
     <string name="routing_attr_allow_via_ferrata_description">Hegyi útvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
     <string name="routing_attr_allow_via_ferrata_name">Hegyoldali útvonal (via ferrata)</string>
+    <string name="free_ride">Szabad vezetés</string>
 </resources>
