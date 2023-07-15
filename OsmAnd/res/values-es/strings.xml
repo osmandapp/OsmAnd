@@ -5321,4 +5321,5 @@
     <string name="free_settings_backup">Copia de seguridad gratuita de la configuración</string>
     <string name="routing_attr_allow_via_ferrata_description">Recorrido de montaña equipado con cables fijos, piñones, escaleras y puentes.</string>
     <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
+    <string name="free_ride">Viaje gratuito</string>
 </resources>
