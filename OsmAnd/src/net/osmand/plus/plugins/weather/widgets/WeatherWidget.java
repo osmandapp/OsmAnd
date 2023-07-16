@@ -31,6 +31,8 @@ import androidx.annotation.Nullable;
 
 public class WeatherWidget extends TextInfoWidget {
 
+	public static final String TAG = WeatherWidget.class.getSimpleName();
+
 	private static final long TRUNCATE_MINUTES = 60 * 60 * 1000;
 
 	private static final DateFormat forecastNamingFormat = new SimpleDateFormat("yyyyMMdd_HH00");
@@ -143,11 +145,13 @@ public class WeatherWidget extends TextInfoWidget {
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (resourcesManager != null && shouldObtainValue(point31, zoom, dateTime)) {
 			ValueRequest request = new ValueRequest();
+			request.setClientId(TAG);
 			request.setBand(band);
 			request.setDateTime(dateTime);
 			request.setLocalData(false);
 			request.setPoint31(point31);
 			request.setZoom(zoom);
+			request.setAbortIfNotRecent(true);
 			lastPotition31 = point31;
 			lastZoom = zoom;
 			lastDateTime = dateTime;
