@@ -192,7 +192,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 			String title = getString(selectedFeature.getTitleId());
 			((TextView) mainView.findViewById(R.id.header_title)).setText(title);
 
-			String desc = getString(selectedFeature.getDescriptionId());
+			String desc = selectedFeature.getDescription(app);
 			((TextView) mainView.findViewById(R.id.primary_description)).setText(desc);
 
 			String mapsPlus = getString(R.string.maps_plus);
