@@ -142,9 +142,10 @@ public class PurchaseUiDataUtils {
 	}
 
 	public static boolean shouldShowFreeAccRegistration(@NonNull OsmandApplication app) {
+		boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		boolean isRegistered = app.getBackupHelper().isRegistered();
-		return !proAvailable && isRegistered;
+		return !subscribedToPromo && !proAvailable && isRegistered;
 	}
 
 	@NonNull

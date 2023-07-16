@@ -42,9 +42,10 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 	@Override
 	protected Map<ExportSettingsType, List<?>> getSelectedItems() {
 		Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
+		boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (ExportSettingsType type : ExportSettingsType.values()) {
-			if (backupHelper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable)) {
+			if (backupHelper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable || subscribedToPromo)) {
 				selectedItemsMap.put(type, getItemsForType(type));
 			}
 		}

@@ -185,9 +185,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			searchView.setOnClickListener(v -> FavoritesSearchFragment.showInstance(getActivity(), ""));
 			listView.addHeaderView(searchView);
 			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
+			boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 			boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 			boolean isRegistered = app.getBackupHelper().isRegistered();
-			if (!proAvailable && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
+			if (!subscribedToPromo && !proAvailable && !isRegistered && !app.getSettings().FAVORITES_FREE_ACCOUNT_CARD_DISMISSED.get()) {
 				freeFavoritesBackupCardDivider = inflater.inflate(R.layout.list_item_divider, listView, false);
 				listView.addHeaderView(freeFavoritesBackupCardDivider, null, false);
 				freeFavoritesBackupCard = inflater.inflate(R.layout.free_backup_card, listView, false);
@@ -667,6 +668,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	private void setupGetOsmAndCloudButton(@NonNull View view) {
+		View dismissButtonContainer = view.findViewById(R.id.dismiss_button_container);
 		View dismissButton = view.findViewById(R.id.dismiss_button);
 		UiUtilities iconsCache = app.getUIUtilities();
 		ImageView closeBtn = view.findViewById(R.id.btn_close);
@@ -685,7 +687,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 		int buttonTextId = R.string.get_osmand_cloud;
 		UiUtilities.setupDialogButton(nightMode, dismissButton, SECONDARY, buttonTextId);
-		dismissButton.setOnClickListener(v -> {
+		dismissButtonContainer.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				((MyPlacesActivity) getActivity()).showOsmAndCloud(this);

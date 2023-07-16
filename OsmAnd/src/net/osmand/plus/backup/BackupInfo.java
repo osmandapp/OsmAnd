@@ -89,11 +89,12 @@ public class BackupInfo {
 	private void createFilteredFilesToUpload(@NonNull OsmandApplication app) {
 		List<LocalFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
+		boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
 			ExportSettingsType type = localFile.item != null ?
 					ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
-			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable)) {
+			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || proAvailable || subscribedToPromo)) {
 				files.add(localFile);
 			}
 		}

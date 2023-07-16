@@ -299,9 +299,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				preference.setVisible(false);
 				app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.set(true);
 			});
+			View getCloudBtnContainer = holder.findViewById(R.id.dismiss_button_container);
 			View getCloudBtn = holder.findViewById(R.id.dismiss_button);
 			UiUtilities.setupDialogButton(isNightMode(), getCloudBtn, SECONDARY, R.string.get_osmand_cloud);
-			getCloudBtn.setOnClickListener(v -> {
+			getCloudBtnContainer.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
@@ -341,9 +342,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	private void setupFreeFavoritesBackupCard() {
+		boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		boolean isRegistered = app.getBackupHelper().isRegistered();
-		boolean shouldShowFreeBackupCard = !proAvailable && !isRegistered && !app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.get();
+		boolean shouldShowFreeBackupCard = !subscribedToPromo && !proAvailable && !isRegistered && !app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.get();
 		Preference freeBackupCard = findPreference("free_favorites_backup_card");
 		if (freeBackupCard != null) {
 			freeBackupCard.setVisible(shouldShowFreeBackupCard);

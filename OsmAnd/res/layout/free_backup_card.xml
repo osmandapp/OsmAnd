@@ -50,7 +50,7 @@
 					android:layout_marginTop="@dimen/content_padding_small_half"
 					android:text="@string/free_favorites_backup_description"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="16sp" />
+					android:textSize="@dimen/default_desc_text_size" />
 			</LinearLayout>
 
 			<ImageButton
@@ -59,18 +59,29 @@
 				android:layout_height="@dimen/acceptable_touch_radius"
 				android:layout_marginLeft="@dimen/content_padding_small"
 				android:layout_marginRight="@dimen/content_padding_small"
-				android:contentDescription="shared_string_close"
+				android:background="@null"
+				android:contentDescription="@string/shared_string_close"
 				osmand:srcCompat="@drawable/ic_action_cancel" />
 
 		</LinearLayout>
 
-		<include
-			android:id="@+id/dismiss_button"
-			layout="@layout/bottom_sheet_dialog_button"
+		<FrameLayout
+			android:id="@+id/dismiss_button_container"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/dialog_button_height"
+			android:layout_height="@dimen/acceptable_touch_radius"
 			android:layout_margin="@dimen/content_padding"
-			android:layout_weight="0" />
+			android:paddingTop="@dimen/content_padding_small_half"
+			android:paddingBottom="@dimen/content_padding_small_half"
+			android:layout_weight="0">
+
+			<include
+				android:id="@+id/dismiss_button"
+				layout="@layout/bottom_sheet_dialog_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/dialog_button_height"
+				/>
+
+		</FrameLayout>
 
 	</LinearLayout>
 

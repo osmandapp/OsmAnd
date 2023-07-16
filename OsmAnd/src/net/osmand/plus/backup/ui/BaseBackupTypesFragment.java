@@ -144,9 +144,10 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(category);
 		List<ExportSettingsType> types = categoryItems.getTypes();
+		boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		for (ExportSettingsType type : types) {
-			if (type.isAllowedInFreeVersion() || proAvailable) {
+			if (type.isAllowedInFreeVersion() || proAvailable || subscribedToPromo) {
 				List<Object> items = getItemsForType(type);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
 				selectedItemsMap.put(type, selected ? items : null);
@@ -159,8 +160,9 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
+		boolean subscribedToPromo = InAppPurchaseHelper.isSubscribedToPromo(app);
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		if (type.isAllowedInFreeVersion() && !proAvailable) {
+		if (type.isAllowedInFreeVersion() && !proAvailable && !subscribedToPromo) {
 			List<Object> items = getItemsForType(type);
 			selectedItemsMap.put(type, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
