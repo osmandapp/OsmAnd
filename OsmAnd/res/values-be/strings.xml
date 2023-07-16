@@ -418,7 +418,7 @@
     <string name="prefs_plugins">Убудовы</string>
     <string name="osm_editing_plugin_description">Дапамагаайце паляпшаць OpenStreetMap - глабальную супольнасць, якая падтрымлівае поўную мапу свету і падае даныя з адкрытым зыходным кодам любому карыстальніку.
 \n
-\n Вы можаце знайсці інструкцыі па рэдагаванні мапы на нашым сайце https://osmand.net/docs/user/plugins/osm-editing.</string>
+\n Вы можаце знайсці інструкцыі па рэдагаванні мапы на нашым сайце %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Вектарныя мапы могуць адлюстроўвацца хутчэй. Падтрымліваецца не ўсімі прыладамі.</string>
     <string name="play_commands_of_currently_selected_voice">Абярыце голас і пратэстуйце яго прайграўшы апавяшчэнні:</string>
     <string name="debugging_and_development">Распрацоўванне OsmAnd</string>
@@ -1149,7 +1149,7 @@
 \n
 \n Базавыя даныя ўзятыя з SRTM і ASTER.
 \n
-\n Працягнуць чытанне на http://osmand.net/docs/user/plugins/contour-lines.</string>
+\n Працягнуць чытанне на %1$s.</string>
     <string name="arrival_distance_descr">Як хутка вы хочаце чуць паведамленне аб прыбыцці?</string>
     <string name="share_fav_subject">Улюбёныя мясціны, якімі падзяліліся праз OsmAnd</string>
     <string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
@@ -1261,7 +1261,7 @@
     <string name="index_tours">Паездкі</string>
     <string name="record_plugin_description">Запісвайце свае паездкі або трэнінгі і аналізуйце даныя па хуткасці, колькасці уздымаў і спускаў, профілю вышыні і г.д. Запісаныя сляды можна архіваваць, дзяліцца з сябрамі, рэдагаваць і апрацоўваць.
 \n
-\nБольш падрабязна https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nБольш падрабязна %1$s.</string>
     <string name="record_plugin_name">Запіс падарожжа</string>
     <string name="int_hour">г</string>
     <string name="duration">Працягласць</string>
@@ -1385,7 +1385,7 @@
     <string name="share_note">Падзяліцца нататкаю</string>
     <string name="plugin_nautical_descr">Узбагачае вашу мапу звесткамі пра маршруты плавання, маякі, небяспечных зонах, зонах з абмежаваннямі на плаванне і г.д. Каб пачаць выкарыстоўваць, спампуйце адпаведныя марскія мапы і ўключыце стыль \"Марская мапа\" ў раздзеле \"Наладзіць мапу\".
 \n
-\n Працягнуць чытанне на https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\n Працягнуць чытанне на %1$s.</string>
     <string name="back_to_map">Вярнуцца да мапы</string>
     <string name="track_segments">Адрэзкі следу</string>
     <string name="track_points">Пункты следу</string>
@@ -3976,7 +3976,7 @@
     <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
     <string name="open_place_reviews_plugin_description">Рабіце ўнёскі у праект OpenPlaceReviews, напрыклад фатаграфіі, агляды або спасылкі на грамадскія месцы (рэстараны, гасцініцы або музеі).
 \n
-\nЗнайсці інструкцыі можна на нашым сайце https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nЗнайсці інструкцыі можна на нашым сайце %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
@@ -4852,7 +4852,7 @@
 \n- віджэты на аснове месцазнаходжання
 \n- ізатэрмы / ізабары
 \n
-\nДаныя бяруцца з Global Forecast System (https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nДаныя бяруцца з Global Forecast System (%1$s).</string>
     <string name="weather_wind_kilimeters_per_hour">Кіламетраў за гадзіну</string>
     <string name="weather_wind_meters_per_second">Метры за секунду</string>
     <string name="map_widget_sunrise_desc">Паказвае час ўзыходу сонца або час, які застаўся да ўзыходу сонца.</string>

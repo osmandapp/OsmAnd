@@ -380,7 +380,7 @@
     <string name="prefs_plugins">Добавки</string>
     <string name="osm_editing_plugin_description">Дайте своя принос към OpenStreetMap - глобална общност, която поддържа цялостна карта на света и предоставя съвременни данни с отворен код на всеки потребител.
 \n
-\nИнструкции за редактиране на картата можете да намерите на адрес https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nИнструкции за редактиране на картата можете да намерите на адрес %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">По-бързо изчертаване на векторни карти. Възможно е да не работи добре при някои устройства.</string>
     <string name="play_commands_of_currently_selected_voice">Изберете глас и го изпробвайте като пуснете съобщения:</string>
     <string name="debugging_and_development">За разработчици</string>
@@ -1336,7 +1336,7 @@
     <string name="shared_string_gpx_points">Точки</string>
     <string name="record_plugin_description">Записвайте пътуванията или тренировките си и анализирайте данните по отношение на скоростта, натрупаните изкачвания и спускания, профила на надморската височина и т.н. Записаните маршрути могат да бъдат архивирани, споделяни с приятели, редактирани или обработвани впоследствие.
 \n
-\nДокументацията е достъпна на адрес https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nДокументацията е достъпна на адрес %1$s.</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>
     <string name="gpx_info_subtracks">Сегменти: %1$s</string>
@@ -1468,7 +1468,7 @@
     <string name="lang_ht">Хаитянски</string>
     <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.
 \n
-\nДокументацията е достъпна на адрес https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nДокументацията е достъпна на адрес %1$s.</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
@@ -2975,7 +2975,7 @@
 \n- приспособления, базирани на местоположението
 \n- изолинии за температура/налягане
 \n
-\nДанните за времето се предоставят от Глобалната система за прогнози (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nДанните за времето се предоставят от Глобалната система за прогнози (GFS, %1$s).</string>
     <string name="empty_screen_weather_clouds_layer">Включете, за да видите слой с облачното покритие на картата.</string>
     <string name="default_appearance">Външен вид по подразбиране</string>
     <string name="change_default_tracks_appearance_confirmation_description">Променяне на външния вид на %1$s трасета\?</string>
@@ -3358,7 +3358,7 @@
     <string name="map_markers_history">История на маркерите на картата</string>
     <string name="open_place_reviews_plugin_description">Направете принос към проекта OpenPlaceReviews, например снимки, отзиви или препратки за обществени места, като ресторанти, хотели или музеи.
 \n
-\nНамерете инструкции за това как да допринесете на адрес https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nНамерете инструкции за това как да допринесете на адрес %1$s.</string>
     <string name="add_to_opr">Добавяне в OpenPlaceReviews</string>
     <string name="angular_measeurement">Ъглови единици</string>
     <string name="contour_lines_hillshade_maps">Контурни линии и карти за засенчване на релефа</string>

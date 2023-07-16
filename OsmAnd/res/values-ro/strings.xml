@@ -221,7 +221,7 @@
     <string name="prefs_plugins">Manager de plugin-uri</string>
     <string name="osm_editing_plugin_description">Contribuiți la OpenStreetMap, o comunitate globală care întreține o hartă cuprinzătoare a lumii și care oferă date open-source actualizate fiecărui utilizator.
 \n
-\nPuteți găsi instrucțiuni despre cum să editați harta pe site-ul nostru https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPuteți găsi instrucțiuni despre cum să editați harta pe site-ul nostru %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Hărțile vectoriale se afișează mai rapid de regulă. Posibil să nu funcționeze bine pe anumite dispozitive.</string>
     <string name="play_commands_of_currently_selected_voice">Selectează o voce și testează redând anunțuri:</string>
     <string name="debugging_and_development">Dezvoltare OsmAnd</string>
@@ -1144,7 +1144,7 @@
     <string name="gpx_selection_segment_title">Segmentul</string>
     <string name="record_plugin_description">Înregistrați-vă călătoriile sau antrenamentele și analizați datele în ceea ce privește viteza, urcările și coborârile acumulate, profilul de altitudine etc. Piesele înregistrate pot fi arhivate, partajate cu prietenii, editate și post-procesate.
 \n
-\nPentru mai multe informații, consultați https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nPentru mai multe informații, consultați %1$s.</string>
     <string name="av_camera_focus">Tip de focalizare al camerei</string>
     <string name="av_camera_focus_descr">Mod focalizare cameră:</string>
     <string name="av_camera_focus_auto">Autofocalizare</string>
@@ -3219,7 +3219,7 @@
     <string name="hillshade_slope_contour_lines">Umbrire relief / Pante / Curbe de nivel</string>
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
-\nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
     <string name="open_place_reviews">OpenPlaceRecenzii</string>
     <string name="opr_use_dev_url">Utilizați test.openplacereviews.org</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
@@ -3620,7 +3620,7 @@
     <string name="plugin_ski_name">Vedere harta de schi</string>
     <string name="plugin_nautical_descr">Îmbogățește harta cu informații despre rutele de navigație, luminile de navigație, zonele de pericol nautic, zonele cu restricții de navigație sau de acostare etc. Pentru a le utiliza, descărcați hărțile nautice respective și activați stilul \"Nautical map\" în \"Configure map\".
 \n
-\nPentru mai multe informații, consultați https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nPentru mai multe informații, consultați %1$s.</string>
     <string name="plugin_nautical_name">Vedere harta nautică</string>
     <string name="plugin_touringview_descr">Activarea acestei vizualizări schimbă stilul hărții OsmAnd în \"Touring view\", aceasta fiind o vizualizare specială, cu multe detalii, pentru călătorii și șoferii profesioniști.
 \n
@@ -3638,7 +3638,7 @@
 \n
 \nDatele de bază provin din SRTM și ASTER.
 \n
-\nPentru mai multe informații, consultați http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nPentru mai multe informații, consultați %1$s.</string>
     <string name="lang_ber">Berberă</string>
     <string name="lang_kab">Cabila</string>
     <string name="lang_hsb">Sorabă (Superioară)</string>
@@ -4912,7 +4912,7 @@
 \n- widget-uri bazate pe locație
 \n- izolatoarele de temperatură / presiune
 \n
-\nDatele meteorologice sunt furnizate de Sistemul global de prognoză (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDatele meteorologice sunt furnizate de Sistemul global de prognoză (GFS, %1$s).</string>
     <string name="shared_string_contours">Curbe (izolinii)</string>
     <string name="shared_string_weather">Meteo</string>
     <string name="empty_screen_weather_contours">Activați pentru a vizualiza curbele meteorologice pe hartă.</string>

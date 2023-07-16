@@ -559,7 +559,7 @@
     <string name="prefs_plugins">Wtyczki</string>
     <string name="osm_editing_plugin_description">Wnieś wkład do OpenStreetMap, globalnej społeczności utrzymującej kompleksową mapę świata i dostarczającej aktualne dane open-source każdemu użytkownikowi.
 \n
-\nInstrukcje dotyczące edycji mapy można znaleźć na naszej stronie internetowej https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nInstrukcje dotyczące edycji mapy można znaleźć na naszej stronie internetowej %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Wybierz głos i przetestuj, odtwarzając komunikaty:</string>
     <string name="debugging_and_development">Rozwój OsmAnd</string>
@@ -881,7 +881,7 @@
 \n
 \nDane bazowe pochodzą z SRTM i ASTER.
 \n
-\nWięcej informacji na stronie http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nWięcej informacji na stronie %1$s.</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     <string name="audionotes_plugin_description">Rób notatki audio/zdjęcia/wideo podczas podróży, używając przycisku mapy lub menu kontekstowego lokalizacji.</string>
@@ -1302,7 +1302,7 @@
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
     <string name="record_plugin_description">Nagrywaj swoje wycieczki lub treningi i analizuj dane pod kątem prędkości, skumulowanych podjazdów i zjazdów, profilu wysokości itp. Zarejestrowane ścieżki można archiwizować, udostępniać znajomym, edytować i poddawać obróbce końcowej.
 \n
-\nWięcej informacji na stronie https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nWięcej informacji na stronie %1$s.</string>
     <string name="confirm_every_run">Zawsze pytaj</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
     <string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
@@ -1496,7 +1496,7 @@
     <string name="shared_string_go">Nawiguj</string>
     <string name="plugin_nautical_descr">Wzbogaca mapę o informacje o szlakach żeglarskich, światłach nawigacyjnych, strefach niebezpiecznych dla żeglugi, strefach z ograniczeniami żeglugi lub dokowania itp. Aby użyć, pobierz odpowiednie mapy żeglarskie i włącz styl \"Mapa żeglarska\" w \"Konfiguracja mapy\".
 \n
-\nWięcej informacji na stronie https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nWięcej informacji na stronie %1$s.</string>
     <string name="plugin_ski_descr">Zaprojektowany do poruszania się po obszarach sportów zimowych: Zobacz trasy narciarskie i wyciągi narciarskie oraz trasy narciarstwa biegowego, z kolorowymi liniami wskazującymi stopnie trudności. Aby użyć, włącz tę wtyczkę, a także przejdź do „Konfiguruj mapę” i wybierz styl mapy „Zima i narty”.</string>
     <string name="shared_string_message">Wiadomość</string>
     <string name="shared_string_do_not_use">Nie używaj</string>
@@ -3962,7 +3962,7 @@
     <string name="hillshade_slope_contour_lines">Mapa cieniowana / Nachylenie / Poziomice</string>
     <string name="open_place_reviews_plugin_description">Dodaj do projektu OpenPlaceReviews zdjęcia, recenzje i linki do miejsc publicznych takich jak restauracje, hotele czy muzea.
 \n
-\nZnajdź instrukcje jak to zrobić na naszej stronie https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nZnajdź instrukcje jak to zrobić na naszej stronie %1$s.</string>
     <string name="opr_use_dev_url">Użyj test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Zaloguj się do OpenPlaceReviews</string>
     <string name="activity_type_water_name">Zbiornik wodny</string>
@@ -4848,7 +4848,7 @@
 \n- widżety oparte na lokalizacji
 \n- izolinie temperatury / ciśnienia
 \n
-\nDane pogodowe są dostarczane przez Globalny System Prognoz (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDane pogodowe są dostarczane przez Globalny System Prognoz (GFS, %1$s).</string>
     <string name="shared_string_time_left">Czas pozostały</string>
     <string name="shared_string_sunset">Zachód słońca</string>
     <string name="shared_string_sunrise">Wschód słońca</string>

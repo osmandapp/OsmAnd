@@ -666,7 +666,7 @@
     <string name="prefs_plugins">Bővítmények</string>
     <string name="osm_editing_plugin_description">Szerkessze Ön is az OpenStreetMapet azzal a globális közösséggel, amelynek célja a világ átfogó térképének létrehozása és naprakész és nyílt forráskódú adatok biztosítása mindenkinek.
 \n
-\nA térkép szerkesztésére vonatkozó tudnivalókat a https://osmand.net/docs/user/plugins/osm-editing weboldalon találja .</string>
+\nA térkép szerkesztésére vonatkozó tudnivalókat a %1$s weboldalon találja .</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
     <string name="play_commands_of_currently_selected_voice">Hang kijelölése és tesztelése bemondások lejátszásával:</string>
     <string name="debugging_and_development">OsmAnd fejlesztés</string>
@@ -881,7 +881,7 @@
 \n
 \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak.
 \n
-\nTovábbi információ a http://osmand.net/docs/user/plugins/contour-lines oldalon található.</string>
+\nTovábbi információ a %1$s oldalon található.</string>
     <string name="recording_is_recorded">Hang-/videofelvétel. Leállításhoz koppintson az A/V widgetre.</string>
     <string name="recording_playing">A megadott felvétel egyik hangfájljának a lejátszása elindult.
 \n%1$s</string>
@@ -1287,7 +1287,7 @@
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
     <string name="record_plugin_description">Rögzítse utazásait vagy edzéseit és elemezze az adatokat a sebesség, az összesített emelkedések és ereszkedések, a magasság profil szempontjából. A rögzített nyomvonalak archiválhatók, megoszthatók ismerősökkel, szerkeszthetők és utólag feldolgozhatók.
 \n
-\nTovábbi tudnivalók: https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nTovábbi tudnivalók: %1$s.</string>
     <string name="record_plugin_name">Utazás felvétele</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
@@ -1498,7 +1498,7 @@
 \nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
     <string name="plugin_nautical_descr">Gazdagítsa a térképet a hajózási útvonalakra, navigációs lámpákra, hajózási veszélyzónákra, hajózási vagy kikötési korlátozásokkal érintett zónákra stb. vonatkozó információkkal. Használatához töltse le a megfelelő tengeri térképeket, és engedélyezze a „Térkép beállítása” menüpontban a „Hajózási térkép” stílust.
 \n
-\nTovábbi olvasnivalók a https://osmand.net/docs/user/plugins/nautical-charts oldalon.</string>
+\nTovábbi olvasnivalók a %1$s oldalon.</string>
     <string name="plugin_ski_descr">Télisporthelyszíneken való navigációra tervezve: sífelvonók, sípályák és sífutópályák a nehézségi fokozatot jelző színes vonalakkal. Használatához engedélyezze ezt a bővítményt, valamint lépjen a „Térkép beállítása” menüpontban a „Tél és síelés” térképstílust.</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépeljen az összes kereséséhez</string>
@@ -3961,7 +3961,7 @@
     <string name="hillshade_slope_contour_lines">Domborzatárnyékolás / lejtés / szintvonalak</string>
     <string name="open_place_reviews_plugin_description">Hozzájárulhat az OpenPlaceReviews projekthez, például éttermekről, szállodákról vagy múzeumokról készült fényképekkel, véleményekkel vagy linkekkel.
 \n
-\nA közreműködés módjáról olvashat a https://osmand.net/docs/user/plugins/openplacereviews weboldalunkon.</string>
+\nA közreműködés módjáról olvashat a %1$s weboldalunkon.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">A test.openplacereviews.org használata</string>
     <string name="login_open_place_reviews">Bejelentkezés az OpenPlaceReviews-ba</string>
@@ -4928,7 +4928,7 @@
 \n- helyalapú widgetek,
 \n- hőmérsékleti és légnyomásvonalak (izobárok).
 \n
-\nAz időjárási adatok szolgáltatója a Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nAz időjárási adatok szolgáltatója a Global Forecast System (GFS, %1$s).</string>
     <string name="map_widget_sunset_desc">Megjeleníti a következő napnyugta idejét vagy az addig hátralévő időt.</string>
     <string name="map_widget_sunrise_desc">Megjeleníti a következő napkelte idejét vagy az addig hátralévő időt.</string>
     <string name="shared_string_time_left">Hátralévő idő</string>

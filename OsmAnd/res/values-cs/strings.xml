@@ -661,7 +661,7 @@
     <string name="prefs_plugins">Moduly</string>
     <string name="osm_editing_plugin_description">Přispívejte do OpenStreetMap, globální komunity, která udržuje komplexní mapu světa a poskytuje aktuální open-source data každému uživateli.
 \n
-\nPokyny k úpravám mapy najdete na našich webových stránkách https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPokyny k úpravám mapy najdete na našich webových stránkách %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
     <string name="play_commands_of_currently_selected_voice">Zvolte hlas a otestujte ho přehráním oznámení:</string>
     <string name="debugging_and_development">Vývoj a ladění OsmAnd</string>
@@ -879,7 +879,7 @@
 \n
 \nPodkladová data pocházejí ze systémů SRTM a ASTER.
 \n
-\nDalší informace naleznete na adrese http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nDalší informace naleznete na adrese %1$s.</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">Klepněte na \'Použít polohu...\' pro přidání poznámky k poloze.</string>
@@ -1289,7 +1289,7 @@
     <string name="rendering_attr_publicTransportMode_name">Autobusy, trolejbusy a kyvadlová doprava</string>
     <string name="record_plugin_description">Zaznamenávejte své výlety nebo tréninky a analyzujte data z hlediska rychlosti, stoupání a klesání, výškového profilu atd. Zaznamenané trasy lze archivovat, sdílet s přáteli, upravovat a dále zpracovávat.
 \n
-\nDalší informace naleznete na adrese https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nDalší informace naleznete na adrese %1$s.</string>
     <string name="record_plugin_name">Záznam cesty</string>
     <string name="int_hour">h</string>
     <string name="duration">Trvání</string>
@@ -1505,7 +1505,7 @@
 \nTento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty možnosti „Styl mapy“ v „Nastavení mapy“.</string>
     <string name="plugin_nautical_descr">Obohatí vaši mapu o informace o plavebních trasách, navigačních světlech, nebezpečných námořních zónách, zónách s omezením plavby nebo kotvení atd. Pro použití si stáhněte příslušné námořní mapy a povolte styl \"Námořní mapa\" v \"Nastavení mapy\".
 \n
-\nDalší informace naleznete na adrese https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nDalší informace naleznete na adrese %1$s.</string>
     <string name="plugin_ski_descr">Navrženo pro navigaci v oblastech zimních sportů: Sjezdovky, vleky a běžkařské tratě jsou označeny barevnými čarami, které označují obtížnost. Chcete-li tento modul používat, povolte jej a přejděte také do \"Nastavení mapy\" a vyberte styl mapy \"Zima a lyžování\".</string>
     <string name="index_name_netherlands">Evropa - Holandsko</string>
     <string name="rendering_value__name">Výchozí</string>
@@ -3965,7 +3965,7 @@
     <string name="hillshade_slope_contour_lines">Stínované svahy / Sklon svahů / Vrstevnice</string>
     <string name="open_place_reviews_plugin_description">Přispívejte do projektu OpenPlaceReviews, například fotografiemi, recenzemi nebo odkazy na veřejná místa, jako jsou restaurace, hotely nebo muzea.
 \n
-\nNávod, jak přispět, najdete na našich webových stránkách https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nNávod, jak přispět, najdete na našich webových stránkách %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Použít test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Přihlásit se do OpenPlaceReviews</string>
@@ -4646,7 +4646,7 @@
 \n- nástroje založené na poloze
 \n- izolinie teploty a tlaku
 \n
-\nÚdaje o počasí poskytuje globální předpovědní systém (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nÚdaje o počasí poskytuje globální předpovědní systém (GFS, %1$s).</string>
     <string name="map_widget_sunrise_desc">Zobrazuje čas příštího východu slunce nebo čas zbývající do východu slunce.</string>
     <string name="map_widget_group_sunrise_sunset">Východ a západ slunce</string>
     <string name="map_widget_sunset_desc">Zobrazuje čas příštího západu slunce nebo čas zbývající do západu slunce.</string>

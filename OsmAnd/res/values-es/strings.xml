@@ -620,7 +620,7 @@
     <string name="prefs_plugins">Complementos</string>
     <string name="osm_editing_plugin_description">Haz contribuciones a OpenStreetMap, una comunidad global que mantiene un mapa completo del mundo y proporciona datos de código abierto actualizados a todos los usuarios.
 \n
-\nPuedes encontrar las instrucciones sobre cómo editar el mapa en nuestro sitio web https://osmand.net/docs/user/plugins/osm-editing.</string>
+\nPuedes encontrar las instrucciones sobre cómo editar el mapa en nuestro sitio web %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Elige una voz y reproduce pruebas de los avisos:</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
@@ -880,7 +880,7 @@
 \n
 \nLos datos subyacentes proceden de SRTM y ASTER.
 \n
-\nMás información en http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nMás información en %1$s.</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -1300,7 +1300,7 @@
     <string name="record_plugin_name">Grabación de viaje</string>
     <string name="record_plugin_description">Registra tus viajes o entrenamientos y analiza los datos como: velocidad, ascensos y descensos acumulados, perfil de elevación, etc. Los recorridos grabados pueden archivarse, compartirse con amigos, editarse y procesarse posteriormente.
 \n
-\nMás información en https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nMás información en %1$s.</string>
     <string name="rendering_attr_publicTransportMode_name">Rutas de autobús, trolebús y lanzadera</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el widget de grabación GPX en el mapa.</string>
@@ -1430,7 +1430,7 @@
     <string name="shared_string_audio">Audio</string>
     <string name="plugin_nautical_descr">Enriquece tu mapa con información sobre rutas de navegación, luces de navegación, zonas de peligro náutico, zonas con restricciones a la navegación o de atraque, etc. Para utilizarlo, descargue los respectivos mapas náuticos y active el estilo \"Mapa náutico\" en \"Configurar mapa\".
 \n
-\nMás información en https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nMás información en %1$s.</string>
     <string name="plugin_ski_descr">Diseñado para navegar por zonas de deportes de invierno: Vea las pistas de esquí y los remontes, así como las pistas de esquí de fondo, con líneas de color que indican los grados de dificultad. Para utilizarlo, activa este plugin y ve también a \"Configurar mapa\" y elige el estilo de mapa \"Invierno y esquí\".</string>
     <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales.
 \n
@@ -3902,7 +3902,7 @@
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="open_place_reviews_plugin_description">Haz contribuciones al proyecto OpenPlaceReviews, como fotos, reseñas o enlaces de lugares públicos como restaurantes, hoteles o museos.
 \n
-\nEncuentra las instrucciones sobre cómo haber las contribuciones nuestro sitio web https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nEncuentra las instrucciones sobre cómo haber las contribuciones nuestro sitio web %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="online_routing_example_hint">La URL con todos los parámetros se verá así:</string>
     <string name="online_routing_engines">Motores de navegación en línea</string>
@@ -4934,7 +4934,7 @@
 \n- widgets basados en la ubicación
 \n- las isolíneas de temperatura/presión
 \n
-\nLos datos meteorológicos son proporcionados por el Sistema de Pronóstico Global (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nLos datos meteorológicos son proporcionados por el Sistema de Pronóstico Global (GFS, %1$s).</string>
     <string name="shared_string_weather">Meteorología</string>
     <string name="rendering_attr_depthContourColorScheme_name">Combinación de colores de las líneas</string>
     <string name="map_widget_sunset_desc">Muestra la hora del próximo atardecer o el tiempo que queda hasta éste.</string>

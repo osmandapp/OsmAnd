@@ -179,7 +179,7 @@
     <string name="prefs_plugins">Erweiterungen</string>
     <string name="osm_editing_plugin_description">Leisten Sie einen Beitrag zu OpenStreetMap, einer globalen Gemeinschaft, die eine umfassende Karte der Welt unterhält und jedem Nutzer aktuelle Open-Source-Daten zur Verfügung stellt.
 \n
-\nEine Anleitung zur Bearbeitung der Karte finden Sie auf unserer Website https://osmand.net/docs/user/plugins/osm-editing.</string>
+\nEine Anleitung zur Bearbeitung der Karte finden Sie auf unserer Website %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden wahrscheinlich schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
     <string name="play_commands_of_currently_selected_voice">Eine Stimme auswählen und mittels Abspielen von Ansagen testen:</string>
     <string name="debugging_and_development">OsmAnd-Entwicklung</string>
@@ -1339,7 +1339,7 @@
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Zeichnen Sie Ihre Fahrten oder Trainings auf und analysieren Sie die Daten in Bezug auf Geschwindigkeit, kumulierte Anstiege und Abfahrten, Höhenprofil usw. Die aufgezeichneten Strecken können archiviert, mit Freunden geteilt, bearbeitet und nachbearbeitet werden.
 \n
-\nWeitere Informationen unter https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nWeitere Informationen unter %1$s.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lange drücken. Derzeit auf dem Gerät vorhandene Daten (%1$s frei):</string>
     <string name="text_size_descr">Karten-Schriftgröße festlegen.</string>
@@ -1455,7 +1455,7 @@
     <string name="back_to_map">Zurück zur Karte</string>
     <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \'Nautisch\' unter \'Menü → Karte konfigurieren → Kartendarstellung\'.
 \n
-\nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nWeitere Informationen unter %1$s.</string>
     <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um diese Erweiterung zu verwenden, aktivieren Sie sie und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer. 
 \n 
@@ -3970,7 +3970,7 @@
     <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
     <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
 \n
-\nAuf unserer Website https://osmand.net/docs/user/plugins/openplacereviews finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
+\nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
     <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
@@ -4931,7 +4931,7 @@
 \n- Standortbasierte Widgets
 \n- Temperatur-/Luftdruck-Isolinien
 \n
-\nWetterdaten werden vom Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) bereitgestellt.</string>
+\nWetterdaten werden vom Global Forecast System (GFS, %1$s) bereitgestellt.</string>
     <string name="shared_string_weather">Wetter</string>
     <string name="shared_string_layers">Ebenen</string>
     <string name="shared_string_contours">Konturen</string>

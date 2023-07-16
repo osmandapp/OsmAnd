@@ -167,7 +167,7 @@
 \n
 \nAzpiko datuak SRTM eta ASTER-en jatorria dira.
 \n
-\nIrakurketa gehiago http://osmand.net/docs/user/plugins/contour-lines helbidean.</string>
+\nIrakurketa gehiago %1$s helbidean.</string>
     <string name="srtm_plugin_name">Sestra-kurbak</string>
     <string name="download_select_map_types">Beste mapak</string>
     <string name="download_roads_only_item">Errepideak bakarrik</string>
@@ -405,7 +405,7 @@
     <string name="prefs_plugins">Gehigarriak</string>
     <string name="osm_editing_plugin_description">Egin ekarpenak OpenStreetMap-i, munduaren mapa osoa mantentzen duen komunitate globalari eta erabiltzaile guztiei kode irekiko datu eguneratuak eskaintzen dizkie.
 \n
-\nMapa editatzeko argibideak gure webgunean aurki ditzakezu https://osmand.net/docs/user/plugins/osm-editing.</string>
+\nMapa editatzeko argibideak gure webgunean aurki ditzakezu %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Ziurrenik bektore mapak azkarrago kargatu. Baliteke gailu batzuetan ongi ez funtzionatzea.</string>
     <string name="play_commands_of_currently_selected_voice">Aukeratu ahotsa eta probatu iragarpenak erreproduzituz:</string>
     <string name="debugging_and_development">OsmAnd garapena</string>
@@ -1870,7 +1870,7 @@
     <string name="begin_with_osmand_menu_group">Lehen pausuak OsmAnd erabiltzean</string>
     <string name="record_plugin_description">Grabatu zure bidaiak edo entrenamenduak, eta aztertu datuak abiadura, metatutako igoerak eta jaitsierak, kota-profila, etab. Grabatutako arrastoak artxibatu, lagunekin partekatu, editatu eta prozesatu egin daitezke.
 \n
-\nIrakurketa gehiago https://osmand.net/docs/user/plugins/trip-recording helbidean.</string>
+\nIrakurketa gehiago %1$s helbidean.</string>
     <string name="plugin_install_needs_network">Internetera konektatu behar zara gehigarri hau instalatzeko.</string>
     <string name="activate_srtm_plugin">Aktibatu \'Sestra-kurbak\' gehigarria</string>
     <string name="plugins_menu_group">Gehigarriak</string>
@@ -1971,7 +1971,7 @@
 \nIkuspegi hemen desgaitu daiteke atzera edo \'Konfiguratu mapa\' menuan \'Maparen estiloa\' aukeratuz.</string>
     <string name="plugin_nautical_descr">Zure mapa aberasten du nabigazio-ibilbideei, nabigazio-argiei, arrisku nautikoko guneei, nabigatzeko edo atrakatzeko mugak dituzten guneei buruzko informazioarekin. Erabiltzeko, deskargatu dagozkien Nautika-mapak eta gaitu \"Mapa nautikoa\" estiloa \"Konfiguratu mapa\" atalean.
 \n
-\nIrakurketa gehiago https://osmand.net/docs/user/plugins/nautical-charts helbidean.</string>
+\nIrakurketa gehiago %1$s helbidean.</string>
     <string name="fav_point_emoticons_message">Gogokoaren izena %1$s-ra aldatu da emotikonoak dituen katea fitxategi batera gorde ahal izateko.</string>
     <string name="activate_seamarks_plugin">Aktibatu \'Itsas-mapa ikuspegia\'</string>
     <string name="plugin_ski_descr">Neguko kirol guneetan nabigatzeko diseinatua: ikusi eski-pistak eta eski-igogailuak, eta kros-eskiko pistak, zailtasun-mailak adierazten dituzten kolore-lerroekin. Erabiltzeko, gaitu plugin hau eta joan \"Mapa konfiguratu\"ra eta aukeratu \"Negua eta eskia\" mapa estiloa.</string>
@@ -4480,7 +4480,7 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="open_place_reviews_plugin_description">Egin ekarpenak OpenPlaceReviews proiektuan, hala nola, argazkiak, iritziak edo toki publikoetarako estekak, hala nola jatetxe, hotel edo museoetarako.
 \n
-\nAurkitu gure webgunean ekarpenak egiteko argibideak https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nAurkitu gure webgunean ekarpenak egiteko argibideak %1$s.</string>
     <string name="select_segments">Hautatu segmentuak</string>
     <string name="uploading_count">%1$d/%2$d kargatzen</string>
     <string name="activity_type_winter_name">Negua</string>
@@ -4636,7 +4636,7 @@
 \n- Kokapenean oinarritutako widgetak
 \n- Tenperatura/presioaren isolineak
 \n
-\nEguraldiaren datuak Global Forecast System-ek (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) ematen ditu.</string>
+\nEguraldiaren datuak Global Forecast System-ek (GFS, %1$s) ematen ditu.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Lerroaren kolore-eskema</string>
     <string name="depth_contour_lines">Sakoneraren sestra-kurbak</string>
     <string name="turn_on_nautical_depth_description">Aktibatu itsas-sakoneraren datuak mapan ikusteko.</string>
