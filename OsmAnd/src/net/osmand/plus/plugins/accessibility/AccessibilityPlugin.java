@@ -61,7 +61,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.osmand_accessibility_description);
 	}
 

@@ -334,4 +334,14 @@ public class ColorUtilities {
 	public static int getStatusBarActiveColorId(boolean nightMode) {
 		return nightMode ? R.color.status_bar_active_color_dark : R.color.status_bar_active_color_light;
 	}
+
+	@ColorInt
+	public static int getLinksColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getLinksColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getLinksColorId(boolean nightMode) {
+		return nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
+	}
 }

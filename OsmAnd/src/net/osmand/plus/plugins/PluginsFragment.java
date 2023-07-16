@@ -230,7 +230,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
 				}
 				name = plugin.getName();
-				pluginDescription.setText(plugin.getDescription());
+				pluginDescription.setText(plugin.getDescription(false));
 
 				int color = AndroidUtils.getColorFromAttr(context, R.attr.list_background_color);
 				Drawable pluginIcon = plugin.getLogoResource();

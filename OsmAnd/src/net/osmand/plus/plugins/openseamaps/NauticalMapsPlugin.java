@@ -21,6 +21,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -66,8 +67,10 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_nautical);
+		String description = app.getString(R.string.plugin_nautical_descr, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override

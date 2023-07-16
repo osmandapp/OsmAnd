@@ -62,6 +62,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
@@ -188,8 +189,10 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.weather_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String infoUrl = app.getString(R.string.weather_global_forecast_system);
+		String description = app.getString(R.string.weather_plugin_description, infoUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, infoUrl) : description;
 	}
 
 	@Override

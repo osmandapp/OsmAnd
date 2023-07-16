@@ -185,7 +185,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.osmand_parking_plugin_description);
 	}
 

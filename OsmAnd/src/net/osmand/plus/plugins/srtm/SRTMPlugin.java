@@ -40,6 +40,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -190,8 +191,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.srtm_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_srtm);
+		String description = app.getString(R.string.srtm_plugin_description, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl): description;
 	}
 
 	@Override
