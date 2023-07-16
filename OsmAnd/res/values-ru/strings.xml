@@ -604,7 +604,7 @@
 \nНавигация временно переключена на онлайн-сервис CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Указанная папка не найдена.</string>
     <string name="application_dir">Папка хранилища данных</string>
-    <string name="osmand_net_previously_installed">У вас установлена предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако избранные точки нужно выгрузить из предыдущей версии приложения и загрузить в новую.</string>
+    <string name="osmand_net_previously_installed">Локальные данные вашей версии приложения поддерживаются в новой, но перед обновлением вам нужно экспортировать избранные точки и после импортировать их.</string>
     <string name="build_installed">Сборка {0} установлена ({1}).</string>
     <string name="downloading_build">Загрузка сборки…</string>
     <string name="install_selected_build">Установить OsmAnd — {0} из {1} {2} МБ\?</string>
@@ -1833,7 +1833,7 @@
     <string name="lang_gl">Галисийский</string>
     <string name="lang_et">Эстонский</string>
     <string name="lang_ceb">Себуанский</string>
-    <string name="archive_wikipedia_data">У вас имеются старые несовместимые данные из Википедии. Заархивировать их?</string>
+    <string name="archive_wikipedia_data">Есть старые несовместимые данные Википедии. Архивировать их\?</string>
     <string name="disable_recording_once_app_killed">Остановить автономную запись</string>
     <string name="lang_pms">Пьемонтский</string>
     <string name="lang_tl">Тагальский</string>
@@ -4307,8 +4307,8 @@
     <string name="no_activity_for_intent">Установите приложение, которое может выполнить это действие.</string>
     <string name="add_group_to_markers">Добавить группу в список маркеров</string>
     <string name="remove_group_from_markers">Удалить группу из списка маркеров</string>
-    <string name="no_items_of_type_message">У вас нет элементов этого типа</string>
-    <string name="routeInfo_tracktype_description">Окраска линии маршрута/трека на основе состава поверхности. Обычно применяется для неасфальтированных дорог.</string>
+    <string name="no_items_of_type_message">Нет элементов этого типа</string>
+    <string name="routeInfo_tracktype_description">Окраска линии маршрута/трека на основе состава поверхности. Обычно применяется для дорог без покрытия.</string>
     <string name="routeInfo_winter_ice_road_description">Окраска маршрута или трека в соответствии с классификацией зимних дорог (зимников).</string>
     <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колёсных транспортных средств в отношении регулярности/ровности поверхности.</string>
     <string name="routeInfo_surface_description">Информация о физическом покрытии дорог/тротуаров.</string>
@@ -4394,7 +4394,7 @@
     <string name="map_markers_history">История маркеров карты</string>
     <string name="shortcut_start_recording">Начать запись</string>
     <string name="approx_safe_mode_description">Выполнить аппроксимацию GPX, используя более медленный код Android вместо нативного.</string>
-    <string name="no_plugins_enabled">У вас не включены плагины. Список доступных плагинов можно найти в «Меню» → «Плагины».</string>
+    <string name="no_plugins_enabled">У вас не включены плагины. Включите нужные (Меню ￫ Плагины).</string>
     <string name="approx_safe_mode">Безопасная аппроксимация GPX</string>
     <string name="use_external_timestamps">Использовать внешние метки времени</string>
     <string name="safe_settings">Безопасные операции</string>
@@ -5042,7 +5042,7 @@
     <string name="change_default_tracks_appearance_confirmation_description">Изменить внешний вид треков (%1$s шт.)\?</string>
     <string name="inch">дюйм</string>
     <string name="empty_tracks_description">Вы можете импортировать, создавать или записывать файлы треков с помощью OsmAnd.</string>
-    <string name="empty_tracks">У вас нет файлов треков.</string>
+    <string name="empty_tracks">Файлы треков отсутствуют.</string>
     <string name="shared_string_select_recent">Выбрать последние</string>
     <string name="change_appearance">Изменить внешний вид</string>
     <string name="switch_folder">Переключить папку</string>
