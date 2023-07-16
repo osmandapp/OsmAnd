@@ -4593,4 +4593,5 @@
     <string name="poi_surface_plastic">Поверхня: пластик</string>
     <string name="poi_surface_rubber">Поверхня: гума</string>
     <string name="poi_assembly_point">Точка збору</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Усі, крім зупинок громадського транспорту</string>
 </resources>
