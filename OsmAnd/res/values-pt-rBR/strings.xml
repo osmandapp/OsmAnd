@@ -148,7 +148,7 @@
     <string name="record_plugin_name">Gravação de viagem</string>
     <string name="record_plugin_description">Grave suas viagens ou treinamentos e analise os em termos de velocidades e subidas e descidas acumuladas. As trilhas gravadas podem ser arquivadas, compartilhadas com os amigos, editada e pós processadas.
 \n
-\nLeia mais em https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nLeia mais em %1$s.</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nível</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento do OsmAnd para curvas de nível off-line</string>
     <string name="srtm_plugin_name">Curvas de nível</string>
@@ -167,7 +167,7 @@
     <string name="plugin_nautical_name">Mapa náutico</string>
     <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc.
 \n
-\nLeitura adicional em https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nLeitura adicional em %1$s.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
     <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
@@ -204,11 +204,11 @@
 \n
 \nOs dados subjacentes são originários do SRTM e ASTER.
 \n
-\nLeia mais em http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nLeia mais em %1$s.</string>
     <string name="osmand_parking_plugin_description">Marque onde seu carro está estacionado e notifique seu calendário quando o parquímetro expirar. Para colocar o marcador, escolha um lugar no mapa, vá em \"Ações\" e toque em \"Adicionar estacionamento\".</string>
     <string name="osm_editing_plugin_description">Faça contribuições para o OpenStreetMap, uma comunidade global que mantém um mapa abrangente do mundo e fornece dados atualizados de código aberto para todos os usuários.
 \n
-\nVocê pode encontrar instruções sobre como editar o mapa em nosso site https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nVocê pode encontrar instruções sobre como editar o mapa em nosso site %1$s.</string>
     <string name="osmand_development_plugin_description">Fornece funcionalidade para testar e depurar o OsmAnd: simular rotas de navegação, monitorar a renderização da tela, verificar o desempenho, etc. Este plug-in não é necessário para o uso normal do aplicativo.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
     <string name="settings_privacy">Privacidade</string>
@@ -3961,7 +3961,7 @@
     <string name="hillshade_slope_contour_lines">Sombras de relevo / Encostas / Curvas de nível</string>
     <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
 \n
-\nVeja as instruções sobre como contribuir em https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nVeja as instruções sobre como contribuir em %1$s.</string>
     <string name="activity_type_motorbike_name">Motocicleta</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
@@ -4966,7 +4966,7 @@
 \n- widgets baseados na localização
 \n- isolinhas de temperatura / pressão
 \n
-\nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nOs dados meteorológicos são fornecidos pela Global Forecast System (GFS, %1$s).</string>
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
     <string name="choose_what_to_sync">Escolha o que sincronizar</string>

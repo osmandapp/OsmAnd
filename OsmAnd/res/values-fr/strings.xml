@@ -607,7 +607,7 @@
     <string name="prefs_plugins">Gestionnaire d\'extensions</string>
     <string name="osm_editing_plugin_description">Contribuez à OpenStreetMap, un projet communautaire global qui maintient à jour une carte complète du monde et fournit des données géographiques libres.
 \n
-\nPour découvrir comment modifier une carte, consultez notre site https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
     <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales :</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
@@ -881,7 +881,7 @@
 \n
 \nLes données proviennent de SRTM et ASTER.
 \n
-\nPlus d\'informations sur http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nPlus d\'informations sur %1$s.</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1296,7 +1296,7 @@
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrez vos trajets ou entraînements et analysez les données : vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et retravaillées.
 \n
-\nPlus d\'informations sur https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nPlus d\'informations sur %1$s.</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -1444,7 +1444,7 @@
     <string name="plugin_touringview_name">Grand tourisme</string>
     <string name="plugin_nautical_descr">Enrichit la carte avec des informations sur les routes maritimes, le balisage, les zones de danger, les restrictions de mouillage, etc. Pour afficher cette vue, téléchargez la carte marine correspondante puis activez-la dans \"Paramétrer la carte\".
 \n
-\nPlus d\'informations sur https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nPlus d\'informations sur %1$s.</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
@@ -3980,7 +3980,7 @@
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens sur des lieux publics tels que les restaurants, les hôtels ou les musées afin de contribuer au projet OpenPlaceReviews.
 \n
-\nPour en savoir plus, consultez https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nPour en savoir plus, consultez %1$s.</string>
     <string name="activity_type_racing_name">Course</string>
     <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
     <string name="track_recording_description">Arrêter l\'enregistrement \?
@@ -4924,7 +4924,7 @@
 \n- Des widgets basés sur la position
 \n- Les cartes d\'isobares et d\'isothermes
 \n
-\nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, %1$s).</string>
     <string name="shared_string_open">Ouvert</string>
     <string name="open_weather_action_description">Vous permet de consulter des informations météo détaillées.</string>
     <string name="open_weather_action">Afficher la météo</string>

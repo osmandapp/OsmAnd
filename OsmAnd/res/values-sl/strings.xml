@@ -496,7 +496,7 @@
 \n Prenesi zemljevide ploščic neposredno ali jih kopiraj v podatkovno mapo OsmAnd, kot datoteke podatkovne zbirke SQLite, z enim od številnih orodij tretjih oseb, za pripravo zemljevidov.</string>
     <string name="osm_editing_plugin_description">Prispevaj v OpenStreetMap, globalno skupnost, ki vzdržuje celovit zemljevid sveta in vsakemu uporabniku zagotavlja posodobljene odprtokodne podatke.
 \n
-\nNavodila za urejanje zemljevida najdeš na spletni strani https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nNavodila za urejanje zemljevida najdeš na spletni strani %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
     <string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
     <string name="native_rendering">Izvorno izrisovanje</string>
@@ -877,7 +877,7 @@
 \n
 \nOsnovni podatki izvirajo iz SRTM in ASTER.
 \n
-\nNadaljnje branje na http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nNadaljnje branje na %1$s.</string>
     <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
@@ -1299,7 +1299,7 @@
     <string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti s pripomočkom za beleženje GPX na zemljevidu.</string>
     <string name="record_plugin_description">Posnemi svoja potovanja ali treninge in analizirajte podatke v smislu hitrosti, skupnih vzponov in spustov, višinskega profila itd. Posnete poti je mogoče arhivirati, deliti s prijatelji, urejati in naknadno obdelati.
 \n
-\nNadaljnje branje na https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nNadaljnje branje na %1$s.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Izris stez po sledeh OSMC.</string>
     <string name="traffic_warning_speed_limit">Omejitev hitrosti</string>
     <string name="traffic_warning_border_control">Mejni prehod</string>
@@ -1518,7 +1518,7 @@
     <string name="plugin_ski_descr">Zasnovan za navigacijo po območjih zimskih športov: oglej si smučarske proge in vlečnice ter proge za tek na smučeh z barvnimi črtami, ki označujejo stopnje težavnosti. Za uporabo omogoči ta vtičnik in pojdi na »Nastavitve zemljevida« ter izberi slog zemljevida »Zima in smučanje«.</string>
     <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Nastavitvah zemljevida«.
 \n
-\nNadaljnje branje na https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nNadaljnje branje na %1$s.</string>
     <string name="routing_attr_avoid_borders_description">Izogni se mednarodnim mejnim prehodom</string>
     <string name="routing_attr_height_name">Višina</string>
     <string name="routing_attr_height_description">Navedi dovoljeno višino vozila na poteh.</string>
@@ -4010,7 +4010,7 @@
     <string name="shared_string_search_history">Zgodovina iskanja</string>
     <string name="open_place_reviews_plugin_description">Prispevaj k projektu OpenPlaceReviews, kot npr. fotografije, ocene, povezave o javnih mestih, kot so restavracije, hoteli, ali muzeji.
 \n
-\nNavodila za prispevanje najdeš na naši spletni strani https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nNavodila za prispevanje najdeš na naši spletni strani %1$s.</string>
     <string name="routing_attr_allow_intermittent_name">Omogoči občasne vodotoke</string>
     <string name="app_mode_motorboat">Motorni čoln</string>
     <string name="edit_online_routing_engine">Urejanje spletnega usmerjevalnika</string>
@@ -4856,7 +4856,7 @@
 \n- gradniki, ki temeljijo na lokaciji;
 \n- izoterme in izobare (izočrte temperature in zračnega tlaka).
 \n
-\nVremenske podatke zagotavlja globalni sistem napovedi (Global Forecast System - GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nVremenske podatke zagotavlja globalni sistem napovedi (Global Forecast System - GFS, %1$s).</string>
     <string name="shared_string_contours">Obrisi</string>
     <string name="measurement_units">Merske enote</string>
     <string name="shared_string_weather">Vreme</string>

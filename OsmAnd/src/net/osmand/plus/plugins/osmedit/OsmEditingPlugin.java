@@ -76,6 +76,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -482,8 +483,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.osm_editing_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_osm);
+		String description = app.getString(R.string.osm_editing_plugin_description, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override

@@ -373,7 +373,7 @@
     <string name="prefs_plugins">Плагины</string>
     <string name="osm_editing_plugin_description">Вносите свой вклад в Openstreetmap, международное сообщество, создающее комплексную карту мира с актуальными данными из открытых источников.
 \n
-\nИнструкции по редактированию карты вы найдете на нашем сайте https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nИнструкции по редактированию карты вы найдете на нашем сайте %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторные карты могут отображаться быстрее. Поддерживается не всеми устройствами.</string>
     <string name="play_commands_of_currently_selected_voice">Выберите голос и опробуйте его на оповещении:</string>
     <string name="debugging_and_development">Отладка и разработка</string>
@@ -3987,7 +3987,7 @@
     <string name="routing_attr_allow_streams_name">Разрешить ручьи и канавы</string>
     <string name="open_place_reviews_plugin_description">Внесите свой вклад в проект OpenPlaceReviews в виде фото, ссылок или обзоров публичных мест, таких как рестораны, отели или музеи.
 \n
-\nИнструкции по добавлению информации есть на нашем сайте https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nИнструкции по добавлению информации есть на нашем сайте %1$s.</string>
     <string name="activity_type_racing_name">Гонки</string>
     <string name="app_restart_required">Для применения настроек требуется перезапуск приложения.</string>
     <string name="map_widget_distance_by_tap">Расстояние по нажатию</string>
@@ -4942,7 +4942,7 @@
 \n- 24-часовой и 7-дневный прогноз с 5 слоями ;
 \n- виджеты на основе местоположения;
 \n- изолинии температуры / давления.
-\nДанные о погоде предоставляются GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+\nДанные о погоде предоставляются GFS %1$s</string>
     <string name="rotate_map_manual_opt">поворот вручную (фикс.)</string>
     <string name="rendering_attr_depthContourColorScheme_name">Цветовая схема линий</string>
     <string name="shared_string_next_sunrise">Следующий восход</string>

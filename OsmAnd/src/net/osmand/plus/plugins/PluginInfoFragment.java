@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,16 +100,17 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			mainView.findViewById(R.id.plugin_image_placeholder).setVisibility(View.VISIBLE);
 		}
 
-		TextView descriptionView = mainView.findViewById(R.id.plugin_description);
-		descriptionView.setText(plugin.getDescription());
-
 		OsmAndAppCustomization customization = app.getAppCustomization();
-		if (customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID) && Linkify.addLinks(descriptionView, Linkify.ALL)) {
-			int linkTextColorId = nightMode ? R.color.ctx_menu_bottom_view_url_color_dark : R.color.ctx_menu_bottom_view_url_color_light;
-			descriptionView.setLinkTextColor(ColorUtilities.getColor(app, linkTextColorId));
-			descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
-			AndroidUtils.removeLinkUnderline(descriptionView);
+		boolean linksEnabled = customization.isFeatureEnabled(CONTEXT_MENU_LINKS_ID);
+
+		TextView tvDescription = mainView.findViewById(R.id.plugin_description);
+		tvDescription.setText(plugin.getDescription(linksEnabled));
+
+		if (linksEnabled) {
+			tvDescription.setLinkTextColor(ColorUtilities.getLinksColor(app, nightMode));
+			tvDescription.setMovementMethod(LinkMovementMethod.getInstance());
 		}
+
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
 		settingsButton.setOnClickListener(view -> {
 			FragmentActivity activity = getActivity();

@@ -531,7 +531,7 @@
     <string name="record_plugin_name">Spur-registrilo</string>
     <string name="record_plugin_description">Ebligas registri viajn vojaĝojn aŭ trejnadojn kaj analizi ilin konsiderante rapidon, tutajn suprenirojn kaj malsuprenirojn, profilon de altitudo kaj pli. Registritajn spurojn oni povas arĥivigi, kunhavigi, redakti kaj pritrakti.
 \n
-\nPliaj informoj: https://osmand.net/docs/user/plugins/trip-recording</string>
+\nPliaj informoj: %1$s</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
     <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da baterio aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
@@ -647,7 +647,7 @@
 \n
 \nDatumoj devenas de la projektoj SRTM kaj ASTER.
 \n
-\nPliaj informoj: http://osmand.net/docs/user/plugins/contour-lines</string>
+\nPliaj informoj: %1$s</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
@@ -1495,7 +1495,7 @@
     <string name="plugin_nautical_name">Mara map-vido</string>
     <string name="plugin_nautical_descr">Pliriĉigas la mapon per naŭtikaj kursoj, navigadaj lumoj, danĝerejoj, zonoj (mal)permesataj por navigi, alligi akvoveturilon, ktp. Por uzi la kromprogramon, elŝutu marajn mapojn kaj aktivigu la map-aspekton “Marnavigada” per la menuo “Agordi mapon”.
 \n
-\nPliaj informoj: https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nPliaj informoj: %1$s</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
     <string name="plugin_ski_descr">Projektita por navigi en vintraj sportejoj. Vidigas descendejojn, skiliftojn kaj skikuradajn kursojn kiel kolorajn liniojn, kiuj indikas malfacilecon. Por uzi la kromprogramon, aktivigu la map-aspekton “Vintro kaj skiado” en la menuo “Agordi mapon”.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
@@ -1505,7 +1505,7 @@
     <string name="osm_editing_plugin_name">OSM-redaktilo</string>
     <string name="osm_editing_plugin_description">Ebligas kontribui al OpenStreetMap – tutmonda komunumo, kies celo estas prizorgi detalan mapon de la mondo kaj liveri aktualajn malfermajn datumojn por ĉiu uzanto.
 \n
-\nPliaj informoj pri kiel redakti la mapon OSM: https://osmand.net/docs/user/plugins/osm-editing</string>
+\nPliaj informoj pri kiel redakti la mapon OSM: %1$s</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
     <string name="osmand_development_plugin_description">Liveras eblojn por testi kaj senerarigi OsmAnd: simuli navigajn kursojn, kontroli map-bildigadon, kontroli rendimenton kaj pli. La kromprogramo ne estas bezona por kutima uzado de la aplikaĵo.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
@@ -3963,7 +3963,7 @@
     <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
     <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
 \n
-\nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: %1$s</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Uzi test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Ensaluti al OpenPlaceReviews</string>
@@ -4905,7 +4905,7 @@
 \n • fenestraĵojn agordiĝantajn laŭ loko
 \n • egal-temperatur-liniojn kaj egal-aerprem-liniojn.
 \n
-\nDatumoj estas liverataj de «Global Forecast System» (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDatumoj estas liverataj de «Global Forecast System» (GFS, %1$s ).</string>
     <string name="rendering_attr_depthContourWidth_name">Larĝo de kurboj</string>
     <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de kurboj</string>
     <string name="empty_screen_view_selected_weather_data">Aktivigu por vidigi elektitajn veterajn datumojn sur la mapo.</string>

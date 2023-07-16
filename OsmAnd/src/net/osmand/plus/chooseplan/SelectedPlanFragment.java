@@ -388,7 +388,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		bindFeatureItem(itemView, feature, true);
 
 		TextView tvDescription = itemView.findViewById(R.id.description);
-		tvDescription.setText(getString(feature.getDescriptionId()));
+		tvDescription.setText(feature.getDescription(app));
 
 		int iconBgColor = ContextCompat.getColor(app, feature.isAvailableInMapsPlus() ?
 				R.color.maps_plus_item_bg :

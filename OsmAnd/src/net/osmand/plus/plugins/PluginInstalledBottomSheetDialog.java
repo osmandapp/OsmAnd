@@ -105,19 +105,16 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 		descrItem = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
 				.setButtonTitle(getString(R.string.show_full_description))
-				.setOnButtonClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						descriptionExpanded = !descriptionExpanded;
-						descrItem.setButtonText(getString(descriptionExpanded
-								? R.string.hide_full_description : R.string.show_full_description));
-						descrItem.setDescriptionMaxLines(descriptionExpanded
-								? Integer.MAX_VALUE : COLLAPSED_DESCRIPTION_LINES);
-						setupHeightAndBackground(getView());
-					}
+				.setOnButtonClickListener(v -> {
+					descriptionExpanded = !descriptionExpanded;
+					descrItem.setButtonText(getString(descriptionExpanded
+							? R.string.hide_full_description : R.string.show_full_description));
+					descrItem.setDescriptionMaxLines(descriptionExpanded
+							? Integer.MAX_VALUE : COLLAPSED_DESCRIPTION_LINES);
+					setupHeightAndBackground(getView());
 				})
 				.setDescriptionLinksClickable(true)
-				.setDescription(plugin.getDescription())
+				.setDescription(plugin.getDescription(true))
 				.setDescriptionMaxLines(COLLAPSED_DESCRIPTION_LINES)
 				.setLayoutId(R.layout.bottom_sheet_item_with_expandable_descr)
 				.create();

@@ -350,7 +350,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_depthContourWidth_name">Line width</string>
     <string name="depth_contour_lines">Depth contour lines</string>
     <string name="turn_on_nautical_depth_description">Turn on to view nautical depth data on the map.</string>
-    <string name="weather_plugin_description">Provides\n- the 24-hour and 7-day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+    <string name="weather_plugin_description">Provides\n- the 24-hour and 7-day weather forecast featuring 5 layers\n- location-based widgets\n- the temperature / pressure isolines\n\nThe weather data is provided by the Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Offline forecast</string>
     <string name="weather_online_cache">Online cache</string>
     <string name="map_settings_weather_temp">Temperature</string>
@@ -1229,7 +1229,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="login_open_place_reviews">Login to OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="open_place_reviews_plugin_description">Make contributions to the OpenPlaceReviews project, like photos, reviews, or links for public places such as restaurants, hotels, or museums. \n\nFind instructions on how to contribute on our website https://osmand.net/docs/user/plugins/openplacereviews .</string>
+    <string name="open_place_reviews_plugin_description">Make contributions to the OpenPlaceReviews project, like photos, reviews, or links for public places such as restaurants, hotels, or museums. \n\nFind instructions on how to contribute on our website %1$s.</string>
     <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
@@ -3447,11 +3447,11 @@ You need to activate the sensor so OsmAnd can find it.</string>
 Any of these maps can be displayed as the main (base) map, or as an overlay or underlay to another base map (like OsmAnd\'s offline vector maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
 Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s data folder using one of the many third-party map preparation tools.</string>
     <string name="record_plugin_name">Trip recording</string>
-    <string name="record_plugin_description">Record your trips or trainings, and analyze the data in terms of speed, accumulated ascents and descents, elevation profile, etc. Recorded tracks can be archived, shared with friends, edited, and post-processed.\n\nFurther reading at https://osmand.net/docs/user/plugins/trip-recording .</string>
+    <string name="record_plugin_description">Record your trips or trainings, and analyze the data in terms of speed, accumulated ascents and descents, elevation profile, etc. Recorded tracks can be archived, shared with friends, edited, and post-processed.\n\nFurther reading at %1$s.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="srtm_plugin_name">Contour lines</string>
-    <string name="srtm_plugin_description">Terrain information like contour lines, hillshades, and slopes, help you to visually assess the lay of the land and relief, navigability, and more. The topographic information can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at http://osmand.net/docs/user/plugins/contour-lines .</string>
+    <string name="srtm_plugin_description">Terrain information like contour lines, hillshades, and slopes, help you to visually assess the lay of the land and relief, navigability, and more. The topographic information can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at %1$s.</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
@@ -3461,7 +3461,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
 		\n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="plugin_nautical_name">Nautical map view</string>
-    <string name="plugin_nautical_descr">Enriches your map with information about sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. To use, download the respective Nautical maps and enable the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at https://osmand.net/docs/user/plugins/nautical-charts .</string>
+    <string name="plugin_nautical_descr">Enriches your map with information about sailing routes, navigation lights, nautical danger zones, zones with sailing or docking restrictions, etc. To use, download the respective Nautical maps and enable the \"Nautical map\" style under \"Configure map\". \n\nFurther reading at %1$s.</string>
     <string name="plugin_ski_name">Ski map view</string>
     <string name="plugin_ski_descr">Designed to navigate winter sports areas: See ski pistes and ski lifts, and cross country ski tracks, with colored lines indicating the difficulty ratings. To use, enable this plugin and also go to \"Configure map\" and choose the \"Winter and ski\" map style.</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
@@ -3473,7 +3473,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
-    <string name="osm_editing_plugin_description">Make contributions to OpenStreetMap, a global community maintaining a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instructions on how to edit the map on our website https://osmand.net/docs/user/plugins/osm-editing .</string>
+    <string name="osm_editing_plugin_description">Make contributions to OpenStreetMap, a global community maintaining a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instructions on how to edit the map on our website %1$s.</string>
     <string name="osmand_development_plugin_description">Provides functionality to test and debug OsmAnd: simulate navigation routes, monitor the screen rendering, check performance, etc. This plugin is not required for normal app use.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>

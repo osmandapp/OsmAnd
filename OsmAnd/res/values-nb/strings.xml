@@ -864,7 +864,7 @@
 \n
 \nDe underliggende dataene kommer fra SRTM og ASTER.
 \n
-\nMer lesing på http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nMer lesing på %1$s.</string>
     <string name="first_time_msg">Takk for at du bruker OsmAnd. Last ned regionale data for nettfrakoblet bruk via \'Meny\' → \'Kartnedlasting\' for å se kart, finne adresser, lete etter interessepunkter, finne offentlig transport og mere.</string>
     <string name="error_avoid_specific_road">Ingen omkjøring funnet</string>
     <string name="home_button">Hjem</string>
@@ -2554,7 +2554,7 @@
 \nLast ned fliskart direkte, eller kopier dem som SQLite-databasefiler til datamappen til OsmAnd ved å bruke en av mange tredjeparts kartbearbeidingsprogrammer.</string>
     <string name="record_plugin_description">Ta opp turene eller treningene dine og analyser dataene når det gjelder hastighet, akkumulerte opp- og nedstigninger, høydeprofil etc. Spor som er tatt opp kan arkiveres, deles med venner, redigeres og etterbehandles.
 \n
-\nMer lesing på https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nMer lesing på %1$s.</string>
     <string name="osmand_development_plugin_description">Innstillinger for utvikling og avlusingsfunksjoner som navigasjonssimulering, opptegningsytelse, eller talemeldinger. Ment for utviklere og trengs ikke for vanlige brukere.</string>
     <string name="osmand_extended_description_part2">GPS-navigering 
 \n • Velg mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere) 
@@ -2672,7 +2672,7 @@
 \nVisningen kan tilbakestilles enten ved å deaktivere den igjen her, eller ved å endre \'Kartstil\' under \"Kartinnstilling\" som ønsket.</string>
     <string name="plugin_nautical_descr">Beriker kartet ditt med informasjon om seilingsruter, navigasjonslys, nautiske faresoner, soner med seilings- og anløpsrestriksjoner etc. For å bruke, last ned de respektive sjøkartene og aktiver \"Sjøkart\"-stilen under \"Kartinnstilling\".
 \n
-\nMer lesing på https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nMer lesing på %1$s.</string>
     <string name="plugin_ski_descr">Designet til å navigere i vintersportsområder: Se skibakker, skiheiser og langrennsløyper, og med fargede linjer som indikerer vanskelighetsgrader. For å bruke, aktiver dette tillegget og gå også til \"Kartinnstilling\" og velg kartstilen \"Vinter og ski\".</string>
     <string name="osmand_distance_planning_plugin_description">Opprett stier ved å trykke på kartet, eller ved å bruke eller endre eksisterende GPX-filer, for å planlegge en tur og måle avstanden mellom punkter. Resultatet kan lagres som en GPX-fil, som senere kan brukes for veiledning.</string>
     <string name="osm_editing_plugin_description">Via dette programtillegget kan OsmAnd brukes til å sende inn OSM-bidrag, som opprettelse eller endring av OSM-POI-objekter, åpning eller kommentering av OSM-notater, og bidrag til GPX-spor. OSM er et verdensomspennende kartprosjekt i offentlig eiendom. For detaljer, se https://openstreetmap.org. Aktiv deltagelse verdsettes, og bidrag kan gjøres direkte fra OsmAnd, hvis du angir din personlige OSM-innloggingsinfo i programmet.</string>
@@ -4195,7 +4195,7 @@
     <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
     <string name="open_place_reviews_plugin_description">Gi bidrag til prosjektet OpenPlaceReviews som bilder, omtaler eller lenker om offentlige steder som restauranter, hoteller eller museer.
 \n
-\nFinn instruksjoner om hvordan du kan bidra på nettsiden vår https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nFinn instruksjoner om hvordan du kan bidra på nettsiden vår %1$s.</string>
     <string name="login_open_place_reviews">Logg inn på OpenPlaceReviews</string>
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
     <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
@@ -4929,7 +4929,7 @@
 \n- posisjonsbaserte miniprogrammer
 \n- temperatur/lufttrykksisolinjer
 \n
-\nVærdata tilbys av det globale værmeldingssystemet (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nVærdata tilbys av det globale værmeldingssystemet (GFS, %1$s).</string>
     <string name="empty_screen_weather_wind_layer">Skru på for å vise vindlag på kartet.</string>
     <string name="shared_string_contours">Koter</string>
     <string name="empty_screen_weather_contours">Skru på for å vise værkoter på kartet.</string>

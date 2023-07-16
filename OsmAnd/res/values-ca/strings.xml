@@ -679,7 +679,7 @@
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="osm_editing_plugin_description">Feu contribucions a OpenStreetMap, una comunitat global que manté un mapa global del món i proporciona dades de codi obert actualitzades a tots els usuaris.
 \n
-\nPodeu trobar instruccions sobre com editar el mapa al nostre lloc web https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPodeu trobar instruccions sobre com editar el mapa al nostre lloc web %1$s.</string>
     <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TTS (text a veu) d\'Android instal·lat, s\'usarà la llengua del TTS per defecte. Voleu buscar un altre motor TTS a la botiga\?</string>
     <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
     <string name="old_map_index_is_not_supported">Format de mapa «{0}» obsolet, no s\'admet</string>
@@ -886,7 +886,7 @@
 \n
 \nLes dades subjacents provenen de SRTM i ASTER.
 \n
-\nMés informació a http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nMés informació a %1$s.</string>
     <string name="rendering_attr_showRoadMaps_description">Trieu quan mostrar mapes de carreteres i prou:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -1292,7 +1292,7 @@
     <string name="shared_string_all">Tot</string>
     <string name="record_plugin_description">Enregistreu els vostres viatges o entrenaments i analitzeu les dades en termes de velocitat, ascensos i descensos acumulats, perfil d\'elevació, etc. Les pistes gravades es poden arxivar, compartir amb els amics, editar i processar posteriorment.
 \n
-\nMés informació a https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nMés informació a %1$s.</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1494,7 +1494,7 @@
     <string name="shared_string_address">Adreça</string>
     <string name="plugin_nautical_descr">Enriqueix el teu mapa amb informació sobre rutes de navegació, llums de navegació, zones de perill nàutic, zones amb restriccions de navegació o atracament, etc. Per utilitzar-lo, descarrega els respectius mapes nàutics i activa l\'estil \"Mapa nàutic\" a \"Configurar mapa\".
 \n
-\nMés informació a https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nMés informació a %1$s.</string>
     <string name="plugin_ski_descr">Dissenyat per navegar per zones d\'esports d\'hivern: veure pistes d\'esquí i remuntadors, i pistes d\'esquí de fons, amb línies de colors que indiquen els nivells de dificultat. Per utilitzar-lo, activeu aquest connector i aneu també a \"Configura el mapa\" i trieu l\'estil de mapa \"Hivern i esquí\".</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Assistent cartogràfic per OSM</string>
     <string name="shared_string_manage">Gestiona</string>
@@ -4123,7 +4123,7 @@
 \n- ginys basats en ubicació
 \n- isolínies de temperatura / de pressió
 \n
-\nLes dades meteorològiques són proporcionades per Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nLes dades meteorològiques són proporcionades per Global Forecast System (GFS, %1$s).</string>
     <string name="shared_string_contours">Contorns</string>
     <string name="empty_screen_weather_contours">Activeu-ho per a mostrar els contorns meteorològics en el mapa.</string>
     <string name="empty_screen_weather_wind_layer">Activeu-ho per a mostrar la cap de ventositat en el mapa.</string>
