@@ -42,6 +42,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
+import net.osmand.plus.plugins.externalsensors.devices.ant.AntTemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBPICPDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBikeSCDDevice;
@@ -155,6 +156,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		switch (deviceType) {
 			case ANT_HEART_RATE:
 				return new AntHeartRateDevice(deviceId);
+			case ANT_TEMPERATURE:
+				return new AntTemperatureDevice(deviceId);
 			case ANT_BICYCLE_POWER:
 				return new AntBikePowerDevice(deviceId);
 			case ANT_BICYCLE_SC:
@@ -527,6 +530,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void scanAntDevices(boolean enable) {
 		if (enable) {
 			antSearchableDevices = Arrays.asList(
+					AntTemperatureDevice.createSearchableDevice(),
 					AntHeartRateDevice.createSearchableDevice(),
 					AntBikeSpeedCadenceDevice.createSearchableDevice(),
 					AntBikeSpeedDistanceDevice.createSearchableDevice(),
