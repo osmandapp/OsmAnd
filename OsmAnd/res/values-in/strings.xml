@@ -5326,4 +5326,5 @@
     <string name="routing_attr_allow_via_ferrata_name">Rute lereng gunung (Via ferrata)</string>
     <string name="free_settings_backup">Pencadangan Pengaturan Gratis</string>
     <string name="routing_attr_allow_via_ferrata_description">Rute gunung yang dilengkapi dengan kabel tetap, tiang, tangga, dan jembatan.</string>
+    <string name="free_ride">Perjalanan gratis</string>
 </resources>

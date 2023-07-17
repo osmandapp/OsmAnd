@@ -675,7 +675,7 @@
     <string name="poi_town">Город (небольшой)</string>
     <string name="poi_village">Деревня</string>
     <string name="poi_hamlet">Деревня (небольшая)</string>
-    <string name="poi_suburb">Пригород</string>
+    <string name="poi_suburb">Район</string>
     <string name="poi_isolated_dwelling">Хутор</string>
     <string name="poi_locality">Урочище</string>
     <string name="poi_palaeontological_site">Палеонтологический объект</string>
