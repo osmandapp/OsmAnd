@@ -91,7 +91,7 @@ public class AntTemperatureSensor extends AntAbstractSensor<AntPlusEnvironmentPc
 	}
 
 	public AntTemperatureSensor(@NonNull AntTemperatureDevice device) {
-		super(device, device.getDeviceId() + "_heart_rate");
+		super(device, device.getDeviceId() + "_temperature");
 	}
 
 	public AntTemperatureSensor(@NonNull AntTemperatureDevice device, @NonNull String sensorId) {
