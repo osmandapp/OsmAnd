@@ -17,6 +17,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.myplaces.favorites.FavouritesFileHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
@@ -117,7 +118,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (!Algorithms.isEmpty(groupName)) {
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, ctx.getString(R.string.shared_string_favorites), groupName);
 		} else if (!Algorithms.isEmpty(fileName)) {
-			groupName = fileName.replace(FAV_FILE_PREFIX, "").replace(GPX_FILE_EXT, "");
+			groupName = FavouritesFileHelper.getGroupName(fileName)
+					.replace(FAV_FILE_PREFIX, "").replace(GPX_FILE_EXT, "");
 			if (groupName.startsWith(FAV_GROUP_NAME_SEPARATOR)) {
 				groupName = groupName.substring(1);
 			}
@@ -125,6 +127,12 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		} else {
 			return ctx.getString(R.string.shared_string_favorites);
 		}
+	}
+
+	@NonNull
+	@Override
+	public String getDefaultFileName() {
+		return FavouritesFileHelper.getGroupFileName(getName()) + getDefaultFileExtension();
 	}
 
 	@NonNull

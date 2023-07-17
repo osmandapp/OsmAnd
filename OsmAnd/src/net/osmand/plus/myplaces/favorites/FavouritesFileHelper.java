@@ -50,6 +50,8 @@ public class FavouritesFileHelper {
 	public static final String LEGACY_FAV_FILE_PREFIX = "favourites";
 	public static final String BAK_FILE_SUFFIX = "_bak";
 
+	public static final String SUBFOLDER_PLACEHOLDER = "_%_";
+
 	private final OsmandApplication app;
 	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
@@ -69,7 +71,9 @@ public class FavouritesFileHelper {
 
 	public File getExternalFile(FavoriteGroup group) {
 		File favDir = getExternalDir();
-		String fileName = (group.getName().isEmpty() ? FAV_FILE_PREFIX : FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + group.getName()) + GPX_FILE_EXT;
+		String fileName = (group.getName().isEmpty()
+				? FAV_FILE_PREFIX
+				: FAV_FILE_PREFIX + FAV_GROUP_NAME_SEPARATOR + getGroupFileName(group.getName())) + GPX_FILE_EXT;
 		return new File(favDir, fileName);
 	}
 
@@ -248,5 +252,19 @@ public class FavouritesFileHelper {
 		SimpleDateFormat format = new SimpleDateFormat(TIME_PATTERN, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
+	}
+
+	public static String getGroupFileName(@NonNull String groupName) {
+		if (groupName.contains("/")) {
+			return groupName.replaceAll("/", SUBFOLDER_PLACEHOLDER);
+		}
+		return groupName;
+	}
+
+	public static String getGroupName(@NonNull String fileName) {
+		if (fileName.contains(SUBFOLDER_PLACEHOLDER)) {
+			return fileName.replaceAll(SUBFOLDER_PLACEHOLDER, "/");
+		}
+		return fileName;
 	}
 }
