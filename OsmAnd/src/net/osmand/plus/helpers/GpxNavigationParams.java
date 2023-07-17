@@ -8,6 +8,7 @@ public class GpxNavigationParams {
 	private boolean snapToRoad;
 	private String snapToRoadMode;
 	private int snapToRoadThreshold = 50;
+	private boolean importedByApi;
 
 	public boolean isForce() {
 		return force;
@@ -60,6 +61,15 @@ public class GpxNavigationParams {
 
 	public GpxNavigationParams setSnapToRoadThreshold(int snapToRoadThreshold) {
 		this.snapToRoadThreshold = snapToRoadThreshold;
+		return this;
+	}
+
+	public boolean isImportedByApi() {
+		return importedByApi;
+	}
+
+	public GpxNavigationParams setImportedByApi(boolean importedByApi) {
+		this.importedByApi = importedByApi;
 		return this;
 	}
 }

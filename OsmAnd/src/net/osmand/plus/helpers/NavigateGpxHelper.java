@@ -25,6 +25,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
@@ -60,12 +62,28 @@ public class NavigateGpxHelper {
 		updateFileNameIfNeeded(app, gpxFile, DEFAULT_FILE_NAME);
 		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
 			if (errorMessage == null) {
-				step2_showGpxOnMap();
+				step2_markImportedIfNeeded();
 			}
 		});
 	}
 
-	public void step2_showGpxOnMap() {
+	public void step2_markImportedIfNeeded() {
+		if (navigationParams.isImportedByApi()) {
+			GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+			GpxDataItem item = gpxDbHelper.getItem(gpxFile.path, gpxItem -> {
+				gpxItem.setImportedByApi(true);
+				step3_showGpxOnMap();
+			});
+			if (item != null) {
+				item.setImportedByApi(true);
+				step3_showGpxOnMap();
+			}
+		} else {
+			step3_showGpxOnMap();
+		}
+	}
+
+	public void step3_showGpxOnMap() {
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpx != null) {
@@ -76,24 +94,24 @@ public class NavigateGpxHelper {
 					.addToHistory().saveSelection();
 			helper.selectGpxFile(gpxFile, selectionParams);
 		}
-		step3_approximateGpxIfNeeded();
+		step4_approximateGpxIfNeeded();
 	}
 
-	public void step3_approximateGpxIfNeeded() {
+	public void step4_approximateGpxIfNeeded() {
 		if (navigationParams.isSnapToRoad()) {
 			GpxApproximationParams approxParams = new GpxApproximationParams();
 			approxParams.setAppMode(ApplicationMode.valueOfStringKey(navigationParams.getSnapToRoadMode(), null));
 			approxParams.setDistanceThreshold(navigationParams.getSnapToRoadThreshold());
 			GpxApproximationHelper.approximateGpxSilently(app, gpxFile, approxParams, approxGpx -> {
-				step4_startNavigation(approxGpx);
+				step5_startNavigation(approxGpx);
 				return true;
 			});
 		} else {
-			step4_startNavigation(gpxFile);
+			step5_startNavigation(gpxFile);
 		}
 	}
 
-	public void step4_startNavigation(@NonNull GPXFile gpxFile) {
+	public void step5_startNavigation(@NonNull GPXFile gpxFile) {
 		MapActivity mapActivity = mapActivityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -122,6 +140,7 @@ public class NavigateGpxHelper {
 		if (gpxFile != null) {
 			saveAndNavigateGpx(mapActivity, gpxFile, new GpxNavigationParams()
 					.setCheckLocationPermission(requestLocationPermission)
+					.setImportedByApi(true)
 					.setForce(force));
 			return true;
 		}
@@ -144,7 +163,8 @@ public class NavigateGpxHelper {
 					.setForce(params.isForce())
 					.setSnapToRoad(params.isSnapToRoad())
 					.setSnapToRoadMode(params.getSnapToRoadMode())
-					.setSnapToRoadThreshold(params.getSnapToRoadThreshold());
+					.setSnapToRoadThreshold(params.getSnapToRoadThreshold())
+					.setImportedByApi(true);
 
 			saveAndNavigateGpx(mapActivity, gpxFile, navigationParams);
 			return true;

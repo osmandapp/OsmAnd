@@ -1255,12 +1255,13 @@ public class OsmandAidlApi {
 		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
-			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
-			gpxDataItem.setApiImported(true);
-			app.getGpxDbHelper().add(gpxDataItem);
+			GpxDataItem item = new GpxDataItem(destination, col);
+			item.setImportedByApi(true);
+			app.getGpxDbHelper().add(item);
 		} else {
 			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
+				item.setImportedByApi(true);
 				app.getGpxDbHelper().updateColor(item, col);
 			}
 		}
@@ -1557,17 +1558,10 @@ public class OsmandAidlApi {
 		return null;
 	}
 
-	boolean removeGpx(String fileName) {
-		if (!Algorithms.isEmpty(fileName)) {
-			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
-			if (f.exists()) {
-				GpxDataItem item = app.getGpxDbHelper().getItem(f);
-				if (item != null && item.isApiImported()) {
-					Algorithms.removeAllFiles(f);
-					app.getGpxDbHelper().remove(f);
-					return true;
-				}
-			}
+	boolean removeGpx(String relativeFilePath) {
+		if (!Algorithms.isEmpty(relativeFilePath)) {
+			File file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + relativeFilePath);
+			return FileUtils.removeGpxFile(app, file);
 		}
 		return false;
 	}

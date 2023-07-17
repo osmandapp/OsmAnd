@@ -248,6 +248,7 @@ public class ExternalApiHelper {
 						GpxNavigationParams params = new GpxNavigationParams();
 						params.setForce(uri.getBooleanQueryParameter(PARAM_FORCE, false));
 						params.setCheckLocationPermission(uri.getBooleanQueryParameter(PARAM_LOCATION_PERMISSION, false));
+						params.setImportedByApi(true);
 						NavigateGpxHelper.saveAndNavigateGpx(mapActivity, gpx, params);
 					} else {
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);

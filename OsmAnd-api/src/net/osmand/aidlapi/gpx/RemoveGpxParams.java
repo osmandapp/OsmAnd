@@ -7,10 +7,10 @@ import net.osmand.aidlapi.AidlParams;
 
 public class RemoveGpxParams extends AidlParams {
 
-	private String fileName;
+	private String relativePath;
 
-	public RemoveGpxParams(String fileName) {
-		this.fileName = fileName;
+	public RemoveGpxParams(String relativePath) {
+		this.relativePath = relativePath;
 	}
 
 	public RemoveGpxParams(Parcel in) {
@@ -29,17 +29,17 @@ public class RemoveGpxParams extends AidlParams {
 		}
 	};
 
-	public String getFileName() {
-		return fileName;
+	public String getRelativePath() {
+		return relativePath;
 	}
 
 	@Override
 	public void writeToBundle(Bundle bundle) {
-		bundle.putString("fileName", fileName);
+		bundle.putString("relativePath", relativePath);
 	}
 
 	@Override
 	protected void readFromBundle(Bundle bundle) {
-		fileName = bundle.getString("fileName");
+		relativePath = bundle.getString("relativePath");
 	}
 }
