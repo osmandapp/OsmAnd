@@ -5195,8 +5195,6 @@
     <string name="rendering_value_sector1_name">Sektor 1</string>
     <string name="map_2d_mode_action">2D način</string>
     <string name="map_3d_mode_action">3D način</string>
-    <string name="rendering_value_sacScale_name">Lestvica SAC</string>
-    <string name="rendering_value_caiScale_name">Lestvica CAI</string>
     <string name="map_3d_mode_hint">Z dolgim dotikom gumba lahko spremeniš položaj gumba.</string>
     <string name="visible_in_3d_mode">Vidno v 3D načinu</string>
     <string name="map_3d_mode_description">Dotakni se zemljevida z dvema prstoma in ju premikaj navzgor in navzdol, da prilagodiš nagib zemljevida.</string>

@@ -5158,8 +5158,6 @@
     <string name="tracks_empty_folder">Tóm mappa</string>
     <string name="track_not_recorded">Ekki skráð</string>
     <string name="shared_string_new_track">Nýr ferill</string>
-    <string name="rendering_value_sacScale_name">SAC-kvarði</string>
-    <string name="rendering_value_caiScale_name">CAI-kvarði</string>
     <string name="map_3d_mode_action">3D-þrívíddarhamur</string>
     <string name="shared_string_close_the_dialog">Loka glugganum</string>
     <string name="external_sensors_source_of_data">Uppruni gagna</string>

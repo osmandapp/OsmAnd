@@ -5196,8 +5196,6 @@
     <string name="map_3d_mode_description">Frapetu kaj ŝovu la mapon supren/malsupren per du fingroj por alĝustigi ĝian klinecon.</string>
     <string name="no_poi_for_category">Ne trovis interesejon</string>
     <string name="rendering_value_sector1_name">Sektoro 1</string>
-    <string name="rendering_value_sacScale_name">SAC-skalo</string>
-    <string name="rendering_value_caiScale_name">CAI-skalo</string>
     <string name="map_3d_mode_action">3D-reĝimo</string>
     <string name="rendering_attr_lightDetail_name">Detaloj de lumo</string>
     <string name="rendering_attr_lightDetail_description">Implicite: nomo de marmarko (karaktero, grupo, periodo); elektu pliajn informojn pri sektoroj 1–3 aŭ pri karaktero de sektoro 1,2,3,4,5</string>

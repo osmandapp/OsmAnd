@@ -5214,7 +5214,6 @@
     <string name="save_track_external_sensors_data">Date</string>
     <string name="external_device_forget_sensor_description">Senzorul va fi eliminat din listă. Veți putea să împerecheați din nou acest senzor în orice moment.</string>
     <string name="external_device_disconnected">Deconectat</string>
-    <string name="rendering_value_caiScale_name">Scala CAI</string>
     <string name="ant_plus_searching_text">Căutarea de senzori</string>
     <string name="map_3d_mode_description">Atingeți harta cu două degete și deplasați-le în sus și în jos pentru a regla înclinarea hărții.</string>
     <string name="external_device_characteristic_pulse_rate">Frecvența pulsului</string>
@@ -5225,7 +5224,6 @@
     <string name="ant_plus_bluetooth_off_description">Activați Bluetooth găsiți și asociați senzorii.</string>
     <string name="ant_plus_bluetooth_off">Bluetooth este dezactivat</string>
     <string name="map_3d_mode_action">mod 3D</string>
-    <string name="rendering_value_sacScale_name">Scala SAC</string>
     <string name="map_3d_mode_hint">Atingerea lungă a butonului permite schimbarea poziției acestuia.</string>
     <string name="tracks_empty_folder">Folder gol</string>
     <string name="track_not_recorded">Neînregistrat</string>

@@ -5217,8 +5217,6 @@
     <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
     <string name="visible_in_3d_mode">Sichtbar im 3D-Modus</string>
-    <string name="rendering_value_caiScale_name">CAI-Skala</string>
-    <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="delete_folder_question">Ordner löschen\?</string>
     <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
     <string name="map_widget_rssi">RSSI</string>

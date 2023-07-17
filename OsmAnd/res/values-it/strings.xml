@@ -5167,8 +5167,6 @@
     <string name="learn_more_about_sensors_link">Ulteriori informazioni sui sensori.</string>
     <string name="ant_plus_bluetooth_off">Il bluetooth è disattivato</string>
     <string name="external_device_disconnected">Disconnesso</string>
-    <string name="rendering_value_sacScale_name">Scala SAC</string>
-    <string name="rendering_value_caiScale_name">Scala CAI</string>
     <string name="external_device_connected">Connesso</string>
     <string name="external_device_characteristic_heart_rate">Frequenza cardiaca</string>
     <string name="external_device_characteristic_systolic">Sistolico</string>

@@ -5219,8 +5219,6 @@
     <string name="map_3d_mode_description">Berør kortet med to fingre, og bevæg dem op og ned for at justere kortets hældning.</string>
     <string name="map_2d_mode_action">2D-tilstand</string>
     <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
-    <string name="rendering_value_sacScale_name">SAC-skala</string>
-    <string name="rendering_value_caiScale_name">CAI-skala</string>
     <string name="rssi_widget_desc">Viser RSSI-niveauet for din eksterne enhed.</string>
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">Denne mappe indeholder endnu ingen spor.</string>

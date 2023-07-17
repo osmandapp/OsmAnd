@@ -5216,8 +5216,6 @@
     <string name="delete_track_folder_dialog_message">Ово ће избрисати фасциклу „%1$s“ и све садржане стазе (%2$s).</string>
     <string name="track_not_recorded">Није снимљено</string>
     <string name="shared_string_new_track">Нови траг</string>
-    <string name="rendering_value_sacScale_name">Лествица САЦ</string>
-    <string name="rendering_value_caiScale_name">Лествица ЦАИ</string>
     <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
     <string name="visible_in_3d_mode">Видљиво у просторном приказу (3д)</string>
     <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>

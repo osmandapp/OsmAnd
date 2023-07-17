@@ -5229,8 +5229,6 @@
     <string name="delete_folder_question">Eliminar pasta\?</string>
     <string name="delete_folder">Eliminar pasta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todos os trilhos no mapa</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
     <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>

@@ -5243,7 +5243,6 @@
     <string name="calculate_offline_altitude_descr">Kalkulatu kota konexiorik gabe, altuera-mapen datuetan oinarrituta. Gailuak erregistratutako altueraren desberdintasunak kota zuzentzeko erabil daitezke.</string>
     <string name="error_calculate">Kalkuluaren emaitza hutsik dago</string>
     <string name="calculate_offline">Kalkulatu konexiorik gabe</string>
-    <string name="rendering_value_sacScale_name">SAC eskala</string>
     <string name="delete_track_folder_dialog_message">Honek \"%1$s\" karpeta eta barne dauden arrasto guztiak (%2$s) ezabatuko ditu.</string>
     <string name="delete_folder_question">Karpeta ezabatu\?</string>
     <string name="delete_folder">Ezabatu karpeta</string>
@@ -5253,7 +5252,6 @@
     <string name="tracks_empty_folder">Karpeta hutsa</string>
     <string name="track_not_recorded">Grabatu gabe</string>
     <string name="shared_string_new_track">Arrasto berria</string>
-    <string name="rendering_value_caiScale_name">CAI eskala</string>
     <string name="shared_string_visible_on_map">Mapan ikusgai</string>
     <string name="save_track_external_sensors_data">Datuak</string>
     <string name="there_are_no_connected_sensors_of_this_type">Ez dago mota honetako sentsorerik konektatuta</string>

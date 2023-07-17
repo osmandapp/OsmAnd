@@ -5278,11 +5278,9 @@
     <string name="map_3d_mode_action">الوضع ثلاثي الأبعاد</string>
     <string name="map_2d_mode_action">الوضع ثنائي الأبعاد</string>
     <string name="poi_categories">فئات نقاط الاهتمام</string>
-    <string name="rendering_value_caiScale_name">مقياس CAI</string>
     <string name="map_3d_mode_hint">الضغط المطول على الزر يسمح بتغيير موضع الزر.</string>
     <string name="visible_in_3d_mode">مرئي في الوضع ثلاثي الأبعاد</string>
     <string name="map_3d_mode_description">المس الخريطة بإصبعين وحركهما للأعلى وللأسفل لضبط إمالة الخريطة.</string>
-    <string name="rendering_value_sacScale_name">مقياس ساك</string>
     <string name="show_all_tracks_on_the_map">عرض جميع المسارات على الخريطة</string>
     <string name="rssi_widget_desc">يعرض مستوى RSSI لجهازك الخارجي.</string>
     <string name="map_widget_rssi">قوة الإشارة</string>

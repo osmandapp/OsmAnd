@@ -5182,11 +5182,9 @@
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
     <string name="no_poi_for_category">POI не найдена</string>
-    <string name="rendering_value_caiScale_name">Шкала CAI</string>
     <string name="map_3d_mode_action">Режим 3D</string>
     <string name="map_2d_mode_action">Режим 2D</string>
     <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
-    <string name="rendering_value_sacScale_name">Шкала SAC</string>
     <string name="shared_string_finger">Палец</string>
     <string name="external_device_characteristic_cuff_pressure">Давление в манжете</string>
     <string name="visible_in_3d_mode">Видно при включении 3D</string>

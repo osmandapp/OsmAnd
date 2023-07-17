@@ -3433,8 +3433,6 @@
     <string name="shared_string_identifiers">Идентификатори</string>
     <string name="purchases_feature_desc_external_sensors">Показва и записва данни от външни сензори: скорост на велосипеда, мощност на велосипеда, каданс и сърдечен ритъм.</string>
     <string name="speak_gps_signal_status">Съобщаване за загуба на сигнала на GPS и възстановяването му</string>
-    <string name="rendering_value_caiScale_name">Скала на Италианския алпийски клуб (CAI)</string>
-    <string name="rendering_value_sacScale_name">Скала на Швейцарския алпийски клуб (SAC)</string>
     <string name="map_3d_mode_description">Докоснете картата с два пръста и ги движете нагоре и надолу, за да регулирате наклона на картата.</string>
     <string name="map_3d_mode_action">Триизмерен режим</string>
     <string name="show_from_zoom_level">Видими при увеличение</string>

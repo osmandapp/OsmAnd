@@ -5212,10 +5212,8 @@
     <string name="map_2d_mode_action">Modalidad 2D</string>
     <string name="map_3d_mode_action">Modalidad 3D</string>
     <string name="map_3d_mode_hint">Pulsar prolongadamente el botón permite cambiar tu posición.</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="visible_in_3d_mode">Visible en modo 3D</string>
     <string name="map_3d_mode_description">Toca el mapa con dos dedos y muévelos arriba y abajo para ajustar la inclinación del mapa.</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="delete_folder">Borrar la carpeta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todas las vías en el mapa</string>
     <string name="rssi_widget_desc">Muestra el nivel RSSI de tu dispositivo externo.</string>

@@ -5219,8 +5219,6 @@
     <string name="map_3d_mode_action">Mode 3D</string>
     <string name="map_3d_mode_hint">Ketuk tombol dengan lama memungkinkan mengubah posisi tombol.</string>
     <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
-    <string name="rendering_value_sacScale_name">Skala SAC</string>
-    <string name="rendering_value_caiScale_name">Skala CAI</string>
     <string name="external_sensors_source_of_data">Sumber data</string>
     <string name="save_track_external_sensors_data">Data</string>
     <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>

@@ -5200,8 +5200,6 @@
     <string name="visible_in_3d_mode">Widoczne w trybie 3D</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="map_2d_mode_action">Tryb 2D</string>
-    <string name="rendering_value_sacScale_name">Skala SAC</string>
-    <string name="rendering_value_caiScale_name">Skala CAI</string>
     <string name="map_3d_mode_description">Dotknij mapy dwoma palcami i przesuwaj je w górę i w dół, aby dostosować nachylenie mapy.</string>
     <string name="map_3d_mode_action">Tryb 3D</string>
     <string name="rendering_attr_lightDetail_description">Domyślnie: nazwa znaku morskiego (light character.group.period), wybierz dodatkowe informacje o sektorach od 1 do 3 lub sektorze 1,2,3,4,5 znaku świetlnego</string>

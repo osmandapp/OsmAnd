@@ -5221,8 +5221,6 @@
     <string name="map_3d_mode_description">Рух двома пальцями вздовж екрану, вгору-вниз, дозволяє змінювати кут нахилу мапи.</string>
     <string name="map_3d_mode_hint">Затискання кнопки дозволяє змінити її положення.</string>
     <string name="visible_in_3d_mode">Видимий у 3D-режимі</string>
-    <string name="rendering_value_caiScale_name">Шкала CAI</string>
-    <string name="rendering_value_sacScale_name">Шкала SAC</string>
     <string name="show_all_tracks_on_the_map">Показати всі треки на мапі</string>
     <string name="rssi_widget_desc">Показує рівень RSSI вашого зовнішнього пристрою.</string>
     <string name="map_widget_rssi">Rssi</string>

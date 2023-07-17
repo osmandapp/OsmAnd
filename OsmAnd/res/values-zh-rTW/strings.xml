@@ -5202,8 +5202,6 @@
     <string name="shared_string_foot">腳</string>
     <string name="map_3d_mode_hint">長按按鈕可以變更按鈕位置。</string>
     <string name="visible_in_3d_mode">在 3D 模式下可見</string>
-    <string name="rendering_value_sacScale_name">SAC 等級</string>
-    <string name="rendering_value_caiScale_name">CAI 等級</string>
     <string name="map_2d_mode_action">2D 模式</string>
     <string name="map_3d_mode_action">3D 模式</string>
     <string name="map_3d_mode_description">用兩根手指觸控地圖並上下移動以調整地圖傾斜度。</string>

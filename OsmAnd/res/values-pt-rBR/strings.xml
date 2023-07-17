@@ -5183,7 +5183,6 @@
     <string name="shared_string_wrist">Pulso</string>
     <string name="shared_string_foot">Pé</string>
     <string name="shared_string_chest">Peito</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="search_track_by_name">Pesquisar trilha por nome</string>
     <string name="no_search_results">SME resultados</string>
     <string name="file_already_exists">O arquivo já existe</string>
@@ -5194,7 +5193,6 @@
     <string name="rendering_value_sector2_name">Setor 2</string>
     <string name="rendering_value_sector3_name">Setor 3</string>
     <string name="poi_categories">Categorias de POI</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="external_device_characteristic_systolic">Sistólica</string>
     <string name="external_device_characteristic_diastolic">Diastólica</string>
     <string name="delete_folder">Excluir pasta</string>
