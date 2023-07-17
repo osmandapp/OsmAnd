@@ -83,7 +83,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		return new PlaceListNavigationTemplate.Builder()
 				.setItemList(listBuilder.build())
 				.setTitle(getApp().getString(R.string.shared_string_favorites))
-				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
+				.setActionStrip(new ActionStrip.Builder().addAction(createSearchAction()).build())
 				.setHeaderAction(Action.BACK)
 				.build();
 	}
@@ -100,21 +100,11 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
 		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
 		QuadRect mapRect = new QuadRect();
+		extendRectToContainPoint(mapRect, location.getLongitude(), location.getLatitude());
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
-			if (mapRect.left == 0.0) {
-				mapRect.left = longitude;
-			} else {
-				mapRect.left = Math.min(mapRect.left, longitude);
-			}
-			mapRect.right = Math.max(mapRect.right, longitude);
-			if (mapRect.bottom == 0.0) {
-				mapRect.bottom = latitude;
-			} else {
-				mapRect.bottom = Math.min(mapRect.bottom, latitude);
-			}
-			mapRect.top = Math.max(mapRect.top, latitude);
+			extendRectToContainPoint(mapRect, longitude, latitude);
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
@@ -139,6 +129,21 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 			RotatedTileBox tileBox =mapView.getCurrentRotatedTileBox().copy();
 			mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tileBox.getPixHeight(), tileBox.getPixHeight(), 0);
 		}
+	}
+
+	private void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
+		if (mapRect.left == 0.0) {
+			mapRect.left = longitude;
+		} else {
+			mapRect.left = Math.min(mapRect.left, longitude);
+		}
+		mapRect.right = Math.max(mapRect.right, longitude);
+		if (mapRect.bottom == 0.0) {
+			mapRect.bottom = latitude;
+		} else {
+			mapRect.bottom = Math.min(mapRect.bottom, latitude);
+		}
+		mapRect.top = Math.max(mapRect.top, latitude);
 	}
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {

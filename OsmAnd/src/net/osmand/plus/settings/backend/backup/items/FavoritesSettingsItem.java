@@ -100,16 +100,6 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 
 	@NonNull
 	@Override
-	public String requireProcessedFileName() {
-		String fileName = requireFileName();
-		if (fileName.contains("/")) {
-			fileName = fileName.replaceAll("/", "_%_");
-		}
-		return fileName;
-	}
-
-	@NonNull
-	@Override
 	public String getName() {
 		FavoriteGroup singleGroup = getSingleGroup();
 		String groupName = singleGroup != null ? singleGroup.getName() : null;
@@ -180,14 +170,15 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				favoritesHelper.addFavourite(favourite, false, false);
 			}
 			favoritesHelper.sortAll();
-			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.saveCurrentPointsIntoFile(false);
 			favoritesHelper.loadFavorites();
 		}
 	}
 
 	@Override
 	protected void deleteItem(FavoriteGroup item) {
-		favoritesHelper.deleteGroup(item);
+		favoritesHelper.deleteGroup(item, false);
+		favoritesHelper.saveCurrentPointsIntoFile(false);
 	}
 
 	@Override

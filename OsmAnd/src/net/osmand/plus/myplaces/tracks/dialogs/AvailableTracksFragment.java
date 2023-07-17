@@ -4,14 +4,18 @@ import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_S
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
@@ -55,7 +59,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.recycler_view_fragment;
+		return R.layout.available_tracks_fragment;
 	}
 
 
@@ -81,6 +85,25 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 		visibleTracksGroup = new VisibleTracksGroup(app);
 		recordingTrackItem = new TrackItem(app, app.getSavingTrackHelper().getCurrentGpx());
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		if (view != null) {
+			setupSwipeRefresh(view);
+		}
+		return view;
+	}
+
+	private void setupSwipeRefresh(@NonNull View view) {
+		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
+		swipeRefresh.setColorSchemeColors(ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange));
+		swipeRefresh.setOnRefreshListener(() -> {
+			reloadTracks();
+			swipeRefresh.setRefreshing(false);
+		});
 	}
 
 	@Nullable

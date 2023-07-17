@@ -58,6 +58,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.plus.widgets.style.CustomURLSpan;
 
 import org.apache.commons.logging.Log;
 
@@ -647,27 +648,30 @@ public class UiUtilities {
 		return spannable;
 	}
 
-	private static void setSpan(@NonNull SpannableString spannable,
-	                            @NonNull Object styleSpan,
-	                            @NonNull String text, @NonNull String t) {
-		try {
-			int startIndex = text.indexOf(t);
-			spannable.setSpan(
-					styleSpan,
-					startIndex,
-					startIndex + t.length(),
-					Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-		} catch (RuntimeException e) {
-			LOG.error("Error trying to find index of " + t + " " + e);
-		}
-	}
-
 	public static SpannableString createCustomFontSpannable(@NonNull Typeface typeface, @NonNull String text, @NonNull String... textToStyle) {
 		SpannableString spannable = new SpannableString(text);
 		for (String s : textToStyle) {
 			setSpan(spannable, new CustomTypefaceSpan(typeface), text, s);
 		}
 		return spannable;
+	}
+
+	public static SpannableString createUrlSpannable(@NonNull String text, @NonNull String url) {
+		SpannableString spannable = new SpannableString(text);
+		setSpan(spannable, new CustomURLSpan(url), text, url);
+		return spannable;
+	}
+
+	private static void setSpan(@NonNull SpannableString spannable,
+	                            @NonNull Object styleSpan,
+	                            @NonNull String text, @NonNull String textToSpan) {
+		try {
+			int start = text.indexOf(textToSpan);
+			int end = start + textToSpan.length();
+			spannable.setSpan(styleSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+		} catch (RuntimeException e) {
+			LOG.error("Error trying to find index of " + textToSpan + " " + e);
+		}
 	}
 
 	public static void setupClickableText(OsmandApplication app,

@@ -4081,7 +4081,7 @@ Lon %2$s</string>
 \n- complementos baseados na localización
 \n- as isolíneas da temperatura/presión
 \n
-\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Pronóstico sen conexión</string>
     <string name="weather_online_cache">Caché en liña</string>
     <string name="map_settings_weather_temp">Temperatura</string>

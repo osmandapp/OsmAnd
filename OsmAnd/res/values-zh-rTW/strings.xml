@@ -213,7 +213,7 @@
     <string name="prefs_plugins">外掛元件管理</string>
     <string name="osm_editing_plugin_description">對 OpenStreetMap 做出貢獻，這是一個維護世界綜合地圖並向每位使用者提供最新開放原始碼資料的全球社群。
 \n
-\n您可以在網站 https://osmand.net/docs/user/plugins/osm-editing 上找到關於如何編輯地圖的說明。</string>
+\n您可以在網站 %1$s 上找到關於如何編輯地圖的說明。</string>
     <string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
     <string name="play_commands_of_currently_selected_voice">選擇一個語音並以播放測試：</string>
     <string name="debugging_and_development">OsmAnd 開發</string>
@@ -572,7 +572,7 @@
     <string name="poi_context_menu_delete">刪除 POI</string>
     <string name="rotate_map_compass_opt">羅盤方向</string>
     <string name="rotate_map_bearing_opt">行進方向</string>
-    <string name="rotate_map_north_opt">固定（北方向上）</string>
+    <string name="rotate_map_north_opt">北方向上</string>
     <string name="rotate_map_to_descr">地圖對齊方式：</string>
     <string name="rotate_map_to">地圖方位</string>
     <string name="show_route">導航路線資訊</string>
@@ -972,7 +972,7 @@
 \n
 \n基礎資料來自 SRTM 與 ASTER。
 \n
-\n在 http://osmand.net/docs/user/plugins/contour-lines 取得進一步的資訊。</string>
+\n在 %1$s 取得進一步的資訊。</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="av_camera_focus">相機對焦類型</string>
     <string name="av_camera_focus_descr">相機對焦模式：</string>
@@ -1254,7 +1254,7 @@
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">記錄您的旅行或訓練，並根據速度、累積的上升與下降、海拔剖面等分析資料。記錄的軌跡可以封存、與朋友分享、編輯與後處理等。
 \n
-\n在 https://osmand.net/docs/user/plugins/trip-recording 取得進一步的資訊。</string>
+\n在 %1$s 取得進一步的資訊。</string>
     <string name="record_plugin_name">旅程錄製</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
@@ -1380,7 +1380,7 @@
     <string name="plugin_touringview_name">旅遊地圖檢視</string>
     <string name="plugin_nautical_descr">使用關於航行路線、導航燈、航海危險區域、航行或停靠限制區域等資訊豐富您的地圖。要使用，請下載對應的航海地圖並在「設定地圖」下啟用「航海地圖」樣式。
 \n
-\n在 https://osmand.net/docs/user/plugins/nautical-charts 取得進一步資訊。</string>
+\n在 %1$s 取得進一步資訊。</string>
     <string name="plugin_ski_descr">用來在冬季運動區導航：檢視滑雪道、滑雪纜車以及越野滑雪道，彩色線條指示難度等級。要使用，請啟用此外掛程式並到「設定地圖」然後選擇「冬季和滑雪」地圖樣式。</string>
     <string name="plugin_touringview_descr">啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。 
 \n 
@@ -3961,7 +3961,7 @@
     <string name="segments_count">線段 %1$d</string>
     <string name="open_place_reviews_plugin_description">為 OpenPlaceReviews 專案做出貢獻，例如餐廳、旅館或博物館等公共場所的照片、評論或連結。
 \n
-\n在我們的網站上找到關於如何貢獻的說明 https://osmand.net/docs/user/plugins/openplacereviews。</string>
+\n在我們的網站上找到關於如何貢獻的說明 %1$s。</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
     <string name="login_open_place_reviews">登入至 OpenPlaceReviews</string>
@@ -4761,7 +4761,7 @@
     <string name="how_to_use">如何使用：</string>
     <string name="distance_by_tap_use_description">點擊地圖以檢視您目前位置與點擊點之間的距離。
 \n用兩根手指在地圖上點擊以檢視與點擊點之間的距離</string>
-    <string name="rotate_map_manual_opt">手動旋轉（固定）</string>
+    <string name="rotate_map_manual_opt">手動旋轉</string>
     <string name="shared_string_large">大</string>
     <string name="display_position">顯示位置</string>
     <string name="map_marker_interval_dialog_desc">指定將測量平均速度以計算預計到達時間的時間間隔。</string>
@@ -4901,7 +4901,7 @@
 \n- 以位置為基礎的小工具
 \n- 等溫線/等壓線
 \n
-\n天氣資料由全球預報系統 (GFS，https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) 提供。</string>
+\n天氣資料由全球預報系統 (GFS，%1$s) 提供。</string>
     <string name="map_settings_weather_temp">溫度</string>
     <string name="map_settings_weather_air_pressure">氣壓</string>
     <string name="map_settings_weather_precip">降水</string>
@@ -5231,7 +5231,6 @@
     <string name="shared_string_close_the_dialog">關閉對話方塊</string>
     <string name="terrain_map">地形圖</string>
     <string name="relief_3d">3D 地形圖</string>
-    <string name="free_mode">免費模式</string>
     <string name="relief_3d_description">你的社區或是整個大陸的擁有與觀察的縮放尺度。</string>
     <string name="terrain_category_description">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
     <string name="slope_legend_description">斜率使用顏色來視覺化地形的坡度。您可以在 %1$s 中取得更多關於斜率的資訊。</string>
@@ -5306,4 +5305,11 @@
 \n • 重新設計高度變化與坡度評估
 \n
 \n</string>
+    <string name="routing_attr_allow_via_ferrata_description">配有固定纜繩、柱子、梯子與橋樑的山路。</string>
+    <string name="routing_attr_allow_via_ferrata_name">山腰路線（鐵索攀岩）</string>
+    <string name="free_settings_backup">免費設定備份</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">為斜率/地形陰影使用點陣 sqltiedb</string>
+    <string name="cache_size">快取大小</string>
+    <string name="shared_string_avoid">避免</string>
+    <string name="may_be_used_if_there_is_shortcut">若有捷徑可以使用</string>
 </resources>

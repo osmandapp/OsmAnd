@@ -797,7 +797,7 @@
 \n
 \nUnderliggande data baseras på SRTM och ASTER.
 \n
-\nLäs mer på http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nLäs mer på %1$s.</string>
     <string name="delete_target_point">Ta bort destination</string>
     <string name="intermediate_point">Mellanliggande destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -3263,7 +3263,7 @@
     <string name="segments_count">Segment %1$d</string>
     <string name="open_place_reviews_plugin_description">Bidra till OpenPlaceReviews-projektet med sådant som foton på, recensioner av eller länkar till offentliga platser såsom restauranger, hotell eller museer
 \n
-\nHitta instruktioner för hur du bidrar på vår webbplats https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nHitta instruktioner för hur du bidrar på vår webbplats %1$s.</string>
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
     <string name="hillshade_slope_contour_lines">Terrängskuggning / Lutning / Höjdkurvor</string>
@@ -4466,7 +4466,7 @@
 \n- platsbaserade widgetar
 \n- temperatur och lufttryck med isolinjer
 \n
-\nVäderdatat tillhandahålls av Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nVäderdatat tillhandahålls av Global Forecast System (GFS, %1$s).</string>
     <string name="rendering_engine_failed_descr">OsmAnd har återgått till \"version 1\" för kartrendering. Du kan försöka byta tillbaka till den nya \"Version 2 (OpenGL)\"-renderingsmotorn i inställningarna.
 \n
 \nUnderlätta gärna förbättringar genom att tillhandahålla din fellogg.</string>

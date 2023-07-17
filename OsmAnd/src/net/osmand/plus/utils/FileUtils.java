@@ -119,8 +119,6 @@ public class FileUtils {
 			destDir.mkdirs();
 		}
 		if (src.renameTo(dest)) {
-			dest.setLastModified(System.currentTimeMillis());
-
 			updateMovedGpx(app, src, dest);
 			return dest;
 		}

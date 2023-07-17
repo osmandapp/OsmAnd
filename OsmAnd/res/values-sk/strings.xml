@@ -81,7 +81,7 @@
     <string name="prefs_plugins">Zásuvné moduly</string>
     <string name="osm_editing_plugin_description">Prispievajte do OpenStreetMap, globálnej komunity tvoriacej podrobnú mapu sveta a poskytujúcej aktuálne slobodné údaje pre každého používateľa.
 \n
-\nInformácie o úpravách mapy môžete nájsť na webstránke https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nInformácie o úpravách mapy môžete nájsť na webstránke %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Zvoľte hlas a otestujte ho prehraním oznámení:</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -884,7 +884,7 @@
 \n
 \nÚdaje pochádzajú od SRTM a ASTER.
 \n
-\nĎalšie podrobnosti na http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nĎalšie podrobnosti na %1$s.</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
@@ -1242,7 +1242,7 @@
     <string name="index_tours">Výlety</string>
     <string name="record_plugin_description">Nahrajte vaše výlety alebo tréningy a analyzujte údaje o vašom pohybe ako rýchlosť, stúpanie, klesanie alebo reliéf trasy. Zaznamenané stopy môžu byť archivované, zdieľané s priateľmi, upravované alebo ďalej spracovávané.
 \n
-\nĎalšie podrobnosti na https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nĎalšie podrobnosti na %1$s.</string>
     <string name="record_plugin_name">Zaznamenávanie výletov</string>
     <string name="int_hour">hod</string>
     <string name="duration">Trvanie</string>
@@ -1365,7 +1365,7 @@
     <string name="roads_only">Iba cesty</string>
     <string name="plugin_nautical_descr">Obohatí mapu o informácie o lodných trasách, navigačných svetlách, nebezpečných námorných zónach, obmedzeniach na pohyb alebo pristávaní lodí, atď. Pre použitie stiahnite príslušné Námorné mapy a zapnite štýl \"Námorná mapa\" v \"Nastaviť mapu\".
 \n
-\nĎalšie podrobnosti na https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nĎalšie podrobnosti na %1$s.</string>
     <string name="plugin_ski_descr">Navrhnutý pre navigáciu v strediskách zimných športov. Sledujte zjazdovky, vleky a bežecké stopy farebne rozlíšené podľa obtiažnosti. Pre požitie zapnite tento modul a použite štýl mapy \"Zima a lyžovanie\" v menu \"Nastaviť mapu\".</string>
     <string name="plugin_touringview_descr">Aktivovaním tohto pohľadu sa zmení štýl mapy na \"Cestovný pohľad\", ktorý obsahuje viac detailov pre cestovateľov a profesionálnych vodičov. 
 \n 
@@ -3960,7 +3960,7 @@
     <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
     <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
 \n
-\nInštrukcie ako prispievať nájdete na našej webstránke https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
@@ -4918,7 +4918,7 @@
 \n- nástroje podľa pozície
 \n- izočiary teploty a tlaku
 \n
-\nÚdaje o počasí sú poskytované službou Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nÚdaje o počasí sú poskytované službou Global Forecast System (GFS, %1$s).</string>
     <string name="empty_screen_weather_clouds_layer">Zapnite pre zobrazenie vrstvy oblačnosti na mape.</string>
     <string name="empty_screen_weather_contours">Zapnite pre zobrazenie izočiary počasia na mape.</string>
     <string name="empty_screen_weather_wind_layer">Zapnite pre zobrazenie vrstvy vetra na mape.</string>

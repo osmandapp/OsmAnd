@@ -95,7 +95,7 @@ public abstract class OsmandPlugin {
 
 	public abstract String getName();
 
-	public abstract CharSequence getDescription();
+	public abstract CharSequence getDescription(boolean linksEnabled);
 
 	@Nullable
 	public Drawable getAssetResourceImage() {
@@ -509,6 +509,10 @@ public abstract class OsmandPlugin {
 	}
 
 	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+
+	}
+
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
 
 	}
 }

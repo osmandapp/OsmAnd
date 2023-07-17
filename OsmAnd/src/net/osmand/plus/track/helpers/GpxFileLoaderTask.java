@@ -33,7 +33,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	 */
 	public static void loadGpxFile(@NonNull File file,
 	                               @Nullable Activity progressContext,
-	                               @NonNull CallbackWithObject<GPXFile> callback) {
+	                               @Nullable CallbackWithObject<GPXFile> callback) {
 		new GpxFileLoaderTask(file, progressContext, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -42,7 +42,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	 */
 	public static void loadGpxFile(@NonNull InputStream inputStream,
 	                               @Nullable Activity progressContext,
-	                               @NonNull CallbackWithObject<GPXFile> callback) {
+	                               @Nullable CallbackWithObject<GPXFile> callback) {
 		new GpxFileLoaderTask(inputStream, progressContext, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -51,7 +51,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	 */
 	public GpxFileLoaderTask(@NonNull File file,
 	                         @Nullable Activity progressContext,
-	                         @NonNull CallbackWithObject<GPXFile> callback) {
+	                         @Nullable CallbackWithObject<GPXFile> callback) {
 		this.file = file;
 		this.inputStream = null;
 		this.callback = callback;
@@ -60,7 +60,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 	private GpxFileLoaderTask(@NonNull InputStream inputStream,
 	                          @Nullable Activity progressContext,
-	                          @NonNull CallbackWithObject<GPXFile> callback) {
+	                          @Nullable CallbackWithObject<GPXFile> callback) {
 		this.file = null;
 		this.inputStream = inputStream;
 		this.callback = callback;
@@ -88,6 +88,8 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 		if (progressDialog != null && AndroidUtils.isActivityNotDestroyed(activityRef.get())) {
 			progressDialog.dismiss();
 		}
-		callback.processResult(gpxFile);
+		if (callback != null) {
+			callback.processResult(gpxFile);
+		}
 	}
 }

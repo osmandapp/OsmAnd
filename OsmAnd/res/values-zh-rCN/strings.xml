@@ -1601,12 +1601,12 @@
     <string name="record_plugin_name">旅行记录</string>
     <string name="record_plugin_description">记录您的旅行或训练，并分析速度、累计上升和下降、海拔剖面等数据。已记录的轨迹可以归档、与朋友分享、编辑和后期处理。
 \n
-\n详情可见 https://osmand.net/docs/user/plugins/trip-recording 。</string>
+\n详情可见 %1$s。</string>
     <string name="srtm_plugin_description">地形信息，例如等高线、山体阴影和坡度，可帮助您直观地评估土地和地形的布局以及适航性等。地形信息可在地图上通过坡度阴影、等高线以及坡度角颜色来表示。
 \n
 \n底层数据来自 SRTM 和 ASTER。
 \n
-\n详情可见 http://osmand.net/docs/user/plugins/contour-lines 。</string>
+\n详情可见 %1$s。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>
     <string name="plugin_nautical_name">航海地图视图</string>
     <string name="audionotes_plugin_description">在旅途中使用地图按钮或位置上下文菜单进行音频/照片/视频注记。</string>
@@ -1614,7 +1614,7 @@
     <string name="osmand_distance_planning_plugin_description">通过点击地图来使用或修改现有的GPX文件来创建路径，以规划旅行并测量各点之间的距离。其结果可以保存为GPX文件，以便日后用于导航。</string>
     <string name="osm_editing_plugin_description">向由全球社区所维护的综合性地图 OpenStreetMap 做出贡献，并为每个用户提供最新的开源数据。
 \n
-\n您可以在我们的网站上找到有关如何编辑地图的说明 https://osmand.net/docs/user/plugins/osm-editing 。</string>
+\n您可以在我们的网站上找到有关如何编辑地图的说明 %1$s。</string>
     <string name="osmand_development_plugin_description">开发和调试功能的设置，如导航模拟、渲染性能或语音提示。适用于开发人员，正常应用使用时不需要。</string>
     <string name="rename_failed">重命名失败。</string>
     <string name="days_behind">天前</string>
@@ -1705,7 +1705,7 @@
 \n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
     <string name="plugin_nautical_descr">打开以丰富您的地图，其中包含有关航行路线、导航灯、危险区域、允许或禁止航行或停靠的区域等信息。如要使用，下载航海地图并在配置地图中启用“航海地图”类型。
 \n
-\n详情可见 https://osmand.net/docs/user/plugins/nautical-charts 。</string>
+\n详情可见 %1$s。</string>
     <string name="plugin_ski_descr">设计用于在冬季运动地点导航。观看滑雪道、滑雪缆车标记和彩色线条，指示每条轨道的复杂性。要在启用后使用，请转到配置地图并选择“冬季和滑雪”地图类型。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
@@ -3264,7 +3264,7 @@
     <string name="hillshade_slope_contour_lines">山体阴影/斜坡/等高线</string>
     <string name="open_place_reviews_plugin_description">为 OpenPlaceReviews 项目做出贡献，例如照片、评论或公共场所（如餐馆、酒店或博物馆）的链接。
 \n
-\n在我们的网站上查找有关如何做出贡献的说明 https://osmand.net/docs/user/plugins/openplacereviews。</string>
+\n在我们的网站上查找有关如何做出贡献的说明 %1$s。</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
     <string name="login_open_place_reviews">登录 OpenPlaceReviews</string>
@@ -4887,7 +4887,7 @@
 \n- 基于位置的小工具
 \n- 等温线/等压线
 \n
-\n天气数据由全球预测系统（GFS，https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ）提供。</string>
+\n天气数据由全球预测系统（GFS，%1$s）提供。</string>
     <string name="edit_profiles">编辑配置文件</string>
     <string name="shared_string_sunset">日落</string>
     <string name="shared_string_sunrise">日出</string>

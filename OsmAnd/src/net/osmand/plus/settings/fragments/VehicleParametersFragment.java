@@ -272,7 +272,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		float settingsDefaultSpeed = mode.getDefaultSpeed();
 		boolean decimalPrecision = !defaultSpeedOnly
 				&& router != null
-				&& router.getMaxSpeed() <= ApplicationMode.FAST_SPEED_THRESHOLD;
+				&& mode.getMaxSpeedConfigLimit() <= ApplicationMode.FAST_SPEED_THRESHOLD;
 
 		float[] defaultValue = {roundSpeed(settingsDefaultSpeed * ratio[0], decimalPrecision)};
 		float[] minValue = new float[1];
@@ -284,17 +284,17 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
 			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
 			min = (int) minValue[0];
-			max = (int) maxValue[0];
 		} else {
 			float minSpeedValue = settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed();
-			float maxSpeedValue = settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed();
+			float maxSpeedValue = settingsMaxSpeed > 0 ? settingsMaxSpeed : mode.getMaxSpeedConfigLimit();
 
 			minValue[0] = roundSpeed(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 			maxValue[0] = roundSpeed(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 
 			min = Math.round(Math.min(minValue[0], router.getMinSpeed() * ratio[0] / 2f));
-			max = Math.round(Math.max(maxValue[0], router.getMaxSpeed() * ratio[0] * 1.5f));
 		}
+		max = Math.round(Math.max(maxValue[0], mode.getMaxSpeedConfigLimit() * ratio[0] * 1.5f));
+		max = Math.max(min, max);
 
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
 		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);

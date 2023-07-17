@@ -1046,13 +1046,13 @@ public class OsmandAidlApi {
 
 	boolean removeFavoriteGroup(String name) {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
-		List<FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
-		for (FavoriteGroup g : groups) {
-			if (g.getName().equals(name)) {
-				favoritesHelper.deleteGroup(g);
+		for (FavoriteGroup group : favoritesHelper.getFavoriteGroups()) {
+			if (group.getName().equals(name)) {
+				favoritesHelper.deleteGroup(group, false);
 				return true;
 			}
 		}
+		favoritesHelper.saveCurrentPointsIntoFile(true);
 		return false;
 	}
 
@@ -1066,7 +1066,7 @@ public class OsmandAidlApi {
 			favoritesHelper.updateGroupVisibility(group, visible, false);
 			favoritesHelper.updateGroupName(group, newGroupName, false);
 
-			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.saveCurrentPointsIntoFile(true);
 			return true;
 		}
 		return false;

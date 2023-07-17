@@ -1093,7 +1093,7 @@ POIの更新は利用できません</string>
 \nタイルマップはオンラインで直接ダウンロードするか、さまざまなサードパーティ製マップ作成ツールで作成されたSQLiteデータベースを事前に準備(OsmAndのデータフォルダーに手動でコピー)しておけばオフラインで使用することができます。</string>
     <string name="osm_editing_plugin_description">世界地図を包括的に管理し、すべてのユーザーが最新のオープンソースデータを利用できるようにするグローバルコミュニティであるOpenStreetMapに貢献してください。
 \n
-\n地図の編集方法は、弊社ウェブサイト https://osmand.net/docs/user/plugins/osm-editing に掲載されています。</string>
+\n地図の編集方法は、弊社ウェブサイト %1$s に掲載されています。</string>
     <string name="amenity_type_osmwiki">ウィキペディア(オフライン)</string>
     <string name="keep_and_add_destination_point">その後の目的地として追加</string>
     <string name="select_gpx">GPXファイルを選択…</string>
@@ -1316,7 +1316,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_pedestrian_name">徒歩</string>
     <string name="record_plugin_description">ドライブやトレーニング時の経路を記録し、速度、累積登坂・降坂、標高プロファイルなどの観点からデータを分析することができます。記録した経路は、アーカイブしたり、友人と共有したり、編集などの後処理も行えます。
 \n
-\n詳しくは https://osmand.net/docs/user/plugins/trip-recording をご覧下さい。</string>
+\n詳しくは %1$s をご覧下さい。</string>
     <string name="record_plugin_name">旅程・経路記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
@@ -1481,7 +1481,7 @@ POIの更新は利用できません</string>
     <string name="local_osm_changes_upload_all_confirm">%1$dカ所の変更をOSMにアップロードしますか？</string>
     <string name="plugin_nautical_descr">航路、ビーコン、海上の危険エリア、航行や係留が禁止されているエリアなどの情報で海図を充実させます。使用するには、対応する海図をダウンロードし[マップ設定]＞[マップスタイル]＞[船舶]を有効にしてください。
 \n
-\n詳しくは、https://osmand.net/docs/user/plugins/nautical-charts をご参照下さい。</string>
+\n詳しくは、%1$s をご参照下さい。</string>
     <string name="plugin_ski_name">スキーマップ表示</string>
     <string name="plugin_ski_descr">ウィンタースポーツエリアでのナビゲーション用に設計されています。スキー場、スキーリフト、クロスカントリースキーコースを、難易度を示す色のついた線で見ることができます。この拡張機能を利用するには、プラグインを有効にしてから\"マップ設定\"内のマップスタイルで\"ウィンター＆スキー\"を選択します。</string>
     <string name="rename_failed">リネーム出来ませんでした</string>
@@ -3884,7 +3884,7 @@ POIの更新は利用できません</string>
     <string name="toast_select_edits_for_upload">アップロードする編集を選択</string>
     <string name="hillshade_slope_contour_lines">陰影起伏図 / 勾配 / 等高線</string>
     <string name="open_place_reviews_plugin_description">"OpenPlaceReviewsプロジェクトに貢献しましょう。例えば、レストラン、ホテル、美術館のような公共の場所の写真、レビュー、リンクなどを投稿してください。
-\n貢献の方法については、私たちのウェブサイトhttps://osmand.net/docs/user/plugins/openplacereviews  を参照してください。"</string>
+\n貢献の方法については、私たちのウェブサイト%1$s  を参照してください。"</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.orgを使用</string>
     <string name="login_open_place_reviews">OpenPlaceReviewsにログイン</string>
@@ -4686,7 +4686,7 @@ POIの更新は利用できません</string>
 \n- 位置に応じたウィジェット
 \n- 温度/気圧の分布図
 \n
-\n気象データは、Global Forecast System (GFS、https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ) によって提供されています。</string>
+\n気象データは、Global Forecast System (GFS、%1$s) によって提供されています。</string>
     <string name="shared_string_weather">天候</string>
     <string name="shared_string_contours">輪郭</string>
     <string name="measurement_units">測定単位</string>

@@ -35,7 +35,6 @@ import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.CustomRegion;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
@@ -490,12 +489,6 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void addPluginIndexItems(@NonNull IndexFileList indexes) {
-		for (OsmandPlugin p : getAvailablePlugins()) {
-			p.addPluginIndexItems(indexes);
-		}
-	}
-
 	public static void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
 		try {
 			for (OsmandPlugin plugin : getEnabledPlugins()) {
@@ -818,6 +811,12 @@ public class PluginsHelper {
 	public static void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.getAvailableGPXDataSetTypes(analysis, availableTypes);
+		}
+	}
+
+	public static void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.onIndexItemDownloaded(item, updatingFile);
 		}
 	}
 }

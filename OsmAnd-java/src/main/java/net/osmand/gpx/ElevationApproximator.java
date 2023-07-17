@@ -46,7 +46,7 @@ public abstract class ElevationApproximator {
 			double prevEle = getPointElevation(lastSurvived);
 			double ele = getPointElevation(i);
 			double eleNext = getPointElevation(i + 1);
-			if ((ele - prevEle) * (eleNext - ele) > 0 && Math.abs(ele - prevEle) > 2) {
+			if ((ele - prevEle) * (eleNext - ele) > 0) {
 				survived[i] = true;
 				lastSurvived = i;
 				survidedCount++;

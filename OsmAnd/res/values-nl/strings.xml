@@ -3958,7 +3958,7 @@
     <string name="hillshade_slope_contour_lines">Reliëfschaduw / Helling / Contourlijnen</string>
     <string name="open_place_reviews_plugin_description">Lever een bijdragen aan het OpenPlaceReviews-project met foto\'s, beoordelingen, of links van openbare plaatsen zoals restaurants, hotels of musea.
 \n
-\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Gebruik test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Inloggen op OpenPlaceReviews</string>
@@ -4789,7 +4789,7 @@
 \n- widgets afgesteld op locatie
 \n- hoogtelijnen van temperatuur / luchtdruk
 \n
-\nDe weersgegevens worden geleverd door de Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDe weersgegevens worden geleverd door de Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Weersvoorspelling zonder internet</string>
     <string name="map_settings_weather_air_pressure">Luchtdruk</string>
     <string name="measurement_units">Meeteenheden</string>

@@ -1952,9 +1952,9 @@
     <string name="poi_service_repair">إصلاح</string>
     <string name="poi_service_dealer">تاجر</string>
     <string name="poi_service_parts">القطع</string>
-    <string name="poi_second_hand_only">السلع المستعملة فقط</string>
+    <string name="poi_second_hand_only">فقط</string>
     <string name="poi_second_hand_no">لا توجد سلع مستعملة</string>
-    <string name="poi_second_hand_yes">السلع المستعملة</string>
+    <string name="poi_second_hand_yes">نعم</string>
     <string name="poi_outdoor_seating_pedestrian_zone">الجلوس في الخارج: منطقة المشاة</string>
     <string name="poi_outdoor_seating_terrace">الجلوس في الخارج: شرفة</string>
     <string name="poi_outdoor_seating_no">لا توجد أماكن جلوس في الخارج</string>
@@ -4541,7 +4541,7 @@
     <string name="poi_recycling_polystyrene_foam">رغوة البوليسترين</string>
     <string name="poi_barrier_planter">اصيص نباتات خرساني</string>
     <string name="poi_wicket_gate">بوابه فرعية</string>
-    <string name="poi_sump_buster">حاجز مانع للسيارات المنخفضة</string>
+    <string name="poi_sump_buster">حاجز رادع للسيارات المنخفضة</string>
     <string name="poi_wedge">وتد</string>
     <string name="poi_spikes">مسامير</string>
     <string name="poi_barrier_bar">حاجز</string>
@@ -4583,4 +4583,14 @@
     <string name="poi_cemt_ii">II</string>
     <string name="poi_cemt_iii">III</string>
     <string name="poi_cemt_iv">IV</string>
+    <string name="poi_vending_machine_fuel_filter">موزعات وقود أوتوماتيكية؛ آلة بيع وقود</string>
+    <string name="poi_vending_machine_fuel">نعم</string>
+    <string name="poi_tunnel_name">اسم النفق</string>
+    <string name="poi_bridge_name">اسم الجسر</string>
+    <string name="poi_surface_acrylic">السطح: أكريليك</string>
+    <string name="poi_surface_carpet">السطح: سجاد</string>
+    <string name="poi_surface_plastic">السطح: بلاستيك</string>
+    <string name="poi_surface_rubber">السطح: مطاط</string>
+    <string name="poi_second_hand_filter">بضائع مستعملة</string>
+    <string name="poi_assembly_point">نقطة التجميع</string>
 </resources>

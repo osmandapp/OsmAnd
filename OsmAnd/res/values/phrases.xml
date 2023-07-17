@@ -5157,4 +5157,7 @@
 	<string name="poi_surface_plastic">Surface: plastic</string>
 	<string name="poi_surface_rubber">Surface: rubber</string>
 
+	<string name="poi_assembly_point">Assembly point</string>
+	<string name="poi_osmand_not_pt_shelter_yes">All except public transport shelters</string>
+
 </resources>

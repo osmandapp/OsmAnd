@@ -221,7 +221,7 @@
     <string name="prefs_plugins">Manager de plugin-uri</string>
     <string name="osm_editing_plugin_description">Contribuiți la OpenStreetMap, o comunitate globală care întreține o hartă cuprinzătoare a lumii și care oferă date open-source actualizate fiecărui utilizator.
 \n
-\nPuteți găsi instrucțiuni despre cum să editați harta pe site-ul nostru https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPuteți găsi instrucțiuni despre cum să editați harta pe site-ul nostru %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Hărțile vectoriale se afișează mai rapid de regulă. Posibil să nu funcționeze bine pe anumite dispozitive.</string>
     <string name="play_commands_of_currently_selected_voice">Selectează o voce și testează redând anunțuri:</string>
     <string name="debugging_and_development">Dezvoltare OsmAnd</string>
@@ -588,7 +588,7 @@
     <string name="poi_context_menu_delete">Șterge POI</string>
     <string name="rotate_map_compass_opt">Direcția busolei</string>
     <string name="rotate_map_bearing_opt">Direcția de deplasare</string>
-    <string name="rotate_map_north_opt">Fixat (nordul este sus)</string>
+    <string name="rotate_map_north_opt">Nordul este sus</string>
     <string name="rotate_map_to_descr">Aliniere hartă:</string>
     <string name="rotate_map_to">Orientare hartă</string>
     <string name="show_route">Detalii rută</string>
@@ -1144,7 +1144,7 @@
     <string name="gpx_selection_segment_title">Segmentul</string>
     <string name="record_plugin_description">Înregistrați-vă călătoriile sau antrenamentele și analizați datele în ceea ce privește viteza, urcările și coborârile acumulate, profilul de altitudine etc. Piesele înregistrate pot fi arhivate, partajate cu prietenii, editate și post-procesate.
 \n
-\nPentru mai multe informații, consultați https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nPentru mai multe informații, consultați %1$s.</string>
     <string name="av_camera_focus">Tip de focalizare al camerei</string>
     <string name="av_camera_focus_descr">Mod focalizare cameră:</string>
     <string name="av_camera_focus_auto">Autofocalizare</string>
@@ -3219,7 +3219,7 @@
     <string name="hillshade_slope_contour_lines">Umbrire relief / Pante / Curbe de nivel</string>
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
-\nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
     <string name="open_place_reviews">OpenPlaceRecenzii</string>
     <string name="opr_use_dev_url">Utilizați test.openplacereviews.org</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
@@ -3620,7 +3620,7 @@
     <string name="plugin_ski_name">Vedere harta de schi</string>
     <string name="plugin_nautical_descr">Îmbogățește harta cu informații despre rutele de navigație, luminile de navigație, zonele de pericol nautic, zonele cu restricții de navigație sau de acostare etc. Pentru a le utiliza, descărcați hărțile nautice respective și activați stilul \"Nautical map\" în \"Configure map\".
 \n
-\nPentru mai multe informații, consultați https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nPentru mai multe informații, consultați %1$s.</string>
     <string name="plugin_nautical_name">Vedere harta nautică</string>
     <string name="plugin_touringview_descr">Activarea acestei vizualizări schimbă stilul hărții OsmAnd în \"Touring view\", aceasta fiind o vizualizare specială, cu multe detalii, pentru călătorii și șoferii profesioniști.
 \n
@@ -3638,7 +3638,7 @@
 \n
 \nDatele de bază provin din SRTM și ASTER.
 \n
-\nPentru mai multe informații, consultați http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nPentru mai multe informații, consultați %1$s.</string>
     <string name="lang_ber">Berberă</string>
     <string name="lang_kab">Cabila</string>
     <string name="lang_hsb">Sorabă (Superioară)</string>
@@ -4912,7 +4912,7 @@
 \n- widget-uri bazate pe locație
 \n- izolatoarele de temperatură / presiune
 \n
-\nDatele meteorologice sunt furnizate de Sistemul global de prognoză (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDatele meteorologice sunt furnizate de Sistemul global de prognoză (GFS, %1$s).</string>
     <string name="shared_string_contours">Curbe (izolinii)</string>
     <string name="shared_string_weather">Meteo</string>
     <string name="empty_screen_weather_contours">Activați pentru a vizualiza curbele meteorologice pe hartă.</string>
@@ -4931,7 +4931,7 @@
     <string name="coordinates_widget_map_center">Coordonate: centrul hărții</string>
     <string name="shared_string_normal">Normal</string>
     <string name="shared_string_large">Mare</string>
-    <string name="rotate_map_manual_opt">Fix (rotit manual)</string>
+    <string name="rotate_map_manual_opt">Rotit manual</string>
     <string name="map_markers_desc">Widgetul afișează distanța sau ora estimată de sosire (ETA) pentru primele două repere din lista de repere de pe hartă.</string>
     <string name="map_widget_ant_bicycle_dist_desc">Afișează distanța parcursă</string>
     <string name="nautical_depth_points">Puncte adâncime nautică</string>
@@ -5241,7 +5241,6 @@
     <string name="shared_string_close_the_dialog">Închideți dialogul</string>
     <string name="power_watts_unit">Wați</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="free_mode">Modul liber</string>
     <string name="terrain_map">Hartă de teren</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="relief_3d_description">Dețineți și observați macheta la scară a cartierului dumneavoastră sau a întregului continent.</string>
@@ -5318,4 +5317,11 @@
 \n • Elevation change and slope evaluation reworked
 \n
 \n</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Utilizați raster sqltiedb raster pentru pantă / hillshade</string>
+    <string name="cache_size">Dimensiunea cache-ului</string>
+    <string name="may_be_used_if_there_is_shortcut">Poate fi utilizat în cazul în care există o scurtătură</string>
+    <string name="routing_attr_allow_via_ferrata_name">Traseu de munte (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Traseu de munte echipat cu cabluri fixe, cu stâlpi, scări și poduri.</string>
+    <string name="shared_string_avoid">Evitați</string>
+    <string name="free_settings_backup">Copie de rezervă gratuită a setărilor</string>
 </resources>
