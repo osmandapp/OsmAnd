@@ -123,6 +123,7 @@ import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -1499,7 +1500,9 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				String fileName = file.getName();
-				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
+				String absolutePath = file.getAbsolutePath();
+				String relativePath = GpxUiHelper.getGpxFileRelativePath(app, absolutePath);
+				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
 				long modifiedTime = dataItem.getFileLastModifiedTime();
 				long fileSize = file.length();
 				int color = dataItem.getColor();
@@ -1512,7 +1515,7 @@ public class OsmandAidlApi {
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
-				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details));
+				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, relativePath, modifiedTime, fileSize, active, colorName, details));
 			}
 		}
 		return true;
