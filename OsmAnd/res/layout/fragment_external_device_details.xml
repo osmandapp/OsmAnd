@@ -163,14 +163,17 @@
 						osmand:typeface="@string/font_roboto_medium" />
 
 					<LinearLayout
+						android:id="@+id/connection_type_container"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_details_connection"
 						android:orientation="horizontal">
 
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
 							android:lineSpacingExtra="5sp"
 							android:padding="@dimen/content_padding"
 							android:text="@string/external_device_details_connection"
@@ -181,6 +184,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
 							android:lineSpacingExtra="5sp"
 							android:padding="@dimen/content_padding"
 							android:text="-"
@@ -196,14 +200,17 @@
 						android:layout_marginLeft="@dimen/content_padding" />
 
 					<LinearLayout
+						android:id="@+id/battery_level_container"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_details_battery"
 						android:orientation="horizontal">
 
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
 							android:lineSpacingExtra="5sp"
 							android:padding="@dimen/content_padding"
 							android:text="@string/external_device_details_battery"
@@ -214,6 +221,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
 							android:lineSpacingExtra="5sp"
 							android:padding="@dimen/content_padding"
 							android:text="-"

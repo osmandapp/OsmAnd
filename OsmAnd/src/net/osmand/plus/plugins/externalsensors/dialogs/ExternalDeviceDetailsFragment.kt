@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,7 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.externalsensors.adapters.DeviceCharacteristicsAdapter
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.BATTERY_UNKNOWN_LEVEL_VALUE
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice
@@ -44,6 +46,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     lateinit var device: AbstractDevice<out AbstractSensor>
     private var connectionState: TextView? = null
     private var batteryLevel: TextView? = null
+    private var batteryLevelContentView: View? = null
     private var progress: View? = null
     private var receivedDataView: RecyclerView? = null
     private lateinit var receivedDataAdapter: DeviceCharacteristicsAdapter
@@ -83,11 +86,16 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         connectionState = view.findViewById(R.id.connection_state)
         batteryLevel = view.findViewById(R.id.battery_level)
         progress = view.findViewById(R.id.progress_bar)
+        batteryLevelContentView = view.findViewById(R.id.battery_level_container)
         updateConnectedState(view)
         updateButtonState(view)
+        val connectionTypeContentView: View = view.findViewById(R.id.connection_type_container)
         val connectionTypeTextView: TextView = view.findViewById(R.id.connection_type)
-        connectionTypeTextView.text =
-            getConnectionTypeName()
+        var connectionType = getConnectionTypeName()
+        connectionTypeTextView.text = connectionType
+        var connectionRes = R.string.external_device_details_connection
+        connectionTypeContentView.contentDescription =
+            "${app.getString(connectionRes)} $connectionType"
         receivedDataAdapter = DeviceCharacteristicsAdapter(app, nightMode)
         receivedDataView = view.findViewById(R.id.received_data)
         receivedDataView!!.adapter = receivedDataAdapter
@@ -104,22 +112,32 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     private fun updateConnectedState(view: View) {
         val isConnected = device.isConnected
         val rssi = device.rssi
-        val signalLevelIcon: Int = if (rssi > -50) {
-            R.drawable.ic_action_signal_high
+        val signalLevelIcon = if (!isConnected) {
+            app.uiUtilities.getIcon(R.drawable.ic_action_signal_not_found, nightMode)
+        } else if (rssi > -50) {
+            AppCompatResources.getDrawable(app, R.drawable.ic_action_signal_high)
         } else if (rssi > -70) {
-            R.drawable.ic_action_signal_middle
+            AppCompatResources.getDrawable(app, R.drawable.ic_action_signal_middle)
         } else {
-            R.drawable.ic_action_signal_low
+            AppCompatResources.getDrawable(app, R.drawable.ic_action_signal_low)
         }
         val connectedTextId =
-            if (isConnected) R.string.bluetooth_connected else R.string.bluetooth_disconnected
-        connectionState?.text = String.format(
+            if (isConnected) R.string.external_device_connected else R.string.external_device_disconnected
+
+        connectionState?.text = app.getString(
+            R.string.ltr_or_rtl_combine_via_comma,
             app.getString(connectedTextId),
             getConnectionTypeName()
         )
         val connectionStateIcon: ImageView = view.findViewById(R.id.connection_state_icon)
-        connectionStateIcon.setImageResource(signalLevelIcon)
-        batteryLevel?.text = device.batteryLevel.toString()
+        connectionStateIcon.setImageDrawable(signalLevelIcon)
+        var batteryLevelValue = device.batteryLevel.toString()
+        batteryLevel?.text = batteryLevelValue
+        if (device.batteryLevel == BATTERY_UNKNOWN_LEVEL_VALUE) {
+            batteryLevelValue = app.getString(R.string.res_unknown)
+        }
+        val strRes = R.string.external_device_details_battery
+        batteryLevelContentView?.contentDescription = "${app.getString(strRes)} $batteryLevelValue"
         val widgetIcon: ImageView = view.findViewById(R.id.widget_icon)
         val deviceType = device.deviceType
         deviceType.let {
