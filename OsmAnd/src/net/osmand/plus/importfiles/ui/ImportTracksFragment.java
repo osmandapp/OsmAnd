@@ -108,10 +108,11 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 		if (savedInstanceState == null) {
 			collectTracks();
+		} else {
+			selectedFolder = savedInstanceState.getString(SELECTED_DIRECTORY_KEY);
 		}
-		if (selectedFolder == null) {
-			String importDir = app.getAppPath(GPX_IMPORT_DIR).getName();
-			selectedFolder = savedInstanceState != null ? savedInstanceState.getString(SELECTED_DIRECTORY_KEY) : importDir;
+		if (Algorithms.isEmpty(selectedFolder)) {
+			selectedFolder = app.getAppPath(GPX_IMPORT_DIR).getAbsolutePath();
 		}
 
 		FragmentActivity activity = requireActivity();
@@ -295,7 +296,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	private void importTracks() {
-		File folder = getFolderFile(selectedFolder);
+		File folder = new File(selectedFolder);
 		SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveTracksTask = null);
 		saveTracksTask = new SaveTracksTask(new ArrayList<>(selectedTracks), folder, saveGpxListener);
 		saveTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -326,35 +327,31 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			app.showToastMessage(R.string.file_already_imported);
 			dismissAndOpenTracks();
 		} else {
-			File destinationDir = getFolderFile(selectedFolder);
+			File destinationDir = new File(selectedFolder);
 			SaveImportedGpxListener saveGpxListener = getSaveGpxListener(() -> saveAsOneTrackTask = null);
 			saveAsOneTrackTask = new SaveGpxAsyncTask(app, gpxFile, destinationDir, fileName, saveGpxListener, false);
 			saveAsOneTrackTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
-	@NonNull
-	private File getFolderFile(@NonNull String folderName) {
-		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
-		return Algorithms.stringsEqual(folderName, gpxDir.getName()) ? gpxDir : new File(gpxDir, folderName);
-	}
-
 	@Override
-	public void onFolderSelected(@NonNull String folderName) {
-		selectedFolder = folderName;
+	public void onFolderSelected(@NonNull String folderPath) {
+		selectedFolder = folderPath;
 		adapter.setSelectedFolder(selectedFolder);
 	}
 
 	@Override
 	public void onFolderSelected(@NonNull File folder) {
-		selectedFolder = folder.getName();
+		selectedFolder = folder.getAbsolutePath();
 		adapter.setSelectedFolder(selectedFolder);
 		adapter.notifyItemChanged(adapter.getItemCount() - 1);
 	}
 
 	@Override
 	public void onTrackFolderAdd(String folderName) {
-		File folder = getFolderFile(folderName);
+		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
+		File folder = new File(gpxDir, folderName);
+
 		folder.mkdirs();
 		onFolderSelected(folder);
 	}
