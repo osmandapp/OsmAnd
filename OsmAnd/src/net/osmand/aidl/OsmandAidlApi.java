@@ -81,6 +81,7 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.GpxNavigationParams;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.NavigateGpxHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -668,13 +669,13 @@ public class OsmandAidlApi {
 					boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
-							MapActivity mapActivity1 = mapActivityRef.get();
-							if (mapActivity1 != null && !routingHelper.isFollowingMode()) {
-								ExternalApiHelper.startNavigation(mapActivity1, start, startDesc, dest, destDesc, profile, locationPermission);
+							MapActivity activity = mapActivityRef.get();
+							if (activity != null && !routingHelper.isFollowingMode()) {
+								NavigateGpxHelper.startNavigation(activity, start, startDesc, dest, destDesc, profile, locationPermission);
 							}
 						});
 					} else {
-						ExternalApiHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
+						NavigateGpxHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
 					}
 				}
 			}
@@ -764,7 +765,7 @@ public class OsmandAidlApi {
 						params.setSnapToRoad(intent.getBooleanExtra(AIDL_SNAP_TO_ROAD, false));
 						params.setSnapToRoadMode(intent.getStringExtra(AIDL_SNAP_TO_ROAD_MODE));
 						params.setSnapToRoadThreshold(intent.getIntExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, 50));
-						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, params);
+						NavigateGpxHelper.saveAndNavigateGpx(mapActivity, gpx, params);
 					}
 				}
 			}
