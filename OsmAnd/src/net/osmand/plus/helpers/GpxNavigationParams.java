@@ -7,53 +7,59 @@ public class GpxNavigationParams {
 	private boolean passWholeRoute;
 	private boolean snapToRoad;
 	private String snapToRoadMode;
-	private int snapToRoadThreshold;
+	private int snapToRoadThreshold = 50;
 
 	public boolean isForce() {
 		return force;
 	}
 
-	public void setForce(boolean force) {
+	public GpxNavigationParams setForce(boolean force) {
 		this.force = force;
+		return this;
 	}
 
 	public boolean isCheckLocationPermission() {
 		return checkLocationPermission;
 	}
 
-	public void setCheckLocationPermission(boolean checkLocationPermission) {
+	public GpxNavigationParams setCheckLocationPermission(boolean checkLocationPermission) {
 		this.checkLocationPermission = checkLocationPermission;
+		return this;
 	}
 
 	public boolean isPassWholeRoute() {
 		return passWholeRoute;
 	}
 
-	public void setPassWholeRoute(boolean passWholeRoute) {
+	public GpxNavigationParams setPassWholeRoute(boolean passWholeRoute) {
 		this.passWholeRoute = passWholeRoute;
+		return this;
 	}
 
 	public boolean isSnapToRoad() {
 		return snapToRoad;
 	}
 
-	public void setSnapToRoad(boolean snapToRoad) {
+	public GpxNavigationParams setSnapToRoad(boolean snapToRoad) {
 		this.snapToRoad = snapToRoad;
+		return this;
 	}
 
 	public String getSnapToRoadMode() {
 		return snapToRoadMode;
 	}
 
-	public void setSnapToRoadMode(String snapToRoadMode) {
+	public GpxNavigationParams setSnapToRoadMode(String snapToRoadMode) {
 		this.snapToRoadMode = snapToRoadMode;
+		return this;
 	}
 
 	public int getSnapToRoadThreshold() {
 		return snapToRoadThreshold;
 	}
 
-	public void setSnapToRoadThreshold(int snapToRoadThreshold) {
+	public GpxNavigationParams setSnapToRoadThreshold(int snapToRoadThreshold) {
 		this.snapToRoadThreshold = snapToRoadThreshold;
+		return this;
 	}
 }

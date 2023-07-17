@@ -17,6 +17,8 @@ public class NavigateGpxParams extends AidlParams {
 	private String snapToRoadMode;
 	private int snapToRoadThreshold;
 
+	private String fileName;
+
 	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission) {
 		this.data = data;
 		this.force = force;
@@ -93,6 +95,14 @@ public class NavigateGpxParams extends AidlParams {
 		return needLocationPermission;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("data", data);
@@ -103,6 +113,7 @@ public class NavigateGpxParams extends AidlParams {
 		bundle.putBoolean("snapToRoad", snapToRoad);
 		bundle.putString("snapToRoadMode", snapToRoadMode);
 		bundle.putInt("snapToRoadThreshold", snapToRoadThreshold);
+		bundle.putString("fileName", fileName);
 	}
 
 	@Override
@@ -115,5 +126,6 @@ public class NavigateGpxParams extends AidlParams {
 		snapToRoad = bundle.getBoolean("snapToRoad");
 		snapToRoadMode = bundle.getString("snapToRoadMode");
 		snapToRoadThreshold = bundle.getInt("snapToRoadThreshold");
+		fileName = bundle.getString("fileName", null);
 	}
 }
