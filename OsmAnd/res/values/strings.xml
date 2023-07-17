@@ -10,7 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_sacScale_description">Swiss Alpine Club</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italian Alpine Club)</string>
+    <string name="difficulty_classification_description">Difficulty classification types for the routes.</string>
+    <string name="difficulty_classification">Difficulty classification</string>
     <string name="free_ride">Free ride</string>
     <string name="free_settings_backup">Free Settings Backup</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqltiedb for slope / hillshade</string>
@@ -90,8 +95,6 @@
     <string name="tracks_empty_folder">Empty folder</string>
     <string name="track_not_recorded">Not recorded</string>
     <string name="shared_string_new_track">New track</string>
-    <string name="rendering_value_sacScale_name">SAC scale</string>
-    <string name="rendering_value_caiScale_name">CAI scale</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
     <string name="map_3d_mode_hint">Long tap the button allows to change button position.</string>
