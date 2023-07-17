@@ -422,7 +422,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public boolean isLoadingTracks() {
-		return asyncLoader == null || asyncLoader.getStatus() != Status.RUNNING;
+		return asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING;
 	}
 
 	@Override

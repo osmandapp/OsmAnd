@@ -1461,8 +1461,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplified) {
-		saveNewGpx(folderName, fileName, showOnMap, simplified, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
+	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName, boolean showOnMap, boolean simplified) {
+		saveNewGpx(folderPath, fileName, showOnMap, simplified, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
 	}
 
 	MeasurementAdapterListener createMeasurementAdapterListener(ItemTouchHelper touchHelper) {
@@ -1585,8 +1585,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
-				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, "", getSuggestedFileName(), null, true, true);
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				SaveAsNewTrackBottomSheetDialogFragment.showInstance(manager, getSuggestedFileName(), this, true, true);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 			}
@@ -1812,13 +1812,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return displayedName;
 	}
 
-	private void saveNewGpx(String folderName, String fileName, boolean showOnMap,
+	private void saveNewGpx(String folderPath, String fileName, boolean showOnMap,
 	                        boolean simplified, FinalSaveAction finalSaveAction) {
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		if (!Algorithms.isEmpty(folderName) && !dir.getName().equals(folderName)) {
-			dir = new File(dir, folderName);
-		}
 		fileName += GPX_FILE_EXT;
+		File dir = Algorithms.isEmpty(folderPath) ? app.getAppPath(GPX_INDEX_DIR) : new File(folderPath);
 		saveNewGpx(dir, fileName, showOnMap, simplified, finalSaveAction);
 	}
 

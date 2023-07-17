@@ -9,6 +9,6 @@
 	<item
 		android:id="@+id/action_menu"
 		android:icon="@drawable/ic_overflow_menu_white"
-		android:title="@string/shared_string_menu"
+		android:title="@string/shared_string_more_actions"
 		app:showAsAction="always" />
 </menu>

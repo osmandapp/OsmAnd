@@ -479,8 +479,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
 					fileName = FileUtils.createUniqueFileName(app, suggestedName, IndexConstants.GPX_INDEX_DIR, GPX_FILE_EXT);
 				}
-				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, null, fileName, null, false, true);
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				SaveAsNewTrackBottomSheetDialogFragment.showInstance(manager, fileName, this, false, true);
 			}
 		};
 		saveRoute.setOnClickListener(saveOnClick);
@@ -893,11 +893,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	@Override
-	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
-		File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		if (folderName != null && !fileDir.getName().equals(folderName)) {
-			fileDir = new File(fileDir, folderName);
-		}
+	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName, boolean showOnMap, boolean simplifiedTrack) {
+		File fileDir = new File(folderPath);
 		File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
 		new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 	}

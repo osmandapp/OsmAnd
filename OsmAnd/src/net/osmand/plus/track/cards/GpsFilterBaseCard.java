@@ -5,34 +5,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
-import net.osmand.plus.track.helpers.save.SaveGpxHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXFile;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
-import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpsFilterHelper;
-import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
-import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.gpx.GPXFile;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
+import net.osmand.plus.track.helpers.GpsFilterHelper;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GpsFilterBaseCard extends MapBaseCard {
 
@@ -103,8 +104,8 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 		String sourceFileName = Algorithms.getFileNameWithoutExtension(sourceFileNameWithExtension);
 		String destFileName = sourceFileName + "-copy";
 		if (target instanceof SaveAsNewTrackFragmentListener) {
-			SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					target, null, sourceFileName, destFileName, false, true);
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			SaveAsNewTrackBottomSheetDialogFragment.showInstance(manager, destFileName, target, false, true);
 		}
 	}
 
@@ -115,12 +116,10 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 		File outFile = new File(newGpxFile.path);
 
 		SaveGpxHelper.saveGpx(outFile, newGpxFile, errorMessage -> {
-			if (app != null) {
-				String toastMessage = errorMessage == null
-						? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
-						: errorMessage.getMessage();
-				app.showToastMessage(toastMessage);
-			}
+			String toastMessage = errorMessage == null
+					? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
+					: errorMessage.getMessage();
+			app.showToastMessage(toastMessage);
 			if (target instanceof SaveIntoFileListener) {
 				((SaveIntoFileListener) target).onSavedIntoFile(newGpxFile.path);
 			}

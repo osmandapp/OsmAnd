@@ -48,7 +48,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -198,7 +197,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			items.addAll(trackItems);
 
 			if (shouldShowFolderStats()) {
-				items.add(TrackFolderAnalysis.getFolderAnalysis(selectedFolder));
+				items.add(selectedFolder.getFolderAnalysis());
 			}
 		}
 		return items;
@@ -267,7 +266,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void showSortByDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			SortByBottomSheet.showInstance(manager, this);
+			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
 		}
 	}
 

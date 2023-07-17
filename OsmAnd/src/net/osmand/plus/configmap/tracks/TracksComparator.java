@@ -15,6 +15,7 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.util.MapUtils;
 
@@ -73,13 +74,36 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareTrackFolders(@NonNull TrackFolder folder1, @NonNull TrackFolder folder2) {
+		TrackFolderAnalysis folderAnalysis1 = folder1.getFolderAnalysis();
+		TrackFolderAnalysis folderAnalysis2 = folder2.getFolderAnalysis();
+
 		switch (sortMode) {
 			case NAME_ASCENDING:
 				return compareTrackFolderNames(folder1, folder2);
 			case NAME_DESCENDING:
 				return -compareTrackFolderNames(folder1, folder2);
+			case DATE_ASCENDING:
+				return -compareFolderFilesByLastModified(folder1, folder2);
+			case DATE_DESCENDING:
+				return compareFolderFilesByLastModified(folder1, folder2);
 			case LAST_MODIFIED:
 				return compareFolderFilesByLastModified(folder1, folder2);
+			case DISTANCE_DESCENDING:
+				if (Math.abs(folderAnalysis1.totalDistance - folderAnalysis2.totalDistance) >= EQUIVALENT_TOLERANCE) {
+					return -Float.compare(folderAnalysis1.totalDistance, folderAnalysis2.totalDistance);
+				}
+			case DISTANCE_ASCENDING:
+				if (Math.abs(folderAnalysis1.totalDistance - folderAnalysis2.totalDistance) >= EQUIVALENT_TOLERANCE) {
+					return Float.compare(folderAnalysis1.totalDistance, folderAnalysis2.totalDistance);
+				}
+			case DURATION_DESCENDING:
+				if (folderAnalysis1.timeSpan != folderAnalysis2.timeSpan) {
+					return -Long.compare(folderAnalysis1.timeSpan, folderAnalysis2.timeSpan);
+				}
+			case DURATION_ASCENDING:
+				if (folderAnalysis1.timeSpan != folderAnalysis2.timeSpan) {
+					return Long.compare(folderAnalysis1.timeSpan, folderAnalysis2.timeSpan);
+				}
 		}
 		return compareTrackFolderNames(folder1, folder2);
 	}

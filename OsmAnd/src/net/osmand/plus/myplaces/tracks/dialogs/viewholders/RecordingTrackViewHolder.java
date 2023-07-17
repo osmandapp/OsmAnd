@@ -18,9 +18,12 @@ import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelecti
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+
+import java.util.Collections;
 
 public class RecordingTrackViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,8 +44,7 @@ public class RecordingTrackViewHolder extends RecyclerView.ViewHolder {
 
 	protected final boolean nightMode;
 
-	public RecordingTrackViewHolder(@NonNull View view, @Nullable TrackSelectionListener selectionListener,
-	                                @Nullable RecordingTrackListener recordingListener, boolean nightMode) {
+	public RecordingTrackViewHolder(@NonNull View view, @Nullable TrackSelectionListener selectionListener, @Nullable RecordingTrackListener recordingListener, boolean nightMode) {
 		super(view);
 		this.selectionListener = selectionListener;
 		this.recordingListener = recordingListener;
@@ -67,6 +69,12 @@ public class RecordingTrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull TrackItem trackItem) {
+		boolean selected = selectionListener != null && selectionListener.isTrackItemSelected(trackItem);
+		itemView.setOnClickListener(v -> {
+			if (selectionListener != null) {
+				selectionListener.onTrackItemsSelected(Collections.singleton(trackItem), !selected);
+			}
+		});
 		menuButton.setOnClickListener(v -> {
 			if (selectionListener != null) {
 				selectionListener.onTrackItemOptionsSelected(v, trackItem);
@@ -109,7 +117,7 @@ public class RecordingTrackViewHolder extends RecyclerView.ViewHolder {
 			String distance = OsmAndFormatter.getFormattedDistance(savingTrackHelper.getDistance(), app);
 			String duration = OsmAndFormatter.getFormattedDurationShort((int) (savingTrackHelper.getDuration() / 1000));
 			String pointsCount = String.valueOf(savingTrackHelper.getPoints());
-			description.setText(distance + " • " + duration + " • " + pointsCount);
+			description.setText(app.getString(R.string.ltr_or_rtl_triple_combine_via_bold_point, distance, duration, pointsCount));
 		} else {
 			description.setText(R.string.track_not_recorded);
 		}
@@ -119,7 +127,14 @@ public class RecordingTrackViewHolder extends RecyclerView.ViewHolder {
 		Context context = button.getContext();
 		button.setTitleId(titleId);
 		button.setIconId(iconId);
-		saveButton.setContentDescription(context.getString(descriptionId));
+		button.setContentDescription(context.getString(descriptionId));
+
+		int paddingHalf = context.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		int paddingSmall = context.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
+
+		TextView title = button.findViewById(R.id.button_text);
+		title.setCompoundDrawablePadding(paddingSmall);
+		AndroidUtils.setPadding(title, paddingHalf, 0, paddingSmall, 0);
 	}
 
 	public interface RecordingTrackListener {
