@@ -1,10 +1,14 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.HAZMAT_CATEGORY_USA_PREFIX;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.*;
-import static net.osmand.router.RoutingConfiguration.parseSilentInt;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.RoutingParameterType;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,106 +16,97 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 
 public class DangerousGoodsFragment extends BaseSettingsFragment {
 
-	private static final String DANGEROUS_GOODS_DESCRIPTION_KEY = "dangerous_goods_description";
-	private static final String HAZMAT_CATEGORY_USA_1 = "hazmat_category_usa_1";
-	private static final String HAZMAT_CATEGORY_USA_2 = "hazmat_category_usa_2";
-	private static final String HAZMAT_CATEGORY_USA_3 = "hazmat_category_usa_3";
-	private static final String HAZMAT_CATEGORY_USA_4 = "hazmat_category_usa_4";
-	private static final String HAZMAT_CATEGORY_USA_5 = "hazmat_category_usa_5";
-	private static final String HAZMAT_CATEGORY_USA_6 = "hazmat_category_usa_6";
-	private static final String HAZMAT_CATEGORY_USA_7 = "hazmat_category_usa_7";
-	private static final String HAZMAT_CATEGORY_USA_8 = "hazmat_category_usa_8";
-	private static final String HAZMAT_CATEGORY_USA_9 = "hazmat_category_usa_9";
-
-	private String lastPreferenceId;
+	private final List<RoutingParameter> parameters = new ArrayList<>();
 
 	@Override
-	protected void setupPreferences() {
-		setupDescription();
-		setupDangerousGoodsPreferences();
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		ApplicationMode mode = getSelectedAppMode();
+		GeneralRouter router = app.getRouter(mode);
+		if (router != null) {
+			Map<String, RoutingParameter> routingParameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
+			for (Map.Entry<String, RoutingParameter> entry : routingParameters.entrySet()) {
+				String key = entry.getKey();
+				RoutingParameter parameter = entry.getValue();
+				if (key.startsWith(HAZMAT_CATEGORY_USA_PREFIX) && parameter.getType() == RoutingParameterType.BOOLEAN) {
+					parameters.add(parameter);
+				}
+			}
+		}
 	}
 
 	@Override
 	protected void createToolbar(@NonNull LayoutInflater inflater, @NonNull View view) {
 		super.createToolbar(inflater, view);
-		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
-		if (toolbarTitle != null) {
-			toolbarTitle.setText(R.string.dangerous_goods);
-		}
+
+		boolean nightMode = isNightMode();
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.setBackgroundColor(ColorUtilities.getCardAndListBackgroundColor(app, nightMode));
+
+		TextView title = view.findViewById(R.id.toolbar_title);
+		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
+
+		ImageView closeButton = view.findViewById(R.id.close_button);
+		closeButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(app), ColorUtilities.getPrimaryIconColorId(nightMode)));
+
+		ImageView actionButton = toolbar.findViewById(R.id.action_button);
+		actionButton.setOnClickListener(v -> resetToDefault());
+		actionButton.setContentDescription(getString(R.string.reset_to_default));
+		actionButton.setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
+		AndroidUiHelper.updateVisibility(actionButton, true);
 	}
 
 	@Override
-	protected void updateToolbar() {
-		super.updateToolbar();
-		View view = getView();
-		if (view != null) {
-			ImageView resetIcon = view.findViewById(R.id.profile_icon);
-			resetIcon.setImageDrawable(getIcon(R.drawable.ic_action_reset_to_default_dark, ColorUtilities.getDefaultIconColorId(isNightMode())));
-
-			View resetButton = view.findViewById(R.id.profile_button);
-			resetButton.setContentDescription(getString(R.string.reset_to_default));
-			resetButton.setOnClickListener(v -> resetToDefault());
-			resetButton.setVisibility(View.VISIBLE);
-			AndroidUtils.setBackground(resetButton, null);
-		}
+	protected void setupPreferences() {
+		setupHazmatPreferences();
 	}
 
-	private void resetToDefault() {
-		RouteParametersFragment parametersFragment = getRouteParametersFragment();
-		if (parametersFragment != null) {
-			for (RoutingParameter parameter : parametersFragment.hazmatCategoryUSAParameters) {
-				if (parameter.getType() == RoutingParameterType.BOOLEAN) {
-					CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
-					pref.resetToDefault();
-				}
-			}
-			updateAllSettings();
-		}
-	}
+	private void setupHazmatPreferences() {
+		Context context = requireContext();
 
-	private void setupDescription() {
-		Preference preference = findPreference(DANGEROUS_GOODS_DESCRIPTION_KEY);
-		if (preference != null) {
-			preference.setTitle(getString(R.string.dangerous_goods_description));
-		}
-	}
+		Iterator<RoutingParameter> iterator = parameters.iterator();
+		while (iterator.hasNext()) {
+			RoutingParameter parameter = iterator.next();
 
-	private void setupDangerousGoodsPreferences() {
-		RouteParametersFragment fragment = getRouteParametersFragment();
-		if (fragment != null) {
-			PreferenceScreen screen = getPreferenceScreen();
-			for (RoutingParameter parameter : fragment.hazmatCategoryUSAParameters) {
-				String title = getRoutingStringPropertyName(app, parameter.getId(), parameter.getName());
-				if (parameter.getType() == RoutingParameterType.BOOLEAN) {
-					CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+			String id = parameter.getId();
+			String title = getRoutingStringPropertyName(app, id, parameter.getName());
+			CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(id, parameter.getDefaultBoolean());
 
-					SwitchPreferenceCompat preference = new SwitchPreferenceCompat(app);
-					preference.setKey(pref.getId());
-					preference.setTitle(title);
-					preference.setLayoutResource(R.layout.preference_switch_divider);
-					preference.setIcon(getDangerousGoodsPrefIcon(parameter.getId()));
-					screen.addPreference(preference);
+			SwitchPreferenceCompat preference = createSwitchPreference(pref, title, null, R.layout.preference_switch);
+			preference.setLayoutResource(R.layout.preference_switch);
+			preference.setIcon(getHazmatPrefIcon(id));
+			addOnPreferencesScreen(preference);
 
-					lastPreferenceId = pref.getId();
-				}
+			if (iterator.hasNext()) {
+				Preference divider = new Preference(context);
+				divider.setLayoutResource(R.layout.divider_half_item_with_background);
+				divider.setKey(id + "_divider");
+				divider.setSelectable(false);
+				addOnPreferencesScreen(divider);
 			}
 		}
 	}
@@ -119,52 +114,38 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		holder.itemView.setContentDescription(getString(R.string.shared_string_class) + " " + getDangerousGoodsClass(preference.getKey()) + " " + preference.getTitle());
-		if (preference.getKey().equals(lastPreferenceId)) {
-			AndroidUiHelper.updateVisibility(holder.itemView.findViewById(R.id.divider), false);
+
+		String key = preference.getKey();
+		if (key.startsWith(ROUTING_PREFERENCE_PREFIX + HAZMAT_CATEGORY_USA_PREFIX)) {
+			int hazmatClass = getHazmatUsaClass(key.replace(ROUTING_PREFERENCE_PREFIX, ""));
+			if (hazmatClass >= 0) {
+				holder.itemView.setContentDescription(getString(R.string.shared_string_class)
+						+ " " + hazmatClass + " " + preference.getTitle());
+			}
 		}
 	}
 
-	public static int getDangerousGoodsClass(String id) {
-		Matcher matcher = Pattern.compile("(hazmat_category_usa_)\\d+$").matcher(id);
-		if (matcher.find()) {
-			String[] separatedKey = id.split("_");
-			return parseSilentInt(separatedKey[separatedKey.length - 1], 0);
+	private void resetToDefault() {
+		ApplicationMode mode = getSelectedAppMode();
+		for (RoutingParameter parameter : parameters) {
+			settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean()).resetModeToDefault(mode);
 		}
-		return 0;
+		updateAllSettings();
 	}
 
 	@Nullable
-	private RouteParametersFragment getRouteParametersFragment() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof RouteParametersFragment) {
-			return (RouteParametersFragment) fragment;
+	private Drawable getHazmatPrefIcon(@NonNull String id) {
+		int hazmatClass = getHazmatUsaClass(id);
+		if (hazmatClass >= 0) {
+			int iconId = AndroidUtils.getDrawableId(app, "ic_action_placard_hazard_" + hazmatClass);
+			if (iconId > 0) {
+				return getIcon(iconId);
+			}
 		}
 		return null;
 	}
 
-	private Drawable getDangerousGoodsPrefIcon(String prefId) {
-		switch (prefId) {
-			case HAZMAT_CATEGORY_USA_1:
-				return getIcon(R.drawable.ic_action_placard_hazard_1);
-			case HAZMAT_CATEGORY_USA_2:
-				return getIcon(R.drawable.ic_action_placard_hazard_2);
-			case HAZMAT_CATEGORY_USA_3:
-				return getIcon(R.drawable.ic_action_placard_hazard_3);
-			case HAZMAT_CATEGORY_USA_4:
-				return getIcon(R.drawable.ic_action_placard_hazard_4);
-			case HAZMAT_CATEGORY_USA_5:
-				return getIcon(R.drawable.ic_action_placard_hazard_5);
-			case HAZMAT_CATEGORY_USA_6:
-				return getIcon(R.drawable.ic_action_placard_hazard_6);
-			case HAZMAT_CATEGORY_USA_7:
-				return getIcon(R.drawable.ic_action_placard_hazard_7);
-			case HAZMAT_CATEGORY_USA_8:
-				return getIcon(R.drawable.ic_action_placard_hazard_8);
-			case HAZMAT_CATEGORY_USA_9:
-				return getIcon(R.drawable.ic_action_placard_hazard_9);
-			default:
-				return null;
-		}
+	public static int getHazmatUsaClass(@NonNull String id) {
+		return Algorithms.parseIntSilently(id.replace(HAZMAT_CATEGORY_USA_PREFIX, ""), -1);
 	}
 }
