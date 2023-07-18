@@ -1280,7 +1280,6 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Prikazuj puteve prema putanjama OSMC-a.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Putanje za pešačenje</string>
     <string name="rendering_attr_alpineHiking_description">Prikazuj puteve prema lestvici SAC-a.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpska skala za planinarenje (SAC)</string>
     <string name="download_roads_only_maps">Karta puteva</string>
     <string name="map_screen_orientation">Orijentacija ekrana</string>
     <string name="map_orientation_landscape">Pejzaž</string>

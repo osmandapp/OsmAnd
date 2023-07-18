@@ -1325,7 +1325,6 @@
     <string name="routing_attr_avoid_borders_name">Ingen grensepasseringer</string>
     <string name="routing_attr_height_name">Høyde</string>
     <string name="routing_attr_height_description">Spesifiser kjøretøyhøyde som tillates på ruter.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpin vandringsskala</string>
     <string name="voices">Talemeldinger</string>
     <string name="downloads_left_template">%1$s nedlastinger igjen</string>
     <string name="other_menu_group">Annet</string>

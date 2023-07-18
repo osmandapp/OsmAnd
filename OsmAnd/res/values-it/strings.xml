@@ -1217,7 +1217,6 @@
     <string name="rendering_attr_subwayMode_name">Percorsi metró</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
     <string name="pause_navigation">Metti in pausa la navigazione</string>
-    <string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino</string>
     <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinerari escursionistici</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disegna i percorsi in base alle tracce OSMC.</string>

@@ -1229,7 +1229,6 @@
     <string name="rendering_attr_subwayMode_name">Metroruter</string>
     <string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
-    <string name="rendering_attr_alpineHiking_name">Alpin vandreskala</string>
     <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC/CAI-skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandreruter</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC-spor.</string>

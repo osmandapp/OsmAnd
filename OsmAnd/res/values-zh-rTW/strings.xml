@@ -1230,7 +1230,6 @@
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-    <string name="rendering_attr_alpineHiking_name">登山健行等級</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">登山健行路線</string>
     <string name="rendering_attr_alpineHiking_description">依據 SAC/CAI 等級繪製路徑。</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑。</string>

@@ -2453,7 +2453,6 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Siendes</string>
     <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC scale.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
     <string name="download_srtm_maps">Contour lines</string>
     <string name="index_srtm_ele">Contour lines</string>
     <string name="index_srtm_parts">parts</string>

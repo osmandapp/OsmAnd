@@ -372,7 +372,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(MTB_ROUTES)) {
 			tv.setText(R.string.app_mode_mountain_bicycle);
 		} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
-			tv.setText(R.string.difficulty_classification);
+			tv.setText(R.string.rendering_attr_alpineHiking_name);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);

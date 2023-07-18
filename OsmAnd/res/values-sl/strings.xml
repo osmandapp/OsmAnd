@@ -1266,7 +1266,6 @@
     <string name="lang_sc">Sardinščina</string>
     <string name="rendering_attr_subwayMode_name">Proge podzemne železnice</string>
     <string name="continue_navigation">Nadaljuj z navigacijo</string>
-    <string name="rendering_attr_alpineHiking_name">Lestvica alpskega pohodništva</string>
     <string name="arrival_distance_factor_early">Predčasno</string>
     <string name="arrival_distance_factor_normally">Pravočasno</string>
     <string name="arrival_distance_factor_late">Pozno</string>

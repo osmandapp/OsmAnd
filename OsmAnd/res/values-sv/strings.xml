@@ -1202,7 +1202,6 @@
     <string name="rendering_attr_subwayMode_name">Tunnelbanelinjer</string>
     <string name="continue_navigation">Fortsätt navigeringen</string>
     <string name="pause_navigation">Pausa navigeringen</string>
-    <string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skalan.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandringsrutter</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Återge stigar enligt OSMC-spår.</string>

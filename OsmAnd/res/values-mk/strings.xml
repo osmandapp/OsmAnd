@@ -3480,7 +3480,6 @@
     <string name="download_roads_only_item">Samo patista</string>
     <string name="download_srtm_maps">Konturni linii</string>
     <string name="download_regular_maps">Standardna karta</string>
-    <string name="rendering_attr_alpineHiking_name">Alpska skala za planinarenje (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Plainarski marsruti</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Avtomatski iscrtani karti spored OSMC tragite.</string>
     <string name="zxing_barcode_scanner_not_found">Aplikacijata ZXing Barcode Scanner ne e instalirana. Baraj vo Google Play\?</string>

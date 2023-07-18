@@ -72,7 +72,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 		headerIcon = container.findViewById(R.id.icon);
 		headerDescription = container.findViewById(R.id.description);
 
-		headerTitle.setText(getString(R.string.difficulty_classification));
+		headerTitle.setText(getString(R.string.rendering_attr_alpineHiking_name));
 
 		compoundButton = container.findViewById(R.id.toggle_item);
 		compoundButton.setClickable(false);
@@ -98,7 +98,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 
 		if (alpineHikingPref.get()) {
 			String scaleScheme = AndroidUtils.getRenderingStringPropertyValue(app, alpineHikingScaleSchemePref.get());
-			headerDescription.setText(getString(R.string.shared_string_on) + ", " + scaleScheme);
+			headerDescription.setText(String.format("%s, %s", getString(R.string.shared_string_on), scaleScheme));
 			AndroidUiHelper.updateVisibility(headerDescription, true);
 		} else {
 			AndroidUiHelper.updateVisibility(headerDescription, false);
@@ -114,11 +114,13 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 		itemsViews.clear();
 
 		RenderingRuleProperty scaleSchemeProperty = app.getRendererRegistry().getCustomRenderingRuleProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
-		String[] possibleValues = scaleSchemeProperty.getPossibleValues();
-		for (int i = 0; i < possibleValues.length; i++) {
-			boolean hasDivider = i != possibleValues.length - 1;
-			View propertyView = createRadioButton(possibleValues[i], inflater, container, hasDivider);
-			container.addView(propertyView);
+		if(scaleSchemeProperty != null){
+			String[] possibleValues = scaleSchemeProperty.getPossibleValues();
+			for (int i = 0; i < possibleValues.length; i++) {
+				boolean hasDivider = i != possibleValues.length - 1;
+				View propertyView = createRadioButton(possibleValues[i], inflater, container, hasDivider);
+				container.addView(propertyView);
+			}
 		}
 	}
 

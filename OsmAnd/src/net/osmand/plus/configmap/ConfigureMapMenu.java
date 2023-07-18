@@ -294,9 +294,11 @@ public class ConfigureMapMenu {
 			scaleSchemePref.set(alpineHikingScaleSchemeProperty.getPossibleValues()[0]);
 		}
 		String scaleScheme = AndroidUtils.getRenderingStringPropertyValue(app, scaleSchemePref.get());
-
+		String title = AndroidUtils.getRenderingStringPropertyName(app, attrName, alpineHikingScaleSchemeProperty != null
+				? alpineHikingScaleSchemeProperty.getName()
+				: attrName);
 		return new ContextMenuItem(ROUTES_ID + attrName)
-				.setTitle(app.getString(R.string.difficulty_classification))
+				.setTitle(title)
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(pref.get())

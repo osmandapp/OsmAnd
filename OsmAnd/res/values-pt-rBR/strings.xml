@@ -770,7 +770,6 @@
     <string name="local_indexes_cat_srtm">Curvas de nível</string>
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="download_srtm_maps">Curvas de nível</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de montanhismo</string>
     <string name="rendering_attr_showRoadMaps_name">Apenas mapa de estradas</string>
     <string name="safe_mode_description">Executar o aplicativo em modo seguro (mais lento).</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na Google Play\?</string>

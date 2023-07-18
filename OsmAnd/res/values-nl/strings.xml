@@ -1210,7 +1210,6 @@
     <string name="rendering_attr_subwayMode_name">Metrolijnen</string>
     <string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
-    <string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren.</string>

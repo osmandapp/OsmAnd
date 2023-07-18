@@ -1605,7 +1605,6 @@
     <string name="action_create">کنش ایجاد</string>
     <string name="action_modify">کنش اصلاح</string>
     <string name="action_delete">کنش حذف</string>
-    <string name="rendering_attr_alpineHiking_name">مقیاس پیاده‌گردی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک مطابق دورهٔ انتخابی است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
