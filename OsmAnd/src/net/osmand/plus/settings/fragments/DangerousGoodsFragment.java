@@ -11,9 +11,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -122,7 +124,20 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 				holder.itemView.setContentDescription(getString(R.string.shared_string_class)
 						+ " " + hazmatClass + " " + preference.getTitle());
 			}
+			View item = holder.itemView.findViewById(R.id.selectable_list_item);
+			item.setMinimumHeight(getDimen(R.dimen.wpt_list_item_height));
+
+			View icon = holder.itemView.findViewById(android.R.id.icon);
+			ViewGroup.LayoutParams layoutParams = icon.getLayoutParams();
+			int iconSize = getDimen(R.dimen.big_icon_size);
+			layoutParams.width = iconSize;
+			layoutParams.height = iconSize;
+			icon.setLayoutParams(layoutParams);
 		}
+	}
+
+	private int getDimen(@DimenRes int id){
+		return app.getResources().getDimensionPixelSize(id);
 	}
 
 	private void resetToDefault() {
