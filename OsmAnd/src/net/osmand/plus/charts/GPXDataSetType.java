@@ -92,7 +92,8 @@ public enum GPXDataSetType {
 			case SLOPE: {
 				return "%";
 			}
-			case SPEED: {
+			case SPEED:
+			case SENSOR_SPEED: {
 				return settings.SPEED_SYSTEM.get().toShortString(app);
 			}
 			case SENSOR_HEART_RATE: {
@@ -104,7 +105,6 @@ public enum GPXDataSetType {
 			case SENSOR_BIKE_CADENCE: {
 				return app.getString(R.string.revolutions_per_minute_unit);
 			}
-			case SENSOR_SPEED:
 			case SENSOR_TEMPERATURE:
 				return "";
 		}
