@@ -48,7 +48,6 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	private View applyButton;
 	protected LinearLayout contentContainer;
 
-
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;
@@ -132,12 +131,19 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
-
-		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), ZOOM_IN_BUTTON_ID));
-		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), ZOOM_OUT_BUTTON_ID));
-		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), BACK_TO_LOC_BUTTON_ID, false));
-
-		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
+		ImageView mapZoomIn = view.findViewById(R.id.map_zoom_in_button);
+		ImageView mapZoomOut = view.findViewById(R.id.map_zoom_out_button);
+		ImageView myLocation = view.findViewById(R.id.map_my_location_button);
+		if (AndroidUiHelper.isOrientationPortrait(activity)) {
+			layer.addMapButton(new ZoomInButton(activity, mapZoomIn, ZOOM_IN_BUTTON_ID));
+			layer.addMapButton(new ZoomOutButton(activity, mapZoomOut, ZOOM_OUT_BUTTON_ID));
+			layer.addMapButton(new MyLocationButton(activity, myLocation, BACK_TO_LOC_BUTTON_ID, false));
+			AndroidUiHelper.updateVisibility(zoomButtonsView, true);
+		} else {
+			mapZoomIn.setVisibility(View.INVISIBLE);
+			mapZoomOut.setVisibility(View.INVISIBLE);
+			myLocation.setVisibility(View.INVISIBLE);
+		}
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
@@ -150,7 +156,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		title.setText(getToolbarTitle());
 
 		ImageView backButton = view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getIcon(AndroidUtils.getNavigationIconResId(view.getContext()), ColorUtilities.getDefaultIconColorId(nightMode)));
+		backButton.setImageDrawable(getIcon(R.drawable.ic_action_close, ColorUtilities.getDefaultIconColorId(nightMode)));
 		backButton.setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
@@ -166,9 +172,10 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	private void moveCompassButton(@NonNull View view) {
 		int btnSizePx = getDimensionPixelSize(R.dimen.map_small_button_size);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
-		int toolbarHeight = getDimensionPixelSize(R.dimen.toolbar_height);
-		int topMargin = getDimensionPixelSize(R.dimen.map_small_button_margin);
-		int startMargin = getDimensionPixelSize(R.dimen.map_button_margin);
+		boolean isPortrait = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
+		int toolbarHeight = isPortrait ? getDimensionPixelSize(R.dimen.toolbar_height) : 0;
+		int topMargin = isPortrait ? getDimensionPixelSize(R.dimen.map_small_button_margin) : getDimensionPixelSize(R.dimen.content_padding_half);
+		int startMargin = isPortrait ? getDimensionPixelSize(R.dimen.map_button_margin) : (getDimensionPixelSize(R.dimen.dashboard_land_width) + getDimensionPixelSize(R.dimen.content_padding));
 		AndroidUtils.setMargins(params, startMargin, topMargin + toolbarHeight, 0, 0);
 
 		MapActivity activity = getMapActivity();

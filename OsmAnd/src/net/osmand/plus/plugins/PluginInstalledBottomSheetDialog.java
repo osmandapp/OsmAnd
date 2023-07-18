@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins;
 
+import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.SrtmDownloadItem.getAbbreviationInScopes;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -279,23 +282,25 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
 			}
 
+			StringBuilder descriptionBuilder = new StringBuilder().append(indexItem.getType().getString(app));
+			if (indexItem.getType() == SRTM_COUNTRY_FILE) {
+				descriptionBuilder.append(" ").append(getAbbreviationInScopes(app, indexItem));
+			}
+			descriptionBuilder.append(" • ").append(indexItem.getSizeDescription(app));
 			BaseBottomSheetItem mapIndexItem = new BottomSheetItemWithDescription.Builder()
-					.setDescription(indexItem.getType().getString(app) + " • " + indexItem.getSizeDescription(app))
+					.setDescription(descriptionBuilder.toString())
 					.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 					.setIcon(getContentIcon(indexItem.getType().getIconResource()))
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (downloadThread.isDownloading(indexItem)) {
-								downloadThread.cancelDownload(indexItem);
-								AndroidUiHelper.updateVisibility(progressBar, false);
-								secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
-							} else {
-								AndroidUiHelper.updateVisibility(progressBar, true);
-								progressBar.setIndeterminate(downloadThread.isDownloading());
-								secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-								new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
-							}
+					.setOnClickListener(v -> {
+						if (downloadThread.isDownloading(indexItem)) {
+							downloadThread.cancelDownload(indexItem);
+							AndroidUiHelper.updateVisibility(progressBar, false);
+							secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
+						} else {
+							AndroidUiHelper.updateVisibility(progressBar, true);
+							progressBar.setIndeterminate(downloadThread.isDownloading());
+							secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+							new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
 						}
 					})
 					.setTag(indexItem)

@@ -396,6 +396,10 @@ public class DownloadResources extends DownloadResourceGroup {
 				// Hide heightmaps of sqlite format
 				continue;
 			}
+			if (app.useOpenGlRenderer()
+					&& (ii.getType() == DownloadActivityType.HILLSHADE_FILE || ii.getType() == DownloadActivityType.SLOPE_FILE)) {
+				continue;
+			}
 			String basename = ii.getBasename();
 			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase());
 			if (region != null) {
