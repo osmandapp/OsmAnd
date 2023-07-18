@@ -58,7 +58,9 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 		int rssi = device.getRssi();
 		Drawable signalLevelIcon;
 		UiUtilities uiUtils = app.getUIUtilities();
-		if (rssi > -50) {
+		if (!device.isConnected()) {
+			signalLevelIcon = uiUtils.getIcon(R.drawable.ic_action_signal_not_found, nightMode);
+		} else if (rssi > -50) {
 			signalLevelIcon = uiUtils.getIcon(R.drawable.ic_action_signal_high);
 		} else if (rssi > -70) {
 			signalLevelIcon = uiUtils.getIcon(R.drawable.ic_action_signal_middle);
@@ -69,10 +71,18 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 		boolean isBle = device instanceof BLEAbstractDevice;
 		String bleTextMarker = app.getString(R.string.external_device_ble);
 		String antTextMarker = app.getString(R.string.external_device_ant);
-		holder.description.setText(String.format(
-				app.getString(device.isConnected() ? R.string.bluetooth_connected : R.string.bluetooth_disconnected),
-				isBle ? bleTextMarker : antTextMarker));
-		holder.description.setCompoundDrawablesWithIntrinsicBounds(signalLevelIcon, null, null, null);
+		int connectedTextId;
+		if (device.isConnected()) {
+			connectedTextId = R.string.external_device_connected;
+		} else {
+			connectedTextId = R.string.external_device_disconnected;
+		}
+		holder.description.setText(app.getString(
+				R.string.ltr_or_rtl_combine_via_comma,
+				app.getString(connectedTextId),
+				isBle ? bleTextMarker : antTextMarker
+		));
+		holder.description.setCompoundDrawablesRelativeWithIntrinsicBounds(signalLevelIcon, null, null, null);
 		holder.description.setGravity(Gravity.CENTER_VERTICAL);
 		holder.itemView.setOnClickListener((v) -> {
 			if (deviceClickListener != null) {
