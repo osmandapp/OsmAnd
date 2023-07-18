@@ -719,9 +719,7 @@ public class TrackDetailsMenu {
 		yAxisIcon.setImageDrawable(getImageDrawable(app, gpxItem.chartTypes));
 		yAxisTitle.setText(getGpxDataSetsName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
-			yAxis.setOnClickListener(v -> {
-				AnalyzeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
-			});
+			yAxis.setOnClickListener(v -> AnalyzeBottomSheet.showInstance(mapActivity.getSupportFragmentManager()));
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
 			yAxis.setOnClickListener(null);
