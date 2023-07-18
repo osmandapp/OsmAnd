@@ -7,7 +7,8 @@
 	android:layout_marginTop="@dimen/content_padding"
 	android:background="?attr/bg_color"
 	android:orientation="horizontal"
-	android:paddingStart="@dimen/content_padding">
+	android:paddingStart="@dimen/content_padding"
+	>
 
 	<ImageView
 		android:id="@+id/icon"
@@ -20,6 +21,7 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/content_padding"
 		android:orientation="vertical">
 
 		<LinearLayout
@@ -65,23 +67,18 @@
 
 		</LinearLayout>
 
-		<FrameLayout
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
 			android:id="@+id/dismiss_button_container"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/acceptable_touch_radius"
+			android:layout_height="wrap_content"
+			osmand:dialogButtonType="secondaryActive"
+			osmand:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
+			osmand:dialogButtonTopMargin="@dimen/content_padding_small"
+			osmand:dialogButtonHeight="@dimen/dialog_button_height"
+			osmand:dialogButtonTitle="@string/get_osmand_cloud"
 			android:layout_margin="@dimen/content_padding"
-			android:paddingTop="@dimen/content_padding_small_half"
-			android:paddingBottom="@dimen/content_padding_small_half"
-			android:layout_weight="0">
-
-			<include
-				android:id="@+id/dismiss_button"
-				layout="@layout/bottom_sheet_dialog_button"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				/>
-
-		</FrameLayout>
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_weight="0"/>
 
 	</LinearLayout>
 
