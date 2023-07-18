@@ -2264,6 +2264,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_highway_class_steps_name">Steps</string>
     <string name="rendering_attr_highway_class_path_name">Path</string>
     <string name="rendering_attr_highway_class_cycleway_name">Cycleway</string>
+    <string name="rendering_attr_highway_class_undefined_name">Undefined</string>
     <string name="rendering_attr_undefined_name">Undefined</string>
 	<string name="rendering_attr_highway_class_track_grade1_name">Grade 1</string>
 	<string name="rendering_attr_highway_class_track_grade2_name">Grade 2</string>
