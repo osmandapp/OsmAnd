@@ -253,7 +253,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				float distanceDifference = (wheelRevolutions - lastWheelRevolutions) * circumference / 1000.0f;
 				float totalDistance = (float) wheelRevolutions * (float) circumference / 1000.0f;
 				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * (float) circumference / 1000.0f;
-				float speed = (distanceDifference / timeDifference) * 3.6f;
+				float speed = (distanceDifference / timeDifference);
 				wheelCadence = (wheelRevolutions - lastWheelRevolutions) * 60.0f / timeDifference;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			}
