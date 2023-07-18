@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:minHeight="@dimen/bottom_sheet_large_list_item_height"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@android:id/title"
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:textColor="?android:textColorSecondary"
+		tools:text="@string/dangerous_goods_description" />
+
+</LinearLayout>

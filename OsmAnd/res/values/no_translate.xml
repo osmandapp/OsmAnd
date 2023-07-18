@@ -8,6 +8,7 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
+    <string name="degree_celsius">°C</string>
     <string name="amazon_market">Amazon</string>
     <string name="huawei_market">Huawei</string>
     <string name="apple_app_store">Apple App Store</string>

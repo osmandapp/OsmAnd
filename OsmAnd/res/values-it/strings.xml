@@ -283,7 +283,7 @@
     <string name="poi_context_menu_delete">Elimina PDI</string>
     <string name="rotate_map_compass_opt">Direzione con bussola</string>
     <string name="rotate_map_bearing_opt">Direzione del movimento</string>
-    <string name="rotate_map_north_opt">Fisso (nord sempre in alto)</string>
+    <string name="rotate_map_north_opt">Nord sempre in alto</string>
     <string name="rotate_map_to_descr">Allineamento della mappa:</string>
     <string name="rotate_map_to">Orientamento della mappa</string>
     <string name="show_route">Dettagli percorso</string>
@@ -4763,7 +4763,7 @@
     <string name="how_to_use">Come si utilizza:</string>
     <string name="distance_by_tap_use_description">Tocca sulla mappa per mostrare la distanza tra la tua posizione attuale e il punto toccato.
 \nTocca con due dita sulla mappa per mostrare la distanza tra i punti toccati</string>
-    <string name="rotate_map_manual_opt">Fisso (ruotato manualmente)</string>
+    <string name="rotate_map_manual_opt">Ruotato manualmente</string>
     <string name="go_to_marker_location">Vai alla posizione del marcatore</string>
     <string name="shared_string_switch_mode">Cambia modalità</string>
     <string name="click_on_widget">Clicca sul widget</string>
@@ -5125,7 +5125,7 @@
     <string name="rendering_value_sector4_name">Settore 4</string>
     <string name="bicycle_scd_device_name">Dispositivo bici</string>
     <string name="rendering_value_name_only_name">Solo nome</string>
-    <string name="running_scds_device_name">Dispositivo running</string>
+    <string name="running_scds_device_name">Dispositivo per la corsa</string>
     <string name="external_device_blood_pressure">Pressione sanguigna</string>
     <string name="no_bt_permission">L\'autorizzazione bluetooth non è stata fornita</string>
     <string name="shared_string_chest">Torace</string>
@@ -5303,6 +5303,13 @@
 \n• Rielaborato il cambio di quota e la valutazione della pendenza
 \n
 \n</string>
-    <string name="routing_attr_allow_via_ferrata_description">Permetti le vie ferrate.</string>
+    <string name="routing_attr_allow_via_ferrata_description">Percorso di montagna attrezzato con funi fisse, camini, scale e ponti.</string>
     <string name="slope_legend_description">Pendenza utilizza i colori per visualizzare la pendenza del terreno. Puoi leggere di più sulle pendenze in %1$s.</string>
+    <string name="free_ride">Corsa libera</string>
+    <string name="routing_attr_allow_via_ferrata_name">Itinerario di montagna (Ferrata)</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usa mappe raster in formato sqltiedb per pendenza / ombra</string>
+    <string name="free_settings_backup">Backup delle impostazioni gratuito</string>
+    <string name="cache_size">Dimensione della cache</string>
+    <string name="shared_string_avoid">Evitare</string>
+    <string name="may_be_used_if_there_is_shortcut">Può essere utilizzato se è presente una scorciatoia</string>
 </resources>

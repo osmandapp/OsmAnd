@@ -79,7 +79,10 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	private void setupProgressBar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
+		updateProgress();
+	}
 
+	private void updateProgress() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		boolean importing = foldersHelper != null && foldersHelper.isImporting();
 		AndroidUiHelper.updateVisibility(progressBar, importing);
@@ -117,7 +120,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), getTargetFragment(), false);
+				FragmentManager manager = activity.getSupportFragmentManager();
+				SearchTrackItemsFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_search));
@@ -155,6 +159,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		updateProgress();
 		updateActionBar(false);
 		restoreState(getArguments());
 	}

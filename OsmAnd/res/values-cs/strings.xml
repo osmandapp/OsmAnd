@@ -3983,7 +3983,7 @@
     <string name="activity_type_running_name">Běh</string>
     <string name="activity_type_walking_name">Chůze</string>
     <string name="activity_type_offroad_name">Off-road</string>
-    <string name="activity_type_motorbike_name">Motokolo</string>
+    <string name="activity_type_motorbike_name">Motocykl</string>
     <string name="activity_type_car_name">Auto</string>
     <string name="temporary_conditional_routing_descr">Použít omezení, která jsou nyní aktivní na mapě</string>
     <string name="routing_attr_short_way_description">Optimalizovaná kratší trasa (úspora energie)</string>
@@ -4753,7 +4753,7 @@
 \nNa semaforech, značkách stop, atd. se aplikuje dodatečné zdržení.</string>
     <string name="map_widget_altitude">Nadmořská výška aktuální polohy</string>
     <string name="shared_string_apply_changes">Použít změny</string>
-    <string name="av_notes_photo_widget_desc">Klepnutím na widget pořídíte fotografii.</string>
+    <string name="av_notes_photo_widget_desc">Klepnutím na nástroj pořídíte fotografii.</string>
     <string name="first_marker_widget_desc">Widget můžete nakonfigurovat tak, aby zobrazoval vzdálenost nebo odhadovaný čas příjezdu k první mapové značce.</string>
     <string name="goods_delivery_desc">Na některých silnicích může být omezen provoz dodávkových vozidel.</string>
     <string name="routing_attr_avoid_highway_description">Vyhnout se dálnicím</string>
@@ -4881,7 +4881,7 @@
     <string name="map_widget_altitude_desc">Zobrazení nadmořské výšky aktuální zeměpisné polohy nebo nadmořské výšky aktuálního středu mapy</string>
     <string name="send_uuid_preference_desc">Náhodný identifikátor UUID se používá ke stahování offline map ze serverů OsmAnd za účelem sledování spravedlivého využívání zdrojů serveru, předvídání vzorců provozu a generování anonymních měsíčních mapových zpráv.</string>
     <string name="shared_string_normal">Normální</string>
-    <string name="av_notes_video_widget_desc">Klepnutím na widget můžete nahrávat video.</string>
+    <string name="av_notes_video_widget_desc">Klepnutím na nástroj můžete nahrávat video.</string>
     <string name="distance_to_destination_widget_desc">Widget zobrazuje zbývající vzdálenost do posledního cílového bodu.</string>
     <string name="shared_string_yards">yardů</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Zobrazit vyhrazené stezky pro horská kola.</string>
@@ -4896,7 +4896,7 @@
     <string name="auto_25_chars_route_tu_kl">Otočte se a držte se vlevo</string>
     <string name="auto_25_chars_route_roundabout_kl">Použijte %1$d. výjezd a držte se vlevo</string>
     <string name="duplacate_widget_added_snackbar">Do seznamu se přidává duplicitní nástroj.</string>
-    <string name="av_notes_audio_widget_desc">Klepnutím na widget můžete pořídit zvukovou poznámku.</string>
+    <string name="av_notes_audio_widget_desc">Klepnutím na nástroj můžete pořídit zvukovou poznámku.</string>
     <string name="trip_recording_uphill_widget_desc">Zobrazuje součet všech stoupání aktuálně zaznamenané cesty.</string>
     <string name="trip_recording_distance_widget_desc">Zobrazuje aktuálně zaznamenanou vzdálenost jízdy.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Barevné schéma hloubkových vrstevnic</string>
@@ -5102,7 +5102,7 @@
     <string name="app_mode_climbing">Horolezectví</string>
     <string name="generate_slope_from_3d_maps">Generovat rastrové mapy svahů z 3D map</string>
     <string name="disable_vertex_hillshade_3d">Vypnout stínování vrcholů ve 3D</string>
-    <string name="test_heightmap">Test výškové mapy</string>
+    <string name="test_heightmap">Testovací výšková mapa</string>
     <string name="common_weight_limit_error">Minimální hodnota je \"%1$s\" %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%3$s\".</string>
     <string name="shared_string_pounds">libry</string>
     <string name="metric_lbs">lbs</string>
@@ -5194,7 +5194,7 @@
     <string name="track_not_recorded">Nezaznamenáno</string>
     <string name="tracks_empty_folder_description">Tato složka zatím neobsahuje žádnou stopu.</string>
     <string name="map_3d_mode_description">Dotkněte se mapy dvěma prsty a pohybem nahoru a dolů upravte sklon mapy.</string>
-    <string name="no_poi_for_category">POI nenalezeno</string>
+    <string name="no_poi_for_category">Bod zájmu nenalezen</string>
     <string name="rendering_attr_lightDetail_name">Detail osvětlení</string>
     <string name="rendering_value_sectors_name">Sektory</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
@@ -5242,4 +5242,5 @@
     <string name="verify_account_deletion_descr">Před smazáním vašeho účtu jej musíme ověřit.
 \n
 \nZadejte prosím e-mailovou adresu, pod kterou jste se zaregistrovali. Na ni vám bude zasláno jednorázové heslo pro další krok.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Horská cesta (ferrata)</string>
 </resources>

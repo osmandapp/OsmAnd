@@ -71,7 +71,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private long touchStartTime;
 	private long touchEndTime;
 	private boolean touched;
-	private boolean wasZoom;
+	private boolean wasPinchZoomOrRotation;
 
 	private final Path linePath = new Path();
 
@@ -143,7 +143,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 						event.getX(), event.getY());
 				singleTouchPointChanged = true;
 				touchStartTime = System.currentTimeMillis();
-				wasZoom = false;
+				wasPinchZoomOrRotation = false;
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE && !touchOutside &&
 					!(touched && showDistBetweenFingerAndLocation)) {
 				double d = Math.sqrt(Math.pow(event.getX() - touchPoint.x, 2) + Math.pow(event.getY() - touchPoint.y, 2));
@@ -181,16 +181,16 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				touched = false;
 				touchEndTime = currentTime;
 			}
-			if (tb.isZoomAnimated()) {
-				wasZoom = true;
+			if (getMapView().isPinchZoomingOrRotating()) {
+				wasPinchZoomOrRotation = true;
 			}
 
-			boolean showTwoFingersDistance = !tb.isZoomAnimated() &&
+			boolean showTwoFingersDistance = !wasPinchZoomOrRotation &&
 					!view.isWasZoomInMultiTouch() &&
 					currentTime - view.getMultiTouchStartTime() > DELAY_BEFORE_DRAW &&
 					(view.isMultiTouch() || currentTime - cacheMultiTouchEndTime < DRAW_TIME);
 
-			boolean showDistBetweenFingerAndLocation = !wasZoom &&
+			boolean showDistBetweenFingerAndLocation = !wasPinchZoomOrRotation &&
 					!showTwoFingersDistance &&
 					!view.isMultiTouch() &&
 					!touchOutside &&
@@ -213,6 +213,10 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 			this.showTwoFingersDistance = showTwoFingersDistance;
 			this.showDistBetweenFingerAndLocation = showDistBetweenFingerAndLocation;
+		} else {
+			if (hasMapRenderer) {
+				hideDistanceRulerOpenGl();
+			}
 		}
 	}
 
@@ -325,9 +329,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		boolean clearMyLocationDistance = disableMyLocationDistance || updateMyLocationDistance;
 
 		if (clearTwoFingersDistance || clearMyLocationDistance) {
-			clearVectorLinesCollection();
-			clearMapMarkersCollections();
-			linePath.reset();
+			hideDistanceRulerOpenGl();
 		}
 
 		cachedNightMode = nightMode;
@@ -456,6 +458,12 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 		linePath.reset();
 		GeometryWay.calculatePath(tileBox, tx, ty, linePath);
+	}
+
+	private void hideDistanceRulerOpenGl() {
+		clearVectorLinesCollection();
+		clearMapMarkersCollections();
+		linePath.reset();
 	}
 
 	@Override

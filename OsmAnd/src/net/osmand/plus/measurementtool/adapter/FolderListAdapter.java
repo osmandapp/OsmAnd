@@ -119,7 +119,8 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 				listener.onItemSelected(selectedItem);
 			}
 		});
-		holder.groupName.setText(Algorithms.capitalizeFirstLetter(item));
+		String name = Algorithms.getFileWithoutDirs(item);
+		holder.groupName.setText(Algorithms.capitalizeFirstLetter(name));
 
 		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		GradientDrawable drawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
@@ -173,15 +174,17 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderViewHolder> {
 		return items.get(position);
 	}
 
+	@NonNull
 	public static List<String> getFolders(@NonNull File parentDir) {
 		List<File> folders = new ArrayList<>();
 		folders.add(parentDir);
 		Algorithms.collectDirs(parentDir, folders);
-		List<String> folderNames = new ArrayList<>();
+
+		List<String> folderPaths = new ArrayList<>();
 		for (File dir : folders) {
-			folderNames.add(dir.getName());
+			folderPaths.add(dir.getAbsolutePath());
 		}
-		return folderNames;
+		return folderPaths;
 	}
 
 	public static class FolderViewHolder extends RecyclerView.ViewHolder {

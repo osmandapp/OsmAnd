@@ -10,12 +10,26 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_sacScale_description">Swiss Alpine Club</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italian Alpine Club)</string>
     <string name="difficulty_classification_description">Difficulty classification types for the routes.</string>
     <string name="difficulty_classification">Difficulty classification</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosives</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Flammable Liquids</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Flammable Solids</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxidizing Agents and Organic Peroxides</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Toxic and Infectious Substances</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioactive Substances</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Corrosive Substances</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Miscellaneous</string>
+    <string name="shared_string_class">Class</string>
+    <string name="dangerous_goods_description">On some roads and tunnels transporting of hazardous materials is forbidden.</string>
+    <string name="dangerous_goods">Dangerous goods</string>
     <string name="free_ride">Free ride</string>
     <string name="free_settings_backup">Free Settings Backup</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqltiedb for slope / hillshade</string>
