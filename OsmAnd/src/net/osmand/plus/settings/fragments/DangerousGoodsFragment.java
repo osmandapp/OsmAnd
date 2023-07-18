@@ -87,11 +87,6 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 		setupHazmatPreferences();
 	}
 
-	@Override
-	public ApplyQueryType getApplyQueryType() {
-		return ApplyQueryType.NONE;
-	}
-
 	private void setupHazmatPreferences() {
 		Context context = requireContext();
 
