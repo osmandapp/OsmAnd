@@ -41,6 +41,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.rastermaps.CalculateMissingTilesTask.MissingTilesInfo;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper.DownloadType;
 import net.osmand.plus.resources.BitmapTilesCache;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.enums.MapLayerType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -115,7 +116,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		downloadTilesHelper = app.getDownloadTilesHelper();
 		mapView = requireMapActivity().getMapView();
 		tilesPreviewDrawer = new TilesPreviewDrawer(app);
-		tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
+		tileSource = loadTileSource();
 		handler = new UpdateTilesHandler(() -> {
 			setupTilesDownloadInfo();
 			updateTilesPreview();
@@ -239,7 +240,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				mapActivity.getMapLayers().selectMapLayer(mapActivity, false,
 						layerToDownload.getMapLayerSettings(app), mapSourceName -> {
 							if (shouldShowDialog(app)) {
-								tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
+								tileSource = loadTileSource();
 								int currentZoom = mapView.getZoom();
 								selectedMaxZoom = tileSource.getMaximumZoomSupported();
 								selectedMinZoom = Math.min(currentZoom, selectedMaxZoom);
@@ -608,6 +609,14 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
 		return activity == null ? null : ((MapActivity) activity);
+	}
+
+	private ITileSource loadTileSource() {
+		ITileSource tileSource = settings.getLayerTileSource(layerToDownload.getMapLayerSettings(app), false);
+		if (tileSource instanceof SQLiteTileSource) {
+			((SQLiteTileSource) tileSource).initDatabaseIfNeeded();
+		}
+		return tileSource;
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
