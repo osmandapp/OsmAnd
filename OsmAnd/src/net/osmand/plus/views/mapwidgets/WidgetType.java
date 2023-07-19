@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
@@ -114,6 +115,9 @@ public enum WidgetType {
 
 	SUNRISE("day_night_mode_sunrise", R.string.shared_string_sunrise, R.string.map_widget_sunrise_desc, R.drawable.widget_sunrise_day, R.drawable.widget_sunrise_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNSET("day_night_mode_sunset", R.string.shared_string_sunset, R.string.map_widget_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
+
+	GLIDE_TARGET("glide_ratio_to_target", R.string.glide_ratio_to_target, R.string.glide_ratio_to_target, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, GLIDE, RIGHT),
+	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.average_glide_ratio, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, GLIDE, RIGHT),
 
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
