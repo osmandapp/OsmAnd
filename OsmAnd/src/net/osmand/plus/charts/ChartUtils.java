@@ -449,8 +449,6 @@ public class ChartUtils {
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 		dataSet.setPriority((float) ((analysis.avgElevation - analysis.minElevation) * convEle));
 		dataSet.setDivX(divX);
-		dataSet.setMulY(convEle);
-		dataSet.setDivY(Float.NaN);
 		dataSet.setUnits(mainUnitY);
 
 		boolean nightMode = !settings.isLightContent();
@@ -546,8 +544,6 @@ public class ChartUtils {
 			dataSet.setPriority(divSpeed / analysis.avgSpeed);
 		}
 		dataSet.setDivX(divX);
-		dataSet.setDivY(divSpeed);
-		dataSet.setMulY(mulSpeed);
 		dataSet.setUnits(mainUnitY);
 
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(!speedInTrack));

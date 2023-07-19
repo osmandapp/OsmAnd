@@ -199,8 +199,6 @@ public class SensorAttributesUtils {
 		});
 
 		dataSet.setDivX(divX);
-		dataSet.setDivY(divY);
-		dataSet.setMulY(mulY);
 		dataSet.setUnits(mainUnitY);
 
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(!speedInTrack));
