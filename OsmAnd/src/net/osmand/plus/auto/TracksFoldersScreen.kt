@@ -20,7 +20,7 @@ import net.osmand.plus.utils.FileUtils
 class TracksFoldersScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext),
+    surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer),
     TrackFolderLoaderTask.LoadTracksListener {
     private var asyncLoader: TrackFolderLoaderTask? = null
     private val selectedTracksHelper: SelectedTracksHelper = SelectedTracksHelper(app)

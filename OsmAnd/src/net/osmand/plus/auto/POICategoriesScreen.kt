@@ -14,7 +14,7 @@ import net.osmand.plus.utils.AndroidUtils
 class POICategoriesScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer) {
 
     private var selectedPOIGroup: PoiUIFilter? = null
 

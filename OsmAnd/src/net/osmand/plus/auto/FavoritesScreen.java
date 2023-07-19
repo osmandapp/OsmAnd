@@ -27,11 +27,11 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
@@ -50,20 +50,18 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 
 	@NonNull
 	private final Action settingsAction;
-	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
 
 	@Nullable
 	private FavoriteGroup selectedGroup;
+	private CompassMode initialCompassMode;
 
 	public FavoritesScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
 			@NonNull SurfaceRenderer surfaceRenderer,
 			@Nullable FavoriteGroup group) {
-		super(carContext);
+		super(carContext, surfaceRenderer);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		selectedGroup = group;
 		getLifecycle().addObserver(new DefaultLifecycleObserver() {
 			@Override
@@ -71,6 +69,9 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 				DefaultLifecycleObserver.super.onDestroy(owner);
 				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(null);
 				getApp().getOsmandMap().getMapView().backToLocation();
+				if (initialCompassMode != null) {
+					getApp().getMapViewTrackingUtilities().switchCompassModeTo(initialCompassMode);
+				}
 			}
 		});
 	}
@@ -100,7 +101,11 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
 		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
 		QuadRect mapRect = new QuadRect();
-		extendRectToContainPoint(mapRect, location.getLongitude(), location.getLatitude());
+		if (!Algorithms.isEmpty(limitedFavoritesPoints)) {
+			OsmandSettings settings = getApp().getSettings();
+			initialCompassMode = settings.getCompassMode();
+			getApp().getMapViewTrackingUtilities().switchCompassModeTo(CompassMode.NORTH_IS_UP);
+		}
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
@@ -124,11 +129,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
 		}
-		if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
-			OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-			RotatedTileBox tileBox =mapView.getCurrentRotatedTileBox().copy();
-			mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tileBox.getPixHeight(), tileBox.getPixHeight(), 0);
-		}
+		adjustMapToRect(location, mapRect);
 	}
 
 	private void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
@@ -152,7 +153,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		result.objectType = ObjectType.FAVORITE;
 		result.object = point;
 		result.localeName = point.getAddress();
-		openRoutePreview(settingsAction, surfaceRenderer, result);
+		openRoutePreview(settingsAction, getSurfaceRenderer(), result);
 	}
 
 	@NonNull

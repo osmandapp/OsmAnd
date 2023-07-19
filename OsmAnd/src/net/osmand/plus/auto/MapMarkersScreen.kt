@@ -32,7 +32,7 @@ import kotlin.math.min
 class MapMarkersScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer) {
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -52,7 +52,6 @@ class MapMarkersScreen(
         val location = app.settings.lastKnownMapLocation
         app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
         val mapRect = QuadRect()
-        extendRectToContainPoint(mapRect, location.longitude, location.latitude)
         for (marker in markers) {
             val longitude = marker.longitude
             val latitude = marker.latitude
@@ -87,10 +86,7 @@ class MapMarkersScreen(
             }
             listBuilder.addItem(rowBuilder.build())
         }
-        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
-            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
-            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
-        }
+        adjustMapToRect(location, mapRect)
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.map_markers))

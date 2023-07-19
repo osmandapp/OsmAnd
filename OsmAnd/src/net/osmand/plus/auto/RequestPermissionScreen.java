@@ -37,8 +37,9 @@ public class RequestPermissionScreen extends BaseOsmAndAndroidAutoScreen {
 	LocationPermissionCheckCallback mLocationPermissionCheckCallback;
 
 	public RequestPermissionScreen(@NonNull CarContext carContext,
-	                               @Nullable LocationPermissionCheckCallback callback) {
-		super(carContext);
+	                               @Nullable LocationPermissionCheckCallback callback,
+	                               @NonNull SurfaceRenderer surfaceRenderer) {
+		super(carContext, surfaceRenderer);
 		mLocationPermissionCheckCallback = callback;
 	}
 

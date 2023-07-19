@@ -24,6 +24,8 @@ import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -32,6 +34,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -67,6 +71,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	RequestPurchaseScreen requestPurchaseScreen;
 	SurfaceRenderer navigationCarSurface;
 	Action settingsAction;
+//	private QuadRect mapRect;
 
 	private OsmandMapTileView mapView;
 
@@ -149,6 +154,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@NonNull
 	public Screen onCreateScreen(@NonNull Intent intent) {
 		Log.i(TAG, "In onCreateScreen()");
+		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		settingsAction =
 				new Action.Builder()
 						.setIcon(new CarIcon.Builder(
@@ -156,10 +162,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 								.build())
 						.setOnClickListener(() -> getCarContext()
 								.getCarService(ScreenManager.class)
-								.push(new SettingsScreen(getCarContext())))
+								.push(new SettingsScreen(getCarContext(), navigationCarSurface)))
 						.build();
 
-		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		if (mapView != null) {
 			navigationCarSurface.setMapView(mapView);
 		}
@@ -173,13 +178,13 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
-			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
+			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext(), navigationCarSurface);
 			return requestPurchaseScreen;
 		}
 
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
-			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
+			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback, navigationCarSurface);
 		}
 		return landingScreen;
 	}
@@ -206,7 +211,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean requestLocationPermission() {
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(
-					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback));
+					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback, navigationCarSurface));
 			return true;
 		}
 		return false;

@@ -5,8 +5,10 @@ import androidx.car.app.constraints.ConstraintManager
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener
 import net.osmand.search.core.SearchCoreFactory
 
-abstract class BaseOsmAndAndroidAutoSearchScreen(carContext: CarContext) :
-    BaseOsmAndAndroidAutoScreen(carContext), SearchHelperListener {
+abstract class BaseOsmAndAndroidAutoSearchScreen(
+	carContext: CarContext,
+	surfaceRenderer: SurfaceRenderer) :
+	BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer), SearchHelperListener {
 
     protected var loading = false
     protected val searchHelper: SearchHelper by lazy(::createSearchHelper)

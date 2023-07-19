@@ -44,8 +44,6 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
-	@NonNull
 	private final SearchResult searchResult;
 	@NonNull
 	private List<Row> routeRows = new ArrayList<>();
@@ -54,9 +52,8 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 	                          @NonNull SurfaceRenderer surfaceRenderer, @NonNull SearchResult searchResult) {
-		super(carContext);
+		super(carContext, surfaceRenderer);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		this.searchResult = searchResult;
 
 		getLifecycle().addObserver(this);

@@ -1551,7 +1551,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		while (tb.getZoom() < 17 && tb.containsLatLon(top, left) && tb.containsLatLon(bottom, right)) {
 			tb.setZoom(tb.getZoom() + 1);
 		}
-		while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
+		while (tb.getZoom() >= 1 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
 			tb.setZoom(tb.getZoom() - 1);
 		}
 		if (dy != 0 || dx != 0) {

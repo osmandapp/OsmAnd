@@ -23,8 +23,8 @@ public final class SettingsScreen extends BaseOsmAndAndroidAutoScreen {
 	@NonNull
 	final OsmandSettings osmandSettings;
 
-	SettingsScreen(@NonNull CarContext carContext) {
-		super(carContext);
+	SettingsScreen(@NonNull CarContext carContext, @NonNull SurfaceRenderer surfaceRenderer) {
+		super(carContext, surfaceRenderer);
 		osmandSettings = ((OsmandApplication) carContext.getApplicationContext()).getSettings();
 	}
 

@@ -20,8 +20,8 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 
 public class RequestPurchaseScreen extends BaseOsmAndAndroidAutoScreen {
 
-	public RequestPurchaseScreen(@NonNull CarContext carContext) {
-		super(carContext);
+	public RequestPurchaseScreen(@NonNull CarContext carContext, @NonNull SurfaceRenderer surfaceRenderer) {
+		super(carContext, surfaceRenderer);
 	}
 
 	@NonNull

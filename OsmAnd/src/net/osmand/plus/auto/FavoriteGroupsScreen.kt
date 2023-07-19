@@ -12,7 +12,7 @@ import net.osmand.plus.utils.AndroidUtils
 class FavoriteGroupsScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer) {
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()

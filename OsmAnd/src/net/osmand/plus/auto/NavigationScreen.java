@@ -52,8 +52,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	private final NavigationListener listener;
 	@NonNull
 	private final Action settingsAction;
-	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
 
 	private boolean navigating;
 	private boolean rerouting;
@@ -83,17 +81,11 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 			@NonNull Action settingsAction,
 			@NonNull NavigationListener listener,
 			@NonNull SurfaceRenderer surfaceRenderer) {
-		super(carContext);
+		super(carContext, surfaceRenderer);
 		this.listener = listener;
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		alarmWidget = new AlarmWidget(getApp(), null);
 		getLifecycle().addObserver(this);
-	}
-
-	@NonNull
-	public SurfaceRenderer getSurfaceRenderer() {
-		return surfaceRenderer;
 	}
 
 	@Override
@@ -110,7 +102,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 
 	@Override
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
-		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, getSurfaceRenderer().getDensity());
 		alarmWidget.updateInfo(drawSettings, true);
 		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
 		if (widgetBitmap != null) {
@@ -228,7 +220,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 												.build())
 								.setOnClickListener(() -> {
 									if (!listener.requestLocationNavigation()) {
-										surfaceRenderer.handleRecenter();
+										getSurfaceRenderer().handleRecenter();
 									}
 								})
 								.build())
@@ -241,7 +233,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 														R.drawable.ic_zoom_in))
 												.build())
 								.setOnClickListener(
-										() -> surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
+										() -> getSurfaceRenderer().handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
 												NavigationSession.INVALID_FOCAL_POINT_VAL,
 												NavigationSession.ZOOM_IN_BUTTON_SCALE_FACTOR))
 								.build())
@@ -254,7 +246,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 														R.drawable.ic_zoom_out))
 												.build())
 								.setOnClickListener(
-										() -> surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
+										() -> getSurfaceRenderer().handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
 												NavigationSession.INVALID_FOCAL_POINT_VAL,
 												NavigationSession.ZOOM_OUT_BUTTON_SCALE_FACTOR))
 								.build())

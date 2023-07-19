@@ -21,7 +21,6 @@ import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
-import net.osmand.data.RotatedTileBox
 import net.osmand.plus.R
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.render.RenderingIcons
@@ -38,9 +37,9 @@ import kotlin.math.min
 class POIScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer,
+    surfaceRenderer: SurfaceRenderer,
     private val group: PoiUIFilter
-) : BaseOsmAndAndroidAutoSearchScreen(carContext), LifecycleObserver {
+) : BaseOsmAndAndroidAutoSearchScreen(carContext, surfaceRenderer), LifecycleObserver {
     private lateinit var itemList: ItemList
     private var searchRadius = 0.0
 
@@ -105,7 +104,6 @@ class POIScreen(
         val location = app.settings.lastKnownMapLocation
         val mapPoint = ArrayList<Amenity>()
         val mapRect = QuadRect()
-        extendRectToContainPoint(mapRect, location)
         searchResults?.let {
             val searchResultsSize = searchResults.size
             val limitedSearchResults =
@@ -147,10 +145,7 @@ class POIScreen(
                     .build())
             }
         }
-        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
-            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
-            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
-        }
+        adjustMapToRect(location, mapRect)
         app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(mapPoint)
     }
 

@@ -11,7 +11,7 @@ import net.osmand.plus.R
 class LandingScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
 
