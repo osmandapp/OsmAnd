@@ -1282,7 +1282,10 @@ public class RouteResultPreparation {
 		if (startIndex != -1 && endIndex != -1) {
 			if (hasAllowedLanes(mainTurnType, lanesArray, startIndex, endIndex)) {
 				for (int k = startIndex; k <= endIndex; k++) {
-					lanesArray[k] |= 1;
+					int[] oneActiveLane = {lanesArray[k]};
+					if (hasAllowedLanes(mainTurnType, oneActiveLane, 0, 0)) {
+						lanesArray[k] |= 1;
+					}
 				}
 				isSet = true;
 			}
