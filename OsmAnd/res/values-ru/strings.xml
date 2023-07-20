@@ -1239,7 +1239,7 @@
     <string name="install_paid">Полная версия</string>
     <string name="cancel_route">Отменить маршрут\?</string>
     <string name="clear_destination">Очистить пункт назначения</string>
-    <string name="search_street_in_neighborhood_cities">Искать улицу в ближайших населённых пунктах</string>
+    <string name="search_street_in_neighborhood_cities">Искать в соседних городах</string>
     <string name="intermediate_items_sort_by_distance">Расположить в оптимальном порядке</string>
     <string name="available_downloads_left">Доступно %1$d файлов для скачивания</string>
     <string name="files_limit">осталось %1$d файлов</string>
@@ -2176,8 +2176,8 @@
     <string name="share_history_subject"> поделились через OsmAnd</string>
     <string name="search_categories">Категории</string>
     <string name="postcode">Почтовый индекс</string>
-    <string name="city_type_district">Район</string>
-    <string name="city_type_neighbourhood">Район</string>
+    <string name="city_type_district">Округ</string>
+    <string name="city_type_neighbourhood">Микрорайон</string>
     <string name="map_widget_search">Поиск</string>
     <string name="shared_string_is_open_24_7">Открыто 24/7</string>
     <string name="storage_directory_card">Карта памяти</string>
@@ -2789,7 +2789,7 @@
     <string name="ask_for_location_permission">Для продолжения дайте OsmAnd разрешение на определение местоположения.</string>
     <string name="rendering_value_black_name">Чёрный</string>
     <string name="search_street">Поиск улицы</string>
-    <string name="start_search_from_city">Укажите город/место/район</string>
+    <string name="start_search_from_city">Сначала укажите населённый пункт</string>
     <string name="shared_string_restore">Восстановление</string>
     <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>
@@ -5312,4 +5312,5 @@
     <string name="shared_string_avoid">Избегать</string>
     <string name="free_settings_backup">Резервная копия настроек</string>
     <string name="free_ride">Фрирайд</string>
+    <string name="relief_3d_description">Создавайте и наблюдайте масштабную модель своего района или целого континента.</string>
 </resources>

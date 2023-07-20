@@ -2067,7 +2067,7 @@
     <string name="rendering_value_low_name">Bajo</string>
     <string name="rendering_attr_contourWidth_description">Anchura de la curva de nivel</string>
     <string name="rendering_attr_contourWidth_name">Anchura de la curva de nivel</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ocultar agua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Cuerpos de agua</string>
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -4676,7 +4676,7 @@
     <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Áreas militares</string>
     <string name="explore_plans">Explorar planes</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
