@@ -3871,7 +3871,7 @@
     <string name="poi_water_source_water_works">Wasserwerk</string>
     <string name="poi_lavoir">Waschplatz für Wäsche</string>
     <string name="poi_waste_transfer_station">Müllumladestation</string>
-    <string name="poi_weightbridge">Brückenwaage;LKW-Waage</string>
+    <string name="poi_weighbridge">Brückenwaage;LKW-Waage</string>
     <string name="poi_ranger_station">Rangerstation</string>
     <string name="poi_swimming_area">Schwimmbereich</string>
     <string name="poi_wildlife_crossing_bat_tunnel">Fledermaustunnel</string>
