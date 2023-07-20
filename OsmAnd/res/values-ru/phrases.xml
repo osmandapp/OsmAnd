@@ -144,7 +144,7 @@
     <string name="poi_service_tyres">Шиномонтаж</string>
     <string name="poi_vehicle_inspection">Пункт техосмотра;Техосмотр</string>
     <string name="poi_car_wash">Автомойка</string>
-    <string name="poi_fuel">Автомобильная заправка;Автозаправка;Бензоколонка;АЗС;Бензозаправка;Заправка</string>
+    <string name="poi_fuel">АЗС;Автозаправочная станция;Автозаправка;Автомобильная заправка;Бензоколонка;Бензозаправка;Заправка</string>
     <string name="poi_electricity_combined_charging">Зарядная станция;Станция зарядки электромобилей;Станция зарядки EV;Пункт зарядки электромобилей;Пункт зарядки;Электронная зарядная станция;Оборудование для питания электромобилей</string>
     <string name="poi_vehicle_ramp">Ремонтная эстакада/яма</string>
     <string name="poi_compressed_air">Подкачка шин</string>
@@ -753,7 +753,7 @@
     <string name="poi_internet_access">Доступ в интернет</string>
     <string name="poi_club">Клуб</string>
     <string name="poi_cafe_and_restaurant">Кафе и ресторан</string>
-    <string name="poi_shop_food">Продуктовый магазин и супермаркет</string>
+    <string name="poi_shop_food">Магазины продуктов и супермаркеты</string>
     <string name="poi_filling_station">Заправочная станция</string>
     <string name="poi_aerialway_transport">Канатный транспорт</string>
     <string name="poi_transport_construction">Транспортное сооружение</string>
@@ -1021,7 +1021,7 @@
     <string name="poi_fireplace">Место для разведения огня</string>
     <string name="poi_fireplace_yes">Есть;Камин</string>
     <string name="poi_fireplace_no">Без места для разведения огня</string>
-    <string name="poi_covered">Укрытие</string>
+    <string name="poi_covered">Крытое</string>
     <string name="poi_covered_yes">Да;С укрытием</string>
     <string name="poi_covered_no">Без укрытия</string>
     <string name="poi_smoking">Курение</string>
@@ -1398,7 +1398,7 @@
     <string name="poi_self_service">Самообслуживание</string>
     <string name="poi_self_service_yes">Да;Самообслуживание</string>
     <string name="poi_self_service_no">Нет;Нет самообслуживания</string>
-    <string name="poi_automated">Автоматизация</string>
+    <string name="poi_automated">Автоматизированные</string>
     <string name="poi_automated_yes">Да; Автоматическое</string>
     <string name="poi_automated_no">Без автоматизации</string>
     <string name="poi_full_service_yes">Полный комплекс услуг</string>
