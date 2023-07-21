@@ -20,6 +20,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.preferences.RadioButtonBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog.ResetToDefaultListener;
@@ -75,6 +76,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupShouldShowFreeVersionBannerPref();
 		setupTestVoiceCommandsPref();
 		setupLogcatBufferPref();
+
+		Preference tripRecording = findPreference("trip_recording");
+		tripRecording.setIconSpaceReserved(false);
+		setupTripRecordingPrefs();
 
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
@@ -153,6 +158,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference logcatBuffer = findPreference("logcat_buffer");
 		logcatBuffer.setIntent(new Intent(getActivity(), LogcatActivity.class));
 		logcatBuffer.setIconSpaceReserved(false);
+	}
+
+	private void setupTripRecordingPrefs() {
+		RadioButtonBooleanPreference writeBearing = findPreference("save_bearing_to_gpx");
+		writeBearing.setIconSpaceReserved(false);
+		writeBearing.setDescription(R.string.write_bearing_description);
+		writeBearing.setChecked(plugin.WRITE_BEARING.get());
+
+		RadioButtonBooleanPreference writeHeading = findPreference("save_heading_to_gpx");
+		writeHeading.setIconSpaceReserved(false);
+		writeHeading.setDescription(R.string.write_heading_description);
+		writeHeading.setChecked(plugin.WRITE_HEADING.get());
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {

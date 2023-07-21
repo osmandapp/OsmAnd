@@ -22,6 +22,7 @@ import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -81,6 +82,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_BACKGROUND = "background";
 
 	private static final float NO_HEADING = -1.0f;
+	private static final float NO_BEARING= 0f;
 
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
@@ -486,7 +488,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void updateLocation(net.osmand.Location location, Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-		if (heading != null && settings.SAVE_HEADING_TO_GPX.get()) {
+		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (heading != null && devPlugin != null && devPlugin.WRITE_HEADING.get()) {
 			heading = MapUtils.normalizeDegrees360(heading);
 		} else {
 			heading = NO_HEADING;
@@ -524,7 +527,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 			if (location.hasBearing()) {
 				try {
-					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
+					double bearing;
+					if (devPlugin != null && devPlugin.WRITE_BEARING.get()) {
+						bearing = location.getBearing();
+					} else {
+						bearing = NO_BEARING;
+					}
+					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(bearing));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);
 				}
