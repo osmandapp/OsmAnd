@@ -753,7 +753,7 @@
     <string name="poi_internet_access">Доступ в интернет</string>
     <string name="poi_club">Клуб</string>
     <string name="poi_cafe_and_restaurant">Кафе и ресторан</string>
-    <string name="poi_shop_food">Магазины продуктов и супермаркеты</string>
+    <string name="poi_shop_food">Продуктовые магазины и супермаркеты</string>
     <string name="poi_filling_station">Заправочная станция</string>
     <string name="poi_aerialway_transport">Канатный транспорт</string>
     <string name="poi_transport_construction">Транспортное сооружение</string>
@@ -850,7 +850,7 @@
     <string name="poi_supervised_yes">Контролируемый объект</string>
     <string name="poi_supervised_no">Неконтролируемый объект</string>
     <string name="poi_seasonal">Сезонность</string>
-    <string name="poi_seasonal_yes">Да;В зависимости от сезона</string>
+    <string name="poi_seasonal_yes">Да;По сезонам</string>
     <string name="poi_seasonal_no">Нет</string>
     <string name="poi_seasonal_dry_season">Сухой сезон</string>
     <string name="poi_seasonal_wet_season">Сезон дождей</string>
@@ -1022,8 +1022,8 @@
     <string name="poi_fireplace_yes">Есть;Камин</string>
     <string name="poi_fireplace_no">Без места для разведения огня</string>
     <string name="poi_covered">Крытое</string>
-    <string name="poi_covered_yes">Да;С укрытием</string>
-    <string name="poi_covered_no">Без укрытия</string>
+    <string name="poi_covered_yes">Да;Крытое</string>
+    <string name="poi_covered_no">Не крытое</string>
     <string name="poi_smoking">Курение</string>
     <string name="poi_smoking_no">Запрещено</string>
     <string name="poi_smoking_outside">Только снаружи</string>
@@ -1356,10 +1356,10 @@
     <string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
     <string name="poi_diet_pescetarian_yes">Пескетарианское питание</string>
     <string name="poi_drive_in">Обслуживание на парковке (Drive-in)</string>
-    <string name="poi_drive_in_yes">Да; Заезд</string>
+    <string name="poi_drive_in_yes">Да;Заезд</string>
     <string name="poi_drive_in_no">Приобрести продукты не покидая авто на парковке (drive-in): нет</string>
     <string name="poi_drive_through">Обслуживание проездом (Drive-through)</string>
-    <string name="poi_drive_through_yes">Да; Проезд</string>
+    <string name="poi_drive_through_yes">Да;Проезд</string>
     <string name="poi_drive_through_no">Приобрести продукты не покидая авто в окошке (drive-through): нет</string>
     <string name="poi_brewery_additional">Название пивоварни</string>
     <string name="poi_microbrewery">Собственная пивоварня</string>
@@ -1399,7 +1399,7 @@
     <string name="poi_self_service_yes">Да;Самообслуживание</string>
     <string name="poi_self_service_no">Нет;Нет самообслуживания</string>
     <string name="poi_automated">Автоматизированные</string>
-    <string name="poi_automated_yes">Да; Автоматическое</string>
+    <string name="poi_automated_yes">Да;Автоматизировано</string>
     <string name="poi_automated_no">Без автоматизации</string>
     <string name="poi_full_service_yes">Полный комплекс услуг</string>
     <string name="poi_brushless">Бесконтактная</string>
@@ -1971,10 +1971,10 @@
     <string name="poi_openfire_yes">Разведение открытого огня разрешено</string>
     <string name="poi_openfire_no">Разведение открытого огня запрещено</string>
     <string name="poi_backcountry">Место для лагеря на природе без удобств</string>
-    <string name="poi_backcountry_yes">Да; Бэккантри</string>
+    <string name="poi_backcountry_yes">Да;Бэккантри</string>
     <string name="poi_backcountry_no">Нет</string>
     <string name="poi_scout_camp">Лагерь скаутов</string>
-    <string name="poi_scout_yes">Да; Скауты</string>
+    <string name="poi_scout_yes">Да;Скауты</string>
     <string name="poi_scout_no">Лагерь скаутов: нет</string>
     <string name="poi_group_only_yes">Доступно только для групп: да</string>
     <string name="poi_group_only_no">Доступно только для групп: нет</string>
@@ -2629,7 +2629,7 @@
     <string name="poi_emergency_yes">Крайняя необходимость: да</string>
     <string name="poi_emergency_no">Крайняя необходимость: нет</string>
     <string name="poi_home_visit">Выезд на дом</string>
-    <string name="poi_home_visit_yes">Да;Посещение на дому</string>
+    <string name="poi_home_visit_yes">Да;На дом</string>
     <string name="poi_home_visit_no">Выезд на дом: нет</string>
     <string name="poi_disease_malaria_yes">Малярия: да</string>
     <string name="poi_disease_malaria_no">Малярия: нет</string>
@@ -3474,7 +3474,7 @@
     <string name="poi_bath_type_river">Река</string>
     <string name="poi_bath_type_lake">Озеро</string>
     <string name="poi_bath_type_foot_bath">Баня для ног</string>
-    <string name="poi_bath_open_air_yes">Да;Место для купания под открытым небом</string>
+    <string name="poi_bath_open_air_yes">Да;Купание на открытом воздухе</string>
     <string name="poi_bath_open_air_no">Нет</string>
     <string name="poi_tourist_camp">Турбаза</string>
     <string name="poi_community_gender_female">Пол сообщества: женский</string>
@@ -4375,4 +4375,6 @@
     <string name="poi_water_filter">Вода;Питьевая вода</string>
     <string name="poi_cai_scale">Шкала CAI</string>
     <string name="poi_sac_scale">Шкала SAC</string>
+    <string name="poi_climbing_grade_filter">Класс восхождения</string>
+    <string name="poi_climbing_bolts_filter">Болты для альпинизма</string>
 </resources>
