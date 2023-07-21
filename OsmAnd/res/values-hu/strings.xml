@@ -4452,7 +4452,7 @@
     <string name="shared_string_downhill">Lejtés</string>
     <string name="shared_string_show_slope">Lejtés megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtés elrejtése</string>
-    <string name="shared_string_grade">Osztály</string>
+    <string name="shared_string_grade">Besorolás</string>
     <string name="elevation_profile">Magassági profil</string>
     <string name="distance_between_points">Pontok közti távolság</string>
     <string name="gps_filter_smoothing_desc">Állítsa be a pontok közti távolság korlátját.
