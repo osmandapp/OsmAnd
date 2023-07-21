@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_checked">Checked</string>
+    <string name="shared_string_not_checked">Not checked</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosives</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
