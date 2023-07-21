@@ -5317,4 +5317,17 @@
     <string name="routing_attr_allow_via_ferrata_name">Sekurigita vojo (viaferatao)</string>
     <string name="free_settings_backup">Senpaga sekurkopio de agordoj</string>
     <string name="free_ride">Libera veturo</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Eksplodaĵoj</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasoj</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brulemaj likvoj</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brulemaj solidoj</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oksidantoj kaj organikaj peroksidoj</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Toksaj kaj biodanĝeraj substancoj</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diversaj</string>
+    <string name="shared_string_class">Klaso</string>
+    <string name="dangerous_goods_description">Sur kelkaj vojoj kaj tuneloj transporto de danĝeraj materialoj estas malpermesata.</string>
+    <string name="dangerous_goods">Danĝeraj materialoj</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktivaj substancoj</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Korodaj substancoj</string>
 </resources>
