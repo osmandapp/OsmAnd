@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
@@ -396,7 +397,16 @@ public class DownloadResources extends DownloadResourceGroup {
 				// Hide heightmaps of sqlite format
 				continue;
 			}
-			if (app.useOpenGlRenderer()
+			boolean shouldHideHillshadeSlope = true;
+			if (!app.useOpenGlRenderer()) {
+				shouldHideHillshadeSlope = false;
+			} else {
+				OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+				if (plugin != null) {
+					shouldHideHillshadeSlope = !plugin.USE_RASTER_SQLITEDB.get();
+				}
+			}
+			if (shouldHideHillshadeSlope
 					&& (ii.getType() == DownloadActivityType.HILLSHADE_FILE || ii.getType() == DownloadActivityType.SLOPE_FILE)) {
 				continue;
 			}

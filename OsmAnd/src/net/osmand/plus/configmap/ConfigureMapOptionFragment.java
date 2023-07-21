@@ -7,6 +7,7 @@ import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.PRIMARY;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.STROKED;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,7 +47,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMapOptionFragment.class.getSimpleName();
 	private RulerWidget rulerWidget;
-	private View applyButton;
+	private DialogButton applyButton;
 	protected LinearLayout contentContainer;
 
 	@Override
@@ -56,7 +58,9 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return ColorUtilities.getListBgColorId(nightMode);
+		return AndroidUiHelper.isOrientationPortrait(requireMapActivity())
+				? ColorUtilities.getListBgColorId(nightMode)
+				: R.color.status_bar_transparent_light;
 	}
 
 	@Override
@@ -80,6 +84,13 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapActivity activity = requireMapActivity();
 		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
+
+		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+			TypedValue typedValueAttr = new TypedValue();
+			int bgAttrId = AndroidUtils.isLayoutRtl(activity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+			activity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
+			view.findViewById(R.id.main_view).setBackgroundResource(typedValueAttr.resourceId);
+		}
 
 		contentContainer = view.findViewById(R.id.main_content);
 		applyButton = view.findViewById(R.id.apply_button);
@@ -115,7 +126,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 
 	protected void updateApplyButton(boolean enable) {
 		applyButton.setEnabled(enable);
-		UiUtilities.setupDialogButton(nightMode, applyButton, enable ? PRIMARY : STROKED, getString(R.string.shared_string_apply));
+		applyButton.setButtonType(enable ? PRIMARY : STROKED);
 	}
 
 	protected void refreshMap() {
@@ -131,19 +142,27 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapActivity activity = requireMapActivity();
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
-		ImageView mapZoomIn = view.findViewById(R.id.map_zoom_in_button);
-		ImageView mapZoomOut = view.findViewById(R.id.map_zoom_out_button);
-		ImageView myLocation = view.findViewById(R.id.map_my_location_button);
-		if (AndroidUiHelper.isOrientationPortrait(activity)) {
-			layer.addMapButton(new ZoomInButton(activity, mapZoomIn, ZOOM_IN_BUTTON_ID));
-			layer.addMapButton(new ZoomOutButton(activity, mapZoomOut, ZOOM_OUT_BUTTON_ID));
-			layer.addMapButton(new MyLocationButton(activity, myLocation, BACK_TO_LOC_BUTTON_ID, false));
-			AndroidUiHelper.updateVisibility(zoomButtonsView, true);
-		} else {
-			mapZoomIn.setVisibility(View.INVISIBLE);
-			mapZoomOut.setVisibility(View.INVISIBLE);
-			myLocation.setVisibility(View.INVISIBLE);
-		}
+
+		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), ZOOM_IN_BUTTON_ID){
+			@Override
+			protected boolean shouldShow() {
+				return true;
+			}
+		});
+		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), ZOOM_OUT_BUTTON_ID){
+			@Override
+			protected boolean shouldShow() {
+				return true;
+			}
+		});
+		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), BACK_TO_LOC_BUTTON_ID, false){
+			@Override
+			protected boolean shouldShow() {
+				return true;
+			}
+		});
+
+		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));

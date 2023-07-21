@@ -33,6 +33,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -570,7 +571,22 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (!downloadThread.shouldDownloadIndexes()) {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
-			suggestedMaps.addAll(getMapsForType(latLon, GEOTIFF_FILE));
+
+			boolean shouldSuggestGeotiff = true;
+			if (!app.useOpenGlRenderer()) {
+				shouldSuggestGeotiff = false;
+			} else {
+				OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+				if (plugin != null) {
+					shouldSuggestGeotiff = !plugin.USE_RASTER_SQLITEDB.get();
+				}
+			}
+			if (shouldSuggestGeotiff) {
+				suggestedMaps.addAll(getMapsForType(latLon, GEOTIFF_FILE));
+			} else {
+				suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
+				suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SLOPE_FILE));
+			}
 		}
 
 		return suggestedMaps;

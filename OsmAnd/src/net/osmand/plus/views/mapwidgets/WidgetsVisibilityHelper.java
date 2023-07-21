@@ -158,7 +158,8 @@ public class WidgetsVisibilityHelper {
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
 				&& !isInFollowTrackMode()
-				&& (additionalDialogsHide || !isPortrait());
+				&& (additionalDialogsHide || !isPortrait())
+				&& !isInConfigureMapOptionMode();
 	}
 
 	public boolean shouldHideCompass() {
@@ -204,7 +205,8 @@ public class WidgetsVisibilityHelper {
 		return showTopControls
 				&& !isInPlanRouteMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
-				&& (additionalDialogsHide || !isPortrait());
+				&& (additionalDialogsHide || !isPortrait())
+				&& !isInConfigureMapOptionMode();
 	}
 
 	public boolean shouldShowElevationProfileWidget() {

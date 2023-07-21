@@ -27,6 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -283,14 +284,15 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			}
 
 			StringBuilder descriptionBuilder = new StringBuilder().append(indexItem.getType().getString(app));
-			if (indexItem.getType() == SRTM_COUNTRY_FILE) {
+			DownloadActivityType type = indexItem.getType();
+			if (type == SRTM_COUNTRY_FILE) {
 				descriptionBuilder.append(" ").append(getAbbreviationInScopes(app, indexItem));
 			}
 			descriptionBuilder.append(" • ").append(indexItem.getSizeDescription(app));
 			BaseBottomSheetItem mapIndexItem = new BottomSheetItemWithDescription.Builder()
 					.setDescription(descriptionBuilder.toString())
 					.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-					.setIcon(getContentIcon(indexItem.getType().getIconResource()))
+					.setIcon(getContentIcon(type.getIconResource()))
 					.setOnClickListener(v -> {
 						if (downloadThread.isDownloading(indexItem)) {
 							downloadThread.cancelDownload(indexItem);
