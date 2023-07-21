@@ -488,7 +488,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void updateLocation(net.osmand.Location location, Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
 		if (heading != null && devPlugin != null && devPlugin.WRITE_HEADING.get()) {
 			heading = MapUtils.normalizeDegrees360(heading);
 		} else {
