@@ -1293,7 +1293,6 @@
     <string name="shared_string_waypoints">Vmesne točke</string>
     <string name="speak_poi">Bližnje točke POI</string>
     <string name="rendering_value_browse_map_name">Poišči na zemljevidu</string>
-    <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC/CAI.</string>
     <string name="pause_navigation">Ustavi navigacijo</string>
     <string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti s pripomočkom za beleženje GPX na zemljevidu.</string>
     <string name="record_plugin_description">Posnemi svoja potovanja ali treninge in analizirajte podatke v smislu hitrosti, skupnih vzponov in spustov, višinskega profila itd. Posnete poti je mogoče arhivirati, deliti s prijatelji, urejati in naknadno obdelati.

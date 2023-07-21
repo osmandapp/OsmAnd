@@ -1707,7 +1707,6 @@
     <string name="recent_places">Последни места</string>
     <string name="use_points_as_intermediates">Изчисляване на маршрут между точки</string>
     <string name="route_descr_destination">Местоназначение</string>
-    <string name="rendering_attr_alpineHiking_description">Оцветяване на пътищата по скалата за трудност на SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Туристически маршрути</string>
     <string name="interrupt_music_descr">Прекъсване на музиката при гласови напътствия.</string>
     <string name="interrupt_music">Прекъсване на музика</string>

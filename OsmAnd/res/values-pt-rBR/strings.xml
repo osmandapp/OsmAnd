@@ -706,7 +706,6 @@
     <string name="download_roads_only_item">Apenas estradas</string>
     <string name="download_regular_maps">Mapa padrão</string>
     <string name="download_roads_only_maps">Apenas mapa de estradas</string>
-    <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhada</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limites</string>

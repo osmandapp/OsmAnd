@@ -903,7 +903,6 @@
     <string name="recording_description">Снимам %1$s %3$s %2$s</string>
     <string name="audionotes_location_not_defined">Кликните „Користи положај…“ да додате белешку одређеној локацији.</string>
     <string name="index_srtm_parts">делови</string>
-    <string name="rendering_attr_alpineHiking_description">Приказуј путеве према лествици САЦ-а/САИ-а.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Приказуј путеве према путањама ОСМЦ-а.</string>
     <string name="rendering_attr_showRoadMaps_description">Одаберите када ће се приказивати само путне карте:</string>
     <string name="rendering_attr_showRoadMaps_name">Само путне карте</string>

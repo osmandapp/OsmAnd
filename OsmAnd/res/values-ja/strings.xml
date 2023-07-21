@@ -1281,7 +1281,6 @@ POIの更新は利用できません</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
     <string name="gpx_option_calculate_first_last_segment">最初と最後の経路分類を利用しOsmAndエンジンでルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
-    <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">ハイキングルート</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写します。</string>
     <string name="interrupt_music_descr">有効にすると音声案内時に音楽を一時停止します</string>

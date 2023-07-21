@@ -1119,7 +1119,6 @@
     <string name="interrupt_music_descr">Ahots iragarpenek musika pausatuko dute.</string>
     <string name="interrupt_music">Eten musika</string>
     <string name="index_item_world_altitude_correction">Munduko garaiera zuzenketa</string>
-    <string name="rendering_attr_alpineHiking_description">Marraztu bideak SAC/CAI eskalaren arabera.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Mendiko ibilbideak</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Marraztu bideak OSMC aztarnen arabera.</string>
     <string name="about_version">Bertsioa:</string>

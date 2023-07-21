@@ -3196,7 +3196,6 @@
     <string name="index_srtm_ele">Konturni linii</string>
     <string name="download_select_map_types">Drugi karti</string>
     <string name="download_roads_only_maps">Patista-samo karta</string>
-    <string name="rendering_attr_alpineHiking_description">Avtomatski iscrtani karti spored скалата SAC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Granici</string>
     <string name="rendering_attr_noAdminboundaries_description">Potisnete go prikazot na regionalnite granici (administratorsko nivo 5–9).</string>
     <string name="map_widget_max_speed">Ogranici brzina</string>

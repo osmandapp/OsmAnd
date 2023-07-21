@@ -4665,7 +4665,6 @@
     <string name="ending_point_too_far">Titik akhir terlalu jauh dari jalan terdekat.</string>
     <string name="recording_playing">Audio dari rekaman yang ditentukan sedang diputar.
 \n%1$s</string>
-    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC/CAI.</string>
     <string name="non_optimal_route_calculation">Hitung kemungkinan rute yang tidak optimal untuk jarak jauh</string>
     <string name="osmand_extended_description_part2">Navigasi GPS
 \n - Pilih antara mode luring (tanpa biaya roaming saat Anda berada di luar negeri) atau daring (lebih cepat)

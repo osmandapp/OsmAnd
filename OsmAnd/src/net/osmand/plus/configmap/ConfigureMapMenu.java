@@ -21,6 +21,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.configmap.DifficultyClassificationFragment.getClassificationItemDescription;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_WIDTH;
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.RENDERING_CATEGORY_OSM_ASSISTANT;
@@ -290,10 +291,10 @@ public class ConfigureMapMenu {
 		CommonPreference<String> scaleSchemePref = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
 		RenderingRuleProperty alpineHikingScaleSchemeProperty = app.getRendererRegistry().getCustomRenderingRuleProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
 
-		if (alpineHikingScaleSchemeProperty != null && scaleSchemePref.get().isEmpty()) {
-			scaleSchemePref.set(alpineHikingScaleSchemeProperty.getPossibleValues()[0]);
+		if (alpineHikingScaleSchemeProperty != null) {
+			scaleSchemePref.overrideDefaultValue(alpineHikingScaleSchemeProperty.getPossibleValues()[0]);
 		}
-		String scaleScheme = AndroidUtils.getRenderingStringPropertyValue(app, scaleSchemePref.get());
+
 		String title = AndroidUtils.getRenderingStringPropertyName(app, attrName, alpineHikingScaleSchemeProperty != null
 				? alpineHikingScaleSchemeProperty.getName()
 				: attrName);
@@ -302,7 +303,7 @@ public class ConfigureMapMenu {
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(pref.get())
-				.setDescription(pref.get() ? (app.getString(R.string.shared_string_on) + ", " + scaleScheme) : null)
+				.setDescription(pref.get() ? getClassificationItemDescription(app) : null)
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
 				.setListener(new OnRowItemClick() {
 					@Override
@@ -318,7 +319,7 @@ public class ConfigureMapMenu {
 					                                  boolean isChecked) {
 						pref.set(isChecked);
 						item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-						item.setDescription(pref.get() ? (app.getString(R.string.shared_string_on) + ", " + scaleScheme) : null);
+						item.setDescription(pref.get() ? getClassificationItemDescription(app) : null);
 						if (uiAdapter != null) {
 							uiAdapter.onDataSetChanged();
 						}

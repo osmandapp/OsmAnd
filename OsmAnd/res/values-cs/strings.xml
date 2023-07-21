@@ -1269,7 +1269,6 @@
     <string name="lang_sr">Srbština (cyrilice)</string>
     <string name="lang_zh_cn">Čínština (zjednodušená)</string>
     <string name="lang_zh_tw">Čínština (tradiční)</string>
-    <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vykreslovat cesty podle OSMC značení.</string>
     <string name="arrival_distance_factor_early">Brzy</string>

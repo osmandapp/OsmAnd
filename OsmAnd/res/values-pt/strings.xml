@@ -2481,7 +2481,6 @@
     <string name="driving_region_australia">Austrália</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
-    <string name="rendering_attr_alpineHiking_description">Apresentar caminhos de acordo com a escala de SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Apresentar caminhos de acordo com traços OSMC.</string>
     <string name="map_widget_intermediate_time">Hora intermédia</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de direções de navegação automatizada do OSM) é uma aplicação de mapas e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM.

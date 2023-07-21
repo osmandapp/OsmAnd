@@ -1275,7 +1275,6 @@
     <string name="continue_navigation">Продовжити навігацію</string>
     <string name="pause_navigation">Призупинити навігацію</string>
     <string name="rendering_attr_subwayMode_name">Маршрути метро</string>
-    <string name="rendering_attr_alpineHiking_description">Показ маршрутів за шкалою SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Піші туристичні маршрути</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Показ шляхів згідно з OSMC-маркуванням.</string>
     <string name="arrival_distance_factor_early">Раніше</string>

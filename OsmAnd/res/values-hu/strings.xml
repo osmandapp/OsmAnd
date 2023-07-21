@@ -1267,7 +1267,6 @@
     <string name="lang_sr">szerb (cirill betűs)</string>
     <string name="lang_zh_cn">kínai (egyszerűsített)</string>
     <string name="lang_zh_tw">kínai (hagyományos)</string>
-    <string name="rendering_attr_alpineHiking_description">Ösvények megjelenítése az SAC/CAI nehézségi skála szerint.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Túraútvonalak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>

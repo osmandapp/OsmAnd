@@ -1248,7 +1248,6 @@
     <string name="rendering_attr_subwayMode_name">Metro maršrutai</string>
     <string name="continue_navigation">Tęsti navigaciją</string>
     <string name="pause_navigation">Pristabdyti navigaciją</string>
-    <string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Užkrauti kelius pagal OSMC pėdsakus.</string>
     <string name="arrival_distance_factor_early">Anksti</string>
     <string name="arrival_distance_factor_normally">Įprastai</string>

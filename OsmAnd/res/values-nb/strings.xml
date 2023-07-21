@@ -1831,7 +1831,6 @@
     <string name="map_widget_av_notes">Lyd/video-notater</string>
     <string name="map_widget_audionotes">Lydnotater</string>
     <string name="index_srtm_parts">deler</string>
-    <string name="rendering_attr_alpineHiking_description">Gjengi stier i henhold til SAC/CAI-skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Gjengi stier i henhold til OSMC-spor.</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionale grenser (administrasjonsnivåer 5-9).</string>
     <string name="close_changeset">Lukk endringssett</string>

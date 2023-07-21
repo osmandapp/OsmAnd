@@ -15,7 +15,7 @@
     <string name="rendering_value_sacScale_description">Swiss Alpine Club</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italian Alpine Club)</string>
-    <string name="difficulty_classification_description">Difficulty classification types for the routes.</string>
+    <string name="rendering_attr_alpineHiking_description">Difficulty classification types for the routes.</string>
     <string name="rendering_attr_alpineHiking_name">Difficulty classification</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosives</string>
@@ -4025,7 +4025,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Standard map</string>
     <string name="download_roads_only_maps">Roads-only map</string>
-    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC/CAI scale.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking routes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>

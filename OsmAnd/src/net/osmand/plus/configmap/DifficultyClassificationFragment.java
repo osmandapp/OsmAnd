@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -96,16 +97,20 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
 		headerIcon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, alpineHikingPref.get() ? selectedColor : disabledColor));
 
-		if (alpineHikingPref.get()) {
-			String scaleScheme = AndroidUtils.getRenderingStringPropertyValue(app, alpineHikingScaleSchemePref.get());
-			headerDescription.setText(String.format("%s, %s", getString(R.string.shared_string_on), scaleScheme));
-			AndroidUiHelper.updateVisibility(headerDescription, true);
-		} else {
-			AndroidUiHelper.updateVisibility(headerDescription, false);
+		boolean alpineHikingEnabled = alpineHikingPref.get();
+		if (alpineHikingEnabled) {
+			headerDescription.setText(getClassificationItemDescription(app));
 		}
+		AndroidUiHelper.updateVisibility(headerDescription, alpineHikingEnabled);
 
 		compoundButton.setChecked(alpineHikingPref.get());
 		UiUtilities.setupCompoundButton(nightMode, selectedColor, compoundButton);
+	}
+
+	public static String getClassificationItemDescription(OsmandApplication app){
+		return app.getString(R.string.ltr_or_rtl_combine_via_comma,
+				app.getString(R.string.shared_string_on),
+				AndroidUtils.getRenderingStringPropertyValue(app, app.getSettings().getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR).get()));
 	}
 
 	private void setupClassifications(@NonNull View view) {

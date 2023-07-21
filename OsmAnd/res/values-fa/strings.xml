@@ -1585,7 +1585,6 @@
     <string name="routing_attr_height_name">ارتفاع مجاز</string>
     <string name="routing_attr_height_description">ارتفاع مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
-    <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس درجه‌بندی SAC رسم شوند.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">مسیرهای پیاده‌گردی</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها بر اساس مسیرهای OSMC رسم شوند.</string>
     <string name="map_widget_battery">میزان شارژ باطری</string>

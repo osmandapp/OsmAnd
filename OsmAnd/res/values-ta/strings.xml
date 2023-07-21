@@ -1013,7 +1013,6 @@
     <string name="download_srtm_maps">சமநிலைக்கோடுகள்</string>
     <string name="download_regular_maps">நிலையான வரைபடம்</string>
     <string name="download_roads_only_maps">சாலைகள் மட்டுமே வரைபடம்</string>
-    <string name="rendering_attr_alpineHiking_description">SAC அளவின் படி பாதைகள் வழங்கவும்.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">அதிகப்படியான குறியீட்டு மேலடுக்கு</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC தடங்களின் படி பாதைகளை வழங்கவும்.</string>
     <string name="rendering_attr_noAdminboundaries_name">எல்லைகள்</string>

@@ -3550,7 +3550,6 @@
     <string name="interrupt_music_descr">Indicațiile vocale pun pe pauză redarea muzicii.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Redă traseele în funcție de urmele OSMC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rute de drumeție</string>
-    <string name="rendering_attr_alpineHiking_description">Redă traseele în conformitate cu scara SAC/CAI.</string>
     <string name="precise_routing_mode_descr">Calculați rute precise fără erori. În continuare limitat la distanță și lent.</string>
     <string name="download_hillshade_maps">Nuanțe de deal</string>
     <string name="layer_hillshade">Strat Hillshade</string>

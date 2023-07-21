@@ -1972,7 +1972,6 @@
     <string name="av_use_external_recorder_descr">Nota upptökutæki kerfisins fyrir myndskeið.</string>
     <string name="av_use_external_recorder">Nota upptökutæki kerfisins</string>
     <string name="av_use_external_camera_descr">Nota forrit kerfisins fyrir ljósmyndir.</string>
-    <string name="rendering_attr_alpineHiking_description">Setja leiðir fram samkvæmt SAC/CAI gönguleiðakvarða.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Setja leiðir fram samkvæmt OSMC-ferlum.</string>
     <string name="search_villages_and_postcodes">Leita að fleiri sveitarfélögum/póstnúmerum</string>
     <string name="analyze_on_map">Greina á korti</string>

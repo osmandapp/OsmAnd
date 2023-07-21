@@ -1799,7 +1799,6 @@
     <string name="recording_playing">Audio halutusta nauhoituksesta soitetaan.
 \n%1$s</string>
     <string name="recording_context_menu_arecord">Tee audio muistiinpano</string>
-    <string name="rendering_attr_alpineHiking_description">Piirrä polut SAC-mittakaavan mukaisesti.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Piirrä polut OSMC-jälkien pohjalta.</string>
     <string name="keep_informing">Toista navigointiohjeet</string>
     <string name="auto_follow_location_enabled">Keskitä käytettävä kartta automaattisesti.</string>

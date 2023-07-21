@@ -1238,7 +1238,6 @@
     <string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
     <string name="continue_navigation">Працягваць навігацыю</string>
     <string name="pause_navigation">Прыпыніць навігацыю</string>
-    <string name="rendering_attr_alpineHiking_description">Візуалізацыя шляху па шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Пешыя маршруты</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізацыя шляху згодна трас OSMC.</string>
     <string name="arrival_distance_factor_early">Раней</string>

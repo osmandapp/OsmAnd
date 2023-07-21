@@ -50,7 +50,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginHorizontal="@dimen/content_padding"
 					android:layout_marginTop="@dimen/content_padding_small"
-					android:text="@string/difficulty_classification_description"
+					android:text="@string/rendering_attr_alpineHiking_description"
 					android:textColor="?android:textColorSecondary" />
 
 				<LinearLayout

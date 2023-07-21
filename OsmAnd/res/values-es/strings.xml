@@ -1271,7 +1271,6 @@
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="continue_navigation">Continuar navegación</string>
     <string name="pause_navigation">Pausar navegación</string>
-    <string name="rendering_attr_alpineHiking_description">Renderizar caminos de acuerdo con la escala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="arrival_distance_factor_early">Lejos</string>

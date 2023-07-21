@@ -715,7 +715,6 @@
     <string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="continue_navigation">Sighi cun sa navigatzione</string>
     <string name="pause_navigation">Pone in pàusa sa navigatzione</string>
-    <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basende·ti in subra de s’iscala SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Àndalas pro s\'escursionismu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC.</string>
     <string name="osmand_parking_delete_confirm">Iscantzellare su marcadore de sa positzione de sa màchina parchegiada?</string>
