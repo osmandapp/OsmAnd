@@ -5338,4 +5338,10 @@
     <string name="dangerous_goods_description">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
     <string name="shared_string_not_checked">Ikke tjekket</string>
     <string name="shared_string_checked">Tjekket</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Den italienske alpinklub)</string>
+    <string name="rendering_value_sacScale_description">Den schweiziske alpinklub</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_description">Klassificeringstyper for sværhedsgrad af ruterne.</string>
+    <string name="rendering_attr_alpineHiking_name">Sværhedsklassificering</string>
 </resources>
