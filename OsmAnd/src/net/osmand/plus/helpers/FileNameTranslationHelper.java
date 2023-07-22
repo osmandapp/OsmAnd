@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.IndexConstants.WEATHER_MAP_INDEX_EXT;
+import static net.osmand.map.WorldRegion.WORLD;
 
 import android.content.Context;
 
@@ -47,6 +48,7 @@ public class FileNameTranslationHelper {
 		} else if (basename.endsWith(WIKIVOYAGE_NAME)) {
 			return getWikivoyageName(ctx, basename);
 		} else if (fileName.endsWith(WEATHER_MAP_INDEX_EXT)) { //weather files
+			basename = basename.replace("Weather_", "");
 			return getWeatherName(ctx, regions, basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
@@ -124,11 +126,10 @@ public class FileNameTranslationHelper {
 
 	public static String getWeatherName(Context ctx, OsmandRegions regions, String basename) {
 		basename = basename.replace(" ", "_");
-		if ("Weather_World".equals(basename)) {
+		if (WORLD.equalsIgnoreCase(basename)) {
 			return ctx.getString(R.string.shared_string_all_world);
 		} else {
-			WorldRegion region = regions.getRegionData(basename);
-			return region != null ? region.getLocaleName() : basename;
+			return regions.getLocaleName(basename.trim(), false);
 		}
 	}
 

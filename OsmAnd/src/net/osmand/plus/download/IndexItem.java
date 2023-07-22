@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -278,16 +277,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		public String assetName;
 		public DownloadActivityType type;
 
-		public boolean isWeather;
-		public WorldRegion worldRegion;
-
 		public DownloadEntry() { }
 
-		public DownloadEntry(WorldRegion worldRegion) {
-			this.worldRegion = worldRegion;
-			isWeather = true;
-		}
-		
 		public DownloadEntry(String assetName, String fileName, long dateModified) {
 			this.dateModified = dateModified;
 			targetFile = new File(fileName);
