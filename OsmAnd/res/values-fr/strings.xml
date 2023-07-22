@@ -5324,4 +5324,10 @@
     <string name="routing_attr_hazmat_category_usa_9_name">Divers</string>
     <string name="shared_string_not_checked">Non vérifié</string>
     <string name="shared_string_checked">Vérifié</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_description">Types de classification pour la difficulté des itinéraires.</string>
+    <string name="rendering_value_sacScale_description">Club Alpin Suisse</string>
+    <string name="rendering_value_sacScale_name">CAS</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_attr_alpineHiking_name">Classification des difficultés</string>
 </resources>
