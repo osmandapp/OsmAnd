@@ -5326,4 +5326,6 @@
     <string name="routing_attr_hazmat_category_usa_4_name">Solides inflammables</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Substances corrosives</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Divers</string>
+    <string name="shared_string_not_checked">Non vérifié</string>
+    <string name="shared_string_checked">Vérifié</string>
 </resources>

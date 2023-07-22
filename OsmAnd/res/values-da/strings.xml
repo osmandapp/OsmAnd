@@ -5340,4 +5340,6 @@
     <string name="routing_attr_hazmat_category_usa_2_name">Gasser</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Brandfarlige væsker</string>
     <string name="dangerous_goods_description">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="shared_string_not_checked">Ikke tjekket</string>
+    <string name="shared_string_checked">Tjekket</string>
 </resources>
