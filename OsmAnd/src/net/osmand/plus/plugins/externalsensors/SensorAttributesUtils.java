@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.externalsensors;
 
-import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
-import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +11,6 @@ import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointAttribute;
 import net.osmand.gpx.PointsAttributesData;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
@@ -30,7 +28,6 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SensorAttributesUtils {
@@ -132,7 +129,6 @@ public class SensorAttributesUtils {
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean calcWithoutGaps, boolean useRightAxis) {
 		switch (graphType) {
-
 			case SENSOR_SPEED: {
 				if (hasSensorSpeedData(analysis)) {
 					return createSensorDataSet(app, chart, analysis, graphType, axisType, useRightAxis, true, calcWithoutGaps);
@@ -176,39 +172,16 @@ public class SensorAttributesUtils {
 
 		float divX = ChartUtils.getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
+		Pair<Float, Float> pair = ChartUtils.getScalingY(app, graphType);
+		float mulY = pair != null ? pair.first : 1f;
+		float divY = pair != null ? pair.second : 1f;
+
+		boolean speedInTrack = analysis.hasSpeedInTrack();
+		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));
 		YAxis yAxis = ChartUtils.getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
-		ArrayList<Entry> values = new ArrayList<>();
-		List<PointAttribute<? extends Number>> attributes = analysis.getAttributesData(graphType.getDataKey()).getAttributes();
-		float currentX = 0;
-
-		for (int i = 0; i < attributes.size(); i++) {
-			PointAttribute<? extends Number> attribute = attributes.get(i);
-
-			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
-
-			if (i == 0 || stepX > 0) {
-				if (!(calcWithoutGaps && attribute.firstPoint)) {
-					currentX += stepX / divX;
-				}
-
-				float currentY = attribute.value.floatValue();
-				if (currentY < 0 || Float.isInfinite(currentY)) {
-					currentY = 0;
-				}
-
-				if (attribute.firstPoint && currentY != 0) {
-					values.add(new Entry(currentX, 0));
-				}
-				values.add(new Entry(currentX, currentY));
-				if (attribute.lastPoint && currentY != 0) {
-					values.add(new Entry(currentX, 0));
-				}
-			}
-		}
-
+		List<Entry> values = ChartUtils.getPointAttributeValues(analysis, graphType, axisType, divX, mulY, divY, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String format = null;
@@ -228,7 +201,7 @@ public class SensorAttributesUtils {
 		dataSet.setDivX(divX);
 		dataSet.setUnits(mainUnitY);
 
-		int color = ColorUtilities.getColor(app, graphType.getFillColorId(false));
+		int color = ColorUtilities.getColor(app, graphType.getFillColorId(!speedInTrack));
 		ChartUtils.setupDataSet(app, dataSet, color, color, drawFilled, false, useRightAxis, nightMode);
 
 		return dataSet;

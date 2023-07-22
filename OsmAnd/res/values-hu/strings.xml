@@ -179,7 +179,9 @@
     <string name="shared_string_no_thanks">Nem szükséges</string>
     <string name="basemap_missing">Töltse le a világ alaptérképét, hogy áttekintő nézetet kapjon az egész Földről alacsony nagyítási szint mellett.</string>
     <string name="vector_data_missing">Adatok (\'offline\') letöltése, hogy offline térképeket tudsz használni.</string>
-    <string name="local_index_gpx_info_show">\n\nHosszan megnyomva további lehetőségek</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nHosszú érintés az opciókhoz"</string>
     <string name="local_index_installed">Helyi verzió</string>
     <string name="local_index_items_backuped">%2$d elemből %1$d inaktiválva.</string>
     <string name="local_index_items_deleted">%2$d elemből %1$d törölve.</string>
@@ -1157,7 +1159,7 @@
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal tervezése az első és az utolsó útszakaszra</string>
     <string name="always_center_position_on_map">Pozíció elhelyezése mindig középre</string>
     <string name="voice_pref_title">Hang</string>
-    <string name="misc_pref_title">Egyebek</string>
+    <string name="misc_pref_title">Egyéb</string>
     <string name="localization_pref_title">Nyelv</string>
     <string name="index_item_nation_addresses">címek (egész ország)</string>
     <string name="index_item_world_altitude_correction">Magasságkorrekció világszerte</string>
@@ -4450,7 +4452,7 @@
     <string name="shared_string_downhill">Lejtés</string>
     <string name="shared_string_show_slope">Lejtés megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtés elrejtése</string>
-    <string name="shared_string_grade">Osztály</string>
+    <string name="shared_string_grade">Besorolás</string>
     <string name="elevation_profile">Magassági profil</string>
     <string name="distance_between_points">Pontok közti távolság</string>
     <string name="gps_filter_smoothing_desc">Állítsa be a pontok közti távolság korlátját.
@@ -5318,4 +5320,19 @@
     <string name="routing_attr_allow_via_ferrata_description">Hegyi útvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
     <string name="routing_attr_allow_via_ferrata_name">Hegyoldali útvonal (Via ferrata)</string>
     <string name="free_ride">Szabad vezetés</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Robbanóanyagok</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gázok</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Éghető folyadékok</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Éghető szilárd anyagok</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxidálószerek és szerves peroxidok</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Mérgező és fertőző anyagok</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktív anyagok</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Maró anyagok</string>
+    <string name="shared_string_class">Osztály</string>
+    <string name="dangerous_goods_description">Egyes utakon és alagutakban tilos a veszélyes anyagok szállítása.</string>
+    <string name="dangerous_goods">Veszélyes áruk</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Egyebek</string>
+    <string name="shared_string_not_checked">Nincs ellenőrizve</string>
+    <string name="shared_string_checked">Ellenőrizve</string>
 </resources>

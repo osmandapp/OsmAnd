@@ -5313,4 +5313,19 @@
     <string name="routing_attr_allow_via_ferrata_name">Itinéraire à flanc de montagne (Via ferrata)</string>
     <string name="free_settings_backup">Paramètres pour la sauvegarde gratuite</string>
     <string name="free_ride">Freeride</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosifs</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gaz</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Liquides inflammables</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substances toxiques et infectieuses</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agents oxydants et peroxydes organiques</string>
+    <string name="shared_string_class">Classe</string>
+    <string name="dangerous_goods_description">Sur certaines routes et tunnels, le transport de matières dangereuses est interdit.</string>
+    <string name="dangerous_goods">Marchandises dangereuses</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substances radioactives</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Solides inflammables</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substances corrosives</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Divers</string>
+    <string name="shared_string_not_checked">Non vérifié</string>
+    <string name="shared_string_checked">Vérifié</string>
 </resources>

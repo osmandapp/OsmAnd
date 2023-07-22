@@ -133,10 +133,9 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
-		setupChildIcon(view, type.getIconRes(), selected && type.isAllowedInFreeVersion());
-		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		boolean showProIcon = !InAppPurchaseHelper.isOsmAndProAvailable(app) && !type.isAllowedInFreeVersion();
+		setupChildIcon(view, type.getIconRes(), selected && !showProIcon);
 		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
-		proIcon.setVisibility(type.isAllowedInFreeVersion() || proAvailable ? View.GONE : View.VISIBLE);
 		view.setOnClickListener(view1 -> {
 			compoundButton.performClick();
 			if (listener != null) {
@@ -144,8 +143,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 			}
 			notifyDataSetChanged();
 		});
-		AndroidUiHelper.updateVisibility(proIcon, !type.isAllowedInFreeVersion());
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.switch_container), type.isAllowedInFreeVersion());
+		AndroidUiHelper.updateVisibility(proIcon, showProIcon);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.switch_container), !showProIcon);
 		setupSelectableBackground(view);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.divider), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_top_divider), false);

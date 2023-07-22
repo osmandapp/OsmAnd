@@ -15,8 +15,6 @@ public class OrderedLineDataSet extends LineDataSet {
 	private String units;
 	private float priority;
 	private float divX = 1f;
-	private float divY = 1f;
-	private float mulY = 1f;
 
 	public OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType,
 	                          GPXDataSetAxisType dataSetAxisType, boolean leftAxis) {
@@ -49,22 +47,6 @@ public class OrderedLineDataSet extends LineDataSet {
 
 	public void setDivX(float divX) {
 		this.divX = divX;
-	}
-
-	public float getDivY() {
-		return divY;
-	}
-
-	public void setDivY(float divY) {
-		this.divY = divY;
-	}
-
-	public float getMulY() {
-		return mulY;
-	}
-
-	public void setMulY(float mulY) {
-		this.mulY = mulY;
 	}
 
 	public String getUnits() {

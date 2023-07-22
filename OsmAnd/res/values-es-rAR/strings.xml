@@ -2067,7 +2067,7 @@
     <string name="rendering_value_low_name">Bajo</string>
     <string name="rendering_attr_contourWidth_description">Anchura de la curva de nivel</string>
     <string name="rendering_attr_contourWidth_name">Anchura de la curva de nivel</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ocultar agua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Cuerpos de agua</string>
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -4676,7 +4676,7 @@
     <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Áreas militares</string>
     <string name="explore_plans">Explorar planes</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
@@ -5337,4 +5337,17 @@
     <string name="may_be_used_if_there_is_shortcut">Puede usarse si existe un acceso directo</string>
     <string name="free_settings_backup">Copia de seguridad gratuita de los ajustes</string>
     <string name="free_ride">Paseo libre</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamables</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Sustancias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Sustancias radioactivas</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Varios</string>
+    <string name="dangerous_goods_description">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
+    <string name="dangerous_goods">Mercancías peligrosas</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Sólidos inflamables</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes y peróxidos orgánicos</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Sustancias corrosivas</string>
+    <string name="shared_string_class">Clase</string>
 </resources>

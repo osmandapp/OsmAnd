@@ -321,6 +321,8 @@ public class DownloadActivityType {
 			return "&heightmap=yes";
 		} else if (this == DEPTH_MAP_FILE) {
 			return "&depth=yes";
+		} else if (this == WEATHER_FORECAST) {
+			return "&weather=yes";
 		}
 		return "";
 	}

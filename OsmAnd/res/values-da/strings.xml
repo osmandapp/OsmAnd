@@ -5327,4 +5327,19 @@
     <string name="may_be_used_if_there_is_shortcut">Kan bruges, hvis der er en genvej</string>
     <string name="free_settings_backup">Gratis sikkerhedskopiering af indstillinger</string>
     <string name="free_ride">Gratis tur</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Sprængstoffer</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxiderende stoffer og organiske peroxider</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige og smitsomme stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Ætsende stoffer</string>
+    <string name="shared_string_class">Klasse</string>
+    <string name="dangerous_goods">Farligt gods</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diverse</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brandfarlige faste stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasser</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brandfarlige væsker</string>
+    <string name="dangerous_goods_description">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="shared_string_not_checked">Ikke tjekket</string>
+    <string name="shared_string_checked">Tjekket</string>
 </resources>
