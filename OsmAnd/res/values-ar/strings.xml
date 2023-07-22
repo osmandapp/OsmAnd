@@ -5398,7 +5398,7 @@
     <string name="shared_string_class">فئة</string>
     <string name="dangerous_goods">بضائع خطرة</string>
     <string name="shared_string_not_checked">لم يتم التحقق منه</string>
-    <string name="shared_string_checked">تم التحقق منه</string>
+    <string name="shared_string_checked">تم التحقق</string>
     <string name="routing_attr_hazmat_category_usa_5_name">عوامل مؤكسدة وبيروكسيدات عضوية</string>
     <string name="routing_attr_hazmat_category_usa_1_name">متفجرات</string>
     <string name="routing_attr_hazmat_category_usa_3_name">سوائل قابلة للإشتعال</string>
