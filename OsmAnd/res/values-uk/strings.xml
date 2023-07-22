@@ -1871,7 +1871,7 @@
 \n(Наразі вільно лише {2} МБ.)</string>
     <string name="download_files_question_space_with_temp">Завантажити {0} файл(ів)\?
 \nВикористовується {3} МБ тимчасового сховища та {1} МБ постійного. (Із {2} МБ.)</string>
-    <string name="donations">Пожертвування</string>
+    <string name="donations">Внески</string>
     <string name="osm_live_subscribe_btn">Передплатити</string>
     <string name="osm_live_hide_user_name">Не показувати мене у звітах</string>
     <string name="osm_live_month_cost">Щомісячна вартість</string>
