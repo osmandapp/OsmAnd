@@ -29,8 +29,8 @@ public class Map3DButton extends MapButton {
 
 	private final ElevationListener elevationListener;
 	private final AnimateDraggingMapThread animateDraggingMapThread;
-	private boolean specialPosition;
 	private final ViewGroup defaultContainer;
+	private boolean specialPosition;
 
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
 		super(mapActivity, fabButton, id);

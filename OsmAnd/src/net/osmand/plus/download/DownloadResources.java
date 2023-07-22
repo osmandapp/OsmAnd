@@ -370,78 +370,73 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		Map<WorldRegion, List<IndexItem>> groupByRegion = new LinkedHashMap<>();
 		OsmandRegions regs = app.getRegions();
-		for (IndexItem ii : resources) {
-			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
-				if (DownloadActivityType.isVoiceTTS(ii)) {
-					voiceTTS.addItem(ii);
-				} else if (DownloadActivityType.isVoiceRec(ii)) {
-					voiceRec.addItem(ii);
+		for (IndexItem item : resources) {
+			DownloadActivityType type = item.getType();
+			if (type == DownloadActivityType.VOICE_FILE) {
+				if (DownloadActivityType.isVoiceTTS(item)) {
+					voiceTTS.addItem(item);
+				} else if (DownloadActivityType.isVoiceRec(item)) {
+					voiceRec.addItem(item);
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.FONT_FILE) {
-				fonts.addItem(ii);
+			if (type == DownloadActivityType.FONT_FILE) {
+				fonts.addItem(item);
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.DEPTH_MAP_FILE) {
-				String fileName = ii.getFileName().toLowerCase();
+			if (type == DownloadActivityType.DEPTH_MAP_FILE) {
+				String fileName = item.getFileName().toLowerCase();
 				if (fileName.startsWith(WORLD_CONTOURS_SUFFIX)) {
-					nauticalWorldwideMaps.addItem(ii);
+					nauticalWorldwideMaps.addItem(item);
 				} else if (InAppPurchaseHelper.isDepthContoursPurchased(app)) {
 					if (fileName.contains(NAUTICAL_DEPTH_POINTS_SUFFIX)) {
-						nauticalDepthPointsMaps.addItem(ii);
+						nauticalDepthPointsMaps.addItem(item);
 					} else {
-						nauticalDepthContoursMaps.addItem(ii);
+						nauticalDepthContoursMaps.addItem(item);
 					}
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.WIKIVOYAGE_FILE) {
+			if (type == DownloadActivityType.WIKIVOYAGE_FILE) {
 				if (app.getTravelHelper() instanceof TravelDbHelper) {
-					wikivoyageMaps.addItem(ii);
+					wikivoyageMaps.addItem(item);
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.TRAVEL_FILE) {
-				if (ii.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
-					wikivoyageMaps.addItem(ii);
+			if (type == DownloadActivityType.TRAVEL_FILE) {
+				if (item.getFileName().contains(WIKIVOYAGE_FILE_FILTER)) {
+					wikivoyageMaps.addItem(item);
 				}
 				continue;
 			}
-			if (ii.getType() == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
+			if (type == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
 				// Hide heightmaps of sqlite format
 				continue;
 			}
-			boolean shouldHideHillshadeSlope = true;
-			if (!app.useOpenGlRenderer()) {
-				shouldHideHillshadeSlope = false;
-			} else {
-				OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-				if (plugin != null) {
-					shouldHideHillshadeSlope = !plugin.USE_RASTER_SQLITEDB.get();
+			if (type == DownloadActivityType.HILLSHADE_FILE || type == DownloadActivityType.SLOPE_FILE) {
+				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+				if (app.useOpenGlRenderer() && plugin != null && !plugin.USE_RASTER_SQLITEDB.get()) {
+					continue;
 				}
 			}
-			if (shouldHideHillshadeSlope
-					&& (ii.getType() == DownloadActivityType.HILLSHADE_FILE || ii.getType() == DownloadActivityType.SLOPE_FILE)) {
-				continue;
-			}
-			String basename = ii.getBasename();
+
+			String basename = item.getBasename();
 			WorldRegion region = regs.getRegionDataByDownloadName(basename.toLowerCase());
 			if (region != null) {
 				if (!groupByRegion.containsKey(region)) {
 					groupByRegion.put(region, new ArrayList<>());
 				}
-				groupByRegion.get(region).add(ii);
+				groupByRegion.get(region).add(item);
 			} else {
-				String fileName = ii.getFileName();
+				String fileName = item.getFileName();
 				if (fileName.contains("World")) {
 					if (Algorithms.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
-						nauticalWorldwideMaps.addItem(ii);
+						nauticalWorldwideMaps.addItem(item);
 					} else {
-						worldMaps.addItem(ii);
+						worldMaps.addItem(item);
 					}
 				} else {
-					otherMaps.addItem(ii);
+					otherMaps.addItem(item);
 				}
 			}
 		}

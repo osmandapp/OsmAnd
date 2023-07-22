@@ -283,14 +283,15 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
 			}
 
-			StringBuilder descriptionBuilder = new StringBuilder().append(indexItem.getType().getString(app));
 			DownloadActivityType type = indexItem.getType();
+			StringBuilder builder = new StringBuilder(type.getString(app));
 			if (type == SRTM_COUNTRY_FILE) {
-				descriptionBuilder.append(" ").append(getAbbreviationInScopes(app, indexItem));
+				builder.append(" ").append(getAbbreviationInScopes(app, indexItem));
 			}
-			descriptionBuilder.append(" • ").append(indexItem.getSizeDescription(app));
+			builder.append(" • ").append(indexItem.getSizeDescription(app));
+
 			BaseBottomSheetItem mapIndexItem = new BottomSheetItemWithDescription.Builder()
-					.setDescription(descriptionBuilder.toString())
+					.setDescription(builder.toString())
 					.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
 					.setIcon(getContentIcon(type.getIconResource()))
 					.setOnClickListener(v -> {

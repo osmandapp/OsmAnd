@@ -30,7 +30,6 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
@@ -58,9 +57,8 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return AndroidUiHelper.isOrientationPortrait(requireMapActivity())
-				? ColorUtilities.getListBgColorId(nightMode)
-				: R.color.status_bar_transparent_light;
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
+		return portrait ? ColorUtilities.getListBgColorId(nightMode) : R.color.status_bar_transparent_light;
 	}
 
 	@Override
@@ -85,13 +83,6 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		View view = themedInflater.inflate(R.layout.configure_map_option_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(activity, view);
 
-		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
-			TypedValue typedValueAttr = new TypedValue();
-			int bgAttrId = AndroidUtils.isLayoutRtl(activity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
-			activity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
-			view.findViewById(R.id.main_view).setBackgroundResource(typedValueAttr.resourceId);
-		}
-
 		contentContainer = view.findViewById(R.id.main_content);
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(viewOnCLick -> {
@@ -103,6 +94,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		buildZoomButtons(view);
 		moveCompassButton(view);
 		moveMap3DButton(view);
+		setupBackgroundShadow(view);
 
 		setupMainContent();
 		updateApplyButton(false);
@@ -143,19 +135,19 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		MapLayers mapLayers = activity.getMapLayers();
 		MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), ZOOM_IN_BUTTON_ID){
+		layer.addMapButton(new ZoomInButton(activity, view.findViewById(R.id.map_zoom_in_button), ZOOM_IN_BUTTON_ID) {
 			@Override
 			protected boolean shouldShow() {
 				return true;
 			}
 		});
-		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), ZOOM_OUT_BUTTON_ID){
+		layer.addMapButton(new ZoomOutButton(activity, view.findViewById(R.id.map_zoom_out_button), ZOOM_OUT_BUTTON_ID) {
 			@Override
 			protected boolean shouldShow() {
 				return true;
 			}
 		});
-		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), BACK_TO_LOC_BUTTON_ID, false){
+		layer.addMapButton(new MyLocationButton(activity, view.findViewById(R.id.map_my_location_button), BACK_TO_LOC_BUTTON_ID, false) {
 			@Override
 			protected boolean shouldShow() {
 				return true;
@@ -168,6 +160,16 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
 	}
 
+	private void setupBackgroundShadow(@NonNull View view) {
+		MapActivity activity = requireMapActivity();
+		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+			TypedValue typedValueAttr = new TypedValue();
+			int bgAttrId = AndroidUtils.isLayoutRtl(activity) ? R.attr.right_menu_view_bg : R.attr.left_menu_view_bg;
+			activity.getTheme().resolveAttribute(bgAttrId, typedValueAttr, true);
+			view.findViewById(R.id.main_view).setBackgroundResource(typedValueAttr.resourceId);
+		}
+	}
+
 	private void setupToolBar(@NonNull View view) {
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
 
@@ -175,7 +177,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		title.setText(getToolbarTitle());
 
 		ImageView backButton = view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getIcon(R.drawable.ic_action_close, ColorUtilities.getDefaultIconColorId(nightMode)));
+		backButton.setImageDrawable(getContentIcon(R.drawable.ic_action_close));
 		backButton.setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
@@ -189,16 +191,17 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 	}
 
 	private void moveCompassButton(@NonNull View view) {
-		int btnSizePx = getDimensionPixelSize(R.dimen.map_small_button_size);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
-		boolean isPortrait = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
-		int toolbarHeight = isPortrait ? getDimensionPixelSize(R.dimen.toolbar_height) : 0;
-		int topMargin = isPortrait ? getDimensionPixelSize(R.dimen.map_small_button_margin) : getDimensionPixelSize(R.dimen.content_padding_half);
-		int startMargin = isPortrait ? getDimensionPixelSize(R.dimen.map_button_margin) : (getDimensionPixelSize(R.dimen.dashboard_land_width) + getDimensionPixelSize(R.dimen.content_padding));
-		AndroidUtils.setMargins(params, startMargin, topMargin + toolbarHeight, 0, 0);
-
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(activity);
+			int toolbarHeight = portrait ? getDimensionPixelSize(R.dimen.toolbar_height) : 0;
+			int topMargin = getDimensionPixelSize(portrait ? R.dimen.map_small_button_margin : R.dimen.content_padding_half);
+			int startMargin = portrait ? getDimensionPixelSize(R.dimen.map_button_margin) : (getDimensionPixelSize(R.dimen.dashboard_land_width) + getDimensionPixelSize(R.dimen.content_padding));
+
+			int buttonSize = getDimensionPixelSize(R.dimen.map_small_button_size);
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(buttonSize, buttonSize);
+			AndroidUtils.setMargins(params, startMargin, topMargin + toolbarHeight, 0, 0);
+
 			MapLayers mapLayers = activity.getMapLayers();
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 			mapControlsLayer.moveCompassButton((ViewGroup) view, params);

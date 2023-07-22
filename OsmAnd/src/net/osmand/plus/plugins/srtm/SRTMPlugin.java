@@ -195,7 +195,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public CharSequence getDescription(boolean linksEnabled) {
 		String docsUrl = app.getString(R.string.docs_plugin_srtm);
 		String description = app.getString(R.string.srtm_plugin_description, docsUrl);
-		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl): description;
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override
@@ -572,20 +572,12 @@ public class SRTMPlugin extends OsmandPlugin {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
 
-			boolean shouldSuggestGeotiff = true;
-			if (!app.useOpenGlRenderer()) {
-				shouldSuggestGeotiff = false;
-			} else {
-				OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-				if (plugin != null) {
-					shouldSuggestGeotiff = !plugin.USE_RASTER_SQLITEDB.get();
-				}
-			}
-			if (shouldSuggestGeotiff) {
-				suggestedMaps.addAll(getMapsForType(latLon, GEOTIFF_FILE));
-			} else {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			if (!app.useOpenGlRenderer() || plugin != null && plugin.USE_RASTER_SQLITEDB.get()) {
 				suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
 				suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SLOPE_FILE));
+			} else {
+				suggestedMaps.addAll(getMapsForType(latLon, GEOTIFF_FILE));
 			}
 		}
 
