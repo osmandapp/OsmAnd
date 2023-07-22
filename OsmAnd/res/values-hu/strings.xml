@@ -5331,4 +5331,10 @@
     <string name="routing_attr_hazmat_category_usa_9_name">Egyebek</string>
     <string name="shared_string_not_checked">Nincs ellenőrizve</string>
     <string name="shared_string_checked">Ellenőrizve</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Az útvonalak nehézségi besorolásának típusai.</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Olasz Alpesi Club)</string>
+    <string name="rendering_value_sacScale_description">Svájci Alpesi Club</string>
+    <string name="rendering_attr_alpineHiking_name">Nehézségi besorolás</string>
 </resources>
