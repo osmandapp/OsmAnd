@@ -1269,8 +1269,6 @@
     <string name="lang_sr">Srbština (cyrilice)</string>
     <string name="lang_zh_cn">Čínština (zjednodušená)</string>
     <string name="lang_zh_tw">Čínština (tradiční)</string>
-    <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
-    <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vykreslovat cesty podle OSMC značení.</string>
     <string name="arrival_distance_factor_early">Brzy</string>
@@ -5193,7 +5191,6 @@
     <string name="save_track_external_sensors_data">Data</string>
     <string name="track_not_recorded">Nezaznamenáno</string>
     <string name="tracks_empty_folder_description">Tato složka zatím neobsahuje žádnou stopu.</string>
-    <string name="rendering_value_sacScale_name">Stupnice SAC</string>
     <string name="map_3d_mode_description">Dotkněte se mapy dvěma prsty a pohybem nahoru a dolů upravte sklon mapy.</string>
     <string name="no_poi_for_category">Bod zájmu nenalezen</string>
     <string name="rendering_attr_lightDetail_name">Detail osvětlení</string>
@@ -5212,7 +5209,6 @@
     <string name="there_are_no_connected_sensors_of_this_type">Nejsou připojeny žádné senzory tohoto typu</string>
     <string name="external_sensors_not_found">Senzory nenalezeny</string>
     <string name="shared_string_new_track">Nová stopa</string>
-    <string name="rendering_value_caiScale_name">Stupnice CAI</string>
     <string name="map_3d_mode_action">3D režim</string>
     <string name="shared_string_visible_on_map">Viditelné na mapě</string>
     <string name="file_already_exists">Soubor již existuje</string>

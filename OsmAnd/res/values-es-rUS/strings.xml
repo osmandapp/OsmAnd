@@ -675,8 +675,6 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapa estándar</string>
     <string name="download_roads_only_maps">Mapa sólo vial</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino</string>
-    <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
@@ -5203,8 +5201,6 @@
     <string name="beats_per_minute_short">ppm</string>
     <string name="bicycle_scd_device_name">Dispositivo para «Bicicleta»</string>
     <string name="shared_string_ear_lobe">Lóbulo de la oreja</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
     <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>

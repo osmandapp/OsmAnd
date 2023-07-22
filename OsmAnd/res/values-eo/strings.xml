@@ -992,8 +992,6 @@
     <string name="download_srtm_maps">Nivelkurboj</string>
     <string name="download_regular_maps">Plena mapo</string>
     <string name="download_roads_only_maps">Nur-voja mapo</string>
-    <string name="rendering_attr_alpineHiking_name">Montgrimpada skalo</string>
-    <string name="rendering_attr_alpineHiking_description">Bildigi vojojn laŭ skalo de SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turismaj kursoj</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Bildigi vojojn laŭ OSMC-kursoj.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
@@ -5196,8 +5194,6 @@
     <string name="map_3d_mode_description">Frapetu kaj ŝovu la mapon supren/malsupren per du fingroj por alĝustigi ĝian klinecon.</string>
     <string name="no_poi_for_category">Ne trovis interesejon</string>
     <string name="rendering_value_sector1_name">Sektoro 1</string>
-    <string name="rendering_value_sacScale_name">SAC-skalo</string>
-    <string name="rendering_value_caiScale_name">CAI-skalo</string>
     <string name="map_3d_mode_action">3D-reĝimo</string>
     <string name="rendering_attr_lightDetail_name">Detaloj de lumo</string>
     <string name="rendering_attr_lightDetail_description">Implicite: nomo de marmarko (karaktero, grupo, periodo); elektu pliajn informojn pri sektoroj 1–3 aŭ pri karaktero de sektoro 1,2,3,4,5</string>

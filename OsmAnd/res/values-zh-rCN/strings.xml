@@ -1907,8 +1907,6 @@
     <string name="map_widget_av_notes">音频/视频注记</string>
     <string name="audionotes_location_not_defined">轻触\"使用位置 …\"以在此添加注记。</string>
     <string name="map_widget_audionotes">音频注记</string>
-    <string name="rendering_attr_alpineHiking_name">高山远足量表（SAC）</string>
-    <string name="rendering_attr_alpineHiking_description">依据 SAC 分级计算路径。</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">徒步旅行路线</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">根据 OSMC 轨迹渲染路径。</string>
     <string name="target_point">目的地 %1$s</string>

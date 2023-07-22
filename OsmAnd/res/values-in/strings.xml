@@ -4524,7 +4524,6 @@
     <string name="speak_descr">Atur pengumuman nama jalan, peringatan lalu lintas (pemberhentian paksa, polisi tidur), peringatan kamera kecepatan, dan batas kecepatan.</string>
     <string name="intermediate_items_sort_return">Urutan tujuan perantara yang dioptimalkan dalam perjalanan ke tujuan.</string>
     <string name="use_kalman_filter_compass_descr">Mengurangi kebisingan dalam pembacaan kompas tetapi menambahkan inersia.</string>
-    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine</string>
     <string name="rendering_attr_noAdminboundaries_description">Menekan tampilan batas wilayah (tingkat admin 5–9).</string>
     <string name="gps_not_available">Harap aktifkan GPS di pengaturan</string>
     <string name="gpx_monitoring_disabled_warn">Catat trek menggunakan widget GPX atau melalui pengaturan \'Perekaman perjalanan\'.</string>
@@ -4666,7 +4665,6 @@
     <string name="ending_point_too_far">Titik akhir terlalu jauh dari jalan terdekat.</string>
     <string name="recording_playing">Audio dari rekaman yang ditentukan sedang diputar.
 \n%1$s</string>
-    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC/CAI.</string>
     <string name="non_optimal_route_calculation">Hitung kemungkinan rute yang tidak optimal untuk jarak jauh</string>
     <string name="osmand_extended_description_part2">Navigasi GPS
 \n - Pilih antara mode luring (tanpa biaya roaming saat Anda berada di luar negeri) atau daring (lebih cepat)
@@ -5219,8 +5217,6 @@
     <string name="map_3d_mode_action">Mode 3D</string>
     <string name="map_3d_mode_hint">Ketuk tombol dengan lama memungkinkan mengubah posisi tombol.</string>
     <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
-    <string name="rendering_value_sacScale_name">Skala SAC</string>
-    <string name="rendering_value_caiScale_name">Skala CAI</string>
     <string name="external_sensors_source_of_data">Sumber data</string>
     <string name="save_track_external_sensors_data">Data</string>
     <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>

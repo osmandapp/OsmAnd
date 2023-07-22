@@ -1363,8 +1363,6 @@
     <string name="download_srtm_maps">Քարտեզ SRTM (բարձունքների գծեր)</string>
     <string name="download_regular_maps">Ստանդարտ քարտեզ</string>
     <string name="download_roads_only_maps">Ճանապարհների քարտեզը</string>
-    <string name="rendering_attr_alpineHiking_name">Լեռնաշղթայի զբոսնում մասշտաբով (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Պատկերացնել ճանապարհը SAC մասշտաբով։</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Ճանապարհի արտացոլումը ըստ OSMC երթուղիների</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Ճանապարհի արտացոլումը ըստ OSMC երթուղիների։</string>
     <string name="rendering_attr_noAdminboundaries_name">Սահմանները</string>

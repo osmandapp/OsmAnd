@@ -1743,7 +1743,6 @@
     <string name="rendering_value_medium_w_name">Miðlungs</string>
     <string name="rendering_value_low_name">Lágur</string>
     <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
-    <string name="rendering_attr_alpineHiking_name">Alpa-gönguleiðakvörðunin</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Gönguleiðir</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-kortagerðaraðstoð</string>
     <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
@@ -1973,7 +1972,6 @@
     <string name="av_use_external_recorder_descr">Nota upptökutæki kerfisins fyrir myndskeið.</string>
     <string name="av_use_external_recorder">Nota upptökutæki kerfisins</string>
     <string name="av_use_external_camera_descr">Nota forrit kerfisins fyrir ljósmyndir.</string>
-    <string name="rendering_attr_alpineHiking_description">Setja leiðir fram samkvæmt SAC/CAI gönguleiðakvarða.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Setja leiðir fram samkvæmt OSMC-ferlum.</string>
     <string name="search_villages_and_postcodes">Leita að fleiri sveitarfélögum/póstnúmerum</string>
     <string name="analyze_on_map">Greina á korti</string>
@@ -5158,8 +5156,6 @@
     <string name="tracks_empty_folder">Tóm mappa</string>
     <string name="track_not_recorded">Ekki skráð</string>
     <string name="shared_string_new_track">Nýr ferill</string>
-    <string name="rendering_value_sacScale_name">SAC-kvarði</string>
-    <string name="rendering_value_caiScale_name">CAI-kvarði</string>
     <string name="map_3d_mode_action">3D-þrívíddarhamur</string>
     <string name="shared_string_close_the_dialog">Loka glugganum</string>
     <string name="external_sensors_source_of_data">Uppruni gagna</string>
