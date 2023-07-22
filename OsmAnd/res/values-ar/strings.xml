@@ -4770,7 +4770,7 @@
     <string name="marker_2nd">التوجيه المباشر الثاني</string>
     <string name="next_live_update_date_and_time">التحديث التالي: %1$s في %2$s.</string>
     <string name="goods_delivery_desc_3">ينطبق فقط على المركبات التي تحمل البضائع التي تحتوي على أربع عجلات على الأقل ولا يزيد وزنها عن 3.5 طن.</string>
-    <string name="reset_all_settings_desc">هل أنت متأكد أنك تريد إعادة تعيين كافة الإعدادات إلى الافتراضي؟</string>
+    <string name="reset_all_settings_desc">إعادة تعيين كافة الإعدادات إلى الافتراضي؟</string>
     <string name="marker_1st">التوجيه المباشر الأول</string>
     <string name="no_altitude_data_desc">يمكنك إرفاق مسارك بالطرق للحصول على بيانات %1$s أو حسابها عبر الإنترنت.</string>
     <string name="next_live_update_time">التحديث التالي: في %1$s.</string>
@@ -5393,11 +5393,11 @@
     <string name="routing_attr_hazmat_category_usa_6_name">مواد سامة ومعدية</string>
     <string name="routing_attr_hazmat_category_usa_7_name">مواد مشعة</string>
     <string name="routing_attr_hazmat_category_usa_8_name">مواد مسببة للتآكل</string>
-    <string name="routing_attr_hazmat_category_usa_9_name">متفرقات</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">متنوع</string>
     <string name="routing_attr_hazmat_category_usa_4_name">مواد صلبة قابلة للاشتعال</string>
     <string name="shared_string_class">فئة</string>
     <string name="dangerous_goods">بضائع خطرة</string>
-    <string name="shared_string_not_checked">لم يتم التحقق منه</string>
+    <string name="shared_string_not_checked">لم يتم التحقق</string>
     <string name="shared_string_checked">تم التحقق</string>
     <string name="routing_attr_hazmat_category_usa_5_name">عوامل مؤكسدة وبيروكسيدات عضوية</string>
     <string name="routing_attr_hazmat_category_usa_1_name">متفجرات</string>
