@@ -65,21 +65,36 @@ public class DownloadResources extends DownloadResourceGroup {
 		return itemsToUpdate;
 	}
 
+	@Nullable
 	public IndexItem getWorldBaseMapItem() {
 		DownloadResourceGroup worldMaps = getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
-		IndexItem worldMap = null;
 		if (worldMaps != null) {
 			List<IndexItem> list = worldMaps.getIndividualResources();
 			if (list != null) {
 				for (IndexItem item : list) {
 					if (item.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
-						worldMap = item;
-						break;
+						return item;
 					}
 				}
 			}
 		}
-		return worldMap;
+		return null;
+	}
+
+	@Nullable
+	public IndexItem getWeatherWorldItem() {
+		DownloadResourceGroup worldMaps = getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
+		if (worldMaps != null) {
+			List<IndexItem> list = worldMaps.getIndividualResources();
+			if (list != null) {
+				for (IndexItem item : list) {
+					if (item.type == DownloadActivityType.WEATHER_FORECAST) {
+						return item;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Nullable
