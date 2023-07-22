@@ -12,6 +12,7 @@ import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
 import static net.osmand.plus.download.DownloadResources.WORLD_SEAMARKS_KEY;
 import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
+import static net.osmand.plus.download.ui.LocalIndexOperationTask.DELETE_OPERATION;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -36,7 +37,6 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
-import net.osmand.OnCompleteCallback;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -61,15 +61,10 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
-import net.osmand.plus.plugins.weather.OfflineForecastHelper;
-import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
-import net.osmand.plus.plugins.weather.viewholder.WeatherIndexItemViewHolder;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemViewHolder {
@@ -234,11 +229,6 @@ public class ItemViewHolder {
 		}
 		tvDesc.setTextColor(textColorSecondary);
 
-		if (isWeatherItemInRemovingProcess(downloadItem)) {
-			bindAsWeatherItemInRemovingProcess();
-			return;
-		}
-
 		if (!isDownloading) {
 			pbProgress.setVisibility(View.GONE);
 			tvDesc.setVisibility(View.VISIBLE);
@@ -256,14 +246,7 @@ public class ItemViewHolder {
 					tvDesc.setText(downloadItem.getType().getString(context));
 				}
 			} else if (downloadItem instanceof MultipleDownloadItem) {
-				MultipleDownloadItem item = (MultipleDownloadItem) downloadItem;
-				if (item.hasWeatherIndexes()) {
-					calculateWeatherCacheSize(item, () -> setupCommonMultipleDescription(item));
-				} else {
-					setupCommonMultipleDescription(item);
-				}
-			} else if (downloadItem instanceof WeatherIndexItem) {
-				calculateWeatherCacheSize(downloadItem, () -> setupCommonDescription(downloadItem));
+				setupCommonMultipleDescription((MultipleDownloadItem) downloadItem);
 			} else {
 				setupCommonDescription(downloadItem);
 			}
@@ -303,58 +286,6 @@ public class ItemViewHolder {
 			ivLeft.setImageDrawable(getThemedIcon(context, R.drawable.ic_map));
 			tvDesc.setVisibility(View.GONE);
 			pbProgress.setVisibility(View.GONE);
-		}
-	}
-
-	private boolean isWeatherItemInRemovingProcess(@NonNull DownloadItem downloadItem) {
-		if (downloadItem instanceof MultipleDownloadItem) {
-			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
-			for (IndexItem indexItem : multipleDownloadItem.getAllIndexes()) {
-				if (isWeatherItemInRemovingProcess(indexItem)) {
-					return true;
-				}
-			}
-		} else if (downloadItem instanceof WeatherIndexItem) {
-			OsmandApplication app = context.getMyApplication();
-			WeatherIndexItem weatherIndexItem = (WeatherIndexItem) downloadItem;
-			OfflineForecastHelper forecastHelper = app.getOfflineForecastHelper();
-			return forecastHelper.isRemoveLocalForecastInProgress(weatherIndexItem.getRegionId());
-		}
-		return false;
-	}
-
-	private void bindAsWeatherItemInRemovingProcess() {
-		showIndeterminateProgress();
-		ivBtnRight.setImageDrawable(null);
-	}
-
-	private void calculateWeatherCacheSize(
-			@NonNull DownloadItem downloadItem,
-			@NonNull OnCompleteCallback onComplete
-	) {
-		showIndeterminateProgress();
-		OsmandApplication app = context.getMyApplication();
-		OfflineForecastHelper helper = app.getOfflineForecastHelper();
-		if (downloadItem instanceof MultipleDownloadItem) {
-			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
-			List<IndexItem> indexes = multipleDownloadItem.getAllIndexes();
-			List<WeatherIndexItem> weatherIndexes = new ArrayList<>();
-			for (IndexItem indexItem : indexes) {
-				if (indexItem instanceof WeatherIndexItem) {
-					weatherIndexes.add((WeatherIndexItem) indexItem);
-				}
-			}
-			helper.calculateCacheSizeForAll(weatherIndexes, () -> onWeatherCacheSizeCalculated(onComplete));
-		} else if (downloadItem instanceof WeatherIndexItem) {
-			WeatherIndexItem index = (WeatherIndexItem) downloadItem;
-			helper.calculateCacheSizeIfNeeded(index, () -> onWeatherCacheSizeCalculated(onComplete));
-		}
-	}
-
-	private void onWeatherCacheSizeCalculated(@NonNull OnCompleteCallback callback) {
-		if (AndroidUtils.isActivityNotDestroyed(context)) {
-			hideIndeterminateProgress();
-			callback.onComplete();
 		}
 	}
 
@@ -450,9 +381,7 @@ public class ItemViewHolder {
 	}
 
 	private int getDownloadActionIconId(@NonNull DownloadItem item) {
-		return item instanceof MultipleDownloadItem ?
-				R.drawable.ic_action_multi_download :
-				R.drawable.ic_action_gsave_dark;
+		return item instanceof MultipleDownloadItem ? R.drawable.ic_action_multi_download : R.drawable.ic_action_gsave_dark;
 	}
 
 	@NonNull
@@ -483,10 +412,7 @@ public class ItemViewHolder {
 	}
 
 	public OnClickListener getRightButtonAction(DownloadItem item, RightButtonAction clickAction) {
-		if (isWeatherItemInRemovingProcess(item)) {
-			// empty listener
-			return v -> {};
-		} else if (clickAction != RightButtonAction.DOWNLOAD) {
+		if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -561,24 +487,6 @@ public class ItemViewHolder {
 				confirmRemove(downloadItem, downloadedFiles);
 				return true;
 			};
-		} else if ((downloadItem instanceof WeatherIndexItem
-				|| (downloadItem instanceof MultipleDownloadItem && downloadItem.getType() == WEATHER_FORECAST))
-				&& downloadItem.isDownloaded()) {
-			removeItemClickListener = _item -> {
-				List<String> regionIds = new ArrayList<>();
-				if (downloadItem instanceof WeatherIndexItem) {
-					regionIds.add(((WeatherIndexItem) downloadItem).getRegionId());
-				} else {
-					MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) downloadItem;
-					for (DownloadItem item : multipleDownloadItem.getAllItems()) {
-						if (item instanceof WeatherIndexItem) {
-							regionIds.add(((WeatherIndexItem) item).getRegionId());
-						}
-					}
-				}
-				WeatherIndexItemViewHolder.confirmWeatherRemove(context, regionIds);
-				return true;
-			};
 		}
 		if (removeItemClickListener != null) {
 			optionsMenu.getMenu()
@@ -621,16 +529,12 @@ public class ItemViewHolder {
 		}
 	}
 
-	private void confirmDownload(DownloadItem item) {
+	private void confirmDownload(@NonNull DownloadItem item) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(R.string.are_you_sure);
 		builder.setMessage(R.string.confirm_download_roadmaps);
-		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-				R.string.shared_string_download, (dialog, which) -> {
-					if (item != null) {
-						startDownload(item);
-					}
-				});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_download, (dialog, which) -> startDownload(item));
 		builder.show();
 	}
 
@@ -643,17 +547,14 @@ public class ItemViewHolder {
 		}
 	}
 
-	private void selectIndexesToDownload(DownloadItem item) {
-		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate,
-				indexes -> {
-					IndexItem[] indexesArray = new IndexItem[indexes.size()];
-					context.startDownload(indexes.toArray(indexesArray));
-				}
-		);
+	private void selectIndexesToDownload(@NonNull DownloadItem item) {
+		SelectIndexesHelper.showDialog(item, context, dateFormat, showRemoteDate, indexes -> {
+			IndexItem[] indexesArray = new IndexItem[indexes.size()];
+			context.startDownload(indexes.toArray(indexesArray));
+		});
 	}
 
-	private void confirmRemove(@NonNull DownloadItem downloadItem,
-							   @NonNull List<File> downloadedFiles) {
+	private void confirmRemove(@NonNull DownloadItem downloadItem, @NonNull List<File> downloadedFiles) {
 		OsmandApplication app = context.getMyApplication();
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 
@@ -677,13 +578,8 @@ public class ItemViewHolder {
 		confirm.show();
 	}
 
-	private void remove(@NonNull LocalIndexType type,
-						@NonNull List<File> filesToDelete) {
-		OsmandApplication app = context.getMyApplication();
-		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(
-				context,
-				null,
-				LocalIndexOperationTask.DELETE_OPERATION);
+	private void remove(@NonNull LocalIndexType type, @NonNull List<File> filesToDelete) {
+		LocalIndexOperationTask removeTask = new LocalIndexOperationTask(context.getMyApplication(), null, DELETE_OPERATION);
 		LocalIndexInfo[] params = new LocalIndexInfo[filesToDelete.size()];
 		for (int i = 0; i < filesToDelete.size(); i++) {
 			File file = filesToDelete.get(i);
