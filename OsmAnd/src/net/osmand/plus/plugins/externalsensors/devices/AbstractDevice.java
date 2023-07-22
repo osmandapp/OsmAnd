@@ -22,9 +22,10 @@ import java.util.List;
 public abstract class AbstractDevice<T extends AbstractSensor> {
 
 	private static final int BATTERY_LOW_LEVEL_THRESHOLD = 15;
+	public static final int BATTERY_UNKNOWN_LEVEL_VALUE = -1;
 
 	protected final String deviceId;
-	protected int batteryLevel = -1;
+	protected int batteryLevel = BATTERY_UNKNOWN_LEVEL_VALUE;
 	protected int rssi = -1;
 	private DeviceConnectionState state = DeviceConnectionState.DISCONNECTED;
 	protected List<DeviceListener> listeners = new ArrayList<>();
@@ -65,7 +66,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	}
 
 	public boolean hasBatteryLevel() {
-		return batteryLevel > -1;
+		return batteryLevel > BATTERY_UNKNOWN_LEVEL_VALUE;
 	}
 
 	public int getBatteryLevel() {

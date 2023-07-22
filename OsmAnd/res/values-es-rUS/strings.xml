@@ -2065,7 +2065,7 @@
     <string name="rendering_value_low_name">Bajo</string>
     <string name="rendering_attr_contourWidth_description">Anchura de la curva de nivel</string>
     <string name="rendering_attr_contourWidth_name">Anchura de la curva de nivel</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ocultar agua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Cuerpos de agua</string>
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -4659,7 +4659,7 @@
     <string name="rendering_attr_weatherTempContours_name">Isolíneas de temperatura</string>
     <string name="rendering_attr_weatherPressureContours_name">Isolíneas de presión</string>
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
     <string name="routing_attr_allow_private_for_truck_name">Permitir el acceso privado (camión)</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
@@ -5331,4 +5331,5 @@
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqltiedb para pendientes o sombreados</string>
     <string name="free_settings_backup">Copia de seguridad gratuita de los ajustes</string>
     <string name="routing_attr_allow_via_ferrata_description">Una ruta de montaña equipada con cables fijos, anclajes, peldaños, escaleras y puentes.</string>
+    <string name="free_ride">Paseo libre</string>
 </resources>

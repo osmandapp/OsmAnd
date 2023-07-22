@@ -299,9 +299,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				preference.setVisible(false);
 				app.getSettings().CONFIGURE_PROFILE_FREE_ACCOUNT_CARD_DISMISSED.set(true);
 			});
-			View getCloudBtn = holder.findViewById(R.id.dismiss_button);
-			UiUtilities.setupDialogButton(isNightMode(), getCloudBtn, SECONDARY, R.string.get_osmand_cloud);
-			getCloudBtn.setOnClickListener(v -> {
+			View getCloudBtnContainer = holder.findViewById(R.id.dismiss_button_container);
+			getCloudBtnContainer.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());

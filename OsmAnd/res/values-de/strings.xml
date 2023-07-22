@@ -954,11 +954,11 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Höhenlinien</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Steigungen helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Neigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Hangneigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
 \n
 \nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
 \n
-\nWeitere Informationen unter https://osmand.net/docs/user/plugins/contour-lines.</string>
+\nWeitere Informationen unter %1$s.</string>
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\', um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
@@ -5320,4 +5320,19 @@
 \n • Höhenänderung und Neigungsauswertung überarbeitet
 \n
 \n</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Verwenden des Rasters von sqlitedb für Hangneigung / Relief</string>
+    <string name="free_ride">Freifahrt</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gase</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxidationsmittel und Organisches Peroxide</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Sonstiges</string>
+    <string name="dangerous_goods_description">Auf manchen Straßen und Tunnel ist der Transport von Gefahrgut verboten.</string>
+    <string name="dangerous_goods">Gefahrgut</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brennbare Feststoffe</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Ätzende Stoffe</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brennbare Flüssigkeiten</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige und Ansteckende Stoffe</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive Stoffe</string>
+    <string name="shared_string_class">Klasse</string>
 </resources>

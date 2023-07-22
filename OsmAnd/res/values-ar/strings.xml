@@ -447,7 +447,7 @@
     <string name="prefs_plugins_descr">تقوم الملحقات بتفعيل إعدادات متقدمة ووظائف إضافية.</string>
     <string name="osm_editing_plugin_description">قدم مساهمات إلى خريطة الشارع المفتوحة ، وهو مجتمع عالمي يحتفظ بخريطة شاملة للعالم ويوفر بيانات محدثة مفتوحة المصدر لكل مستخدم.
 \n
-\nيمكنك العثور على تعليمات حول كيفية تحرير الخريطة على موقعنا https://osmand.net/docs/user/plugins/osm-editing.</string>
+\nيمكنك العثور على تعليمات حول كيفية تحرير الخريطة على موقعنا %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
     <string name="play_commands_of_currently_selected_voice">شغل أوامر الصوت المحدد الحالي:</string>
     <string name="switch_to_raster_map_to_see">لا توجد خرائط توجيه لهذا المكان. قم بتحميل إحدها ، أو التغيير لخرائط الإنترنت (فعّل ملحق خرائط الإنترنت).</string>
@@ -551,11 +551,11 @@
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="local_osm_changes_delete_all_confirm">حذف %1$d من التعديلات؟</string>
     <string name="shared_string_delete_all">احذف الكل</string>
-    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ، والحدود القصوى ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح. 
+    <string name="srtm_plugin_description">تساعدك معلومات التضاريس ، مثل الخطوط الكنتورية ، والتضاريس ، والمنحدرات ، على التقييم البصري لشكل سطح الأرض ، مع مراعاة الانحناء ، والحدود القصوى ، والانحدار ، ونقاط الارتفاع المتساوية ، والمزيد. يمكن تمثيل المعلومات الطبوغرافية على الخريطة من خلال تظليل المنحدر ، والخطوط الكنتورية للصعود والهبوط ، ولون انحراف زاوية الانحدار عن المسطح.
 \n
-\nالبيانات من SRTM و ASTER.
+\nالبيانات الأساسية تنشأ من SRTM و ASTER.
 \n
-\nكيف - http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nمزيد من القراءة في %1$s.</string>
     <string name="osmand_long_description_1000_chars">أوسماند (اتجاهات التنقل الآلي OSM)
 \n
 \n أوسماند هو تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى مجموعة واسعة من بيانات OpenStreetMap (OSM) العالمية. يمكن تخزين جميع بيانات الخريطة (خرائط التوجيه أو خرائط جانبية) على ذاكرة الهاتف للاستخدام في وضع عدم الاتصال. كما يتم توفير وظائف التوجيه عبر الإنترنت وبدونه ، بما في ذلك التوجيه الصوتي خطوة بخطوة.
@@ -1602,7 +1602,7 @@
     <string name="route_tl">انعطف يسارا واذهب</string>
     <string name="plugin_nautical_descr">إثراء خريطتك بمعلومات حول طرق الإبحار ، وأضواء الملاحة ، ومناطق الخطر البحري ، والمناطق ذات قيود الإبحار أو الإرساء ، وما إلى ذلك.
 \n
-\nمزيد من القراءة على https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nمزيد من القراءة على %1$s.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه</string>
     <string name="map_markers">التوجيه المباشر</string>
@@ -1883,7 +1883,7 @@
     <string name="amenity_type_geocache">البيانات الجغرافية المؤقتة</string>
     <string name="record_plugin_description">سجل رحلاتك أو تدريباتك ، وقم بتحليل البيانات من حيث السرعة ، والصعود والهبوط المتراكم ، وملف الارتفاع ، وما إلى ذلك. يمكن أرشفة المسارات المسجلة ومشاركتها مع الأصدقاء وتحريرها ومعالجتها لاحقًا.
 \n
-\nمزيد من القراءة على https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nمزيد من القراءة على %1$s.</string>
     <string name="missing_write_external_storage_permission">أوسماند ليس لديه إذن لاستخدام ذاكرة البطاقة</string>
     <string name="save_poi_without_poi_type_message">حفظ موضع الاهتمام بدون نوع؟</string>
     <string name="dashboard_or_drawer_description">هناك خيار جديد لتحكم بشكل مرن بالتطبيق عبر لوحة القياس أو القائمة الثابتة. اختيارك يمكن تغييره دائما في إعدادات لوحة القياس.</string>
@@ -4032,7 +4032,7 @@
     <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
     <string name="open_place_reviews_plugin_description">قدم مساهمات في مشروع OpenPlaceReviews ، مثل الصور أو المراجعات أو الروابط للأماكن العامة مثل المطاعم أو الفنادق أو المتاحف.
 \n
-\nاعثر على إرشادات حول كيفية المساهمة على موقعنا https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nاعثر على إرشادات حول كيفية المساهمة على موقعنا %1$s.</string>
     <string name="open_place_reviews">موقع OpenPlaceReviews</string>
     <string name="opr_use_dev_url">استخدام test.openplacereviews.org</string>
     <string name="login_open_place_reviews">الدخول إلى OpenPlaceReviews</string>
@@ -4971,7 +4971,7 @@
 \n- ويدجت يعتمد على الموقع
 \n- خطوط متساوية لدرجة الحرارة / الضغط
 \n
-\nيتم توفير بيانات الطقس من قبل GFS https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast.</string>
+\nيتم توفير بيانات الطقس من قبل (GFS، %1$s).</string>
     <string name="map_settings_weather_temp">درجة الحرارة</string>
     <string name="weather_online_cache">توقعات متصلة بالانترنت</string>
     <string name="shared_string_weather">الطقس</string>
@@ -5384,4 +5384,20 @@
     <string name="routing_attr_allow_via_ferrata_name">طريق سفح الجبل (عبر فيراتا)</string>
     <string name="routing_attr_allow_via_ferrata_description">طريق جبلي مجهز بالكابلات الثابتة والمعابد والسلالم والجسور.</string>
     <string name="free_settings_backup">نسخ احتياطي مجاني للإعدادات</string>
+    <string name="free_ride">توصيلة بالمجان</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">مواد سامة ومعدية</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">مواد مشعة</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">مواد مسببة للتآكل</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">متفرقات</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">مواد صلبة قابلة للاشتعال</string>
+    <string name="shared_string_class">فئة</string>
+    <string name="dangerous_goods">بضائع خطرة</string>
+    <string name="shared_string_not_checked">لم يتم التحقق منه</string>
+    <string name="shared_string_checked">تم التحقق</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">عوامل مؤكسدة وبيروكسيدات عضوية</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">متفجرات</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">سوائل قابلة للإشتعال</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">غازات</string>
+    <string name="dangerous_goods_description">في بعض الطرق والأنفاق يحظر نقل المواد الخطرة.</string>
 </resources>

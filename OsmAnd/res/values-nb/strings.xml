@@ -1014,7 +1014,7 @@
     <string name="pref_vector_rendering">Spesifikke alternativer for vektoropptegning</string>
     <string name="local_index_mi_upload_gpx">Send til OSM</string>
     <string name="tile_source_already_installed">Kart er allerede installert, innstillinger blir oppdatert.</string>
-    <string name="select_tile_source_to_install">Velg (flis)kart å installere eller oppdatere.</string>
+    <string name="select_tile_source_to_install">Velg kilder til fliskart:</string>
     <string name="internet_not_available">Kan ikke utføre operasjon uten en internettforbindelse.</string>
     <string name="reading_cached_tiles">Leser hurtigbufrede fliser…</string>
     <string name="maps_could_not_be_downloaded">Dette kartet kan ikke lastes ned</string>
@@ -2553,7 +2553,7 @@
     <string name="record_plugin_description">Ta opp turene eller treningene dine og analyser dataene når det gjelder hastighet, akkumulerte opp- og nedstigninger, høydeprofil etc. Spor som er tatt opp kan arkiveres, deles med venner, redigeres og etterbehandles.
 \n
 \nMer lesing på %1$s.</string>
-    <string name="osmand_development_plugin_description">Innstillinger for utvikling og avlusingsfunksjoner som navigasjonssimulering, opptegningsytelse, eller talemeldinger. Ment for utviklere og trengs ikke for vanlige brukere.</string>
+    <string name="osmand_development_plugin_description">Gir funksjoner til å teste og feilsøke OsmAnd: Simulere navigasjonsruter, overvåke skjermgjengivelsen, kontrollere ytelse osv. Dette tillegget er ikke påkrevd for normal bruk av appen.</string>
     <string name="osmand_extended_description_part2">GPS-navigering 
 \n • Velg mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere) 
 \n • Taleveiledning sving-for-sving leder deg langs veien (innspilt og syntetisert tale) 
@@ -2673,7 +2673,9 @@
 \nMer lesing på %1$s.</string>
     <string name="plugin_ski_descr">Designet til å navigere i vintersportsområder: Se skibakker, skiheiser og langrennsløyper, og med fargede linjer som indikerer vanskelighetsgrader. For å bruke, aktiver dette tillegget og gå også til \"Kartinnstilling\" og velg kartstilen \"Vinter og ski\".</string>
     <string name="osmand_distance_planning_plugin_description">Opprett stier ved å trykke på kartet, eller ved å bruke eller endre eksisterende GPX-filer, for å planlegge en tur og måle avstanden mellom punkter. Resultatet kan lagres som en GPX-fil, som senere kan brukes for veiledning.</string>
-    <string name="osm_editing_plugin_description">Via dette programtillegget kan OsmAnd brukes til å sende inn OSM-bidrag, som opprettelse eller endring av OSM-POI-objekter, åpning eller kommentering av OSM-notater, og bidrag til GPX-spor. OSM er et verdensomspennende kartprosjekt i offentlig eiendom. For detaljer, se https://openstreetmap.org. Aktiv deltagelse verdsettes, og bidrag kan gjøres direkte fra OsmAnd, hvis du angir din personlige OSM-innloggingsinfo i programmet.</string>
+    <string name="osm_editing_plugin_description">Lag bidrag til OpenStreetMap, et globalt felleskap som vedlikeholder et omfattende kart over verden og gir oppdaterte åpen-kildekodedata til enhver bruker.
+\n
+\nDu kan finne instruksjoner om hvordan du redigerer kartet på vårt nettsted %1$s.</string>
     <string name="osmand_extended_description_part3">Kart 
 \n • Viser interessepunkter rundt deg 
 \n • Orienterer kartet etter bevegelsesretning (eller kompass) 
@@ -4899,7 +4901,7 @@
     <string name="empty_tracks_description">Du kan importere, opprette eller ta opp sporfiler ved bruk av OsmAnd.</string>
     <string name="map_widget_camera_tilt">Kamerahelning</string>
     <string name="map_marker_interval_dialog_desc">Angi tidsintervall gjen- hastighet vil bli målt i for å regne ut anslått tid til ankomst.</string>
-    <string name="approximate_bearing_descr">Regn ut peiling hvis ikke mottatt fra enheten</string>
+    <string name="approximate_bearing_descr">Avled peilingen fra navigasjonsruten som følges.</string>
     <string name="shared_string_inches">tommer</string>
     <string name="map_widget_group_sunrise_sunset_desc">Viser info om neste solopp- og nedgang.</string>
     <string name="precipitation_widget_desc">Viser nedbør for nåværende kartsentrum.</string>
@@ -5012,7 +5014,7 @@
     <string name="inch">in</string>
     <string name="weather_wind_kn">kn</string>
     <string name="weather_wind_mph">mi/h</string>
-    <string name="shared_string_yards">yd</string>
+    <string name="shared_string_yards">yard</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="weather_precip_in">in</string>
     <string name="shared_string_add_manually">Legg til manuelt …</string>
@@ -5023,7 +5025,7 @@
     <string name="shared_string_in_progress">Underveis</string>
     <string name="shared_string_original">Opprinnelig</string>
     <string name="movement_speed">Bevegelseshastighet</string>
-    <string name="simulation_position_description">Velg en sporfil å bruke som bevegelsesveiledning.</string>
+    <string name="simulation_position_description">Velg en sporfil som vil bli brukt som kilde for posisjonsforflytning.</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="release_4_3">- Ny, raskere versjon 2 (OpenGL) kartopptagningsmotor med 2,5D-visning.
 \n
@@ -5098,7 +5100,7 @@
     <string name="free_maps_updates">Gratis oppdateringer (nødsfall)</string>
     <string name="shared_string_pounds">pund</string>
     <string name="weather_forecast_is_outdated">Værmeldingen er utdatert.</string>
-    <string name="weather_download_error">Kunne ikke laste ned %1$s flis.</string>
+    <string name="weather_download_error">Kunne ikke laste ned %1$s fliser.</string>
     <string name="proxy_port_max_warning">Maks. portverdi er %1$s</string>
     <string name="external_device_characteristic_battery_level">Batteri</string>
     <string name="external_device_characteristic_gear_ratio">Girutveksling</string>
@@ -5107,11 +5109,11 @@
     <string name="external_device_characteristic_speed">Hastighet</string>
     <string name="ant_plus_nothing_found_text">Fant ingen sensorer</string>
     <string name="external_device_characteristic_distance">Avstand</string>
-    <string name="ant_plus_searching_text">Søker etter sensorer …</string>
-    <string name="speak_route_deviation">Kunngjør avvik fra ruten</string>
-    <string name="generate_slope_from_3d_maps">Generer rasterbaserte helningskart fra 3D-kart</string>
+    <string name="ant_plus_searching_text">Søker etter sensorer</string>
+    <string name="speak_route_deviation">Meld om avvik fra ruten</string>
+    <string name="generate_slope_from_3d_maps">Generer helningsrasterkart fra 3D-kart</string>
     <string name="generate_hillshade_from_3d_maps">Generer raster-baserte relieffskyggekart fra 3D-kart</string>
-    <string name="clear_online_cache_description">Tømmer hurtiglageret for nettbaserte værflis.</string>
+    <string name="clear_online_cache_description">Dette vil tømme hurtiglageret for nettbaserte værfliser.</string>
     <string name="external_device_characteristic_pulse_rate">Pulsfrekvens</string>
     <string name="external_device_characteristic_cuff_pressure">Mansjett-trykk</string>
     <string name="disable_vertex_hillshade_3d">Skru av node-relieffskygge i 3D</string>
@@ -5162,8 +5164,8 @@
 \n– Sensoren er aktivert
 \n– At denne enheten befinner seg nærme sensoren</string>
     <string name="is_imported">%1$s importert.</string>
-    <string name="file_already_exists_description">«%1$s». En fil med dette navnet finnes allerede. Erstatting med nåværende versjon overskriver alle endringer gjort.</string>
-    <string name="nav_profile_confirm_delete">Slett «%1$s»\?</string>
+    <string name="file_already_exists_description">«%1$s». En fil med dette navnet finnes allerede. Å erstatte vil overskrive alle endringer gjort med gjeldende versjon.</string>
+    <string name="nav_profile_confirm_delete">Er du sikker på at du vil slette «%1$s»\?</string>
     <string name="file_already_exists">Filen finnes allerede</string>
     <string name="no_search_results">Resultatløst</string>
     <string name="search_track_by_name">Søk etter spor ved navn</string>
@@ -5214,4 +5216,12 @@
     <string name="shared_string_chest">Bryst</string>
     <string name="deleting_complete">Sletting fullført</string>
     <string name="delete_account_warning">Er du sikker på at du vil slette kontoen %1$s\?</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoff</string>
+    <string name="shared_string_class">Klasse</string>
+    <string name="dangerous_goods_description">På noen veier og i noen tunneller er transport av farlige materialer forbudt.</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diverse</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasser</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Etsende stoffer</string>
+    <string name="dangerous_goods">Farlig gods</string>
 </resources>

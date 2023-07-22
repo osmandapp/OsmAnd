@@ -226,7 +226,7 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) throws JSONException {
+	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
 

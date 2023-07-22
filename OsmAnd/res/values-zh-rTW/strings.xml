@@ -5308,4 +5308,18 @@
     <string name="cache_size">快取大小</string>
     <string name="shared_string_avoid">避免</string>
     <string name="may_be_used_if_there_is_shortcut">若有捷徑可以使用</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">炸藥</string>
+    <string name="shared_string_class">分類</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">氣體</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">易燃液體</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">易燃固體</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">氧化劑與有機過氧化物</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">有毒與傳染性物質</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">放射性物質</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">腐蝕性物質</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">雜項</string>
+    <string name="dangerous_goods_description">部份道路與隧道禁止運輸危險物品。</string>
+    <string name="dangerous_goods">危險物品</string>
+    <string name="free_ride">免費搭乘</string>
 </resources>

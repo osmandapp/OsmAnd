@@ -489,7 +489,7 @@ public class PluginsHelper {
 		}
 	}
 
-	public static void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
+	public static void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) {
 		try {
 			for (OsmandPlugin plugin : getEnabledPlugins()) {
 				plugin.attachAdditionalInfoToRecordedTrack(location, json);

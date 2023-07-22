@@ -4054,7 +4054,7 @@
     <string name="poi_water_source_well">Vodnjak</string>
     <string name="poi_water_source_river">Reka</string>
     <string name="poi_water_source_lake">Jezero</string>
-    <string name="poi_weightbridge">Mostna tehtnica;Tehtnica za tovornjake;Cestna tehtnica</string>
+    <string name="poi_weighbridge">Mostna tehtnica;Tehtnica za tovornjake;Cestna tehtnica</string>
     <string name="poi_swimming_area">Območje za kopanje</string>
     <string name="poi_wildlife_crossing_bat_bridge">Most za netopirje</string>
     <string name="poi_wildlife_crossing_bat_tunnel">Predor za netopirje</string>

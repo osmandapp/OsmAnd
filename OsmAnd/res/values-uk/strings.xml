@@ -5325,4 +5325,17 @@
     <string name="free_settings_backup">Безплатне резервне копіювання налаштувань</string>
     <string name="may_be_used_if_there_is_shortcut">Може використовуватися, якщо є ярлик</string>
     <string name="free_ride">Фрирайд</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Вибухівка</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Гази</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Легкозаймисті рідини</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Легкозаймисті речовини</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Окислювачі та органічні пероксиди</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Токсичні та інфекційні речовини</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Радіоактивні речовини</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Корозійні речовини</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Різне</string>
+    <string name="shared_string_class">Клас</string>
+    <string name="dangerous_goods_description">Деякими дорогами та тунелями перевезення небезпечних матеріалів заборонено.</string>
+    <string name="dangerous_goods">Небезпечні вантажі</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
 </resources>

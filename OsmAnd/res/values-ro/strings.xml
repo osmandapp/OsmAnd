@@ -5320,4 +5320,6 @@
     <string name="routing_attr_allow_via_ferrata_description">Traseu de munte echipat cu cabluri fixe, cu stâlpi, scări și poduri.</string>
     <string name="shared_string_avoid">Evitați</string>
     <string name="free_settings_backup">Copie de rezervă gratuită a setărilor</string>
+    <string name="free_ride">Călătorie gratuită</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
 </resources>

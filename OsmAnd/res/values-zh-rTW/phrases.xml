@@ -3866,7 +3866,7 @@
     <string name="poi_water_source_tap">點擊</string>
     <string name="poi_water_source_water_works">自來水廠</string>
     <string name="poi_water_source_tube_well">管井</string>
-    <string name="poi_weightbridge">地磅</string>
+    <string name="poi_weighbridge">地磅</string>
     <string name="poi_ranger_station">護林員站</string>
     <string name="poi_lavoir">公共洗衣區</string>
     <string name="poi_waste_transfer_station">垃圾站</string>
@@ -4593,4 +4593,5 @@
     <string name="poi_surface_rubber">鋪面：橡膠</string>
     <string name="poi_surface_plastic">鋪面：塑膠</string>
     <string name="poi_assembly_point">集合點</string>
+    <string name="poi_osmand_not_pt_shelter_yes">除大眾運輸候車亭以外的所有區域</string>
 </resources>

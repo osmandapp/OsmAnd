@@ -945,7 +945,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
 				if (!modifySegments) {
-					MeasurementEditingContextUtils.fillPointsArray(points, seg, lastGpxPoint && k == segments.size() - 1);
+					List<RouteSegmentResult> routeToTarget = gpxPoints.get(i).routeToTarget;
+					List<RouteSegmentResult> routeToTargetNext = gpxPoints.get(i + 1).routeToTarget;
+					boolean duplicatePoint = routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
+							.equals(routeToTargetNext.get(0).getStartPoint());
+					boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
+					MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
 				} else {
 					int ind = seg.getStartPointIndex();
 					boolean plus = seg.isForwardDirection();

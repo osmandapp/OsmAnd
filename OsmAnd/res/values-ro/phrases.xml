@@ -3799,7 +3799,7 @@
     <string name="poi_swimming_area">Zonă de înot</string>
     <string name="poi_lavoir">Lavoar</string>
     <string name="poi_waste_transfer_station">Stație de transfer a deșeurilor</string>
-    <string name="poi_weightbridge">Pod de greutate; Cântar pentru camioane</string>
+    <string name="poi_weighbridge">Pod de greutate; Cântar pentru camioane</string>
     <string name="poi_ranger_station">Centru de vizitare</string>
     <string name="poi_water_source_lake">Lacul</string>
     <string name="poi_water_source_river">Râul</string>
@@ -4592,4 +4592,6 @@
     <string name="poi_surface_carpet">Suprafață: covor</string>
     <string name="poi_surface_plastic">Suprafață: plastic</string>
     <string name="poi_second_hand_filter">Bunuri la mâna a doua</string>
+    <string name="poi_assembly_point">Punct de adunare</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Toate, cu excepția adăposturilor pentru transportul public</string>
 </resources>
