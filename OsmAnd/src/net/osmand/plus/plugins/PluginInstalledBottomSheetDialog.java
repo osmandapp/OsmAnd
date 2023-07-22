@@ -1,5 +1,8 @@
 package net.osmand.plus.plugins;
 
+import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
+import static net.osmand.plus.download.SrtmDownloadItem.getAbbreviationInScopes;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -24,6 +27,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -279,23 +283,27 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
 			}
 
+			DownloadActivityType type = indexItem.getType();
+			StringBuilder builder = new StringBuilder(type.getString(app));
+			if (type == SRTM_COUNTRY_FILE) {
+				builder.append(" ").append(getAbbreviationInScopes(app, indexItem));
+			}
+			builder.append(" • ").append(indexItem.getSizeDescription(app));
+
 			BaseBottomSheetItem mapIndexItem = new BottomSheetItemWithDescription.Builder()
-					.setDescription(indexItem.getType().getString(app) + " • " + indexItem.getSizeDescription(app))
+					.setDescription(builder.toString())
 					.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-					.setIcon(getContentIcon(indexItem.getType().getIconResource()))
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (downloadThread.isDownloading(indexItem)) {
-								downloadThread.cancelDownload(indexItem);
-								AndroidUiHelper.updateVisibility(progressBar, false);
-								secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
-							} else {
-								AndroidUiHelper.updateVisibility(progressBar, true);
-								progressBar.setIndeterminate(downloadThread.isDownloading());
-								secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
-								new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
-							}
+					.setIcon(getContentIcon(type.getIconResource()))
+					.setOnClickListener(v -> {
+						if (downloadThread.isDownloading(indexItem)) {
+							downloadThread.cancelDownload(indexItem);
+							AndroidUiHelper.updateVisibility(progressBar, false);
+							secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_import));
+						} else {
+							AndroidUiHelper.updateVisibility(progressBar, true);
+							progressBar.setIndeterminate(downloadThread.isDownloading());
+							secondaryIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+							new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
 						}
 					})
 					.setTag(indexItem)

@@ -81,7 +81,6 @@ public class ItemViewHolder {
 	private boolean nauticalPluginDisabled;
 	private boolean depthContoursPurchased;
 	private boolean weatherPurchased;
-	private boolean relief3dPurchased;
 
 	protected final DownloadActivity context;
 
@@ -103,7 +102,6 @@ public class ItemViewHolder {
 		DOWNLOAD,
 		ASK_FOR_SEAMARKS_PLUGIN,
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
-		ASK_FOR_3D_RELIEF_PURCHASE,
 		ASK_FOR_SRTM_PLUGIN_ENABLE,
 		ASK_FOR_FULL_VERSION_PURCHASE,
 		ASK_FOR_DEPTH_CONTOURS_PURCHASE,
@@ -168,7 +166,6 @@ public class ItemViewHolder {
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
 		depthContoursPurchased = InAppPurchaseHelper.isDepthContoursPurchased(app);
 		weatherPurchased = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		relief3dPurchased = InAppPurchaseHelper.isOsmAndProAvailable(app);
 	}
 
 	public void bindDownloadItem(DownloadItem downloadItem) {
@@ -391,7 +388,7 @@ public class ItemViewHolder {
 			DownloadActivityType type = item.getType();
 			if (item.getBasename().equalsIgnoreCase(WORLD_SEAMARKS_KEY) && nauticalPluginDisabled) {
 				action = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-			} else if ((type == SRTM_COUNTRY_FILE || type == HILLSHADE_FILE || type == SLOPE_FILE) && srtmDisabled) {
+			} else if ((type == SRTM_COUNTRY_FILE || type == HILLSHADE_FILE || type == SLOPE_FILE || type == GEOTIFF_FILE ) && srtmDisabled) {
 				action = srtmNeedsInstallation ? ASK_FOR_SRTM_PLUGIN_PURCHASE : ASK_FOR_SRTM_PLUGIN_ENABLE;
 			} else if ((type == WIKIPEDIA_FILE || type == TRAVEL_FILE) && !Version.isPaidVersion(context.getMyApplication())) {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
@@ -404,8 +401,6 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((item.getType() == DEPTH_CONTOUR_FILE || item.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
-			} else if (type == GEOTIFF_FILE && !relief3dPurchased) {
-				action = RightButtonAction.ASK_FOR_3D_RELIEF_PURCHASE;
 			}
 		}
 		return action;
@@ -424,9 +419,6 @@ public class ItemViewHolder {
 						case ASK_FOR_WEATHER_PURCHASE:
 							context.getMyApplication().logEvent("in_app_purchase_show_from_weather_context_menu");
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WEATHER);
-							break;
-						case ASK_FOR_3D_RELIEF_PURCHASE:
-							ChoosePlanFragment.showInstance(context, OsmAndFeature.RELIEF_3D);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.NAUTICAL);
