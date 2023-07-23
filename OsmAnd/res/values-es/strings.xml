@@ -5331,4 +5331,12 @@
     <string name="dangerous_goods">Mercancías peligrosas</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="dangerous_goods_description">En algunas carreteras y túneles está prohibido el transporte de mercancías peligrosas.</string>
+    <string name="shared_string_checked">Comprobado</string>
+    <string name="shared_string_not_checked">Sin revisar</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de la facilidad</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de la clasificación de la dificultad de las rutas.</string>
 </resources>
