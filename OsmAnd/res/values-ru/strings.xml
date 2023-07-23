@@ -607,11 +607,10 @@
     <string name="osmand_net_previously_installed">Локальные данные вашей версии приложения поддерживаются в новой, но перед обновлением вам нужно экспортировать избранные точки и после импортировать их.</string>
     <string name="build_installed">Сборка {0} установлена ({1}).</string>
     <string name="downloading_build">Загрузка сборки…</string>
-    <string name="install_selected_build">┃{0}
-\n┃{1}
-\n┃{2} МБ
+    <string name="install_selected_build">[{0}] {2} МБ
+\nСборка от {1}
 \n
-\nУстановить сборку\?</string>
+\nУстановить\?</string>
     <string name="loading_builds_failed">Не удалось получить список сборок OsmAnd</string>
     <string name="loading_builds">Загрузка сборок OsmAnd…</string>
     <string name="select_build_to_install">Выберите версию для установки</string>
@@ -2599,7 +2598,7 @@
     <string name="shared_string_edited">Отредактировано</string>
     <string name="shared_string_added">Добавлено</string>
     <string name="marker_activated">Маркер %s активирован.</string>
-    <string name="one_tap_active_descr">Нажатие на маркер на карте переместит его в начало списка активных маркеров, не используя контекстное меню.</string>
+    <string name="one_tap_active_descr">Нажатие на маркер на карте переместит его в начало списка активных маркеров, минуя контекстное меню.</string>
     <string name="one_tap_active">Активация одним нажатием</string>
     <string name="empty_state_av_notes">Делайте заметки!</string>
     <string name="empty_state_av_notes_desc">Добавьте аудио-, видео- или фотозаметки в любую точку на карте, используя виджет или контекстное меню.</string>
@@ -3009,7 +3008,7 @@
     <string name="shared_string_icon">Значок</string>
     <string name="collected_data">Собранные данные</string>
     <string name="press_again_to_change_the_map_orientation">Нажмите ещё раз для смены ориентации карты</string>
-    <string name="last_launch_crashed">Последний запуск OsmAnd завершился ошибкой. Помогите сделать OsmAnd лучше, отправив нам отчёт об ошибке.</string>
+    <string name="last_launch_crashed">Прошлый запуск OsmAnd завершился сбоем. Помогите нам, отправив отчёт об ошибке на электронную почту.</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
@@ -3494,11 +3493,11 @@
     <string name="shared_string_language">Язык</string>
     <string name="shared_string_all_languages">Все языки</string>
     <string name="wiki_menu_download_descr">Для POI Википедии требуются дополнительные карты.</string>
-    <string name="ui_customization_description">Настройка элементов в разделах «Боковая панель», «Настройки карты» и «Действия контекстного меню».
+    <string name="ui_customization_description">Настройка главного, контекстного меню и раздела «Настройки карты».
 \n
-\nОтключите неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
-    <string name="ui_customization_short_descr">Элементы панели, контекстное меню</string>
-    <string name="shared_string_drawer">Боковое меню</string>
+\nОтключите ненужные плагины, чтобы скрыть их элементы управления. %1$s.</string>
+    <string name="ui_customization_short_descr">Элементы главного и контекстного меню</string>
+    <string name="shared_string_drawer">Главное меню</string>
     <string name="divider_descr">Элементы ниже разделённые делителем.</string>
     <string name="shared_string_items">Элементы</string>
     <string name="ui_customization">Настройки интерфейса</string>
@@ -4778,7 +4777,7 @@
     <string name="favorite_delete_group">Удалить группу</string>
     <string name="download_heightmap_maps">Карта высот</string>
     <string name="display_position">Позиция на экране</string>
-    <string name="current_location_widget">Координаты: текущее местоположение</string>
+    <string name="current_location_widget">Координаты: текущая позиция</string>
     <string name="external_sensors_plugin_name">Внешние датчики</string>
     <string name="map_center_widget">Координаты: центр карты</string>
     <string name="map_widget_altitude_map_center">Высота: центр карты</string>
@@ -4851,7 +4850,7 @@
     <string name="shared_string_shows">Показывать</string>
     <string name="coordinates_widget_current_location_desc">Виджет показывает географические координаты текущего местоположения</string>
     <string name="coordinates_widget_map_center">Координаты: центр карты</string>
-    <string name="coordinates_widget_current_location">Координаты: текущее местоположение</string>
+    <string name="coordinates_widget_current_location">Координаты: текущая позиция</string>
     <string name="distance_by_tap_use_description">Нажмите на карту, чтобы увидеть расстояние между точкой и текущим местоположением.
 \nНажмите двумя пальцами, чтобы увидеть расстояние между двумя точками.</string>
     <string name="quick_action_map_center_widget_descr">Переключатель для отображения или скрытия виджета координат центра карты.</string>
@@ -5050,7 +5049,7 @@
     <string name="switch_folder">Переключить папку</string>
     <string name="show_all_tracks">Показать все треки</string>
     <string name="shared_string_on_map">На карте</string>
-    <string name="display_position_automatic_descr">Зависит от ориентации карты: для «по направлению движения» — внизу, для всех остальных — по центру.</string>
+    <string name="display_position_automatic_descr">Зависит от ориентации карты: в режиме «по направлению движения» внизу, в остальных — по центру.</string>
     <string name="weight_limit_error">Минимальное значение - %1$s тонн. Используйте профиль «%2$s», если масса автомобиля меньше минимального значения.</string>
     <string name="sound_beep_complex_loud">Beep: complex loud</string>
     <string name="sound_beep_minimal">Beep: minimal</string>
