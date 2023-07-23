@@ -5346,4 +5346,12 @@
     <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes y peróxidos orgánicos</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Sustancias corrosivas</string>
     <string name="shared_string_class">Clase</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de clasificación de dificultad para rutas.</string>
+    <string name="shared_string_checked">Revisado</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
+    <string name="shared_string_not_checked">Sin revisar</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
 </resources>
