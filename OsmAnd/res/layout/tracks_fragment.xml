@@ -32,6 +32,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/shared_string_back"
 					android:tint="?attr/primary_icon_color"
 					osmand:srcCompat="@drawable/ic_action_close" />
 
@@ -63,6 +64,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/switch_folder"
 					osmand:srcCompat="@drawable/ic_action_list_folders"
 					tools:tint="?attr/default_icon_color" />
 
@@ -72,6 +74,7 @@
 					android:layout_width="@dimen/toolbar_height"
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
+					android:contentDescription="@string/shared_string_more_actions"
 					osmand:srcCompat="@drawable/ic_overflow_menu_white"
 					tools:tint="?attr/default_icon_color" />
 

@@ -1230,9 +1230,7 @@
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
-    <string name="rendering_attr_alpineHiking_name">登山健行等級</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">登山健行路線</string>
-    <string name="rendering_attr_alpineHiking_description">依據 SAC/CAI 等級繪製路徑。</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑。</string>
     <string name="arrival_distance_factor_early">提早</string>
     <string name="arrival_distance_factor_normally">正常</string>
@@ -5202,8 +5200,6 @@
     <string name="shared_string_foot">腳</string>
     <string name="map_3d_mode_hint">長按按鈕可以變更按鈕位置。</string>
     <string name="visible_in_3d_mode">在 3D 模式下可見</string>
-    <string name="rendering_value_sacScale_name">SAC 等級</string>
-    <string name="rendering_value_caiScale_name">CAI 等級</string>
     <string name="map_2d_mode_action">2D 模式</string>
     <string name="map_3d_mode_action">3D 模式</string>
     <string name="map_3d_mode_description">用兩根手指觸控地圖並上下移動以調整地圖傾斜度。</string>
@@ -5312,4 +5308,18 @@
     <string name="cache_size">快取大小</string>
     <string name="shared_string_avoid">避免</string>
     <string name="may_be_used_if_there_is_shortcut">若有捷徑可以使用</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">炸藥</string>
+    <string name="shared_string_class">分類</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">氣體</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">易燃液體</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">易燃固體</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">氧化劑與有機過氧化物</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">有毒與傳染性物質</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">放射性物質</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">腐蝕性物質</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">雜項</string>
+    <string name="dangerous_goods_description">部份道路與隧道禁止運輸危險物品。</string>
+    <string name="dangerous_goods">危險物品</string>
+    <string name="free_ride">免費搭乘</string>
 </resources>

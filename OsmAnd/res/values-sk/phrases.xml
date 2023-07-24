@@ -3812,7 +3812,7 @@
     <string name="poi_fuel_propane">Propán</string>
     <string name="poi_outdoor_seating_poi">Vonkajšie sedenie</string>
     <string name="poi_motorcycle_type_chopper">Chopper motorka</string>
-    <string name="poi_weightbridge">Mostná/cestná váha;Váha pre nákladné autá</string>
+    <string name="poi_weighbridge">Mostná/cestná váha;Váha pre nákladné autá</string>
     <string name="poi_payment_reverse_charge_calls_yes">Hovory na účet volaného: áno</string>
     <string name="poi_payment_calling_cards_yes">Volacie karty sú akceptované</string>
     <string name="poi_payment_reverse_charge_calls_no">Hovory na účet volaného: nie</string>

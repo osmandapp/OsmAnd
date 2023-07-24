@@ -36,9 +36,12 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+
+import java.util.List;
 
 /**
  * Session class for the Navigation sample app.
@@ -73,6 +76,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	Action settingsAction;
 
 	private OsmandMapTileView mapView;
+	private ApplicationMode defaultAppMode;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -118,6 +122,21 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		mapLayers.getGpxLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		mapLayers.getPoiMapLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		mapLayers.getMapMarkersLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+		OsmandSettings settings = getApp().getSettings();
+		defaultAppMode = settings.getApplicationMode();
+		if (!isAppModeDerivedFromCar(defaultAppMode)) {
+			List<ApplicationMode> availableAppModes = ApplicationMode.values(getApp());
+			for (ApplicationMode availableAppMode : availableAppModes) {
+				if (isAppModeDerivedFromCar(availableAppMode)) {
+					settings.setApplicationMode(availableAppMode);
+					break;
+				}
+			}
+		}
+	}
+
+	private boolean isAppModeDerivedFromCar(ApplicationMode appMode) {
+		return appMode == ApplicationMode.CAR || appMode.isDerivedRoutingFrom(ApplicationMode.CAR);
 	}
 
 	@Override
@@ -128,6 +147,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		mapLayers.getGpxLayer().customObjectsDelegate = null;
 		mapLayers.getPoiMapLayer().customObjectsDelegate = null;
 		mapLayers.getMapMarkersLayer().customObjectsDelegate = null;
+		if (defaultAppMode != null) {
+			getApp().getSettings().setApplicationMode(defaultAppMode);
+			defaultAppMode = null;
+		}
 	}
 
 	@Override

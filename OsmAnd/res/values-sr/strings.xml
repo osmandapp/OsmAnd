@@ -903,7 +903,6 @@
     <string name="recording_description">Снимам %1$s %3$s %2$s</string>
     <string name="audionotes_location_not_defined">Кликните „Користи положај…“ да додате белешку одређеној локацији.</string>
     <string name="index_srtm_parts">делови</string>
-    <string name="rendering_attr_alpineHiking_description">Приказуј путеве према лествици САЦ-а/САИ-а.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Приказуј путеве према путањама ОСМЦ-а.</string>
     <string name="rendering_attr_showRoadMaps_description">Одаберите када ће се приказивати само путне карте:</string>
     <string name="rendering_attr_showRoadMaps_name">Само путне карте</string>
@@ -2416,7 +2415,6 @@
 \n
 \nСнимљене путање се могу делити са пријатељима или слати на ОСМ. Спортисти могу да користе снимљене путање да прате своја вежбања. Директно у ОсмАнд-у може да се ради основно проучавање путања, као што су рачунање брзине круга, просечна брзина итд. Наравно, путање се даље могу проучавати у другим нарочитим алатима за проучавање.</string>
     <string name="rendering_attr_pisteGrooming_name">Равнање стазе</string>
-    <string name="rendering_attr_alpineHiking_name">Алпска лествица за планинарење</string>
     <string name="osmand_plus_extended_description_part8">Приближна покривеност карте и каквоћа:
 \n • Западна Европа: ****
 \n • Источна Европа: ***
@@ -5216,8 +5214,6 @@
     <string name="delete_track_folder_dialog_message">Ово ће избрисати фасциклу „%1$s“ и све садржане стазе (%2$s).</string>
     <string name="track_not_recorded">Није снимљено</string>
     <string name="shared_string_new_track">Нови траг</string>
-    <string name="rendering_value_sacScale_name">Лествица САЦ</string>
-    <string name="rendering_value_caiScale_name">Лествица ЦАИ</string>
     <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
     <string name="visible_in_3d_mode">Видљиво у просторном приказу (3д)</string>
     <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>

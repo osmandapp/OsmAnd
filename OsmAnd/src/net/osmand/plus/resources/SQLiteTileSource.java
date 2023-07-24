@@ -267,6 +267,10 @@ public class SQLiteTileSource implements ITileSource {
 		return Algorithms.stringsEqual(fileName, other.fileName);
 	}
 
+	public void initDatabaseIfNeeded() {
+		getDatabase();
+	}
+
 	protected synchronized SQLiteConnection getDatabase() {
 		if ((db == null || db.isClosed()) && file.exists()) {
 			LOG.debug("Open " + file.getAbsolutePath());

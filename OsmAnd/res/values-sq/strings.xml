@@ -50,7 +50,6 @@
     <string name="home_button">Shtëpia</string>
     <string name="rendering_attr_hideBuildings_name">Hiç ndërtesat</string>
     <string name="use_kalman_filter_compass">Përdor filterat e Kalmanit</string>
-    <string name="rendering_attr_alpineHiking_name">Shkalla malore e ecjes në këmbë/eskursion (SAC)</string>
     <string name="context_menu_item_last_intermediate_point">Shtoje si pikë rruge të fundit</string>
     <string name="snap_to_road">Shko tek rruga</string>
 	<string name="first_time_msg">Faleminderit që përdorni OsmAnd. Për shumë përfitime të këtij programi ju keni nevojë për disa të dhëna regjonale \"offline\" të cilat ju mund ti shkarkoni tek \"Ndryshimet\" → \"Menagjo skedarët e hartave\". Më pas ju do të jeni në gjendje të shihni hartat, gjeni adresat, shikoni pikat e interesit, dhe të gjeni transportin publik.</string>

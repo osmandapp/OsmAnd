@@ -158,6 +158,7 @@ public class WidgetsVisibilityHelper {
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
 				&& !isInFollowTrackMode()
+				&& !isInConfigureMapOptionMode()
 				&& (additionalDialogsHide || !isPortrait());
 	}
 
@@ -203,6 +204,7 @@ public class WidgetsVisibilityHelper {
 				|| (isInTrackMenuMode() && !isPortrait());
 		return showTopControls
 				&& !isInPlanRouteMode()
+				&& !isInConfigureMapOptionMode()
 				&& !(isMapLinkedToLocation() && routingHelper.isFollowingMode())
 				&& (additionalDialogsHide || !isPortrait());
 	}

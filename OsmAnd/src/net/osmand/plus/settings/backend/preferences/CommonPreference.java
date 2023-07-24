@@ -136,7 +136,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		}
 
 		Object profilePrefs = settings.getProfilePreferences(mode);
-		boolean changed = !Algorithms.objectEquals(obj, getValue(profilePrefs, obj));
+		boolean changed = !Algorithms.objectEquals(obj, getModeValue(mode));
 		boolean valueSaved = setValue(profilePrefs, obj);
 		if (valueSaved) {
 			if (changed) {
@@ -228,7 +228,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	@Override
 	public boolean set(T obj) {
 		Object prefs = getPreferences();
-		boolean changed = !Algorithms.objectEquals(obj, getValue(prefs, obj));
+		boolean changed = !Algorithms.objectEquals(obj, get());
 		if (setValue(prefs, obj)) {
 			if (changed && isShared() && isGlobal() && PluginsHelper.isDevelopment()) {
 				Log.d("CommonPreference", "SET GLOBAL id=" + getId() + " value=" + obj + " cached=" + cachedValue);

@@ -1248,14 +1248,12 @@
     <string name="rendering_attr_subwayMode_name">Metro maršrutai</string>
     <string name="continue_navigation">Tęsti navigaciją</string>
     <string name="pause_navigation">Pristabdyti navigaciją</string>
-    <string name="rendering_attr_alpineHiking_description">Užkrauti kelius pagal SAC skalę.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Užkrauti kelius pagal OSMC pėdsakus.</string>
     <string name="arrival_distance_factor_early">Anksti</string>
     <string name="arrival_distance_factor_normally">Įprastai</string>
     <string name="arrival_distance_factor_late">Vėlai</string>
     <string name="arrival_distance_factor_at_last">Paskutiniuose metruose</string>
     <string name="rendering_attr_coloredBuildings_name">Spalvoti pastatai</string>
-    <string name="rendering_attr_alpineHiking_name">Kalnų žygiai (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Padengimas žygių simboliais</string>
     <string name="av_camera_pic_size">Nuotraukos dydis</string>
     <string name="av_camera_pic_size_descr">Pasirinkti vidinės kameros nuotraukos dydį.</string>

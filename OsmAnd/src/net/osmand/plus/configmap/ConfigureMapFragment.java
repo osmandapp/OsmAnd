@@ -49,7 +49,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private Map<ContextMenuItem, List<ContextMenuItem>> items;
 	private ViewCreator viewCreator;
 
-	private LinearLayout llList;
+	private LinearLayout itemsContainer;
 	private ListStringPreference collapsedIds;
 	private View.OnClickListener itemsClickListener;
 	private final Map<Integer, View> views = new HashMap<>();
@@ -75,7 +75,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflater.inflate(R.layout.fragment_configure_map, container, false);
-		llList = view.findViewById(R.id.list);
+		itemsContainer = view.findViewById(R.id.list);
 		onDataSetInvalidated();
 		return view;
 	}
@@ -97,7 +97,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			item.refreshWithActualData();
 			View view = views.get(item.getTitleId());
 			if (view != null) {
-				bindItemView(item, llList);
+				bindItemView(item, itemsContainer);
 			}
 		}
 	}
@@ -113,23 +113,23 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			appMode = settings.getApplicationMode();
 			useAnimation = !settings.DO_NOT_USE_ANIMATIONS.getModeValue(appMode);
 
+			updateNightMode();
 			viewCreator = new ViewCreator(activity, nightMode);
 			viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 			viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
 			viewCreator.setUiAdapter(this);
 
-			int bgColor = ColorUtilities.getActivityBgColor(app, nightMode);
-			llList.setBackgroundColor(bgColor);
-
 			views.clear();
-			llList.removeAllViews();
+			itemsContainer.removeAllViews();
+			itemsContainer.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
+
 			updateItemsData();
 			updateItemsView();
 		}
 	}
 
 	private void updateItemsData() {
-		ConfigureMapMenu menu = new ConfigureMapMenu();
+		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity);
 		CtxMenuUtils.removeHiddenItems(adapter);
 		CtxMenuUtils.hideExtraDividers(adapter);
@@ -145,7 +145,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			if (topItem.isCategory() && nestedItems != null) {
 				bindCategoryView(topItem, nestedItems);
 			} else {
-				bindItemView(topItem, llList);
+				bindItemView(topItem, itemsContainer);
 			}
 		}
 	}
@@ -166,7 +166,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		view.setFocusable(true);
 		if (existedView == null) {
 			views.put(standardId, view);
-			llList.addView(view);
+			itemsContainer.addView(view);
 		}
 		updateCategoryView(category);
 

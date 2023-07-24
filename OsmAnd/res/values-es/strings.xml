@@ -1271,8 +1271,6 @@
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="continue_navigation">Continuar navegación</string>
     <string name="pause_navigation">Pausar navegación</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de excursionismo alpina</string>
-    <string name="rendering_attr_alpineHiking_description">Renderizar caminos de acuerdo con la escala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="arrival_distance_factor_early">Lejos</string>
@@ -4588,8 +4586,8 @@
     <string name="routing_attr_difficulty_preference_expert_name">Experto</string>
     <string name="on_with_params">%1$s en %2$s</string>
     <string name="shared_string_symbol">Símbolo</string>
-    <string name="no_widgets_descr">Añade uno o más widgets de la lista de widgets disponibles.</string>
-    <string name="no_widgets_here_yet">Todavía sin widgets aquí</string>
+    <string name="no_widgets_descr">Añade uno o varios widgets de la lista de widgets disponibles.</string>
+    <string name="no_widgets_here_yet">Todavía no hay widgets</string>
     <string name="available_widgets">Widgets disponibles</string>
     <string name="snackbar_page_removed">Se ha quitado «Página %1$s».</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">No salirse de la pista</string>
@@ -4680,7 +4678,7 @@
     <string name="routing_attr_motor_type_name">Motor del vehículo</string>
     <string name="routing_attr_goods_restrictions_name">Reparto de bienes</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos de bienes ligeros (bienes)</string>
-    <string name="reset_all_settings_desc">¿Quiere restablecer la configuración a la predefinida\?</string>
+    <string name="reset_all_settings_desc">¿Restablecer todos los ajustes por defecto\?</string>
     <string name="goods_delivery_desc_3">Sólo aplica a camiones de reparto inferiores a 3,5 toneladas.</string>
     <string name="goods_delivery_desc_2">Los caminos cerrados serán evitados para la entrega de mercancías.</string>
     <string name="updated_map_time">Actualizado: %1$s.</string>
@@ -5212,10 +5210,8 @@
     <string name="map_2d_mode_action">Modalidad 2D</string>
     <string name="map_3d_mode_action">Modalidad 3D</string>
     <string name="map_3d_mode_hint">Pulsar prolongadamente el botón permite cambiar tu posición.</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="visible_in_3d_mode">Visible en modo 3D</string>
     <string name="map_3d_mode_description">Toca el mapa con dos dedos y muévelos arriba y abajo para ajustar la inclinación del mapa.</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="delete_folder">Borrar la carpeta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todas las vías en el mapa</string>
     <string name="rssi_widget_desc">Muestra el nivel RSSI de tu dispositivo externo.</string>
@@ -5322,4 +5318,25 @@
     <string name="routing_attr_allow_via_ferrata_description">Recorrido de montaña equipado con cables fijos, piñones, escaleras y puentes.</string>
     <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
     <string name="free_ride">Viaje gratuito</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamables</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Sustancias inflamables</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes y peróxidos orgánicos</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Sustancias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Sustancias radioactivas</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Sustancias corrosivas</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Otras</string>
+    <string name="shared_string_class">Clase</string>
+    <string name="dangerous_goods">Mercancías peligrosas</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="dangerous_goods_description">En algunas carreteras y túneles está prohibido el transporte de mercancías peligrosas.</string>
+    <string name="shared_string_checked">Comprobado</string>
+    <string name="shared_string_not_checked">Sin revisar</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de la facilidad</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de la clasificación de la dificultad de las rutas.</string>
 </resources>

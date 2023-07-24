@@ -119,13 +119,13 @@ public class FileUtils {
 			destDir.mkdirs();
 		}
 		if (src.renameTo(dest)) {
-			updateMovedGpx(app, src, dest);
+			updateRenamedGpx(app, src, dest);
 			return dest;
 		}
 		return null;
 	}
 
-	public static void updateMovedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
+	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
 		app.getGpxDbHelper().rename(src, dest);
 		app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
