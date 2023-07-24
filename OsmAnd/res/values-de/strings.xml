@@ -54,8 +54,6 @@
     <string name="pause_navigation">Navigation pausieren</string>
     <string name="keep_navigation_service">Aktiv erhalten</string>
     <string name="stop_navigation_service">Beenden</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine Tourenskala</string>
-    <string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC/CAI-Wanderskala darstellen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Wanderrouten</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Wandersymbole anzeigen (OSMC).</string>
     <string name="arrival_distance_factor_early">Früh</string>
@@ -179,7 +177,7 @@
     <string name="prefs_plugins">Erweiterungen</string>
     <string name="osm_editing_plugin_description">Leisten Sie einen Beitrag zu OpenStreetMap, einer globalen Gemeinschaft, die eine umfassende Karte der Welt unterhält und jedem Nutzer aktuelle Open-Source-Daten zur Verfügung stellt.
 \n
-\nEine Anleitung zur Bearbeitung der Karte finden Sie auf unserer Website https://osmand.net/docs/user/plugins/osm-editing.</string>
+\nEine Anleitung zur Bearbeitung der Karte finden Sie auf unserer Website %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden wahrscheinlich schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
     <string name="play_commands_of_currently_selected_voice">Eine Stimme auswählen und mittels Abspielen von Ansagen testen:</string>
     <string name="debugging_and_development">OsmAnd-Entwicklung</string>
@@ -956,11 +954,11 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Höhenlinien</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Steigungen helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Neigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Hangneigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
 \n
 \nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
 \n
-\nWeitere Informationen unter https://osmand.net/docs/user/plugins/contour-lines.</string>
+\nWeitere Informationen unter %1$s.</string>
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
     <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\', um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
@@ -1339,7 +1337,7 @@
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Zeichnen Sie Ihre Fahrten oder Trainings auf und analysieren Sie die Daten in Bezug auf Geschwindigkeit, kumulierte Anstiege und Abfahrten, Höhenprofil usw. Die aufgezeichneten Strecken können archiviert, mit Freunden geteilt, bearbeitet und nachbearbeitet werden.
 \n
-\nWeitere Informationen unter https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nWeitere Informationen unter %1$s.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lange drücken. Derzeit auf dem Gerät vorhandene Daten (%1$s frei):</string>
     <string name="text_size_descr">Karten-Schriftgröße festlegen.</string>
@@ -1455,7 +1453,7 @@
     <string name="back_to_map">Zurück zur Karte</string>
     <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil \'Nautisch\' unter \'Menü → Karte konfigurieren → Kartendarstellung\'.
 \n
-\nWeitere Informationen unter https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nWeitere Informationen unter %1$s.</string>
     <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um diese Erweiterung zu verwenden, aktivieren Sie sie und wählen Sie unter \"Karte konfigurieren\" den Kartenstil \"Winter und Ski\".</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer. 
 \n 
@@ -2898,7 +2896,7 @@
     <string name="shared_string_degrees">Grad</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
-    <string name="angular_measeurement_descr">Ändern, in welchem Azimut gemessen wird.</string>
+    <string name="angular_measeurement_descr">Ändern, in welcher Einheit Azimut gemessen wird.</string>
     <string name="routing_attr_avoid_tram_name">Keine Straßenbahnen</string>
     <string name="routing_attr_avoid_tram_description">Vermeidet Straßenbahnen</string>
     <string name="routing_attr_avoid_bus_name">Keine Busse</string>
@@ -3970,7 +3968,7 @@
     <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
     <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
 \n
-\nAuf unserer Website https://osmand.net/docs/user/plugins/openplacereviews finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
+\nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
     <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
@@ -4019,7 +4017,7 @@
     <string name="on_pause">Pausiert</string>
     <string name="app_restart_required">App-Neustart erforderlich, um einige Einstellungen anzuwenden.</string>
     <string name="routing_attr_height_obstacles_description">Die voraussichtliche Reisezeit wird den Höhenverlauf berücksichtigen. Die bevorzugte Streckenführung kann helfen, steile Steigungen zu vermeiden:</string>
-    <string name="quick_action_coordinates_widget_descr">Ein Umschalter zum Ein- und Ausblenden des Koordinaten-Widgets auf der Karte.</string>
+    <string name="quick_action_coordinates_widget_descr">Ein Schalter zum Ein- oder Ausblenden des Koordinaten-Widgets auf der Karte.</string>
     <string name="latest_openstreetmap_update">Aktuelles OpenStreetMap Update verfügbar:</string>
     <string name="last_time_checked">Zuletzt geprüft: %s</string>
     <string name="update_frequency">Aktualisierungsintervall</string>
@@ -4588,7 +4586,7 @@
     <string name="routing_attr_difficulty_preference_expert_name">Experte</string>
     <string name="shared_string_symbol">Symbol</string>
     <string name="no_widgets_descr">Ein oder mehrere Widgets aus der Liste der verfügbaren Widgets hinzufügen.</string>
-    <string name="no_widgets_here_yet">Noch keine Widgets hier</string>
+    <string name="no_widgets_here_yet">Noch keine Widgets vorhanden</string>
     <string name="routing_attr_freeride_policy_allow_name">Erlauben</string>
     <string name="snackbar_page_removed">Die „Seite %1$s“ wurde entfernt.</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Keine Präferenz</string>
@@ -4620,7 +4618,7 @@
     <string name="average_speed_skip_stops">Stopps berücksichtigen</string>
     <string name="map_widget_true_bearing">Rechtweisende Peilung</string>
     <string name="average_speed_time_interval_desc">Geben Sie das Zeitintervall für die Mittelwertbildung der Geschwindigkeit an.</string>
-    <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Fahrt an.</string>
+    <string name="average_speed_widget_desc">Zeigt die durchschnittliche Geschwindigkeit der aktuellen Reise.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
     <string name="rendering_attr_weatherPressureContours_name">Isobaren</string>
@@ -4629,7 +4627,7 @@
     <string name="routing_attr_avoid_4wd_only_name">Allradstrecken vermeiden</string>
     <string name="shared_string_mode">Modus</string>
     <string name="map_widget_time_to_destination">Zeit bis zum Ziel</string>
-    <string name="map_widget_time_to_intermediate">Zeit bis zum Zwischenstopp</string>
+    <string name="map_widget_time_to_intermediate">Zeit bis zum Zwischenziel</string>
     <string name="map_widget_distance_to_intermediate">Entfernung bis zum Zwischenstopp</string>
     <string name="routing_attr_avoid_4wd_only_description">Straßen vermeiden, die nur für Allradfahrzeuge geeignet sind</string>
     <string name="radius_ruler_mode_desc">Durch Antippen des Widgets wechseln Sie in den Radiuslineal-Modus.</string>
@@ -4663,7 +4661,7 @@
     <string name="compass_on_circles">Kompass auf Kreisen</string>
     <string name="bearing_secondary_desc">Sie können das verwendete Datenformat ändern in %1$s – %2$s – %3$s.</string>
     <string name="elevation_profile_widget_desc">Zeigt Höhenprofil und Hangneigung der aktuellen Route an.</string>
-    <string name="mapillary_widget_desc">Bietet schnellen Zugriff auf die Mapillary-App, um Straßenansichten hinzuzufügen.</string>
+    <string name="mapillary_widget_desc">Ermöglicht den Schnellzugriff auf die Mapillary-App, um Bilder auf Straßenebene hinzuzufügen.</string>
     <string name="coordinates_widget_secondary_desc">Sie können das Koordinatenformat ändern in %1$s - %2$s - %3$s.</string>
     <string name="parking_widget_desc">Zeigt die Entfernung von der Bildschirmmitte zu Ihrer Parklücke an.</string>
     <string name="arrival_time_widget_desc">Zeitpunkt der Ankunft am Zielort.</string>
@@ -4683,9 +4681,9 @@
     <string name="app_mode_mountain_bicycle">Mountainbike</string>
     <string name="radius_rules_widget_desc">Das Radiuslineal zeigt Entfernungskreise um einen ausgewählten Punkt auf der Karte an.</string>
     <string name="lanes_widgets_desc">Zeigt die aktuellen Fahrspuren an und hebt diejenigen hervor, die bei der Navigation zu nehmen sind.</string>
-    <string name="street_name_widget_desc">Das Straßennamen-Widget zeigt den aktuellen Straßennamen mit einem Richtungspfeil oder den nächsten Straßennamen mit einem Pfeil, der auf eine bevorstehende Abbiegung hinweist.</string>
+    <string name="street_name_widget_desc">Das Straßennamen-Widget zeigt den aktuellen Straßennamen mit einem geraden Richtungspfeil oder den nächsten Straßennamen mit einem Abbiegepfeil an.</string>
     <string name="current_time_widget_desc">Zeigt die aktuelle Zeit an, die von Ihrem Gerät abgerufen wird.</string>
-    <string name="current_speed_widget_desc">Zeigt Ihre per GPS gemeldete aktuelle Geschwindigkeit an.</string>
+    <string name="current_speed_widget_desc">Zeigt Ihre aktuelle Geschwindigkeit an, wie über GPS gemeldet.</string>
     <string name="battery_widget_desc">Zeigt den Akkustand Ihres Geräts an.</string>
     <string name="altitude_widget_desc">Zeigt die Höhe über dem Meeresspiegel der aktuellen Geolokalisierung an.</string>
     <string name="max_speed_widget_desc">Zeigt die Geschwindigkeitsbegrenzung für die aktuell befahrene Straße an.</string>
@@ -4696,7 +4694,7 @@
     <string name="calculate_altitude">Höhe berechnen</string>
     <string name="calculating_altitude">Höhe berechnen</string>
     <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
-    <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
+    <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktuellen Straßennamen, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
     <string name="map_markers_bar_widget_desc">Das Widget in der oberen Leiste zeigt die Entfernung und Richtung zur nächsten Kartenmarkierung von Ihrem aktuellen Standort aus an. Das Widget kann so konfiguriert werden, dass es 1 oder 2 Markierungen anzeigt.</string>
     <string name="live_update_frequency_day_variant">Kartenaktualisierungen werden täglich überprüft.</string>
     <string name="next_live_update_time">Nächste Aktualisierung um %1$s Uhr.</string>
@@ -4708,7 +4706,7 @@
     <string name="next_live_update_date_and_time">Nächste Aktualisierung am %1$s um %2$s Uhr.</string>
     <string name="switch_widget_mode_desc">Tippen des Widgets wechselt den Modus.</string>
     <string name="side_marker_eta">Geschätzte Ankunftszeit</string>
-    <string name="reset_all_settings_desc">Alle Einstellungen auf Standard zurücksetzen\?</string>
+    <string name="reset_all_settings_desc">Alle Einstellungen auf Standardwerte zurücksetzen\?</string>
     <string name="goods_delivery_desc_3">Gilt nur für Lieferfahrzeuge bis 3,5 Tonnen.</string>
     <string name="goods_delivery_desc_2">Für die Warenanlieferung gesperrte Straßen werden gemieden.</string>
     <string name="goods_delivery_desc">Für Lieferfahrzeuge kann es auf einigen Straßen Einschränkungen geben.</string>
@@ -4748,7 +4746,7 @@
     <string name="compass_visible_if_map_rotated_desc">Ausgeblendet, wenn Norden oben ist</string>
     <string name="compass_visible_if_map_rotated">Sichtbar, wenn die Karte gedreht wird</string>
     <string name="compass_always_hidden">Immer ausgeblendet</string>
-    <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald ein Zwischenpunkt passiert ist, wird die Entfernung zum nächsten Zwischenpunkt aktualisiert.</string>
+    <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald Zwischenpunkte passiert sind, wird die Distanz bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
     <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
     <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
@@ -4757,8 +4755,8 @@
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
     <string name="second_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur zweiten Kartenmarkierung anzeigt.</string>
     <string name="first_marker_widget_desc">Sie können das Widget so konfigurieren, dass es die Entfernung oder voraussichtliche Ankunftszeit bis zur ersten Kartenmarkierung anzeigt.</string>
-    <string name="time_to_destination_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit ab dem aktuellen Standort.</string>
-    <string name="time_to_intermediate_widget_desc">Das Widget zeigt die \"Ankunftszeit\" oder die \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert. Sobald ein Zwischenpunkt passiert ist, wird die Zeit bis zum nächsten Zwischenpunkt aktualisiert.</string>
+    <string name="time_to_destination_widget_desc">Das Widget zeigt \"Ankunftszeit\" oder \"Verbleibende Zeit\" zum letzten Zielpunkt an. Die Zeit wird während der Navigation ständig aktualisiert und entspricht der Routenzeit vom aktuellen Standort aus.</string>
+    <string name="time_to_intermediate_widget_desc">Das Widget zeigt \"Ankunftszeit\" oder \"Verbleibende Zeit\" zum ersten Zwischenpunkt an. Die Zeit wird während der Navigation ständig aktualisiert, sobald Zwischenpunkte passiert sind, wird die Zeit auf den nächsten Zwischenpunkt aktualisiert.</string>
     <string name="compass_always_visible">Immer sichtbar</string>
     <string name="download_tiles">Kacheln herunterladen</string>
     <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
@@ -4778,7 +4776,7 @@
     <string name="shared_string_large">Groß</string>
     <string name="go_to_marker_location">Zum Standort der Markierung gehen</string>
     <string name="shared_string_switch_mode">Modus wechseln</string>
-    <string name="map_markers_desc">Das Widget zeigt die Entfernung oder die geschätzte Ankunftszeit (ETA) der ersten beiden Markierungen in der Liste der Kartenmarkierungen an.</string>
+    <string name="map_markers_desc">Das Widget zeigt die Entfernung oder die geschätzte Ankunftszeit (ETA) für die ersten beiden Markierungen in der Liste der Kartenmarkierungen an.</string>
     <string name="map_marker_interval_dialog_desc">Geben Sie das Zeitintervall an, für das die Durchschnittsgeschwindigkeit zur Berechnung der geschätzten Ankunftszeit gemessen wird.</string>
     <string name="click_on_widget">Klicken Sie auf das Widget</string>
     <string name="distance_by_tap_use_description">Tippen Sie auf die Karte, um die Entfernung zwischen Ihrem aktuellen Standort und dem angetippten Punkt anzuzeigen.
@@ -4913,7 +4911,7 @@
     <string name="weather_wind_meters_per_second">Meter/Sekunde</string>
     <string name="weather_widgets_secondary_desc">Die Maßeinheiten können in den Einstellungen des Wetter-Plugins geändert werden.</string>
     <string name="air_pressure_widget_desc">Zeigt den Luftdruck für die aktuelle Kartenmitte an.</string>
-    <string name="clouds_widget_desc">Zeigt die Bewölkung für die aktuelle Kartenmitte an.</string>
+    <string name="clouds_widget_desc">Zeigt die Wolkenbedeckung für die aktuelle Kartenmitte an.</string>
     <string name="wind_widget_desc">Zeigt die Windgeschwindigkeit für die aktuelle Kartenmitte an.</string>
     <string name="weather_widget_group_desc">Eine Reihe von Widgets mit verschiedenen Wetterinformationen.</string>
     <string name="weather_pressure_hpa">hPa</string>
@@ -4931,7 +4929,7 @@
 \n- Standortbasierte Widgets
 \n- Temperatur-/Luftdruck-Isolinien
 \n
-\nWetterdaten werden vom Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) bereitgestellt.</string>
+\nWetterdaten werden vom Global Forecast System (GFS, %1$s) bereitgestellt.</string>
     <string name="shared_string_weather">Wetter</string>
     <string name="shared_string_layers">Ebenen</string>
     <string name="shared_string_contours">Konturen</string>
@@ -4952,7 +4950,7 @@
     <string name="switch_mode_by_tapping_on_widget">Wechseln Sie den Modus, indem Sie auf das Widget tippen.</string>
     <string name="shared_string_sunrise">Sonnenaufgang</string>
     <string name="shared_string_sunset">Sonnenuntergang</string>
-    <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenaufgang und Sonnenuntergang an.</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Diese Widgets zeigen Informationen über den nächsten Sonnenauf- und -untergang.</string>
     <string name="map_widget_group_sunrise_sunset">Sonnenaufgang, Sonnenuntergang</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linienfarbschema</string>
     <string name="storage_migration_fragment_close_descr">Kopiervorgang erst zu %1$s %% abgeschlossen. Bei Abbruch funktioniert die Anwendung möglicherweise nicht richtig.</string>
@@ -5217,8 +5215,6 @@
     <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
     <string name="visible_in_3d_mode">Sichtbar im 3D-Modus</string>
-    <string name="rendering_value_caiScale_name">CAI-Skala</string>
-    <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="delete_folder_question">Ordner löschen\?</string>
     <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
     <string name="map_widget_rssi">RSSI</string>
@@ -5242,7 +5238,6 @@
     <string name="revolutions_per_minute_unit">U/min</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
-    <string name="free_mode">Freier Modus</string>
     <string name="terrain_map">Geländekarte</string>
     <string name="relief_3d">3D-Relief</string>
     <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
@@ -5280,4 +5275,72 @@
     <string name="free_account">Kostenloses Konto</string>
     <string name="folder_export_empty_error">Nichts zu exportieren, Ordner ist leer</string>
     <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
+    <string name="cache_size">Cachegröße</string>
+    <string name="routing_attr_allow_via_ferrata_name">Bergroute (Klettersteig)</string>
+    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet
+\n
+\n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“
+\n
+\n • Neues Format für Geländekarten mit 3D-Reliefunterstützung
+\n
+\n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner
+\n
+\n • Android Auto: Neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien
+\n
+\n • Eine Liste von Widgets für das obere/untere Bedienfeld
+\n
+\n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken
+\n
+\n • Konturlinien funktionieren mit jeder „Kartenquelle“
+\n
+\n • Erweiterte Liste von Standardaktionen für externe Tastaturen
+\n
+\n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt
+\n
+\n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt
+\n
+\n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt
+\n
+\n • „Gefährliche Materialien“-Klassen für LKW-Navigation in Nordamerika hinzugefügt
+\n
+\n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt
+\n
+\n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt
+\n
+\n • Die Sprachauswahl pro App wurde korrigiert
+\n
+\n • Unterstützung für thematische Symbole hinzugefügt
+\n
+\n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt
+\n
+\n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dp geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war
+\n
+\n • Japanische Sprachansagen überarbeitet
+\n
+\n • Höhenänderung und Neigungsauswertung überarbeitet
+\n
+\n</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Verwenden des Rasters von sqlitedb für Hangneigung / Relief</string>
+    <string name="free_ride">Freifahrt</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gase</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxidationsmittel und Organisches Peroxide</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Sonstiges</string>
+    <string name="dangerous_goods_description">Auf manchen Straßen und Tunnel ist der Transport von Gefahrgut verboten.</string>
+    <string name="dangerous_goods">Gefahrgut</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brennbare Feststoffe</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Ätzende Stoffe</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brennbare Flüssigkeiten</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige und Ansteckende Stoffe</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive Stoffe</string>
+    <string name="shared_string_class">Klasse</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italienischer Alpenverein)</string>
+    <string name="shared_string_checked">Geprüft</string>
+    <string name="rendering_value_caiScale_name">CAI-Skala</string>
+    <string name="rendering_value_sacScale_description">Schweizer Alpen-Club</string>
+    <string name="shared_string_not_checked">Nicht geprüft</string>
+    <string name="rendering_attr_alpineHiking_description">Schwierigkeitsgrade der Wanderwege.</string>
+    <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad</string>
+    <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
 </resources>

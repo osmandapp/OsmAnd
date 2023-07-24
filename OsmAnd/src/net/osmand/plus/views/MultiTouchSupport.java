@@ -62,8 +62,8 @@ public class MultiTouchSupport {
 		return multiTouchAPISupported;
 	}
 
-	public boolean isInZoomMode() {
-		return inZoomMode;
+	public boolean isInZoomAndRotationMode() {
+		return inZoomAndRotationMode;
 	}
 
 	public boolean isInTiltMode() {
@@ -82,7 +82,7 @@ public class MultiTouchSupport {
 		}
 	}
 
-	private boolean inZoomMode;
+	private boolean inZoomAndRotationMode;
 	private boolean inTiltMode;
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
@@ -113,9 +113,9 @@ public class MultiTouchSupport {
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if (pointCount < 2) {
-				if (inZoomMode) {
+				if (inZoomAndRotationMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
+					inZoomAndRotationMode = false;
 					return true;
 				} else if (inTiltMode) {
 					inTiltMode = false;
@@ -149,9 +149,9 @@ public class MultiTouchSupport {
 				angleStarted = angle;
 				return true;
 			} else if (actionCode == MotionEvent.ACTION_POINTER_UP) {
-				if (inZoomMode) {
+				if (inZoomAndRotationMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
+					inZoomAndRotationMode = false;
 				} else if (inTiltMode) {
 					inTiltMode = false;
 				}
@@ -159,7 +159,7 @@ public class MultiTouchSupport {
 			} else if (actionCode == MotionEvent.ACTION_MOVE) {
 				firstPoint = new PointF(x1, y1);
 				secondPoint = new PointF(x2, y2);
-				if (inZoomMode) {
+				if (inZoomAndRotationMode) {
 
 					// Keep zoom center fixed or flexible
 					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
@@ -190,17 +190,17 @@ public class MultiTouchSupport {
 						listener.onChangeViewAngleStarted();
 						startedMode = MODE.TILT;
 						inTiltMode = true;
-					} else if (useZoom && (startedMode == MODE.NONE || startedMode == MODE.ZOOM)) {
+					} else if (useZoom && (startedMode == MODE.NONE || startedMode == MODE.ZOOM_AND_ROTATION)) {
 						if (startedMode == MODE.NONE) {
 							angleRelative = 0;
 							zoomRelative = 0;
-							startedMode = MODE.ZOOM;
+							startedMode = MODE.ZOOM_AND_ROTATION;
 						}
-						inZoomMode = true;
+						inZoomAndRotationMode = true;
 					}
 				} else {
-					startedMode = MODE.ZOOM;
-					inZoomMode = true;
+					startedMode = MODE.ZOOM_AND_ROTATION;
+					inZoomAndRotationMode = true;
 				}
 				return true;
 			}
@@ -235,7 +235,7 @@ public class MultiTouchSupport {
 	}
 
 	private enum MODE {
-		NONE, ZOOM, TILT
+		NONE, ZOOM_AND_ROTATION, TILT
 	}
 
 }

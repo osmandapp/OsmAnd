@@ -60,7 +60,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 			}
 		}
 		favoritesHelper.sortAll();
-		favoritesHelper.saveCurrentPointsIntoFile();
+		favoritesHelper.saveCurrentPointsIntoFile(false);
 	}
 
 	private void checkDuplicateNames(@NonNull List<FavouritePoint> favourites) {

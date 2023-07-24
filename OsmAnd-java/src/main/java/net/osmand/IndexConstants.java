@@ -5,7 +5,7 @@ public class IndexConstants {
 
 	// Important : Every time you change schema of db upgrade version!!! 
 	// If you want that new application support old index : put upgrade code in android app ResourceManager
-	public static final int POI_TABLE_VERSION = 1;
+	public static final int POI_TABLE_VERSION = 2;
 	public static final int BINARY_MAP_VERSION = 2; // starts with 1
 	public static final int VOICE_VERSION = 0; //supported download versions
 	public static final int TTSVOICE_VERSION = 1; //supported download versions
@@ -41,7 +41,8 @@ public class IndexConstants {
 	public static final String DOWNLOAD_EXT = ".download";
 	public static final String TIF_EXT = ".tif";
 	public static final String TIFF_DB_EXT = ".tiff.db";
-	public static final String WEATHER_EXT = "_weather";
+	public static final String WEATHER_EXT = ".tifsqlite";
+	public static final String WEATHER_MAP_INDEX_EXT = ".tifsqlite.zip";
 
 	public static final String VOICE_INDEX_EXT_ZIP = ".voice.zip";
 	public static final String TTSVOICE_INDEX_EXT_JS = "tts.js";

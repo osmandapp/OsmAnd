@@ -101,7 +101,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		String description = JsonUtils.getLocalizedResFromMap(app, descriptions, null);
 		return description != null ? Html.fromHtml(description) : null;
 	}

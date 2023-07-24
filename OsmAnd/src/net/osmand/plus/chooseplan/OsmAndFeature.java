@@ -1,6 +1,9 @@
 package net.osmand.plus.chooseplan;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -55,9 +58,11 @@ public enum OsmAndFeature {
 		return listTitleId;
 	}
 
-	@StringRes
-	public int getDescriptionId() {
-		return descriptionId;
+	public String getDescription(@NonNull Context ctx) {
+		if (this == WIKIPEDIA) {
+			return ctx.getString(descriptionId, R.string.weather_global_forecast_system);
+		}
+		return ctx.getString(descriptionId);
 	}
 
 	@DrawableRes

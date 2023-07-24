@@ -414,7 +414,6 @@ class AppVersionUpgradeOnInit {
 				settings.SAVE_TRACK_MIN_DISTANCE,
 				settings.SAVE_TRACK_INTERVAL,
 				settings.TRACK_STORAGE_DIRECTORY,
-				settings.SAVE_HEADING_TO_GPX,
 				settings.DISABLE_RECORDING_ONCE_APP_KILLED,
 				settings.SAVE_TRACK_TO_GPX,
 				settings.SAVE_GLOBAL_TRACK_REMEMBER,

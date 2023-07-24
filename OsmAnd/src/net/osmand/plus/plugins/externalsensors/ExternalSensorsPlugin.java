@@ -53,9 +53,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ExternalSensorsPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(ExternalSensorsPlugin.class);
@@ -71,7 +69,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE;
 
-	public ExternalSensorsPlugin(OsmandApplication app) {
+	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
 		SPEED_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("speed_sensor_write_to_track_device", "").makeProfile().cache();
 		CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE = registerStringPreference("cadence_sensor_write_to_track_device", "").makeProfile().cache();
@@ -103,7 +101,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.external_sensors_plugin_description);
 	}
 
@@ -181,13 +179,13 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) {
-		for(WriteToGpxWidgetType writeToGpxWidgetType : WriteToGpxWidgetType.values()){
+	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) {
+		for (WriteToGpxWidgetType writeToGpxWidgetType : WriteToGpxWidgetType.values()) {
 			attachDeviceSensorInfoToRecordedTrack(writeToGpxWidgetType, json);
 		}
 	}
 
-	private void attachDeviceSensorInfoToRecordedTrack(WriteToGpxWidgetType writeToGpxWidgetType, JSONObject json){
+	private void attachDeviceSensorInfoToRecordedTrack(WriteToGpxWidgetType writeToGpxWidgetType, JSONObject json) {
 		ApplicationMode selectedAppMode = settings.getApplicationMode();
 		CommonPreference<String> preference = getPrefSettingsForWidgetType(writeToGpxWidgetType);
 		String speedDeviceId = preference.getModeValue(selectedAppMode);

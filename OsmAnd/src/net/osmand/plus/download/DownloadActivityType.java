@@ -1,8 +1,9 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.WEATHER_EXT;
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
+import static net.osmand.IndexConstants.WEATHER_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.ZIP_EXT;
 import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_DEPTH_HEADER;
 import static net.osmand.plus.download.DownloadResourceGroupType.NAUTICAL_POINTS_HEADER;
 
@@ -34,6 +35,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class DownloadActivityType {
+
 	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 	private static final Map<String, DownloadActivityType> byTag = new HashMap<>();
 
@@ -72,7 +74,7 @@ public class DownloadActivityType {
 	public static final DownloadActivityType WEATHER_FORECAST =
 			new DownloadActivityType(R.string.weather_forecast, R.drawable.ic_action_umbrella, "weather", 90);
 	public static final DownloadActivityType GEOTIFF_FILE =
-			new DownloadActivityType(R.string.terrain_map, R.drawable.ic_action_altitude, "geotiff", 85);
+			new DownloadActivityType(R.string.terrain_map, R.drawable.ic_action_terrain, "geotiff", 85);
 
 	private final int stringResource;
 	private final int iconResource;
@@ -175,6 +177,8 @@ public class DownloadActivityType {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (DEPTH_MAP_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
+		} else if (WEATHER_FORECAST == this) {
+			return fileName.endsWith(WEATHER_MAP_INDEX_EXT);
 		}
 		return false;
 	}
@@ -317,6 +321,8 @@ public class DownloadActivityType {
 			return "&heightmap=yes";
 		} else if (this == DEPTH_MAP_FILE) {
 			return "&depth=yes";
+		} else if (this == WEATHER_FORECAST) {
+			return "&weather=yes";
 		}
 		return "";
 	}
@@ -480,6 +486,9 @@ public class DownloadActivityType {
 				l = fileName.length();
 			}
 			return fileName.substring(0, l) + IndexConstants.BINARY_MAP_INDEX_EXT;
+		} else if (this == WEATHER_FORECAST) {
+			return fileName.substring(0, fileName.length() - ZIP_EXT.length())
+					.replace(FileNameTranslationHelper.WEATHER + "_", "");
 		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 				|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			int l = fileName.lastIndexOf('_');
@@ -570,8 +579,8 @@ public class DownloadActivityType {
 			return fileName;
 		}
 		if (this == WEATHER_FORECAST) {
-			int ls = fileName.lastIndexOf(WEATHER_EXT);
-			return ls >= 0 ? fileName.substring(0, ls) : fileName;
+			return fileName.substring(0, fileName.length() - WEATHER_MAP_INDEX_EXT.length())
+					.replace(FileNameTranslationHelper.WEATHER + "_", "");
 		}
 		int ls = fileName.lastIndexOf('_');
 		if (ls >= 0) {

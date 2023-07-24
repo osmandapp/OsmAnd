@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTION_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
@@ -32,6 +33,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -39,6 +41,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -189,8 +192,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.srtm_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_srtm);
+		String description = app.getString(R.string.srtm_plugin_description, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override
@@ -566,8 +571,14 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (!downloadThread.shouldDownloadIndexes()) {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
-			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
-			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SLOPE_FILE));
+
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			if (!app.useOpenGlRenderer() || plugin != null && plugin.USE_RASTER_SQLITEDB.get()) {
+				suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
+				suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SLOPE_FILE));
+			} else {
+				suggestedMaps.addAll(getMapsForType(latLon, GEOTIFF_FILE));
+			}
 		}
 
 		return suggestedMaps;
@@ -675,5 +686,22 @@ public class SRTMPlugin extends OsmandPlugin {
 		String attrName = property.getAttrName();
 		String defValue = CONTOUR_LINES_ATTR.equals(attrName) ? CONTOUR_LINES_DISABLED_VALUE : "";
 		return registerRenderingPreference(attrName, defValue);
+	}
+
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
+		if (item.getType() == GEOTIFF_FILE) {
+			updateHeightmap(updatingFile, item.getTargetFile(app).getAbsolutePath());
+		}
+	}
+
+	private void updateHeightmap(boolean overwriteExistingFile, @NonNull String filePath) {
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			if (overwriteExistingFile) {
+				mapRendererContext.removeCachedHeightmapTiles(filePath);
+			} else {
+				mapRendererContext.updateCachedHeightmapTiles();
+			}
+		}
 	}
 }

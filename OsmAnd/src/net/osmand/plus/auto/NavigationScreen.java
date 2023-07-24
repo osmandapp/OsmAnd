@@ -52,8 +52,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	private final NavigationListener listener;
 	@NonNull
 	private final Action settingsAction;
-	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
 
 	private boolean navigating;
 	private boolean rerouting;
@@ -81,19 +79,12 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 	public NavigationScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
-			@NonNull NavigationListener listener,
-			@NonNull SurfaceRenderer surfaceRenderer) {
+			@NonNull NavigationListener listener) {
 		super(carContext);
 		this.listener = listener;
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		alarmWidget = new AlarmWidget(getApp(), null);
 		getLifecycle().addObserver(this);
-	}
-
-	@NonNull
-	public SurfaceRenderer getSurfaceRenderer() {
-		return surfaceRenderer;
 	}
 
 	@Override
@@ -110,12 +101,21 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 
 	@Override
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
-		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
-		alarmWidget.updateInfo(drawSettings, true);
-		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
-		if (widgetBitmap != null) {
-			canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
+		if (surfaceRenderer != null) {
+			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+			alarmWidget.updateInfo(drawSettings, true);
+			Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
+			if (widgetBitmap != null) {
+				canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
+			}
 		}
+	}
+
+	@Nullable
+	private SurfaceRenderer getSurfaceRenderer() {
+		NavigationSession session = getApp().getCarNavigationSession();
+		return session != null ? session.navigationCarSurface : null;
 	}
 
 	/**
@@ -185,6 +185,13 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		// Set the action strip.
 		ActionStrip.Builder actionStripBuilder = new ActionStrip.Builder();
 		updateCompass();
+		if (!navigating) {
+			actionStripBuilder.addAction(
+					new Action.Builder()
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_list_flat)).build())
+							.setOnClickListener(this::goBack)
+							.build());
+		}
 		actionStripBuilder.addAction(
 				new Action.Builder()
 						.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), compassResId)).build())
@@ -197,12 +204,6 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 							.setTitle(getApp().getString(R.string.shared_string_control_stop))
 							.setOnClickListener(this::stopNavigation)
 							.build());
-		} else {
-			actionStripBuilder.addAction(
-					new Action.Builder()
-							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_actions_menu)).build())
-							.setOnClickListener(this::goBack)
-							.build());
 		}
 		builder.setActionStrip(actionStripBuilder.build());
 
@@ -213,6 +214,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 		//	panIconBuilder.setTint(CarColor.BLUE);
 		//}
 
+		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		builder.setMapActionStrip(new ActionStrip.Builder()
 				.addAction(new Action.Builder(Action.PAN)
 						//.setIcon(panIconBuilder.build())
@@ -227,7 +229,9 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 												.build())
 								.setOnClickListener(() -> {
 									if (!listener.requestLocationNavigation()) {
-										surfaceRenderer.handleRecenter();
+										if (surfaceRenderer != null) {
+											surfaceRenderer.handleRecenter();
+										}
 									}
 								})
 								.build())
@@ -240,9 +244,13 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 														R.drawable.ic_zoom_in))
 												.build())
 								.setOnClickListener(
-										() -> surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
-												NavigationSession.INVALID_FOCAL_POINT_VAL,
-												NavigationSession.ZOOM_IN_BUTTON_SCALE_FACTOR))
+										() -> {
+											if (surfaceRenderer != null) {
+												surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
+														NavigationSession.INVALID_FOCAL_POINT_VAL,
+														NavigationSession.ZOOM_IN_BUTTON_SCALE_FACTOR);
+											}
+										})
 								.build())
 				.addAction(
 						new Action.Builder()
@@ -253,9 +261,13 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 														R.drawable.ic_zoom_out))
 												.build())
 								.setOnClickListener(
-										() -> surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
-												NavigationSession.INVALID_FOCAL_POINT_VAL,
-												NavigationSession.ZOOM_OUT_BUTTON_SCALE_FACTOR))
+										() -> {
+											if (surfaceRenderer != null) {
+												surfaceRenderer.handleScale(NavigationSession.INVALID_FOCAL_POINT_VAL,
+														NavigationSession.INVALID_FOCAL_POINT_VAL,
+														NavigationSession.ZOOM_OUT_BUTTON_SCALE_FACTOR);
+											}
+										})
 								.build())
 
 				.build());
@@ -339,6 +351,7 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 
 	private void compassClick() {
 		getApp().getMapViewTrackingUtilities().requestSwitchCompassToNextMode();
+		invalidate();
 	}
 
 	private void goBack() {

@@ -13,8 +13,7 @@ import net.osmand.plus.utils.AndroidUtils
 
 class POICategoriesScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
 
     private var selectedPOIGroup: PoiUIFilter? = null
 
@@ -24,7 +23,7 @@ class POICategoriesScreen(
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.poi_categories))
-            .setActionStrip(ActionStrip.Builder().addAction(settingsAction).build())
+            .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())
             .setHeaderAction(Action.BACK)
             .build()
     }
@@ -59,7 +58,6 @@ class POICategoriesScreen(
                 POIScreen(
                     carContext,
                     settingsAction,
-                    surfaceRenderer,
                     group))
         }
     }

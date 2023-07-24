@@ -21,6 +21,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -63,8 +64,10 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.open_place_reviews_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_opr);
+		String description = app.getString(R.string.open_place_reviews_plugin_description, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Nullable

@@ -93,6 +93,7 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 			if (localChanges) {
 				String typeDescr = getDescriptionForItemType(type, item.fileName, getString(R.string.shared_string_uploaded));
 				description = typeDescr + "\n" + getString(R.string.local_file_will_be_restored);
+				deleteOperation = false;
 			} else {
 				description = generateTimeString(app, item.localFile.uploadTime, getString(R.string.shared_string_deleted));
 			}
@@ -113,8 +114,9 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		titleTv.setText(R.string.download_cloud_version);
 		descriptionTv.setText(description);
 		imageView.setImageDrawable(getIcon(R.drawable.ic_action_cloud_download_outline, enabled ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryIconColorId(nightMode)));
+		SyncOperationType operationType = deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD;
 		downloadItem.setOnClickListener(v -> {
-			syncItem(deleteOperation ? SYNC_OPERATION_DELETE : SYNC_OPERATION_DOWNLOAD);
+			syncItem(operationType);
 			dismiss();
 		});
 		downloadItem.setEnabled(enabled);

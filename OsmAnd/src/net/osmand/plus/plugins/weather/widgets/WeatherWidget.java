@@ -1,8 +1,5 @@
 package net.osmand.plus.plugins.weather.widgets;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.IndexConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -11,15 +8,18 @@ import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback;
 import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherHelper;
+import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -27,9 +27,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class WeatherWidget extends TextInfoWidget {
 
+	public static final String TAG = WeatherWidget.class.getSimpleName();
+
 	private static final long TRUNCATE_MINUTES = 60 * 60 * 1000;
+
+	private static final int MAX_METERS_TO_PREVIOUS_FORECAST = 30 * 1000;
 
 	private static final DateFormat forecastNamingFormat = new SimpleDateFormat("yyyyMMdd_HH00");
 	private static final DateFormat timeFormat = new SimpleDateFormat("d MMM HH:mm");
@@ -49,7 +56,8 @@ public class WeatherWidget extends TextInfoWidget {
 	private long lastDateTime;
 
 	private boolean lastObtainingFailed;
-	private long lastSuccessfulObtainedRequestTime;
+	private PointI lastDisplayedForecastPoint31;
+	private long lastDisplayedForecastTime;
 
 	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, short band) {
 		super(mapActivity, widgetType);
@@ -58,18 +66,8 @@ public class WeatherWidget extends TextInfoWidget {
 		this.weatherBand = weatherHelper.getWeatherBand(band);
 		this.callback = new IObtainValueAsyncCallback() {
 			@Override
-			public void method(boolean succeeded, long requestedTime, double value, SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
-				WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
-				if (succeeded && resourcesManager != null) {
-					lastObtainingFailed = false;
-					lastSuccessfulObtainedRequestTime = requestedTime;
-					value = resourcesManager.getConvertedBandValue(band, value);
-					String formattedValue = resourcesManager.getFormattedBandValue(band, value, true);
-					onValueObtained(true, value, formattedValue);
-				} else {
-					lastObtainingFailed = true;
-					onValueObtained(false, value, null);
-				}
+			public void method(boolean succeeded, PointI point31, long requestedTime, double value, SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
+				app.runInUIThread(() -> onValueObtained(succeeded, point31, requestedTime, value));
 			}
 		};
 		this.callback.swigReleaseOwnership();
@@ -82,15 +80,35 @@ public class WeatherWidget extends TextInfoWidget {
 		});
 	}
 
-	public void onValueObtained(boolean succeeded, double value, @Nullable String formattedValue) {
-		app.runInUIThread(() -> {
-			if (succeeded && !Algorithms.isEmpty(formattedValue)) {
-				setText(formattedValue, weatherBand.getBandUnit().getSymbol());
-			} else {
-				setText(NO_VALUE, null);
+	private void onValueObtained(boolean success, @NonNull PointI requestedPoint31, long requestedTime, double value) {
+		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
+		if (success && resourcesManager != null) {
+			lastObtainingFailed = false;
+
+			PointI point31 = getPoint31();
+			if (point31 != null && getMetersBetweenPoints(point31, requestedPoint31) > MAX_METERS_TO_PREVIOUS_FORECAST) {
+				return;
 			}
-			mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();
-		});
+
+			lastDisplayedForecastPoint31 = requestedPoint31;
+			lastDisplayedForecastTime = requestedTime;
+
+			double convertedValue = resourcesManager.getConvertedBandValue(band, value);
+			String formattedValue = resourcesManager.getFormattedBandValue(band, convertedValue, true);
+			updateContent(formattedValue);
+		} else {
+			lastObtainingFailed = true;
+			updateContent(null);
+		}
+	}
+
+	public void updateContent(@Nullable String formattedValue) {
+		if (!Algorithms.isEmpty(formattedValue)) {
+			setText(formattedValue, weatherBand.getBandUnit().getSymbol());
+		} else {
+			setText(NO_VALUE, null);
+		}
+		mapActivity.getMapLayers().getMapInfoLayer().updateSideWidgets();;
 	}
 
 	public void setDateTime(@Nullable Date date) {
@@ -100,7 +118,13 @@ public class WeatherWidget extends TextInfoWidget {
 	@Nullable
 	public PointI getPoint31() {
 		MapRendererView mapRenderer = getMyApplication().getOsmandMap().getMapView().getMapRenderer();
-		return mapRenderer != null ? mapRenderer.getTarget() : null;
+		if (mapRenderer != null) {
+			RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+			int centerPixelX = tileBox.getCenterPixelX();
+			int centerPixelY = tileBox.getCenterPixelY();
+			return NativeUtilities.get31FromElevatedPixel(mapRenderer, centerPixelX, centerPixelY);
+		}
+		return null;
 	}
 
 	@Nullable
@@ -132,14 +156,26 @@ public class WeatherWidget extends TextInfoWidget {
 		PointI point31 = getPoint31();
 		ZoomLevel zoom = getZoom();
 		long dateTime = getDateTime();
+
+		if (lastDisplayedForecastPoint31 != null && point31 != null) {
+			double metersToPreviousForecastPoint = getMetersBetweenPoints(lastDisplayedForecastPoint31, point31);
+			if (metersToPreviousForecastPoint > MAX_METERS_TO_PREVIOUS_FORECAST) {
+				lastDisplayedForecastTime = 0;
+				lastDisplayedForecastPoint31 = null;
+				setText(NO_VALUE, null);
+			}
+		}
+
 		WeatherTileResourcesManager resourcesManager = weatherHelper.getWeatherResourcesManager();
 		if (resourcesManager != null && shouldObtainValue(point31, zoom, dateTime)) {
 			ValueRequest request = new ValueRequest();
+			request.setClientId(TAG);
 			request.setBand(band);
 			request.setDateTime(dateTime);
 			request.setLocalData(false);
 			request.setPoint31(point31);
 			request.setZoom(zoom);
+			request.setAbortIfNotRecent(true);
 			lastPotition31 = point31;
 			lastZoom = zoom;
 			lastDateTime = dateTime;
@@ -155,12 +191,12 @@ public class WeatherWidget extends TextInfoWidget {
 
 		StringBuilder stringBuilder = new StringBuilder();
 
-		if (lastSuccessfulObtainedRequestTime != 0) {
-			long forecastTime = lastSuccessfulObtainedRequestTime / TRUNCATE_MINUTES * TRUNCATE_MINUTES;
+		if (lastDisplayedForecastTime != 0) {
+			long forecastTime = lastDisplayedForecastTime / TRUNCATE_MINUTES * TRUNCATE_MINUTES;
 			stringBuilder.append("For date: ")
 					.append(timeFormat.format(new Date(forecastTime)));
 
-			long lastDownload = getForecastDbLastDownload(lastSuccessfulObtainedRequestTime);
+			long lastDownload = getForecastDbLastDownload(lastDisplayedForecastTime);
 			if (lastDownload != 0) {
 				stringBuilder.append(". Downloaded: ")
 						.append(timeFormat.format(new Date(lastDownload)));
@@ -189,6 +225,10 @@ public class WeatherWidget extends TextInfoWidget {
 		return usedForecastDb.exists() && usedForecastDb.canRead()
 				? usedForecastDb.lastModified()
 				: 0;
+	}
+
+	private double getMetersBetweenPoints(@NonNull PointI a, @NonNull PointI b) {
+		return MapUtils.measuredDist31(a.getX(), a.getY(), b.getX(), b.getY());
 	}
 
 	@NonNull

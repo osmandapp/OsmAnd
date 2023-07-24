@@ -115,7 +115,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
+	public CharSequence getDescription(boolean linksEnabled) {
 		return app.getString(R.string.plugin_mapillary_descr);
 	}
 

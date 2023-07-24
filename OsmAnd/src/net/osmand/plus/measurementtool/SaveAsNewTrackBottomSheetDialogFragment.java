@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.VIEW_TYPE_ADD;
 import static net.osmand.plus.measurementtool.adapter.FolderListAdapter.getFolders;
 
@@ -51,10 +52,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
 	public static final String SHOW_ON_MAP_KEY = "show_on_map_key";
 	public static final String SIMPLIFIED_TRACK_KEY = "simplified_track_key";
-	public static final String DEST_FOLDER_NAME_KEY = "dest_folder_name_key";
+	public static final String DEST_FOLDER_PATH_KEY = "dest_folder_path_key";
 	public static final String DEST_FILE_NAME_KEY = "dest_file_name_key";
-	public static final String SOURCE_FILE_NAME_KEY = "source_file_name_key";
-	public static final String SOURCE_FOLDER_NAME_KEY = "source_folder_name_key";
 	public static final String SHOW_SIMPLIFIED_BUTTON_KEY = "show_simplified_button_key";
 
 	private OsmandApplication app;
@@ -64,9 +63,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	private RecyclerView recyclerView;
 
 	private String destFileName;
-	private String sourceFileName;
-	private String sourceFolderName;
-	private String folderName;
+	private String folderPath;
 	private boolean showOnMap;
 	private boolean simplifiedTrack;
 	private boolean rightButtonEnabled = true;
@@ -74,23 +71,19 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = getMyApplication();
-		if (app == null) {
-			return;
-		}
+		app = requiredMyApplication();
 
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		if (savedInstanceState != null) {
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
-			folderName = savedInstanceState.getString(DEST_FOLDER_NAME_KEY);
+			folderPath = savedInstanceState.getString(DEST_FOLDER_PATH_KEY);
 			destFileName = savedInstanceState.getString(DEST_FILE_NAME_KEY);
-			sourceFileName = savedInstanceState.getString(SOURCE_FILE_NAME_KEY);
-			sourceFolderName = savedInstanceState.getString(SOURCE_FOLDER_NAME_KEY);
 			showSimplifiedButton = savedInstanceState.getBoolean(SHOW_SIMPLIFIED_BUTTON_KEY);
-		} else {
-			folderName = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getName();
+		}
+		if (Algorithms.isEmpty(folderPath)) {
+			folderPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		}
 
 		items.add(new TitleItem(getString(R.string.save_as_new_track)));
@@ -125,7 +118,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				File dest = getFile(app, folderName, destFileName);
+				File dest = getFile(folderPath, destFileName);
 				MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(),
 						dest, SaveAsNewTrackBottomSheetDialogFragment.this, usedOnMap, true);
 			}
@@ -135,7 +128,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.create();
 		items.add(selectFolderItem);
 
-		adapter = new FolderListAdapter(app, folderName, nightMode);
+		adapter = new FolderListAdapter(app, folderPath, nightMode);
 		adapter.setItems(getAdapterItems());
 		if (adapter.getItemCount() > 0) {
 			adapter.setListener(createFolderSelectListener());
@@ -214,7 +207,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		return new FolderListAdapterListener() {
 			@Override
 			public void onItemSelected(String item) {
-				folderName = item;
+				folderPath = item;
 				EditText editText = nameTextBox.getEditText();
 				if (editText != null) {
 					updateFileNameFromEditText(editText.getText().toString());
@@ -236,10 +229,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(SHOW_ON_MAP_KEY, showOnMap);
 		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
-		outState.putString(DEST_FOLDER_NAME_KEY, folderName);
+		outState.putString(DEST_FOLDER_PATH_KEY, folderPath);
 		outState.putString(DEST_FILE_NAME_KEY, destFileName);
-		outState.putString(SOURCE_FILE_NAME_KEY, sourceFileName);
-		outState.putString(SOURCE_FOLDER_NAME_KEY, sourceFolderName);
 		outState.putBoolean(SHOW_SIMPLIFIED_BUTTON_KEY, showSimplifiedButton);
 		super.onSaveInstanceState(outState);
 	}
@@ -254,19 +245,15 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
 			((SaveAsNewTrackFragmentListener) targetFragment)
-					.onSaveAsNewTrack(folderName, destFileName, showOnMap, simplifiedTrack);
+					.onSaveAsNewTrack(folderPath, destFileName, showOnMap, simplifiedTrack);
 		}
 		dismiss();
 	}
 
-	private File getFile(OsmandApplication app, String folderName, String fileName) {
-		File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		File source = dir;
-		if (folderName != null && !dir.getName().equals(folderName)) {
-			source = new File(dir, folderName);
-		}
-		source = new File(source, fileName + IndexConstants.GPX_FILE_EXT);
-		return source;
+	@NonNull
+	private File getFile(@NonNull String folderName, @NonNull String fileName) {
+		File dir = new File(folderName);
+		return new File(dir, fileName + GPX_FILE_EXT);
 	}
 
 	@Override
@@ -291,28 +278,23 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	private boolean isFileExist(String name) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			File file = getFile(app, folderName, name);
-			return file.exists();
-		}
-		return false;
+		return getFile(folderPath, name).exists();
 	}
 
 	@Override
 	public void onFileMove(@Nullable File src, @NonNull File dest) {
 		File destFolder = dest.getParentFile();
 		if (destFolder != null) {
-			folderName = destFolder.getName();
+			folderPath = destFolder.getAbsolutePath();
 			boolean newFolder = destFolder.mkdirs();
 			List<Object> items = getAdapterItems();
 			if (newFolder) {
 				adapter.setItems(items);
 			}
-			adapter.setSelectedItem(folderName);
+			adapter.setSelectedItem(folderPath);
 			adapter.notifyDataSetChanged();
 
-			int position = items.indexOf(folderName);
+			int position = items.indexOf(folderPath);
 			if (position != -1) {
 				recyclerView.scrollToPosition(position);
 			}
@@ -327,33 +309,29 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	public void onTrackFolderAdd(String folderName) {
-		File file = getFile(app, this.folderName, destFileName);
+		File file = getFile(folderPath, destFileName);
 		File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName);
 		this.onFileMove(file, new File(destFolder, file.getName()));
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @Nullable Fragment targetFragment,
-	                                @Nullable String sourceFolderName,
-	                                @NonNull String sourceFileName,
-	                                @Nullable String destFileName,
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull String destFileName,
+	                                @Nullable Fragment target,
 	                                boolean showSimplifiedButton,
 	                                boolean showOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
-			fragment.setTargetFragment(targetFragment, 0);
-			fragment.sourceFileName = sourceFileName;
-			fragment.sourceFolderName = sourceFolderName;
-			fragment.destFileName = destFileName == null ? sourceFileName : destFileName;
+			fragment.setTargetFragment(target, 0);
+			fragment.destFileName = destFileName;
 			fragment.showSimplifiedButton = showSimplifiedButton;
 			fragment.showOnMap = showOnMap;
-			fragment.show(fragmentManager, TAG);
+			fragment.show(manager, TAG);
 		}
 	}
 
 	public interface SaveAsNewTrackFragmentListener {
 
-		void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack);
+		void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName, boolean showOnMap, boolean simplifiedTrack);
 
 	}
 }

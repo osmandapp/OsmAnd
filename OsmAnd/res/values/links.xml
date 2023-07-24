@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <!--      <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-4-2-released/</string>  -->
-    <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-4-4-released/</string>
+    <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-4-5-released/</string>
     <string name="blog_guideline" translatable="false">https://osmand.net/blog/guideline-pt</string>
 
     <string name="docs_add_online_maps" translatable="false">https://docs.osmand.net/docs/user/map/raster-maps#add-new-online-raster-map-source</string>
@@ -29,6 +29,13 @@
     <string name="docs_widget_mapillary" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-mapillary-widget</string>
     <string name="docs_widget_parking" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-parking-widget</string>
     <string name="docs_widget_distance_by_tap" translatable="false">https://docs.osmand.net/docs/user/widgets/radius-ruler#distance-by-tap-tool</string>
+
+    <string name="docs_plugin_trip_recording" translatable="false">https://osmand.net/docs/user/plugins/trip-recording</string>
+    <string name="docs_plugin_nautical" translatable="false">https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="docs_plugin_opr" translatable="false">https://osmand.net/docs/user/plugins/openplacereviews</string>
+    <string name="docs_plugin_osm" translatable="false">https://osmand.net/docs/user/plugins/osm-editing</string>
+    <string name="docs_plugin_srtm" translatable="false">http://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="weather_global_forecast_system" translatable="false">https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
 
     <string name="docs_purchases" translatable="false">https://docs.osmand.net/docs/user/purchases/</string>
     <string name="docs_purchases_android" translatable="false">https://docs.osmand.net/docs/user/purchases/android</string>

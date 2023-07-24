@@ -85,6 +85,9 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 				updateFileNameFromEditText(s.toString().trim());
 			}
 		});
+		editText.requestFocus();
+		AndroidUtils.softKeyboardDelayed(requireActivity(), editText);
+
 		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create();

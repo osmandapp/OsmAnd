@@ -40,6 +40,7 @@ import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
@@ -85,7 +86,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.SAVE_TRACK_PRECISION);
 		pluginPreferences.add(settings.AUTO_SPLIT_RECORDING);
 		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
-		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
 		pluginPreferences.add(settings.SHOW_TRIP_REC_START_DIALOG);
 		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
@@ -135,8 +135,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public CharSequence getDescription() {
-		return app.getString(R.string.record_plugin_description);
+	public CharSequence getDescription(boolean linksEnabled) {
+		String docsUrl = app.getString(R.string.docs_plugin_trip_recording);
+		String description = app.getString(R.string.record_plugin_description, docsUrl);
+		return linksEnabled ? UiUtilities.createUrlSpannable(description, docsUrl) : description;
 	}
 
 	@Override

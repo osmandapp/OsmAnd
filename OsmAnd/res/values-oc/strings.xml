@@ -1306,8 +1306,6 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Representacion dei camins e draias segons lei traças OSMC (simbòls de colors).</string>
     <string name="rendering_attr_noAdminboundaries_description">Pas mostrar lei limits admistratius (de nivèu 5-9).</string>
     <string name="rendering_attr_noAdminboundaries_name">Limits administratius</string>
-    <string name="rendering_attr_alpineHiking_description">Representacion dei camins e draias segon l\'escala SAC (Club Alpinn Soisse).</string>
-    <string name="rendering_attr_alpineHiking_name">Escala deis escorregudas alpinas (SAC)</string>
     <string name="map_widget_renderer">Representacion de la mapa</string>
     <string name="rendering_attr_appMode_description">Optimizar la mapa per</string>
     <string name="rendering_attr_appMode_name">Mòde de representacion</string>

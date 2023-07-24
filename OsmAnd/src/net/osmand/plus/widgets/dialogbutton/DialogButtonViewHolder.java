@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
@@ -109,7 +108,7 @@ public class DialogButtonViewHolder {
 			int contentColor = getColorFromAttr(ctx, buttonType.getContentColorAttr());
 			Drawable icon = createTintedDrawable(ctx, iconResId, contentColor);
 			tvTitle.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			tvTitle.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, getDimension(ctx, R.dimen.content_padding_half)));
+			tvTitle.setCompoundDrawablePadding(ctx.getResources().getDimensionPixelSize(R.dimen.content_padding_half));
 		}
 	}
 
@@ -172,9 +171,5 @@ public class DialogButtonViewHolder {
 	@ColorInt
 	private static int getColor(@NonNull Context ctx, @ColorRes int colorId) {
 		return ColorUtilities.getColor(ctx, colorId);
-	}
-
-	private static int getDimension(@NonNull Context ctx, @DimenRes int resId) {
-		return ctx.getResources().getDimensionPixelSize(resId);
 	}
 }

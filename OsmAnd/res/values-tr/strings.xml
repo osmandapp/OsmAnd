@@ -1504,8 +1504,6 @@
     <string name="arrival_distance_factor_at_last">Son metrelerde</string>
     <string name="arrival_distance">Varış duyurusu</string>
     <string name="arrival_distance_descr">Varış duyurusunu ne yakınlıkta istiyorsunuz\?</string>
-    <string name="rendering_attr_alpineHiking_name">Alp yürüyüş ölçeği (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">SAC ölçeğine göre yolları görselleştir.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş rotaları</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları görselleştir.</string>
     <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
@@ -3965,7 +3963,7 @@
     <string name="hillshade_slope_contour_lines">tepe gölgesi / yamaç / eş yükselti eğrileri</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews projesine katkıda bulunmanızı sağlar. Fotoğraflar, yorumlar, restoranlar, oteller, müzeler ve yol noktaları gibi halka açık yerler hakkında bağlantılar gibi.
 \n
-\nNasıl katkıda bulunacağınıza ilişkin talimatları web sitemizde bulabilirsiniz - https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nNasıl katkıda bulunacağınıza ilişkin talimatları web sitemizde bulabilirsiniz - %1$s</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org adresini kullan</string>
     <string name="login_open_place_reviews">OpenPlaceReviews\'te oturum aç</string>
@@ -4770,7 +4768,7 @@
 \n- konum tabanlı widget\'lar
 \n- sıcaklık/basınç eş değer eğrileri
 \n
-\nHava durumu verileri Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast) tarafından sağlanır.</string>
+\nHava durumu verileri Global Forecast System (GFS, %1$s) tarafından sağlanır.</string>
     <string name="weather_offline_forecast">Çevrim dışı tahmin</string>
     <string name="map_settings_weather_temp">Sıcaklık</string>
     <string name="map_settings_weather_air_pressure">Hava basıncı</string>

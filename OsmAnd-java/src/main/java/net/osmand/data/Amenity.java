@@ -68,6 +68,15 @@ public class Amenity extends MapObject {
 	private TIntArrayList y;
 	private TIntArrayList x;
 	private String mapIconName;
+	private int order;
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
 	public static class AmenityRoutePoint {
 		public double deviateDistance;

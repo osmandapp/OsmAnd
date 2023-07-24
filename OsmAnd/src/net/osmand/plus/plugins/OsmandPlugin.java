@@ -95,7 +95,7 @@ public abstract class OsmandPlugin {
 
 	public abstract String getName();
 
-	public abstract CharSequence getDescription();
+	public abstract CharSequence getDescription(boolean linksEnabled);
 
 	@Nullable
 	public Drawable getAssetResourceImage() {
@@ -226,7 +226,7 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected void attachAdditionalInfoToRecordedTrack(Location location, JSONObject json) throws JSONException {
+	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
 
@@ -509,6 +509,10 @@ public abstract class OsmandPlugin {
 	}
 
 	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+
+	}
+
+	public void onIndexItemDownloaded(@NonNull IndexItem item, boolean updatingFile) {
 
 	}
 }

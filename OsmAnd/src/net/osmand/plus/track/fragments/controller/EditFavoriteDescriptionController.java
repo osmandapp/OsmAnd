@@ -18,7 +18,7 @@ public class EditFavoriteDescriptionController extends EditPointDescriptionContr
 		FavouritePoint point = (FavouritePoint) getContextMenuObject();
 		if (point != null) {
 			FavouritesHelper helper = activity.getMyApplication().getFavoritesHelper();
-			helper.editFavouriteDescription(point, editedText);
+			helper.editFavouriteName(point, point.getName(), point.getCategory(), editedText, point.getAddress());
 			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
 			updateContextMenu(latLon, point.getPointDescription(activity), point);
 		}

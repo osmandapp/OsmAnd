@@ -1210,8 +1210,6 @@
     <string name="rendering_attr_subwayMode_name">Metrolijnen</string>
     <string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
-    <string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren.</string>
     <string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
@@ -3958,7 +3956,7 @@
     <string name="hillshade_slope_contour_lines">Reliëfschaduw / Helling / Contourlijnen</string>
     <string name="open_place_reviews_plugin_description">Lever een bijdragen aan het OpenPlaceReviews-project met foto\'s, beoordelingen, of links van openbare plaatsen zoals restaurants, hotels of musea.
 \n
-\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nU kunt instructies vinden op onze website over hoe u kunt bijdragen: %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Gebruik test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Inloggen op OpenPlaceReviews</string>
@@ -4789,7 +4787,7 @@
 \n- widgets afgesteld op locatie
 \n- hoogtelijnen van temperatuur / luchtdruk
 \n
-\nDe weersgegevens worden geleverd door de Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDe weersgegevens worden geleverd door de Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Weersvoorspelling zonder internet</string>
     <string name="map_settings_weather_air_pressure">Luchtdruk</string>
     <string name="measurement_units">Meeteenheden</string>
@@ -5175,8 +5173,6 @@
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder">Lege map</string>
     <string name="shared_string_new_track">Nieuwe track</string>
-    <string name="rendering_value_sacScale_name">SAC schaal</string>
-    <string name="rendering_value_caiScale_name">CAI schaal</string>
     <string name="map_3d_mode_hint">Door de knop lang ingedrukt te houden, kan de positie van de knop gewijzigd worden.</string>
     <string name="map_3d_mode_description">Gebruik 2 vingers en beweeg ze naar boven en beneden om de oriëntatie van de kaart aan te passen.</string>
     <string name="shared_string_visible_on_map">Zichtbaar op de kaart</string>

@@ -607,7 +607,7 @@
     <string name="prefs_plugins">Gestionnaire d\'extensions</string>
     <string name="osm_editing_plugin_description">Contribuez à OpenStreetMap, un projet communautaire global qui maintient à jour une carte complète du monde et fournit des données géographiques libres.
 \n
-\nPour découvrir comment modifier une carte, consultez notre site https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nPour découvrir comment modifier une carte, consultez notre site %1$s.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
     <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales :</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
@@ -881,7 +881,7 @@
 \n
 \nLes données proviennent de SRTM et ASTER.
 \n
-\nPlus d\'informations sur http://osmand.net/docs/user/plugins/contour-lines.</string>
+\nPlus d\'informations sur %1$s.</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1271,8 +1271,6 @@
     <string name="continue_navigation">Reprendre le guidage</string>
     <string name="pause_navigation">Suspendre le guidage</string>
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
-    <string name="rendering_attr_alpineHiking_name">Échelle des sentiers de randonnée</string>
-    <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des sentiers de randonnée selon l\'échelle SAC / CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinéraires de randonnée</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Rendu des itinéraires de randonnée d\'après OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Colorer les bâtiments par type</string>
@@ -1296,7 +1294,7 @@
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Enregistrez vos trajets ou entraînements et analysez les données : vitesse, dénivelés, altitude, etc. Les traces enregistrées peuvent être archivées, partagées avec des amis, modifiées et retravaillées.
 \n
-\nPlus d\'informations sur https://osmand.net/docs/user/plugins/trip-recording.</string>
+\nPlus d\'informations sur %1$s.</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -1444,7 +1442,7 @@
     <string name="plugin_touringview_name">Grand tourisme</string>
     <string name="plugin_nautical_descr">Enrichit la carte avec des informations sur les routes maritimes, le balisage, les zones de danger, les restrictions de mouillage, etc. Pour afficher cette vue, téléchargez la carte marine correspondante puis activez-la dans \"Paramétrer la carte\".
 \n
-\nPlus d\'informations sur https://osmand.net/docs/user/plugins/nautical-charts.</string>
+\nPlus d\'informations sur %1$s.</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
@@ -3980,7 +3978,7 @@
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens sur des lieux publics tels que les restaurants, les hôtels ou les musées afin de contribuer au projet OpenPlaceReviews.
 \n
-\nPour en savoir plus, consultez https://osmand.net/docs/user/plugins/openplacereviews.</string>
+\nPour en savoir plus, consultez %1$s.</string>
     <string name="activity_type_racing_name">Course</string>
     <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
     <string name="track_recording_description">Arrêter l\'enregistrement \?
@@ -4924,7 +4922,7 @@
 \n- Des widgets basés sur la position
 \n- Les cartes d\'isobares et d\'isothermes
 \n
-\nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast).</string>
+\nLes données météorologiques sont fournies par le modèle GFS (Global Forecast System, %1$s).</string>
     <string name="shared_string_open">Ouvert</string>
     <string name="open_weather_action_description">Vous permet de consulter des informations météo détaillées.</string>
     <string name="open_weather_action">Afficher la météo</string>
@@ -5204,8 +5202,6 @@
     <string name="map_3d_mode_hint">Un appui long sur le bouton permet de modifier sa position.</string>
     <string name="map_3d_mode_description">Touchez la carte avec deux doigts et déplacez-les vers le haut ou vers le bas pour modifier l\'inclinaison de la carte.</string>
     <string name="map_3d_mode_action">Mode 3D</string>
-    <string name="rendering_value_sacScale_name">Échelle SAC</string>
-    <string name="rendering_value_caiScale_name">Échelle CAI</string>
     <string name="visible_in_3d_mode">Visible en mode 3D</string>
     <string name="delete_folder_question">Supprimer le dossier \?</string>
     <string name="delete_folder">Supprimer le dossier</string>
@@ -5229,7 +5225,6 @@
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
-    <string name="free_mode">Mode libre</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="terrain_map">Carte du relief</string>
     <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
@@ -5313,4 +5308,26 @@
     <string name="use_raster_sqlitedb_for_slope_hillshade">Utiliser le raster sqltiedb pour la pente / l\'ombrage du relief</string>
     <string name="routing_attr_allow_via_ferrata_name">Itinéraire à flanc de montagne (Via ferrata)</string>
     <string name="free_settings_backup">Paramètres pour la sauvegarde gratuite</string>
+    <string name="free_ride">Freeride</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosifs</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gaz</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Liquides inflammables</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substances toxiques et infectieuses</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agents oxydants et peroxydes organiques</string>
+    <string name="shared_string_class">Classe</string>
+    <string name="dangerous_goods_description">Sur certaines routes et tunnels, le transport de matières dangereuses est interdit.</string>
+    <string name="dangerous_goods">Marchandises dangereuses</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substances radioactives</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Solides inflammables</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substances corrosives</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Divers</string>
+    <string name="shared_string_not_checked">Non vérifié</string>
+    <string name="shared_string_checked">Vérifié</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_description">Types de classification pour la difficulté des itinéraires.</string>
+    <string name="rendering_value_sacScale_description">Club Alpin Suisse</string>
+    <string name="rendering_value_sacScale_name">CAS</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_attr_alpineHiking_name">Classification des difficultés</string>
 </resources>

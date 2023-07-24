@@ -496,8 +496,6 @@ Punktaŭ maršrutu %2$s</string>
     <string name="download_srtm_maps">Іzalinіі vyšyń</string>
     <string name="download_regular_maps">Standartnyja mapy</string>
     <string name="download_roads_only_maps">Mapa tolkі daroh</string>
-    <string name="rendering_attr_alpineHiking_name">Piešy horny turyzm</string>
-    <string name="rendering_attr_alpineHiking_description">Vizualizacyja šliachu pa škalie SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Nakładańnie znakaŭ piešaha turyzmu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vizualizacyja šliachu zhodna trasam OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Miežy</string>

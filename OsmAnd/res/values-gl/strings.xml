@@ -428,8 +428,6 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapa normal</string>
     <string name="download_roads_only_maps">Mapa só de estradas</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de sendeirismo alpino (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Amosar rotas seguindo a escala SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposición dos símbolos de sendeirismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar os camiños segundo as pistas do OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteiras</string>
@@ -4081,7 +4079,7 @@ Lon %2$s</string>
 \n- complementos baseados na localización
 \n- as isolíneas da temperatura/presión
 \n
-\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nA predición meteorolóxica e proporcionada polo Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Pronóstico sen conexión</string>
     <string name="weather_online_cache">Caché en liña</string>
     <string name="map_settings_weather_temp">Temperatura</string>

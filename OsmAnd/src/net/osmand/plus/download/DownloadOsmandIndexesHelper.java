@@ -295,23 +295,23 @@ public class DownloadOsmandIndexesHelper {
 		return recordedVoiceList;
 	}
 
-	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx) {
+	private static IndexFileList downloadIndexesListFromInternet(@NonNull OsmandApplication app) {
 		try {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files");
 			try {
-				String strUrl = ctx.getAppCustomization().getIndexesUrl();
-				long nd = ctx.getAppInitializer().getFirstInstalledDays();
+				String strUrl = app.getAppCustomization().getIndexesUrl();
+				long nd = app.getAppInitializer().getFirstInstalledDays();
 				if (nd > 0) {
 					strUrl += "&nd=" + nd;
 				}
-				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
+				strUrl += "&ns=" + app.getAppInitializer().getNumberOfStarts();
 				try {
-					if (ctx.isUserAndroidIdAllowed()) {
-						strUrl += "&aid=" + ctx.getUserAndroidId();
+					if (app.isUserAndroidIdAllowed()) {
+						strUrl += "&aid=" + app.getUserAndroidId();
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					log.error(e);
 				}
 				log.info(strUrl);
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
@@ -323,12 +323,12 @@ public class DownloadOsmandIndexesHelper {
 				while ((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
 						String attrValue = parser.getAttributeValue(null, "type");
-						DownloadActivityType tp = DownloadActivityType.getIndexType(attrValue);
+						DownloadActivityType type = DownloadActivityType.getIndexType(attrValue);
 						// ignore old DEPTH_CONTOUR_FILE
-						if (tp != null && tp != DownloadActivityType.DEPTH_CONTOUR_FILE) {
-							IndexItem it = tp.parseIndexItem(ctx, parser);
-							if (it != null) {
-								result.add(it);
+						if (type != null && type != DownloadActivityType.DEPTH_CONTOUR_FILE) {
+							IndexItem item = type.parseIndexItem(app, parser);
+							if (item != null) {
+								result.add(item);
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {
 							String mapVersion = parser.getAttributeValue(null, "mapversion");

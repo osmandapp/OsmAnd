@@ -531,7 +531,7 @@
     <string name="record_plugin_name">Spur-registrilo</string>
     <string name="record_plugin_description">Ebligas registri viajn vojaĝojn aŭ trejnadojn kaj analizi ilin konsiderante rapidon, tutajn suprenirojn kaj malsuprenirojn, profilon de altitudo kaj pli. Registritajn spurojn oni povas arĥivigi, kunhavigi, redakti kaj pritrakti.
 \n
-\nPliaj informoj: https://osmand.net/docs/user/plugins/trip-recording</string>
+\nPliaj informoj: %1$s</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
     <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da baterio aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
@@ -647,7 +647,7 @@
 \n
 \nDatumoj devenas de la projektoj SRTM kaj ASTER.
 \n
-\nPliaj informoj: http://osmand.net/docs/user/plugins/contour-lines</string>
+\nPliaj informoj: %1$s</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
@@ -992,8 +992,6 @@
     <string name="download_srtm_maps">Nivelkurboj</string>
     <string name="download_regular_maps">Plena mapo</string>
     <string name="download_roads_only_maps">Nur-voja mapo</string>
-    <string name="rendering_attr_alpineHiking_name">Montgrimpada skalo</string>
-    <string name="rendering_attr_alpineHiking_description">Bildigi vojojn laŭ skalo de SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turismaj kursoj</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Bildigi vojojn laŭ OSMC-kursoj.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
@@ -1495,7 +1493,7 @@
     <string name="plugin_nautical_name">Mara map-vido</string>
     <string name="plugin_nautical_descr">Pliriĉigas la mapon per naŭtikaj kursoj, navigadaj lumoj, danĝerejoj, zonoj (mal)permesataj por navigi, alligi akvoveturilon, ktp. Por uzi la kromprogramon, elŝutu marajn mapojn kaj aktivigu la map-aspekton “Marnavigada” per la menuo “Agordi mapon”.
 \n
-\nPliaj informoj: https://osmand.net/docs/user/plugins/nautical-charts</string>
+\nPliaj informoj: %1$s</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
     <string name="plugin_ski_descr">Projektita por navigi en vintraj sportejoj. Vidigas descendejojn, skiliftojn kaj skikuradajn kursojn kiel kolorajn liniojn, kiuj indikas malfacilecon. Por uzi la kromprogramon, aktivigu la map-aspekton “Vintro kaj skiado” en la menuo “Agordi mapon”.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
@@ -1505,7 +1503,7 @@
     <string name="osm_editing_plugin_name">OSM-redaktilo</string>
     <string name="osm_editing_plugin_description">Ebligas kontribui al OpenStreetMap – tutmonda komunumo, kies celo estas prizorgi detalan mapon de la mondo kaj liveri aktualajn malfermajn datumojn por ĉiu uzanto.
 \n
-\nPliaj informoj pri kiel redakti la mapon OSM: https://osmand.net/docs/user/plugins/osm-editing</string>
+\nPliaj informoj pri kiel redakti la mapon OSM: %1$s</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
     <string name="osmand_development_plugin_description">Liveras eblojn por testi kaj senerarigi OsmAnd: simuli navigajn kursojn, kontroli map-bildigadon, kontroli rendimenton kaj pli. La kromprogramo ne estas bezona por kutima uzado de la aplikaĵo.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
@@ -1602,7 +1600,7 @@
     <string name="error_reading_gpx">Ne povas legi GPX‑datumojn.</string>
     <string name="rotate_map_compass_opt">Direkto de kompaso</string>
     <string name="rotate_map_bearing_opt">Direkto de movado</string>
-    <string name="rotate_map_north_opt">Fiksita (nordo supre)</string>
+    <string name="rotate_map_north_opt">Nordo supre</string>
     <string name="rotate_map_to_descr">Ekran‑turniĝo:</string>
     <string name="rotate_map_to">Map-orientiĝo</string>
     <string name="show_route">Detaloj pri kurso</string>
@@ -1869,7 +1867,7 @@
     <string name="please_specify_poi_type">Bonvolu precizigi specon de interesejo.</string>
     <string name="working_days">Labortagoj</string>
     <string name="recent_places">Antaŭaj ejoj</string>
-    <string name="favourites">Ŝatataj ejoj</string>
+    <string name="favourites">Ŝatataj punktoj</string>
     <string name="saved_at_time">Konservita je: %1$s</string>
     <string name="poi_deleted_localy">Interesejo estos forigita kiam vi alŝutos viajn ŝanĝojn</string>
     <string name="count_of_lines">Nombro de linioj</string>
@@ -3963,7 +3961,7 @@
     <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
     <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
 \n
-\nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: https://osmand.net/docs/user/plugins/openplacereviews</string>
+\nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: %1$s</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Uzi test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Ensaluti al OpenPlaceReviews</string>
@@ -4787,7 +4785,7 @@
     <string name="map_widget_camera_tilt_desc">Fenestraĵo montranta fotilan klinecon en 2,5-dimensia vido. Implicite estas 90° (neniu klineco).</string>
     <string name="distance_by_tap_use_description">Frapetu la ekranon per unu fingro por vidigi distancon inter via nuna pozicio kaj la elektita punkto.
 \nFrapetu la ekranon per du fingroj por vidigi distancon inter la elektitaj punktoj.</string>
-    <string name="rotate_map_manual_opt">Fiksita (permane turnita)</string>
+    <string name="rotate_map_manual_opt">Permane turnita</string>
     <string name="map_center_widget">Koordinatoj: map-centro</string>
     <string name="map_widget_altitude_map_center">Altitudo: map-centro</string>
     <string name="map_widget_altitude_current_location_desc">Vidigas altecon super la marnivelo por la nuna pozicio.</string>
@@ -4905,7 +4903,7 @@
 \n • fenestraĵojn agordiĝantajn laŭ loko
 \n • egal-temperatur-liniojn kaj egal-aerprem-liniojn.
 \n
-\nDatumoj estas liverataj de «Global Forecast System» (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nDatumoj estas liverataj de «Global Forecast System» (GFS, %1$s ).</string>
     <string name="rendering_attr_depthContourWidth_name">Larĝo de kurboj</string>
     <string name="rendering_attr_depthContourColorScheme_name">Kolor-skemo de kurboj</string>
     <string name="empty_screen_view_selected_weather_data">Aktivigu por vidigi elektitajn veterajn datumojn sur la mapo.</string>
@@ -5196,8 +5194,6 @@
     <string name="map_3d_mode_description">Frapetu kaj ŝovu la mapon supren/malsupren per du fingroj por alĝustigi ĝian klinecon.</string>
     <string name="no_poi_for_category">Ne trovis interesejon</string>
     <string name="rendering_value_sector1_name">Sektoro 1</string>
-    <string name="rendering_value_sacScale_name">SAC-skalo</string>
-    <string name="rendering_value_caiScale_name">CAI-skalo</string>
     <string name="map_3d_mode_action">3D-reĝimo</string>
     <string name="rendering_attr_lightDetail_name">Detaloj de lumo</string>
     <string name="rendering_attr_lightDetail_description">Implicite: nomo de marmarko (karaktero, grupo, periodo); elektu pliajn informojn pri sektoroj 1–3 aŭ pri karaktero de sektoro 1,2,3,4,5</string>
@@ -5234,7 +5230,6 @@
     <string name="revolutions_per_minute_unit">Rivoluoj/min</string>
     <string name="shared_string_close_the_dialog">Fermi la fenestron</string>
     <string name="relief_3d">3-dimensia reliefo</string>
-    <string name="free_mode">Libera reĝimo</string>
     <string name="terrain_map">Terena mapo</string>
     <string name="relief_3d_description">Havigu kaj vidu skalitan modelon de via najbaraĵo aŭ de la tuta kontinento.</string>
     <string name="osmand_cloud_deleted_account_descr">Forigis konton kaj ĉiujn datumojn el OsmAnd-Nubo.</string>
@@ -5262,4 +5257,79 @@
     <string name="verify_account">Verigi vian konton</string>
     <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pli la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
     <string name="terrain_category_description">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
+    <string name="routing_attr_allow_via_ferrata_description">Monta vojo kun fiksitaj ŝnuregoj, teniloj, ŝtupetaroj kaj pontetoj.</string>
+    <string name="free_favorites_backup_description">Akiru konton OsmAnd-Nubo por havigi senpagan sekurkopion de ŝatataj punktoj kaj agordoj.</string>
+    <string name="free_favorites_backup">Senpaga sekurkopio de ŝatataj punktoj</string>
+    <string name="get_osmand_cloud">Akiri OsmAnd-Nubon</string>
+    <string name="folder_export_empty_error">Nenio por elporti, dosierujo estas malplena</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Uzi rastruman «sqltiedb» por dekliveco kaj nivelombrumo</string>
+    <string name="cache_size">Grando de kaŝmemoro</string>
+    <string name="shared_string_avoid">Eviti</string>
+    <string name="may_be_used_if_there_is_shortcut">Povas esti uzata se pli mallonga kurso</string>
+    <string name="release_4_5">• sentiloj BLE/ANT+: refaris konektadon, konservadon kaj montradon de ricevitaj datumoj al GPX
+\n
+\n• senpaga sekurkopio de ŝatataj punktoj kaj agordoj al OsmAnd-Nubo
+\n
+\n• nova formo de terenaj mapoj kun 3-dimensia reliefo
+\n
+\n• administri spurojn: plibonigita fasado, aldonis ordigadon kaj subtenon por ingitaj dosierujoj
+\n
+\n• Android Auto: nova komenca ekrano kun aliro al ŝatataj punktoj, spuroj kaj kategorioj de interesejoj
+\n
+\n• la samaj disponeblaj fenestraĵoj por supra kaj malsupra paneloj
+\n
+\n• nova profilo “Vagonaro” por kalkuli fervojajn kursojn
+\n
+\n• nivelkurboj kun ĉiuj map-fonto
+\n
+\n• etendita listo de implicitaj agoj por eksteraj klavaroj
+\n
+\n• propraj dosieroj de navigo, eblo superskribi aŭ forigi
+\n
+\n• eblo “Anonci devojiĝon de la kurso”
+\n
+\n• komenca ekrano: eblo restarigi agordaron de OsmAnd el dosiero
+\n
+\n• aldonis klasojn de danĝeraj materialoj por navigo per kamiono en Usono
+\n
+\n• aldonis subtenon por viaferataojn por piedirada navigo
+\n
+\n• vidigo de malfaciloj de kursoj laŭ la CAI-skalo
+\n
+\n• riparis elektilon de lingvo
+\n
+\n• aldonis subtenon por etosaj emblemoj
+\n
+\n• OsmAnd-Nubo: eblo por forigi konton
+\n
+\n• alirebleco: butona tuŝ-areo ŝanĝita al 48 dp; riparita problemo pri videbla uzant-fasado por ekranlegiloj
+\n
+\n• refaritaj japanaj voĉaj anoncoj
+\n
+\n• refaritaj ŝanĝoj de altitudo kaj pritakso de dekliveco
+\n
+\n</string>
+    <string name="free_account">Senpaga konto</string>
+    <string name="routing_attr_allow_via_ferrata_name">Sekurigita vojo (viaferatao)</string>
+    <string name="free_settings_backup">Senpaga sekurkopio de agordoj</string>
+    <string name="free_ride">Libera veturo</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Eksplodaĵoj</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasoj</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brulemaj likvoj</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brulemaj solidoj</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oksidantoj kaj organikaj peroksidoj</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Toksaj kaj biodanĝeraj substancoj</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diversaj</string>
+    <string name="shared_string_class">Klaso</string>
+    <string name="dangerous_goods_description">Sur kelkaj vojoj kaj tuneloj transporto de danĝeraj materialoj estas malpermesata.</string>
+    <string name="dangerous_goods">Danĝeraj materialoj</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktivaj substancoj</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Korodaj substancoj</string>
+    <string name="rendering_value_sacScale_description">laŭ skalo de Svisa Alpisma Klubo</string>
+    <string name="rendering_value_caiScale_description">laŭ skalo de Itala Alpisma Klubo</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_name">SAC/CAS</string>
+    <string name="rendering_attr_alpineHiking_name">Klasifiko de facileco</string>
+    <string name="rendering_attr_alpineHiking_description">Maniero klasifiki facilecon de montgrimpadaj kursoj.</string>
 </resources>

@@ -3865,7 +3865,7 @@
     <string name="poi_wildlife_crossing_bat_tunnel">Flagermustunnel</string>
     <string name="poi_wildlife_crossing_bat_bridge">Flagermusbro</string>
     <string name="poi_swimming_area">Svømmeområde</string>
-    <string name="poi_weightbridge">Vægtbro</string>
+    <string name="poi_weighbridge">Vægtbro</string>
     <string name="poi_ranger_station">Rangerstation</string>
     <string name="poi_water_source_well">Brønd</string>
     <string name="poi_water_source_powered_pump">Motordrevet pumpe</string>
@@ -4032,4 +4032,7 @@
     <string name="poi_tunnel_name">Tunnelnavn</string>
     <string name="poi_surface_carpet">Overflade: tæppe</string>
     <string name="poi_surface_rubber">Overflade: gummi</string>
+    <string name="poi_sac_scale">SAC-skala</string>
+    <string name="poi_assembly_point">Samlingssted</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Alle undtagen læskure til offentlig transport</string>
 </resources>

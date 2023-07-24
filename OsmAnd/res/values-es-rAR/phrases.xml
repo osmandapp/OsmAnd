@@ -3866,7 +3866,7 @@
     <string name="poi_water_source_tap">Canilla;Grifo</string>
     <string name="poi_water_source_water_works">Planta potabilizadora</string>
     <string name="poi_water_source_tube_well">Pozo entubado</string>
-    <string name="poi_weightbridge">Báscula puente;Báscula de camiones;Balanza</string>
+    <string name="poi_weighbridge">Báscula puente;Báscula de camiones;Balanza</string>
     <string name="poi_ranger_station">Estación de guardabosques</string>
     <string name="poi_lavoir">Lavadero público de ropa</string>
     <string name="poi_waste_transfer_station">Estación de transferencia de residuos</string>
@@ -4592,4 +4592,6 @@
     <string name="poi_surface_carpet">Superficie: alfombra</string>
     <string name="poi_surface_rubber">Superficie: goma, caucho</string>
     <string name="poi_second_hand_filter">Artículos usados</string>
+    <string name="poi_assembly_point">Punto de encuentro;Punto de reunión</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Todo excepto refugios de transporte público</string>
 </resources>

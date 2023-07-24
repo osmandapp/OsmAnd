@@ -197,7 +197,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		searchButton.setOnClickListener((v) -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, true);
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, true, isUsedOnMap());
 			}
 		});
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
@@ -350,7 +350,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void showSortByDialog() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SortByBottomSheet.showInstance(activity.getSupportFragmentManager(), this);
+			FragmentManager manager = activity.getSupportFragmentManager();
+			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
 		}
 	}
 
@@ -596,7 +597,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		PopUpMenu.showSystemMenu(displayData);
+		PopUpMenu.show(displayData);
 	}
 
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {

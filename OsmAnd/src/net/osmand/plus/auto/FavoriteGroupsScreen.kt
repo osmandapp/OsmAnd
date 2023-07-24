@@ -11,8 +11,7 @@ import net.osmand.plus.utils.AndroidUtils
 
 class FavoriteGroupsScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
@@ -20,7 +19,7 @@ class FavoriteGroupsScreen(
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.shared_string_favorites))
-            .setActionStrip(ActionStrip.Builder().addAction(settingsAction).build())
+            .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())
             .setHeaderAction(Action.BACK)
             .build()
     }
@@ -70,7 +69,6 @@ class FavoriteGroupsScreen(
             FavoritesScreen(
                 carContext,
                 settingsAction,
-                surfaceRenderer,
                 group))
     }
 

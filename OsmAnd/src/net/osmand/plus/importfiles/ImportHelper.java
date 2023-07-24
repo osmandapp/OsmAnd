@@ -496,7 +496,8 @@ public class ImportHelper {
 				int tracksCount = result.getTracksCount();
 				if (singleImport && (tracksCount > 1 && tracksCount < 50)) {
 					FragmentManager manager = activity.getSupportFragmentManager();
-					ImportTracksFragment.showInstance(manager, result, name, destinationDir.getName(), gpxImportListener, fileSize);
+					ImportTracksFragment.showInstance(manager, result, name,
+							destinationDir.getAbsolutePath(), gpxImportListener, fileSize);
 				} else {
 					importAsOneTrack(result, name, destinationDir, showSnackbar, onGpxImport);
 				}

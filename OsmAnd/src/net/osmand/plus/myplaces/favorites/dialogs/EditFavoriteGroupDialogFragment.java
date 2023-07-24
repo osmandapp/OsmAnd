@@ -195,7 +195,8 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 					b.setMessage(getString(R.string.favorite_confirm_delete_group, groupName, group.getPoints().size()));
 					b.setNeutralButton(R.string.shared_string_cancel, null);
 					b.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
-						helper.deleteGroup(group);
+						helper.deleteGroup(group, false);
+						helper.saveCurrentPointsIntoFile(true);
 						updateParentFragment();
 						dismiss();
 					});

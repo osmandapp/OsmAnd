@@ -20,19 +20,18 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
-import net.osmand.data.RotatedTileBox
 import net.osmand.plus.R
 import net.osmand.plus.mapmarkers.MapMarker
+import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
+import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
-import kotlin.math.max
-import kotlin.math.min
 
 class MapMarkersScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private var initialCompassMode: CompassMode? = null
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -40,6 +39,9 @@ class MapMarkersScreen(
                 super.onDestroy(owner)
                 app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(null)
                 app.osmandMap.mapView.backToLocation()
+                initialCompassMode?.let {
+                    app.mapViewTrackingUtilities.switchCompassModeTo(it)
+                }
             }
         })
     }
@@ -52,13 +54,14 @@ class MapMarkersScreen(
         val location = app.settings.lastKnownMapLocation
         app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
         val mapRect = QuadRect()
+        if (!Algorithms.isEmpty(markers)) {
+            initialCompassMode = app.settings.compassMode
+            app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
+        }
         for (marker in markers) {
             val longitude = marker.longitude
             val latitude = marker.latitude
-            mapRect.left = if(mapRect.left == 0.0) longitude else min(mapRect.left, longitude)
-            mapRect.right = max(mapRect.right, longitude)
-            mapRect.bottom = if(mapRect.bottom == 0.0) latitude else min(mapRect.bottom, latitude)
-            mapRect.top = max(mapRect.top, latitude)
+            Algorithms.extendRectToContainPoint(mapRect, longitude, latitude)
             val title = marker.getName(app)
             val markerColor = MapMarker.getColorId(marker.colorIndex)
             val icon = CarIcon.Builder(
@@ -89,24 +92,12 @@ class MapMarkersScreen(
             }
             listBuilder.addItem(rowBuilder.build())
         }
-        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
-            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
-            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
-        }
-        val actionStripBuilder = ActionStrip.Builder()
-        actionStripBuilder.addAction(
-            Action.Builder()
-                .setIcon(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(
-                            carContext, R.drawable.ic_action_search_dark)).build())
-                .setOnClickListener { openSearch() }
-                .build())
+        adjustMapToRect(location, mapRect)
         return PlaceListNavigationTemplate.Builder()
             .setItemList(listBuilder.build())
             .setTitle(app.getString(R.string.map_markers))
+            .setActionStrip(ActionStrip.Builder().addAction(createSearchAction()).build())
             .setHeaderAction(Action.BACK)
-            .setActionStrip(actionStripBuilder.build())
             .build()
     }
 
@@ -117,14 +108,7 @@ class MapMarkersScreen(
             mapMarker.point.longitude)
         result.objectType = ObjectType.MAP_MARKER
         result.`object` = mapMarker
-        openRoutePreview(settingsAction, surfaceRenderer, result)
+        openRoutePreview(settingsAction, result)
     }
 
-    private fun openSearch() {
-        screenManager.pushForResult(
-            SearchScreen(
-                carContext,
-                settingsAction,
-                surfaceRenderer)) { }
-    }
 }

@@ -32,6 +32,8 @@ import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.importfiles.MultipleTracksImportListener;
+import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
+import net.osmand.plus.importfiles.ui.FileExistBottomSheet.SaveExistingFileListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
@@ -144,7 +146,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.showSystemMenu(displayData);
+		PopUpMenu.show(displayData);
 	}
 
 	public void showItemOptionsMenu(@NonNull TrackItem trackItem, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
@@ -217,7 +219,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.showSystemMenu(displayData);
+		PopUpMenu.show(displayData);
 	}
 
 	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups,
@@ -292,7 +294,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
-		PopUpMenu.showSystemMenu(displayData);
+		PopUpMenu.show(displayData);
 	}
 
 	private void exportTrackItem(@NonNull OsmEditingPlugin plugin, @NonNull TrackItem trackItem, @NonNull BaseTrackFolderFragment fragment) {
@@ -422,13 +424,15 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	}
 
 	public boolean isLoadingTracks() {
-		return asyncLoader == null || asyncLoader.getStatus() != Status.RUNNING;
+		return asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING;
 	}
 
 	@Override
 	public void onFileMove(@Nullable File src, @NonNull File dest) {
-		if (dest.exists()) {
-			app.showToastMessage(R.string.file_with_name_already_exists);
+		if (src != null && dest.exists()) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			SaveExistingFileListener listener = getSaveFileListener(src, dest);
+			FileExistBottomSheet.showInstance(manager, dest.getName(), listener);
 		} else if (src != null && FileUtils.renameGpxFile(app, src, dest) != null) {
 			reloadTracks();
 		} else {
@@ -436,9 +440,51 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		}
 	}
 
+	@NonNull
+	private SaveExistingFileListener getSaveFileListener(@NonNull File src, @NonNull File dest) {
+		return new SaveExistingFileListener() {
+			@Override
+			public void saveExistingFile(boolean overwrite) {
+				if (moveFile(overwrite)) {
+					reloadTracks();
+				} else {
+					app.showToastMessage(R.string.file_can_not_be_moved);
+				}
+			}
+
+			private boolean moveFile(boolean overwrite) {
+				if (overwrite) {
+					FileUtils.removeGpxFile(app, dest);
+					return FileUtils.renameGpxFile(app, src, dest) != null;
+				} else {
+					File destFile = dest;
+					File destDir = destFile.getParentFile();
+					while (destFile.exists()) {
+						destFile = new File(destDir, AndroidUtils.createNewFileName(destFile.getName()));
+					}
+					return FileUtils.renameGpxFile(app, src, destFile) != null;
+				}
+			}
+		};
+	}
+
 	public void moveTracks(@NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
-	                       @NonNull File dest, @Nullable CallbackWithObject<Void> callback) {
-		MoveTrackFoldersTask task = new MoveTrackFoldersTask(activity, dest, items, groups, callback);
+	                       @NonNull File destDir, @Nullable CallbackWithObject<Void> callback) {
+		MoveTrackFoldersTask task = new MoveTrackFoldersTask(activity, destDir, items, groups, trackItems -> {
+			for (TrackItem item : trackItems) {
+				File src = item.getFile();
+				if (src != null) {
+					File dest = new File(destDir, src.getName());
+					FragmentManager manager = activity.getSupportFragmentManager();
+					SaveExistingFileListener listener = getSaveFileListener(src, dest);
+					FileExistBottomSheet.showInstance(manager, dest.getName(), listener);
+				}
+			}
+			if (callback != null) {
+				callback.processResult(null);
+			}
+			return true;
+		});
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 

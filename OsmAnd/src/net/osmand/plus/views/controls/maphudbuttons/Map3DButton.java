@@ -29,6 +29,7 @@ public class Map3DButton extends MapButton {
 
 	private final ElevationListener elevationListener;
 	private final AnimateDraggingMapThread animateDraggingMapThread;
+	private final ViewGroup defaultContainer;
 	private boolean specialPosition;
 
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
@@ -36,6 +37,7 @@ public class Map3DButton extends MapButton {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
 		animateDraggingMapThread = mapView.getAnimatedDraggingThread();
+		defaultContainer = (ViewGroup) fabButton.getParent();
 
 		updateButton(!isDefaultElevationAngle());
 		setRoundTransparentBackground();
@@ -122,7 +124,6 @@ public class Map3DButton extends MapButton {
 		if (parent != null) {
 			specialPosition = false;
 			parent.removeView(view);
-			ViewGroup defaultContainer = mapActivity.findViewById(R.id.map_3d_button);
 			if (defaultContainer != null) {
 				int btnSizePx = app.getResources().getDimensionPixelSize(R.dimen.map_button_size);
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);

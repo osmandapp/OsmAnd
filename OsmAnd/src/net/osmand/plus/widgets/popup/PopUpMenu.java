@@ -116,31 +116,39 @@ public class PopUpMenu {
 	}
 
 	public static void show(@NonNull PopUpMenuDisplayData displayData) {
-		PopUpMenu popUpMenu = new PopUpMenu(displayData);
-		popUpMenu.createListPopupWindow().show();
-	}
-
-	public static void showSystemMenu(@NonNull PopUpMenuDisplayData displayData) {
-		View view = displayData.anchorView;
-		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-		MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
-		menuBuilder.setOptionalIconsVisible(true);
-		MenuCompat.setGroupDividerEnabled(menuBuilder, true);
-
-		int groupId = 1;
-		for (int i = 0; i < displayData.menuItems.size(); i++) {
-			PopUpMenuItem popupMenuItem = displayData.menuItems.get(i);
-			if (popupMenuItem.shouldShowTopDivider()) {
-				groupId++;
+		boolean useCustomPopUp = false;
+		for (PopUpMenuItem item : displayData.menuItems) {
+			if (item.isShowCompoundBtn()) {
+				useCustomPopUp = true;
+				break;
 			}
-			MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
-			menuItem.setIcon(popupMenuItem.getIcon());
-			menuItem.setOnMenuItemClickListener(item -> {
-				popupMenuItem.getOnClickListener().onClick(view);
-				popupMenu.dismiss();
-				return true;
-			});
 		}
-		popupMenu.show();
+
+		if (useCustomPopUp) {
+			PopUpMenu popUpMenu = new PopUpMenu(displayData);
+			popUpMenu.createListPopupWindow().show();
+		} else {
+			View view = displayData.anchorView;
+			PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+			MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
+			menuBuilder.setOptionalIconsVisible(true);
+			MenuCompat.setGroupDividerEnabled(menuBuilder, true);
+
+			int groupId = 1;
+			for (int i = 0; i < displayData.menuItems.size(); i++) {
+				PopUpMenuItem popupMenuItem = displayData.menuItems.get(i);
+				if (popupMenuItem.shouldShowTopDivider()) {
+					groupId++;
+				}
+				MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
+				menuItem.setIcon(popupMenuItem.getIcon());
+				menuItem.setOnMenuItemClickListener(item -> {
+					popupMenuItem.getOnClickListener().onClick(view);
+					popupMenu.dismiss();
+					return true;
+				});
+			}
+			popupMenu.show();
+		}
 	}
 }

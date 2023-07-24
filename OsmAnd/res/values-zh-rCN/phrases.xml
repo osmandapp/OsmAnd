@@ -1893,7 +1893,7 @@
     <string name="poi_enforcement_check">强制执行：检查</string>
     <string name="poi_enforcement_maxheight">强制执行：最大高度</string>
     <string name="poi_power_terminal">电力终端</string>
-    <string name="poi_weightbridge">地磅秤；卡车称</string>
+    <string name="poi_weighbridge">地磅秤；卡车称</string>
     <string name="poi_kiln">窑</string>
     <string name="poi_enforcement_maxspeed">强制执行：最高速度</string>
     <string name="poi_information_terminal">终端机</string>

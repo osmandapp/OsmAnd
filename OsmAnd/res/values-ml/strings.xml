@@ -2098,8 +2098,6 @@
 \n%1$s</string>
     <string name="recording_open_external_player">"എക്സ്ടേണല്‍  പ്ലെയർ തുറക്കുക"</string>
     <string name="recording_delete_confirm">ഈ ഇനം ഇല്ലാതാക്കണോ\?</string>
-    <string name="rendering_attr_alpineHiking_name">അൽപൈൻ ഹൈക്കിംഗ് സ്കെയിൽ (എസ്എസി)</string>
-    <string name="rendering_attr_alpineHiking_description">SAC സ്കെയിൽ അനുസരിച്ച് പാതകൾ റെന്‍ഡര്‍ ചെയ്യുക.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">ഹൈക്കിംഗ് സിംബല്‍ ഓവർലേ</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC ട്രെയ്സ് അനുസരിച്ച് പാതകൾ റെണ്ടര്‍ ചെയ്യുക.</string>
     <string name="search_villages_and_postcodes">കൂടുതൽ ഗ്രാമങ്ങൾ / പോസ്റ്റ് കോഡ് തിരയുക</string>

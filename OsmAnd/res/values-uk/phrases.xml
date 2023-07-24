@@ -3871,7 +3871,7 @@
     <string name="poi_water_source_lake">Озеро</string>
     <string name="poi_water_source_river">Річка</string>
     <string name="poi_ranger_station">Лісництво</string>
-    <string name="poi_weightbridge">Автомобільні ваги;Зважування вантажівок</string>
+    <string name="poi_weighbridge">Автомобільні ваги;Зважування вантажівок</string>
     <string name="poi_lavoir">Громадська пральня</string>
     <string name="poi_waste_transfer_station">Станція перевезення відходів</string>
     <string name="poi_swimming_area">Плавальний майданчик</string>
@@ -4592,4 +4592,6 @@
     <string name="poi_surface_acrylic">Поверхня: акрилова</string>
     <string name="poi_surface_plastic">Поверхня: пластик</string>
     <string name="poi_surface_rubber">Поверхня: гума</string>
+    <string name="poi_assembly_point">Точка збору</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Усі, крім зупинок громадського транспорту</string>
 </resources>

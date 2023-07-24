@@ -3,17 +3,14 @@ package net.osmand.plus.auto
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
-import androidx.car.app.Screen
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
-import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 
 class LandingScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
 
@@ -34,14 +31,7 @@ class LandingScreen(
         val actionStripBuilder = ActionStrip.Builder()
         updateCompass()
         actionStripBuilder.addAction(settingsAction)
-        actionStripBuilder.addAction(
-            Action.Builder()
-                .setIcon(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(
-                            carContext, R.drawable.ic_action_search_dark)).build())
-                .setOnClickListener { openSearch() }
-                .build())
+        actionStripBuilder.addAction(createSearchAction())
         val mapActionStripBuilder = ActionStrip.Builder()
             .addAction(
                 Action.Builder(Action.PAN)
@@ -55,7 +45,7 @@ class LandingScreen(
                                 R.drawable.ic_zoom_in))
                             .build())
                     .setOnClickListener {
-                        surfaceRenderer.handleScale(
+                        app.carNavigationSession?.navigationCarSurface?.handleScale(
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.ZOOM_IN_BUTTON_SCALE_FACTOR)
@@ -70,7 +60,7 @@ class LandingScreen(
                                 R.drawable.ic_zoom_out))
                             .build())
                     .setOnClickListener {
-                        surfaceRenderer.handleScale(
+                        app.carNavigationSession?.navigationCarSurface?.handleScale(
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.ZOOM_OUT_BUTTON_SCALE_FACTOR)
@@ -93,13 +83,6 @@ class LandingScreen(
         compassResId = compassMode.getIconId(nightMode)
     }
 
-    private fun openSearch() {
-        screenManager.pushForResult(
-            SearchScreen(
-                carContext,
-                settingsAction,
-                surfaceRenderer)) { obj: Any? -> }
-    }
 
     private fun onCategoryClick(category: PlaceCategory) {
         when (category) {
@@ -109,47 +92,42 @@ class LandingScreen(
                         NavigationScreen(
                             carContext,
                             settingsAction,
-                            it,
-                            surfaceRenderer
+                            it
                         ))
                 }
 
             PlaceCategory.FAVORITES -> screenManager.push(
                 FavoriteGroupsScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction
+                ))
 
             PlaceCategory.HISTORY -> screenManager.push(
                 HistoryScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
 
             PlaceCategory.MAP_MARKERS -> screenManager.push(
                 MapMarkersScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
 
             PlaceCategory.POI -> screenManager.push(
                 POICategoriesScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
 
             PlaceCategory.TRACKS -> screenManager.push(
                 TracksFoldersScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
         }
     }
 
     internal enum class PlaceCategory(
         @DrawableRes val iconId: Int,
         @StringRes val titleId: Int) {
-        FREE_MODE(R.drawable.ic_map, R.string.free_mode),
+        FREE_MODE(R.drawable.ic_action_start_navigation, R.string.free_ride),
         HISTORY(R.drawable.ic_action_history, R.string.shared_string_history),
         POI(R.drawable.ic_action_info_dark, R.string.poi_categories),
         FAVORITES(R.drawable.ic_action_favorite, R.string.shared_string_favorites),

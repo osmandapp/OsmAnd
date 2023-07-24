@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
@@ -25,9 +29,12 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesLis
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import org.apache.commons.logging.Log;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
@@ -99,6 +106,13 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 					AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 					if (plugin != null) {
 						plugin.indexingFiles(true, true);
+					}
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+						if (mapInfoLayer != null) {
+							mapInfoLayer.recreateAllControls(activity);
+						}
 					}
 				}
 				importFinished(succeed, needRestart, items);

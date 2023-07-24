@@ -4,14 +4,19 @@ import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_S
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
@@ -28,7 +33,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.RecordingTrackViewHol
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -55,7 +59,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	protected int getLayoutId() {
-		return R.layout.recycler_view_fragment;
+		return R.layout.available_tracks_fragment;
 	}
 
 
@@ -84,6 +88,25 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	}
 
 	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+		if (view != null) {
+			setupSwipeRefresh(view);
+		}
+		return view;
+	}
+
+	private void setupSwipeRefresh(@NonNull View view) {
+		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
+		swipeRefresh.setColorSchemeColors(ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange));
+		swipeRefresh.setOnRefreshListener(() -> {
+			reloadTracks();
+			swipeRefresh.setRefreshing(false);
+		});
+	}
+
+	@Nullable
 	public TrackFoldersHelper getTrackFoldersHelper() {
 		return trackFoldersHelper;
 	}
@@ -99,7 +122,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		super.onResume();
 
 		if (!trackFoldersHelper.isImporting()) {
-			if (rootFolder == null && trackFoldersHelper.isLoadingTracks()) {
+			if (rootFolder == null && !trackFoldersHelper.isLoadingTracks()) {
 				reloadTracks();
 			} else {
 				updateContent();
@@ -110,6 +133,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		updateEnable = true;
 		startHandler();
 		restoreState(getArguments());
+		updateProgressVisibility();
 	}
 
 	private void startHandler() {
@@ -141,7 +165,8 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		if (itemId == R.id.action_search) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, false);
+				FragmentManager manager = activity.getSupportFragmentManager();
+				SearchTrackItemsFragment.showInstance(manager, this, false, isUsedOnMap());
 			}
 		}
 		if (itemId == R.id.action_menu) {
@@ -166,7 +191,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		items.addAll(rootFolder.getTrackItems());
 
 		if (rootFolder.getFlattenedTrackItems().size() != 0) {
-			items.add(TrackFolderAnalysis.getFolderAnalysis(rootFolder));
+			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;
 	}
@@ -214,7 +239,13 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		updateProgressVisibility(false);
 	}
 
-	public void updateProgressVisibility(boolean visible) {
+	private void updateProgressVisibility() {
+		boolean importing = trackFoldersHelper.isImporting();
+		boolean loadingTracks = trackFoldersHelper.isLoadingTracks();
+		updateProgressVisibility(importing || loadingTracks);
+	}
+
+	private void updateProgressVisibility(boolean visible) {
 		MyPlacesActivity activity = getMyActivity();
 		if (activity != null) {
 			activity.setSupportProgressBarIndeterminateVisibility(visible);
@@ -224,7 +255,8 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 	private void openTrackFolder(@NonNull TrackFolder trackFolder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			TrackFolderFragment.showInstance(activity.getSupportFragmentManager(), trackFolder, this);
+			FragmentManager manager = activity.getSupportFragmentManager();
+			TrackFolderFragment.showInstance(manager, trackFolder, this);
 		}
 	}
 

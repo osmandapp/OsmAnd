@@ -1,5 +1,6 @@
 package net.osmand.plus.widgets.alert;
 
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
 import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
 import android.content.Context;
@@ -67,11 +68,12 @@ public class CustomAlert {
 			editText.setText(initialText);
 		}
 		editText.requestFocus();
-
-		AlertDialog dialog = builder.show();
-		applyAdditionalParameters(dialog, data);
-
 		AndroidUtils.softKeyboardDelayed(activity, editText);
+
+		AlertDialog dialog = builder.create();
+		dialog.getWindow().setSoftInputMode(SOFT_INPUT_STATE_VISIBLE);
+		applyAdditionalParameters(dialog, data);
+		dialog.show();
 	}
 
 	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,

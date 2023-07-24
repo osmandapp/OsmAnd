@@ -3859,7 +3859,7 @@
     <string name="poi_vaccination_covid19">Vacinação: COVID19</string>
     <string name="poi_health_specialty_vaccination_yes">Vacinação</string>
     <string name="poi_waste_transfer_station">Estação de transferência de resíduos</string>
-    <string name="poi_weightbridge">Báscula-ponte (balança de veículos);Ponte báscula</string>
+    <string name="poi_weighbridge">Báscula-ponte (balança de veículos);Ponte báscula</string>
     <string name="poi_water_source_lake">Lago</string>
     <string name="poi_water_source_river">Rio</string>
     <string name="poi_water_source_water_tank">Tanque de água</string>
@@ -4592,4 +4592,6 @@
     <string name="poi_surface_carpet">Superfície: alcatifa</string>
     <string name="poi_surface_plastic">Superfície: plástico</string>
     <string name="poi_surface_rubber">Superfície: borracha</string>
+    <string name="poi_assembly_point">Ponto de encontro</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Todos exceto abrigos de transportes públicos</string>
 </resources>

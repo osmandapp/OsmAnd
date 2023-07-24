@@ -667,7 +667,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	}
 
 	private void setupGetOsmAndCloudButton(@NonNull View view) {
-		View dismissButton = view.findViewById(R.id.dismiss_button);
+		View dismissButtonContainer = view.findViewById(R.id.dismiss_button_container);
 		UiUtilities iconsCache = app.getUIUtilities();
 		ImageView closeBtn = view.findViewById(R.id.btn_close);
 		closeBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_cancel, isNightMode()));
@@ -683,15 +683,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 		});
 
-		int buttonTextId = R.string.get_osmand_cloud;
-		UiUtilities.setupDialogButton(nightMode, dismissButton, SECONDARY, buttonTextId);
-		dismissButton.setOnClickListener(v -> {
+		dismissButtonContainer.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				((MyPlacesActivity) getActivity()).showOsmAndCloud(this);
 			}
 		});
-		AndroidUiHelper.updateVisibility(dismissButton, true);
 	}
 
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {

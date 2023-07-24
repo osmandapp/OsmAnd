@@ -3872,7 +3872,7 @@
     <string name="poi_swimming_area">Zone de baignade</string>
     <string name="poi_lavoir">Lavoir</string>
     <string name="poi_waste_transfer_station">Station de traitement des déchets</string>
-    <string name="poi_weightbridge">Pont de poids ; Balance de camion</string>
+    <string name="poi_weighbridge">Pont de poids ; Balance de camion</string>
     <string name="poi_ranger_station">Poste de garde forestier</string>
     <string name="poi_conference_centre">Centre de conférence</string>
     <string name="poi_piste_status_closed">Statut de la piste : fermée</string>
@@ -4588,4 +4588,6 @@
     <string name="poi_surface_carpet">Surface : tapis</string>
     <string name="poi_surface_plastic">Surface : plastique</string>
     <string name="poi_draft">Profondeur du chenal</string>
+    <string name="poi_assembly_point">Point d\'assemblage</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Tout sauf abris de transports en commun</string>
 </resources>

@@ -160,7 +160,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	@Override
 	public void onTypeSelected(ExportSettingsType type, boolean selected) {
 		boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		if (type.isAllowedInFreeVersion() && !proAvailable) {
+		if (type.isAllowedInFreeVersion() || proAvailable) {
 			List<Object> items = getItemsForType(type);
 			selectedItemsMap.put(type, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {

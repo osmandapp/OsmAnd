@@ -387,13 +387,13 @@
 \nDescarga las teselas de los mapas directamente, o copialos en la carpeta de datos de OsmAnd como archivos de base de datos SQLite, usando una variedad de herramientas de preparación de mapas de terceros.</string>
     <string name="record_plugin_description">Registra tus viajes o entrenamientos y analiza los datos de velocidad, ascensos y descensos acumulados, el perfil de elevación, etc. Las trazas grabadas pueden archivarse, compartirse, editarse y post-procesarse.
 \n
-\nVéase - https://osmand.net/docs/user/plugins/trip-recording .</string>
+\nVéase - %1$s.</string>
     <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
     <string name="srtm_plugin_description">La información topográfica, como las curvas de nivel, los sombreados y las pendientes, ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y más. La información topográfica en un mapa puede representarse mediante el sombreado de la pendiente, las curvas de nivel y/o el color de la inclinación.
 \n
 \nLos datos subyacentes provienen de SRTM y ASTER.
 \n
-\nVéase - http://osmand.net/docs/user/plugins/contour-lines .</string>
+\nVéase - %1$s.</string>
     <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales.
 \n
 \nEsta vista proporciona, en cualquier nivel de zum del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
@@ -407,7 +407,7 @@
 \nEsta vista puede revertirse desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
     <string name="plugin_nautical_descr">Enriquece el mapa con información sobre rutas náuticas, marcas de navegación náutica, áreas marinas peligrosas, zonas restringidas para navegar o atracar, etc. Para usarlo, descarga los respectivos mapas náuticos y activa el estilo «Mapa náutico» en «Configurar mapa».
 \n
-\nVéase - https://osmand.net/docs/user/plugins/nautical-charts .</string>
+\nVéase - %1$s.</string>
     <string name="plugin_ski_descr">Diseñado para navegar en áreas deportivas de invierno. Vea las pistas de esquí, los remontes, etc. con líneas coloreadas que indican el nivel de complejidad. Para usarlo, activa este complemento, ve a «Configurar mapa» y elige el estilo de mapa «Invierno y esquí».</string>
     <string name="audionotes_plugin_description">Toma notas de audio, fotografía y/o video durante un viaje, usando un botón en el mapa o el menú contextual de la ubicación.</string>
     <string name="osmand_parking_plugin_description">Registra en dónde el vehículo fue estacionado y crea un recordatorio sobre la expiración del mismo. Para colocar el marcador, elige un lugar en el mapa, luego ve a «Acciones» y pulsa «Añadir estacionamiento».</string>
@@ -415,7 +415,7 @@
     <string name="osmand_accessibility_description">Activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Esto facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usando la rueda de desplazamiento para el control del zum, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Haz contribuciones en OpenStreetMap, un proyecto de mapeo de dominio público, global, libre, abierto e impulsado por la comunidad.
 \n
-\nEn nuestro sitio web, puedes encontrar una guía de como colaborar en el mapa - https://osmand.net/docs/user/plugins/osm-editing .</string>
+\nEn nuestro sitio web, puedes encontrar una guía de como colaborar en el mapa - %1$s.</string>
     <string name="osmand_development_plugin_description">Incluye funciones de prueba y depuración de OsmAnd: simula rutas de navegación, monitorea el renderizado de la pantalla, comprueba el rendimiento, etc. El complemento no es necesario para el uso normal de la aplicación.</string>
     <string name="world_ski_missing">Descargar el mapa especial sin conexión para mostrar las instalaciones de esquí.</string>
     <string name="nautical_maps_missing">Descargar el mapa especial sin conexión para mostrar los detalles náuticos.</string>
@@ -675,8 +675,6 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapa estándar</string>
     <string name="download_roads_only_maps">Mapa sólo vial</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino</string>
-    <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
@@ -2067,7 +2065,7 @@
     <string name="rendering_value_low_name">Bajo</string>
     <string name="rendering_attr_contourWidth_description">Anchura de la curva de nivel</string>
     <string name="rendering_attr_contourWidth_name">Anchura de la curva de nivel</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Ocultar agua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Cuerpos de agua</string>
     <string name="configure_screen_quick_action">Acción rápida</string>
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
@@ -3966,7 +3964,7 @@
     <string name="hillshade_slope_contour_lines">Sombreado / Pendiente / Curvas de nivel</string>
     <string name="open_place_reviews_plugin_description">Haz contribuciones al proyecto OpenPlaceReviews, como fotos, reseñas o enlaces sobre lugares públicos como restaurantes, hoteles o museos.
 \n
-\nEn nuestro sitio web, hay una guía de cómo contribuir - https://osmand.net/docs/user/plugins/openplacereviews .</string>
+\nEn nuestro sitio web, hay una guía de cómo contribuir - %1$s.</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
@@ -4676,7 +4674,7 @@
     <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
     <string name="map_widget_true_bearing">Rumbo verdadero</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Oculta las áreas militares</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Áreas militares</string>
     <string name="explore_plans">Explorar planes</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
@@ -4933,7 +4931,7 @@
 \n- widgets basados en la ubicación
 \n- isolíneas de temperatura / presión
 \n
-\nLos datos meteorológicos son provistos por el Global Forecast System (GFS, https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast ).</string>
+\nLos datos meteorológicos son provistos por el Global Forecast System (GFS, %1$s).</string>
     <string name="shared_string_layers">Capas</string>
     <string name="shared_string_weather">Meteorología</string>
     <string name="explore_weather_forecast">Explora el pronóstico meteorológico.</string>
@@ -5227,10 +5225,8 @@
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
     <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="delete_folder_question">¿Borrar carpeta\?</string>
     <string name="delete_folder">Borrar carpeta</string>
     <string name="shared_string_new_track">Nueva traza</string>
@@ -5254,7 +5250,6 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el diálogo</string>
     <string name="terrain_map">Mapa topográfico</string>
-    <string name="free_mode">Modo libre</string>
     <string name="relief_3d">Relieve 3D</string>
     <string name="relief_3d_description">Obtén y observa el modelo a escala de tu barrio o de todo el continente.</string>
     <string name="deleting_complete">Borrado completo</string>
@@ -5337,4 +5332,26 @@
     <string name="shared_string_avoid">Evitar</string>
     <string name="may_be_used_if_there_is_shortcut">Puede usarse si existe un acceso directo</string>
     <string name="free_settings_backup">Copia de seguridad gratuita de los ajustes</string>
+    <string name="free_ride">Paseo libre</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamables</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Sustancias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Sustancias radioactivas</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Varios</string>
+    <string name="dangerous_goods_description">En algunos caminos y túneles se prohíbe el transporte de materiales peligrosos.</string>
+    <string name="dangerous_goods">Mercancías peligrosas</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Sólidos inflamables</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes y peróxidos orgánicos</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Sustancias corrosivas</string>
+    <string name="shared_string_class">Clase</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de clasificación de dificultad para rutas.</string>
+    <string name="shared_string_checked">Revisado</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
+    <string name="shared_string_not_checked">Sin revisar</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
 </resources>

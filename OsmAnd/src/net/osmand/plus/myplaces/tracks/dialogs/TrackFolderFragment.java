@@ -13,10 +13,12 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
@@ -69,6 +71,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		if (view != null) {
 			setupToolbar(view);
 			setupProgressBar(view);
+			setupSwipeRefresh(view);
 		}
 		updateContent();
 		return view;
@@ -76,10 +79,22 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 
 	private void setupProgressBar(@NonNull View view) {
 		progressBar = view.findViewById(R.id.progress_bar);
+		updateProgress();
+	}
 
+	private void updateProgress() {
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		boolean importing = foldersHelper != null && foldersHelper.isImporting();
 		AndroidUiHelper.updateVisibility(progressBar, importing);
+	}
+
+	private void setupSwipeRefresh(@NonNull View view) {
+		SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
+		swipeRefresh.setColorSchemeColors(ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange));
+		swipeRefresh.setOnRefreshListener(() -> {
+			reloadTracks();
+			swipeRefresh.setRefreshing(false);
+		});
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -105,7 +120,8 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), getTargetFragment(), false);
+				FragmentManager manager = activity.getSupportFragmentManager();
+				SearchTrackItemsFragment.showInstance(manager, getTargetFragment(), false, isUsedOnMap());
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_search));
@@ -143,6 +159,7 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		updateProgress();
 		updateActionBar(false);
 		restoreState(getArguments());
 	}
