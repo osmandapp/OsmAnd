@@ -209,11 +209,11 @@ dependencies {
 	//openglImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
 
 	// Comment for local debug
-	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:4.5@aar"
-	opengldebugImplementation "net.osmand:OsmAndCore_android:4.5@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
-	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:4.5@aar"
-	openglImplementation "net.osmand:OsmAndCore_android:4.5@aar"
+	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
+	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'
