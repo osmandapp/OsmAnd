@@ -14,6 +14,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
@@ -21,14 +23,15 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 	private final File destinationFolder;
 	private final Set<TrackItem> trackItems;
 	private final Set<TracksGroup> tracksGroups;
-	private final CallbackWithObject<Void> callback;
+	private final Set<TrackItem> existingTrackItems = new HashSet<>();
+	private final CallbackWithObject<Set<TrackItem>> callback;
 
 
 	public MoveTrackFoldersTask(@NonNull FragmentActivity activity,
 	                            @NonNull File destinationFolder,
 	                            @NonNull Set<TrackItem> trackItems,
 	                            @NonNull Set<TracksGroup> tracksGroups,
-	                            @Nullable CallbackWithObject<Void> callback) {
+	                            @Nullable CallbackWithObject<Set<TrackItem>> callback) {
 		super(activity);
 		this.trackItems = trackItems;
 		this.tracksGroups = tracksGroups;
@@ -62,7 +65,7 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 			File dest = new File(destinationFolder, src.getName());
 			if (src.renameTo(dest)) {
 				dest.setLastModified(System.currentTimeMillis());
-				updateMovedGpx(trackFolder, src, dest);
+				updateMovedGpx(trackFolder.getFlattenedTrackItems(), src, dest);
 			}
 		}
 	}
@@ -72,22 +75,24 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 			File src = trackItem.getFile();
 			if (src != null) {
 				File dest = new File(destinationFolder, src.getName());
-				if (!dest.exists()) {
+				if (dest.exists()) {
+					existingTrackItems.add(trackItem);
+				} else {
 					FileUtils.renameGpxFile(app, src, dest);
 				}
 			}
 		}
 	}
 
-	private void updateMovedGpx(@NonNull TrackFolder trackFolder, @NonNull File srcDir, @NonNull File destDir) {
-		for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+	private void updateMovedGpx(@NonNull List<TrackItem> trackItems, @NonNull File srcDir, @NonNull File destDir) {
+		for (TrackItem trackItem : trackItems) {
 			String path = trackItem.getPath();
 			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
 
 			File srcFile = trackItem.getFile();
 			File destFile = new File(newPath);
 			if (srcFile != null && destFile.exists()) {
-				FileUtils.updateMovedGpx(app, srcFile, destFile);
+				FileUtils.updateRenamedGpx(app, srcFile, destFile);
 			}
 		}
 	}
@@ -97,7 +102,7 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 		hideProgress();
 
 		if (callback != null) {
-			callback.processResult(null);
+			callback.processResult(existingTrackItems);
 		}
 	}
 }
