@@ -24,6 +24,8 @@ import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -32,8 +34,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
@@ -173,6 +176,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@NonNull
 	public Screen onCreateScreen(@NonNull Intent intent) {
 		Log.i(TAG, "In onCreateScreen()");
+		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		settingsAction =
 				new Action.Builder()
 						.setIcon(new CarIcon.Builder(
@@ -183,7 +187,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 								.push(new SettingsScreen(getCarContext())))
 						.build();
 
-		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		if (mapView != null) {
 			navigationCarSurface.setMapView(mapView);
 		}
@@ -192,7 +195,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (CarContext.ACTION_NAVIGATE.equals(action)) {
 			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
 		}
-		landingScreen = new LandingScreen(getCarContext(), settingsAction, navigationCarSurface);
+		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
@@ -251,7 +254,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					new SearchResultsScreen(
 							getCarContext(),
 							settingsAction,
-							navigationCarSurface,
 							query),
 					(obj) -> {
 					});
@@ -292,7 +294,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void createNavigationScreen() {
-		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this, navigationCarSurface);
+		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 		navigationCarSurface.setCallback(navigationScreen);
 	}
 

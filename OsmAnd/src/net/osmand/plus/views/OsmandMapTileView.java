@@ -97,6 +97,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
+	private static final int MIN_ZOOM_LIMIT = 1;
+	private static final int MAX_ZOOM_LIMIT = 17;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -1548,10 +1550,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
-		while (tb.getZoom() < 17 && tb.containsLatLon(top, left) && tb.containsLatLon(bottom, right)) {
+		while (tb.getZoom() < MAX_ZOOM_LIMIT && tb.containsLatLon(top, left) && tb.containsLatLon(bottom, right)) {
 			tb.setZoom(tb.getZoom() + 1);
 		}
-		while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
+		while (tb.getZoom() >= MIN_ZOOM_LIMIT && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
 			tb.setZoom(tb.getZoom() - 1);
 		}
 		if (dy != 0 || dx != 0) {

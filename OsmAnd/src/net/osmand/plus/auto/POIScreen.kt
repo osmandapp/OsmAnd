@@ -21,10 +21,10 @@ import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
-import net.osmand.data.RotatedTileBox
 import net.osmand.plus.R
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchCoreFactory
@@ -32,17 +32,15 @@ import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
-import kotlin.math.max
-import kotlin.math.min
 
 class POIScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer,
     private val group: PoiUIFilter
 ) : BaseOsmAndAndroidAutoSearchScreen(carContext), LifecycleObserver {
     private lateinit var itemList: ItemList
     private var searchRadius = 0.0
+    private var initialCompassMode: CompassMode? = null
 
     init {
         loadPOI()
@@ -51,6 +49,9 @@ class POIScreen(
                 super.onDestroy(owner)
                 app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
                 app.osmandMap.mapView.backToLocation()
+                initialCompassMode?.let {
+                    app.mapViewTrackingUtilities.switchCompassModeTo(it)
+                }
             }
         })
     }
@@ -105,17 +106,20 @@ class POIScreen(
         val location = app.settings.lastKnownMapLocation
         val mapPoint = ArrayList<Amenity>()
         val mapRect = QuadRect()
-        extendRectToContainPoint(mapRect, location)
         searchResults?.let {
             val searchResultsSize = searchResults.size
             val limitedSearchResults =
                 searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
+            if (!Algorithms.isEmpty(limitedSearchResults)) {
+                initialCompassMode = app.settings.compassMode
+                app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
+            }
             for (point in limitedSearchResults) {
                 if (point.`object` is Amenity) {
                     val amenity = point.`object` as Amenity
                     mapPoint.add(amenity)
-                    val amenityLocation = amenity.location
-                    extendRectToContainPoint(mapRect, amenityLocation)
+                    val latLon = amenity.location
+                    Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
                 }
                 val title = point.localeName
                 var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
@@ -147,23 +151,9 @@ class POIScreen(
                     .build())
             }
         }
-        if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
-            val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
-            app.osmandMap.mapView.fitRectToMap(mapRect.left, mapRect.right, mapRect.top, mapRect.bottom, tb.pixWidth, tb.pixHeight, 0)
-        }
+        adjustMapToRect(location, mapRect)
         app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(mapPoint)
     }
-
-	private fun extendRectToContainPoint(mapRect: QuadRect, amenityLocation: LatLon) {
-		mapRect.left = if (mapRect.left == 0.0) amenityLocation.longitude else min(
-			mapRect.left,
-			amenityLocation.longitude)
-		mapRect.right = max(mapRect.right, amenityLocation.longitude)
-		mapRect.bottom = if (mapRect.bottom == 0.0) amenityLocation.latitude else min(
-			mapRect.bottom,
-			amenityLocation.latitude)
-		mapRect.top = max(mapRect.top, amenityLocation.latitude)
-	}
 
     private fun loadPOI() {
         val objectLocalizedName = group.name;
@@ -171,7 +161,7 @@ class POIScreen(
         sr.localeName = objectLocalizedName
         sr.`object` = group
         sr.priority = SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY.toDouble()
-	    sr.priorityDistance = searchRadius
+        sr.priorityDistance = searchRadius
         sr.objectType = ObjectType.POI_TYPE
         searchHelper.completeQueryWithObject(sr)
         loading = true
@@ -182,6 +172,6 @@ class POIScreen(
         result.location = LatLon(point.location.latitude, point.location.longitude)
         result.objectType = ObjectType.POI
         result.`object` = point.`object`
-        openRoutePreview(settingsAction, surfaceRenderer, result)
+        openRoutePreview(settingsAction, result)
     }
 }
