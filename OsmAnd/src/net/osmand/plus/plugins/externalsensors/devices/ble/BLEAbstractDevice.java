@@ -51,7 +51,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
 	protected BluetoothGatt bluetoothGatt;
-	protected String deviceName;
 
 	private final Handler callbackHandler = new Handler();
 	private final Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -85,18 +84,6 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			device.rssi = rssi;
 		}
 		return device;
-	}
-
-	@NonNull
-	@Override
-	@RequiresPermission(Manifest.permission.BLUETOOTH)
-	@SuppressLint("MissingPermission")
-	public String getName() {
-		String name = device != null ? device.getName() : deviceName;
-		if (name == null) {
-			name = getClass().getSimpleName();
-		}
-		return name;
 	}
 
 	@Nullable
@@ -252,7 +239,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 	@SuppressLint("MissingPermission")
 	@Override
 	public boolean connect(@NonNull Context context, @Nullable Activity activity) {
-		if(!AndroidUtils.hasBLEPermission(activity)){
+		if (!AndroidUtils.hasBLEPermission(activity)) {
 			LOG.error("Try to connect " + deviceName + " while no ble permission");
 			return false;
 		}
@@ -265,6 +252,9 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			if (bluetoothGatt != null) {
 				if (bluetoothGatt.connect()) {
 					setCurrentState(DeviceConnectionState.CONNECTING);
+					for (DeviceListener listener : listeners) {
+						listener.onDeviceConnecting(this);
+					}
 					return true;
 				} else {
 					return false;
