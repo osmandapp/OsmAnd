@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="write_bearing_description">Save bearing to each track point while recording</string>
+    <string name="write_bearing">Write Bearing</string>
+    <string name="write_heading_description">Save heading to each track point while recording</string>
+    <string name="write_heading">Write Heading</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_sacScale_description">Swiss Alpine Club</string>
     <string name="rendering_value_caiScale_name">CAI</string>

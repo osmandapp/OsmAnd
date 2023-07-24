@@ -52,6 +52,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
+	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
+	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -71,6 +73,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.MEMORY_ALLOCATED_FOR_ROUTING);
 
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
+		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
+		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();

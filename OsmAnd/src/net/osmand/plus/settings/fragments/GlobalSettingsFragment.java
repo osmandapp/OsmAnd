@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -143,7 +144,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
 			// recreate activity to update locale
 			Activity activity = getActivity();

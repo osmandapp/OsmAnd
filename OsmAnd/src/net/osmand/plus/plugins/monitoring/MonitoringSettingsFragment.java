@@ -104,7 +104,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		setupSaveTrackMinSpeedPref();
 		setupAutoSplitRecordingPref();
 		setupDisableRecordingOnceAppKilledPref();
-		setupSaveHeadingToGpxPref();
 
 		setupTrackStorageDirectoryPref();
 		setupExternalSensorsPref();
@@ -239,11 +238,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	private void setupDisableRecordingOnceAppKilledPref() {
 		SwitchPreferenceEx disableRecordingOnceAppKilled = findPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED.getId());
 		disableRecordingOnceAppKilled.setDescription(getString(R.string.disable_recording_once_app_killed_descrp));
-	}
-
-	private void setupSaveHeadingToGpxPref() {
-		SwitchPreferenceEx saveHeadingToGpx = findPreference(settings.SAVE_HEADING_TO_GPX.getId());
-		saveHeadingToGpx.setDescription(getString(R.string.save_heading_descr));
 	}
 
 	private void setupShowTripRecNotificationPref() {

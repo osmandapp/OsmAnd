@@ -19,8 +19,7 @@ import net.osmand.util.MapUtils
 
 class HistoryScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
@@ -90,14 +89,13 @@ class HistoryScreen(
             historyItem.searchResult.location.longitude)
         result.objectType = ObjectType.RECENT_OBJ
         result.`object` = historyItem.searchResult.`object`
-        openRoutePreview(settingsAction, surfaceRenderer, result)
+        openRoutePreview(settingsAction, result)
     }
 
     private fun openSearch() {
         screenManager.pushForResult(
             SearchScreen(
                 carContext,
-                settingsAction,
-                surfaceRenderer)) { }
+                settingsAction)) { }
     }
 }
