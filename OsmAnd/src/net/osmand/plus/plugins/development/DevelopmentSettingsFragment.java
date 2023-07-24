@@ -19,7 +19,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.bottomsheets.CompoundButtonBooleanBottomSheet;
+import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog;
@@ -35,8 +35,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
-	private static final String WRITE_BEARING = "save_bearing_to_gpx";
-	private static final String WRITE_HEADING = "save_heading_to_gpx";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
@@ -161,17 +159,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	private void setupTripRecordingPrefs() {
-		SwitchPreferenceEx writeBearing = findPreference("save_bearing_to_gpx");
-		writeBearing.setIconSpaceReserved(false);
-		writeBearing.setDescription(R.string.write_bearing_description);
-		writeBearing.setChecked(plugin.WRITE_BEARING.get());
-		writeBearing.setOverrideOnClick(false);
+		SwitchPreferenceEx bearingPref = findPreference(plugin.SAVE_BEARING_TO_GPX.getId());
+		bearingPref.setIconSpaceReserved(false);
+		bearingPref.setDescription(R.string.write_bearing_description);
 
-		SwitchPreferenceEx writeHeading = findPreference("save_heading_to_gpx");
-		writeHeading.setIconSpaceReserved(false);
-		writeHeading.setDescription(R.string.write_heading_description);
-		writeHeading.setChecked(plugin.WRITE_HEADING.get());
-		writeHeading.setOverrideOnClick(false);
+		SwitchPreferenceEx headingPref = findPreference(plugin.SAVE_HEADING_TO_GPX.getId());
+		headingPref.setIconSpaceReserved(false);
+		headingPref.setDescription(R.string.write_heading_description);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {
@@ -277,11 +271,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			if (fragmentManager != null) {
 				ConfirmResetToDefaultBottomSheetDialog.showInstance(fragmentManager, this, R.string.debugging_and_development);
 			}
-		} else if (WRITE_BEARING.equals(prefId) || WRITE_HEADING.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				CompoundButtonBooleanBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, getSelectedAppMode(), getApplyQueryType(), isProfileDependent());
-			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -293,6 +282,21 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			setupMemoryAllocatedForRoutingPref();
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
+		}
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (plugin.SAVE_BEARING_TO_GPX.getId().equals(prefId) || plugin.SAVE_HEADING_TO_GPX.getId().equals(prefId)) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				BooleanRadioButtonsBottomSheet.showInstance(manager, prefId, getApplyQueryType(),
+						this, getSelectedAppMode(), false, isProfileDependent());
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
 		}
 	}
 
@@ -347,6 +351,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			mapActivity.restart();
 		}
 	}
+
 	private void loadNativeLibrary() {
 		FragmentActivity activity = getActivity();
 		if (!NativeOsmandLibrary.isLoaded() && activity != null) {

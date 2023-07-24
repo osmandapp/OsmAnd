@@ -441,10 +441,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				JSONObject json = new JSONObject(pluginsInfo);
 				for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
 					String key = iterator.next();
-					String value = json.optString(key);
-					if (!(key.equals(TRACK_COL_BEARING) && value.equals("NaN"))) {
-						extensions.put(key, json.optString(key));
-					}
+					extensions.put(key, json.optString(key));
 				}
 				return extensions;
 			} catch (JSONException e) {
@@ -490,12 +487,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void updateLocation(net.osmand.Location location, Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-		if (heading != null && devPlugin != null && devPlugin.WRITE_HEADING.get()) {
-			heading = MapUtils.normalizeDegrees360(heading);
-		} else {
-			heading = NO_HEADING;
-		}
+
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		boolean writeHeading = plugin != null && plugin.SAVE_HEADING_TO_GPX.get();
+		heading = heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : NO_HEADING;
+
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
@@ -527,10 +523,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (record) {
 			JSONObject json = new JSONObject();
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
-			if (location.hasBearing()) {
+
+			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
+			if (writeBearing && location.hasBearing()) {
 				try {
-					float bearing = devPlugin != null && devPlugin.WRITE_BEARING.get() ? location.getBearing() : Float.NaN;
-					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(bearing));
+					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);
 				}
