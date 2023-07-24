@@ -5323,4 +5323,25 @@
     <string name="free_settings_backup">Pencadangan Pengaturan Gratis</string>
     <string name="routing_attr_allow_via_ferrata_description">Rute gunung yang dilengkapi dengan kabel tetap, tiang, tangga, dan jembatan.</string>
     <string name="free_ride">Perjalanan gratis</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Zat Korosif</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Lain-lain</string>
+    <string name="shared_string_class">Kelas</string>
+    <string name="shared_string_checked">Diperiksa</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Cairan Mudah Terbakar</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Padatan Mudah Terbakar</string>
+    <string name="dangerous_goods_description">Di beberapa jalan dan terowongan, pengangkutan bahan berbahaya dilarang.</string>
+    <string name="dangerous_goods">Barang berbahaya</string>
+    <string name="rendering_value_sacScale_description">Klub Alpen Swiss</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Zat Radioaktif</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Klub Alpen Italia)</string>
+    <string name="shared_string_not_checked">Tidak diperiksa</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gas</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agen Pengoksidasi dan Peroksida Organik</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Zat Beracun dan Menular</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Bahan peledak</string>
+    <string name="rendering_attr_alpineHiking_description">Jenis klasifikasi kesulitan untuk rute.</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_name">Klasifikasi kesulitan</string>
 </resources>
