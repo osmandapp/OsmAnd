@@ -32,9 +32,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+
+import java.util.List;
 
 /**
  * Session class for the Navigation sample app.
@@ -114,6 +118,21 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		mapLayers.getGpxLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		mapLayers.getPoiMapLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		mapLayers.getMapMarkersLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+		OsmandSettings settings = getApp().getSettings();
+		ApplicationMode appMode = settings.getApplicationMode();
+		if (!isAppModeDerivedFromCar(appMode)) {
+			List<ApplicationMode> availableAppModes = ApplicationMode.values(getApp());
+			for (ApplicationMode availableAppMode : availableAppModes) {
+				if (isAppModeDerivedFromCar(availableAppMode)) {
+					settings.setApplicationMode(availableAppMode);
+					break;
+				}
+			}
+		}
+	}
+
+	private boolean isAppModeDerivedFromCar(ApplicationMode appMode) {
+		return appMode == ApplicationMode.CAR || appMode.isDerivedRoutingFrom(ApplicationMode.CAR);
 	}
 
 	@Override
