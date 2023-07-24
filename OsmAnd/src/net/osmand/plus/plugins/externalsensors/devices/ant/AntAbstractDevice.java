@@ -86,12 +86,6 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 		return !Algorithms.isEmpty(foundDeviceId) ? foundDeviceId : super.getDeviceId();
 	}
 
-	@NonNull
-	@Override
-	public String getName() {
-		return pcc != null ? pcc.getDeviceName() : this.getClass().getSimpleName();
-	}
-
 	public T getPcc() {
 		return pcc;
 	}
@@ -189,6 +183,9 @@ public abstract class AntAbstractDevice<T extends AntPluginPcc> extends Abstract
 			switch (resultCode) {
 				case SUCCESS:
 					pcc = result;
+					if (Algorithms.isEmpty(deviceName)) {
+						setDeviceName(pcc.getDeviceName());
+					}
 					connectionResult = DeviceConnectionResult.SUCCESS;
 					deviceNumber = result.getAntDeviceNumber();
 					AntAbstractDevice.this.deviceNumber = deviceNumber;
