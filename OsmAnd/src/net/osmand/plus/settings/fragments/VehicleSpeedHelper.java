@@ -3,10 +3,10 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.plus.routing.RouteService.DIRECT_TO;
 import static net.osmand.plus.routing.RouteService.STRAIGHT;
 import static net.osmand.plus.settings.backend.ApplicationMode.FAST_SPEED_THRESHOLD;
-import static net.osmand.plus.settings.fragments.SpeedSliderType.DEFAULT_SPEED;
-import static net.osmand.plus.settings.fragments.SpeedSliderType.DEFAULT_SPEED_ONLY;
-import static net.osmand.plus.settings.fragments.SpeedSliderType.MAX_SPEED;
-import static net.osmand.plus.settings.fragments.SpeedSliderType.MIN_SPEED;
+import static net.osmand.plus.settings.enums.SpeedSliderType.DEFAULT_SPEED;
+import static net.osmand.plus.settings.enums.SpeedSliderType.DEFAULT_SPEED_ONLY;
+import static net.osmand.plus.settings.enums.SpeedSliderType.MAX_SPEED;
+import static net.osmand.plus.settings.enums.SpeedSliderType.MIN_SPEED;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,11 +30,14 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.SpeedSliderType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 
 public class VehicleSpeedHelper {
+
+	private static final float MAX_DEFAULT_SPEED = 300;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -52,8 +55,9 @@ public class VehicleSpeedHelper {
 		GeneralRouter router = app.getRouter(mode);
 		RouteService routeService = mode.getRouteService();
 
+		float maxSpeedLimit = VehicleSpeedConfigLimits.getMaxSpeedConfigLimit(app, mode);
 		boolean defaultSpeedOnly = routeService == STRAIGHT || routeService == DIRECT_TO;
-		boolean decimalPrecision = !defaultSpeedOnly && router != null && router.getMaxSpeed() <= FAST_SPEED_THRESHOLD;
+		boolean decimalPrecision = !defaultSpeedOnly && router != null && maxSpeedLimit / 1.5f <= FAST_SPEED_THRESHOLD;
 
 		float[] ratio = getSpeedRatio();
 		float[] minValue = new float[1];
@@ -117,8 +121,7 @@ public class VehicleSpeedHelper {
 
 	private void setupSpeedSlider(@NonNull SpeedSliderType type, @NonNull String speedUnits,
 	                              @NonNull float[] defaultValue, @NonNull float[] minValue,
-	                              @NonNull float[] maxValue, int min,
-	                              int max, boolean decimalPrecision,
+	                              @NonNull float[] maxValue, int min, int max, boolean decimalPrecision,
 	                              @NonNull View seekbarView, @ColorInt int activeColor) {
 		View sliderLayout = seekbarView.findViewById(type.layoutId);
 		float[] speedValue = getSpeedValue(type, defaultValue, minValue, maxValue);
@@ -191,9 +194,8 @@ public class VehicleSpeedHelper {
 		float settingsDefaultSpeed = mode.getDefaultSpeed();
 		if (defaultSpeedOnly || router == null) {
 			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
-			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
-			min = (int) minValue[0];
-			max = (int) maxValue[0];
+			maxValue[0] = Math.round(Math.max(MAX_DEFAULT_SPEED, settingsDefaultSpeed) * ratio[0]);
+			min = Math.round(minValue[0]);
 		} else {
 			float settingsMinSpeed = mode.getMinSpeed();
 			float settingsMaxSpeed = mode.getMaxSpeed();
@@ -204,9 +206,11 @@ public class VehicleSpeedHelper {
 			minValue[0] = roundSpeed(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 			maxValue[0] = roundSpeed(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 
-			min = Math.round(Math.min(minValue[0], router.getMinSpeed() * ratio[0] / 2f));
-			max = Math.round(Math.max(maxValue[0], router.getMaxSpeed() * ratio[0] * 1.5f));
+			float minSpeed = router.getMinSpeed() / 2f;
+			min = Math.round(Math.min(minValue[0], minSpeed * ratio[0]));
 		}
+		float maxSpeedConfigLimit = VehicleSpeedConfigLimits.getMaxSpeedConfigLimit(app, mode);
+		max = Math.round(Math.max(maxValue[0], maxSpeedConfigLimit * ratio[0]));
 		return new Pair<>(min, max);
 	}
 
