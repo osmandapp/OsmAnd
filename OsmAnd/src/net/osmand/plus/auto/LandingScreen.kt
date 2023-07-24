@@ -10,8 +10,7 @@ import net.osmand.plus.R
 
 class LandingScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
 
@@ -46,7 +45,7 @@ class LandingScreen(
                                 R.drawable.ic_zoom_in))
                             .build())
                     .setOnClickListener {
-                        surfaceRenderer.handleScale(
+                        app.carNavigationSession?.navigationCarSurface?.handleScale(
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.ZOOM_IN_BUTTON_SCALE_FACTOR)
@@ -61,7 +60,7 @@ class LandingScreen(
                                 R.drawable.ic_zoom_out))
                             .build())
                     .setOnClickListener {
-                        surfaceRenderer.handleScale(
+                        app.carNavigationSession?.navigationCarSurface?.handleScale(
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.INVALID_FOCAL_POINT_VAL,
                             NavigationSession.ZOOM_OUT_BUTTON_SCALE_FACTOR)
@@ -93,40 +92,35 @@ class LandingScreen(
                         NavigationScreen(
                             carContext,
                             settingsAction,
-                            it,
-                            surfaceRenderer
+                            it
                         ))
                 }
 
             PlaceCategory.FAVORITES -> screenManager.push(
                 FavoriteGroupsScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction
+                ))
 
             PlaceCategory.HISTORY -> screenManager.push(
                 HistoryScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
 
             PlaceCategory.MAP_MARKERS -> screenManager.push(
                 MapMarkersScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
 
             PlaceCategory.POI -> screenManager.push(
                 POICategoriesScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
 
             PlaceCategory.TRACKS -> screenManager.push(
                 TracksFoldersScreen(
                     carContext,
-                    settingsAction,
-                    surfaceRenderer))
+                    settingsAction))
         }
     }
 

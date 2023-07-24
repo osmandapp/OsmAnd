@@ -14,8 +14,7 @@ import net.osmand.search.core.SearchResult
 import kotlin.math.abs
 
 abstract class BaseOsmAndAndroidAutoScreen(
-	carContext: CarContext,
-	val surfaceRenderer: SurfaceRenderer) : Screen(carContext) {
+	carContext: CarContext) : Screen(carContext) {
 
 	protected val app: OsmandApplication
 		get() {
@@ -42,10 +41,9 @@ abstract class BaseOsmAndAndroidAutoScreen(
 
 	protected fun openRoutePreview(
 		settingsAction: Action,
-		surfaceRenderer: SurfaceRenderer,
 		result: SearchResult) {
 		screenManager.pushForResult(
-			RoutePreviewScreen(carContext, settingsAction, surfaceRenderer, result)
+			RoutePreviewScreen(carContext, settingsAction, result)
 		) { obj: Any? ->
 			obj?.let {
 				onSearchResultSelected(result)
@@ -79,38 +77,39 @@ abstract class BaseOsmAndAndroidAutoScreen(
 			screenManager.pushForResult(
 				SearchScreen(
 					carContext,
-					navigationSession.settingsAction,
-					navigationSession.navigationCarSurface)) { _: Any? -> }
+					navigationSession.settingsAction)) { _: Any? -> }
 		}
 	}
 
 	protected fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
-		if ((mapRect.left != 0.0) && (mapRect.right != 0.0) && (mapRect.top != 0.0) && (mapRect.bottom != 0.0)) {
-			val mapView = app.osmandMap.mapView
-			val tileBox = mapView.rotatedTileBox
-			val leftRightDelta = abs(location.longitude - mapRect.left)
-				.coerceAtLeast(abs(location.longitude - mapRect.right))
-			val topBottomDelta = abs(location.latitude - mapRect.top)
-				.coerceAtLeast(abs(location.latitude - mapRect.bottom))
-			val rectLeft = location.longitude - leftRightDelta
-			val rectRight = location.longitude + leftRightDelta
-			val rectWidth = rectRight - rectLeft
-			val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
-			val left = rectLeft - rectWidth * coef
-			val right = rectRight + rectWidth * coef
-			val rectInVisibleArea = QuadRect()
-			rectInVisibleArea.left = left
-			rectInVisibleArea.right = right
-			rectInVisibleArea.top = location.latitude - topBottomDelta
-			rectInVisibleArea.bottom = location.latitude + topBottomDelta
-			mapView.fitRectToMap(
-				rectInVisibleArea.left,
-				rectInVisibleArea.right,
-				rectInVisibleArea.top,
-				rectInVisibleArea.bottom,
-				tileBox.pixWidth,
-				tileBox.pixHeight,
-				0)
+		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
+			if (!mapRect.hasInitialState()) {
+				val mapView = app.osmandMap.mapView
+				val tileBox = mapView.rotatedTileBox
+				val leftRightDelta = abs(location.longitude - mapRect.left)
+					.coerceAtLeast(abs(location.longitude - mapRect.right))
+				val topBottomDelta = abs(location.latitude - mapRect.top)
+					.coerceAtLeast(abs(location.latitude - mapRect.bottom))
+				val rectLeft = location.longitude - leftRightDelta
+				val rectRight = location.longitude + leftRightDelta
+				val rectWidth = rectRight - rectLeft
+				val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
+				val left = rectLeft - rectWidth * coef
+				val right = rectRight + rectWidth * coef
+				val rectInVisibleArea = QuadRect()
+				rectInVisibleArea.left = left
+				rectInVisibleArea.right = right
+				rectInVisibleArea.top = location.latitude - topBottomDelta
+				rectInVisibleArea.bottom = location.latitude + topBottomDelta
+				mapView.fitRectToMap(
+					rectInVisibleArea.left,
+					rectInVisibleArea.right,
+					rectInVisibleArea.top,
+					rectInVisibleArea.bottom,
+					tileBox.pixWidth,
+					tileBox.pixHeight,
+					0)
+			}
 		}
 	}
 

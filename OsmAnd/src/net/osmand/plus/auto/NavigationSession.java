@@ -71,7 +71,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	RequestPurchaseScreen requestPurchaseScreen;
 	SurfaceRenderer navigationCarSurface;
 	Action settingsAction;
-//	private QuadRect mapRect;
 
 	private OsmandMapTileView mapView;
 
@@ -162,7 +161,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 								.build())
 						.setOnClickListener(() -> getCarContext()
 								.getCarService(ScreenManager.class)
-								.push(new SettingsScreen(getCarContext(), navigationCarSurface)))
+								.push(new SettingsScreen(getCarContext())))
 						.build();
 
 		if (mapView != null) {
@@ -173,18 +172,18 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (CarContext.ACTION_NAVIGATE.equals(action)) {
 			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
 		}
-		landingScreen = new LandingScreen(getCarContext(), settingsAction, navigationCarSurface);
+		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
-			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext(), navigationCarSurface);
+			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
 			return requestPurchaseScreen;
 		}
 
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
-			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback, navigationCarSurface);
+			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
 		}
 		return landingScreen;
 	}
@@ -211,7 +210,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private boolean requestLocationPermission() {
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(
-					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback, navigationCarSurface));
+					new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback));
 			return true;
 		}
 		return false;
@@ -232,7 +231,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					new SearchResultsScreen(
 							getCarContext(),
 							settingsAction,
-							navigationCarSurface,
 							query),
 					(obj) -> {
 					});
@@ -273,7 +271,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void createNavigationScreen() {
-		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this, navigationCarSurface);
+		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 		navigationCarSurface.setCallback(navigationScreen);
 	}
 

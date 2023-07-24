@@ -40,8 +40,8 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 	private boolean showResult;
 
 	public SearchResultsScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                           @NonNull SurfaceRenderer surfaceRenderer, @NonNull String searchText) {
-		super(carContext, surfaceRenderer);
+	                           @NonNull String searchText) {
+		super(carContext);
 		this.settingsAction = settingsAction;
 		this.searchText = searchText;
 
@@ -112,7 +112,7 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 
 	private void showResult(SearchResult sr) {
 		showResult = false;
-		openRoutePreview(settingsAction, getSurfaceRenderer(), sr);
+		openRoutePreview(settingsAction, sr);
 	}
 
 	@Override

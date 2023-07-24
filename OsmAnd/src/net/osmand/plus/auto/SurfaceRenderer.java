@@ -295,10 +295,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	}
 
 	public double getVisibleAreaWidth() {
-		if(visibleArea != null){
-			return visibleArea.width();
-		} else {
-			return 0f;
-		}
+		return visibleArea != null ? visibleArea.width() : 0f;
 	}
 }

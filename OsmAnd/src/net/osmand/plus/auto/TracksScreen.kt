@@ -10,7 +10,6 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.QuadRect
-import net.osmand.data.RotatedTileBox
 import net.osmand.gpx.GPXUtilities
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -25,15 +24,12 @@ import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
-import kotlin.math.max
-import kotlin.math.min
 
 class TracksScreen(
 	carContext: CarContext,
 	private val settingsAction: Action,
-	surfaceRenderer: SurfaceRenderer,
 	private val trackTab: TrackTab
-) : BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer) {
+) : BaseOsmAndAndroidAutoScreen(carContext) {
 	val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 	private var loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
 	private lateinit var loadTracksTask: LoadTracksTask
@@ -51,8 +47,8 @@ class TracksScreen(
 				super.onDestroy(owner)
 				app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
 				app.osmandMap.mapView.backToLocation()
-				if (initialCompassMode != null) {
-					app.mapViewTrackingUtilities.switchCompassModeTo(initialCompassMode!!)
+				initialCompassMode?.let {
+					app.mapViewTrackingUtilities.switchCompassModeTo(it)
 				}
 			}
 		})
@@ -127,7 +123,7 @@ class TracksScreen(
 			gpxFile?.let {
 				selectedGpxFiles.add(it)
 				val gpxRect: QuadRect = it.gpxFile.rect
-				extendRectToContainPoint(mapRect, gpxRect)
+				Algorithms.extendRectToContainRect(mapRect, gpxRect)
 			}
 			val title = track.name
 			val icon = CarIcon.Builder(
@@ -159,35 +155,15 @@ class TracksScreen(
 				.build())
 		}
 		adjustMapToRect(latLon, mapRect)
-
-		if (mapRect.left != 0.0 && mapRect.right != 0.0 && mapRect.top != 0.0 && mapRect.bottom != 0.0) {
-			val tb: RotatedTileBox = app.osmandMap.mapView.currentRotatedTileBox.copy()
-			app.osmandMap.mapView.fitRectToMap(
-				mapRect.left,
-				mapRect.right,
-				mapRect.top,
-				mapRect.bottom,
-				tb.pixWidth,
-				tb.pixHeight,
-				0)
-		}
 		app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(selectedGpxFiles)
 		templateBuilder.setItemList(listBuilder.build())
 	}
-
-    private fun extendRectToContainPoint(mapRect: QuadRect, gpxRect: QuadRect) {
-        mapRect.left = if (mapRect.left == 0.0) gpxRect.left else min(mapRect.left, gpxRect.left)
-        mapRect.right = max(mapRect.right, gpxRect.right)
-        mapRect.top = max(mapRect.top, gpxRect.top)
-        mapRect.bottom =
-            if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
-    }
 
     private fun onClickTrack(trackItem: TrackItem) {
         val result = SearchResult()
         result.objectType = ObjectType.GPX_TRACK
         result.`object` = trackItem
         result.relatedObject = GPXInfo(trackItem.name, trackItem.file)
-        openRoutePreview(settingsAction, surfaceRenderer, result)
+        openRoutePreview(settingsAction, result)
     }
 }

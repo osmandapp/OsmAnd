@@ -58,9 +58,8 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 	public FavoritesScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
-			@NonNull SurfaceRenderer surfaceRenderer,
 			@Nullable FavoriteGroup group) {
-		super(carContext, surfaceRenderer);
+		super(carContext);
 		this.settingsAction = settingsAction;
 		selectedGroup = group;
 		getLifecycle().addObserver(new DefaultLifecycleObserver() {
@@ -109,7 +108,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
-			extendRectToContainPoint(mapRect, longitude, latitude);
+			Algorithms.extendRectToContainPoint(mapRect, longitude, latitude);
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
@@ -132,28 +131,13 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 		adjustMapToRect(location, mapRect);
 	}
 
-	private void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
-		if (mapRect.left == 0.0) {
-			mapRect.left = longitude;
-		} else {
-			mapRect.left = Math.min(mapRect.left, longitude);
-		}
-		mapRect.right = Math.max(mapRect.right, longitude);
-		if (mapRect.bottom == 0.0) {
-			mapRect.bottom = latitude;
-		} else {
-			mapRect.bottom = Math.min(mapRect.bottom, latitude);
-		}
-		mapRect.top = Math.max(mapRect.top, latitude);
-	}
-
 	private void onClickFavorite(@NonNull FavouritePoint point) {
 		SearchResult result = new SearchResult();
 		result.location = new LatLon(point.getLatitude(), point.getLongitude());
 		result.objectType = ObjectType.FAVORITE;
 		result.object = point;
 		result.localeName = point.getAddress();
-		openRoutePreview(settingsAction, getSurfaceRenderer(), result);
+		openRoutePreview(settingsAction, result);
 	}
 
 	@NonNull

@@ -6,9 +6,8 @@ import net.osmand.plus.auto.SearchHelper.SearchHelperListener
 import net.osmand.search.core.SearchCoreFactory
 
 abstract class BaseOsmAndAndroidAutoSearchScreen(
-	carContext: CarContext,
-	surfaceRenderer: SurfaceRenderer) :
-	BaseOsmAndAndroidAutoScreen(carContext, surfaceRenderer), SearchHelperListener {
+	carContext: CarContext) :
+	BaseOsmAndAndroidAutoScreen(carContext), SearchHelperListener {
 
     protected var loading = false
     protected val searchHelper: SearchHelper by lazy(::createSearchHelper)
