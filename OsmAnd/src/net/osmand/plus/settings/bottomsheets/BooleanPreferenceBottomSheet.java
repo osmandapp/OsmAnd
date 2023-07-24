@@ -5,22 +5,15 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.TwoStatePreference;
 
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.preferences.RadioButtonBooleanPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.utils.ColorUtilities;
@@ -38,7 +31,6 @@ import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
@@ -56,7 +48,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (app == null) {
 			return;
 		}
-		TwoStatePreference twoStatePreference = getTwoStatePreference();
+		SwitchPreferenceEx twoStatePreference = getSwitchPreferenceEx();
 		if (twoStatePreference == null) {
 			return;
 		}
@@ -64,121 +56,13 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (!(preference instanceof BooleanPreference)) {
 			return;
 		}
+
+		createBooleanItem(app, (SwitchPreferenceEx) twoStatePreference, preference);
+	}
+
+	protected void createBooleanItem(OsmandApplication app, SwitchPreferenceEx switchPreference, OsmandPreference preference) {
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 
-		if (twoStatePreference instanceof SwitchPreferenceEx) {
-			createSwitchBooleanItem(app, (SwitchPreferenceEx) twoStatePreference, preference, themedCtx);
-		} else if (twoStatePreference instanceof RadioButtonBooleanPreference) {
-			createRadioButtonsBooleanItem(app, (RadioButtonBooleanPreference) twoStatePreference);
-		}
-	}
-
-	private void createRadioButtonsBooleanItem(OsmandApplication app, RadioButtonBooleanPreference preference) {
-		View titleView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.title_with_desc, null);
-		String title = preference.getTitle().toString();
-		TextView titleTv = titleView.findViewById(R.id.title);
-		titleTv.setText(title);
-
-		String description = preference.getDescription();
-		TextView descriptionTv = titleView.findViewById(R.id.description);
-		if (description != null) {
-			descriptionTv.setText(description);
-		} else {
-			AndroidUiHelper.setVisibility(View.GONE, descriptionTv);
-		}
-
-		BaseBottomSheetItem titleItem = new BaseBottomSheetItem.Builder()
-				.setCustomView(titleView)
-				.create();
-		items.add(titleItem);
-
-		CharSequence summaryOn = preference.getSummaryOn();
-		CharSequence summaryOff = preference.getSummaryOff();
-		String on = summaryOn == null || summaryOn.toString().isEmpty()
-				? getString(R.string.shared_string_enabled) : summaryOn.toString();
-		String off = summaryOff == null || summaryOff.toString().isEmpty()
-				? getString(R.string.shared_string_disabled) : summaryOff.toString();
-
-		boolean checked = preference.isChecked();
-		BottomSheetItemWithCompoundButton[] preferenceButtons = new BottomSheetItemWithCompoundButton[2];
-		preferenceButtons[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCustomView(getCustomRadioButtonView(app, on, checked, true))
-				.setOnClickListener(v -> onRadioButtonClick(v, preferenceButtons, preference))
-				.create();
-		preferenceButtons[1] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setCustomView(getCustomRadioButtonView(app, off, checked, false))
-				.setOnClickListener(v -> onRadioButtonClick(v, preferenceButtons, preference))
-				.create();
-
-		items.add(preferenceButtons[0]);
-		items.add(preferenceButtons[1]);
-	}
-
-	private void onRadioButtonClick(View v, BottomSheetItemWithCompoundButton[] preferenceBtn, RadioButtonBooleanPreference preference) {
-		boolean newValue = (boolean) v.getTag();
-		Fragment targetFragment = getTargetFragment();
-		if (targetFragment instanceof OnConfirmPreferenceChange) {
-			ApplyQueryType applyQueryType = getApplyQueryType();
-			if (applyQueryType == ApplyQueryType.SNACK_BAR) {
-				applyQueryType = ApplyQueryType.NONE;
-			}
-			OnConfirmPreferenceChange confirmationInterface = (OnConfirmPreferenceChange) targetFragment;
-			if (confirmationInterface.onConfirmPreferenceChange(preference.getKey(), newValue, applyQueryType)) {
-				preference.setChecked(newValue);
-				updatePreferenceButtons(preferenceBtn, newValue);
-				if (targetFragment instanceof OnPreferenceChanged) {
-					((OnPreferenceChanged) targetFragment).onPreferenceChanged(preference.getKey());
-				}
-			}
-		}
-	}
-
-	private void updatePreferenceButtons(BottomSheetItemWithCompoundButton[] buttons, boolean checked) {
-		for (BottomSheetItemWithCompoundButton button : buttons) {
-			updateCustomRadioButtonView(button.getView(), checked);
-		}
-	}
-
-	public View getCustomRadioButtonView(OsmandApplication app, String title, boolean checked, boolean itemBooleanState) {
-		View customView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.dialog_list_item_with_compound_button, null);
-
-		FrameLayout buttonContainer = customView.findViewById(R.id.compound_buttons_container);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT,
-				LinearLayout.LayoutParams.WRAP_CONTENT
-		);
-		params.gravity = Gravity.CENTER_VERTICAL;
-		int horizontalMargin = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
-		params.setMargins(horizontalMargin, 0, horizontalMargin, 0);
-		buttonContainer.setLayoutParams(params);
-
-		TextViewEx textViewEx = customView.findViewById(R.id.text);
-		textViewEx.setText(title);
-
-		RadioButton radioButton = customView.findViewById(R.id.radio);
-		radioButton.setClickable(false);
-		radioButton.setFocusable(false);
-		radioButton.setBackground(null);
-		AndroidUiHelper.setVisibility(View.VISIBLE, radioButton);
-
-		LinearLayout buttonView = customView.findViewById(R.id.button);
-		buttonView.setMinimumHeight(app.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
-		int color = getAppMode().getProfileColor(nightMode);
-		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
-		AndroidUtils.setBackground(buttonView, background);
-
-		customView.setTag(itemBooleanState);
-		updateCustomRadioButtonView(customView, checked);
-		return customView;
-	}
-
-	public void updateCustomRadioButtonView(View customView, boolean checked) {
-		boolean buttonBooleanState = (boolean) customView.getTag();
-		RadioButton button = customView.findViewById(R.id.radio);
-		button.setChecked(checked == buttonBooleanState);
-	}
-
-	private void createSwitchBooleanItem(OsmandApplication app, SwitchPreferenceEx switchPreference, OsmandPreference preference, Context themedCtx) {
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
 
@@ -286,8 +170,8 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
-	private TwoStatePreference getTwoStatePreference() {
-		return (TwoStatePreference) getPreference();
+	private SwitchPreferenceEx getSwitchPreferenceEx() {
+		return (SwitchPreferenceEx) getPreference();
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefId, Fragment target, boolean usedOnMap,

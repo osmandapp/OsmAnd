@@ -82,7 +82,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_BACKGROUND = "background";
 
 	private static final float NO_HEADING = -1.0f;
-	private static final float NO_BEARING= 0f;
 
 	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
@@ -442,7 +441,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				JSONObject json = new JSONObject(pluginsInfo);
 				for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
 					String key = iterator.next();
-					extensions.put(key, json.optString(key));
+					String value = json.optString(key);
+					if (!(key.equals(TRACK_COL_BEARING) && value.equals("NaN"))) {
+						extensions.put(key, json.optString(key));
+					}
 				}
 				return extensions;
 			} catch (JSONException e) {
@@ -527,12 +529,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
 			if (location.hasBearing()) {
 				try {
-					double bearing;
-					if (devPlugin != null && devPlugin.WRITE_BEARING.get()) {
-						bearing = location.getBearing();
-					} else {
-						bearing = NO_BEARING;
-					}
+					float bearing = devPlugin != null && devPlugin.WRITE_BEARING.get() ? location.getBearing() : Float.NaN;
 					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(bearing));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);

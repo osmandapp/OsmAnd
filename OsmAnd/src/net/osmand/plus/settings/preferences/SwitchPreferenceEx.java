@@ -8,6 +8,7 @@ import androidx.preference.SwitchPreferenceCompat;
 public class SwitchPreferenceEx extends SwitchPreferenceCompat {
 
 	private String description;
+	private boolean overrideOnClick = true;
 
 	public SwitchPreferenceEx(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
@@ -37,9 +38,13 @@ public class SwitchPreferenceEx extends SwitchPreferenceCompat {
 		setDescription(getContext().getString(titleResId));
 	}
 
+	public void setOverrideOnClick(boolean overrideOnClick) {
+		this.overrideOnClick = overrideOnClick;
+	}
+
 	@Override
 	protected void onClick() {
-		if (getFragment() == null && getIntent() == null) {
+		if (getFragment() == null && getIntent() == null && overrideOnClick) {
 			getPreferenceManager().showDialog(this);
 		}
 	}
