@@ -54,7 +54,6 @@ public class ApplicationMode {
 
 	private ApplicationMode parentAppMode;
 	private int iconRes = R.drawable.ic_world_globe_dark;
-	private float maxSpeedConfigLimit = 0f;
 
 	private ApplicationMode(int key, @NonNull String stringKey) {
 		this.keyName = key;
@@ -66,62 +65,49 @@ public class ApplicationMode {
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
 			.icon(R.drawable.ic_action_car_dark)
-			.setMaxSpeedConfigLimit(36.11111f)
 			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
 			.icon(R.drawable.ic_action_bicycle_dark)
-			.setMaxSpeedConfigLimit(9.166667f)
 			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
 			.icon(R.drawable.ic_action_pedestrian_dark)
-			.setMaxSpeedConfigLimit(2.777778f)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode TRUCK = create(CAR, R.string.app_mode_truck, "truck")
 			.icon(R.drawable.ic_action_truck_dark)
-			.setMaxSpeedConfigLimit(36.11111f)
 			.description(R.string.app_mode_truck).reg();
 
 	public static final ApplicationMode MOTORCYCLE = create(CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
-			.setMaxSpeedConfigLimit(36.11111f)
 			.description(R.string.app_mode_motorcycle).reg();
-
 	public static final ApplicationMode MOPED = create(BICYCLE, R.string.app_mode_moped, "moped")
-			.setMaxSpeedConfigLimit(12.96296f)
 			.icon(R.drawable.ic_action_motor_scooter)
-			.description(R.string.app_mode_bicycle).reg();
+			.description(R.string.app_mode_moped).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
 			.icon(R.drawable.ic_action_bus_dark)
-			.setMaxSpeedConfigLimit(26.388889f)
 			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode TRAIN = createBase(R.string.app_mode_train, "train")
 			.icon(R.drawable.ic_action_train)
-			.setMaxSpeedConfigLimit(47.222225f)
 			.description(R.string.app_mode_train).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.icon(R.drawable.ic_action_sail_boat_dark)
-			.setMaxSpeedConfigLimit(18.527777f)
 			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
 			.icon(R.drawable.ic_action_aircraft)
-			.setMaxSpeedConfigLimit(200f)
 			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.icon(R.drawable.ic_action_skiing)
-			.setMaxSpeedConfigLimit(41.666668f)
 			.description(R.string.base_profile_descr_ski).reg();
 
 	public static final ApplicationMode HORSE = createBase(R.string.horseback_riding, "horse")
 			.icon(R.drawable.ic_action_horse)
-			.setMaxSpeedConfigLimit(8.333334f)
 			.description(R.string.horseback_riding).reg();
 
 	public static List<ApplicationMode> values(@NonNull OsmandApplication app) {
@@ -469,10 +455,6 @@ public class ApplicationMode {
 		app.getSettings().APP_MODE_VERSION.setModeValue(this, version);
 	}
 
-	public float getMaxSpeedConfigLimit() {
-		return maxSpeedConfigLimit;
-	}
-
 	public static void onApplicationStart(OsmandApplication app) {
 		initCustomModes(app);
 		initModesParams(app);
@@ -483,13 +465,10 @@ public class ApplicationMode {
 	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
-			iconNameListener = new StateChangedListener<String>() {
-				@Override
-				public void stateChanged(String change) {
-					List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
-					for (ApplicationMode mode : modes) {
-						mode.updateAppModeIcon();
-					}
+			iconNameListener = change -> {
+				List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
+				for (ApplicationMode mode : modes) {
+					mode.updateAppModeIcon();
 				}
 			};
 			settings.ICON_RES_NAME.addListener(iconNameListener);
@@ -532,12 +511,7 @@ public class ApplicationMode {
 	}
 
 	public static void reorderAppModes() {
-		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
-			@Override
-			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
-				return (mode1.getOrder() < mode2.getOrder()) ? -1 : ((mode1.getOrder() == mode2.getOrder()) ? 0 : 1);
-			}
-		};
+		Comparator<ApplicationMode> comparator = (mode1, mode2) -> Integer.compare(mode1.getOrder(), mode2.getOrder());
 		Collections.sort(values, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);
@@ -748,11 +722,6 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder icon(int iconRes) {
 			applicationMode.iconRes = iconRes;
-			return this;
-		}
-
-		public ApplicationModeBuilder setMaxSpeedConfigLimit(float maxSpeedConfigLimit) {
-			applicationMode.maxSpeedConfigLimit = maxSpeedConfigLimit;
 			return this;
 		}
 

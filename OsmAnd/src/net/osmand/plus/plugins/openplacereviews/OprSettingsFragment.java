@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.openplacereviews;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -105,7 +106,7 @@ public class OprSettingsFragment extends BaseSettingsFragment implements OprAuth
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (plugin.OPR_USE_DEV_URL.getId().equals(prefId)) {
 			oprLogout();
 		}

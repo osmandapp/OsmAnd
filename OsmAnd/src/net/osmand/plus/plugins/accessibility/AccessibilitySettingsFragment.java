@@ -243,7 +243,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
 			updateAllSettings();
 		}
