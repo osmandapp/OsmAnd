@@ -79,7 +79,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 	public void onResume() {
 		super.onResume();
 		forecastHelper.registerRemoveLocalForecastListener(this);
-		offlineForecastCard.updateIndexesList();
+		offlineForecastCard.onUpdatedIndexesList();
 	}
 
 	@Override
@@ -211,7 +211,7 @@ public class WeatherMainFragment extends BaseOsmAndFragment implements DownloadE
 
 	@Override
 	public void onRemoveLocalForecastEvent() {
-		offlineForecastCard.onRemoveLocalForecastEvent();
+		offlineForecastCard.onUpdatedIndexesList();
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {

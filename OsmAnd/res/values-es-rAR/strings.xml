@@ -675,8 +675,6 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapa estándar</string>
     <string name="download_roads_only_maps">Mapa sólo vial</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino</string>
-    <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
@@ -5227,10 +5225,8 @@
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
     <string name="map_3d_mode_hint">Mantén pulsado para cambiar la ubicación del botón.</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="visible_in_3d_mode">Visible en el modo 3D</string>
     <string name="map_3d_mode_description">Pulsa en el mapa con 2 dedos y mueve hacia arriba o abajo para ajustar la inclinación del mapa.</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
     <string name="delete_folder_question">¿Borrar carpeta\?</string>
     <string name="delete_folder">Borrar carpeta</string>
     <string name="shared_string_new_track">Nueva traza</string>
@@ -5350,4 +5346,12 @@
     <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes y peróxidos orgánicos</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Sustancias corrosivas</string>
     <string name="shared_string_class">Clase</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de clasificación de dificultad para rutas.</string>
+    <string name="shared_string_checked">Revisado</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
+    <string name="shared_string_not_checked">Sin revisar</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
 </resources>

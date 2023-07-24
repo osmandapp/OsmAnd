@@ -74,7 +74,7 @@ public class DownloadActivityType {
 	public static final DownloadActivityType WEATHER_FORECAST =
 			new DownloadActivityType(R.string.weather_forecast, R.drawable.ic_action_umbrella, "weather", 90);
 	public static final DownloadActivityType GEOTIFF_FILE =
-			new DownloadActivityType(R.string.terrain_map, R.drawable.ic_action_altitude, "geotiff", 85);
+			new DownloadActivityType(R.string.terrain_map, R.drawable.ic_action_terrain, "geotiff", 85);
 
 	private final int stringResource;
 	private final int iconResource;

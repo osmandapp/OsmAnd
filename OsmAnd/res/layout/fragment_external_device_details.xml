@@ -142,6 +142,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/content_padding_small"
+				android:paddingBottom="@dimen/content_padding_half"
 				android:orientation="vertical">
 
 				<LinearLayout
@@ -236,6 +237,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
 					android:background="?attr/list_background_color"
 					android:elevation="2dp"
 					android:orientation="vertical">

@@ -1426,7 +1426,6 @@
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_coloredBuildings_name">Colorir edifícios por tipo</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de caminhada alpina</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhadas</string>
     <string name="rendering_attr_showCycleRoutes_name">Rotas para bicicletas</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
@@ -2482,7 +2481,6 @@
     <string name="driving_region_australia">Austrália</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
-    <string name="rendering_attr_alpineHiking_description">Apresentar caminhos de acordo com a escala de SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Apresentar caminhos de acordo com traços OSMC.</string>
     <string name="map_widget_intermediate_time">Hora intermédia</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de direções de navegação automatizada do OSM) é uma aplicação de mapas e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM.
@@ -5229,8 +5227,6 @@
     <string name="delete_folder_question">Eliminar pasta\?</string>
     <string name="delete_folder">Eliminar pasta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todos os trilhos no mapa</string>
-    <string name="rendering_value_sacScale_name">Escala SAC</string>
-    <string name="rendering_value_caiScale_name">Escala CAI</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_action">Modo 3D</string>
     <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>

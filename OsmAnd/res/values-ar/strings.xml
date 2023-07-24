@@ -1874,8 +1874,6 @@
     <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود الوطنية</string>
     <string name="routing_attr_height_description">تحديد الارتفاع الأعلى المسموح به على الطرق.</string>
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
-    <string name="rendering_attr_alpineHiking_name">مقياس رياضة الهايكنق</string>
-    <string name="rendering_attr_alpineHiking_description">تجسيد المسارات وفقا لمقياس SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">طرق المشي الخلوي</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>
@@ -4770,7 +4768,7 @@
     <string name="marker_2nd">التوجيه المباشر الثاني</string>
     <string name="next_live_update_date_and_time">التحديث التالي: %1$s في %2$s.</string>
     <string name="goods_delivery_desc_3">ينطبق فقط على المركبات التي تحمل البضائع التي تحتوي على أربع عجلات على الأقل ولا يزيد وزنها عن 3.5 طن.</string>
-    <string name="reset_all_settings_desc">هل أنت متأكد أنك تريد إعادة تعيين كافة الإعدادات إلى الافتراضي؟</string>
+    <string name="reset_all_settings_desc">إعادة تعيين كافة الإعدادات إلى الافتراضي؟</string>
     <string name="marker_1st">التوجيه المباشر الأول</string>
     <string name="no_altitude_data_desc">يمكنك إرفاق مسارك بالطرق للحصول على بيانات %1$s أو حسابها عبر الإنترنت.</string>
     <string name="next_live_update_time">التحديث التالي: في %1$s.</string>
@@ -5278,11 +5276,9 @@
     <string name="map_3d_mode_action">الوضع ثلاثي الأبعاد</string>
     <string name="map_2d_mode_action">الوضع ثنائي الأبعاد</string>
     <string name="poi_categories">فئات نقاط الاهتمام</string>
-    <string name="rendering_value_caiScale_name">مقياس CAI</string>
     <string name="map_3d_mode_hint">الضغط المطول على الزر يسمح بتغيير موضع الزر.</string>
     <string name="visible_in_3d_mode">مرئي في الوضع ثلاثي الأبعاد</string>
     <string name="map_3d_mode_description">المس الخريطة بإصبعين وحركهما للأعلى وللأسفل لضبط إمالة الخريطة.</string>
-    <string name="rendering_value_sacScale_name">مقياس ساك</string>
     <string name="show_all_tracks_on_the_map">عرض جميع المسارات على الخريطة</string>
     <string name="rssi_widget_desc">يعرض مستوى RSSI لجهازك الخارجي.</string>
     <string name="map_widget_rssi">قوة الإشارة</string>
@@ -5389,4 +5385,19 @@
     <string name="routing_attr_allow_via_ferrata_description">طريق جبلي مجهز بالكابلات الثابتة والمعابد والسلالم والجسور.</string>
     <string name="free_settings_backup">نسخ احتياطي مجاني للإعدادات</string>
     <string name="free_ride">توصيلة بالمجان</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">مواد سامة ومعدية</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">مواد مشعة</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">مواد مسببة للتآكل</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">متنوع</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">مواد صلبة قابلة للاشتعال</string>
+    <string name="shared_string_class">فئة</string>
+    <string name="dangerous_goods">بضائع خطرة</string>
+    <string name="shared_string_not_checked">لم يتم التحقق</string>
+    <string name="shared_string_checked">تم التحقق</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">عوامل مؤكسدة وبيروكسيدات عضوية</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">متفجرات</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">سوائل قابلة للإشتعال</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">غازات</string>
+    <string name="dangerous_goods_description">في بعض الطرق والأنفاق يحظر نقل المواد الخطرة.</string>
 </resources>

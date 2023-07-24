@@ -14,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.AppInitializer.LoadRoutingFilesCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -72,19 +71,16 @@ public class XmlImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				showSuccessSnackbar(destFileName);
 				hideProgress();
 			} else if (importType == ImportType.ROUTING) {
-				loadRoutingFiles(app, new LoadRoutingFilesCallback() {
-					@Override
-					public void onRoutingFilesLoaded() {
-						hideProgress();
-						Builder builder = app.getCustomRoutingConfig(destFileName);
-						if (builder != null) {
-							if (routingCallback != null) {
-								routingCallback.processResult(builder);
-							}
-							showSuccessSnackbar(destFileName);
-						} else {
-							app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
+				loadRoutingFiles(app, () -> {
+					hideProgress();
+					Builder builder = app.getCustomRoutingConfig(destFileName);
+					if (builder != null) {
+						if (routingCallback != null) {
+							routingCallback.processResult(builder);
 						}
+						showSuccessSnackbar(destFileName);
+					} else {
+						app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, destFileName));
 					}
 				});
 			}

@@ -1269,8 +1269,6 @@
     <string name="lang_sr">szerb (cirill betűs)</string>
     <string name="lang_zh_cn">kínai (egyszerűsített)</string>
     <string name="lang_zh_tw">kínai (hagyományos)</string>
-    <string name="rendering_attr_alpineHiking_name">Alpesi túra nehézségi szint</string>
-    <string name="rendering_attr_alpineHiking_description">Ösvények megjelenítése az SAC/CAI nehézségi skála szerint.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Túraútvonalak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Szokásos</string>
@@ -4452,7 +4450,7 @@
     <string name="shared_string_downhill">Lejtés</string>
     <string name="shared_string_show_slope">Lejtés megjelenítése</string>
     <string name="shared_string_hide_slope">Lejtés elrejtése</string>
-    <string name="shared_string_grade">Osztály</string>
+    <string name="shared_string_grade">Besorolás</string>
     <string name="elevation_profile">Magassági profil</string>
     <string name="distance_between_points">Pontok közti távolság</string>
     <string name="gps_filter_smoothing_desc">Állítsa be a pontok közti távolság korlátját.
@@ -5210,8 +5208,6 @@
     <string name="map_3d_mode_hint">A gomb hosszú érintése lehetővé teszi a gomb pozíciójának megváltoztatását.</string>
     <string name="visible_in_3d_mode">Látható 3D módban</string>
     <string name="map_3d_mode_description">Érintse meg a térképet két ujjal, és mozgassa fel és le a térkép dőlésszögének beállításához.</string>
-    <string name="rendering_value_caiScale_name">CAI skála</string>
-    <string name="rendering_value_sacScale_name">SAC skála</string>
     <string name="show_all_tracks_on_the_map">Minden nyomvonal megjelenítése a térképen</string>
     <string name="rssi_widget_desc">Mutatja a külső eszköze jelszintjét.</string>
     <string name="map_widget_rssi">RSSI</string>
@@ -5333,4 +5329,12 @@
     <string name="dangerous_goods">Veszélyes áruk</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Egyebek</string>
+    <string name="shared_string_not_checked">Nincs ellenőrizve</string>
+    <string name="shared_string_checked">Ellenőrizve</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Az útvonalak nehézségi besorolásának típusai.</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Olasz Alpesi Club)</string>
+    <string name="rendering_value_sacScale_description">Svájci Alpesi Club</string>
+    <string name="rendering_attr_alpineHiking_name">Nehézségi besorolás</string>
 </resources>
