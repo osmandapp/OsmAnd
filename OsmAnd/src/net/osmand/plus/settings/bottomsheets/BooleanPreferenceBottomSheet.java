@@ -48,16 +48,16 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (app == null) {
 			return;
 		}
-		SwitchPreferenceEx twoStatePreference = getSwitchPreferenceEx();
-		if (twoStatePreference == null) {
+		SwitchPreferenceEx switchPreferenceEx = getSwitchPreferenceEx();
+		if (switchPreferenceEx == null) {
 			return;
 		}
-		OsmandPreference preference = app.getSettings().getPreference(twoStatePreference.getKey());
+		OsmandPreference preference = app.getSettings().getPreference(switchPreferenceEx.getKey());
 		if (!(preference instanceof BooleanPreference)) {
 			return;
 		}
 
-		createBooleanItem(app, (SwitchPreferenceEx) twoStatePreference, preference);
+		createBooleanItem(app, (SwitchPreferenceEx) switchPreferenceEx, preference);
 	}
 
 	protected void createBooleanItem(OsmandApplication app, SwitchPreferenceEx switchPreference, OsmandPreference preference) {
