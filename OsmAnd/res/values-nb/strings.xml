@@ -5209,8 +5209,8 @@
     <string name="shared_string_foot">Fot</string>
     <string name="number_of_tracks">%1$s spor</string>
     <string name="shared_string_finger">Finger</string>
-    <string name="rendering_value_sacScale_name">SAC-skala</string>
-    <string name="rendering_value_caiScale_name">CAI-skala</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
     <string name="external_sensors_not_found">Sensorer ikke funnet</string>
     <string name="shared_string_wrist">Håndledd</string>
     <string name="shared_string_chest">Bryst</string>
@@ -5224,4 +5224,8 @@
     <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive stoffer</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Etsende stoffer</string>
     <string name="dangerous_goods">Farlig gods</string>
+    <string name="rendering_attr_alpineHiking_name">Vanskelighetsklassifisering</string>
+    <string name="rendering_attr_alpineHiking_description">Klassifiseringstyper for vanskelighetsgrad på rutene.</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italiensk alpinforening)</string>
+    <string name="rendering_value_sacScale_description">Sveitsisk alpinklubb</string>
 </resources>
