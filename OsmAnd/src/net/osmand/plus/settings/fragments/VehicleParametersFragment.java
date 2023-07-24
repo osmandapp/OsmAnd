@@ -353,8 +353,6 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 					return ApplicationMode.PEDESTRIAN.getMaxSpeedConfigLimit();
 				case "boat":
 					return ApplicationMode.BOAT.getMaxSpeedConfigLimit();
-				case "STRAIGHT_LINE_MODE":
-					return 0;
 				case "ski":
 					return ApplicationMode.SKI.getMaxSpeedConfigLimit();
 				case "public_transport":
