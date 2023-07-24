@@ -110,12 +110,10 @@ class TracksScreen(
 		val listBuilder = ItemList.Builder()
 		val tracksSize = trackTab.trackItems.size
 		val selectedGpxFiles = ArrayList<SelectedGpxFile>()
-		val tracks =
-			trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
+		val tracks = trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
 		val mapRect = QuadRect()
 		if (!Algorithms.isEmpty(tracks)) {
-			val settings = app.settings
-			initialCompassMode = settings.compassMode
+			initialCompassMode = app.settings.compassMode
 			app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
 		}
 		for (track in tracks) {

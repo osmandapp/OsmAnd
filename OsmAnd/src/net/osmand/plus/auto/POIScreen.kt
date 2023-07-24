@@ -111,19 +111,15 @@ class POIScreen(
             val limitedSearchResults =
                 searchResults.subList(0, searchResultsSize.coerceAtMost(contentLimit - 1))
             if (!Algorithms.isEmpty(limitedSearchResults)) {
-                val settings = app.settings
-                initialCompassMode = settings.compassMode
+                initialCompassMode = app.settings.compassMode
                 app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
             }
             for (point in limitedSearchResults) {
                 if (point.`object` is Amenity) {
                     val amenity = point.`object` as Amenity
                     mapPoint.add(amenity)
-                    val amenityLocation = amenity.location
-                    Algorithms.extendRectToContainPoint(
-                        mapRect,
-                        amenityLocation.longitude,
-                        amenityLocation.latitude)
+                    val latLon = amenity.location
+                    Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
                 }
                 val title = point.localeName
                 var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
@@ -165,7 +161,7 @@ class POIScreen(
         sr.localeName = objectLocalizedName
         sr.`object` = group
         sr.priority = SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY.toDouble()
-	    sr.priorityDistance = searchRadius
+        sr.priorityDistance = searchRadius
         sr.objectType = ObjectType.POI_TYPE
         searchHelper.completeQueryWithObject(sr)
         loading = true

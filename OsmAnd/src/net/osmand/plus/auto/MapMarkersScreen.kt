@@ -55,8 +55,7 @@ class MapMarkersScreen(
         app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(markers)
         val mapRect = QuadRect()
         if (!Algorithms.isEmpty(markers)) {
-            val settings = app.settings
-            initialCompassMode = settings.compassMode
+            initialCompassMode = app.settings.compassMode
             app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
         }
         for (marker in markers) {

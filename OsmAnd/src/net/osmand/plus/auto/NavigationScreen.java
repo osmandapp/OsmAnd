@@ -114,8 +114,8 @@ public final class NavigationScreen extends BaseOsmAndAndroidAutoScreen implemen
 
 	@Nullable
 	private SurfaceRenderer getSurfaceRenderer() {
-		return getApp().getCarNavigationSession() != null ?
-				getApp().getCarNavigationSession().navigationCarSurface : null;
+		NavigationSession session = getApp().getCarNavigationSession();
+		return session != null ? session.navigationCarSurface : null;
 	}
 
 	/**
