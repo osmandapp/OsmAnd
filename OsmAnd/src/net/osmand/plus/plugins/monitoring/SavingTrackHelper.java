@@ -22,6 +22,7 @@ import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -486,11 +487,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void updateLocation(net.osmand.Location location, Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-		if (heading != null && settings.SAVE_HEADING_TO_GPX.get()) {
-			heading = MapUtils.normalizeDegrees360(heading);
-		} else {
-			heading = NO_HEADING;
-		}
+
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		boolean writeHeading = plugin != null && plugin.SAVE_HEADING_TO_GPX.get();
+		heading = heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : NO_HEADING;
+
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
@@ -522,7 +523,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (record) {
 			JSONObject json = new JSONObject();
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
-			if (location.hasBearing()) {
+
+			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
+			if (writeBearing && location.hasBearing()) {
 				try {
 					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
 				} catch (JSONException e) {
