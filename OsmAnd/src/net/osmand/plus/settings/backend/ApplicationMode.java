@@ -66,62 +66,62 @@ public class ApplicationMode {
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
 			.icon(R.drawable.ic_action_car_dark)
-			.setMaxSpeedConfigLimit(36.11111f)
+			.setMaxSpeedConfigLimit(195)
 			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
 			.icon(R.drawable.ic_action_bicycle_dark)
-			.setMaxSpeedConfigLimit(9.166667f)
+			.setMaxSpeedConfigLimit(50)
 			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
 			.icon(R.drawable.ic_action_pedestrian_dark)
-			.setMaxSpeedConfigLimit(2.777778f)
+			.setMaxSpeedConfigLimit(15)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode TRUCK = create(CAR, R.string.app_mode_truck, "truck")
 			.icon(R.drawable.ic_action_truck_dark)
-			.setMaxSpeedConfigLimit(36.11111f)
+			.setMaxSpeedConfigLimit(195)
 			.description(R.string.app_mode_truck).reg();
 
 	public static final ApplicationMode MOTORCYCLE = create(CAR, R.string.app_mode_motorcycle, "motorcycle")
 			.icon(R.drawable.ic_action_motorcycle_dark)
-			.setMaxSpeedConfigLimit(36.11111f)
+			.setMaxSpeedConfigLimit(195)
 			.description(R.string.app_mode_motorcycle).reg();
 
 	public static final ApplicationMode MOPED = create(BICYCLE, R.string.app_mode_moped, "moped")
-			.setMaxSpeedConfigLimit(12.96296f)
+			.setMaxSpeedConfigLimit(70)
 			.icon(R.drawable.ic_action_motor_scooter)
-			.description(R.string.app_mode_bicycle).reg();
+			.description(R.string.app_mode_moped).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
 			.icon(R.drawable.ic_action_bus_dark)
-			.setMaxSpeedConfigLimit(26.388889f)
+			.setMaxSpeedConfigLimit(142.5f)
 			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode TRAIN = createBase(R.string.app_mode_train, "train")
 			.icon(R.drawable.ic_action_train)
-			.setMaxSpeedConfigLimit(47.222225f)
+			.setMaxSpeedConfigLimit(255)
 			.description(R.string.app_mode_train).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.icon(R.drawable.ic_action_sail_boat_dark)
-			.setMaxSpeedConfigLimit(18.527777f)
+			.setMaxSpeedConfigLimit(100f)
 			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
 			.icon(R.drawable.ic_action_aircraft)
-			.setMaxSpeedConfigLimit(200f)
+			.setMaxSpeedConfigLimit(1080)
 			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.icon(R.drawable.ic_action_skiing)
-			.setMaxSpeedConfigLimit(41.666668f)
+			.setMaxSpeedConfigLimit(225)
 			.description(R.string.base_profile_descr_ski).reg();
 
 	public static final ApplicationMode HORSE = createBase(R.string.horseback_riding, "horse")
 			.icon(R.drawable.ic_action_horse)
-			.setMaxSpeedConfigLimit(8.333334f)
+			.setMaxSpeedConfigLimit(45)
 			.description(R.string.horseback_riding).reg();
 
 	public static List<ApplicationMode> values(@NonNull OsmandApplication app) {
@@ -752,7 +752,7 @@ public class ApplicationMode {
 		}
 
 		public ApplicationModeBuilder setMaxSpeedConfigLimit(float maxSpeedConfigLimit) {
-			applicationMode.maxSpeedConfigLimit = maxSpeedConfigLimit;
+			applicationMode.maxSpeedConfigLimit = maxSpeedConfigLimit / 3.6f;
 			return this;
 		}
 

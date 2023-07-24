@@ -39,12 +39,12 @@ import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.vehiclesize.SizeType;
-import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
+import net.osmand.plus.settings.vehiclesize.SizeType;
+import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.vehiclesize.WeightMetric;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.AndroidUtils;
@@ -63,6 +63,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	private static final String ROUTING_PARAMETER_SYMBOLIC_DEFAULT = "-";
 
 	private static final String MOTOR_TYPE_PREF_ID = ROUTING_PREFERENCE_PREFIX + MOTOR_TYPE;
+	public static final int MAX_SPEED_LIMIT_FOR_DEFAULT_SPEED = 300;
 
 	@Override
 	protected void setupPreferences() {
@@ -272,7 +273,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		float settingsDefaultSpeed = mode.getDefaultSpeed();
 		boolean decimalPrecision = !defaultSpeedOnly
 				&& router != null
-				&& mode.getMaxSpeedConfigLimit() <= ApplicationMode.FAST_SPEED_THRESHOLD;
+				&& getMaxSpeedLimit(mode) / 1.5f <= ApplicationMode.FAST_SPEED_THRESHOLD;
 
 		float[] defaultValue = {roundSpeed(settingsDefaultSpeed * ratio[0], decimalPrecision)};
 		float[] minValue = new float[1];
@@ -282,18 +283,18 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 		if (defaultSpeedOnly || router == null) {
 			minValue[0] = Math.round(Math.min(1, settingsDefaultSpeed) * ratio[0]);
-			maxValue[0] = Math.round(Math.max(300, settingsDefaultSpeed) * ratio[0]);
+			maxValue[0] = Math.round(Math.max(MAX_SPEED_LIMIT_FOR_DEFAULT_SPEED, settingsDefaultSpeed) * ratio[0]);
 			min = (int) minValue[0];
 		} else {
 			float minSpeedValue = settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed();
-			float maxSpeedValue = settingsMaxSpeed > 0 ? settingsMaxSpeed : mode.getMaxSpeedConfigLimit();
+			float maxSpeedValue = settingsMaxSpeed > 0 ? settingsMaxSpeed : getMaxSpeedLimit(mode) / 1.5f;
 
 			minValue[0] = roundSpeed(Math.min(minSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 			maxValue[0] = roundSpeed(Math.max(maxSpeedValue, settingsDefaultSpeed) * ratio[0], decimalPrecision);
 
 			min = Math.round(Math.min(minValue[0], router.getMinSpeed() * ratio[0] / 2f));
 		}
-		max = Math.round(Math.max(maxValue[0], mode.getMaxSpeedConfigLimit() * ratio[0] * 1.5f));
+		max = Math.round(Math.max(maxValue[0], getMaxSpeedLimit(mode) * ratio[0]));
 		max = Math.max(min, max);
 
 		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
@@ -337,6 +338,44 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		}
 
 		builder.show();
+	}
+
+	private float getMaxSpeedLimit(ApplicationMode mode) {
+		RouteService routeService = mode.getRouteService();
+		if (routeService == RouteService.OSMAND) {
+			String routingProfile = mode.getRoutingProfile();
+			switch (routingProfile) {
+				case "car":
+					return ApplicationMode.CAR.getMaxSpeedConfigLimit();
+				case "bicycle":
+					return ApplicationMode.BICYCLE.getMaxSpeedConfigLimit();
+				case "pedestrian":
+					return ApplicationMode.PEDESTRIAN.getMaxSpeedConfigLimit();
+				case "boat":
+					return ApplicationMode.BOAT.getMaxSpeedConfigLimit();
+				case "STRAIGHT_LINE_MODE":
+					return 0;
+				case "ski":
+					return ApplicationMode.SKI.getMaxSpeedConfigLimit();
+				case "public_transport":
+					return ApplicationMode.PUBLIC_TRANSPORT.getMaxSpeedConfigLimit();
+				case "horsebackriding":
+					return ApplicationMode.HORSE.getMaxSpeedConfigLimit();
+				case "moped":
+					return ApplicationMode.MOPED.getMaxSpeedConfigLimit();
+				case "train":
+					return ApplicationMode.TRAIN.getMaxSpeedConfigLimit();
+				default:
+					return getRoutingDefaultMaxSpeed(mode);
+			}
+		} else {
+			return getRoutingDefaultMaxSpeed(mode);
+		}
+	}
+
+	private float getRoutingDefaultMaxSpeed(ApplicationMode mode) {
+		GeneralRouter router = app.getRouter(mode);
+		return router == null ? Math.max(MAX_SPEED_LIMIT_FOR_DEFAULT_SPEED, mode.getDefaultSpeed()) : router.getMaxSpeed() * 1.5f;
 	}
 
 	private enum SpeedSliderType {
