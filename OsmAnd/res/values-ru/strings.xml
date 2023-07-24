@@ -4945,7 +4945,7 @@
 \n- виджеты на основе местоположения;
 \n- изолинии температуры / давления.
 \nДанные о погоде предоставляются GFS %1$s</string>
-    <string name="rotate_map_manual_opt">поворот вручную (фикс.)</string>
+    <string name="rotate_map_manual_opt">вручную</string>
     <string name="rendering_attr_depthContourColorScheme_name">Цветовая схема линий</string>
     <string name="shared_string_next_sunrise">Следующий восход</string>
     <string name="map_widget_group_sunrise_sunset">Восход, закат</string>
