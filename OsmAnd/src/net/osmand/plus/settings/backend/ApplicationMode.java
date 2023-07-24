@@ -465,13 +465,10 @@ public class ApplicationMode {
 	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
-			iconNameListener = new StateChangedListener<String>() {
-				@Override
-				public void stateChanged(String change) {
-					List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
-					for (ApplicationMode mode : modes) {
-						mode.updateAppModeIcon();
-					}
+			iconNameListener = change -> {
+				List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
+				for (ApplicationMode mode : modes) {
+					mode.updateAppModeIcon();
 				}
 			};
 			settings.ICON_RES_NAME.addListener(iconNameListener);
@@ -514,12 +511,7 @@ public class ApplicationMode {
 	}
 
 	public static void reorderAppModes() {
-		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
-			@Override
-			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
-				return (mode1.getOrder() < mode2.getOrder()) ? -1 : ((mode1.getOrder() == mode2.getOrder()) ? 0 : 1);
-			}
-		};
+		Comparator<ApplicationMode> comparator = (mode1, mode2) -> Integer.compare(mode1.getOrder(), mode2.getOrder());
 		Collections.sort(values, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);
