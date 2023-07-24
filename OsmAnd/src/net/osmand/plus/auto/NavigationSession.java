@@ -73,6 +73,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	Action settingsAction;
 
 	private OsmandMapTileView mapView;
+	private ApplicationMode defaultAppMode;
 
 	NavigationSession() {
 		getLifecycle().addObserver(this);
@@ -119,8 +120,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		mapLayers.getPoiMapLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		mapLayers.getMapMarkersLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		OsmandSettings settings = getApp().getSettings();
-		ApplicationMode appMode = settings.getApplicationMode();
-		if (!isAppModeDerivedFromCar(appMode)) {
+		defaultAppMode = settings.getApplicationMode();
+		if (!isAppModeDerivedFromCar(defaultAppMode)) {
 			List<ApplicationMode> availableAppModes = ApplicationMode.values(getApp());
 			for (ApplicationMode availableAppMode : availableAppModes) {
 				if (isAppModeDerivedFromCar(availableAppMode)) {
@@ -143,6 +144,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		mapLayers.getGpxLayer().customObjectsDelegate = null;
 		mapLayers.getPoiMapLayer().customObjectsDelegate = null;
 		mapLayers.getMapMarkersLayer().customObjectsDelegate = null;
+		if (defaultAppMode != null) {
+			getApp().getSettings().setApplicationMode(defaultAppMode);
+			defaultAppMode = null;
+		}
 	}
 
 	@Override
