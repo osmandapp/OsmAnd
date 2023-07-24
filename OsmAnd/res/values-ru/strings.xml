@@ -2792,7 +2792,7 @@
     <string name="rendering_value_black_name">Чёрный</string>
     <string name="search_street">Поиск улицы</string>
     <string name="start_search_from_city">Сначала укажите населённый пункт</string>
-    <string name="shared_string_restore">Восстановление</string>
+    <string name="shared_string_restore">Восстановить</string>
     <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>
     <string name="more_transport_on_stop_hint">Больше транспорта доступно от этой остановки.</string>
@@ -3139,8 +3139,8 @@
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Скорость движения, размеры, масса транспортного средства</string>
-    <string name="vehicle_parameters">Параметры транспортного средства</string>
-    <string name="voice_announces_info">Голосовые оповещения работают только при навигации.</string>
+    <string name="vehicle_parameters">Физические параметры</string>
+    <string name="voice_announces_info">Настройка голосовых оповещений (работают только при навигации).</string>
     <string name="voice_announces_descr">Навигационные инструкции и оповещения</string>
     <string name="voice_announces">Голосовая навигация</string>
     <string name="screen_alerts">Экранные оповещения</string>
@@ -4805,8 +4805,8 @@
     <string name="map_widget_target_distance">Расстояние от камеры до цели</string>
     <string name="map_widget_zoom_level">Уровень масштабирования</string>
     <string name="ant_missing_dependency">Отсутствует зависимость</string>
-    <string name="speak_gps_signal_status">Оповещать о потере и восстановлении GPS-сигнала</string>
-    <string name="speak_route_recalculation">Оповещать о пересчёте маршрута</string>
+    <string name="speak_gps_signal_status">Потеря связи с GPS</string>
+    <string name="speak_route_recalculation">Пересчёт маршрута</string>
     <string name="map_widget_altitude_current_location_desc">Виджет показывает высоту над уровнем моря для текущего местоположения.</string>
     <string name="simulate_location_by_gpx">Моделирование местоположения по GPX</string>
     <string name="location_simulation_speedup">Ускорение моделирования</string>
@@ -5116,7 +5116,7 @@
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
     <string name="clear_online_cache_description">Это очистит весь кеш онлайн-тайлов погоды.</string>
     <string name="free_maps_updates">Бесплатные обновления (экстренные)</string>
-    <string name="speak_route_deviation">Оповещать об отклонении от маршрута</string>
+    <string name="speak_route_deviation">Отклонение от маршрута</string>
     <string name="select_layer">Выбрать слой</string>
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
     <string name="shutter_sound">Звук затвора</string>
