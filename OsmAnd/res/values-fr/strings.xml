@@ -4571,9 +4571,9 @@
     <string name="page_number">Page %1$s</string>
     <string name="map_widget_distance_to_destination">Distance jusqu\'à destination</string>
     <string name="add_page">Ajouter page</string>
-    <string name="no_widgets_descr">Ajoutez un ou plusieurs widgets grâce à la liste des widgets disponibles.</string>
+    <string name="no_widgets_descr">Ajouter un ou plusieurs gadgets depuis la liste des gadgets disponibles.</string>
     <string name="snackbar_page_removed">La page \"%1$s\" a été supprimée.</string>
-    <string name="no_widgets_here_yet">Aucun widget pour l\'instant</string>
+    <string name="no_widgets_here_yet">Pas encore de gadget ici</string>
     <string name="on_with_params">%1$s de %2$s</string>
     <string name="shared_string_symbol">Symbole</string>
     <string name="available_widgets">Widgets disponibles</string>
@@ -4698,7 +4698,7 @@
     <string name="marker_2nd">Seconde marque</string>
     <string name="goods_delivery_desc_4">Pour un véhicule pesant plus de 3,5 tonnes, utilisez le profil Camion.</string>
     <string name="goods_delivery_desc_2">Les routes fermées à la livraison de marchandises seront évitées.</string>
-    <string name="reset_all_settings_desc">Réinitialiser tous les paramètres à leurs valeurs par défaut \?</string>
+    <string name="reset_all_settings_desc">Réinitialiser tous les paramètres \?</string>
     <string name="goods_delivery_desc_3">S\'applique uniquement aux véhicules pesant moins de 3,5 tonnes.</string>
     <string name="routing_attr_goods_restrictions_name">Livraison de marchandises</string>
     <string name="download_complete">Téléchargement terminé</string>
