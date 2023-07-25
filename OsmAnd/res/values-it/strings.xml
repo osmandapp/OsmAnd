@@ -4167,7 +4167,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token non valido o scaduto</string>
     <string name="backup_error_user_is_not_registered">Nessun utente registrato con questo indirizzo email</string>
     <string name="backup_error_no_valid_subscription">Nessuna valida sottoscrizione presente</string>
-    <string name="contour_lines_hillshades_slope">Isoipse, ombreggiamento dei rilievi, pendenze</string>
+    <string name="contour_lines_hillshade_slope">Isoipse, ombreggiamento dei rilievi, pendenze</string>
     <string name="release_4_0">• Backup Cloud
 \n
 \n • Aggiunta la modalità notte per lo stile della mappa \"Topo\"

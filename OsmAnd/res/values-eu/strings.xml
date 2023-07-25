@@ -4387,7 +4387,7 @@
     <string name="contact_support">Jarri harremanetan laguntzarekin</string>
     <string name="track_recording_title">Arrastoaren grabatzea gelditu da</string>
     <string name="map_widget_distance_by_tap">Distantzia sakatuz</string>
-    <string name="contour_lines_hillshades_slope">Sestra-lerroak, itzalak, maldak</string>
+    <string name="contour_lines_hillshade_slope">Sestra-lerroak, itzalak, maldak</string>
     <string name="shared_string_uphill">Maldan gora</string>
     <string name="backup_error_no_valid_subscription">Ez dago baliozko harpidetzarik</string>
     <string name="contact_support_description">Galderarik baduzu, jarri gurekin harremanetan %1$s helbidean.</string>

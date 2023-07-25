@@ -3986,7 +3986,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller udløbet token</string>
     <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
     <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
-    <string name="contour_lines_hillshades_slope">Højdekurver, terrænskygger, hældning</string>
+    <string name="contour_lines_hillshade_slope">Højdekurver, terrænskygger, hældning</string>
     <string name="duration_moment_ago">for et øjeblik siden</string>
     <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Log ud\?

@@ -4119,7 +4119,7 @@
     <string name="osmand_pro_tagline">Få alle funksjonene</string>
     <string name="backup_delete_types">Slett avskrudde datatyper</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Terrengkart: koter, relieffskygger, bakkehelning</string>
-    <string name="contour_lines_hillshades_slope">Koter, relieffskygger, bakkehelning</string>
+    <string name="contour_lines_hillshade_slope">Koter, relieffskygger, bakkehelning</string>
     <string name="active_till">Aktiv til %1$s</string>
     <string name="track_recording_title">Sporopptak stoppet</string>
     <string name="track_has_no_needed_data">Sporet mangler nødvendige data.</string>

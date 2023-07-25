@@ -4282,7 +4282,7 @@
     <string name="turn_arrows_descr">Izaberite da li su strelice za skretanje prikazane na liniji rute.</string>
     <string name="included_categories">Uključene kategorije</string>
     <string name="from_with_param">Od %1$s</string>
-    <string name="contour_lines_hillshades_slope">Izohipse, reljef, nagib</string>
+    <string name="contour_lines_hillshade_slope">Izohipse, reljef, nagib</string>
     <string name="verification_code_missing">Nisam dobio verifikacioni kod</string>
     <string name="backup_delete_old_data_warning">Izbrisaćete istoriju promena prethodno učitanih podataka.
 \n

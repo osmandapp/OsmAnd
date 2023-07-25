@@ -4216,7 +4216,7 @@
     <string name="duration_moment_ago">antaŭ momento</string>
     <string name="enter_verification_code">Enigu unufojan pasvorton</string>
     <string name="backup_error_subscription_was_expired_descr">Via abono OsmAnd Pro senvalidiĝis – reaboni ĝin por povi uzi sekurkopion. Vi plue povas restarigi datumojn el la nubo.</string>
-    <string name="contour_lines_hillshades_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
+    <string name="contour_lines_hillshade_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
     <string name="logout_from_osmand_cloud">Elsaluti el OsmAnd-Nubo</string>
     <string name="logout_from_osmand_cloud_decsr">Ĉu elsaluti\?
 \nVi devos reensaluti por fari sekurkopion aŭ restarigi datumojn.</string>

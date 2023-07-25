@@ -26,7 +26,7 @@ public enum OsmAndFeature {
 	WIKIPEDIA(R.string.offline_wikipeadia, R.string.purchases_feature_desc_wikipedia, R.drawable.ic_action_wikipedia_download_colored_day, R.drawable.ic_action_wikipedia_download_colored_night),
 	WIKIVOYAGE(R.string.offline_wikivoyage, R.string.purchases_feature_desc_wikivoyage, R.drawable.ic_action_backpack_colored_day, R.drawable.ic_action_backpack_colored_night),
 	EXTERNAL_SENSORS_SUPPORT(R.string.external_sensors_support, R.string.purchases_feature_desc_external_sensors, R.drawable.ic_action_external_sensor_colored_day, R.drawable.ic_action_external_sensor_colored_night),
-	TERRAIN(R.string.terrain_maps, R.string.terrain_maps_contour_lines_hillshade_slope, R.string.purchases_feature_desc_terrain, R.drawable.ic_action_srtm_colored_day, R.drawable.ic_action_srtm_colored_day),
+	TERRAIN(R.string.terrain_maps, R.string.contour_lines_hillshade_slope, R.string.purchases_feature_desc_terrain, R.drawable.ic_action_srtm_colored_day, R.drawable.ic_action_srtm_colored_day),
 	NAUTICAL(R.string.nautical_depth, R.string.purchases_feature_desc_nautical, R.drawable.ic_action_nautical_depth_colored_day, R.drawable.ic_action_nautical_depth_colored_night);
 
 	private final int titleId;

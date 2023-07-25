@@ -426,7 +426,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
 						TERRAIN_ID,
 						R.string.shared_string_terrain,
-						R.string.contour_lines_hillshades_slope);
+						R.string.contour_lines_hillshade_slope);
 			} else {
 				createContextMenuItems(adapter, mapActivity);
 			}

@@ -4238,7 +4238,7 @@
     <string name="attribute">Atrybut</string>
     <string name="shared_string_purchased">Zakupiono</string>
     <string name="explore_wikipedia_offline">Przeglądaj Wikipedię w trybie offline.</string>
-    <string name="contour_lines_hillshades_slope">Poziomice, mapy cieniowane, nachylenie</string>
+    <string name="contour_lines_hillshade_slope">Poziomice, mapy cieniowane, nachylenie</string>
     <string name="on_hold_since">Wstrzymana od %1$s</string>
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>

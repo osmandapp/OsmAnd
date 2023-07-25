@@ -3021,7 +3021,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token invalid sau expirat</string>
     <string name="backup_error_user_is_not_registered">Nu există niciun utilizator înregistrat cu această adresă de e-mail</string>
     <string name="backup_error_no_valid_subscription">Nu există un abonament valabil</string>
-    <string name="contour_lines_hillshades_slope">Curbe de nivel, umbrire relief, pante</string>
+    <string name="contour_lines_hillshade_slope">Curbe de nivel, umbrire relief, pante</string>
     <string name="release_4_0">• Backup în cloud
 \n
 \n • A fost adăugat modul de noapte pentru stilul de redare \"Topo\"

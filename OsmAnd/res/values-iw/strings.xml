@@ -4203,7 +4203,7 @@
     <string name="backup_error_subscription_was_expired_descr">מינוי ה־OsmAnd Pro שלך פג, יש לחדש אותו כדי להשתמש בגיבוי. עדיין ניתן לשחזר מהענן.</string>
     <string name="backup_error_subscription_was_used">מינוי או פרומו שנעשה בו שימוש בחשבון אחר %1$s</string>
     <string name="backup_error_size_is_exceeded">הגודל המרבי של OsmAnd Cloud חורג מ־%1$s</string>
-    <string name="contour_lines_hillshades_slope">קווי מתאר, הצללות, מדרונים</string>
+    <string name="contour_lines_hillshade_slope">קווי מתאר, הצללות, מדרונים</string>
     <string name="logout_from_osmand_cloud">יציאה מ־OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">לצאת מהחשבון\?
 \nיהיה עליך להיכנס שוב כדי לגבות או לשחזר נתונים.</string>

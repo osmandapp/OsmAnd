@@ -4287,7 +4287,7 @@
     <string name="upload_gpx_description_hint">Оставите празно, имена путања ће се користити као опис. Унешен опис ће се применити за сваку путању.</string>
     <string name="backup_deleting_all_data_descr">Сачекајте док ОсмАнд избрише Ваше податке са облака. Сви подаци на уређају ће остати нетакнути.</string>
     <string name="enter_verification_code">Унесите једнократну лозинку</string>
-    <string name="contour_lines_hillshades_slope">Изохипсе, рељеф, нагиб</string>
+    <string name="contour_lines_hillshade_slope">Изохипсе, рељеф, нагиб</string>
     <string name="exit_pan_mode_descr">Кликните Изабери ради напуштања начина рада померања</string>
     <string name="osm_live_payment_subscription_management_amz">Плаћање се скида са Вашег налога Амазона приликом потврде куповине.
 \n

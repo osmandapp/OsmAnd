@@ -4237,7 +4237,7 @@
     <string name="duration_moment_ago">gerade eben</string>
     <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikivoyage offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
     <string name="backup_error_subscription_was_expired_descr">Ihr OsmAnd Pro-Abonnement ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
-    <string name="contour_lines_hillshades_slope">Höhenlinien, Relief, Hangneigung</string>
+    <string name="contour_lines_hillshade_slope">Höhenlinien, Relief, Hangneigung</string>
     <string name="logout_from_osmand_cloud">Abmelden aus der OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Abmelden\?
 \nZum Sichern oder Wiederherstellen von Daten müssen Sie sich erneut anmelden.</string>

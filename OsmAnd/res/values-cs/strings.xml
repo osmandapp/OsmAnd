@@ -4208,7 +4208,7 @@
     <string name="empty_category_name">Prázdný název kategorie</string>
     <string name="reset_to_original">Resetovat do původního stavu</string>
     <string name="attribute">Atribut</string>
-    <string name="contour_lines_hillshades_slope">Vrstevnice, stínování svahů, sklon svahů</string>
+    <string name="contour_lines_hillshade_slope">Vrstevnice, stínování svahů, sklon svahů</string>
     <string name="copying_file">Kopírování souboru %1$s…</string>
     <string name="from_to_with_params">Z %1$s do %2$s</string>
     <string name="progress_complete">%1$s hotovo</string>

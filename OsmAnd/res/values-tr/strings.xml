@@ -4201,7 +4201,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Geçersiz veya süresi dolmuş belirteç</string>
     <string name="backup_error_user_is_not_registered">Bu e-posta adresiyle kayıtlı kullanıcı yok</string>
     <string name="backup_error_no_valid_subscription">Geçerli abonelik yok</string>
-    <string name="contour_lines_hillshades_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
+    <string name="contour_lines_hillshade_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
     <string name="release_4_0">• Bulut yedekleme
 \n
 \n • \"Topo\" harita tarzı için gece modu eklendi

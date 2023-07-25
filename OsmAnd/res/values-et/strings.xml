@@ -4301,7 +4301,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Värv võrgukuuluvuse järgi.</string>
     <string name="walking_route_osmc_description">Värvi marsruudid vastavalt nende individuaalsele kohalikule värvile (kui see on OpenStreetMapis olemas) ja tüübile (rahvusvaheline, piirkondlik, kohalik).</string>
     <string name="travel_routes">Reisimarsruudid</string>
-    <string name="contour_lines_hillshades_slope">Kõrgusjooned, mäenõlvad, kalle</string>
+    <string name="contour_lines_hillshade_slope">Kõrgusjooned, mäenõlvad, kalle</string>
     <string name="start_point">Alusta</string>
     <string name="mapillary_menu_filter_description_new">Otsi pilte kuupäeva või tüübi aluse. See võimalus on kasutusel vaid suure suumi puhul.</string>
     <string name="service_is_not_available_please_try_later">Teenus pole saadaval, palun proovi hiljem uuesti.</string>

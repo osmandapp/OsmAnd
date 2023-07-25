@@ -2404,7 +2404,7 @@
     <string name="backup_error_no_valid_subscription">Няма валиден абонамент</string>
     <string name="connect_track_points_as">Съединяване на точки от маршрута</string>
     <string name="add_line">Добави линия</string>
-    <string name="contour_lines_hillshades_slope">Контурни линии, засенчване на релефа, склонове</string>
+    <string name="contour_lines_hillshade_slope">Контурни линии, засенчване на релефа, склонове</string>
     <string name="duration_moment_ago">току-що</string>
     <string name="logout_from_osmand_cloud">Изход от OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Изход от системата\?

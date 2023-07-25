@@ -4410,7 +4410,7 @@
     <string name="shared_string_hide_slope">Hellingen verbergen</string>
     <string name="shared_string_downhill">Dalen</string>
     <string name="transparent_status_bar_descr">Geef de kaart weer onder de statusbalk</string>
-    <string name="contour_lines_hillshades_slope">Hoogtelijnen, reliëfschaduwen en hellingen</string>
+    <string name="contour_lines_hillshade_slope">Hoogtelijnen, reliëfschaduwen en hellingen</string>
     <string name="backup_error_file_not_available">Bestand onbeschikbaar</string>
     <string name="backup_error_user_is_not_registered">Er is geen gebruiker geregistreerd met het opgegeven e-mailadres</string>
     <string name="backup_error_token_is_not_valid_or_expired">Ongeldig of verlopen code</string>

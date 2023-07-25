@@ -4212,7 +4212,7 @@
 \n</string>
     <string name="duration_moment_ago">剛才</string>
     <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 訂閱已過期，請續訂以使用備份。您仍然可以從雲端還原資料。</string>
-    <string name="contour_lines_hillshades_slope">等高線、地形陰影、坡度</string>
+    <string name="contour_lines_hillshade_slope">等高線、地形陰影、坡度</string>
     <string name="logout_from_osmand_cloud">從 OsmAnd Cloud 登出</string>
     <string name="logout_from_osmand_cloud_decsr">登出？
 \n您必須重新登入才能備份或還原資料。</string>

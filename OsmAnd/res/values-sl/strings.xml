@@ -3803,7 +3803,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Obarvaj poti glede na vrsto omrežja vozlišč (mednarodno, regionalno, lokalno).</string>
     <string name="duration_moment_ago">pred nekaj trenutki</string>
     <string name="backup_deleting_all_data_descr">Počakaj, da OsmAnd izbriše podatke iz oblaka. Vsi podatki v napravi bodo ostali nedotaknjeni.</string>
-    <string name="contour_lines_hillshades_slope">Izohipse, senčenje terena, naklon</string>
+    <string name="contour_lines_hillshade_slope">Izohipse, senčenje terena, naklon</string>
     <string name="backup_error_file_not_available">Datoteka ni na voljo</string>
     <string name="backup_error_user_is_not_registered">S tem e-poštnim naslovom ni registriran noben uporabnik</string>
     <string name="backup_error_subscription_was_expired">Potekla naročnina</string>

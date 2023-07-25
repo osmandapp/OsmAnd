@@ -3066,7 +3066,7 @@
     <string name="routeInfo_smoothness_description">Klasifikasi kemampuan manuver jalan/jalur untuk kendaraan beroda, khususnya mengenai keteraturan/kerataan permukaan.</string>
     <string name="backup_error_no_subscription">Tidak ada langganan yang ada</string>
     <string name="backup_welcome_back_descr">Pulihkan data pada perangkat ini menggunakan OsmAnd Cloud.</string>
-    <string name="contour_lines_hillshades_slope">Garis kontur, bayangan bukit, lereng</string>
+    <string name="contour_lines_hillshade_slope">Garis kontur, bayangan bukit, lereng</string>
     <string name="release_4_0_beta">• Tambahkan opsi untuk mengunduh garis kontur dalam kaki
 \n
 \n • Lanskap Rencana Rute: menambahkan tab untuk beralih di antara titik atau grafik
