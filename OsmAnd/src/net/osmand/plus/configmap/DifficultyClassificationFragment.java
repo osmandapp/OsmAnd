@@ -116,7 +116,12 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 		String value = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR).get();
 		if (Algorithms.isEmpty(value)) {
 			RendererRegistry registry = app.getRendererRegistry();
-			value = registry.getCustomRenderingRuleProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR).getPossibleValues()[0];
+			RenderingRuleProperty property = registry.getCustomRenderingRuleProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
+			if (property != null) {
+				value = property.getPossibleValues()[0];
+			} else {
+				return app.getString(R.string.shared_string_disabled);
+			}
 		}
 		return app.getString(R.string.ltr_or_rtl_combine_via_comma, app.getString(R.string.shared_string_on),
 				AndroidUtils.getRenderingStringPropertyValue(app, value));

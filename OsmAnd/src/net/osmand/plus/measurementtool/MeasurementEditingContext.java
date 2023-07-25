@@ -944,12 +944,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			List<RouteSegmentResult> modifiedSegments = new ArrayList<>();
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
+				boolean duplicatePoint = needDuplicatePoint(gpxPoints, i);
+				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
 				if (!modifySegments) {
-					List<RouteSegmentResult> routeToTarget = gpxPoints.get(i).routeToTarget;
-					List<RouteSegmentResult> routeToTargetNext = gpxPoints.get(i + 1).routeToTarget;
-					boolean duplicatePoint = routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
-							.equals(routeToTargetNext.get(0).getStartPoint());
-					boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
 					MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
 				} else {
 					int ind = seg.getStartPointIndex();
@@ -998,7 +995,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 						modifiedSegments.add(seg);
 						pendingSegments.add(seg);
 					}
-					if (lastGpxPoint && k == segments.size() - 1) {
+					if (includeEndPoint) {
 						WptPt prevAddedPoint = addedPoint;
 						addedPoint = MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
 						if (prevAddedPoint != null) {
@@ -1080,6 +1077,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		replacePoints(originalPoints, routePoints);
 		return routePoints;
+	}
+
+	private boolean needDuplicatePoint(List<GpxPoint> gpxPoints, int i) {
+		List<RouteSegmentResult> routeToTarget = gpxPoints.get(i).routeToTarget;
+		List<RouteSegmentResult> routeToTargetNext = gpxPoints.get(i + 1).routeToTarget;
+		return routeToTarget.get(routeToTarget.size() - 1).getEndPoint()
+				.equals(routeToTargetNext.get(0).getStartPoint());
 	}
 
 	private void updateSegmentsForSnap(boolean both) {
