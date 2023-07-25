@@ -5335,4 +5335,6 @@
     <string name="rendering_attr_alpineHiking_name">Klasifikace podle obížnosti</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="write_bearing_description">Ukládat směr ke každému bodu stopy během záznamu</string>
+    <string name="write_bearing">Zapisovat směr</string>
 </resources>
