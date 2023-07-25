@@ -5344,4 +5344,8 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_attr_alpineHiking_description">Klassificeringstyper for sværhedsgrad af ruterne.</string>
     <string name="rendering_attr_alpineHiking_name">Sværhedsklassificering</string>
+    <string name="write_bearing">Skriv pejling</string>
+    <string name="write_heading_description">Gem retning for hvert sporpunkt under optagelse</string>
+    <string name="write_heading">Skriv retning</string>
+    <string name="write_bearing_description">Gem pejling for hvert sporpunkt under optagelse</string>
 </resources>
