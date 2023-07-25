@@ -159,6 +159,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	private void setupTripRecordingPrefs() {
+		Preference routingCategory = findPreference("trip_recording");
+		routingCategory.setIconSpaceReserved(false);
+
 		SwitchPreferenceEx bearingPref = findPreference(plugin.SAVE_BEARING_TO_GPX.getId());
 		bearingPref.setIconSpaceReserved(false);
 		bearingPref.setDescription(R.string.write_bearing_description);
