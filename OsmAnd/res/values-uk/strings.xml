@@ -5346,4 +5346,8 @@
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Італійський альпійський клуб)</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="write_bearing">Записувати напрямок</string>
+    <string name="write_heading_description">Під час запису зберігати напрямок для кожної точки треку</string>
+    <string name="write_heading">Записувати заголовок</string>
+    <string name="write_bearing_description">Під час запису зберігати напрямок на кожну точку треку</string>
 </resources>
