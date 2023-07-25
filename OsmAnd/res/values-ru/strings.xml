@@ -668,7 +668,7 @@
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">по направлению компаса</string>
     <string name="rotate_map_bearing_opt">по направлению движения</string>
-    <string name="rotate_map_north_opt">север сверху (фикс.)</string>
+    <string name="rotate_map_north_opt">север сверху</string>
     <string name="rotate_map_to_descr">Выравнивание карты:</string>
     <string name="rotate_map_to">Ориентация карты</string>
     <string name="show_route">Детали маршрута</string>
