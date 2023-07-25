@@ -5343,4 +5343,8 @@
     <string name="rendering_attr_alpineHiking_description">Schwierigkeitsgrade der Wanderwege.</string>
     <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
+    <string name="write_bearing">Peilung schreiben</string>
+    <string name="write_heading">Richtung schreiben</string>
+    <string name="write_heading_description">Richtung zu jedem Trackpunkt bei Aufnahme speichern.</string>
+    <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
 </resources>
