@@ -344,7 +344,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(OSM_NOTES)) {
 			tv.setText(R.string.osm_notes);
 		} else if (isCurrentType(TERRAIN)) {
-			tv.setText(R.string.shared_string_terrain);
+			tv.setText(R.string.shared_string_hillshade_slope);
 		} else if (isCurrentType(WIKIPEDIA)) {
 			tv.setText(R.string.shared_string_wikipedia);
 		} else if (isCurrentType(CYCLE_ROUTES)) {
