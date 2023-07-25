@@ -5337,4 +5337,8 @@
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Olasz Alpesi Club)</string>
     <string name="rendering_value_sacScale_description">Svájci Alpesi Club</string>
     <string name="rendering_attr_alpineHiking_name">Nehézségi besorolás</string>
+    <string name="write_bearing">Irányszög mentése</string>
+    <string name="write_bearing_description">Rögzítés során a nyomvonal pontok irányszögének mentése</string>
+    <string name="write_heading_description">Rögzítés során a nyomvonal pontok irányának mentése</string>
+    <string name="write_heading">Irány mentése</string>
 </resources>
