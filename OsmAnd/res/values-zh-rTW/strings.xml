@@ -5322,4 +5322,12 @@
     <string name="dangerous_goods_description">部份道路與隧道禁止運輸危險物品。</string>
     <string name="dangerous_goods">危險物品</string>
     <string name="free_ride">免費搭乘</string>
+    <string name="shared_string_checked">已檢查</string>
+    <string name="shared_string_not_checked">未檢查</string>
+    <string name="rendering_value_caiScale_description">義大利人阿爾卑斯山俱樂部</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_description">瑞士阿爾卑斯山俱樂部</string>
+    <string name="rendering_attr_alpineHiking_name">難度分類</string>
+    <string name="rendering_attr_alpineHiking_description">路線的難度分類類型。</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
 </resources>
