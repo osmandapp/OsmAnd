@@ -5330,4 +5330,8 @@
     <string name="rendering_value_sacScale_name">CAS</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
     <string name="rendering_attr_alpineHiking_name">Classification des difficultés</string>
+    <string name="write_bearing">Enregistrer le relèvement</string>
+    <string name="write_heading">Enregistrer le cap</string>
+    <string name="write_heading_description">Sauvegarder le cap à chaque point de passage lors de l\'enregistrement</string>
+    <string name="write_bearing_description">Sauvegarder le relèvement vers chaque point de passage lors de l\'enregistrement</string>
 </resources>
