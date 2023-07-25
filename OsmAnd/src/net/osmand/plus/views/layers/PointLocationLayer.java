@@ -327,7 +327,8 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			updateMarkerPosition(location, target31, animationDuration);
 			if (location.hasBearing()) {
 				float bearing = location.getBearing() - 90.0f;
-				boolean updateBearing = lastBearingCached == null || Math.abs(bearing - lastBearingCached) > 0.1;
+				Float cachedBearing = lastBearingCached;
+				boolean updateBearing = cachedBearing == null || Math.abs(bearing - cachedBearing) > 0.1;
 				if (updateBearing) {
 					lastBearingCached = bearing;
 					updateMarkerBearing(bearing, isAnimateMyLocation());
@@ -335,7 +336,8 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 			}
 		}
 		if (heading != null && showHeadingCached) {
-			boolean updateHeading = lastHeadingCached == null || Math.abs(heading - lastHeadingCached) > 0.1;
+			Float cachedHeading = lastHeadingCached;
+			boolean updateHeading = cachedHeading == null || Math.abs(heading - cachedHeading) > 0.1;
 			if (updateHeading) {
 				lastHeadingCached = heading;
 				updateMarkerHeading(heading);
