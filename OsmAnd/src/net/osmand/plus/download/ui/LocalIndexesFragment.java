@@ -189,7 +189,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Override
-	public void renamedTo(File file) {
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
 		reloadLocalIndexes();
 	}
 
