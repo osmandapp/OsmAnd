@@ -887,7 +887,7 @@
     <string name="map_tile_source">Kilde til kortfliser</string>
     <string name="map_source">Kortkilde</string>
     <string name="use_internet">Brug internettet</string>
-    <string name="show_location">Vis position</string>
+    <string name="show_location">Vis din position</string>
     <string name="show_gps_coordinates_text">Vis GPS-koordinater på kortet</string>
     <string name="use_internet_to_download_tile">Hent manglende kortfliser</string>
     <string name="app_description">Navigationsprogram</string>
