@@ -40,4 +40,10 @@ public class VisibleTracksGroup implements TracksGroup {
 	public String getName(@NonNull Context context) {
 		return context.getString(R.string.shared_string_visible_on_map);
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getName(app);
+	}
 }

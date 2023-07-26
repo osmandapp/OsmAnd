@@ -942,9 +942,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				}
 			}
 			List<RouteSegmentResult> modifiedSegments = new ArrayList<>();
+			boolean duplicatePoint = needDuplicatePoint(gpxPoints, i);
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
-				boolean duplicatePoint = needDuplicatePoint(gpxPoints, i);
 				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
 				if (!modifySegments) {
 					MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);

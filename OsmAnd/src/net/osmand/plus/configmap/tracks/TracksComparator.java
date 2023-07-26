@@ -17,6 +17,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -119,7 +120,7 @@ public class TracksComparator implements Comparator<Object> {
 		GPXTrackAnalysis analysis1 = dataItem1 != null ? dataItem1.getAnalysis() : null;
 		GPXTrackAnalysis analysis2 = dataItem2 != null ? dataItem2.getAnalysis() : null;
 
-		if (shouldCheckAnalysis() || analysis1 == null || analysis2 == null) {
+		if (shouldCheckAnalysis()) {
 			Integer analysis = checkItemsAnalysis(item1, item2, analysis1, analysis2);
 			if (analysis != null) {
 				return analysis;
@@ -170,7 +171,7 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private boolean shouldCheckAnalysis() {
-		return sortMode != NAME_ASCENDING && sortMode != NAME_DESCENDING && sortMode != LAST_MODIFIED;
+		return !Algorithms.equalsToAny(sortMode, NAME_ASCENDING, NAME_DESCENDING, LAST_MODIFIED);
 	}
 
 	@Nullable
