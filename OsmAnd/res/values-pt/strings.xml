@@ -5322,4 +5322,29 @@
 \n
 \n"</string>
     <string name="free_ride">Passeio gratuito</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de classificação de dificuldade para as rotas.</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Sólidos inflamáveis</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamáveis</string>
+    <string name="shared_string_class">Classe</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Outros</string>
+    <string name="rendering_value_sacScale_description">Swiss Alpine Club (Clube Alpino Suíço)</string>
+    <string name="dangerous_goods">Mercadorias perigosas</string>
+    <string name="shared_string_checked">Ativado</string>
+    <string name="shared_string_not_checked">Desativado</string>
+    <string name="write_bearing">Guardar direção</string>
+    <string name="write_heading_description">Guardar o cabeçalho em cada ponto do trilho durante a gravação</string>
+    <string name="write_heading">Guardar cabeçalho</string>
+    <string name="rendering_value_caiScale_description">Clube Alpino Italiano (Italian Alpine Club)</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agentes oxidantes e peróxidos orgânicos</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substâncias tóxicas e infecciosas</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substâncias radioativas</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
+    <string name="dangerous_goods_description">Em algumas estradas e túneis é proibido o transporte de materiais perigosos.</string>
+    <string name="write_bearing_description">Guardar a direção em cada ponto do trilho durante a gravação</string>
+    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
 </resources>
