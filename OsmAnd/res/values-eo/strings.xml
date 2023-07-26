@@ -1046,7 +1046,7 @@
     <string name="show_warnings_title">Montri avertojn…</string>
     <string name="show_warnings_descr">Agordi trafikajn avertojn (pri rapidlimoj, devigaj haltejoj, strat-ĝiboj, tuneloj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj.</string>
     <string name="use_compass_navigation">Uzi kompason</string>
-    <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu direkto estas trovita.</string>
+    <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu movdirekto estas trovita.</string>
     <string name="avoid_motorway">Sen aŭtovojojn</string>
     <string name="auto_zoom_map">Aŭtomate skali mapon</string>
     <string name="auto_zoom_map_descr">Skali mapon depende de via rapido (kiam mapo estas samtempigita kun aktuala pozicio).</string>
