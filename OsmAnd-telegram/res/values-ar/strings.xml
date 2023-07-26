@@ -70,9 +70,9 @@
     <string name="unit_of_length_descr">تغيير وحدات قياس المسافة.</string>
     <string name="unit_of_length">وحدات الطول</string>
     <string name="last_update_from_telegram_date">آخر تحديث من تيليجرام: %1$s</string>
-    <string name="last_response_date">الرد الأخير:٪ 1 $ s</string>
+    <string name="last_response_date">الرد الأخير: %1$s</string>
     <string name="last_update_from_telegram_duration">آخر تحديث من تيليجرام: %1$s قبل</string>
-    <string name="last_response_duration">الرد الأخير: قبل٪ 1 $ s</string>
+    <string name="last_response_duration">الرد الأخير: قبل %1$s</string>
     <string name="shared_string_error_short">خطا</string>
     <string name="privacy_policy_telegram_client">تتبع أوسماند هوأحد العملاء الذين يستخدمون منصة تيليجرام المفتوحة. يمكن لجهات الاتصال الخاصة بك استخدام أي عميل تيليجرام آخر.</string>
     <string name="privacy_policy_agree">من خلال النقر على \"متابعة\" أنت توافق على شروط سياسة الخصوصية لتطبيقي تيليجرام وأوسماند.</string>
