@@ -5313,4 +5313,11 @@
     <string name="free_settings_backup">Резервная копия настроек</string>
     <string name="free_ride">Фрирайд</string>
     <string name="relief_3d_description">Масштабная модель вашего района или целого континента.</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_sacScale_description">Швейцарский альпийский клуб (Swiss Alpine Club)</string>
+    <string name="rendering_value_caiScale_description">Итальянский альпийский клуб (Club Alpino Italiano)</string>
+    <string name="rendering_attr_alpineHiking_description">Классификация сложности маршрутов.</string>
+    <string name="rendering_attr_alpineHiking_name">Классификация сложности</string>
 </resources>
