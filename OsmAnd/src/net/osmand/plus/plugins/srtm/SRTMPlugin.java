@@ -388,7 +388,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	protected void registerConfigureMapCategoryActions(@NonNull ContextMenuAdapter adapter,
 	                                                   @NonNull MapActivity mapActivity,
 	                                                   @NonNull List<RenderingRuleProperty> customRules) {
-		if (isEnabled() && app.useOpenGlRenderer()) {
+		if (isEnabled()) {
 			adapter.addItem(new ContextMenuItem(TERRAIN_CATEGORY_ID)
 					.setCategory(true)
 					.setTitle(app.getString(R.string.shared_string_terrain))
@@ -398,7 +398,9 @@ public class SRTMPlugin extends OsmandPlugin {
 				addTerrainDescriptionItem(adapter, mapActivity);
 			} else {
 				createContextMenuItems(adapter, mapActivity);
-				add3DReliefItem(adapter, mapActivity);
+				if (app.useOpenGlRenderer()) {
+					add3DReliefItem(adapter, mapActivity);
+				}
 			}
 			NauticalMapsPlugin nauticalPlugin = PluginsHelper.getPlugin(NauticalMapsPlugin.class);
 			if (nauticalPlugin != null) {
@@ -409,28 +411,26 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	private void addTerrainDescriptionItem(@NonNull ContextMenuAdapter adapter,
 	                                       @NonNull MapActivity activity) {
-		adapter.addItem(new ContextMenuItem(TERRAIN_DESCRIPTION_ID)
-				.setLayout(R.layout.list_item_terrain_description)
-				.setTitleId(TERRAIN_DESCRIPTION_ID.hashCode(), null)
-				.setClickable(false)
-				.setListener((uiAdapter, view, item, isChecked) -> {
-					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
-					return true;
-				}));
+		if (app.useOpenGlRenderer()) {
+			adapter.addItem(new ContextMenuItem(TERRAIN_DESCRIPTION_ID)
+					.setLayout(R.layout.list_item_terrain_description)
+					.setTitleId(TERRAIN_DESCRIPTION_ID.hashCode(), null)
+					.setClickable(false)
+					.setListener((uiAdapter, view, item, isChecked) -> {
+						ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
+						return true;
+					}));
+		} else {
+			PurchasingUtils.createPromoItem(adapter, activity, OsmAndFeature.TERRAIN,
+					TERRAIN_ID,
+					R.string.shared_string_terrain,
+					R.string.contour_lines_hillshades_slope);
+		}
 	}
 
 	@Override
 	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		if (isEnabled() && !app.useOpenGlRenderer()) {
-			if (isLocked()) {
-				PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
-						TERRAIN_ID,
-						R.string.shared_string_terrain,
-						R.string.contour_lines_hillshades_slope);
-			} else {
-				createContextMenuItems(adapter, mapActivity);
-			}
-		}
+		return;
 	}
 
 	private void createContextMenuItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {

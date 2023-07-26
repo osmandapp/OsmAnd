@@ -115,9 +115,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter,
 	                                            @NonNull MapActivity mapActivity,
 	                                            @NonNull List<RenderingRuleProperty> customRules) {
-		if (!app.useOpenGlRenderer()) {
-			createAdapterItem(menuAdapter, mapActivity, customRules);
-		}
+		return;
 	}
 
 	private boolean hasDepthMaps() {
