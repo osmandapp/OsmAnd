@@ -157,7 +157,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
 		observableListView = root.findViewById(R.id.list_view);
 
-		titleTv.setText(R.string.shared_string_terrain);
+		titleTv.setText(R.string.shared_string_hillshade_slope);
 		String pluginUrl = getString(R.string.osmand_features_contour_lines_plugin);
 		String emptyStateText = getString(R.string.terrain_empty_state_text) + "\n" + pluginUrl;
 		setupClickableText(emptyStateDescriptionTv, emptyStateText, pluginUrl, pluginUrl, true);
