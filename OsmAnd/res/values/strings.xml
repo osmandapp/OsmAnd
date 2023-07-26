@@ -11,7 +11,6 @@
 	Thx - Hardy
 -->
 
-    <string name="shared_string_hillshade_slope">Hillshade / Slope</string>
     <string name="write_bearing_description">Save bearing to each track point while recording</string>
     <string name="write_bearing">Write Bearing</string>
     <string name="write_heading_description">Save heading to each track point while recording</string>
@@ -39,7 +38,7 @@
     <string name="dangerous_goods">Dangerous goods</string>
     <string name="free_ride">Free ride</string>
     <string name="free_settings_backup">Free Settings Backup</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqlitedb for Hillshade / Slope</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqlitedb for hillshade / slope</string>
     <string name="cache_size">Cache size</string>
     <string name="shared_string_avoid">Avoid</string>
     <string name="may_be_used_if_there_is_shortcut">May be used if there is a shortcut</string>
@@ -92,7 +91,7 @@
     <string name="verify_account">Verify your account</string>
     <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slope in %1$s.</string>
     <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
-    <string name="terrain_map">Heightmap</string>
+    <string name="terrain_map">Terrain map</string>
     <string name="relief_3d">3D Relief</string>
     <string name="relief_3d_description">Own and observe the scale model of your neighborhood or the whole continent.</string>
     <string name="shared_string_close_the_dialog">Close the dialog</string>
@@ -1715,7 +1714,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="select_group">Select group</string>
     <string name="add_description">Add description</string>
     <string name="delete_description">Delete description</string>
-    <string name="quick_action_terrain_descr">A button to show or hide the Hillshade / Slope layer on the map.</string>
+    <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
     <string name="download_slope_maps">Slope</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>

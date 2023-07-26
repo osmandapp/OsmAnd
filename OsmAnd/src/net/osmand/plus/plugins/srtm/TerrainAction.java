@@ -19,7 +19,7 @@ public class TerrainAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(30,
 			"terrain.showhide", TerrainAction.class).nameActionRes(R.string.quick_action_show_hide_title).
-			nameRes(R.string.shared_string_hillshade_slope).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
+			nameRes(R.string.shared_string_terrain).iconRes(R.drawable.ic_action_hillshade_dark).nonEditable().
 			category(QuickActionType.CONFIGURE_MAP);
 
 	public TerrainAction() {
