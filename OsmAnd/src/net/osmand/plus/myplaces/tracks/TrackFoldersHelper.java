@@ -255,8 +255,18 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
 						showEmptyItemsToast(move);
 					} else {
+						File srcFile = null;
+						if (!Algorithms.isEmpty(trackItems)) {
+							srcFile = trackItems.iterator().next().getFile();
+						}
+						if (srcFile == null && !Algorithms.isEmpty(tracksGroups)) {
+							TracksGroup group = tracksGroups.iterator().next();
+							if (group instanceof TrackFolder) {
+								srcFile = ((TrackFolder) group).getDirFile();
+							}
+						}
 						FragmentManager manager = activity.getSupportFragmentManager();
-						MoveGpxFileBottomSheet.showInstance(manager, null, fragment, false, true);
+						MoveGpxFileBottomSheet.showInstance(manager, srcFile, fragment, false, false);
 					}
 				})
 				.showTopDivider(true)

@@ -208,8 +208,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	public void updateContent() {
-		adapter.setSortMode(getTracksSortMode());
 		adapter.setItems(getAdapterItems());
+		adapter.setSortMode(getTracksSortMode());
 	}
 
 	protected void updateActionBar(boolean visible) {
@@ -300,7 +300,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void renamedTo(File file) {
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
 		reloadTracks();
 	}
 

@@ -945,8 +945,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@Override
-	public void renamedTo(File file) {
-		updateFile(file);
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
+		updateFile(dest);
 	}
 
 	@Override
