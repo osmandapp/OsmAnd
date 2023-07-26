@@ -321,7 +321,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				Zoom zoom = new Zoom(getZoom(), getZoomFloatPart(), getMinZoom(), getMaxZoom());
 				if (zoom.isZoomOutAllowed()) {
 					zoom.zoomOut();
-					getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), false);
+					getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
 					if (wasMapLinkedBeforeGesture) {
 						application.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
 					}
@@ -1993,14 +1993,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 					RotatedTileBox tb = getCurrentRotatedTileBox();
 					LatLon latlon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, e.getX(), e.getY());
-					if (mapRenderer != null) {
-						PointI start31 = mapRenderer.getTarget();
-						PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer,
-								latlon.getLatitude(), latlon.getLongitude(), false);
+					if (hasMapRenderer()) {
+						getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), latlon, true);
+					} else {
+						getAnimatedDraggingThread().startMoving(
+								latlon.getLatitude(), latlon.getLongitude(), zoom.getBaseZoom(), zoom.getZoomFloatPart(),
+								true, false, null, null);
 					}
-					getAnimatedDraggingThread().startMoving(
-							latlon.getLatitude(), latlon.getLongitude(), zoom.getBaseZoom(), zoom.getZoomFloatPart(),
-							true, false, null, null);
 				}
 				afterDoubleTap = true;
 				return true;

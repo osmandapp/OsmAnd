@@ -154,7 +154,7 @@ public class OsmandMap implements NavigationSessionListener {
 		}
 
 		zoom.changeZoom(stp);
-		animateDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), changeLocation);
+		animateDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, changeLocation);
 		if (app.accessibilityEnabled()) {
 			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
 		}
