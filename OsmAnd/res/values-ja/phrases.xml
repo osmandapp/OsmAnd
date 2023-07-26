@@ -3860,7 +3860,7 @@
     <string name="poi_fuel_propane">プロパン</string>
     <string name="poi_lavoir">洗濯場所</string>
     <string name="poi_waste_transfer_station">ごみ処理場</string>
-    <string name="poi_weightbridge">車両計量台;トラックスケール</string>
+    <string name="poi_weighbridge">車両計量台;トラックスケール</string>
     <string name="poi_ranger_station">自然公園管理事務所</string>
     <string name="poi_water_source_lake">湖</string>
     <string name="poi_water_source_river">川</string>

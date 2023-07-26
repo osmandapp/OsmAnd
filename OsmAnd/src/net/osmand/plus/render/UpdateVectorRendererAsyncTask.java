@@ -33,12 +33,6 @@ public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean
 		if (newRenderer == null) {
 			newRenderer = registry.defaultRender();
 		}
-		if (mapView.getMapRenderer() != null) {
-			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-			if (mapRendererContext != null) {
-				mapRendererContext.updateMapSettings();
-			}
-		}
 		boolean changed = registry.getCurrentSelectedRenderer() != newRenderer;
 		if (changed) {
 			registry.setCurrentSelectedRender(newRenderer);
@@ -47,6 +41,12 @@ public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean
 			mapView.refreshMap(true);
 		} else {
 			mapView.resetDefaultColor();
+		}
+		if (mapView.hasMapRenderer()) {
+			MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
+			if (rendererContext != null) {
+				rendererContext.updateMapSettings();
+			}
 		}
 		return changed;
 	}

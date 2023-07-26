@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
+import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
 import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_CADENCE;
 import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_DISTANCE;
 import static net.osmand.plus.plugins.externalsensors.SensorAttributesUtils.SENSOR_TAG_SPEED;
@@ -252,7 +253,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				float distanceDifference = (wheelRevolutions - lastWheelRevolutions) * circumference / 1000.0f;
 				float totalDistance = (float) wheelRevolutions * (float) circumference / 1000.0f;
 				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * (float) circumference / 1000.0f;
-				float speed = (distanceDifference / timeDifference) * 3.6f;
+				float speed = (distanceDifference / timeDifference);
 				wheelCadence = (wheelRevolutions - lastWheelRevolutions) * 60.0f / timeDifference;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			}
@@ -302,7 +303,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		switch (widgetDataFieldType) {
 			case BIKE_SPEED:
 				if (lastBikeSpeedDistanceData != null) {
-					json.put(SENSOR_TAG_SPEED, lastBikeSpeedDistanceData.speed);
+					json.put(SENSOR_TAG_SPEED, DECIMAL_FORMAT.format(lastBikeSpeedDistanceData.speed));
 				}
 				break;
 			case BIKE_CADENCE:

@@ -14,6 +14,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -37,8 +38,8 @@ import net.osmand.gpx.ElevationDiffsCalculator;
 import net.osmand.gpx.ElevationDiffsCalculator.Extremum;
 import net.osmand.gpx.GPXInterpolator;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.PointAttribute;
 import net.osmand.gpx.PointAttribute.Elevation;
-import net.osmand.gpx.PointAttribute.Speed;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -448,8 +449,6 @@ public class ChartUtils {
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 		dataSet.setPriority((float) ((analysis.avgElevation - analysis.minElevation) * convEle));
 		dataSet.setDivX(divX);
-		dataSet.setMulY(convEle);
-		dataSet.setDivY(Float.NaN);
 		dataSet.setUnits(mainUnitY);
 
 		boolean nightMode = !settings.isLightContent();
@@ -517,65 +516,20 @@ public class ChartUtils {
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
-		SpeedConstants speedConstants = settings.SPEED_SYSTEM.get();
-		float mulSpeed = Float.NaN;
-		float divSpeed = Float.NaN;
-		String mainUnitY = graphType.getMainUnitY(app);
-		if (speedConstants == SpeedConstants.KILOMETERS_PER_HOUR) {
-			mulSpeed = 3.6f;
-		} else if (speedConstants == SpeedConstants.MILES_PER_HOUR) {
-			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-		} else if (speedConstants == SpeedConstants.NAUTICALMILES_PER_HOUR) {
-			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
-		} else if (speedConstants == SpeedConstants.MINUTES_PER_KILOMETER) {
-			divSpeed = METERS_IN_KILOMETER / 60.0f;
-		} else if (speedConstants == SpeedConstants.MINUTES_PER_MILE) {
-			divSpeed = METERS_IN_ONE_MILE / 60.0f;
-		} else {
-			mulSpeed = 1f;
-		}
+		Pair<Float, Float> pair = ChartUtils.getScalingY(app, graphType);
+		float mulSpeed = pair != null ? pair.first : Float.NaN;
+		float divSpeed = pair != null ? pair.second : Float.NaN;
 
 		boolean speedInTrack = analysis.hasSpeedInTrack();
 		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
-		ArrayList<Entry> values = new ArrayList<>();
-		List<Speed> speedData = analysis.getSpeedData().getAttributes();
-		float currentX = 0;
+		List<Entry> values = getPointAttributeValues(analysis, graphType, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
-		for (int i = 0; i < speedData.size(); i++) {
-			Speed speed = speedData.get(i);
-
-			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? speed.timeDiff : speed.distance;
-
-			if (i == 0 || stepX > 0) {
-				if (!(calcWithoutGaps && speed.firstPoint)) {
-					currentX += stepX / divX;
-				}
-
-				float currentY = Float.isNaN(divSpeed) ? speed.value * mulSpeed : divSpeed / speed.value;
-				if (currentY < 0 || Float.isInfinite(currentY)) {
-					currentY = 0;
-				}
-
-				if (speed.firstPoint && currentY != 0) {
-					values.add(new Entry(currentX, 0));
-				}
-				values.add(new Entry(currentX, currentY));
-				if (speed.lastPoint && currentY != 0) {
-					values.add(new Entry(currentX, 0));
-				}
-			}
-		}
-
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType, !useRightAxis);
-
-		String format = null;
-		if (dataSet.getYMax() < 3) {
-			format = "{0,number,0.#} ";
-		}
-		String formatY = format;
+		String mainUnitY = graphType.getMainUnitY(app);
+		String formatY = dataSet.getYMax() < 3 ? "{0,number,0.#} " : null;
 		yAxis.setValueFormatter((value, axis) -> {
 			if (!Algorithms.isEmpty(formatY)) {
 				return MessageFormat.format(formatY + mainUnitY, value);
@@ -590,13 +544,6 @@ public class ChartUtils {
 			dataSet.setPriority(divSpeed / analysis.avgSpeed);
 		}
 		dataSet.setDivX(divX);
-		if (Float.isNaN(divSpeed)) {
-			dataSet.setMulY(mulSpeed);
-			dataSet.setDivY(Float.NaN);
-		} else {
-			dataSet.setDivY(divSpeed);
-			dataSet.setMulY(Float.NaN);
-		}
 		dataSet.setUnits(mainUnitY);
 
 		int color = ColorUtilities.getColor(app, graphType.getFillColorId(!speedInTrack));
@@ -616,6 +563,67 @@ public class ChartUtils {
 		} else {
 			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
 		}
+	}
+
+	@Nullable
+	public static Pair<Float, Float> getScalingY(@NonNull OsmandApplication app, @NonNull GPXDataSetType graphType) {
+		if (graphType == GPXDataSetType.SPEED || graphType == GPXDataSetType.SENSOR_SPEED) {
+			float mulSpeed = Float.NaN;
+			float divSpeed = Float.NaN;
+			SpeedConstants speedConstants = app.getSettings().SPEED_SYSTEM.get();
+			if (speedConstants == SpeedConstants.KILOMETERS_PER_HOUR) {
+				mulSpeed = 3.6f;
+			} else if (speedConstants == SpeedConstants.MILES_PER_HOUR) {
+				mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
+			} else if (speedConstants == SpeedConstants.NAUTICALMILES_PER_HOUR) {
+				mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
+			} else if (speedConstants == SpeedConstants.MINUTES_PER_KILOMETER) {
+				divSpeed = METERS_IN_KILOMETER / 60.0f;
+			} else if (speedConstants == SpeedConstants.MINUTES_PER_MILE) {
+				divSpeed = METERS_IN_ONE_MILE / 60.0f;
+			} else {
+				mulSpeed = 1f;
+			}
+			return new Pair<>(mulSpeed, divSpeed);
+		}
+		return null;
+	}
+
+	@NonNull
+	public static List<Entry> getPointAttributeValues(@NonNull GPXTrackAnalysis analysis,
+	                                                  @NonNull GPXDataSetType graphType,
+	                                                  @NonNull GPXDataSetAxisType axisType,
+	                                                  float divX, float mulY, float divY,
+	                                                  boolean calcWithoutGaps) {
+		List<Entry> values = new ArrayList<>();
+		List<PointAttribute<? extends Number>> attributes = analysis.getAttributesData(graphType.getDataKey()).getAttributes();
+		float currentX = 0;
+
+		for (int i = 0; i < attributes.size(); i++) {
+			PointAttribute<? extends Number> attribute = attributes.get(i);
+
+			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
+
+			if (i == 0 || stepX > 0) {
+				if (!(calcWithoutGaps && attribute.firstPoint)) {
+					currentX += stepX / divX;
+				}
+				float value = attribute.value.floatValue();
+				float currentY = Float.isNaN(divY) ? value * mulY : divY / value;
+				if (currentY < 0 || Float.isInfinite(currentY)) {
+					currentY = 0;
+				}
+
+				if (attribute.firstPoint && currentY != 0) {
+					values.add(new Entry(currentX, 0));
+				}
+				values.add(new Entry(currentX, currentY));
+				if (attribute.lastPoint && currentY != 0) {
+					values.add(new Entry(currentX, 0));
+				}
+			}
+		}
+		return values;
 	}
 
 	public static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {

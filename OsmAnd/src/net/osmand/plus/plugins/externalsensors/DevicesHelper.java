@@ -145,6 +145,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				AbstractDevice<?> device = createDevice(deviceSettings.deviceType, deviceId);
 				if (device != null) {
 					devices.put(deviceId, device);
+					device.setDeviceName(deviceSettings.deviceName);
 				}
 			}
 		}
@@ -220,8 +221,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			}
 			ScanRecord scanRecord = result.getScanRecord();
 			if (isSupportedBleDevice(scanRecord)) {
-				String deviceName = result.getDevice().getName();
 				String address = result.getDevice().getAddress();
+				DeviceSettings settings = devicesSettings.getDeviceSettings(address);
+				String deviceName;
+				deviceName = settings == null ? result.getDevice().getName() : settings.deviceName;
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				for (ParcelUuid uuid : uuids) {
 					BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
@@ -505,16 +508,16 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	public void setDeviceName(@NonNull AbstractDevice<?> device, @NonNull String name) {
 		String deviceId = device.getDeviceId();
+		device.setDeviceName(name);
 		DeviceSettings settings = devicesSettings.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
 				settings = new DeviceSettings(deviceId, device.getDeviceType(), name, false);
-				devicesSettings.setDeviceSettings(deviceId, settings);
 			}
 		} else {
 			settings.deviceName = name;
-			devicesSettings.setDeviceSettings(deviceId, settings);
 		}
+		devicesSettings.setDeviceSettings(deviceId, settings);
 	}
 
 	@Override

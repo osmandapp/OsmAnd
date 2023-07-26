@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -14,12 +16,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -31,10 +30,12 @@ import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 
@@ -61,13 +62,8 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
 
-		BooleanPreference pref = (BooleanPreference) preference;
-		CharSequence summaryOn = switchPreference.getSummaryOn();
-		CharSequence summaryOff = switchPreference.getSummaryOff();
-		String on = summaryOn == null || summaryOn.toString().isEmpty()
-				? getString(R.string.shared_string_enabled) : summaryOn.toString();
-		String off = summaryOff == null || summaryOff.toString().isEmpty()
-				? getString(R.string.shared_string_disabled) : summaryOff.toString();
+		String on = getSummary(switchPreference, true);
+		String off = getSummary(switchPreference, false);
 		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		boolean checked = switchPreference.isChecked();
@@ -78,29 +74,26 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				.setTitle(checked ? on : off)
 				.setTitleColorId(checked ? activeColor : disabledColor)
 				.setCustomView(getCustomButtonView(app, getAppMode(), checked, nightMode))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean newValue = !switchPreference.isChecked();
-						Fragment targetFragment = getTargetFragment();
-						if (targetFragment instanceof OnConfirmPreferenceChange) {
-							ApplyQueryType applyQueryType = getApplyQueryType();
-							if (applyQueryType == ApplyQueryType.SNACK_BAR) {
-								applyQueryType = ApplyQueryType.NONE;
-							}
-							OnConfirmPreferenceChange confirmationInterface =
-									(OnConfirmPreferenceChange) targetFragment;
-							if (confirmationInterface.onConfirmPreferenceChange(
-									switchPreference.getKey(), newValue, applyQueryType)) {
-								switchPreference.setChecked(newValue);
-								preferenceBtn[0].setTitle(newValue ? on : off);
-								preferenceBtn[0].setChecked(newValue);
-								preferenceBtn[0].setTitleColorId(newValue ? activeColor : disabledColor);
-								updateCustomButtonView(app, getAppMode(), v, newValue, nightMode);
+				.setOnClickListener(v -> {
+					boolean newValue = !switchPreference.isChecked();
+					Fragment targetFragment = getTargetFragment();
+					if (targetFragment instanceof OnConfirmPreferenceChange) {
+						ApplyQueryType applyQueryType = getApplyQueryType();
+						if (applyQueryType == ApplyQueryType.SNACK_BAR) {
+							applyQueryType = ApplyQueryType.NONE;
+						}
+						OnConfirmPreferenceChange confirmationInterface =
+								(OnConfirmPreferenceChange) targetFragment;
+						if (confirmationInterface.onConfirmPreferenceChange(
+								switchPreference.getKey(), newValue, applyQueryType)) {
+							switchPreference.setChecked(newValue);
+							preferenceBtn[0].setTitle(newValue ? on : off);
+							preferenceBtn[0].setChecked(newValue);
+							preferenceBtn[0].setTitleColorId(newValue ? activeColor : disabledColor);
+							updateCustomButtonView(app, getAppMode(), v, newValue, nightMode);
 
-								if (targetFragment instanceof OnPreferenceChanged) {
-									((OnPreferenceChanged) targetFragment).onPreferenceChanged(switchPreference.getKey());
-								}
+							if (targetFragment instanceof OnPreferenceChanged) {
+								((OnPreferenceChanged) targetFragment).onPreferenceChanged(switchPreference.getKey());
 							}
 						}
 					}
@@ -118,6 +111,17 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 					.setLayoutId(R.layout.bottom_sheet_item_descr)
 					.create();
 			items.add(preferenceDescription);
+		}
+	}
+
+	@NonNull
+	protected String getSummary(SwitchPreferenceEx switchPreference, boolean enabled) {
+		if (enabled) {
+			CharSequence summary = switchPreference.getSummaryOn();
+			return Algorithms.isEmpty(summary) ? getString(R.string.shared_string_enabled) : summary.toString();
+		} else {
+			CharSequence summary = switchPreference.getSummaryOff();
+			return Algorithms.isEmpty(summary) ? getString(R.string.shared_string_disabled) : summary.toString();
 		}
 	}
 
@@ -165,29 +169,29 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
-	private SwitchPreferenceEx getSwitchPreferenceEx() {
+	protected SwitchPreferenceEx getSwitchPreferenceEx() {
 		return (SwitchPreferenceEx) getPreference();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefId, Fragment target, boolean usedOnMap,
-									@Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
-									boolean profileDependent) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, prefId);
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull String prefId,
+	                                @NonNull ApplyQueryType applyQueryType,
+	                                @Nullable Fragment target,
+	                                @Nullable ApplicationMode appMode,
+	                                boolean usedOnMap,
+	                                boolean profileDependent) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(PREFERENCE_ID, prefId);
 
-				BooleanPreferenceBottomSheet fragment = new BooleanPreferenceBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setApplyQueryType(applyQueryType);
-				fragment.setTargetFragment(target, 0);
-				fragment.setProfileDependent(profileDependent);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			BooleanPreferenceBottomSheet fragment = new BooleanPreferenceBottomSheet();
+			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
+			fragment.setApplyQueryType(applyQueryType);
+			fragment.setTargetFragment(target, 0);
+			fragment.setProfileDependent(profileDependent);
+			fragment.show(manager, TAG);
 		}
 	}
 }

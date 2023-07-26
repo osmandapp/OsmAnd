@@ -1217,8 +1217,6 @@
     <string name="rendering_attr_subwayMode_name">Percorsi metró</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
     <string name="pause_navigation">Metti in pausa la navigazione</string>
-    <string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino</string>
-    <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinerari escursionistici</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disegna i percorsi in base alle tracce OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Colora gli edifici per tipo</string>
@@ -2389,7 +2387,7 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Aggiunto</string>
     <string name="order_by">Ordina per:</string>
-    <string name="coordinates_format">Formato coordinate</string>
+    <string name="coordinates_format">Formato delle coordinate</string>
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
     <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Tocca il pulsante \'Opzioni\' per cambiarlo.</string>
     <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
@@ -4530,7 +4528,7 @@
     <string name="zoom_levels_difference_description">La maggiore differenza tra i livelli di zoom può aumentare la quantità di dati da scaricare.</string>
     <string name="number_of_tiles">Numero di riquadri</string>
     <string name="change_default_appearance">Cambia la visualizzazione predefinita</string>
-    <string name="map_widget_distance_to_destination">Distanza dalla destinazione</string>
+    <string name="map_widget_distance_to_destination">Distanza alla destinazione</string>
     <string name="apply_only_to_new_favorites">Applica solo ai nuovi preferiti</string>
     <string name="simulation_preview_mode_desc">La velocità della simulazione sarà massima nei rettilinei e diminuirà solamente alle intersezioni.</string>
     <string name="add_page">Aggiungi pagina</string>
@@ -4697,9 +4695,9 @@
     <string name="auto_25_chars_route_tl_kr">Svolta a sinistra e mantieni la destra</string>
     <string name="auto_25_chars_route_tr_kl">Svolta a destra e mantieni la sinistra</string>
     <string name="auto_25_chars_route_tr_kr">Svolta a destra e mantieni la destra</string>
-    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso in corso di registrazione.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso attualmente registrato.</string>
     <string name="true_bearing_wdiget_desc">Angolo fra il nord reale e il punto di destinazione osservato dalla tua posizione.</string>
-    <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso registrato attuale.</string>
+    <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso attualmente registrato.</string>
     <string name="connect_with_straight_line">Collega con una linea retta</string>
     <string name="shared_string_only_missing">Solo mancanti</string>
     <string name="download_tiles">Scarica tile</string>
@@ -5167,8 +5165,6 @@
     <string name="learn_more_about_sensors_link">Ulteriori informazioni sui sensori.</string>
     <string name="ant_plus_bluetooth_off">Il bluetooth è disattivato</string>
     <string name="external_device_disconnected">Disconnesso</string>
-    <string name="rendering_value_sacScale_name">Scala SAC</string>
-    <string name="rendering_value_caiScale_name">Scala CAI</string>
     <string name="external_device_connected">Connesso</string>
     <string name="external_device_characteristic_heart_rate">Frequenza cardiaca</string>
     <string name="external_device_characteristic_systolic">Sistolico</string>

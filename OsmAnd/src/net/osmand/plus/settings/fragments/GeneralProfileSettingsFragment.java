@@ -419,7 +419,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onPreferenceChanged(String prefId) {
+	public void onPreferenceChanged(@NonNull String prefId) {
 		Preference preference = findPreference(prefId);
 		if (preference != null) {
 			if (settings.OSMAND_THEME.getId().equals(prefId)) {

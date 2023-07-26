@@ -2657,8 +2657,6 @@
 \nלא נדרשת הורדה של מפה מיוחדת, התצוגה נוצרת מהמפות הרגילות שלנו. 
 \n 
 \nניתן לצאת מתצוגה זו על ידי השבתתה או על ידי שינוי ‚סגנון המפה’ תחת ‚הגדרת המפה’ כרצונך.</string>
-    <string name="rendering_attr_alpineHiking_name">דרגות קושי בטיפוס (SAC - מועדון האלפים השווייצרי)</string>
-    <string name="rendering_attr_alpineHiking_description">עיבוד מסלולים לפי מדד מועדון האלפים השווייצרי (SAC).</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">מסלולי טיול</string>
     <string name="osmand_extended_description_part4">סקי
 \n תוסף מפות הסקי של OsmAnd מאפשר לך לצפות במסלולי סקי ברמות מורכבות מסוימות ופרטים נוספים, כמו מיקום הרכבלים ומתקנים נוספים.</string>

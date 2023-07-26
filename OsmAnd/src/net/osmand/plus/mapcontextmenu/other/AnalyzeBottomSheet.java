@@ -19,10 +19,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -70,10 +71,6 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 		View dialogView = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.analyze_charts_bottom_sheet, null);
 		setupDialogView(dialogView);
 		return dialogView;
-	}
-
-	public static void showInstance(FragmentManager fragmentManager) {
-		new AnalyzeBottomSheet().show(fragmentManager, TAG);
 	}
 
 	private void setupDialogView(View dialogView) {
@@ -173,6 +170,13 @@ public class AnalyzeBottomSheet extends BottomSheetDialogFragment {
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(selected);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			AnalyzeBottomSheet fragment = new AnalyzeBottomSheet();
+			fragment.show(manager, TAG);
+		}
 	}
 }
 

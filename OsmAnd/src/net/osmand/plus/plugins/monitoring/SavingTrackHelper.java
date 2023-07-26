@@ -22,6 +22,7 @@ import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.Version;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -42,6 +43,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -388,20 +390,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				float heading = query.getFloat(6);
 				pt.heading = heading == NO_HEADING ? Float.NaN : heading;
 
-				String pluginsInfo = query.getString(7);
-				if (!Algorithms.isEmpty(pluginsInfo)) {
-					try {
-						Map<String, String> extensions = new HashMap<>();
-						JSONObject json = new JSONObject(pluginsInfo);
-						for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
-							String key = iterator.next();
-							extensions.put(key, json.optString(key));
-						}
-						pt.getExtensionsToWrite().putAll(extensions);
-					} catch (JSONException e) {
-						log.error(e.getMessage(), e);
-					}
-				}
+				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
+				pt.getExtensionsToWrite().putAll(extensions);
+
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
 				long currentInterval = Math.abs(pt.time - previousTime);
 				if (track != null && !newInterval && (!settings.AUTO_SPLIT_RECORDING.get()
@@ -442,6 +433,24 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		dropEmptyTracks(dataTracks);
 	}
 
+	@NonNull
+	private Map<String, String> getPluginsExtensions(@Nullable String pluginsInfo) {
+		if (!Algorithms.isEmpty(pluginsInfo)) {
+			try {
+				Map<String, String> extensions = new HashMap<>();
+				JSONObject json = new JSONObject(pluginsInfo);
+				for (Iterator<String> iterator = json.keys(); iterator.hasNext(); ) {
+					String key = iterator.next();
+					extensions.put(key, json.optString(key));
+				}
+				return extensions;
+			} catch (JSONException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+		return Collections.emptyMap();
+	}
+
 	private void dropEmptyTracks(@NonNull Map<String, GPXFile> dataTracks) {
 		List<String> datesToRemove = new ArrayList<>();
 		for (Map.Entry<String, GPXFile> entry : dataTracks.entrySet()) {
@@ -478,11 +487,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void updateLocation(net.osmand.Location location, Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-		if (heading != null && settings.SAVE_HEADING_TO_GPX.get()) {
-			heading = MapUtils.normalizeDegrees360(heading);
-		} else {
-			heading = NO_HEADING;
-		}
+
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		boolean writeHeading = plugin != null && plugin.SAVE_HEADING_TO_GPX.get();
+		heading = heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : NO_HEADING;
+
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
@@ -514,25 +523,31 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (record) {
 			JSONObject json = new JSONObject();
 			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
-			if (location.hasBearing()) {
+
+			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
+			if (writeBearing && location.hasBearing()) {
 				try {
 					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
 				} catch (JSONException e) {
 					log.error(e.getMessage(), e);
 				}
 			}
-			String additionalInfo = json.length() > 0 ? json.toString() : null;
+			String pluginsInfo = json.length() > 0 ? json.toString() : null;
 			heading = heading == NO_HEADING ? Float.NaN : heading;
+
 			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), locationTime,
 					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
 
-			insertData(wptPt, additionalInfo);
+			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
+			wptPt.getExtensionsToWrite().putAll(extensions);
+
+			insertData(wptPt, pluginsInfo);
 			app.getNotificationHelper().refreshNotification(NotificationType.GPX);
 		}
 	}
 
-	private void insertData(@NonNull WptPt wptPt, @Nullable String additionalInfo) {
-		executeInsertTrackQuery(wptPt.lat, wptPt.lon, wptPt.ele, wptPt.speed, wptPt.hdop, wptPt.time, wptPt.heading, additionalInfo);
+	private void insertData(@NonNull WptPt wptPt, @Nullable String pluginsInfo) {
+		executeInsertTrackQuery(wptPt.lat, wptPt.lon, wptPt.ele, wptPt.speed, wptPt.hdop, wptPt.time, wptPt.heading, pluginsInfo);
 		boolean newSegment = false;
 		if (lastPoint == null || (wptPt.time - lastTimeUpdated) > 180 * 1000) {
 			lastPoint = new LatLon(wptPt.lat, wptPt.lon);

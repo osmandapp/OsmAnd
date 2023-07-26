@@ -1218,8 +1218,6 @@
     <string name="lang_zh_tw">Čínsky (Tradičná)</string>
     <string name="continue_navigation">Pokračovať v navigácii</string>
     <string name="pause_navigation">Pozastaviť navigáciu</string>
-    <string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Kresliť chodníky podľa značenia OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>

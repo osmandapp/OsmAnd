@@ -102,6 +102,25 @@
 		android:title="@string/logcat_buffer" />
 
 	<PreferenceCategory
+		android:key="trip_recording"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_trip_recording" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_bearing_to_gpx"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/write_bearing" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="save_heading_to_gpx"
+		android:layout="@layout/preference_with_descr"
+		android:summaryOff="@string/shared_string_no"
+		android:summaryOn="@string/shared_string_yes"
+		android:title="@string/write_heading" />
+
+	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/info_button" />

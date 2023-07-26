@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.weather.indexitem.WeatherIndexItem;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -64,15 +63,6 @@ public class MultipleDownloadItem extends DownloadItem {
 	public boolean isDownloading(@NonNull DownloadIndexesThread thread) {
 		for (DownloadItem item : items) {
 			if (item.isDownloading(thread)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean hasWeatherIndexes() {
-		for (DownloadItem item : items) {
-			if (item instanceof WeatherIndexItem) {
 				return true;
 			}
 		}

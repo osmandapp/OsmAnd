@@ -3859,7 +3859,7 @@
     <string name="poi_ranger_station">Ranger station</string>
     <string name="poi_lavoir">Ruhamosó hely</string>
     <string name="poi_waste_transfer_station">Hulladékátrakodó</string>
-    <string name="poi_weightbridge">Hídmérleg;Teherautómérleg</string>
+    <string name="poi_weighbridge">Hídmérleg;Teherautómérleg</string>
     <string name="poi_water_source_lake">Tó</string>
     <string name="poi_water_source_river">Folyó</string>
     <string name="poi_water_source_well">Kút</string>

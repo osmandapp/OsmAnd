@@ -124,8 +124,6 @@
     <string name="tracks_empty_folder">โฟลเดอร์เปล่า</string>
     <string name="track_not_recorded">ไม่ได้บันทึก</string>
     <string name="shared_string_new_track">เส้นทางใหม่</string>
-    <string name="rendering_value_sacScale_name">ขนาด SAC</string>
-    <string name="rendering_value_caiScale_name">ขนาด CAI</string>
     <string name="map_3d_mode_description">แตะแผนที่ด้วยสองนิ้วและเลื่อนขึ้นหรือลงเพื่อปรับความเอียงของแผนที่</string>
     <string name="rendering_attr_lightDetail_name">ข้อมูลของแสง</string>
     <string name="rendering_value_sector1_name">เซกเตอร์ 1</string>

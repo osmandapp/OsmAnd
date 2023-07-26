@@ -32,8 +32,6 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
-	@NonNull
 	private final String searchText;
 
 	private ItemList itemList;
@@ -42,10 +40,9 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 	private boolean showResult;
 
 	public SearchResultsScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                           @NonNull SurfaceRenderer surfaceRenderer, @NonNull String searchText) {
+	                           @NonNull String searchText) {
 		super(carContext);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		this.searchText = searchText;
 
 		this.loading = getApp().isApplicationInitializing();
@@ -115,7 +112,7 @@ public final class SearchResultsScreen extends BaseOsmAndAndroidAutoSearchScreen
 
 	private void showResult(SearchResult sr) {
 		showResult = false;
-		openRoutePreview(settingsAction, surfaceRenderer, sr);
+		openRoutePreview(settingsAction, sr);
 	}
 
 	@Override

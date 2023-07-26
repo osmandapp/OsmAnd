@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
+import androidx.core.util.PatternsCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities;
@@ -183,7 +184,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !("population".equals(key) || "height".equals(key) || Amenity.OPENING_HOURS.equals(key));
+			boolean needLinks = !(Algorithms.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -531,7 +532,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 
 		// It cannot be username
-		if (sb.indexOf("/") != -1) {
+		if (PatternsCompat.AUTOLINK_WEB_URL.matcher(sb.toString()).matches()) {
 			return "https://" + value;
 		}
 

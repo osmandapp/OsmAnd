@@ -1275,8 +1275,6 @@
     <string name="continue_navigation">Продовжити навігацію</string>
     <string name="pause_navigation">Призупинити навігацію</string>
     <string name="rendering_attr_subwayMode_name">Маршрути метро</string>
-    <string name="rendering_attr_alpineHiking_name">Альпіністська шкала складності маршруту (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Показ маршрутів за шкалою SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Піші туристичні маршрути</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Показ шляхів згідно з OSMC-маркуванням.</string>
     <string name="arrival_distance_factor_early">Раніше</string>
@@ -5221,8 +5219,6 @@
     <string name="map_3d_mode_description">Рух двома пальцями вздовж екрану, вгору-вниз, дозволяє змінювати кут нахилу мапи.</string>
     <string name="map_3d_mode_hint">Затискання кнопки дозволяє змінити її положення.</string>
     <string name="visible_in_3d_mode">Видимий у 3D-режимі</string>
-    <string name="rendering_value_caiScale_name">Шкала CAI</string>
-    <string name="rendering_value_sacScale_name">Шкала SAC</string>
     <string name="show_all_tracks_on_the_map">Показати всі треки на мапі</string>
     <string name="rssi_widget_desc">Показує рівень RSSI вашого зовнішнього пристрою.</string>
     <string name="map_widget_rssi">Rssi</string>
@@ -5329,4 +5325,25 @@
     <string name="free_settings_backup">Безплатне резервне копіювання налаштувань</string>
     <string name="may_be_used_if_there_is_shortcut">Може використовуватися, якщо є ярлик</string>
     <string name="free_ride">Фрирайд</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Вибухівка</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Гази</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Легкозаймисті рідини</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Легкозаймисті речовини</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Окислювачі та органічні пероксиди</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Токсичні та інфекційні речовини</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Радіоактивні речовини</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Корозійні речовини</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Різне</string>
+    <string name="shared_string_class">Клас</string>
+    <string name="dangerous_goods_description">Деякими дорогами та тунелями перевезення небезпечних матеріалів заборонено.</string>
+    <string name="dangerous_goods">Небезпечні вантажі</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="shared_string_not_checked">Не перевірено</string>
+    <string name="shared_string_checked">Перевірено</string>
+    <string name="rendering_attr_alpineHiking_description">Типи класифікації складності маршрутів.</string>
+    <string name="rendering_attr_alpineHiking_name">Класифікація складності</string>
+    <string name="rendering_value_sacScale_description">Швейцарський альпійський клуб</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Італійський альпійський клуб)</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
 </resources>
