@@ -48,7 +48,7 @@ import java.io.File;
 
 public class LocationSimulationAction extends QuickAction implements FileSelected {
 
-	public static final QuickActionType TYPE = new QuickActionType(26, "location.simulation", LocationSimulationAction.class)
+	public static final QuickActionType TYPE = new QuickActionType(45, "location.simulation", LocationSimulationAction.class)
 			.nameRes(R.string.simulate_location_by_gpx)
 			.iconRes(R.drawable.ic_action_start_navigation).nonEditable()
 			.category(QuickActionType.NAVIGATION);
