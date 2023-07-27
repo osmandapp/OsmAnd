@@ -117,6 +117,7 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 				}
 			}
 		}
+		dismiss();
 	}
 
 	private void updatePreferenceButtons(boolean checked) {

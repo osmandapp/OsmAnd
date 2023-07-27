@@ -387,8 +387,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.hdop = query.getDouble(4);
 				pt.time = query.getLong(5);
 
-				float heading = query.getFloat(6);
-				pt.heading = heading == NO_HEADING ? Float.NaN : heading;
+				if (query.isNull(6)) {
+					pt.heading = Float.NaN;
+				} else {
+					pt.heading = query.getFloat(6);
+				}
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				pt.getExtensionsToWrite().putAll(extensions);
@@ -764,7 +767,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(TRACK_COL_SPEED, speed);
 		rowsMap.put(TRACK_COL_HDOP, hdop);
 		rowsMap.put(TRACK_COL_DATE, time);
-		rowsMap.put(TRACK_COL_HEADING, heading);
+		rowsMap.put(TRACK_COL_HEADING, Float.isNaN(heading) ? null : heading);
 		rowsMap.put(TRACK_COL_PLUGINS_INFO, pluginsInfo);
 		execWithClose(AndroidUtils.createDbInsertQuery(TRACK_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
