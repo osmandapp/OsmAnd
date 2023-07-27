@@ -5339,4 +5339,8 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_attr_alpineHiking_description">Tipos de la clasificación de la dificultad de las rutas.</string>
+    <string name="write_bearing">Escribir el rumbo</string>
+    <string name="write_heading_description">Guarda el rumbo de cada punto de seguimiento en la grabación</string>
+    <string name="write_heading">Escribir el encabezado</string>
+    <string name="write_bearing_description">Guarda la dirección de cada punto de seguimiento durante la grabación</string>
 </resources>
