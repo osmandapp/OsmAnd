@@ -1550,17 +1550,29 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
-		while (tb.getZoom() < MAX_ZOOM_LIMIT && tb.containsLatLon(top, left) && tb.containsLatLon(bottom, right)) {
-			tb.setZoom(tb.getZoom() + 1);
+
+		int minZoom = Math.max(getMinZoom(), MIN_ZOOM_LIMIT);
+		int maxZoom = Math.min(getMaxZoom(), MAX_ZOOM_LIMIT);
+		Zoom zoom = new Zoom(tb.getZoom(), (float) tb.getZoomFloatPart(), minZoom, maxZoom);
+
+		while (zoom.isZoomInAllowed() && tb.containsRectInRotatedRect(left, top, right, bottom)) {
+			zoom.zoomIn();
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		while (tb.getZoom() >= MIN_ZOOM_LIMIT && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
-			tb.setZoom(tb.getZoom() - 1);
+		while (zoom.isZoomOutAllowed() && !tb.containsRectInRotatedRect(left, top, right, bottom)) {
+			zoom.zoomOut();
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
+
 		if (dy != 0 || dx != 0) {
-			clat = tb.getLatFromPixel(tb.getPixWidth() / 2f, tb.getPixHeight() / 2f + dy);
-			clon = tb.getLonFromPixel(tb.getPixWidth() / 2f + dx, tb.getPixHeight() / 2f);
+			float x = tb.getPixWidth() / 2f + dx;
+			float y = tb.getPixHeight() / 2f + dy;
+			clat = tb.getLatFromPixel(x, y);
+			clon = tb.getLonFromPixel(x, y);
 		}
-		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
+
+		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart(),
+				true, false, null, null);
 	}
 
 	public RotatedTileBox getTileBox(int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
@@ -1580,8 +1592,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		tb.setPixelDimensions(tbw, tbh);
 
 		if (dy != 0) {
-			double clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 - dy);
-			double clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+			float x = tb.getPixWidth() / 2f;
+			float y = tb.getPixHeight() / 2f - dy;
+			double clat = tb.getLatFromPixel(x, y);
+			double clon = tb.getLonFromPixel(x, y);
 			tb.setLatLonCenter(clat, clon);
 		}
 		return tb;
@@ -1603,8 +1617,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		tb.setLatLonCenter(clat, clon);
 		tb.setZoom(zoom);
 		if (dy != 0) {
-			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
-			clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+			float x = tb.getPixWidth() / 2f;
+			float y = tb.getPixHeight() / 2f - dy;
+			clat = tb.getLatFromPixel(x, y);
+			clon = tb.getLonFromPixel(x, y);
 		}
 		if (animated) {
 			animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
