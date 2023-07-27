@@ -43,6 +43,9 @@ class MapMarkersScreen(
                     app.mapViewTrackingUtilities.switchCompassModeTo(it)
                 }
             }
+            override fun onStart(owner: LifecycleOwner) {
+                recenterMap()
+            }
         })
     }
 

@@ -5,6 +5,8 @@ import androidx.car.app.CarContext
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.IndexConstants
 import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.SelectedTracksHelper
@@ -23,6 +25,14 @@ class TracksFoldersScreen(
     TrackFolderLoaderTask.LoadTracksListener {
     private var asyncLoader: TrackFolderLoaderTask? = null
     private val selectedTracksHelper: SelectedTracksHelper = SelectedTracksHelper(app)
+
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                recenterMap()
+            }
+        })
+    }
 
     override fun onGetTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
