@@ -879,7 +879,7 @@
     <string name="audionotes_location_not_defined">Ha szeretne jegyzetet adni a helyhez, koppintson a „Hely használata…” gombra.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
-    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás és a lejtési viszonyok, segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sokminden mást. A topográfiai információk a térképen lejtőárnyékolással, szintvonalakkal és/vagy meredekségszínezéssel ábrázolhatók.
+    <string name="srtm_plugin_description">A domborzati információk, mint például a szintvonalak, domborzatárnyékolás és a lejtési viszonyok, segítenek vizuálisan felmérni a terep fekvését, a domborzatot, a hajózhatóságot és még sok minden mást. A topográfiai információk a térképen lejtőárnyékolással, szintvonalakkal és/vagy meredekségszínezéssel ábrázolhatók.
 \n
 \nAz alapul szolgáló adatok az SRTM és az ASTER adataiból származnak.
 \n
@@ -3055,7 +3055,7 @@
     <string name="shared_string_calculate">Tervezés</string>
     <string name="layer_osm_edits">OSM-szerkesztések</string>
     <string name="quick_action_contour_lines_descr">Gomb, amely a térképen megjeleníti vagy elrejti a szintvonalakat.</string>
-    <string name="quick_action_hillshade_descr">Gomb, amely a térképen megjeleníti vagy elrejti a domborzatárnyékolást.</string>
+    <string name="quick_action_hillshade_descr">Gomb domborzatárnyékolás megjelenítésére vagy rejtésére a térképen.</string>
     <string name="tts_initialization_error">Szövegfelolvasó motor indítása sikertelen.</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB szabad (%2$s GB-ból)</string>
@@ -3366,7 +3366,7 @@
     <string name="keep_both">Mindkettő megtartása</string>
     <string name="replace_all">Az összes cseréje</string>
     <string name="shared_string_terrain">Domborzat</string>
-    <string name="hillshade_description">A domborzatárnyékolási térkép sötét árnyalatokkal jeleníti meg a lejtőket, hegycsúcsokat és síkságokat.</string>
+    <string name="hillshade_description">A domborzatárnyékolási térkép sötét árnyalatokkal jeleníti meg a lejtést, hegycsúcsokat és síkságokat.</string>
     <string name="slope_description">A lejtésviszony színezéssel jeleníti meg a terep meredekségét.</string>
     <string name="terrain_slider_description">Állítsa be a legkisebb és legnagyobb nagyítási szintet, amelyen a réteg megjelenjen.</string>
     <string name="hillshade_download_description">A domborzatárnyékolás térképen való megjelenítéséhez további térképek szükségesek.</string>
@@ -3392,7 +3392,7 @@
     <string name="shared_string_square">Négyzet</string>
     <string name="shared_string_min">Min</string>
     <string name="clear_recorded_data">Felvett adatok törlése</string>
-    <string name="terrain_empty_state_text">Megjeleníti a térképen a domborzatárnyékolást vagy a lejtési viszonyokat. Ezekről a térképfajtákról a honlapunkon olvashat.</string>
+    <string name="terrain_empty_state_text">Megjeleníti a térképen a domborzatárnyékolást vagy a lejtést. Ezekről a térképfajtákról a honlapunkon olvashat.</string>
     <string name="app_mode_ski_touring">Túrasízés</string>
     <string name="app_mode_ski_snowmobile">Motoros szán</string>
     <string name="custom_osmand_plugin">Egyéni OsmAnd bővítmény</string>
@@ -5311,7 +5311,7 @@
     <string name="cache_size">Gyorsítótár méret</string>
     <string name="shared_string_avoid">Elkerülés</string>
     <string name="free_settings_backup">Beállítások ingyenes lementése</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Raszteres sqlitedb használata lejtőhöz/domborzatárnyékoláshoz</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Raszteres sqlitedb használata domborzatárnyékoláshoz/lejtőhöz</string>
     <string name="may_be_used_if_there_is_shortcut">Használható, ha van parancsikon</string>
     <string name="routing_attr_allow_via_ferrata_description">Hegyi útvonal rögzített kábelekkel, fellépőkkel, létrákkal és hidakkal.</string>
     <string name="routing_attr_allow_via_ferrata_name">Hegyoldali útvonal (Via ferrata)</string>
