@@ -118,6 +118,18 @@ public class OpeningHoursParserTest {
 		testOpened("20.06.2023 10:00", hours, true);
 		testOpened("01.11.2023 10:00", hours, false);
 		testOpened("31.12.2023 10:00", hours, false);
+		
+		hours = parseOpenedHours("2022 Oct 30 - 2023 Oct 24");
+		System.out.println(hours);
+		testOpened("25.10.2023 10:00", hours, false);
+		
+		hours = parseOpenedHours("2022 Oct 24 - 2023 Aug 30");
+		System.out.println(hours);
+		testOpened("25.10.2022 10:00", hours, true);
+		testOpened("25.09.2023 10:00", hours, false);
+		testOpened("25.09.2022 10:00", hours, false);
+		testOpened("25.08.2022 10:00", hours, false);
+		testOpened("25.08.2023 10:00", hours, true);
 
 /*		test for opening_hours not handled correctly #17521
 		hours = parseOpenedHours("11:00-14:00,17:00-22:00; We off; Fr,Sa 11:00-14:00,17:00-00:00");
