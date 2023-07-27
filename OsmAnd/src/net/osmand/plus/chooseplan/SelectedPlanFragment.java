@@ -208,12 +208,15 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	protected void bindFeatureItem(@NonNull View itemView, @NonNull OsmAndFeature feature) {
 		bindFeatureItem(itemView, feature, false);
 		ImageView ivCheckmark = itemView.findViewById(R.id.checkmark);
-		if (includedFeatures.contains(feature)) {
+		boolean included = includedFeatures.contains(feature);
+		if (included) {
 			ivCheckmark.setVisibility(View.VISIBLE);
 			ivCheckmark.setImageDrawable(getCheckmark());
 		} else {
 			ivCheckmark.setVisibility(View.GONE);
 		}
+		itemView.setContentDescription(getString(R.string.ltr_or_rtl_combine_via_space, getString(feature.getListTitleId()),
+				included ? getString(R.string.shared_string_included) : getString(R.string.shared_string_not_included)));
 	}
 
 	private void setupPriceButtons() {
@@ -256,6 +259,16 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 			if (itemView == null) {
 				continue;
 			}
+			StringBuilder contentDescription = new StringBuilder(key.getTitle());
+			String discount = key.getDiscount();
+			if(discount != null){
+				contentDescription.append(" ").append(discount);
+			}
+			contentDescription.append(" ").append(key.getPrice());
+			String description = key.getDescription();
+			if(description != null){
+				contentDescription.append(" ").append(description);
+			}
 
 			ImageView ivCheckmark = itemView.findViewById(R.id.icon);
 
@@ -270,11 +283,14 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.rectangle_rounded, colorWithAlpha);
 				Drawable[] layers = {bgDrawable, stroke};
 				normal = new LayerDrawable(layers);
+				contentDescription.append(" ").append(getString(R.string.shared_string_selected));
 			} else {
 				ivCheckmark.setImageDrawable(getEmptyCheckmark());
 				normal = new ColorDrawable(Color.TRANSPARENT);
+				contentDescription.append(" ").append(getString(R.string.shared_string_not_selected));
 			}
 			setupRoundedBackground(itemView, normal, colorNoAlpha, ButtonBackground.ROUNDED);
+			itemView.setContentDescription(contentDescription.toString());
 		}
 		updateSelectedPriceButton();
 	}
