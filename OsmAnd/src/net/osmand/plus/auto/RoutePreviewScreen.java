@@ -116,6 +116,11 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 		getLifecycle().removeObserver(this);
 	}
 
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		recenterMap();
+	}
+
 	@NonNull
 	@Override
 	public Template onGetTemplate() {

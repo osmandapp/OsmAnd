@@ -133,6 +133,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				}
 			}
 		}
+		if (navigationCarSurface != null) {
+			navigationCarSurface.handleRecenter();
+		}
 	}
 
 	private boolean isAppModeDerivedFromCar(ApplicationMode appMode) {
