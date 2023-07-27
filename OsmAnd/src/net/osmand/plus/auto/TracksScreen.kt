@@ -51,10 +51,14 @@ class TracksScreen(
 					app.mapViewTrackingUtilities.switchCompassModeTo(it)
 				}
 			}
-		})
+
+	        override fun onStart(owner: LifecycleOwner) {
+		        recenterMap()
+	        }
+        })
 	}
 
-    private inner class LoadTracksTask : AsyncTask<Unit, Unit, Unit>() {
+	private inner class LoadTracksTask : AsyncTask<Unit, Unit, Unit>() {
         override fun doInBackground(vararg params: Unit?) {
             prepareTrackItems()
         }
