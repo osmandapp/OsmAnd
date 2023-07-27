@@ -1625,7 +1625,17 @@ public class OpeningHoursParser {
 		}
 
 		private boolean hasFullYears() {
-			return fullYears > 0;
+			boolean overlappedYears = false;
+			if (firstYearMonths != null && lastYearMonths != null) {
+				int monthIdx = 0;
+				while (firstYearMonths[monthIdx] == 0 && monthIdx < 12){
+					monthIdx++;
+				}
+				if (firstYearMonths[monthIdx] < lastYearMonths[monthIdx]) {
+					overlappedYears = true;
+				}
+			}
+			return fullYears > 0 || overlappedYears;
 		}
 	}
 
@@ -1985,7 +1995,7 @@ public class OpeningHoursParser {
 									basic.lastYearMonths = new int[12];
 									Arrays.fill(basic.lastYearMonths, 0, lastMonthToken.mainNumber + 1, endYear);
 								}
-								if (endYear - startYear > 1) {
+								if (endYear - startYear > 0) {
 									basic.fullYears = endYear - startYear - 1;
 									fillFirstLastYearsDayOfMonth(basic, pair);
 								}
