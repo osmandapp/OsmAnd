@@ -136,19 +136,27 @@ public class SideWidgetsPanel extends FrameLayout {
 		int dotsBackgroundId = nightMode ? R.color.icon_color_secondary_dark : R.color.divider_color_light;
 		dots.setBackgroundResource(dotsBackgroundId);
 
-		dots.removeAllViews();
-
-		for (int i = 0; i < pagesCount; i++) {
-			ImageView dot = new ImageView(getContext());
-			int dp3 = AndroidUtils.dpToPx(getContext(), 3);
-			MarginLayoutParams dotParams = new ViewGroup.MarginLayoutParams(dp3, dp3);
-			AndroidUtils.setMargins(dotParams, dp3, 0, dp3, 0);
-			dot.setLayoutParams(dotParams);
-
-			boolean currentPage = i == viewPager.getCurrentItem();
-			int dotColor = getDotColorId(currentPage);
-			dot.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_dot_position, dotColor));
-			dots.addView(dot);
+		if (dots.getChildCount() != pagesCount) {
+			dots.removeAllViews();
+			for (int i = 0; i < pagesCount; i++) {
+				ImageView dot = new ImageView(getContext());
+				int dp3 = AndroidUtils.dpToPx(getContext(), 3);
+				MarginLayoutParams dotParams = new ViewGroup.MarginLayoutParams(dp3, dp3);
+				AndroidUtils.setMargins(dotParams, dp3, 0, dp3, 0);
+				dot.setLayoutParams(dotParams);
+				int dotColor = getDotColorId(i == viewPager.getCurrentItem());
+				dot.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_dot_position, dotColor));
+				dots.addView(dot);
+			}
+		} else {
+			for (int i = 0; i < dots.getChildCount(); i++) {
+				View childView = dots.getChildAt(i);
+				if (childView instanceof ImageView) {
+					ImageView dot = (ImageView) childView;
+					int dotColor = getDotColorId(i == viewPager.getCurrentItem());
+					dot.setImageDrawable(getIconsCache().getIcon(R.drawable.ic_dot_position, dotColor));
+				}
+			}
 		}
 	}
 
