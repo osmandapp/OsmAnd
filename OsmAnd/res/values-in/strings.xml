@@ -35,7 +35,7 @@
     <string name="prefer_in_routing_title">Utamakan…</string>
     <string name="prefer_in_routing_descr">Utamakan jalan raya.</string>
     <string name="max_speed_none">tidak ada</string>
-    <string name="download_hillshade_maps">Hillshade</string>
+    <string name="download_hillshade_maps">Bayangan bukit</string>
     <string name="local_indexes_cat_av">Data Audio/Video</string>
     <string name="about_version">Versi:</string>
     <string name="shared_string_about">Tentang</string>
@@ -5315,7 +5315,7 @@
     <string name="free_account">Akun gratis</string>
     <string name="get_osmand_cloud">Dapatkan OsmAnd Cloud</string>
     <string name="folder_export_empty_error">Tidak ada untuk diekspor, folder kosong</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Gunakan sqltiedb raster untuk bayangan lereng/bukit</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Gunakan sqlitedb raster untuk bayangan lereng/bukit</string>
     <string name="cache_size">Ukuran tembolok</string>
     <string name="shared_string_avoid">Hindari</string>
     <string name="may_be_used_if_there_is_shortcut">Dapat digunakan jika ada jalan potong</string>
@@ -5344,4 +5344,8 @@
     <string name="rendering_attr_alpineHiking_description">Jenis klasifikasi kesulitan untuk rute.</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_attr_alpineHiking_name">Klasifikasi kesulitan</string>
+    <string name="write_bearing">Tulis Bantalan</string>
+    <string name="write_bearing_description">Simpan bantalan ke setiap titik trek saat merekam</string>
+    <string name="write_heading_description">Simpan tajuk ke setiap titik trek saat merekam</string>
+    <string name="write_heading">Tulis Tajuk</string>
 </resources>
