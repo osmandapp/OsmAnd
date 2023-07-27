@@ -1989,12 +1989,12 @@ public class OpeningHoursParser {
 								int startYear = ruleYear > 0 ? ruleYear : endYear;
 								if (basic.firstYearMonths == null) {
 									basic.firstYearMonths = new int[12];
-									Arrays.fill(basic.firstYearMonths, firstMonthToken.mainNumber, 12, startYear);
 								}
+								Arrays.fill(basic.firstYearMonths, firstMonthToken.mainNumber, 12, startYear);
 								if (basic.lastYearMonths == null) {
 									basic.lastYearMonths = new int[12];
-									Arrays.fill(basic.lastYearMonths, 0, lastMonthToken.mainNumber + 1, endYear);
 								}
+								Arrays.fill(basic.lastYearMonths, 0, lastMonthToken.mainNumber + 1, endYear);
 								if (endYear - startYear > 0) {
 									basic.fullYears = endYear - startYear - 1;
 									fillFirstLastYearsDayOfMonth(basic, pair);
