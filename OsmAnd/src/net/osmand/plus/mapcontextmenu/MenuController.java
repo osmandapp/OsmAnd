@@ -863,8 +863,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
-			setBgIds(R.color.app_bar_color_light, R.color.app_bar_color_dark,
-					R.color.app_bar_color_light, R.color.app_bar_color_dark);
+			setBgIds(R.color.app_bar_main_light, R.color.app_bar_main_dark,
+					R.color.app_bar_main_light, R.color.app_bar_main_dark);
 			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setTitleTextClrIds(R.color.color_white, R.color.color_white);

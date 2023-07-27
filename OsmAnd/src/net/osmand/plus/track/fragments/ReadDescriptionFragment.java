@@ -98,7 +98,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			int statusBarColor = nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+			int statusBarColor = nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 			window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
 		}
 		return dialog;

@@ -8,7 +8,7 @@
 	</item>
 	<item android:state_enabled="false">
 		<shape android:shape="rectangle">
-			<solid android:color="@color/activity_background_dark" />
+			<solid android:color="@color/activity_background_color_dark" />
 			<corners android:radius="@dimen/route_info_button_bg_line_radius" />
 		</shape>
 	</item>

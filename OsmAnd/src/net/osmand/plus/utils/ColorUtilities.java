@@ -240,7 +240,7 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getAppBarColorId(boolean nightMode) {
-		return nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light;
+		return nightMode ? R.color.app_bar_main_dark : R.color.app_bar_main_light;
 	}
 
 	@ColorInt
@@ -327,7 +327,7 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getStatusBarColorId(boolean nightMode) {
-		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 	}
 
 	@ColorRes

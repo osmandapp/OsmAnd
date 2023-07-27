@@ -123,7 +123,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		progressBar = view.findViewById(R.id.progress_bar);
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
-		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		searchButton = toolbar.findViewById(R.id.search);
@@ -234,7 +234,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		viewPager = view.findViewById(R.id.view_pager);
 		List<TrackTab> tabs = getTrackTabs();
 		tabLayout = view.findViewById(R.id.sliding_tabs);
-		tabLayout.setTabBackground(nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light);
+		tabLayout.setTabBackground(nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light);
 		tabLayout.setCustomTabProvider(new CustomTabProvider() {
 			@Override
 			public View getCustomTabView(@NonNull ViewGroup parent, int position) {

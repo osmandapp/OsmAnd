@@ -1155,7 +1155,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				AndroidUtils.setBackground(app, startButton, ColorUtilities.getCardAndListBackgroundColorId(nightMode));
 			} else {
 				color1 = R.color.description_font_and_bottom_sheet_icons;
-				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_light, R.color.activity_background_dark);
+				AndroidUtils.setBackground(app, startButton, nightMode, R.color.activity_background_color_light, R.color.activity_background_color_dark);
 			}
 			color2 = color1;
 		} else {

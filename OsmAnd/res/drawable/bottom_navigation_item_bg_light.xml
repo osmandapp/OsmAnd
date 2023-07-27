@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<item android:drawable="@color/wikivoyage_card_bg_light" android:state_selected="false" />
+	<item android:drawable="@color/card_and_list_background_light" android:state_selected="false" />
 
 	<item android:drawable="@drawable/navigation_item_active_bg_light" android:state_selected="true" />
 

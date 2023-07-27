@@ -78,7 +78,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@ColorRes
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_color_dark : R.color.activity_background_color_light;
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private void setupToolbar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
-		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.card_and_list_background_light));
+		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light));
 
 		Toolbar toolbar = appbar.findViewById(R.id.toolbar);
 		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));

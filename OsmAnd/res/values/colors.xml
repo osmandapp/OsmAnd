@@ -1,37 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<!-- Background -->
+	<color name="activity_background_color_light">#f0f0f0</color>
+	<color name="activity_background_color_dark">#0D0D0D</color>
+	<color name="card_and_list_background_light">#ffffff</color>
+	<color name="card_and_list_background_dark">#222526</color>3
+	<color name="list_background_color_light">#ffffff</color>
+	<color name="list_background_color_dark">#1E1F20</color>
 
-	<color name="splash_screen_background_color">@color/map_background_color_light</color>
-	<color name="backup_restore_icons_blue">#6C19FF</color>
-	<color name="backup_restore_icons_yellow">#FFC30D</color>
-	<color name="backup_restore_icons_green">#12B38B</color>
-	<color name="backup_warning">#E82A3B</color>
+	<!-- Text -->
 	<color name="text_color_primary_light">#212121</color>
 	<color name="text_color_primary_dark">#cccccc</color>
 	<color name="text_color_secondary_light">#727272</color>
 	<color name="text_color_secondary_dark">#727272</color>
 	<color name="text_color_tertiary_light">#bfbfbf</color>
 	<color name="text_color_tertiary_dark">#404040</color>
+	<color name="text_color_tab_active_light">#ffffff</color>
+	<color name="text_color_tab_active_dark">#cccccc</color>
+
+	<!-- Icon -->
+	<color name="icon_color_default_light">#727272</color>
+	<color name="icon_color_default_dark">#727272</color>
+	<color name="icon_color_secondary_light">#b3b3b3</color>
+	<color name="icon_color_secondary_dark">#4d4d4d</color>
+	<color name="icon_color_primary_light">#4d4d4d</color>
+	<color name="icon_color_primary_dark">#b3b3b3</color>
+	<color name="icon_color_osmand_light">#ff8800</color>
+	<color name="icon_color_osmand_dark">#d28521</color>
+	<color name="icon_color_active_light">#237bff</color>
+	<color name="icon_color_active_dark">#d28521</color>
+	
+	<!-- AppBar & Status bar colors -->
+	<color name="app_bar_main_light">#ff8800</color>
+	<color name="app_bar_main_dark">#252727</color>
+	<color name="app_bar_secondary_light">#FFFFFF</color>
+	<color name="app_bar_secondary_dark">#252727</color>
+	<!-- <color name="app_bar_color_light">#ff8800</color> -->
+	<!-- <color name="app_bar_color_dark">#252727</color> -->
+
+	<color name="navigation_bar_bg_light">#000000</color>
+	<color name="navigation_bar_bg_dark">#000000</color>
+
+	<color name="status_bar_main_light">#E68200</color>
+	<color name="status_bar_main_dark">#1E1F1F</color>
+	<color name="status_bar_secondary_light">#F0F0F0</color>
+	<color name="status_bar_secondary_dark">#1E1F1F</color>
+	<!-- <color name="status_bar_color_light">#e68200</color> -->
+	<!-- <color name="status_bar_color_dark">#232525</color> -->
+	<color name="status_bar_transparent_light">#66000000</color>
+	<color name="status_bar_transparent_dark">#99000000</color>
+	<color name="status_bar_transparent_gradient">#CC000000</color>
+	<color name="status_bar_mapillary">#11ab51</color>
+	<color name="status_bar_dim_light">#8a4e00</color>
+	<color name="status_bar_dim_dark">#13171a</color>
+	<color name="status_bar_coordinate_input_dark">#0d0f0f</color>
+	<color name="status_bar_wikivoyage_light">#dddddd</color>
+	<color name="status_bar_wikivoyage_dark">#101112</color>
+	<color name="status_bar_wikivoyage_article_light">#f2f2f2</color>
+	<color name="status_bar_wikivoyage_article_dark">#222526</color>
+	<color name="status_bar_active_color_light">#0F6FFF</color>
+	<color name="status_bar_active_color_dark">#0B2F65</color>
+	
+	<!-- Active -->
 	<color name="active_color_primary_light">#237bff</color>
 	<color name="active_color_primary_dark">#d28521</color>
 	<color name="active_color_secondary_light">#DEEBFF</color>
 	<color name="active_color_secondary_dark">#4D300E</color>
+
+	<!-- Divider -->
 	<color name="divider_color_light">#e6e6e6</color>
 	<color name="divider_color_dark">#2c3033</color>
-	<color name="activity_background_color_light">#f0f0f0</color>
-	<color name="activity_background_color_dark">#121212</color>
+	<color name="divider_color">#ccc</color>
+
+	<color name="splash_screen_background_color">@color/map_background_color_light</color>
+	<color name="backup_restore_icons_blue">#6C19FF</color>
+	<color name="backup_restore_icons_yellow">#FFC30D</color>
+	<color name="backup_restore_icons_green">#12B38B</color>
+	<color name="backup_warning">#E82A3B</color>
+
 	<color name="activity_background_transparent_color_light">#eaf0f0f0</color>
 	<color name="activity_background_transparent_color_dark">#ea17181a</color>
-	<color name="list_background_color_light">#ffffff</color>
-	<color name="list_background_color_dark">#1E1F20</color>
-	<color name="app_bar_color_light">#ff8800</color>
-	<color name="app_bar_color_dark">#252727</color>
-	<color name="status_bar_color_light">#e68200</color>
-	<color name="status_bar_color_dark">#232525</color>
 	<color name="toolbar_active_color_light">#237BFF</color>
 	<color name="toolbar_active_color_dark">#0E3A7C</color>
-	<color name="status_bar_active_color_light">#0F6FFF</color>
-	<color name="status_bar_active_color_dark">#0B2F65</color>
 	<color name="material_text_input_layout_bg">#4DCCCCCC</color>
 
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
@@ -74,28 +124,13 @@
     <color name="buy_button_pressed_color">#b5e5b9</color>
 
     <color name="xmas_blue">#3f51b5</color>
-
 	<color name="discount_bar_bg">#357ef2</color>
-
-	<color name="text_color_tab_active_dark">#cccccc</color>
-	<color name="text_color_tab_active_light">#ffffff</color>
 
     <color name="searchbar_text_hint_dark">#727272</color>
     <color name="searchbar_text_hint_light">#727272</color>
 	<color name="searchbar_tab_inactive_dark">#66FFFFFF</color>
 	<color name="searchbar_tab_inactive_light">#B3FFFFFF</color>
 
-	<color name="icon_color_default_light">#727272</color>
-	<color name="icon_color_default_dark">#727272</color>
-	<color name="icon_color_secondary_light">#b3b3b3</color>
-	<color name="icon_color_secondary_dark">#4d4d4d</color>
-	<color name="icon_color_primary_light">#4d4d4d</color>
-	<color name="icon_color_primary_dark">#b3b3b3</color>
-
-	<color name="icon_color_osmand_light">#ff8800</color>
-	<color name="icon_color_osmand_dark">#d28521</color>
-	<color name="icon_color_active_light">#237bff</color>
-	<color name="icon_color_active_dark">#d28521</color>
 	<color name="osmand_live_active">#14CC70</color>
 	<color name="osmand_live_cancelled">#EE5622</color>
 	<color name="button_color_active_light">#6E18E8</color>
@@ -105,7 +140,7 @@
     <color name="markers_top_bar_background">#0f5257</color>
     <color name="markers_top_bar_2nd_background">#0c4347</color>
     <color name="marker_top_2nd_line_color">#859899</color>
-
+	<color name="list_divider_dark">#1f2326</color>
 	<color name="marker_blue">#2196f3</color>
 	<color name="marker_green">#73b825</color>
 	<color name="marker_orange">#ff9800</color>
@@ -138,7 +173,6 @@
 	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
 	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 
-	<color name="list_divider_dark">#1f2326</color>
 	<color name="list_item_light_pressed">#8cffffff</color>
 	<color name="list_item_dark_pressed">#be222526</color>
 
@@ -169,19 +203,7 @@
 	<color name="download_pressed_light">#8cff8f00</color>
 	<color name="download_pressed_dark">#be39464d</color>
 
-	<color name="status_bar_transparent_light">#66000000</color>
-	<color name="status_bar_transparent_dark">#99000000</color>
-	<color name="status_bar_transparent_gradient">#CC000000</color>
-	<color name="status_bar_mapillary">#11ab51</color>
-	<color name="status_bar_route_light">#e68200</color>
-	<color name="status_bar_route_dark">#000000</color>
-	<color name="status_bar_dim_light">#8a4e00</color>
-	<color name="status_bar_dim_dark">#13171a</color>
-	<color name="status_bar_coordinate_input_dark">#0d0f0f</color>
-	<color name="status_bar_wikivoyage_light">#dddddd</color>
-	<color name="status_bar_wikivoyage_dark">#101112</color>
-	<color name="status_bar_wikivoyage_article_light">#f2f2f2</color>
-	<color name="status_bar_wikivoyage_article_dark">#222526</color>
+
 
 	<color name="color_transparent">#0000</color>
 	<color name="color_black_transparent">#90000000</color>
@@ -278,7 +300,7 @@
 
 	<color name="inactive_item_orange">#ffc87f</color>
 	<color name="osmand_orange_dark">#e68200</color>
-	<color name="divider_color">#ccc</color>
+
 
 	<!-- DownloadedRegionsLayer -->
 	<color name="region_uptodate">#5532C832</color>
@@ -348,10 +370,10 @@
 	<color name="keyboard_divider_light">#e6e6e6</color>
 	<color name="keyboard_divider_dark">#2a2f33</color>
 
-	<color name="coordinate_input_app_bar_color_light">#536dfe</color>
-	<color name="coordinate_input_app_bar_color_dark">#2d3980</color>
-	<color name="coordinate_input_keyboard_icon_color">#9fadfc</color>
-	<color name="coordinate_input_error_color">#ed5421</color>
+	<!-- <color name="coordinate_input_app_bar_color_light">#536dfe</color>
+	<color name="coordinate_input_app_bar_color_dark">#2d3980</color> -->
+	<!-- <color name="coordinate_input_keyboard_icon_color">#9fadfc</color> -->
+	<!-- <color name="coordinate_input_error_color">#ed5421</color> -->
 	<color name="coordinate_input_active_icon_dark">#c0c0c0</color>
 	<color name="coordinate_input_edit_text_activated">#ff8800</color>
 	<color name="coordinate_input_edit_text_normal_light">#e6e6e6</color>
@@ -429,16 +451,10 @@
 
     <color name="grid_menu_icon_dark">#808080</color>
 
-	<color name="wikivoyage_bg_light">#f0f0f0</color>
-	<color name="wikivoyage_bg_dark">#17191a</color>
-	<color name="wikivoyage_card_bg_light">#ffffff</color>
-	<color name="wikivoyage_card_bg_dark">#222526</color>
 	<color name="wikivoyage_card_divider_light">#f0f0f0</color>
 	<color name="wikivoyage_card_divider_dark">#2d3133</color>
 	<color name="wikivoyage_active_light">#237bff</color>
 	<color name="wikivoyage_active_dark">#d28521</color>
-	<color name="wikivoyage_app_bar_light">#f2f2f2</color>
-	<color name="wikivoyage_app_bar_dark">#222526</color>
 	<color name="wikivoyage_app_bar_text_light">#454545</color>
 	<color name="wikivoyage_app_bar_text_dark">#ababab</color>
 	<color name="wikivoyage_contents_parent_icon_light">#536dfe</color>
@@ -470,18 +486,8 @@
 	<color name="preference_top_switch_off">#808080</color>
 	<color name="preference_action_button_text">#0047B2</color>
 
-	<!-- Basic colors -->
-	<color name="app_bar_main_dark">#101112</color>
-	<color name="app_bar_main_light">#ff8800</color>
-	<color name="status_bar_main_dark">#101112</color>
-	<color name="status_bar_main_light">#E68200</color>
-	<color name="navigation_bar_bg_light">#000000</color>
-	<color name="navigation_bar_bg_dark">#000000</color>
 
-	<color name="activity_background_dark">#17181a</color>
-	<color name="activity_background_light">#f0f0f0</color>
-	<color name="card_and_list_background_dark">#222526</color>
-	<color name="card_and_list_background_light">#ffffff</color>
+
 	<color name="description_font_and_bottom_sheet_icons">#727272</color>
 	<color name="additional_description_dark">#4d4d4d</color>
 	<color name="additional_description_light">#b3b3b3</color>
@@ -500,7 +506,6 @@
 	<color name="profile_icon_color_red_light">#FF2200</color>
 	<color name="profile_icon_color_yellow_light">#F0B400</color>
 	<color name="profile_icon_color_magenta_light">#CC0063</color>
-
 	<color name="profile_icon_color_blue_dark_default">#237BFF</color>
 	<color name="profile_icon_color_purple_dark">#732EEB</color>
 	<color name="profile_icon_color_green_dark">#0EBE92</color>
@@ -508,10 +513,8 @@
 	<color name="profile_icon_color_red_dark">#FF2200</color>
 	<color name="profile_icon_color_yellow_dark">#F0B400</color>
 	<color name="profile_icon_color_magenta_dark">#CC0063</color>
-
 	<color name="profile_icon_color_outdated_light">#A6A6A6</color>
 	<color name="profile_icon_color_outdated_dark">#727272</color>
-
 	<color name="profile_icon_color_inactive">#727272</color>
 
 	<color name="switch_button_active_light">#1A237BFF</color>

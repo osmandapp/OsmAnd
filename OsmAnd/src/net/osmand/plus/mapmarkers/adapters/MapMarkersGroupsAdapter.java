@@ -336,7 +336,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, color));
 				itemViewHolder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
 				itemViewHolder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, night));
-				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_main_dark : R.color.divider_color_light));
 				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, actionIconColor));
 				itemViewHolder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, night));

@@ -283,7 +283,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			TextView toolbar = mainView.findViewById(R.id.toolbar_text);
 			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
-			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_color_light : R.color.route_info_bottom_view_bg_dark);
+			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_main_light : R.color.route_info_bottom_view_bg_dark);
 		}
 
 		optionsButton.setOnClickListener(view -> {
