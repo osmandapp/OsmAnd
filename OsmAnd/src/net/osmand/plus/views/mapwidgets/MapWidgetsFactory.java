@@ -2,8 +2,6 @@ package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_AVERAGE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.GLIDE_TARGET;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +22,8 @@ import net.osmand.plus.views.mapwidgets.widgets.CurrentTimeWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DistanceToIntermediateDestinationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
-import net.osmand.plus.views.mapwidgets.widgets.GlideWidget;
+import net.osmand.plus.views.mapwidgets.widgets.GlideAverageWidget;
+import net.osmand.plus.views.mapwidgets.widgets.GlideTargetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.GpsInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
@@ -128,9 +127,9 @@ public class MapWidgetsFactory {
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
 				return new SunriseSunsetWidget(mapActivity, sunsetState);
 			case GLIDE_TARGET:
-				return new GlideWidget(mapActivity, GLIDE_TARGET);
+				return new GlideTargetWidget(mapActivity);
 			case GLIDE_AVERAGE:
-				return new GlideWidget(mapActivity, GLIDE_AVERAGE);
+				return new GlideAverageWidget(mapActivity, customId);
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId);
 			default:
