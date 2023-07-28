@@ -80,7 +80,7 @@
 					android:paddingEnd="10dp"
 					android:paddingRight="10dp"
 					osmand:srcCompat="@drawable/ic_action_additional_option"
-					android:tint="@color/description_font_and_bottom_sheet_icons" />
+					android:tint="@color/icon_color_default_light" />
 
 				<androidx.appcompat.widget.SwitchCompat
 					android:id="@+id/compound_button"

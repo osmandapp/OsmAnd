@@ -32,7 +32,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/content_padding"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textColor="@color/description_font_and_bottom_sheet_icons"
+			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/default_desc_text_size"
 			tools:ignore="UnusedAttribute"
 			tools:text="@string/public_transport_warning_title" />
@@ -42,7 +42,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textColor="@color/description_font_and_bottom_sheet_icons"
+			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/default_desc_text_size"
 			tools:ignore="UnusedAttribute"
 			tools:text="@string/public_transport_warning_descr_blog" />

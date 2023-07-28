@@ -448,7 +448,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
 
-		int descriptionColor = ContextCompat.getColor(ctx, R.color.description_font_and_bottom_sheet_icons);
+		int descriptionColor = ContextCompat.getColor(ctx, R.color.text_color_secondary_light);
 		((TextView) mainView.findViewById(R.id.fromTitle)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);

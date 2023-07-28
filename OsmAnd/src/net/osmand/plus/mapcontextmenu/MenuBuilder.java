@@ -1077,7 +1077,7 @@ public class MenuBuilder {
 
 	public Drawable getCollapseIcon(boolean collapsed) {
 		return app.getUIUtilities().getIcon(collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up,
-				light ? R.color.ctx_menu_collapse_icon_color_light : R.color.ctx_menu_collapse_icon_color_dark);
+				light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	private View buildTransportRowItem(View view, TransportStopRoute route, OnClickListener listener) {

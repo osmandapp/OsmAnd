@@ -108,7 +108,7 @@ public class ChartUtils {
 		mChart.setYAxisLabelView(chartLabel);
 
 		int xAxisRulerColor = ContextCompat.getColor(context, R.color.gpx_chart_black_grid);
-		int labelsColor = ContextCompat.getColor(context, R.color.description_font_and_bottom_sheet_icons);
+		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(true);
 		xAxis.setDrawAxisLineBehindData(false);

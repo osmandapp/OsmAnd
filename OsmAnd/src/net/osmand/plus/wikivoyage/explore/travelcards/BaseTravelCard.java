@@ -65,6 +65,6 @@ public abstract class BaseTravelCard {
 		if (enabled) {
 			return ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		}
-		return R.color.wikivoyage_secondary_text;
+		return R.color.text_color_secondary_light;
 	}
 }

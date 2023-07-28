@@ -34,7 +34,7 @@
 			android:layout_height="wrap_content"
 			android:gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textColor="@color/wikivoyage_secondary_text"
+			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/text_button_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="Buy - 5€" />
@@ -45,7 +45,7 @@
 			android:layout_height="wrap_content"
 			android:gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
-			android:textColor="@color/wikivoyage_secondary_text"
+			android:textColor="@color/text_color_secondary_light"
 			android:textSize="@dimen/text_button_text_size"
 			osmand:typeface="@string/font_roboto_regular"
 			tools:text="One time purchase" />

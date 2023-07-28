@@ -347,7 +347,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		setupSideOfTheWorldBtns(R.id.lat_side_of_the_world_btn, R.id.lon_side_of_the_world_btn);
 
-		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.ctx_menu_buttons_divider_light : R.color.ctx_menu_buttons_divider_dark);
+		setBackgroundColor(R.id.point_name_divider, lightTheme ? R.color.divider_color_light : R.color.divider_color_dark);
 		setBackgroundColor(R.id.point_name_et_container, lightTheme ? R.color.keyboard_item_control_light_bg : R.color.route_info_bottom_view_bg_dark);
 
 		ImageView pointNameKeyboardBtn = mainView.findViewById(R.id.point_name_keyboard_btn);
@@ -442,7 +442,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		View keyboardView = mainView.findViewById(R.id.keyboard_view);
 
-		int dividersColorResId = lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark;
+		int dividersColorResId = lightTheme ? R.color.divider_color_light : R.color.divider_color_dark;
 		setBackgroundColor(keyboardView, dividersColorResId);
 		setBackgroundColor(R.id.keyboard_divider, dividersColorResId);
 
