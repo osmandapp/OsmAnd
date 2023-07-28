@@ -111,15 +111,6 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-	@Override
-	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter,
-	                                            @NonNull MapActivity mapActivity,
-	                                            @NonNull List<RenderingRuleProperty> customRules) {
-		if (!app.useOpenGlRenderer()) {
-			createAdapterItem(menuAdapter, mapActivity, customRules);
-		}
-	}
-
 	private boolean hasDepthMaps() {
 		boolean readFiles = !app.getResourceManager().isIndexesLoadedOnStart();
 		LocalIndexHelper helper = new LocalIndexHelper(app);
