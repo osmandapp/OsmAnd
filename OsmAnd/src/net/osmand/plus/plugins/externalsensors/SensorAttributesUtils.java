@@ -174,7 +174,7 @@ public class SensorAttributesUtils {
 
 		Pair<Float, Float> pair = ChartUtils.getScalingY(app, graphType);
 		float mulY = pair != null ? pair.first : 1f;
-		float divY = pair != null ? pair.second : 1f;
+		float divY = pair != null ? pair.second : Float.NaN;
 
 		boolean speedInTrack = analysis.hasSpeedInTrack();
 		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));

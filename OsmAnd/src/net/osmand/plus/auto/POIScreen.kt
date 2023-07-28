@@ -103,7 +103,7 @@ class POIScreen(
     }
 
     private fun setupPOI(listBuilder: ItemList.Builder, searchResults: List<SearchResult>?) {
-        val location = app.settings.lastKnownMapLocation
+        val location = app.mapViewTrackingUtilities.defaultLocation
         val mapPoint = ArrayList<Amenity>()
         val mapRect = QuadRect()
         searchResults?.let {
