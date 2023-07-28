@@ -58,7 +58,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 			items.add(dividerItem);
 
 			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin != null && plugin.isHeightmapAllowed()) {
+			if (plugin != null && plugin.isRelief3dAllowed()) {
 				createOfflineItem();
 			} else {
 				createOnlineItem();
