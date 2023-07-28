@@ -30,7 +30,6 @@ import java.util.List;
 
 public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonListener {
 
-	private static final String DASH = "—";
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
 
 	private final MapMarkersHelper mapMarkersHelper;
@@ -142,7 +141,7 @@ public class MapMarkerSideWidget extends TextInfoWidget implements CustomLatLonL
 		float averageSpeed = averageSpeedComputer.getAverageSpeed(interval, false);
 
 		if (Float.isNaN(averageSpeed) || averageSpeed == 0) {
-			setText(DASH, null);
+			setText(NO_VALUE, null);
 			return;
 		}
 

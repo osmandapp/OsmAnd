@@ -19,7 +19,6 @@ public class AverageSpeedWidget extends TextInfoWidget {
 	private static final String SKIP_STOPS_PREF_ID = "average_speed_skip_stops";
 
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
-	private static final String DASH = "—";
 
 	private final AverageSpeedComputer averageSpeedComputer;
 
@@ -68,7 +67,7 @@ public class AverageSpeedWidget extends TextInfoWidget {
 		boolean skipLowSpeed = skipStopsPref.get();
 		float averageSpeed = averageSpeedComputer.getAverageSpeed(measuredInterval, skipLowSpeed);
 		if (Float.isNaN(averageSpeed)) {
-			setText(DASH, null);
+			setText(NO_VALUE, null);
 		} else {
 			FormattedValue formattedAverageSpeed = OsmAndFormatter.getFormattedSpeedValue(averageSpeed, app);
 			setText(formattedAverageSpeed.value, formattedAverageSpeed.unit);
