@@ -954,7 +954,7 @@
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Höhenlinien</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Hangneigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Hangneigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
 \n
 \nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
 \n
@@ -3243,7 +3243,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Bei der Navigation unbefestigte Straßen gegenüber befestigten bevorzugen.</string>
     <string name="layer_osm_edits">OSM-Bearbeitungen</string>
     <string name="quick_action_contour_lines_descr">Schaltfläche zum Ein- und Ausblenden von Höhenlinien auf der Karte.</string>
-    <string name="quick_action_hillshade_descr">Schaltfläche zum Ein- oder Ausblenden der Reliefdarstellung.</string>
+    <string name="quick_action_hillshade_descr">Schaltfläche zum Ein- oder Ausblenden des Reliefs.</string>
     <string name="tts_initialization_error">Text-to-Speech-Engine kann nicht gestartet werden.</string>
     <string name="simulate_your_location_gpx_descr">Simulation Ihrer Position mit einem aufgezeichneten GPX-Track.</string>
     <string name="export_profile">Profil exportieren</string>
@@ -3466,14 +3466,14 @@
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Hangneigungen</string>
+    <string name="download_slope_maps">Hangneigung</string>
     <string name="terrain_empty_state_text">Zeigt Relief oder Hangneigung auf der Karte. Weitere Informationen hierzu finden Sie auf unserer Website.</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Hangneigung in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigung auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung des Reliefs werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
-    <string name="hillshade_description">Reliefkarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
+    <string name="hillshade_description">Reliefkarte mit dunklen Schattierungen zur Darstellung von Hangneigung, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
@@ -4748,8 +4748,8 @@
     <string name="compass_always_hidden">Immer ausgeblendet</string>
     <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald Zwischenpunkte passiert sind, wird die Distanz bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
-    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
-    <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
+    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um die Art der Kartenausrichtung zu ändern.</string>
+    <string name="compass_desc">Zeigt Richtung Norden.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
@@ -5218,10 +5218,10 @@
     <string name="delete_folder_question">Ordner löschen\?</string>
     <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
     <string name="map_widget_rssi">RSSI</string>
-    <string name="tracks_empty_folder_description">Dieser Ordner hat noch keinen Track.</string>
+    <string name="tracks_empty_folder_description">Dieser Ordner enthält noch keinen Track.</string>
     <string name="tracks_empty_folder">Leerer Ordner</string>
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
-    <string name="shared_string_new_track">Neue Strecke</string>
+    <string name="shared_string_new_track">Neuer Track</string>
     <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
     <string name="delete_track_folder_dialog_message">Dies löscht den Ordner \"%1$s\" und alle darin enthaltenen Tracks (%2$s).</string>
     <string name="delete_folder">Ordner löschen</string>
@@ -5320,7 +5320,7 @@
 \n • Höhenänderung und Neigungsauswertung überarbeitet
 \n
 \n</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Verwenden des Rasters von sqlitedb für Hangneigung / Relief</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Raster sqlitedb für Relief / Hangneigung verwenden</string>
     <string name="free_ride">Freifahrt</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gase</string>
@@ -5345,6 +5345,6 @@
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
     <string name="write_bearing">Peilung schreiben</string>
     <string name="write_heading">Richtung schreiben</string>
-    <string name="write_heading_description">Richtung zu jedem Trackpunkt bei Aufnahme speichern.</string>
+    <string name="write_heading_description">Richtung zu jedem Trackpunkt bei Aufnahme speichern</string>
     <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
 </resources>
