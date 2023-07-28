@@ -748,8 +748,7 @@ public class MapUtils {
 	}
 
 	public static boolean areLatLonEqual(double lat0, double lon0, double lat1, double lon1) {
-		return Math.abs(lat0 - lat1) < 0.00001
-				&& Math.abs(lon0 - lon1) < 0.00001;
+		return Math.abs(lat0 - lat1) < 0.00001 && Math.abs(lon0 - lon1) < 0.00001;
 	}
 
 	public static boolean areLatLonEqualPrecise(Location l, double lat, double lon) {

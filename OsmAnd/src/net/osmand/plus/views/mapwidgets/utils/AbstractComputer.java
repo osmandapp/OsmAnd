@@ -18,7 +18,6 @@ public abstract class AbstractComputer {
 
 	public static final long BIGGEST_MEASURED_INTERVAL;
 	public static final long ADD_POINT_INTERVAL_MILLIS = 1000;
-	protected static final boolean CALCULATE_UNIFORM_SPEED = true;
 
 	public static final List<Long> MEASURED_INTERVALS;
 	public static final long DEFAULT_INTERVAL_MILLIS = 30 * 60 * 1000L;

@@ -24,6 +24,8 @@ import java.util.List;
 
 public class AverageSpeedComputer extends AbstractComputer {
 
+	private static final boolean CALCULATE_UNIFORM_SPEED = true;
+
 	private final SegmentsList segmentsList;
 
 	private Location previousLocation;
