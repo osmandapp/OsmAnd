@@ -347,15 +347,11 @@ public class FavouritesHelper {
 		}
 	}
 
-	public boolean addFavourite(FavouritePoint p) {
-		return addFavourite(p, true);
+	public boolean addFavourite(@NonNull FavouritePoint point) {
+		return addFavourite(point, true, true, true);
 	}
 
-	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
-		return addFavourite(p, saveImmediately, true);
-	}
-
-	public boolean addFavourite(FavouritePoint point, boolean saveImmediately, boolean lookupAddress) {
+	public boolean addFavourite(@NonNull FavouritePoint point, boolean lookupAddress, boolean sortAndSave, boolean saveAsync) {
 		if (Double.isNaN(point.getAltitude()) || point.getAltitude() == 0) {
 			initAltitude(point);
 		}
@@ -366,23 +362,21 @@ public class FavouritesHelper {
 			lookupAddress(point);
 		}
 		app.getSettings().SHOW_FAVORITES.set(true);
-		FavoriteGroup group = getOrCreateGroup(point);
 
+		FavoriteGroup group = getOrCreateGroup(point);
 		if (!point.getName().isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
 				point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
-			} else {
-				if (point.getColor() == 0) {
-					point.setColor(group.getColor());
-				}
+			} else if (point.getColor() == 0) {
+				point.setColor(group.getColor());
 			}
 			group.getPoints().add(point);
 			addFavouritePoint(point);
 		}
-		if (saveImmediately) {
+		if (sortAndSave) {
 			sortAll();
-			saveCurrentPointsIntoFile(false);
+			saveCurrentPointsIntoFile(saveAsync);
 		}
 
 		runSyncWithMarkers(group);
@@ -483,10 +477,9 @@ public class FavouritesHelper {
 	}
 
 	public void saveCurrentPointsIntoFile(boolean async) {
-		SaveFavoritesListener listener = () -> {
-			updateLastModifiedTime();
-			onFavouritePropertiesUpdated();
-		};
+		updateLastModifiedTime();
+		SaveFavoritesListener listener = this::onFavouritePropertiesUpdated;
+
 		List<FavoriteGroup> groups = new ArrayList<>(favoriteGroups);
 		if (async) {
 			fileHelper.saveFavoritesIntoFile(groups, listener);
@@ -635,19 +628,25 @@ public class FavouritesHelper {
 	}
 
 	public void sortAll() {
-		Collator collator = Collator.getInstance();
-		collator.setStrength(Collator.SECONDARY);
+		Collator collator = getCollator();
 		Collections.sort(favoriteGroups, (lhs, rhs) -> lhs.isPersonal() ? -1 : rhs.isPersonal() ? 1 : collator.compare(lhs.getName(), rhs.getName()));
 		Comparator<FavouritePoint> favoritesComparator = getComparator();
-		for (FavoriteGroup g : favoriteGroups) {
-			Collections.sort(g.getPoints(), favoritesComparator);
+		for (FavoriteGroup group : favoriteGroups) {
+			Collections.sort(group.getPoints(), favoritesComparator);
 		}
 		Collections.sort(cachedFavoritePoints, favoritesComparator);
 	}
 
-	public static Comparator<FavouritePoint> getComparator() {
+	@NonNull
+	private static Collator getCollator() {
 		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
+		return collator;
+	}
+
+	@NonNull
+	private static Comparator<FavouritePoint> getComparator() {
+		Collator collator = getCollator();
 		return (o1, o2) -> {
 			String s1 = o1.getName();
 			String s2 = o2.getName();

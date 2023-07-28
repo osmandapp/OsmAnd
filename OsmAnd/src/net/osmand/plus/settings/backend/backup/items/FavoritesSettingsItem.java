@@ -175,7 +175,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			}
 			List<FavouritePoint> favourites = FavouritesHelper.getPointsFromGroups(appliedItems);
 			for (FavouritePoint favourite : favourites) {
-				favoritesHelper.addFavourite(favourite, false, false);
+				favoritesHelper.addFavourite(favourite, false, false, false);
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile(false);
