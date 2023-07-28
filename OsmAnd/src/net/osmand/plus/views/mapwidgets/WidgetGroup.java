@@ -33,7 +33,7 @@ public enum WidgetGroup {
 	ANT_PLUS(R.string.external_sensor_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0),
 	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0),
 	SUNRISE_SUNSET(R.string.map_widget_group_sunrise_sunset, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0),
-	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_ratio, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0);
+	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0);
 
 	@StringRes
 	public final int titleId;

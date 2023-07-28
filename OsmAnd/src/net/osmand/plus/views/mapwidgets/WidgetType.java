@@ -116,8 +116,8 @@ public enum WidgetType {
 	SUNRISE("day_night_mode_sunrise", R.string.shared_string_sunrise, R.string.map_widget_sunrise_desc, R.drawable.widget_sunrise_day, R.drawable.widget_sunrise_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNSET("day_night_mode_sunset", R.string.shared_string_sunset, R.string.map_widget_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
 
-	GLIDE_TARGET("glide_ratio_to_target", R.string.glide_ratio_to_target, R.string.glide_ratio_to_target, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, GLIDE, RIGHT),
-	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.average_glide_ratio, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, GLIDE, RIGHT),
+	GLIDE_TARGET("glide_ratio_to_target", R.string.glide_ratio_to_target, R.string.map_widget_glide_target_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0, GLIDE, RIGHT),
+	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.map_widget_glide_average_desc, R.drawable.widget_glide_ratio_average_day, R.drawable.widget_glide_ratio_average_night, 0, GLIDE, RIGHT),
 
 	// Bottom panel
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);

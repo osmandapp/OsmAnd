@@ -11,6 +11,14 @@
 	Thx - Hardy
 -->
 
+    <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
+    <string name="map_widget_glide_average_desc">Shows the average glide ratio for the set interval.</string>
+    <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point.</string>
+    <string name="average_glide_time_interval_desc">Specify the time interval for glide averaging.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Average glide ratio</string>
+    <string name="glide_ratio_to_target">Glide ratio to target</string>
+    <string name="map_widget_group_glide_ratio">Glide ratio</string>
     <string name="write_bearing_description">Save bearing to each track point while recording</string>
     <string name="write_bearing">Write Bearing</string>
     <string name="write_heading_description">Save heading to each track point while recording</string>
@@ -23,9 +31,6 @@
     <string name="rendering_attr_alpineHiking_name">Difficulty classification</string>
     <string name="shared_string_checked">Checked</string>
     <string name="shared_string_not_checked">Not checked</string>
-    <string name="average_glide_ratio">Average glide ratio</string>
-    <string name="glide_ratio_to_target">Glide ratio to target</string>
-    <string name="map_widget_group_glide_ratio">Glide ratio</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosives</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
