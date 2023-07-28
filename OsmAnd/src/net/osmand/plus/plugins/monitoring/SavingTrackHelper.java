@@ -386,12 +386,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.speed = query.getDouble(3);
 				pt.hdop = query.getDouble(4);
 				pt.time = query.getLong(5);
-
-				if (query.isNull(6)) {
-					pt.heading = Float.NaN;
-				} else {
-					pt.heading = query.getFloat(6);
-				}
+				pt.heading = query.isNull(6) ? Float.NaN : query.getFloat(6);
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				pt.getExtensionsToWrite().putAll(extensions);
