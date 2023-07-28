@@ -8,6 +8,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
@@ -274,6 +275,22 @@ public class NativeUtilities {
 			latLon = tileBox.getLatLonFromPixel(x, y);
 		}
 		return latLon;
+	}
+
+	public static void getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon,
+	                                        @NonNull OnResultCallback<Double> callback) {
+		if (latLon != null) {
+			Double altitude = getAltitudeForLatLon(mapRenderer, latLon);
+			if (altitude != null) {
+				callback.onResult(altitude);
+			} else {
+				HeightResolver.resolveHeight(latLon, output -> {
+					callback.onResult(output != null ? Double.valueOf(output) : null);
+				});
+			}
+		} else {
+			callback.onResult(null);
+		}
 	}
 
 	public static Double getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon) {
