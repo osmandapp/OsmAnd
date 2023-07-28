@@ -1618,7 +1618,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		tb.setZoom(zoom);
 		if (dy != 0) {
 			float x = tb.getPixWidth() / 2f;
-			float y = tb.getPixHeight() / 2f - dy;
+			float y = tb.getPixHeight() / 2f + dy;
 			clat = tb.getLatFromPixel(x, y);
 			clon = tb.getLonFromPixel(x, y);
 		}
