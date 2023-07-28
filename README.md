@@ -8,7 +8,7 @@ You are welcome to discuss any question regarding the project at the Google grou
     <tr>
         <td style="text-align: center; vertical-align: middle;">
             <a href="https://play.google.com/store/apps/details?id=net.osmand" target="_blank">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="85"/>
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="85" width="220"/>
             </a>
         </td>
         <td style="text-align: center; vertical-align: middle;">
@@ -20,12 +20,12 @@ You are welcome to discuss any question regarding the project at the Google grou
     <tr>
         <td style="text-align: center; vertical-align: middle;">
             <a href="https://apps.apple.com/app/apple-store/id934850257" target="_blank">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Get it on AppStore" height="60"/>
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Get it on AppStore" height="60" width="230"/>
             </a>
         </td>
         <td style="text-align: center; vertical-align: middle;">
             <a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" target="_blank">
-                <img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png" alt="Get it on Amazon" height="60"/>
+                <img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png" alt="Get it on Amazon" height="60" width="210"/>
             </a>
         </td>
     </tr>
