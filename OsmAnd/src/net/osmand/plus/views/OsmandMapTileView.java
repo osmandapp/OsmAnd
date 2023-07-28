@@ -1701,7 +1701,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		boolean wasInTiltMode = multiTouchSupport != null && multiTouchSupport.isInTiltMode();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
 
-		MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
+		MeasurementToolLayer layer = getMeasurementToolLayer();
 		if (mapRenderer != null && multiTouchSupport != null && (layer == null || !layer.isInMeasurementMode())) {
 			int actionCode = event.getActionMasked();
 			if (actionCode != MotionEvent.ACTION_DOWN
@@ -1850,7 +1850,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
-			MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
+			MeasurementToolLayer layer = getMeasurementToolLayer();
 			MapRendererView mapRenderer = getMapRenderer();
 			boolean finished = mapRenderer != null && (layer == null || !layer.isInMeasurementMode());
 			// 1.5 works better even on dm.density=1 devices
@@ -1945,6 +1945,32 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onChangeViewAngleStarted() {
 			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
 				initialElevation = elevationAngle;
+
+				MapRendererView mapRenderer = getMapRenderer();
+				MeasurementToolLayer measurementToolLayer = getMeasurementToolLayer();
+				boolean measurementMode = measurementToolLayer != null && measurementToolLayer.isInMeasurementMode();
+
+				if (mapRenderer != null && !measurementMode && multiTouchSupport != null) {
+					if (!targetChanged) {
+						targetChanged = true;
+						// Remember last target position before it is changed with map gesture
+						PointI targetPixelPosition = mapRenderer.getTargetScreenPosition();
+						targetPixelX = targetPixelPosition.getX();
+						targetPixelY = targetPixelPosition.getY();
+						rotate = MapUtils.unifyRotationTo360(-mapRenderer.getAzimuth());
+					}
+
+					PointF firstTouchPoint = multiTouchSupport.getFirstPoint();
+					PointF secondTouchPoint = multiTouchSupport.getSecondPoint();
+					int middleX = (int) ((firstTouchPoint.x + secondTouchPoint.x) / 2f);
+					int middleY = (int) ((firstTouchPoint.y + secondTouchPoint.y) / 2f);
+					PointI middlePoint31 = NativeUtilities.get31FromElevatedPixel(mapRenderer, middleX, middleY);
+					if (middlePoint31 == null) {
+						middlePoint31 = mapRenderer.getState().getTarget31();
+					}
+
+					mapRenderer.setMapTarget(new PointI(middleX, middleY), middlePoint31);
+				}
 			}
 		}
 
@@ -2057,7 +2083,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 			// Keep zoom center fixed or flexible
 			if (mapRenderer != null) {
-				MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
+				MeasurementToolLayer layer = getMeasurementToolLayer();
 				if ((layer == null || !layer.isInMeasurementMode()) &&
 						(doubleTapScaleDetector == null || !doubleTapScaleDetector.isInZoomMode()))
 					zoomAndRotateToAnimate(startZooming, startRotating);
@@ -2158,7 +2184,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 			if (multiTouchSupport != null && !multiTouchSupport.isInTiltMode()) {
-				MeasurementToolLayer layer = application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
+				MeasurementToolLayer layer = getMeasurementToolLayer();
 				MapRendererView mapRenderer = getMapRenderer();
 				if (mapRenderer != null && (layer == null || !layer.isInMeasurementMode())) {
 					if (!targetChanged) {
@@ -2220,6 +2246,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean isLayoutRtl() {
 		return AndroidUtils.isLayoutRtl(application);
+	}
+
+	@Nullable
+	private MeasurementToolLayer getMeasurementToolLayer() {
+		return application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 	}
 
 	private boolean isUseOpenGL() {
