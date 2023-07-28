@@ -735,9 +735,21 @@ public class MapUtils {
 	}
 
 	public static boolean areLatLonEqual(Location l, double lat, double lon) {
-		return l != null
-				&& Math.abs(l.getLatitude() - lat) < 0.00001
-				&& Math.abs(l.getLongitude() - lon) < 0.00001;
+		return l != null && areLatLonEqual(l.getLatitude(), l.getLongitude(), lat, lon);
+	}
+
+	public static boolean areLatLonEqual(LatLon l1, LatLon l2) {
+		return l1 == null && l2 == null
+				|| (l2 != null && areLatLonEqual(l1, l2.getLatitude(), l2.getLongitude()));
+	}
+
+	public static boolean areLatLonEqual(LatLon l, double lat, double lon) {
+		return l != null && areLatLonEqual(l.getLatitude(), l.getLongitude(), lat, lon);
+	}
+
+	public static boolean areLatLonEqual(double lat0, double lon0, double lat1, double lon1) {
+		return Math.abs(lat0 - lat1) < 0.00001
+				&& Math.abs(lon0 - lon1) < 0.00001;
 	}
 
 	public static boolean areLatLonEqualPrecise(Location l, double lat, double lon) {
@@ -820,5 +832,18 @@ public class MapUtils {
 			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
 		}
 		return dist;
+	}
+
+	public static float calculateAircraftGlideRatio(LatLon l1, LatLon l2, double a1, double a2) {
+		double altitudeDifference = a1 - a2;
+		double distance = getDistance(l1, l2);
+		return calculateAircraftGlideRatio(distance, altitudeDifference);
+	}
+
+	public static float calculateAircraftGlideRatio(double distance, double altitudeDifference) {
+		if (distance > 0 && altitudeDifference != 0) {
+			return (float) (distance / altitudeDifference);
+		}
+		return 0;
 	}
 }
