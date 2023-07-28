@@ -4,13 +4,20 @@ This project aims at providing comfortable map viewing and navigation (routing) 
 To get started, continue with the basic description below, then find more detail on our Welcome Wiki Pages, the Project Homepage, or the OpenStreetMap OsmAnd Wiki Page.
 You are welcome to discuss any question regarding the project at the Google group OsmAnd. Please do not use comments on wiki pages because it is rather difficult to find them.
 
-<a href="https://play.google.com/store/apps/details?id=net.osmand" target="_blank">
-<img src="https://github.com/osmandapp/osmandapp.github.io/blob/master/website/images/help/badge_store_google_play.png" alt="Get it on Google Play" height="60"/></a>
-<a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" target="_blank">
-<img src="https://github.com/osmandapp/osmandapp.github.io/blob/master/website/images/help/badge_store_amazon.png" alt="Get it on Amazon" height="60"/></a>
-<a href="https://apps.apple.com/app/apple-store/id934850257" target="_blank">
-<img src="https://github.com/osmandapp/osmandapp.github.io/blob/master/website/images/help/badge_store_appstore.png" alt="Get it on AppStore" height="60"/></a>
-
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; justify-items: center;">
+    <a href="https://play.google.com/store/apps/details?id=net.osmand" target="_blank">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="70"/>
+    </a>
+    <a href="https://apps.apple.com/app/apple-store/id934850257" target="_blank">
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Get it on AppStore" height="70"/>
+    </a>
+    <a href="https://f-droid.org/packages/net.osmand.plus/" target="_blank">
+        <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="70"/>
+    </a>
+    <a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" target="_blank">
+        <img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png" alt="Get it on Amazon" height="70"/>
+    </a>
+</div>
 
 <p>
 <a href="https://hosted.weblate.org/engage/osmand/">
