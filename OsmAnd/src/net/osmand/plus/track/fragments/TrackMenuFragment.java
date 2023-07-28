@@ -1130,7 +1130,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == RENAME_BUTTON_INDEX) {
 				FileUtils.renameFile(mapActivity, new File(gpxFile.path), this, true);
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {
-				MoveGpxFileBottomSheet.showInstance(fragmentManager, new File(gpxFile.path), this, true, false);
+				File file = new File(gpxFile.path);
+				MoveGpxFileBottomSheet.showInstance(fragmentManager, file, file.getParentFile(), this, true, false);
 			} else if (buttonIndex == GPS_FILTER_BUTTON_INDEX) {
 				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile, this);
 			} else if (buttonIndex == ALTITUDE_CORRECTION_BUTTON_INDEX) {
