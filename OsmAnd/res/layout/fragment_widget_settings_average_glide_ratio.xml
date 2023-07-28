@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		style="@style/DescStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/content_padding_small"
+		android:text="@string/average_glide_time_interval_desc"
+		android:textColor="?android:textColorSecondary" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?divider_color_basic" />
+
+	<FrameLayout
+		android:id="@+id/time_interval_card_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+</LinearLayout>

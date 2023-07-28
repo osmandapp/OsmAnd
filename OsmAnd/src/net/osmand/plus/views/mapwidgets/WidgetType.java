@@ -27,6 +27,7 @@ import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageSpeedWidgetSettingFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.ElevationProfileWidgetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.MapMarkerSideWidgetSettingsFragment;
@@ -286,6 +287,8 @@ public enum WidgetType {
 				this == BICYCLE_DISTANCE ||
 				this == RSSI) {
 			return new SensorWidgetSettingFragment();
+		} else if (this == GLIDE_AVERAGE) {
+			return new AverageGlideWidgetSettingsFragment();
 		}
 		return null;
 	}
