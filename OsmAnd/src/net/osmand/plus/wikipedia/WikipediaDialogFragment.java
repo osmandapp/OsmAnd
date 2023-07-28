@@ -94,8 +94,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
-				R.color.icon_color_default_light, R.color.wikivoyage_active_dark
+				R.color.icon_color_default_light, R.color.active_color_primary_light,
+				R.color.icon_color_default_light, R.color.active_color_primary_dark
 		);
 
 		readFullArticleButton = mainView.findViewById(R.id.read_full_article);

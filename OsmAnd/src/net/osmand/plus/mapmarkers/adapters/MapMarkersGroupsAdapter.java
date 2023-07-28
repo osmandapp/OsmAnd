@@ -578,7 +578,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
 						null, null, app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
-								night ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
+								night ? R.color.active_color_primary_dark : R.color.active_color_primary_light), null);
 				categoriesViewHolder.button.setOnClickListener(openChooseCategoriesDialog);
 				categoriesViewHolder.title.setOnClickListener(openChooseCategoriesDialog);
 			}

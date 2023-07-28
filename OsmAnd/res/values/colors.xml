@@ -446,8 +446,6 @@
 
 	<color name="wikivoyage_card_divider_light">#f0f0f0</color>
 	<color name="wikivoyage_card_divider_dark">#2d3133</color>
-	<color name="wikivoyage_active_light">#237bff</color>
-	<color name="wikivoyage_active_dark">#d28521</color>
 	<color name="wikivoyage_app_bar_text_light">#454545</color>
 	<color name="wikivoyage_app_bar_text_dark">#ababab</color>
 	<color name="wikivoyage_contents_parent_icon_light">#536dfe</color>
