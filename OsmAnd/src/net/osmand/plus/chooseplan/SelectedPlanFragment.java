@@ -208,12 +208,13 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	protected void bindFeatureItem(@NonNull View itemView, @NonNull OsmAndFeature feature) {
 		bindFeatureItem(itemView, feature, false);
 		ImageView ivCheckmark = itemView.findViewById(R.id.checkmark);
-		if (includedFeatures.contains(feature)) {
-			ivCheckmark.setVisibility(View.VISIBLE);
+		boolean included = includedFeatures.contains(feature);
+		if (included) {
 			ivCheckmark.setImageDrawable(getCheckmark());
-		} else {
-			ivCheckmark.setVisibility(View.GONE);
 		}
+		AndroidUiHelper.setVisibility(included ? View.VISIBLE : View.GONE, ivCheckmark);
+		itemView.setContentDescription(getString(R.string.ltr_or_rtl_combine_via_space, getString(feature.getListTitleId()),
+				getString(included ? R.string.shared_string_included : R.string.shared_string_not_included)));
 	}
 
 	private void setupPriceButtons() {
@@ -261,7 +262,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 			int colorNoAlpha = ColorUtilities.getActiveColor(app, nightMode);
 			Drawable normal;
-			if (key.equals(selectedPriceButton)) {
+			boolean selected = key.equals(selectedPriceButton);
+			if (selected) {
 				ivCheckmark.setImageDrawable(getCheckmark());
 
 				Drawable stroke = getActiveStrokeDrawable();
@@ -275,8 +277,24 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				normal = new ColorDrawable(Color.TRANSPARENT);
 			}
 			setupRoundedBackground(itemView, normal, colorNoAlpha, ButtonBackground.ROUNDED);
+			itemView.setContentDescription(getButtonContentDescription(key, selected));
 		}
 		updateSelectedPriceButton();
+	}
+
+	private String getButtonContentDescription(PriceButton<?> button, boolean selected) {
+		StringBuilder builder = new StringBuilder(button.getTitle());
+		String discount = button.getDiscount();
+		if (!Algorithms.isEmpty(discount)) {
+			builder.append(" ").append(discount);
+		}
+		builder.append(" ").append(button.getPrice());
+		String description = button.getDescription();
+		if (!Algorithms.isEmpty(description)) {
+			builder.append(" ").append(description);
+		}
+		builder.append(" ").append(getString(selected ? R.string.shared_string_selected : R.string.shared_string_not_selected));
+		return builder.toString();
 	}
 
 	private void updateSelectedPriceButton() {
