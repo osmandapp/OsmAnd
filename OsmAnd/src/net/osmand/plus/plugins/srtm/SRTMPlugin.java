@@ -428,11 +428,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	@Override
-	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity, @NonNull List<RenderingRuleProperty> customRules) {
-		return;
-	}
-
 	private void createContextMenuItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		ItemClickListener listener = new OnRowItemClick() {
 
