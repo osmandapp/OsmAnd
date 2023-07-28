@@ -53,7 +53,7 @@ public class FavoritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> 
 
 		for (FavouritePoint favourite : favourites) {
 			favoritesHelper.deleteFavourite(favourite, false);
-			favoritesHelper.addFavourite(favourite, false, false);
+			favoritesHelper.addFavourite(favourite, false, false, false);
 
 			if (plugin != null && favourite.getSpecialPointType() == SpecialPointType.PARKING) {
 				plugin.updateParkingPoint(favourite);
