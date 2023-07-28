@@ -9,13 +9,13 @@ You are welcome to discuss any question regarding the project at the Google grou
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80"/>
     </a>
     <a href="https://apps.apple.com/app/apple-store/id934850257" target="_blank">
-        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Get it on AppStore" height="60"/>
+        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Get it on AppStore" height="55"/>
     </a>
     <a href="https://f-droid.org/packages/net.osmand.plus/" target="_blank">
         <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80"/>
     </a>
     <a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" target="_blank">
-        <img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png" alt="Get it on Amazon" height="60"/>
+        <img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png" alt="Get it on Amazon" height="55"/>
     </a>
 </div>
 
