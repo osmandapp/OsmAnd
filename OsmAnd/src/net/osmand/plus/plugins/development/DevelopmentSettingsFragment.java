@@ -109,11 +109,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	private void setupHeightmapRelatedPrefs() {
-		boolean heightmapAllowed = plugin.isHeightmapAllowed();
-
-		SwitchPreferenceEx useRasterSQLiteDb = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
-		useRasterSQLiteDb.setIconSpaceReserved(false);
-		useRasterSQLiteDb.setEnabled(heightmapAllowed);
+		SwitchPreferenceEx preference = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
+		preference.setIconSpaceReserved(false);
+		preference.setEnabled(plugin.isRelief3dAllowed());
 	}
 
 	private void setupSimulateYourLocationPref() {

@@ -212,18 +212,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	// If enabled, map should be rendered with elevation data (in 3D)
 	public boolean is3DMapsEnabled() {
-		return isHeightmapAllowed() && settings.ENABLE_3D_MAPS.get();
+		return isRelief3dAllowed() && settings.ENABLE_3D_MAPS.get();
 	}
 
 	public boolean generateTerrainFrom3DMaps() {
-		return isHeightmapAllowed() && !USE_RASTER_SQLITEDB.get();
+		return app.useOpenGlRenderer() && !USE_RASTER_SQLITEDB.get();
 	}
 
-	public boolean isHeightmapAllowed() {
-		return app.useOpenGlRenderer() && isHeightmapPurchased();
+	public boolean isRelief3dAllowed() {
+		return app.useOpenGlRenderer() && isRelief3dPurchased();
 	}
 
-	public boolean isHeightmapPurchased() {
+	public boolean isRelief3dPurchased() {
 		return InAppPurchaseHelper.isOsmAndProAvailable(app);
 	}
 
