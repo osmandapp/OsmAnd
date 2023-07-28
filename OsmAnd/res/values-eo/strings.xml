@@ -5332,4 +5332,8 @@
     <string name="rendering_value_sacScale_name">SAC/CAS</string>
     <string name="rendering_attr_alpineHiking_name">Klasifiko de facileco</string>
     <string name="rendering_attr_alpineHiking_description">Maniero klasifiki facilecon de montgrimpadaj kursoj.</string>
+    <string name="write_heading">Konservi mov-direkton</string>
+    <string name="write_bearing_description">Konservi kompas-direkton al ĉiu punkto dum registri spuron</string>
+    <string name="write_bearing">Konservi kompas-direkton</string>
+    <string name="write_heading_description">Konservi mov-direkton al ĉiu punkto dum registri spuron</string>
 </resources>
