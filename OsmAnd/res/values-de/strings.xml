@@ -380,7 +380,7 @@
     <string name="vector_data_missing">Bitte Offline-Daten herunterladen, damit Karten offline verwendet werden können.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nLang tippen für Optionen"</string>
+\nFür Optionen lang tippen"</string>
     <string name="local_index_installed">Lokale Version</string>
     <string name="local_index_items_backuped">%1$d von %2$d Datei(en) deaktiviert.</string>
     <string name="local_index_items_deleted">%1$d von %2$d Datei(en) gelöscht.</string>
@@ -1203,7 +1203,7 @@
     <string name="map_widget_plain_time">Aktuelle Zeit</string>
     <string name="selected_gpx_info_show">"
 \n
-\nZur Darstellung auf der Karte lange drücken"</string>
+\nZur Darstellung lange auf der Karte tippen"</string>
     <string name="delay_navigation_start">Navigation automatisch starten</string>
     <string name="save_as_favorites_points">Als Favoritengruppe speichern</string>
     <string name="select_destination_and_intermediate_points">Ziele auswählen</string>
@@ -5347,4 +5347,6 @@
     <string name="write_heading">Richtung schreiben</string>
     <string name="write_heading_description">Richtung zu jedem Trackpunkt bei Aufnahme speichern</string>
     <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
+    <string name="feature_available_as_part_of_plan">%1$s verfügbar als Teil des %2$s-Plans</string>
+    <string name="shared_string_included">Inbegriffen</string>
 </resources>
