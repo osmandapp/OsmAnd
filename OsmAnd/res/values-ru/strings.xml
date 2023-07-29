@@ -734,7 +734,7 @@
     <string name="first_time_continue">Продолжить</string>
     <string name="first_time_download">Загрузить детальные карты регионов</string>
     <string name="search_poi_location">Поиск сигнала…</string>
-    <string name="search_near_map">Искать вокруг текущего центра карты</string>
+    <string name="search_near_map">Поиск вблизи текущего центра карты</string>
     <string name="search_nearby">Поиск рядом</string>
     <string name="map_orientation_default">По умолчанию</string>
     <string name="map_orientation_portrait">Портрет</string>
@@ -2178,7 +2178,7 @@
     <string name="share_history_subject"> поделились через OsmAnd</string>
     <string name="search_categories">Категории</string>
     <string name="postcode">Почтовый индекс</string>
-    <string name="city_type_district">Округ</string>
+    <string name="city_type_district">Район</string>
     <string name="city_type_neighbourhood">Микрорайон</string>
     <string name="map_widget_search">Поиск</string>
     <string name="shared_string_is_open_24_7">Открыто 24/7</string>
