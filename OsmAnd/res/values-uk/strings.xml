@@ -5350,4 +5350,6 @@
     <string name="write_heading_description">Під час запису зберігати напрямок для кожної точки треку</string>
     <string name="write_heading">Записувати заголовок</string>
     <string name="write_bearing_description">Під час запису зберігати напрямок на кожну точку треку</string>
+    <string name="feature_available_as_part_of_plan">%1$s доступно в рамках тарифного плану %2$s</string>
+    <string name="shared_string_included">Включено</string>
 </resources>
