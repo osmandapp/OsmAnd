@@ -5334,4 +5334,6 @@
     <string name="write_heading">Enregistrer le cap</string>
     <string name="write_heading_description">Sauvegarder le cap à chaque point de passage lors de l\'enregistrement</string>
     <string name="write_bearing_description">Sauvegarder le relèvement vers chaque point de passage lors de l\'enregistrement</string>
+    <string name="shared_string_included">Inclus</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponible dans le cadre de l\'abonnement %2$s</string>
 </resources>
