@@ -5348,4 +5348,6 @@
     <string name="write_heading_description">Gem retning for hvert sporpunkt under optagelse</string>
     <string name="write_heading">Skriv retning</string>
     <string name="write_bearing_description">Gem pejling for hvert sporpunkt under optagelse</string>
+    <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
+    <string name="shared_string_included">Inkluderet</string>
 </resources>
