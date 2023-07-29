@@ -3444,9 +3444,9 @@
     <string name="shared_string_terrain">Tereno</string>
     <string name="slope_download_description">Kromaj mapoj estas necesaj por vidigi deklivecon sur la mapo.</string>
     <string name="slope_read_more">Pliaj informoj pri dekliveco en %1$s.</string>
-    <string name="terrain_empty_state_text">Montras nivelombrumon (reliefon) aŭ deklivecon sur la mapo. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas sur nia retpaĝo.</string>
+    <string name="terrain_empty_state_text">Montras nivelombrumon (reliefon) aŭ deklivecon sur la mapo. Pliaj informoj pri tiuj ĉi specoj de mapoj troviĝas en nia retejo.</string>
     <string name="download_slope_maps">Dekliveco</string>
-    <string name="hillshade_description">Uzas tonojn de grizo por vidigi altaĵojn, montpintojn kaj malaltaĵojn.</string>
+    <string name="hillshade_description">Uzas tonojn de grizo por vidigi deklivecon, montpintojn kaj malaltaĵojn.</string>
     <string name="slope_description">Uzas kolorojn por vidigi angulon de dekliveco.</string>
     <string name="terrain_slider_description">Agordi minimuman kaj maksimuman skal-nivelojn inter kiuj la tavolo estos montrata.</string>
     <string name="hillshade_download_description">Kromaj mapoj estas necesaj por vidigi tavolon de nivelombrumo.</string>
@@ -5255,14 +5255,14 @@
     <string name="deleting_complete">Forigado plenumita</string>
     <string name="delete_account">Forigi konton</string>
     <string name="verify_account">Verigi vian konton</string>
-    <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pli la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
+    <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pri la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
     <string name="terrain_category_description">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
     <string name="routing_attr_allow_via_ferrata_description">Monta vojo kun fiksitaj ŝnuregoj, teniloj, ŝtupetaroj kaj pontetoj.</string>
     <string name="free_favorites_backup_description">Akiru konton OsmAnd-Nubo por havigi senpagan sekurkopion de ŝatataj punktoj kaj agordoj.</string>
     <string name="free_favorites_backup">Senpaga sekurkopio de ŝatataj punktoj</string>
     <string name="get_osmand_cloud">Akiri OsmAnd-Nubon</string>
     <string name="folder_export_empty_error">Nenio por elporti, dosierujo estas malplena</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Uzi rastruman «sqltiedb» por dekliveco kaj nivelombrumo</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Uzi rastruman «sqlitedb» por dekliveco / nivelombrumo</string>
     <string name="cache_size">Grando de kaŝmemoro</string>
     <string name="shared_string_avoid">Eviti</string>
     <string name="may_be_used_if_there_is_shortcut">Povas esti uzata se pli mallonga kurso</string>
@@ -5336,4 +5336,8 @@
     <string name="write_bearing_description">Konservi kompas-direkton al ĉiu punkto dum registri spuron</string>
     <string name="write_bearing">Konservi kompas-direkton</string>
     <string name="write_heading_description">Konservi mov-direkton al ĉiu punkto dum registri spuron</string>
+    <string name="shared_string_not_checked">Nemarkita</string>
+    <string name="shared_string_checked">Markita</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponebla kiel parto de la plano %2$s</string>
+    <string name="shared_string_included">Enhavata</string>
 </resources>
