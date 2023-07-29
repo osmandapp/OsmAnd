@@ -4097,7 +4097,7 @@
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="local_backup_descr">Резервное копирование данных в локальный файл или восстановление из него.</string>
     <string name="backup_into_file">Резервное копирование в файл</string>
-    <string name="restore_from_file">Восстановление из файла</string>
+    <string name="restore_from_file">Восстановить из файла</string>
     <string name="osmand_cloud_help_descr">Нужна помощь\? Напишите нам на
 \n%1$s</string>
     <string name="osmand_cloud_create_account_descr">Введите адрес электронной почты, и все ваши данные будут привязаны к нему.
@@ -5316,8 +5316,24 @@
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC</string>
-    <string name="rendering_value_sacScale_description">Швейцарский альпийский клуб (Swiss Alpine Club)</string>
-    <string name="rendering_value_caiScale_description">Итальянский альпийский клуб (Club Alpino Italiano)</string>
+    <string name="rendering_value_sacScale_description">Швейцарский альпийский клуб (SAC)</string>
+    <string name="rendering_value_caiScale_description">Итальянский альпийский клуб (CAI)</string>
     <string name="rendering_attr_alpineHiking_description">Классификация сложности маршрутов.</string>
     <string name="rendering_attr_alpineHiking_name">Классификация сложности</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Окислители и органические пероксиды</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Токсичные и инфекционные вещества</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Взрывчатые вещества</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Газы</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Легковоспламеняющиеся жидкости</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Легковоспламеняющиеся твердые вещества</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Радиоактивные материалы</string>
+    <string name="dangerous_goods">Опасные грузы</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Коррозионные вещества</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Прочие опасные вещества</string>
+    <string name="shared_string_class">Класс</string>
+    <string name="dangerous_goods_description">На некоторых дорогах и в тоннелях перевозка опасных материалов запрещена.</string>
+    <string name="routing_attr_allow_via_ferrata_description">Горный маршрут, оборудованный стационарными тросами, скобами, лестницами и мостами.</string>
+    <string name="terrain_category_description">Линии контуров рельефа, карты затенения рельефа (отмывки) и карты уклонов с цветами для отображения вершин и низменностей.</string>
+    <string name="slope_legend_description">Уклон использует цвета для визуализации крутизны рельефа. Подробнее об уклоне можно прочитать на сайте %1$s.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Горный маршрут (Виа феррата)</string>
 </resources>

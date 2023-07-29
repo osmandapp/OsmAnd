@@ -5400,4 +5400,9 @@
     <string name="routing_attr_hazmat_category_usa_3_name">سوائل قابلة للإشتعال</string>
     <string name="routing_attr_hazmat_category_usa_2_name">غازات</string>
     <string name="dangerous_goods_description">في بعض الطرق والأنفاق يحظر نقل المواد الخطرة.</string>
+    <string name="rendering_attr_alpineHiking_name">تصنيف الصعوبة</string>
+    <string name="write_heading">كتابة العنوان</string>
+    <string name="rendering_value_caiScale_description">نادي ألبينو الإيطالي (نادي ألبين الإيطالي)</string>
+    <string name="rendering_value_sacScale_description">نادي الألب السويسري</string>
+    <string name="rendering_attr_alpineHiking_description">أنواع تصنيف الصعوبة للطرق.</string>
 </resources>

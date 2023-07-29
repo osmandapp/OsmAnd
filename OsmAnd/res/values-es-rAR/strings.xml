@@ -3453,7 +3453,7 @@
     <string name="shared_string_transparency">Transparencia</string>
     <string name="shared_string_zoom_levels">Niveles de zum</string>
     <string name="shared_string_legend">Leyenda</string>
-    <string name="terrain_empty_state_text">Muestra los sombreados o pendientes en el mapa. Más información sobre estos tipos de mapas en nuestro sitio.</string>
+    <string name="terrain_empty_state_text">Muestra el sombreado o la pendiente en el mapa. Más información sobre estos tipos de mapas en nuestro sitio.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="download_slope_maps">Pendientes</string>
     <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa topográfica en el mapa.</string>
@@ -5327,7 +5327,7 @@
     <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
     <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
     <string name="routing_attr_allow_via_ferrata_description">Una ruta de montaña equipada con cables fijos, anclajes, peldaños, escaleras y puentes.</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqltiedb para pendientes o sombreados</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para pendientes o sombreados</string>
     <string name="cache_size">Tamaño de la caché</string>
     <string name="shared_string_avoid">Evitar</string>
     <string name="may_be_used_if_there_is_shortcut">Puede usarse si existe un acceso directo</string>
@@ -5354,4 +5354,8 @@
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_attr_alpineHiking_name">Clasificación de dificultad</string>
+    <string name="write_bearing_description">Guarda el rumbo para cada punto de la traza durante la grabación</string>
+    <string name="write_bearing">Escribir rumbo</string>
+    <string name="write_heading_description">Guarda el encabezado de cada punto de la traza durante la grabación</string>
+    <string name="write_heading">Escribir encabezado</string>
 </resources>

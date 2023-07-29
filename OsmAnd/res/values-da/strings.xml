@@ -36,7 +36,7 @@
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygger og hældninger hjælper dig med at vurdere terrænets beskaffenhed og relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af skravering af hældninger, konturlinjer og/eller farvelægning af stejlhed.
+    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygge og hældning hjælper dig med at vurdere terrænets beskaffenhed og relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af skravering af hældninger, konturlinjer og/eller farvelægning af stejlhed.
 \n
 \nDe underliggende data stammer fra SRTM og ASTER.
 \n
@@ -157,7 +157,7 @@
     <string name="map_widget_back_to_loc">Hvor er jeg</string>
     <string name="map_widget_lock_screen">Lås</string>
     <string name="map_widget_compass">Kompas</string>
-    <string name="download_hillshade_maps">Terrænskygger</string>
+    <string name="download_hillshade_maps">Terrænskygge</string>
     <string name="map_widget_reset">Nulstil til standard</string>
     <string name="map_widget_parking">Parkering</string>
     <string name="map_widget_time">Resterende tid</string>
@@ -3239,7 +3239,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Foretræk ikke-asfalterede veje fremfor asfalterede veje ved ruteberegning.</string>
     <string name="layer_osm_edits">OSM redigeringer</string>
     <string name="quick_action_contour_lines_descr">Knap der viser eller skjuler højdekurver på kortet.</string>
-    <string name="quick_action_hillshade_descr">En knap der viser eller skjuler terrænskygger på kortet.</string>
+    <string name="quick_action_hillshade_descr">En knap der viser eller skjuler terrænskygge på kortet.</string>
     <string name="rendering_value_white_name">Hvid</string>
     <string name="tts_initialization_error">Tekst-til-tale-programmet kan ikke startes.</string>
     <string name="simulate_your_location_gpx_descr">Simuler positionen ved hjælp af et optaget GPX-spor.</string>
@@ -3400,7 +3400,7 @@
     <string name="select_distance_route_will_recalc">Vælg afstanden, hvorefter ruten genberegnes.</string>
     <string name="recalculate_route_distance_promo">Ruten genberegnes, hvis afstanden fra ruten til den aktuelle placering er større end den valgte værdi.</string>
     <string name="n_items_of_z">%1$s af %2$s</string>
-    <string name="download_slope_maps">Hældninger</string>
+    <string name="download_slope_maps">Hældning</string>
     <string name="quick_action_terrain_descr">En knap der viser eller skjuler terrænlag på kortet.</string>
     <string name="delete_description">Slet beskrivelse</string>
     <string name="add_description">Tilføj beskrivelse</string>
@@ -3435,16 +3435,16 @@
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem min placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem min placering og den beregnede rute vises, indtil ruten er genberegnet</string>
     <string name="shared_string_terrain">Terræn</string>
-    <string name="hillshade_description">Terrænskyggekort viser hældninger, toppe og lavland ved hjælp af mørke skygger.</string>
+    <string name="hillshade_description">Terrænskyggekort viser hældning, toppe og lavland ved hjælp af mørke skygger.</string>
     <string name="slope_description">Hældning bruger farver til visualisering af terrænets stejlhed.</string>
     <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
     <string name="hillshade_download_description">Yderligere kort er nødvendige for at se terrænskygge på kortet.</string>
-    <string name="slope_download_description">Yderligere kort er nødvendige for at se hældninger på kortet.</string>
-    <string name="slope_read_more">Læs mere om hældninger på %1$s.</string>
+    <string name="slope_download_description">Yderligere kort er nødvendige for at se hældning på kortet.</string>
+    <string name="slope_read_more">Læs mere om hældning på %1$s.</string>
     <string name="shared_string_transparency">Gennemsigtighed</string>
     <string name="shared_string_zoom_levels">Zoomniveauer</string>
     <string name="shared_string_legend">Tegnforklaring</string>
-    <string name="terrain_empty_state_text">Viser terrænskygger eller hældninger på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
+    <string name="terrain_empty_state_text">Viser terrænskygge eller hældning på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
     <string name="shared_string_hillshade">Terrænskygge</string>
     <string name="import_complete_description">Alle data fra %1$s er importeret. Brug knapperne nedenfor til at åbne den nødvendige del af appen for at håndtere det.</string>
     <string name="items_added">Poster tilføjet</string>
@@ -5243,7 +5243,7 @@
     <string name="terrain_map">Terrænkort</string>
     <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
     <string name="terrain_category_description">Terrænkonturlinjer, fuldt terrænskyggekort med mørke nuancer og hældningskort med farver til at vise toppe og lavland.</string>
-    <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældninger i %1$s.</string>
+    <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældning i %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.
 \n
 \nAlle data på enheden forbliver uberørte.</string>
@@ -5317,7 +5317,7 @@
     <string name="folder_export_empty_error">Intet at eksportere, mappe er tom</string>
     <string name="routing_attr_allow_via_ferrata_description">En bjergrute udstyret med fastmonterede kabler, trin, stiger og broer.</string>
     <string name="routing_attr_allow_via_ferrata_name">Bjergside-rute (Via ferrata)</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Brug raster sqlitedb til hældning / terrænskygge</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Brug raster sqlitedb til terrænskygge / hældning</string>
     <string name="cache_size">Cache-størrelse</string>
     <string name="shared_string_avoid">Undgå</string>
     <string name="may_be_used_if_there_is_shortcut">Kan bruges, hvis der er en genvej</string>

@@ -742,7 +742,7 @@
     <string name="map_widget_show_ruler">Righello</string>
     <string name="map_widget_view_direction">Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
-    <string name="int_continuosly">Continuo</string>
+    <string name="int_continuosly">continuo</string>
     <string name="email">e-mail</string>
     <string name="osmand_short_description_80_chars">Visualizzazione e navigazione in mobilità di mappe mondiali OSM</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)
@@ -4883,7 +4883,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5225,7 +5225,7 @@
     <string name="rendering_attr_lightDetail_name">Dettagli chiari</string>
     <string name="deleting_complete">Eliminazione completata</string>
     <string name="verify_account">Verifica il tuo account</string>
-    <string name="manage_subscriptions">Gestisci le iscrizioni.</string>
+    <string name="manage_subscriptions">Gestisci le sottoscrizioni.</string>
     <string name="shared_string_deleting">Eliminazione</string>
     <string name="delete_account">Elimina l\'account</string>
     <string name="shared_string_close_the_dialog">Chiudi la finestra di dialogo</string>
@@ -5238,7 +5238,7 @@
     <string name="osmand_cloud_deleting_account_descr">Tra pochi istanti tutti i tuoi dati e il tuo account verranno cancellati da OsmAnd Cloud.
 \n
 \nTutti i dati sul dispositivo rimarranno intatti.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account su OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account OsmAnd Cloud\?
 \n
 \nQuesta azione non può essere annullata.</string>
     <string name="osmand_cloud_delete_account_confirmation">Eliminare l\'account\?</string>
@@ -5246,8 +5246,8 @@
     <string name="osmand_cloud_deletion_secondary_devices_warning">I dispositivi secondari verranno disconnessi da OsmAnd Cloud e perderanno l\'accesso alle funzionalità a pagamento.</string>
     <string name="osmand_cloud_deletion_account_warning">Il tuo account e tutti i dettagli dell\'account saranno %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Tutti i dati di OsmAnd Cloud saranno %1$s. I dati sul dispositivo rimarranno intatti.</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non annullerà il tuo abbonamento a OsmAnd Pro.</string>
-    <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati dal cloud di OsmAnd.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non cancellerà il tuo abbonamento a OsmAnd Pro.</string>
+    <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
     <string name="delete_account_warning">Sei sicuro di voler eliminare l\'account %1$s\?</string>
     <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
@@ -5310,4 +5310,27 @@
     <string name="cache_size">Dimensione della cache</string>
     <string name="shared_string_avoid">Evitare</string>
     <string name="may_be_used_if_there_is_shortcut">Può essere utilizzato se è presente una scorciatoia</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Esplosivi</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gas</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Liquidi Infiammabili</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Solidi Infiammabili</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agenti Ossidanti e Perossidi Organici</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Sostanze Infettive e Tossiche</string>
+    <string name="rendering_attr_alpineHiking_description">Tipi di classificazione della difficoltà del percorso.</string>
+    <string name="write_bearing">Registra l\'orientamento</string>
+    <string name="write_heading_description">Durante la registrazione salva l\'orientamento per ogni punto della traccia</string>
+    <string name="write_heading">Registra l\'orientamento</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Svizzero</string>
+    <string name="rendering_attr_alpineHiking_name">Classificazione della difficoltà</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Sostanze Radioattive</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Sostanze Corrosive</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Club Alpino Italiano)</string>
+    <string name="shared_string_class">Classe</string>
+    <string name="dangerous_goods">Merci pericolose</string>
+    <string name="write_bearing_description">Durante la registrazione salva l\'orientamento di ogni punto della traccia</string>
+    <string name="dangerous_goods_description">In alcune strade e tunnel il trasporto di materiali pericolosi è proibito.</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Miscellanea</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
 </resources>
