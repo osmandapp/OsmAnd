@@ -765,7 +765,7 @@
     <string name="prefer_in_routing_descr">Надавати перевагу автомагістралям.</string>
     <string name="max_speed_none">немає</string>
     <string name="index_name_openmaps">OpenMaps - Європа</string>
-    <string name="download_hillshade_maps">Відмивка рельєфу</string>
+    <string name="download_hillshade_maps">Рельєф</string>
     <string name="local_indexes_cat_av">Аудіо/Відео дані</string>
     <string name="stop_routing_confirm">Зупинити навігацію\?</string>
     <string name="clear_dest_confirm">Вилучити пункт призначення (і проміжні точки)\?</string>
@@ -3460,7 +3460,7 @@
     <string name="terrain_slider_description">Встановіть мінімальний та максимальний рівні масштабування, для показу шару.</string>
     <string name="hillshade_download_description">Потрібні додаткові мапи для перегляду рельєфу.</string>
     <string name="slope_download_description">Для перегляду схилів потрібні додаткові мапи.</string>
-    <string name="slope_read_more">Докладніше про схили у %1$s.</string>
+    <string name="slope_read_more">Докладніше про схили в %1$s.</string>
     <string name="shared_string_transparency">Прозорість</string>
     <string name="shared_string_zoom_levels">Масштаб</string>
     <string name="shared_string_legend">Позначення</string>
@@ -5319,7 +5319,7 @@
     <string name="free_account">Безплатний обліковий запис</string>
     <string name="routing_attr_allow_via_ferrata_name">Гірський маршрут (Via ferrata)</string>
     <string name="routing_attr_allow_via_ferrata_description">Гірський маршрут, обладнаний стаціонарними тросами, стелами, драбинами та містками.</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Використання растрового sqltiedb для схилів / рельєфу</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Використовувати растровий sqlitedb для рельєфу / схилів</string>
     <string name="cache_size">Розмір кешу</string>
     <string name="shared_string_avoid">Уникати</string>
     <string name="free_settings_backup">Безплатне резервне копіювання налаштувань</string>
