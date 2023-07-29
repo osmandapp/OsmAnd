@@ -5341,4 +5341,6 @@
     <string name="write_bearing_description">Rögzítés során a nyomvonal pontok irányszögének mentése</string>
     <string name="write_heading_description">Rögzítés során a nyomvonal pontok irányának mentése</string>
     <string name="write_heading">Irány mentése</string>
+    <string name="feature_available_as_part_of_plan">%1$s elérhető az %2$s csomag részeként</string>
+    <string name="shared_string_included">Belefoglalva</string>
 </resources>
