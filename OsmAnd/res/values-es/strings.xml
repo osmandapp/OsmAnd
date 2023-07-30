@@ -5343,4 +5343,6 @@
     <string name="write_heading_description">Guarda el rumbo de cada punto de seguimiento en la grabación</string>
     <string name="write_heading">Escribir el encabezado</string>
     <string name="write_bearing_description">Guarda la dirección de cada punto de seguimiento durante la grabación</string>
+    <string name="shared_string_included">Incluido</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponible como parte del plan %2$s</string>
 </resources>
