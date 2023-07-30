@@ -5101,7 +5101,7 @@
     <string name="rendering_value_defaultMedium_name">Predefinito (medio)</string>
     <string name="select_layer">Seleziona il livello</string>
     <string name="speak_route_deviation">Annuncio deviazione dal percorso</string>
-    <string name="clear_online_cache_description">Questo cancellerà la cache per il riquadro meteo online.</string>
+    <string name="clear_online_cache_description">Questo cancellerà la cache delle mattonelle meteo online.</string>
     <string name="free_maps_updates">Aggiornamenti gratuiti (emergenza)</string>
     <string name="common_weight_limit_error">Il valore minimo è \"%1$s\" %2$s. Utilizza il profilo \"%3$s\" se il peso del veicolo è inferiore al valore minimo.</string>
     <string name="shared_string_all_world">Tutto il mondo</string>
@@ -5163,7 +5163,7 @@
     <string name="ant_plus_bluetooth_off_description">Attiva il Bluetooth, trova e abbina i sensori.</string>
     <string name="ant_plus_open_settings">Apri le impostazioni</string>
     <string name="learn_more_about_sensors_link">Ulteriori informazioni sui sensori.</string>
-    <string name="ant_plus_bluetooth_off">Il bluetooth è disattivato</string>
+    <string name="ant_plus_bluetooth_off">Il Bluetooth è disattivato</string>
     <string name="external_device_disconnected">Disconnesso</string>
     <string name="external_device_connected">Connesso</string>
     <string name="external_device_characteristic_heart_rate">Frequenza cardiaca</string>
@@ -5176,14 +5176,14 @@
     <string name="external_device_characteristic_stride_length">Lunghezza del passo</string>
     <string name="external_device_characteristic_temperature">Temperatura</string>
     <string name="external_device_details_connect">Collegare</string>
-    <string name="external_device_details_pair">Associare</string>
+    <string name="external_device_details_pair">Associa</string>
     <string name="external_device_ble">BLE</string>
     <string name="bluetooth_not_supported">Bluetooth non supportato</string>
     <string name="ble_search_again">Cerca ancora</string>
     <string name="external_device_ant">ANT</string>
     <string name="bluetooth_found_title">Trovato: %d</string>
     <string name="ant_plus_nothing_found_description">Assicurarsi che:
-\n– Il bluetooth sia attivato
+\n– Il Bluetooth sia attivato
 \n– Il sensore sia attivato
 \n– Questo dispositivo si trovi vicino al sensore</string>
     <string name="ant_plus_help_title">Non so che tipo di sensore possiedo</string>
@@ -5191,18 +5191,18 @@
     <string name="ant_plus_searching">Ricerca</string>
     <string name="ant_plus_searching_text_description">Tenere il dispositivo vicino al sensore. Attivare il sensore in modo che OsmAnd possa trovarlo.</string>
     <string name="ant_plus_pair_new_sensor">Associa il nuovo sensore</string>
-    <string name="ant_plus_pair_new_sensor_ble">Associa il sensore bluetooth LE</string>
+    <string name="ant_plus_pair_new_sensor_ble">Associa il sensore Bluetooth LE</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Associa il sensore ANT+</string>
     <string name="external_device_details_received_data">Dati ricevuti</string>
     <string name="external_device_details_battery">Batteria</string>
-    <string name="external_device_details_disconnect">Disconnettere</string>
+    <string name="external_device_details_disconnect">Disconnetti</string>
     <string name="bluetooth_disconnected">Disconnesso, %s</string>
     <string name="write_data_from_sensor_to_track">Scrivi i dati dei sensori esterni sulla traccia GPX durante la registrazione del viaggio.</string>
     <string name="external_sensors_not_found">Sensori non trovati</string>
     <string name="there_are_no_connected_sensors_of_this_type">Non ci sono sensori collegati di questo tipo</string>
     <string name="delete_track_folder_dialog_message">Questo eliminerà la cartella \"%1$s\" e tutte le tracce (%2$s) incluse.</string>
     <string name="external_sensors_source_of_data">Fonte dei dati</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Puoi associare i sensori bluetooth LE e ANT+ con OsmAnd.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Puoi associare con OsmAnd i sensori Bluetooth LE e ANT+.</string>
     <string name="rendering_attr_lightDetail_description">Predefinito: nome del contrassegno (carattere chiaro.gruppo.periodo), selezionare informazioni aggiuntive sui settori da 1 a 3 o carattere chiaro settore 1,2,3,4,5</string>
     <string name="show_all_tracks_on_the_map">Mostra tutti i percorsi sulla mappa</string>
     <string name="rssi_widget_desc">Mostra il livello RSSI del tuo dispositivo esterno.</string>
