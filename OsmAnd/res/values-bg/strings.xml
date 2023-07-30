@@ -137,11 +137,11 @@
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
     <string name="index_srtm_parts">части</string>
     <string name="index_srtm_ele">Контурни линии</string>
-    <string name="srtm_plugin_description">Информацията за терена, като контурни линии, хълмове и склонове, ви помага визуално да оцените разположението на земята и релефа, възможността за навигация и др. Топографската информация може да бъде представена на картата чрез засенчване на склонове, контурни линии и/или оцветяване на стръмнини.
+    <string name="srtm_plugin_description">Информацията за терена, като контурни линии, хълмове и склонове, Ви помага визуално да оцените разположението на земята и релефа, възможностите за навигация и др. Топографската информация може да бъде представена на картата чрез засенчване на склонове, контурни линии и/или оцветяване на стръмнини.
 \n
 \nДанните, върху които лежи тази функционалност, произхождат от SRTM и ASTER.
 \n
-\nДокументацията е достъпна на адрес https://osmand.net/docs/user/plugins/contour-lines .</string>
+\nОще информация на %1$s.</string>
     <string name="srtm_plugin_name">Контурни линии</string>
     <string name="download_select_map_types">Други карти</string>
     <string name="download_roads_only_item">Само пътища</string>
@@ -898,7 +898,7 @@
     <string name="previous_run_crashed">Последният път OsmAnd се срина. Записан е лог-файл в {0}. Моля, докладвайте за срива и приложете лог-файла.</string>
     <string name="saving_gpx_tracks">Файлът на GPX се запазва…</string>
     <string name="finished_task">Приключено</string>
-    <string name="use_online_routing_descr">Използване на Интернет за изчисляване на дистанцията</string>
+    <string name="use_online_routing_descr">Използване на онлайн ресурси за намиране на маршрут.</string>
     <string name="use_online_routing">Използване на онлайн навигация</string>
     <string name="osm_settings_descr">Настройки за изпращане на данни в Openstreetmap.org (OSM)</string>
     <string name="data_settings_descr">Определяне на език, изтегляне/презареждане на данни.</string>
@@ -3805,7 +3805,7 @@
 \nКогато използвате OsmAnd Cloud, това може да доведе до недоразумения след преинсталиране.</string>
     <string name="routing_attr_avoid_ferry_name">Без фериботи</string>
     <string name="provided_by">Предоставен от %1$s</string>
-    <string name="snap_to_road_descr">Иконата за текуща позиция ще се прикрепи към текущия навигационен маршрут.</string>
+    <string name="snap_to_road_descr">Иконата за позиция ще се придържа към текущия маршрут</string>
     <string name="terrain_maps">Карти на терена</string>
     <string name="speed_cameras_restart_descr">Рестартирайте приложението, за да бъдат премахнати данните за предупреждение за камери за контрол на скоростта.</string>
     <string name="uninstall_speed_cameras">Премахване на камери за контрол на скоростта</string>
