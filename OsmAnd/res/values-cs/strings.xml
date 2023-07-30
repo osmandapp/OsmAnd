@@ -4711,7 +4711,7 @@
 \n
 \n</string>
     <string name="map_center_widget">Souřadnice: Střed mapy</string>
-    <string name="weather_widgets_secondary_desc">Jednotky měření lze změnit v nastavení zásuvného modulu Počasí.</string>
+    <string name="weather_widgets_secondary_desc">Jednotky měření lze změnit v nastavení modulu Počasí.</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="restart_now">Restartovat nyní</string>
     <string name="map_rendering_engine_v1">Verze 1</string>
@@ -4808,7 +4808,7 @@
     <string name="quick_action_map_center_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje středu mapy na mapě.</string>
     <string name="quick_action_current_location_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje aktuální polohy na mapě.</string>
     <string name="coordinates_widget_map_center">Souřadnice: střed mapy</string>
-    <string name="shared_string_switch_mode">Režim přepínání</string>
+    <string name="shared_string_switch_mode">Přepnout režim</string>
     <string name="click_on_widget">Klikněte na nástroj</string>
     <string name="last_synchronized">Poslední synchronizace</string>
     <string name="map_widget_altitude_map_center_desc">Zobrazuje nadmořskou výšku aktuálního středu mapy.</string>
@@ -5335,6 +5335,10 @@
     <string name="rendering_attr_alpineHiking_name">Klasifikace podle obížnosti</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
-    <string name="write_bearing_description">Ukládat směr ke každému bodu stopy během záznamu</string>
-    <string name="write_bearing">Zapisovat směr</string>
+    <string name="write_bearing_description">Ukládat azimut každého bodu stopy během záznamu</string>
+    <string name="write_bearing">Zapisovat azimut</string>
+    <string name="write_heading_description">Ukládat směr ke každému bodu stopy během záznamu</string>
+    <string name="write_heading">Zapisovat směr</string>
+    <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
+    <string name="shared_string_included">Zahrnuto</string>
 </resources>
