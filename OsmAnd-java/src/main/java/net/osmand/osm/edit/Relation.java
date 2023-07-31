@@ -158,4 +158,12 @@ public class Relation extends Entity {
 		return false;
 	}
 
+	public void fillEmptyRouteName() {
+		Map<String, String> relationTags = getTags();
+		if (relationTags.containsKey(OSMTagKey.ROUTE.getValue())
+				&& !relationTags.containsKey(OSMTagKey.NAME.getValue())
+				&& getNameTags().isEmpty()) {
+			putTag(OSMTagKey.NAME.getValue(), "(" + getId() + ")");
+		}
+	}
 }
