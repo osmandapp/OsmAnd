@@ -175,7 +175,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					.setIcon(getContentIcon(R.drawable.ic_action_folder_stroke))
 					.setOnClickListener(v -> {
 						FragmentManager manager = activity.getSupportFragmentManager();
-						MoveGpxFileBottomSheet.showInstance(manager, file, fragment, false, false);
+						MoveGpxFileBottomSheet.showInstance(manager, file, file.getParentFile(), fragment, false, false);
 					})
 					.create());
 
@@ -222,12 +222,13 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		PopUpMenu.show(displayData);
 	}
 
-	public void showItemsOptionsMenu(@NonNull Set<TrackItem> trackItems, @NonNull Set<TracksGroup> tracksGroups,
-	                                 @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {
-		List<PopUpMenuItem> items = new ArrayList<>();
-		Set<TrackItem> selectedTrackItems = getSelectedTrackItems(trackItems, tracksGroups);
+	public void showItemsOptionsMenu(@NonNull View view, @NonNull TrackFolder trackFolder,
+	                                 @NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
+	                                 @NonNull BaseTrackFolderFragment fragment) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		Set<TrackItem> selectedTrackItems = getSelectedTrackItems(items, groups);
 
-		items.add(new PopUpMenuItem.Builder(app)
+		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
@@ -236,7 +237,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				})
 				.create()
 		);
-		items.add(new PopUpMenuItem.Builder(app)
+		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> {
@@ -245,35 +246,26 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				})
 				.create()
 		);
-		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, items);
+		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, menuItems);
 
 		String move = app.getString(R.string.shared_string_move);
-		items.add(new PopUpMenuItem.Builder(app)
+		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitle(move)
 				.setIcon(getContentIcon(R.drawable.ic_action_folder_move))
 				.setOnClickListener(v -> {
-					if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
+					if (items.isEmpty() && groups.isEmpty()) {
 						showEmptyItemsToast(move);
 					} else {
-						File srcFile = null;
-						if (!Algorithms.isEmpty(trackItems)) {
-							srcFile = trackItems.iterator().next().getFile();
-						}
-						if (srcFile == null && !Algorithms.isEmpty(tracksGroups)) {
-							TracksGroup group = tracksGroups.iterator().next();
-							if (group instanceof TrackFolder) {
-								srcFile = ((TrackFolder) group).getDirFile();
-							}
-						}
+						File excludedDir = trackFolder.getDirFile();
 						FragmentManager manager = activity.getSupportFragmentManager();
-						MoveGpxFileBottomSheet.showInstance(manager, srcFile, fragment, false, false);
+						MoveGpxFileBottomSheet.showInstance(manager, null, excludedDir, fragment, false, false);
 					}
 				})
 				.showTopDivider(true)
 				.create()
 		);
 		String changeAppearance = app.getString(R.string.change_appearance);
-		items.add(new PopUpMenuItem.Builder(app)
+		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitle(changeAppearance)
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
 				.setOnClickListener(v -> {
@@ -286,14 +278,14 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.create()
 		);
 		String delete = app.getString(R.string.shared_string_delete);
-		items.add(new PopUpMenuItem.Builder(app)
+		menuItems.add(new PopUpMenuItem.Builder(app)
 				.setTitle(delete)
 				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
 				.setOnClickListener(v -> {
-					if (trackItems.isEmpty() && tracksGroups.isEmpty()) {
+					if (items.isEmpty() && groups.isEmpty()) {
 						showEmptyItemsToast(delete);
 					} else {
-						showDeleteConfirmationDialog(trackItems, tracksGroups, fragment);
+						showDeleteConfirmationDialog(items, groups, fragment);
 					}
 				})
 				.showTopDivider(true)
@@ -302,7 +294,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 		displayData.anchorView = view;
-		displayData.menuItems = items;
+		displayData.menuItems = menuItems;
 		displayData.nightMode = fragment.isNightMode();
 		PopUpMenu.show(displayData);
 	}

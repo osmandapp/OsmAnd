@@ -94,7 +94,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 	}
 
 	private void setupFavorites(ItemList.Builder listBuilder) {
-		LatLon location = getApp().getSettings().getLastKnownMapLocation();
+		LatLon location = getApp().getMapViewTrackingUtilities().getDefaultLocation();
 		List<FavouritePoint> favoritesPoints = getFavorites();
 		int favoritesPointsSize = favoritesPoints.size();
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));

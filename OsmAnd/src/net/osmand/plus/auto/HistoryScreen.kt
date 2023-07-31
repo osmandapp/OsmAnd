@@ -5,7 +5,6 @@ import android.text.Spanned
 import androidx.car.app.CarContext
 import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.*
-import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import net.osmand.data.LatLon
 import net.osmand.plus.R
@@ -26,7 +25,7 @@ class HistoryScreen(
         val app = app
         val historyHelper = SearchHistoryHelper.getInstance(app)
         val results = historyHelper.getHistoryEntries(true)
-        val location = app.settings.lastKnownMapLocation
+        val location = app.mapViewTrackingUtilities.defaultLocation
         val resultsSize = results.size
         val limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
         for (result in limitedResults) {

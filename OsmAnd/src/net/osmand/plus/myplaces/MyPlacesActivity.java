@@ -1,6 +1,5 @@
 package net.osmand.plus.myplaces;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,22 +11,18 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -38,10 +33,6 @@ import java.util.List;
  */
 public class MyPlacesActivity extends TabActivity {
 
-	private static final Log LOG = PlatformUtil.getLog(MyPlacesActivity.class);
-
-	public static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
-	public static final int IMPORT_FAVOURITES_REQUEST = 1007;
 
 	public static final String TAB_ID = "selected_tab_id";
 
@@ -49,7 +40,6 @@ public class MyPlacesActivity extends TabActivity {
 	public static final int FAV_TAB = R.string.shared_string_my_favorites;
 
 	private OsmandSettings settings;
-	private ImportHelper importHelper;
 
 	private ViewPager viewPager;
 	private List<WeakReference<FragmentStateHolder>> fragmentsStateList = new ArrayList<>();
@@ -61,7 +51,6 @@ public class MyPlacesActivity extends TabActivity {
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		OsmandApplication app = getMyApplication();
 		settings = app.getSettings();
-		importHelper = new ImportHelper(this);
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 
@@ -92,17 +81,6 @@ public class MyPlacesActivity extends TabActivity {
 				}
 				viewPager.setCurrentItem(pagerItem, false);
 			}
-		}
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
-			if (data != null && data.getData() != null) {
-				importHelper.handleFavouritesImport(data.getData());
-			}
-		} else {
-			super.onActivityResult(requestCode, resultCode, data);
 		}
 	}
 
