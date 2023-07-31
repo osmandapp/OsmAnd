@@ -5304,7 +5304,7 @@
     <string name="routing_attr_allow_via_ferrata_description">配有固定纜繩、柱子、梯子與橋樑的山路。</string>
     <string name="routing_attr_allow_via_ferrata_name">山腰路線（鐵索攀岩）</string>
     <string name="free_settings_backup">免費設定備份</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">為斜率/地形陰影使用點陣 sqltiedb</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">為地形陰影/斜率使用點陣 sqlitedb</string>
     <string name="cache_size">快取大小</string>
     <string name="shared_string_avoid">避免</string>
     <string name="may_be_used_if_there_is_shortcut">若有捷徑可以使用</string>
@@ -5334,4 +5334,6 @@
     <string name="write_heading_description">錄製時將航向資訊儲存到每個軌跡點</string>
     <string name="write_heading">寫入航向資訊</string>
     <string name="write_bearing_description">錄製時將方位資訊儲存到每個軌跡點</string>
+    <string name="feature_available_as_part_of_plan">%1$s 作為 %2$s 方案的一部分提供</string>
+    <string name="shared_string_included">已包含</string>
 </resources>
