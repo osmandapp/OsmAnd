@@ -3,6 +3,7 @@ package net.osmand.plus.settings.bottomsheets;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -82,6 +83,7 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 
 		TextView textView = view.findViewById(R.id.text);
 		textView.setText(getSummary(preference, enabled));
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
 
 		int margin = getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
@@ -117,6 +119,7 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 				}
 			}
 		}
+		dismiss();
 	}
 
 	private void updatePreferenceButtons(boolean checked) {
