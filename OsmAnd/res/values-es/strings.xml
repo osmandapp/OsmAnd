@@ -876,7 +876,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5 – 9).</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">La información del terreno, como las curvas de nivel, las sombras de las colinas y las pendientes, le ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad, etc. La información topográfica puede representarse en el mapa mediante el sombreado de la pendiente, las curvas de nivel y/o la coloración de la inclinación.
+    <string name="srtm_plugin_description">La información sobre el terreno, como las curvas de nivel, el sombreado de las colinas y la pendiente, te ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y mucho más. La información topográfica puede representarse en el mapa mediante el sombreado de la pendiente, las curvas de nivel y/o la coloración de la inclinación.
 \n
 \nLos datos subyacentes proceden de SRTM y ASTER.
 \n
@@ -3231,7 +3231,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere los caminos sin pavimentar a los pavimentados para el trazado de rutas.</string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
-    <string name="quick_action_hillshade_descr">Un botón que muestra u oculta el sombreado de las colinas en el mapa.</string>
+    <string name="quick_action_hillshade_descr">Un botón para mostrar u ocultar la sombra de la colina en el mapa.</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada.</string>
     <string name="export_profile">Exportar perfil</string>
     <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
@@ -3405,15 +3405,15 @@
     <string name="profile_type_custom_string">Perfil personalizado</string>
     <string name="import_rendering_file">Importar archivo de renderizado</string>
     <string name="shared_string_terrain">Terreno</string>
-    <string name="hillshade_description">El mapa Hillshade utiliza tonos oscuros para mostrar las laderas, los picos y las tierras bajas.</string>
+    <string name="hillshade_description">El mapa Hillshade utiliza tonos oscuros para mostrar la pendiente, los picos y las tierras bajas.</string>
     <string name="slope_description">La pendiente usa colores para visualizar la inclinación del terreno.</string>
     <string name="terrain_slider_description">Define los niveles de zum mínimo y máximo en los que se mostrará la capa.</string>
     <string name="hillshade_download_description">Se necesitan mapas adicionales para ver el sombreado en el mapa.</string>
-    <string name="slope_download_description">Se necesitan mapas adicionales para ver las pendientes en el mapa.</string>
-    <string name="slope_read_more">Más información sobre las pendientes en «%1$s».</string>
+    <string name="slope_download_description">Se necesitan mapas adicionales para ver la pendiente en el mapa.</string>
+    <string name="slope_read_more">Más información sobre la pendiente en %1$s.</string>
     <string name="shared_string_transparency">Transparencia</string>
     <string name="shared_string_zoom_levels">Niveles de zum</string>
-    <string name="terrain_empty_state_text">Muestra los sombreados o pendientes en el mapa. Más información sobre estos tipos de mapas en nuestro sitio.</string>
+    <string name="terrain_empty_state_text">Muestra el relieve o la pendiente en el mapa. Más información sobre estos tipos de mapas en nuestra página web.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="shared_string_import_complete">Importación completa</string>
     <string name="items_added">Elementos añadidos</string>
@@ -3429,7 +3429,7 @@
     <string name="clear_recorded_data_warning">¿Borrar los datos registrados\?</string>
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desviación</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
-    <string name="download_slope_maps">Pendientes</string>
+    <string name="download_slope_maps">Pendiente</string>
     <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa del terreno en el mapa.</string>
     <string name="delete_description">Borrar descripción</string>
     <string name="add_description">Añadir descripción</string>
@@ -5261,7 +5261,7 @@
     <string name="delete_account">Eliminar la cuenta</string>
     <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
     <string name="verify_account">Verifica tu cuenta</string>
-    <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes leer más sobre las Pendientes en %1$s.</string>
+    <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes obtener más información sobre la pendiente en %1$s.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios se desconectarán de OsmAnd Cloud y perderán el acceso a las funciones de pago.</string>
     <string name="terrain_category_description">Líneas del contorno del terreno, mapa completo de colinas con tonos oscuros y mapas de pendientes con colores para mostrar las cumbres y las tierras bajas.</string>
     <string name="verify_account_deletion_descr">Necesitamos verificar tu cuenta antes de eliminarla.
@@ -5310,7 +5310,7 @@
 \n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
 \n
 \n</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para las pendiente/los sombreado</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para el relieve/la pendiente</string>
     <string name="shared_string_avoid">Evitar</string>
     <string name="cache_size">Tamaño de la caché</string>
     <string name="may_be_used_if_there_is_shortcut">Puede utilizarse si existe un acceso directo</string>
