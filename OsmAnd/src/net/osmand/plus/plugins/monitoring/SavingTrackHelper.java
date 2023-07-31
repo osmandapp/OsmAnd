@@ -81,9 +81,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_ICON = "icon";
 	private static final String POINT_COL_BACKGROUND = "background";
 
-	private static final float NO_HEADING = -1.0f;
-
-	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 
 	private final OsmandApplication app;
@@ -478,7 +476,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void startNewSegment() {
 		lastTimeUpdated = 0;
 		lastPoint = null;
-		executeInsertTrackQuery(0, 0, 0, 0, 0, System.currentTimeMillis(), NO_HEADING, null);
+		executeInsertTrackQuery(0, 0, 0, 0, 0, System.currentTimeMillis(), Float.NaN, null);
 		addTrackPoint(null, true, System.currentTimeMillis());
 	}
 
@@ -488,7 +486,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
 		boolean writeHeading = plugin != null && plugin.SAVE_HEADING_TO_GPX.get();
-		heading = heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : NO_HEADING;
+		heading = heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : Float.NaN;
 
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
@@ -531,7 +529,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				}
 			}
 			String pluginsInfo = json.length() > 0 ? json.toString() : null;
-			heading = heading == NO_HEADING ? Float.NaN : heading;
 
 			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), locationTime,
 					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
