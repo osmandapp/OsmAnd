@@ -3,6 +3,7 @@ package net.osmand.plus.auto;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
@@ -16,7 +17,8 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import net.osmand.CallbackWithObject;
+import net.osmand.StateChangedListener;
+import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -44,19 +46,30 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
-	private final SurfaceRenderer surfaceRenderer;
-	@NonNull
 	private final SearchResult searchResult;
 	@NonNull
 	private List<Row> routeRows = new ArrayList<>();
 
+	@Nullable
+	private GPXFile routeGpxFile;
+
+	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
+		@Override
+		public void stateChanged(Void change) {
+			if (routeGpxFile != null) {
+				QuadRect mapRect = new QuadRect();
+				Algorithms.extendRectToContainRect(mapRect, routeGpxFile.getRect());
+				adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
+			}
+		}
+	};
+
 	private boolean calculating;
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                          @NonNull SurfaceRenderer surfaceRenderer, @NonNull SearchResult searchResult) {
+	                          @NonNull SearchResult searchResult) {
 		super(carContext);
 		this.settingsAction = settingsAction;
-		this.surfaceRenderer = surfaceRenderer;
 		this.searchResult = searchResult;
 
 		getLifecycle().addObserver(this);
@@ -67,15 +80,12 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 			File file = gpxInfo.getFile();
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
 			if (selectedGpxFile == null) {
-				GpxFileLoaderTask.loadGpxFile(file, null, new CallbackWithObject<GPXFile>() {
-					@Override
-					public boolean processResult(GPXFile gpxFile) {
-						getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(gpxFile);
-						return true;
-					}
+				GpxFileLoaderTask.loadGpxFile(file, null, gpxFile -> {
+					buildRouteByGivenGpx(gpxFile);
+					return true;
 				});
 			} else {
-				getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
+				buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
 			}
 		} else {
 			getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
@@ -83,9 +93,15 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 		}
 	}
 
+	private void buildRouteByGivenGpx(@NonNull GPXFile gpxFile) {
+		routeGpxFile = gpxFile;
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().buildRouteByGivenGpx(gpxFile);
+	}
+
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
+		getApp().getTargetPointsHelper().addListener(stateChangedListener);
 	}
 
 	@Override
@@ -96,7 +112,13 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 		if (routingHelper.isRoutePlanningMode()) {
 			app.stopNavigation();
 		}
+		getApp().getTargetPointsHelper().removeListener(stateChangedListener);
 		getLifecycle().removeObserver(this);
+	}
+
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		recenterMap();
 	}
 
 	@NonNull

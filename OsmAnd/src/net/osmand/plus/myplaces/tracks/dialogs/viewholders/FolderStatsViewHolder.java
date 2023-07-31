@@ -34,7 +34,7 @@ public class FolderStatsViewHolder extends RecyclerView.ViewHolder {
 		appendField(builder, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), false);
 		appendField(builder, app.getString(R.string.shared_string_uphill), OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app), false);
 		appendField(builder, app.getString(R.string.shared_string_downhill), OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app), false);
-		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(analysis.duration, app.accessibilityEnabled()), false);
+		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(analysis.timeSpan, app.accessibilityEnabled()), false);
 		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.fileSize), true);
 		return builder.toString();
 	}

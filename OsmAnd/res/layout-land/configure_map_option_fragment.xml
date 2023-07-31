@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="horizontal">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:id="@+id/main_view"
+			android:layout_width="@dimen/dashboard_land_width"
+			android:layout_height="match_parent"
+			android:background="?attr/list_background_color"
+			android:clickable="true"
+			android:focusable="true"
+			android:orientation="vertical">
+
+			<com.google.android.material.appbar.AppBarLayout
+				android:id="@+id/appbar"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/toolbar_height"
+				android:background="?attr/list_background_color">
+
+				<androidx.appcompat.widget.Toolbar
+					android:id="@+id/toolbar"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:minHeight="@dimen/toolbar_height">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal">
+
+						<ImageButton
+							android:id="@+id/back_button"
+							style="@style/Widget.AppCompat.ActionButton"
+							android:layout_width="@dimen/toolbar_height"
+							android:layout_height="@dimen/toolbar_height"
+							android:layout_gravity="center_vertical"
+							android:contentDescription="@string/shared_string_back"
+							tools:srcCompat="@drawable/ic_arrow_back"
+							tools:tint="?attr/default_icon_color" />
+
+						<TextView
+							android:id="@+id/title"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_weight="1"
+							android:letterSpacing="@dimen/text_button_letter_spacing"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_header_text_size"
+							app:lineHeight="@dimen/default_title_line_height"
+							app:typeface="@string/font_roboto_medium"
+							tools:text="@string/shared_string_toolbar" />
+
+						<ImageButton
+							android:id="@+id/reset_button"
+							style="@style/Widget.AppCompat.ActionButton"
+							android:layout_width="@dimen/toolbar_height"
+							android:layout_height="@dimen/toolbar_height"
+							android:layout_gravity="center_vertical"
+							android:contentDescription="@string/reset_to_default"
+							tools:srcCompat="@drawable/ic_action_reset"
+							tools:tint="?attr/default_icon_color" />
+
+					</LinearLayout>
+
+				</androidx.appcompat.widget.Toolbar>
+
+			</com.google.android.material.appbar.AppBarLayout>
+
+			<LinearLayout
+				android:id="@+id/main_content"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:orientation="vertical"
+				android:paddingVertical="@dimen/content_padding">
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/bottom_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:clickable="true"
+				android:focusable="true"
+				android:orientation="vertical"
+				android:paddingVertical="@dimen/content_padding">
+
+				<net.osmand.plus.widgets.dialogbutton.DialogButton
+					android:id="@+id/apply_button"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					osmand:dialogButtonHeight="@dimen/dialog_button_height"
+					osmand:dialogButtonTitle="@string/shared_string_apply"
+					osmand:dialogButtonTopMargin="@dimen/content_padding_small" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/map_controls_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:layout_marginHorizontal="@dimen/content_padding_half"
+			android:layout_marginBottom="@dimen/content_padding_small_half">
+
+			<include
+				layout="@layout/map_hud_controls"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="end|bottom" />
+
+			<include
+				layout="@layout/map_ruler"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start|bottom" />
+
+		</FrameLayout>
+
+	</LinearLayout>
+
+</FrameLayout>

@@ -293,4 +293,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 			surface.unlockCanvasAndPost(canvas);
 		}
 	}
+
+	public double getVisibleAreaWidth() {
+		return visibleArea != null ? visibleArea.width() : 0f;
+	}
 }

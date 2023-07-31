@@ -19,6 +19,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.views.mapwidgets.configure.ConfirmResetToDefaultBottomSheetDialog;
@@ -76,6 +77,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupTestVoiceCommandsPref();
 		setupLogcatBufferPref();
 
+		setupTripRecordingPrefs();
+
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
@@ -106,11 +109,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	private void setupHeightmapRelatedPrefs() {
-		boolean heightmapAllowed = plugin.isHeightmapAllowed();
-
-		SwitchPreferenceEx useRasterSQLiteDb = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
-		useRasterSQLiteDb.setIconSpaceReserved(false);
-		useRasterSQLiteDb.setEnabled(heightmapAllowed);
+		SwitchPreferenceEx preference = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
+		preference.setIconSpaceReserved(false);
+		preference.setEnabled(plugin.isRelief3dAllowed());
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -153,6 +154,19 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference logcatBuffer = findPreference("logcat_buffer");
 		logcatBuffer.setIntent(new Intent(getActivity(), LogcatActivity.class));
 		logcatBuffer.setIconSpaceReserved(false);
+	}
+
+	private void setupTripRecordingPrefs() {
+		Preference routingCategory = findPreference("trip_recording");
+		routingCategory.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx bearingPref = findPreference(plugin.SAVE_BEARING_TO_GPX.getId());
+		bearingPref.setIconSpaceReserved(false);
+		bearingPref.setDescription(R.string.write_bearing_description);
+
+		SwitchPreferenceEx headingPref = findPreference(plugin.SAVE_HEADING_TO_GPX.getId());
+		headingPref.setIconSpaceReserved(false);
+		headingPref.setDescription(R.string.write_heading_description);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {
@@ -273,6 +287,21 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (plugin.SAVE_BEARING_TO_GPX.getId().equals(prefId) || plugin.SAVE_HEADING_TO_GPX.getId().equals(prefId)) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				BooleanRadioButtonsBottomSheet.showInstance(manager, prefId, getApplyQueryType(),
+						this, getSelectedAppMode(), false, isProfileDependent());
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
+	}
+
+	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
 		if (settings.SAFE_MODE.getId().equals(prefId) && newValue instanceof Boolean) {
@@ -323,6 +352,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			mapActivity.restart();
 		}
 	}
+
 	private void loadNativeLibrary() {
 		FragmentActivity activity = getActivity();
 		if (!NativeOsmandLibrary.isLoaded() && activity != null) {

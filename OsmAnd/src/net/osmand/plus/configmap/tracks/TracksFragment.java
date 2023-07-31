@@ -197,7 +197,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 		searchButton.setOnClickListener((v) -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, true);
+				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, true, isUsedOnMap());
 			}
 		});
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
@@ -350,7 +350,8 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	public void showSortByDialog() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SortByBottomSheet.showInstance(activity.getSupportFragmentManager(), this);
+			FragmentManager manager = activity.getSupportFragmentManager();
+			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
 		}
 	}
 
@@ -552,7 +553,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 					.setIcon(getContentIcon(R.drawable.ic_action_folder_stroke))
 					.setOnClickListener(v -> {
 						FragmentManager manager = activity.getSupportFragmentManager();
-						MoveGpxFileBottomSheet.showInstance(manager, file, this, false, false);
+						MoveGpxFileBottomSheet.showInstance(manager, file, file.getParentFile(), this, false, false);
 					})
 					.create());
 
@@ -656,7 +657,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@Override
-	public void renamedTo(File file) {
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
 		reloadTracks();
 	}
 

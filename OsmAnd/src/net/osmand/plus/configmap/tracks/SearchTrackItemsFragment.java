@@ -70,11 +70,12 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 
+	private boolean usedOnMap;
 	private boolean selectionMode;
 
 	@Override
 	protected boolean isUsedOnMap() {
-		return true;
+		return usedOnMap;
 	}
 
 	@Override
@@ -306,7 +307,7 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 	public void showSortByDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			SortByBottomSheet.showInstance(manager, this);
+			SortByBottomSheet.showInstance(manager, getTracksSortMode(), this, isUsedOnMap());
 		}
 	}
 
@@ -388,9 +389,11 @@ public class SearchTrackItemsFragment extends BaseOsmAndDialogFragment implement
 		};
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, boolean selectionMode) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
+	                                boolean selectionMode, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SearchTrackItemsFragment fragment = new SearchTrackItemsFragment();
+			fragment.usedOnMap = usedOnMap;
 			fragment.selectionMode = selectionMode;
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(target, 0);

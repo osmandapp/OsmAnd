@@ -23,6 +23,8 @@ public class TrackFolder implements TracksGroup {
 
 	private List<TrackItem> flattenedTrackItems;
 	private List<TrackFolder> flattenedSubFolders;
+
+	private TrackFolderAnalysis folderAnalysis;
 	private long lastModified = -1;
 
 	public TrackFolder(@NonNull File dirFile, @Nullable TrackFolder parentFolder) {
@@ -117,6 +119,14 @@ public class TrackFolder implements TracksGroup {
 		return flattenedSubFolders;
 	}
 
+	@NonNull
+	public TrackFolderAnalysis getFolderAnalysis() {
+		if (folderAnalysis == null) {
+			folderAnalysis = new TrackFolderAnalysis(this);
+		}
+		return folderAnalysis;
+	}
+
 	public long getLastModified() {
 		if (lastModified < 0) {
 			lastModified = dirFile.lastModified();
@@ -134,6 +144,7 @@ public class TrackFolder implements TracksGroup {
 		lastModified = -1;
 		flattenedTrackItems = null;
 		flattenedSubFolders = null;
+		folderAnalysis = null;
 	}
 
 	@Override

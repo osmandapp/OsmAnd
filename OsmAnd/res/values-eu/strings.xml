@@ -1119,8 +1119,6 @@
     <string name="interrupt_music_descr">Ahots iragarpenek musika pausatuko dute.</string>
     <string name="interrupt_music">Eten musika</string>
     <string name="index_item_world_altitude_correction">Munduko garaiera zuzenketa</string>
-    <string name="rendering_attr_alpineHiking_name">Alpetar bidezidor kirol eskala</string>
-    <string name="rendering_attr_alpineHiking_description">Marraztu bideak SAC/CAI eskalaren arabera.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Mendiko ibilbideak</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Marraztu bideak OSMC aztarnen arabera.</string>
     <string name="about_version">Bertsioa:</string>
@@ -5243,7 +5241,6 @@
     <string name="calculate_offline_altitude_descr">Kalkulatu kota konexiorik gabe, altuera-mapen datuetan oinarrituta. Gailuak erregistratutako altueraren desberdintasunak kota zuzentzeko erabil daitezke.</string>
     <string name="error_calculate">Kalkuluaren emaitza hutsik dago</string>
     <string name="calculate_offline">Kalkulatu konexiorik gabe</string>
-    <string name="rendering_value_sacScale_name">SAC eskala</string>
     <string name="delete_track_folder_dialog_message">Honek \"%1$s\" karpeta eta barne dauden arrasto guztiak (%2$s) ezabatuko ditu.</string>
     <string name="delete_folder_question">Karpeta ezabatu\?</string>
     <string name="delete_folder">Ezabatu karpeta</string>
@@ -5253,7 +5250,6 @@
     <string name="tracks_empty_folder">Karpeta hutsa</string>
     <string name="track_not_recorded">Grabatu gabe</string>
     <string name="shared_string_new_track">Arrasto berria</string>
-    <string name="rendering_value_caiScale_name">CAI eskala</string>
     <string name="shared_string_visible_on_map">Mapan ikusgai</string>
     <string name="save_track_external_sensors_data">Datuak</string>
     <string name="there_are_no_connected_sensors_of_this_type">Ez dago mota honetako sentsorerik konektatuta</string>
@@ -5291,4 +5287,60 @@
     <string name="terrain_category_description">Lurraren sestra-kurbak, itzal iluneko muinoen mapa osoa eta malden mapak koloreekin gailurrak eta behe-lurrak erakusteko.</string>
     <string name="terrain_map">Lurraren mapa</string>
     <string name="relief_3d">3D erliebea</string>
+    <string name="routing_attr_allow_via_ferrata_name">Mendiko ibilbidea (ferrata bidea)</string>
+    <string name="free_ride">Doako bidaia</string>
+    <string name="free_favorites_backup_description">Erregistratu OsmAnd Cloud-en gogokoen eta ezarpenen doako babeskopia lortzeko.</string>
+    <string name="free_favorites_backup">Gogokoen doako babeskopia</string>
+    <string name="get_osmand_cloud">Lortu OsmAnd Cloud</string>
+    <string name="free_account">Doako kontua</string>
+    <string name="routing_attr_allow_via_ferrata_description">Kable, barra, eskailera eta zubi finkoz hornitutako mendi ibilbidea.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Erabili sqltiedb raster malda / mendi-itzaletarako</string>
+    <string name="cache_size">Cachearen tamaina</string>
+    <string name="shared_string_avoid">Saihestu</string>
+    <string name="free_settings_backup">Ezarpenen doako babeskopia</string>
+    <string name="may_be_used_if_there_is_shortcut">Lasterbideren bat badago erabil daiteke</string>
+    <string name="release_4_5">BLE/ANT+ sentsoreak: GPXn jasotako datuen konexioa, idazketa eta bistaratzea hobetu da.
+\n
+\n • Doako babeskopia gogokoen eta ezarpenen \"OsmAnd Cloud\"-en
+\n
+\n • 3D erliebearen euskarria duten lur-mapen formatu berria
+\n
+\n • Arrastoen kudeatzea: UI eguneratua, sailkapen gehigarria, habiaraturiko karpeten laguntza
+\n
+\n • Android Auto: gogokoak, arrastoak eta POI kategoriak atzitzeko hasierako menu berria
+\n
+\n • Goiko/Beheko panelerako trepeten zerrenda bat
+\n
+\n • \"Trena\" profil berria, trenbideen ibilbideak kalkulatzeko aukera ematen du
+\n
+\n • Sestra-marrak edozein \"Mapa-iturburu\"rekin funtzionatzen dute
+\n
+\n • Kanpoko teklatuen ekintza lehenetsien zerrenda zabaldua
+\n
+\n • Bideratze-fitxategi pertsonalizatuak, ezabatzeko edo gainidazteko aukera gehitu
+\n
+\n • \"Ibilbidetik desbideratzea iragarri\" aukera gehitu da
+\n
+\n • Hasierako pantaila: fitxategitik OsmAnd egoera berreskuratzeko aukera gehitu da
+\n
+\n • \"Material arriskutsuak\" klaseak gehitu dira Kamioietako nabigazioa Ipar Amerikan
+\n
+\n • \"Fferrata bide\"ak onartzen dira oinezkoentzako bideratzeko
+\n
+\n • Ibilbideen zailtasunak sailkatzeko \"CAI\" eskala gehitu da
+\n
+\n • Aplikazio bakoitzeko hizkuntza hautaketa konpondu da
+\n
+\n • Gaikako ikonoentzako euskarria gehitu da
+\n
+\n • OsmAnd Cloud: kontua ezabatzeko aukera gehitu da
+\n
+\n • Irisgarritasuna: ukitu helburu-tamaina botoien 48 dp-ra aldatu da; Arazoa konpondu da pantaila-irakurleentzat ikusgai dagoen mapa-interfazearekin
+\n
+\n • Japoniako ahots-abisuak berraztertu dira
+\n
+\n • Kota aldaketa eta maldaren ebaluazioa berritu
+\n
+\n</string>
+    <string name="folder_export_empty_error">Ez dago ezer esportatzeko, karpeta hutsik dago</string>
 </resources>

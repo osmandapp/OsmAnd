@@ -4524,7 +4524,6 @@
     <string name="speak_descr">Atur pengumuman nama jalan, peringatan lalu lintas (pemberhentian paksa, polisi tidur), peringatan kamera kecepatan, dan batas kecepatan.</string>
     <string name="intermediate_items_sort_return">Urutan tujuan perantara yang dioptimalkan dalam perjalanan ke tujuan.</string>
     <string name="use_kalman_filter_compass_descr">Mengurangi kebisingan dalam pembacaan kompas tetapi menambahkan inersia.</string>
-    <string name="rendering_attr_alpineHiking_name">Skala pendakian Alpine</string>
     <string name="rendering_attr_noAdminboundaries_description">Menekan tampilan batas wilayah (tingkat admin 5–9).</string>
     <string name="gps_not_available">Harap aktifkan GPS di pengaturan</string>
     <string name="gpx_monitoring_disabled_warn">Catat trek menggunakan widget GPX atau melalui pengaturan \'Perekaman perjalanan\'.</string>
@@ -4666,7 +4665,6 @@
     <string name="ending_point_too_far">Titik akhir terlalu jauh dari jalan terdekat.</string>
     <string name="recording_playing">Audio dari rekaman yang ditentukan sedang diputar.
 \n%1$s</string>
-    <string name="rendering_attr_alpineHiking_description">Render jalur sesuai dengan skala SAC/CAI.</string>
     <string name="non_optimal_route_calculation">Hitung kemungkinan rute yang tidak optimal untuk jarak jauh</string>
     <string name="osmand_extended_description_part2">Navigasi GPS
 \n - Pilih antara mode luring (tanpa biaya roaming saat Anda berada di luar negeri) atau daring (lebih cepat)
@@ -5219,8 +5217,6 @@
     <string name="map_3d_mode_action">Mode 3D</string>
     <string name="map_3d_mode_hint">Ketuk tombol dengan lama memungkinkan mengubah posisi tombol.</string>
     <string name="map_3d_mode_description">Sentuh peta dengan dua jari dan gerakkan ke atas dan bawah untuk mengatur kemiringan peta.</string>
-    <string name="rendering_value_sacScale_name">Skala SAC</string>
-    <string name="rendering_value_caiScale_name">Skala CAI</string>
     <string name="external_sensors_source_of_data">Sumber data</string>
     <string name="save_track_external_sensors_data">Data</string>
     <string name="write_data_from_sensor_to_track">Tulis data dari sensor eksternal ke GPX saat perekaman perjalanan.</string>
@@ -5326,4 +5322,26 @@
     <string name="routing_attr_allow_via_ferrata_name">Rute lereng gunung (Via ferrata)</string>
     <string name="free_settings_backup">Pencadangan Pengaturan Gratis</string>
     <string name="routing_attr_allow_via_ferrata_description">Rute gunung yang dilengkapi dengan kabel tetap, tiang, tangga, dan jembatan.</string>
+    <string name="free_ride">Perjalanan gratis</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Zat Korosif</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Lain-lain</string>
+    <string name="shared_string_class">Kelas</string>
+    <string name="shared_string_checked">Diperiksa</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Cairan Mudah Terbakar</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Padatan Mudah Terbakar</string>
+    <string name="dangerous_goods_description">Di beberapa jalan dan terowongan, pengangkutan bahan berbahaya dilarang.</string>
+    <string name="dangerous_goods">Barang berbahaya</string>
+    <string name="rendering_value_sacScale_description">Klub Alpen Swiss</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Zat Radioaktif</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Klub Alpen Italia)</string>
+    <string name="shared_string_not_checked">Tidak diperiksa</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gas</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agen Pengoksidasi dan Peroksida Organik</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Zat Beracun dan Menular</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Bahan peledak</string>
+    <string name="rendering_attr_alpineHiking_description">Jenis klasifikasi kesulitan untuk rute.</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_name">Klasifikasi kesulitan</string>
 </resources>

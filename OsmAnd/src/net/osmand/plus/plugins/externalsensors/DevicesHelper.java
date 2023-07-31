@@ -42,6 +42,7 @@ import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
+import net.osmand.plus.plugins.externalsensors.devices.ant.AntTemperatureDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBPICPDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEBikeSCDDevice;
@@ -144,6 +145,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				AbstractDevice<?> device = createDevice(deviceSettings.deviceType, deviceId);
 				if (device != null) {
 					devices.put(deviceId, device);
+					device.setDeviceName(deviceSettings.deviceName);
 				}
 			}
 		}
@@ -155,6 +157,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		switch (deviceType) {
 			case ANT_HEART_RATE:
 				return new AntHeartRateDevice(deviceId);
+			case ANT_TEMPERATURE:
+				return new AntTemperatureDevice(deviceId);
 			case ANT_BICYCLE_POWER:
 				return new AntBikePowerDevice(deviceId);
 			case ANT_BICYCLE_SC:
@@ -217,8 +221,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			}
 			ScanRecord scanRecord = result.getScanRecord();
 			if (isSupportedBleDevice(scanRecord)) {
-				String deviceName = result.getDevice().getName();
 				String address = result.getDevice().getAddress();
+				DeviceSettings settings = devicesSettings.getDeviceSettings(address);
+				String deviceName;
+				deviceName = settings == null ? result.getDevice().getName() : settings.deviceName;
 				List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 				for (ParcelUuid uuid : uuids) {
 					BLEAbstractDevice device = BLEAbstractDevice.createDeviceByUUID(
@@ -502,16 +508,16 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	public void setDeviceName(@NonNull AbstractDevice<?> device, @NonNull String name) {
 		String deviceId = device.getDeviceId();
+		device.setDeviceName(name);
 		DeviceSettings settings = devicesSettings.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
 				settings = new DeviceSettings(deviceId, device.getDeviceType(), name, false);
-				devicesSettings.setDeviceSettings(deviceId, settings);
 			}
 		} else {
 			settings.deviceName = name;
-			devicesSettings.setDeviceSettings(deviceId, settings);
 		}
+		devicesSettings.setDeviceSettings(deviceId, settings);
 	}
 
 	@Override
@@ -527,6 +533,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void scanAntDevices(boolean enable) {
 		if (enable) {
 			antSearchableDevices = Arrays.asList(
+					AntTemperatureDevice.createSearchableDevice(),
 					AntHeartRateDevice.createSearchableDevice(),
 					AntBikeSpeedCadenceDevice.createSearchableDevice(),
 					AntBikeSpeedDistanceDevice.createSearchableDevice(),

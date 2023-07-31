@@ -80,13 +80,18 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return itemsCache.put(item.getFile(), item);
 	}
 
-	private void removeFromCache(@NonNull GpxDataItem item) {
-		itemsCache.remove(item.getFile());
+	private void removeFromCache(@NonNull File file) {
+		itemsCache.remove(file);
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
 		GpxDataItem item = itemsCache.get(currentFile);
-		return database.rename(item, currentFile, newFile);
+		boolean res = database.rename(item, currentFile, newFile);
+		if (item != null) {
+			putToCache(item);
+			removeFromCache(currentFile);
+		}
+		return res;
 	}
 
 	public boolean updateColor(@NonNull GpxDataItem item, int color) {

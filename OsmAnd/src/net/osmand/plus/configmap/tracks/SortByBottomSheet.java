@@ -21,7 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.BaseBottomSheetDialogFragment;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
@@ -32,29 +33,25 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.Arrays;
 import java.util.List;
 
-public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
+public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private static final String TAG = SortByBottomSheet.class.getSimpleName();
 
-	private TracksSortMode tracksSortMode;
+	private static final String TRACKS_SORT_MODE_KEY = "tracks_sort_mode_key";
 
-	private boolean nightMode;
+	private TracksSortMode tracksSortMode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		nightMode = isNightMode(true);
 
-		Fragment target = getTargetFragment();
-		if (target instanceof SortTracksListener) {
-			tracksSortMode = ((SortTracksListener) target).getTracksSortMode();
+		if (savedInstanceState != null) {
+			tracksSortMode = AndroidUtils.getSerializable(savedInstanceState, TRACKS_SORT_MODE_KEY, TracksSortMode.class);
 		}
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
 		LayoutInflater themedInflater = UiUtilities.getInflater(context, nightMode);
 		View view = themedInflater.inflate(R.layout.bottom_sheet_track_group_list, null);
@@ -67,7 +64,7 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(context));
 		recyclerView.setAdapter(new SortModesAdapter(Arrays.asList(TracksSortMode.values())));
 
-		return view;
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
 	}
 
 	public class SortModesAdapter extends RecyclerView.Adapter<SortModeViewHolder> {
@@ -97,7 +94,7 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 
 			boolean selected = sortMode == tracksSortMode;
 			int colorId = selected ? activeColorId : defaultColorId;
-			holder.groupTypeIcon.setImageDrawable(uiUtilities.getIcon(sortMode.getIconId(), colorId));
+			holder.groupTypeIcon.setImageDrawable(getIcon(sortMode.getIconId(), colorId));
 
 			holder.itemView.setOnClickListener(view -> {
 				Fragment target = getTargetFragment();
@@ -139,9 +136,18 @@ public class SortByBottomSheet extends BaseBottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target) {
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(TRACKS_SORT_MODE_KEY, tracksSortMode);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksSortMode sortMode,
+	                                @NonNull Fragment target, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SortByBottomSheet fragment = new SortByBottomSheet();
+			fragment.tracksSortMode = sortMode;
+			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}

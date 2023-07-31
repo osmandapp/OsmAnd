@@ -175,7 +175,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		void onFoldersListSelected();
 
-		void onFolderSelected(@NonNull String folderName);
+		void onFolderSelected(@NonNull String folderPath);
 
 		void onTrackItemSelected(@NonNull ImportTrackItem item, boolean selected);
 

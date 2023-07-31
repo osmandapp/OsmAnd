@@ -45,6 +45,7 @@ public class FileUtils {
 		}
 	}
 
+	@Nullable
 	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
 	                                    RenameCallback callback) {
 		File dest = checkRenamePossibility(ctx, source, newName, false);
@@ -64,7 +65,7 @@ public class FileUtils {
 				}
 			}
 			if (callback != null) {
-				callback.renamedTo(dest);
+				callback.fileRenamed(source, dest);
 			}
 			return dest;
 		} else {
@@ -83,7 +84,7 @@ public class FileUtils {
 		File res = renameGpxFile(app, source, dest);
 		if (res != null) {
 			if (callback != null) {
-				callback.renamedTo(res);
+				callback.fileRenamed(source, res);
 			}
 		} else {
 			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
@@ -91,6 +92,7 @@ public class FileUtils {
 		return res;
 	}
 
+	@Nullable
 	public static File renameFile(@NonNull OsmandApplication app, @NonNull File source,
 	                              @NonNull String newName, boolean dirAllowed, RenameCallback callback) {
 		File dest = checkRenamePossibility(app, source, newName, dirAllowed);
@@ -104,7 +106,7 @@ public class FileUtils {
 		File res = source.renameTo(dest) ? dest : null;
 		if (res != null) {
 			if (callback != null) {
-				callback.renamedTo(res);
+				callback.fileRenamed(source, res);
 			}
 		} else {
 			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
@@ -119,13 +121,13 @@ public class FileUtils {
 			destDir.mkdirs();
 		}
 		if (src.renameTo(dest)) {
-			updateMovedGpx(app, src, dest);
+			updateRenamedGpx(app, src, dest);
 			return dest;
 		}
 		return null;
 	}
 
-	public static void updateMovedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
+	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
 		app.getGpxDbHelper().rename(src, dest);
 		app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
@@ -307,6 +309,6 @@ public class FileUtils {
 	}
 
 	public interface RenameCallback {
-		void renamedTo(File file);
+		void fileRenamed(@NonNull File src, @NonNull File dest);
 	}
 }

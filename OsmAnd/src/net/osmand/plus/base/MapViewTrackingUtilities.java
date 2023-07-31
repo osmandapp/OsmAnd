@@ -271,7 +271,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 								() -> movingToMyLocation = false);
 					} else {
 						if (zoom != null && zoom.first != null && zoom.second != null) {
-							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
+							mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, null, false);
 						}
 						if (rotation != null) {
 							mapView.setRotate(rotation, false);

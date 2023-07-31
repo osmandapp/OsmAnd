@@ -223,7 +223,6 @@
     <string name="download_srtm_maps">Høgdekurver</string>
     <string name="download_regular_maps">Vanlege kart</string>
     <string name="download_roads_only_maps">Kart med berre vegar</string>
-    <string name="rendering_attr_alpineHiking_name">Fjellturkart</string>
     <string name="rendering_attr_noAdminboundaries_name">Gøym grenser</string>
     <string name="map_widget_max_speed">Fartsgrense</string>
     <string name="no_buildings_found">Fann ingen bygningar.</string>

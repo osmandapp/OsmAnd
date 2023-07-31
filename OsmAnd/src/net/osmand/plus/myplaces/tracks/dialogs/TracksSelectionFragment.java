@@ -165,7 +165,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			if (foldersHelper != null) {
 				Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
 				Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(trackItems, tracksGroups, v, this);
+				foldersHelper.showItemsOptionsMenu(v, rootFolder, trackItems, tracksGroups, this);
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_more));

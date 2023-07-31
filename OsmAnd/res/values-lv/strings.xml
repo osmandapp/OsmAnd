@@ -1451,7 +1451,6 @@
     <string name="rendering_attr_hideHouseNumbers_name">Māju numurus</string>
     <string name="index_name_netherlands">Eiropa - Nīderlande</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderēt ceļus pēc OSMC trasēm</string>
-    <string name="rendering_attr_alpineHiking_description">Renderēt ceļus pēc SAC skalas</string>
     <string name="download_wikipedia_maps">Vikipēdija</string>
     <string name="routing_attr_height_description">Transportlīdzekļa maksimālais atļautais augstums maršrutos</string>
     <string name="routing_attr_height_name">Augstuma robežas</string>
@@ -1716,7 +1715,6 @@
     <string name="routing_attr_avoid_stairs_name">Izvairīties no kāpnēm</string>
     <string name="routing_attr_avoid_stairs_description">Izvairīties no kāpnēm</string>
     <string name="routing_attr_avoid_borders_name">Izvairīties pārbraukt robežas</string>
-    <string name="rendering_attr_alpineHiking_name">Kalnu tūrisms (SAC)</string>
     <string name="shared_string_release">Izlaists</string>
     <string name="favourites_context_menu_add">Pievienot izlasei</string>
     <string name="poi_action_delete">Izdzēst</string>

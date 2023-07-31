@@ -1267,8 +1267,6 @@
     <string name="rendering_attr_subwayMode_name">Rutes de metro</string>
     <string name="continue_navigation">Continua la navegació</string>
     <string name="pause_navigation">Suspèn la navegació</string>
-    <string name="rendering_attr_alpineHiking_name">Escala senderista SAC (Club Alpí Suís)</string>
-    <string name="rendering_attr_alpineHiking_description">Representació dels camins segons l\'escala SAC (Club Alpí Suís).</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rutes de senderisme</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Representació dels camins segons les traces OSMC (símbols de colors).</string>
     <string name="arrival_distance_factor_early">Aviat</string>

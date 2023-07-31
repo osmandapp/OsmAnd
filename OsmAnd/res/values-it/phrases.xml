@@ -794,7 +794,7 @@
     <string name="poi_fuel_lh2">Idrogeno liquido</string>
     <string name="poi_fuel_electricity">Energia elettrica</string>
     <string name="poi_public_transport_stop_position">Posizione stop del trasporto pubblico</string>
-    <string name="poi_railway_platform">Piattaforma ferroviaria</string>
+    <string name="poi_railway_platform">Piattaforma ferroviaria;Piattaforma del treno</string>
     <string name="poi_halt">Fermata ferroviaria</string>
     <string name="poi_runway">Pista</string>
     <string name="poi_rest_area">Area di sosta</string>
@@ -2194,9 +2194,9 @@
     <string name="poi_delivery_no">No consegna</string>
     <string name="poi_delivery_only">Solo consegna</string>
     <string name="poi_outdoor_seating_patio">Posti a sedere all\'aperto: patio</string>
-    <string name="poi_second_hand_yes">Usato</string>
+    <string name="poi_second_hand_yes">Si</string>
     <string name="poi_second_hand_no">Non usato</string>
-    <string name="poi_second_hand_only">Solo usato</string>
+    <string name="poi_second_hand_only">Solo</string>
     <string name="poi_diaper_yes">Tavolo cambio pannolino</string>
     <string name="poi_diaper_no">Tavolo cambio pannolino non presente</string>
     <string name="poi_diaper_room">Locale cambio pannolino</string>
@@ -2459,7 +2459,7 @@
     <string name="poi_service_bicycle_retail_no">Vendita bici al dettaglio: no</string>
     <string name="poi_service_bicycle_diy_yes">Utensili per riparazioni fai-da-te;Utensili fai-da-te per motociclette;Utensili fai-da-te per biciclette</string>
     <string name="poi_service_bicycle_diy_no">Attrezzi per le riparazioni fai-da-te: no</string>
-    <string name="poi_service_bicycle_chaintool_yes">Attrezzo per catena; Attrezzo per catena di bicicletta; Attrezzo per catena di motocicletta</string>
+    <string name="poi_service_bicycle_chaintool_yes">Attrezzo per catena;Attrezzo per catena di bicicletta;Attrezzo per catena di motocicletta</string>
     <string name="poi_service_bicycle_chaintool_no">Utensile per la catena: no</string>
     <string name="poi_service_bicycle_second_hand_yes">Commercio al dettaglio di biciclette usate;Biciclette usate;Motociclette usate</string>
     <string name="poi_service_bicycle_second_hand_no">Vendita al dettaglio di bici di seconda mano: no</string>
@@ -2916,7 +2916,7 @@
     <string name="poi_horse_riding">Equitazione</string>
     <string name="poi_water_characteristic_mud">Fango</string>
     <string name="poi_generator_source_biomass">Fonte di energia: biomassa</string>
-    <string name="poi_deadlock">Deadlock</string>
+    <string name="poi_deadlock">Stallo</string>
     <string name="poi_animal_shelter_wildlife">Fauna selvatica</string>
     <string name="poi_trees_rubber">Gomma</string>
     <string name="poi_trees_meadow_orchard">Frutteto di prato</string>
@@ -3381,7 +3381,7 @@
     <string name="poi_memorial_jizo">Jizo</string>
     <string name="poi_wetland_reedbed">Canneto</string>
     <string name="poi_wetland_saltmarsh">Palude salata</string>
-    <string name="poi_wetland_string_bog">Palude di corde</string>
+    <string name="poi_wetland_string_bog">Palude di liane</string>
     <string name="poi_resource_dimension_stone">Pietra dimensionale</string>
     <string name="poi_bridge_movable_swing">Tipo ponte mobile: altalena</string>
     <string name="poi_hiking_filter">Adatto per l\'escursionismo</string>
@@ -3414,7 +3414,7 @@
     <string name="poi_health_specialty_physiatry_yes">Medicina fisica e riabilitazione</string>
     <string name="poi_health_specialty_general_yes">Medico di base</string>
     <string name="poi_bathing_no">Bagno: no</string>
-    <string name="poi_cairn">Cairn</string>
+    <string name="poi_cairn">Tumulo</string>
     <string name="poi_megalith_type_nuraghe">Tipo di megalite: nuraghe</string>
     <string name="poi_site_type_earthwork">Terrapieno</string>
     <string name="poi_historic_era_neolithic">Epoca storica: neolitico</string>
@@ -3758,7 +3758,7 @@
     <string name="poi_fuel_lng">LNG</string>
     <string name="poi_socket_cee_blue">Socket: CEE blu</string>
     <string name="poi_direction_north">Direzione nord</string>
-    <string name="poi_booth"/>
+    <string name="poi_booth">Tipo di bancarella</string>
     <string name="poi_hgv_unsuitable">Accesso HGV: non adatto</string>
     <string name="poi_payment_contactless_no">Contactless non accettato</string>
     <string name="poi_support_ground">Supporto: suolo</string>
@@ -3847,7 +3847,7 @@
     <string name="poi_nuclear_explosion_purpose_industrial_application">Scopo esplosione: applicazione industriale</string>
     <string name="poi_health_service_counselling_yes">Servizio sanitario: consulenza: sì</string>
     <string name="poi_street_cabinet_power">Tipo cabina: energia</string>
-    <string name="poi_government_treasury"/>
+    <string name="poi_government_treasury">Tesoriera</string>
     <string name="poi_socket_cee_red_32a_current">Socket: CEE rosso 32A: current</string>
     <string name="poi_socket_cee_red_32a">Socket: CEE rosso 32A</string>
     <string name="poi_socket_cee_red_32a_output">Socket: CEE rosso 32A: output</string>
@@ -3875,7 +3875,7 @@
     <string name="poi_motor_vehicle_customers">Accesso veicoli a motore: clienti</string>
     <string name="poi_shop_security">Negozio di sicurezza</string>
     <string name="poi_bowling_alley">Centro bowling</string>
-    <string name="poi_covered_booth"/>
+    <string name="poi_covered_booth">Bancarella</string>
     <string name="poi_operator_type_community">Tipo operatore: comunità</string>
     <string name="poi_operator_type_private">Tipo operatore: privato</string>
     <string name="poi_share_taxi_yes">Taxi condiviso: sì</string>
@@ -3939,4 +3939,18 @@
     <string name="poi_payment_reverse_charge_calls_yes">Chiamate a carico del destinatario: sì</string>
     <string name="poi_payment_calling_cards_no">Non si accettano carte telefoniche</string>
     <string name="poi_payment_mir_yes">Carte Mir</string>
+    <string name="poi_health_service_nursing_no">Servizio sanitario: infermieristico: no</string>
+    <string name="poi_health_service_nursing_yes">Servizio sanitario: infermieristico: sì</string>
+    <string name="poi_health_specialty_speech_therapy_yes">Logoterapia</string>
+    <string name="poi_forestry_compartment">Segnavia: compartimento forestale</string>
+    <string name="poi_health_specialty_palliative_medicine_yes">Medicina palliativa</string>
+    <string name="poi_squash">Squash</string>
+    <string name="poi_fair_trade_only">Solo prodotti del commercio equo e solidale</string>
+    <string name="poi_forestry_allotment">Segnavia: orto forestale</string>
+    <string name="poi_waste_accepted">Rifiuti accettati</string>
+    <string name="poi_vending_machine_fuel_filter">Distributori automatici di carburante;Distributori di carburante</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_second_hand_filter">Beni di seconda mano</string>
+    <string name="poi_health_specialty_reiki_yes">Reiki</string>
+    <string name="poi_vending_machine_fuel">Si</string>
 </resources>

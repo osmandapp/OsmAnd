@@ -1,7 +1,6 @@
 package net.osmand.plus.track.fragments;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -414,14 +413,11 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	@Override
-	public void onSaveAsNewTrack(@Nullable String folderName, @NonNull String fileName,
+	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName,
 	                             boolean showOnMap, boolean simplifiedTrack) {
 		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
-			File destFile = app.getAppPath(GPX_INDEX_DIR);
-			if (!Algorithms.isEmpty(folderName) && !destFile.getName().equals(folderName)) {
-				destFile = new File(destFile, folderName);
-			}
-			destFile = new File(destFile, fileName + GPX_FILE_EXT);
+			File fileDir = new File(folderPath);
+			File destFile = new File(fileDir, fileName + GPX_FILE_EXT);
 
 			GPXFile filteredGpxFile = selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile();
 			GPXFile gpxFileToWrite = GpsFilterHelper.copyGpxFile(app, filteredGpxFile);

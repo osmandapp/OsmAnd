@@ -1229,8 +1229,6 @@
     <string name="rendering_attr_subwayMode_name">Metroruter</string>
     <string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
-    <string name="rendering_attr_alpineHiking_name">Alpin vandreskala</string>
-    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC/CAI-skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandreruter</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC-spor.</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
@@ -5219,8 +5217,6 @@
     <string name="map_3d_mode_description">Berør kortet med to fingre, og bevæg dem op og ned for at justere kortets hældning.</string>
     <string name="map_2d_mode_action">2D-tilstand</string>
     <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
-    <string name="rendering_value_sacScale_name">SAC-skala</string>
-    <string name="rendering_value_caiScale_name">CAI-skala</string>
     <string name="rssi_widget_desc">Viser RSSI-niveauet for din eksterne enhed.</string>
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder_description">Denne mappe indeholder endnu ingen spor.</string>
@@ -5326,4 +5322,26 @@
     <string name="shared_string_avoid">Undgå</string>
     <string name="may_be_used_if_there_is_shortcut">Kan bruges, hvis der er en genvej</string>
     <string name="free_settings_backup">Gratis sikkerhedskopiering af indstillinger</string>
+    <string name="free_ride">Gratis tur</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Sprængstoffer</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxiderende stoffer og organiske peroxider</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige og smitsomme stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktive stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Ætsende stoffer</string>
+    <string name="shared_string_class">Klasse</string>
+    <string name="dangerous_goods">Farligt gods</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diverse</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brandfarlige faste stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasser</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brandfarlige væsker</string>
+    <string name="dangerous_goods_description">På nogle veje og i nogle tunneller er transport af farlige materialer forbudt.</string>
+    <string name="shared_string_not_checked">Ikke tjekket</string>
+    <string name="shared_string_checked">Tjekket</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Den italienske alpinklub)</string>
+    <string name="rendering_value_sacScale_description">Den schweiziske alpinklub</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_description">Klassificeringstyper for sværhedsgrad af ruterne.</string>
+    <string name="rendering_attr_alpineHiking_name">Sværhedsklassificering</string>
 </resources>
