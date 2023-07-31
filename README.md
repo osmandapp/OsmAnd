@@ -4,32 +4,18 @@ This project aims at providing comfortable map viewing and navigation (routing) 
 To get started, continue with the basic description below, then find more detail on our Welcome Wiki Pages, the Project Homepage, or the OpenStreetMap OsmAnd Wiki Page.
 You are welcome to discuss any question regarding the project at the Google group OsmAnd. Please do not use comments on wiki pages because it is rather difficult to find them.
 
-<table style="margin: 0 auto;">
-    <tr>
-        <td style="text-align: center; vertical-align: middle;">
-            <a href="https://play.google.com/store/apps/details?id=net.osmand" target="_blank">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="85" width="220"/>
-            </a>
-        </td>
-        <td style="text-align: center; vertical-align: middle;">
-            <a href="https://f-droid.org/packages/net.osmand.plus/" target="_blank">
-                <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="85"/>
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td style="text-align: center; vertical-align: middle;">
-            <a href="https://apps.apple.com/app/apple-store/id934850257" target="_blank">
-                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Get it on AppStore" height="60" width="230"/>
-            </a>
-        </td>
-        <td style="text-align: center; vertical-align: middle;">
-            <a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" target="_blank">
-                <img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png" alt="Get it on Amazon" height="60" width="210"/>
-            </a>
-        </td>
-    </tr>
-</table>
+
+
+|Android markets|
+|---------------|
+|<a href="https://play.google.com/store/apps/details?id=net.osmand" rel="Get it on Google Play">![Google Play](https://github.com/osmandapp/OsmAnd/assets/44466116/ce98ccb6-0dad-47f1-836b-31b73d0313fa)</a>|
+|<a href="https://appgallery.huawei.com/#/app/C101486545" rel="Explore it on AppGallery">![Huawei AppGallery](https://github.com/osmandapp/OsmAnd/assets/44466116/a16a7170-1989-44f7-93d1-50ac68e76a06)</a>|
+|<a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" rel="Get it on Amazon">![Amazon](https://github.com/osmandapp/OsmAnd/assets/44466116/b343f121-5938-42df-b127-cf2f3445111a)</a>|
+|<a href="https://f-droid.org/packages/net.osmand.plus/" rel="Get it on F-Droid">![F-droid](https://github.com/osmandapp/OsmAnd/assets/44466116/8cdb306f-c018-4560-873a-94c97fe3cf73)</a>|
+
+|App Store - Apple|
+|---------------|
+|<a href="https://apps.apple.com/app/apple-store/id934850257" rel="Get it on AppStore">![App Store Apple](https://github.com/osmandapp/OsmAnd/assets/44466116/bc6ad9da-6ac0-4b30-a606-4076aad6d7cf)</a>|
 
 <p>
 <a href="https://hosted.weblate.org/engage/osmand/">
