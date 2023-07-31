@@ -5233,4 +5233,19 @@
     <string name="external_device_characteristic_gear_ratio">Gear ratio</string>
     <string name="terrain_category_description">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
     <string name="slope_legend_description">O Slope usa cores para visualizar a inclinação do terreno. Você pode ler mais sobre Slopes em %1$s.</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_attr_alpineHiking_description">Tipos de classificação de dificuldade para as rotas.</string>
+    <string name="shared_string_checked">Ativado</string>
+    <string name="shared_string_not_checked">Não ativado</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
+    <string name="write_bearing_description">Salvar a direção em cada ponto da trilha durante a gravação</string>
+    <string name="write_bearing">Salvar direção</string>
+    <string name="write_heading_description">Salvar o cabeçalho em cada ponto da trilha durante a gravação</string>
+    <string name="write_heading">Salvar cabeçalho</string>
+    <string name="rendering_value_sacScale_description">Clube Alpino Suíço</string>
+    <string name="rendering_value_caiScale_description">Clube Alpino Italiano</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="shared_string_included">Incluído</string>
+    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
 </resources>
