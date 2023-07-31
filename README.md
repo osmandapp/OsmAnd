@@ -10,7 +10,7 @@ You are welcome to discuss any question regarding the project at the Google grou
 |---------------|
 |<a href="https://play.google.com/store/apps/dev?id=8483587772816822023" rel="Get it on Google Play">![Google Play](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/googleplay.png)</a>|
 |<a href="https://appgallery.huawei.com/#/app/C101486545" rel="Explore it on AppGallery">![Huawei AppGallery](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appgallery.png)</a>|
-|<a href="https://www.amazon.com/s?i=mobile-apps&rh=p_4%3AOsmAnd" rel="Get it on Amazon">![Amazon](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/amazon.png)</a>|
+|<a href="https://www.amazon.com/s?i=mobile-apps&rh=p_4%3AOsmAnd&search-type=ss" rel="Get it on Amazon">![Amazon](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/amazon.png)</a>|
 |<a href="https://f-droid.org/packages/net.osmand.plus/" rel="Get it on F-Droid">![F-droid](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/fdroid.png)</a>|
 
 |App Store - Apple|
