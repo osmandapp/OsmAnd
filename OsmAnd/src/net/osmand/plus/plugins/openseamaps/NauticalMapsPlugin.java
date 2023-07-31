@@ -17,6 +17,8 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.download.LocalIndexHelper;
 import net.osmand.plus.download.LocalIndexInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -108,6 +110,15 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	                              @NonNull List<RenderingRuleProperty> customRules) {
 		if ((isEnabled() || hasDepthMaps())) {
 			createNauticalItem(adapter, mapActivity, customRules);
+		}
+	}
+
+	@Override
+	public void registerLayerContextMenuActions(@NonNull ContextMenuAdapter menuAdapter,
+	                                            @NonNull MapActivity mapActivity,
+	                                            @NonNull List<RenderingRuleProperty> customRules) {
+		if (!PluginsHelper.isEnabled(SRTMPlugin.class)) {
+			createAdapterItem(menuAdapter, mapActivity, customRules);
 		}
 	}
 
