@@ -5336,4 +5336,5 @@
     <string name="terrain_category_description">Линии контуров рельефа, карты затенения рельефа (отмывки) и карты уклонов с цветами для отображения вершин и низменностей.</string>
     <string name="slope_legend_description">Уклон использует цвета для визуализации крутизны рельефа. Подробнее об уклоне можно прочитать на сайте %1$s.</string>
     <string name="routing_attr_allow_via_ferrata_name">Горный маршрут (Виа феррата)</string>
+    <string name="feature_available_as_part_of_plan">%1$s доступно в рамках плана %2$s</string>
 </resources>
