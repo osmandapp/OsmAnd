@@ -8,14 +8,14 @@ You are welcome to discuss any question regarding the project at the Google grou
 
 |Android markets|
 |---------------|
-|<a href="https://play.google.com/store/apps/details?id=net.osmand" rel="Get it on Google Play">![Google Play](https://github.com/osmandapp/OsmAnd/assets/44466116/ce98ccb6-0dad-47f1-836b-31b73d0313fa)</a>|
-|<a href="https://appgallery.huawei.com/#/app/C101486545" rel="Explore it on AppGallery">![Huawei AppGallery](https://github.com/osmandapp/OsmAnd/assets/44466116/a16a7170-1989-44f7-93d1-50ac68e76a06)</a>|
-|<a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" rel="Get it on Amazon">![Amazon](https://github.com/osmandapp/OsmAnd/assets/44466116/b343f121-5938-42df-b127-cf2f3445111a)</a>|
-|<a href="https://f-droid.org/packages/net.osmand.plus/" rel="Get it on F-Droid">![F-droid](https://github.com/osmandapp/OsmAnd/assets/44466116/8cdb306f-c018-4560-873a-94c97fe3cf73)</a>|
+|<a href="https://play.google.com/store/apps/details?id=net.osmand" rel="Get it on Google Play">![Google Play](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/googleplay.png)</a>|
+|<a href="https://appgallery.huawei.com/#/app/C101486545" rel="Explore it on AppGallery">![Huawei AppGallery](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appgallery.png)</a>|
+|<a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" rel="Get it on Amazon">![Amazon](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/amazon.png)</a>|
+|<a href="https://f-droid.org/packages/net.osmand.plus/" rel="Get it on F-Droid">![F-droid](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/fdroid.png)</a>|
 
 |App Store - Apple|
 |---------------|
-|<a href="https://apps.apple.com/app/apple-store/id934850257" rel="Get it on AppStore">![App Store Apple](https://github.com/osmandapp/OsmAnd/assets/44466116/bc6ad9da-6ac0-4b30-a606-4076aad6d7cf)</a>|
+|<a href="https://apps.apple.com/app/apple-store/id934850257" rel="Get it on AppStore">![App Store Apple](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appstore.png)</a>|
 
 <p>
 <a href="https://hosted.weblate.org/engage/osmand/">
