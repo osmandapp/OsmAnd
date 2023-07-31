@@ -4752,7 +4752,7 @@
     <string name="worldwide_maps">Verdenskart</string>
     <string name="developer_widgets">Utviklerminiprogrammer</string>
     <string name="map_widget_ant_bicycle_dist_desc">Viser tilbakelagt distanse</string>
-    <string name="nautical_depth_points">Sjødybder</string>
+    <string name="nautical_depth_points">Sjødybdepunkter</string>
     <string name="depth_contours">Dybdekonturer</string>
     <string name="map_widget_zoom_level_desc">Viser nåværende kartforstørrelsesnivå.</string>
     <string name="external_sensor_widgets">Eksterne sensorer</string>
@@ -4900,7 +4900,7 @@
     <string name="shared_string_kilograms">kilogram</string>
     <string name="empty_tracks_description">Du kan importere, opprette eller ta opp sporfiler ved bruk av OsmAnd.</string>
     <string name="map_widget_camera_tilt">Kamerahelning</string>
-    <string name="map_marker_interval_dialog_desc">Angi tidsintervall gjen- hastighet vil bli målt i for å regne ut anslått tid til ankomst.</string>
+    <string name="map_marker_interval_dialog_desc">Angi tidsintervallet der gjennomsnittshastigheten vil bli målt for å beregne forventet ankomsttid.</string>
     <string name="approximate_bearing_descr">Avled peilingen fra navigasjonsruten som følges.</string>
     <string name="shared_string_inches">tommer</string>
     <string name="map_widget_group_sunrise_sunset_desc">Viser info om neste solopp- og nedgang.</string>
@@ -5009,7 +5009,7 @@
     <string name="check_for_updates">Se etter oppdateringer</string>
     <string name="recently_visible">Nylig synlig %1$s</string>
     <string name="weather_wind_miles_per_hour">Miles per time</string>
-    <string name="cloud_sync_progress">Synk…%1$s</string>
+    <string name="cloud_sync_progress">Synkroniserer…%1$s</string>
     <string name="weather_pressure_hpa">hPa</string>
     <string name="inch">in</string>
     <string name="weather_wind_kn">kn</string>
@@ -5236,4 +5236,5 @@
     <string name="write_heading">Skriv retning</string>
     <string name="map_3d_mode_hint">Med langt trykk på knappen kan knappeposisjon endres.</string>
     <string name="shared_string_included">Inkludert</string>
+    <string name="tracks_empty_folder_description">Denne mappen har ennå ingen spor.</string>
 </resources>
