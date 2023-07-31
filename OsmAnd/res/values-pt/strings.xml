@@ -3302,7 +3302,7 @@
     <string name="slope_description">Os declives usam cores para visualizar a inclinação do terreno.</string>
     <string name="terrain_slider_description">Defina os níveis de ampliação mínimos e máximos em que a camada será mostrada.</string>
     <string name="hillshade_download_description">São necessários mapas adicionais para ver sombras de relevo no mapa.</string>
-    <string name="slope_download_description">Mapas adicionais são necessários para ver declives no mapa.</string>
+    <string name="slope_download_description">São necessários mapas adicionais para ver declives no mapa.</string>
     <string name="slope_read_more">Leia mais sobre declives em %1$s.</string>
     <string name="shared_string_transparency">Transparência</string>
     <string name="shared_string_zoom_levels">Níveis de ampliação</string>
@@ -5280,11 +5280,11 @@
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usar sqltiedb raster para sombras de relevo / declives</string>
     <string name="release_4_5">- Sensores BLE/ANT+: ligação reformulada, escrita e visualização dos dados recebidos no GPX
 \n
-\n - Cópia de segurança gratuita dos favoritos e das definições para \"OsmAnd Cloud\"
+\n - Cópia de segurança gratuita dos favoritos e das configurações para \"OsmAnd Cloud\"
 \n
 \n - Novo formato para mapas de terreno com suporte de relevo 3D
 \n
-\n - Gestão de faixas: interface de utilizador atualizada, ordenação adicionada, suporte de pastas aninhadas
+\n - Gestão de trilhos: interface de utilizador atualizada, ordenação adicionada, suporte de pastas aninhadas
 \n
 \n - Android Auto: novo menu inicial para aceder aos favoritos, trajetos e categorias de POI
 \n
@@ -5302,13 +5302,13 @@
 \n
 \n - Ecrã inicial: opção adicionada para restaurar o estado do OsmAnd a partir de um ficheiro
 \n
-\n - Adicionadas classes \"Materiais perigosos\" Navegação de camiões na América do Norte
+\n - Adicionadas classes \"Materiais perigosos\" na navegação de camiões na América do Norte
 \n
-\n - Adicionado o suporte da \"Via ferrata\" para o encaminhamento de peões
+\n - Adicionado o suporte da \"Via ferrata\" para rotas pedestres
 \n
 \n - Adicionada a escala \"CAI\" para classificação da dificuldade dos percursos
 \n
-\n - Correção da seleção do idioma por app
+\n - Correção da seleção do idioma por aplicação
 \n
 \n - Adicionado suporte para ícones temáticos
 \n
