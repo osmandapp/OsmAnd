@@ -260,7 +260,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
 				if (warn != null) {
 					warnings.add(warn.getMessage());
-					return new SaveGpxResult(warnings, new HashMap<String, GPXFile>());
+					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
 				GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());

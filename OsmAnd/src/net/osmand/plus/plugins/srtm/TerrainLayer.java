@@ -94,7 +94,7 @@ public class TerrainLayer extends MapTileLayer {
 			return true;
 		}
 
-		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		OsmandDevelopmentPlugin developmentPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		boolean terrainFromHeightmap = developmentPlugin != null && developmentPlugin.generateTerrainFrom3DMaps();
 
 		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();

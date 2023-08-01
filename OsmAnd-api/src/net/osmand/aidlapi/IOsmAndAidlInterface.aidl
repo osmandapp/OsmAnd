@@ -455,7 +455,7 @@ interface IOsmAndAidlInterface {
      * @param gpxUri (Uri) - URI created by FileProvider.
      * @param force (boolean) - ask to stop current navigation if any. False - ask. True - don't ask.
      */
-    boolean navigateGpx(in NavigateGpxParams params);
+    boolean navigateGpx(inout NavigateGpxParams params);
 
     /**
      * Remove GPX file.

@@ -25,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 
 public class GpxApproximator {
 
+	public static final int DEFAULT_POINT_APPROXIMATION = 50;
+
 	protected static final Log log = PlatformUtil.getLog(GpxApproximator.class);
 
 	private final OsmandApplication ctx;
@@ -37,7 +39,7 @@ public class GpxApproximator {
 	private List<GpxPoint> points;
 	private LatLon start;
 	private LatLon end;
-	private float pointApproximation = 50;
+	private float pointApproximation = DEFAULT_POINT_APPROXIMATION;
 	private GpxApproximationListener listener;
 	private Runnable approximationTask;
 
