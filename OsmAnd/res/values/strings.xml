@@ -642,7 +642,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (No restrictions)</string>
     <string name="routing_attr_avoid_fords_name">Avoid fords</string>
     <string name="routing_attr_avoid_fords_description">Avoid fords</string>
-    <string name="colour_of_circles">Colour of circles</string>
+    <string name="colour_of_circles">Color of circles</string>
     <string name="compass_on_circles">Compass on circles</string>
     <string name="distance_circles">Distance-circles</string>
     <string name="circle_settings">Circle settings</string>
