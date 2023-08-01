@@ -391,7 +391,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (isEnabled()) {
 			adapter.addItem(new ContextMenuItem(TERRAIN_CATEGORY_ID)
 					.setCategory(true)
-					.setTitle(app.getString(R.string.shared_string_terrain))
+					.setTitle(app.getString(R.string.srtm_plugin_name))
 					.setLayout(R.layout.list_group_title_with_switch));
 
 			if (isLocked()) {
@@ -423,7 +423,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		} else {
 			PurchasingUtils.createPromoItem(adapter, activity, OsmAndFeature.TERRAIN,
 					TERRAIN_ID,
-					R.string.shared_string_terrain,
+					R.string.srtm_plugin_name,
 					R.string.contour_lines_hillshade_slope);
 		}
 	}
@@ -435,7 +435,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			public boolean onRowItemClick(@NonNull @NotNull OnDataChangeUiAdapter uiAdapter, @NonNull @NotNull View view, @NonNull @NotNull ContextMenuItem item) {
 				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				int itemId = item.getTitleId();
-				if (itemId == R.string.srtm_plugin_name) {
+				if (itemId == R.string.download_srtm_maps) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES, viewCoordinates);
 					return false;
 				} else if (itemId == R.string.shared_string_terrain) {
@@ -448,7 +448,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			@Override
 			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
 				int itemId = item.getTitleId();
-				if (itemId == R.string.srtm_plugin_name) {
+				if (itemId == R.string.download_srtm_maps) {
 					toggleContourLines(mapActivity, isChecked, () -> {
 						RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 						if (contourLinesProp != null) {
@@ -490,7 +490,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			boolean contourLinesSelected = isContourLinesLayerEnabled(app);
 			String descr = getPrefDescription(app, contourLinesProp, pref);
 			adapter.addItem(new ContextMenuItem(CONTOUR_LINES)
-					.setTitleId(R.string.srtm_plugin_name, mapActivity)
+					.setTitleId(R.string.download_srtm_maps, mapActivity)
 					.setSelected(contourLinesSelected)
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
