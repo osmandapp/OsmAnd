@@ -14,7 +14,7 @@ import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
+import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.TileIdList;
@@ -33,7 +33,7 @@ public class NativeUtilities {
 
 	public static final int MIN_ALTITUDE_VALUE = -20_000;
 
-	public static SWIGTYPE_p_sk_spT_SkImage_const_t createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
+	public static SingleSkImage createSkImageFromBitmap(@NonNull Bitmap inputBmp) {
 		return SwigUtilities.createSkImageARGB888With(
 				inputBmp.getWidth(), inputBmp.getHeight(), AndroidUtils.getByteArrayFromBitmap(inputBmp));
 	}
