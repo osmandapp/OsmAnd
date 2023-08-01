@@ -118,10 +118,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStart(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
 		MapLayers mapLayers = getApp().getOsmandMap().getMapLayers();
-		mapLayers.getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
-		mapLayers.getGpxLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
-		mapLayers.getPoiMapLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
-		mapLayers.getMapMarkersLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 		OsmandSettings settings = getApp().getSettings();
 		defaultAppMode = settings.getApplicationMode();
 		if (!isAppModeDerivedFromCar(defaultAppMode)) {
@@ -145,11 +141,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().removeListener(this);
-		MapLayers mapLayers = getApp().getOsmandMap().getMapLayers();
-		mapLayers.getFavouritesLayer().customObjectsDelegate = null;
-		mapLayers.getGpxLayer().customObjectsDelegate = null;
-		mapLayers.getPoiMapLayer().customObjectsDelegate = null;
-		mapLayers.getMapMarkersLayer().customObjectsDelegate = null;
 		if (defaultAppMode != null) {
 			getApp().getSettings().setApplicationMode(defaultAppMode);
 			defaultAppMode = null;
