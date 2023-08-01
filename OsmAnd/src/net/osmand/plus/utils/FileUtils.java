@@ -144,7 +144,7 @@ public class FileUtils {
 		if (file.exists()) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
-			Algorithms.removeAllFiles(file);
+			file.delete();
 			app.getGpxDbHelper().remove(file);
 			if (selected != null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance()
