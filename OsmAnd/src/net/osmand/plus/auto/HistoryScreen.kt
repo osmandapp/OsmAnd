@@ -10,13 +10,14 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.LatLon
-import net.osmand.gpx.GPXUtilities
 import net.osmand.plus.R
 import net.osmand.plus.helpers.SearchHistoryHelper
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI
 import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.track.data.GPXInfo
+import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem
+import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
@@ -27,6 +28,7 @@ class HistoryScreen(
     private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
 	private lateinit var updateItemsTask: HistoryScreen.UpdateHistoryItemsTask
 	private lateinit var searchItems: ArrayList<QuickSearchListItem>
+	val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 
 	init {
 		lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -79,21 +81,35 @@ class HistoryScreen(
 		val resultsSize = results.size
 		searchItems = ArrayList()
 		var limitedResults = results.subList(0, resultsSize.coerceAtMost(contentLimit - 1))
-			for (result in limitedResults){
-				val searchResult =
-					SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
-				val listItem = QuickSearchListItem(app, searchResult)
-				if (listItem.searchResult.objectType == ObjectType.GPX_TRACK && listItem.searchResult.location == null) {
-					var gpxInfo = listItem.searchResult.relatedObject as GPXInfo
-					var gpxFile = gpxInfo.gpxFile
-					if(gpxFile == null && gpxInfo.file != null) {
-						gpxFile = GPXUtilities.loadGPXFile(gpxInfo.file)
+		for (result in limitedResults) {
+			val searchResult =
+				SearchHistoryAPI.createSearchResult(app, result, SearchPhrase.emptyPhrase())
+			val listItem = QuickSearchListItem(app, searchResult)
+			if (listItem.searchResult.objectType == ObjectType.GPX_TRACK && listItem.searchResult.location == null) {
+				var gpxInfo = listItem.searchResult.relatedObject as GPXInfo
+				var gpxFile = gpxInfo.gpxFile
+				if (gpxFile == null) {
+					gpxInfo.file?.let { file ->
+						val item = gpxDbHelper.getItem(file) {
+							updateSearchResult(
+								listItem.searchResult,
+								it)
+						}
+						if (item != null) {
+							updateSearchResult(listItem.searchResult, item)
+						}
 					}
-					var analysis = gpxFile?.getAnalysis(0)
+				} else {
+					val analysis = gpxFile.getAnalysis(0)
 					listItem.searchResult.location = analysis?.latLonStart
 				}
-				searchItems.add(listItem)
 			}
+			searchItems.add(listItem)
+		}
+	}
+
+	private fun updateSearchResult(searchResult: SearchResult, dataItem: GpxDataItem) {
+		searchResult.location = dataItem.analysis?.latLonStart
 	}
 
 	private fun prepareList(templateBuilder: ListTemplate.Builder) {
