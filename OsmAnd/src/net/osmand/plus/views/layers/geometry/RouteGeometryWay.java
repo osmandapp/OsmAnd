@@ -215,6 +215,7 @@ public class RouteGeometryWay extends
 					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
+					vectorLine.setLineWidth(customWidth);
 					lineIdx++;
 				} else {
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
