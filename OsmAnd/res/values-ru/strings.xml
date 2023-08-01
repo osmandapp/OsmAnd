@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">На карте</string>
+    <string name="shared_string_visible">На экране</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -1070,7 +1070,7 @@
     <string name="map_widget_config">Настройки экрана</string>
     <string name="map_widget_back_to_loc">Где я</string>
     <string name="map_widget_lock_screen">Заблокировать</string>
-    <string name="map_widget_compass">Компас</string>
+    <string name="map_widget_compass">Компас / режим ориентации</string>
     <string name="map_widget_reset">Сбросить настройки</string>
     <string name="map_widget_parking">Парковка</string>
     <string name="map_widget_time">Время до прибытия</string>
@@ -3506,7 +3506,7 @@
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы: 
 \n%1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
-    <string name="shared_string_hidden">Скрыт</string>
+    <string name="shared_string_hidden">Скрыто</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
     <string name="main_actions_descr">Только четыре кнопки.</string>
@@ -4544,7 +4544,7 @@
     <string name="rendering_attr_showMonorailRoutes_name">Монорельсовые маршруты</string>
     <string name="top_widgets_panel">Верхняя панель</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Маршрутные такси</string>
-    <string name="configure_screen_widgets_descr">Выберите сторону экрана, чтобы добавить виджеты или изменить их порядок.</string>
+    <string name="configure_screen_widgets_descr">Выберите сторону экрана для настройки</string>
     <string name="osm_carto_render_descr">Стиль похож на OpenStreetMap-carto, используемый на главной странице сайта OSM.</string>
     <string name="simulation_real_mode_title">Реалистичное моделирование</string>
     <string name="simulation_constant_mode_desc">Моделирование с заданной скоростью.</string>
@@ -4751,11 +4751,11 @@
     <string name="av_notes_video_widget_desc">Нажатие на виджет позволяет начать видеозапись.</string>
     <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
     <string name="compass_visible_if_map_rotated_desc">Скрыт, когда север сверху</string>
-    <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
-    <string name="compass_always_hidden">Всегда скрыт</string>
-    <string name="compass_always_visible">Всегда виден</string>
-    <string name="compass_click_desc">Нажмите на компас для смены режима ориентации.</string>
-    <string name="compass_desc">Показывает направление на север.</string>
+    <string name="compass_visible_if_map_rotated">На экране, если карта повернута</string>
+    <string name="compass_always_hidden">Всегда скрыто</string>
+    <string name="compass_always_visible">Всегда на экране</string>
+    <string name="compass_click_desc">Нажатие на компас переключает режим ориентации.</string>
+    <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
     <string name="rendering_attr_depthContourWidth_description">Толщина контурных линий глубины (изобат)</string>
     <string name="trip_recording_distance_widget_desc">Показывает расстояние текущего записываемого маршрута.</string>
@@ -5184,12 +5184,12 @@
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
     <string name="no_poi_for_category">POI не найдена</string>
-    <string name="map_3d_mode_action">Режим 3D</string>
+    <string name="map_3d_mode_action">3D-режим</string>
     <string name="map_2d_mode_action">Режим 2D</string>
     <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
     <string name="shared_string_finger">Палец</string>
     <string name="external_device_characteristic_cuff_pressure">Давление в манжете</string>
-    <string name="visible_in_3d_mode">Видно при включении 3D</string>
+    <string name="visible_in_3d_mode">На экране, когда 3D включён</string>
     <string name="poi_categories">Категории POI</string>
     <string name="shared_string_ear_lobe">Мочка уха</string>
     <string name="map_3d_mode_hint">Удерживайте кнопку для изменения положения.</string>
@@ -5337,4 +5337,8 @@
     <string name="slope_legend_description">Уклон использует цвета для визуализации крутизны рельефа. Подробнее об уклоне можно прочитать на сайте %1$s.</string>
     <string name="routing_attr_allow_via_ferrata_name">Горный маршрут (Виа феррата)</string>
     <string name="feature_available_as_part_of_plan">%1$s доступно в рамках плана %2$s</string>
+    <string name="write_bearing_description">Сохранять азимут для каждой точки трека при записи.</string>
+    <string name="write_bearing">Записывать азимут</string>
+    <string name="write_heading_description">Сохранять значение курса для каждой точки трека при записи.</string>
+    <string name="write_heading">Записывать курс</string>
 </resources>
