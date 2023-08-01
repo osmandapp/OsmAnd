@@ -20,6 +20,7 @@ import net.osmand.plus.track.data.GPXInfo
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.plus.track.helpers.SelectedGpxFile
+import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
@@ -46,6 +47,7 @@ class TracksScreen(
 			override fun onDestroy(owner: LifecycleOwner) {
 				super.onDestroy(owner)
 				app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
+				app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = null
 				app.osmandMap.mapView.backToLocation()
 				initialCompassMode?.let {
 					app.mapViewTrackingUtilities.switchCompassModeTo(it)
@@ -54,6 +56,7 @@ class TracksScreen(
 
 	        override fun onStart(owner: LifecycleOwner) {
 		        recenterMap()
+		        app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = CustomMapObjects()
 	        }
         })
 	}

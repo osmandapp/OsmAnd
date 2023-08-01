@@ -23,6 +23,7 @@ import net.osmand.data.QuadRect
 import net.osmand.plus.R
 import net.osmand.plus.mapmarkers.MapMarker
 import net.osmand.plus.settings.enums.CompassMode
+import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
@@ -38,6 +39,7 @@ class MapMarkersScreen(
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
                 app.osmandMap.mapLayers.mapMarkersLayer.setCustomMapObjects(null)
+                app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = null
                 app.osmandMap.mapView.backToLocation()
                 initialCompassMode?.let {
                     app.mapViewTrackingUtilities.switchCompassModeTo(it)
@@ -45,6 +47,7 @@ class MapMarkersScreen(
             }
             override fun onStart(owner: LifecycleOwner) {
                 recenterMap()
+                app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = CustomMapObjects()
             }
         })
     }
