@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.routing.GpxApproximator.DEFAULT_POINT_APPROXIMATION;
+
 public class GpxNavigationParams {
 
 	private boolean force;
@@ -7,7 +9,7 @@ public class GpxNavigationParams {
 	private boolean passWholeRoute;
 	private boolean snapToRoad;
 	private String snapToRoadMode;
-	private int snapToRoadThreshold = 50;
+	private int snapToRoadThreshold = DEFAULT_POINT_APPROXIMATION;
 	private boolean importedByApi;
 
 	public boolean isForce() {

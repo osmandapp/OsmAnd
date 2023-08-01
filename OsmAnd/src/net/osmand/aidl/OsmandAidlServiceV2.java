@@ -599,9 +599,9 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		@Override
 		public boolean removeGpx(RemoveGpxParams params) {
 			try {
-				if (params != null && params.getRelativePath() != null) {
+				if (params != null && (params.getFileName() != null || params.getRelativePath() != null)) {
 					OsmandAidlApi api = getApi("removeGpx");
-					return api != null && api.removeGpx(params.getRelativePath());
+					return api != null && api.removeGpx(params.getFileName(), params.getRelativePath());
 				}
 				return false;
 			} catch (Exception e) {

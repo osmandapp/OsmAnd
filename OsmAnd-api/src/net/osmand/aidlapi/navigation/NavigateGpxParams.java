@@ -8,16 +8,15 @@ import net.osmand.aidlapi.AidlParams;
 
 public class NavigateGpxParams extends AidlParams {
 
-	private String data;
 	private Uri uri;
+	private String data;
+	private String fileName;
 	private boolean force;
 	private boolean needLocationPermission;
 	private boolean passWholeRoute;
 	private boolean snapToRoad;
 	private String snapToRoadMode;
 	private int snapToRoadThreshold;
-
-	private String fileName;
 
 	public NavigateGpxParams(String data, boolean force, boolean needLocationPermission) {
 		this.data = data;
@@ -47,12 +46,20 @@ public class NavigateGpxParams extends AidlParams {
 		}
 	};
 
+	public Uri getUri() {
+		return uri;
+	}
+
 	public String getData() {
 		return data;
 	}
 
-	public Uri getUri() {
-		return uri;
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public boolean isForce() {
@@ -95,14 +102,6 @@ public class NavigateGpxParams extends AidlParams {
 		return needLocationPermission;
 	}
 
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("data", data);
@@ -126,6 +125,6 @@ public class NavigateGpxParams extends AidlParams {
 		snapToRoad = bundle.getBoolean("snapToRoad");
 		snapToRoadMode = bundle.getString("snapToRoadMode");
 		snapToRoadThreshold = bundle.getInt("snapToRoadThreshold");
-		fileName = bundle.getString("fileName", null);
+		fileName = bundle.getString("fileName");
 	}
 }

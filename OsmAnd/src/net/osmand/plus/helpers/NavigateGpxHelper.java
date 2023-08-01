@@ -1,5 +1,8 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -9,7 +12,6 @@ import android.os.ParcelFileDescriptor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -26,7 +28,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
@@ -52,8 +53,8 @@ public class NavigateGpxHelper {
 
 	public NavigateGpxHelper(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile,
 	                         @NonNull GpxNavigationParams navigationParams) {
-		this.mapActivityRef = new WeakReference<>(mapActivity);
 		this.app = mapActivity.getMyApplication();
+		this.mapActivityRef = new WeakReference<>(mapActivity);
 		this.gpxFile = gpxFile;
 		this.navigationParams = navigationParams;
 	}
@@ -68,19 +69,10 @@ public class NavigateGpxHelper {
 	}
 
 	public void step2_markImportedIfNeeded() {
-		if (navigationParams.isImportedByApi()) {
-			GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-			GpxDataItem item = gpxDbHelper.getItem(gpxFile.path, gpxItem -> {
-				gpxItem.setImportedByApi(true);
-				step3_showGpxOnMap();
-			});
-			if (item != null) {
-				item.setImportedByApi(true);
-				step3_showGpxOnMap();
-			}
-		} else {
-			step3_showGpxOnMap();
-		}
+		GpxDataItem item = new GpxDataItem(new File(gpxFile.path), gpxFile);
+		item.setImportedByApi(navigationParams.isImportedByApi());
+		app.getGpxDbHelper().add(item);
+		step3_showGpxOnMap();
 	}
 
 	public void step3_showGpxOnMap() {
@@ -114,7 +106,6 @@ public class NavigateGpxHelper {
 	public void step5_startNavigation(@NonNull GPXFile gpxFile) {
 		MapActivity mapActivity = mapActivityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-			OsmandApplication app = mapActivity.getMyApplication();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 
 			boolean passWholeRoute = navigationParams.isPassWholeRoute();
@@ -133,38 +124,43 @@ public class NavigateGpxHelper {
 		}
 	}
 
-	public static boolean saveAndNavigateGpx(@NonNull MapActivity mapActivity,
-	                                         @Nullable String data, @Nullable Uri uri,
-	                                         boolean force, boolean requestLocationPermission) {
+	public static void saveAndNavigateGpx(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile, @NonNull GpxNavigationParams params) {
+		new NavigateGpxHelper(mapActivity, gpxFile, params).step1_saveGpx();
+	}
+
+	public static boolean saveAndNavigateGpx(@NonNull MapActivity mapActivity, @Nullable String data,
+	                                         @Nullable Uri uri, boolean force, boolean requestLocationPermission) {
 		GPXFile gpxFile = loadGpxFile(mapActivity, data, uri);
-		if (gpxFile != null) {
-			saveAndNavigateGpx(mapActivity, gpxFile, new GpxNavigationParams()
-					.setCheckLocationPermission(requestLocationPermission)
+		if (gpxFile != null && gpxFile.error == null) {
+			GpxNavigationParams params = new GpxNavigationParams()
+					.setForce(force)
 					.setImportedByApi(true)
-					.setForce(force));
+					.setCheckLocationPermission(requestLocationPermission);
+			saveAndNavigateGpx(mapActivity, gpxFile, params);
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean saveAndNavigateGpx(@NonNull MapActivity mapActivity,
-	                                         @NonNull NavigateGpxParams params) {
+	public static boolean saveAndNavigateGpx(@NonNull MapActivity mapActivity, @NonNull NavigateGpxParams params) {
 		GPXFile gpxFile = loadGpxFile(mapActivity, params.getData(), params.getUri());
-		if (gpxFile != null) {
+		if (gpxFile != null && gpxFile.error == null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			String updatedFileName = updateFileNameIfNeeded(app, gpxFile, params.getFileName());
+
+			String fileName = params.getFileName();
+			String updatedFileName = updateFileNameIfNeeded(app, gpxFile, fileName);
 			if (!Algorithms.isEmpty(updatedFileName)) {
 				params.setFileName(updatedFileName);
 			}
 
 			GpxNavigationParams navigationParams = new GpxNavigationParams()
-					.setCheckLocationPermission(params.isNeedLocationPermission())
-					.setPassWholeRoute(params.isPassWholeRoute())
+					.setImportedByApi(true)
 					.setForce(params.isForce())
+					.setPassWholeRoute(params.isPassWholeRoute())
+					.setCheckLocationPermission(params.isNeedLocationPermission())
 					.setSnapToRoad(params.isSnapToRoad())
 					.setSnapToRoadMode(params.getSnapToRoadMode())
-					.setSnapToRoadThreshold(params.getSnapToRoadThreshold())
-					.setImportedByApi(true);
+					.setSnapToRoadThreshold(params.getSnapToRoadThreshold());
 
 			saveAndNavigateGpx(mapActivity, gpxFile, navigationParams);
 			return true;
@@ -172,20 +168,15 @@ public class NavigateGpxHelper {
 		return false;
 	}
 
-	public static void saveAndNavigateGpx(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile,
-	                                      @NonNull GpxNavigationParams params) {
-		new NavigateGpxHelper(mapActivity, gpxFile, params).step1_saveGpx();
-	}
-
 	public static void startNavigation(@NonNull MapActivity mapActivity, @NonNull GPXFile gpx,
 	                                   boolean checkLocationPermission, boolean passWholeRoute) {
 		startNavigation(mapActivity, gpx, null, null, null, null, null, checkLocationPermission, passWholeRoute);
 	}
 
-	public static void startNavigation(@NonNull MapActivity mapActivity,
+	public static void startNavigation(@NonNull MapActivity mapActivity, @NonNull ApplicationMode mode,
 	                                   @Nullable LatLon from, @Nullable PointDescription fromDesc,
 	                                   @Nullable LatLon to, @Nullable PointDescription toDesc,
-	                                   @NonNull ApplicationMode mode, boolean checkLocationPermission) {
+	                                   boolean checkLocationPermission) {
 		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode, checkLocationPermission, false);
 	}
 
@@ -204,8 +195,8 @@ public class NavigateGpxHelper {
 			targets.removeAllWayPoints(false, true);
 			targets.navigateToPoint(to, true, -1, toDesc);
 		}
-		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(
-				gpx, from, fromDesc, true, false, passWholeRoute);
+		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, from, fromDesc,
+				true, false, passWholeRoute);
 		if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 			mapActivity.getMapRouteInfoMenu().show();
 		} else {
@@ -225,26 +216,24 @@ public class NavigateGpxHelper {
 		}
 	}
 
-	private static String updateFileNameIfNeeded(@NonNull OsmandApplication app,
-	                                             @NonNull GPXFile gpxFile,
-	                                             @Nullable String preferredFileName) {
+	private static String updateFileNameIfNeeded(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @Nullable String preferredFileName) {
 		if (Algorithms.isEmpty(gpxFile.path)) {
 			String fileName = !Algorithms.isEmpty(preferredFileName) ? preferredFileName : DEFAULT_FILE_NAME;
-			String fileNameWithExt = fileName + IndexConstants.GPX_FILE_EXT;
+			String fileNameWithExt = fileName + GPX_FILE_EXT;
 
-			File destDir = app.getAppPath(IndexConstants.GPX_IMPORT_DIR);
-			File destFile = app.getAppPath(IndexConstants.GPX_IMPORT_DIR + fileNameWithExt);
+			File destDir = app.getAppPath(GPX_IMPORT_DIR);
+			File destFile = app.getAppPath(GPX_IMPORT_DIR + fileNameWithExt);
 			while (destFile.exists()) {
 				fileNameWithExt = AndroidUtils.createNewFileName(fileNameWithExt);
 				destFile = new File(destDir, fileNameWithExt);
 			}
 			gpxFile.path = destFile.getAbsolutePath();
-			return fileName;
+			return destFile.getName();
 		}
 		return null;
 	}
 
-	private static GPXFile loadGpxFile(@NonNull Context context, String data, Uri uri) {
+	private static GPXFile loadGpxFile(@NonNull Context context, @Nullable String data, @Nullable Uri uri) {
 		GPXFile gpx = null;
 		if (!Algorithms.isEmpty(data)) {
 			gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(data.getBytes()));
@@ -265,5 +254,4 @@ public class NavigateGpxHelper {
 		}
 		return gpx;
 	}
-
 }

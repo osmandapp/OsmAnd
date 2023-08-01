@@ -124,6 +124,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return res;
 	}
 
+	public boolean updateImportedByApi(@NonNull GpxDataItem item, boolean importedByApi) {
+		boolean res = database.updateImportedByApi(item, importedByApi);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean updateShowArrows(@NonNull GpxDataItem item, boolean showArrows) {
 		boolean res = database.updateShowArrows(item, showArrows);
 		putToCache(item);
@@ -211,11 +217,6 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file) {
 		return getItem(file, null);
-	}
-
-	@Nullable
-	public GpxDataItem getItem(@NonNull String filePath, @Nullable GpxDataItemCallback callback) {
-		return getItem(new File(filePath), callback);
 	}
 
 	@Nullable

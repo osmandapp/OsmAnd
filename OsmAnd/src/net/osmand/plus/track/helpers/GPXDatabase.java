@@ -765,6 +765,25 @@ public class GPXDatabase {
 		return false;
 	}
 
+	public boolean updateImportedByApi(@NonNull GpxDataItem item, boolean importedByApi) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_API_IMPORTED + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {importedByApi ? 1 : 0, fileName, fileDir});
+				item.setImportedByApi(importedByApi);
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean updateJoinSegments(@NonNull GpxDataItem item, boolean joinSegments) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {

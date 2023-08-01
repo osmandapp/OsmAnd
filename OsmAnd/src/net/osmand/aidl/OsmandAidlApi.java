@@ -16,7 +16,6 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.helpers.NavigateGpxHelper.saveAndNavigateGpx;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
@@ -80,7 +79,6 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
-import net.osmand.plus.helpers.GpxNavigationParams;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.NavigateGpxHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -665,11 +663,11 @@ public class OsmandAidlApi {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
 							MapActivity activity = mapActivityRef.get();
 							if (activity != null && !routingHelper.isFollowingMode()) {
-								NavigateGpxHelper.startNavigation(activity, start, startDesc, dest, destDesc, profile, locationPermission);
+								NavigateGpxHelper.startNavigation(activity, profile, start, startDesc, dest, destDesc, locationPermission);
 							}
 						});
 					} else {
-						NavigateGpxHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
+						NavigateGpxHelper.startNavigation(mapActivity, profile, start, startDesc, dest, destDesc, locationPermission);
 					}
 				}
 			}
@@ -1255,9 +1253,9 @@ public class OsmandAidlApi {
 		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
-			GpxDataItem item = new GpxDataItem(destination, col);
-			item.setImportedByApi(true);
-			app.getGpxDbHelper().add(item);
+			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
+			gpxDataItem.setImportedByApi(true);
+			app.getGpxDbHelper().add(gpxDataItem);
 		} else {
 			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
@@ -1502,7 +1500,6 @@ public class OsmandAidlApi {
 			if (file.exists()) {
 				String fileName = file.getName();
 				String absolutePath = file.getAbsolutePath();
-				String relativePath = GpxUiHelper.getGpxFileRelativePath(app, absolutePath);
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
 				long modifiedTime = dataItem.getFileLastModifiedTime();
 				long fileSize = file.length();
@@ -1516,7 +1513,10 @@ public class OsmandAidlApi {
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
-				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, relativePath, modifiedTime, fileSize, active, colorName, details));
+				net.osmand.aidlapi.gpx.AGpxFile gpxFile = new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details);
+				gpxFile.setRelativePath(GpxUiHelper.getGpxFileRelativePath(app, absolutePath));
+
+				files.add(gpxFile);
 			}
 		}
 		return true;
@@ -1558,10 +1558,19 @@ public class OsmandAidlApi {
 		return null;
 	}
 
-	boolean removeGpx(String relativeFilePath) {
-		if (!Algorithms.isEmpty(relativeFilePath)) {
-			File file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + relativeFilePath);
-			return FileUtils.removeGpxFile(app, file);
+	boolean removeGpx(@Nullable String fileName, @Nullable String relativePath) {
+		File file = null;
+		if (!Algorithms.isEmpty(relativePath)) {
+			file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + relativePath);
+		} else if (!Algorithms.isEmpty(fileName)) {
+			file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+		}
+
+		if (file != null && file.exists()) {
+			GpxDataItem item = app.getGpxDbHelper().getItem(file);
+			if (item != null && item.isImportedByApi()) {
+				return FileUtils.removeGpxFile(app, file);
+			}
 		}
 		return false;
 	}
@@ -1798,17 +1807,11 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigateGpx(String data, Uri uri, boolean force, boolean requestLocationPermission) {
-		if (mapActivity != null) {
-			return saveAndNavigateGpx(mapActivity, data, uri, force, requestLocationPermission);
-		}
-		return false;
+		return mapActivity != null && NavigateGpxHelper.saveAndNavigateGpx(mapActivity, data, uri, force, requestLocationPermission);
 	}
 
-	boolean navigateGpxV2(NavigateGpxParams params) {
-		if (mapActivity != null) {
-			return saveAndNavigateGpx(mapActivity, params);
-		}
-		return false;
+	boolean navigateGpxV2(@NonNull NavigateGpxParams params) {
+		return mapActivity != null && NavigateGpxHelper.saveAndNavigateGpx(mapActivity, params);
 	}
 
 	boolean setLockState(boolean lock) {

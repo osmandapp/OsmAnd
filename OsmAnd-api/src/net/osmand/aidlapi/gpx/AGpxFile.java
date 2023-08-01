@@ -18,10 +18,8 @@ public class AGpxFile extends AidlParams {
 	private String color;
 	private AGpxFileDetails details;
 
-	public AGpxFile(@NonNull String fileName, @NonNull String relativePath, long modifiedTime,
-	                long fileSize, boolean active, String color, @Nullable AGpxFileDetails details) {
+	public AGpxFile(@NonNull String fileName, long modifiedTime, long fileSize, boolean active, String color, @Nullable AGpxFileDetails details) {
 		this.fileName = fileName;
-		this.relativePath = relativePath;
 		this.modifiedTime = modifiedTime;
 		this.fileSize = fileSize;
 		this.active = active;
@@ -51,6 +49,10 @@ public class AGpxFile extends AidlParams {
 
 	public String getRelativePath() {
 		return relativePath;
+	}
+
+	public void setRelativePath(String relativePath) {
+		this.relativePath = relativePath;
 	}
 
 	public long getModifiedTime() {

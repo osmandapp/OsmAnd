@@ -305,17 +305,13 @@ public class ExternalApiHelper {
 
 					RoutingHelper routingHelper = app.getRoutingHelper();
 					if (routingHelper.isFollowingMode() && !force) {
-						mapActivity.getMapActions().stopNavigationActionConfirm(new DialogInterface.OnDismissListener() {
-
-							@Override
-							public void onDismiss(DialogInterface dialog) {
-								if (!routingHelper.isFollowingMode()) {
-									startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
-								}
+						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
+							if (!routingHelper.isFollowingMode()) {
+								startNavigation(mapActivity, profile, start, startDesc, dest, destDesc, locationPermission);
 							}
 						});
 					} else {
-						startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
+						startNavigation(mapActivity, profile, start, startDesc, dest, destDesc, locationPermission);
 					}
 				}
 
@@ -753,7 +749,7 @@ public class ExternalApiHelper {
 										LatLon to = new LatLon(res.getLatitude(), res.getLongitude());
 										PointDescription toDesc = new PointDescription(
 												PointDescription.POINT_TYPE_TARGET, res.getLocalName() + ", " + res.getLocalTypeName());
-										startNavigation(mapActivity, from, fromDesc, to, toDesc, mode, checkLocationPermission);
+										startNavigation(mapActivity, mode, from, fromDesc, to, toDesc, checkLocationPermission);
 									} else {
 										mapActivity.getMyApplication().showToastMessage(mapActivity.getString(R.string.search_nothing_found));
 									}
