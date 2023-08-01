@@ -99,7 +99,7 @@ public class ContourLinesMenu {
 		CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
 		boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-		int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
+		int toggleActionStringId = R.string.download_srtm_maps;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 
@@ -157,8 +157,10 @@ public class ContourLinesMenu {
 			toggleIconId = R.drawable.ic_action_hide;
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
+		String summary = mapActivity.getString(selected ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
+				.setDescription(summary)
 				.setIcon(toggleIconId)
 				.setColor(app, toggleIconColorId)
 				.setListener(l)
