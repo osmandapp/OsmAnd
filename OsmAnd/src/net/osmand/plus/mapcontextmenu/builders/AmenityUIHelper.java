@@ -731,7 +731,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 
-		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
+		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 
 		if (isPhoneNumber || isUrl) {
 			textView.setTextColor(linkTextColor);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-	<solid android:color="@color/wikivoyage_card_divider_dark" />
+	<solid android:color="@color/divider_color_dark" />
 	<corners android:radius="@dimen/map_button_rect_rad" />
 </shape>

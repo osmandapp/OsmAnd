@@ -154,7 +154,7 @@ public class WptPtMenuController extends MenuController {
 		if (Algorithms.isEmpty(getSubtypeStr())) {
 			return null;
 		} else {
-			return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
+			return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.icon_color_secondary_dark);
 		}
 	}
 

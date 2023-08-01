@@ -121,7 +121,7 @@ public class AddWaypointBottomSheetDialogFragment extends MenuBottomSheetDialogF
 
 	@Override
 	protected int getDividerColorId() {
-		return nightMode ? R.color.route_info_bottom_view_bg_dark : -1;
+		return nightMode ? R.color.card_and_list_background_dark : -1;
 	}
 
 	@Override

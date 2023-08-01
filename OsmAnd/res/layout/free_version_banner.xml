@@ -6,7 +6,7 @@
     android:id="@+id/freeVersionBanner"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/osmo_header_dark"
+    android:background="@color/card_and_list_background_dark"
     android:orientation="vertical"
     android:theme="@style/FreeVersionBanner">
 

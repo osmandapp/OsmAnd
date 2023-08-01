@@ -66,7 +66,7 @@
     <style name="OsmandLightTheme" parent="Theme.MaterialComponents.Light">
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
-        <item name="bottom_bar_background_color">@color/bottom_bar_background_color_light</item>
+        <item name="bottom_bar_background_color">@color/card_and_list_background_light</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_main_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
@@ -176,7 +176,7 @@
 
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_light</item>
 
-        <item name="coordinate_input_edit_text_normal">@color/cdivider_color_light</item>
+        <item name="coordinate_input_edit_text_normal">@color/divider_color_light</item>
 
         <item name="subscription_active_bg_color">@color/subscription_active_bg_color_light</item>
         <item name="subscription_active_div_color">@color/subscription_active_div_color_light</item>
@@ -190,7 +190,7 @@
 
         <item name="wikivoyage_bg_color">@color/activity_background_color_light</item>
         <item name="wikivoyage_card_bg_color">@color/card_and_list_background_light</item>
-        <item name="wikivoyage_card_divider_color">@color/wikivoyage_card_divider_light</item>
+        <item name="wikivoyage_card_divider_color">@color/divider_color_light</item>
         <item name="wikivoyage_app_bar_color">@color/activity_background_color_light</item>
         <item name="wikivoyage_app_bar_text_color">@color/text_color_primary_light</item>
         <item name="wikivoyage_active_color">@color/active_color_primary_light</item>
@@ -220,7 +220,7 @@
 
         <item name="menu_bottom_sheet_icon_color">@color/on_map_icon_color</item>
         <item name="route_info_control_icon_color">@color/icon_color_default_light</item>
-        <item name="route_info_bg">@color/route_info_bg_light</item>
+        <item name="route_info_bg">@color/card_and_list_background_light</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_light</item>
         <item name="divider_color_basic">@color/divider_color_light</item>
@@ -408,7 +408,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.MaterialComponents">
-        <item name="bottom_bar_background_color">@color/bottom_bar_background_color_dark</item>
+        <item name="bottom_bar_background_color">@color/card_and_list_background_dark</item>
         <item name="android:textDirection">locale</item>
         <item name="android:statusBarColor">@color/status_bar_main_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
@@ -506,7 +506,7 @@
 
         <item name="keyboard_controls_divider">@color/keyboard_item_add_button_divider_dark</item>
 
-        <item name="coordinate_input_edit_text_normal">@color/cdivider_color_dark</item>
+        <item name="coordinate_input_edit_text_normal">@color/divider_color_dark</item>
 
         <item name="subscription_active_bg_color">@color/subscription_active_bg_color_dark</item>
         <item name="subscription_active_div_color">@color/subscription_active_div_color_dark</item>
@@ -522,7 +522,7 @@
 
         <item name="wikivoyage_bg_color">@color/activity_background_color_dark</item>
         <item name="wikivoyage_card_bg_color">@color/card_and_list_background_dark</item>
-        <item name="wikivoyage_card_divider_color">@color/wikivoyage_card_divider_dark</item>
+        <item name="wikivoyage_card_divider_color">@color/divider_color_dark</item>
         <item name="wikivoyage_app_bar_color">@color/activity_background_color_dark</item>
         <item name="wikivoyage_app_bar_text_color">@color/text_color_primary_dark</item>
         <item name="wikivoyage_active_color">@color/active_color_primary_dark</item>
@@ -552,7 +552,7 @@
 
         <item name="menu_bottom_sheet_icon_color">@color/text_color_primary_dark</item>
         <item name="route_info_control_icon_color">@color/icon_color_default_dark</item>
-        <item name="route_info_bg">@color/route_info_bg_dark</item>
+        <item name="route_info_bg">@color/card_and_list_background_dark</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_dark</item>
         <item name="divider_color_basic">@color/divider_color_dark</item>
@@ -614,7 +614,7 @@
         <item name="ripple_solid_6dp">@drawable/ripple_solid_dark_6dp</item>
         <item name="icon_color_active">@color/icon_color_active_dark</item>
         <item name="toolbar_active_color">@color/toolbar_active_color_dark</item>
-        <item name="status_bar_active_color">@color/status_bar_selection_color_darj</item>
+        <item name="status_bar_active_color">@color/status_bar_selection_color_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
