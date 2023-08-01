@@ -69,8 +69,8 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 			@Override
 			public void onDestroy(@NonNull LifecycleOwner owner) {
 				DefaultLifecycleObserver.super.onDestroy(owner);
-				getFavouritesLayer().customObjectsDelegate = null;
 				getFavouritesLayer().setCustomMapObjects(null);
+				getFavouritesLayer().customObjectsDelegate = null;
 				getApp().getOsmandMap().getMapView().backToLocation();
 				if (initialCompassMode != null) {
 					getApp().getMapViewTrackingUtilities().switchCompassModeTo(initialCompassMode);
