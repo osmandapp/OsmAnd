@@ -428,7 +428,7 @@
 	<dimen name="slider_thumb_size">6dp</dimen>
 	<dimen name="slider_thumb_halo_size">12dp</dimen>
 	<dimen name="slider_track_height">2dp</dimen>
-	<dimen name="mtrl_slider_track_side_padding">@dimen/slider_thumb_size</dimen>
+	<dimen name="mtrl_slider_track_side_padding">8dp</dimen>
 
 	<dimen name="list_item_move_header_min_height">65dp</dimen>
 

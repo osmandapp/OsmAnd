@@ -23,6 +23,7 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
+				android:lineSpacingExtra="2.5dp"
 				android:ellipsize="end"
 				android:text="@string/terrain_category_description"
 				android:textColor="?android:textColorSecondary"
@@ -31,7 +32,7 @@
 			<ImageView
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center_vertical"
+				android:layout_gravity="top"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:src="@drawable/ic_action_srtm_colored_day" />
@@ -39,44 +40,51 @@
 		</LinearLayout>
 
 		<LinearLayout
-			android:id="@+id/button_get"
+			android:id="@+id/button_get_clickable"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding"
-			android:layout_marginBottom="@dimen/content_padding"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:paddingVertical="@dimen/content_padding">
 
-			<FrameLayout
-				android:id="@+id/button_container"
+			<LinearLayout
+				android:id="@+id/button_get"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:duplicateParentState="true">
+				android:orientation="vertical">
 
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/button_text"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:layout_gravity="center_vertical|start"
-					android:drawablePadding="@dimen/content_padding_half"
-					android:duplicateParentState="true"
-					android:gravity="center_vertical|start"
-					android:paddingHorizontal="@dimen/content_padding_small"
-					android:paddingVertical="@dimen/content_padding_half"
-					android:text="@string/explore_plans"
-					android:textColor="?attr/active_color_basic"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+				<FrameLayout
+					android:id="@+id/button_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:duplicateParentState="true">
 
-				<androidx.appcompat.widget.AppCompatImageView
-					android:layout_width="@dimen/standard_icon_size"
-					android:layout_height="@dimen/standard_icon_size"
-					android:layout_gravity="center_vertical|end"
-					android:layout_marginHorizontal="@dimen/content_padding_small"
-					android:layout_marginVertical="@dimen/content_padding_half"
-					android:src="@drawable/ic_arrow_forward"
-					android:tint="?attr/active_color_basic" />
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/button_text"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_gravity="center_vertical|start"
+						android:drawablePadding="@dimen/content_padding_half"
+						android:duplicateParentState="true"
+						android:gravity="center_vertical|start"
+						android:paddingHorizontal="@dimen/content_padding_small"
+						android:paddingVertical="@dimen/content_padding_half"
+						android:text="@string/explore_plans"
+						android:textColor="?attr/active_color_basic"
+						android:textSize="@dimen/default_desc_text_size"
+						osmand:typeface="@string/font_roboto_medium" />
 
-			</FrameLayout>
+					<androidx.appcompat.widget.AppCompatImageView
+						android:layout_width="@dimen/standard_icon_size"
+						android:layout_height="@dimen/standard_icon_size"
+						android:layout_gravity="center_vertical|end"
+						android:layout_marginHorizontal="@dimen/content_padding_small"
+						android:layout_marginVertical="@dimen/content_padding_half"
+						android:src="@drawable/ic_arrow_forward"
+						android:tint="?attr/active_color_basic" />
+
+				</FrameLayout>
+
+			</LinearLayout>
 
 		</LinearLayout>
 
