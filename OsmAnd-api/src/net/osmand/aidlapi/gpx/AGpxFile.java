@@ -11,6 +11,7 @@ import net.osmand.aidlapi.AidlParams;
 public class AGpxFile extends AidlParams {
 
 	private String fileName;
+	private String relativePath;
 	private long modifiedTime;
 	private long fileSize;
 	private boolean active;
@@ -46,6 +47,14 @@ public class AGpxFile extends AidlParams {
 		return fileName;
 	}
 
+	public String getRelativePath() {
+		return relativePath;
+	}
+
+	public void setRelativePath(String relativePath) {
+		this.relativePath = relativePath;
+	}
+
 	public long getModifiedTime() {
 		return modifiedTime;
 	}
@@ -69,6 +78,7 @@ public class AGpxFile extends AidlParams {
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putString("fileName", fileName);
+		bundle.putString("relativePath", relativePath);
 		bundle.putLong("modifiedTime", modifiedTime);
 		bundle.putLong("fileSize", fileSize);
 		bundle.putBoolean("active", active);
@@ -80,6 +90,7 @@ public class AGpxFile extends AidlParams {
 	protected void readFromBundle(Bundle bundle) {
 		bundle.setClassLoader(AGpxFileDetails.class.getClassLoader());
 		fileName = bundle.getString("fileName");
+		relativePath = bundle.getString("relativePath");
 		modifiedTime = bundle.getLong("modifiedTime");
 		fileSize = bundle.getLong("fileSize");
 		active = bundle.getBoolean("active");

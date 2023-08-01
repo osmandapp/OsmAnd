@@ -249,7 +249,7 @@ public class GPXDatabase {
 		private double splitInterval;
 		private long fileLastModifiedTime;
 		private long fileLastUploadedTime;
-		private boolean apiImported;
+		private boolean importedByApi;
 		private boolean showAsMarkers;
 		private boolean joinSegments;
 		private boolean showArrows;
@@ -351,12 +351,12 @@ public class GPXDatabase {
 			return splitInterval;
 		}
 
-		public boolean isApiImported() {
-			return apiImported;
+		public boolean isImportedByApi() {
+			return importedByApi;
 		}
 
-		public void setApiImported(boolean apiImported) {
-			this.apiImported = apiImported;
+		public void setImportedByApi(boolean importedByApi) {
+			this.importedByApi = importedByApi;
 		}
 
 		public boolean isShowAsMarkers() {
@@ -765,6 +765,25 @@ public class GPXDatabase {
 		return false;
 	}
 
+	public boolean updateImportedByApi(@NonNull GpxDataItem item, boolean importedByApi) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_API_IMPORTED + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] {importedByApi ? 1 : 0, fileName, fileDir});
+				item.setImportedByApi(importedByApi);
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean updateJoinSegments(@NonNull GpxDataItem item, boolean joinSegments) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
@@ -953,7 +972,7 @@ public class GPXDatabase {
 		rowsMap.put(GPX_COL_FILE_LAST_UPLOADED_TIME, item.fileLastUploadedTime);
 		rowsMap.put(GPX_COL_SPLIT_TYPE, item.splitType);
 		rowsMap.put(GPX_COL_SPLIT_INTERVAL, item.splitInterval);
-		rowsMap.put(GPX_COL_API_IMPORTED, item.apiImported ? 1 : 0);
+		rowsMap.put(GPX_COL_API_IMPORTED, item.importedByApi ? 1 : 0);
 		rowsMap.put(GPX_COL_SHOW_AS_MARKERS, item.showAsMarkers ? 1 : 0);
 		rowsMap.put(GPX_COL_JOIN_SEGMENTS, item.joinSegments ? 1 : 0);
 		rowsMap.put(GPX_COL_SHOW_ARROWS, item.showArrows ? 1 : 0);
@@ -1126,7 +1145,7 @@ public class GPXDatabase {
 		item.fileLastUploadedTime = fileLastUploadedTime;
 		item.splitType = splitType;
 		item.splitInterval = splitInterval;
-		item.apiImported = apiImported;
+		item.importedByApi = apiImported;
 		item.showAsMarkers = showAsMarkers;
 		item.joinSegments = joinSegments;
 		item.showArrows = showArrows;

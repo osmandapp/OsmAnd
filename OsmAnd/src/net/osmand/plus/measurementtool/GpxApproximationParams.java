@@ -1,5 +1,7 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.routing.GpxApproximator.DEFAULT_POINT_APPROXIMATION;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,7 +15,7 @@ import java.util.List;
 public class GpxApproximationParams {
 
 	private ApplicationMode appMode = ApplicationMode.CAR;
-	private int distanceThreshold = 50;
+	private int distanceThreshold = DEFAULT_POINT_APPROXIMATION;
 	private List<LocationsHolder> locationsHolders;
 
 

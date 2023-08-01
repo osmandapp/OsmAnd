@@ -1,5 +1,14 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
+
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -98,15 +107,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
-import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
-import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
-import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
-import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
 public class OsmandAidlService extends Service implements AidlCallbackListener {
 
@@ -583,7 +583,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				if (params != null && params.getFileName() != null) {
 					OsmandAidlApi api = getApi("removeGpx");
-					return api != null && api.removeGpx(params.getFileName());
+					return api != null && api.removeGpx(params.getFileName(), null);
 				}
 				return false;
 			} catch (Exception e) {

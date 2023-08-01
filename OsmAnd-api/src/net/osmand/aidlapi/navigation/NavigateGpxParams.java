@@ -8,8 +8,9 @@ import net.osmand.aidlapi.AidlParams;
 
 public class NavigateGpxParams extends AidlParams {
 
-	private String data;
 	private Uri uri;
+	private String data;
+	private String fileName;
 	private boolean force;
 	private boolean needLocationPermission;
 	private boolean passWholeRoute;
@@ -45,12 +46,20 @@ public class NavigateGpxParams extends AidlParams {
 		}
 	};
 
+	public Uri getUri() {
+		return uri;
+	}
+
 	public String getData() {
 		return data;
 	}
 
-	public Uri getUri() {
-		return uri;
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public boolean isForce() {
@@ -103,6 +112,7 @@ public class NavigateGpxParams extends AidlParams {
 		bundle.putBoolean("snapToRoad", snapToRoad);
 		bundle.putString("snapToRoadMode", snapToRoadMode);
 		bundle.putInt("snapToRoadThreshold", snapToRoadThreshold);
+		bundle.putString("fileName", fileName);
 	}
 
 	@Override
@@ -115,5 +125,6 @@ public class NavigateGpxParams extends AidlParams {
 		snapToRoad = bundle.getBoolean("snapToRoad");
 		snapToRoadMode = bundle.getString("snapToRoadMode");
 		snapToRoadThreshold = bundle.getInt("snapToRoadThreshold");
+		fileName = bundle.getString("fileName");
 	}
 }
