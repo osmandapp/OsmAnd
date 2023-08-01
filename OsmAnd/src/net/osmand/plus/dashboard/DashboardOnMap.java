@@ -340,7 +340,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(MAPILLARY)) {
 			tv.setText(R.string.street_level_imagery);
 		} else if (isCurrentType(CONTOUR_LINES)) {
-			tv.setText(R.string.srtm_plugin_name);
+			tv.setText(R.string.download_srtm_maps);
 		} else if (isCurrentType(OSM_NOTES)) {
 			tv.setText(R.string.osm_notes);
 		} else if (isCurrentType(TERRAIN)) {
