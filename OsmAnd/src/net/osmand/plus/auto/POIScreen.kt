@@ -26,6 +26,7 @@ import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.render.RenderingIcons
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.utils.AndroidUtils
+import net.osmand.plus.views.layers.base.OsmandMapLayer
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchCoreFactory
 import net.osmand.search.core.SearchPhrase
@@ -48,10 +49,17 @@ class POIScreen(
             override fun onDestroy(owner: LifecycleOwner) {
                 super.onDestroy(owner)
                 app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
+                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
                 app.osmandMap.mapView.backToLocation()
                 initialCompassMode?.let {
                     app.mapViewTrackingUtilities.switchCompassModeTo(it)
                 }
+            }
+
+            override fun onStart(owner: LifecycleOwner) {
+                super.onStart(owner)
+                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate =
+                    OsmandMapLayer.CustomMapObjects()
             }
         })
     }
