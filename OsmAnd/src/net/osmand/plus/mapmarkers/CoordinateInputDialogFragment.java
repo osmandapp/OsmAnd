@@ -231,7 +231,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (window != null) {
 			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 			if (!lightTheme) {
-				window.setStatusBarColor(getResolvedColor(R.color.status_bar_coordinate_input_dark));
+				window.setStatusBarColor(getResolvedColor(R.color.status_bar_main_dark));
 			}
 		}
 		return dialog;

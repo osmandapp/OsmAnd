@@ -277,7 +277,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 
 	@ColorRes
 	protected int getStatusBarColor() {
-		return nightMode ? R.color.status_bar_wikivoyage_dark : R.color.status_bar_wikivoyage_light;
+		return nightMode ? R.color.status_bar_secondary_dark : R.color.status_bar_secondary_light;
 	}
 
 	@ColorInt

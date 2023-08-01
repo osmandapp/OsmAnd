@@ -332,7 +332,7 @@ public class ColorUtilities {
 
 	@ColorRes
 	public static int getStatusBarActiveColorId(boolean nightMode) {
-		return nightMode ? R.color.status_bar_active_color_dark : R.color.status_bar_active_color_light;
+		return nightMode ? R.color.status_bar_selection_color_darj : R.color.status_bar_selection_color_light;
 	}
 
 	@ColorInt

@@ -282,7 +282,7 @@
         <item name="ripple_solid_6dp">@drawable/ripple_solid_light_6dp</item>
         <item name="icon_color_active">@color/icon_color_active_light</item>
         <item name="toolbar_active_color">@color/toolbar_active_color_light</item>
-        <item name="status_bar_active_color">@color/status_bar_active_color_light</item>
+        <item name="status_bar_active_color">@color/status_bar_selection_color_light</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -614,7 +614,7 @@
         <item name="ripple_solid_6dp">@drawable/ripple_solid_dark_6dp</item>
         <item name="icon_color_active">@color/icon_color_active_dark</item>
         <item name="toolbar_active_color">@color/toolbar_active_color_dark</item>
-        <item name="status_bar_active_color">@color/status_bar_active_color_dark</item>
+        <item name="status_bar_active_color">@color/status_bar_selection_color_darj</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

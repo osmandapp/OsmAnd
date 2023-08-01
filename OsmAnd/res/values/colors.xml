@@ -35,8 +35,6 @@
 	<color name="app_bar_main_dark">#252727</color>
 	<color name="app_bar_secondary_light">#FFFFFF</color>
 	<color name="app_bar_secondary_dark">#252727</color>
-	<!-- <color name="app_bar_color_light">#ff8800</color> -->
-	<!-- <color name="app_bar_color_dark">#252727</color> -->
 
 	<color name="navigation_bar_bg_light">#000000</color>
 	<color name="navigation_bar_bg_dark">#000000</color>
@@ -45,21 +43,16 @@
 	<color name="status_bar_main_dark">#1E1F1F</color>
 	<color name="status_bar_secondary_light">#F0F0F0</color>
 	<color name="status_bar_secondary_dark">#1E1F1F</color>
-	<!-- <color name="status_bar_color_light">#e68200</color> -->
-	<!-- <color name="status_bar_color_dark">#232525</color> -->
+	<color name="status_bar_selection_color_light">#0F6FFF</color>
+	<color name="status_bar_selection_color_dark">#0B2F65</color>
 	<color name="status_bar_transparent_light">#66000000</color>
 	<color name="status_bar_transparent_dark">#99000000</color>
+
 	<color name="status_bar_transparent_gradient">#CC000000</color>
 	<color name="status_bar_mapillary">#11ab51</color>
 	<color name="status_bar_dim_light">#8a4e00</color>
 	<color name="status_bar_dim_dark">#13171a</color>
-	<color name="status_bar_coordinate_input_dark">#0d0f0f</color>
-	<color name="status_bar_wikivoyage_light">#dddddd</color>
-	<color name="status_bar_wikivoyage_dark">#101112</color>
-	<color name="status_bar_wikivoyage_article_light">#f2f2f2</color>
-	<color name="status_bar_wikivoyage_article_dark">#222526</color>
-	<color name="status_bar_active_color_light">#0F6FFF</color>
-	<color name="status_bar_active_color_dark">#0B2F65</color>
+
 	
 	<!-- Active -->
 	<color name="active_color_primary_light">#237bff</color>
@@ -384,7 +377,7 @@
 	<color name="color_osm_edit_modify">#fac403</color>
 	<color name="color_osm_edit_delete">#ee5622</color>
 
-	<color name="ctx_menu_subtitle_color">#727272</color>
+	<!-- <color name="ctx_menu_subtitle_color">#727272</color> -->
 	<color name="ctx_menu_direction_color_light">#536dfe</color>
 	<color name="ctx_menu_direction_color_dark">#e69122</color>
 	<color name="ctx_menu_controller_button_text_color_light_n">#536dfe</color>
@@ -499,6 +492,7 @@
 	<color name="profile_button_gray">#EFEFEF</color>
 	<color name="profile_button_gray_pressed">#ababab</color>
 
+	<!-- Profile colors -->
 	<color name="profile_icon_color_blue_light_default">#237BFF</color>
 	<color name="profile_icon_color_purple_light">#732EEB</color>
 	<color name="profile_icon_color_green_light">#0EBE92</color>
