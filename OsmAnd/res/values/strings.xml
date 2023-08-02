@@ -224,7 +224,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="generate_slope_from_3d_maps">Generate slope raster maps from 3D maps</string>
     <string name="disable_vertex_hillshade_3d">Disable vertex hillshade in 3D</string>
     <string name="enable_3d_maps">Enable 3D maps</string>
-    <string name="test_heightmap">Test heightmap</string>
     <string name="common_weight_limit_error">Minimum value is \"%1$s\" %2$s. Use the "\"%3$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="shared_string_pounds">pounds</string>
     <string name="metric_lbs">lbs</string>
