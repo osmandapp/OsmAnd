@@ -2457,7 +2457,7 @@
     <string name="import_gpx_file_description">возможен импорт в избранные точки или как трек файл.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
-    <string name="import_as_favorites">Импортировать в Мои места</string>
+    <string name="import_as_favorites">Импортировать в избранные</string>
     <string name="import_file">Импорт файла</string>
     <string name="wrong_input">Неправильный ввод</string>
     <string name="shared_string_view">Просмотр</string>
@@ -3979,7 +3979,7 @@
     <string name="activity_type_snowmobile_name">Снегоход</string>
     <string name="activity_type_mountainbike_name">Горный велосипед</string>
     <string name="routing_engine_vehicle_type_driving">Вождение</string>
-    <string name="routing_engine_vehicle_type_foot">Пешком</string>
+    <string name="routing_engine_vehicle_type_foot">Пешеход</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
