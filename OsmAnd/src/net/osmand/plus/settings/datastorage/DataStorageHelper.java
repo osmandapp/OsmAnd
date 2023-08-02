@@ -207,7 +207,7 @@ public class DataStorageHelper {
 //				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT, IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)
 				.setDirectories(
 						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(TILES_INDEX_DIR, false, PREFIX, false),
+						createDirectory(TILES_INDEX_DIR, false, PREFIX, false))
 //						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true))
 //						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
 				.setPrefixes("Hillshade", "Slope")
