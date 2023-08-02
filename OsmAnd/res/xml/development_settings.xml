@@ -14,7 +14,7 @@
 	<PreferenceCategory
 		android:key="heightmap"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/download_heightmap_maps" />
+		android:title="@string/shared_string_terrain" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_raster_sqlitedb"
