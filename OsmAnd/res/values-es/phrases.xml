@@ -4594,4 +4594,10 @@
     <string name="poi_surface_rubber">Superficie: caucho</string>
     <string name="poi_assembly_point">Punto de encuentro</string>
     <string name="poi_osmand_not_pt_shelter_yes">Todas excepto las marquesinas de transporte público</string>
+    <string name="poi_horse_designated">Destinado a caballos</string>
+    <string name="poi_foot_designated">Destinado a peatones</string>
+    <string name="poi_motor_vehicle_designated">Destinado a vehículos a motor</string>
+    <string name="poi_vehicle_designated">Destinado a vehículos</string>
+    <string name="poi_bicycle_designated">Destinado a bicicletas</string>
+    <string name="poi_motorcar_designated">Destinado a automóviles</string>
 </resources>

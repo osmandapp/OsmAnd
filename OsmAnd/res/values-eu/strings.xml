@@ -5343,4 +5343,31 @@
 \n
 \n</string>
     <string name="folder_export_empty_error">Ez dago ezer esportatzeko, karpeta hutsik dago</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Lehergaiak</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agente oxidatzaileak eta peroxido organikoak</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Solido sukoiak</string>
+    <string name="dangerous_goods">Salgai arriskutsuak</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substantzia korrosiboak</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Denetarik</string>
+    <string name="shared_string_class">Mota</string>
+    <string name="dangerous_goods_description">Errepide eta tunel batzuetan debekatuta dago material arriskutsuak garraiatzea.</string>
+    <string name="shared_string_checked">Egiaztatuta</string>
+    <string name="shared_string_not_checked">Egiaztatu gabe</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substantzia erradioaktiboak</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_description">Ibilbideen zailtasunen araberako sailkapenak.</string>
+    <string name="rendering_value_caiScale_description">Italiako Alpino Kluba</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasak</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Likido sukoiak</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="write_heading_description">Gorde goiburua arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
+    <string name="write_bearing_description">Gorde norabidea arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
+    <string name="write_bearing">Idatzi norabidea</string>
+    <string name="rendering_attr_alpineHiking_name">Zailtasunen sailkapena</string>
+    <string name="shared_string_included">Barne</string>
+    <string name="feature_available_as_part_of_plan">%1$s eskuragarri dago %2$s planaren barruan</string>
+    <string name="write_heading">Idatzi goiburua</string>
+    <string name="rendering_value_sacScale_description">Suitzako Alpino Kluba</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substantzia toxikoak eta infekziosoak</string>
 </resources>

@@ -25,7 +25,7 @@ public class ContourLinesAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(29,
 			"contourlines.showhide", ContourLinesAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
-			.nameRes(R.string.srtm_plugin_name).iconRes(R.drawable.ic_plugin_srtm).nonEditable()
+			.nameRes(R.string.download_srtm_maps).iconRes(R.drawable.ic_plugin_srtm).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
 
 	public ContourLinesAction() {

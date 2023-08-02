@@ -291,13 +291,14 @@ public class ViewCreator {
 
 	@NonNull
 	private View getTerrainDescriptionView(@NonNull View view, @NonNull ContextMenuItem item) {
-		View button = view.findViewById(R.id.button_get);
-		button.setOnClickListener(v -> {
+		View clickableButton = view.findViewById(R.id.button_get_clickable);
+		clickableButton.setOnClickListener(v -> {
 			ItemClickListener listener = item.getItemClickListener();
 			if (listener != null) {
 				listener.onContextMenuClick(uiAdapter, view, item, false);
 			}
 		});
+		View button = view.findViewById(R.id.button_get);
 		UiUtilities.setupDialogButton(nightMode, button, DialogButtonType.SECONDARY_ACTIVE, R.string.shared_string_get);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), PluginsHelper.isEnabled(NauticalMapsPlugin.class));
 		return view;

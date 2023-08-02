@@ -91,8 +91,8 @@
     <string name="verify_account_deletion_descr">We need to verify your account before delete it.\n\nPlease enter the e-mail address you registered with. A one-time password for the next step will be sent to it.</string>
     <string name="verify_account">Verify your account</string>
     <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slope in %1$s.</string>
-    <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
-    <string name="terrain_map">Terrain map</string>
+    <string name="terrain_category_description">Terrain contour lines, grayscale hillshade and color scale slope indication, to show peaks and lowlands.</string>
+    <string name="terrain_map">Terrain map (3D)</string>
     <string name="relief_3d">3D Relief</string>
     <string name="relief_3d_description">Own and observe the scale model of your neighborhood or the whole continent.</string>
     <string name="shared_string_close_the_dialog">Close the dialog</string>
@@ -642,7 +642,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (No restrictions)</string>
     <string name="routing_attr_avoid_fords_name">Avoid fords</string>
     <string name="routing_attr_avoid_fords_description">Avoid fords</string>
-    <string name="colour_of_circles">Colour of circles</string>
+    <string name="colour_of_circles">Color of circles</string>
     <string name="compass_on_circles">Compass on circles</string>
     <string name="distance_circles">Distance-circles</string>
     <string name="circle_settings">Circle settings</string>
@@ -1061,7 +1061,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="terrain_maps">Terrain maps</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <!-- string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: contour lines, hillshade, slope</string -->
+    <!-- string name="terrain_maps_contour_lines_hillshade_slope">Topography maps: contour lines, hillshade, slope</string -->
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
@@ -1071,7 +1071,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore Wikipedia articles on the go, without an internet connection. Offline data divided by countries and available in all languages.</string>
     <string name="purchases_feature_desc_wikipedia">Provides all place related Wikipedia articles offline, helping you to learn about the places you visit on your trip by simple taps on the map. Don\'t forget to download the Wikipedia map files for the respective regions.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore Wikivoyage offline. Articles divided by countries and regions and available in all languages.</string>
-    <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands.</string>
+    <string name="purchases_feature_desc_terrain">Terrain contour lines, grayscale hillshade and color scale slope indication, to show peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
     <string name="send_logcat_log">Send logcat log</string>
     <string name="send_crash_log">Send crash log</string>
@@ -1167,7 +1167,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="announce_when_exceeded">Announce when exceeded</string>
     <string name="exit_number">Exit number</string>
     <string name="srtm_download_single_help_message">Please select the variant. You will need to re-download the file to change the format.</string>
-    <string name="srtm_download_list_help_message">OsmAnd provides contour lines data in meters and feet. You will need to re-download the file to change the format.</string>
+    <string name="srtm_download_list_help_message">OsmAnd provides contour line data in meters and feet. You will need to re-download the file to change the format.</string>
     <string name="srtm_unit_format">Contour lines unit variant</string>
     <string name="shared_string_feet">feet</string>
     <string name="update_all_maps_added">Update all maps added to %1$s?</string>
@@ -1254,7 +1254,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="opr_use_dev_url">Use test.openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="open_place_reviews_plugin_description">Make contributions to the OpenPlaceReviews project, like photos, reviews, or links for public places such as restaurants, hotels, or museums. \n\nFind instructions on how to contribute on our website %1$s.</string>
-    <string name="hillshade_slope_contour_lines">Hillshade / Slope / Contour lines</string>
+    <string name="hillshade_slope_contour_lines">Contour lines / Hillshade / Slope</string>
     <string name="toast_select_edits_for_upload">Select edits for upload</string>
     <string name="uploaded_count">Uploaded %1$d of %2$d</string>
     <string name="segments_count">Segment %1$d</string>
@@ -1424,7 +1424,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="routing_attr_avoid_footways_description">Avoid footways</string>
     <string name="osm_live_payment_subscription_management_hw">Payment is charged from your AppGallery account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your AppGallery settings at any time.</string>
     <string name="osm_live_payment_desc_hw">The subscription is charged per the period selected. Cancel it in your AppGallery at any time.</string>
-    <string name="contour_lines_thanks">Thank you for purchasing \'Contour lines\'</string>
+    <string name="contour_lines_thanks">Thank you for purchasing \'Topography\'</string>
     <string name="start_finish_icons">Start and finish icons</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="sort_name_descending">Name: Z – A</string>
@@ -2398,10 +2398,10 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="off_road_render_descr">For off-road driving based on \'Topo\' style and for use with green satellite images as an underlay. Reduced main road thickness, increased thickness of tracks, paths, bicycle and other routes.</string>
     <string name="nautical_render_descr">For nautical navigation. Features buoys, lighthouses, riverways, sea lanes and marks, harbors, seamark services, and depth contours.</string>
     <string name="ski_map_render_descr">For skiing. Features pistes, ski-lifts, cross country tracks, etc. Dims secondary map objects.</string>
-    <string name="light_rs_render_descr">Simple driving style. Gentle night mode, contour lines, contrasting orange styled roads, dims secondary map objects.</string>
+    <string name="light_rs_render_descr">Simple driving style. Gentle night mode, contrasting orange styled roads, dims secondary map objects, topography features like contour lines.</string>
     <string name="topo_render_descr">For hiking, trekking, and nature cycling. Readable outdoors. Contrasting roads and natural objects, different route types, advanced contour line options, extra details. Adjusting "Surface integrity" distinguishes road quality. No night mode.</string>
     <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. Includes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
-    <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC/CAI scale, whitewater sports items.</string>
+    <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features routes, surface quality, access restrictions, road shields, paths rendering according to SAC/CAI scale, whitewater sports items, topography features like contour lines.</string>
     <string name="open_wikipedia_link_online">Open Wikipedia link online</string>
     <string name="open_wikipedia_link_online_description">The link will be opened in a web browser.</string>
     <string name="read_wikipedia_offline_description">Get OsmAnd Live subscription to read Wikipedia and Wikivoyage articles offline.</string>
@@ -2439,7 +2439,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
-    <string name="contour_lines_hillshade_maps">Contour lines &amp; hillshade maps</string>
+    <!-- string name="contour_lines_hillshade_maps">Contour lines &amp; hillshade maps</string -->
     <string name="unlock_all_features">Unlock all OsmAnd features</string>
     <string name="purchase_dialog_title">Choose plan</string>
     <string name="purchase_dialog_travel_description">Purchase one of the following to receive the offline travel guide functionality:</string>
@@ -2712,11 +2712,11 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search in Favorites</string>
     <string name="hillshade_menu_download_descr">Download the \'Hillshade\' overlay map to show vertical shading.</string>
-    <string name="hillshade_purchase_header">Install the \'Contour lines\' plugin to show graded vertical areas.</string>
+    <string name="hillshade_purchase_header">Install the \'Topography\' plugin to show graded vertical areas.</string>
     <string name="hide_from_zoom_level">Hide starting from zoom level</string>
-    <string name="srtm_menu_download_descr">Download the \'Contour line\' map for use in this region.</string>
+    <string name="srtm_menu_download_descr">Download the \'Contour lines\' map of this region.</string>
     <string name="shared_string_plugin">Plugin</string>
-    <string name="srtm_purchase_header">Buy and install the \'Contour lines\' plugin to show graded vertical areas.</string>
+    <string name="srtm_purchase_header">Buy and install the \'Topography\' plugin to show graded vertical areas.</string>
     <string name="srtm_color_scheme">Color scheme</string>
     <string name="show_from_zoom_level">Displaying starts at zoom level</string>
     <string name="routing_attr_allow_private_name">Allow private access</string>
@@ -3215,7 +3215,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="region_maps">Regionwide maps</string>
     <string name="world_maps">World maps</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
-    <string name="srtm_plugin_disabled">Contour lines disabled</string>
+    <!-- string name="srtm_plugin_disabled">Topogaphy disabled</string -->
     <string name="favorite_category_add_new">Add new</string>
     <string name="favorite_category_select">Choose category</string>
     <string name="default_speed_system_descr">Define unit of speed.</string>
@@ -3472,10 +3472,10 @@ Any of these maps can be displayed as the main (base) map, or as an overlay or u
 Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s data folder using one of the many third-party map preparation tools.</string>
     <string name="record_plugin_name">Trip recording</string>
     <string name="record_plugin_description">Record your trips or trainings, and analyze the data in terms of speed, accumulated ascents and descents, elevation profile, etc. Recorded tracks can be archived, shared with friends, edited, and post-processed.\n\nFurther reading at %1$s.</string>
-    <string name="srtm_paid_version_title">Contour lines plugin</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
-    <string name="srtm_plugin_name">Contour lines</string>
-    <string name="srtm_plugin_description">Terrain information like contour lines, hillshade and slope, help you to visually assess the lay of the land and relief, navigability, and more. The topographic information can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at %1$s.</string>
+    <string name="srtm_paid_version_title">Topography plugin</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline topo features like contour lines, hillshade, slope</string>
+    <string name="srtm_plugin_name">Topography</string>
+    <string name="srtm_plugin_description">Terrain information, like contour lines, hillshade, slope, help you to visually assess the lay of the land, the relief, navigability, and more. The topographic information can on the map be represented by contour lines, relief shading and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at %1$s.</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
@@ -3993,7 +3993,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="dropbox_plugin_description">Sync tracks and audio/video notes with your Dropbox account.</string>
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="intermediate_points_change_order">Change order</string>
-    <string name="srtm_paid_version_msg">Please consider paying for the \'Contour lines\' plugin to support further development.</string>
+    <string name="srtm_paid_version_msg">Please consider paying for the \'Topography\' plugin to support further development.</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Default widget action:</string>
@@ -4025,8 +4025,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Tap \'Use location…\' to add a note to the location.</string>
     <string name="map_widget_audionotes">Audio notes</string>
-    <string name="index_srtm_parts">parts</string>
-    <string name="index_srtm_ele">Contour lines</string>
+    <!-- string name="index_srtm_parts">parts</string -->
+    <!-- string name="index_srtm_ele">Contour lines</string -->
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
     <string name="download_srtm_maps">Contour lines</string>
@@ -4105,7 +4105,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
 		- Compact offline vector maps for the whole world available\n
 		- Download country or region maps directly from the app\n
-		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, Favorites, contour lines, public transport stops, additional maps with customizable transparency\n
+		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, favorites, public transport stops, additional maps with customizable transparency, topography features like contour lines/hillshade/slope\n
 		- Offline search for addresses and places (POIs)\n
 		- Offline routing for medium-range distances\n
 		- Car, bicycle, and pedestrian modes with optional:\n
@@ -4123,7 +4123,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmand_extended_description_part1">
     OsmAnd (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OSM data.\n\n
 
-    Enjoy voice and optical navigator, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info (through plugin), a choice between driving, cycling, pedestrian modes, OSM editing and much more.
+    Enjoy voice and optical navigator, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and topographic info (through plugin), a choice between driving, cycling, pedestrian modes, OSM editing and much more.
     </string>
     <string name="osmand_extended_description_part2">
         GPS navigation\n
@@ -4158,7 +4158,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
         • GPS navigation in cycling mode builds your route using cycle paths\n
         • See your speed and altitude\n
         • GPX recording option enables you to record your trip and share it\n
-        • Via an additional plugin you can enable contour lines and hillshading
+        • Via an additional plugin you can enable contour lines and hillshade
     </string>
     <string name="osmand_extended_description_part6">
         Walking, hiking, city tour\n
@@ -4204,7 +4204,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
 		- Compact offline vector maps for the whole world available\n
 		- Unlimited downloading of country or region maps directly from the app\n
 		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing\n
-		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, Favorites, contour lines, public transport stops, additional maps with customizable transparency\n\n
+		- Overlay of several map layers possible, like GPX or navigation tracks, points of interest, Favorites, public transport stops, additional maps with customizable transparency, topography features like contour lines/hillshade/slope\n\n
 		- Offline search for addresses and places (POIs)\n
 		- Offline routing for medium-range distances\n
 		- Car, bicycle, and pedestrian modes with optional:\n
@@ -4215,7 +4215,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
 	</string>
     <string name="osmand_plus_extended_description_part1">
         OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OSM data.\n
-        Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info, a choice between driving, cycling, pedestrian modes, OSM editing and much more.\n\n
+        Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and topography info, a choice between driving, cycling, pedestrian modes, OSM editing and much more.\n\n
 
         OsmAnd+ is the paid app version. By buying it, you support the project, fund the development of new features, and receive the latest updates.\n\n
 
@@ -4373,7 +4373,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_appMode_name">Rendering mode</string>
     <string name="rendering_attr_appMode_description">Optimize map for</string>
     <!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string -->
-    <string name="rendering_attr_contourLines_description">Display from zoom level (requires contour data):</string>
+    <string name="rendering_attr_contourLines_description">Display from zoom level (requires contour line data):</string>
     <string name="rendering_attr_contourLines_name">Show contour lines</string>
     <string name="rendering_attr_hmRendered_description">Increase amount of map detail shown.</string>
     <string name="rendering_attr_hmRendered_name">Show more map detail</string>
@@ -5071,7 +5071,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="show_free_version_banner_description">Display the free version banner even in the paid version.</string>
     <string name="buy">Buy</string>
     <string name="activate_seamarks_plugin">Please activate the \'Nautical map view\' plugin</string>
-    <string name="activate_srtm_plugin">Please activate the \'Contour lines\' plugin</string>
+    <string name="activate_srtm_plugin">Please activate the \'Topography\' plugin</string>
     <string name="later">Later</string>
     <string name="get_full_version">Full version</string>
     <string name="downloads">Downloads</string>
