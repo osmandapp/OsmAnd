@@ -1057,10 +1057,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Get “%1$s” as part of the %2$s plan. Comparison:</string>
     <string name="nautical_depth">Nautical depth</string>
-    <string name="terrain_maps">Terrain maps</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <!-- string name="terrain_maps_contour_lines_hillshade_slope">Topography maps: contour lines, hillshade, slope</string -->
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
