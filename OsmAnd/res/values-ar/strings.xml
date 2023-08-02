@@ -5405,4 +5405,9 @@
     <string name="rendering_value_caiScale_description">نادي ألبينو الإيطالي (نادي ألبين الإيطالي)</string>
     <string name="rendering_value_sacScale_description">نادي الألب السويسري</string>
     <string name="rendering_attr_alpineHiking_description">أنواع تصنيف الصعوبة للطرق.</string>
+    <string name="write_heading_description">حفظ العنوان لكل نقطة مسار أثناء التسجيل</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="feature_available_as_part_of_plan">%1$s متاح كجزء من خطة %2$s</string>
+    <string name="shared_string_included">متضمن</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
 </resources>
