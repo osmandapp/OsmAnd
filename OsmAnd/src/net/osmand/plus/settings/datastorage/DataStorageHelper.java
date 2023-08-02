@@ -55,6 +55,7 @@ public class DataStorageHelper {
 
 	private static final String MAPS_STORAGE_SIZE = "maps_storage_size";
 	private static final String TERRAIN_STORAGE_SIZE = "terrain_storage_size";
+	private static final String TERRAIN3D_STORAGE_SIZE = "terrain3d_storage_size";
 	public static final String TILES_STORAGE_SIZE = "tiles_storage_size";
 	private static final String ROADSONLY_STORAGE_SIZE = "roadsonly_storage_size";
 	private static final String NAUTICAL_STORAGE_SIZE = "nautical_storage_size";
@@ -75,6 +76,7 @@ public class DataStorageHelper {
 	private final ArrayList<MemoryItem> memoryItems = new ArrayList<>();
 	private MemoryItem mapsStorageSize;
 	private MemoryItem terrainStorageSize;
+	private MemoryItem terrain3dStorageSize;
 	private MemoryItem tilesStorageSize;
 	private MemoryItem roadsonlyStorageSize;
 	private MemoryItem nauticalStorageSize;
@@ -206,12 +208,20 @@ public class DataStorageHelper {
 				.setDirectories(
 						createDirectory(SRTM_INDEX_DIR, true, EXTENSIONS, true),
 						createDirectory(TILES_INDEX_DIR, false, PREFIX, false),
-						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
+//						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true))
+//						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
 				.setPrefixes("Hillshade", "Slope")
-				.setExtensions(IndexConstants.TIF_EXT)
 				.createItem();
 		memoryItems.add(terrainStorageSize);
+
+		terrain3dStorageSize = MemoryItem.builder()
+				.setKey(TERRAIN3D_STORAGE_SIZE)
+//				.setExtensions(IndexConstants.TIF_EXT)
+				.setDirectories(
+						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
+						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
+				.createItem();
+		memoryItems.add(terrain3dStorageSize);
 
 		tilesStorageSize = MemoryItem.builder()
 				.setKey(TILES_STORAGE_SIZE)
@@ -337,7 +347,7 @@ public class DataStorageHelper {
 	public RefreshUsedMemoryTask calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter uiAdapter) {
 		File rootDir = new File(currentStoragePath);
 		RefreshUsedMemoryTask task = new RefreshUsedMemoryTask(uiAdapter, otherStorageSize, rootDir, null, null, OTHER_STORAGE_SIZE);
-		task.execute(mapsStorageSize, terrainStorageSize, tilesStorageSize, roadsonlyStorageSize, nauticalStorageSize, liveStorageSize, 
+		task.execute(mapsStorageSize, terrainStorageSize, terrain3dStorageSize, tilesStorageSize, roadsonlyStorageSize, nauticalStorageSize, liveStorageSize, 
 				archiveStorageSize, wikiStorageSize, travelStorageSize, weatherStorageSize, tracksStorageSize, notesStorageSize, otherStorageSize);
 		return task;
 	}

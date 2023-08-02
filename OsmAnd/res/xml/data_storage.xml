@@ -14,10 +14,16 @@
 			android:title="@string/shared_string_maps" />
 
 		<Preference
-			android:icon="@drawable/ic_map"
+			android:icon="@drawable/ic_action_hillshade_dark"
 			android:key="terrain_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/hillshade_slope_contour_lines" />
+
+		<Preference
+			android:icon="@drawable/ic_action_terrain"
+			android:key="terrain3d_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/terrain_map" />
 
 		<Preference
 			android:icon="@drawable/ic_world_globe_dark"
