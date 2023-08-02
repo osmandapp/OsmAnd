@@ -587,7 +587,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (multiTouch || Float.isNaN(rotate)) {
 			return;
 		}
-		float diff = MapUtils.unifyRotationDiff(rotate, getRotate());
+		MapRendererView mapRenderer = getMapRenderer();
+		float diff = MapUtils.unifyRotationDiff(rotate, mapRenderer != null ? mapActivity.getMapRotateTarget() : getRotate());
 		if (Math.abs(diff) > 5 || force) { // check smallest rotation
 			animatedDraggingThread.startRotate(rotate);
 		}
