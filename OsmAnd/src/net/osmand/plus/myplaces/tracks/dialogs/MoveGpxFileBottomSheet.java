@@ -34,11 +34,14 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 
 	private static final String TAG = MoveGpxFileBottomSheet.class.getSimpleName();
 	private static final String SRC_FILE_KEY = "file_path_key";
+	private static final String EXCLUDED_DIR_KEY = "excluded_dir_key";
 	private static final String SHOW_ALL_FOLDERS_KEY = "show_all_folders_key";
 
 	private OsmandApplication app;
 	@Nullable
 	private File srcFile;
+	@Nullable
+	private File excludedDir;
 	private boolean showAllFolders;
 
 	@Override
@@ -49,6 +52,9 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(SRC_FILE_KEY)) {
 				srcFile = AndroidUtils.getSerializable(savedInstanceState, SRC_FILE_KEY, File.class);
+			}
+			if (savedInstanceState.containsKey(EXCLUDED_DIR_KEY)) {
+				excludedDir = AndroidUtils.getSerializable(savedInstanceState, EXCLUDED_DIR_KEY, File.class);
 			}
 			showAllFolders = savedInstanceState.getBoolean(SHOW_ALL_FOLDERS_KEY);
 		}
@@ -89,7 +95,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		File rootDir = app.getAppPath(GPX_INDEX_DIR);
 		File fileDir = srcFile != null ? srcFile.getParentFile() : null;
 
-		collectDirs(rootDir, dirs, showAllFolders ? null : fileDir);
+		collectDirs(rootDir, dirs, excludedDir);
 		if (showAllFolders || !Algorithms.objectEquals(fileDir, rootDir)) {
 			dirs.add(0, rootDir);
 		}
@@ -132,6 +138,9 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 		if (srcFile != null) {
 			outState.putSerializable(SRC_FILE_KEY, srcFile);
 		}
+		if (excludedDir != null) {
+			outState.putSerializable(EXCLUDED_DIR_KEY, excludedDir);
+		}
 		outState.putBoolean(SHOW_ALL_FOLDERS_KEY, showAllFolders);
 	}
 
@@ -164,10 +173,12 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable File srcFile,
-	                                @Nullable Fragment target, boolean usedOnMap, boolean showAllFolders) {
+	                                @Nullable File excludedDir, @Nullable Fragment target,
+	                                boolean usedOnMap, boolean showAllFolders) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			MoveGpxFileBottomSheet fragment = new MoveGpxFileBottomSheet();
 			fragment.srcFile = srcFile;
+			fragment.excludedDir = excludedDir;
 			fragment.showAllFolders = showAllFolders;
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);

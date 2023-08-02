@@ -2452,8 +2452,6 @@
     <string name="shared_string_unexpected_error">Fallu inesperáu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Siendes</string>
-    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC scale.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
     <string name="download_srtm_maps">Contour lines</string>
     <string name="index_srtm_ele">Contour lines</string>
     <string name="index_srtm_parts">parts</string>
@@ -4179,7 +4177,7 @@
     <string name="you_can_get_feature_as_part_of_pattern">Get “%1$s” as part of the %2$s plan. Comparison:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="continue_with">Siguir con %1$s</string>
-    <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
+    <string name="contour_lines_hillshade_slope">Contour lines, hillshades, slope</string>
     <string name="release_4_0">• Cloud backup
 \n
 \n • Added night mode for \"Topo\" map style

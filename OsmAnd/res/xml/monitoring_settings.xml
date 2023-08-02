@@ -89,13 +89,6 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/disable_recording_once_app_killed" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="save_heading_to_gpx"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/save_heading" />
-
 	<Preference
 		android:key="logging_accuracy_divider"
 		android:layout="@layout/simple_divider_item"

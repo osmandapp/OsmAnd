@@ -1585,7 +1585,6 @@
     <string name="routing_attr_height_name">ارتفاع مجاز</string>
     <string name="routing_attr_height_description">ارتفاع مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
-    <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس درجه‌بندی SAC رسم شوند.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">مسیرهای پیاده‌گردی</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها بر اساس مسیرهای OSMC رسم شوند.</string>
     <string name="map_widget_battery">میزان شارژ باطری</string>
@@ -1605,7 +1604,6 @@
     <string name="action_create">کنش ایجاد</string>
     <string name="action_modify">کنش اصلاح</string>
     <string name="action_delete">کنش حذف</string>
-    <string name="rendering_attr_alpineHiking_name">مقیاس پیاده‌گردی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک مطابق دورهٔ انتخابی است. هر زمان که خواستید، اشتراک خود را در گوگل‌پلی لغو کنید.</string>
@@ -4226,7 +4224,7 @@
     <string name="backup_error_subscription_was_used">اشتراک یا کد تبلیغی را حساب دیگری استفاده کرده است %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">پرونده باید در قالب ‎.gzip فرستاده شود</string>
     <string name="backup_error_file_not_available">پرونده در دسترس نیست</string>
-    <string name="contour_lines_hillshades_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
+    <string name="contour_lines_hillshade_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="duration_moment_ago">لحظه‌ای پیش</string>
     <string name="backup_deleting_all_data">در حال حذف همهٔ داده‌ها…</string>
     <string name="backup_data_removed">همهٔ داده‌ها حذف شد.</string>

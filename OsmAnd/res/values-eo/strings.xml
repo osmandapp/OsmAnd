@@ -992,8 +992,6 @@
     <string name="download_srtm_maps">Nivelkurboj</string>
     <string name="download_regular_maps">Plena mapo</string>
     <string name="download_roads_only_maps">Nur-voja mapo</string>
-    <string name="rendering_attr_alpineHiking_name">Montgrimpada skalo</string>
-    <string name="rendering_attr_alpineHiking_description">Bildigi vojojn laŭ skalo de SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turismaj kursoj</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Bildigi vojojn laŭ OSMC-kursoj.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
@@ -1048,7 +1046,7 @@
     <string name="show_warnings_title">Montri avertojn…</string>
     <string name="show_warnings_descr">Agordi trafikajn avertojn (pri rapidlimoj, devigaj haltejoj, strat-ĝiboj, tuneloj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj.</string>
     <string name="use_compass_navigation">Uzi kompason</string>
-    <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu direkto estas trovita.</string>
+    <string name="use_compass_navigation_descr">Uzi kompason nur kiam neniu movdirekto estas trovita.</string>
     <string name="avoid_motorway">Sen aŭtovojojn</string>
     <string name="auto_zoom_map">Aŭtomate skali mapon</string>
     <string name="auto_zoom_map_descr">Skali mapon depende de via rapido (kiam mapo estas samtempigita kun aktuala pozicio).</string>
@@ -3446,9 +3444,9 @@
     <string name="shared_string_terrain">Tereno</string>
     <string name="slope_download_description">Kromaj mapoj estas necesaj por vidigi deklivecon sur la mapo.</string>
     <string name="slope_read_more">Pliaj informoj pri dekliveco en %1$s.</string>
-    <string name="terrain_empty_state_text">Montras nivelombrumon (reliefon) aŭ deklivecon sur la mapo. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas sur nia retpaĝo.</string>
+    <string name="terrain_empty_state_text">Montras nivelombrumon (reliefon) aŭ deklivecon sur la mapo. Pliaj informoj pri tiuj ĉi specoj de mapoj troviĝas en nia retejo.</string>
     <string name="download_slope_maps">Dekliveco</string>
-    <string name="hillshade_description">Uzas tonojn de grizo por vidigi altaĵojn, montpintojn kaj malaltaĵojn.</string>
+    <string name="hillshade_description">Uzas tonojn de grizo por vidigi deklivecon, montpintojn kaj malaltaĵojn.</string>
     <string name="slope_description">Uzas kolorojn por vidigi angulon de dekliveco.</string>
     <string name="terrain_slider_description">Agordi minimuman kaj maksimuman skal-nivelojn inter kiuj la tavolo estos montrata.</string>
     <string name="hillshade_download_description">Kromaj mapoj estas necesaj por vidigi tavolon de nivelombrumo.</string>
@@ -4218,7 +4216,7 @@
     <string name="duration_moment_ago">antaŭ momento</string>
     <string name="enter_verification_code">Enigu unufojan pasvorton</string>
     <string name="backup_error_subscription_was_expired_descr">Via abono OsmAnd Pro senvalidiĝis – reaboni ĝin por povi uzi sekurkopion. Vi plue povas restarigi datumojn el la nubo.</string>
-    <string name="contour_lines_hillshades_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
+    <string name="contour_lines_hillshade_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
     <string name="logout_from_osmand_cloud">Elsaluti el OsmAnd-Nubo</string>
     <string name="logout_from_osmand_cloud_decsr">Ĉu elsaluti\?
 \nVi devos reensaluti por fari sekurkopion aŭ restarigi datumojn.</string>
@@ -5196,8 +5194,6 @@
     <string name="map_3d_mode_description">Frapetu kaj ŝovu la mapon supren/malsupren per du fingroj por alĝustigi ĝian klinecon.</string>
     <string name="no_poi_for_category">Ne trovis interesejon</string>
     <string name="rendering_value_sector1_name">Sektoro 1</string>
-    <string name="rendering_value_sacScale_name">SAC-skalo</string>
-    <string name="rendering_value_caiScale_name">CAI-skalo</string>
     <string name="map_3d_mode_action">3D-reĝimo</string>
     <string name="rendering_attr_lightDetail_name">Detaloj de lumo</string>
     <string name="rendering_attr_lightDetail_description">Implicite: nomo de marmarko (karaktero, grupo, periodo); elektu pliajn informojn pri sektoroj 1–3 aŭ pri karaktero de sektoro 1,2,3,4,5</string>
@@ -5259,14 +5255,14 @@
     <string name="deleting_complete">Forigado plenumita</string>
     <string name="delete_account">Forigi konton</string>
     <string name="verify_account">Verigi vian konton</string>
-    <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pli la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
+    <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pri la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
     <string name="terrain_category_description">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
     <string name="routing_attr_allow_via_ferrata_description">Monta vojo kun fiksitaj ŝnuregoj, teniloj, ŝtupetaroj kaj pontetoj.</string>
     <string name="free_favorites_backup_description">Akiru konton OsmAnd-Nubo por havigi senpagan sekurkopion de ŝatataj punktoj kaj agordoj.</string>
     <string name="free_favorites_backup">Senpaga sekurkopio de ŝatataj punktoj</string>
     <string name="get_osmand_cloud">Akiri OsmAnd-Nubon</string>
     <string name="folder_export_empty_error">Nenio por elporti, dosierujo estas malplena</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Uzi rastruman «sqltiedb» por dekliveco kaj nivelombrumo</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Uzi rastruman «sqlitedb» por dekliveco / nivelombrumo</string>
     <string name="cache_size">Grando de kaŝmemoro</string>
     <string name="shared_string_avoid">Eviti</string>
     <string name="may_be_used_if_there_is_shortcut">Povas esti uzata se pli mallonga kurso</string>
@@ -5317,4 +5313,31 @@
     <string name="routing_attr_allow_via_ferrata_name">Sekurigita vojo (viaferatao)</string>
     <string name="free_settings_backup">Senpaga sekurkopio de agordoj</string>
     <string name="free_ride">Libera veturo</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Eksplodaĵoj</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasoj</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brulemaj likvoj</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brulemaj solidoj</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oksidantoj kaj organikaj peroksidoj</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Toksaj kaj biodanĝeraj substancoj</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diversaj</string>
+    <string name="shared_string_class">Klaso</string>
+    <string name="dangerous_goods_description">Sur kelkaj vojoj kaj tuneloj transporto de danĝeraj materialoj estas malpermesata.</string>
+    <string name="dangerous_goods">Danĝeraj materialoj</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktivaj substancoj</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Korodaj substancoj</string>
+    <string name="rendering_value_sacScale_description">laŭ skalo de Svisa Alpisma Klubo</string>
+    <string name="rendering_value_caiScale_description">laŭ skalo de Itala Alpisma Klubo</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_name">SAC/CAS</string>
+    <string name="rendering_attr_alpineHiking_name">Klasifiko de facileco</string>
+    <string name="rendering_attr_alpineHiking_description">Maniero klasifiki facilecon de montgrimpadaj kursoj.</string>
+    <string name="write_heading">Konservi mov-direkton</string>
+    <string name="write_bearing_description">Konservi kompas-direkton al ĉiu punkto dum registri spuron</string>
+    <string name="write_bearing">Konservi kompas-direkton</string>
+    <string name="write_heading_description">Konservi mov-direkton al ĉiu punkto dum registri spuron</string>
+    <string name="shared_string_not_checked">Nemarkita</string>
+    <string name="shared_string_checked">Markita</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponebla kiel parto de la plano %2$s</string>
+    <string name="shared_string_included">Enhavata</string>
 </resources>

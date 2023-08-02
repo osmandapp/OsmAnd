@@ -742,7 +742,7 @@
     <string name="map_widget_show_ruler">Righello</string>
     <string name="map_widget_view_direction">Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
-    <string name="int_continuosly">Continuo</string>
+    <string name="int_continuosly">continuo</string>
     <string name="email">e-mail</string>
     <string name="osmand_short_description_80_chars">Visualizzazione e navigazione in mobilità di mappe mondiali OSM</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)
@@ -1217,8 +1217,6 @@
     <string name="rendering_attr_subwayMode_name">Percorsi metró</string>
     <string name="continue_navigation">Prosegui la navigazione</string>
     <string name="pause_navigation">Metti in pausa la navigazione</string>
-    <string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino</string>
-    <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinerari escursionistici</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disegna i percorsi in base alle tracce OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Colora gli edifici per tipo</string>
@@ -2389,7 +2387,7 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Aggiunto</string>
     <string name="order_by">Ordina per:</string>
-    <string name="coordinates_format">Formato coordinate</string>
+    <string name="coordinates_format">Formato delle coordinate</string>
     <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
     <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Tocca il pulsante \'Opzioni\' per cambiarlo.</string>
     <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
@@ -4169,7 +4167,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token non valido o scaduto</string>
     <string name="backup_error_user_is_not_registered">Nessun utente registrato con questo indirizzo email</string>
     <string name="backup_error_no_valid_subscription">Nessuna valida sottoscrizione presente</string>
-    <string name="contour_lines_hillshades_slope">Isoipse, ombreggiamento dei rilievi, pendenze</string>
+    <string name="contour_lines_hillshade_slope">Isoipse, ombreggiamento dei rilievi, pendenze</string>
     <string name="release_4_0">• Backup Cloud
 \n
 \n • Aggiunta la modalità notte per lo stile della mappa \"Topo\"
@@ -4530,7 +4528,7 @@
     <string name="zoom_levels_difference_description">La maggiore differenza tra i livelli di zoom può aumentare la quantità di dati da scaricare.</string>
     <string name="number_of_tiles">Numero di riquadri</string>
     <string name="change_default_appearance">Cambia la visualizzazione predefinita</string>
-    <string name="map_widget_distance_to_destination">Distanza dalla destinazione</string>
+    <string name="map_widget_distance_to_destination">Distanza alla destinazione</string>
     <string name="apply_only_to_new_favorites">Applica solo ai nuovi preferiti</string>
     <string name="simulation_preview_mode_desc">La velocità della simulazione sarà massima nei rettilinei e diminuirà solamente alle intersezioni.</string>
     <string name="add_page">Aggiungi pagina</string>
@@ -4697,9 +4695,9 @@
     <string name="auto_25_chars_route_tl_kr">Svolta a sinistra e mantieni la destra</string>
     <string name="auto_25_chars_route_tr_kl">Svolta a destra e mantieni la sinistra</string>
     <string name="auto_25_chars_route_tr_kr">Svolta a destra e mantieni la destra</string>
-    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso in corso di registrazione.</string>
+    <string name="trip_recording_distance_widget_desc">Mostra la distanza del percorso attualmente registrato.</string>
     <string name="true_bearing_wdiget_desc">Angolo fra il nord reale e il punto di destinazione osservato dalla tua posizione.</string>
-    <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso registrato attuale.</string>
+    <string name="trip_recording_uphill_widget_desc">Mostra il totale di tutte le salite del percorso attualmente registrato.</string>
     <string name="connect_with_straight_line">Collega con una linea retta</string>
     <string name="shared_string_only_missing">Solo mancanti</string>
     <string name="download_tiles">Scarica tile</string>
@@ -4885,7 +4883,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5103,7 +5101,7 @@
     <string name="rendering_value_defaultMedium_name">Predefinito (medio)</string>
     <string name="select_layer">Seleziona il livello</string>
     <string name="speak_route_deviation">Annuncio deviazione dal percorso</string>
-    <string name="clear_online_cache_description">Questo cancellerà la cache per il riquadro meteo online.</string>
+    <string name="clear_online_cache_description">Questo cancellerà la cache delle mattonelle meteo online.</string>
     <string name="free_maps_updates">Aggiornamenti gratuiti (emergenza)</string>
     <string name="common_weight_limit_error">Il valore minimo è \"%1$s\" %2$s. Utilizza il profilo \"%3$s\" se il peso del veicolo è inferiore al valore minimo.</string>
     <string name="shared_string_all_world">Tutto il mondo</string>
@@ -5165,10 +5163,8 @@
     <string name="ant_plus_bluetooth_off_description">Attiva il Bluetooth, trova e abbina i sensori.</string>
     <string name="ant_plus_open_settings">Apri le impostazioni</string>
     <string name="learn_more_about_sensors_link">Ulteriori informazioni sui sensori.</string>
-    <string name="ant_plus_bluetooth_off">Il bluetooth è disattivato</string>
+    <string name="ant_plus_bluetooth_off">Il Bluetooth è disattivato</string>
     <string name="external_device_disconnected">Disconnesso</string>
-    <string name="rendering_value_sacScale_name">Scala SAC</string>
-    <string name="rendering_value_caiScale_name">Scala CAI</string>
     <string name="external_device_connected">Connesso</string>
     <string name="external_device_characteristic_heart_rate">Frequenza cardiaca</string>
     <string name="external_device_characteristic_systolic">Sistolico</string>
@@ -5180,14 +5176,14 @@
     <string name="external_device_characteristic_stride_length">Lunghezza del passo</string>
     <string name="external_device_characteristic_temperature">Temperatura</string>
     <string name="external_device_details_connect">Collegare</string>
-    <string name="external_device_details_pair">Associare</string>
+    <string name="external_device_details_pair">Associa</string>
     <string name="external_device_ble">BLE</string>
     <string name="bluetooth_not_supported">Bluetooth non supportato</string>
     <string name="ble_search_again">Cerca ancora</string>
     <string name="external_device_ant">ANT</string>
     <string name="bluetooth_found_title">Trovato: %d</string>
     <string name="ant_plus_nothing_found_description">Assicurarsi che:
-\n– Il bluetooth sia attivato
+\n– Il Bluetooth sia attivato
 \n– Il sensore sia attivato
 \n– Questo dispositivo si trovi vicino al sensore</string>
     <string name="ant_plus_help_title">Non so che tipo di sensore possiedo</string>
@@ -5195,18 +5191,18 @@
     <string name="ant_plus_searching">Ricerca</string>
     <string name="ant_plus_searching_text_description">Tenere il dispositivo vicino al sensore. Attivare il sensore in modo che OsmAnd possa trovarlo.</string>
     <string name="ant_plus_pair_new_sensor">Associa il nuovo sensore</string>
-    <string name="ant_plus_pair_new_sensor_ble">Associa il sensore bluetooth LE</string>
+    <string name="ant_plus_pair_new_sensor_ble">Associa il sensore Bluetooth LE</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Associa il sensore ANT+</string>
     <string name="external_device_details_received_data">Dati ricevuti</string>
     <string name="external_device_details_battery">Batteria</string>
-    <string name="external_device_details_disconnect">Disconnettere</string>
+    <string name="external_device_details_disconnect">Disconnetti</string>
     <string name="bluetooth_disconnected">Disconnesso, %s</string>
     <string name="write_data_from_sensor_to_track">Scrivi i dati dei sensori esterni sulla traccia GPX durante la registrazione del viaggio.</string>
     <string name="external_sensors_not_found">Sensori non trovati</string>
     <string name="there_are_no_connected_sensors_of_this_type">Non ci sono sensori collegati di questo tipo</string>
     <string name="delete_track_folder_dialog_message">Questo eliminerà la cartella \"%1$s\" e tutte le tracce (%2$s) incluse.</string>
     <string name="external_sensors_source_of_data">Fonte dei dati</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Puoi associare i sensori bluetooth LE e ANT+ con OsmAnd.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Puoi associare con OsmAnd i sensori Bluetooth LE e ANT+.</string>
     <string name="rendering_attr_lightDetail_description">Predefinito: nome del contrassegno (carattere chiaro.gruppo.periodo), selezionare informazioni aggiuntive sui settori da 1 a 3 o carattere chiaro settore 1,2,3,4,5</string>
     <string name="show_all_tracks_on_the_map">Mostra tutti i percorsi sulla mappa</string>
     <string name="rssi_widget_desc">Mostra il livello RSSI del tuo dispositivo esterno.</string>
@@ -5229,7 +5225,7 @@
     <string name="rendering_attr_lightDetail_name">Dettagli chiari</string>
     <string name="deleting_complete">Eliminazione completata</string>
     <string name="verify_account">Verifica il tuo account</string>
-    <string name="manage_subscriptions">Gestisci le iscrizioni.</string>
+    <string name="manage_subscriptions">Gestisci le sottoscrizioni.</string>
     <string name="shared_string_deleting">Eliminazione</string>
     <string name="delete_account">Elimina l\'account</string>
     <string name="shared_string_close_the_dialog">Chiudi la finestra di dialogo</string>
@@ -5242,7 +5238,7 @@
     <string name="osmand_cloud_deleting_account_descr">Tra pochi istanti tutti i tuoi dati e il tuo account verranno cancellati da OsmAnd Cloud.
 \n
 \nTutti i dati sul dispositivo rimarranno intatti.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account su OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account OsmAnd Cloud\?
 \n
 \nQuesta azione non può essere annullata.</string>
     <string name="osmand_cloud_delete_account_confirmation">Eliminare l\'account\?</string>
@@ -5250,8 +5246,8 @@
     <string name="osmand_cloud_deletion_secondary_devices_warning">I dispositivi secondari verranno disconnessi da OsmAnd Cloud e perderanno l\'accesso alle funzionalità a pagamento.</string>
     <string name="osmand_cloud_deletion_account_warning">Il tuo account e tutti i dettagli dell\'account saranno %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Tutti i dati di OsmAnd Cloud saranno %1$s. I dati sul dispositivo rimarranno intatti.</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non annullerà il tuo abbonamento a OsmAnd Pro.</string>
-    <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati dal cloud di OsmAnd.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non cancellerà il tuo abbonamento a OsmAnd Pro.</string>
+    <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
     <string name="delete_account_warning">Sei sicuro di voler eliminare l\'account %1$s\?</string>
     <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
@@ -5314,4 +5310,27 @@
     <string name="cache_size">Dimensione della cache</string>
     <string name="shared_string_avoid">Evitare</string>
     <string name="may_be_used_if_there_is_shortcut">Può essere utilizzato se è presente una scorciatoia</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Esplosivi</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gas</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Liquidi Infiammabili</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Solidi Infiammabili</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agenti Ossidanti e Perossidi Organici</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Sostanze Infettive e Tossiche</string>
+    <string name="rendering_attr_alpineHiking_description">Tipi di classificazione della difficoltà del percorso.</string>
+    <string name="write_bearing">Registra l\'orientamento</string>
+    <string name="write_heading_description">Durante la registrazione salva l\'orientamento per ogni punto della traccia</string>
+    <string name="write_heading">Registra l\'orientamento</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_sacScale_description">Club Alpino Svizzero</string>
+    <string name="rendering_attr_alpineHiking_name">Classificazione della difficoltà</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Sostanze Radioattive</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Sostanze Corrosive</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Club Alpino Italiano)</string>
+    <string name="shared_string_class">Classe</string>
+    <string name="dangerous_goods">Merci pericolose</string>
+    <string name="write_bearing_description">Durante la registrazione salva l\'orientamento di ogni punto della traccia</string>
+    <string name="dangerous_goods_description">In alcune strade e tunnel il trasporto di materiali pericolosi è proibito.</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Miscellanea</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
 </resources>

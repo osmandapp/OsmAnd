@@ -1210,8 +1210,6 @@
     <string name="rendering_attr_subwayMode_name">Metrolijnen</string>
     <string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
-    <string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren.</string>
     <string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
@@ -4412,7 +4410,7 @@
     <string name="shared_string_hide_slope">Hellingen verbergen</string>
     <string name="shared_string_downhill">Dalen</string>
     <string name="transparent_status_bar_descr">Geef de kaart weer onder de statusbalk</string>
-    <string name="contour_lines_hillshades_slope">Hoogtelijnen, reliëfschaduwen en hellingen</string>
+    <string name="contour_lines_hillshade_slope">Hoogtelijnen, reliëfschaduwen en hellingen</string>
     <string name="backup_error_file_not_available">Bestand onbeschikbaar</string>
     <string name="backup_error_user_is_not_registered">Er is geen gebruiker geregistreerd met het opgegeven e-mailadres</string>
     <string name="backup_error_token_is_not_valid_or_expired">Ongeldig of verlopen code</string>
@@ -5175,8 +5173,6 @@
     <string name="map_widget_rssi">Rssi</string>
     <string name="tracks_empty_folder">Lege map</string>
     <string name="shared_string_new_track">Nieuwe track</string>
-    <string name="rendering_value_sacScale_name">SAC schaal</string>
-    <string name="rendering_value_caiScale_name">CAI schaal</string>
     <string name="map_3d_mode_hint">Door de knop lang ingedrukt te houden, kan de positie van de knop gewijzigd worden.</string>
     <string name="map_3d_mode_description">Gebruik 2 vingers en beweeg ze naar boven en beneden om de oriëntatie van de kaart aan te passen.</string>
     <string name="shared_string_visible_on_map">Zichtbaar op de kaart</string>

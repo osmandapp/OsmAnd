@@ -3,6 +3,7 @@ package net.osmand.util;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize;
 
 import org.apache.commons.logging.Log;
@@ -283,15 +284,15 @@ public class Algorithms {
 	}
 
 	public static List<File> collectDirs(File parentDir, List<File> dirs, File exclDir) {
-		File[] listFiles = parentDir.listFiles();
-		if (listFiles != null) {
-			Arrays.sort(listFiles);
-			for (File f : listFiles) {
-				if (f.isDirectory()) {
-					if (!f.equals(exclDir)) {
-						dirs.add(f);
+		File[] files = parentDir.listFiles();
+		if (files != null) {
+			Arrays.sort(files);
+			for (File file : files) {
+				if (file.isDirectory()) {
+					if (!file.equals(exclDir)) {
+						dirs.add(file);
 					}
-					collectDirs(f, dirs);
+					collectDirs(file, dirs, exclDir);
 				}
 			}
 		}
@@ -1361,4 +1362,17 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
+		mapRect.left = mapRect.left == 0.0 ? longitude : Math.min(mapRect.left, longitude);
+		mapRect.right = Math.max(mapRect.right, longitude);
+		mapRect.bottom = mapRect.bottom == 0.0 ? latitude : Math.min(mapRect.bottom, latitude);
+		mapRect.top = Math.max(mapRect.top, latitude);
+	}
+
+	public static void extendRectToContainRect(QuadRect mapRect, QuadRect gpxRect) {
+		mapRect.left = mapRect.left == 0.0 ? gpxRect.left : Math.min(mapRect.left, gpxRect.left);
+		mapRect.right = Math.max(mapRect.right, gpxRect.right);
+		mapRect.top = Math.max(mapRect.top, gpxRect.top);
+		mapRect.bottom = mapRect.bottom == 0.0 ? gpxRect.bottom : Math.min(mapRect.bottom, gpxRect.bottom);
+	}
 }

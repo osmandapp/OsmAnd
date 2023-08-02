@@ -619,7 +619,7 @@
     <string name="finished_task">Lokið</string>
     <string name="data_settings">Gögn</string>
     <string name="additional_settings">Aukastillingar</string>
-    <string name="update_tile">Uppfæra kort</string>
+    <string name="update_tile">Uppfæra</string>
     <string name="mark_point">Útkoma</string>
     <string name="search_button">Leita</string>
     <string name="search_activity">Leita</string>
@@ -934,7 +934,7 @@
     <string name="gpx_files_not_found">Engar GPX-skrár fundust í ferlamöppunni</string>
     <string name="rotate_map_compass_opt">Eftir áttavita</string>
     <string name="rotate_map_bearing_opt">Eftir átt hreyfingar</string>
-    <string name="rotate_map_north_opt">Fast (norður er upp)</string>
+    <string name="rotate_map_north_opt">Norður er upp</string>
     <string name="rotate_map_to">Stefna korts</string>
     <string name="show_route">Nánar um leið</string>
     <string name="send_report">Senda skýrslu</string>
@@ -1743,7 +1743,6 @@
     <string name="rendering_value_medium_w_name">Miðlungs</string>
     <string name="rendering_value_low_name">Lágur</string>
     <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
-    <string name="rendering_attr_alpineHiking_name">Alpa-gönguleiðakvörðunin</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Gönguleiðir</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-kortagerðaraðstoð</string>
     <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
@@ -1973,7 +1972,6 @@
     <string name="av_use_external_recorder_descr">Nota upptökutæki kerfisins fyrir myndskeið.</string>
     <string name="av_use_external_recorder">Nota upptökutæki kerfisins</string>
     <string name="av_use_external_camera_descr">Nota forrit kerfisins fyrir ljósmyndir.</string>
-    <string name="rendering_attr_alpineHiking_description">Setja leiðir fram samkvæmt SAC/CAI gönguleiðakvarða.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Setja leiðir fram samkvæmt OSMC-ferlum.</string>
     <string name="search_villages_and_postcodes">Leita að fleiri sveitarfélögum/póstnúmerum</string>
     <string name="analyze_on_map">Greina á korti</string>
@@ -2346,11 +2344,11 @@
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'.
 \n
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="srtm_plugin_description">Yfirborðsupplýsingar, eins og hæðarlínur, hæðaskygging (relief hillshade) og brekkur, sem birtast ofan á staðalkortum OsmAnd, hjálpa við að meta landslag út frá atriðum á borð við sléttleika, hættur, halla, hæðarmismun og fleira. Yfirborðsupplýsingar á korti er hægt að túlka með skyggingum fyrir halla, hæðarlínum og litstiglum fyrir nismunandi frávik frá flötu landi. 
+    <string name="srtm_plugin_description">Yfirborðsupplýsingar, eins og hæðarlínur, hæðaskygging (relief hillshade) og brekkur, sem birtast ofan á staðalkortum OsmAnd, hjálpa við að meta landslag út frá atriðum á borð við sléttleika, hættur, halla, hæðarmismun og fleira. Yfirborðsupplýsingar á korti er hægt að túlka með skyggingum fyrir halla, hæðarlínum og litstiglum fyrir nismunandi frávik frá flötu landi.
 \n
 \nGögnin koma frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer).
 \n
-\nLeiðbeiningar - https://osmand.net/docs/user/plugins/contour-lines .</string>
+\nFrekari upplýsingar á %1$s.</string>
     <string name="plugin_nautical_descr">Virkjaðu þetta til að bæta á kortið myndrænni framsetningu fyrir siglingaleiðir, ljósvita, hættusvæði, bannsvæði, hvar megi kasta akkerum, bryggjur, o.s.frv. Til að nota þetta skaltu sækja sjókortaviðbótina, fara í kortastillingarnar og setja stíl kortsins á \'Sjókort\'.
 \n
 \nLeiðbeiningar - %1$s.</string>
@@ -4204,7 +4202,7 @@
     <string name="use_login_and_password">Nota notandanafn og lykilorð</string>
     <string name="available_until">Tiltækt til %1$s</string>
     <string name="map_updates_are_unavailable_yet">Uppfærslur á kortum eru ekki enn tiltækar. :-(</string>
-    <string name="contour_lines_hillshades_slope">Hæðarlínur, hæðaskyggingar, brekkur</string>
+    <string name="contour_lines_hillshade_slope">Hæðarlínur, hæðaskyggingar, brekkur</string>
     <string name="logout_from_osmand_cloud">Skrá út úr OsmAnd Cloud-tölvuskýi</string>
     <string name="backup_deleting_all_data">Eyði öllum gögnum…</string>
     <string name="backup_deleted_all_data">Eyddi öllum gögnum.</string>
@@ -4767,7 +4765,7 @@
     <string name="favorite_delete_group">Eyða hópi</string>
     <string name="coordinates_widget_map_center">Hnit: miðja korts</string>
     <string name="shared_string_normal">Venjulegt</string>
-    <string name="rotate_map_manual_opt">Snúið handvirkt (fast)</string>
+    <string name="rotate_map_manual_opt">Snúið handvirkt</string>
     <string name="external_sensor_widgets">ANT+ viðmótshlutar</string>
     <string name="map_widget_ant_heart_rate">Hjartsláttur</string>
     <string name="shared_string_switch_mode">Skipta um ham</string>
@@ -5158,9 +5156,13 @@
     <string name="tracks_empty_folder">Tóm mappa</string>
     <string name="track_not_recorded">Ekki skráð</string>
     <string name="shared_string_new_track">Nýr ferill</string>
-    <string name="rendering_value_sacScale_name">SAC-kvarði</string>
-    <string name="rendering_value_caiScale_name">CAI-kvarði</string>
     <string name="map_3d_mode_action">3D-þrívíddarhamur</string>
     <string name="shared_string_close_the_dialog">Loka glugganum</string>
     <string name="external_sensors_source_of_data">Uppruni gagna</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_attr_alpineHiking_name">Flokkun í erfiðleikastig</string>
+    <string name="rendering_attr_alpineHiking_description">Flokkun leiða í erfiðleikastig.</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="routing_attr_allow_via_ferrata_name">Hengistígur (Via ferrata)</string>
+    <string name="routing_attr_allow_via_ferrata_description">Hengistígur gerður með vírum, keðjum, stigum og brúm.</string>
 </resources>

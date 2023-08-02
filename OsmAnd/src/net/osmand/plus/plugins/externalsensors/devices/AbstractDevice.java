@@ -30,6 +30,7 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	private DeviceConnectionState state = DeviceConnectionState.DISCONNECTED;
 	protected List<DeviceListener> listeners = new ArrayList<>();
 	protected List<T> sensors = new ArrayList<>();
+	protected String deviceName;
 
 	public interface DeviceListener {
 
@@ -98,7 +99,13 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 	}
 
 	@NonNull
-	public abstract String getName();
+	public String getName() {
+		return deviceName != null ? deviceName : getClass().getSimpleName();
+	}
+
+	public void setDeviceName(String name) {
+		deviceName = name;
+	}
 
 	public abstract boolean connect(@NonNull Context context, @Nullable Activity activity);
 

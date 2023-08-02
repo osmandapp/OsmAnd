@@ -1614,7 +1614,7 @@
     <string name="routeInfo_tracktype_description">Lliwio llinell y llwybr neu drac yn ôl y mathau o wyneb. Mwyaf defnyddiol pan fo\'r ffyrdd yn bennaf heb wynebau caled.</string>
     <string name="select_backup_data_descr">Dewiswch ddata a ffolderi i\'w cadw wrth gefn.</string>
     <string name="display_route_tracks_as_poi">Dangos traciau fel MODd</string>
-    <string name="contour_lines_hillshades_slope">Cyfuchliniau, cysgodion bryniau, llethrau</string>
+    <string name="contour_lines_hillshade_slope">Cyfuchliniau, cysgodion bryniau, llethrau</string>
     <string name="backup_delete_old_data_warning">Rydych ar fin dileu hanes newid y data a lwythwyd yn flaenorol.
 \n
 \nBydd y fersiwn cyfredol o ddata yn cael ei gadw ar y gweinydd, ond ni fydd yn bosib troi nôl i\'r newidiadau a gwnaed yn flaenorol.</string>

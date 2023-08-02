@@ -10,7 +10,20 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_included">Included</string>
+    <string name="feature_available_as_part_of_plan">%1$s available as part of the %2$s plan</string>
+    <string name="write_bearing_description">Save bearing to each track point while recording</string>
+    <string name="write_bearing">Write Bearing</string>
+    <string name="write_heading_description">Save heading to each track point while recording</string>
+    <string name="write_heading">Write Heading</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_sacScale_description">Swiss Alpine Club</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italian Alpine Club)</string>
+    <string name="rendering_attr_alpineHiking_description">Difficulty classification types for the routes.</string>
+    <string name="rendering_attr_alpineHiking_name">Difficulty classification</string>
+    <string name="shared_string_checked">Checked</string>
+    <string name="shared_string_not_checked">Not checked</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosives</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
@@ -26,7 +39,7 @@
     <string name="dangerous_goods">Dangerous goods</string>
     <string name="free_ride">Free ride</string>
     <string name="free_settings_backup">Free Settings Backup</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqltiedb for slope / hillshade</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Use raster sqlitedb for hillshade / slope</string>
     <string name="cache_size">Cache size</string>
     <string name="shared_string_avoid">Avoid</string>
     <string name="may_be_used_if_there_is_shortcut">May be used if there is a shortcut</string>
@@ -77,7 +90,7 @@
     <string name="backup_error_delete_account_email_match">Email doesn\'t match login username</string>
     <string name="verify_account_deletion_descr">We need to verify your account before delete it.\n\nPlease enter the e-mail address you registered with. A one-time password for the next step will be sent to it.</string>
     <string name="verify_account">Verify your account</string>
-    <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slopes in %1$s.</string>
+    <string name="slope_legend_description">Slope uses colors to visualize terrain steepness. You can read more about Slope in %1$s.</string>
     <string name="terrain_category_description">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands. </string>
     <string name="terrain_map">Terrain map</string>
     <string name="relief_3d">3D Relief</string>
@@ -103,8 +116,6 @@
     <string name="tracks_empty_folder">Empty folder</string>
     <string name="track_not_recorded">Not recorded</string>
     <string name="shared_string_new_track">New track</string>
-    <string name="rendering_value_sacScale_name">SAC scale</string>
-    <string name="rendering_value_caiScale_name">CAI scale</string>
     <string name="map_2d_mode_action">2D mode</string>
     <string name="map_3d_mode_action">3D mode</string>
     <string name="map_3d_mode_hint">Long tap the button allows to change button position.</string>
@@ -1015,7 +1026,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     • Added option to change the route line appearance\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
-    <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
+    <string name="contour_lines_hillshade_slope">Contour lines, hillshade, slope</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
@@ -1050,7 +1061,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="terrain_maps">Terrain maps</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: contour lines, hillshades, slope</string>
+    <!-- string name="terrain_maps_contour_lines_hillshade_slope">Terrain maps: contour lines, hillshade, slope</string -->
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
@@ -1705,7 +1716,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="add_description">Add description</string>
     <string name="delete_description">Delete description</string>
     <string name="quick_action_terrain_descr">A button to show or hide terrain layer on the map.</string>
-    <string name="download_slope_maps">Slopes</string>
+    <string name="download_slope_maps">Slope</string>
     <string name="n_items_of_z">%1$s of %2$s</string>
     <string name="recalculate_route_distance_promo">The route will be recalculated if the distance from the route to the current location is more than selected value.</string>
     <string name="select_distance_route_will_recalc">Select the distance after which the route will be recalculated.</string>
@@ -1722,16 +1733,16 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_import_complete">Import complete</string>
     <string name="import_complete_description">Imported all data from the %1$s. Use the buttons below to open any part of the app to manage it.</string>
     <string name="shared_string_hillshade">Hillshade</string>
-    <string name="terrain_empty_state_text">Shows hillshades or slopes on the map. Read more about these map types on our site.</string>
+    <string name="terrain_empty_state_text">Shows hillshade or slope on the map. Read more about these map types on our site.</string>
     <string name="shared_string_legend">Legend</string>
     <string name="shared_string_zoom_levels">Zoom levels</string>
     <string name="shared_string_transparency">Transparency</string>
-    <string name="slope_read_more">Read more about slopes in %1$s.</string>
-    <string name="slope_download_description">Additional maps are needed to view slopes on the map.</string>
+    <string name="slope_read_more">Read more about slope in %1$s.</string>
+    <string name="slope_download_description">Additional maps are needed to view slope on the map.</string>
     <string name="hillshade_download_description">Additional maps are needed to view hillshade on the map.</string>
     <string name="terrain_slider_description">Set the minimum and maximum zoom levels at which the layer will be displayed.</string>
     <string name="slope_description">Slope uses colors to visualize terrain steepness.</string>
-    <string name="hillshade_description">Hillshade map uses dark shades to show slopes, peaks and lowlands.</string>
+    <string name="hillshade_description">Hillshade map uses dark shades to show slope, peaks and lowlands.</string>
     <string name="shared_string_terrain">Terrain</string>
     <string name="import_rendering_file">Import rendering file</string>
     <string name="profile_type_custom_string">Custom profile</string>
@@ -1904,7 +1915,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="tts_initialization_error">Cannot start text-to-speech engine.</string>
     <string name="layer_osm_edits">OSM edits</string>
     <string name="quick_action_contour_lines_descr">Button showing or hiding contour lines on the map.</string>
-    <string name="quick_action_hillshade_descr">A button to show or hide hillshades on the map.</string>
+    <string name="quick_action_hillshade_descr">A button to show or hide hillshade on the map.</string>
     <string name="apply_preference_to_all_profiles">Apply this change to all or the selected profile.</string>
     <string name="shared_preference">Shared</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>
@@ -2264,7 +2275,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_highway_class_steps_name">Steps</string>
     <string name="rendering_attr_highway_class_path_name">Path</string>
     <string name="rendering_attr_highway_class_cycleway_name">Cycleway</string>
-    <string name="rendering_attr_highway_class_undefined_name">Undefined</string>
     <string name="rendering_attr_undefined_name">Undefined</string>
 	<string name="rendering_attr_highway_class_track_grade1_name">Grade 1</string>
 	<string name="rendering_attr_highway_class_track_grade2_name">Grade 2</string>
@@ -3465,7 +3475,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="srtm_plugin_name">Contour lines</string>
-    <string name="srtm_plugin_description">Terrain information like contour lines, hillshades, and slopes, help you to visually assess the lay of the land and relief, navigability, and more. The topographic information can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at %1$s.</string>
+    <string name="srtm_plugin_description">Terrain information like contour lines, hillshade and slope, help you to visually assess the lay of the land and relief, navigability, and more. The topographic information can on the map be represented by slope shading, contour lines, and/or steepness coloring.\n\nThe underlying data originates from SRTM and ASTER.\n\nFurther reading at %1$s.</string>
     <string name="plugin_touringview_name">Touring map view</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
@@ -3969,7 +3979,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="download_hillshade_maps">Hillshades</string>
+    <string name="download_hillshade_maps">Hillshade</string>
     <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Stop the navigation?</string>
@@ -4022,8 +4032,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Standard map</string>
     <string name="download_roads_only_maps">Roads-only map</string>
-    <string name="rendering_attr_alpineHiking_name">Alpine hiking scale</string>
-    <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC/CAI scale.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking routes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>

@@ -128,6 +128,12 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		int visibility = feature.isAvailableInMapsPlus() ? View.VISIBLE : View.INVISIBLE;
 		AndroidUiHelper.setVisibility(visibility, view.findViewById(R.id.secondary_icon));
 
+		String osmandPro = getString(R.string.osmand_pro);
+		String osmandPlus = getString(R.string.osmand_plus);
+		String plan = feature.isAvailableInMapsPlus() ? getString(R.string.ltr_or_rtl_combine_via_or, osmandPlus , osmandPro) : osmandPro;
+		String contentDescription = getString(R.string.feature_available_as_part_of_plan, getString(feature.getListTitleId()), plan);
+		view.setContentDescription(contentDescription);
+
 		boolean isLastItem = feature == allFeatures.get(allFeatures.size() - 1);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !isLastItem);
 	}

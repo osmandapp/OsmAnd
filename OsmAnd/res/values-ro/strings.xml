@@ -3021,7 +3021,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token invalid sau expirat</string>
     <string name="backup_error_user_is_not_registered">Nu există niciun utilizator înregistrat cu această adresă de e-mail</string>
     <string name="backup_error_no_valid_subscription">Nu există un abonament valabil</string>
-    <string name="contour_lines_hillshades_slope">Curbe de nivel, umbrire relief, pante</string>
+    <string name="contour_lines_hillshade_slope">Curbe de nivel, umbrire relief, pante</string>
     <string name="release_4_0">• Backup în cloud
 \n
 \n • A fost adăugat modul de noapte pentru stilul de redare \"Topo\"
@@ -3550,8 +3550,6 @@
     <string name="interrupt_music_descr">Indicațiile vocale pun pe pauză redarea muzicii.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Redă traseele în funcție de urmele OSMC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rute de drumeție</string>
-    <string name="rendering_attr_alpineHiking_description">Redă traseele în conformitate cu scara SAC/CAI.</string>
-    <string name="rendering_attr_alpineHiking_name">Scară pentru drumeții alpine</string>
     <string name="precise_routing_mode_descr">Calculați rute precise fără erori. În continuare limitat la distanță și lent.</string>
     <string name="download_hillshade_maps">Nuanțe de deal</string>
     <string name="layer_hillshade">Strat Hillshade</string>
@@ -5214,7 +5212,6 @@
     <string name="save_track_external_sensors_data">Date</string>
     <string name="external_device_forget_sensor_description">Senzorul va fi eliminat din listă. Veți putea să împerecheați din nou acest senzor în orice moment.</string>
     <string name="external_device_disconnected">Deconectat</string>
-    <string name="rendering_value_caiScale_name">Scala CAI</string>
     <string name="ant_plus_searching_text">Căutarea de senzori</string>
     <string name="map_3d_mode_description">Atingeți harta cu două degete și deplasați-le în sus și în jos pentru a regla înclinarea hărții.</string>
     <string name="external_device_characteristic_pulse_rate">Frecvența pulsului</string>
@@ -5225,7 +5222,6 @@
     <string name="ant_plus_bluetooth_off_description">Activați Bluetooth găsiți și asociați senzorii.</string>
     <string name="ant_plus_bluetooth_off">Bluetooth este dezactivat</string>
     <string name="map_3d_mode_action">mod 3D</string>
-    <string name="rendering_value_sacScale_name">Scala SAC</string>
     <string name="map_3d_mode_hint">Atingerea lungă a butonului permite schimbarea poziției acestuia.</string>
     <string name="tracks_empty_folder">Folder gol</string>
     <string name="track_not_recorded">Neînregistrat</string>
@@ -5324,4 +5320,30 @@
     <string name="routing_attr_allow_via_ferrata_description">Traseu de munte echipat cu cabluri fixe, cu stâlpi, scări și poduri.</string>
     <string name="shared_string_avoid">Evitați</string>
     <string name="free_settings_backup">Copie de rezervă gratuită a setărilor</string>
+    <string name="free_ride">Călătorie gratuită</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificarea dificultății</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="rendering_value_sacScale_description">Clubul Alpin Elvețian</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Clubul Alpin Italian)</string>
+    <string name="rendering_attr_alpineHiking_description">Tipuri de clasificare a dificultății pentru trasee.</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explozibili</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gaze</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Lichide inflamabile</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Substanțe solide inflamabile</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Agenți oxidanți și peroxizi organici</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substanțe toxice și infecțioase</string>
+    <string name="shared_string_checked">Verificat</string>
+    <string name="shared_string_not_checked">Neverificat</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substanțe radioactive</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substanțe corozive</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diverse</string>
+    <string name="shared_string_class">Clasă</string>
+    <string name="dangerous_goods_description">Pe unele drumuri și tuneluri este interzis transportul de materiale periculoase.</string>
+    <string name="dangerous_goods">Mărfuri periculoase</string>
+    <string name="write_bearing_description">Salvarea palierului la fiecare punct al pistei în timpul înregistrării</string>
+    <string name="write_bearing">Scrieți Bearing</string>
+    <string name="write_heading_description">Salvarea rubricii pentru fiecare punct al pistei în timpul înregistrării</string>
+    <string name="write_heading">Scrieți titlul</string>
 </resources>

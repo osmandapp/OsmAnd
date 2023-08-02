@@ -263,13 +263,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	private void buildGeneralSegment() {
-		GPXUtilities.TrkSegment segment = new GPXUtilities.TrkSegment();
-		for (GPXUtilities.Track track : tracks) {
-			for (GPXUtilities.TrkSegment s : track.segments) {
-				if (s.points.size() > 0) {
-					List<GPXUtilities.WptPt> waypoints = new ArrayList<>(s.points.size());
-					for (GPXUtilities.WptPt wptPt : s.points) {
-						waypoints.add(new GPXUtilities.WptPt(wptPt));
+		TrkSegment segment = new TrkSegment();
+		for (Track track : tracks) {
+			for (TrkSegment trkSegment : track.segments) {
+				if (trkSegment.points.size() > 0) {
+					List<WptPt> waypoints = new ArrayList<>(trkSegment.points.size());
+					for (WptPt wptPt : trkSegment.points) {
+						waypoints.add(new WptPt(wptPt));
 					}
 					waypoints.get(0).firstPoint = true;
 					waypoints.get(waypoints.size() - 1).lastPoint = true;

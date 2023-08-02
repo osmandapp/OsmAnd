@@ -208,8 +208,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	public void updateContent() {
-		adapter.setSortMode(getTracksSortMode());
 		adapter.setItems(getAdapterItems());
+		adapter.setSortMode(getTracksSortMode());
 	}
 
 	protected void updateActionBar(boolean visible) {
@@ -273,7 +273,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		Map<String, String> tabsSortModes = settings.getTrackTabsSortModes();
+		Map<String, String> tabsSortModes = settings.getTrackFoldersSortModes();
 		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
 			if (Algorithms.stringsEqual(entry.getKey(), selectedFolder.getDirName())) {
 				return TracksSortMode.getByValue(entry.getValue());
@@ -286,10 +286,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
 		adapter.setSortMode(sortMode);
 
-		Map<String, String> tabsSortModes = settings.getTrackTabsSortModes();
+		Map<String, String> tabsSortModes = settings.getTrackFoldersSortModes();
 		tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
 
-		settings.saveTabsSortModes(tabsSortModes);
+		settings.saveFoldersSortModes(tabsSortModes);
 	}
 
 	@Override
@@ -300,7 +300,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void renamedTo(File file) {
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
 		reloadTracks();
 	}
 

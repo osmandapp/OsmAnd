@@ -1266,7 +1266,6 @@
     <string name="lang_sc">Sardinščina</string>
     <string name="rendering_attr_subwayMode_name">Proge podzemne železnice</string>
     <string name="continue_navigation">Nadaljuj z navigacijo</string>
-    <string name="rendering_attr_alpineHiking_name">Lestvica alpskega pohodništva</string>
     <string name="arrival_distance_factor_early">Predčasno</string>
     <string name="arrival_distance_factor_normally">Pravočasno</string>
     <string name="arrival_distance_factor_late">Pozno</string>
@@ -1294,7 +1293,6 @@
     <string name="shared_string_waypoints">Vmesne točke</string>
     <string name="speak_poi">Bližnje točke POI</string>
     <string name="rendering_value_browse_map_name">Poišči na zemljevidu</string>
-    <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC/CAI.</string>
     <string name="pause_navigation">Ustavi navigacijo</string>
     <string name="save_track_to_gpx_globally_descr">Splošno beleženje položaja v datoteko GPX je mogoče vklopiti in izklopiti s pripomočkom za beleženje GPX na zemljevidu.</string>
     <string name="record_plugin_description">Posnemi svoja potovanja ali treninge in analizirajte podatke v smislu hitrosti, skupnih vzponov in spustov, višinskega profila itd. Posnete poti je mogoče arhivirati, deliti s prijatelji, urejati in naknadno obdelati.
@@ -3805,7 +3803,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Obarvaj poti glede na vrsto omrežja vozlišč (mednarodno, regionalno, lokalno).</string>
     <string name="duration_moment_ago">pred nekaj trenutki</string>
     <string name="backup_deleting_all_data_descr">Počakaj, da OsmAnd izbriše podatke iz oblaka. Vsi podatki v napravi bodo ostali nedotaknjeni.</string>
-    <string name="contour_lines_hillshades_slope">Izohipse, senčenje terena, naklon</string>
+    <string name="contour_lines_hillshade_slope">Izohipse, senčenje terena, naklon</string>
     <string name="backup_error_file_not_available">Datoteka ni na voljo</string>
     <string name="backup_error_user_is_not_registered">S tem e-poštnim naslovom ni registriran noben uporabnik</string>
     <string name="backup_error_subscription_was_expired">Potekla naročnina</string>
@@ -5195,8 +5193,6 @@
     <string name="rendering_value_sector1_name">Sektor 1</string>
     <string name="map_2d_mode_action">2D način</string>
     <string name="map_3d_mode_action">3D način</string>
-    <string name="rendering_value_sacScale_name">Lestvica SAC</string>
-    <string name="rendering_value_caiScale_name">Lestvica CAI</string>
     <string name="map_3d_mode_hint">Z dolgim dotikom gumba lahko spremeniš položaj gumba.</string>
     <string name="visible_in_3d_mode">Vidno v 3D načinu</string>
     <string name="map_3d_mode_description">Dotakni se zemljevida z dvema prstoma in ju premikaj navzgor in navzdol, da prilagodiš nagib zemljevida.</string>

@@ -472,7 +472,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 
 	@NonNull
 	private DownloadActivityType getDownloadActivityType() {
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (plugin != null && plugin.generateTerrainFrom3DMaps()) {
 			return GEOTIFF_FILE;
 		} else {

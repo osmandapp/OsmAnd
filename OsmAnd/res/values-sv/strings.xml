@@ -1202,8 +1202,6 @@
     <string name="rendering_attr_subwayMode_name">Tunnelbanelinjer</string>
     <string name="continue_navigation">Fortsätt navigeringen</string>
     <string name="pause_navigation">Pausa navigeringen</string>
-    <string name="rendering_attr_alpineHiking_name">Alpvandringsskala (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Återge stigar enligt SAC-skalan.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandringsrutter</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Återge stigar enligt OSMC-spår.</string>
     <string name="rendering_attr_coloredBuildings_name">Färgkoda byggnader efter typ</string>
@@ -3467,7 +3465,7 @@
     <string name="poi_routes">Rutter</string>
     <string name="restore_selected_data">Återställ vald data</string>
     <string name="backup_error_gzip_only_supported_upload">Filen ska vara i .gzip-format</string>
-    <string name="contour_lines_hillshades_slope">Höjdkurvor, terrängskuggning, lutning</string>
+    <string name="contour_lines_hillshade_slope">Höjdkurvor, terrängskuggning, lutning</string>
     <string name="shared_string_purchased">Köpt</string>
     <string name="on_hold_since">Pausad sedan %1$s</string>
     <string name="active_till">Aktiv till %1$s</string>

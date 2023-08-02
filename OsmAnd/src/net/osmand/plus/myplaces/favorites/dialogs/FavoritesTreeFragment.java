@@ -4,10 +4,9 @@ import static android.view.Gravity.CENTER;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.MyPlacesActivity.IMPORT_FAVOURITES_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
-import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -81,17 +80,19 @@ import java.util.Set;
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FragmentStateHolder,
 		OsmAndCompassListener, OsmAndLocationListener, ShareFavoritesListener {
 
-	public static final int SEARCH_ID = -1;
-	public static final int DELETE_ID = 2;
-	public static final int DELETE_ACTION_ID = 3;
-	public static final int SHARE_ID = 4;
-	public static final int SELECT_MAP_MARKERS_ID = 5;
-	public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
-	public static final int IMPORT_FAVOURITES_ID = 7;
-	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
+	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
+	private static final int SEARCH_ID = -1;
+	private static final int DELETE_ID = 2;
+	private static final int DELETE_ACTION_ID = 3;
+	private static final int SHARE_ID = 4;
+	private static final int SELECT_MAP_MARKERS_ID = 5;
+	private static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
+	private static final int IMPORT_FAVOURITES_ID = 7;
+	private static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
 	private FavouritesHelper helper;
 	private FavouritesAdapter favouritesAdapter;
+	private ImportHelper importHelper;
 
 	private boolean selectionMode;
 	private final LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
@@ -119,6 +120,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		favouritesAdapter = new FavouritesAdapter();
+		importHelper = new ImportHelper(requireActivity());
 
 		helper = app.getFavoritesHelper();
 		if (helper.isFavoritesLoaded()) {
@@ -179,10 +181,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			boolean nightMode = !app.getSettings().isLightContent();
 			View searchView = inflater.inflate(R.layout.search_fav_list_item, listView, false);
 			searchView.setBackgroundResource(ColorUtilities.getListBgColorId(nightMode));
+
 			TextView title = searchView.findViewById(R.id.title);
-			Drawable searchIcon = app.getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark);
+			Drawable searchIcon = getContentIcon(R.drawable.ic_action_search_dark);
 			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(title, searchIcon, null, null, null);
-			searchView.setOnClickListener(v -> FavoritesSearchFragment.showInstance(getActivity(), ""));
+			searchView.setOnClickListener(v -> FavoritesSearchFragment.showInstance(requireActivity(), ""));
 			listView.addHeaderView(searchView);
 			View dividerView = inflater.inflate(R.layout.list_item_divider, null, false);
 			boolean proAvailable = InAppPurchaseHelper.isOsmAndProAvailable(app);
@@ -592,6 +595,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private void importFavourites() {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null && data.getData() != null) {
+				importHelper.handleFavouritesImport(data.getData());
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
 	}
 
 	public void shareFavorites(@Nullable FavoriteGroup group) {

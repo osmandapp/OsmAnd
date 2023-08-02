@@ -2216,7 +2216,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						.beginTransaction()
 						.detach(fragment)
 						.attach(fragment)
-						.commit();
+						.commitAllowingStateLoss();
 			}
 
 			DashboardOnMap dashboard = getDashboard();

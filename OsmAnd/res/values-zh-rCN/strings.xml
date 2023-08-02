@@ -1535,7 +1535,7 @@
     <string name="favorite_category_dublicate_message">请使用尚不存在的类别名称。</string>
     <string name="shared_string_trip_recording">行程记录</string>
     <string name="download_live_updates">实时更新</string>
-    <string name="restart_is_required">需要重新启动才能应用更改。</string>
+    <string name="restart_is_required">需要重新启动以应用更改。</string>
     <string name="lang_pms">皮埃蒙特语</string>
     <string name="lang_bn">孟加拉语</string>
     <string name="lang_tl">塔加拉族語</string>
@@ -1907,8 +1907,6 @@
     <string name="map_widget_av_notes">音频/视频注记</string>
     <string name="audionotes_location_not_defined">轻触\"使用位置 …\"以在此添加注记。</string>
     <string name="map_widget_audionotes">音频注记</string>
-    <string name="rendering_attr_alpineHiking_name">高山远足量表（SAC）</string>
-    <string name="rendering_attr_alpineHiking_description">依据 SAC 分级计算路径。</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">徒步旅行路线</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">根据 OSMC 轨迹渲染路径。</string>
     <string name="target_point">目的地 %1$s</string>
@@ -2754,7 +2752,7 @@
     <string name="files_failed">无法复制 %1$d 个文件 (%2$s)。</string>
     <string name="poi_cannot_be_found">无法找到节点或道路。</string>
     <string name="shared_string_total">一共</string>
-    <string name="wikivoyage_download_pics">下载图片</string>
+    <string name="wikivoyage_download_pics">下载图像</string>
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
     <string name="rendering_value_black_name">黑色</string>
@@ -3665,7 +3663,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">无效或过期的令牌</string>
     <string name="backup_error_user_is_not_registered">不存在用该电子邮件地址注册的用户</string>
     <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
-    <string name="contour_lines_hillshades_slope">等高线、丘陵阴影、坡度</string>
+    <string name="contour_lines_hillshade_slope">等高线、丘陵阴影、坡度</string>
     <string name="release_4_0">- 云备份
 \n
 \n - 为 \"Topo \"地图风格增加了夜间模式
@@ -4340,7 +4338,7 @@
     <string name="make_osmand_better_descr">允许OsmAnd收集和处理匿名的应用使用数据。不会收集关于你的位置或你在地图上查看的位置的数据。
 \n
 \n在\'设置\'→\'隐私和安全\'中随时进行配置。</string>
-    <string name="reset_all_settings_desc">将所有设置重置为默认值？</string>
+    <string name="reset_all_settings_desc">重置所有设置为默认值吗？</string>
     <string name="routing_attr_motor_type_description">选择发动机的燃料类型，这是估算二氧化碳排放量所必需的。</string>
     <string name="track_file_description">点击此动作会显示可用的轨迹。</string>
     <string name="auto_backup_title">自动备份</string>

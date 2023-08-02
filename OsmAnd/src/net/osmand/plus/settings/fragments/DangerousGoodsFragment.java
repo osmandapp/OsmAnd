@@ -33,15 +33,14 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
 public class DangerousGoodsFragment extends BaseSettingsFragment {
 
-	private final List<RoutingParameter> parameters = new ArrayList<>();
+	private final Map<String, RoutingParameter> parameters = new LinkedHashMap<>();
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 				String key = entry.getKey();
 				RoutingParameter parameter = entry.getValue();
 				if (key.startsWith(HAZMAT_CATEGORY_USA_PREFIX) && parameter.getType() == RoutingParameterType.BOOLEAN) {
-					parameters.add(parameter);
+					parameters.put(key, parameter);
 				}
 			}
 		}
@@ -90,7 +89,7 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 	private void setupHazmatPreferences() {
 		Context context = requireContext();
 
-		Iterator<RoutingParameter> iterator = parameters.iterator();
+		Iterator<RoutingParameter> iterator = parameters.values().iterator();
 		while (iterator.hasNext()) {
 			RoutingParameter parameter = iterator.next();
 
@@ -122,10 +121,14 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 			int hazmatClass = getHazmatUsaClass(key.replace(ROUTING_PREFERENCE_PREFIX, ""));
 			if (hazmatClass >= 0) {
 				holder.itemView.setContentDescription(getString(R.string.shared_string_class)
-						+ " " + hazmatClass + " " + preference.getTitle());
+						+ " " + hazmatClass + " " + preference.getTitle() + " "
+						+ getPreferenceStatus(key));
 			}
 			View item = holder.itemView.findViewById(R.id.selectable_list_item);
 			item.setMinimumHeight(getDimen(R.dimen.wpt_list_item_height));
+
+			TextView title = holder.itemView.findViewById(android.R.id.title);
+			title.setPadding(getDimen(R.dimen.text_margin_small), 0, getDimen(R.dimen.context_menu_padding_margin_large), 0);
 
 			View icon = holder.itemView.findViewById(android.R.id.icon);
 			ViewGroup.LayoutParams layoutParams = icon.getLayoutParams();
@@ -136,13 +139,23 @@ public class DangerousGoodsFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private int getDimen(@DimenRes int id){
+	private String getPreferenceStatus(String key) {
+		String id = key.replace(ROUTING_PREFERENCE_PREFIX, "");
+		RoutingParameter parameter = parameters.get(id);
+		if (parameter != null) {
+			CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(id, parameter.getDefaultBoolean());
+			return getString(pref.getModeValue(getSelectedAppMode()) ? R.string.shared_string_checked : R.string.shared_string_not_checked);
+		}
+		return "";
+	}
+
+	private int getDimen(@DimenRes int id) {
 		return app.getResources().getDimensionPixelSize(id);
 	}
 
 	private void resetToDefault() {
 		ApplicationMode mode = getSelectedAppMode();
-		for (RoutingParameter parameter : parameters) {
+		for (RoutingParameter parameter : parameters.values()) {
 			settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean()).resetModeToDefault(mode);
 		}
 		updateAllSettings();

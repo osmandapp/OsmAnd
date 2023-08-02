@@ -1238,8 +1238,6 @@
     <string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
     <string name="continue_navigation">Працягваць навігацыю</string>
     <string name="pause_navigation">Прыпыніць навігацыю</string>
-    <string name="rendering_attr_alpineHiking_name">Пешы горны турызм</string>
-    <string name="rendering_attr_alpineHiking_description">Візуалізацыя шляху па шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Пешыя маршруты</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізацыя шляху згодна трас OSMC.</string>
     <string name="arrival_distance_factor_early">Раней</string>
@@ -4396,7 +4394,7 @@
     <string name="use_login_and_password">Выкарыстоўваць імя карыстальніка і пароль</string>
     <string name="map_updates_for_mappers">Абнаўленні мапаў для картографаў</string>
     <string name="online_direct_line_maps_link">Праверце неабходныя мапы.</string>
-    <string name="contour_lines_hillshades_slope">Контурныя лініі, рэльеф, схілы</string>
+    <string name="contour_lines_hillshade_slope">Контурныя лініі, рэльеф, схілы</string>
     <string name="cancel_anytime_in_huawei_appgallery">Скасуйце ў любы час у Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Скасуйце ў любы час у Google Play.</string>
     <string name="choose_what_to_restore">Выберыце, што аднавіць.</string>
@@ -4919,4 +4917,164 @@
     <string name="external_device_characteristic_temperature">Тэмпература</string>
     <string name="external_device_details_information">Інфармацыя</string>
     <string name="ant_plus_open_settings">Адкрыць налады</string>
+    <string name="free_ride">Бясплатны праезд</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Выкарыстоўваць растр sqltiedb для схілу / рэльефу</string>
+    <string name="cache_size">Памер кэша</string>
+    <string name="shared_string_avoid">Пазбягаць</string>
+    <string name="may_be_used_if_there_is_shortcut">Можа выкарыстоўвацца, калі ёсць ярлык</string>
+    <string name="release_4_5">• Датчыкі BLE/ANT+: удасканаленае злучэнне, запіс і прагляд атрыманых даных у GPX
+\n
+\n • Бясплатнае рэзервовае капіраванне выбраных і налад у \"OsmAnd Cloud\"
+\n
+\n • Новы фармат карт мясцовасці з падтрымкай 3D-рэльефу
+\n
+\n • Кіраванне слядамі: абноўлены інтэрфейс, дададзена сартаванне, падтрымка ўкладзеных папак
+\n
+\n • Android Auto: новае меню «Пуск» для доступу да абраных, трэкаў і катэгорый POI
+\n
+\n • Агульны спіс віджэтаў для верхняй/ніжняй панэлі
+\n
+\n • Новы профіль «Цягнік», які дазваляе разлічваць чыгуначныя маршруты
+\n
+\n • Контурныя лініі працуюць з любой «крыніцай карты»
+\n
+\n • Пашыраны спіс дзеянняў па змаўчанні для знешніх клавіятур
+\n
+\n • Карыстальніцкія файлы маршрутызацыі: дададзены параметры для выдалення або перазапісу
+\n
+\n • Дададзена опцыя «Апавяшчаць аб адхіленні ад маршруту»
+\n
+\n • Пачатковы экран: дададзена опцыя аднаўлення стану OsmAnd з файла
+\n
+\n • Дададзены класы «Небяспечныя матэрыялы» Навігацыя грузавікоў у Паўночнай Амерыцы
+\n
+\n • Дададзена падтрымка \"Via ferrata\" для пешаходнага маршруту
+\n
+\n • Дададзена шкала \"CAI\" для класіфікацыі складанасці маршрутаў
+\n
+\n • Выпраўлены выбар мовы для кожнага прыкладання
+\n
+\n • Дададзена падтрымка тэматычных значкоў
+\n
+\n • OsmAnd Cloud: дададзена магчымасць выдалення ўліковага запісу
+\n
+\n • Даступнасць: памер кнопак зменены на 48 dp; выпраўлена праблема з інтэрфейсам карты для праграм чытання з экрана
+\n
+\n • Перапрацаваныя галасавыя падказкі на японскай мове
+\n
+\n • Удасканалены разлік змены вышыні і ацэнка схілу
+\n
+\n</string>
+    <string name="osmand_cloud_deletion_account_warning">Ваш уліковы запіс і ўсе рэквізіты ўліковага запісу будуць %1$s</string>
+    <string name="manage_subscriptions">Кіраванне падпіскамі.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Гэта не скасуе вашу падпіску на OsmAnd Pro.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Горны маршрут (Via ferrata)</string>
+    <string name="shared_string_close_the_dialog">Закрыць дыялогавае акно</string>
+    <string name="routing_attr_allow_via_ferrata_description">Горны маршрут, абсталяваны фіксаванымі тросамі, выбоінамі, лесвіцамі і мастамі.</string>
+    <string name="external_device_details_battery">Батарэя</string>
+    <string name="free_favorites_backup_description">Зарэгіструйцеся ў OsmAnd Cloud, каб атрымаць бясплатную рэзервовую копію закладак і налад.</string>
+    <string name="osmand_cloud_deleted_account_descr">Уліковы запіс і ўсе даныя былі выдалены з OsmAnd Cloud.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Выдаліць уліковы запіс\?</string>
+    <string name="shared_string_deleting">Выдаленне</string>
+    <string name="deleting_complete">Выдаленне завершана</string>
+    <string name="verify_account">Спраўдзіце свой уліковы запіс</string>
+    <string name="free_favorites_backup">Бясплатная рэзервовая копія закладак</string>
+    <string name="get_osmand_cloud">Атрымаць OsmAnd Cloud</string>
+    <string name="action_cannot_be_undone">Гэта дзеянне нельга скасаваць.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Другасныя прылады будуць адключаны ад OsmAnd Cloud і страцяць доступ да платных функцый.</string>
+    <string name="backup_error_delete_account_email_match">Адрас электроннай пошты не адпавядае імю карыстальніка</string>
+    <string name="verify_account_deletion_descr">Нам трэба спраўдзіць ваш уліковы запіс перад яго выдаленнем.
+\n
+\nКалі ласка, увядзіце адрас электроннай пошты, пад якім вы зарэгістраваліся. На яго будзе адпраўлены аднаразовы пароль для наступнага кроку.</string>
+    <string name="terrain_category_description">Контурныя лініі мясцовасці, поўная карта рэльефу з цёмнымі адценнямі і карта схілаў з колерамі для адлюстравання вяршынь і нізін.</string>
+    <string name="calculate_offline">Разлічыць у аўтаномным рэжыме</string>
+    <string name="terrain_map">Карта мясцовасці</string>
+    <string name="external_device_details_pair">Спалучыць</string>
+    <string name="external_device_details_speed">Хуткасць</string>
+    <string name="external_device_details_total_distance">Агульная адлегласць</string>
+    <string name="free_settings_backup">Бясплатная рэзервовая копія налад</string>
+    <string name="relief_3d">3D рэльеф</string>
+    <string name="relief_3d_description">Стварайце і назірайце за маштабнай мадэллю вашага раёна або ўсяго кантынента.</string>
+    <string name="power_watts_unit">Ваты</string>
+    <string name="revolutions_per_minute_unit">аб/хв</string>
+    <string name="error_calculate">Вынік разліку пусты</string>
+    <string name="external_device_details_distance">Адлегласць</string>
+    <string name="calculate_offline_altitude_descr">Разлічыць вышыню ў аўтаномным рэжыме на аснове даных з карты вышынь. Адрозненні ад вышыні, запісанай прыладай, могуць быць выкарыстаны ў якасці карэкцыі вышыні.</string>
+    <string name="external_device_details_connect">Злучыць</string>
+    <string name="free_account">Бясплатны ўліковы запіс</string>
+    <string name="folder_export_empty_error">Няма элементаў для экспарту, папка пустая</string>
+    <string name="osmand_cloud_deleting_account_descr">Праз некалькі хвілін усе вашы даныя і ўліковы запіс будуць выдалены з OsmAnd Cloud.
+\n
+\nУсе даныя на прыладзе застануцца некранутымі.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Вы ўпэўнены, што хочаце выдаліць уліковы запіс OsmAnd Cloud\?
+\n
+\nГэта дзеянне нельга скасаваць.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Усе даныя з OsmAnd Cloud будуць %1$s. Даныя на прыладзе застануцца некранутымі.</string>
+    <string name="delete_account_warning">Вы сапраўды хочаце выдаліць уліковы запіс %1$s\?</string>
+    <string name="delete_account">Выдаліць уліковы запіс</string>
+    <string name="slope_legend_description">Карта схілаў выкарыстоўвае колеры для візуалізацыі крутасці рэльефу. Вы можаце прачытаць больш пра карту схілаў у %1$s.</string>
+    <string name="external_device_characteristic_heart_rate">Частата сардэчнага рытму</string>
+    <string name="ant_plus_searching_text">Пошук датчыкаў</string>
+    <string name="bluetooth_found_title">Знойдзена: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth не падтрымліваецца</string>
+    <string name="ble_search_again">Шукаць зноў</string>
+    <string name="ant_plus_help_title">Я не ведаю, які ў мяне тып датчыка</string>
+    <string name="ant_plus_pair_new_sensor_ble">Спалучыць датчык Bluetooth LE</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Спалучыць датчык ANT+</string>
+    <string name="shared_string_alt_name">Альтэрнатыўная назва</string>
+    <string name="shared_string_pounds">фунтаў</string>
+    <string name="metric_lbs">фунтаў</string>
+    <string name="sort_duration_ascending">Спачатку меншая працягласць</string>
+    <string name="shared_string_ear_lobe">Мочка вуха</string>
+    <string name="sort_duration_descending">Спачатку найбольшая працягласць</string>
+    <string name="disable_vertex_hillshade_3d">Адключыць цень вяршынь ў 3D</string>
+    <string name="selected_value">Выбранае значэнне</string>
+    <string name="external_device_details_connection">Злучэнне</string>
+    <string name="external_device_characteristic_cadence">Хуткасць кручэння</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth адключаны</string>
+    <string name="ant_plus_bluetooth_off_description">Уключыце Bluetooth, знайдзіце і спалучыце датчыкі.</string>
+    <string name="sort_distance_ascending">Спачатку найкарацейшая адлегласць</string>
+    <string name="generate_hillshade_from_3d_maps">Стварыць растравыя карты рэльефу з 3D карт</string>
+    <string name="ant_plus_nothing_found_text">Немагчыма знайсці датчыкі</string>
+    <string name="shutter_sound">Гук засаўкі</string>
+    <string name="clear_online_cache_description">Гэта прывядзе да ачысткі кэша сеціўных тайлаў надвор\'я.</string>
+    <string name="clear_online_cache">Ачысціць сеціўны кэш</string>
+    <string name="offline_cache">Аўтаномны кэш</string>
+    <string name="generate_slope_from_3d_maps">Стварыць растравыя карты схілаў з 3D карт</string>
+    <string name="poi_categories">Катэгорыі POI</string>
+    <string name="is_imported">%1$s імпартаваны.</string>
+    <string name="external_device_characteristic_gear_ratio">Перадатачны лік</string>
+    <string name="enable_3d_maps">Уключыць 3D-карты</string>
+    <string name="token_is_not_valid">Токен несапраўдны</string>
+    <string name="common_weight_limit_error">Мінімальнае значэнне \"%1$s\" %2$s. Выкарыстоўвайце профіль \"%3$s\", калі вага аўтамабіля меньшая за мінімальнае значэнне.</string>
+    <string name="sort_distance_descending">Спачатку найдаўжэйшая адлегласць</string>
+    <string name="bluetooth_disconnected">Адлучана, %s</string>
+    <string name="bluetooth_connected">Злучана, %s</string>
+    <string name="ant_plus_pair_new_sensor">Спалучыць новы датчык</string>
+    <string name="speak_route_deviation">Апавясціць аб адхіленні ад маршруту</string>
+    <string name="app_mode_climbing">Скалалазанне</string>
+    <string name="external_device_details_received_data">Атрыманыя даныя</string>
+    <string name="nav_profile_confirm_delete">Вы сапраўды хочаце выдаліць \"%1$s\"\?</string>
+    <string name="external_device_low_battery">Нізкі зарад батарэі</string>
+    <string name="file_already_exists_description">\"%1$s\". Файл з такой назвай ужо існуе. Замена перазапіша ўсе змяненні, зробленыя ў бягучай версіі.</string>
+    <string name="file_already_exists">Файл ужо існуе</string>
+    <string name="ant_plus_searching_text_description">Калі ласка, трымайце прыладу бліжэй да датчыка. Вам неабходна актываваць датчык, каб OsmAnd мог яго знайсці.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Вы можаце спалучыць датчыкі Bluetooth LE і ANT+ з OsmAnd.</string>
+    <string name="learn_more_about_sensors_link">Даведайцеся больш пра датчыкі.</string>
+    <string name="shared_string_wrist">Запясце</string>
+    <string name="sort_date_ascending">Спачатку найноўшыя</string>
+    <string name="select_layer">Выбраць слой</string>
+    <string name="shared_string_finger">Палец</string>
+    <string name="shared_string_hand">Рука</string>
+    <string name="shared_string_foot">Нага</string>
+    <string name="external_device_details_disconnect">Адлучыць</string>
+    <string name="external_device_characteristic_cuff_pressure">Ціск у манжэце</string>
+    <string name="external_device_characteristic_pulse_rate">Частата пульса</string>
+    <string name="external_device_characteristic_stride_length">Даўжыня кроку</string>
+    <string name="ant_plus_nothing_found_description">Пераканайцеся, што:
+\n– Bluetooth уключаны
+\n– Датчык актываваны
+\n– Гэта прылада знаходзіцца побач з датчыкам</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="test_heightmap">Тэст карты вышынь</string>
 </resources>

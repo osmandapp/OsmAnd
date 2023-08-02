@@ -1,6 +1,11 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
+import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
+
 import android.graphics.drawable.Drawable;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -84,15 +89,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 			// Text line 2
 			TextView line2 = convertView.findViewById(R.id.context_menu_line2);
 			line2.setTextColor(ContextCompat.getColor(getContext(), R.color.ctx_menu_subtitle_color));
-			StringBuilder line2Str = new StringBuilder(item.getTypeStr());
-			String streetStr = item.getStreetStr();
-			if (!Algorithms.isEmpty(streetStr) && !item.displayStreetNameInTitle()) {
-				if (line2Str.length() > 0) {
-					line2Str.append(", ");
-				}
-				line2Str.append(streetStr);
-			}
-			line2.setText(line2Str);
+			line2.setText(getSecondLineText(item));
 			Drawable slIcon = item.getTypeIcon();
 			line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 			line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(menu.getMapActivity(), 5f));
@@ -103,6 +100,27 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		}
 
 		return convertView;
+	}
+
+	private String getSecondLineText(MenuObject item) {
+		StringBuilder line2Str = new StringBuilder(item.getTypeStr());
+		if (item.getObject() instanceof Pair) {
+			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
+			if (pair.first instanceof RouteKey) {
+				RouteKey key = (RouteKey) pair.first;
+				String tag = key.type.getTag();
+				String routeType = getActivityTypeStringPropertyName(item.getMyApplication(), tag, capitalizeFirstLetterAndLowercase(tag));
+				line2Str.append(" - ").append(routeType);
+			}
+		}
+		String streetStr = item.getStreetStr();
+		if (!Algorithms.isEmpty(streetStr) && !item.displayStreetNameInTitle()) {
+			if (line2Str.length() > 0) {
+				line2Str.append(", ");
+			}
+			line2Str.append(streetStr);
+		}
+		return line2Str.toString();
 	}
 
 	public interface OnClickListener {

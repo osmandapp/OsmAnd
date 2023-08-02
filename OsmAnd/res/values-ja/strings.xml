@@ -1281,8 +1281,6 @@ POIの更新は利用できません</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
     <string name="gpx_option_calculate_first_last_segment">最初と最後の経路分類を利用しOsmAndエンジンでルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
-    <string name="rendering_attr_alpineHiking_name">アルペンハイキングスケール(SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">ハイキングルート</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写します。</string>
     <string name="interrupt_music_descr">有効にすると音声案内時に音楽を一時停止します</string>
@@ -4383,7 +4381,7 @@ POIの更新は利用できません</string>
     <string name="logout_from_osmand_cloud_decsr">ログアウトしますか？
 \nデータをバックアップまたは復元するには、再度ログインする必要があります。</string>
     <string name="logout_from_osmand_cloud">OsmAnd Cloudからログアウト</string>
-    <string name="contour_lines_hillshades_slope">等高線、陰影起伏、勾配</string>
+    <string name="contour_lines_hillshade_slope">等高線、陰影起伏、勾配</string>
     <string name="backup_error_subscription_was_expired_descr">OsmAnd Proのサブスクリプション期限が切れているので、データのバックアップを継続利用するのであれば更新してください。引き続きクラウドからデータを復元できるようになります。</string>
     <string name="rendering_attr_natureReserves_name">自然保護区</string>
     <string name="rendering_attr_natureReserves_description">自然保護区、保護地域、国立公園を表示します。</string>

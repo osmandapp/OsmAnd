@@ -1465,8 +1465,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference(this, "disable_recording_once_app_killed", false).makeProfile();
 
-	public final CommonPreference<Boolean> SAVE_HEADING_TO_GPX = new BooleanPreference(this, "save_heading_to_gpx", false).makeProfile();
-
 	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference(this, "track_storage_directory", 0).makeProfile();
 
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
@@ -1851,30 +1849,50 @@ public class OsmandSettings {
 
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
-	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").cache();
+	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
+	public final ListStringPreference TRACKS_FOLDERS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_folders_sort_modes", null, ";;").makeGlobal().makeShared().cache();
 
 	@NonNull
 	public Map<String, String> getTrackTabsSortModes() {
-		Map<String, String> tabsSortModes = new HashMap<>();
+		return getTrackSortModes(TRACKS_TABS_SORT_MODES.getStringsList());
+	}
 
-		List<String> sortModes = TRACKS_TABS_SORT_MODES.getStringsList();
-		if (!Algorithms.isEmpty(sortModes)) {
-			for (String sortMode : sortModes) {
-				String[] tabSortMode = sortMode.split(",,");
-				if (tabSortMode.length == 2) {
-					tabsSortModes.put(tabSortMode[0], tabSortMode[1]);
-				}
-			}
-		}
-		return tabsSortModes;
+	@NonNull
+	public Map<String, String> getTrackFoldersSortModes() {
+		return getTrackSortModes(TRACKS_FOLDERS_SORT_MODES.getStringsList());
 	}
 
 	public void saveTabsSortModes(@NonNull Map<String, String> tabsSortModes) {
+		List<String> sortModes = getPlainSortModes(tabsSortModes);
+		TRACKS_TABS_SORT_MODES.setStringsList(sortModes);
+	}
+
+	public void saveFoldersSortModes(@NonNull Map<String, String> tabsSortModes) {
+		List<String> sortModes = getPlainSortModes(tabsSortModes);
+		TRACKS_FOLDERS_SORT_MODES.setStringsList(sortModes);
+	}
+
+	@NonNull
+	private Map<String, String> getTrackSortModes(@Nullable List<String> modes) {
+		Map<String, String> sortModes = new HashMap<>();
+		if (!Algorithms.isEmpty(modes)) {
+			for (String sortMode : modes) {
+				String[] tabSortMode = sortMode.split(",,");
+				if (tabSortMode.length == 2) {
+					sortModes.put(tabSortMode[0], tabSortMode[1]);
+				}
+			}
+		}
+		return sortModes;
+	}
+
+	@NonNull
+	private List<String> getPlainSortModes(@NonNull Map<String, String> tabsSortModes) {
 		List<String> sortTypes = new ArrayList<>();
 		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
 			sortTypes.add(entry.getKey() + ",," + entry.getValue());
 		}
-		TRACKS_TABS_SORT_MODES.setStringsList(sortTypes);
+		return sortTypes;
 	}
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();

@@ -1504,8 +1504,6 @@
     <string name="arrival_distance_factor_at_last">Son metrelerde</string>
     <string name="arrival_distance">Varış duyurusu</string>
     <string name="arrival_distance_descr">Varış duyurusunu ne yakınlıkta istiyorsunuz\?</string>
-    <string name="rendering_attr_alpineHiking_name">Alp yürüyüş ölçeği (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">SAC ölçeğine göre yolları görselleştir.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş rotaları</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları görselleştir.</string>
     <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
@@ -4203,7 +4201,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Geçersiz veya süresi dolmuş belirteç</string>
     <string name="backup_error_user_is_not_registered">Bu e-posta adresiyle kayıtlı kullanıcı yok</string>
     <string name="backup_error_no_valid_subscription">Geçerli abonelik yok</string>
-    <string name="contour_lines_hillshades_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
+    <string name="contour_lines_hillshade_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
     <string name="release_4_0">• Bulut yedekleme
 \n
 \n • \"Topo\" harita tarzı için gece modu eklendi

@@ -1218,8 +1218,6 @@
     <string name="lang_zh_tw">Čínsky (Tradičná)</string>
     <string name="continue_navigation">Pokračovať v navigácii</string>
     <string name="pause_navigation">Pozastaviť navigáciu</string>
-    <string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Kresliť chodníky podľa značenia OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
@@ -4229,7 +4227,7 @@
     <string name="purchases_feature_desc_hourly_map_updates">Získajte prístup k častejším aktualizáciám máp. Hodinové, denné alebo týždenné aktualizácie. Aktualizácie sú sťahované postupne, len pre zmenenú oblasť.</string>
     <string name="purchases_feature_desc_osmand_cloud">Získajte OsmAnd Cloud na uloženie všetkých údajov OsmAnd na serveri. Po preinštalovaní nestratíte údaje. Zálohujte a obnovte ľahko všetky informácie.</string>
     <string name="backup_error_subscription_was_expired_descr">Vaše predplatné OsmAnd Pro expirovalo, obnovte ho pre použitie zálohovania. Napriek tom môžete obnoviť údaje z Cloudu.</string>
-    <string name="contour_lines_hillshades_slope">Vrstevnice, tieňované svahy, sklony</string>
+    <string name="contour_lines_hillshade_slope">Vrstevnice, tieňované svahy, sklony</string>
     <string name="duration_moment_ago">pred chvíľou</string>
     <string name="logout_from_osmand_cloud">Odhlásiť z OsmAnd Cloudu</string>
     <string name="logout_from_osmand_cloud_decsr">Odhlásiť sa\?

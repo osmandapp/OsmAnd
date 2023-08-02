@@ -80,13 +80,18 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return itemsCache.put(item.getFile(), item);
 	}
 
-	private void removeFromCache(@NonNull GpxDataItem item) {
-		itemsCache.remove(item.getFile());
+	private void removeFromCache(@NonNull File file) {
+		itemsCache.remove(file);
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
 		GpxDataItem item = itemsCache.get(currentFile);
-		return database.rename(item, currentFile, newFile);
+		boolean res = database.rename(item, currentFile, newFile);
+		if (item != null) {
+			putToCache(item);
+			removeFromCache(currentFile);
+		}
+		return res;
 	}
 
 	public boolean updateColor(@NonNull GpxDataItem item, int color) {
@@ -115,6 +120,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public boolean updateShowAsMarkers(@NonNull GpxDataItem item, boolean showAsMarkers) {
 		boolean res = database.updateShowAsMarkers(item, showAsMarkers);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean updateImportedByApi(@NonNull GpxDataItem item, boolean importedByApi) {
+		boolean res = database.updateImportedByApi(item, importedByApi);
 		putToCache(item);
 		return res;
 	}

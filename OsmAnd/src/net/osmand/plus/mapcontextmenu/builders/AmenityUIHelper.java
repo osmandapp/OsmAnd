@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
+import androidx.core.util.PatternsCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities;
@@ -133,6 +134,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
+		List<AmenityInfoRow> urlRows = new LinkedList<>();
 
 		Map<String, List<PoiType>> poiAdditionalCategories = new HashMap<>();
 		AmenityInfoRow cuisineRow = null;
@@ -183,7 +185,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !("population".equals(key) || "height".equals(key) || Amenity.OPENING_HOURS.equals(key));
+			boolean needLinks = !(Algorithms.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -293,7 +295,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else if (Amenity.MOBILE.equals(key)) {
 				iconId = R.drawable.ic_action_phone;
 				isPhoneNumber = true;
-			} else if (Amenity.WEBSITE.equals(key)) {
+			} else if (Algorithms.equalsToAny(key, Amenity.WEBSITE, Amenity.URL_KEY)) {
 				iconId = R.drawable.ic_world_globe_dark;
 				isUrl = true;
 			} else if (Amenity.CUISINE.equals(key)) {
@@ -409,6 +411,8 @@ public class AmenityUIHelper extends MenuBuilder {
 				descriptions.add(row);
 			} else if (isCuisine) {
 				cuisineRow = row;
+			} else if (isUrl) {
+				addRowIfNotExists(urlRows, row);
 			} else if (poiType == null) {
 				infoRows.add(row);
 			}
@@ -484,7 +488,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					poiCategory.getKeyName(), false, false, false, 1));
 		}
 
-
+		infoRows.addAll(urlRows);
 		Collections.sort(infoRows, (row1, row2) -> {
 			if (row1.order < row2.order) {
 				return -1;
@@ -518,6 +522,12 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 	}
 
+	private void addRowIfNotExists(@NonNull List<AmenityInfoRow> rows, @NonNull AmenityInfoRow row) {
+		if (!rows.contains(row)) {
+			rows.add(row);
+		}
+	}
+
 	@Nullable
 	private String getSocialMediaUrl(String key, String value) {
 		// Remove leading and closing slashes
@@ -531,7 +541,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		}
 
 		// It cannot be username
-		if (sb.indexOf("/") != -1) {
+		if (PatternsCompat.AUTOLINK_WEB_URL.matcher(sb.toString()).matches()) {
 			return "https://" + value;
 		}
 

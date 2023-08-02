@@ -1279,8 +1279,6 @@
     <string name="rendering_attr_noAdminboundaries_description">Zabrani prikaz regionalnih granica (admin nivoi 5-9).</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Prikazuj puteve prema putanjama OSMC-a.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Putanje za pešačenje</string>
-    <string name="rendering_attr_alpineHiking_description">Prikazuj puteve prema lestvici SAC-a.</string>
-    <string name="rendering_attr_alpineHiking_name">Alpska skala za planinarenje (SAC)</string>
     <string name="download_roads_only_maps">Karta puteva</string>
     <string name="map_screen_orientation">Orijentacija ekrana</string>
     <string name="map_orientation_landscape">Pejzaž</string>
@@ -4284,7 +4282,7 @@
     <string name="turn_arrows_descr">Izaberite da li su strelice za skretanje prikazane na liniji rute.</string>
     <string name="included_categories">Uključene kategorije</string>
     <string name="from_with_param">Od %1$s</string>
-    <string name="contour_lines_hillshades_slope">Izohipse, reljef, nagib</string>
+    <string name="contour_lines_hillshade_slope">Izohipse, reljef, nagib</string>
     <string name="verification_code_missing">Nisam dobio verifikacioni kod</string>
     <string name="backup_delete_old_data_warning">Izbrisaćete istoriju promena prethodno učitanih podataka.
 \n

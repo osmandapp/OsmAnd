@@ -715,8 +715,6 @@
     <string name="rendering_attr_coloredBuildings_name">Edifìtzios colorados pro casta</string>
     <string name="continue_navigation">Sighi cun sa navigatzione</string>
     <string name="pause_navigation">Pone in pàusa sa navigatzione</string>
-    <string name="rendering_attr_alpineHiking_name">Iscala pro s’alpinismu (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basende·ti in subra de s’iscala SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Àndalas pro s\'escursionismu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC.</string>
     <string name="osmand_parking_delete_confirm">Iscantzellare su marcadore de sa positzione de sa màchina parchegiada?</string>
@@ -4206,7 +4204,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Getone invàlidu o iscadidu</string>
     <string name="backup_error_user_is_not_registered">Perunu impreadore registradu cun custu indiritzu de posta</string>
     <string name="backup_error_no_valid_subscription">Non b\'at perunu abbonamentu vàlidu</string>
-    <string name="contour_lines_hillshades_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
+    <string name="contour_lines_hillshade_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
     <string name="duration_moment_ago">unu momentu a como</string>
     <string name="logout_from_osmand_cloud">Essi dae OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Cheres essire\?

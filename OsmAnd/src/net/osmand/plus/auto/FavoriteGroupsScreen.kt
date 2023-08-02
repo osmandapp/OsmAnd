@@ -5,14 +5,23 @@ import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.favorites.FavoriteGroup
 import net.osmand.plus.utils.AndroidUtils
 
 class FavoriteGroupsScreen(
     carContext: CarContext,
-    private val settingsAction: Action,
-    private val surfaceRenderer: SurfaceRenderer) : BaseOsmAndAndroidAutoScreen(carContext) {
+    private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
+
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                recenterMap()
+            }
+        })
+    }
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
@@ -70,7 +79,6 @@ class FavoriteGroupsScreen(
             FavoritesScreen(
                 carContext,
                 settingsAction,
-                surfaceRenderer,
                 group))
     }
 

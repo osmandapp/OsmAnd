@@ -1799,8 +1799,6 @@
     <string name="recording_playing">Audio halutusta nauhoituksesta soitetaan.
 \n%1$s</string>
     <string name="recording_context_menu_arecord">Tee audio muistiinpano</string>
-    <string name="rendering_attr_alpineHiking_name">Alppivaelluksen mittakaava (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Piirrä polut SAC-mittakaavan mukaisesti.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Piirrä polut OSMC-jälkien pohjalta.</string>
     <string name="keep_informing">Toista navigointiohjeet</string>
     <string name="auto_follow_location_enabled">Keskitä käytettävä kartta automaattisesti.</string>
@@ -3749,7 +3747,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Virheellinen tai vanhentunut tunniste</string>
     <string name="backup_error_user_is_not_registered">Tällä sähköpostiosoitteella ei ole rekisteröitynyttä käyttäjää</string>
     <string name="backup_error_no_valid_subscription">Ei voimassa olevaa tilausta</string>
-    <string name="contour_lines_hillshades_slope">Ääriviivat, kukkulat, rinne</string>
+    <string name="contour_lines_hillshade_slope">Ääriviivat, kukkulat, rinne</string>
     <string name="release_4_0">- Pilvivarmistus
 \n
 \n - Lisätty yötila Topo-karttatyyliin

@@ -304,7 +304,7 @@
     <string name="backup_deleting_all_data">Se brišat site podatoci…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavuvanje\?
 \nḰe treba povtorno da se najavite za da napravite rezervna kopija ili da gi vratite podatocite.</string>
-    <string name="contour_lines_hillshades_slope">Konturni linii, ridovi, nagib</string>
+    <string name="contour_lines_hillshade_slope">Konturni linii, ridovi, nagib</string>
     <string name="backup_error_no_valid_subscription">Nema validna pretplata</string>
     <string name="backup_error_user_is_not_registered">Nitu eden korisnik ne e registriran so taa adresa na e-pošta</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nevažečki ili istečen token</string>
@@ -3196,7 +3196,6 @@
     <string name="index_srtm_ele">Konturni linii</string>
     <string name="download_select_map_types">Drugi karti</string>
     <string name="download_roads_only_maps">Patista-samo karta</string>
-    <string name="rendering_attr_alpineHiking_description">Avtomatski iscrtani karti spored скалата SAC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Granici</string>
     <string name="rendering_attr_noAdminboundaries_description">Potisnete go prikazot na regionalnite granici (administratorsko nivo 5–9).</string>
     <string name="map_widget_max_speed">Ogranici brzina</string>
@@ -3480,7 +3479,6 @@
     <string name="download_roads_only_item">Samo patista</string>
     <string name="download_srtm_maps">Konturni linii</string>
     <string name="download_regular_maps">Standardna karta</string>
-    <string name="rendering_attr_alpineHiking_name">Alpska skala za planinarenje (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Plainarski marsruti</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Avtomatski iscrtani karti spored OSMC tragite.</string>
     <string name="zxing_barcode_scanner_not_found">Aplikacijata ZXing Barcode Scanner ne e instalirana. Baraj vo Google Play\?</string>

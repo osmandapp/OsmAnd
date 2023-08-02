@@ -2335,8 +2335,6 @@
 \n * Παρατεταμένο πάτημα σε σημείο για να προβάλετε και να επισυνάψετε περιγραφή.
 \n * Πατήστε το γραφικό στοιχείο μέτρησης για να δείτε περισσότερες ενέργειες.</string>
     <string name="download_wikipedia_maps">Βικιπαίδεια</string>
-    <string name="rendering_attr_alpineHiking_name">Κλίμακα αλπικής πεζοπορίας (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Απόδοση δρόμων σύμφωνα με την κλίμακα SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Διαδρομές πεζοπορίας</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Απόδοση δρόμων σύμφωνα με τα ίχνη OSMC.</string>
     <string name="osmand_extended_description_part2">Πλοήγηση GPS 

@@ -1277,8 +1277,6 @@
     <string name="rendering_attr_coloredBuildings_name">Różne kolory typów budynków</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
     <string name="pause_navigation">Zatrzymaj nawigację</string>
-    <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności wspinaczki alpinistycznej</string>
-    <string name="rendering_attr_alpineHiking_description">Renderowanie ścieżek zgodnie ze skalą SAC/CAI.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Szlaki turystyczne</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderowanie szlaków według śladów OSMC.</string>
     <string name="arrival_distance_factor_early">Wcześnie</string>
@@ -4240,7 +4238,7 @@
     <string name="attribute">Atrybut</string>
     <string name="shared_string_purchased">Zakupiono</string>
     <string name="explore_wikipedia_offline">Przeglądaj Wikipedię w trybie offline.</string>
-    <string name="contour_lines_hillshades_slope">Poziomice, mapy cieniowane, nachylenie</string>
+    <string name="contour_lines_hillshade_slope">Poziomice, mapy cieniowane, nachylenie</string>
     <string name="on_hold_since">Wstrzymana od %1$s</string>
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>
@@ -5200,8 +5198,6 @@
     <string name="visible_in_3d_mode">Widoczne w trybie 3D</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="map_2d_mode_action">Tryb 2D</string>
-    <string name="rendering_value_sacScale_name">Skala SAC</string>
-    <string name="rendering_value_caiScale_name">Skala CAI</string>
     <string name="map_3d_mode_description">Dotknij mapy dwoma palcami i przesuwaj je w górę i w dół, aby dostosować nachylenie mapy.</string>
     <string name="map_3d_mode_action">Tryb 3D</string>
     <string name="rendering_attr_lightDetail_description">Domyślnie: nazwa znaku morskiego (light character.group.period), wybierz dodatkowe informacje o sektorach od 1 do 3 lub sektorze 1,2,3,4,5 znaku świetlnego</string>
@@ -5242,4 +5238,18 @@
     <string name="relief_3d_description">Posiadaj i obserwuj model w skali swojej okolicy lub całego kontynentu.</string>
     <string name="slope_legend_description">Nachylenie używa kolorów do wizualizacji nachylenia terenu. Więcej informacji na temat stoków można znaleźć w %1$s.</string>
     <string name="terrain_category_description">Linie konturu terenu, pełna mapa cieni wzgórz z ciemnymi odcieniami i mapy zboczy z kolorami pokazującymi szczyty i niziny.</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gazy</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Ciecze łatwopalne</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Łatwopalne substancje stałe</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Środki utleniające i nadtlenki organiczne</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substancje toksyczne i zakaźne</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Materiały wybuchowe</string>
+    <string name="dangerous_goods_description">Na niektórych drogach i w tunelach przewożenie materiałów niebezpiecznych jest zabronione.</string>
+    <string name="dangerous_goods">Towary niebezpieczne</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Różne</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substancje żrące</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substancje radioaktywne</string>
+    <string name="rendering_attr_alpineHiking_description">Typy klasyfikacji trudności tras.</string>
+    <string name="rendering_value_sacScale_name">Skala SAC</string>
+    <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności</string>
 </resources>

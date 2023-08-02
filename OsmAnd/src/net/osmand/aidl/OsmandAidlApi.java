@@ -31,7 +31,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.view.KeyEvent;
@@ -43,6 +42,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
@@ -79,8 +79,8 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
-import net.osmand.plus.helpers.GpxNavigationParams;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.NavigateGpxHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -121,6 +121,7 @@ import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
@@ -199,14 +200,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_DEST_LAT = "aidl_dest_lat";
 	private static final String AIDL_DEST_LON = "aidl_dest_lon";
 	private static final String AIDL_PROFILE = "aidl_profile";
-	private static final String AIDL_DATA = "aidl_data";
-	private static final String AIDL_URI = "aidl_uri";
 	private static final String AIDL_FORCE = "aidl_force";
 	private static final String AIDL_LOCATION_PERMISSION = "aidl_location_permission";
-	private static final String AIDL_PASS_WHOLE_ROUTE = "aidl_pass_whole_route";
-	private static final String AIDL_SNAP_TO_ROAD = "aidl_snap_to_road";
-	private static final String AIDL_SNAP_TO_ROAD_MODE = "aidl_snap_to_road_mode";
-	private static final String AIDL_SNAP_TO_ROAD_THRESHOLD = "aidl_snap_to_road_threshold";
 	private static final String AIDL_SEARCH_QUERY = "aidl_search_query";
 	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
 	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
@@ -220,7 +215,6 @@ public class OsmandAidlApi {
 	private static final String AIDL_STOP_RECORDING = "aidl_stop_recording";
 
 	private static final String AIDL_NAVIGATE = "aidl_navigate";
-	private static final String AIDL_NAVIGATE_GPX = "aidl_navigate_gpx";
 	private static final String AIDL_NAVIGATE_SEARCH = "aidl_navigate_search";
 	private static final String AIDL_PAUSE_NAVIGATION = "pause_navigation";
 	private static final String AIDL_RESUME_NAVIGATION = "resume_navigation";
@@ -280,7 +274,6 @@ public class OsmandAidlApi {
 		registerStartAudioRecordingReceiver(mapActivity);
 		registerStopRecordingReceiver(mapActivity);
 		registerNavigateReceiver(mapActivity);
-		registerNavigateGpxReceiver(mapActivity);
 		registerNavigateSearchReceiver(mapActivity);
 		registerPauseNavigationReceiver(mapActivity);
 		registerResumeNavigationReceiver(mapActivity);
@@ -668,13 +661,13 @@ public class OsmandAidlApi {
 					boolean locationPermission = intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false);
 					if (routingHelper.isFollowingMode() && !force) {
 						mapActivity.getMapActions().stopNavigationActionConfirm(dialog -> {
-							MapActivity mapActivity1 = mapActivityRef.get();
-							if (mapActivity1 != null && !routingHelper.isFollowingMode()) {
-								ExternalApiHelper.startNavigation(mapActivity1, start, startDesc, dest, destDesc, profile, locationPermission);
+							MapActivity activity = mapActivityRef.get();
+							if (activity != null && !routingHelper.isFollowingMode()) {
+								NavigateGpxHelper.startNavigation(activity, profile, start, startDesc, dest, destDesc, locationPermission);
 							}
 						});
 					} else {
-						ExternalApiHelper.startNavigation(mapActivity, start, startDesc, dest, destDesc, profile, locationPermission);
+						NavigateGpxHelper.startNavigation(mapActivity, profile, start, startDesc, dest, destDesc, locationPermission);
 					}
 				}
 			}
@@ -746,53 +739,6 @@ public class OsmandAidlApi {
 			}
 		};
 		registerReceiver(navigateSearchReceiver, mapActivity, AIDL_NAVIGATE_SEARCH);
-	}
-
-	private void registerNavigateGpxReceiver(@NonNull MapActivity mapActivity) {
-		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-		BroadcastReceiver navigateGpxReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				MapActivity mapActivity = mapActivityRef.get();
-				if (mapActivity != null) {
-					GPXFile gpx = loadGpxFileFromIntent(mapActivity, intent);
-					if (gpx != null) {
-						GpxNavigationParams params = new GpxNavigationParams();
-						params.setForce(intent.getBooleanExtra(AIDL_FORCE, false));
-						params.setCheckLocationPermission(intent.getBooleanExtra(AIDL_LOCATION_PERMISSION, false));
-						params.setPassWholeRoute(intent.getBooleanExtra(AIDL_PASS_WHOLE_ROUTE, false));
-						params.setSnapToRoad(intent.getBooleanExtra(AIDL_SNAP_TO_ROAD, false));
-						params.setSnapToRoadMode(intent.getStringExtra(AIDL_SNAP_TO_ROAD_MODE));
-						params.setSnapToRoadThreshold(intent.getIntExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, 50));
-						ExternalApiHelper.saveAndNavigateGpx(mapActivity, gpx, params);
-					}
-				}
-			}
-
-			private GPXFile loadGpxFileFromIntent(@NonNull MapActivity mapActivity, @NonNull Intent intent) {
-				GPXFile gpx = null;
-				String gpxStr = intent.getStringExtra(AIDL_DATA);
-				if (!Algorithms.isEmpty(gpxStr)) {
-					gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
-				} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					Uri gpxUri = intent.getParcelableExtra(AIDL_URI);
-					if (gpxUri != null) {
-						ParcelFileDescriptor gpxParcelDescriptor = null;
-						try {
-							gpxParcelDescriptor = mapActivity.getContentResolver().openFileDescriptor(gpxUri, "r");
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-						if (gpxParcelDescriptor != null) {
-							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-							gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
-						}
-					}
-				}
-				return gpx;
-			}
-		};
-		registerReceiver(navigateGpxReceiver, mapActivity, AIDL_NAVIGATE_GPX);
 	}
 
 	private void registerPauseNavigationReceiver(@NonNull MapActivity mapActivity) {
@@ -1308,11 +1254,12 @@ public class OsmandAidlApi {
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
-			gpxDataItem.setApiImported(true);
+			gpxDataItem.setImportedByApi(true);
 			app.getGpxDbHelper().add(gpxDataItem);
 		} else {
 			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
+				item.setImportedByApi(true);
 				app.getGpxDbHelper().updateColor(item, col);
 			}
 		}
@@ -1552,7 +1499,8 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				String fileName = file.getName();
-				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
+				String absolutePath = file.getAbsolutePath();
+				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
 				long modifiedTime = dataItem.getFileLastModifiedTime();
 				long fileSize = file.length();
 				int color = dataItem.getColor();
@@ -1565,7 +1513,10 @@ public class OsmandAidlApi {
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
-				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details));
+				net.osmand.aidlapi.gpx.AGpxFile gpxFile = new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details);
+				gpxFile.setRelativePath(GpxUiHelper.getGpxFileRelativePath(app, absolutePath));
+
+				files.add(gpxFile);
 			}
 		}
 		return true;
@@ -1607,16 +1558,18 @@ public class OsmandAidlApi {
 		return null;
 	}
 
-	boolean removeGpx(String fileName) {
-		if (!Algorithms.isEmpty(fileName)) {
-			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
-			if (f.exists()) {
-				GpxDataItem item = app.getGpxDbHelper().getItem(f);
-				if (item != null && item.isApiImported()) {
-					Algorithms.removeAllFiles(f);
-					app.getGpxDbHelper().remove(f);
-					return true;
-				}
+	boolean removeGpx(@Nullable String fileName, @Nullable String relativePath) {
+		File file = null;
+		if (!Algorithms.isEmpty(relativePath)) {
+			file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + relativePath);
+		} else if (!Algorithms.isEmpty(fileName)) {
+			file = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+		}
+
+		if (file != null && file.exists()) {
+			GpxDataItem item = app.getGpxDbHelper().getItem(file);
+			if (item != null && item.isImportedByApi()) {
+				return FileUtils.removeGpxFile(app, file);
 			}
 		}
 		return false;
@@ -1854,31 +1807,11 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigateGpx(String data, Uri uri, boolean force, boolean requestLocationPermission) {
-		Intent intent = new Intent();
-		intent.setAction(AIDL_NAVIGATE_GPX);
-		intent.putExtra(AIDL_DATA, data);
-		intent.putExtra(AIDL_URI, uri);
-		intent.putExtra(AIDL_FORCE, force);
-		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
-		app.sendBroadcast(intent);
-		return true;
+		return mapActivity != null && NavigateGpxHelper.saveAndNavigateGpx(mapActivity, data, uri, force, requestLocationPermission);
 	}
 
-	boolean navigateGpxV2(String data, Uri uri, boolean force, boolean requestLocationPermission,
-	                      boolean passWholeRoute, boolean snapToRoad, String snapToRoadMode,
-	                      int snapToRoadThreshold) {
-		Intent intent = new Intent();
-		intent.setAction(AIDL_NAVIGATE_GPX);
-		intent.putExtra(AIDL_DATA, data);
-		intent.putExtra(AIDL_URI, uri);
-		intent.putExtra(AIDL_FORCE, force);
-		intent.putExtra(AIDL_LOCATION_PERMISSION, requestLocationPermission);
-		intent.putExtra(AIDL_PASS_WHOLE_ROUTE, passWholeRoute);
-		intent.putExtra(AIDL_SNAP_TO_ROAD, snapToRoad);
-		intent.putExtra(AIDL_SNAP_TO_ROAD_MODE, snapToRoadMode);
-		intent.putExtra(AIDL_SNAP_TO_ROAD_THRESHOLD, snapToRoadThreshold);
-		app.sendBroadcast(intent);
-		return true;
+	boolean navigateGpxV2(@NonNull NavigateGpxParams params) {
+		return mapActivity != null && NavigateGpxHelper.saveAndNavigateGpx(mapActivity, params);
 	}
 
 	boolean setLockState(boolean lock) {

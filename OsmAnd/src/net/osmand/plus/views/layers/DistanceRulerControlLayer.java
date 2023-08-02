@@ -185,8 +185,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				wasPinchZoomOrRotation = true;
 			}
 
-			boolean showTwoFingersDistance = !wasPinchZoomOrRotation &&
-					!view.isWasZoomInMultiTouch() &&
+			boolean showTwoFingersDistance =
 					currentTime - view.getMultiTouchStartTime() > DELAY_BEFORE_DRAW &&
 					(view.isMultiTouch() || currentTime - cacheMultiTouchEndTime < DRAW_TIME);
 
