@@ -219,7 +219,7 @@ public class DataStorageHelper {
 //				.setExtensions(IndexConstants.TIF_EXT)
 				.setDirectories(
 						createDirectory(HEIGHTMAP_INDEX_DIR, true, EXTENSIONS, true),
-						createDirectory(GEOTIFF_DIR, false, EXTENSIONS, false))
+						createDirectory(GEOTIFF_DIR, true, EXTENSIONS, true))
 				.createItem();
 		memoryItems.add(terrain3dStorageSize);
 
