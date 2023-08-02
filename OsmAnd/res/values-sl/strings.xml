@@ -312,7 +312,7 @@
     <string name="route_roundabout">Krožišče: zapeljite v %1$d izvoz</string>
     <string name="route_kl">Držite se leve</string>
     <string name="route_kr">Držite se desne</string>
-    <string name="rendering_attr_contourLines_description">Prikaži pod povečavo (zahteva podatke izohips):</string>
+    <string name="rendering_attr_contourLines_description">Prikaži od povečave (zahteva podatke izohips):</string>
     <string name="rendering_attr_hmRendered_description">Povečaj podrobnost izrisa zemljevida.</string>
     <string name="rendering_attr_hmRendered_name">Pokaži podrobnejši izris</string>
     <string name="navigate_point_format">Oblika</string>
@@ -707,7 +707,7 @@
 \n• popolnoma delujoč tudi brez povezave (shrani podatke vektorskih in zemljevidov s ploščicami v mapo po izbiri);
 \n• na voljo so stisnjeni vektorski podatki zemljevida sveta;
 \n• prenos podatkov zemljevida posameznih držav ali področij znotraj programa;
-\n• prekrivanje zemljevidov s podatkovnimi sloji: na primer sledi GPX, načrti poti, zanimive in priljubljene točke, izohipse, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo;
+\n• prekrivanje zemljevidov s podatkovnimi sloji: na primer sledi GPX, načrti poti, zanimive in priljubljene točke, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo, topografske značilnosti, kot so izohipse, senčenje terena in naklon;
 \n• iskanje naslovov, krajev in zanimivih točk (POI) brez povezave;
 \n• usmerjanje v načinu brez povezave za srednje dolge poti;
 \n• način za avtomobiliste, kolesarje in pešce:
@@ -726,13 +726,13 @@
 \n OsmAnd+ je odprtokodna programska oprema za navigacijo, ki za prikaz uporablja širok nabor zemljevidov OpenStreetMap (OSM). Vse podatke zemljevidov je mogoče shraniti v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja.
 \n
 \n OsmAnd+ je plačljiva različica programa. Z nakupom podprete projekt, razvoj programske kode, nove zmožnosti programa in pridobite dostop do vseh najnovejših posodobitev.
-\n 
 \n
-\n Pomembnejše lastnosti:
+\n Nekatere pomembnejše lastnosti:
 \n • Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)
 \n • Na voljo so stisnjeni vektorski podatki zemljevida za cel svet
 \n • Prenos podatkov zemljevida posameznih držav ali področij znotraj programa
-\n • Prekrivanje zemljevidov s podatkovnimi plastmi; na primer sledmi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališči javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
+\n • Funkcija Wikipedije brez povezave (prenos zanimivih točk Wikipedije), ki je odlična za oglede znamenitosti
+\n • Prekrivanje zemljevidov s podatkovnimi sloji: na primer sledi GPX, načrti poti, zanimive in priljubljene točke, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo, topografske značilnosti, kot so izohipse, senčenje terena in naklon;
 \n
 \n • Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
 \n • Vodenje poti v načinu brez povezave za srednje dolge poti
@@ -873,19 +873,19 @@
     <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9).</string>
     <string name="index_srtm_ele">Izris izohips</string>
-    <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti lego zemlje in relief, navigacijo in drugo. Topografske informacije na zemljevidu so lahko predstavljene s senčenjem naklonov, izohipsami in/ali barvanjem strmine.
+    <string name="srtm_plugin_description">Informacije o terenu, kot so izohipse, senčenje terena in naklon, ti pomagajo vizualno oceniti lego terena in relief, navigacijo in drugo. Topografske informacije na zemljevidu so lahko predstavljene s senčenjem naklonov, izohipsami in/ali barvanjem strmine.
 \n
 \nOsnovni podatki izvirajo iz SRTM in ASTER.
 \n
 \nNadaljnje branje na %1$s.</string>
-    <string name="srtm_plugin_name">Izohipse</string>
+    <string name="srtm_plugin_name">Topografija</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
     <string name="recording_description">Snemanje %1$s %3$s na %2$s</string>
     <string name="recording_default_name">Snemanje</string>
     <string name="shared_string_control_stop">Zaustavi</string>
     <string name="map_widget_av_notes">Zvočni in video zaznamki</string>
-    <string name="osmand_srtm_short_description_80_chars">Vstavek za prikaz izohips v programu OsmAnd (brez povezave)</string>
+    <string name="osmand_srtm_short_description_80_chars">Vstavek za OsmAnd za prikaz (brez povezave) reliefnih oblik, kot so izohipse, senčenje terena in naklon</string>
     <string name="map_widget_distancemeasurement">Merjenje razdalj</string>
     <string name="map_widget_audionotes">Zvočni zaznamek</string>
     <string name="audionotes_plugin_description">Med potovanjem lahko z gumbom na zemljevidu ali v kontekstnem meniju lokacije ustvarjaš zvočne/fotografske/video opombe.</string>
@@ -916,8 +916,8 @@
     <string name="recording_error">Snemanje je spodletelo</string>
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
     <string name="audionotes_location_not_defined">Tapni »Uporabi lokacijo …«, da lokaciji dodaš opombo.</string>
-    <string name="srtm_paid_version_msg">Prosim, razmisli o nakupu vtičnika za prikaz »Izohips« in s tem podpri nadaljnji razvoj.</string>
-    <string name="srtm_paid_version_title">Vstavek Izohipse</string>
+    <string name="srtm_paid_version_msg">Prosim, razmisli o nakupu vtičnika »Topografija« in s tem podpri nadaljnji razvoj.</string>
+    <string name="srtm_paid_version_title">Vtičnik Topografija</string>
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
     <string name="dropbox_plugin_description">Sinhroniziraj sledi in avdio/video opombe z računom Dropbox.</string>
     <string name="dropbox_plugin_name">Vstavek Dropbox</string>
@@ -1670,7 +1670,7 @@
     <string name="hillshade_layer_disabled">Senčenje terena je onemogočeno</string>
     <string name="buy">Nakup</string>
     <string name="activate_seamarks_plugin">Omogočite vstavek »Pomorske oznake«</string>
-    <string name="activate_srtm_plugin">Omogočite vstavek za prikaz reliefa »Izohipse«</string>
+    <string name="activate_srtm_plugin">Prosim, omogoči vtičnik »Topografija«</string>
     <string name="later">Kasneje</string>
     <string name="get_full_version">Polna različica</string>
     <string name="regions">Območja</string>
@@ -2275,10 +2275,10 @@
     <string name="route_is_too_long_v2">Daljša potovanja: če pot ni ugotovljena v 10 minutah, vstavite vmesne točke.</string>
     <string name="open_mapillary">Odpri Mapillary</string>
     <string name="hillshade_menu_download_descr">Prenesi zemljevid za prekrivanje »Senčenje terena« za prikaz navpičnega senčenja.</string>
-    <string name="hillshade_purchase_header">Za prikaz reliefa na zemljevidu, namesti vtičnik »Izohipse« .</string>
+    <string name="hillshade_purchase_header">Za prikaz reliefa, namesti vtičnik »Topografija«.</string>
     <string name="hide_from_zoom_level">Končaj prikazovati od ravni povečave</string>
     <string name="srtm_menu_download_descr">Prenesi zemljevid »Izohipse« za to območje.</string>
-    <string name="srtm_purchase_header">Za prikaz reliefa na zemljevidu, kupi in namesti vtičnik »Izohipse«.</string>
+    <string name="srtm_purchase_header">Za prikaz reliefa, kupi in namesti vtičnik »Topografija«.</string>
     <string name="show_from_zoom_level">Prikazovanje se začne na ravni povečave</string>
     <string name="display_zoom_level">Raven približanja: %1$s</string>
     <string name="distance_moving">Razdalja je popravljena</string>
@@ -2287,16 +2287,16 @@
     <string name="shared_string_permissions">Dovoljenja</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) je zemljevid in aplikacija za navigacijo, z dostopom do brezplačnih, svetovnih in visokokakovostnih OSM podatkov.
 \n
-\nUživajte v glasovnem in vidnem navigatorju, ogledu POI-jev (zanimivih točkah), ustvarjanju in upravljanju GPX sledi, uporabo izohips in drugih višinskih informacij (prek vtičnika), izbiro med vožnjo, kolesarjenjem, načini za pešce, urejanjem OSM-a in še veliko več.</string>
+\nUživajte v glasovnem in vidnem navigatorju, ogledu POI-jev (zanimivih točkah), ustvarjanju in upravljanju GPX sledi, uporabo izohips in drugih topografskih informacij (prek vtičnika), izbiro med vožnjo, kolesarjenjem, načini za pešce, urejanjem OSM-a in še veliko več.</string>
     <string name="map_widget_ruler_control">Krožno ravnilo</string>
     <string name="quick_action_add_destination_desc">Gumb za dodajanje sredine zaslona kot novo ciljno točko. Prej nastavljena ciljna točka bo postala zadnja vmesna točka.</string>
     <string name="quick_action_add_first_intermediate_desc">Gumb za dodajanje sredine zaslona kot prva vmesna točka.</string>
-    <string name="osmand_extended_description_part5">Kolesarjenje 
-\n • Omogoča določevanje kolesarskih poti na zemljevidu 
-\n • V načinu kolesarjenja omogoča navigacija GPS določevanje poti po kolesarskih poteh 
-\n • Beležijo se podatki hitrosti in spremembe višine 
-\n • Možnost shranjevanja poti GPX omogoča beleženje in izmenjavo poti 
-\n • Prek dodatnih vstavkov je mogoče prikazati tudi izohipse terena in senčenje hribovitih predelov</string>
+    <string name="osmand_extended_description_part5">Kolesarjenje
+\n • Omogoča določevanje kolesarskih poti na zemljevidu
+\n • V načinu kolesarjenja omogoča navigacija GPS določevanje poti po kolesarskih poteh
+\n • Beležijo se podatki hitrosti in spremembe višine
+\n • Možnost shranjevanja poti GPX omogoča beleženje in izmenjavo poti
+\n • Prek dodatnih vtičnikov je mogoče prikazati tudi izohipse in senčenje terena</string>
     <string name="osmand_plus_extended_description_part5">Varnostne možnosti
 \n• Izbirno preklapljanje dnevno-nočnega prikaza
 \n• Nastavitev prikaza omejitev hitrosti z možnostjo opozoril v primeru prekoračitev
@@ -2419,11 +2419,11 @@
     <string name="do_not_use_animations_descr">Izklopi animacije zemljevida.</string>
     <string name="keep_showing_on_map">Prikazuj na zemljevidu</string>
     <string name="exit_without_saving">Končati brez shranjevanja\?</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) je navigacijski program, ki kot vir podatkov uporablja visoko kakovostne zemljevide OSM. 
-\nProgram podpira glasovno in vizualno navigacijo, iskanje in ogledovanje točk POI (zanimive točke), ustvarjanje in upravljanje s sledmi GPX, izohipse in senčenje terena, podatke o poti, različne profile za pripravo poti in še veliko, veliko več. 
-\n 
-\nOsmAnd+ je plačljiva različica programa. Z nakupom podpirate projekt, omogočate razvoj novih zmožnosti in si pridobite možnost prejemanja najnovejših posodobitev. 
-\n 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) je navigacijski program, ki kot vir podatkov uporablja visoko kakovostne zemljevide OSM.
+\nProgram podpira glasovno in vizualno navigacijo, iskanje in ogledovanje točk POI (zanimive točke), ustvarjanje in upravljanje s sledmi GPX, izohipse in topografske informacije, podatke o poti, različne profile za pripravo poti in še veliko, veliko več.
+\n
+\nOsmAnd+ je plačljiva različica programa. Z nakupom podpirate projekt, omogočate razvoj novih zmožnosti in si pridobite možnost prejemanja najnovejših posodobitev.
+\n
 \nGlavne značilnosti programa so:</string>
     <string name="osmand_plus_extended_description_part2">Navigacija
 \n • Deluje prek širokopasovne povezave (hitro) ali brez povezave (ni dodatnih stroškov na poti)
@@ -2745,10 +2745,10 @@
     <string name="off_road_render_descr">Za terensko vožnjo na podlagi sloga »Topo« in za uporabo z zelenimi satelitskimi posnetki kot podlago. Debelina glavnih poti je zmanjšana, povečana pa je debelina gozdnih poti, stez, kolesarskih in drugih podobnih poti.</string>
     <string name="nautical_render_descr">Za navtično navigacijo. Vsebuje boje, svetilnike, rečne poti, morske poti in oznake, pristanišča, pomorske storitve in izobate.</string>
     <string name="ski_map_render_descr">Za smučanje. Ponuja proge, vlečnice, proge za tek na smučeh itd. Zatemni sekundarne objekte zemljevida.</string>
-    <string name="light_rs_render_descr">Preprost način za vožnjo. Nežen nočni način, izohipse, kontrastne oranžne ceste. Zatemni sekundarne objekte zemljevida.</string>
+    <string name="light_rs_render_descr">Preprost način za vožnjo. Nežen nočni način, ceste v kontrastnem oranžnem slogu, zatemnjeni sekundarni objekti zemljevida, topografski elementi, kot so izohipse.</string>
     <string name="topo_render_descr">Za pohodništvo, treking in kolesarjenje v naravi. Berljivo na prostem. Kontrastne ceste in naravni objekti, različne vrste poti, napredne možnosti izohips, dodatne podrobnosti. Prilagajanje celovitosti površine za razlikovanje kakovosti cest. Ni nočnega načina.</string>
     <string name="touring_view_render_descr">Turistični slog z visokim kontrastom in največ podrobnostmi. Vključuje vse možnosti privzetega sloga OsmAnd, hkrati pa prikazuje čim več podrobnosti, zlasti o cestah, stezah in drugih načinih potovanja. Jasno razlikovanje med vrstami cest. Primeren za dnevno in nočno uporabo, ter uporabo na prostem.</string>
-    <string name="default_render_descr">Slog za splošno uporabo. Poenostavljen prikaz za uporabo v strnjenih naseljih. Vsebuje izohipse, poti, kakovost površine, omejitve dostopa, cestne ovire, upodabljanje poti po lestvici SAC/CAI, objekte za športe na divjih vodah.</string>
+    <string name="default_render_descr">Slog za splošno uporabo. Poenostavljen prikaz za uporabo v strnjenih naseljih. Vsebuje poti, kakovost površine, omejitve dostopa, cestne ovire, upodabljanje poti po lestvici SAC/CAI, objekte za športe na divjih vodah, topografski elementi, kot so izohipse.</string>
     <string name="read_wikipedia_offline_description">Naročite se na storitev OsmAnd Live za dostop brez povezave do prispevkov na Wikipediji in Wikivoyage.</string>
     <string name="purchase_cancelled_dialog_descr">Obnovite naročilo za uporabo vseh zmožnosti programa:</string>
     <string name="maps_you_need_descr">Na osnovi shranjenih zaznamkov je priporočljivo prejeti zemljevide:</string>
@@ -3704,7 +3704,7 @@
     <string name="output">Izhodni podatki</string>
     <string name="srtm_download_single_help_message">Izberi varianto. Datoteko boš moral ponovno prenesti, za spremembo oblike zapisa.</string>
     <string name="shared_string_feet">čevlji</string>
-    <string name="srtm_download_list_help_message">OsmAnd zagotavlja podatke o izohipsah v metrih in čevljih. Datoteko boš moral znova prenesti, za spremembo oblike.</string>
+    <string name="srtm_download_list_help_message">OsmAnd zagotavlja podatke o izohipsah v metrih in čevljih. Za spremembo merskih enot boš moral/a znova prenesti datoteko.</string>
     <string name="srtm_unit_format">Različica enote izohips</string>
     <string name="contact_support_description">Če imaš kakršno koli vprašanje, nas kontaktiraj na %1$s.</string>
     <string name="new_device_account">Nova naprava / nov račun</string>
@@ -3858,7 +3858,7 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedija in Wikivoyage brez povezave</string>
     <string name="unlimited_map_downloads">Neomejen prenos zemljevidov</string>
     <string name="purchases_feature_desc_hourly_map_updates">Dostopaj do pogostejših posodobitev zemljevidov. Urne, dnevne ali tedenske posodobitve. Posodobitve se prenašajo postopno, samo za spremenjeno območje.</string>
-    <string name="purchases_feature_desc_terrain">Izohipse terena, popoln zemljevid senčenja terena, s temnimi odtenki, in zemljevidi naklonov z barvami, ki prikazujejo vrhove in nižine.</string>
+    <string name="purchases_feature_desc_terrain">Izohipse terena, sivinsko senčenje terena in označevanje naklona z barvno lestvico, za prikaz vrhov in nižin.</string>
     <string name="send_logcat_log">Pošlji dnevnik logcat</string>
     <string name="routing_attr_avoid_tunnels_name">Izogibaj se predorov</string>
     <string name="backup_version_history_delete_descr">Želiš izbrisati dnevnik sprememb za zastarele vrste podatkov iz OsmAnd Cloud\?</string>
@@ -3963,7 +3963,7 @@
     <string name="activity_type_snowmobile_name">Motorne sani</string>
     <string name="activity_type_water_name">Vodno</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="hillshade_slope_contour_lines">Senčenje terena / naklon / izohipse</string>
+    <string name="hillshade_slope_contour_lines">Izohipse / senčenje terena / naklon</string>
     <string name="trip_recording_show_start_dialog_setting">Če onemogočeno, se bo snemanje začelo takoj, ko tapneš pripomoček ali element menija, pri čemer se preskoči potrditveno okno.</string>
     <string name="show_start_dialog">Pokaži začetno pogovorno okno</string>
     <string name="lost_data_warning">Vsi neshranjeni podatki bodo izgubljeni.</string>
@@ -4070,7 +4070,7 @@
     <string name="add_edit_favorite">Dodajanje ali urejanje priljubljenih</string>
     <string name="create_edit_poi">Ustvari ali uredite POI</string>
     <string name="enter_text_separated">Vnesi oznake, ločene z vejico.</string>
-    <string name="contour_lines_thanks">Hvala za nakup pripomočka »Izohipse«</string>
+    <string name="contour_lines_thanks">Hvala za nakup pripomočka »Topografija«</string>
     <string name="back_to_editing">Nazaj na urejanje</string>
     <string name="elevation_profile_widget_desc">Prikazuje profil nadmorske višine in naklona trenutne poti.</string>
     <string name="parking_widget_desc">Prikazuje razdaljo od središča zaslona do tvojega parkirnega mesta.</string>
@@ -5293,7 +5293,7 @@
     <string name="deleting_complete">Brisanje končano</string>
     <string name="relief_3d_description">Imej in opazuj maketo svoje soseske ali cele celine.</string>
     <string name="free_settings_backup">Brezplačno varnostno kopiranje nastavitev</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Uporaba rastrskega sqltiedb za naklon / senčenje terena</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Uporaba rastrskega sqltiedb za senčenje terena / naklon</string>
     <string name="cache_size">Velikost predpomnilnika</string>
     <string name="shared_string_avoid">Izogibaj se</string>
     <string name="may_be_used_if_there_is_shortcut">Lahko se uporabi, če obstaja bližnjica</string>
@@ -5305,10 +5305,38 @@
 \nVsi podatki v napravi ostanejo nedotaknjeni.</string>
     <string name="backup_error_delete_account_email_match">E-pošta se ne ujema z uporabniškim imenom za prijavo</string>
     <string name="slope_legend_description">Naklon uporablja barve za prikaz strmine terena. Več o naklonu lahko prebereš v %1$s.</string>
-    <string name="terrain_category_description">Izohipse terena, popoln zemljevid senčenja terena s temnimi odtenki, in zemljevidi naklonov z barvami, ki prikazujejo vrhove in nižine.</string>
-    <string name="terrain_map">Zemljevid terena</string>
+    <string name="terrain_category_description">Izohipse terena, sivinsko senčenje terena in označevanje naklona z barvno lestvico, za prikaz vrhov in nižin.</string>
+    <string name="terrain_map">Zemljevid terena (3D)</string>
     <string name="verify_account_deletion_descr">Tvoj račun moramo preveriti, preden ga izbrišemo.
 \n
 \nVnesi e-poštni naslov, s katerim si se registriral/a. Poslano mu bo enkratno geslo za naslednji korak.</string>
     <string name="relief_3d">3D relief</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Razno</string>
+    <string name="shared_string_checked">Preverjeno</string>
+    <string name="shared_string_not_checked">Ni preverjeno</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Eksplozivi</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Plini</string>
+    <string name="dangerous_goods">Nevarno blago</string>
+    <string name="shared_string_class">Razred</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Jedke (korozivne) snovi</string>
+    <string name="dangerous_goods_description">Na nekaterih cestah in predorih je prevoz nevarnih snovi prepovedan.</string>
+    <string name="rendering_attr_alpineHiking_name">Klasifikacije težavnosti</string>
+    <string name="write_bearing_description">Med beleženjem k vsaki točki sledi shrani tudi usmeritev</string>
+    <string name="write_heading_description">Med beleženjem k vsaki točki sledi shrani tudi smer</string>
+    <string name="write_bearing">Pisanje usmeritve</string>
+    <string name="write_heading">Napiši smer</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioaktivne snovi</string>
+    <string name="rendering_attr_alpineHiking_description">Vrste klasifikacije težavnosti poti.</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="shared_string_included">Vključeno</string>
+    <string name="feature_available_as_part_of_plan">%1$s na voljo kot del paketa %2$s</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italijanska planinska zveza)</string>
+    <string name="rendering_value_sacScale_description">Swiss Alpine Club (Švicarska planinska zveza)</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Vnetljive tekočine</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Vnetljive trdne snovi</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oksidanti in organski peroksidi</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Strupene in nalezljive snovi</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="free_ride">Brezplačna vožnja</string>
 </resources>
