@@ -20,6 +20,8 @@ import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.TrackFolderFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -153,7 +155,19 @@ public class MyPlacesActivity extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (itemId == android.R.id.home) {
-			finish();
+			boolean shouldOnBackPressed = false;
+			for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+				String tag = fragment.getTag();
+				if (tag != null && (tag.equals(TrackFolderFragment.TAG) || tag.equals(TracksSelectionFragment.TAG))) {
+					shouldOnBackPressed = true;
+					break;
+				}
+			}
+			if (shouldOnBackPressed) {
+				onBackPressed();
+			} else {
+				finish();
+			}
 			return true;
 		}
 		return false;

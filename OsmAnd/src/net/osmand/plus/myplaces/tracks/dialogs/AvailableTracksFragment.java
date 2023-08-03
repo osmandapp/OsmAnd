@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -177,6 +178,16 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			}
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void updateToolbarTittle() {
+		MyPlacesActivity activity = getMyActivity();
+		if (activity != null) {
+			ActionBar actionBar = activity.getSupportActionBar();
+			if (actionBar != null) {
+				actionBar.setTitle(R.string.shared_string_my_places);
+			}
+		}
 	}
 
 	@NonNull
