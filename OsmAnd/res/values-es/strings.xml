@@ -5215,7 +5215,7 @@
     <string name="delete_folder">Borrar la carpeta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todas las vías en el mapa</string>
     <string name="rssi_widget_desc">Muestra el nivel RSSI de tu dispositivo externo.</string>
-    <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (Rssi)</string>
+    <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (RSSI)</string>
     <string name="tracks_empty_folder_description">Esta carpeta aún no tiene ninguna pista.</string>
     <string name="tracks_empty_folder">Carpeta vacía</string>
     <string name="track_not_recorded">Sin guardar</string>
