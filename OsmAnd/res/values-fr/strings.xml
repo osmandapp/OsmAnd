@@ -5220,7 +5220,7 @@
     <string name="external_sensors_not_found">Capteurs non trouvés</string>
     <string name="write_data_from_sensor_to_track">Ajouter les données des capteurs externes dans le fichier GPX lors de l\'enregistrement d\'un trajet.</string>
     <string name="error_calculate">Le résultat du calcul est vide</string>
-    <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte altimétrique. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
+    <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte de terrain 3D. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
