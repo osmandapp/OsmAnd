@@ -5218,7 +5218,7 @@
     <string name="map_2d_mode_action">2D-tilstand</string>
     <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
     <string name="rssi_widget_desc">Viser RSSI-niveauet for din eksterne enhed.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Denne mappe indeholder endnu ingen spor.</string>
     <string name="delete_folder">Slet mappe</string>
     <string name="show_all_tracks_on_the_map">Vis alle spor på kortet</string>
