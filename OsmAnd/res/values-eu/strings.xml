@@ -5245,7 +5245,7 @@
     <string name="delete_folder_question">Karpeta ezabatu\?</string>
     <string name="delete_folder">Ezabatu karpeta</string>
     <string name="rssi_widget_desc">Zure kanpoko gailuaren RSSI maila erakusten du.</string>
-    <string name="map_widget_rssi">Jasotako seinalearen indarraren adierazlea (Rssi)</string>
+    <string name="map_widget_rssi">Jasotako seinalearen indarraren adierazlea (RSSI)</string>
     <string name="tracks_empty_folder_description">Karpeta honek oraindik ez du arrastorik.</string>
     <string name="tracks_empty_folder">Karpeta hutsa</string>
     <string name="track_not_recorded">Grabatu gabe</string>
