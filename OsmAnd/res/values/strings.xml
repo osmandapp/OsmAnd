@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="local_indexes_category_terrain">"Terrain maps (3D)</string>
     <string name="shared_string_included">Included</string>
     <string name="feature_available_as_part_of_plan">%1$s available as part of the %2$s plan</string>
     <string name="write_bearing_description">Save bearing to each track point while recording</string>
