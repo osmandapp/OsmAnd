@@ -5209,7 +5209,7 @@
     <string name="rendering_attr_lightDetail_description">Privzeto: ime pomorske oznake (svetli character.group.period), izberi dodatne informacije o sektorjih 1 do 3 ali sektorjih 1, 2, 3, 4, 5 svetli znak</string>
     <string name="calculate_offline">Izračunaj brez povezave</string>
     <string name="error_calculate">Rezultat izračuna je prazen</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder">Prazna mapa</string>
     <string name="write_data_from_sensor_to_track">Zapisovanje podatkov iz zunanjih senzorjev v GPX med snemanjem potovanja.</string>
     <string name="save_track_external_sensors_data">Podatki</string>
