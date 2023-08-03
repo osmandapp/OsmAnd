@@ -697,7 +697,7 @@
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de dibujo</string>
     <string name="rendering_attr_appMode_description">Optimizar mapa para</string>
-    <string name="rendering_attr_contourLines_description">Mostrar desde el nivel de zum (requiere datos de curvas de nivel):</string>
+    <string name="rendering_attr_contourLines_description">Visualización a partir del nivel del zoom (requiere los datos de las curvas de nivel):</string>
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
     <string name="rendering_attr_hmRendered_description">Aumentar detalle que se muestra en el mapa.</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
@@ -778,49 +778,49 @@
     <string name="map_widget_vector_attributes">Atributos de renderizado</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+    <string name="osmand_long_description_1000_chars">OsmAnd (indicaciones de navegación automatizadas de OSM)
 \n
-\nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas) pueden almacenarse en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz.
+\n OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de los mapas (vectoriales o mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono móvil para usarlos sin conexión. OsmAnd también proporciona la funcionalidad de cálculo de ruta sin conexión, incluida la guía de paso a paso mediante la voz.
 \n
-\n Algunas de las funciones fundamentales:
-\n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo)
-\n - Mapas vectoriales compactos disponibles de todo el planeta
-\n - Descarga de mapas por país o región directamente desde la aplicación
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Navegación sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zum del mapa según la velocidad
-\n - Alineación del mapa, según la brújula o dirección del movimiento
-\n - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas
+\n Algunas de las características principales:
+\n - Funcionalidad completa sin conexión (los mapas vectoriales o teselados descargados se almacenan en la carpeta de tú elección)
+\n - Mapas vectoriales compactos sin conexión para todo el mundo
+\n - Los mapas de países o regiones se pueden descargar directamente desde la aplicación
+\n - Es posible superponer varias capas de mapas, como GPX o tracks de navegación, puntos de interés (POI), favoritos, curvas de nivel, paradas de transporte público o mapas adicionales con transparencia ajustable
+\n - Búsqueda sin conexión de direcciones y lugares (PDI)
+\n - Cálculo de las rutas sin conexión para las distancias medias
+\n - Modos coche, bicicleta y peatón, opcionalmente con:
+\n - Cambio de vista diurna y nocturna automática
+\n - Aproximación del mapa en función de la velocidad
+\n - Alineación del mapa según la brújula o la dirección en que te mueves
+\n - Guiado por los carriles, límites de velocidad, voces grabadas y TTS
 \n
-\n Limitaciones de la versión gratuita de OsmAnd:
-\n - Limitado número de mapas descargados
-\n - Sin acceso a los PDI descargados de Wikipedia.
+\n Limitaciones de esta versión gratuita de OsmAnd:
+\n - El número de mapas para descargar es limitado
+\n - No tienes acceso a los puntos de interés (PDI) de la Wikipedia sin conexión
 \n
-\n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
+\n OsmAnd se está desarrollando activamente y nuestro proyecto y su futuro dependen de la contribución financiera para financiar el desarrollo y las pruebas de las nuevas funciones. Busca la opción de comprar OsmAnd+ o financia nuevas características o haz una donación en osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direcciones de navegación automatizadas de OSM)
 \n
-\n OsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden almacenarse en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.
+\n OsmAnd+ es una aplicación de navegación de software de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de los mapas (vectoriales o de mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono para usarlos sin conexión. También se ofrece la funcionalidad de enrutamiento fuera sin conexión y en línea, incluida la guía de voz paso a paso.
 \n
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
+\n OsmAnd+ es la versión de pago de la aplicación. Al comprarla, respaldas el proyecto, financias el desarrollo de nuevas funciones y recibes las últimas actualizaciones.
 \n
-\n Algunas de las funciones principales:
-\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n - Mapas vectoriales compactos sin conexión, disponibles en todo el mundo
+\n Algunas de las características principales:
+\n - Funcionalidad sin conexión completa (almacenar mapas vectoriales o mosaicos descargados en el almacenamiento del dispositivo)
+\n - Mapas vectoriales sin conexión compactos para todo el mundo disponibles
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
-\n - Función de Wikipedia sin conexión (descargar puntos de interés de Wikipedia), ideal para hacer turismo
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+\n - Función de Wikipedia sin conexión (descargar puntos de interés de la Wikipedia), ideal para hacer turismo
+\n - Posibilidad de superposición de varias capas de mapas, como GPX o rutas de navegación, puntos de interés, Favoritos, paradas de transporte público, mapas adicionales con transparencia personalizable, características topográficas como curvas de nivel/sombreado/pendiente
 \n
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Rutas sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zum del mapa según la velocidad
-\n - Alineación del mapa, según brújula o dirección del movimiento
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
+\n - Búsqueda sin conexión de direcciones y lugares (PDI)
+\n - Enrutamiento fuera de línea para distancias medias
+\n - Modos coche, bicicleta y peatón con opcional:
+\n - Cambio automático de vista diurna/nocturna
+\n - Zoom de mapa dependiente de la velocidad
+\n - Alineación del mapa según la brújula o la dirección del movimiento
+\n - Indicación de carril, visualización del límite de velocidad, voz grabada y de texto a voz
 \n</string>
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="snap_to_road">Ajustar al camino</string>
@@ -1678,7 +1678,7 @@
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="buy">Comprar</string>
     <string name="activate_seamarks_plugin">Activa el complemento de «Vista náutica»</string>
-    <string name="activate_srtm_plugin">Activa el complemento de «Curvas de nivel»</string>
+    <string name="activate_srtm_plugin">Por favor activa el plugin \"Topografía\"</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
@@ -2194,9 +2194,9 @@
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Circular por la derecha</string>
     <string name="shared_string_automatic">Automático</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
+    <string name="osmand_extended_description_part1">OsmAnd (Direcciones de navegación automatizadas OSM) es una aplicación de mapas y navegación con acceso a los datos de OSM gratuitos, de alta calidad y en todo el mundo.
 \n
-\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
+\nDisfruta de la navegación visual y por audio, visualización de POI (Puntos de interés), creación y gestión de recorridos GPX, visualización de curvas de nivel e información topográfica (a través de una extensión), elección del tipo de coche, bicicleta o peatón, la oportunidad de contribuir a OSM y mucho más.</string>
     <string name="analyze_on_map">Analizar en el mapa</string>
     <string name="shared_string_visible">Visible</string>
     <string name="restore_purchases">Restaurar compras</string>
@@ -2224,12 +2224,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">Esquí 
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
-    <string name="osmand_extended_description_part5">Ciclismo 
-\n• Encuentra rutas de ciclismo en el mapa 
-\n• La navegación GPS en el modo bicicleta, construye la ruta usando rutas de ciclismo 
-\n• Vea la velocidad y altitud 
-\n• La opción de grabación GPX, permite grabar el viaje y compartirlo 
-\n• Mediante un complemento adicional, puedes activar las curvas de nivel y el sombreado de colinas</string>
+    <string name="osmand_extended_description_part5">Ciclismo
+\n - Encuentra carriles bici en el mapa
+\n - La navegación GPS en modo ciclismo construye tu ruta utilizando carriles bici
+\n - Consulta tu velocidad y altitud
+\n - La opción de grabación GPX te permite grabar tu viaje y compartirlo
+\n - A través de un complemento adicional, puedes activar las curvas de nivel y las sombras de las colinas</string>
     <string name="osmand_extended_description_part6">Caminar, senderismo, turismo de ciudad
 \n • El mapa muestra las rutas para caminar y de senderismo
 \n • Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística
@@ -2277,12 +2277,12 @@
     <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad náuticos del hemisferio norte</string>
     <string name="download_depth_countours">Curvas de profundidad náuticas</string>
     <string name="nautical_maps">Mapas náuticos</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
-\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (Direcciones de navegación automatizadas OSM) es una aplicación de mapas y navegación con acceso a los datos OSM gratuitos, mundiales y de alta calidad.
+\n Disfruta de navegación por voz y óptica, visualización de POIs (puntos de interés), creación y gestión de tracks GPX, uso de visualización de curvas de nivel e información topográfica, elección entre modos de conducción, ciclismo, peatones, edición OSM y mucho más.
 \n
-\nOsmAnd+ es la versión de pago. Comprando la aplicación, ayudas al proyecto, financiando el desarrollo de nuevas funciones y recibiendo las últimas actualizaciones.
+\n OsmAnd+ es la versión de pago de la aplicación. Al comprarla, apoyas el proyecto, financias el desarrollo de nuevas funciones y recibes las últimas actualizaciones.
 \n
-\nAlgunas de las principales funciones son:</string>
+\n Algunas de las características principales:</string>
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="type_address">Escribe la dirección</string>
@@ -5228,7 +5228,7 @@
     <string name="save_track_external_sensors_data">Datos</string>
     <string name="external_sensors_not_found">No se encontraron sensores</string>
     <string name="external_sensors_source_of_data">Fuente de los datos</string>
-    <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándose en los datos del mapa de la elevación del terreno. Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándote en los datos del mapa del terreno (3D). Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
     <string name="calculate_offline">Calcular sin conexión</string>
     <string name="power_watts_unit">Vatios</string>
@@ -5237,7 +5237,7 @@
     <string name="relief_3d">Relieve en 3D</string>
     <string name="terrain_map">Mapa del terreno (3D)</string>
     <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>
-    <string name="free_favorites_backup">Copia de seguridad gratuita de los favoritos</string>
+    <string name="free_favorites_backup">Copia de seguridad gratuita de tus favoritos</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">¿Estás seguro de que quieres eliminar la cuenta de OsmAnd Cloud\?
 \n
 \nEsta acción no se puede deshacer.</string>
@@ -5246,7 +5246,7 @@
 \nTodos los datos en el dispositivo permanecen intactos.</string>
     <string name="osmand_cloud_deletion_account_warning">Tu cuenta y todos los detalles de la cuenta serán %1$s</string>
     <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de tus favoritos y ajustes.</string>
-    <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">Obten OsmAnd Cloud</string>
     <string name="free_account">Cuenta gratuita</string>
     <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
     <string name="osmand_cloud_deleted_account_descr">La cuenta y todos los datos fueron eliminados de OsmAnd Cloud.</string>
