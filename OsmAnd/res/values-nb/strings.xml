@@ -5176,7 +5176,7 @@
     <string name="external_sensors_source_of_data">Datakilde</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">o/min</string>
-    <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på høydekartdata. Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
+    <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på data fra terrengkart (3D). Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
     <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s) den inneholder.</string>
     <string name="rendering_value_sectors_name">Sektorer</string>
     <string name="shared_string_close_the_dialog">Lukk dialogen</string>
@@ -5243,4 +5243,9 @@
     <string name="routing_attr_hazmat_category_usa_4_name">Brennbare faste stoffer</string>
     <string name="routing_attr_hazmat_category_usa_5_name">Oksidasjonsmidler og organiske peroksider</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Giftige og smittsomme stoffer</string>
+    <string name="error_calculate">Beregningsresultatet er tomt</string>
+    <string name="write_data_from_sensor_to_track">Skriv data fra eksterne sensorer til GPX under turopptak.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Det er ingen tilkoblede sensorer av denne typen</string>
+    <string name="calculate_offline">Beregn uten internett</string>
+    <string name="free_settings_backup">Gratis sikkerhetskopiering av innstillinger</string>
 </resources>
