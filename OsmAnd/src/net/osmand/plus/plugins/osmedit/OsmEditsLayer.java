@@ -439,11 +439,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				.setPinIcon(NativeUtilities.createSkImageFromBitmap(bitmap))
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 
-		if (osmPoint instanceof OsmNotesPoint) {
-			mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top);
-		} else {
-			mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
-		}
+		mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
+		mapMarkerBuilder.setPinIconOffset(new PointI(0, -backgroundType.getOffsetY(ctx, textScale)));
 
 		if (isTextVisible() && osmPoint instanceof OpenstreetmapPoint) {
 			mapMarkerBuilder
