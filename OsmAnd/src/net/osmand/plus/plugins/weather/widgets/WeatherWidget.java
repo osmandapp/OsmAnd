@@ -9,6 +9,7 @@ import net.osmand.core.jni.WeatherTileResourcesManager.IObtainValueAsyncCallback
 import net.osmand.core.jni.WeatherTileResourcesManager.ValueRequest;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -37,6 +38,7 @@ public class WeatherWidget extends TextInfoWidget {
 	private static final long TRUNCATE_MINUTES = 60 * 60 * 1000;
 
 	private static final int MAX_METERS_TO_PREVIOUS_FORECAST = 30 * 1000;
+	private static final int HIDE_OLD_DATA_DELAY = 1000;
 
 	private static final DateFormat forecastNamingFormat = new SimpleDateFormat("yyyyMMdd_HH00");
 	private static final DateFormat timeFormat = new SimpleDateFormat("d MMM HH:mm");
@@ -49,6 +51,7 @@ public class WeatherWidget extends TextInfoWidget {
 	private final IObtainValueAsyncCallback callback;
 	private final WeatherBand weatherBand;
 	private final short band;
+	private final int hideOldDataMessageId;
 
 	private PointI lastPotition31;
 	private ZoomLevel lastZoom;
@@ -62,6 +65,7 @@ public class WeatherWidget extends TextInfoWidget {
 	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, short band) {
 		super(mapActivity, widgetType);
 		this.band = band;
+		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;
 		this.weatherHelper = app.getWeatherHelper();
 		this.weatherBand = weatherHelper.getWeatherBand(band);
 		this.callback = new IObtainValueAsyncCallback() {
@@ -103,6 +107,7 @@ public class WeatherWidget extends TextInfoWidget {
 	}
 
 	public void updateContent(@Nullable String formattedValue) {
+		app.removeMessagesInUiThread(hideOldDataMessageId);
 		if (!Algorithms.isEmpty(formattedValue)) {
 			setText(formattedValue, weatherBand.getBandUnit().getSymbol());
 		} else {
@@ -157,12 +162,20 @@ public class WeatherWidget extends TextInfoWidget {
 		ZoomLevel zoom = getZoom();
 		long dateTime = getDateTime();
 
-		if (lastDisplayedForecastPoint31 != null && point31 != null) {
+		boolean scheduleDashShow = dateTime != lastDateTime;
+		if (!scheduleDashShow && lastDisplayedForecastPoint31 != null && point31 != null) {
 			double metersToPreviousForecastPoint = getMetersBetweenPoints(lastDisplayedForecastPoint31, point31);
 			if (metersToPreviousForecastPoint > MAX_METERS_TO_PREVIOUS_FORECAST) {
-				lastDisplayedForecastTime = 0;
-				lastDisplayedForecastPoint31 = null;
-				setText(NO_VALUE, null);
+				scheduleDashShow = true;
+			}
+		}
+		if (scheduleDashShow) {
+			if (!app.hasMessagesInUiThread(hideOldDataMessageId)) {
+				app.runMessageInUiThread(hideOldDataMessageId, HIDE_OLD_DATA_DELAY, () -> {
+					lastDisplayedForecastTime = 0;
+					lastDisplayedForecastPoint31 = null;
+					setText(NO_VALUE, null);
+				});
 			}
 		}
 

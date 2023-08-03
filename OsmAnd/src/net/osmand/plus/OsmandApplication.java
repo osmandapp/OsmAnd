@@ -788,6 +788,20 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
 
+	public void runMessageInUiThread(int messageId, long delay, @NonNull Runnable runnable) {
+		Message message = Message.obtain(uiHandler, runnable);
+		message.what = messageId;
+		uiHandler.sendMessageDelayed(message, delay);
+	}
+
+	public boolean hasMessagesInUiThread(int messageId) {
+		return uiHandler.hasMessages(messageId);
+	}
+
+	public void removeMessagesInUiThread(int messageId) {
+		uiHandler.removeMessages(messageId);
+	}
+
 	@NonNull
 	public File getAppPath(@Nullable String path) {
 		String child = path != null ? path : "";
