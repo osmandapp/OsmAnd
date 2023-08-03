@@ -5202,7 +5202,7 @@
     <string name="rendering_value_name_only_name">Pouze název</string>
     <string name="power_watts_unit">Watty</string>
     <string name="calculate_offline">Výpočet offline</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder">Prázdná složka</string>
     <string name="error_calculate">Výsledek výpočtu je prázdný</string>
     <string name="write_data_from_sensor_to_track">Zápis dat z externích senzorů do GPX během záznamu cesty.</string>
