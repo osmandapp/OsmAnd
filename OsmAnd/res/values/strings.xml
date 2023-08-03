@@ -1026,6 +1026,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
     <string name="contour_lines_hillshade_slope">Contour lines, hillshade, slope</string>
+    <string name="hillshade_slope">Hillshade, Slope</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
@@ -1931,7 +1932,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Used %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Contour lines and hillshade</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>

@@ -11,25 +11,31 @@
 			android:icon="@drawable/ic_map"
 			android:key="maps_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/shared_string_maps" />
-
-		<Preference
-			android:icon="@drawable/ic_action_hillshade_dark"
-			android:key="terrain_storage_size"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/hillshade_slope_contour_lines" />
-
-		<Preference
-			android:icon="@drawable/ic_action_terrain"
-			android:key="terrain3d_storage_size"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/terrain_map" />
+			android:title="@string/local_indexes_cat_map" />
 
 		<Preference
 			android:icon="@drawable/ic_world_globe_dark"
 			android:key="tiles_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/shared_sting_tiles" />
+
+		<Preference
+			android:icon="@drawable/ic_plugin_srtm"
+			android:key="contour_lines_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/download_srtm_maps" />
+
+		<Preference
+			android:icon="@drawable/ic_action_hillshade_dark"
+			android:key="hillshade_slope_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/hillshade_slope" />
+
+		<Preference
+			android:icon="@drawable/ic_action_terrain"
+			android:key="terrain3d_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/terrain_map" />
 
 		<Preference
 			android:icon="@drawable/ic_map"
@@ -48,12 +54,6 @@
 			android:key="live_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/osmand_live" />
-
-		<Preference
-			android:icon="@drawable/ic_action_folder"
-			android:key="archive_storage_size"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/local_indexes_cat_backup" />
 
 		<Preference
 			android:icon="@drawable/ic_action_wikipedia"
@@ -84,6 +84,12 @@
 			android:key="notes_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/audionotes_plugin_name" />
+
+		<Preference
+			android:icon="@drawable/ic_action_folder"
+			android:key="archive_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/local_indexes_cat_backup" />
 
 		<Preference
 			android:icon="@drawable/ic_action_folder"
