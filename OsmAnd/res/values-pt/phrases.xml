@@ -3600,7 +3600,7 @@
     <string name="poi_motorcar_yes">Sim;Automóvel</string>
     <string name="poi_motorcar_private">Acesso a automóveis: privado</string>
     <string name="poi_motorcar_no">Acesso a automóveis: não</string>
-    <string name="poi_motorcar_destination">Acesso de automóveis: apenas para acesso ao destino</string>
+    <string name="poi_motorcar_destination">Acesso a automóveis: apenas para acesso ao destino</string>
     <string name="poi_motorcar_permissive">Acesso a automóveis: permitido</string>
     <string name="poi_motorcar_customers">Acesso a automóveis: só clientes</string>
     <string name="poi_motorcar_forestry">Acesso a automóveis: florestal</string>
@@ -4594,4 +4594,10 @@
     <string name="poi_surface_rubber">Superfície: borracha</string>
     <string name="poi_assembly_point">Ponto de encontro</string>
     <string name="poi_osmand_not_pt_shelter_yes">Todos exceto abrigos de transportes públicos</string>
+    <string name="poi_bicycle_designated">Destinado a bicicletas</string>
+    <string name="poi_horse_designated">Destinado a cavalos</string>
+    <string name="poi_foot_designated">Destinado a peões</string>
+    <string name="poi_motor_vehicle_designated">Destinado a veículos a motor</string>
+    <string name="poi_motorcar_designated">Destinado a automóveis</string>
+    <string name="poi_vehicle_designated">Destinado a veículos</string>
 </resources>
