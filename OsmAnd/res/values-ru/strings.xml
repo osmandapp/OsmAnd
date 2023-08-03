@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">На экране</string>
+    <string name="shared_string_visible">Visible</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -1070,7 +1070,7 @@
     <string name="map_widget_config">Настройки экрана</string>
     <string name="map_widget_back_to_loc">Где я</string>
     <string name="map_widget_lock_screen">Заблокировать</string>
-    <string name="map_widget_compass">Компас / режим ориентации</string>
+    <string name="map_widget_compass">Компас</string>
     <string name="map_widget_reset">Сбросить настройки</string>
     <string name="map_widget_parking">Парковка</string>
     <string name="map_widget_time">Время до прибытия</string>
@@ -3139,7 +3139,7 @@
     <string name="map_during_navigation_info">Карта во время навигации</string>
     <string name="map_during_navigation">Карта во время навигации</string>
     <string name="vehicle_parameters_descr">Скорость движения, размеры, масса транспортного средства</string>
-    <string name="vehicle_parameters">Физические параметры</string>
+    <string name="vehicle_parameters">Параметры транспортного средства</string>
     <string name="voice_announces_info">Настройка голосовых оповещений (работают только при навигации).</string>
     <string name="voice_announces_descr">Навигационные инструкции и оповещения</string>
     <string name="voice_announces">Голосовая навигация</string>
@@ -3979,7 +3979,7 @@
     <string name="activity_type_snowmobile_name">Снегоход</string>
     <string name="activity_type_mountainbike_name">Горный велосипед</string>
     <string name="routing_engine_vehicle_type_driving">Вождение</string>
-    <string name="routing_engine_vehicle_type_foot">Пешеход</string>
+    <string name="routing_engine_vehicle_type_foot">Пешком</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
@@ -4751,9 +4751,9 @@
     <string name="av_notes_video_widget_desc">Нажатие на виджет позволяет начать видеозапись.</string>
     <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
     <string name="compass_visible_if_map_rotated_desc">Скрывать, когда север сверху</string>
-    <string name="compass_visible_if_map_rotated">На экране, если карта повернута</string>
+    <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Всегда скрыто</string>
-    <string name="compass_always_visible">Всегда на экране</string>
+    <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажатие на компас переключает режим ориентации.</string>
     <string name="compass_desc">Кнопка с указателем севера.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Цветовая схема линий глубины (изобат)</string>
@@ -5116,7 +5116,7 @@
     <string name="offline_weather_forecast_desc">Вы можете скачать прогноз погоды на 7 дней.</string>
     <string name="clear_online_cache_description">Это очистит весь кеш онлайн-тайлов погоды.</string>
     <string name="free_maps_updates">Бесплатные обновления (экстренные)</string>
-    <string name="speak_route_deviation">Отклонение от маршрута</string>
+    <string name="speak_route_deviation">Оповещать об отклонении от маршрута</string>
     <string name="select_layer">Выбрать слой</string>
     <string name="rendering_value_defaultMedium_name">По умолчанию (средний)</string>
     <string name="shutter_sound">Звук затвора</string>
@@ -5184,7 +5184,7 @@
     <string name="shared_string_hand">Рука</string>
     <string name="shared_string_foot">Нога</string>
     <string name="no_poi_for_category">POI не найдена</string>
-    <string name="map_3d_mode_action">3D-режим</string>
+    <string name="map_3d_mode_action">Режим 3D</string>
     <string name="map_2d_mode_action">Режим 2D</string>
     <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
     <string name="shared_string_finger">Палец</string>
@@ -5236,7 +5236,7 @@
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
     <string name="relief_3d">3D-рельеф</string>
     <string name="terrain_map">Карта рельефа</string>
-    <string name="free_favorites_backup_description">Зарегистрируйтесь в OsmAnd Cloud для подключения бесплатного резервного копирования избранных точек и настроек</string>
+    <string name="free_favorites_backup_description"></string>
     <string name="free_favorites_backup">Резервное копирование избранных</string>
     <string name="folder_export_empty_error">Экспорт невозможен, так как папка пуста.</string>
     <string name="osmand_cloud_delete_account_confirmation">Удалить аккаунт\?</string>
@@ -5293,7 +5293,7 @@
 \n • Переработано определение изменения высоты и оценка уклона
 \n
 \n</string>
-    <string name="get_osmand_cloud">Подключить OsmAnd Cloud</string>
+    <string name="get_osmand_cloud"></string>
     <string name="free_account">Бесплатный аккаунт</string>
     <string name="osmand_cloud_deleting_account_descr">Вскоре все ваши данные и аккаунт будут удалены из OsmAnd Cloud.
 \n
