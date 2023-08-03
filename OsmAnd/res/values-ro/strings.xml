@@ -5229,7 +5229,7 @@
     <string name="delete_folder">Ștergeți folderul</string>
     <string name="show_all_tracks_on_the_map">Afișați toate pistele pe hartă</string>
     <string name="rssi_widget_desc">Afișează nivelul RSSI al dispozitivului dumneavoastră extern.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Acest folder nu are încă nici un track.</string>
     <string name="map_2d_mode_action">mod 2D</string>
     <string name="external_device_low_battery">Baterie descărcată</string>
