@@ -3,17 +3,34 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.graphics.Color;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 public class ColorUtilities {
+
+	public static float getColorsSquareDistance(@ColorInt int color1, @ColorInt int color2) {
+		int redDiff = Color.red(color1) - Color.red(color2);
+		int greenDiff = Color.green(color1) - Color.green(color2);
+		int blueDiff = Color.blue(color1) - Color.blue(color2);
+		float redmean = (Color.red(color1) + Color.red(color2)) / 2f;
+
+		float redCoeff = 2.0f + redmean / 255.0f;
+		float greenCoeff = 4.0f;
+		float blueCoeff = 2.0f + (255.0f - redmean) / 255.0f;
+
+		float redDelta = redCoeff * redDiff * redDiff;
+		float greenDelta = greenCoeff * greenDiff * greenDiff;
+		float blueDelta = blueCoeff * blueDiff * blueDiff;
+
+		return redDelta + greenDelta + blueDelta;
+	}
 
 	@ColorInt
 	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {

@@ -1,23 +1,16 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
-import static net.osmand.render.RenderingRuleStorageProperties.TAG;
-import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.LayerDrawable;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
@@ -26,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
@@ -46,6 +40,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
+
+import static net.osmand.plus.views.layers.geometry.RouteGeometryWay.MIN_COLOR_SQUARE_DISTANCE;
+import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
+import static net.osmand.render.RenderingRuleStorageProperties.TAG;
+import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
 
 public class PreviewRouteLineLayer extends BaseRouteLayer {
 
@@ -150,33 +154,22 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		if (previewRouteLineInfo.shouldShowTurnArrows()) {
-			Path path = new Path();
-			Matrix matrix = new Matrix();
 			int lineLength = AndroidUtils.dpToPx(getContext(), 24);
 			int offset = AndroidUtils.isLayoutRtl(getContext()) ? lineLength : -lineLength;
-			int attrsTurnArrowColor = attrs.paint3.getColor();
-			if (customTurnArrowColor != 0) {
-				attrs.paint3.setColor(customTurnArrowColor);
-			}
-			float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
-			if (routeWidth != 0) {
-				attrs.paint3.setStrokeWidth(routeWidth / 2);
-				//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
-			}
-			path.moveTo(centerX + offset, startY);
-			path.lineTo(centerX, startY);
-			path.lineTo(centerX, startY - lineLength);
-			drawTurnArrow(canvas, matrix, centerX, startY - lineLength, centerX, startY);
-			canvas.drawPath(path, attrs.paint3);
 
-			path.reset();
-			path.moveTo(centerX, endY + lineLength);
-			path.lineTo(centerX, endY);
-			path.lineTo(centerX - offset, endY);
+			List<List<PointF>> arrows = new ArrayList<>();
+			arrows.add(Arrays.asList(
+					new PointF(centerX + offset, startY),
+					new PointF(centerX, startY),
+					new PointF(centerX, startY - lineLength)
+			));
+			arrows.add(Arrays.asList(
+					new PointF(centerX, endY + lineLength),
+					new PointF(centerX, endY),
+					new PointF(centerX - offset, endY)
+			));
 
-			canvas.drawPath(path, attrs.paint3);
-			drawTurnArrow(canvas, matrix, centerX - offset, endY, centerX, endY);
-			attrs.paint3.setColor(attrsTurnArrowColor);
+			drawTurnArrows(canvas, arrows, tx, ty, styles);
 		}
 
 		if (previewIcon == null) {
@@ -463,6 +456,122 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			return colors[index - 1];
 		}
 		return 0;
+	}
+
+	private void drawTurnArrows(@NonNull Canvas canvas,
+	                            @NonNull List<List<PointF>> arrows,
+	                            @NonNull List<Float> pathPointsX,
+	                            @NonNull List<Float> pathPointsY,
+	                            @NonNull List<GeometryWayStyle<?>> styles) {
+		Path path = new Path();
+		Matrix matrix = new Matrix();
+		int styleTurnArrowColor = attrs.paint3.getColor();
+		float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
+		if (routeWidth != 0) {
+			attrs.paint3.setStrokeWidth(routeWidth / 2);
+			//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
+		}
+
+		for (List<PointF> arrow : arrows) {
+			int arrowColor = getTurnArrowColor(arrow, pathPointsX, pathPointsY, styles);
+			setTurnArrowPaintsColor(arrowColor);
+
+			path.reset();
+			for (PointF point : arrow) {
+				if (path.isEmpty()) {
+					path.moveTo(point.x, point.y);
+				} else {
+					path.lineTo(point.x, point.y);
+				}
+			}
+			canvas.drawPath(path, attrs.paint3);
+
+			PointF penultimatePoint = arrow.get(arrow.size() - 2);
+			PointF lastPoint = arrow.get(arrow.size() - 1);
+			drawTurnArrow(canvas, matrix, lastPoint.x, lastPoint.y, penultimatePoint.x, penultimatePoint.y);
+		}
+
+		setTurnArrowPaintsColor(styleTurnArrowColor);
+	}
+
+	@ColorInt
+	private int getTurnArrowColor(@NonNull List<PointF> arrowPointsX,
+	                              @NonNull List<Float> pathPointsX,
+	                              @NonNull List<Float> pathPointsY,
+	                              @NonNull List<GeometryWayStyle<?>> styles) {
+		boolean rtl = AndroidUtils.isLayoutRtl(getContext());
+
+		int lightColor = ColorUtilities.getSecondaryIconColor(getContext(), false);
+		int darkColor = ColorUtilities.getSecondaryIconColor(getContext(), true);
+
+		int originalLowDistanceCount = 0;
+		int lightLowDistanceCount = 0;
+		int darkLowDistanceCount = 0;
+
+		int arrowPointIndex = 0;
+		for (int i = 0; i < pathPointsX.size() - 1 && arrowPointIndex < arrowPointsX.size(); i++) {
+			float startX = pathPointsX.get(i);
+			float startY = pathPointsY.get(i);
+			float endX = pathPointsX.get(i + 1);
+			float endY = pathPointsY.get(i + 1);
+
+			PointF arrowPoint = arrowPointsX.get(arrowPointIndex);
+
+			boolean horizontalSegment = !rtl
+					&& startY == arrowPoint.y
+					&& endY == arrowPoint.y
+					&& startX <= arrowPoint.x
+					&& arrowPoint.x < endX;
+			boolean horizontalSegmentRtl = rtl
+					&& startY == arrowPoint.y
+					&& endY == arrowPoint.y
+					&& startX >= arrowPoint.x
+					&& arrowPoint.x > endX;
+			boolean verticalSegment = startX == arrowPoint.x
+					&& endX == arrowPoint.x
+					&& startY >= arrowPoint.y
+					&& arrowPoint.y > endY;
+			float offset;
+			if (horizontalSegment) {
+				offset = (arrowPoint.x - startX) / (endX - startX);
+			} else if (horizontalSegmentRtl) {
+				offset = (startX - arrowPoint.x) / (startX - endX);
+			} else if (verticalSegment) {
+				offset = (arrowPoint.y - startY) / (endY - startY);
+			} else {
+				continue;
+			}
+
+			int lineColor;
+			GeometryWayStyle<?> style = styles.get(i);
+			if (style instanceof GeometryGradientWayStyle<?>) {
+				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) (style);
+				int startColor = gradientStyle.currColor;
+				int endColor = gradientStyle.nextColor;
+				lineColor = RouteColorize.getIntermediateColor(startColor, endColor, offset);
+			} else {
+				 lineColor = style.getColor(getRouteLineColor());
+			}
+
+			if (ColorUtilities.getColorsSquareDistance(customTurnArrowColor, lineColor) < MIN_COLOR_SQUARE_DISTANCE) {
+				originalLowDistanceCount++;
+			}
+			if (ColorUtilities.getColorsSquareDistance(lightColor, lineColor) < MIN_COLOR_SQUARE_DISTANCE) {
+				lightLowDistanceCount++;
+			}
+			if (ColorUtilities.getColorsSquareDistance(darkColor, lineColor) < MIN_COLOR_SQUARE_DISTANCE) {
+				darkLowDistanceCount++;
+			}
+
+			arrowPointIndex++;
+		}
+
+		if (originalLowDistanceCount < pathPointsX.size() / 2f
+				|| originalLowDistanceCount < Math.min(lightLowDistanceCount, darkLowDistanceCount)) {
+			return customTurnArrowColor;
+		}
+
+		return lightLowDistanceCount <= darkLowDistanceCount ? lightColor : darkColor;
 	}
 
 	@Override

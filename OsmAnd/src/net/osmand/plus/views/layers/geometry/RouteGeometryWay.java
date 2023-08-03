@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers.geometry;
 
+import android.content.Context;
 import android.graphics.Paint;
 
 import androidx.annotation.ColorInt;
@@ -17,7 +18,10 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.layers.RouteLayer.ActionPoint;
+import net.osmand.router.RouteColorize;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -26,6 +30,8 @@ import java.util.List;
 
 public class RouteGeometryWay extends
 		MultiColoringGeometryWay<RouteGeometryWayContext, MultiColoringGeometryWayDrawer<RouteGeometryWayContext>> {
+
+	public static final int MIN_COLOR_SQUARE_DISTANCE = 15_000;
 
 	private final RoutingHelper helper;
 	private RouteCalculationResult route;
@@ -168,15 +174,15 @@ public class RouteGeometryWay extends
 		}
 	}
 
-	private List<List<Location>> getActionArrows(List<Location> locations) {
-		List<List<Location>> ll = new ArrayList<>();
+	public List<List<ActionPoint>> getActionArrows(List<ActionPoint> actionPoints) {
+		List<List<ActionPoint>> ll = new ArrayList<>();
 		ll.add(new ArrayList<>());
 		int index = 0;
-		for (int i = 0; i < locations.size(); i++) {
-			Location loc = locations.get(i);
-			if (loc != null) {
-				ll.get(index).add(loc);
-			} else if (i < locations.size() - 1) {
+		for (int i = 0; i < actionPoints.size(); i++) {
+			ActionPoint actionPoint = actionPoints.get(i);
+			if (actionPoint != null) {
+				ll.get(index).add(actionPoint);
+			} else if (i < actionPoints.size() - 1) {
 				index++;
 				ll.add(new ArrayList<>());
 			}
@@ -184,30 +190,32 @@ public class RouteGeometryWay extends
 		return ll;
 	}
 
-	public void buildActionArrows(List<Location> actionPoints, int customTurnArrowColor) {
+	public void buildActionArrows(@NonNull List<ActionPoint> actionPoints, int customTurnArrowColor) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
 		int baseOrder = this.baseOrder - 1000;
-		List<List<Location>> actionArrows = getActionArrows(actionPoints);
+		List<List<ActionPoint>> actionArrows = getActionArrows(actionPoints);
 		if (!actionArrows.isEmpty()) {
 			int lineIdx = 0;
 			if (actionLinesCollection == null) {
 				actionLinesCollection = new VectorLinesCollection();
 			}
 			long initialLinesCount = actionLinesCollection.getLines().size();
-			for (List<Location> line : actionArrows) {
+			for (List<ActionPoint> line : actionArrows) {
+				int arrowColor = getContrastArrowColor(line, customTurnArrowColor);
 				QVectorPointI points = new QVectorPointI();
-				for (Location point : line) {
-					int x = MapUtils.get31TileNumberX(point.getLongitude());
-					int y = MapUtils.get31TileNumberY(point.getLatitude());
+				for (ActionPoint point : line) {
+					int x = MapUtils.get31TileNumberX(point.location.getLongitude());
+					int y = MapUtils.get31TileNumberY(point.location.getLatitude());
 					points.add(new PointI(x, y));
 				}
 				if (lineIdx < initialLinesCount) {
 					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
+					vectorLine.setLineWidth(customWidth);
 					lineIdx++;
 				} else {
 					VectorLineBuilder vectorLineBuilder = new VectorLineBuilder();
@@ -217,7 +225,7 @@ public class RouteGeometryWay extends
 							.setLineWidth(customWidth)
 							.setPoints(points)
 							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
-							.setFillColor(NativeUtilities.createFColorARGB(customTurnArrowColor));
+							.setFillColor(NativeUtilities.createFColorARGB(arrowColor));
 					vectorLineBuilder.buildAndAddToCollection(actionLinesCollection);
 				}
 			}
@@ -227,5 +235,62 @@ public class RouteGeometryWay extends
 			}
 			mapRenderer.addSymbolsProvider(actionLinesCollection);
 		}
+	}
+
+	@ColorInt
+	public int getContrastArrowColor(@NonNull List<ActionPoint> line, @ColorInt int originalArrowColor) {
+		Context context = getContext().getCtx();
+
+		int lightColor = ColorUtilities.getSecondaryIconColor(context, false);
+		int darkColor = ColorUtilities.getSecondaryIconColor(context, true);
+
+		List<Integer> colors = new ArrayList<>(line.size());
+		int originalLowDistanceCount = 0;
+		int lightLowDistanceCount = 0;
+		int darkLowDistanceCount = 0;
+
+		for (ActionPoint actionPoint : line) {
+			Integer lineColor;
+
+			if (styleMap.isEmpty()) {
+				lineColor = getDefaultWayStyle().getColor();
+			} else {
+				GeometryWayStyle<?> style = getStyle(actionPoint.index, null);
+				if (style == null || !style.hasPathLine()) {
+					return originalArrowColor;
+				}
+
+				if (style instanceof GeometryGradientWayStyle<?>) {
+					GeometryGradientWayStyle<?> gradientStyle = ((GeometryGradientWayStyle<?>) style);
+					int startColor = gradientStyle.currColor;
+					int endColor = gradientStyle.nextColor;
+					lineColor = RouteColorize.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
+				} else {
+					lineColor = style.getColor();
+				}
+			}
+
+			if (lineColor == null) {
+				return originalArrowColor;
+			}
+			colors.add(lineColor);
+
+			if (ColorUtilities.getColorsSquareDistance(originalArrowColor, lineColor) < MIN_COLOR_SQUARE_DISTANCE) {
+				originalLowDistanceCount++;
+			}
+			if (ColorUtilities.getColorsSquareDistance(lightColor, lineColor) < MIN_COLOR_SQUARE_DISTANCE) {
+				lightLowDistanceCount++;
+			}
+			if (ColorUtilities.getColorsSquareDistance(darkColor, lightColor) < MIN_COLOR_SQUARE_DISTANCE) {
+				darkLowDistanceCount++;
+			}
+		}
+
+		if (originalLowDistanceCount < line.size() / 2f
+				|| originalLowDistanceCount < Math.min(lightLowDistanceCount, darkLowDistanceCount)) {
+			return originalArrowColor;
+		}
+
+		return lightLowDistanceCount <= darkLowDistanceCount ? lightColor : darkColor;
 	}
 }
