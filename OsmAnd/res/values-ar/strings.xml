@@ -2998,7 +2998,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
     <string name="shared_string_calculate">حساب</string>
     <string name="shared_string_osmand_usage">المستخدم</string>
-    <string name="shared_sting_tiles">الطبقات</string>
+    <string name="shared_string_tiles">الطبقات</string>
     <string name="shared_string_maps">الخرائط</string>
     <string name="shared_string_memory_tb_desc">تيرا بايت %1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

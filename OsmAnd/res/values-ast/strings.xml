@@ -3056,7 +3056,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_maps">Mapes</string>
-    <string name="shared_sting_tiles">Teseles</string>
+    <string name="shared_string_tiles">Teseles</string>
     <string name="shared_string_osmand_usage">Usu d\'OsmAnd</string>
     <string name="shared_string_calculate">Calcular</string>
     <string name="store_tracks_in_daily_directories_descrp">Record tracks in sub-folders per recording day (like 2018-01-01).</string>

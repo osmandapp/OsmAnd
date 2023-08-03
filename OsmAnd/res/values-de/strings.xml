@@ -3208,7 +3208,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
-    <string name="shared_sting_tiles">Kacheln</string>
+    <string name="shared_string_tiles">Kacheln</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB frei (von %2$s GB)</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB verwendet</string>

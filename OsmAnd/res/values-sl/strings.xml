@@ -4577,7 +4577,7 @@
     <string name="store_tracks_in_daily_directories">Shrani sledi v dnevno mapo</string>
     <string name="store_tracks_in_daily_directories_descrp">Sledi bodo shranjene v podmape, poimenovane po dnevu zapisa (npr. 2018-01-01).</string>
     <string name="shared_string_calculate">Izračunaj</string>
-    <string name="shared_sting_tiles">Ploščice</string>
+    <string name="shared_string_tiles">Ploščice</string>
     <string name="shared_string_maps">Zemljevidi</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

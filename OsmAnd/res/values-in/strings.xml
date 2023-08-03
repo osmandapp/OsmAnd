@@ -1838,7 +1838,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_maps">Peta</string>
-    <string name="shared_sting_tiles">Ubin</string>
+    <string name="shared_string_tiles">Ubin</string>
     <string name="shared_string_osmand_usage">Penggunaan OsmAnd</string>
     <string name="shared_string_calculate">Hitung</string>
     <string name="shared_string_memory_used_kb_desc">Menggunakan %1$s KB</string>

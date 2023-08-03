@@ -3037,7 +3037,7 @@
     <string name="routing_attr_width_description">Adja meg az útvonalakon a járművekre vonatkozó szélességkorlátozást.</string>
     <string name="avoid_in_routing_descr_">Bizonyos útvonalak és úttípusok elkerülése</string>
     <string name="shared_string_osmand_usage">OsmAnd által felhasznált</string>
-    <string name="shared_sting_tiles">Csempék</string>
+    <string name="shared_string_tiles">Csempék</string>
     <string name="shared_string_maps">Térképek</string>
     <string name="shared_string_memory_used_tb_desc">Felhasznált %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Felhasznált %1$s GB</string>

@@ -3218,7 +3218,7 @@
     <string name="rendering_attr_piste_difficulty_advanced_name">Avanzado</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Estilo libre</string>
     <string name="shared_string_osmand_usage">Uso de OsmAnd</string>
-    <string name="shared_sting_tiles">Teselas</string>
+    <string name="shared_string_tiles">Teselas</string>
     <string name="track_storage_directory">Carpeta de almacenamiento de trazas</string>
     <string name="track_storage_directory_descrp">Las trazas pueden almacenarse en la carpeta «rec», carpetas mensuales o diarias.</string>
     <string name="store_tracks_in_rec_directory">Grabar trazas en la carpeta «rec»</string>

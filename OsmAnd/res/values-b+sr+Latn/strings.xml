@@ -3663,7 +3663,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_maps">Karte</string>
-    <string name="shared_sting_tiles">Sličice</string>
+    <string name="shared_string_tiles">Sličice</string>
     <string name="shared_string_osmand_usage">Korišćenje OsmAnd-a</string>
     <string name="shared_string_calculate">Izračunaj</string>
     <string name="store_tracks_in_daily_directories_descrp">Snimaj staze u podfascikle po danu snimanja (npr. 2018-01-01).</string>

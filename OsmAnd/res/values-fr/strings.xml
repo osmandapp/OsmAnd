@@ -3187,7 +3187,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Transport par câble aérien</string>
     <string name="shared_string_calculate">Calculer</string>
     <string name="shared_string_osmand_usage">Utilisation d\'OsmAnd</string>
-    <string name="shared_sting_tiles">Tuiles</string>
+    <string name="shared_string_tiles">Tuiles</string>
     <string name="shared_string_maps">Cartes</string>
     <string name="shared_string_memory_tb_desc">%1$s To</string>
     <string name="shared_string_memory_gb_desc">%1$s Go</string>

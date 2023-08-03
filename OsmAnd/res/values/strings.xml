@@ -1943,7 +1943,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="store_tracks_in_daily_directories_descrp">Record tracks in sub-folders per recording day (like 2018-01-01).</string>
     <string name="shared_string_calculate">Calculate</string>
     <string name="shared_string_osmand_usage">OsmAnd usage</string>
-    <string name="shared_sting_tiles">Tiles</string>
+    <string name="shared_string_tiles">Tiles</string>
     <string name="shared_string_maps">Maps</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

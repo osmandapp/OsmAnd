@@ -3201,7 +3201,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Зʼєднання</string>
     <string name="shared_string_calculate">Обчислити</string>
     <string name="shared_string_osmand_usage">Використання OsmAnd</string>
-    <string name="shared_sting_tiles">Тайли</string>
+    <string name="shared_string_tiles">Тайли</string>
     <string name="shared_string_maps">Мапи</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>

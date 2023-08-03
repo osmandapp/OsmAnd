@@ -3893,7 +3893,7 @@
     <string name="save_track_to_gpx_descrp">Starta spårinspelning automatiskt när navigering pågår. När den är klar sparas spåret automatiskt.</string>
     <string name="shared_string_revert">Återställ</string>
     <string name="shared_preference">Delad</string>
-    <string name="shared_sting_tiles">Rasterkartor</string>
+    <string name="shared_string_tiles">Rasterkartor</string>
     <string name="connect_track_points_as">Sammanlänka ruttpunkter</string>
     <string name="rendering_attr_piste_type_downhill_name">Utförsåkning</string>
     <string name="sett_parrot_ext_input">Parrot</string>

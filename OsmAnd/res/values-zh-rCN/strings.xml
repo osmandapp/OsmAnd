@@ -3010,7 +3010,7 @@
     <string name="shared_string_revert">还原</string>
     <string name="shared_preference">共享</string>
     <string name="shared_string_maps">地图</string>
-    <string name="shared_sting_tiles">图块</string>
+    <string name="shared_string_tiles">图块</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">空中航线</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">未定义</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">极限</string>

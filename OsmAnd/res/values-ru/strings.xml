@@ -3177,7 +3177,7 @@
     <string name="app_mode_utv">Мотовездеход</string>
     <string name="shared_string_calculate">Рассчитать</string>
     <string name="shared_string_osmand_usage">Использовано OsmAnd</string>
-    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_tiles">Тайлы</string>
     <string name="shared_string_maps">Карты</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>

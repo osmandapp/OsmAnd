@@ -3116,7 +3116,7 @@
     <string name="app_mode_utv">Side om side</string>
     <string name="shared_string_calculate">Beregn</string>
     <string name="shared_string_osmand_usage">OsmAnd-bruk</string>
-    <string name="shared_sting_tiles">Fliser</string>
+    <string name="shared_string_tiles">Fliser</string>
     <string name="shared_string_maps">Kart</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

@@ -3181,7 +3181,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">連線</string>
     <string name="shared_string_calculate">計算</string>
     <string name="shared_string_osmand_usage">OsmAnd 用法</string>
-    <string name="shared_sting_tiles">圖磚</string>
+    <string name="shared_string_tiles">圖磚</string>
     <string name="shared_string_maps">地圖</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

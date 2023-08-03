@@ -3242,7 +3242,7 @@
     <string name="shared_string_memory_gb_desc">%1$s Gt</string>
     <string name="shared_string_memory_tb_desc">%1$s Tt</string>
     <string name="shared_string_maps">Kartat</string>
-    <string name="shared_sting_tiles">Laatat</string>
+    <string name="shared_string_tiles">Laatat</string>
     <string name="shared_string_osmand_usage">OsmAndin käyttö</string>
     <string name="shared_string_calculate">Laske</string>
     <string name="shared_preference">Jaettu</string>

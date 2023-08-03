@@ -2476,7 +2476,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Conexiune</string>
     <string name="shared_string_calculate">Calculează</string>
     <string name="shared_string_osmand_usage">Utilizarea OsmAnd</string>
-    <string name="shared_sting_tiles">Dale</string>
+    <string name="shared_string_tiles">Dale</string>
     <string name="shared_string_maps">Hărţi</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

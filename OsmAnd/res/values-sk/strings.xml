@@ -3186,7 +3186,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Spojnica</string>
     <string name="shared_string_calculate">Vypočítať</string>
     <string name="shared_string_osmand_usage">Miesto použité OsmAndom</string>
-    <string name="shared_sting_tiles">Dlaždice</string>
+    <string name="shared_string_tiles">Dlaždice</string>
     <string name="shared_string_maps">Mapy</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

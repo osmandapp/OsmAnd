@@ -3194,7 +3194,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Forbindelse</string>
     <string name="shared_string_calculate">Beregn</string>
     <string name="shared_string_osmand_usage">OsmAnd brug</string>
-    <string name="shared_sting_tiles">Kortfliser</string>
+    <string name="shared_string_tiles">Kortfliser</string>
     <string name="shared_string_maps">Kort</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

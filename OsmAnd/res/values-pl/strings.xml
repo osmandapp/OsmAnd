@@ -3196,7 +3196,7 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">Wolne %1$s GB (z %2$s GB)</string>
     <string name="rendering_attr_piste_type_skitour_name">Wycieczka</string>
-    <string name="shared_sting_tiles">Kafelki</string>
+    <string name="shared_string_tiles">Kafelki</string>
     <string name="track_storage_directory">Katalog pamięci tras</string>
     <string name="track_storage_directory_descrp">Trasy mogą być przechowywane w katalogu „rec” lub w katalogach miesięcznych bądź dziennych.</string>
     <string name="store_tracks_in_rec_directory">Nagrywaj trasy do katalogu „rec”</string>

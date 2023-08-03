@@ -3189,7 +3189,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Konexioa</string>
     <string name="shared_string_calculate">Kalkulatu</string>
     <string name="shared_string_osmand_usage">OsmAnd erabilera</string>
-    <string name="shared_sting_tiles">Teselak</string>
+    <string name="shared_string_tiles">Teselak</string>
     <string name="shared_string_maps">Mapak</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

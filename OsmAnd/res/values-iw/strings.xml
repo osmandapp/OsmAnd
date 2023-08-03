@@ -3182,7 +3182,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">חיבור</string>
     <string name="shared_string_calculate">חישוב</string>
     <string name="shared_string_osmand_usage">שימוש ב־OsmAnd</string>
-    <string name="shared_sting_tiles">אריחים</string>
+    <string name="shared_string_tiles">אריחים</string>
     <string name="shared_string_maps">מפות</string>
     <string name="shared_string_memory_tb_desc">%1$s ט״ב</string>
     <string name="shared_string_memory_gb_desc">%1$s ג״ב</string>

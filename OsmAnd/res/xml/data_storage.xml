@@ -17,7 +17,7 @@
 			android:icon="@drawable/ic_world_globe_dark"
 			android:key="tiles_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/shared_sting_tiles" />
+			android:title="@string/shared_string_tiles" />
 
 		<Preference
 			android:icon="@drawable/ic_plugin_srtm"

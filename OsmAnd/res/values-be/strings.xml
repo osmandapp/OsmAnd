@@ -3216,7 +3216,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Злучэнне</string>
     <string name="shared_string_calculate">Разлічыць</string>
     <string name="shared_string_osmand_usage">Выкарыстанне OsmAnd</string>
-    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_tiles">Тайлы</string>
     <string name="shared_string_maps">Мапы</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>

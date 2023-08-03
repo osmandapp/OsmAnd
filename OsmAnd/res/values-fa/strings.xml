@@ -3206,7 +3206,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">راه هوایی</string>
     <string name="shared_string_calculate">محاسبه</string>
     <string name="shared_string_osmand_usage">کارکرد OsmAnd</string>
-    <string name="shared_sting_tiles">کاشی‌ها</string>
+    <string name="shared_string_tiles">کاشی‌ها</string>
     <string name="shared_string_maps">نقشه‌ها</string>
     <string name="shared_string_memory_tb_desc">%1$s ترابایت</string>
     <string name="shared_string_memory_gb_desc">%1$s گیگابایت</string>
