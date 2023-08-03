@@ -4895,7 +4895,7 @@
     <string name="delete_folder">Выдаліць папку</string>
     <string name="show_all_tracks_on_the_map">Паказаць усе сляды на карце</string>
     <string name="rssi_widget_desc">Паказвае ўзровень магутнасці сігналу (RSSI) на вашай знешняй прыладзе.</string>
-    <string name="map_widget_rssi">Узровень магутнасці сігналу (Rssi)</string>
+    <string name="map_widget_rssi">Узровень магутнасці сігналу (RSSI)</string>
     <string name="external_device_characteristic_arterial_pressure">Артэрыяльны ціск</string>
     <string name="camera_app">Праграма камеры</string>
     <string name="map_2d_mode_action">Двухмерны рэжым</string>
