@@ -13,6 +13,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -65,7 +66,15 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 			File dest = new File(destinationFolder, src.getName());
 			if (src.renameTo(dest)) {
 				dest.setLastModified(System.currentTimeMillis());
-				updateMovedGpx(trackFolder.getFlattenedTrackItems(), src, dest);
+
+				List<File> files = new ArrayList<>();
+				for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+					File file = trackItem.getFile();
+					if (file != null) {
+						files.add(file);
+					}
+				}
+				FileUtils.updateMovedGpxFiles(app, files, src, dest);
 			}
 		}
 	}
@@ -80,19 +89,6 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 				} else {
 					FileUtils.renameGpxFile(app, src, dest);
 				}
-			}
-		}
-	}
-
-	private void updateMovedGpx(@NonNull List<TrackItem> trackItems, @NonNull File srcDir, @NonNull File destDir) {
-		for (TrackItem trackItem : trackItems) {
-			String path = trackItem.getPath();
-			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());
-
-			File srcFile = trackItem.getFile();
-			File destFile = new File(newPath);
-			if (srcFile != null && destFile.exists()) {
-				FileUtils.updateRenamedGpx(app, srcFile, destFile);
 			}
 		}
 	}

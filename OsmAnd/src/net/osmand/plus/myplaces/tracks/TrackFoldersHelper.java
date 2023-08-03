@@ -490,19 +490,6 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void renameFolder(@NonNull TrackFolder trackFolder, @NonNull String name, @Nullable CallbackWithObject<TrackFolder> callback) {
-		File oldDir = trackFolder.getDirFile();
-		File newDir = new File(oldDir.getParentFile(), name);
-		if (oldDir.renameTo(newDir)) {
-			TrackFolderLoaderTask task = new TrackFolderLoaderTask(app, newDir, newFolder -> {
-				if (callback != null) {
-					callback.processResult(newFolder);
-				}
-			});
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
-	}
-
 	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
 		if (Algorithms.isEmpty(trackItems)) {
 			app.showToastMessage(R.string.folder_export_empty_error);

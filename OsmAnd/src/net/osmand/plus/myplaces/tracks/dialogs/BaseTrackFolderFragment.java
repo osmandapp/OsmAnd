@@ -39,6 +39,7 @@ import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.GpxImportListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsController;
 import net.osmand.plus.myplaces.tracks.controller.TrackFolderOptionsListener;
@@ -67,7 +68,8 @@ import java.util.Set;
 
 public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment implements FragmentStateHolder,
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
-		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener, OnTrackFileMoveListener, RenameCallback {
+		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
+		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem> {
 
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
 	public static final String SELECTED_ITEM_PATH_KEY = "selected_item_path_key";
@@ -225,12 +227,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		}
 	}
 
-	@NonNull
-	private BaseTrackFolderFragment getMainFragment() {
-		BaseTrackFolderFragment target = (BaseTrackFolderFragment) getTargetFragment();
-		return target != null ? target : this;
-	}
-
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -258,7 +254,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		TrackFoldersHelper foldersHelper = getTrackFoldersHelper();
 		if (foldersHelper != null && group instanceof TrackFolder) {
 			TrackFolder folder = (TrackFolder) group;
-			TrackFolderOptionsController.showDialog(foldersHelper, folder, getMainFragment());
+			TrackFolderOptionsController.showDialog(foldersHelper, folder, this);
 		}
 	}
 
