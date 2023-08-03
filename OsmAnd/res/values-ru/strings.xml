@@ -2454,10 +2454,10 @@
     <string name="shared_string_left">Налево</string>
     <string name="show_number_pad">Показать цифровую панель</string>
     <string name="tap_on_map_to_hide_interface_descr">Нажатие на карте переключает кнопки управления и виджеты.</string>
-    <string name="import_gpx_file_description">возможен импорт в избранные точки или как трек файл.</string>
+    <string name="import_gpx_file_description">возможен импорт в избранные точки или как трек.</string>
     <string name="shared_string_more_without_dots">Больше</string>
     <string name="import_as_gpx">Импортировать как файл GPX</string>
-    <string name="import_as_favorites">Импортировать в Мои места</string>
+    <string name="import_as_favorites">Импортировать в избранные</string>
     <string name="import_file">Импорт файла</string>
     <string name="wrong_input">Неправильный ввод</string>
     <string name="shared_string_view">Просмотр</string>
@@ -3979,7 +3979,7 @@
     <string name="activity_type_snowmobile_name">Снегоход</string>
     <string name="activity_type_mountainbike_name">Горный велосипед</string>
     <string name="routing_engine_vehicle_type_driving">Вождение</string>
-    <string name="routing_engine_vehicle_type_foot">Пешком</string>
+    <string name="routing_engine_vehicle_type_foot">Пешеход</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
@@ -4750,7 +4750,7 @@
     <string name="av_notes_photo_widget_desc">Нажатие на виджет позволяет сделать снимок.</string>
     <string name="av_notes_video_widget_desc">Нажатие на виджет позволяет начать видеозапись.</string>
     <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
-    <string name="compass_visible_if_map_rotated_desc">Скрыт, когда север сверху</string>
+    <string name="compass_visible_if_map_rotated_desc">Скрывать, когда север сверху</string>
     <string name="compass_visible_if_map_rotated">На экране, если карта повернута</string>
     <string name="compass_always_hidden">Всегда скрыто</string>
     <string name="compass_always_visible">Всегда на экране</string>

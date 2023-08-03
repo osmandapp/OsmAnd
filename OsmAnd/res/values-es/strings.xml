@@ -876,17 +876,17 @@
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5 – 9).</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">La información sobre el terreno, como las curvas de nivel, el sombreado de las colinas y la pendiente, te ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad y mucho más. La información topográfica puede representarse en el mapa mediante el sombreado de la pendiente, las curvas de nivel y/o la coloración de la inclinación.
+    <string name="srtm_plugin_description">La información sobre el terreno, como las curvas de nivel, el sombreado de las colinas o la pendiente, ayuda a evaluar visualmente la disposición del terreno, el relieve, la navegabilidad y mucho más. La información topográfica puede representarse en el mapa mediante curvas de nivel, sombreado del relieve y/o coloreado de la pendiente.
 \n
 \nLos datos subyacentes proceden de SRTM y ASTER.
 \n
 \nMás información en %1$s.</string>
-    <string name="srtm_plugin_name">Curvas de nivel</string>
+    <string name="srtm_plugin_name">Topografía</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="audionotes_plugin_description">Tome notas de audio / foto / video durante un viaje, utilizando un botón de mapa o el menú contextual de la ubicación.</string>
     <string name="audionotes_plugin_name">Notas audio/vídeo</string>
-    <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
+    <string name="osmand_srtm_short_description_80_chars">El complemento de OsmAnd para características las topográficas sin conexión como líneas de contorno, sombreado, pendiente</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
@@ -919,8 +919,8 @@
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.
 \n%1$s</string>
     <string name="recording_description">Grabando %1$s %3$s %2$s</string>
-    <string name="srtm_paid_version_msg">Por favor, considera pagar por el complemento «Curvas de nivel» para apoyar su desarrollo.</string>
-    <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
+    <string name="srtm_paid_version_msg">Por favor, considera pagar por el complemento \'Topografía para apoyar su desarrollo.</string>
+    <string name="srtm_paid_version_title">Complemento de Topografía</string>
     <string name="dropbox_plugin_description">Sincroniza trazas y notas multimedia con tu cuenta de Dropbox.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
@@ -2357,9 +2357,9 @@
 \nDesde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
 \n</string>
     <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas mayúsculas. ¿Continuar?</string>
-    <string name="srtm_menu_download_descr">Descarga el mapa de «Curvas de nivel» para usarlas en esta región.</string>
+    <string name="srtm_menu_download_descr">Descarga el mapa de las \'curvas de nivel\' de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Compra e instala el complemento «Curvas de nivel» para mostrar áreas verticales graduadas.</string>
+    <string name="srtm_purchase_header">Compra e instala el complemento \'Topografía\' para mostrar las áreas verticales graduadas.</string>
     <string name="srtm_color_scheme">Esquema de color</string>
     <string name="show_from_zoom_level">La visualización comienza a nivel de zoom</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
@@ -2375,7 +2375,7 @@
     <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Cambiar la búsqueda o aumentar su radio.</string>
     <string name="hillshade_menu_download_descr">Descarga la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
-    <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrar las áreas verticales graduadas.</string>
+    <string name="hillshade_purchase_header">Instale el complemento de \'Topografía para mostrar las zonas verticales niveladas.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el uso de caminos privados para este viaje\?</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora, captura el mundo.</string>
@@ -2717,9 +2717,9 @@
     <string name="show_full_description">Mostrar descripción completa</string>
     <string name="nautical_render_descr">Para navegación náutica. Cuenta con boyas, faros, vías fluviales, carriles y balizas marítimas, puertos, servicios marítimos y curvas de profundidad.</string>
     <string name="ski_map_render_descr">Para esquiar. Cuenta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa los objetos de mapas secundarios.</string>
-    <string name="light_rs_render_descr">Estilo de conducción simple. Modo nocturno suave, curvas de nivel, caminos contrastantes con estilo naranja, atenúa los objetos de mapas secundarios.</string>
+    <string name="light_rs_render_descr">Estilo de conducción sencillo. Modo nocturno suave, carreteras de estilo naranja contrastado, atenúa los objetos secundarios del mapa, las características topográficas como las curvas de nivel.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
-    <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Presenta curvas de nivel, rutas, calidad de la superficie, restricciones de acceso, escudos de carreteras, representación de caminos según la escala SAC/CAI, elementos deportivos de aguas bravas.</string>
+    <string name="default_render_descr">Estilo universal. Representación clara de las ciudades densamente pobladas. Características: rutas, calidad de la superficie, restricciones de acceso, señales de tráfico, enrutamiento a escala SAC/CAI, características de deportes de aguas bravas, características topográficas como las curvas de nivel.</string>
     <string name="shared_string_bookmark">Favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
@@ -3845,7 +3845,7 @@
     <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="snowmobile_render_descr">Para caminos y senderos exclusivos de motos de nieve.</string>
-    <string name="contour_lines_thanks">Gracias por comprar las «Curvas de nivel»</string>
+    <string name="contour_lines_thanks">Gracias por comprar \'Topography\'</string>
     <string name="routing_attr_avoid_footways_description">Evita pasar por veredas o aceras</string>
     <string name="routing_attr_avoid_footways_name">Evitar aceras</string>
     <string name="use_live_public_transport">Datos de «OsmAnd Live»</string>
@@ -3909,7 +3909,7 @@
     <string name="message_name_is_already_exists">El nombre ya existe</string>
     <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
     <string name="keep_it_empty_if_not">Si no, mantenerlo vacío</string>
-    <string name="hillshade_slope_contour_lines">Sombreado / Pendiente / Curvas de nivel</string>
+    <string name="hillshade_slope_contour_lines">Curvas de nivel / Sombreado / Pendiente</string>
     <string name="edit_track">Editar traza</string>
     <string name="edit_online_routing_engine">Editar motor de navegación en línea</string>
     <string name="delete_waypoints">Borrar puntos de referencia</string>
@@ -4316,7 +4316,7 @@
     <string name="purchases_feature_desc_combined_wiki">Explora los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Proporciona todos los artículos de la Wikipedia relacionados con el lugar sin conexión, ayudándote a aprender sobre los lugares que visitas en tu viaje con simples toques en el mapa. No olvides descargar los archivos de los mapas de la Wikipedia para las respectivas regiones.</string>
     <string name="purchases_feature_desc_wikivoyage">Explora Wikiviajes sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
-    <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar picos y tierras bajas.</string>
+    <string name="purchases_feature_desc_terrain">Las líneas del contorno del terreno, sombras de las colinas en escala de grises e indicación de las pendientes en escala de colores, para mostrar las cumbres y las tierras bajas.</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="send_crash_log">Enviar informe de errores</string>
@@ -4370,7 +4370,7 @@
     <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
     <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
     <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
-    <string name="srtm_download_list_help_message">OsmAnd provee datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_list_help_message">OsmAnd proporciona los datos de las curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
     <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="search_more">Buscar más…</string>
@@ -5235,7 +5235,7 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
     <string name="relief_3d">Relieve en 3D</string>
-    <string name="terrain_map">Mapa del terreno</string>
+    <string name="terrain_map">Mapa del terreno (3D)</string>
     <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de los favoritos</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">¿Estás seguro de que quieres eliminar la cuenta de OsmAnd Cloud\?
@@ -5263,7 +5263,7 @@
     <string name="verify_account">Verifica tu cuenta</string>
     <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes obtener más información sobre la pendiente en %1$s.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios se desconectarán de OsmAnd Cloud y perderán el acceso a las funciones de pago.</string>
-    <string name="terrain_category_description">Líneas del contorno del terreno, mapa completo de colinas con tonos oscuros y mapas de pendientes con colores para mostrar las cumbres y las tierras bajas.</string>
+    <string name="terrain_category_description">Líneas del contorno del terreno, sombra de colinas en escala de grises e indicación de la pendiente en escala de colores, para mostrar las cumbres y las tierras bajas.</string>
     <string name="verify_account_deletion_descr">Necesitamos verificar tu cuenta antes de eliminarla.
 \n
 \nIntroduce la dirección de correo electrónico con la que te registraste. Se te enviará una contraseña de un solo uso para el siguiente paso.</string>

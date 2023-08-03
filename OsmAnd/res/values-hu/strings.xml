@@ -783,7 +783,7 @@
 \n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén)
 \n - kompakt vektoros térképek az egész világról
 \n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból
-\n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvence, szintvonalak, tömegközlekedési megállók és további térképek
+\n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvencek, tömegközlekedési megállók és további térképek, topográfiai jellemzők, mint szintvonalak, árnyékolás, lejtés
 \n - Címek és helyek (érdekes pontok) offline keresése
 \n - Offline útvonaltervezés közepes távolságra
 \n - Autós, kerékpáros és gyalogos módok a következő beállításokkal:
@@ -872,7 +872,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak</string>
     <string name="rendering_attr_noAdminboundaries_description">Regionális határok megjelenítésének kikapcsolása (5–9 közigazgatási szint).</string>
     <string name="download_srtm_maps">Szintvonalak</string>
-    <string name="srtm_plugin_name">Szintvonalak</string>
+    <string name="srtm_plugin_name">Topográfia</string>
     <string name="index_srtm_ele">Szintvonalak</string>
     <string name="index_srtm_parts">részek</string>
     <string name="download_select_map_types">Egyéb térképek</string>
@@ -899,7 +899,7 @@
     <string name="recording_default_name">Felvétel</string>
     <string name="shared_string_control_start">Indítás</string>
     <string name="map_widget_av_notes">Hang/videojegyzetek</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-bővítmény offline szintvonalakkal</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-bővítmény offline topográfiai jellemzőkkel, mint szintvonalak, árnyékolás, lejtés</string>
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
     <string name="audionotes_plugin_description">Készítsen hang-/fénykép-/videójegyzeteket utazás közben egy térképgomb vagy a pozíció helyi menüjének használatával.</string>
     <string name="av_def_action_video">Videofelvétel</string>
@@ -916,8 +916,8 @@
     <string name="av_widget_action_descr">Alapértelmezett widgetművelet:</string>
     <string name="av_widget_action">Alapértelmezett widgetmód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
-    <string name="srtm_paid_version_msg">Kérjük, fontolja meg a „Szintvonalak” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
-    <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
+    <string name="srtm_paid_version_msg">Kérjük, fontolja meg a „Topográfia” bővítmény megvásárlását, ezzel is támogatva a további fejlesztéseket.</string>
+    <string name="srtm_paid_version_title">Topográfia bővítmény</string>
     <string name="intermediate_points_change_order">Más sorrend</string>
     <string name="dropbox_plugin_description">Szinkronizálja a hang/videó jegyzeteket a Dropbox fiókjával.</string>
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
@@ -1672,7 +1672,7 @@
     <string name="show_free_version_banner_description">Az ingyenes verzió bannerének megjelenítése akkor is, ha fizetős verziót használsz.</string>
     <string name="buy">Vásárlás</string>
     <string name="activate_seamarks_plugin">Kérjük, aktiválja a „Hajózásitérkép-nézet” bővítményt</string>
-    <string name="activate_srtm_plugin">Kérjük, aktiválja a „Szintvonalak” bővítményt</string>
+    <string name="activate_srtm_plugin">Kérjük, aktiválja a „Topográfia” bővítményt</string>
     <string name="later">Tovább</string>
     <string name="get_full_version">Teljes verzió</string>
     <string name="downloads">Letöltések</string>
@@ -2228,11 +2228,11 @@
     <string name="sorted_by_distance">Távolság szerinti sorrendben</string>
     <string name="search_favorites">Keresés a Kedvencekben</string>
     <string name="hillshade_menu_download_descr">A függőleges árnyékolás megjelenítéséhez töltse le a „Domborzatárnyékolás” fedőrétegtérképet.</string>
-    <string name="hillshade_purchase_header">A fokozatos függőleges területek megjelenítéséhez telepítse a „Szintvonalak” bővítményt.</string>
+    <string name="hillshade_purchase_header">A fokozatos függőleges területek megjelenítéséhez telepítse a „Topográfia” bővítményt.</string>
     <string name="hide_from_zoom_level">Elrejtés a következő nagyítási szinttől:</string>
     <string name="srtm_menu_download_descr">Töltse le a régió szintvonaltérképét.</string>
     <string name="shared_string_plugin">Bővítmény</string>
-    <string name="srtm_purchase_header">A fokozatos függőleges területek megjelenítéséhez vásárolja meg és telepítse a „Szintvonalak” bővítményt.</string>
+    <string name="srtm_purchase_header">A fokozatos függőleges területek megjelenítéséhez vásárolja meg és telepítse a „Topográfia” bővítményt.</string>
     <string name="srtm_color_scheme">Színséma</string>
     <string name="show_from_zoom_level">Megjelenítés a következő nagyítási szinttől:</string>
     <string name="routing_attr_allow_private_name">Magánutak használatának engedélyezése</string>
@@ -3776,7 +3776,7 @@
     <string name="sort_name_descending">Név: Z–A</string>
     <string name="sort_name_ascending">Név: A–Z</string>
     <string name="start_finish_icons">Kiindulás és érkezés ikonjai</string>
-    <string name="contour_lines_thanks">Köszönjük, hogy megvásárolta a szintvonalbővítményt (Contour lines)</string>
+    <string name="contour_lines_thanks">Köszönjük, hogy megvásárolta a \'Topográfia\' bővítményt</string>
     <string name="osm_live_payment_desc_hw">Az előfizetés a kiválasztott időszakonként kerül felszámolásra. Bármikor törölheti az AppGallery alkalmazásban.</string>
     <string name="osm_live_payment_subscription_management_hw">A fizetés az AppGallery számlájáról kerül levonásra a vásárlás megerősítésekor.
 \n
@@ -4059,7 +4059,7 @@
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Teljesítmény</string>
     <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
-    <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
+    <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonal magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
     <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
@@ -4183,7 +4183,7 @@
     <string name="purchases_feature_desc_combined_wiki">Fedezze fel a Wikipédia szócikkeit útközben, internetkapcsolat nélkül. Offline adatok országok szerinti bontásban, minden nyelven.</string>
     <string name="purchases_feature_desc_wikipedia">A Wikipédia összes helyhez kapcsolódó szócikkét elérhetővé teszi offline módon, így a térképen egyszerű koppintásokkal megismerheti az utazás során meglátogatott helyeket. Ne felejtse el letölteni az adott régiók Wikipedia-térképfájljait.</string>
     <string name="purchases_feature_desc_wikivoyage">Fedezze fel a Wikivoyage útikönyvet offline módon. A cikkek országok és régiók szerint vannak felosztva, és minden nyelven elérhetők.</string>
-    <string name="purchases_feature_desc_terrain">Szintvonalak, teljes domborzati térkép domborzatárnyékolással és lejtőtérképek színekkel a csúcsok és síkságok megjelenítésére.</string>
+    <string name="purchases_feature_desc_terrain">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="purchases_feature_desc_nautical">Hozzáférés a tengeri mélységadatokhoz</string>
     <string name="backup_error_no_valid_subscription">Jelenleg nincs érvényes előfizetése</string>
     <string name="backup_error_user_is_not_registered">Ezzel az e-mail-címmel nincs regisztrált felhasználó</string>
@@ -5233,10 +5233,10 @@
     <string name="revolutions_per_minute_unit">ford/perc</string>
     <string name="shared_string_close_the_dialog">Párbeszédpanel bezárása</string>
     <string name="relief_3d">3D domborzat</string>
-    <string name="terrain_map">Terep térkép</string>
+    <string name="terrain_map">Terep térkép (3D)</string>
     <string name="relief_3d_description">Birtokolja és figyelje meg környéke vagy akár az egész kontinens méretarányos modelljét.</string>
     <string name="slope_legend_description">A lejtés színekkel jelzi a terep meredekségét. A lejtési viszonyokról bővebben itt olvashat: %1$s.</string>
-    <string name="terrain_category_description">Szintvonalak, teljes domborzatárnyékolási térkép sötét árnyalatokkal és lejtési viszonyokat ábrázoló térképek, amelyek színekkel jelzik a csúcsokat és alföldeket.</string>
+    <string name="terrain_category_description">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="shared_string_deleting">Törlés folyamatban</string>
     <string name="delete_account_warning">Biztosan törli ezt a fiókot: %1$s\?</string>
     <string name="osmand_cloud_delete_account_confirmation">Fiók törlése\?</string>

@@ -794,18 +794,18 @@
 \n- Fonctionne complètement hors-ligne
 \n- Cartes hors-lignes dans un format compact (vectoriel) disponibles pour le monde entier
 \n- Téléchargement des cartes pour un pays ou une région directement depuis l\'application
-\n- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable
+\n- Possibilité de superposer plusieurs couches, telles que des traces GPX, des points d\'intérêt (PI), des favoris, des données topographiques (courbes de niveau, ombrage du relief, pente), les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable
 \n- Recherche hors-ligne d\'adresses et de lieux (PI)
 \n- Navigation hors-ligne sur des distances moyennes
 \n- Mode voiture, vélo et piéton
-\n- Option de vue jour/nuit automatique
+\n- Affichage jour/nuit automatique
 \n- Option de zoom automatique adapté à la vitesse de déplacement
-\n- Orientation automatique de la carte (fixe, boussole, direction du déplacement)
+\n- Orientation de la carte paramétrable (vers le nord, selon le déplacement, fixe)
 \n- Affichage des limitations de vitesse et des voies de circulation à l\'approche des bifurcations
 \n- Guidage vocale par voix enregistrée ou voix de synthèse.
 \n
 \nLimitations de cette version gratuite d\'OsmAnd :
-\n- Nombre limité de téléchargements
+\n- Nombre limité de téléchargements de carte
 \n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne.
 \n
 \nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheter la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
@@ -813,7 +813,7 @@
 \n
 \nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal.
 \n
-\nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour de cartes existantes ou encore des extensions et d\'autres données (courbes de niveau, ...). En achetant OsmAnd+ vous contribuez au projet et financez le développement de nouvelles fonctionnalités.
+\nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour des cartes existantes ou encore des extensions et d\'autres données (courbes de niveau, ...). En achetant OsmAnd+ vous contribuez au projet et financez le développement de nouvelles fonctionnalités.
 \n
 \nFonctionnalités principales :
 \n- Fonctionne complètement hors-ligne (après téléchargement des cartes sur l\'appareil)
@@ -823,7 +823,7 @@
 \n- Recherche hors-ligne d\'adresses et de points d\'intérêt
 \n- Navigation hors-ligne sur des itinéraires de moyenne distance
 \n- Plusieurs modes de navigation : voiture, cycliste et piéton
-\n- Options : vue jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (fixe ou suivant le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrée ou par synthèse vocale.
+\n- Options : affichage jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (vers le nord ou selon le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrée ou par synthèse vocale.
 \n</string>
     <string name="avoid_motorway">Éviter les autoroutes</string>
     <string name="context_menu_item_last_intermediate_point">Ajouter comme dernière étape</string>
@@ -882,7 +882,7 @@
 \nLes données proviennent de SRTM et ASTER.
 \n
 \nPlus d\'informations sur %1$s.</string>
-    <string name="srtm_plugin_name">Courbes de niveau</string>
+    <string name="srtm_plugin_name">Topographie</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
     <string name="index_srtm_parts">parties</string>
@@ -890,7 +890,7 @@
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Prenez des notes (photos, audios ou vidéos) pendant votre itinéraire, soit en utilisant un bouton, soit depuis le menu contextuel de n\'importe quel point.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
-    <string name="osmand_srtm_short_description_80_chars">Extension OsmAnd pour les courbes de niveau hors-ligne</string>
+    <string name="osmand_srtm_short_description_80_chars">Extension OsmAnd pour les courbes de niveau et l\'ombrage du relief hors-ligne</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
     <string name="av_def_action_video">Enregistrer une vidéo</string>
     <string name="av_def_action_audio">Enregistrer une note audio</string>
@@ -920,8 +920,8 @@
     <string name="shared_string_control_stop">Arrêter</string>
     <string name="map_widget_av_notes">Notes audio/vidéo</string>
     <string name="shared_string_control_start">Démarrer</string>
-    <string name="srtm_paid_version_msg">Achetez l\'extension « Courbes de niveau » pour soutenir les développements futurs.</string>
-    <string name="srtm_paid_version_title">Extension « Courbes de niveau »</string>
+    <string name="srtm_paid_version_msg">Veuillez achetez l\'extension « Topographie » pour soutenir les futurs développements.</string>
+    <string name="srtm_paid_version_title">Extension « Topographie »</string>
     <string name="intermediate_points_change_order">Modifier l\'ordre</string>
     <string name="dropbox_plugin_name">Extension Dropbox</string>
     <string name="dropbox_plugin_description">Synchronisez vos itinéraires et notes audio / vidéo avec votre compte Dropbox.</string>
@@ -1674,7 +1674,7 @@
     <string name="hillshade_layer_disabled">Affichage du relief désactivé</string>
     <string name="buy">Acheter</string>
     <string name="activate_seamarks_plugin">Veuillez activer l\'extension \'Carte marine\'</string>
-    <string name="activate_srtm_plugin">Veuillez activer l’extension \'Courbes de niveau\'</string>
+    <string name="activate_srtm_plugin">Veuillez activer l’extension \'Topographie\'</string>
     <string name="later">Plus tard</string>
     <string name="get_full_version">Version complète</string>
     <string name="regions">Régions</string>
@@ -2233,7 +2233,7 @@
 \nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute participation financière pour accélérer encore son développement.
 \n</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel ; découvrez des points d\'intérêt ; créez et gérez des traces GPX ; installez des extensions pour visualiser l\'altitude et les courbes de niveau ; utilisez les modes Automobile, Piéton, Cycliste ; contribuez à l\'amélioration des cartes et bien plus encore !
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel ; découvrez des points d\'intérêt ; créez et gérez des traces GPX ; installez des extensions pour visualiser l\'altitude et les courbes de niveau ; utilisez les modes Voiture, Piéton, Cycliste ; contribuez à l\'amélioration des cartes et bien plus encore !
 \n
 \nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités et recevez les dernières mises à jour.
 \n
@@ -2288,10 +2288,10 @@
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">L\'affichage commence à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Pour les longues distances et si l\'itinéraire n\'est pas calculé dans 10 minutes, ajoutez des étapes.</string>
-    <string name="srtm_menu_download_descr">Téléchargez la carte \'Courbes de niveau\' de cette région.</string>
+    <string name="srtm_menu_download_descr">Téléchargez la carte \'Topographique\' de cette région.</string>
     <string name="shared_string_plugin">Extension</string>
-    <string name="srtm_purchase_header">Achetez et installez l\'extension \'Courbes de niveau\' pour mieux visualiser le relief.</string>
-    <string name="hillshade_purchase_header">Téléchargez l\'extension \'Courbes de niveau\' pour mieux visualiser le relief.</string>
+    <string name="srtm_purchase_header">Achetez et installez l\'extension \'Topographie\' pour mieux visualiser le relief.</string>
+    <string name="hillshade_purchase_header">Téléchargez l\'extension \'Topographie\' pour mieux visualiser le relief.</string>
     <string name="hide_from_zoom_level">Masquer à partir du niveau de zoom</string>
     <string name="hillshade_menu_download_descr">Téléchargez la sur-couche \'Ombrage du relief\' pour mieux visualiser le relief.</string>
     <string name="quick_action_showhide_osmbugs_descr">Bouton pour afficher ou masquer les notes OSM sur la carte.</string>
@@ -2714,8 +2714,8 @@
     <string name="show_full_description">Afficher la description complète</string>
     <string name="nautical_render_descr">Pour le guidage en mer et en rivière. Fonctions clés : bouées, phares, balises, chenaux de navigation, ports, lignes de profondeur.</string>
     <string name="ski_map_render_descr">Sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, courses hors-piste, rendu hivernal et masquage des objets secondaires.</string>
-    <string name="light_rs_render_descr">Style simple pour la conduite. Mode nuit doux, courbes de niveau, routes contrastées de couleur orange, objets secondaires atténués.</string>
-    <string name="default_render_descr">Style générique. Zones urbaines affichées de manière claire, courbes de niveau, routes et revêtement des routes, restrictions d\'accès, rendu des chemins selon l\'échelle SAC / CAI, sports d\'eau vive.</string>
+    <string name="light_rs_render_descr">Style simple pour la conduite. Mode nuit doux, routes contrastées de couleur orange, objets secondaires atténués comme les courbes de niveau.</string>
+    <string name="default_render_descr">Style générique. Zones urbaines affichées de manière claire, routes, revêtement des routes, restrictions d\'accès, rendu des chemins selon l\'échelle SAC / CAI, sports d\'eau vive, courbes de niveau.</string>
     <string name="shared_string_bookmark">Favori</string>
     <string name="topo_render_descr">Pour les activités en extérieur (randonnée, VTT). Lisibilité optimisée pour l\'extérieur, routes et éléments naturels contrastés, distinction des types de routes en fonction de leur revêtement, options avancées pour les courbes de niveau, nombreux détails. Pas de mode nuit.</string>
     <string name="off_road_render_descr">Pour la conduite sur voies non revêtues. Style basé sur le style « Topo » et à utiliser avec la sous-couche verte d\'images satellites. Largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes.</string>
@@ -3776,7 +3776,7 @@
     <string name="sort_name_descending">Nom : Z – A</string>
     <string name="sort_name_ascending">Nom : A – Z</string>
     <string name="start_finish_icons">Icônes de départ et d\'arrivée</string>
-    <string name="contour_lines_thanks">Merci pour votre achat de \'Courbes de niveau\'</string>
+    <string name="contour_lines_thanks">Merci pour votre achat de \'Topographie\'</string>
     <string name="osm_live_payment_desc_hw">L\'abonnement est facturé pour la période sélectionnée. Annulation possible à tout moment sur AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Éviter les trottoirs</string>
     <string name="routing_attr_avoid_footways_name">Éviter les trottoirs</string>
@@ -3960,7 +3960,7 @@
     <string name="uploaded_count">%1$d sur %2$d envoyé</string>
     <string name="upload_photo">Envoi en cours</string>
     <string name="upload_photo_completed">Envoi terminé</string>
-    <string name="hillshade_slope_contour_lines">Ombrage du relief / Pentes / Courbes de niveau</string>
+    <string name="hillshade_slope_contour_lines">Courbes de niveau / Ombrage du relief / Pentes</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Utilisez test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Se connecter à OpenPlaceReviews</string>
@@ -4157,7 +4157,7 @@
     <string name="nautical_depth">Profondeur bathymétrique</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Cartes du relief : courbes de niveau, ombres, pentes</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
-    <string name="purchases_feature_desc_terrain">Cartes avec courbes de niveau, ombrage du relief, pentes et couleurs mettant en valeur sommets et plaines.</string>
+    <string name="purchases_feature_desc_terrain">Courbes de niveau, ombrage du relief, pentes colorées mettant en valeur sommets et plaines.</string>
     <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur bathymétrique</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
@@ -5226,9 +5226,9 @@
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Fermer la fenêtre</string>
     <string name="relief_3d">Relief 3D</string>
-    <string name="terrain_map">Carte du relief</string>
+    <string name="terrain_map">Carte du relief (3D)</string>
     <string name="relief_3d_description">Possédez et observez la maquette de votre quartier ou du continent tout entier.</string>
-    <string name="terrain_category_description">Courbes de niveaux, ombrage du relief avec des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les vallées.</string>
+    <string name="terrain_category_description">Courbes de niveaux, ombrage du relief par des tons foncés et cartes de pentes colorées pour mettre en valeur les sommets et les plaines.</string>
     <string name="slope_legend_description">Pente utilise des couleurs pour rendre compte de l\'inclinaison du terrain. Pour en savoir plus sur les pentes, consultez %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n

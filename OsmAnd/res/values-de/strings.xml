@@ -2375,7 +2375,7 @@
     <string name="hillshade_menu_download_descr">Laden Sie die Reliefkarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Topographie\', um abgestufte vertikale Flächen anzuzeigen.</string>
-    <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
+    <string name="srtm_menu_download_descr">Höhenlinienkarte für diese Region herunterladen.</string>
     <string name="hillshade_purchase_header">Installieren Sie die Erweiterung \'Topographie\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Betreten von Privatwegen für diese Reise zulassen?</string>
     <string name="restart_search">Suche wiederholen</string>
@@ -4183,7 +4183,7 @@
     <string name="complete_purchase">Vollständiger Kauf</string>
     <string name="regular_price">Normaler Preis</string>
     <string name="purchases_feature_desc_nautical">Zugang zu Informationen über Wassertiefen erhalten</string>
-    <string name="purchases_feature_desc_terrain">Höhenlinien, Reliefkarten mit dunklen Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="purchases_feature_desc_terrain">Höhenlinien, graustufiges Relief und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="purchases_feature_desc_wikipedia">Stellt alle ortsbezogenen Wikipedia-Artikel offline bereit und hilft Ihnen, mehr über die Orte zu erfahren, die Sie auf Ihrer Reise besuchen, indem Sie einfach auf die Karte tippen. Vergessen Sie nicht, die Wikipedia-Kartendateien für die jeweiligen Regionen herunterzuladen.</string>
     <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia Artikel auch unterwegs, ohne Internetverbindung. Offline-Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
@@ -5267,7 +5267,7 @@
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Relief-Schattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
-    <string name="free_favorites_backup">Kostenloses Favoriten-Backup</string>
+    <string name="free_favorites_backup">Kostenloses Backup ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
     <string name="routing_attr_allow_via_ferrata_description">Eine Bergroute, die mit Fixseilen, Stemmeisen, Leitern und Brücken ausgestattet ist.</string>
