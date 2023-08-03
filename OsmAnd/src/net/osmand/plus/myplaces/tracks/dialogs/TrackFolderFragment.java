@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTrackItemsFragment;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
@@ -229,6 +230,16 @@ public class TrackFolderFragment extends BaseTrackFolderFragment {
 			}
 			selectedItemPath = null;
 		}
+	}
+
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
+		ItemsSelectionHelper<TrackItem> selectionHelper = new ItemsSelectionHelper<>();
+		selectionHelper.setAllItems(selectedFolder.getFlattenedTrackItems());
+		selectionHelper.setSelectedItems(selectedFolder.getFlattenedTrackItems());
+		selectionHelper.setOriginalSelectedItems(selectedFolder.getFlattenedTrackItems());
+		return selectionHelper;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TrackFolder folder, @Nullable Fragment target) {
