@@ -1,5 +1,7 @@
 package net.osmand.data;
 
+import net.osmand.util.MapUtils;
+
 import java.io.Serializable;
 
 public class LatLon implements Serializable {
@@ -42,8 +44,7 @@ public class LatLon implements Serializable {
 			return false;
 
 		LatLon other = (LatLon) obj;
-		return Math.abs(latitude - other.latitude) < 0.00001
-				&& Math.abs(longitude - other.longitude) < 0.00001;
+		return MapUtils.areLatLonEqual(this, other);
 	}
 
 	@Override

@@ -111,7 +111,8 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageGlideComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.VoiceProviderDialog;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -203,6 +204,7 @@ public class OsmandApplication extends MultiDexApplication {
 	GpsFilterHelper gpsFilterHelper;
 	DownloadTilesHelper downloadTilesHelper;
 	AverageSpeedComputer averageSpeedComputer;
+	AverageGlideComputer averageGlideComputer;
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
 
@@ -578,6 +580,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageSpeedComputer getAverageSpeedComputer() {
 		return averageSpeedComputer;
+	}
+
+	@NonNull
+	public AverageGlideComputer getAverageGlideComputer() {
+		return averageGlideComputer;
 	}
 
 	@NonNull

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.views.mapwidgets.AverageSpeedComputer;
+import net.osmand.plus.views.mapwidgets.utils.AverageSpeedComputer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
@@ -26,7 +26,7 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 	private long initialIntervalMillis;
 	private boolean countStops;
 
-	private AverageSpeedIntervalCard averageSpeedIntervalCard;
+	private TimeIntervalCard timeIntervalCard;
 
 	@NonNull
 	@Override
@@ -60,9 +60,9 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 	}
 
 	private void setupIntervalSliderCard() {
-		averageSpeedIntervalCard = new AverageSpeedIntervalCard(requireMyActivity(), initialIntervalMillis);
+		timeIntervalCard = new TimeIntervalCard(requireMyActivity(), initialIntervalMillis);
 		ViewGroup cardContainer = view.findViewById(R.id.average_speed_interval_card_container);
-		cardContainer.addView(averageSpeedIntervalCard.build(cardContainer.getContext()));
+		cardContainer.addView(timeIntervalCard.build(cardContainer.getContext()));
 	}
 
 	private void setupSkipStopsSetting() {
@@ -86,13 +86,13 @@ public class AverageSpeedWidgetSettingFragment extends WidgetSettingsBaseFragmen
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putLong(KEY_TIME_INTERVAL, averageSpeedIntervalCard.getSelectedIntervalMillis());
+		outState.putLong(KEY_TIME_INTERVAL, timeIntervalCard.getSelectedIntervalMillis());
 		outState.putBoolean(KEY_COUNT_STOPS, countStops);
 	}
 
 	@Override
 	protected void applySettings() {
 		speedWidget.setShouldSkipStops(appMode, !countStops);
-		speedWidget.setMeasuredInterval(appMode, averageSpeedIntervalCard.getSelectedIntervalMillis());
+		speedWidget.setMeasuredInterval(appMode, timeIntervalCard.getSelectedIntervalMillis());
 	}
 }

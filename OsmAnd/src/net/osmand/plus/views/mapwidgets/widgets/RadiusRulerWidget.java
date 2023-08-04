@@ -25,8 +25,6 @@ import java.util.Set;
 
 public class RadiusRulerWidget extends TextInfoWidget {
 
-	private static final String DASH = "—";
-
 	private RadiusRulerMode cachedRadiusRulerMode;
 
 	public RadiusRulerWidget(@NonNull MapActivity mapActivity) {
@@ -34,7 +32,7 @@ public class RadiusRulerWidget extends TextInfoWidget {
 		cachedRadiusRulerMode = settings.RADIUS_RULER_MODE.get();
 
 		updateIcons();
-		setText(DASH, null);
+		setText(NO_VALUE, null);
 		setOnClickListener(v -> switchRadiusRulerMode());
 	}
 
@@ -67,7 +65,7 @@ public class RadiusRulerWidget extends TextInfoWidget {
 				setDistanceText(distance);
 			}
 		} else {
-			setText(DASH, null);
+			setText(NO_VALUE, null);
 		}
 	}
 
