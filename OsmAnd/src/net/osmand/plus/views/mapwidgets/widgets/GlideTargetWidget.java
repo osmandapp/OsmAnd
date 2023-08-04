@@ -3,8 +3,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -40,17 +40,18 @@ public class GlideTargetWidget extends GlideBaseWidget {
 						setText(NO_VALUE, null);
 					}
 				}
+				return true;
 			});
 		}
 	}
 
-	private void calculateGlideRatio(@NonNull OnResultCallback<Float> callback) {
+	private void calculateGlideRatio(@NonNull CallbackWithObject<Float> callback) {
 		MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 		if (mapRenderer == null
 				|| cachedTargetLatLon == null
 				|| cachedCurrentLocation == null
 				|| !cachedCurrentLocation.hasAltitude()) {
-			callback.onResult(null);
+			callback.processResult(null);
 			return;
 		}
 
@@ -58,14 +59,8 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		double a1 = cachedCurrentLocation.getAltitude();
 		LatLon l2 = cachedTargetLatLon;
 
-		NativeUtilities.getAltitudeForLatLon(mapRenderer, l2, markerAltitude -> {
-			if (markerAltitude != null) {
-				float result = MapUtils.calculateAircraftGlideRatio(l1, l2, a1, markerAltitude);
-				callback.onResult(result);
-			} else {
-				callback.onResult(null);
-			}
-		});
+		NativeUtilities.getAltitudeForLatLon(mapRenderer, l2, altitude ->
+				callback.processResult(altitude != null ? MapUtils.calculateGlideRatio(l1, l2, a1, altitude) : null));
 	}
 
 	/**
@@ -75,9 +70,8 @@ public class GlideTargetWidget extends GlideBaseWidget {
 	 */
 	@Override
 	public boolean isUpdateNeeded() {
-		boolean updateNeeded;
 		Location location = locationProvider.getLastKnownLocation();
-		updateNeeded = cachedCurrentLocation == null || !MapUtils.areLatLonEqual(cachedCurrentLocation, location);
+		boolean updateNeeded = cachedCurrentLocation == null || !MapUtils.areLatLonEqual(cachedCurrentLocation, location);
 		cachedCurrentLocation = location;
 
 		LatLon targetLatLon = null;

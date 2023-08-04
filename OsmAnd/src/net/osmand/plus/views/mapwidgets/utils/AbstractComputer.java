@@ -18,15 +18,8 @@ public abstract class AbstractComputer {
 
 	public static final long BIGGEST_MEASURED_INTERVAL;
 	public static final long ADD_POINT_INTERVAL_MILLIS = 1000;
-
-	public static final List<Long> MEASURED_INTERVALS;
 	public static final long DEFAULT_INTERVAL_MILLIS = 30 * 60 * 1000L;
-
-	protected final OsmandApplication app;
-
-	protected final OsmandSettings settings;
-
-	protected final List<Location> locations = new LinkedList<>();
+	public static final List<Long> MEASURED_INTERVALS;
 
 	static {
 		List<Long> modifiableIntervals = new ArrayList<>();
@@ -39,6 +32,12 @@ public abstract class AbstractComputer {
 		MEASURED_INTERVALS = Collections.unmodifiableList(modifiableIntervals);
 		BIGGEST_MEASURED_INTERVAL = MEASURED_INTERVALS.get(MEASURED_INTERVALS.size() - 1);
 	}
+
+	protected final OsmandApplication app;
+
+	protected final OsmandSettings settings;
+
+	protected final List<Location> locations = new LinkedList<>();
 
 	public AbstractComputer(@NonNull OsmandApplication app) {
 		this.app = app;

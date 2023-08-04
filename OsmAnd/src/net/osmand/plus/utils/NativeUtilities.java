@@ -2,13 +2,14 @@ package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.OnResultCallback;
+import net.osmand.CallbackWithObject;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
@@ -24,10 +25,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
+import net.osmand.plus.utils.HeightsResolverTask.HeightsResolverCallback;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NativeUtilities {
@@ -58,14 +61,14 @@ public class NativeUtilities {
 		int r = (color >> 16) & 0xFF;
 		int g = (color >> 8) & 0xFF;
 		int b = (color) & 0xFF;
-		return new ColorARGB((short)a, (short)r , (short)g, (short)b);
+		return new ColorARGB((short) a, (short) r, (short) g, (short) b);
 	}
 
 	public static ColorARGB createColorARGB(@ColorInt int color, int alpha) {
 		int r = (color >> 16) & 0xFF;
 		int g = (color >> 8) & 0xFF;
 		int b = (color) & 0xFF;
-		return new ColorARGB((short)alpha, (short)r , (short)g, (short)b);
+		return new ColorARGB((short) alpha, (short) r, (short) g, (short) b);
 	}
 
 	public static boolean isSegmentCrossingPolygon(@NonNull PointI start31,
@@ -278,18 +281,18 @@ public class NativeUtilities {
 	}
 
 	public static void getAltitudeForLatLon(@Nullable MapRendererView mapRenderer, @Nullable LatLon latLon,
-	                                        @NonNull OnResultCallback<Double> callback) {
+	                                        @NonNull CallbackWithObject<Double> callback) {
 		if (latLon != null) {
 			Double altitude = getAltitudeForLatLon(mapRenderer, latLon);
 			if (altitude != null) {
-				callback.onResult(altitude);
+				callback.processResult(altitude);
 			} else {
-				HeightResolver.resolveHeight(latLon, output -> {
-					callback.onResult(output != null ? Double.valueOf(output) : null);
-				});
+				HeightsResolverCallback heightsCallback = heights -> callback.processResult(heights != null && heights.length > 0 ? (double) heights[0] : null);
+				HeightsResolverTask task = new HeightsResolverTask(Collections.singletonList(latLon), heightsCallback);
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		} else {
-			callback.onResult(null);
+			callback.processResult(null);
 		}
 	}
 

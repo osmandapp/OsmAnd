@@ -153,7 +153,7 @@ public class AverageSpeedComputer extends AbstractComputer {
 		}
 	}
 
-	public static class SegmentsList {
+	private static class SegmentsList {
 
 		private final Segment[] segments;
 
@@ -161,7 +161,7 @@ public class AverageSpeedComputer extends AbstractComputer {
 		private int headIndex;
 
 		public SegmentsList() {
-			int size = (int) (AbstractComputer.BIGGEST_MEASURED_INTERVAL / AbstractComputer.ADD_POINT_INTERVAL_MILLIS) + 1;
+			int size = (int) (BIGGEST_MEASURED_INTERVAL / ADD_POINT_INTERVAL_MILLIS) + 1;
 			segments = new Segment[size];
 		}
 

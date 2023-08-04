@@ -13,9 +13,8 @@ import java.util.Locale;
 
 public abstract class GlideBaseWidget extends TextInfoWidget {
 
-	private static final String FORMAT_PATTERN = "#.#";
-
 	private static final int UPDATE_INTERVAL_MILLIS = 1000;
+	private static final NumberFormat FORMATTER = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	protected long lastUpdateTime;
 
@@ -30,9 +29,7 @@ public abstract class GlideBaseWidget extends TextInfoWidget {
 
 	@NonNull
 	public String format(float value) {
-		DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.US);
-		NumberFormat formatter = new DecimalFormat(FORMAT_PATTERN, dfs);
-		String formattedValue = formatter.format(value);
+		String formattedValue = FORMATTER.format(value);
 		return app.getString(R.string.ltr_or_rtl_combine_via_colon_with_space, formattedValue, "1");
 	}
 }
