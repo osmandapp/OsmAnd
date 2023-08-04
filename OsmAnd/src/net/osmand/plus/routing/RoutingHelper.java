@@ -190,7 +190,7 @@ public class RoutingHelper {
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation) {
 		app.logRoutingEvent("setFinalAndCurrentLocation finalLocation " + finalLocation + " intermediatePoints " + intermediatePoints + " currentLocation " + currentLocation);
-		RoutingHelperUtils.checkAndUpdateStartLocation(app, currentLocation, false);
+		RoutingHelperUtils.updateDrivingRegionIfNeeded(app, currentLocation, false);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
