@@ -5336,4 +5336,6 @@
     <string name="write_bearing_description">Sauvegarder le relèvement vers chaque point de passage lors de l\'enregistrement</string>
     <string name="shared_string_included">Inclus</string>
     <string name="feature_available_as_part_of_plan">%1$s disponible dans le cadre de l\'abonnement %2$s</string>
+    <string name="local_indexes_category_terrain">Cartes de terrain (3D)</string>
+    <string name="hillshade_slope">Ombrage du relief, pente</string>
 </resources>
