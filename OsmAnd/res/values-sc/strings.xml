@@ -3189,7 +3189,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Connessione</string>
     <string name="shared_string_calculate">Càrcula</string>
     <string name="shared_string_osmand_usage">Impreu de OsmAnd</string>
-    <string name="shared_sting_tiles">Tasseddos</string>
+    <string name="shared_string_tiles">Tasseddos</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -4204,7 +4204,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Getone invàlidu o iscadidu</string>
     <string name="backup_error_user_is_not_registered">Perunu impreadore registradu cun custu indiritzu de posta</string>
     <string name="backup_error_no_valid_subscription">Non b\'at perunu abbonamentu vàlidu</string>
-    <string name="contour_lines_hillshades_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
+    <string name="contour_lines_hillshade_slope">Curvas de livellu, umbraduras de sos rilievos, pendèntzia</string>
     <string name="duration_moment_ago">unu momentu a como</string>
     <string name="logout_from_osmand_cloud">Essi dae OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Cheres essire\?

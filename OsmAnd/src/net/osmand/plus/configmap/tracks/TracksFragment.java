@@ -553,7 +553,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 					.setIcon(getContentIcon(R.drawable.ic_action_folder_stroke))
 					.setOnClickListener(v -> {
 						FragmentManager manager = activity.getSupportFragmentManager();
-						MoveGpxFileBottomSheet.showInstance(manager, file, this, false, false);
+						MoveGpxFileBottomSheet.showInstance(manager, file, file.getParentFile(), this, false, false);
 					})
 					.create());
 
@@ -657,7 +657,7 @@ public class TracksFragment extends BaseOsmAndDialogFragment implements LoadTrac
 	}
 
 	@Override
-	public void renamedTo(File file) {
+	public void fileRenamed(@NonNull File src, @NonNull File dest) {
 		reloadTracks();
 	}
 

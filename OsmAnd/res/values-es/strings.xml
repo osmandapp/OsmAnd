@@ -697,7 +697,7 @@
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de dibujo</string>
     <string name="rendering_attr_appMode_description">Optimizar mapa para</string>
-    <string name="rendering_attr_contourLines_description">Mostrar desde el nivel de zum (requiere datos de curvas de nivel):</string>
+    <string name="rendering_attr_contourLines_description">Visualización a partir del nivel del zoom (requiere los datos de las curvas de nivel):</string>
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
     <string name="rendering_attr_hmRendered_description">Aumentar detalle que se muestra en el mapa.</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
@@ -778,49 +778,49 @@
     <string name="map_widget_vector_attributes">Atributos de renderizado</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+    <string name="osmand_long_description_1000_chars">OsmAnd (indicaciones de navegación automatizadas de OSM)
 \n
-\nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas) pueden almacenarse en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz.
+\n OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de los mapas (vectoriales o mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono móvil para usarlos sin conexión. OsmAnd también proporciona la funcionalidad de cálculo de ruta sin conexión, incluida la guía de paso a paso mediante la voz.
 \n
-\n Algunas de las funciones fundamentales:
-\n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo)
-\n - Mapas vectoriales compactos disponibles de todo el planeta
-\n - Descarga de mapas por país o región directamente desde la aplicación
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Navegación sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zum del mapa según la velocidad
-\n - Alineación del mapa, según la brújula o dirección del movimiento
-\n - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas
+\n Algunas de las características principales:
+\n - Funcionalidad completa sin conexión (los mapas vectoriales o teselados descargados se almacenan en la carpeta de tú elección)
+\n - Mapas vectoriales compactos sin conexión para todo el mundo
+\n - Los mapas de países o regiones se pueden descargar directamente desde la aplicación
+\n - Es posible superponer varias capas de mapas, como GPX o tracks de navegación, puntos de interés (POI), favoritos, curvas de nivel, paradas de transporte público o mapas adicionales con transparencia ajustable
+\n - Búsqueda sin conexión de direcciones y lugares (PDI)
+\n - Cálculo de las rutas sin conexión para las distancias medias
+\n - Modos coche, bicicleta y peatón, opcionalmente con:
+\n - Cambio de vista diurna y nocturna automática
+\n - Aproximación del mapa en función de la velocidad
+\n - Alineación del mapa según la brújula o la dirección en que te mueves
+\n - Guiado por los carriles, límites de velocidad, voces grabadas y TTS
 \n
-\n Limitaciones de la versión gratuita de OsmAnd:
-\n - Limitado número de mapas descargados
-\n - Sin acceso a los PDI descargados de Wikipedia.
+\n Limitaciones de esta versión gratuita de OsmAnd:
+\n - El número de mapas para descargar es limitado
+\n - No tienes acceso a los puntos de interés (PDI) de la Wikipedia sin conexión
 \n
-\n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
+\n OsmAnd se está desarrollando activamente y nuestro proyecto y su futuro dependen de la contribución financiera para financiar el desarrollo y las pruebas de las nuevas funciones. Busca la opción de comprar OsmAnd+ o financia nuevas características o haz una donación en osmand.net.</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Direcciones de navegación automatizadas de OSM)
 \n
-\n OsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos del mapa (vectores y teselas), pueden almacenarse en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz.
+\n OsmAnd+ es una aplicación de navegación de software de código abierto con acceso a una amplia variedad de datos globales de OSM. Todos los datos de los mapas (vectoriales o de mosaicos) se pueden almacenar en la tarjeta de memoria del teléfono para usarlos sin conexión. También se ofrece la funcionalidad de enrutamiento fuera sin conexión y en línea, incluida la guía de voz paso a paso.
 \n
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
+\n OsmAnd+ es la versión de pago de la aplicación. Al comprarla, respaldas el proyecto, financias el desarrollo de nuevas funciones y recibes las últimas actualizaciones.
 \n
-\n Algunas de las funciones principales:
-\n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n - Mapas vectoriales compactos sin conexión, disponibles en todo el mundo
+\n Algunas de las características principales:
+\n - Funcionalidad sin conexión completa (almacenar mapas vectoriales o mosaicos descargados en el almacenamiento del dispositivo)
+\n - Mapas vectoriales sin conexión compactos para todo el mundo disponibles
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
-\n - Función de Wikipedia sin conexión (descargar puntos de interés de Wikipedia), ideal para hacer turismo
-\n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+\n - Función de Wikipedia sin conexión (descargar puntos de interés de la Wikipedia), ideal para hacer turismo
+\n - Posibilidad de superposición de varias capas de mapas, como GPX o rutas de navegación, puntos de interés, Favoritos, paradas de transporte público, mapas adicionales con transparencia personalizable, características topográficas como curvas de nivel/sombreado/pendiente
 \n
-\n - Búsqueda sin conexión de direcciones y sitios (PDI)
-\n - Rutas sin conexión para distancias de rango medio
-\n - Modos de automóvil, bicicleta y peatón con opcional:
-\n - Cambio automático de modo diurno/nocturno
-\n - Zum del mapa según la velocidad
-\n - Alineación del mapa, según brújula o dirección del movimiento
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
+\n - Búsqueda sin conexión de direcciones y lugares (PDI)
+\n - Enrutamiento fuera de línea para distancias medias
+\n - Modos coche, bicicleta y peatón con opcional:
+\n - Cambio automático de vista diurna/nocturna
+\n - Zoom de mapa dependiente de la velocidad
+\n - Alineación del mapa según la brújula o la dirección del movimiento
+\n - Indicación de carril, visualización del límite de velocidad, voz grabada y de texto a voz
 \n</string>
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="snap_to_road">Ajustar al camino</string>
@@ -876,17 +876,17 @@
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5 – 9).</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">La información del terreno, como las curvas de nivel, las sombras de las colinas y las pendientes, le ayudan a evaluar visualmente la disposición del terreno y el relieve, la navegabilidad, etc. La información topográfica puede representarse en el mapa mediante el sombreado de la pendiente, las curvas de nivel y/o la coloración de la inclinación.
+    <string name="srtm_plugin_description">La información sobre el terreno, como las curvas de nivel, el sombreado de las colinas o la pendiente, ayuda a evaluar visualmente la disposición del terreno, el relieve, la navegabilidad y mucho más. La información topográfica puede representarse en el mapa mediante curvas de nivel, sombreado del relieve y/o coloreado de la pendiente.
 \n
 \nLos datos subyacentes proceden de SRTM y ASTER.
 \n
 \nMás información en %1$s.</string>
-    <string name="srtm_plugin_name">Curvas de nivel</string>
+    <string name="srtm_plugin_name">Topografía</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="audionotes_plugin_description">Tome notas de audio / foto / video durante un viaje, utilizando un botón de mapa o el menú contextual de la ubicación.</string>
     <string name="audionotes_plugin_name">Notas audio/vídeo</string>
-    <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
+    <string name="osmand_srtm_short_description_80_chars">El complemento de OsmAnd para características las topográficas sin conexión como líneas de contorno, sombreado, pendiente</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
@@ -919,8 +919,8 @@
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.
 \n%1$s</string>
     <string name="recording_description">Grabando %1$s %3$s %2$s</string>
-    <string name="srtm_paid_version_msg">Por favor, considera pagar por el complemento «Curvas de nivel» para apoyar su desarrollo.</string>
-    <string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
+    <string name="srtm_paid_version_msg">Por favor, considera pagar por el complemento \'Topografía para apoyar su desarrollo.</string>
+    <string name="srtm_paid_version_title">Complemento de Topografía</string>
     <string name="dropbox_plugin_description">Sincroniza trazas y notas multimedia con tu cuenta de Dropbox.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
@@ -1678,7 +1678,7 @@
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="buy">Comprar</string>
     <string name="activate_seamarks_plugin">Activa el complemento de «Vista náutica»</string>
-    <string name="activate_srtm_plugin">Activa el complemento de «Curvas de nivel»</string>
+    <string name="activate_srtm_plugin">Por favor activa el plugin \"Topografía\"</string>
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
@@ -2194,9 +2194,9 @@
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Circular por la derecha</string>
     <string name="shared_string_automatic">Automático</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
+    <string name="osmand_extended_description_part1">OsmAnd (Direcciones de navegación automatizadas OSM) es una aplicación de mapas y navegación con acceso a los datos de OSM gratuitos, de alta calidad y en todo el mundo.
 \n
-\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
+\nDisfruta de la navegación visual y por audio, visualización de POI (Puntos de interés), creación y gestión de recorridos GPX, visualización de curvas de nivel e información topográfica (a través de una extensión), elección del tipo de coche, bicicleta o peatón, la oportunidad de contribuir a OSM y mucho más.</string>
     <string name="analyze_on_map">Analizar en el mapa</string>
     <string name="shared_string_visible">Visible</string>
     <string name="restore_purchases">Restaurar compras</string>
@@ -2224,12 +2224,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">Esquí 
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
-    <string name="osmand_extended_description_part5">Ciclismo 
-\n• Encuentra rutas de ciclismo en el mapa 
-\n• La navegación GPS en el modo bicicleta, construye la ruta usando rutas de ciclismo 
-\n• Vea la velocidad y altitud 
-\n• La opción de grabación GPX, permite grabar el viaje y compartirlo 
-\n• Mediante un complemento adicional, puedes activar las curvas de nivel y el sombreado de colinas</string>
+    <string name="osmand_extended_description_part5">Ciclismo
+\n - Encuentra carriles bici en el mapa
+\n - La navegación GPS en modo ciclismo construye tu ruta utilizando carriles bici
+\n - Consulta tu velocidad y altitud
+\n - La opción de grabación GPX te permite grabar tu viaje y compartirlo
+\n - A través de un complemento adicional, puedes activar las curvas de nivel y las sombras de las colinas</string>
     <string name="osmand_extended_description_part6">Caminar, senderismo, turismo de ciudad
 \n • El mapa muestra las rutas para caminar y de senderismo
 \n • Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística
@@ -2277,12 +2277,12 @@
     <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad náuticos del hemisferio norte</string>
     <string name="download_depth_countours">Curvas de profundidad náuticas</string>
     <string name="nautical_maps">Mapas náuticos</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
-\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usa la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (Direcciones de navegación automatizadas OSM) es una aplicación de mapas y navegación con acceso a los datos OSM gratuitos, mundiales y de alta calidad.
+\n Disfruta de navegación por voz y óptica, visualización de POIs (puntos de interés), creación y gestión de tracks GPX, uso de visualización de curvas de nivel e información topográfica, elección entre modos de conducción, ciclismo, peatones, edición OSM y mucho más.
 \n
-\nOsmAnd+ es la versión de pago. Comprando la aplicación, ayudas al proyecto, financiando el desarrollo de nuevas funciones y recibiendo las últimas actualizaciones.
+\n OsmAnd+ es la versión de pago de la aplicación. Al comprarla, apoyas el proyecto, financias el desarrollo de nuevas funciones y recibes las últimas actualizaciones.
 \n
-\nAlgunas de las principales funciones son:</string>
+\n Algunas de las características principales:</string>
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="type_address">Escribe la dirección</string>
@@ -2357,9 +2357,9 @@
 \nDesde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
 \n</string>
     <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas mayúsculas. ¿Continuar?</string>
-    <string name="srtm_menu_download_descr">Descarga el mapa de «Curvas de nivel» para usarlas en esta región.</string>
+    <string name="srtm_menu_download_descr">Descarga el mapa de las \'curvas de nivel\' de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Compra e instala el complemento «Curvas de nivel» para mostrar áreas verticales graduadas.</string>
+    <string name="srtm_purchase_header">Compra e instala el complemento \'Topografía\' para mostrar las áreas verticales graduadas.</string>
     <string name="srtm_color_scheme">Esquema de color</string>
     <string name="show_from_zoom_level">La visualización comienza a nivel de zoom</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
@@ -2375,7 +2375,7 @@
     <string name="nothing_found">Nada encontrado</string>
     <string name="nothing_found_descr">Cambiar la búsqueda o aumentar su radio.</string>
     <string name="hillshade_menu_download_descr">Descarga la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
-    <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrar las áreas verticales graduadas.</string>
+    <string name="hillshade_purchase_header">Instale el complemento de \'Topografía para mostrar las zonas verticales niveladas.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el uso de caminos privados para este viaje\?</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre sitios, colabora, captura el mundo.</string>
@@ -2717,9 +2717,9 @@
     <string name="show_full_description">Mostrar descripción completa</string>
     <string name="nautical_render_descr">Para navegación náutica. Cuenta con boyas, faros, vías fluviales, carriles y balizas marítimas, puertos, servicios marítimos y curvas de profundidad.</string>
     <string name="ski_map_render_descr">Para esquiar. Cuenta con pistas de esquí, remontes, pistas de esquí de fondo, etc. Atenúa los objetos de mapas secundarios.</string>
-    <string name="light_rs_render_descr">Estilo de conducción simple. Modo nocturno suave, curvas de nivel, caminos contrastantes con estilo naranja, atenúa los objetos de mapas secundarios.</string>
+    <string name="light_rs_render_descr">Estilo de conducción sencillo. Modo nocturno suave, carreteras de estilo naranja contrastado, atenúa los objetos secundarios del mapa, las características topográficas como las curvas de nivel.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
-    <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Presenta curvas de nivel, rutas, calidad de la superficie, restricciones de acceso, escudos de carreteras, representación de caminos según la escala SAC/CAI, elementos deportivos de aguas bravas.</string>
+    <string name="default_render_descr">Estilo universal. Representación clara de las ciudades densamente pobladas. Características: rutas, calidad de la superficie, restricciones de acceso, señales de tráfico, enrutamiento a escala SAC/CAI, características de deportes de aguas bravas, características topográficas como las curvas de nivel.</string>
     <string name="shared_string_bookmark">Favorito</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
@@ -3218,7 +3218,7 @@
     <string name="rendering_attr_piste_difficulty_advanced_name">Avanzado</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Estilo libre</string>
     <string name="shared_string_osmand_usage">Uso de OsmAnd</string>
-    <string name="shared_sting_tiles">Teselas</string>
+    <string name="shared_string_tiles">Teselas</string>
     <string name="track_storage_directory">Carpeta de almacenamiento de trazas</string>
     <string name="track_storage_directory_descrp">Las trazas pueden almacenarse en la carpeta «rec», carpetas mensuales o diarias.</string>
     <string name="store_tracks_in_rec_directory">Grabar trazas en la carpeta «rec»</string>
@@ -3231,7 +3231,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere los caminos sin pavimentar a los pavimentados para el trazado de rutas.</string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
-    <string name="quick_action_hillshade_descr">Un botón que muestra u oculta el sombreado de las colinas en el mapa.</string>
+    <string name="quick_action_hillshade_descr">Un botón para mostrar u ocultar la sombra de la colina en el mapa.</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada.</string>
     <string name="export_profile">Exportar perfil</string>
     <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
@@ -3405,15 +3405,15 @@
     <string name="profile_type_custom_string">Perfil personalizado</string>
     <string name="import_rendering_file">Importar archivo de renderizado</string>
     <string name="shared_string_terrain">Terreno</string>
-    <string name="hillshade_description">El mapa Hillshade utiliza tonos oscuros para mostrar las laderas, los picos y las tierras bajas.</string>
+    <string name="hillshade_description">El mapa Hillshade utiliza tonos oscuros para mostrar la pendiente, los picos y las tierras bajas.</string>
     <string name="slope_description">La pendiente usa colores para visualizar la inclinación del terreno.</string>
     <string name="terrain_slider_description">Define los niveles de zum mínimo y máximo en los que se mostrará la capa.</string>
     <string name="hillshade_download_description">Se necesitan mapas adicionales para ver el sombreado en el mapa.</string>
-    <string name="slope_download_description">Se necesitan mapas adicionales para ver las pendientes en el mapa.</string>
-    <string name="slope_read_more">Más información sobre las pendientes en «%1$s».</string>
+    <string name="slope_download_description">Se necesitan mapas adicionales para ver la pendiente en el mapa.</string>
+    <string name="slope_read_more">Más información sobre la pendiente en %1$s.</string>
     <string name="shared_string_transparency">Transparencia</string>
     <string name="shared_string_zoom_levels">Niveles de zum</string>
-    <string name="terrain_empty_state_text">Muestra los sombreados o pendientes en el mapa. Más información sobre estos tipos de mapas en nuestro sitio.</string>
+    <string name="terrain_empty_state_text">Muestra el relieve o la pendiente en el mapa. Más información sobre estos tipos de mapas en nuestra página web.</string>
     <string name="shared_string_hillshade">Sombreado</string>
     <string name="shared_string_import_complete">Importación completa</string>
     <string name="items_added">Elementos añadidos</string>
@@ -3429,7 +3429,7 @@
     <string name="clear_recorded_data_warning">¿Borrar los datos registrados\?</string>
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desviación</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
-    <string name="download_slope_maps">Pendientes</string>
+    <string name="download_slope_maps">Pendiente</string>
     <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa del terreno en el mapa.</string>
     <string name="delete_description">Borrar descripción</string>
     <string name="add_description">Añadir descripción</string>
@@ -3845,7 +3845,7 @@
     <string name="gpx_upload_trackable_visibility_descr">«Trazable» significa que la traza no aparece en ninguna lista pública, pero el conjunto de puntos procesados con marcas de tiempo (no se pueden asociar directamente con usted) estarán disponibles a través de la API pública de GPS.</string>
     <string name="lang_de_casual">Alemán (casual)</string>
     <string name="snowmobile_render_descr">Para caminos y senderos exclusivos de motos de nieve.</string>
-    <string name="contour_lines_thanks">Gracias por comprar las «Curvas de nivel»</string>
+    <string name="contour_lines_thanks">Gracias por comprar \'Topography\'</string>
     <string name="routing_attr_avoid_footways_description">Evita pasar por veredas o aceras</string>
     <string name="routing_attr_avoid_footways_name">Evitar aceras</string>
     <string name="use_live_public_transport">Datos de «OsmAnd Live»</string>
@@ -3909,7 +3909,7 @@
     <string name="message_name_is_already_exists">El nombre ya existe</string>
     <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
     <string name="keep_it_empty_if_not">Si no, mantenerlo vacío</string>
-    <string name="hillshade_slope_contour_lines">Sombreado / Pendiente / Curvas de nivel</string>
+    <string name="hillshade_slope_contour_lines">Curvas de nivel / Sombreado / Pendiente</string>
     <string name="edit_track">Editar traza</string>
     <string name="edit_online_routing_engine">Editar motor de navegación en línea</string>
     <string name="delete_waypoints">Borrar puntos de referencia</string>
@@ -4301,7 +4301,7 @@
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
 \n
 \nGestiona o cancela las suscripciones cuando quieras, en los ajustes de Amazon.</string>
-    <string name="contour_lines_hillshades_slope">Curvas de nivel, sombreados, pendientes</string>
+    <string name="contour_lines_hillshade_slope">Curvas de nivel, sombreados, pendientes</string>
     <string name="backup_error_no_valid_subscription">No hay ninguna suscripción válida</string>
     <string name="backup_error_token_is_not_valid">Algo está mal con el ID del dispositivo o la clave proporcionada</string>
     <string name="osmand_maps_plus_tagline">Obtén funciones ampliadas</string>
@@ -4316,7 +4316,7 @@
     <string name="purchases_feature_desc_combined_wiki">Explora los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Proporciona todos los artículos de la Wikipedia relacionados con el lugar sin conexión, ayudándote a aprender sobre los lugares que visitas en tu viaje con simples toques en el mapa. No olvides descargar los archivos de los mapas de la Wikipedia para las respectivas regiones.</string>
     <string name="purchases_feature_desc_wikivoyage">Explora Wikiviajes sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
-    <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar picos y tierras bajas.</string>
+    <string name="purchases_feature_desc_terrain">Las líneas del contorno del terreno, sombras de las colinas en escala de grises e indicación de las pendientes en escala de colores, para mostrar las cumbres y las tierras bajas.</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="send_crash_log">Enviar informe de errores</string>
@@ -4370,7 +4370,7 @@
     <string name="language_description">Marca el idioma preferido y el tipo de indicaciones por voz.</string>
     <string name="route_line_use_gradient_coloring">La línea de ruta se colorea según la pendiente de elevación.</string>
     <string name="srtm_download_single_help_message">Marca la variante. Deberás volver a descargar el archivo para cambiar el formato.</string>
-    <string name="srtm_download_list_help_message">OsmAnd provee datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
+    <string name="srtm_download_list_help_message">OsmAnd proporciona los datos de las curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
     <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="search_more">Buscar más…</string>
@@ -5228,16 +5228,16 @@
     <string name="save_track_external_sensors_data">Datos</string>
     <string name="external_sensors_not_found">No se encontraron sensores</string>
     <string name="external_sensors_source_of_data">Fuente de los datos</string>
-    <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándose en los datos del mapa de la elevación del terreno. Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación sin conexión, basándote en los datos del mapa del terreno (3D). Las diferencias respecto a la altitud registrada por el dispositivo pueden utilizarse como corrección de la elevación.</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
     <string name="calculate_offline">Calcular sin conexión</string>
     <string name="power_watts_unit">Vatios</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="shared_string_close_the_dialog">Cerrar el cuadro del diálogo</string>
     <string name="relief_3d">Relieve en 3D</string>
-    <string name="terrain_map">Mapa del terreno</string>
+    <string name="terrain_map">Mapa del terreno (3D)</string>
     <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>
-    <string name="free_favorites_backup">Copia de seguridad gratuita de los favoritos</string>
+    <string name="free_favorites_backup">Copia de seguridad gratuita de tus favoritos</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">¿Estás seguro de que quieres eliminar la cuenta de OsmAnd Cloud\?
 \n
 \nEsta acción no se puede deshacer.</string>
@@ -5246,7 +5246,7 @@
 \nTodos los datos en el dispositivo permanecen intactos.</string>
     <string name="osmand_cloud_deletion_account_warning">Tu cuenta y todos los detalles de la cuenta serán %1$s</string>
     <string name="free_favorites_backup_description">Regístrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de tus favoritos y ajustes.</string>
-    <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">Obten OsmAnd Cloud</string>
     <string name="free_account">Cuenta gratuita</string>
     <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
     <string name="osmand_cloud_deleted_account_descr">La cuenta y todos los datos fueron eliminados de OsmAnd Cloud.</string>
@@ -5261,9 +5261,9 @@
     <string name="delete_account">Eliminar la cuenta</string>
     <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
     <string name="verify_account">Verifica tu cuenta</string>
-    <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes leer más sobre las Pendientes en %1$s.</string>
+    <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes obtener más información sobre la pendiente en %1$s.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios se desconectarán de OsmAnd Cloud y perderán el acceso a las funciones de pago.</string>
-    <string name="terrain_category_description">Líneas del contorno del terreno, mapa completo de colinas con tonos oscuros y mapas de pendientes con colores para mostrar las cumbres y las tierras bajas.</string>
+    <string name="terrain_category_description">Líneas del contorno del terreno, sombra de colinas en escala de grises e indicación de la pendiente en escala de colores, para mostrar las cumbres y las tierras bajas.</string>
     <string name="verify_account_deletion_descr">Necesitamos verificar tu cuenta antes de eliminarla.
 \n
 \nIntroduce la dirección de correo electrónico con la que te registraste. Se te enviará una contraseña de un solo uso para el siguiente paso.</string>
@@ -5310,7 +5310,7 @@
 \n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
 \n
 \n</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para las pendiente/los sombreado</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para el relieve/la pendiente</string>
     <string name="shared_string_avoid">Evitar</string>
     <string name="cache_size">Tamaño de la caché</string>
     <string name="may_be_used_if_there_is_shortcut">Puede utilizarse si existe un acceso directo</string>
@@ -5339,4 +5339,10 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_attr_alpineHiking_description">Tipos de la clasificación de la dificultad de las rutas.</string>
+    <string name="write_bearing">Escribir el rumbo</string>
+    <string name="write_heading_description">Guarda el rumbo de cada punto de seguimiento en la grabación</string>
+    <string name="write_heading">Escribir el encabezado</string>
+    <string name="write_bearing_description">Guarda la dirección de cada punto de seguimiento durante la grabación</string>
+    <string name="shared_string_included">Incluido</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponible como parte del plan %2$s</string>
 </resources>

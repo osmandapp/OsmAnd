@@ -3156,7 +3156,7 @@
     <string name="quick_action_showhide_mapillary_descr">Xəritədə Mapillary qatını göstərmək və ya gizlətmək üçün düymə.</string>
     <string name="vessel_height_warning">Alçaq körpülərdən yayınmaq üçün gəmi hündürlüyünü təyin edin. Körpü hərəkətlidirsə, açıq vəziyyətdəki hündürlüyü istifadə olunur.</string>
     <string name="start_editing_card_description">Siz Vikisəyahət-də istənilən məqaləyə düzəliş edə bilərsiniz və etməlisiniz. Bilik, təcrübə, istedad və diqqətinizi paylaşın.</string>
-    <string name="contour_lines_hillshades_slope">Kontur xətləri, təpə kölgələri, yamac</string>
+    <string name="contour_lines_hillshade_slope">Kontur xətləri, təpə kölgələri, yamac</string>
     <string name="hillshade_slope_contour_lines">Təpə kölgəsi / Yamac / Kontur xətləri</string>
     <string name="hillshade_purchase_header">Dərəcəli şaquli sahələri göstərmək üçün “Kontur xətləri” qoşmasını quraşdırın.</string>
     <string name="quick_action_hillshade_descr">Xəritədə təpə kölgələrini göstərmək və ya gizlətmək üçün düymə.</string>

@@ -5160,4 +5160,11 @@
 	<string name="poi_assembly_point">Assembly point</string>
 	<string name="poi_osmand_not_pt_shelter_yes">All except public transport shelters</string>
 
+	<string name="poi_bicycle_designated">Designated for bicycles</string>
+	<string name="poi_horse_designated">Designated for horses</string>
+	<string name="poi_foot_designated">Designated for pedestrians</string>
+	<string name="poi_motor_vehicle_designated">Designated for motor vehicles</string>
+	<string name="poi_motorcar_designated">Designated for motorcars</string>
+	<string name="poi_vehicle_designated">Designated for vehicles</string>
+
 </resources>

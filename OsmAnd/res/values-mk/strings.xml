@@ -304,7 +304,7 @@
     <string name="backup_deleting_all_data">Se brišat site podatoci…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavuvanje\?
 \nḰe treba povtorno da se najavite za da napravite rezervna kopija ili da gi vratite podatocite.</string>
-    <string name="contour_lines_hillshades_slope">Konturni linii, ridovi, nagib</string>
+    <string name="contour_lines_hillshade_slope">Konturni linii, ridovi, nagib</string>
     <string name="backup_error_no_valid_subscription">Nema validna pretplata</string>
     <string name="backup_error_user_is_not_registered">Nitu eden korisnik ne e registriran so taa adresa na e-pošta</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nevažečki ili istečen token</string>
@@ -1498,7 +1498,7 @@
     <string name="rendering_attr_piste_difficulty_undefined_name">Nedefinirano</string>
     <string name="routeInfo_piste_difficulty_name">Teskotii na patekata</string>
     <string name="shared_string_osmand_usage">OsmAnd upotreba</string>
-    <string name="shared_sting_tiles">Plocki</string>
+    <string name="shared_string_tiles">Plocki</string>
     <string name="shared_string_maps">Karti</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="navigate_point_format_olc">Otvorete go kodot za lokacija</string>

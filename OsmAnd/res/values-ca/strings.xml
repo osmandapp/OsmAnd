@@ -3223,7 +3223,7 @@
     <string name="rendering_attr_piste_type_hike_name">Senderisme</string>
     <string name="default_speed_dialog_msg">Estima l\'hora d\'arribada per tipus de carretera desconeguts i limita la velocitat a totes les vies (podria afectar la ruta)</string>
     <string name="shared_string_other">Altres</string>
-    <string name="shared_sting_tiles">Tessel·les</string>
+    <string name="shared_string_tiles">Tessel·les</string>
     <string name="export_profile">Exporta el perfil</string>
     <string name="exported_osmand_profile">Perfil d\'OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">«%1$s» ja existeix. El voleu sobreescriure\?</string>

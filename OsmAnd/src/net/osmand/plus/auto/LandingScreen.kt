@@ -41,6 +41,18 @@ class LandingScreen(
                     .setIcon(
                         CarIcon.Builder(
                             IconCompat.createWithResource(
+                                getCarContext(),
+                                R.drawable.ic_my_location))
+                            .build())
+                    .setOnClickListener {
+                        session?.navigationCarSurface?.handleRecenter()
+                    }
+                    .build())
+            .addAction(
+                Action.Builder()
+                    .setIcon(
+                        CarIcon.Builder(
+                            IconCompat.createWithResource(
                                 carContext,
                                 R.drawable.ic_zoom_in))
                             .build())

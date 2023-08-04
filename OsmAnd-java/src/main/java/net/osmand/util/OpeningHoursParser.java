@@ -665,14 +665,6 @@ public class OpeningHoursParser {
 		public boolean containsMonth(Calendar cal);
 
 		/**
-		 * Check if the year of "cal" is part of this rule
-		 *
-		 * @param cal the time to check
-		 * @return true if the year is part of the rule
-		 */
-		public boolean containsYear(Calendar cal);
-
-		/**
 		 * @return true if the rule overlap to the next day
 		 */
 		public boolean hasOverlapTimes();
@@ -725,14 +717,10 @@ public class OpeningHoursParser {
 		 */
 		private boolean[] months = new boolean[12];
 
-		/**
-		 * represents the list on which year / month it is open.
-		 */
-		private int[] firstYearMonths = null;
+		private int[] firstYearMonths = null; // stores YEAR == this.year for valid months [0, 0, ... 0, YEAR, YEAR, ... YEAR, 0...]
 		private boolean[][] firstYearDayMonth;
 		private int[] lastYearMonths = null;
 		private boolean[][] lastYearDayMonth;
-		private int fullYears = 0;
 		private int year = 0;
 
 		private boolean fallback;
@@ -1001,34 +989,25 @@ public class OpeningHoursParser {
 		 * @param cal the time to check
 		 * @return true if the month is part of the rule
 		 */
-		@Override
 		public boolean containsMonth(Calendar cal) {
 			int month = cal.get(Calendar.MONTH);
 			int year = cal.get(Calendar.YEAR);
-			return containsYear(cal) && months[month] || hasFullYears();
+			if (!hasYears()) {
+				return (this.year == 0 || this.year == year) && months[month];
+			}
+			if (this.year > year) {
+				return false;
+			} else if(this.year < year) {
+				if (lastYearMonths == null) {
+					return false;
+				}
+				int lastYear = lastYearMonths[month];
+				return lastYear > 0 && year <= lastYear;
+			} else {
+				return firstYearMonths[month] > 0;
+			}
 		}
 
-		@Override
-		public boolean containsYear(Calendar cal) {
-			if (year == 0 && firstYearMonths == null) {
-				return true;
-			}
-			int month = cal.get(Calendar.MONTH);
-			int year = cal.get(Calendar.YEAR);
-			if (firstYearMonths != null && firstYearMonths[month] == year ||
-					lastYearMonths != null && lastYearMonths[month] == year ||
-					firstYearMonths == null && lastYearMonths == null && this.year == year) {
-				return true;
-			}
-			if (fullYears > 0 && this.year > 0) {
-				for (int i = 1; i <= fullYears; i++) {
-					if (this.year + i == year) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
 
 		/**
 		 * Check if this rule says the feature is open at time "cal"
@@ -1552,8 +1531,8 @@ public class OpeningHoursParser {
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int day = (i + 5) % 7;
 			int previous = (day + 6) % 7;
-			boolean thisDay = hasDays || hasDayMonths() || hasFullYears();
-			if (hasFullYears()) {
+			boolean thisDay = true; //hasDays || hasDayMonths() || hasFullYears(); // CHECK?
+			if (hasYears()) {
 				thisDay = isOpened(year, month, dmonth);
 			} else {
 				if (thisDay && hasDayMonths()) {
@@ -1564,8 +1543,8 @@ public class OpeningHoursParser {
 				thisDay = days[day];
 			}
 			// potential error for Dec 31 12:00-01:00
-			boolean previousDay = hasDays || hasDayMonths() || hasFullYears();
-			if (hasFullYears()) {
+			boolean previousDay = true; // hasDays || hasDayMonths() || hasFullYears(); // CHECK?
+			if (hasYears()) {
 				if (dmonth > 0) {
 					previousDay = isOpened(year, month, dmonth - 1);
 				}
@@ -1609,23 +1588,29 @@ public class OpeningHoursParser {
 
 		private boolean isOpened(int year, int month, int dmonth) {
 			boolean opened = hasDayMonths() && dayMonths[month][dmonth];
-			if (hasFullYears()) {
-				if (year == this.year) {
-					opened = firstYearDayMonth[month][dmonth];
+			if (hasYears()) {
+				if (year < this.year) {
+					opened = false;
+				} else if (year == this.year) {
+					if (firstYearDayMonth != null) {
+						opened = firstYearDayMonth[month][dmonth];
+					}
 				} else {
-					int lastYear = this.year + fullYears + 1;
-					if (year == lastYear) {
+					int lastYear = lastYearMonths[month];
+					if (year < lastYear) {
+						opened = true;
+					} else if (year == lastYear) {
 						opened = lastYearDayMonth[month][dmonth];
 					} else {
-						opened = year > this.year && year < lastYear;
+						opened = false;
 					}
 				}
 			}
 			return opened;
 		}
 
-		private boolean hasFullYears() {
-			return fullYears > 0;
+		private boolean hasYears() {
+			return firstYearMonths != null ;
 		}
 	}
 
@@ -1668,11 +1653,6 @@ public class OpeningHoursParser {
 
 		@Override
 		public boolean containsMonth(Calendar cal) {
-			return false;
-		}
-
-		@Override
-		public boolean containsYear(Calendar cal) {
 			return false;
 		}
 
@@ -1979,19 +1959,24 @@ public class OpeningHoursParser {
 								int startYear = ruleYear > 0 ? ruleYear : endYear;
 								if (basic.firstYearMonths == null) {
 									basic.firstYearMonths = new int[12];
-									Arrays.fill(basic.firstYearMonths, firstMonthToken.mainNumber, 12, startYear);
 								}
-								if (basic.lastYearMonths == null) {
-									basic.lastYearMonths = new int[12];
+								Arrays.fill(basic.firstYearMonths, firstMonthToken.mainNumber, 12, startYear);
+								if (endYear > startYear) {
+									if (basic.lastYearMonths == null) {
+										basic.lastYearMonths = new int[12];
+									}
 									Arrays.fill(basic.lastYearMonths, 0, lastMonthToken.mainNumber + 1, endYear);
-								}
-								if (endYear - startYear > 1) {
-									basic.fullYears = endYear - startYear - 1;
+									if (endYear - startYear > 1) {
+										int startInd = lastMonthToken.mainNumber + 1;
+										Arrays.fill(basic.lastYearMonths, startInd, 12, endYear - 1);
+									} else {
+										int startInd = Math.max(lastMonthToken.mainNumber + 1, firstMonthToken.mainNumber);
+										Arrays.fill(basic.lastYearMonths, startInd, 12, startYear);
+									}
 									fillFirstLastYearsDayOfMonth(basic, pair);
-								}
-								if (endYear > startYear && firstMonthToken.mainNumber >= lastMonthToken.mainNumber) {
-									//basic.dayMonths = null;
-									Arrays.fill(basic.months, true);
+									if (firstMonthToken.mainNumber >= lastMonthToken.mainNumber) {
+										Arrays.fill(basic.months, true);
+									}
 								}
 							}
 

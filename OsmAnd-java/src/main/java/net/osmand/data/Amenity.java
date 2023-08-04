@@ -24,6 +24,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class Amenity extends MapObject {
 
+	public static final String URL_KEY = "url";
 	public static final String WEBSITE = "website";
 	public static final String PHONE = "phone";
 	public static final String MOBILE = "mobile";

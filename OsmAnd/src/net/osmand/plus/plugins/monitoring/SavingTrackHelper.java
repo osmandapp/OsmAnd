@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
@@ -81,9 +82,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String POINT_COL_ICON = "icon";
 	private static final String POINT_COL_BACKGROUND = "background";
 
-	private static final float NO_HEADING = -1.0f;
-
-	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 
 	private final OsmandApplication app;
@@ -261,7 +260,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
 				if (warn != null) {
 					warnings.add(warn.getMessage());
-					return new SaveGpxResult(warnings, new HashMap<String, GPXFile>());
+					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
 				GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
@@ -386,9 +385,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.speed = query.getDouble(3);
 				pt.hdop = query.getDouble(4);
 				pt.time = query.getLong(5);
-
-				float heading = query.getFloat(6);
-				pt.heading = heading == NO_HEADING ? Float.NaN : heading;
+				pt.heading = query.isNull(6) ? Float.NaN : query.getFloat(6);
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				pt.getExtensionsToWrite().putAll(extensions);
@@ -480,23 +477,36 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void startNewSegment() {
 		lastTimeUpdated = 0;
 		lastPoint = null;
-		executeInsertTrackQuery(0, 0, 0, 0, 0, System.currentTimeMillis(), NO_HEADING, null);
+		executeInsertTrackQuery(0, 0, 0, 0, 0, System.currentTimeMillis(), Float.NaN, null);
 		addTrackPoint(null, true, System.currentTimeMillis());
 	}
 
-	public void updateLocation(net.osmand.Location location, Float heading) {
+	public void updateLocation(@Nullable Location location, @Nullable Float heading) {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
-
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-		boolean writeHeading = plugin != null && plugin.SAVE_HEADING_TO_GPX.get();
-		heading = heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : NO_HEADING;
 
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
 		} else if (settings.getApplicationMode() == settings.DEFAULT_APPLICATION_MODE.get()) {
 			lastRoutingApplicationMode = null;
 		}
+		boolean record = shouldRecordLocation(location, locationTime);
+		if (record) {
+			heading = getAdjustedHeading(heading);
+
+			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), locationTime,
+					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
+
+			String pluginsInfo = getPluginsInfo(location);
+			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
+			wptPt.getExtensionsToWrite().putAll(extensions);
+
+			insertData(wptPt, pluginsInfo);
+			app.getNotificationHelper().refreshNotification(NotificationType.GPX);
+		}
+	}
+
+	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
@@ -507,8 +517,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				record = true;
 			}
 			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
-			if (minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) <
-					minDistance) {
+			if (minDistance > 0 && lastPoint != null
+					&& MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < minDistance) {
 				record = false;
 			}
 			float precision = settings.SAVE_TRACK_PRECISION.get();
@@ -520,30 +530,30 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				record = false;
 			}
 		}
-		if (record) {
-			JSONObject json = new JSONObject();
-			PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
+		return record;
+	}
 
-			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
-			if (writeBearing && location.hasBearing()) {
-				try {
-					json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
-				} catch (JSONException e) {
-					log.error(e.getMessage(), e);
-				}
+	private float getAdjustedHeading(@Nullable Float heading) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		boolean writeHeading = plugin != null && plugin.SAVE_HEADING_TO_GPX.get();
+		return heading != null && writeHeading ? MapUtils.normalizeDegrees360(heading) : Float.NaN;
+	}
+
+	@Nullable
+	private String getPluginsInfo(@NonNull net.osmand.Location location) {
+		JSONObject json = new JSONObject();
+		PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
+
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+		boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
+		if (writeBearing && location.hasBearing()) {
+			try {
+				json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
+			} catch (JSONException e) {
+				log.error(e.getMessage(), e);
 			}
-			String pluginsInfo = json.length() > 0 ? json.toString() : null;
-			heading = heading == NO_HEADING ? Float.NaN : heading;
-
-			WptPt wptPt = new WptPt(location.getLatitude(), location.getLongitude(), locationTime,
-					location.getAltitude(), location.getSpeed(), location.getAccuracy(), heading);
-
-			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
-			wptPt.getExtensionsToWrite().putAll(extensions);
-
-			insertData(wptPt, pluginsInfo);
-			app.getNotificationHelper().refreshNotification(NotificationType.GPX);
 		}
+		return json.length() > 0 ? json.toString() : null;
 	}
 
 	private void insertData(@NonNull WptPt wptPt, @Nullable String pluginsInfo) {
@@ -764,7 +774,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(TRACK_COL_SPEED, speed);
 		rowsMap.put(TRACK_COL_HDOP, hdop);
 		rowsMap.put(TRACK_COL_DATE, time);
-		rowsMap.put(TRACK_COL_HEADING, heading);
+		rowsMap.put(TRACK_COL_HEADING, Float.isNaN(heading) ? null : heading);
 		rowsMap.put(TRACK_COL_PLUGINS_INFO, pluginsInfo);
 		execWithClose(AndroidUtils.createDbInsertQuery(TRACK_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}

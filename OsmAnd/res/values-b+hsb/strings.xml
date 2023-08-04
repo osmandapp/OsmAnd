@@ -1549,7 +1549,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Zwisk</string>
     <string name="shared_string_calculate">Wobličeć</string>
     <string name="shared_string_osmand_usage">Wužiwanje OsmAnd</string>
-    <string name="shared_sting_tiles">Kachlicy</string>
+    <string name="shared_string_tiles">Kachlicy</string>
     <string name="shared_string_maps">Karty</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

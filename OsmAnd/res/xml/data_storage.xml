@@ -11,19 +11,31 @@
 			android:icon="@drawable/ic_map"
 			android:key="maps_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/shared_string_maps" />
+			android:title="@string/local_indexes_cat_map" />
 
 		<Preference
 			android:icon="@drawable/ic_map"
-			android:key="terrain_storage_size"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/hillshade_slope_contour_lines" />
-
-		<Preference
-			android:icon="@drawable/ic_world_globe_dark"
 			android:key="tiles_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/shared_sting_tiles" />
+			android:title="@string/local_indexes_cat_tile" />
+
+		<Preference
+			android:icon="@drawable/ic_plugin_srtm"
+			android:key="contour_lines_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/download_srtm_maps" />
+
+		<Preference
+			android:icon="@drawable/ic_action_hillshade_dark"
+			android:key="hillshade_slope_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/hillshade_slope" />
+
+		<Preference
+			android:icon="@drawable/ic_action_terrain"
+			android:key="terrain3d_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/local_indexes_category_terrain" />
 
 		<Preference
 			android:icon="@drawable/ic_map"
@@ -32,22 +44,16 @@
 			android:title="@string/roads_only" />
 
 		<Preference
-			android:icon="@drawable/ic_map"
+			android:icon="@drawable/ic_action_nautical_depth"
 			android:key="nautical_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/nautical_maps" />
+			android:title="@string/index_item_depth_contours_osmand_ext" />
 
 		<Preference
 			android:icon="@drawable/ic_world_globe_dark"
 			android:key="live_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/osmand_live" />
-
-		<Preference
-			android:icon="@drawable/ic_action_folder"
-			android:key="archive_storage_size"
-			android:layout="@layout/data_storage_memory_used_item"
-			android:title="@string/local_indexes_cat_backup" />
 
 		<Preference
 			android:icon="@drawable/ic_action_wikipedia"
@@ -62,7 +68,7 @@
 			android:title="@string/wikivoyage_travel_guide" />
 
 		<Preference
-			android:icon="@drawable/ic_world_globe_dark"
+			android:icon="@drawable/ic_action_precipitation"
 			android:key="weather_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/shared_string_weather" />
@@ -78,6 +84,12 @@
 			android:key="notes_storage_size"
 			android:layout="@layout/data_storage_memory_used_item"
 			android:title="@string/audionotes_plugin_name" />
+
+		<Preference
+			android:icon="@drawable/ic_action_folder"
+			android:key="archive_storage_size"
+			android:layout="@layout/data_storage_memory_used_item"
+			android:title="@string/local_indexes_cat_backup" />
 
 		<Preference
 			android:icon="@drawable/ic_action_folder"

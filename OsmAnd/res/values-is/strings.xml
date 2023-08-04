@@ -3194,7 +3194,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Tenging</string>
     <string name="shared_string_calculate">Reikna</string>
     <string name="shared_string_osmand_usage">Notkun OsmAnd</string>
-    <string name="shared_sting_tiles">Kortatíglar</string>
+    <string name="shared_string_tiles">Kortatíglar</string>
     <string name="shared_string_maps">Kort</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -4202,7 +4202,7 @@
     <string name="use_login_and_password">Nota notandanafn og lykilorð</string>
     <string name="available_until">Tiltækt til %1$s</string>
     <string name="map_updates_are_unavailable_yet">Uppfærslur á kortum eru ekki enn tiltækar. :-(</string>
-    <string name="contour_lines_hillshades_slope">Hæðarlínur, hæðaskyggingar, brekkur</string>
+    <string name="contour_lines_hillshade_slope">Hæðarlínur, hæðaskyggingar, brekkur</string>
     <string name="logout_from_osmand_cloud">Skrá út úr OsmAnd Cloud-tölvuskýi</string>
     <string name="backup_deleting_all_data">Eyði öllum gögnum…</string>
     <string name="backup_deleted_all_data">Eyddi öllum gögnum.</string>

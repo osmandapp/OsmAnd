@@ -11,7 +11,7 @@ import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.search.core.SearchResult
-import kotlin.math.abs
+import net.osmand.util.Algorithms
 
 abstract class BaseOsmAndAndroidAutoScreen(
 	carContext: CarContext) : Screen(carContext) {
@@ -82,35 +82,30 @@ abstract class BaseOsmAndAndroidAutoScreen(
 	}
 
 	protected fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
+		Algorithms.extendRectToContainPoint(mapRect, location.longitude, location.latitude)
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
 				val tileBox = mapView.rotatedTileBox
-				val leftRightDelta = abs(location.longitude - mapRect.left)
-					.coerceAtLeast(abs(location.longitude - mapRect.right))
-				val topBottomDelta = abs(location.latitude - mapRect.top)
-					.coerceAtLeast(abs(location.latitude - mapRect.bottom))
-				val rectLeft = location.longitude - leftRightDelta
-				val rectRight = location.longitude + leftRightDelta
-				val rectWidth = rectRight - rectLeft
+				val rectWidth = mapRect.right - mapRect.left
 				val coef: Double = surfaceRenderer.visibleAreaWidth / tileBox.pixWidth
-				val left = rectLeft - rectWidth * coef
-				val right = rectRight + rectWidth * coef
-				val rectInVisibleArea = QuadRect()
-				rectInVisibleArea.left = left
-				rectInVisibleArea.right = right
-				rectInVisibleArea.top = location.latitude - topBottomDelta
-				rectInVisibleArea.bottom = location.latitude + topBottomDelta
+				val left = mapRect.left - rectWidth * coef
+				val right = mapRect.right + rectWidth * coef
 				mapView.fitRectToMap(
-					rectInVisibleArea.left,
-					rectInVisibleArea.right,
-					rectInVisibleArea.top,
-					rectInVisibleArea.bottom,
+					left,
+					right,
+					mapRect.top,
+					mapRect.bottom,
 					tileBox.pixWidth,
 					tileBox.pixHeight,
 					0)
+				mapView.refreshMap()
 			}
 		}
+	}
+
+	protected fun recenterMap() {
+		session?.navigationCarSurface?.handleRecenter()
 	}
 
 	companion object {

@@ -8,7 +8,7 @@
     <string name="rendering_attr_noPolygons_name">Полігони</string>
     <string name="rendering_attr_appMode_name">Режим показу</string>
     <string name="rendering_attr_appMode_description">Оптимізувати мапу</string>
-    <string name="rendering_attr_contourLines_description">Мінімальний рівень масштабу для показу ізоліній:</string>
+    <string name="rendering_attr_contourLines_description">Мінімальний масштаб для показу ізоліній:</string>
     <string name="rendering_attr_contourLines_name">Показ ізоліній</string>
     <string name="rendering_attr_hmRendered_description">Показувати більше подробиць на мапі.</string>
     <string name="rendering_attr_hmRendered_name">Більше подробиць</string>
@@ -765,7 +765,7 @@
     <string name="prefer_in_routing_descr">Надавати перевагу автомагістралям.</string>
     <string name="max_speed_none">немає</string>
     <string name="index_name_openmaps">OpenMaps - Європа</string>
-    <string name="download_hillshade_maps">Відмивка рельєфу</string>
+    <string name="download_hillshade_maps">Рельєф</string>
     <string name="local_indexes_cat_av">Аудіо/Відео дані</string>
     <string name="stop_routing_confirm">Зупинити навігацію\?</string>
     <string name="clear_dest_confirm">Вилучити пункт призначення (і проміжні точки)\?</string>
@@ -776,8 +776,8 @@
     <string name="dropbox_plugin_description">Синхронізуйте треки та аудіо/відео примітки з вашим обліковим записом Dropbox.</string>
     <string name="dropbox_plugin_name">Плагін Dropbox</string>
     <string name="intermediate_points_change_order">Змінити порядок</string>
-    <string name="srtm_paid_version_msg">Будь ласка, зважте на придбання плагіна \"Ізолінії\" для підтримки його подальшого розвитку.</string>
-    <string name="srtm_paid_version_title">Ізолінії</string>
+    <string name="srtm_paid_version_msg">Будь ласка, зважте на придбання плагіну \'Топографія\' для підтримки його подальшого розвитку.</string>
+    <string name="srtm_paid_version_title">Плагін Топографія</string>
     <string name="av_def_action_video">Запис відео</string>
     <string name="av_def_action_audio">Запис аудіо</string>
     <string name="av_widget_action_descr">Типова дія віджету:</string>
@@ -793,7 +793,7 @@
     <string name="shared_string_control_stop">Зупинити</string>
     <string name="shared_string_control_start">Почати</string>
     <string name="map_widget_av_notes">Аудіо/відео примітки</string>
-    <string name="osmand_srtm_short_description_80_chars">Плагін OsmAnd для показу ізоліній</string>
+    <string name="osmand_srtm_short_description_80_chars">Плагін OsmAnd для топографічних функцій офлайн, таких як ізолінії, рельєф, схили</string>
     <string name="av_use_external_camera">Використовувати застосунок Камера</string>
     <string name="av_settings_descr">Налаштування аудіо/відео запису.</string>
     <string name="av_settings">Налаштування аудіо/відео</string>
@@ -818,12 +818,12 @@
     <string name="audionotes_plugin_name">Аудіо/відео примітки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Ізолінії</string>
-    <string name="srtm_plugin_description">Дані про рельєф місцевості, така як ізолінії, рельєф пагорбів і схилів, допомагають візуально оцінити рельєф місцевості, можливості судноплавства тощо. Топографічні відомості можуть бути представлені на мапі рельєфом схилів, ізолініями та/або розфарбовуванням крутості схилів.
+    <string name="srtm_plugin_description">Дані про рельєф місцевості, такі як ізолінії, рельєф, схили, допомагають візуально оцінити рельєф місцевості, можливості судноплавства тощо. Топографічні відомості можуть бути представлені на мапі ізолініями, рельєфом місцевості та/або розфарбовуванням крутості схилів.
 \n
 \nВихідні дані походять від SRTM та ASTER.
 \n
 \nПодробиці за посиланням %1$s.</string>
-    <string name="srtm_plugin_name">Ізолінії</string>
+    <string name="srtm_plugin_name">Топографія</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
     <string name="download_srtm_maps">Ізолінії</string>
@@ -914,7 +914,7 @@
 \n - повноцінна робота без інтернет-з’єднання (просто збережіть векторні чи растрові дані на пристрій)
 \n - доступні компактні офлайнові векторні мапи всього світу
 \n - завантаження мап країн чи областей безпосередньо в застосунку
-\n - можливе накладання декількох шарів мапи, таких як GPX або навігаційні треки, точки інтересу, закладки, ізолінії, зупинки громадського транспорту, додаткові мапи з налаштуванням їх прозорості
+\n - можливе накладання декількох шарів мапи, таких як GPX або навігаційні треки, точки інтересу, закладки, зупинки громадського транспорту, додаткові мапи з налаштуванням їх прозорості, топографічними функціями, такими як ізолінії/рельєф місцевості/схили
 \n - офлайн пошук адрес та точок інтересу
 \n - офлайн прокладання маршрутів середньої дальності
 \n - режими для пішохідної, автомобільної та велонавігації з опціональними:
@@ -923,9 +923,9 @@
 \n - можливістю орієнтації мапи за компасом чи напрямком руху
 \n - інформація про напрямки руху по смугах, показ обмежень швидкості, голосові повідомлення записані та синтезовані (TTS)
 \n
-\n Обмеження цієї безкоштовної версії OsmAnd:
-\n - кількість завантажень мап є обмеженою
-\n - відсутній офлайн доступ до точок інтересу з Вікіпедії
+\n Обмеження цієї безплатної версії OsmAnd:
+\n - кількість завантажень мап обмежена
+\n - відсутній офлайн-доступ до точок інтересу з Вікіпедії
 \n
 \n OsmAnd активно розвивається, і наш проєкт та його подальший розвиток покладається на фінансові внески для продовження розробки та тестування. Будь ласка, розгляньте можливість придбання OsmAnd+, профінансуйте конкретні нові можливості застосунку або зробіть благодійний внесок на https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
@@ -939,7 +939,7 @@
 \n - Доступні компактні офлайнові векторні мапи для усього світу
 \n - Необмежена кількість завантажень мап окремої країни чи області безпосередньо у застосунку
 \n - Можливість офлайнової роботи з даними Вікіпедії (завантажте POI Вікіпедії) є чудовим інструментом для мандрівників
-\n - Можливість накладання додаткових даних на мапу: наприклад, GPX або навігаційні треки, точки інтересу, закладки, ізолінії, зупинки громадського транспорту, додаткові мапи з налаштуванням їх прозорості
+\n - Можливість накладання додаткових даних на мапу: наприклад, GPX або навігаційні треки, точки інтересу, закладки, зупинки громадського транспорту, додаткові мапи з налаштуванням їх прозорості, топографічні функції, такі як ізолінії/рельєф місцевості/схили
 \n
 \n - Офлайн пошук адрес та місць (точок інтересу)
 \n - Офлайн прокладання маршрутів для середніх відстаней
@@ -1734,7 +1734,7 @@
     <string name="roads">Дороги</string>
     <string name="buy">Придбати</string>
     <string name="activate_seamarks_plugin">Будь ласка, увімкніть плагін «Морські мапи»</string>
-    <string name="activate_srtm_plugin">Будь ласка, увімкніть плагін «Ізолінії»</string>
+    <string name="activate_srtm_plugin">Будь ласка, увімкніть плагін \'Топографія\'</string>
     <string name="later">Пізніше</string>
     <string name="get_full_version">Повна версія</string>
     <string name="downloads">Завантаження</string>
@@ -2202,11 +2202,11 @@
     <string name="sorted_by_distance">Відсортоване за відстанню</string>
     <string name="search_favorites">Пошук в Закладках</string>
     <string name="hillshade_menu_download_descr">Завантажте шар мапи «Рельєф», щоб показати вертикальне затінення.</string>
-    <string name="hillshade_purchase_header">Для показу рельєфу місцевості на мапі, встановіть плагін «Ізолінії».</string>
+    <string name="hillshade_purchase_header">Для показу рельєфу місцевості на мапі, установіть плагін \'Топографія\'.</string>
     <string name="hide_from_zoom_level">Приховати починаючи з масштабу</string>
-    <string name="srtm_menu_download_descr">Завантажте мапу \'Ізолінії\' для використання в обраній місцевості.</string>
+    <string name="srtm_menu_download_descr">Завантажте мапу \'Ізолінії\' для обраної місцевості.</string>
     <string name="shared_string_plugin">Плагін</string>
-    <string name="srtm_purchase_header">Для показу ізоліній на мапі, вам потрібно придбати та встановити плагін «Ізолінії».</string>
+    <string name="srtm_purchase_header">Для показу ізоліній на мапі, вам потрібно придбати та встановити плагін \'Топографія\'.</string>
     <string name="srtm_color_scheme">Схема кольорів</string>
     <string name="show_from_zoom_level">Показувати починаючи з масштабу</string>
     <string name="routing_attr_allow_private_name">Дозволяти рух приватними дорогами</string>
@@ -2263,7 +2263,7 @@
     <string name="route_is_too_long_v2">Для великих відстаней: Додайте проміжні пункти призначення, якщо протягом 10 хвилин не буде знайдено жодного маршруту.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) — застосунок для показу мап та навігації з доступом до вільних глобальних високоякісних даних OpenStreetMap (OSM).
 \n
-\nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX-треками, використовуючи показ ізоліній та даних про висоту (за допомогою плагінів), вибором режимів для автомобілістів, велосипедистів й пішоходів, редагуванням OSM та ще багато чим іншим.</string>
+\nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX-треками, використовуючи показ ізоліній і топографічних даних (за допомогою плагінів), вибором режимів для автомобілістів, велосипедистів й пішоходів, редагуванням OSM та ще багато чим іншим.</string>
     <string name="osmand_extended_description_part2">GPS навігація
 \n • Обирайте між офлайн (без плати за роумінг за кордоном) чи онлайн режимом (швидше)
 \n • Покрокові голосові інструкції допоможуть вам дістатись до місця призначення (записані чи синтезовані голоси)
@@ -2292,7 +2292,7 @@
 \n • GPS-навігація у велосипедному режимі будує маршрут з використанням велосипедних доріжок
 \n • Ви можете бачити свою швидкість та набір висоти
 \n • Запис GPX треків дозволяє вам записувати ваші подорожі та ділитися ними
-\n • З допомогою додаткового плагіна ви можете увімкнути показ ізоліній та рельєфу</string>
+\n • З допомогою додаткового плагіну ви можете увімкнути показ ізоліній і рельєфу</string>
     <string name="osmand_extended_description_part6">Прогулянки, походи, екскурсії по місту
 \n• Мапа показує шляхи для прогулянок та походів
 \n• Вікіпедія обраною вами мовою розповість багато під час екскурсії містом
@@ -2321,9 +2321,9 @@
 \nБільшість країн по всьому світу доступні для завантаження!
 \nОтримайте надійний навігатор у своїй країні — будь то Україна, Польща, Франція, Німеччина, Мексика, Велика Британія, Іспанія, Нідерланди, США, Бразилія чи будь-яка інша.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографічний навігаційний застосунок з доступом до вільних та високоякісних даних OSM зі всього світу.
-\nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX треками, використовуючи показ ізоліній та даних про висоти, вибором між режимами для авто, вело та пішохідної навігації, редагуванням OSM та ще багато чим іншим.
+\nНасолоджуйтесь голосовою та візуальною навігацією, переглядом точок інтересу (англ. POI), створенням та керуванням GPX треками, використовуючи показ ізоліній і топографічних даних, вибором між режимами для авто, вело та пішохідної навігації, редагуванням OSM та ще багато чим іншим.
 \n
-\nOsmAnd+ є платною версією застосунку. Купуючи її, ви підтримуєте проєкт, фінансуєте розробку нових можливостей та отримуєте останні оновлення.
+\nOsmAnd+ — платна версія застосунку. Купуючи її, ви підтримуєте проєкт, фінансуєте розробку нових можливостей та отримуєте найновіші оновлення.
 \n
 \nДеякі з основних можливостей:</string>
     <string name="osmand_plus_extended_description_part2">Навігація
@@ -2660,10 +2660,10 @@
     <string name="shared_string_restart">Перезапуск програми</string>
     <string name="show_images">Показати зображення</string>
     <string name="off_road_render_descr">Для руху бездоріжжям, заснований на стилі «Топо», та для використання із зеленими супутниковими зображеннями на тлі. Зменшенна товщина основних доріг, збільшена товщина доріжок, путівців, велосипедних та інших маршрутів.</string>
-    <string name="light_rs_render_descr">Простий і контрастний стиль для автомобільної навігації. Зручний для сприйняття вночі. Головні особливості: ізолінії, контрастні помаранчеві дороги, затемнені другорядні об\'єкти мапи.</string>
+    <string name="light_rs_render_descr">Простий і контрастний стиль для автомобільної навігації. Зручний для сприйняття вночі. Головні особливості: контрастні помаранчеві дороги, затемнені другорядні об\'єкти мапи, топографічні функції, такі як ізолінії.</string>
     <string name="topo_render_descr">Для походів, пішого та вело туризму. Добре читається на вулиці. Контрастні дороги та природні об’єкти, різні типи маршрутів, розширені варіанти ізоліній, більше подробиць. Налаштування однорідності поверхні дозволяє відрізняти якість дороги. Нічного режиму немає.</string>
     <string name="touring_view_render_descr">Туристичний стиль з високим контрастом та високою деталізацією. Включає всі типові параметри стилю OsmAnd, показуючи при цьому докладні відомості, зокрема дороги, стежки та інші шляхи для подорожі. \"Туристичний атлас\" чітко показує різницю між типами доріг. Підходить для денного, нічного та використання на природі.</string>
-    <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить ізолінії, маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC/CAI, елементи сплавних водних видів спорту.</string>
+    <string name="default_render_descr">Стиль загального призначення. Щільно забудовані міста показуються охайно. Містить маршрути, відомості про якість дорожнього покриття, обмеження доступу, дорожні вказівники, показ стежок за шкалою SAC/CAI, елементи сплавних водних видів спорту, топографічні функції, такі як ізолінії.</string>
     <string name="open_wikipedia_link_online">Перейти за посиланням до Вікіпедії</string>
     <string name="open_wikipedia_link_online_description">Посилання буде відкрите в вебоглядачі.</string>
     <string name="read_wikipedia_offline_description">Передплатіть OsmAnd Live, щоб читати статті з Вікіпедії та Вікімандрів в офлайн режимі.</string>
@@ -3201,7 +3201,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Зʼєднання</string>
     <string name="shared_string_calculate">Обчислити</string>
     <string name="shared_string_osmand_usage">Використання OsmAnd</string>
-    <string name="shared_sting_tiles">Тайли</string>
+    <string name="shared_string_tiles">Тайли</string>
     <string name="shared_string_maps">Мапи</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
@@ -3460,7 +3460,7 @@
     <string name="terrain_slider_description">Встановіть мінімальний та максимальний рівні масштабування, для показу шару.</string>
     <string name="hillshade_download_description">Потрібні додаткові мапи для перегляду рельєфу.</string>
     <string name="slope_download_description">Для перегляду схилів потрібні додаткові мапи.</string>
-    <string name="slope_read_more">Докладніше про схили у %1$s.</string>
+    <string name="slope_read_more">Докладніше про схили в %1$s.</string>
     <string name="shared_string_transparency">Прозорість</string>
     <string name="shared_string_zoom_levels">Масштаб</string>
     <string name="shared_string_legend">Позначення</string>
@@ -3785,7 +3785,7 @@
     <string name="sort_name_descending">За назвою: Я — А</string>
     <string name="sort_name_ascending">За назвою: А — Я</string>
     <string name="start_finish_icons">Піктограми старту та фінішу</string>
-    <string name="contour_lines_thanks">Дякуємо за придбання «Ізоліній»</string>
+    <string name="contour_lines_thanks">Дякуємо за придбання \'Топографії\'</string>
     <string name="what_is_new">Що нового</string>
     <string name="osm_live_payment_desc_hw">Передплата стягується раз на вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
     <string name="osm_live_payment_subscription_management_hw">Кошти будуть списані з рахунку, зареєстрованому у вашому обліковому записі AppGallery після підтвердження придбання.
@@ -3969,7 +3969,7 @@
     <string name="uploading_count">Надсилання %1$d з %2$d</string>
     <string name="uploaded_count">Надіслано %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для надсилання</string>
-    <string name="hillshade_slope_contour_lines">Рельєф / Схили / Ізолінії</string>
+    <string name="hillshade_slope_contour_lines">Ізолінії / Рельєф / Схили</string>
     <string name="open_place_reviews_plugin_description">Зробіть свій внесок у проєкт OpenPlaceReviews, наприклад, світлини, відгуки або посилання на громадські місця, такі як ресторани, готелі або музеї.
 \n
 \nІнструкції про те, як зробити свій внесок, можна знайти на нашому вебсайті %1$s.</string>
@@ -4067,7 +4067,7 @@
     <string name="announce_when_exceeded">Повідомляти про перевищення</string>
     <string name="user_points">Точки користувача</string>
     <string name="output">Вивід</string>
-    <string name="srtm_download_list_help_message">OsmAnd надає дані про ізолінії в метрах та футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
+    <string name="srtm_download_list_help_message">OsmAnd надає дані про ізолінії в метрах і футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
     <string name="srtm_unit_format">Одиниці вимірювання ізоліній</string>
     <string name="shared_string_feet">фути</string>
     <string name="srtm_download_single_help_message">Виберіть потрібний формат. Щоб змінити його, потрібно повторно завантажити файл.</string>
@@ -4160,7 +4160,7 @@
     <string name="send_logcat_log">Надіслати вміст журналу</string>
     <string name="backup_promocode">Промокод</string>
     <string name="purchases_feature_desc_nautical">Отримайте доступ до даних про морські глибини</string>
-    <string name="purchases_feature_desc_terrain">Ізолінії рельєфу, повноколірне затінення рельєфу та мапи схилів в кольорах для показу вершин та низовин.</string>
+    <string name="purchases_feature_desc_terrain">Ізолінії рельєфу, відтінки схилів у сірій і кольоровій гамах для позначення вершин і низин.</string>
     <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікімандри в офлайн режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
     <string name="purchases_feature_desc_wikipedia">Надає всі статті Вікіпедії, повʼязані з конкретними місцями офлайн, допомагаючи вам дізнатися про місця, які ви відвідуєте під час подорожі, простими дотиком до мапи. Не забудьте завантажити файли мап Вікіпедії для відповідних регіонів.</string>
     <string name="purchases_feature_desc_combined_wiki">Переглядайте статті Вікіпедії в дорозі, без з’єднання з Інтернетом. Офлайнові дані, розділені за країнами та доступні всіма мовами.</string>
@@ -4231,7 +4231,7 @@
     <string name="logout_from_osmand_cloud_decsr">Вийти\?
 \nЩоб створити резервну копію даних або відновити їх, потрібно буде ввійти ще раз.</string>
     <string name="backup_error_subscription_was_expired_descr">Термін дії передплати OsmAnd Pro завершився, поновіть її, щоб користуватись резервним копіюванням. Ви досі можете відновити дані з Хмари.</string>
-    <string name="contour_lines_hillshades_slope">Ізолінії, затінення рельєфу, схили</string>
+    <string name="contour_lines_hillshade_slope">Ізолінії, затінення рельєфу, схили</string>
     <string name="backup_deleting_all_data">Вилучення всіх даних…</string>
     <string name="backup_deleted_all_data">Вилучено всі дані.</string>
     <string name="backup_deleting_all_data_descr">Зачекайте, поки OsmAnd вилучить ваші дані з хмари. Усі дані на пристрої залишаться незміненими.</string>
@@ -5241,10 +5241,10 @@
     <string name="power_watts_unit">Ватт</string>
     <string name="revolutions_per_minute_unit">об/хв</string>
     <string name="shared_string_close_the_dialog">Закрити діалогове вікно</string>
-    <string name="terrain_map">Мапа рельєфу</string>
+    <string name="terrain_map">Мапа рельєфу (3D)</string>
     <string name="relief_3d">3D-рельєф</string>
     <string name="relief_3d_description">Придбайте та спостерігайте за масштабною моделлю вашого району або цілого континенту.</string>
-    <string name="terrain_category_description">Ізолінії рельєфу, повноколірне затінення рельєфу та мапи схилів в кольорах для показу вершин та низин.</string>
+    <string name="terrain_category_description">Ізолінії рельєфу, відтінки схилів у сірій і кольоровій гамах для позначення вершин і низин.</string>
     <string name="slope_legend_description">Мапа схилів використовує кольори для візуалізації крутості рельєфу. Ви можете прочитати більше про мапу схилів у %1$s.</string>
     <string name="shared_string_deleting">Видалення</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Буде виконано вихід з OsmAnd Cloud на додаткових пристроях і вони втратять доступ до платних функцій.</string>
@@ -5319,7 +5319,7 @@
     <string name="free_account">Безплатний обліковий запис</string>
     <string name="routing_attr_allow_via_ferrata_name">Гірський маршрут (Via ferrata)</string>
     <string name="routing_attr_allow_via_ferrata_description">Гірський маршрут, обладнаний стаціонарними тросами, стелами, драбинами та містками.</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Використання растрового sqltiedb для схилів / рельєфу</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Використовувати растровий sqlitedb для рельєфу / схилів</string>
     <string name="cache_size">Розмір кешу</string>
     <string name="shared_string_avoid">Уникати</string>
     <string name="free_settings_backup">Безплатне резервне копіювання налаштувань</string>
@@ -5346,4 +5346,10 @@
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Італійський альпійський клуб)</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="write_bearing">Записувати напрямок</string>
+    <string name="write_heading_description">Під час запису зберігати напрямок для кожної точки треку</string>
+    <string name="write_heading">Записувати заголовок</string>
+    <string name="write_bearing_description">Під час запису зберігати напрямок на кожну точку треку</string>
+    <string name="feature_available_as_part_of_plan">%1$s доступно в рамках тарифного плану %2$s</string>
+    <string name="shared_string_included">Включено</string>
 </resources>

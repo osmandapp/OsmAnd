@@ -57,7 +57,7 @@ public class CopyTrackGroupToFavoritesBottomSheet extends EditTrackGroupBottomSh
 				if (plugin != null && point.getSpecialPointType() == SpecialPointType.PARKING) {
 					plugin.updateParkingPoint(point);
 				}
-				favouritesHelper.addFavourite(point, false);
+				favouritesHelper.addFavourite(point, true, false, false);
 			}
 		}
 		favouritesHelper.saveCurrentPointsIntoFile(true);

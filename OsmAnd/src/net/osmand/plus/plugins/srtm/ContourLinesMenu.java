@@ -99,7 +99,7 @@ public class ContourLinesMenu {
 		CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
 		boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-		int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
+		int toggleActionStringId = R.string.download_srtm_maps;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 
@@ -127,7 +127,7 @@ public class ContourLinesMenu {
 						uiAdapter.onDataSetChanged();
 						mapActivity.refreshMapComplete();
 					});
-				} else if (itemId == R.string.srtm_plugin_name) {
+				} else if (itemId == R.string.download_srtm_maps) {
 					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
@@ -157,8 +157,10 @@ public class ContourLinesMenu {
 			toggleIconId = R.drawable.ic_action_hide;
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
+		String summary = mapActivity.getString(selected ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 		contextMenuAdapter.addItem(new ContextMenuItem(null)
 				.setTitleId(toggleActionStringId, mapActivity)
+				.setDescription(summary)
 				.setIcon(toggleIconId)
 				.setColor(app, toggleIconColorId)
 				.setListener(l)
@@ -200,7 +202,7 @@ public class ContourLinesMenu {
 					.setTitleId(R.string.srtm_purchase_header, mapActivity)
 					.setLayout(R.layout.list_group_title_with_switch_light));
 			contextMenuAdapter.addItem(new ContextMenuItem(null)
-					.setTitleId(R.string.srtm_plugin_name, mapActivity)
+					.setTitleId(R.string.download_srtm_maps, mapActivity)
 					.setLayout(R.layout.list_item_icon_and_right_btn)
 					.setIcon(R.drawable.ic_plugin_srtm)
 					.setColor(app, R.color.osmand_orange)

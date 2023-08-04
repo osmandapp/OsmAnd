@@ -6,6 +6,8 @@ import androidx.car.app.CarContext
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.render.RenderingIcons
@@ -14,6 +16,14 @@ import net.osmand.plus.utils.AndroidUtils
 class POICategoriesScreen(
     carContext: CarContext,
     private val settingsAction: Action) : BaseOsmAndAndroidAutoScreen(carContext) {
+
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onStart(owner: LifecycleOwner) {
+                recenterMap()
+            }
+        })
+    }
 
     private var selectedPOIGroup: PoiUIFilter? = null
 

@@ -323,7 +323,7 @@
     <string name="backup_restore_now">ᱱᱤᱛᱜᱮ ᱫᱚᱦᱲᱟ ᱡᱚᱜᱟᱣ ᱢᱮ</string>
     <string name="backup_setup">ᱵᱮᱠᱚᱯ ᱥᱮᱴᱚᱯ ᱢᱮ</string>
     <string name="backup_deleted_all_data">ᱡᱷᱚᱛᱚ ᱥᱟᱹᱠᱷᱤᱭᱟᱹᱛ ᱢᱮᱴᱟᱣ ᱦᱩᱭᱮᱱᱟ᱾</string>
-    <string name="contour_lines_hillshades_slope">ᱨᱩᱯᱛᱮᱭᱟᱨ ᱜᱟᱨ, ᱵᱩᱨᱩᱩᱢᱩᱞᱠᱚ, ᱫᱟᱲᱟᱝ</string>
+    <string name="contour_lines_hillshade_slope">ᱨᱩᱯᱛᱮᱭᱟᱨ ᱜᱟᱨ, ᱵᱩᱨᱩᱩᱢᱩᱞᱠᱚ, ᱫᱟᱲᱟᱝ</string>
     <string name="backup_error_user_is_not_registered">ᱚᱱᱟ ᱤᱢᱮᱞ ᱴᱷᱤᱠᱟᱹᱱᱟ ᱛᱮ ᱠᱚᱱᱦᱚᱸ ᱵᱮᱵᱷᱟᱨᱤᱭᱟᱹ ᱨᱮᱡᱤᱥᱴᱚᱨ ᱵᱟᱹᱱᱩᱜ ᱠᱚᱣᱟ</string>
     <string name="shared_string_view_all">ᱡᱷᱚᱛᱚ ᱧᱮᱞ ᱢᱮ</string>
     <string name="shared_string_includes">ᱥᱟᱹᱢᱤᱞ ᱜᱮᱭᱟ</string>

@@ -32,7 +32,10 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.layers.FavouritesLayer;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -66,13 +69,24 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 			@Override
 			public void onDestroy(@NonNull LifecycleOwner owner) {
 				DefaultLifecycleObserver.super.onDestroy(owner);
-				getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(null);
+				getFavouritesLayer().setCustomMapObjects(null);
+				getFavouritesLayer().customObjectsDelegate = null;
 				getApp().getOsmandMap().getMapView().backToLocation();
 				if (initialCompassMode != null) {
 					getApp().getMapViewTrackingUtilities().switchCompassModeTo(initialCompassMode);
 				}
 			}
+
+			@Override
+			public void onStart(@NonNull LifecycleOwner owner) {
+				DefaultLifecycleObserver.super.onStart(owner);
+				getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+			}
 		});
+	}
+
+	private FavouritesLayer getFavouritesLayer() {
+		return getApp().getOsmandMap().getMapLayers().getFavouritesLayer();
 	}
 
 	@NonNull
@@ -94,7 +108,7 @@ public final class FavoritesScreen extends BaseOsmAndAndroidAutoScreen {
 	}
 
 	private void setupFavorites(ItemList.Builder listBuilder) {
-		LatLon location = getApp().getSettings().getLastKnownMapLocation();
+		LatLon location = getApp().getMapViewTrackingUtilities().getDefaultLocation();
 		List<FavouritePoint> favoritesPoints = getFavorites();
 		int favoritesPointsSize = favoritesPoints.size();
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));

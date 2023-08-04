@@ -3010,7 +3010,7 @@
     <string name="shared_string_revert">还原</string>
     <string name="shared_preference">共享</string>
     <string name="shared_string_maps">地图</string>
-    <string name="shared_sting_tiles">图块</string>
+    <string name="shared_string_tiles">图块</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">空中航线</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">未定义</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">极限</string>
@@ -3663,7 +3663,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">无效或过期的令牌</string>
     <string name="backup_error_user_is_not_registered">不存在用该电子邮件地址注册的用户</string>
     <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
-    <string name="contour_lines_hillshades_slope">等高线、丘陵阴影、坡度</string>
+    <string name="contour_lines_hillshade_slope">等高线、丘陵阴影、坡度</string>
     <string name="release_4_0">- 云备份
 \n
 \n - 为 \"Topo \"地图风格增加了夜间模式

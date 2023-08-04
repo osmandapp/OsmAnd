@@ -875,7 +875,7 @@
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stíny kopců a svahy, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny stínováním svahů, vrstevnicemi a/nebo zbarvením strmosti.
+    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny stínováním svahů, vrstevnicemi a/nebo zbarvením strmosti.
 \n
 \nPodkladová data pocházejí ze systémů SRTM a ASTER.
 \n
@@ -938,7 +938,7 @@
     <string name="prefer_in_routing_title">Upřednostňovat…</string>
     <string name="max_speed_none">žádná</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_maps">Stínování kopců</string>
+    <string name="download_hillshade_maps">Stínování svahů</string>
     <string name="prefer_in_routing_descr">Upřednostňovat dálnice.</string>
     <string name="access_arrival_time">Čas příjezdu</string>
     <string name="layer_hillshade">Stínování</string>
@@ -3144,7 +3144,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Připojení</string>
     <string name="shared_string_calculate">Vypočítat</string>
     <string name="shared_string_osmand_usage">OsmAnd využití</string>
-    <string name="shared_sting_tiles">Dlaždice</string>
+    <string name="shared_string_tiles">Dlaždice</string>
     <string name="shared_string_maps">Mapy</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3201,11 +3201,11 @@
     <string name="terrain_slider_description">Nastavte minimální a maximální úroveň přiblížení, při které bude vrstva zobrazená.</string>
     <string name="hillshade_download_description">Pro zobrazení stínování svahů jsou potřeba další mapy.</string>
     <string name="slope_download_description">Pro zobrazení sklonu svahů jsou potřeba další mapy.</string>
-    <string name="slope_read_more">O sklonech svahů si přečtěte více na %1$s.</string>
+    <string name="slope_read_more">O sklonu svahů si přečtěte více na %1$s.</string>
     <string name="shared_string_transparency">Průhlednost</string>
     <string name="shared_string_zoom_levels">Úrovně přiblížení</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Zobrazí stínované svahy nebo sklony svahů na mapě. O těchto typech map se dozvíte více na našich stránkách.</string>
+    <string name="terrain_empty_state_text">Zobrazí stínování nebo sklon svahů na mapě. O těchto typech map se dozvíte více na našich stránkách.</string>
     <string name="import_complete_description">Všechna data z %1$s jsou naimportovaná. Použijte tlačítka níže k otevření části aplikace pro jejich správu.</string>
     <string name="shared_string_import_complete">Import dokončen</string>
     <string name="items_added">Položky přidány</string>
@@ -3223,7 +3223,7 @@
     <string name="select_distance_route_will_recalc">Zvolte vzdálenost, při které bude trasa přepočítána.</string>
     <string name="recalculate_route_distance_promo">Trasa bude přepočítána, pokud vzdálenost od trasy k aktuální poloze je větší než zvolená hodnota.</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
-    <string name="download_slope_maps">Svahy</string>
+    <string name="download_slope_maps">Svah</string>
     <string name="quick_action_terrain_descr">Tlačítko pro zobrazení nebo skrytí vrstvy terénu na mapě.</string>
     <string name="delete_description">Smazat popis</string>
     <string name="add_description">Přidat popis</string>
@@ -4208,7 +4208,7 @@
     <string name="empty_category_name">Prázdný název kategorie</string>
     <string name="reset_to_original">Resetovat do původního stavu</string>
     <string name="attribute">Atribut</string>
-    <string name="contour_lines_hillshades_slope">Vrstevnice, stínování svahů, sklon svahů</string>
+    <string name="contour_lines_hillshade_slope">Vrstevnice, stínování svahů, sklon svahů</string>
     <string name="copying_file">Kopírování souboru %1$s…</string>
     <string name="from_to_with_params">Z %1$s do %2$s</string>
     <string name="progress_complete">%1$s hotovo</string>
@@ -4711,7 +4711,7 @@
 \n
 \n</string>
     <string name="map_center_widget">Souřadnice: Střed mapy</string>
-    <string name="weather_widgets_secondary_desc">Jednotky měření lze změnit v nastavení zásuvného modulu Počasí.</string>
+    <string name="weather_widgets_secondary_desc">Jednotky měření lze změnit v nastavení modulu Počasí.</string>
     <string name="weather_pressure_inhg">inHg</string>
     <string name="restart_now">Restartovat nyní</string>
     <string name="map_rendering_engine_v1">Verze 1</string>
@@ -4808,7 +4808,7 @@
     <string name="quick_action_map_center_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje středu mapy na mapě.</string>
     <string name="quick_action_current_location_widget_descr">Přepínač pro zobrazení nebo skrytí nástroje aktuální polohy na mapě.</string>
     <string name="coordinates_widget_map_center">Souřadnice: střed mapy</string>
-    <string name="shared_string_switch_mode">Režim přepínání</string>
+    <string name="shared_string_switch_mode">Přepnout režim</string>
     <string name="click_on_widget">Klikněte na nástroj</string>
     <string name="last_synchronized">Poslední synchronizace</string>
     <string name="map_widget_altitude_map_center_desc">Zobrazuje nadmořskou výšku aktuálního středu mapy.</string>
@@ -5317,7 +5317,7 @@
     <string name="free_favorites_backup">Bezplatné zálohování oblíbených bodů</string>
     <string name="folder_export_empty_error">Nic k exportování, složka je prázdná</string>
     <string name="manage_subscriptions">Spravovat předplatné.</string>
-    <string name="slope_legend_description">Svahy používají barvy pro zobrazení sklonu. Více o svazích si můžete přečíst na %1$s.</string>
+    <string name="slope_legend_description">Svah používá barvy pro zobrazení strmosti terénu. Více o mapě Svah si můžete přečíst na %1$s.</string>
     <string name="relief_3d_description">Získejte a prohlédněte si model svého okolí nebo celého kontinentu ve věrném měřítku.</string>
     <string name="shared_string_ear_lobe">Ušní lalok</string>
     <string name="shared_string_foot">Noha</string>
@@ -5329,4 +5329,16 @@
     <string name="osmand_cloud_deletion_account_warning">Váš účet a všechny jeho detaily budou %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Všechna data z OsmAnd Cloud budou %1$s. Data v zařízení zůstanou nedotčena.</string>
     <string name="free_ride">Volná jízda</string>
+    <string name="rendering_attr_alpineHiking_description">Typy klasifikace tras podle obtížnosti.</string>
+    <string name="rendering_value_sacScale_description">Švýcarský alpinistický klub</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (italský alpinistický klub)</string>
+    <string name="rendering_attr_alpineHiking_name">Klasifikace podle obížnosti</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="write_bearing_description">Ukládat azimut každého bodu stopy během záznamu</string>
+    <string name="write_bearing">Zapisovat azimut</string>
+    <string name="write_heading_description">Ukládat směr ke každému bodu stopy během záznamu</string>
+    <string name="write_heading">Zapisovat směr</string>
+    <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
+    <string name="shared_string_included">Zahrnuto</string>
 </resources>

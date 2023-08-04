@@ -2477,7 +2477,7 @@
     <string name="osmand_accessibility_description">Чини да се могућности приступачности из уређаја могу користити директно у ОсмАнд-у. Може да управља брзином изговора вештачких гласова, подешавање Д-пада за навођење, коришћење точкића за управљање приближавања, изговара читање, нпр. да Вам каже положај.</string>
     <string name="intermediate_items_sort_return">Прилагоди редослед успутних одредишта ка крајњем одредишту.</string>
     <string name="osmand_short_description_80_chars">Земаљски преглед карти на мобилним уређајима и навођење картама ОСМ-а на мрежи и ван мреже</string>
-    <string name="osmand_extended_description_part5">Бицкли
+    <string name="osmand_extended_description_part5">Бициклизам
 \n • Нађите бициклистичке стазе на картама
 \n • Навођење ГПС-ом за бицикле Вам проналази путању на бициклистичким путевима
 \n • Видите Вашу брзину и надморску висину
@@ -3188,7 +3188,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Веза</string>
     <string name="shared_string_calculate">Израчунај</string>
     <string name="shared_string_osmand_usage">Коришћење ОсмАнда</string>
-    <string name="shared_sting_tiles">Сличице</string>
+    <string name="shared_string_tiles">Сличице</string>
     <string name="shared_string_maps">Карте</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -4287,7 +4287,7 @@
     <string name="upload_gpx_description_hint">Оставите празно, имена путања ће се користити као опис. Унешен опис ће се применити за сваку путању.</string>
     <string name="backup_deleting_all_data_descr">Сачекајте док ОсмАнд избрише Ваше податке са облака. Сви подаци на уређају ће остати нетакнути.</string>
     <string name="enter_verification_code">Унесите једнократну лозинку</string>
-    <string name="contour_lines_hillshades_slope">Изохипсе, рељеф, нагиб</string>
+    <string name="contour_lines_hillshade_slope">Изохипсе, рељеф, нагиб</string>
     <string name="exit_pan_mode_descr">Кликните Изабери ради напуштања начина рада померања</string>
     <string name="osm_live_payment_subscription_management_amz">Плаћање се скида са Вашег налога Амазона приликом потврде куповине.
 \n
@@ -5219,4 +5219,6 @@
     <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>
     <string name="map_3d_mode_hint">Дуги тап на дугме омогућава промену положаја дугмета.</string>
     <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
+    <string name="revolutions_per_minute_unit">Обртаја у минути</string>
+    <string name="calculate_offline">Израчунај ван мреже</string>
 </resources>

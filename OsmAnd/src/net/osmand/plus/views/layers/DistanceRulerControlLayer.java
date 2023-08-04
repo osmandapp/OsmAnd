@@ -25,7 +25,6 @@ import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.SWIGTYPE_p_sk_spT_SkImage_const_t;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.VectorDouble;
 import net.osmand.core.jni.VectorLine;
@@ -185,8 +184,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				wasPinchZoomOrRotation = true;
 			}
 
-			boolean showTwoFingersDistance = !wasPinchZoomOrRotation &&
-					!view.isWasZoomInMultiTouch() &&
+			boolean showTwoFingersDistance =
 					currentTime - view.getMultiTouchStartTime() > DELAY_BEFORE_DRAW &&
 					(view.isMultiTouch() || currentTime - cacheMultiTouchEndTime < DRAW_TIME);
 
@@ -413,7 +411,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		int y31 = MapUtils.get31TileNumberY(touchPoint.getLatitude());
 
 		Bitmap icon = night ? centerIconNight : centerIconDay;
-		SWIGTYPE_p_sk_spT_SkImage_const_t skImage = NativeUtilities.createSkImageFromBitmap(icon);
 
 		MapMarkerBuilder builder = new MapMarkerBuilder();
 		builder.setIsHidden(false)
@@ -422,7 +419,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				.setIsAccuracyCircleSupported(false)
 				.setPinIconHorisontalAlignment(PinIconHorisontalAlignment.CenterHorizontal)
 				.setPinIconVerticalAlignment(PinIconVerticalAlignment.CenterVertical)
-				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), skImage);
+				.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(1), NativeUtilities.createSkImageFromBitmap(icon));
 
 		builder.buildAndAddToCollection(mapMarkersCollection);
 

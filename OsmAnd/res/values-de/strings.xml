@@ -106,7 +106,7 @@
 \n- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
 \n- Kompakte Vektorkarten für die ganze Welt verfügbar
 \n- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
-\n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
+\n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz, topographische Informationen wie Höhenlinien/Relief/Hangneigung
 \n- Offline-Adress- und POI-Suche
 \n- Offlinenavigation für mittlere Entfernungen
 \n- Auto-, Fahrrad- und Fußgänger-Modus wahlweise mit:
@@ -133,7 +133,7 @@
 \n - Kompakte Vektorkarten für die ganze Welt verfügbar
 \n - Unbeschränktes, direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
 \n - Offline-Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützlich für Besichtigungstouren
-\n - Darstellung mehrerer überlagerter Kartenschichten wie GPX- oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
+\n - Darstellung mehrerer überlagerter Kartenschichten wie GPX- oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz, topographische Informationen wie Höhenlinien/Relief/Hangneigung
 \n
 \n - Offline-Adress- und POI-Suche
 \n - Offline-Navigation für mittlere Entfernungen
@@ -380,7 +380,7 @@
     <string name="vector_data_missing">Bitte Offline-Daten herunterladen, damit Karten offline verwendet werden können.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nLang tippen für Optionen"</string>
+\nFür Optionen lang tippen"</string>
     <string name="local_index_installed">Lokale Version</string>
     <string name="local_index_items_backuped">%1$d von %2$d Datei(en) deaktiviert.</string>
     <string name="local_index_items_deleted">%1$d von %2$d Datei(en) gelöscht.</string>
@@ -953,14 +953,14 @@
     <string name="zxing_barcode_scanner_not_found">Barcode-Scanner-App ZXing nicht installiert. Soll im Google Play Store danach gesucht werden\?</string>
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
-    <string name="srtm_plugin_name">Höhenlinien</string>
-    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen Ihnen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topografischen Informationen können auf der Karte durch Hangneigungsschattierungen, Höhenlinien und/oder Steilheitsfarben dargestellt werden.
+    <string name="srtm_plugin_name">Topographie</string>
+    <string name="srtm_plugin_description">Geländeinformationen wie Höhenlinien, Relief und Hangneigung helfen bei der visuellen Beurteilung des Geländes, des Reliefs, der Befahrbarkeit und vielem mehr. Die topographischen Informationen können auf der Karte durch Höhenlinien, Relief-Schattierungen, und/oder Steilheitsfarben dargestellt werden.
 \n
 \nDie zugrunde liegenden Daten stammen von SRTM und ASTER.
 \n
 \nWeitere Informationen unter %1$s.</string>
-    <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
-    <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\', um die Weiterentwicklung zu fördern.</string>
+    <string name="srtm_paid_version_title">Topographie-Plugin</string>
+    <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Topographie\', um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
     <string name="av_camera_pic_size">Bildgröße der Kamera</string>
@@ -1002,7 +1002,7 @@
     <string name="recording_context_menu_delete">Aufnahme löschen</string>
     <string name="layer_recordings">Audio-/Videonotizen</string>
     <string name="map_widget_av_notes">Audio-/Videonotizen</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für Offline-Höhenlinien</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für offline Höhenlinien, Relief und Hangneigung</string>
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
     <string name="monitoring_settings">Streckenaufzeichnung</string>
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
@@ -1203,7 +1203,7 @@
     <string name="map_widget_plain_time">Aktuelle Zeit</string>
     <string name="selected_gpx_info_show">"
 \n
-\nZur Darstellung auf der Karte lange drücken"</string>
+\nZur Darstellung lange auf der Karte tippen"</string>
     <string name="delay_navigation_start">Navigation automatisch starten</string>
     <string name="save_as_favorites_points">Als Favoritengruppe speichern</string>
     <string name="select_destination_and_intermediate_points">Ziele auswählen</string>
@@ -1764,7 +1764,7 @@
     <string name="downloading_number_of_files">Herunterladen von %1$d Datei…</string>
     <string name="show_free_version_banner">Banner der kostenlosen Version anzeigen</string>
     <string name="activate_seamarks_plugin">Bitte die Erweiterung \'Seekarte\' aktivieren</string>
-    <string name="activate_srtm_plugin">Bitte die Erweiterung \'Höhenlinien\' aktivieren</string>
+    <string name="activate_srtm_plugin">Bitte die Erweiterung \'Topographie\' aktivieren</string>
     <string name="get_full_version">Vollversion</string>
     <string name="confirm_download_roadmaps">Die reine Straßenkarte wird nicht benötigt, da Sie die Standardkarte haben. Trotzdem herunterladen?</string>
     <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
@@ -2202,7 +2202,7 @@
     <string name="shared_string_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen OSM-Daten. 
 \n 
-\nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
+\nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und topographischen Informationen (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
     <string name="osmand_extended_description_part2">GPS-Navigation 
 \n • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb 
 \n • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg 
@@ -2261,7 +2261,7 @@
     <string name="restore_purchases">Käufe wiederherstellen</string>
     <string name="fonts_header">Kartenschriftarten</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen OSM-Daten.
-\n Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (Orte von Interesse), die Erstellung und Bearbeitung von GPX-Tracks, die Darstellung von Höhenlinien und -daten, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. 
+\n Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (Orte von Interesse), die Erstellung und Bearbeitung von GPX-Tracks, die Darstellung von Höhenlinien und topographischen Informationen, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. 
 \n 
 \n OsmAnd+ ist die Kaufversion. Durch ihren Erwerb unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neuesten Aktualisierungen. 
 \n 
@@ -2374,9 +2374,9 @@
     <string name="search_favorites">In Favoriten suchen</string>
     <string name="hillshade_menu_download_descr">Laden Sie die Reliefkarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
-    <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Höhenlinien\', um abgestufte vertikale Flächen anzuzeigen.</string>
-    <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
-    <string name="hillshade_purchase_header">Installieren Sie die Erweiterung \'Höhenlinien\', um abgestufte vertikale Flächen anzuzeigen.</string>
+    <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Topographie\', um abgestufte vertikale Flächen anzuzeigen.</string>
+    <string name="srtm_menu_download_descr">Höhenlinienkarte für diese Region herunterladen.</string>
+    <string name="hillshade_purchase_header">Installieren Sie die Erweiterung \'Topographie\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Betreten von Privatwegen für diese Reise zulassen?</string>
     <string name="restart_search">Suche wiederholen</string>
     <string name="increase_search_radius">Suchradius vergrößern</string>
@@ -2728,9 +2728,9 @@
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
     <string name="nautical_render_descr">Zur nautischen Navigation. Merkmale: Bojen, Leuchttürme, Flussläufe, Schifffahrtswege und -zeichen, Häfen, Seezeichendienste und Tiefenlinien.</string>
     <string name="ski_map_render_descr">Für Skifahrer. Enthält Pisten, Lifte, Langlaufloipen und mehr. Weniger störende sekundäre Kartenobjekte.</string>
-    <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, Höhenlinien, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab.</string>
+    <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab, topographische Funktionen wie Höhenlinien.</string>
     <string name="topo_render_descr">Für Wanderungen, Trekking und Radfahren in der Natur. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenbeschaffenheit kennzeichnet die Straßenqualität. Kein Nachtmodus.</string>
-    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC/CAI-Skala, Wildwassersportmerkmale.</string>
+    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC/CAI-Skala, Wildwassersportmerkmale, topographische Funktionen wie Höhenlinien.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
     <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlage. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
@@ -3208,7 +3208,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
-    <string name="shared_sting_tiles">Kacheln</string>
+    <string name="shared_string_tiles">Kacheln</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB frei (von %2$s GB)</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB verwendet</string>
@@ -3243,7 +3243,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Bei der Navigation unbefestigte Straßen gegenüber befestigten bevorzugen.</string>
     <string name="layer_osm_edits">OSM-Bearbeitungen</string>
     <string name="quick_action_contour_lines_descr">Schaltfläche zum Ein- und Ausblenden von Höhenlinien auf der Karte.</string>
-    <string name="quick_action_hillshade_descr">Schaltfläche zum Ein- oder Ausblenden der Reliefdarstellung.</string>
+    <string name="quick_action_hillshade_descr">Schaltfläche zum Ein- oder Ausblenden des Reliefs.</string>
     <string name="tts_initialization_error">Text-to-Speech-Engine kann nicht gestartet werden.</string>
     <string name="simulate_your_location_gpx_descr">Simulation Ihrer Position mit einem aufgezeichneten GPX-Track.</string>
     <string name="export_profile">Profil exportieren</string>
@@ -3466,14 +3466,14 @@
     <string name="shared_string_transparency">Transparenz</string>
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
-    <string name="download_slope_maps">Hangneigungen</string>
+    <string name="download_slope_maps">Hangneigung</string>
     <string name="terrain_empty_state_text">Zeigt Relief oder Hangneigung auf der Karte. Weitere Informationen hierzu finden Sie auf unserer Website.</string>
     <string name="shared_string_legend">Legende</string>
-    <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
-    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
+    <string name="slope_read_more">Lesen Sie mehr über Hangneigung in %1$s.</string>
+    <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigung auf der Karte anzuzeigen.</string>
     <string name="hillshade_download_description">Für die Darstellung des Reliefs werden zusätzliche Karten benötigt.</string>
     <string name="shared_string_min">Min</string>
-    <string name="hillshade_description">Reliefkarte mit dunklen Schattierungen zur Darstellung von Hängen, Gipfeln und Ebenen.</string>
+    <string name="hillshade_description">Reliefkarte mit dunklen Schattierungen zur Darstellung von Hangneigung, Gipfeln und Ebenen.</string>
     <string name="n_items_of_z">%1$s von %2$s</string>
     <string name="shared_string_octagon">Achteck</string>
     <string name="app_mode_ski_touring">Skitouren</string>
@@ -3787,7 +3787,7 @@
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_name_ascending">Name: A – Z</string>
     <string name="start_finish_icons">Start- und Zielsymbole</string>
-    <string name="contour_lines_thanks">Vielen Dank für den Kauf von \'Höhenlinien\'</string>
+    <string name="contour_lines_thanks">Vielen Dank für den Kauf von \'Topographie\'</string>
     <string name="osm_live_payment_desc_hw">Das Abonnement wird für den gewählten Zeitraum berechnet. Sie können es jederzeit in Ihrer AppGallery kündigen.</string>
     <string name="osm_live_payment_subscription_management_hw">Die Zahlung wird von Ihrem AppGallery-Konto abgebucht, wenn Sie den Kauf bestätigen.
 \n
@@ -3965,7 +3965,7 @@
     <string name="uploading_count">Lade %1$d von %2$d hoch</string>
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
-    <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
+    <string name="hillshade_slope_contour_lines">Höhenlinien / Relief / Hangneigung</string>
     <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
 \n
 \nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
@@ -4183,14 +4183,13 @@
     <string name="complete_purchase">Vollständiger Kauf</string>
     <string name="regular_price">Normaler Preis</string>
     <string name="purchases_feature_desc_nautical">Zugang zu Informationen über Wassertiefen erhalten</string>
-    <string name="purchases_feature_desc_terrain">Höhenlinien, Reliefkarten mit dunklen Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="purchases_feature_desc_terrain">Höhenlinien, graustufiges Relief und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="purchases_feature_desc_wikipedia">Stellt alle ortsbezogenen Wikipedia-Artikel offline bereit und hilft Ihnen, mehr über die Orte zu erfahren, die Sie auf Ihrer Reise besuchen, indem Sie einfach auf die Karte tippen. Vergessen Sie nicht, die Wikipedia-Kartendateien für die jeweiligen Regionen herunterzuladen.</string>
     <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia Artikel auch unterwegs, ohne Internetverbindung. Offline-Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Erhalten Sie Zugang zu den regulären monatlichen Updates für Offline-Karten.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Erhalten Sie Zugang zu häufigeren Kartenaktualisierungen. Wählen Sie zwischen stündlichen, täglichen oder wöchentlichen Aktualisierungen. Updates erfolgen inkrementell, nur der geänderte Bereich wird heruntergeladen.</string>
     <string name="purchases_feature_desc_osmand_cloud">Holen Sie sich OsmAnd Cloud, um alle OsmAnd-Daten online zu speichern. Kein Datenverlust mehr nach einer Neuinstallation, alle Informationen problemlos sichern und wiederherstellen.</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Geländekarten: Höhenlinien, Relief, Hangneigung</string>
     <string name="you_can_get_feature_as_part_of_pattern">Erhalten Sie „%1$s“ als Teil des Tarifs %2$s. Vergleich:</string>
     <string name="not_available_with">Nicht verfügbar mit %1$s</string>
     <string name="redeem_promo_code">Aktionscode einlösen</string>
@@ -4237,7 +4236,8 @@
     <string name="duration_moment_ago">gerade eben</string>
     <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikivoyage offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
     <string name="backup_error_subscription_was_expired_descr">Ihr OsmAnd Pro-Abonnement ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
-    <string name="contour_lines_hillshades_slope">Höhenlinien, Relief, Hangneigung</string>
+    <string name="contour_lines_hillshade_slope">Höhenlinien, Relief, Hangneigung</string>
+    <string name="hillshade_slope">Relief, Hangneigung</string>
     <string name="logout_from_osmand_cloud">Abmelden aus der OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Abmelden\?
 \nZum Sichern oder Wiederherstellen von Daten müssen Sie sich erneut anmelden.</string>
@@ -4748,8 +4748,8 @@
     <string name="compass_always_hidden">Immer ausgeblendet</string>
     <string name="distance_to_intermediate_widget_desc">Das Widget zeigt die verbleibende Entfernung zum ersten Zwischenpunkt an. Sobald Zwischenpunkte passiert sind, wird die Distanz bis zum nächsten Zwischenpunkt aktualisiert.</string>
     <string name="trip_recording_duration_widget_desc">Zeigt die aktuell aufgezeichnete Reisezeit an.</string>
-    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um den Kartenausrichtungsmodus zu wechseln.</string>
-    <string name="compass_desc">Zeigt die Richtung nach Norden an.</string>
+    <string name="compass_click_desc">Hinweis: Tippen Sie auf den Kompass, um die Art der Kartenausrichtung zu ändern.</string>
+    <string name="compass_desc">Zeigt Richtung Norden.</string>
     <string name="trip_recording_distance_widget_desc">Zeigt die aktuell aufgezeichnete Reisestrecke an.</string>
     <string name="true_bearing_wdiget_desc">Winkel zwischen wahrem Norden und dem Zielpunkt, der von Ihrem Standort aus beobachtet wird.</string>
     <string name="relative_bearing_widget_desc">Zeigt den Winkel zwischen Ihrer Bewegungsrichtung und dem Zielpunkt an.</string>
@@ -5218,10 +5218,10 @@
     <string name="delete_folder_question">Ordner löschen\?</string>
     <string name="rssi_widget_desc">Zeigt den RSSI-Pegel des externen Geräts an.</string>
     <string name="map_widget_rssi">RSSI</string>
-    <string name="tracks_empty_folder_description">Dieser Ordner hat noch keinen Track.</string>
+    <string name="tracks_empty_folder_description">Dieser Ordner enthält noch keinen Track.</string>
     <string name="tracks_empty_folder">Leerer Ordner</string>
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
-    <string name="shared_string_new_track">Neue Strecke</string>
+    <string name="shared_string_new_track">Neuer Track</string>
     <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
     <string name="delete_track_folder_dialog_message">Dies löscht den Ordner \"%1$s\" und alle darin enthaltenen Tracks (%2$s).</string>
     <string name="delete_folder">Ordner löschen</string>
@@ -5233,12 +5233,12 @@
     <string name="external_sensors_not_found">Sensoren nicht gefunden</string>
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
-    <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
+    <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf (3D) Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">U/min</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
-    <string name="terrain_map">Geländekarte</string>
+    <string name="terrain_map">Geländekarte (3D)</string>
     <string name="relief_3d">3D-Relief</string>
     <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
     <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
@@ -5265,9 +5265,9 @@
 \nBitte geben Sie die E-Mail Adresse ein, mit der Sie sich registriert haben. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
-    <string name="terrain_category_description">Höhenlinien, Reliefkarte mit Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="terrain_category_description">Höhenlinien, graustufige Relief-Schattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
-    <string name="free_favorites_backup">Kostenloses Favoriten-Backup</string>
+    <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
     <string name="routing_attr_allow_via_ferrata_description">Eine Bergroute, die mit Fixseilen, Stemmeisen, Leitern und Brücken ausgestattet ist.</string>
@@ -5320,7 +5320,7 @@
 \n • Höhenänderung und Neigungsauswertung überarbeitet
 \n
 \n</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Verwenden des Rasters von sqlitedb für Hangneigung / Relief</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Raster sqlitedb für Relief / Hangneigung verwenden</string>
     <string name="free_ride">Freifahrt</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gase</string>
@@ -5343,4 +5343,10 @@
     <string name="rendering_attr_alpineHiking_description">Schwierigkeitsgrade der Wanderwege.</string>
     <string name="rendering_attr_alpineHiking_name">Schwierigkeitsgrad</string>
     <string name="rendering_value_sacScale_name">SAC-Wanderskala</string>
+    <string name="write_bearing">Peilung schreiben</string>
+    <string name="write_heading">Richtung schreiben</string>
+    <string name="write_heading_description">Richtung zu jedem Trackpunkt bei Aufnahme speichern</string>
+    <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
+    <string name="feature_available_as_part_of_plan">%1$s verfügbar als Teil des %2$s-Plans</string>
+    <string name="shared_string_included">Inbegriffen</string>
 </resources>

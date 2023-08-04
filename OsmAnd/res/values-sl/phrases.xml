@@ -830,7 +830,7 @@
     <string name="poi_access_hgv">Dostop s težkim tovornim vozilom</string>
     <string name="poi_access_goods">Dostop z lahkim tovornim vozilom</string>
     <string name="poi_bay_filter">Vrsta zaliva</string>
-    <string name="poi_access_motorcar">Dostop z motornim vozilom</string>
+    <string name="poi_access_motorcar">Dostop z avtomobilom</string>
     <string name="poi_access_bicycle">Dostop s kolesom</string>
     <string name="poi_access_scooter">Dostop s skuterjem</string>
     <string name="poi_authentication_contactless">Brezstična avtentikacija</string>
@@ -4594,4 +4594,10 @@
     <string name="poi_cemt_iv">IV</string>
     <string name="poi_surface_chipseal">Chipseal</string>
     <string name="poi_osmand_not_pt_shelter_yes">Vse razen zavetišč za javni prevoz</string>
+    <string name="poi_motorcar_designated">Namenjeno za avtomobile</string>
+    <string name="poi_vehicle_designated">Namenjeno za vozila</string>
+    <string name="poi_horse_designated">Namenjeno za konje</string>
+    <string name="poi_foot_designated">Namenjeno za pešce</string>
+    <string name="poi_motor_vehicle_designated">Namenjeno za motorna vozila</string>
+    <string name="poi_bicycle_designated">Namenjeno za kolesa</string>
 </resources>

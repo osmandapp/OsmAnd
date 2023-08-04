@@ -3216,7 +3216,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Злучэнне</string>
     <string name="shared_string_calculate">Разлічыць</string>
     <string name="shared_string_osmand_usage">Выкарыстанне OsmAnd</string>
-    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_tiles">Тайлы</string>
     <string name="shared_string_maps">Мапы</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
@@ -4394,7 +4394,7 @@
     <string name="use_login_and_password">Выкарыстоўваць імя карыстальніка і пароль</string>
     <string name="map_updates_for_mappers">Абнаўленні мапаў для картографаў</string>
     <string name="online_direct_line_maps_link">Праверце неабходныя мапы.</string>
-    <string name="contour_lines_hillshades_slope">Контурныя лініі, рэльеф, схілы</string>
+    <string name="contour_lines_hillshade_slope">Контурныя лініі, рэльеф, схілы</string>
     <string name="cancel_anytime_in_huawei_appgallery">Скасуйце ў любы час у Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Скасуйце ў любы час у Google Play.</string>
     <string name="choose_what_to_restore">Выберыце, што аднавіць.</string>

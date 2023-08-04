@@ -22,7 +22,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.UploadGpxListener;
 import net.osmand.plus.track.data.TrackFolder;
@@ -36,7 +35,7 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
-public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener, SelectionHelperProvider<TrackItem> {
+public class TracksSelectionFragment extends BaseTrackFolderFragment implements UploadGpxListener {
 
 	public static final String TAG = TracksSelectionFragment.class.getSimpleName();
 
@@ -165,7 +164,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			if (foldersHelper != null) {
 				Set<TrackItem> trackItems = itemsSelectionHelper.getSelectedItems();
 				Set<TracksGroup> tracksGroups = groupsSelectionHelper.getSelectedItems();
-				foldersHelper.showItemsOptionsMenu(trackItems, tracksGroups, v, this);
+				foldersHelper.showItemsOptionsMenu(v, rootFolder, trackItems, tracksGroups, this);
 			}
 		});
 		button.setContentDescription(getString(R.string.shared_string_more));
