@@ -5345,4 +5345,6 @@
     <string name="write_bearing_description">Guarda la dirección de cada punto de seguimiento durante la grabación</string>
     <string name="shared_string_included">Incluido</string>
     <string name="feature_available_as_part_of_plan">%1$s disponible como parte del plan %2$s</string>
+    <string name="local_indexes_category_terrain">Mapas del terreno (en 3D)</string>
+    <string name="hillshade_slope">Sombreado, Pendiente</string>
 </resources>
