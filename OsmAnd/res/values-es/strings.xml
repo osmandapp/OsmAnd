@@ -5215,7 +5215,7 @@
     <string name="delete_folder">Borrar la carpeta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todas las vías en el mapa</string>
     <string name="rssi_widget_desc">Muestra el nivel RSSI de tu dispositivo externo.</string>
-    <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (Rssi)</string>
+    <string name="map_widget_rssi">Indicador de fuerza de la señal recibida (RSSI)</string>
     <string name="tracks_empty_folder_description">Esta carpeta aún no tiene ninguna pista.</string>
     <string name="tracks_empty_folder">Carpeta vacía</string>
     <string name="track_not_recorded">Sin guardar</string>
@@ -5345,4 +5345,6 @@
     <string name="write_bearing_description">Guarda la dirección de cada punto de seguimiento durante la grabación</string>
     <string name="shared_string_included">Incluido</string>
     <string name="feature_available_as_part_of_plan">%1$s disponible como parte del plan %2$s</string>
+    <string name="local_indexes_category_terrain">Mapas del terreno (en 3D)</string>
+    <string name="hillshade_slope">Sombreado, Pendiente</string>
 </resources>

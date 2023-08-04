@@ -5235,7 +5235,7 @@
     <string name="there_are_no_connected_sensors_of_this_type">Немає підключених датчиків цього типу</string>
     <string name="write_data_from_sensor_to_track">Записувати дані з зовнішніх датчиків у GPX під час запису треку.</string>
     <string name="save_track_external_sensors_data">Дані</string>
-    <string name="calculate_offline_altitude_descr">Розраховуйте висоту офлайн на основі даних карти висот. Відмінності від висоти, записаної пристроєм, можна використовувати як поправку висоти.</string>
+    <string name="calculate_offline_altitude_descr">Обчислюйте висоту офлайн на основі даних мапи рельєфу місцевості (3D). Відмінності від висоти, записаної пристроєм, можна використовувати як поправку висоти.</string>
     <string name="error_calculate">Результати розрахунків порожні</string>
     <string name="calculate_offline">Розрахувати офлайн</string>
     <string name="power_watts_unit">Ватт</string>
@@ -5352,4 +5352,6 @@
     <string name="write_bearing_description">Під час запису зберігати напрямок на кожну точку треку</string>
     <string name="feature_available_as_part_of_plan">%1$s доступно в рамках тарифного плану %2$s</string>
     <string name="shared_string_included">Включено</string>
+    <string name="local_indexes_category_terrain">Мапа рельєфу (3D)</string>
+    <string name="hillshade_slope">Рельєф місцевості, схил</string>
 </resources>

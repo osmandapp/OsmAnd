@@ -5154,7 +5154,7 @@
     <string name="save_track_external_sensors_data">Dati</string>
     <string name="delete_folder_question">Eliminare la cartella\?</string>
     <string name="delete_folder">Eliminare la cartella</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Questa cartella non ha ancora alcuna traccia.</string>
     <string name="external_device_characteristic_speed">Velocità</string>
     <string name="external_device_details_connection">Connessione</string>

@@ -5170,7 +5170,7 @@
     <string name="device_connected">%1$s is verbonden</string>
     <string name="show_all_tracks_on_the_map">Alle tracks op de kaart tonen</string>
     <string name="rssi_widget_desc">Toont het RSSI-niveau van je externe apparaat.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder">Lege map</string>
     <string name="shared_string_new_track">Nieuwe track</string>
     <string name="map_3d_mode_hint">Door de knop lang ingedrukt te houden, kan de positie van de knop gewijzigd worden.</string>

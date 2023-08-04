@@ -5213,7 +5213,7 @@
     <string name="delete_folder_question">Usunąć folder\?</string>
     <string name="delete_track_folder_dialog_message">Spowoduje to usunięcie folderu \"%1$s\" i wszystkich zawartych w nim ścieżek (%2$s).</string>
     <string name="delete_folder">Usuń folder</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">W tym folderze nie ma jeszcze żadnej ścieżki.</string>
     <string name="tracks_empty_folder">Pusty folder</string>
     <string name="show_all_tracks_on_the_map">Pokaż wszystkie ścieżki na mapie</string>

@@ -5214,7 +5214,7 @@
     <string name="external_sensors_not_found">Sensores não encontrados</string>
     <string name="external_sensors_source_of_data">Fonte dos dados</string>
     <string name="rssi_widget_desc">Mostra o nível RSSI do seu dispositivo externo.</string>
-    <string name="map_widget_rssi">Rssi (intensidade do sinal recebido)</string>
+    <string name="map_widget_rssi">RSSI (intensidade do sinal recebido)</string>
     <string name="tracks_empty_folder_description">Esta pasta ainda não tem nenhum trilho.</string>
     <string name="shared_string_new_track">Novo trilho</string>
     <string name="shared_string_visible_on_map">Visível no mapa</string>
