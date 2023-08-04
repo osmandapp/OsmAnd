@@ -5350,4 +5350,6 @@
     <string name="write_bearing_description">Gem pejling for hvert sporpunkt under optagelse</string>
     <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
     <string name="shared_string_included">Inkluderet</string>
+    <string name="hillshade_slope">Terrænskygge, hældning</string>
+    <string name="local_indexes_category_terrain">Terrænkort (3D)</string>
 </resources>
