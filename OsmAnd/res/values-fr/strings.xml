@@ -5307,7 +5307,7 @@
     <string name="may_be_used_if_there_is_shortcut">Peut être utilisé si un raccourci existe</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Utiliser raster sqltiedb pour l\'ombrage du relief et les pentes</string>
     <string name="routing_attr_allow_via_ferrata_name">Itinéraire à flanc de montagne (Via ferrata)</string>
-    <string name="free_settings_backup">Paramètres pour la sauvegarde gratuite</string>
+    <string name="free_settings_backup">Sauvegarde gratuite des paramètres</string>
     <string name="free_ride">Freeride</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosifs</string>
