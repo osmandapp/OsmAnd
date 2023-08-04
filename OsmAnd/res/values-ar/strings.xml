@@ -685,7 +685,7 @@
     <string name="vector_data_missing">البيانات المحلية (التي لا تحتاج إلى ربط بالإنترنت ) غير موجودة على بطاقة الذاكرة. يرجى إعادة تحميلها بغرض استخدام الخرائط من دون اتصال.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nاضغط مطولا للرؤية على الخريطة"</string>
+\nاضغط مطولا للخيارات"</string>
     <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
@@ -5412,4 +5412,6 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="write_bearing_description">حفظ الوجهة لكل نقطة متابعة خلال التسجيل</string>
     <string name="write_bearing">كتابة الاتجاه</string>
+    <string name="local_indexes_category_terrain">خرائط التضاريس (3D)</string>
+    <string name="hillshade_slope">التضاريس، الانحدار</string>
 </resources>
