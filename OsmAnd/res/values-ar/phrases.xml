@@ -4594,4 +4594,10 @@
     <string name="poi_second_hand_filter">بضائع مستعملة</string>
     <string name="poi_assembly_point">نقطة التجميع</string>
     <string name="poi_osmand_not_pt_shelter_yes">الجميع باستثناء ملاجئ وسائل النقل العام</string>
+    <string name="poi_vehicle_designated">مخصصة للمركبات</string>
+    <string name="poi_bicycle_designated">مخصصة للدراجات</string>
+    <string name="poi_horse_designated">مصممة للخيول</string>
+    <string name="poi_foot_designated">مخصصة للمشاة</string>
+    <string name="poi_motorcar_designated">مصممة للسيارات</string>
+    <string name="poi_motor_vehicle_designated">مصممة للمركبات ذات محرك</string>
 </resources>
