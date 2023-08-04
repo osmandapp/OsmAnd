@@ -528,6 +528,10 @@ public class RoutePlannerFrontEnd {
 		if (!gctx.ctx.calculationProgress.isCancelled) {
 			preparation.prepareTurnResults(gctx.ctx, gctx.result);
 		}
+		for (RouteSegmentResult r : gctx.result) {
+			r.clearAttachedRoutes();
+			r.clearPreattachedRoutes();
+		}
 	}
 
 	private void addStraightLine(GpxRouteApproximation gctx, List<LatLon> lastStraightLine, GpxPoint strPnt, RouteRegion reg) {
