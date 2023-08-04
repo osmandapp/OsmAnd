@@ -1,9 +1,16 @@
 package net.osmand.plus.download;
 
 
+import static net.osmand.IndexConstants.GEOTIFF_DIR;
+import static net.osmand.IndexConstants.TIF_EXT;
 import static net.osmand.IndexConstants.WEATHER_EXT;
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.DEPTH_DATA;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.MAP_DATA;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.SRTM_DATA;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.TERRAIN_DATA;
 import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WEATHER_DATA;
+import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.WIKI_DATA;
 
 import android.content.Context;
 
@@ -61,7 +68,7 @@ public class LocalIndexHelper {
 
 	public void updateDescription(@NonNull LocalIndexInfo info) {
 		File file = new File(info.getPathToData());
-		if (info.getType() == LocalIndexType.MAP_DATA) {
+		if (info.getType() == MAP_DATA) {
 			Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 			String fileModifiedDate = indexFileNames.get(info.getFileName());
 			if (fileModifiedDate != null) {
@@ -89,34 +96,19 @@ public class LocalIndexHelper {
 			}
 			info.setAttachedObject(template);
 			info.setDescription(descr);
-		} else if (info.getType() == LocalIndexType.SRTM_DATA) {
+		} else if (info.getType() == SRTM_DATA) {
 			info.setDescription(app.getString(R.string.download_srtm_maps));
-		} else if (info.getType() == LocalIndexType.WIKI_DATA) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == LocalIndexType.TRAVEL_DATA) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == LocalIndexType.TTS_VOICE_DATA) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == LocalIndexType.DEACTIVATED) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == LocalIndexType.VOICE_DATA) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == LocalIndexType.FONT_DATA) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == LocalIndexType.DEPTH_DATA) {
-			info.setDescription(getInstalledDate(file));
-		} else if (info.getType() == WEATHER_DATA) {
+		} else {
 			info.setDescription(getInstalledDate(file));
 		}
 	}
 
 	@Nullable
 	private LocalIndexInfo getLocalIndexInfo(LocalIndexType type, String downloadName, boolean roadMap, boolean backuped) {
-
 		File fileDir = null;
 		String fileName = null;
 
-		if (type == LocalIndexType.MAP_DATA) {
+		if (type == MAP_DATA) {
 			if (!roadMap) {
 				fileDir = app.getAppPath(IndexConstants.MAPS_PATH);
 				fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
@@ -126,11 +118,11 @@ public class LocalIndexHelper {
 				fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 						+ IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 			}
-		} else if (type == LocalIndexType.SRTM_DATA) {
+		} else if (type == SRTM_DATA) {
 			fileDir = app.getAppPath(IndexConstants.SRTM_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
-		} else if (type == LocalIndexType.WIKI_DATA) {
+		} else if (type == WIKI_DATA) {
 			fileDir = app.getAppPath(IndexConstants.WIKI_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
@@ -138,13 +130,16 @@ public class LocalIndexHelper {
 			fileDir = app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
-		} else if (type == LocalIndexType.DEPTH_DATA) {
+		} else if (type == DEPTH_DATA) {
 			fileDir = app.getAppPath(IndexConstants.NAUTICAL_INDEX_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 					+ IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
 		} else if (type == WEATHER_DATA) {
 			fileDir = app.getAppPath(WEATHER_FORECAST_DIR);
 			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + WEATHER_EXT;
+		} else if (type == LocalIndexType.TERRAIN_DATA) {
+			fileDir = app.getAppPath(GEOTIFF_DIR);
+			fileName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + TIF_EXT;
 		}
 
 		if (backuped) {
@@ -163,58 +158,41 @@ public class LocalIndexHelper {
 		return null;
 	}
 
-	public List<LocalIndexInfo> getLocalIndexInfos(String downloadName) {
-		List<LocalIndexInfo> list = new ArrayList<>();
-		LocalIndexInfo info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, false);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, true, false);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.SRTM_DATA, downloadName, false, false);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.WIKI_DATA, downloadName, false, false);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.DEPTH_DATA, downloadName, false, false);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(WEATHER_DATA, downloadName, false, false);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, false, true);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.MAP_DATA, downloadName, true, true);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.SRTM_DATA, downloadName, false, true);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.WIKI_DATA, downloadName, false, true);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(LocalIndexType.DEPTH_DATA, downloadName, false, true);
-		if (info != null) {
-			list.add(info);
-		}
-		info = getLocalIndexInfo(WEATHER_DATA, downloadName, false, true);
-		if (info != null) {
-			list.add(info);
-		}
+	@NonNull
+	public List<LocalIndexInfo> getLocalIndexInfos(@NonNull String downloadName) {
+		List<LocalIndexInfo> indexInfos = new ArrayList<>();
 
-		return list;
+		collectLocalIndexInfos(indexInfos, downloadName, false);
+		collectLocalIndexInfos(indexInfos, downloadName, true);
+
+		return indexInfos;
+	}
+
+	private void collectLocalIndexInfos(@NonNull List<LocalIndexInfo> list, @NonNull String downloadName, boolean backuped) {
+		for (LocalIndexType type : getSuggestedIndexTypes()) {
+			LocalIndexInfo info = getLocalIndexInfo(type, downloadName, false, backuped);
+			if (info != null) {
+				list.add(info);
+			}
+			if (type == MAP_DATA) {
+				info = getLocalIndexInfo(type, downloadName, true, backuped);
+				if (info != null) {
+					list.add(info);
+				}
+			}
+		}
+	}
+
+	@NonNull
+	public List<LocalIndexType> getSuggestedIndexTypes() {
+		List<LocalIndexType> types = new ArrayList<>();
+		types.add(MAP_DATA);
+		types.add(SRTM_DATA);
+		types.add(TERRAIN_DATA);
+		types.add(WIKI_DATA);
+		types.add(DEPTH_DATA);
+		types.add(WEATHER_DATA);
+		return types;
 	}
 
 	@NonNull
@@ -249,7 +227,6 @@ public class LocalIndexHelper {
 				case TILES_DATA:
 					loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, needDescription, loadTask);
 					loadTilesData(app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR), result, false, needDescription, loadTask);
-					loadTilesData(app.getAppPath(IndexConstants.GEOTIFF_DIR), result, false, needDescription, loadTask);
 					break;
 				case TRAVEL_DATA:
 					loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, false, readFiles,
@@ -277,6 +254,10 @@ public class LocalIndexHelper {
 					break;
 				case WEATHER_DATA:
 					loadDataImpl(app.getAppPath(WEATHER_FORECAST_DIR), WEATHER_DATA, WEATHER_EXT,
+							false, readFiles, needDescription, result, indexFiles, loadTask);
+					break;
+				case TERRAIN_DATA:
+					loadDataImpl(app.getAppPath(GEOTIFF_DIR), TERRAIN_DATA, TIF_EXT,
 							false, readFiles, needDescription, result, indexFiles, loadTask);
 					break;
 			}
@@ -375,8 +356,7 @@ public class LocalIndexHelper {
 				if (tileFile.isFile()) {
 					String fileName = tileFile.getName();
 					boolean tilesData = fileName.endsWith(SQLiteTileSource.EXT)
-							|| fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)
-							|| fileName.endsWith(IndexConstants.TIF_EXT);
+							|| fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT);
 					if (tilesData) {
 						loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 					}
@@ -408,14 +388,14 @@ public class LocalIndexHelper {
 	private void loadSrtmData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
 	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
 	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
-		loadDataImpl(dataPath, LocalIndexType.SRTM_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
+		loadDataImpl(dataPath, SRTM_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
 	private void loadWikiData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
 	                          boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
 	                          @Nullable AbstractLoadLocalIndexTask loadTask) {
-		loadDataImpl(dataPath, LocalIndexType.WIKI_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
+		loadDataImpl(dataPath, WIKI_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
@@ -429,7 +409,7 @@ public class LocalIndexHelper {
 	private void loadDepthData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
 	                           boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
 	                           @Nullable AbstractLoadLocalIndexTask loadTask) {
-		loadDataImpl(dataPath, LocalIndexType.DEPTH_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
+		loadDataImpl(dataPath, DEPTH_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
 				backup, readFiles, needDescription, result, indexFiles, loadTask);
 	}
 
@@ -456,15 +436,15 @@ public class LocalIndexHelper {
 	                             boolean needDescription, @NonNull Map<String, String> indexFileNames,
 	                             @Nullable AbstractLoadLocalIndexTask loadTask) {
 		String fileName = dataFile.getName();
-		LocalIndexType lt = LocalIndexType.MAP_DATA;
+		LocalIndexType type = MAP_DATA;
 		if (SrtmDownloadItem.isSrtmFile(fileName)) {
-			lt = LocalIndexType.SRTM_DATA;
+			type = SRTM_DATA;
 		} else if (fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
-			lt = LocalIndexType.WIKI_DATA;
+			type = WIKI_DATA;
 		} else if (fileName.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
-			lt = LocalIndexType.DEPTH_DATA;
+			type = DEPTH_DATA;
 		}
-		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup);
+		LocalIndexInfo info = new LocalIndexInfo(type, dataFile, backup);
 		if (indexFileNames.containsKey(fileName) && !backup) {
 			info.setLoaded(true);
 		}
@@ -513,6 +493,7 @@ public class LocalIndexHelper {
 		MAP_DATA(R.string.local_indexes_cat_map, R.drawable.ic_map, 10),
 		TILES_DATA(R.string.local_indexes_cat_tile, R.drawable.ic_map, 60),
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm, 40),
+		TERRAIN_DATA(R.string.local_indexes_category_terrain, R.drawable.ic_action_terrain, 42),
 		DEPTH_DATA(R.string.nautical_depth, R.drawable.ic_action_nautical_depth, 45),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TRAVEL_DATA(R.string.download_maps_travel, R.drawable.ic_plugin_wikipedia, 60),
@@ -521,7 +502,6 @@ public class LocalIndexHelper {
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
 		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
 		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);
-//		AV_DATA(R.string.local_indexes_cat_av);
 
 		@StringRes
 		private final int resId;

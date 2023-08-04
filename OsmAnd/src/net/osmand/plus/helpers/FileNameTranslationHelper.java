@@ -58,8 +58,8 @@ public class FileNameTranslationHelper {
 			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
 		} else if (fileName.startsWith(HEIGHTMAP)) {
-			basename = basename.replace(HEIGHTMAP + " ", "");
-			return getTerrainName(ctx, regions, basename, R.string.download_heightmap_maps);
+			basename = basename.replace(HEIGHTMAP + " ", "").replace(" ", "_");
+			return regions.getLocaleName(basename.trim(), true);
 		} else if (fileName.startsWith(SLOPE)) {
 			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
