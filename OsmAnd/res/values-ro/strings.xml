@@ -5347,4 +5347,5 @@
     <string name="write_heading_description">Salvarea rubricii pentru fiecare punct al pistei în timpul înregistrării</string>
     <string name="write_heading">Scrieți titlul</string>
     <string name="shared_string_included">Inclus</string>
+    <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
 </resources>
