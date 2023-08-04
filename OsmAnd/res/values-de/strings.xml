@@ -5349,4 +5349,5 @@
     <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
     <string name="feature_available_as_part_of_plan">%1$s verfügbar als Teil des %2$s-Plans</string>
     <string name="shared_string_included">Inbegriffen</string>
+    <string name="local_indexes_category_terrain">Geländekarten (3D)</string>
 </resources>
