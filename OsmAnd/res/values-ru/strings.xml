@@ -5221,7 +5221,7 @@
     <string name="rendering_value_sector5_name">Сектор 5</string>
     <string name="rendering_value_name_only_name">Только название</string>
     <string name="save_track_external_sensors_data">Данные</string>
-    <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Подключённых датчиков данного типа нет</string>
     <string name="write_data_from_sensor_to_track">Сохранять данные с внешних датчиков в GPX-файл при записи маршрута.</string>
     <string name="external_sensors_not_found">Датчики не найдены</string>
     <string name="external_sensors_source_of_data">Источник данных</string>
