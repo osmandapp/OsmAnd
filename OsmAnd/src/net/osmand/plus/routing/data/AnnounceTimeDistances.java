@@ -174,10 +174,22 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist) {
-		return isDistanceLess(currentSpeed, dist, leadDist, (float) leadDist / DEFAULT_SPEED);
+		return isDistanceLess(currentSpeed, dist, leadDist, 0.0f);
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist, float leadTime) {
+		if (leadTime != 0.0f) { 
+			// Issue #17376: low speed adjustment for TURN_NOW timing:
+			// Only required for car (but no big effect for bike/ped)
+			if ((currentSpeed > 0) && (currentSpeed < DEFAULT_SPEED)) {
+				float scaleDown = currentSpeed / DEFAULT_SPEED;
+				leadDist = Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
+				leadTime = scaleDown * leadTime;
+			}
+		} else {
+			leadTime = (float) leadDist / DEFAULT_SPEED;
+		}
+
 		// Check triggers:
 		// (1) distance <= leadDistance?
 		if (dist - voicePromptDelayTimeSec * currentSpeed <= leadDist) {
@@ -194,8 +206,11 @@ public class AnnounceTimeDistances {
 			simulation = locationProvider.getLocationSimulation().isRouteAnimating();
 		}
 		float speed = DEFAULT_SPEED;
-		if (loc != null && loc.hasSpeed() && !simulation) {
-			speed = Math.max(loc.getSpeed(), speed);
+		//Hardy 2023-08-05: It is unclear why we exclude the simulation case (next line) here, and floor reporting currentSpeed (second-next line):)
+		//if (loc != null && loc.hasSpeed() && !simulation) {
+		//	speed = Math.max(loc.getSpeed(), speed);
+		if (loc != null && loc.hasSpeed()) {
+			speed = loc.getSpeed();
 		}
 		return speed;
 	}
