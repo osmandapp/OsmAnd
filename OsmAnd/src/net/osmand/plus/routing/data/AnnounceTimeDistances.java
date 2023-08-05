@@ -36,7 +36,6 @@ public class AnnounceTimeDistances {
 	private float ARRIVAL_DISTANCE;
 	private float OFF_ROUTE_DISTANCE;
 
-	private float TURN_NOW_SPEED;
 	private final int PREPARE_LONG_DISTANCE;
 	private int PREPARE_LONG_DISTANCE_END;
 	private final int PREPARE_DISTANCE;
@@ -44,6 +43,7 @@ public class AnnounceTimeDistances {
 	private final int TURN_IN_DISTANCE;
 	private final int TURN_IN_DISTANCE_END;
 	private int TURN_NOW_DISTANCE;
+	private float TURN_NOW_TIME;
 	private int LONG_PNT_ANNOUNCE_RADIUS;
 	private int SHORT_PNT_ANNOUNCE_RADIUS;
 	private int LONG_ALARM_ANNOUNCE_RADIUS;
@@ -105,11 +105,10 @@ public class AnnounceTimeDistances {
 		// float TURN_NOW_TIME = 7;
 		// ** #8749 to keep 1m / 1 sec precision (POSITIONING_TOLERANCE = 12 m)
 		// car 50 km/h - 7 s, bicycle 10 km/h - 3 s, pedestrian 4 km/h - 2 s, 1 km/h - 1 s
-		float TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
+		TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
 
 		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (capped by POSITIONING_TOLERANCE)
 		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * arrivalDistanceFactor);
-		TURN_NOW_SPEED = TURN_NOW_DISTANCE / TURN_NOW_TIME;
 
 		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
 		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
@@ -139,7 +138,7 @@ public class AnnounceTimeDistances {
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_NOW:
-				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_SPEED);
+				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_TIME);
 			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
 			case STATE_PREPARE_TURN:
@@ -174,19 +173,19 @@ public class AnnounceTimeDistances {
 		return true;
 	}
 
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon) {
-		return isDistanceLess(currentSpeed, dist, etalon, DEFAULT_SPEED);
+	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist) {
+		return isDistanceLess(currentSpeed, dist, leadDist, (float) leadDist / DEFAULT_SPEED);
 	}
 
-	private boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed) {
+	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist, float leadTime) {
 		// Check triggers:
-		// (1) distance < etalon?
-		if (dist - voicePromptDelayTimeSec * currentSpeed <= etalon) {
+		// (1) distance <= leadDistance?
+		if (dist - voicePromptDelayTimeSec * currentSpeed <= leadDist) {
 			return true;
 		}
-		// (2) time_with_current_speed < etalon_time_with_default_speed?
+		// (2) time_with_current_speed <= leadTimed?
 		// check only if speed > 0
-		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= etalon / defSpeed;
+		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= leadTime;
 	}
 
 	public float getSpeed(Location loc) {
@@ -214,12 +213,11 @@ public class AnnounceTimeDistances {
 	}
 
 	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, String meter, String second) {
-		appendTurnDesc(app, builder, name, dist, DEFAULT_SPEED, meter, second);
+		appendTurnDesc(app, builder, name, dist, (int) (dist / DEFAULT_SPEED), meter, second);
 	}
 
-	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, float speed, String meter, String second) {
+	private void appendTurnDesc(OsmandApplication app, SpannableStringBuilder builder, String name, int dist, int time, String meter, String second) {
 		int minDist = (dist / 5) * 5;
-		int time = (int) (dist / speed);
 		if (time > 15) {
 			// round to 5
 			time = (time / 5) * 5;
@@ -259,7 +257,7 @@ public class AnnounceTimeDistances {
 			appendTurnDesc(app, builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
 		}
 		appendTurnDesc(app, builder, approach, TURN_IN_DISTANCE, meter, second);
-		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, TURN_NOW_SPEED, meter, second);
+		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, (int) TURN_NOW_TIME, meter, second);
 
 		// Arrive at destination
 		appendTurnDesc(app, builder, arrive, (int) (getArrivalDistance()), meter, second);
