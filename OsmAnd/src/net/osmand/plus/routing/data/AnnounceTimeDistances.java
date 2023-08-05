@@ -183,8 +183,8 @@ public class AnnounceTimeDistances {
 		if (dist - voicePromptDelayTimeSec * currentSpeed <= leadDist) {
 			return true;
 		}
-		// (2) time_with_current_speed <= leadTimed?
-		// check only if speed > 0
+		// (2) time_with_current_speed <= leadTime? (high speed adjustment)
+		// Check only if speed > 0. (speed = 0 in cases where no time threshold is used.)
 		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= leadTime;
 	}
 
