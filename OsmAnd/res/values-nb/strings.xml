@@ -5292,4 +5292,5 @@
     <string name="rendering_value_small_name">Liten</string>
     <string name="rssi_widget_desc">Viser RSSI-nivå for din eksterne enhet.</string>
     <string name="free_ride">Gratis tur</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>

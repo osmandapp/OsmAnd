@@ -5338,4 +5338,12 @@
     <string name="feature_available_as_part_of_plan">%1$s disponible dans le cadre de l\'abonnement %2$s</string>
     <string name="local_indexes_category_terrain">Cartes de terrain (3D)</string>
     <string name="hillshade_slope">Ombrage du relief, pente</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Dérive moyenne</string>
+    <string name="map_widget_glide_average_desc">Affiche la dérive moyenne sur la durée définie.</string>
+    <string name="map_widget_group_glide_ratio">Dérive</string>
+    <string name="glide_ratio_to_target">Dérive par rapport à la destination</string>
+    <string name="average_glide_time_interval_desc">Définir la fréquence de calcul de la dérive moyenne.</string>
+    <string name="map_widget_group_glide_desc">Les Widgets affichent la dérive par rapport à la destination ou la dérive moyenne pour l\'itinéraire en cours.</string>
+    <string name="map_widget_glide_target_desc">Affiche la dérive à compenser pour atteindre la destination.</string>
 </resources>
