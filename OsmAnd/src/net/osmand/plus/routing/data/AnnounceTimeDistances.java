@@ -180,7 +180,7 @@ public class AnnounceTimeDistances {
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist, float leadTime) {
 		// Check triggers:
 		// (1) distance <= leadDistance?
-		if (dist - voicePromptDelayTimeSec * currentSpeed <= leadDist) {
+		if (dist <= leadDist + currentSpeed * voicePromptDelayTimeSec) {
 			return true;
 		}
 		// (2) time_with_current_speed <= leadTime? (high speed adjustment)
