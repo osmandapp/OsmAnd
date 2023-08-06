@@ -3216,7 +3216,7 @@
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_service">Serviciul</string>
     <string name="icon_group_symbols">Simboluri</string>
-    <string name="hillshade_slope_contour_lines">Umbrire relief / Pante / Curbe de nivel</string>
+    <string name="hillshade_slope_contour_lines">Linii de contur / Umbre de deal / Pantă</string>
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
 \nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
@@ -5348,4 +5348,11 @@
     <string name="write_heading">Scrieți titlul</string>
     <string name="shared_string_included">Inclus</string>
     <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
+    <string name="map_widget_group_glide_desc">Widgeturile afișează raportul de planeitate față de țintă sau raportul de planeitate mediu pentru cursa curentă.</string>
+    <string name="hillshade_slope">Colină, Pantă</string>
+    <string name="map_widget_glide_average_desc">Afișează raportul mediu de alunecare pentru intervalul setat.</string>
+    <string name="map_widget_glide_target_desc">Afișează raportul de planare necesar pentru a ajunge la punctul țintă.</string>
+    <string name="glide_ratio_to_target">Raportul de planeitate la țintă</string>
+    <string name="map_widget_group_glide_ratio">Raportul de alunecare</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponibil ca parte a planului %2$s</string>
 </resources>
