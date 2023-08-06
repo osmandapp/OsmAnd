@@ -361,7 +361,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
         return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
                 app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
-                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to folow if there is selected point on map
+                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to follow if there is selected point on map
     }
 
     private void updateMapDisplayPosition() {

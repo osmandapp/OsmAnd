@@ -281,7 +281,7 @@ public class StreetNameWidget extends MapWidget {
 		float xSize = shield.getIntrinsicWidth();
 		float ySize = shield.getIntrinsicHeight();
 		float xyRatio = xSize / ySize;
-		//setting view propotions (height is fixed by toolbar size - 48dp);
+		//setting view proportions (height is fixed by toolbar size - 48dp);
 		int viewHeightPx = AndroidUtils.dpToPx(app, 48);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
 

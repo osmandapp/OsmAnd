@@ -179,7 +179,7 @@ public class MapUtils {
 		        Math.sin(dLon / 2) * Math.sin(dLon / 2);
 		//double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		//return R * c * 1000;
-		// simplyfy haversine:
+		// simplify haversine:
 		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
 	}
 
@@ -256,7 +256,7 @@ public class MapUtils {
 
 
 	/**
-	 * Theses methods operate with degrees (evaluating tiles & vice versa)
+	 * These methods operate with degrees (evaluating tiles & vice versa)
 	 * degree longitude measurements (-180, 180) [27.56 Minsk]
 	 * // degree latitude measurements (90, -90) [53.9]
 	 */
