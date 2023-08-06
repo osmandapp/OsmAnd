@@ -95,7 +95,7 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 	}
 
 	@Override
-	protected WidgetsPagerAdapter createWidgetsPagerAdapter() {
+	protected WidgetsPagerAdapter createPagerAdapter() {
 		return new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT) {
 			@NonNull
 			@Override
