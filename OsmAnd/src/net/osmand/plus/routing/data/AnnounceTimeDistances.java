@@ -201,12 +201,13 @@ public class AnnounceTimeDistances {
 	}
 
 	public float getSpeed(Location loc) {
-		boolean simulation = false;
-		if (locationProvider != null) {
-			simulation = locationProvider.getLocationSimulation().isRouteAnimating();
-		}
+		// Hardy 2023-08-05: I believe the limitation to the non-simulation case may be deprecated?
+		// Hardy 2023-08-05: Remove flooring the speed to facilitate low speed adjustment (Issue #17376)
+		//boolean simulation = false;
+		//if (locationProvider != null) {
+		//	simulation = locationProvider.getLocationSimulation().isRouteAnimating();
+		//}
 		float speed = DEFAULT_SPEED;
-		//Hardy 2023-08-05: It is unclear why we exclude the simulation case (next line) here, and floor reporting currentSpeed (second-next line):)
 		//if (loc != null && loc.hasSpeed() && !simulation) {
 		//	speed = Math.max(loc.getSpeed(), speed);
 		if (loc != null && loc.hasSpeed()) {
