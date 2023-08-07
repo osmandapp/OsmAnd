@@ -14,6 +14,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.util.Algorithms;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -284,7 +285,7 @@ class RouteRecalculationHelper {
 		Collection<RouteCalculationProgressListener> listeners = params.calculationProgressListener != null
 				? Collections.singletonList(params.calculationProgressListener)
 				: calculationProgressListeners;
-		boolean isRouteBeingCalculated = true;
+		boolean isRouteBeingCalculated = !Algorithms.isEmpty(listeners);
 		for (RouteCalculationProgressListener listener : listeners) {
 			isRouteBeingCalculated &= onRouteCalculationUpdate(listener, params);
 		}
