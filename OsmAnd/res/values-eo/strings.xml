@@ -4012,7 +4012,7 @@
     <string name="shared_strings_all_regions">Ĉiuj regionoj</string>
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
-    <string name="shared_string_interval">Intertempo</string>
+    <string name="shared_string_interval">Tempodaŭro</string>
     <string name="trip_recording_logging_interval_info">La periodo de intertempo de registrado estas tempo post kiu OsmAnd petos pri aktualaj datumoj de pozicio.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
@@ -4687,7 +4687,7 @@
     <string name="reset_all_settings_desc">Ĉu reagordi ĉiujn agordojn al implicitaj valoroj\?</string>
     <string name="marker_2nd">Dua markilo</string>
     <string name="marker_1st">Unua markilo</string>
-    <string name="map_marker_average_speed_desc">Enigu la intertempon por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
+    <string name="map_marker_average_speed_desc">Enigu la tempodaŭron por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="switch_widget_mode_desc">Vi povas ŝanĝi la reĝimon per frapeti la fenestraĵon.</string>
     <string name="side_marker_eta">Proksimuma tempo de alveno</string>
     <string name="goods_delivery_desc_4">Uzu la profilon “Kamiono”, se via veturilo estas pli peza ol 3,5 Mg.</string>
@@ -4767,7 +4767,7 @@
     <string name="coordinates_widget_map_center_desc">Fenestraĵo montranta geografiajn koordinatojn de la montrata centro de la mapo.</string>
     <string name="coordinates_widget_current_location_desc">Fenestraĵo montranta geografiajn koordinatojn de via nuna pozicio.</string>
     <string name="map_markers_desc">Fenestraĵo montranta distancon aŭ antaŭkalkulitan tempon de alveno por la du unuaj map-markoj.</string>
-    <string name="map_marker_interval_dialog_desc">Enigu la intertempon por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
+    <string name="map_marker_interval_dialog_desc">Enigu la tempodaŭron por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="go_to_marker_location">Iri al la map-marko</string>
     <string name="shared_string_switch_mode">Baskuli reĝimon</string>
     <string name="map_widget_zoom_level">Skal-nivelo</string>
@@ -5340,4 +5340,14 @@
     <string name="shared_string_checked">Markita</string>
     <string name="feature_available_as_part_of_plan">%1$s disponebla kiel parto de la plano %2$s</string>
     <string name="shared_string_included">Enhavata</string>
+    <string name="map_widget_glide_average_desc">Montras la mezuman glisrilaton por la agordita tempodaŭro.</string>
+    <string name="map_widget_glide_target_desc">Montras la glisrilaton necesan por atingi la celon.</string>
+    <string name="average_glide_time_interval_desc">Difinu kiel ofte la mezuma glisrilato estos rekalkulata.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Mezuma glisrilato</string>
+    <string name="map_widget_group_glide_desc">Fenestraĵoj montrantaj glisrilaton necesan por atingi la celon aŭ mezuman glisrilaton por la nuna vojaĝo.</string>
+    <string name="local_indexes_category_terrain">Terenaj mapoj (3D)</string>
+    <string name="hillshade_slope">Nivelombrumo, dekliveco</string>
+    <string name="glide_ratio_to_target">Glisrilato necesa por celo</string>
+    <string name="map_widget_group_glide_ratio">Glisrilato</string>
 </resources>
