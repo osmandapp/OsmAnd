@@ -182,7 +182,7 @@ public class AnnounceTimeDistances {
 			// Issue #17376: low speed adjustment for TURN_NOW timing:
 			// Only required for car (but no big effect for bike/ped)
 			if ((currentSpeed > 0) && (currentSpeed < DEFAULT_SPEED)) {
-				float scaleDown = currentSpeed / DEFAULT_SPEED;
+				float scaleDown = Math.sqrt(currentSpeed / DEFAULT_SPEED);
 				leadDist = Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
 				leadTime = scaleDown * leadTime;
 			}
