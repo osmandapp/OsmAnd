@@ -133,7 +133,7 @@ public class CollatorStringMatcher implements StringMatcher {
 	 */
 	public static boolean cstartsWith(Collator collator, String fullTextP, String theStart, 
 			boolean checkBeginning, boolean checkSpaces, boolean equals) {
-		// FUTURE: This is not effective code, it runs on each comparision
+		// FUTURE: This is not effective code, it runs on each comparison
 		// It would be more efficient to normalize all strings in file and normalize search string before collator  
 		theStart = alignChars(theStart);
 		String searchIn = simplifyStringAndAlignChars(fullTextP);

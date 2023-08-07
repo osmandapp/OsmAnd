@@ -441,7 +441,7 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	/**
 	 * Sets the id of the view, that should be moved, when the user swipes an item.
 	 * Only the view with the specified id will move, while all other views in the list item, will
-	 * stay where they are. This might be usefull to have a background behind the view that is swiped
+	 * stay where they are. This might be useful to have a background behind the view that is swiped
 	 * out, to stay where it is (and maybe explain that the item is going to be deleted).
 	 * If you never call this method (or call it with 0), the whole view will be swiped. Also if there
 	 * is no view in a list item, with the given id, the whole view will be swiped.

@@ -187,7 +187,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			mpix.add((psps.get(index)).width * (psps.get(index)).height);
 			picSizesValues.add(index);
 		}
-		// sort list for max resolution in begining of list
+		// sort list for max resolution in beginning of list
 		for (int i = 0; i < mpix.size(); i++) {
 			for (int j = 0; j < mpix.size() - i - 1; j++) {
 				if (mpix.get(j) < mpix.get(j + 1)) {
@@ -253,7 +253,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		Camera.Parameters parameters = cam.getParameters();
 
 		// focus mode settings
-		// show in menu only suppoted modes
+		// show in menu only supported modes
 		List<String> sfm = parameters.getSupportedFocusModes();
 		if (sfm == null) {
 			cameraFocusType.setVisible(false);
