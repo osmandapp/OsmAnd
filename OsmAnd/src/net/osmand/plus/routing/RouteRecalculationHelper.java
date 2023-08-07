@@ -281,25 +281,30 @@ class RouteRecalculationHelper {
 	}
 
 	private void updateProgressInUIThread(RouteCalculationParams params) {
-		Collection<RouteCalculationProgressListener> listeners = params.calculationProgressListener != null ? Collections.singletonList(params.calculationProgressListener) :
-				calculationProgressListeners;
+		Collection<RouteCalculationProgressListener> listeners = params.calculationProgressListener != null
+				? Collections.singletonList(params.calculationProgressListener)
+				: calculationProgressListeners;
+		boolean isRouteBeingCalculated = true;
 		for (RouteCalculationProgressListener listener : listeners) {
-			onRouteCalculationUpdate(listener, params);
+			isRouteBeingCalculated &= onRouteCalculationUpdate(listener, params);
+		}
+		if (isRouteBeingCalculated) {
+			updateProgressWithDelay(params);
 		}
 	}
 
 	private void onRouteCalculationStart(@NonNull RouteCalculationParams params) {
 		if (params.calculationProgressListener != null) {
 			params.calculationProgressListener.onCalculationStart();
-		} else if (calculationProgressListeners != null) {
+		} else {
 			for (RouteCalculationProgressListener listener : calculationProgressListeners) {
 				listener.onCalculationStart();
 			}
 		}
 	}
 
-	private void onRouteCalculationUpdate(@NonNull RouteCalculationProgressListener progressRoute,
-	                                      @NonNull RouteCalculationParams params) {
+	private boolean onRouteCalculationUpdate(@NonNull RouteCalculationProgressListener progressRoute,
+	                                         @NonNull RouteCalculationParams params) {
 		RouteCalculationProgress calculationProgress = params.calculationProgress;
 		if (isRouteBeingCalculated()) {
 			boolean routeCalculationStarted = calculationProgress.routeCalculationStartTime != 0;
@@ -317,7 +322,7 @@ class RouteRecalculationHelper {
 						progressRoute.onUpdateMissingMaps(calculationProgress.missingMaps, false);
 					}
 				}
-				updateProgressWithDelay(params);
+				return true;
 			}
 		} else {
 			if (calculationProgress.requestPrivateAccessRouting) {
@@ -325,12 +330,13 @@ class RouteRecalculationHelper {
 			}
 			progressRoute.onCalculationFinish();
 		}
+		return false;
 	}
 
 	private void onRouteCalculationFinish(@NonNull RouteCalculationParams params) {
 		if (params.calculationProgressListener != null) {
 			params.calculationProgressListener.onCalculationFinish();
-		} else if (calculationProgressListeners != null) {
+		} else {
 			for (RouteCalculationProgressListener listener : calculationProgressListeners) {
 				listener.onCalculationFinish();
 			}
