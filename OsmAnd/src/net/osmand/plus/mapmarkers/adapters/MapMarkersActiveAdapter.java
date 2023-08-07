@@ -1,11 +1,15 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
+
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +23,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -41,19 +44,19 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	private Snackbar snackbar;
 	private boolean showDirectionEnabled;
 
-	private final boolean night;
+	private final boolean nightMode;
 	private final UiUtilities uiUtilities;
 	private final UpdateLocationViewCache updateLocationViewCache;
 
-	public MapMarkersActiveAdapter(MapActivity mapActivity) {
+	public MapMarkersActiveAdapter(@NonNull MapActivity mapActivity) {
 		setHasStableIds(true);
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		uiUtilities = app.getUIUtilities();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
 		markers = app.getMapMarkersHelper().getMapMarkers();
-		night = !app.getSettings().isLightContent();
-		showDirectionEnabled = WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(mapActivity);
+		nightMode = !app.getSettings().isLightContent();
+		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP, MARKERS_TOP_BAR.id);
 	}
 
 	public void setShowDirectionEnabled(boolean showDirectionEnabled) {
@@ -63,39 +66,35 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	public void setAdapterListener(MapMarkersActiveAdapterListener listener) {
 		this.listener = listener;
 	}
+
+	@NonNull
 	@Override
-	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+	public MapMarkerItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(view);
-			}
-		});
+		view.setOnClickListener(v -> listener.onItemClick(v));
 		return new MapMarkerItemViewHolder(view);
 	}
 
 	@Override
-	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
-		UiUtilities iconsCache = app.getUIUtilities();
+	public void onBindViewHolder(@NonNull MapMarkerItemViewHolder holder, int pos) {
 		MapMarker marker = markers.get(pos);
 
 		ImageView markerImageViewToUpdate;
 		int drawableResToUpdate;
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
-		int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
+		int actionIconColor = nightMode ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 		boolean displayedInWidget = pos < app.getSettings().DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 		if (showDirectionEnabled && displayedInWidget) {
 			holder.iconDirection.setVisibility(View.GONE);
 
-			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
-			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_divider_dark : R.color.markers_top_bar_background));
-			holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.text_color_primary_dark : R.color.color_white));
+			holder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
+			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_divider_dark : R.color.markers_top_bar_background));
+			holder.title.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.color_white));
 			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_divider_color));
 			holder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, R.drawable.marker_circle_background_on_map_with_inset));
-			holder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
-			holder.iconReorder.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_item_move, R.color.icon_color_default_light));
+			holder.optionsBtn.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
+			holder.iconReorder.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_item_move, R.color.icon_color_default_light));
 			holder.description.setTextColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_color));
 
 			drawableResToUpdate = R.drawable.ic_arrow_marker_diretion;
@@ -103,14 +102,14 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		} else {
 			holder.iconDirection.setVisibility(View.VISIBLE);
 
-			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, markerColor));
-			holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
-			holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, night));
-			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
-			holder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
-			holder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, actionIconColor));
-			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
-			holder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, night));
+			holder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_flag, markerColor));
+			holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
+			holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
+			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
+			holder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, nightMode ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
+			holder.optionsBtn.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_passed, actionIconColor));
+			holder.iconReorder.setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_item_move));
+			holder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, nightMode));
 
 			drawableResToUpdate = R.drawable.ic_direction_arrow;
 			markerImageViewToUpdate = holder.iconDirection;
@@ -125,14 +124,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.point.setVisibility(View.VISIBLE);
 
-		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					listener.onDragStarted(holder);
-				}
-				return false;
+		holder.iconReorder.setOnTouchListener((view, event) -> {
+			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+				listener.onDragStarted(holder);
 			}
+			return false;
 		});
 
 		holder.title.setText(marker.getName(mapActivity));
@@ -150,31 +146,25 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		}
 		holder.description.setText(descr);
 
-		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				int position = holder.getAdapterPosition();
-				if (position < 0) {
-					return;
-				}
-				MapMarker marker = markers.get(position);
-
-				app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
-				changeMarkers();
-				notifyDataSetChanged();
-
-				snackbar = Snackbar.make(holder.itemView, mapActivity.getString(R.string.marker_moved_to_history), Snackbar.LENGTH_LONG)
-						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-							@Override
-							public void onClick(View view) {
-								app.getMapMarkersHelper().restoreMarkerFromHistory(marker, position);
-								changeMarkers();
-								notifyDataSetChanged();
-							}
-						});
-				UiUtilities.setupSnackbar(snackbar, night);
-				snackbar.show();
+		holder.optionsBtn.setOnClickListener(view -> {
+			int position = holder.getAdapterPosition();
+			if (position < 0) {
+				return;
 			}
+			MapMarker mapMarker = markers.get(position);
+
+			app.getMapMarkersHelper().moveMapMarkerToHistory(mapMarker);
+			changeMarkers();
+			notifyDataSetChanged();
+
+			snackbar = Snackbar.make(holder.itemView, mapActivity.getString(R.string.marker_moved_to_history), Snackbar.LENGTH_LONG)
+					.setAction(R.string.shared_string_undo, v -> {
+						app.getMapMarkersHelper().restoreMarkerFromHistory(mapMarker, position);
+						changeMarkers();
+						notifyDataSetChanged();
+					});
+			UiUtilities.setupSnackbar(snackbar, nightMode);
+			snackbar.show();
 		});
 
 		updateLocationViewCache.arrowResId = drawableResToUpdate;
@@ -230,15 +220,12 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		changeMarkers();
 		notifyDataSetChanged();
 		snackbar = Snackbar.make(holder.itemView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
-				.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						app.getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
-						changeMarkers();
-						notifyDataSetChanged();
-					}
+				.setAction(R.string.shared_string_undo, view -> {
+					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
+					changeMarkers();
+					notifyDataSetChanged();
 				});
-		UiUtilities.setupSnackbar(snackbar, night);
+		UiUtilities.setupSnackbar(snackbar, nightMode);
 		snackbar.show();
 	}
 
