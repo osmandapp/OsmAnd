@@ -17,6 +17,8 @@ import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -275,18 +277,16 @@ class RouteRecalculationHelper {
 	}
 
 	void updateProgress(RouteCalculationParams params) {
-		List<RouteCalculationProgressListener> listeners = new ArrayList<>();
-		if (params.calculationProgressListener != null) {
-			listeners.add(params.calculationProgressListener);
-		} else if (calculationProgressListeners != null) {
-			listeners.addAll(calculationProgressListeners);
-		}
-		if (!Algorithms.isEmpty(listeners)) {
-			app.runInUIThread(() -> {
-				for (RouteCalculationProgressListener listener : listeners) {
-					onRouteCalculationUpdate(listener, params);
-				}
-			}, 300);
+		app.runInUIThread(() -> {
+			updateProgressInUIThread(params);
+		}, 300);
+	}
+
+	private void updateProgressInUIThread(RouteCalculationParams params) {
+		Collection<RouteCalculationProgressListener> listeners = params.calculationProgressListener != null ? Collections.singletonList(params.calculationProgressListener) :
+				calculationProgressListeners;
+		for (RouteCalculationProgressListener listener : listeners) {
+			onRouteCalculationUpdate(listener, params);
 		}
 	}
 
@@ -319,7 +319,7 @@ class RouteRecalculationHelper {
 						progressRoute.onUpdateMissingMaps(calculationProgress.missingMaps, false);
 					}
 				}
-				updateProgress(params);
+				updateProgressInUIThread(params);
 			}
 		} else {
 			if (calculationProgress.requestPrivateAccessRouting) {
