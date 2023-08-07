@@ -75,17 +75,7 @@ public class WidgetsVisibilityHelper {
 				&& !isSelectingTilesZone();
 	}
 
-	public boolean shouldShowTopMapCenterCoordinatesWidget() {
-		return (settings.SHOW_MAP_CENTER_COORDINATES_WIDGET.get())
-				&& shouldShowTopCoordinatesWidget();
-	}
-
-	public boolean shouldShowTopCurrentLocationCoordinatesWidget() {
-		return settings.SHOW_CURRENT_LOCATION_COORDINATES_WIDGET.get()
-				&& shouldShowTopCoordinatesWidget();
-	}
-
-	private boolean shouldShowTopCoordinatesWidget() {
+	public boolean shouldShowTopCoordinatesWidget() {
 		return !mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
