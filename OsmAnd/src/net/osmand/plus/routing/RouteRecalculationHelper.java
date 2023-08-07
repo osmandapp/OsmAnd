@@ -14,9 +14,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
-import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -218,7 +216,7 @@ class RouteRecalculationHelper {
 			lastTask = newTask;
 			onRouteCalculationStart(params);
 			if (updateProgress) {
-				updateProgress(params);
+				updateProgressWithDelay(params);
 			}
 			Future<?> future = executor.submit(newTask);
 			tasksMap.put(future, newTask);
@@ -276,7 +274,7 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	void updateProgress(RouteCalculationParams params) {
+	void updateProgressWithDelay(RouteCalculationParams params) {
 		app.runInUIThread(() -> {
 			updateProgressInUIThread(params);
 		}, 300);
@@ -319,7 +317,7 @@ class RouteRecalculationHelper {
 						progressRoute.onUpdateMissingMaps(calculationProgress.missingMaps, false);
 					}
 				}
-				updateProgressInUIThread(params);
+				updateProgressWithDelay(params);
 			}
 		} else {
 			if (calculationProgress.requestPrivateAccessRouting) {
@@ -401,7 +399,7 @@ class RouteRecalculationHelper {
 		@Override
 		public void run() {
 			if (!updateProgress) {
-				updateProgress(params);
+				updateProgressWithDelay(params);
 			}
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();
