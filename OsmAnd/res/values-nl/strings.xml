@@ -5182,4 +5182,25 @@
     <string name="delete_folder">Map verwijderen</string>
     <string name="tracks_empty_folder_description">Deze map heeft nog geen tracks.</string>
     <string name="visible_in_3d_mode">Zichtbaar in 3D mode</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosieven</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gassen</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioactieve stoffen</string>
+    <string name="shared_string_class">Klasse</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Bijtende stoffen</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diverse gevaarlijke stoffen en voorwerpen</string>
+    <string name="dangerous_goods_description">Op sommige wegen en tunnels is het verboden om gevaarlijke stoffen te vervoeren.</string>
+    <string name="shared_string_checked">Gecontroleerd</string>
+    <string name="shared_string_not_checked">Niet gecontroleerd</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brandbare vloeistoffen</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brandbare vaste stoffen</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxiderende stoffen en organische peroxiden</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige en infectueuze stoffen</string>
+    <string name="dangerous_goods">Gevaarlijke goederen</string>
+    <string name="free_ride">Gratis rit</string>
+    <string name="write_bearing_description">Peiling opslaan voor elk spoor tijdens het opnemen</string>
+    <string name="write_bearing">Schrijf peiling (richting)</string>
+    <string name="rendering_attr_alpineHiking_name">Moeilijkheidsgraad classificatie</string>
+    <string name="shared_string_included">Inclusief</string>
+    <string name="feature_available_as_part_of_plan">%1$s beschikbaar als onderdeel van het %2$s abonnement</string>
+    <string name="free_settings_backup">Gratis instellingen back-up</string>
 </resources>
