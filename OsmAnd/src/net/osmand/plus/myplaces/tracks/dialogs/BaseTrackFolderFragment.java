@@ -269,7 +269,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		Map<String, String> tabsSortModes = settings.getTrackFoldersSortModes();
+		Map<String, String> tabsSortModes = settings.getTrackSortModes();
 		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
 			if (Algorithms.stringsEqual(entry.getKey(), selectedFolder.getDirName())) {
 				return TracksSortMode.getByValue(entry.getValue());
@@ -282,10 +282,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
 		adapter.setSortMode(sortMode);
 
-		Map<String, String> tabsSortModes = settings.getTrackFoldersSortModes();
+		Map<String, String> tabsSortModes = settings.getTrackSortModes();
 		tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
 
-		settings.saveFoldersSortModes(tabsSortModes);
+		settings.saveTabsSortModes(tabsSortModes);
 	}
 
 	@Override
