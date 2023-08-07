@@ -107,10 +107,10 @@ public class AnnounceTimeDistances {
 		// car 50 km/h - 7 s, bicycle 10 km/h - 3 s, pedestrian 4 km/h - 2 s, 1 km/h - 1 s
 		TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
 
-		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (capped by POSITIONING_TOLERANCE)
+		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (floored by POSITIONING_TOLERANCE)
 		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * arrivalDistanceFactor);
 
-		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (capped by POSITIONING_TOLERANCE)
+		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (floored by POSITIONING_TOLERANCE)
 		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
 
 		// 20 s: car 250 m, bicycle 56 m, pedestrian 22 m
@@ -138,7 +138,15 @@ public class AnnounceTimeDistances {
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_NOW:
-				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE, TURN_NOW_TIME);
+				int leadDist = TURN_NOW_DISTANCE;
+				float leadTime = TURN_NOW_TIME;
+				// Issue #17376: low speed adjustment for TURN_NOW timing:
+				if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
+					float scaleDown = (float) Math.sqrt(currentSpeed / DEFAULT_SPEED);
+					leadDist = (int) Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
+					leadTime = scaleDown * leadTime;
+				}
+				return isDistanceLess(currentSpeed, dist, leadDist, leadTime);
 			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
 			case STATE_PREPARE_TURN:
@@ -174,21 +182,10 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist) {
-		return isDistanceLess(currentSpeed, dist, leadDist, 0.0f);
+		return isDistanceLess(currentSpeed, dist, leadDist, (float) leadDist / DEFAULT_SPEED);
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist, float leadTime) {
-		if (leadTime != 0.0f) {    //identifies TURN_NOW case
-			// Issue #17376: low speed adjustment for TURN_NOW timing:
-			if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
-				float scaleDown = (float) Math.sqrt(currentSpeed / DEFAULT_SPEED);
-				leadDist = Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
-				leadTime = scaleDown * leadTime;
-			}
-		} else {
-			leadTime = (float) leadDist / DEFAULT_SPEED;
-		}
-
 		// Check triggers:
 		// (1) distance <= leadDistance?
 		if (dist <= leadDist + currentSpeed * voicePromptDelayTimeSec) {
