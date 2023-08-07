@@ -4879,6 +4879,6 @@
     <string name="shared_string_time_left">הזמן שנותר</string>
     <string name="shared_string_sunset">שקיעת החמה</string>
     <string name="weather_precip_mm">מ\"מ</string>
-    <string name="show_map_symbols">הצג סמלי מפה</string>
+    <string name="show_map_symbols">הצגת סמלי מפה</string>
     <string name="map_settings_weather_wind">רוח</string>
 </resources>
