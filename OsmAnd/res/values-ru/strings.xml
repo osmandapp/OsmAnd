@@ -2784,7 +2784,7 @@
     <string name="send_search_query">Отправить поисковый запрос?</string>
     <string name="test_voice_desrc">Нажмите кнопку и прослушайте подсказку для проверки наличия и корректности.</string>
     <string name="thank_you_for_feedback">Спасибо за ваш отзыв</string>
-    <string name="poi_cannot_be_found">Не удалось найти точку или путь.</string>
+    <string name="poi_cannot_be_found">Не удалось найти точку (node) или линию (way).</string>
     <string name="search_no_results_feedback">Нет результатов поиска\? 
 \nОставьте отзыв</string>
     <string name="increase_search_radius_to">Расширить радиус поиска до %1$s</string>
