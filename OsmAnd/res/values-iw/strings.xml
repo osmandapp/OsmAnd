@@ -4822,7 +4822,7 @@
     <string name="ble_search_again">חיפוש חוזר</string>
     <string name="external_device_details_battery">סוללה</string>
     <string name="map_settings_weather_air_pressure">לחץ אוויר</string>
-    <string name="weather_precip_inches">אינץ\'</string>
+    <string name="weather_precip_inches">אינץ׳</string>
     <string name="shared_string_apply_changes">החל שינויים</string>
     <string name="routing_attr_hazmat_category_usa_1_name">חומרי נפץ</string>
     <string name="routing_attr_hazmat_category_usa_2_name">גזים</string>
@@ -4837,7 +4837,7 @@
     <string name="dangerous_goods">חומרים מסוכנים</string>
     <string name="shared_string_next_sunrise">הזריחה הבאה</string>
     <string name="shared_string_weather">מזג אוויר</string>
-    <string name="weather_wind_kmh">קמ\"ש</string>
+    <string name="weather_wind_kmh">קמ״ש</string>
     <string name="weather_wind_miles_per_hour">מיילים לשעה</string>
     <string name="tracks_empty_folder">תיקייה ריקה</string>
     <string name="ant_plus_searching">מחפש</string>
@@ -4848,18 +4848,18 @@
     <string name="map_rendering_engine_v1">גרסה 1</string>
     <string name="map_settings_weather_temp">טמפרטורה</string>
     <string name="precipitation_layer">שכבת משקעים</string>
-    <string name="weather_wind_ms">מ\'/שניה</string>
+    <string name="weather_wind_ms">מ׳/שנייה</string>
     <string name="deleting_complete">המחיקה הושלמה</string>
-    <string name="map_2d_mode_action">מצב 2D</string>
+    <string name="map_2d_mode_action">מצב דו־ממד</string>
     <string name="external_device_disconnected">מנותק</string>
     <string name="external_device_connected">מחובר</string>
-    <string name="external_device_menu_forget">שכח</string>
+    <string name="external_device_menu_forget">לשכוח</string>
     <string name="bluetooth_found_title">נמצאו: %d</string>
     <string name="pressure_layer">שכבת לחצים</string>
-    <string name="map_3d_mode_action">מצב 3D</string>
+    <string name="map_3d_mode_action">מצב תלת־ממד</string>
     <string name="weather_wind_kilimeters_per_hour">קילומטר לשעה</string>
-    <string name="weather_wind_meters_per_second">מטר/שניה</string>
-    <string name="weather_temperature_celsius">צלסיוס</string>
+    <string name="weather_wind_meters_per_second">מטר/שנייה</string>
+    <string name="weather_temperature_celsius">צלזיוס</string>
     <string name="map_rendering_engine_v2">גרסה 2 (OpenGL)</string>
     <string name="routing_attr_hazmat_category_usa_3_name">נוזלים דליקים</string>
     <string name="poi_categories">קטגוריות נקודות עניין</string>
@@ -4878,7 +4878,7 @@
     <string name="measurement_units">יחידות מידה</string>
     <string name="shared_string_time_left">הזמן שנותר</string>
     <string name="shared_string_sunset">שקיעת החמה</string>
-    <string name="weather_precip_mm">מ\"מ</string>
+    <string name="weather_precip_mm">מ״מ</string>
     <string name="show_map_symbols">הצגת סמלי מפה</string>
     <string name="map_settings_weather_wind">רוח</string>
 </resources>
