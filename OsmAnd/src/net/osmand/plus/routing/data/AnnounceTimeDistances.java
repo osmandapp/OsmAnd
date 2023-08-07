@@ -178,10 +178,9 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist, float leadTime) {
-		if (leadTime != 0.0f) { 
+		if (leadTime != 0.0f) {    //identifies TURN_NOW case
 			// Issue #17376: low speed adjustment for TURN_NOW timing:
-			// Only required for car (but no big effect for bike/ped)
-			if ((currentSpeed > 0) && (currentSpeed < DEFAULT_SPEED)) {
+			if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
 				float scaleDown = (float) Math.sqrt(currentSpeed / DEFAULT_SPEED);
 				leadDist = Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
 				leadTime = scaleDown * leadTime;
@@ -192,24 +191,16 @@ public class AnnounceTimeDistances {
 
 		// Check triggers:
 		// (1) distance <= leadDistance?
-		if (dist - voicePromptDelayTimeSec * currentSpeed <= leadDist) {
+		if (dist <= leadDist + currentSpeed * voicePromptDelayTimeSec) {
 			return true;
 		}
 		// (2) time_with_current_speed <= leadTime? (high speed adjustment)
-		// Check only if speed > 0. (speed = 0 in cases where no time threshold is used.)
-		return currentSpeed > 0 && (dist / currentSpeed - voicePromptDelayTimeSec) <= leadTime;
+		// currentSpeed = 0 in cases where no time threshold is used.
+		return dist <= currentSpeed * (leadTime + voicePromptDelayTimeSec);
 	}
 
 	public float getSpeed(Location loc) {
-		// Hardy 2023-08-05: I believe the limitation to the non-simulation case may be deprecated?
-		// Hardy 2023-08-05: Remove flooring the speed to facilitate low speed adjustment (Issue #17376)
-		//boolean simulation = false;
-		//if (locationProvider != null) {
-		//	simulation = locationProvider.getLocationSimulation().isRouteAnimating();
-		//}
 		float speed = DEFAULT_SPEED;
-		//if (loc != null && loc.hasSpeed() && !simulation) {
-		//	speed = Math.max(loc.getSpeed(), speed);
 		if (loc != null && loc.hasSpeed()) {
 			speed = loc.getSpeed();
 		}
