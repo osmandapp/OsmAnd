@@ -29,7 +29,7 @@
 		android:id="@+id/description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:lineSpacingMultiplier="@dimen/description_letter_spacing"
+		android:letterSpacing="@dimen/description_letter_spacing"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
 		osmand:typeface="@string/font_roboto_regular"
