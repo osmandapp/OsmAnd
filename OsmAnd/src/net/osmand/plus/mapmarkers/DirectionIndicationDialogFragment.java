@@ -1,6 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -101,33 +102,27 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		TextView menuTv = mainView.findViewById(R.id.active_markers_text_view);
 		menuTv.setText(settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 1 ? R.string.shared_string_one : R.string.shared_string_two);
 		menuTv.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
-		menuTv.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Context themedContext = UiUtilities.getThemedContext(getActivity(), !settings.isLightContent());
-				CharSequence[] titles = getMenuTitles();
-				Paint paint = new Paint();
-				paint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-				float titleTextWidth = Math.max(paint.measureText(titles[0].toString()), paint.measureText(titles[1].toString()));
-				float itemWidth = titleTextWidth + AndroidUtils.dpToPx(themedContext, 32);
-				float minWidth = AndroidUtils.dpToPx(themedContext, 100);
-				ListPopupWindow listPopupWindow = new ListPopupWindow(themedContext);
-				listPopupWindow.setAnchorView(menuTv);
-				listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
-				listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
-				listPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(themedContext, 8));
-				listPopupWindow.setVerticalOffset(-menuTv.getHeight());
-				listPopupWindow.setModal(true);
-				listPopupWindow.setAdapter(new ArrayAdapter<>(themedContext, R.layout.popup_list_text_item, titles));
-				listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						updateDisplayedMarkersCount(position == 0 ? 1 : 2);
-						listPopupWindow.dismiss();
-					}
-				});
-				listPopupWindow.show();
-			}
+		menuTv.setOnClickListener(view -> {
+			Context themedContext = UiUtilities.getThemedContext(getActivity(), !settings.isLightContent());
+			CharSequence[] titles = getMenuTitles();
+			Paint paint = new Paint();
+			paint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
+			float titleTextWidth = Math.max(paint.measureText(titles[0].toString()), paint.measureText(titles[1].toString()));
+			float itemWidth = titleTextWidth + AndroidUtils.dpToPx(themedContext, 32);
+			float minWidth = AndroidUtils.dpToPx(themedContext, 100);
+			ListPopupWindow listPopupWindow = new ListPopupWindow(themedContext);
+			listPopupWindow.setAnchorView(menuTv);
+			listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
+			listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
+			listPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(themedContext, 8));
+			listPopupWindow.setVerticalOffset(-menuTv.getHeight());
+			listPopupWindow.setModal(true);
+			listPopupWindow.setAdapter(new ArrayAdapter<>(themedContext, R.layout.popup_list_text_item, titles));
+			listPopupWindow.setOnItemClickListener((parent, v, position, id) -> {
+				updateDisplayedMarkersCount(position == 0 ? 1 : 2);
+				listPopupWindow.dismiss();
+			});
+			listPopupWindow.show();
 		});
 
 		updateHelpImage();
@@ -199,8 +194,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				imgList.add(getArrowTwoImg());
 			}
 		}
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(mapActivity)) {
+		MapActivity activity = getMapActivity();
+		if (activity != null && WidgetsVisibilityHelper.isWidgetEnabled(activity, TOP, MARKERS_TOP_BAR.id)) {
 			imgList.add(getTopBar1Img());
 			if (count == 2) {
 				imgList.add(getTopBar2Img());
