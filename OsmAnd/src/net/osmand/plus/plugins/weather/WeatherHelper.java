@@ -238,8 +238,6 @@ public class WeatherHelper {
 	}
 
 	public static boolean isWeatherSupported(@NonNull OsmandApplication app) {
-		return app.getSettings().USE_OPENGL_RENDER.get()
-				&& NativeCore.isAvailable()
-				&& !Version.isQnxOperatingSystem();
+		return app.getSettings().USE_OPENGL_RENDER.get() && Version.isOpenGlAvailable(app);
 	}
 }
