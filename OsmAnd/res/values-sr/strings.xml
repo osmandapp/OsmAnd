@@ -5221,4 +5221,6 @@
     <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
     <string name="revolutions_per_minute_unit">Обртаја у минути</string>
     <string name="calculate_offline">Израчунај ван мреже</string>
+    <string name="local_indexes_category_terrain">Карте тла (Просторне, 3Д)</string>
+    <string name="shared_string_included">обухваћено</string>
 </resources>
