@@ -45,47 +45,47 @@
     <string name="auto_zoom_map">自動縮放地圖</string>
     <string name="snap_to_road">對齊道路</string>
     <string name="osmand_short_description_80_chars">離線與線上的 OSM 地圖用於全球行動地圖檢視與導航</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd 是開放程式碼的軟體導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。 
-\n 
-\n部份主要功能： 
-\n- 完整的離線功能（將下載的向量圖或地圖圖磚存放於裝置儲存空間） 
-\n- 提供細緻的全球離線向量圖資 
-\n- 直接從應用程式下載各國或區域圖資 
-\n- 可以自訂的透明度疊加不同的多種圖層，如 GPX 或導航軌跡、興趣點、我的最愛、公共運輸站 
-\n- 離線查詢地址、場所(POI) 
-\n- 中程距離的離線導航 
-\n- 汽車、自行車、步行模式有多種選項： 
-\n- 自動日夜模式切換 
-\n- 可依據速度選擇地圖縮放 
-\n- 根據羅盤或行進方向進行地圖對齊 
-\n- 車道引導、速限顯示、使用真人語音或文字轉語音 
-\n 
-\n這個 OsmAnd 免費版的限制： 
-\n- 地圖下載次數有限制 
-\n- 沒有離線維基百科 POI 的存取 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\n
+\nOsmAnd 是開放程式碼的軟體導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。
+\n
+\n部份主要功能：
+\n- 完整的離線功能（將下載的向量圖或地圖圖磚存放於裝置儲存空間）
+\n- 提供細緻的全球離線向量圖資
+\n- 直接從應用程式下載各國或區域圖資
+\n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵
+\n- 離線查詢地址、場所(POI)
+\n- 中程距離的離線導航
+\n- 汽車、自行車、步行模式有多種選項：
+\n- 自動日夜模式切換
+\n- 可依據速度選擇地圖縮放
+\n- 根據羅盤或行進方向進行地圖對齊
+\n- 車道引導、速限顯示、使用真人語音或文字轉語音
+\n
+\n這個 OsmAnd 免費版的限制：
+\n- 地圖下載次數有限制
+\n- 沒有離線維基百科 POI 的存取
+\n
 \nOsmAnd 正在積極開發，專案也持續的發展，依賴資金捐助以用於開發和測試新的功能。請考慮購買 OsmAnd+ 或是資助特定的新功能，又或在 https://osmand.net 網站上捐款。</string>
     <string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
-\nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。 
-\n 
-\nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 
-\n 
-\n一些主要的功能： 
-\n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間） 
-\n- 全球離線向量圖資 
-\n- 直接由手機下載各國或區域圖資 
-\n- 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、等高線、大眾運輸停靠站 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
-\n- 離線查詢地址、場所(POI) 
-\n- 中程距離的離線路線 
-\n- 汽車、自行車、步行模式有多種選項： 
-\n- 自動日夜模式切換 
-\n- 可依據速度選擇地圖縮放 
-\n- 根據羅盤或行進方向進行地圖對齊 
+\nOsmAnd+ 是開放原始碼的導航應用程式，存取各式各樣的全球性 OSM 資料。所有圖資（向量圖或地圖圖磚）均可存放於手機的記憶卡上，還可使用離線與線上圖資導航，包含轉向建議的語音導航。
+\n
+\nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。
+\n
+\n一些主要的功能：
+\n- 完整離線功能（存放下載的向量圖或地圖圖磚於裝置儲存空間）
+\n- 全球離線向量圖資
+\n- 直接由手機下載各國或區域圖資
+\n- 可以疊加多個地圖圖層，例如 GPX 或導航軌跡、興趣點、最愛、大眾運輸站點、具有可自訂透明度的附加地圖、等高線/地形陰影/坡度等地形特徵
+\n
+\n- 離線查詢地址、場所(POI)
+\n- 中程距離的離線路線
+\n- 汽車、自行車、步行模式有多種選項：
+\n- 自動日夜模式切換
+\n- 可依據速度選擇地圖縮放
+\n- 根據羅盤或行進方向進行地圖對齊
 \n- 車道引導、速限顯示、使用真人語音或文字轉語音
 \n</string>
     <string name="filterpoi_activity">建立 POI 篩選</string>
@@ -171,7 +171,7 @@
     <string name="rendering_attr_noPolygons_name">多邊形</string>
     <string name="rendering_attr_appMode_name">繪製模式</string>
     <string name="rendering_attr_appMode_description">為地圖最佳化</string>
-    <string name="rendering_attr_contourLines_description">顯示縮放比級別(需要等高線資料)：</string>
+    <string name="rendering_attr_contourLines_description">顯示縮放層級（需要等高線資料）：</string>
     <string name="rendering_attr_contourLines_name">顯示等高線</string>
     <string name="rendering_attr_hmRendered_description">增加地圖顯示詳細的資訊量。</string>
     <string name="rendering_attr_hmRendered_name">顯示更多地圖細節</string>
@@ -893,8 +893,8 @@
     <string name="dropbox_plugin_description">讓軌跡和音訊／視訊的註記同步到您的 Dropbox 帳號。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
     <string name="intermediate_points_change_order">變動排列</string>
-    <string name="srtm_paid_version_msg">請考慮付款購買「等高線」外掛程式以支援未來開發。</string>
-    <string name="srtm_paid_version_title">等高線外掛元件</string>
+    <string name="srtm_paid_version_msg">請考慮付款購買「地形」外掛程式以支援未來開發。</string>
+    <string name="srtm_paid_version_title">地形外掛程式</string>
     <string name="av_def_action_video">錄取視訊</string>
     <string name="av_def_action_audio">錄取音訊</string>
     <string name="av_widget_action_descr">預設小工具動作：</string>
@@ -924,14 +924,14 @@
     <string name="recording_description">錄製 %1$s %3$s %2$s</string>
     <string name="recording_default_name">錄製中</string>
     <string name="map_widget_av_notes">音訊/視訊的附註</string>
-    <string name="osmand_srtm_short_description_80_chars">用於離線等高線的 OsmAnd 外掛元件</string>
+    <string name="osmand_srtm_short_description_80_chars">用於離線地形特徵（如等高線、地形陰影、斜率等）的 OsmAnd 外掛元件</string>
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="map_widget_audionotes">音訊註解</string>
     <string name="audionotes_plugin_description">在旅程中取得音訊／相片／視訊註記，使用地圖按鈕或位置情境選單。</string>
     <string name="audionotes_plugin_name">音訊/視訊附註</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_name">等高線</string>
+    <string name="srtm_plugin_name">地形</string>
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
     <string name="download_srtm_maps">等高線</string>
@@ -968,7 +968,7 @@
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">中轉地點到目的地的路途中已最佳化排列。</string>
     <string name="audionotes_location_not_defined">輕點「使用位置……」以新增註記到地點。</string>
-    <string name="srtm_plugin_description">等高線、地形陰影與坡度等地形資訊可協助您直觀地評估地質與地形、適航性等。地圖上的地形資訊可以透過坡度陰影、等高線與/或坡度著色來顯示。
+    <string name="srtm_plugin_description">等高線、地形陰影與坡度等地形資訊可協助您直觀地評估地質與地形、適航性等。地圖上的地形資訊可以透過等高線、坡度陰影與/或坡度著色來顯示。
 \n
 \n基礎資料來自 SRTM 與 ASTER。
 \n
@@ -1667,7 +1667,7 @@
     <string name="buy">購買</string>
     <string name="hillshade_layer_disabled">地形陰影圖層停用</string>
     <string name="activate_seamarks_plugin">請啟動「檢視航海地圖」外掛元件</string>
-    <string name="activate_srtm_plugin">請啟動「等高線」外掛元件</string>
+    <string name="activate_srtm_plugin">請啟動「地形」外掛元件</string>
     <string name="later">隨後</string>
     <string name="get_full_version">完整版</string>
     <string name="regions">地區</string>
@@ -2246,9 +2246,9 @@
 \n• 可選的旅程錄製而且在背景模式（當裝置處於休眠模式下） 
 \nOsmAnd 是仍在積極開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。
 \n</string>
-    <string name="osmand_extended_description_part1">OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的 OSM 資料。 
-\n 
-\n享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線和海拔資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。</string>
+    <string name="osmand_extended_description_part1">OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的 OSM 資料。
+\n
+\n享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線與地形資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。</string>
     <string name="osmand_extended_description_part2">GPS 導航 
 \n• 您可以在離線（當您在國外時就不需要國際漫遊費用了）或連線（快速）兩種模式間選擇 
 \n• 轉向建議語音導航（真人和合成語音） 
@@ -2296,12 +2296,12 @@
 \n• 允許您選擇怎樣在地圖上顯示名稱：使用英文、裝置端或語言的拼寫 
 \n• 顯示專用的線上地圖圖磚、衛星照片（來自 Bing）、不同的疊加層如旅遊／導航 GPX 軌跡以及可自訂透明度的額外圖層
 \n</string>
-    <string name="osmand_extended_description_part5">自行車 
-\n• 在地圖找到自行車道 
-\n• GPS 導航在自行車模式下，使用自行車道構建您的路線 
-\n• 看到您的速度和海拔高度 
-\n• GPX 錄製選項使您能去記錄您的旅程並且分享 
-\n• 通過附加的外掛元件，您可以啟用等高線和地形陰影</string>
+    <string name="osmand_extended_description_part5">自行車
+\n• 在地圖找到自行車道
+\n• GPS 導航在自行車模式下，使用自行車道構建您的路線
+\n• 看到您的速度和海拔高度
+\n• GPX 錄製選項使您能去記錄您的旅程並且分享
+\n• 通過附加的外掛元件，您可以啟用等高線與地形陰影</string>
     <string name="osmand_extended_description_part8">OsmAnd 正在積極的開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。 
 \n大概的地圖覆蓋區域和品質： 
 \n• 西歐： **** 
@@ -2330,11 +2330,11 @@
 \n• GPS 導航在行人模式下，使用步行路徑構建您的路線 
 \n• 上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線
 \n</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的 OSM 圖資。 
-\n享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線和海拔資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。 
-\n 
-\nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。 
-\n 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的 OSM 圖資。
+\n享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線與地形資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。
+\n
+\nOsmAnd+ 是 OsmAnd 的付費版本，透過購買這個應用程式來資助開發新功能，並收到最新的更新。
+\n
 \n一些主要特點：</string>
     <string name="quick_action_auto_zoom_desc">用於速度控制自動縮放開關的按鈕。</string>
     <string name="shared_string_overview">概要</string>
@@ -2355,11 +2355,11 @@
     <string name="show_from_zoom_level">自此縮放等級開始顯示</string>
     <string name="routing_attr_allow_private_name">允許私人進入</string>
     <string name="routing_attr_allow_private_description">允許進入私有區域。</string>
-    <string name="srtm_menu_download_descr">下載「等高線」地圖以在此區域使用。</string>
+    <string name="srtm_menu_download_descr">下載此區域的「等高線」地圖。</string>
     <string name="shared_string_plugin">外掛元件</string>
-    <string name="srtm_purchase_header">購買並安裝「等高線」外掛程式以顯示垂直漸層區域。</string>
+    <string name="srtm_purchase_header">購買並安裝「地形」外掛程式以顯示垂直漸層區域。</string>
     <string name="hillshade_menu_download_descr">下載「地形陰影」覆蓋層地圖以顯示垂直陰影。</string>
-    <string name="hillshade_purchase_header">安裝「等高線」外掛程式以顯示漸層垂直區域。</string>
+    <string name="hillshade_purchase_header">安裝「地形」外掛程式以顯示漸層垂直區域。</string>
     <string name="hide_from_zoom_level">自此縮放等級開始隱藏</string>
     <string name="sorted_by_distance">按距離排序</string>
     <string name="search_favorites">在我的最愛中搜尋</string>
@@ -2709,9 +2709,9 @@
     <string name="show_full_description">顯示完整說明</string>
     <string name="nautical_render_descr">用於航海導航。特色是浮標、燈塔、河道、航線與標記、港口、海洋標記服務與等深線。</string>
     <string name="ski_map_render_descr">用於滑雪。特色是滑雪道、滑雪纜車、越野賽道等等。讓次要地點變暗。</string>
-    <string name="light_rs_render_descr">簡易的車輛駕駛樣式。柔和的夜間模式、等高線、對比鮮明的橘色道路、並讓次要地點變暗。</string>
+    <string name="light_rs_render_descr">簡易的車輛駕駛樣式。柔和的夜間模式、對比鮮明的橘色道路，讓次要地圖物件、等高線等地形特徵變暗。</string>
     <string name="topo_render_descr">用於遠足、徒步旅行和在大自然中騎車。容易在戶外閱讀的地圖。對比鮮明的道路與自然地點、不同的路徑類型、進階等高線選項、額外的細節。調整表面完整性可以分辨道路品質。無夜間模式。</string>
-    <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是等高線、路徑、路面品質、進入限制、路障、根據 SAC/CAI 等級繪製的路徑、激流運動項目。</string>
+    <string name="default_render_descr">一般用途樣式。在人口密集的城市中也很清楚。特色是路徑、路面品質、進入限制、路障、根據 SAC/CAI 等級繪製的路徑、激流運動項目、如等高線等地形特徵。</string>
     <string name="shared_string_bookmark">書籤</string>
     <string name="off_road_render_descr">基於「Topo」樣式，適用於越野駕駛，使用綠色衛星圖作為底圖。減少主要道路的寬度，增加車跡、路徑、腳踏車與其他路徑的寬度。</string>
     <string name="touring_view_render_descr">以高對比與最多細節的旅遊樣式。包含所有 OsmAnd 預設樣式的選項，並盡可能地顯示更多細節，特別是道路、路徑與其他旅行方式。明確區分道路類型的旅遊地圖集。白天、夜晚與戶外都適用。</string>
@@ -3181,7 +3181,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">連線</string>
     <string name="shared_string_calculate">計算</string>
     <string name="shared_string_osmand_usage">OsmAnd 用法</string>
-    <string name="shared_sting_tiles">圖磚</string>
+    <string name="shared_string_tiles">圖磚</string>
     <string name="shared_string_maps">地圖</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3769,7 +3769,7 @@
     <string name="sort_name_descending">名稱：Z – A</string>
     <string name="sort_name_ascending">名稱：A – Z</string>
     <string name="start_finish_icons">開始與結束圖示</string>
-    <string name="contour_lines_thanks">感謝您購買 \'Contour lines\'</string>
+    <string name="contour_lines_thanks">感謝您購買 \'Topography\'</string>
     <string name="osm_live_payment_desc_hw">按選定週期收取訂閱費用。隨時在 AppGallery 上取消。</string>
     <string name="osm_live_payment_subscription_management_hw">確認購買後，將從您的 AppGallery 帳號中收取費用。
 \n
@@ -3953,7 +3953,7 @@
     <string name="uploading_count">正在上傳 %1$d，共 %2$d</string>
     <string name="uploaded_count">已上傳 %1$d，共 %2$d</string>
     <string name="toast_select_edits_for_upload">選取要上傳的檔案</string>
-    <string name="hillshade_slope_contour_lines">地形陰影／斜坡／等高線</string>
+    <string name="hillshade_slope_contour_lines">等高線／地形陰影／斜坡</string>
     <string name="select_segments">選取線段</string>
     <string name="select_segments_description">%1$s 包含了多於一段，您必須指定導航的部份。</string>
     <string name="segments_count">線段 %1$d</string>
@@ -4144,7 +4144,7 @@
     <string name="send_logcat_log">傳送 logcat 紀錄檔</string>
     <string name="backup_promocode">促銷代碼</string>
     <string name="purchases_feature_desc_nautical">取得航海深度資訊</string>
-    <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
+    <string name="purchases_feature_desc_terrain">地形等高線、灰階地形陰影與色標坡度指示，用來顯示山峰與低地。</string>
     <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基導遊。文章按國家與區域劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_wikipedia">離線提供所有與地點相關的維基百科條目，協助您透過在地圖上的簡單點擊了解您在旅途中造訪的地點。不要忘記下載各地區的維基百科地圖檔案。</string>
     <string name="purchases_feature_desc_combined_wiki">隨時瀏覽維基百科，不需要網際網路連線。離線資料按國家劃分，並以所有語言提供。</string>
@@ -5208,7 +5208,7 @@
     <string name="delete_track_folder_dialog_message">這將會刪除「%1$s」資料夾與其包含的所有軌跡 (%2$s)。</string>
     <string name="delete_folder">刪除資料夾</string>
     <string name="rssi_widget_desc">顯示您外部裝置的 RSSI 層級。</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">此資料夾尚無任何軌跡。</string>
     <string name="tracks_empty_folder">空資料夾</string>
     <string name="track_not_recorded">未記錄</string>
@@ -5219,7 +5219,7 @@
     <string name="save_track_external_sensors_data">資料</string>
     <string name="there_are_no_connected_sensors_of_this_type">沒有此類型的已連結感應器</string>
     <string name="external_sensors_not_found">找不到感應器</string>
-    <string name="calculate_offline_altitude_descr">根據高度圖資料，離線計算海拔。與裝置記錄的海拔差異可用作高度校正。</string>
+    <string name="calculate_offline_altitude_descr">根據地形圖 (3D) 資料，離線計算海拔。與裝置記錄的海拔差異可用作高度校正。</string>
     <string name="error_calculate">計算結果為空</string>
     <string name="calculate_offline">離線計算</string>
     <string name="power_watts_unit">瓦</string>
@@ -5228,7 +5228,7 @@
     <string name="terrain_map">地形圖</string>
     <string name="relief_3d">3D 地形圖</string>
     <string name="relief_3d_description">你的社區或是整個大陸的擁有與觀察的縮放尺度。</string>
-    <string name="terrain_category_description">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
+    <string name="terrain_category_description">地形等高線、灰階地形陰影與色標坡度指示，用來顯示山峰與低地。</string>
     <string name="slope_legend_description">斜率使用顏色來視覺化地形的坡度。您可以在 %1$s 中取得更多關於斜率的資訊。</string>
     <string name="osmand_cloud_deleted_account_descr">帳號與所有資料都已從 OsmAnd Cloud 刪除。</string>
     <string name="manage_subscriptions">管理訂閱。</string>
@@ -5336,4 +5336,14 @@
     <string name="write_bearing_description">錄製時將方位資訊儲存到每個軌跡點</string>
     <string name="feature_available_as_part_of_plan">%1$s 作為 %2$s 方案的一部分提供</string>
     <string name="shared_string_included">已包含</string>
+    <string name="hillshade_slope">地形陰影、斜率</string>
+    <string name="local_indexes_category_terrain">地形圖 (3D)</string>
+    <string name="map_widget_glide_average_desc">顯示設定間隔的平均滑翔比。</string>
+    <string name="map_widget_group_glide_ratio">滑翔比</string>
+    <string name="map_widget_group_glide_desc">用來顯示目前旅程的目標滑翔比或平均滑翔比。</string>
+    <string name="average_glide_ratio">平均滑翔比</string>
+    <string name="map_widget_glide_target_desc">顯示到達目標點所需的滑翔比。</string>
+    <string name="average_glide_time_interval_desc">指定滑翔平均的時間間隔。</string>
+    <string name="glide_ratio_to_target">到目標的滑翔比</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>

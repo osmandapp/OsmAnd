@@ -214,7 +214,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			locationProvider = location.getProvider();
 			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated && !app.isApplicationInitializing()) {
 				drivingRegionUpdated = true;
-				RoutingHelperUtils.checkAndUpdateStartLocation(app, location, true);
+				RoutingHelperUtils.updateDrivingRegionIfNeeded(app, location, true);
 			}
 		}
 		if (mapView != null) {

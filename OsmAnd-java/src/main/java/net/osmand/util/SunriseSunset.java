@@ -256,7 +256,7 @@ public class SunriseSunset
 		// the signal of the values provided by the standard library
 		double dfTimeZoneIn = 1.0 * tzIn.getOffset(dateInputIn.getTime()) / 3600000;
 
-		// Copy values supplied as agruments to local variables.
+		// Copy values supplied as arguments to local variables.
 		dfLat 		= dfLatIn;
 		dfLon 		= dfLonIn;
 		dateInput 	= dateInputIn;
@@ -515,7 +515,7 @@ public class SunriseSunset
 	
 				tempD = Math.sqrt( tempD );					// SUNUP.BAS 620
 	
-				// Determine occurence of sunrise or sunset.
+				// Determine occurrence of sunrise or sunset.
 	
 				// Flags to identify occurrence during this day are 
 				// bSunriseToday and bSunsetToday, and are initialized false.

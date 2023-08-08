@@ -10,6 +10,18 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="map_widget_group_glide_desc">Widgets show the glide ratio to the target or average glide ratio for the current trip.</string>
+    <string name="map_widget_glide_average_desc">Shows the average glide ratio for the set interval.</string>
+    <string name="map_widget_glide_target_desc">Shows the glide ratio needed to reach the target point.</string>
+    <string name="average_glide_time_interval_desc">Specify the time interval for glide averaging.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Average glide ratio</string>
+    <string name="glide_ratio_to_target">Glide ratio to target</string>
+    <string name="map_widget_group_glide_ratio">Glide ratio</string>
+    <string name="local_indexes_category_terrain">"Terrain maps (3D)</string>
+    <string name="wheel_circumference">Wheel circumference</string>
+    <string name="external_sensor_name_property_description">Sensor name</string>
     <string name="shared_string_included">Included</string>
     <string name="feature_available_as_part_of_plan">%1$s available as part of the %2$s plan</string>
     <string name="write_bearing_description">Save bearing to each track point while recording</string>
@@ -99,7 +111,7 @@
     <string name="power_watts_unit">Watts</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="calculate_offline">Calculate offline</string>
-    <string name="calculate_offline_altitude_descr">Calculate elevation offline, based on heightmap data. Differences vs. device recorded altitude may be used as elevation correction.</string>
+    <string name="calculate_offline_altitude_descr">Calculate elevation offline, based on Terrain map (3D) data. Differences vs. device recorded altitude may be used as elevation correction.</string>
     <string name="error_calculate">Calculation result is empty</string>
     <string name="write_data_from_sensor_to_track">Write data from external sensors to GPX while trip recording.</string>
     <string name="save_track_external_sensors_data">Data</string>
@@ -224,7 +236,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="generate_slope_from_3d_maps">Generate slope raster maps from 3D maps</string>
     <string name="disable_vertex_hillshade_3d">Disable vertex hillshade in 3D</string>
     <string name="enable_3d_maps">Enable 3D maps</string>
-    <string name="test_heightmap">Test heightmap</string>
     <string name="common_weight_limit_error">Minimum value is \"%1$s\" %2$s. Use the "\"%3$s\"" profile if the vehicle weight is less than the minimum value.</string>
     <string name="shared_string_pounds">pounds</string>
     <string name="metric_lbs">lbs</string>
@@ -1027,6 +1038,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
     <string name="contour_lines_hillshade_slope">Contour lines, hillshade, slope</string>
+    <string name="hillshade_slope">Hillshade, Slope</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
@@ -1058,10 +1070,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Get “%1$s” as part of the %2$s plan. Comparison:</string>
     <string name="nautical_depth">Nautical depth</string>
-    <string name="terrain_maps">Terrain maps</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <!-- string name="terrain_maps_contour_lines_hillshade_slope">Topography maps: contour lines, hillshade, slope</string -->
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
@@ -1934,7 +1944,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Used %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Contour lines and hillshade</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>
@@ -1946,7 +1955,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="store_tracks_in_daily_directories_descrp">Record tracks in sub-folders per recording day (like 2018-01-01).</string>
     <string name="shared_string_calculate">Calculate</string>
     <string name="shared_string_osmand_usage">OsmAnd usage</string>
-    <string name="shared_sting_tiles">Tiles</string>
+    <string name="shared_string_tiles">Tiles</string>
     <string name="shared_string_maps">Maps</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

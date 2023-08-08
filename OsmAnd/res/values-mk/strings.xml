@@ -1498,7 +1498,7 @@
     <string name="rendering_attr_piste_difficulty_undefined_name">Nedefinirano</string>
     <string name="routeInfo_piste_difficulty_name">Teskotii na patekata</string>
     <string name="shared_string_osmand_usage">OsmAnd upotreba</string>
-    <string name="shared_sting_tiles">Plocki</string>
+    <string name="shared_string_tiles">Plocki</string>
     <string name="shared_string_maps">Karti</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="navigate_point_format_olc">Otvorete go kodot za lokacija</string>

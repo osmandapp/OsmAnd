@@ -130,7 +130,7 @@ public class FeedbackHelper {
 		} catch (Throwable e) {
 		}
 		msg.append("\n")
-				.append("Exception occured in thread ")
+				.append("Exception occurred in thread ")
 				.append(thread)
 				.append(" : \n")
 				.append(out);

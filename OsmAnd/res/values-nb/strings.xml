@@ -824,13 +824,13 @@
     <string name="favourites_list_activity">Velg favoritt</string>
     <string name="local_indexes_cat_srtm">Koter</string>
     <string name="recording_context_menu_show">Vis</string>
-    <string name="srtm_paid_version_title">Programtillegg for koter</string>
+    <string name="srtm_paid_version_title">Programtillegg for topografi</string>
     <string name="av_settings_descr">Still inn lyd og video.</string>
     <string name="av_settings">Lyd/video-innstillinger</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for (nett)frakoblede koter</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-tillegg for å vise koter, relieffskygge og bakkehelning, uten internett</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
     <string name="index_srtm_ele">Koter</string>
-    <string name="srtm_plugin_name">Koter</string>
+    <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kart</string>
     <string name="download_roads_only_item">Bare veier</string>
     <string name="download_srtm_maps">Koter</string>
@@ -860,7 +860,7 @@
     <string name="shared_string_downloading">Laster ned…</string>
     <string name="loading_postcodes">Laster postnummer…</string>
     <string name="loading_data">Laster data…</string>
-    <string name="srtm_plugin_description">Terrenginformasjon som koter, relieffskygge og bakkehelning, hjelper deg med å visuelt vurdere terrengforhold og relieff, navigerbarhet og mer. Topografisk informasjon på kartet kan representeres av helningsskyggelegging, koter og/eller fargelegging av bratthet.
+    <string name="srtm_plugin_description">Terrenginformasjon som koter, relieffskygge, bakkehelning, hjelper deg med å visuelt vurdere terrengforhold, relieff, navigerbarhet og mer. Topografisk informasjon på kartet kan representeres av koter, relieffskyggelegging og/eller fargelegging av bratthet.
 \n
 \nDe underliggende dataene kommer fra SRTM og ASTER.
 \n
@@ -1271,7 +1271,7 @@
     <string name="get_full_version">Fullversjon</string>
     <string name="confirm_download_roadmaps">Det rene veikartet er ikke nødvendig siden du har det fullstendige standardkartet. Laste det ned likevel\?</string>
     <string name="later">Senere</string>
-    <string name="activate_srtm_plugin">Aktiver programtillegget for koter</string>
+    <string name="activate_srtm_plugin">Aktiver programtillegget \'Topografi\'</string>
     <string name="opening_at">Åpner</string>
     <string name="closing_at">Lukker</string>
     <string name="contact_info">Kontaktinformasjon</string>
@@ -1653,7 +1653,7 @@
     <string name="rendering_attr_contourDensity_name">Kotetetthet</string>
     <string name="rendering_attr_contourWidth_description">Kotebredde</string>
     <string name="rendering_attr_contourWidth_name">Kotebredde</string>
-    <string name="srtm_paid_version_msg">Overvei å betale for kote-programtillegget for å støtte videre utvikling.</string>
+    <string name="srtm_paid_version_msg">Overvei å betale for programtillegget \'Topografi\' for å støtte videre utvikling.</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
 \n OsmAnd er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger.
@@ -1662,7 +1662,7 @@
 \n - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
 \n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
 \n - Last ned lands- eller regionkart direkte fra programmet
-\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, stoppesteder for offentlig transport, ytterligere kart med tilpasset gjennomsiktighet, topografiske funksjoner som koter/relieffskygge/bakkehelning
 \n - Frakoblet søk etter adresser og steder (interessepunkter)
 \n - Frakoblet ruting for middels avstander
 \n - Bil, sykkel eller fotgjengermoduser med valgfri:
@@ -1918,9 +1918,9 @@
     <string name="points_delete_multiple">Er du sikker på at du vil slette %1$d punkt(er)\?</string>
     <string name="average_speed">Gjennomsnittsfart</string>
     <string name="select_gpx_folder">Velg mappe for GPX-fil</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). 
-\n 
-\n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
+\n
+\n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og topografisk informasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
 \n OsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for nettfrakoblet bruk. Frakoblet og nettbasert rutefunksjon tilbys også, inkludert talebaserte anvisninger.
@@ -1932,7 +1932,8 @@
 \n - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
 \n - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet
 \n - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing
-\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+\n - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, stoppesteder for offentlig transport, ytterligere kart med tilpasset gjennomsiktighet, topografiske funksjoner som koter/relieffskygge/bakkehelning
+\n
 \n - Frakoblet søk etter adresser og steder (interessepunkter)
 \n - Frakoblet ruting for middels avstander
 \n - Bil, sykkel eller fotgjengermoduser med valgfri:
@@ -1941,11 +1942,11 @@
 \n - Kartjustering etter kompass- eller bevegelsesretning
 \n - Filhenvisning, fartsgrensevisning, innspilte og TTS-tale
 \n</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). 
-\n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer. 
-\n 
-\n OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene. 
-\n 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM).
+\n Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og topografisk informasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.
+\n
+\n OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene.
+\n
 \n Noen av hovedfunksjonene:</string>
     <string name="quick_action_map_source_switch">Kartkilde endret til \"%s\".</string>
     <string name="quick_action_map_source_action">Legg til kartkilde</string>
@@ -2149,7 +2150,7 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Lagt til</string>
     <string name="order_by">Sorter etter:</string>
-    <string name="srtm_purchase_header">Kjøp og installer \"Koter\"-tillegget for å vise graderte vertikale områder.</string>
+    <string name="srtm_purchase_header">Kjøp og installer \'Topografi\'-tillegget for å vise graderte vertikale områder.</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt fra nærmeste vei.</string>
     <string name="shared_location">Delt posisjon</string>
@@ -2243,7 +2244,7 @@
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Bilder fra Mapillary er kun tilgjengelig når tilkoblet internett.</string>
     <string name="hillshade_menu_download_descr">Last ned overleggskartet for \'Relieffskygge\' for å vise vertikal skyggelegging.</string>
-    <string name="hillshade_purchase_header">Installer programtillegget \'Koter\' for å vise graderte vertikale områder.</string>
+    <string name="hillshade_purchase_header">Installer programtillegget \'Topografi\' for å vise graderte vertikale områder.</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
     <string name="shared_string_back">Tilbake</string>
     <string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
@@ -2463,11 +2464,11 @@
     <string name="save_track_to_gpx_globally_descr">Generell posisjonslogging til GPX-fil kan skrus av eller på ved bruk av GPX-loggingsminiprogrammet på kartet.</string>
     <string name="osmand_extended_description_part4">Ski 
 \n OsmAnd-skikarttillegget gjør det mulig å se skiløyper med vanskelighetsgrad og ytterligere informasjon, som hvor heisene og andre fasiliteter finnes.</string>
-    <string name="osmand_extended_description_part5">Sykling 
-\n • Finn sykkelstier på kartet 
-\n • GPS-navigering i sykkelmodus lager ruten din ved hjelp av sykkelstier 
-\n • Se hastigheten din og antall høydemeter 
-\n • GPX-opptaksalternativet lar deg ta opp turen og dele den 
+    <string name="osmand_extended_description_part5">Sykling
+\n • Finn sykkelstier på kartet
+\n • GPS-navigering i sykkelmodus lager ruten din ved hjelp av sykkelstier
+\n • Se hastigheten din og antall høydemeter
+\n • GPX-opptaksalternativet lar deg ta opp turen og dele den
 \n • Via et ekstra tillegg kan du aktivere visning av koter og relieffskygger</string>
     <string name="osmand_extended_description_part7">Bidra til OSM 
 \n • Rapporter datafeil 
@@ -2712,10 +2713,10 @@
     <string name="show_full_description">Vis full beskrivelse</string>
     <string name="nautical_render_descr">Nautisk navigasjonsstil. Har bøyer, fyr, vannveier, skipsleder og merker, havner, sjømerketjenester, dybdekonturer.</string>
     <string name="ski_map_render_descr">Skistil. Har bakker, heiser og andre skifunksjoner osv. Demper sekundære kartobjekter.</string>
-    <string name="light_rs_render_descr">Enkel kjørestil. Skånsom nattmodus, koter, kontrastrike oransjefargede veier, dempede sekundære kartobjekter.</string>
+    <string name="light_rs_render_descr">Enkel kjørestil. Skånsom nattmodus, kontrastrike oransjefargede veier, dempede sekundære kartobjekter, topografiske funksjoner som koter.</string>
     <string name="topo_render_descr">For turgåing, vandring og sykling i naturen. Lesbar utendørs. Kontrasterende veier og naturlige objekter, forskjellige rutetyper, avanserte kotealternativer, flere detaljer. Justering av overflate gjør det mulig å skjelne veikvalitet. Ingen nattmodus.</string>
     <string name="touring_view_render_descr">Turstil med høy kontrast og maksimalt med detaljer. Inkluderer alle alternativene til standardstilen til OsmAnd, med visning av så mange detaljer som mulig, i særdeleshet veier, stier og andre måter å reise på. Tydelig \"reiseatlas\"-skille mellom veityper. Egnet for dag, natt og utendørs bruk.</string>
-    <string name="default_render_descr">Stil for generell bruk. Renere opptegning i tett befolkede byer. Har koter, ruter, overflatekvalitet, tilgangsbegrensninger, veinummer, stiopptegning i henhold til SAC-skala, raftingsfunksjoner.</string>
+    <string name="default_render_descr">Stil for generell bruk. Tettbebygde byer vises klart. Har ruter, overflatekvalitet, adgangsbegrensninger, veinummer, stiopptegning i henhold til SAC/CAI-skala, rafting/elvepadling-elementer, topografiske funksjoner som koter.</string>
     <string name="open_wikipedia_link_online">Åpne Wikipedia-lenke på nett</string>
     <string name="open_wikipedia_link_online_description">Lenken vil åpnes i en nettleser.</string>
     <string name="read_wikipedia_offline_description">Skaff OsmAnd Live-abonnement for å lese Wikipedia og Wikivoyage-artikler på nett.</string>
@@ -2813,11 +2814,11 @@
     <string name="routeInfo_surface_name">Overflate</string>
     <string name="routeInfo_smoothness_name">Jevnhet</string>
     <string name="routeInfo_steepness_name">Bratthet</string>
-    <string name="add_home">Legg til bosted</string>
+    <string name="add_home">Legg til hjem</string>
     <string name="add_work">Legg til arbeidssted</string>
     <string name="work_button">Arbeid</string>
     <string name="previous_route">Forrige rute</string>
-    <string name="add_destination_query">Legg til mål først</string>
+    <string name="add_destination_query">Angi et mål først</string>
     <string name="shared_string_swap">Veksle</string>
     <string name="show_more">Vis mer</string>
     <string name="tracks_on_map">Viste spor</string>
@@ -2826,7 +2827,7 @@
     <string name="step_by_step">Steg for steg</string>
     <string name="routeInfo_road_types_name">Veityper</string>
     <string name="exit_at">Gå av på</string>
-    <string name="sit_on_the_stop">Sitt på stoppet</string>
+    <string name="sit_on_the_stop">Stig på ved stoppested</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Knapp for å vise eller skjule valgte spor på kartet.</string>
     <string name="use_osm_live_public_transport_description">Skru på offentlig transport i OsmAnd Live-endringer.</string>
     <string name="use_osm_live_public_transport">Offentlig transport i OsmAnd Live</string>
@@ -3013,7 +3014,7 @@
     <string name="routing_attr_allow_skating_only_description">Ruter forberedt for fristil eller kun skøyting, uten klassiske spor.</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt for kun klassisk, uten skøytemuligheter. Dette inkluderer ruter forberedt av en mindre snøskuter med løsere løype og spor laget manuelt av skigåere.</string>
     <string name="routing_attr_difficulty_preference_description">Foretrekk ruter med denne vanskelighetsgraden, selv om ruting over hardere eller enklere løyper fremdeles er mulig hvis kortere.</string>
-    <string name="routing_attr_freeride_policy_description">Frikjøring og terrengkjøring er uoffisielle ruter og passasjer. Typisk upreparert, ikke vedlikeholdt av bakkepersonell, og ikke sjekket på kveldene. Kjør på egen risiko.</string>
+    <string name="routing_attr_freeride_policy_description">Frikjøring og terrengkjøring er uoffisielle ruter og passasjer. Typisk upreparert, ikke vedlikeholdt og ikke sjekket på kveldene. Kjør på egen risiko.</string>
     <string name="shared_string_min_speed">Minimumshastighet</string>
     <string name="shared_string_max_speed">Maksimumshastighet</string>
     <string name="default_speed_setting_title">Standardhastighet</string>
@@ -3115,7 +3116,7 @@
     <string name="app_mode_utv">Side om side</string>
     <string name="shared_string_calculate">Beregn</string>
     <string name="shared_string_osmand_usage">OsmAnd-bruk</string>
-    <string name="shared_sting_tiles">Fliser</string>
+    <string name="shared_string_tiles">Fliser</string>
     <string name="shared_string_maps">Kart</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3717,7 +3718,7 @@
     <string name="navigate_to_track_descr">Naviger fra min posisjon til sporet</string>
     <string name="use_native_pt">Innebygd utvikling for offentlig transport</string>
     <string name="use_native_pt_desc">Bytt til Java (sikker) ruteberegning for offentlig transport</string>
-    <string name="contour_lines_thanks">Takk for at du kjøpte «Koter»</string>
+    <string name="contour_lines_thanks">Takk for at du kjøpte \'Topografi\'</string>
     <string name="routing_attr_avoid_footways_name">Unngå gangveier</string>
     <string name="routing_attr_avoid_footways_description">Unngå gangveier</string>
     <string name="recalc_angle_dialog_descr">Ekstra rett segment mellom min posisjon og beregnet rute blir vist til ruten er beregnet på nytt</string>
@@ -3908,7 +3909,7 @@
     <string name="track_has_no_speed">Sporet inneholder ikke hastighetsdata.</string>
     <string name="select_another_colorization">Velg en annen type fargelegging.</string>
     <string name="shared_strings_all_regions">Alle regioner</string>
-    <string name="hillshade_slope_contour_lines">Relieffskygge/bakkehelning/koter</string>
+    <string name="hillshade_slope_contour_lines">Koter / Relieffskygge / Bakkehelning</string>
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_hiking_name">Turgåing</string>
     <string name="activity_type_running_name">Løping</string>
@@ -3932,7 +3933,7 @@
     <string name="route_line_use_gradient_coloring">Rutelinjen er farget i henhold til helningen.</string>
     <string name="recorded_description">Innspilt tale høres bedre ut, men kan kun uttale forhåndsinnspilte uttrykk: svinginstruksjoner. Kan ikke melde om gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
-    <string name="cloud_email_not_registered">Dennne e-postadressen er ikke registrert for OsmAnd Sky</string>
+    <string name="cloud_email_not_registered">Dennne e-postadressen er ikke registrert for OsmAnd-sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
     <string name="resend_verification_code">Send igjen</string>
     <string name="verification_code_missing">Jeg mottok ikke noen bekreftelseskode</string>
@@ -3940,7 +3941,7 @@
     <string name="download_server_version">Last ned tjenerversjon</string>
     <string name="shared_string_logout">Logg ut</string>
     <string name="backup_delete_all_data">Slett all min data</string>
-    <string name="backup_delete_all_data_warning">Du er i ferd med å slette all data tidligere opplastet til OsmAnd Sky, inkludert versjonshistorikk.
+    <string name="backup_delete_all_data_warning">Du er i ferd med å slette all data tidligere opplastet til OsmAnd-sky, inkludert versjonshistorikk.
 \n
 \nDu vil ikke kunne gjenopprette slettet data.</string>
     <string name="backup_danger_zone">Faresone</string>
@@ -4054,8 +4055,8 @@
     <string name="routing_attr_prefer_hiking_routes_description">Foretrekk vandreruter</string>
     <string name="routing_attr_prefer_hiking_routes_name">Foretrekk vandreruter</string>
     <string name="routing_attr_allow_streams_description">Tillat bekker og dreneringsgrøfter</string>
-    <string name="backup_delete_types_descr">Slett all data for foreldede datatyper fra OsmAnd Sky\?</string>
-    <string name="backup_error_size_is_exceeded">Maksimal størrelse for OsmAnd Sky oversteget %1$s</string>
+    <string name="backup_delete_types_descr">Slett all data for foreldede datatyper fra OsmAnd-sky\?</string>
+    <string name="backup_error_size_is_exceeded">Maks. størrelse for OsmAnd-sky har overskredet %1$s</string>
     <string name="release_4_0">• Skysikkerhetskopi
 \n • Nattmodus for «Topo»-opptegningsstil
 \n • Mulighet for nedlasting av konturlinjer i fot
@@ -4179,7 +4180,7 @@
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="activity_type_racing_name">Kappløp</string>
     <string name="exit_number">Avkjøringsnummer</string>
-    <string name="purchases_feature_desc_terrain">Terrengkoter, full relieffskyggekart med mørke skygger og helningskart med farger for å vise topper og lavland.</string>
+    <string name="purchases_feature_desc_terrain">Terrengkoter, gråskala relieffskygge og fargede helningskart, for å vise topper og lavland.</string>
     <string name="quick_action_coordinates_widget_descr">Glidebryter for å vise eler skjule koordinat-miniprogram på kartet.</string>
     <string name="activity_type_offroad_name">Terreng</string>
     <string name="routing_engine_vehicle_type_scooter">Scooter</string>
@@ -4191,7 +4192,7 @@
     <string name="gpx_upload_identifiable_visibility_descr">«Identifiserbart» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer. Altså vil andre kunne laste ned rå sporingsdata og tilknytte den til brukernavnet ditt. Sporingspunktsdata med offentlige tidsstempel fra GPS-API-et servert via sporingspunkts-API-et vil vise til din opprinnelige sporingsside.</string>
     <string name="trip_recording_logging_interval_info">Loggingsintervall setter tidsperioden mellom hver gang OsmAnd forespør nåværende posisjonsdata.</string>
     <string name="gpx_upload_public_visibility_descr">«Offentlig» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer, og i den offentlige spor-listen med tidsstempler i rå form. Data servert via API-et viser ikke til sporsiden din. Tidsstempler fra sporingspunkter er ikke tilgjengelig gjennom det offentlige GPS-API-et, og sporingspunkter sorteres ikke kronologisk.</string>
-    <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd Sky.</string>
+    <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd-sky.</string>
     <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
     <string name="open_place_reviews_plugin_description">Gi bidrag til prosjektet OpenPlaceReviews som bilder, omtaler eller lenker om offentlige steder som restauranter, hoteller eller museer.
 \n
@@ -4634,7 +4635,7 @@
     <string name="route_maneuvers">Rutemanøvrer</string>
     <string name="route_maneuvers_desc">Navigasjonsminiprogrammer vises under navigasjon for å vise info som f.eks. avstand, ankomst, eller avgangstid, neste sving, retning, nåværende gatenavn, filinfo, maks. hastighet, kommende varsler, interessepunkter, og veipunkter.</string>
     <string name="track_attach_to_the_roads_descr">Sporet vil festes til veiene ved bruk av frakoblede kart. Sporgeometrien vil bli endret.</string>
-    <string name="colour_of_circles">Sirkelfarger</string>
+    <string name="colour_of_circles">Farge på sirkler</string>
     <string name="distance_circles">Distansesirkler</string>
     <string name="circle_settings">Sirkelinnstillinger</string>
     <string name="bearing_desc">Viser absolutt eller relativ peiling til et mål i vinkelenheter (i modusen 180 grader, 360 grader eller milliradianer).</string>
@@ -4967,7 +4968,7 @@
 \nStøtt forbedringer ved å tilby din feillogg.</string>
     <string name="second_marker_widget_desc">Du kan sette opp miniprogrammet til å vise avstanden eller antatt tid til ankomst til sekundær kartmarkør.</string>
     <string name="auto_backup_preference_desc">Som forvalg lagrer Android sikkerhetskopier av favoritter, kartsymboler, og OsmAnd-innstillinger for å gjenopprette dem på nye enheter eller etter reinstallasjon. Sikkerhetskopi er begrenset til 25 MB.
-\nNår du bruker OsmAnd sky kan dette lede til misforståelser etter reinstallasjon.</string>
+\nNår du bruker OsmAnd-sky kan dette lede til misforståelser etter reinstallasjon.</string>
     <string name="time_to_intermediate_widget_desc">Viser «Ankomsttid» eller «Anslått tid til ankomst» til første mellomliggende punkt. Tid oppdateres hele tiden under navigasjon. Når mellomliggende punkter passeres oppdatere tiden til neste mellomliggende punkt.</string>
     <string name="choose_what_to_sync">Velg hva som skal synkroniseres</string>
     <string name="value_downloaded_of_mb">Laster ned %1$.1f/%2$.1f MB</string>
@@ -5175,7 +5176,7 @@
     <string name="external_sensors_source_of_data">Datakilde</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">o/min</string>
-    <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på høydekartdata. Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
+    <string name="calculate_offline_altitude_descr">Beregn høyde uten internett, basert på data fra terrengkart (3D). Forskjeller i forhold til enhetens registrerte høyde kan brukes som høydekorreksjon.</string>
     <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s) den inneholder.</string>
     <string name="rendering_value_sectors_name">Sektorer</string>
     <string name="shared_string_close_the_dialog">Lukk dialogen</string>
@@ -5194,11 +5195,11 @@
     <string name="delete_folder">Slett mappen</string>
     <string name="show_all_tracks_on_the_map">Vis alle sporene på kartet</string>
     <string name="relief_3d_description">Ei og observer skalamodellen av ditt nabolag eller hele kontinentet.</string>
-    <string name="terrain_map">Terrengkart</string>
+    <string name="terrain_map">Terrengkart (3D)</string>
     <string name="relief_3d">3D-relieff</string>
     <string name="slope_legend_description">Helning bruker farger for å visualisere terrengbratthet. Du kan lese mer om helning i %1$s.</string>
-    <string name="terrain_category_description">Terrengkoter, relieffskyggekart med mørke skygger og helningskart med farger for å vise topper og lavland.</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Bruk raster-sqlitedb for relieffskygge / bakkehelning</string>
+    <string name="terrain_category_description">Terrengkoter, gråskala relieffskygge og fargede helningskart, for å vise topper og lavland.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Bruk raster-SQLite DB for relieffskygge/bakkehelning</string>
     <string name="cache_size">Hurtiglagerstørrelse</string>
     <string name="shared_string_avoid">Unngå</string>
     <string name="poi_categories">Interessepunktkategorier</string>
@@ -5237,4 +5238,59 @@
     <string name="map_3d_mode_hint">Med langt trykk på knappen kan knappeposisjon endres.</string>
     <string name="shared_string_included">Inkludert</string>
     <string name="tracks_empty_folder_description">Denne mappen har ennå ingen spor.</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brennbare væsker</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brennbare faste stoffer</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oksidasjonsmidler og organiske peroksider</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige og smittsomme stoffer</string>
+    <string name="error_calculate">Beregningsresultatet er tomt</string>
+    <string name="write_data_from_sensor_to_track">Skriv data fra eksterne sensorer til GPX under turopptak.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Det er ingen tilkoblede sensorer av denne typen</string>
+    <string name="calculate_offline">Beregn uten internett</string>
+    <string name="free_settings_backup">Gratis sikkerhetskopiering av innstillinger</string>
+    <string name="rendering_attr_lightDetail_description">Forvalg: Sjømerkenavn (lystegn.gruppe.periode), velg ytterligere info om sektor 1 til 3, eller sektor 1, 2, 3, 4, 5-lystegn</string>
+    <string name="verify_account">Bekreft kontoen din</string>
+    <string name="verify_account_deletion_descr">Konto må bekreftes før du sletter den.
+\n
+\nSkriv inn e-postadressen du registrerte deg med. Et engangspassord for neste steg vil bli sendt til den.</string>
+    <string name="rendering_attr_lightDetail_name">Lysdetalj</string>
+    <string name="shared_string_checked">Sjekket</string>
+    <string name="shared_string_not_checked">Usjekket</string>
+    <string name="free_favorites_backup_description">Registrer deg for OsmAnd-sky og få gratis sikkerhetskopiering av favoritter og innstillinger.</string>
+    <string name="free_account">Gratiskonto</string>
+    <string name="shared_string_deleting">Sletter</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Dette vil ikke avbryte ditt OsmAnd Pro-abonnement.</string>
+    <string name="manage_subscriptions">Håndter abonnementer.</string>
+    <string name="backup_error_delete_account_email_match">E-postadressen samsvarer ikke med innloggingsbrukernavn</string>
+    <string name="device_connected">%1$s tilkoblet</string>
+    <string name="running_scds_device_name">Løpeenhet</string>
+    <string name="map_widget_rssi">RSSI</string>
+    <string name="external_device_blood_pressure">Blodtrykk</string>
+    <string name="osmand_cloud_deleted_account_descr">Konto og all data slettet fra OsmAnd-sky.</string>
+    <string name="routing_attr_allow_via_ferrata_description">En fjellrute som har fastmonterte kabler, trinn, stiger og broer.</string>
+    <string name="get_osmand_cloud">Skaff OsmAnd-sky</string>
+    <string name="local_indexes_category_terrain">Terrengkart (3D)</string>
+    <string name="bicycle_scd_device_name">Sykkelenhet</string>
+    <string name="hillshade_slope">Relieffskygge, helning</string>
+    <string name="osmand_cloud_deleting_account_descr">Om en stund vil all din data og din konto bli slettet fra OsmAnd-sky.
+\n
+\nAll data på enheten forblir urørt.</string>
+    <string name="free_favorites_backup">Gratis favoritt-sikkerhetskopiering</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundære enheter vil bli fralogget fra OsmAnd-sky og miste tilgangen til betalte funksjoner.</string>
+    <string name="osmand_cloud_deletion_account_warning">Kontoen din og alle kontodetaljer vil bli %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">All data fra OsmAnd-sky vil bli %1$s. Data på enheten forblir urørt.</string>
+    <string name="map_3d_mode_description">Berør kartet med to fingre og flytt dem opp- og nedover for å justere kartets helning.</string>
+    <string name="feature_available_as_part_of_plan">%1$s er tilgjengelig som del av %2$s-abonnementet</string>
+    <string name="routing_attr_allow_via_ferrata_name">Bergrute (klatresti)</string>
+    <string name="osmand_cloud_delete_account_confirmation">Slett konto\?</string>
+    <string name="action_cannot_be_undone">Dette kan ikke angres.</string>
+    <string name="device_disconnected">%1$s frakoblet</string>
+    <string name="no_bt_permission">Blåtannstilgang ikke innvilget</string>
+    <string name="beats_per_minute_short">slag per minutt</string>
+    <string name="may_be_used_if_there_is_shortcut">Kan brukes hvis det finnes en snarvei</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Vil du slette din OsmAnd-sky for godt\?</string>
+    <string name="rendering_value_small_name">Liten</string>
+    <string name="rssi_widget_desc">Viser RSSI-nivå for din eksterne enhet.</string>
+    <string name="free_ride">Gratis tur</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>

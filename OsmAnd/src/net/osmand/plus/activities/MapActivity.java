@@ -253,6 +253,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	};
 	private MapActivityKeyListener mapActivityKeyListener;
+	private RouteCalculationProgressListener routeCalculationProgressCallback;
+	private TransportRouteCalculationProgressCallback transportRouteCalculationProgressCallback;
+	private LoadSimulatedLocationsListener simulatedLocationsListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -456,11 +459,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void createProgressBarForRouting() {
-		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
-		RouteCalculationProgressListener progressCallback = new RouteCalculationProgressListener() {
+		routeCalculationProgressCallback = new RouteCalculationProgressListener() {
 
 			@Override
 			public void onCalculationStart() {
+				ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 				setupRouteCalculationProgressBar(progressBar);
 				mapRouteInfoMenu.routeCalculationStarted();
 				RoutingHelper routingHelper = getRoutingHelper();
@@ -524,6 +527,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void onCalculationFinish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
+				ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 				AndroidUiHelper.updateVisibility(progressBar, false);
 
 				// for voice navigation. (routingAppMode may have changed.)
@@ -534,28 +538,31 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		};
 
-		app.getRoutingHelper().addCalculationProgressListener(progressCallback);
+		app.getRoutingHelper().addCalculationProgressListener(routeCalculationProgressCallback);
 
-		app.getTransportRoutingHelper().setProgressBar(new TransportRouteCalculationProgressCallback() {
+		transportRouteCalculationProgressCallback = new TransportRouteCalculationProgressCallback() {
 			@Override
 			public void start() {
-				progressCallback.onCalculationStart();
+				routeCalculationProgressCallback.onCalculationStart();
 			}
 
 			@Override
 			public void updateProgress(int progress) {
-				progressCallback.onUpdateCalculationProgress(progress);
+				routeCalculationProgressCallback.onUpdateCalculationProgress(progress);
 			}
 
 			@Override
 			public void finish() {
-				progressCallback.onCalculationFinish();
+				routeCalculationProgressCallback.onCalculationFinish();
 			}
-		});
-		app.getLocationProvider().getLocationSimulation().addListener(new LoadSimulatedLocationsListener() {
+		};
+		app.getTransportRoutingHelper().setProgressBar(transportRouteCalculationProgressCallback);
+
+		simulatedLocationsListener = new LoadSimulatedLocationsListener() {
 			@Override
 			public void onLocationsStartedLoading() {
 				if (!isRouteBeingCalculated()) {
+					ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 					AndroidUiHelper.updateVisibility(progressBar, true);
 				}
 			}
@@ -570,10 +577,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void onLocationsLoaded(@Nullable List<SimulatedLocation> locations) {
 				if (!isRouteBeingCalculated()) {
+					ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 					AndroidUiHelper.updateVisibility(progressBar, false);
 				}
 			}
-		});
+		};
+		app.getLocationProvider().getLocationSimulation().addListener(simulatedLocationsListener);
+	}
+
+	private void destroyProgressBarForRouting() {
+		app.getLocationProvider().getLocationSimulation().removeListener(simulatedLocationsListener);
+		simulatedLocationsListener = null;
+		app.getTransportRoutingHelper().setProgressBar(null);
+		transportRouteCalculationProgressCallback = null;
+		app.getRoutingHelper().removeCalculationProgressListener(routeCalculationProgressCallback);
+		routeCalculationProgressCallback = null;
 	}
 
 	private void updateProgress(int progress) {
@@ -1210,6 +1228,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		destroyProgressBarForRouting();
 		getMapLayers().setMapActivity(null);
 		getMapView().setMapActivity(null);
 		mapContextMenu.setMapActivity(null);

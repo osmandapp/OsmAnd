@@ -3188,7 +3188,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Веза</string>
     <string name="shared_string_calculate">Израчунај</string>
     <string name="shared_string_osmand_usage">Коришћење ОсмАнда</string>
-    <string name="shared_sting_tiles">Сличице</string>
+    <string name="shared_string_tiles">Сличице</string>
     <string name="shared_string_maps">Карте</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -5221,4 +5221,6 @@
     <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
     <string name="revolutions_per_minute_unit">Обртаја у минути</string>
     <string name="calculate_offline">Израчунај ван мреже</string>
+    <string name="local_indexes_category_terrain">Карте тла (Просторне, 3Д)</string>
+    <string name="shared_string_included">обухваћено</string>
 </resources>

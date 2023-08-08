@@ -643,7 +643,9 @@
     <string name="plugins_screen">Plugins beheren</string>
     <string name="prefs_plugins_descr">Schakel plugins in voor speciale functies en extra instellingen.</string>
     <string name="prefs_plugins">Plugin-manager</string>
-    <string name="osm_editing_plugin_description">Draag actief bij aan OSM, bijvoorbeeld door het aanmaken of wijzigen van OSM-POI-objecten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden die met OsmAnd zijn opgenomen door je gebruikersnaam en wachtwoord in te voeren. OpenStreetMap.org is een gemeenschappelijk public domain project om de wereld in kaart te brengen.</string>
+    <string name="osm_editing_plugin_description">Draag actief bij aan OpenStreetMap, bijvoorbeeld door het aanmaken of wijzigen van OSM-POI-objecten, aanmaken of becommentariëren van OSM-opmerkingen, en door GPX-tracks te uploaden die met OsmAnd zijn opgenomen door je gebruikersnaam en wachtwoord in te voeren. OpenStreetMap.org is een gemeenschappelijk public domain project om de wereld in kaart te brengen.
+\n
+\nVoor meer instructies voor het bewerken van de kaart op onze website %1$s.</string>
     <string name="north_north_west">noord-noordwest</string>
     <string name="search_position_current_location_search">Positie zoeken…</string>
     <string name="search_position_current_location_found">Huidige Positie (gevonden)</string>
@@ -838,9 +840,11 @@
     <string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9).</string>
     <string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
-    <string name="srtm_plugin_description">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap. 
+    <string name="srtm_plugin_description">Deze plug-in toont hoogtelijnen en een reliëfschaduwlaag bovenop de normale OsmAnd-kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.
 \n
-\nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM(Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
+\nDe wereldwijde gegevens (van 70° noorderbreedte tot 70° zuiderbreedte) zijn gebaseerd op metingen door SRTM(Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de Terra-satelliet, het vlaggenschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).
+\n
+\nLees verder op %1$s.</string>
     <string name="srtm_plugin_name">Hoogtelijnen</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
@@ -1234,9 +1238,9 @@
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">Registreer je afgelegde weg als track in een GPX-bestand. Gebruik de opnameknop op het kaartscherm, of laat alle reizen automatisch opslaan.
+    <string name="record_plugin_description">Neem je reizen of trainingen in GPX formaat en analyseer de gegevens zoals snelheid, opgebouwde beklimmingen en afdalingen, hoogteprofiel, etc. Opgenomen tracks kunnen worden gearchiveerd, gedeeld met vrienden, bewerkt en verwerkt worden in andere programma\'s.
 \n
-\nOpgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-bijdragen. Atleten kunnen opgenomen tracks gebruiken om hun trainingen te volgen. OsmAnd kan tracks analyseren (ronde tijden, gemiddelde snelheid enz.) en tracks kunnen natuurlijk ook met andere programma\'s worden geanalyseerd.</string>
+\nLees verder op %1$s.</string>
     <string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met de GPX opname widget op het kaartscherm.</string>
     <string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus- en pendeltaxilijnen</string>
@@ -1365,7 +1369,9 @@
 \n
 \nDeze plug-in biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.
 \n
-\nOm weer de gewone kaart te zien kun je de plug-in uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen.</string>
+\nOm weer de gewone kaart te zien kun je de plug-in uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen.
+\n
+\nLees verder op %1$s.</string>
     <string name="plugin_ski_name">Ski kaartweergave</string>
     <string name="plugin_ski_descr">Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap. 
 \n
@@ -3196,7 +3202,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Lift</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Verbinding</string>
     <string name="shared_string_osmand_usage">OsmAnd gebruik</string>
-    <string name="shared_sting_tiles">Tegels</string>
+    <string name="shared_string_tiles">Tegels</string>
     <string name="track_storage_directory">Opslagfolder tracks</string>
     <string name="track_storage_directory_descrp">Tracks kunnen opgeslagen worden in de \'rec\' folder, of in maandelijkse of dagelijkse folders.</string>
     <string name="store_tracks_in_rec_directory">Sla tracks op in de \'rec\' folder</string>
@@ -5170,7 +5176,7 @@
     <string name="device_connected">%1$s is verbonden</string>
     <string name="show_all_tracks_on_the_map">Alle tracks op de kaart tonen</string>
     <string name="rssi_widget_desc">Toont het RSSI-niveau van je externe apparaat.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder">Lege map</string>
     <string name="shared_string_new_track">Nieuwe track</string>
     <string name="map_3d_mode_hint">Door de knop lang ingedrukt te houden, kan de positie van de knop gewijzigd worden.</string>
@@ -5182,4 +5188,70 @@
     <string name="delete_folder">Map verwijderen</string>
     <string name="tracks_empty_folder_description">Deze map heeft nog geen tracks.</string>
     <string name="visible_in_3d_mode">Zichtbaar in 3D mode</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Explosieven</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gassen</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radioactieve stoffen</string>
+    <string name="shared_string_class">Klasse</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Bijtende stoffen</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Diverse gevaarlijke stoffen en voorwerpen</string>
+    <string name="dangerous_goods_description">Op sommige wegen en tunnels is het verboden om gevaarlijke stoffen te vervoeren.</string>
+    <string name="shared_string_checked">Gecontroleerd</string>
+    <string name="shared_string_not_checked">Niet gecontroleerd</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Brandbare vloeistoffen</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Brandbare vaste stoffen</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oxiderende stoffen en organische peroxiden</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Giftige en infectueuze stoffen</string>
+    <string name="dangerous_goods">Gevaarlijke goederen</string>
+    <string name="free_ride">Gratis rit</string>
+    <string name="write_bearing_description">Peiling opslaan voor elk spoor tijdens het opnemen</string>
+    <string name="write_bearing">Schrijf peiling (richting)</string>
+    <string name="rendering_attr_alpineHiking_name">Moeilijkheidsgraad classificatie</string>
+    <string name="shared_string_included">Inclusief</string>
+    <string name="feature_available_as_part_of_plan">%1$s beschikbaar als onderdeel van het %2$s abonnement</string>
+    <string name="free_settings_backup">Gratis instellingen back-up</string>
+    <string name="free_favorites_backup">Gratis favorieten back-up</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Weet je zeker dat je jouw OsmAnd Cloud account wilt verwijderen\?
+\n
+\nDeze actie kan niet ongedaan worden gemaakt.</string>
+    <string name="osmand_cloud_deletion_account_warning">Je account en alle accountgegevens worden %1$s</string>
+    <string name="calculate_offline">Offline berekenen</string>
+    <string name="error_calculate">Het berekeningsresultaat is leeg</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Alle gegevens van OsmAnd Cloud worden %1$s. De gegevens op het apparaat blijven ongewijzigd.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Hierdoor wordt je OsmAnd Pro abonnement niet stopgezet.</string>
+    <string name="shared_string_deleting">Verwijderen</string>
+    <string name="deleting_complete">Verwijderen voltooid</string>
+    <string name="relief_3d_description">Bekijk het schaalmodel van je buurt of het hele continent.</string>
+    <string name="routing_attr_allow_via_ferrata_description">Een bergroute met vaste kabels, stempels, ladders en bruggen.</string>
+    <string name="shared_string_close_the_dialog">Dialoog sluiten</string>
+    <string name="delete_account">Account verwijderen</string>
+    <string name="backup_error_delete_account_email_match">E-mail komt niet overeen met de gebruikersnaam</string>
+    <string name="verify_account_deletion_descr">We moeten je account verifiëren voordat we het verwijderen.
+\n
+\nVoer het e-mailadres in waarmee u bent geregistreerd. Er zal een eenmalig wachtwoord voor de volgende stap naar worden verzonden.</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Gebruik raster sqltieddb voor helling / heuvelkam</string>
+    <string name="shared_string_avoid">Vermijd</string>
+    <string name="free_favorites_backup_description">Registreer voor OsmAnd Cloud om een gratis back-up te maken van favorieten en instellingen.</string>
+    <string name="get_osmand_cloud">Neem OsmAnd Cloud</string>
+    <string name="free_account">Gratis account</string>
+    <string name="folder_export_empty_error">Niets om te exporteren, de map is leeg</string>
+    <string name="osmand_cloud_deleted_account_descr">Account en alle gegevens zijn verwijderd uit OsmAnd Cloud.</string>
+    <string name="osmand_cloud_deleting_account_descr">Binnen enkele ogenblikken worden al je gegevens en je account verwijderd uit OsmAnd Cloud.
+\n
+\nAlle gegevens op het apparaat blijven ongewijzigd.</string>
+    <string name="action_cannot_be_undone">Deze actie kan niet ongedaan worden gemaakt.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Account verwijderen\?</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Secundaire apparaten worden afgemeld bij OsmAnd Cloud en verliezen toegang tot betaalde functies.</string>
+    <string name="manage_subscriptions">Beheer abonnementen.</string>
+    <string name="delete_account_warning">Weet je zeker dat je %1$s account wilt verwijderen\?</string>
+    <string name="verify_account">Je account verifiëren</string>
+    <string name="slope_legend_description">De hellingshoek visualiseert de steilheid van het terrein met kleuren. Je kunt meer lezen over hellingen in %1$s.</string>
+    <string name="calculate_offline_altitude_descr">Bereken de hoogte offline, gebaseerd op gegevens van de terreinkaart (3D). Verschillen ten opzichte van de door het apparaat geregistreerde hoogte kunnen worden gebruikt als hoogtecorrectie.</string>
+    <string name="write_data_from_sensor_to_track">Schrijf de gegevens van externe sensoren naar de GPX tijdens de ritregistratie.</string>
+    <string name="save_track_external_sensors_data">Gegevens</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Er zijn geen aangesloten sensoren van dit type</string>
+    <string name="external_sensors_not_found">Geen sensoren gevonden</string>
+    <string name="external_sensors_source_of_data">Gegevensbron</string>
+    <string name="rendering_value_sacScale_name">SAC schaal</string>
+    <string name="rendering_value_caiScale_name">CAI schaal</string>
 </resources>

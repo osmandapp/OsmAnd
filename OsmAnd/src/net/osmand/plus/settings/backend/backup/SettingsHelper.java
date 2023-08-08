@@ -491,7 +491,7 @@ public abstract class SettingsHelper {
 						result.add(new FileSettingsItem(app, file));
 					}
 				} catch (IllegalArgumentException e) {
-					LOG.warn("Trying to export unsuported file type", e);
+					LOG.warn("Trying to export unsupported file type", e);
 				}
 			} else if (object instanceof FileSettingsItem) {
 				result.add((FileSettingsItem) object);

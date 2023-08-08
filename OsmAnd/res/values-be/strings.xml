@@ -3216,7 +3216,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Злучэнне</string>
     <string name="shared_string_calculate">Разлічыць</string>
     <string name="shared_string_osmand_usage">Выкарыстанне OsmAnd</string>
-    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_tiles">Тайлы</string>
     <string name="shared_string_maps">Мапы</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
     <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
@@ -4895,7 +4895,7 @@
     <string name="delete_folder">Выдаліць папку</string>
     <string name="show_all_tracks_on_the_map">Паказаць усе сляды на карце</string>
     <string name="rssi_widget_desc">Паказвае ўзровень магутнасці сігналу (RSSI) на вашай знешняй прыладзе.</string>
-    <string name="map_widget_rssi">Узровень магутнасці сігналу (Rssi)</string>
+    <string name="map_widget_rssi">Узровень магутнасці сігналу (RSSI)</string>
     <string name="external_device_characteristic_arterial_pressure">Артэрыяльны ціск</string>
     <string name="camera_app">Праграма камеры</string>
     <string name="map_2d_mode_action">Двухмерны рэжым</string>

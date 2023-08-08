@@ -44,7 +44,7 @@ public class NativeCoreContext {
 	}
 
 	public static void init(@NonNull OsmandApplication app) {
-		if (!init && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
+		if (!init && Version.isOpenGlAvailable(app)) {
 			if (!NativeCore.isLoaded()) {
 				CoreResourcesFromAndroidAssets assets = CoreResourcesFromAndroidAssets.loadFromCurrentApplication(app);
 				File fontDir = app.getAppPath(IndexConstants.FONT_INDEX_DIR);

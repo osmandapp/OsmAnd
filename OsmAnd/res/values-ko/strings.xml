@@ -1802,7 +1802,7 @@
     <string name="hidden_items_descr">이러한 항목은 메뉴에 숨겨져 있지만, 표시된 옵션이나 플러그인은 계속 작동한다.</string>
     <string name="monitoring_min_distance_descr_recommendation">권장 사항: 세부 정보를 캡처할 필요가 없고, 유휴 상태에서 명시적으로 데이터를 캡처하지 않으려는 경우 5m의 설정이 유용할 수 있다.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">노드 네트워크</string>
-    <string name="shared_sting_tiles">타일</string>
+    <string name="shared_string_tiles">타일</string>
     <string name="shared_string_maps">지도</string>
     <string name="configure_profile">프로파일 구성</string>
     <string name="configure_profile_info">프로필 설정:</string>

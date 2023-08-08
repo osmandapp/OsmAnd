@@ -286,7 +286,7 @@ public class LocationParser {
 				if (o.equals("°")) {
 					type = 0;
 				} else if (o.equals("′") /*o.equals("'")*/) {
-					// ' can be used as delimeter ignore it
+					// ' can be used as delimiter ignore it
 					type = 1;
 				} else if (o.equals("\"") || o.equals("″")) {
 					type = 2;

@@ -2375,7 +2375,7 @@
     <string name="hillshade_menu_download_descr">Laden Sie die Reliefkarte herunter, um vertikale Schattierungen anzuzeigen.</string>
     <string name="shared_string_plugin">Erweiterung</string>
     <string name="srtm_purchase_header">Kaufen und installieren Sie die Erweiterung \'Topographie\', um abgestufte vertikale Flächen anzuzeigen.</string>
-    <string name="srtm_menu_download_descr">Laden Sie die Höhenlinienkarte zu dieser Region herunter.</string>
+    <string name="srtm_menu_download_descr">Höhenlinienkarte für diese Region herunterladen.</string>
     <string name="hillshade_purchase_header">Installieren Sie die Erweiterung \'Topographie\', um abgestufte vertikale Flächen anzuzeigen.</string>
     <string name="private_access_routing_req">Ihr Ziel liegt in einem Gebiet mit Privatzugang. Betreten von Privatwegen für diese Reise zulassen?</string>
     <string name="restart_search">Suche wiederholen</string>
@@ -3208,7 +3208,7 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
-    <string name="shared_sting_tiles">Kacheln</string>
+    <string name="shared_string_tiles">Kacheln</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB frei (von %2$s GB)</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB verwendet</string>
@@ -4183,14 +4183,13 @@
     <string name="complete_purchase">Vollständiger Kauf</string>
     <string name="regular_price">Normaler Preis</string>
     <string name="purchases_feature_desc_nautical">Zugang zu Informationen über Wassertiefen erhalten</string>
-    <string name="purchases_feature_desc_terrain">Höhenlinien, Reliefkarten mit dunklen Schattierungen und Hangneigungskarten mit Farben zur Darstellung von Erhebungen und Niederungen.</string>
+    <string name="purchases_feature_desc_terrain">Höhenlinien, graustufiges Relief und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="purchases_feature_desc_wikipedia">Stellt alle ortsbezogenen Wikipedia-Artikel offline bereit und hilft Ihnen, mehr über die Orte zu erfahren, die Sie auf Ihrer Reise besuchen, indem Sie einfach auf die Karte tippen. Vergessen Sie nicht, die Wikipedia-Kartendateien für die jeweiligen Regionen herunterzuladen.</string>
     <string name="purchases_feature_desc_combined_wiki">Erkunden Sie Wikipedia Artikel auch unterwegs, ohne Internetverbindung. Offline-Daten sind nach Ländern aufgeteilt und in allen Sprachen verfügbar.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Erhalten Sie unbegrenzte Downloads für Offline-Karten aller Kontinente und Regionen.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Erhalten Sie Zugang zu den regulären monatlichen Updates für Offline-Karten.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Erhalten Sie Zugang zu häufigeren Kartenaktualisierungen. Wählen Sie zwischen stündlichen, täglichen oder wöchentlichen Aktualisierungen. Updates erfolgen inkrementell, nur der geänderte Bereich wird heruntergeladen.</string>
     <string name="purchases_feature_desc_osmand_cloud">Holen Sie sich OsmAnd Cloud, um alle OsmAnd-Daten online zu speichern. Kein Datenverlust mehr nach einer Neuinstallation, alle Informationen problemlos sichern und wiederherstellen.</string>
-    <!-- string name="terrain_maps_contour_lines_hillshade_slope">Topographische Karten: Höhenlinien, Relief, Hangneigung</string -->
     <string name="you_can_get_feature_as_part_of_pattern">Erhalten Sie „%1$s“ als Teil des Tarifs %2$s. Vergleich:</string>
     <string name="not_available_with">Nicht verfügbar mit %1$s</string>
     <string name="redeem_promo_code">Aktionscode einlösen</string>
@@ -4238,6 +4237,7 @@
     <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikivoyage offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
     <string name="backup_error_subscription_was_expired_descr">Ihr OsmAnd Pro-Abonnement ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
     <string name="contour_lines_hillshade_slope">Höhenlinien, Relief, Hangneigung</string>
+    <string name="hillshade_slope">Relief, Hangneigung</string>
     <string name="logout_from_osmand_cloud">Abmelden aus der OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Abmelden\?
 \nZum Sichern oder Wiederherstellen von Daten müssen Sie sich erneut anmelden.</string>
@@ -5233,7 +5233,7 @@
     <string name="external_sensors_not_found">Sensoren nicht gefunden</string>
     <string name="calculate_offline">Offline berechnen</string>
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
-    <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
+    <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf (3D) Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">U/min</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
@@ -5267,7 +5267,7 @@
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Relief-Schattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
     <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
-    <string name="free_favorites_backup">Kostenloses Favoriten-Backup</string>
+    <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
     <string name="routing_attr_allow_via_ferrata_description">Eine Bergroute, die mit Fixseilen, Stemmeisen, Leitern und Brücken ausgestattet ist.</string>
@@ -5349,4 +5349,13 @@
     <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
     <string name="feature_available_as_part_of_plan">%1$s verfügbar als Teil des %2$s-Plans</string>
     <string name="shared_string_included">Inbegriffen</string>
+    <string name="local_indexes_category_terrain">Geländekarten (3D)</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="map_widget_group_glide_desc">Widgets zur Anzeige der Gleitzahl zum Ziel oder mittlere Gleitzahl der aktuellen Reise.</string>
+    <string name="map_widget_glide_average_desc">Zeigt die mittlere Gleitzahl für das eingestellte Interval.</string>
+    <string name="glide_ratio_to_target">Gleitzahl zum Zielpunkt</string>
+    <string name="map_widget_group_glide_ratio">Gleitzahl</string>
+    <string name="map_widget_glide_target_desc">Zeigt die erforderliche Gleitzahl zum Erreichen des Zielpunkts.</string>
+    <string name="average_glide_time_interval_desc">Zeitintervall eingeben um mittlere Gleitzahl zu ermitteln.</string>
+    <string name="average_glide_ratio">Mittlere Gleitzahl</string>
 </resources>

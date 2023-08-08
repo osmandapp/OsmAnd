@@ -174,7 +174,7 @@ public class RendererRegistry {
 			loadedRenderers.put(name, main);
 			try {
 				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
-					// reload every time to propogate rendering constants
+					// reload every time to propagate rendering constants
 					if (loadedRenderers.containsKey(nm)) {
 						log.warn("Possible Circular dependencies found " + nm);
 					}

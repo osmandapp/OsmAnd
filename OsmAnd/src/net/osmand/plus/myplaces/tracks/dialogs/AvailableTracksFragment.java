@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AvailableTracksFragment extends BaseTrackFolderFragment implements SelectionHelperProvider<TrackItem> {
+public class AvailableTracksFragment extends BaseTrackFolderFragment {
 
 	public static final String TAG = TrackItemsFragment.class.getSimpleName();
 

@@ -3159,7 +3159,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_piste_difficulty_connection_name">リフト間接続</string>
     <string name="shared_string_calculate">計算する</string>
     <string name="shared_string_osmand_usage">OsmAndの合計使用容量</string>
-    <string name="shared_sting_tiles">タイル</string>
+    <string name="shared_string_tiles">タイル</string>
     <string name="shared_string_maps">マップ</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

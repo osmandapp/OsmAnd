@@ -2,6 +2,7 @@ package net.osmand.plus.plugins.externalsensors;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ANT_PLUS;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.NAME;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_CADENCE;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_DISTANCE;
 import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
@@ -15,6 +16,7 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.github.mikephil.charting.charts.LineChart;
 
@@ -33,6 +35,7 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
@@ -359,16 +362,16 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		devicesHelper.disconnectDevice(device);
 	}
 
-	@Nullable
+	@NonNull
 	public String getDeviceName(@NonNull AbstractDevice<?> device) {
-		String sensorName = devicesHelper.getDeviceName(device);
-		return sensorName != null ? sensorName : device.getName();
+		String sensorName = devicesHelper.getDeviceProperty(device, NAME);
+		return !Algorithms.isEmpty(sensorName) ? sensorName : device.getName();
 	}
 
 	public void changeDeviceName(@NonNull String deviceId, @NonNull String newName) {
 		AbstractDevice<?> device = getDevice(deviceId);
 		if (device != null) {
-			devicesHelper.setDeviceName(device, newName);
+			devicesHelper.setDeviceProperty(device, DeviceChangeableProperties.NAME, newName);
 		}
 	}
 
@@ -407,5 +410,18 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	@Override
 	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 		SensorAttributesUtils.getAvailableGPXDataSetTypes(analysis, availableTypes);
+	}
+
+	public void setDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperties property, @NonNull String value) {
+		devicesHelper.setDeviceProperty(device, property, value);
+	}
+
+	public String getDeviceProperty(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperties property) {
+		return devicesHelper.getDeviceProperty(device, property);
+	}
+
+	@StringRes
+	public int getPropertyMetric(@NonNull DeviceChangeableProperties property, boolean shortForm) {
+		return devicesHelper.getPropertyMetric(property, shortForm);
 	}
 }

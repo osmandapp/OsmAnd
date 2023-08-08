@@ -3184,7 +3184,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
     <string name="shared_string_calculate">Calcular</string>
     <string name="shared_string_osmand_usage">Uso do OsmAnd</string>
-    <string name="shared_sting_tiles">Quadrículas</string>
+    <string name="shared_string_tiles">Quadrículas</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -5211,7 +5211,7 @@
     <string name="there_are_no_connected_sensors_of_this_type">Não há sensores conectados deste tipo</string>
     <string name="external_sensors_source_of_data">Fonte de dados</string>
     <string name="delete_track_folder_dialog_message">Isto eliminará a pasta \"%1$s\" e todas as trilhas (%2$s) incluídas.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="is_imported">%1$s é importado.</string>
     <string name="external_device_forget_sensor">Esquecer o sensor</string>
     <string name="revolutions_per_minute_unit">RPM</string>

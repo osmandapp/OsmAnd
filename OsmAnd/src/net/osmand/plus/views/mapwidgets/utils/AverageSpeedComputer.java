@@ -1,19 +1,18 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views.mapwidgets.utils;
 
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.SimulationProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkerSideWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
@@ -21,63 +20,27 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-public class AverageSpeedComputer {
+public class AverageSpeedComputer extends AbstractComputer {
 
-	private static final long ADD_POINT_INTERVAL_MILLIS = 1000;
 	private static final boolean CALCULATE_UNIFORM_SPEED = true;
 
-	public static final List<Long> MEASURED_INTERVALS;
-	public static final long DEFAULT_INTERVAL_MILLIS = 30 * 60 * 1000L;
-
-	static {
-		List<Long> modifiableIntervals = new ArrayList<>();
-		modifiableIntervals.add(15 * 1000L);
-		modifiableIntervals.add(30 * 1000L);
-		modifiableIntervals.add(45 * 1000L);
-		for (int i = 1; i <= 60; i++) {
-			modifiableIntervals.add(i * 60 * 1000L);
-		}
-		MEASURED_INTERVALS = Collections.unmodifiableList(modifiableIntervals);
-	}
-
-	private static final long BIGGEST_MEASURED_INTERVAL = MEASURED_INTERVALS.get(MEASURED_INTERVALS.size() - 1);
-
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-
 	private final SegmentsList segmentsList;
-	private final List<Location> locations = new LinkedList<>();
 
 	private Location previousLocation;
 	private long previousTime;
 
 	public AverageSpeedComputer(@NonNull OsmandApplication app) {
-		this.app = app;
-		this.settings = app.getSettings();
+		super(app);
 		this.segmentsList = new SegmentsList();
 	}
 
-	public void updateLocation(@Nullable Location location) {
-		if (location != null) {
-			long time = System.currentTimeMillis();
-			boolean save = isEnabled() && SimulationProvider.isNotSimulatedLocation(location);
-			if (save) {
-				saveLocation(location, time);
-			}
-		}
-	}
-
-	private boolean isEnabled() {
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
+	protected boolean isEnabled() {
 		ApplicationMode appMode = settings.getApplicationMode();
-		List<MapWidgetInfo> widgetInfos = widgetRegistry.getAllWidgets();
+		MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 
-		for (MapWidgetInfo widgetInfo : widgetInfos) {
+		for (MapWidgetInfo widgetInfo : registry.getAllWidgets()) {
 			MapWidget widget = widgetInfo.widget;
 			boolean usesAverageSpeed = widget instanceof AverageSpeedWidget || widget instanceof MapMarkerSideWidget;
 			if (usesAverageSpeed
@@ -86,11 +49,10 @@ public class AverageSpeedComputer {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
-	private void saveLocation(@NonNull Location location, long time) {
+	protected void saveLocation(@NonNull Location location, long time) {
 		if (CALCULATE_UNIFORM_SPEED) {
 			if (location.hasSpeed()) {
 				Location loc = new Location(location);
@@ -105,18 +67,6 @@ public class AverageSpeedComputer {
 			}
 			previousLocation = location;
 			previousTime = time;
-		}
-	}
-
-	private void clearExpiredLocations(@NonNull List<Location> locations, long measuredInterval) {
-		long expirationTime = System.currentTimeMillis() - measuredInterval;
-		for (Iterator<Location> iterator = locations.iterator(); iterator.hasNext(); ) {
-			Location location = iterator.next();
-			if (location.getTime() < expirationTime) {
-				iterator.remove();
-			} else {
-				break;
-			}
 		}
 	}
 

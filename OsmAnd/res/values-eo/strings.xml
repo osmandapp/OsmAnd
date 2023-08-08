@@ -640,10 +640,10 @@
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklaj kursoj</string>
-    <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn malkonekte</string>
-    <string name="srtm_plugin_name">Nivelkurboj</string>
-    <string name="srtm_plugin_description">Informoj pri tereno – kiel nivelkurboj, nivelombrumo kaj dekliveco – helpas al vi perokule taksi formon de la tereno, ĝian navigeblecon kaj pli. Topografiaj informoj povas esti reprezentataj sur la mapo per vidigi nivelkurbojn (nivelliniojn), ombrumi malebenaĵojn (reliefo) aŭ per vidigi angulon de dekliveco uzante kolorojn.
+    <string name="srtm_paid_version_title">Topografio (kromprogramo)</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo: malkonekte vidigi topografion de tereno</string>
+    <string name="srtm_plugin_name">Topografio</string>
+    <string name="srtm_plugin_description">Informoj pri tereno – kiel nivelkurboj, nivelombrumo kaj dekliveco – helpas al vi perokule taksi formon de la tereno, ĝian navigeblecon kaj pli. Topografiaj informoj povas esti reprezentataj sur la mapo per vidigi nivelkurbojn (egal-nivel-linioj), ombrumi malebenaĵojn (reliefo) aŭ per vidigi angulon de dekliveco uzante kolorojn.
 \n
 \nDatumoj devenas de la projektoj SRTM kaj ASTER.
 \n
@@ -951,7 +951,7 @@
     <string name="dropbox_plugin_description">Samtempigi kursojn kaj sonajn/videajn notojn kun via konto ĉe Dropbox.</string>
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
-    <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon “nivelkurboj” en la vendejo por subteni ĝian pluan evoluigon.</string>
+    <string name="srtm_paid_version_msg">Konsideru aĉeti la kromprogramon “Topografio” por subteni ĝian pluan evoluigon.</string>
     <string name="av_def_action_video">Registri videon</string>
     <string name="av_def_action_audio">Registri sonon</string>
     <string name="av_widget_action_descr">Implicita ago de fenestraĵo:</string>
@@ -1055,27 +1055,27 @@
     <string name="interrupt_music_descr">Voĉaj anoncoj paǔzigas ludadon de muziko.</string>
     <string name="osmand_short_description_80_chars">Tuttera mapfoliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
     <string name="osmand_plus_short_description_80_chars">Tuttera mapfoliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direkte al la celo) 
-\n 
-\nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno. 
-\n 
-\nĈefaj eblaĵoj: 
-\n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo) 
-\n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
-\n– elŝuti landajn aŭ regionajn mapojn senpere en la aplikaĵo 
-\n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
-\n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
-\n– difini kursojn por mezaj distancoj eksterrete 
-\n– aŭta, bicikla, kaj piediranta reĝimoj kun: 
-\n – agordeblaj aŭtomata/taga/nokta aspektoj 
-\n – agordebla rapid‑dependa map‑skalado 
-\n – agordebla map‑turniĝo laŭ direkto de movado aŭ kompaso 
-\n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj 
-\n 
-\nLimigoj en tiu ĉi senpaga versio de OsmAnd: 
-\n– limigita nombro da elŝutoj de mapoj 
-\n– sen aliro al eksterretaj vikipediaj interesejoj 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direkte al la celo)
+\n
+\nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno.
+\n
+\nĈefaj eblaĵoj:
+\n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata konservejo)
+\n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
+\n– elŝuti landajn aŭ regionajn mapojn senpere en la aplikaĵo
+\n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco, topografio (nivelkurboj/nivelombrumo/dekliveco)
+\n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn)
+\n– difini kursojn por mezaj distancoj eksterrete
+\n– aŭta, bicikla, kaj piediranta reĝimoj kun:
+\n – agordeblaj aŭtomata/taga/nokta aspektoj
+\n – agordebla rapid‑dependa map‑skalado
+\n – agordebla map‑turniĝo laŭ direkto de movado aŭ kompaso
+\n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj
+\n
+\nLimigoj en tiu ĉi senpaga versio de OsmAnd:
+\n– limigita nombro da elŝutoj de mapoj
+\n– sen aliro al eksterretaj vikipediaj interesejoj
+\n
 \nOsmAnd estas konstante evoluigata kaj ĝia plua evoluigo dependas de monaj donacoj por subteni programadon kaj testadon de novaj ebloj. Bonvolu konsideri aĉeti OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto ĉe https://osmand.net.</string>
     <string name="day_night_info_description">Sunleviĝo: %1$s\nSunsubiro: %2$s</string>
     <string name="day_night_info">Informo pri tago/nokto</string>
@@ -1879,7 +1879,7 @@
     <string name="show_free_version_banner">Montri reklamaĵon de senpaga versio</string>
     <string name="show_free_version_banner_description">Montri reklamaĵon de senpaga versio, eĉ se vi havas pagan version.</string>
     <string name="activate_seamarks_plugin">Bonvolu aktivigi la kromprogramon “mara map-vido”</string>
-    <string name="activate_srtm_plugin">Bonvolu aktivigi la kromprogramon “nivelkurboj”</string>
+    <string name="activate_srtm_plugin">Aktivigu la kromprogramon “Topografio”</string>
     <string name="later">Poste</string>
     <string name="get_full_version">Plena versio</string>
     <string name="downloads">Elŝutoj</string>
@@ -1953,24 +1953,24 @@
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
     <string name="route_stops_before">Post %1$s haltejoj</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) 
-\n 
-\nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno. 
-\n 
-\nOsmAnd+ estas pagenda versio de programo, per aĉeti la aplikaĵo, vi subtenas la projekton, donacas al novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn. 
-\n 
-\nĈefaj eblaĵoj: 
-\n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelajn mapojn en la aparata konservejo) 
-\n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo 
-\n– senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo 
-\n– eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado 
-\n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco 
-\n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) 
-\n– difini kursojn por mezaj distancoj eksterrete 
-\n– aŭta, bicikla, kaj piediranta reĝimoj kun: 
-\n – agordeblaj aŭtomata/taga/nokta aspektoj 
-\n – agordebla rapid-dependa map-skalado 
-\n – agordebla map-turniĝo laŭ direkto de movado aŭ kompaso 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo)
+\n
+\nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno.
+\n
+\nOsmAnd+ estas pagenda versio de programo, per aĉeti la aplikaĵo, vi subtenas la projekton, donacas al novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn.
+\n
+\nĈefaj eblaĵoj:
+\n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelajn mapojn en la aparata konservejo)
+\n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
+\n– senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo
+\n– eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado
+\n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco, topografio (nivelkurboj/nivelombrumo/dekliveco)
+\n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn)
+\n– difini kursojn por mezaj distancoj eksterrete
+\n– aŭta, bicikla, kaj piediranta reĝimoj kun:
+\n – agordeblaj aŭtomata/taga/nokta aspektoj
+\n – agordebla rapid-dependa map-skalado
+\n – agordebla map-turniĝo laŭ direkto de movado aŭ kompaso
 \n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj
 \n</string>
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
@@ -2192,8 +2192,8 @@
     <string name="shared_string_automatic">Aŭtomata</string>
     <string name="right_side_navigation">Dekstr‑flanka trafiko</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
-\n 
-\nĜuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri altitudo (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.</string>
+\n
+\nĜuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri topografio (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.</string>
     <string name="osmand_extended_description_part2">GPS-navigado 
 \n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj 
 \n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) 
@@ -2217,12 +2217,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
-    <string name="osmand_extended_description_part5">Biciklado 
-\n • Vidigi biciklajn vojojn sur la mapo 
-\n • GPS-navigado en biciklada reĝimo kalkulas kursojn uzante biciklajn vojojn 
-\n • Montri viajn rapidon kaj altitudon 
-\n • Registri GPX-spurojn de via vojaĝo kaj diskonigi ilin 
-\n • Per aldona kromprogramo vi povas vidigi nivelkurbojn kaj nivel-ombrumon (reliefon)</string>
+    <string name="osmand_extended_description_part5">Biciklado
+\n • Vidigi biciklajn vojojn sur la mapo
+\n • GPS-navigado en biciklada reĝimo kalkulas kursojn uzante biciklajn vojojn
+\n • Montri viajn rapidon kaj altitudon
+\n • Registri GPX-spurojn de via vojaĝo kaj diskonigi ilin
+\n • Per aldona kromprogramo vi povas vidigi nivelkurbojn kaj nivelombrumon (reliefon)</string>
     <string name="osmand_extended_description_part6">Piedirado, vizitado de urbo 
 \n • La mapo montras al vi piediradajn kursojn 
 \n • Vikipedio en via lingvo eblas rakonti al vi multe dum via vizitado de urbo 
@@ -2250,10 +2250,10 @@
 \n Mapoj de preskaŭ ĉiuj de landoj de la mondo estas elŝuteblaj! 
 \n Havigu konfidindan navigilon en via lando - kaj en Francujo, Germanujo, Meksiko, Britujo, Hispanujo, Nederlando, Usono, Rusujo, Brazilo kaj ie alie.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
-\n Ĝuu voĉan kaj vidan navigadon, foliumu tra diversspecaj interesejoj (punktoj de intereso), kreu kaj administru GPX‑spurojn, vidigu sur la mapo nivelkurbojn kaj informojn pri altitudo (per kromprogramo), elektu inter aŭta, bicikla kaj piediranta reĝimoj, redaktu OSM kaj pli.
-\n 
-\n OsmAnd+ estas pagenda versio de la aplikaĵo. Per aĉeti ĝin, vi apogas la projekton, fondas evoluigon de novaj funkcioj kaj akiras plej aktualajn ĝisdatigojn. 
-\n 
+\n Ĝuu voĉan kaj vidan navigadon, foliumu tra diversspecaj interesejoj (punktoj de intereso), kreu kaj administru GPX‑spurojn, vidigu sur la mapo nivelkurbojn kaj informojn pri topografio (per kromprogramo), elektu inter aŭta, bicikla kaj piediranta reĝimoj, redaktu OSM kaj pli.
+\n
+\n OsmAnd+ estas pagenda versio de la aplikaĵo. Per aĉeti ĝin, vi apogas la projekton, fondas evoluigon de novaj funkcioj kaj akiras plej aktualajn ĝisdatigojn.
+\n
 \n Ĉefaj eblaĵoj:</string>
     <string name="osmand_plus_extended_description_part2">Navigado:
 \n • funkcias enrete (rapide) aŭ tute malkonekte (neniuj abonpagoj fremdlande)
@@ -2358,11 +2358,11 @@
     <string name="display_zoom_level">Vidigi de skal-nivelo: %1$s</string>
     <string name="route_is_too_long_v2">Por longaj distancoj: bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
     <string name="save_poi_too_many_uppercase">La nomo enhavas tro multe da grandaj literoj? Ĉu pluigi?</string>
-    <string name="srtm_menu_download_descr">Elŝutu la mapon “nivelkurboj” por vidigi nivelkurbojn por tiu ĉi regiono.</string>
+    <string name="srtm_menu_download_descr">Elŝutu la mapon “Nivelkurboj” de tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
-    <string name="srtm_purchase_header">Aĉetu kaj instalu la kromprogramon “nivelkurboj” por vidigi nivelkurbojn kaj nivelombrumon.</string>
+    <string name="srtm_purchase_header">Aĉetu kaj instalu la kromprogramon “Topografio” por vidigi nivelkurbojn kaj nivelombrumon.</string>
     <string name="hillshade_menu_download_descr">Elŝutu la mapon “nivelombrumo” por vidigi reliefon sur la mapo.</string>
-    <string name="hillshade_purchase_header">Instalu la kromprogramon “nivelkurboj” por vidigi reliefon (nivelombrumon) sur la mapo.</string>
+    <string name="hillshade_purchase_header">Instalu la kromprogramon “Topografio” por vidigi reliefon (nivelombrumon) sur la mapo.</string>
     <string name="hide_from_zoom_level">Kaŝi komence de skal‑nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
@@ -2706,9 +2706,9 @@
     <string name="show_full_description">Montri plenan priskribon</string>
     <string name="nautical_render_descr">Por mara kaj rivera navigado. Buoj, lumturoj, akvovojoj, linioj kaj markoj por akv-navigado, havenoj kaj profundec-kurboj.</string>
     <string name="ski_map_render_descr">Por skiado. Oportuna vidigo de skivojoj kaj telferoj; malpli absorbantaj malpli gravaj objektoj.</string>
-    <string name="light_rs_render_descr">Simpla stilo por aŭt‑navigado. Agrabla por okuloj dum nokto, kontrastaj oranĝkoloraj vojoj, malpli absorbantaj malpli gravaj objektoj.</string>
+    <string name="light_rs_render_descr">Simpla stilo por aŭt‑navigado. Agrabla por okuloj dum nokto, kontrastaj oranĝkoloraj vojoj, malpli absorbantaj malpli gravaj objektoj, prezento de topografio per nivelkurboj.</string>
     <string name="topo_render_descr">Por turisma marŝado kaj biciklado. Legebla ĉe maloportuna ekstera lumo. Kontrastaj vojoj kaj naturaj objektoj, diversaj specoj de kursoj, agordeblaj nivel-kurboj, pliaj detaloj. Distingebla firmeco de vojoj. Sen nokta reĝimo.</string>
-    <string name="default_render_descr">Ĝenerala map-stilo. Legebla en dense loĝataj urboj. Nivel-kurboj, vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ skaloj SAC/CAI, objektoj por rapid-akvaj sportoj.</string>
+    <string name="default_render_descr">Ĝenerala map-stilo. Legebla en dense loĝataj urboj. Trajtoj: vojoj, kvalito de vojoj, aliraj limigoj, ŝoseaj numeroj, turismaj kursoj laŭ skaloj SAC/CAI, objektoj por rapid-akvaj sportoj, topografio (nivelkurboj).</string>
     <string name="open_wikipedia_link_online">Malfermi Vikipedian ligilon enrete</string>
     <string name="open_wikipedia_link_online_description">La ligilo estos malfermita per ret-foliumilo.</string>
     <string name="read_wikipedia_offline_description">Akiru abonon al OsmAnd Live por legi artikolojn de Vikipedio kaj Vikivojaĝo malkonekte.</string>
@@ -3185,7 +3185,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">ligilo</string>
     <string name="shared_string_calculate">Kalkuli</string>
     <string name="shared_string_osmand_usage">Uzitaj de OsmAnd</string>
-    <string name="shared_sting_tiles">Kaheloj</string>
+    <string name="shared_string_tiles">Kaheloj</string>
     <string name="shared_string_maps">Mapoj</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3780,7 +3780,7 @@
 \n
 \nVi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
     <string name="start_finish_icons">Emblemoj de komenco kaj fino</string>
-    <string name="contour_lines_thanks">Dankon al vi pro aĉeti la kromprogramon “Nivelkurboj”</string>
+    <string name="contour_lines_thanks">Dankon al vi pro aĉeti la kromprogramon “Topografio”</string>
     <string name="osm_live_payment_desc_hw">La abonpago estas prenita por la elektita periodo. VI ĉiam povas rezigni abonon ĉe AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Eviti irejojn</string>
     <string name="routing_attr_avoid_footways_name">Sen trotuaroj</string>
@@ -3958,7 +3958,7 @@
     <string name="uploading_count">Sendado de %1$d el %2$d</string>
     <string name="uploaded_count">Sendis %1$d el %2$d</string>
     <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
-    <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
+    <string name="hillshade_slope_contour_lines">Nivelkurboj / nivelombrumo / dekliveco</string>
     <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
 \n
 \nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: %1$s</string>
@@ -4012,7 +4012,7 @@
     <string name="shared_strings_all_regions">Ĉiuj regionoj</string>
     <string name="purchases">Aĉetoj</string>
     <string name="quick_action_show_hide_title">Montri/kaŝi</string>
-    <string name="shared_string_interval">Intertempo</string>
+    <string name="shared_string_interval">Tempodaŭro</string>
     <string name="trip_recording_logging_interval_info">La periodo de intertempo de registrado estas tempo post kiu OsmAnd petos pri aktualaj datumoj de pozicio.</string>
     <string name="lost_data_warning">Ĉiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
@@ -4166,7 +4166,7 @@
     <string name="shared_string_discussion">Diskuto</string>
     <string name="shared_string_view_all">Montri ĉiujn</string>
     <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
-    <string name="purchases_feature_desc_terrain">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
+    <string name="purchases_feature_desc_terrain">Nivelkurboj (egal-nivel-linioj), nivelombrumo (reliefo) kaj perkolora prezento de dekliveco por montri teren-formon.</string>
     <string name="purchases_feature_desc_wikivoyage">Esploru Vikivojaĝon malkonekte. Artikoloj estas dividitaj laŭ landoj/regionoj kaj estas disponeblaj en ĉiuj lingvoj.</string>
     <string name="purchases_feature_desc_wikipedia">Malkonekta aliro al ĉiuj artikoloj de Vikipedio pri lokoj por ke vi povu sciiĝi pri la vizitataj ejoj per simple frapi la mapon. Ne forgesu elŝuti Vikipediajn mapojn de la dezirataj lokoj antaŭ komenci vojaĝon.</string>
     <string name="purchases_feature_desc_combined_wiki">Esploru artikolojn de Vikipedio dum vojaĝi sen interreta konekto. Datumoj estas dividitaj laŭ landoj kaj liveras artikolojn en ĉiuj lingvoj.</string>
@@ -4687,7 +4687,7 @@
     <string name="reset_all_settings_desc">Ĉu reagordi ĉiujn agordojn al implicitaj valoroj\?</string>
     <string name="marker_2nd">Dua markilo</string>
     <string name="marker_1st">Unua markilo</string>
-    <string name="map_marker_average_speed_desc">Enigu la intertempon por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
+    <string name="map_marker_average_speed_desc">Enigu la tempodaŭron por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="switch_widget_mode_desc">Vi povas ŝanĝi la reĝimon per frapeti la fenestraĵon.</string>
     <string name="side_marker_eta">Proksimuma tempo de alveno</string>
     <string name="goods_delivery_desc_4">Uzu la profilon “Kamiono”, se via veturilo estas pli peza ol 3,5 Mg.</string>
@@ -4767,7 +4767,7 @@
     <string name="coordinates_widget_map_center_desc">Fenestraĵo montranta geografiajn koordinatojn de la montrata centro de la mapo.</string>
     <string name="coordinates_widget_current_location_desc">Fenestraĵo montranta geografiajn koordinatojn de via nuna pozicio.</string>
     <string name="map_markers_desc">Fenestraĵo montranta distancon aŭ antaŭkalkulitan tempon de alveno por la du unuaj map-markoj.</string>
-    <string name="map_marker_interval_dialog_desc">Enigu la intertempon por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
+    <string name="map_marker_interval_dialog_desc">Enigu la tempodaŭron por kiu la mezuma rapido estos mezurita por kalkuli proksimuman tempon de alveno.</string>
     <string name="go_to_marker_location">Iri al la map-marko</string>
     <string name="shared_string_switch_mode">Baskuli reĝimon</string>
     <string name="map_widget_zoom_level">Skal-nivelo</string>
@@ -5225,12 +5225,12 @@
     <string name="beats_per_minute_short">korbatoj/min</string>
     <string name="error_calculate">Rezulto de kalkulo estas nula</string>
     <string name="calculate_offline">Kalkuli malkonekte</string>
-    <string name="calculate_offline_altitude_descr">Kalkuli altitudon eksterrete uzante datumojn de altmapo. Malsameco kun altitudo registrita de la aparato povas esti uzata kiel korekto.</string>
+    <string name="calculate_offline_altitude_descr">Kalkuli altitudon eksterrete uzante la datumojn “Terena mapo (3D)”. Malsameco kun altitudo registrita de la aparato povas esti uzata kiel korekto.</string>
     <string name="power_watts_unit">Vatoj</string>
     <string name="revolutions_per_minute_unit">Rivoluoj/min</string>
     <string name="shared_string_close_the_dialog">Fermi la fenestron</string>
     <string name="relief_3d">3-dimensia reliefo</string>
-    <string name="terrain_map">Terena mapo</string>
+    <string name="terrain_map">Terena mapo (3D)</string>
     <string name="relief_3d_description">Havigu kaj vidu skalitan modelon de via najbaraĵo aŭ de la tuta kontinento.</string>
     <string name="osmand_cloud_deleted_account_descr">Forigis konton kaj ĉiujn datumojn el OsmAnd-Nubo.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Aliaj aparatoj estos elsalutintaj el OsmAnd-Nubo kaj perdos aliron al pagendaj ebloj.</string>
@@ -5256,7 +5256,7 @@
     <string name="delete_account">Forigi konton</string>
     <string name="verify_account">Verigi vian konton</string>
     <string name="slope_legend_description">Uzas kolorojn por vidigi deklivecon de tereno. Pliaj informoj pri la eblo “Dekliveco” troviĝas ĉe %1$s.</string>
-    <string name="terrain_category_description">Montrado de montpintoj, altaĵoj kaj malaltaĵoj per nivelkurboj, mapoj de nivelombrumo (tonoj de grizo) kaj mapoj de dekliveco (koloraj).</string>
+    <string name="terrain_category_description">Nivelkurboj (egal-nivel-linioj), nivelombrumo (reliefo) kaj perkolora prezento de dekliveco por montri teren-formon.</string>
     <string name="routing_attr_allow_via_ferrata_description">Monta vojo kun fiksitaj ŝnuregoj, teniloj, ŝtupetaroj kaj pontetoj.</string>
     <string name="free_favorites_backup_description">Akiru konton OsmAnd-Nubo por havigi senpagan sekurkopion de ŝatataj punktoj kaj agordoj.</string>
     <string name="free_favorites_backup">Senpaga sekurkopio de ŝatataj punktoj</string>
@@ -5340,4 +5340,14 @@
     <string name="shared_string_checked">Markita</string>
     <string name="feature_available_as_part_of_plan">%1$s disponebla kiel parto de la plano %2$s</string>
     <string name="shared_string_included">Enhavata</string>
+    <string name="map_widget_glide_average_desc">Montras la mezuman glisrilaton por la agordita tempodaŭro.</string>
+    <string name="map_widget_glide_target_desc">Montras la glisrilaton necesan por atingi la celon.</string>
+    <string name="average_glide_time_interval_desc">Difinu kiel ofte la mezuma glisrilato estos rekalkulata.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Mezuma glisrilato</string>
+    <string name="map_widget_group_glide_desc">Fenestraĵoj montrantaj glisrilaton necesan por atingi la celon aŭ mezuman glisrilaton por la nuna vojaĝo.</string>
+    <string name="local_indexes_category_terrain">Terenaj mapoj (3D)</string>
+    <string name="hillshade_slope">Nivelombrumo, dekliveco</string>
+    <string name="glide_ratio_to_target">Glisrilato necesa por celo</string>
+    <string name="map_widget_group_glide_ratio">Glisrilato</string>
 </resources>

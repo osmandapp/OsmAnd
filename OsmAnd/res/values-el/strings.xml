@@ -3200,7 +3200,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Σύνδεση</string>
     <string name="shared_string_calculate">Υπολογισμός</string>
     <string name="shared_string_osmand_usage">Χρήση OsmAnd</string>
-    <string name="shared_sting_tiles">Πλακίδια</string>
+    <string name="shared_string_tiles">Πλακίδια</string>
     <string name="shared_string_maps">Χάρτες</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

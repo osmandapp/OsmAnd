@@ -3144,7 +3144,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Připojení</string>
     <string name="shared_string_calculate">Vypočítat</string>
     <string name="shared_string_osmand_usage">OsmAnd využití</string>
-    <string name="shared_sting_tiles">Dlaždice</string>
+    <string name="shared_string_tiles">Dlaždice</string>
     <string name="shared_string_maps">Mapy</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -5202,7 +5202,7 @@
     <string name="rendering_value_name_only_name">Pouze název</string>
     <string name="power_watts_unit">Watty</string>
     <string name="calculate_offline">Výpočet offline</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder">Prázdná složka</string>
     <string name="error_calculate">Výsledek výpočtu je prázdný</string>
     <string name="write_data_from_sensor_to_track">Zápis dat z externích senzorů do GPX během záznamu cesty.</string>

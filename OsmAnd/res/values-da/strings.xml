@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="srtm_paid_version_msg">Overvej at betale for Højdekurve-udvidelsen for at støtte videre udvikling.</string>
+    <string name="srtm_paid_version_msg">Overvej at betale for Topografi-udvidelsen for at støtte videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag lyd</string>
     <string name="av_widget_action_descr">Standard modulhandling:</string>
@@ -19,7 +19,7 @@
     <string name="recording_delete_confirm">Slet dette element\?</string>
     <string name="recording_unavailable">ikke tilgængelig</string>
     <string name="recording_context_menu_arecord">Optag lydnote</string>
-    <string name="srtm_paid_version_title">Højdekurve-udvidelse</string>
+    <string name="srtm_paid_version_title">Topografi-udvidelse</string>
     <string name="recording_context_menu_vrecord">Optag videonote</string>
     <string name="layer_recordings">Optagelser</string>
     <string name="recording_can_not_be_played">Optagelse kunne ikke afspilles.</string>
@@ -28,7 +28,7 @@
     <string name="recording_description">Optagelse %1$s %3$s %2$s</string>
     <string name="recording_default_name">Optager</string>
     <string name="map_widget_av_notes">Lyd-/videonoter</string>
-    <string name="osmand_srtm_short_description_80_chars">Udvidelse for offline højdekurver</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-udvidelse til offline topofunktioner som konturlinjer, terrænkygge, hældning</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Tryk på \'Brug placering...\' for at tilføje en note til placeringen.</string>
     <string name="map_widget_audionotes">Lydnoter</string>
@@ -36,12 +36,12 @@
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygge og hældning hjælper dig med at vurdere terrænets beskaffenhed og relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af skravering af hældninger, konturlinjer og/eller farvelægning af stejlhed.
+    <string name="srtm_plugin_description">Terrænoplysninger som f.eks. konturlinjer, terrænskygge og hældning hjælper dig med at vurdere terrænets beskaffenhed, relief, navigationsmuligheder og meget mere. De topografiske oplysninger kan på kortet repræsenteres ved hjælp af konturlinjer, terrænskygger og/eller farvelægning af stejlhed.
 \n
 \nDe underliggende data stammer fra SRTM og ASTER.
 \n
 \nYderligere oplysninger findes på %1$s.</string>
-    <string name="srtm_plugin_name">Højdekurver</string>
+    <string name="srtm_plugin_name">Topografi</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
     <string name="download_srtm_maps">Højdekurver</string>
@@ -443,11 +443,11 @@
 \n
 \nOsmAnd er en open source-navigationsapp med adgang til en lang række af globale OpenStreetMap (OSM)-data. Alle kortdata (vektorkort eller kortfliser) kan gemmes på enhedens hukommelseskort til offline-brug. OsmAnd tilbyder også offline- og online-rutefunktionalitet inklusive sving-for-sving tale vejledning.
 \n
-\nNogle af hovedfunktionerne:
+\n Nogle af hovedfunktionerne:
 \n - Komplet offlinefunktionalitet (gemme hentede vektorkort eller kortfliser i enhedens lager)
 \n - Kompakte offlinevektorkort for hele verden er tilgængelige
 \n - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd
-\n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationspor, interessepunkter (IP), favoritter, højdekurver, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed
+\n - Overlejring af flere kortlag er muligt, som fx GPX- eller navigationspor, interessepunkter (IP), favoritter, stoppesteder for kollektiv trafik og flere kort med modificerebar gennemsigtighed, topografiske elementer som højdekurver/terrænskygge/hældninger
 \n - Offlinesøgning efter adresser og steder (interessepunkter, IP)
 \n - Offlineruteplanlægning for mellemlange afstande
 \n - Bil-, cykel- og fodgængertilstand med:
@@ -474,7 +474,7 @@
 \n - Kompakte offline vektorkort for hele verden
 \n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd
 \n - Offline Wikipedia-funktioner (hent Wikipedia-interessepunkter (IP)), fantastisk til sightseeing
-\n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, højdekurver, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed
+\n - Overlejring af flere kortlag mulige, såsom GPX- eller navigationsspor, seværdigheder, Favoritter, stoppesteder for kollektiv trafik, ekstra kort med brugerdefinerbar gennemsigtighed, topografiske elementer som højdekurver/terrænskygge/hælning
 \n
 \n - Offline-søgning efter adresser og steder (IP)
 \n - Offline-ruteberegning til mediumafstande
@@ -1680,7 +1680,7 @@
     <string name="buy">Køb</string>
     <string name="hillshade_layer_disabled">Terrænskyggelaget deaktiveret</string>
     <string name="activate_seamarks_plugin">Aktiver \'Søkort\' udvidelsen</string>
-    <string name="activate_srtm_plugin">Aktiver Højdekurve-udvidelsen</string>
+    <string name="activate_srtm_plugin">Aktivér Topografi-udvidelsen</string>
     <string name="later">Senere</string>
     <string name="get_full_version">Fuldversion</string>
     <string name="regions">Regioner</string>
@@ -2202,7 +2202,7 @@
     <string name="shared_string_automatic">Automatisk</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er en kort- og navigationsapp med adgang til gratis og verdensomspændende OpenStreetMap (OSM)-data af høj kvalitet.
 \n
-\nNyd visuel og stemmenavigation, visning af IP\'er (interessepunkter), oprettelse og administration af GPX-spor, brug af højdekurvevisualisering og højdeinfo (via udvidelse), et valg mellem bil-, cykel- og fodgængertilstand, OSM-redigering og meget mere.</string>
+\nNyd visuel og stemmenavigation, visning af IP\'er (interessepunkter), oprettelse og administration af GPX-spor, brug af højdekurvevisualisering og topografisk (via udvidelse), et valg mellem bil-, cykel- og fodgængertilstand, OSM-redigering og meget mere.</string>
     <string name="osmand_extended_description_part7">Bidrag til OSM
 \n • Rapporter fejl i data
 \n • Overfør GPX-spor til OSM direkte
@@ -2266,7 +2266,7 @@
 \n • Overfør og følg en GPX-rute eller optag og del egne ruter
 \n</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er en kort- og navigationsapp med adgang til gratis, verdensomspændende, og højkvalitet data fra OpenStreetMap (OSM).
-\n Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og højdeinfo, vælg mellem bilkørsel, cykling, fodgænger tilstand, OSM redigering og meget mere.
+\n Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og topografi, vælg mellem bilkørsel, cykling, fodgænger tilstand, OSM redigering og meget mere.
 \n
 \n OsmAnd+ er den betalte appversion. Ved køb af denne støtter du projektet og udviklingen af nye funktioner, og modtager de seneste opdateringer.
 \n
@@ -2369,11 +2369,11 @@
     <string name="show_from_zoom_level">Visning starter ved zoomniveau</string>
     <string name="routing_attr_allow_private_name">Tillad privat adgang</string>
     <string name="routing_attr_allow_private_description">Tillad adgang til private områder.</string>
-    <string name="srtm_menu_download_descr">Hent \'Højdekurve\' kort til brug i området.</string>
+    <string name="srtm_menu_download_descr">Hent \'Højdekurver\'-kortet for denne region.</string>
     <string name="shared_string_plugin">Udvidelse</string>
-    <string name="srtm_purchase_header">Køb og installer Højdekurve-udvidelsen for at få vist graduerede lodrette områder.</string>
+    <string name="srtm_purchase_header">Køb og installer Topografi-udvidelsen for at få vist graduerede lodrette områder.</string>
     <string name="hillshade_menu_download_descr">Download overlejringskortet \'Terrænskygger\' for at vise vertikale skygger.</string>
-    <string name="hillshade_purchase_header">Installer Højdekurve-udvidelsen for at få vist graduerede lodrette områder.</string>
+    <string name="hillshade_purchase_header">Installér Topografi-udvidelsen for at få vist graduerede lodrette områder.</string>
     <string name="hide_from_zoom_level">Begynd at skjule fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
     <string name="search_favorites">Søg i Favoritter</string>
@@ -2723,9 +2723,9 @@
     <string name="show_full_description">Vis fuld beskrivelse</string>
     <string name="nautical_render_descr">Til maritim navigation. Funktioner: bøjer, fyrtårne, vandveje, sejlruter og sømærker, havne, søfartstjenester og dybdekonturer.</string>
     <string name="ski_map_render_descr">Til skiløb. Viser pister, skilifte, cross country-spor, etc. Dæmper sekundære kortobjekter.</string>
-    <string name="light_rs_render_descr">Enkel stil til kørsel. Skånsom for øjnene i nat-tilstand, højdekurver, veje med kontrast i orange, dæmper sekundære kortobjekter.</string>
+    <string name="light_rs_render_descr">Enkel kørestil. Skånsom nattilstand, kontrasterende orange veje, nedtoner sekundære kortobjekter, topografiske elementer som konturlinjer.</string>
     <string name="topo_render_descr">Til vandring, gåture og cykling i naturen. God læsbarhed udendørs. Kontrast mellem veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, ekstra detaljer. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
-    <string name="default_render_descr">Stilart til almindelig brug. Tæt bebyggede byer vises klart. Højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC/CAI-skalaen, rafting-elementer (vandsport).</string>
+    <string name="default_render_descr">Stil til almindeligt brug. Tætte byer vises tydeligt. Indeholder ruter, overfladekvalitet, adgangsbegrænsninger, vejskilte, stier gengivet i henhold til SAC/CAI-skalaen, elementer til vandsport, topografiske elementer såsom højdekurver.</string>
     <string name="touring_view_render_descr">Touring-stilart med høj kontrast og maksimal detalje. Indeholder alle indstillingsmuligheder fra OsmAnd-standardstilen, mens der vises så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. Klar \"touring atlas\" sondring mellem alle forskellige vejtyper. Velegnet til dag, nat og udendørsbrug.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
     <string name="off_road_render_descr">Til off-road kørsel baseret på \'Topo\'-stilen. Velegnet til brug med grønne satellitbilleder som underlejringskort. Reduceret tykkelse af hovedveje, øget tykkelse af spor, stier, cykel og andre ruter.</string>
@@ -3194,7 +3194,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Forbindelse</string>
     <string name="shared_string_calculate">Beregn</string>
     <string name="shared_string_osmand_usage">OsmAnd brug</string>
-    <string name="shared_sting_tiles">Kortfliser</string>
+    <string name="shared_string_tiles">Kortfliser</string>
     <string name="shared_string_maps">Kort</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3662,7 +3662,7 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="export_not_enough_space">Der er ikke plads nok</string>
     <string name="routing_attr_length_name">Længde</string>
-    <string name="contour_lines_thanks">Tak for køb af \'Højdekurver\'</string>
+    <string name="contour_lines_thanks">Tak for dit køb af \'Topografi\'</string>
     <string name="osm_live_payment_desc_hw">Abonnementet er opkrævet pr. den valgte periode. Annuller det til enhver tid i dit AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Undgå gangstier</string>
     <string name="routing_attr_avoid_footways_name">Undgå gangstier</string>
@@ -3825,7 +3825,7 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Indspillet stemme lyder bedre, men kan kun udtale forudindspillede sætninger: drejeinstruktioner. Kan ikke udtale vejnavne eller IP-navne.</string>
     <string name="use_system_language">Brug systemsprog</string>
-    <string name="srtm_download_list_help_message">OsmAnd leverer data om højdekurver i meter og fod. Du skal downloade filen igen for at ændre formatet.</string>
+    <string name="srtm_download_list_help_message">OsmAnd leverer højdekurvedata i meter og fod. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="change_folder">Skift mappe</string>
     <string name="shared_string_sec">sek</string>
@@ -3836,7 +3836,7 @@
     <string name="shared_string_turn">Sving</string>
     <string name="announcement_time_intervals">Tids- og distanceintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
-    <string name="hillshade_slope_contour_lines">Terrænskygge / Hældning / Højdekurver</string>
+    <string name="hillshade_slope_contour_lines">Højdekurver / Terrænskygge / Hældning</string>
     <string name="activity_type_racing_name">Racerkørsel</string>
     <string name="temporary_conditional_routing_descr">Brug de vejrestriktioner, der er aktive på kortet nu</string>
     <string name="on_hold">I venteposition</string>
@@ -4103,7 +4103,7 @@
     <string name="backup_promocode">Kampagnekode</string>
     <string name="send_crash_log">Send nedbrudslog</string>
     <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
-    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, fuldt terrænskyggekort med mørke nuancer samt hældningskort med farver til at vise toppe og lavlandsområder.</string>
+    <string name="purchases_feature_desc_terrain">Terræn-højdekurver, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavlandsområder.</string>
     <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler er opdelt efter lande og regioner og er tilgængelige på alle sprog.</string>
     <string name="purchases_feature_desc_wikipedia">Giver dig alle stedrelaterede Wikipedia-artikler offline, så du kan lære mere om de steder, du besøger på din rejse, ved blot at trykke på kortet. Glem ikke at downloade Wikipedia-kortfilerne for de respektive regioner.</string>
     <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
@@ -4642,7 +4642,7 @@
     <string name="av_def_action_choose">På forespørgsel</string>
     <string name="routing_attr_avoid_4wd_only_name">Undgå 4WD-veje</string>
     <string name="routing_attr_avoid_4wd_only_description">Undgå veje, der kun er egnet til køretøjer med firehjulstræk</string>
-    <string name="colour_of_circles">Farve på cirkler</string>
+    <string name="colour_of_circles">Cirkelfarver</string>
     <string name="compass_on_circles">Kompas på cirkler</string>
     <string name="distance_circles">Afstandscirkler</string>
     <string name="circle_settings">Cirkelindstillinger</string>
@@ -5218,7 +5218,7 @@
     <string name="map_2d_mode_action">2D-tilstand</string>
     <string name="visible_in_3d_mode">Synlig i 3D-tilstand</string>
     <string name="rssi_widget_desc">Viser RSSI-niveauet for din eksterne enhed.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Denne mappe indeholder endnu ingen spor.</string>
     <string name="delete_folder">Slet mappe</string>
     <string name="show_all_tracks_on_the_map">Vis alle spor på kortet</string>
@@ -5234,15 +5234,15 @@
     <string name="external_sensors_not_found">Sensorer ikke fundet</string>
     <string name="external_sensors_source_of_data">Datakilde</string>
     <string name="calculate_offline">Beregn offline</string>
-    <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på højdekortdata. Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
+    <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på data fra terrænkort (3D). Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
     <string name="error_calculate">Beregningsresultatet er tomt</string>
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">OPM</string>
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
     <string name="relief_3d">3D-relief</string>
-    <string name="terrain_map">Terrænkort</string>
+    <string name="terrain_map">Terrænkort (3D)</string>
     <string name="relief_3d_description">Ej og observer skalamodellen af dit nabolag eller hele kontinentet.</string>
-    <string name="terrain_category_description">Terrænkonturlinjer, fuldt terrænskyggekort med mørke nuancer og hældningskort med farver til at vise toppe og lavland.</string>
+    <string name="terrain_category_description">Terrænkonturlinjer, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavland.</string>
     <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældning i %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.
 \n
@@ -5350,4 +5350,14 @@
     <string name="write_bearing_description">Gem pejling for hvert sporpunkt under optagelse</string>
     <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
     <string name="shared_string_included">Inkluderet</string>
+    <string name="hillshade_slope">Terrænskygge, hældning</string>
+    <string name="local_indexes_category_terrain">Terrænkort (3D)</string>
+    <string name="map_widget_glide_average_desc">Viser det gennemsnitlige glidetal for det indstillede interval.</string>
+    <string name="average_glide_time_interval_desc">Angiv tidsintervallet for glide-gennemsnit.</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Gennemsnitligt glidetal</string>
+    <string name="glide_ratio_to_target">Glidetal til mål</string>
+    <string name="map_widget_group_glide_ratio">Glidetal</string>
+    <string name="map_widget_group_glide_desc">Moduler viser glidetal til målet eller gennemsnitlig glidetal for den aktuelle tur.</string>
+    <string name="map_widget_glide_target_desc">Viser det nødvendige glidetal for at nå målpunktet.</string>
 </resources>

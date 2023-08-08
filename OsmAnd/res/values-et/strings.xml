@@ -939,7 +939,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Ühendus</string>
     <string name="shared_string_calculate">Arvuta</string>
     <string name="shared_string_osmand_usage">OsmJa kasutamine</string>
-    <string name="shared_sting_tiles">Paanid</string>
+    <string name="shared_string_tiles">Paanid</string>
     <string name="shared_string_maps">Kaardid</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>

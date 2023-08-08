@@ -8,4 +8,5 @@ public interface OsmAndConstants {
 	int UI_HANDLER_PROGRESS = 6000;
 	int UI_HANDLER_SEARCH = 7000;
 	int UI_HANDLER_GPS_FILTER = 8000;
+	int UI_HANDLER_WEATHER_WIDGET = 9000;
 }

@@ -1015,6 +1015,10 @@ public class Algorithms {
 	}
 
 	public static boolean isFloat(String value) {
+		return isFloat(value, false);
+	}
+
+	public static boolean isFloat(String value, boolean includeInt) {
 		int pointsCount = 0;
 		int length = value.length();
 		for (int i = 0; i < length; i++) {
@@ -1034,7 +1038,7 @@ public class Algorithms {
 				}
 			}
 		}
-		return pointsCount == 1;
+		return pointsCount == 1 || includeInt && pointsCount == 0;
 	}
 
 	public static <T> T getPercentile(List<T> sortedValues, int percentile) throws IllegalArgumentException {

@@ -18,11 +18,13 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
@@ -30,6 +32,8 @@ import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrackFolderOptionsController extends BaseDialogController implements IDisplayDataProvider,
 		IDialogItemClicked, TrackFolderOptionsListener {
@@ -38,13 +42,11 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 
 	private TrackFoldersHelper foldersHelper;
 	private TrackFolder trackFolder;
-	private TrackFolder parentFolder;
 	private TrackFolderOptionsListener optionsListener;
 
 	public TrackFolderOptionsController(@NonNull TrackFoldersHelper foldersHelper, @NonNull TrackFolder folder) {
 		super(foldersHelper.getApp());
 		this.trackFolder = folder;
-		this.parentFolder = folder.getParentFolder();
 		this.foldersHelper = foldersHelper;
 	}
 
@@ -156,20 +158,27 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 	}
 
 	private void renameFolder(@NonNull String newName) {
-		foldersHelper.renameFolder(trackFolder, newName, folder -> {
-			if (parentFolder != null) {
-				parentFolder.removeSubFolder(trackFolder, false);
-				parentFolder.addSubFolder(folder, true);
+		File oldDir = trackFolder.getDirFile();
+		File newDir = new File(oldDir.getParentFile(), newName);
+		if (oldDir.renameTo(newDir)) {
+			trackFolder.setDirFile(newDir);
+			trackFolder.resetCashedData();
+
+			List<File> files = new ArrayList<>();
+			for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+				File file = trackItem.getFile();
+				if (file != null) {
+					files.add(file);
+				}
 			}
-			trackFolder = folder;
+			FileUtils.updateMovedGpxFiles(app, files, oldDir, newDir);
+
 			dialogManager.askRefreshDialogCompletely(PROCESS_ID);
 
-			// Notify external listener
 			if (optionsListener != null) {
-				optionsListener.onFolderRenamed(folder.getDirFile());
+				optionsListener.onFolderRenamed(newDir);
 			}
-			return true;
-		});
+		}
 	}
 
 	@Override

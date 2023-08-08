@@ -253,7 +253,7 @@
     <string name="poi_context_menu_delete">Usuń użyteczne miejsce</string>
     <string name="rotate_map_compass_opt">Względem kompasu</string>
     <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
-    <string name="rotate_map_north_opt">Zablokowane (północ jest na górze)</string>
+    <string name="rotate_map_north_opt">Północ jest na górze</string>
     <string name="rotate_map_to_descr">Obracanie mapy:</string>
     <string name="rotate_map_to">Orientacja mapy</string>
     <string name="show_route">Szczegóły trasy</string>
@@ -876,7 +876,7 @@
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
-    <string name="srtm_plugin_name">Poziomice</string>
+    <string name="srtm_plugin_name">Topografia</string>
     <string name="srtm_plugin_description">Informacje o terenie, takie jak linie konturowe, odcienie wzgórz i stoki, pomagają wizualnie ocenić układ terenu i rzeźbę terenu, żeglowność i inne. Informacje topograficzne mogą być na mapie reprezentowane przez cieniowanie stoków, linie konturowe i/lub kolorystykę stromości.
 \n
 \nDane bazowe pochodzą z SRTM i ASTER.
@@ -920,7 +920,7 @@
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
     <string name="intermediate_points_change_order">Zmień kolejność</string>
     <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice, aby wspomóc dalszy rozwój.</string>
-    <string name="srtm_paid_version_title">Wtyczka poziomic</string>
+    <string name="srtm_paid_version_title">Wtyczka Topografia</string>
     <string name="recording_context_menu_arecord">Zrób uwagę audio</string>
     <string name="recording_context_menu_vrecord">Zrób uwagę wideo</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
@@ -1677,7 +1677,7 @@
     <string name="show_free_version_banner_description">Wyświetla baner wersji darmowej w przypadku zainstalowania wersji płatnej.</string>
     <string name="buy">Kup</string>
     <string name="activate_seamarks_plugin">Aktywuj wtyczkę \"Widok mapy morskiej\"</string>
-    <string name="activate_srtm_plugin">Aktywuj wtyczkę „Poziomice”</string>
+    <string name="activate_srtm_plugin">Aktywuj wtyczkę \'Topografia\'</string>
     <string name="later">Później</string>
     <string name="get_full_version">Pełna wersja</string>
     <string name="downloads">Pobierz</string>
@@ -2257,11 +2257,11 @@
     <string name="route_is_too_long_v2">Na duże odległości: Dodaj pośrednie cele podróży, jeśli w ciągu 10 minut nie zostanie znaleziona żadna trasa.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
-    <string name="srtm_menu_download_descr">Pobierz mapę \"Izolinie\" do użycia dla tego obszaru.</string>
+    <string name="srtm_menu_download_descr">Pobierz mapę \"Linie konturowe\" tego regionu.</string>
     <string name="hide_from_zoom_level">Ukrywaj, zaczynając od poziomu przybliżenia</string>
-    <string name="hillshade_purchase_header">Zainstaluj wtyczkę „Poziomice”, aby wyświetlić stopniowane obszary pionowe.</string>
+    <string name="hillshade_purchase_header">Zainstaluj wtyczkę „Topografia”, aby wyświetlić stopniowane obszary pionowe.</string>
     <string name="hillshade_menu_download_descr">Pobierz nakładkę mapy „Mapa cieniowana”, aby wyświetlić cieniowanie pionowe.</string>
-    <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę „Poziomice”, aby wyświetlić stopniowane obszary pionowe.</string>
+    <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę „Topografia”, aby wyświetlić stopniowane obszary pionowe.</string>
     <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: 
 \n • Europa Zachodnia: **** 
 \n • Europa Wschodnia: *** 
@@ -3196,7 +3196,7 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">Wolne %1$s GB (z %2$s GB)</string>
     <string name="rendering_attr_piste_type_skitour_name">Wycieczka</string>
-    <string name="shared_sting_tiles">Kafelki</string>
+    <string name="shared_string_tiles">Kafelki</string>
     <string name="track_storage_directory">Katalog pamięci tras</string>
     <string name="track_storage_directory_descrp">Trasy mogą być przechowywane w katalogu „rec” lub w katalogach miesięcznych bądź dziennych.</string>
     <string name="store_tracks_in_rec_directory">Nagrywaj trasy do katalogu „rec”</string>
@@ -3451,7 +3451,7 @@
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Poziom powiększenia</string>
     <string name="shared_string_transparency">Przejrzystość</string>
-    <string name="slope_read_more">Przeczytaj więcej o nachyleniach w %1$s.</string>
+    <string name="slope_read_more">Przeczytaj więcej o nachyleniu w %1$s.</string>
     <string name="slope_download_description">Do wyświetlania nachylenia terenu wymagane są dodatkowe mapy.</string>
     <string name="terrain_slider_description">Ustaw minimalny i maksymalny poziom powiększenia, na których będzie wyświetlana warstwa.</string>
     <string name="slope_description">Nachylenie używa kolorów do wizualizacji stromości terenu.</string>
@@ -3777,7 +3777,7 @@
     <string name="sort_name_ascending">Nazwa: A – Z</string>
     <string name="what_is_new">Co nowego</string>
     <string name="start_finish_icons">Ikony startu i końca</string>
-    <string name="contour_lines_thanks">Dziękujemy za zakup „Poziomice”</string>
+    <string name="contour_lines_thanks">Dziękujemy za zakup \'Topografii\'</string>
     <string name="osm_live_payment_desc_hw">Subskrypcja jest naliczana za wybrany okres. Anuluj go w AppGallery w dowolnym momencie.</string>
     <string name="osm_live_payment_subscription_management_hw">Płatność jest pobierana z Twojego konta AppGallery podczas potwierdzania zakupu.
 \n
@@ -4896,7 +4896,7 @@
     <string name="go_to_marker_location">Przejdź do lokalizacji znacznika</string>
     <string name="shared_string_switch_mode">Przełącz tryb</string>
     <string name="shared_string_normal">Normalna</string>
-    <string name="rotate_map_manual_opt">Stałe (obracane ręcznie)</string>
+    <string name="rotate_map_manual_opt">Obracane ręcznie</string>
     <string name="map_widget_true_bearing">Prawdziwy kierunek</string>
     <string name="map_widget_altitude_map_center">Wysokość: centrum mapy</string>
     <string name="purchases_feature_desc_external_sensors">Wyświetlaj i rejestruj dane z czujników zewnętrznych: prędkość roweru, moc roweru, kadencję i tętno.</string>
@@ -5213,7 +5213,7 @@
     <string name="delete_folder_question">Usunąć folder\?</string>
     <string name="delete_track_folder_dialog_message">Spowoduje to usunięcie folderu \"%1$s\" i wszystkich zawartych w nim ścieżek (%2$s).</string>
     <string name="delete_folder">Usuń folder</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">W tym folderze nie ma jeszcze żadnej ścieżki.</string>
     <string name="tracks_empty_folder">Pusty folder</string>
     <string name="show_all_tracks_on_the_map">Pokaż wszystkie ścieżki na mapie</string>
@@ -5233,7 +5233,7 @@
     <string name="power_watts_unit">Watów</string>
     <string name="revolutions_per_minute_unit">obr./min</string>
     <string name="relief_3d">Relief 3D</string>
-    <string name="terrain_map">Mapa terenu</string>
+    <string name="terrain_map">Mapa terenu (3D)</string>
     <string name="save_track_external_sensors_data">Dane</string>
     <string name="relief_3d_description">Posiadaj i obserwuj model w skali swojej okolicy lub całego kontynentu.</string>
     <string name="slope_legend_description">Nachylenie używa kolorów do wizualizacji nachylenia terenu. Więcej informacji na temat stoków można znaleźć w %1$s.</string>
@@ -5252,4 +5252,47 @@
     <string name="rendering_attr_alpineHiking_description">Typy klasyfikacji trudności tras.</string>
     <string name="rendering_value_sacScale_name">Skala SAC</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="shared_string_class">Kategoria</string>
+    <string name="free_favorites_backup_description">Zarejestruj się w OsmAnd Cloud, aby uzyskać bezpłatną kopię zapasową ulubionych i ustawień.</string>
+    <string name="free_favorites_backup">Darmowa kopia zapasowa ulubionych</string>
+    <string name="get_osmand_cloud">Pozyskaj OsmAnd Cloud</string>
+    <string name="write_bearing_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania.</string>
+    <string name="write_bearing">Rzeźby</string>
+    <string name="write_heading_description">Zapisuj kierunek do każdego punktu trasy podczas nagrywania.</string>
+    <string name="osmand_cloud_deleting_account_descr">W ciągu kilku chwil wszystkie dane i konto zostaną usunięte z OsmAnd Cloud.
+\n
+\nWszystkie dane na urządzeniu pozostaną nietknięte.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Czy na pewno chcesz usunąć konto OsmAnd Cloud\?
+\n
+\nTej czynności nie można cofnąć.</string>
+    <string name="routing_attr_allow_via_ferrata_description">Trasa górska wyposażona w stałe liny, słupy, drabiny i mosty.</string>
+    <string name="cache_size">Wielkość pamięci podręcznej</string>
+    <string name="shared_string_avoid">Unikaj</string>
+    <string name="feature_available_as_part_of_plan">%1$s dostępne w ramach planu %2$s</string>
+    <string name="rendering_value_sacScale_description">Szwajcarski Klub Alpejski</string>
+    <string name="may_be_used_if_there_is_shortcut">Można użyć, jeśli istnieje skrót</string>
+    <string name="free_account">Darmowe konto</string>
+    <string name="folder_export_empty_error">Nie ma czego eksportować, folder jest pusty</string>
+    <string name="osmand_cloud_deleted_account_descr">Konto i wszystkie dane zostały usunięte z OsmAnd Cloud.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Usunąć konto\?</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Wszystkie dane z OsmAnd Cloud zostaną %1$s. Dane na urządzeniu pozostaną nienaruszone.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Nie spowoduje to anulowania subskrypcji OsmAnd Pro.</string>
+    <string name="manage_subscriptions">Zarządzanie subskrypcjami.</string>
+    <string name="delete_account_warning">Czy na pewno chcesz usunąć konto %1$s\?</string>
+    <string name="shared_string_deleting">Usuwanie</string>
+    <string name="deleting_complete">Usuwanie zakończone</string>
+    <string name="delete_account">Usuń konto</string>
+    <string name="backup_error_delete_account_email_match">Adres e-mail nie pasuje do nazwy użytkownika</string>
+    <string name="verify_account_deletion_descr">Przed usunięciem konta musimy je zweryfikować.
+\n
+\nWprowadź adres e-mail, za pomocą którego się zarejestrowałeś. Zostanie na niego wysłane jednorazowe hasło do następnego kroku.</string>
+    <string name="verify_account">Zweryfikuj swoje konto</string>
+    <string name="free_settings_backup">Bezpłatna kopia zapasowa ustawień</string>
+    <string name="action_cannot_be_undone">Tego działania nie można cofnąć.</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Użyj rastra sqlitedb dla cieniowania / nachylenia wzgórza</string>
+    <string name="free_ride">Przejazd bezpłatny</string>
+    <string name="routing_attr_allow_via_ferrata_name">Trasa górska (Via ferrata)</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Urządzenia dodatkowe zostaną wylogowane z OsmAnd Cloud i utracą dostęp do płatnych funkcji.</string>
+    <string name="osmand_cloud_deletion_account_warning">Twoje konto i wszystkie dane konta będą %1$s</string>
 </resources>

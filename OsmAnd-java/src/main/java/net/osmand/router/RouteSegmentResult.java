@@ -445,7 +445,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 		attachedRoutes[st].add(r);
 	}
-	
+
 	public void copyPreattachedRoutes(RouteSegmentResult toCopy, int shift) {
 		if (toCopy.preAttachedRoutes != null) {
 			int l = toCopy.preAttachedRoutes.length - shift;
@@ -453,7 +453,15 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			System.arraycopy(toCopy.preAttachedRoutes, shift, preAttachedRoutes, 0, l);
 		}
 	}
-	
+
+	public void clearAttachedRoutes() {
+		attachedRoutes = null;
+	}
+
+	public void clearPreattachedRoutes() {
+		preAttachedRoutes = null;
+	}
+
 	public RouteSegmentResult[] getPreAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
 		if (preAttachedRoutes != null && st < preAttachedRoutes.length) {
@@ -461,7 +469,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		}
 		return null;
 	}
-	
+
 	public List<RouteSegmentResult> getAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
 		List<RouteSegmentResult> list = attachedRoutes[st];

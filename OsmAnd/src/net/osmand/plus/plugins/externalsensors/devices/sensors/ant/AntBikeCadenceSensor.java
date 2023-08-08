@@ -106,10 +106,14 @@ public class AntBikeCadenceSensor extends AntAbstractSensor<AntPlusBikeCadencePc
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeCalculatedCadenceEvent((estTimestamp, eventFlags, calculatedCadence) -> {
-			lastBikeCadenceData = new BikeCadenceData(estTimestamp, calculatedCadence.intValue());
-			getDevice().fireSensorDataEvent(this, lastBikeCadenceData);
-		});
+		AntPlusBikeCadencePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeCalculatedCadenceEvent(null);
+			pcc.subscribeCalculatedCadenceEvent((estTimestamp, eventFlags, calculatedCadence) -> {
+				lastBikeCadenceData = new BikeCadenceData(estTimestamp, calculatedCadence.intValue());
+				getDevice().fireSensorDataEvent(this, lastBikeCadenceData);
+			});
+		}
 	}
 
 	@Override

@@ -2476,7 +2476,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Conexiune</string>
     <string name="shared_string_calculate">Calculează</string>
     <string name="shared_string_osmand_usage">Utilizarea OsmAnd</string>
-    <string name="shared_sting_tiles">Dale</string>
+    <string name="shared_string_tiles">Dale</string>
     <string name="shared_string_maps">Hărţi</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -2880,7 +2880,7 @@
     <string name="update_all_maps_added">Actualizați toate hărțile adăugate la %1$s\?</string>
     <string name="shared_string_feet">picioare</string>
     <string name="srtm_unit_format">Variantă unități curbe (izolinii)</string>
-    <string name="srtm_download_list_help_message">OsmAnd oferă date despre curbele de nivel în metri și picioare. Va trebui să descărcați din nou fișierul pentru a schimba formatul.</string>
+    <string name="srtm_download_list_help_message">OsmAnd oferă date privind curbele de nivel în metri și picioare. Va trebui să descărcați din nou fișierul pentru a schimba formatul.</string>
     <string name="srtm_download_single_help_message">Vă rugăm să selectați varianta. Va trebui să descărcați din nou fișierul pentru a schimba formatul.</string>
     <string name="exit_number">Număr de ieșire</string>
     <string name="announce_when_exceeded">Anunță când este depășită</string>
@@ -2976,7 +2976,7 @@
     <string name="send_crash_log">Trimiteți jurnalul de eroare</string>
     <string name="send_logcat_log">Trimiteți jurnalul logcat</string>
     <string name="purchases_feature_desc_nautical">Obțineți acces la informații privind adâncimea nautică</string>
-    <string name="purchases_feature_desc_terrain">Curbe ale terenului, umbrire completă pe baza reliefului și afișarea pantelor cu ajutorul culorilor pentru a arăta vârfurile și zonele joase.</string>
+    <string name="purchases_feature_desc_terrain">Linii de contur ale terenului, nuanțe de gri și indicarea pantei pe scară de culori, pentru a arăta vârfurile și zonele joase.</string>
     <string name="purchases_feature_desc_wikivoyage">Explorați Wikivoyage offline. Articole împărțite pe țări și regiuni și disponibile în toate limbile.</string>
     <string name="purchases_feature_desc_wikipedia">Oferă toate articolele Wikipedia legate de locuri în mod offline, ajutându-vă să aflați mai multe despre locurile pe care le vizitați în timpul călătoriei prin simple atingeri pe hartă. Nu uitați să descărcați fișierele cu hărțile Wikipedia pentru regiunile respective.</string>
     <string name="purchases_feature_desc_combined_wiki">Explorați articolele din Wikipedia din mers, fără conexiune la internet. Date offline împărțite pe țări și disponibile în toate limbile.</string>
@@ -3216,7 +3216,7 @@
     <string name="icon_group_transport">Transport</string>
     <string name="icon_group_service">Serviciul</string>
     <string name="icon_group_symbols">Simboluri</string>
-    <string name="hillshade_slope_contour_lines">Umbrire relief / Pante / Curbe de nivel</string>
+    <string name="hillshade_slope_contour_lines">Linii de contur / Umbre de deal / Pantă</string>
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
 \nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
@@ -4646,7 +4646,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Fără restricții)</string>
     <string name="routing_attr_avoid_fords_name">Evitați vadurile</string>
     <string name="routing_attr_avoid_fords_description">Evitați vadurile</string>
-    <string name="colour_of_circles">Culoarea cercurilor</string>
+    <string name="colour_of_circles">Coloritul cercurilor</string>
     <string name="av_def_action_choose">La cerere</string>
     <string name="route_maneuvers">Manevre de traseu</string>
     <string name="track_attach_to_the_roads_descr">Pista va fi atașată la drum cu ajutorul hărților offline, iar geometria pistei va fi modificată.</string>
@@ -5194,7 +5194,7 @@
     <string name="external_sensors_source_of_data">Sursa de date</string>
     <string name="delete_track_folder_dialog_message">Acest lucru va șterge folderul \"%1$s\" și toate piesele (%2$s) incluse.</string>
     <string name="delete_folder_question">Ștergeți folderul\?</string>
-    <string name="calculate_offline_altitude_descr">Calculează altitudinea offline, pe baza datelor din harta înălțimii. Diferențele față de altitudinea înregistrată de dispozitiv pot fi utilizate ca corecție a altitudinii.</string>
+    <string name="calculate_offline_altitude_descr">Calculați altitudinea offline, pe baza datelor de pe harta terenului (3D). Diferențele față de altitudinea înregistrată de dispozitiv pot fi utilizate ca corecție a altitudinii.</string>
     <string name="shared_string_visible_on_map">Vizibil pe hartă</string>
     <string name="visible_in_3d_mode">Vizibil în modul 3D</string>
     <string name="poi_categories">Categorii de POI</string>
@@ -5229,7 +5229,7 @@
     <string name="delete_folder">Ștergeți folderul</string>
     <string name="show_all_tracks_on_the_map">Afișați toate pistele pe hartă</string>
     <string name="rssi_widget_desc">Afișează nivelul RSSI al dispozitivului dumneavoastră extern.</string>
-    <string name="map_widget_rssi">Rssi</string>
+    <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Acest folder nu are încă nici un track.</string>
     <string name="map_2d_mode_action">mod 2D</string>
     <string name="external_device_low_battery">Baterie descărcată</string>
@@ -5237,11 +5237,11 @@
     <string name="shared_string_close_the_dialog">Închideți dialogul</string>
     <string name="power_watts_unit">Wați</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="terrain_map">Hartă de teren</string>
+    <string name="terrain_map">Hartă de teren (3D)</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="relief_3d_description">Dețineți și observați macheta la scară a cartierului dumneavoastră sau a întregului continent.</string>
-    <string name="terrain_category_description">Liniile de contur ale terenului, harta completă a dealurilor cu nuanțe întunecate și hărți de pantă cu culori pentru a arăta vârfurile și zonele joase.</string>
-    <string name="slope_legend_description">Slope folosește culori pentru a vizualiza panta terenului. Puteți citi mai multe despre pante în %1$s.</string>
+    <string name="terrain_category_description">Linii de contur ale terenului, nuanțe de gri și indicarea pantei pe scară de culori, pentru a arăta vârfurile și zonele joase.</string>
+    <string name="slope_legend_description">Slope folosește culori pentru a vizualiza panta terenului. Puteți citi mai multe despre Slope în %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">În câteva momente, toate datele și contul dumneavoastră vor fi șterse din OsmAnd Cloud.
 \n
 \nToate datele de pe dispozitiv rămân neatinse.</string>
@@ -5313,7 +5313,7 @@
 \n • Elevation change and slope evaluation reworked
 \n
 \n</string>
-    <string name="use_raster_sqlitedb_for_slope_hillshade">Utilizați raster sqltiedb raster pentru pantă / hillshade</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Utilizați raster sqlitedb pentru hillshade / pantă</string>
     <string name="cache_size">Dimensiunea cache-ului</string>
     <string name="may_be_used_if_there_is_shortcut">Poate fi utilizat în cazul în care există o scurtătură</string>
     <string name="routing_attr_allow_via_ferrata_name">Traseu de munte (Via ferrata)</string>
@@ -5346,4 +5346,13 @@
     <string name="write_bearing">Scrieți Bearing</string>
     <string name="write_heading_description">Salvarea rubricii pentru fiecare punct al pistei în timpul înregistrării</string>
     <string name="write_heading">Scrieți titlul</string>
+    <string name="shared_string_included">Inclus</string>
+    <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
+    <string name="map_widget_group_glide_desc">Widgeturile afișează raportul de planeitate față de țintă sau raportul de planeitate mediu pentru cursa curentă.</string>
+    <string name="hillshade_slope">Colină, Pantă</string>
+    <string name="map_widget_glide_average_desc">Afișează raportul mediu de alunecare pentru intervalul setat.</string>
+    <string name="map_widget_glide_target_desc">Afișează raportul de planare necesar pentru a ajunge la punctul țintă.</string>
+    <string name="glide_ratio_to_target">Raportul de planeitate la țintă</string>
+    <string name="map_widget_group_glide_ratio">Raportul de alunecare</string>
+    <string name="feature_available_as_part_of_plan">%1$s disponibil ca parte a planului %2$s</string>
 </resources>

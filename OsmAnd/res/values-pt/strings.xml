@@ -685,7 +685,7 @@
     <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de visualização</string>
     <string name="rendering_attr_appMode_description">Otimizar mapa para</string>
-    <string name="rendering_attr_contourLines_description">Mostrar desde a ampliação (requer dados de contorno):</string>
+    <string name="rendering_attr_contourLines_description">Mostrar desde a ampliação (requer dados de curvas de nível):</string>
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nível</string>
     <string name="rendering_attr_hmRendered_description">Aumentar o nível de detalhe do mapa.</string>
     <string name="rendering_attr_hmRendered_name">Ver mais detalhes no mapa</string>
@@ -789,7 +789,7 @@
 \n- Funcionamento totalmente desligado da Internet (guarda os mapas obtidos, sejam eles vetoriais ou imagens, numa pasta selecionável).
 \n- Disponíveis mapas vetoriais offline compactados do mundo inteiro.
 \n- Descarregar mapas de países ou regiões diretamente na aplicação.
-\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável, etc.
+\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, paragens de transportes públicos, mapas adicionais com transparência personalizável, características de topografia como curvas de nível, sombras de relevo e declives.
 \n- Pesquisa desligado da Internet para endereços e locais (POIs).
 \n- Cálculo de rotas desligado da Internet para distâncias médias.
 \n- Modo de carro, bicicleta, pedestre, entre outros.
@@ -882,8 +882,8 @@
     <string name="recording_context_menu_precord">Tirar uma fotografia</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
-    <string name="srtm_paid_version_msg">Por favor considere comprar o complemento \"Curvas de nível\" para apoiar o desenvolvimento.</string>
-    <string name="srtm_paid_version_title">Complemento curvas de nível</string>
+    <string name="srtm_paid_version_msg">Por favor considere comprar o complemento \"Topografia\" para apoiar o desenvolvimento.</string>
+    <string name="srtm_paid_version_title">Complemento Topografia</string>
     <string name="av_video_format_descr">Formato de saída de vídeo:</string>
     <string name="av_use_external_recorder_descr">Usar gravador do sistema para vídeo.</string>
     <string name="av_use_external_camera_descr">Utilizar a aplicação do sistema para tirar fotografias.</string>
@@ -896,7 +896,7 @@
     <string name="shared_string_control_stop">Parar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de áudio/vídeo</string>
-    <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nível offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para recursos topográficos offline como curvas de nível, sombras de relevo, inclinação</string>
     <string name="map_widget_distancemeasurement">Medição da distância</string>
     <string name="audionotes_location_not_defined">Toque em \"Usar localização…\" para adicionar uma nota ao local especificado.</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
@@ -906,12 +906,12 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
     <string name="av_def_action_picture">Tirar uma fotografia</string>
-    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras de relevo e declives, ajudam a avaliar visualmente a configuração do terreno e o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por assombreamento de declives, linhas de contorno e/ou coloração da declividade.
+    <string name="srtm_plugin_description">As informações do terreno, como curvas de nível, sombras de relevo, declives, ajudam a avaliar visualmente a configuração do terreno, o relevo, a navegabilidade e muito mais. As informações topográficas podem ser representadas no mapa por linhas de contorno, assombreamento de declives, e/ou coloração da declividade.
 \n
 \nOs dados subjacentes têm origem em SRTM e ASTER.
 \n
 \nVeja mais informações em %1$s.</string>
-    <string name="srtm_plugin_name">Curvas de nível</string>
+    <string name="srtm_plugin_name">Topografia</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteiras regionais</string>
@@ -1048,7 +1048,7 @@
 \n- Disponíveis mapas vetoriais offline compactados do mundo inteiro.
 \n- Descarregar mapas de países ou regiões diretamente na aplicação.
 \n- Recurso Wikipédia desligado da Internet (descarregamento de POIs da Wikipédia), bom para passeios turísticos.
-\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável, etc.
+\n- Sobreposição de mapas diversos, como trilhos GPX ou trajetos de navegação, pontos de interesse (POI), favoritos, paragens de transportes públicos, mapas adicionais com transparência personalizável, características de topografia como curvas de nível, sombras de relevo e declives.
 \n
 \n- Pesquisa desligado da Internet para endereços e locais (POIs).
 \n- Cálculo de rotas desligado da Internet para distâncias médias.
@@ -1908,11 +1908,11 @@
     <string name="sorted_by_distance">Ordenar por distância</string>
     <string name="search_favorites">Pesquisar nos favoritos</string>
     <string name="hillshade_menu_download_descr">Descarregar o mapa da camada superior de \"Sombras de relevo\" para mostrar as sombras verticais.</string>
-    <string name="hillshade_purchase_header">Instale o complemento \"Curvas de nível\" para mostrar áreas verticais graduadas.</string>
+    <string name="hillshade_purchase_header">Instale o complemento \"Topografia\" para mostrar áreas verticais graduadas.</string>
     <string name="hide_from_zoom_level">Ocultar a partir do nível de ampliação</string>
-    <string name="srtm_menu_download_descr">Descarregue o mapa de \"Curvas de nível\" para usar nesta região.</string>
+    <string name="srtm_menu_download_descr">Descarregue o mapa \"Curvas de nível\" desta região.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Compre e instale o complemento \"Curvas de nível\" para mostrar declives no terreno.</string>
+    <string name="srtm_purchase_header">Compre e instale o complemento \"Topografia\" para mostrar declives no terreno.</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="show_from_zoom_level">Mostrar a partir do nível de ampliação</string>
     <string name="routing_attr_allow_private_name">Ativar acesso a vias privadas</string>
@@ -2146,10 +2146,10 @@
     <string name="off_road_render_descr">Para condução todo-o-terreno com base no estilo \"Topo\" e para utilização com imagens de satélite verdes na camada inferior. Redução da espessura das estradas principais, aumento da espessura dos trajetos, caminhos, ciclovias e outras vias.</string>
     <string name="nautical_render_descr">Para navegação náutica. Características: bóias, faróis, cursos de rios, vias e balizas marítimas, portos, serviços de navegação marítima e curvas de profundidade.</string>
     <string name="ski_map_render_descr">Para esquiar. Contém pistas de esqui, elevadores, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
-    <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. É suave para os olhos no modo noturno. Características principais: curvas de nível, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
+    <string name="light_rs_render_descr">Estilo de condução simples. Modo noturno suave, contrastando estradas com estilo laranja, elementos secundários do mapa desvanecidos, características de topografia como curvas de nível.</string>
     <string name="topo_render_descr">Para caminhadas, pedestrianismo e ciclismo de natureza. Legível em exteriores. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
     <string name="touring_view_render_descr">Estilo turístico com alto contraste e máximo detalhe. Inclui todas as opções do estilo OsmAnd padrão, enquanto mostra o máximo de detalhes possíveis, particularmente estradas, caminhos e outras formas de viajar. Distinção clara do \"atlas turístico\" entre as categorias de estrada. Adequado para uso diurno, noturno e ao ar livre.</string>
-    <string name="default_render_descr">Estilo de utilização geral. As cidades densamente povoadas são mostradas simplificadas e de forma clara. Características principais: curvas de nível, rotas, qualidade da superfície, restrições de acesso, placas das referências da estradas, renderização de caminhos de acordo com a escala SAC/CAI, características desportivas de águas bravas.</string>
+    <string name="default_render_descr">Estilo de propósito geral. Cidades densas mostradas de forma limpa. Características: rotas, qualidade de superfície, restrições de acesso, escudos de estrada, caminhos conforme escala SAC/CAI, elementos desportivos de águas bravas, elementos de topografia como curvas de nível.</string>
     <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
     <string name="open_wikipedia_link_online_description">A hiperligação será aberta no navegador de Internet.</string>
     <string name="read_wikipedia_offline_description">Obtenha uma subscrição do OsmAnd Live para ler artigos da Wikipédia e da Wikivoyage desligado da Internet.</string>
@@ -2485,7 +2485,7 @@
     <string name="map_widget_intermediate_time">Hora intermédia</string>
     <string name="osmand_extended_description_part1">OsmAnd (sigla em inglês de direções de navegação automatizada do OSM) é uma aplicação de mapas e navegação com acesso a dados livres, mundiais e de alta qualidade do OSM.
 \n
-\nPoderá usar o navegador visual e por voz, ver POIs (pontos de interesse), criar e gerir trilhos GPX, usar curvas de nível (através de um complemento) e dados de altitude, escolher entre os modos motorista, ciclista e pedestre, editar o OpenStreetMap e muito mais.</string>
+\nPoderá usar o navegador visual e por voz, ver POIs (pontos de interesse), criar e gerir trilhos GPX, usar curvas de nível (através de um complemento) e dados de topografia, escolher entre os modos motorista, ciclista e pedestre, editar o OpenStreetMap e muito mais.</string>
     <string name="osmand_extended_description_part2">Navegação GPS
 \n• Escolha entre modos offline (sem tarifa de roaming quando estiver no estrangeiro) ou online (mais rápido)
 \n• Orientação por voz curva a curva lhe guia ao longo do caminho (vozes gravadas e sintetizadas)
@@ -2541,8 +2541,8 @@
 \n • Antártida: *
 \n A maioria dos países ao redor do globo está disponível para descarregar!
 \n Obtenha um navegador confiável no seu país - seja em França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM)
-\nO OsmAnd+ é uma aplicação de navegação com código-fonte aberto, com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM). Todos os dados dos mapas (vetoriais ou imagens raster) podem ser armazenados no cartão de memória do telemóvel para usar quando não tiver Internet. O OsmAnd+ também permite usar rotas, tanto ligado como desligado da Internet, incluindo a funcionalidade de rotas curva a curva com orientação por voz.
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions / direções de navegação automatizadas do OSM) é uma aplicação de navegação com acesso a uma ampla variedade de dados globais do OpenStreetMap (OSM).
+\nDesfrute da navegação por voz ou visual, visualização de POIs (pontos de interesse), criar e gerir trilhos GPX, utilizando informações topográficas e visualização de curvas de nível, uma escolha entre os modos de condução, de bicicleta ou a pé. edição do OSM e muito mais.
 \n
 \nOsmAnd+ é a versão paga da aplicação, ao comprá-la está a apoiar o projeto, a financiar o desenvolvimento de novas funcionalidades e a receber as últimas atualizações nos mapas.
 \n
@@ -2663,7 +2663,7 @@
     <string name="unsaved_changes_will_be_lost">Quaisquer alterações por guardar serão perdidas. Continuar\?</string>
     <string name="show_free_version_banner_description">Mostra o anúncio da versão gratuita mesmo na versão paga.</string>
     <string name="activate_seamarks_plugin">Ative o complemento \"Mapa náutico\"</string>
-    <string name="activate_srtm_plugin">Ative o complemento \"Curvas de nível\"</string>
+    <string name="activate_srtm_plugin">Ative o complemento \"Topografia\"</string>
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atualizar tudo (%1$s MB)</string>
@@ -3191,7 +3191,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
     <string name="shared_string_calculate">Calcular</string>
     <string name="shared_string_osmand_usage">Utilização do OsmAnd</string>
-    <string name="shared_sting_tiles">Mosaicos</string>
+    <string name="shared_string_tiles">Mosaicos</string>
     <string name="shared_string_maps">Mapas</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3778,7 +3778,7 @@
     <string name="sort_name_descending">Nome: Z – A</string>
     <string name="sort_name_ascending">Nome: A – Z</string>
     <string name="start_finish_icons">Ícones de início e fim</string>
-    <string name="contour_lines_thanks">Obrigado por comprar \"Curvas de nível\"</string>
+    <string name="contour_lines_thanks">Obrigado por comprar \"Topografia\"</string>
     <string name="osm_live_payment_desc_hw">A subscrição é cobrada pelo período selecionado. Cancele-a na sua AppGallery a qualquer momento.</string>
     <string name="osm_live_payment_subscription_management_hw">O pagamento é cobrado da sua conta AppGallery ao confirmar a compra.
 \n
@@ -3910,7 +3910,7 @@
     <string name="edit_track">Editar trilho</string>
     <string name="rename_track">Alterar nome do trilho</string>
     <string name="change_folder">Mudar pasta</string>
-    <string name="hillshade_slope_contour_lines">Sombras de relevo / declives / curvas de nível</string>
+    <string name="hillshade_slope_contour_lines">Curvas de nível / sombras de relevo / declives</string>
     <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
 \n
 \nVeja as instruções sobre como contribuir em %1$s.</string>
@@ -4155,7 +4155,7 @@
     <string name="send_logcat_log">Enviar registo logcat</string>
     <string name="backup_promocode">Código promocional</string>
     <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
-    <string name="purchases_feature_desc_terrain">Veja curvas de nível do terreno, mapas em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
+    <string name="purchases_feature_desc_terrain">Curvas de nível do terreno, sombras de relevo a cinzento e indicação a cores da inclinação, para mostrar picos e planícies.</string>
     <string name="purchases_feature_desc_wikivoyage">Explore o Wikivoyage offline. Os artigos estão divididos em conjuntos de países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Fornece todos os artigos da Wikipédia relacionados a lugares, desligado da Internet, ajudando a aprender sobre os lugares que visita com simples toques no mapa. Não se esqueça de descarregar os ficheiros de mapas da Wikipédia para as respetivas regiões.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma ligação à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
@@ -5214,7 +5214,7 @@
     <string name="external_sensors_not_found">Sensores não encontrados</string>
     <string name="external_sensors_source_of_data">Fonte dos dados</string>
     <string name="rssi_widget_desc">Mostra o nível RSSI do seu dispositivo externo.</string>
-    <string name="map_widget_rssi">Rssi (intensidade do sinal recebido)</string>
+    <string name="map_widget_rssi">RSSI (intensidade do sinal recebido)</string>
     <string name="tracks_empty_folder_description">Esta pasta ainda não tem nenhum trilho.</string>
     <string name="shared_string_new_track">Novo trilho</string>
     <string name="shared_string_visible_on_map">Visível no mapa</string>
@@ -5233,12 +5233,12 @@
     <string name="visible_in_3d_mode">Visível no modo 3D</string>
     <string name="map_3d_mode_description">Toque no mapa com dois dedos e mova-os para cima e para baixo para ajustar a inclinação do mapa.</string>
     <string name="calculate_offline">Calcular offline</string>
-    <string name="calculate_offline_altitude_descr">Calcula a elevação sem ligação à Internet, com base nos dados do mapa de altitude. As diferenças em relação à altitude registada pelo dispositivo podem ser usadas como correção da elevação.</string>
+    <string name="calculate_offline_altitude_descr">Calcula a elevação sem ligação à Internet, com base nos dados do mapa do terreno (3D). As diferenças em relação à altitude registada pelo dispositivo podem ser usadas como correção da elevação.</string>
     <string name="error_calculate">O resultado do cálculo está vazio</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="power_watts_unit">Watts</string>
     <string name="shared_string_close_the_dialog">Fechar o ecrã</string>
-    <string name="terrain_map">Mapa do terreno</string>
+    <string name="terrain_map">Mapa do terreno (3D)</string>
     <string name="relief_3d">Relevo 3D</string>
     <string name="relief_3d_description">Possua e observe o modelo do seu bairro ou de todo o continente.</string>
     <string name="verify_account_deletion_descr">Temos de verificar a sua conta antes de a apagar.
@@ -5264,10 +5264,10 @@
     <string name="backup_error_delete_account_email_match">O e-mail não corresponde ao nome de utilizador de login</string>
     <string name="verify_account">Verifique a sua conta</string>
     <string name="slope_legend_description">O declive utiliza cores para visualizar a inclinação do terreno. Pode ler mais sobre declives em %1$s.</string>
-    <string name="terrain_category_description">Veja curvas de nível do terreno, mapas em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
+    <string name="terrain_category_description">Curvas de nível do terreno, sombras de relevo a cinzento e indicação a cores da inclinação, para mostrar picos e planícies.</string>
     <string name="osmand_cloud_delete_account_confirmation">Apagar a conta\?</string>
-    <string name="free_favorites_backup">Cópia de segurança gratuita dos favoritos</string>
-    <string name="get_osmand_cloud">Obtenha o OsmAnd Cloud</string>
+    <string name="free_favorites_backup">Cópia de segurança gratuita de favoritos</string>
+    <string name="get_osmand_cloud">Obter o OsmAnd Cloud</string>
     <string name="free_account">Conta gratuita</string>
     <string name="free_favorites_backup_description">Registe-se no OsmAnd Cloud para obter uma cópia de segurança gratuita dos seus favoritos e configurações.</string>
     <string name="shared_string_avoid">Evitar</string>
