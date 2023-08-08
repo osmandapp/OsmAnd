@@ -5236,7 +5236,7 @@
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
     <string name="relief_3d">3D-рельеф</string>
     <string name="terrain_map">Карта рельефа</string>
-    <string name="free_favorites_backup_description"/>
+    <string name="free_favorites_backup_description">Зарегистрируйтесь в OsmAnd Cloud, чтобы получить возможность бесплатного резервного копирования избранных и настроек.</string>
     <string name="free_favorites_backup">Резервное копирование избранных</string>
     <string name="folder_export_empty_error">Экспорт невозможен, так как папка пуста.</string>
     <string name="osmand_cloud_delete_account_confirmation">Удалить аккаунт\?</string>
@@ -5293,7 +5293,7 @@
 \n • Переработано определение изменения высоты и оценка уклона
 \n
 \n</string>
-    <string name="get_osmand_cloud"/>
+    <string name="get_osmand_cloud">Получить OsmAnd Cloud</string>
     <string name="free_account">Бесплатный аккаунт</string>
     <string name="osmand_cloud_deleting_account_descr">Вскоре все ваши данные и аккаунт будут удалены из OsmAnd Cloud.
 \n
@@ -5341,4 +5341,7 @@
     <string name="write_bearing">Записывать азимут</string>
     <string name="write_heading_description">Сохранять значение курса для каждой точки трека при записи.</string>
     <string name="write_heading">Записывать курс</string>
+    <string name="local_indexes_category_terrain">Карты рельефа (3D)</string>
+    <string name="hillshade_slope">Отмывка, уклон</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>
