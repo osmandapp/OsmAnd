@@ -28,7 +28,6 @@ import java.util.List;
 
 public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistancePcc> {
 
-	private static final double WHEEL_CIRCUMFERENCE = 2.1; //The wheel circumference in meters, used to calculate speed
 
 	private BikeSpeedData lastBikeSpeedData;
 
@@ -99,6 +98,10 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 		return "Bicycle Speed";
 	}
 
+	private AntBikeSpeedDistanceDevice getBikeSpeedDistanceDevice() {
+		return (AntBikeSpeedDistanceDevice) device;
+	}
+
 	@NonNull
 	@Override
 	public List<SensorWidgetDataFieldType> getSupportedWidgetDataFieldTypes() {
@@ -113,13 +116,17 @@ public class AntBikeSpeedSensor extends AntAbstractSensor<AntPlusBikeSpeedDistan
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeCalculatedSpeedEvent(new CalculatedSpeedReceiver(new BigDecimal(WHEEL_CIRCUMFERENCE)) {
-			@Override
-			public void onNewCalculatedSpeed(long estTimestamp, EnumSet<EventFlag> enumSet, BigDecimal calculatedSpeed) {
-				lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());//m/s
-				getDevice().fireSensorDataEvent(AntBikeSpeedSensor.this, lastBikeSpeedData);
-			}
-		});
+		AntPlusBikeSpeedDistancePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeCalculatedSpeedEvent(null);
+			pcc.subscribeCalculatedSpeedEvent(new CalculatedSpeedReceiver(BigDecimal.valueOf(getBikeSpeedDistanceDevice().getWheelCircumference())) {
+				@Override
+				public void onNewCalculatedSpeed(long estTimestamp, EnumSet<EventFlag> enumSet, BigDecimal calculatedSpeed) {
+					lastBikeSpeedData = new BikeSpeedData(estTimestamp, calculatedSpeed.doubleValue());//m/s
+					getDevice().fireSensorDataEvent(AntBikeSpeedSensor.this, lastBikeSpeedData);
+				}
+			});
+		}
 	}
 
 	@Override

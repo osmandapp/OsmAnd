@@ -107,10 +107,14 @@ public class AntRssiLegacySensor<T extends AntPlusLegacyCommonPcc> extends AntAb
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeRssiEvent((estTimestamp, enumSet, rssi) -> {
-			rssiData = new RssiData(estTimestamp, rssi);
-			getDevice().fireSensorDataEvent(AntRssiLegacySensor.this, rssiData);
-		});
+		AntPlusLegacyCommonPcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeRssiEvent(null);
+			pcc.subscribeRssiEvent((estTimestamp, enumSet, rssi) -> {
+				rssiData = new RssiData(estTimestamp, rssi);
+				getDevice().fireSensorDataEvent(AntRssiLegacySensor.this, rssiData);
+			});
+		}
 	}
 
 	@Override
