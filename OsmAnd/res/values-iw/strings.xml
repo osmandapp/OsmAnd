@@ -4919,7 +4919,7 @@
     <string name="compass_always_hidden">תמיד מוסתר</string>
     <string name="shared_string_large">גדול</string>
     <string name="compass_visible_if_map_rotated_desc">מוסתר כאשר הצפון למעלה</string>
-    <string name="download_tiles">הורד אריחים</string>
+    <string name="download_tiles">הורדת אריחים</string>
     <string name="compass_visible_if_map_rotated">גלוי אם המפה מסובבת</string>
     <string name="live_update_frequency_week_variant">עדכוני מפה נבדקים מדי שבוע.</string>
     <string name="map_widget_ant_bicycle_cadence_desc">מציג את המהירות שבה המשתמש מדווש</string>
