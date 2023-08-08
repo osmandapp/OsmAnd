@@ -106,10 +106,14 @@ public class AntRssiCommonSensor<T extends AntPlusCommonPcc> extends AntAbstract
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeRssiEvent((estTimestamp, enumSet, rssi) -> {
-			rssiData = new RssiData(estTimestamp, rssi);
-			getDevice().fireSensorDataEvent(AntRssiCommonSensor.this, rssiData);
-		});
+		AntPlusCommonPcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeRssiEvent(null);
+			pcc.subscribeRssiEvent((estTimestamp, enumSet, rssi) -> {
+				rssiData = new RssiData(estTimestamp, rssi);
+				getDevice().fireSensorDataEvent(AntRssiCommonSensor.this, rssiData);
+			});
+		}
 	}
 
 	@Override

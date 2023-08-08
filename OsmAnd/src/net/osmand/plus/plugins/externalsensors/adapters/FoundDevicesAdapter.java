@@ -17,6 +17,7 @@ import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ble.BLEAbstractDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
 import net.osmand.plus.plugins.externalsensors.viewholders.FoundDeviceViewHolder;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -28,7 +29,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	protected final OsmandApplication app;
 	protected final ExternalSensorsPlugin plugin;
 	protected final boolean nightMode;
-	protected List<AbstractDevice<?>> items = new ArrayList<>();
+	protected List<AbstractDevice<? extends AbstractSensor>> items = new ArrayList<>();
 	protected DeviceClickListener deviceClickListener;
 	protected UiUtilities uiUtils;
 

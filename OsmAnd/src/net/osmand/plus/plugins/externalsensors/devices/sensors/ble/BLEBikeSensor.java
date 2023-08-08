@@ -38,7 +38,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 	private int lastCrankRevolutions = -1;
 	private int lastCrankEventTime = -1;
 
-	private int wheelSize = 2086;
+	private float wheelSize; //m
 
 	private BikeCadenceData lastBikeCadenceData;
 	private BikeSpeedDistanceData lastBikeSpeedDistanceData;
@@ -201,11 +201,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		return GattAttributes.UUID_CHARACTERISTIC_CYCLING_SPEED_AND_CADENCE_MEASUREMENT;
 	}
 
-	public int getWheelSize() {
-		return wheelSize;
-	}
-
-	public void setWheelSize(int wheelSize) {
+	public void setWheelSize(float wheelSize) {
 		this.wheelSize = wheelSize;
 	}
 
@@ -234,13 +230,13 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		if (wheelRevPresent) {
 			wheelRevolutions = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT32, 1);
 			lastWheelEventTime = characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT16, 5);
-			int circumference = wheelSize;
+			float circumference = wheelSize;
 			if (firstWheelRevolutions < 0) {
 				firstWheelRevolutions = wheelRevolutions;
 			}
 			if (this.lastWheelEventTime == lastWheelEventTime) {
-				float totalDistance = (float) wheelRevolutions * (float) circumference / 1000.0f;
-				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * (float) circumference / 1000.0f;
+				float totalDistance = (float) wheelRevolutions * circumference;
+				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * circumference; //m
 				float speed = 0;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			} else if (lastWheelRevolutions >= 0) {
@@ -250,14 +246,13 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 				} else {
 					timeDifference = (lastWheelEventTime - this.lastWheelEventTime) / 1024.0f;
 				}
-				float distanceDifference = (wheelRevolutions - lastWheelRevolutions) * circumference / 1000.0f;
-				float totalDistance = (float) wheelRevolutions * (float) circumference / 1000.0f;
-				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * (float) circumference / 1000.0f;
+				float distanceDifference = (wheelRevolutions - lastWheelRevolutions) * circumference;
+				float totalDistance = (float) wheelRevolutions * circumference;
+				float distance = (float) (wheelRevolutions - firstWheelRevolutions) * circumference;
 				float speed = (distanceDifference / timeDifference);
 				wheelCadence = (wheelRevolutions - lastWheelRevolutions) * 60.0f / timeDifference;
 				getDevice().fireSensorDataEvent(this, createBikeSpeedDistanceData(speed, distance, totalDistance));
 			}
-
 			lastWheelRevolutions = wheelRevolutions;
 			this.lastWheelEventTime = lastWheelEventTime;
 
@@ -284,6 +279,7 @@ public class BLEBikeSensor extends BLEAbstractSensor {
 		}
 	}
 
+	//speed m/s, distance m
 	@NonNull
 	private SensorData createBikeSpeedDistanceData(float speed, float distance, float totalDistance) {
 		BikeSpeedDistanceData data = new BikeSpeedDistanceData(System.currentTimeMillis(), speed, distance, totalDistance);

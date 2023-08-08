@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,22 +23,28 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.EditTextEx;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
-public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+
+public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 
 	public static final String TAG = "EditDeviceNameDialog";
 
-	private static final String NAME_KEY = "name_key";
-	private static final String SENSOR_ID_KEY = "content_key";
+	private static final String PROPERTY_ID_KEY = "name_key";
+	private static final String DEVICE_ID_KEY = "content_key";
 
-	private EditTextEx textInput;
-	private String name;
-	private String sensorId;
+	private OsmandTextFieldBoxes propertyValueView;
+	private ExtendedEditText textInput;
+	private TextView propertyName;
+	private String propertyOldValueValue;
+	private DeviceChangeableProperties property;
+	private String deviceId;
 
 	@Nullable
 	@Override
@@ -45,8 +52,12 @@ public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.dialog_edit_device_name, container, false);
 
+		propertyName = view.findViewById(R.id.property_name);
 		textInput = view.findViewById(R.id.description);
 		textInput.requestFocus();
+
+		propertyValueView = view.findViewById(R.id.property_value);
+		propertyValueView.setClearButton(app.getUIUtilities().getIcon(R.drawable.ic_action_cancel, nightMode));
 
 		view.findViewById(R.id.btn_close).setOnClickListener(v -> {
 			if (shouldClose()) {
@@ -60,11 +71,29 @@ public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
 
 		Bundle args = getArguments();
 		if (args != null) {
-			name = args.getString(NAME_KEY);
-			if (name != null) {
-				textInput.append(name);
+			int propertyId = args.getInt(PROPERTY_ID_KEY);
+			deviceId = args.getString(DEVICE_ID_KEY);
+			property = DeviceChangeableProperties.values()[propertyId];
+			textInput.setInputType(property.getInputType());
+			propertyName.setText(property.getDisplayNameResId());
+			propertyValueView.setHasClearButton(property == DeviceChangeableProperties.NAME);
+			ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
+			if (plugin != null) {
+				int metricResId = plugin.getPropertyMetric(property, false);
+				if (metricResId != 0) {
+					if (AndroidUtils.isRTL()) {
+						textInput.setPrefix(app.getString(metricResId));
+					} else {
+						textInput.setSuffix(app.getString(metricResId));
+					}
+
+				}
+				AbstractDevice<?> device = plugin.getDevice(deviceId);
+				if (device != null) {
+					propertyOldValueValue = plugin.getDeviceProperty(device, property).replace(",", ".");
+					textInput.setText(propertyOldValueValue);
+				}
 			}
-			sensorId = args.getString(SENSOR_ID_KEY);
 		}
 
 		return view;
@@ -94,10 +123,10 @@ public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
 
 	private boolean shouldClose() {
 		Editable editable = textInput.getText();
-		if (name == null || editable == null) {
+		if (propertyOldValueValue == null || editable == null) {
 			return true;
 		}
-		return name.equals(editable.toString());
+		return propertyOldValueValue.equals(editable.toString());
 	}
 
 	private void setupSaveButton(View view) {
@@ -130,21 +159,27 @@ public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
 
 	private void onSaveEditedText(@NonNull String newName) {
 		Fragment target = getTargetFragment();
-		if (target instanceof OnSaveSensorNameCallback) {
-			OnSaveSensorNameCallback callback = (OnSaveSensorNameCallback) target;
-			callback.changeSensorName(sensorId, newName);
+		if (target instanceof OnSaveSensorPropertyCallback && property != null) {
+			OnSaveSensorPropertyCallback callback = (OnSaveSensorPropertyCallback) target;
+			callback.changeSensorPropertyValue(deviceId, property, newName);
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment target, @NonNull AbstractDevice<?> device) {
+	public static void showInstance(@NonNull FragmentActivity activity,
+	                                @Nullable Fragment target,
+	                                @NonNull AbstractDevice<?> device,
+	                                @NonNull DeviceChangeableProperties property) {
+		if (!(target instanceof OnSaveSensorPropertyCallback)) {
+			throw new IllegalArgumentException("target fragment should implement OnSaveSensorNameCallback");
+		}
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
-			EditDeviceNameDialog fragment = new EditDeviceNameDialog();
+			EditDevicePropertyDialog fragment = new EditDevicePropertyDialog();
 			Bundle args = new Bundle();
 			ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 			if (plugin != null) {
-				args.putString(NAME_KEY, plugin.getDeviceName(device));
-				args.putString(SENSOR_ID_KEY, device.getDeviceId());
+				args.putInt(PROPERTY_ID_KEY, property.ordinal());
+				args.putString(DEVICE_ID_KEY, device.getDeviceId());
 				fragment.setArguments(args);
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fragmentManager, TAG);
@@ -152,7 +187,7 @@ public class EditDeviceNameDialog extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public interface OnSaveSensorNameCallback {
-		void changeSensorName(@NonNull String sensorId, @NonNull String newName);
+	public interface OnSaveSensorPropertyCallback {
+		void changeSensorPropertyValue(@NonNull String sensorId, @NonNull DeviceChangeableProperties property, @NonNull String newValue);
 	}
 }
