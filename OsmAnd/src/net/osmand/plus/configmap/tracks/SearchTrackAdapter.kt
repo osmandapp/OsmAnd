@@ -24,7 +24,7 @@ class SearchTracksAdapter(
     private val app: OsmandApplication,
     private val trackItems: List<TrackItem>,
     private val nightMode: Boolean,
-    private val selectionMode: Boolean
+    private var selectionMode: Boolean
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
@@ -54,6 +54,10 @@ class SearchTracksAdapter(
         this.sortMode = sortMode
         sortItems()
         notifyDataSetChanged()
+    }
+
+    fun setSelectionMode(selectionMode: Boolean) {
+        this.selectionMode = selectionMode
     }
 
     private fun sortItems() {

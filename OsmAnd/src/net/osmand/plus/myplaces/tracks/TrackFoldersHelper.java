@@ -35,6 +35,7 @@ import net.osmand.plus.importfiles.MultipleTracksImportListener;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet;
 import net.osmand.plus.importfiles.ui.FileExistBottomSheet.SaveExistingFileListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
+import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
@@ -299,6 +300,81 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		PopUpMenu.show(displayData);
 	}
 
+	public void showItemsOptionsMenu(@NonNull View view, @NonNull Set<TrackItem> items, @NonNull Set<TracksGroup> groups,
+									 @NonNull SearchMyPlacesTracksFragment fragment) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		Set<TrackItem> selectedTrackItems = getSelectedTrackItems(items, groups);
+
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_show_on_map)
+				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
+				.setOnClickListener(v -> {
+					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, fragment);
+					fragment.dismiss();
+				})
+				.create()
+		);
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_share)
+				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
+				.setOnClickListener(v -> {
+					showExportDialog(selectedTrackItems, fragment);
+					fragment.dismiss();
+				})
+				.create()
+		);
+		PluginsHelper.onOptionsMenuActivity(activity, fragment, selectedTrackItems, menuItems);
+
+		String move = app.getString(R.string.shared_string_move);
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitle(move)
+				.setIcon(getContentIcon(R.drawable.ic_action_folder_move))
+				.setOnClickListener(v -> {
+					if (items.isEmpty() && groups.isEmpty()) {
+						showEmptyItemsToast(move);
+					} else {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						MoveGpxFileBottomSheet.showInstance(manager, null, null, fragment, false, false);
+					}
+				})
+				.showTopDivider(true)
+				.create()
+		);
+		String changeAppearance = app.getString(R.string.change_appearance);
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitle(changeAppearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> {
+					if (selectedTrackItems.isEmpty()) {
+						showEmptyItemsToast(changeAppearance);
+					} else {
+						TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), fragment);
+					}
+				})
+				.create()
+		);
+		String delete = app.getString(R.string.shared_string_delete);
+		menuItems.add(new PopUpMenuItem.Builder(app)
+				.setTitle(delete)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(v -> {
+					if (items.isEmpty() && groups.isEmpty()) {
+						showEmptyItemsToast(delete);
+					} else {
+						showDeleteConfirmationDialog(items, groups, fragment);
+					}
+				})
+				.showTopDivider(true)
+				.create()
+		);
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = app.getDaynightHelper().isNightMode(false);
+		PopUpMenu.show(displayData);
+	}
+
 	private void exportTrackItem(@NonNull OsmEditingPlugin plugin, @NonNull TrackItem trackItem, @NonNull BaseTrackFolderFragment fragment) {
 		if (trackItem.isShowCurrentTrack()) {
 			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
@@ -349,6 +425,21 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		builder.setPositiveButton(delete, (dialog, which) -> {
 			deleteTracks(trackItems, tracksGroups);
 			fragment.dismiss();
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.show();
+	}
+
+	private void showDeleteConfirmationDialog(@NonNull Set<TrackItem> trackItems,
+											  @NonNull Set<TracksGroup> tracksGroups,
+											  @NonNull SearchMyPlacesTracksFragment fragment) {
+		String size = String.valueOf(trackItems.size() + tracksGroups.size());
+		String delete = app.getString(R.string.shared_string_delete);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setMessage(app.getString(R.string.local_index_action_do, delete.toLowerCase(), size));
+		builder.setPositiveButton(delete, (dialog, which) -> {
+			deleteTracks(trackItems, tracksGroups);
+			fragment.dismissImmediately();
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
@@ -503,7 +594,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		}
 	}
 
-	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
+	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull FragmentStateHolder fragment) {
 		if (Algorithms.isEmpty(trackItems)) {
 			app.showToastMessage(R.string.folder_export_empty_error);
 			return;
