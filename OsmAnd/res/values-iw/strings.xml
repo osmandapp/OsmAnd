@@ -4936,4 +4936,9 @@
     <string name="ant_write_to_gpx">כתיבה חזרה למסלול</string>
     <string name="ant_heart_rate_write_gpx_desc">לכלול את הדופק במסלול</string>
     <string name="map_widget_ant_heart_rate_desc">להציג את דופק המשתמש במהלך פעילות כלשהי בזמן אמת</string>
+    <string name="map_widget_group_glide_desc">ווידג\'טים מציגים את יחס הגלישה למטרה או יחס הגלישה הממוצע עבור הנסיעה הנוכחית.</string>
+    <string name="map_widget_camera_distance">גובה מצלמה</string>
+    <string name="map_widget_camera_tilt">הטיית מצלמה</string>
+    <string name="developer_widgets">ווידג\'טים למפתחים</string>
+    <string name="quick_action_air_pressure_layer">מתג כדי להציג או להסתיר את שכבת לחץ האוויר במפה.</string>
 </resources>
