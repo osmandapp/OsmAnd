@@ -4914,7 +4914,7 @@
     <string name="no_visible_tracks">אין מסלולים על המפה</string>
     <string name="live_update_frequency_hour_variant">עדכוני מפה נבדקים מדי שעה.</string>
     <string name="external_sensor_widgets">חיישנים חיצוניים</string>
-    <string name="ant_go_to_store">עבור לחנות</string>
+    <string name="ant_go_to_store">מעבר לחנות</string>
     <string name="live_update_frequency_day_variant">עדכוני מפה נבדקים מדי יום.</string>
     <string name="compass_always_hidden">תמיד מוסתר</string>
     <string name="shared_string_large">גדול</string>
@@ -4922,10 +4922,18 @@
     <string name="download_tiles">הורדת אריחים</string>
     <string name="compass_visible_if_map_rotated">גלוי אם המפה מסובבת</string>
     <string name="live_update_frequency_week_variant">עדכוני מפה נבדקים מדי שבוע.</string>
-    <string name="map_widget_ant_bicycle_cadence_desc">מציג את המהירות שבה המשתמש מדווש</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">הצגת המהירות שבה המשתמש מדווש</string>
     <string name="map_widget_ant_bicycle_speed">מהירות אופניים</string>
     <string name="nautical_depth_points">נקודות עומק ימיות</string>
-    <string name="shared_string_switch_mode">החלף מצב</string>
-    <string name="shared_string_normal">נורמלי</string>
+    <string name="shared_string_switch_mode">החלפת מצב</string>
+    <string name="shared_string_normal">רגיל</string>
     <string name="compass_always_visible">תמיד מוצג</string>
+    <string name="click_on_widget">לחיצה על הווידג׳ט</string>
+    <string name="shared_string_shows">מציגה</string>
+    <string name="map_widget_ant_heart_rate">דופק</string>
+    <string name="map_widget_ant_bicycle_power">עצמת אופניים</string>
+    <string name="ant_read_data">קריאת נתונים</string>
+    <string name="ant_write_to_gpx">כתיבה חזרה למסלול</string>
+    <string name="ant_heart_rate_write_gpx_desc">לכלול את הדופק במסלול</string>
+    <string name="map_widget_ant_heart_rate_desc">להציג את דופק המשתמש במהלך פעילות כלשהי בזמן אמת</string>
 </resources>
