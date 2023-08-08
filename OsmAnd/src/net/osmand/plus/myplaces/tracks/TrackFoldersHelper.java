@@ -581,7 +581,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull BaseTrackFolderFragment fragment) {
+	public void showExportDialog(@NonNull Collection<TrackItem> trackItems, @NonNull FragmentStateHolder fragment) {
 		if (Algorithms.isEmpty(trackItems)) {
 			app.showToastMessage(R.string.folder_export_empty_error);
 			return;
