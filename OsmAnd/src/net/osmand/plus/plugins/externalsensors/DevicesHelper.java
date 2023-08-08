@@ -530,9 +530,12 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 		String formattedValue = value;
 		if (property == DeviceChangeableProperties.WHEEL_CIRCUMFERENCE) {
-			float floatValue = Float.parseFloat(value.replace(",", "."));
+			float floatValue = WheelDeviceSettings.DEFAULT_WHEEL_CIRCUMFERENCE;
+			if (settings != null && Algorithms.isFloat(value, true)) {
+				floatValue = Float.parseFloat(value.replace(",", "."));
+			}
 			if (!isMetricSelected()) {
-				floatValue *= 39.37;
+				floatValue *= METER_TO_INCH_SCALE;
 			}
 			formattedValue = new DecimalFormat("#.####", new DecimalFormatSymbols(Locale.US)).format(floatValue);
 		}
