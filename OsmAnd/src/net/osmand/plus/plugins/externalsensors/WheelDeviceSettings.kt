@@ -2,9 +2,11 @@ package net.osmand.plus.plugins.externalsensors
 
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties
 
-private const val DEFAULT_WHEEL_CIRCUMFERENCE = 2.086f
-
 class WheelDeviceSettings : DeviceSettings {
+	companion object {
+		const val DEFAULT_WHEEL_CIRCUMFERENCE = 2.086f
+	}
+
 	constructor(
 		deviceId: String, deviceType: DeviceType,
 		deviceName: String, deviceEnabled: Boolean) : super(
