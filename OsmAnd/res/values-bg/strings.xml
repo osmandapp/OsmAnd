@@ -2312,7 +2312,7 @@
     <string name="verify_email_address">Потвърждаване на адреса на електронна поща</string>
     <string name="verify_email_address_descr">Изпратен е код за проверка на %1$s. Въведете го в полето по-долу.</string>
     <string name="cloud_email_not_registered">Този адрес на електронна поща не е регистриран в OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">Този адрес на електронна поща вече е регистриран.</string>
+    <string name="cloud_email_already_registered">Тази адрес на електронна поща вече е регистриран.</string>
     <string name="resend_verification_code">Повторно изпращане</string>
     <string name="average_speed">Средната скорост</string>
     <string name="average_altitude">Средна надморска височина</string>
