@@ -156,14 +156,18 @@ public class AntHeartRateSensor extends AntAbstractSensor<AntPlusHeartRatePcc> {
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeHeartRateDataEvent((estTimestamp, eventFlags, computedHeartRate, heartBeatCount, heartBeatEventTime, dataState) -> {
-			boolean zeroState = AntPlusHeartRatePcc.DataState.ZERO_DETECTED.equals(dataState);
-			boolean initialState = AntPlusHeartRatePcc.DataState.INITIAL_VALUE.equals(dataState);
+		AntPlusHeartRatePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeHeartRateDataEvent(null);
+			pcc.subscribeHeartRateDataEvent((estTimestamp, eventFlags, computedHeartRate, heartBeatCount, heartBeatEventTime, dataState) -> {
+				boolean zeroState = AntPlusHeartRatePcc.DataState.ZERO_DETECTED.equals(dataState);
+				boolean initialState = AntPlusHeartRatePcc.DataState.INITIAL_VALUE.equals(dataState);
 
-			lastHeartRateData = new HeartRateData(getDevice().isConnected(), estTimestamp, computedHeartRate, zeroState,
-					heartBeatCount, initialState, heartBeatEventTime, initialState);
-			getDevice().fireSensorDataEvent(AntHeartRateSensor.this, lastHeartRateData);
-		});
+				lastHeartRateData = new HeartRateData(getDevice().isConnected(), estTimestamp, computedHeartRate, zeroState,
+						heartBeatCount, initialState, heartBeatEventTime, initialState);
+				getDevice().fireSensorDataEvent(AntHeartRateSensor.this, lastHeartRateData);
+			});
+		}
 	}
 
 	@Override

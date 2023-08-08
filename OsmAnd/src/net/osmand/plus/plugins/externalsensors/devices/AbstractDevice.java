@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices;
 
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties.NAME;
+
 import android.app.Activity;
 import android.content.Context;
 
@@ -9,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.plugins.externalsensors.DeviceType;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.AbstractSensor;
+import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperties;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.util.Algorithms;
@@ -17,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractDevice<T extends AbstractSensor> {
@@ -155,6 +159,17 @@ public abstract class AbstractDevice<T extends AbstractSensor> {
 			if (sensor.getSupportedWidgetDataFieldTypes().contains(widgetDataFieldType)) {
 				sensor.writeSensorDataToJson(json, widgetDataFieldType);
 			}
+		}
+	}
+
+	@NonNull
+	public List<DeviceChangeableProperties> getChangeableProperties() {
+		return Collections.emptyList();
+	}
+
+	public void setChangeableProperty(DeviceChangeableProperties property, String value) {
+		if (property == NAME) {
+			setDeviceName(value);
 		}
 	}
 

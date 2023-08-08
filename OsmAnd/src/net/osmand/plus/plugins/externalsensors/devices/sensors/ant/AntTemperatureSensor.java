@@ -118,10 +118,14 @@ public class AntTemperatureSensor extends AntAbstractSensor<AntPlusEnvironmentPc
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeTemperatureDataEvent((estTimestamp, eventFlags, temperature, eventCount, lowLast24Hours, highLast24Hours) -> {
-			lastTemperatureData = new TemperatureData(getDevice().isConnected(), estTimestamp, temperature.doubleValue(), eventCount, lowLast24Hours, highLast24Hours);
-			getDevice().fireSensorDataEvent(AntTemperatureSensor.this, lastTemperatureData);
-		});
+		AntPlusEnvironmentPcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeTemperatureDataEvent(null);
+			pcc.subscribeTemperatureDataEvent((estTimestamp, eventFlags, temperature, eventCount, lowLast24Hours, highLast24Hours) -> {
+				lastTemperatureData = new TemperatureData(getDevice().isConnected(), estTimestamp, temperature.doubleValue(), eventCount, lowLast24Hours, highLast24Hours);
+				getDevice().fireSensorDataEvent(AntTemperatureSensor.this, lastTemperatureData);
+			});
+		}
 	}
 
 	@Override
