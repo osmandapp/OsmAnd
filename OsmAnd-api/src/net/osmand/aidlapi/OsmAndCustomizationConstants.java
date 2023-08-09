@@ -35,12 +35,9 @@ public interface OsmAndCustomizationConstants {
 
 	// Configure Map:
 	String CONFIGURE_MAP_ITEM_ID_SCHEME = "map.configure.";
-	String SHOW_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "show.";
-	String RENDERING_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "rendering.";
-	String CUSTOM_RENDERING_ITEMS_ID_SCHEME = RENDERING_ITEMS_ID_SCHEME + "custom.";
-
 	String APP_PROFILES_ID = CONFIGURE_MAP_ITEM_ID_SCHEME + "app_profiles";
 
+	String SHOW_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "show.";
 	String SHOW_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "category";
 	String FAVORITES_ID = SHOW_ITEMS_ID_SCHEME + "favorites";
 	String POI_OVERLAY_ID = SHOW_ITEMS_ID_SCHEME + "poi_overlay";
@@ -52,20 +49,31 @@ public interface OsmAndCustomizationConstants {
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
 	String MAP_BORDERS_ID = SHOW_ITEMS_ID_SCHEME + "map_borders";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
-	String DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
+	String SHOW_DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
-	String OSM_NOTES = SHOW_ITEMS_ID_SCHEME + "osm_notes";
-	String OSM_EDITS = SHOW_ITEMS_ID_SCHEME + "osm_edits";
-	String OPEN_STREET_MAP = SHOW_ITEMS_ID_SCHEME + "open_street_map";
 	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
-	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
-	String TERRAIN_ID = SHOW_ITEMS_ID_SCHEME + "terrain";
-	String TERRAIN_CATEGORY_ID = SHOW_ITEMS_ID_SCHEME + "terrain_category";
-	String TERRAIN_DESCRIPTION_ID = SHOW_ITEMS_ID_SCHEME + "terrain_description";
 	String WEATHER_ID = SHOW_ITEMS_ID_SCHEME + "weather";
-	String MAP_ENABLE_3D_MAPS_ID = SHOW_ITEMS_ID_SCHEME + "enable_3d_maps";
 
+	String TERRAIN_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "terrain.";
+	String TERRAIN_ID = TERRAIN_ITEMS_ID_SCHEME + "terrain";
+	String TERRAIN_PROMO_ID = TERRAIN_ITEMS_ID_SCHEME + "promo";
+	String TERRAIN_CATEGORY_ID = TERRAIN_ITEMS_ID_SCHEME + "category";
+	String TERRAIN_DESCRIPTION_ID = TERRAIN_ITEMS_ID_SCHEME + "description";
+	String CONTOUR_LINES = TERRAIN_ITEMS_ID_SCHEME + "contour_lines";
+	String RELIEF_3D_ID = TERRAIN_ITEMS_ID_SCHEME + "relief_3d";
+	String TERRAIN_DEPTH_CONTOURS = TERRAIN_ITEMS_ID_SCHEME + "depth_contours";
+
+	String OPEN_STREET_MAP_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "open_street_map.";
+	String OSM_NOTES = OPEN_STREET_MAP_ITEMS_ID_SCHEME + "osm_notes";
+	String OSM_EDITS = OPEN_STREET_MAP_ITEMS_ID_SCHEME + "osm_edits";
+	String OPEN_STREET_MAP = OPEN_STREET_MAP_ITEMS_ID_SCHEME + "category";
+
+	String ROUTES_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "routes.";
+	String ROUTES_ID = ROUTES_ITEMS_ID_SCHEME + "category";
+
+	String RENDERING_ITEMS_ID_SCHEME = CONFIGURE_MAP_ITEM_ID_SCHEME + "rendering.";
+	String CUSTOM_RENDERING_ITEMS_ID_SCHEME = RENDERING_ITEMS_ID_SCHEME + "custom.";
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
 	String MAP_MODE_ID = RENDERING_ITEMS_ID_SCHEME + "map_mode";
@@ -75,7 +83,6 @@ public interface OsmAndCustomizationConstants {
 	String MAP_LANGUAGE_ID = RENDERING_ITEMS_ID_SCHEME + "map_language";
 	String DETAILS_ID = RENDERING_ITEMS_ID_SCHEME + "details";
 	String HIDE_ID = RENDERING_ITEMS_ID_SCHEME + "hide";
-	String ROUTES_ID = RENDERING_ITEMS_ID_SCHEME + "routes";
 
 	// Map Controls:
 	String HUD_BTN_ID_SCHEME = "map.view.";
