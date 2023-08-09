@@ -5195,7 +5195,7 @@
     <string name="shared_string_finger">Doigt</string>
     <string name="shared_string_hand">Main</string>
     <string name="rendering_value_name_only_name">Nom uniquement</string>
-    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (light character.group.period), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
+    <string name="rendering_attr_lightDetail_description">Par défaut : nom de la balise (type. signal.durée), sélectionnez des informations supplémentaires sur les secteurs 1 à 3 ou sur les secteurs 1, 2, 3, 4, 5 du signal lumineux</string>
     <string name="no_poi_for_category">Point d\'intérêt non trouvé</string>
     <string name="poi_categories">Catégories de PI</string>
     <string name="map_2d_mode_action">Mode 2D</string>
@@ -5346,4 +5346,6 @@
     <string name="average_glide_time_interval_desc">Définir la fréquence de calcul de la dérive moyenne.</string>
     <string name="map_widget_group_glide_desc">Les Widgets affichent la dérive par rapport à la destination ou la dérive moyenne pour l\'itinéraire en cours.</string>
     <string name="map_widget_glide_target_desc">Affiche la dérive à compenser pour atteindre la destination.</string>
+    <string name="wheel_circumference">Circonférence de la roue</string>
+    <string name="external_sensor_name_property_description">Nom du capteur</string>
 </resources>
