@@ -21,6 +21,7 @@ import net.osmand.plus.track.helpers.GpxDbHelper
 import net.osmand.search.core.ObjectType
 import net.osmand.search.core.SearchPhrase
 import net.osmand.search.core.SearchResult
+import net.osmand.util.Algorithms
 import net.osmand.util.MapUtils
 
 class HistoryScreen(
@@ -119,9 +120,12 @@ class HistoryScreen(
 			if (item.searchResult?.`object` is HistoryEntry) {
 				val result = item.searchResult?.`object` as HistoryEntry
 				val pointDescription = result.name
-				val title = item.name
+				var title = item.name
 				val icon = CarIcon.Builder(
 					IconCompat.createWithResource(app, pointDescription.itemIcon)).build()
+				if (Algorithms.isEmpty(title)) {
+					title = item.searchResult?.location?.toString()
+				}
 				val rowBuilder = Row.Builder()
 					.setTitle(title)
 					.setImage(icon)
