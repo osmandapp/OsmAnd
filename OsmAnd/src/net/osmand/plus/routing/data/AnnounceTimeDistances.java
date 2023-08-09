@@ -139,14 +139,12 @@ public class AnnounceTimeDistances {
 		switch (turnType) {
 			case STATE_TURN_NOW:
 				int leadDist = TURN_NOW_DISTANCE;
-				float leadTime = TURN_NOW_TIME;
 				// Issue #17376: low speed adjustment for TURN_NOW timing:
 				if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
-					float scaleDown = (float) Math.sqrt(currentSpeed / DEFAULT_SPEED);
+					float scaleDown = (float) (currentSpeed / DEFAULT_SPEED);
 					leadDist = (int) Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
-					leadTime = scaleDown * leadTime;
 				}
-				leadDist = (int) Math.max(leadDist, currentSpeed * leadTime);
+				leadDist = (int) Math.max(leadDist, currentSpeed * TURN_NOW_TIME);
 				return isDistanceLess(currentSpeed, dist, leadDist);
 			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
