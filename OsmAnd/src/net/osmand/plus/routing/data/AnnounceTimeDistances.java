@@ -146,7 +146,8 @@ public class AnnounceTimeDistances {
 					leadDist = (int) Math.max(POSITIONING_TOLERANCE, scaleDown * leadDist);
 					leadTime = scaleDown * leadTime;
 				}
-				return isDistanceLess(currentSpeed, dist, leadDist, leadTime);
+				leadDist = (int) Math.max(leadDist, currentSpeed * leadTime);
+				return isDistanceLess(currentSpeed, dist, leadDist);
 			case STATE_TURN_IN:
 				return isDistanceLess(currentSpeed, dist, TURN_IN_DISTANCE);
 			case STATE_PREPARE_TURN:
@@ -182,18 +183,8 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist) {
-		return isDistanceLess(currentSpeed, dist, leadDist, (float) leadDist / DEFAULT_SPEED);
-	}
-
-	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist, float leadTime) {
-		// Check triggers:
-		// (1) distance <= leadDistance?
-		if (dist <= leadDist + currentSpeed * voicePromptDelayTimeSec) {
-			return true;
-		}
-		// (2) time_with_current_speed <= leadTime? (high speed adjustment)
-		// currentSpeed = 0 in cases where no time threshold is used.
-		return dist <= currentSpeed * (leadTime + voicePromptDelayTimeSec);
+		// Check trigger. Lead distance is scaled up for high speeds.
+		return dist <= Math.max(1, currentSpeed / DEFAULT_SPEED) * leadDist + currentSpeed * voicePromptDelayTimeSec;
 	}
 
 	public float getSpeed(Location loc) {
