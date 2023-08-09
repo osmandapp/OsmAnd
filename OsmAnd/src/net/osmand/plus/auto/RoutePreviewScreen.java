@@ -1,5 +1,6 @@
 package net.osmand.plus.auto;
 
+import android.os.AsyncTask;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,8 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 	@Nullable
 	private GPXFile routeGpxFile;
 
+	private LoadTracksTask loadTracksTask;
+
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
 		@Override
 		public void stateChanged(Void change) {
@@ -73,8 +76,24 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 		this.searchResult = searchResult;
 
 		getLifecycle().addObserver(this);
-
 		calculating = true;
+	}
+
+	private class LoadTracksTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... voids) {
+			prepareRoute();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void unused) {
+			super.onPostExecute(unused);
+			invalidate();
+		}
+	}
+
+	private void prepareRoute(){
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
 			File file = gpxInfo.getFile();
@@ -102,6 +121,8 @@ public final class RoutePreviewScreen extends BaseOsmAndAndroidAutoScreen implem
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
 		getApp().getTargetPointsHelper().addListener(stateChangedListener);
+		loadTracksTask = new LoadTracksTask();
+		loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
