@@ -5,7 +5,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATE
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -296,7 +296,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 						String id = iterator.next().getId();
 						if (DRAWER_DIVIDER_ID.equals(id)
 								|| SHOW_CATEGORY_ID.equals(id)
-								|| TERRAIN_ID.equals(id)
+								|| TERRAIN_CATEGORY_ID.equals(id)
 								|| OPEN_STREET_MAP.equals(id)
 								|| ROUTES_ID.equals(id)
 								|| MAP_RENDERING_CATEGORY_ID.equals(id)) {

@@ -30,6 +30,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
 import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
@@ -157,7 +158,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 				h.actionIcon.setVisibility(View.GONE);
 				h.moveButton.setVisibility(View.VISIBLE);
 				h.divider.setVisibility(View.VISIBLE);
-			} else if (Algorithms.equalsToAny(id, SHOW_CATEGORY_ID, TERRAIN_ID, OPEN_STREET_MAP, ROUTES_ID, MAP_RENDERING_CATEGORY_ID)) {
+			} else if (Algorithms.equalsToAny(id, SHOW_CATEGORY_ID, TERRAIN_CATEGORY_ID, OPEN_STREET_MAP, ROUTES_ID, MAP_RENDERING_CATEGORY_ID)) {
 				h.title.setText(menuItem.getTitle());
 				h.title.setTypeface(FontCache.getFont(app, app.getString(R.string.font_roboto_medium)));
 				h.title.setTextSize(TypedValue.COMPLEX_UNIT_PX, app.getResources().getDimension(R.dimen.default_list_text_size));
@@ -205,7 +206,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			});
 			if (!menuItem.isHidden()
 					&& !id.equals(SHOW_CATEGORY_ID)
-					&& !id.equals(TERRAIN_ID)
+					&& !id.equals(TERRAIN_CATEGORY_ID)
 					&& !id.equals(OPEN_STREET_MAP)
 					&& !id.equals(ROUTES_ID)
 					&& !id.equals(MAP_RENDERING_CATEGORY_ID)) {
