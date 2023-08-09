@@ -183,7 +183,7 @@ public class AnnounceTimeDistances {
 	}
 
 	private boolean isDistanceLess(float currentSpeed, double dist, double leadDist) {
-		// Check trigger. Lead distance is scaled up for high speeds.
+		// Check trigger. Lead distance is scaled up for high speeds. (For cases without such scaling we pass currentSpeed=0.)
 		return dist <= Math.max(1, currentSpeed / DEFAULT_SPEED) * leadDist + currentSpeed * voicePromptDelayTimeSec;
 	}
 
