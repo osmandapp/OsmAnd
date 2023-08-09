@@ -1146,7 +1146,7 @@ public class SearchUICore {
 				int r = step.compare(o1, o2, this);
 				steps.add(step);
 				if (r != 0) {
-					// debug crashes and identify non-transitive comparision
+					// debug crashes and identify non-transitive comparison
 					// LOG.debug(String.format("%d: %s o1='%s' o2='%s'", r, steps, o1, o2));
 					return r;
 				}

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BottomSheetDialogFragment
@@ -24,6 +26,18 @@ class ForgetDeviceDialog : BottomSheetDialogFragment() {
     companion object {
         const val TAG = "ForgetDeviceDialog"
         const val DEVICE_ID_KEY = "DEVICE_ID"
+
+        fun showInstance(manager: FragmentManager, targetFragment: Fragment, device: AbstractDevice<*>) {
+            if(targetFragment !is ForgetDeviceListener){
+                throw IllegalArgumentException("target fragment should implement ForgetDeviceListener")
+            }
+            val fragment = ForgetDeviceDialog()
+            val args = Bundle()
+            args.putString(DEVICE_ID_KEY, device.deviceId)
+            fragment.arguments = args
+            fragment.setTargetFragment(targetFragment, 0)
+            fragment.show(manager, TAG)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +67,7 @@ class ForgetDeviceDialog : BottomSheetDialogFragment() {
         val cancelButtonContainer = cancelButton.findViewById<View>(R.id.button_container)
 
         forgetButton.setOnClickListener {
-            (targetFragment as ExternalDevicesListFragment).onForgetSensorConfirmed(device)
+            (targetFragment as ForgetDeviceListener).onForgetSensorConfirmed(device)
             dismiss()
         }
         cancelButton.setOnClickListener { dismiss() }
@@ -95,5 +109,9 @@ class ForgetDeviceDialog : BottomSheetDialogFragment() {
         )
         cancelButtonText.setTextColor(ColorUtilities.getButtonSecondaryTextColor(app, nightMode))
         return view
+    }
+
+    interface ForgetDeviceListener {
+        fun onForgetSensorConfirmed(device: AbstractDevice<out AbstractSensor>)
     }
 }

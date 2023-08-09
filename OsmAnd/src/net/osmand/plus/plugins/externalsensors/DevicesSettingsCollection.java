@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-class DevicesSettings {
+class DevicesSettingsCollection {
 
 	private static final String DEVICES_SETTINGS_PREF_ID = "external_devices_settings";
 
@@ -26,28 +26,6 @@ class DevicesSettings {
 	private final Map<String, DeviceSettings> settings = new HashMap<>();
 	private List<DevicePreferencesListener> listeners = new ArrayList<>();
 
-	public static class DeviceSettings {
-		String deviceId;
-		DeviceType deviceType;
-		String deviceName;
-		boolean deviceEnabled;
-
-		public DeviceSettings(@NonNull String deviceId, @NonNull DeviceType deviceType,
-		                      @NonNull String deviceName, boolean deviceEnabled) {
-			if (Algorithms.isEmpty(deviceId)) {
-				throw new IllegalArgumentException("Device ID is empty");
-			}
-			this.deviceId = deviceId;
-			this.deviceType = deviceType;
-			this.deviceName = deviceName;
-			this.deviceEnabled = deviceEnabled;
-		}
-
-		public DeviceSettings(@NonNull DeviceSettings settings) {
-			this(settings.deviceId, settings.deviceType, settings.deviceName,
-					settings.deviceEnabled);
-		}
-	}
 
 	public interface DevicePreferencesListener {
 		void onDeviceEnabled(@NonNull String deviceId);
@@ -55,7 +33,7 @@ class DevicesSettings {
 		void onDeviceDisabled(@NonNull String deviceId);
 	}
 
-	public DevicesSettings(@NonNull ExternalSensorsPlugin plugin) {
+	public DevicesSettingsCollection(@NonNull ExternalSensorsPlugin plugin) {
 		gson = new GsonBuilder().create();
 		preference = plugin.registerStringPref(DEVICES_SETTINGS_PREF_ID, "");
 		readSettings();
@@ -88,7 +66,27 @@ class DevicesSettings {
 	public DeviceSettings getDeviceSettings(@NonNull String deviceId) {
 		synchronized (settings) {
 			DeviceSettings deviceSettings = settings.get(deviceId);
-			return deviceSettings != null ? new DeviceSettings(deviceSettings) : null;
+			return deviceSettings != null ? createDeviceSettings(deviceSettings) : null;
+		}
+	}
+
+	private DeviceSettings createDeviceSettings(@NonNull DeviceSettings settings) {
+		switch (settings.getDeviceType()) {
+			case ANT_BICYCLE_SD:
+			case BLE_BICYCLE_SCD:
+				return new WheelDeviceSettings(settings);
+			default:
+				return new DeviceSettings(settings);
+		}
+	}
+
+	public static DeviceSettings createDeviceSettings(String deviceId, DeviceType deviceType, String name, boolean deviceEnabled) {
+		switch (deviceType) {
+			case ANT_BICYCLE_SD:
+			case BLE_BICYCLE_SCD:
+				return new WheelDeviceSettings(deviceId, deviceType, name, deviceEnabled);
+			default:
+				return new DeviceSettings(deviceId, deviceType, name, deviceEnabled);
 		}
 	}
 
@@ -110,14 +108,14 @@ class DevicesSettings {
 			} else {
 				DeviceSettings prevSettings = settings.get(deviceId);
 				settings.put(deviceId, deviceSettings);
-				stateChanged = prevSettings != null && prevSettings.deviceEnabled != deviceSettings.deviceEnabled;
+				stateChanged = prevSettings != null && prevSettings.getDeviceEnabled() != deviceSettings.getDeviceEnabled();
 			}
 			if (write) {
 				writeSettings();
 			}
 		}
 		if (stateChanged) {
-			fireDeviceStateChangedEvent(deviceId, deviceSettings != null && deviceSettings.deviceEnabled);
+			fireDeviceStateChangedEvent(deviceId, deviceSettings != null && deviceSettings.getDeviceEnabled());
 		}
 	}
 

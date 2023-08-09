@@ -16,7 +16,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -216,7 +217,7 @@ class RouteRecalculationHelper {
 			lastTask = newTask;
 			onRouteCalculationStart(params);
 			if (updateProgress) {
-				updateProgress(params);
+				updateProgressWithDelay(params);
 			}
 			Future<?> future = executor.submit(newTask);
 			tasksMap.put(future, newTask);
@@ -274,34 +275,37 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	void updateProgress(RouteCalculationParams params) {
-		List<RouteCalculationProgressListener> listeners = new ArrayList<>();
-		if (params.calculationProgressListener != null) {
-			listeners.add(params.calculationProgressListener);
-		} else if (calculationProgressListeners != null) {
-			listeners.addAll(calculationProgressListeners);
+	void updateProgressWithDelay(RouteCalculationParams params) {
+		app.runInUIThread(() -> {
+			updateProgressInUIThread(params);
+		}, 300);
+	}
+
+	private void updateProgressInUIThread(RouteCalculationParams params) {
+		Collection<RouteCalculationProgressListener> listeners = params.calculationProgressListener != null
+				? Collections.singletonList(params.calculationProgressListener)
+				: calculationProgressListeners;
+		boolean isRouteBeingCalculated = !Algorithms.isEmpty(listeners);
+		for (RouteCalculationProgressListener listener : listeners) {
+			isRouteBeingCalculated &= onRouteCalculationUpdate(listener, params);
 		}
-		if (!Algorithms.isEmpty(listeners)) {
-			app.runInUIThread(() -> {
-				for (RouteCalculationProgressListener listener : listeners) {
-					onRouteCalculationUpdate(listener, params);
-				}
-			}, 300);
+		if (isRouteBeingCalculated) {
+			updateProgressWithDelay(params);
 		}
 	}
 
 	private void onRouteCalculationStart(@NonNull RouteCalculationParams params) {
 		if (params.calculationProgressListener != null) {
 			params.calculationProgressListener.onCalculationStart();
-		} else if (calculationProgressListeners != null) {
+		} else {
 			for (RouteCalculationProgressListener listener : calculationProgressListeners) {
 				listener.onCalculationStart();
 			}
 		}
 	}
 
-	private void onRouteCalculationUpdate(@NonNull RouteCalculationProgressListener progressRoute,
-	                                      @NonNull RouteCalculationParams params) {
+	private boolean onRouteCalculationUpdate(@NonNull RouteCalculationProgressListener progressRoute,
+	                                         @NonNull RouteCalculationParams params) {
 		RouteCalculationProgress calculationProgress = params.calculationProgress;
 		if (isRouteBeingCalculated()) {
 			boolean routeCalculationStarted = calculationProgress.routeCalculationStartTime != 0;
@@ -319,7 +323,7 @@ class RouteRecalculationHelper {
 						progressRoute.onUpdateMissingMaps(calculationProgress.missingMaps, false);
 					}
 				}
-				updateProgress(params);
+				return true;
 			}
 		} else {
 			if (calculationProgress.requestPrivateAccessRouting) {
@@ -327,12 +331,13 @@ class RouteRecalculationHelper {
 			}
 			progressRoute.onCalculationFinish();
 		}
+		return false;
 	}
 
 	private void onRouteCalculationFinish(@NonNull RouteCalculationParams params) {
 		if (params.calculationProgressListener != null) {
 			params.calculationProgressListener.onCalculationFinish();
-		} else if (calculationProgressListeners != null) {
+		} else {
 			for (RouteCalculationProgressListener listener : calculationProgressListeners) {
 				listener.onCalculationFinish();
 			}
@@ -401,7 +406,7 @@ class RouteRecalculationHelper {
 		@Override
 		public void run() {
 			if (!updateProgress) {
-				updateProgress(params);
+				updateProgressWithDelay(params);
 			}
 			RouteProvider provider = routingHelper.getProvider();
 			OsmandSettings settings = getSettings();

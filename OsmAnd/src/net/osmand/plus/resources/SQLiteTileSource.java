@@ -477,7 +477,7 @@ public class SQLiteTileSource implements ITileSource {
 		} finally {
 			if (LOG.isDebugEnabled()) {
 				long time = System.currentTimeMillis();
-				LOG.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				LOG.debug("Checking tile existence x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		}
 	}
@@ -670,7 +670,7 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
 			return;
 		}
-		/*There is no sense to downoad and do not save. If needed, check should perform before downlad 
+		/*There is no sense to download and do not save. If needed, check should perform before download 
 		  if (exists(x, y, zoom)) {
 
 			return;

@@ -5347,4 +5347,7 @@
     <string name="feature_available_as_part_of_plan">%1$s disponible como parte del plan %2$s</string>
     <string name="local_indexes_category_terrain">Mapas del terreno (en 3D)</string>
     <string name="hillshade_slope">Sombreado, Pendiente</string>
+    <string name="map_widget_glide_average_desc">Muestra la tasa de planeo media para el intervalo establecido.</string>
+    <string name="map_widget_glide_target_desc">Muestra la tasa de planeo necesaria para alcanzar el objetivo.</string>
+    <string name="map_widget_group_glide_desc">Los widgets muestran la tasa de planeo respecto al objetivo o la tasa de planeo media del trayecto actual.</string>
 </resources>

@@ -35,10 +35,8 @@ import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
 import net.osmand.plus.quickaction.actions.RouteAction;
-import net.osmand.plus.quickaction.actions.ShowHideCurrentLocationWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
-import net.osmand.plus.quickaction.actions.ShowHideMapCenterWidgetAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
@@ -263,8 +261,6 @@ public class QuickActionRegistry {
 		allTypes.add(DayNightModeAction.TYPE);
 		allTypes.add(ShowHideTransportLinesAction.TYPE);
 		allTypes.add(ShowHideMapillaryAction.TYPE);
-		allTypes.add(ShowHideCurrentLocationWidgetAction.TYPE);
-		allTypes.add(ShowHideMapCenterWidgetAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);
@@ -301,7 +297,7 @@ public class QuickActionRegistry {
 		filterQuickActions(TYPE_ADD_ITEMS, result);
 		filterQuickActions(TYPE_CONFIGURE_MAP, result);
 		filterQuickActions(TYPE_NAVIGATION, result);
-		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
+//		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
 		filterQuickActions(TYPE_SETTINGS, result);
 		filterQuickActions(TYPE_OPEN, result);
 		return result;
