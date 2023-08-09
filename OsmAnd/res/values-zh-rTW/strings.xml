@@ -5338,4 +5338,12 @@
     <string name="shared_string_included">已包含</string>
     <string name="hillshade_slope">地形陰影、斜率</string>
     <string name="local_indexes_category_terrain">地形圖 (3D)</string>
+    <string name="map_widget_glide_average_desc">顯示設定間隔的平均滑翔比。</string>
+    <string name="map_widget_group_glide_ratio">滑翔比</string>
+    <string name="map_widget_group_glide_desc">用來顯示目前旅程的目標滑翔比或平均滑翔比。</string>
+    <string name="average_glide_ratio">平均滑翔比</string>
+    <string name="map_widget_glide_target_desc">顯示到達目標點所需的滑翔比。</string>
+    <string name="average_glide_time_interval_desc">指定滑翔平均的時間間隔。</string>
+    <string name="glide_ratio_to_target">到目標的滑翔比</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
 </resources>

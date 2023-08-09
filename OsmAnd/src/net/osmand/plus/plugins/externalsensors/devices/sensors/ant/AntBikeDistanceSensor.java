@@ -99,6 +99,10 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 		return "Bicycle Distance";
 	}
 
+	private AntBikeSpeedDistanceDevice getBikeSpeedDistanceDevice() {
+		return (AntBikeSpeedDistanceDevice) device;
+	}
+
 	@NonNull
 	@Override
 	public List<SensorWidgetDataFieldType> getSupportedWidgetDataFieldTypes() {
@@ -113,13 +117,17 @@ public class AntBikeDistanceSensor extends AntAbstractSensor<AntPlusBikeSpeedDis
 
 	@Override
 	public void subscribeToEvents() {
-		getAntDevice().getPcc().subscribeCalculatedAccumulatedDistanceEvent(new CalculatedAccumulatedDistanceReceiver(new BigDecimal(WHEEL_CIRCUMFERENCE)) {
-			@Override
-			public void onNewCalculatedAccumulatedDistance(long estTimestamp, EnumSet<EventFlag> eventFlags, BigDecimal accumulatedDistance) {
-				lastBikeDistanceData = new BikeDistanceData(estTimestamp, accumulatedDistance.doubleValue());
-				getDevice().fireSensorDataEvent(AntBikeDistanceSensor.this, lastBikeDistanceData);
-			}
-		});
+		AntPlusBikeSpeedDistancePcc pcc = getAntDevice().getPcc();
+		if (pcc != null) {
+			pcc.subscribeCalculatedAccumulatedDistanceEvent(null);
+			pcc.subscribeCalculatedAccumulatedDistanceEvent(new CalculatedAccumulatedDistanceReceiver(BigDecimal.valueOf(getBikeSpeedDistanceDevice().getWheelCircumference())) {
+				@Override
+				public void onNewCalculatedAccumulatedDistance(long estTimestamp, EnumSet<EventFlag> eventFlags, BigDecimal accumulatedDistance) {
+					lastBikeDistanceData = new BikeDistanceData(estTimestamp, accumulatedDistance.doubleValue());
+					getDevice().fireSensorDataEvent(AntBikeDistanceSensor.this, lastBikeDistanceData);
+				}
+			});
+		}
 	}
 
 	@Override

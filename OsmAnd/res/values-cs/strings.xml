@@ -685,7 +685,7 @@
     <string name="rendering_attr_noPolygons_name">Polygony</string>
     <string name="rendering_attr_appMode_name">Režim vykreslování</string>
     <string name="rendering_attr_appMode_description">Optimalizace mapy pro příslušný uživatelský profil</string>
-    <string name="rendering_attr_contourLines_description">Minimální zvětšení, od kterého se budou zobrazovat vrstevnice (vyžaduje soubor \'SRTM\'):</string>
+    <string name="rendering_attr_contourLines_description">Zobrazit od úrovně zvětšení (vyžaduje vrstevnicová data):</string>
     <string name="rendering_attr_contourLines_name">Zobrazit vrstevnice</string>
     <string name="rendering_attr_hmRendered_description">Zvýšit počet detailů vyobrazených v mapě.</string>
     <string name="rendering_attr_hmRendered_name">Více mapových detailů</string>
@@ -809,7 +809,7 @@
 \n - dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení)
 \n - kompaktní offline vektorové mapy celého světa dostupné zdarma
 \n - stahování národních nebo regionálních map přímo z aplikace
-\n - možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností
+\n - možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností, topografické údaje jako vrstevnice/stínování kopců/sklon svahů
 \n - offline vyhledávání adres a bodů zájmu
 \n - offline navigace na střední vzdálenosti
 \n - režim auto, kolo a pěší s volitelnými funkcemi:
@@ -817,7 +817,7 @@
 \n - automatické přibližování mapy podle rychlosti pohybu
 \n - otáčení mapy podle kompasu nebo směru pohybu
 \n - navádění do jízdních pruhů, zobrazení rychlostních limitů, nahrané i TTS hlasy
-\n 
+\n
 \nOmezení této bezplatné verze:
 \n - omezený počet map ke stažení
 \n - bez offline přístupu k bodům zájmu na Wikipedii
@@ -834,8 +834,8 @@
 \n - kompaktní offline vektorové mapy celého světa dostupné zdarma
 \n - neomezené stahování národních nebo regionálních map přímo z aplikace
 \n - funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty
-\n - možnost zobrazení několika vrstev mapy: GPX nebo navigační trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností
-\n 
+\n - možnost zobrazení několika vrstev mapy: GPX nebo navigační trasa, body zájmu, oblíbená místa, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností, topografické údaje jako vrstevnice/stínování kopců/sklon svahů
+\n
 \n - offline vyhledávání adres a bodů zájmu
 \n - offline navigace na střední vzdálenosti
 \n - režim auto, kolo a pěší s volitelnými funkcemi:
@@ -875,12 +875,12 @@
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny stínováním svahů, vrstevnicemi a/nebo zbarvením strmosti.
+    <string name="srtm_plugin_description">Informace o terénu, jako jsou obrysové čáry, stínování svahů a strmost, vám pomohou vizuálně zhodnotit reliéf terénu, schůdnost a další. Topografické informace mohou být na mapě znázorněny vrstevnicemi, stínováním svahů a/nebo zbarvením strmosti.
 \n
 \nPodkladová data pocházejí ze systémů SRTM a ASTER.
 \n
 \nDalší informace naleznete na adrese %1$s.</string>
-    <string name="srtm_plugin_name">Vrstevnice</string>
+    <string name="srtm_plugin_name">Topografie</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">Klepněte na \'Použít polohu...\' pro přidání poznámky k poloze.</string>
     <string name="map_widget_audionotes">Audio poznámky</string>
@@ -914,12 +914,12 @@
     <string name="layer_recordings">Audio/video nahrávky</string>
     <string name="recording_description">Nahrávka %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nahrávání</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pro off-line zobrazování vrstevnic</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pro off-line zobrazování topografických údajů jako jsou vrstevnice, stínování kopců a sklon svahů</string>
     <string name="shared_string_control_start">Start</string>
     <string name="dropbox_plugin_name">Modul Dropbox</string>
     <string name="intermediate_points_change_order">Změnit pořadí</string>
-    <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu \'Vrstevnice\', abyste podpořili další vývoj.</string>
-    <string name="srtm_paid_version_title">Modul Vrstevnice</string>
+    <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu \'Topografie\', abyste podpořili další vývoj.</string>
+    <string name="srtm_paid_version_title">Modul Topografie</string>
     <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Synchronizuje trasy a audio/video poznámky s vaším účtem Dropbox.</string>
     <string name="stop_routing_confirm">Zastavit navigaci\?</string>
@@ -1677,7 +1677,7 @@
     <string name="favorite_category_name">Název kategorie</string>
     <string name="favorite_category_add_new_title">Přidat novou kategorii</string>
     <string name="activate_seamarks_plugin">Prosím aktivujte modul \'Plavební mapový pohled\'</string>
-    <string name="activate_srtm_plugin">Prosím aktivujte modul \'Vrstevnice\'</string>
+    <string name="activate_srtm_plugin">Prosím aktivujte modul \'Topografie\'</string>
     <string name="later">Později</string>
     <string name="get_full_version">Plná verze</string>
     <string name="downloads">Stahování</string>
@@ -2211,11 +2211,11 @@
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Hledat v Oblíbených</string>
     <string name="hillshade_menu_download_descr">Pro zobrazení vertikálního stínování si stáhněte překryvnou mapu stínovaných svahů.</string>
-    <string name="hillshade_purchase_header">Pro zobrazení výškových stupňů si nainstalujte modul \'Vrstevnice\'.</string>
+    <string name="hillshade_purchase_header">Pro zobrazení výškových stupňů si nainstalujte modul \'Topografie\'.</string>
     <string name="hide_from_zoom_level">Skrýt od úrovně přiblížení</string>
     <string name="srtm_menu_download_descr">Stáhnout mapu vrstevnic tohoto regionu.</string>
     <string name="shared_string_plugin">Modul</string>
-    <string name="srtm_purchase_header">Pro zobrazení výškových stupňů si zakupte a nainstalujte modul \'Vrstevnice\'.</string>
+    <string name="srtm_purchase_header">Pro zobrazení výškových stupňů si zakupte a nainstalujte modul \'Topografie\'.</string>
     <string name="srtm_color_scheme">Barevné schéma</string>
     <string name="show_from_zoom_level">Zobrazení začíná na úrovni přiblížení</string>
     <string name="routing_attr_allow_private_name">Povolit soukromý přístup</string>
@@ -2484,7 +2484,7 @@
     <string name="subsequent_dest_description">Přesune cíl nahoru a vytvoří ho</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) je mapová a navigační aplikace s přístupem k volným a kvalitním celosvětovým údajům z OpenStreetMap (OSM).
 \n
-\n Využívejte hlasovou a optickou navigaci, zobrazení bodů zájmu, vytváření a správu GPX stop, znázornění vrstevnic a nadmořské výšky (pomocí doplňkového modulu), výběr z režimů auto, cyklista a pěší, editaci OSM a mnoho dalšího.</string>
+\n Využívejte hlasovou a optickou navigaci, zobrazení bodů zájmu, vytváření a správu GPX stop, znázornění vrstevnic a topografických údajů (pomocí doplňkového modulu), výběr z režimů auto, cyklista a pěší, editaci OSM a mnoho dalšího.</string>
     <string name="toast_empty_name_error">Bezejmenné místo</string>
     <string name="tunnel_warning">Blíží se tunel</string>
     <string name="show_tunnels">Tunely</string>
@@ -2534,12 +2534,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">Lyžování
 \nOsmAnd plugin Lyžařský mapový pohled zobrazuje lyžařské trasy podle stupně obtížnosti a také další informace jako polohy vleků a dalších zařízení.</string>
-    <string name="osmand_extended_description_part5">Cyklistika 
-\n• Na mapě najdete cyklostezky 
-\n• GPS navigace v režimu Cyklista vytvoří trasu po cyklostezkách 
-\n• Vidíte svoji rychlost a nadmořskou výšku 
-\n• Pomocí funkce GPX záznam si svůj výlet uložíte a můžete sdílet 
-\n• Pomocí dalších pluginů si můžete na mapě zobrazit vrstevnice a stínování kopců</string>
+    <string name="osmand_extended_description_part5">Cyklistika
+\n• Na mapě najdete cyklostezky
+\n• GPS navigace v režimu Cyklista vytvoří trasu po cyklostezkách
+\n• Vidíte svoji rychlost a nadmořskou výšku
+\n• Pomocí funkce GPX záznam si svůj výlet uložíte a můžete sdílet
+\n• Pomocí samostatného modulu si můžete na mapě zobrazit vrstevnice a stínování kopců</string>
     <string name="osmand_extended_description_part6">Pěší výlety, procházky městem
 \n• Mapa zobrazuje pěší a turistické trasy
 \n• Wikipedie ve vašem zvoleném jazyce vám poskytne mnoho informací při procházce městem
@@ -2567,7 +2567,7 @@
 \n Mapy většiny států na zeměkouli jsou dostupné ke stažení!
 \n Získejte spolehlivého navigátora ve své zemi - ať je to Francie, Německo, Mexiko, Spojené království, Španělsko, Nizozemí, USA, Rusko, Brazílie či jakákoliv jiná.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) je mapová a navigační aplikace s přístupem ke kvalitním, bezplatným a celosvětovým datům OpenStreetMap (OSM).
-\nMůžete využít hlasovou a optickou navigaci, prohlížet si POI (body zájmu), vytvářet a spravovat GPX trasy, zobrazit vrstevnice a údaje o nadmořské výšce, vybírat mezi režimem auto, cyklista a pěší, editovat OSM a mnoho dalšího.
+\nMůžete využít hlasovou a optickou navigaci, prohlížet si POI (body zájmu), vytvářet a spravovat GPX trasy, zobrazit vrstevnice a topografické údaje, vybírat mezi režimem auto, cyklista a pěší, editovat OSM a mnoho dalšího.
 \n
 \nOsmAnd+ je placenou verzí aplikace. Jejím zakoupením podpoříte projekt, přispějete na vývoj nových funkcí a získáte nejnovější aktualizace.
 \n
@@ -2735,10 +2735,10 @@
     <string name="nautical_render_descr">Pro námořní navigaci. Obsahuje bóje, majáky, plavební cesty, mořské cesty a značky, přístavy, námořní služby a hloubkové vrstevnice.</string>
     <string name="ski_map_render_descr">Pro lyžování. Obsahuje sjezdovky, lyžařské vleky, běžkařské trasy atd. Nedůležité objekty jsou na mapě méně výrazné.</string>
     <string name="welcome_to_open_beta">Vítejte v otevřené beta verzi</string>
-    <string name="light_rs_render_descr">Jednoduchý styl pro automobilovou navigaci. Příjemný noční režim, vrstevnice, kontrastní oranžové silnice, druhořadé objekty jsou méně výrazné.</string>
+    <string name="light_rs_render_descr">Jednoduchý styl pro automobilovou navigaci. Příjemný noční režim, kontrastní oranžové silnice, druhořadé objekty jsou méně výrazné, topografické údaje jako například vrstevnice.</string>
     <string name="topo_render_descr">Pro pěší turistiku a cyklistiku v přírodě. Dobře čitelný venku. Kontrastní silnice a přírodních objekty, různé typy tras, vrstevnice s rozšířeným nastavením, více detailů. Umožňuje rozlišit kvalitu povrchu vozovky. Nemá noční režim.</string>
     <string name="touring_view_render_descr">Styl pro cestování s vysokým kontrastem a maximálními detaily. Obsahuje všechna nastavení ze základního stylu OsmAnd a navíc zobrazuje maximum detailů, především silnice, cesty a jiné způsoby cestování. Jasně rozlišuje různé typy cest, podobně jako cestovní atlasy. Vhodný pro použití ve dne, v noci i venku.</string>
-    <string name="default_render_descr">Obecný styl. Čisté vykreslování hustě osídlených měst. Obsahuje vrstevnice, trasy, kvalitu povrchu cest, omezení přístupu, čísla cest, vykreslení cest podle stupnice SAC/CAI, objekty pro vodní sporty.</string>
+    <string name="default_render_descr">Obecný styl. Čisté vykreslování hustě osídlených měst. Obsahuje trasy, kvalitu povrchu cest, omezení přístupu, čísla cest, vykreslení cest podle stupnice SAC/CAI, objekty pro vodní sporty, topografické údaje jako například vrstevnice.</string>
     <string name="travel_card_download_descr">Stáhněte si cestovní průvodce Wikivoyage a prohlížejte články o místech po celém světě bez připojení na internet.</string>
     <string name="start_editing_card_image_text">Bezplatný cestovní průvodce, který může upravovat každý.</string>
     <string name="welcome_to_open_beta_description">Cestovní průvodci jsou nyní založené na Wikivoyage. Všechny jejich funkce můžete otestovat zdarma během beta testování.</string>
@@ -3489,7 +3489,7 @@
     <string name="sort_name_descending">Název: Z – A</string>
     <string name="sort_name_ascending">Název: A – Z</string>
     <string name="start_finish_icons">Ikony startu a cíle</string>
-    <string name="contour_lines_thanks">Děkujeme za zakoupení modulu \'Vrstevnice\'</string>
+    <string name="contour_lines_thanks">Děkujeme za zakoupení modulu \'Topografie\'</string>
     <string name="perform_oauth_authorization_description">Přihlásit se pomocí OAuth pro použití funkcí editace OSM</string>
     <string name="perform_oauth_authorization">Přihlášení pomocí OAuth</string>
     <string name="clear_osm_token">Vymazat OpenStreetMap OAuth token</string>
@@ -3960,7 +3960,7 @@
     <string name="uploading_count">Nahrávám %1$d z %2$d</string>
     <string name="uploaded_count">Nahráno %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Vyberte úpravy pro nahrání</string>
-    <string name="hillshade_slope_contour_lines">Stínované svahy / Sklon svahů / Vrstevnice</string>
+    <string name="hillshade_slope_contour_lines">Vrstevnice / Stínované svahy / Sklon svahů</string>
     <string name="open_place_reviews_plugin_description">Přispívejte do projektu OpenPlaceReviews, například fotografiemi, recenzemi nebo odkazy na veřejná místa, jako jsou restaurace, hotely nebo muzea.
 \n
 \nNávod, jak přispět, najdete na našich webových stránkách %1$s.</string>
@@ -5180,7 +5180,7 @@
     <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externího zařízení.</string>
     <string name="shared_string_close_the_dialog">Zavřít dialogové okno</string>
     <string name="revolutions_per_minute_unit">RPM</string>
-    <string name="calculate_offline_altitude_descr">Výpočet nadmořské výšky v režimu offline na základě údajů z výškové mapy. Rozdíly oproti nadmořské výšce zaznamenané zařízením lze použít jako korekci nadmořské výšky.</string>
+    <string name="calculate_offline_altitude_descr">Výpočet nadmořské výšky v režimu offline na základě údajů z 3D terénní mapy. Rozdíly oproti nadmořské výšce zaznamenané zařízením lze použít jako korekci nadmořské výšky.</string>
     <string name="external_sensors_source_of_data">Zdroj údajů</string>
     <string name="map_3d_mode_hint">Dlouhým klepnutím na tlačítko můžete změnit jeho polohu.</string>
     <string name="visible_in_3d_mode">Viditelné ve 3D režimu</string>
@@ -5218,7 +5218,7 @@
     <string name="relief_3d">3D reliéf</string>
     <string name="shared_string_wrist">Zápěstí</string>
     <string name="shared_string_finger">Prst</string>
-    <string name="terrain_map">Mapa terénu</string>
+    <string name="terrain_map">Mapa terénu (3D)</string>
     <string name="shared_string_chest">Hruď</string>
     <string name="no_bt_permission">Oprávnění Bluetooth nebylo uděleno</string>
     <string name="shared_string_hand">Ruka</string>
@@ -5341,4 +5341,7 @@
     <string name="write_heading">Zapisovat směr</string>
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
+    <string name="hillshade_slope">Stínování kopců, svahy</string>
 </resources>

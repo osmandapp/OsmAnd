@@ -5243,7 +5243,7 @@
     <string name="external_sensors_source_of_data">Origen de los datos</string>
     <string name="save_track_external_sensors_data">Datos</string>
     <string name="write_data_from_sensor_to_track">Escribir datos de sensores externos en el GPX mientras se graba el viaje.</string>
-    <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa de altura. Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
+    <string name="calculate_offline_altitude_descr">Calcula la elevación estando desconectado, basándose en los datos del mapa topográfico (3D). Las diferencias respecto a la altitud registrada por el dispositivo pueden usarse como corrección de la elevación.</string>
     <string name="error_calculate">El resultado del cálculo está vacío</string>
     <string name="calculate_offline">Calcular sin conexión</string>
     <string name="power_watts_unit">Vatios (watts)</string>
@@ -5360,4 +5360,14 @@
     <string name="write_heading">Escribir encabezado</string>
     <string name="shared_string_included">Incluido</string>
     <string name="feature_available_as_part_of_plan">«%1$s» disponible como parte del plan «%2$s»</string>
+    <string name="local_indexes_category_terrain">Mapa topográfico (3D)</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="average_glide_ratio">Relación de planeo promedio</string>
+    <string name="map_widget_glide_average_desc">Muestran la relación de planeo para el intervalo definido.</string>
+    <string name="average_glide_time_interval_desc">Indica el intervalo de tiempo para el planeo promedio.</string>
+    <string name="glide_ratio_to_target">Relación de planeo al objetivo</string>
+    <string name="map_widget_group_glide_ratio">Relación de planeo</string>
+    <string name="map_widget_glide_target_desc">Muestra la relación de planeo necesaria para alcanzar el punto de destino.</string>
+    <string name="hillshade_slope">Sombreado, Pendientes</string>
+    <string name="map_widget_group_glide_desc">Los widgets muestran la relación de planeo hacia el objetivo o la relación de planeo promedio para el viaje actual.</string>
 </resources>

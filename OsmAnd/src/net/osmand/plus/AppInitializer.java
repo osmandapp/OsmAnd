@@ -641,9 +641,14 @@ public class AppInitializer implements IProgress {
 
 	private void initOpenGl() {
 		OsmandSettings settings = app.getSettings();
-		if (!NativeCore.isAvailable() && settings.USE_OPENGL_RENDER.get()) {
+
+		if (!settings.USE_OPENGL_RENDER.get()) {
+			return;
+		}
+
+		if (!Version.isOpenGlAvailable(app)) {
 			settings.USE_OPENGL_RENDER.set(false);
-		} else if (settings.USE_OPENGL_RENDER.get() && NativeCore.isAvailable() && !Version.isQnxOperatingSystem()) {
+		} else {
 			int failedCounter = settings.OPENGL_RENDER_FAILED.get();
 			if (failedCounter >= MAX_OPENGL_FAILURES && failedCounter % 2 == 1) {
 				settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
@@ -663,8 +668,8 @@ public class AppInitializer implements IProgress {
 				}
 			}
 
+			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 		}
-		notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
 	}
 
 	private void initNativeCore() {

@@ -234,27 +234,29 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
-	                       int order, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, int order,
+	                       @NonNull List<MapWidget> followingWidgets) {
 		super.attachView(container, panel, order, followingWidgets);
 
-		boolean showBottomShadow = true;
+		boolean showBottomShadow = shouldShowBottomShadow(followingWidgets);
+		showHideBottomShadow(showBottomShadow);
+	}
+
+	private boolean shouldShowBottomShadow(@NonNull List<MapWidget> followingWidgets) {
 		WidgetsVisibilityHelper visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-		boolean mapCenterVisible = visibilityHelper.shouldShowTopMapCenterCoordinatesWidget();
-		boolean currentCoordinatesVisible = visibilityHelper.shouldShowTopCurrentLocationCoordinatesWidget();
+		boolean showTopCoordinates = visibilityHelper.shouldShowTopCoordinatesWidget();
+
 		WidgetsPanel widgetsPanel = widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		if (widgetsPanel == WidgetsPanel.TOP) {
 			for (MapWidget widget : followingWidgets) {
-				if (widget instanceof MapMarkersBarWidget
-						|| (widget instanceof CoordinatesBaseWidget && (mapCenterVisible || currentCoordinatesVisible))) {
-					showBottomShadow = false;
-					break;
+				if (widget instanceof MapMarkersBarWidget || (widget instanceof CoordinatesBaseWidget && showTopCoordinates)) {
+					return false;
 				}
 			}
 		} else {
-			showBottomShadow = false;
+			return false;
 		}
-		showHideBottomShadow(showBottomShadow);
+		return true;
 	}
 
 	private void showHideBottomShadow(boolean show) {

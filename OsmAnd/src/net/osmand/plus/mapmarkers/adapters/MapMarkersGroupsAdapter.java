@@ -1,5 +1,8 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +33,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.SelectWptCategoriesBottomSheetDialogFragment;
 import net.osmand.plus.mapmarkers.ShowHideHistoryButton;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -66,7 +68,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private final MapActivity mapActivity;
 	private final OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
-	private final boolean night;
+	private final boolean nightMode;
 	private boolean showDirectionEnabled;
 	private List<MapMarker> showDirectionMarkers;
 	private Snackbar snackbar;
@@ -78,11 +80,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		this.listener = listener;
 	}
 
-	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
+	public MapMarkersGroupsAdapter(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
 		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
-		night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		nightMode = !app.getSettings().isLightContent();
 		updateShowDirectionMarkers();
 		createDisplayGroups();
 	}
@@ -91,7 +93,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		int markersCount = mapMarkers.size();
 		showDirectionMarkers = new ArrayList<>(mapMarkers.subList(0, getToIndex(markersCount)));
-		showDirectionEnabled = WidgetsVisibilityHelper.isMapMarkerBarWidgetEnabled(mapActivity);
+		showDirectionEnabled = WidgetsVisibilityHelper.isWidgetEnabled(mapActivity, TOP, MARKERS_TOP_BAR.id);
 	}
 
 	private int getToIndex(int markersCount) {
@@ -196,12 +198,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						CategoriesSubHeader categoriesSubHeader = new CategoriesSubHeader(group);
 						items.add(categoriesSubHeader);
 					}
-					TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
+					TravelHelper travelHelper = app.getTravelHelper();
 					if (travelHelper.isAnyTravelBookPresent()) {
 						List<TravelArticle> savedArticles = travelHelper.getBookmarksHelper().getSavedArticles();
 						for (TravelArticle art : savedArticles) {
 							String gpxName = travelHelper.getGPXName(art);
-							File path = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
+							File path = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
 							if (path.getAbsolutePath().equals(group.getGpxPath(app))) {
 								group.setWikivoyageArticle(art);
 							}
@@ -218,9 +220,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private GPXFile getGpxFile(String filePath) {
 		if (filePath != null) {
-			OsmandApplication app = mapActivity.getMyApplication();
 			SelectedGpxFile selectedGpx = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
-			if (selectedGpx != null && selectedGpx.getGpxFile() != null) {
+			if (selectedGpx != null) {
 				return selectedGpx.getGpxFile();
 			}
 			return GPXUtilities.loadGPXFile(new File(filePath));
@@ -273,16 +274,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		notifyDataSetChanged();
 	}
 
+	@NonNull
 	@Override
-	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 		if (viewType == MARKER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					listener.onItemClick(view);
-				}
-			});
+			view.setOnClickListener(v -> listener.onItemClick(v));
 			return new MapMarkerItemViewHolder(view);
 		} else if (viewType == HEADER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
@@ -299,7 +296,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	@Override
-	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		UiUtilities iconsCache = app.getUIUtilities();
 		if (holder instanceof MapMarkerItemViewHolder) {
 			MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
@@ -315,14 +312,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			}
 			ImageView markerImageViewToUpdate;
 			int drawableResToUpdate;
-			int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
+			int actionIconColor = nightMode ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
 			boolean markerToHighlight = showDirectionMarkers.contains(marker);
 			if (showDirectionEnabled && markerToHighlight) {
 				itemViewHolder.iconDirection.setVisibility(View.GONE);
 
 				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, color));
-				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_divider_dark : R.color.markers_top_bar_background));
-				itemViewHolder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.text_color_primary_dark : R.color.color_white));
+				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_divider_dark : R.color.markers_top_bar_background));
+				itemViewHolder.title.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.color_white));
 				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_divider_color));
 				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, R.drawable.marker_circle_background_on_map_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, R.color.color_white));
@@ -334,12 +331,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.iconDirection.setVisibility(View.VISIBLE);
 
 				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, color));
-				itemViewHolder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
-				itemViewHolder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, night));
-				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
-				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
+				itemViewHolder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
+				itemViewHolder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.app_bar_color_dark : R.color.divider_color_light));
+				itemViewHolder.optionsBtn.setBackground(AppCompatResources.getDrawable(mapActivity, nightMode ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, actionIconColor));
-				itemViewHolder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, night));
+				itemViewHolder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, nightMode));
 
 				drawableResToUpdate = R.drawable.ic_direction_arrow;
 				markerImageViewToUpdate = itemViewHolder.iconDirection;
@@ -375,31 +372,25 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.description.setVisibility(View.GONE);
 			}
 
-			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					int position = itemViewHolder.getAdapterPosition();
-					if (position < 0) {
-						return;
-					}
-					if (markerInHistory) {
-						app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-					} else {
-						app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
-					}
-					updateDisplayedData();
-					if (!markerInHistory) {
-						snackbar = Snackbar.make(itemViewHolder.itemView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
-								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-									@Override
-									public void onClick(View view) {
-										mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-										updateDisplayedData();
-									}
-								});
-						UiUtilities.setupSnackbar(snackbar, night);
-						snackbar.show();
-					}
+			itemViewHolder.optionsBtn.setOnClickListener(view -> {
+				int adapterPosition = itemViewHolder.getAdapterPosition();
+				if (adapterPosition < 0) {
+					return;
+				}
+				if (markerInHistory) {
+					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+				} else {
+					app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+				}
+				updateDisplayedData();
+				if (!markerInHistory) {
+					snackbar = Snackbar.make(itemViewHolder.itemView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, v -> {
+								app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+								updateDisplayedData();
+							});
+					UiUtilities.setupSnackbar(snackbar, nightMode);
+					snackbar.show();
 				}
 			});
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
@@ -450,84 +441,74 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				TravelArticle article = group.getWikivoyageArticle();
 				if (article != null && !groupIsDisabled) {
 					headerViewHolder.articleDescription.setVisibility(View.VISIBLE);
-					View.OnClickListener openWikiwoyageArticle = new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (mapActivity.getSupportFragmentManager() != null) {
-								WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.generateIdentifier(), article.getLang());
-							}
-						}
+					View.OnClickListener openWikivoyageArticle = v -> {
+						mapActivity.getSupportFragmentManager();
+						WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.generateIdentifier(), article.getLang());
 					};
 					if (article.getContent().isEmpty()) {
 						headerViewHolder.content.setVisibility(View.GONE);
 					} else {
 						headerViewHolder.content.setText(article.getContent());
-						headerViewHolder.content.setOnClickListener(openWikiwoyageArticle);
+						headerViewHolder.content.setOnClickListener(openWikivoyageArticle);
 					}
 
 					headerViewHolder.button.setText(R.string.shared_string_read);
-					headerViewHolder.button.setOnClickListener(openWikiwoyageArticle);
+					headerViewHolder.button.setOnClickListener(openWikivoyageArticle);
 				} else {
 					headerViewHolder.articleDescription.setVisibility(View.GONE);
 				}
-				CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
-						MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-						GPXFile[] gpxFile = new GPXFile[1];
-						boolean disabled = !enabled;
+				CompoundButton.OnCheckedChangeListener checkedChangeListener = (compoundButton, enabled) -> {
+					MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
+					GPXFile[] gpxFile = new GPXFile[1];
+					boolean disabled = !enabled;
 
-						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
-							group.setWasShown(true);
-							Bundle args = new Bundle();
-							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
-							args.putString(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, group.getWptCategoriesString());
-							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
+					if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
+						group.setWasShown(true);
+						Bundle args = new Bundle();
+						args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
+						args.putString(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, group.getWptCategoriesString());
+						args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
 
-							SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-							fragment.setArguments(args);
-							fragment.setUsedOnMap(false);
-							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
-						}
-						mapMarkersHelper.updateGroupDisabled(group, disabled);
-						if (group.getType() == ItineraryType.TRACK) {
-							group.setVisibleUntilRestart(disabled);
-							String gpxPath = group.getGpxPath(app);
-							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
-							if (selectedGpxFile != null) {
-								gpxFile[0] = selectedGpxFile.getGpxFile();
-							} else {
-								// TODO IO load in another thread ?
-								gpxFile[0] = GPXUtilities.loadGPXFile(new File(gpxPath));
-							}
-							switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
-						}
-						if (!disabled) {
-							mapMarkersHelper.enableGroup(group);
+						SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+						fragment.setArguments(args);
+						fragment.setUsedOnMap(false);
+						fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+					}
+					mapMarkersHelper.updateGroupDisabled(group, disabled);
+					if (group.getType() == ItineraryType.TRACK) {
+						group.setVisibleUntilRestart(disabled);
+						String gpxPath = group.getGpxPath(app);
+						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
+						if (selectedGpxFile != null) {
+							gpxFile[0] = selectedGpxFile.getGpxFile();
 						} else {
-							mapMarkersHelper.runSynchronization(group);
+							// TODO IO load in another thread ?
+							gpxFile[0] = GPXUtilities.loadGPXFile(new File(gpxPath));
 						}
+						switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
+					}
+					if (!disabled) {
+						mapMarkersHelper.enableGroup(group);
+					} else {
+						mapMarkersHelper.runSynchronization(group);
+					}
 
-						if (disabled) {
-							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
-									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-										@Override
-										public void onClick(View view) {
-											if (group.getType() == ItineraryType.TRACK && gpxFile[0] != null) {
-												switchGpxVisibility(gpxFile[0], null, true);
-											}
-											mapMarkersHelper.enableGroup(group);
-										}
-									});
-							UiUtilities.setupSnackbar(snackbar, night);
-							snackbar.show();
-						}
+					if (disabled) {
+						snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
+								.setAction(R.string.shared_string_undo, view -> {
+									if (group.getType() == ItineraryType.TRACK && gpxFile[0] != null) {
+										switchGpxVisibility(gpxFile[0], null, true);
+									}
+									mapMarkersHelper.enableGroup(group);
+								});
+						UiUtilities.setupSnackbar(snackbar, nightMode);
+						snackbar.show();
 					}
 				};
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(null);
 				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(checkedChangeListener);
-				UiUtilities.setupCompoundButton(headerViewHolder.disableGroupSwitch, night, UiUtilities.CompoundButtonType.GLOBAL);
+				UiUtilities.setupCompoundButton(headerViewHolder.disableGroupSwitch, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
@@ -543,13 +524,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				showHideHistoryViewHolder.bottomShadow.setVisibility(View.GONE);
 			}
 			showHideHistoryViewHolder.title.setText(app.getString(showHistory ? R.string.hide_passed : R.string.show_passed));
-			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					showHideHistoryButton.showHistory = !showHistory;
-					createDisplayGroups();
-					notifyDataSetChanged();
-				}
+			showHideHistoryViewHolder.itemView.setOnClickListener(view -> {
+				showHideHistoryButton.showHistory = !showHistory;
+				createDisplayGroups();
+				notifyDataSetChanged();
 			});
 		} else if (holder instanceof MapMarkerCategoriesViewHolder) {
 			MapMarkerCategoriesViewHolder categoriesViewHolder = (MapMarkerCategoriesViewHolder) holder;
@@ -557,28 +535,25 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (header instanceof CategoriesSubHeader) {
 				CategoriesSubHeader categoriesSubHeader = (CategoriesSubHeader) header;
 				MapMarkersGroup group = categoriesSubHeader.getGroup();
-				View.OnClickListener openChooseCategoriesDialog = new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						if (!group.getWptCategories().isEmpty()) {
-							Bundle args = new Bundle();
-							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
-							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
-							args.putStringArrayList(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, new ArrayList<String>(group.getWptCategories()));
-							SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
-							fragment.setArguments(args);
-							fragment.setUsedOnMap(false);
-							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
-						} else {
-							mapActivity.getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath(app)));
-						}
+				View.OnClickListener openChooseCategoriesDialog = view -> {
+					if (!group.getWptCategories().isEmpty()) {
+						Bundle args = new Bundle();
+						args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
+						args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
+						args.putStringArrayList(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, new ArrayList<String>(group.getWptCategories()));
+						SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+						fragment.setArguments(args);
+						fragment.setUsedOnMap(false);
+						fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+					} else {
+						app.getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath(app)));
 					}
 				};
 				categoriesViewHolder.title.setText(getGroupWptCategoriesString(group));
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
 						null, null, app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
-								night ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
+								nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light), null);
 				categoriesViewHolder.button.setOnClickListener(openChooseCategoriesDialog);
 				categoriesViewHolder.title.setOnClickListener(openChooseCategoriesDialog);
 			}
@@ -677,7 +652,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
-	public class CategoriesSubHeader {
+	public static class CategoriesSubHeader {
 
 		private final MapMarkersGroup group;
 

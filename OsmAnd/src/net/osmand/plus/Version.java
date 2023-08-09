@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
@@ -163,13 +166,20 @@ public class Version {
 	}
 
 	public static boolean isOpenGlAvailable(@NonNull OsmandApplication app) {
-		if (!NativeCore.isAvailable() || isQnxOperatingSystem()) {
+		if (!NativeCore.isAvailable() || isQnxOperatingSystem() || !isOpenGlEsVersionSupported(app)) {
 			return false;
 		}
 		File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
 		if (checkOpenGlExists(nativeLibraryDir)) return true;
 		// check opengl doesn't work correctly on some devices when native libs are not unpacked
 		return true;
+	}
+
+	public static boolean isOpenGlEsVersionSupported(@NonNull OsmandApplication app) {
+		ActivityManager activityManager = (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
+		ConfigurationInfo deviceConfigurationInfo = activityManager.getDeviceConfigurationInfo();
+		int majorVersion = (deviceConfigurationInfo.reqGlEsVersion & 0xffff0000) >> 16;
+		return majorVersion >= 3;
 	}
 
 	public static boolean isQnxOperatingSystem() {

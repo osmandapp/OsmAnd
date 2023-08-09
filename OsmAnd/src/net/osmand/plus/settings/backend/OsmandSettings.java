@@ -1844,32 +1844,18 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
-	public final OsmandPreference<Boolean> SHOW_CURRENT_LOCATION_COORDINATES_WIDGET = new BooleanPreference(this, "show_coordinates_widget", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> SHOW_MAP_CENTER_COORDINATES_WIDGET = new BooleanPreference(this, "show_map_center_coordinates_widget", true).makeProfile().cache();
-
 	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
-	public final ListStringPreference TRACKS_FOLDERS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_folders_sort_modes", null, ";;").makeGlobal().makeShared().cache();
 
 	@NonNull
-	public Map<String, String> getTrackTabsSortModes() {
+	public Map<String, String> getTrackSortModes() {
 		return getTrackSortModes(TRACKS_TABS_SORT_MODES.getStringsList());
-	}
-
-	@NonNull
-	public Map<String, String> getTrackFoldersSortModes() {
-		return getTrackSortModes(TRACKS_FOLDERS_SORT_MODES.getStringsList());
 	}
 
 	public void saveTabsSortModes(@NonNull Map<String, String> tabsSortModes) {
 		List<String> sortModes = getPlainSortModes(tabsSortModes);
 		TRACKS_TABS_SORT_MODES.setStringsList(sortModes);
-	}
-
-	public void saveFoldersSortModes(@NonNull Map<String, String> tabsSortModes) {
-		List<String> sortModes = getPlainSortModes(tabsSortModes);
-		TRACKS_FOLDERS_SORT_MODES.setStringsList(sortModes);
 	}
 
 	@NonNull
