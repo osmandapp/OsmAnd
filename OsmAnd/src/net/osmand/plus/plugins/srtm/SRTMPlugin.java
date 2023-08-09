@@ -1,11 +1,13 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_ENABLE_3D_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_SRTM;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RELIEF_3D_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DEPTH_CONTOURS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTION_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
@@ -404,7 +406,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 			NauticalMapsPlugin nauticalPlugin = PluginsHelper.getPlugin(NauticalMapsPlugin.class);
 			if (nauticalPlugin != null) {
-				nauticalPlugin.createAdapterItem(adapter, mapActivity, customRules);
+				nauticalPlugin.createAdapterItem(TERRAIN_DEPTH_CONTOURS, adapter, mapActivity, customRules);
 			}
 		}
 	}
@@ -414,7 +416,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (app.useOpenGlRenderer()) {
 			adapter.addItem(new ContextMenuItem(TERRAIN_DESCRIPTION_ID)
 					.setLayout(R.layout.list_item_terrain_description)
-					.setTitleId(TERRAIN_DESCRIPTION_ID.hashCode(), null)
 					.setClickable(false)
 					.setListener((uiAdapter, view, item, isChecked) -> {
 						ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
@@ -422,7 +423,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					}));
 		} else {
 			PurchasingUtils.createPromoItem(adapter, activity, OsmAndFeature.TERRAIN,
-					TERRAIN_ID,
+					TERRAIN_PROMO_ID,
 					R.string.srtm_plugin_name,
 					R.string.contour_lines_hillshade_slope);
 		}
@@ -517,7 +518,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
-		ContextMenuItem item = new ContextMenuItem(MAP_ENABLE_3D_MAPS_ID)
+		ContextMenuItem item = new ContextMenuItem(RELIEF_3D_ID)
 				.setTitleId(R.string.relief_3d, app)
 				.setIcon(R.drawable.ic_action_3d_relief)
 				.setListener((uiAdapter, view, contextItem, isChecked) -> {

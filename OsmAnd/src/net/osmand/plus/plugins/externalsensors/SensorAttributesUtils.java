@@ -32,12 +32,12 @@ import java.util.List;
 
 public class SensorAttributesUtils {
 
-	public static final String SENSOR_TAG_HEART_RATE = "heart_rate_sensor";
-	public static final String SENSOR_TAG_SPEED = "speed_sensor";
-	public static final String SENSOR_TAG_CADENCE = "bike_cadence_sensor";
-	public static final String SENSOR_TAG_BIKE_POWER = "power_sensor";
-	public static final String SENSOR_TAG_TEMPERATURE = "temperature_sensor";
-	public static final String SENSOR_TAG_DISTANCE = "bike_distance_sensor";
+	public static final String SENSOR_TAG_HEART_RATE = "hr";
+	public static final String SENSOR_TAG_SPEED = "osmand:speed_sensor";
+	public static final String SENSOR_TAG_CADENCE = "cadence";
+	public static final String SENSOR_TAG_BIKE_POWER = "power";
+	public static final String SENSOR_TAG_TEMPERATURE = "temp";
+	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
 
 	public static boolean hasHeartRateData(@NonNull GPXTrackAnalysis analysis) {
 		return getHeartRateData(analysis).hasData();

@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.openseamaps;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_NAUTICAL;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_DEPTH_CONTOURS;
 import static net.osmand.plus.download.LocalIndexHelper.LocalIndexType.DEPTH_DATA;
 
 import android.graphics.drawable.Drawable;
@@ -105,11 +106,12 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		return PLUGIN_NAUTICAL;
 	}
 
-	public void createAdapterItem(@NonNull ContextMenuAdapter adapter,
+	public void createAdapterItem(@NonNull String id,
+	                              @NonNull ContextMenuAdapter adapter,
 	                              @NonNull MapActivity mapActivity,
 	                              @NonNull List<RenderingRuleProperty> customRules) {
 		if ((isEnabled() || hasDepthMaps())) {
-			createNauticalItem(adapter, mapActivity, customRules);
+			createNauticalItem(id, adapter, mapActivity, customRules);
 		}
 	}
 
@@ -118,7 +120,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	                                            @NonNull MapActivity mapActivity,
 	                                            @NonNull List<RenderingRuleProperty> customRules) {
 		if (!PluginsHelper.isEnabled(SRTMPlugin.class)) {
-			createAdapterItem(menuAdapter, mapActivity, customRules);
+			createAdapterItem(SHOW_DEPTH_CONTOURS, menuAdapter, mapActivity, customRules);
 		}
 	}
 
@@ -129,7 +131,8 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 		return !Algorithms.isEmpty(depthIndexData);
 	}
 
-	private void createNauticalItem(@NonNull ContextMenuAdapter adapter,
+	private void createNauticalItem(@NonNull String id,
+	                                @NonNull ContextMenuAdapter adapter,
 	                                @NonNull MapActivity mapActivity,
 	                                @NonNull List<RenderingRuleProperty> customRules) {
 		OsmandSettings settings = app.getSettings();
@@ -141,7 +144,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 				CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(attrName);
 				ItemClickListener listener = getPropertyItemClickListener(pref, mapActivity);
 
-				adapter.addItem(new ContextMenuItem(DEPTH_CONTOURS)
+				adapter.addItem(new ContextMenuItem(id)
 						.setTitleId(R.string.nautical_depth, mapActivity)
 						.setSecondaryIcon(R.drawable.ic_action_additional_option)
 						.setSecondaryDescription(pref.get() ? app.getString(R.string.shared_string_on) : app.getString(R.string.shared_string_off))
