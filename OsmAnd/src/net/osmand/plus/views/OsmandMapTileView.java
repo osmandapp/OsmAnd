@@ -1999,13 +1999,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
+			boolean rotatingAllowedInSettings = settings.MAP_ROTATION_USING_TWO_POINTERS_ROTATION_GESTURE.get();
+			boolean rotatingAllowedInLayers = mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION);
+			boolean rotatingAllowed = rotatingAllowedInSettings && rotatingAllowedInLayers;
+
 			double deltaZoom = calculateDeltaZoom(relativeToStart);
-			if (Math.abs(deltaZoom) <= ZONE_0_ZOOM_THRESHOLD && !startZooming) {
+			if (rotatingAllowed && Math.abs(deltaZoom) <= ZONE_0_ZOOM_THRESHOLD && !startZooming) {
 				deltaZoom = 0; // keep only rotating
 			} else {
 				startZooming = true;
 			}
-			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION) && isAngleOverThreshold(Math.abs(relAngle), Math.abs(deltaZoom))) {
+			if (rotatingAllowed && isAngleOverThreshold(Math.abs(relAngle), Math.abs(deltaZoom))) {
 				startRotating = true;
 			} else {
 				relAngle = 0;

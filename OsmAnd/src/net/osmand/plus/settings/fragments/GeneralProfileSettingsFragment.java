@@ -63,6 +63,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupSpeedSystemPref();
 
 		setupVolumeButtonsAsZoom();
+		setupMapRotationUsingTwoPointersRotationGesture();
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
@@ -231,6 +232,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		volumeButtonsPref.setDescription(getString(R.string.use_volume_buttons_as_zoom_descr));
 		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_zoom_volume_buttons);
 		volumeButtonsPref.setIcon(icon);
+	}
+
+	private void setupMapRotationUsingTwoPointersRotationGesture() {
+		SwitchPreferenceEx mapRotationUsingTwoPointersRotationGesturePref = findPreference(settings.MAP_ROTATION_USING_TWO_POINTERS_ROTATION_GESTURE.getId());
+		mapRotationUsingTwoPointersRotationGesturePref.setTitle(getString(R.string.map_rotation_using_two_pointers_rotation_gesture));
+		mapRotationUsingTwoPointersRotationGesturePref.setDescription(getString(R.string.map_rotation_using_two_pointers_rotation_gesture_descr));
 	}
 
 	private void setupKalmanFilterPref() {

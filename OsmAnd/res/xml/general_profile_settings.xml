@@ -88,6 +88,13 @@
 		android:title="@string/use_volume_buttons_as_zoom"
 		tools:icon="@drawable/ic_action_zoom_volume_buttons" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="map_rotation_using_two_pointers_rotation_gesture"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/map_rotation_using_two_pointers_rotation_gesture" />
+
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="external_input_device"
 		android:layout="@layout/preference_with_descr"
