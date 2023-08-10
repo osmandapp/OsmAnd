@@ -31,7 +31,7 @@ public class AnnounceTimeDistances {
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
 	private float DEFAULT_SPEED = 10;
-	private double voicePromptDelayTimeSec;
+	private double voicePromptDelayTimeSec = 0;
 
 	private float ARRIVAL_DISTANCE;
 	private float OFF_ROUTE_DISTANCE;
@@ -138,12 +138,13 @@ public class AnnounceTimeDistances {
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_NOW:
-				if (dist <= currentSpeed * TURN_NOW_TIME) {
+				if (dist <= currentSpeed * TURN_NOW_TIME + voicePromptDelayTimeSec) {
 					return true;
 				}
 				if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
 					// Issue #17376: low speed adjustment for TURN_NOW timing
-					return dist <= Math.max(POSITIONING_TOLERANCE, currentSpeed / DEFAULT_SPEED * TURN_NOW_DISTANCE);
+					return dist <= Math.max(POSITIONING_TOLERANCE, currentSpeed / DEFAULT_SPEED * TURN_NOW_DISTANCE)
+							 + currentSpeed * voicePromptDelayTimeSec;
 				}
 				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE);
 			case STATE_TURN_IN:
