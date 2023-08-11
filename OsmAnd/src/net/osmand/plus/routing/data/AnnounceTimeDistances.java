@@ -103,7 +103,7 @@ public class AnnounceTimeDistances {
 
 		// TURN_NOW lead time heuristically: Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8)
 		// car: 6.7 s * 45 km/h = 83 m, bicycle 3.2s * 10 km/h = 8 m -> 12 m,
-		// pedestrian 2 s * 4 km/h = 6 m -> 12 m, 1 km/h - 1 s (all floored by POSITIONING_TOLERANCE)
+		// pedestrian 2 s * 4 km/h = 2 m -> 12 m, 1 km/h - 1 s (all floored by POSITIONING_TOLERANCE)
 		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, 
 				DEFAULT_SPEED * (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8)) * arrivalDistanceFactor);
 
