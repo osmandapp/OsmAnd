@@ -135,7 +135,7 @@ public class AnnounceTimeDistances {
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_NOW:
-				if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
+				if (currentSpeed < DEFAULT_SPEED) {
 					// Issue #17376: low speed adjustment for TURN_NOW timing
 					return dist <= Math.max(POSITIONING_TOLERANCE, currentSpeed / DEFAULT_SPEED * TURN_NOW_DISTANCE)
 							+ currentSpeed * voicePromptDelayTimeSec;
