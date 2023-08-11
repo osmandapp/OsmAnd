@@ -1,6 +1,7 @@
 package net.osmand.plus.render;
 
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -25,6 +27,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -123,6 +126,14 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 			renderer.removeHiddenFileExtension(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 		} else {
 			renderer.addHiddenFileExtension(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
+		}
+		MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
+		if (rendererContext != null) {
+			if (settings.SHOW_TRAVEL.get()) {
+				rendererContext.addDirectory(app.getAppPath(WIKIVOYAGE_INDEX_DIR).getAbsolutePath());
+			} else {
+				rendererContext.removeDirectory(app.getAppPath(WIKIVOYAGE_INDEX_DIR).getAbsolutePath());
+			}
 		}
 		reloadIndexes();
 	}
