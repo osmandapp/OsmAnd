@@ -191,10 +191,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		int zoom = tb.getZoom();
 		PathGeometryZoom zm = zooms.size() > zoom ? zooms.get(zoom) : null;
 		if (zm == null) {
-			zm = new PathGeometryZoom(locationProvider, tb, tb.getZoom() < context.getSimplificationZoom());
+			boolean simplify = tb.getZoom() < context.getSimplificationZoom();
+			zm = new PathGeometryZoom(locationProvider, tb, simplify, getForceIncludedLocationIndexes());
 			zooms.put(zoom, zm);
 		}
 		return zm;
+	}
+
+	@NonNull
+	protected List<Integer> getForceIncludedLocationIndexes() {
+		return Collections.emptyList();
 	}
 
 	@NonNull
@@ -719,7 +725,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		private final List<Double> distances;
 		private final List<Double> angles;
 
-		public PathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify) {
+		public PathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify,
+		                        @NonNull List<Integer> forceIncludedIndexes) {
 			//  this.locations = locations;
 			tb = new RotatedTileBox(tb);
 			tb.setZoomAndAnimation(tb.getZoom(), 0, tb.getZoomFloatPart());
@@ -737,7 +744,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			for (int i = 0; i < size; i++) {
 				double d = 0;
 				double angle = 0;
-				if (simplifyPoints.get(i) > 0) {
+				if (simplifyPoints.get(i) > 0 || forceIncludedIndexes.contains(i)) {
 					if (previousIndex > -1) {
 						float x = tb.getPixXFromLatLon(locationProvider.getLatitude(i), locationProvider.getLongitude(i));
 						float y = tb.getPixYFromLatLon(locationProvider.getLatitude(i), locationProvider.getLongitude(i));

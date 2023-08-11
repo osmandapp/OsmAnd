@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Pair;
 
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
@@ -33,6 +32,7 @@ import java.util.Map.Entry;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import gnu.trove.list.array.TByteArrayList;
 
 public class RouteGeometryWay extends
 		MultiColoringGeometryWay<RouteGeometryWayContext, MultiColoringGeometryWayDrawer<RouteGeometryWayContext>> {
@@ -41,7 +41,8 @@ public class RouteGeometryWay extends
 
 	private final RoutingHelper helper;
 	private RouteCalculationResult route;
-	private int startLocationIndex;
+	@NonNull
+	private List<Integer> forceIncludedIndexes = new ArrayList<>();
 
 	private Integer customDirectionArrowColor;
 
@@ -110,13 +111,26 @@ public class RouteGeometryWay extends
 		return false;
 	}
 
+	public void setForceIncludedPointIndexesFromActionPoints(@Nullable List<ActionPoint> actionPoints) {
+		List<Integer> indexes = new ArrayList<>();
+		if (actionPoints != null) {
+			for (ActionPoint actionPoint : actionPoints) {
+				if (actionPoint != null) {
+					indexes.add(actionPoint.index);
+					if (actionPoint.normalizedOffset > 0) {
+						indexes.add(actionPoint.index + 1);
+					}
+				}
+			}
+		}
+		this.forceIncludedIndexes = indexes;
+		this.zooms.clear();
+	}
+
 	@Override
-	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
-	                         double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-	                         Location lastProjection, int startLocationIndex) {
-		this.startLocationIndex = startLocationIndex;
-		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				lastProjection, startLocationIndex);
+	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
+		return super.shouldSkipLocation(simplification, styleMap, locationIdx)
+				&& !forceIncludedIndexes.contains(locationIdx);
 	}
 
 	@Override
@@ -185,6 +199,12 @@ public class RouteGeometryWay extends
 
 	@NonNull
 	@Override
+	protected List<Integer> getForceIncludedLocationIndexes() {
+		return forceIncludedIndexes;
+	}
+
+	@NonNull
+	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
 		return coloringType.isGradient()
 				? getGradientWayStyle()
@@ -211,7 +231,7 @@ public class RouteGeometryWay extends
 			int zoom = tb.getZoom();
 			PathGeometryZoom zm = zooms.get(zoom);
 			if (zm == null) {
-				zm = new GradientPathGeometryZoom(getLocationProvider(), tb, true);
+				zm = new GradientPathGeometryZoom(getLocationProvider(), tb, true, forceIncludedIndexes);
 				zooms.put(zoom, zm);
 			}
 			return zm;
@@ -379,75 +399,30 @@ public class RouteGeometryWay extends
 			return getDefaultWayStyle().getColor();
 		}
 
-		GeometryWayProvider locationProvider = getLocationProvider();
-		if (locationProvider == null) {
-			return null;
-		}
-
 		for (Segment segment : cachedSegments) {
 
 			if (!segment.isCompleted()) {
 				return null;
 			}
 
-			Pair<Integer, Integer> range = segment.getClosestPointOrdersRange(actionPoint.index);
-			if (range == null) {
+			int pointOrder = segment.getPointOrders(actionPoint.index);
+			if (pointOrder == -1) {
 				return null;
 			}
 
-			GeometryWayStyle<?> style = segment.styles.get(range.first);
-
-			if (!(style instanceof GeometryGradientWayStyle<?>)) {
+			GeometryWayStyle<?> style = segment.styles.get(pointOrder);
+			if (style instanceof GeometryGradientWayStyle<?>) {
+				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) style;
+				if (pointOrder + 1 == segment.styles.size()) {
+					return gradientStyle.nextColor;
+				} else {
+					int startColor = gradientStyle.currColor;
+					int endColor = gradientStyle.nextColor;
+					return RouteColorize.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
+				}
+			} else {
 				return style.getColor();
 			}
-
-			GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) style;
-			double normalizedOffset;
-
-			if (range.first.equals(range.second)) {
-				if (range.first + 1 == segment.styles.size()) {
-					return gradientStyle.nextColor;
-				}
-
-				normalizedOffset = actionPoint.normalizedOffset;
-			} else {
-				int startIndex = segment.indexes.get(range.first);
-				int endIndex = segment.indexes.get(range.second);
-
-				double startLat;
-				double startLon;
-				double endLat;
-				double endLon;
-
-				if (startIndex >= INITIAL_POINT_INDEX_SHIFT) {
-					int index = startIndex - INITIAL_POINT_INDEX_SHIFT - startLocationIndex;
-					if (index < 0 || index > segment.initialLocations.size()) {
-						return null;
-					}
-					Location location = segment.initialLocations.get(index);
-					startLat = location.getLatitude();
-					startLon = location.getLongitude();
-				} else {
-					startLat = locationProvider.getLatitude(startIndex);
-					startLon = locationProvider.getLongitude(startIndex);
-				}
-
-				if (endIndex >= INITIAL_POINT_INDEX_SHIFT) {
-					return null;
-				} else {
-					endLat = locationProvider.getLongitude(endIndex);
-					endLon = locationProvider.getLongitude(endIndex);
-				}
-
-				normalizedOffset = MapUtils.getProjectionCoeff(
-						actionPoint.location.getLatitude(), actionPoint.location.getLongitude(),
-						startLat, startLon,
-						endLat, endLon);
-			}
-
-			int startColor = gradientStyle.currColor;
-			int endColor = gradientStyle.nextColor;
-			return RouteColorize.getIntermediateColor(startColor, endColor, normalizedOffset);
 		}
 
 		return null;
@@ -462,23 +437,20 @@ public class RouteGeometryWay extends
 			return indexes != null && styles != null;
 		}
 
-		@Nullable
-		public Pair<Integer, Integer> getClosestPointOrdersRange(int index) {
+		public int getPointOrders(int index) {
 			for (int pointOrder = 0; pointOrder < indexes.size(); pointOrder++) {
 				int pointIndex = indexes.get(pointOrder);
 
 				if (index >= 0 && index == pointIndex || index == -1 && pointIndex >= INITIAL_POINT_INDEX_SHIFT) {
-					return Pair.create(pointOrder, pointOrder);
+					return pointOrder;
 				}
 
 				if (pointIndex > index && pointIndex < INITIAL_POINT_INDEX_SHIFT) {
-					return pointOrder > 0
-							? Pair.create(pointOrder - 1, pointOrder)
-							: null;
+					return -1;
 				}
 			}
 
-			return null;
+			return -1;
 		}
 	}
 }

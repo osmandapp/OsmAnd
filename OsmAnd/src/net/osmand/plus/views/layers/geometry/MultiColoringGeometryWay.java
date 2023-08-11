@@ -317,8 +317,9 @@ public abstract class MultiColoringGeometryWay
 
 	protected static class GradientPathGeometryZoom extends PathGeometryZoom {
 
-		public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify) {
-			super(locationProvider, tb, simplify);
+		public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify,
+		                                @NonNull List<Integer> forceIncludedIndexes) {
+			super(locationProvider, tb, simplify, forceIncludedIndexes);
 		}
 
 		@Override
