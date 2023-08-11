@@ -124,7 +124,7 @@ public class MapDataMenuController extends MenuController {
 									Toast.LENGTH_SHORT).show();
 						}
 					} else if (!downloaded || indexItem.isOutdated()) {
-						new DownloadValidationManager(app).startDownload(activity, indexItem);
+						startDownload(mapActivity, indexItem);
 					} else if (isLiveUpdatesOn()) {
 						LiveUpdatesHelper.runLiveUpdate(activity, indexItem.getTargetFileName(), true, null);
 					}
