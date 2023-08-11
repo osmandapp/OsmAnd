@@ -49,7 +49,7 @@ public class RouteGeometryWay extends
 	private boolean drawDirectionArrows = true;
 	private VectorLinesCollection actionLinesCollection;
 
-	private final List<Segment> cachedSegments = new ArrayList<>();
+	private List<Segment> cachedSegments = new ArrayList<>();
 	private Segment currentCachedSegment = null;
 
 	public RouteGeometryWay(RouteGeometryWayContext context) {
@@ -169,8 +169,7 @@ public class RouteGeometryWay extends
 			segments.add(segment);
 		}
 
-		cachedSegments.clear();
-		cachedSegments.addAll(segments);
+		cachedSegments = segments;
 	}
 
 	@Override

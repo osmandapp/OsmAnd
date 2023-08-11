@@ -41,8 +41,6 @@ public abstract class MultiColoringGeometryWay
 		<C extends MultiColoringGeometryWayContext, D extends MultiColoringGeometryWayDrawer<C>> extends
 		GeometryWay<C, D> {
 
-	protected static final int MISSING_ROUTE_DATA_COLOR = RouteColorize.LIGHT_GREY;
-
 	protected int customColor;
 	protected float customWidth;
 	protected float[] dashPattern;
@@ -143,7 +141,7 @@ public abstract class MultiColoringGeometryWay
 			RouteSegmentAttribute attribute =
 					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
 			int color = attribute.getColor();
-			color = color == 0 ? MISSING_ROUTE_DATA_COLOR : color;
+			color = color == 0 ? RouteColorize.LIGHT_GREY : color;
 
 			if (i == 0) {
 				for (int j = 0; j < firstSegmentLocationIdx; j++) {
