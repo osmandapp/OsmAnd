@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.quickaction.QuickActionIds.TAKE_AUDIO_NOTE_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class TakeAudioNoteAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(8,
+	public static final QuickActionType TYPE = new QuickActionType(TAKE_AUDIO_NOTE_ACTION_ID,
 			"audio.note", TakeAudioNoteAction.class).
 			nameRes(R.string.quick_action_take_audio_note).iconRes(R.drawable.ic_action_micro_dark).nonEditable().
 			category(QuickActionType.CREATE_CATEGORY);

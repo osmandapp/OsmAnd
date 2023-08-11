@@ -1,6 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import static net.osmand.plus.quickaction.QuickActionIds.GPX_ACTION_ID;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -59,7 +60,7 @@ import java.io.File;
 
 public class GPXAction extends QuickAction implements FileSelected {
 
-	public static final QuickActionType TYPE = new QuickActionType(6, "gpx.add", GPXAction.class)
+	public static final QuickActionType TYPE = new QuickActionType(GPX_ACTION_ID, "gpx.add", GPXAction.class)
 			.nameRes(R.string.quick_action_add_gpx)
 			.iconRes(R.drawable.ic_action_gnew_label_dark)
 			.category(QuickActionType.CREATE_CATEGORY);

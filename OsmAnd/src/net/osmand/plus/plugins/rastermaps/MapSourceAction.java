@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.rastermaps;
 
+import static net.osmand.plus.quickaction.QuickActionIds.MAP_SOURCE_ACTION_ID;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
@@ -24,7 +26,6 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import java.util.Map;
 public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	public static final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
-	public static final QuickActionType TYPE = new QuickActionType(17,
+	public static final QuickActionType TYPE = new QuickActionType(MAP_SOURCE_ACTION_ID,
 			"mapsource.change", MapSourceAction.class).
 			nameRes(R.string.quick_action_map_source).iconRes(R.drawable.ic_world_globe_dark).
 			category(QuickActionType.CONFIGURE_MAP);

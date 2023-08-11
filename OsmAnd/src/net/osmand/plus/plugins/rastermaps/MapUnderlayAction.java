@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.rastermaps;
 
+import static net.osmand.plus.quickaction.QuickActionIds.MAP_UNDERLAY_ACTION_ID;
+
 import android.content.Context;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -23,7 +25,6 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	private static final String KEY_UNDERLAYS = "underlays";
 	private static final String KEY_NO_UNDERLAY = "no_underlay";
-	public static final QuickActionType TYPE = new QuickActionType(16,
+	public static final QuickActionType TYPE = new QuickActionType(MAP_UNDERLAY_ACTION_ID,
 			"mapunderlay.change", MapUnderlayAction.class).
 			nameRes(R.string.quick_action_map_underlay).iconRes(R.drawable.ic_layer_bottom).
 			category(QuickActionType.CONFIGURE_MAP);

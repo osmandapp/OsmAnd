@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.ROUTE_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class RouteAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(37, "route.add", RouteAction.class)
+	public static final QuickActionType TYPE = new QuickActionType(ROUTE_ACTION_ID, "route.add", RouteAction.class)
 			.nameRes(R.string.plan_route_create_new_route)
 			.iconRes(R.drawable.ic_action_plan_route)
 			.nonEditable()

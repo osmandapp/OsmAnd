@@ -17,12 +17,13 @@ import net.osmand.render.RenderingRuleProperty;
 
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
+import static net.osmand.plus.quickaction.QuickActionIds.CONTOUR_LINES_ACTION_ID;
 
 import androidx.annotation.NonNull;
 
 public class ContourLinesAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(29,
+	public static final QuickActionType TYPE = new QuickActionType(CONTOUR_LINES_ACTION_ID,
 			"contourlines.showhide", ContourLinesAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.download_srtm_maps).iconRes(R.drawable.ic_plugin_srtm).nonEditable()

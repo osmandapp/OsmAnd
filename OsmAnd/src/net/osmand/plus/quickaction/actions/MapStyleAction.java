@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.MAP_STYLE_ACTION_ID;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
@@ -35,7 +37,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 
 
 	private static final String KEY_STYLES = "styles";
-	public static final QuickActionType TYPE = new QuickActionType(14,
+	public static final QuickActionType TYPE = new QuickActionType(MAP_STYLE_ACTION_ID,
 			"mapstyle.change", MapStyleAction.class).
 			nameRes(R.string.quick_action_map_style).iconRes(R.drawable.ic_map).
 			category(QuickActionType.CONFIGURE_MAP);
