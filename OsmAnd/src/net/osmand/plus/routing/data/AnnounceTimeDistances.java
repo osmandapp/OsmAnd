@@ -31,7 +31,7 @@ public class AnnounceTimeDistances {
 	// Default speed to have comfortable announcements (m/s)
 	// initial value is updated from default speed settings anyway
 	private float DEFAULT_SPEED = 10;
-	private double voicePromptDelayTimeSec;
+	private double voicePromptDelayTimeSec = 0;
 
 	private float ARRIVAL_DISTANCE;
 	private float OFF_ROUTE_DISTANCE;
@@ -43,7 +43,6 @@ public class AnnounceTimeDistances {
 	private final int TURN_IN_DISTANCE;
 	private final int TURN_IN_DISTANCE_END;
 	private int TURN_NOW_DISTANCE;
-	private float TURN_NOW_TIME;
 	private int LONG_PNT_ANNOUNCE_RADIUS;
 	private int SHORT_PNT_ANNOUNCE_RADIUS;
 	private int LONG_ALARM_ANNOUNCE_RADIUS;
@@ -101,14 +100,12 @@ public class AnnounceTimeDistances {
 
 	public void setArrivalDistances(float arrivalDistanceFactor) {
 		arrivalDistanceFactor = Math.max(arrivalDistanceFactor, 0.1f);
-		// Turn now: 3.5 s normal speed, 7 s for half speed (default)
-		// float TURN_NOW_TIME = 7;
-		// ** #8749 to keep 1m / 1 sec precision (POSITIONING_TOLERANCE = 12 m)
-		// car 50 km/h - 7 s, bicycle 10 km/h - 3 s, pedestrian 4 km/h - 2 s, 1 km/h - 1 s
-		TURN_NOW_TIME = (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8);
 
-		// 3.6 s: car 45 m, bicycle 10 m -> 12 m, pedestrian 4 m -> 12 m (floored by POSITIONING_TOLERANCE)
-		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 3.6) * arrivalDistanceFactor);
+		// TURN_NOW lead time heuristically: Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8)
+		// car: 6.7 s * 45 km/h = 83 m, bicycle 3.2s * 10 km/h = 8 m -> 12 m,
+		// pedestrian 2 s * 4 km/h = 6 m -> 12 m, 1 km/h - 1 s (all floored by POSITIONING_TOLERANCE)
+		TURN_NOW_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, 
+				DEFAULT_SPEED * (float) Math.min(Math.sqrt(DEFAULT_SPEED * 3.6), 8)) * arrivalDistanceFactor);
 
 		// 5 s: car 63 m, bicycle 14 m, pedestrian 6 m -> 12 m (floored by POSITIONING_TOLERANCE)
 		ARRIVAL_DISTANCE = (int) (Math.max(POSITIONING_TOLERANCE, DEFAULT_SPEED * 5.) * arrivalDistanceFactor);
@@ -138,12 +135,10 @@ public class AnnounceTimeDistances {
 	public boolean isTurnStateActive(float currentSpeed, double dist, int turnType) {
 		switch (turnType) {
 			case STATE_TURN_NOW:
-				if (dist <= currentSpeed * TURN_NOW_TIME) {
-					return true;
-				}
-				if (currentSpeed > 0 && currentSpeed < DEFAULT_SPEED) {
+				if (currentSpeed < DEFAULT_SPEED) {
 					// Issue #17376: low speed adjustment for TURN_NOW timing
-					return dist <= Math.max(POSITIONING_TOLERANCE, currentSpeed / DEFAULT_SPEED * TURN_NOW_DISTANCE);
+					return dist <= Math.max(POSITIONING_TOLERANCE, currentSpeed / DEFAULT_SPEED * TURN_NOW_DISTANCE)
+							+ currentSpeed * voicePromptDelayTimeSec;
 				}
 				return isDistanceLess(currentSpeed, dist, TURN_NOW_DISTANCE);
 			case STATE_TURN_IN:
@@ -250,7 +245,7 @@ public class AnnounceTimeDistances {
 			appendTurnDesc(app, builder, longPrepare, PREPARE_LONG_DISTANCE, meter, second);
 		}
 		appendTurnDesc(app, builder, approach, TURN_IN_DISTANCE, meter, second);
-		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, (int) TURN_NOW_TIME, meter, second);
+		appendTurnDesc(app, builder, passing, TURN_NOW_DISTANCE, (int) (TURN_NOW_DISTANCE / DEFAULT_SPEED), meter, second);
 
 		// Arrive at destination
 		appendTurnDesc(app, builder, arrive, (int) (getArrivalDistance()), meter, second);
