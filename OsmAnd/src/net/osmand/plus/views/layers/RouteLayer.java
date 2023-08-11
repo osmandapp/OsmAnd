@@ -607,6 +607,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			double rightLongitude, Location lastProjection, List<Location> routeNodes, int cd,
 			Iterator<RouteDirectionInfo> it, int zoom) {
 		RouteDirectionInfo nf = null;
+
+		int currentRoute = helper.getRoute().getCurrentRoute();
 		
 		double DISTANCE_ACTION = 35;
 		if(zoom >= 17) {
@@ -656,13 +658,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				if (actionDist >= DISTANCE_ACTION) {
 					double normalizedOffset = 1 - (actionDist - DISTANCE_ACTION) / dist;
 					Location projection = calculateProjection(normalizedOffset, previousAction, loc);
-					actionPoints.add(new ActionPoint(projection, routePoint - 1, normalizedOffset));
+					actionPoints.add(new ActionPoint(projection, routePoint - 1 + currentRoute, normalizedOffset));
 					actionPoints.add(null);
 					prevFinishPoint = routePoint;
 					previousAction = null;
 					actionDist = 0;
 				} else {
-					actionPoints.add(new ActionPoint(loc, routePoint, 0.0f));
+					actionPoints.add(new ActionPoint(loc, routePoint + currentRoute, 0.0f));
 					previousAction = loc;
 				}
 			} else {
@@ -671,7 +673,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					addPreviousToActionPoints(actionPoints, lastProjection, routeNodes, DISTANCE_ACTION,
 							prevFinishPoint, routePoint, loc);
 				}
-				actionPoints.add(new ActionPoint(loc, routePoint, 0.0f));
+				actionPoints.add(new ActionPoint(loc, routePoint + currentRoute, 0.0f));
 				previousAction = loc;
 				prevFinishPoint = -1;
 				actionDist = 0;
@@ -687,23 +689,26 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private void addPreviousToActionPoints(List<ActionPoint> actionPoints, Location lastProjection,
 	                                       List<Location> routeNodes, double distanceAction,
 	                                       int prevFinishPoint, int routePoint, Location loc) {
+		int currentRoute = helper.getRoute().getCurrentRoute();
+
 		// put some points in front
 		int ind = actionPoints.size();
 		Location lprevious = loc;
 		double dist = 0;
 		for (int k = routePoint - 1; k >= -1; k--) {
 			Location location = k == -1 ? lastProjection : routeNodes.get(k);
+			int actionPointIndex = k == -1 ? -1 : k + currentRoute;
 			float locDist = lprevious.distanceTo(location);
 			dist += locDist;
 			if (dist >= distanceAction) {
 				if (locDist > 1) {
 					double normalizedOffset = (dist - distanceAction) / locDist;
 					Location projection = calculateProjection(1 - normalizedOffset, lprevious, location);
-					actionPoints.add(ind, new ActionPoint(projection, k, normalizedOffset));
+					actionPoints.add(ind, new ActionPoint(projection, actionPointIndex, normalizedOffset));
 				}
 				break;
 			} else {
-				actionPoints.add(ind, new ActionPoint(location, k, 0.0));
+				actionPoints.add(ind, new ActionPoint(location, actionPointIndex, 0.0));
 				lprevious = location;
 			}
 			if (prevFinishPoint == k) {

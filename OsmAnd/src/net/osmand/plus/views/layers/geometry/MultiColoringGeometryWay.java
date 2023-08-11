@@ -41,6 +41,8 @@ public abstract class MultiColoringGeometryWay
 		<C extends MultiColoringGeometryWayContext, D extends MultiColoringGeometryWayDrawer<C>> extends
 		GeometryWay<C, D> {
 
+	protected static final int MISSING_ROUTE_DATA_COLOR = RouteColorize.LIGHT_GREY;
+
 	protected int customColor;
 	protected float customWidth;
 	protected float[] dashPattern;
@@ -141,7 +143,7 @@ public abstract class MultiColoringGeometryWay
 			RouteSegmentAttribute attribute =
 					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
 			int color = attribute.getColor();
-			color = color == 0 ? RouteColorize.LIGHT_GREY : color;
+			color = color == 0 ? MISSING_ROUTE_DATA_COLOR : color;
 
 			if (i == 0) {
 				for (int j = 0; j < firstSegmentLocationIdx; j++) {
@@ -215,8 +217,12 @@ public abstract class MultiColoringGeometryWay
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
 	                                  double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
 	                                  boolean previousVisible, Location lastPoint, int startLocationIndex) {
-		previousVisible = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 				style, previousVisible, lastPoint, startLocationIndex);
+		if (!added) {
+			return false;
+		}
+
 		if (style instanceof GeometryGradientWayStyle) {
 			GeometryGradientWayStyle<?> gradientWayStyle = (GeometryGradientWayStyle<?>) style;
 			GradientGeometryWayProvider locationProvider = getGradientLocationProvider();
@@ -243,7 +249,7 @@ public abstract class MultiColoringGeometryWay
 			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
 			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;
 		}
-		return previousVisible;
+		return true;
 	}
 
 	@Override
