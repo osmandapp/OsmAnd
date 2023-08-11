@@ -2951,4 +2951,7 @@
     <string name="app_mode_moped">퍼스널 모빌리티</string>
     <string name="sort_duration_ascending">짧은 기간 먼저</string>
     <string name="sort_duration_descending">가장 긴 기간이 먼저</string>
+    <string name="skip_download">다음에 다운로드</string>
+    <string name="restart_now">지금 다시 시작</string>
+    <string name="shared_string_other">기타</string>
 </resources>
