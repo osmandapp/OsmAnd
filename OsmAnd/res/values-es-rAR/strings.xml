@@ -5370,4 +5370,6 @@
     <string name="map_widget_glide_target_desc">Muestra la relación de planeo necesaria para alcanzar el punto de destino.</string>
     <string name="hillshade_slope">Sombreado, Pendientes</string>
     <string name="map_widget_group_glide_desc">Los widgets muestran la relación de planeo hacia el objetivo o la relación de planeo promedio para el viaje actual.</string>
+    <string name="wheel_circumference">Circunferencia de la rueda</string>
+    <string name="external_sensor_name_property_description">Nombre del sensor</string>
 </resources>

@@ -1897,7 +1897,7 @@
 \nи навигация</string>
     <string name="building_number">Номер дома</string>
     <string name="rendering_attr_pisteGrooming_name">Тип лыжной трассы</string>
-    <string name="download_live_updates">Автообновления</string>
+    <string name="download_live_updates">Live обновления</string>
     <string name="dahboard_options_dialog_title">Настройки панели управления</string>
     <string name="shared_string_card_was_hidden">Карточка скрыта</string>
     <string name="commit_poi">Зафиксировать POI</string>
@@ -1992,7 +1992,7 @@
     <string name="first_usage_item">Первый запуск</string>
     <string name="first_usage_item_description">Как загрузить карты, задать основные настройки.</string>
     <string name="navigation_item_description">Настройки навигации.</string>
-    <string name="planning_trip_item">Ручное составление маршрута</string>
+    <string name="planning_trip_item">Ручное планирование маршрута</string>
     <string name="enter_country_name">Страна</string>
     <string name="new_version">Новая версия</string>
     <string name="begin_with_osmand_menu_group">Первые шаги с OsmAnd</string>
@@ -2345,7 +2345,7 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
-    <string name="plan_route">Составление маршрута</string>
+    <string name="plan_route">Планирование маршрута</string>
     <string name="coordinate_input">Ввод координат</string>
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет выключена при следующем запуске приложения.</string>
@@ -3893,7 +3893,7 @@
     <string name="routing_attr_allow_intermittent_name">Разрешить пересыхающие водные пути</string>
     <string name="release_3_9">• Добавлена возможность экспорта и импорта всех данных, включая настройки, ресурсы, мои места.
 \n
-\n• Составление маршрута: графики для сегментов трека с маршрутом, добавлена возможность создавать и редактировать несколько сегментов трека.
+\n• Планирование маршрута: графики для сегментов трека с маршрутом, добавлена возможность создавать и редактировать несколько сегментов трека.
 \n
 \n• Добавлен OAuth метод аутентификации для OpenStreetMap, улучшен интерфейс диалоговых OSM.
 \n
@@ -4044,7 +4044,7 @@
     <string name="annual_subscription">Годовая подписка</string>
     <string name="release_4_0_beta">• Добавлена возможность загрузить контурные линии в футах.
 \n
-\n• Составление маршрута: добавлены вкладки для переключения между точками и графиками.
+\n• Планирование маршрута: добавлены вкладки для переключения между точками и графиками.
 \n
 \n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления».
 \n
@@ -4225,7 +4225,7 @@
 \n
 \n• Расстояние по нажатию перемещено из радиус-линейки в отдельный параметр
 \n
-\n• Составление маршрута: добавлена возможность изменения параметров навигации, доступ к настройке карты и поиску, не покидая конструктор маршрутов
+\n• Планирование маршрута: добавлена возможность изменения параметров навигации, доступ к настройке карты и поиску, не покидая конструктор маршрутов
 \n
 \n• Новый экран «Покупка» с подробной информацией о планах
 \n
@@ -4354,7 +4354,7 @@
 \n
 \n• Избранные: добавлена возможность просмотра недавно использованных значков
 \n
-\n• Составление маршрута: после запуска будет использоваться выбранный профиль
+\n• Планирование маршрута: после запуска будет использоваться выбранный профиль
 \n
 \n• Исправлен слой Mapillary, плагин теперь отключен по умолчанию
 \n

@@ -4396,7 +4396,7 @@
     <string name="backup_delete_types">Smazat vypnuté typy dat</string>
     <string name="redeem_promo_code">Použít promo kód</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s nebo %2$s</string>
-    <string name="purchases_feature_desc_terrain">Vrstevnice, mapy se stínováním kopců a sklonem svahů s barevným zvýrazněním vrcholů a nížin.</string>
+    <string name="purchases_feature_desc_terrain">Terénní vrstevnice, reliéf znázorněný odstíny šedi a barevně vyznačený sklon svahů pro zobrazení vrcholů a nížin.</string>
     <string name="rendering_attr_natureReserves_description">Zobrazit přírodní rezervace, chráněné oblasti a národní parky.</string>
     <string name="show_parameter_seekbar">Zobrazit lištu vyhledávání parametrů</string>
     <string name="approx_safe_mode">Bezpečná aproximace GPX</string>
@@ -5262,7 +5262,7 @@
     <string name="deleting_complete">Smazání dokončeno</string>
     <string name="delete_account">Smazat účet</string>
     <string name="verify_account">Ověřit účet</string>
-    <string name="terrain_category_description">Terénní vrstevnice, plně stínované mapy a barevné svahy pro zobrazení vrcholů a nížin.</string>
+    <string name="terrain_category_description">Terénní vrstevnice, reliéf znázorněný odstíny šedi a barevně vyznačený sklon svahů pro zobrazení vrcholů a nížin.</string>
     <string name="running_scds_device_name">Běžecké zařízení</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Použít rastry z sqlitedb pro stínování svahů</string>
     <string name="cache_size">Velikost mezipaměti</string>

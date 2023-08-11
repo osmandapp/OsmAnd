@@ -2355,7 +2355,7 @@
     <string name="poi_recycling_food">אוכל</string>
     <string name="poi_recycling_oil">שמן</string>
     <string name="poi_recycling_polystyrene_foam">קלקר</string>
-    <string name="poi_recycling_second_hand">יד שניה</string>
+    <string name="poi_recycling_second_hand">יד שנייה</string>
     <string name="poi_waste_dog_excrement">צואת כלבים</string>
     <string name="poi_spikes">קוצים</string>
     <string name="poi_maxlength">אורך מרבי</string>
@@ -2387,7 +2387,7 @@
     <string name="poi_socket_cee_blue_voltage_low">נמוך</string>
     <string name="poi_socket_type3c_output_medium">בינוני</string>
     <string name="poi_socket_type3c_output_low">נמוך</string>
-    <string name="poi_lifeguard">מציל</string>
+    <string name="poi_lifeguard">הצלה</string>
     <string name="poi_socket_type3c_voltage_low">נמוך</string>
     <string name="poi_lifeguard_base">בסיס המצילים</string>
     <string name="poi_lifeguard_tower">מגדל מצילים</string>

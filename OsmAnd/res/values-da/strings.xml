@@ -5360,4 +5360,6 @@
     <string name="map_widget_group_glide_ratio">Glidetal</string>
     <string name="map_widget_group_glide_desc">Moduler viser glidetal til målet eller gennemsnitlig glidetal for den aktuelle tur.</string>
     <string name="map_widget_glide_target_desc">Viser det nødvendige glidetal for at nå målpunktet.</string>
+    <string name="wheel_circumference">Hjulomkreds</string>
+    <string name="external_sensor_name_property_description">Sensornavn</string>
 </resources>
