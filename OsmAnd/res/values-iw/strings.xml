@@ -942,7 +942,7 @@
     <string name="item_unchecked">ללא בדיקה</string>
     <string name="shared_string_map">מפה</string>
     <string name="access_arrival_time">זמן ההגעה</string>
-    <string name="map_widget_gps_info">פרטי איכון</string>
+    <string name="map_widget_gps_info">פרטי GPS</string>
     <string name="layer_hillshade">שכבת הצללת תבליט</string>
     <string name="osmand_play_title_30_chars">מפות וניווט עם OsmAnd</string>
     <string name="osmand_plus_play_title_30_chars">מפות וניווט עם OsmAnd+‎</string>
@@ -4939,6 +4939,6 @@
     <string name="map_widget_group_glide_desc">ווידג\'טים מציגים את יחס הגלישה למטרה או יחס הגלישה הממוצע עבור הנסיעה הנוכחית.</string>
     <string name="map_widget_camera_distance">גובה מצלמה</string>
     <string name="map_widget_camera_tilt">הטיית מצלמה</string>
-    <string name="developer_widgets">ווידג\'טים למפתחים</string>
+    <string name="developer_widgets">וידג׳טים למפתחים</string>
     <string name="quick_action_air_pressure_layer">מתג כדי להציג או להסתיר את שכבת לחץ האוויר במפה.</string>
 </resources>
