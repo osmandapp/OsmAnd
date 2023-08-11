@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.SWITCH_PROFILE_ACTION_ID;
+
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,7 +33,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 	private static final String KEY_PROFILES = "profiles";
 
-	public static final QuickActionType TYPE = new QuickActionType(32,
+	public static final QuickActionType TYPE = new QuickActionType(SWITCH_PROFILE_ACTION_ID,
 			"profile.change", SwitchProfileAction.class)
 			.nameRes(R.string.change_application_profile)
 			.iconRes(R.drawable.ic_action_manage_profiles)

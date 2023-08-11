@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.NAV_START_STOP_ACTION_ID;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,7 @@ import net.osmand.plus.routing.RoutingHelper;
 public class NavStartStopAction extends QuickAction {
 
 	private static final String KEY_DIALOG = "dialog";
-	public static final QuickActionType TYPE = new QuickActionType(25,
+	public static final QuickActionType TYPE = new QuickActionType(NAV_START_STOP_ACTION_ID,
 			"nav.startstop", NavStartStopAction .class).
 			nameRes(R.string.quick_action_start_stop_navigation).iconRes(R.drawable.ic_action_start_navigation).nonEditable().
 			category(QuickActionType.NAVIGATION);

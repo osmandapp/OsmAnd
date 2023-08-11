@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.weather.actions;
 
+import static net.osmand.plus.quickaction.QuickActionIds.OPEN_WEATHER_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
 public class OpenWeatherAction extends QuickAction {
-	public static final QuickActionType TYPE = new QuickActionType(44,
+	public static final QuickActionType TYPE = new QuickActionType(OPEN_WEATHER_ACTION_ID,
 			"weather.forecast.open", OpenWeatherAction.class)
 			.nameRes(R.string.open_weather_action)
 			.iconRes(R.drawable.ic_action_umbrella).nonEditable()

@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.mapillary;
 
+import static net.osmand.plus.quickaction.QuickActionIds.SHOW_HIDE_MAPILLARY_ACTION_ID;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,7 @@ import net.osmand.plus.quickaction.QuickActionType;
 
 public class ShowHideMapillaryAction extends QuickAction {
 
-	public static final QuickActionType TYPE = new QuickActionType(33,
+	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_MAPILLARY_ACTION_ID,
 			"mapillary.showhide", ShowHideMapillaryAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.mapillary)
