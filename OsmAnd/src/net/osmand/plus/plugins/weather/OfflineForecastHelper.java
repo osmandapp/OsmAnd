@@ -27,7 +27,7 @@ import net.osmand.IProgress;
 import net.osmand.OnCompleteCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.core.jni.LatLon;
-import net.osmand.core.jni.SWIGTYPE_p_std__shared_ptrT_Metric_t;
+import net.osmand.core.jni.Metric;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.TileIdList;
 import net.osmand.core.jni.TileIdVector;
@@ -218,7 +218,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				public void method(boolean succeeded,
 				                   BigInteger downloadedTiles,
 				                   BigInteger totalTiles,
-				                   SWIGTYPE_p_std__shared_ptrT_Metric_t metric) {
+				                   Metric metric) {
 					if (!succeeded) {
 						errorsCounter[0]++;
 					}
