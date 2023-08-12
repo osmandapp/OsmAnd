@@ -4585,4 +4585,16 @@
     <string name="poi_surface_chipseal">Asfalto com brita</string>
     <string name="poi_tunnel_name">Nome do túnel</string>
     <string name="poi_bridge_name">Nome da ponte</string>
+    <string name="poi_boat_designated">Acesso de barco: desiginado</string>
+    <string name="poi_ship_designated">Acesso de navio: desiginado</string>
+    <string name="poi_surface_acrylic">Superfície: acrílico</string>
+    <string name="poi_surface_plastic">Superfície: plástico</string>
+    <string name="poi_surface_rubber">Superfície: borracha</string>
+    <string name="poi_second_hand_filter">Artigos em segunda mão</string>
+    <string name="poi_bicycle_designated">Designado para bicicletas</string>
+    <string name="poi_horse_designated">Designados para cavalos</string>
+    <string name="poi_foot_designated">Designado para pedestres</string>
+    <string name="poi_vehicle_designated">Designado para veículos</string>
+    <string name="poi_assembly_point">Ponto de encontro</string>
+    <string name="poi_osmand_not_pt_shelter_yes">Todos exceto abrigos de transportes públicos</string>
 </resources>
