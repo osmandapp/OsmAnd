@@ -465,7 +465,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return true;
 	}
 
-	protected void clearArrays() {
+	private void clearArrays() {
 		indexes.clear();
 		tx.clear();
 		ty.clear();

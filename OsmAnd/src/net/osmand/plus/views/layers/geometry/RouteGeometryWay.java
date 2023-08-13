@@ -128,6 +128,12 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
+	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex) {
+		cachedSegments.clear();
+		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex);
+	}
+
+	@Override
 	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
 		return super.shouldSkipLocation(simplification, styleMap, locationIdx)
 				&& !forceIncludedIndexes.contains(locationIdx);
@@ -275,12 +281,6 @@ public class RouteGeometryWay extends
 				actionLinesCollection = null;
 			}
 		}
-	}
-
-	@Override
-	protected void clearArrays() {
-		super.clearArrays();
-		cachedSegments.clear();
 	}
 
 	public List<List<ActionPoint>> getActionArrows(List<ActionPoint> actionPoints) {
