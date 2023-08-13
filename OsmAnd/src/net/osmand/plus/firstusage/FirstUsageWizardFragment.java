@@ -130,7 +130,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	public void setWizardType(WizardType wizardType, boolean updateWizardView) {
 		this.wizardType = wizardType;
-		if (updateWizardView) {
+		if (updateWizardView && getContext() != null) {
 			updateWizardView();
 			doWizardTypeTask();
 			updateSkipButton();
