@@ -4870,7 +4870,7 @@
     <string name="favorites_backup">גיבוי מועדפים</string>
     <string name="device_connected">%1$s מחובר</string>
     <string name="device_disconnected">%1$s מנותק</string>
-    <string name="external_device_characteristic_gear_ratio">יחס מסירה</string>
+    <string name="external_device_characteristic_gear_ratio">יחס העברה</string>
     <string name="external_device_characteristic_battery_level">סוללה</string>
     <string name="temperature_layer">שכבת טמפרטורות</string>
     <string name="map_settings_weather_cloud">ענן</string>
@@ -4941,4 +4941,5 @@
     <string name="map_widget_camera_tilt">הטיית מצלמה</string>
     <string name="developer_widgets">וידג׳טים למפתחים</string>
     <string name="quick_action_air_pressure_layer">מתג כדי להציג או להסתיר את שכבת לחץ האוויר במפה.</string>
+    <string name="map_widget_glide_average_desc">מציג את יחס הגלישה הממוצע לטווח שהוגדר.</string>
 </resources>
