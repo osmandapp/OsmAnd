@@ -215,8 +215,12 @@ public abstract class MultiColoringGeometryWay
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
 	                                  double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
 	                                  boolean previousVisible, Location lastPoint, int startLocationIndex) {
-		previousVisible = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
+		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 				style, previousVisible, lastPoint, startLocationIndex);
+		if (!added) {
+			return false;
+		}
+
 		if (style instanceof GeometryGradientWayStyle) {
 			GeometryGradientWayStyle<?> gradientWayStyle = (GeometryGradientWayStyle<?>) style;
 			GradientGeometryWayProvider locationProvider = getGradientLocationProvider();
@@ -243,7 +247,7 @@ public abstract class MultiColoringGeometryWay
 			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
 			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;
 		}
-		return previousVisible;
+		return true;
 	}
 
 	@Override
@@ -313,8 +317,9 @@ public abstract class MultiColoringGeometryWay
 
 	protected static class GradientPathGeometryZoom extends PathGeometryZoom {
 
-		public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify) {
-			super(locationProvider, tb, simplify);
+		public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify,
+		                                @NonNull List<Integer> forceIncludedIndexes) {
+			super(locationProvider, tb, simplify, forceIncludedIndexes);
 		}
 
 		@Override
