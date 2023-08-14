@@ -447,13 +447,19 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onResume() {
 		super.onResume();
-		requireMapActivity().disableDrawer();
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			activity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		requireMapActivity().enableDrawer();
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			activity.enableDrawer();
+		}
 	}
 
 	@Override
@@ -715,11 +721,6 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		return ColorUtilities.getListBgColorId(deviceNightMode);
 	}
 
-	@NonNull
-	protected MapActivity requireMapActivity() {
-		return (MapActivity) requireActivity();
-	}
-
 	public void showSearchLocationWizard(boolean updateWizardView, boolean searchByIp) {
 		searchLocationByIp = searchByIp;
 		setWizardType(WizardType.SEARCH_LOCATION, updateWizardView);
@@ -780,8 +781,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 			@Override
 			public void onRestoreFromFile() {
-				MapActivity mapActivity = requireMapActivity();
-				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+				}
 			}
 
 			@Override
@@ -794,6 +797,15 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				}
 			}
 		};
+	}
+
+	@Nullable
+	protected MapActivity getMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			return (MapActivity) activity;
+		}
+		return null;
 	}
 
 	private void logError(String msg, Throwable e) {
