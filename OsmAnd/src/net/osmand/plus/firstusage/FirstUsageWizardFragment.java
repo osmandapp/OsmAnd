@@ -84,7 +84,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
-		AppInitializeListener, DownloadEvents, StorageSelectionListener {
+		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
 
 	public static final String TAG = FirstUsageWizardFragment.class.getSimpleName();
 
@@ -750,53 +750,65 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		setWizardType(WizardType.MAP_DOWNLOADED, updateWizardView);
 	}
 
-	public FirstUsageActionsListener getFirstUsageActionsListener() {
-		return new FirstUsageActionsListener() {
-			@Override
-			public void onSelectCountry() {
+	@Override
+	public void processActionClick(@NonNull FirstUsageAction action) {
+		switch (action) {
+			case SELECT_COUNTRY:
 				searchCountryMap();
-			}
+				break;
 
-			@Override
-			public void onDetermineLocation() {
-				if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
-					location = null;
-					ActivityCompat.requestPermissions(activity,
-							new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
-									Manifest.permission.ACCESS_COARSE_LOCATION},
-							FIRST_USAGE_LOCATION_PERMISSION);
-				} else {
-					findLocation(activity, false, true);
-				}
-			}
+			case DETERMINE_LOCATION:
+				determineLocation();
+				break;
 
-			@Override
-			public void onRestoreFromCloud() {
-				if (app.getBackupHelper().isRegistered()) {
-					BackupCloudFragment.showInstance(activity.getSupportFragmentManager());
-				} else {
-					BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
-				}
-			}
+			case RESTORE_FROM_CLOUD:
+				restoreFromCloud();
+				break;
 
-			@Override
-			public void onRestoreFromFile() {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
-				}
-			}
+			case RESTORE_FROM_FILE:
+				restoreFromFile();
+				break;
 
-			@Override
-			public void onSelectStorageFolder() {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					Bundle args = new Bundle();
-					args.putBoolean(FIRST_USAGE, true);
-					BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
-				}
-			}
-		};
+			case SELECT_STORAGE_FOLDER:
+				selectStorageFolder();
+				break;
+		}
+	}
+
+	public void determineLocation() {
+		if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+			location = null;
+			ActivityCompat.requestPermissions(activity,
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+							Manifest.permission.ACCESS_COARSE_LOCATION},
+					FIRST_USAGE_LOCATION_PERMISSION);
+		} else {
+			findLocation(activity, false, true);
+		}
+	}
+
+	public void restoreFromCloud() {
+		if (app.getBackupHelper().isRegistered()) {
+			BackupCloudFragment.showInstance(activity.getSupportFragmentManager());
+		} else {
+			BackupAuthorizationFragment.showInstance(activity.getSupportFragmentManager());
+		}
+	}
+
+	public void restoreFromFile() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getImportHelper().chooseFileToImport(SETTINGS, null);
+		}
+	}
+
+	public void selectStorageFolder() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Bundle args = new Bundle();
+			args.putBoolean(FIRST_USAGE, true);
+			BaseSettingsFragment.showInstance(activity, SettingsScreenType.DATA_STORAGE, null, args, FirstUsageWizardFragment.this);
+		}
 	}
 
 	@Nullable
@@ -830,13 +842,5 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 }
 
 interface FirstUsageActionsListener {
-	void onSelectCountry();
-
-	void onDetermineLocation();
-
-	void onRestoreFromCloud();
-
-	void onRestoreFromFile();
-
-	void onSelectStorageFolder();
+	void processActionClick(@NonNull FirstUsageAction action);
 }
