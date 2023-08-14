@@ -380,12 +380,11 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 
 		boolean draw = false;
 		float x1, y1, x2, y2;
-		float lastTileX, lastTileY;
 		Coordinate firstPnt = coordinates[0];
 		double px = firstPnt.x / EXTENT;
 		double py = firstPnt.y / EXTENT;
-		lastTileX = (float)((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
-		lastTileY = (float) ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
+		double lastTileX = ((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
+		double lastTileY = ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
 		PointI topLeft = tileBBox31.getTopLeft();
 		int tileBBox31Left = topLeft.getX();
 		int tileBBox31Top = topLeft.getY();
@@ -405,8 +404,8 @@ public class MapillaryTilesProvider extends interface_ImageMapLayerProvider {
 			px = point.x / EXTENT;
 			py = point.y / EXTENT;
 
-			float tileX = (float)((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
-			float tileY = (float)((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
+			double tileX = ((tileId.getX() << zoomShift) + (tileSize31 * px)) * mult;
+			double tileY = ((tileId.getY() << zoomShift) + (tileSize31 * py)) * mult;
 
 			if (tileBBox31Enlarged.contains((int)tileX, (int)tileY)) {
 				x2 = (float) (((tileX - tileBBox31Left) / tileSize31) * tileSize);
