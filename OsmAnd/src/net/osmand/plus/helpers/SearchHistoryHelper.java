@@ -169,7 +169,7 @@ public class SearchHistoryHelper {
 			if (pd.isCustomPoiFilter()) {
 				app.getPoiFilters().markHistory(pd.getName(), false);
 			}
-			loadedEntries.remove(model);
+			loadedEntries = Algorithms.removeFromList(loadedEntries, model);
 			mp.remove(pd);
 		}
 	}
@@ -178,7 +178,7 @@ public class SearchHistoryHelper {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		if (helper.removeAll()) {
 			app.getPoiFilters().clearHistory();
-			loadedEntries.clear();
+			loadedEntries = new ArrayList<>();
 			mp.clear();
 		}
 	}
@@ -186,8 +186,7 @@ public class SearchHistoryHelper {
 	private HistoryItemDBHelper checkLoadedEntries() {
 		HistoryItemDBHelper helper = new HistoryItemDBHelper();
 		if (loadedEntries == null) {
-			loadedEntries = helper.getEntries();
-			Collections.sort(loadedEntries, new HistoryEntryComparator());
+			loadedEntries = sortHistoryEntries(helper.getEntries());
 			for (HistoryEntry he : loadedEntries) {
 				mp.put(he.getName(), he);
 			}
@@ -203,7 +202,7 @@ public class SearchHistoryHelper {
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.update(model);
 			} else {
-				loadedEntries.add(model);
+				loadedEntries = Algorithms.addToList(loadedEntries, model);
 				mp.put(model.getName(), model);
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.add(model);
@@ -221,29 +220,39 @@ public class SearchHistoryHelper {
 
 	public void updateEntriesList() {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		Collections.sort(loadedEntries, new HistoryEntryComparator());
-		while (loadedEntries.size() > HISTORY_LIMIT) {
-			if (helper.remove(loadedEntries.get(loadedEntries.size() - 1))) {
-				loadedEntries.remove(loadedEntries.size() - 1);
+		List<HistoryEntry> loadedEntriesCopy = sortHistoryEntries(loadedEntries);
+		while (loadedEntriesCopy.size() > HISTORY_LIMIT) {
+			HistoryEntry lastEntry = loadedEntriesCopy.get(loadedEntriesCopy.size() - 1);
+			if (helper.remove(lastEntry)) {
+				loadedEntriesCopy.remove(lastEntry);
 			}
 		}
+		loadedEntries = loadedEntriesCopy;
 	}
 
 	private void addItemToHistoryWithReplacement(HistoryEntry model) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
 		PointDescription name = model.getName();
+		List<HistoryEntry> loadedEntriesCopy = new ArrayList<>(loadedEntries);
 		if (mp.containsKey(name)) {
 			HistoryEntry oldModel = mp.remove(name);
-			loadedEntries.remove(oldModel);
+			loadedEntriesCopy.remove(oldModel);
 			helper.remove(model);
 		}
-		loadedEntries.add(model);
+		loadedEntriesCopy.add(model);
+		loadedEntries = loadedEntriesCopy;
 		mp.put(name, model);
 		helper.add(model);
 	}
 
 	public HistoryEntry getEntryByName(PointDescription pd) {
 		return mp != null && pd != null ? mp.get(pd) : null;
+	}
+
+	private List<HistoryEntry> sortHistoryEntries(@NonNull List<HistoryEntry> originalList) {
+		List<HistoryEntry> copyList = new ArrayList<>(originalList);
+		Collections.sort(copyList, new HistoryEntryComparator());
+		return copyList;
 	}
 
 	public static class HistoryEntry {
