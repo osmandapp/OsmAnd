@@ -553,7 +553,7 @@ public class MenuBuilder {
 	}
 
 	protected void showDescriptionDialog(@NonNull Context ctx, @NonNull String description, @NonNull String title) {
-		if (description.contains("</")) {
+		if (Algorithms.isHtmlText(description)) {
 			POIMapLayer.showHtmlDescriptionDialog(ctx, app, description, title);
 		} else {
 			POIMapLayer.showPlainDescriptionDialog(ctx, app, description, title);
@@ -797,7 +797,9 @@ public class MenuBuilder {
 
 	public View buildDescriptionRow(View view, String description) {
 		String descriptionLabel = app.getString(R.string.shared_string_description);
-		View.OnClickListener onClickListener = v -> showDescriptionDialog(view.getContext(), description, descriptionLabel);
+		View.OnClickListener onClickListener = v -> {
+			showDescriptionDialog(view.getContext(), description, descriptionLabel);
+		};
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
