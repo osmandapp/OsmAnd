@@ -143,14 +143,15 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		ty.add(endY);
 		ty.add(endY);
 
+		List<Integer> indexes = new ArrayList<>();
 		List<Double> angles = new ArrayList<>();
 		List<Double> distances = new ArrayList<>();
 		List<GeometryWayStyle<?>> styles = new ArrayList<>();
 		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
 				true, directionArrowsColor, routeColoringType, routeInfoAttribute);
-		fillPreviewLineArrays(tx, ty, angles, distances, styles);
+		fillPreviewLineArrays(tx, ty, indexes, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		previewLineGeometry.drawRouteSegment(tileBox, canvas, null, tx, ty, tx31, ty31, angles, distances, 0, styles);
+		previewLineGeometry.drawRouteSegment(tileBox, canvas, indexes, tx, ty, tx31, ty31, angles, distances, 0, styles);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		if (previewRouteLineInfo.shouldShowTurnArrows()) {
@@ -183,7 +184,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		canvas.rotate(90, centerX, centerY);
 	}
 
-	private void fillPreviewLineArrays(List<Float> tx, List<Float> ty, List<Double> angles,
+	private void fillPreviewLineArrays(List<Float> tx, List<Float> ty, List<Integer> indexes, List<Double> angles,
 	                                   List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		fillDistancesAngles(tx, ty, angles, distances);
 
@@ -200,6 +201,10 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			if (!success) {
 				fillSolidSingeColorArrays(tx, styles);
 			}
+		}
+
+		for (int i = 0; i < tx.size(); i++) {
+			indexes.add(i);
 		}
 	}
 
