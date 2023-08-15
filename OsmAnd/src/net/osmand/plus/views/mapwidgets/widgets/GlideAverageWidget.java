@@ -45,11 +45,11 @@ public class GlideAverageWidget extends GlideBaseWidget {
 
 	private void updateAverageGlide() {
 		long measuredInterval = measuredIntervalPref.get();
-		float averageVal = averageGlideComputer.getAverageGlideRatio(measuredInterval);
-		if (Float.isNaN(averageVal)) {
+		String formattedValue = averageGlideComputer.getFormattedAverageGlideRatio(measuredInterval);
+		if (Algorithms.isEmpty(formattedValue)) {
 			setText(NO_VALUE, null);
 		} else {
-			setText(format(averageVal), null);
+			setText(formattedValue, null);
 		}
 	}
 

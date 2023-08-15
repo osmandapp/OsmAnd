@@ -1,10 +1,12 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.utils.GlideUtils.calculateFormattedRatio;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -20,7 +22,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 	private Location cachedCurrentLocation = null;
 	private LatLon cachedTargetLatLon = null;
-	private Float cachedGlideRatio = null;
+	private String cachedFormattedRatio = null;
 
 	public GlideTargetWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, WidgetType.GLIDE_TARGET);
@@ -32,26 +34,25 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		if (isUpdateNeeded() || isTimeToUpdate()) {
 			lastUpdateTime = System.currentTimeMillis();
 			calculateGlideRatio(result -> {
-				if (cachedGlideRatio == null || !Objects.equals(cachedGlideRatio, result)) {
-					cachedGlideRatio = result;
-					if (cachedGlideRatio != null) {
-						setText(format(cachedGlideRatio), null);
+				if (cachedFormattedRatio == null || !Objects.equals(cachedFormattedRatio, result)) {
+					cachedFormattedRatio = result;
+					if (cachedFormattedRatio != null) {
+						setText(cachedFormattedRatio, null);
 					} else {
 						setText(NO_VALUE, null);
 					}
 				}
-				return true;
 			});
 		}
 	}
 
-	private void calculateGlideRatio(@NonNull CallbackWithObject<Float> callback) {
+	private void calculateGlideRatio(@NonNull OnResultCallback<String> callback) {
 		MapRendererView mapRenderer = mapActivity.getMapView().getMapRenderer();
 		if (mapRenderer == null
 				|| cachedTargetLatLon == null
 				|| cachedCurrentLocation == null
 				|| !cachedCurrentLocation.hasAltitude()) {
-			callback.processResult(null);
+			callback.onResult(null);
 			return;
 		}
 
@@ -59,8 +60,13 @@ public class GlideTargetWidget extends GlideBaseWidget {
 		double a1 = cachedCurrentLocation.getAltitude();
 		LatLon l2 = cachedTargetLatLon;
 
-		NativeUtilities.getAltitudeForLatLon(mapRenderer, l2, altitude ->
-				callback.processResult(altitude != null ? MapUtils.calculateGlideRatio(l1, l2, a1, altitude) : null));
+		NativeUtilities.getAltitudeForLatLon(mapRenderer, l2, altitude -> {
+			String formattedValue = null;
+			if (altitude != null) {
+				formattedValue = calculateFormattedRatio(app, l1, l2, a1, altitude);
+			}
+			callback.onResult(formattedValue);
+		});
 	}
 
 	/**
