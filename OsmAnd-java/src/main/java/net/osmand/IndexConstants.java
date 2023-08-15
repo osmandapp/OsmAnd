@@ -63,6 +63,7 @@ public class IndexConstants {
 
 	public static final String WPT_CHART_FILE_EXT = ".wpt.chart";
 	public static final String SQLITE_CHART_FILE_EXT = ".3d.chart";
+	public static final String HELP_ARTICLE_FILE_EXT = ".mht";
 
 	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
 
@@ -84,6 +85,8 @@ public class IndexConstants {
 	public static final String NAUTICAL_INDEX_DIR = "nautical/";
 	public static final String ROADS_INDEX_DIR = "roads/";
 	public static final String WIKI_INDEX_DIR = "wiki/";
+	public static final String HELP_INDEX_DIR = "help/";
+	public static final String ARTICLES_DIR = HELP_INDEX_DIR + "articles/";
 	public static final String WIKIVOYAGE_INDEX_DIR = "travel/";
 	public static final String GPX_TRAVEL_DIR = GPX_INDEX_DIR + WIKIVOYAGE_INDEX_DIR;
 	public static final String AV_INDEX_DIR = "avnotes/";
