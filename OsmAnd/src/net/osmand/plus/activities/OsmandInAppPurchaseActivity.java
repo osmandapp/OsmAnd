@@ -5,6 +5,9 @@ import static net.osmand.plus.Version.FULL_VERSION_NAME;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,13 +37,101 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private InAppPurchaseHelper purchaseHelper;
 	private boolean activityDestroyed;
+	private boolean activityHiddenForTalkback = false;
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		initInAppPurchaseHelper();
+		getSupportFragmentManager().registerFragmentLifecycleCallbacks(lifecycleCallbacks, false);
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getSupportFragmentManager().unregisterFragmentLifecycleCallbacks(lifecycleCallbacks);
+	}
+
+	protected void setActivityAccessibility(boolean hideActivity) {
+		List<View> views = getHidingViews();
+		if (views == null) {
+			View view = getWindow().getDecorView();
+			setActivityViewsAccessibility(view, hideActivity);
+		} else {
+			for (View hidingView : views) {
+				hidingView.setImportantForAccessibility(hideActivity ? View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS : View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+			}
+		}
+	}
+
+	@Nullable
+	protected List<View> getHidingViews() {
+		return null;
+	}
+
+	protected void setActivityViewsAccessibility(View v, boolean hideActivity) {
+		if (hideActivity != isActivityHiddenForTalkback()) {
+			setActivityHiddenForTalkback(hideActivity);
+			setViewAccessibility(v, hideActivity);
+		}
+	}
+
+	private void setViewAccessibility(View v, boolean hideActivity) {
+		ViewGroup viewgroup = (ViewGroup) v;
+		for (int i = 0; i < viewgroup.getChildCount(); i++) {
+			View v1 = viewgroup.getChildAt(i);
+			if (v1 instanceof ViewGroup) {
+				setViewAccessibility(v1, hideActivity);
+			} else {
+				v1.setImportantForAccessibility(hideActivity ? View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS : View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+			}
+		}
+	}
+
+	protected List<Fragment> getActiveTalkbackFragments() {
+		return getSupportFragmentManager().getFragments();
+	}
+
+	FragmentManager.FragmentLifecycleCallbacks lifecycleCallbacks = new FragmentManager.FragmentLifecycleCallbacks() {
+		@Override
+		public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
+			super.onFragmentViewCreated(fm, f, v, savedInstanceState);
+			List<Fragment> fragments = getActiveTalkbackFragments();
+
+			for (int i = 0; i < fragments.size(); i++) {
+				if (i != fragments.size() - 1) {
+					View fragmentView = fragments.get(i).getView();
+					if (fragmentView != null) {
+						fragmentView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+					}
+				} else {
+					View fragmentView = fragments.get(i).getView();
+					if (fragmentView != null) {
+						fragmentView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+					}
+				}
+			}
+			if (!fragments.isEmpty()) {
+				setActivityAccessibility(true);
+			}
+		}
+
+		@Override
+		public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+			super.onFragmentDestroyed(fm, f);
+			List<Fragment> fragments = getActiveTalkbackFragments();
+			if (!fragments.isEmpty()) {
+				View topFragmentView = fragments.get(fragments.size() - 1).getView();
+				if (topFragmentView != null) {
+					topFragmentView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+				}
+
+			} else {
+				setActivityAccessibility(false);
+			}
+		}
+	};
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -277,5 +368,13 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	public void dismissInAppPurchaseProgress(InAppPurchaseTaskType taskType) {
 		// not implemented
+	}
+
+	public boolean isActivityHiddenForTalkback() {
+		return activityHiddenForTalkback;
+	}
+
+	public void setActivityHiddenForTalkback(boolean activityHiddenForTalkback) {
+		this.activityHiddenForTalkback = activityHiddenForTalkback;
 	}
 }
