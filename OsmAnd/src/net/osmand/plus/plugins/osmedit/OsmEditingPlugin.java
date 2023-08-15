@@ -629,11 +629,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return app.getUIUtilities().getIcon(R.drawable.osm_editing);
 	}
 
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/osm-editing-plugin.html";
-	}
-
 	public static String getEditName(OsmPoint point) {
 		String prefix = getPrefix(point);
 		String name = getName(point);

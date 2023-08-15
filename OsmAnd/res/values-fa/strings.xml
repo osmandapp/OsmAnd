@@ -1570,7 +1570,7 @@
     <string name="access_from_map">دسترسی از نقشه</string>
     <string name="versions_item">نسخه‌ها</string>
     <string name="feedback">بازخورد</string>
-    <string name="contact_us">تماس</string>
+    <string name="shared_string_contact">تماس</string>
     <string name="map_legend">کلید نقشه</string>
     <string name="save_poi_without_poi_type_message">نقطهٔ توجه را بدون مشخص‌کردن نوعش ذخیره می‌کنید؟</string>
     <string name="navigation_item_description">تنظیمات ناوبری را انجام دهید.</string>

@@ -594,7 +594,7 @@
     <string name="faq_item_description">Isteqsiyen i d-yettuɣalen s waṭas</string>
     <string name="versions_item">Ileqman</string>
     <string name="feedback">Tikti</string>
-    <string name="contact_us">Anermis</string>
+    <string name="shared_string_contact">Anermis</string>
     <string name="number_of_edits">Amḍan n ibeddlilen</string>
     <string name="quick_action_add_favorite">Rnut d amenyaf</string>
     <string name="favorite_autofill_toast_text">" yekles ɣer "</string>

@@ -1906,7 +1906,7 @@
     <string name="techical_articles_item">Teĥnikaj artikoloj</string>
     <string name="versions_item">Versioj</string>
     <string name="feedback">Sendi opinion</string>
-    <string name="contact_us">Kontakti</string>
+    <string name="shared_string_contact">Kontakti</string>
     <string name="map_legend">Mapklarigo</string>
     <string name="save_poi_without_poi_type_message">Ĉu konservi interesejon sen determinita speco\?</string>
     <string name="poi_context_menu_modify_osm_change">Modifi OSM ŝanĝoj</string>

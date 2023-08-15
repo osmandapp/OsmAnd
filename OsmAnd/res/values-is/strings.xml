@@ -688,7 +688,7 @@
     <string name="faq_item_description">Algengar spurningar.</string>
     <string name="versions_item">Útgáfur</string>
     <string name="feedback">Umsagnir</string>
-    <string name="contact_us">Hafa samband</string>
+    <string name="shared_string_contact">Hafa samband</string>
     <string name="use_dashboard_btn">Nota stjórnborð</string>
     <string name="use_drawer_btn">Nota valmynd</string>
     <string name="live_update">Síuppfærsla</string>

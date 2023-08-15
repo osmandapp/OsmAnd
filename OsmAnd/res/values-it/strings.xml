@@ -1714,7 +1714,7 @@
     <string name="instalation_troubleshooting_item">Installazione e risoluzione dei problemi</string>
     <string name="techical_articles_item">Articoli tecnici</string>
     <string name="versions_item">Versioni</string>
-    <string name="contact_us">Contatti</string>
+    <string name="shared_string_contact">Contatti</string>
     <string name="world_map_download_descr">La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valuta se scaricarla per un ambiente completo.</string>
     <string name="map_legend">Legenda della mappa</string>
     <string name="shared_string_upload">Carica</string>
