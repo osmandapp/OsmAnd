@@ -130,7 +130,6 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		for (String url : links) {
 			addArticle(articleNode, url);
 		}
-		printTree(articleNode, 0);
 	}
 
 	private void addArticle(@NonNull HelpArticleNode currentNode, @NonNull String url) {
