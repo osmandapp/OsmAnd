@@ -86,9 +86,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		List<ContextMenuItem> items = new ArrayList<>();
 
 		createPopularArticlesCategory(items);
-		if (articleNode != null) {
-			createUserGuideCategory(items, articleNode);
-		}
+		createArticleNodeCategories(items);
 		createContactUsCategory(items);
 		createReportIssuesCategory(items);
 		createAboutCategory(items);
@@ -116,27 +114,57 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		}
 	}
 
-	private void createUserGuideCategory(@NonNull List<ContextMenuItem> items, @NonNull HelpArticleNode articleNode) {
-		HelpArticleNode troubleshootingNode = null;
-		items.add(createCategory(getString(R.string.user_guide)));
+	private void createArticleNodeCategories(@NonNull List<ContextMenuItem> items) {
+		if (articleNode != null) {
+			Map<String, HelpArticleNode> articles = new LinkedHashMap<>(articleNode.articles);
+			HelpArticleNode troubleshootingNode = articles.remove("troubleshooting");
 
-		for (Map.Entry<String, HelpArticleNode> entry : articleNode.articles.entrySet()) {
-			HelpArticleNode node = entry.getValue();
+			createUserGuideCategory(items, articles);
 
-			if (Algorithms.stringsEqual(entry.getKey(), "troubleshooting")) {
-				troubleshootingNode = node;
-			} else {
-				String title = HelpArticleUtils.getArticleName(app, node.url);
-				items.add(createMenuItem(title, null, R.drawable.ic_action_book_info,
-						(uiAdapter, view, item, isChecked) -> {
-							FragmentManager manager = activity.getSupportFragmentManager();
-							HelpArticlesFragment.showInstance(manager, node);
-							return false;
-						}));
+			if (troubleshootingNode != null) {
+				createTroubleshootingCategory(items, troubleshootingNode);
 			}
 		}
-		if (troubleshootingNode != null) {
-			createTroubleshootingCategory(items, troubleshootingNode);
+	}
+
+	private void createUserGuideCategory(@NonNull List<ContextMenuItem> items, @NonNull Map<String, HelpArticleNode> articles) {
+		items.add(createCategory(getString(R.string.user_guide)));
+
+		createUserGuideArticleItem("start-with", items, articles);
+		createUserGuideArticleItem("map", items, articles);
+		createUserGuideArticleItem("map-legend", items, articles);
+		createUserGuideArticleItem("widgets", items, articles);
+		createUserGuideArticleItem("navigation", items, articles);
+		createUserGuideArticleItem("search", items, articles);
+		createUserGuideArticleItem("personal", items, articles);
+		createUserGuideArticleItem("plan-route", items, articles);
+		createUserGuideArticleItem("plugins", items, articles);
+		createUserGuideArticleItem("purchases", items, articles);
+
+		for (Map.Entry<String, HelpArticleNode> entry : articles.entrySet()) {
+			HelpArticleNode node = entry.getValue();
+
+			String title = HelpArticleUtils.getArticleName(app, node.url);
+			items.add(createMenuItem(title, null, R.drawable.ic_action_book_info,
+					(uiAdapter, view, item, isChecked) -> {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						HelpArticlesFragment.showInstance(manager, node);
+						return false;
+					}));
+		}
+	}
+
+	private void createUserGuideArticleItem(@NonNull String key, @NonNull List<ContextMenuItem> items,
+	                                        @NonNull Map<String, HelpArticleNode> articles) {
+		HelpArticleNode node = articles.remove(key);
+		if (node != null) {
+			String title = HelpArticleUtils.getArticleName(app, node.url);
+			items.add(createMenuItem(title, null, R.drawable.ic_action_book_info,
+					(uiAdapter, view, item, isChecked) -> {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						HelpArticlesFragment.showInstance(manager, node);
+						return false;
+					}));
 		}
 	}
 
@@ -145,12 +173,12 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 
 		Map<String, HelpArticleNode> articles = new LinkedHashMap<>(articleNode.articles);
 
-		createArticleItem("setup", items, articles, R.drawable.ic_action_device_download);
-		createArticleItem("maps-data", items, articles, R.drawable.ic_action_layers);
-		createArticleItem("navigation", items, articles, R.drawable.ic_action_gdirections_dark);
-		createArticleItem("track-recording-issues", items, articles, R.drawable.ic_action_track_recordable);
-		createArticleItem("general", items, articles, R.drawable.ic_action_book_info);
-		createArticleItem("crash-logs", items, articles, R.drawable.ic_action_book_info);
+		createTroubleshootingArticleItem("setup", items, articles, R.drawable.ic_action_device_download);
+		createTroubleshootingArticleItem("maps-data", items, articles, R.drawable.ic_action_layers);
+		createTroubleshootingArticleItem("navigation", items, articles, R.drawable.ic_action_gdirections_dark);
+		createTroubleshootingArticleItem("track-recording-issues", items, articles, R.drawable.ic_action_track_recordable);
+		createTroubleshootingArticleItem("general", items, articles, R.drawable.ic_action_book_info);
+		createTroubleshootingArticleItem("crash-logs", items, articles, R.drawable.ic_action_book_info);
 
 		for (HelpArticleNode node : articles.values()) {
 			String title = HelpArticleUtils.getArticleName(app, node.url);
@@ -159,8 +187,8 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		}
 	}
 
-	private void createArticleItem(@NonNull String key, @NonNull List<ContextMenuItem> items,
-	                               @NonNull Map<String, HelpArticleNode> articles, @DrawableRes int iconId) {
+	private void createTroubleshootingArticleItem(@NonNull String key, @NonNull List<ContextMenuItem> items,
+	                                              @NonNull Map<String, HelpArticleNode> articles, @DrawableRes int iconId) {
 		HelpArticleNode node = articles.remove(key);
 		if (node != null) {
 			String title = HelpArticleUtils.getArticleName(app, node.url);
