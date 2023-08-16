@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -12,6 +15,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -40,6 +44,7 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 
 		Bundle arg = getArguments();
 		if (arg != null && arg.containsKey(TELEGRAM_CHATS)) {
@@ -51,9 +56,14 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.telegram_chats_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.help_articles_fragment, container, false);
 
 		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
+
+		menuAdapter.addItem(new ContextMenuItem(null)
+				.setTitle(getString(R.string.telegram_chats_descr))
+				.setLayout(R.layout.description_article_item));
+
 		if (!Algorithms.isEmpty(telegramChats)) {
 			for (Map.Entry<String, String> entry : telegramChats.entrySet()) {
 				String key = entry.getKey();
@@ -90,6 +100,35 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+
+		HelpActivity activity = (HelpActivity) requireActivity();
+		ActionBar actionBar = activity.getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.setTitle(getString(R.string.telegram_chats));
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
+		menu.clear();
+	}
+
+	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		ContextMenuItem item = adapter.getItem(position);
 		ItemClickListener listener = item.getItemClickListener();
@@ -107,7 +146,7 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 			fragment.setArguments(bundle);
 			manager.beginTransaction()
 					.addToBackStack(null)
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 		}
 	}
