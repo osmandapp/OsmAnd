@@ -1729,7 +1729,7 @@
     <string name="techical_articles_item">Technische Themen</string>
     <string name="versions_item">Versionen</string>
     <string name="feedback">Bewertung</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
     <string name="access_from_map_description">Menütaste startet die Übersichtsseite und nicht das Menü</string>
     <string name="show_on_start_description">\'Aus\' startet die Karte direkt.</string>

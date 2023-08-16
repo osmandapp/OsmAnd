@@ -1981,7 +1981,7 @@
     <string name="simulate_initial_startup">Имитировать первый запуск</string>
     <string name="simulate_initial_startup_descr">Устанавливает признак первого запуска приложения, не изменяет других настроек.</string>
     <string name="feedback">Опрос</string>
-    <string name="contact_us">Связаться с нами</string>
+    <string name="shared_string_contact">Связаться с нами</string>
     <string name="versions_item">Версии</string>
     <string name="techical_articles_item">Технические статьи</string>
     <string name="instalation_troubleshooting_item">Установка и решение проблем</string>

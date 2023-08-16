@@ -1227,7 +1227,7 @@
     <string name="osmand_parking_plugin_name">停车位置</string>
     <string name="plugin_ski_name">滑雪地图浏览</string>
     <string name="help_us_to_improve_menu_group">帮助我们改进 OsmAnd</string>
-    <string name="contact_us">联系</string>
+    <string name="shared_string_contact">联系</string>
     <string name="follow_us">跟随我们</string>
     <string name="instalation_troubleshooting_item">安装和疑难解答</string>
     <string name="techical_articles_item">技术文章</string>

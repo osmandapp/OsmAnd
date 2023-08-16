@@ -1685,7 +1685,7 @@
     <string name="instalation_troubleshooting_item">Installation och problemlösning</string>
     <string name="techical_articles_item">Tekniska artiklar</string>
     <string name="versions_item">Versioner</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="osm_edit_created_poi">Skapat en OSM POI</string>
     <string name="world_map_download_descr">Världskarta (täcker hela världen vid låg zoomnivå) saknas eller är föråldrad. Överväg att ladda ner den för en global översikt.</string>
     <string name="shared_string_upload">Skicka</string>

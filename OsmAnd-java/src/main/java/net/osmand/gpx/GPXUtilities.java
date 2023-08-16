@@ -1245,7 +1245,7 @@ public class GPXUtilities {
 		return text == null ? null : text.toString();
 	}
 
-	private static Map<String, String> readTextMap(XmlPullParser parser, String key)
+	public static Map<String, String> readTextMap(XmlPullParser parser, String key)
 			throws XmlPullParserException, IOException {
 		int tok;
 		StringBuilder text = null;

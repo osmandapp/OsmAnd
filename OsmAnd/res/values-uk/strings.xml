@@ -1763,7 +1763,7 @@
     <string name="techical_articles_item">Технічні статті</string>
     <string name="versions_item">Версії</string>
     <string name="feedback">Зворотній звʼязок</string>
-    <string name="contact_us">Листування</string>
+    <string name="shared_string_contact">Листування</string>
     <string name="map_legend">Легенда мапи</string>
     <string name="poi_context_menu_modify_osm_change">Редагувати зміни OSM</string>
     <string name="only_download_over_wifi">Завантажувати лише через Wi-Fi</string>
