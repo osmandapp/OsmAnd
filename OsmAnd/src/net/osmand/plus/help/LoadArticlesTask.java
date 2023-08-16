@@ -12,7 +12,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -72,7 +71,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	private void loadPopularArticles() {
-		File file = new File(FileUtils.getExistingDir(app, HELP_INDEX_DIR), HELP_LINKS_FILE_NAME);
+		File file = new File(getHelpDir(), HELP_LINKS_FILE_NAME);
 		if (file.exists()) {
 			parsePopularArticles(file);
 		} else {
@@ -113,7 +112,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 	}
 
 	private void loadSitemapArticles() {
-		File file = new File(FileUtils.getExistingDir(app, HELP_INDEX_DIR), HELP_SITEMAP_FILE_NAME);
+		File file = new File(getHelpDir(), HELP_SITEMAP_FILE_NAME);
 		if (file.exists()) {
 			processSitemapArticles(file);
 		} else {
@@ -131,7 +130,6 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		for (String url : links) {
 			addArticle(articleNode, url);
 		}
-		printTree(app, articleNode, 0);
 	}
 
 	private void addArticle(@NonNull HelpArticleNode currentNode, @NonNull String url) {
@@ -181,18 +179,13 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		return links;
 	}
 
-	public static void printTree(@NonNull OsmandApplication app, @NonNull HelpArticleNode node, int level) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < level; i++) {
-			builder.append("  ");
+	@NonNull
+	private File getHelpDir() {
+		File dir = new File(app.getCacheDir(), HELP_INDEX_DIR);
+		if (!dir.exists()) {
+			dir.mkdirs();
 		}
-//		log.debug(builder + node.url);
-
-		for (Map.Entry<String, HelpArticleNode> entry : node.articles.entrySet()) {
-			String key = entry.getValue().url.replace(DOCS_LINKS_URL, "").toLowerCase(Locale.US).replace("/", "_").replace("-", "_");
-			log.debug(key);
-			printTree(app, entry.getValue(), level + 1);
-		}
+		return dir;
 	}
 
 	@Override

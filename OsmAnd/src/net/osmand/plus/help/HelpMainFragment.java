@@ -34,6 +34,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -80,10 +81,14 @@ public class HelpMainFragment extends BaseOsmAndFragment implements OnItemClickL
 
 	public void updateContent() {
 		HelpActivity activity = (HelpActivity) requireActivity();
-		HelpArticlesHelper 	articlesHelper = activity.getArticlesHelper();
+		HelpArticlesHelper articlesHelper = activity.getArticlesHelper();
 
-		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
 		List<ContextMenuItem> items = articlesHelper.createItems();
+		if (!Algorithms.isEmpty(items)) {
+			items.get(items.size() - 1).setHideDivider(true);
+			items.add(new ContextMenuItem(null).setLayout(R.layout.card_bottom_divider));
+		}
+		ContextMenuAdapter menuAdapter = new ContextMenuAdapter(app);
 		for (ContextMenuItem item : items) {
 			menuAdapter.addItem(item);
 		}

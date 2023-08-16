@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -92,6 +93,9 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 				}
 			}
 		}
+		if (!Algorithms.isEmpty(items)) {
+			items.add(new ContextMenuItem(null).setLayout(R.layout.simple_divider_item));
+		}
 		return items;
 	}
 
@@ -128,6 +132,19 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 	@Override
 	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
 		menu.clear();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == android.R.id.home) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
