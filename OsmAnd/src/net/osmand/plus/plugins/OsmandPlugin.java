@@ -275,6 +275,10 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public String getHelpFileName() {
+		return null;
+	}
+
 	/*
 	 * Return true in case if plugin should fill the map context menu with buildContextMenuRows method.
 	 */

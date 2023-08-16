@@ -30,8 +30,7 @@ public abstract class BaseLogcatActivity extends ActionBarProgressActivity imple
 	@NonNull
 	protected abstract String getFilterLevel();
 
-	protected void onLogEntryAdded() {
-	}
+	protected abstract void onLogEntryAdded();
 
 	protected void startSaveLogsAsyncTask() {
 		SaveLogsAsyncTask saveLogsAsyncTask = new SaveLogsAsyncTask(this, logs);

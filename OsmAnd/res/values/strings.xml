@@ -10,22 +10,6 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
-    <string name="user_guide">User guide</string>
-    <string name="telegram_chats_descr">Join to one of our local telegram chats.</string>
-    <string name="telegram_chats">Telegram chats</string>
-    <string name="github_discussion">GitHub Discussion</string>
-    <string name="contact_us">Contact us</string>
-    <string name="free_versions_descr">Download and install free OsmAnd version</string>
-    <string name="free_versions">Free versions</string>
-    <string name="about_osmand">About OsmAnd</string>
-    <string name="send_logcat_log_descr">Detailed log file</string>
-    <string name="send_crash_log_descr">Contains only information about crashes</string>
-    <string name="open_issue_on_github_descr">Ask question, propose features</string>
-    <string name="open_issue_on_github">Open issue on GitHub</string>
-    <string name="report_an_issues">Report an issues</string>
-    <string name="copy_build_version">Copy build version</string>
-    <string name="most_viewed">Most viewed</string>
     <string name="local_indexes_category_terrain">"Terrain maps (3D)</string>
     <string name="wheel_circumference">Wheel circumference</string>
     <string name="external_sensor_name_property_description">Sensor name</string>
@@ -5120,7 +5104,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>
     <string name="feedback">Feedback</string>
-    <string name="shared_string_contact">Contact</string>
+    <string name="contact_us">Contact</string>
     <string name="map_legend">Map legend</string>
     <string name="save_poi_too_many_uppercase">The name contains too many capital letters. Continue?</string>
     <string name="save_poi_without_poi_type_message">Save POI without type?</string>

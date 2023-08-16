@@ -195,6 +195,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public String getHelpFileName() {
+		return "feature_articles/parking-plugin.html";
+	}
+
+	@Override
 	public boolean isMarketPlugin() {
 		return true;
 	}

@@ -112,6 +112,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public String getHelpFileName() {
+		return "feature_articles/online-maps-plugin.html";
+	}
+
+	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		underlayListener = change -> {
 			if (updateConfigureMapItemCallback != null) {

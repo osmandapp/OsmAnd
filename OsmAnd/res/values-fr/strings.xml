@@ -1721,7 +1721,7 @@
     <string name="techical_articles_item">Articles techniques</string>
     <string name="versions_item">Versions</string>
     <string name="feedback">Sondage</string>
-    <string name="shared_string_contact">Nous contacter</string>
+    <string name="contact_us">Nous contacter</string>
     <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
     <string name="map_legend">Légende de la carte</string>
     <string name="shared_string_upload">Téléverser</string>

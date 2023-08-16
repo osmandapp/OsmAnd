@@ -1727,7 +1727,7 @@
     <string name="techical_articles_item">Artykuły techniczne</string>
     <string name="versions_item">Wersje</string>
     <string name="feedback">Opinie</string>
-    <string name="shared_string_contact">Kontakt</string>
+    <string name="contact_us">Kontakt</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać POI bez podawania typu\?</string>
     <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu</string>
