@@ -1774,7 +1774,7 @@
     <string name="poi_club_fishing">Fiskeklubb</string>
     <string name="poi_denomination_evangelical">Evangelisk</string>
     <string name="poi_religion_multifaith">Multireligiøs</string>
-    <string name="poi_chalet">Feriehus</string>
+    <string name="poi_chalet">Feriehus;Husly</string>
     <string name="poi_fuel_wood">Brensel: tre</string>
     <string name="poi_fuel_lpg">Flytende petroleumsgass (LPG)</string>
     <string name="poi_fuel_gtl_diesel">GTL-diesel</string>
@@ -1812,7 +1812,7 @@
     <string name="poi_fridge_filter">Kjøleskap</string>
     <string name="poi_museum_type">Museum-emne</string>
     <string name="poi_post_office_type">Type</string>
-    <string name="poi_lean_to">Gapahuk</string>
+    <string name="poi_lean_to">Gapahuk;Ly</string>
     <string name="poi_departures_board">Avgangstavle</string>
     <string name="poi_power_generator">Elgenerator</string>
     <string name="poi_craft_beekeeper">Birøkter</string>
@@ -1909,4 +1909,6 @@
     <string name="poi_fuel_coal">Brensel: kull</string>
     <string name="poi_recycling_styrofoam">Ekstrudert polystyrenskum</string>
     <string name="poi_occupational_therapist">Ergoterapeut</string>
+    <string name="poi_second_hand_yes">Ja</string>
+    <string name="poi_water_filter">Vann;Drikkevann</string>
 </resources>
