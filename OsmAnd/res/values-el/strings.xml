@@ -2551,7 +2551,7 @@
     <string name="techical_articles_item">Τεχνικά άρθρα</string>
     <string name="versions_item">Εκδόσεις</string>
     <string name="feedback">Ανατροφοδότηση</string>
-    <string name="contact_us">Επαφή</string>
+    <string name="shared_string_contact">Επαφή</string>
     <string name="map_legend">Υπόμνημα χάρτη</string>
     <string name="save_poi_too_many_uppercase">Το όνομα περιέχει υπερβολικά πολλά κεφαλαία γράμματα. Συνέχεια;</string>
     <string name="save_poi_without_poi_type_message">Αποθήκευση ΣΕ χωρίς τύπο;</string>

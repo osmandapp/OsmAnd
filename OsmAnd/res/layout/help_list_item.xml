@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:minHeight="@dimen/bottom_sheet_selected_item_title_height"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/selectableItemBackground"
+		android:orientation="horizontal">
+
+		<ImageView
+			android:id="@+id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginVertical="@dimen/content_padding"
+			tools:srcCompat="@drawable/ic_action_book_info"
+			tools:tint="?attr/default_icon_color" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:orientation="vertical">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="?android:textColorPrimary"
+				tools:text="@string/share_crash_log" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="?android:textColorSecondary"
+				tools:text="@string/send_crash_log_descr" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/divider"
+		layout="@layout/divider_half_item" />
+
+</LinearLayout>

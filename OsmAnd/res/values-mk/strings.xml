@@ -4684,7 +4684,7 @@
     <string name="voice_prompts_timetable">Vreminja na glasovni izvestuvanja</string>
     <string name="routing_attr_freeride_policy_description">„Freeride“ i „Off-piste“ se neoficijalni pravci i premini. Tipično neguvani, neodržuvani i ne provereni navečer. Vlezete na vaš sopstven rizik.</string>
     <string name="amenity_type_shop">Prodavnica</string>
-    <string name="contact_us">Kontakt</string>
+    <string name="shared_string_contact">Kontakt</string>
     <string name="quick_action_map_underlay_title">Podlogi na kartata</string>
     <string name="quick_action_map_underlay_action">Dodadete podloga</string>
     <string name="quick_action_map_source">Promenete go izvorot na kartata</string>

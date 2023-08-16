@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical">
 
-	<net.osmand.plus.widgets.WebViewEx
-		android:id="@+id/webView"
+	<FrameLayout
+		android:id="@+id/fragmentContainer"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1"/>
+		android:layout_height="match_parent" />
 
-	<net.osmand.plus.activities.search.toolbar.SplitToolbar
-		android:orientation="horizontal"
-		android:id="@+id/bottomControls"
-		android:background="?attr/bottomToolBarColor"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"/>
-</LinearLayout>
+</FrameLayout>

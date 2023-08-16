@@ -2657,7 +2657,7 @@
     <string name="activate_seamarks_plugin">Mohon aktifkan plugin \'Tampilan peta bahari\'</string>
     <string name="activate_srtm_plugin">Mohon aktifkan plugin \'Topografi\'</string>
     <string name="confirm_download_roadmaps">Peta jalan-saja tidak dibutuhkan, Anda punya peta standar (penuh). Unduh saja\?</string>
-    <string name="contact_us">Kontak</string>
+    <string name="shared_string_contact">Kontak</string>
     <string name="configure_screen_quick_action">Tindakan cepat</string>
     <string name="quick_action_navigation_voice_off">Suarakan Suara</string>
     <string name="quick_action_navigation_voice_descr">Sebuah alihan untuk menonaktifkan atau mengaktifkan pemandu suara saat navigasi.</string>

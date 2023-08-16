@@ -205,11 +205,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		return app.getString(R.string.srtm_plugin_name);
 	}
 
-	@Override
-	public String getHelpFileName() {
-		return "feature_articles/contour-lines-plugin.html";
-	}
-
 	@Nullable
 	@Override
 	public OsmAndFeature getOsmAndFeature() {

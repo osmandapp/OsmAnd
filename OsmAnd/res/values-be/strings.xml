@@ -1721,7 +1721,7 @@
     <string name="plugins_menu_group">Убудовы</string>
     <string name="faq_item">Частыя пытанні</string>
     <string name="versions_item">Версіі</string>
-    <string name="contact_us">Кантакты</string>
+    <string name="shared_string_contact">Кантакты</string>
     <string name="map_legend">Легенда мапы</string>
     <string name="shared_string_update">Абнавіць</string>
     <string name="world_map_download_descr">Базавая мапа свету (якая пакрывае ўвесь свет пры малым маштабе) адсутнічае або састарэла. Калі ласка, спампуйце яе каб мець магчымасць базавага агляду ўсяго свету.</string>

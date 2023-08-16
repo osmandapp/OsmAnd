@@ -1304,7 +1304,7 @@
     <string name="techical_articles_item">Teknik makaleler</string>
     <string name="versions_item">Sürümler</string>
     <string name="feedback">Görüşleriniz</string>
-    <string name="contact_us">İletişim</string>
+    <string name="shared_string_contact">İletişim</string>
     <string name="map_legend">Harita lejandı</string>
     <string name="save_poi_without_poi_type_message">POI tür olmadan kaydedilsin mi\?</string>
     <string name="poi_context_menu_modify_osm_change">OSM değişikliği değiştirme</string>

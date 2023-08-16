@@ -1844,7 +1844,7 @@
     <string name="address">Адреса</string>
     <string name="techical_articles_item">Технички чланци</string>
     <string name="versions_item">Издања</string>
-    <string name="contact_us">Веза са нама</string>
+    <string name="shared_string_contact">Веза са нама</string>
     <string name="quick_action_btn_tutorial_title">Помери дугме</string>
     <string name="quick_action_btn_tutorial_descr">Дуго држање и превлачење дугмета га помера по заслону.</string>
     <string name="shared_string_action_name">Име радње</string>
