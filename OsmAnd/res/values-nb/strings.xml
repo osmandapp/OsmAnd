@@ -540,7 +540,7 @@
     <string name="route_from">Fra:</string>
     <string name="destination_point">Reisemål %1$s</string>
     <string name="context_menu_item_destination_point">Sett som reisemål</string>
-    <string name="please_select_address">Velg by eller gate først</string>
+    <string name="please_select_address">Angi by eller gate først</string>
     <string name="search_street_in_neighborhood_cities">Søk etter gaten i nabobyer</string>
     <string name="about_version">Versjon:</string>
     <string name="shared_string_about">Om</string>
@@ -5298,4 +5298,8 @@
     <string name="average_glide_ratio">Gjennomsnittlig glidetall</string>
     <string name="glide_ratio_to_target">Glidetall til målet</string>
     <string name="map_widget_group_glide_ratio">Glidetall</string>
+    <string name="map_widget_glide_average_desc">Viser det gjennomsnittlige glidetallet for det angitte intervallet.</string>
+    <string name="map_widget_glide_target_desc">Viser glidetallet som trengs for å nå målpunktet.</string>
+    <string name="average_glide_time_interval_desc">Angi tidsintervallet for å bestemme gjennomsnittlig glidetall.</string>
+    <string name="map_widget_group_glide_desc">Moduler viser glidetallet til målet eller gjennomsnittlig glidetall for den gjeldende turen.</string>
 </resources>
