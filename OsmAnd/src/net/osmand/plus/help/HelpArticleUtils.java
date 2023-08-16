@@ -20,7 +20,7 @@ public class HelpArticleUtils {
 		int endIndex = key.indexOf(")");
 
 		if (startIndex != -1 && endIndex != -1 && endIndex > startIndex) {
-			String langKey = key.substring(startIndex, endIndex);
+			String langKey = key.substring(startIndex + 1, endIndex);
 			String value = AndroidUtils.getStringByProperty(app, "lang_" + langKey);
 			if (!Algorithms.isEmpty(value)) {
 				String telegram = app.getString(R.string.telegram);
