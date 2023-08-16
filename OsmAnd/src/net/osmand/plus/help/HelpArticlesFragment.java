@@ -25,7 +25,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemClickListener {
 
@@ -63,10 +62,9 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 		List<ContextMenuItem> items = new ArrayList<>();
 
 		if (articleNode != null) {
-			for (Map.Entry<String, HelpArticleNode> entry : articleNode.articles.entrySet()) {
-				String title = HelpArticlesHelper.getArticleName(app, entry.getKey());
+			for (HelpArticleNode node : articleNode.articles.values()) {
+				String title = HelpArticleUtils.getArticleName(app, node.url);
 
-				HelpArticleNode node = entry.getValue();
 				if (Algorithms.isEmpty(node.articles)) {
 					items.add(createArticleItem(title, node.url));
 				} else {
