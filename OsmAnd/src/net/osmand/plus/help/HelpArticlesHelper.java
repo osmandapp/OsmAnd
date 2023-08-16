@@ -145,12 +145,12 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 
 		Map<String, HelpArticleNode> articles = new LinkedHashMap<>(articleNode.articles);
 
-		createArticleItem(items, articles, "setup");
-		createArticleItem(items, articles, "maps-data");
-		createArticleItem(items, articles, "navigation");
-		createArticleItem(items, articles, "track-recording-issues");
-		createArticleItem(items, articles, "general");
-		createArticleItem(items, articles, "crash-logs");
+		createArticleItem("setup", items, articles, R.drawable.ic_action_device_download);
+		createArticleItem("maps-data", items, articles, R.drawable.ic_action_layers);
+		createArticleItem("navigation", items, articles, R.drawable.ic_action_gdirections_dark);
+		createArticleItem("track-recording-issues", items, articles, R.drawable.ic_action_track_recordable);
+		createArticleItem("general", items, articles, R.drawable.ic_action_book_info);
+		createArticleItem("crash-logs", items, articles, R.drawable.ic_action_book_info);
 
 		for (HelpArticleNode node : articles.values()) {
 			String title = HelpArticleUtils.getArticleName(app, node.url);
@@ -159,11 +159,12 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		}
 	}
 
-	private void createArticleItem(@NonNull List<ContextMenuItem> items, @NonNull Map<String, HelpArticleNode> articles, @NonNull String key) {
+	private void createArticleItem(@NonNull String key, @NonNull List<ContextMenuItem> items,
+	                               @NonNull Map<String, HelpArticleNode> articles, @DrawableRes int iconId) {
 		HelpArticleNode node = articles.remove(key);
 		if (node != null) {
 			String title = HelpArticleUtils.getArticleName(app, node.url);
-			items.add(createMenuItem(title, null, R.drawable.ic_action_book_info,
+			items.add(createMenuItem(title, null, iconId,
 					getArticleItemClickListener(title, node.url)));
 		}
 	}

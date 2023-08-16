@@ -32,18 +32,24 @@ public class HelpArticleUtils {
 
 	@NonNull
 	public static String getArticleName(@NonNull OsmandApplication app, @NonNull String url) {
-		String propertyName = url.toLowerCase(Locale.US).replace(DOCS_LINKS_URL, "")
-				.replace("-", "_").replace("/", "_");
-
-		if (!Algorithms.isEmpty(propertyName) && propertyName.charAt(propertyName.length() - 1) == '_') {
-			propertyName = propertyName.substring(0, propertyName.length() - 1);
-		}
+		String propertyName = getArticlePropertyName(url);
 
 		String name = getArticlePairedName(app, propertyName);
 		if (name == null) {
 			name = AndroidUtils.getStringByProperty(app, "help_article_" + propertyName + "_name");
 		}
 		return name != null ? name : Algorithms.capitalizeFirstLetterAndLowercase(propertyName.replace("_", " "));
+	}
+
+	@NonNull
+	private static String getArticlePropertyName(@NonNull String url) {
+		String propertyName = url.toLowerCase(Locale.US).replace(DOCS_LINKS_URL, "")
+				.replace("-", "_").replace("/", "_");
+
+		if (!Algorithms.isEmpty(propertyName) && propertyName.charAt(propertyName.length() - 1) == '_') {
+			propertyName = propertyName.substring(0, propertyName.length() - 1);
+		}
+		return propertyName;
 	}
 
 	@Nullable

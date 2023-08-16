@@ -2,6 +2,8 @@ package net.osmand.plus.help;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -33,6 +36,12 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 	private HelpArticleNode articleNode;
 	private ContextMenuListAdapter adapter;
 
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +64,17 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 		listView.setOnItemClickListener(this);
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		HelpActivity activity = (HelpActivity) requireActivity();
+		ActionBar actionBar = activity.getSupportActionBar();
+		if (actionBar != null && articleNode != null) {
+			actionBar.setTitle(HelpArticleUtils.getArticleName(app, articleNode.url));
+		}
 	}
 
 	@NonNull
@@ -106,6 +126,11 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 	}
 
 	@Override
+	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
+		menu.clear();
+	}
+
+	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		ContextMenuItem item = adapter.getItem(position);
 		ItemClickListener listener = item.getItemClickListener();
@@ -122,7 +147,7 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 
 			manager.beginTransaction()
 					.addToBackStack(null)
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 		}
 	}
