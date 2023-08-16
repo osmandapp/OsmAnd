@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -135,7 +134,10 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 	@NonNull
 	private File getArticleFile() {
-		File dir = FileUtils.getExistingDir(app, ARTICLES_DIR);
+		File dir = new File(app.getCacheDir(), ARTICLES_DIR);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
 		return new File(dir, title + HELP_ARTICLE_FILE_EXT);
 	}
 
