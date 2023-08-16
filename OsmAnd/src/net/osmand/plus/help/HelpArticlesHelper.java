@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -26,8 +25,6 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,8 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HelpArticlesHelper implements LoadArticlesListener {
-
-	private static final Log log = PlatformUtil.getLog(HelpArticlesHelper.class);
 
 	private static final int MAX_VISIBLE_POPULAR_ARTICLES = 5;
 
@@ -119,9 +114,10 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 			Map<String, HelpArticleNode> articles = new LinkedHashMap<>(articleNode.articles);
 			HelpArticleNode troubleshootingNode = articles.remove("troubleshooting");
 
-			createUserGuideCategory(items, articles);
-
-			if (troubleshootingNode != null) {
+			if (!Algorithms.isEmpty(articles)) {
+				createUserGuideCategory(items, articles);
+			}
+			if (troubleshootingNode != null && !Algorithms.isEmpty(troubleshootingNode.articles)) {
 				createTroubleshootingCategory(items, troubleshootingNode);
 			}
 		}
@@ -206,6 +202,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 					Intent intent = new Intent(Intent.ACTION_SENDTO);
 					intent.setData(Uri.parse("mailto:"));
 					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
+					intent.putExtra(Intent.EXTRA_TEXT, app.getFeedbackHelper().getDeviceInfo());
 					AndroidUtils.startActivityIfSafe(activity, intent);
 					return false;
 				}));
