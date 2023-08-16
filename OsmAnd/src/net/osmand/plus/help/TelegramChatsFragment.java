@@ -79,7 +79,7 @@ public class TelegramChatsFragment extends BaseOsmAndFragment implements OnItemC
 	@NonNull
 	private ContextMenuItem createSocialItem(@NonNull String key, @NonNull String url) {
 		return new ContextMenuItem(null)
-				.setTitle(HelpArticlesHelper.getTelegramChatName(app, key))
+				.setTitle(HelpArticleUtils.getTelegramChatName(app, key))
 				.setDescription(url)
 				.setIcon(R.drawable.ic_action_social_telegram)
 				.setListener((uiAdapter, view, item, isChecked) -> {

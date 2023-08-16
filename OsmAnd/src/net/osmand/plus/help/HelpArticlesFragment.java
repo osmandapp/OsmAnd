@@ -2,6 +2,8 @@ package net.osmand.plus.help;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -25,7 +28,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemClickListener {
 
@@ -33,6 +35,12 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 
 	private HelpArticleNode articleNode;
 	private ContextMenuListAdapter adapter;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
 
 	@Nullable
 	@Override
@@ -58,15 +66,25 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 		return view;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		HelpActivity activity = (HelpActivity) requireActivity();
+		ActionBar actionBar = activity.getSupportActionBar();
+		if (actionBar != null && articleNode != null) {
+			actionBar.setTitle(HelpArticleUtils.getArticleName(app, articleNode.url));
+		}
+	}
+
 	@NonNull
 	public List<ContextMenuItem> createItems() {
 		List<ContextMenuItem> items = new ArrayList<>();
 
 		if (articleNode != null) {
-			for (Map.Entry<String, HelpArticleNode> entry : articleNode.articles.entrySet()) {
-				String title = HelpArticlesHelper.getArticleName(app, entry.getKey());
+			for (HelpArticleNode node : articleNode.articles.values()) {
+				String title = HelpArticleUtils.getArticleName(app, node.url);
 
-				HelpArticleNode node = entry.getValue();
 				if (Algorithms.isEmpty(node.articles)) {
 					items.add(createArticleItem(title, node.url));
 				} else {
@@ -108,6 +126,11 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 	}
 
 	@Override
+	public void onCreateOptionsMenu(Menu menu, @NonNull MenuInflater inflater) {
+		menu.clear();
+	}
+
+	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		ContextMenuItem item = adapter.getItem(position);
 		ItemClickListener listener = item.getItemClickListener();
@@ -124,7 +147,7 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 
 			manager.beginTransaction()
 					.addToBackStack(null)
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 		}
 	}

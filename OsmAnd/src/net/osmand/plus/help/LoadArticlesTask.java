@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
@@ -40,7 +41,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 	private static final String SITEMAP_URL = SERVER_URL + "/sitemap.xml";
 	private static final String HELP_LINKS_URL = SERVER_URL + "/help-links-android.json";
-	private static final String DOCS_LINKS_URL = SERVER_URL + "/docs/user/";
+	public static final String DOCS_LINKS_URL = SERVER_URL + "/docs/user/";
 
 	private final OsmandApplication app;
 
@@ -130,6 +131,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		for (String url : links) {
 			addArticle(articleNode, url);
 		}
+		printTree(app, articleNode, 0);
 	}
 
 	private void addArticle(@NonNull HelpArticleNode currentNode, @NonNull String url) {
@@ -177,6 +179,20 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 			Algorithms.closeStream(stream);
 		}
 		return links;
+	}
+
+	public static void printTree(@NonNull OsmandApplication app, @NonNull HelpArticleNode node, int level) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < level; i++) {
+			builder.append("  ");
+		}
+//		log.debug(builder + node.url);
+
+		for (Map.Entry<String, HelpArticleNode> entry : node.articles.entrySet()) {
+			String key = entry.getValue().url.replace(DOCS_LINKS_URL, "").toLowerCase(Locale.US).replace("/", "_").replace("-", "_");
+			log.debug(key);
+			printTree(app, entry.getValue(), level + 1);
+		}
 	}
 
 	@Override
