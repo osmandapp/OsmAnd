@@ -5304,4 +5304,17 @@
     <string name="rendering_value_caiScale_description">Włoski Klub Alpejski (Italian Alpine Club)</string>
     <string name="shared_string_checked">Sprawdzano</string>
     <string name="write_heading">Napisz nagłówek</string>
+    <string name="map_widget_group_glide_desc">Widżety pokazują współczynnik poślizgu do docelowego lub średni współczynnik poślizgu dla bieżącej podróży.</string>
+    <string name="map_widget_glide_average_desc">Pokazuje średni współczynnik poślizgu dla ustawionego interwału.</string>
+    <string name="average_glide_time_interval_desc">Określa interwał czasowy dla uśredniania poślizgu.</string>
+    <string name="average_glide_ratio">Średni współczynnik poślizgu</string>
+    <string name="glide_ratio_to_target">Współczynnik poślizgu do celu</string>
+    <string name="map_widget_group_glide_ratio">Współczynnik poślizgu</string>
+    <string name="help_article_map_interact_with_map_name">Współdziałanie z mapą</string>
+    <string name="help_article_map_point_layers_on_map_name">Punkty na mapie</string>
+    <string name="help_article_map_raster_maps_name">Mapy rastrowe (Online / Offline)</string>
+    <string name="map_widget_glide_target_desc">Pokazuje współczynnik poślizgu potrzebny do osiągnięcia punktu docelowego.</string>
+    <string name="help_article_map_legend_nautical_map_name">Styl mapy morskiej</string>
+    <string name="help_article_map_legend_osmand_name">Styl mapy OsmAnd</string>
+    <string name="help_article_map_track_context_menu_name">Menu kontekstowe ścieżek</string>
 </resources>
