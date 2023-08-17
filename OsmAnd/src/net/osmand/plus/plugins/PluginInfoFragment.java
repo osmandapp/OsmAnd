@@ -3,9 +3,7 @@ package net.osmand.plus.plugins;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -26,8 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanUtils;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
@@ -140,16 +137,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		getButton.setText(plugin.isPaid() ? R.string.shared_string_get : R.string.shared_string_install);
 		getButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				OsmAndFeature feature = plugin.getOsmAndFeature();
-				if (feature != null) {
-					ChoosePlanFragment.showInstance(activity, feature);
-				} else {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
-					AndroidUtils.startActivityIfSafe(activity, intent);
-				}
-			}
+			ChoosePlanUtils.onGetPlugin(getActivity(), plugin);
 		});
 
 		updateState();
