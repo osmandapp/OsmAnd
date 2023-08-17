@@ -3,11 +3,9 @@ package net.osmand.plus.widgets.ctxmenu;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -20,15 +18,12 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
@@ -37,11 +32,11 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnIntegerValueChangedListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashSet;
@@ -179,8 +174,6 @@ public class ViewCreator {
 			return getDrawerProfileView(convertView, layoutId, item);
 		} else if (layoutId == R.layout.profile_list_item) {
 			return getProfileListItemView(convertView, item);
-		} else if (layoutId == R.layout.help_to_improve_item) {
-			return getHelpToImproveItemView(convertView);
 		} else if (layoutId == R.layout.main_menu_drawer_osmand_version) {
 			return getOsmAndVersionView(convertView, item);
 		} else if (layoutId == R.layout.list_item_terrain_description) {
@@ -261,31 +254,6 @@ public class ViewCreator {
 			}
 		}
 		AndroidUtils.setBackground(view, drawable);
-		return view;
-	}
-
-	@NonNull
-	private View getHelpToImproveItemView(@NonNull View view) {
-		TextView feedbackButton = view.findViewById(R.id.feedbackButton);
-		Drawable pollIcon = iconsCache.getThemedIcon(R.drawable.ic_action_big_poll);
-		feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
-		feedbackButton.setOnClickListener(v -> {
-			String name = ctx.getString(R.string.feedback);
-			String url = ctx.getString(R.string.osmand_poll);
-			FragmentManager fm = ((FragmentActivity) ctx).getSupportFragmentManager();
-			HelpArticleDialogFragment.instantiateWithUrl(url, name).show(fm, null);
-		});
-		TextView contactUsButton = view.findViewById(R.id.contactUsButton);
-		Drawable contactUsIcon = iconsCache.getThemedIcon(R.drawable.ic_action_big_feedback);
-		contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
-				null);
-		String email = ctx.getString(R.string.support_email);
-		contactUsButton.setOnClickListener(v -> {
-			Intent intent = new Intent(Intent.ACTION_SENDTO);
-			intent.setData(Uri.parse("mailto:"));
-			intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
-			AndroidUtils.startActivityIfSafe(ctx, intent);
-		});
 		return view;
 	}
 

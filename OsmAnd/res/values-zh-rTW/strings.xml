@@ -1714,7 +1714,7 @@
     <string name="techical_articles_item">技術文章</string>
     <string name="versions_item">版本</string>
     <string name="feedback">投票</string>
-    <string name="contact_us">聯絡</string>
+    <string name="shared_string_contact">聯絡</string>
     <string name="osm_edit_created_poi">建立 OSM 的 POI</string>
     <string name="map_legend">地圖圖例</string>
     <string name="shared_string_upload">上傳</string>

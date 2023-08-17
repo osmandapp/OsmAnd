@@ -591,11 +591,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getHelpFileName() {
-		return "feature_articles/audio-video-notes-plugin.html";
-	}
-
-	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		loadCameraSoundIfNeeded(false);
 		AV_PHOTO_PLAY_SOUND.addListener(change -> app.runInUIThread(() -> {

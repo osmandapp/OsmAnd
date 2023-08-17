@@ -110,7 +110,6 @@ clean.doFirst {
 	delete fileTree('assets') {
 		include '*.obf'
 		include 'fonts/**'
-		include 'feature_articles/**'
 		include 'voice/**'
 	}
 }
@@ -183,19 +182,6 @@ task collectHelpContentsStyle(type: Copy) {
 		include "style.css"
 	}
 	into "assets"
-}
-
-task collectHelpContentsAssets(type: Copy) {
-	from("../../help/website/help") {
-		include "about.html"
-		include "changes.html"
-		include "faq.html"
-		include "map-legend.html"
-	}
-	from("../../help/website/feature_articles") {
-		include "*.html"
-	}
-	into "assets/feature_articles"
 }
 
 task copyProjDb(type: Copy) {
@@ -293,7 +279,6 @@ task collectExternalResources {
 	dependsOn collectVoiceAssets,
 			collectFonts,
 			collectUiFonts,
-			collectHelpContentsAssets,
 			collectHelpContentsStyle,
 			copyMapShaderIcons,
 			copyMapPOIIcons,

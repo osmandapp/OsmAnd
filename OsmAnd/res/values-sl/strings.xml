@@ -1714,7 +1714,7 @@
     <string name="techical_articles_item">Tehnični prispevki o možnostih programa</string>
     <string name="versions_item">Različice</string>
     <string name="feedback">Anketa</string>
-    <string name="contact_us">Pišite nam</string>
+    <string name="shared_string_contact">Pišite nam</string>
     <string name="world_map_download_descr">Osnovni svetovni zemljevid (zemljevid sveta pri oddaljenem pogledu) je zastarel, ali pa ni nameščen. Brez tega zemljevida prikaz ni popoln.</string>
     <string name="simulate_initial_startup_descr">Nastavi zastavico, ki določa prvi zagon programa, ostale nastavitve pa ostanejo nespremenjene.</string>
     <string name="show_on_start_description">»Izklop« zažene program v pogledu zemljevida.</string>

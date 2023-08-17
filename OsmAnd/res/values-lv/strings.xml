@@ -1799,7 +1799,7 @@ failu(s)?
     <string name="techical_articles_item">Tehniskā dokumentācija</string>
     <string name="versions_item">Versijas</string>
     <string name="feedback">Atsauksmes</string>
-    <string name="contact_us">Mūsu kontakti</string>
+    <string name="shared_string_contact">Mūsu kontakti</string>
     <string name="map_legend">Kartes leģenda</string>
     <string name="save_poi_without_poi_type_message">Vai saglabāt POI, nenorādot tā tipu?</string>
     <string name="poi_context_menu_modify_osm_change">Rediģēt POI</string>
