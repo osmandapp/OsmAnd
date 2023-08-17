@@ -220,39 +220,44 @@ public class SearchHistoryHelper {
 
 	public void updateEntriesList() {
 		HistoryItemDBHelper helper = checkLoadedEntries();
-		List<HistoryEntry> loadedEntriesCopy = sortHistoryEntries(loadedEntries);
-		while (loadedEntriesCopy.size() > HISTORY_LIMIT) {
-			HistoryEntry lastEntry = loadedEntriesCopy.get(loadedEntriesCopy.size() - 1);
-			if (helper.remove(lastEntry)) {
-				loadedEntriesCopy.remove(lastEntry);
+		List<HistoryEntry> historyEntries = sortHistoryEntries(loadedEntries);
+
+		while (historyEntries.size() > HISTORY_LIMIT) {
+			int lastIndex = historyEntries.size() - 1;
+			if (helper.remove(historyEntries.get(lastIndex))) {
+				historyEntries.remove(lastIndex);
 			}
 		}
-		loadedEntries = loadedEntriesCopy;
+		loadedEntries = historyEntries;
 	}
 
-	private void addItemToHistoryWithReplacement(HistoryEntry model) {
+	private void addItemToHistoryWithReplacement(@NonNull HistoryEntry model) {
 		HistoryItemDBHelper helper = checkLoadedEntries();
+		List<HistoryEntry> historyEntries = new ArrayList<>(loadedEntries);
+
 		PointDescription name = model.getName();
-		List<HistoryEntry> loadedEntriesCopy = new ArrayList<>(loadedEntries);
 		if (mp.containsKey(name)) {
 			HistoryEntry oldModel = mp.remove(name);
-			loadedEntriesCopy.remove(oldModel);
+			historyEntries.remove(oldModel);
 			helper.remove(model);
 		}
-		loadedEntriesCopy.add(model);
-		loadedEntries = loadedEntriesCopy;
+		historyEntries.add(model);
+		loadedEntries = historyEntries;
+
 		mp.put(name, model);
 		helper.add(model);
 	}
 
-	public HistoryEntry getEntryByName(PointDescription pd) {
-		return mp != null && pd != null ? mp.get(pd) : null;
+	@Nullable
+	public HistoryEntry getEntryByName(@Nullable PointDescription pd) {
+		return pd != null ? mp.get(pd) : null;
 	}
 
-	private List<HistoryEntry> sortHistoryEntries(@NonNull List<HistoryEntry> originalList) {
-		List<HistoryEntry> copyList = new ArrayList<>(originalList);
-		Collections.sort(copyList, new HistoryEntryComparator());
-		return copyList;
+	@NonNull
+	private List<HistoryEntry> sortHistoryEntries(@NonNull List<HistoryEntry> historyEntries) {
+		List<HistoryEntry> entries = new ArrayList<>(historyEntries);
+		Collections.sort(entries, new HistoryEntryComparator());
+		return entries;
 	}
 
 	public static class HistoryEntry {

@@ -171,8 +171,7 @@ public class LanesWidget extends MapWidget {
 		if (specialPosition) {
 			specialContainer.addView(view);
 		} else {
-			int index = Math.min(container.getChildCount(), order); // Avoid IndexOutOfBoundsException
-			container.addView(view, index);
+			container.addView(view, order);
 		}
 	}
 

@@ -130,7 +130,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 	public void setWizardType(WizardType wizardType, boolean updateWizardView) {
 		this.wizardType = wizardType;
-		if (updateWizardView && getContext() != null) {
+		if (updateWizardView && isAdded()) {
 			updateWizardView();
 			doWizardTypeTask();
 			updateSkipButton();
@@ -447,6 +447,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onResume() {
 		super.onResume();
+
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.disableDrawer();
@@ -456,6 +457,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	@Override
 	public void onPause() {
 		super.onPause();
+
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.enableDrawer();
@@ -756,19 +758,15 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 			case SELECT_COUNTRY:
 				searchCountryMap();
 				break;
-
 			case DETERMINE_LOCATION:
 				determineLocation();
 				break;
-
 			case RESTORE_FROM_CLOUD:
 				restoreFromCloud();
 				break;
-
 			case RESTORE_FROM_FILE:
 				restoreFromFile();
 				break;
-
 			case SELECT_STORAGE_FOLDER:
 				selectStorageFolder();
 				break;
@@ -779,7 +777,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 			location = null;
 			ActivityCompat.requestPermissions(activity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION,
 							Manifest.permission.ACCESS_COARSE_LOCATION},
 					FIRST_USAGE_LOCATION_PERMISSION);
 		} else {

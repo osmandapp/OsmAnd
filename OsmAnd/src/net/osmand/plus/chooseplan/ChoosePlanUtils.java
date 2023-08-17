@@ -23,5 +23,4 @@ public class ChoosePlanUtils {
 			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 	}
-
 }
