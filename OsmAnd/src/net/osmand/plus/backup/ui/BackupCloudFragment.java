@@ -300,7 +300,7 @@ public class BackupCloudFragment extends BaseOsmAndFragment implements InAppPurc
 			}
 		} else if (card instanceof BackupStorageCard) {
 			if (TRASH_BUTTON_INDEX == buttonIndex) {
-				// Show history trash screen from here
+				CloudTrashFragment.showInstance(manager);
 			}
 		}
 	}
