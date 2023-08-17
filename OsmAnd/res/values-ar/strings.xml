@@ -122,7 +122,7 @@
     <string name="favourites_search_desc">البحث في المفضلة</string>
     <string name="offline_navigation_not_available">الملاحة غير متاحة مؤقتاً.</string>
     <string name="unknown_from_location">نقطة الانطلاق لم تحدد بعد.</string>
-    <string name="local_indexes_cat_map">خرائط التوجيه (المحملة)</string>
+    <string name="local_indexes_cat_map">الخرائط القياسية (الاتجاهية)</string>
     <string name="index_settings_descr">تحميل وإدارة الخرائط غير المتصلة المخزنة على جهازك.</string>
     <string name="prefs_plugins">الملحقات</string>
     <string name="debugging_and_development">خيارات المطور</string>
@@ -589,7 +589,7 @@
 \n
 \n عبارة عن تطبيق ملاحة مفتوح المصدر مع إمكانية الوصول إلى العديد من بيانات عالمية للموقع. كل بيانات الخرائط (خرائط التوجيه أو الخرائط الجزئية) يمكن تخزينها في ذاكرة الجهاز للإستخدام دون إنترنت. يوفر التطبيق كذلك وظائف توجيه بما في ذلك التوجيه الصوتي.
 \n
-\n OsmAnd + هو إصدار التطبيق المدفوع ، بشرائه فإنك تدعم المشروع ، وتمول تطوير ميزات جديدة ، وتتلقى آخر التحديثات.
+\nأوسماند بلس هو إصدار التطبيق المدفوع ، بشرائه فإنك تدعم المشروع ، وتمول تطوير ميزات جديدة ، وتتلقى آخر التحديثات.
 \n
 \n بعض الميزات الأساسية:
 \n - تشغيل كامل دون إنترنت( خزن خرائط التوجيه أو الخرائط الجزئية المنزلة في ذاكرة الجهاز)
@@ -2059,7 +2059,7 @@
     <string name="rendering_value_fine_name">اللون والسمك</string>
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
-    <string name="wiki_around">مقالات ويكيبيديا قريبة</string>
+    <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
     <string name="lang_sr_latn">صربي (لاتيني)</string>
@@ -3084,7 +3084,7 @@
     <string name="utm_format_descr">يستخدم أوسماند تنسيق UTM وهو مشابه ولكن غير مطابق لتنسيق UTM الناتو.</string>
     <string name="shared_string_example">مثال</string>
     <string name="navigate_point_format_utm">معيار الإحداثيات</string>
-    <string name="navigate_point_format_olc">رمز الموقع المفتوح (OLC)</string>
+    <string name="navigate_point_format_olc">افتح رمز الموقع</string>
     <string name="coordinates_format_info">سيتم تطبيق التنسيق المحدد في كل أنحاء التطبيق.</string>
     <string name="pref_selected_by_default_for_profiles">يتم تحديد هذا الاعداد بشكل افتراضي للأوضاع: %s</string>
     <string name="change_default_settings">تغيير الإعدادات</string>
@@ -3548,8 +3548,8 @@
     <string name="shared_string_language">اللغة</string>
     <string name="shared_string_all_languages">كل اللغات</string>
     <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة من ويكيبيديا على الخريطة.</string>
-    <string name="ui_customization_description">تخصيص كمية العناصر في درج تكوين خريطة قائمة السياق. 
-\n 
+    <string name="ui_customization_description">تخصيص كمية العناصر في قائمة تكوين خيارات الخريطة.
+\n
 \nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
     <string name="ui_customization_short_descr">القائمة الجانبية و السفلية</string>
     <string name="ui_customization">تخصيص واجهة المستخدم</string>
@@ -3826,18 +3826,18 @@
     <string name="shared_string_file_name">اسم الملف</string>
     <string name="one_point_error">الرجاء إضافة نقطتين على الأقل.</string>
     <string name="shared_string_redo">إعادة</string>
-    <string name="release_3_8">• ميزة تخطيط المسار المحدثة: تسمح باستخدام أنواع الملاحة المختلفة لكل جزء وكذا اظافة طرق 
-\n 
-\n• قائمة مظهر جديدة للمسارات: تحديد اللون، السماكة، اظهار أسهم التوجيه، أيقونات الانطلاق والنهاية 
-\n 
-\n• تحسين رؤية عقد الدراجات 
-\n 
-\n• المسارات قابلة للنقر عليها الان وقائمة سياق بمعلومات أساسية 
-\n 
-\n• خوارزميات بحث محسنة 
-\n 
-\n• تم تحسين خيارات متابعة المسار خلال الملاحة 
-\n 
+    <string name="release_3_8">• ميزة تخطيط المسار المحدثة: تسمح باستخدام أنواع الملاحة المختلفة لكل جزء وكذا اظافة طرق
+\n
+\n• قائمة مظهر جديدة للمسارات: تحديد اللون، السماكة، اظهار أسهم التوجيه، أيقونات الانطلاق والنهاية
+\n
+\n• تحسين رؤية عقد الدراجات
+\n
+\n• المسارات قابلة للنقر عليها الان وقائمة الخيارات بمعلومات أساسية
+\n
+\n• خوارزميات بحث محسنة
+\n
+\n• تم تحسين خيارات متابعة المسار خلال الملاحة
+\n
 \n• تم إصلاح المشكلات المتعلقة باستيراد/تصدير الأوضاع الشخصية
 \n
 \n</string>
@@ -5123,7 +5123,7 @@
     <string name="shared_string_add_manually">إضافة يدويا…</string>
     <string name="release_4_4">• تحسين قائمة \"المسارات\" في \"تكوين الخريطة\"
 \n
-\n• عرض قائمة السياق الآن أسماء مترجمة لنقاط الاهتمام
+\n• عرض قائمة خيارات الآن أسماء مترجمة لنقاط الاهتمام
 \n
 \n• تم إضافة خيار لمشاركة المسار عن طريق الرابط
 \n
@@ -5143,7 +5143,7 @@
 \n
 \n• إمكانية إضافية لتنزيل الطبقات عبر الإنترنت المستخدم كخرائط \"تراكب\" أو \"أساسية\"
 \n
-\n• دعم إضافي للوحدات العالمية \"معلمات السيارة\"
+\n• دعم إضافي للوحدات العالمية \"معاييرالسيارة\"
 \n
 \n• ملف تعريف الدراجة الجديد
 \n
@@ -5414,7 +5414,7 @@
     <string name="write_bearing">كتابة الاتجاه</string>
     <string name="local_indexes_category_terrain">خرائط التضاريس (3D)</string>
     <string name="hillshade_slope">التضاريس، الانحدار</string>
-    <string name="glide_ratio_to_target">نسبة الاندار إلى الهدف</string>
+    <string name="glide_ratio_to_target">نسبة الانحدار إلى الهدف</string>
     <string name="map_widget_group_glide_ratio">نسبة الانحدار</string>
     <string name="map_widget_group_glide_desc">ويدجت عرض نسبة الانحدار أو متوسطه إلى الهدف للرحلة الحالية.</string>
     <string name="map_widget_glide_average_desc">يعرض متوسط معدل الانحدار للفترة المحددة.</string>
@@ -5424,4 +5424,80 @@
     <string name="average_glide_ratio">متوسط نسبة الانحدار</string>
     <string name="wheel_circumference">محيط العجلة</string>
     <string name="external_sensor_name_property_description">اسم المستشعر</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="help_article_map_legend_nautical_map_name">نمط الخرائط البحرية</string>
+    <string name="help_article_map_legend_osmand_name">نمط خرائط أوسماند</string>
+    <string name="help_article_map_legend_ski_map_name">نمط خريطة التزلج</string>
+    <string name="help_article_map_interact_with_map_name">التفاعل مع الخريطة</string>
+    <string name="help_article_map_point_layers_on_map_name">النقاط على الخريطة</string>
+    <string name="help_article_map_raster_maps_name">الخرائط النقطية (متصل / غير متصل)</string>
+    <string name="help_article_map_track_context_menu_name">قائمة خيارات المسار</string>
+    <string name="help_article_map_map_context_menu_name">قائمة خيارات الخريطة</string>
+    <string name="help_article_map_tracks_on_map_name">المسارات والطرق</string>
+    <string name="help_article_map_vector_maps_name">خرائط المتجهات (أنماط الخريطة)</string>
+    <string name="help_article_navigation_auto_car_name">أندرويد أوتو</string>
+    <string name="help_article_navigation_car_play_name">كار بلي</string>
+    <string name="help_article_navigation_guidance_name">توجيه</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">شاشة الخريطة أثناء التنقل</string>
+    <string name="help_article_navigation_routing_brouter_name">التوجيه عبر</string>
+    <string name="help_article_navigation_routing_moped_routing_name">توجيه الدراجة</string>
+    <string name="help_article_navigation_routing_online_routing_name">التوجيه عبر الإنترنت</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">حول توجيه أوسماند</string>
+    <string name="help_article_start_with_first_steps_name">الخطوات الأولي</string>
+    <string name="help_article_start_with_main_menu_name">القائمة الرئيسية</string>
+    <string name="help_article_troubleshooting_crash_logs_name">سجلات الأعطال</string>
+    <string name="copy_build_version">نسخ رقم النسخة</string>
+    <string name="most_viewed">الأكثر مشاهدة</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">المطالبات الصوتية / الإشعارات</string>
+    <string name="help_article_navigation_routing_name">تفضيلات اختيار الطريق</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">توجيه الدراجات (MTB)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">توجيه القارب</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">توجيه السيارة (شاحنة ، دراجة نارية)</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">التوجيه المباشر إلى نقطة (قارب)</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">توجيه المشاة</string>
+    <string name="help_article_navigation_routing_ski_routing_name">توجيه التزلج</string>
+    <string name="help_article_plan_route_web_name">مخطط مسار الانترنت</string>
+    <string name="help_article_purchases_giveaway_name">تبرع</string>
+    <string name="help_article_troubleshooting_general_name">عام</string>
+    <string name="help_article_widgets_name">ويدجت الخريطة</string>
+    <string name="help_article_widgets_info_widgets_name">ويدجت المعلومات</string>
+    <string name="help_article_widgets_markers_name">ويدجت التوجيه المباشر</string>
+    <string name="help_article_widgets_nav_widgets_name">ويدجت التنقل</string>
+    <string name="help_article_widgets_radius_ruler_name">دوائر القياس والمسطرة</string>
+    <string name="shared_string_setup">إعداد</string>
+    <string name="user_guide">دليل المستخدم</string>
+    <string name="telegram_chats">دردشات التليجرام</string>
+    <string name="github_discussion">مناقشة موقع جيثب</string>
+    <string name="help_article_navigation_routing_horse_routing_name">التوجيه على ظهور الخيل</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">توجيه النقل العام</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">التوجيه بخط مستقيم (الطائرات)</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">التنقل بعلامات التوجيه المباشر</string>
+    <string name="help_article_navigation_setup_route_navigation_name">تحضير الطريق</string>
+    <string name="help_article_purchases_ios_name">مشتريات iOS</string>
+    <string name="help_article_troubleshooting_maps_data_name">بيانات الخرائط</string>
+    <string name="help_article_widgets_map_buttons_name">أزرار الخريطة</string>
+    <string name="send_logcat_log_descr">تفاصيل ملف السجل</string>
+    <string name="help_article_navigation_routing_train_routing_name">توجيه القطار</string>
+    <string name="help_article_navigation_setup_route_details_name">تفاصيل الطريق</string>
+    <string name="help_article_personal_name">بياناتي</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">تسجيل المسار</string>
+    <string name="telegram_chats_descr">الانضمام لإحدى محادثات التليجرام المحلية الخاصة بنا.</string>
+    <string name="free_versions_descr">قم بتنزيل وتثبيت إصدار أوسماند المجاني</string>
+    <string name="send_crash_log_descr">يحتوي فقط على معلومات حول الأعطال</string>
+    <string name="open_issue_on_github_descr">اطرح سؤالاً واقترح ميزات</string>
+    <string name="open_issue_on_github">فتح نزاع على موقع جيثب</string>
+    <string name="report_an_issues">إبلاغ عن مشكلة</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">التنقل عن طريق المسار</string>
+    <string name="help_article_search_search_all_name">بحث عن</string>
+    <string name="help_article_personal_import_export_name">استيراد / تصدير</string>
+    <string name="free_versions">إصدارمجاني</string>
+    <string name="help_article_search_search_coordinates_name">بحث عن الإحداثيات</string>
+    <string name="about_osmand">حول أوسماند</string>
+    <string name="help_article_personal_profiles_name">إعدادات الملف الشخصي</string>
+    <string name="help_article_purchases_android_name">مشتريات أندرويد</string>
+    <string name="help_article_search_search_poi_name">بحث نقاط الاهتمام</string>
+    <string name="help_article_personal_storage_name">التخزين</string>
+    <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
+    <string name="help_article_plan_route_name">تخطيط الطريق</string>
+    <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
 </resources>

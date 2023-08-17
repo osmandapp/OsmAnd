@@ -5348,4 +5348,21 @@
     <string name="map_widget_glide_target_desc">Affiche la dérive à compenser pour atteindre la destination.</string>
     <string name="wheel_circumference">Circonférence de la roue</string>
     <string name="external_sensor_name_property_description">Nom du capteur</string>
+    <string name="help_article_map_interact_with_map_name">Interagir avec la carte</string>
+    <string name="help_article_map_tracks_on_map_name">Traces et itinéraires</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_map_legend_nautical_map_name">Style Carte nautique</string>
+    <string name="help_article_map_legend_osmand_name">Style de carte OsmAnd</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_routing_name">Paramètres de l\'itinéraire</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Ligne droite (à vol d\'oiseau)</string>
+    <string name="help_article_navigation_guidance_name">Guidage</string>
+    <string name="help_article_map_point_layers_on_map_name">Points sur la carte</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Annonces vocales / Notifications</string>
+    <string name="help_article_navigation_setup_route_details_name">Détails de l\'itinéraire</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Préparation de l\'itinéraire</string>
+    <string name="help_article_personal_name">Mes données</string>
+    <string name="help_article_map_legend_ski_map_name">Style de carte Ski</string>
+    <string name="help_article_personal_import_export_name">Import / Export</string>
 </resources>
