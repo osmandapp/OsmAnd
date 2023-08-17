@@ -179,45 +179,45 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
-			QuickSearchType searchType = dialogFragment.getSearchType();
-
-			if (searchType.isTargetPoint()) {
-				GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
-				String fileName = gpxInfo.getFileName();
-				SelectedGpxFile selectedGpxFile = getMyApplication().getSelectedGpxHelper().getSelectedFileByName(fileName);
-				if (selectedGpxFile != null) {
-					selectFollowTrack(selectedGpxFile.getGpxFile());
-				} else {
-					CallbackWithObject<GPXFile[]> callback = result -> {
-						selectFollowTrack(result[0]);
-						return true;
-					};
-					File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-					GpxUiHelper.loadGPXFileInDifferentThread(getMapActivity(), callback, dir, null, fileName);
+			GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+			if (dialogFragment.getSearchType().isTargetPoint()) {
+				File file = gpxInfo.getFile();
+				if (file != null) {
+					selectFollowTrack(file);
 				}
 			} else {
-				showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+				showTrackMenuFragment(gpxInfo);
 			}
-
 		} else if (searchResult.location != null) {
-			Pair<PointDescription, Object> pointDescriptionObject =
-					QuickSearchListItem.getPointDescriptionObject(getMyApplication(), searchResult);
+			Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
 
 			dialogFragment.hideToolbar();
 			dialogFragment.hide();
 
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					searchResult.preferredZoom, pointDescriptionObject.first, pointDescriptionObject.second);
+					searchResult.preferredZoom, pair.first, pair.second);
 		}
 	}
 
-	private void selectFollowTrack(@NonNull GPXFile gpxFile){
-		dialogFragment.hideToolbar();
-		dialogFragment.hide();
-		getMapActivity().getMapRouteInfoMenu().selectTrack(gpxFile, true);
-		getMapActivity().getMapRouteInfoMenu().hide();
-		getMapActivity().getMapRouteInfoMenu().selectTrack();
+	private void selectFollowTrack(@NonNull File file) {
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+		if (selectedGpxFile != null) {
+			selectFollowTrack(selectedGpxFile.getGpxFile());
+		} else {
+			GpxFileLoaderTask.loadGpxFile(file, getMapActivity(), gpxFile -> {
+				selectFollowTrack(gpxFile);
+				return true;
+			});
+		}
+	}
+
+	private void selectFollowTrack(@NonNull GPXFile gpxFile) {
+		MapRouteInfoMenu routeInfoMenu = requireMapActivity().getMapRouteInfoMenu();
+		routeInfoMenu.selectTrack(gpxFile, true);
+		routeInfoMenu.hide();
+		routeInfoMenu.showFollowTrack();
+
 		dialogFragment.dismiss();
 	}
 
