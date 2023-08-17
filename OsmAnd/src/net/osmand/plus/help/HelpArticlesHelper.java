@@ -248,18 +248,18 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		items.add(createCategory(getString(R.string.about_osmand)));
 		boolean nightMode = !app.getSettings().isLightContent();
 
-		items.add(createMenuItem(getString(R.string.about_osmand), null, R.drawable.ic_action_osmand_logo,
+		String version = Version.getFullVersionWithReleaseDate(app);
+		items.add(createMenuItem(getString(R.string.about_osmand), version, R.drawable.ic_action_osmand_logo,
 				getArticleItemClickListener(getString(R.string.about_osmand), getString(R.string.osmand_about)))
 				.setUseNaturalIconColor(true)
-				.setColor(ColorUtilities.getOsmandIconColor(app, nightMode)));
-
-		String version = Version.getFullVersionWithReleaseDate(app);
-		items.add(createMenuItem(getString(R.string.what_is_new), version, R.drawable.ic_action_clipboard_notes,
-				getArticleItemClickListener(getString(R.string.what_is_new), getString(R.string.docs_latest_version)))
+				.setColor(ColorUtilities.getOsmandIconColor(app, nightMode))
 				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
 					return false;
 				}));
+
+		items.add(createMenuItem(getString(R.string.what_is_new), null, R.drawable.ic_action_clipboard_notes,
+				getArticleItemClickListener(getString(R.string.what_is_new), getString(R.string.docs_latest_version))));
 
 		String freeVersions = getString(R.string.free_versions);
 		items.add(createMenuItem(freeVersions, getString(R.string.free_versions_descr),
