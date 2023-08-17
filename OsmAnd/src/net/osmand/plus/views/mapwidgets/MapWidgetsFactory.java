@@ -36,6 +36,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SecondNextTurnWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.MapMarkerSideWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.plus.views.mapwidgets.widgetstates.TimeToNavigationPointWidgetState;
@@ -127,7 +128,8 @@ public class MapWidgetsFactory {
 				SunriseSunsetWidgetState sunsetState = new SunriseSunsetWidgetState(app, customId, false);
 				return new SunriseSunsetWidget(mapActivity, sunsetState);
 			case GLIDE_TARGET:
-				return new GlideTargetWidget(mapActivity);
+				GlideTargetWidgetState glideWidgetState = new GlideTargetWidgetState(app, customId);
+				return new GlideTargetWidget(mapActivity, glideWidgetState);
 			case GLIDE_AVERAGE:
 				return new GlideAverageWidget(mapActivity, customId);
 			case ELEVATION_PROFILE:

@@ -5,6 +5,7 @@ import static java.lang.String.format;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -17,16 +18,16 @@ import java.util.Locale;
 
 public class GlideUtils {
 
-	private static final NumberFormat FORMATTER = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
+	private static final NumberFormat GLIDE_RATIO_FORMATTER = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	public static final float MAX_VALUE_TO_DISPLAY = 150.f;
 	public static final float MAX_VALUE_TO_FORMAT = 100.f;
 	public static final float MIN_ACCEPTABLE_VALUE = 0.1f;
 
 	@NonNull
-	public static String calculateFormattedRatio(@NonNull Context ctx, LatLon l1, LatLon l2, double altTo, double altFrom) {
+	public static String calculateFormattedRatio(@NonNull Context ctx, LatLon l1, LatLon l2, double a1, double a2) {
 		double distance = MapUtils.getDistance(l1, l2);
-		return calculateFormattedRatio(ctx, distance, altTo - altFrom);
+		return calculateFormattedRatio(ctx, distance, a1 - a2);
 	}
 
 	@NonNull
@@ -58,8 +59,12 @@ public class GlideUtils {
 		} else if (absRatio > MAX_VALUE_TO_FORMAT) {
 			return format(pattern, "" + (int) absRatio * sign, "" + divider);
 		} else {
-			return format(pattern, FORMATTER.format(absRatio * sign), "" + divider);
+			return format(pattern, GLIDE_RATIO_FORMATTER.format(absRatio * sign), "" + divider);
 		}
 	}
 
+	public static boolean areAltitudeEqual(@Nullable Double a1, @Nullable Double a2) {
+		return a1 == null && a2 == null
+				|| a1 != null && a2 != null && Math.abs(a1 - a2) > 0.01;
+	}
 }
