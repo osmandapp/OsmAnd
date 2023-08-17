@@ -15,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,6 +36,8 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
@@ -175,7 +179,26 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
-			showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+			QuickSearchType searchType = dialogFragment.getSearchType();
+
+			if (searchType.isTargetPoint()) {
+				GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+				String fileName = gpxInfo.getFileName();
+				SelectedGpxFile selectedGpxFile = getMyApplication().getSelectedGpxHelper().getSelectedFileByName(fileName);
+				if (selectedGpxFile != null) {
+					selectFollowTrack(selectedGpxFile.getGpxFile());
+				} else {
+					CallbackWithObject<GPXFile[]> callback = result -> {
+						selectFollowTrack(result[0]);
+						return true;
+					};
+					File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+					GpxUiHelper.loadGPXFileInDifferentThread(getMapActivity(), callback, dir, null, fileName);
+				}
+			} else {
+				showTrackMenuFragment((GPXInfo) searchResult.relatedObject);
+			}
+
 		} else if (searchResult.location != null) {
 			Pair<PointDescription, Object> pointDescriptionObject =
 					QuickSearchListItem.getPointDescriptionObject(getMyApplication(), searchResult);
@@ -187,6 +210,15 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 					searchResult.preferredZoom, pointDescriptionObject.first, pointDescriptionObject.second);
 		}
+	}
+
+	private void selectFollowTrack(@NonNull GPXFile gpxFile){
+		dialogFragment.hideToolbar();
+		dialogFragment.hide();
+		getMapActivity().getMapRouteInfoMenu().selectTrack(gpxFile, true);
+		getMapActivity().getMapRouteInfoMenu().hide();
+		getMapActivity().getMapRouteInfoMenu().selectTrack();
+		dialogFragment.dismiss();
 	}
 
 	public static void showOnMap(MapActivity mapActivity, QuickSearchDialogFragment dialogFragment,
